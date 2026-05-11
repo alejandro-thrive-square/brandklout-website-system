@@ -2,7 +2,7 @@
 
 This folder contains the canonical post-contract delivery template library for the Deliver microsystem. Sales owns offer definition, proposal sending, discovery meeting, contract onboarding, and the Deliver handoff package. Deliver starts after signing, then uses the handoff package's normalized `selected_offer` value to initialize a client folder and choose the correct delivery path.
 
-Each numbered module mirrors the standard workflow structure defined in [SYSTEM_RULES.md Section 2.1](../../SYSTEM_RULES.md): `.md` directive, `.py` executor, `TRIGGER_PROMPT.txt`, and a `.tmp/` artifact folder. Module `00` defines client-folder initialization. Modules `01` through `13` are reusable delivery execution templates; [OFFER_ROUTING.md](./OFFER_ROUTING.md) determines which execution modules are copied for each Sales offer.
+Each numbered module mirrors the standard workflow structure defined in [SYSTEM_RULES.md Section 2.1](../../SYSTEM_RULES.md): `.md` directive, `.py` executor, `TRIGGER_PROMPT.txt`, and a `.tmp/` artifact folder. Module `00` defines client-folder initialization. Modules `01` through `14` are reusable delivery execution templates; [OFFER_ROUTING.md](./OFFER_ROUTING.md) determines which execution modules are copied for each Sales offer.
 
 > [!IMPORTANT]
 > **Integrity Rule**: When a phase's logic, naming, output schema, or offer routing changes, update the relevant phase `.md`, this index, and [OFFER_ROUTING.md](./OFFER_ROUTING.md) in the same commit.
@@ -26,16 +26,16 @@ Each numbered module mirrors the standard workflow structure defined in [SYSTEM_
 
 | Sales offer | Default start | Required delivery modules | Adapted or optional modules |
 | :--- | :--- | :--- | :--- |
-| Development from Scratch | `00-client-delivery-initialization` | `00`, then `01` -> `02` -> `03` -> `04` -> `05` -> `06` -> `07` -> `08` | None by default; full process applies. |
-| Figma to Webflow | `00-client-delivery-initialization` | `00`, then `09` -> optional `04` -> `05` -> `06` -> `07` -> `08` | `04` validates content/SEO only when scoped; `01` and `03` are skipped unless scoped. |
-| Migration to Webflow | `00-client-delivery-initialization` | `00`, then `10` -> optional `01`/`02`/`03` -> `11` -> `12` -> `05` -> `06` -> `07` -> `08` | `01`, `02`, and `03` apply only for redesign, new IA, or new visual direction. |
-| Webflow Improvements & Updates | `00-client-delivery-initialization` | `00`, then `13` -> `05` -> `06` -> optional `07` -> adapted `08` | `01`-`04` apply only when the approved request needs planning, assets, design, content, or SEO. |
+| Development from Scratch | `00-client-delivery-initialization` | `00`, then `01` -> `02` -> `03` -> `04` -> `05` -> `06` -> `07` -> `08` | `14` optional for static design previews, client review URLs, or Vercel-based delivery. |
+| Figma to Webflow | `00-client-delivery-initialization` | `00`, then `09` -> optional `04` -> `05` -> `06` -> `07` -> `08` | `04` validates content/SEO only when scoped; `01` and `03` are skipped unless scoped; `14` optional for preview deployments. |
+| Migration to Webflow | `00-client-delivery-initialization` | `00`, then `10` -> optional `01`/`02`/`03` -> `11` -> `12` -> `05` -> `06` -> `07` -> `08` | `01`, `02`, and `03` apply only for redesign, new IA, or new visual direction; `14` optional for static preview deployments. |
+| Webflow Improvements & Updates | `00-client-delivery-initialization` | `00`, then `13` -> `05` -> `06` -> optional `07` -> adapted `08` | `01`-`04` apply only when the approved request needs planning, assets, design, content, or SEO; `14` optional for review URLs or standalone static delivery. |
 
 Use [OFFER_ROUTING.md](./OFFER_ROUTING.md) as the source of truth for required handoff fields, completion criteria, and detailed routing rules.
 
 ## Process Modules
 
-The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `08` sequence remains the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `09` through `13`.
+The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `08` sequence remains the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `09` through `13` and optional static deployment module `14`.
 
 | # | Phase | Directive |
 | :---: | :--- | :--- |
@@ -53,6 +53,7 @@ The current numbered folders are reusable templates. Module `00` is the setup wo
 | 11 | Content Export & Import | [11-content-export-import.md](./11-content-export-import/11-content-export-import.md) |
 | 12 | Migration SEO & Redirects | [12-migration-seo-redirects.md](./12-migration-seo-redirects/12-migration-seo-redirects.md) |
 | 13 | Improvement Intake & Audit | [13-improvement-intake-audit.md](./13-improvement-intake-audit/13-improvement-intake-audit.md) |
+| 14 | Vercel Deployment | [14-vercel-deployment.md](./14-vercel-deployment/14-vercel-deployment.md) |
 
 ## Standard Folder Shape (per phase)
 

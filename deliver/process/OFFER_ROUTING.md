@@ -67,6 +67,7 @@ Improvement handoffs must also include:
 | `11-content-export-import` | Not used | Not used | Required | Not used |
 | `12-migration-seo-redirects` | Not used | Not used | Required | Not used |
 | `13-improvement-intake-audit` | Not used | Not used | Not used | Required |
+| `14-vercel-deployment` | Optional for previews or static delivery | Optional for previews | Optional for previews | Optional for review URLs or static delivery |
 
 ## 4. Offer Paths
 
@@ -77,6 +78,7 @@ Improvement handoffs must also include:
 - **Required modules**: `01-wireframe`, `02-graphic-resources`, `03-design`, `04-content-seo`, `05-webflow-build`, `06-qa`, `07-launch`, `08-handoff-support`.
 - **Route**: `01` -> `02` -> `03` -> `04` -> `05` -> `06` -> `07` -> `08`.
 - **Completion criteria**: The live Webflow site is launched, QA-approved, handed off to the client, and support terms are documented.
+- **Optional Vercel path**: Add `14-vercel-deployment` when the design/prototype/static output needs a Vercel preview URL, client-specific Vercel project, or custom subdomain before Webflow launch.
 
 ### Figma to Webflow
 
@@ -87,6 +89,7 @@ Improvement handoffs must also include:
 - **Adapted modules**: `02-graphic-resources` becomes an asset readiness check; `04-content-seo` validates final copy, metadata, alt text, and CMS content readiness.
 - **Required pre-build module**: `09-figma-review-build-planning` validates Figma completeness, breakpoint coverage, CMS requirements, component states, interactions, fonts, assets, and licensing notes.
 - **Completion criteria**: The Webflow build matches approved Figma designs, passes QA, launches if scoped, and includes Editor walkthrough/handoff notes.
+- **Optional Vercel path**: Add `14-vercel-deployment` when a static review URL is needed for stakeholder approval before or instead of Webflow publication.
 
 ### Migration to Webflow
 
@@ -99,6 +102,7 @@ Improvement handoffs must also include:
 - **Content migration requirements**: `11-content-export-import` owns source export, cleanup, field mapping, media mapping, Webflow import, and import issue reporting.
 - **SEO/redirect requirements**: `12-migration-seo-redirects` owns URL inventory, redirect map, metadata preservation, sitemap/Search Console tasks, and redirect validation requirements.
 - **Completion criteria**: Webflow site is launched with migrated content, redirects verified, metadata preserved, critical URLs smoke-tested, and monitoring outcomes recorded.
+- **Optional Vercel path**: Add `14-vercel-deployment` when a migrated/redesigned static prototype needs a separate review deployment before Webflow cutover.
 
 ### Webflow Improvements & Updates
 
@@ -110,6 +114,7 @@ Improvement handoffs must also include:
 - **Launch handling**: Use `07-launch` only when DNS, publishing, or a production release is part of the request.
 - **Handoff handling**: Use adapted `08-handoff-support` as a delivery note, support summary, or retainer loop update.
 - **Completion criteria**: Approved change list is implemented, regression-tested, delivered or published according to scope, and documented for the client.
+- **Optional Vercel path**: Add `14-vercel-deployment` when the change request produces a standalone static preview, demo, or temporary client review URL.
 
 ## 5. Routing Validation
 

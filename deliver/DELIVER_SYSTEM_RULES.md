@@ -14,6 +14,7 @@ To deliver world-class digital experiences (Webflow + SEO + Automation) that exc
 | **ClickUp** | Task management, resource allocation, and project timelines. |
 | **Figma API** | Extracting design assets and syncing styles. |
 | **Webflow API** | Automated site creation, CMS population, and publishing. |
+| **Vercel** | Static preview, prototype, and client/product subdomain deployments. |
 | **Vimeo / Loom** | Hosting delivery walkthroughs and tutorials. |
 | **SEO Tools (Ahrefs/Semrush)** | Benchmarking and final optimization reports. |
 
@@ -31,7 +32,7 @@ The canonical post-contract delivery template library lives in `deliver/process/
 - Offer routing: [process/OFFER_ROUTING.md](./process/OFFER_ROUTING.md)
 - Client initialization: [process/00-client-delivery-initialization/00-client-delivery-initialization.md](./process/00-client-delivery-initialization/00-client-delivery-initialization.md)
 - Full-build phases covered: Wireframe -> Graphic Resources -> Design -> Content & SEO -> Webflow Build -> QA -> Launch -> Handoff & Support.
-- Offer-specific modules covered: Figma Review & Build Planning, Migration Audit & Plan, Content Export & Import, Migration SEO & Redirects, and Improvement Intake & Audit.
+- Offer-specific and optional modules covered: Figma Review & Build Planning, Migration Audit & Plan, Content Export & Import, Migration SEO & Redirects, Improvement Intake & Audit, and Vercel Deployment.
 - New client projects are instantiated by manually copying routed workflow templates from `deliver/process/` into `deliver/[client-name]/workflows/`. No automated executor for this initialization exists yet.
 
 ## 4. Quality Standards

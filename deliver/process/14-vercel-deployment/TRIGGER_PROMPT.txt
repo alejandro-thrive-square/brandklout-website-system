@@ -1,0 +1,9 @@
+Deploy or prepare a Vercel deployment for the selected client/product folder.
+
+Before running:
+- Confirm the client slug, product slug, deployment root, and environment.
+- Confirm whether this is a Vercel preview, production deployment, or custom subdomain setup.
+- Confirm the folder is safe to publish and contains no secrets.
+
+Default Giovanni Serrano final design root:
+deliver/giovanni-serrano/workflows/03-design/.tmp/final-design
