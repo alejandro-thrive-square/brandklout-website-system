@@ -35,7 +35,7 @@ Use [OFFER_ROUTING.md](./OFFER_ROUTING.md) as the source of truth for required h
 
 ## Process Modules
 
-The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `08` sequence remains the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `09` through `13` and optional static deployment module `14`.
+The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `08` sequence remains the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `09` through `13` and optional static deployment module `14`. Module `14` defaults to GitHub for source history and Vercel CLI for per-client/per-product deployment.
 
 | # | Phase | Directive |
 | :---: | :--- | :--- |

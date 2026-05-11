@@ -14,6 +14,8 @@ This module is optional. It can be copied into any client workspace when the Sal
 ## Deployment Model
 Use one Vercel project per client/product when the deployment needs a stable review URL, custom subdomain, or independent production history.
 
+The default Webzite operating model is **GitHub for source history and Vercel CLI for deployment**. Agents should commit/push the static client folder to GitHub for auditability, then deploy the specific folder with Vercel CLI. Do not require Git-connected Vercel projects for every client/product unless the project explicitly needs Vercel automatic deployments from Git.
+
 Recommended naming:
 - **Client slug**: `giovanni-serrano`
 - **Product/site slug**: `final-design`, `invest`, `scale`, `client-preview`, or another clear product name.
@@ -35,31 +37,28 @@ Examples:
 
 ## Execution Steps
 1. Confirm the deployment root exists and contains an entry file, usually `index.html`.
-2. Confirm the deployment root is committed or intentionally deployable from local CLI.
-3. Choose the deployment mode:
-   - **Git-connected Vercel project**: Import the repository and set Vercel's Root Directory to the deployment root.
-   - **CLI deployment**: Run Vercel CLI with `--cwd` pointed at the deployment root.
-4. Create or link the Vercel project using the recommended project naming convention.
-5. Deploy to preview first.
-6. Review the generated Vercel URL for layout, assets, routing, and form behavior.
-7. Promote or deploy to production only after approval.
-8. Add the custom domain/subdomain in Vercel when needed.
-9. Store the deployment manifest and verification notes in this workflow's `.tmp/` folder.
+2. Confirm the deployment root is safe to publish and contains no secrets.
+3. Commit and push the changed deployment root to GitHub when this is a real client/project update.
+4. Run Vercel CLI with `--cwd` pointed at the deployment root.
+5. Create or link the Vercel project using the recommended project naming convention.
+6. Deploy to preview first unless this is an approved production update.
+7. Review the generated Vercel URL for layout, assets, routing, and form behavior.
+8. Promote or deploy to production only after approval.
+9. Add the custom domain/subdomain in Vercel when needed.
+10. Store the deployment manifest and verification notes in this workflow's `.tmp/` folder.
 
-## Git-Connected Setup
-When using the GitHub repository from the Vercel dashboard:
+## Standard Update Flow
+Use this flow when updating an existing CLI-managed Vercel project:
 
-1. Import the repository.
-2. Set **Root Directory** to the client/product output folder, for example:
-
-```text
-deliver/giovanni-serrano/workflows/03-design/.tmp/final-design
+```powershell
+git status
+git add deliver/[client-name]/workflows/[workflow-name]/.tmp/[deployment-folder]
+git commit -m "Update [client-name] [product-slug] deployment"
+git push origin main
+vercel --cwd deliver/[client-name]/workflows/[workflow-name]/.tmp/[deployment-folder] --prod
 ```
 
-3. Use **Framework Preset**: `Other`.
-4. Leave **Build Command** empty for plain HTML/CSS/JS.
-5. Leave **Output Directory** empty or set it to `.` if Vercel asks for one.
-6. Set the project name using `webzite-[client-slug]-[product-slug]`.
+This keeps GitHub as the record of what changed while using Vercel CLI as the deployment mechanism. If the update is only a temporary preview experiment, the commit can wait until the work is approved.
 
 ## CLI Setup
 Run from the repository root:
@@ -80,6 +79,23 @@ For Giovanni Serrano's current final design:
 vercel --cwd deliver/giovanni-serrano/workflows/03-design/.tmp/final-design
 vercel --cwd deliver/giovanni-serrano/workflows/03-design/.tmp/final-design --prod
 ```
+
+## Git-Connected Setup
+Use Git-connected setup only when a client/product specifically needs automatic Vercel deployments from GitHub. It is not the default for client/product folders because each Vercel project requires its own repository/root-directory configuration.
+
+When using the GitHub repository from the Vercel dashboard:
+
+1. Import the repository.
+2. Set **Root Directory** to the client/product output folder, for example:
+
+```text
+deliver/giovanni-serrano/workflows/03-design/.tmp/final-design
+```
+
+3. Use **Framework Preset**: `Other`.
+4. Leave **Build Command** empty for plain HTML/CSS/JS.
+5. Leave **Output Directory** empty or set it to `.` if Vercel asks for one.
+6. Set the project name using `webzite-[client-slug]-[product-slug]`.
 
 ## Subdomain Rules
 - Use a Vercel-generated URL for internal preview unless the client needs a branded link.
@@ -115,7 +131,7 @@ Store a lightweight JSON manifest when a deployment is created:
 
 ## Technical Setup
 - **Executor status**: Planning and manifest helper. The executor validates the local deployment root and writes a deployment manifest draft; it does not call Vercel until CLI/API automation is intentionally added.
-- **Future automation**: Create/link Vercel projects, deploy with Vercel CLI, attach custom domains, and run post-deploy checks.
+- **Future automation**: Create/link Vercel projects, deploy with Vercel CLI, attach custom domains, write deployment URLs back to `.tmp`, and run post-deploy checks.
 - **Likely integrations**: Vercel CLI, Vercel REST API, GitHub, DNS provider, [Playwright Browser Tool](../../../manage/browser-tools/playwright-browser/playwright-browser.md).
 
 ## Version Control

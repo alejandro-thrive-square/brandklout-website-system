@@ -67,7 +67,7 @@ Improvement handoffs must also include:
 | `11-content-export-import` | Not used | Not used | Required | Not used |
 | `12-migration-seo-redirects` | Not used | Not used | Required | Not used |
 | `13-improvement-intake-audit` | Not used | Not used | Not used | Required |
-| `14-vercel-deployment` | Optional for previews or static delivery | Optional for previews | Optional for previews | Optional for review URLs or static delivery |
+| `14-vercel-deployment` | Optional for CLI-managed previews or static delivery | Optional for CLI-managed previews | Optional for CLI-managed previews | Optional for CLI-managed review URLs or static delivery |
 
 ## 4. Offer Paths
 
