@@ -1,0 +1,1126 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Giovanni Serrano — Editorial Cinema</title>
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root {
+  --terra: #E07A5F; --terra-d: #C85A3A;
+  --navy: #3D405B; --navy-d: #2C2F4A; --navy-deep: #1B1D2E;
+  --gold: #F2CC8F; --canvas: #F4F1DE; --bone: #EDE8D5;
+  --ink: #3D405B; --ink-soft: rgba(61,64,91,0.62); --ink-mute: rgba(61,64,91,0.42); --line: rgba(61,64,91,0.12);
+  --on-d: #F4F1DE; --on-d-soft: rgba(244,241,222,0.62); --on-d-mute: rgba(244,241,222,0.32); --on-d-line: rgba(244,241,222,0.12);
+  --display: 'Lora', Georgia, serif;
+  --body: 'Inter', -apple-system, sans-serif;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { scroll-behavior: auto; }
+body {
+  background: var(--navy-deep); color: var(--on-d);
+  font-family: var(--body); font-weight: 300;
+  font-size: 16px; line-height: 1.6;
+  cursor: none;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+
+/* ───────── Magnetic cursor ───────── */
+.cursor-dot {
+  position: fixed; top: 0; left: 0;
+  width: 8px; height: 8px; border-radius: 50%;
+  background: var(--terra); pointer-events: none; z-index: 9999;
+  transform: translate(-50%, -50%);
+  transition: width .25s, height .25s, background .25s;
+  mix-blend-mode: difference;
+}
+.cursor-ring {
+  position: fixed; top: 0; left: 0;
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid var(--gold); pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: width .35s, height .35s, opacity .35s, border-color .35s;
+  opacity: 0.6;
+}
+.cursor-dot.hover { width: 14px; height: 14px; }
+.cursor-ring.hover { width: 64px; height: 64px; opacity: 1; border-color: var(--terra); }
+
+/* ───────── Scroll progress ───────── */
+.progress {
+  position: fixed; top: 0; left: 0; right: 0; height: 2px;
+  background: rgba(244,241,222,0.06); z-index: 100;
+}
+.progress > i {
+  display: block; height: 100%; width: 0%;
+  background: linear-gradient(90deg, var(--terra), var(--gold));
+}
+
+/* ───────── Top nav (minimal) ───────── */
+nav.top {
+  position: fixed; top: 28px; left: 0; right: 0;
+  display: flex; justify-content: space-between; align-items: center;
+  padding: 0 56px; z-index: 50;
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--on-d-soft);
+  mix-blend-mode: difference;
+}
+nav.top .brand { color: var(--canvas); font-family: var(--display); font-weight: 700; font-size: 18px; letter-spacing: -0.01em; text-transform: none; }
+nav.top .brand em { color: var(--terra); font-style: normal; }
+nav.top .links { display: flex; gap: 36px; }
+nav.top a { color: inherit; text-decoration: none; transition: color .2s; cursor: none; }
+nav.top a:hover { color: var(--gold); }
+nav.top .now { display: flex; align-items: center; gap: 10px; }
+nav.top .now::before { content: ""; width: 6px; height: 6px; border-radius: 50%; background: var(--terra); animation: pulse 2s infinite; }
+@keyframes pulse { 0%,100%{opacity:1;} 50%{opacity:.3;} }
+
+/* ───────── Hero ───────── */
+.hero {
+  position: relative; height: 100vh; min-height: 760px;
+  overflow: hidden;
+  display: grid; grid-template-rows: 1fr auto; align-items: end;
+  padding: 0 56px 56px;
+}
+.hero canvas {
+  position: absolute; inset: 0; width: 100%; height: 100%;
+  z-index: 0;
+}
+.hero::after {
+  content: ""; position: absolute; inset: 0; z-index: 1;
+  background:
+    radial-gradient(circle at 50% 100%, transparent 0%, var(--navy-deep) 80%),
+    linear-gradient(180deg, transparent 40%, rgba(27,29,46,0.7) 100%);
+  pointer-events: none;
+}
+.hero-eyebrow {
+  position: absolute; top: 100px; left: 56px; z-index: 2;
+  display: flex; align-items: center; gap: 16px;
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  color: var(--gold);
+}
+.hero-eyebrow::before { content: ""; width: 48px; height: 1px; background: var(--gold); }
+.hero-headline {
+  position: relative; z-index: 2;
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(96px, 13vw, 220px);
+  line-height: 0.92; letter-spacing: -0.025em;
+  color: var(--canvas);
+  margin: 0;
+  max-width: 1200px;
+}
+.hero-headline em {
+  font-style: italic; font-weight: 400;
+  color: var(--terra);
+  display: inline-block;
+  position: relative;
+}
+.hero-headline em::after {
+  content: ""; position: absolute; left: 0; right: 8%; bottom: 8%; height: 6px;
+  background: linear-gradient(90deg, var(--terra), var(--gold), transparent);
+  opacity: 0.55;
+}
+.hero-foot {
+  position: relative; z-index: 2;
+  display: grid; grid-template-columns: 1.4fr 1fr 1fr;
+  gap: 64px; align-items: end;
+  margin-top: 56px;
+}
+.hero-foot .lede {
+  font-family: var(--display); font-style: italic; font-weight: 400;
+  font-size: 22px; line-height: 1.35; color: var(--on-d-soft);
+  max-width: 460px;
+}
+.hero-foot .lede strong { color: var(--canvas); font-style: normal; font-family: var(--body); font-weight: 500; font-size: 13px; letter-spacing: 0.25em; text-transform: uppercase; display: block; margin-bottom: 12px; }
+.hero-foot .stat { border-top: 1px solid var(--on-d-line); padding-top: 18px; }
+.hero-foot .stat .k { font-family: var(--body); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--on-d-mute); }
+.hero-foot .stat .v { font-family: var(--display); font-weight: 700; font-size: 36px; line-height: 1; margin-top: 12px; color: var(--canvas); }
+.hero-foot .stat .v em { font-style: italic; font-weight: 400; color: var(--terra); }
+.hero-foot .stat .sub { font-family: var(--body); font-size: 12px; color: var(--on-d-mute); margin-top: 8px; }
+
+.scroll-hint {
+  position: absolute; bottom: 32px; left: 50%; transform: translateX(-50%);
+  z-index: 3;
+  font-family: var(--body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.32em; text-transform: uppercase;
+  color: var(--on-d-mute);
+  display: flex; align-items: center; gap: 12px; flex-direction: column;
+}
+.scroll-hint::after {
+  content: ""; width: 1px; height: 36px;
+  background: linear-gradient(180deg, var(--gold), transparent);
+  animation: drip 2s ease-in-out infinite;
+}
+@keyframes drip {
+  0% { transform: scaleY(0); transform-origin: top; }
+  50% { transform: scaleY(1); transform-origin: top; }
+  51% { transform: scaleY(1); transform-origin: bottom; }
+  100% { transform: scaleY(0); transform-origin: bottom; }
+}
+
+/* ───────── Generic section chrome ───────── */
+section.scene {
+  position: relative;
+  padding: 160px 56px;
+}
+section.scene.dark { background: var(--navy-deep); color: var(--on-d); }
+section.scene.deep { background: var(--navy); color: var(--on-d); }
+section.scene.canvas-bg { background: var(--canvas); color: var(--ink); }
+section.scene.bone-bg { background: var(--bone); color: var(--ink); }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.28em; text-transform: uppercase;
+}
+.eyebrow .num { font-family: var(--body); }
+.eyebrow .bar { width: 32px; height: 1px; background: currentColor; opacity: .6; }
+.eyebrow.terra { color: var(--terra); }
+.eyebrow.gold  { color: var(--gold); }
+
+h2.scene-title {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(56px, 6.5vw, 104px);
+  line-height: 0.98; letter-spacing: -0.018em;
+  margin: 24px 0 0;
+  max-width: 1100px;
+}
+h2.scene-title em { font-style: italic; font-weight: 400; color: var(--terra); }
+section.dark h2.scene-title em, section.deep h2.scene-title em { color: var(--gold); }
+
+/* ───────── Services — pinned scenes ───────── */
+.services-pin {
+  position: relative;
+  /* Each child scene scrolls past while header stays */
+}
+.services-intro {
+  padding: 160px 56px 80px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 64px; align-items: end;
+}
+.services-intro p { font-family: var(--display); font-style: italic; font-weight: 400; font-size: 24px; line-height: 1.4; color: var(--on-d-soft); max-width: 520px; }
+
+.svc-card-stack {
+  display: grid; gap: 24px; padding: 0 56px 200px;
+}
+.svc-card {
+  position: sticky;
+  border: 1px solid var(--on-d-line);
+  background: linear-gradient(180deg, rgba(244,241,222,0.03), rgba(244,241,222,0.01));
+  backdrop-filter: blur(8px);
+  padding: 64px;
+  display: grid; grid-template-columns: 80px 1fr 1.2fr;
+  gap: 56px;
+  border-radius: 2px;
+  transition: transform .6s ease, opacity .6s ease;
+}
+.svc-card:nth-child(1) { top: 80px; }
+.svc-card:nth-child(2) { top: 110px; }
+.svc-card:nth-child(3) { top: 140px; }
+.svc-card .num {
+  font-family: var(--display); font-weight: 700; font-size: 64px; line-height: 1;
+  color: var(--terra);
+}
+.svc-card .num em { font-style: italic; font-weight: 400; color: var(--gold); display: block; font-size: 12px; letter-spacing: 0.25em; text-transform: uppercase; margin-top: 12px; }
+.svc-card .meta h3 {
+  font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 1;
+  margin: 0 0 16px; letter-spacing: -0.015em;
+}
+.svc-card .meta h3 em { font-style: italic; font-weight: 400; color: var(--terra); }
+.svc-card .meta .who {
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); margin-bottom: 24px;
+}
+.svc-card .meta .deliverable {
+  font-family: var(--display); font-style: italic; font-weight: 400;
+  font-size: 18px; line-height: 1.5; color: var(--on-d-soft);
+  border-left: 2px solid var(--terra); padding-left: 20px;
+}
+.svc-card .body p { font-size: 15px; line-height: 1.7; color: var(--on-d-soft); margin: 0 0 18px; }
+.svc-card .body strong { color: var(--canvas); font-weight: 500; }
+.svc-card .body ul { list-style: none; padding: 0; margin: 24px 0 0; display: grid; gap: 8px; }
+.svc-card .body li { display: grid; grid-template-columns: 14px 1fr; gap: 12px; font-size: 13px; color: var(--on-d-soft); align-items: baseline; }
+.svc-card .body li::before { content: "·"; color: var(--terra); font-weight: 700; font-size: 18px; line-height: 0; }
+.svc-card .cta {
+  margin-top: 32px;
+  display: inline-flex; gap: 12px; align-items: center;
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  color: var(--terra); text-decoration: none;
+  padding: 16px 0;
+  border-top: 1px solid var(--on-d-line);
+  width: 100%;
+  transition: gap .3s, color .3s;
+}
+.svc-card .cta:hover { gap: 18px; color: var(--gold); }
+
+/* ───────── About ───────── */
+.about-grid {
+  display: grid; grid-template-columns: 0.9fr 1.4fr;
+  gap: 96px; align-items: start;
+  margin-top: 96px;
+}
+.portrait-slot {
+  position: relative;
+  aspect-ratio: 3/4;
+  background: var(--navy);
+  border: 1px solid var(--terra);
+  overflow: hidden;
+  display: grid; place-items: center;
+  color: var(--on-d-soft);
+}
+.portrait-slot::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at 30% 0%, rgba(224,122,95,0.4), transparent 60%),
+    radial-gradient(ellipse at 70% 100%, rgba(242,204,143,0.25), transparent 50%);
+}
+.portrait-slot::after {
+  content: "Portrait of Giovanni\Aplaceholder · 3:4 portrait";
+  white-space: pre; text-align: center;
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--on-d-mute);
+  position: relative; z-index: 1;
+  line-height: 2;
+}
+.portrait-slot .corner {
+  position: absolute; top: 16px; left: 16px;
+  font-family: var(--body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--gold); z-index: 2;
+}
+.portrait-slot .index {
+  position: absolute; bottom: 16px; right: 20px;
+  font-family: var(--body); font-size: 10px;
+  letter-spacing: 0.18em; color: var(--on-d-mute); z-index: 2;
+}
+
+.about-prose .lede {
+  font-family: var(--display); font-weight: 400; font-size: 38px;
+  line-height: 1.18; color: var(--canvas);
+  margin: 0 0 40px;
+  letter-spacing: -0.01em;
+}
+.about-prose .lede em { font-style: italic; color: var(--terra); }
+.about-prose p {
+  font-size: 16px; line-height: 1.75; color: var(--on-d-soft);
+  margin: 0 0 22px; max-width: 640px;
+}
+.about-prose p strong { color: var(--canvas); font-weight: 500; }
+.about-quote-pull {
+  margin: 64px 0 0;
+  padding: 36px 0;
+  border-top: 1px solid var(--on-d-line);
+  border-bottom: 1px solid var(--on-d-line);
+  font-family: var(--display); font-style: italic; font-weight: 400;
+  font-size: 32px; line-height: 1.3; color: var(--gold);
+  letter-spacing: -0.005em;
+}
+
+/* milestones strip */
+.milestones {
+  margin-top: 96px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 1px; background: var(--on-d-line);
+  border: 1px solid var(--on-d-line);
+}
+.milestones .m {
+  background: var(--navy-deep); padding: 32px;
+}
+.milestones .m .age {
+  font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 1;
+  color: var(--terra);
+}
+.milestones .m .age em { font-style: italic; font-weight: 400; color: var(--gold); }
+.milestones .m h4 { font-family: var(--display); font-weight: 700; font-size: 18px; margin: 18px 0 8px; }
+.milestones .m p { font-size: 13px; line-height: 1.55; color: var(--on-d-soft); margin: 0; }
+
+/* ───────── Capstone / Portfolio ───────── */
+.capstone-card {
+  margin-top: 96px;
+  border: 1px solid var(--ink);
+  background: var(--canvas);
+  display: grid; grid-template-columns: 1.2fr 1fr; gap: 0;
+  border-radius: 0;
+  overflow: hidden;
+}
+.capstone-card .left { padding: 56px; border-right: 1px solid var(--line); }
+.capstone-card .badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.28em; text-transform: uppercase;
+  background: var(--navy); color: var(--gold);
+  padding: 8px 14px;
+}
+.capstone-card h3 {
+  font-family: var(--display); font-weight: 700; font-size: 48px; line-height: 1.02;
+  margin: 24px 0 12px; letter-spacing: -0.015em;
+}
+.capstone-card h3 em { font-style: italic; font-weight: 400; color: var(--terra); }
+.capstone-card .sub { font-family: var(--display); font-style: italic; font-size: 18px; color: var(--ink-soft); margin-bottom: 28px; }
+.capstone-card p { font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+.capstone-card .right { padding: 56px; background: var(--bone); display: grid; gap: 24px; align-content: start; }
+.capstone-card .col-title {
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--terra); margin-bottom: 12px;
+}
+.capstone-card .deliverable-list { display: grid; gap: 8px; }
+.capstone-card .deliverable-list .li {
+  display: grid; grid-template-columns: 24px 1fr;
+  font-size: 13px; line-height: 1.5; color: var(--ink-soft);
+  padding: 8px 0; border-bottom: 1px solid var(--line);
+}
+.capstone-card .deliverable-list .li::before { content: "·"; color: var(--terra); font-weight: 700; font-size: 18px; line-height: 1; }
+.capstone-card .stats {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; margin-top: auto; border-top: 1px solid var(--line); padding-top: 24px;
+}
+.capstone-card .stats .s { padding-right: 16px; border-right: 1px solid var(--line); }
+.capstone-card .stats .s:last-child { border-right: none; padding-left: 16px; }
+.capstone-card .stats .k { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); }
+.capstone-card .stats .v { font-family: var(--display); font-weight: 700; font-size: 28px; color: var(--terra); margin-top: 8px; }
+
+.portfolio-strip {
+  margin-top: 64px;
+  display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px;
+  background: var(--ink-line); border: 1px solid var(--ink-line);
+}
+.portfolio-strip .p {
+  background: var(--canvas); padding: 28px;
+  display: grid; gap: 8px; align-content: start;
+  transition: background .3s;
+}
+.portfolio-strip .p:hover { background: var(--bone); }
+.portfolio-strip .p .type { font-family: var(--body); font-size: 10px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; color: var(--terra); }
+.portfolio-strip .p h4 { font-family: var(--display); font-weight: 700; font-size: 20px; margin: 8px 0 4px; line-height: 1.2; }
+.portfolio-strip .p p { font-size: 13px; line-height: 1.55; color: var(--ink-soft); margin: 0; }
+.portfolio-strip .p .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 12px; }
+.portfolio-strip .p .tag { font-family: var(--body); font-size: 10px; padding: 4px 8px; background: rgba(61,64,91,0.06); color: var(--ink-soft); letter-spacing: 0.05em; }
+
+/* ───────── Sample Analysis — proforma reveal ───────── */
+.proforma {
+  margin-top: 96px;
+  border: 1px solid var(--on-d-line);
+  background: var(--navy-d);
+  padding: 0;
+}
+.proforma .head {
+  padding: 48px 56px;
+  display: grid; grid-template-columns: 1.3fr 1fr;
+  gap: 48px; align-items: end;
+  border-bottom: 1px solid var(--on-d-line);
+}
+.proforma .head .ph {
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.28em; text-transform: uppercase; color: var(--terra);
+}
+.proforma .head h3 {
+  font-family: var(--display); font-weight: 700; font-size: 44px; margin: 16px 0 8px;
+  letter-spacing: -0.01em;
+}
+.proforma .head h3 em { font-style: italic; font-weight: 400; color: var(--gold); }
+.proforma .head .meta { font-family: var(--body); font-size: 13px; color: var(--on-d-soft); }
+.proforma .head .price { text-align: right; }
+.proforma .head .price .v {
+  font-family: var(--display); font-weight: 700; font-size: 64px; line-height: 1;
+  color: var(--canvas);
+}
+.proforma .head .price .t { font-family: var(--body); font-size: 12px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--gold); margin-top: 14px; }
+
+.proforma .grid {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 0;
+}
+.proforma .grid .col { padding: 48px 56px; border-right: 1px solid var(--on-d-line); }
+.proforma .grid .col:last-child { border-right: none; }
+.proforma .grid .col-title {
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold);
+  margin-bottom: 24px;
+}
+.proforma .row {
+  display: grid; grid-template-columns: 1fr auto;
+  padding: 14px 0; border-bottom: 1px solid var(--on-d-line);
+  font-family: var(--body); font-size: 14px;
+}
+.proforma .row.mono .v { font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-feature-settings: "tnum"; }
+.proforma .row.sub { color: var(--on-d-soft); }
+.proforma .row.sub .v { color: var(--on-d-soft); }
+.proforma .row .v { font-feature-settings: "tnum"; }
+.proforma .row.total { border-top: 1px solid var(--terra); border-bottom: none; padding-top: 18px; margin-top: 6px; font-weight: 500; color: var(--canvas); }
+.proforma .row.total .v { color: var(--canvas); font-weight: 600; }
+.proforma .row.total.neg .v { color: var(--terra); }
+
+.metrics-row {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-top: 1px solid var(--on-d-line);
+}
+.metrics-row .m { padding: 32px 56px; border-right: 1px solid var(--on-d-line); }
+.metrics-row .m:last-child { border-right: none; }
+.metrics-row .k { font-family: var(--body); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+.metrics-row .v { font-family: var(--display); font-weight: 700; font-size: 56px; color: var(--canvas); margin-top: 12px; line-height: 1; }
+.metrics-row .v em { font-style: italic; font-weight: 400; color: var(--terra); }
+
+.upside {
+  padding: 36px 56px;
+  background: var(--terra); color: var(--canvas);
+  font-family: var(--display); font-style: italic; font-weight: 400;
+  font-size: 18px; line-height: 1.55;
+}
+.upside strong { font-family: var(--body); font-style: normal; font-weight: 500; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; display: block; margin-bottom: 10px; color: var(--canvas); }
+.upside .num { font-family: var(--body); font-style: normal; font-weight: 500; }
+
+.verdict {
+  padding: 36px 56px; background: var(--navy-deep);
+  font-family: var(--display); font-style: italic; font-size: 18px; line-height: 1.5;
+  color: var(--on-d-soft); border-top: 1px solid var(--on-d-line);
+}
+.verdict strong { font-family: var(--body); font-style: normal; font-weight: 500; font-size: 11px; letter-spacing: 0.25em; text-transform: uppercase; color: var(--gold); display: block; margin-bottom: 10px; }
+
+/* ───────── Reviews ───────── */
+.review-stage {
+  margin-top: 96px;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 32px;
+}
+.review-card {
+  padding: 56px;
+  background: var(--navy);
+  border: 1px solid var(--on-d-line);
+  display: grid; gap: 24px; align-content: space-between;
+  position: relative;
+}
+.review-card .qm {
+  font-family: var(--display); font-weight: 700;
+  font-size: 96px; line-height: 0.5; color: var(--terra);
+}
+.review-card .text {
+  font-family: var(--display); font-style: italic; font-weight: 400;
+  font-size: 24px; line-height: 1.45; color: var(--canvas);
+}
+.review-card .who {
+  display: flex; gap: 16px; align-items: center;
+  border-top: 1px solid var(--on-d-line); padding-top: 24px;
+}
+.review-card .av {
+  width: 48px; height: 48px; border-radius: 50%;
+  background: var(--terra); color: var(--canvas);
+  display: grid; place-items: center;
+  font-family: var(--display); font-weight: 700; font-size: 16px;
+}
+.review-card .name { font-family: var(--display); font-weight: 700; font-size: 16px; }
+.review-card .role { font-family: var(--body); font-size: 12px; color: var(--on-d-soft); margin-top: 2px; }
+
+/* ───────── Contact ───────── */
+.contact-stage {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 96px;
+  margin-top: 96px;
+  align-items: start;
+}
+.contact-stage .pitch h3 {
+  font-family: var(--display); font-weight: 700;
+  font-size: 80px; line-height: 0.98; margin: 0;
+  letter-spacing: -0.018em;
+}
+.contact-stage .pitch h3 em { font-style: italic; font-weight: 400; color: var(--gold); }
+.contact-stage .pitch p { font-family: var(--display); font-style: italic; font-size: 22px; color: var(--on-d-soft); line-height: 1.4; margin: 32px 0; max-width: 460px; }
+.contact-stage .pitch .links { display: grid; gap: 16px; margin-top: 48px; }
+.contact-stage .pitch .links a {
+  display: grid; grid-template-columns: 24px 1fr auto;
+  gap: 16px; align-items: center;
+  padding: 20px 0; border-top: 1px solid var(--on-d-line);
+  color: var(--canvas); text-decoration: none;
+  font-family: var(--display); font-weight: 700; font-size: 22px;
+  cursor: none;
+  transition: color .25s;
+}
+.contact-stage .pitch .links a:hover { color: var(--gold); }
+.contact-stage .pitch .links a .arrow { font-family: var(--body); font-weight: 400; color: var(--terra); }
+.contact-stage .pitch .links a .ic { font-family: var(--body); font-size: 11px; letter-spacing: 0.22em; color: var(--on-d-mute); text-transform: uppercase; }
+
+.form {
+  background: var(--navy-d); border: 1px solid var(--on-d-line);
+  padding: 48px;
+}
+.form .field { display: grid; gap: 8px; margin-bottom: 24px; }
+.form label { font-family: var(--body); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+.form input, .form select, .form textarea {
+  font-family: var(--body); font-size: 16px; font-weight: 300;
+  background: transparent; border: none;
+  border-bottom: 1px solid var(--on-d-line);
+  color: var(--canvas); padding: 12px 0; cursor: none;
+}
+.form input:focus, .form select:focus, .form textarea:focus { outline: none; border-bottom-color: var(--terra); }
+.form input::placeholder, .form textarea::placeholder { color: var(--on-d-mute); font-style: italic; }
+.form select option { background: var(--navy-d); color: var(--canvas); }
+.form textarea { resize: vertical; min-height: 80px; }
+.form button {
+  margin-top: 16px;
+  background: var(--terra); color: var(--canvas);
+  border: none; padding: 20px 32px;
+  font-family: var(--body); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  cursor: none; transition: background .25s;
+  width: 100%;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.form button:hover { background: var(--terra-d); }
+
+/* ───────── Footer ───────── */
+footer {
+  padding: 96px 56px 48px;
+  background: var(--navy-deep);
+  border-top: 1px solid var(--on-d-line);
+  position: relative;
+}
+.foot-mark {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(120px, 18vw, 280px);
+  line-height: 0.9; letter-spacing: -0.025em;
+  color: var(--canvas); margin: 0;
+}
+.foot-mark em { font-style: italic; font-weight: 400; color: var(--terra); }
+.foot-meta {
+  margin-top: 64px;
+  display: grid; grid-template-columns: 1fr 1fr 1fr 1fr; gap: 32px;
+  padding-top: 32px; border-top: 1px solid var(--on-d-line);
+  font-family: var(--body); font-size: 12px; color: var(--on-d-soft);
+}
+.foot-meta .col .k { font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 14px; }
+.foot-meta .col a { color: var(--canvas); text-decoration: none; display: block; padding: 4px 0; cursor: none; }
+.foot-meta .col a:hover { color: var(--terra); }
+.foot-bar { margin-top: 48px; display: flex; justify-content: space-between; font-family: 'JetBrains Mono', ui-monospace, monospace; font-size: 11px; color: var(--on-d-mute); }
+
+/* ───────── Reveal animation ───────── */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal-stagger.in > * { opacity: 1; transform: none; }
+.reveal-stagger.in > *:nth-child(1) { transition-delay: .04s; }
+.reveal-stagger.in > *:nth-child(2) { transition-delay: .12s; }
+.reveal-stagger.in > *:nth-child(3) { transition-delay: .20s; }
+.reveal-stagger.in > *:nth-child(4) { transition-delay: .28s; }
+.reveal-stagger.in > *:nth-child(5) { transition-delay: .36s; }
+.reveal-stagger.in > *:nth-child(6) { transition-delay: .44s; }
+.reveal-stagger.in > *:nth-child(7) { transition-delay: .52s; }
+.reveal-stagger.in > *:nth-child(8) { transition-delay: .60s; }
+.reveal-stagger.in > *:nth-child(9) { transition-delay: .68s; }
+.reveal-stagger.in > *:nth-child(10) { transition-delay: .76s; }
+
+a, button, input, select, textarea, .hover { cursor: none; }
+</style>
+</head>
+<body>
+
+<div class="cursor-ring" id="cursor-ring"></div>
+<div class="cursor-dot" id="cursor-dot"></div>
+<div class="progress" id="progress"><i></i></div>
+
+<nav class="top">
+  <div class="brand">Giovanni <em>Serrano</em></div>
+  <div class="links">
+    <a href="#services" class="hover">Services</a>
+    <a href="#about" class="hover">About</a>
+    <a href="#portfolio" class="hover">Work</a>
+    <a href="#sample" class="hover">Sample</a>
+    <a href="#contact" class="hover">Contact</a>
+  </div>
+  <div class="now">San Diego · 09:42 PT</div>
+</nav>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero" data-screen-label="01 Hero">
+  <canvas id="hero-canvas"></canvas>
+  <div class="hero-eyebrow">Multifamily · Investment · Development</div>
+  <div>
+    <h1 class="hero-headline">Move with<br><em>intention.</em></h1>
+    <div class="hero-foot">
+      <div class="lede">
+        <strong>Multifamily, San Diego</strong>
+        Most agents sell properties. I model deals — full proforma, sensitivity, and feasibility before you fall for the kitchen.
+      </div>
+      <div class="stat">
+        <div class="k">Underwritten</div>
+        <div class="v">14<em>+</em></div>
+        <div class="sub">Acquisition &amp; development models</div>
+      </div>
+      <div class="stat">
+        <div class="k">Foundation</div>
+        <div class="v"><em>B.S.</em></div>
+        <div class="sub">Real Estate &amp; Development · UCSD</div>
+      </div>
+    </div>
+  </div>
+  <div class="scroll-hint">Scroll · 01 / 07</div>
+</section>
+
+<!-- ════════ SERVICES ════════ -->
+<section class="scene dark" id="services" data-screen-label="02 Services" style="padding: 0;">
+  <div class="services-intro">
+    <div>
+      <div class="eyebrow terra"><span class="bar"></span><span class="num">02 ·</span> Three services</div>
+      <h2 class="scene-title reveal">How I <em>help.</em></h2>
+    </div>
+    <p class="reveal">Three distinct services. Each built around your specific goal — not a generic process. The deliverable is the same: a model you can use, not a pitch.</p>
+  </div>
+
+  <div class="svc-card-stack">
+    <article class="svc-card reveal">
+      <div class="num">01<em>Invest</em></div>
+      <div class="meta">
+        <div class="who">First-time buyers</div>
+        <h3>Your <em>first</em> multifamily.</h3>
+        <p class="deliverable">A duplex or triplex you live in, while tenants pay your mortgage. The strategy explained, the property modeled, the offer sized.</p>
+      </div>
+      <div class="body">
+        <p>Most first-time buyers don't realize they can start building wealth from day one. Instead of locking yourself into a single-family home with one mortgage and no income, a duplex or triplex lets you live in one unit and rent the rest — <strong>your tenants help pay your mortgage</strong> while your equity grows.</p>
+        <ul>
+          <li>House-hack strategy — live in one unit, rent the rest</li>
+          <li>Full deal analysis before every offer — NOI, cash flow, debt coverage</li>
+          <li>Deep San Diego neighborhood knowledge — Mission Hills to National City</li>
+        </ul>
+        <a href="#" class="cta hover">See how Invest works <span>→</span></a>
+      </div>
+    </article>
+
+    <article class="svc-card reveal">
+      <div class="num">02<em>Scale</em></div>
+      <div class="meta">
+        <div class="who">Existing investors</div>
+        <h3>Your <em>portfolio.</em></h3>
+        <p class="deliverable">Fourplex through 12-unit acquisitions. Institutional-grade underwriting on every deal you're considering — DCF, sensitivity, JV waterfall.</p>
+      </div>
+      <div class="body">
+        <p>You already own property. Now you want a fourplex, an 8-unit, or a 12-unit building — or you want to build new units on land you've identified. At this level, <strong>the stakes are higher and the analysis has to be sharper</strong>.</p>
+        <ul>
+          <li>Acquisition analysis for existing multifamily buildings</li>
+          <li>Development feasibility for new construction opportunities</li>
+          <li>Investment analysis — proforma, IRR, cap rate, cash-on-cash</li>
+        </ul>
+        <a href="#" class="cta hover">See how Scale works <span>→</span></a>
+      </div>
+    </article>
+
+    <article class="svc-card reveal">
+      <div class="num">03<em>Develop</em></div>
+      <div class="meta">
+        <div class="who">Homeowners with land</div>
+        <h3>Build <em>more</em> than you think.</h3>
+        <p class="deliverable">SB 9, ADU law, density bonus. Free lot review, full feasibility, end-to-end project management — concept through certificate of occupancy.</p>
+      </div>
+      <div class="body">
+        <p>Recent California law opened up small-scale development on lots that used to be locked. <strong>SB 9 lets you split a single-family lot</strong> and build up to four units. State ADU law lets you add a detached second unit on nearly any residential property.</p>
+        <ul>
+          <li>Feasibility analysis — what can you build and will it pencil</li>
+          <li>Full proforma modeling before you commit a dollar</li>
+          <li>Team assembly — architect, engineers, general contractor</li>
+        </ul>
+        <a href="#" class="cta hover">See how Develop works <span>→</span></a>
+      </div>
+    </article>
+  </div>
+</section>
+
+<!-- ════════ ABOUT ════════ -->
+<section class="scene deep" id="about" data-screen-label="03 About">
+  <div class="eyebrow gold"><span class="bar"></span><span class="num">03 ·</span> About Giovanni</div>
+  <h2 class="scene-title reveal">A real estate professional<br>and developer — <em>not just an agent.</em></h2>
+
+  <div class="about-grid">
+    <div class="portrait-slot">
+      <span class="corner">PORTRAIT · 3:4</span>
+      <span class="index">A · ABOUT</span>
+    </div>
+    <div class="about-prose">
+      <p class="lede reveal">I was born in San Diego and grew up across the <em>San Diego–Tijuana</em> region — the binational corridor that's been my family's home for three generations.</p>
+      <p class="reveal">My mother, my uncles, and my abuelos have been operating in real estate on <strong>both sides of the border</strong> for more than two decades: acquiring parcels, developing them, leasing them, selling them, doing it again. That's how I learned this business — on the ground, on both sides of the border, long before any classroom.</p>
+      <p class="reveal">On top of that foundation, I built the institutional toolkit. <strong>A B.S. in Real Estate &amp; Development from UC San Diego</strong> — a project-based program tied to actual properties and the financial models lenders and acquisition committees actually use.</p>
+      <div class="about-quote-pull reveal">"Real estate is a financial instrument.<br>It should be treated like one."</div>
+    </div>
+  </div>
+
+  <div class="milestones reveal-stagger">
+    <div class="m"><div class="age"><em>16</em></div><h4>Land Transactions</h4><p>Working alongside my mother on family acquisitions in the binational corridor.</p></div>
+    <div class="m"><div class="age"><em>18</em></div><h4>Construction Sites</h4><p>On site with my uncles — planning, financing, building, leasing the apartments and commercial spaces our family developed.</p></div>
+    <div class="m"><div class="age"><em>21</em></div><h4>30–60 Units</h4><p>Helped take that volume from raw land to producing income. Acquisition. Construction. Lease-up. Repeat.</p></div>
+    <div class="m"><div class="age">UCSD</div><h4>B.S. RE &amp; Development</h4><p>Project-based program. Proforma modeling, JV structuring, planning law — applied to real properties.</p></div>
+  </div>
+</section>
+
+<!-- ════════ PORTFOLIO / CAPSTONE ════════ -->
+<section class="scene canvas-bg" id="portfolio" data-screen-label="04 Portfolio">
+  <div class="eyebrow terra"><span class="bar"></span><span class="num">04 ·</span> The work behind the analysis</div>
+  <h2 class="scene-title reveal" style="color: var(--ink);">A capstone, then <em>fourteen models.</em></h2>
+
+  <div class="capstone-card reveal">
+    <div class="left">
+      <span class="badge">Senior Capstone · UCSD Urban Planning EXPO</span>
+      <h3>4855 College Ave —<br><em>3.05-acre multifamily.</em></h3>
+      <div class="sub">Full Offering Memorandum · presented to industry judges</div>
+      <p>A complete Offering Memorandum for a 3.05-acre site zoned single-family, with proposed rezone to multifamily (RS-1-7 to RM-4-10). Every stage of development evaluation — from zoning and demographics through proforma and exit — in the same format institutional firms use to evaluate where to commit millions.</p>
+      <div class="stats">
+        <div class="s"><div class="k">Hold</div><div class="v">10 yr</div></div>
+        <div class="s"><div class="k">Pages</div><div class="v">30</div></div>
+        <div class="s"><div class="k">Site</div><div class="v">3.05<em>ac</em></div></div>
+      </div>
+    </div>
+    <div class="right">
+      <div>
+        <div class="col-title">Analysis &amp; Design</div>
+        <div class="deliverable-list">
+          <div class="li">Land use &amp; zoning rezone (RS-1-7 → RM-4-10)</div>
+          <div class="li">Demographics with projections through 2035</div>
+          <div class="li">Market analysis · vacancy, rents, absorption (CoStar)</div>
+          <div class="li">Site plan, parking, massing, amenities</div>
+        </div>
+      </div>
+      <div>
+        <div class="col-title">Financial &amp; Deliverables</div>
+        <div class="deliverable-list">
+          <div class="li">10-year proforma with full cash flow</div>
+          <div class="li">IRR, cash-on-cash, equity multiple, levered returns</div>
+          <div class="li">EXPO charrette board · investor video pitch</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="portfolio-strip reveal-stagger" style="margin-top: 48px;">
+    <div class="p">
+      <span class="type">Value-add residential</span>
+      <h4>6966 Amherst — 14-Unit</h4>
+      <p>Value-add acquisition with 10-year proforma, CapEx schedule, exit modeling. 6% cash-on-cash, 14% levered, 12% IRR.</p>
+      <div class="tags"><span class="tag">14 units</span><span class="tag">10-yr</span><span class="tag">12% IRR</span></div>
+    </div>
+    <div class="p">
+      <span class="type">Highrise proforma</span>
+      <h4>311-Unit Downtown SD</h4>
+      <p>Full development proforma with JV waterfall: 10% pref return, 60/40 GP/LP split, refi and disposition modeling.</p>
+      <div class="tags"><span class="tag">311 units</span><span class="tag">JV waterfall</span></div>
+    </div>
+    <div class="p">
+      <span class="type">Ground-up subdivision</span>
+      <h4>80-Lot · Phased Cash Flow</h4>
+      <p>$3.7M land basis, $68K per finished lot, $150/SF construction. 18% IRR target. Phased build vs. single-phase impact.</p>
+      <div class="tags"><span class="tag">80 lots</span><span class="tag">18% IRR</span><span class="tag">Monthly CF</span></div>
+    </div>
+    <div class="p">
+      <span class="type">Commercial repositioning</span>
+      <h4>4616 El Cajon Blvd</h4>
+      <p>Repositioning analysis on a Transit Priority Area asset. NNN vs. full-service, 60/40 JV, 16% IRR investor hurdle.</p>
+      <div class="tags"><span class="tag">Retail/Office</span><span class="tag">16% IRR</span></div>
+    </div>
+    <div class="p">
+      <span class="type">JV structure</span>
+      <h4>256-Bed Student Housing</h4>
+      <p>JV: 8% preferred dividend, 50/50 split post-pref, capital recovery sequencing.</p>
+      <div class="tags"><span class="tag">JV 50/50</span><span class="tag">8% pref</span></div>
+    </div>
+    <div class="p">
+      <span class="type">Land recap</span>
+      <h4>2,000-Acre Recapitalization</h4>
+      <p>Distressed recap: $4M new equity, subordinated debt, IRR hurdles, option payments to landowner.</p>
+      <div class="tags"><span class="tag">$4M equity</span><span class="tag">Recap</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ SAMPLE ANALYSIS ════════ -->
+<section class="scene dark" id="sample" data-screen-label="05 Sample">
+  <div class="eyebrow terra"><span class="bar"></span><span class="num">05 ·</span> How I model a deal</div>
+  <h2 class="scene-title reveal">Numbers <em>before</em> narrative.</h2>
+  <p class="reveal" style="font-family: var(--display); font-style: italic; font-size: 24px; color: var(--on-d-soft); max-width: 720px; margin: 32px 0 0; line-height: 1.4;">Every property gets this treatment before you make an offer. The numbers below are illustrative — on a real deal, they'd be your rents, your financing, your market.</p>
+
+  <div class="proforma reveal">
+    <div class="head">
+      <div>
+        <div class="ph">Sample · North Park</div>
+        <h3>4-Unit Multifamily<br><em>built 1978 · 5,800 sf lot</em></h3>
+        <div class="meta">4 × 2BR/1BA · seller asking · agent-listed</div>
+      </div>
+      <div class="price">
+        <div class="v">$1.65M</div>
+        <div class="t">25% down · 7.0% / 30-yr</div>
+      </div>
+    </div>
+
+    <div class="grid">
+      <div class="col">
+        <div class="col-title">Year 1 Proforma</div>
+        <div class="row mono"><span>Gross scheduled rent</span><span class="v">$144,000</span></div>
+        <div class="row mono sub"><span>Less vacancy (5%)</span><span class="v">−$7,200</span></div>
+        <div class="row mono sub"><span>Less operating expenses (35%)</span><span class="v">−$47,880</span></div>
+        <div class="row mono total"><span>Net Operating Income</span><span class="v">$88,920</span></div>
+        <div class="row mono sub"><span>Less annual debt service</span><span class="v">−$98,772</span></div>
+        <div class="row mono total neg"><span>Cash flow after debt</span><span class="v">−$9,852</span></div>
+      </div>
+      <div class="col">
+        <div class="col-title">Capital Stack</div>
+        <div class="row mono"><span>Purchase price</span><span class="v">$1,650,000</span></div>
+        <div class="row mono sub"><span>Down payment (25%)</span><span class="v">$412,500</span></div>
+        <div class="row mono sub"><span>Closing costs (est.)</span><span class="v">$32,000</span></div>
+        <div class="row mono sub"><span>Reserves (6 mo.)</span><span class="v">$18,000</span></div>
+        <div class="row mono total"><span>Total cash required</span><span class="v">$462,500</span></div>
+        <div class="row mono"><span>Loan amount</span><span class="v">$1,237,500</span></div>
+      </div>
+    </div>
+
+    <div class="metrics-row">
+      <div class="m"><div class="k">Cap rate</div><div class="v">5.4<em>%</em></div></div>
+      <div class="m"><div class="k">Cash-on-cash</div><div class="v"><em>−</em>2.1<em>%</em></div></div>
+      <div class="m"><div class="k">DSCR</div><div class="v">0.90<em>×</em></div></div>
+    </div>
+
+    <div class="upside">
+      <strong>Value-Add · Detached ADU</strong>
+      Adding a 1BR detached ADU at <span class="num">$180,000</span> construction cost adds <span class="num">$27,000</span> in annual rent. Revised NOI: <span class="num">$106,470</span>. Revised cash flow: <span class="num">+$7,698</span>. Cash-on-cash shifts to <span class="num">+1.2%</span>.
+    </div>
+    <div class="verdict">
+      <strong>Verdict</strong>
+      As-is, this deal doesn't pencil. It only works with the ADU upside, meaningful seller concession, or assumable low-rate financing. <em>This is exactly what you need to know before you make an offer.</em>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ REVIEWS ════════ -->
+<section class="scene deep" id="reviews" data-screen-label="06 Reviews">
+  <div class="eyebrow gold"><span class="bar"></span><span class="num">06 ·</span> Client reviews</div>
+  <h2 class="scene-title reveal">In their <em>words.</em></h2>
+
+  <div class="review-stage">
+    <div class="review-card reveal">
+      <div class="qm">"</div>
+      <div class="text">I've worked with several agents on investment properties. Giovanni is the only one who actually understood the numbers. He modeled the deal before I made an offer — IRR, cap rate, cash-on-cash. <em>That's a different level.</em></div>
+      <div class="who">
+        <div class="av">JT</div>
+        <div><div class="name">James T.</div><div class="role">Multifamily Investor · San Diego County</div></div>
+      </div>
+    </div>
+    <div class="review-card reveal">
+      <div class="qm">"</div>
+      <div class="text">Multifamily felt intimidating before I talked to Giovanni — all the numbers, the tenants, the loan structure. He broke it down clearly. I bought my first duplex and <em>I actually understand the investment.</em></div>
+      <div class="who">
+        <div class="av">MR</div>
+        <div><div class="name">Maria R.</div><div class="role">First-time Multifamily Buyer · San Diego</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CONTACT ════════ -->
+<section class="scene dark" id="contact" data-screen-label="07 Contact">
+  <div class="eyebrow terra"><span class="bar"></span><span class="num">07 ·</span> Let's talk</div>
+
+  <div class="contact-stage">
+    <div class="pitch">
+      <h3 class="reveal">Ready to move<br><em>with intention?</em></h3>
+      <p class="reveal">Buying your first multifamily, scaling a portfolio, or exploring what you can build — the first step is a conversation.</p>
+      <div class="links reveal-stagger">
+        <a href="tel:6196178584" class="hover"><span class="ic">Call · text</span><span>619.617.8584</span><span class="arrow">→</span></a>
+        <a href="mailto:giovanni@giovanniserrano.com" class="hover"><span class="ic">Email</span><span>giovanni@giovanniserrano.com</span><span class="arrow">→</span></a>
+        <a href="https://giovanniserrano.com" class="hover"><span class="ic">Web</span><span>giovanniserrano.com</span><span class="arrow">→</span></a>
+      </div>
+    </div>
+
+    <form class="form reveal" onsubmit="event.preventDefault(); this.querySelector('button').textContent='Sent · within 24 hrs';">
+      <div class="field"><label>Name</label><input type="text" placeholder="Your name" required></div>
+      <div class="field"><label>Email</label><input type="email" placeholder="your@email.com" required></div>
+      <div class="field"><label>I'm Looking To</label>
+        <select required>
+          <option value="" selected>Select your goal</option>
+          <option>Buy my first duplex / triplex / fourplex</option>
+          <option>Acquire a multifamily investment property</option>
+          <option>Build units on property I already own</option>
+          <option>Something else</option>
+        </select>
+      </div>
+      <div class="field"><label>Message <span style="color:var(--on-d-mute);text-transform:none;letter-spacing:0;">(optional)</span></label><textarea placeholder="Timeline, budget, specific properties — whatever helps."></textarea></div>
+      <button type="submit" class="hover"><span>Send my message</span><span>→</span></button>
+    </form>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer data-screen-label="08 Footer">
+  <p class="foot-mark">Move with<br><em>intention.</em></p>
+  <div class="foot-meta">
+    <div class="col">
+      <div class="k">Brand</div>
+      <div>Giovanni Serrano</div>
+      <div>Multifamily Investment &amp;<br>Development Advisor</div>
+    </div>
+    <div class="col">
+      <div class="k">Sub-pages</div>
+      <a href="#" class="hover">Invest</a>
+      <a href="#" class="hover">Scale</a>
+      <a href="#" class="hover">Develop</a>
+    </div>
+    <div class="col">
+      <div class="k">Reach</div>
+      <a href="tel:6196178584" class="hover">619.617.8584</a>
+      <a href="mailto:giovanni@giovanniserrano.com" class="hover">giovanni@giovanniserrano.com</a>
+      <a href="#" class="hover">San Diego, CA</a>
+    </div>
+    <div class="col">
+      <div class="k">Compliance</div>
+      <div>DRE #02282434</div>
+      <div>© 2026 Giovanni Serrano Real Estate</div>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>v4.0 · 2026 · Soft Golden Hour</span>
+    <span>Lora · Inter</span>
+    <span>Built from scratch. Built to last.</span>
+  </div>
+</footer>
+
+<script>
+/* ───── Magnetic cursor ───── */
+const dot = document.getElementById('cursor-dot');
+const ring = document.getElementById('cursor-ring');
+let mx = window.innerWidth/2, my = window.innerHeight/2;
+let rx = mx, ry = my;
+window.addEventListener('mousemove', e => { mx = e.clientX; my = e.clientY; dot.style.transform = `translate(${mx}px,${my}px) translate(-50%,-50%)`; });
+function loop() {
+  rx += (mx - rx) * 0.15;
+  ry += (my - ry) * 0.15;
+  ring.style.transform = `translate(${rx}px,${ry}px) translate(-50%,-50%)`;
+  requestAnimationFrame(loop);
+}
+loop();
+document.querySelectorAll('a, button, .hover, input, select, textarea').forEach(el => {
+  el.addEventListener('mouseenter', () => { dot.classList.add('hover'); ring.classList.add('hover'); });
+  el.addEventListener('mouseleave', () => { dot.classList.remove('hover'); ring.classList.remove('hover'); });
+});
+
+/* ───── Scroll progress ───── */
+const prog = document.querySelector('#progress > i');
+window.addEventListener('scroll', () => {
+  const h = document.documentElement;
+  const p = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+  prog.style.width = p + '%';
+}, { passive: true });
+
+/* ───── Reveal observer ───── */
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.15 });
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+/* ───── Hero WebGL gradient with cursor displacement ───── */
+const canvas = document.getElementById('hero-canvas');
+const gl = canvas.getContext('webgl', { antialias: true, alpha: true });
+function fit() {
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  canvas.width = canvas.clientWidth * dpr;
+  canvas.height = canvas.clientHeight * dpr;
+  gl.viewport(0, 0, canvas.width, canvas.height);
+}
+fit(); window.addEventListener('resize', fit);
+
+const vs = `attribute vec2 p; void main(){ gl_Position = vec4(p, 0.0, 1.0); }`;
+const fs = `
+precision highp float;
+uniform vec2 u_res;
+uniform vec2 u_mouse;
+uniform float u_time;
+
+vec3 terra = vec3(0.878, 0.478, 0.373);   // #E07A5F
+vec3 gold  = vec3(0.949, 0.800, 0.561);   // #F2CC8F
+vec3 navy  = vec3(0.105, 0.113, 0.180);   // #1B1D2E
+vec3 navy2 = vec3(0.239, 0.250, 0.357);   // #3D405B
+
+float hash(vec2 p){ return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453); }
+float noise(vec2 p){
+  vec2 i = floor(p), f = fract(p);
+  float a = hash(i), b = hash(i+vec2(1.,0.)), c = hash(i+vec2(0.,1.)), d = hash(i+vec2(1.,1.));
+  vec2 u = f*f*(3.-2.*f);
+  return mix(a,b,u.x) + (c-a)*u.y*(1.-u.x) + (d-b)*u.x*u.y;
+}
+float fbm(vec2 p){ float v=0., a=0.5; for (int i=0;i<5;i++){ v+=a*noise(p); p*=2.; a*=0.5; } return v; }
+
+void main(){
+  vec2 uv = gl_FragCoord.xy / u_res.xy;
+  vec2 m = u_mouse / u_res.xy;
+  vec2 p = uv;
+  p.x *= u_res.x / u_res.y;
+  m.x *= u_res.x / u_res.y;
+
+  float t = u_time * 0.06;
+  vec2 q = vec2(fbm(p + t), fbm(p - t + 5.0));
+  vec2 r = vec2(fbm(p + q + vec2(1.7, 9.2) + t*1.4),
+                fbm(p + q + vec2(8.3, 2.8) - t*1.1));
+  float n = fbm(p + r);
+
+  // distance from mouse — bloom
+  float d = distance(p, m);
+  float glow = exp(-d*1.8);
+
+  vec3 col = navy;
+  col = mix(col, navy2, smoothstep(0.0, 1.0, n));
+  col = mix(col, terra, smoothstep(0.55, 0.95, n) * 0.85);
+  col = mix(col, gold,  smoothstep(0.78, 1.0, n) * 0.55);
+  col = mix(col, mix(terra, gold, 0.5), glow * 0.55);
+
+  // top-left vignette = darker for headline contrast
+  float vy = smoothstep(0.0, 0.7, uv.y);
+  col = mix(col * 0.55, col, vy);
+  // bottom fade to deep navy
+  col = mix(col, vec3(0.105, 0.113, 0.180), smoothstep(0.5, 0.0, uv.y) * 0.7);
+
+  // grain
+  float g = (hash(uv * u_res.xy + u_time) - 0.5) * 0.04;
+  col += g;
+
+  gl_FragColor = vec4(col, 1.0);
+}`;
+
+function shader(type, src){ const s = gl.createShader(type); gl.shaderSource(s, src); gl.compileShader(s); if(!gl.getShaderParameter(s, gl.COMPILE_STATUS)) console.warn(gl.getShaderInfoLog(s)); return s; }
+const prog2 = gl.createProgram();
+gl.attachShader(prog2, shader(gl.VERTEX_SHADER, vs));
+gl.attachShader(prog2, shader(gl.FRAGMENT_SHADER, fs));
+gl.linkProgram(prog2);
+gl.useProgram(prog2);
+const buf = gl.createBuffer();
+gl.bindBuffer(gl.ARRAY_BUFFER, buf);
+gl.bufferData(gl.ARRAY_BUFFER, new Float32Array([-1,-1, 1,-1, -1,1, -1,1, 1,-1, 1,1]), gl.STATIC_DRAW);
+const loc = gl.getAttribLocation(prog2, 'p');
+gl.enableVertexAttribArray(loc); gl.vertexAttribPointer(loc, 2, gl.FLOAT, false, 0, 0);
+const uRes = gl.getUniformLocation(prog2, 'u_res');
+const uMouse = gl.getUniformLocation(prog2, 'u_mouse');
+const uTime = gl.getUniformLocation(prog2, 'u_time');
+let hmx = canvas.width/2, hmy = canvas.height/2;
+let chmx = hmx, chmy = hmy;
+canvas.addEventListener('mousemove', e => {
+  const r = canvas.getBoundingClientRect();
+  const dpr = Math.min(window.devicePixelRatio || 1, 2);
+  hmx = (e.clientX - r.left) * dpr;
+  hmy = (canvas.height) - (e.clientY - r.top) * dpr;
+});
+const start = performance.now();
+function render(){
+  chmx += (hmx - chmx) * 0.06;
+  chmy += (hmy - chmy) * 0.06;
+  gl.uniform2f(uRes, canvas.width, canvas.height);
+  gl.uniform2f(uMouse, chmx, chmy);
+  gl.uniform1f(uTime, (performance.now() - start) / 1000);
+  gl.drawArrays(gl.TRIANGLES, 0, 6);
+  requestAnimationFrame(render);
+}
+render();
+
+/* ───── Smooth anchor scroll ───── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 20, behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>

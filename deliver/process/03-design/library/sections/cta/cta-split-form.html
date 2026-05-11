@@ -1,0 +1,481 @@
+<!-- METADATA
+  @style: modern-saas
+  @complexity: 3
+  @animation-deps: none
+  @responsive: true
+  @description: Split CTA with compelling copy and social proof on left, email capture form with validation and success animation on right
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CTA Split Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --color-bg: #f8f9fc;
+    --color-surface: #ffffff;
+    --color-primary: #4f46e5;
+    --color-primary-dark: #4338ca;
+    --color-primary-light: #eef2ff;
+    --color-text: #0f172a;
+    --color-text-secondary: #64748b;
+    --color-border: #e2e8f0;
+    --color-success: #10b981;
+    --color-error: #ef4444;
+    --font-main: 'Inter', sans-serif;
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  body {
+    font-family: var(--font-main);
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .cta-section {
+    padding: 120px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .cta-card {
+    background: var(--color-surface);
+    border-radius: var(--radius);
+    box-shadow: 0 4px 6px -1px rgba(0,0,0,.04), 0 20px 60px -8px rgba(79,70,229,.08);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    overflow: hidden;
+  }
+
+  /* Left side */
+  .cta-left {
+    padding: 64px 56px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .cta-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: 0.75rem;
+    font-weight: 600;
+    border-radius: 999px;
+    margin-bottom: 24px;
+    width: fit-content;
+  }
+
+  .cta-badge__dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-primary);
+    animation: pulse 2s ease infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.4; }
+  }
+
+  .cta-title {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    letter-spacing: -0.02em;
+  }
+
+  .cta-description {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+    margin-bottom: 40px;
+  }
+
+  /* Social proof */
+  .social-proof {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+  }
+
+  .avatar-stack {
+    display: flex;
+    align-items: center;
+  }
+
+  .avatar-stack__img {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 2.5px solid var(--color-surface);
+    margin-left: -10px;
+  }
+
+  .avatar-stack__img:first-child {
+    margin-left: 0;
+  }
+
+  .avatar-stack__count {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.6875rem;
+    font-weight: 700;
+    margin-left: -10px;
+    border: 2.5px solid var(--color-surface);
+  }
+
+  .social-proof__stats {
+    display: flex;
+    gap: 24px;
+  }
+
+  .stat {
+    text-align: center;
+  }
+
+  .stat__number {
+    font-size: 1.25rem;
+    font-weight: 800;
+    color: var(--color-text);
+  }
+
+  .stat__label {
+    font-size: 0.6875rem;
+    color: var(--color-text-secondary);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    font-weight: 500;
+  }
+
+  /* Right side */
+  .cta-right {
+    padding: 64px 56px;
+    background: var(--color-primary);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .cta-right::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: radial-gradient(ellipse at top right, rgba(255,255,255,0.1), transparent 60%);
+    pointer-events: none;
+  }
+
+  .form-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+    position: relative;
+  }
+
+  .form-subtitle {
+    font-size: 0.9375rem;
+    color: rgba(255,255,255,0.75);
+    margin-bottom: 32px;
+    position: relative;
+  }
+
+  .form {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+  }
+
+  .form__group {
+    position: relative;
+  }
+
+  .form__input {
+    width: 100%;
+    padding: 16px 18px;
+    border-radius: var(--radius-sm);
+    border: 2px solid rgba(255,255,255,0.2);
+    background: rgba(255,255,255,0.1);
+    color: #ffffff;
+    font-family: var(--font-main);
+    font-size: 0.9375rem;
+    transition: all 0.25s ease;
+    outline: none;
+    backdrop-filter: blur(4px);
+  }
+
+  .form__input::placeholder {
+    color: rgba(255,255,255,0.5);
+  }
+
+  .form__input:focus {
+    border-color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.15);
+  }
+
+  .form__input--error {
+    border-color: var(--color-error);
+    background: rgba(239,68,68,0.1);
+  }
+
+  .form__error {
+    font-size: 0.75rem;
+    color: #fca5a5;
+    margin-top: 6px;
+    display: none;
+  }
+
+  .form__error--visible {
+    display: block;
+  }
+
+  .form__btn {
+    padding: 16px 24px;
+    border-radius: var(--radius-sm);
+    border: none;
+    background: #ffffff;
+    color: var(--color-primary);
+    font-family: var(--font-main);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    position: relative;
+    overflow: hidden;
+  }
+
+  .form__btn:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 8px 24px rgba(0,0,0,0.15);
+  }
+
+  .form__btn:active {
+    transform: translateY(0);
+  }
+
+  .form__btn--loading {
+    color: transparent;
+    pointer-events: none;
+  }
+
+  .form__btn--loading::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 20px;
+    border: 2.5px solid var(--color-primary);
+    border-top-color: transparent;
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    animation: spin 0.6s linear infinite;
+  }
+
+  @keyframes spin {
+    to { transform: translate(-50%, -50%) rotate(360deg); }
+  }
+
+  .form__note {
+    font-size: 0.75rem;
+    color: rgba(255,255,255,0.55);
+    text-align: center;
+    position: relative;
+  }
+
+  /* Success state */
+  .success-state {
+    display: none;
+    text-align: center;
+    padding: 20px 0;
+    position: relative;
+  }
+
+  .success-state--visible {
+    display: block;
+  }
+
+  .success-icon {
+    width: 64px;
+    height: 64px;
+    margin: 0 auto 16px;
+    background: rgba(255,255,255,0.15);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    animation: scaleIn 0.4s cubic-bezier(.34,1.56,.64,1);
+  }
+
+  @keyframes scaleIn {
+    0% { transform: scale(0); }
+    100% { transform: scale(1); }
+  }
+
+  .success-icon svg {
+    width: 32px;
+    height: 32px;
+  }
+
+  .success-title {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin-bottom: 8px;
+  }
+
+  .success-text {
+    font-size: 0.875rem;
+    color: rgba(255,255,255,0.75);
+  }
+
+  @media (max-width: 768px) {
+    .cta-section { padding: 80px 16px; }
+    .cta-card { grid-template-columns: 1fr; }
+    .cta-left { padding: 40px 28px; }
+    .cta-right { padding: 40px 28px; }
+    .social-proof { gap: 16px; }
+  }
+</style>
+</head>
+<body>
+<section class="cta-section">
+  <div class="cta-card">
+    <div class="cta-left">
+      <div class="cta-badge">
+        <span class="cta-badge__dot"></span>
+        Limited time offer
+      </div>
+      <h2 class="cta-title">Start building for free today</h2>
+      <p class="cta-description">Get instant access to all features with our 14-day trial. No credit card needed. Cancel anytime.</p>
+      <div class="social-proof">
+        <div class="avatar-stack">
+          <img src="https://picsum.photos/seed/av1/72/72" alt="" class="avatar-stack__img">
+          <img src="https://picsum.photos/seed/av2/72/72" alt="" class="avatar-stack__img">
+          <img src="https://picsum.photos/seed/av3/72/72" alt="" class="avatar-stack__img">
+          <img src="https://picsum.photos/seed/av4/72/72" alt="" class="avatar-stack__img">
+          <div class="avatar-stack__count">+2K</div>
+        </div>
+        <div class="social-proof__stats">
+          <div class="stat">
+            <div class="stat__number">12K+</div>
+            <div class="stat__label">Active users</div>
+          </div>
+          <div class="stat">
+            <div class="stat__number">4.9</div>
+            <div class="stat__label">Avg rating</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="cta-right">
+      <div id="formContainer">
+        <h3 class="form-title">Get started now</h3>
+        <p class="form-subtitle">Enter your email to create your free account.</p>
+        <form class="form" id="ctaForm" novalidate>
+          <div class="form__group">
+            <input type="text" class="form__input" id="nameInput" placeholder="Your full name" required autocomplete="name">
+            <div class="form__error" id="nameError">Please enter your name</div>
+          </div>
+          <div class="form__group">
+            <input type="email" class="form__input" id="emailInput" placeholder="you@company.com" required autocomplete="email">
+            <div class="form__error" id="emailError">Please enter a valid email address</div>
+          </div>
+          <button type="submit" class="form__btn" id="submitBtn">Get free access</button>
+          <p class="form__note">Free 14-day trial. No credit card required.</p>
+        </form>
+      </div>
+
+      <div class="success-state" id="successState">
+        <div class="success-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <div class="success-title">You're in!</div>
+        <p class="success-text">Check your inbox for the confirmation email.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const form = document.getElementById('ctaForm');
+  const nameInput = document.getElementById('nameInput');
+  const emailInput = document.getElementById('emailInput');
+  const nameError = document.getElementById('nameError');
+  const emailError = document.getElementById('emailError');
+  const submitBtn = document.getElementById('submitBtn');
+  const formContainer = document.getElementById('formContainer');
+  const successState = document.getElementById('successState');
+
+  function validateEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function showError(input, errorEl) {
+    input.classList.add('form__input--error');
+    errorEl.classList.add('form__error--visible');
+  }
+
+  function hideError(input, errorEl) {
+    input.classList.remove('form__input--error');
+    errorEl.classList.remove('form__error--visible');
+  }
+
+  nameInput.addEventListener('input', () => hideError(nameInput, nameError));
+  emailInput.addEventListener('input', () => hideError(emailInput, emailError));
+
+  form.addEventListener('submit', (e) => {
+    e.preventDefault();
+    let isValid = true;
+
+    if (!nameInput.value.trim()) {
+      showError(nameInput, nameError);
+      isValid = false;
+    }
+
+    if (!validateEmail(emailInput.value.trim())) {
+      showError(emailInput, emailError);
+      isValid = false;
+    }
+
+    if (!isValid) return;
+
+    // Loading state
+    submitBtn.classList.add('form__btn--loading');
+
+    // Simulate submission
+    setTimeout(() => {
+      formContainer.style.display = 'none';
+      successState.classList.add('success-state--visible');
+    }, 1500);
+  });
+})();
+</script>
+</body>
+</html>

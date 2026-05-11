@@ -1,0 +1,1299 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Giovanni Serrano — Architectural Split</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --terra: #E07A5F; --terra-d: #C85A3A;
+  --navy: #3D405B; --navy-d: #2C2F4A;
+  --gold: #F2CC8F; --canvas: #F4F1DE; --bone: #EDE8D5; --bone-d: #E5DFCB;
+  --ink: #3D405B; --ink-soft: rgba(61,64,91,0.65); --ink-mute: rgba(61,64,91,0.42); --ink-fade: rgba(61,64,91,0.18); --line: rgba(61,64,91,0.14);
+  --on-d: #F4F1DE; --on-d-soft: rgba(244,241,222,0.62); --on-d-mute: rgba(244,241,222,0.32); --on-d-line: rgba(244,241,222,0.12);
+  --display: 'Lora', Georgia, serif;
+  --body: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--body); font-weight: 300;
+  font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+
+/* ───────── Top nav ───────── */
+nav.top {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  gap: 32px; align-items: center;
+  padding: 22px 40px;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+}
+nav.top .brand { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -0.01em; text-transform: none; color: var(--navy); }
+nav.top .brand em { color: var(--terra); font-style: normal; }
+nav.top .links { display: flex; gap: 40px; justify-content: center; }
+nav.top .links a { color: var(--ink); text-decoration: none; transition: color .2s; position: relative; }
+nav.top .links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -6px; height: 1px; background: var(--terra); transition: right .35s ease; }
+nav.top .links a:hover::after { right: 0; }
+nav.top .right { justify-self: end; display: flex; align-items: center; gap: 24px; }
+nav.top .right .num { color: var(--ink-soft); font-family: var(--mono); }
+nav.top .cta {
+  padding: 12px 22px; background: var(--navy); color: var(--canvas);
+  text-decoration: none; transition: background .2s;
+  display: inline-flex; gap: 12px; align-items: center;
+}
+nav.top .cta:hover { background: var(--terra); }
+nav.top .cta .ar { font-family: var(--mono); }
+
+/* ───────── Marquee strip ───────── */
+.marquee {
+  position: fixed; top: 64px; left: 0; right: 0;
+  z-index: 49; height: 28px; overflow: hidden;
+  background: var(--terra); color: var(--canvas);
+  border-bottom: 1px solid var(--terra-d);
+  display: flex; align-items: center;
+  font-family: var(--body); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.32em; text-transform: uppercase;
+}
+.marquee .track {
+  display: flex; gap: 48px; padding-left: 48px;
+  white-space: nowrap; animation: scroll-left 50s linear infinite;
+}
+.marquee .track span { display: inline-flex; align-items: center; gap: 48px; }
+.marquee .track .dot { color: var(--gold); }
+@keyframes scroll-left { from { transform: translateX(0); } to { transform: translateX(-50%); } }
+
+/* ───────── HERO ───────── */
+.hero {
+  padding: 152px 40px 64px;
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 64px;
+  position: relative;
+  background:
+    linear-gradient(0deg, var(--canvas), var(--canvas)),
+    repeating-linear-gradient(0deg, transparent 0 47px, var(--ink-fade) 47px 48px),
+    repeating-linear-gradient(90deg, transparent 0 47px, var(--ink-fade) 47px 48px);
+  background-blend-mode: normal, multiply, multiply;
+}
+.hero::before {
+  content: "";
+  position: absolute; inset: 92px 0 0 0;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 47px, var(--ink-fade) 47px 48px),
+    repeating-linear-gradient(90deg, transparent 0 47px, var(--ink-fade) 47px 48px);
+  pointer-events: none; opacity: 0.5;
+}
+.hero > * { position: relative; z-index: 1; }
+.hero-left { padding-top: 24px; }
+
+.hero-eyebrow {
+  display: flex; align-items: center; gap: 16px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--terra); margin-bottom: 32px;
+}
+.hero-eyebrow .num { color: var(--ink-mute); }
+.hero-eyebrow .bar { width: 32px; height: 1px; background: var(--terra); }
+.hero h1 {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(80px, 11.5vw, 196px);
+  line-height: 0.92; letter-spacing: -0.025em;
+  color: var(--navy); margin: 0 0 56px;
+}
+.hero h1 .l1 { display: block; }
+.hero h1 .l2 {
+  display: block;
+  font-style: italic; font-weight: 400;
+  color: var(--terra);
+  position: relative;
+  padding-left: 0;
+}
+.hero h1 .l2::before {
+  content: ""; display: inline-block;
+  vertical-align: middle;
+  width: 80px; height: 4px; margin-right: 24px;
+  background: linear-gradient(90deg, transparent, var(--terra) 30%, var(--gold));
+}
+.hero-meta {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--line);
+  border: 1px solid var(--line);
+}
+.hero-meta .cell {
+  background: var(--canvas); padding: 22px 24px;
+}
+.hero-meta .k { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); }
+.hero-meta .v { font-family: var(--display); font-weight: 700; font-size: 18px; line-height: 1.25; margin-top: 10px; color: var(--navy); }
+.hero-meta .v em { font-style: italic; font-weight: 400; color: var(--terra); }
+
+.hero-right {
+  position: relative;
+  display: grid; grid-template-rows: 1fr auto;
+  gap: 24px;
+}
+.elevation {
+  position: relative;
+  height: 100%; min-height: 540px;
+  background: var(--bone);
+  border: 1px solid var(--ink);
+  overflow: hidden;
+}
+.elevation .label {
+  position: absolute; top: 16px; left: 16px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--ink-mute);
+  z-index: 3;
+}
+.elevation .corner {
+  position: absolute; top: 16px; right: 16px;
+  font-family: var(--mono); font-size: 10px; color: var(--terra);
+  letter-spacing: 0.18em;
+  z-index: 3;
+}
+.elevation .scale {
+  position: absolute; bottom: 16px; left: 16px; right: 16px;
+  display: flex; justify-content: space-between;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em;
+  color: var(--ink-mute); z-index: 3;
+  border-top: 1px solid var(--ink-fade); padding-top: 8px;
+}
+.elevation svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+
+.hero-cta-row {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 16px;
+}
+.hero-cta-row a {
+  background: var(--navy); color: var(--canvas);
+  text-decoration: none; padding: 22px 24px;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center;
+  font-family: var(--body); font-weight: 500; font-size: 13px; letter-spacing: 0.05em;
+  transition: background .25s, transform .25s;
+}
+.hero-cta-row a.alt { background: var(--terra); }
+.hero-cta-row a:hover { background: var(--terra-d); transform: translateY(-2px); }
+.hero-cta-row a .ar { font-family: var(--mono); }
+
+/* ───────── Section frame ───────── */
+section.scene { padding: 120px 40px; position: relative; border-top: 1px solid var(--line); }
+section.scene.bone { background: var(--bone); }
+section.scene.dark { background: var(--navy); color: var(--on-d); border-top-color: var(--on-d-line); }
+
+.scene-head {
+  display: grid; grid-template-columns: 320px 1fr;
+  gap: 96px; margin-bottom: 80px;
+  align-items: start;
+}
+.scene-head .marker {
+  position: sticky; top: 130px;
+}
+.scene-head .num {
+  font-family: var(--display); font-weight: 700;
+  font-size: 88px; line-height: 0.9;
+  color: var(--terra); letter-spacing: -0.02em;
+}
+.scene-head .label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--ink); margin-top: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+section.dark .scene-head .label { color: var(--on-d); }
+.scene-head .label::before { content: ""; width: 24px; height: 1px; background: var(--terra); }
+.scene-head h2 {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(44px, 5.5vw, 88px);
+  line-height: 0.98; letter-spacing: -0.018em;
+  margin: 0;
+  color: var(--navy); max-width: 1000px;
+}
+section.dark .scene-head h2 { color: var(--canvas); }
+.scene-head h2 em { font-style: italic; font-weight: 400; color: var(--terra); }
+section.dark .scene-head h2 em { color: var(--gold); }
+.scene-head .sub {
+  font-family: var(--display); font-style: italic; font-size: 22px;
+  color: var(--ink-soft); margin-top: 24px; max-width: 700px; line-height: 1.45;
+}
+section.dark .scene-head .sub { color: var(--on-d-soft); }
+
+/* ───────── Services — horizontal stage ───────── */
+.h-stage {
+  position: relative;
+  padding: 0 40px;
+}
+.h-stage .track {
+  display: grid;
+  grid-auto-flow: column; grid-auto-columns: minmax(560px, 720px);
+  gap: 24px;
+  overflow-x: auto;
+  padding-bottom: 24px;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: thin;
+  scrollbar-color: var(--ink-mute) transparent;
+}
+.h-stage .track::-webkit-scrollbar { height: 6px; }
+.h-stage .track::-webkit-scrollbar-track { background: transparent; }
+.h-stage .track::-webkit-scrollbar-thumb { background: var(--ink-mute); border-radius: 3px; }
+.svc {
+  scroll-snap-align: start;
+  background: var(--canvas);
+  border: 1px solid var(--ink);
+  display: grid; grid-template-rows: auto 1fr auto;
+  position: relative; min-height: 720px;
+  transition: transform .3s;
+}
+.svc:hover { transform: translateY(-4px); }
+.svc .top {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: end;
+  padding: 28px;
+  border-bottom: 1px solid var(--line);
+}
+.svc .top .id {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--terra);
+}
+.svc .top .name {
+  font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 0.95;
+  letter-spacing: -0.018em; color: var(--navy); margin-top: 6px;
+}
+.svc .top .name em { font-style: italic; font-weight: 400; color: var(--terra); }
+.svc .top .who { font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-mute); text-align: right; }
+
+.svc .body { padding: 28px; display: grid; gap: 18px; align-content: start; }
+.svc .body .lead { font-family: var(--display); font-style: italic; font-size: 22px; line-height: 1.4; color: var(--ink); margin: 0; }
+.svc .body p { margin: 0; color: var(--ink-soft); font-size: 14px; line-height: 1.7; }
+.svc .body strong { color: var(--ink); font-weight: 500; }
+.svc .feat {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 1px; background: var(--line);
+  border: 1px solid var(--line); margin-top: 10px;
+}
+.svc .feat .it { background: var(--canvas); padding: 16px; }
+.svc .feat .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; text-transform: uppercase; color: var(--terra); }
+.svc .feat .v { font-family: var(--display); font-weight: 700; font-size: 22px; color: var(--navy); margin-top: 6px; }
+.svc .feat .v em { font-style: italic; font-weight: 400; color: var(--terra); }
+
+.svc .foot {
+  padding: 22px 28px;
+  border-top: 1px solid var(--ink);
+  background: var(--bone);
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--navy);
+  transition: background .2s, color .2s;
+  cursor: pointer;
+}
+.svc .foot a { color: inherit; text-decoration: none; display: contents; }
+.svc:hover .foot { background: var(--terra); color: var(--canvas); }
+.svc .foot .ar { font-family: var(--mono); }
+
+/* ───────── Editorial about ───────── */
+.about-grid {
+  display: grid; grid-template-columns: 1fr 1.3fr 0.9fr;
+  gap: 48px;
+  align-items: start;
+}
+.about-grid .col-portrait { position: sticky; top: 130px; }
+.portrait-slot {
+  position: relative;
+  aspect-ratio: 3/4;
+  background: var(--bone-d);
+  border: 1px solid var(--ink);
+  display: grid; place-items: center;
+  overflow: hidden;
+}
+.portrait-slot::before {
+  content: "";
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(45deg, var(--ink-fade) 0 1px, transparent 1px 14px),
+    radial-gradient(ellipse at 30% 20%, rgba(224,122,95,0.18), transparent 70%);
+}
+.portrait-slot::after {
+  content: "PORTRAIT · GIOVANNI · 3:4";
+  position: relative;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em;
+  color: var(--ink-mute);
+}
+.portrait-slot .label {
+  position: absolute; top: 14px; left: 14px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--terra);
+}
+.portrait-slot .corner {
+  position: absolute; bottom: 14px; right: 14px;
+  font-family: var(--mono); font-size: 10px; color: var(--ink-mute);
+  letter-spacing: 0.18em;
+}
+
+.about-grid .prose {
+  column-count: 1;
+}
+.about-grid .prose .lead {
+  font-family: var(--display); font-weight: 400; font-size: 32px; line-height: 1.22;
+  color: var(--navy); margin: 0 0 28px; letter-spacing: -0.01em;
+}
+.about-grid .prose .lead em { font-style: italic; color: var(--terra); }
+.about-grid .prose p {
+  font-size: 15px; line-height: 1.75; color: var(--ink-soft);
+  margin: 0 0 18px;
+}
+.about-grid .prose p strong { color: var(--ink); font-weight: 500; }
+
+.about-grid .pull {
+  position: sticky; top: 130px;
+  background: var(--navy); color: var(--canvas);
+  padding: 36px 32px;
+  border: 1px solid var(--ink);
+}
+.about-grid .pull .label {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 18px;
+}
+.about-grid .pull .quote {
+  font-family: var(--display); font-style: italic; font-weight: 400;
+  font-size: 28px; line-height: 1.3; color: var(--canvas);
+  letter-spacing: -0.005em;
+}
+.about-grid .pull .quote em { color: var(--gold); }
+.about-grid .pull .credit {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--on-d-mute); margin-top: 24px;
+  border-top: 1px solid var(--on-d-line); padding-top: 16px;
+}
+
+.timeline {
+  margin-top: 80px;
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+}
+.timeline .t {
+  padding: 32px 28px;
+  border-right: 1px solid var(--line);
+  position: relative;
+}
+.timeline .t:last-child { border-right: none; }
+.timeline .t .age {
+  font-family: var(--display); font-weight: 700;
+  font-size: 56px; line-height: 1;
+  color: var(--terra); letter-spacing: -0.02em;
+}
+.timeline .t .age em { font-style: italic; font-weight: 400; color: var(--ink); }
+.timeline .t h4 { font-family: var(--display); font-weight: 700; font-size: 20px; margin: 16px 0 8px; color: var(--navy); }
+.timeline .t p { font-size: 13px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+.timeline .t .tag {
+  display: inline-block;
+  font-family: var(--mono); font-size: 10px;
+  letter-spacing: 0.18em; text-transform: uppercase;
+  background: var(--terra); color: var(--canvas);
+  padding: 4px 10px; margin-top: 16px;
+}
+
+/* ───────── Capstone (architectural) ───────── */
+.cap {
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  gap: 0;
+  border: 1px solid var(--ink);
+  background: var(--canvas);
+}
+.cap .left { padding: 48px; border-right: 1px solid var(--ink); }
+.cap .badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase;
+  background: var(--navy); color: var(--gold);
+  padding: 8px 14px; margin-bottom: 24px;
+}
+.cap h3 {
+  font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 0.98;
+  letter-spacing: -0.018em; margin: 0 0 18px;
+  color: var(--navy);
+}
+.cap h3 em { font-style: italic; font-weight: 400; color: var(--terra); }
+.cap .sub { font-family: var(--display); font-style: italic; font-size: 20px; color: var(--ink-soft); margin-bottom: 28px; }
+.cap p { font-size: 15px; line-height: 1.7; color: var(--ink-soft); margin: 0 0 20px; }
+.cap .vitals {
+  margin-top: 28px; padding-top: 24px; border-top: 1px solid var(--line);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px;
+}
+.cap .vitals .v {
+  border-left: 1px solid var(--line); padding-left: 16px;
+}
+.cap .vitals .v:first-child { border-left: none; padding-left: 0; }
+.cap .vitals .k { font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); }
+.cap .vitals .num { font-family: var(--display); font-weight: 700; font-size: 26px; color: var(--terra); margin-top: 6px; }
+
+.cap .right {
+  padding: 48px; background: var(--bone);
+  display: grid; gap: 24px; align-content: start;
+}
+.cap .right .col-title {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--terra); margin-bottom: 14px;
+}
+.cap .right .li {
+  display: grid; grid-template-columns: 24px 1fr;
+  font-size: 13px; line-height: 1.5; color: var(--ink-soft);
+  padding: 10px 0; border-bottom: 1px solid var(--line);
+}
+.cap .right .li::before { content: "·"; color: var(--terra); font-weight: 700; font-size: 18px; line-height: 1; }
+.cap .right .li:last-child { border-bottom: none; }
+
+/* portfolio shelf */
+.shelf {
+  margin-top: 56px;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+}
+.shelf .item {
+  background: var(--canvas);
+  padding: 28px;
+  position: relative;
+  display: grid; gap: 12px; align-content: start;
+  transition: background .25s;
+}
+.shelf .item:hover { background: var(--bone); }
+.shelf .item .ph {
+  height: 140px;
+  background: var(--bone-d);
+  border: 1px solid var(--ink-fade);
+  margin-bottom: 8px;
+  position: relative;
+  overflow: hidden;
+}
+.shelf .item .ph svg { position: absolute; inset: 0; width: 100%; height: 100%; }
+.shelf .item .meta {
+  display: flex; justify-content: space-between; align-items: baseline;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--terra);
+}
+.shelf .item .meta .id { color: var(--ink-mute); }
+.shelf .item h4 { font-family: var(--display); font-weight: 700; font-size: 22px; margin: 4px 0; line-height: 1.15; color: var(--navy); }
+.shelf .item p { font-size: 13px; line-height: 1.6; color: var(--ink-soft); margin: 0; }
+.shelf .item .stat {
+  margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--line);
+  display: flex; justify-content: space-between;
+  font-family: var(--mono); font-size: 11px; color: var(--ink);
+}
+.shelf .item .stat strong { color: var(--terra); font-weight: 500; }
+
+/* ───────── Sample analysis (dark) ───────── */
+.proforma {
+  border: 1px solid var(--on-d-line);
+  background: var(--navy-d);
+}
+.proforma .head {
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  align-items: stretch;
+  border-bottom: 1px solid var(--on-d-line);
+}
+.proforma .head .info { padding: 36px 40px; border-right: 1px solid var(--on-d-line); }
+.proforma .head .info .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--terra); }
+.proforma .head .info h3 {
+  font-family: var(--display); font-weight: 700; font-size: 40px; line-height: 1; margin: 14px 0 8px;
+  letter-spacing: -0.01em;
+}
+.proforma .head .info h3 em { font-style: italic; font-weight: 400; color: var(--gold); }
+.proforma .head .info .meta { font-family: var(--mono); font-size: 12px; color: var(--on-d-soft); margin-top: 10px; }
+.proforma .head .price {
+  padding: 36px 40px; background: var(--terra); color: var(--canvas);
+  display: grid; align-content: center; gap: 6px;
+}
+.proforma .head .price .lab { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(244,241,222,0.85); }
+.proforma .head .price .v { font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 1; }
+.proforma .head .price .terms { font-family: var(--mono); font-size: 12px; color: var(--canvas); opacity: 0.85; }
+
+.proforma .body {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--on-d-line);
+}
+.proforma .body .col { padding: 32px 40px; border-right: 1px solid var(--on-d-line); }
+.proforma .body .col:last-child { border-right: none; }
+.proforma .col-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 18px; }
+.proforma .row {
+  display: grid; grid-template-columns: 1fr auto;
+  padding: 12px 0; border-bottom: 1px solid var(--on-d-line);
+  font-family: var(--body); font-size: 14px;
+}
+.proforma .row .v { font-family: var(--mono); font-feature-settings: "tnum"; }
+.proforma .row.sub { color: var(--on-d-soft); }
+.proforma .row.sub .v { color: var(--on-d-soft); }
+.proforma .row.total { border-top: 1px solid var(--terra); border-bottom: none; padding-top: 16px; margin-top: 6px; font-weight: 500; color: var(--canvas); }
+.proforma .row.total .v { color: var(--canvas); font-weight: 600; }
+.proforma .row.total.neg .v { color: var(--terra); }
+
+.metrics {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--on-d-line);
+}
+.metrics .m { padding: 28px 40px; border-right: 1px solid var(--on-d-line); }
+.metrics .m:last-child { border-right: none; }
+.metrics .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); }
+.metrics .v { font-family: var(--display); font-weight: 700; font-size: 48px; color: var(--canvas); margin-top: 12px; line-height: 1; }
+.metrics .v em { font-style: italic; font-weight: 400; color: var(--terra); }
+
+.upside {
+  padding: 28px 40px; background: var(--gold); color: var(--navy);
+  font-family: var(--display); font-style: italic; font-weight: 400; font-size: 17px; line-height: 1.55;
+}
+.upside strong { font-family: var(--mono); font-style: normal; font-weight: 500; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; display: block; margin-bottom: 10px; color: var(--navy); }
+.verdict {
+  padding: 28px 40px; background: var(--navy);
+  font-family: var(--display); font-style: italic; font-size: 17px; line-height: 1.55; color: var(--on-d-soft);
+}
+.verdict strong { font-family: var(--mono); font-style: normal; font-weight: 500; font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; display: block; margin-bottom: 10px; color: var(--gold); }
+
+/* ───────── Reviews — gallery ───────── */
+.gallery {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 24px;
+}
+.gallery .r {
+  background: var(--canvas);
+  border: 1px solid var(--ink);
+  padding: 40px;
+  display: grid; gap: 20px; align-content: space-between;
+  position: relative; overflow: hidden;
+}
+.gallery .r::before {
+  content: '"';
+  position: absolute; top: -40px; right: 20px;
+  font-family: var(--display); font-weight: 700; font-size: 220px;
+  color: var(--terra); opacity: 0.12; line-height: 1;
+}
+.gallery .r .text {
+  font-family: var(--display); font-style: italic; font-weight: 400;
+  font-size: 22px; line-height: 1.45; color: var(--navy);
+  position: relative; z-index: 1;
+}
+.gallery .r .who {
+  display: flex; gap: 16px; align-items: center;
+  border-top: 1px solid var(--line); padding-top: 20px;
+}
+.gallery .r .av {
+  width: 44px; height: 44px;
+  background: var(--terra); color: var(--canvas);
+  display: grid; place-items: center;
+  font-family: var(--display); font-weight: 700; font-size: 14px;
+}
+.gallery .r .name { font-family: var(--display); font-weight: 700; font-size: 15px; color: var(--navy); }
+.gallery .r .role { font-family: var(--mono); font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+
+/* ───────── Contact ───────── */
+.contact-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  gap: 0;
+  border: 1px solid var(--ink);
+}
+.contact-grid .left {
+  background: var(--terra); color: var(--canvas);
+  padding: 56px;
+  display: grid; align-content: space-between; gap: 32px;
+  border-right: 1px solid var(--ink);
+}
+.contact-grid .left .lab { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(244,241,222,0.85); }
+.contact-grid .left h3 {
+  font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 0.98;
+  letter-spacing: -0.018em; margin: 16px 0 0;
+}
+.contact-grid .left h3 em { font-style: italic; font-weight: 400; color: var(--navy); }
+.contact-grid .left .pitch { font-family: var(--display); font-style: italic; font-size: 22px; line-height: 1.4; max-width: 460px; margin: 0; color: rgba(244,241,222,0.92); }
+.contact-grid .left .reach { display: grid; gap: 12px; font-family: var(--mono); font-size: 14px; letter-spacing: 0.05em; }
+.contact-grid .left .reach a { color: var(--canvas); text-decoration: none; padding: 10px 0; border-top: 1px solid rgba(244,241,222,0.25); display: grid; grid-template-columns: 80px 1fr auto; gap: 16px; align-items: baseline; transition: color .2s; }
+.contact-grid .left .reach a:hover { color: var(--navy); }
+.contact-grid .left .reach a .k { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244,241,222,0.7); }
+
+.contact-grid .right { padding: 56px; background: var(--canvas); }
+.contact-grid form { display: grid; gap: 22px; }
+.contact-grid form label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terra); display: block; margin-bottom: 6px; }
+.contact-grid form input, .contact-grid form select, .contact-grid form textarea {
+  font-family: var(--body); font-size: 16px; font-weight: 300;
+  background: transparent; border: none;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink); padding: 10px 0; width: 100%;
+}
+.contact-grid form input::placeholder, .contact-grid form textarea::placeholder { color: var(--ink-mute); font-style: italic; }
+.contact-grid form input:focus, .contact-grid form select:focus, .contact-grid form textarea:focus { outline: none; border-bottom-color: var(--terra); }
+.contact-grid form textarea { min-height: 80px; resize: vertical; }
+.contact-grid form button {
+  margin-top: 12px;
+  background: var(--navy); color: var(--canvas);
+  border: none; padding: 20px;
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  cursor: pointer; transition: background .2s;
+  display: grid; grid-template-columns: 1fr auto; align-items: center;
+}
+.contact-grid form button:hover { background: var(--terra); }
+
+/* ───────── Footer ───────── */
+footer {
+  background: var(--navy); color: var(--on-d);
+  padding: 80px 40px 40px;
+  border-top: 1px solid var(--ink);
+}
+.foot-mark {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(96px, 14vw, 200px); line-height: 0.92;
+  letter-spacing: -0.025em;
+  color: var(--canvas); margin: 0 0 56px;
+  border-bottom: 1px solid var(--on-d-line);
+  padding-bottom: 32px;
+}
+.foot-mark em { font-style: italic; font-weight: 400; color: var(--terra); }
+.foot-grid {
+  display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr;
+  gap: 32px;
+}
+.foot-grid .col .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.foot-grid .col a { color: var(--canvas); text-decoration: none; display: block; padding: 4px 0; transition: color .2s; }
+.foot-grid .col a:hover { color: var(--terra); }
+.foot-grid .col p { color: var(--on-d-soft); font-size: 14px; margin: 0 0 8px; }
+.foot-grid .col p strong { color: var(--canvas); font-weight: 500; }
+.foot-bar {
+  margin-top: 48px; padding-top: 24px;
+  border-top: 1px solid var(--on-d-line);
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  font-family: var(--mono); font-size: 11px; color: var(--on-d-mute);
+}
+.foot-bar > *:nth-child(2) { text-align: center; }
+.foot-bar > *:nth-child(3) { text-align: right; }
+
+/* reveal */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal-stagger.in > * { opacity: 1; transform: none; }
+.reveal-stagger.in > *:nth-child(1){transition-delay:.04s;} .reveal-stagger.in > *:nth-child(2){transition-delay:.12s;} .reveal-stagger.in > *:nth-child(3){transition-delay:.20s;} .reveal-stagger.in > *:nth-child(4){transition-delay:.28s;} .reveal-stagger.in > *:nth-child(5){transition-delay:.36s;} .reveal-stagger.in > *:nth-child(6){transition-delay:.44s;}
+</style>
+</head>
+<body>
+
+<nav class="top">
+  <div class="brand">Giovanni <em>Serrano</em></div>
+  <div class="links">
+    <a href="#services">Services</a>
+    <a href="#about">About</a>
+    <a href="#portfolio">Work</a>
+    <a href="#sample">Sample</a>
+    <a href="#contact">Contact</a>
+  </div>
+  <div class="right">
+    <div class="num">DRE #02282434</div>
+    <a class="cta" href="#contact">Let's talk <span class="ar">→</span></a>
+  </div>
+</nav>
+
+<div class="marquee">
+  <div class="track">
+    <span>Move with intention. <span class="dot">·</span> Multifamily · San Diego <span class="dot">·</span> Investment · Development · Advisory <span class="dot">·</span> First-time buyers · Scaling investors · Homeowners with land <span class="dot">·</span></span>
+    <span>Move with intention. <span class="dot">·</span> Multifamily · San Diego <span class="dot">·</span> Investment · Development · Advisory <span class="dot">·</span> First-time buyers · Scaling investors · Homeowners with land <span class="dot">·</span></span>
+  </div>
+</div>
+
+<!-- ════════ HERO ════════ -->
+<section class="hero" data-screen-label="01 Hero">
+  <div class="hero-left">
+    <div class="hero-eyebrow">
+      <span class="bar"></span>
+      <span class="num">01 / 07 ·</span>
+      <span>Multifamily Investment &amp; Development Advisor</span>
+    </div>
+    <h1>
+      <span class="l1">Move with</span>
+      <span class="l2">intention.</span>
+    </h1>
+    <div class="hero-meta">
+      <div class="cell">
+        <div class="k">Discipline</div>
+        <div class="v">Multifamily<br><em>investment</em></div>
+      </div>
+      <div class="cell">
+        <div class="k">Market</div>
+        <div class="v">San Diego<br><em>only</em></div>
+      </div>
+      <div class="cell">
+        <div class="k">Foundation</div>
+        <div class="v">Family ops<br><em>+ UCSD</em></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="hero-right">
+    <div class="elevation">
+      <span class="label">A · Front Elevation · 4-unit Multifamily · 1:200</span>
+      <span class="corner">North Park · CA</span>
+      <svg viewBox="0 0 600 540" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <!-- grid lines -->
+        <g stroke="rgba(61,64,91,0.10)" stroke-width="0.5" fill="none">
+          <path d="M0 60 L600 60 M0 120 L600 120 M0 180 L600 180 M0 240 L600 240 M0 300 L600 300 M0 360 L600 360 M0 420 L600 420 M0 480 L600 480"/>
+          <path d="M60 0 L60 540 M120 0 L120 540 M180 0 L180 540 M240 0 L240 540 M300 0 L300 540 M360 0 L360 540 M420 0 L420 540 M480 0 L480 540 M540 0 L540 540"/>
+        </g>
+        <!-- ground line -->
+        <line x1="40" y1="500" x2="560" y2="500" stroke="#3D405B" stroke-width="2"/>
+        <!-- ground hatching -->
+        <g stroke="#3D405B" stroke-width="0.6">
+          <line x1="60" y1="500" x2="40" y2="520"/><line x1="100" y1="500" x2="80" y2="520"/><line x1="140" y1="500" x2="120" y2="520"/><line x1="180" y1="500" x2="160" y2="520"/><line x1="220" y1="500" x2="200" y2="520"/><line x1="260" y1="500" x2="240" y2="520"/><line x1="300" y1="500" x2="280" y2="520"/><line x1="340" y1="500" x2="320" y2="520"/><line x1="380" y1="500" x2="360" y2="520"/><line x1="420" y1="500" x2="400" y2="520"/><line x1="460" y1="500" x2="440" y2="520"/><line x1="500" y1="500" x2="480" y2="520"/><line x1="540" y1="500" x2="520" y2="520"/>
+        </g>
+        <!-- main building outline -->
+        <rect x="80" y="180" width="440" height="320" fill="#F4F1DE" stroke="#3D405B" stroke-width="2"/>
+        <!-- roof/parapet -->
+        <path d="M70 180 L530 180 L520 160 L80 160 Z" fill="#EDE8D5" stroke="#3D405B" stroke-width="2"/>
+        <!-- floor lines -->
+        <line x1="80" y1="340" x2="520" y2="340" stroke="#3D405B" stroke-width="1.2"/>
+        <!-- window grid -->
+        <g fill="#E07A5F" stroke="#3D405B" stroke-width="1.2">
+          <rect x="110" y="210" width="60" height="80"/>
+          <rect x="200" y="210" width="60" height="80"/>
+          <rect x="340" y="210" width="60" height="80"/>
+          <rect x="430" y="210" width="60" height="80"/>
+          <rect x="110" y="370" width="60" height="80"/>
+          <rect x="430" y="370" width="60" height="80"/>
+        </g>
+        <!-- doors -->
+        <g fill="#2C2F4A" stroke="#3D405B" stroke-width="1.2">
+          <rect x="220" y="400" width="50" height="100"/>
+          <rect x="330" y="400" width="50" height="100"/>
+        </g>
+        <line x1="245" y1="400" x2="245" y2="500" stroke="#F2CC8F" stroke-width="1"/>
+        <line x1="355" y1="400" x2="355" y2="500" stroke="#F2CC8F" stroke-width="1"/>
+        <!-- balcony rail -->
+        <line x1="80" y1="345" x2="520" y2="345" stroke="#E07A5F" stroke-width="2"/>
+        <g stroke="#E07A5F" stroke-width="1">
+          <line x1="100" y1="345" x2="100" y2="365"/><line x1="120" y1="345" x2="120" y2="365"/><line x1="140" y1="345" x2="140" y2="365"/><line x1="160" y1="345" x2="160" y2="365"/><line x1="180" y1="345" x2="180" y2="365"/>
+          <line x1="380" y1="345" x2="380" y2="365"/><line x1="400" y1="345" x2="400" y2="365"/><line x1="420" y1="345" x2="420" y2="365"/><line x1="440" y1="345" x2="440" y2="365"/><line x1="460" y1="345" x2="460" y2="365"/><line x1="480" y1="345" x2="480" y2="365"/><line x1="500" y1="345" x2="500" y2="365"/>
+        </g>
+        <!-- dimension lines -->
+        <g stroke="#3D405B" stroke-width="0.6" fill="none">
+          <line x1="80" y1="540" x2="520" y2="540"/>
+          <line x1="80" y1="535" x2="80" y2="545"/>
+          <line x1="520" y1="535" x2="520" y2="545"/>
+          <line x1="540" y1="180" x2="540" y2="500"/>
+          <line x1="535" y1="180" x2="545" y2="180"/>
+          <line x1="535" y1="500" x2="545" y2="500"/>
+        </g>
+        <text x="300" y="560" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#3D405B" letter-spacing="2">44'-0"</text>
+        <text x="555" y="345" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#3D405B" letter-spacing="2" transform="rotate(-90 555 345)">32'-0"</text>
+        <!-- callout: unit count -->
+        <g>
+          <line x1="320" y1="240" x2="380" y2="100" stroke="#E07A5F" stroke-width="1"/>
+          <circle cx="320" cy="240" r="3" fill="#E07A5F"/>
+          <text x="385" y="92" font-family="JetBrains Mono, monospace" font-size="11" fill="#E07A5F" letter-spacing="2">UNIT 02 · 2BR</text>
+          <text x="385" y="107" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="1.5">920 SF · MARKET RENT $2,950/MO</text>
+        </g>
+      </svg>
+      <div class="scale">
+        <span>0'</span><span>10'</span><span>20'</span><span>30'</span><span>40'</span><span>50'</span>
+      </div>
+    </div>
+    <div class="hero-cta-row">
+      <a href="#sample">See a sample <span class="ar">→</span></a>
+      <a href="#contact" class="alt">Get a deal review <span class="ar">→</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ SERVICES ════════ -->
+<section class="scene bone" id="services" data-screen-label="02 Services" style="padding: 120px 0;">
+  <div style="padding: 0 40px;">
+    <div class="scene-head">
+      <div class="marker">
+        <div class="num">02</div>
+        <div class="label">Services</div>
+      </div>
+      <div>
+        <h2 class="reveal">Three services. <em>Three blueprints.</em></h2>
+        <p class="sub reveal">Pick the one closest to where you are. Each is a defined engagement with a defined deliverable — not a vague "let's see what happens" relationship.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="h-stage">
+    <div class="track" id="svc-track">
+      <article class="svc reveal">
+        <div class="top">
+          <div>
+            <div class="id">A · Invest</div>
+            <div class="name">Your <em>first</em><br>multifamily.</div>
+          </div>
+          <div class="who">First-time<br>buyers</div>
+        </div>
+        <div class="body">
+          <p class="lead">A duplex or triplex you live in, while tenants pay your mortgage.</p>
+          <p>Most first-time buyers don't realize they can start building wealth from day one. <strong>Live in one unit, rent the rest</strong> — your tenants help pay your mortgage while your equity grows.</p>
+          <div class="feat">
+            <div class="it"><div class="k">Strategy</div><div class="v">House <em>hack</em></div></div>
+            <div class="it"><div class="k">Down</div><div class="v">3.5–5%</div></div>
+            <div class="it"><div class="k">Property</div><div class="v">2–4 units</div></div>
+            <div class="it"><div class="k">Financing</div><div class="v">Owner-occupied</div></div>
+          </div>
+        </div>
+        <div class="foot"><a href="#"><span>Read Invest brief</span><span class="ar">→</span></a></div>
+      </article>
+
+      <article class="svc reveal">
+        <div class="top">
+          <div>
+            <div class="id">B · Scale</div>
+            <div class="name">Your <em>portfolio.</em></div>
+          </div>
+          <div class="who">Existing<br>investors</div>
+        </div>
+        <div class="body">
+          <p class="lead">Fourplex through 12-unit. Institutional-grade underwriting on every deal.</p>
+          <p>You already own. Now you want a fourplex, an 8-unit, a 12-unit — or to build new. <strong>The stakes are higher and the analysis has to be sharper.</strong> Full DCF, sensitivity, JV waterfall.</p>
+          <div class="feat">
+            <div class="it"><div class="k">Property</div><div class="v">4–12 units</div></div>
+            <div class="it"><div class="k">Model</div><div class="v">10-yr <em>DCF</em></div></div>
+            <div class="it"><div class="k">Hurdle</div><div class="v">14% IRR</div></div>
+            <div class="it"><div class="k">Structures</div><div class="v">JV waterfall</div></div>
+          </div>
+        </div>
+        <div class="foot"><a href="#"><span>Read Scale brief</span><span class="ar">→</span></a></div>
+      </article>
+
+      <article class="svc reveal">
+        <div class="top">
+          <div>
+            <div class="id">C · Develop</div>
+            <div class="name">Build <em>more</em><br>than you think.</div>
+          </div>
+          <div class="who">Homeowners<br>with land</div>
+        </div>
+        <div class="body">
+          <p class="lead">SB 9, ADU law, density bonus. Free lot review, full feasibility, end-to-end project management.</p>
+          <p>Recent California law opened up small-scale development on lots that used to be locked. <strong>SB 9 lets you split a single-family lot</strong> and build up to four units. State ADU law lets you add a detached unit on nearly any property.</p>
+          <div class="feat">
+            <div class="it"><div class="k">Path</div><div class="v">SB 9 / <em>ADU</em></div></div>
+            <div class="it"><div class="k">Yield</div><div class="v">2–10 units</div></div>
+            <div class="it"><div class="k">Process</div><div class="v">Concept → C&nbsp;of&nbsp;O</div></div>
+            <div class="it"><div class="k">Team</div><div class="v">Architect + GC</div></div>
+          </div>
+        </div>
+        <div class="foot"><a href="#"><span>Read Develop brief</span><span class="ar">→</span></a></div>
+      </article>
+
+      <article class="svc reveal" style="background: var(--navy); color: var(--on-d); border-color: var(--navy);">
+        <div class="top" style="border-bottom-color: var(--on-d-line);">
+          <div>
+            <div class="id" style="color: var(--gold);">D · Connect</div>
+            <div class="name" style="color: var(--canvas);">Not sure?<br><em style="color: var(--gold);">Start here.</em></div>
+          </div>
+          <div class="who" style="color: var(--on-d-mute);">Anyone<br>exploring</div>
+        </div>
+        <div class="body">
+          <p class="lead" style="color: var(--canvas);">A 30-minute conversation, a model, a clear next step.</p>
+          <p style="color: var(--on-d-soft);">If you're early, exploratory, or don't know which of the three above fits — start with a call. <strong style="color: var(--canvas);">No fees until you transact.</strong> No high-pressure pitch.</p>
+          <div class="feat" style="background: var(--on-d-line); border-color: var(--on-d-line);">
+            <div class="it" style="background: var(--navy);"><div class="k" style="color: var(--gold);">Cost</div><div class="v" style="color: var(--canvas);">Free</div></div>
+            <div class="it" style="background: var(--navy);"><div class="k" style="color: var(--gold);">Length</div><div class="v" style="color: var(--canvas);">30 min</div></div>
+            <div class="it" style="background: var(--navy);"><div class="k" style="color: var(--gold);">Format</div><div class="v" style="color: var(--canvas);">Phone or in person</div></div>
+            <div class="it" style="background: var(--navy);"><div class="k" style="color: var(--gold);">Output</div><div class="v" style="color: var(--canvas);">Plan + <em style="color: var(--gold);">model</em></div></div>
+          </div>
+        </div>
+        <div class="foot" style="background: var(--terra); color: var(--canvas); border-top-color: var(--terra-d);"><a href="#contact"><span>Book a call</span><span class="ar">→</span></a></div>
+      </article>
+    </div>
+  </div>
+
+  <div style="padding: 32px 40px 0; display: flex; justify-content: space-between; align-items: center; max-width: none; font-family: var(--mono); font-size: 11px; color: var(--ink-mute); letter-spacing: 0.18em; text-transform: uppercase;">
+    <span>← Drag · scroll · 4 services on the rail</span>
+    <span>A · B · C · D</span>
+  </div>
+</section>
+
+<!-- ════════ ABOUT ════════ -->
+<section class="scene" id="about" data-screen-label="03 About">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">03</div>
+      <div class="label">About</div>
+    </div>
+    <div>
+      <h2 class="reveal">A real estate professional<br>and developer — <em>not just an agent.</em></h2>
+      <p class="sub reveal">Three generations of family operations across the San Diego–Tijuana corridor, paired with the institutional toolkit from UCSD's Real Estate &amp; Development program.</p>
+    </div>
+  </div>
+
+  <div class="about-grid">
+    <div class="col-portrait">
+      <div class="portrait-slot">
+        <span class="label">Portrait · A</span>
+        <span class="corner">3:4 · 2026</span>
+      </div>
+    </div>
+
+    <div class="prose">
+      <p class="lead reveal">I was born in San Diego and grew up across the <em>San Diego–Tijuana</em> region — the binational corridor that's been my family's home for three generations.</p>
+      <p class="reveal">My mother, my uncles, and my abuelos have been operating in real estate on <strong>both sides of the border</strong> for more than two decades: acquiring parcels, developing them, leasing them, selling them, doing it again. That's how I learned this business — on the ground, on both sides of the border, long before any classroom.</p>
+      <p class="reveal">On top of that foundation, I built the institutional toolkit. <strong>A B.S. in Real Estate &amp; Development from UC San Diego</strong> — a project-based program tied to actual properties and the financial models lenders and acquisition committees actually use.</p>
+      <p class="reveal">The combination matters. Most real estate agents have neither — they took a 60-hour licensing course. Family operators usually don't have the financial discipline. <strong>I bring both.</strong></p>
+    </div>
+
+    <div class="pull">
+      <div class="label">Thesis</div>
+      <div class="quote">Real estate is a <em>financial instrument.</em> It should be treated like one.</div>
+      <div class="credit">Giovanni Serrano · 2026</div>
+    </div>
+  </div>
+
+  <div class="timeline reveal-stagger">
+    <div class="t">
+      <div class="age"><em>16</em></div>
+      <h4>Land Transactions</h4>
+      <p>Working alongside my mother on family acquisitions in the binational corridor.</p>
+      <span class="tag">First deal</span>
+    </div>
+    <div class="t">
+      <div class="age"><em>18</em></div>
+      <h4>Construction Sites</h4>
+      <p>On site with my uncles — planning, financing, building, leasing the apartments and commercial spaces our family developed.</p>
+      <span class="tag">On site</span>
+    </div>
+    <div class="t">
+      <div class="age">21</div>
+      <h4>30–60 Units Operating</h4>
+      <p>Helped take that volume from raw land to producing income. Acquisition. Construction. Lease-up. Repeat.</p>
+      <span class="tag">Income producing</span>
+    </div>
+    <div class="t">
+      <div class="age">UCSD</div>
+      <h4>B.S. RE &amp; Development</h4>
+      <p>Project-based program. Proforma modeling, JV structuring, planning law — applied to real properties.</p>
+      <span class="tag">2025</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ PORTFOLIO ════════ -->
+<section class="scene bone" id="portfolio" data-screen-label="04 Portfolio">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">04</div>
+      <div class="label">Portfolio</div>
+    </div>
+    <div>
+      <h2 class="reveal">A capstone, then <em>fourteen models.</em></h2>
+      <p class="sub reveal">Academic projects in the same format institutional firms use. Every model below was built end-to-end. The work behind the analysis.</p>
+    </div>
+  </div>
+
+  <div class="cap reveal">
+    <div class="left">
+      <span class="badge">Senior Capstone · UCSD Urban Planning EXPO</span>
+      <h3>4855 College Ave —<br><em>3.05-acre multifamily.</em></h3>
+      <div class="sub">Full Offering Memorandum · presented to industry judges</div>
+      <p>A complete OM for a 3.05-acre site zoned single-family, with proposed rezone to multifamily (RS-1-7 to RM-4-10). <strong>Every stage of development evaluation</strong> — from zoning and demographics through proforma and exit — in the same format institutional firms use to evaluate where to commit millions.</p>
+      <p>Presented at UCSD Urban Planning EXPO with a charrette board and an investor video pitch.</p>
+      <div class="vitals">
+        <div class="v"><div class="k">Hold</div><div class="num">10 yr</div></div>
+        <div class="v"><div class="k">Pages</div><div class="num">30</div></div>
+        <div class="v"><div class="k">Site</div><div class="num">3.05 ac</div></div>
+        <div class="v"><div class="k">Rezone</div><div class="num">RM-4-10</div></div>
+      </div>
+    </div>
+    <div class="right">
+      <div>
+        <div class="col-title">Analysis &amp; Design</div>
+        <div class="li">Land use &amp; zoning rezone (RS-1-7 → RM-4-10)</div>
+        <div class="li">Demographics with projections through 2035</div>
+        <div class="li">Market analysis · vacancy, rents, absorption (CoStar)</div>
+        <div class="li">Site plan, parking, massing, amenities</div>
+      </div>
+      <div>
+        <div class="col-title">Financial &amp; Deliverables</div>
+        <div class="li">10-year proforma with full cash flow</div>
+        <div class="li">IRR, cash-on-cash, equity multiple, levered returns</div>
+        <div class="li">EXPO charrette board · investor video pitch</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="shelf reveal-stagger">
+    <div class="item">
+      <div class="ph">
+        <svg viewBox="0 0 240 140" preserveAspectRatio="none"><g stroke="rgba(61,64,91,0.3)" stroke-width="0.5" fill="none"><path d="M0 28 L240 28 M0 56 L240 56 M0 84 L240 84 M0 112 L240 112 M30 0 L30 140 M60 0 L60 140 M90 0 L90 140 M120 0 L120 140 M150 0 L150 140 M180 0 L180 140 M210 0 L210 140"/></g><rect x="40" y="40" width="160" height="80" fill="#F4F1DE" stroke="#3D405B" stroke-width="1.2"/><g fill="#E07A5F"><rect x="50" y="52" width="20" height="20"/><rect x="80" y="52" width="20" height="20"/><rect x="110" y="52" width="20" height="20"/><rect x="140" y="52" width="20" height="20"/><rect x="170" y="52" width="20" height="20"/></g><g fill="#3D405B"><rect x="50" y="88" width="20" height="24"/><rect x="170" y="88" width="20" height="24"/></g></svg>
+      </div>
+      <div class="meta"><span>Value-add residential</span><span class="id">14 / 02</span></div>
+      <h4>6966 Amherst — 14-Unit</h4>
+      <p>Value-add acquisition with 10-year proforma, CapEx schedule, exit modeling.</p>
+      <div class="stat"><span>Cash-on-cash</span><strong>6%</strong></div>
+      <div class="stat"><span>Levered IRR</span><strong>12%</strong></div>
+    </div>
+    <div class="item">
+      <div class="ph">
+        <svg viewBox="0 0 240 140" preserveAspectRatio="none"><g stroke="rgba(61,64,91,0.3)" stroke-width="0.5" fill="none"><path d="M0 28 L240 28 M0 56 L240 56 M0 84 L240 84 M0 112 L240 112"/></g><rect x="100" y="20" width="40" height="100" fill="#F4F1DE" stroke="#3D405B"/><g fill="#E07A5F"><rect x="106" y="28" width="8" height="8"/><rect x="118" y="28" width="8" height="8"/><rect x="130" y="28" width="8" height="8"/><rect x="106" y="42" width="8" height="8"/><rect x="118" y="42" width="8" height="8"/><rect x="130" y="42" width="8" height="8"/><rect x="106" y="56" width="8" height="8"/><rect x="118" y="56" width="8" height="8"/><rect x="130" y="56" width="8" height="8"/><rect x="106" y="70" width="8" height="8"/><rect x="118" y="70" width="8" height="8"/><rect x="130" y="70" width="8" height="8"/><rect x="106" y="84" width="8" height="8"/><rect x="118" y="84" width="8" height="8"/><rect x="130" y="84" width="8" height="8"/></g></svg>
+      </div>
+      <div class="meta"><span>Highrise proforma</span><span class="id">14 / 03</span></div>
+      <h4>311-Unit Downtown SD</h4>
+      <p>Full development proforma with JV waterfall: 10% pref, 60/40 GP/LP split.</p>
+      <div class="stat"><span>Units</span><strong>311</strong></div>
+      <div class="stat"><span>Pref</span><strong>10%</strong></div>
+    </div>
+    <div class="item">
+      <div class="ph">
+        <svg viewBox="0 0 240 140" preserveAspectRatio="none"><g stroke="rgba(61,64,91,0.3)" stroke-width="0.5" fill="none"><path d="M0 28 L240 28 M0 56 L240 56 M0 84 L240 84 M0 112 L240 112"/></g><g fill="#F4F1DE" stroke="#3D405B"><rect x="20" y="35" width="32" height="22"/><rect x="58" y="35" width="32" height="22"/><rect x="96" y="35" width="32" height="22"/><rect x="134" y="35" width="32" height="22"/><rect x="172" y="35" width="32" height="22"/><rect x="20" y="65" width="32" height="22"/><rect x="58" y="65" width="32" height="22"/><rect x="96" y="65" width="32" height="22"/><rect x="134" y="65" width="32" height="22"/><rect x="172" y="65" width="32" height="22"/><rect x="20" y="95" width="32" height="22"/><rect x="58" y="95" width="32" height="22"/><rect x="96" y="95" width="32" height="22"/></g><g fill="#E07A5F"><rect x="20" y="35" width="32" height="3"/><rect x="58" y="35" width="32" height="3"/><rect x="96" y="35" width="32" height="3"/></g></svg>
+      </div>
+      <div class="meta"><span>Subdivision · phased</span><span class="id">14 / 04</span></div>
+      <h4>80-Lot · Phased Cash Flow</h4>
+      <p>$3.7M land basis, $68K per finished lot, $150/SF construction. Monthly CF model.</p>
+      <div class="stat"><span>Lots</span><strong>80</strong></div>
+      <div class="stat"><span>IRR target</span><strong>18%</strong></div>
+    </div>
+    <div class="item">
+      <div class="ph">
+        <svg viewBox="0 0 240 140" preserveAspectRatio="none"><g stroke="rgba(61,64,91,0.3)" stroke-width="0.5" fill="none"><path d="M0 28 L240 28 M0 56 L240 56 M0 84 L240 84 M0 112 L240 112"/></g><rect x="40" y="50" width="160" height="60" fill="#F4F1DE" stroke="#3D405B"/><line x1="120" y1="50" x2="120" y2="110" stroke="#3D405B"/><g fill="#E07A5F"><rect x="50" y="62" width="14" height="36"/><rect x="68" y="62" width="14" height="36"/><rect x="86" y="62" width="14" height="36"/></g><g fill="#3D405B"><rect x="135" y="62" width="50" height="36"/></g></svg>
+      </div>
+      <div class="meta"><span>Commercial repositioning</span><span class="id">14 / 05</span></div>
+      <h4>4616 El Cajon Blvd</h4>
+      <p>Repositioning analysis on a Transit Priority Area asset. NNN vs. full-service.</p>
+      <div class="stat"><span>Structure</span><strong>60/40 JV</strong></div>
+      <div class="stat"><span>Hurdle</span><strong>16% IRR</strong></div>
+    </div>
+    <div class="item">
+      <div class="ph">
+        <svg viewBox="0 0 240 140" preserveAspectRatio="none"><g stroke="rgba(61,64,91,0.3)" stroke-width="0.5" fill="none"><path d="M0 28 L240 28 M0 56 L240 56 M0 84 L240 84 M0 112 L240 112"/></g><rect x="40" y="30" width="160" height="80" fill="#F4F1DE" stroke="#3D405B"/><g fill="#E07A5F"><rect x="50" y="42" width="12" height="14"/><rect x="68" y="42" width="12" height="14"/><rect x="86" y="42" width="12" height="14"/><rect x="104" y="42" width="12" height="14"/><rect x="122" y="42" width="12" height="14"/><rect x="140" y="42" width="12" height="14"/><rect x="158" y="42" width="12" height="14"/><rect x="176" y="42" width="12" height="14"/><rect x="50" y="62" width="12" height="14"/><rect x="68" y="62" width="12" height="14"/><rect x="86" y="62" width="12" height="14"/><rect x="104" y="62" width="12" height="14"/><rect x="122" y="62" width="12" height="14"/><rect x="140" y="62" width="12" height="14"/><rect x="158" y="62" width="12" height="14"/><rect x="176" y="62" width="12" height="14"/><rect x="50" y="82" width="12" height="14"/><rect x="68" y="82" width="12" height="14"/><rect x="86" y="82" width="12" height="14"/><rect x="104" y="82" width="12" height="14"/><rect x="122" y="82" width="12" height="14"/><rect x="140" y="82" width="12" height="14"/><rect x="158" y="82" width="12" height="14"/><rect x="176" y="82" width="12" height="14"/></g></svg>
+      </div>
+      <div class="meta"><span>JV Structure</span><span class="id">14 / 06</span></div>
+      <h4>256-Bed Student Housing</h4>
+      <p>JV: 8% preferred dividend, 50/50 split post-pref, capital recovery.</p>
+      <div class="stat"><span>Beds</span><strong>256</strong></div>
+      <div class="stat"><span>Pref</span><strong>8%</strong></div>
+    </div>
+    <div class="item">
+      <div class="ph">
+        <svg viewBox="0 0 240 140" preserveAspectRatio="none"><g stroke="rgba(61,64,91,0.3)" stroke-width="0.5" fill="none"><path d="M0 28 L240 28 M0 56 L240 56 M0 84 L240 84 M0 112 L240 112"/></g><path d="M20 100 Q60 60 120 80 T220 70 L220 120 L20 120 Z" fill="#F4F1DE" stroke="#3D405B" stroke-width="1.2"/><g fill="#E07A5F" opacity="0.7"><circle cx="60" cy="92" r="3"/><circle cx="100" cy="78" r="3"/><circle cx="140" cy="82" r="3"/><circle cx="180" cy="74" r="3"/></g></svg>
+      </div>
+      <div class="meta"><span>Land recap</span><span class="id">14 / 07</span></div>
+      <h4>2,000-Acre Recapitalization</h4>
+      <p>Distressed recap: $4M new equity, sub-debt, IRR hurdles, option payments.</p>
+      <div class="stat"><span>New equity</span><strong>$4M</strong></div>
+      <div class="stat"><span>Acres</span><strong>2,000</strong></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ SAMPLE ════════ -->
+<section class="scene dark" id="sample" data-screen-label="05 Sample">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num" style="color: var(--gold);">05</div>
+      <div class="label">Sample</div>
+    </div>
+    <div>
+      <h2 class="reveal">Numbers <em>before</em> narrative.</h2>
+      <p class="sub reveal">Every property gets this treatment before you make an offer. The numbers below are illustrative — on a real deal, they'd be your rents, your financing, your market.</p>
+    </div>
+  </div>
+
+  <div class="proforma reveal">
+    <div class="head">
+      <div class="info">
+        <div class="tag">Sample · North Park</div>
+        <h3>4-Unit Multifamily<br><em>built 1978 · 5,800 sf lot</em></h3>
+        <div class="meta">4 × 2BR/1BA · seller asking · agent-listed</div>
+      </div>
+      <div class="price">
+        <div class="lab">Asking</div>
+        <div class="v">$1.65M</div>
+        <div class="terms">25% down · 7.0% / 30-yr</div>
+      </div>
+    </div>
+
+    <div class="body">
+      <div class="col">
+        <div class="col-title">Year 1 Proforma</div>
+        <div class="row"><span>Gross scheduled rent</span><span class="v">$144,000</span></div>
+        <div class="row sub"><span>Less vacancy (5%)</span><span class="v">−$7,200</span></div>
+        <div class="row sub"><span>Less operating expenses (35%)</span><span class="v">−$47,880</span></div>
+        <div class="row total"><span>Net Operating Income</span><span class="v">$88,920</span></div>
+        <div class="row sub"><span>Less annual debt service</span><span class="v">−$98,772</span></div>
+        <div class="row total neg"><span>Cash flow after debt</span><span class="v">−$9,852</span></div>
+      </div>
+      <div class="col">
+        <div class="col-title">Capital Stack</div>
+        <div class="row"><span>Purchase price</span><span class="v">$1,650,000</span></div>
+        <div class="row sub"><span>Down payment (25%)</span><span class="v">$412,500</span></div>
+        <div class="row sub"><span>Closing costs (est.)</span><span class="v">$32,000</span></div>
+        <div class="row sub"><span>Reserves (6 mo.)</span><span class="v">$18,000</span></div>
+        <div class="row total"><span>Total cash required</span><span class="v">$462,500</span></div>
+        <div class="row"><span>Loan amount</span><span class="v">$1,237,500</span></div>
+      </div>
+    </div>
+
+    <div class="metrics">
+      <div class="m"><div class="k">Cap rate</div><div class="v">5.4<em>%</em></div></div>
+      <div class="m"><div class="k">Cash-on-cash</div><div class="v"><em>−</em>2.1<em>%</em></div></div>
+      <div class="m"><div class="k">DSCR</div><div class="v">0.90<em>×</em></div></div>
+    </div>
+
+    <div class="upside">
+      <strong>Value-Add · Detached ADU</strong>
+      Adding a 1BR detached ADU at $180,000 construction cost adds $27,000 in annual rent. Revised NOI: $106,470. Revised cash flow: +$7,698. Cash-on-cash shifts to +1.2%.
+    </div>
+    <div class="verdict">
+      <strong>Verdict</strong>
+      As-is, this deal doesn't pencil. It only works with the ADU upside, meaningful seller concession, or assumable low-rate financing. <em>This is exactly what you need to know before you make an offer.</em>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ REVIEWS ════════ -->
+<section class="scene" id="reviews" data-screen-label="06 Reviews">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">06</div>
+      <div class="label">Reviews</div>
+    </div>
+    <div>
+      <h2 class="reveal">In their <em>words.</em></h2>
+      <p class="sub reveal">Two voices, two segments. More coming as the practice grows.</p>
+    </div>
+  </div>
+
+  <div class="gallery reveal-stagger">
+    <div class="r">
+      <div class="text">"I've worked with several agents on investment properties. Giovanni is the only one who actually understood the numbers. He modeled the deal before I made an offer — IRR, cap rate, cash-on-cash. <em>That's a different level.</em>"</div>
+      <div class="who">
+        <div class="av">JT</div>
+        <div><div class="name">James T.</div><div class="role">Multifamily Investor · San Diego County</div></div>
+      </div>
+    </div>
+    <div class="r">
+      <div class="text">"Multifamily felt intimidating before I talked to Giovanni — all the numbers, the tenants, the loan structure. He broke it down clearly. I bought my first duplex and <em>I actually understand the investment.</em>"</div>
+      <div class="who">
+        <div class="av">MR</div>
+        <div><div class="name">Maria R.</div><div class="role">First-time Multifamily Buyer · San Diego</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CONTACT ════════ -->
+<section class="scene bone" id="contact" data-screen-label="07 Contact">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">07</div>
+      <div class="label">Let's talk</div>
+    </div>
+    <div>
+      <h2 class="reveal">Ready to move<br><em>with intention?</em></h2>
+      <p class="sub reveal">Buying your first multifamily, scaling a portfolio, or exploring what you can build — start with a 30-minute call.</p>
+    </div>
+  </div>
+
+  <div class="contact-grid reveal">
+    <div class="left">
+      <div>
+        <div class="lab">Direct line</div>
+        <h3>One call.<br><em>Then a model.</em></h3>
+      </div>
+      <p class="pitch">No fees until you transact. No high-pressure pitch. The numbers will tell us if there's a deal here — and the call will tell us if we're a fit.</p>
+      <div class="reach">
+        <a href="tel:6196178584"><span class="k">Call</span><span>619.617.8584</span><span>→</span></a>
+        <a href="mailto:giovanni@giovanniserrano.com"><span class="k">Email</span><span>giovanni@giovanniserrano.com</span><span>→</span></a>
+        <a href="https://giovanniserrano.com"><span class="k">Web</span><span>giovanniserrano.com</span><span>→</span></a>
+      </div>
+    </div>
+    <div class="right">
+      <form onsubmit="event.preventDefault(); this.querySelector('button span:first-child').textContent='Sent · response within 24 hrs';">
+        <div><label>Name</label><input type="text" placeholder="Your name" required></div>
+        <div><label>Email</label><input type="email" placeholder="your@email.com" required></div>
+        <div><label>Phone</label><input type="tel" placeholder="619.555.0000"></div>
+        <div><label>I'm Looking To</label>
+          <select required>
+            <option value="" selected>Select your goal</option>
+            <option>Buy my first duplex / triplex / fourplex</option>
+            <option>Acquire a multifamily investment property (4–12 units)</option>
+            <option>Build units on property I already own (SB 9 / ADU)</option>
+            <option>Just explore — start with a conversation</option>
+          </select>
+        </div>
+        <div><label>Message <span style="color: var(--ink-mute); text-transform: none; letter-spacing: 0;">(optional)</span></label><textarea placeholder="Timeline, budget, specific properties — whatever helps."></textarea></div>
+        <button type="submit"><span>Send my message</span><span>→</span></button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer data-screen-label="08 Footer">
+  <p class="foot-mark">Move with<br><em>intention.</em></p>
+  <div class="foot-grid">
+    <div class="col">
+      <div class="k">Brand</div>
+      <p><strong>Giovanni Serrano</strong></p>
+      <p>Multifamily Investment &amp; Development Advisor.<br>San Diego, California.</p>
+    </div>
+    <div class="col">
+      <div class="k">Sub-pages</div>
+      <a href="#">Invest</a>
+      <a href="#">Scale</a>
+      <a href="#">Develop</a>
+      <a href="#">Sample analysis</a>
+    </div>
+    <div class="col">
+      <div class="k">Reach</div>
+      <a href="tel:6196178584">619.617.8584</a>
+      <a href="mailto:giovanni@giovanniserrano.com">giovanni@giovanniserrano.com</a>
+      <a href="#">San Diego, CA</a>
+    </div>
+    <div class="col">
+      <div class="k">Compliance</div>
+      <p>DRE #02282434</p>
+      <p>© 2026 Giovanni Serrano Real Estate</p>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>v4.0 · 2026 · Soft Golden Hour</span>
+    <span>Lora · Inter · JetBrains Mono</span>
+    <span>Built from scratch. Built to last.</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); }
+  });
+});
+
+// horizontal track wheel-scroll forwarding
+const track = document.getElementById('svc-track');
+if (track) {
+  track.addEventListener('wheel', (e) => {
+    if (Math.abs(e.deltaY) > Math.abs(e.deltaX) && track.scrollWidth > track.clientWidth) {
+      const max = track.scrollWidth - track.clientWidth;
+      const pos = track.scrollLeft;
+      if ((e.deltaY > 0 && pos < max) || (e.deltaY < 0 && pos > 0)) {
+        track.scrollLeft += e.deltaY;
+        e.preventDefault();
+      }
+    }
+  }, { passive: false });
+}
+</script>
+</body>
+</html>

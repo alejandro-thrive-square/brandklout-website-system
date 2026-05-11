@@ -1,0 +1,520 @@
+<!-- METADATA
+  @style: corporate
+  @complexity: 3
+  @animation-deps: none
+  @responsive: true
+  @description: Full comparison table with sticky header, multiple tiers, responsive stacked cards on mobile
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing Comparison Table</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --color-bg: #ffffff;
+    --color-surface: #f8fafc;
+    --color-primary: #2563eb;
+    --color-primary-light: #eff6ff;
+    --color-text: #0f172a;
+    --color-text-secondary: #64748b;
+    --color-border: #e2e8f0;
+    --color-success: #16a34a;
+    --color-muted: #cbd5e1;
+    --font-main: 'DM Sans', sans-serif;
+    --radius: 16px;
+    --radius-sm: 10px;
+  }
+
+  body {
+    font-family: var(--font-main);
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .pricing {
+    padding: 120px 24px;
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .pricing__header {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+
+  .pricing__overline {
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-primary);
+    margin-bottom: 12px;
+  }
+
+  .pricing__title {
+    font-size: clamp(1.75rem, 3.5vw, 2.5rem);
+    font-weight: 700;
+    margin-bottom: 12px;
+  }
+
+  .pricing__subtitle {
+    color: var(--color-text-secondary);
+    font-size: 1.0625rem;
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Desktop Table */
+  .table-wrapper {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+  }
+
+  .comparison-table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  .comparison-table thead {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+  }
+
+  .comparison-table th,
+  .comparison-table td {
+    padding: 16px 24px;
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.875rem;
+  }
+
+  .comparison-table th:first-child,
+  .comparison-table td:first-child {
+    text-align: left;
+    font-weight: 500;
+    color: var(--color-text);
+    width: 280px;
+  }
+
+  .comparison-table thead th {
+    background: var(--color-surface);
+    padding: 24px;
+    vertical-align: bottom;
+  }
+
+  .comparison-table thead th:first-child {
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+  }
+
+  .tier-name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 4px;
+  }
+
+  .tier-price {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  .tier-price span {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  .tier-btn {
+    display: inline-block;
+    margin-top: 12px;
+    padding: 8px 20px;
+    border-radius: var(--radius-sm);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    text-decoration: none;
+    border: 1.5px solid var(--color-border);
+    color: var(--color-text);
+    background: var(--color-bg);
+    transition: all 0.2s ease;
+    cursor: pointer;
+    font-family: var(--font-main);
+  }
+
+  .tier-btn:hover {
+    background: var(--color-text);
+    color: #fff;
+    border-color: var(--color-text);
+  }
+
+  .tier-btn--primary {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+  }
+
+  .tier-btn--primary:hover {
+    background: #1d4ed8;
+    border-color: #1d4ed8;
+  }
+
+  .tier--featured {
+    background: var(--color-primary-light);
+  }
+
+  .comparison-table tbody tr:nth-child(even) td {
+    background: var(--color-surface);
+  }
+
+  .comparison-table tbody tr:nth-child(even) td.tier--featured {
+    background: #e8f0fe;
+  }
+
+  .comparison-table tbody td.tier--featured {
+    background: var(--color-primary-light);
+  }
+
+  .comparison-table thead th.tier--featured {
+    background: var(--color-primary-light);
+    border-bottom: 2px solid var(--color-primary);
+  }
+
+  .comparison-table tbody tr:last-child td {
+    border-bottom: none;
+  }
+
+  .category-row td {
+    background: var(--color-surface) !important;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-text-secondary);
+    padding: 12px 24px;
+  }
+
+  /* Icons */
+  .icon-check {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    color: var(--color-success);
+  }
+
+  .icon-cross {
+    display: inline-flex;
+    width: 20px;
+    height: 20px;
+    color: var(--color-muted);
+  }
+
+  .value-text {
+    font-weight: 600;
+    color: var(--color-text);
+  }
+
+  /* Mobile Cards */
+  .mobile-cards {
+    display: none;
+  }
+
+  .mobile-card {
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius);
+    margin-bottom: 24px;
+    overflow: hidden;
+  }
+
+  .mobile-card--featured {
+    border-color: var(--color-primary);
+    box-shadow: 0 4px 20px rgba(37, 99, 235, 0.1);
+  }
+
+  .mobile-card__header {
+    padding: 24px;
+    background: var(--color-surface);
+    text-align: center;
+    border-bottom: 1px solid var(--color-border);
+  }
+
+  .mobile-card--featured .mobile-card__header {
+    background: var(--color-primary-light);
+  }
+
+  .mobile-card__name {
+    font-size: 1rem;
+    font-weight: 700;
+    margin-bottom: 8px;
+  }
+
+  .mobile-card__price {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  .mobile-card__price span {
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+  }
+
+  .mobile-card__btn {
+    display: block;
+    margin: 16px auto 0;
+    padding: 10px 24px;
+    border-radius: var(--radius-sm);
+    font-size: 0.875rem;
+    font-weight: 600;
+    border: 1.5px solid var(--color-border);
+    background: #fff;
+    color: var(--color-text);
+    cursor: pointer;
+    font-family: var(--font-main);
+    transition: all 0.2s;
+  }
+
+  .mobile-card--featured .mobile-card__btn {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+  }
+
+  .mobile-card__features {
+    padding: 20px 24px;
+    list-style: none;
+  }
+
+  .mobile-card__feature {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px 0;
+    border-bottom: 1px solid var(--color-border);
+    font-size: 0.875rem;
+  }
+
+  .mobile-card__feature:last-child {
+    border-bottom: none;
+  }
+
+  .mobile-card__feature-label {
+    color: var(--color-text-secondary);
+  }
+
+  .mobile-card__feature-value {
+    font-weight: 600;
+  }
+
+  @media (max-width: 768px) {
+    .pricing { padding: 80px 16px; }
+    .table-wrapper { display: none; }
+    .mobile-cards { display: block; }
+  }
+</style>
+</head>
+<body>
+<section class="pricing">
+  <div class="pricing__header">
+    <div class="pricing__overline">Compare Plans</div>
+    <h2 class="pricing__title">Find the right plan for your team</h2>
+    <p class="pricing__subtitle">Every plan includes a 14-day free trial. No credit card required.</p>
+  </div>
+
+  <!-- Desktop Table -->
+  <div class="table-wrapper">
+    <table class="comparison-table">
+      <thead>
+        <tr>
+          <th>Compare features</th>
+          <th>
+            <div class="tier-name">Starter</div>
+            <div class="tier-price">$19<span>/mo</span></div>
+            <button class="tier-btn">Get started</button>
+          </th>
+          <th class="tier--featured">
+            <div class="tier-name">Professional</div>
+            <div class="tier-price">$49<span>/mo</span></div>
+            <button class="tier-btn tier-btn--primary">Get started</button>
+          </th>
+          <th>
+            <div class="tier-name">Business</div>
+            <div class="tier-price">$99<span>/mo</span></div>
+            <button class="tier-btn">Get started</button>
+          </th>
+          <th>
+            <div class="tier-name">Enterprise</div>
+            <div class="tier-price">Custom</div>
+            <button class="tier-btn">Contact us</button>
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr class="category-row"><td colspan="5">Usage</td></tr>
+        <tr>
+          <td>Projects</td>
+          <td><span class="value-text">5</span></td>
+          <td class="tier--featured"><span class="value-text">25</span></td>
+          <td><span class="value-text">Unlimited</span></td>
+          <td><span class="value-text">Unlimited</span></td>
+        </tr>
+        <tr>
+          <td>Team members</td>
+          <td><span class="value-text">3</span></td>
+          <td class="tier--featured"><span class="value-text">15</span></td>
+          <td><span class="value-text">50</span></td>
+          <td><span class="value-text">Unlimited</span></td>
+        </tr>
+        <tr>
+          <td>Storage</td>
+          <td><span class="value-text">10 GB</span></td>
+          <td class="tier--featured"><span class="value-text">100 GB</span></td>
+          <td><span class="value-text">500 GB</span></td>
+          <td><span class="value-text">Unlimited</span></td>
+        </tr>
+        <tr>
+          <td>API calls / month</td>
+          <td><span class="value-text">10K</span></td>
+          <td class="tier--featured"><span class="value-text">100K</span></td>
+          <td><span class="value-text">1M</span></td>
+          <td><span class="value-text">Unlimited</span></td>
+        </tr>
+        <tr class="category-row"><td colspan="5">Features</td></tr>
+        <tr>
+          <td>Analytics dashboard</td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+          <td class="tier--featured"><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+        </tr>
+        <tr>
+          <td>Custom integrations</td>
+          <td><svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+          <td class="tier--featured"><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+        </tr>
+        <tr>
+          <td>Advanced reporting</td>
+          <td><svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+          <td class="tier--featured"><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+        </tr>
+        <tr>
+          <td>White labeling</td>
+          <td><svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+          <td class="tier--featured"><svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+        </tr>
+        <tr class="category-row"><td colspan="5">Security & Compliance</td></tr>
+        <tr>
+          <td>SSO / SAML</td>
+          <td><svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+          <td class="tier--featured"><svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+        </tr>
+        <tr>
+          <td>Audit logs</td>
+          <td><svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+          <td class="tier--featured"><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+        </tr>
+        <tr>
+          <td>Custom SLA</td>
+          <td><svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+          <td class="tier--featured"><svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+          <td><svg class="icon-cross" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg></td>
+          <td><svg class="icon-check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></td>
+        </tr>
+        <tr class="category-row"><td colspan="5">Support</td></tr>
+        <tr>
+          <td>Support level</td>
+          <td><span class="value-text">Email</span></td>
+          <td class="tier--featured"><span class="value-text">Priority</span></td>
+          <td><span class="value-text">Dedicated</span></td>
+          <td><span class="value-text">24/7 Phone</span></td>
+        </tr>
+        <tr>
+          <td>Onboarding</td>
+          <td><span class="value-text">Self-serve</span></td>
+          <td class="tier--featured"><span class="value-text">Guided</span></td>
+          <td><span class="value-text">White-glove</span></td>
+          <td><span class="value-text">Custom</span></td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- Mobile Cards -->
+  <div class="mobile-cards" id="mobileCards"></div>
+</section>
+
+<script>
+(function() {
+  const tiers = [
+    {
+      name: 'Starter', price: '$19/mo', featured: false,
+      features: { 'Projects': '5', 'Team members': '3', 'Storage': '10 GB', 'API calls': '10K', 'Analytics': true, 'Custom integrations': false, 'Advanced reporting': false, 'White labeling': false, 'SSO / SAML': false, 'Audit logs': false, 'Support': 'Email', 'Onboarding': 'Self-serve' }
+    },
+    {
+      name: 'Professional', price: '$49/mo', featured: true,
+      features: { 'Projects': '25', 'Team members': '15', 'Storage': '100 GB', 'API calls': '100K', 'Analytics': true, 'Custom integrations': true, 'Advanced reporting': true, 'White labeling': false, 'SSO / SAML': false, 'Audit logs': true, 'Support': 'Priority', 'Onboarding': 'Guided' }
+    },
+    {
+      name: 'Business', price: '$99/mo', featured: false,
+      features: { 'Projects': 'Unlimited', 'Team members': '50', 'Storage': '500 GB', 'API calls': '1M', 'Analytics': true, 'Custom integrations': true, 'Advanced reporting': true, 'White labeling': true, 'SSO / SAML': true, 'Audit logs': true, 'Support': 'Dedicated', 'Onboarding': 'White-glove' }
+    },
+    {
+      name: 'Enterprise', price: 'Custom', featured: false,
+      features: { 'Projects': 'Unlimited', 'Team members': 'Unlimited', 'Storage': 'Unlimited', 'API calls': 'Unlimited', 'Analytics': true, 'Custom integrations': true, 'Advanced reporting': true, 'White labeling': true, 'SSO / SAML': true, 'Audit logs': true, 'Support': '24/7 Phone', 'Onboarding': 'Custom' }
+    }
+  ];
+
+  const container = document.getElementById('mobileCards');
+
+  tiers.forEach(tier => {
+    const card = document.createElement('div');
+    card.className = 'mobile-card' + (tier.featured ? ' mobile-card--featured' : '');
+
+    let featuresHTML = '';
+    Object.entries(tier.features).forEach(([label, value]) => {
+      let displayValue;
+      if (typeof value === 'boolean') {
+        displayValue = value
+          ? '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#16a34a" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>'
+          : '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="#cbd5e1" stroke-width="2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>';
+      } else {
+        displayValue = `<span class="mobile-card__feature-value">${value}</span>`;
+      }
+      featuresHTML += `<li class="mobile-card__feature"><span class="mobile-card__feature-label">${label}</span>${displayValue}</li>`;
+    });
+
+    card.innerHTML = `
+      <div class="mobile-card__header">
+        <div class="mobile-card__name">${tier.name}</div>
+        <div class="mobile-card__price">${tier.price.replace('/mo', '<span>/mo</span>')}</div>
+        <button class="mobile-card__btn">${tier.name === 'Enterprise' ? 'Contact us' : 'Get started'}</button>
+      </div>
+      <ul class="mobile-card__features">${featuresHTML}</ul>
+    `;
+    container.appendChild(card);
+  });
+})();
+</script>
+</body>
+</html>

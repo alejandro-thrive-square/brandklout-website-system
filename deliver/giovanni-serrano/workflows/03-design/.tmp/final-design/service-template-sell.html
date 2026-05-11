@@ -1,0 +1,820 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Sell — Maximize your exit value · Giovanni Serrano</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --terra: #E07A5F; --terra-d: #C85A3A;
+  --navy: #3D405B; --navy-d: #2C2F4A;
+  --gold: #F2CC8F; --canvas: #F4F1DE; --bone: #EDE8D5; --bone-d: #E5DFCB;
+  --ink: #3D405B; --ink-soft: rgba(61,64,91,0.65); --ink-mute: rgba(61,64,91,0.42); --ink-fade: rgba(61,64,91,0.18); --line: rgba(61,64,91,0.14);
+  --on-d: #F4F1DE; --on-d-soft: rgba(244,241,222,0.62); --on-d-mute: rgba(244,241,222,0.32); --on-d-line: rgba(244,241,222,0.12);
+  --display: 'Lora', Georgia, serif;
+  --body: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { scroll-behavior: smooth; }
+body { background: var(--canvas); color: var(--ink); font-family: var(--body); font-weight: 300; font-size: 16px; line-height: 1.6; -webkit-font-smoothing: antialiased; overflow-x: hidden; }
+img { max-width: 100%; display: block; }
+em { font-style: italic; }
+
+/* progress */
+.progress { position: fixed; top: 0; left: 0; right: 0; height: 2px; z-index: 60; }
+.progress .bar { height: 100%; width: 0; background: linear-gradient(90deg, var(--terra), var(--gold)); transition: width .12s linear; }
+
+/* nav */
+nav.top { position: fixed; top: 0; left: 0; right: 0; z-index: 50; display: grid; grid-template-columns: 1fr auto 1fr; gap: 32px; align-items: center; padding: 22px 40px; background: var(--canvas); border-bottom: 1px solid var(--line); font-family: var(--body); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; }
+nav.top .brand { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -0.01em; text-transform: none; color: var(--navy); }
+nav.top .brand em { color: var(--terra); }
+nav.top .links { display: flex; gap: 40px; justify-content: center; }
+nav.top .links a { color: var(--ink); text-decoration: none; transition: color .2s; position: relative; }
+nav.top .links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -6px; height: 1px; background: var(--terra); transition: right .35s ease; }
+nav.top .links a:hover::after, nav.top .links a.active::after { right: 0; }
+nav.top .links a.active { color: var(--terra); }
+nav.top .right { justify-self: end; display: flex; align-items: center; gap: 24px; }
+nav.top .right .num { color: var(--ink-soft); font-family: var(--mono); }
+nav.top .cta { padding: 12px 22px; background: var(--terra); color: var(--canvas); text-decoration: none; transition: background .2s; display: inline-flex; gap: 12px; align-items: center; }
+nav.top .cta:hover { background: var(--navy); }
+
+/* context bar */
+.context { position: fixed; top: 87px; left: 0; right: 0; z-index: 49; height: 32px; background: var(--terra); color: var(--canvas); display: grid; grid-template-columns: auto 1fr auto; align-items: center; gap: 24px; padding: 0 40px; border-bottom: 1px solid var(--terra-d); font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; }
+.context .crumb a { color: var(--canvas); text-decoration: none; opacity: .85; }
+.context .crumb a:hover { opacity: 1; }
+.context .crumb .sep { margin: 0 12px; color: var(--navy); }
+.context .now { font-weight: 500; }
+.context .next a { color: var(--canvas); text-decoration: none; }
+.context .next a:hover { color: var(--navy); }
+
+/* filing */
+.filing { position: fixed; top: 50%; left: 16px; transform: translateY(-50%); z-index: 48; font-family: var(--mono); font-size: 10px; letter-spacing: 0.32em; text-transform: uppercase; color: var(--ink-mute); writing-mode: vertical-rl; pointer-events: none; display: flex; gap: 18px; align-items: center; }
+.filing .dot { width: 6px; height: 6px; background: var(--terra); border-radius: 50%; }
+
+/* hero */
+.subhero { padding: 152px 40px 64px; position: relative; display: grid; grid-template-columns: 1.05fr 1fr; gap: 64px; align-items: stretch; background: repeating-linear-gradient(0deg, transparent 0 47px, var(--bone-d) 47px 48px), repeating-linear-gradient(90deg, transparent 0 47px, var(--bone-d) 47px 48px), var(--bone); }
+.subhero::after { content: ""; position: absolute; left: 40px; right: 40px; bottom: 0; height: 1px; background: var(--line); }
+.subhero-left { padding-top: 16px; position: relative; z-index: 1; }
+.subhero-eyebrow { display: inline-flex; align-items: center; gap: 14px; font-family: var(--mono); font-size: 11px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terra); margin-bottom: 28px; padding: 8px 14px; border: 1px solid var(--terra); background: rgba(224,122,95,0.07); }
+.subhero-eyebrow .num { color: var(--ink-mute); }
+.subhero h1 { font-family: var(--display); font-weight: 700; font-size: clamp(40px, 5.2vw, 80px); line-height: 0.98; letter-spacing: -0.018em; color: var(--navy); margin: 0 0 32px; }
+.subhero h1 em { font-style: italic; font-weight: 400; color: var(--terra); display: inline-block; position: relative; }
+.subhero h1 em::before { content: ""; position: absolute; left: -4px; right: -4px; bottom: 6%; height: 14%; background: var(--gold); opacity: 0.4; z-index: -1; transform: skewX(-6deg); }
+.subhero-sub { font-family: var(--display); font-style: italic; font-size: 22px; line-height: 1.5; color: var(--ink-soft); max-width: 640px; margin: 0 0 48px; }
+.subhero-sub::first-letter { font-family: var(--display); font-weight: 700; font-style: normal; float: left; font-size: 64px; line-height: 0.9; padding: 6px 12px 0 0; color: var(--terra); }
+.subhero-meta { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1px; background: var(--line); border: 1px solid var(--line); max-width: 640px; }
+.subhero-meta .cell { background: var(--canvas); padding: 22px 24px; }
+.subhero-meta .k { font-family: var(--mono); font-size: 10px; font-weight: 500; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); }
+.subhero-meta .v { font-family: var(--display); font-weight: 700; font-size: 17px; line-height: 1.25; margin-top: 10px; color: var(--navy); }
+.subhero-meta .v em { color: var(--terra); font-weight: 400; }
+.subhero-scroll { margin-top: 48px; display: inline-flex; align-items: center; gap: 12px; font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); }
+.subhero-scroll .down { width: 28px; height: 1px; background: var(--ink); position: relative; animation: scrollHint 2.4s ease-in-out infinite; }
+.subhero-scroll .down::after { content: ""; position: absolute; right: -2px; top: -3px; width: 8px; height: 8px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); transform: rotate(-45deg); }
+@keyframes scrollHint { 0%,100% { transform: translateX(0); opacity: 1; } 50% { transform: translateX(8px); opacity: .4; } }
+
+/* hero valuation pane */
+.site-pane { position: relative; border: 1px solid var(--ink); background: var(--canvas); overflow: hidden; min-height: 580px; display: grid; }
+.site-pane .label { position: absolute; top: 16px; left: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); z-index: 4; }
+.site-pane .corner { position: absolute; top: 16px; right: 16px; font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em; color: var(--terra); z-index: 4; }
+.site-pane svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.site-pane .scale-bar { position: absolute; bottom: 16px; left: 16px; right: 16px; display: flex; justify-content: space-between; font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em; color: var(--ink-mute); z-index: 4; border-top: 1px solid var(--ink-fade); padding-top: 8px; }
+
+/* site plan animations */
+.sp-draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.site-pane.in .sp-draw { animation: spDraw 1.2s cubic-bezier(.25,.7,.2,1) forwards; }
+.site-pane.in .sp-draw.d1 { animation-delay: .1s; }
+.site-pane.in .sp-draw.d2 { animation-delay: .4s; }
+.site-pane.in .sp-draw.d3 { animation-delay: .7s; }
+.site-pane.in .sp-draw.d4 { animation-delay: 1.0s; }
+@keyframes spDraw { to { stroke-dashoffset: 0; } }
+.sp-fade { opacity: 0; transition: opacity .7s ease; }
+.site-pane.in .sp-fade { opacity: 1; }
+.site-pane.in .sp-fade.f2 { transition-delay: .6s; }
+.site-pane.in .sp-fade.f3 { transition-delay: 1.0s; }
+.site-pane.in .sp-fade.f4 { transition-delay: 1.4s; }
+.site-pane.in .sp-fade.f5 { transition-delay: 1.8s; }
+
+/* sections */
+section.scene { padding: 140px 40px; position: relative; border-top: 1px solid var(--line); }
+section.scene.bone { background: var(--bone); }
+section.scene.dark { background: var(--navy); color: var(--on-d); border-top-color: var(--on-d-line); }
+.scene-head { display: grid; grid-template-columns: 320px 1fr; gap: 96px; margin-bottom: 80px; align-items: start; }
+.scene-head .marker { position: sticky; top: 130px; }
+.scene-head .num { font-family: var(--display); font-weight: 700; font-size: 88px; line-height: 0.9; color: var(--terra); letter-spacing: -0.02em; }
+.scene-head .label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--ink); margin-top: 16px; display: flex; align-items: center; gap: 12px; }
+section.dark .scene-head .label { color: var(--on-d); }
+.scene-head .label::before { content: ""; width: 24px; height: 1px; background: var(--terra); }
+.scene-head h2 { font-family: var(--display); font-weight: 700; font-size: clamp(40px, 5vw, 76px); line-height: 0.98; letter-spacing: -0.018em; margin: 0; color: var(--navy); max-width: 1000px; }
+section.dark .scene-head h2 { color: var(--canvas); }
+.scene-head h2 em { font-style: italic; font-weight: 400; color: var(--terra); }
+section.dark .scene-head h2 em { color: var(--gold); }
+.scene-head .sub { font-family: var(--display); font-style: italic; font-size: 22px; color: var(--ink-soft); margin-top: 24px; max-width: 720px; line-height: 1.45; }
+section.dark .scene-head .sub { color: var(--on-d-soft); }
+
+/* strategy stair */
+.stair { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; border: 1px solid var(--ink); background: var(--canvas); }
+.stair .step { position: relative; padding: 36px 28px; border-right: 1px solid var(--line); display: grid; align-content: start; gap: 18px; background: var(--canvas); transition: background .35s, transform .35s; }
+.stair .step:nth-child(2) { transform: translateY(28px); }
+.stair .step:nth-child(3) { transform: translateY(56px); }
+.stair .step:nth-child(4) { transform: translateY(84px); border-right: none; }
+.stair .step:hover { background: var(--bone); transform: translateY(-4px); }
+.stair .step:nth-child(2):hover { transform: translateY(24px); }
+.stair .step:nth-child(3):hover { transform: translateY(52px); }
+.stair .step:nth-child(4):hover { transform: translateY(80px); }
+.stair .step .num { font-family: var(--display); font-weight: 700; font-size: 64px; line-height: 1; color: var(--terra); letter-spacing: -0.02em; }
+.stair .step h3 { font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1.2; color: var(--navy); margin: 0; }
+.stair .step p { font-size: 14px; line-height: 1.7; color: var(--ink-soft); margin: 0; }
+.stair .step p strong { color: var(--ink); font-weight: 500; }
+.stair .step::after { content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px; background: var(--terra); transform: scaleX(0); transform-origin: left; transition: transform .45s cubic-bezier(.2,.7,.2,1); }
+.stair .step:hover::after { transform: scaleX(1); }
+.stair-label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); margin-top: 120px; display: flex; justify-content: space-between; }
+
+/* valuation grid */
+.path-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; border: 1px solid var(--ink); }
+.path-card { padding: 48px 40px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink); display: grid; gap: 20px; align-content: start; position: relative; transition: background .3s; }
+.path-card:nth-child(2) { border-right: none; }
+.path-card:nth-child(3), .path-card:nth-child(4) { border-bottom: none; }
+.path-card:nth-child(4) { border-right: none; }
+.path-card:hover { background: var(--bone); }
+.path-card .id { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--terra); }
+.path-card .range { font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 1; color: var(--navy); letter-spacing: -0.018em; }
+.path-card .range em { font-style: italic; font-weight: 400; color: var(--terra); }
+.path-card h3 { font-family: var(--display); font-weight: 700; font-size: 24px; line-height: 1.2; color: var(--navy); margin: 0; }
+.path-card p { font-size: 14px; line-height: 1.75; color: var(--ink-soft); margin: 0; }
+.path-card p strong { color: var(--ink); font-weight: 500; }
+
+/* process tower */
+.tower { display: grid; grid-template-columns: 280px 1fr; gap: 48px; align-items: start; }
+.tower-spine { position: sticky; top: 130px; background: var(--canvas); border: 1px solid var(--ink); padding: 28px; display: grid; gap: 0; align-content: start; }
+.tower-spine .lab { font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--terra); margin-bottom: 16px; }
+.tower-spine svg { width: 100%; height: auto; }
+.floors { display: grid; gap: 0; }
+.floor { border: 1px solid var(--ink); background: var(--canvas); display: grid; grid-template-columns: 100px 1fr auto; gap: 32px; align-items: center; padding: 32px 36px; border-bottom: none; position: relative; transition: background .35s, transform .35s; }
+.floor:last-child { border-bottom: 1px solid var(--ink); }
+.floor:hover { background: var(--bone); transform: translateX(-6px); }
+.floor .n { font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 1; color: var(--terra); letter-spacing: -0.02em; }
+.floor .body h3 { font-family: var(--display); font-weight: 700; font-size: 22px; line-height: 1.2; color: var(--navy); margin: 0 0 8px; }
+.floor .body p { font-size: 14px; line-height: 1.7; color: var(--ink-soft); margin: 0; max-width: 700px; }
+.floor .body p strong { color: var(--ink); font-weight: 500; }
+.floor .when { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); text-align: right; border-left: 1px solid var(--line); padding-left: 24px; align-self: stretch; display: grid; align-content: center; }
+
+/* ribbon */
+.ribbon { margin: 0 -40px; background: var(--terra); color: var(--canvas); padding: 40px 56px; display: grid; grid-template-columns: 1fr auto; align-items: center; gap: 24px; border-top: 1px solid var(--terra-d); border-bottom: 1px solid var(--terra-d); position: relative; overflow: hidden; }
+.ribbon::before { content: ""; position: absolute; inset: 0; background: repeating-linear-gradient(45deg, rgba(244,241,222,0.08) 0 1px, transparent 1px 14px); pointer-events: none; }
+.ribbon .text { font-family: var(--display); font-style: italic; font-size: 28px; line-height: 1.25; max-width: 700px; position: relative; }
+.ribbon .text strong { font-style: normal; font-weight: 500; }
+.ribbon .btn { background: var(--canvas); color: var(--terra); text-decoration: none; padding: 20px 28px; font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em; text-transform: uppercase; font-weight: 500; display: inline-flex; gap: 14px; align-items: center; transition: background .2s, color .2s, transform .2s; position: relative; }
+.ribbon .btn:hover { background: var(--navy); color: var(--canvas); transform: translateX(-4px); }
+
+/* background (dark) */
+.bg-editorial { display: grid; grid-template-columns: 1fr 0.65fr; gap: 64px; align-items: start; }
+.bg-editorial .lead { font-family: var(--display); font-style: italic; font-size: 28px; line-height: 1.42; color: var(--canvas); margin: 0 0 28px; letter-spacing: -0.005em; }
+.bg-editorial .lead em { color: var(--gold); }
+.bg-editorial p { color: var(--on-d-soft); font-size: 15px; line-height: 1.75; margin: 0 0 18px; }
+.bg-editorial p strong { color: var(--canvas); font-weight: 500; }
+.bg-pull { background: var(--terra); color: var(--canvas); padding: 40px; border: 1px solid var(--terra-d); position: sticky; top: 130px; }
+.bg-pull .lab { font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.85; margin-bottom: 16px; }
+.bg-pull .quote { font-family: var(--display); font-style: italic; font-size: 26px; line-height: 1.35; }
+.bg-pull .credit { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.7; margin-top: 20px; border-top: 1px solid rgba(244,241,222,0.25); padding-top: 16px; }
+
+/* contact */
+.contact-grid { display: grid; grid-template-columns: 1.2fr 1fr; border: 1px solid var(--ink); }
+.contact-grid .left { background: var(--terra); color: var(--canvas); padding: 56px; display: grid; align-content: space-between; gap: 32px; border-right: 1px solid var(--ink); position: relative; overflow: hidden; }
+.contact-grid .left::before { content: '⌂'; position: absolute; right: -60px; bottom: -160px; font-size: 600px; line-height: 1; color: rgba(244,241,222,0.07); pointer-events: none; }
+.contact-grid .left .lab { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.85; position: relative; }
+.contact-grid .left h3 { font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 0.98; letter-spacing: -0.018em; margin: 16px 0 0; position: relative; }
+.contact-grid .left h3 em { font-style: italic; font-weight: 400; color: var(--navy); }
+.contact-grid .left .pitch { font-family: var(--display); font-style: italic; font-size: 22px; line-height: 1.4; max-width: 460px; margin: 0; color: rgba(244,241,222,0.92); position: relative; }
+.contact-grid .left .reach { display: grid; gap: 0; font-family: var(--mono); font-size: 14px; position: relative; }
+.contact-grid .left .reach a { color: var(--canvas); text-decoration: none; padding: 14px 0; border-top: 1px solid rgba(244,241,222,0.25); display: grid; grid-template-columns: 80px 1fr auto; gap: 16px; align-items: baseline; transition: color .2s, padding .2s; }
+.contact-grid .left .reach a:hover { color: var(--navy); padding-left: 8px; }
+.contact-grid .left .reach a .k { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244,241,222,0.7); }
+.contact-grid .right { padding: 56px; background: var(--canvas); }
+.contact-grid form { display: grid; gap: 22px; }
+.contact-grid form label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terra); display: block; margin-bottom: 6px; }
+.contact-grid form input, .contact-grid form select, .contact-grid form textarea { font-family: var(--body); font-size: 16px; font-weight: 300; background: transparent; border: none; border-bottom: 1px solid var(--line); color: var(--ink); padding: 10px 0; width: 100%; }
+.contact-grid form input:focus, .contact-grid form select:focus, .contact-grid form textarea:focus { outline: none; border-bottom-color: var(--terra); }
+.contact-grid form input::placeholder, .contact-grid form textarea::placeholder { color: var(--ink-mute); font-style: italic; }
+.contact-grid form textarea { min-height: 80px; resize: vertical; }
+.contact-grid form button { margin-top: 12px; background: var(--navy); color: var(--canvas); border: none; padding: 20px; font-family: var(--mono); font-size: 12px; font-weight: 500; letter-spacing: 0.25em; text-transform: uppercase; cursor: pointer; transition: background .2s; display: grid; grid-template-columns: 1fr auto; align-items: center; }
+.contact-grid form button:hover { background: var(--terra); }
+.contact-note { font-family: var(--mono); font-size: 11px; color: var(--ink-mute); text-transform: none; letter-spacing: 0.05em; margin-top: 8px; }
+
+/* related */
+.related { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 1px; background: var(--ink); border: 1px solid var(--ink); }
+.related a { background: var(--canvas); padding: 56px 48px; display: grid; gap: 18px; align-content: end; text-decoration: none; color: var(--navy); position: relative; overflow: hidden; transition: background .3s, color .3s; min-height: 280px; }
+.related a:hover { background: var(--navy); color: var(--canvas); }
+.related a::before { content: ""; position: absolute; right: -120px; top: -80px; width: 320px; height: 320px; border: 1px solid var(--ink-fade); border-radius: 50%; transition: transform .5s, border-color .3s; }
+.related a:hover::before { transform: scale(1.2) rotate(20deg); border-color: rgba(244,241,222,0.18); }
+.related a .id { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--terra); position: relative; }
+.related a .name { font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 1; letter-spacing: -0.018em; position: relative; }
+.related a .name em { font-style: italic; font-weight: 400; color: var(--terra); }
+.related a:hover .name em { color: var(--gold); }
+.related a .sub { font-family: var(--display); font-style: italic; font-size: 18px; opacity: 0.65; position: relative; }
+.related a .arrow { font-family: var(--mono); font-size: 14px; color: var(--terra); position: relative; transition: transform .3s; }
+.related a:hover .arrow { transform: translateX(8px); color: var(--gold); }
+
+/* footer */
+footer { background: var(--navy); color: var(--on-d); padding: 80px 40px 40px; border-top: 1px solid var(--ink); }
+.foot-mark { font-family: var(--display); font-weight: 700; font-size: clamp(80px, 11vw, 168px); line-height: 0.92; letter-spacing: -0.025em; color: var(--canvas); margin: 0 0 56px; border-bottom: 1px solid var(--on-d-line); padding-bottom: 32px; }
+.foot-mark em { font-style: italic; font-weight: 400; color: var(--terra); }
+.foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
+.foot-grid .col .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.foot-grid .col a { color: var(--canvas); text-decoration: none; display: block; padding: 4px 0; transition: color .2s; }
+.foot-grid .col a:hover { color: var(--terra); }
+.foot-grid .col p { color: var(--on-d-soft); font-size: 14px; margin: 0 0 8px; }
+.foot-grid .col p strong { color: var(--canvas); font-weight: 500; }
+.foot-bar { margin-top: 48px; padding-top: 24px; border-top: 1px solid var(--on-d-line); display: grid; grid-template-columns: 1fr 1fr 1fr; font-family: var(--mono); font-size: 11px; color: var(--on-d-mute); }
+.foot-bar > *:nth-child(2) { text-align: center; }
+.foot-bar > *:nth-child(3) { text-align: right; }
+
+/* reveals */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal-stagger.in > * { opacity: 1; transform: none; }
+.reveal-stagger.in > *:nth-child(1){transition-delay:.04s} .reveal-stagger.in > *:nth-child(2){transition-delay:.12s} .reveal-stagger.in > *:nth-child(3){transition-delay:.20s} .reveal-stagger.in > *:nth-child(4){transition-delay:.28s} .reveal-stagger.in > *:nth-child(5){transition-delay:.36s} .reveal-stagger.in > *:nth-child(6){transition-delay:.44s}
+
+/* ── MOBILE ─────────────────────────────────────────── */
+.nav-toggle {
+  display: none;
+  background: none; border: none; cursor: pointer;
+  padding: 8px; color: var(--ink); font-size: 22px; line-height: 1;
+  font-family: var(--body);
+}
+
+@media (max-width: 1024px) {
+  nav.top { grid-template-columns: 1fr auto auto; gap: 12px; padding: 18px 24px; }
+  nav.top .links { display: none; }
+  nav.top .links.open {
+    display: flex; flex-direction: column; gap: 0;
+    position: fixed; top: 60px; left: 0; right: 0;
+    background: var(--canvas); z-index: 48;
+    border-bottom: 2px solid var(--terra);
+    box-shadow: 0 8px 24px rgba(61,64,91,0.12);
+  }
+  nav.top .links.open a { display: block; padding: 14px 24px; border-bottom: 1px solid var(--line); font-size: 13px; }
+  nav.top .links.open a::after { display: none; }
+  nav.top .right .num,
+  nav.top .cta { display: none; }
+  .nav-toggle { display: block; }
+  .filing { display: none; }
+  .context { display: none; }
+
+  .subhero { padding: 130px 24px 48px; grid-template-columns: 1fr; }
+  .subhero-meta { max-width: 100%; }
+  .site-pane { min-height: unset; aspect-ratio: 3/4; }
+
+  section.scene { padding: 80px 24px; }
+  .scene-head { grid-template-columns: 1fr; gap: 24px; }
+  .scene-head .marker { position: static; }
+  .scene-head .num { font-size: 64px; }
+
+  .stair { grid-template-columns: repeat(2, 1fr); }
+  .stair .step:nth-child(1), .stair .step:nth-child(2),
+  .stair .step:nth-child(3), .stair .step:nth-child(4) { transform: none; }
+  .stair .step:nth-child(2), .stair .step:nth-child(4) { border-right: none; }
+  .stair .step:hover, .stair .step:nth-child(2):hover,
+  .stair .step:nth-child(3):hover, .stair .step:nth-child(4):hover { transform: none; background: var(--bone); }
+
+  .path-grid { grid-template-columns: 1fr; }
+  .path-card { border-right: none; }
+
+  .tower { grid-template-columns: 1fr; }
+  .tower-spine { position: static; max-width: 320px; margin-inline: auto; }
+  .tower-spine svg { max-height: 420px; width: auto; margin-inline: auto; display: block; }
+
+  .bg-editorial { grid-template-columns: 1fr; }
+  .bg-pull { position: static; }
+
+  .contact-grid { grid-template-columns: 1fr; }
+  .contact-grid .left { border-right: none; border-bottom: 1px solid var(--ink); }
+
+  .related { grid-template-columns: 1fr; }
+
+  .foot-grid { grid-template-columns: repeat(2, 1fr); }
+}
+
+@media (max-width: 640px) {
+  nav.top { padding: 14px 20px; }
+  nav.top .links.open { top: 54px; }
+
+  .subhero { padding: 108px 20px 40px; }
+  .subhero h1 { font-size: clamp(32px, 9vw, 56px); }
+  .subhero-sub { font-size: 18px; }
+  .subhero-meta { grid-template-columns: 1fr; }
+  .site-pane { display: block; }
+
+  section.scene { padding: 64px 20px; }
+
+  .stair { grid-template-columns: 1fr; }
+  .stair .step { border-right: none; border-bottom: 1px solid var(--line); }
+  .stair .step:last-child { border-bottom: none; }
+
+  .tower-spine { max-width: 260px; }
+  .tower-spine svg { max-height: 360px; }
+
+  .path-grid { grid-template-columns: 1fr; }
+
+  .ribbon { margin: 0 -20px; padding: 28px 32px; grid-template-columns: 1fr; gap: 16px; }
+
+  .contact-grid .left, .contact-grid .right { padding: 36px 20px; }
+  .contact-grid .left .reach a { grid-template-columns: 56px 1fr auto; }
+
+  .foot-grid { grid-template-columns: 1fr; }
+  .foot-bar { grid-template-columns: 1fr; gap: 6px; }
+  .foot-bar > *:nth-child(2), .foot-bar > *:nth-child(3) { text-align: left; }
+  .foot-mark { font-size: clamp(48px, 12vw, 80px); margin-bottom: 32px; }
+  footer { padding: 48px 20px 24px; }
+
+  .floor { grid-template-columns: 1fr; gap: 12px; padding: 28px 24px; }
+  .floor:hover { transform: none; }
+  .floor .n { font-size: 40px; }
+  .floor .when { border-left: none; border-top: 1px solid var(--line); padding-left: 0; padding-top: 12px; text-align: left; align-self: start; }
+}
+
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="bar" id="progressBar"></div></div>
+
+<nav class="top">
+  <div class="brand"><a href="index.html" style="color:inherit;text-decoration:none;">Giovanni <em>Serrano</em></a></div>
+  <div class="links">
+    <a href="service-template-invest.html">Invest</a>
+    <a href="service-template-scale.html">Scale</a>
+    <a href="service-template-develop.html">Develop</a>
+    <a href="service-template-sell.html" class="active">Sell</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#portfolio">Work</a>
+  </div>
+  <div class="right">
+    <div class="num">DRE #02282434</div>
+    <a class="cta" href="#contact">Free pricing strategy <span>&rarr;</span></a>
+  </div>
+  <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
+</nav>
+
+<div class="context">
+  <div class="crumb">
+    <a href="index.html">Home</a><span class="sep">/</span><span class="now">Sell &middot; Maximize your exit value</span>
+  </div>
+  <div></div>
+  <div class="next">
+    <a href="service-template-develop.html">&larr; 03 &middot; Develop</a>
+  </div>
+</div>
+
+
+<!-- ════════ HERO ════════ -->
+<section class="subhero">
+  <div class="subhero-left">
+    <div class="subhero-eyebrow">
+      <span class="num">04 / 04</span>
+      <span>&middot;</span>
+      <span>Sell &middot; Service Brief D</span>
+    </div>
+    <h1>
+      <span style="display:block;">Most agents price backward.</span>
+      <span style="display:block;"><em>I price upward.</em></span>
+    </h1>
+    <p class="subhero-sub">Most agents price a home by looking backward at what your neighbors sold for. I evaluate your home like a developer. Before we ever put a sign in the yard, I run the same three-approach valuation that bank appraisers use. I run the income approach, check the replacement cost, and analyze the lot for ADU or SB 9 development upside. If your property has hidden land value, we don&rsquo;t let the next buyer capture that profit. We price it into your sale.</p>
+    <div class="subhero-meta">
+      <div class="cell">
+        <div class="k">Best For</div>
+        <div class="v">Homeowners<br><em>upgrading or relocating</em></div>
+      </div>
+      <div class="cell">
+        <div class="k">Typical Property</div>
+        <div class="v">Single-family<br><em>&amp; small multifamily</em></div>
+      </div>
+      <div class="cell">
+        <div class="k">Strategy</div>
+        <div class="v">Highest-and-best<br><em>use valuation</em></div>
+      </div>
+    </div>
+    <div class="subhero-scroll">
+      <span class="down"></span>
+      <span>Scroll &middot; the strategy unfolds</span>
+    </div>
+  </div>
+
+  <!-- VALUATION illustration -->
+  <div class="site-pane" id="sitepane">
+    <span class="label">D &middot; Valuation Model &middot; Three-Approach &middot; Sell</span>
+    <span class="corner">San Diego &middot; CA</span>
+    <svg viewBox="-10 0 640 570" preserveAspectRatio="xMidYMid meet" aria-hidden="true" style="transform: translateY(16.9px);">
+      <!-- engineering grid -->
+      <g stroke="rgba(61,64,91,0.09)" stroke-width="0.5" fill="none">
+        <path d="M0 60 L600 60 M0 120 L600 120 M0 180 L600 180 M0 240 L600 240 M0 300 L600 300 M0 360 L600 360 M0 420 L600 420 M0 480 L600 480"></path>
+        <path d="M60 0 L60 540 M120 0 L120 540 M180 0 L180 540 M240 0 L240 540 M300 0 L300 540 M360 0 L360 540 M420 0 L420 540 M480 0 L480 540 M540 0 L540 540"></path>
+      </g>
+
+      <!-- property outline -->
+      <rect x="60" y="60" width="480" height="420" fill="none" stroke="#3D405B" stroke-width="2" class="sp-draw d1" pathLength="1"></rect>
+
+      <!-- house footprint -->
+      <rect x="100" y="240" width="200" height="200" fill="#3D405B" stroke="#3D405B" stroke-width="1.5" class="sp-draw d2" pathLength="1"></rect>
+      <rect x="100" y="240" width="200" height="200" fill="#3D405B" class="sp-fade f2"></rect>
+      <text x="200" y="330" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#F4F1DE" letter-spacing="2" class="sp-fade f2">EXISTING</text>
+      <text x="200" y="348" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#F4F1DE" letter-spacing="2" class="sp-fade f2">HOME</text>
+      <text x="200" y="370" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(244,241,222,0.65)" letter-spacing="1.5" class="sp-fade f3">1,800 SF</text>
+
+      <!-- valuation approach 1: Sales Comparison (top-left) -->
+      <rect x="100" y="80" width="180" height="120" fill="#E07A5F" stroke="#3D405B" stroke-width="1.5" class="sp-draw d3" pathLength="1"></rect>
+      <rect x="100" y="80" width="180" height="120" fill="#E07A5F" opacity="0.92" class="sp-fade f3"></rect>
+      <text x="190" y="120" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#F4F1DE" letter-spacing="2" class="sp-fade f3">APPROACH 01</text>
+      <text x="190" y="140" text-anchor="middle" font-family="Lora, serif" font-size="16" fill="#F4F1DE" font-weight="700" class="sp-fade f3">Sales Comp</text>
+      <text x="190" y="162" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="rgba(244,241,222,0.85)" letter-spacing="1" class="sp-fade f3">$1.15M</text>
+
+      <!-- valuation approach 2: Income (top-right) -->
+      <rect x="320" y="80" width="180" height="120" fill="#E07A5F" stroke="#3D405B" stroke-width="1.5" class="sp-draw d3" pathLength="1"></rect>
+      <rect x="320" y="80" width="180" height="120" fill="#E07A5F" opacity="0.92" class="sp-fade f3"></rect>
+      <text x="410" y="120" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#F4F1DE" letter-spacing="2" class="sp-fade f3">APPROACH 02</text>
+      <text x="410" y="140" text-anchor="middle" font-family="Lora, serif" font-size="16" fill="#F4F1DE" font-weight="700" class="sp-fade f3">Income</text>
+      <text x="410" y="162" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="rgba(244,241,222,0.85)" letter-spacing="1" class="sp-fade f3">$1.22M</text>
+
+      <!-- valuation approach 3: Cost (mid-right) -->
+      <rect x="340" y="260" width="180" height="120" fill="#C85A3A" stroke="#3D405B" stroke-width="1.5" class="sp-draw d4" pathLength="1"></rect>
+      <rect x="340" y="260" width="180" height="120" fill="#C85A3A" opacity="0.92" class="sp-fade f4"></rect>
+      <text x="430" y="300" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#F4F1DE" letter-spacing="2" class="sp-fade f4">APPROACH 03</text>
+      <text x="430" y="320" text-anchor="middle" font-family="Lora, serif" font-size="16" fill="#F4F1DE" font-weight="700" class="sp-fade f4">Cost</text>
+      <text x="430" y="342" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="rgba(244,241,222,0.85)" letter-spacing="1" class="sp-fade f4">$1.08M</text>
+
+      <!-- HBU premium (bottom-right, gold) -->
+      <rect x="340" y="400" width="180" height="60" fill="#F2CC8F" stroke="#3D405B" stroke-width="1.5" class="sp-draw d4" pathLength="1"></rect>
+      <rect x="340" y="400" width="180" height="60" fill="#F2CC8F" opacity="0.92" class="sp-fade f4"></rect>
+      <text x="430" y="425" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="2" class="sp-fade f4">HBU PREMIUM</text>
+      <text x="430" y="445" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="12" fill="rgba(61,64,91,0.85)" letter-spacing="1" class="sp-fade f4">+$85K</text>
+
+      <!-- reconciled value label -->
+      <g class="sp-fade f5">
+        <text x="300" y="520" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#E07A5F" letter-spacing="3">RECONCILED LIST PRICE: $1.28M</text>
+      </g>
+
+      <!-- connector lines -->
+      <g stroke="#E07A5F" stroke-width="1" stroke-dasharray="4 3" class="sp-fade f5">
+        <line x1="190" y1="200" x2="190" y2="238"></line>
+        <line x1="410" y1="200" x2="430" y2="258"></line>
+        <line x1="430" y1="380" x2="430" y2="398"></line>
+      </g>
+    </svg>
+    <div class="scale-bar">
+      <span>Sales</span><span>Income</span><span>Cost</span><span>HBU</span><span>Reconciled</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ EARLY CTA RIBBON ════════ -->
+<section class="scene" style="padding: 0 40px; border-top: 1px solid var(--line);">
+  <div class="ribbon reveal">
+    <div class="text">Curious what your home is actually worth? <strong>Send me the address &mdash; I'll run the valuation for free.</strong></div>
+    <a href="#contact" class="btn"><span>Get a free pricing strategy</span><span>&rarr;</span></a>
+  </div>
+</section>
+
+<!-- ════════ THE STRATEGY — stair ════════ -->
+<section class="scene bone" id="strategy" data-screen-label="02 Strategy">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">02</div>
+      <div class="label">The strategy</div>
+    </div>
+    <div>
+      <h2 class="reveal">Why a developer&rsquo;s valuation gets you<br>a <em>higher price.</em></h2>
+      <p class="sub reveal">Selling a property shouldn&rsquo;t rely on a sunny open house and a hope. It relies on defensible math. When we list your home, we&rsquo;re optimizing for four advantages standard agents miss.</p>
+    </div>
+  </div>
+
+  <div class="stair reveal-stagger">
+    <div class="step">
+      <div class="num">01</div>
+      <h3>Your lot might be worth more than the house.</h3>
+      <p>If your lot is eligible for an SB 9 split or a detached ADU, it changes who wants to buy it. <strong>We aren&rsquo;t just selling a 3-bedroom house &mdash; we&rsquo;re selling a small-scale development opportunity.</strong> Identifying that upside expands your buyer pool and raises your price ceiling.</p>
+    </div>
+    <div class="step">
+      <div class="num">02</div>
+      <h3>Two buyer pools pay more than one.</h3>
+      <p>If the valuation shows your home appeals to investors or developers, we don&rsquo;t run one marketing campaign &mdash; we run two. <strong>The lifestyle of your home goes to families. The hard data, proformas, and development upside go to my network of investors.</strong></p>
+    </div>
+    <div class="step">
+      <div class="num">03</div>
+      <h3>Defensible pricing stops appraisal cuts.</h3>
+      <p>Listings priced on three comps and a guess get appraisal cuts. <strong>When the buyer&rsquo;s appraiser shows up, I hand them a documented analysis &mdash; Sales Comparison, Income Approach, Cost Approach.</strong> We defend your contract price with institutional math.</p>
+    </div>
+    <div class="step">
+      <div class="num">04</div>
+      <h3>The Military Relocation / PCS math.</h3>
+      <p>If you&rsquo;re an active-duty family facing a PCS, the first question isn&rsquo;t <em>how do I sell?</em> &mdash; it&rsquo;s <em>should I sell at all?</em> Before listing, we run the rent-vs-sell proforma. <strong>Sometimes the best financial move is to keep the asset. I&rsquo;ll tell you that upfront.</strong></p>
+    </div>
+  </div>
+  <div class="stair-label">
+    <span>01 &middot; 02 &middot; 03 &middot; 04 &middot; four advantages</span>
+    <span>Developer&rsquo;s lens</span>
+  </div>
+</section>
+
+<!-- ════════ VALUATION — path grid ════════ -->
+<section class="scene" id="valuation" data-screen-label="03 Valuation">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">03</div>
+      <div class="label">How I model your price</div>
+    </div>
+    <div>
+      <h2 class="reveal">The three-approach valuation,<br><em>line by line.</em></h2>
+      <p class="sub reveal">The same framework a bank&rsquo;s appraiser uses &mdash; applied to your home before the listing goes live. Each approach answers a different question. Reconciled together, they give a price the buyer&rsquo;s appraiser can&rsquo;t credibly cut.</p>
+    </div>
+  </div>
+
+  <div class="path-grid reveal-stagger">
+    <div class="path-card">
+      <div class="id">Approach 01</div>
+      <div class="range"><em>Sales</em></div>
+      <h3>Sales Comparison.</h3>
+      <p>Pull verified recent sales and adjust line-by-line for time, location, view, design, condition, and finish. <strong>This is the baseline.</strong></p>
+    </div>
+    <div class="path-card">
+      <div class="id">Approach 02</div>
+      <div class="range"><em>Income</em></div>
+      <h3>Income Approach.</h3>
+      <p>What your home would rent for, valued at the local San Diego market cap rate. <strong>This is what an investor would pay for your property as a performing asset.</strong></p>
+    </div>
+    <div class="path-card">
+      <div class="id">Approach 03</div>
+      <div class="range"><em>Cost</em></div>
+      <h3>Cost Approach.</h3>
+      <p>Land value plus what it would cost to rebuild today, less depreciation. <strong>The sanity check.</strong></p>
+    </div>
+    <div class="path-card">
+      <div class="id">Approach 04</div>
+      <div class="range"><em>HBU</em></div>
+      <h3>Highest-and-Best-Use Premium.</h3>
+      <p>The developer&rsquo;s lens. Added value if your lot qualifies for SB 9, SB 1123, the State Density Bonus, or ADU stacking. <strong>We add this premium to your list price so you capture the equity &mdash; not the developer who buys it.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ RIBBON ════════ -->
+<section class="scene" style="padding: 0 40px;">
+  <div class="ribbon reveal">
+    <div class="text">Want to know what the three-approach model says about <strong>your home?</strong></div>
+    <a href="#contact" class="btn"><span>Request a pricing strategy</span><span>&rarr;</span></a>
+  </div>
+</section>
+
+<!-- ════════ THE PROCESS — tower ════════ -->
+<section class="scene bone" id="process" data-screen-label="04 Process">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">04</div>
+      <div class="label">The process</div>
+    </div>
+    <div>
+      <h2 class="reveal">Five stages &mdash; from valuation<br>to <em>your next asset.</em></h2>
+      <p class="sub reveal">Five steps. Same framework on every listing &mdash; whether it&rsquo;s a $700K condo or a $2M home. The first two happen before the sign goes in the yard. That&rsquo;s where most of the price is created.</p>
+    </div>
+  </div>
+
+  <div class="tower">
+    <div class="tower-spine">
+      <div class="lab">Sell sequence</div>
+      <svg viewBox="0 0 240 320" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g stroke="rgba(61,64,91,0.12)" stroke-width="0.5" fill="none"><path d="M0 60 L240 60 M0 120 L240 120 M0 180 L240 180 M0 240 L240 240"/></g>
+        <line x1="30" y1="300" x2="210" y2="300" stroke="#3D405B" stroke-width="2"/>
+        <g stroke="#3D405B" stroke-width="0.6"><line x1="40" y1="300" x2="30" y2="314"/><line x1="60" y1="300" x2="50" y2="314"/><line x1="80" y1="300" x2="70" y2="314"/><line x1="100" y1="300" x2="90" y2="314"/><line x1="120" y1="300" x2="110" y2="314"/><line x1="140" y1="300" x2="130" y2="314"/><line x1="160" y1="300" x2="150" y2="314"/><line x1="180" y1="300" x2="170" y2="314"/><line x1="200" y1="300" x2="190" y2="314"/></g>
+        <rect x="50" y="244" width="140" height="48" fill="#F4F1DE" stroke="#3D405B" stroke-width="1.4"/>
+        <text x="120" y="272" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="2">01 &middot; STRATEGY</text>
+        <rect x="50" y="196" width="140" height="48" fill="#EDE8D5" stroke="#3D405B" stroke-width="1.4"/>
+        <text x="120" y="224" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="2">02 &middot; VALUATION</text>
+        <rect x="50" y="148" width="140" height="48" fill="#F4F1DE" stroke="#3D405B" stroke-width="1.4"/>
+        <text x="120" y="176" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="2">03 &middot; MARKETING</text>
+        <rect x="50" y="100" width="140" height="48" fill="#EDE8D5" stroke="#3D405B" stroke-width="1.4"/>
+        <text x="120" y="128" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="2">04 &middot; NEGOTIATE</text>
+        <rect x="50" y="52" width="140" height="48" fill="#E07A5F" stroke="#3D405B" stroke-width="1.4"/>
+        <text x="120" y="80" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#F4F1DE" letter-spacing="2">05 &middot; TRADE-UP</text>
+        <path d="M40 52 L200 52 L195 40 L45 40 Z" fill="#F2CC8F"/>
+      </svg>
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.18em;color:var(--ink-mute);margin-top:14px;">&uarr; Top of stack: next asset.</div>
+    </div>
+
+    <div class="floors reveal-stagger">
+      <div class="floor">
+        <div class="n">01</div>
+        <div class="body">
+          <h3>Strategy session &amp; the &ldquo;should you sell?&rdquo; test.</h3>
+          <p>First call, no listing agreement. We talk through your goals, your timeline, your existing mortgage, your tax situation, and what you&rsquo;d want to do with the proceeds. <strong>The honest first question is: should you sell at all?</strong> If you have a 2.75% mortgage and don&rsquo;t actually need to move, the math might say hold it. If you have $600K of dead equity and a clear next move, the math says go.</p>
+        </div>
+        <div class="when">Initial call</div>
+      </div>
+      <div class="floor">
+        <div class="n">02</div>
+        <div class="body">
+          <h3>The valuation &amp; prep.</h3>
+          <p>An in-person walkthrough at the home, then the three-approach analysis. <strong>Repairs that actually recover their cost</strong> &mdash; paint, landscaping, minor fixes, a few targeted upgrades &mdash; get done. Overimprovements that wouldn&rsquo;t return their cost don&rsquo;t. Staging, architectural photography, drone where the lot tells a story, twilight where the home does. <em>This is where 5&ndash;10% of the sale price lives.</em></p>
+        </div>
+        <div class="when">1&ndash;2 weeks</div>
+      </div>
+      <div class="floor">
+        <div class="n">03</div>
+        <div class="body">
+          <h3>Dual-audience marketing launch.</h3>
+          <p>Listing goes live with the full package: MLS, professional photography, property website, targeted social, broker network outreach, and a coordinated open-house schedule. <strong>If the valuation showed your home appeals to investors or developers &mdash; not just families &mdash; separate marketing materials go out to each pool.</strong> Lifestyle imagery for families. Hard data, proformas, and development upside for the investor network.</p>
+        </div>
+        <div class="when">Active listing</div>
+      </div>
+      <div class="floor">
+        <div class="n">04</div>
+        <div class="body">
+          <h3>Negotiation &amp; escrow.</h3>
+          <p>Offers come in. We evaluate them on price <em>and</em> terms &mdash; financing contingency, inspection contingency, close timeline, seller credits, leaseback if you need time to move. <strong>The best offer is rarely just the highest number.</strong> Once accepted, I quarterback escrow: appraisal defense, inspection negotiations, title, lender milestones, and the final walkthrough.</p>
+        </div>
+        <div class="when">30&ndash;45 days</div>
+      </div>
+      <div class="floor">
+        <div class="n">05</div>
+        <div class="body">
+          <h3>Trade-up or 1031 exchange coordination.</h3>
+          <p>Most agents stop at Step 4. If you&rsquo;re redeploying proceeds into income property &mdash; duplex, fourplex, or small multifamily &mdash; Step 5 is where I run the buy-side in parallel. <strong>Underwriting your next acquisition before the listing agreement.</strong> If the property is investment, not primary, we use a 1031 exchange instead &mdash; strict 45-day identification, 180-day close, qualified intermediary holds the funds.</p>
+        </div>
+        <div class="when">If applicable</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ BACKGROUND (dark) ════════ -->
+<section class="scene dark" id="background" data-screen-label="05 Background">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num" style="color:var(--gold);">05</div>
+      <div class="label">My background</div>
+    </div>
+    <div>
+      <h2 class="reveal">The construction site and the<br><em>spreadsheet, both.</em></h2>
+    </div>
+  </div>
+
+  <div class="bg-editorial">
+    <div>
+      <p class="lead reveal">My UC San Diego program in Real Estate &amp; Development was project-based &mdash; the institutional toolkit, applied to real deals. But before any of the academic work, I spent years on construction sites in Tijuana with my family &mdash; three generations of <em>small developers.</em></p>
+      <p class="reveal">By 16, I was working land transactions. By 18, I was on construction sites planning, financing, building, and leasing. Today, I look at your home through the eyes of a developer. <strong>I evaluate buildings on their NOI for a living.</strong> That changes how I underwrite acquisitions &mdash; and it fundamentally changes how I price and sell your home.</p>
+    </div>
+
+    <div class="bg-pull reveal">
+      <div class="lab">Core thesis</div>
+      <div class="quote">I evaluate buildings on their NOI for a living. That changes how I price and sell your home.</div>
+      <div class="credit">Giovanni Serrano &middot; 2026</div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CONTACT ════════ -->
+<section class="scene bone" id="contact" data-screen-label="06 Contact">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">06</div>
+      <div class="label">Let&rsquo;s talk</div>
+    </div>
+    <div>
+      <h2 class="reveal">Let&rsquo;s get your home <em>sold.</em></h2>
+      <p class="sub reveal">Send me the address. We&rsquo;ll meet at the home, walk through your goals and timeline, and I&rsquo;ll come back with a pricing strategy, a marketing plan, and a clear path to close. Free, in-person, no listing agreement.</p>
+    </div>
+  </div>
+
+  <div class="contact-grid reveal">
+    <div class="left">
+      <div>
+        <div class="lab">Free pricing strategy</div>
+        <h3>One address.<br><em>Then a plan.</em></h3>
+      </div>
+      <p class="pitch">No fees, no obligation. Send me the address and I&rsquo;ll come back with a three-approach valuation, a marketing plan, and a clear path to close.</p>
+      <div class="reach">
+        <a href="tel:6196178584"><span class="k">Call</span><span>619.617.8584</span><span>&rarr;</span></a>
+        <a href="mailto:giovanni@giovanniserrano.com"><span class="k">Email</span><span>giovanni@giovanniserrano.com</span><span>&rarr;</span></a>
+        <a href="https://giovanniserrano.com"><span class="k">Web</span><span>giovanniserrano.com</span><span>&rarr;</span></a>
+      </div>
+    </div>
+    <div class="right">
+      <form onsubmit="event.preventDefault(); this.querySelector('button span:first-child').textContent='Sent &middot; response within 24 hrs';">
+        <div><label>Name</label><input type="text" placeholder="Your name" required></div>
+        <div><label>Email</label><input type="email" placeholder="your@email.com" required></div>
+        <div><label>Phone</label><input type="tel" placeholder="619.555.0000"></div>
+        <div><label>I&rsquo;m Looking To</label>
+          <select required>
+            <option value="" selected>Select your goal</option>
+            <option>Request a sell strategy session</option>
+            <option>Talk through whether selling makes sense at all</option>
+            <option>Get a three-approach valuation</option>
+            <option>PCS / military relocation &mdash; sell vs. rent analysis</option>
+            <option>Sell and trade up to multifamily</option>
+            <option>Coordinate a 1031 exchange (investment property)</option>
+            <option>Just exploring the market</option>
+          </select>
+        </div>
+        <div><label>Property Address <span style="color:var(--ink-mute);text-transform:none;letter-spacing:0;">(if you have one)</span></label><textarea placeholder="Street address, San Diego CA &mdash; or just describe your situation."></textarea></div>
+        <button type="submit"><span>Request a sell strategy session</span><span>&rarr;</span></button>
+        <p class="contact-note">Your information is never shared. Response within 24 hours.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ RELATED ════════ -->
+<section class="scene" id="related" data-screen-label="07 Related">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">07</div>
+      <div class="label">Other services</div>
+    </div>
+    <div>
+      <h2 class="reveal">Three other ways<br>I work with clients.</h2>
+    </div>
+  </div>
+
+  <div class="related reveal">
+    <a href="service-template-invest.html">
+      <div class="id">A &middot; Invest</div>
+      <div class="name">Your first <em>multifamily.</em></div>
+      <div class="sub">Modeled before you offer.</div>
+      <div class="arrow">Read brief &rarr;</div>
+    </a>
+    <a href="service-template-scale.html">
+      <div class="id">B &middot; Scale</div>
+      <div class="name">Your <em>portfolio.</em></div>
+      <div class="sub">Sharper underwriting on the next deal.</div>
+      <div class="arrow">Read brief &rarr;</div>
+    </a>
+    <a href="service-template-develop.html">
+      <div class="id">C &middot; Develop</div>
+      <div class="name">Build <em>more</em> than you think.</div>
+      <div class="sub">SB 9, ADU law, end-to-end project management.</div>
+      <div class="arrow">Read brief &rarr;</div>
+    </a>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer>
+  <p class="foot-mark">Move with<br><em>intention.</em></p>
+  <div class="foot-grid">
+    <div class="col"><div class="k">Brand</div><p><strong>Giovanni Serrano</strong></p><p>Multifamily Investment &amp; Development Advisor.<br>San Diego, California.</p></div>
+    <div class="col"><div class="k">Sub-pages</div><a href="service-template-invest.html">Invest</a><a href="service-template-scale.html">Scale</a><a href="service-template-develop.html">Develop</a><a href="service-template-sell.html">Sell</a><a href="index.html#sample">Sample analysis</a></div>
+    <div class="col"><div class="k">Reach</div><a href="tel:6196178584">619.617.8584</a><a href="mailto:giovanni@giovanniserrano.com">giovanni@giovanniserrano.com</a><a href="#">San Diego, CA</a></div>
+    <div class="col"><div class="k">Compliance</div><p>DRE #02282434</p><p>&copy; 2026 Giovanni Serrano Real Estate</p></div>
+  </div>
+  <div class="foot-bar">
+    <span>v4.0 &middot; 2026 &middot; Soft Golden Hour</span>
+    <span>Lora &middot; Inter &middot; JetBrains Mono</span>
+    <span>Built from scratch. Built to last.</span>
+  </div>
+</footer>
+
+<script>
+const io = new IntersectionObserver((e) => { e.forEach(x => { if (x.isIntersecting) { x.target.classList.add('in'); io.unobserve(x.target); } }); }, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+const spObs = new IntersectionObserver((e) => { e.forEach(x => { if (x.isIntersecting) x.target.classList.add('in'); }); }, { threshold: 0.25 });
+const sp = document.getElementById('sitepane');
+if (sp) spObs.observe(sp);
+
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => { const t = document.querySelector(a.getAttribute('href')); if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' }); } });
+});
+
+const progressBar = document.getElementById('progressBar');
+window.addEventListener('scroll', () => { const h = document.documentElement; progressBar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + '%'; }, { passive: true });
+
+const spSvg = document.querySelector('.site-pane svg');
+if (spSvg) window.addEventListener('scroll', () => { const y = window.scrollY; if (y < 800) spSvg.style.transform = 'translateY(' + (y * 0.05) + 'px)'; }, { passive: true });
+
+const navBtn = document.querySelector('.nav-toggle');
+const navMenu = document.querySelector('nav.top .links');
+if (navBtn && navMenu) {
+  navBtn.addEventListener('click', () => {
+    navMenu.classList.toggle('open');
+    navBtn.textContent = navMenu.classList.contains('open') ? '✕' : '☰';
+  });
+  document.addEventListener('click', (e) => {
+    if (!e.target.closest('nav.top')) {
+      navMenu.classList.remove('open');
+      navBtn.textContent = '☰';
+    }
+  });
+}
+
+function applyDesktopZoom() {
+  const w = window.innerWidth;
+  document.documentElement.style.zoom = w > 1920 ? (w / 1920) : '';
+}
+applyDesktopZoom();
+window.addEventListener('resize', applyDesktopZoom);
+</script>
+</body>
+</html>

@@ -1,0 +1,470 @@
+<!-- METADATA
+  @style: creative-agency
+  @complexity: 3
+  @animation-deps: gsap
+  @responsive: true
+  @description: Full-viewport hero with animated CSS gradient simulating video background, dark overlay, bold white text, navigation hint, and scroll-triggered content reveal.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero - Video Background</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-bg: #000000;
+    --color-text: #ffffff;
+    --color-text-muted: rgba(255,255,255,0.5);
+    --color-accent: #ff4d4d;
+    --font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif;
+    --container-max: 1280px;
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: var(--font-family);
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  /* Simulated Video BG */
+  .hero {
+    position: relative;
+    height: 100vh;
+    min-height: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+  }
+
+  .hero__video-bg {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background:
+      linear-gradient(125deg, #1a0a2e 0%, #16213e 25%, #0a3d62 50%, #1a0a2e 75%, #2d1b69 100%);
+    background-size: 400% 400%;
+    animation: gradientFlow 12s ease infinite;
+  }
+
+  .hero__video-bg::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      radial-gradient(circle at 30% 40%, rgba(255,77,77,0.12) 0%, transparent 50%),
+      radial-gradient(circle at 70% 60%, rgba(88,28,135,0.15) 0%, transparent 50%),
+      radial-gradient(circle at 50% 80%, rgba(6,182,212,0.1) 0%, transparent 40%);
+    background-size: 200% 200%;
+    animation: gradientFlow2 8s ease-in-out infinite alternate;
+  }
+
+  .hero__video-bg::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+      repeating-linear-gradient(
+        0deg,
+        transparent,
+        transparent 2px,
+        rgba(255,255,255,0.008) 2px,
+        rgba(255,255,255,0.008) 4px
+      );
+    pointer-events: none;
+  }
+
+  @keyframes gradientFlow {
+    0% { background-position: 0% 50%; }
+    25% { background-position: 50% 0%; }
+    50% { background-position: 100% 50%; }
+    75% { background-position: 50% 100%; }
+    100% { background-position: 0% 50%; }
+  }
+
+  @keyframes gradientFlow2 {
+    0% { background-position: 0% 0%; }
+    100% { background-position: 100% 100%; }
+  }
+
+  .hero__overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0,0,0,0.45);
+    z-index: 1;
+  }
+
+  .hero__content {
+    position: relative;
+    z-index: 2;
+    text-align: center;
+    max-width: 900px;
+    padding: 0 32px;
+  }
+
+  .hero__eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 13px;
+    font-weight: 500;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--color-text-muted);
+    margin-bottom: 32px;
+    opacity: 0;
+  }
+
+  .hero__eyebrow-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--color-accent);
+    animation: pulse 2s ease-in-out infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; transform: scale(1); }
+    50% { opacity: 0.5; transform: scale(1.3); }
+  }
+
+  .hero__headline {
+    font-size: clamp(40px, 7vw, 88px);
+    font-weight: 700;
+    line-height: 1.05;
+    letter-spacing: -0.03em;
+    margin-bottom: 28px;
+    opacity: 0;
+  }
+
+  .hero__headline em {
+    font-style: italic;
+    color: var(--color-accent);
+  }
+
+  .hero__desc {
+    font-size: clamp(16px, 1.5vw, 19px);
+    line-height: 1.7;
+    color: var(--color-text-muted);
+    max-width: 580px;
+    margin: 0 auto 48px;
+    font-weight: 400;
+    opacity: 0;
+  }
+
+  .hero__actions {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    opacity: 0;
+  }
+
+  .hero__btn {
+    padding: 16px 36px;
+    font-size: 15px;
+    font-weight: 600;
+    font-family: var(--font-family);
+    border-radius: 4px;
+    cursor: pointer;
+    text-decoration: none;
+    transition: all 0.3s ease;
+    border: none;
+  }
+
+  .hero__btn--filled {
+    background: var(--color-accent);
+    color: #fff;
+  }
+
+  .hero__btn--filled:hover {
+    background: #e63e3e;
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(255,77,77,0.3);
+  }
+
+  .hero__btn--ghost {
+    background: transparent;
+    color: var(--color-text);
+    border: 1px solid rgba(255,255,255,0.2);
+  }
+
+  .hero__btn--ghost:hover {
+    border-color: rgba(255,255,255,0.5);
+    background: rgba(255,255,255,0.05);
+  }
+
+  /* Bottom Bar */
+  .hero__bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    z-index: 2;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 48px;
+    border-top: 1px solid rgba(255,255,255,0.08);
+    opacity: 0;
+  }
+
+  .hero__nav-hint {
+    font-size: 13px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .hero__scroll-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    font-size: 13px;
+    color: var(--color-text-muted);
+    letter-spacing: 0.05em;
+  }
+
+  .hero__scroll-wheel {
+    width: 20px;
+    height: 32px;
+    border: 1.5px solid rgba(255,255,255,0.3);
+    border-radius: 10px;
+    position: relative;
+  }
+
+  .hero__scroll-wheel::after {
+    content: '';
+    position: absolute;
+    top: 6px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 3px;
+    height: 8px;
+    background: rgba(255,255,255,0.6);
+    border-radius: 2px;
+    animation: scrollWheel 2s ease-in-out infinite;
+  }
+
+  @keyframes scrollWheel {
+    0% { transform: translateX(-50%) translateY(0); opacity: 1; }
+    100% { transform: translateX(-50%) translateY(10px); opacity: 0; }
+  }
+
+  /* Reveal Section */
+  .reveal {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--color-bg);
+    padding: 120px 32px;
+  }
+
+  .reveal__container {
+    max-width: var(--container-max);
+    width: 100%;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+
+  .reveal__text {
+    opacity: 0;
+  }
+
+  .reveal__label {
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-accent);
+    margin-bottom: 20px;
+  }
+
+  .reveal__heading {
+    font-size: clamp(28px, 3.5vw, 48px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.02em;
+    margin-bottom: 24px;
+  }
+
+  .reveal__body {
+    font-size: 17px;
+    line-height: 1.75;
+    color: var(--color-text-muted);
+  }
+
+  .reveal__image {
+    opacity: 0;
+    border-radius: 8px;
+    overflow: hidden;
+  }
+
+  .reveal__image img {
+    display: block;
+    width: 100%;
+    height: 480px;
+    object-fit: cover;
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero__bottom {
+      padding: 20px 32px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero__bottom {
+      flex-direction: column;
+      gap: 16px;
+      padding: 20px 24px;
+    }
+    .reveal__container {
+      grid-template-columns: 1fr;
+      gap: 48px;
+    }
+    .reveal__image img {
+      height: 320px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .hero__content {
+      padding: 0 16px;
+    }
+    .hero__actions {
+      flex-direction: column;
+      width: 100%;
+    }
+    .hero__btn {
+      width: 100%;
+      text-align: center;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero__video-bg"></div>
+  <div class="hero__overlay"></div>
+
+  <div class="hero__content">
+    <p class="hero__eyebrow">
+      <span class="hero__eyebrow-dot"></span>
+      Award-winning studio
+    </p>
+    <h1 class="hero__headline">
+      We create <em>stories</em><br>through design
+    </h1>
+    <p class="hero__desc">
+      A multidisciplinary creative agency crafting brand identities, digital products, and immersive experiences for forward-thinking companies.
+    </p>
+    <div class="hero__actions">
+      <a href="#" class="hero__btn hero__btn--filled">View our work</a>
+      <a href="#" class="hero__btn hero__btn--ghost">Get in touch</a>
+    </div>
+  </div>
+
+  <div class="hero__bottom">
+    <span class="hero__nav-hint">Est. 2018 / New York</span>
+    <div class="hero__scroll-indicator">
+      <div class="hero__scroll-wheel"></div>
+      <span>Scroll to explore</span>
+    </div>
+  </div>
+</section>
+
+<section class="reveal">
+  <div class="reveal__container">
+    <div class="reveal__text">
+      <p class="reveal__label">About us</p>
+      <h2 class="reveal__heading">We believe in the power of thoughtful design</h2>
+      <p class="reveal__body">Every project starts with a question: how can we make this better? We collaborate closely with our clients, combining strategy with craft to deliver work that resonates and endures.</p>
+    </div>
+    <div class="reveal__image">
+      <img src="https://picsum.photos/800/600?random=5" alt="Studio work">
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    gsap.registerPlugin(ScrollTrigger);
+
+    // Hero entrance
+    const heroTl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+    heroTl
+      .to('.hero__eyebrow', { opacity: 1, y: 0, duration: 0.7 })
+      .from('.hero__eyebrow', { y: 20, duration: 0.7 }, '<')
+      .to('.hero__headline', { opacity: 1, y: 0, duration: 0.8 }, '-=0.4')
+      .from('.hero__headline', { y: 30, duration: 0.8 }, '<')
+      .to('.hero__desc', { opacity: 1, y: 0, duration: 0.6 }, '-=0.4')
+      .from('.hero__desc', { y: 20, duration: 0.6 }, '<')
+      .to('.hero__actions', { opacity: 1, y: 0, duration: 0.5 }, '-=0.3')
+      .from('.hero__actions', { y: 15, duration: 0.5 }, '<')
+      .to('.hero__bottom', { opacity: 1, duration: 0.8 }, '-=0.3');
+
+    // Scroll reveal
+    gsap.to('.reveal__text', {
+      opacity: 1,
+      x: 0,
+      duration: 0.8,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.reveal',
+        start: 'top 70%',
+        toggleActions: 'play none none none',
+      }
+    });
+    gsap.from('.reveal__text', {
+      x: -40,
+      scrollTrigger: {
+        trigger: '.reveal',
+        start: 'top 70%',
+        toggleActions: 'play none none none',
+      }
+    });
+
+    gsap.to('.reveal__image', {
+      opacity: 1,
+      x: 0,
+      duration: 0.8,
+      delay: 0.2,
+      ease: 'power2.out',
+      scrollTrigger: {
+        trigger: '.reveal',
+        start: 'top 70%',
+        toggleActions: 'play none none none',
+      }
+    });
+    gsap.from('.reveal__image', {
+      x: 40,
+      scrollTrigger: {
+        trigger: '.reveal',
+        start: 'top 70%',
+        toggleActions: 'play none none none',
+      }
+    });
+  });
+</script>
+</body>
+</html>

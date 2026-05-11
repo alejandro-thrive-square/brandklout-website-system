@@ -1,0 +1,89 @@
+{
+  "meta": {
+    "name": "Creative Agency",
+    "style": "creative-agency",
+    "version": "1.0",
+    "description": "Bold, award-winning creative studio aesthetic. Dark canvas with neon accents, dramatic contrasts, and expressive typography.",
+    "author": "Webzite Studio"
+  },
+  "colors": {
+    "primary":        { "value": "#FF3366", "type": "color", "description": "Hot pink — primary brand color, CTAs, links" },
+    "primary-light":  { "value": "#FF6690", "type": "color", "description": "Softer pink for hover states" },
+    "primary-dark":   { "value": "#CC2952", "type": "color", "description": "Deeper pink for active/pressed states" },
+    "secondary":      { "value": "#00FF87", "type": "color", "description": "Neon green — secondary accent, highlights" },
+    "secondary-dark": { "value": "#00CC6C", "type": "color", "description": "Subdued green for text on dark bg" },
+    "accent":         { "value": "#7B61FF", "type": "color", "description": "Electric purple — tertiary highlights" },
+    "background":     { "value": "#0A0A0A", "type": "color", "description": "Near-black — primary canvas" },
+    "background-alt": { "value": "#111111", "type": "color", "description": "Slightly lighter black — offset sections" },
+    "surface":        { "value": "#161616", "type": "color", "description": "Dark gray — card and panel surfaces" },
+    "surface-hover":  { "value": "#1F1F1F", "type": "color", "description": "Lighter gray — hover surfaces" },
+    "text-primary":   { "value": "#FFFFFF", "type": "color", "description": "Pure white — primary text" },
+    "text-secondary": { "value": "#B0B0B0", "type": "color", "description": "Light gray — secondary text" },
+    "text-muted":     { "value": "#666666", "type": "color", "description": "Medium gray — muted text, captions" },
+    "border":         { "value": "#2A2A2A", "type": "color", "description": "Dark gray — borders" },
+    "border-subtle":  { "value": "#1A1A1A", "type": "color", "description": "Very subtle borders" },
+    "success":        { "value": "#00FF87", "type": "color", "description": "Neon green — success (shared with secondary)" },
+    "warning":        { "value": "#FFB800", "type": "color", "description": "Bright amber — warning states" },
+    "error":          { "value": "#FF3366", "type": "color", "description": "Hot pink — error (shared with primary)" }
+  },
+  "typography": {
+    "font-primary": {
+      "value": "'Space Grotesk', -apple-system, BlinkMacSystemFont, sans-serif",
+      "type": "fontFamily",
+      "weights": [300, 400, 500, 600, 700]
+    },
+    "font-secondary": {
+      "value": "'Syne', 'Arial Black', sans-serif",
+      "type": "fontFamily",
+      "weights": [400, 500, 600, 700, 800]
+    },
+    "font-mono": {
+      "value": "'Space Mono', 'Courier New', monospace",
+      "type": "fontFamily",
+      "weights": [400, 700]
+    },
+    "scale": {
+      "xs":      { "value": "0.75rem",   "lineHeight": "1rem",     "letterSpacing": "0.08em",  "fontWeight": 400 },
+      "sm":      { "value": "0.875rem",  "lineHeight": "1.25rem",  "letterSpacing": "0.04em",  "fontWeight": 400 },
+      "base":    { "value": "1rem",      "lineHeight": "1.6rem",   "letterSpacing": "0.01em",  "fontWeight": 300 },
+      "lg":      { "value": "1.25rem",   "lineHeight": "1.75rem",  "letterSpacing": "0em",     "fontWeight": 400 },
+      "xl":      { "value": "1.5rem",    "lineHeight": "2rem",     "letterSpacing": "-0.01em", "fontWeight": 500 },
+      "2xl":     { "value": "2rem",      "lineHeight": "2.5rem",   "letterSpacing": "-0.02em", "fontWeight": 600 },
+      "3xl":     { "value": "2.75rem",   "lineHeight": "3.25rem",  "letterSpacing": "-0.03em", "fontWeight": 700 },
+      "4xl":     { "value": "3.75rem",   "lineHeight": "4.25rem",  "letterSpacing": "-0.04em", "fontWeight": 700 },
+      "5xl":     { "value": "5rem",      "lineHeight": "5.25rem",  "letterSpacing": "-0.05em", "fontWeight": 800 },
+      "display": { "value": "7rem",      "lineHeight": "7rem",     "letterSpacing": "-0.06em", "fontWeight": 800 }
+    }
+  },
+  "spacing": {
+    "unit": 8,
+    "scale": {
+      "xs":  { "value": "0.5rem",   "px": 8 },
+      "sm":  { "value": "1rem",     "px": 16 },
+      "md":  { "value": "2rem",     "px": 32 },
+      "lg":  { "value": "3rem",     "px": 48 },
+      "xl":  { "value": "5rem",     "px": 80 },
+      "2xl": { "value": "8rem",     "px": 128 },
+      "3xl": { "value": "12rem",    "px": 192 },
+      "4xl": { "value": "16rem",    "px": 256 }
+    }
+  },
+  "radius": {
+    "sm":   { "value": "0px" },
+    "md":   { "value": "0px" },
+    "lg":   { "value": "2px" },
+    "xl":   { "value": "4px" },
+    "full": { "value": "9999px" }
+  },
+  "shadows": {
+    "sm": { "value": "0 0 10px rgba(255, 51, 102, 0.1)" },
+    "md": { "value": "0 0 20px rgba(255, 51, 102, 0.15), 0 0 40px rgba(123, 97, 255, 0.05)" },
+    "lg": { "value": "0 0 40px rgba(255, 51, 102, 0.2), 0 0 80px rgba(123, 97, 255, 0.1)" },
+    "xl": { "value": "0 0 60px rgba(255, 51, 102, 0.25), 0 0 120px rgba(0, 255, 135, 0.1)" }
+  },
+  "transitions": {
+    "fast": { "value": "all 150ms cubic-bezier(0.33, 1, 0.68, 1)", "duration": "150ms", "easing": "cubic-bezier(0.33, 1, 0.68, 1)" },
+    "base": { "value": "all 300ms cubic-bezier(0.33, 1, 0.68, 1)", "duration": "300ms", "easing": "cubic-bezier(0.33, 1, 0.68, 1)" },
+    "slow": { "value": "all 700ms cubic-bezier(0.16, 1, 0.3, 1)",  "duration": "700ms", "easing": "cubic-bezier(0.16, 1, 0.3, 1)" }
+  }
+}

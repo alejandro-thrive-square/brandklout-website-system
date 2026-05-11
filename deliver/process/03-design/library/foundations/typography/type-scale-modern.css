@@ -1,0 +1,188 @@
+/* ==========================================================================
+   TYPE SCALE: MODERN
+   Geometric sans-serif scale for SaaS, tech, and startup projects.
+   Uses Inter with fluid typography via clamp().
+
+   Usage: Link this file + import the Google Font, then apply
+   var(--font-size-*) to your elements.
+   ========================================================================== */
+
+/* --- Google Fonts Import --- */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap');
+
+/* --- Font Family Tokens --- */
+:root {
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-secondary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-mono: 'JetBrains Mono', 'Fira Code', 'Cascadia Code', 'Consolas', monospace;
+}
+
+/* --- Fluid Type Scale ---
+   Each step uses clamp(min, preferred, max) for smooth scaling.
+   Min viewport: 375px (mobile)
+   Max viewport: 1440px (desktop)
+   ========================================================================== */
+:root {
+  /* xs — labels, overlines, badges */
+  --font-size-xs: clamp(0.6875rem, 0.66rem + 0.12vw, 0.75rem);
+  --line-height-xs: 1rem;
+  --letter-spacing-xs: 0.01em;
+
+  /* sm — captions, helper text, metadata */
+  --font-size-sm: clamp(0.8125rem, 0.79rem + 0.1vw, 0.875rem);
+  --line-height-sm: 1.25rem;
+  --letter-spacing-sm: 0.005em;
+
+  /* base — body text */
+  --font-size-base: clamp(0.9375rem, 0.91rem + 0.12vw, 1rem);
+  --line-height-base: 1.5rem;
+  --letter-spacing-base: 0em;
+
+  /* lg — large body, lead paragraphs */
+  --font-size-lg: clamp(1.0625rem, 1.02rem + 0.19vw, 1.125rem);
+  --line-height-lg: 1.75rem;
+  --letter-spacing-lg: -0.005em;
+
+  /* xl — h5, subheadings */
+  --font-size-xl: clamp(1.125rem, 1.06rem + 0.28vw, 1.25rem);
+  --line-height-xl: 1.75rem;
+  --letter-spacing-xl: -0.01em;
+
+  /* 2xl — h4 */
+  --font-size-2xl: clamp(1.25rem, 1.13rem + 0.56vw, 1.5rem);
+  --line-height-2xl: 2rem;
+  --letter-spacing-2xl: -0.015em;
+
+  /* 3xl — h3 */
+  --font-size-3xl: clamp(1.5rem, 1.29rem + 0.94vw, 1.875rem);
+  --line-height-3xl: 2.25rem;
+  --letter-spacing-3xl: -0.02em;
+
+  /* 4xl — h2 */
+  --font-size-4xl: clamp(1.75rem, 1.43rem + 1.41vw, 2.25rem);
+  --line-height-4xl: 2.5rem;
+  --letter-spacing-4xl: -0.025em;
+
+  /* 5xl — h1 */
+  --font-size-5xl: clamp(2.25rem, 1.78rem + 2.07vw, 3rem);
+  --line-height-5xl: 3.25rem;
+  --letter-spacing-5xl: -0.03em;
+
+  /* display — hero headlines */
+  --font-size-display: clamp(2.75rem, 2.03rem + 3.17vw, 3.75rem);
+  --line-height-display: 1.05;
+  --letter-spacing-display: -0.035em;
+}
+
+/* --- Font Weight Tokens --- */
+:root {
+  --font-weight-light: 300;
+  --font-weight-regular: 400;
+  --font-weight-medium: 500;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+  --font-weight-extrabold: 800;
+}
+
+/* --- Semantic Typography Classes --- */
+
+/* Body text */
+.text-body {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-base);
+  line-height: var(--line-height-base);
+  letter-spacing: var(--letter-spacing-base);
+  font-weight: var(--font-weight-regular);
+}
+
+.text-body-lg {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-lg);
+  line-height: var(--line-height-lg);
+  letter-spacing: var(--letter-spacing-lg);
+  font-weight: var(--font-weight-regular);
+}
+
+/* Small / caption text */
+.text-sm {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-sm);
+  line-height: var(--line-height-sm);
+  letter-spacing: var(--letter-spacing-sm);
+  font-weight: var(--font-weight-regular);
+}
+
+.text-xs {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  letter-spacing: var(--letter-spacing-xs);
+  font-weight: var(--font-weight-medium);
+  text-transform: uppercase;
+}
+
+/* Headings */
+.heading-display {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-display);
+  line-height: var(--line-height-display);
+  letter-spacing: var(--letter-spacing-display);
+  font-weight: var(--font-weight-bold);
+}
+
+.heading-1 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-5xl);
+  line-height: var(--line-height-5xl);
+  letter-spacing: var(--letter-spacing-5xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.heading-2 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-4xl);
+  line-height: var(--line-height-4xl);
+  letter-spacing: var(--letter-spacing-4xl);
+  font-weight: var(--font-weight-bold);
+}
+
+.heading-3 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-3xl);
+  line-height: var(--line-height-3xl);
+  letter-spacing: var(--letter-spacing-3xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+.heading-4 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-2xl);
+  line-height: var(--line-height-2xl);
+  letter-spacing: var(--letter-spacing-2xl);
+  font-weight: var(--font-weight-semibold);
+}
+
+.heading-5 {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xl);
+  line-height: var(--line-height-xl);
+  letter-spacing: var(--letter-spacing-xl);
+  font-weight: var(--font-weight-medium);
+}
+
+/* Monospace */
+.text-mono {
+  font-family: var(--font-mono);
+  font-size: 0.9em;
+  letter-spacing: -0.02em;
+}
+
+/* Overline / label */
+.text-overline {
+  font-family: var(--font-primary);
+  font-size: var(--font-size-xs);
+  line-height: var(--line-height-xs);
+  letter-spacing: 0.08em;
+  font-weight: var(--font-weight-semibold);
+  text-transform: uppercase;
+}

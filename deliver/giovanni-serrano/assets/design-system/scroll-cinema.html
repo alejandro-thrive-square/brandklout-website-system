@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Giovanni Serrano — Scroll Cinema · 2 Variants</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  :root { --terra:#E07A5F; --navy:#3D405B; --gold:#F2CC8F; --canvas:#F4F1DE; --bone:#EDE8D5; --ink:#3D405B; --line:rgba(61,64,91,0.14); }
+  html,body{margin:0;background:#2C2F4A;color:#F4F1DE;font-family:'Inter',-apple-system,sans-serif;}
+</style>
+<script src="https://unpkg.com/react@18.3.1/umd/react.development.js" integrity="sha384-hD6/rw4ppMLGNu3tX5cjIb+uRZ7UkRJ6BPkLpg4hAu/6onKUg4lLsHAs9EBPT82L" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/react-dom@18.3.1/umd/react-dom.development.js" integrity="sha384-u6aeetuaXnQ38mYT8rp6sbXaQe3NL9t+IBXmnYxwkUI2Hw4bsp2Wvmx4yRQF1uAm" crossorigin="anonymous"></script>
+<script src="https://unpkg.com/@babel/standalone@7.29.0/babel.min.js" integrity="sha384-m08KidiNqLdpJqLq95G/LEi8Qvjl/xUYll3QILypMoQ65QorJ9Lvtp2RXYGBFj1y" crossorigin="anonymous"></script>
+<script type="text/babel" src="canvas/design-canvas.jsx"></script>
+</head>
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const { useEffect, useState } = React;
+
+function FrameTile({ src, label }) {
+  return (
+    <div style={{ position:'absolute', inset:0, background:'#F4F1DE', display:'flex', flexDirection:'column' }}>
+      <div style={{
+        flex:'0 0 auto', display:'grid', gridTemplateColumns:'auto 1fr auto',
+        gap:16, alignItems:'center', padding:'12px 18px',
+        background:'#3D405B', color:'#F4F1DE',
+        fontFamily:'JetBrains Mono, monospace', fontSize:11, letterSpacing:'0.18em', textTransform:'uppercase'
+      }}>
+        <span style={{ color:'#F2CC8F' }}>{label}</span>
+        <span style={{ textAlign:'center', color:'rgba(244,241,222,0.55)' }}>scroll inside the frame · then drag the canvas to compare</span>
+        <a href={src} target="_blank" rel="noreferrer" style={{ color:'#E07A5F', textDecoration:'none' }}>open ↗</a>
+      </div>
+      <iframe
+        src={src}
+        title={label}
+        style={{ flex:'1 1 auto', width:'100%', border:'none', background:'#F4F1DE' }}
+      />
+    </div>
+  );
+}
+
+function App() {
+  return (
+    <DesignCanvas
+      title="Giovanni Serrano · Scroll Cinema"
+      subtitle="Two complete site directions, side-by-side. Each frame is the live page — scroll inside to walk the experience, then drag the canvas to compare scenes across variants."
+    >
+      <DCSection id="hero" title="Variant A vs. Variant B">
+        <DCArtboard id="va" label="A · Editorial Cinema · dark, type-driven, WebGL gradient" width={1440} height={3200}>
+          <FrameTile src="variants/variant-a.html" label="A · Editorial Cinema" />
+        </DCArtboard>
+        <DCArtboard id="vb" label="B · Architectural Split · light, blueprint, horizontal services" width={1440} height={3200}>
+          <FrameTile src="variants/variant-b.html" label="B · Architectural Split" />
+        </DCArtboard>
+      </DCSection>
+
+      <DCSection id="notes" title="The two directions in one line">
+        <DCArtboard id="na" label="A · Note" width={720} height={520}>
+          <div style={{position:'absolute',inset:0,background:'#3D405B',color:'#F4F1DE',padding:'56px 56px',display:'flex',flexDirection:'column',gap:18,fontFamily:'Inter, sans-serif'}}>
+            <div style={{fontFamily:'JetBrains Mono, monospace',fontSize:11,letterSpacing:'0.28em',textTransform:'uppercase',color:'#F2CC8F'}}>Variant A · Editorial Cinema</div>
+            <h2 style={{fontFamily:'Lora, serif',fontWeight:700,fontSize:56,lineHeight:0.98,letterSpacing:'-0.018em',margin:'8px 0 0'}}>The brand as <em style={{fontStyle:'italic',fontWeight:400,color:'#F2CC8F'}}>cinema.</em></h2>
+            <p style={{fontFamily:'Lora, serif',fontStyle:'italic',fontSize:20,lineHeight:1.5,color:'rgba(244,241,222,0.78)',margin:'12px 0 0'}}>Dark navy backdrop, animated gradient hero, a stacking sticky-tabs services act, full-bleed proforma, italic typographic moments. Restrained, premium, ”reads like a magazine.”</p>
+            <ul style={{margin:'auto 0 0',padding:0,listStyle:'none',display:'grid',gap:10,fontSize:13,color:'rgba(244,241,222,0.7)'}}>
+              <li>·  Hero: WebGL-style oklch gradient + huge italic display</li>
+              <li>·  Services: sticky tabs A/B/C/D, scroll-driven swap</li>
+              <li>·  Sample: dark proforma with Verdict + Upside</li>
+              <li>·  Mood: confident, quiet, editorial</li>
+            </ul>
+          </div>
+        </DCArtboard>
+        <DCArtboard id="nb" label="B · Note" width={720} height={520}>
+          <div style={{position:'absolute',inset:0,background:'#F4F1DE',color:'#3D405B',padding:'56px 56px',display:'flex',flexDirection:'column',gap:18,fontFamily:'Inter, sans-serif',backgroundImage:'repeating-linear-gradient(0deg,transparent 0 47px,rgba(61,64,91,0.08) 47px 48px),repeating-linear-gradient(90deg,transparent 0 47px,rgba(61,64,91,0.08) 47px 48px)'}}>
+            <div style={{fontFamily:'JetBrains Mono, monospace',fontSize:11,letterSpacing:'0.28em',textTransform:'uppercase',color:'#E07A5F'}}>Variant B · Architectural Split</div>
+            <h2 style={{fontFamily:'Lora, serif',fontWeight:700,fontSize:56,lineHeight:0.98,letterSpacing:'-0.018em',margin:'8px 0 0'}}>The brand as <em style={{fontStyle:'italic',fontWeight:400,color:'#E07A5F'}}>blueprint.</em></h2>
+            <p style={{fontFamily:'Lora, serif',fontStyle:'italic',fontSize:20,lineHeight:1.5,color:'rgba(61,64,91,0.7)',margin:'12px 0 0'}}>Warm canvas, architectural elevation hero, a horizontal-scroll services rail, terra-dominant CTAs, square corners. Direct, structural, ”reads like a set of construction documents.”</p>
+            <ul style={{margin:'auto 0 0',padding:0,listStyle:'none',display:'grid',gap:10,fontSize:13,color:'rgba(61,64,91,0.7)'}}>
+              <li>·  Hero: front-elevation drawing + dimensional callouts</li>
+              <li>·  Services: horizontal-scroll rail, 4 cards on a track</li>
+              <li>·  About: portrait + sticky pull-quote + 4-step timeline</li>
+              <li>·  Mood: structural, terra-forward, technical</li>
+            </ul>
+          </div>
+        </DCArtboard>
+      </DCSection>
+    </DesignCanvas>
+  );
+}
+
+ReactDOM.createRoot(document.getElementById('root')).render(<App />);
+</script>
+</body>
+</html>

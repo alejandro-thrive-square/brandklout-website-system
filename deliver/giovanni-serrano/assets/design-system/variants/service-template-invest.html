@@ -1,0 +1,1661 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Invest — Your first multifamily · Giovanni Serrano</title>
+<meta name="viewport" content="width=1440">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root {
+  --terra: #E07A5F; --terra-d: #C85A3A;
+  --navy: #3D405B; --navy-d: #2C2F4A;
+  --gold: #F2CC8F; --canvas: #F4F1DE; --bone: #EDE8D5; --bone-d: #E5DFCB;
+  --ink: #3D405B; --ink-soft: rgba(61,64,91,0.65); --ink-mute: rgba(61,64,91,0.42); --ink-fade: rgba(61,64,91,0.18); --line: rgba(61,64,91,0.14);
+  --on-d: #F4F1DE; --on-d-soft: rgba(244,241,222,0.62); --on-d-mute: rgba(244,241,222,0.32); --on-d-line: rgba(244,241,222,0.12);
+  --display: 'Lora', Georgia, serif;
+  --body: 'Inter', -apple-system, sans-serif;
+  --mono: 'JetBrains Mono', ui-monospace, Menlo, monospace;
+}
+* { box-sizing: border-box; }
+html, body { margin: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--canvas);
+  color: var(--ink);
+  font-family: var(--body); font-weight: 300;
+  font-size: 16px; line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  overflow-x: hidden;
+}
+img { max-width: 100%; display: block; }
+em { font-style: italic; }
+
+/* ───── scroll progress (top, terra) ───── */
+.progress {
+  position: fixed; top: 0; left: 0; right: 0;
+  height: 2px; background: transparent; z-index: 60;
+}
+.progress .bar {
+  height: 100%; width: 0;
+  background: linear-gradient(90deg, var(--terra), var(--gold));
+  transition: width .12s linear;
+}
+
+/* ───── Top nav ───── */
+nav.top {
+  position: fixed; top: 0; left: 0; right: 0;
+  z-index: 50;
+  display: grid; grid-template-columns: 1fr auto 1fr;
+  gap: 32px; align-items: center;
+  padding: 22px 40px;
+  background: var(--canvas);
+  border-bottom: 1px solid var(--line);
+  font-family: var(--body); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+}
+nav.top .brand { font-family: var(--display); font-weight: 700; font-size: 20px; letter-spacing: -0.01em; text-transform: none; color: var(--navy); }
+nav.top .brand em { color: var(--terra); }
+nav.top .links { display: flex; gap: 40px; justify-content: center; }
+nav.top .links a { color: var(--ink); text-decoration: none; transition: color .2s; position: relative; }
+nav.top .links a::after { content: ""; position: absolute; left: 0; right: 100%; bottom: -6px; height: 1px; background: var(--terra); transition: right .35s ease; }
+nav.top .links a:hover::after, nav.top .links a.active::after { right: 0; }
+nav.top .links a.active { color: var(--terra); }
+nav.top .right { justify-self: end; display: flex; align-items: center; gap: 24px; }
+nav.top .right .num { color: var(--ink-soft); font-family: var(--mono); }
+nav.top .cta {
+  padding: 12px 22px; background: var(--navy); color: var(--canvas);
+  text-decoration: none; transition: background .2s;
+  display: inline-flex; gap: 12px; align-items: center;
+}
+nav.top .cta:hover { background: var(--terra); }
+
+/* ───── Page-context strip (replaces global marquee on sub pages) ───── */
+.context {
+  position: fixed; top: 64px; left: 0; right: 0; z-index: 49;
+  height: 32px; background: var(--terra); color: var(--canvas);
+  display: grid; grid-template-columns: auto 1fr auto;
+  align-items: center; gap: 24px; padding: 0 40px;
+  border-bottom: 1px solid var(--terra-d);
+  font-family: var(--mono); font-size: 11px;
+  letter-spacing: 0.22em; text-transform: uppercase;
+}
+.context .crumb { color: var(--canvas); opacity: .85; }
+.context .crumb a { color: inherit; text-decoration: none; transition: opacity .2s; }
+.context .crumb a:hover { opacity: 1; }
+.context .crumb .sep { margin: 0 12px; color: var(--gold); }
+.context .now { color: var(--canvas); font-weight: 500; }
+.context .next { display: inline-flex; align-items: center; gap: 14px; color: var(--gold); }
+.context .next a { color: var(--canvas); text-decoration: none; }
+.context .next a:hover { color: var(--gold); }
+
+/* ───── Filing tag — vertical, on left edge ───── */
+.filing {
+  position: fixed; top: 50%; left: 16px; transform: translateY(-50%);
+  z-index: 48;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.32em;
+  text-transform: uppercase; color: var(--ink-mute);
+  writing-mode: vertical-rl; transform-origin: center;
+  pointer-events: none;
+  display: flex; gap: 18px; align-items: center;
+}
+.filing .dot { width: 6px; height: 6px; background: var(--terra); border-radius: 50%; }
+
+/* ───── HERO (sub) ───── */
+.subhero {
+  padding: 152px 40px 64px;
+  position: relative;
+  display: grid; grid-template-columns: 1.05fr 1fr;
+  gap: 64px; align-items: stretch;
+  background:
+    repeating-linear-gradient(0deg, transparent 0 47px, var(--ink-fade) 47px 48px),
+    repeating-linear-gradient(90deg, transparent 0 47px, var(--ink-fade) 47px 48px),
+    var(--canvas);
+}
+.subhero::after {
+  content: ""; position: absolute; left: 40px; right: 40px; bottom: 0;
+  height: 1px; background: var(--line);
+}
+.subhero-left { padding-top: 16px; position: relative; z-index: 1; }
+
+.subhero-eyebrow {
+  display: inline-flex; align-items: center; gap: 14px;
+  font-family: var(--mono); font-size: 11px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase;
+  color: var(--terra); margin-bottom: 28px;
+  padding: 8px 14px;
+  border: 1px solid var(--terra);
+  background: rgba(224,122,95,0.06);
+}
+.subhero-eyebrow .num { color: var(--ink-mute); }
+.subhero-eyebrow .dot { color: var(--gold); }
+
+.subhero h1 {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(40px, 5.2vw, 80px);
+  line-height: 0.98; letter-spacing: -0.018em;
+  color: var(--navy); margin: 0 0 32px;
+}
+.subhero h1 .l1 { display: block; }
+.subhero h1 em {
+  font-style: italic; font-weight: 400; color: var(--terra);
+  display: inline-block; position: relative;
+}
+.subhero h1 em::before {
+  content: ""; position: absolute; left: -4px; right: -4px; bottom: 6%;
+  height: 14%; background: var(--gold); opacity: 0.4; z-index: -1;
+  transform: skewX(-6deg);
+}
+
+.subhero-sub {
+  font-family: var(--display); font-style: italic; font-size: 22px;
+  line-height: 1.5; color: var(--ink-soft);
+  max-width: 640px; margin: 0 0 48px;
+}
+.subhero-sub::first-letter {
+  font-family: var(--display); font-weight: 700; font-style: normal;
+  float: left; font-size: 64px; line-height: 0.9; padding: 6px 12px 0 0;
+  color: var(--terra);
+}
+
+.subhero-meta {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 1px; background: var(--line);
+  border: 1px solid var(--line);
+  max-width: 640px;
+}
+.subhero-meta .cell { background: var(--canvas); padding: 22px 24px; }
+.subhero-meta .k {
+  font-family: var(--mono); font-size: 10px; font-weight: 500;
+  letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute);
+}
+.subhero-meta .v {
+  font-family: var(--display); font-weight: 700; font-size: 17px;
+  line-height: 1.25; margin-top: 10px; color: var(--navy);
+}
+.subhero-meta .v em { color: var(--terra); font-weight: 400; }
+
+/* hero scroll anchor */
+.subhero-scroll {
+  margin-top: 48px;
+  display: inline-flex; align-items: center; gap: 12px;
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--ink-mute);
+}
+.subhero-scroll .down {
+  width: 28px; height: 1px; background: var(--ink); position: relative;
+  animation: scrollHint 2.4s ease-in-out infinite;
+}
+.subhero-scroll .down::after {
+  content: ""; position: absolute; right: -2px; top: -3px;
+  width: 8px; height: 8px; border-right: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+  transform: rotate(-45deg);
+}
+@keyframes scrollHint { 0%,100% { transform: translateX(0); opacity: 1; } 50% { transform: translateX(8px); opacity: .4; } }
+
+/* ───── HERO — animated section drawing of a fourplex ───── */
+.cross-section {
+  position: relative;
+  border: 1px solid var(--ink);
+  background: var(--bone);
+  overflow: hidden;
+  min-height: 580px;
+  display: grid;
+}
+.cross-section .label {
+  position: absolute; top: 16px; left: 16px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--ink-mute); z-index: 4;
+}
+.cross-section .corner {
+  position: absolute; top: 16px; right: 16px;
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.18em;
+  color: var(--terra); z-index: 4;
+}
+.cross-section svg { position: absolute; inset: 0; width: 100%; height: 100%; z-index: 1; }
+.cross-section .scale {
+  position: absolute; bottom: 16px; left: 16px; right: 16px;
+  display: flex; justify-content: space-between;
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.15em;
+  color: var(--ink-mute); z-index: 4;
+  border-top: 1px solid var(--ink-fade); padding-top: 8px;
+}
+
+/* draw-on animation for blueprint paths */
+.draw { stroke-dasharray: 1; stroke-dashoffset: 1; }
+.csec.in .draw { animation: draw 1.6s cubic-bezier(.25,.7,.2,1) forwards; }
+.csec.in .draw.d1 { animation-delay: .15s; }
+.csec.in .draw.d2 { animation-delay: .35s; }
+.csec.in .draw.d3 { animation-delay: .55s; }
+.csec.in .draw.d4 { animation-delay: .75s; }
+.csec.in .draw.d5 { animation-delay: .95s; }
+@keyframes draw { to { stroke-dashoffset: 0; } }
+
+.fade-late { opacity: 0; transition: opacity .8s ease; }
+.csec.in .fade-late { opacity: 1; transition-delay: 1.4s; }
+.csec.in .fade-late.l2 { transition-delay: 1.7s; }
+.csec.in .fade-late.l3 { transition-delay: 2.0s; }
+
+.unit-pulse { transform-origin: center; }
+.csec.in .unit-pulse { animation: pulse 2.4s ease-in-out infinite; animation-delay: 2.2s; }
+@keyframes pulse { 0%,100% { opacity: .9; } 50% { opacity: .55; } }
+
+/* ───── Section frame ───── */
+section.scene {
+  padding: 140px 40px;
+  position: relative;
+  border-top: 1px solid var(--line);
+}
+section.scene.bone { background: var(--bone); }
+section.scene.dark { background: var(--navy); color: var(--on-d); border-top-color: var(--on-d-line); }
+
+.scene-head {
+  display: grid; grid-template-columns: 320px 1fr;
+  gap: 96px; margin-bottom: 80px;
+  align-items: start;
+}
+.scene-head .marker { position: sticky; top: 130px; }
+.scene-head .num {
+  font-family: var(--display); font-weight: 700;
+  font-size: 88px; line-height: 0.9;
+  color: var(--terra); letter-spacing: -0.02em;
+}
+.scene-head .label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--ink); margin-top: 16px;
+  display: flex; align-items: center; gap: 12px;
+}
+section.dark .scene-head .label { color: var(--on-d); }
+.scene-head .label::before { content: ""; width: 24px; height: 1px; background: var(--terra); }
+.scene-head h2 {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(40px, 5vw, 76px);
+  line-height: 0.98; letter-spacing: -0.018em;
+  margin: 0; color: var(--navy); max-width: 1000px;
+}
+section.dark .scene-head h2 { color: var(--canvas); }
+.scene-head h2 em { font-style: italic; font-weight: 400; color: var(--terra); }
+section.dark .scene-head h2 em { color: var(--gold); }
+.scene-head .sub {
+  font-family: var(--display); font-style: italic; font-size: 22px;
+  color: var(--ink-soft); margin-top: 24px; max-width: 720px; line-height: 1.45;
+}
+section.dark .scene-head .sub { color: var(--on-d-soft); }
+
+/* ───── WHY — staggered "stair" cards with hover-lift ───── */
+.stair {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0;
+  border: 1px solid var(--ink);
+  background: var(--canvas);
+}
+.stair .step {
+  position: relative;
+  padding: 36px 28px 36px;
+  border-right: 1px solid var(--line);
+  display: grid; align-content: start; gap: 18px;
+  background: var(--canvas);
+  transition: background .35s, transform .35s;
+}
+.stair .step:nth-child(2) { transform: translateY(28px); }
+.stair .step:nth-child(3) { transform: translateY(56px); }
+.stair .step:nth-child(4) { transform: translateY(84px); border-right: none; }
+.stair .step:hover { background: var(--bone); transform: translateY(-4px); }
+.stair .step:nth-child(2):hover { transform: translateY(24px); }
+.stair .step:nth-child(3):hover { transform: translateY(52px); }
+.stair .step:nth-child(4):hover { transform: translateY(80px); }
+.stair .step .num {
+  font-family: var(--display); font-weight: 700; font-size: 64px;
+  line-height: 1; color: var(--terra); letter-spacing: -0.02em;
+}
+.stair .step .num em { font-style: italic; font-weight: 400; color: var(--ink); }
+.stair .step h3 {
+  font-family: var(--display); font-weight: 700; font-size: 24px;
+  line-height: 1.2; color: var(--navy); margin: 0; letter-spacing: -0.005em;
+}
+.stair .step p {
+  font-size: 14px; line-height: 1.7; color: var(--ink-soft); margin: 0;
+}
+.stair .step p strong { color: var(--ink); font-weight: 500; }
+.stair .step::after {
+  content: ""; position: absolute; left: 0; right: 0; top: 0; height: 2px;
+  background: var(--terra); transform: scaleX(0); transform-origin: left;
+  transition: transform .45s cubic-bezier(.2,.7,.2,1);
+}
+.stair .step:hover::after { transform: scaleX(1); }
+.stair-label {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--ink-mute);
+  margin-top: 120px; display: flex; justify-content: space-between;
+}
+
+/* ───── STRATEGY — comparison ledger ───── */
+.compare {
+  border: 1px solid var(--ink);
+  display: grid; grid-template-columns: 1fr 1fr;
+  background: var(--canvas);
+}
+.compare .col { padding: 48px; position: relative; }
+.compare .col + .col { border-left: 1px solid var(--ink); }
+.compare .col.bad { background: var(--bone); }
+.compare .col .tag {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--ink-mute); margin-bottom: 14px;
+}
+.compare .col.good .tag { color: var(--terra); }
+.compare .col h3 {
+  font-family: var(--display); font-weight: 700; font-size: 38px;
+  line-height: 1; letter-spacing: -0.012em; color: var(--navy); margin: 0 0 22px;
+}
+.compare .col.good h3 em { font-style: italic; font-weight: 400; color: var(--terra); }
+.compare .col p { color: var(--ink-soft); font-size: 14px; line-height: 1.7; margin: 0 0 16px; }
+.compare .stack {
+  margin: 28px 0 0; display: grid; gap: 8px;
+}
+.compare .stack .row {
+  display: grid; grid-template-columns: 110px 1fr auto; gap: 14px;
+  align-items: center;
+  padding: 12px 0; border-bottom: 1px solid var(--line);
+}
+.compare .stack .row .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); }
+.compare .stack .row .bar {
+  height: 8px; background: var(--ink-fade); position: relative;
+  overflow: hidden;
+}
+.compare .stack .row .bar::before {
+  content: ""; position: absolute; left: 0; top: 0; bottom: 0;
+  background: var(--ink); width: 0;
+  transition: width 1.2s cubic-bezier(.2,.7,.2,1);
+}
+.compare .col.good .stack .row .bar::before { background: var(--terra); }
+.compare.in .stack .row .bar::before { width: var(--w, 25%); }
+.compare .stack .row .v { font-family: var(--mono); font-size: 13px; font-weight: 500; color: var(--ink); font-feature-settings: "tnum"; }
+.compare .col.good .stack .row .v { color: var(--terra); }
+
+.strategy-cards {
+  margin-top: 56px;
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+}
+.strategy-cards .c { background: var(--canvas); padding: 32px 28px; display: grid; gap: 12px; align-content: start; }
+.strategy-cards .c .key {
+  font-family: var(--display); font-weight: 700; font-size: 48px;
+  color: var(--terra); line-height: 1;
+}
+.strategy-cards .c h4 { font-family: var(--display); font-weight: 700; font-size: 18px; line-height: 1.25; color: var(--navy); margin: 4px 0; }
+.strategy-cards .c p { font-size: 13px; line-height: 1.7; color: var(--ink-soft); margin: 0; }
+.strategy-cards .c p strong { color: var(--ink); font-weight: 500; }
+
+/* ───── WHY ME — editorial 3 column ───── */
+.three-col {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+}
+.three-col .item {
+  padding: 48px 32px;
+  border-right: 1px solid var(--line);
+  display: grid; gap: 18px; align-content: start;
+  position: relative;
+}
+.three-col .item:last-child { border-right: none; }
+.three-col .item .id {
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--terra);
+  display: flex; align-items: center; gap: 12px;
+}
+.three-col .item .id::after {
+  content: ""; flex: 1; height: 1px; background: var(--terra);
+  transform: scaleX(0); transform-origin: left;
+  transition: transform .8s cubic-bezier(.2,.7,.2,1);
+}
+.three-col.in .item .id::after { transform: scaleX(1); }
+.three-col.in .item:nth-child(2) .id::after { transition-delay: .15s; }
+.three-col.in .item:nth-child(3) .id::after { transition-delay: .3s; }
+.three-col .item h3 { font-family: var(--display); font-weight: 700; font-size: 28px; line-height: 1.15; letter-spacing: -0.008em; color: var(--navy); margin: 0; }
+.three-col .item h3 em { font-style: italic; font-weight: 400; color: var(--terra); }
+.three-col .item p { font-size: 14px; line-height: 1.75; color: var(--ink-soft); margin: 0; }
+.three-col .item p strong { color: var(--ink); font-weight: 500; }
+
+/* ───── PROFORMA — sticky scroll-pin "live build" ───── */
+.pin-wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.pin-steps { display: grid; gap: 80px; }
+.pin-step {
+  display: grid; grid-template-columns: 80px 1fr; gap: 28px;
+  align-items: start;
+  padding-bottom: 40px;
+  border-bottom: 1px solid var(--on-d-line);
+  opacity: 0.35; transition: opacity .5s;
+}
+.pin-step.active { opacity: 1; }
+.pin-step .n {
+  font-family: var(--display); font-weight: 700; font-size: 64px;
+  color: var(--gold); line-height: 0.9; letter-spacing: -0.02em;
+  font-feature-settings: "tnum";
+}
+.pin-step.active .n { color: var(--terra); }
+.pin-step h3 {
+  font-family: var(--display); font-weight: 700; font-size: 26px;
+  line-height: 1.2; color: var(--canvas); margin: 0 0 14px;
+  letter-spacing: -0.005em;
+}
+.pin-step.active h3 { color: var(--gold); }
+.pin-step p { font-size: 14px; line-height: 1.75; color: var(--on-d-soft); margin: 0; }
+.pin-step p strong { color: var(--canvas); font-weight: 500; }
+
+.pin-pane {
+  position: sticky; top: 130px;
+  border: 1px solid var(--on-d-line);
+  background: var(--navy-d);
+  padding: 32px;
+  display: grid; gap: 8px;
+  align-content: start;
+  height: fit-content;
+  min-height: 540px;
+}
+.pin-pane .pane-tag {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em;
+  text-transform: uppercase; color: var(--gold); margin-bottom: 8px;
+}
+.pin-pane .pane-title {
+  font-family: var(--display); font-style: italic; font-size: 20px;
+  color: var(--canvas); margin-bottom: 24px;
+  border-bottom: 1px solid var(--on-d-line); padding-bottom: 16px;
+}
+.pin-pane .ledger-row {
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: baseline; padding: 12px 0;
+  border-bottom: 1px dashed var(--on-d-line);
+  font-family: var(--mono); font-size: 13px;
+  color: var(--on-d-mute);
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .5s, transform .5s, color .3s;
+}
+.pin-pane .ledger-row.shown { opacity: 1; transform: none; color: var(--canvas); }
+.pin-pane .ledger-row .v { font-feature-settings: "tnum"; color: var(--gold); }
+.pin-pane .ledger-row.sub { font-size: 12px; color: var(--on-d-soft); }
+.pin-pane .ledger-row.sub.shown { color: var(--on-d-soft); }
+.pin-pane .ledger-row.total { border-top: 1px solid var(--terra); border-bottom: none; padding-top: 14px; margin-top: 6px; font-weight: 500; }
+.pin-pane .ledger-row.total .v { color: var(--terra); font-weight: 600; font-size: 15px; }
+.pin-pane .pane-metrics {
+  margin-top: 24px; padding-top: 20px;
+  border-top: 1px solid var(--on-d-line);
+  display: grid; grid-template-columns: repeat(4, 1fr); gap: 1px;
+  background: var(--on-d-line);
+}
+.pin-pane .pm {
+  background: var(--navy-d); padding: 14px 12px;
+  opacity: 0; transform: translateY(8px);
+  transition: opacity .6s, transform .6s;
+}
+.pin-pane .pm.shown { opacity: 1; transform: none; }
+.pin-pane .pm .k {
+  font-family: var(--mono); font-size: 9px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--gold);
+}
+.pin-pane .pm .v {
+  font-family: var(--display); font-weight: 700; font-size: 22px;
+  color: var(--canvas); margin-top: 6px; line-height: 1;
+}
+.pin-pane .pm .v em { font-style: italic; font-weight: 400; color: var(--terra); }
+
+/* ───── SAMPLE — full bleed proforma block ───── */
+.sample-block {
+  border: 1px solid var(--ink);
+  background: var(--canvas);
+  display: grid;
+  grid-template-rows: auto auto auto auto;
+}
+.sample-head {
+  display: grid; grid-template-columns: 1.4fr 1fr;
+  border-bottom: 1px solid var(--ink);
+}
+.sample-head .info { padding: 40px; border-right: 1px solid var(--ink); }
+.sample-head .info .tag { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--terra); }
+.sample-head .info h3 {
+  font-family: var(--display); font-weight: 700; font-size: 44px; line-height: 1;
+  margin: 14px 0 10px; letter-spacing: -0.012em; color: var(--navy);
+}
+.sample-head .info h3 em { font-style: italic; font-weight: 400; color: var(--terra); }
+.sample-head .info .meta { font-family: var(--mono); font-size: 12px; color: var(--ink-soft); }
+.sample-head .price {
+  background: var(--terra); color: var(--canvas);
+  padding: 40px; display: grid; align-content: center; gap: 8px;
+}
+.sample-head .price .lab { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; opacity: 0.85; }
+.sample-head .price .v { font-family: var(--display); font-weight: 700; font-size: 64px; line-height: 1; }
+.sample-head .price .terms { font-family: var(--mono); font-size: 12px; opacity: 0.85; }
+
+.sample-grid {
+  display: grid; grid-template-columns: 1fr 1fr;
+  border-bottom: 1px solid var(--line);
+}
+.sample-grid .col { padding: 36px 40px; border-right: 1px solid var(--line); }
+.sample-grid .col:last-child { border-right: none; }
+.sample-grid .col-title { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terra); margin-bottom: 18px; }
+.sample-line {
+  display: grid; grid-template-columns: 1fr auto;
+  padding: 12px 0; border-bottom: 1px solid var(--line);
+  font-family: var(--body); font-size: 14px;
+}
+.sample-line.sub { color: var(--ink-soft); }
+.sample-line .val { font-family: var(--mono); font-feature-settings: "tnum"; }
+.sample-line.total { border-top: 1px solid var(--terra); border-bottom: none; margin-top: 8px; padding-top: 16px; font-weight: 500; color: var(--ink); }
+.sample-line.total .val { font-weight: 600; }
+.sample-line.total.neg .val { color: var(--terra); }
+
+.sample-metrics {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  border-bottom: 1px solid var(--line);
+}
+.sample-metrics .m { padding: 32px 40px; border-right: 1px solid var(--line); }
+.sample-metrics .m:last-child { border-right: none; }
+.sample-metrics .k { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--ink-mute); }
+.sample-metrics .v {
+  font-family: var(--display); font-weight: 700; font-size: 56px;
+  color: var(--navy); margin-top: 12px; line-height: 1;
+  font-feature-settings: "tnum";
+}
+.sample-metrics .v em { font-style: italic; font-weight: 400; color: var(--terra); }
+.sample-metrics .v.neg { color: var(--terra); }
+
+.sample-upside {
+  padding: 36px 40px; background: var(--gold); color: var(--navy);
+  font-family: var(--display); font-style: italic; font-size: 17px; line-height: 1.55;
+}
+.sample-upside strong {
+  font-family: var(--mono); font-style: normal; font-weight: 500;
+  font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase;
+  display: block; margin-bottom: 12px; color: var(--navy);
+}
+.sample-upside em { color: var(--terra); }
+.sample-upside .num { font-family: var(--display); font-weight: 700; font-style: normal; color: var(--navy); }
+
+/* ───── Inline CTA band ───── */
+.ribbon {
+  margin: 0 -40px;
+  background: var(--terra); color: var(--canvas);
+  padding: 40px 56px;
+  display: grid; grid-template-columns: 1fr auto;
+  align-items: center; gap: 24px;
+  border-top: 1px solid var(--terra-d);
+  border-bottom: 1px solid var(--terra-d);
+  position: relative; overflow: hidden;
+}
+.ribbon::before {
+  content: ""; position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(45deg, rgba(244,241,222,0.08) 0 1px, transparent 1px 14px);
+  pointer-events: none;
+}
+.ribbon .text { font-family: var(--display); font-style: italic; font-size: 28px; line-height: 1.25; max-width: 700px; position: relative; }
+.ribbon .text strong { font-style: normal; font-weight: 500; }
+.ribbon .btn {
+  background: var(--canvas); color: var(--terra);
+  text-decoration: none; padding: 20px 28px;
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em;
+  text-transform: uppercase; font-weight: 500;
+  display: inline-flex; gap: 14px; align-items: center;
+  transition: background .2s, color .2s, transform .2s;
+  position: relative;
+}
+.ribbon .btn:hover { background: var(--navy); color: var(--canvas); transform: translateX(-4px); }
+
+/* ───── PROCESS — vertical stacked floors ───── */
+.tower {
+  display: grid;
+  grid-template-columns: 280px 1fr;
+  gap: 48px;
+  align-items: start;
+}
+.tower-spine {
+  position: sticky; top: 130px;
+  background: var(--canvas); border: 1px solid var(--ink);
+  padding: 28px;
+  display: grid; gap: 0;
+}
+.tower-spine .lab { font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--terra); margin-bottom: 16px; }
+.tower-spine svg { width: 100%; height: auto; }
+
+.floors { display: grid; gap: 0; }
+.floor {
+  border: 1px solid var(--ink);
+  background: var(--canvas);
+  display: grid; grid-template-columns: 100px 1fr auto;
+  gap: 32px; align-items: center;
+  padding: 32px 36px;
+  border-bottom: none;
+  position: relative;
+  transition: background .35s, transform .35s;
+}
+.floor:last-child { border-bottom: 1px solid var(--ink); }
+.floor:hover { background: var(--bone); transform: translateX(-6px); }
+.floor .n {
+  font-family: var(--display); font-weight: 700; font-size: 56px;
+  line-height: 1; color: var(--terra); letter-spacing: -0.02em;
+  font-feature-settings: "tnum";
+}
+.floor .body h3 {
+  font-family: var(--display); font-weight: 700; font-size: 22px;
+  line-height: 1.2; color: var(--navy); margin: 0 0 8px; letter-spacing: -0.005em;
+}
+.floor .body p { font-size: 14px; line-height: 1.7; color: var(--ink-soft); margin: 0; max-width: 700px; }
+.floor .body p strong { color: var(--ink); font-weight: 500; }
+.floor .when {
+  font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em;
+  text-transform: uppercase; color: var(--ink-mute);
+  text-align: right;
+  border-left: 1px solid var(--line); padding-left: 24px; align-self: stretch;
+  display: grid; align-content: center;
+}
+
+/* ───── BACKGROUND (dark) ───── */
+.bg-grid {
+  display: grid; grid-template-columns: 1fr 0.7fr;
+  gap: 64px; align-items: start;
+}
+.bg-grid .lead {
+  font-family: var(--display); font-style: italic; font-weight: 400;
+  font-size: 28px; line-height: 1.42;
+  color: var(--canvas); letter-spacing: -0.005em;
+  margin: 0 0 28px;
+}
+.bg-grid .lead em { color: var(--gold); }
+.bg-grid p { color: var(--on-d-soft); font-size: 15px; line-height: 1.75; margin: 0 0 18px; }
+.bg-grid p strong { color: var(--canvas); font-weight: 500; }
+
+.creds {
+  background: var(--navy-d);
+  border: 1px solid var(--on-d-line);
+  padding: 32px;
+  display: grid; gap: 16px;
+}
+.creds .lab { font-family: var(--mono); font-size: 10px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.creds .row { display: grid; grid-template-columns: 1fr auto; padding: 14px 0; border-bottom: 1px solid var(--on-d-line); font-family: var(--mono); font-size: 12px; color: var(--on-d-soft); }
+.creds .row:last-child { border-bottom: none; }
+.creds .row .v { color: var(--canvas); }
+
+/* ───── FAQ — accordion ───── */
+.faq {
+  border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink);
+}
+.faq details {
+  border-bottom: 1px solid var(--line);
+  padding: 0;
+  transition: background .25s;
+}
+.faq details:last-child { border-bottom: none; }
+.faq details[open] { background: var(--bone); }
+.faq summary {
+  list-style: none; cursor: pointer;
+  padding: 28px 8px;
+  display: grid; grid-template-columns: 60px 1fr 60px;
+  align-items: center; gap: 24px;
+  font-family: var(--display); font-weight: 700; font-size: 22px;
+  color: var(--navy); letter-spacing: -0.005em;
+  transition: color .2s;
+}
+.faq summary::-webkit-details-marker { display: none; }
+.faq summary .id {
+  font-family: var(--mono); font-size: 12px; letter-spacing: 0.22em;
+  color: var(--terra); font-weight: 500;
+}
+.faq summary .ar {
+  font-family: var(--mono); font-size: 24px; color: var(--terra); text-align: right;
+  transition: transform .35s ease;
+}
+.faq details[open] summary .ar { transform: rotate(45deg); }
+.faq details[open] summary { color: var(--terra); }
+.faq .a {
+  padding: 0 8px 32px 92px;
+  font-size: 15px; line-height: 1.75; color: var(--ink-soft);
+  max-width: 920px;
+}
+
+/* ───── CONTACT (terra split) ───── */
+.contact-grid {
+  display: grid; grid-template-columns: 1.2fr 1fr;
+  border: 1px solid var(--ink);
+}
+.contact-grid .left {
+  background: var(--terra); color: var(--canvas);
+  padding: 56px;
+  display: grid; align-content: space-between; gap: 32px;
+  border-right: 1px solid var(--ink);
+  position: relative; overflow: hidden;
+}
+.contact-grid .left::before {
+  content: '$'; position: absolute; right: -40px; bottom: -120px;
+  font-family: var(--display); font-weight: 700; font-size: 540px;
+  line-height: 1; color: rgba(244,241,222,0.08); pointer-events: none;
+}
+.contact-grid .left .lab { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: rgba(244,241,222,0.85); position: relative; }
+.contact-grid .left h3 {
+  font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 0.98;
+  letter-spacing: -0.018em; margin: 16px 0 0; position: relative;
+}
+.contact-grid .left h3 em { font-style: italic; font-weight: 400; color: var(--navy); }
+.contact-grid .left .pitch { font-family: var(--display); font-style: italic; font-size: 22px; line-height: 1.4; max-width: 460px; margin: 0; color: rgba(244,241,222,0.92); position: relative; }
+.contact-grid .left .reach { display: grid; gap: 0; font-family: var(--mono); font-size: 14px; position: relative; }
+.contact-grid .left .reach a {
+  color: var(--canvas); text-decoration: none;
+  padding: 14px 0; border-top: 1px solid rgba(244,241,222,0.25);
+  display: grid; grid-template-columns: 80px 1fr auto; gap: 16px;
+  align-items: baseline; transition: color .2s, padding .2s;
+}
+.contact-grid .left .reach a:hover { color: var(--navy); padding-left: 8px; }
+.contact-grid .left .reach a .k { font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: rgba(244,241,222,0.7); }
+
+.contact-grid .right { padding: 56px; background: var(--canvas); }
+.contact-grid form { display: grid; gap: 22px; }
+.contact-grid form label { font-family: var(--mono); font-size: 11px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--terra); display: block; margin-bottom: 6px; }
+.contact-grid form input, .contact-grid form select, .contact-grid form textarea {
+  font-family: var(--body); font-size: 16px; font-weight: 300;
+  background: transparent; border: none;
+  border-bottom: 1px solid var(--line);
+  color: var(--ink); padding: 10px 0; width: 100%;
+}
+.contact-grid form input::placeholder, .contact-grid form textarea::placeholder { color: var(--ink-mute); font-style: italic; }
+.contact-grid form input:focus, .contact-grid form select:focus, .contact-grid form textarea:focus { outline: none; border-bottom-color: var(--terra); }
+.contact-grid form textarea { min-height: 80px; resize: vertical; }
+.contact-grid form button {
+  margin-top: 12px;
+  background: var(--navy); color: var(--canvas);
+  border: none; padding: 20px;
+  font-family: var(--mono); font-size: 12px; font-weight: 500;
+  letter-spacing: 0.25em; text-transform: uppercase;
+  cursor: pointer; transition: background .2s;
+  display: grid; grid-template-columns: 1fr auto; align-items: center;
+}
+.contact-grid form button:hover { background: var(--terra); }
+.contact-note { font-family: var(--mono); font-size: 11px; color: var(--ink-mute); letter-spacing: 0.05em; text-transform: none; margin-top: 8px; }
+
+/* ───── RELATED ───── */
+.related {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 1px;
+  background: var(--ink);
+  border: 1px solid var(--ink);
+}
+.related a {
+  background: var(--canvas);
+  padding: 56px 48px;
+  display: grid; gap: 18px; align-content: end;
+  text-decoration: none; color: var(--navy);
+  position: relative; overflow: hidden;
+  transition: background .3s, color .3s;
+  min-height: 280px;
+}
+.related a:hover { background: var(--navy); color: var(--canvas); }
+.related a::before {
+  content: ""; position: absolute; right: -120px; top: -80px;
+  width: 320px; height: 320px;
+  border: 1px solid var(--ink-fade);
+  border-radius: 50%;
+  transition: transform .5s, border-color .3s;
+}
+.related a:hover::before { transform: scale(1.2) rotate(20deg); border-color: rgba(244,241,222,0.18); }
+.related a .id { font-family: var(--mono); font-size: 11px; letter-spacing: 0.28em; text-transform: uppercase; color: var(--terra); position: relative; }
+.related a .name { font-family: var(--display); font-weight: 700; font-size: 56px; line-height: 1; letter-spacing: -0.018em; position: relative; }
+.related a .name em { font-style: italic; font-weight: 400; color: var(--terra); }
+.related a:hover .name em { color: var(--gold); }
+.related a .sub { font-family: var(--display); font-style: italic; font-size: 18px; color: inherit; opacity: 0.65; position: relative; }
+.related a .arrow { font-family: var(--mono); font-size: 14px; color: var(--terra); position: relative; transition: transform .3s; }
+.related a:hover .arrow { transform: translateX(8px); color: var(--gold); }
+
+/* ───── Footer ───── */
+footer {
+  background: var(--navy); color: var(--on-d);
+  padding: 80px 40px 40px;
+  border-top: 1px solid var(--ink);
+}
+.foot-mark {
+  font-family: var(--display); font-weight: 700;
+  font-size: clamp(80px, 11vw, 168px); line-height: 0.92;
+  letter-spacing: -0.025em; color: var(--canvas); margin: 0 0 56px;
+  border-bottom: 1px solid var(--on-d-line);
+  padding-bottom: 32px;
+}
+.foot-mark em { font-style: italic; font-weight: 400; color: var(--terra); }
+.foot-grid { display: grid; grid-template-columns: 1.6fr 1fr 1fr 1fr; gap: 32px; }
+.foot-grid .col .k { font-family: var(--mono); font-size: 10px; letter-spacing: 0.22em; text-transform: uppercase; color: var(--gold); margin-bottom: 16px; }
+.foot-grid .col a { color: var(--canvas); text-decoration: none; display: block; padding: 4px 0; transition: color .2s; }
+.foot-grid .col a:hover { color: var(--terra); }
+.foot-grid .col p { color: var(--on-d-soft); font-size: 14px; margin: 0 0 8px; }
+.foot-grid .col p strong { color: var(--canvas); font-weight: 500; }
+.foot-bar {
+  margin-top: 48px; padding-top: 24px;
+  border-top: 1px solid var(--on-d-line);
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  font-family: var(--mono); font-size: 11px; color: var(--on-d-mute);
+}
+.foot-bar > *:nth-child(2) { text-align: center; }
+.foot-bar > *:nth-child(3) { text-align: right; }
+
+/* ───── Reveal animations ───── */
+.reveal { opacity: 0; transform: translateY(40px); transition: opacity 1s cubic-bezier(.2,.7,.2,1), transform 1s cubic-bezier(.2,.7,.2,1); }
+.reveal.in { opacity: 1; transform: none; }
+.reveal-stagger > * { opacity: 0; transform: translateY(24px); transition: opacity .8s cubic-bezier(.2,.7,.2,1), transform .8s cubic-bezier(.2,.7,.2,1); }
+.reveal-stagger.in > * { opacity: 1; transform: none; }
+.reveal-stagger.in > *:nth-child(1){transition-delay:.04s;} .reveal-stagger.in > *:nth-child(2){transition-delay:.12s;} .reveal-stagger.in > *:nth-child(3){transition-delay:.20s;} .reveal-stagger.in > *:nth-child(4){transition-delay:.28s;} .reveal-stagger.in > *:nth-child(5){transition-delay:.36s;} .reveal-stagger.in > *:nth-child(6){transition-delay:.44s;}
+
+/* counter-up effect base */
+.count { font-feature-settings: "tnum"; }
+</style>
+</head>
+<body>
+
+<div class="progress"><div class="bar" id="progressBar"></div></div>
+
+<nav class="top">
+  <div class="brand"><a href="index.html" style="color:inherit;text-decoration:none;">Giovanni <em>Serrano</em></a></div>
+  <div class="links">
+    <a href="invest.html" class="active">Invest</a>
+    <a href="scale.html">Scale</a>
+    <a href="develop.html">Develop</a>
+    <a href="index.html#about">About</a>
+    <a href="index.html#portfolio">Work</a>
+  </div>
+  <div class="right">
+    <div class="num">DRE #02282434</div>
+    <a class="cta" href="#contact">Get a deal review <span class="ar">→</span></a>
+  </div>
+</nav>
+
+<div class="context">
+  <div class="crumb">
+    <a href="index.html">Home</a><span class="sep">/</span><span class="now">Invest · Your first multifamily</span>
+  </div>
+  <div></div>
+  <div class="next">
+    <span>Up next</span>
+    <a href="scale.html">02 · Scale →</a>
+  </div>
+</div>
+
+<div class="filing">
+  <span>Service Brief · A · 2026</span>
+  <span class="dot"></span>
+  <span>Filed under: Investment</span>
+</div>
+
+<!-- ════════ HERO ════════ -->
+<section class="subhero" data-screen-label="01 Invest · Hero">
+  <div class="subhero-left">
+    <div class="subhero-eyebrow">
+      <span class="num">01 / 03</span>
+      <span class="dot">·</span>
+      <span>Invest · Service Brief A</span>
+    </div>
+    <h1>
+      <span class="l1">Buying your first</span>
+      <span class="l1">multifamily?</span>
+      <span class="l1"><em>Model the deal</em> first.</span>
+    </h1>
+    <p class="subhero-sub">Most first-time buyers walk into a property and try to imagine themselves living there. The right approach is the opposite — walk into the numbers first. Run the proforma. Stress the assumptions. Decide whether to fall for the property only after the math says it's worth falling for.</p>
+    <div class="subhero-meta">
+      <div class="cell">
+        <div class="k">Best For</div>
+        <div class="v"><em>First-time</em><br>multifamily buyers</div>
+      </div>
+      <div class="cell">
+        <div class="k">Typical Property</div>
+        <div class="v">Duplex · Triplex<br><em>Fourplex</em></div>
+      </div>
+      <div class="cell">
+        <div class="k">Strategy</div>
+        <div class="v">House <em>hack</em><br>+ build equity</div>
+      </div>
+    </div>
+    <div class="subhero-scroll">
+      <span class="down"></span>
+      <span>Scroll · the brief unfolds</span>
+    </div>
+  </div>
+
+  <div class="cross-section csec" id="csec">
+    <span class="label">B · Cross-Section · 4-Unit · 1:200</span>
+    <span class="corner">North Park · CA</span>
+    <svg viewBox="0 0 600 540" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+      <!-- grid -->
+      <g stroke="rgba(61,64,91,0.10)" stroke-width="0.5" fill="none">
+        <path d="M0 60 L600 60 M0 120 L600 120 M0 180 L600 180 M0 240 L600 240 M0 300 L600 300 M0 360 L600 360 M0 420 L600 420 M0 480 L600 480"/>
+        <path d="M60 0 L60 540 M120 0 L120 540 M180 0 L180 540 M240 0 L240 540 M300 0 L300 540 M360 0 L360 540 M420 0 L420 540 M480 0 L480 540 M540 0 L540 540"/>
+      </g>
+      <!-- ground -->
+      <line x1="40" y1="490" x2="560" y2="490" class="draw d1" stroke="#3D405B" stroke-width="2" pathLength="1"/>
+      <g stroke="#3D405B" stroke-width="0.6">
+        <line x1="60" y1="490" x2="40" y2="510"/><line x1="100" y1="490" x2="80" y2="510"/><line x1="140" y1="490" x2="120" y2="510"/><line x1="180" y1="490" x2="160" y2="510"/><line x1="220" y1="490" x2="200" y2="510"/><line x1="260" y1="490" x2="240" y2="510"/><line x1="300" y1="490" x2="280" y2="510"/><line x1="340" y1="490" x2="320" y2="510"/><line x1="380" y1="490" x2="360" y2="510"/><line x1="420" y1="490" x2="400" y2="510"/><line x1="460" y1="490" x2="440" y2="510"/><line x1="500" y1="490" x2="480" y2="510"/><line x1="540" y1="490" x2="520" y2="510"/>
+      </g>
+
+      <!-- building shell -->
+      <rect x="80" y="170" width="440" height="320" fill="#F4F1DE" stroke="#3D405B" stroke-width="2" class="draw d1" pathLength="1"/>
+      <!-- floor divider (cross-section) -->
+      <line x1="80" y1="330" x2="520" y2="330" stroke="#3D405B" stroke-width="1.5" class="draw d2" pathLength="1"/>
+      <!-- vertical wall divider -->
+      <line x1="300" y1="170" x2="300" y2="490" stroke="#3D405B" stroke-width="1.5" class="draw d2" pathLength="1"/>
+      <!-- roof -->
+      <path d="M70 170 L530 170 L520 150 L80 150 Z" fill="#EDE8D5" stroke="#3D405B" stroke-width="2" class="draw d3" pathLength="1"/>
+
+      <!-- UNIT 01 — YOU (top-left) navy/gold -->
+      <rect x="80" y="170" width="220" height="160" fill="#3D405B" opacity="0.92" class="fade-late"/>
+      <text x="190" y="220" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#F2CC8F" letter-spacing="3" class="fade-late">UNIT 01 · YOU</text>
+      <text x="190" y="240" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(244,241,222,0.7)" letter-spacing="2" class="fade-late">2BR · 920 SF</text>
+      <text x="190" y="278" text-anchor="middle" font-family="Lora, serif" font-style="italic" font-weight="400" font-size="22" fill="#F2CC8F" class="fade-late l2">live here</text>
+
+      <!-- UNIT 02 — TENANT (top-right) terra -->
+      <rect x="300" y="170" width="220" height="160" fill="#E07A5F" opacity="0.92" class="fade-late l2"/>
+      <text x="410" y="220" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#F4F1DE" letter-spacing="3" class="fade-late l2">UNIT 02 · TENANT</text>
+      <text x="410" y="240" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(244,241,222,0.85)" letter-spacing="2" class="fade-late l2">$2,950 / MO</text>
+      <text x="410" y="278" text-anchor="middle" font-family="Lora, serif" font-style="italic" font-weight="400" font-size="20" fill="#F4F1DE" class="fade-late l3">pays you</text>
+
+      <!-- UNIT 03 — TENANT (bottom-left) terra -->
+      <rect x="80" y="330" width="220" height="160" fill="#E07A5F" opacity="0.92" class="fade-late l2"/>
+      <text x="190" y="380" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#F4F1DE" letter-spacing="3" class="fade-late l2">UNIT 03 · TENANT</text>
+      <text x="190" y="400" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(244,241,222,0.85)" letter-spacing="2" class="fade-late l2">$2,950 / MO</text>
+      <text x="190" y="438" text-anchor="middle" font-family="Lora, serif" font-style="italic" font-weight="400" font-size="20" fill="#F4F1DE" class="fade-late l3">pays you</text>
+
+      <!-- UNIT 04 — TENANT (bottom-right) terra -->
+      <rect x="300" y="330" width="220" height="160" fill="#E07A5F" opacity="0.92" class="fade-late l2"/>
+      <text x="410" y="380" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#F4F1DE" letter-spacing="3" class="fade-late l2">UNIT 04 · TENANT</text>
+      <text x="410" y="400" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="rgba(244,241,222,0.85)" letter-spacing="2" class="fade-late l2">$2,950 / MO</text>
+      <text x="410" y="438" text-anchor="middle" font-family="Lora, serif" font-style="italic" font-weight="400" font-size="20" fill="#F4F1DE" class="fade-late l3">pays you</text>
+
+      <!-- arrows from tenants to YOU -->
+      <g stroke="#F2CC8F" stroke-width="1.5" fill="none" class="fade-late l3" opacity="0.9">
+        <path d="M410 250 Q300 260 220 250" stroke-dasharray="4 4" class="unit-pulse"/>
+        <path d="M190 380 Q150 340 190 310" stroke-dasharray="4 4" class="unit-pulse"/>
+        <path d="M410 380 Q500 340 280 270" stroke-dasharray="4 4" class="unit-pulse"/>
+      </g>
+
+      <!-- dimension lines -->
+      <g stroke="#3D405B" stroke-width="0.6" fill="none" class="fade-late l3">
+        <line x1="80" y1="525" x2="520" y2="525"/>
+        <line x1="80" y1="520" x2="80" y2="530"/>
+        <line x1="520" y1="520" x2="520" y2="530"/>
+        <line x1="540" y1="170" x2="540" y2="490"/>
+        <line x1="535" y1="170" x2="545" y2="170"/>
+        <line x1="535" y1="490" x2="545" y2="490"/>
+      </g>
+      <text x="300" y="540" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#3D405B" letter-spacing="2" class="fade-late l3">44'-0"</text>
+      <text x="555" y="335" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="10" fill="#3D405B" letter-spacing="2" transform="rotate(-90 555 335)" class="fade-late l3">32'-0"</text>
+
+      <!-- callout: 75% paid by tenants -->
+      <g class="fade-late l3">
+        <line x1="300" y1="100" x2="300" y2="140" stroke="#E07A5F" stroke-width="1"/>
+        <circle cx="300" cy="100" r="3" fill="#E07A5F"/>
+        <text x="300" y="80" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="11" fill="#E07A5F" letter-spacing="2">3 OF 4 UNITS</text>
+        <text x="300" y="95" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="1.5">~75% OF MORTGAGE COVERED</text>
+      </g>
+    </svg>
+    <div class="scale">
+      <span>0'</span><span>10'</span><span>20'</span><span>30'</span><span>40'</span><span>50'</span>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ WHY MULTIFAMILY ════════ -->
+<section class="scene" id="why" data-screen-label="02 Why">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">02</div>
+      <div class="label">Why Multifamily</div>
+    </div>
+    <div>
+      <h2 class="reveal">Not just a different kind of house. <em>A different financial instrument.</em></h2>
+      <p class="sub reveal">Same down payment. Same monthly payment. Same neighborhood. A 2-to-4-unit property does something a single-family home structurally cannot.</p>
+    </div>
+  </div>
+
+  <div class="stair reveal-stagger">
+    <div class="step">
+      <div class="num">01</div>
+      <h3>Tenants pay your mortgage.</h3>
+      <p>On a typical San Diego fourplex, the rent from the three units you don't live in often covers most of the mortgage, taxes, insurance, and reserves. <strong>Your effective housing cost ends up below renting the same unit.</strong></p>
+    </div>
+    <div class="step">
+      <div class="num">02</div>
+      <h3>Equity builds <em>4×</em> faster.</h3>
+      <p>A single-family buyer pays down their loan with one source: their own income. A multifamily buyer has three or four sources paying down the loan. <strong>Same down payment. Substantially more equity built over five years.</strong></p>
+    </div>
+    <div class="step">
+      <div class="num">03</div>
+      <h3>Cash flow, not a money pit.</h3>
+      <p>A single-family home costs you money every month — mortgage, taxes, insurance, repairs, no offsetting income. A well-priced multifamily produces cash flow once stabilized. <strong>That difference compounds for decades.</strong></p>
+    </div>
+    <div class="step">
+      <div class="num">04</div>
+      <h3>You exit on NOI — not comps.</h3>
+      <p>A house sells on what other houses nearby sold for. A multifamily property sells on its NOI capitalized at the local cap rate. <strong>The income you build directly drives what you can sell for</strong> — independent of your neighbors.</p>
+    </div>
+  </div>
+  <div class="stair-label">
+    <span>A · B · C · D · 4 mechanics that compound</span>
+    <span>Unleveraged</span>
+  </div>
+</section>
+
+<!-- ════════ STRATEGY — comparison ════════ -->
+<section class="scene bone" id="strategy" data-screen-label="03 Strategy">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">03</div>
+      <div class="label">The Strategy</div>
+    </div>
+    <div>
+      <h2 class="reveal">Live in one unit.<br>Rent the rest. <em>Buy with owner-occupied financing.</em></h2>
+      <p class="sub reveal">A 2-to-4-unit property bought as your primary residence qualifies for the same low-down-payment loans a single-family buyer gets. The same fourplex an investor would put $400K down on, an owner-occupant might enter for under $90K.</p>
+    </div>
+  </div>
+
+  <div class="compare reveal" id="compare">
+    <div class="col bad">
+      <div class="tag">Path A · Investor</div>
+      <h3>The high-friction path.</h3>
+      <p>Non-owner-occupied multifamily loans require institutional-investor terms. The bar is high; the entry cost is higher.</p>
+      <div class="stack">
+        <div class="row" style="--w: 100%"><span class="k">Down</span><span class="bar"></span><span class="v">25%</span></div>
+        <div class="row" style="--w: 95%"><span class="k">Cash to close</span><span class="bar"></span><span class="v">~$462K</span></div>
+        <div class="row" style="--w: 30%"><span class="k">Rent counted</span><span class="bar"></span><span class="v">Limited</span></div>
+        <div class="row" style="--w: 10%"><span class="k">Tax-shield</span><span class="bar"></span><span class="v">Standard</span></div>
+      </div>
+    </div>
+    <div class="col good">
+      <div class="tag">Path B · Owner-Occupant</div>
+      <h3>The path<br>that <em>actually opens.</em></h3>
+      <p>Live in one unit for ~12 months. FHA at 3.5% down or conventional at 5% down on the same property. <strong>Tenants help you qualify, then they help you pay.</strong></p>
+      <div class="stack">
+        <div class="row" style="--w: 16%"><span class="k">Down</span><span class="bar"></span><span class="v">3.5–5%</span></div>
+        <div class="row" style="--w: 24%"><span class="k">Cash to close</span><span class="bar"></span><span class="v">~$115K</span></div>
+        <div class="row" style="--w: 90%"><span class="k">Rent counted</span><span class="bar"></span><span class="v">Toward DTI</span></div>
+        <div class="row" style="--w: 80%"><span class="k">Tax-shield</span><span class="bar"></span><span class="v">Depreciation</span></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="strategy-cards reveal-stagger">
+    <div class="c">
+      <div class="key">A.</div>
+      <h4>Owner-occupied loan products</h4>
+      <p>FHA on 2–4 units has historically gone as low as <strong>3.5% down</strong>. Conventional often starts at 5%.</p>
+    </div>
+    <div class="c">
+      <div class="key">B.</div>
+      <h4>Rents help you qualify</h4>
+      <p>Most owner-occupied lenders count <strong>a portion of projected rents</strong> toward your debt-to-income.</p>
+    </div>
+    <div class="c">
+      <div class="key">C.</div>
+      <h4>Year 1 → an income asset</h4>
+      <p>After your owner-occupancy period (12 mo for FHA), <strong>rent your unit out and repeat</strong>.</p>
+    </div>
+    <div class="c">
+      <div class="key">D.</div>
+      <h4>Tax treatment SFH doesn't get</h4>
+      <p>Depreciation. Operating expenses deductible against rental income. <strong>Single-family ownership has none of this.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ WHY ME ════════ -->
+<section class="scene" id="why-me" data-screen-label="04 Why Me">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">04</div>
+      <div class="label">Why work with me</div>
+    </div>
+    <div>
+      <h2 class="reveal">What most agents won't do<br>for a first-time buyer — <em>that I will.</em></h2>
+      <p class="sub reveal">Buying your first multifamily is a different conversation than buying your first home. The agent on the other side of the table should be running different math.</p>
+    </div>
+  </div>
+
+  <div class="three-col" id="threecol">
+    <div class="item">
+      <div class="id">A · Underwrite</div>
+      <h3>A real <em>proforma</em> — not a vague "should cash flow."</h3>
+      <p>Most agents tell you a property "should cash flow" and call that analysis. I run the full proforma — gross rent, vacancy, operating expenses, NOI, debt service, and the four metrics — on every property worth considering. <strong>You see the math before you write the offer.</strong></p>
+    </div>
+    <div class="item">
+      <div class="id">B · Stress-test</div>
+      <h3>Sensitivity, before you <em>sign anything.</em></h3>
+      <p>Knowing the answer at one set of assumptions isn't underwriting. I model what happens at higher vacancy, what happens at a half-point rate shift, what happens if a unit takes 60 days to turn. <strong>The deal we move forward with should still pencil under realistic downside — not just under perfect conditions.</strong></p>
+    </div>
+    <div class="item">
+      <div class="id">C · Operate</div>
+      <h3>A model you can use <em>after close.</em></h3>
+      <p>After the closing table, the proforma becomes your tracking baseline — Year 1 actuals vs. Year 1 model. Where you're outperforming, where you're underperforming, when to refinance, when to consider the next one. <strong>You don't just close. You learn how to operate.</strong></p>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ THE PROFORMA — sticky build ════════ -->
+<section class="scene dark" id="proforma" data-screen-label="05 Proforma">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num" style="color: var(--gold);">05</div>
+      <div class="label">How I model your deal</div>
+    </div>
+    <div>
+      <h2 class="reveal">The proforma — <em>line by line,</em><br>the way real estate finance defines it.</h2>
+      <p class="sub reveal">Most agents will tell you a property "should cash flow." That isn't analysis. The standard income-property proforma works through the same line items in the same order. Watch it build as you scroll →</p>
+    </div>
+  </div>
+
+  <div class="pin-wrap" id="pinwrap">
+    <div class="pin-steps" id="pinsteps">
+      <div class="pin-step" data-step="1">
+        <div class="n">01</div>
+        <div>
+          <h3>Gross scheduled rent</h3>
+          <p>Total rent the property would produce at <strong>100% occupancy and current market rents</strong>. Built up unit-by-unit using the actual rent roll for occupied units and verified rent comps for any units below market. <strong>If the seller's listing claims rents that don't match the rent roll, we catch that here.</strong></p>
+        </div>
+      </div>
+      <div class="pin-step" data-step="2">
+        <div class="n">02</div>
+        <div>
+          <h3>Less vacancy → EGI</h3>
+          <p>Even fully-leased properties model 5–10% vacancy. We lose units to turnover, late rent, the occasional bad tenant. Pulling realistic vacancy out gives us <strong>effective gross income</strong> — what the property is actually likely to collect.</p>
+        </div>
+      </div>
+      <div class="pin-step" data-step="3">
+        <div class="n">03</div>
+        <div>
+          <h3>Less operating expenses → NOI</h3>
+          <p>Property taxes, insurance, utilities the owner pays, management (real or imputed at 7–10%), maintenance, reserves, common-area items. Standard OpEx ratio runs 35–45% of EGI. <strong>NOI is the single most important number on the page</strong> — it's what cap rates are computed against.</p>
+        </div>
+      </div>
+      <div class="pin-step" data-step="4">
+        <div class="n">04</div>
+        <div>
+          <h3>Less debt service → BTCF</h3>
+          <p>Annual P&amp;I payments on your mortgage, based on your specific loan amount, rate, and amortization. NOI minus debt service equals <strong>before-tax cash flow</strong> — what shows up in your account each year. (In real estate finance: the "equity dividend.")</p>
+        </div>
+      </div>
+      <div class="pin-step" data-step="5">
+        <div class="n">05</div>
+        <div>
+          <h3>Compute the four metrics</h3>
+          <p>From those line items, the proforma generates the metrics lenders, appraisers, and investors all use: <strong>cap rate</strong> (unleveraged yield), <strong>cash-on-cash</strong> (yield on your equity), <strong>DSCR</strong> (lender minimum 1.20), and <strong>break-even occupancy</strong> (the rate at which the property covers its own bills).</p>
+        </div>
+      </div>
+      <div class="pin-step" data-step="6">
+        <div class="n">06</div>
+        <div>
+          <h3>Stress-test the variables</h3>
+          <p>What if vacancy is 10%? What if rates rise half a point at refinance? What if a unit takes 60 days to turn? <strong>The deal is the deal that survives the downside case</strong> — not the one that only works at perfect assumptions. Sensitivity is the difference between an underwrite and a sales pitch.</p>
+        </div>
+      </div>
+    </div>
+
+    <aside class="pin-pane" id="pinpane">
+      <div class="pane-tag">Live · sample build</div>
+      <div class="pane-title">North Park 4-Unit · proforma builds</div>
+      <div class="ledger-row" data-row="1"><span>Gross scheduled rent</span><span class="v">$144,000</span></div>
+      <div class="ledger-row sub" data-row="2"><span>Less vacancy (5%)</span><span class="v">−$7,200</span></div>
+      <div class="ledger-row sub" data-row="3"><span>Less OpEx (35%)</span><span class="v">−$47,880</span></div>
+      <div class="ledger-row total" data-row="3"><span>Net Operating Income</span><span class="v">$88,920</span></div>
+      <div class="ledger-row sub" data-row="4"><span>Less annual debt service</span><span class="v">−$98,772</span></div>
+      <div class="ledger-row total" data-row="4"><span>Cash flow after debt</span><span class="v" style="color:var(--terra);">−$9,852</span></div>
+      <div class="pane-metrics">
+        <div class="pm" data-row="5"><div class="k">Cap</div><div class="v count">5.4<em>%</em></div></div>
+        <div class="pm" data-row="5"><div class="k">CoC</div><div class="v count" style="color:var(--terra);"><em>−</em>2.1<em>%</em></div></div>
+        <div class="pm" data-row="5"><div class="k">DSCR</div><div class="v count">0.90<em>×</em></div></div>
+        <div class="pm" data-row="6"><div class="k">B/E occ.</div><div class="v count">96<em>%</em></div></div>
+      </div>
+    </aside>
+  </div>
+</section>
+
+<!-- ════════ SAMPLE — full proforma ════════ -->
+<section class="scene" id="sample" data-screen-label="06 Sample">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">06</div>
+      <div class="label">Sample analysis</div>
+    </div>
+    <div>
+      <h2 class="reveal">A real proforma — <em>line by line.</em></h2>
+      <p class="sub reveal">Below is exactly the analysis described above, applied to a typical North Park 4-unit. The numbers are illustrative — on your actual deal, every input would be your specific rents, your specific financing, your specific market.</p>
+    </div>
+  </div>
+
+  <div class="sample-block reveal">
+    <div class="sample-head">
+      <div class="info">
+        <div class="tag">Sample · North Park</div>
+        <h3>4-Unit Multifamily<br><em>built 1978 · 5,800 sf lot</em></h3>
+        <div class="meta">4 × 2BR/1BA · seller asking · agent-listed</div>
+      </div>
+      <div class="price">
+        <div class="lab">Asking</div>
+        <div class="v">$1.65M</div>
+        <div class="terms">25% down · 7.0% / 30-yr</div>
+      </div>
+    </div>
+
+    <div class="sample-grid">
+      <div class="col">
+        <div class="col-title">Year 1 Proforma</div>
+        <div class="sample-line"><span>Gross scheduled rent</span><span class="val">$144,000</span></div>
+        <div class="sample-line sub"><span>Less vacancy (5%)</span><span class="val">−$7,200</span></div>
+        <div class="sample-line sub"><span>Less operating expenses (35%)</span><span class="val">−$47,880</span></div>
+        <div class="sample-line total"><span>Net Operating Income</span><span class="val">$88,920</span></div>
+        <div class="sample-line sub"><span>Less annual debt service</span><span class="val">−$98,772</span></div>
+        <div class="sample-line total neg"><span>Cash flow after debt</span><span class="val">−$9,852</span></div>
+      </div>
+      <div class="col">
+        <div class="col-title">Capital Stack</div>
+        <div class="sample-line"><span>Purchase price</span><span class="val">$1,650,000</span></div>
+        <div class="sample-line sub"><span>Down payment (25%)</span><span class="val">$412,500</span></div>
+        <div class="sample-line sub"><span>Closing costs (est.)</span><span class="val">$32,000</span></div>
+        <div class="sample-line sub"><span>Reserves (6 mo.)</span><span class="val">$18,000</span></div>
+        <div class="sample-line total"><span>Total cash required</span><span class="val">$462,500</span></div>
+        <div class="sample-line"><span>Loan amount</span><span class="val">$1,237,500</span></div>
+      </div>
+    </div>
+
+    <div class="sample-metrics">
+      <div class="m"><div class="k">Cap rate</div><div class="v count" data-target="5.4" data-suffix="%">5.4<em>%</em></div></div>
+      <div class="m"><div class="k">Cash-on-cash</div><div class="v neg count" data-target="-2.1" data-suffix="%"><em>−</em>2.1<em>%</em></div></div>
+      <div class="m"><div class="k">DSCR</div><div class="v count" data-target="0.90" data-suffix="×">0.90<em>×</em></div></div>
+    </div>
+
+    <div class="sample-upside">
+      <strong>Reading the metrics</strong>
+      <strong style="display:inline;font-style:normal;">Cap rate 5.4%</strong> ($88,920 NOI ÷ $1,650,000) is the unleveraged yield. <strong style="display:inline;font-style:normal;">Cash-on-cash −2.1%</strong> ($−9,852 ÷ $462,500 cash invested) is the leveraged yield to a 25%-down investor — slightly negative in this rate environment. <strong style="display:inline;font-style:normal;">DSCR 0.90</strong> means NOI doesn't fully cover the mortgage payment — most lenders want at least 1.20. <span class="num">But this changes dramatically as an owner-occupant.</span> If you live in one of the four units, you reduce gross rent by one unit (−$36K/yr) but you also <em>eliminate</em> your separate housing cost (a comparable 2BR rental in North Park runs ~$2,800/mo = ~$33,600/yr). Roughly housing-cost-neutral, while 25% of the property accrues equity in your name and the other 75% gets paid down by your tenants. At 5% down owner-occupied, total cash to close drops from $462K to ~$115K.
+    </div>
+  </div>
+</section>
+
+<!-- ════════ CTA RIBBON ════════ -->
+<section class="scene" style="padding: 0 40px;">
+  <div class="ribbon reveal">
+    <div class="text">Have a property in mind? <strong>I'll model it free</strong> — before you make a move.</div>
+    <a href="#contact" class="btn"><span>Get a free deal review</span><span>→</span></a>
+  </div>
+</section>
+
+<!-- ════════ PROCESS — tower of floors ════════ -->
+<section class="scene bone" id="process" data-screen-label="07 Process">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">07</div>
+      <div class="label">How we work together</div>
+    </div>
+    <div>
+      <h2 class="reveal">From "I'm thinking about it" <br>to <em>"I own this."</em></h2>
+      <p class="sub reveal">Six floors. Each one structural. The tower we build together — strategy at the foundation, ownership at the top.</p>
+    </div>
+  </div>
+
+  <div class="tower">
+    <div class="tower-spine">
+      <div class="lab">Build sequence</div>
+      <svg viewBox="0 0 240 360" preserveAspectRatio="xMidYMid meet" aria-hidden="true">
+        <g stroke="rgba(61,64,91,0.12)" stroke-width="0.5" fill="none">
+          <path d="M0 60 L240 60 M0 120 L240 120 M0 180 L240 180 M0 240 L240 240 M0 300 L240 300"/>
+        </g>
+        <line x1="30" y1="340" x2="210" y2="340" stroke="#3D405B" stroke-width="2"/>
+        <g stroke="#3D405B" stroke-width="0.6">
+          <line x1="40" y1="340" x2="30" y2="354"/><line x1="60" y1="340" x2="50" y2="354"/><line x1="80" y1="340" x2="70" y2="354"/><line x1="100" y1="340" x2="90" y2="354"/><line x1="120" y1="340" x2="110" y2="354"/><line x1="140" y1="340" x2="130" y2="354"/><line x1="160" y1="340" x2="150" y2="354"/><line x1="180" y1="340" x2="170" y2="354"/><line x1="200" y1="340" x2="190" y2="354"/>
+        </g>
+        <!-- 6 floors stacking -->
+        <rect x="50" y="280" width="140" height="50" fill="#F4F1DE" stroke="#3D405B" stroke-width="1.4"/>
+        <text x="120" y="310" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="2">01 · STRATEGY</text>
+        <rect x="50" y="232" width="140" height="48" fill="#EDE8D5" stroke="#3D405B" stroke-width="1.4"/>
+        <text x="120" y="260" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="2">02 · SEARCH</text>
+        <rect x="50" y="184" width="140" height="48" fill="#F4F1DE" stroke="#3D405B" stroke-width="1.4"/>
+        <text x="120" y="212" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="2">03 · UNDERWRITE</text>
+        <rect x="50" y="136" width="140" height="48" fill="#EDE8D5" stroke="#3D405B" stroke-width="1.4"/>
+        <text x="120" y="164" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="2">04 · OFFER</text>
+        <rect x="50" y="88" width="140" height="48" fill="#F4F1DE" stroke="#3D405B" stroke-width="1.4"/>
+        <text x="120" y="116" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#3D405B" letter-spacing="2">05 · DD</text>
+        <rect x="50" y="40" width="140" height="48" fill="#E07A5F" stroke="#3D405B" stroke-width="1.4"/>
+        <text x="120" y="68" text-anchor="middle" font-family="JetBrains Mono, monospace" font-size="9" fill="#F4F1DE" letter-spacing="2">06 · CLOSE</text>
+        <!-- crown / parapet -->
+        <path d="M40 40 L200 40 L195 28 L45 28 Z" fill="#3D405B"/>
+      </svg>
+      <div style="font-family:var(--mono);font-size:10px;letter-spacing:0.18em;color:var(--ink-mute);margin-top:14px;">↑ Top of stack: ownership.</div>
+    </div>
+
+    <div class="floors reveal-stagger">
+      <div class="floor">
+        <div class="n">06</div>
+        <div class="body">
+          <h3>Close — and the model becomes your operating playbook.</h3>
+          <p>After close, the proforma becomes your tracking baseline. Year 1 actuals vs. Year 1 model. Where you're outperforming, where you're underperforming, when to refinance, when to start thinking about the next one. <strong>You're not a homeowner who happens to have tenants. You're an investor with a plan.</strong></p>
+        </div>
+        <div class="when">Day 0+<br>Repeats</div>
+      </div>
+      <div class="floor">
+        <div class="n">05</div>
+        <div class="body">
+          <h3>Due diligence — verify everything in the proforma.</h3>
+          <p>Rent roll audit (tenant by tenant). Lease review (rent, term, deposits, special clauses). Trailing 12 months of seller financials. Property inspection. Permits and code compliance. <strong>Every assumption gets verified — or updated. We make decisions on updated numbers, not listing numbers.</strong></p>
+        </div>
+        <div class="when">14–17 days</div>
+      </div>
+      <div class="floor">
+        <div class="n">04</div>
+        <div class="body">
+          <h3>Offer strategy &amp; negotiation.</h3>
+          <p>Price, contingencies, due diligence period, financing terms, leaseback if you need it. Coordination with the listing agent, escrow, your lender, the inspector, the appraiser. <strong>The proforma we built becomes the basis for what we'll pay</strong> — not what the seller is asking.</p>
+        </div>
+        <div class="when">Days 1–14<br>per offer</div>
+      </div>
+      <div class="floor">
+        <div class="n">03</div>
+        <div class="body">
+          <h3>Full proforma on every property worth a second look.</h3>
+          <p>The full underwrite — gross rent through NOI through cash flow through cap rate, cash-on-cash, DSCR, and break-even. Plus a sensitivity table on vacancy, rent growth, and rate shocks. <strong>Delivered as a clean one-page summary you can actually read.</strong></p>
+        </div>
+        <div class="when">24–48 hr<br>per property</div>
+      </div>
+      <div class="floor">
+        <div class="n">02</div>
+        <div class="body">
+          <h3>Targeted San Diego search.</h3>
+          <p>Duplexes, triplexes, fourplexes that match your purchasing power and the submarkets that fit your strategy. On-market and off-market. Including small properties with unrealized development upside under <strong>SB 9 / ADU law</strong> — value most agents miss.</p>
+        </div>
+        <div class="when">Ongoing</div>
+      </div>
+      <div class="floor">
+        <div class="n">01</div>
+        <div class="body">
+          <h3>Strategy session &amp; lender pre-approval.</h3>
+          <p>Your goals, timeline, cash, credit. Then a multifamily-savvy lender to map your loan products and pre-approval — what you actually qualify for, owner-occupied vs. investor financing, FHA vs. conventional. <strong>Most people skip this step and look at properties they can't actually buy. We don't.</strong></p>
+        </div>
+        <div class="when">Week 1</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ BACKGROUND (dark) ════════ -->
+<section class="scene dark" id="background" data-screen-label="08 Background">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num" style="color: var(--gold);">08</div>
+      <div class="label">My background</div>
+    </div>
+    <div>
+      <h2 class="reveal">A licensed advisor<br>who's <em>actually done</em> this work.</h2>
+    </div>
+  </div>
+
+  <div class="bg-grid">
+    <div>
+      <p class="lead reveal">DRE Licensed Multifamily Investment &amp; Development Advisor (#02282434), San Diego. <em>UC San Diego B.S. in Real Estate &amp; Development</em> — a project-based program tied to actual properties, actual investors, actual financial models.</p>
+      <p class="reveal">Before any of that: three generations of family ownership in Tijuana, where I spent years on construction sites, working land transactions, and helping finance, build, and lease somewhere between thirty and sixty units across our family's projects before I turned 21.</p>
+      <p class="reveal"><strong>I'm not learning multifamily on your transaction.</strong> The proforma I'll run on your deal is the framework I think in.</p>
+    </div>
+
+    <div class="creds reveal">
+      <div class="lab">Credentials</div>
+      <div class="row"><span>License</span><span class="v">DRE #02282434</span></div>
+      <div class="row"><span>Degree</span><span class="v">B.S. RE &amp; Dev. · UCSD</span></div>
+      <div class="row"><span>Family operations</span><span class="v">30–60 units · 2 decades</span></div>
+      <div class="row"><span>Capstone</span><span class="v">3.05-acre OM</span></div>
+      <div class="row"><span>Models built</span><span class="v">14 institutional</span></div>
+      <div class="row"><span>Market</span><span class="v">San Diego only</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ FAQ ════════ -->
+<section class="scene" id="faq" data-screen-label="09 FAQ">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">09</div>
+      <div class="label">Common questions</div>
+    </div>
+    <div>
+      <h2 class="reveal">What first-time buyers usually ask <em>before we get started.</em></h2>
+    </div>
+  </div>
+
+  <div class="faq reveal">
+    <details>
+      <summary><span class="id">Q.01</span><span>Do I need a big down payment?</span><span class="ar">+</span></summary>
+      <div class="a">Not necessarily. As an owner-occupant on a 2-to-4-unit, FHA financing has historically gone as low as 3.5% down for credit-qualified buyers, and conventional owner-occupied multifamily loans often start around 5% down. As a non-owner-occupant investor on the same property, you'd typically need 25% down. We'll go through the loan products you actually qualify for in the first session — exact down-payment requirements vary by program, lender, and your specific credit profile.</div>
+    </details>
+    <details>
+      <summary><span class="id">Q.02</span><span>Will I have to be a landlord and deal with tenants?</span><span class="ar">+</span></summary>
+      <div class="a">In a 2-to-4-unit you typically inherit existing tenants and existing leases at close. Day-to-day landlording is mostly low-frequency: rent collection, occasional repair coordination, lease renewals. Many first-time owners self-manage. Some hire a small property manager for 7–10% of gross rent. Either is workable. We'll talk through both before you decide.</div>
+    </details>
+    <details>
+      <summary><span class="id">Q.03</span><span>What if rents drop or I have a bad tenant?</span><span class="ar">+</span></summary>
+      <div class="a">That's exactly what stress-testing the proforma is for. Before we make an offer I model what happens at higher vacancy, what happens with one tenant turnover, what happens if a unit needs a 60-day rent-ready turn. The deal we move forward with should still pencil under realistic downside scenarios — not just under perfect conditions. The "break-even occupancy rate" tells you exactly how empty the property can get before it stops covering its own bills.</div>
+    </details>
+    <details>
+      <summary><span class="id">Q.04</span><span>How is working with you different from a typical agent?</span><span class="ar">+</span></summary>
+      <div class="a">Most agents are showing properties and writing offers. I'm doing those things too, but my main role is treating your purchase like an investment — running the proforma, stress-testing the numbers, helping you understand what the asset actually does. By the time you close, you should be able to explain the four key metrics on your own deal: cap rate, cash-on-cash return, DSCR, and break-even occupancy.</div>
+    </details>
+    <details>
+      <summary><span class="id">Q.05</span><span>What does it cost to work with you?</span><span class="ar">+</span></summary>
+      <div class="a">On the buy side, my fee is paid through the transaction — same as any agent — so there's no out-of-pocket cost to you for representation. The deal review and proforma work I do for clients is part of the engagement. The first conversation is always free, with no obligation.</div>
+    </details>
+  </div>
+</section>
+
+<!-- ════════ CONTACT ════════ -->
+<section class="scene bone" id="contact" data-screen-label="10 Contact">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">10</div>
+      <div class="label">Let's talk</div>
+    </div>
+    <div>
+      <h2 class="reveal">Ready to <em>see the numbers?</em></h2>
+      <p class="sub reveal">Send me a property you're considering — or just your goals — and I'll come back with a real proforma. No pressure. No obligation.</p>
+    </div>
+  </div>
+
+  <div class="contact-grid reveal">
+    <div class="left">
+      <div>
+        <div class="lab">Direct line</div>
+        <h3>One call.<br><em>Then a model.</em></h3>
+      </div>
+      <p class="pitch">No fees until you transact. No high-pressure pitch. The numbers will tell us if there's a deal here — and the call will tell us if we're a fit.</p>
+      <div class="reach">
+        <a href="tel:6196178584"><span class="k">Call</span><span>619.617.8584</span><span>→</span></a>
+        <a href="mailto:giovanni@giovanniserrano.com"><span class="k">Email</span><span>giovanni@giovanniserrano.com</span><span>→</span></a>
+        <a href="https://giovanniserrano.com"><span class="k">Web</span><span>giovanniserrano.com</span><span>→</span></a>
+      </div>
+    </div>
+    <div class="right">
+      <form onsubmit="event.preventDefault(); const b=this.querySelector('button span:first-child'); b.textContent='Sent · response within 24 hrs';">
+        <div><label>Name</label><input type="text" placeholder="Your name" required></div>
+        <div><label>Email</label><input type="email" placeholder="your@email.com" required></div>
+        <div><label>Phone</label><input type="tel" placeholder="619.555.0000"></div>
+        <div><label>I'm Looking To</label>
+          <select required>
+            <option value="" selected>Select your goal</option>
+            <option>Get a deal review on a specific property</option>
+            <option>Talk through my buying strategy</option>
+            <option>Understand what I qualify for</option>
+            <option>Just exploring — not ready yet</option>
+          </select>
+        </div>
+        <div><label>Anything Else <span style="color: var(--ink-mute); text-transform: none; letter-spacing: 0;">(optional)</span></label><textarea placeholder="Timeline, budget, specific properties — whatever helps."></textarea></div>
+        <button type="submit"><span>Request a deal review</span><span>→</span></button>
+        <p class="contact-note">Your information is never shared or sold. Response within 24 hours.</p>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ════════ RELATED ════════ -->
+<section class="scene" id="related" data-screen-label="11 Related">
+  <div class="scene-head">
+    <div class="marker">
+      <div class="num">11</div>
+      <div class="label">Other services</div>
+    </div>
+    <div>
+      <h2 class="reveal">Two other ways<br>I work with clients.</h2>
+      <p class="sub reveal">Different stage, different math, different deliverable. Each engagement is defined.</p>
+    </div>
+  </div>
+
+  <div class="related reveal">
+    <a href="scale.html">
+      <div class="id">B · Scale</div>
+      <div class="name">Your <em>portfolio.</em></div>
+      <div class="sub">Sharper underwriting on the next deal.</div>
+      <div class="arrow">Read brief →</div>
+    </a>
+    <a href="develop.html">
+      <div class="id">C · Develop</div>
+      <div class="name">Your <em>land.</em></div>
+      <div class="sub">What California law lets you build.</div>
+      <div class="arrow">Read brief →</div>
+    </a>
+  </div>
+</section>
+
+<!-- ════════ FOOTER ════════ -->
+<footer data-screen-label="12 Footer">
+  <p class="foot-mark">Move with<br><em>intention.</em></p>
+  <div class="foot-grid">
+    <div class="col">
+      <div class="k">Brand</div>
+      <p><strong>Giovanni Serrano</strong></p>
+      <p>Multifamily Investment &amp; Development Advisor.<br>San Diego, California.</p>
+    </div>
+    <div class="col">
+      <div class="k">Sub-pages</div>
+      <a href="invest.html">Invest</a>
+      <a href="scale.html">Scale</a>
+      <a href="develop.html">Develop</a>
+      <a href="index.html#sample">Sample analysis</a>
+    </div>
+    <div class="col">
+      <div class="k">Reach</div>
+      <a href="tel:6196178584">619.617.8584</a>
+      <a href="mailto:giovanni@giovanniserrano.com">giovanni@giovanniserrano.com</a>
+      <a href="#">San Diego, CA</a>
+    </div>
+    <div class="col">
+      <div class="k">Compliance</div>
+      <p>DRE #02282434</p>
+      <p>© 2026 Giovanni Serrano Real Estate</p>
+    </div>
+  </div>
+  <div class="foot-bar">
+    <span>v4.0 · 2026 · Soft Golden Hour</span>
+    <span>Lora · Inter · JetBrains Mono</span>
+    <span>Built from scratch. Built to last.</span>
+  </div>
+</footer>
+
+<script>
+// ───── Reveal observer
+const io = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+}, { threshold: 0.12 });
+document.querySelectorAll('.reveal, .reveal-stagger, .compare').forEach(el => io.observe(el));
+
+// hero blueprint draws on its own observer for reliability
+const heroObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('in'); });
+}, { threshold: 0.25 });
+const csec = document.getElementById('csec');
+if (csec) heroObs.observe(csec);
+
+// smooth scroll for in-page links
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', e => {
+    const t = document.querySelector(a.getAttribute('href'));
+    if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' }); }
+  });
+});
+
+// ───── Scroll progress bar
+const progressBar = document.getElementById('progressBar');
+function tickProgress() {
+  const h = document.documentElement;
+  const max = h.scrollHeight - h.clientHeight;
+  const pct = max > 0 ? (h.scrollTop / max) * 100 : 0;
+  progressBar.style.width = pct + '%';
+}
+window.addEventListener('scroll', tickProgress, { passive: true });
+tickProgress();
+
+// ───── Three-col underline trigger
+const tcol = document.getElementById('threecol');
+if (tcol) io.observe(tcol);
+
+// ───── Pinned proforma — drive ledger reveal by step in viewport
+const steps = document.querySelectorAll('.pin-step');
+const rows = document.querySelectorAll('.pin-pane .ledger-row, .pin-pane .pm');
+function reveal(stepN) {
+  rows.forEach(r => {
+    const n = parseInt(r.getAttribute('data-row'), 10);
+    if (n <= stepN) r.classList.add('shown'); else r.classList.remove('shown');
+  });
+}
+const pinObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      steps.forEach(s => s.classList.remove('active'));
+      e.target.classList.add('active');
+      const n = parseInt(e.target.getAttribute('data-step'), 10);
+      reveal(n);
+    }
+  });
+}, { rootMargin: '-40% 0px -40% 0px', threshold: 0 });
+steps.forEach(s => pinObs.observe(s));
+
+// ───── Animate metric numbers in Sample block when visible
+function animateNumber(el) {
+  const target = parseFloat(el.getAttribute('data-target'));
+  const suffix = el.getAttribute('data-suffix') || '';
+  const isNeg = target < 0;
+  const abs = Math.abs(target);
+  const dur = 1200;
+  const start = performance.now();
+  function frame(t) {
+    const p = Math.min(1, (t - start) / dur);
+    const eased = 1 - Math.pow(1 - p, 3);
+    const cur = (abs * eased).toFixed(target % 1 === 0 ? 0 : (abs < 1 ? 2 : 1));
+    el.innerHTML = (isNeg ? '<em>−</em>' : '') + cur + '<em>' + suffix + '</em>';
+    if (p < 1) requestAnimationFrame(frame);
+  }
+  requestAnimationFrame(frame);
+}
+const numObs = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting && !e.target.dataset.animated) {
+      e.target.dataset.animated = '1';
+      animateNumber(e.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('.sample-metrics .v[data-target]').forEach(el => numObs.observe(el));
+
+// ───── Active link in nav based on section in view
+const sections = document.querySelectorAll('section[id]');
+const navLinks = document.querySelectorAll('nav.top .links a');
+// (kept simple — current page is "Invest", so we leave it active)
+
+// ───── Subtle parallax on hero blueprint
+const cs = document.querySelector('.cross-section svg');
+if (cs) {
+  window.addEventListener('scroll', () => {
+    const y = window.scrollY;
+    if (y < 800) cs.style.transform = 'translateY(' + (y * 0.06) + 'px)';
+  }, { passive: true });
+}
+</script>
+</body>
+</html>

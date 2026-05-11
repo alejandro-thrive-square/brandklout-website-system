@@ -1,0 +1,124 @@
+/* ==========================================================================
+   SPACING SYSTEM: MODULAR SCALE
+   Ratio-based spacing using a 1.25 (major third) multiplier for dramatic,
+   harmonious jumps between sizes. Best for creative, editorial, and
+   agency projects where visual rhythm is more important than pixel precision.
+
+   Base: 1rem (16px)
+   Ratio: 1.25 (major third)
+   ========================================================================== */
+
+/* --- Modular Spacing Scale ---
+   Each step is multiplied by 1.25 from the previous.
+   This produces a natural, harmonious progression.
+
+   Step -3:  0.512rem  ~  8px
+   Step -2:  0.64rem   ~ 10px
+   Step -1:  0.8rem    ~ 13px
+   Step  0:  1rem      = 16px  (base)
+   Step  1:  1.25rem   = 20px
+   Step  2:  1.563rem  ~ 25px
+   Step  3:  1.953rem  ~ 31px
+   Step  4:  2.441rem  ~ 39px
+   Step  5:  3.052rem  ~ 49px
+   Step  6:  3.815rem  ~ 61px
+   Step  7:  4.768rem  ~ 76px
+   Step  8:  5.96rem   ~ 95px
+   Step  9:  7.451rem  ~ 119px
+   Step 10:  9.313rem  ~ 149px
+   Step 11: 11.642rem  ~ 186px
+   Step 12: 14.552rem  ~ 233px
+   ========================================================================== */
+:root {
+  --ms-ratio: 1.25;
+  --ms-base: 1rem;
+
+  /* Negative steps (smaller than base) */
+  --space-ms--3:  0.512rem;   /*  ~8px  */
+  --space-ms--2:  0.64rem;    /* ~10px  */
+  --space-ms--1:  0.8rem;     /* ~13px  */
+
+  /* Base */
+  --space-ms-0:   1rem;       /*  16px  */
+
+  /* Positive steps (larger than base) */
+  --space-ms-1:   1.25rem;    /*  20px  */
+  --space-ms-2:   1.563rem;   /* ~25px  */
+  --space-ms-3:   1.953rem;   /* ~31px  */
+  --space-ms-4:   2.441rem;   /* ~39px  */
+  --space-ms-5:   3.052rem;   /* ~49px  */
+  --space-ms-6:   3.815rem;   /* ~61px  */
+  --space-ms-7:   4.768rem;   /* ~76px  */
+  --space-ms-8:   5.96rem;    /* ~95px  */
+  --space-ms-9:   7.451rem;   /* ~119px */
+  --space-ms-10:  9.313rem;   /* ~149px */
+  --space-ms-11:  11.642rem;  /* ~186px */
+  --space-ms-12:  14.552rem;  /* ~233px */
+}
+
+/* --- Semantic Aliases ---
+   Map the modular scale to semantic names.
+   ========================================================================== */
+:root {
+  /* Token-style aliases (match the token schema naming) */
+  --space-xs:  var(--space-ms--2);  /* ~10px */
+  --space-sm:  var(--space-ms-0);   /*  16px */
+  --space-md:  var(--space-ms-2);   /* ~25px */
+  --space-lg:  var(--space-ms-4);   /* ~39px */
+  --space-xl:  var(--space-ms-6);   /* ~61px */
+  --space-2xl: var(--space-ms-8);   /* ~95px */
+  --space-3xl: var(--space-ms-10);  /* ~149px */
+  --space-4xl: var(--space-ms-12);  /* ~233px */
+}
+
+/* --- Section Spacing (Fluid) ---
+   Large gaps between page sections using the modular scale.
+   Fluid values ensure smooth transitions between breakpoints.
+   ========================================================================== */
+:root {
+  --section-gap-sm:  clamp(var(--space-ms-3),  3vw + 1rem, var(--space-ms-5));   /*  31– 49px */
+  --section-gap-md:  clamp(var(--space-ms-5),  5vw + 1rem, var(--space-ms-7));   /*  49– 76px */
+  --section-gap-lg:  clamp(var(--space-ms-6),  7vw + 1rem, var(--space-ms-9));   /*  61–119px */
+  --section-gap-xl:  clamp(var(--space-ms-7), 10vw + 1rem, var(--space-ms-11));  /*  76–186px */
+}
+
+/* --- Container Widths ---
+   Slightly narrower defaults for editorial/creative layouts
+   to create dramatic margins.
+   ========================================================================== */
+:root {
+  --container-xs:     24rem;    /* 384px  — narrow column */
+  --container-sm:     32rem;    /* 512px  — text column */
+  --container-md:     44rem;    /* 704px  — medium content */
+  --container-lg:     60rem;    /* 960px  — standard page */
+  --container-xl:     76rem;    /* 1216px — wide layout */
+  --container-2xl:    88rem;    /* 1408px — full-width layout */
+
+  --container-padding: clamp(var(--space-ms-0), 1rem + 3vw, var(--space-ms-3));
+}
+
+/* --- Container Utility Classes --- */
+.container-xs  { max-width: var(--container-xs);  margin-inline: auto; padding-inline: var(--container-padding); }
+.container-sm  { max-width: var(--container-sm);  margin-inline: auto; padding-inline: var(--container-padding); }
+.container-md  { max-width: var(--container-md);  margin-inline: auto; padding-inline: var(--container-padding); }
+.container-lg  { max-width: var(--container-lg);  margin-inline: auto; padding-inline: var(--container-padding); }
+.container-xl  { max-width: var(--container-xl);  margin-inline: auto; padding-inline: var(--container-padding); }
+.container-2xl { max-width: var(--container-2xl); margin-inline: auto; padding-inline: var(--container-padding); }
+
+/* --- Section Padding Utilities --- */
+.section-sm { padding-block: var(--section-gap-sm); }
+.section-md { padding-block: var(--section-gap-md); }
+.section-lg { padding-block: var(--section-gap-lg); }
+.section-xl { padding-block: var(--section-gap-xl); }
+
+/* --- Gap Utilities (Modular) --- */
+.gap-ms--2 { gap: var(--space-ms--2); }
+.gap-ms--1 { gap: var(--space-ms--1); }
+.gap-ms-0  { gap: var(--space-ms-0); }
+.gap-ms-1  { gap: var(--space-ms-1); }
+.gap-ms-2  { gap: var(--space-ms-2); }
+.gap-ms-3  { gap: var(--space-ms-3); }
+.gap-ms-4  { gap: var(--space-ms-4); }
+.gap-ms-5  { gap: var(--space-ms-5); }
+.gap-ms-6  { gap: var(--space-ms-6); }
+.gap-ms-8  { gap: var(--space-ms-8); }

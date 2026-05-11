@@ -1,0 +1,454 @@
+<!-- METADATA
+  @style: modern-saas
+  @complexity: 3
+  @animation-deps: none
+  @responsive: true
+  @description: Monthly/Annual toggle with 3 pricing cards, animated price transitions, highlighted Pro tier with accent glow
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pricing Toggle Cards</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --color-bg: #fafbfc;
+    --color-surface: #ffffff;
+    --color-primary: #6366f1;
+    --color-primary-dark: #4f46e5;
+    --color-primary-glow: rgba(99, 102, 241, 0.15);
+    --color-primary-light: #eef2ff;
+    --color-text: #0f172a;
+    --color-text-secondary: #64748b;
+    --color-border: #e2e8f0;
+    --color-success: #10b981;
+    --font-main: 'Inter', sans-serif;
+    --radius: 20px;
+    --radius-sm: 12px;
+  }
+
+  body {
+    font-family: var(--font-main);
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .pricing {
+    padding: 120px 24px;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .pricing__header {
+    text-align: center;
+    margin-bottom: 48px;
+  }
+
+  .pricing__badge {
+    display: inline-block;
+    padding: 6px 14px;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: 0.8125rem;
+    font-weight: 600;
+    border-radius: 999px;
+    margin-bottom: 16px;
+  }
+
+  .pricing__title {
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: 12px;
+  }
+
+  .pricing__subtitle {
+    font-size: 1.0625rem;
+    color: var(--color-text-secondary);
+    max-width: 480px;
+    margin: 0 auto;
+  }
+
+  /* Toggle */
+  .toggle-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 16px;
+    margin-bottom: 56px;
+  }
+
+  .toggle-label {
+    font-size: 0.9375rem;
+    font-weight: 500;
+    color: var(--color-text-secondary);
+    transition: color 0.3s;
+  }
+
+  .toggle-label--active {
+    color: var(--color-text);
+  }
+
+  .toggle {
+    position: relative;
+    width: 56px;
+    height: 30px;
+    background: var(--color-border);
+    border-radius: 999px;
+    cursor: pointer;
+    transition: background 0.3s;
+    border: none;
+    padding: 0;
+  }
+
+  .toggle--active {
+    background: var(--color-primary);
+  }
+
+  .toggle__thumb {
+    position: absolute;
+    top: 3px;
+    left: 3px;
+    width: 24px;
+    height: 24px;
+    background: #fff;
+    border-radius: 50%;
+    transition: transform 0.3s cubic-bezier(.4,0,.2,1);
+    box-shadow: 0 1px 3px rgba(0,0,0,.15);
+  }
+
+  .toggle--active .toggle__thumb {
+    transform: translateX(26px);
+  }
+
+  .save-badge {
+    font-size: 0.75rem;
+    font-weight: 600;
+    color: var(--color-success);
+    background: rgba(16,185,129,.1);
+    padding: 3px 10px;
+    border-radius: 999px;
+  }
+
+  /* Cards */
+  .cards {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px;
+    align-items: center;
+  }
+
+  .card {
+    background: var(--color-surface);
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius);
+    padding: 40px 32px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    position: relative;
+  }
+
+  .card:hover {
+    transform: translateY(-4px);
+  }
+
+  .card--featured {
+    border-color: var(--color-primary);
+    box-shadow: 0 0 0 1px var(--color-primary), 0 8px 40px var(--color-primary-glow);
+    padding: 52px 32px;
+    z-index: 1;
+  }
+
+  .card--featured:hover {
+    box-shadow: 0 0 0 1px var(--color-primary), 0 12px 50px rgba(99,102,241,.25);
+  }
+
+  .card__popular {
+    position: absolute;
+    top: -13px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--color-primary);
+    color: #fff;
+    font-size: 0.75rem;
+    font-weight: 600;
+    padding: 4px 16px;
+    border-radius: 999px;
+    letter-spacing: 0.04em;
+  }
+
+  .card__plan {
+    font-size: 0.875rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: var(--color-text-secondary);
+    margin-bottom: 8px;
+  }
+
+  .card--featured .card__plan {
+    color: var(--color-primary);
+  }
+
+  .card__description {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 24px;
+    line-height: 1.5;
+  }
+
+  .card__price-wrapper {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 8px;
+    position: relative;
+    overflow: hidden;
+    height: 56px;
+  }
+
+  .card__currency {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text);
+    align-self: flex-start;
+    margin-top: 8px;
+  }
+
+  .card__price {
+    font-size: 3rem;
+    font-weight: 800;
+    line-height: 1;
+    color: var(--color-text);
+    transition: transform 0.4s cubic-bezier(.4,0,.2,1), opacity 0.4s ease;
+  }
+
+  .card__price--exit {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  .card__price--enter {
+    transform: translateY(100%);
+    opacity: 0;
+  }
+
+  .card__period {
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    font-weight: 500;
+    align-self: flex-end;
+    padding-bottom: 4px;
+  }
+
+  .card__billed {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    margin-bottom: 32px;
+    min-height: 20px;
+  }
+
+  .card__btn {
+    display: block;
+    width: 100%;
+    padding: 14px 24px;
+    border: 1.5px solid var(--color-border);
+    border-radius: var(--radius-sm);
+    background: transparent;
+    color: var(--color-text);
+    font-family: var(--font-main);
+    font-size: 0.9375rem;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    text-align: center;
+    text-decoration: none;
+    margin-bottom: 32px;
+  }
+
+  .card__btn:hover {
+    background: var(--color-text);
+    color: #fff;
+    border-color: var(--color-text);
+  }
+
+  .card--featured .card__btn {
+    background: var(--color-primary);
+    color: #fff;
+    border-color: var(--color-primary);
+  }
+
+  .card--featured .card__btn:hover {
+    background: var(--color-primary-dark);
+    border-color: var(--color-primary-dark);
+    box-shadow: 0 4px 16px var(--color-primary-glow);
+  }
+
+  .card__features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 14px;
+  }
+
+  .card__feature {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 0.875rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+  }
+
+  .card__check {
+    width: 18px;
+    height: 18px;
+    flex-shrink: 0;
+    color: var(--color-success);
+    margin-top: 1px;
+  }
+
+  @media (max-width: 1024px) {
+    .cards { grid-template-columns: 1fr; max-width: 440px; margin: 0 auto; }
+    .card--featured { padding: 40px 32px; }
+    .card__popular { top: -13px; }
+  }
+
+  @media (max-width: 480px) {
+    .pricing { padding: 80px 16px; }
+    .card { padding: 28px 24px; }
+  }
+</style>
+</head>
+<body>
+<section class="pricing">
+  <div class="pricing__header">
+    <span class="pricing__badge">Pricing</span>
+    <h2 class="pricing__title">Simple, transparent pricing</h2>
+    <p class="pricing__subtitle">No hidden fees. No surprises. Pick the plan that fits your team.</p>
+  </div>
+
+  <div class="toggle-wrapper">
+    <span class="toggle-label toggle-label--active" id="monthlyLabel">Monthly</span>
+    <button class="toggle" id="billingToggle" aria-label="Toggle billing period">
+      <div class="toggle__thumb"></div>
+    </button>
+    <span class="toggle-label" id="annualLabel">Annual</span>
+    <span class="save-badge">Save 20%</span>
+  </div>
+
+  <div class="cards">
+    <!-- Basic -->
+    <div class="card" data-monthly="19" data-annual="15">
+      <div class="card__plan">Basic</div>
+      <p class="card__description">Perfect for individuals and small projects getting started.</p>
+      <div class="card__price-wrapper">
+        <span class="card__currency">$</span>
+        <span class="card__price">19</span>
+        <span class="card__period">/mo</span>
+      </div>
+      <div class="card__billed"></div>
+      <a href="#" class="card__btn">Get started</a>
+      <ul class="card__features">
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Up to 5 projects</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>10 GB storage</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Basic analytics</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Community support</li>
+      </ul>
+    </div>
+
+    <!-- Pro -->
+    <div class="card card--featured" data-monthly="49" data-annual="39">
+      <div class="card__popular">Most Popular</div>
+      <div class="card__plan">Pro</div>
+      <p class="card__description">For growing teams that need more power and collaboration.</p>
+      <div class="card__price-wrapper">
+        <span class="card__currency">$</span>
+        <span class="card__price">49</span>
+        <span class="card__period">/mo</span>
+      </div>
+      <div class="card__billed"></div>
+      <a href="#" class="card__btn">Get started</a>
+      <ul class="card__features">
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited projects</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>100 GB storage</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Advanced analytics</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Priority support</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom integrations</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Team collaboration</li>
+      </ul>
+    </div>
+
+    <!-- Enterprise -->
+    <div class="card" data-monthly="99" data-annual="79">
+      <div class="card__plan">Enterprise</div>
+      <p class="card__description">For large organizations with advanced security and compliance needs.</p>
+      <div class="card__price-wrapper">
+        <span class="card__currency">$</span>
+        <span class="card__price">99</span>
+        <span class="card__period">/mo</span>
+      </div>
+      <div class="card__billed"></div>
+      <a href="#" class="card__btn">Contact sales</a>
+      <ul class="card__features">
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Everything in Pro</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Unlimited storage</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>SSO & SAML</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Dedicated account manager</li>
+        <li class="card__feature"><svg class="card__check" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>Custom SLA</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const toggle = document.getElementById('billingToggle');
+  const monthlyLabel = document.getElementById('monthlyLabel');
+  const annualLabel = document.getElementById('annualLabel');
+  const cards = document.querySelectorAll('.card');
+  let isAnnual = false;
+
+  function animatePrice(card, newPrice) {
+    const priceEl = card.querySelector('.card__price');
+    const billedEl = card.querySelector('.card__billed');
+
+    // Exit animation
+    priceEl.classList.add('card__price--exit');
+
+    setTimeout(() => {
+      priceEl.textContent = newPrice;
+      priceEl.classList.remove('card__price--exit');
+      priceEl.classList.add('card__price--enter');
+
+      // Force reflow
+      priceEl.offsetHeight;
+
+      priceEl.classList.remove('card__price--enter');
+    }, 200);
+
+    billedEl.textContent = isAnnual
+      ? `Billed $${newPrice * 12}/year`
+      : '';
+  }
+
+  toggle.addEventListener('click', () => {
+    isAnnual = !isAnnual;
+    toggle.classList.toggle('toggle--active', isAnnual);
+    monthlyLabel.classList.toggle('toggle-label--active', !isAnnual);
+    annualLabel.classList.toggle('toggle-label--active', isAnnual);
+
+    cards.forEach(card => {
+      const price = isAnnual ? card.dataset.annual : card.dataset.monthly;
+      animatePrice(card, price);
+    });
+  });
+})();
+</script>
+</body>
+</html>

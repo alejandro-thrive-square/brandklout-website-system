@@ -1,0 +1,451 @@
+<!-- METADATA
+  @style: modern-saas
+  @complexity: 3
+  @animation-deps: none
+  @responsive: true
+  @description: Horizontal carousel with large quote cards, auto-play with pause on hover, navigation dots and arrows
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Testimonials Carousel</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,700;1,400&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+  :root {
+    --color-bg: #f8f9fc;
+    --color-surface: #ffffff;
+    --color-primary: #4f46e5;
+    --color-primary-light: #eef2ff;
+    --color-text: #1e1b4b;
+    --color-text-secondary: #6b7280;
+    --color-border: #e5e7eb;
+    --color-accent: #7c3aed;
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+    --radius-lg: 24px;
+    --radius-full: 9999px;
+    --shadow-card: 0 4px 6px -1px rgba(0,0,0,.04), 0 10px 40px -4px rgba(79,70,229,.08);
+    --shadow-card-hover: 0 8px 30px -4px rgba(79,70,229,.15);
+    --transition-smooth: 0.5s cubic-bezier(.4,0,.2,1);
+  }
+
+  body {
+    font-family: var(--font-sans);
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .testimonials {
+    padding: 120px 0;
+    overflow: hidden;
+  }
+
+  .testimonials__header {
+    text-align: center;
+    max-width: 640px;
+    margin: 0 auto 64px;
+    padding: 0 24px;
+  }
+
+  .testimonials__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 16px;
+    background: var(--color-primary-light);
+    color: var(--color-primary);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    border-radius: var(--radius-full);
+    margin-bottom: 20px;
+  }
+
+  .testimonials__title {
+    font-family: var(--font-serif);
+    font-size: clamp(2rem, 4vw, 3rem);
+    font-weight: 700;
+    line-height: 1.15;
+    margin-bottom: 16px;
+    color: var(--color-text);
+  }
+
+  .testimonials__subtitle {
+    font-size: 1.125rem;
+    color: var(--color-text-secondary);
+    line-height: 1.6;
+  }
+
+  .carousel {
+    position: relative;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 24px;
+  }
+
+  .carousel__track-container {
+    overflow: hidden;
+    border-radius: var(--radius-lg);
+  }
+
+  .carousel__track {
+    display: flex;
+    transition: transform var(--transition-smooth);
+    will-change: transform;
+  }
+
+  .carousel__slide {
+    flex: 0 0 100%;
+    padding: 0 16px;
+    display: flex;
+    justify-content: center;
+  }
+
+  @media (min-width: 768px) {
+    .carousel__slide { flex: 0 0 50%; }
+  }
+  @media (min-width: 1024px) {
+    .carousel__slide { flex: 0 0 33.3333%; }
+  }
+
+  .card {
+    background: var(--color-surface);
+    border-radius: var(--radius-lg);
+    padding: 40px 32px;
+    box-shadow: var(--shadow-card);
+    transition: box-shadow 0.3s ease, transform 0.3s ease;
+    width: 100%;
+    max-width: 400px;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+  }
+
+  .card:hover {
+    box-shadow: var(--shadow-card-hover);
+    transform: translateY(-4px);
+  }
+
+  .card__quote-icon {
+    width: 48px;
+    height: 48px;
+    margin-bottom: 24px;
+    color: var(--color-primary);
+    opacity: 0.3;
+  }
+
+  .card__text {
+    font-size: 1.0625rem;
+    line-height: 1.7;
+    color: var(--color-text);
+    margin-bottom: 32px;
+    flex: 1;
+    font-style: italic;
+  }
+
+  .card__author {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    border-top: 1px solid var(--color-border);
+    padding-top: 24px;
+  }
+
+  .card__avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    object-fit: cover;
+    border: 2px solid var(--color-primary-light);
+  }
+
+  .card__name {
+    font-weight: 600;
+    font-size: 0.9375rem;
+    color: var(--color-text);
+  }
+
+  .card__role {
+    font-size: 0.8125rem;
+    color: var(--color-text-secondary);
+    margin-top: 2px;
+  }
+
+  .card__company {
+    color: var(--color-primary);
+    font-weight: 500;
+  }
+
+  /* Navigation */
+  .carousel__nav {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 24px;
+    margin-top: 48px;
+  }
+
+  .carousel__arrow {
+    width: 48px;
+    height: 48px;
+    border-radius: var(--radius-full);
+    border: 1.5px solid var(--color-border);
+    background: var(--color-surface);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 0.25s ease;
+    color: var(--color-text);
+  }
+
+  .carousel__arrow:hover {
+    background: var(--color-primary);
+    border-color: var(--color-primary);
+    color: #fff;
+    box-shadow: 0 4px 12px rgba(79,70,229,.3);
+  }
+
+  .carousel__arrow svg {
+    width: 18px;
+    height: 18px;
+  }
+
+  .carousel__dots {
+    display: flex;
+    gap: 8px;
+  }
+
+  .carousel__dot {
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-full);
+    border: none;
+    background: var(--color-border);
+    cursor: pointer;
+    transition: all 0.3s ease;
+    padding: 0;
+  }
+
+  .carousel__dot--active {
+    background: var(--color-primary);
+    width: 32px;
+  }
+
+  @media (max-width: 767px) {
+    .testimonials { padding: 80px 0; }
+    .card { padding: 28px 22px; }
+    .carousel__slide { padding: 0 8px; }
+  }
+</style>
+</head>
+<body>
+<section class="testimonials">
+  <div class="testimonials__header">
+    <span class="testimonials__badge">
+      <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87L18.18 22 12 18.56 5.82 22 7 14.14l-5-4.87 6.91-1.01L12 2z"/></svg>
+      Testimonials
+    </span>
+    <h2 class="testimonials__title">Loved by teams worldwide</h2>
+    <p class="testimonials__subtitle">Hear from the people who use our platform every day to build better products faster.</p>
+  </div>
+
+  <div class="carousel" id="carousel">
+    <div class="carousel__track-container">
+      <div class="carousel__track" id="carouselTrack">
+
+        <div class="carousel__slide">
+          <div class="card">
+            <svg class="card__quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609L9.978 5.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg>
+            <p class="card__text">"This platform completely transformed how our team collaborates. We shipped 3x faster within the first month. The intuitive interface made onboarding a breeze."</p>
+            <div class="card__author">
+              <img src="https://picsum.photos/seed/person1/96/96" alt="Sarah Chen" class="card__avatar">
+              <div>
+                <div class="card__name">Sarah Chen</div>
+                <div class="card__role">VP of Engineering, <span class="card__company">Stripeflow</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__slide">
+          <div class="card">
+            <svg class="card__quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609L9.978 5.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg>
+            <p class="card__text">"The analytics dashboard alone saved us 20 hours per week. We can finally make data-driven decisions without the usual overhead. Absolutely game-changing."</p>
+            <div class="card__author">
+              <img src="https://picsum.photos/seed/person2/96/96" alt="Marcus Johnson" class="card__avatar">
+              <div>
+                <div class="card__name">Marcus Johnson</div>
+                <div class="card__role">Head of Product, <span class="card__company">Acmesoft</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__slide">
+          <div class="card">
+            <svg class="card__quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609L9.978 5.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg>
+            <p class="card__text">"We evaluated a dozen tools before choosing this one. The API is elegant, the docs are thorough, and the support team is incredibly responsive."</p>
+            <div class="card__author">
+              <img src="https://picsum.photos/seed/person3/96/96" alt="Elena Rodriguez" class="card__avatar">
+              <div>
+                <div class="card__name">Elena Rodriguez</div>
+                <div class="card__role">CTO, <span class="card__company">Launchpad</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__slide">
+          <div class="card">
+            <svg class="card__quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609L9.978 5.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg>
+            <p class="card__text">"Our conversion rate jumped 40% after implementing the personalization features. The ROI was evident within the first two weeks of deployment."</p>
+            <div class="card__author">
+              <img src="https://picsum.photos/seed/person4/96/96" alt="David Park" class="card__avatar">
+              <div>
+                <div class="card__name">David Park</div>
+                <div class="card__role">Growth Lead, <span class="card__company">Velociti</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__slide">
+          <div class="card">
+            <svg class="card__quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609L9.978 5.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg>
+            <p class="card__text">"Finally a platform that understands developer workflows. The integration with our existing stack was seamless. Our team morale has noticeably improved."</p>
+            <div class="card__author">
+              <img src="https://picsum.photos/seed/person5/96/96" alt="Aisha Patel" class="card__avatar">
+              <div>
+                <div class="card__name">Aisha Patel</div>
+                <div class="card__role">Senior Dev, <span class="card__company">Buildcraft</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="carousel__slide">
+          <div class="card">
+            <svg class="card__quote-icon" viewBox="0 0 24 24" fill="currentColor"><path d="M14.017 21v-7.391c0-5.704 3.731-9.57 8.983-10.609l.995 2.151c-2.432.917-3.995 3.638-3.995 5.849h4v10H14.017zM0 21v-7.391c0-5.704 3.731-9.57 8.983-10.609L9.978 5.151C7.546 6.068 5.983 8.789 5.983 11H10v10H0z"/></svg>
+            <p class="card__text">"The customer support is world-class. Every question I had was answered within minutes. It's rare to find a SaaS company that truly cares about its users."</p>
+            <div class="card__author">
+              <img src="https://picsum.photos/seed/person6/96/96" alt="James O'Brien" class="card__avatar">
+              <div>
+                <div class="card__name">James O'Brien</div>
+                <div class="card__role">Founder, <span class="card__company">NovaTech</span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="carousel__nav">
+      <button class="carousel__arrow" id="prevBtn" aria-label="Previous">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <div class="carousel__dots" id="carouselDots"></div>
+      <button class="carousel__arrow" id="nextBtn" aria-label="Next">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+  </div>
+</section>
+
+<script>
+(function() {
+  const track = document.getElementById('carouselTrack');
+  const slides = Array.from(track.children);
+  const dotsContainer = document.getElementById('carouselDots');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+  const carousel = document.getElementById('carousel');
+
+  let currentIndex = 0;
+  let slidesPerView = 3;
+  let autoplayInterval;
+  const AUTOPLAY_DELAY = 4000;
+
+  function getSlidesPerView() {
+    if (window.innerWidth < 768) return 1;
+    if (window.innerWidth < 1024) return 2;
+    return 3;
+  }
+
+  function getMaxIndex() {
+    return Math.max(0, slides.length - slidesPerView);
+  }
+
+  function buildDots() {
+    dotsContainer.innerHTML = '';
+    const totalDots = getMaxIndex() + 1;
+    for (let i = 0; i < totalDots; i++) {
+      const dot = document.createElement('button');
+      dot.classList.add('carousel__dot');
+      if (i === currentIndex) dot.classList.add('carousel__dot--active');
+      dot.setAttribute('aria-label', `Go to slide ${i + 1}`);
+      dot.addEventListener('click', () => goTo(i));
+      dotsContainer.appendChild(dot);
+    }
+  }
+
+  function updateTrack() {
+    const slideWidth = 100 / slidesPerView;
+    track.style.transform = `translateX(-${currentIndex * slideWidth}%)`;
+    document.querySelectorAll('.carousel__dot').forEach((dot, i) => {
+      dot.classList.toggle('carousel__dot--active', i === currentIndex);
+    });
+  }
+
+  function goTo(index) {
+    currentIndex = Math.max(0, Math.min(index, getMaxIndex()));
+    updateTrack();
+  }
+
+  function next() {
+    goTo(currentIndex >= getMaxIndex() ? 0 : currentIndex + 1);
+  }
+
+  function prev() {
+    goTo(currentIndex <= 0 ? getMaxIndex() : currentIndex - 1);
+  }
+
+  function startAutoplay() {
+    stopAutoplay();
+    autoplayInterval = setInterval(next, AUTOPLAY_DELAY);
+  }
+
+  function stopAutoplay() {
+    clearInterval(autoplayInterval);
+  }
+
+  prevBtn.addEventListener('click', () => { prev(); startAutoplay(); });
+  nextBtn.addEventListener('click', () => { next(); startAutoplay(); });
+
+  carousel.addEventListener('mouseenter', stopAutoplay);
+  carousel.addEventListener('mouseleave', startAutoplay);
+
+  window.addEventListener('resize', () => {
+    slidesPerView = getSlidesPerView();
+    if (currentIndex > getMaxIndex()) currentIndex = getMaxIndex();
+    buildDots();
+    updateTrack();
+  });
+
+  // Init
+  slidesPerView = getSlidesPerView();
+  buildDots();
+  updateTrack();
+  startAutoplay();
+})();
+</script>
+</body>
+</html>

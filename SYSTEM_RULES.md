@@ -1,0 +1,135 @@
+# Webzite Agentic Workflow: System Core Rules
+
+This document serves as the master blueprint for the Webzite Agentic Workflow. It defines the architecture, directory structure, and operational standards for all agentic processes.
+
+> [!IMPORTANT]
+> **Documentation Integrity Rule**: Whenever a change is made to the technical implementation of this system, the corresponding markdown files **MUST** be updated immediately to maintain synchronization between documentation and code.
+
+## 0. Infrastructure
+This system is designed to run on a **Hostinger VPS** with the following specifications:
+- **OS**: Ubuntu 24.04 LTS
+- **Execution Environment**: All Python executors and system-level tools must be compatible with this Linux distribution.
+
+> [!IMPORTANT]
+> **Mandatory Section**: Every Markdown file created within this system **MUST** include an Infrastructure section at the end of the file to ensure environment compatibility.
+
+> [!IMPORTANT]
+> **Mandatory Section**: Every Markdown file created within this system **MUST** include a Version Control section (before Infrastructure) referencing the root-level version control rules. This ensures every workflow and pillar document reinforces Git discipline for agents operating in that context.
+
+## 1. System Architecture
+
+The system is organized into four primary pillars (Microsystems), each responsible for a specific stage of the business lifecycle.
+
+```mermaid
+graph TD
+    A[Webzite Agentic Workflow] --> B[Sales]
+    A --> C[Manage]
+    A --> D[Growth]
+    A --> E[Deliver]
+
+    subgraph "Sales Microsystem"
+    B --> B1[Lead Gen]
+    B --> B2[Outreach]
+    B --> B3[CRM]
+    end
+
+    subgraph "Manage Microsystem"
+    C --> C1[Resource Planning]
+    C --> C2[Ops Management]
+    end
+
+    subgraph "Growth Microsystem"
+    D --> D1[Scraping/Redesign]
+    D --> D2[Marketing Automaion]
+    end
+
+    subgraph "Deliver Microsystem"
+    E --> E1[Project Execution]
+    E --> E2[QC/Reporting]
+    end
+```
+
+## 2. Directory Structure & Microsystems
+
+Each folder represents a standalone Microsystem with its own internal logic and workflows.
+
+| Pillar | Directory | Purpose |
+| :--- | :--- | :--- |
+| **Sales** | `sales/` | Lead acquisition, Upwork scraping, CRM management, and proposal automation. |
+| **Manage** | `manage/` | Internal operations, documentation, **Global Assets Hub**, and financial maintenance. |
+| **Growth** | `growth/` | Dynamic prospecting, rapid prototyping (Vercel), and design comparisons. |
+| **Deliver** | `deliver/` | Client project execution, SEO optimization, and final handoffs. |
+
+### 2.1 Workflow Folder Structure
+Every workflow within a pillar must follow this structure:
+- `[workflow-name]/`: The root folder for the process.
+- `[workflow-name].md`: **The Directive**. Contains the logic, prompts, and requirements.
+- `[workflow-name].py`: **The Executor**. The Python script that triggers the logic.
+- `.tmp/`: **Artifact Storage**. Stores workflow-owned intermediate and output files (HTML, CSVs, scraped data, manifests, logs, and lightweight generated artifacts). `.tmp/` folders are included in Git so workflow state and text artifacts travel with the repository. Heavy binary/media assets inside `.tmp/` remain excluded by file type and are synced to the VPS via `rclone`.
+
+## 3. Global Operational Standards
+
+- **Context Filtering**: When working on a specific workflow, agents should prioritize the `.md` file within that workflow folder to save tokens and maintain focus.
+- **Environment Variables**: All API keys and secrets are shared globally via a root `.env` file.
+- **Inter-system Connectivity**: Microsystems connect through Python executors. Output from a `sales` workflow can trigger a `growth` or `deliver` process.
+- **Safety**: No destructive actions (deleting client data, unapproved publishing) should be taken without explicit confirmation in the directive.
+
+## 4. Version Control & Asset Management
+
+This system is version-controlled via a **GitHub repository**. All contributors and agents must follow these rules.
+
+**Architecture: Git for code, docs, and lightweight workflow artifacts; VPS for heavy assets.**
+```
+Local PC ──── Git push (code/docs) ────→ GitHub ────→ VPS (git pull)
+Local PC ──── rclone sync (brand assets + heavy workflow media) ───→ VPS (asset source of truth)
+```
+
+### 4.1 Repository Hygiene
+- **Platform**: GitHub (private repository).
+- **`.gitignore`**: Enforced at the repo root. The following are **never committed**:
+  - `.env` and any files containing API keys or secrets.
+  - OS/IDE junk files (`__pycache__/`, `.DS_Store`, `Thumbs.db`, `.vscode/`, etc.).
+  - **All binary/media files** (`*.png`, `*.jpg`, `*.jpeg`, `*.gif`, `*.svg`, `*.ico`, `*.pdf`, `*.mp4`, `*.mov`, `*.zip`, `*.psd`, `*.ai`, `*.fig`, `*.sketch`).
+- **`.tmp/` folders**: Committed when they contain lightweight workflow state, text artifacts, HTML/CSS/JS, CSV/JSON, or other repo-friendly files. Heavy binary/media files inside `.tmp/` are still blocked by `.gitignore` and must not be force-added.
+- **Commit Discipline**: Commits must be atomic and descriptive. One logical change per commit.
+
+### 4.2 Asset Management (VPS Storage)
+Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (100 GB)** is the single source of truth for those assets.
+
+- **Global Brand Assets** (`manage/brand-assets/`): The canonical source for all agency brand materials. These files live on the VPS and are synced from the local machine via `rclone` (SFTP).
+- **Deliver Project Files** (`deliver/[client-name]/workflows/[workflow-name]/.tmp/`): Client handoff files, source materials, generated media, extracted assets, design prototypes, and workflow-owned final assets live in the `.tmp/` folder of the workflow that owns or uses them. Repo-friendly files in this path are committed; heavy binary/media files are synced to the VPS.
+- **Workflow Artifacts** (`.tmp/` folders): Generated at runtime and **not disposable**. Commit lightweight artifacts that are useful for review, replay, handoff, or agent continuity. Sync heavy binary/media outputs to the VPS via `rclone`, mirroring the same directory structure.
+- **Sync commands** (Local → VPS):
+  ```bash
+  # Brand assets
+  rclone sync ./manage/brand-assets/ vps:/path/to/repo/manage/brand-assets/
+
+
+  # Heavy media/assets inside .tmp/ folders
+  rclone sync . vps:/path/to/repo/ \
+    --filter "+ **/" \
+    --filter "+ **/.tmp/**/*.png" --filter "+ **/.tmp/**/*.jpg" --filter "+ **/.tmp/**/*.jpeg" \
+    --filter "+ **/.tmp/**/*.gif" --filter "+ **/.tmp/**/*.svg" --filter "+ **/.tmp/**/*.webp" --filter "+ **/.tmp/**/*.ico" \
+    --filter "+ **/.tmp/**/*.pdf" --filter "+ **/.tmp/**/*.mp4" --filter "+ **/.tmp/**/*.mov" \
+    --filter "+ **/.tmp/**/*.zip" --filter "+ **/.tmp/**/*.psd" --filter "+ **/.tmp/**/*.ai" \
+    --filter "+ **/.tmp/**/*.fig" --filter "+ **/.tmp/**/*.sketch" \
+    --filter "- *"
+  ```
+  Configure the `vps` remote in `~/.config/rclone/rclone.conf` with SFTP credentials. Use `rclone sync` for any directory containing heavy binary/media assets.
+
+### 4.3 Branching Strategy
+- **`main`**: Production-ready state of the system. Protected — no direct pushes.
+- **`dev`**: Active development and integration branch.
+- **Feature branches**: Named `pillar/description` (e.g., `sales/upwork-scraper`, `manage/brand-refresh`). Merged into `dev` via pull request.
+
+### 4.4 Agent Responsibilities
+- Agents must **never** commit secrets or binary/media files. `.tmp/` folders are commit-eligible for lightweight workflow artifacts, but ignored heavy assets inside them must stay out of Git.
+- When an agent creates or modifies a binary asset intended to persist, it must be placed in the appropriate asset path on disk: `manage/brand-assets/` for agency brand assets, or the owning Deliver workflow's `.tmp/` folder for client project assets. The user will sync it to the VPS via `rclone`.
+- Agents should not force-push or rewrite shared branch history without explicit user confirmation.
+
+## 5. Key Directives
+- **Pricing & Timeline Rules**: [PRICING_TIMELINE_RULES.md](./sales/PRICING_TIMELINE_RULES.md) — canonical per-page rates and execution duration. Single source of truth for Sales quoting, Deliver scheduling, and Manage invoicing.
+- **Sales Rules**: [SALES_SYSTEM_RULES.md](./sales/SALES_SYSTEM_RULES.md)
+- **Manage Rules**: [MANAGE_SYSTEM_RULES.md](./manage/MANAGE_SYSTEM_RULES.md)
+- **Growth Rules**: [GROWTH_SYSTEM_RULES.md](./growth/GROWTH_SYSTEM_RULES.md)
+- **Deliver Rules**: [DELIVER_SYSTEM_RULES.md](./deliver/DELIVER_SYSTEM_RULES.md)

@@ -1,0 +1,454 @@
+<!-- METADATA
+  @style: modern-saas
+  @complexity: 3
+  @animation-deps: gsap
+  @responsive: true
+  @description: Split hero with headline, subtext, CTA buttons on left and product screenshot on right. Clean grid layout with GSAP entrance animations.
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hero - Split Image</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --color-bg: #fafafa;
+    --color-text: #0f172a;
+    --color-text-secondary: #475569;
+    --color-primary: #6366f1;
+    --color-primary-dark: #4f46e5;
+    --color-accent-gradient: linear-gradient(135deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+    --color-badge-bg: #eef2ff;
+    --color-badge-text: #4f46e5;
+    --color-border: #e2e8f0;
+    --color-card-bg: #ffffff;
+    --font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    --container-max: 1280px;
+    --section-padding: 120px 0;
+    --radius-sm: 8px;
+    --radius-md: 12px;
+    --radius-lg: 16px;
+    --radius-xl: 24px;
+    --shadow-sm: 0 1px 2px rgba(0,0,0,0.05);
+    --shadow-md: 0 4px 6px -1px rgba(0,0,0,0.07), 0 2px 4px -2px rgba(0,0,0,0.05);
+    --shadow-lg: 0 20px 40px -12px rgba(0,0,0,0.1);
+    --shadow-xl: 0 32px 64px -16px rgba(0,0,0,0.12);
+  }
+
+  *, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: var(--font-family);
+    background: var(--color-bg);
+    color: var(--color-text);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
+  }
+
+  .hero {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    padding: var(--section-padding);
+    position: relative;
+  }
+
+  .hero__bg-gradient {
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(99,102,241,0.08) 0%, transparent 70%);
+    pointer-events: none;
+    z-index: 0;
+  }
+
+  .hero__container {
+    max-width: var(--container-max);
+    margin: 0 auto;
+    padding: 0 40px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+    width: 100%;
+  }
+
+  .hero__content {
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+
+  .hero__badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--color-badge-bg);
+    color: var(--color-badge-text);
+    padding: 6px 16px;
+    border-radius: 100px;
+    font-size: 14px;
+    font-weight: 600;
+    width: fit-content;
+    border: 1px solid rgba(99,102,241,0.15);
+  }
+
+  .hero__badge svg {
+    flex-shrink: 0;
+  }
+
+  .hero__headline {
+    font-size: clamp(36px, 4.5vw, 64px);
+    font-weight: 800;
+    line-height: 1.08;
+    letter-spacing: -0.03em;
+    color: var(--color-text);
+  }
+
+  .hero__headline span {
+    background: var(--color-accent-gradient);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+
+  .hero__subtext {
+    font-size: 18px;
+    line-height: 1.7;
+    color: var(--color-text-secondary);
+    max-width: 480px;
+  }
+
+  .hero__ctas {
+    display: flex;
+    gap: 16px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .hero__btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 14px 28px;
+    border-radius: var(--radius-md);
+    font-size: 16px;
+    font-weight: 600;
+    font-family: var(--font-family);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-decoration: none;
+    border: none;
+  }
+
+  .hero__btn--primary {
+    background: var(--color-accent-gradient);
+    color: #ffffff;
+    box-shadow: 0 4px 16px rgba(99,102,241,0.3);
+  }
+
+  .hero__btn--primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(99,102,241,0.4);
+  }
+
+  .hero__btn--secondary {
+    background: var(--color-card-bg);
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+    box-shadow: var(--shadow-sm);
+  }
+
+  .hero__btn--secondary:hover {
+    background: #f8fafc;
+    border-color: #cbd5e1;
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+  }
+
+  .hero__btn svg {
+    flex-shrink: 0;
+  }
+
+  .hero__social-proof {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding-top: 8px;
+  }
+
+  .hero__avatars {
+    display: flex;
+    align-items: center;
+  }
+
+  .hero__avatar {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 2px solid var(--color-bg);
+    margin-left: -10px;
+    object-fit: cover;
+  }
+
+  .hero__avatar:first-child {
+    margin-left: 0;
+  }
+
+  .hero__social-text {
+    font-size: 14px;
+    color: var(--color-text-secondary);
+  }
+
+  .hero__social-text strong {
+    color: var(--color-text);
+    font-weight: 700;
+  }
+
+  .hero__image-wrapper {
+    position: relative;
+  }
+
+  .hero__image-container {
+    position: relative;
+    border-radius: var(--radius-xl);
+    overflow: hidden;
+    background: var(--color-card-bg);
+    box-shadow: var(--shadow-xl);
+    border: 1px solid var(--color-border);
+  }
+
+  .hero__image-container img {
+    display: block;
+    width: 100%;
+    height: auto;
+    aspect-ratio: 4/3;
+    object-fit: cover;
+  }
+
+  .hero__floating-card {
+    position: absolute;
+    background: var(--color-card-bg);
+    border-radius: var(--radius-lg);
+    padding: 16px 20px;
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--color-border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 2;
+  }
+
+  .hero__floating-card--top {
+    top: -20px;
+    right: -20px;
+  }
+
+  .hero__floating-card--bottom {
+    bottom: -20px;
+    left: -20px;
+  }
+
+  .hero__floating-icon {
+    width: 40px;
+    height: 40px;
+    border-radius: var(--radius-sm);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .hero__floating-icon--green {
+    background: #ecfdf5;
+    color: #059669;
+  }
+
+  .hero__floating-icon--blue {
+    background: #eff6ff;
+    color: #2563eb;
+  }
+
+  .hero__floating-label {
+    font-size: 13px;
+    color: var(--color-text-secondary);
+  }
+
+  .hero__floating-value {
+    font-size: 18px;
+    font-weight: 700;
+    color: var(--color-text);
+  }
+
+  /* Responsive */
+  @media (max-width: 1024px) {
+    .hero__container {
+      gap: 48px;
+      padding: 0 32px;
+    }
+    .hero__headline {
+      font-size: 40px;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .hero {
+      padding: 80px 0 60px;
+      min-height: auto;
+    }
+    .hero__container {
+      grid-template-columns: 1fr;
+      gap: 48px;
+      padding: 0 24px;
+    }
+    .hero__content {
+      text-align: center;
+      align-items: center;
+    }
+    .hero__subtext {
+      max-width: 100%;
+    }
+    .hero__ctas {
+      justify-content: center;
+    }
+    .hero__social-proof {
+      justify-content: center;
+    }
+    .hero__floating-card--top {
+      top: -12px;
+      right: -8px;
+    }
+    .hero__floating-card--bottom {
+      bottom: -12px;
+      left: -8px;
+    }
+  }
+
+  @media (max-width: 375px) {
+    .hero__container {
+      padding: 0 16px;
+    }
+    .hero__ctas {
+      flex-direction: column;
+      width: 100%;
+    }
+    .hero__btn {
+      width: 100%;
+      justify-content: center;
+    }
+    .hero__floating-card {
+      padding: 12px 14px;
+    }
+  }
+</style>
+</head>
+<body>
+
+<section class="hero">
+  <div class="hero__bg-gradient"></div>
+  <div class="hero__container">
+    <div class="hero__content">
+      <div class="hero__badge">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+          <path d="M8 1l2.1 4.26L15 6.04l-3.5 3.41.83 4.82L8 12.08l-4.33 2.19.83-4.82L1 6.04l4.9-.78L8 1z" fill="currentColor"/>
+        </svg>
+        New: AI-powered analytics v2.0
+      </div>
+
+      <h1 class="hero__headline">
+        Build faster with<br><span>intelligent insights</span>
+      </h1>
+
+      <p class="hero__subtext">
+        Unlock the full potential of your data with our next-generation analytics platform. Real-time dashboards, predictive models, and actionable insights in one place.
+      </p>
+
+      <div class="hero__ctas">
+        <a href="#" class="hero__btn hero__btn--primary">
+          Start free trial
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <path d="M3 8h10m0 0L9 4m4 4L9 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </a>
+        <a href="#" class="hero__btn hero__btn--secondary">
+          <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+            <polygon points="6,3 13,8 6,13" fill="currentColor"/>
+          </svg>
+          Watch demo
+        </a>
+      </div>
+
+      <div class="hero__social-proof">
+        <div class="hero__avatars">
+          <img class="hero__avatar" src="https://picsum.photos/72/72?random=10" alt="User">
+          <img class="hero__avatar" src="https://picsum.photos/72/72?random=11" alt="User">
+          <img class="hero__avatar" src="https://picsum.photos/72/72?random=12" alt="User">
+          <img class="hero__avatar" src="https://picsum.photos/72/72?random=13" alt="User">
+        </div>
+        <p class="hero__social-text"><strong>2,400+</strong> teams already on board</p>
+      </div>
+    </div>
+
+    <div class="hero__image-wrapper">
+      <div class="hero__floating-card hero__floating-card--top">
+        <div class="hero__floating-icon hero__floating-icon--green">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <polyline points="4,14 8,8 12,11 16,4" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="hero__floating-label">Revenue</div>
+          <div class="hero__floating-value">+42.5%</div>
+        </div>
+      </div>
+
+      <div class="hero__image-container">
+        <img src="https://picsum.photos/800/600?random=1" alt="Product dashboard screenshot">
+      </div>
+
+      <div class="hero__floating-card hero__floating-card--bottom">
+        <div class="hero__floating-icon hero__floating-icon--blue">
+          <svg width="20" height="20" viewBox="0 0 20 20" fill="none">
+            <circle cx="10" cy="10" r="7" stroke="currentColor" stroke-width="2"/>
+            <path d="M10 6v4l3 2" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+          </svg>
+        </div>
+        <div>
+          <div class="hero__floating-label">Avg. response</div>
+          <div class="hero__floating-value">1.2s</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+<script>
+  document.addEventListener('DOMContentLoaded', () => {
+    const tl = gsap.timeline({ defaults: { ease: 'power3.out' } });
+
+    tl.from('.hero__badge', { opacity: 0, y: 20, duration: 0.6 })
+      .from('.hero__headline', { opacity: 0, y: 30, duration: 0.7 }, '-=0.3')
+      .from('.hero__subtext', { opacity: 0, y: 20, duration: 0.6 }, '-=0.4')
+      .from('.hero__ctas', { opacity: 0, y: 20, duration: 0.6 }, '-=0.3')
+      .from('.hero__social-proof', { opacity: 0, y: 15, duration: 0.5 }, '-=0.3')
+      .from('.hero__image-container', { opacity: 0, x: 40, scale: 0.97, duration: 0.8 }, '-=0.7')
+      .from('.hero__floating-card--top', { opacity: 0, y: -20, x: 20, duration: 0.5 }, '-=0.3')
+      .from('.hero__floating-card--bottom', { opacity: 0, y: 20, x: -20, duration: 0.5 }, '-=0.3');
+  });
+</script>
+</body>
+</html>
