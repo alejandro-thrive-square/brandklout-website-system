@@ -29,8 +29,8 @@ This workflow converts an approved proposal and discovery meeting into a signed 
 - Do not store credentials or secrets in repo artifacts.
 
 ### Step 4: Deliver Handoff
-- Produce a handoff package containing goals, approved scope, normalized `selected_offer`, sitemap direction, audience notes, timeline, constraints, assets, and open questions.
-- Include the shared Deliver routing fields: `selected_offer`, `approved_scope`, `timeline`, `pages_or_templates`, `content_status`, `assets_status`, `platform_access_needed`, `launch_or_delivery_expectation`, and `open_questions`.
+- Produce a handoff package containing goals, approved scope, normalized `selected_offer`, sitemap direction, audience notes, timeline, constraints, assets, selected design-system reference when applicable, and open questions.
+- Include the shared Deliver routing fields: `selected_offer`, `approved_scope`, `timeline`, `pages_or_templates`, `content_status`, `assets_status`, `platform_access_needed`, `launch_or_delivery_expectation`, `selected_design_system_reference`, and `open_questions`.
 - For migration offers, also include `source_platform`, `existing_site_url`, `content_volume`, `redirect_required`, and `redesign_scope`.
 - For Webflow improvement offers, also include `request_type`, `change_list`, `priority`, `existing_webflow_access`, and `engagement_model`.
 - Confirm the contract is signed before creating the Deliver client folder.

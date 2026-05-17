@@ -24,19 +24,24 @@ Every signed client project must have its own dedicated subdirectory within `del
 - `deliver/[client-name]/workflows/`: Project-specific automations.
 - `deliver/[client-name]/docs/`: Knowledge base, meeting notes, and handoff docs.
 
-Client assets are workflow-owned. Store client handoff files, source materials, generated files, extracted media, design outputs, and final workflow assets inside the `.tmp/` folder of the workflow that owns or uses them, such as `deliver/[client-name]/workflows/[workflow-name]/.tmp/`. Do not create or use a client-level `assets/` folder as the default asset location.
+Client assets are workflow-owned:
+- Store the initial client handoff package once in `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/client-handoff/`.
+- When Deliver owns design creation or redesign, store the selected central design-system reference in `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/design-system/`.
+- Store later incoming files, generated files, extracted media, design outputs, and final workflow assets inside the `.tmp/` folder of the workflow that receives, produces, or uses them.
+- Later workflows should reference the original handoff package instead of duplicating it unless they need a transformed copy.
+- Do not create or use a client-level `assets/` folder as the default asset location.
 
 ### 3.1 Delivery Process
 The canonical post-contract delivery template library lives in `deliver/process/`. Sales owns offer definition, proposal sending, discovery meeting, contract onboarding, and the handoff package. Deliver starts only after signing, using the Sales handoff and its normalized `selected_offer` value to initialize the client workspace and choose the correct delivery path. Each numbered phase folder is a reusable delivery template that can be required, skipped, adapted, or replaced depending on the signed offer. Each phase keeps the standard workflow structure (`.md` directive, empty `.py` executor, empty `TRIGGER_PROMPT.txt`, and a `.tmp/` artifact folder).
 - Index: [process/PROCESS_INDEX.md](./process/PROCESS_INDEX.md)
 - Offer routing: [process/OFFER_ROUTING.md](./process/OFFER_ROUTING.md)
 - Client initialization: [process/00-client-delivery-initialization/00-client-delivery-initialization.md](./process/00-client-delivery-initialization/00-client-delivery-initialization.md)
-- Full-build phases covered: Wireframe -> Graphic Resources -> Design -> Content & SEO -> Webflow Build -> QA -> Launch -> Handoff & Support.
+- Full-build phases covered: Content Intake -> Wireframe -> Graphic Resources -> Design -> Design Revisions -> Content & SEO -> Webflow Build -> QA -> Launch -> Handoff & Support.
 - Offer-specific and optional modules covered: Figma Review & Build Planning, Migration Audit & Plan, Content Export & Import, Migration SEO & Redirects, Improvement Intake & Audit, and Vercel Deployment.
 - New client projects are instantiated by manually copying routed workflow templates from `deliver/process/` into `deliver/[client-name]/workflows/`. No automated executor for this initialization exists yet.
 
 ## 4. Quality Standards
-- **Pixel Perfection**: Final Webflow builds must match Figma designs 1:1.
+- **Pixel Perfection**: Final Webflow builds must match the approved design source 1:1, whether that source is a Claude Design HTML/CSS/JS package or a Figma design.
 - **CMS First**: All sites must be built with a scalable CMS structure, never hardcoded content.
 - **Responsiveness**: Mandatory testing on Mobile (320px) to Desktop (1920px+).
 - **SEO Ready**: Proper H1-H6 hierarchy, meta tags, and alt text on all images.

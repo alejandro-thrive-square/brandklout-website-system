@@ -11,20 +11,21 @@ This offer applies when a client has no existing design, wireframe, or developme
 
 ## 3. Scope of Work
 
-### Phase 1: Discovery & Strategy
-- Kickoff call to define goals, audience, and functionality requirements.
+### Phase 1: Content Intake & Strategy
+- Post-signing website-content questionnaire to gather business details, offers, proof points, and page content.
 - Competitive analysis (2-3 competitor sites reviewed).
 - Sitemap defining page structure and content hierarchy.
-- Content strategy: determine what copy exists, what needs to be written, and by whom.
+- Content strategy: determine what copy exists, what needs refinement, and what needs to be written separately.
 
-### Phase 2: Design
+### Phase 2: Wireframe & Design
+- HTML/CSS/JS wireframes reviewed and approved before visual design.
 - Moodboard or style direction (if no brand guidelines exist).
-- High-fidelity Figma designs: homepage + inner pages.
-- Desktop and mobile responsive layouts.
-- Up to 2 rounds of design revisions.
+- High-fidelity design package produced through Claude Design or direct Figma creation.
+- Figma file plus Vercel review URL delivered for client review.
+- Design-revision loop completed before development.
 
 ### Phase 3: Development
-- Webflow build: pixel-perfect translation of approved Figma designs.
+- Webflow build: pixel-perfect translation of the approved final design source.
 - Responsive implementation (desktop, tablet, mobile).
 - CMS setup for dynamic content (blog, portfolio, team, etc.) if applicable.
 - Animations and interactions using Webflow native interactions and GSAP where needed.

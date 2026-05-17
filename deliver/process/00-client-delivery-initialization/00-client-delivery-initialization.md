@@ -15,7 +15,7 @@ This is currently a documented manual structure process. The Python executor and
 - Signed contract and payment/setup readiness.
 - Sales handoff package from `sales/process/04-contract-onboarding/.tmp/deliver-handoff-[client-id].md`.
 - Normalized `selected_offer` value that matches `deliver/process/OFFER_ROUTING.md`.
-- Client name, client ID, approved scope, timeline, access/setup items, and open questions.
+- Client name, client ID, approved scope, timeline, access/setup items, selected design-system reference when applicable, and open questions.
 
 ## Execution Steps
 1. Confirm the contract is signed and Deliver is allowed to start.
@@ -28,9 +28,12 @@ This is currently a documented manual structure process. The Python executor and
 6. Identify the routed workflow modules for the selected offer.
 7. Copy only the required and scoped module folders from `deliver/process/` into `deliver/[client-name]/workflows/`.
 8. Preserve each copied workflow's internal structure: `.md` directive, `.py` executor, `TRIGGER_PROMPT.txt`, and `.tmp/`.
-9. Store client handoff files, source materials, generated files, extracted media, design outputs, and final workflow assets inside the `.tmp/` folder of the workflow that owns or uses them.
-10. Update the copied workflow `.md` files only when client-specific scope, skipped modules, adapted behavior, asset locations, or open questions need to be documented.
-11. Add `deliver/[client-name]/docs/project-overview.md` with the approved scope, selected offer, routed workflow list, timeline, setup items, workflow-owned asset locations, and open questions.
+9. Create `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/client-handoff/`.
+10. Store the signed handoff package and all initial client-provided source material once in `00-client-delivery-initialization/.tmp/client-handoff/`.
+11. When Deliver owns design creation or redesign, validate `selected_design_system_reference` and copy only that chosen package from `deliver/process/design-system-library/` into `00-client-delivery-initialization/.tmp/design-system/`.
+12. Store later incoming files, generated files, extracted media, design outputs, and final workflow assets inside the `.tmp/` folder of the workflow that receives, produces, or uses them.
+13. Update the copied workflow `.md` files only when client-specific scope, skipped modules, adapted behavior, asset locations, or open questions need to be documented.
+14. Add `deliver/[client-name]/docs/project-overview.md` with the approved scope, selected offer, routed workflow list, timeline, setup items, selected design-system reference when applicable, workflow-owned asset locations, and open questions.
     - **Estimated duration**: compute from the handoff `pages_or_templates` count using the per-page formula in [PRICING_TIMELINE_RULES.md](../../../sales/PRICING_TIMELINE_RULES.md): `pages × 2 days` for full-build offers, `pages × 1 day` for Figma-to-Webflow. Surface this as the `timeline` field in `project-overview.md`. If the handoff `timeline` differs from the formula output, record both and flag the deviation in `open_questions`.
 
 ## Routing Rules
@@ -40,21 +43,24 @@ This is currently a documented manual structure process. The Python executor and
 - Offer execution order is defined by `deliver/process/OFFER_ROUTING.md`.
 - Skipped modules should be noted in `project-overview.md` when their absence affects client expectations or delivery scope.
 
-## Non-Copy Resources
-Some process modules contain committed reference resources that must NOT be copied to client folders. These are always referenced from their canonical location in `deliver/process/`.
-
-- **`deliver/process/03-design/library/`**: The design reference library (~75 HTML/CSS/JS/JSON/MD files) is a read-only resource used during Phase 2 of the 03-Design workflow to generate client prototypes. It is never duplicated into client folders. All prototype outputs go to `deliver/[client-name]/workflows/03-design/.tmp/`.
+## Design-System Library
+- **Source of truth**: `deliver/process/design-system-library/`.
+- **Sales routing**: Discovery records the approved `selected_design_system_reference` from this library when Deliver owns design creation or redesign.
+- **Initialization behavior**: Copy only the selected package into `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/design-system/`.
+- **Design workflow behavior**: `04-design` reads the initialized package from `00/.tmp/design-system/` and writes project-specific outputs to its own `.tmp/`.
 
 ## Technical Setup
 - **Executor status**: Placeholder. No automated copying is implemented yet.
-- **Future automation**: Read a handoff package, create the client folder tree, copy routed workflow folders, generate `project-overview.md`, and report missing required handoff fields.
+- **Future automation**: Read a handoff package, create the client folder tree, copy routed workflow folders, seed the selected design-system package when applicable, generate `project-overview.md`, and report missing required handoff fields.
 - **Likely integrations**: CRM, ClickUp, Google Drive, OpenAI/Anthropic.
 - **Data boundary**: Do not store credentials or secrets in client docs, workflow files, or `.tmp/` artifacts.
-- **Asset boundary**: Do not create a client-level `assets/` folder by default. Client project assets belong in the owning workflow `.tmp/` folder and persist through VPS `rclone` sync.
+- **Asset boundary**: Do not create a client-level `assets/` folder by default. Initial client-provided files live once in `00-client-delivery-initialization/.tmp/client-handoff/`; the selected design-system reference lives in `00-client-delivery-initialization/.tmp/design-system/`; later files belong in the workflow `.tmp/` folder that receives, produces, or uses them. Persist heavy assets through VPS `rclone` sync.
 
 ## Output Artifacts
 - `deliver/process/00-client-delivery-initialization/.tmp/routing-check.json`
 - `deliver/process/00-client-delivery-initialization/.tmp/copied-workflows.json`
+- `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/client-handoff/`
+- `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/design-system/` (design-owned offers only)
 - `deliver/[client-name]/docs/project-overview.md` (final, persisted)
 
 ## Version Control

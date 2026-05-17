@@ -51,10 +51,11 @@ graph TD
 
 ## 2. Directory Structure & Microsystems
 
-Each folder represents a standalone Microsystem with its own internal logic and workflows.
+The root contains shared infrastructure (`mcp-servers/`) and four standalone Microsystems (pillars). The `mcp-servers/` directory sits above all microsystems as cross-cutting infrastructure — any pillar can reference its MCP servers.
 
-| Pillar | Directory | Purpose |
+| Component | Directory | Purpose |
 | :--- | :--- | :--- |
+| **MCP Infrastructure** | `mcp-servers/` | Shared MCP server index, setup docs, and config — above all microsystems. |
 | **Sales** | `sales/` | Lead acquisition, Upwork scraping, CRM management, and proposal automation. |
 | **Manage** | `manage/` | Internal operations, documentation, **Global Assets Hub**, and financial maintenance. |
 | **Growth** | `growth/` | Dynamic prospecting, rapid prototyping (Vercel), and design comparisons. |
@@ -67,10 +68,17 @@ Every workflow within a pillar must follow this structure:
 - `[workflow-name].py`: **The Executor**. The Python script that triggers the logic.
 - `.tmp/`: **Artifact Storage**. Stores workflow-owned intermediate and output files (HTML, CSVs, scraped data, manifests, logs, and lightweight generated artifacts). `.tmp/` folders are included in Git so workflow state and text artifacts travel with the repository. Heavy binary/media assets inside `.tmp/` remain excluded by file type and are synced to the VPS via `rclone`.
 
+### 2.2 MCP Server Folder Structure
+Every MCP server registered in the project follows this structure under `mcp-servers/`:
+- `[mcp-name]/`: Subfolder for each MCP server (e.g., `webflow/`, `figma/`).
+- `setup.md`: Setup, authorization, and usage documentation.
+- `MCP_INDEX.md`: Master index of all MCP servers in the project.
+
 ## 3. Global Operational Standards
 
 - **Context Filtering**: When working on a specific workflow, agents should prioritize the `.md` file within that workflow folder to save tokens and maintain focus.
 - **Environment Variables**: All API keys and secrets are shared globally via a root `.env` file.
+- **MCP Servers**: MCP servers are defined in `.mcp.json` (project scope) and documented in `mcp-servers/`. OAuth-based MCPs (e.g., Webflow, Figma) authenticate at runtime — no static tokens required.
 - **Inter-system Connectivity**: Microsystems connect through Python executors. Output from a `sales` workflow can trigger a `growth` or `deliver` process.
 - **Safety**: No destructive actions (deleting client data, unapproved publishing) should be taken without explicit confirmation in the directive.
 
@@ -89,7 +97,7 @@ Local PC ──── rclone sync (brand assets + heavy workflow media) ──�
 - **`.gitignore`**: Enforced at the repo root. The following are **never committed**:
   - `.env` and any files containing API keys or secrets.
   - OS/IDE junk files (`__pycache__/`, `.DS_Store`, `Thumbs.db`, `.vscode/`, etc.).
-  - **All binary/media files** (`*.png`, `*.jpg`, `*.jpeg`, `*.gif`, `*.svg`, `*.ico`, `*.pdf`, `*.mp4`, `*.mov`, `*.zip`, `*.psd`, `*.ai`, `*.fig`, `*.sketch`).
+  - **All binary/media files** (`*.png`, `*.jpg`, `*.jpeg`, `*.gif`, `*.webp`, `*.svg`, `*.ico`, `*.pdf`, `*.mp4`, `*.mov`, `*.zip`, `*.7z`, `*.psd`, `*.ai`, `*.eps`, `*.fig`, `*.sketch`).
 - **`.tmp/` folders**: Committed when they contain lightweight workflow state, text artifacts, HTML/CSS/JS, CSV/JSON, or other repo-friendly files. Heavy binary/media files inside `.tmp/` are still blocked by `.gitignore` and must not be force-added.
 - **Commit Discipline**: Commits must be atomic and descriptive. One logical change per commit.
 
@@ -97,7 +105,7 @@ Local PC ──── rclone sync (brand assets + heavy workflow media) ──�
 Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (100 GB)** is the single source of truth for those assets.
 
 - **Global Brand Assets** (`manage/brand-assets/`): The canonical source for all agency brand materials. These files live on the VPS and are synced from the local machine via `rclone` (SFTP).
-- **Deliver Project Files** (`deliver/[client-name]/workflows/[workflow-name]/.tmp/`): Client handoff files, source materials, generated media, extracted assets, design prototypes, and workflow-owned final assets live in the `.tmp/` folder of the workflow that owns or uses them. Repo-friendly files in this path are committed; heavy binary/media files are synced to the VPS.
+- **Deliver Project Files** (`deliver/[client-name]/workflows/[workflow-name]/.tmp/`): Initial client-provided source material lives once in `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/client-handoff/`. Later workflow inputs, generated media, extracted assets, design prototypes, and final assets live in the `.tmp/` folder of the workflow that receives, produces, or uses them. Repo-friendly files in these paths are committed; heavy binary/media files are synced to the VPS.
 - **Workflow Artifacts** (`.tmp/` folders): Generated at runtime and **not disposable**. Commit lightweight artifacts that are useful for review, replay, handoff, or agent continuity. Sync heavy binary/media outputs to the VPS via `rclone`, mirroring the same directory structure.
 - **Sync commands** (Local → VPS):
   ```bash
@@ -111,7 +119,7 @@ Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (
     --filter "+ **/.tmp/**/*.png" --filter "+ **/.tmp/**/*.jpg" --filter "+ **/.tmp/**/*.jpeg" \
     --filter "+ **/.tmp/**/*.gif" --filter "+ **/.tmp/**/*.svg" --filter "+ **/.tmp/**/*.webp" --filter "+ **/.tmp/**/*.ico" \
     --filter "+ **/.tmp/**/*.pdf" --filter "+ **/.tmp/**/*.mp4" --filter "+ **/.tmp/**/*.mov" \
-    --filter "+ **/.tmp/**/*.zip" --filter "+ **/.tmp/**/*.psd" --filter "+ **/.tmp/**/*.ai" \
+    --filter "+ **/.tmp/**/*.zip" --filter "+ **/.tmp/**/*.7z" --filter "+ **/.tmp/**/*.psd" --filter "+ **/.tmp/**/*.ai" --filter "+ **/.tmp/**/*.eps" \
     --filter "+ **/.tmp/**/*.fig" --filter "+ **/.tmp/**/*.sketch" \
     --filter "- *"
   ```

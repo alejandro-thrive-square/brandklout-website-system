@@ -13,13 +13,16 @@ Welcome, Claude. You are operating within the **Webzite Agentic Workflow** syste
 - **Manage Pillar**: [manage/MANAGE_SYSTEM_RULES.md](./manage/MANAGE_SYSTEM_RULES.md)
 - **Growth Pillar**: [growth/GROWTH_SYSTEM_RULES.md](./growth/GROWTH_SYSTEM_RULES.md)
 - **Deliver Pillar**: [deliver/DELIVER_SYSTEM_RULES.md](./deliver/DELIVER_SYSTEM_RULES.md)
+- **MCP Index**: [mcp-servers/MCP_INDEX.md](./mcp-servers/MCP_INDEX.md) — all MCP servers used across the project
+- **Webflow MCP Setup**: [mcp-servers/webflow/setup.md](./mcp-servers/webflow/setup.md)
 
 ## Operational Protocol
 1. **Understand the Pillar**: Before starting a task, read the rules for the relevant pillar.
 2. **Locate the Workflow**: Workflows are stored in subfolders with a `.md` directive and a `.py` executor.
 3. **Use Artifacts**: Store all intermediate data in the `.tmp/` folder within the specific workflow directory.
 4. **Token Optimization**: Filter your context to the specific workflow folder you are executing.
-5. **Version Control**: This system is managed via a GitHub repository. Follow the version control rules in [SYSTEM_RULES.md — Section 4](./SYSTEM_RULES.md). Commit lightweight `.tmp/` workflow artifacts when useful, but never commit `.env` files, secrets, or binary/media assets. All new `.md` files must include a Version Control section.
+5. **MCP Management**: MCP servers are shared infrastructure in `mcp-servers/`. Register new servers with `claude mcp add --scope project`. See [MCP Index](./mcp-servers/MCP_INDEX.md).
+6. **Version Control**: This system is managed via a GitHub repository. Follow the version control rules in [SYSTEM_RULES.md — Section 4](./SYSTEM_RULES.md). Commit lightweight `.tmp/` workflow artifacts when useful, but never commit `.env` files, secrets, or binary/media assets. All new `.md` files must include a Version Control section.
 
 ## Infrastructure
 - **Hosting**: Hostinger VPS

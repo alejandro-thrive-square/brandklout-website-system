@@ -2,7 +2,7 @@
 
 This folder contains the canonical post-contract delivery template library for the Deliver microsystem. Sales owns offer definition, proposal sending, discovery meeting, contract onboarding, and the Deliver handoff package. Deliver starts after signing, then uses the handoff package's normalized `selected_offer` value to initialize a client folder and choose the correct delivery path.
 
-Each numbered module mirrors the standard workflow structure defined in [SYSTEM_RULES.md Section 2.1](../../SYSTEM_RULES.md): `.md` directive, `.py` executor, `TRIGGER_PROMPT.txt`, and a `.tmp/` artifact folder. Module `00` defines client-folder initialization. Modules `01` through `14` are reusable delivery execution templates; [OFFER_ROUTING.md](./OFFER_ROUTING.md) determines which execution modules are copied for each Sales offer.
+Each numbered module mirrors the standard workflow structure defined in [SYSTEM_RULES.md Section 2.1](../../SYSTEM_RULES.md): `.md` directive, `.py` executor, `TRIGGER_PROMPT.txt`, and a `.tmp/` artifact folder. Module `00` defines client-folder initialization. Modules `01` through `16` are reusable delivery execution templates; [OFFER_ROUTING.md](./OFFER_ROUTING.md) determines which execution modules are copied for each Sales offer.
 
 > [!IMPORTANT]
 > **Integrity Rule**: When a phase's logic, naming, output schema, or offer routing changes, update the relevant phase `.md`, this index, and [OFFER_ROUTING.md](./OFFER_ROUTING.md) in the same commit.
@@ -19,41 +19,45 @@ Each numbered module mirrors the standard workflow structure defined in [SYSTEM_
 3. Read `selected_offer` from the handoff package and validate it against [OFFER_ROUTING.md](./OFFER_ROUTING.md).
 4. Identify the required, optional, skipped, and adapted modules for that offer.
 5. Copy only the required and scoped execution module folders into `deliver/[client-name]/workflows/` and keep the same internal structure.
-6. Fill in the empty `.py` executor and `TRIGGER_PROMPT.txt` for that engagement when automation is needed.
-7. Update the cloned `.md` files to reflect offer-specific adaptations, skipped phases, or client-specific deviations.
+6. Store the original signed handoff package and all client-provided starting materials in `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/client-handoff/`.
+7. When Deliver owns design creation or redesign, seed `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/design-system/` from the handoff's `selected_design_system_reference`.
+8. Fill in the empty `.py` executor and `TRIGGER_PROMPT.txt` for that engagement when automation is needed.
+9. Update the cloned `.md` files to reflect offer-specific adaptations, skipped phases, or client-specific deviations.
 
 ## Offer-to-Delivery Matrix
 
 | Sales offer | Default start | Required delivery modules | Adapted or optional modules |
 | :--- | :--- | :--- | :--- |
-| Development from Scratch | `00-client-delivery-initialization` | `00`, then `01` -> `02` -> `03` -> `04` -> `05` -> `06` -> `07` -> `08` | `14` optional for static design previews, client review URLs, or Vercel-based delivery. |
-| Figma to Webflow | `00-client-delivery-initialization` | `00`, then `09` -> optional `04` -> `05` -> `06` -> `07` -> `08` | `04` validates content/SEO only when scoped; `01` and `03` are skipped unless scoped; `14` optional for preview deployments. |
-| Migration to Webflow | `00-client-delivery-initialization` | `00`, then `10` -> optional `01`/`02`/`03` -> `11` -> `12` -> `05` -> `06` -> `07` -> `08` | `01`, `02`, and `03` apply only for redesign, new IA, or new visual direction; `14` optional for static preview deployments. |
-| Webflow Improvements & Updates | `00-client-delivery-initialization` | `00`, then `13` -> `05` -> `06` -> optional `07` -> adapted `08` | `01`-`04` apply only when the approved request needs planning, assets, design, content, or SEO; `14` optional for review URLs or standalone static delivery. |
+| Development from Scratch | `00-client-delivery-initialization` | `00`, then `01` -> `02` -> `03` -> `04` -> `05` -> `06` -> `07` -> `08` -> `09` -> `10` | `16` remains optional for standalone static deployments beyond the required design-review deployments handled inside `04` and `05`. |
+| Figma to Webflow | `00-client-delivery-initialization` | `00`, then `11` -> optional `06` -> `07` -> `08` -> `09` -> `10` | `06` validates content/SEO only when scoped; `01`-`05` are skipped unless scoped; `16` optional for preview deployments. |
+| Migration to Webflow | `00-client-delivery-initialization` | `00`, then `12` -> optional `01`/`02`/`03`/`04`/`05` -> `13` -> `14` -> `07` -> `08` -> `09` -> `10` | `01`-`05` apply only for new content, redesign, new IA, or a client revision loop; `16` optional for static preview deployments. |
+| Webflow Improvements & Updates | `00-client-delivery-initialization` | `00`, then `15` -> `07` -> `08` -> optional `09` -> adapted `10` | `01`-`06` apply only when the approved request needs intake, planning, assets, design, revisions, content, or SEO; `16` optional for review URLs or standalone static delivery. |
 
 Use [OFFER_ROUTING.md](./OFFER_ROUTING.md) as the source of truth for required handoff fields, completion criteria, and detailed routing rules.
 
 ## Process Modules
 
-The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `08` sequence remains the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `09` through `13` and optional static deployment module `14`. Module `14` defaults to GitHub for source history and Vercel CLI for per-client/per-product deployment.
+The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `10` sequence is the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `11` through `15` and optional static deployment module `16`.
 
 | # | Phase | Directive |
 | :---: | :--- | :--- |
 | 00 | Client Delivery Initialization | [00-client-delivery-initialization.md](./00-client-delivery-initialization/00-client-delivery-initialization.md) |
-| 01 | Wireframe | [01-wireframe.md](./01-wireframe/01-wireframe.md) |
-| 02 | Graphic Resources | [02-graphic-resources.md](./02-graphic-resources/02-graphic-resources.md) |
-| 03 | Design | [03-design.md](./03-design/03-design.md) |
-| 04 | Content & SEO | [04-content-seo.md](./04-content-seo/04-content-seo.md) |
-| 05 | Webflow Build | [05-webflow-build.md](./05-webflow-build/05-webflow-build.md) |
-| 06 | QA | [06-qa.md](./06-qa/06-qa.md) |
-| 07 | Launch | [07-launch.md](./07-launch/07-launch.md) |
-| 08 | Handoff & Support | [08-handoff-support.md](./08-handoff-support/08-handoff-support.md) |
-| 09 | Figma Review & Build Planning | [09-figma-review-build-planning.md](./09-figma-review-build-planning/09-figma-review-build-planning.md) |
-| 10 | Migration Audit & Plan | [10-migration-audit-plan.md](./10-migration-audit-plan/10-migration-audit-plan.md) |
-| 11 | Content Export & Import | [11-content-export-import.md](./11-content-export-import/11-content-export-import.md) |
-| 12 | Migration SEO & Redirects | [12-migration-seo-redirects.md](./12-migration-seo-redirects/12-migration-seo-redirects.md) |
-| 13 | Improvement Intake & Audit | [13-improvement-intake-audit.md](./13-improvement-intake-audit/13-improvement-intake-audit.md) |
-| 14 | Vercel Deployment | [14-vercel-deployment.md](./14-vercel-deployment/14-vercel-deployment.md) |
+| 01 | Content Intake | [01-content-intake.md](./01-content-intake/01-content-intake.md) |
+| 02 | Wireframe | [02-wireframe.md](./02-wireframe/02-wireframe.md) |
+| 03 | Graphic Resources | [03-graphic-resources.md](./03-graphic-resources/03-graphic-resources.md) |
+| 04 | Design | [04-design.md](./04-design/04-design.md) |
+| 05 | Design Revisions | [05-design-revisions.md](./05-design-revisions/05-design-revisions.md) |
+| 06 | Content & SEO | [06-content-seo.md](./06-content-seo/06-content-seo.md) |
+| 07 | Webflow Build | [07-webflow-build.md](./07-webflow-build/07-webflow-build.md) |
+| 08 | QA | [08-qa.md](./08-qa/08-qa.md) |
+| 09 | Launch | [09-launch.md](./09-launch/09-launch.md) |
+| 10 | Handoff & Support | [10-handoff-support.md](./10-handoff-support/10-handoff-support.md) |
+| 11 | Figma Review & Build Planning | [11-figma-review-build-planning.md](./11-figma-review-build-planning/11-figma-review-build-planning.md) |
+| 12 | Migration Audit & Plan | [12-migration-audit-plan.md](./12-migration-audit-plan/12-migration-audit-plan.md) |
+| 13 | Content Export & Import | [13-content-export-import.md](./13-content-export-import/13-content-export-import.md) |
+| 14 | Migration SEO & Redirects | [14-migration-seo-redirects.md](./14-migration-seo-redirects/14-migration-seo-redirects.md) |
+| 15 | Improvement Intake & Audit | [15-improvement-intake-audit.md](./15-improvement-intake-audit/15-improvement-intake-audit.md) |
+| 16 | Vercel Deployment | [16-vercel-deployment.md](./16-vercel-deployment/16-vercel-deployment.md) |
 
 ## Standard Folder Shape (per phase)
 
@@ -67,11 +71,11 @@ The current numbered folders are reusable templates. Module `00` is the setup wo
 
 ## Non-Copy Resources
 
-Some process modules contain committed reference resources that are NOT copied to client folders during initialization. These resources are always referenced from their canonical location in `deliver/process/`.
+Some process resources are committed once and reused across delivery engagements.
 
-| Module | Resource | Path | Rule |
-|:---|:---|:---|:---|
-| 03-design | Design reference library | `deliver/process/03-design/library/` | Read-only reference. Never copied to client folders. Contains ~75 HTML/CSS/JS/JSON/MD files for prototype generation. See `library/LIBRARY_INDEX.md`. |
+| Resource | Path | Rule |
+|:---|:---|:---|
+| Design system library | `deliver/process/design-system-library/` | Single source of truth for references selected in Sales discovery. Initialization copies only the chosen package into the client project's `00-client-delivery-initialization/.tmp/design-system/`. |
 
 ## Version Control
 - All changes to the delivery process and this index must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../SYSTEM_RULES.md).

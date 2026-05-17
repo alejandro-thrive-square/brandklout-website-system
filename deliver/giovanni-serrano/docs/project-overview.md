@@ -1,72 +1,64 @@
-# Giovanni Serrano — Project Overview
+# Giovanni Serrano - Project Overview
 
 ## Selected Offer
-**Development from Scratch** — Full design + Webflow build
+**Development from Scratch** - Full design + Webflow build
 
 ## Approved Scope
-- **4 pages total:** Home (index) + 3 service sub-pages (Invest, Scale, Develop)
-- **2 unique Figma designs:** Home page + Service page template (Invest, Scale, Develop share structure)
-- Client provided HTML wireframes (desktop-first) as information architecture source
-- Client provided brand guidelines v4.0 (colors, typography, voice)
-- Cloud design used to produce improved design system + 2 homepage variants (A/B)
+- **4 pages total:** Home + 3 service pages: Invest, Scale, Develop
+- **2 unique design templates:** Home page + shared Service page template
+- **Design path:** Claude Design HTML/CSS/JS package
+- Client-provided HTML wireframes serve as the approved IA source.
+- Client-provided brand guidelines v4.0 and Webflow developer brief seed the design and build work.
 
 ## Project Details
 | Field | Value |
 |---|---|
 | Client | Giovanni Serrano |
 | Domain | giovanniserrano.com |
-| Industry | Multifamily real estate investment & development (San Diego) |
-| Pages | 4 (1 home, 3 service templates) |
-| Design deliverable | 2 Figma pages (home + service template) |
+| Industry | Multifamily real estate investment and development |
+| Pages | 4 |
+| Templates | 2 |
 | Offer | Development from Scratch |
 | Pricing | 4 pages x $400 = $1,600 |
 | Timeline | 4 pages x 2 days = 8 days |
+| Selected design system reference | Giovanni Serrano design-system package |
 
 ## Routed Workflows
 | # | Workflow | Status | Notes |
-|---|----------|--------|-------|
-| 00 | Client Delivery Initialization | Complete | This document |
-| 01 | Wireframe | Adapted | Client provided HTML wireframes; IA validation only |
-| 02 | Graphic Resources | Required | Process brand guidelines, extract assets |
-| 03 | Design | Required | Cloud design variants already created; formalize in Figma |
-| 04 | Content & SEO | Required | Copy locked in HTML; needs metadata, schema, alt text |
-| 05 | Webflow Build | Required | Full build from approved designs |
-| 06 | QA | Required | Full-site QA |
-| 07 | Launch | Required | DNS, SSL, publish |
-| 08 | Handoff & Support | Required | Editor training, 3-week support |
+|---|---|---|---|
+| 00 | Client Delivery Initialization | Complete | Client workspace, handoff package, and routed workflow set created |
+| 01 | Content Intake | Skipped | Existing client materials already cover the initial intake need |
+| 02 | Wireframe | Adapted | Validate client-provided HTML wireframes instead of creating new ones |
+| 03 | Graphic Resources | Required | Prepare brand and visual assets |
+| 04 | Design | Required | Use Claude Design path and initialized design-system package |
+| 05 | Design Revisions | Required | Apply approved correction list before development |
+| 06 | Content & SEO | Required | Finalize metadata, schema, alt text, and locked copy package |
+| 07 | Webflow Build | Required | Build approved designs in Webflow |
+| 08 | QA | Required | Full-site QA |
+| 09 | Launch | Required | DNS, SSL, publish, smoke test |
+| 10 | Handoff & Support | Required | Walkthrough, packet, 3-week support window |
 
 ## Asset Locations
-- **Client handoff:** deliver/giovanni-serrano/workflows/01-wireframe/.tmp/client-handoff/
-  - index.html, invest.html, scale.html, develop.html (HTML wireframes)
-  - giovanni_brand_guidelines_v4.pdf (brand guidelines)
-  - WEBFLOW_DEVELOPER_BRIEF.md (detailed build brief)
-- **Graphic resources:** deliver/giovanni-serrano/workflows/02-graphic-resources/.tmp/
-  - asset-inventory.json, asset-direction.md, missing-assets.md
-  - extracted Gio photo, logo files, source/licensing notes
-- **Design system and variants:** deliver/giovanni-serrano/workflows/03-design/.tmp/
-  - Giovanni Serrano - Design System.html (main design system)
-  - design-system.html (alternate design system)
-  - scroll-cinema.html (scroll animation variant)
-  - variant-a.html (homepage variant A)
-  - variant-b.html (homepage variant B)
-  - service-template-invest.html, service-template-scale.html, service-template-develop.html
-  - canvas/design-canvas.jsx (canvas component)
+- **Initial client handoff:** `deliver/giovanni-serrano/workflows/00-client-delivery-initialization/.tmp/client-handoff/`
+  - HTML wireframes: `index.html`, `invest.html`, `scale.html`, `develop.html`
+  - `WEBFLOW_DEVELOPER_BRIEF.md`
+- **Selected design-system package:** `deliver/giovanni-serrano/workflows/00-client-delivery-initialization/.tmp/design-system/`
+- **Graphic resources:** `deliver/giovanni-serrano/workflows/03-graphic-resources/.tmp/`
+- **First-draft design outputs:** `deliver/giovanni-serrano/workflows/04-design/.tmp/`
+- **Authoritative client correction notes and revised design package:** `deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/`
 
 ## Setup Items Needed
 - [ ] Webflow workspace access
-- [ ] Domain registrar access (DNS configuration)
-- [ ] Gio's photo asset (currently base64-embedded in HTML — extract and upload)
-- [ ] Logo files (if any beyond wordmark)
-- [ ] Client sign-off on homepage variant selection (A or B)
+- [ ] Domain registrar access
+- [ ] Final client approval of revised design package
 
 ## Open Questions
-- Which homepage variant does the client prefer — A or B?
-- Does Gio have additional photos beyond the one embedded in the About section?
-- Any preference on CMS timing for Testimonials (currently placeholder)?
+- Are additional approved photography assets available beyond the current supplied source material?
+- When should Testimonials be populated in CMS if real testimonials are not ready before launch?
 
 ## Version Control
 - All changes to this document must follow the version control rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md).
-- **Branch naming:** deliver/giovanni-serrano-<change>
+- **Branch naming:** `deliver/giovanni-serrano-<change>`
 - **Commit discipline:** Atomic commits with descriptive messages. One logical change per commit.
 
 ## Infrastructure

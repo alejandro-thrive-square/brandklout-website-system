@@ -22,10 +22,12 @@ This workflow owns the booked discovery meeting after a proposal has been sent a
 - Discuss business goals, audience, current pain points, desired outcomes, and success criteria.
 - Confirm stakeholders, decision-makers, timeline, budget fit, and platform requirements.
 - Review any existing website, Figma file, CMS, integrations, migration needs, or content gaps.
+- When Deliver owns design creation or redesign, route the client to one approved reference from `deliver/process/design-system-library/`.
 
 ### Step 3: Capture Strategy Notes
 - Summarize positioning, sitemap direction, content needs, SEO needs, technical requirements, and risks.
 - Review 3-5 competitor or inspiration URLs when relevant.
+- Record `selected_design_system_reference` when design work is in scope.
 - Save relevant scraped Markdown, meeting notes, and strategy notes in `.tmp/`.
 
 ### Step 4: Prepare Contract Inputs
