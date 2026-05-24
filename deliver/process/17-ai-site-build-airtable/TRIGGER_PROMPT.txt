@@ -1,0 +1,9 @@
+Build the approved AI-assisted website package for the selected client using the Claude/Vercel/Airtable delivery path.
+
+Before implementation:
+- Read the Sales handoff, approved wireframes, approved Claude design package, revision notes, and scoped content/SEO decisions.
+- Confirm the deployment target, Airtable-backed content scope, dynamic content types, and SEO rendering expectation.
+- Keep Airtable tokens and Vercel secret values out of browser code, docs, manifests, and committed files.
+
+Outputs:
+- Write the build plan, Airtable content contract, environment-variable name list, SEO rendering notes, QA handoff, and Vercel-ready site package into this workflow's `.tmp/` folder.

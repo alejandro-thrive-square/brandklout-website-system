@@ -7,9 +7,9 @@ This workflow publishes a static design or client website folder to Vercel so it
 > **Integrity Rule**: Any change to the Python executor, Vercel deployment strategy, project naming rules, or artifact schema must be documented here immediately.
 
 ## Operational Purpose
-Deploy a workflow-owned static output folder, such as `deliver/[client-name]/workflows/04-design/.tmp/final-design`, to Vercel without moving the client files out of the Deliver project structure. Use this workflow for client previews, final static handoff sites, or temporary review environments when Webflow launch is not the immediate deployment target.
+Deploy a workflow-owned static output folder, such as `deliver/[client-name]/workflows/05-design-revisions/.tmp/final-design`, to Vercel without moving the client files out of the Deliver project structure. Use this workflow for client previews, final static handoff sites, or temporary review environments when Webflow launch is not the immediate deployment target.
 
-This module is optional. It can be copied into any client workspace when the Sales handoff, project overview, or delivery decision calls for Vercel preview/deployment.
+This module is optional for delivery routes that only need Webflow or ad-hoc preview hosting. It is required for the `AI Site with Claude, Vercel & Airtable` route and can be copied into any other client workspace when the Sales handoff, project overview, or delivery decision calls for Vercel preview/deployment.
 
 ## Deployment Model
 Use one Vercel project per client/product when the deployment needs a stable review URL, custom subdomain, or independent production history.
@@ -47,6 +47,69 @@ Examples:
 9. Add the custom domain/subdomain in Vercel when needed.
 10. Store the deployment manifest and verification notes in this workflow's `.tmp/` folder.
 
+## Airtable CMS on Vercel Pattern
+Use this pattern when a static client site needs lightweight CMS content without moving immediately to Webflow.
+
+Required folder shape:
+
+```text
+deliver/[client-name]/workflows/05-design-revisions/.tmp/final-design/
+  index.html
+  api/
+    [content-route].js
+```
+
+Implementation rules:
+- Keep Airtable tokens server-side in Vercel Functions under `api/*.js`.
+- Browser code should call same-origin routes such as `/api/portfolio`; never call Airtable directly from the browser.
+- Store only environment variable names in docs. Never commit values, `.env` files, Personal Access Tokens, base IDs, or private table IDs unless masked and intentionally documented for debugging.
+- Trim environment variable values in the Vercel Function before use; trailing spaces can break Airtable requests.
+- Prefer Airtable IDs for runtime config when possible:
+  - base ID begins with `app`
+  - table ID begins with `tbl`
+- Redeploy after any Vercel environment variable change.
+
+Standard Airtable environment variable pattern:
+
+```text
+AIRTABLE_TOKEN
+AIRTABLE_BASE_ID
+AIRTABLE_[CONTENT]_TABLE
+```
+
+For a portfolio route, use:
+
+```text
+AIRTABLE_TOKEN
+AIRTABLE_BASE_ID
+AIRTABLE_PROJECTS_TABLE
+AIRTABLE_CATEGORIES_TABLE
+```
+
+Cache defaults:
+- Use `Cache-Control: no-store, max-age=0` while content is actively reviewed or edited.
+- Use browser fetch with `{ cache: 'no-store' }` when immediate Airtable edit visibility is expected.
+- Add caching later only when the maintenance expectation allows delayed updates.
+
+Safe diagnostics:
+- API responses may include non-secret diagnostic fields such as missing env var names, masked base IDs, configured route/table names, and upstream status codes.
+- API responses must never include tokens, full secret values, private credentials, or raw Authorization headers.
+
+Post-deploy checks:
+- Visit the public API route directly, for example `/api/portfolio`.
+- Confirm it returns expected JSON before testing the page UI.
+- Confirm the browser console has no failed API requests.
+- Edit a non-sensitive Airtable test record and reload the site to confirm the CMS path updates.
+
+Common debugging sequence:
+
+| Symptom | Meaning | Next Check |
+|---|---|---|
+| Public page works but `/api/...` returns 404 | Function folder was not deployed. | Confirm `api/*.js` exists inside the exact deployed root. |
+| API returns generic content-load error | Function deployed but runtime config or upstream request failed. | Inspect safe `detail`/`config` diagnostics. |
+| Airtable returns `404 NOT_FOUND` | Wrong base/table, token lacks access, or whitespace in env vars. | Confirm matching `app...` base ID, `tbl...` table ID, token scope, and trimmed values. |
+| Airtable edits do not show after reload | Old deployment or cache policy. | Confirm live code uses no-store headers/fetch and redeploy if needed. |
+
 ## Standard Update Flow
 Use this flow when updating an existing CLI-managed Vercel project:
 
@@ -76,8 +139,8 @@ vercel --cwd deliver/[client-name]/workflows/[workflow-name]/.tmp/[deployment-fo
 For Giovanni Serrano's current final design:
 
 ```powershell
-vercel --cwd deliver/giovanni-serrano/workflows/04-design/.tmp/final-design
-vercel --cwd deliver/giovanni-serrano/workflows/04-design/.tmp/final-design --prod
+vercel --cwd deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final-design
+vercel --cwd deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final-design --prod
 ```
 
 ## Git-Connected Setup
@@ -89,7 +152,7 @@ When using the GitHub repository from the Vercel dashboard:
 2. Set **Root Directory** to the client/product output folder, for example:
 
 ```text
-deliver/giovanni-serrano/workflows/04-design/.tmp/final-design
+deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final-design
 ```
 
 3. Use **Framework Preset**: `Other`.
@@ -118,7 +181,7 @@ Store a lightweight JSON manifest when a deployment is created:
 {
   "client_slug": "giovanni-serrano",
   "product_slug": "final-design",
-  "deployment_root": "deliver/giovanni-serrano/workflows/04-design/.tmp/final-design",
+  "deployment_root": "deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final-design",
   "vercel_project": "webzite-giovanni-serrano-final-design",
   "environment": "preview",
   "deployment_url": "",

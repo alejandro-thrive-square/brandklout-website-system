@@ -12,7 +12,7 @@ For smaller Webflow improvement requests, this module can be reduced to a delive
 
 ## Inputs From Sales / Previous Phase
 - Live production website and successful post-launch smoke test.
-- Final Webflow structure, CMS notes, credentials transfer needs, and known maintenance recommendations.
+- Final platform structure, CMS/content notes, credentials transfer needs, and known maintenance recommendations.
 - Any support terms promised in the signed agreement.
 
 ## Execution Steps
@@ -26,6 +26,7 @@ For smaller Webflow improvement requests, this module can be reduced to a delive
 - **Figma to Webflow**: Include Webflow Editor training, CMS notes, interaction notes, and any deviations from the Figma file.
 - **Migration to Webflow**: Include migrated CMS notes from `13-content-export-import`, redirect status from `14-migration-seo-redirects`, monitoring outcomes, source-platform cutover notes, and any post-launch watch items.
 - **Webflow Improvements & Updates**: Provide a concise delivery note or retainer summary covering the approved `13` change list, QA checks, publish status, open risks, and next-request process.
+- **AI Site with Claude, Vercel & Airtable**: Include Vercel deployment notes, Airtable editing scope, environment-variable name references, route/SEO caveats, and the support path for future code or content-model changes.
 
 ## Technical Setup
 - **Executor status**: Placeholder.

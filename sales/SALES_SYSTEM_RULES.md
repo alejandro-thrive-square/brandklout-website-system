@@ -56,6 +56,7 @@ The canonical offer files live in `sales/process/01-define-offers/offers/` and a
 - [Figma to Webflow](./process/01-define-offers/offers/offer-figma-to-webflow.md) - Client has a finished Figma design. Development only.
 - [Migration to Webflow](./process/01-define-offers/offers/offer-migration-to-webflow.md) - WordPress/Shopify to Webflow, including CMS content migration.
 - [Webflow Improvements & Updates](./process/01-define-offers/offers/offer-webflow-improvements.md) - Changes, fixes, and additions to an existing Webflow site.
+- [AI Site with Claude, Vercel & Airtable](./process/01-define-offers/offers/offer-ai-site-claude-vercel-airtable.md) - AI-assisted coded website route with Claude design/build iterations, Vercel deployment, and scoped Airtable-backed content.
 
 ## 8. Supporting Workflow Links
 - [Scrape Upwork & Write Proposal](./scrape-upwork-sheets-write-proposal/scrape-upwork-sheets-write-proposal.md)

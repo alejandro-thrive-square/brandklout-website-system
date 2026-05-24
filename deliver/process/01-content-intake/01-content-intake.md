@@ -25,6 +25,7 @@ Send, receive, and normalize the post-signing website-content questionnaire for 
 - **Figma to Webflow**: Skipped unless the client also needs missing content gathered or rewritten.
 - **Migration to Webflow**: Skipped unless redesign or new-page scope requires new content intake.
 - **Webflow Improvements & Updates**: Optional when new pages, sections, or copy-heavy requests need structured intake.
+- **AI Site with Claude, Vercel & Airtable**: Required unless the signed handoff already includes an approved content package sufficient for Claude wireframing.
 
 ## Technical Setup
 - **Executor status**: Placeholder.

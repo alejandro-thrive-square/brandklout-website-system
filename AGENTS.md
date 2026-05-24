@@ -8,6 +8,7 @@ Welcome, Claude. You are operating within the **Webzite Agentic Workflow** syste
 
 ## Quick Links
 - **Master Rules**: [SYSTEM_RULES.md](./SYSTEM_RULES.md)
+- **VPS Deployment**: [DEPLOYMENT.md](./DEPLOYMENT.md)
 - **Pricing & Timeline Rules**: [PRICING_TIMELINE_RULES.md](./sales/PRICING_TIMELINE_RULES.md) — per-page rates and durations (single source of truth)
 - **Sales Pillar**: [sales/SALES_SYSTEM_RULES.md](./sales/SALES_SYSTEM_RULES.md)
 - **Manage Pillar**: [manage/MANAGE_SYSTEM_RULES.md](./manage/MANAGE_SYSTEM_RULES.md)

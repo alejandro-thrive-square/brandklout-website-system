@@ -19,7 +19,7 @@ This workflow keeps the Sales offer library clear, current, and ready to use bef
 - If no offer fits, flag the opportunity for manual scope review before proposal writing.
 
 ### Step 2: Confirm Offer Fit
-- Identify whether the lead needs development from scratch, Figma to Webflow, migration to Webflow, or Webflow improvements.
+- Identify whether the lead needs development from scratch, Figma to Webflow, migration to Webflow, Webflow improvements, or an AI site built with Claude, Vercel, and Airtable.
 - Record the normalized `selected_offer` value using the canonical offer title exactly as it should appear in the Deliver handoff.
 - Capture any add-ons, exclusions, or constraints that should be mentioned in the proposal.
 - Confirm which materials the client must provide.

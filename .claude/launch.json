@@ -1,0 +1,11 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "final-design",
+      "runtimeExecutable": "npx",
+      "runtimeArgs": ["serve", "deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final-design", "-l", "3456"],
+      "port": 3456
+    }
+  ]
+}

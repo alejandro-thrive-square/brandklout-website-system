@@ -25,6 +25,7 @@ Create or collect the visual assets required by the approved wireframes and bran
 - **Figma to Webflow**: Validate that Figma assets, images, icons, fonts, and licensing notes are available for build; request only missing assets.
 - **Migration to Webflow**: Inventory source-site media, reusable brand assets, documents, and CMS images that must be migrated or replaced.
 - **Webflow Improvements & Updates**: Use only when the approved request includes new visual assets, brand updates, media cleanup, or new page/section graphics.
+- **AI Site with Claude, Vercel & Airtable**: Use when the approved Claude wireframes require new imagery, icons, illustration, motion assets, or prepared media before design refinement.
 
 ## Technical Setup
 - **Executor status**: Placeholder.

@@ -33,6 +33,7 @@ This workflow converts an approved proposal and discovery meeting into a signed 
 - Include the shared Deliver routing fields: `selected_offer`, `approved_scope`, `timeline`, `pages_or_templates`, `content_status`, `assets_status`, `platform_access_needed`, `launch_or_delivery_expectation`, `selected_design_system_reference`, and `open_questions`.
 - For migration offers, also include `source_platform`, `existing_site_url`, `content_volume`, `redirect_required`, and `redesign_scope`.
 - For Webflow improvement offers, also include `request_type`, `change_list`, `priority`, `existing_webflow_access`, and `engagement_model`.
+- For AI Claude/Vercel/Airtable site offers, also include `runtime_stack`, `airtable_scope`, `dynamic_content_types`, `vercel_launch_expectation`, and `seo_rendering_expectation`.
 - Confirm the contract is signed before creating the Deliver client folder.
 - Deliver uses `deliver/process/OFFER_ROUTING.md` to select the correct path from this handoff package.
 

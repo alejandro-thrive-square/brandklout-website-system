@@ -92,6 +92,8 @@ Local PC ──── Git push (code/docs) ────→ GitHub ────�
 Local PC ──── rclone sync (brand assets + heavy workflow media) ───→ VPS (asset source of truth)
 ```
 
+- **Automatic VPS deploys**: Pushes to `main` trigger the GitHub Actions workflow in `.github/workflows/deploy-vps.yml`, which SSHes into the VPS and runs a guarded `git pull --ff-only origin main`. Setup details and required GitHub secrets are documented in [DEPLOYMENT.md](./DEPLOYMENT.md).
+
 ### 4.1 Repository Hygiene
 - **Platform**: GitHub (private repository).
 - **`.gitignore`**: Enforced at the repo root. The following are **never committed**:
@@ -124,6 +126,8 @@ Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (
     --filter "- *"
   ```
   Configure the `vps` remote in `~/.config/rclone/rclone.conf` with SFTP credentials. Use `rclone sync` for any directory containing heavy binary/media assets.
+
+- **Retired VPS paths**: When a repo restructure makes an old VPS-only path obsolete, first migrate any assets that still belong in the system, then add the retired path to `scripts/deploy-cleanup.sh`. Deployment cleanup must stay allowlisted and explicit; do not use broad `git clean -fdx` cleanup because valid ignored media intentionally lives on the VPS.
 
 ### 4.3 Branching Strategy
 - **`main`**: Production-ready state of the system. Protected — no direct pushes.

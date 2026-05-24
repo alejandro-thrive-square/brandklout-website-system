@@ -61,6 +61,7 @@ All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.t
 - **Figma to Webflow**: Skipped unless the signed scope includes design changes, missing breakpoints, or unresolved component states that Deliver is responsible for designing.
 - **Migration to Webflow**: Required only when the migration includes redesign or significant visual changes.
 - **Webflow Improvements & Updates**: Optional for scoped redesign work, new page designs, or brand-system updates.
+- **AI Site with Claude, Vercel & Airtable**: Required. Use the Claude Design path to produce the approved coded design package that `17-ai-site-build-airtable` turns into the final Vercel site.
 
 ## Technical Setup
 - **Executor status**: Placeholder.

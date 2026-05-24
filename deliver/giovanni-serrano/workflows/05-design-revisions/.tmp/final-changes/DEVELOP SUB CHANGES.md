@@ -1,80 +1,123 @@
-﻿DEVELOP SUB-PAGE â€” DESIGN CHANGES
+# Develop Sub-Page Design Changes
 
-GLOBAL
-â€¢	Add a sticky "Get a free lot review â†’" button. Top-right on desktop, full-width bottom bar on mobile. Appears after second scroll. Anchors to #contact.
-â€¢	Standardize CTA copy as "GET A FREE LOT REVIEW" across the entire page â€” banners, sticky button, hero CTA, and form button. The two existing inline banners already use this. The form submit button at Section 10 currently says "REQUEST A FREE LOT REVIEW" â€” change it to match.
-â€¢	Systemic font rendering issue across the page. Capital letters are rendering as fallback glyphs: 
-o	S â†’ Ãª (e.g. "Ãªan Diego", "ÃªB 9", "ÃªB 1123", "Ãªtabilized", "ÃªD", "Ãªtructural", "Ãªoils", "Ãªometimes")
-o	W â†’ Ê‹ (e.g. "Ê‹ hat's", "Ê‹ alking")
-o	Y â†’ Ê‹ (e.g. "Ê‹ou contribute", "Ê‹ou hold")
-o	V â†’ Ê‹ (e.g. "JÊ‹ structuring", "LTÊ‹")
-o	lowercase s â†’ Ê‚ (e.g. "Ê‚aving")
-Likely a missing font weight or Unicode mapping issue. Needs a technical fix at the font level, then a global verification pass before publish. For a homeowner audience making a six-figure decision, copy glitches kill trust faster than anything else on the page.
-â€¢	The two existing inline CTA banners (after hero, after Section 05) are well-placed â€” keep both. Add one additional banner between Section 04 (Refinance Play) and Section 05 (Sample Lot Review), same copy and styling.
+## Global
 
-SECTION 01 Â· HERO
-â€¢	Add two CTAs below the BEST FOR / RANGE / MY ROLE box: 
-o	Primary (terracotta button): "Get a free lot review â†’" â€” anchors to #contact
-o	Secondary (text link with arrow): "See a sample lot review â†“" â€” anchors to Section 05
-â€¢	Replace eyebrow text "03 / 04 Â· DEVELOP Â· SERVICE BRIEF C" with "03 / 04 Â· FOR HOMEOWNERS WITH A BACKYARD"
-â€¢	The site-plan visual on the right is excellent. Keep as-is.
+- Add a sticky `Get a free lot review ->` button.
+- Desktop placement: top right.
+- Mobile placement: full-width bottom bar.
+- Trigger: appears after the second scroll.
+- Anchor: `#contact`.
+- Standardize CTA copy as `GET A FREE LOT REVIEW` across the entire page: banners, sticky button, hero CTA, and form button.
+- The two existing inline CTA banners already use this copy. The Section 10 form submit button currently says `REQUEST A FREE LOT REVIEW`; change it to match.
+- Fix the systemic font rendering issue across the page. Capital letters are rendering as fallback glyphs:
+  - `S` renders incorrectly in examples such as `San Diego`, `SB 9`, `SB 1123`, `Stabilized`, `SD`, `Structural`, `Soils`, and `Sometimes`.
+  - `W` renders incorrectly in examples such as `What's` and `Walking`.
+  - `Y` renders incorrectly in examples such as `You contribute` and `You hold`.
+  - `V` renders incorrectly in examples such as `JV structuring` and `LTV`.
+  - Lowercase `s` renders incorrectly in examples such as `Saving`.
+- This is likely a missing font weight or Unicode mapping issue. It needs a technical fix at the font level, followed by a global verification pass before publish.
+- For a homeowner audience making a six-figure decision, copy glitches kill trust faster than anything else on the page.
+- Keep the two existing inline CTA banners after the hero and after Section 05.
+- Add one additional banner between Section 04, Refinance Play, and Section 05, Sample Lot Review. Use the same copy and styling.
 
-SECTION 02 Â· WHY BUILD
-â€¢	Fix typo in Card 02: "Ãªan Diego" â†’ "San Diego"
+## Section 01 - Hero
 
-SECTION 03 Â· THREE PATHS
-The 2Ã—2 grid has an empty bottom-right quadrant (A top-left, B top-right, C bottom-left, empty bottom-right). Reads as unfinished. Two cleaner options:
-â€¢	Preferred: Restructure as a single row of three columns (A Â· B Â· C). Tight, balanced, no empty space.
-â€¢	Alternative: Move the "CA law" callout up into the empty quadrant so the grid stays 2Ã—2 with no gap, then drop the standalone CA law section below.
+- Add two CTAs below the `BEST FOR / RANGE / MY ROLE` box:
+  - Primary terracotta button: `Get a free lot review ->`, anchored to `#contact`.
+  - Secondary text link with arrow: `See a sample lot review v`, anchored to Section 05.
+- Replace eyebrow text:
+  - From: `03 / 04 - DEVELOP - SERVICE BRIEF C`
+  - To: `03 / 04 - FOR HOMEOWNERS WITH A BACKYARD`
+- Keep the site-plan visual on the right as-is. It is excellent.
 
-SECTION 04 Â· THE REFINANCE PLAY
-â€¢	Fix typo in Stage 01 body: "Ê‹ou contribute 20â€“35% equity" â†’ "You contribute 20â€“35% equity"
-â€¢	Fix typo in Stage 04 body: "Ê‹ou hold the property" â†’ "You hold the property"
-â€¢	The "+Units / +Income / +Equity / Repeat" treatment at the bottom of the four stages is the strongest formulaic moment on the page. Keep as-is.
+## Section 02 - Why Build
 
-SECTION 05 Â· SAMPLE LOT REVIEW
-â€¢	Fix typos in the sample document: 
-o	"2 additional units via ÃªB 9 lot split" â†’ "via SB 9 lot split"
-o	"ÃªB 1123 small-lot subdivision" â†’ "SB 1123 small-lot subdivision"
-o	"Ãªtabilized rents" â†’ "Stabilized rents"
-o	"Cash-out at 70% LTÊ‹" â†’ "Cash-out at 70% LTV"
-â€¢	Insert a testimonial slot between this section and the CTA banner that follows. Single quote, 2â€“3 lines, attributed by name and neighborhood. Design the slot now even if copy isn't final. For a homeowner audience considering a six-figure development project, a quote from another homeowner who went through the process is the single highest-impact addition to this page.
+- Fix typo in Card 02: change the broken rendering of `San Diego` to `San Diego`.
 
-SECTION 06 Â· WHY WORK WITH ME
-â€¢	Fix typo in Card B body: "Ê‚aving you from a project" â†’ "Saving you from a project"
+## Section 03 - Three Paths
 
-SECTION 07 Â· THE PROCESS
-â€¢	Fix typos in Stage 01 body: 
-o	"Ê‹ hat's actually worth building" â†’ "What's actually worth building"
-o	"under ÃªB 9, ADU law, Density Bonus, ÃªB 1123" â†’ "under SB 9, ADU law, Density Bonus, SB 1123"
+The `2x2` grid has an empty bottom-right quadrant: A top left, B top right, C bottom left, and empty bottom right. It reads as unfinished.
 
-SECTION 08 Â· THE TEAM
-â€¢	Fix typos across cards: 
-o	Card A Â· DESIGN: "ÃªD â†’ DD â†’ CD" â†’ "SD â†’ DD â†’ CD". Consider expanding on first use: "Schematic Design (SD) â†’ Design Development (DD) â†’ Construction Documents (CD)" â€” most homeowners don't know these abbreviations.
-o	Card B Â· STRUCTURE + SITE: "Ãªtructural engineering" â†’ "Structural engineering"; "Ãªoils (geotech)" â†’ "Soils (geotech)"
-o	Card D Â· CAPITAL: "Ãªometimes the same institution" â†’ "Sometimes the same institution"
-o	Card E Â· LEGAL: "JÊ‹ structuring" â†’ "JV structuring"
-o	Card F Â· DEVELOPER: "Ê‹ alking the site" â†’ "Walking the site"
-â€¢	Card F (the inverted dark-panel "Me â€” end to end" card) is intentional and effective. Keep as-is.
-â€¢	Mobile: stack the 3Ã—2 grid as 2Ã—3 (not 1Ã—6 â€” too long a scroll). Card F must land last in the stacked order so the "everyone else, then me" reveal stays intact.
+Preferred option:
 
-SECTION 09 Â· MY BACKGROUND
-â€¢	Add a professional headshot of Gio. Position above the body copy on the left column; the Core Thesis terracotta panel stays on the right. Preserves the 2-column structure and lands the photo in the natural "introduce yourself" position before the narrative.
-â€¢	The Core Thesis panel ("The construction site and the spreadsheet, both. Most people only bring one.") works as-is.
+- Restructure as a single row of three columns: `A / B / C`.
+- This is tighter, balanced, and avoids empty space.
 
-SECTION 10 Â· LET'S TALK (Contact Form)
-â€¢	Phone field placeholder "619.555.0000" reads as a real number. Change to "(619) 555-0000" or "Your phone".
-â€¢	"I'm looking to" dropdown â€” currently empty "Select your goal". Suggested Develop-specific options: 
-o	"Find out what's buildable on my lot"
-o	"Get a feasibility review for a specific property"
-o	"Explore the refinance math on my home"
-o	"Discuss a full development project"
-â€¢	Verify the house-shape watermark behind the terracotta panel renders consistently on mobile.
+Alternative option:
 
-SECTION 11 Â· OTHER SERVICES
-â€¢	Cards labeled A Â· INVEST / B Â· SCALE â€” skipping C because C is Develop. Relabel as 01 / 02 or drop the letter labels entirely.
-â€¢	Confirm placement is BELOW the contact form.
+- Move the `CA law` callout up into the empty quadrant so the grid stays `2x2` with no gap.
+- Then drop the standalone CA law section below.
 
-SECTION 12 Â· FOOTER
-No changes.
+## Section 04 - The Refinance Play
 
+- Fix typo in Stage 01 body: change the broken rendering of `You contribute 20-35% equity` to `You contribute 20-35% equity`.
+- Fix typo in Stage 04 body: change the broken rendering of `You hold the property` to `You hold the property`.
+- Keep the `+Units / +Income / +Equity / Repeat` treatment at the bottom of the four stages as-is. It is the strongest formulaic moment on the page.
+
+## Section 05 - Sample Lot Review
+
+- Fix typos in the sample document:
+  - Change broken `SB 9 lot split` text to `via SB 9 lot split`.
+  - Change broken `SB 1123 small-lot subdivision` text to `SB 1123 small-lot subdivision`.
+  - Change broken `Stabilized rents` text to `Stabilized rents`.
+  - Change broken `Cash-out at 70% LTV` text to `Cash-out at 70% LTV`.
+- Insert a testimonial slot between this section and the CTA banner that follows:
+  - Single quote, 2-3 lines.
+  - Attribute by name and neighborhood.
+  - Design the slot now even if final copy is not ready.
+- For a homeowner audience considering a six-figure development project, a quote from another homeowner who went through the process is the single highest-impact addition to this page.
+
+## Section 06 - Why Work With Me
+
+- Fix typo in Card B body: change the broken rendering of `Saving you from a project` to `Saving you from a project`.
+
+## Section 07 - The Process
+
+- Fix typos in Stage 01 body:
+  - Change broken `What's actually worth building` text to `What's actually worth building`.
+  - Change broken `under SB 9, ADU law, Density Bonus, SB 1123` text to `under SB 9, ADU law, Density Bonus, SB 1123`.
+
+## Section 08 - The Team
+
+- Fix typos across cards:
+  - Card A, Design: change broken `SD -> DD -> CD` text to `SD -> DD -> CD`. Consider expanding on first use as `Schematic Design (SD) -> Design Development (DD) -> Construction Documents (CD)` because most homeowners do not know these abbreviations.
+  - Card B, Structure + Site: fix `Structural engineering` and `Soils (geotech)`.
+  - Card D, Capital: fix `Sometimes the same institution`.
+  - Card E, Legal: fix `JV structuring`.
+  - Card F, Developer: fix `Walking the site`.
+- Keep Card F as-is. The inverted dark-panel `Me - end to end` card is intentional and effective.
+- Mobile: stack the `3x2` grid as `2x3`, not `1x6`, because a single column creates too long a scroll.
+- Card F must land last in the stacked order so the `everyone else, then me` reveal stays intact.
+
+## Section 09 - My Background
+
+- Add a professional headshot of Gio.
+- Position it above the body copy on the left column.
+- Keep the Core Thesis terracotta panel on the right.
+- Preserve the two-column structure and land the photo in the natural `introduce yourself` position before the narrative.
+- Keep the Core Thesis panel as-is:
+
+```text
+The construction site and the spreadsheet, both. Most people only bring one.
+```
+
+## Section 10 - Let's Talk Contact Form
+
+- Phone field placeholder `619.555.0000` reads as a real number. Change it to `(619) 555-0000` or `Your phone`.
+- The `I'm looking to` dropdown currently shows an empty `Select your goal`.
+- Suggested Develop-specific dropdown options:
+  - `Find out what's buildable on my lot`
+  - `Get a feasibility review for a specific property`
+  - `Explore the refinance math on my home`
+  - `Discuss a full development project`
+- Verify the house-shape watermark behind the terracotta panel renders consistently on mobile.
+
+## Section 11 - Other Services
+
+- Cards are labeled `A - INVEST` and `B - SCALE`, skipping `C` because Develop is the current page.
+- Relabel these as `01 / 02`, or drop the letter labels entirely.
+- Confirm placement is below the contact form.
+
+## Section 12 - Footer
+
+- No changes.

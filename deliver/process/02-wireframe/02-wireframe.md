@@ -26,6 +26,7 @@ Translate the approved content-intake package into a sitemap and low-fidelity HT
 - **Figma to Webflow**: Skipped unless the Figma file has unresolved IA gaps or the signed scope includes structural redesign.
 - **Migration to Webflow**: Required only when the migration includes redesign, major navigation changes, or new page/template architecture.
 - **Webflow Improvements & Updates**: Required only for scoped new pages, major new sections, or navigation/IA changes.
+- **AI Site with Claude, Vercel & Airtable**: Required Claude wireframe checkpoint before the Claude Design package is refined.
 
 ## Technical Setup
 - **Executor status**: Placeholder.

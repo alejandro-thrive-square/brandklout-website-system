@@ -25,6 +25,9 @@ This workflow turns a qualified lead and selected offer into a clear proposal. I
 - Swap case study URLs if a more relevant project example is available.
 - Tailor the worked example in the pricing & timeline block to the client's likely page count when it is known from the job post (e.g. swap "5 pages" for "8 pages"). Keep the per-page rates and durations exactly as written — they come from [PRICING_TIMELINE_RULES.md](../../PRICING_TIMELINE_RULES.md) and must not be edited inline.
 - Do not rewrite the template structure — keep emoji placement and section order identical.
+- Draft artifacts may include a short internal metadata block before the first `---`, but the proposal body after that divider must remain copy-paste ready for Upwork.
+- Do not use markdown bullets, headings, tables, or numbered implementation plans inside the client-facing proposal body unless the source template already uses them.
+- If repository-required notes such as Version Control or Infrastructure are needed in a `.tmp` proposal artifact, place them after a second `---` under `Internal artifact notes - do not send:` so they cannot be mistaken for proposal copy.
 
 ### Step 3: Send Proposal
 - Send through the active lead channel, such as Upwork, email, CRM, or another approved inbox.
@@ -53,6 +56,7 @@ Templates live in `upwork-proposals/`. One file per offer type. Each file contai
 - Case study URLs are defaults. Swap them when a more relevant example exists.
 - Pricing and timeline numbers in each proposal are sourced from [PRICING_TIMELINE_RULES.md](../../PRICING_TIMELINE_RULES.md). Do not edit per-page rates or durations inline — update the rules file and the proposal templates together.
 - Do not add markdown formatting to the proposal body — Upwork renders it as plain text.
+- Keep internal scoping notes separate from the client-facing body. The sent proposal should contain only the personalized template copy.
 
 ## 5. Portfolio Content
 

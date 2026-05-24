@@ -7,7 +7,7 @@ We refine the website copy, page titles, descriptions, image text, and search st
 > **Integrity Rule**: Any change to the Python executor or technical logic of this workflow must be documented here immediately.
 
 ## Operational Purpose
-Refine the questionnaire-sourced content into approved on-page copy, metadata, schema plans, keyword mapping, and alt text before content reaches Webflow. Migration-specific content export/import and redirect planning remain in the dedicated migration modules.
+Refine the questionnaire-sourced content into approved on-page copy, metadata, schema plans, keyword mapping, and alt text before content reaches the selected production build. Migration-specific content export/import and redirect planning remain in the dedicated migration modules.
 
 ## Inputs From Sales / Previous Phase
 - Content-intake summary from `01-content-intake`.
@@ -19,13 +19,14 @@ Refine the questionnaire-sourced content into approved on-page copy, metadata, s
 1. Map each page to a primary keyword, secondary terms, audience intent, and CTA goal.
 2. Refine questionnaire-sourced copy using the approved structure and brand voice.
 3. Write metadata, schema recommendations, and alt text.
-4. Route copy for approval and freeze final content for the Webflow build.
+4. Route copy for approval and freeze final content for the selected production build.
 
 ## Offer-Specific Adaptations
 - **Development from Scratch**: Refine the full questionnaire-derived content package before Webflow build.
 - **Figma to Webflow**: Validate that final copy, metadata, alt text, CMS content, and SEO requirements are present before build; do not rewrite design-approved copy unless scoped.
 - **Migration to Webflow**: Use this module only for new copy or on-page SEO work beyond the dedicated migration modules.
 - **Webflow Improvements & Updates**: Use only when the approved change list includes SEO, content, metadata, accessibility text, CMS content, or performance-related content cleanup.
+- **AI Site with Claude, Vercel & Airtable**: Use when copy refinement, metadata, schema, alt text, or Airtable-backed content SEO expectations must be approved before `17-ai-site-build-airtable`.
 
 ## Technical Setup
 - **Executor status**: Placeholder.

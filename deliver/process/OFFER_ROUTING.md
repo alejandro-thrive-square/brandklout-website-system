@@ -16,6 +16,7 @@ This document is the canonical bridge between signed Sales offers and Deliver ex
 | `Figma to Webflow` | `sales/process/01-define-offers/offers/offer-figma-to-webflow.md` | `00`, then `11` -> optional `06` -> `07` -> `08` -> `09` -> `10` | `pages x 1 day` (dev only) |
 | `Migration to Webflow` | `sales/process/01-define-offers/offers/offer-migration-to-webflow.md` | `00`, then `12` -> optional `01`/`02`/`03`/`04`/`05` -> `13` -> `14` -> `07` -> `08` -> `09` -> `10` | Rebuild: `pages x 1 day` (or `x 2` if redesigned). Migration-specific work scheduled separately. |
 | `Webflow Improvements & Updates` | `sales/process/01-define-offers/offers/offer-webflow-improvements.md` | `00`, then `15` -> `07` -> `08` -> optional `09` -> adapted `10` | Per-page formula applies only to pages added/redesigned. Other changes ad-hoc/hourly. |
+| `AI Site with Claude, Vercel & Airtable` | `sales/process/01-define-offers/offers/offer-ai-site-claude-vercel-airtable.md` | `00`, then `01` -> `02` -> optional `03` -> `04` -> `05` -> optional `06` -> `17` -> `08` -> `16` -> `09` -> `10` | Page-based design + build scope: `pages x 2 days`; Airtable/integration complexity scheduled explicitly when it exceeds that formula. |
 
 ## 2. Shared Handoff Fields
 
@@ -45,27 +46,35 @@ Improvement handoffs must also include:
 - `existing_webflow_access`
 - `engagement_model` (`one-time`, `hourly`, or `retainer`)
 
+AI Claude/Vercel/Airtable site handoffs must also include:
+- `runtime_stack`
+- `airtable_scope`
+- `dynamic_content_types`
+- `vercel_launch_expectation`
+- `seo_rendering_expectation`
+
 ## 3. Offer-to-Delivery Matrix
 
-| Deliver module | Development from Scratch | Figma to Webflow | Migration to Webflow | Webflow Improvements & Updates |
-| :--- | :--- | :--- | :--- | :--- |
-| `00-client-delivery-initialization` | Required | Required | Required | Required |
-| `01-content-intake` | Required | Optional when new content is needed | Optional for new/redesigned content | Optional for new copy-heavy work |
-| `02-wireframe` | Required | Skipped unless IA gaps are found | Required only for redesigns or major IA changes | Skipped unless new page structure is scoped |
-| `03-graphic-resources` | Required | Adapted to asset readiness check | Adapted to source asset inventory and migration needs | Optional for new sections, pages, or brand updates |
-| `04-design` | Required | Skipped unless design changes are scoped | Required only for redesigns | Optional for scoped redesign work |
-| `05-design-revisions` | Required | Optional when Deliver owns design revisions | Optional when redesign enters client review | Optional for scoped redesign review loops |
-| `06-content-seo` | Required | Adapted to content/SEO validation | Optional for new copy or on-page SEO beyond migration modules | Optional for SEO/performance requests |
-| `07-webflow-build` | Required | Required, starts after Figma review and build planning | Required, includes CMS architecture and imported content | Required, scoped to approved change list |
-| `08-qa` | Required | Required | Required, includes content and redirect QA | Required, scoped to changed surfaces and regression risks |
-| `09-launch` | Required | Required when production launch is in scope | Required, includes DNS/redirect launch and monitoring | Optional; use only when publishing or production release is in scope |
-| `10-handoff-support` | Required | Required | Required, includes migration notes and monitoring outcomes | Adapted to delivery note, support summary, or retainer loop |
-| `11-figma-review-build-planning` | Not used | Required | Not used | Not used |
-| `12-migration-audit-plan` | Not used | Not used | Required | Not used |
-| `13-content-export-import` | Not used | Not used | Required | Not used |
-| `14-migration-seo-redirects` | Not used | Not used | Required | Not used |
-| `15-improvement-intake-audit` | Not used | Not used | Not used | Required |
-| `16-vercel-deployment` | Optional for extra static deployments beyond required design review URLs | Optional for CLI-managed previews | Optional for CLI-managed previews | Optional for CLI-managed review URLs or static delivery |
+| Deliver module | Development from Scratch | Figma to Webflow | Migration to Webflow | Webflow Improvements & Updates | AI Site with Claude, Vercel & Airtable |
+| :--- | :--- | :--- | :--- | :--- | :--- |
+| `00-client-delivery-initialization` | Required | Required | Required | Required | Required |
+| `01-content-intake` | Required | Optional when new content is needed | Optional for new/redesigned content | Optional for new copy-heavy work | Required unless content package is already approved |
+| `02-wireframe` | Required | Skipped unless IA gaps are found | Required only for redesigns or major IA changes | Skipped unless new page structure is scoped | Required; Claude wireframe checkpoint |
+| `03-graphic-resources` | Required | Adapted to asset readiness check | Adapted to source asset inventory and migration needs | Optional for new sections, pages, or brand updates | Optional when new or prepared graphic resources are needed |
+| `04-design` | Required | Skipped unless design changes are scoped | Required only for redesigns | Optional for scoped redesign work | Required; Claude design package path |
+| `05-design-revisions` | Required | Optional when Deliver owns design revisions | Optional when redesign enters client review | Optional for scoped redesign review loops | Required before coded build finalization |
+| `06-content-seo` | Required | Adapted to content/SEO validation | Optional for new copy or on-page SEO beyond migration modules | Optional for SEO/performance requests | Optional when content refinement or SEO scope is approved |
+| `07-webflow-build` | Required | Required, starts after Figma review and build planning | Required, includes CMS architecture and imported content | Required, scoped to approved change list | Not used; replaced by `17` |
+| `08-qa` | Required | Required | Required, includes content and redirect QA | Required, scoped to changed surfaces and regression risks | Required; QA Vercel site package, routes, Airtable rendering, motion, and responsiveness |
+| `09-launch` | Required | Required when production launch is in scope | Required, includes DNS/redirect launch and monitoring | Optional; use only when publishing or production release is in scope | Required when production Vercel launch or domain connection is in scope |
+| `10-handoff-support` | Required | Required | Required, includes migration notes and monitoring outcomes | Adapted to delivery note, support summary, or retainer loop | Required; include Vercel deployment and Airtable editing notes |
+| `11-figma-review-build-planning` | Not used | Required | Not used | Not used | Not used |
+| `12-migration-audit-plan` | Not used | Not used | Required | Not used | Not used |
+| `13-content-export-import` | Not used | Not used | Required | Not used | Not used |
+| `14-migration-seo-redirects` | Not used | Not used | Required | Not used | Not used |
+| `15-improvement-intake-audit` | Not used | Not used | Not used | Required | Not used |
+| `16-vercel-deployment` | Optional for extra static deployments beyond required design review URLs | Optional for CLI-managed previews | Optional for CLI-managed previews | Optional for CLI-managed review URLs or static delivery | Required for preview/production deployment path |
+| `17-ai-site-build-airtable` | Not used | Not used | Not used | Not used | Required |
 
 ## 4. Offer Paths
 
@@ -95,6 +104,13 @@ Improvement handoffs must also include:
 - **Route**: `15` -> `07` -> `08` -> optional `09` -> adapted `10`.
 - **Required modules**: `15-improvement-intake-audit`, adapted `07-webflow-build`, and `08-qa`.
 - **Conditional modules**: `01` through `06` apply only when the approved request includes intake, IA, asset, design, revision, content, SEO, or CMS planning work.
+
+### AI Site with Claude, Vercel & Airtable
+- **Start phase**: `01-content-intake`.
+- **Route**: `01` -> `02` -> optional `03` -> `04` -> `05` -> optional `06` -> `17` -> `08` -> `16` -> `09` -> `10`.
+- **Required modules**: `01-content-intake`, `02-wireframe`, `04-design`, `05-design-revisions`, `17-ai-site-build-airtable`, `08-qa`, `16-vercel-deployment`, and `10-handoff-support`.
+- **Conditional modules**: `03-graphic-resources` is used when resources must be created or prepared; `06-content-seo` is used when content refinement or on-page SEO is scoped; `09-launch` owns domain/DNS production launch when that is included.
+- **Stack boundary**: This path uses the approved Claude design package as the coded production source. It does not copy `07-webflow-build` unless the signed scope explicitly adds a Webflow implementation later.
 
 ## 5. Routing Validation
 Before copying workflow templates into `deliver/[client-name]/workflows/`, confirm:

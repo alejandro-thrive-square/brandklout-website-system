@@ -26,6 +26,7 @@ The canonical offer files live in `sales/process/01-define-offers/offers/` and a
 - [Figma to Webflow](./01-define-offers/offers/offer-figma-to-webflow.md)
 - [Migration to Webflow](./01-define-offers/offers/offer-migration-to-webflow.md)
 - [Webflow Improvements & Updates](./01-define-offers/offers/offer-webflow-improvements.md)
+- [AI Site with Claude, Vercel & Airtable](./01-define-offers/offers/offer-ai-site-claude-vercel-airtable.md)
 
 ## Standard Folder Shape
 

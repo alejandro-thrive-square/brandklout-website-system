@@ -7,7 +7,7 @@ After the first design draft is reviewed, we apply the approved correction list,
 > **Integrity Rule**: Any change to the Python executor or technical logic of this workflow must be documented here immediately.
 
 ## Operational Purpose
-Own the post-design client correction loop before Webflow development begins. This workflow receives client feedback, duplicates the approved working design package into a revisions workspace, applies the accepted changes, republishes review outputs, and records final approval.
+Own the post-design client correction loop before production build work begins. This workflow receives client feedback, duplicates the approved working design package into a revisions workspace, applies the accepted changes, republishes review outputs, and records final approval.
 
 ## Inputs From Sales / Previous Phase
 - First-draft design package from `04-design`.
@@ -20,13 +20,14 @@ Own the post-design client correction loop before Webflow development begins. Th
 3. Duplicate `04-design/.tmp/final-design/` into `05-design-revisions/.tmp/final-design/` as the editable revision workspace.
 4. Apply approved revisions to the copied design package and update linked Figma outputs.
 5. Republish the revised design to Vercel for verification.
-6. Send the revised Figma and Vercel links for approval, then record the final approved package for Webflow Build.
+6. Send the revised Figma and Vercel links for approval, then record the final approved package for the selected production build module.
 
 ## Offer-Specific Adaptations
 - **Development from Scratch**: Required after Design and before Content & SEO/Webflow Build.
 - **Figma to Webflow**: Skipped unless Deliver is also responsible for design correction work.
 - **Migration to Webflow**: Required only when redesign work enters a client revision loop.
 - **Webflow Improvements & Updates**: Optional for scoped redesign requests that need client signoff before implementation.
+- **AI Site with Claude, Vercel & Airtable**: Required after the first Claude Design review and before `17-ai-site-build-airtable` finalizes the coded site package.
 
 ## Technical Setup
 - **Executor status**: Placeholder.

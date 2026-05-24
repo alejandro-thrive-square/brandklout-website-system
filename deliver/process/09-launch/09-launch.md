@@ -7,18 +7,18 @@ After QA is approved, we connect the domain, confirm hosting and SSL, publish th
 > **Integrity Rule**: Any change to the Python executor or technical logic of this workflow must be documented here immediately.
 
 ## Operational Purpose
-Move the QA-approved staging build to production with DNS, SSL, publishing, rollback awareness, and post-publish verification.
+Move the QA-approved staging build to production with DNS, SSL, publishing, rollback awareness, and post-publish verification. The publishing target is Webflow for Webflow routes and Vercel for the AI Claude/Vercel/Airtable route.
 For improvement work, this module is used only when `15-improvement-intake-audit` defines publishing, DNS, or a production release as in scope.
 
 ## Inputs From Sales / Previous Phase
 - Approved QA report with no open critical/high-priority launch blockers.
 - Domain registrar access or client-assisted DNS change plan.
-- Webflow project access, production domain, and launch timing approval.
+- Platform access for the selected production target, production domain, and launch timing approval.
 
 ## Execution Steps
 1. Confirm QA approval, launch window, domain ownership, SSL readiness, and rollback plan.
-2. Update DNS records and connect the custom domain in Webflow.
-3. Publish to production.
+2. Update DNS records and connect the custom domain in the selected hosting platform.
+3. Publish or promote the approved build to production.
 4. Smoke test priority pages, sitemap, robots.txt, forms, and primary CTAs.
 
 ## Offer-Specific Adaptations
@@ -26,6 +26,7 @@ For improvement work, this module is used only when `15-improvement-intake-audit
 - **Figma to Webflow**: Run the standard launch sequence when production launch is included; otherwise store staging delivery approval.
 - **Migration to Webflow**: Launch using the redirect and SEO requirements from `14-migration-seo-redirects`, plus source-platform cutover notes from `12-migration-audit-plan`.
 - **Webflow Improvements & Updates**: Use only when `15-improvement-intake-audit` includes a publish or production release; otherwise document the staged or completed delivery in handoff/support.
+- **AI Site with Claude, Vercel & Airtable**: Launch the QA-approved Vercel deployment from `16-vercel-deployment`, verify configured Airtable runtime routes after production promotion, and document DNS/custom-domain details when they are in scope.
 
 ## Technical Setup
 - **Executor status**: Placeholder.
