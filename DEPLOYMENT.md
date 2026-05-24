@@ -16,7 +16,6 @@ Add these repository secrets in GitHub before enabling the workflow:
 | `VPS_PORT` | SSH port. Optional; defaults to `22` when empty. |
 | `VPS_USER` | SSH user used for deployment. |
 | `VPS_SSH_KEY` | Private SSH key GitHub Actions uses to log into the VPS. |
-| `VPS_KNOWN_HOSTS` | Trusted host-key entry for the VPS, generated from a verified SSH host key. |
 | `VPS_REPO_PATH` | Absolute path to this repository on the VPS. |
 
 ## One-Time VPS Setup
@@ -24,8 +23,7 @@ Add these repository secrets in GitHub before enabling the workflow:
 1. Create a dedicated deployment SSH key pair for GitHub Actions.
 2. Add the public key to the VPS deployment user's `~/.ssh/authorized_keys`.
 3. Add the private key to GitHub as `VPS_SSH_KEY`.
-4. Add the VPS host-key line to GitHub as `VPS_KNOWN_HOSTS`.
-5. Confirm the repository already exists on the VPS at `VPS_REPO_PATH`.
+4. Confirm the repository already exists on the VPS at `VPS_REPO_PATH`.
 6. Ensure the VPS repository can run `git pull origin main` non-interactively. For this private repository, prefer a read-only GitHub deploy key on the VPS or another non-interactive GitHub authentication method.
 7. Keep the VPS worktree clean. The workflow aborts if `git status --porcelain` returns any local changes.
 
@@ -43,6 +41,33 @@ Add these repository secrets in GitHub before enabling the workflow:
 - Not included:
   - No automatic `rclone` sync for heavy assets.
   - No automatic service restart because this repository currently has no documented long-running service process to restart.
+
+## Asset Sync
+
+Git deployment only updates tracked files. Heavy binary/media assets (images, PDFs, videos, archives) must be synced separately via `rclone` after each deploy.
+
+The full deploy cycle is:
+
+1. **Push** — commit and push to `main` (triggers GitHub Actions deploy or use manual SSH fallback).
+2. **Pull** — VPS pulls the latest committed state via `git pull --ff-only origin main`.
+3. **Sync assets** — run `bash scripts/sync-assets.sh` from the local repo root to upload heavy assets to the VPS.
+
+Preview what will be transferred before syncing:
+
+```bash
+bash scripts/sync-assets.sh --dry-run
+```
+
+Run the actual sync:
+
+```bash
+bash scripts/sync-assets.sh
+```
+
+The script performs two `rclone sync` operations matching the rules in [SYSTEM_RULES.md Section 4.2](./SYSTEM_RULES.md):
+
+- `manage/brand-assets/` — full directory sync of agency brand materials.
+- `.tmp/` folders — filtered sync of heavy binary/media files (`png`, `jpg`, `jpeg`, `gif`, `svg`, `webp`, `ico`, `pdf`, `mp4`, `mov`, `zip`, `7z`, `psd`, `ai`, `eps`, `fig`, `sketch`).
 
 ## Manual SSH Fallback
 
@@ -124,7 +149,7 @@ The top commit should match the new commit from GitHub.
 
 ## Troubleshooting
 
-- `Host key verification failed`: `VPS_KNOWN_HOSTS` is missing or does not match the VPS host key.
+- `Host key verification failed`: `ssh-keyscan` failed during the workflow; check that `VPS_HOST` and `VPS_PORT` are correct.
 - `Permission denied (publickey)`: the `VPS_SSH_KEY` private key does not match an authorized public key on the VPS user account.
 - `fatal: could not read Username for 'https://github.com'`: the VPS repo itself cannot authenticate to GitHub for `git pull`; configure a non-interactive GitHub credential on the VPS.
 - `Working tree is not clean`: commit, stash, or intentionally remove local VPS changes before retrying.
