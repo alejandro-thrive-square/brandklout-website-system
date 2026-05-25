@@ -18,6 +18,11 @@ To create a "magnet" effect for the agency by providing instant value (like free
 | **Instantly / Lemlist** | Scaling cold email campaigns. |
 | **Canva / Adobe API** | Automating social media graphic generation. |
 
+### 2.1 MCP Access
+Growth MCP usage is usually `prospect` or `agency` scoped. Before using any MCP in a Growth workflow, agents must read [../mcp-servers/ACCESS_MODEL.md](../mcp-servers/ACCESS_MODEL.md), the closest applicable `mcp-access.md` when one exists, and the referenced profile in `mcp-servers/profiles/`.
+
+Growth workflows that use MCPs for public prospect analysis should follow [prospect-audit.md](../mcp-servers/profiles/prospect-audit.md). Workflows that mutate Webzite-owned sites, send outreach, deploy public previews, use private sessions, or touch production systems must include a workflow-level `mcp-access.md` and require explicit confirmation for those actions.
+
 ## 3. Core Strategies
 - **Value-In-Advance**: Instead of a cold pitch, send a link to a personalized redesign.
 - **Dynamic Content**: Auto-generating blog posts or social snippets based on trending industry topics.

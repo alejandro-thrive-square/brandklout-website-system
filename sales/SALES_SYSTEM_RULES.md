@@ -17,6 +17,11 @@ To automate the discovery, qualification, proposal, and contract-readiness proce
 | **Gmail API** | Sending follow-ups and notifications. |
 | **CRM (e.g., HubSpot)** | Storing client data, qualification status, deal stages, and contract readiness. |
 
+### 2.1 MCP Access
+Sales MCP usage is usually `prospect` or `workflow` scoped. Before using any MCP in a Sales workflow, agents must read [../mcp-servers/ACCESS_MODEL.md](../mcp-servers/ACCESS_MODEL.md), the closest applicable `mcp-access.md` when one exists, and the referenced profile in `mcp-servers/profiles/`.
+
+Sales workflows that analyze public websites, public job posts, or public listings should follow [prospect-audit.md](../mcp-servers/profiles/prospect-audit.md). Workflows that use CRM, email, proposal, contract, private-session, or authenticated platform MCPs must include a workflow-level `mcp-access.md`. Sending messages, changing CRM stages, submitting proposals, using private sessions, or touching contract/payment systems requires explicit confirmation unless the workflow directive already grants that exact action.
+
 ## 3. Core Sales Process
 1. **Define Offers**: Keep the approved service offers current and choose the right offer for each lead.
 2. **Send Proposal**: Write and send a personalized proposal based on the selected offer and lead context.

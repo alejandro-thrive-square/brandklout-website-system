@@ -35,6 +35,7 @@ This is currently a documented manual structure process. The Python executor and
 13. Update the copied workflow `.md` files only when client-specific scope, skipped modules, adapted behavior, asset locations, or open questions need to be documented.
 14. Add `deliver/[client-name]/docs/project-overview.md` with the approved scope, selected offer, routed workflow list, timeline, setup items, selected design-system reference when applicable, workflow-owned asset locations, and open questions.
     - **Estimated duration**: compute from the handoff `pages_or_templates` count using the per-page formula in [PRICING_TIMELINE_RULES.md](../../../sales/PRICING_TIMELINE_RULES.md): `pages × 2 days` for full-build offers, `pages × 1 day` for Figma-to-Webflow. Surface this as the `timeline` field in `project-overview.md`. If the handoff `timeline` differs from the formula output, record both and flag the deviation in `open_questions`.
+15. If any scoped workflow uses MCPs, add `deliver/[client-name]/docs/mcp-access.md` using [MCP Access Model](../../../mcp-servers/ACCESS_MODEL.md) and the relevant profile from `mcp-servers/profiles/`.
 
 ## Routing Rules
 - `deliver/process/` is the canonical template library.
@@ -42,6 +43,7 @@ This is currently a documented manual structure process. The Python executor and
 - `00-client-delivery-initialization` is not copied as an execution phase unless the client setup itself needs to be documented inside the client workspace.
 - Offer execution order is defined by `deliver/process/OFFER_ROUTING.md`.
 - Skipped modules should be noted in `project-overview.md` when their absence affects client expectations or delivery scope.
+- Client projects that use MCPs must include `docs/mcp-access.md`; agents must read it before using any MCP in the client folder.
 
 ## Design-System Library
 - **Source of truth**: `deliver/process/design-system-library/`.
@@ -51,9 +53,10 @@ This is currently a documented manual structure process. The Python executor and
 
 ## Technical Setup
 - **Executor status**: Placeholder. No automated copying is implemented yet.
-- **Future automation**: Read a handoff package, create the client folder tree, copy routed workflow folders, seed the selected design-system package when applicable, generate `project-overview.md`, and report missing required handoff fields.
+- **Future automation**: Read a handoff package, create the client folder tree, copy routed workflow folders, seed the selected design-system package when applicable, generate `project-overview.md`, generate `mcp-access.md` when MCPs are in scope, and report missing required handoff fields.
 - **Likely integrations**: CRM, ClickUp, Google Drive, OpenAI/Anthropic.
 - **Data boundary**: Do not store credentials or secrets in client docs, workflow files, or `.tmp/` artifacts.
+- **MCP boundary**: MCP definitions are shared, but client MCP usage is controlled by `deliver/[client-name]/docs/mcp-access.md`. Store target IDs and public URLs only when they are not secrets; never store OAuth tokens, API keys, passwords, cookies, or private credential values.
 - **Asset boundary**: Do not create a client-level `assets/` folder by default. Initial client-provided files live once in `00-client-delivery-initialization/.tmp/client-handoff/`; the selected design-system reference lives in `00-client-delivery-initialization/.tmp/design-system/`; later files belong in the workflow `.tmp/` folder that receives, produces, or uses them. Persist heavy assets through VPS `rclone` sync.
 
 ## Output Artifacts
@@ -62,6 +65,7 @@ This is currently a documented manual structure process. The Python executor and
 - `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/client-handoff/`
 - `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/design-system/` (design-owned offers only)
 - `deliver/[client-name]/docs/project-overview.md` (final, persisted)
+- `deliver/[client-name]/docs/mcp-access.md` (when MCPs are in scope)
 
 ## Version Control
 - All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../SYSTEM_RULES.md).

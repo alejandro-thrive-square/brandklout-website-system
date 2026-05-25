@@ -19,11 +19,21 @@ To deliver world-class digital experiences (Webflow + SEO + Automation) that exc
 | **Vimeo / Loom** | Hosting delivery walkthroughs and tutorials. |
 | **SEO Tools (Ahrefs/Semrush)** | Benchmarking and final optimization reports. |
 
+### 2.1 MCP Access
+Deliver MCP usage is client-scoped by default. Before using any MCP in a client project, agents must read:
+1. [../mcp-servers/ACCESS_MODEL.md](../mcp-servers/ACCESS_MODEL.md)
+2. The closest applicable `mcp-access.md`, normally `deliver/[client-name]/docs/mcp-access.md`
+3. The referenced profile in `mcp-servers/profiles/`
+4. The client `docs/project-overview.md`
+
+Every Deliver client project that uses MCPs must include `deliver/[client-name]/docs/mcp-access.md`. The file must list active MCP servers, target resources, allowed operations, forbidden operations, confirmation requirements, runtime auth notes, and artifact paths. Publishing, deleting, overwriting, production deploys, DNS changes, access changes, billing, emailing, and production data edits require explicit confirmation.
+
 ## 3. Project Organization
 Every signed client project must have its own dedicated subdirectory within `deliver/`:
 - `deliver/[client-name]/`: Root folder for the client.
 - `deliver/[client-name]/workflows/`: Project-specific automations.
 - `deliver/[client-name]/docs/`: Knowledge base, meeting notes, and handoff docs.
+- `deliver/[client-name]/docs/mcp-access.md`: Required when the client project uses MCPs.
 
 Client assets are workflow-owned:
 - Store the initial client handoff package once in `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/client-handoff/`.

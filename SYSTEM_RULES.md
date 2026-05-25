@@ -5,6 +5,9 @@ This document serves as the master blueprint for the Webzite Agentic Workflow. I
 > [!IMPORTANT]
 > **Documentation Integrity Rule**: Whenever a change is made to the technical implementation of this system, the corresponding markdown files **MUST** be updated immediately to maintain synchronization between documentation and code.
 
+> [!IMPORTANT]
+> [AGENTS.md](./AGENTS.md), [CLAUDE.md](./CLAUDE.md), and [GEMINI.md](./GEMINI.md) must stay identical. These filenames exist separately because different agent runtimes auto-load different entry-point names.
+
 ## 0. Infrastructure
 This system is designed to run on a **Hostinger VPS** with the following specifications:
 - **OS**: Ubuntu 24.04 LTS
@@ -73,12 +76,29 @@ Every MCP server registered in the project follows this structure under `mcp-ser
 - `[mcp-name]/`: Subfolder for each MCP server (e.g., `webflow/`, `figma/`).
 - `setup.md`: Setup, authorization, and usage documentation.
 - `MCP_INDEX.md`: Master index of all MCP servers in the project.
+- `ACCESS_MODEL.md`: Folder-based MCP access procedure shared by all pillars.
+- `profiles/`: Reusable MCP access profiles (agency, client, prospect, design, deployment).
+
+### 2.3 Folder-Based MCP Access
+MCP server definitions stay centralized in `.mcp.json` and `mcp-servers/`, but MCP usage is controlled by the active folder's nearest `mcp-access.md`.
+
+Before using any MCP tool, agents must:
+1. Identify the active folder context.
+2. Read the closest applicable `mcp-access.md`.
+3. Read the referenced profile in `mcp-servers/profiles/`.
+4. Confirm the intended MCP server is listed in [mcp-servers/MCP_INDEX.md](./mcp-servers/MCP_INDEX.md).
+5. Verify runtime authentication through `/mcp`, `claude mcp list`, or the active MCP client's equivalent status check.
+6. Confirm the target account, site, project, repository, base, deployment, or other resource before changing it.
+7. Ask explicit confirmation before publishing, deleting, overwriting, billing, emailing, deploying, changing production data, or using private session data.
+8. Store MCP outputs in the active workflow's `.tmp/` folder unless the workflow specifies another repo-safe path.
+
+Folders that rely on MCPs must include an `mcp-access.md` file documenting allowed MCPs, target resources, allowed operations, forbidden operations, confirmation requirements, runtime authentication notes, and artifact paths. Client projects use `deliver/[client-name]/docs/mcp-access.md`.
 
 ## 3. Global Operational Standards
 
 - **Context Filtering**: When working on a specific workflow, agents should prioritize the `.md` file within that workflow folder to save tokens and maintain focus.
 - **Environment Variables**: All API keys and secrets are shared globally via a root `.env` file.
-- **MCP Servers**: MCP servers are defined in `.mcp.json` (project scope) and documented in `mcp-servers/`. OAuth-based MCPs (e.g., Webflow, Figma) authenticate at runtime — no static tokens required.
+- **MCP Servers**: MCP servers are defined in `.mcp.json` (project scope) and documented in `mcp-servers/`. OAuth-based MCPs (e.g., Webflow, Figma) authenticate at runtime — no static tokens required. Usage is controlled by the folder-based procedure in [mcp-servers/ACCESS_MODEL.md](./mcp-servers/ACCESS_MODEL.md).
 - **Inter-system Connectivity**: Microsystems connect through Python executors. Output from a `sales` workflow can trigger a `growth` or `deliver` process.
 - **Safety**: No destructive actions (deleting client data, unapproved publishing) should be taken without explicit confirmation in the directive.
 
@@ -112,11 +132,11 @@ Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (
 - **Sync commands** (Local → VPS):
   ```bash
   # Brand assets
-  rclone sync ./manage/brand-assets/ vps:/path/to/repo/manage/brand-assets/
+  rclone sync ./manage/brand-assets/ vps:/root/webzite-agentic-workflow/manage/brand-assets/
 
 
   # Heavy media/assets inside .tmp/ folders
-  rclone sync . vps:/path/to/repo/ \
+  rclone sync . vps:/root/webzite-agentic-workflow/ \
     --filter "+ **/" \
     --filter "+ **/.tmp/**/*.png" --filter "+ **/.tmp/**/*.jpg" --filter "+ **/.tmp/**/*.jpeg" \
     --filter "+ **/.tmp/**/*.gif" --filter "+ **/.tmp/**/*.svg" --filter "+ **/.tmp/**/*.webp" --filter "+ **/.tmp/**/*.ico" \
@@ -140,6 +160,7 @@ Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (
 - Agents should not force-push or rewrite shared branch history without explicit user confirmation.
 
 ## 5. Key Directives
+- **New Computer Install**: [INSTALL.md](./INSTALL.md) - restore this system on a new local workstation from GitHub, the VPS, and private credentials.
 - **Pricing & Timeline Rules**: [PRICING_TIMELINE_RULES.md](./sales/PRICING_TIMELINE_RULES.md) — canonical per-page rates and execution duration. Single source of truth for Sales quoting, Deliver scheduling, and Manage invoicing.
 - **Sales Rules**: [SALES_SYSTEM_RULES.md](./sales/SALES_SYSTEM_RULES.md)
 - **Manage Rules**: [MANAGE_SYSTEM_RULES.md](./manage/MANAGE_SYSTEM_RULES.md)

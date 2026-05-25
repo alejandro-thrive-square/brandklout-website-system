@@ -18,6 +18,11 @@ To provide a frictionless operational backbone for the agency, automating admini
 | **DocuSign / HelloSign** | Automated contract signing and storage. |
 | **Slack API** | Internal notifications and team communication. |
 
+### 2.1 MCP Access
+Manage MCP usage is usually `agency` or `workflow` scoped and may involve sensitive operational, financial, legal, or internal systems. Before using any MCP in Manage, agents must read [../mcp-servers/ACCESS_MODEL.md](../mcp-servers/ACCESS_MODEL.md), the closest applicable `mcp-access.md` when one exists, and the referenced profile in `mcp-servers/profiles/`.
+
+Any Manage workflow that uses MCPs for payments, contracts, finance, HR, internal communications, access control, or production operations must include a workflow-level `mcp-access.md`. Billing, refunds, contracts, payroll, access changes, public notifications, and production changes require explicit confirmation.
+
 ## 3. Core Responsibilities
 - **Finance**: Tracking revenue, expenses, and profit margins.
 - **Legal**: Managing client contracts and non-disclosure agreements (NDAs).
