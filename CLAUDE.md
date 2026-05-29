@@ -12,6 +12,7 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 - **Master Rules**: [SYSTEM_RULES.md](./SYSTEM_RULES.md)
 - **New Computer Install**: [INSTALL.md](./INSTALL.md)
 - **VPS Deployment**: [DEPLOYMENT.md](./DEPLOYMENT.md)
+- **Agent Hermes & Two-Workspace Sync**: [HERMES.md](./HERMES.md) - resume work from anywhere (phone via Hermes or local) with `bash scripts/sync.sh`
 - **Pricing & Timeline Rules**: [PRICING_TIMELINE_RULES.md](./sales/PRICING_TIMELINE_RULES.md) - per-page rates and durations (single source of truth)
 - **Sales Pillar**: [sales/SALES_SYSTEM_RULES.md](./sales/SALES_SYSTEM_RULES.md)
 - **Manage Pillar**: [manage/MANAGE_SYSTEM_RULES.md](./manage/MANAGE_SYSTEM_RULES.md)

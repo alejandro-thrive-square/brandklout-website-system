@@ -29,6 +29,9 @@ Before using any MCP tool, agents must:
 
 If no `mcp-access.md` exists for the active folder and the task requires an MCP, create or request one before using the MCP. Read-only public prospect analysis may use the `prospect-audit` profile when the workflow directive already allows public web analysis.
 
+> [!NOTE]
+> **VPS-resident agents (e.g., [Hermes](../HERMES.md))** that operate inside this repository's folders are bound by the same folder-based `mcp-access.md` rules as any other agent. Their own external projects live outside this repository and are out of scope here — do not add a Hermes-specific MCP profile, since that would imply Hermes' infrastructure lives in this repo.
+
 ## MCP Access File Pattern
 
 Each folder that uses MCPs should include an `mcp-access.md` file with:

@@ -17,7 +17,20 @@ fi
 
 git add -A
 git commit -m "$MSG"
+
+# Pull-before-push: integrate any work pushed from local (via scripts/sync.sh)
+# before pushing, so this push never gets rejected or clobbers remote history.
+git fetch origin main
+if ! git merge --ff-only origin/main; then
+  echo "" >&2
+  echo "ERROR: local and VPS histories diverged — cannot fast-forward." >&2
+  echo "Both sides committed since they last agreed. Reconcile here with git" >&2
+  echo "(e.g. 'git rebase origin/main'), resolve any conflicts, then re-run this script." >&2
+  echo "Nothing was pushed." >&2
+  exit 1
+fi
+
 git push origin main
 
 echo ""
-echo "=== VPS push complete. Run 'git pull' on local to receive changes. ==="
+echo "=== VPS push complete. On local, run 'bash scripts/sync.sh' to receive changes (git + assets). ==="

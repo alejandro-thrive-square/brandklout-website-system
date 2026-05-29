@@ -203,12 +203,14 @@ rclone copy vps:/root/webzite-agentic-workflow/deliver/giovanni-serrano/workflow
 
 Prefer targeted `rclone copy` operations when setting up a new computer. Use full sync carefully because local empty folders can overwrite remote data if the command direction is wrong.
 
-For normal local-to-VPS uploads after work resumes, use:
+For normal day-to-day work after setup, use the single safe sync command (git + assets, both ways). It runs from Git Bash on the local machine:
 
 ```bash
-bash scripts/sync-assets.sh --dry-run
-bash scripts/sync-assets.sh
+bash scripts/sync.sh --dry-run   # preview
+bash scripts/sync.sh             # commit + push + bisync
 ```
+
+The first-ever bisync needs `--resync` to establish a baseline (`bash scripts/sync.sh --resync`); the script detects a missing baseline and prompts you. See [HERMES.md](./HERMES.md) for the two-workspace model. The directional `bash scripts/sync-assets.sh [--dry-run]` commands remain available as lower-level primitives for asset-only transfers.
 
 ## Step 7: Restore MCP Configuration
 

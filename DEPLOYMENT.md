@@ -46,6 +46,19 @@ Add these repository secrets in GitHub before enabling the workflow:
 
 Git deployment only updates tracked files. Heavy binary/media assets (images, PDFs, videos, archives) must be synced separately via `rclone` — they are never committed to Git.
 
+### One command (local): `scripts/sync.sh`
+
+For the everyday "resume work from anywhere" flow, use the single safe command on your **local** machine — it brings both workspaces into sync in both directions (git pull → reconcile → push → `rclone bisync`):
+
+```bash
+bash scripts/sync.sh --dry-run   # preview git + asset changes, no mutation
+bash scripts/sync.sh             # commit + push (auto-deploys) + bisync assets
+```
+
+It integrates remote work **before** pushing (never auto-clobbering), defaults to safe `rclone bisync`, and aborts on divergence with recovery instructions. The first-ever bisync needs `--resync` (the script detects a missing baseline and tells you). This is the recommended path; the directional commands below are the lower-level primitives. See [HERMES.md](./HERMES.md) for the two-workspace model and [SYSTEM_RULES.md §4.5](./SYSTEM_RULES.md) for the conflict policy.
+
+### Lower-level primitives: `scripts/sync-assets.sh`
+
 `scripts/sync-assets.sh` supports three directions:
 
 | Flag | Direction | Use case |
@@ -75,23 +88,19 @@ bash scripts/sync-assets.sh --direction push
 
 When Hermes (or another VPS agent) creates images or other binary assets:
 
-1. **VPS pushes git-tracked artifacts** (prompt logs, JSON metadata, `.md` notes) — run on the VPS:
+1. **VPS pushes git-tracked artifacts** (prompt logs, JSON metadata, `.md` notes) — run on the VPS (this pulls before pushing, so it never clobbers remote history):
 
 ```bash
 bash scripts/vps-commit-push.sh "feat: generate ad batch for campaign X"
 ```
 
-2. **Local pulls git-tracked changes**:
+2. **Local receives everything in one command** (git-tracked changes + binary assets):
 
 ```bash
-git pull
+bash scripts/sync.sh
 ```
 
-3. **Local fetches binary assets** (images, etc.) from the VPS:
-
-```bash
-bash scripts/sync-assets.sh --direction pull
-```
+Or do the two halves manually — `git pull` for tracked files, then `bash scripts/sync-assets.sh --direction pull` for binary assets. The destructive `pull` mirror is the lower-level primitive; `sync.sh` uses safe bisync.
 
 ### Both Sides Changed Assets
 
