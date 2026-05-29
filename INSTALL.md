@@ -163,6 +163,20 @@ Required remote name:
 vps
 ```
 
+> [!IMPORTANT]
+> The rclone SFTP backend skips host key verification by default. During `rclone config`, in the advanced options, set `known_hosts_file` to your SSH known_hosts path so the VPS connection is verified instead of trusted blindly. The expected config block:
+>
+> ```ini
+> [vps]
+> type = sftp
+> host = <VPS_IP>
+> user = root
+> key_file = C:\Users\pc\.ssh\id_ed25519
+> known_hosts_file = C:\Users\pc\.ssh\known_hosts
+> ```
+>
+> Ensure the VPS host key is in known_hosts first (Step 5). Verify with `ssh-keygen -F <VPS_IP> -f $HOME\.ssh\known_hosts`. If `known_hosts_file` is unset, rclone logs a "No host key validation" advisory.
+
 Validate the remote:
 
 ```powershell
