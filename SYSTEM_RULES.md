@@ -106,13 +106,18 @@ Folders that rely on MCPs must include an `mcp-access.md` file documenting allow
 
 This system is version-controlled via a **GitHub repository**. All contributors and agents must follow these rules.
 
-**Architecture: Git for code, docs, and lightweight workflow artifacts; VPS for heavy assets.**
+**Architecture: Git for code, docs, and lightweight workflow artifacts; rclone for heavy binary assets. Both directions are supported.**
 ```
-Local PC ──── Git push (code/docs) ────→ GitHub ────→ VPS (git pull)
-Local PC ──── rclone sync (brand assets + heavy workflow media) ───→ VPS (asset source of truth)
+Local PC ──── git push (code/docs) ──────────→ GitHub ──→ VPS (git pull via GitHub Actions)
+VPS      ──── git push (agent artifacts) ────→ GitHub ──→ Local (git pull)
+
+Local PC ──── rclone sync --direction push ──→ VPS  (local assets → VPS)
+Local PC ←─── rclone sync --direction pull ──  VPS  (VPS-generated assets → local)
+Local PC ←──→ rclone bisync ─────────────────→ VPS  (merge both sides)
 ```
 
 - **Automatic VPS deploys**: Pushes to `main` trigger the GitHub Actions workflow in `.github/workflows/deploy-vps.yml`, which SSHes into the VPS and runs a guarded `git pull --ff-only origin main`. Setup details and required GitHub secrets are documented in [DEPLOYMENT.md](./DEPLOYMENT.md).
+- **VPS → GitHub pushes**: When a VPS agent (e.g., Hermes) produces git-tracked artifacts, run `bash scripts/vps-commit-push.sh` on the VPS to commit and push to GitHub. Pull locally with `git pull`.
 
 ### 4.1 Repository Hygiene
 - **Platform**: GitHub (private repository).
@@ -129,23 +134,19 @@ Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (
 - **Global Brand Assets** (`manage/brand-assets/`): The canonical source for all agency brand materials. These files live on the VPS and are synced from the local machine via `rclone` (SFTP).
 - **Deliver Project Files** (`deliver/[client-name]/workflows/[workflow-name]/.tmp/`): Initial client-provided source material lives once in `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/client-handoff/`. Later workflow inputs, generated media, extracted assets, design prototypes, and final assets live in the `.tmp/` folder of the workflow that receives, produces, or uses them. Repo-friendly files in these paths are committed; heavy binary/media files are synced to the VPS.
 - **Workflow Artifacts** (`.tmp/` folders): Generated at runtime and **not disposable**. Commit lightweight artifacts that are useful for review, replay, handoff, or agent continuity. Sync heavy binary/media outputs to the VPS via `rclone`, mirroring the same directory structure.
-- **Sync commands** (Local → VPS):
+- **Sync commands** — use `scripts/sync-assets.sh` (wraps rclone with the correct filters):
   ```bash
-  # Brand assets
-  rclone sync ./manage/brand-assets/ vps:/root/webzite-agentic-workflow/manage/brand-assets/
+  # Local → VPS (default; after working locally)
+  bash scripts/sync-assets.sh --direction push
 
+  # VPS → Local (after VPS agent generates assets)
+  bash scripts/sync-assets.sh --direction pull
 
-  # Heavy media/assets inside .tmp/ folders
-  rclone sync . vps:/root/webzite-agentic-workflow/ \
-    --filter "+ **/" \
-    --filter "+ **/.tmp/**/*.png" --filter "+ **/.tmp/**/*.jpg" --filter "+ **/.tmp/**/*.jpeg" \
-    --filter "+ **/.tmp/**/*.gif" --filter "+ **/.tmp/**/*.svg" --filter "+ **/.tmp/**/*.webp" --filter "+ **/.tmp/**/*.ico" \
-    --filter "+ **/.tmp/**/*.pdf" --filter "+ **/.tmp/**/*.mp4" --filter "+ **/.tmp/**/*.mov" \
-    --filter "+ **/.tmp/**/*.zip" --filter "+ **/.tmp/**/*.7z" --filter "+ **/.tmp/**/*.psd" --filter "+ **/.tmp/**/*.ai" --filter "+ **/.tmp/**/*.eps" \
-    --filter "+ **/.tmp/**/*.fig" --filter "+ **/.tmp/**/*.sketch" \
-    --filter "- *"
+  # Bidirectional merge (first run requires --resync)
+  bash scripts/sync-assets.sh --direction bisync --resync   # first time
+  bash scripts/sync-assets.sh --direction bisync            # subsequent runs
   ```
-  Configure the `vps` remote in `~/.config/rclone/rclone.conf` with SFTP credentials. Use `rclone sync` for any directory containing heavy binary/media assets.
+  Configure the `vps` remote in `~/.config/rclone/rclone.conf` with SFTP credentials. See [DEPLOYMENT.md § Asset Sync](./DEPLOYMENT.md) for the full workflow.
 
 - **Retired VPS paths**: When a repo restructure makes an old VPS-only path obsolete, first migrate any assets that still belong in the system, then add the retired path to `scripts/deploy-cleanup.sh`. Deployment cleanup must stay allowlisted and explicit; do not use broad `git clean -fdx` cleanup because valid ignored media intentionally lives on the VPS.
 
@@ -156,7 +157,7 @@ Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (
 
 ### 4.4 Agent Responsibilities
 - Agents must **never** commit secrets or binary/media files. `.tmp/` folders are commit-eligible for lightweight workflow artifacts, but ignored heavy assets inside them must stay out of Git.
-- When an agent creates or modifies a binary asset intended to persist, it must be placed in the appropriate asset path on disk: `manage/brand-assets/` for agency brand assets, or the owning Deliver workflow's `.tmp/` folder for client project assets. The user will sync it to the VPS via `rclone`.
+- When an agent creates or modifies a binary asset intended to persist, it must be placed in the appropriate asset path on disk: `manage/brand-assets/` for agency brand assets, or the owning Deliver workflow's `.tmp/` folder for client project assets. The user will sync it between local and VPS via `scripts/sync-assets.sh`.
 - Agents should not force-push or rewrite shared branch history without explicit user confirmation.
 
 ## 5. Key Directives

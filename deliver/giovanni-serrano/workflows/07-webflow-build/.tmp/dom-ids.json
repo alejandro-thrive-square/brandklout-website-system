@@ -1,0 +1,62 @@
+[
+  {
+    "action": "index-003-home",
+    "path": "",
+    "id": "home"
+  },
+  {
+    "action": "index-004-services",
+    "path": "",
+    "id": "services"
+  },
+  {
+    "action": "index-004-services",
+    "path": ".children[1].children[0]",
+    "id": "svc-track"
+  },
+  {
+    "action": "index-004-services",
+    "path": ".children[3]",
+    "id": "svc-drag-cursor"
+  },
+  {
+    "action": "index-005-about",
+    "path": "",
+    "id": "about"
+  },
+  {
+    "action": "index-006-portfolio",
+    "path": "",
+    "id": "portfolio"
+  },
+  {
+    "action": "index-006-portfolio",
+    "path": ".children[1]",
+    "id": "portfolio-featured"
+  },
+  {
+    "action": "index-006-portfolio",
+    "path": ".children[2]",
+    "id": "portfolio-featured-tags"
+  },
+  {
+    "action": "index-006-portfolio",
+    "path": ".children[3]",
+    "id": "portfolio-groups"
+  },
+  {
+    "action": "index-007-sample",
+    "path": "",
+    "id": "sample"
+  },
+  {
+    "action": "index-008-reviews",
+    "path": "",
+    "id": "reviews"
+  },
+  {
+    "action": "index-009-contact",
+    "path": "",
+    "id": "contact"
+  }
+]

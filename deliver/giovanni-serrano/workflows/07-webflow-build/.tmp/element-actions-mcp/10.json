@@ -1,0 +1,388 @@
+{
+  "build_label": "index-010-section",
+  "parent_element_id": {
+    "component": "6a06593646dcd6cfe2297362",
+    "element": "6a06593646dcd6cfe2297367"
+  },
+  "creation_position": "append",
+  "element_schema": {
+    "type": "DivBlock",
+    "set_attributes": {
+      "attributes": [
+        {
+          "name": "data-screen-label",
+          "value": "08 Footer"
+        }
+      ]
+    },
+    "children": [
+      {
+        "type": "Paragraph",
+        "set_style": {
+          "style_names": [
+            "foot-mark"
+          ]
+        },
+        "set_text": {
+          "text": "Move with intention."
+        }
+      },
+      {
+        "type": "DivBlock",
+        "set_style": {
+          "style_names": [
+            "foot-grid"
+          ]
+        },
+        "children": [
+          {
+            "type": "DivBlock",
+            "set_style": {
+              "style_names": [
+                "col"
+              ]
+            },
+            "children": [
+              {
+                "type": "DivBlock",
+                "set_style": {
+                  "style_names": [
+                    "k"
+                  ]
+                }
+              },
+              {
+                "type": "Paragraph",
+                "set_text": {
+                  "text": "Giovanni Serrano"
+                }
+              },
+              {
+                "type": "Paragraph",
+                "set_text": {
+                  "text": "Multifamily Investment & Development Advisor.Serving San Diego County, California."
+                }
+              },
+              {
+                "type": "DivBlock",
+                "set_attributes": {
+                  "attributes": [
+                    {
+                      "name": "data-inline-style",
+                      "value": "display: flex; gap: 16px; margin-top: 12px;"
+                    }
+                  ]
+                },
+                "children": [
+                  {
+                    "type": "TextLink",
+                    "set_text": {
+                      "text": "Instagram"
+                    },
+                    "set_link": {
+                      "link_type": "url",
+                      "link": "#"
+                    },
+                    "set_attributes": {
+                      "attributes": [
+                        {
+                          "name": "data-inline-style",
+                          "value": "color: var(--on-d-soft); text-decoration: none; font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; transition: color .2s;"
+                        }
+                      ]
+                    }
+                  },
+                  {
+                    "type": "TextLink",
+                    "set_text": {
+                      "text": "LinkedIn"
+                    },
+                    "set_link": {
+                      "link_type": "url",
+                      "link": "#"
+                    },
+                    "set_attributes": {
+                      "attributes": [
+                        {
+                          "name": "data-inline-style",
+                          "value": "color: var(--on-d-soft); text-decoration: none; font-family: var(--mono); font-size: 11px; letter-spacing: 0.18em; text-transform: uppercase; transition: color .2s;"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "DivBlock",
+            "set_style": {
+              "style_names": [
+                "col"
+              ]
+            },
+            "children": [
+              {
+                "type": "DivBlock",
+                "set_style": {
+                  "style_names": [
+                    "k"
+                  ]
+                }
+              },
+              {
+                "type": "TextLink",
+                "set_text": {
+                  "text": "Invest"
+                },
+                "set_link": {
+                  "link_type": "url",
+                  "link": "invest.html"
+                }
+              },
+              {
+                "type": "TextLink",
+                "set_text": {
+                  "text": "Scale"
+                },
+                "set_link": {
+                  "link_type": "url",
+                  "link": "scale.html"
+                }
+              },
+              {
+                "type": "TextLink",
+                "set_text": {
+                  "text": "Develop"
+                },
+                "set_link": {
+                  "link_type": "url",
+                  "link": "develop.html"
+                }
+              },
+              {
+                "type": "TextLink",
+                "set_text": {
+                  "text": "Sell"
+                },
+                "set_link": {
+                  "link_type": "url",
+                  "link": "sell.html"
+                }
+              },
+              {
+                "type": "TextLink",
+                "set_text": {
+                  "text": "About"
+                },
+                "set_link": {
+                  "link_type": "url",
+                  "link": "#about"
+                }
+              },
+              {
+                "type": "TextLink",
+                "set_text": {
+                  "text": "Contact"
+                },
+                "set_link": {
+                  "link_type": "url",
+                  "link": "#contact"
+                }
+              }
+            ]
+          },
+          {
+            "type": "DivBlock",
+            "set_style": {
+              "style_names": [
+                "col"
+              ]
+            },
+            "children": [
+              {
+                "type": "DivBlock",
+                "set_style": {
+                  "style_names": [
+                    "k"
+                  ]
+                }
+              },
+              {
+                "type": "TextLink",
+                "set_text": {
+                  "text": "619.617.8584"
+                },
+                "set_link": {
+                  "link_type": "phone",
+                  "link": "6196178584"
+                }
+              },
+              {
+                "type": "TextLink",
+                "set_text": {
+                  "text": "giovanni@giovanniserrano.com"
+                },
+                "set_link": {
+                  "link_type": "email",
+                  "link": "giovanni@giovanniserrano.com"
+                }
+              },
+              {
+                "type": "TextLink",
+                "set_text": {
+                  "text": "giovanniserrano.com"
+                },
+                "set_link": {
+                  "link_type": "url",
+                  "link": "https://giovanniserrano.com"
+                }
+              },
+              {
+                "type": "Paragraph",
+                "set_text": {
+                  "text": "Serving San Diego County, California"
+                }
+              }
+            ]
+          },
+          {
+            "type": "DivBlock",
+            "set_style": {
+              "style_names": [
+                "col"
+              ]
+            },
+            "children": [
+              {
+                "type": "DivBlock",
+                "set_style": {
+                  "style_names": [
+                    "k"
+                  ]
+                }
+              },
+              {
+                "type": "Paragraph",
+                "set_text": {
+                  "text": "\u00b7 DRE #02282434 Giovanni Serrano"
+                }
+              },
+              {
+                "type": "Paragraph",
+                "set_text": {
+                  "text": "Multifamily Investment & Development Advisor"
+                }
+              },
+              {
+                "type": "Paragraph",
+                "set_text": {
+                  "text": "Equal Housing Opportunity"
+                }
+              },
+              {
+                "type": "DivBlock",
+                "set_attributes": {
+                  "attributes": [
+                    {
+                      "name": "data-inline-style",
+                      "value": "margin-top: 12px; padding: 12px 0; border-top: 1px solid var(--on-d-line);"
+                    }
+                  ]
+                },
+                "children": [
+                  {
+                    "type": "Paragraph",
+                    "set_text": {
+                      "text": "Giovanni Serrano \u00b7 DRE #02282434REAL Broker, LLC \u00b7 DRE #: 02022092\u00a9 2026 Giovanni Serrano"
+                    },
+                    "set_attributes": {
+                      "attributes": [
+                        {
+                          "name": "data-inline-style",
+                          "value": "font-size: 14px; color: var(--on-d-soft); line-height: 1.6;"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "DivBlock",
+                "set_attributes": {
+                  "attributes": [
+                    {
+                      "name": "data-inline-style",
+                      "value": "margin-top: 12px;"
+                    }
+                  ]
+                },
+                "children": [
+                  {
+                    "type": "Image",
+                    "set_image_asset": {
+                      "image_asset_id": "6a16f77f047d5aa5975c052c",
+                      "alt_text": "REAL Broker, LLC"
+                    },
+                    "set_attributes": {
+                      "attributes": [
+                        {
+                          "name": "data-inline-style",
+                          "value": "display: block; max-width: 140px; height: auto; opacity: 0.85;"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "DivBlock",
+        "set_style": {
+          "style_names": [
+            "foot-bar"
+          ]
+        },
+        "set_attributes": {
+          "attributes": [
+            {
+              "name": "data-inline-style",
+              "value": "grid-template-columns: 1fr 1fr;"
+            }
+          ]
+        },
+        "children": [
+          {
+            "type": "DOM",
+            "set_text": {
+              "text": "\u00a9 2026 Giovanni Serrano"
+            },
+            "set_dom_config": {
+              "dom_tag": "span"
+            }
+          },
+          {
+            "type": "DOM",
+            "set_text": {
+              "text": "Lora \u00b7 Inter \u00b7 JetBrains Mono"
+            },
+            "set_dom_config": {
+              "dom_tag": "span"
+            },
+            "set_attributes": {
+              "attributes": [
+                {
+                  "name": "data-inline-style",
+                  "value": "text-align: right;"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    ]
+  }
+}

@@ -1,0 +1,454 @@
+{
+  "build_label": "index-009-contact",
+  "parent_element_id": {
+    "component": "6a06593646dcd6cfe2297362",
+    "element": "6a06593646dcd6cfe2297367"
+  },
+  "creation_position": "append",
+  "element_schema": {
+    "type": "Section",
+    "set_style": {
+      "style_names": [
+        "scene",
+        "bone"
+      ]
+    },
+    "set_attributes": {
+      "attributes": [
+        {
+          "name": "data-screen-label",
+          "value": "07 Contact"
+        }
+      ]
+    },
+    "children": [
+      {
+        "type": "DivBlock",
+        "set_style": {
+          "style_names": [
+            "scene-head"
+          ]
+        },
+        "children": [
+          {
+            "type": "DivBlock",
+            "set_style": {
+              "style_names": [
+                "marker"
+              ]
+            },
+            "children": [
+              {
+                "type": "DivBlock",
+                "set_style": {
+                  "style_names": [
+                    "num"
+                  ]
+                }
+              },
+              {
+                "type": "DivBlock"
+              }
+            ]
+          },
+          {
+            "type": "DivBlock",
+            "children": [
+              {
+                "type": "Heading",
+                "set_style": {
+                  "style_names": [
+                    "reveal"
+                  ]
+                },
+                "set_text": {
+                  "text": "Ready to Move With Intention?"
+                },
+                "set_heading_level": {
+                  "heading_level": 2
+                }
+              },
+              {
+                "type": "Paragraph",
+                "set_style": {
+                  "style_names": [
+                    "reveal"
+                  ]
+                },
+                "set_text": {
+                  "text": "Whether you're buying your first multifamily property, scaling your portfolio, or exploring what you can build \u2014 the first step is a conversation."
+                }
+              }
+            ]
+          }
+        ]
+      },
+      {
+        "type": "DivBlock",
+        "set_style": {
+          "style_names": [
+            "contact-grid",
+            "reveal"
+          ]
+        },
+        "children": [
+          {
+            "type": "DivBlock",
+            "set_style": {
+              "style_names": [
+                "left"
+              ]
+            },
+            "children": [
+              {
+                "type": "DivBlock",
+                "children": [
+                  {
+                    "type": "DivBlock",
+                    "set_style": {
+                      "style_names": [
+                        "lab"
+                      ]
+                    }
+                  },
+                  {
+                    "type": "Heading",
+                    "set_text": {
+                      "text": "One call. Then a model."
+                    },
+                    "set_heading_level": {
+                      "heading_level": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Paragraph",
+                "set_style": {
+                  "style_names": [
+                    "pitch"
+                  ]
+                },
+                "set_text": {
+                  "text": "No fees until you transact. No high-pressure pitch. The numbers will tell us if there's a deal here \u2014 and the call will tell us if we're a fit."
+                }
+              },
+              {
+                "type": "DivBlock",
+                "set_style": {
+                  "style_names": [
+                    "reach"
+                  ]
+                },
+                "children": [
+                  {
+                    "type": "LinkBlock",
+                    "set_link": {
+                      "link_type": "phone",
+                      "link": "6196178584"
+                    },
+                    "children": [
+                      {
+                        "type": "DOM",
+                        "set_style": {
+                          "style_names": [
+                            "k"
+                          ]
+                        },
+                        "set_text": {
+                          "text": "Call or Text"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "span"
+                        }
+                      },
+                      {
+                        "type": "DOM",
+                        "set_text": {
+                          "text": "619.617.8584"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "span"
+                        }
+                      },
+                      {
+                        "type": "DOM",
+                        "set_text": {
+                          "text": "\u2192"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "span"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "LinkBlock",
+                    "set_link": {
+                      "link_type": "email",
+                      "link": "giovanni@giovanniserrano.com"
+                    },
+                    "children": [
+                      {
+                        "type": "DOM",
+                        "set_style": {
+                          "style_names": [
+                            "k"
+                          ]
+                        },
+                        "set_text": {
+                          "text": "Email"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "span"
+                        }
+                      },
+                      {
+                        "type": "DOM",
+                        "set_text": {
+                          "text": "giovanni@giovanniserrano.com"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "span"
+                        }
+                      },
+                      {
+                        "type": "DOM",
+                        "set_text": {
+                          "text": "\u2192"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "span"
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "LinkBlock",
+                    "set_link": {
+                      "link_type": "url",
+                      "link": "https://giovanniserrano.com"
+                    },
+                    "children": [
+                      {
+                        "type": "DOM",
+                        "set_style": {
+                          "style_names": [
+                            "k"
+                          ]
+                        },
+                        "set_text": {
+                          "text": "Website"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "span"
+                        }
+                      },
+                      {
+                        "type": "DOM",
+                        "set_text": {
+                          "text": "giovanniserrano.com"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "span"
+                        }
+                      },
+                      {
+                        "type": "DOM",
+                        "set_text": {
+                          "text": "\u2192"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "span"
+                        }
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          },
+          {
+            "type": "DivBlock",
+            "set_style": {
+              "style_names": [
+                "right"
+              ]
+            },
+            "children": [
+              {
+                "type": "Form",
+                "children": [
+                  {
+                    "type": "DivBlock",
+                    "children": [
+                      {
+                        "type": "DOM",
+                        "set_text": {
+                          "text": "Name"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "label"
+                        }
+                      },
+                      {
+                        "type": "FormTextInput",
+                        "set_attributes": {
+                          "attributes": [
+                            {
+                              "name": "type",
+                              "value": "text"
+                            },
+                            {
+                              "name": "placeholder",
+                              "value": "Your name"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "DivBlock",
+                    "children": [
+                      {
+                        "type": "DOM",
+                        "set_text": {
+                          "text": "Email"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "label"
+                        }
+                      },
+                      {
+                        "type": "FormTextInput",
+                        "set_attributes": {
+                          "attributes": [
+                            {
+                              "name": "type",
+                              "value": "email"
+                            },
+                            {
+                              "name": "placeholder",
+                              "value": "your@email.com"
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "DivBlock",
+                    "children": [
+                      {
+                        "type": "DOM",
+                        "set_text": {
+                          "text": "I'm Looking To"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "label"
+                        }
+                      },
+                      {
+                        "type": "DivBlock",
+                        "children": [
+                          {
+                            "type": "DivBlock"
+                          },
+                          {
+                            "type": "DivBlock"
+                          },
+                          {
+                            "type": "DivBlock"
+                          },
+                          {
+                            "type": "DivBlock"
+                          },
+                          {
+                            "type": "DivBlock"
+                          }
+                        ]
+                      }
+                    ]
+                  },
+                  {
+                    "type": "DivBlock",
+                    "children": [
+                      {
+                        "type": "DOM",
+                        "set_text": {
+                          "text": "Anything Else (optional)"
+                        },
+                        "set_dom_config": {
+                          "dom_tag": "label"
+                        },
+                        "children": [
+                          {
+                            "type": "DOM",
+                            "set_text": {
+                              "text": "(optional)"
+                            },
+                            "set_dom_config": {
+                              "dom_tag": "span"
+                            },
+                            "set_attributes": {
+                              "attributes": [
+                                {
+                                  "name": "data-inline-style",
+                                  "value": "color: var(--ink-mute); text-transform: none; letter-spacing: 0;"
+                                }
+                              ]
+                            }
+                          }
+                        ]
+                      },
+                      {
+                        "type": "FormTextarea",
+                        "set_attributes": {
+                          "attributes": [
+                            {
+                              "name": "placeholder",
+                              "value": "Timeline, budget range, specific properties \u2014 whatever helps."
+                            }
+                          ]
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "type": "Button",
+                    "set_text": {
+                      "text": "SEND MY MESSAGE \u2192"
+                    },
+                    "set_attributes": {
+                      "attributes": [
+                        {
+                          "name": "type",
+                          "value": "submit"
+                        }
+                      ]
+                    }
+                  }
+                ]
+              },
+              {
+                "type": "Paragraph",
+                "set_text": {
+                  "text": "Your information is never shared or sold. I'll respond within 24 hours. No pressure. No obligation."
+                },
+                "set_attributes": {
+                  "attributes": [
+                    {
+                      "name": "data-inline-style",
+                      "value": "font-size: 11px; color: var(--ink-mute); text-align: center; margin-top: 14px; line-height: 1.6;"
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

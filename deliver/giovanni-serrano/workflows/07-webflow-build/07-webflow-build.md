@@ -31,10 +31,40 @@ Reproduce the approved final design source in Webflow with CMS-first structure, 
 - **Webflow Improvements & Updates**: Implement only the approved change list from `15`.
 
 ## Technical Setup
-- **Executor status**: Directive-driven (Claude follows the MCP Build Protocol below).
-- **Primary operating model**: MCP-assisted build using the HTML Decomposition Pipeline. Claude reads the approved HTML prototype, decomposes it into native Webflow elements via `element_builder`, and reserves `whtml_builder` only for non-native edge cases (animations, SVGs, pseudo-element decorations).
+- **Executor status**: Python precompiler active. `07-webflow-build.py` reads the approved HTML prototype and writes MCP-ready JSON/Markdown artifacts into `.tmp/`.
+- **Primary operating model**: MCP-assisted build using the HTML Decomposition Pipeline. The executor pre-parses the approved HTML prototype into token, style, asset, element, CMS, script, and embed plans. Claude then reviews those artifacts, confirms the Webflow target, and executes the appropriate MCP calls.
 - **Fallback**: Manual developer build in Webflow Designer, referencing the Vercel preview side-by-side.
 - **Active integrations**: Webflow MCP (`element_builder`, `style_tool`, `variable_tool`, `data_cms_tool`, `component_builder`, `whtml_builder`, `data_assets_tool`, `data_scripts_tool`, `de_page_tool`).
+
+### Python Precompiler CLI
+
+Run from the workflow folder or repo root:
+
+```bash
+python deliver/giovanni-serrano/workflows/07-webflow-build/07-webflow-build.py all
+```
+
+Available commands:
+- `analyze`: parse HTML/CSS/JS and produce token, style, asset, CMS, script, embed, and report artifacts.
+- `compile`: generate per-page `element_builder` action batches and `mcp-runbook.md`.
+- `validate`: check required artifacts, missing local assets, unsupported tags, oversized embeds/scripts, max element schema depth, and obvious secret patterns.
+- `all`: run `analyze`, `compile`, and `validate` in order.
+
+Optional flags:
+- `--source`: override the approved prototype directory. Defaults to `../05-design-revisions/.tmp/final-design/`.
+- `--output`: override the artifact directory. Defaults to `07-webflow-build/.tmp/`.
+
+The executor is offline-first and does not call Webflow. It writes local artifacts only.
+
+### MCP Review Gate
+
+Do not execute generated MCP payloads until:
+- The optional Webflow build path is explicitly activated.
+- `deliver/giovanni-serrano/docs/mcp-access.md` and the referenced MCP profile have been reviewed.
+- Webflow runtime authentication is confirmed.
+- The target Webflow site ID is listed and confirmed.
+- The Webflow MCP Bridge App is open in Designer.
+- The generated `validation-report.json`, `precompile-report.json`, and `mcp-runbook.md` have been reviewed.
 
 ---
 
@@ -146,6 +176,14 @@ Register site-level scripts via `data_scripts_tool` for:
 | CMS-bound repeating content | `element_builder` + `data_cms_tool` | Dynamic content binding required |
 
 ## Output Artifacts
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/precompile-report.json` - parser summary, counts, and safety flags
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/token-map.input.json` - CSS vars grouped for `variable_tool`
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/style-actions.json` - CSS class/media-query rules for `style_tool`
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/asset-upload-plan.json` - local media references for `data_assets_tool`
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/element-actions/*.json` - per-page `element_builder` action batches
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/embed-plan.json` - targeted `whtml_builder` and `data_scripts_tool` review plan
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/mcp-runbook.md` - execution order and placeholder notes
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/validation-report.json` - validation errors and warnings
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/token-map.json` — CSS vars → Webflow variable IDs
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/style-map.json` — CSS classes → Webflow style names/IDs
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/asset-map.json` — image paths → Webflow asset IDs

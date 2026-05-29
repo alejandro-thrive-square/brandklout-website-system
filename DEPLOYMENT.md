@@ -44,27 +44,68 @@ Add these repository secrets in GitHub before enabling the workflow:
 
 ## Asset Sync
 
-Git deployment only updates tracked files. Heavy binary/media assets (images, PDFs, videos, archives) must be synced separately via `rclone` after each deploy.
+Git deployment only updates tracked files. Heavy binary/media assets (images, PDFs, videos, archives) must be synced separately via `rclone` — they are never committed to Git.
 
-The full deploy cycle is:
+`scripts/sync-assets.sh` supports three directions:
 
-1. **Push** — commit and push to `main` (triggers GitHub Actions deploy or use manual SSH fallback).
-2. **Pull** — VPS pulls the latest committed state via `git pull --ff-only origin main`.
-3. **Sync assets** — run `bash scripts/sync-assets.sh` from the local repo root to upload heavy assets to the VPS.
+| Flag | Direction | Use case |
+| :--- | :--- | :--- |
+| `--direction push` (default) | local → VPS | After working locally; upload new assets to VPS. |
+| `--direction pull` | VPS → local | After VPS agent (e.g., Hermes) generates new assets; fetch them locally. |
+| `--direction bisync` | bidirectional | Both sides changed assets; merge without overwriting either. |
 
-Preview what will be transferred before syncing:
-
-```bash
-bash scripts/sync-assets.sh --dry-run
-```
-
-Run the actual sync:
+Preview any direction without transferring files:
 
 ```bash
-bash scripts/sync-assets.sh
+bash scripts/sync-assets.sh --direction pull --dry-run
 ```
 
-The script performs two `rclone sync` operations matching the rules in [SYSTEM_RULES.md Section 4.2](./SYSTEM_RULES.md):
+### Working Locally → Updating VPS
+
+The standard deploy cycle when originating work on local:
+
+1. **Push** — `git push origin main` (triggers GitHub Actions → VPS `git pull`).
+2. **Sync assets** — upload local binary/media assets to VPS.
+
+```bash
+bash scripts/sync-assets.sh --direction push
+```
+
+### VPS Agent Generates Assets → Fetching Locally
+
+When Hermes (or another VPS agent) creates images or other binary assets:
+
+1. **VPS pushes git-tracked artifacts** (prompt logs, JSON metadata, `.md` notes) — run on the VPS:
+
+```bash
+bash scripts/vps-commit-push.sh "feat: generate ad batch for campaign X"
+```
+
+2. **Local pulls git-tracked changes**:
+
+```bash
+git pull
+```
+
+3. **Local fetches binary assets** (images, etc.) from the VPS:
+
+```bash
+bash scripts/sync-assets.sh --direction pull
+```
+
+### Both Sides Changed Assets
+
+When local and VPS both have new binary assets since the last sync, use bisync to merge without losing files on either side. The very first bisync run requires `--resync` to establish a baseline:
+
+```bash
+# First run only
+bash scripts/sync-assets.sh --direction bisync --resync
+
+# Subsequent runs
+bash scripts/sync-assets.sh --direction bisync
+```
+
+The script performs two operations matching the rules in [SYSTEM_RULES.md Section 4.2](./SYSTEM_RULES.md):
 
 - `manage/brand-assets/` — full directory sync of agency brand materials.
 - `.tmp/` folders — filtered sync of heavy binary/media files (`png`, `jpg`, `jpeg`, `gif`, `svg`, `webp`, `ico`, `pdf`, `mp4`, `mov`, `zip`, `7z`, `psd`, `ai`, `eps`, `fig`, `sketch`).
