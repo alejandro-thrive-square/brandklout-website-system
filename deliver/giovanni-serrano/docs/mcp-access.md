@@ -14,13 +14,13 @@ This file controls MCP usage for the Giovanni Serrano client project.
 | MCP Server | Status | Allowed Purpose |
 | :--- | :--- | :--- |
 | Figma | Optional / runtime-authenticated | Design generation, design inspection, and design handoff only when a workflow calls for it. |
-| Webflow | Optional future path | Webflow build, CMS, staging, QA, and launch only if the optional Webflow path is activated. |
+| Webflow | Active for confirmed Webflow build steps | CSS variable import, Webflow build setup, CMS, staging, QA, and launch only after target site confirmation. |
 
 ## Target Resources
 
 - **Production domain:** `giovanniserrano.com`
 - **Current delivery path:** Vercel/Airtable path documented in `project-overview.md`.
-- **Webflow target:** Not active. If activated, list sites first and confirm the target site ID before any mutation.
+- **Webflow target:** Active only when executing the confirmed Webflow build workflow. List sites first and confirm the target site ID before any mutation.
 - **Airtable target:** Use only environment variable names and non-secret base/table identifiers documented by the relevant workflow. Do not store token values here.
 
 ## Allowed Operations
@@ -29,7 +29,7 @@ This file controls MCP usage for the Giovanni Serrano client project.
 - Generate design or implementation artifacts for the approved workflow scope.
 - Inspect staging, preview, or public URLs for QA.
 - Use Figma MCP for design production only when the active workflow requires it.
-- Use Webflow MCP only if the optional Webflow build path is explicitly activated.
+- Use Webflow MCP for confirmed Webflow build steps, including CSS variable import before clipboard paste.
 
 ## Forbidden Operations
 

@@ -1,0 +1,63 @@
+<!doctype html>
+<meta charset="utf-8">
+<title>Webflow Clipboard Capture</title>
+<style>
+  body{font:14px/1.5 system-ui,sans-serif;margin:24px;max-width:1100px}
+  h1{font-size:18px}
+  .drop{border:2px dashed #888;border-radius:10px;padding:28px;text-align:center;
+        background:#faf8f0;cursor:text}
+  .drop:focus{outline:3px solid #E07A5F}
+  .block{margin:18px 0}
+  .label{font-weight:700;margin-bottom:6px}
+  textarea{width:100%;height:240px;font:12px/1.4 ui-monospace,Menlo,monospace;
+           white-space:pre;overflow:auto}
+  .types{font:13px ui-monospace,monospace;color:#444;margin:8px 0}
+  button{font-size:14px;padding:8px 14px;margin-right:8px;cursor:pointer}
+  .hint{color:#666}
+</style>
+<h1>Webflow Clipboard Capture</h1>
+<p class="hint">1) In Webflow, bind a div's background (and maybe text) to a <b>variable</b>, then Copy it.
+2) Click the box below and press <b>Ctrl/Cmd-V</b>. 3) Send me the <b>application/json</b> text (or click Download).</p>
+
+<div class="drop" id="drop" contenteditable="true" tabindex="0">Click here, then paste (Ctrl/Cmd-V)…</div>
+
+<div class="types" id="types"></div>
+
+<div class="block">
+  <div class="label">application/json <button id="dlJson">Download JSON</button> <button id="copyJson">Copy JSON</button></div>
+  <textarea id="json" placeholder="(empty — no application/json on the clipboard)"></textarea>
+</div>
+
+<div class="block">
+  <div class="label">text/html</div>
+  <textarea id="html" placeholder="(empty)"></textarea>
+</div>
+
+<div class="block">
+  <div class="label">text/plain</div>
+  <textarea id="plain" placeholder="(empty)"></textarea>
+</div>
+
+<script>
+const $ = id => document.getElementById(id);
+function show(dt){
+  const types = Array.from(dt.types || []);
+  $('types').textContent = 'clipboard types present: ' + (types.join(', ') || '(none)');
+  $('json').value  = dt.getData('application/json') || '';
+  $('html').value  = dt.getData('text/html') || '';
+  $('plain').value = dt.getData('text/plain') || '';
+}
+$('drop').addEventListener('paste', e => { e.preventDefault(); show(e.clipboardData); });
+document.addEventListener('paste', e => { if(document.activeElement!==$('drop')) show(e.clipboardData); });
+$('dlJson').onclick = () => {
+  const blob = new Blob([$('json').value], {type:'application/json'});
+  const a = document.createElement('a');
+  a.href = URL.createObjectURL(blob);
+  a.download = 'webflow_variable_ref_capture.json';
+  a.click();
+};
+$('copyJson').onclick = async () => {
+  try { await navigator.clipboard.writeText($('json').value); $('copyJson').textContent='Copied!'; }
+  catch { $('copyJson').textContent='copy failed — select & Ctrl-C'; }
+};
+</script>

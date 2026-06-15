@@ -6,6 +6,12 @@
       "runtimeExecutable": "npx",
       "runtimeArgs": ["serve", "deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final-design", "-l", "3456"],
       "port": 3456
+    },
+    {
+      "name": "final-revisions",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "3457", "--directory", "deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final revisions"],
+      "port": 3457
     }
   ]
 }

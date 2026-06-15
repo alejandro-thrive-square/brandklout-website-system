@@ -4,7 +4,7 @@
 A shared browser automation utility that uses Playwright (Chromium) to load any URL, capture visual and textual artifacts, and report the results so that agents can **see** what a browser renders. This is the single entry-point for browser-based work across all pillars.
 
 **Consumers:**
-- **Sales** — [scrape-page-to-markdown](../../../sales/scrape-page-to-markdown/scrape-page-to-markdown.md) falls back to this tool when a JavaScript-rendered page returns sparse text via urllib.
+- **Sales** — [scrape-page-to-markdown](../../../sales/process/scrape-page-to-markdown/scrape-page-to-markdown.md) falls back to this tool when a JavaScript-rendered page returns sparse text via urllib.
 - **Deliver / QA** — [06-qa](../../../deliver/process/06-qa/06-qa.md) uses it for responsive screenshots and smoke-testing staging URLs.
 - **Deliver / Launch** — [07-launch](../../../deliver/process/07-launch/07-launch.md) uses it for post-publish smoke tests.
 - **Growth** — [form-scrape-redesign](../../../growth/form-scrape-redesign-vercel-email/form-scrape-redesign-vercel-email.md) uses it as a JS-capable scraper.

@@ -1,10 +1,47 @@
-Execute the 07-Webflow-Build workflow for client [CLIENT_NAME].
+Execute the 07-Webflow-Build workflow for client [CLIENT_NAME] using the
+HTML/CSS/JS clipboard paste method.
 
-Read the directive at deliver/process/07-webflow-build/07-webflow-build.md and follow the MCP Build Protocol — HTML Decomposition Pipeline.
+Read the directive at:
+deliver/[CLIENT_NAME]/workflows/07-webflow-build/html-to-webflow-clipboard.md
 
-Inputs:
-- Approved HTML design: deliver/[CLIENT_NAME]/workflows/05-design-revisions/.tmp/final-design/ (fall back to 04-design/.tmp/final-design/ if no revisions exist).
-- Content & SEO: deliver/[CLIENT_NAME]/workflows/06-content-seo/.tmp/ (if available).
-- Target Webflow site ID: [SITE_ID] (use data_sites_tool to list if unknown).
+Input design:
+deliver/[CLIENT_NAME]/workflows/05-design-revisions/.tmp/final-design/index.html
+(fall back to 04-design/.tmp/final-design/ if no revisions exist).
 
-Execute all 6 phases in order. Save all output artifacts to deliver/[CLIENT_NAME]/workflows/07-webflow-build/.tmp/. After completing the build, publish to staging and prepare the build manifest for QA.
+Required order:
+1. Read the client's docs/mcp-access.md before any MCP use.
+2. Confirm Webflow MCP runtime auth and the exact target Webflow site.
+3. Extract source :root CSS variables and import them into Webflow via MCP.
+   Update .tmp/webflow-variable-map.json with each imported variable's
+   Webflow cssName and variableId. The variableId is required for Designer
+   style bindings.
+4. Generate split paste pages with resolved CSS values for stable paste rendering:
+
+   python html_to_webflow.py \
+     --html ../05-design-revisions/.tmp/final-design/index.html \
+     --asset-base "https://<DEPLOYED_SITE_URL>" \
+     --var-map .tmp/webflow-variable-map.json \
+     --split .tmp/sections
+
+5. Open each .tmp/sections/paste_*.html page in order, click
+   "Copy to Webflow clipboard", then paste into one Webflow Designer page.
+6. Use Webflow MCP/Designer variable tools and the generated
+   .tmp/webflow-style-variable-bindings.json styleTool.actions to bind pasted
+   style properties to Webflow variables. These actions use
+   properties[].variable_as_value = variableId; raw var(...) strings in
+   clipboard styleLess do not create Designer variable chips.
+7. Install .tmp/webflow-custom-code.js as Webflow custom code.
+8. Verify against .tmp/animation-manifest.json that required IDs/classes/selectors
+   still exist after paste.
+9. Publish staging only after explicit confirmation.
+
+Use https://evercoder.github.io/clipboard-inspector/ only when capturing or
+debugging Webflow clipboard reference JSON. Save reference captures as
+.tmp/webflow_*.json.
+
+Verification note: external images may show as gray placeholders and some
+gradient textures may be missing in Designer. Verify the published staging URL,
+not only the Designer canvas.
+
+Save generated artifacts to:
+deliver/[CLIENT_NAME]/workflows/07-webflow-build/.tmp/

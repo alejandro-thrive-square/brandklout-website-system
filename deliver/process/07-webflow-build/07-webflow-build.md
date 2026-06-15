@@ -6,6 +6,9 @@ We build the approved design in Webflow with clean structure, responsive behavio
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the Python executor or technical logic of this workflow must be documented here immediately.
 
+> [!NOTE]
+> Planned evolution: [TEMPLATE_LIBRARY_PLAN.md](./TEMPLATE_LIBRARY_PLAN.md) — Relume-based template library (one shared class system, 20–30 variable-themed templates) feeding the pasteable-components converter.
+
 ## Operational Purpose
 Reproduce the approved final design source in Webflow with CMS-first structure, token consistency, responsive coverage, and staging readiness. Valid approved sources include revised Claude Design HTML/CSS/JS packages and Figma designs.
 
@@ -31,10 +34,12 @@ Reproduce the approved final design source in Webflow with CMS-first structure, 
 - **Webflow Improvements & Updates**: Implement only the approved change list from `15`.
 
 ## Technical Setup
-- **Executor status**: Directive-driven (Claude follows the MCP Build Protocol below).
-- **Primary operating model**: MCP-assisted build using the HTML Decomposition Pipeline. Claude reads the approved HTML prototype, decomposes it into native Webflow elements via `element_builder`, and reserves `whtml_builder` only for non-native edge cases (animations, SVGs, pseudo-element decorations).
-- **Fallback**: Manual developer build in Webflow Designer, referencing the Vercel preview side-by-side.
-- **Active integrations**: Webflow MCP (`element_builder`, `style_tool`, `variable_tool`, `data_cms_tool`, `component_builder`, `whtml_builder`, `data_assets_tool`, `data_scripts_tool`, `de_page_tool`).
+- **Executor status**: Directive-driven (Claude runs the HTML→Webflow converter).
+- **Primary operating model — Clipboard Copy-Paste build**: Claude runs `html_to_webflow.py` to convert the approved HTML/CSS into Webflow's clipboard payload (`@webflow/XscpData`), emits a browser copy page, and pastes each section straight into the Designer. A cascade resolver bakes descendant/compound/state CSS into flat Webflow classes, resolves `:root` design tokens, materializes `::before`/`::after`, and applies the Webflow-specific CSS translation rules (gap→grid-gap, grid track defaults + ordering, `inset` expansion, etc.). This is faster and higher-fidelity than per-element MCP calls for full pages. **Full method + translation rules:** the workflow's `html-to-webflow-clipboard.md`.
+- **Going-forward standard**: author designs (`04`/`05`) in **Client-First flat classes** (one semantic class per styled element, no descendant selectors) so the converter stays a clean 1:1 map and the Webflow project has tidy class names for handoff.
+- **Fallback A — MCP Build Protocol**: the HTML Decomposition Pipeline below (native `element_builder` build). Use when CMS bindings/native Designer editing must be authored programmatically rather than pasted.
+- **Fallback B**: manual developer build in Webflow Designer, referencing the Vercel preview side-by-side.
+- **Available integrations**: Webflow MCP (`element_builder`, `style_tool`, `variable_tool`, `data_cms_tool`, `component_builder`, `whtml_builder`, `data_assets_tool`, `data_scripts_tool`, `de_page_tool`) — used by Fallback A and for CMS setup.
 
 ---
 

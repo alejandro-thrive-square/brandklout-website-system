@@ -1,0 +1,61 @@
+{
+  "project": "CENTRA",
+  "direction": "rtl",
+  "language": "he",
+  "pages": [
+    {
+      "id": "home",
+      "title": "Home",
+      "file": "wireframes/index.html",
+      "sections": [
+        { "name": "Strong Header (hero)", "component": "custom-animated", "notes": "Exploded-device 3D hero; chip pulled out + hand fixing. Client supplies 3D object after approval." },
+        { "name": "Logo Gallery", "component": "logo-gallery", "notes": "50+ brands; moving/animated marquee. Samsung, Dyson, Dreame, Ninja, PlayStation." },
+        { "name": "Text & Search Bar", "component": "custom-functional", "notes": "Warranty serial-number lookup; connect to warranty form/catalog (backend)." },
+        { "name": "Quantity Counter", "component": "animated-counters", "notes": "250 / 100+ / 300,000 with CTAs." },
+        { "name": "Contact Form", "component": "contact-form", "notes": "Name, product type, mobile." }
+      ]
+    },
+    {
+      "id": "effective-robotics",
+      "title": "EFFECTIVE ROBOTICS",
+      "file": "wireframes/effective-robotics.html",
+      "sections": [
+        { "name": "Brand intro", "component": "text" },
+        { "name": "Logo gallery", "component": "logo-gallery" },
+        { "name": "Coverage", "component": "text-strong-image", "notes": "Israel map; client-supplied image." },
+        { "name": "Service journey", "component": "text-icons-3col", "notes": "Remote -> At home -> At lab then back." },
+        { "name": "Service standard", "component": "text-icons-3col", "notes": "Parts availability / expertise per brand / advanced tools." },
+        { "name": "Areas of expertise", "component": "titles-icons-5", "notes": "Gaming, Kitchen, Monitors, TVs, Robot vacuums." }
+      ]
+    },
+    {
+      "id": "installations",
+      "title": "CENTRA Installations",
+      "file": "wireframes/installations.html",
+      "sections": [
+        { "name": "Work gallery", "component": "gallery", "notes": "Real job photos." },
+        { "name": "Samsung credential", "component": "logo-gallery-award", "notes": "Official installers of Samsung Israel." },
+        { "name": "Areas of expertise", "component": "titles-icons-5", "notes": "Washing-machine hookup, Ceiling install, Wall TVs, + 2 placeholders (X?)." },
+        { "name": "Contact form", "component": "contact-form", "notes": "Company name, device owned, mobile." }
+      ]
+    },
+    {
+      "id": "special-projects",
+      "title": "Special / Government Projects",
+      "file": "wireframes/special-projects.html",
+      "sections": [
+        { "name": "Intro", "component": "text" },
+        { "name": "Projects (expandable)", "component": "titles-icons-accordion", "notes": "Each icon opens a text bar: Ministry of Health (ventilated patients), Leumit/HMO, Ministry of Education/schools, Secret (censored)." },
+        { "name": "Contact form", "component": "contact-form", "notes": "Company name, project description, mobile." }
+      ]
+    }
+  ],
+  "navigation": ["מעבדות (Labs)", "התקנות (Installations)", "פרויקטים מיוחדים (Special Projects)", "עבודות (Work)"],
+  "cms_bound_candidates": [
+    "Logo gallery brands",
+    "Team members (Home)",
+    "Areas of expertise cards",
+    "Special projects entries",
+    "Work gallery items"
+  ]
+}

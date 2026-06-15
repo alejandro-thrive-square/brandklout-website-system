@@ -1,0 +1,13 @@
+Use the Deliver supporting workflow `copy-style-guide` when I ask to set up or copy a website's style guide (variables + styles) from one Webflow site to another in the same workspace — for example, seeding an existing site from a Relume cloneable site.
+
+See deliver/process/copy-style-guide/copy-style-guide.md for the full protocol. Scope is variables and styles only (no components, assets, pages, or CMS). Conflict policy is source wins (overwrite).
+
+Steps:
+1. Phase A — Run `data_sites_tool` list_sites. Never assume site IDs. Ask me to confirm which site is the SOURCE (Relume clone) and which is the TARGET (existing site), and record both siteId values.
+2. Before writing, read the nearest mcp-access.md and its referenced profile in mcp-servers/profiles/, confirm Webflow auth via /mcp, and confirm both sites are in the authorized workspace.
+3. Phase B — With the SOURCE open in the Webflow Designer (Bridge App connected), read variables (variable_tool get_variable_collections + get_variables, include_all_modes) and styles (style_tool get_styles, include_all_breakpoints). Save source-variables.json and source-styles.json in .tmp/.
+4. Phase C — Switch the Designer to the TARGET site (confirm the target siteId with me first). Recreate variable collections, modes, and variables (base values first, then aliases via existing_variable_id). Overwrite on name collision. Save variable-id-map.json (source var ID -> target var ID).
+5. Phase D — Recreate styles on the TARGET: base classes first, then combo classes (parent_style_names). Bind variable references via variable_as_value using variable-id-map.json. Apply responsive/pseudo overrides with update_style per breakpoint_id. Overwrite on name collision. Save style-map.json.
+6. Phase E — Re-read the target, confirm counts match the source, and save copy-report.json. Tell me about any unmapped variable references or warnings.
+
+Reminder: variable_tool/style_tool act through the open Designer session, so keep the correct site open in the Designer for each phase (SOURCE for reading, TARGET for writing).

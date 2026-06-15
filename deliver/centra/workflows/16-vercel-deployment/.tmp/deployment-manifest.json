@@ -1,0 +1,14 @@
+{
+  "client_slug": "centra",
+  "product_slug": "wireframe",
+  "deployment_root": "deliver/centra/workflows/02-wireframe/.tmp/wireframes",
+  "vercel_project": "centra",
+  "vercel_scope": "webzite-studio",
+  "environment": "production",
+  "deployment_url": "https://centra-two.vercel.app",
+  "custom_domain": "",
+  "deployed_from_branch": "main",
+  "deployed_commit": "",
+  "deployed_at": "2026-06-01",
+  "notes": "Public production URL: https://centra-two.vercel.app (Vercel auto-suffixed to 'centra-two' because centra.vercel.app is owned by another account). Project 'centra' under Webzite Studio team. Deploy required NODE_OPTIONS=--use-system-ca so Node trusts the machine's proxy/AV root CA — this was the only blocker (connectivity + auth were fine). Team-suffixed and preview URLs stay behind Vercel Deployment Protection (401); the clean production alias is public, same as giovanni-serrano.vercel.app."
+}

@@ -1,0 +1,134 @@
+{
+  "actions": [
+    {
+      "label": "bind hero-eyebrow [main/noPseudo]",
+      "update_style": {
+        "style_name": "hero-eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "color",
+            "variable_as_value": "variable-e1f6700e-f038-b700-a7c8-7a04a55b7210"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind bar [main/noPseudo]",
+      "update_style": {
+        "style_name": "bar",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "background-color",
+            "variable_as_value": "variable-e1f6700e-f038-b700-a7c8-7a04a55b7210"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind num [main/noPseudo]",
+      "update_style": {
+        "style_name": "num",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "color",
+            "variable_as_value": "variable-a982e047-3234-a4fc-52e9-d9a54f14779b"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind h1 [main/noPseudo]",
+      "update_style": {
+        "style_name": "h1",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "color",
+            "variable_as_value": "variable-9e125476-dc36-6c82-f263-2bf9c521a88f"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind l2 [main/noPseudo]",
+      "update_style": {
+        "style_name": "l2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "color",
+            "variable_as_value": "variable-e1f6700e-f038-b700-a7c8-7a04a55b7210"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind hero-sub [main/noPseudo]",
+      "update_style": {
+        "style_name": "hero-sub",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "color",
+            "variable_as_value": "variable-9e125476-dc36-6c82-f263-2bf9c521a88f"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind hero-meta [main/noPseudo]",
+      "update_style": {
+        "style_name": "hero-meta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "background-color",
+            "variable_as_value": "variable-55a3337f-0215-3b43-94a7-a50abee954b7"
+          },
+          {
+            "property_name": "border-color",
+            "variable_as_value": "variable-55a3337f-0215-3b43-94a7-a50abee954b7"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind cell [main/noPseudo]",
+      "update_style": {
+        "style_name": "cell",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "background-color",
+            "variable_as_value": "variable-51aaaba6-a892-11e4-0838-87807e4bdf66"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind k [main/noPseudo]",
+      "update_style": {
+        "style_name": "k",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "color",
+            "variable_as_value": "variable-a982e047-3234-a4fc-52e9-d9a54f14779b"
+          }
+        ]
+      }
+    }
+  ]
+}

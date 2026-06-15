@@ -1,0 +1,120 @@
+{
+  "actions": [
+    {
+      "label": "bind v [main/noPseudo]",
+      "update_style": {
+        "style_name": "v",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "color",
+            "variable_as_value": "variable-9e125476-dc36-6c82-f263-2bf9c521a88f"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind em-2 [main/noPseudo]",
+      "update_style": {
+        "style_name": "em-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "color",
+            "variable_as_value": "variable-e1f6700e-f038-b700-a7c8-7a04a55b7210"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind hero-ticker [main/noPseudo]",
+      "update_style": {
+        "style_name": "hero-ticker",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "border-top-color",
+            "variable_as_value": "variable-55a3337f-0215-3b43-94a7-a50abee954b7"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind td [main/noPseudo]",
+      "update_style": {
+        "style_name": "td",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "background-color",
+            "variable_as_value": "variable-e1f6700e-f038-b700-a7c8-7a04a55b7210"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind span-3 [main/noPseudo]",
+      "update_style": {
+        "style_name": "span-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "color",
+            "variable_as_value": "variable-589aa521-b980-fd27-e6a2-78033a9a0aaf"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind elevation [main/noPseudo]",
+      "update_style": {
+        "style_name": "elevation",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "background-color",
+            "variable_as_value": "variable-9e125476-dc36-6c82-f263-2bf9c521a88f"
+          },
+          {
+            "property_name": "border-color",
+            "variable_as_value": "variable-88869292-03e0-a196-3a3a-87fec9346859"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind label [main/noPseudo]",
+      "update_style": {
+        "style_name": "label",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "color",
+            "variable_as_value": "variable-a982e047-3234-a4fc-52e9-d9a54f14779b"
+          }
+        ]
+      }
+    },
+    {
+      "label": "bind corner [main/noPseudo]",
+      "update_style": {
+        "style_name": "corner",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "properties": [
+          {
+            "property_name": "color",
+            "variable_as_value": "variable-e1f6700e-f038-b700-a7c8-7a04a55b7210"
+          }
+        ]
+      }
+    }
+  ]
+}

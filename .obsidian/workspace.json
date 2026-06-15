@@ -1,0 +1,184 @@
+{
+  "main": {
+    "id": "9de3360c47baf215",
+    "type": "split",
+    "children": [
+      {
+        "id": "424bd6935dd6bf6c",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "fef99d743d035679",
+            "type": "leaf",
+            "pinned": true,
+            "state": {
+              "type": "graph",
+              "state": {},
+              "pinned": true,
+              "icon": "lucide-git-fork",
+              "title": "Vista gráfica"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "vertical"
+  },
+  "left": {
+    "id": "2480179f4c473bc4",
+    "type": "split",
+    "children": [
+      {
+        "id": "cbe8a84eef09effe",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "2ebbd7ed83eb7d64",
+            "type": "leaf",
+            "state": {
+              "type": "file-explorer",
+              "state": {
+                "sortOrder": "alphabetical",
+                "autoReveal": false
+              },
+              "icon": "lucide-folder-closed",
+              "title": "Explorador de archivos"
+            }
+          },
+          {
+            "id": "1dfe0dea34e1a75b",
+            "type": "leaf",
+            "state": {
+              "type": "search",
+              "state": {
+                "query": "",
+                "matchingCase": false,
+                "explainSearch": false,
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical"
+              },
+              "icon": "lucide-search",
+              "title": "Search"
+            }
+          },
+          {
+            "id": "f0770efd6533c320",
+            "type": "leaf",
+            "state": {
+              "type": "bookmarks",
+              "state": {},
+              "icon": "lucide-bookmark",
+              "title": "Bookmarks"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300
+  },
+  "right": {
+    "id": "770ca94e98998a84",
+    "type": "split",
+    "children": [
+      {
+        "id": "34a2a41e09cf11bb",
+        "type": "tabs",
+        "children": [
+          {
+            "id": "3da6ba777cec1f77",
+            "type": "leaf",
+            "state": {
+              "type": "backlink",
+              "state": {
+                "collapseAll": false,
+                "extraContext": false,
+                "sortOrder": "alphabetical",
+                "showSearch": false,
+                "searchQuery": "",
+                "backlinkCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-coming-in",
+              "title": "Backlinks"
+            }
+          },
+          {
+            "id": "48d6c62068653465",
+            "type": "leaf",
+            "state": {
+              "type": "outgoing-link",
+              "state": {
+                "linksCollapsed": false,
+                "unlinkedCollapsed": true
+              },
+              "icon": "links-going-out",
+              "title": "Outgoing links"
+            }
+          },
+          {
+            "id": "eb263305995830c5",
+            "type": "leaf",
+            "state": {
+              "type": "tag",
+              "state": {
+                "sortOrder": "frequency",
+                "useHierarchy": true
+              },
+              "icon": "lucide-tags",
+              "title": "Tags"
+            }
+          },
+          {
+            "id": "bbb7b773081a1f2b",
+            "type": "leaf",
+            "state": {
+              "type": "outline",
+              "state": {},
+              "icon": "lucide-list",
+              "title": "Outline"
+            }
+          }
+        ]
+      }
+    ],
+    "direction": "horizontal",
+    "width": 300,
+    "collapsed": true
+  },
+  "left-ribbon": {
+    "hiddenItems": {
+      "switcher:Abrir selector rápido": false,
+      "graph:Abrir vista gráfica": false,
+      "canvas:Crear nuevo lienzo": false,
+      "daily-notes:Abrir la nota de hoy": false,
+      "templates:Insertar plantilla": false,
+      "command-palette:Abrir paleta de comandos": false,
+      "bases:Crear nueva base": false
+    }
+  },
+  "active": "fef99d743d035679",
+  "lastOpenFiles": [
+    "SYSTEM_RULES.md",
+    "deliver/DELIVER_SYSTEM_RULES.md",
+    "deliver/process/PROCESS_INDEX.md",
+    "deliver/process/design-system-library/design-systems/DESIGN_SYSTEMS_INDEX.md",
+    "deliver/giovanni-serrano/workflows/07-webflow-build/tests/test_html_to_webflow.py.tmp.6516.71e05a313423",
+    "deliver/giovanni-serrano/workflows/07-webflow-build/tests/test_html_to_webflow.py.tmp.6516.d1002c3cf3b7",
+    "deliver/giovanni-serrano/workflows/07-webflow-build/TRIGGER_PROMPT.txt",
+    "deliver/giovanni-serrano/workflows/07-webflow-build/TRIGGER_PROMPT.txt.tmp.17156.c7fd4ed2ad44",
+    "deliver/giovanni-serrano/workflows/07-webflow-build/html_to_webflow.py.tmp.17156.6fa26c198a6a",
+    "deliver/giovanni-serrano/workflows/07-webflow-build/html_to_webflow.py.tmp.17156.51da58b60075",
+    "deliver/giovanni-serrano/workflows/07-webflow-build/html_to_webflow.py.tmp.17156.299f6add119b",
+    "deliver/giovanni-serrano/workflows/07-webflow-build/html_to_webflow.py.tmp.17156.081be5601abe",
+    "deliver/giovanni-serrano/workflows/07-webflow-build/__pycache__/html_to_webflow.cpython-313.pyc",
+    "deliver/giovanni-serrano/workflows/07-webflow-build/__pycache__",
+    "deliver/giovanni-serrano/workflows/07-webflow-build/html-to-webflow-clipboard.md",
+    "HERMES.md",
+    "deliver/process/00-client-delivery-initialization/00-client-delivery-initialization.md",
+    "deliver/process/copy-style-guide/copy-style-guide.md",
+    "INSTALL.md",
+    "sales/process/02-send-proposal/02-send-proposal.md"
+  ]
+}

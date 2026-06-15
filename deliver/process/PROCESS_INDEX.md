@@ -5,7 +5,7 @@ This folder contains the canonical post-contract delivery template library for t
 Each numbered module mirrors the standard workflow structure defined in [SYSTEM_RULES.md Section 2.1](../../SYSTEM_RULES.md): `.md` directive, `.py` executor, `TRIGGER_PROMPT.txt`, and a `.tmp/` artifact folder. Module `00` defines client-folder initialization. Modules `01` through `17` are reusable delivery execution templates; [OFFER_ROUTING.md](./OFFER_ROUTING.md) determines which execution modules are copied for each Sales offer.
 
 > [!IMPORTANT]
-> **Integrity Rule**: When a phase's logic, naming, output schema, or offer routing changes, update the relevant phase `.md`, this index, and [OFFER_ROUTING.md](./OFFER_ROUTING.md) in the same commit.
+> **Integrity Rule**: When a phase's or supporting workflow's logic, naming, output schema, or offer routing changes, update the relevant `.md`, this index, and [OFFER_ROUTING.md](./OFFER_ROUTING.md) (when routing is affected) in the same commit.
 
 ## Purpose
 - Provide reusable, version-controlled delivery templates for every signed delivery engagement.
@@ -60,6 +60,13 @@ The current numbered folders are reusable templates. Module `00` is the setup wo
 | 15 | Improvement Intake & Audit | [15-improvement-intake-audit.md](./15-improvement-intake-audit/15-improvement-intake-audit.md) |
 | 16 | Vercel Deployment | [16-vercel-deployment.md](./16-vercel-deployment/16-vercel-deployment.md) |
 | 17 | AI Site Build & Airtable | [17-ai-site-build-airtable.md](./17-ai-site-build-airtable/17-ai-site-build-airtable.md) |
+
+## Supporting Workflows
+Non-sequential tools that delivery phases call as needed. They live flat inside `deliver/process/` alongside the numbered phases (mirroring how `deliver/process/` already holds non-numbered items such as `design-system-library`), but they are **not** part of the `00`-`17` offer-routing sequence. Each follows the same standard folder shape and can be cloned into `deliver/[client-name]/workflows/` when run for a specific engagement.
+
+| Workflow | Directive |
+| :--- | :--- |
+| Copy Style Guide (Variables + Styles) | [copy-style-guide/copy-style-guide.md](./copy-style-guide/copy-style-guide.md) |
 
 ## Standard Folder Shape (per phase)
 
