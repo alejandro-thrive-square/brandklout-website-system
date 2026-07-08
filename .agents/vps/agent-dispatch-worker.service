@@ -1,0 +1,17 @@
+# Webzite agent dispatch worker (VPS, systemd).
+# Rendered from this template by install-worker.sh (substitutes @@REPO@@ / @@PY@@).
+# Docs: .agents/DISPATCH.md
+[Unit]
+Description=Webzite agent dispatch worker - process one queued task
+Documentation=file:///root/webzite-agentic-workflow/.agents/DISPATCH.md
+After=network-online.target
+Wants=network-online.target
+
+[Service]
+Type=oneshot
+User=root
+WorkingDirectory=@@REPO@@
+ExecStart=@@PY@@ @@REPO@@/.agents/dispatch.py worker --once
+# One whole worker tick (incl. a long sub-agent run). Per-task timeouts are
+# still enforced inside dispatch.py (settings.timeout_sec).
+TimeoutStartSec=30min

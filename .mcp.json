@@ -3,6 +3,31 @@
     "webflow": {
       "type": "http",
       "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-webzite": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-clifton-exteriors": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-giovanni-serrano": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-horizon": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-excellent-facets": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
+    },
+    "agent-dispatch": {
+      "type": "stdio",
+      "command": "python",
+      "args": ["mcp-servers/agent-dispatch/server.py"]
     }
   }
 }

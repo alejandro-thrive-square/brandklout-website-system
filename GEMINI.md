@@ -21,6 +21,11 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 - **MCP Index**: [mcp-servers/MCP_INDEX.md](./mcp-servers/MCP_INDEX.md) - all MCP servers used across the project
 - **MCP Access Model**: [mcp-servers/ACCESS_MODEL.md](./mcp-servers/ACCESS_MODEL.md) - folder-based MCP permissions and profiles
 - **Webflow MCP Setup**: [mcp-servers/webflow/setup.md](./mcp-servers/webflow/setup.md)
+- **Cross-Provider Agent Dispatch**: [.agents/DISPATCH.md](./.agents/DISPATCH.md) - let any agent trigger another provider's agent (Claude/Codex/Pi), local + VPS. Trigger phrase: `@dispatch`
+
+## Trigger Phrases
+
+- **`@dispatch`** — When a message contains a line starting with `@dispatch`, load and follow [.agents/TRIGGER_PROMPT.txt](./.agents/TRIGGER_PROMPT.txt), then execute the cross-provider dispatch it describes. Syntax: `@dispatch [async] [diff:N] <role> <task...>` (e.g. `@dispatch backend write a Flask webhook`). Roles: `backend`, `automation`, `docs`, `token-opt`, `linking`, `audit`, `system-improvement`, `design`, `build`. If `diff:N` is omitted, self-rate the task difficulty 1–10 first per TRIGGER_PROMPT.txt. Mutating actions still require explicit confirmation.
 
 ## Operational Protocol
 1. **Understand the Pillar**: Before starting a task, read the rules for the relevant pillar.
@@ -28,7 +33,8 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 3. **Use Artifacts**: Store all intermediate data in the `.tmp/` folder within the specific workflow directory.
 4. **Token Optimization**: Filter your context to the specific workflow folder you are executing.
 5. **MCP Management**: MCP servers are shared infrastructure in `mcp-servers/`. Register new servers with `claude mcp add --scope project`. Before using any MCP, read the nearest `mcp-access.md` and the referenced profile in `mcp-servers/profiles/`. See [MCP Index](./mcp-servers/MCP_INDEX.md) and [MCP Access Model](./mcp-servers/ACCESS_MODEL.md).
-6. **Version Control**: This system is managed via a GitHub repository. Follow the version control rules in [SYSTEM_RULES.md - Section 4](./SYSTEM_RULES.md). Commit lightweight `.tmp/` workflow artifacts when useful, but never commit `.env` files, secrets, or binary/media assets. All new `.md` files must include a Version Control section.
+6. **Directive Improvement Loop**: At task completion, update the related directive `.md` files used to learn or execute the process whenever the task reveals a missing step, changed requirement, new decision, corrected assumption, or reusable process improvement.
+7. **Version Control**: This system is managed via a GitHub repository. Follow the version control rules in [SYSTEM_RULES.md - Section 4](./SYSTEM_RULES.md). Commit lightweight `.tmp/` workflow artifacts when useful, but never commit `.env` files, secrets, or binary/media assets. All new `.md` files must include a Version Control section.
 
 ## Version Control
 

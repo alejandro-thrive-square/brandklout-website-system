@@ -1,0 +1,118 @@
+# Webzite Agent Dispatch — roster & provider config
+# Edit freely. Routed by ROLE (not model name) so model ids can change without
+# touching agent code. Run `python .agents/dispatch.py routes` to see the result.
+
+[settings]
+timeout_sec = 900        # default per-call timeout
+max_depth   = 3          # recursion guard: agent -> agent -> agent chain depth
+
+# ----------------------------------------------------------------- providers
+# Each provider's `command` MUST contain exactly one {prompt} token (the prompt
+# is passed as a single argv element, so multiline prompts are safe).
+# `model_args` (optional) are appended only when the agent sets a `model`.
+
+[providers.claude]
+command    = ["claude", "-p", "{prompt}", "--output-format", "text"]
+model_args = ["--model", "{model}"]
+# team account: default config dir (~/.claude)
+
+[providers.claude2]
+command    = ["claude", "-p", "{prompt}", "--output-format", "text"]
+model_args = ["--model", "{model}"]
+env        = { CLAUDE_CONFIG_DIR = "~/.claude-account-b" }   # personal (Max) account
+
+[providers.codex]
+command    = ["codex", "exec", "--skip-git-repo-check", "{prompt}"]
+model_args = ["-m", "{model}"]
+# If Codex prompts for approval in your setup, add to the agent's extra_args:
+#   extra_args = ["-c", "approval_policy=never"]
+
+[providers.pi]
+command    = ["pi", "-p", "{prompt}"]
+# pi selects its model from its own theme/config, so no model_args here.
+
+[providers.gemini]
+command    = ["gemini", "{prompt}"]
+# Experimental; not routed to any role by default.
+
+# ----------------------------------------------------------------- agents
+# "Claude2" is a named worker on the same `claude` binary — orchestration sees
+# providers, interactive windows are separate. Two named Claude agents let you
+# run two concurrent jobs.
+
+[agents.claude-design]
+provider = "claude"
+model    = "fable"         # Fable = design/build specialist (alias; full id claude-fable-5)
+roles    = ["design", "build"]
+note     = "Claude #1 - design + build websites"
+
+[agents.claude2-design]
+provider = "claude2"
+model    = "fable"
+roles    = ["design", "build", "design2", "build2"]
+note     = "Claude #2 - personal (Max) account; design + build websites"
+
+[agents.codex-backend]
+provider = "codex"
+model    = "gpt-5.5"       # Codex default; supported on ChatGPT accounts
+roles    = ["backend", "automation"]
+note     = "Codex - backend + automations"
+
+[agents.claude-docs]
+provider = "claude"
+model    = "sonnet"
+roles    = ["docs", "token-opt", "linking"]
+note     = "Claude #1 - documentation, linking, token optimization"
+
+[agents.claude2-docs]
+provider = "claude2"
+model    = "sonnet"
+roles    = ["docs2", "token-opt2", "linking2"]
+note     = "Claude #2 - personal (Max) account; documentation"
+
+[agents.pi-audit]
+provider = "pi"
+model    = "glm-5"         # set to GLM 5.2 when available
+roles    = ["audit", "system-improvement"]
+note     = "Pi (GLM) - system audits + improvements"
+
+# ----------------------------------------------------------------- capability routing
+# Task difficulty 1-10 -> tier -> per-provider model + effort.
+# Exposed as 1-10 to humans; bucketed into 4 tiers (no provider has 10 real tiers).
+# Difficulty is OPT-IN: omit --diff to use each agent's default model.
+# Codex lever is reasoning effort; Claude lever is the model tier (fable=design,
+# opus=frontier). Edit freely.
+[capability]
+ranges = { lite = "1-3", standard = "4-6", heavy = "7-9", max = "10" }
+
+[capability.lite.claude]
+model = "haiku"
+[capability.lite.codex]
+model = "gpt-5.5"
+extra_args = ["-c", "model_reasoning_effort=low"]
+[capability.lite.pi]
+model = "glm-5"
+
+[capability.standard.claude]
+model = "sonnet"
+[capability.standard.codex]
+model = "gpt-5.5"
+extra_args = ["-c", "model_reasoning_effort=medium"]
+[capability.standard.pi]
+model = "glm-5"
+
+[capability.heavy.claude]
+model = "fable"
+[capability.heavy.codex]
+model = "gpt-5.5"
+extra_args = ["-c", "model_reasoning_effort=high"]
+[capability.heavy.pi]
+model = "glm-5"
+
+[capability.max.claude]
+model = "opus"
+[capability.max.codex]
+model = "gpt-5.5"
+extra_args = ["-c", "model_reasoning_effort=high"]
+[capability.max.pi]
+model = "glm-5"

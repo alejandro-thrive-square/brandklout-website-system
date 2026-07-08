@@ -17,6 +17,23 @@ MCP server definitions are centralized, but MCP usage is controlled by the activ
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Webflow | HTTP (remote) | Project | Agency, Client, Workflow | [webflow/setup.md](./webflow/setup.md) | CMS management, site audits, collection item CRUD, SEO, publishing |
 | Figma | HTTP (remote) | User/Global | Global, Agency, Client, Workflow | [figma/setup.md](./figma/setup.md) | Design file generation, design inspection, and conversion from HTML/CSS prototypes |
+| Agent Dispatch | stdio (local) | Project | Global | [agent-dispatch/setup.md](./agent-dispatch/setup.md) · [profiles/agent-dispatch.md](./profiles/agent-dispatch.md) | Cross-provider orchestration: trigger Claude/Codex/Pi agents headlessly (local + VPS). See [.agents/DISPATCH.md](../.agents/DISPATCH.md) |
+
+## Server Instances (One Per Principal)
+
+Platform MCPs that hold OAuth grants are registered once **per principal** (see [ACCESS_MODEL.md — Server Instances](./ACCESS_MODEL.md#server-instances-one-per-principal)). All Webflow instances point at `https://mcp.webflow.com/mcp`; each holds its own runtime grant scoped to its principal's sites only.
+
+| Instance Name | Principal | Access Level | Grant Scope | Access File |
+| :--- | :--- | :--- | :--- | :--- |
+| `webflow-webzite` | Webzite Studio | `agency` | Webzite-owned sites only | [agency-site profile](./profiles/agency-site.md) |
+| `webflow-clifton-exteriors` | Clifton Exteriors (via Farewell Agency) | `client` | `clifton-exteriors-lutum.webflow.io` | [mcp-access.md](../deliver/farewell-agency/clifton-exteriors/docs/mcp-access.md) |
+| `webflow-giovanni-serrano` | Giovanni Serrano | `client` | Giovanni Serrano site only | [mcp-access.md](../deliver/giovanni-serrano/docs/mcp-access.md) |
+| `webflow-horizon` | Horizon Building Corp (via Farewell Agency) | `client` | Horizon sites only (`6a1f7d0be8345316ba21999c`) | [mcp-access.md](../deliver/farewell-agency/horizon/docs/mcp-access.md) |
+| `webflow-excellent-facets` | Excellent Facets | `client` | Excellent Facets site only (`excellentfacets.com`) | [mcp-access.md](../deliver/excellent-facets/docs/mcp-access.md) |
+| `webflow` | **Legacy — deprecated** | — | Whatever the last OAuth covered (unscoped) | Remove after active work migrates to per-client instances |
+
+> [!WARNING]
+> The `claude.ai Webflow` connector that may appear in `/mcp` is a claude.ai **account** connector, not part of this project's structure. Do not use it for project work — it belongs to whichever claude.ai account the terminal is logged into and bypasses the per-principal grant model. Always use the project-scoped instances above.
 
 ## Configuration
 
