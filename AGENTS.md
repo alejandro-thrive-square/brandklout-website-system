@@ -22,10 +22,15 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 - **MCP Access Model**: [mcp-servers/ACCESS_MODEL.md](./mcp-servers/ACCESS_MODEL.md) - folder-based MCP permissions and profiles
 - **Webflow MCP Setup**: [mcp-servers/webflow/setup.md](./mcp-servers/webflow/setup.md)
 - **Cross-Provider Agent Dispatch**: [.agents/DISPATCH.md](./.agents/DISPATCH.md) - let any agent trigger another provider's agent (Claude/Codex/Pi), local + VPS. Trigger phrase: `@dispatch`
+- **Desktop Notifications**: `dispatch.py` shows a toast when agents finish tasks (Win/Linux/macOS). Silence per-call with `--no-notify` or globally in `roster.toml` under `[notifications]`. Requires `libnotify-bin` on Linux VPS.
 
 ## Trigger Phrases
 
-- **`@dispatch`** — When a message contains a line starting with `@dispatch`, load and follow [.agents/TRIGGER_PROMPT.txt](./.agents/TRIGGER_PROMPT.txt), then execute the cross-provider dispatch it describes. Syntax: `@dispatch [async] [diff:N] <role> <task...>` (e.g. `@dispatch backend write a Flask webhook`). Roles: `backend`, `automation`, `docs`, `token-opt`, `linking`, `audit`, `system-improvement`, `design`, `build`. If `diff:N` is omitted, self-rate the task difficulty 1–10 first per TRIGGER_PROMPT.txt. Mutating actions still require explicit confirmation.
+- **`@dispatch`** — When a message contains a line starting with `@dispatch`, load and follow [.agents/TRIGGER_PROMPT.txt](./.agents/TRIGGER_PROMPT.txt), then execute the cross-provider dispatch it describes. Syntax: `@dispatch [async] [diff:N] [account:personal] <role> <task...>` (e.g. `@dispatch review find bugs in dispatch.py`).
+  - **Pick the role by task type — it already carries the model.** Do not rate difficulty; `diff:N` is an override for when *this* instance differs from what its role implies, and if you're unsure, omit it.
+  - Roles by tier — **max** (Fable): `review` `code-review` `audit` `bugs` · `plan` `strategy` `system-improvement` · `design-qa` `design-review` `ux-review`. **heavy** (Opus / Codex Sol): `design` `build` · `design2` `build2` · `automation` `backend` · `motion` `animation` `remotion`. **standard** (Sonnet / gpt-5.5): `site-update` `media` · `scrape` `data`. **lite** (GLM 5.2): `docs` `vcs` `commit` `token-opt` `linking` · `docs2` `vcs2` `commit2` `token-opt2` `linking2` (2nd concurrent lite worker, on opencode).
+  - **`@dispatch loop`** runs an autonomous produce→verify→refine loop: it iterates a producer role against a verifier until the verifier approves or a stop cap fires. Use `recipe:NAME` (`design-refine`, `bug-hunt`, `doc-tighten`, `plan-sharpen`) or name the producer + `verify:<role>`. Sub-agents run unattended in permission-bypass mode confined to a `--cwd` workspace; the loop refuses mutating roles (`vcs`/`commit`/`deploy`/`publish`) and never auto-commits or deploys. See [.agents/DISPATCH.md](./.agents/DISPATCH.md).
+  - Mutating actions still require explicit confirmation.
 
 ## Operational Protocol
 1. **Understand the Pillar**: Before starting a task, read the rules for the relevant pillar.
