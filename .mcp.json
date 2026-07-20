@@ -23,11 +23,6 @@
     "webflow-excellent-facets": {
       "type": "http",
       "url": "https://mcp.webflow.com/mcp"
-    },
-    "agent-dispatch": {
-      "type": "stdio",
-      "command": "python",
-      "args": ["mcp-servers/agent-dispatch/server.py"]
     }
   }
 }
