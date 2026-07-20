@@ -51,6 +51,22 @@ Orca supports four execution modes. The first is the default; the middle two map
 3. **Remote Orca server** — run `orca serve` on an always-on machine (the VPS); agents keep running when the laptop disconnects, and multiple clients (laptop, browser, mobile) reconnect to the same runtime. Complements the phone-driven [Hermes](./HERMES.md) model for working away from the computer.
 4. **Per-workspace sandboxes** — each worktree provisions a disposable environment via a provider recipe (Docker, Fly, Modal, Vercel…). You bring and pay the provider.
 
+## Run Orca Against the Hostinger VPS (Option A: SSH Target)
+
+The chosen model for using the VPS is an **SSH target**: Orca stays installed on the Windows machine, while agents and their `git worktree`s run on the VPS. The editor, diff viewer, and UI stay local. Nothing is installed on the VPS for this mode beyond git and the agent CLIs — no Orca install, no headless-GUI concerns (that would only apply to the `orca serve` mode, which is not used here).
+
+**VPS readiness (verified 2026-07-20):** Ubuntu 24.04, git 2.43, repo present at `/root/webzite-agentic-workflow`. Agent CLIs available: **Claude Code**, **Codex**, **OpenCode**. Not installed (optional, add later if needed): Cursor CLI (`cursor-agent`), `pi`, GLM. A separate `claude2` binary is **not** required — Orca switches between Claude accounts via its built-in hot-swap.
+
+**Setup (in Orca on Windows):**
+
+1. **Settings → SSH → Add host.** Use the same connection as the rclone `vps` remote: user `root`, host `<VPS_HOST>` (the Hostinger IP configured in `rclone config show vps` / the `VPS_HOST` deploy secret), port `22`, private key `C:\Users\<USER>\.ssh\id_ed25519`.
+2. **Test the connection** and confirm it succeeds.
+3. **Create a worktree → set "Run on" to the VPS SSH target**, choose the base ref (`origin/main`), and launch an agent (Claude Code / Codex / OpenCode).
+
+**Keep the deploy checkout clean.** The GitHub Actions deploy aborts if `/root/webzite-agentic-workflow` has a dirty worktree (see [DEPLOYMENT.md](./DEPLOYMENT.md) and [SYSTEM_RULES.md §4.5](./SYSTEM_RULES.md)). Orca uses `git worktree`, which creates **separate** working directories, so it does not dirty the main checkout — but do not point an agent at the main checkout directly. Let Orca manage the worktrees and merge back through normal commits/PRs.
+
+To add Cursor / `pi` / GLM later, install those CLIs on the VPS and they will appear as selectable agents for that SSH target.
+
 ## Multi-Agent Orchestration
 
 ### GUI — race agents on one task (day-to-day)

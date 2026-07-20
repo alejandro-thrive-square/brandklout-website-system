@@ -289,7 +289,7 @@ The supported local workstation is now **Orca Agent IDE** — a desktop app that
 
    Orca reads git state and sets your default branch as the base reference.
 5. **Configure agents.** Under **Settings → Agents**, confirm the built-in agents (Claude Code, Codex, Cursor CLI, GLM-5.2). Add any extra CLIs you use (e.g. `pi`, `opencode`) via **Add a custom CLI agent** — the picker simply launches the process in a terminal. Authenticate each CLI once inside its Orca terminal; sign in when prompted. Do not store auth tokens in this repository.
-6. **(Optional) Remote execution.** To run agents on the Hostinger VPS instead of locally, configure an **SSH target** or run `orca serve` on the VPS and connect as a client. See [ORCA.md — Ways to Run](./ORCA.md#ways-to-run) and [DEPLOYMENT.md](./DEPLOYMENT.md).
+6. **(Optional) Run agents on the VPS.** The chosen remote model is an **SSH target** — Orca stays local, agents and worktrees run on the Hostinger VPS (nothing is installed on the VPS beyond git + agent CLIs). Add it under **Settings → SSH** using the same `root@<VPS_HOST>` connection as the rclone `vps` remote. Full steps and VPS readiness notes: [ORCA.md — Run Orca Against the Hostinger VPS](./ORCA.md#run-orca-against-the-hostinger-vps-option-a-ssh-target).
 
 Verify: open Orca, confirm the repo appears in the sidebar, create a test worktree with **+**, launch Claude Code in it, and confirm the agent starts in a PowerShell terminal scoped to that worktree. To run several agents at once, create additional worktrees and assign a different agent to each (see [ORCA.md — Multi-Agent Orchestration](./ORCA.md#multi-agent-orchestration)).
 
