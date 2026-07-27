@@ -96,3 +96,12 @@ Bonus: a genuinely distinctive hero concept.
 - **Isadora capture:** `manage/browser-tools/playwright-browser/.tmp/style-capture-isadora-final/` (`contact-sheets/`, `frames/`, `video.webm`, `code/resources/css` & `js`)
 - **Brand system:** `manage/brand-assets/design-system/css/webzite-design-system.css` + `js/webzite-design-system.js`
 - **Pricing source of truth:** `sales/PRICING_TIMELINE_RULES.md`
+
+## Version Control
+
+This document follows the root-level version control rules in [SYSTEM_RULES.md](/SYSTEM_RULES.md). Commit only non-secret, repo-friendly workflow context and artifacts.
+
+## Infrastructure
+
+- **Hosting**: Hostinger VPS
+- **OS**: Ubuntu 24.04 LTS

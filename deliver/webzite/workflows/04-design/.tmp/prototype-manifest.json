@@ -1,0 +1,111 @@
+{
+  "$meta": {
+    "project": "Webzite Studio — internal redesign",
+    "workflow": "04-design",
+    "path": "Claude Design (coded HTML/CSS/JS)",
+    "date": "2026-07-17",
+    "page": "home",
+    "status": "first-draft",
+    "stopPoint": "design HTML only — no Webflow paste",
+    "designSystem": "v2.0 (manage/brand-assets/design-system)",
+    "verified": {
+      "jsSyntax": "node --check pass",
+      "assetRefs": "all resolve",
+      "jsHooks": "all 20 data-hooks present in HTML",
+      "renders": [
+        "desktop 1440 (animated + reduced-motion)",
+        "mobile ~390-500 (reduced-motion)"
+      ],
+      "reducedMotion": "full fallback confirmed",
+      "screenshots": ".tmp/screenshots/"
+    }
+  },
+  "package": {
+    "root": ".tmp/final-design/",
+    "entry": "index.html",
+    "css": "css/home.css",
+    "js": "js/home.js",
+    "assets": {
+      "logos": ["webzite-logo-white.svg", "webzite-logo-white-alt.svg", "webzite-mark.svg", "favicon.png"],
+      "textures": ["webzite-texture-noise.png", "webzite-texture-long.jpg"],
+      "3d": ["logo-3d-blue-yellow.png", "logo-3d-red-blue.png", "logo-3d-yellow.png"],
+      "note": "approved brand-kit assets only; gitignored (binary) and VPS-synced. No live-site media."
+    },
+    "fonts": "Google Fonts Inter + JetBrains Mono, with system fallbacks"
+  },
+  "sections": [
+    {
+      "id": "hero",
+      "name": "Hero — thesis as equation",
+      "composition": "top meta bar (rating) + Strategy + Experience(outline) + Function = Profit(yellow) + studio-of-one lede + dual CTA + metric strip",
+      "content": "35+ projects, 4+ years, 25+ clients, 100 top PageSpeed",
+      "animations": ["masked line reveal (staggered)", "dust canvas", "scroll progress"]
+    },
+    {
+      "id": "marquee",
+      "name": "Capability marquee",
+      "content": "Webflow Development, Figma to Webflow, Site Migration, CMS Architecture, Speed & SEO, Motion & 3D",
+      "animations": ["infinite marquee, pause on hover"]
+    },
+    {
+      "id": "thesis",
+      "name": "Profit thesis",
+      "content": "A pretty site is a cost. A profitable one is an asset. + studio-of-one accountability paragraph",
+      "animations": ["scroll reveal"]
+    },
+    {
+      "id": "work",
+      "name": "Selected work — editorial index",
+      "projects": [
+        { "name": "Ivy RX", "industry": "Online healthcare", "location": "London", "proof": ["80 posts migrated", "160 URLs redirected", "Shopify -> Webflow"], "link": "https://www.ivyrx.com" },
+        { "name": "Excellent Facets", "industry": "Diamond supplier", "location": "New York", "proof": ["Webflow build", "3D asset", "Chatbot + GTM"], "link": "https://www.excellentfacets.com" },
+        { "name": "Wealth Group", "industry": "Trading community", "location": "United Kingdom", "proof": ["Figma -> Webflow", "Client-First", "Chatbot"], "link": "https://www.wealthgroup.ai" },
+        { "name": "Verde Energy Group", "industry": "Renewable energy", "location": "Ireland", "proof": ["WordPress migration", "30 posts + 30 URLs", "Speed tuned"], "link": "https://www.verdeenergygroup.com" },
+        { "name": "Mused Agency", "industry": "Design agency", "location": "Spain", "proof": ["PageSpeed 100 desktop", "Figma -> Webflow", "Custom JS"], "link": "https://www.mused.design" },
+        { "name": "Michael Sjosten", "industry": "Film director", "location": "Portfolio", "proof": ["Webflow build", "Motion"], "link": null }
+      ],
+      "proofPolicy": "tags use only facts present in 01-content-intake inventory; no invented metrics",
+      "animations": ["row hover underline + arrow rotate", "cursor-follow preview card (pointer-fine only)"]
+    },
+    {
+      "id": "capabilities",
+      "name": "What we handle — Design / Build / Grow",
+      "cards": ["Design", "Build", "Grow"],
+      "animations": ["scroll reveal (staggered)", "card lift on hover"]
+    },
+    {
+      "id": "proof",
+      "name": "Client voice — testimonial rail",
+      "content": "3 verified Upwork testimonials (Tiare Vildosola / Banca.Me, Stan St-Fleur / NSQ Inc, Ovidio Diaz Espino / Isthmus Financial)",
+      "note": "avatars rendered as monogram chips (no old-site avatar media)",
+      "animations": ["auto-rotate 5.2s", "dot controls", "cross-fade"]
+    },
+    {
+      "id": "engagement",
+      "name": "Simple, per page — pricing",
+      "content": "Design $200/pg (1 day) + Dev $200/pg (1 day). Live calculator: 1pg $400/2d, 5pg $2000/10d, 8pg $3200/16d.",
+      "source": "sales/PRICING_TIMELINE_RULES.md (canonical). Old $400/$1500/$3000 packages intentionally dropped.",
+      "animations": ["scroll reveal", "JS computes cost/timeline from data-pages"]
+    },
+    {
+      "id": "contact",
+      "name": "Contact — single conversion path",
+      "content": "Let's build the one that pays. Book a call / email / Upwork. Response within 24 hours.",
+      "animations": ["scroll reveal"]
+    },
+    {
+      "id": "footer",
+      "name": "Footer",
+      "content": "Webzite wordmark, (c) 2026, honest in-page nav",
+      "animations": ["radial blue ambient"]
+    }
+  ],
+  "nextActions": [
+    "Client/self review of the coded draft",
+    "Figma conversion (Phase 2A step 9) via HTML-to-Figma workflow",
+    "Vercel review deploy (Phase 2A step 10) — NODE_OPTIONS=--use-system-ca on this machine",
+    "Confirm public pricing presentation before launch",
+    "Commission fresh case-study cover art to replace 3D-mark stand-ins",
+    "Decide Webflow target, then 07-webflow-build"
+  ]
+}

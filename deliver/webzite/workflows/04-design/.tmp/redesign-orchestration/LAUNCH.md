@@ -36,3 +36,12 @@ to the hard constraints, and a clear improvement over the current design.
 
 ## After all three finish
 Tell the advisor (Fable). The advisor will review the three `deliver/webzite/workflows/04-design/.tmp/redesign/` outputs (one per worktree/branch) against §8, verify the hard constraints, and recommend a winner — grafting the best ideas from the runners-up.
+
+## Version Control
+
+This document follows the root-level version control rules in [SYSTEM_RULES.md](/SYSTEM_RULES.md). Commit only non-secret, repo-friendly workflow context and artifacts.
+
+## Infrastructure
+
+- **Hosting**: Hostinger VPS
+- **OS**: Ubuntu 24.04 LTS

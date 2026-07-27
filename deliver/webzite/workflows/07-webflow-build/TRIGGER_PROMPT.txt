@@ -1,0 +1,52 @@
+Execute the 07-Webflow-Build workflow for client [CLIENT_NAME] using the
+HTML/CSS/JS clipboard paste method.
+
+Read the directive at:
+deliver/[CLIENT_NAME]/workflows/07-webflow-build/html-to-webflow-clipboard.md
+(and the overview at 07-webflow-build.md).
+
+Input design:
+deliver/[CLIENT_NAME]/workflows/05-design-revisions/.tmp/final-design/[page].html
+(fall back to 04-design/.tmp/final-design/ if no revisions exist).
+
+Setup (once per project):
+1. Read the client's docs/mcp-access.md before any MCP use.
+2. Run `python 07-webflow-build.py init-config` and fill in
+   webflow-build.config.json (asset_base, css, pages).
+3. Confirm Webflow MCP runtime auth and the exact target Webflow site.
+4. Extract source :root CSS variables and import them into Webflow via MCP.
+   Update .tmp/webflow-variable-map.json with each imported variable's
+   Webflow cssName and variableId (required for Designer style bindings).
+
+Per page:
+5. Build the page:
+   `python 07-webflow-build.py build-page [page]`
+   (or, for a multi-page shared class system: run `vocab` once, then
+   `build-page [page] --vocab`.)
+6. Payload QA immediately after:
+   `python 07-webflow-build.py qa [page]`
+7. Open each .tmp/[page]/paste_*.html page in filename order, click
+   "Copy to Webflow clipboard", then paste into one Webflow Designer page.
+8. Use Webflow MCP/Designer variable tools and the generated
+   .tmp/[page]/webflow-style-variable-bindings.json styleTool.actions to bind
+   pasted style properties to Webflow variables. These actions use
+   properties[].variable_as_value = variableId; raw var(...) strings in
+   clipboard styleLess do not create Designer variable chips.
+9. Install .tmp/[page]/webflow-custom-code.js (before </body>) and the
+   .tmp/[page]/webflow-runtime-states.css (Head, inside a <style> block) as
+   Webflow custom code.
+10. Verify against .tmp/[page]/animation-manifest.json that required
+    IDs/classes/selectors still exist after paste, and run a design-vs-staging
+    diff (`python wf_tools.py compare <design-url> <staging-url>`).
+11. Publish staging only after explicit confirmation.
+
+Use https://evercoder.github.io/clipboard-inspector/ only when capturing or
+debugging Webflow clipboard reference JSON. Save reference captures as
+.tmp/webflow_*.json.
+
+Verification note: external images may show as gray placeholders and some
+gradient textures may be missing in Designer. Verify the published staging URL,
+not only the Designer canvas.
+
+Save generated artifacts to:
+deliver/[CLIENT_NAME]/workflows/07-webflow-build/.tmp/

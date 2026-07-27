@@ -1,0 +1,64 @@
+{
+  "$meta": {
+    "name": "Webzite Studio — Home Redesign Tokens",
+    "version": "1.0.0",
+    "date": "2026-07-17",
+    "source": "manage/brand-assets/design-system/css/webzite-design-system.css (v2.0)",
+    "rule": "Inherited verbatim from the design system. No new hex values, spacing steps, or easing curves were introduced by the home page build.",
+    "additions": "None. Page-level values are all composed from the tokens below."
+  },
+  "color": {
+    "--wz-ink": "#111114",
+    "--wz-ink-2": "#19191f",
+    "--wz-paper": "#f7f5ef",
+    "--wz-white": "#ffffff",
+    "--wz-muted": "rgba(255, 255, 255, 0.6)",
+    "--wz-faint": "rgba(255, 255, 255, 0.38)",
+    "--wz-line": "rgba(255, 255, 255, 0.14)",
+    "--wz-blue": "#466fff",
+    "--wz-red": "#ff4646",
+    "--wz-yellow": "#ffec46",
+    "--wz-mist": "#dce6ff"
+  },
+  "structure": {
+    "--wz-max": "1440px",
+    "--wz-gutter": "clamp(20px, 4vw, 64px)",
+    "--wz-radius": "8px",
+    "--wz-radius-lg": "18px",
+    "grid": "12 column",
+    "breakpoints": ["1180px", "980px", "680px"]
+  },
+  "space": {
+    "--wz-space-1": "4px",
+    "--wz-space-2": "8px",
+    "--wz-space-3": "16px",
+    "--wz-space-4": "24px",
+    "--wz-space-5": "40px",
+    "--wz-space-6": "64px",
+    "--wz-space-7": "96px",
+    "--wz-space-8": "156px",
+    "lattice": "4px"
+  },
+  "motion": {
+    "--wz-ease": "cubic-bezier(0.19, 1, 0.22, 1)",
+    "--wz-ease-std": "cubic-bezier(0.4, 0, 0.2, 1)",
+    "--wz-micro": "220ms var(--wz-ease-std)",
+    "--wz-base": "420ms var(--wz-ease)",
+    "--wz-slow": "780ms var(--wz-ease)",
+    "reveal": "780ms var(--wz-ease), masked line reveal 900ms var(--wz-ease)"
+  },
+  "type": {
+    "--wz-font": "\"Inter\", ui-sans-serif, system-ui, -apple-system, \"Segoe UI\", sans-serif",
+    "--wz-mono": "\"JetBrains Mono\", ui-monospace, \"Cascadia Mono\", \"SF Mono\", Consolas, monospace",
+    "scale": {
+      "hero": "clamp(50px, 10.4vw, 148px) / 800 / -0.04em / 0.88",
+      "display-1": "clamp(64px, 9vw, 132px) / 800 / -0.03em / 0.92",
+      "display-2": "clamp(42px, 6vw, 92px) / 800 / -0.02em / 0.94",
+      "heading-1": "clamp(28px, 3vw, 40px) / 700 / -0.01em / 1.05",
+      "heading-2": "clamp(20px, 2vw, 24px) / 600 / 1.2",
+      "body-1": "18px / 400 / 1.55",
+      "body-2": "15px / 400 / 1.5",
+      "label": "11px mono / 500 / 0.14em / uppercase"
+    }
+  }
+}

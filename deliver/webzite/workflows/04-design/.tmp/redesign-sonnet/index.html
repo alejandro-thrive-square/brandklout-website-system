@@ -1,0 +1,491 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Webzite Studio — Webflow Websites Engineered for Profit</title>
+  <meta
+    name="description"
+    content="Webzite Studio is a studio-of-one designing and building Webflow websites where strategy, experience, and functionality add up to profit. 35+ projects, 4+ years, clients worldwide."
+  />
+  <meta name="theme-color" content="#111114" />
+  <link rel="icon" href="assets/logos/favicon.png" />
+
+  <meta property="og:title" content="Webzite Studio — Webflow Websites Engineered for Profit" />
+  <meta
+    property="og:description"
+    content="Strategy + Experience + Function = Profit. Webflow design and development, studio-standard, led by a named partner."
+  />
+  <meta property="og:type" content="website" />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <a class="skip-link" href="#work">Skip to work</a>
+
+  <div class="cursor" data-cursor aria-hidden="true">
+    <span class="cursor-dot"></span>
+    <span class="cursor-ring"></span>
+  </div>
+
+  <div class="scroll-progress" data-progress aria-hidden="true"></div>
+
+  <!-- Nav -->
+  <header class="nav" data-nav data-boot>
+    <div class="shell nav-inner">
+      <a class="nav-brand" href="#top" aria-label="Webzite Studio home">
+        <img src="assets/logos/webzite-mark.svg" alt="" width="26" height="26" />
+        <span>Webzite<sup>&reg;</sup></span>
+      </a>
+
+      <nav class="nav-links" aria-label="Primary">
+        <a class="nav-link" href="#thesis" data-spy="thesis">Approach</a>
+        <a class="nav-link" href="#work" data-spy="work">Work</a>
+        <a class="nav-link" href="#capabilities" data-spy="capabilities">Capabilities</a>
+        <a class="nav-link" href="#engagement" data-spy="engagement">Pricing</a>
+      </nav>
+
+      <div class="nav-actions">
+        <a class="button primary" href="#contact">Book a call <i class="btn-go" aria-hidden="true">&rarr;</i></a>
+        <button
+          class="nav-toggle"
+          type="button"
+          data-nav-toggle
+          aria-expanded="false"
+          aria-controls="nav-drawer"
+          aria-label="Toggle menu"
+        >
+          <i></i><i></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <div class="nav-drawer" id="nav-drawer" data-nav-drawer>
+    <a href="#thesis">Approach</a>
+    <a href="#work">Work</a>
+    <a href="#capabilities">Capabilities</a>
+    <a href="#engagement">Pricing</a>
+    <a class="button primary is-lg" href="#contact">Book a call <i class="btn-go" aria-hidden="true">&rarr;</i></a>
+  </div>
+
+  <main id="top">
+    <!-- ==================================================================
+         Hero — "the ledger". Asymmetric two-column: an oversized statement
+         stated like a running account (line items + ruled total in yellow)
+         on the left; an offset, gently parallaxing case-reel theater lower
+         right. No pin, no scroll-jack — GSAP-authored entrance only, and it
+         degrades to a static, fully visible layout with zero JS.
+         ================================================================== -->
+    <section class="field field-ink hero" aria-labelledby="hero-heading">
+      <div class="shell hero-grid">
+        <div class="hero-col-text">
+          <div class="hero-top mono" data-boot data-boot-delay="1">
+            <span>Webflow design &amp; development studio</span>
+            <a
+              class="hero-rating"
+              href="https://www.upwork.com/freelancers/alejandromilano"
+              target="_blank"
+              rel="noopener"
+            >
+              <b>4.5</b> Stars on Upwork &nearr;
+            </a>
+          </div>
+
+          <h1 class="hero-title" id="hero-heading" data-hero-title>
+            <span class="sr-only">Strategy plus experience plus function equals profit.</span>
+            <span class="ledger" aria-hidden="true">
+              <span class="ledger-row" data-boot data-boot-delay="2">
+                <span class="ledger-in">Strategy <em>+</em> Experience <em>+</em> Function</span>
+              </span>
+              <span class="ledger-row is-total" data-boot data-boot-delay="3">
+                <span class="ledger-in"><em>=</em> <i data-ledger-total>Profit</i></span>
+              </span>
+            </span>
+          </h1>
+
+          <p class="hero-lede" data-boot data-boot-delay="4">
+            We are a <b>studio-of-one</b>: one senior partner, accountable end to end,
+            designing and building <b>Webflow websites optimized to win customers</b> —
+            not just to look good.
+          </p>
+          <div class="hero-cta" data-boot data-boot-delay="5">
+            <a class="button primary is-lg" href="#contact">Book a call <i class="btn-go" aria-hidden="true">&rarr;</i></a>
+            <a class="button secondary is-lg" href="#work">See the work</a>
+          </div>
+        </div>
+
+        <!-- reel card: honest brand renders stand in for the case reel -->
+        <figure class="theater" data-theater data-boot data-boot-delay="6">
+          <div class="theater-chrome mono" aria-hidden="true">
+            <i></i><i></i><i></i>
+            <span>webzite.studio</span>
+          </div>
+          <div class="theater-screen" data-reel>
+            <img src="assets/3d/logo-3d-blue-yellow.png" alt="Webzite 3D brand render, blue and yellow" class="is-active" />
+            <img src="assets/3d/logo-3d-red-blue.png" alt="Webzite 3D brand render, red and blue" />
+            <img src="assets/3d/logo-3d-yellow.png" alt="Webzite 3D brand render, yellow" />
+          </div>
+          <figcaption class="theater-caption mono">
+            <span>Case reel — fresh covers in production</span>
+          </figcaption>
+        </figure>
+      </div>
+    </section>
+
+    <!-- Marquee -->
+    <div class="marquee" data-marquee>
+      <button type="button" class="marquee-toggle" data-marquee-toggle aria-pressed="false" aria-label="Pause marquee"></button>
+      <div class="marquee-track" aria-hidden="true">
+        <span>Webflow Development</span><i>&#9679;</i>
+        <span>Figma to Webflow</span><i>&#9679;</i>
+        <span>Site Migration</span><i>&#9679;</i>
+        <span>CMS Architecture</span><i>&#9679;</i>
+        <span>Speed &amp; SEO</span><i>&#9679;</i>
+        <span>Motion &amp; 3D</span><i>&#9679;</i>
+        <span>Webflow Development</span><i>&#9679;</i>
+        <span>Figma to Webflow</span><i>&#9679;</i>
+        <span>Site Migration</span><i>&#9679;</i>
+        <span>CMS Architecture</span><i>&#9679;</i>
+        <span>Speed &amp; SEO</span><i>&#9679;</i>
+        <span>Motion &amp; 3D</span><i>&#9679;</i>
+      </div>
+    </div>
+
+    <!-- ==================================================================
+         Manifesto + services — field switch to ink-2. Service rows swap
+         the sticky media well on hover/focus.
+         ================================================================== -->
+    <section class="field field-ink-2 shell manifesto" id="thesis" aria-labelledby="thesis-heading">
+      <span class="eyebrow mono" data-reveal>The thesis</span>
+      <p class="manifesto-statement" id="thesis-heading" data-reveal data-delay="80">
+        A pretty site is a cost. A <em>profitable</em> one is an asset. We stay accountable
+        for the strategy behind the structure, the experience that keeps people moving, and
+        the function that turns a visitor into a <em>customer</em>.
+      </p>
+
+      <div class="services" id="capabilities" data-services aria-labelledby="cap-heading">
+        <h2 class="sr-only" id="cap-heading">Capabilities</h2>
+        <div class="services-list">
+          <div class="service-row is-active" data-service="0" data-reveal tabindex="0">
+            <div class="service-head">
+              <h3>Design</h3>
+              <span class="service-meta mono">Landing pages &mdash; Design systems &mdash; 3D &amp; motion &mdash; Every breakpoint</span>
+            </div>
+            <p>Strategy-led interface design in Figma or coded directly — layout, motion, and a brand system built to convert.</p>
+          </div>
+          <div class="service-row" data-service="1" data-reveal data-delay="120" tabindex="0">
+            <div class="service-head">
+              <h3>Build</h3>
+              <span class="service-meta mono">Figma &rarr; Webflow 1:1 &mdash; CMS &mdash; Custom JS &mdash; Integrations</span>
+            </div>
+            <p>Pixel-faithful Webflow development on Client-First and Lumos, with CMS architecture that scales past launch day.</p>
+          </div>
+          <div class="service-row" data-service="2" data-reveal data-delay="240" tabindex="0">
+            <div class="service-head">
+              <h3>Grow</h3>
+              <span class="service-meta mono">Migrations &mdash; Redirect maps &mdash; Speed &amp; SEO &mdash; Analytics</span>
+            </div>
+            <p>Migrations that keep your rankings, speed work that passes PageSpeed, and the wiring to prove the site works.</p>
+          </div>
+        </div>
+        <div class="services-well" aria-hidden="true" data-reveal data-delay="120">
+          <img src="assets/3d/logo-3d-blue-yellow.png" alt="" class="is-active" data-well="0" />
+          <img src="assets/3d/logo-3d-red-blue.png" alt="" data-well="1" />
+          <img src="assets/3d/logo-3d-yellow.png" alt="" data-well="2" />
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         Case studies — field switch to a low-alpha yellow-tinted near-black.
+         Offset editorial grid (58% landscape / 32% portrait, staggered).
+         ================================================================== -->
+    <section class="field field-amber shell section" id="work" aria-labelledby="work-heading">
+      <div class="sec-head">
+        <span class="eyebrow mono" data-reveal>01 &mdash; Selected work</span>
+        <h2 id="work-heading" data-reveal data-delay="80">Case<br />studies</h2>
+      </div>
+
+      <div class="case-list">
+        <a class="case-item" href="https://www.ivyrx.com" target="_blank" rel="noopener" data-reveal>
+          <span class="case-media is-blue">
+            <img src="assets/3d/logo-3d-blue-yellow.png" alt="Webzite brand render standing in for the Ivy RX case cover" />
+          </span>
+          <span class="case-name"><span>Ivy RX</span></span>
+          <span class="case-desc">Online healthcare &middot; London</span>
+          <span class="case-tags mono">
+            <span>80 posts migrated</span><span>160 URLs redirected</span><span>Shopify &rarr; Webflow</span>
+          </span>
+        </a>
+
+        <a class="case-item" href="https://www.excellentfacets.com" target="_blank" rel="noopener" data-reveal data-delay="140">
+          <span class="case-media is-red">
+            <img src="assets/3d/logo-3d-red-blue.png" alt="Webzite brand render standing in for the Excellent Facets case cover" />
+          </span>
+          <span class="case-name"><span>Excellent Facets</span></span>
+          <span class="case-desc">Diamond supplier &middot; New York</span>
+          <span class="case-tags mono">
+            <span>Webflow build</span><span>3D asset</span><span>Chatbot + GTM</span>
+          </span>
+        </a>
+
+        <a class="case-item" href="https://www.wealthgroup.ai" target="_blank" rel="noopener" data-reveal>
+          <span class="case-media is-yellow">
+            <img src="assets/3d/logo-3d-yellow.png" alt="Webzite brand render standing in for the Wealth Group case cover" />
+          </span>
+          <span class="case-name"><span>Wealth Group</span></span>
+          <span class="case-desc">Trading community &middot; United Kingdom</span>
+          <span class="case-tags mono">
+            <span>Figma &rarr; Webflow</span><span>Client-First</span><span>Chatbot</span>
+          </span>
+        </a>
+
+        <a class="case-item" href="https://www.verdeenergygroup.com" target="_blank" rel="noopener" data-reveal data-delay="140">
+          <span class="case-media is-blue">
+            <img src="assets/3d/logo-3d-blue-yellow.png" alt="Webzite brand render standing in for the Verde Energy case cover" />
+          </span>
+          <span class="case-name"><span>Verde Energy Group</span></span>
+          <span class="case-desc">Renewable energy &middot; Ireland</span>
+          <span class="case-tags mono">
+            <span>WordPress migration</span><span>30 posts + 30 URLs</span><span>Speed tuned</span>
+          </span>
+        </a>
+
+        <a class="case-item" href="https://www.mused.design" target="_blank" rel="noopener" data-reveal>
+          <span class="case-media is-red">
+            <img src="assets/3d/logo-3d-red-blue.png" alt="Webzite brand render standing in for the Mused Agency case cover" />
+          </span>
+          <span class="case-name"><span>Mused Agency</span></span>
+          <span class="case-desc">Design agency &middot; Spain</span>
+          <span class="case-tags mono">
+            <span>PageSpeed 100 desktop</span><span>Figma &rarr; Webflow</span><span>Custom JS</span>
+          </span>
+        </a>
+
+        <span class="case-item" data-reveal data-delay="140">
+          <span class="case-media is-yellow">
+            <img src="assets/3d/logo-3d-yellow.png" alt="Webzite brand render standing in for the Michael Sjosten case cover" />
+          </span>
+          <span class="case-name"><span>Michael Sjosten</span></span>
+          <span class="case-desc">Film director &middot; Portfolio</span>
+          <span class="case-tags mono">
+            <span>Webflow build</span><span>Motion</span>
+          </span>
+        </span>
+      </div>
+
+      <p class="work-note mono" data-reveal>
+        <i aria-hidden="true"></i>
+        Fresh case covers &amp; full studies in production &mdash; indexed here as the proof system.
+      </p>
+    </section>
+
+    <!-- ==================================================================
+         Statement + stats — field switch to a low-alpha blue-tinted
+         near-black. Word-fill prose + 2x2 count-up stat grid.
+         ================================================================== -->
+    <section class="field field-blue shell statement" aria-labelledby="statement-heading">
+      <p class="statement-text" id="statement-heading" data-wordfill>
+        Companies come to us when the website has to pay for itself. One senior partner fuses
+        <a href="#thesis">strategy</a>, <a href="#thesis">experience</a>, and
+        <a href="#capabilities">function</a> into sites that <em>convert</em>.
+      </p>
+
+      <div class="stats" data-metrics>
+        <div class="stat" data-reveal>
+          <b><span class="stat-num" data-count="35">0</span><em>+</em></b>
+          <span class="stat-label">Projects shipped<br />in Webflow</span>
+        </div>
+        <div class="stat" data-reveal data-delay="120">
+          <b><span class="stat-num" data-count="4">0</span><em>+</em></b>
+          <span class="stat-label">Years building<br />for the web</span>
+        </div>
+        <div class="stat" data-reveal data-delay="240">
+          <b><span class="stat-num" data-count="25">0</span><em>+</em></b>
+          <span class="stat-label">Clients worldwide,<br />four continents</span>
+        </div>
+        <div class="stat" data-reveal data-delay="360">
+          <b><span class="stat-num" data-count="100">0</span></b>
+          <span class="stat-label">Top PageSpeed<br />score shipped</span>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         Client voice — back to ink field. Hairline ruled quote table.
+         ================================================================== -->
+    <section class="field field-ink shell section" aria-labelledby="proof-heading">
+      <div class="sec-head">
+        <span class="eyebrow mono" data-reveal>02 &mdash; Client voice</span>
+        <h2 id="proof-heading" data-reveal data-delay="80">Verified<br />reviews</h2>
+      </div>
+
+      <div class="quote-grid" data-reveal>
+        <blockquote class="quote-cell">
+          <p>&ldquo;Alejandro is a professional who stands out not only for his talent and knowledge,
+          but also for his way of managing projects.&rdquo;</p>
+          <footer>
+            <span class="quote-avatar" aria-hidden="true">TV</span>
+            <span><strong>Tiare Vildosola</strong><em>Banca.Me</em></span>
+          </footer>
+        </blockquote>
+        <blockquote class="quote-cell">
+          <p>&ldquo;He can handle multitasking as well as building great Webflow websites.
+          He is great.&rdquo;</p>
+          <footer>
+            <span class="quote-avatar" aria-hidden="true">SS</span>
+            <span><strong>Stan St-Fleur</strong><em>NSQ Inc</em></span>
+          </footer>
+        </blockquote>
+        <blockquote class="quote-cell">
+          <p>&ldquo;Alejandro did a quality job and met all of my expectations. He was very
+          responsive and delivered on time.&rdquo;</p>
+          <footer>
+            <span class="quote-avatar" aria-hidden="true">OD</span>
+            <span><strong>Ovidio Diaz Espino</strong><em>Isthmus Financial</em></span>
+          </footer>
+        </blockquote>
+        <a
+          class="quote-cell is-cta"
+          href="https://www.upwork.com/freelancers/alejandromilano"
+          target="_blank"
+          rel="noopener"
+        >
+          <b>4.5<i>&#9733;</i></b>
+          <span>Rated on Upwork &mdash; read every review on the profile <em class="quote-go" aria-hidden="true">&rarr;</em></span>
+        </a>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         Engagement / pricing — the one bold accent block (Isadora §composition,
+         translated to brand yellow). Two rate cards + the cost/timeline calc.
+         ================================================================== -->
+    <section class="field field-accent shell section" id="engagement" aria-labelledby="rate-heading">
+      <div class="sec-head">
+        <span class="eyebrow mono" data-reveal>03 &mdash; Engagement</span>
+        <h2 id="rate-heading" data-reveal data-delay="80">Simple,<br />per page</h2>
+        <p class="sec-lede" data-reveal data-delay="160">
+          No mystery packages. One transparent rate, priced by the page, so scope and budget
+          move together. Design and development, <b>$400 per page</b>, two working days each.
+        </p>
+      </div>
+
+      <div class="rate-grid" data-reveal>
+        <div class="rate-card">
+          <span class="eyebrow mono">Design</span>
+          <b>$200 <em>/ page</em></b>
+          <p>Strategy, interface, motion, and a component system — 1 working day per page.</p>
+        </div>
+        <div class="rate-card">
+          <span class="eyebrow mono">Development</span>
+          <b>$200 <em>/ page</em></b>
+          <p>Webflow build, CMS, interactions, speed &amp; SEO — 1 working day per page.</p>
+        </div>
+      </div>
+
+      <div class="rate-calc" data-calc data-reveal data-delay="120">
+        <div class="calc-row calc-head">
+          <span class="eyebrow mono">Typical engagement</span>
+          <span class="calc-cost">Cost</span>
+          <span class="calc-time">Timeline</span>
+        </div>
+        <div class="calc-row" data-pages="1">
+          <span>Landing page &middot; design + build</span>
+          <span class="calc-cost" data-cost></span>
+          <span class="calc-time" data-time></span>
+        </div>
+        <div class="calc-row" data-pages="5">
+          <span>Small site &middot; 5 pages</span>
+          <span class="calc-cost" data-cost></span>
+          <span class="calc-time" data-time></span>
+        </div>
+        <div class="calc-row" data-pages="8">
+          <span>Standard site &middot; 8 pages</span>
+          <span class="calc-cost" data-cost></span>
+          <span class="calc-time" data-time></span>
+        </div>
+        <p class="rate-foot">
+          Development-only builds from an approved Figma file are <b>$200 per page, 1 day each</b>.
+          Copywriting, brand identity from scratch, migration audits, and custom scroll-heavy motion
+          are scoped separately. Final quote is confirmed on the call.
+        </p>
+      </div>
+    </section>
+
+    <!-- ==================================================================
+         Contact — field switch back to ink-2. Closing display statement.
+         ================================================================== -->
+    <section class="field field-ink-2 shell contact" id="contact" aria-labelledby="contact-heading">
+      <h2 id="contact-heading" data-reveal>We look forward to the one<br />that <em>pays</em> for itself.</h2>
+      <p class="contact-lede" data-reveal data-delay="100">
+        Tell us the scope and the number you need to move. You'll talk to the person who does
+        the work — no account managers, no handoffs.
+      </p>
+      <div class="contact-actions" data-reveal data-delay="180">
+        <a class="button primary is-lg" href="mailto:alejandro@webzite.studio">Book a call <i class="btn-go" aria-hidden="true">&rarr;</i></a>
+        <a
+          class="button secondary is-lg"
+          href="https://www.upwork.com/freelancers/alejandromilano"
+          target="_blank"
+          rel="noopener"
+        >Hire on Upwork</a>
+      </div>
+
+      <div class="contact-list" data-reveal data-delay="240">
+        <div>
+          <span class="eyebrow mono">Email</span>
+          <a href="mailto:alejandro@webzite.studio">alejandro@webzite.studio</a>
+        </div>
+        <div>
+          <span class="eyebrow mono">Upwork</span>
+          <a
+            href="https://www.upwork.com/freelancers/alejandromilano"
+            target="_blank"
+            rel="noopener"
+          >4.5 stars &middot; view profile</a>
+        </div>
+        <div>
+          <span class="eyebrow mono">Response</span>
+          <span>Within 24 hours</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- Footer -->
+  <footer class="field field-ink-2 footer">
+    <div class="shell footer-inner">
+      <img
+        class="footer-logo"
+        src="assets/logos/webzite-logo-white.svg"
+        alt="Webzite Studio"
+      />
+      <div class="footer-meta mono">
+        <span>&copy; 2026 Webzite Studio. All rights reserved.</span>
+        <nav aria-label="Footer">
+          <a href="#work">Work</a>
+          <a href="#capabilities">Capabilities</a>
+          <a href="#engagement">Pricing</a>
+          <a href="#contact">Contact</a>
+        </nav>
+        <span>Webflow design &amp; development</span>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Motion engine: optional enhancement only. Every call below is guarded
+       so a blocked/offline CDN leaves the page fully visible and usable. -->
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" defer></script>
+  <script src="js/main.js" defer></script>
+</body>
+</html>
