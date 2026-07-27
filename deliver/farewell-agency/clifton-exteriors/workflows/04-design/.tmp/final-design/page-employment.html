@@ -1,0 +1,1101 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clifton Exteriors — Employment page (rebuild)</title>
+<!-- Preview scaffold: body font/background only. Converter ignores <link>. -->
+<link rel="stylesheet" href="_preview-base.css">
+
+<!-- ==============================================================
+     STATIC PAGE CSS — /employment rebuild. Shared classes are baked
+     BYTE-IDENTICAL from their bake sources so defs merge on paste:
+       - page-windows.html  → :root tokens, section_win-hero,
+         section_win-invite, section_win-sunshine, cx-btn family
+       - sections-new.html  → nx-* editorial atoms, section_form-panel,
+         section_contact-direct
+     New page-specific classes use the emp- prefix (job-application
+     form design inside the form-panel slot). Content is 1:1 from
+     cliftonexteriors.com/employment/ (phase-b-content.md §3a/§3b);
+     the closing CTA is DRAFT copy (old site was lorem).
+     Section roots: section_win-hero → section_win-invite →
+     section_form-panel (#apply) → section_contact-direct →
+     [REVIEWS MARKER] → section_win-sunshine. Reviews are NOT in this
+     file — paste the existing section_reviews-v2 payload at the
+     body marker comment.
+     ============================================================== -->
+<style>
+:root {
+  --_primitives---neutral-colors--brand-colors--blue: #243864;
+  --_primitives---neutral-colors--brand-colors--red: #b02034;
+  --_primitives---neutral-colors--brand-colors--warm: #eae1d5;
+  --_primitives---neutral-colors--neutral-dark: #121c32;
+  --_primitives---neutral-colors--neutral-darkest: #060911;
+  --_primitives---neutral-colors--neutral-light: #f6f4ef;
+  --_primitives---neutral-colors--neutral-lightest: #faf9f7;
+  --_primitives---neutral-colors--neutral: #d6d6d6;
+}
+
+/* single page root — the WHOLE page pastes as ONE payload (multi-root
+   merges crash the Designer; single root is the proven safe path) */
+.page_employment { width: 100%; }
+
+/* ============================== HERO ==============================
+   (baked byte-identical from page-windows.html) */
+.section_win-hero {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 8rem 5% 6rem;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  border-radius: 1rem;
+}
+.win-hero__bg { position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
+.win-hero__bg-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+.win-hero__scrim {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: linear-gradient(180deg, #121c32b3, #121c3266 45%, var(--_primitives---neutral-colors--neutral-darkest));
+}
+.win-hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+  background-color: #dadada33;
+  border-radius: 24px;
+  padding: 6px 14px 6px 10px;
+  font-size: 0.95rem;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__badge-star {
+  display: flex;
+  align-items: center;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__h1 {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.9;
+}
+.win-hero__h2 {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ====================== INVITE SPLIT FEATURE ======================
+   (baked byte-identical from page-windows.html) */
+.section_win-invite {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+}
+.win-invite__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.win-invite__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.win-invite__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-invite__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-invite__p {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.85;
+}
+.win-invite__visual { border-radius: 1rem; overflow: hidden; }
+.win-invite__img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; display: block; }
+
+/* ---------- shared editorial atoms (bespoke, merge-safe) ----------
+   (baked byte-identical from sections-new.html) */
+.nx-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--_primitives---neutral-colors--brand-colors--red);
+}
+.nx-eyebrow__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--red);
+}
+.nx-h2 {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3.5rem;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+}
+.nx-h2.is--light { color: var(--_primitives---neutral-colors--neutral-lightest); }
+.nx-em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.nx-sub {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+  opacity: 0.78;
+}
+.nx-sub.is--sublight { color: var(--_primitives---neutral-colors--neutral-lightest); opacity: 0.85; }
+
+/* ==================================================================
+   section_form-panel — form shell (native form built in slot later)
+   (baked byte-identical from sections-new.html)
+   ================================================================== */
+.section_form-panel {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 8rem 5%;
+  position: relative;
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  border-radius: 1rem;
+}
+.form-panel__glow {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  pointer-events: none;
+  border-radius: inherit;
+  background-image:
+    radial-gradient(60% 80% at 15% 0%, #eae1d51f, transparent 60%),
+    radial-gradient(50% 70% at 90% 100%, #24386480, transparent 65%);
+}
+.form-panel__grid {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: minmax(0, 26rem) minmax(0, 1fr);
+  gap: 4rem;
+  align-items: start;
+}
+.form-panel__text {
+  position: sticky;
+  top: 6rem;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.form-panel__card {
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  border-radius: 1rem;
+  padding: 2.5rem;
+  min-height: 24rem;
+}
+.form-panel__slot { display: flex; flex-direction: column; gap: 1rem; }
+.form-panel__placeholder {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+  opacity: 0.55;
+}
+
+/* ==================================================================
+   emp-form — NEW (page-specific, emp- prefix): visual design of the
+   13-field job-application form living in .form-panel__slot. The
+   native Webflow Form is rebuilt from this spec in the Designer.
+   ================================================================== */
+.emp-form { display: flex; flex-direction: column; gap: 1.25rem; }
+.emp-form__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem 1rem;
+}
+.emp-form__field { display: flex; flex-direction: column; gap: 0.5rem; }
+.emp-form__field.is--full { grid-column: span 2; }
+.emp-form__label {
+  font-size: 0.95rem;
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+}
+.emp-form__req { color: var(--_primitives---neutral-colors--brand-colors--red); }
+.emp-form__input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  background-color: #ffffff;
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  border-radius: 0.75rem;
+  font-family: inherit;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+}
+.emp-form__input.is--area { min-height: 7.5rem; resize: vertical; }
+.emp-form__choices { display: flex; flex-wrap: wrap; gap: 0.5rem; }
+.emp-form__choice {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  padding: 0.625rem 1rem;
+  background-color: #ffffff;
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  border-radius: 0.75rem;
+  font-size: 0.95rem;
+  line-height: 1.3;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+  cursor: pointer;
+}
+.emp-form__tick {
+  width: 1rem;
+  height: 1rem;
+  margin: 0;
+  flex: none;
+  accent-color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.emp-form__note {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+  opacity: 0.7;
+}
+.emp-form__file {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.875rem;
+  padding: 1.5rem;
+  border: 1px dashed var(--_primitives---neutral-colors--neutral);
+  border-radius: 0.75rem;
+  background-color: var(--_primitives---neutral-colors--neutral-light);
+  color: var(--_primitives---neutral-colors--neutral-dark);
+  cursor: pointer;
+}
+.emp-form__file-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+  border-radius: 50%;
+  background-color: #ffffff;
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.emp-form__file-text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.125rem;
+  text-align: left;
+}
+.emp-form__file-name { font-size: 1rem; font-weight: 500; line-height: 1.35; }
+.emp-form__file-hint { font-size: 0.85rem; line-height: 1.35; opacity: 0.6; }
+.emp-form__submit { display: flex; margin-top: 0.5rem; }
+
+/* ==================================================================
+   section_contact-direct — details + map split
+   (baked byte-identical from sections-new.html)
+   ================================================================== */
+.section_contact-direct {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 8rem 5%;
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border-radius: 1rem;
+}
+.contact-direct__grid {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1.2fr);
+  gap: 4rem;
+  align-items: center;
+}
+.contact-direct__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.75rem;
+}
+.contact-direct__list { display: flex; flex-direction: column; gap: 0.5rem; width: 100%; }
+.contact-direct__row {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.125rem 1.25rem;
+  border-radius: 0.75rem;
+  background-color: #ffffff;
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  text-decoration: none;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1);
+}
+.contact-direct__row:hover { transform: translateX(0.375rem); }
+.contact-direct__row-icon {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--_primitives---neutral-colors--neutral-light);
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.contact-direct__row-label {
+  font-size: 0.8rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  opacity: 0.55;
+}
+.contact-direct__row-value { font-size: 1.0625rem; line-height: 1.35; }
+.contact-direct__map {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  aspect-ratio: 4 / 3;
+  background-color: var(--_primitives---neutral-colors--neutral-light);
+}
+
+/* ============================ SUNSHINE ============================
+   (closing warm band — baked byte-identical from page-windows.html) */
+.section_win-sunshine {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--warm);
+  border-radius: 1rem;
+}
+.win-sun__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-sun__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-sun__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-sun__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.win-sun__area {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.7;
+}
+
+/* cx-btn — bespoke clone of the build's button component (identical block in
+   section-reviews.html; keep both copies byte-identical so defs merge). */
+.cx-btn {
+  border-radius: 2rem;
+  background-color: var(--_primitives---neutral-colors--brand-colors--blue);
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  text-align: center;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  display: flex;
+  overflow: hidden;
+}
+.cx-btn__hide { height: 1.5rem; overflow: hidden; }
+.cx-btn__wrap { display: flex; flex-direction: column; }
+.cx-btn__tile {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+.cx-btn__arrow { justify-content: center; align-items: center; display: flex; }
+
+/* glass variant on the dark band */
+.cx-btn.is--glass {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background-color: #faf9f733;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+
+/* ========================== BREAKPOINTS =========================== */
+@media screen and (max-width: 991px) {
+  .win-hero__h2 { font-size: 3.25rem; }
+  .win-sun__h { font-size: 3.25rem; }
+  .win-invite__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .nx-h2 { font-size: 2.75rem; }
+  .form-panel__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .form-panel__text { position: static; }
+  .contact-direct__grid { grid-template-columns: 1fr; gap: 2.5rem; }
+}
+@media screen and (max-width: 767px) {
+  .section_win-hero { padding-top: 6rem; padding-bottom: 5rem; }
+  .section_win-sunshine { padding-top: 5rem; padding-bottom: 5rem; }
+  .section_form-panel, .section_contact-direct { padding-top: 5rem; padding-bottom: 5rem; }
+  .win-hero__h2 { font-size: 2.75rem; }
+  .win-sun__h { font-size: 2.75rem; }
+  .win-invite__h { font-size: 2.5rem; }
+  .nx-h2 { font-size: 2.25rem; }
+  .form-panel__card { padding: 1.5rem; }
+  .emp-form__grid { grid-template-columns: 1fr; }
+  .emp-form__field.is--full { grid-column: span 1; }
+}
+@media screen and (max-width: 479px) {
+  .win-hero__h2 { font-size: 2.25rem; }
+  .win-sun__h { font-size: 2.25rem; }
+  .win-sun__buttons { flex-direction: column; width: 100%; }
+  .win-sun__buttons .cx-btn { width: 100%; }
+  .emp-form__choices { flex-direction: column; align-items: stretch; }
+  .emp-form__file { flex-direction: column; }
+  .emp-form__file-text { align-items: center; text-align: center; }
+  .emp-form__submit { width: 100%; }
+  .emp-form__submit .cx-btn { width: 100%; }
+  .cx-btn__hide { height: auto; }
+  .cx-btn__wrap { height: 20px; }
+  .cx-btn__tile.is--bottom { display: none; }
+  .cx-btn__arrow { display: none; }
+}
+</style>
+
+<link rel="stylesheet" href="site-shell.css" data-cx-site-shell>
+<script src="site-shell.js" defer data-cx-site-shell></script>
+</head>
+<body>
+
+<!-- ================================================================
+     PAGE: /employment — rebuild of cliftonexteriors.com/employment/
+     Content 1:1 (phase-b-content.md §3a/§3b + saved old-site HTML);
+     design per the established system. Bake sources: page-windows.html
+     (win-* shared classes, cx-btn, tokens) and sections-new.html
+     (nx-* atoms, section_form-panel, section_contact-direct — the
+     contact-direct section is a byte-identical copy). New classes use
+     the emp- prefix. Nav + footer are site-wide Webflow components —
+     not part of this payload.
+     ONE-PASTE RULE: everything below sits inside the single
+     .page_employment root so the converter emits ONE pasteable payload.
+     Section roots in order:
+       section_win-hero → section_win-invite → section_form-panel
+       (#apply, job-application form) → section_contact-direct →
+       [REVIEWS MARKER] → section_win-sunshine (DRAFT closing copy).
+     COMPONENT-REUSE NOTE: hero / invite / sunshine structurally match
+     the existing "Section / Windows *" components, and form-panel /
+     contact-direct match the Phase-B components — replace pasted
+     sections with component instances via MCP where props allow
+     (hero is buttonless and the invite has no CTA, so both may need
+     to stay pasted; verify against the component prop list).
+     ================================================================ -->
+<div class="page_employment">
+
+<!-- ============ SECTION 1: Hero (root: section_win-hero) ============
+     Old site: H1 "Join Our Team" + H2 "Advance Your Career..." on a
+     photo band, NO buttons — kept buttonless on purpose. -->
+<section class="section_win-hero" data-win-hero>
+
+  <div class="win-hero__bg" aria-hidden="true">
+    <!-- IMAGE HOTLINKS the old WordPress host — re-upload to Webflow
+         assets and relink after paste. -->
+    <img class="win-hero__bg-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/DL_Resizer15.webp" alt="" loading="eager">
+    <div class="win-hero__scrim"></div>
+  </div>
+
+  <div class="win-hero__content">
+    <div class="win-hero__badge" data-win-reveal>
+      <span class="win-hero__badge-star" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+      </span>
+      <span>5/5 from over 75 reviews</span>
+    </div>
+
+    <div class="win-hero__eyebrow-wrap" data-win-reveal>
+      <h1 class="win-hero__h1">Join Our Team</h1>
+    </div>
+
+    <div class="win-hero__heading">
+      <h2 class="win-hero__h2" data-win-split>Advance Your Career In The Trades At <em class="win-hero__em">Clifton Exteriors</em></h2>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS (rides as HtmlEmbed) -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-hero .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-hero .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    /* awwwards touches — masked word reveal (spans are JS-created) + slow bg zoom */
+    .win-hero__w-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .2em; margin-bottom: -.2em; }
+    .win-hero__w { display: inline-block; transform: translateY(110%); }
+    .win-hero__w.win-in { transform: none; transition: transform .9s cubic-bezier(.22, 1, .36, 1); }
+    @media (prefers-reduced-motion: no-preference) {
+      .section_win-hero .win-hero__bg-img { animation: win-hero-zoom 9s cubic-bezier(.22, 1, .36, 1) forwards; }
+    }
+    @keyframes win-hero-zoom { from { transform: scale(1.12); } to { transform: none; } }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS (rides as HtmlEmbed) -->
+  <script data-embed>
+    /* section_win-hero — masked word reveal + staggered reveal (dependency-free) */
+    (function () {
+      function splitWords(el) {
+        Array.prototype.slice.call(el.childNodes).forEach(function (node) {
+          if (node.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            node.textContent.split(/(\s+)/).forEach(function (part) {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+              var m = document.createElement('span'); m.className = 'win-hero__w-mask';
+              var w = document.createElement('span'); w.className = 'win-hero__w';
+              w.textContent = part; m.appendChild(w); frag.appendChild(m);
+            });
+            el.replaceChild(frag, node);
+          } else if (node.nodeType === 1) { splitWords(node); }
+        });
+      }
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var splitEl = section.querySelector('[data-win-split]');
+        var words = [];
+        if (splitEl) { splitWords(splitEl); words = splitEl.querySelectorAll('.win-hero__w'); }
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          words.forEach(function (w, i) {
+            setTimeout(function () { w.classList.add('win-in'); }, 150 + i * 45);
+          });
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-hero]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- == SECTION 2: Let's Work Together (root: section_win-invite) =====
+     Copy 1:1 (phase-b-content.md §3a). Old section has NO button —
+     none added. Eyebrow label is an additive design element. -->
+<section class="section_win-invite" data-win-invite>
+
+  <div class="win-invite__grid">
+    <div class="win-invite__text">
+      <div class="win-invite__eyebrow-wrap" data-win-reveal>
+        <p class="win-invite__eyebrow">Careers</p>
+      </div>
+      <div class="win-invite__heading" data-win-reveal>
+        <h2 class="win-invite__h">Let&rsquo;s Work Together</h2>
+      </div>
+      <div class="win-invite__copy" data-win-reveal>
+        <p class="win-invite__p">Here at Clifton Exteriors, we pride ourselves on the passion and creativity of our team members. Everyone on board understands that client-oriented excellence is not only the goal that we strive for, but it&rsquo;s what dictates our entire culture. Our 5-star standard demands nothing less than absolute perfection, every single time. That&rsquo;s why we&rsquo;re always looking to welcome new recruits who we can trust to embody the same commitment to meeting and exceeding expectations.</p>
+      </div>
+    </div>
+    <div class="win-invite__visual" data-win-reveal>
+      <!-- IMAGE HOTLINKS the old WordPress host — re-upload to Webflow
+           assets and relink after paste. -->
+      <img class="win-invite__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/CliftonTeam1sections_resizer.webp" alt="Clifton Team Photo" loading="lazy">
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-invite .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-invite .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-invite — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-invite]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- == SECTION 3: Apply To Our Crew (root: section_form-panel) =======
+     Shell baked byte-identical from sections-new.html; text side is
+     the employment instance (H2/intro 1:1 per §3b). The card holds
+     the emp-form visual design of the 13-field application form. -->
+<section class="section_form-panel" id="apply" data-nx-form>
+  <div class="form-panel__glow" aria-hidden="true"></div>
+  <div class="form-panel__grid">
+    <div class="form-panel__text">
+      <div class="nx-eyebrow" data-nx-reveal><div class="nx-eyebrow__dot"></div><div>Apply Today</div></div>
+      <h2 class="nx-h2 is--light" data-nx-reveal>Apply To <em class="nx-em">Our Crew</em></h2>
+      <p class="nx-sub is--sublight" data-nx-reveal>Use the form below to apply to work with us here at Clifton Exteriors. We will follow up to schedule an interview.</p>
+    </div>
+    <div class="form-panel__card" data-nx-reveal>
+
+      <!-- DESIGNER NOTE: the converter cannot emit native Webflow Form
+           elements. The emp-form block below is the VISUAL SPEC of the
+           job-application form (13 fields per phase-b-content.md §3b).
+           After pasting, REBUILD it as a native Webflow Form in the
+           Designer (field names/required flags below; file-upload
+           requires a Webflow plan with file upload, plus reCAPTCHA v3
+           as on the old site), then delete this mock. The interim
+           submit is a mailto link — replaced by the native submit. -->
+      <div class="form-panel__slot">
+        <div class="emp-form">
+          <div class="emp-form__grid">
+
+            <!-- 1. First Name (text, required) -->
+            <div class="emp-form__field">
+              <label class="emp-form__label" for="emp-first-name">First Name <span class="emp-form__req" aria-hidden="true">*</span></label>
+              <input class="emp-form__input" type="text" id="emp-first-name" name="emp-first-name" required>
+            </div>
+
+            <!-- 2. Last Name (text, required) -->
+            <div class="emp-form__field">
+              <label class="emp-form__label" for="emp-last-name">Last Name <span class="emp-form__req" aria-hidden="true">*</span></label>
+              <input class="emp-form__input" type="text" id="emp-last-name" name="emp-last-name" required>
+            </div>
+
+            <!-- 3. Mobile (text on the old site — not tel; required) -->
+            <div class="emp-form__field">
+              <label class="emp-form__label" for="emp-mobile">Mobile <span class="emp-form__req" aria-hidden="true">*</span></label>
+              <input class="emp-form__input" type="text" id="emp-mobile" name="emp-mobile" required>
+            </div>
+
+            <!-- 4. Email (email, required) -->
+            <div class="emp-form__field">
+              <label class="emp-form__label" for="emp-email">Email <span class="emp-form__req" aria-hidden="true">*</span></label>
+              <input class="emp-form__input" type="email" id="emp-email" name="emp-email" required>
+            </div>
+
+            <!-- 5. Street Address (text, required) -->
+            <div class="emp-form__field is--full">
+              <label class="emp-form__label" for="emp-street">Street Address <span class="emp-form__req" aria-hidden="true">*</span></label>
+              <input class="emp-form__input" type="text" id="emp-street" name="emp-street" required>
+            </div>
+
+            <!-- 6. City (text, required) -->
+            <div class="emp-form__field">
+              <label class="emp-form__label" for="emp-city">City <span class="emp-form__req" aria-hidden="true">*</span></label>
+              <input class="emp-form__input" type="text" id="emp-city" name="emp-city" required>
+            </div>
+
+            <!-- 7. State (text, required) -->
+            <div class="emp-form__field">
+              <label class="emp-form__label" for="emp-state">State <span class="emp-form__req" aria-hidden="true">*</span></label>
+              <input class="emp-form__input" type="text" id="emp-state" name="emp-state" required>
+            </div>
+
+            <!-- 8. Zip (text, required) -->
+            <div class="emp-form__field">
+              <label class="emp-form__label" for="emp-zip">Zip <span class="emp-form__req" aria-hidden="true">*</span></label>
+              <input class="emp-form__input" type="text" id="emp-zip" name="emp-zip" required>
+            </div>
+
+            <!-- 9. Preferred Method Of Contact. (radio, required) -->
+            <div class="emp-form__field is--full" role="radiogroup" aria-labelledby="emp-contact-method-label">
+              <div class="emp-form__label" id="emp-contact-method-label">Preferred Method Of Contact. <span class="emp-form__req" aria-hidden="true">*</span></div>
+              <div class="emp-form__choices">
+                <label class="emp-form__choice"><input class="emp-form__tick" type="radio" name="emp-contact-method" value="Call" required><span>Call</span></label>
+                <label class="emp-form__choice"><input class="emp-form__tick" type="radio" name="emp-contact-method" value="Text"><span>Text</span></label>
+                <label class="emp-form__choice"><input class="emp-form__tick" type="radio" name="emp-contact-method" value="Email"><span>Email</span></label>
+              </div>
+            </div>
+
+            <!-- 10. How Did You Find Out About Us? (free text on the
+                 old employment form — NOT the contact page's select) -->
+            <div class="emp-form__field is--full">
+              <label class="emp-form__label" for="emp-found-us">How Did You Find Out About Us?</label>
+              <input class="emp-form__input" type="text" id="emp-found-us" name="emp-found-us">
+            </div>
+
+            <!-- 11. Experience checkboxes (optional, 6 options) -->
+            <div class="emp-form__field is--full" role="group" aria-labelledby="emp-experience-label">
+              <div class="emp-form__label" id="emp-experience-label">Do you have any experience in the following fields?</div>
+              <div class="emp-form__choices">
+                <label class="emp-form__choice"><input class="emp-form__tick" type="checkbox" name="emp-experience" value="Window Replacement and Install"><span>Window Replacement and Install</span></label>
+                <label class="emp-form__choice"><input class="emp-form__tick" type="checkbox" name="emp-experience" value="Door Installation"><span>Door Installation</span></label>
+                <label class="emp-form__choice"><input class="emp-form__tick" type="checkbox" name="emp-experience" value="Roofing Repair and Install"><span>Roofing Repair and Install</span></label>
+                <label class="emp-form__choice"><input class="emp-form__tick" type="checkbox" name="emp-experience" value="Siding Repair and Install"><span>Siding Repair and Install</span></label>
+                <label class="emp-form__choice"><input class="emp-form__tick" type="checkbox" name="emp-experience" value="Gutter Repair and Install"><span>Gutter Repair and Install</span></label>
+                <label class="emp-form__choice"><input class="emp-form__tick" type="checkbox" name="emp-experience" value="Other"><span>Other</span></label>
+              </div>
+            </div>
+
+            <!-- 12. Candidate pitch (textarea 4 rows, required) -->
+            <div class="emp-form__field is--full">
+              <label class="emp-form__label" for="emp-candidate">Tell us why you&rsquo;re a good candidate for this job. <span class="emp-form__req" aria-hidden="true">*</span></label>
+              <textarea class="emp-form__input is--area" id="emp-candidate" name="emp-candidate" rows="4" required></textarea>
+            </div>
+
+            <!-- Resume note (verbatim HTML note between fields) -->
+            <div class="emp-form__field is--full">
+              <p class="emp-form__note">Important: So we can learn more about you and your job experience, please upload your resume.</p>
+            </div>
+
+            <!-- 13. Upload Your Resume (file, optional) -->
+            <div class="emp-form__field is--full">
+              <div class="emp-form__label" id="emp-resume-label">Upload Your Resume</div>
+              <div class="emp-form__file" role="button" tabindex="0" aria-labelledby="emp-resume-label">
+                <div class="emp-form__file-icon" aria-hidden="true">
+                  <svg viewBox="0 0 24 24" width="18" height="18" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 16V4m0 0L7 9m5-5l5 5M4 20h16" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                </div>
+                <div class="emp-form__file-text">
+                  <div class="emp-form__file-name">Choose a file</div>
+                  <div class="emp-form__file-hint">PDF or DOC &mdash; added via the native form&rsquo;s file-upload field</div>
+                </div>
+              </div>
+            </div>
+
+          </div>
+
+          <!-- (hidden reCAPTCHA v3 field rides the native form after
+               field 13 — configured in the Designer, as on the old site) -->
+
+          <!-- Submit: 'Send Your Application' — interim mailto link;
+               the native Webflow Form submit button replaces it. -->
+          <div class="emp-form__submit">
+            <a href="mailto:info@cliftonexteriors.com" class="cx-btn">
+              <div class="cx-btn__hide">
+                <div class="cx-btn__wrap">
+                  <div class="cx-btn__tile">
+                    <div>Send Your Application</div>
+                    <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+                  </div>
+                  <div class="cx-btn__tile is--bottom">
+                    <div>Send Your Application</div>
+                    <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+                  </div>
+                </div>
+              </div>
+            </a>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <style data-embed>
+    .nx-pre { opacity: 0; transform: translateY(1.5rem); }
+    .nx-pre.nx-in { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1); }
+    /* emp-form runtime states (focus/hover only — statics live in classes) */
+    .section_form-panel .emp-form__input:focus { border-color: var(--_primitives---neutral-colors--brand-colors--blue); outline: 2px solid #24386426; }
+    .section_form-panel .emp-form__choice:hover { border-color: var(--_primitives---neutral-colors--brand-colors--blue); }
+    .section_form-panel .emp-form__file:hover { border-color: var(--_primitives---neutral-colors--brand-colors--blue); }
+    .section_form-panel .emp-form__file:focus-visible { border-color: var(--_primitives---neutral-colors--brand-colors--blue); outline: 2px solid #24386426; }
+    .section_form-panel .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_form-panel .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+  <script data-embed>
+    /* section_form-panel — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-nx-form-ready')) return;
+        section.setAttribute('data-nx-form-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-nx-reveal]');
+        items.forEach(function (el) { el.classList.add('nx-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('nx-in'); }, i * 110);
+          });
+        }, { threshold: .25 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-nx-form]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+</section>
+
+<!-- ================================================================
+     SECTION 4: Contact details + map (root: section_contact-direct)
+     BYTE-IDENTICAL copy of the section in sections-new.html — the old
+     employment page carries the same "Or Get In Touch Directly" block
+     as /contact-us. Map iframe rides the JS embed (built at runtime)
+     so no iframe markup needs to survive the paste.
+     ================================================================ -->
+<section class="section_contact-direct" data-nx-contact>
+  <div class="contact-direct__grid">
+    <div class="contact-direct__text">
+      <div class="nx-eyebrow" data-nx-reveal><div class="nx-eyebrow__dot"></div><div>Contact</div></div>
+      <h2 class="nx-h2" data-nx-reveal>Or Get In Touch <em class="nx-em">Directly</em></h2>
+      <div class="contact-direct__list">
+        <a href="https://goo.gl/maps/7QMUL4y9k4cS4TyV7" target="_blank" rel="noopener" class="contact-direct__row" data-nx-reveal>
+          <div class="contact-direct__row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M3 10.5L12 3l9 7.5M5 9.5V21h5v-6h4v6h5V9.5" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <div>
+            <div class="contact-direct__row-label">Address</div>
+            <div class="contact-direct__row-value">12644 Chapel Rd. #104, Clifton, VA 20124</div>
+          </div>
+        </a>
+        <a href="tel:+15712491480" class="contact-direct__row" data-nx-reveal>
+          <div class="contact-direct__row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 005 5L15 13l5 2v4a2 2 0 01-2 2A16 16 0 013 6a2 2 0 012-2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <div>
+            <div class="contact-direct__row-label">Phone</div>
+            <div class="contact-direct__row-value">+1 (571) 249-1480</div>
+          </div>
+        </a>
+        <a href="mailto:info@cliftonexteriors.com" class="contact-direct__row" data-nx-reveal>
+          <div class="contact-direct__row-icon"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="3" y="5" width="18" height="14" rx="2" stroke="currentColor" stroke-width="2"/><path d="M3 7l9 6 9-6" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg></div>
+          <div>
+            <div class="contact-direct__row-label">Email</div>
+            <div class="contact-direct__row-value">info@cliftonexteriors.com</div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="contact-direct__map" data-nx-map data-nx-reveal></div>
+  </div>
+
+  <style data-embed>
+    .nx-pre { opacity: 0; transform: translateY(1.5rem); }
+    .nx-pre.nx-in { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1); }
+    .section_contact-direct .contact-direct__map iframe { width: 100%; height: 100%; border: 0; display: block; }
+  </style>
+  <script data-embed>
+    /* section_contact-direct — lazy map + reveal (dependency-free) */
+    (function () {
+      var MAP_SRC = 'https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d12433.275260887865!2d-77.4154423!3d38.8251588!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0xf3af758b0c0a6e91!2sClifton%20Exteriors%20LLC!5e0!3m2!1sen!2sus!4v1671128787040!5m2!1sen!2sus';
+      function init(section) {
+        if (!section || section.getAttribute('data-nx-contact-ready')) return;
+        section.setAttribute('data-nx-contact-ready', '1');
+        var mapEl = section.querySelector('[data-nx-map]');
+        function loadMap() {
+          if (!mapEl || mapEl.getAttribute('data-nx-map-loaded')) return;
+          mapEl.setAttribute('data-nx-map-loaded', '1');
+          var f = document.createElement('iframe');
+          f.src = MAP_SRC;
+          f.loading = 'lazy';
+          f.referrerPolicy = 'no-referrer-when-downgrade';
+          f.setAttribute('allowfullscreen', '');
+          mapEl.appendChild(f);
+        }
+        if (!('IntersectionObserver' in window)) { loadMap(); return; }
+        var ioM = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          ioM.disconnect();
+          loadMap();
+        }, { rootMargin: '200px' });
+        if (mapEl) ioM.observe(mapEl);
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-nx-reveal]');
+        items.forEach(function (el) { el.classList.add('nx-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            io.unobserve(e.target);
+            e.target.classList.add('nx-in');
+          });
+        }, { threshold: .2 });
+        items.forEach(function (el) { io.observe(el); });
+      }
+      function boot() { document.querySelectorAll('[data-nx-contact]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+</section>
+
+<!-- ================================================================
+     SECTION 5: REVIEWS — NOT part of this payload.
+     Paste the existing reviews wall here (already built + QA-passed):
+       07-webflow-build/.tmp/section-reviews/paste_01_section_reviews-v2.html
+     Its classes (section_reviews-v2, reviews-wall__*, review-card__*,
+     cx-btn) merge cleanly with this page's payload.
+     ================================================================ -->
+
+<!-- ====== SECTION 6: Closing CTA (root: section_win-sunshine) =======
+     The old page's closing CTA is a broken lorem placeholder
+     ("Footer CTA Headline Lorem" → #). Heading + button are drafted;
+     the service-area line is the site's standard closing line. -->
+<!-- DRAFT COPY — client to approve -->
+<section class="section_win-sunshine" data-win-sun>
+
+  <div class="win-sun__content">
+    <div class="win-sun__heading" data-win-reveal>
+      <h2 class="win-sun__h">Build Your <em class="win-sun__em">Career</em> With Clifton Exteriors</h2>
+    </div>
+
+    <div class="win-sun__buttons" data-win-reveal>
+      <a href="#apply" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Apply Now</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Apply Now</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="win-sun__area-wrap" data-win-reveal>
+      <p class="win-sun__area">Proudly serving Fairfax County, Prince William County, Loudoun County, and Surrounding Areas.</p>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-sunshine .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-sunshine .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-sunshine — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .35 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-sun]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+</div>
+<!-- ================== end .page_employment root ================== -->
+
+</body>
+</html>

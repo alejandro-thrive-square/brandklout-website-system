@@ -1,4 +1,4 @@
-You are executing the 03-Design workflow for client: [CLIENT_NAME].
+You are executing the 04-Design workflow for client: [CLIENT_NAME].
 
 ## Context
 - Client folder: deliver/[CLIENT_NAME]/
@@ -28,9 +28,9 @@ Execute the design workflow defined in deliver/process/04-design/04-design.md.
    - bold-startup: Startups, consumer apps, modern brands
    - luxury: High-end brands, fashion, premium products
 
-5. Read the matching token file from library/foundations/tokens/ as a starting point.
+5. Read the matching token file from deliver/process/design-system-library/foundations/tokens/ as a starting point.
 
-6. If the client brief strongly matches a known brand style, read the corresponding file in library/design-systems/ for deeper philosophy guidance.
+6. If the client brief strongly matches a known brand style, read the corresponding file in deliver/process/design-system-library/design-systems/ for deeper philosophy guidance.
 
 7. Create a custom token JSON by merging:
    - Base token structure from the selected style
@@ -46,9 +46,9 @@ Execute the design workflow defined in deliver/process/04-design/04-design.md.
 
 9. For each page from the wireframes, compose a prototype HTML file:
 
-   a. Open library/sections/SECTION_INDEX.md. For each section in the wireframe, find the closest matching section pattern.
+   a. Open deliver/process/design-system-library/sections/SECTION_INDEX.md. For each section in the wireframe, find the closest matching section pattern.
 
-   b. Read the matching section HTML files from library/sections/.
+   b. Read the matching section HTML files from deliver/process/design-system-library/sections/.
 
    c. Assemble sections into a complete page:
       - Apply the custom design-tokens.json as CSS custom properties in the <style> block
@@ -58,11 +58,11 @@ Execute the design workflow defined in deliver/process/04-design/04-design.md.
       - Ensure all sections flow together cohesively
 
    d. Add animations:
-      - Open library/animations/ANIMATION_INDEX.md
+      - Open deliver/process/design-system-library/animations/ANIMATION_INDEX.md
       - Select appropriate animation modules for the style direction
       - Include CDN dependencies (GSAP, ScrollTrigger, Lottie as needed)
       - Add data attributes to elements: data-reveal, data-text-split, data-parallax, etc.
-      - Include the animation JS inline or reference from library/animations/
+      - Include the animation JS inline or reference from deliver/process/design-system-library/animations/
 
    e. Ensure responsive design:
       - Test at 1440px, 1024px, 768px, 375px breakpoints

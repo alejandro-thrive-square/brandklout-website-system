@@ -1,0 +1,237 @@
+=== HOME slider-ish elements (390px):
+{"cls":"marquee","tag":"DIV","x":0,"w":390,"ml":"0px","mr":"0px","pl":"0px","pr":"0px","overflowX":"hidden","display":"flex","kids":1,"firstKid":{"cls":"index-div-3 track","x":-95,"w":3878}}
+{"cls":"index-div-3 track","tag":"DIV","x":-95,"w":3878,"ml":"0px","mr":"0px","pl":"48px","pr":"0px","overflowX":"visible","display":"flex","kids":2,"firstKid":{"cls":"index-span-2","x":-47,"w":1891}}
+{"cls":"index-div-9 track","tag":"DIV","x":0,"w":390,"ml":"0px","mr":"0px","pl":"35.1px","pr":"35.1px","overflowX":"auto","display":"flex","kids":12,"firstKid":{"cls":"index-article svc is-clone","x":-1293,"w":320}}
+{"cls":"services-rail-note","tag":"DIV","x":0,"w":390,"ml":"0px","mr":"0px","pl":"20px","pr":"20px","overflowX":"visible","display":"flex","kids":2,"firstKid":{"cls":"index-button","x":20,"w":316}}
+{"cls":"review-badge","tag":"DIV","x":61,"w":268,"ml":"0px","mr":"0px","pl":"20px","pr":"20px","overflowX":"visible","display":"block","kids":0,"firstKid":null}
+{"cls":"review-badge","tag":"DIV","x":61,"w":268,"ml":"0px","mr":"0px","pl":"20px","pr":"20px","overflowX":"visible","display":"block","kids":0,"firstKid":null}
+reviews el: quote
+=== NAV OPEN home: {
+ "linksRect": {
+  "x": 0,
+  "y": 54,
+  "w": 390,
+  "h": 301
+ },
+ "items": [
+  {
+   "text": "Invest",
+   "rect": {
+    "x": 0,
+    "y": 54,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(61, 64, 91) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  },
+  {
+   "text": "Scale",
+   "rect": {
+    "x": 0,
+    "y": 104,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(61, 64, 91) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  },
+  {
+   "text": "Develop",
+   "rect": {
+    "x": 0,
+    "y": 154,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(61, 64, 91) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  },
+  {
+   "text": "Sell",
+   "rect": {
+    "x": 0,
+    "y": 203,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(61, 64, 91) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  },
+  {
+   "text": "About",
+   "rect": {
+    "x": 0,
+    "y": 253,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(61, 64, 91) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  },
+  {
+   "text": "Contact",
+   "rect": {
+    "x": 0,
+    "y": 303,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(61, 64, 91) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  }
+ ],
+ "belowLastLink": [
+  "hero-lede",
+  "hero-left",
+  "hero",
+  "main-wrapper"
+ ],
+ "marquee": {
+  "y": 66,
+  "h": 28,
+  "overlapsLinks": true
+ }
+}
+=== NAV OPEN invest: {
+ "linksRect": {
+  "x": 0,
+  "y": 54,
+  "w": 390,
+  "h": 301
+ },
+ "items": [
+  {
+   "text": "Invest",
+   "rect": {
+    "x": 0,
+    "y": 54,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(224, 122, 95) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  },
+  {
+   "text": "Scale",
+   "rect": {
+    "x": 0,
+    "y": 104,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(61, 64, 91) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  },
+  {
+   "text": "Develop",
+   "rect": {
+    "x": 0,
+    "y": 154,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(61, 64, 91) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  },
+  {
+   "text": "Sell",
+   "rect": {
+    "x": 0,
+    "y": 203,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(61, 64, 91) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  },
+  {
+   "text": "About",
+   "rect": {
+    "x": 0,
+    "y": 253,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(61, 64, 91) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  },
+  {
+   "text": "Work",
+   "rect": {
+    "x": 0,
+    "y": 303,
+    "w": 390,
+    "h": 50
+   },
+   "outline": "rgb(61, 64, 91) none 3px",
+   "border": "",
+   "boxShadow": "none",
+   "bg": "rgba(0, 0, 0, 0)",
+   "display": "block",
+   "pad": "14px 24px"
+  }
+ ],
+ "belowLastLink": [
+  "subhero-sub",
+  "subhero-left",
+  "subhero",
+  "main-wrapper"
+ ]
+}
+=== HOME side-by-side rows (390px):
+{"cls":"index-div-3 track","txt":"Move with intention. · Multifamily · San Diego · Invest","kidCls":["index-span-2","index-span-2"]}
+{"cls":"ti","txt":"Multifamily","kidCls":["td","index-span-4"]}
+{"cls":"project-title","txt":"80-Lot Subdivision — Phased Feasibility & Monthly Cash ","kidCls":["","",""]}
+{"cls":"index-div-40 row","txt":"Gross scheduled rent$144,000","kidCls":["index-span-9","index-span-10 v"]}
+{"cls":"index-div-41 row sub","txt":"Less vacancy (5%)−$7,200","kidCls":["index-span-9","index-span-11 v"]}
+{"cls":"index-div-42 row total","txt":"Net Operating Income$88,920","kidCls":["index-span-9","index-span-12 v"]}
+{"cls":"index-div-42 row total neg","txt":"Cash flow after debt−$9,852","kidCls":["index-span-9","index-span-13 v"]}
+{"cls":"index-div-46 v","txt":"−2.1%","kidCls":["index-em-2","index-em-2"]}
+{"cls":"index-div-51 who","txt":"JTJames T.Multifamily Investor · San Diego County","kidCls":["av","index-button"]}
+{"cls":"index-div-58","txt":"Instagram LinkedIn","kidCls":["index-a-6","index-a-6"]}
+DONE

@@ -1,0 +1,104 @@
+{
+  "source": "Webflow variable map",
+  "note": "After MCP import, fill variableId with the Webflow variable ID and cssName with variable.getCSSName(). style_tool variable binding uses variableId via variable_as_value.",
+  "variables": [
+    {
+      "sourceName": "--ef-body",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-body",
+      "binding": "var(--ef-body)"
+    },
+    {
+      "sourceName": "--ef-burgundy",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-burgundy",
+      "binding": "var(--ef-burgundy)"
+    },
+    {
+      "sourceName": "--ef-charcoal",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-charcoal",
+      "binding": "var(--ef-charcoal)"
+    },
+    {
+      "sourceName": "--ef-cream",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-cream",
+      "binding": "var(--ef-cream)"
+    },
+    {
+      "sourceName": "--ef-display",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-display",
+      "binding": "var(--ef-display)"
+    },
+    {
+      "sourceName": "--ef-green",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-green",
+      "binding": "var(--ef-green)"
+    },
+    {
+      "sourceName": "--ef-green-deep",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-green-deep",
+      "binding": "var(--ef-green-deep)"
+    },
+    {
+      "sourceName": "--ef-max",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-max",
+      "binding": "var(--ef-max)"
+    },
+    {
+      "sourceName": "--ef-muted",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-muted",
+      "binding": "var(--ef-muted)"
+    },
+    {
+      "sourceName": "--ef-page-pad",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-page-pad",
+      "binding": "var(--ef-page-pad)"
+    },
+    {
+      "sourceName": "--ef-radius",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-radius",
+      "binding": "var(--ef-radius)"
+    },
+    {
+      "sourceName": "--ef-radius-small",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-radius-small",
+      "binding": "var(--ef-radius-small)"
+    },
+    {
+      "sourceName": "--ef-sand",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-sand",
+      "binding": "var(--ef-sand)"
+    },
+    {
+      "sourceName": "--ef-white",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ef-white",
+      "binding": "var(--ef-white)"
+    }
+  ]
+}

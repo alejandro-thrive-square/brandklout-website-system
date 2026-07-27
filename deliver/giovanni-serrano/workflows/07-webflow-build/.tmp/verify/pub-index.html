@@ -1,0 +1,389 @@
+<!DOCTYPE html><!-- This site was created in Webflow. https://webflow.com --><!-- Last Published: Tue Jul 07 2026 21:47:47 GMT+0000 (Coordinated Universal Time) --><html data-wf-domain="giovanni-serrano.webflow.io" data-wf-page="6a06593646dcd6cfe2297362" data-wf-site="6a06593446dcd6cfe2297358" lang="en"><head><meta charset="utf-8"/><link href="https://cdn.prod.website-files.com" rel="preconnect" crossorigin="anonymous"/><title>Giovanni Serrano</title><meta content="width=device-width, initial-scale=1" name="viewport"/><meta content="Webflow" name="generator"/><link href="https://cdn.prod.website-files.com/6a06593446dcd6cfe2297358/css/giovanni-serrano.webflow.shared.595907e46.min.css" rel="stylesheet" type="text/css" integrity="sha384-WVkH5G/N2NzJ8dG2nwxf/CpZo2VxgqlbE66E+X4AOdRuts/7BT8dD/hLCad4VE+M" crossorigin="anonymous"/><link href="https://fonts.googleapis.com" rel="preconnect"/><link href="https://fonts.gstatic.com" rel="preconnect" crossorigin="anonymous"/><script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js" type="text/javascript"></script><script type="text/javascript">WebFont.load({  google: {    families: ["Inter:300,400,500,600","JetBrains Mono:400,500","Lora:400,500,600,700"]  }});</script><script type="text/javascript">!function(o,c){var n=c.documentElement,t=" w-mod-";n.className+=t+"js",("ontouchstart"in o||o.DocumentTouch&&c instanceof DocumentTouch)&&(n.className+=t+"touch")}(window,document);</script><link href="https://cdn.prod.website-files.com/img/favicon.ico" rel="shortcut icon" type="image/x-icon"/><link href="https://cdn.prod.website-files.com/img/webclip.png" rel="apple-touch-icon"/><style>
+/* The converter wraps the hamburger button in a w-embed that also carries .nav-toggle,
+   so the embed CSS padding:8px applies twice (wrapper + button) and inflates the fixed
+   nav from 67px to 83px on mobile — covering the marquee/context strips fixed at top:66.
+   Zero the wrapper so only the button's own padding applies, matching the design. */
+div.nav-toggle.w-embed{padding:0}
+</style><style>
+@import url("https://fonts.googleapis.com/css2?family=Lora:ital,wght@0,400..700;1,400..700&family=Inter:wght@300;400;500;600&family=JetBrains+Mono:wght@400;500&display=swap");
+body{background:#F4F1DE;color:#3D405B;font-family:'Inter', -apple-system, sans-serif;font-weight:300;font-size:16px;line-height:1.6;-webkit-font-smoothing:antialiased;overflow-x:hidden}
+nav.top .right .num.num.num{color:rgba(61, 64, 91, 0.65);font-family:'JetBrains Mono', ui-monospace, Menlo, monospace}
+.elevation .scale.scale.scale{position:absolute;bottom:16px;left:16px;right:16px;display:flex;justify-content:space-between;font-family:'JetBrains Mono', ui-monospace, Menlo, monospace;font-size:9px;letter-spacing:0.15em;color:rgba(61, 64, 91, 0.42);z-index:3;border-top:1px solid rgba(61, 64, 91, 0.18);padding-top:8px}
+.h-stage .track.dragging.dragging.dragging{cursor:none;scroll-snap-type:none;scroll-behavior:auto}
+.h-stage .track.dragging.dragging.dragging .svc{transition:none}
+.svc-drag-cursor.active.active.active{opacity:1;transform:translate(-50%, -50%) scale(1)}
+.svc-drag-cursor.dragging.dragging.dragging{background:#E07A5F;color:#F4F1DE;transform:translate(-50%, -50%) scale(0.9)}
+.about-grid .col-portrait.col-portrait.col-portrait{position:sticky;top:130px}
+.portrait-slot.portrait-slot.portrait-slot{position:relative;aspect-ratio:3/4;background:#3D405B;border:1px solid #3D405B;display:grid;place-items:center;overflow:hidden}
+.portrait-slot.portrait-slot.portrait-slot > .portrait-slot-before{content:"";position:absolute;inset:0;background:repeating-linear-gradient(45deg, rgba(61, 64, 91, 0.18) 0 1px, transparent 1px 14px),
+        radial-gradient(ellipse at 30% 20%, rgba(224, 122, 95, 0.18), transparent 70%)}
+.portrait-slot.portrait-slot.portrait-slot > .portrait-slot-after{content:"PORTRAIT · GIOVANNI · 3:4";position:relative;font-family:'JetBrains Mono', ui-monospace, Menlo, monospace;font-size:11px;letter-spacing:0.28em;color:rgba(61, 64, 91, 0.42)}
+.portrait-slot.portrait-slot.portrait-slot .label{position:absolute;top:14px;left:14px;font-family:'JetBrains Mono', ui-monospace, Menlo, monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#E07A5F}
+.portrait-slot.portrait-slot.portrait-slot .corner{position:absolute;bottom:14px;right:14px;font-family:'JetBrains Mono', ui-monospace, Menlo, monospace;font-size:10px;color:rgba(61, 64, 91, 0.42);letter-spacing:0.18em}
+.shelf.shelf.shelf{margin-top:56px;display:grid;grid-template-columns:repeat(3, 1fr);gap:1px;background:#3D405B;border:1px solid #3D405B}
+.shelf.shelf.shelf .item.item.item{background:#F4F1DE;padding:28px;position:relative;display:grid;gap:12px;align-content:start;transition:background .25s}
+.shelf.shelf.shelf .item.item.item:hover{background:#EDE8D5}
+.shelf.shelf.shelf .item.item.item .ph.ph.ph{height:140px;background:#E5DFCB;border:1px solid rgba(61, 64, 91, 0.18);margin-bottom:8px;position:relative;overflow:hidden}
+.shelf.shelf.shelf .item.item.item .ph.ph.ph svg{position:absolute;inset:0;width:100%;height:100%}
+.shelf.shelf.shelf .item.item.item .meta{display:flex;justify-content:space-between;align-items:baseline;font-family:'JetBrains Mono', ui-monospace, Menlo, monospace;font-size:10px;letter-spacing:0.22em;text-transform:uppercase;color:#E07A5F}
+.shelf.shelf.shelf .item.item.item .meta .id{color:rgba(61, 64, 91, 0.42)}
+.shelf.shelf.shelf .item.item.item h4{font-family:'Lora', Georgia, serif;font-weight:700;font-size:22px;margin:4px 0;line-height:1.15;color:#3D405B}
+.shelf.shelf.shelf .item.item.item p{font-size:13px;line-height:1.6;color:rgba(61, 64, 91, 0.65);margin:0}
+.shelf.shelf.shelf .item.item.item .stat.stat.stat{margin-top:12px;padding-top:12px;border-top:1px solid rgba(61, 64, 91, 0.14);display:flex;justify-content:space-between;font-family:'JetBrains Mono', ui-monospace, Menlo, monospace;font-size:11px;color:#3D405B}
+.shelf.shelf.shelf .item.item.item .stat.stat.stat strong{color:#E07A5F;font-weight:500}
+.foot-bar>*:nth-child(3){text-align:right}
+.reveal.in.in.in{opacity:1;transform:none}
+.reveal-stagger.in.in.in>*{opacity:1;transform:none}
+.reveal-stagger.in.in.in>*:nth-child(1){transition-delay:.04s}
+.reveal-stagger.in.in.in>*:nth-child(2){transition-delay:.12s}
+.reveal-stagger.in.in.in>*:nth-child(3){transition-delay:.20s}
+.reveal-stagger.in.in.in>*:nth-child(4){transition-delay:.28s}
+.reveal-stagger.in.in.in>*:nth-child(5){transition-delay:.36s}
+.reveal-stagger.in.in.in>*:nth-child(6){transition-delay:.44s}
+.reveal-stagger.in.in.in .w-dyn-item>*{opacity:1;transform:none}
+.reveal-stagger.in.in.in .w-dyn-item:nth-child(1)>*{transition-delay:.04s}
+.reveal-stagger.in.in.in .w-dyn-item:nth-child(2)>*{transition-delay:.12s}
+.reveal-stagger.in.in.in .w-dyn-item:nth-child(3)>*{transition-delay:.20s}
+.reveal-stagger.in.in.in .w-dyn-item:nth-child(4)>*{transition-delay:.28s}
+.reveal-stagger.in.in.in .w-dyn-item:nth-child(5)>*{transition-delay:.36s}
+.reveal-stagger.in.in.in .w-dyn-item:nth-child(6)>*{transition-delay:.44s}
+.about-creds-grid.about-creds-grid.about-creds-grid{margin-top:48px;display:flex;flex-wrap:wrap;gap:12px}
+.about-cred.about-cred.about-cred{display:flex;align-items:center;gap:10px}
+.about-cred-dot.about-cred-dot.about-cred-dot{width:5px;height:5px;border-radius:50%;background:#E07A5F;flex-shrink:0}
+.about-cred-text.about-cred-text.about-cred-text{font-size:13px;font-weight:400;color:rgba(61, 64, 91, 0.65)}
+section.scene.canvas.canvas.canvas section.prose-block.prose-block.prose-block p{color:rgba(61, 64, 91, 0.65)}
+section.scene.canvas.canvas.canvas section.prose-block.prose-block.prose-block p strong{color:#3D405B}
+section.scene.canvas.canvas.canvas .prose-story.prose-story.prose-story{font-size:15px;line-height:1.75;color:rgba(61, 64, 91, 0.65);margin:18px 0;max-width:720px}
+section.scene.canvas.canvas.canvas .prose-story.prose-story.prose-story strong{color:#3D405B;font-weight:500}
+section.scene.canvas.canvas.canvas .prose-story.prose-story.prose-story em{font-style:italic}
+.elevation-fx .fx-drift.fx-drift.fx-drift{animation:elev-drift 7s ease-in-out infinite}
+.elevation-fx .star.star.star{animation:star-twinkle 4s ease-in-out infinite}
+.elevation-fx .star.star.star.s2.s2.s2{animation-duration:2.6s}
+.elevation-fx .star.star.star.s3.s3.s3{animation-duration:5.5s}
+.elevation-fx .star.star.star.flare.flare.flare{animation:star-flare 5s ease-in-out infinite;transform-origin:center;transform-box:fill-box}
+.elevation-fx .star-layer.star-layer.star-layer{animation:star-drift 60s linear infinite}
+.elevation-fx .star-layer.star-layer.star-layer.slow.slow.slow{animation-duration:110s}
+@media (max-width: 991px){
+nav.top .links.open.open.open{display:flex;flex-direction:column;gap:0;position:fixed;top:60px;left:0;right:0;background:#F4F1DE;z-index:48;border-bottom:2px solid #E07A5F;box-shadow:0 8px 24px rgba(61, 64, 91, 0.12)}
+nav.top .links.open.open.open a{display:block;padding:14px 24px;border-bottom:1px solid rgba(61, 64, 91, 0.14);font-size:13px}
+nav.top .links.open.open.open a > .a-after{display:none}
+nav.top .right .num.num.num{display:none}
+.about-grid .col-portrait.col-portrait.col-portrait{position:static}
+.shelf.shelf.shelf{grid-template-columns:repeat(2, 1fr)}
+}
+@media (max-width: 767px){
+nav.top .links.open.open.open{top:54px}
+.shelf.shelf.shelf{grid-template-columns:1fr}
+.foot-bar>*:nth-child(3){text-align:left}
+nav.top .right .num.num.num{display:none}
+}
+@media (pointer: coarse){
+.svc-drag-cursor{display:none}
+}
+@keyframes scroll-left{
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-50%);
+      }
+    }
+@keyframes star-twinkle{
+
+      0%,
+      100% {
+        opacity: 0.2;
+      }
+
+      50% {
+        opacity: 0.9;
+      }
+    }
+@keyframes star-flare{
+
+      0%,
+      100% {
+        opacity: 0.45;
+        transform: scale(1);
+      }
+
+      50% {
+        opacity: 1;
+        transform: scale(1.6);
+      }
+    }
+@keyframes star-drift{
+      from {
+        transform: translateX(0);
+      }
+
+      to {
+        transform: translateX(-22px);
+      }
+    }
+@keyframes grid-breathe{
+
+      0%,
+      100% {
+        opacity: 0.45;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+</style>
+</head><body><nav class="index-nav top"><div class="brand"><a href="/" aria-current="page" class="index-a w--current">Giovanni <em class="index-em">Serrano</em></a></div><div class="index-div links"><a href="/invest" class="index-a-2">Invest<div class="a-after"></div></a> <a href="/scale" class="index-a-2">Scale<div class="a-after"></div></a> <a href="/develop" class="index-a-2">Develop<div class="a-after"></div></a> <a href="/sell" class="index-a-2">Sell<div class="a-after"></div></a> <a href="#about" class="index-a-2">About<div class="a-after"></div></a> <a href="#contact" class="index-a-2">Contact<div class="a-after"></div></a></div><div class="index-div-2 right"><a href="#contact" class="cta">Let&#x27;s talk <span class="index-span ar">→</span></a></div><div class="index-button nav-toggle w-embed"><style>*{box-sizing:border-box}.nav-toggle{display:none;background:none;border:none;cursor:pointer;padding:8px;color:#3D405B;font-size:22px;line-height:1;font-family:'Inter', -apple-system, sans-serif}@media (max-width: 991px){.nav-toggle{display:block}}</style><button aria-label="Toggle menu" class="nav-toggle">☰</button></div></nav><div class="marquee"><div class="index-div-3 track"><span class="index-span-2">Move with intention. <span class="dot">·</span> Multifamily · San Diego <span class="dot">·</span> Investment · Development · Advisory <span class="dot">·</span> First-time buyers · Scaling investors · Homeowners with land <span class="dot">·</span> Homeowners selling <span class="dot">·</span></span> <span class="index-span-2">Move with intention. <span class="dot">·</span> Multifamily · San Diego <span class="dot">·</span> Investment · Development · Advisory <span class="dot">·</span> First-time buyers · Scaling investors · Homeowners with land <span class="dot">·</span> Homeowners selling <span class="dot">·</span></span></div></div><main class="main-wrapper"><section id="home" data-screen-label="01 Hero" class="hero"><div class="hero-before"></div><div class="hero-left"><div class="hero-eyebrow"><span class="bar"></span> <span class="index-span-3 num">01 / 08 ·</span> <span class="index-button">Multifamily Investment &amp; Development Advisor</span></div><h1 class="index-h1"><span class="l1">Giovanni</span> <span class="l2"><div class="l2-before"></div>Serrano</span></h1><p class="hero-sub"> Most agents close transactions. I <em class="index-button">analyze deals.</em></p><p class="hero-lede"> Multifamily investment in San Diego — the financial modeling, development expertise, and market intelligence most agents don&#x27;t have.</p><div class="hero-meta"><div class="cell"><div class="index-div-4 k">Experience</div><div class="index-div-5 v">10+<span class="br-line"><em class="index-em-2">dev projects</em></span></div></div><div class="cell"><div class="index-div-4 k">Market</div><div class="index-div-5 v">San Diego<span class="br-line"><em class="index-em-2">County</em></span></div></div><div class="cell"><div class="index-div-4 k">Education</div><div class="index-div-5 v">B.S. RE &amp; Development<span class="br-line"><em class="index-em-2">UC San Diego</em></span></div></div></div><div class="hero-ticker"><div class="ti"><div class="td"></div><span class="index-span-4">Multifamily</span></div><div class="ti"><div class="td"></div><span class="index-span-4">Duplexes to 12-Unit Buildings</span></div><div class="ti"><div class="td"></div><span class="index-span-4">San Diego County</span></div><div class="ti"><div class="td"></div><span class="index-span-4">ADU &amp; Infill Development</span></div></div></div><div class="hero-right"><div class="index-button elevation"><span class="index-span-5 label">A · Giovanni Serrano · Investment Advisor</span> <span class="index-span-6 corner">San Diego · CA</span><div class="index-button elevation-fx w-embed"><style>*{box-sizing:border-box}.elevation svg{position:absolute;inset:0;width:100%;height:100%;z-index:1}.elevation-fx{position:absolute;inset:0;width:100%;height:100%;z-index:1;pointer-events:none}.elevation-fx .fx-grid{animation:grid-breathe 8s ease-in-out infinite}</style><svg aria-hidden="true" class="elevation-fx" preserveaspectratio="none" viewbox="0 0 600 420">
+<defs>
+<pattern height="22" id="elev-dot-grid" patternunits="userSpaceOnUse" width="22" x="0" y="0">
+<circle cx="11" cy="11" fill="#F4F1DE" opacity="0.10" r="0.7"></circle>
+</pattern>
+</defs>
+<!-- dotted backdrop -->
+<rect class="fx-grid" fill="url(#elev-dot-grid)" height="420" width="600"></rect>
+</svg></div><img sizes="(max-width: 849px) 100vw, 849px" srcset="https://cdn.prod.website-files.com/6a06593446dcd6cfe2297358/6a16f77f44ce089fe9cb0074_giovanni-portrait-p-500.webp 500w, https://cdn.prod.website-files.com/6a06593446dcd6cfe2297358/6a16f77f44ce089fe9cb0074_giovanni-portrait-p-800.webp 800w, https://cdn.prod.website-files.com/6a06593446dcd6cfe2297358/6a16f77f44ce089fe9cb0074_giovanni-portrait.webp 849w" alt="Giovanni Serrano" src="https://cdn.prod.website-files.com/6a06593446dcd6cfe2297358/6a16f77f44ce089fe9cb0074_giovanni-portrait.webp" loading="eager" class="index-img"/></div><div class="hero-cta-row"><a href="#sample" class="index-a-3">See a sample <span class="index-span ar">→</span></a> <a href="#contact" class="alt">Get a deal review <span class="index-span ar">→</span></a></div></div></section><section id="services" data-screen-label="02 Services" class="index-section scene bone services-scene"><div class="services-head-wrap"><div class="scene-head"><div class="marker"><div class="index-div-6 num">02</div><div class="index-div-7 label"><div class="label-before"></div>Services</div></div><div class="index-div-8"><h2 class="index-h2 reveal">How I Help You Move<span class="br-line">With <em class="index-em-2">Intention</em></span></h2><p class="index-p sub reveal">Four distinct services. Each built around your specific goal — not a generic process.</p></div></div></div><div class="index-button h-stage"><div id="svc-track" class="index-div-9 track"><article class="index-article svc reveal"><div class="index-div-10 top"><div class="index-div-11"><div class="index-div-12 id">01 · Invest</div><div class="index-div-13 name">Your <em class="index-em-3">first</em><span class="br-line">multifamily.</span></div></div><div class="index-div-14 who">First-time<span class="br-line">buyers</span></div></div><div class="index-div-15 body"><p class="index-p-2 lead">A duplex or triplex you live in, while tenants pay your mortgage.</p><p class="index-p-3">Most first-time buyers don&#x27;t realize they can start building wealth from day one. Instead of locking yourself into a single-family home with one mortgage and no income, a duplex or triplex lets you live in one unit and rent the rest — <strong class="index-strong">your tenants help pay your mortgage</strong> while your equity grows.</p><p class="index-p-3">I educate you on the strategy, help you find properties other agents overlook, and run the numbers on every deal before you make an offer — so you know exactly what it will cost, what it will return, and whether it actually makes sense.</p><div class="feat"><div class="it"><div class="index-div-16 k">Strategy</div><div class="index-div-17 v">House <em class="index-em-3">hack</em></div></div><div class="it"><div class="index-div-16 k">Down</div><div class="index-div-17 v">3.5–5%</div></div><div class="it"><div class="index-div-16 k">Property</div><div class="index-div-17 v">2–4 units</div></div><div class="it"><div class="index-div-16 k">Financing</div><div class="index-div-17 v">Owner-occupied</div></div></div><ul role="list" class="svc-bullets"><li class="index-li"><div class="li-before">—</div>House-hack strategy — live in one unit, rent the rest</li><li class="index-li"><div class="li-before">—</div>Full deal analysis before every offer — NOI, cash flow, debt coverage</li><li class="index-li"><div class="li-before">—</div>Deep San Diego neighborhood knowledge — Mission Hills to National City</li><li class="index-li"><div class="li-before">—</div>You&#x27;ll understand the investment, not just the purchase</li></ul></div><div class="foot"><a href="/invest" class="index-a-4"><span class="index-div-11">See how Invest works</span><span class="index-span-7 ar">→</span></a></div></article><article class="index-article svc reveal"><div class="index-div-10 top"><div class="index-div-11"><div class="index-div-12 id">02 · Scale</div><div class="index-div-13 name">Your <em class="index-em-3">portfolio.</em></div></div><div class="index-div-14 who">Existing<span class="br-line">investors</span></div></div><div class="index-div-15 body"><p class="index-p-2 lead">Fourplex through 12-unit. Institutional-grade underwriting on every deal.</p><p class="index-p-3">You already own property. Now you want a fourplex, an 8-unit, or a 12-unit building — or you want to build new units on land you&#x27;ve identified. At this level, <strong class="index-strong">the stakes are higher and the analysis has to be sharper</strong>.</p><p class="index-p-3">I run full investment analysis on every deal — proforma modeling, cap rate sensitivity, cash-on-cash returns, debt coverage — so you can compare opportunities with real data. And if the opportunity is a development play, I understand the full process from site feasibility through entitlement to construction.</p><div class="feat"><div class="it"><div class="index-div-16 k">Property</div><div class="index-div-17 v">4–12 units</div></div><div class="it"><div class="index-div-16 k">Model</div><div class="index-div-17 v">10-yr <em class="index-em-3">DCF</em></div></div><div class="it"><div class="index-div-16 k">Hurdle</div><div class="index-div-17 v">14% IRR</div></div><div class="it"><div class="index-div-16 k">Structures</div><div class="index-div-17 v">JV waterfall</div></div></div><ul role="list" class="svc-bullets"><li class="index-li"><div class="li-before">—</div>Acquisition analysis for existing multifamily buildings</li><li class="index-li"><div class="li-before">—</div>Development feasibility for new construction opportunities</li><li class="index-li"><div class="li-before">—</div>Investment analysis — proforma, IRR, cap rate, cash-on-cash</li><li class="index-li"><div class="li-before">—</div>San Diego market intelligence — where demand is growing and why</li></ul></div><div class="foot"><a href="/scale" class="index-a-4"><span class="index-div-11">See how Scale works</span><span class="index-span-7 ar">→</span></a></div></article><article class="index-article svc reveal"><div class="index-div-10 top"><div class="index-div-11"><div class="index-div-12 id">03 · Develop</div><div class="index-div-13 name">Build <em class="index-em-3">more</em><span class="br-line">than you think.</span></div></div><div class="index-div-14 who">Homeowners<span class="br-line">with land</span></div></div><div class="index-div-15 body"><p class="index-p-2 lead">SB 9, ADU law, density bonus. Free lot review, full feasibility, end-to-end project management.</p><p class="index-p-3">Recent California law opened up small-scale development on lots that used to be locked. <strong class="index-strong">SB 9 lets you split a single-family lot</strong> and build up to four units. State ADU law lets you add a detached second unit on nearly any residential property. The State Density Bonus Law can allow up to 50% more units for projects with an affordable component. If you own land in San Diego, there&#x27;s a good chance you can build more than you think.</p><p class="index-p-3">I run the feasibility, build the proforma, and if the numbers work, I assemble and manage the entire development team — architect, engineers, contractor — from concept through construction to completion. You don&#x27;t need to figure out the process. That&#x27;s what I do.</p><div class="feat"><div class="it"><div class="index-div-16 k">Path</div><div class="index-div-17 v">SB 9 / <em class="index-em-3">ADU</em></div></div><div class="it"><div class="index-div-16 k">Yield</div><div class="index-div-17 v">2–10 units</div></div><div class="it"><div class="index-div-16 k">Process</div><div class="index-div-17 v">Concept → C of O</div></div><div class="it"><div class="index-div-16 k">Team</div><div class="index-div-17 v">Architect + GC</div></div></div><ul role="list" class="svc-bullets"><li class="index-li"><div class="li-before">—</div>Feasibility analysis — what can you build and will it pencil</li><li class="index-li"><div class="li-before">—</div>Full proforma modeling before you commit a dollar</li><li class="index-li"><div class="li-before">—</div>Team assembly — architect, engineers, general contractor</li><li class="index-li"><div class="li-before">—</div>Full project management from entitlement to certificate of occupancy</li></ul></div><div class="foot"><a href="/develop" class="index-a-4"><span class="index-div-11">See how Develop works</span><span class="index-span-7 ar">→</span></a></div></article><article class="index-article svc reveal"><div class="index-div-10 top"><div class="index-div-11"><div class="index-div-12 id">04 · Sell</div><div class="index-div-13 name">Maximize your<span class="br-line"><em class="index-em-3">exit value.</em></span></div></div><div class="index-div-14 who">Homeowners<span class="br-line">selling</span></div></div><div class="index-div-15 body"><p class="index-p-2 lead">Highest-and-best-use valuation. Dual-audience marketing. Trade-up coordination.</p><p class="index-p-3">Most agents price a home by looking backward at what your neighbors sold for. I evaluate your property like a developer. Before we ever put a sign in the yard, I run the same three-approach valuation that bank appraisers use and analyze the lot for ADU or SB 9 development upside. <strong class="index-strong">If your property has hidden land value, we don’t let the next buyer capture that profit.</strong> We price it into your sale. </p><div class="feat"><div class="it"><div class="index-div-16 k">Strategy</div><div class="index-div-17 v">Three-approach <em class="index-em-3">valuation</em></div></div><div class="it"><div class="index-div-16 k">Marketing</div><div class="index-div-17 v">Dual <em class="index-em-3">audience</em></div></div><div class="it"><div class="index-div-16 k">Property</div><div class="index-div-17 v">SFR &amp; small <em class="index-em-3">multi</em></div></div><div class="it"><div class="index-div-16 k">Exit</div><div class="index-div-17 v">Trade-up / <em class="index-em-3">1031</em></div></div></div><ul role="list" class="svc-bullets"><li class="index-li"><div class="li-before">—</div>Highest-and-best-use valuation — Sales, Income, and Cost approaches</li><li class="index-li"><div class="li-before">—</div>Dual-audience marketing — pitching to both families and investors</li><li class="index-li"><div class="li-before">—</div>Trade-up and 1031 exchange coordination</li><li class="index-li"><div class="li-before">—</div>Military relocation / PCS hold-vs-sell proformas</li></ul></div><div class="foot"><a href="/sell" class="index-a-4"><span class="index-div-11">See how Sell works</span><span class="index-span-7 ar">→</span></a></div></article></div></div><div class="services-rail-note"><span class="index-button">← Drag · scroll · 4 services on the rail</span> <span class="index-button">01 · 02 · 03 · 04</span></div><div id="svc-drag-cursor" aria-hidden="true" class="index-button svc-drag-cursor">Drag</div></section><section id="about" data-screen-label="03 About" class="index-section-2 scene"><div class="scene-head"><div class="marker"><div class="index-div-6 num">03</div><div class="index-div-7 label"><div class="label-before"></div>About</div></div><div class="index-div-8"><h2 class="index-h2 reveal">A real estate professional<span class="br-line">and <em class="index-em-2">developer.</em></span></h2><p class="index-p sub reveal">Real estate runs in my family. Underwriting runs in how I work.</p></div></div><div class="index-button about-grid"><div class="prose"><p class="index-p-4 lead reveal">I was born in San Diego and grew up across the <em class="index-em-4">San Diego–Tijuana</em> region — the binational corridor that’s been my family’s home for three generations.</p><p class="index-p-5 reveal">My mother, my uncles, and my abuelos have been operating in real estate on <strong class="index-strong-2">both sides of the border</strong> for more than two decades: acquiring parcels, developing them, leasing them, selling them, doing it again. That’s how I learned this business — on the ground, on both sides of the border, long before any classroom.</p><p class="index-p-5 reveal">By <strong class="index-strong-2">16</strong>, I was working land transactions alongside my mother. By <strong class="index-strong-2">18</strong>, I was on construction sites with my uncles — planning, financing, building, and leasing the apartments and commercial spaces our family developed. By <strong class="index-strong-2">21</strong>, I had helped take somewhere between thirty and sixty units from raw land to producing income.</p><p class="index-p-5 reveal">Acquisition. Construction. Leasing. Sale. Repeat. <strong class="index-strong-2">The full arc of a real estate venture, run more times than most agents see in their entire careers.</strong></p><p class="index-p-5 reveal">On top of that foundation, I built the institutional toolkit. <strong class="index-strong-2">A B.S. in Real Estate &amp; Development from UC San Diego</strong> — a project-based program tied to actual properties, actual investors, and the financial models lenders and acquisition committees actually use. <strong class="index-strong-2">DRE-licensed Multifamily Investment &amp; Development Advisor (#02282434).</strong> Five years in corporate sales at AT&amp;T and Wyyerd Fiber sharpened the negotiation muscle and funded the transition.</p><p class="index-p-6 reveal">What that means for you:</p><p class="index-p-5 reveal">I’m not a transactional agent. Most agents in San Diego show properties, write offers, and close deals — I do those things, but my actual value is upstream. <strong class="index-strong-2">I run full proformas</strong> on every property worth considering. <strong class="index-strong-2">I model development upside</strong> under SB 9, ADU law, the State Density Bonus, and SB 1123. <strong class="index-strong-2">I structure JV waterfalls</strong> for partner deals. <strong class="index-strong-2">I project-manage small infill developments</strong> end to end — from feasibility through certificate of occupancy and the cash-out refinance after.</p><p class="index-p-5 reveal">I work as both a real estate professional <em class="index-button">and</em> a developer. Most people in this business pick one lane — the lanes inform each other. My development experience changes how I underwrite acquisitions, and my acquisition discipline changes how I run development projects.</p><p class="index-p-5 reveal">If you’re buying your first multifamily, scaling a portfolio, or looking at what’s buildable on the lot you already own — I bring real estate finance, development experience, and deep knowledge of the <strong class="index-strong-2">San Diego–Tijuana region</strong> to the table. <strong class="index-strong-2">Not just a transaction.</strong></p></div><div class="pull"><div class="index-div-18 label">Thesis</div><div class="quote">“Real estate is a <em class="index-em-5">financial instrument.</em> It should be treated like one.”</div><div class="credit">Giovanni Serrano · 2026</div></div></div><div class="index-button timeline reveal-stagger"><div class="index-div-19 t"><div class="age"><em class="index-em-6">16</em></div><h4 class="index-h4">San Diego–Tijuana</h4><p class="index-p-7">Born in San Diego, raised binationally. Three generations of family operators on both sides of the border. From 16, working land transactions with my mother. By 18, on construction sites with my uncles — planning, financing, building, and leasing. The full lifecycle, learned from the inside.</p><span class="index-span-8 tag">First deal</span></div><div class="index-div-19 t"><div class="age"><em class="index-em-6">5yr</em></div><h4 class="index-h4">Corporate Sales</h4><p class="index-p-7">Five years of B2B sales discipline at corporate scale. AT&amp;T, Wyyerd Fiber. Negotiation under pressure, account management, and the resources to fund what came next.</p><span class="index-span-8 tag">B2B</span></div><div class="index-div-19 t"><div class="age">UCSD</div><h4 class="index-h4">B.S. RE &amp; Development</h4><p class="index-p-7">Project-based program. Proforma modeling, joint ventures, market analysis, California planning law, development feasibility — applied to real properties and evaluated by industry professionals.</p><span class="index-span-8 tag">2025</span></div><div class="index-div-20 t"><div class="age"><em class="index-em-6">DRE</em></div><h4 class="index-h4">California Licensed</h4><p class="index-p-7">San Diego. First-time buyers, scaling investors, infill developers. The construction site and the spreadsheet, both.</p><span class="index-span-8 tag">#02282434</span></div></div></section><section id="portfolio" data-screen-label="04 Portfolio" class="index-section-3 scene bone"><div class="scene-head"><div class="marker"><div class="index-div-6 num">04</div><div class="index-div-7 label"><div class="label-before"></div>Portfolio</div></div><div class="index-div-8"><h2 class="index-h2 reveal">The Work Behind the <em class="index-em-2">Analysis.</em></h2><p class="index-p sub reveal">Real estate investment analysis, development feasibility, market research, and financial modeling — using real San Diego properties, real market data, and institutional-standard models.</p></div></div><div class="index-button cap reveal"><div class="index-div-21 left"><span class="badge">Senior Capstone · UCSD Urban Planning EXPO</span><h3 class="index-h3">4855 College Ave —<span class="br-line"><em class="index-em-2">3.05-Acre Multifamily Development</em></span></h3><div class="index-div-22 sub">Full Offering Memorandum · presented to industry judges</div><p class="index-p-8">A complete Offering Memorandum for a 3.05-acre site zoned single-family, with proposed rezone to multifamily (RS-1-7 to RM-4-10). Every stage of development evaluation — from zoning and demographics through proforma and exit — in the same format institutional firms use to evaluate where to commit millions of dollars.</p><p class="index-p-8">Presented at UCSD Urban Planning EXPO with a charrette board and an investor video pitch.</p><div class="vitals"><div class="index-div-23 v"><div class="index-div-24 k">Hold</div><div class="index-div-25 num">10 yr</div></div><div class="index-div-26 v"><div class="index-div-24 k">Pages</div><div class="index-div-25 num">30</div></div><div class="index-div-26 v"><div class="index-div-24 k">Site</div><div class="index-div-25 num">3.05 ac</div></div><div class="index-div-26 v"><div class="index-div-24 k">Rezone</div><div class="index-div-25 num">RM-4-10</div></div></div></div><div class="index-div-27 right"><div class="index-button"><div class="index-div-28 col-title">Analysis &amp; Design</div><div class="index-div-29 li"><div class="li-before-2">·</div>Land use &amp; zoning (RS-1-7 to RM-4-10 rezone)</div><div class="index-div-29 li"><div class="li-before-2">·</div>Demographics with projections through 2035</div><div class="index-div-29 li"><div class="li-before-2">·</div>Market analysis — vacancy, rents, absorption, comps (CoStar)</div><div class="index-div-29 li"><div class="li-before-2">·</div>Development program, site plan, parking</div><div class="index-div-29 li"><div class="li-before-2">·</div>Design vision, massing, amenities, tenant mix</div><div class="index-div-30 li"><div class="li-before-2">·</div>Community benefits &amp; SWOT analysis</div></div><div class="index-button"><div class="index-div-28 col-title">Financial &amp; Deliverables</div><div class="index-div-29 li"><div class="li-before-2">·</div>10-year proforma with full cash flow</div><div class="index-div-29 li"><div class="li-before-2">·</div>IRR, cash-on-cash, equity multiple, levered returns</div><div class="index-div-29 li"><div class="li-before-2">·</div>Financing assumptions, cost basis, cap rates</div><div class="index-div-29 li"><div class="li-before-2">·</div>Marketing &amp; branding identity</div><div class="index-div-29 li"><div class="li-before-2">·</div>30-page investor-ready Offering Memorandum</div><div class="index-div-30 li"><div class="li-before-2">·</div>EXPO charrette board + investor video pitch</div></div></div></div><div class="index-button capstone-tags reveal"><span class="capstone-tag">Offering Memorandum</span> <span class="capstone-tag">3.05 Acres</span> <span class="capstone-tag">Multifamily</span> <span class="capstone-tag">College Area</span> <span class="capstone-tag">Rezone</span> <span class="capstone-tag">10-Yr Proforma</span> <span class="capstone-tag">Investor Pitch</span> <span class="capstone-tag">CoStar</span></div><div class="portfolio-section"><div class="portfolio-cat">Acquisition &amp; Development Underwriting<div class="portfolio-cat-after"></div></div><div class="index-button portfolio-grid reveal-stagger"><div class="w-dyn-list"><div role="list" class="w-dyn-items"><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">GROUND-UP DEVELOPMENT</div><div class="project-title"><span data-pt-name="1">80-Lot Subdivision</span><span data-pt-sep="1"> — </span><span data-pt-sub="1">Phased Feasibility &amp; Monthly Cash Flow</span></div><div class="project-desc">Ground-up subdivision feasibility model built around a $3.7M land basis, $68K finished-lot basis, $150/SF construction budget, and three-lot monthly absorption. The analysis compares phased delivery against a single-phase build to show effects on capital deployment, gross margin, and IRR.</div><div class="project-tags"><div data-tags-src="1">80 Lots, Monthly CF, 18% IRR, Phasing</div></div><span data-slug="1">80-lot-subdivision</span></a></div><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">MARKET ANALYSIS</div><div class="project-title"><span data-pt-name="1">College Area</span><span data-pt-sep="1"> — </span><span data-pt-sub="1">Residential &amp; Commercial</span></div><div class="project-desc">Residential and commercial market memo using institutional data inputs for vacancy, asking rents, absorption, delivery pipeline, comparable projects, and forward-looking demand assumptions.</div><div class="project-tags"><div data-tags-src="1">CoStar, Comps</div></div><span data-slug="1">college-area-2</span></a></div><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">DEMOGRAPHICS</div><div class="project-title"><span data-pt-name="1">College Area</span><span data-pt-sep="1"> — </span><span data-pt-sub="1">Growth Projections to 2035</span></div><div class="project-desc">Submarket demographic forecast comparing population growth, household income, rent levels, and renter-owner tenure trends against San Diego County and nearby competitive neighborhoods.</div><div class="project-tags"><div data-tags-src="1">Census, CAGR</div></div><span data-slug="1">college-area</span></a></div><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">COMMERCIAL REPOSITIONING</div><div class="project-title"><span data-pt-name="1">4616 El Cajon Blvd</span><span data-pt-sep="1"> — </span><span data-pt-sub="1">Strip Center</span></div><div class="project-desc">Repositioning study for a Transit Priority Area retail and office asset. The model compares NNN and full-service lease structures, evaluates tenant-roll risk, and tests a 60/40 JV structure against a 16% investor IRR hurdle.</div><div class="project-tags"><div data-tags-src="1">Retail/Office, 16% IRR, JV</div></div><span data-slug="1">4616-el-cajon-blvd</span></a></div><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">VALUE-ADD RESIDENTIAL</div><div class="project-title"><span data-pt-name="1">6966 Amherst St</span><span data-pt-sep="1"> — </span><span data-pt-sub="1">14-Unit Acquisition</span></div><div class="project-desc">Value-add acquisition analysis for a small multifamily asset, including a 10-year operating model, CapEx schedule, rent-renovation assumptions, exit cap sensitivity, and investor return summary. The scenario tests a 6% stabilized cash-on-cash yield, 14% levered return, 12% IRR, and 2.0x equity multiple.</div><div class="project-tags"><div data-tags-src="1">14 Units, IRR &amp; NPV, 10-Yr Hold</div></div><span data-slug="1">6966-amherst-st</span></a></div></div></div><div class="w-embed w-script"><style>.portfolio-grid .w-dyn-list,.portfolio-grid .w-dyn-items,.portfolio-grid .w-dyn-item,.portfolio-grid-3 .w-dyn-list,.portfolio-grid-3 .w-dyn-items,.portfolio-grid-3 .w-dyn-item{display:contents}.portfolio-grid .w-embed,.portfolio-grid-3 .w-embed{display:none}.project-tags [data-tags-src]{display:none}a.project-card [data-slug]{display:none}.project-title [data-pt-sep]:has(+ .w-dyn-bind-empty){display:none}a.project-card{text-decoration:none;color:inherit}</style><script>document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('a.project-card').forEach(function(a){var s=a.querySelector('[data-slug]');if(s&&s.textContent.trim())a.setAttribute('href','/projects/'+s.textContent.trim())});document.querySelectorAll('.project-tags').forEach(function(w){if(w.querySelector('.project-tag'))return;var src=w.querySelector('[data-tags-src]');var txt=src?src.textContent:'';txt.split(',').forEach(function(t){t=t.trim();if(!t)return;var el=document.createElement('span');el.className='project-tag';el.textContent=t;w.appendChild(el)})});document.querySelectorAll('.project-title [data-pt-sep]').forEach(function(sep){var nxt=sep.nextElementSibling;if(!nxt||!nxt.textContent.trim())sep.style.display='none'})});</script></div></div><div class="portfolio-cat">Advanced Finance — Case Studies<div class="portfolio-cat-after"></div></div><div class="index-button portfolio-grid-3 reveal-stagger"><div class="w-dyn-list"><div role="list" class="w-dyn-items"><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">AFFORDABLE HOUSING</div><div class="project-title"><span data-pt-name="1">210-Unit Condo - 4 Scenarios</span><span data-pt-sep="1"> — </span><span data-pt-sub="1" class="w-dyn-bind-empty"></span></div><div class="project-desc">Comparative feasibility model for a 210-unit condo concept, evaluating market-rate, AMI-restricted, subsidy-supported, and TIF-backed financing scenarios against project IRR and funding gap requirements.</div><div class="project-tags"><div data-tags-src="1">AMI, TIF</div></div><span data-slug="1">210-unit-condo-4-scenarios</span></a></div><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">LAND RECAPITALIZATION</div><div class="project-title"><span data-pt-name="1">2,000-Acre Land Recap</span><span data-pt-sep="1"> — </span><span data-pt-sub="1" class="w-dyn-bind-empty"></span></div><div class="project-desc">Land recapitalization case for a distressed ownership group, testing $4M of new equity, subordinated debt, IRR hurdles, and staged option payments to the landowner.</div><div class="project-tags"><div data-tags-src="1">Recap, $4M Equity</div></div><span data-slug="1">2-000-acre-land-recap</span></a></div><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">OFFICE JV</div><div class="project-title"><span data-pt-name="1">925 B St - 64K SF Downtown Office</span><span data-pt-sep="1"> — </span><span data-pt-sub="1" class="w-dyn-bind-empty"></span></div><div class="project-desc">Office acquisition joint venture model with GP/LP 20/80 split, 10-year hold assumptions, NOI sensitivity, debt sizing, and exit cap scenarios for a downtown San Diego asset.</div><div class="project-tags"><div data-tags-src="1">64K SF, 10-Yr Hold</div></div><span data-slug="1">925-b-st-64k-sf-downtown-office</span></a></div><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">JOINT VENTURE</div><div class="project-title"><span data-pt-name="1">256-Bed Student Housing</span><span data-pt-sep="1"> — </span><span data-pt-sub="1" class="w-dyn-bind-empty"></span></div><div class="project-desc">Student housing JV model with an 8% preferred dividend, 50/50 split after preferred return, capital recovery sequencing, and downside protection cases for delayed lease-up.</div><div class="project-tags"><div data-tags-src="1">JV, 50/50</div></div><span data-slug="1">256-bed-student-housing</span></a></div><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">DISTRESSED REPOSITIONING</div><div class="project-title"><span data-pt-name="1">280-Unit Condo Conversion</span><span data-pt-sep="1"> — </span><span data-pt-sub="1" class="w-dyn-bind-empty"></span></div><div class="project-desc">Distressed repositioning case for a stalled condo project, including audited financial review, rent-pivot analysis, lender recovery scenarios, and equity impairment sensitivity.</div><div class="project-tags"><div data-tags-src="1">280 Units, Workout</div></div><span data-slug="1">280-unit-condo-conversion</span></a></div><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">HIGHRISE PROFORMA</div><div class="project-title"><span data-pt-name="1">311-Unit Downtown SD Highrise</span><span data-pt-sep="1"> — </span><span data-pt-sub="1" class="w-dyn-bind-empty"></span></div><div class="project-desc">Full highrise development proforma with construction draw schedule, lease-up assumptions, refinance case, disposition case, and JV waterfall logic using a 10% preferred return and 60/40 GP/LP promote split.</div><div class="project-tags"><div data-tags-src="1">311 Units, Waterfall</div></div><span data-slug="1">311-unit-downtown-sd-highrise</span></a></div></div></div></div><div class="portfolio-cat">Planning &amp; Site Analysis<div class="portfolio-cat-after"></div></div><div class="index-button portfolio-grid-3 reveal-stagger"><div class="w-dyn-list"><div role="list" class="w-dyn-items"><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">FEASIBILITY</div><div class="project-title"><span data-pt-name="1">San Diego Site - Investor-Ready Concept</span><span data-pt-sep="1"> — </span><span data-pt-sub="1" class="w-dyn-bind-empty"></span></div><div class="project-desc">Investor-ready feasibility concept for an active San Diego site, combining design vision, planning constraints, program assumptions, proforma outputs, and presentation materials reviewed by industry judges.</div><div class="project-tags"><div data-tags-src="1">Feasibility, Proforma</div></div><span data-slug="1">san-diego-site-investor-ready-concept</span></a></div><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">SITE ANALYSIS</div><div class="project-title"><span data-pt-name="1">Pacific Beach - Windshield Survey</span><span data-pt-sep="1"> — </span><span data-pt-sub="1" class="w-dyn-bind-empty"></span></div><div class="project-desc">Field survey and opportunity scan for Pacific Beach, combining TOD analysis, neighborhood resource mapping, parcel observations, and development opportunity identification.</div><div class="project-tags"><div data-tags-src="1">TOD, Field Survey</div></div><span data-slug="1">pacific-beach-windshield-survey</span></a></div><div role="listitem" class="w-dyn-item"><a href="/projects" class="index-div-31 project-card w-inline-block"><div class="project-card-before"></div><div class="project-type">ECONOMIC ANALYSIS</div><div class="project-title"><span data-pt-name="1">LQ &amp; Shift-Share Analysis</span><span data-pt-sep="1"> — </span><span data-pt-sub="1" class="w-dyn-bind-empty"></span></div><div class="project-desc">NAICS-based economic base study for a San Diego submarket, using location quotient and shift-share outputs to identify target industries and support planning memo recommendations.</div><div class="project-tags"><div data-tags-src="1">LQ, Shift-Share</div></div><span data-slug="1">lq-shift-share-analysis</span></a></div></div></div></div></div></section><section id="sample" data-screen-label="05 Sample" class="index-section-4 scene dark"><div class="scene-head"><div class="marker"><div class="index-div-32 num">05</div><div class="index-div-33 label"><div class="label-before"></div>Sample</div></div><div class="index-div-8"><h2 class="index-h2-2 reveal">How I Model a <em class="index-em-7">Deal</em></h2><p class="index-p-9 sub reveal">Every property you&#x27;re considering gets this treatment before you make an offer. The numbers below are illustrative — on a real deal, they&#x27;d be your actual rents, your actual financing, your actual market.</p></div></div><div class="index-button proforma reveal"><div class="head"><div class="info"><div class="index-div-34 tag">Sample · North Park</div><h3 class="index-h3-2">4-Unit Multifamily<span class="br-line"><em class="index-em-7">built 1978 · 5,800 sf lot</em></span></h3><div class="index-div-35 meta">4 × 2BR/1BA · seller asking · agent-listed</div></div><div class="price"><div class="lab">Asking</div><div class="index-div-36 v">$1,650,000</div><div class="terms">25% down · 7.0% / 30-yr</div></div></div><div class="index-div-37 body"><div class="index-div-38 col"><div class="index-div-39 col-title">Year 1 Proforma</div><div class="index-div-40 row"><span class="index-span-9">Gross scheduled rent</span><span class="index-span-10 v">$144,000</span></div><div class="index-div-41 row sub"><span class="index-span-9">Less vacancy (5%)</span><span class="index-span-11 v">−$7,200</span></div><div class="index-div-41 row sub"><span class="index-span-9">Less operating expenses (35%)</span><span class="index-span-11 v">−$47,880</span></div><div class="index-div-42 row total"><span class="index-span-9">Net Operating Income</span><span class="index-span-12 v">$88,920</span></div><div class="index-div-41 row sub"><span class="index-span-9">Less annual debt service</span><span class="index-span-11 v">−$98,772</span></div><div class="index-div-42 row total neg"><span class="index-span-9">Cash flow after debt</span><span class="index-span-13 v">−$9,852</span></div></div><div class="index-div-43 col"><div class="index-div-39 col-title">Capital Stack</div><div class="index-div-40 row"><span class="index-span-9">Purchase price</span><span class="index-span-10 v">$1,650,000</span></div><div class="index-div-41 row sub"><span class="index-span-9">Down payment (25%)</span><span class="index-span-11 v">$412,500</span></div><div class="index-div-41 row sub"><span class="index-span-9">Closing costs (est.)</span><span class="index-span-11 v">$32,000</span></div><div class="index-div-41 row sub"><span class="index-span-9">Reserves (6 mo.)</span><span class="index-span-11 v">$18,000</span></div><div class="index-div-42 row total"><span class="index-span-9">Total cash required</span><span class="index-span-12 v">$462,500</span></div><div class="index-div-40 row"><span class="index-span-9">Loan amount</span><span class="index-span-10 v">$1,237,500</span></div></div></div><div class="metrics"><div class="index-div-44 m"><div class="index-div-45 k">Cap Rate</div><div class="index-div-46 v">5.4<em class="index-em-2">%</em></div></div><div class="index-div-44 m"><div class="index-div-45 k">Cash-on-Cash</div><div class="index-div-46 v"><em class="index-em-2">−</em>2.1<em class="index-em-2">%</em></div></div><div class="index-div-47 m"><div class="index-div-45 k">DSCR</div><div class="index-div-46 v">0.90<em class="index-em-2">×</em></div></div></div><div class="upside"><strong class="index-strong-3">Value-Add · Detached ADU</strong> Adding a 1BR detached ADU (permitted under state ADU law) at $180,000 construction cost adds $27,000 in annual rent. Revised NOI: $106,470. Revised cash flow: +$7,698. Cash-on-cash shifts to +1.2% with substantially better long-term equity. </div><div class="verdict"><strong class="index-strong-4">Verdict</strong> As-is, this deal doesn&#x27;t pencil — negative cash flow and DSCR below lender thresholds. It only works with the ADU upside, meaningful seller concession, or assumable low-rate financing. <em class="index-button">This is exactly what you need to know before you make an offer.</em></div></div><p class="index-p-10 sample-caption reveal"> This is a sample analysis framework, not a closed deal. On a real property we&#x27;d use your target rents, your verified comps, your specific loan terms, and live market data.</p></section><section id="reviews" data-screen-label="06 Reviews" class="index-section-2 scene"><div class="scene-head"><div class="marker"><div class="index-div-6 num">06</div><div class="index-div-7 label"><div class="label-before"></div>Reviews</div></div><div class="index-div-8"><h2 class="index-h2 reveal">What Clients <em class="index-em-2">Say</em></h2><p class="index-p sub reveal">Two voices, two segments. More coming as the practice grows.</p></div></div><div class="index-button gallery reveal-stagger"><div class="index-div-48 r"><div class="r-before">&quot;</div><div class="index-button"><div class="index-div-49 text">&quot;I&#x27;ve worked with several agents on investment properties. Giovanni is the only one who actually understood the numbers. He modeled the deal before I made an offer — showed me the IRR, the cap rate, the cash-on-cash. <em class="index-button">That&#x27;s a different level.</em>&quot;</div><div class="index-div-50"><span class="index-span-14">★</span><span class="index-span-14">★</span><span class="index-span-14">★</span><span class="index-span-14">★</span><span class="index-span-14">★</span></div><div class="index-div-51 who"><div class="av">JT</div><div class="index-button"><div class="index-div-52 name">James T.</div><div class="role">Multifamily Investor · San Diego County</div></div></div></div><div class="review-badge">Investor Review</div></div><div class="index-div-53 r"><div class="r-before">&quot;</div><div class="index-button"><div class="index-div-54 text">&quot;Multifamily felt intimidating before I talked to Giovanni — all the numbers, the tenants, the loan structure. He broke it down clearly. Walked me through what the property would actually return, what it would cost each month after rental income, and what the real risks were. I bought my first duplex and <em class="index-button">I actually understand the investment.</em>&quot;</div><div class="index-div-50"><span class="index-span-14">★</span><span class="index-span-14">★</span><span class="index-span-14">★</span><span class="index-span-14">★</span><span class="index-span-14">★</span></div><div class="index-div-51 who"><div class="av">MR</div><div class="index-button"><div class="index-div-52 name">Maria R.</div><div class="role">First-time Multifamily Buyer · San Diego County</div></div></div></div><div class="review-badge">First-Time Buyer</div></div></div></section><section id="contact" data-screen-label="07 Contact" class="index-section-3 scene bone"><div class="scene-head"><div class="marker"><div class="index-div-6 num">07</div><div class="index-div-7 label"><div class="label-before"></div>Let&#x27;s Connect</div></div><div class="index-div-8"><h2 class="index-h2 reveal">Ready to Move<span class="br-line"><em class="index-em-2">With Intention?</em></span></h2><p class="index-p sub reveal">Whether you&#x27;re buying your first multifamily property, scaling your portfolio, or exploring what you can build — the first step is a conversation.</p></div></div><div class="index-button contact-grid reveal"><div class="index-div-55 left"><div class="index-button"><div class="lab">Direct line</div><h3 class="index-h3-3">One call.<span class="br-line"><em class="index-em-8">Then a model.</em></span></h3></div><p class="pitch">No fees until you transact. No high-pressure pitch. The numbers will tell us if there&#x27;s a deal here — and the call will tell us if we&#x27;re a fit.</p><div class="reach"><a href="tel:6196178584" class="index-a-5"><span class="index-span-15 k">Call or Text</span><span class="index-span-16">619.617.8584</span><span class="index-span-16">→</span></a> <a href="mailto:giovanni@giovanniserrano.com" class="index-a-5"><span class="index-span-15 k">Email</span><span class="index-span-16">giovanni@giovanniserrano.com</span><span class="index-span-16">→</span></a> <a href="https://giovanniserrano.com" class="index-a-5"><span class="index-span-15 k">Website</span><span class="index-span-16">giovanniserrano.com</span><span class="index-span-16">→</span></a></div></div><div class="index-div-56 right"><div class="index-form w-embed"><style>*{box-sizing:border-box}.contact-grid form{display:grid;gap:22px}.contact-grid form label{font-family:'JetBrains Mono', ui-monospace, Menlo, monospace;font-size:11px;letter-spacing:0.22em;text-transform:uppercase;color:#E07A5F;display:block;margin-bottom:6px}.contact-grid form input{font-family:'Inter', -apple-system, sans-serif;font-size:16px;font-weight:300;background:transparent;border:none;border-bottom:1px solid rgba(61, 64, 91, 0.14);color:#3D405B;padding:10px 0;width:100%}.contact-grid form select{font-family:'Inter', -apple-system, sans-serif;font-size:16px;font-weight:300;background:transparent;border:none;border-bottom:1px solid rgba(61, 64, 91, 0.14);color:#3D405B;padding:10px 0;width:100%}.contact-grid form textarea{font-family:'Inter', -apple-system, sans-serif;font-size:16px;font-weight:300;background:transparent;border:none;border-bottom:1px solid rgba(61, 64, 91, 0.14);color:#3D405B;padding:10px 0;width:100%}.contact-grid form input:focus{outline:none;border-bottom-color:#E07A5F}.contact-grid form select:focus{outline:none;border-bottom-color:#E07A5F}.contact-grid form textarea:focus{outline:none;border-bottom-color:#E07A5F}.contact-grid form textarea{min-height:80px;resize:vertical}.contact-grid form button{margin-top:12px;background:#3D405B;color:#F4F1DE;border:none;padding:20px;font-family:'JetBrains Mono', ui-monospace, Menlo, monospace;font-size:12px;font-weight:500;letter-spacing:0.25em;text-transform:uppercase;cursor:pointer;transition:background .2s;display:grid;grid-template-columns:1fr auto;align-items:center}.contact-grid form button:hover{background:#E07A5F}</style><form onsubmit="event.preventDefault(); this.querySelector('button span:first-child').textContent='Message Sent! I\'ll be in touch within 24 hours.'; this.style.background='#4a7c59';">
+<div><label>Name</label><input placeholder="Your name" required="" type="text"/></div>
+<div><label>Email</label><input placeholder="your@email.com" required="" type="email"/></div>
+<div><label>I'm Looking To</label>
+<select required="">
+<option disabled="" selected="" value="">Select your goal</option>
+<option>Buy my first duplex / triplex / fourplex</option>
+<option>Acquire a multifamily investment property</option>
+<option>Build units on property I already own</option>
+<option>Something else</option>
+</select>
+</div>
+<div><label>Anything Else <span style="color: var(--ink-mute); text-transform: none; letter-spacing: 0;">(optional)</span></label><textarea placeholder="Timeline, budget range, specific properties — whatever helps."></textarea></div>
+<button type="submit"><span>SEND MY MESSAGE</span><span>→</span></button>
+</form></div><p class="index-p-11">Your information is never shared or sold. I&#x27;ll respond within 24 hours. No pressure. No obligation.</p></div></div></section></main><footer data-screen-label="08 Footer" class="index-footer"><p class="foot-mark">Move with<span class="br-line"><em class="index-em-2">intention.</em></span></p><div class="foot-grid"><div class="index-div-8 col"><div class="index-div-57 k">Brand</div><p class="index-p-12"><strong class="index-strong-5">Giovanni Serrano</strong></p><p class="index-p-12">Multifamily Investment &amp; Development Advisor.<span class="br-line">Serving San Diego County, California.</span></p><div class="index-div-58"><a href="#" class="index-a-6">Instagram</a> <a href="#" class="index-a-6">LinkedIn</a></div></div><div class="index-div-8 col"><div class="index-div-57 k">Navigate</div><a href="/invest" class="index-a-7">Invest</a> <a href="/scale" class="index-a-7">Scale</a> <a href="/develop" class="index-a-7">Develop</a> <a href="/sell" class="index-a-7">Sell</a> <a href="#about" class="index-a-7">About</a> <a href="#contact" class="index-a-7">Contact</a></div><div class="index-div-8 col"><div class="index-div-57 k">Reach</div><a href="tel:6196178584" class="index-a-7">619.617.8584</a> <a href="mailto:giovanni@giovanniserrano.com" class="index-a-7">giovanni@giovanniserrano.com</a> <a href="https://giovanniserrano.com" class="index-a-7">giovanniserrano.com</a><p class="index-p-12">Serving San Diego County, California</p></div><div class="index-div-8 col"><div class="index-div-57 k">Compliance</div><p class="index-p-12"><strong class="index-strong-5">Giovanni Serrano</strong> · DRE #02282434</p><p class="index-p-12">Multifamily Investment &amp; Development Advisor</p><p class="index-p-12">Equal Housing Opportunity</p><div class="index-div-59"><p class="index-p-13">Giovanni Serrano · DRE #02282434<span class="br-line">REAL Broker, LLC · DRE #02022092</span><span class="br-line">© 2026 Giovanni Serrano</span></p></div><div class="index-div-60"><img loading="eager" src="https://cdn.prod.website-files.com/6a06593446dcd6cfe2297358/6a16f77f047d5aa5975c052c_real-broker-logo.svg" alt="REAL Broker, LLC" class="index-img-2"/></div></div></div><div class="index-button foot-bar"><span class="index-span-16">© 2026 Giovanni Serrano</span> <span class="index-span-17">Lora · Inter · JetBrains Mono</span></div></footer><script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6a06593446dcd6cfe2297358" type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/6a06593446dcd6cfe2297358/js/webflow.schunk.36b8fb49256177c8.js" type="text/javascript" integrity="sha384-4abIlA5/v7XaW1HMXKBgnUuhnjBYJ/Z9C1OSg4OhmVw9O3QeHJ/qJqFBERCDPv7G" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/6a06593446dcd6cfe2297358/js/webflow.schunk.f383f5e6d5965c7d.js" type="text/javascript" integrity="sha384-QnOp7fbOcrKXZDi7+0fkHJk90FV9G/AoswfyaoltjC7RwYWcCfFhbXP4nXa9dqGz" crossorigin="anonymous"></script><script src="https://cdn.prod.website-files.com/6a06593446dcd6cfe2297358/js/webflow.84262c97.21347a01e7fc3944.js" type="text/javascript" integrity="sha384-cQxMcfCbS87voO8G5PajlUDvQjKdX1mW6dGKfpnRY79YU01KAvr+hflEKv5UUJXP" crossorigin="anonymous"></script><script>
+(() => {
+const io = new IntersectionObserver((entries) => {
+      entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el => io.observe(el));
+
+    document.querySelectorAll('a[href^="#"]').forEach(a => {
+      a.addEventListener('click', e => {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); }
+      });
+    });
+
+    // Portfolio renders from static markup baked into this page (Airtable fetch removed for Webflow static build).
+
+    // hamburger nav
+    const navToggle = document.querySelector('button.nav-toggle') || document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('nav.top .links');
+    if (navToggle && navLinks) {
+      navToggle.addEventListener('click', () => {
+        navLinks.classList.toggle('open');
+        navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+      });
+      document.addEventListener('click', (e) => {
+        if (!e.target.closest('nav.top')) {
+          navLinks.classList.remove('open');
+          navToggle.textContent = '☰';
+        }
+      });
+    }
+
+    // services draggable infinite slider — smoothed with rAF batching
+    const track = document.getElementById('svc-track');
+    if (track) {
+      const originals = Array.from(track.children);
+      const dragCursor = document.getElementById('svc-drag-cursor');
+      let slideWidth = 0;
+      let index = originals.length;
+      let autoTimer = null;
+      let resumeTimer = null;
+      let isDragging = false;
+      let didDrag = false;
+      let startX = 0;
+      let startScroll = 0;
+      let lastX = 0;
+      let lastTime = 0;
+      let velocity = 0;
+      let pendingScroll = null;
+      let pendingCursor = null;
+      let rafId = null;
+      let cursorRafId = null;
+
+      const prepareClone = (node) => {
+        const clone = node.cloneNode(true);
+        clone.classList.add('is-clone');
+        clone.classList.remove('reveal');
+        clone.setAttribute('aria-hidden', 'true');
+        return clone;
+      };
+
+      const beforeClones = originals.map(prepareClone);
+      const afterClones = originals.map(prepareClone);
+      track.replaceChildren(...beforeClones, ...originals, ...afterClones);
+
+      const slides = Array.from(track.children);
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      const measure = () => {
+        const first = slides[0];
+        const second = slides[1];
+        slideWidth = second.offsetLeft - first.offsetLeft || second.getBoundingClientRect().width;
+        jumpTo(index);
+      };
+
+      const jumpTo = (nextIndex) => {
+        index = nextIndex;
+        track.scrollLeft = slideWidth * index;
+      };
+
+      const goTo = (nextIndex, behavior = 'smooth') => {
+        index = nextIndex;
+        track.scrollTo({ left: slideWidth * index, behavior });
+      };
+
+      const normalizeLoop = () => {
+        if (index < originals.length) jumpTo(index + originals.length);
+        if (index >= originals.length * 2) jumpTo(index - originals.length);
+      };
+
+      const stopAuto = () => {
+        clearInterval(autoTimer);
+        clearTimeout(resumeTimer);
+      };
+
+      const startAuto = () => {
+        if (reduceMotion.matches) return;
+        stopAuto();
+        autoTimer = setInterval(() => goTo(index + 1), 4200);
+      };
+
+      const resumeAuto = () => {
+        stopAuto();
+        resumeTimer = setTimeout(startAuto, 1800);
+      };
+
+      const settleToNearest = () => {
+        if (!slideWidth) return;
+        // velocity-aware: if user flicked, advance one more slide in flick direction
+        const projected = track.scrollLeft + velocity * 120;
+        goTo(Math.round(projected / slideWidth));
+      };
+
+      // rAF-batched scrollLeft write — keeps drag silky on high-refresh displays
+      const flushScroll = () => {
+        rafId = null;
+        if (pendingScroll == null) return;
+        track.scrollLeft = pendingScroll;
+        pendingScroll = null;
+      };
+
+      const flushCursor = () => {
+        cursorRafId = null;
+        if (!dragCursor || !pendingCursor) return;
+        dragCursor.style.left = `${pendingCursor.x}px`;
+        dragCursor.style.top = `${pendingCursor.y}px`;
+        pendingCursor = null;
+      };
+
+      track.addEventListener('scroll', () => {
+        if (!slideWidth) return;
+        index = Math.round(track.scrollLeft / slideWidth);
+        window.clearTimeout(track._loopTimer);
+        track._loopTimer = window.setTimeout(normalizeLoop, 120);
+      }, { passive: true });
+
+      track.addEventListener('wheel', (e) => {
+        if (Math.abs(e.deltaX) > Math.abs(e.deltaY)) resumeAuto();
+      }, { passive: true });
+
+      track.addEventListener('pointerdown', (e) => {
+        if (e.button !== undefined && e.button !== 0) return;
+        isDragging = true;
+        didDrag = false;
+        startX = e.clientX;
+        lastX = e.clientX;
+        lastTime = performance.now();
+        velocity = 0;
+        startScroll = track.scrollLeft;
+        track.classList.add('dragging');
+        dragCursor?.classList.add('dragging');
+        track.setPointerCapture(e.pointerId);
+        stopAuto();
+      });
+
+      track.addEventListener('pointermove', (e) => {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) > 6) didDrag = true;
+        // track velocity for flick detection
+        const now = performance.now();
+        const dt = now - lastTime;
+        if (dt > 0) {
+          // px per ms — smoothed slightly
+          velocity = velocity * 0.7 + ((lastX - e.clientX) / dt) * 0.3;
+        }
+        lastX = e.clientX;
+        lastTime = now;
+        // batch scrollLeft writes via rAF — single write per frame
+        pendingScroll = startScroll - dx;
+        if (rafId == null) rafId = requestAnimationFrame(flushScroll);
+        e.preventDefault();
+      });
+
+      const endDrag = (e) => {
+        if (!isDragging) return;
+        isDragging = false;
+        track.classList.remove('dragging');
+        dragCursor?.classList.remove('dragging');
+        if (track.hasPointerCapture(e.pointerId)) track.releasePointerCapture(e.pointerId);
+        // flush any pending scroll before snapping
+        if (rafId != null) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+          if (pendingScroll != null) {
+            track.scrollLeft = pendingScroll;
+            pendingScroll = null;
+          }
+        }
+        settleToNearest();
+        resumeAuto();
+      };
+
+      track.addEventListener('pointerup', endDrag);
+      track.addEventListener('pointercancel', endDrag);
+      track.addEventListener('click', (e) => {
+        if (!didDrag) return;
+        e.preventDefault();
+        e.stopPropagation();
+        didDrag = false;
+      }, true);
+      track.addEventListener('pointerenter', () => {
+        dragCursor?.classList.add('active');
+      });
+      track.addEventListener('pointerleave', () => {
+        dragCursor?.classList.remove('active', 'dragging');
+      });
+      // batch cursor follow via rAF too
+      track.addEventListener('pointermove', (e) => {
+        if (!dragCursor) return;
+        pendingCursor = { x: e.clientX, y: e.clientY, dragging: isDragging };
+        if (cursorRafId == null) cursorRafId = requestAnimationFrame(flushCursor);
+      }, { passive: true });
+      window.addEventListener('resize', measure);
+
+      requestAnimationFrame(() => {
+        measure();
+        startAuto();
+      });
+    }
+
+
+    // proportional scale-up above 1920
+    function applyDesktopZoom() {
+      const w = window.innerWidth;
+      document.documentElement.style.zoom = w > 1920 ? (w / 1920) : '';
+    }
+    applyDesktopZoom();
+    window.addEventListener('resize', applyDesktopZoom);
+})();
+</script></body></html>

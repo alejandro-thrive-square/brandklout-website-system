@@ -1,0 +1,57 @@
+/* ============================================================
+   PREVIEW ONLY — do NOT pass to html_to_webflow.py.
+   Replicates horizon-build.webflow.io base element styles so the
+   local preview matches how sections render once pasted.
+   ============================================================ */
+
+@import url("https://fonts.googleapis.com/css2?family=Petrona:wght@200;300&family=Plus+Jakarta+Sans:wght@200;300;400;500;600&display=swap");
+
+*, *::before, *::after { box-sizing: border-box; }
+
+html { font-size: 16px; }
+
+body {
+  margin: 0;
+  background-color: #f3f2f1;
+  font-family: "Plus Jakarta Sans", Arial, sans-serif;
+  color: #141110;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+
+img { max-width: 100%; vertical-align: middle; display: inline-block; }
+
+h2 {
+  margin-top: 1rem;
+  margin-bottom: 1rem;
+  font-family: Petrona, Georgia, serif;
+  color: #0e0d0c;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 200;
+  line-height: 1.1;
+  letter-spacing: 0;
+}
+
+h3 {
+  margin-top: 0;
+  margin-bottom: 1rem;
+  font-family: "Plus Jakarta Sans", Arial, sans-serif;
+  color: #0e0d0c;
+  font-size: clamp(1.5rem, 2.5vw, 2rem);
+  font-weight: 200;
+  line-height: 1.1;
+}
+
+p { margin-top: 0; margin-bottom: 0; }
+
+a { color: #0e0d0c; text-decoration: underline; }
+
+@media screen and (max-width: 991px) {
+  h2 { font-size: 2.75rem; }
+  h3 { font-size: 2.25rem; }
+}
+
+@media screen and (max-width: 767px) {
+  h2 { font-size: 2.25rem; }
+  h3 { font-size: 2rem; }
+}

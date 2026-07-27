@@ -1,0 +1,13 @@
+rail @360: {"cardX":32,"cardW":288,"rightGap":40}
+rail @390: {"cardX":35,"cardW":312,"rightGap":43}
+menu invest @390: {"navH":67,"linksTop":67,"overlap":0,"activeAfterDisplay":"none"}
+menu invest @800: {"navH":75,"linksTop":75,"overlap":0,"activeAfterDisplay":"none"}
+reach index @390: {"display":"grid","cols":"283.594px 8.40625px","labelAboveValue":true,"emailOneLine":22}
+reach invest @390: {"display":"grid","cols":"284.297px 7.70312px","labelAboveValue":true,"emailOneLine":22}
+regress index: hOverflow=0 errors=[]
+regress invest: hOverflow=0 errors=[]
+regress develop: hOverflow=0 errors=[]
+regress scale: hOverflow=0 errors=[]
+regress sell: hOverflow=0 errors=[]
+regress projects/4855-college-ave: hOverflow=0 errors=[]
+DONE

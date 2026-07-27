@@ -12,6 +12,18 @@
       "runtimeExecutable": "python",
       "runtimeArgs": ["-m", "http.server", "3457", "--directory", "deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final revisions"],
       "port": 3457
+    },
+    {
+      "name": "heart-construction",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4321", "--directory", "deliver/charly-agency/heart-construction/workflows/04-design/.tmp/final-design"],
+      "port": 4321
+    },
+    {
+      "name": "heart-construction-v2",
+      "runtimeExecutable": "python",
+      "runtimeArgs": ["-m", "http.server", "4322", "--directory", "deliver/charly-agency/heart-construction/workflows/04-design/.tmp/final-design-v2"],
+      "port": 4322
     }
   ]
 }

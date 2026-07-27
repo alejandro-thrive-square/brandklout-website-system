@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Paste into Webflow</title>
+<style>
+  body{font:15px/1.5 system-ui,sans-serif;max-width:640px;margin:3rem auto;padding:0 1rem;color:#111}
+  button{font-size:1.1rem;padding:.9rem 1.6rem;border:0;border-radius:.5rem;
+          background:#1463ff;color:#fff;cursor:pointer}
+  button:active{transform:translateY(1px)}
+  .ok{color:#0a7d28;font-weight:600}
+  code{background:#f0f0f3;padding:.1rem .3rem;border-radius:.25rem}
+  small{color:#666}
+</style>
+</head>
+<body>
+<h1>Copy component for Webflow</h1>
+<p>Click the button, then switch to the Webflow Designer, click on the canvas,
+and press <code>Ctrl/Cmd&nbsp;+&nbsp;V</code>.</p>
+<p><button id="btn">Copy to Webflow clipboard</button>
+   <span id="status"></span></p>
+<p><small>Writes the payload under the <code>application/json</code> MIME type
+   Webflow's paste handler reads.</small></p>
+<script type="application/json" id="payload">{"type":"@webflow/XscpData","payload":{"nodes":[{"_id":"3383a934-a570-437e-8b6a-3f925660384e","type":"Link","tag":"a","classes":["a235bb92-7e0c-4455-ba83-bec1bf517b67"],"children":["54b59820-2c1b-4b79-af2e-4c7c2e1477d2","98727fe8-0e45-429e-806d-a2d96149ac66"],"data":{"button":false,"block":"","link":{"mode":"external","url":"#contact"},"eventIds":[],"devlink":{"runtimeProps":{},"slot":""},"displayName":"","attr":{"id":"stickyCta"},"xattr":[],"search":{"exclude":false},"visibility":{"conditions":[],"keepInHtml":{"tag":"False","val":{}}}}},{"_id":"54b59820-2c1b-4b79-af2e-4c7c2e1477d2","text":true,"v":"Get a free pricing strategy "},{"_id":"98727fe8-0e45-429e-806d-a2d96149ac66","type":"Block","tag":"span","classes":["08ee0597-ce8a-4c69-814f-30acd717ca0e"],"children":["aeb2508e-bd6c-4444-97a0-6ad71e6333dc"],"data":{"devlink":{"runtimeProps":{},"slot":""},"displayName":"","attr":{"id":""},"xattr":[],"search":{"exclude":false},"visibility":{"conditions":[],"keepInHtml":{"tag":"False","val":{}}},"text":true,"tag":"span"}},{"_id":"aeb2508e-bd6c-4444-97a0-6ad71e6333dc","text":true,"v":"\u2192"}],"styles":[{"_id":"a235bb92-7e0c-4455-ba83-bec1bf517b67","fake":false,"type":"class","name":"sticky-cta-sell","namespace":"","comb":"","styleLess":"box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; background: #E07A5F; color: #F4F1DE; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace; font-weight: 300; font-size: 11px; line-height: 1.6; -webkit-font-smoothing: antialiased; position: fixed; right: 40px; top: 135px; z-index: 47; padding-top: 14px; padding-right: 24px; padding-bottom: 14px; padding-left: 24px; letter-spacing: 0.22em; text-transform: uppercase; text-decoration: none; display: none; transition: background .2s;","variants":{"main_hover":{"styleLess":"background: #3D405B;"},"small":{"styleLess":"right: 0; left: 0; top: auto; bottom: 0; text-align: center; border-top-style: solid; border-top-width: 1px; border-top-color: #C85A3A;"}},"children":[],"origin":null,"selector":null},{"_id":"08ee0597-ce8a-4c69-814f-30acd717ca0e","fake":false,"type":"class","name":"span-2-sell","namespace":"","comb":"","styleLess":"box-sizing: border-box; font-family: 'JetBrains Mono', ui-monospace, Menlo, monospace;","variants":{},"children":[],"origin":null,"selector":null}],"assets":[],"ix1":[],"ix2":{"interactions":[],"events":[],"actionLists":[]}},"meta":{"droppedLinks":0,"dynBindRemovedCount":0,"dynListBindRemovedCount":0,"paginationRemovedCount":0,"universalBindingsRemovedCount":0,"unlinkedSymbolCount":0,"codeComponentsRemovedCount":0,"richTextComponentsStripped":false}}</script>
+<script>
+  const json = document.getElementById('payload').textContent;
+  document.getElementById('btn').addEventListener('click', () => {
+    const handler = (e) => {
+      e.preventDefault();
+      e.clipboardData.setData('application/json', json);
+      e.clipboardData.setData('text/plain', json);
+    };
+    document.addEventListener('copy', handler);
+    const ok = document.execCommand('copy');
+    document.removeEventListener('copy', handler);
+    const s = document.getElementById('status');
+    s.textContent = ok ? '\u2713 Copied! Now paste in Webflow.' : 'Copy failed \u2013 try again.';
+    s.className = ok ? 'ok' : '';
+  });
+</script>
+</body>
+</html>

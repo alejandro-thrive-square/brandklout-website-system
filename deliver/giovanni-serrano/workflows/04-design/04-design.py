@@ -59,22 +59,33 @@ FONT_MAP = {
 }
 
 
-def extract_tokens(html_text):
-    """Extract CSS custom properties from the :root block of the HTML."""
-    match = re.search(r":root\s*\{([^}]+)\}", html_text, re.DOTALL)
-    if not match:
-        return {}
-    tokens = {}
-    for line in match.group(1).split(";"):
-        line = line.strip()
-        if not line.startswith("--"):
+def extract_tokens(html_text, css_text=None):
+    """Extract CSS custom properties from the first :root block found.
+
+    Under the centralized-CSS authoring structure (see 04-design.md) the
+    `:root` variables live in the shared `site.css`, not in the page HTML, so a
+    sibling stylesheet's text can be passed in via `css_text` and is searched
+    first; the page HTML is the fallback for older self-contained drafts.
+    """
+    for source in (css_text, html_text):
+        if not source:
             continue
-        parts = line.split(":", 1)
-        if len(parts) == 2:
-            key = parts[0].strip()
-            val = parts[1].strip().rstrip(";")
-            tokens[key] = val
-    return tokens
+        match = re.search(r":root\s*\{([^}]+)\}", source, re.DOTALL)
+        if not match:
+            continue
+        tokens = {}
+        for line in match.group(1).split(";"):
+            line = line.strip()
+            if not line.startswith("--"):
+                continue
+            parts = line.split(":", 1)
+            if len(parts) == 2:
+                key = parts[0].strip()
+                val = parts[1].strip().rstrip(";")
+                tokens[key] = val
+        if tokens:
+            return tokens
+    return {}
 
 
 def extract_page_title(html_text):
@@ -223,9 +234,13 @@ def main():
     tokens = {}
     sections = []
     page_title = ""
+    # Centralized authoring puts :root variables in a sibling site.css; fall
+    # back to the page HTML for older self-contained drafts.
+    site_css = TMP_DIR / "final-design" / "site.css"
+    css_text = site_css.read_text(encoding="utf-8") if site_css.exists() else None
     for label, path in files:
         html = path.read_text(encoding="utf-8")
-        tokens[label] = extract_tokens(html)
+        tokens[label] = extract_tokens(html, css_text)
         if label == args.variant or args.variant == "both":
             sections = detect_sections(html)
             page_title = extract_page_title(html)

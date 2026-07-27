@@ -1,0 +1,139 @@
+{
+  "source": "Webflow variable map",
+  "note": "After MCP import, fill variableId with the Webflow variable ID and cssName with variable.getCSSName(). style_tool variable binding uses variableId via variable_as_value.",
+  "variables": [
+    {
+      "sourceName": "--brand-300",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--brand-300",
+      "binding": "var(--brand-300)"
+    },
+    {
+      "sourceName": "--brand-500",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--brand-500",
+      "binding": "var(--brand-500)"
+    },
+    {
+      "sourceName": "--brand-600",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--brand-600",
+      "binding": "var(--brand-600)"
+    },
+    {
+      "sourceName": "--card-gap",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--card-gap",
+      "binding": "var(--card-gap)"
+    },
+    {
+      "sourceName": "--cream",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--cream",
+      "binding": "var(--cream)"
+    },
+    {
+      "sourceName": "--divider",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--divider",
+      "binding": "var(--divider)"
+    },
+    {
+      "sourceName": "--font-body",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--font-body",
+      "binding": "var(--font-body)"
+    },
+    {
+      "sourceName": "--font-heading",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--font-heading",
+      "binding": "var(--font-heading)"
+    },
+    {
+      "sourceName": "--hover-tint",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--hover-tint",
+      "binding": "var(--hover-tint)"
+    },
+    {
+      "sourceName": "--max-width",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--max-width",
+      "binding": "var(--max-width)"
+    },
+    {
+      "sourceName": "--neutral-100",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--neutral-100",
+      "binding": "var(--neutral-100)"
+    },
+    {
+      "sourceName": "--neutral-300",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--neutral-300",
+      "binding": "var(--neutral-300)"
+    },
+    {
+      "sourceName": "--neutral-50",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--neutral-50",
+      "binding": "var(--neutral-50)"
+    },
+    {
+      "sourceName": "--neutral-600",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--neutral-600",
+      "binding": "var(--neutral-600)"
+    },
+    {
+      "sourceName": "--neutral-700",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--neutral-700",
+      "binding": "var(--neutral-700)"
+    },
+    {
+      "sourceName": "--neutral-800",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--neutral-800",
+      "binding": "var(--neutral-800)"
+    },
+    {
+      "sourceName": "--radius-medium",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--radius-medium",
+      "binding": "var(--radius-medium)"
+    },
+    {
+      "sourceName": "--radius-small",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--radius-small",
+      "binding": "var(--radius-small)"
+    },
+    {
+      "sourceName": "--row-spacing",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--row-spacing",
+      "binding": "var(--row-spacing)"
+    }
+  ]
+}

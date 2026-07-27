@@ -1,0 +1,94 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Install FOOTER</title>
+<style>body{font:14px system-ui;margin:2rem;max-width:760px}button{font-size:1.05rem;padding:.8rem 1.4rem;background:#1463ff;color:#fff;border:0;border-radius:.4rem;cursor:pointer}.ok{color:#0a7d28;font-weight:600;margin-left:1rem}textarea{width:100%;height:280px;font:12px monospace;margin-top:1rem}</style>
+</head><body>
+<h2>Copy FOOTER code (textarea holder)</h2>
+<p><button id="b">Copy FOOTER</button><span id="s"></span></p>
+<textarea id="d" readonly>&lt;script&gt;
+(() =&gt; {
+// ───── Reveal observer
+    const io = new IntersectionObserver((entries) =&gt; {
+      entries.forEach(e =&gt; { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal').forEach(el =&gt; io.observe(el));
+
+    // hero blueprint draws on its own observer for reliability
+    const heroObs = new IntersectionObserver((entries) =&gt; {
+      entries.forEach(e =&gt; { if (e.isIntersecting) e.target.classList.add('in'); });
+    }, { threshold: 0.25 });
+    const csec = document.getElementById('csec');
+    if (csec) heroObs.observe(csec);
+
+    // smooth scroll for in-page links
+    document.querySelectorAll('a[href^="#"]').forEach(a =&gt; {
+      a.addEventListener('click', e =&gt; {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 100, behavior: 'smooth' }); }
+      });
+    });
+
+    // ───── Scroll progress bar
+    const progressBar = document.getElementById('progressBar');
+    function tickProgress() {
+      const h = document.documentElement;
+      const max = h.scrollHeight - h.clientHeight;
+      const pct = max &gt; 0 ? (h.scrollTop / max) * 100 : 0;
+      progressBar.style.width = pct + '%';
+    }
+    window.addEventListener('scroll', tickProgress, { passive: true });
+    tickProgress();
+
+    // hamburger nav
+    const navBtn = document.querySelector('button.nav-toggle') || document.querySelector('.nav-toggle');
+    const navMenu = document.querySelector('nav.top .links');
+    if (navBtn &amp;&amp; navMenu) {
+      navBtn.addEventListener('click', () =&gt; {
+        navMenu.classList.toggle('open');
+        navBtn.textContent = navMenu.classList.contains('open') ? '✕' : '☰';
+      });
+      document.addEventListener('click', (e) =&gt; {
+        if (!e.target.closest('nav.top')) {
+          navMenu.classList.remove('open');
+          navBtn.textContent = '☰';
+        }
+      });
+    }
+
+    // ───── Subtle parallax on hero blueprint
+    const cs = document.querySelector('.cross-section svg');
+    if (cs) {
+      window.addEventListener('scroll', () =&gt; {
+        const y = window.scrollY;
+        if (y &lt; 800) cs.style.transform = 'translateY(' + (y * 0.06) + 'px)';
+      }, { passive: true });
+    }
+
+    // ───── Sticky CTA show/hide
+    const stickyCta = document.getElementById('stickyCta');
+    if (stickyCta) {
+      window.addEventListener('scroll', () =&gt; {
+        if (window.scrollY &gt; 600) stickyCta.classList.add('visible');
+        else stickyCta.classList.remove('visible');
+      }, { passive: true });
+    }
+
+    // proportional scale-up above 1920
+    function applyDesktopZoom() {
+      const w = window.innerWidth;
+      document.documentElement.style.zoom = w &gt; 1920 ? (w / 1920) : '';
+    }
+    applyDesktopZoom();
+    window.addEventListener('resize', applyDesktopZoom);
+})();
+&lt;/script&gt;</textarea>
+<script>
+const t=document.getElementById('d').value;
+document.getElementById('b').addEventListener('click',()=>{
+  const h=ev=>{ev.preventDefault();ev.clipboardData.setData('text/plain',t);};
+  document.addEventListener('copy',h);
+  const ok=document.execCommand('copy');
+  document.removeEventListener('copy',h);
+  const s=document.getElementById('s');
+  s.textContent= ok ? '✓ Copied '+t.length+' chars' : 'Copy failed';
+  s.className= ok ? 'ok':'';
+});
+</script></body></html>

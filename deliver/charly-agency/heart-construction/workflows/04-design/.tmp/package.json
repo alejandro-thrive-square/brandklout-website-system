@@ -1,0 +1,10 @@
+{
+  "private": true,
+  "type": "commonjs",
+  "scripts": {
+    "test:playwright": "node playwright-smoke.js"
+  },
+  "devDependencies": {
+    "playwright": "^1.61.0"
+  }
+}

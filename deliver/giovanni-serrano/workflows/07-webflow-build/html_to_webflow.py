@@ -109,6 +109,30 @@ def new_id() -> str:
     return str(uuid.uuid4())
 
 
+def normalize_href(href: str) -> str:
+    """Rewrite static-export page links to Webflow's root-relative format.
+
+    Designs are authored as a folder of `.html` files (`sell.html`,
+    `index.html#about`), but a Webflow site serves slugs at the root
+    (`/sell`, `/#about`, `/` for the homepage). A pasted `<a>` keeps its raw
+    href, so without this the published nav points at non-existent
+    `…/sell.html` URLs. Anchors, protocols (tel:/mailto:/http(s)), protocol-
+    relative, and already-rooted hrefs are left untouched.
+    """
+    if not href:
+        return href
+    h = href.strip()
+    if h.startswith(("#", "/", "tel:", "mailto:", "http://", "https://", "//")):
+        return href
+    m = re.match(r"^([^?#]*?)\.html(\?[^#]*)?(#.*)?$", h)
+    if not m:
+        return href
+    base = m.group(1).rsplit("/", 1)[-1]      # filename without dir
+    query, frag = m.group(2) or "", m.group(3) or ""
+    path = "/" if base in ("", "index") else "/" + base
+    return path + query + frag
+
+
 # Attributes handled elsewhere (class/style/id/links/images) — not copied to xattr.
 _ATTR_SKIP = {"class", "style", "id", "href", "src", "srcset", "sizes",
               "width", "height", "alt", "loading"}
@@ -664,8 +688,20 @@ class WebflowBuilder:
                  variable_css_names: Optional[dict] = None,
                  shared_utility_names: Optional[set] = None,
                  contested_combo_names: Optional[set] = None,
-                 hook_class_names: Optional[set] = None):
+                 hook_class_names: Optional[set] = None,
+                 page_prefix: str = "", vocab: Optional[dict] = None):
         self.resolver = resolver
+        # Shared-class-system mode (see _style_id / _emit_style):
+        # - page_prefix: namespaces tag-derived AUTO-NAMES (`div`, `p`, ...) so a
+        #   page-specific residual class can never collide with another page's
+        #   same-named residual (no Webflow `-2` fork). Source class names are
+        #   left untouched so they stay shareable across pages.
+        # - vocab: {name: {comb, styleLess, variants}} canonical definitions for
+        #   shared SOURCE classes. Emitting the canonical (identical on every
+        #   page) lets Webflow merge by name with no duplicate. Applied only in
+        #   the concrete pass so the preserve_vars binding pass keeps var().
+        self.page_prefix = page_prefix
+        self.vocab = vocab or {}
         self.var_map = var_map or {}
         self.asset_base = asset_base.rstrip("/")
         self.preserve_vars = preserve_vars
@@ -742,6 +778,15 @@ class WebflowBuilder:
                          for k, d in variants.items()},
             "children": [], "origin": None, "selector": None,
         }
+        # Shared vocabulary: replace this page's resolved declarations with the
+        # canonical (cross-page-identical) ones so Webflow merges by name instead
+        # of forking. Concrete pass only — the preserve_vars binding pass must
+        # keep var() so font/color variable bindings are still emitted.
+        if not self.preserve_vars:
+            canon = self.vocab.get(name)
+            if canon is not None and comb == canon.get("comb", ""):
+                style["styleLess"] = canon["styleLess"]
+                style["variants"] = canon.get("variants", {})
         self.styles.append(style)
         self._style_by_id[sid] = style
         return sid
@@ -751,8 +796,16 @@ class WebflowBuilder:
         if parent is not None and combo_id not in parent["children"]:
             parent["children"].append(combo_id)
 
-    def _style_id(self, display: str, base: dict, variants: dict) -> str:
-        """De-duplicate identical computed styles; uniquify display names."""
+    def _style_id(self, display: str, base: dict, variants: dict,
+                  auto: bool = False) -> str:
+        """De-duplicate identical computed styles; uniquify display names.
+
+        `auto` marks a tag-derived auto-name (e.g. the `div`/`p` residual content
+        class), as opposed to a source class name. In shared-class-system mode
+        these get a page prefix so a page-specific residual never collides with
+        another page's same-named residual."""
+        if auto and self.page_prefix:
+            display = f"{self.page_prefix}-{display}"
         if display in self.hook_class_names:
             # content classes must not squat a hook token's name (see
             # hook_class_names in __init__)
@@ -861,7 +914,8 @@ class WebflowBuilder:
             if include_page_base:
                 content_base, content_variants = self._with_page_base(
                     content_base, content_variants)
-            content_id = self._style_id(tag.name, content_base, content_variants)
+            content_id = self._style_id(tag.name, content_base, content_variants,
+                                        auto=True)
             out = [content_id]
             parent_id = content_id
             for i, name in enumerate(names):
@@ -888,7 +942,8 @@ class WebflowBuilder:
             base, variants = self._with_page_base(base, variants)
         if not base and not variants and not names:
             return []
-        return [self._style_id(names[0] if names else tag.name, base, variants)]
+        return [self._style_id(names[0] if names else tag.name, base, variants,
+                               auto=not names)]
 
     def _split_single_utility(self, tag: Tag, include_page_base: bool) -> list[str]:
         """Emit a shared-utility single-class element as [content, utility].
@@ -923,7 +978,8 @@ class WebflowBuilder:
             # EXACT name (it may be a JS/state-CSS hook token _style_id
             # would deliberately rename)
             return [self._native_class_id(name, util_base, util_variants)]
-        content_id = self._style_id(tag.name, content_base, content_variants)
+        content_id = self._style_id(tag.name, content_base, content_variants,
+                                    auto=True)
         util_id = self._native_class_id(name, util_base, util_variants, content_id)
         return [content_id, util_id]
 
@@ -1181,7 +1237,8 @@ class WebflowBuilder:
             data["tag"] = name
         elif wtype == "Link":
             data = {"button": False, "block": "",
-                    "link": {"mode": "external", "url": tag.get("href", "#")},
+                    "link": {"mode": "external",
+                             "url": normalize_href(tag.get("href", "#"))},
                     "eventIds": [], **self._common_data()}
         elif wtype == "Image":
             # build common data FIRST, then set attr — otherwise the common
@@ -1291,7 +1348,8 @@ def load_variable_css_map(path: Optional[str]) -> dict:
 
 def _setup(html: str, css: str, resolve: bool, asset_base: str,
            preserve_vars: bool = False, variable_css_names: Optional[dict] = None,
-           extra_shared_utility_names: Optional[set] = None):
+           extra_shared_utility_names: Optional[set] = None,
+           page_prefix: str = "", vocab: Optional[dict] = None):
     """Shared parse + resolver + builder setup. Returns (soup, builder).
 
     `extra_shared_utility_names` forces additional class names through the
@@ -1395,7 +1453,8 @@ def _setup(html: str, css: str, resolve: bool, asset_base: str,
     return soup, WebflowBuilder(resolver, var_map, asset_base, preserve_vars,
                                 page_base, page_variants, variable_css_names,
                                 shared_utility_names, contested_combo_names,
-                                hook_class_names)
+                                hook_class_names, page_prefix=page_prefix,
+                                vocab=vocab)
 
 
 def _warn_unsupported(builder):
@@ -1622,17 +1681,30 @@ def extract_runtime_state_css(html: str, css: str = "") -> str:
         if "fonts.googleapis" in href:
             parts.append(f'@import url("{href}");')
     body_overflow = {}
+    body_base = {}
     resolver = CascadeResolver(soup, rules)
     if soup.body:
         bb, _bv = resolver.computed(soup.body)
         body_overflow = {k: v for k, v in bb.items() if k.startswith("overflow")}
-    if body_overflow:
+        # Base visual declarations for the Webflow Body element. Pasted
+        # components never carry the source <body>'s own styles, so without this
+        # the published <body> keeps Webflow defaults (white bg, #333, Arial);
+        # any uncovered area or text that inherits from body then diverges from
+        # the design (verified 2026-06-18 on Giovanni Serrano home: cream/navy/
+        # Inter all missing on staging). These are sticky-safe (only overflow
+        # disables sticky), so they ride the same body-only rule below.
+        _BASE_PROPS = ("background", "background-color", "color", "font-family",
+                       "font-weight", "font-size", "line-height",
+                       "-webkit-font-smoothing")
+        body_base = {k: v for k, v in bb.items() if k in _BASE_PROPS}
+    body_decls = {**body_base, **body_overflow}
+    if body_decls:
         # body ONLY — never html. With html left `visible`, body's overflow-x
         # propagates to the viewport and body itself stays a non-clipping box.
         # `html,body{overflow-x:hidden}` makes body its own clip container,
         # which disables position:sticky for the entire page (the thesis pull
         # quote regression, round two).
-        parts.append("body{" + _resolve(list(body_overflow.items())) + "}")
+        parts.append("body{" + _resolve(list(body_decls.items())) + "}")
     parts.extend(grouped.pop(None, []))
     for bp, lst in grouped.items():
         mq = _RUNTIME_BP_MEDIA.get(bp)
@@ -1919,7 +1991,8 @@ def convert(html: str, css: str = "", root_selector: Optional[str] = None,
 def convert_sections(html: str, css: str = "", resolve: bool = True,
                      asset_base: str = "", preserve_vars: bool = False,
                      variable_css_names: Optional[dict] = None,
-                     extra_shared_utility_names: Optional[set] = None):
+                     extra_shared_utility_names: Optional[set] = None,
+                     page_prefix: str = "", vocab: Optional[dict] = None):
     """Build the whole page in ONE pass, then return one payload per top-level
     section as a list of (label, payload). Class names are globally consistent
     across sections, so pasting them one-by-one (each small enough not to crash
@@ -1927,7 +2000,8 @@ def convert_sections(html: str, css: str = "", resolve: bool = True,
 
     `label` is derived from each root's id / first class / tag name."""
     soup, builder = _setup(html, css, resolve, asset_base, preserve_vars,
-                           variable_css_names, extra_shared_utility_names)
+                           variable_css_names, extra_shared_utility_names,
+                           page_prefix=page_prefix, vocab=vocab)
     sliced = builder.build_sliced(_body_roots(soup))
     _warn_unsupported(builder)
     out = []
@@ -2040,8 +2114,20 @@ def apply_namespace_avoidance(sections, reserved: dict, protected: set,
         # the embed are left alone — they are not Webflow classes.
         for _label, payload in sections:
             for node in payload["payload"]["nodes"]:
+                if node.get("type") != "HtmlEmbed":
+                    continue
+                # The embed HTML is duplicated in node["v"] AND the canonical
+                # Webflow field node["data"]["embed"]["meta"]["html"] (both set
+                # from the same raw string at creation). Webflow's clipboard
+                # PASTES from meta.html, so rewriting only "v" leaves the pasted
+                # embed with the OLD class names (the invest contact-form stayed
+                # unstyled until 2026-06-19). Rewrite BOTH.
+                meta = (node.get("data", {}) or {}).get("embed", {}) \
+                    .get("meta", {}) if isinstance(node.get("data"), dict) else {}
                 v = node.get("v")
-                if node.get("type") != "HtmlEmbed" or not isinstance(v, str):
+                if not isinstance(v, str):
+                    v = meta.get("html") if isinstance(meta, dict) else None
+                if not isinstance(v, str):
                     continue
                 internal = set()
                 for m in re.finditer(r'class="([^"]*)"', v):
@@ -2053,7 +2139,10 @@ def apply_namespace_avoidance(sections, reserved: dict, protected: set,
                     new_v = re.sub(rf"\.{re.escape(old)}(?![\w-])",
                                    f".{new}", new_v)
                 if new_v != v:
-                    node["v"] = new_v
+                    if isinstance(node.get("v"), str):
+                        node["v"] = new_v
+                    if isinstance(meta, dict) and isinstance(meta.get("html"), str):
+                        meta["html"] = new_v
         print(f"[html_to_webflow] renamed {len(rename)} classes colliding with "
               f"already-built pages: "
               + ", ".join(f"{o}->{n}" for o, n in sorted(rename.items())),
@@ -2211,9 +2300,19 @@ def main(argv=None):
             print(f"{label:20}{len(payload['payload']['nodes']):6}  {fp}")
         print(f"\nPaste the {len(sections)} pages in order into ONE Webflow page "
               f"(each after the previous).")
-        artifact_dir = os.path.dirname(args.split) or "."
+        # All companion artifacts go into the page's OWN split folder, so each
+        # `.tmp/<page>/` is fully self-contained (components + JS + state CSS +
+        # variable artifacts + a copy of the source CSS). Nothing is written to
+        # the shared parent `.tmp/` anymore — that previously forced manual
+        # `index-artifacts/` backups before every new page.
+        artifact_dir = args.split
         write_text_artifacts(html, artifact_dir, state_renames)
         write_variable_artifacts(collect_css(html, css), artifact_dir)
+        if args.css:
+            import shutil
+            site_css_copy = os.path.join(artifact_dir, "site.css")
+            shutil.copy(args.css, site_css_copy)
+            print(f"copied source CSS -> {site_css_copy}")
         binding_sections = sections
         if not args.preserve_vars:
             binding_sections = convert_sections(

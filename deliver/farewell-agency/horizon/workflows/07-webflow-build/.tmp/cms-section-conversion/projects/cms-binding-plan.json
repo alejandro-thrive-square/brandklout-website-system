@@ -1,0 +1,43 @@
+{
+  "sectionSelector": ".section_projects",
+  "repeatedItemSelector": ".projects_row",
+  "collection": "Projects",
+  "cmsListPlacement": "Replace static repeated items with one CMS Collection List using the first item as the template.",
+  "preserveAttributes": [
+    "data-* animation hooks",
+    "existing classes",
+    "existing link block structure"
+  ],
+  "bindings": [
+    {
+      "selector": ".projects_row",
+      "property": "link",
+      "field": "url"
+    },
+    {
+      "selector": ".projects_thumb",
+      "property": "image",
+      "field": "image"
+    },
+    {
+      "selector": ".projects_thumb",
+      "property": "alt",
+      "field": "image_alt"
+    },
+    {
+      "selector": ".projects_title",
+      "property": "text",
+      "field": "name"
+    },
+    {
+      "selector": ".projects_index",
+      "property": "text",
+      "field": "index"
+    },
+    {
+      "selector": ".projects_meta",
+      "property": "text",
+      "field": "meta"
+    }
+  ]
+}

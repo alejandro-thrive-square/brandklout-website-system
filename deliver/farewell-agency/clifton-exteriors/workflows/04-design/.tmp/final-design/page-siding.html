@@ -1,0 +1,2356 @@
+﻿<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clifton Exteriors - Siding page (rebuild)</title>
+<!-- Preview scaffold: body font/background only. Converter ignores <link>. -->
+<link rel="stylesheet" href="_preview-base.css">
+
+<!-- ==============================================================
+     STATIC PAGE CSS â€” BAKE SOURCE. Shared classes are byte-identical
+     to page-windows.html so every def merges on paste (Webflow merges
+     styles by name; identical defs reuse instead of forking -2).
+     Siding-only additions live at the END of this block, clearly
+     marked. Content is 1:1 from cliftonexteriors.com/siding; design
+     follows the staging homepage system (staging-analysis.md).
+     Section roots: section_win-* (shared system; component naming
+     cleanup is a separate later task). Reviews are NOT in this file â€”
+     the reviews section is inserted post-paste as a component/payload
+     between FAQ and Contact (see body marker comment).
+     COMPONENT-REUSE PLAN: financing, upgrades, curb (feature 2),
+     portfolio, confidence, process, and contact below are pasted as
+     placeholders and then REPLACED in the Designer with the existing
+     "Section / Windows *" components via MCP (props re-set per page).
+     See 07-webflow-build/.tmp/page-siding/component-replacements.json.
+     ============================================================== -->
+<style>
+:root {
+  --_primitives---neutral-colors--brand-colors--blue: #243864;
+  --_primitives---neutral-colors--brand-colors--red: #b02034;
+  --_primitives---neutral-colors--brand-colors--warm: #eae1d5;
+  --_primitives---neutral-colors--neutral-dark: #121c32;
+  --_primitives---neutral-colors--neutral-darkest: #060911;
+  --_primitives---neutral-colors--neutral-light: #f6f4ef;
+  --_primitives---neutral-colors--neutral-lightest: #faf9f7;
+  --_primitives---neutral-colors--neutral: #d6d6d6;
+}
+
+/* single page root â€” the WHOLE page pastes as ONE payload (multi-root
+   merges crash the Designer; single root is the proven safe path) */
+.page_siding { width: 100%; }
+
+/* ============================== HERO ============================== */
+.section_win-hero {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 8rem 5% 6rem;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  border-radius: 1rem;
+}
+.win-hero__bg { position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
+.win-hero__bg-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+.win-hero__scrim {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: linear-gradient(180deg, #121c32b3, #121c3266 45%, var(--_primitives---neutral-colors--neutral-darkest));
+}
+.win-hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+  background-color: #dadada33;
+  border-radius: 24px;
+  padding: 6px 14px 6px 10px;
+  font-size: 0.95rem;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__badge-star {
+  display: flex;
+  align-items: center;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__h1 {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.9;
+}
+.win-hero__h2 {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.win-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.win-hero__badge-chip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
+}
+.win-hero__badge-img { height: 2.75rem; width: auto; display: block; }
+
+/* =========================== FINANCING ============================ */
+.section_win-financing {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 5rem 5%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--warm);
+  border-radius: 1rem;
+}
+.win-fin__grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: center;
+}
+.win-fin__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.win-fin__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-fin__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-fin__visual {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.win-fin__img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; display: block; }
+
+/* ====================== INVITING ATMOSPHERE ======================= */
+.section_win-invite {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+}
+.win-invite__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.win-invite__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.win-invite__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-invite__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-invite__p {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.85;
+}
+.win-invite__visual { border-radius: 1rem; overflow: hidden; }
+.win-invite__img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; display: block; }
+
+/* ============================ UPGRADES ============================ */
+.section_win-upgrades {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+}
+.win-upg__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-upg__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-upg__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-upg__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  gap: 1.5rem;
+  margin-top: 4rem;
+}
+.win-upg__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  border-radius: 1rem;
+  padding: 2rem;
+}
+.win-upg__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 100vw;
+  background-color: var(--_primitives---neutral-colors--brand-colors--blue);
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-upg__name {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 1.375rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+
+/* =========================== CURB APPEAL ========================== */
+.section_win-curb {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+}
+.win-curb__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: center;
+}
+.win-curb__visual { border-radius: 1rem; overflow: hidden; }
+.win-curb__img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; display: block; }
+.win-curb__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.win-curb__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-curb__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-curb__p {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.85;
+}
+
+/* ============================ PORTFOLIO =========================== */
+.section_win-portfolio {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+}
+.win-port__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-port__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-port__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-port__marquee {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  margin-top: 4rem;
+  margin-bottom: 3rem;
+}
+.win-port__row {
+  width: 100%;
+  overflow: hidden;
+}
+.win-port__track {
+  display: flex;
+  gap: 1.5rem;
+  width: max-content;
+}
+.win-port__item {
+  width: 24rem;
+  flex: none;
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.win-port__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  aspect-ratio: 4 / 3;
+  display: block;
+}
+.win-port__actions {
+  display: flex;
+  justify-content: center;
+}
+
+/* ========================== CONFIDENCE =========================== */
+.section_win-confidence {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  border-radius: 1rem;
+}
+.win-conf__bg { position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
+.win-conf__glow {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image:
+    radial-gradient(60% 80% at 20% 0%, #eae1d51f, transparent 60%),
+    radial-gradient(50% 70% at 85% 100%, #24386480, transparent 65%);
+}
+.win-conf__scrim {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: linear-gradient(180deg, #3d403c33, transparent 45%, var(--_primitives---neutral-colors--neutral-darkest));
+  opacity: 0.8;
+}
+.win-conf__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 3rem;
+}
+.win-conf__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-conf__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.8;
+}
+.win-conf__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-conf__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-conf__sub {
+  margin: 0;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.85;
+}
+.win-conf__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+}
+.win-conf__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  background-color: #faf9f70d;
+  border: 0.5px solid #faf9f733;
+  border-radius: 1rem;
+  padding: 2rem;
+}
+.win-conf__icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  border-radius: 100vw;
+  background-color: #faf9f71a;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-conf__name {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 1.375rem;
+  line-height: 1.2;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-conf__desc {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.8;
+}
+
+/* ============================= PRICING ============================ */
+.section_win-pricing {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+}
+.win-price__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-price__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-price__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-price__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-top: 4rem;
+}
+.win-price__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  border-radius: 1rem;
+  padding: 2.5rem 2rem;
+}
+.win-price__card.is--featured {
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  border-color: var(--_primitives---neutral-colors--neutral-dark);
+}
+.win-price__tier {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-price__tier.is--featured {
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.8;
+}
+.win-price__amount-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.win-price__starting {
+  font-size: 0.875rem;
+  line-height: 1;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.6;
+}
+.win-price__starting.is--featured {
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-price__amount {
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 2.75rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-price__amount.is--featured {
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-price__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.win-price__list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-price__list-item.is--featured {
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-price__check {
+  display: flex;
+  align-items: center;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-price__check.is--featured {
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-price__cta-wrap {
+  display: flex;
+  margin-top: auto;
+  width: 100%;
+}
+.win-price__note {
+  margin: 2rem auto 0;
+  max-width: 48rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.6;
+}
+
+/* ============================= PROCESS ============================ */
+.section_win-process {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 8rem 5%;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  border-radius: 1rem;
+}
+.win-proc__bg { position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
+.win-proc__glow {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image:
+    radial-gradient(60% 80% at 80% 0%, #eae1d51f, transparent 60%),
+    radial-gradient(50% 70% at 15% 100%, #24386480, transparent 65%);
+}
+.win-proc__scrim {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: linear-gradient(180deg, #3d403c33, transparent 45%, var(--_primitives---neutral-colors--neutral-darkest));
+  opacity: 0.8;
+}
+.win-proc__marquee {
+  position: absolute;
+  top: 50%;
+  left: 0;
+  right: 0;
+  transform: translateY(-50%);
+  overflow: hidden;
+  pointer-events: none;
+}
+.win-proc__mq-track {
+  display: flex;
+  white-space: nowrap;
+  width: max-content;
+}
+.win-proc__mq-text {
+  margin: 0;
+  padding-right: 4rem;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 10rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.05;
+}
+.win-proc__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-proc__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+  background-color: #dadada33;
+  border-radius: 24px;
+  padding: 6px 14px 6px 10px;
+  font-size: 0.95rem;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-proc__badge-star {
+  display: flex;
+  align-items: center;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-proc__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-proc__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-proc__sub {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.85;
+}
+.win-proc__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* =============================== FAQ ============================== */
+.section_win-faq {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+}
+.win-faq__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-faq__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-faq__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-faq__list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  max-width: 48rem;
+  margin: 3rem auto 0;
+}
+.win-faq__item {
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.win-faq__q {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  width: 100%;
+  padding: 1.5rem;
+  background-color: transparent;
+  border: 0;
+  cursor: pointer;
+  text-align: left;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 1.25rem;
+  line-height: 1.3;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-faq__q-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-shrink: 0;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 100vw;
+  border: 1px solid #06091133;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-faq__a { padding: 0 1.5rem 1.5rem; }
+.win-faq__a-p {
+  margin: 0 0 0.75rem;
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.85;
+}
+
+/* ============================= CONTACT ============================ */
+.section_win-contact {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+}
+.win-contact__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-contact__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-contact__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-contact__p {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.85;
+}
+.win-contact__form-slot {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  margin-top: 0.5rem;
+}
+
+/* ============================ SUNSHINE ============================ */
+.section_win-sunshine {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--warm);
+  border-radius: 1rem;
+}
+.win-sun__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-sun__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-sun__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-sun__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.win-sun__area {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.7;
+}
+
+/* cx-btn â€” bespoke clone of the build's button component (identical block in
+   section-reviews.html; keep both copies byte-identical so defs merge). */
+.cx-btn {
+  border-radius: 2rem;
+  background-color: var(--_primitives---neutral-colors--brand-colors--blue);
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  text-align: center;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  display: flex;
+  overflow: hidden;
+}
+.cx-btn__hide { height: 1.5rem; overflow: hidden; }
+.cx-btn__wrap { display: flex; flex-direction: column; }
+.cx-btn__tile {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+.cx-btn__arrow { justify-content: center; align-items: center; display: flex; }
+
+/* glass variant on the dark band */
+.cx-btn.is--glass {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background-color: #faf9f733;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+
+/* ========================== BREAKPOINTS =========================== */
+@media screen and (max-width: 991px) {
+  .win-hero__h2 { font-size: 3.25rem; }
+  .win-port__item { width: 20rem; }
+  .win-proc__h { font-size: 3.25rem; }
+  .win-sun__h { font-size: 3.25rem; }
+  .win-fin__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .win-invite__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .win-curb__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .win-upg__grid { grid-template-columns: 1fr 1fr; }
+  .win-conf__grid { grid-template-columns: 1fr; }
+  .win-price__grid { grid-template-columns: 1fr; }
+}
+@media screen and (max-width: 767px) {
+  .section_win-hero { padding-top: 6rem; padding-bottom: 5rem; }
+  .section_win-process { padding-top: 5rem; padding-bottom: 5rem; }
+  .section_win-financing { padding-top: 4rem; padding-bottom: 4rem; }
+  .section_win-sunshine { padding-top: 5rem; padding-bottom: 5rem; }
+  .win-hero__h2 { font-size: 2.75rem; }
+  .win-proc__h { font-size: 2.75rem; }
+  .win-sun__h { font-size: 2.75rem; }
+  .win-fin__h { font-size: 2.5rem; }
+  .win-invite__h { font-size: 2.5rem; }
+  .win-upg__h { font-size: 2.5rem; }
+  .win-curb__h { font-size: 2.5rem; }
+  .win-port__h { font-size: 2.5rem; }
+  .win-conf__h { font-size: 2.5rem; }
+  .win-price__h { font-size: 2.5rem; }
+  .win-faq__h { font-size: 2.5rem; }
+  .win-contact__h { font-size: 2.5rem; }
+  .win-port__item { width: 18rem; }
+  .win-port__track { gap: 1rem; }
+  .win-port__marquee { gap: 1rem; }
+  .win-proc__mq-text { font-size: 6rem; }
+}
+@media screen and (max-width: 479px) {
+  .win-hero__h2 { font-size: 2.25rem; }
+  .win-proc__h { font-size: 2.25rem; }
+  .win-sun__h { font-size: 2.25rem; }
+  .win-upg__grid { grid-template-columns: 1fr; }
+  .win-port__item { width: 15rem; }
+  .win-hero__buttons { flex-direction: column; width: 100%; }
+  .win-hero__buttons .cx-btn { width: 100%; }
+  .win-proc__buttons { flex-direction: column; width: 100%; }
+  .win-proc__buttons .cx-btn { width: 100%; }
+  .win-sun__buttons { flex-direction: column; width: 100%; }
+  .win-sun__buttons .cx-btn { width: 100%; }
+  .win-hero__badge-img { height: 2.25rem; }
+  .win-faq__q { font-size: 1.125rem; padding: 1.25rem; }
+  .win-faq__a { padding: 0 1.25rem 1.25rem; }
+  .cx-btn__hide { height: auto; }
+  .cx-btn__wrap { height: 20px; }
+  .cx-btn__tile.is--bottom { display: none; }
+  .cx-btn__arrow { display: none; }
+}
+
+/* ================= SIDING-ONLY ADDITIONS (new classes only; no
+   redefinition of any shared class above) ================= */
+/* hero support copy â€” the siding hero carries two extra body lines
+   (GAF/CertainTeed certification + hail-claim expertise) */
+.win-hero__sub {
+  margin: 0;
+  max-width: 40rem;
+  font-size: 1.125rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.85;
+}
+</style>
+
+<link rel="stylesheet" href="site-shell.css" data-cx-site-shell>
+<script src="site-shell.js" defer data-cx-site-shell></script>
+</head>
+<body>
+
+<!-- ================================================================
+     PAGE: /siding â€” rebuild of cliftonexteriors.com/siding/
+     Content 1:1 from the live page; design per the staging homepage
+     system + the windows-page section library. Nav + footer are
+     site-wide Webflow components â€” not part of this payload.
+     ONE-PASTE RULE: everything below sits inside the single
+     .page_siding root so the converter emits ONE pasteable payload.
+     POST-PASTE: replace the marked sections with the existing
+     "Section / Windows *" components via MCP (see
+     component-replacements.json), then insert the Reviews section
+     between FAQ and Contact.
+     ================================================================ -->
+<div class="page_siding">
+
+<!-- ============ SECTION 1: Hero (root: section_win-hero) ============
+     STAYS PASTED â€” the display H2 (accent em + word-split) is not a
+     component prop, and this hero carries two extra support lines. -->
+<section class="section_win-hero" data-win-hero>
+
+  <div class="win-hero__bg" aria-hidden="true">
+    <img class="win-hero__bg-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/DL_Resizer11.webp" alt="" loading="eager">
+    <div class="win-hero__scrim"></div>
+  </div>
+
+  <div class="win-hero__content">
+    <div class="win-hero__badge" data-win-reveal>
+      <span class="win-hero__badge-star" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+      </span>
+      <span>5/5 from over 75 reviews</span>
+    </div>
+
+    <div class="win-hero__eyebrow-wrap" data-win-reveal>
+      <h1 class="win-hero__h1">Most Trusted Siding Contractor In Clifton, VA &amp; Surrounding Areas</h1>
+    </div>
+
+    <div class="win-hero__heading">
+      <h2 class="win-hero__h2" data-win-split>Trust Our Expertise For All Your Siding Replacement And <em class="win-hero__em">New Siding Installation</em> Needs</h2>
+    </div>
+
+    <div class="win-hero__sub-wrap" data-win-reveal>
+      <p class="win-hero__sub">We Are A Certified GAF Siding Installer And CertainTeed Shingle Master.</p>
+    </div>
+    <div class="win-hero__sub-wrap-2" data-win-reveal>
+      <p class="win-hero__sub">Got Hail Damage? Our siding contractors have you covered with over 20 years of siding hail claim expertise!</p>
+    </div>
+
+    <div class="win-hero__buttons" data-win-reveal>
+      <a href="/contact-us" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/our-process" class="cx-btn is--glass">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Our Process</div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Our Process</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="win-hero__badges" data-win-reveal>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/GAF-CERTIFIED-copy.webp" alt="GAF-Certified" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2023/01/5-star-legacy-google-review.png" alt="A five star review for Google business review" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/ProVia-logo-copy.webp" alt="ProVia logo" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/shinglemaster-copy.webp" alt="ShingleMaster logo" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/11/nextdoor_2024_web.webp" alt="2024 Neighborhood Favorites Nextdoor" loading="lazy"></div>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS (rides as HtmlEmbed) -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-hero .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-hero .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    /* awwwards touches â€” masked word reveal (spans are JS-created) + slow bg zoom */
+    .win-hero__w-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .2em; margin-bottom: -.2em; }
+    .win-hero__w { display: inline-block; transform: translateY(110%); }
+    .win-hero__w.win-in { transform: none; transition: transform .9s cubic-bezier(.22, 1, .36, 1); }
+    @media (prefers-reduced-motion: no-preference) {
+      .section_win-hero .win-hero__bg-img { animation: win-hero-zoom 9s cubic-bezier(.22, 1, .36, 1) forwards; }
+    }
+    @keyframes win-hero-zoom { from { transform: scale(1.12); } to { transform: none; } }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS (rides as HtmlEmbed) -->
+  <script data-embed>
+    /* section_win-hero â€” masked word reveal + staggered reveal (dependency-free) */
+    (function () {
+      function splitWords(el) {
+        Array.prototype.slice.call(el.childNodes).forEach(function (node) {
+          if (node.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            node.textContent.split(/(\s+)/).forEach(function (part) {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+              var m = document.createElement('span'); m.className = 'win-hero__w-mask';
+              var w = document.createElement('span'); w.className = 'win-hero__w';
+              w.textContent = part; m.appendChild(w); frag.appendChild(m);
+            });
+            el.replaceChild(frag, node);
+          } else if (node.nodeType === 1) { splitWords(node); }
+        });
+      }
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var splitEl = section.querySelector('[data-win-split]');
+        var words = [];
+        if (splitEl) { splitWords(splitEl); words = splitEl.querySelectorAll('.win-hero__w'); }
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          words.forEach(function (w, i) {
+            setTimeout(function () { w.classList.add('win-in'); }, 150 + i * 45);
+          });
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-hero]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ======= SECTION 2: Financing (root: section_win-financing) =======
+     REPLACE POST-PASTE with component "Section / Windows Financing"
+     (set Image 1 to this page's financing visual). -->
+<section class="section_win-financing" data-win-fin>
+
+  <div class="win-fin__grid">
+    <div class="win-fin__text">
+      <div class="win-fin__eyebrow-wrap" data-win-reveal>
+        <p class="win-fin__eyebrow">Financing Available</p>
+      </div>
+      <div class="win-fin__heading" data-win-reveal>
+        <h2 class="win-fin__h">We Offer Financing For Your Project</h2>
+      </div>
+      <div class="win-fin__cta" data-win-reveal>
+        <a href="/financing" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Learn More</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Learn More</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="win-fin__visual" data-win-reveal>
+      <img class="win-fin__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/sidingCliftonsections_resizer3.webp" alt="New siding on house with refinished siding" loading="lazy">
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-financing .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-financing .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-financing â€” staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-fin]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ==== SECTION 3: Protect Your Family (root: section_win-invite) ====
+     STAYS PASTED â€” the live copy has THREE paragraphs; the component
+     "Section / Windows Invite" only has two paragraph props. -->
+<section class="section_win-invite" data-win-invite>
+
+  <div class="win-invite__grid">
+    <div class="win-invite__text">
+      <div class="win-invite__eyebrow-wrap" data-win-reveal>
+        <p class="win-invite__eyebrow">Siding Replacement</p>
+      </div>
+      <div class="win-invite__heading" data-win-reveal>
+        <h2 class="win-invite__h">Protect Your Family With Siding Replacement</h2>
+      </div>
+      <div class="win-invite__copy" data-win-reveal>
+        <p class="win-invite__p">Siding damage can have devastating consequences if it is ignored. From water leakage to pest infestations, a damaged siding can quickly cause thousands of dollars of damage and create an unhealthy home.</p>
+      </div>
+      <div class="win-invite__copy-2" data-win-reveal>
+        <p class="win-invite__p">This is why it&rsquo;s best not to put off siding replacement. The longer you wait, the worse the problem can become. Take the initiative to protect your family and home from the harm that can come with a faulty siding.</p>
+      </div>
+      <div class="win-invite__copy-3" data-win-reveal>
+        <p class="win-invite__p">As a professional siding contractor in Clifton, VA, we&rsquo;re here to help!</p>
+      </div>
+      <div class="win-invite__cta" data-win-reveal>
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="win-invite__visual" data-win-reveal>
+      <img class="win-invite__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/bigstock-roof-of-new-house-with-shingle-431816399.jpg" alt="Siding of new house with shingles" loading="lazy">
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-invite .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-invite .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-invite â€” staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-invite]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ======== SECTION 4: Upcharges (root: section_win-upgrades) ========
+     REPLACE POST-PASTE with component "Section / Windows Upgrades"
+     (set eyebrow, heading, and the four card titles â€” the siding page
+     lists exactly four upcharges). -->
+<section class="section_win-upgrades" data-win-upg>
+
+  <div class="win-upg__header">
+    <div class="win-upg__eyebrow-wrap" data-win-reveal>
+      <p class="win-upg__eyebrow">Popular Upcharges</p>
+    </div>
+    <div class="win-upg__heading" data-win-reveal>
+      <h2 class="win-upg__h">Common Upcharges For Siding Replacement And Installation</h2>
+    </div>
+  </div>
+
+  <div class="win-upg__grid">
+    <div class="win-upg__card" data-win-reveal>
+      <div class="win-upg__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8.5 12.5l2.5 2.5 4.5-5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="win-upg__name">Custom Designer Shingles</h3>
+    </div>
+    <div class="win-upg__card" data-win-reveal>
+      <div class="win-upg__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8.5 12.5l2.5 2.5 4.5-5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="win-upg__name">Skylights</h3>
+    </div>
+    <div class="win-upg__card" data-win-reveal>
+      <div class="win-upg__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8.5 12.5l2.5 2.5 4.5-5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="win-upg__name">Rotted or FRT Plywood Replacement</h3>
+    </div>
+    <div class="win-upg__card" data-win-reveal>
+      <div class="win-upg__icon" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="12" r="9" stroke="currentColor" stroke-width="2"/><path d="M8.5 12.5l2.5 2.5 4.5-5.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h3 class="win-upg__name">Steep Slope</h3>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-upgrades â€” staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-upg]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ==== SECTION 5: Add Character (root: section_win-curb) ==========
+     REPLACE POST-PASTE with component "Section / Windows Curb Appeal"
+     (set eyebrow, heading, both paragraphs, and Image 1). -->
+<section class="section_win-curb" data-win-curb>
+
+  <div class="win-curb__grid">
+    <div class="win-curb__visual" data-win-reveal>
+      <img class="win-curb__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/sidingCliftonsections_resizer1.webp" alt="New siding on beautiful home" loading="lazy">
+    </div>
+    <div class="win-curb__text">
+      <div class="win-curb__eyebrow-wrap" data-win-reveal>
+        <p class="win-curb__eyebrow">Character</p>
+      </div>
+      <div class="win-curb__heading" data-win-reveal>
+        <h2 class="win-curb__h">Add Character To Your Clifton Home</h2>
+      </div>
+      <div class="win-curb__copy" data-win-reveal>
+        <p class="win-curb__p">A new siding can transform your home in a way that is both comforting and exciting. After all, the siding is often the part of the house that can define its character, from a welcoming cottage to an urban contemporary home.</p>
+      </div>
+      <div class="win-curb__copy-2" data-win-reveal>
+        <p class="win-curb__p">In addition to providing protection against the weather, a new siding will create an exterior that you are proud of. Whether you want to stay traditional or go modern, reflect your passions, or show off your creativity&ndash;it&rsquo;s all possible with a fresh new siding, courtesy of Clifton Exteriors, the trusted siding contractor in Clifton, Virginia!</p>
+      </div>
+      <div class="win-curb__cta" data-win-reveal>
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-curb .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-curb .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-curb â€” staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-curb]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ====== SECTION 6: Portfolio (root: section_win-portfolio) ========
+     REPLACE POST-PASTE with component "Section / Windows Portfolio"
+     (set heading + the 9 image slots; 6 unique siding photos, 3
+     repeats â€” the marquee loops so repeats read naturally). -->
+<section class="section_win-portfolio" data-win-port>
+
+  <div class="win-port__header">
+    <div class="win-port__eyebrow-wrap" data-win-reveal>
+      <p class="win-port__eyebrow">Our Work</p>
+    </div>
+    <div class="win-port__heading" data-win-reveal>
+      <h2 class="win-port__h">Our Siding Contractor&rsquo;s Replacement And Installation Portfolio</h2>
+    </div>
+  </div>
+
+  <div class="win-port__marquee" data-win-reveal>
+    <div class="win-port__row" data-port-row data-port-dir="1">
+      <div class="win-port__track" data-port-track>
+        <div class="win-port__item"><img class="win-port__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/IMG_0760.jpg" alt="Siding replacement project by Clifton Exteriors" loading="lazy"></div>
+        <div class="win-port__item"><img class="win-port__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/IMG_0945.jpg" alt="Siding replacement project by Clifton Exteriors" loading="lazy"></div>
+        <div class="win-port__item"><img class="win-port__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2023/04/123_1-1.jpeg" alt="Siding replacement project by Clifton Exteriors" loading="lazy"></div>
+        <div class="win-port__item"><img class="win-port__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/File_0001.jpg" alt="Siding replacement project by Clifton Exteriors" loading="lazy"></div>
+        <div class="win-port__item"><img class="win-port__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2023/03/close_up_siding.webp" alt="Siding replacement project by Clifton Exteriors" loading="lazy"></div>
+      </div>
+    </div>
+    <div class="win-port__row" data-port-row data-port-dir="-1">
+      <div class="win-port__track" data-port-track>
+        <div class="win-port__item"><img class="win-port__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/IMG_1033.jpg" alt="Siding replacement project by Clifton Exteriors" loading="lazy"></div>
+        <div class="win-port__item"><img class="win-port__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/IMG_0760.jpg" alt="Siding replacement project by Clifton Exteriors" loading="lazy"></div>
+        <div class="win-port__item"><img class="win-port__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2023/04/123_1-1.jpeg" alt="Siding replacement project by Clifton Exteriors" loading="lazy"></div>
+        <div class="win-port__item"><img class="win-port__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/IMG_0945.jpg" alt="Siding replacement project by Clifton Exteriors" loading="lazy"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="win-port__actions" data-win-reveal>
+    <a href="/portfolio" class="cx-btn">
+      <div class="cx-btn__hide">
+        <div class="cx-btn__wrap">
+          <div class="cx-btn__tile">
+            <div>View Our Full Portfolio</div>
+            <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+          </div>
+          <div class="cx-btn__tile is--bottom">
+            <div>View Our Full Portfolio</div>
+            <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-portfolio .win-port__img { transition: transform .5s cubic-bezier(.22, 1, .36, 1); }
+    .section_win-portfolio .win-port__item:hover .win-port__img { transform: scale(1.04); }
+    .section_win-portfolio .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-portfolio .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    /* draggable marquee (states applied by JS) */
+    .section_win-portfolio .win-port__row { cursor: grab; touch-action: pan-y; }
+    .section_win-portfolio .win-port__row.is--dragging { cursor: grabbing; }
+    .section_win-portfolio .win-port__row.is--dragging .win-port__img { pointer-events: none; }
+    .section_win-portfolio .win-port__row.is--static { overflow-x: auto; }
+    .section_win-portfolio .win-port__track { will-change: transform; }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-portfolio â€” draggable dual-direction marquee + reveal (dependency-free) */
+    (function () {
+      function initRow(row, isInView) {
+        var track = row.querySelector('[data-port-track]');
+        if (!track) return;
+        var dir = parseFloat(row.getAttribute('data-port-dir')) || 1;
+        var count = track.children.length;
+        track.innerHTML = track.innerHTML + track.innerHTML;
+        var first = track.children[0].getBoundingClientRect();
+        var loopStart = track.children[count].getBoundingClientRect();
+        var orig = loopStart.left - first.left;
+        if (orig <= 0) return;
+        var offset = 0, paused = false, dragging = false, startX = 0, startOffset = 0, last = null;
+        row.addEventListener('mouseenter', function () { paused = true; });
+        row.addEventListener('mouseleave', function () { paused = false; });
+        row.addEventListener('pointerdown', function (e) {
+          dragging = true; startX = e.clientX; startOffset = offset;
+          row.classList.add('is--dragging');
+        });
+        window.addEventListener('pointermove', function (e) {
+          if (!dragging) return;
+          offset = startOffset - (e.clientX - startX);
+        });
+        window.addEventListener('pointerup', function () {
+          if (!dragging) return;
+          dragging = false; row.classList.remove('is--dragging');
+        });
+        function tick(ts) {
+          if (last === null) last = ts;
+          var dt = Math.min(ts - last, 80) / 1000;
+          last = ts;
+          if (isInView() && !paused && !dragging) offset += dir * 28 * dt;
+          var x = ((offset % orig) + orig) % orig;
+          track.style.transform = 'translate3d(' + (-x) + 'px, 0, 0)';
+          window.requestAnimationFrame(tick);
+        }
+        window.requestAnimationFrame(tick);
+      }
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        var rows = section.querySelectorAll('[data-port-row]');
+        if (!('IntersectionObserver' in window) ||
+            window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+          rows.forEach(function (row) { row.classList.add('is--static'); });
+          return;
+        }
+        var inView = false;
+        var vio = new IntersectionObserver(function (entries) {
+          inView = entries[0].isIntersecting;
+        }, { threshold: 0 });
+        vio.observe(section);
+        rows.forEach(function (row) { initRow(row, function () { return inView; }); });
+
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 90);
+          });
+        }, { threshold: .1 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-port]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ===== SECTION 7: Confidence (root: section_win-confidence) =======
+     REPLACE POST-PASTE with component "Section / Windows Confidence"
+     (set Card 01 Title to "10 Year Craftsmanship Warranty"; all other
+     prop defaults already match). -->
+<section class="section_win-confidence" data-win-conf>
+
+  <div class="win-conf__bg" aria-hidden="true">
+    <div class="win-conf__glow"></div>
+    <div class="win-conf__scrim"></div>
+  </div>
+
+  <div class="win-conf__content">
+    <div class="win-conf__header">
+      <div class="win-conf__eyebrow-wrap" data-win-reveal>
+        <p class="win-conf__eyebrow">Why Clifton Exteriors</p>
+      </div>
+      <div class="win-conf__heading" data-win-reveal>
+        <h2 class="win-conf__h">Feel <em class="win-conf__em">Confident</em> Working With Us</h2>
+      </div>
+      <div class="win-conf__sub-wrap" data-win-reveal>
+        <p class="win-conf__sub">We know that you&rsquo;ve got options when it comes to enhancing your home. Thank you for considering Clifton Exteriors.</p>
+      </div>
+    </div>
+
+    <div class="win-conf__grid">
+      <div class="win-conf__card" data-win-reveal>
+        <div class="win-conf__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2l8 3.5V11c0 5-3.4 8.6-8 10-4.6-1.4-8-5-8-10V5.5L12 2z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M8.5 11.5l2.5 2.5 4.5-5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="win-conf__name">10 Year Craftsmanship Warranty</h3>
+        <p class="win-conf__desc">Rest assured, knowing that we got your back.</p>
+      </div>
+      <div class="win-conf__card" data-win-reveal>
+        <div class="win-conf__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="9" r="6" stroke="currentColor" stroke-width="2"/><path d="M8.8 14.2L7.5 21.5l4.5-2.7 4.5 2.7-1.3-7.3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="win-conf__name">25+ Years Of Experience</h3>
+        <p class="win-conf__desc">We are the experts when it comes to exterior enhancements.</p>
+      </div>
+      <div class="win-conf__card" data-win-reveal>
+        <div class="win-conf__icon" aria-hidden="true">
+          <svg viewBox="0 0 24 24" width="20" height="20" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M7 4h10v5a5 5 0 01-10 0V4z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/><path d="M7 6H4.5a1.5 1.5 0 000 3H7M17 6h2.5a1.5 1.5 0 010 3H17M12 14v4M8.5 21h7M12 18h.01" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </div>
+        <h3 class="win-conf__name">Award-Winning</h3>
+        <p class="win-conf__desc">Clifton Exteriors has been recognized as Nextdoor&rsquo;s Neighborhood Favorite, Simonton Windows Preferred Installer, and James Hardie&rsquo;s Preferred Remodeler, in addition to many other honors.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-confidence â€” staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-conf]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ======== SECTION 8: Pricing (root: section_win-pricing) ==========
+     STAYS PASTED â€” the siding tiers carry THREE feature bullets each
+     ("Ideal forâ€¦" + "Includesâ€¦" + "Complete inâ€¦"); the component
+     "Section / Windows Pricing" only has two feature props per tier. -->
+<section class="section_win-pricing" data-win-price>
+
+  <div class="win-price__header">
+    <div class="win-price__eyebrow-wrap" data-win-reveal>
+      <p class="win-price__eyebrow">Transparent Pricing</p>
+    </div>
+    <div class="win-price__heading" data-win-reveal>
+      <h2 class="win-price__h">Siding Replacement And New Siding Installation Pricing In Clifton, VA</h2>
+    </div>
+  </div>
+
+  <div class="win-price__grid">
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Standard</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$5-7.5K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for a small to medium size townhome.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes architectural lifetime, high-definition shingles, and all necessary siding accessories.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1 day.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card is--featured" data-win-reveal>
+      <p class="win-price__tier is--featured">Deluxe</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting is--featured">Starting At</span>
+        <div class="win-price__amount is--featured">$8-18K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for a small to medium size single-family home.</span>
+        </div>
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes architectural lifetime, high-definition shingles, and all necessary siding accessories.</span>
+        </div>
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1 day.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn is--glass">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Premium</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$20-50K+</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for large to mansion-size single-family homes.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes architectural lifetime, high-definition shingles, and all necessary siding accessories.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1-3 days.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <p class="win-price__note">*Prices are averages and may change depending on the size of your home, materials used, and upgrades wanted. You will receive an exact quote for your siding installation after an in-home consultation with a Clifton Exteriors siding contractor.</p>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-pricing .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-pricing .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    .section_win-pricing .win-price__cta-wrap .cx-btn { width: 100%; }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-pricing â€” staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-price]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ======== SECTION 9: Process (root: section_win-process) ==========
+     REPLACE POST-PASTE with component "Section / Windows Process"
+     (set only the Paragraph Text prop to the siding copy). -->
+<section class="section_win-process" data-win-proc>
+
+  <div class="win-proc__bg" aria-hidden="true">
+    <div class="win-proc__glow"></div>
+    <div class="win-proc__scrim"></div>
+  </div>
+
+  <div class="win-proc__marquee" aria-hidden="true">
+    <div class="win-proc__mq-track">
+      <p class="win-proc__mq-text">A Hassle Free Process &mdash; Get A Quote &mdash; A Hassle Free Process &mdash; Get A Quote &mdash;</p>
+      <p class="win-proc__mq-text">A Hassle Free Process &mdash; Get A Quote &mdash; A Hassle Free Process &mdash; Get A Quote &mdash;</p>
+    </div>
+  </div>
+
+  <div class="win-proc__content">
+    <div class="win-proc__badge" data-win-reveal>
+      <span class="win-proc__badge-star" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+      </span>
+      <span>5/5 from over 75 reviews</span>
+    </div>
+
+    <div class="win-proc__heading" data-win-reveal>
+      <h2 class="win-proc__h">A <em class="win-proc__em">Hassle Free</em> Process</h2>
+    </div>
+
+    <div class="win-proc__sub-wrap" data-win-reveal>
+      <p class="win-proc__sub">Our siding contractors have crafted a process that keeps your vision for your home at the forefront of everything we do. Let&rsquo;s upgrade your home together.</p>
+    </div>
+
+    <div class="win-proc__buttons" data-win-reveal>
+      <a href="/our-process" class="cx-btn is--glass">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Our Process</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Our Process</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-process .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-process .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    /* oversized type marquee backdrop (decorative; two identical halves -> -50% loop) */
+    @media (prefers-reduced-motion: no-preference) {
+      .section_win-process .win-proc__mq-track { animation: win-proc-mq 32s linear infinite; }
+    }
+    @keyframes win-proc-mq { to { transform: translate3d(-50%, 0, 0); } }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-process â€” staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .35 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-proc]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- =========== SECTION 10: FAQ (root: section_win-faq) ==============
+     STAYS PASTED â€” the component's Q&A items are static (windows
+     questions); the siding page has its own six questions. -->
+<section class="section_win-faq" data-win-faq>
+
+  <div class="win-faq__header">
+    <div class="win-faq__eyebrow-wrap" data-win-reveal>
+      <p class="win-faq__eyebrow">FAQ</p>
+    </div>
+    <div class="win-faq__heading" data-win-reveal>
+      <h2 class="win-faq__h">Frequently Asked Questions About Siding Installation &amp; Replacement</h2>
+    </div>
+  </div>
+
+  <div class="win-faq__list">
+    <div class="win-faq__item" data-win-reveal data-faq-item>
+      <div class="win-faq__q" data-faq-q role="button" tabindex="0" aria-expanded="true">
+        <span class="win-faq__q-text">How long does it take to replace a siding?</span>
+        <span class="win-faq__q-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </div>
+      <div class="win-faq__a" data-faq-a>
+        <p class="win-faq__a-p">Depending on the size of your home and the extent of your siding project, it can take a siding contractor anywhere from 1-3 days to install a new siding on a home in Clifton.</p>
+      </div>
+    </div>
+
+    <div class="win-faq__item" data-win-reveal data-faq-item>
+      <div class="win-faq__q" data-faq-q role="button" tabindex="0" aria-expanded="true">
+        <span class="win-faq__q-text">Why is a good siding important?</span>
+        <span class="win-faq__q-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </div>
+      <div class="win-faq__a" data-faq-a>
+        <p class="win-faq__a-p">A good siding is crucial primarily because it offers protection from various weather conditions. It serves as the first line of defense against rain, snow, hail, wind, and sunlight, ensuring the safety and comfort of the building&rsquo;s occupants. Besides, a well-maintained siding contributes to energy efficiency by providing proper insulation, which helps in regulating the indoor temperature, resulting in lower heating and cooling costs.</p>
+      </div>
+    </div>
+
+    <div class="win-faq__item" data-win-reveal data-faq-item>
+      <div class="win-faq__q" data-faq-q role="button" tabindex="0" aria-expanded="true">
+        <span class="win-faq__q-text">What is the most popular type of siding in Clifton?</span>
+        <span class="win-faq__q-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </div>
+      <div class="win-faq__a" data-faq-a>
+        <p class="win-faq__a-p">Around Clifton, VA, asphalt shingle roofs are the most popular type of siding due to their affordability, durability, and ease of installation. Asphalt shingles are available in a variety of styles and colors, which allows homeowners to customize their siding&rsquo;s appearance to complement their home&rsquo;s architecture.</p>
+      </div>
+    </div>
+
+    <div class="win-faq__item" data-win-reveal data-faq-item>
+      <div class="win-faq__q" data-faq-q role="button" tabindex="0" aria-expanded="true">
+        <span class="win-faq__q-text">If I have a leak in my siding, will I have to replace the whole thing?</span>
+        <span class="win-faq__q-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </div>
+      <div class="win-faq__a" data-faq-a>
+        <p class="win-faq__a-p">When it comes to leaks, most of the time a siding contractor can repair it without having to replace the entire siding. However, if the leak is covering a large portion of your home in Clifton, it may be smart to fully replace it.</p>
+      </div>
+    </div>
+
+    <div class="win-faq__item" data-win-reveal data-faq-item>
+      <div class="win-faq__q" data-faq-q role="button" tabindex="0" aria-expanded="true">
+        <span class="win-faq__q-text">What is the most important part of a siding?</span>
+        <span class="win-faq__q-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </div>
+      <div class="win-faq__a" data-faq-a>
+        <p class="win-faq__a-p">While all aspects of a siding are important, one important part of a siding is its underlayment or waterpsiding membrane, which provides a crucial protective barrier against water infiltration and damage. This component prevents leaks, mold growth, and structural damage by directing water away from the siding structure and into the gutters, thus ensuring the building&rsquo;s safety and durability.</p>
+      </div>
+    </div>
+
+    <div class="win-faq__item" data-win-reveal data-faq-item>
+      <div class="win-faq__q" data-faq-q role="button" tabindex="0" aria-expanded="true">
+        <span class="win-faq__q-text">What is the most popular siding color in Clifton?</span>
+        <span class="win-faq__q-icon" aria-hidden="true"><svg viewBox="0 0 24 24" width="14" height="14" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 5v14M5 12h14" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></span>
+      </div>
+      <div class="win-faq__a" data-faq-a>
+        <p class="win-faq__a-p">In Clifton, neutral and earth-toned colors tend to be popular. Shades of grey, black, and brown are common choices homeowners ask siding contractors for, as they complement a wide range of exterior home colors and blend well with the environment.</p>
+      </div>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    /* accordion states â€” applied only after JS init, so content is never
+       CSS-hidden without JS */
+    [data-win-faq][data-win-ready] [data-faq-a] { display: none; }
+    [data-win-faq][data-win-ready] [data-faq-item].is--open [data-faq-a] {
+      display: block;
+      animation: win-faq-open .35s ease;
+    }
+    [data-win-faq][data-win-ready] [data-faq-q] .win-faq__q-icon {
+      transition: transform .3s ease;
+    }
+    [data-win-faq][data-win-ready] [data-faq-item].is--open .win-faq__q-icon {
+      transform: rotate(45deg);
+    }
+    @keyframes win-faq-open {
+      from { opacity: 0; transform: translateY(-0.5rem); }
+      to { opacity: 1; transform: none; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      [data-win-faq][data-win-ready] [data-faq-item].is--open [data-faq-a] { animation: none; }
+      [data-win-faq][data-win-ready] [data-faq-q] .win-faq__q-icon { transition: none; }
+    }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS (accordion + reveal) -->
+  <script data-embed>
+    /* section_win-faq â€” accordion + staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+
+        /* accordion (first item open) */
+        var items = section.querySelectorAll('[data-faq-item]');
+        items.forEach(function (item, i) {
+          var q = item.querySelector('[data-faq-q]');
+          if (!q) return;
+          if (i === 0) { item.classList.add('is--open'); }
+          q.setAttribute('aria-expanded', i === 0 ? 'true' : 'false');
+          function toggle() {
+            var open = item.classList.toggle('is--open');
+            q.setAttribute('aria-expanded', open ? 'true' : 'false');
+          }
+          q.addEventListener('click', toggle);
+          q.addEventListener('keydown', function (e) {
+            if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
+          });
+        });
+
+        /* reveal */
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var reveals = section.querySelectorAll('[data-win-reveal]');
+        reveals.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          reveals.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 90);
+          });
+        }, { threshold: .1 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-faq]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ================================================================
+     SECTION 11: REVIEWS â€” NOT part of this payload.
+     Insert the site's reviews wall here (between FAQ and Contact),
+     preferably as a component instance via MCP; fallback: paste
+     07-webflow-build/.tmp/section-reviews/paste_01_section_reviews-v2.html
+     ================================================================ -->
+
+<!-- ======== SECTION 12: Contact (root: section_win-contact) =========
+     REPLACE POST-PASTE with component "Section / Windows Contact"
+     (all prop defaults already match â€” zero prop changes needed). -->
+<section class="section_win-contact" data-win-contact>
+
+  <div class="win-contact__content">
+    <div class="win-contact__eyebrow-wrap" data-win-reveal>
+      <p class="win-contact__eyebrow">Contact</p>
+    </div>
+    <div class="win-contact__heading" data-win-reveal>
+      <h2 class="win-contact__h">Tell Us About Your Project</h2>
+    </div>
+    <div class="win-contact__copy" data-win-reveal>
+      <p class="win-contact__p">Use our contact form below to get in contact with us so we can start planning out the enhancements for your home.</p>
+    </div>
+
+    <!-- DESIGNER NOTE: the converter cannot emit native Webflow Form
+         elements. After pasting, add the site's native quote form
+         component here (same form as /contact-us) and delete the
+         interim button below. -->
+    <div class="win-contact__form-slot" data-win-reveal>
+      <a href="/contact-us" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Get Your Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Get Your Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-contact .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-contact .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-contact â€” staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-contact]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ====== SECTION 13: Trusted Siding (root: section_win-sunshine) =====
+     STAYS PASTED â€” the closing heading is static in the component
+     ("Invite The Sunshineâ€¦") and differs per page. -->
+<section class="section_win-sunshine" data-win-sun>
+
+  <div class="win-sun__content">
+    <div class="win-sun__heading" data-win-reveal>
+      <h2 class="win-sun__h">Put A Siding You Can Trust <em class="win-sun__em">Over Your Family</em></h2>
+    </div>
+
+    <div class="win-sun__buttons" data-win-reveal>
+      <a href="/contact-us" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="win-sun__area-wrap" data-win-reveal>
+      <p class="win-sun__area">Proudly serving Fairfax County, Prince William County, Loudoun County, and Surrounding Areas.</p>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-sunshine .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-sunshine .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-sunshine â€” staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .35 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-sun]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+</div>
+<!-- ==================== end .page_siding root ==================== -->
+
+</body>
+</html>

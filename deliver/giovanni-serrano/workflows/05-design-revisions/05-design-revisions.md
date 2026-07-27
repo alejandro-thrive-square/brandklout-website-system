@@ -29,6 +29,9 @@ Own Giovanni's post-design correction loop and maintain the approved `final-desi
 
 ## Project-Specific Notes
 - `05-design-revisions/.tmp/final-changes/` is the sole authoritative location for Giovanni's final correction notes.
+- **Source of truth is `.tmp/final revisions/` (with a space), not `.tmp/final-design/`.** It carries the seven live pages — `index`, `invest`, `scale`, `develop`, `sell`, `projects`, `project-detail` — and is the input consumed by `07-webflow-build/build_vocab.py` and `html_to_webflow.py`. `.tmp/final-design/` is the older five-page package. Apply client punch lists to `final revisions/`.
+- **Revisions here invalidate the `07-webflow-build/.tmp/` paste artifacts.** Those `paste_*.html` files are generated copies of this CSS/markup; after any change, regenerate them with `html_to_webflow.py` before pasting into Webflow, or the Designer will receive the pre-revision design.
+- Chrome-height and tap-target QA can be reproduced headlessly with Playwright from `07-webflow-build/` (`node_modules` already includes it) by loading each page over `file://` at 320/360/390/477px.
 - The approved static Vercel preview in `.tmp/final-design/` is also the proposed published site package and includes a serverless Airtable portfolio integration:
   - `api/portfolio.js` reads portfolio records from Airtable using Vercel environment variables and never exposes the Airtable token to browser code.
   - `index.html` renders the portfolio section from `/api/portfolio` into `#portfolio-featured`, `#portfolio-featured-tags`, and `#portfolio-groups`.

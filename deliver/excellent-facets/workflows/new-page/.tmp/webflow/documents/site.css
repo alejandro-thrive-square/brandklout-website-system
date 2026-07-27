@@ -1,0 +1,696 @@
+@font-face {
+  font-family: "Kantumruy Pro";
+  src: url("https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b06d4bbd2001e10e0_KantumruyPro-Regular.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kantumruy Pro";
+  src: url("https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b88f8db319abf841e_KantumruyPro-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Kantumruy Pro";
+  src: url("https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b35c19c68b049d070_KantumruyPro-SemiBold.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Scotch Display";
+  src: url("https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9bf6cb86f50b2d3b57_ScotchDisplay-Roman.woff") format("woff");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Scotch Display";
+  src: url("https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b35c19c68b049d08b_ScotchDisplay-Medium.woff") format("woff");
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+:root {
+  --ef-green: #245c52;
+  --ef-green-deep: #173f38;
+  --ef-burgundy: #662136;
+  --ef-charcoal: #202020;
+  --ef-muted: #585254;
+  --ef-sand: #d1c7bd;
+  --ef-cream: #edede5;
+  --ef-white: #ffffff;
+  --ef-display: "Scotch Display", Georgia, serif;
+  --ef-body: "Kantumruy Pro", Arial, sans-serif;
+  --ef-page-pad: clamp(1rem, 0.4rem + 3vw, 3.5rem);
+  --ef-max: 90rem;
+  --ef-radius: 0rem;
+  --ef-radius-small: 0rem;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  background: var(--ef-cream);
+  color: var(--ef-charcoal);
+  scroll-behavior: smooth;
+}
+
+body {
+  min-width: 20rem;
+  margin: 0;
+  overflow-x: hidden;
+  background: var(--ef-cream);
+  color: var(--ef-charcoal);
+  font-family: var(--ef-body);
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+}
+
+button,
+a {
+  color: inherit;
+  font: inherit;
+}
+
+.ef-skip-link {
+  position: fixed;
+  top: 0.75rem;
+  left: 0.75rem;
+  z-index: 1000;
+  padding: 0.75rem 1rem;
+  border-radius: var(--ef-radius-small);
+  background: var(--ef-white);
+  color: var(--ef-charcoal);
+  transform: translateY(-160%);
+}
+
+.ef-docs-topbar {
+  width: 100%;
+  border-bottom: 1px solid rgba(32, 32, 32, 0.22);
+  background: var(--ef-cream);
+}
+
+.ef-topbar-inner {
+  display: flex;
+  width: min(100%, var(--ef-max));
+  min-height: 5.25rem;
+  margin: 0 auto;
+  padding: 1.4rem var(--ef-page-pad);
+  align-items: center;
+  justify-content: center;
+}
+
+.ef-wordmark {
+  width: min(27.75rem, 72vw);
+  color: var(--ef-charcoal);
+}
+
+.ef-wordmark svg {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.ef-docs-hero {
+  position: relative;
+  overflow: hidden;
+  background: var(--ef-green);
+  color: var(--ef-white);
+}
+
+.ef-hero-inner {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  width: min(100%, var(--ef-max));
+  min-height: 31rem;
+  margin: 0 auto;
+  padding: clamp(4.75rem, 8vw, 8rem) var(--ef-page-pad);
+  align-content: center;
+  justify-items: center;
+  text-align: center;
+}
+
+.ef-hero-kicker {
+  margin: 0 0 1.5rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  line-height: 1.3;
+  text-transform: uppercase;
+}
+
+.ef-hero-title {
+  max-width: 66rem;
+  margin: 0;
+  font-family: var(--ef-display);
+  font-size: clamp(2.6rem, 6.2vw, 6.35rem);
+  font-weight: 400;
+  letter-spacing: -0.025em;
+  line-height: 0.95;
+}
+
+.ef-title-fr {
+  display: block;
+  margin-top: 0.18em;
+  color: var(--ef-sand);
+}
+
+.ef-hero-intro {
+  max-width: 50rem;
+  margin: 2rem 0 0;
+  color: rgba(255, 255, 255, 0.86);
+  font-size: clamp(1rem, 1.4vw, 1.22rem);
+  line-height: 1.55;
+}
+
+.ef-intro-fr {
+  display: block;
+  margin-top: 0.3rem;
+}
+
+.ef-hero-mark {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: min(68vw, 45rem);
+  aspect-ratio: 1;
+  border: 1px solid rgba(255, 255, 255, 0.14);
+  transform: translate(-50%, -50%) rotate(45deg);
+}
+
+.ef-hero-mark-inner {
+  position: absolute;
+  inset: 13%;
+  border: 1px solid rgba(255, 255, 255, 0.11);
+}
+
+.ef-docs-library {
+  width: 100%;
+  background: var(--ef-cream);
+}
+
+.ef-library-inner {
+  width: min(100%, var(--ef-max));
+  margin: 0 auto;
+  padding: clamp(4.25rem, 8vw, 8rem) var(--ef-page-pad) clamp(5.5rem, 9vw, 9rem);
+}
+
+.ef-group {
+  margin-top: clamp(4.5rem, 8vw, 8rem);
+}
+
+.ef-group-first {
+  margin-top: 0;
+}
+
+.ef-group-heading {
+  display: grid;
+  grid-template-columns: 3.5rem minmax(0, 1fr);
+  margin-bottom: 2rem;
+  padding-bottom: 1.4rem;
+  align-items: start;
+  border-bottom: 1px solid rgba(32, 32, 32, 0.34);
+}
+
+.ef-group-number {
+  padding-top: 0.45rem;
+  color: var(--ef-green);
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.12em;
+}
+
+.ef-group-title {
+  margin: 0;
+  font-family: var(--ef-display);
+  font-size: clamp(2rem, 4vw, 4rem);
+  font-weight: 400;
+  letter-spacing: -0.02em;
+  line-height: 1;
+}
+
+.ef-group-title-fr {
+  display: block;
+  margin-top: 0.18em;
+  color: var(--ef-muted);
+  font-family: var(--ef-body);
+  font-size: 0.34em;
+  font-weight: 500;
+  letter-spacing: 0;
+  line-height: 1.25;
+}
+
+.ef-card-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+}
+
+.ef-card-grid-two {
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+
+.ef-document-card {
+  display: flex;
+  min-height: 16rem;
+  padding: clamp(1.25rem, 2.2vw, 2rem);
+  border: 1px solid var(--ef-sand);
+  border-radius: var(--ef-radius);
+  background: var(--ef-white);
+  flex-direction: column;
+}
+
+.ef-document-meta {
+  display: flex;
+  margin-bottom: 2.2rem;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--ef-muted);
+  font-size: 0.72rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+}
+
+.ef-document-type {
+  color: var(--ef-green);
+}
+
+.ef-document-title {
+  margin: 0;
+  font-family: var(--ef-display);
+  font-size: clamp(1.5rem, 2.1vw, 2.1rem);
+  font-weight: 400;
+  line-height: 1.06;
+}
+
+.ef-document-title-fr {
+  display: block;
+  margin-top: 0.45rem;
+  color: var(--ef-muted);
+  font-family: var(--ef-body);
+  font-size: 0.48em;
+  font-weight: 400;
+  line-height: 1.25;
+}
+
+.ef-language-note {
+  margin: 0.75rem 0 0;
+  color: var(--ef-muted);
+  font-size: 0.78rem;
+  line-height: 1.35;
+}
+
+.ef-downloads {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0.55rem;
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.ef-downloads-single {
+  grid-template-columns: minmax(0, 1fr);
+}
+
+.ef-download {
+  display: flex;
+  min-height: 3.35rem;
+  padding: 0.8rem 1rem;
+  border: 1px solid var(--ef-charcoal);
+  border-radius: var(--ef-radius-small);
+  align-items: center;
+  justify-content: space-between;
+  background: transparent;
+  color: var(--ef-charcoal);
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  line-height: 1;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.ef-download-label {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 0.35rem;
+}
+
+.ef-download-language {
+  color: var(--ef-muted);
+  font-size: 0.68rem;
+  font-weight: 500;
+}
+
+.ef-download-icon {
+  font-size: 1rem;
+  line-height: 1;
+}
+
+/* ----- Report download dropdown (progressive enhancement over <details>) -----
+   The two Sustainability Report cards tuck their EN/FR buttons behind a single
+   "Download" trigger. Built on <details>/<summary> so it still works without JS;
+   documents.js adds one-open-at-a-time, outside-click/Escape close and
+   auto-close once a download starts.
+
+   Only NON-state layout/visual rules live here. The open/close visibility,
+   caret rotation, hover and motion rules travel in the library section's
+   <style data-embed> (see generate_page.py -> library_embed) so they survive
+   Webflow's flat-class conversion as raw CSS (parent-state selectors such as
+   .ef-dropdown.is-open > .ef-dropdown-menu cannot be baked into one class). */
+.ef-document-card .ef-dropdown {
+  margin-top: auto;
+  padding-top: 2rem;
+}
+
+.ef-dropdown {
+  position: relative;
+  width: 100%;
+}
+
+.ef-dropdown-trigger {
+  width: 100%;
+  cursor: pointer;
+  list-style: none;
+  text-align: left;
+}
+.ef-dropdown-trigger::-webkit-details-marker { display: none; }
+.ef-dropdown-trigger::marker { content: ""; }
+
+.ef-download-caret {
+  display: inline-block;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-right: 0.13rem solid currentColor;
+  border-bottom: 0.13rem solid currentColor;
+}
+
+.ef-dropdown-menu {
+  position: absolute;
+  top: calc(100% + 0.5rem);
+  left: 0;
+  right: 0;
+  z-index: 30;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  padding: 0.45rem;
+  border: 1px solid var(--ef-sand);
+  border-radius: var(--ef-radius-small);
+  background: var(--ef-white);
+  box-shadow: 0 14px 34px rgba(32, 32, 32, 0.18);
+}
+
+.ef-dropdown-item {
+  width: 100%;
+  border-color: transparent;
+  border-radius: 0;
+  text-transform: none;
+  letter-spacing: 0.02em;
+}
+.ef-dropdown-item .ef-download-language { font-size: 0.7rem; }
+
+.ef-forms-stack {
+  display: grid;
+  gap: 1rem;
+}
+
+.ef-form-card {
+  display: grid;
+  grid-template-columns: minmax(14rem, 0.8fr) minmax(0, 1.4fr);
+  padding: clamp(1.25rem, 2.6vw, 2.4rem);
+  border: 1px solid var(--ef-sand);
+  border-radius: var(--ef-radius);
+  background: var(--ef-white);
+  gap: clamp(2rem, 5vw, 5rem);
+}
+
+.ef-form-heading {
+  align-self: start;
+}
+
+.ef-form-title {
+  margin: 0;
+  font-family: var(--ef-display);
+  font-size: clamp(1.7rem, 2.7vw, 2.65rem);
+  font-weight: 400;
+  line-height: 1.05;
+}
+
+.ef-form-title-fr {
+  display: block;
+  margin-top: 0.5rem;
+  color: var(--ef-muted);
+  font-family: var(--ef-body);
+  font-size: 0.43em;
+  font-weight: 400;
+  line-height: 1.3;
+}
+
+.ef-entity-list {
+  display: grid;
+}
+
+.ef-entity-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(14rem, 0.8fr);
+  min-height: 5.4rem;
+  padding: 0.75rem 0;
+  align-items: center;
+  border-bottom: 1px solid rgba(32, 32, 32, 0.19);
+  gap: 1rem;
+}
+
+.ef-entity-row-first {
+  padding-top: 0;
+}
+
+.ef-entity-row-last {
+  padding-bottom: 0;
+  border-bottom: 0;
+}
+
+.ef-entity-name {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.ef-entity-downloads {
+  padding-top: 0;
+}
+
+.ef-docs-footer {
+  width: 100%;
+  background: var(--ef-charcoal);
+  color: var(--ef-white);
+}
+
+.ef-footer-inner {
+  display: grid;
+  width: min(100%, var(--ef-max));
+  min-height: 11rem;
+  margin: 0 auto;
+  padding: 2.5rem var(--ef-page-pad);
+  grid-template-columns: minmax(0, 1fr) auto;
+  align-items: end;
+  gap: 2rem;
+}
+
+.ef-footer-brand {
+  margin: 0;
+  font-family: var(--ef-display);
+  font-size: clamp(1.6rem, 3vw, 2.5rem);
+  line-height: 1;
+}
+
+.ef-footer-note {
+  margin: 0.7rem 0 0;
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 0.8rem;
+}
+
+.ef-footer-contact {
+  color: var(--ef-white);
+  font-size: 0.88rem;
+  text-underline-offset: 0.25rem;
+}
+
+.ef-download-status {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 20;
+  max-width: min(24rem, calc(100vw - 2rem));
+  padding: 0.85rem 1rem;
+  border-radius: var(--ef-radius-small);
+  background: var(--ef-charcoal);
+  color: var(--ef-white);
+  font-size: 0.8rem;
+  opacity: 0;
+  pointer-events: none;
+  transform: translateY(0.6rem);
+}
+
+@media screen and (max-width: 991px) {
+  .ef-card-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ef-card-grid-two {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .ef-card-last {
+    grid-column: 1 / -1;
+  }
+
+  .ef-form-card {
+    grid-template-columns: minmax(0, 1fr);
+    gap: 2.2rem;
+  }
+}
+
+@media screen and (max-width: 767px) {
+  .ef-topbar-inner {
+    min-height: 4.4rem;
+    padding-top: 1.15rem;
+    padding-bottom: 1.15rem;
+  }
+
+  .ef-wordmark {
+    width: min(16rem, 76vw);
+  }
+
+  .ef-hero-inner {
+    min-height: 29rem;
+    padding-top: 4.75rem;
+    padding-bottom: 4.75rem;
+  }
+
+  .ef-hero-mark {
+    width: 32rem;
+  }
+
+  .ef-hero-kicker {
+    margin-bottom: 1.2rem;
+    font-size: 0.68rem;
+  }
+
+  .ef-hero-title {
+    font-size: clamp(2.55rem, 12vw, 4.5rem);
+    line-height: 0.98;
+  }
+
+  .ef-hero-intro {
+    margin-top: 1.6rem;
+    font-size: 0.96rem;
+  }
+
+  .ef-group {
+    margin-top: 4.75rem;
+  }
+
+  .ef-group-first {
+    margin-top: 0;
+  }
+
+  .ef-group-heading {
+    grid-template-columns: 2.4rem minmax(0, 1fr);
+    margin-bottom: 1.25rem;
+    padding-bottom: 1rem;
+  }
+
+  .ef-group-number {
+    padding-top: 0.35rem;
+  }
+
+  .ef-group-title {
+    font-size: clamp(2rem, 9vw, 3rem);
+  }
+
+  .ef-group-title-fr {
+    margin-top: 0.32rem;
+    font-size: 0.41em;
+  }
+
+  .ef-card-grid,
+  .ef-card-grid-two {
+    grid-template-columns: minmax(0, 1fr);
+  }
+
+  .ef-card-last {
+    grid-column: auto;
+  }
+
+  .ef-document-card {
+    min-height: 14.5rem;
+    padding: 1.25rem;
+  }
+
+  .ef-document-meta {
+    margin-bottom: 1.6rem;
+  }
+
+  .ef-document-title {
+    font-size: 1.7rem;
+  }
+
+  .ef-form-card {
+    padding: 1.25rem;
+    gap: 2rem;
+  }
+
+  .ef-form-title {
+    font-size: 1.85rem;
+  }
+
+  .ef-entity-row {
+    grid-template-columns: minmax(0, 1fr);
+    padding: 1.1rem 0;
+    gap: 0.8rem;
+  }
+
+  .ef-download {
+    min-height: 3.25rem;
+    padding-right: 0.85rem;
+    padding-left: 0.85rem;
+  }
+
+  .ef-footer-inner {
+    min-height: 12rem;
+    grid-template-columns: minmax(0, 1fr);
+    align-items: end;
+    gap: 1.5rem;
+  }
+
+  .ef-footer-contact {
+    justify-self: start;
+  }
+}
+
+@media screen and (max-width: 379px) {
+  .ef-download {
+    padding-right: 0.72rem;
+    padding-left: 0.72rem;
+    font-size: 0.74rem;
+  }
+
+  .ef-download-language {
+    font-size: 0.62rem;
+  }
+}

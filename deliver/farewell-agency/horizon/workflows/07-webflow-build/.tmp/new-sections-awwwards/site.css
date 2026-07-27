@@ -1,0 +1,67 @@
+/* ============================================================
+   Horizon Building — motion-only CSS for new home-page sections
+
+   Purpose: safe head-tag snippet that only preserves transitions and
+   animation performance hints. Component/layout/typography/color styles
+   should live in Webflow Designer classes so Designer edits are not
+   overridden by custom-code CSS.
+
+   Required behavior is driven by webflow-custom-code.js. This file only
+   supports smooth state changes that are either controlled by Webflow
+   hover states or inline styles applied by the JS.
+   ============================================================ */
+
+/* Shared / existing site classes */
+.button {
+  transition: all .25s ease-in-out;
+}
+
+/* Projects hover + cursor preview */
+.projects_row {
+  transition: background-color .3s ease, padding-left .3s ease;
+}
+
+.projects_preview {
+  transition: opacity .35s ease;
+}
+
+.projects_preview-img {
+  transition: opacity .4s ease, transform .6s ease;
+}
+
+/* Why cards GSAP scroll scaling */
+.why_card {
+  will-change: transform;
+}
+
+/* Testimonial marquee GSAP movement */
+.testi_track {
+  will-change: transform;
+}
+
+/* FAQ hover + open/close inline states */
+.faq_question {
+  transition: background-color .3s ease;
+}
+
+.faq_q {
+  transition: color .3s ease;
+}
+
+.faq_icon {
+  transition: transform .4s ease, background-color .3s ease, color .3s ease;
+}
+
+/* CTA parallax */
+.cta_image {
+  will-change: transform;
+}
+
+/* Footer link hover transitions */
+.footer-main_link {
+  transition: color .25s ease-in-out, padding-left .25s ease-in-out;
+}
+
+.footer-main_social-link {
+  transition: color .25s ease-in-out;
+}

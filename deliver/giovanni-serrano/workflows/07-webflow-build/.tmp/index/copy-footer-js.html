@@ -1,0 +1,373 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Copy FOOTER JS (script)</title></head>
+<body style="font:15px/1.5 system-ui,sans-serif;max-width:680px;margin:3rem auto;padding:0 1rem">
+<h1>Copy FOOTER JS (script)</h1>
+<p>Click, then focus the Webflow code field and press Ctrl/Cmd+V.</p>
+<button id="btn" style="font-size:1.1rem;padding:.9rem 1.6rem;border:0;border-radius:.5rem;background:#1463ff;color:#fff;cursor:pointer">Copy to clipboard</button>
+<span id="status" style="margin-left:1rem;font-weight:600"></span>
+<textarea id="payload" style="position:absolute;left:-9999px;top:-9999px">&lt;script&gt;
+(() =&gt; {
+const io = new IntersectionObserver((entries) =&gt; {
+      entries.forEach(e =&gt; { if (e.isIntersecting) { e.target.classList.add(&#x27;in&#x27;); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll(&#x27;.reveal, .reveal-stagger&#x27;).forEach(el =&gt; io.observe(el));
+
+    document.querySelectorAll(&#x27;a[href^=&quot;#&quot;]&#x27;).forEach(a =&gt; {
+      a.addEventListener(&#x27;click&#x27;, e =&gt; {
+        const t = document.querySelector(a.getAttribute(&#x27;href&#x27;));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 90, behavior: &#x27;smooth&#x27; }); }
+      });
+    });
+
+    // Airtable-backed portfolio content
+    const portfolioFeatured = document.getElementById(&#x27;portfolio-featured&#x27;);
+    const portfolioFeaturedTags = document.getElementById(&#x27;portfolio-featured-tags&#x27;);
+    const portfolioGroups = document.getElementById(&#x27;portfolio-groups&#x27;);
+
+    const escapeHtml = (value = &#x27;&#x27;) =&gt; String(value)
+      .replace(/&amp;/g, &#x27;&amp;amp;&#x27;)
+      .replace(/&lt;/g, &#x27;&amp;lt;&#x27;)
+      .replace(/&gt;/g, &#x27;&amp;gt;&#x27;)
+      .replace(/&quot;/g, &#x27;&amp;quot;&#x27;)
+      .replace(/&#x27;/g, &#x27;&amp;#039;&#x27;);
+
+    const titleHtml = (project) =&gt; {
+      const name = escapeHtml(project.name);
+      const subtitle = escapeHtml(project.subtitle);
+      return subtitle ? `${name} &amp;mdash;&lt;br&gt;&lt;em&gt;${subtitle}&lt;/em&gt;` : name;
+    };
+
+    const paragraphHtml = (description = &#x27;&#x27;) =&gt; String(description)
+      .split(/&lt;br\s*\/?&gt;\s*&lt;br\s*\/?&gt;|\n\s*\n/i)
+      .map(part =&gt; part.trim())
+      .filter(Boolean)
+      .map(part =&gt; `&lt;p&gt;${escapeHtml(part.replace(/&lt;br\s*\/?&gt;/gi, &#x27;\n&#x27;)).replace(/\n/g, &#x27;&lt;br&gt;&#x27;)}&lt;/p&gt;`)
+      .join(&#x27;&#x27;);
+
+    const listHtml = (items = []) =&gt; items
+      .map(item =&gt; String(item).replace(/^[-*]\s*/, &#x27;&#x27;).trim())
+      .filter(Boolean)
+      .map(item =&gt; `&lt;div class=&quot;li&quot;&gt;${escapeHtml(item)}&lt;/div&gt;`)
+      .join(&#x27;&#x27;);
+
+    const tagHtml = (tags = [], className = &#x27;project-tag&#x27;) =&gt; tags
+      .map(tag =&gt; `&lt;span class=&quot;${className}&quot;&gt;${escapeHtml(tag)}&lt;/span&gt;`)
+      .join(&#x27;&#x27;);
+
+    const observeReveals = (root) =&gt; {
+      root.querySelectorAll(&#x27;.reveal, .reveal-stagger&#x27;).forEach(el =&gt; io.observe(el));
+    };
+
+    const renderPortfolio = ({ featured, groups }) =&gt; {
+      if (!portfolioFeatured || !portfolioFeaturedTags || !portfolioGroups) return;
+
+      if (featured) {
+        portfolioFeatured.innerHTML = `
+          &lt;div class=&quot;cap reveal&quot;&gt;
+            &lt;div class=&quot;left&quot;&gt;
+              ${featured.featuredContext ? `&lt;span class=&quot;badge&quot;&gt;${escapeHtml(featured.featuredContext)}&lt;/span&gt;` : &#x27;&#x27;}
+              &lt;h3&gt;${titleHtml(featured)}&lt;/h3&gt;
+              ${featured.overlineType ? `&lt;div class=&quot;sub&quot;&gt;${escapeHtml(featured.overlineType)}&lt;/div&gt;` : &#x27;&#x27;}
+              ${paragraphHtml(featured.description)}
+              &lt;div class=&quot;vitals&quot;&gt;
+                ${(featured.featuredMetrics || []).map(metric =&gt; `
+                  &lt;div class=&quot;v&quot;&gt;
+                    &lt;div class=&quot;k&quot;&gt;${escapeHtml(metric.label)}&lt;/div&gt;
+                    &lt;div class=&quot;num&quot;&gt;${escapeHtml(metric.value)}&lt;/div&gt;
+                  &lt;/div&gt;
+                `).join(&#x27;&#x27;)}
+              &lt;/div&gt;
+            &lt;/div&gt;
+            &lt;div class=&quot;right&quot;&gt;
+              &lt;div&gt;
+                &lt;div class=&quot;col-title&quot;&gt;Analysis &amp;amp; Design&lt;/div&gt;
+                ${listHtml(featured.analysisDesignList)}
+              &lt;/div&gt;
+              &lt;div&gt;
+                &lt;div class=&quot;col-title&quot;&gt;Financial &amp;amp; Deliverables&lt;/div&gt;
+                ${listHtml(featured.financialDeliverablesList)}
+              &lt;/div&gt;
+            &lt;/div&gt;
+          &lt;/div&gt;
+        `;
+
+        portfolioFeaturedTags.innerHTML = `
+          &lt;div class=&quot;capstone-tags reveal&quot;&gt;
+            ${tagHtml(featured.tags, &#x27;capstone-tag&#x27;)}
+          &lt;/div&gt;
+        `;
+      } else {
+        portfolioFeatured.innerHTML = &#x27;&#x27;;
+        portfolioFeaturedTags.innerHTML = &#x27;&#x27;;
+      }
+
+      portfolioGroups.innerHTML = (groups || []).map(group =&gt; {
+        const gridClass = group.projects.length &gt;= 6 ? &#x27;portfolio-grid-3&#x27; : &#x27;portfolio-grid&#x27;;
+        return `
+          &lt;div class=&quot;portfolio-cat&quot;&gt;${escapeHtml(group.name)}&lt;/div&gt;
+          &lt;div class=&quot;${gridClass} reveal-stagger&quot;&gt;
+            ${group.projects.map(project =&gt; `
+              &lt;div class=&quot;project-card${project.tags.length &gt; 3 ? &#x27; wide&#x27; : &#x27;&#x27;}&quot;&gt;
+                ${project.overlineType ? `&lt;div class=&quot;project-type&quot;&gt;${escapeHtml(project.overlineType)}&lt;/div&gt;` : &#x27;&#x27;}
+                &lt;div class=&quot;project-title&quot;&gt;${project.subtitle ? `${escapeHtml(project.name)} &amp;mdash; ${escapeHtml(project.subtitle)}` : escapeHtml(project.name)}&lt;/div&gt;
+                &lt;div class=&quot;project-desc&quot;&gt;${escapeHtml(project.description)}&lt;/div&gt;
+                &lt;div class=&quot;project-tags&quot;&gt;${tagHtml(project.tags)}&lt;/div&gt;
+              &lt;/div&gt;
+            `).join(&#x27;&#x27;)}
+          &lt;/div&gt;
+        `;
+      }).join(&#x27;&#x27;);
+
+      observeReveals(document.getElementById(&#x27;portfolio&#x27;));
+    };
+
+    const showPortfolioError = () =&gt; {
+      if (!portfolioGroups) return;
+      portfolioGroups.innerHTML = `
+        &lt;div class=&quot;portfolio-cat&quot;&gt;Portfolio unavailable&lt;/div&gt;
+        &lt;div class=&quot;portfolio-grid&quot;&gt;
+          &lt;div class=&quot;project-card wide&quot;&gt;
+            &lt;div class=&quot;project-type&quot;&gt;Content loading issue&lt;/div&gt;
+            &lt;div class=&quot;project-title&quot;&gt;Portfolio content could not be loaded.&lt;/div&gt;
+            &lt;div class=&quot;project-desc&quot;&gt;Please check the Airtable connection and Vercel environment variables.&lt;/div&gt;
+          &lt;/div&gt;
+        &lt;/div&gt;
+      `;
+    };
+
+    fetch(&#x27;/api/portfolio&#x27;, { cache: &#x27;no-store&#x27; })
+      .then(response =&gt; {
+        if (!response.ok) throw new Error(`Portfolio API returned ${response.status}`);
+        return response.json();
+      })
+      .then(renderPortfolio)
+      .catch(showPortfolioError);
+
+    // hamburger nav
+    const navToggle = document.querySelector(&#x27;.nav-toggle&#x27;);
+    const navLinks = document.querySelector(&#x27;nav.top .links&#x27;);
+    if (navToggle &amp;&amp; navLinks) {
+      navToggle.addEventListener(&#x27;click&#x27;, () =&gt; {
+        navLinks.classList.toggle(&#x27;open&#x27;);
+        navToggle.textContent = navLinks.classList.contains(&#x27;open&#x27;) ? &#x27;✕&#x27; : &#x27;☰&#x27;;
+      });
+      document.addEventListener(&#x27;click&#x27;, (e) =&gt; {
+        if (!e.target.closest(&#x27;nav.top&#x27;)) {
+          navLinks.classList.remove(&#x27;open&#x27;);
+          navToggle.textContent = &#x27;☰&#x27;;
+        }
+      });
+    }
+
+    // services draggable infinite slider — smoothed with rAF batching
+    const track = document.getElementById(&#x27;svc-track&#x27;);
+    if (track) {
+      const originals = Array.from(track.children);
+      const dragCursor = document.getElementById(&#x27;svc-drag-cursor&#x27;);
+      let slideWidth = 0;
+      let index = originals.length;
+      let autoTimer = null;
+      let resumeTimer = null;
+      let isDragging = false;
+      let didDrag = false;
+      let startX = 0;
+      let startScroll = 0;
+      let lastX = 0;
+      let lastTime = 0;
+      let velocity = 0;
+      let pendingScroll = null;
+      let pendingCursor = null;
+      let rafId = null;
+      let cursorRafId = null;
+
+      const prepareClone = (node) =&gt; {
+        const clone = node.cloneNode(true);
+        clone.classList.add(&#x27;is-clone&#x27;);
+        clone.classList.remove(&#x27;reveal&#x27;);
+        clone.setAttribute(&#x27;aria-hidden&#x27;, &#x27;true&#x27;);
+        return clone;
+      };
+
+      const beforeClones = originals.map(prepareClone);
+      const afterClones = originals.map(prepareClone);
+      track.replaceChildren(...beforeClones, ...originals, ...afterClones);
+
+      const slides = Array.from(track.children);
+      const reduceMotion = window.matchMedia(&#x27;(prefers-reduced-motion: reduce)&#x27;);
+
+      const measure = () =&gt; {
+        const first = slides[0];
+        const second = slides[1];
+        slideWidth = second.offsetLeft - first.offsetLeft || second.getBoundingClientRect().width;
+        jumpTo(index);
+      };
+
+      const jumpTo = (nextIndex) =&gt; {
+        index = nextIndex;
+        track.scrollLeft = slideWidth * index;
+      };
+
+      const goTo = (nextIndex, behavior = &#x27;smooth&#x27;) =&gt; {
+        index = nextIndex;
+        track.scrollTo({ left: slideWidth * index, behavior });
+      };
+
+      const normalizeLoop = () =&gt; {
+        if (index &lt; originals.length) jumpTo(index + originals.length);
+        if (index &gt;= originals.length * 2) jumpTo(index - originals.length);
+      };
+
+      const stopAuto = () =&gt; {
+        clearInterval(autoTimer);
+        clearTimeout(resumeTimer);
+      };
+
+      const startAuto = () =&gt; {
+        if (reduceMotion.matches) return;
+        stopAuto();
+        autoTimer = setInterval(() =&gt; goTo(index + 1), 4200);
+      };
+
+      const resumeAuto = () =&gt; {
+        stopAuto();
+        resumeTimer = setTimeout(startAuto, 1800);
+      };
+
+      const settleToNearest = () =&gt; {
+        if (!slideWidth) return;
+        // velocity-aware: if user flicked, advance one more slide in flick direction
+        const projected = track.scrollLeft + velocity * 120;
+        goTo(Math.round(projected / slideWidth));
+      };
+
+      // rAF-batched scrollLeft write — keeps drag silky on high-refresh displays
+      const flushScroll = () =&gt; {
+        rafId = null;
+        if (pendingScroll == null) return;
+        track.scrollLeft = pendingScroll;
+        pendingScroll = null;
+      };
+
+      const flushCursor = () =&gt; {
+        cursorRafId = null;
+        if (!dragCursor || !pendingCursor) return;
+        dragCursor.style.left = `${pendingCursor.x}px`;
+        dragCursor.style.top = `${pendingCursor.y}px`;
+        pendingCursor = null;
+      };
+
+      track.addEventListener(&#x27;scroll&#x27;, () =&gt; {
+        if (!slideWidth) return;
+        index = Math.round(track.scrollLeft / slideWidth);
+        window.clearTimeout(track._loopTimer);
+        track._loopTimer = window.setTimeout(normalizeLoop, 120);
+      }, { passive: true });
+
+      track.addEventListener(&#x27;wheel&#x27;, (e) =&gt; {
+        if (Math.abs(e.deltaX) &gt; Math.abs(e.deltaY)) resumeAuto();
+      }, { passive: true });
+
+      track.addEventListener(&#x27;pointerdown&#x27;, (e) =&gt; {
+        if (e.button !== undefined &amp;&amp; e.button !== 0) return;
+        isDragging = true;
+        didDrag = false;
+        startX = e.clientX;
+        lastX = e.clientX;
+        lastTime = performance.now();
+        velocity = 0;
+        startScroll = track.scrollLeft;
+        track.classList.add(&#x27;dragging&#x27;);
+        dragCursor?.classList.add(&#x27;dragging&#x27;);
+        track.setPointerCapture(e.pointerId);
+        stopAuto();
+      });
+
+      track.addEventListener(&#x27;pointermove&#x27;, (e) =&gt; {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) &gt; 6) didDrag = true;
+        // track velocity for flick detection
+        const now = performance.now();
+        const dt = now - lastTime;
+        if (dt &gt; 0) {
+          // px per ms — smoothed slightly
+          velocity = velocity * 0.7 + ((lastX - e.clientX) / dt) * 0.3;
+        }
+        lastX = e.clientX;
+        lastTime = now;
+        // batch scrollLeft writes via rAF — single write per frame
+        pendingScroll = startScroll - dx;
+        if (rafId == null) rafId = requestAnimationFrame(flushScroll);
+        e.preventDefault();
+      });
+
+      const endDrag = (e) =&gt; {
+        if (!isDragging) return;
+        isDragging = false;
+        track.classList.remove(&#x27;dragging&#x27;);
+        dragCursor?.classList.remove(&#x27;dragging&#x27;);
+        if (track.hasPointerCapture(e.pointerId)) track.releasePointerCapture(e.pointerId);
+        // flush any pending scroll before snapping
+        if (rafId != null) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+          if (pendingScroll != null) {
+            track.scrollLeft = pendingScroll;
+            pendingScroll = null;
+          }
+        }
+        settleToNearest();
+        resumeAuto();
+      };
+
+      track.addEventListener(&#x27;pointerup&#x27;, endDrag);
+      track.addEventListener(&#x27;pointercancel&#x27;, endDrag);
+      track.addEventListener(&#x27;click&#x27;, (e) =&gt; {
+        if (!didDrag) return;
+        e.preventDefault();
+        e.stopPropagation();
+        didDrag = false;
+      }, true);
+      track.addEventListener(&#x27;pointerenter&#x27;, () =&gt; {
+        dragCursor?.classList.add(&#x27;active&#x27;);
+      });
+      track.addEventListener(&#x27;pointerleave&#x27;, () =&gt; {
+        dragCursor?.classList.remove(&#x27;active&#x27;, &#x27;dragging&#x27;);
+      });
+      // batch cursor follow via rAF too
+      track.addEventListener(&#x27;pointermove&#x27;, (e) =&gt; {
+        if (!dragCursor) return;
+        pendingCursor = { x: e.clientX, y: e.clientY, dragging: isDragging };
+        if (cursorRafId == null) cursorRafId = requestAnimationFrame(flushCursor);
+      }, { passive: true });
+      window.addEventListener(&#x27;resize&#x27;, measure);
+
+      requestAnimationFrame(() =&gt; {
+        measure();
+        startAuto();
+      });
+    }
+
+
+    // proportional scale-up above 1920
+    function applyDesktopZoom() {
+      const w = window.innerWidth;
+      document.documentElement.style.zoom = w &gt; 1920 ? (w / 1920) : &#x27;&#x27;;
+    }
+    applyDesktopZoom();
+    window.addEventListener(&#x27;resize&#x27;, applyDesktopZoom);
+})();
+
+&lt;/script&gt;</textarea>
+<script>
+const txt=document.getElementById('payload').value;
+document.getElementById('btn').addEventListener('click',()=>{
+  const h=(e)=>{e.preventDefault();e.clipboardData.setData('text/plain',txt);};
+  document.addEventListener('copy',h);
+  const ok=document.execCommand('copy');
+  document.removeEventListener('copy',h);
+  const s=document.getElementById('status');
+  s.textContent=ok?('\u2713 Copied '+txt.length+' chars'):'copy failed';
+});
+</script>
+</body></html>

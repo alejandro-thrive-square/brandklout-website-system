@@ -1,0 +1,5481 @@
+{
+  "source": "Generated paste payload styleLess var() references",
+  "note": "Use Webflow MCP style_tool after paste. Designer variable mapping requires properties[].variable_as_value = variable_id.",
+  "styleTool": {
+    "actions": []
+  },
+  "bindings": [
+    {
+      "section": "01_progress",
+      "className": "progress",
+      "sourceStyleId": "0feb4b7f-b540-4ba3-aeb2-d521d83b8741",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "progress",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "01_progress",
+      "className": "progress",
+      "sourceStyleId": "0feb4b7f-b540-4ba3-aeb2-d521d83b8741",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "progress",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "01_progress",
+      "className": "bar",
+      "sourceStyleId": "051c6386-3d0f-4e8c-bc3c-370d50b9acd7",
+      "variant": "base",
+      "property": "background",
+      "value": "linear-gradient(90deg, var(--terra), var(--gold))",
+      "cssNames": [
+        "--terra",
+        "--gold"
+      ],
+      "sourceNames": [
+        "--terra",
+        "--gold"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "02_top",
+      "className": "project-detail-nav",
+      "sourceStyleId": "898b03fe-cffa-49f8-adae-0d61ea8ebd75",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-nav",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "project-detail-nav",
+      "sourceStyleId": "898b03fe-cffa-49f8-adae-0d61ea8ebd75",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-nav",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "project-detail-nav",
+      "sourceStyleId": "898b03fe-cffa-49f8-adae-0d61ea8ebd75",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-nav",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "project-detail-nav",
+      "sourceStyleId": "898b03fe-cffa-49f8-adae-0d61ea8ebd75",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-nav",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "brand",
+      "sourceStyleId": "60bd1247-be64-4fce-93b5-4c2ebd663e82",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "brand",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "brand",
+      "sourceStyleId": "60bd1247-be64-4fce-93b5-4c2ebd663e82",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "brand",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "project-detail-em",
+      "sourceStyleId": "6364df33-fc5f-453b-af22-f15a8130b232",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-em",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "project-detail-a-2",
+      "sourceStyleId": "8929f19a-fd14-494e-9381-683675851ca4",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "a-after",
+      "sourceStyleId": "0c3ce003-5709-423f-b723-8cb78a919813",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "a-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "active",
+      "sourceStyleId": "caf91931-f653-4a9f-9d75-8c3e06ada89f",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "active",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "active-after",
+      "sourceStyleId": "a4dc7976-c7cc-431d-9c8c-4b491d1de3b1",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "active-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "cta",
+      "sourceStyleId": "9e47de7c-611a-4151-ac8e-d1c1eb8b9fe2",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "cta",
+      "sourceStyleId": "9e47de7c-611a-4151-ac8e-d1c1eb8b9fe2",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "cta",
+      "sourceStyleId": "9e47de7c-611a-4151-ac8e-d1c1eb8b9fe2",
+      "variant": "main_hover",
+      "property": "background",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cta",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "nav-toggle",
+      "sourceStyleId": "c01f3611-3a6b-47a2-a15b-71a83ed83256",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-toggle",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "02_top",
+      "className": "nav-toggle",
+      "sourceStyleId": "c01f3611-3a6b-47a2-a15b-71a83ed83256",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-toggle",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "03_stickyCta",
+      "className": "project-detail-a-3",
+      "sourceStyleId": "e4b46c02-8316-4b6e-9163-f9051e9d0773",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "03_stickyCta",
+      "className": "project-detail-a-3",
+      "sourceStyleId": "e4b46c02-8316-4b6e-9163-f9051e9d0773",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "03_stickyCta",
+      "className": "project-detail-a-3",
+      "sourceStyleId": "e4b46c02-8316-4b6e-9163-f9051e9d0773",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "03_stickyCta",
+      "className": "sticky-cta",
+      "sourceStyleId": "36ba39b7-91cf-4223-8bf6-d5976c74e78e",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "sticky-cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "03_stickyCta",
+      "className": "sticky-cta",
+      "sourceStyleId": "36ba39b7-91cf-4223-8bf6-d5976c74e78e",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "sticky-cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "03_stickyCta",
+      "className": "sticky-cta",
+      "sourceStyleId": "36ba39b7-91cf-4223-8bf6-d5976c74e78e",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "sticky-cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "03_stickyCta",
+      "className": "sticky-cta",
+      "sourceStyleId": "36ba39b7-91cf-4223-8bf6-d5976c74e78e",
+      "variant": "small",
+      "property": "border-top-color",
+      "value": "var(--terra-d)",
+      "cssNames": [
+        "--terra-d"
+      ],
+      "sourceNames": [
+        "--terra-d"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "sticky-cta",
+        "breakpoint_id": "small",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra-d",
+        "cssName": "--terra-d"
+      }
+    },
+    {
+      "section": "03_stickyCta",
+      "className": "project-detail-span",
+      "sourceStyleId": "9b360b6d-e063-47e1-9500-6bbeba5d5197",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-span",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "04_context",
+      "className": "context",
+      "sourceStyleId": "944a3874-ef5c-48ef-bd3b-094371903671",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "context",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "04_context",
+      "className": "context",
+      "sourceStyleId": "944a3874-ef5c-48ef-bd3b-094371903671",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "context",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "04_context",
+      "className": "context",
+      "sourceStyleId": "944a3874-ef5c-48ef-bd3b-094371903671",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "context",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "04_context",
+      "className": "context",
+      "sourceStyleId": "944a3874-ef5c-48ef-bd3b-094371903671",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--terra-d)",
+      "cssNames": [
+        "--terra-d"
+      ],
+      "sourceNames": [
+        "--terra-d"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "context",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra-d",
+        "cssName": "--terra-d"
+      }
+    },
+    {
+      "section": "04_context",
+      "className": "crumb",
+      "sourceStyleId": "084e647e-1afe-4369-bef4-e551bea87a91",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "crumb",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "04_context",
+      "className": "sep",
+      "sourceStyleId": "bde2e245-6a55-49d4-ba53-91af5059728a",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "sep",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "04_context",
+      "className": "now",
+      "sourceStyleId": "09feb04a-4914-4ec5-ab50-345f6ef293bf",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "now",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "04_context",
+      "className": "next",
+      "sourceStyleId": "b2013cfc-d1d5-4124-a0ab-248be7232b5a",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "next",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "04_context",
+      "className": "project-detail-a-5",
+      "sourceStyleId": "bf436691-7407-4a15-9c8f-19ef7c548d6f",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-5",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "04_context",
+      "className": "project-detail-a-5",
+      "sourceStyleId": "bf436691-7407-4a15-9c8f-19ef7c548d6f",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-5",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero",
+      "sourceStyleId": "d9bb36a9-937e-4400-b4f1-ff378d9df07b",
+      "variant": "base",
+      "property": "background",
+      "value": "repeating-linear-gradient(0deg, transparent 0 47px, var(--bone) 47px 48px),\n        repeating-linear-gradient(90deg, transparent 0 47px, var(--bone) 47px 48px),\n        var(--canvas)",
+      "cssNames": [
+        "--bone",
+        "--bone",
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--bone",
+        "--bone",
+        "--canvas"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero",
+      "sourceStyleId": "d9bb36a9-937e-4400-b4f1-ff378d9df07b",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero",
+      "sourceStyleId": "d9bb36a9-937e-4400-b4f1-ff378d9df07b",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero-eyebrow",
+      "sourceStyleId": "0062c4f8-7adb-44e0-8bbf-c662c779d858",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero-eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero-eyebrow",
+      "sourceStyleId": "0062c4f8-7adb-44e0-8bbf-c662c779d858",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero-eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero-eyebrow",
+      "sourceStyleId": "0062c4f8-7adb-44e0-8bbf-c662c779d858",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero-eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero-eyebrow",
+      "sourceStyleId": "0062c4f8-7adb-44e0-8bbf-c662c779d858",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero-eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero-eyebrow",
+      "sourceStyleId": "0062c4f8-7adb-44e0-8bbf-c662c779d858",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero-eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero-eyebrow",
+      "sourceStyleId": "0062c4f8-7adb-44e0-8bbf-c662c779d858",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero-eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "project-detail-span-2",
+      "sourceStyleId": "a25cf8c5-698a-4a84-827c-012e2d60d25d",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink-mute)",
+      "cssNames": [
+        "--ink-mute"
+      ],
+      "sourceNames": [
+        "--ink-mute"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-span-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-mute",
+        "cssName": "--ink-mute"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "dot",
+      "sourceStyleId": "8b4eba0c-6850-4370-a1f8-969f3f2260dd",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "dot",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "project-detail-h1",
+      "sourceStyleId": "b5728ac8-2d66-492c-808f-6ecca80ad8e0",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-h1",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "project-detail-h1",
+      "sourceStyleId": "b5728ac8-2d66-492c-808f-6ecca80ad8e0",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-h1",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "project-detail-em-2",
+      "sourceStyleId": "47c39b81-0589-461d-bf7f-09f049287784",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-em-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "em-before",
+      "sourceStyleId": "624eb363-0289-48e7-802b-d0c057f3a59a",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "em-before",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero-sub",
+      "sourceStyleId": "afffb6a3-68e4-4b0b-a44c-e54bac7550b3",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero-sub",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero-sub",
+      "sourceStyleId": "afffb6a3-68e4-4b0b-a44c-e54bac7550b3",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink-soft)",
+      "cssNames": [
+        "--ink-soft"
+      ],
+      "sourceNames": [
+        "--ink-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero-sub",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-soft",
+        "cssName": "--ink-soft"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero-scroll",
+      "sourceStyleId": "c8aa15af-8f9c-4d42-b9d8-222421f5d0b1",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero-scroll",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero-scroll",
+      "sourceStyleId": "c8aa15af-8f9c-4d42-b9d8-222421f5d0b1",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink-mute)",
+      "cssNames": [
+        "--ink-mute"
+      ],
+      "sourceNames": [
+        "--ink-mute"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero-scroll",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-mute",
+        "cssName": "--ink-mute"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "down",
+      "sourceStyleId": "17288d46-087a-422e-9aa6-ef3d704a1bc0",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "down",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "down-after",
+      "sourceStyleId": "f0d1dd55-a429-40fa-9838-76af6328bc10",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "down-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "down-after",
+      "sourceStyleId": "f0d1dd55-a429-40fa-9838-76af6328bc10",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "down-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "project-detail-a-6",
+      "sourceStyleId": "ce23edd9-5796-41e5-bfda-f2d5982ea10f",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-6",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "project-detail-a-6",
+      "sourceStyleId": "ce23edd9-5796-41e5-bfda-f2d5982ea10f",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-6",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "project-detail-a-6",
+      "sourceStyleId": "ce23edd9-5796-41e5-bfda-f2d5982ea10f",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-6",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "project-detail-a-7",
+      "sourceStyleId": "3c7293a2-a4c2-44c2-85a6-879d1832bbd4",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-7",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "project-detail-a-7",
+      "sourceStyleId": "3c7293a2-a4c2-44c2-85a6-879d1832bbd4",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink-soft)",
+      "cssNames": [
+        "--ink-soft"
+      ],
+      "sourceNames": [
+        "--ink-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-7",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-soft",
+        "cssName": "--ink-soft"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "pj-board",
+      "sourceStyleId": "d35cd98c-dec6-4acd-a254-ca57f5791c85",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-board",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "pj-board",
+      "sourceStyleId": "d35cd98c-dec6-4acd-a254-ca57f5791c85",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--navy-d)",
+      "cssNames": [
+        "--navy-d"
+      ],
+      "sourceNames": [
+        "--navy-d"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-board",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy-d",
+        "cssName": "--navy-d"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "pj-board",
+      "sourceStyleId": "d35cd98c-dec6-4acd-a254-ca57f5791c85",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--navy-d)",
+      "cssNames": [
+        "--navy-d"
+      ],
+      "sourceNames": [
+        "--navy-d"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-board",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy-d",
+        "cssName": "--navy-d"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "pj-board",
+      "sourceStyleId": "d35cd98c-dec6-4acd-a254-ca57f5791c85",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--navy-d)",
+      "cssNames": [
+        "--navy-d"
+      ],
+      "sourceNames": [
+        "--navy-d"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-board",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy-d",
+        "cssName": "--navy-d"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "pj-board",
+      "sourceStyleId": "d35cd98c-dec6-4acd-a254-ca57f5791c85",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--navy-d)",
+      "cssNames": [
+        "--navy-d"
+      ],
+      "sourceNames": [
+        "--navy-d"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-board",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy-d",
+        "cssName": "--navy-d"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "ctx",
+      "sourceStyleId": "6c27f980-b3d7-48b6-bb96-186ed78f63b9",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ctx",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "ctx",
+      "sourceStyleId": "6c27f980-b3d7-48b6-bb96-186ed78f63b9",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ctx",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "ctx",
+      "sourceStyleId": "6c27f980-b3d7-48b6-bb96-186ed78f63b9",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--on-d-line)",
+      "cssNames": [
+        "--on-d-line"
+      ],
+      "sourceNames": [
+        "--on-d-line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ctx",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d-line",
+        "cssName": "--on-d-line"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "project-detail-div-4",
+      "sourceStyleId": "f8a26805-dcbe-41d4-8792-e10a938107d6",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-4",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "project-detail-div-4",
+      "sourceStyleId": "f8a26805-dcbe-41d4-8792-e10a938107d6",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--on-d-mute)",
+      "cssNames": [
+        "--on-d-mute"
+      ],
+      "sourceNames": [
+        "--on-d-mute"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-4",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d-mute",
+        "cssName": "--on-d-mute"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "val",
+      "sourceStyleId": "db97021e-a8e0-4ecb-bbed-cbc5facb78b8",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "val",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "val",
+      "sourceStyleId": "db97021e-a8e0-4ecb-bbed-cbc5facb78b8",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "val",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "tags",
+      "sourceStyleId": "87c219b9-be78-4eb2-9119-e467d5d44fc2",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--on-d-line)",
+      "cssNames": [
+        "--on-d-line"
+      ],
+      "sourceNames": [
+        "--on-d-line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "tags",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d-line",
+        "cssName": "--on-d-line"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "pj-tag",
+      "sourceStyleId": "1003ee59-8dc0-4e56-ac7b-7b01322a3228",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-tag",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "foot",
+      "sourceStyleId": "8e1afceb-a709-4770-9726-a8acb837b4c9",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "foot",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "foot",
+      "sourceStyleId": "8e1afceb-a709-4770-9726-a8acb837b4c9",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--on-d-soft)",
+      "cssNames": [
+        "--on-d-soft"
+      ],
+      "sourceNames": [
+        "--on-d-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "foot",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d-soft",
+        "cssName": "--on-d-soft"
+      }
+    },
+    {
+      "section": "05_subhero",
+      "className": "subhero-after",
+      "sourceStyleId": "1cfb75ac-32b7-4936-aef7-d5f8ce596387",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "subhero-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-section",
+      "sourceStyleId": "b16d876c-af70-49d4-9504-dc5e83affaa3",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--bone)",
+      "cssNames": [
+        "--bone"
+      ],
+      "sourceNames": [
+        "--bone"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bone",
+        "cssName": "--bone"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-section",
+      "sourceStyleId": "b16d876c-af70-49d4-9504-dc5e83affaa3",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-section",
+      "sourceStyleId": "b16d876c-af70-49d4-9504-dc5e83affaa3",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-section",
+      "sourceStyleId": "b16d876c-af70-49d4-9504-dc5e83affaa3",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-div-5",
+      "sourceStyleId": "ffbd8c5e-1dfb-47c7-b016-4b099a1e9307",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-5",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-div-5",
+      "sourceStyleId": "ffbd8c5e-1dfb-47c7-b016-4b099a1e9307",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-5",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-div-6",
+      "sourceStyleId": "94cc6c66-a7ae-4f9c-9343-b08c8b36da22",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-6",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-div-6",
+      "sourceStyleId": "94cc6c66-a7ae-4f9c-9343-b08c8b36da22",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-6",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "label-before",
+      "sourceStyleId": "10290a4b-f11d-4798-b92d-b8f708108318",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "label-before",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-h2",
+      "sourceStyleId": "6197a67d-01ee-47ab-969b-beb412fd6285",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-h2",
+      "sourceStyleId": "6197a67d-01ee-47ab-969b-beb412fd6285",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-em-3",
+      "sourceStyleId": "aab60fdb-f10f-49ca-b06b-129831f14b15",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-em-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-p",
+      "sourceStyleId": "411dc78b-fab2-4adf-bdde-ae6df0c99871",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-p",
+      "sourceStyleId": "411dc78b-fab2-4adf-bdde-ae6df0c99871",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink-soft)",
+      "cssNames": [
+        "--ink-soft"
+      ],
+      "sourceNames": [
+        "--ink-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-soft",
+        "cssName": "--ink-soft"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "pj-cols",
+      "sourceStyleId": "c5ae3fb6-9cea-44c4-b9a8-3273bffd2cc7",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-cols",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "pj-cols",
+      "sourceStyleId": "c5ae3fb6-9cea-44c4-b9a8-3273bffd2cc7",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-cols",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "pj-cols",
+      "sourceStyleId": "c5ae3fb6-9cea-44c4-b9a8-3273bffd2cc7",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-cols",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "pj-cols",
+      "sourceStyleId": "c5ae3fb6-9cea-44c4-b9a8-3273bffd2cc7",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-cols",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "pj-cols",
+      "sourceStyleId": "c5ae3fb6-9cea-44c4-b9a8-3273bffd2cc7",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-cols",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "pj-col-title",
+      "sourceStyleId": "9ef21d2e-a343-41bd-b3c7-01dbc0b8d940",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-col-title",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "pj-col-title",
+      "sourceStyleId": "9ef21d2e-a343-41bd-b3c7-01dbc0b8d940",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-col-title",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "pj-li",
+      "sourceStyleId": "3343f6e3-3661-4419-853d-052f92de2eb4",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink-soft)",
+      "cssNames": [
+        "--ink-soft"
+      ],
+      "sourceNames": [
+        "--ink-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-li",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-soft",
+        "cssName": "--ink-soft"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "pj-li",
+      "sourceStyleId": "3343f6e3-3661-4419-853d-052f92de2eb4",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-li",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "pj-li-before",
+      "sourceStyleId": "ac1af54f-0cc3-424e-977a-70beaddf43ee",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pj-li-before",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-div-9",
+      "sourceStyleId": "f2584233-7d5a-44b3-9e26-59e064df350e",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-9",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-div-9",
+      "sourceStyleId": "f2584233-7d5a-44b3-9e26-59e064df350e",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--bone)",
+      "cssNames": [
+        "--bone"
+      ],
+      "sourceNames": [
+        "--bone"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-9",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bone",
+        "cssName": "--bone"
+      }
+    },
+    {
+      "section": "06_scope",
+      "className": "project-detail-div-9",
+      "sourceStyleId": "f2584233-7d5a-44b3-9e26-59e064df350e",
+      "variant": "medium",
+      "property": "border-top-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-9",
+        "breakpoint_id": "medium",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "project-detail-section-2",
+      "sourceStyleId": "b163ed58-6e6c-48f3-b34b-81f967a25580",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "project-detail-section-2",
+      "sourceStyleId": "b163ed58-6e6c-48f3-b34b-81f967a25580",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "project-detail-section-2",
+      "sourceStyleId": "b163ed58-6e6c-48f3-b34b-81f967a25580",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "project-detail-section-2",
+      "sourceStyleId": "b163ed58-6e6c-48f3-b34b-81f967a25580",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "ribbon",
+      "sourceStyleId": "36f2abcb-4c9b-4993-886e-afaaf253eb43",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ribbon",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "ribbon",
+      "sourceStyleId": "36f2abcb-4c9b-4993-886e-afaaf253eb43",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ribbon",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "ribbon",
+      "sourceStyleId": "36f2abcb-4c9b-4993-886e-afaaf253eb43",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--terra-d)",
+      "cssNames": [
+        "--terra-d"
+      ],
+      "sourceNames": [
+        "--terra-d"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ribbon",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra-d",
+        "cssName": "--terra-d"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "ribbon",
+      "sourceStyleId": "36f2abcb-4c9b-4993-886e-afaaf253eb43",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--terra-d)",
+      "cssNames": [
+        "--terra-d"
+      ],
+      "sourceNames": [
+        "--terra-d"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ribbon",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra-d",
+        "cssName": "--terra-d"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "text",
+      "sourceStyleId": "5aa8eedb-5d10-4918-a864-e47cb199043d",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "text",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "btn",
+      "sourceStyleId": "b68609e2-6c37-4d37-a54c-6a361006b50d",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "btn",
+      "sourceStyleId": "b68609e2-6c37-4d37-a54c-6a361006b50d",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "btn",
+      "sourceStyleId": "b68609e2-6c37-4d37-a54c-6a361006b50d",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "btn",
+      "sourceStyleId": "b68609e2-6c37-4d37-a54c-6a361006b50d",
+      "variant": "main_hover",
+      "property": "background",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "07_scene",
+      "className": "btn",
+      "sourceStyleId": "b68609e2-6c37-4d37-a54c-6a361006b50d",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-section",
+      "sourceStyleId": "b16d876c-af70-49d4-9504-dc5e83affaa3",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--bone)",
+      "cssNames": [
+        "--bone"
+      ],
+      "sourceNames": [
+        "--bone"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bone",
+        "cssName": "--bone"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-section",
+      "sourceStyleId": "b16d876c-af70-49d4-9504-dc5e83affaa3",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-section",
+      "sourceStyleId": "b16d876c-af70-49d4-9504-dc5e83affaa3",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-section",
+      "sourceStyleId": "b16d876c-af70-49d4-9504-dc5e83affaa3",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-div-5",
+      "sourceStyleId": "ffbd8c5e-1dfb-47c7-b016-4b099a1e9307",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-5",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-div-5",
+      "sourceStyleId": "ffbd8c5e-1dfb-47c7-b016-4b099a1e9307",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-5",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-div-6",
+      "sourceStyleId": "94cc6c66-a7ae-4f9c-9343-b08c8b36da22",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-6",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-div-6",
+      "sourceStyleId": "94cc6c66-a7ae-4f9c-9343-b08c8b36da22",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-6",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "label-before",
+      "sourceStyleId": "10290a4b-f11d-4798-b92d-b8f708108318",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "label-before",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-h2",
+      "sourceStyleId": "6197a67d-01ee-47ab-969b-beb412fd6285",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-h2",
+      "sourceStyleId": "6197a67d-01ee-47ab-969b-beb412fd6285",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-em-3",
+      "sourceStyleId": "aab60fdb-f10f-49ca-b06b-129831f14b15",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-em-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-p",
+      "sourceStyleId": "411dc78b-fab2-4adf-bdde-ae6df0c99871",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-p",
+      "sourceStyleId": "411dc78b-fab2-4adf-bdde-ae6df0c99871",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink-soft)",
+      "cssNames": [
+        "--ink-soft"
+      ],
+      "sourceNames": [
+        "--ink-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-soft",
+        "cssName": "--ink-soft"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "contact-grid",
+      "sourceStyleId": "0b06e263-f18e-43cf-906f-e4dd0148d953",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "contact-grid",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "contact-grid",
+      "sourceStyleId": "0b06e263-f18e-43cf-906f-e4dd0148d953",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "contact-grid",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "contact-grid",
+      "sourceStyleId": "0b06e263-f18e-43cf-906f-e4dd0148d953",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "contact-grid",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "contact-grid",
+      "sourceStyleId": "0b06e263-f18e-43cf-906f-e4dd0148d953",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "contact-grid",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "left",
+      "sourceStyleId": "1d604493-e455-4e41-adc4-f9a88b45524e",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "left",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "left",
+      "sourceStyleId": "1d604493-e455-4e41-adc4-f9a88b45524e",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "left",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "left",
+      "sourceStyleId": "1d604493-e455-4e41-adc4-f9a88b45524e",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "left",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "left",
+      "sourceStyleId": "1d604493-e455-4e41-adc4-f9a88b45524e",
+      "variant": "medium",
+      "property": "border-bottom-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "left",
+        "breakpoint_id": "medium",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "left-before",
+      "sourceStyleId": "46e85613-4c1b-4e8f-bf61-ed49b480ad46",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "left-before",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "lab",
+      "sourceStyleId": "87e99517-f253-4293-af4b-61e27ddb79ea",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "lab",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-h3",
+      "sourceStyleId": "4e37f06a-a274-4fc3-809a-69728d8c33cd",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-h3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-em-4",
+      "sourceStyleId": "6ec65cc4-ea2c-4764-8c1b-fe089550fbd3",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-em-4",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "pitch",
+      "sourceStyleId": "8be999d9-b695-4129-9efb-318cf34f860a",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pitch",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "reach",
+      "sourceStyleId": "d49756f5-d5a6-42eb-adf1-240733760655",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "reach",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-a-8",
+      "sourceStyleId": "e034a562-0daf-4b4f-a616-6b50a5585238",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-8",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-a-8",
+      "sourceStyleId": "e034a562-0daf-4b4f-a616-6b50a5585238",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-8",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "08_contact",
+      "className": "project-detail-div-10",
+      "sourceStyleId": "3c613e3d-f6a8-4ecd-b178-443f7e44ebe3",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-10",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-div-5",
+      "sourceStyleId": "ffbd8c5e-1dfb-47c7-b016-4b099a1e9307",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-5",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-div-5",
+      "sourceStyleId": "ffbd8c5e-1dfb-47c7-b016-4b099a1e9307",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-5",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-div-6",
+      "sourceStyleId": "94cc6c66-a7ae-4f9c-9343-b08c8b36da22",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-6",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-div-6",
+      "sourceStyleId": "94cc6c66-a7ae-4f9c-9343-b08c8b36da22",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-6",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "label-before",
+      "sourceStyleId": "10290a4b-f11d-4798-b92d-b8f708108318",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "label-before",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-h2",
+      "sourceStyleId": "6197a67d-01ee-47ab-969b-beb412fd6285",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-h2",
+      "sourceStyleId": "6197a67d-01ee-47ab-969b-beb412fd6285",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-em-3",
+      "sourceStyleId": "aab60fdb-f10f-49ca-b06b-129831f14b15",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-em-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-p",
+      "sourceStyleId": "411dc78b-fab2-4adf-bdde-ae6df0c99871",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-p",
+      "sourceStyleId": "411dc78b-fab2-4adf-bdde-ae6df0c99871",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink-soft)",
+      "cssNames": [
+        "--ink-soft"
+      ],
+      "sourceNames": [
+        "--ink-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-soft",
+        "cssName": "--ink-soft"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-section-3",
+      "sourceStyleId": "d18be2dc-1a00-41bf-a236-faa72c53d834",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-section-3",
+      "sourceStyleId": "d18be2dc-1a00-41bf-a236-faa72c53d834",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-section-3",
+      "sourceStyleId": "d18be2dc-1a00-41bf-a236-faa72c53d834",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-section-3",
+      "sourceStyleId": "d18be2dc-1a00-41bf-a236-faa72c53d834",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-section-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "related",
+      "sourceStyleId": "4af50db2-88b4-4ab8-8dd9-6218e313a875",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "related",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "related",
+      "sourceStyleId": "4af50db2-88b4-4ab8-8dd9-6218e313a875",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "related",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "related",
+      "sourceStyleId": "4af50db2-88b4-4ab8-8dd9-6218e313a875",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "related",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "related",
+      "sourceStyleId": "4af50db2-88b4-4ab8-8dd9-6218e313a875",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "related",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "related",
+      "sourceStyleId": "4af50db2-88b4-4ab8-8dd9-6218e313a875",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "related",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-a-9",
+      "sourceStyleId": "5fc8ffc9-d6ae-4b78-ad25-407abbac0e85",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-9",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-a-9",
+      "sourceStyleId": "5fc8ffc9-d6ae-4b78-ad25-407abbac0e85",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-9",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-a-9",
+      "sourceStyleId": "5fc8ffc9-d6ae-4b78-ad25-407abbac0e85",
+      "variant": "main_hover",
+      "property": "background",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-9",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-a-9",
+      "sourceStyleId": "5fc8ffc9-d6ae-4b78-ad25-407abbac0e85",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-9",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "a-before",
+      "sourceStyleId": "ceebf2be-225f-4107-88f6-9ebc8ba94b4e",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--ink-fade)",
+      "cssNames": [
+        "--ink-fade"
+      ],
+      "sourceNames": [
+        "--ink-fade"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "a-before",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-fade",
+        "cssName": "--ink-fade"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "a-before",
+      "sourceStyleId": "ceebf2be-225f-4107-88f6-9ebc8ba94b4e",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--ink-fade)",
+      "cssNames": [
+        "--ink-fade"
+      ],
+      "sourceNames": [
+        "--ink-fade"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "a-before",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-fade",
+        "cssName": "--ink-fade"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "a-before",
+      "sourceStyleId": "ceebf2be-225f-4107-88f6-9ebc8ba94b4e",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--ink-fade)",
+      "cssNames": [
+        "--ink-fade"
+      ],
+      "sourceNames": [
+        "--ink-fade"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "a-before",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-fade",
+        "cssName": "--ink-fade"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "a-before",
+      "sourceStyleId": "ceebf2be-225f-4107-88f6-9ebc8ba94b4e",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--ink-fade)",
+      "cssNames": [
+        "--ink-fade"
+      ],
+      "sourceNames": [
+        "--ink-fade"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "a-before",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-fade",
+        "cssName": "--ink-fade"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "id",
+      "sourceStyleId": "84b3177b-89ad-47b9-a840-9db645d0d7fc",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "id",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "id",
+      "sourceStyleId": "84b3177b-89ad-47b9-a840-9db645d0d7fc",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "id",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "name",
+      "sourceStyleId": "07937860-2ac2-4813-97ac-f0477ba72362",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "name",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-em-5",
+      "sourceStyleId": "02f985a6-7f0c-459b-862c-8b368198ac96",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-em-5",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-em-5",
+      "sourceStyleId": "02f985a6-7f0c-459b-862c-8b368198ac96",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-em-5",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "project-detail-div-11",
+      "sourceStyleId": "32219787-d79e-4a04-8fe9-f1e108df9207",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-11",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "arrow",
+      "sourceStyleId": "267f122e-3495-4a50-b888-921ebb9dc31c",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "arrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "arrow",
+      "sourceStyleId": "267f122e-3495-4a50-b888-921ebb9dc31c",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "arrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "09_related",
+      "className": "arrow",
+      "sourceStyleId": "267f122e-3495-4a50-b888-921ebb9dc31c",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "arrow",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "now",
+      "sourceStyleId": "09feb04a-4914-4ec5-ab50-345f6ef293bf",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "now",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-em-3",
+      "sourceStyleId": "aab60fdb-f10f-49ca-b06b-129831f14b15",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-em-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-footer",
+      "sourceStyleId": "ba3bcf26-15d3-406f-a798-4d5ae1b05081",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--navy)",
+      "cssNames": [
+        "--navy"
+      ],
+      "sourceNames": [
+        "--navy"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-footer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--navy",
+        "cssName": "--navy"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-footer",
+      "sourceStyleId": "ba3bcf26-15d3-406f-a798-4d5ae1b05081",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--on-d)",
+      "cssNames": [
+        "--on-d"
+      ],
+      "sourceNames": [
+        "--on-d"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-footer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d",
+        "cssName": "--on-d"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-footer",
+      "sourceStyleId": "ba3bcf26-15d3-406f-a798-4d5ae1b05081",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-footer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-footer",
+      "sourceStyleId": "ba3bcf26-15d3-406f-a798-4d5ae1b05081",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--ink)",
+      "cssNames": [
+        "--ink"
+      ],
+      "sourceNames": [
+        "--ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-footer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink",
+        "cssName": "--ink"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "foot-mark",
+      "sourceStyleId": "000d3a35-9d5f-4851-b54e-10793323f630",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--display)",
+      "cssNames": [
+        "--display"
+      ],
+      "sourceNames": [
+        "--display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "foot-mark",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--display",
+        "cssName": "--display"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "foot-mark",
+      "sourceStyleId": "000d3a35-9d5f-4851-b54e-10793323f630",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "foot-mark",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "foot-mark",
+      "sourceStyleId": "000d3a35-9d5f-4851-b54e-10793323f630",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--on-d-line)",
+      "cssNames": [
+        "--on-d-line"
+      ],
+      "sourceNames": [
+        "--on-d-line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "foot-mark",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d-line",
+        "cssName": "--on-d-line"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-div-12",
+      "sourceStyleId": "e138e734-1449-4e37-8b21-30a86e283a17",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-12",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-div-12",
+      "sourceStyleId": "e138e734-1449-4e37-8b21-30a86e283a17",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-12",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-p-2",
+      "sourceStyleId": "5d449b74-d2ea-4d2d-884b-1368b71904d9",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--on-d-soft)",
+      "cssNames": [
+        "--on-d-soft"
+      ],
+      "sourceNames": [
+        "--on-d-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-p-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d-soft",
+        "cssName": "--on-d-soft"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-a-10",
+      "sourceStyleId": "baaf7587-1b67-4430-ab03-037333973d84",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--on-d-soft)",
+      "cssNames": [
+        "--on-d-soft"
+      ],
+      "sourceNames": [
+        "--on-d-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-10",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d-soft",
+        "cssName": "--on-d-soft"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-a-10",
+      "sourceStyleId": "baaf7587-1b67-4430-ab03-037333973d84",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-10",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-a-10",
+      "sourceStyleId": "baaf7587-1b67-4430-ab03-037333973d84",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-10",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-a-11",
+      "sourceStyleId": "f71a2c90-0f70-4fb6-92df-5110686533d1",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--canvas)",
+      "cssNames": [
+        "--canvas"
+      ],
+      "sourceNames": [
+        "--canvas"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-11",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--canvas",
+        "cssName": "--canvas"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-a-11",
+      "sourceStyleId": "f71a2c90-0f70-4fb6-92df-5110686533d1",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--terra)",
+      "cssNames": [
+        "--terra"
+      ],
+      "sourceNames": [
+        "--terra"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-a-11",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--terra",
+        "cssName": "--terra"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-div-14",
+      "sourceStyleId": "333735bb-d4bd-4cab-b92a-96a163cbbffc",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--on-d-line)",
+      "cssNames": [
+        "--on-d-line"
+      ],
+      "sourceNames": [
+        "--on-d-line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-div-14",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d-line",
+        "cssName": "--on-d-line"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "project-detail-p-3",
+      "sourceStyleId": "36deaf25-183d-48f0-a236-d0ae6dd211e7",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--on-d-soft)",
+      "cssNames": [
+        "--on-d-soft"
+      ],
+      "sourceNames": [
+        "--on-d-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "project-detail-p-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d-soft",
+        "cssName": "--on-d-soft"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "foot-bar",
+      "sourceStyleId": "312ba832-4659-47b4-b498-90aae421ae43",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--on-d-line)",
+      "cssNames": [
+        "--on-d-line"
+      ],
+      "sourceNames": [
+        "--on-d-line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "foot-bar",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d-line",
+        "cssName": "--on-d-line"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "foot-bar",
+      "sourceStyleId": "312ba832-4659-47b4-b498-90aae421ae43",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--mono)",
+      "cssNames": [
+        "--mono"
+      ],
+      "sourceNames": [
+        "--mono"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "foot-bar",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mono",
+        "cssName": "--mono"
+      }
+    },
+    {
+      "section": "10_footer",
+      "className": "foot-bar",
+      "sourceStyleId": "312ba832-4659-47b4-b498-90aae421ae43",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--on-d-mute)",
+      "cssNames": [
+        "--on-d-mute"
+      ],
+      "sourceNames": [
+        "--on-d-mute"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "foot-bar",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--on-d-mute",
+        "cssName": "--on-d-mute"
+      }
+    }
+  ]
+}

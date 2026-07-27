@@ -13,6 +13,7 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 - **New Computer Install**: [INSTALL.md](./INSTALL.md)
 - **VPS Deployment**: [DEPLOYMENT.md](./DEPLOYMENT.md)
 - **Agent Hermes & Two-Workspace Sync**: [HERMES.md](./HERMES.md) - resume work from anywhere (phone via Hermes or local) with `bash scripts/sync.sh`
+- **Orca Agent IDE (Windows workstation & orchestration)**: [ORCA.md](./ORCA.md) - run multiple agents (Claude/Codex/Cursor/GLM) side by side in isolated git worktrees; replaces the WezTerm Agent Hub and the removed `@dispatch` layer
 - **Pricing & Timeline Rules**: [PRICING_TIMELINE_RULES.md](./sales/PRICING_TIMELINE_RULES.md) - per-page rates and durations (single source of truth)
 - **Sales Pillar**: [sales/SALES_SYSTEM_RULES.md](./sales/SALES_SYSTEM_RULES.md)
 - **Manage Pillar**: [manage/MANAGE_SYSTEM_RULES.md](./manage/MANAGE_SYSTEM_RULES.md)
@@ -21,11 +22,6 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 - **MCP Index**: [mcp-servers/MCP_INDEX.md](./mcp-servers/MCP_INDEX.md) - all MCP servers used across the project
 - **MCP Access Model**: [mcp-servers/ACCESS_MODEL.md](./mcp-servers/ACCESS_MODEL.md) - folder-based MCP permissions and profiles
 - **Webflow MCP Setup**: [mcp-servers/webflow/setup.md](./mcp-servers/webflow/setup.md)
-- **Cross-Provider Agent Dispatch**: [.agents/DISPATCH.md](./.agents/DISPATCH.md) - let any agent trigger another provider's agent (Claude/Codex/Pi), local + VPS. Trigger phrase: `@dispatch`
-
-## Trigger Phrases
-
-- **`@dispatch`** — When a message contains a line starting with `@dispatch`, load and follow [.agents/TRIGGER_PROMPT.txt](./.agents/TRIGGER_PROMPT.txt), then execute the cross-provider dispatch it describes. Syntax: `@dispatch [async] [diff:N] <role> <task...>` (e.g. `@dispatch backend write a Flask webhook`). Roles: `backend`, `automation`, `docs`, `token-opt`, `linking`, `audit`, `system-improvement`, `design`, `build`. If `diff:N` is omitted, self-rate the task difficulty 1–10 first per TRIGGER_PROMPT.txt. Mutating actions still require explicit confirmation.
 
 ## Operational Protocol
 1. **Understand the Pillar**: Before starting a task, read the rules for the relevant pillar.

@@ -17,7 +17,6 @@ MCP server definitions are centralized, but MCP usage is controlled by the activ
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Webflow | HTTP (remote) | Project | Agency, Client, Workflow | [webflow/setup.md](./webflow/setup.md) | CMS management, site audits, collection item CRUD, SEO, publishing |
 | Figma | HTTP (remote) | User/Global | Global, Agency, Client, Workflow | [figma/setup.md](./figma/setup.md) | Design file generation, design inspection, and conversion from HTML/CSS prototypes |
-| Agent Dispatch | stdio (local) | Project | Global | [agent-dispatch/setup.md](./agent-dispatch/setup.md) · [profiles/agent-dispatch.md](./profiles/agent-dispatch.md) | Cross-provider orchestration: trigger Claude/Codex/Pi agents headlessly (local + VPS). See [.agents/DISPATCH.md](../.agents/DISPATCH.md) |
 
 ## Server Instances (One Per Principal)
 

@@ -17,9 +17,8 @@ Clients scroll through the library and pick a style. A new client site is then
 **cloned from the chosen template** (variables + bound classes + style
 direction pre-installed), and the client's actual pages are produced through
 the pasteable-components converter
-([html_to_webflow.py](../../giovanni-serrano/workflows/07-webflow-build/html_to_webflow.py),
-currently in the Giovanni Serrano delivery; promote to a shared location when
-this plan starts).
+([html_to_webflow.py](./html_to_webflow.py), now the canonical home of the
+converter in this `07-webflow-build` template).
 
 ## Why This Model
 
@@ -63,9 +62,9 @@ single class inventory; "style direction" is a variable-collection swap.
    empty styleLess) so the paste-merge adopts the project's bound definitions;
    only custom classes carry baked CSS. Natural extension of the existing
    shared-utility thin-class mechanism.
-5. **Paste + verify**: per the "Build → Paste → Verify Protocol" in the
-   converter directive
-  ([html-to-webflow-clipboard.md](../../giovanni-serrano/workflows/07-webflow-build/html-to-webflow-clipboard.md)).
+5. **Paste + verify**: per the "Build → Paste → Verify Protocol" in
+   the converter directive
+  ([html-to-webflow-clipboard.md](./html-to-webflow-clipboard.md)).
 
 ## Milestones (in order)
 

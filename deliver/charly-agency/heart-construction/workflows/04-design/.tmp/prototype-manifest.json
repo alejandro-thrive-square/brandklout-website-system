@@ -1,0 +1,62 @@
+{
+  "project": "Heart Construction",
+  "artifact_type": "custom_homes_landing_page_wireframe_plus",
+  "allowed_copy_sources": [
+    "Charly Agency Mail - Fwd_ Document shared with you_ _B2B Questionnaire - Heart Construction.md",
+    "Charly Agency Mail - Fwd_ Next Steps & Project Details.md"
+  ],
+  "excluded_copy_sources": [
+    "Other client workspace assets and copy",
+    "Other client workspaces",
+    "PDF duplicates",
+    "External assumptions or unverified claims"
+  ],
+  "design_path": "Claude Design HTML/CSS/JS package",
+  "primary_file": "final-design/index.html",
+  "supporting_files": [
+    "final-design/styles.css",
+    "final-design/script.js"
+  ],
+  "prototype_copy": "prototypes/landing-page.html",
+  "sections": [
+    "Sticky navigation with scroll progress",
+    "Custom homes hero with local current-site project photography",
+    "Custom home stakes / homeowner concerns",
+    "Pre-construction planning differentiator with stacked interaction cards",
+    "Owner-led human proof section featuring Jason and Asaf with user-provided integrity story copy",
+    "Interactive custom home project path tabs",
+    "Selected project photography gallery with two-column closing project cards",
+    "Custom home contexts / related complex residential services",
+    "Real testimonial slider from current Heart Squarespace site",
+    "Greater Los Angeles service areas with parallax location tags around centered copy",
+    "Budget and construction-cost FAQ accordion",
+    "Custom home consultation lead form",
+    "Sticky mobile-friendly CTA",
+    "Footer with required launch details"
+  ],
+  "interaction_notes": [
+    "Scroll progress indicator",
+    "Reveal-on-scroll animation",
+    "Photography-led hero using current Heart site imagery, with floating notes and project image strip",
+    "Pointer-based hero/owner image tilt on capable devices",
+    "Hover lift and shimmer states on cards/buttons",
+    "Enhanced designed project path tabs with numbered states and no gradient underline",
+    "FAQ accordion using native details/summary interactions",
+    "Testimonial slider with previous/next controls and dots",
+    "Sticky consultation CTA after initial scroll",
+    "Reduced-motion media query disables motion where requested"
+  ],
+  "known_placeholders": [
+    "{{FORM_ENDPOINT}}",
+    "Placeholder phone number: (323) 555-0198",
+    "Final approval for current-site project and owner photography",
+    "License/credential details"
+  ],
+  "notes": [
+    "The page now prioritizes the Custom Homes landing page per client direction.",
+    "The rebuild target is Framer; this static package is the high-fidelity direction for Framer components/interactions.",
+    "The client references are Las Ruinas and the current Heart Construction Squarespace site.",
+    "Current-site imagery has been copied into final-design/assets for the static prototype; approved assets should be optimized in Framer before launch.",
+    "Form submission is intercepted locally until a real endpoint is connected."
+  ]
+}

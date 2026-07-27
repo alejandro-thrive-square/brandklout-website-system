@@ -1,0 +1,832 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clifton Exteriors - Media page (rebuild)</title>
+<!-- Preview scaffold: body font/background only. Converter ignores <link>. -->
+<link rel="stylesheet" href="_preview-base.css">
+
+<!-- ==============================================================
+     STATIC PAGE CSS. Shared classes are byte-identical to their
+     bake sources so every def merges on paste (Webflow merges
+     styles by name; identical defs reuse instead of forking -2):
+       - page-windows.html  -> :root tokens, section_win-hero,
+         section_win-financing, section_win-sunshine, cx-btn,
+         win-* breakpoint block
+       - sections-new.html  -> nx-* editorial atoms,
+         section_media-grid (2x2 click-to-load YouTube grid)
+     Content is 1:1 from cliftonexteriors.com/media; design follows
+     the staging homepage system (staging-analysis.md).
+     Section roots: section_win-hero, section_win-financing,
+     section_media-grid, section_win-sunshine. Reviews are NOT in
+     this file - paste the existing section_reviews-v2 payload
+     between the media grid and the closing section (see body
+     marker comment). New media-only class: page_media (root).
+     New-class prefix reserved for this page: med- (none needed).
+     ============================================================== -->
+<style>
+:root {
+  --_primitives---neutral-colors--brand-colors--blue: #243864;
+  --_primitives---neutral-colors--brand-colors--red: #b02034;
+  --_primitives---neutral-colors--brand-colors--warm: #eae1d5;
+  --_primitives---neutral-colors--neutral-dark: #121c32;
+  --_primitives---neutral-colors--neutral-darkest: #060911;
+  --_primitives---neutral-colors--neutral-light: #f6f4ef;
+  --_primitives---neutral-colors--neutral-lightest: #faf9f7;
+  --_primitives---neutral-colors--neutral: #d6d6d6;
+}
+
+/* single page root — the WHOLE page pastes as ONE payload (multi-root
+   merges crash the Designer; single root is the proven safe path) */
+.page_media { width: 100%; }
+
+/* ============================== HERO ============================== */
+.section_win-hero {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 8rem 5% 6rem;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  border-radius: 1rem;
+}
+.win-hero__bg { position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
+.win-hero__bg-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+.win-hero__scrim {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: linear-gradient(180deg, #121c32b3, #121c3266 45%, var(--_primitives---neutral-colors--neutral-darkest));
+}
+.win-hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+  background-color: #dadada33;
+  border-radius: 24px;
+  padding: 6px 14px 6px 10px;
+  font-size: 0.95rem;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__badge-star {
+  display: flex;
+  align-items: center;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__h1 {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.9;
+}
+.win-hero__h2 {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.win-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.win-hero__badge-chip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
+}
+.win-hero__badge-img { height: 2.75rem; width: auto; display: block; }
+
+/* =========================== FINANCING ============================ */
+.section_win-financing {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 5rem 5%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--warm);
+  border-radius: 1rem;
+}
+.win-fin__grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: center;
+}
+.win-fin__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.win-fin__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-fin__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-fin__visual {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.win-fin__img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; display: block; }
+
+/* ---------- shared editorial atoms (bespoke, merge-safe) ---------- */
+.nx-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--_primitives---neutral-colors--brand-colors--red);
+}
+.nx-eyebrow__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--red);
+}
+.nx-h2 {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3.5rem;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+}
+.nx-h2.is--light { color: var(--_primitives---neutral-colors--neutral-lightest); }
+.nx-em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.nx-sub {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+  opacity: 0.78;
+}
+.nx-sub.is--sublight { color: var(--_primitives---neutral-colors--neutral-lightest); opacity: 0.85; }
+
+/* ==================================================================
+   4. section_media-grid — click-to-load YouTube 2x2
+   ================================================================== */
+.section_media-grid {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 8rem 5%;
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border-radius: 1rem;
+}
+.media-grid__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  max-width: 44rem;
+  margin-bottom: 3.5rem;
+}
+.media-grid__grid {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.media-grid__item {
+  position: relative;
+  overflow: hidden;
+  border-radius: 1rem;
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  aspect-ratio: 16 / 9;
+  cursor: pointer;
+}
+.media-grid__thumb {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-position: 50%;
+  background-size: cover;
+  transition: transform .6s cubic-bezier(.22, 1, .36, 1), opacity .3s ease;
+}
+.media-grid__item:hover .media-grid__thumb { transform: scale(1.04); }
+.media-grid__scrim {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: linear-gradient(180deg, transparent 40%, #060911b3);
+}
+.media-grid__play {
+  position: absolute;
+  top: 50%; left: 50%;
+  transform: translate(-50%, -50%);
+  display: flex;
+  width: 4.5rem;
+  height: 4.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background-color: #faf9f733;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  transition: transform .3s cubic-bezier(.22, 1, .36, 1), background-color .3s ease;
+}
+.media-grid__item:hover .media-grid__play {
+  transform: translate(-50%, -50%) scale(1.08);
+  background-color: var(--_primitives---neutral-colors--brand-colors--red);
+}
+.media-grid__frame { position: absolute; top: 0; right: 0; bottom: 0; left: 0; }
+
+/* ============================ SUNSHINE ============================ */
+.section_win-sunshine {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--warm);
+  border-radius: 1rem;
+}
+.win-sun__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-sun__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-sun__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-sun__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.win-sun__area {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.7;
+}
+
+/* cx-btn — bespoke clone of the build's button component (identical block in
+   section-reviews.html; keep both copies byte-identical so defs merge). */
+.cx-btn {
+  border-radius: 2rem;
+  background-color: var(--_primitives---neutral-colors--brand-colors--blue);
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  text-align: center;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  display: flex;
+  overflow: hidden;
+}
+.cx-btn__hide { height: 1.5rem; overflow: hidden; }
+.cx-btn__wrap { display: flex; flex-direction: column; }
+.cx-btn__tile {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+.cx-btn__arrow { justify-content: center; align-items: center; display: flex; }
+
+/* glass variant on the dark band */
+.cx-btn.is--glass {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background-color: #faf9f733;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+
+/* ========================== BREAKPOINTS =========================== */
+@media screen and (max-width: 991px) {
+  .win-hero__h2 { font-size: 3.25rem; }
+  .win-port__item { width: 20rem; }
+  .win-proc__h { font-size: 3.25rem; }
+  .win-sun__h { font-size: 3.25rem; }
+  .win-fin__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .win-invite__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .win-curb__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .win-upg__grid { grid-template-columns: 1fr 1fr; }
+  .win-conf__grid { grid-template-columns: 1fr; }
+  .win-price__grid { grid-template-columns: 1fr; }
+}
+@media screen and (max-width: 767px) {
+  .section_win-hero { padding-top: 6rem; padding-bottom: 5rem; }
+  .section_win-process { padding-top: 5rem; padding-bottom: 5rem; }
+  .section_win-financing { padding-top: 4rem; padding-bottom: 4rem; }
+  .section_win-sunshine { padding-top: 5rem; padding-bottom: 5rem; }
+  .win-hero__h2 { font-size: 2.75rem; }
+  .win-proc__h { font-size: 2.75rem; }
+  .win-sun__h { font-size: 2.75rem; }
+  .win-fin__h { font-size: 2.5rem; }
+  .win-invite__h { font-size: 2.5rem; }
+  .win-upg__h { font-size: 2.5rem; }
+  .win-curb__h { font-size: 2.5rem; }
+  .win-port__h { font-size: 2.5rem; }
+  .win-conf__h { font-size: 2.5rem; }
+  .win-price__h { font-size: 2.5rem; }
+  .win-faq__h { font-size: 2.5rem; }
+  .win-contact__h { font-size: 2.5rem; }
+  .win-port__item { width: 18rem; }
+  .win-port__track { gap: 1rem; }
+  .win-port__marquee { gap: 1rem; }
+  .win-proc__mq-text { font-size: 6rem; }
+}
+@media screen and (max-width: 479px) {
+  .win-hero__h2 { font-size: 2.25rem; }
+  .win-proc__h { font-size: 2.25rem; }
+  .win-sun__h { font-size: 2.25rem; }
+  .win-upg__grid { grid-template-columns: 1fr; }
+  .win-port__item { width: 15rem; }
+  .win-hero__buttons { flex-direction: column; width: 100%; }
+  .win-hero__buttons .cx-btn { width: 100%; }
+  .win-proc__buttons { flex-direction: column; width: 100%; }
+  .win-proc__buttons .cx-btn { width: 100%; }
+  .win-sun__buttons { flex-direction: column; width: 100%; }
+  .win-sun__buttons .cx-btn { width: 100%; }
+  .win-hero__badge-img { height: 2.25rem; }
+  .win-faq__q { font-size: 1.125rem; padding: 1.25rem; }
+  .win-faq__a { padding: 0 1.25rem 1.25rem; }
+  .cx-btn__hide { height: auto; }
+  .cx-btn__wrap { height: 20px; }
+  .cx-btn__tile.is--bottom { display: none; }
+  .cx-btn__arrow { display: none; }
+}
+/* responsive — net-new batch classes (per-class defs byte-identical to
+   sections-new.html; grouped selectors there are subset to the classes
+   on this page, declarations unchanged) */
+@media screen and (max-width: 991px) {
+  .nx-h2 { font-size: 2.75rem; }
+}
+@media screen and (max-width: 767px) {
+  .section_media-grid { padding-top: 5rem; padding-bottom: 5rem; }
+  .nx-h2 { font-size: 2.25rem; }
+  .media-grid__grid { grid-template-columns: 1fr; }
+}
+</style>
+
+<link rel="stylesheet" href="site-shell.css" data-cx-site-shell>
+<script src="site-shell.js" defer data-cx-site-shell></script>
+</head>
+<body>
+
+<!-- ================================================================
+     PAGE: /media — rebuild of cliftonexteriors.com/media/
+     Content 1:1 (see 07-webflow-build/.tmp/redesign-flow/
+     phase-b-content.md §6); design per the staging homepage system.
+     Nav + footer are site-wide Webflow components — not part of this
+     payload. IMAGES hotlink the old WordPress host — re-upload to
+     Webflow assets and relink post-paste.
+     ONE-PASTE RULE: everything below sits inside the single
+     .page_media root so the converter emits ONE pasteable payload.
+     ================================================================ -->
+<div class="page_media">
+
+<!-- ============ SECTION 1: Hero (root: section_win-hero) ============ -->
+<section class="section_win-hero" data-win-hero>
+
+  <div class="win-hero__bg" aria-hidden="true">
+    <img class="win-hero__bg-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/DL_Resizer17.webp" alt="" loading="eager">
+    <div class="win-hero__scrim"></div>
+  </div>
+
+  <div class="win-hero__content">
+    <div class="win-hero__badge" data-win-reveal>
+      <span class="win-hero__badge-star" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+      </span>
+      <span>5/5 from over 75 reviews</span>
+    </div>
+
+    <div class="win-hero__eyebrow-wrap" data-win-reveal>
+      <h1 class="win-hero__h1">Our Media Center</h1>
+    </div>
+
+    <div class="win-hero__heading">
+      <h2 class="win-hero__h2" data-win-split>Watch Us <em class="win-hero__em">Transform Homes</em> Throughout Virginia</h2>
+    </div>
+
+    <div class="win-hero__buttons" data-win-reveal>
+      <a href="/contact-us" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/our-process" class="cx-btn is--glass">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Our Process</div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Our Process</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="win-hero__badges" data-win-reveal>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/GAF-CERTIFIED-copy.webp" alt="GAF-Certified" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2023/01/5-star-legacy-google-review.png" alt="A five star review for Google business review" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/ProVia-logo-copy.webp" alt="ProVia logo" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/shinglemaster-copy.webp" alt="ShingleMaster logo" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/11/nextdoor_2024_web.webp" alt="2024 Neighborhood Favorites Nextdoor" loading="lazy"></div>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS (rides as HtmlEmbed) -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-hero .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-hero .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    /* awwwards touches — masked word reveal (spans are JS-created) + slow bg zoom */
+    .win-hero__w-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .2em; margin-bottom: -.2em; }
+    .win-hero__w { display: inline-block; transform: translateY(110%); }
+    .win-hero__w.win-in { transform: none; transition: transform .9s cubic-bezier(.22, 1, .36, 1); }
+    @media (prefers-reduced-motion: no-preference) {
+      .section_win-hero .win-hero__bg-img { animation: win-hero-zoom 9s cubic-bezier(.22, 1, .36, 1) forwards; }
+    }
+    @keyframes win-hero-zoom { from { transform: scale(1.12); } to { transform: none; } }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS (rides as HtmlEmbed) -->
+  <script data-embed>
+    /* section_win-hero — masked word reveal + staggered reveal (dependency-free) */
+    (function () {
+      function splitWords(el) {
+        Array.prototype.slice.call(el.childNodes).forEach(function (node) {
+          if (node.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            node.textContent.split(/(\s+)/).forEach(function (part) {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+              var m = document.createElement('span'); m.className = 'win-hero__w-mask';
+              var w = document.createElement('span'); w.className = 'win-hero__w';
+              w.textContent = part; m.appendChild(w); frag.appendChild(m);
+            });
+            el.replaceChild(frag, node);
+          } else if (node.nodeType === 1) { splitWords(node); }
+        });
+      }
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var splitEl = section.querySelector('[data-win-split]');
+        var words = [];
+        if (splitEl) { splitWords(splitEl); words = splitEl.querySelectorAll('.win-hero__w'); }
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          words.forEach(function (w, i) {
+            setTimeout(function () { w.classList.add('win-in'); }, 150 + i * 45);
+          });
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-hero]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ======= SECTION 2: Financing (root: section_win-financing) ======= -->
+<section class="section_win-financing" data-win-fin>
+
+  <div class="win-fin__grid">
+    <div class="win-fin__text">
+      <div class="win-fin__eyebrow-wrap" data-win-reveal>
+        <p class="win-fin__eyebrow">Financing Available</p>
+      </div>
+      <div class="win-fin__heading" data-win-reveal>
+        <h2 class="win-fin__h">We Offer Financing For Your Project</h2>
+      </div>
+      <div class="win-fin__cta" data-win-reveal>
+        <a href="/financing" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Learn More</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Learn More</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="win-fin__visual" data-win-reveal>
+      <img class="win-fin__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/DL_Resizer5.webp" alt="Exterior remodeling project financed through Clifton Exteriors" loading="lazy">
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-financing .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-financing .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-financing — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-fin]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ================================================================
+     SECTION 3: Media video grid (root: section_media-grid)
+     Click-to-load YouTube (no iframes until click; thumbnails set by
+     JS from i.ytimg.com so nothing rides <img src> through the paste).
+     Video IDs 1:1 from cliftonexteriors.com/media/.
+     ================================================================ -->
+<section class="section_media-grid" data-nx-media>
+  <div class="media-grid__head">
+    <div class="nx-eyebrow" data-nx-reveal><div class="nx-eyebrow__dot"></div><div>Media Center</div></div>
+    <h2 class="nx-h2" data-nx-reveal>Watch Us <em class="nx-em">Transform Homes</em> Throughout Virginia</h2>
+  </div>
+  <div class="media-grid__grid">
+    <div class="media-grid__item" data-nx-video="eHL1NqT7Twk" data-nx-reveal role="button" tabindex="0" aria-label="Play video 1">
+      <div class="media-grid__thumb"></div>
+      <div class="media-grid__scrim" aria-hidden="true"></div>
+      <div class="media-grid__play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5.5v13l11-6.5L8 5.5z"/></svg></div>
+    </div>
+    <div class="media-grid__item" data-nx-video="4489D9-zn3E" data-nx-reveal role="button" tabindex="0" aria-label="Play video 2">
+      <div class="media-grid__thumb"></div>
+      <div class="media-grid__scrim" aria-hidden="true"></div>
+      <div class="media-grid__play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5.5v13l11-6.5L8 5.5z"/></svg></div>
+    </div>
+    <div class="media-grid__item" data-nx-video="kqIA3RTBdGk" data-nx-reveal role="button" tabindex="0" aria-label="Play video 3">
+      <div class="media-grid__thumb"></div>
+      <div class="media-grid__scrim" aria-hidden="true"></div>
+      <div class="media-grid__play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5.5v13l11-6.5L8 5.5z"/></svg></div>
+    </div>
+    <div class="media-grid__item" data-nx-video="NELbJnxGM84" data-nx-reveal role="button" tabindex="0" aria-label="Play video 4">
+      <div class="media-grid__thumb"></div>
+      <div class="media-grid__scrim" aria-hidden="true"></div>
+      <div class="media-grid__play" aria-hidden="true"><svg width="22" height="22" viewBox="0 0 24 24" fill="currentColor" xmlns="http://www.w3.org/2000/svg"><path d="M8 5.5v13l11-6.5L8 5.5z"/></svg></div>
+    </div>
+  </div>
+
+  <style data-embed>
+    .nx-pre { opacity: 0; transform: translateY(1.5rem); }
+    .nx-pre.nx-in { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1); }
+  </style>
+  <script data-embed>
+    /* section_media-grid — lite YouTube: thumb via JS, iframe on click */
+    (function () {
+      function initItem(item) {
+        var id = item.getAttribute('data-nx-video');
+        if (!id) return;
+        var thumb = item.querySelector('.media-grid__thumb');
+        if (thumb) { thumb.style.backgroundImage = 'url(https://i.ytimg.com/vi/' + id + '/hqdefault.jpg)'; }
+        function play() {
+          if (item.getAttribute('data-nx-playing')) return;
+          item.setAttribute('data-nx-playing', '1');
+          var f = document.createElement('iframe');
+          f.className = 'media-grid__frame';
+          f.width = '100%'; f.height = '100%';
+          f.setAttribute('frameborder', '0');
+          f.setAttribute('allow', 'accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture');
+          f.setAttribute('allowfullscreen', '');
+          f.src = 'https://www.youtube-nocookie.com/embed/' + id + '?autoplay=1&rel=0';
+          item.appendChild(f);
+        }
+        item.addEventListener('click', play);
+        item.addEventListener('keydown', function (e) { if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); play(); } });
+      }
+      function init(section) {
+        if (!section || section.getAttribute('data-nx-media-ready')) return;
+        section.setAttribute('data-nx-media-ready', '1');
+        section.querySelectorAll('[data-nx-video]').forEach(initItem);
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-nx-reveal]');
+        items.forEach(function (el) { el.classList.add('nx-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            io.unobserve(e.target);
+            e.target.classList.add('nx-in');
+          });
+        }, { threshold: .2 });
+        items.forEach(function (el) { io.observe(el); });
+      }
+      function boot() { document.querySelectorAll('[data-nx-media]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+</section>
+
+<!-- ================================================================
+     SECTION 4: REVIEWS — NOT part of this payload.
+     Paste the existing reviews wall here (already built + QA-passed):
+       07-webflow-build/.tmp/section-reviews/paste_01_section_reviews-v2.html
+     Its classes (section_reviews-v2, reviews-wall__*, review-card__*,
+     cx-btn) merge cleanly with this page's payload.
+     ================================================================ -->
+
+<!-- ==== SECTION 5: Closing (root: section_win-sunshine) ==== -->
+<section class="section_win-sunshine" data-win-sun>
+
+  <div class="win-sun__content">
+    <div class="win-sun__heading" data-win-reveal>
+      <h2 class="win-sun__h">Make Your Home The <em class="win-sun__em">Talk Of The Neighborhood</em></h2>
+    </div>
+
+    <div class="win-sun__buttons" data-win-reveal>
+      <a href="/contact-us" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="win-sun__area-wrap" data-win-reveal>
+      <p class="win-sun__area">Proudly serving Fairfax County, Prince William County, Loudoun County, and Surrounding Areas.</p>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-sunshine .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-sunshine .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-sunshine — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .35 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-sun]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+</div>
+<!-- ===================== end .page_media root ===================== -->
+
+</body>
+</html>

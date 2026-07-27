@@ -4,13 +4,20 @@ Connects Claude Code to Webflow's APIs for CMS management, site audits, collecti
 
 ## Installation
 
-The server was installed via:
+Webflow is registered as **one server instance per principal** (see [ACCESS_MODEL.md — Server Instances](../ACCESS_MODEL.md#server-instances-one-per-principal)). All instances share the same URL; each holds its own OAuth grant scoped to that principal's sites:
 
 ```bash
-claude mcp add --transport http webflow https://mcp.webflow.com/mcp -s project
+# Agency-owned sites
+claude mcp add --transport http webflow-webzite https://mcp.webflow.com/mcp -s project
+
+# One per client (slug matches the deliver/ folder name)
+claude mcp add --transport http webflow-<client-name> https://mcp.webflow.com/mcp -s project
 ```
 
-This added the Webflow MCP to `.mcp.json` at the project root (project-scoped).
+Current instances are listed in [MCP_INDEX.md](../MCP_INDEX.md#server-instances-one-per-principal). The original unscoped `webflow` entry is deprecated and will be removed once active work has migrated to per-client instances.
+
+> [!IMPORTANT]
+> OAuth grants are keyed by server *name*. Re-authenticating a shared server for a different client silently wipes the previous client's grant — this is exactly why instances are per-principal. When authorizing an instance, select **only** that principal's sites in the OAuth screen.
 
 ## Folder-Based Access
 
@@ -72,6 +79,8 @@ The Webflow MCP provides tools for:
 - **Bridge App not connecting**: Ensure the Webflow Designer is open and the Bridge App is launched from the Apps panel (E key)
 - **OAuth issues**: Re-authenticate by logging out via `/mcp` and reconnecting
 - **Permission errors**: Verify the authorized sites in the OAuth flow include the target site
+- **Server missing from `/mcp` entirely**: project-scoped servers require a one-time approval at session start, and Claude Code remembers a rejection silently. Run `claude mcp reset-project-choices`, restart the session, and approve the server when prompted.
+- **"claude.ai Webflow" is not this server**: `/mcp` may also list a `claude.ai Webflow` connector — that is a claude.ai account-level connector tied to whichever Claude account the terminal is logged into (it can fail with "Server not found" on other accounts). Always select the project-scoped instance (`webflow-<principal>`) instead.
 
 ## Version Control
 

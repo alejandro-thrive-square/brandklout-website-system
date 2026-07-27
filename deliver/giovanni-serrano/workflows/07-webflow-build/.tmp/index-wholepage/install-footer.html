@@ -1,0 +1,248 @@
+<!doctype html><html><head><meta charset="utf-8"><title>Install FOOTER</title>
+<style>body{font:14px system-ui;margin:2rem;max-width:760px}button{font-size:1.05rem;padding:.8rem 1.4rem;background:#1463ff;color:#fff;border:0;border-radius:.4rem;cursor:pointer}.ok{color:#0a7d28;font-weight:600;margin-left:1rem}textarea{width:100%;height:280px;font:12px monospace;margin-top:1rem}</style>
+</head><body>
+<h2>Copy FOOTER code (textarea holder)</h2>
+<p><button id="b">Copy FOOTER</button><span id="s"></span></p>
+<textarea id="d" readonly>&lt;script&gt;
+(() =&gt; {
+const io = new IntersectionObserver((entries) =&gt; {
+      entries.forEach(e =&gt; { if (e.isIntersecting) { e.target.classList.add('in'); io.unobserve(e.target); } });
+    }, { threshold: 0.12 });
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach(el =&gt; io.observe(el));
+
+    document.querySelectorAll('a[href^="#"]').forEach(a =&gt; {
+      a.addEventListener('click', e =&gt; {
+        const t = document.querySelector(a.getAttribute('href'));
+        if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 90, behavior: 'smooth' }); }
+      });
+    });
+
+    // Portfolio renders from static markup baked into this page (Airtable fetch removed for Webflow static build).
+
+    // hamburger nav
+    const navToggle = document.querySelector('button.nav-toggle') || document.querySelector('.nav-toggle');
+    const navLinks = document.querySelector('nav.top .links');
+    if (navToggle &amp;&amp; navLinks) {
+      navToggle.addEventListener('click', () =&gt; {
+        navLinks.classList.toggle('open');
+        navToggle.textContent = navLinks.classList.contains('open') ? '✕' : '☰';
+      });
+      document.addEventListener('click', (e) =&gt; {
+        if (!e.target.closest('nav.top')) {
+          navLinks.classList.remove('open');
+          navToggle.textContent = '☰';
+        }
+      });
+    }
+
+    // services draggable infinite slider — smoothed with rAF batching
+    const track = document.getElementById('svc-track');
+    if (track) {
+      const originals = Array.from(track.children);
+      const dragCursor = document.getElementById('svc-drag-cursor');
+      let slideWidth = 0;
+      let index = originals.length;
+      let autoTimer = null;
+      let resumeTimer = null;
+      let isDragging = false;
+      let didDrag = false;
+      let startX = 0;
+      let startScroll = 0;
+      let lastX = 0;
+      let lastTime = 0;
+      let velocity = 0;
+      let pendingScroll = null;
+      let pendingCursor = null;
+      let rafId = null;
+      let cursorRafId = null;
+
+      const prepareClone = (node) =&gt; {
+        const clone = node.cloneNode(true);
+        clone.classList.add('is-clone');
+        clone.classList.remove('reveal');
+        clone.setAttribute('aria-hidden', 'true');
+        return clone;
+      };
+
+      const beforeClones = originals.map(prepareClone);
+      const afterClones = originals.map(prepareClone);
+      track.replaceChildren(...beforeClones, ...originals, ...afterClones);
+
+      const slides = Array.from(track.children);
+      const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+      const measure = () =&gt; {
+        const first = slides[0];
+        const second = slides[1];
+        slideWidth = second.offsetLeft - first.offsetLeft || second.getBoundingClientRect().width;
+        jumpTo(index);
+      };
+
+      const jumpTo = (nextIndex) =&gt; {
+        index = nextIndex;
+        track.scrollLeft = slideWidth * index;
+      };
+
+      const goTo = (nextIndex, behavior = 'smooth') =&gt; {
+        index = nextIndex;
+        track.scrollTo({ left: slideWidth * index, behavior });
+      };
+
+      const normalizeLoop = () =&gt; {
+        if (index &lt; originals.length) jumpTo(index + originals.length);
+        if (index &gt;= originals.length * 2) jumpTo(index - originals.length);
+      };
+
+      const stopAuto = () =&gt; {
+        clearInterval(autoTimer);
+        clearTimeout(resumeTimer);
+      };
+
+      const startAuto = () =&gt; {
+        if (reduceMotion.matches) return;
+        stopAuto();
+        autoTimer = setInterval(() =&gt; goTo(index + 1), 4200);
+      };
+
+      const resumeAuto = () =&gt; {
+        stopAuto();
+        resumeTimer = setTimeout(startAuto, 1800);
+      };
+
+      const settleToNearest = () =&gt; {
+        if (!slideWidth) return;
+        // velocity-aware: if user flicked, advance one more slide in flick direction
+        const projected = track.scrollLeft + velocity * 120;
+        goTo(Math.round(projected / slideWidth));
+      };
+
+      // rAF-batched scrollLeft write — keeps drag silky on high-refresh displays
+      const flushScroll = () =&gt; {
+        rafId = null;
+        if (pendingScroll == null) return;
+        track.scrollLeft = pendingScroll;
+        pendingScroll = null;
+      };
+
+      const flushCursor = () =&gt; {
+        cursorRafId = null;
+        if (!dragCursor || !pendingCursor) return;
+        dragCursor.style.left = `${pendingCursor.x}px`;
+        dragCursor.style.top = `${pendingCursor.y}px`;
+        pendingCursor = null;
+      };
+
+      track.addEventListener('scroll', () =&gt; {
+        if (!slideWidth) return;
+        index = Math.round(track.scrollLeft / slideWidth);
+        window.clearTimeout(track._loopTimer);
+        track._loopTimer = window.setTimeout(normalizeLoop, 120);
+      }, { passive: true });
+
+      track.addEventListener('wheel', (e) =&gt; {
+        if (Math.abs(e.deltaX) &gt; Math.abs(e.deltaY)) resumeAuto();
+      }, { passive: true });
+
+      track.addEventListener('pointerdown', (e) =&gt; {
+        if (e.button !== undefined &amp;&amp; e.button !== 0) return;
+        isDragging = true;
+        didDrag = false;
+        startX = e.clientX;
+        lastX = e.clientX;
+        lastTime = performance.now();
+        velocity = 0;
+        startScroll = track.scrollLeft;
+        track.classList.add('dragging');
+        dragCursor?.classList.add('dragging');
+        track.setPointerCapture(e.pointerId);
+        stopAuto();
+      });
+
+      track.addEventListener('pointermove', (e) =&gt; {
+        if (!isDragging) return;
+        const dx = e.clientX - startX;
+        if (Math.abs(dx) &gt; 6) didDrag = true;
+        // track velocity for flick detection
+        const now = performance.now();
+        const dt = now - lastTime;
+        if (dt &gt; 0) {
+          // px per ms — smoothed slightly
+          velocity = velocity * 0.7 + ((lastX - e.clientX) / dt) * 0.3;
+        }
+        lastX = e.clientX;
+        lastTime = now;
+        // batch scrollLeft writes via rAF — single write per frame
+        pendingScroll = startScroll - dx;
+        if (rafId == null) rafId = requestAnimationFrame(flushScroll);
+        e.preventDefault();
+      });
+
+      const endDrag = (e) =&gt; {
+        if (!isDragging) return;
+        isDragging = false;
+        track.classList.remove('dragging');
+        dragCursor?.classList.remove('dragging');
+        if (track.hasPointerCapture(e.pointerId)) track.releasePointerCapture(e.pointerId);
+        // flush any pending scroll before snapping
+        if (rafId != null) {
+          cancelAnimationFrame(rafId);
+          rafId = null;
+          if (pendingScroll != null) {
+            track.scrollLeft = pendingScroll;
+            pendingScroll = null;
+          }
+        }
+        settleToNearest();
+        resumeAuto();
+      };
+
+      track.addEventListener('pointerup', endDrag);
+      track.addEventListener('pointercancel', endDrag);
+      track.addEventListener('click', (e) =&gt; {
+        if (!didDrag) return;
+        e.preventDefault();
+        e.stopPropagation();
+        didDrag = false;
+      }, true);
+      track.addEventListener('pointerenter', () =&gt; {
+        dragCursor?.classList.add('active');
+      });
+      track.addEventListener('pointerleave', () =&gt; {
+        dragCursor?.classList.remove('active', 'dragging');
+      });
+      // batch cursor follow via rAF too
+      track.addEventListener('pointermove', (e) =&gt; {
+        if (!dragCursor) return;
+        pendingCursor = { x: e.clientX, y: e.clientY, dragging: isDragging };
+        if (cursorRafId == null) cursorRafId = requestAnimationFrame(flushCursor);
+      }, { passive: true });
+      window.addEventListener('resize', measure);
+
+      requestAnimationFrame(() =&gt; {
+        measure();
+        startAuto();
+      });
+    }
+
+
+    // proportional scale-up above 1920
+    function applyDesktopZoom() {
+      const w = window.innerWidth;
+      document.documentElement.style.zoom = w &gt; 1920 ? (w / 1920) : '';
+    }
+    applyDesktopZoom();
+    window.addEventListener('resize', applyDesktopZoom);
+})();
+&lt;/script&gt;</textarea>
+<script>
+const t=document.getElementById('d').value;
+document.getElementById('b').addEventListener('click',()=>{
+  const h=ev=>{ev.preventDefault();ev.clipboardData.setData('text/plain',t);};
+  document.addEventListener('copy',h);
+  const ok=document.execCommand('copy');
+  document.removeEventListener('copy',h);
+  const s=document.getElementById('s');
+  s.textContent= ok ? '✓ Copied '+t.length+' chars' : 'Copy failed';
+  s.className= ok ? 'ok':'';
+});
+</script></body></html>

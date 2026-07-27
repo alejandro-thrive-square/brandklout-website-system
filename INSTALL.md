@@ -27,6 +27,7 @@ Install these tools on the new computer before cloning:
 - `rclone`
 - SSH client
 - Claude Code or the agent runtime used for this project
+- Orca Agent IDE (local workstation — installed in [Step 10](#step-10-install-orca-agent-ide-local-workstation); see [ORCA.md](./ORCA.md))
 - Node.js only if a workflow or MCP setup requires it
 
 On Windows, use PowerShell for local commands. For scripts ending in `.sh`, use Git Bash, WSL, or another Bash-compatible shell.
@@ -185,6 +186,27 @@ rclone lsd vps:/root/webzite-agentic-workflow
 
 Preview heavy asset sync from the VPS to the local machine before downloading anything:
 
+```bash
+bash scripts/bootstrap.sh --dry-run
+```
+
+Restore brand assets and heavy `.tmp/` media with the bootstrap helper:
+
+```bash
+bash scripts/bootstrap.sh
+```
+
+You can restrict the restore when needed:
+
+```bash
+bash scripts/bootstrap.sh --brand-only
+bash scripts/bootstrap.sh --media-only --client giovanni-serrano
+```
+
+The bootstrap helper uses safe `rclone copy` operations from VPS to local. It never deletes local files and never writes to the VPS.
+
+Manual targeted copies are still available when you need a narrow restore:
+
 ```powershell
 rclone copy vps:/root/webzite-agentic-workflow/manage/brand-assets ./manage/brand-assets --dry-run --progress
 ```
@@ -270,7 +292,32 @@ Run a workflow-specific executor only after reading the relevant pillar rules an
 - [DELIVER_SYSTEM_RULES.md](./deliver/DELIVER_SYSTEM_RULES.md)
 - The target workflow directive under `deliver/process/` or `deliver/<client>/workflows/`
 
-## Step 10: Agent Handoff Checklist
+## Step 10: Install Orca Agent IDE (Local Workstation)
+
+The supported local workstation is now **Orca Agent IDE** — a desktop app that runs multiple agents side by side, each in its own isolated git worktree. It replaces the former WezTerm "Agent Hub" (multiple PowerShell tabs) and the removed `@dispatch` orchestration layer. Full reference: [ORCA.md](./ORCA.md).
+
+> [!NOTE]
+> Orca is external tooling and is **not** stored in this repository. Install it per-machine; only [ORCA.md](./ORCA.md) is versioned here.
+
+1. **Download and install.** Get the Windows installer `orca-windows-setup.exe` from the latest release at [github.com/stablyai/orca/releases/latest](https://github.com/stablyai/orca/releases/latest) and run it.
+2. **First launch.** Grant Orca access to your home directory. When prompted, let it **import existing config** — it reads `~/.claude` and `~/.codex`, so your existing Claude Code and Codex accounts/subscriptions carry over (this covers the old `claude` / `claude2` account separation via Claude Code's account hot-swap).
+3. **Set the shell.** Under **Settings → Terminal**, set the default shell to **PowerShell**.
+4. **Add the repo.** In the sidebar, **Add Repo** and point Orca at the local checkout:
+
+   ```text
+   C:\Users\<USER>\Documents\Webzite Studio\Webzite Agentic Workflow
+   ```
+
+   Orca reads git state and sets your default branch as the base reference.
+5. **Configure agents.** Under **Settings → Agents**, confirm the built-in agents (Claude Code, Codex, Cursor CLI, GLM-5.2). Add any extra CLIs you use (e.g. `pi`, `opencode`) via **Add a custom CLI agent** — the picker simply launches the process in a terminal. Authenticate each CLI once inside its Orca terminal; sign in when prompted. Do not store auth tokens in this repository.
+6. **(Optional) Run agents on the VPS.** The chosen remote model is an **SSH target** — Orca stays local, agents and worktrees run on the Hostinger VPS (nothing is installed on the VPS beyond git + agent CLIs). Add it under **Settings → SSH** using the same `root@<VPS_HOST>` connection as the rclone `vps` remote. Full steps and VPS readiness notes: [ORCA.md — Run Orca Against the Hostinger VPS](./ORCA.md#run-orca-against-the-hostinger-vps-option-a-ssh-target).
+
+Verify: open Orca, confirm the repo appears in the sidebar, create a test worktree with **+**, launch Claude Code in it, and confirm the agent starts in a PowerShell terminal scoped to that worktree. To run several agents at once, create additional worktrees and assign a different agent to each (see [ORCA.md — Multi-Agent Orchestration](./ORCA.md#multi-agent-orchestration)).
+
+> [!NOTE]
+> **Legacy:** the previous WezTerm "Agent Hub" shortcut (`~/.wezterm.lua` + a Start Menu `Agent Hub.lnk`) is superseded by Orca and no longer maintained. Its config lives in git history if ever needed.
+
+## Step 11: Agent Handoff Checklist
 
 Before declaring the new computer ready, confirm:
 
@@ -283,6 +330,7 @@ Before declaring the new computer ready, confirm:
 - `rclone` remote `vps` works.
 - Required heavy assets have been copied down from the VPS.
 - MCP servers are visible and any required OAuth auth is complete.
+- Orca Agent IDE installed, repo added, and agents authenticated (a test worktree launches Claude Code in a scoped PowerShell terminal).
 - [SYSTEM_RULES.md](./SYSTEM_RULES.md), [DEPLOYMENT.md](./DEPLOYMENT.md), and relevant pillar docs have been read.
 
 ## Recovery Boundaries
@@ -315,6 +363,7 @@ Update this document immediately when any of the following changes:
 - VPS host, user, or repository path.
 - `rclone` remote name or asset storage layout.
 - MCP server setup.
+- Orca Agent IDE setup.
 - Deployment process.
 - Secret management process.
 

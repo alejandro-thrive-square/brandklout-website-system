@@ -1,0 +1,734 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clifton Exteriors — Financing page (rebuild)</title>
+<!-- Preview scaffold: body font/background only. Converter ignores <link>. -->
+<link rel="stylesheet" href="_preview-base.css">
+
+<!-- ==============================================================
+     STATIC PAGE CSS — shared classes are byte-identical to their
+     bake sources so every def merges on paste (Webflow merges styles
+     by name; identical defs reuse instead of forking -2):
+       - page-windows.html → :root tokens, section_win-hero,
+         section_win-sunshine, cx-btn family
+       - sections-new.html → section_fin-partners (+ the nx-* atoms
+         it uses: nx-eyebrow, nx-h2, nx-em)
+     Only NEW class on this page: the page_financing root (new-class
+     prefix fin- reserved; no other new classes were needed).
+     Content is 1:1 from cliftonexteriors.com/financing/ (see
+     redesign-flow/phase-b-content.md §4a/4b/4c); the GreenSky card
+     body is DRAFT copy (old site was lorem) — marked in markup.
+     DROPPED BY DESIGN — the old page's lorem placeholder sections
+     "Section Headline" (GreenSky merchantkit module, id 73ac4ee7)
+     and "Your Trust Is Important To Us" (id ce7c576) are intentionally
+     NOT rebuilt in the redesign.
+     Section roots, in order: section_win-hero → section_fin-partners
+     → [reviews marker] → section_win-sunshine. Reviews are NOT in
+     this file — paste the existing section_reviews-v2 payload at the
+     body marker comment.
+     COMPONENT-REUSE NOTE: hero + sunshine reuse the shared win-*
+     system; if matching "Section / Windows *" components exist in the
+     Designer, replace post-paste per the runbook (props re-set).
+     ============================================================== -->
+<style>
+:root {
+  --_primitives---neutral-colors--brand-colors--blue: #243864;
+  --_primitives---neutral-colors--brand-colors--red: #b02034;
+  --_primitives---neutral-colors--brand-colors--warm: #eae1d5;
+  --_primitives---neutral-colors--neutral-dark: #121c32;
+  --_primitives---neutral-colors--neutral-darkest: #060911;
+  --_primitives---neutral-colors--neutral-light: #f6f4ef;
+  --_primitives---neutral-colors--neutral-lightest: #faf9f7;
+  --_primitives---neutral-colors--neutral: #d6d6d6;
+}
+
+/* single page root — the WHOLE page pastes as ONE payload (multi-root
+   merges crash the Designer; single root is the proven safe path) */
+.page_financing { width: 100%; }
+
+/* ============================== HERO ============================== */
+.section_win-hero {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 8rem 5% 6rem;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  border-radius: 1rem;
+}
+.win-hero__bg { position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
+.win-hero__bg-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+.win-hero__scrim {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: linear-gradient(180deg, #121c32b3, #121c3266 45%, var(--_primitives---neutral-colors--neutral-darkest));
+}
+.win-hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+  background-color: #dadada33;
+  border-radius: 24px;
+  padding: 6px 14px 6px 10px;
+  font-size: 0.95rem;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__badge-star {
+  display: flex;
+  align-items: center;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__h1 {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.9;
+}
+.win-hero__h2 {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.win-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.win-hero__badge-chip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
+}
+.win-hero__badge-img { height: 2.75rem; width: auto; display: block; }
+
+/* ------- nx-* shared editorial atoms (bake: sections-new.html) ------- */
+.nx-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--_primitives---neutral-colors--brand-colors--red);
+}
+.nx-eyebrow__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--red);
+}
+.nx-h2 {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3.5rem;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+}
+.nx-em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+
+/* ==================================================================
+   3. section_fin-partners — benefits trio + partner cards
+   ================================================================== */
+.section_fin-partners {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 8rem 5%;
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border-radius: 1rem;
+}
+.finpart__head {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  max-width: 44rem;
+  margin-bottom: 3.5rem;
+}
+.finpart__trio {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1rem;
+  margin-bottom: 4rem;
+}
+.finpart__mini {
+  background-color: #ffffff;
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  border-radius: 1rem;
+  padding: 1.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.finpart__mini-icon {
+  display: flex;
+  width: 2.5rem;
+  height: 2.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: var(--_primitives---neutral-colors--neutral-light);
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.finpart__mini-h {
+  margin: 0;
+  font-size: 1.25rem;
+  line-height: 1.25;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+}
+.finpart__mini-p {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+  opacity: 0.72;
+}
+.finpart__cards {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1rem;
+}
+.finpart__card {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.25rem;
+  padding: 2.75rem;
+  border-radius: 1rem;
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  transition: transform .35s cubic-bezier(.22, 1, .36, 1);
+}
+.finpart__card:hover { transform: translateY(-0.375rem); }
+.finpart__card.is--paper {
+  background-color: #ffffff;
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+}
+.finpart__logo { height: 3.5rem; width: auto; max-width: 14rem; object-fit: contain; }
+.finpart__badge-icon {
+  display: flex;
+  width: 3.5rem;
+  height: 3.5rem;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background-color: #faf9f71a;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.finpart__offer {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 2rem;
+  line-height: 1.15;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.finpart__card.is--paper .finpart__offer { color: var(--_primitives---neutral-colors--neutral-dark); }
+.finpart__terms {
+  margin: 0;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.7;
+}
+.finpart__card.is--paper .finpart__terms { color: var(--_primitives---neutral-colors--neutral-dark); opacity: 0.72; }
+.finpart__partner-tag {
+  font-size: 0.85rem;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.55;
+}
+.finpart__card.is--paper .finpart__partner-tag { color: var(--_primitives---neutral-colors--neutral-dark); opacity: 0.55; }
+
+/* ============================ SUNSHINE ============================ */
+.section_win-sunshine {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--warm);
+  border-radius: 1rem;
+}
+.win-sun__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-sun__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-sun__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-sun__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.win-sun__area {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.7;
+}
+
+/* cx-btn — bespoke clone of the build's button component (identical block in
+   section-reviews.html; keep both copies byte-identical so defs merge). */
+.cx-btn {
+  border-radius: 2rem;
+  background-color: var(--_primitives---neutral-colors--brand-colors--blue);
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  text-align: center;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  display: flex;
+  overflow: hidden;
+}
+.cx-btn__hide { height: 1.5rem; overflow: hidden; }
+.cx-btn__wrap { display: flex; flex-direction: column; }
+.cx-btn__tile {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+.cx-btn__arrow { justify-content: center; align-items: center; display: flex; }
+
+/* glass variant on the dark band */
+.cx-btn.is--glass {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background-color: #faf9f733;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+
+/* ========================== BREAKPOINTS =========================== */
+@media screen and (max-width: 991px) {
+  .win-hero__h2 { font-size: 3.25rem; }
+  .win-sun__h { font-size: 3.25rem; }
+  .nx-h2 { font-size: 2.75rem; }
+  .finpart__trio { grid-template-columns: 1fr; }
+  .finpart__cards { grid-template-columns: 1fr; }
+}
+@media screen and (max-width: 767px) {
+  .section_win-hero { padding-top: 6rem; padding-bottom: 5rem; }
+  .section_win-sunshine { padding-top: 5rem; padding-bottom: 5rem; }
+  .section_fin-partners { padding-top: 5rem; padding-bottom: 5rem; }
+  .win-hero__h2 { font-size: 2.75rem; }
+  .win-sun__h { font-size: 2.75rem; }
+  .nx-h2 { font-size: 2.25rem; }
+}
+@media screen and (max-width: 479px) {
+  .win-hero__h2 { font-size: 2.25rem; }
+  .win-sun__h { font-size: 2.25rem; }
+  .win-hero__buttons { flex-direction: column; width: 100%; }
+  .win-hero__buttons .cx-btn { width: 100%; }
+  .win-sun__buttons { flex-direction: column; width: 100%; }
+  .win-sun__buttons .cx-btn { width: 100%; }
+  .win-hero__badge-img { height: 2.25rem; }
+  .cx-btn__hide { height: auto; }
+  .cx-btn__wrap { height: 20px; }
+  .cx-btn__tile.is--bottom { display: none; }
+  .cx-btn__arrow { display: none; }
+}
+</style>
+
+<link rel="stylesheet" href="site-shell.css" data-cx-site-shell>
+<script src="site-shell.js" defer data-cx-site-shell></script>
+</head>
+<body>
+
+<!-- ================================================================
+     PAGE: /financing — rebuild of cliftonexteriors.com/financing/
+     Content 1:1 (phase-b-content.md §4a/4b/4c + financing outline);
+     design per the staging homepage system. Nav + footer are
+     site-wide Webflow components — not part of this payload.
+     ONE-PASTE RULE: everything below sits inside the single
+     .page_financing root so the converter emits ONE pasteable payload.
+     IMAGES hotlink the old WordPress host — re-upload to Webflow
+     assets and relink post-paste.
+     ================================================================ -->
+<div class="page_financing">
+
+<!-- ============ SECTION 1: Hero (root: section_win-hero) ============ -->
+<section class="section_win-hero" data-win-hero>
+
+  <div class="win-hero__bg" aria-hidden="true">
+    <img class="win-hero__bg-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/DL_Resizer2-1.webp" alt="" loading="eager">
+    <div class="win-hero__scrim"></div>
+  </div>
+
+  <div class="win-hero__content">
+    <div class="win-hero__badge" data-win-reveal>
+      <span class="win-hero__badge-star" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+      </span>
+      <span>5/5 from over 75 reviews</span>
+    </div>
+
+    <div class="win-hero__eyebrow-wrap" data-win-reveal>
+      <h1 class="win-hero__h1">Finance Your Project</h1>
+    </div>
+
+    <div class="win-hero__heading">
+      <h2 class="win-hero__h2" data-win-split>Whether Your Project Is Big Or Small, <em class="win-hero__em">We Got Your Back</em></h2>
+    </div>
+
+    <div class="win-hero__buttons" data-win-reveal>
+      <a href="/contact-us" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="win-hero__badges" data-win-reveal>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/GAF-CERTIFIED-copy.webp" alt="GAF-Certified" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2023/01/5-star-legacy-google-review.png" alt="A five star review for Google business review" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/ProVia-logo-copy.webp" alt="ProVia logo" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/shinglemaster-copy.webp" alt="ShingleMaster logo" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/11/nextdoor_2024_web.webp" alt="2024 Neighborhood Favorites Nextdoor" loading="lazy"></div>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS (rides as HtmlEmbed) -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-hero .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-hero .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    /* awwwards touches — masked word reveal (spans are JS-created) + slow bg zoom */
+    .win-hero__w-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .2em; margin-bottom: -.2em; }
+    .win-hero__w { display: inline-block; transform: translateY(110%); }
+    .win-hero__w.win-in { transform: none; transition: transform .9s cubic-bezier(.22, 1, .36, 1); }
+    @media (prefers-reduced-motion: no-preference) {
+      .section_win-hero .win-hero__bg-img { animation: win-hero-zoom 9s cubic-bezier(.22, 1, .36, 1) forwards; }
+    }
+    @keyframes win-hero-zoom { from { transform: scale(1.12); } to { transform: none; } }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS (rides as HtmlEmbed) -->
+  <script data-embed>
+    /* section_win-hero — masked word reveal + staggered reveal (dependency-free) */
+    (function () {
+      function splitWords(el) {
+        Array.prototype.slice.call(el.childNodes).forEach(function (node) {
+          if (node.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            node.textContent.split(/(\s+)/).forEach(function (part) {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+              var m = document.createElement('span'); m.className = 'win-hero__w-mask';
+              var w = document.createElement('span'); w.className = 'win-hero__w';
+              w.textContent = part; m.appendChild(w); frag.appendChild(m);
+            });
+            el.replaceChild(frag, node);
+          } else if (node.nodeType === 1) { splitWords(node); }
+        });
+      }
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var splitEl = section.querySelector('[data-win-split]');
+        var words = [];
+        if (splitEl) { splitWords(splitEl); words = splitEl.querySelectorAll('.win-hero__w'); }
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          words.forEach(function (w, i) {
+            setTimeout(function () { w.classList.add('win-in'); }, 150 + i * 45);
+          });
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-hero]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ===== SECTION 2: Financing partners (root: section_fin-partners) =====
+     Copied BYTE-IDENTICAL from sections-new.html (bake source).
+     Benefits trio verbatim (old-site "hassel" typo FIXED to "hassle").
+     GreenSky card body copy is DRAFTED (old site was lorem) — flag for
+     client review. SVC card content 1:1.
+     ================================================================ -->
+<section class="section_fin-partners" data-nx-finpart>
+  <div class="finpart__head">
+    <div class="nx-eyebrow" data-nx-reveal><div class="nx-eyebrow__dot"></div><div>Financing Options</div></div>
+    <h2 class="nx-h2" data-nx-reveal>Learn More About How to <em class="nx-em">Finance Your Project</em></h2>
+  </div>
+
+  <div class="finpart__trio">
+    <div class="finpart__mini" data-nx-reveal>
+      <div class="finpart__mini-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><rect x="2" y="4" width="20" height="13" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 21h8M12 17v4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <h3 class="finpart__mini-h">Apply Online</h3>
+      <p class="finpart__mini-p">Getting financing shouldn&rsquo;t be a hassle. Use the buttons below to apply now!</p>
+    </div>
+    <div class="finpart__mini" data-nx-reveal>
+      <div class="finpart__mini-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="12" cy="13" r="8" stroke="currentColor" stroke-width="2"/><path d="M12 9v4l2.5 2.5M9 2h6" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <h3 class="finpart__mini-h">Quick Response Time</h3>
+      <p class="finpart__mini-p">Our financing approval times are fast, so you can spend more time focusing on the vision for your home.</p>
+    </div>
+    <div class="finpart__mini" data-nx-reveal>
+      <div class="finpart__mini-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><circle cx="11" cy="11" r="7" stroke="currentColor" stroke-width="2"/><path d="M21 21l-4-4M11 8v6M9 10h4" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <h3 class="finpart__mini-h">Financing Options</h3>
+      <p class="finpart__mini-p">We understand that when it comes to investing in your home, you want options. That&rsquo;s why we&rsquo;ve partnered with a company that ensures you choose the option that fits your needs most.</p>
+    </div>
+  </div>
+
+  <div class="finpart__cards">
+    <div class="finpart__card" data-nx-reveal>
+      <div class="finpart__partner-tag">Our Partner &mdash; SVC Financial</div>
+      <img class="finpart__logo" src="https://www.cliftonexteriors.com/wp-content/uploads/2023/03/SVC-ENDORSED2x.png" alt="SVC Financial — endorsed partner" loading="lazy">
+      <h3 class="finpart__offer">No interest if paid in full in <em class="nx-em">6 months</em></h3>
+      <p class="finpart__terms">Subject to credit approval. Minimum monthly payment is required. Interest is billed during promotional period but all interest is waived if the purchase amount is paid in full in 6 months.</p>
+      <a href="https://apply.svcfin.com/home/dealerAuthentication?id=815128695&amp;key=1742219857" target="_blank" rel="noopener" class="cx-btn is--glass">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Apply Now</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Apply Now</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="finpart__card is--paper" data-nx-reveal>
+      <div class="finpart__partner-tag">Our Partner &mdash; GreenSky</div>
+      <div class="finpart__badge-icon" style="background-color:#f6f4ef;color:#243864;"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M12 2v20M17 6.5c0-1.9-2.2-3-5-3s-5 1.1-5 3 1.6 2.6 5 3.4c3.4.8 5 1.7 5 3.6 0 1.9-2.2 3-5 3s-5-1.1-5-3" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></div>
+      <h3 class="finpart__offer">We Have <em class="nx-em">Financing</em></h3>
+      <p class="finpart__terms">Flexible monthly payment plans for roofing, windows, siding, doors, and gutter projects through our partner GreenSky. Apply online in minutes with a quick response &mdash; so your project never has to wait. [DRAFT COPY — old site was lorem; client to approve]</p>
+      <a href="https://projects.greensky.com/merchantloanapplication?apptype=short&amp;merchant=81092412&amp;dealerplan=2511&amp;channel=External-Button-03" target="_blank" rel="noopener" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Learn More</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Learn More</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <style data-embed>
+    .nx-pre { opacity: 0; transform: translateY(1.5rem); }
+    .nx-pre.nx-in { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1); }
+    .section_fin-partners .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_fin-partners .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+  <script data-embed>
+    /* section_fin-partners — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-nx-finpart-ready')) return;
+        section.setAttribute('data-nx-finpart-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-nx-reveal]');
+        items.forEach(function (el) { el.classList.add('nx-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          entries.forEach(function (e) {
+            if (!e.isIntersecting) return;
+            io.unobserve(e.target);
+            e.target.classList.add('nx-in');
+          });
+        }, { threshold: .2 });
+        items.forEach(function (el) { io.observe(el); });
+      }
+      function boot() { document.querySelectorAll('[data-nx-finpart]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+</section>
+
+<!-- ================================================================
+     SECTION 3: REVIEWS — NOT part of this payload.
+     Paste the existing reviews wall here (already built + QA-passed):
+       07-webflow-build/.tmp/section-reviews/paste_01_section_reviews-v2.html
+     Its classes (section_reviews-v2, reviews-wall__*, review-card__*,
+     cx-btn) merge cleanly with this page's payload.
+     ================================================================ -->
+
+<!-- ==== SECTION 4: Sunshine closing (root: section_win-sunshine) ==== -->
+<section class="section_win-sunshine" data-win-sun>
+
+  <div class="win-sun__content">
+    <div class="win-sun__heading" data-win-reveal>
+      <h2 class="win-sun__h">Your Home Built To <em class="win-sun__em">Perfection</em></h2>
+    </div>
+
+    <div class="win-sun__buttons" data-win-reveal>
+      <a href="/contact-us" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="win-sun__area-wrap" data-win-reveal>
+      <p class="win-sun__area">Proudly serving Fairfax County, Prince William County, Loudoun County, and Surrounding Areas.</p>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-sunshine .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-sunshine .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-sunshine — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .35 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-sun]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+</div>
+<!-- =================== end .page_financing root =================== -->
+
+</body>
+</html>

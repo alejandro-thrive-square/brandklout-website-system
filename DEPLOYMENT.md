@@ -6,6 +6,9 @@ The deployment intentionally updates only repository-tracked files. Heavy binary
 
 The normal deployment path is GitHub Actions. Manual SSH deployment is an approved fallback when Actions is not configured yet, when an immediate server-side verification is needed, or when the current VPS state must be inspected directly.
 
+> [!NOTE]
+> To run **agents** (not deploys) on the VPS, the supported model is an Orca **SSH target** — see [ORCA.md — Run Orca Against the Hostinger VPS](./ORCA.md#run-orca-against-the-hostinger-vps-option-a-ssh-target). Orca uses `git worktree`, so it does not dirty the deploy checkout at `VPS_REPO_PATH`, which must stay clean for this workflow to succeed.
+
 ## Required GitHub Secrets
 
 Add these repository secrets in GitHub before enabling the workflow:
