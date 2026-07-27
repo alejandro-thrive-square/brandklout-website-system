@@ -186,6 +186,27 @@ rclone lsd vps:/root/webzite-agentic-workflow
 
 Preview heavy asset sync from the VPS to the local machine before downloading anything:
 
+```bash
+bash scripts/bootstrap.sh --dry-run
+```
+
+Restore brand assets and heavy `.tmp/` media with the bootstrap helper:
+
+```bash
+bash scripts/bootstrap.sh
+```
+
+You can restrict the restore when needed:
+
+```bash
+bash scripts/bootstrap.sh --brand-only
+bash scripts/bootstrap.sh --media-only --client giovanni-serrano
+```
+
+The bootstrap helper uses safe `rclone copy` operations from VPS to local. It never deletes local files and never writes to the VPS.
+
+Manual targeted copies are still available when you need a narrow restore:
+
 ```powershell
 rclone copy vps:/root/webzite-agentic-workflow/manage/brand-assets ./manage/brand-assets --dry-run --progress
 ```
