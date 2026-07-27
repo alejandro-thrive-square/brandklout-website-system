@@ -37,7 +37,7 @@ class HtmlToWebflowTest(unittest.TestCase):
                          link["classes"])
 
     def test_combo_reference_capture_shape(self) -> None:
-        ref = SCRIPT_PATH.parent / ".tmp" / "webflow_combo_class.json"
+        ref = Path(__file__).parent / "fixtures" / "webflow_combo_class.json"
         payload = json.loads(ref.read_text(encoding="utf-8"))
         styles = payload["payload"]["styles"]
         combo_styles = [style for style in styles if style.get("comb") == "&"]
@@ -277,6 +277,38 @@ class HtmlToWebflowTest(unittest.TestCase):
         self.assertIn("font-size: 88px", font_owner["styleLess"])
 
 
+    def test_expand_shorthands_padding_margin_border_radius(self) -> None:
+        html = '<div class="box">content</div>'
+        css = """
+        .box {
+            padding: 22px 40px;
+            margin: 0 0 56px;
+            border: 1px solid #3D405B;
+            border-radius: 50%;
+        }
+        """
+        payload = converter.convert(html, css)
+        style = next(s for s in payload["payload"]["styles"] if s["name"] == "box")
+        sl = style["styleLess"]
+
+        self.assertIn("padding-top: 22px", sl)
+        self.assertIn("padding-right: 40px", sl)
+        self.assertIn("padding-bottom: 22px", sl)
+        self.assertIn("padding-left: 40px", sl)
+
+        self.assertIn("margin-top: 0", sl)
+        self.assertIn("margin-right: 0", sl)
+        self.assertIn("margin-bottom: 56px", sl)
+        self.assertIn("margin-left: 0", sl)
+
+        self.assertIn("border-top-style: solid", sl)
+        self.assertIn("border-top-width: 1px", sl)
+        self.assertIn("border-top-color: #3D405B", sl)
+        self.assertIn("border-left-style: solid", sl)
+
+        self.assertIn("border-top-left-radius: 50%", sl)
+        self.assertIn("border-bottom-right-radius: 50%", sl)
+
     def test_contested_combo_name_records_stay_byte_identical(self) -> None:
         # `sub` is used as a thin token in one stack (styled only through the
         # descendant rule `.scene-head .sub`) and as a real combo in another
@@ -319,7 +351,6 @@ class HtmlToWebflowTest(unittest.TestCase):
                   if "color: rgba(61, 64, 91, 0.65)" in by_id[c]["styleLess"]]
         self.assertTrue(owners)
         self.assertNotEqual("sub", owners[0]["name"])
-        # the literal class tokens stay on the element for JS/state-CSS hooks
         names = [by_id[c]["name"] for c in sample_line["classes"]]
         self.assertIn("sample-line", names)
         self.assertIn("sub", names)
@@ -347,8 +378,6 @@ class HtmlToWebflowTest(unittest.TestCase):
         html = '<body><div class="card"><p>hello</p></div></body>'
         css = ".card { padding: 10px; } .card p { color: red; }"
         sections = converter.convert_sections(html, css)
-        # simulate the already-built page reserving `p` with a DIFFERENT
-        # definition and `card` with the IDENTICAL one
         ours = {s["name"]: converter.style_signature(s)
                 for _l, p in sections for s in p["payload"]["styles"]}
         reserved = {
@@ -375,6 +404,25 @@ class HtmlToWebflowTest(unittest.TestCase):
         names = {s["name"] for _l, p in sections
                  for s in p["payload"]["styles"]}
         self.assertIn("reveal", names)
+
+    def test_state_css_selectors_follow_class_renames(self) -> None:
+        html = """<html><head><style>
+        .row .bar { width: 0; }
+        .compare.in .row .bar::before { width: 25%; }
+        @keyframes spin { to { transform: rotate(1turn); } }
+        </style></head><body>
+        <div class="compare"><div class="row"><div class="bar"></div></div></div>
+        <script>document.querySelectorAll('.compare');</script>
+        </body></html>"""
+        with tempfile.TemporaryDirectory() as tmp:
+            converter.write_text_artifacts(html, tmp,
+                                           class_renames={"bar": "bar-pg2"})
+            css = (Path(tmp) / "webflow-runtime-states.css").read_text(
+                encoding="utf-8")
+        # the class token is renamed AND the pseudo targets the materialized
+        # child div (which keeps its own, non-colliding name)
+        self.assertIn(".bar-pg2 > .bar-before", css)
+        self.assertNotIn(".bar::before", css)
 
     def test_runtime_state_css_includes_unmatched_class_combinations(self) -> None:
         # `active` exists in markup (nav a.active), so the token check alone
@@ -447,15 +495,37 @@ class HtmlToWebflowTest(unittest.TestCase):
                     "inner": {"clash" + json.dumps({}, sort_keys=True)}}
         converter.apply_namespace_avoidance(sections, reserved,
                                             protected=set(), suffix="pg2")
-        embeds = [n["v"] for _l, p in sections
-                  for n in p["payload"]["nodes"]
-                  if n.get("type") == "HtmlEmbed"]
-        self.assertTrue(embeds)
-        # ancestor class renamed in the embed's <style> selectors
-        self.assertIn(".contact-grid-pg2 form input", embeds[0])
-        self.assertNotIn(".contact-grid form", embeds[0])
-        # class used INSIDE the embed html stays untouched
-        self.assertIn('class="inner"', embeds[0])
+        embed_nodes = [n for _l, p in sections
+                       for n in p["payload"]["nodes"]
+                       if n.get("type") == "HtmlEmbed"]
+        self.assertTrue(embed_nodes)
+        # The HTML lives in BOTH node["v"] AND the canonical Webflow field
+        # node["data"]["embed"]["meta"]["html"] — Webflow PASTES from meta.html,
+        # so the rename must reach both. Asserting only "v" let the contact-form
+        # regression ship (meta.html kept ".contact-grid", form pasted native).
+        meta_html = embed_nodes[0]["data"]["embed"]["meta"]["html"]
+        for where in (embed_nodes[0]["v"], meta_html):
+            # ancestor class renamed in the embed's <style> selectors
+            self.assertIn(".contact-grid-pg2 form input", where)
+            self.assertNotIn(".contact-grid form", where)
+            # class used INSIDE the embed html stays untouched
+            self.assertIn('class="inner"', where)
+
+    def test_custom_code_artifact_is_iife_wrapped(self) -> None:
+        # Top-level const/let share one global lexical scope across all
+        # <script> tags; two pages' scripts installed site-wide collide
+        # ("Identifier 'io' has already been declared") and the second never
+        # runs. The artifact must ship pre-wrapped in its own scope.
+        html = ('<html><body><div class="reveal">x</div>'
+                '<script>const io = 1; console.log(io);</script>'
+                '</body></html>')
+        with tempfile.TemporaryDirectory() as tmp:
+            converter.write_text_artifacts(html, tmp)
+            code = (Path(tmp) / "webflow-custom-code.js").read_text(
+                encoding="utf-8")
+        self.assertTrue(code.startswith("(() => {"))
+        self.assertTrue(code.rstrip().endswith("})();"))
+        self.assertIn("const io = 1", code)
 
     def test_state_css_hook_tokens_survive_tag_name_squatting(self) -> None:
         # Anchor content classes are display-named after the tag (`a`, `a-2`,
@@ -512,8 +582,6 @@ class HtmlToWebflowTest(unittest.TestCase):
              ["#strategy .row", 1, "--w", "30%"]],
             restorations)
 
-        import tempfile
-        from pathlib import Path
         with tempfile.TemporaryDirectory() as tmp:
             converter.write_text_artifacts(html, tmp,
                                            class_renames={"row": "row-pg2"})
@@ -523,77 +591,6 @@ class HtmlToWebflowTest(unittest.TestCase):
         self.assertIn('"#strategy .row-pg2", 0, "--w", "100%"', code)
         self.assertIn("style.setProperty(p, v)", code)
         self.assertTrue(code.startswith("(() => {"))
-
-    def test_custom_code_artifact_is_iife_wrapped(self) -> None:
-        # Top-level const/let share one global lexical scope across all
-        # <script> tags; two pages' scripts installed site-wide collide
-        # ("Identifier 'io' has already been declared") and the second never
-        # runs. The artifact must ship pre-wrapped in its own scope.
-        html = ('<html><body><div class="reveal">x</div>'
-                '<script>const io = 1; console.log(io);</script>'
-                '</body></html>')
-        import tempfile
-        from pathlib import Path
-        with tempfile.TemporaryDirectory() as tmp:
-            converter.write_text_artifacts(html, tmp)
-            code = (Path(tmp) / "webflow-custom-code.js").read_text(
-                encoding="utf-8")
-        self.assertTrue(code.startswith("(() => {"))
-        self.assertTrue(code.rstrip().endswith("})();"))
-        self.assertIn("const io = 1", code)
-
-    def test_state_css_selectors_follow_class_renames(self) -> None:
-        html = """<html><head><style>
-        .row .bar { width: 0; }
-        .compare.in .row .bar::before { width: 25%; }
-        @keyframes spin { to { transform: rotate(1turn); } }
-        </style></head><body>
-        <div class="compare"><div class="row"><div class="bar"></div></div></div>
-        <script>document.querySelectorAll('.compare');</script>
-        </body></html>"""
-        import tempfile
-        from pathlib import Path
-        with tempfile.TemporaryDirectory() as tmp:
-            converter.write_text_artifacts(html, tmp,
-                                           class_renames={"bar": "bar-pg2"})
-            css = (Path(tmp) / "webflow-runtime-states.css").read_text(
-                encoding="utf-8")
-        # the class token is renamed AND the pseudo targets the materialized
-        # child div (which keeps its own, non-colliding name)
-        self.assertIn(".bar-pg2 > .bar-before", css)
-        self.assertNotIn(".bar::before", css)
-
-    def test_expand_shorthands_padding_margin_border_radius(self) -> None:
-        html = '<div class="box">content</div>'
-        css = """
-        .box {
-            padding: 22px 40px;
-            margin: 0 0 56px;
-            border: 1px solid #3D405B;
-            border-radius: 50%;
-        }
-        """
-        payload = converter.convert(html, css)
-        style = next(s for s in payload["payload"]["styles"] if s["name"] == "box")
-        sl = style["styleLess"]
-
-        self.assertIn("padding-top: 22px", sl)
-        self.assertIn("padding-right: 40px", sl)
-        self.assertIn("padding-bottom: 22px", sl)
-        self.assertIn("padding-left: 40px", sl)
-
-        self.assertIn("margin-top: 0", sl)
-        self.assertIn("margin-right: 0", sl)
-        self.assertIn("margin-bottom: 56px", sl)
-        self.assertIn("margin-left: 0", sl)
-
-        self.assertIn("border-top-style: solid", sl)
-        self.assertIn("border-top-width: 1px", sl)
-        self.assertIn("border-top-color: #3D405B", sl)
-        self.assertIn("border-left-style: solid", sl)
-
-        self.assertIn("border-top-left-radius: 50%", sl)
-        self.assertIn("border-bottom-right-radius: 50%", sl)
 
 
 if __name__ == "__main__":
