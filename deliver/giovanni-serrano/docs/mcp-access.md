@@ -14,7 +14,7 @@ This file controls MCP usage for the Giovanni Serrano client project.
 | MCP Server | Status | Allowed Purpose |
 | :--- | :--- | :--- |
 | Figma | Optional / runtime-authenticated | Design generation, design inspection, and design handoff only when a workflow calls for it. |
-| Webflow | Active for confirmed Webflow build steps | CSS variable import, Webflow build setup, CMS, staging, QA, and launch only after target site confirmation. |
+| `webflow-giovanni-serrano` | Active for confirmed Webflow build steps | CSS variable import, Webflow build setup, CMS, staging, QA, and launch only after target site confirmation. Grant must cover the Giovanni Serrano site only — see the [server-per-principal model](../../../mcp-servers/ACCESS_MODEL.md#server-instances-one-per-principal). |
 
 ## Target Resources
 

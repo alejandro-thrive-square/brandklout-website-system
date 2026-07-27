@@ -12,6 +12,36 @@ This document defines how agents use Model Context Protocol (MCP) servers across
 | `prospect` | Sales and Growth lead workflows | Public or pre-contract analysis of prospect websites, listings, and reference material. |
 | `workflow` | A specific workflow folder | Narrow MCP access needed only for one workflow execution. |
 
+## Server Instances: One Per Principal
+
+For platform MCPs that authenticate via OAuth grants (Webflow, and any future platform where one grant covers a set of accounts/sites), we register **one named server instance per principal** instead of one shared server for the whole platform.
+
+A **principal** is the account boundary a grant should cover: Webzite Studio itself, or one client engagement.
+
+**Why:** the MCP client stores the OAuth grant keyed by *server name*. A single shared server therefore forces a choice between one grant that spans every client's sites (over-broad access) or re-authenticating on every client switch (which silently wipes the previous client's grant). Named instances give each principal a persistent, least-privilege grant — and the tool prefix (`mcp__webflow-clifton-exteriors__...`) makes it self-evident which account an agent is acting on.
+
+**Naming convention:** `<platform>-<principal-slug>`, where the principal slug matches the folder name under `deliver/` (or `webzite` for agency-owned properties).
+
+| Instance pattern | Access level | Grant scope when authorizing |
+| :--- | :--- | :--- |
+| `<platform>-webzite` | `agency` | Webzite-owned sites/workspaces only |
+| `<platform>-<client-name>` | `client` | Only that client's site(s) — never select other clients' sites in the OAuth screen |
+| *(none — no authenticated instance)* | `prospect` | Prospect analysis uses public URLs only, never an authenticated grant |
+
+**Runtime rules:**
+
+1. Authenticate only the instance for the principal you are actively working on; leave other instances unauthenticated.
+2. When completing the OAuth authorization screen, select **only** the sites belonging to that instance's principal.
+3. Before any mutation, verify the tool prefix matches the client folder you are working in (e.g., work under `deliver/farewell-agency/clifton-exteriors/` must use `webflow-clifton-exteriors` tools).
+4. Each machine/account holds its own runtime grants; instance definitions in `.mcp.json` are shared and safe to commit (they contain no secrets).
+
+**Adding a client instance:**
+
+1. `claude mcp add --transport http <platform>-<client-name> <platform-mcp-url> -s project` (or add the entry to `.mcp.json` directly).
+2. Restart the session and approve the new project-scoped server when prompted.
+3. Authenticate via `/mcp`, selecting only that client's sites in the OAuth screen.
+4. Register the instance in [MCP_INDEX.md](./MCP_INDEX.md) and the client's `docs/mcp-access.md`.
+
 ## Folder-Based Control
 
 MCP server definitions are stored in `.mcp.json` and documented in `mcp-servers/`. Folder-level access is controlled by `mcp-access.md` files.
