@@ -217,22 +217,7 @@
       grid-template-columns: 1.3fr 1fr;
       gap: 64px;
       position: relative;
-      background:
-        linear-gradient(0deg, var(--canvas), var(--canvas)),
-        repeating-linear-gradient(0deg, transparent 0 47px, var(--bone-d) 47px 48px),
-        repeating-linear-gradient(90deg, transparent 0 47px, var(--bone-d) 47px 48px);
-      background-blend-mode: normal, multiply, multiply;
-    }
-
-    .hero::before {
-      content: "";
-      position: absolute;
-      inset: 92px 0 0 0;
-      background:
-        repeating-linear-gradient(0deg, transparent 0 47px, var(--bone-d) 47px 48px),
-        repeating-linear-gradient(90deg, transparent 0 47px, var(--bone-d) 47px 48px);
-      pointer-events: none;
-      opacity: 0.5;
+      background: var(--canvas);
     }
 
     .hero>* {
@@ -1795,25 +1780,6 @@
       font-weight: 500;
     }
 
-    .foot-bar {
-      margin-top: 48px;
-      padding-top: 24px;
-      border-top: 1px solid var(--on-d-line);
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      font-family: var(--mono);
-      font-size: 11px;
-      color: var(--on-d-mute);
-    }
-
-    .foot-bar>*:nth-child(2) {
-      text-align: center;
-    }
-
-    .foot-bar>*:nth-child(3) {
-      text-align: right;
-    }
-
     /* reveal */
     .reveal {
       opacity: 0;
@@ -2085,6 +2051,29 @@
       font-size: 22px;
       line-height: 1;
       font-family: var(--body);
+      min-width: 44px;
+      min-height: 44px;
+      align-items: center;
+      justify-content: center;
+    }
+
+    /* Compact header CTA: stands in for .cta once that is hidden below 1024px. */
+    nav.top .cta-compact {
+      display: none;
+      align-items: center;
+      min-height: 44px;
+      box-sizing: border-box;
+      padding: 0 14px;
+      background: var(--navy);
+      color: var(--canvas);
+      text-decoration: none;
+      font-family: var(--body);
+      font-size: 10px;
+      font-weight: 500;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      white-space: nowrap;
+      transition: background .2s;
     }
 
     /* ─── Tablet ≤1024px ─── */
@@ -2092,7 +2081,7 @@
       nav.top {
         grid-template-columns: 1fr auto auto;
         gap: 12px;
-        padding: 18px 24px;
+        padding: 15px 24px;
       }
 
       nav.top .links {
@@ -2130,7 +2119,15 @@
       }
 
       .nav-toggle {
-        display: block;
+        display: inline-flex;
+      }
+
+      nav.top .cta-compact {
+        display: inline-flex;
+      }
+
+      nav.top .right {
+        gap: 10px;
       }
 
       .marquee {
@@ -2254,7 +2251,7 @@
     /* ─── Phone ≤640px ─── */
     @media (max-width: 640px) {
       nav.top {
-        padding: 14px 20px;
+        padding: 11px 20px;
       }
 
       nav.top .links.open {
@@ -2262,11 +2259,11 @@
       }
 
       .marquee {
-        top: 66px;
+        top: 67px;
       }
 
       .hero {
-        padding: 110px 20px 40px;
+        padding: 110px 20px 32px;
       }
 
       .elevation {
@@ -2292,7 +2289,7 @@
       }
 
       section.scene {
-        padding: 64px 20px;
+        padding: 44px 20px;
       }
 
       .h-stage {
@@ -2346,23 +2343,13 @@
         grid-template-columns: 1fr;
       }
 
-      .foot-bar {
-        grid-template-columns: 1fr;
-        gap: 6px;
-      }
-
-      .foot-bar>*:nth-child(2),
-      .foot-bar>*:nth-child(3) {
-        text-align: left;
-      }
-
       .foot-mark {
         font-size: clamp(48px, 12vw, 80px);
         margin-bottom: 32px;
       }
 
       footer {
-        padding: 48px 20px 24px;
+        padding: 36px 20px 20px;
       }
 
       /* ── mobile: stack remaining multi-column grids ── */
@@ -2408,7 +2395,7 @@
 
       /* ── mobile: tighten oversized type & padding ── */
       section.services-scene {
-        padding: 64px 0;
+        padding: 44px 0;
       }
 
       .services-head-wrap {
@@ -2575,10 +2562,6 @@
       /* ── mobile: prevent long unbreakable strings from forcing width ── */
       .foot-grid .col a,
       .foot-grid .col p,
-      .foot-bar,
-      .foot-bar>* {
-        overflow-wrap: anywhere;
-      }
 
       .proforma .row>*,
       .metrics .v,
@@ -2590,21 +2573,6 @@
       .timeline .t,
       .metrics .m,
       .foot-grid .col,
-      .foot-bar>*,
-      .proforma .row,
-      .proforma .head,
-      .proforma .head .info,
-      .proforma .head .price,
-      .about-grid,
-      .about-grid>*,
-      .svc,
-      .cap,
-      .gallery .r,
-      .scene-head,
-      .scene-head>*,
-      .services-rail-note {
-        min-width: 0;
-      }
 
       /* ── hard backstop ── */
       html,
@@ -2722,6 +2690,44 @@
     .elevation-fx .star-layer.slow {
       animation-duration: 110s;
     }
+
+    /* ─── Phone portrait ≤478px ─── */
+    @media (max-width: 478px) {
+      .hero-meta .k,
+      .cap .vitals .k {
+        font-size: 10px;
+      }
+
+      nav.top .cta-compact {
+        padding: 0 10px;
+        letter-spacing: 0.08em;
+      }
+
+      nav.top {
+        gap: 8px;
+      }
+
+      nav.top .brand {
+        font-size: 18px;
+      }
+    }
+
+    /* ─── Narrow phones ≤359px: keep the wordmark on one line ─── */
+    @media (max-width: 359px) {
+      nav.top {
+        gap: 6px;
+        padding: 11px 14px;
+      }
+
+      nav.top .brand {
+        font-size: 16px;
+      }
+
+      nav.top .cta-compact {
+        padding: 0 8px;
+        letter-spacing: 0.04em;
+      }
+    }
   </style>
 </head>
 
@@ -2740,6 +2746,7 @@
     </div>
     <div class="right">
       <a class="cta" href="#contact">Let's talk <span class="ar">&rarr;</span></a>
+      <a class="cta-compact" href="#contact">Let's talk</a>
     </div>
     <button class="nav-toggle" aria-label="Toggle menu">&#9776;</button>
   </nav>
@@ -3338,6 +3345,7 @@
               <option>Buy my first duplex / triplex / fourplex</option>
               <option>Acquire a multifamily investment property</option>
               <option>Build units on property I already own</option>
+              <option>Sell my home or property</option>
               <option>Something else</option>
             </select>
           </div>
@@ -3387,7 +3395,6 @@
       </div>
       <div class="col">
         <div class="k">Compliance</div>
-        <p><strong>Giovanni Serrano</strong> &middot; DRE #02282434</p>
         <p>Multifamily Investment &amp; Development Advisor</p>
         <p>Equal Housing Opportunity</p>
         <div style="margin-top: 12px; padding: 12px 0; border-top: 1px solid var(--on-d-line);">
@@ -3396,13 +3403,9 @@
         </div>
         <div style="margin-top: 12px;">
           <img src="REAL Broker Logo.svg" alt="REAL Broker, LLC"
-            style="display: block; max-width: 140px; height: auto; opacity: 0.85;">
+            style="display: block; max-width: 140px; height: auto; opacity: 0.62;">
         </div>
       </div>
-    </div>
-    <div class="foot-bar" style="grid-template-columns: 1fr 1fr;">
-      <span>&copy; 2026 Giovanni Serrano</span>
-      <span style="text-align: right;">Lora &middot; Inter &middot; JetBrains Mono</span>
     </div>
   </footer>
 
