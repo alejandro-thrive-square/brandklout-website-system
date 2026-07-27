@@ -1,0 +1,884 @@
+{
+  "client": "Clifton Exteriors",
+  "generated": "2026-07-10",
+  "packaging": "one Webflow clipboard file per semantic section",
+  "baseline_collision_folders": [
+    "C:\\Users\\pc\\Documents\\Webzite Studio\\Webzite Agentic Workflow\\deliver\\farewell-agency\\clifton-exteriors\\workflows\\07-webflow-build\\.tmp\\section-reviews",
+    "C:\\Users\\pc\\Documents\\Webzite Studio\\Webzite Agentic Workflow\\deliver\\farewell-agency\\clifton-exteriors\\workflows\\07-webflow-build\\.tmp\\section-cta-quote",
+    "C:\\Users\\pc\\Documents\\Webzite Studio\\Webzite Agentic Workflow\\deliver\\farewell-agency\\clifton-exteriors\\workflows\\07-webflow-build\\.tmp\\sections-new"
+  ],
+  "page_count": 20,
+  "component_count": 138,
+  "pages": [
+    {
+      "page": "page-windows",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-windows.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 12,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 56
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 27
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-invite.html",
+          "nodes": 33
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-upgrades.html",
+          "nodes": 31
+        },
+        {
+          "position": 5,
+          "file": "paste_05_section_win-curb.html",
+          "nodes": 33
+        },
+        {
+          "position": 6,
+          "file": "paste_06_section_win-portfolio.html",
+          "nodes": 47
+        },
+        {
+          "position": 7,
+          "file": "paste_07_section_win-confidence.html",
+          "nodes": 42
+        },
+        {
+          "position": 8,
+          "file": "paste_08_section_win-pricing.html",
+          "nodes": 118
+        },
+        {
+          "position": 9,
+          "file": "paste_09_section_win-process.html",
+          "nodes": 42
+        },
+        {
+          "position": 10,
+          "file": "paste_10_section_win-faq.html",
+          "nodes": 75
+        },
+        {
+          "position": 11,
+          "file": "paste_11_section_win-contact.html",
+          "nodes": 27
+        },
+        {
+          "position": 12,
+          "file": "paste_12_section_win-sunshine.html",
+          "nodes": 27
+        }
+      ]
+    },
+    {
+      "page": "page-doors",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-doors.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 12,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 56
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 27
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-invite.html",
+          "nodes": 36
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-upgrades.html",
+          "nodes": 36
+        },
+        {
+          "position": 5,
+          "file": "paste_05_section_win-curb.html",
+          "nodes": 33
+        },
+        {
+          "position": 6,
+          "file": "paste_06_section_win-portfolio.html",
+          "nodes": 47
+        },
+        {
+          "position": 7,
+          "file": "paste_07_section_win-confidence.html",
+          "nodes": 42
+        },
+        {
+          "position": 8,
+          "file": "paste_08_section_win-pricing.html",
+          "nodes": 118
+        },
+        {
+          "position": 9,
+          "file": "paste_09_section_win-process.html",
+          "nodes": 42
+        },
+        {
+          "position": 10,
+          "file": "paste_10_section_win-faq.html",
+          "nodes": 31
+        },
+        {
+          "position": 11,
+          "file": "paste_11_section_win-contact.html",
+          "nodes": 27
+        },
+        {
+          "position": 12,
+          "file": "paste_12_section_win-sunshine.html",
+          "nodes": 26
+        }
+      ]
+    },
+    {
+      "page": "page-roofing",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-roofing.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 12,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 63
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 27
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-invite.html",
+          "nodes": 36
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-upgrades.html",
+          "nodes": 31
+        },
+        {
+          "position": 5,
+          "file": "paste_05_section_win-curb.html",
+          "nodes": 33
+        },
+        {
+          "position": 6,
+          "file": "paste_06_section_win-portfolio.html",
+          "nodes": 47
+        },
+        {
+          "position": 7,
+          "file": "paste_07_section_win-confidence.html",
+          "nodes": 42
+        },
+        {
+          "position": 8,
+          "file": "paste_08_section_win-pricing.html",
+          "nodes": 136
+        },
+        {
+          "position": 9,
+          "file": "paste_09_section_win-process.html",
+          "nodes": 42
+        },
+        {
+          "position": 10,
+          "file": "paste_10_section_win-faq.html",
+          "nodes": 71
+        },
+        {
+          "position": 11,
+          "file": "paste_11_section_win-contact.html",
+          "nodes": 27
+        },
+        {
+          "position": 12,
+          "file": "paste_12_section_win-sunshine.html",
+          "nodes": 26
+        }
+      ]
+    },
+    {
+      "page": "page-siding",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-siding.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 12,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 63
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 27
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-invite.html",
+          "nodes": 36
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-upgrades.html",
+          "nodes": 31
+        },
+        {
+          "position": 5,
+          "file": "paste_05_section_win-curb.html",
+          "nodes": 33
+        },
+        {
+          "position": 6,
+          "file": "paste_06_section_win-portfolio.html",
+          "nodes": 47
+        },
+        {
+          "position": 7,
+          "file": "paste_07_section_win-confidence.html",
+          "nodes": 42
+        },
+        {
+          "position": 8,
+          "file": "paste_08_section_win-pricing.html",
+          "nodes": 136
+        },
+        {
+          "position": 9,
+          "file": "paste_09_section_win-process.html",
+          "nodes": 42
+        },
+        {
+          "position": 10,
+          "file": "paste_10_section_win-faq.html",
+          "nodes": 71
+        },
+        {
+          "position": 11,
+          "file": "paste_11_section_win-contact.html",
+          "nodes": 27
+        },
+        {
+          "position": 12,
+          "file": "paste_12_section_win-sunshine.html",
+          "nodes": 26
+        }
+      ]
+    },
+    {
+      "page": "page-gutters",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-gutters.html",
+      "source_type": "staging-derived",
+      "root_selector": "main.main-wrapper > section",
+      "component_count": 13,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 83
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 47
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-invite.html",
+          "nodes": 53
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-invite.html",
+          "nodes": 51
+        },
+        {
+          "position": 5,
+          "file": "paste_05_section_win-invite.html",
+          "nodes": 53
+        },
+        {
+          "position": 6,
+          "file": "paste_06_section_win-invite.html",
+          "nodes": 67
+        },
+        {
+          "position": 7,
+          "file": "paste_07_section_win-confidence.html",
+          "nodes": 67
+        },
+        {
+          "position": 8,
+          "file": "paste_08_section_win-invite.html",
+          "nodes": 218
+        },
+        {
+          "position": 9,
+          "file": "paste_09_section_win-process.html",
+          "nodes": 67
+        },
+        {
+          "position": 10,
+          "file": "paste_10_section_win-invite.html",
+          "nodes": 81
+        },
+        {
+          "position": 11,
+          "file": "paste_11_u-section.html",
+          "nodes": 331
+        },
+        {
+          "position": 12,
+          "file": "paste_12_section_win-invite.html",
+          "nodes": 47
+        },
+        {
+          "position": 13,
+          "file": "paste_13_section_win-sunshine.html",
+          "nodes": 48
+        }
+      ]
+    },
+    {
+      "page": "home",
+      "source": "workflows\\04-design\\.tmp\\final-design\\index.html",
+      "source_type": "staging-derived",
+      "root_selector": "main.main-wrapper > section",
+      "component_count": 8,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_u-section.html",
+          "nodes": 78
+        },
+        {
+          "position": 2,
+          "file": "paste_02_u-section.html",
+          "nodes": 270
+        },
+        {
+          "position": 3,
+          "file": "paste_03_u-section.html",
+          "nodes": 47
+        },
+        {
+          "position": 4,
+          "file": "paste_04_u-section.html",
+          "nodes": 114
+        },
+        {
+          "position": 5,
+          "file": "paste_05_u-section.html",
+          "nodes": 63
+        },
+        {
+          "position": 6,
+          "file": "paste_06_u-section.html",
+          "nodes": 61
+        },
+        {
+          "position": 7,
+          "file": "paste_07_u-section.html",
+          "nodes": 331
+        },
+        {
+          "position": 8,
+          "file": "paste_08_u-section.html",
+          "nodes": 52
+        }
+      ]
+    },
+    {
+      "page": "page-our-process",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-our-process.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 5,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 56
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 27
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-invite.html",
+          "nodes": 33
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_steps.html",
+          "nodes": 122
+        },
+        {
+          "position": 5,
+          "file": "paste_05_section_win-sunshine.html",
+          "nodes": 24
+        }
+      ]
+    },
+    {
+      "page": "page-testimonials",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-testimonials.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 3,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_thankyou.html",
+          "nodes": 36
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_thx-intro.html",
+          "nodes": 14
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-sunshine.html",
+          "nodes": 26
+        }
+      ]
+    },
+    {
+      "page": "page-media",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-media.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 4,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 57
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 27
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_media-grid.html",
+          "nodes": 34
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-sunshine.html",
+          "nodes": 26
+        }
+      ]
+    },
+    {
+      "page": "page-financing",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-financing.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 3,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 46
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_fin-partners.html",
+          "nodes": 82
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-sunshine.html",
+          "nodes": 26
+        }
+      ]
+    },
+    {
+      "page": "page-about-us",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-about-us.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 8,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 56
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 27
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-invite.html",
+          "nodes": 45
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-curb.html",
+          "nodes": 33
+        },
+        {
+          "position": 5,
+          "file": "paste_05_section_win-confidence.html",
+          "nodes": 42
+        },
+        {
+          "position": 6,
+          "file": "paste_06_section_badge-wall.html",
+          "nodes": 40
+        },
+        {
+          "position": 7,
+          "file": "paste_07_section_win-process.html",
+          "nodes": 42
+        },
+        {
+          "position": 8,
+          "file": "paste_08_section_win-sunshine.html",
+          "nodes": 27
+        }
+      ]
+    },
+    {
+      "page": "page-contact-us",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-contact-us.html",
+      "source_type": "staging-derived",
+      "root_selector": "main.main-wrapper > section",
+      "component_count": 5,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_page-header.html",
+          "nodes": 13
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_financing-banner.html",
+          "nodes": 8
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_contact.html",
+          "nodes": 34
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_fin-partners.html",
+          "nodes": 66
+        },
+        {
+          "position": 5,
+          "file": "paste_05_u-section.html",
+          "nodes": 331
+        }
+      ]
+    },
+    {
+      "page": "page-employment",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-employment.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 5,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 21
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-invite.html",
+          "nodes": 16
+        },
+        {
+          "position": 3,
+          "file": "paste_03_apply.html",
+          "nodes": 97
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_contact-direct.html",
+          "nodes": 41
+        },
+        {
+          "position": 5,
+          "file": "paste_05_section_win-sunshine.html",
+          "nodes": 27
+        }
+      ]
+    },
+    {
+      "page": "page-insurance-claims",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-insurance-claims.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 8,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 47
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 27
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-invite.html",
+          "nodes": 30
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-faq.html",
+          "nodes": 54
+        },
+        {
+          "position": 5,
+          "file": "paste_05_section_steps.html",
+          "nodes": 114
+        },
+        {
+          "position": 6,
+          "file": "paste_06_section_win-confidence.html",
+          "nodes": 42
+        },
+        {
+          "position": 7,
+          "file": "paste_07_section_form-panel.html",
+          "nodes": 74
+        },
+        {
+          "position": 8,
+          "file": "paste_08_section_win-sunshine.html",
+          "nodes": 26
+        }
+      ]
+    },
+    {
+      "page": "page-pricing",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-pricing.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 8,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 56
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 27
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-pricing.html",
+          "nodes": 118
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-pricing.html",
+          "nodes": 118
+        },
+        {
+          "position": 5,
+          "file": "paste_05_section_win-pricing.html",
+          "nodes": 136
+        },
+        {
+          "position": 6,
+          "file": "paste_06_section_win-pricing.html",
+          "nodes": 136
+        },
+        {
+          "position": 7,
+          "file": "paste_07_section_win-pricing.html",
+          "nodes": 136
+        },
+        {
+          "position": 8,
+          "file": "paste_08_section_win-sunshine.html",
+          "nodes": 26
+        }
+      ]
+    },
+    {
+      "page": "page-blog",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-blog.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 4,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 46
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 27
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_blg-posts.html",
+          "nodes": 138
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-sunshine.html",
+          "nodes": 26
+        }
+      ]
+    },
+    {
+      "page": "page-service-locations",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-service-locations.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 4,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 59
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_loc-grid.html",
+          "nodes": 180
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_loc-notes.html",
+          "nodes": 20
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-sunshine.html",
+          "nodes": 39
+        }
+      ]
+    },
+    {
+      "page": "page-portfolio",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-portfolio.html",
+      "source_type": "bespoke-design",
+      "root_selector": "body > div[class^=\"page_\"] > section",
+      "component_count": 8,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_win-hero.html",
+          "nodes": 46
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_win-financing.html",
+          "nodes": 27
+        },
+        {
+          "position": 3,
+          "file": "paste_03_section_win-portfolio.html",
+          "nodes": 45
+        },
+        {
+          "position": 4,
+          "file": "paste_04_section_win-portfolio.html",
+          "nodes": 39
+        },
+        {
+          "position": 5,
+          "file": "paste_05_section_win-portfolio.html",
+          "nodes": 31
+        },
+        {
+          "position": 6,
+          "file": "paste_06_section_win-portfolio.html",
+          "nodes": 51
+        },
+        {
+          "position": 7,
+          "file": "paste_07_section_win-portfolio.html",
+          "nodes": 37
+        },
+        {
+          "position": 8,
+          "file": "paste_08_section_win-sunshine.html",
+          "nodes": 26
+        }
+      ]
+    },
+    {
+      "page": "page-privacy-policy",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-privacy-policy.html",
+      "source_type": "staging-derived",
+      "root_selector": "main.main-wrapper > section",
+      "component_count": 2,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_page-header.html",
+          "nodes": 14
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_rich-text.html",
+          "nodes": 11
+        }
+      ]
+    },
+    {
+      "page": "page-terms-of-service",
+      "source": "workflows\\04-design\\.tmp\\final-design\\page-terms-of-service.html",
+      "source_type": "staging-derived",
+      "root_selector": "main.main-wrapper > section",
+      "component_count": 2,
+      "paste_order": [
+        {
+          "position": 1,
+          "file": "paste_01_section_page-header.html",
+          "nodes": 14
+        },
+        {
+          "position": 2,
+          "file": "paste_02_section_rich-text.html",
+          "nodes": 11
+        }
+      ]
+    }
+  ]
+}

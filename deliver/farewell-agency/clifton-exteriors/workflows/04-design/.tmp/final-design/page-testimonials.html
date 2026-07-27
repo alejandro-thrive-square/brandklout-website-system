@@ -1,0 +1,540 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clifton Exteriors — Testimonials page (rebuild)</title>
+<!-- Preview scaffold: body font/background only. Converter ignores <link>. -->
+<link rel="stylesheet" href="_preview-base.css">
+
+<!-- ==============================================================
+     STATIC PAGE CSS — shared classes are byte-identical to their
+     bake sources so every def merges on paste (Webflow merges styles
+     by name; identical defs reuse instead of forking -2):
+       page-windows.html  → tokens, cx-btn, section_win-sunshine
+       sections-new.html  → nx-* atoms, section_thankyou
+     Testimonials-only additions (thx- prefix) live at the END of
+     this block, clearly marked. Content is 1:1 from
+     cliftonexteriors.com/testimonials; design follows the staging
+     homepage system (staging-analysis.md).
+     Section roots: section_thankyou → section_thx-intro →
+     [reviews paste] → section_win-sunshine.
+     Reviews are NOT in this file — this page's body IS the reviews
+     wall: paste the existing section_reviews-v2 payload between the
+     intro band and the closing (see body marker comment).
+     ============================================================== -->
+<style>
+:root {
+  --_primitives---neutral-colors--brand-colors--blue: #243864;
+  --_primitives---neutral-colors--brand-colors--red: #b02034;
+  --_primitives---neutral-colors--brand-colors--warm: #eae1d5;
+  --_primitives---neutral-colors--neutral-dark: #121c32;
+  --_primitives---neutral-colors--neutral-darkest: #060911;
+  --_primitives---neutral-colors--neutral-light: #f6f4ef;
+  --_primitives---neutral-colors--neutral-lightest: #faf9f7;
+  --_primitives---neutral-colors--neutral: #d6d6d6;
+}
+
+/* single page root — the WHOLE page pastes as ONE payload (multi-root
+   merges crash the Designer; single root is the proven safe path) */
+.page_testimonials { width: 100%; }
+
+/* ---------- shared editorial atoms (bespoke, merge-safe) ---------- */
+.nx-eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.95rem;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  color: var(--_primitives---neutral-colors--brand-colors--red);
+}
+.nx-eyebrow__dot {
+  width: 0.5rem;
+  height: 0.5rem;
+  border-radius: 50%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--red);
+}
+.nx-h2 {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3.5rem;
+  line-height: 1.05;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+}
+.nx-em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.nx-sub {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 1.125rem;
+  line-height: 1.55;
+  color: var(--_primitives---neutral-colors--neutral-dark);
+  opacity: 0.78;
+}
+
+/* ==================================================================
+   5. section_thankyou — testimonials thank-you hero (dark band)
+   ================================================================== */
+.section_thankyou {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 8rem 5%;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  border-radius: 1rem;
+}
+.thanks__glow {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  pointer-events: none;
+  background-image:
+    radial-gradient(60% 80% at 20% 0%, #eae1d51f, transparent 60%),
+    radial-gradient(50% 70% at 85% 100%, #24386480, transparent 65%);
+}
+.thanks__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.75rem;
+  max-width: 46rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.thanks__logo {
+  width: 5rem;
+  height: 5rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 0.5px solid #faf9f74d;
+}
+.thanks__h1 {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.thanks__quote {
+  margin: 0;
+  padding: 0;
+  border-left-style: none;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-size: 1.25rem;
+  line-height: 1.6;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.85;
+}
+.thanks__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+
+/* ============================ SUNSHINE ============================ */
+.section_win-sunshine {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--warm);
+  border-radius: 1rem;
+}
+.win-sun__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-sun__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-sun__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-sun__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.win-sun__area {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.7;
+}
+
+/* cx-btn — bespoke clone of the build's button component (identical block in
+   section-reviews.html; keep both copies byte-identical so defs merge). */
+.cx-btn {
+  border-radius: 2rem;
+  background-color: var(--_primitives---neutral-colors--brand-colors--blue);
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  text-align: center;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  display: flex;
+  overflow: hidden;
+}
+.cx-btn__hide { height: 1.5rem; overflow: hidden; }
+.cx-btn__wrap { display: flex; flex-direction: column; }
+.cx-btn__tile {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+.cx-btn__arrow { justify-content: center; align-items: center; display: flex; }
+
+/* glass variant on the dark band */
+.cx-btn.is--glass {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background-color: #faf9f733;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+
+/* ========================== BREAKPOINTS =========================== */
+@media screen and (max-width: 991px) {
+  .nx-h2 { font-size: 2.75rem; }
+  .thanks__h1 { font-size: 3.25rem; }
+  .win-sun__h { font-size: 3.25rem; }
+}
+@media screen and (max-width: 767px) {
+  .section_thankyou { padding-top: 5rem; padding-bottom: 5rem; }
+  .section_win-sunshine { padding-top: 5rem; padding-bottom: 5rem; }
+  .nx-h2 { font-size: 2.25rem; }
+  .thanks__h1 { font-size: 2.75rem; }
+  .win-sun__h { font-size: 2.75rem; }
+}
+@media screen and (max-width: 479px) {
+  .thanks__h1 { font-size: 2.25rem; }
+  .win-sun__h { font-size: 2.25rem; }
+  .thanks__buttons { flex-direction: column; width: 100%; }
+  .thanks__buttons .cx-btn { width: 100%; }
+  .win-sun__buttons { flex-direction: column; width: 100%; }
+  .win-sun__buttons .cx-btn { width: 100%; }
+  .cx-btn__hide { height: auto; }
+  .cx-btn__wrap { height: 20px; }
+  .cx-btn__tile.is--bottom { display: none; }
+  .cx-btn__arrow { display: none; }
+}
+
+/* ================= TESTIMONIALS-ONLY ADDITIONS (thx-) =============
+   New page-specific classes only — never restyles a shared class. */
+.section_thx-intro {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 6rem 5% 1rem;
+}
+.thx-intro__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+@media screen and (max-width: 767px) {
+  .section_thx-intro { padding-top: 4rem; }
+}
+</style>
+
+<link rel="stylesheet" href="site-shell.css" data-cx-site-shell>
+<script src="site-shell.js" defer data-cx-site-shell></script>
+</head>
+<body>
+
+<!-- ================================================================
+     PAGE: /testimonials — rebuild of cliftonexteriors.com/testimonials/
+     Content 1:1 from the live page; design per the staging homepage
+     system + the windows-page / net-new section library. Nav + footer
+     are site-wide Webflow components — not part of this payload.
+     ONE-PASTE RULE: everything below sits inside the single
+     .page_testimonials root so the converter emits ONE pasteable payload.
+     COMPONENT-REUSE PLAN: the thank-you hero below is byte-identical
+     to the section_thankyou bake in sections-new.html — once that
+     batch is componentized, replace it with the component instance.
+     The closing matches the "Section / Windows Sunshine" component
+     (static heading differs per page, so it STAYS PASTED).
+     POST-PASTE: insert the Reviews wall between the intro band and
+     the closing (see body marker comment) — this page's body IS the
+     reviews wall.
+     ================================================================ -->
+<div class="page_testimonials">
+
+<!-- ====== SECTION 1: Thank-you hero (root: section_thankyou) =======
+     Byte-identical copy of the section_thankyou bake in
+     sections-new.html (markup + embeds). Content 1:1 from
+     cliftonexteriors.com/testimonials/ hero. Logo img hotlinks the
+     old WordPress host — re-upload to Webflow assets post-paste. -->
+<section class="section_thankyou" data-nx-thanks>
+  <div class="thanks__glow" aria-hidden="true"></div>
+  <div class="thanks__content">
+    <img class="thanks__logo" src="https://www.cliftonexteriors.com/wp-content/uploads/2025/07/be-funkey-clifton-new-logo-150x150.jpg" alt="Clifton Exteriors" data-nx-reveal loading="lazy">
+    <h1 class="thanks__h1" data-nx-reveal>Thank You For <em class="nx-em">Your Review!</em></h1>
+    <blockquote class="thanks__quote" data-nx-reveal>It means the world to us that you&rsquo;ve trusted us with your home renovation project. If we knocked it out of the park, please take a minute to talk about your experience working with us. Feel free to discuss why you were looking to have work done on your home and how we have been able to help solve your problem. Thank you again! - Clifton Exteriors, LLC</blockquote>
+    <div class="thanks__buttons" data-nx-reveal>
+      <a href="https://g.page/r/CZFuCgyLda_zEB0/review" target="_blank" rel="noopener" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Leave a Google review</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Leave a Google review</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="https://www.facebook.com/cliftonexteriors/reviews" target="_blank" rel="noopener" class="cx-btn is--glass">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Leave a Facebook review</div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Leave a Facebook review</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+  </div>
+
+  <style data-embed>
+    .nx-pre { opacity: 0; transform: translateY(1.5rem); }
+    .nx-pre.nx-in { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1); }
+    .section_thankyou .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_thankyou .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+  <script data-embed>
+    /* section_thankyou — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-nx-thanks-ready')) return;
+        section.setAttribute('data-nx-thanks-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-nx-reveal]');
+        items.forEach(function (el) { el.classList.add('nx-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('nx-in'); }, i * 110);
+          });
+        }, { threshold: .3 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-nx-thanks]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+</section>
+
+<!-- ==== SECTION 2: Testimonials intro band (root: section_thx-intro)
+     Heading band in the system idiom (nx-* atoms). Content 1:1 from
+     cliftonexteriors.com/testimonials/ ("Client Testimonials" + sub);
+     the eyebrow label is an additive design element. Awwwards touch:
+     masked word-by-word roll-up on the H2 (same pattern as the
+     page-windows hero; spans are JS-created, runtime-only). -->
+<section class="section_thx-intro" data-thx-intro>
+
+  <div class="thx-intro__header">
+    <div class="nx-eyebrow" data-thx-reveal><div class="nx-eyebrow__dot"></div><div>Reviews</div></div>
+    <h2 class="nx-h2" data-thx-split>Client <em class="nx-em">Testimonials</em></h2>
+    <p class="nx-sub" data-thx-reveal>Read through some of our amazing reviews from past customers and learn more about how we were able to help them achieve their visions for their homes.</p>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS (rides as HtmlEmbed) -->
+  <style data-embed>
+    .nx-pre { opacity: 0; transform: translateY(1.5rem); }
+    .nx-pre.nx-in { opacity: 1; transform: none; transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1); }
+    /* masked word reveal — spans are JS-created, never in the paste markup */
+    .thx-intro__w-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .2em; margin-bottom: -.2em; }
+    .thx-intro__w { display: inline-block; transform: translateY(110%); }
+    .thx-intro__w.nx-in { transform: none; transition: transform .9s cubic-bezier(.22, 1, .36, 1); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS (rides as HtmlEmbed) -->
+  <script data-embed>
+    /* section_thx-intro — masked word reveal + staggered reveal (dependency-free) */
+    (function () {
+      function splitWords(el) {
+        Array.prototype.slice.call(el.childNodes).forEach(function (node) {
+          if (node.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            node.textContent.split(/(\s+)/).forEach(function (part) {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+              var m = document.createElement('span'); m.className = 'thx-intro__w-mask';
+              var w = document.createElement('span'); w.className = 'thx-intro__w';
+              w.textContent = part; m.appendChild(w); frag.appendChild(m);
+            });
+            el.replaceChild(frag, node);
+          } else if (node.nodeType === 1) { splitWords(node); }
+        });
+      }
+      function init(section) {
+        if (!section || section.getAttribute('data-thx-ready')) return;
+        section.setAttribute('data-thx-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var splitEl = section.querySelector('[data-thx-split]');
+        var words = [];
+        if (splitEl) { splitWords(splitEl); words = splitEl.querySelectorAll('.thx-intro__w'); }
+        var items = section.querySelectorAll('[data-thx-reveal]');
+        items.forEach(function (el) { el.classList.add('nx-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          words.forEach(function (w, i) {
+            setTimeout(function () { w.classList.add('nx-in'); }, 150 + i * 45);
+          });
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('nx-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-thx-intro]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ================================================================
+     SECTION 3: REVIEWS — NOT part of this payload.
+     Paste the existing reviews wall here (already built + QA-passed):
+       07-webflow-build/.tmp/section-reviews/paste_01_section_reviews-v2.html
+     Its classes (section_reviews-v2, reviews-wall__*, review-card__*,
+     cx-btn) merge cleanly with this page's payload.
+     ================================================================ -->
+
+<!-- ====== SECTION 4: Closing (root: section_win-sunshine) ==========
+     STAYS PASTED — the closing heading is static in the component
+     ("Invite The Sunshine…") and differs per page.
+     OLD-SITE NOTE: the original closing band used a photo background
+     (https://www.cliftonexteriors.com/wp-content/uploads/2022/12/DL_Resizer5.webp);
+     the redesign closing idiom is the warm panel — if the photo
+     treatment is preferred, swap the section background in the
+     Designer (re-upload the image to Webflow assets first). -->
+<section class="section_win-sunshine" data-win-sun>
+
+  <div class="win-sun__content">
+    <div class="win-sun__heading" data-win-reveal>
+      <h2 class="win-sun__h">Building Relationships <em class="win-sun__em">One Home At A Time</em></h2>
+    </div>
+
+    <div class="win-sun__buttons" data-win-reveal>
+      <a href="/contact-us" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="win-sun__area-wrap" data-win-reveal>
+      <p class="win-sun__area">Proudly serving Fairfax County, Prince William County, Loudoun County, and Surrounding Areas.</p>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-sunshine .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-sunshine .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-sunshine — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .35 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-sun]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+</div>
+<!-- ================= end .page_testimonials root ================== -->
+
+</body>
+</html>

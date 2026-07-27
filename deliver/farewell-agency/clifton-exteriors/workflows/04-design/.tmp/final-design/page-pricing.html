@@ -1,0 +1,1562 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clifton Exteriors — Pricing page (rebuild)</title>
+<!-- Preview scaffold: body font/background only. Converter ignores <link>. -->
+<link rel="stylesheet" href="_preview-base.css">
+
+<!-- ==============================================================
+     STATIC PAGE CSS — BAKE SOURCE: page-windows.html (all shared
+     win-* / cx-btn classes and the :root token block are copied
+     BYTE-IDENTICAL from it so the defs merge on paste; the roofing
+     3-bullet tier-card variant reuses the same win-price__* classes
+     per page-roofing.html). Content is 1:1 from
+     cliftonexteriors.com/pricing/; design follows the staging
+     homepage system (staging-analysis.md). No new pri-* classes were
+     needed — every section reuses the windows-page section kits.
+     Section roots, in order: section_win-hero → section_win-financing
+     → 5× section_win-pricing (windows / doors / roofing / siding /
+     gutters) → [reviews marker] → section_win-sunshine.
+     Reviews are NOT in this file — paste the existing
+     section_reviews-v2 payload between the gutters pricing section
+     and the sunshine closing (see body marker comment).
+     Images hotlink the old WordPress host — re-upload to Webflow
+     assets and relink post-paste.
+     ============================================================== -->
+<style>
+:root {
+  --_primitives---neutral-colors--brand-colors--blue: #243864;
+  --_primitives---neutral-colors--brand-colors--red: #b02034;
+  --_primitives---neutral-colors--brand-colors--warm: #eae1d5;
+  --_primitives---neutral-colors--neutral-dark: #121c32;
+  --_primitives---neutral-colors--neutral-darkest: #060911;
+  --_primitives---neutral-colors--neutral-light: #f6f4ef;
+  --_primitives---neutral-colors--neutral-lightest: #faf9f7;
+  --_primitives---neutral-colors--neutral: #d6d6d6;
+}
+
+/* single page root — the WHOLE page pastes as ONE payload (multi-root
+   merges crash the Designer; single root is the proven safe path) */
+.page_pricing { width: 100%; }
+
+/* ============================== HERO ============================== */
+.section_win-hero {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 8rem 5% 6rem;
+  position: relative;
+  overflow: hidden;
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  border-radius: 1rem;
+}
+.win-hero__bg { position: absolute; top: 0; right: 0; bottom: 0; left: 0; pointer-events: none; }
+.win-hero__bg-img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; }
+.win-hero__scrim {
+  position: absolute;
+  top: 0; right: 0; bottom: 0; left: 0;
+  background-image: linear-gradient(180deg, #121c32b3, #121c3266 45%, var(--_primitives---neutral-colors--neutral-darkest));
+}
+.win-hero__content {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 56rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-hero__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+  background-color: #dadada33;
+  border-radius: 24px;
+  padding: 6px 14px 6px 10px;
+  font-size: 0.95rem;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__badge-star {
+  display: flex;
+  align-items: center;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__h1 {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1.3;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.9;
+}
+.win-hero__h2 {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-hero__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-hero__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.win-hero__badges {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 3rem;
+}
+.win-hero__badge-chip {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border-radius: 0.75rem;
+  padding: 0.625rem 1rem;
+}
+.win-hero__badge-img { height: 2.75rem; width: auto; display: block; }
+
+/* =========================== FINANCING ============================ */
+.section_win-financing {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 5rem 5%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--warm);
+  border-radius: 1rem;
+}
+.win-fin__grid {
+  display: grid;
+  grid-template-columns: 1.2fr 0.8fr;
+  gap: 4rem;
+  align-items: center;
+}
+.win-fin__text {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+}
+.win-fin__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-fin__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-fin__visual {
+  border-radius: 1rem;
+  overflow: hidden;
+}
+.win-fin__img { width: 100%; height: 100%; object-fit: cover; aspect-ratio: 4 / 3; display: block; }
+
+/* ============================= PRICING ============================ */
+.section_win-pricing {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+}
+.win-price__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-price__eyebrow {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-price__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-price__grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  margin-top: 4rem;
+}
+.win-price__card {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 1.5rem;
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  border-radius: 1rem;
+  padding: 2.5rem 2rem;
+}
+.win-price__card.is--featured {
+  background-color: var(--_primitives---neutral-colors--neutral-dark);
+  border-color: var(--_primitives---neutral-colors--neutral-dark);
+}
+.win-price__tier {
+  margin: 0;
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1.125rem;
+  line-height: 1;
+  letter-spacing: 0.04em;
+  font-weight: 500;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-price__tier.is--featured {
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  opacity: 0.8;
+}
+.win-price__amount-group {
+  display: flex;
+  flex-direction: column;
+  gap: 0.375rem;
+}
+.win-price__starting {
+  font-size: 0.875rem;
+  line-height: 1;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.6;
+}
+.win-price__starting.is--featured {
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-price__amount {
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 2.75rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-price__amount.is--featured {
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-price__list {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+.win-price__list-item {
+  display: flex;
+  align-items: center;
+  gap: 0.625rem;
+  font-size: 1rem;
+  line-height: 1.4;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-price__list-item.is--featured {
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-price__check {
+  display: flex;
+  align-items: center;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.win-price__check.is--featured {
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+.win-price__cta-wrap {
+  display: flex;
+  margin-top: auto;
+  width: 100%;
+}
+.win-price__note {
+  margin: 2rem auto 0;
+  max-width: 48rem;
+  text-align: center;
+  font-size: 0.875rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.6;
+}
+
+/* ============================ SUNSHINE ============================ */
+.section_win-sunshine {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+  background-color: var(--_primitives---neutral-colors--brand-colors--warm);
+  border-radius: 1rem;
+}
+.win-sun__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.5rem;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.win-sun__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 4rem;
+  line-height: 1;
+  letter-spacing: -0.01em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.win-sun__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.win-sun__buttons {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  margin-top: 0.5rem;
+}
+.win-sun__area {
+  margin: 0;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+  opacity: 0.7;
+}
+
+/* cx-btn — bespoke clone of the build's button component (identical block in
+   section-reviews.html; keep both copies byte-identical so defs merge). */
+.cx-btn {
+  border-radius: 2rem;
+  background-color: var(--_primitives---neutral-colors--brand-colors--blue);
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  text-align: center;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  display: flex;
+  overflow: hidden;
+}
+.cx-btn__hide { height: 1.5rem; overflow: hidden; }
+.cx-btn__wrap { display: flex; flex-direction: column; }
+.cx-btn__tile {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+.cx-btn__arrow { justify-content: center; align-items: center; display: flex; }
+
+/* glass variant on the dark band */
+.cx-btn.is--glass {
+  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter: blur(20px);
+  background-color: #faf9f733;
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+}
+
+/* ========================== BREAKPOINTS =========================== */
+@media screen and (max-width: 991px) {
+  .win-hero__h2 { font-size: 3.25rem; }
+  .win-sun__h { font-size: 3.25rem; }
+  .win-fin__grid { grid-template-columns: 1fr; gap: 3rem; }
+  .win-price__grid { grid-template-columns: 1fr; }
+}
+@media screen and (max-width: 767px) {
+  .section_win-hero { padding-top: 6rem; padding-bottom: 5rem; }
+  .section_win-financing { padding-top: 4rem; padding-bottom: 4rem; }
+  .section_win-sunshine { padding-top: 5rem; padding-bottom: 5rem; }
+  .win-hero__h2 { font-size: 2.75rem; }
+  .win-sun__h { font-size: 2.75rem; }
+  .win-fin__h { font-size: 2.5rem; }
+  .win-price__h { font-size: 2.5rem; }
+}
+@media screen and (max-width: 479px) {
+  .win-hero__h2 { font-size: 2.25rem; }
+  .win-sun__h { font-size: 2.25rem; }
+  .win-hero__buttons { flex-direction: column; width: 100%; }
+  .win-hero__buttons .cx-btn { width: 100%; }
+  .win-sun__buttons { flex-direction: column; width: 100%; }
+  .win-sun__buttons .cx-btn { width: 100%; }
+  .win-hero__badge-img { height: 2.25rem; }
+  .cx-btn__hide { height: auto; }
+  .cx-btn__wrap { height: 20px; }
+  .cx-btn__tile.is--bottom { display: none; }
+  .cx-btn__arrow { display: none; }
+}
+</style>
+
+<link rel="stylesheet" href="site-shell.css" data-cx-site-shell>
+<script src="site-shell.js" defer data-cx-site-shell></script>
+</head>
+<body>
+
+<!-- ================================================================
+     PAGE: /pricing — rebuild of cliftonexteriors.com/pricing/
+     Content 1:1 (headings, tier prices, feature bullets and the
+     per-service disclaimers are verbatim from the old page); design
+     per the staging homepage system (staging-analysis.md). Nav +
+     footer are site-wide Webflow components — not part of this
+     payload. ONE-PASTE RULE: everything below sits inside the single
+     .page_pricing root so the converter emits ONE pasteable payload.
+     ================================================================ -->
+<div class="page_pricing">
+
+<!-- ============ SECTION 1: Hero (root: section_win-hero) ============ -->
+<section class="section_win-hero" data-win-hero>
+
+  <div class="win-hero__bg" aria-hidden="true">
+    <img class="win-hero__bg-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/DL_ResizerLast.webp" alt="" loading="eager">
+    <div class="win-hero__scrim"></div>
+  </div>
+
+  <div class="win-hero__content">
+    <div class="win-hero__badge" data-win-reveal>
+      <span class="win-hero__badge-star" aria-hidden="true">
+        <svg viewBox="0 0 24 24" width="16" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+      </span>
+      <span>5/5 from over 75 reviews</span>
+    </div>
+
+    <div class="win-hero__eyebrow-wrap" data-win-reveal>
+      <h1 class="win-hero__h1">Exterior Home Renovation At A Fair Price</h1>
+    </div>
+
+    <div class="win-hero__heading">
+      <h2 class="win-hero__h2" data-win-split>Get Ballpark Pricing For Your <em class="win-hero__em">Home&rsquo;s Renovation</em></h2>
+    </div>
+
+    <div class="win-hero__buttons" data-win-reveal>
+      <a href="/contact-us" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+      <a href="/our-process" class="cx-btn is--glass">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Our Process</div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Our Process</div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="win-hero__badges" data-win-reveal>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/GAF-CERTIFIED-copy.webp" alt="GAF-Certified" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2023/01/5-star-legacy-google-review.png" alt="A five star review for Google business review" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/ProVia-logo-copy.webp" alt="ProVia logo" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/08/shinglemaster-copy.webp" alt="ShingleMaster logo" loading="lazy"></div>
+      <div class="win-hero__badge-chip"><img class="win-hero__badge-img" src="https://www.cliftonexteriors.com/wp-content/uploads/2024/11/nextdoor_2024_web.webp" alt="2024 Neighborhood Favorites Nextdoor" loading="lazy"></div>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS (rides as HtmlEmbed) -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-hero .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-hero .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    /* awwwards touches — masked word reveal (spans are JS-created) + slow bg zoom */
+    .win-hero__w-mask { display: inline-block; overflow: hidden; vertical-align: top; padding-bottom: .2em; margin-bottom: -.2em; }
+    .win-hero__w { display: inline-block; transform: translateY(110%); }
+    .win-hero__w.win-in { transform: none; transition: transform .9s cubic-bezier(.22, 1, .36, 1); }
+    @media (prefers-reduced-motion: no-preference) {
+      .section_win-hero .win-hero__bg-img { animation: win-hero-zoom 9s cubic-bezier(.22, 1, .36, 1) forwards; }
+    }
+    @keyframes win-hero-zoom { from { transform: scale(1.12); } to { transform: none; } }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS (rides as HtmlEmbed) -->
+  <script data-embed>
+    /* section_win-hero — masked word reveal + staggered reveal (dependency-free) */
+    (function () {
+      function splitWords(el) {
+        Array.prototype.slice.call(el.childNodes).forEach(function (node) {
+          if (node.nodeType === 3) {
+            var frag = document.createDocumentFragment();
+            node.textContent.split(/(\s+)/).forEach(function (part) {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(' ')); return; }
+              var m = document.createElement('span'); m.className = 'win-hero__w-mask';
+              var w = document.createElement('span'); w.className = 'win-hero__w';
+              w.textContent = part; m.appendChild(w); frag.appendChild(m);
+            });
+            el.replaceChild(frag, node);
+          } else if (node.nodeType === 1) { splitWords(node); }
+        });
+      }
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var splitEl = section.querySelector('[data-win-split]');
+        var words = [];
+        if (splitEl) { splitWords(splitEl); words = splitEl.querySelectorAll('.win-hero__w'); }
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          words.forEach(function (w, i) {
+            setTimeout(function () { w.classList.add('win-in'); }, 150 + i * 45);
+          });
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-hero]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ======= SECTION 2: Financing (root: section_win-financing) ======= -->
+<section class="section_win-financing" data-win-fin>
+
+  <div class="win-fin__grid">
+    <div class="win-fin__text">
+      <div class="win-fin__eyebrow-wrap" data-win-reveal>
+        <p class="win-fin__eyebrow">Financing Available</p>
+      </div>
+      <div class="win-fin__heading" data-win-reveal>
+        <h2 class="win-fin__h">We Offer Financing For Your Project</h2>
+      </div>
+      <div class="win-fin__cta" data-win-reveal>
+        <a href="/financing" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Learn More</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Learn More</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+    <div class="win-fin__visual" data-win-reveal>
+      <img class="win-fin__img" src="https://www.cliftonexteriors.com/wp-content/uploads/2022/12/DL_Resizer5.webp" alt="Exterior remodeling project financed through Clifton Exteriors" loading="lazy">
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-financing .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-financing .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-financing — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-fin]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ===== SECTION 3: Windows Pricing (root: section_win-pricing) ====== -->
+<section class="section_win-pricing" data-win-price>
+
+  <div class="win-price__header">
+    <div class="win-price__eyebrow-wrap" data-win-reveal>
+      <p class="win-price__eyebrow">Windows</p>
+    </div>
+    <div class="win-price__heading" data-win-reveal>
+      <h2 class="win-price__h">Window Replacement And Installation</h2>
+    </div>
+  </div>
+
+  <div class="win-price__grid">
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Standard</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$5-8.5K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes 6-10 vinyl windows.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1 day.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card is--featured" data-win-reveal>
+      <p class="win-price__tier is--featured">Deluxe</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting is--featured">Starting At</span>
+        <div class="win-price__amount is--featured">$10-17K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes 12-20 vinyl windows.</span>
+        </div>
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1-2 days.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn is--glass">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Premium</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$20-40K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes 24+ vinyl windows.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1-3 days.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <p class="win-price__note">*Prices are averages and may change depending on the size of your home, materials used, and upgrades wanted. You will receive an exact quote for your window upgrade after our in-home consultation.</p>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-pricing .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-pricing .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    .section_win-pricing .win-price__cta-wrap .cx-btn { width: 100%; }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-pricing — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-price]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ====== SECTION 4: Doors Pricing (root: section_win-pricing) ======= -->
+<section class="section_win-pricing" data-win-price>
+
+  <div class="win-price__header">
+    <div class="win-price__eyebrow-wrap" data-win-reveal>
+      <p class="win-price__eyebrow">Doors</p>
+    </div>
+    <div class="win-price__heading" data-win-reveal>
+      <h2 class="win-price__h">Door Replacement And Installation</h2>
+    </div>
+  </div>
+
+  <div class="win-price__grid">
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Standard</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$2.8-5K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes a standard 36&rdquo;x80&rdquo; Steel/Fiberglass Door (No Glass).</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1 day.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card is--featured" data-win-reveal>
+      <p class="win-price__tier is--featured">Deluxe</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting is--featured">Starting At</span>
+        <div class="win-price__amount is--featured">$5.5-10K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes a standard 36&rdquo;x80&rdquo; Steel/Fiberglass Door with 2 sidelights or a French Door.</span>
+        </div>
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1 day.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn is--glass">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Premium</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$7.5-18K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes a standard 36&rdquo;x80&rdquo; Steel/Fiberglass Door with 2 sidelights with Transom or French Door (Fullview Clear Glass/Intricate Fullview Decorative Glass Packages).</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1-2 days.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <p class="win-price__note">*Prices are averages and may change depending on the size of your home, materials used, and upgrades wanted. You will receive an exact quote for your door installation after our in-home consultation.</p>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-pricing .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-pricing .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    .section_win-pricing .win-price__cta-wrap .cx-btn { width: 100%; }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-pricing — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-price]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ===== SECTION 5: Roofing Pricing (root: section_win-pricing) ====== -->
+<section class="section_win-pricing" data-win-price>
+
+  <div class="win-price__header">
+    <div class="win-price__eyebrow-wrap" data-win-reveal>
+      <p class="win-price__eyebrow">Roofing</p>
+    </div>
+    <div class="win-price__heading" data-win-reveal>
+      <h2 class="win-price__h">Roofing Replacement And Installation</h2>
+    </div>
+  </div>
+
+  <div class="win-price__grid">
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Standard</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$5-7.5K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for a small to medium size townhome.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes architectural lifetime, high-definition shingles, and all necessary roofing accessories.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1 day.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card is--featured" data-win-reveal>
+      <p class="win-price__tier is--featured">Deluxe</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting is--featured">Starting At</span>
+        <div class="win-price__amount is--featured">$8-18K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for a small to medium size single-family home.</span>
+        </div>
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes architectural lifetime, high-definition shingles, and all necessary roofing accessories.</span>
+        </div>
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1 day.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn is--glass">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Premium</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$20-50K+</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for large to mansion-size single-family homes.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes architectural lifetime, high-definition shingles, and all necessary roofing accessories.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1-3 days.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <p class="win-price__note">*Prices are averages and may change depending on the size of your home, materials used, and upgrades wanted. You will receive an exact quote for your roof installation after our in-home consultation.</p>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-pricing .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-pricing .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    .section_win-pricing .win-price__cta-wrap .cx-btn { width: 100%; }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-pricing — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-price]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ====== SECTION 6: Siding Pricing (root: section_win-pricing) ====== -->
+<section class="section_win-pricing" data-win-price>
+
+  <div class="win-price__header">
+    <div class="win-price__eyebrow-wrap" data-win-reveal>
+      <p class="win-price__eyebrow">Siding</p>
+    </div>
+    <div class="win-price__heading" data-win-reveal>
+      <h2 class="win-price__h">Siding Replacement And Installation</h2>
+    </div>
+  </div>
+
+  <div class="win-price__grid">
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Standard</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$8-14K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for smaller homes/ townhomes.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes vinyl siding.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 2-3 days.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card is--featured" data-win-reveal>
+      <p class="win-price__tier is--featured">Deluxe</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting is--featured">Starting At</span>
+        <div class="win-price__amount is--featured">$16-24K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for an average 2-3 story home.</span>
+        </div>
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes vinyl siding.</span>
+        </div>
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 3-5 days.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn is--glass">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Premium</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$28-50K+</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for a large to mansion size home.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes vinyl or Hardie siding.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 5-10 days.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <p class="win-price__note">*Prices are averages and may change depending on the size of your home, materials used, and upgrades wanted. You will receive an exact quote for your siding installation after our in-home consultation.</p>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-pricing .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-pricing .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    .section_win-pricing .win-price__cta-wrap .cx-btn { width: 100%; }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-pricing — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-price]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ===== SECTION 7: Gutters Pricing (root: section_win-pricing) ====== -->
+<section class="section_win-pricing" data-win-price>
+
+  <div class="win-price__header">
+    <div class="win-price__eyebrow-wrap" data-win-reveal>
+      <p class="win-price__eyebrow">Gutters</p>
+    </div>
+    <div class="win-price__heading" data-win-reveal>
+      <h2 class="win-price__h">Gutter Replacement And Installation</h2>
+    </div>
+  </div>
+
+  <div class="win-price__grid">
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Standard</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$1-1.5K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for a small to medium size townhome.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes standard 5&rdquo; (or oversized 6&rdquo;) gutters &amp; standard 2&rdquo;x3&rdquo; (or oversized 3&rdquo;x4&rdquo;) downspouts.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1 day.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card is--featured" data-win-reveal>
+      <p class="win-price__tier is--featured">Deluxe</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting is--featured">Starting At</span>
+        <div class="win-price__amount is--featured">$2-3.5K</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for a small to medium size single-family house.</span>
+        </div>
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes standard 5&rdquo; (or oversized 6&rdquo;) gutters &amp; standard 2&rdquo;x3&rdquo; (or oversized 3&rdquo;x4&rdquo;) downspouts. Also includes Bulldog Leaf Guard Protection.</span>
+        </div>
+        <div class="win-price__list-item is--featured">
+          <span class="win-price__check is--featured" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1 day.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn is--glass">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+
+    <div class="win-price__card" data-win-reveal>
+      <p class="win-price__tier">Premium</p>
+      <div class="win-price__amount-group">
+        <span class="win-price__starting">Starting At</span>
+        <div class="win-price__amount">$4-10K+</div>
+      </div>
+      <div class="win-price__list">
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Ideal for a large to a mansion-size single-family house.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Includes oversized 6&rdquo; gutters &amp; oversized 3&rdquo;x4&rdquo; downspouts. Also includes Bulldog Leaf Guard Protection.</span>
+        </div>
+        <div class="win-price__list-item">
+          <span class="win-price__check" aria-hidden="true"><svg viewBox="0 0 24 24" width="16" height="16" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M5 12.5l4.5 4.5L19 7.5" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+          <span>Complete in 1-2 days.</span>
+        </div>
+      </div>
+      <div class="win-price__cta-wrap">
+        <a href="/contact-us" class="cx-btn">
+          <div class="cx-btn__hide">
+            <div class="cx-btn__wrap">
+              <div class="cx-btn__tile">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+              <div class="cx-btn__tile is--bottom">
+                <div>Get A Quote</div>
+                <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+              </div>
+            </div>
+          </div>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <p class="win-price__note">*Prices are averages and may change depending on the size of your home, materials used, and upgrades wanted. You will receive an exact quote for your gutter installation after our in-home consultation.</p>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-pricing .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-pricing .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    .section_win-pricing .win-price__cta-wrap .cx-btn { width: 100%; }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-pricing — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .2 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-price]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+<!-- ================================================================
+     SECTION 8: REVIEWS — NOT part of this payload.
+     Paste the existing reviews wall here (already built + QA-passed):
+       07-webflow-build/.tmp/section-reviews/paste_01_section_reviews-v2.html
+     Its classes (section_reviews-v2, reviews-wall__*, review-card__*,
+     cx-btn) merge cleanly with this page's payload.
+     (Old page heading here: "Reviews From Our Satisfied Clients".)
+     ================================================================ -->
+
+<!-- ======= SECTION 9: Closing (root: section_win-sunshine) ========== -->
+<section class="section_win-sunshine" data-win-sun>
+
+  <div class="win-sun__content">
+    <div class="win-sun__heading" data-win-reveal>
+      <h2 class="win-sun__h">Quality Is Our <em class="win-sun__em">Promise</em></h2>
+    </div>
+
+    <div class="win-sun__buttons" data-win-reveal>
+      <a href="/contact-us" class="cx-btn">
+        <div class="cx-btn__hide">
+          <div class="cx-btn__wrap">
+            <div class="cx-btn__tile">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+            <div class="cx-btn__tile is--bottom">
+              <div>Get A Quote</div>
+              <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+            </div>
+          </div>
+        </div>
+      </a>
+    </div>
+
+    <div class="win-sun__area-wrap" data-win-reveal>
+      <p class="win-sun__area">Proudly serving Fairfax County, Prince William County, Loudoun County, and Surrounding Areas.</p>
+    </div>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS -->
+  <style data-embed>
+    .win-pre { opacity: 0; transform: translateY(1.5rem); }
+    .win-pre.win-in {
+      opacity: 1;
+      transform: none;
+      transition: opacity .7s ease, transform .7s cubic-bezier(.22, 1, .36, 1);
+    }
+    .section_win-sunshine .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_win-sunshine .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS -->
+  <script data-embed>
+    /* section_win-sunshine — staggered reveal (dependency-free) */
+    (function () {
+      function init(section) {
+        if (!section || section.getAttribute('data-win-ready')) return;
+        section.setAttribute('data-win-ready', '1');
+        if (!('IntersectionObserver' in window)) return;
+        if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+        var items = section.querySelectorAll('[data-win-reveal]');
+        items.forEach(function (el) { el.classList.add('win-pre'); });
+        var io = new IntersectionObserver(function (entries) {
+          if (!entries[0].isIntersecting) return;
+          io.disconnect();
+          items.forEach(function (el, i) {
+            setTimeout(function () { el.classList.add('win-in'); }, i * 110);
+          });
+        }, { threshold: .35 });
+        io.observe(section);
+      }
+      function boot() { document.querySelectorAll('[data-win-sun]').forEach(init); }
+      if (document.readyState === 'loading') { document.addEventListener('DOMContentLoaded', boot); } else { boot(); }
+    })();
+  </script>
+
+</section>
+
+</div>
+<!-- ==================== end .page_pricing root ==================== -->
+
+</body>
+</html>

@@ -1,0 +1,2787 @@
+{
+  "source": "Generated paste payload styleLess var() references",
+  "note": "Use Webflow MCP style_tool after paste. Designer variable mapping requires properties[].variable_as_value = variable_id.",
+  "styleTool": {
+    "actions": []
+  },
+  "bindings": [
+    {
+      "section": "01_section_win-hero",
+      "className": "section_win-hero",
+      "sourceStyleId": "425d0d4a-5650-4c2f-a585-00f6105811c9",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--neutral-dark)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_win-hero",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-dark",
+        "cssName": "--_primitives---neutral-colors--neutral-dark"
+      }
+    },
+    {
+      "section": "01_section_win-hero",
+      "className": "win-hero__scrim",
+      "sourceStyleId": "4d1ddcda-dba0-4f25-8318-06815b9744db",
+      "variant": "base",
+      "property": "background-image",
+      "value": "linear-gradient(180deg, #121c32b3, #121c3266 45%, var(--_primitives---neutral-colors--neutral-darkest))",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "01_section_win-hero",
+      "className": "win-hero__badge",
+      "sourceStyleId": "99bf7df3-5c69-482b-81ed-d6629af8db1c",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__badge",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_section_win-hero",
+      "className": "win-hero__badge-star",
+      "sourceStyleId": "4e66721f-095e-492b-9b20-537f9fd081ca",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__badge-star",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_section_win-hero",
+      "className": "win-hero__h1",
+      "sourceStyleId": "3ba4e315-ea17-4837-8195-216e9acaf19e",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__h1",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_section_win-hero",
+      "className": "win-hero__h2",
+      "sourceStyleId": "30e6d2cc-df65-435f-a690-3b8509d9cabf",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_section_win-hero",
+      "className": "win-hero__sub",
+      "sourceStyleId": "2e5cc550-f36f-4983-9157-bf1a101e167b",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__sub",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_section_win-hero",
+      "className": "cx-btn",
+      "sourceStyleId": "d60e8fd8-c060-410c-a799-38117adcde97",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "01_section_win-hero",
+      "className": "cx-btn",
+      "sourceStyleId": "d60e8fd8-c060-410c-a799-38117adcde97",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_section_win-hero",
+      "className": "is--glass",
+      "sourceStyleId": "6c510f35-9ae7-4103-b885-de3070c9f43d",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "is--glass",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_section_win-hero",
+      "className": "win-hero__badge-chip",
+      "sourceStyleId": "df5e9bb6-051d-4370-a5a4-c335ab9b55a6",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__badge-chip",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "02_section_win-financing",
+      "className": "section_win-financing",
+      "sourceStyleId": "576569e2-c905-4427-b131-40b0df9bda49",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--warm)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--warm"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--warm"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_win-financing",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--warm",
+        "cssName": "--_primitives---neutral-colors--brand-colors--warm"
+      }
+    },
+    {
+      "section": "02_section_win-financing",
+      "className": "win-fin__eyebrow",
+      "sourceStyleId": "ef6d59e9-78b8-4342-a13a-32a368e347da",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "02_section_win-financing",
+      "className": "win-fin__h",
+      "sourceStyleId": "c08449e7-a02a-4502-a502-eb200c64ebf4",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "02_section_win-financing",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "02_section_win-financing",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "03_section_win-invite",
+      "className": "win-fin__eyebrow",
+      "sourceStyleId": "ef6d59e9-78b8-4342-a13a-32a368e347da",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "03_section_win-invite",
+      "className": "win-fin__h",
+      "sourceStyleId": "c08449e7-a02a-4502-a502-eb200c64ebf4",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "03_section_win-invite",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "03_section_win-invite",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "03_section_win-invite",
+      "className": "win-invite__p",
+      "sourceStyleId": "f293041f-841b-4834-a740-9973b4b566fc",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-invite__p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "04_section_win-upgrades",
+      "className": "win-fin__eyebrow",
+      "sourceStyleId": "ef6d59e9-78b8-4342-a13a-32a368e347da",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "04_section_win-upgrades",
+      "className": "win-upg__h",
+      "sourceStyleId": "4718f085-e8bb-46ea-8273-06a292e211f1",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "04_section_win-upgrades",
+      "className": "win-upg__card",
+      "sourceStyleId": "602ff91d-1be1-4d35-9853-63e4a922ae27",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "04_section_win-upgrades",
+      "className": "win-upg__card",
+      "sourceStyleId": "602ff91d-1be1-4d35-9853-63e4a922ae27",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "04_section_win-upgrades",
+      "className": "win-upg__card",
+      "sourceStyleId": "602ff91d-1be1-4d35-9853-63e4a922ae27",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "04_section_win-upgrades",
+      "className": "win-upg__card",
+      "sourceStyleId": "602ff91d-1be1-4d35-9853-63e4a922ae27",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "04_section_win-upgrades",
+      "className": "win-upg__card",
+      "sourceStyleId": "602ff91d-1be1-4d35-9853-63e4a922ae27",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "04_section_win-upgrades",
+      "className": "win-upg__icon",
+      "sourceStyleId": "78cfcd8a-61f2-4ebb-9229-238e4656ac0c",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__icon",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "04_section_win-upgrades",
+      "className": "win-upg__icon",
+      "sourceStyleId": "78cfcd8a-61f2-4ebb-9229-238e4656ac0c",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__icon",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "04_section_win-upgrades",
+      "className": "win-upg__name",
+      "sourceStyleId": "75b36f0a-e886-409f-a84f-66bbd8929d48",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__name",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "05_section_win-curb",
+      "className": "win-fin__eyebrow",
+      "sourceStyleId": "ef6d59e9-78b8-4342-a13a-32a368e347da",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "05_section_win-curb",
+      "className": "win-fin__h",
+      "sourceStyleId": "c08449e7-a02a-4502-a502-eb200c64ebf4",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "05_section_win-curb",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "05_section_win-curb",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "05_section_win-curb",
+      "className": "win-invite__p",
+      "sourceStyleId": "f293041f-841b-4834-a740-9973b4b566fc",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-invite__p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "06_section_win-portfolio",
+      "className": "win-fin__eyebrow",
+      "sourceStyleId": "ef6d59e9-78b8-4342-a13a-32a368e347da",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "06_section_win-portfolio",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "06_section_win-portfolio",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "06_section_win-portfolio",
+      "className": "win-upg__h",
+      "sourceStyleId": "4718f085-e8bb-46ea-8273-06a292e211f1",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "07_section_win-confidence",
+      "className": "section_win-confidence",
+      "sourceStyleId": "68a76589-4364-4358-900c-1ffd5b982ccd",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--neutral-dark)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_win-confidence",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-dark",
+        "cssName": "--_primitives---neutral-colors--neutral-dark"
+      }
+    },
+    {
+      "section": "07_section_win-confidence",
+      "className": "win-conf__scrim",
+      "sourceStyleId": "21ba0013-539d-4dd7-959f-981faa395bc6",
+      "variant": "base",
+      "property": "background-image",
+      "value": "linear-gradient(180deg, #3d403c33, transparent 45%, var(--_primitives---neutral-colors--neutral-darkest))",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "07_section_win-confidence",
+      "className": "win-conf__eyebrow",
+      "sourceStyleId": "d9ef94ee-4264-4c9c-9e8b-89ea791749ae",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-conf__eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "07_section_win-confidence",
+      "className": "win-conf__h",
+      "sourceStyleId": "dc506095-ae2e-46a3-a746-eae4529e7957",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-conf__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "07_section_win-confidence",
+      "className": "win-conf__sub",
+      "sourceStyleId": "0eee7c7f-0f45-4d7a-a759-5c7fad48f316",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-conf__sub",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "07_section_win-confidence",
+      "className": "win-conf__icon",
+      "sourceStyleId": "88408f83-380f-4506-851a-94ddd949b58c",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-conf__icon",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "07_section_win-confidence",
+      "className": "win-conf__name",
+      "sourceStyleId": "22e2aa60-47fd-43cb-969f-dbf8c3d1a547",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-conf__name",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "07_section_win-confidence",
+      "className": "win-conf__desc",
+      "sourceStyleId": "1a152f5e-bbc9-4b18-b712-ae023912bf83",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-conf__desc",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-fin__eyebrow",
+      "sourceStyleId": "ef6d59e9-78b8-4342-a13a-32a368e347da",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-upg__h",
+      "sourceStyleId": "4718f085-e8bb-46ea-8273-06a292e211f1",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__card",
+      "sourceStyleId": "7abf0f6c-c846-43a4-8118-295f3c0c3d9e",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__card",
+      "sourceStyleId": "7abf0f6c-c846-43a4-8118-295f3c0c3d9e",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__card",
+      "sourceStyleId": "7abf0f6c-c846-43a4-8118-295f3c0c3d9e",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__card",
+      "sourceStyleId": "7abf0f6c-c846-43a4-8118-295f3c0c3d9e",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__card",
+      "sourceStyleId": "7abf0f6c-c846-43a4-8118-295f3c0c3d9e",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__tier",
+      "sourceStyleId": "27f37e31-be3e-414b-a304-083645ef69bb",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__tier",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__starting",
+      "sourceStyleId": "11f182a2-ff23-4963-9a0e-7ce059d8dc5c",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__starting",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__amount",
+      "sourceStyleId": "55120f11-3457-4035-b333-7964a804d9a7",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__amount",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__list-item",
+      "sourceStyleId": "bc39e40b-7dae-455d-a572-a606633cae33",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__list-item",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__check",
+      "sourceStyleId": "c8e60f56-9b0b-4e9a-b8c5-e0413ca27f88",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__check",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "div",
+      "sourceStyleId": "b7edf744-c43d-4d13-9d28-24587fd57ebf",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--neutral-dark)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "div",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-dark",
+        "cssName": "--_primitives---neutral-colors--neutral-dark"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "div",
+      "sourceStyleId": "b7edf744-c43d-4d13-9d28-24587fd57ebf",
+      "variant": "base",
+      "property": "border-color",
+      "value": "var(--_primitives---neutral-colors--neutral-dark)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "div",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-dark",
+        "cssName": "--_primitives---neutral-colors--neutral-dark"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__card",
+      "sourceStyleId": "491479ce-3799-4522-b2d7-f999678950b1",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__card",
+      "sourceStyleId": "491479ce-3799-4522-b2d7-f999678950b1",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__card",
+      "sourceStyleId": "491479ce-3799-4522-b2d7-f999678950b1",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__card",
+      "sourceStyleId": "491479ce-3799-4522-b2d7-f999678950b1",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__card",
+      "sourceStyleId": "491479ce-3799-4522-b2d7-f999678950b1",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "p",
+      "sourceStyleId": "91d6d6fb-ac69-4128-b1b0-f2188ffa0ea1",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__tier",
+      "sourceStyleId": "48362c60-09f6-4025-9b84-ec635efaf575",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__tier",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "span",
+      "sourceStyleId": "83f06161-064e-4f95-a955-cd340f540c2c",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "span",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__starting",
+      "sourceStyleId": "11973e70-be54-4695-a763-e77582e6d337",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__starting",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__amount",
+      "sourceStyleId": "aa835e0e-df95-4e81-99a8-0b2c73c1d62d",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__amount",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__list-item",
+      "sourceStyleId": "46285eea-5df9-4874-8bda-e55ff90bb471",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__list-item",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__check",
+      "sourceStyleId": "ca2d3dab-0b8d-40bc-9ddb-b0b14a7a0e20",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__check",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "is--glass",
+      "sourceStyleId": "137cc5b0-5a3a-44c9-ab4a-3225db336b99",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "is--glass",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "08_section_win-pricing",
+      "className": "win-price__note",
+      "sourceStyleId": "5141cca2-480c-4758-820a-86a1ba0b4466",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-price__note",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "09_section_win-process",
+      "className": "win-hero__badge",
+      "sourceStyleId": "99bf7df3-5c69-482b-81ed-d6629af8db1c",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__badge",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "09_section_win-process",
+      "className": "win-hero__badge-star",
+      "sourceStyleId": "4e66721f-095e-492b-9b20-537f9fd081ca",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__badge-star",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "09_section_win-process",
+      "className": "win-hero__h2",
+      "sourceStyleId": "30e6d2cc-df65-435f-a690-3b8509d9cabf",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "09_section_win-process",
+      "className": "cx-btn",
+      "sourceStyleId": "d60e8fd8-c060-410c-a799-38117adcde97",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "09_section_win-process",
+      "className": "cx-btn",
+      "sourceStyleId": "d60e8fd8-c060-410c-a799-38117adcde97",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "09_section_win-process",
+      "className": "is--glass",
+      "sourceStyleId": "6c510f35-9ae7-4103-b885-de3070c9f43d",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "is--glass",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "09_section_win-process",
+      "className": "win-conf__scrim",
+      "sourceStyleId": "21ba0013-539d-4dd7-959f-981faa395bc6",
+      "variant": "base",
+      "property": "background-image",
+      "value": "linear-gradient(180deg, #3d403c33, transparent 45%, var(--_primitives---neutral-colors--neutral-darkest))",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "09_section_win-process",
+      "className": "section_win-process",
+      "sourceStyleId": "af299466-4131-440e-aa3f-8c3828025293",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--neutral-dark)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_win-process",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-dark",
+        "cssName": "--_primitives---neutral-colors--neutral-dark"
+      }
+    },
+    {
+      "section": "09_section_win-process",
+      "className": "win-proc__mq-text",
+      "sourceStyleId": "e5e080c5-48a1-440f-9f24-f58ee2ec78e0",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-proc__mq-text",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "09_section_win-process",
+      "className": "win-proc__sub",
+      "sourceStyleId": "687af51e-d26f-4079-bbf7-44da70d05014",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-proc__sub",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "10_section_win-faq",
+      "className": "win-fin__eyebrow",
+      "sourceStyleId": "ef6d59e9-78b8-4342-a13a-32a368e347da",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "10_section_win-faq",
+      "className": "win-upg__h",
+      "sourceStyleId": "4718f085-e8bb-46ea-8273-06a292e211f1",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "10_section_win-faq",
+      "className": "win-faq__item",
+      "sourceStyleId": "340db882-4c84-4f45-8e94-2e2d8f362d97",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-faq__item",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "10_section_win-faq",
+      "className": "win-faq__item",
+      "sourceStyleId": "340db882-4c84-4f45-8e94-2e2d8f362d97",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-faq__item",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "10_section_win-faq",
+      "className": "win-faq__item",
+      "sourceStyleId": "340db882-4c84-4f45-8e94-2e2d8f362d97",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-faq__item",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "10_section_win-faq",
+      "className": "win-faq__item",
+      "sourceStyleId": "340db882-4c84-4f45-8e94-2e2d8f362d97",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-faq__item",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "10_section_win-faq",
+      "className": "win-faq__item",
+      "sourceStyleId": "340db882-4c84-4f45-8e94-2e2d8f362d97",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--_primitives---neutral-colors--neutral)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-faq__item",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral",
+        "cssName": "--_primitives---neutral-colors--neutral"
+      }
+    },
+    {
+      "section": "10_section_win-faq",
+      "className": "win-faq__q",
+      "sourceStyleId": "62c03c8f-a34c-4942-a314-536a8f4ff18c",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-faq__q",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "10_section_win-faq",
+      "className": "win-faq__q-icon",
+      "sourceStyleId": "1aec584d-e7f2-44a9-81a9-58dab0f62b05",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-faq__q-icon",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "10_section_win-faq",
+      "className": "win-faq__a-p",
+      "sourceStyleId": "8f9e6dbe-e8e2-4865-8862-cdcf251e9404",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-faq__a-p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "11_section_win-contact",
+      "className": "win-fin__eyebrow",
+      "sourceStyleId": "ef6d59e9-78b8-4342-a13a-32a368e347da",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "11_section_win-contact",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "11_section_win-contact",
+      "className": "cx-btn",
+      "sourceStyleId": "79d83b5f-2d99-4750-9841-f9852a4f1158",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "11_section_win-contact",
+      "className": "win-upg__h",
+      "sourceStyleId": "4718f085-e8bb-46ea-8273-06a292e211f1",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-upg__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "11_section_win-contact",
+      "className": "win-contact__p",
+      "sourceStyleId": "bcda0613-6480-4a06-aae4-0deef92291e4",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-contact__p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "12_section_win-sunshine",
+      "className": "cx-btn",
+      "sourceStyleId": "d60e8fd8-c060-410c-a799-38117adcde97",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "12_section_win-sunshine",
+      "className": "cx-btn",
+      "sourceStyleId": "d60e8fd8-c060-410c-a799-38117adcde97",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "12_section_win-sunshine",
+      "className": "section_win-sunshine",
+      "sourceStyleId": "72efb719-b8bd-4013-a4f4-a093639f06f2",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--warm)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--warm"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--warm"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_win-sunshine",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--warm",
+        "cssName": "--_primitives---neutral-colors--brand-colors--warm"
+      }
+    },
+    {
+      "section": "12_section_win-sunshine",
+      "className": "win-sun__h",
+      "sourceStyleId": "cec7db51-504c-4554-9e61-80cfae5b21e3",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-sun__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "12_section_win-sunshine",
+      "className": "win-sun__area",
+      "sourceStyleId": "6dc9ade5-8e55-41d0-84f1-57a3db138578",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-sun__area",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    }
+  ]
+}

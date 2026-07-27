@@ -1,0 +1,584 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Clifton Exteriors — Reviews section (improved)</title>
+<!-- Preview scaffold: body font/background only. Converter ignores <link>. -->
+<link rel="stylesheet" href="_preview-base.css">
+
+<!-- ==============================================================
+     STATIC SECTION CSS — BAKE SOURCE.
+     Unmarked <style>: html_to_webflow.py folds these rules into
+     native, Designer-editable Webflow classes. Class styles travel
+     with in-Designer copy/paste, so they don't need to ride the
+     runtime embed. Runtime-only rules live in the <style data-embed>
+     inside the section.
+     Payload uses BESPOKE class names only (section_reviews-v2, cx-btn,
+     reviews-wall__*, review-card__*) — nothing collides with the
+     teammate's u-*/button_primary classes, so nothing can fork -2.
+     ============================================================== -->
+<style>
+:root {
+  --_primitives---neutral-colors--brand-colors--blue: #243864;
+  --_primitives---neutral-colors--brand-colors--red: #b02034;
+  --_primitives---neutral-colors--neutral-dark: #121c32;
+  --_primitives---neutral-colors--neutral-darkest: #060911;
+  --_primitives---neutral-colors--neutral-light: #f6f4ef;
+  --_primitives---neutral-colors--neutral-lightest: #faf9f7;
+  --_primitives---neutral-colors--neutral: #d6d6d6;
+}
+
+/* section root — carries the build's u-section metrics (80rem, 7rem 5%, 2rem auto) */
+.section_reviews-v2 {
+  width: 100%;
+  max-width: 80rem;
+  margin: 2rem auto;
+  padding: 7rem 5%;
+  position: relative;
+  overflow: hidden;
+}
+
+.reviews-wall__header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+.reviews-wall__badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  -webkit-backdrop-filter: blur(50px);
+  backdrop-filter: blur(50px);
+  background-color: #dadada33;
+  border-radius: 24px;
+  padding: 6px 14px;
+  font-size: 0.95rem;
+  color: var(--_primitives---neutral-colors--brand-colors--blue);
+}
+.reviews-wall__badge-g { display: flex; align-items: center; }
+.reviews-wall__badge-score { font-weight: 600; }
+.reviews-wall__badge-stars {
+  display: flex;
+  align-items: center;
+  color: var(--_primitives---neutral-colors--brand-colors--red);
+}
+.reviews-wall__h {
+  margin: 0;
+  font-family: 'Hanken Grotesk', Arial, sans-serif;
+  font-size: 3rem;
+  line-height: 1;
+  letter-spacing: -0.02em;
+  font-weight: 400;
+  color: var(--_primitives---neutral-colors--neutral-darkest);
+}
+.reviews-wall__em {
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-style: italic;
+  font-weight: 400;
+}
+.reviews-wall__sub {
+  max-width: 34rem;
+  opacity: 0.8;
+  font-size: 1.125rem;
+  line-height: 1.5;
+}
+.reviews-wall__p { margin: 0; }
+
+.reviews-wall__mask {
+  position: relative;
+  height: 42rem;
+  overflow: hidden;
+}
+.reviews-wall__cols {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 1.25rem;
+  grid-row-gap: 1.25rem;
+  align-items: start;
+}
+.reviews-wall__stack {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 1.25rem;
+}
+
+.review-card {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  background-color: var(--_primitives---neutral-colors--neutral-lightest);
+  border: 0.5px solid var(--_primitives---neutral-colors--neutral);
+  border-radius: 1rem;
+  padding: 1.75rem;
+}
+.review-card__stars {
+  display: flex;
+  color: var(--_primitives---neutral-colors--brand-colors--red);
+}
+.review-card__text { margin: 0; padding: 0; }
+.review-card__p { margin: 0; font-size: 1rem; line-height: 1.5; }
+.review-card__meta {
+  display: flex;
+  align-items: center;
+  gap: 0.875rem;
+  margin-top: auto;
+}
+.review-card__avatar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 2.75rem;
+  height: 2.75rem;
+  flex: none;
+  border-radius: 100em;
+  background-color: var(--_primitives---neutral-colors--brand-colors--blue);
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  font-family: 'Erode Variable', 'Erode', Georgia, serif;
+  font-size: 1rem;
+  letter-spacing: 0.02em;
+}
+.review-card__who { display: flex; flex-direction: column; line-height: 1.3; }
+.review-card__name { font-size: 1rem; }
+.review-card__source { font-size: 0.85rem; opacity: 0.5; }
+
+.reviews-wall__actions {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+  gap: 1.5rem;
+  margin-top: 3rem;
+}
+.reviews-wall__writelink {
+  color: inherit;
+  font-size: 1rem;
+  text-decoration: underline;
+  text-underline-offset: 4px;
+  opacity: 0.7;
+}
+.reviews-wall__writelink:hover { opacity: 1; }
+
+/* cx-btn — bespoke clone of the build's button component (identical block in
+   section-cta-quote.html; keep both copies byte-identical so defs merge). */
+.cx-btn {
+  border-radius: 2rem;
+  background-color: var(--_primitives---neutral-colors--brand-colors--blue);
+  color: var(--_primitives---neutral-colors--neutral-lightest);
+  text-align: center;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  padding: 0.625rem 1.5rem;
+  font-size: 1rem;
+  font-weight: 400;
+  line-height: 1.5;
+  text-decoration: none;
+  display: flex;
+  overflow: hidden;
+}
+.cx-btn__hide { height: 1.5rem; overflow: hidden; }
+.cx-btn__wrap { display: flex; flex-direction: column; }
+.cx-btn__tile {
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  justify-content: flex-start;
+  align-items: center;
+  display: flex;
+}
+.cx-btn__arrow { justify-content: center; align-items: center; display: flex; }
+
+@media screen and (max-width: 991px) {
+  .reviews-wall__cols { grid-template-columns: 1fr 1fr; }
+  .reviews-wall__col.is--third { display: none; }
+  .reviews-wall__mask { height: 38rem; }
+}
+@media screen and (max-width: 767px) {
+  .section_reviews-v2 { padding-top: 3rem; padding-bottom: 3rem; }
+  .reviews-wall__h { font-size: 2.5rem; }
+  .reviews-wall__cols { grid-template-columns: 1fr; }
+  .reviews-wall__col.is--second { display: none; }
+  .reviews-wall__mask { height: 32rem; }
+  .reviews-wall__header { margin-bottom: 2rem; }
+  .reviews-wall__actions { margin-top: 2rem; }
+}
+@media screen and (max-width: 479px) {
+  .cx-btn__hide { height: auto; }
+  .cx-btn__wrap { height: 20px; }
+  .cx-btn__tile.is--bottom { display: none; }
+  .cx-btn__arrow { display: none; }
+}
+</style>
+</head>
+<body>
+
+<!-- ================================================================
+     SECTION: Reviews wall — pasteable component (root: section_reviews-v2)
+     Replaces the existing section_reviews slider after paste-verify.
+     The <style data-embed> / <script data-embed> at the end become the
+     section's two HtmlEmbed elements (runtime CSS + JS).
+     Content: 12 verbatim Google reviews from cliftonexteriors.com.
+     ================================================================ -->
+<section class="section_reviews-v2" data-reviews-wall>
+
+  <div class="reviews-wall__header">
+    <div class="reviews-wall__badge">
+      <span class="reviews-wall__badge-g" aria-hidden="true">
+        <svg viewBox="0 0 48 48" width="20" height="20" xmlns="http://www.w3.org/2000/svg"><path fill="#FFC107" d="M43.6 20.5H42V20H24v8h11.3C33.7 32.7 29.2 36 24 36c-6.6 0-12-5.4-12-12s5.4-12 12-12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 13 4 4 13 4 24s9 20 20 20 20-9 20-20c0-1.3-.1-2.3-.4-3.5z"/><path fill="#FF3D00" d="M6.3 14.7l6.6 4.8C14.7 15.1 18.9 12 24 12c3.1 0 5.9 1.2 8 3l5.7-5.7C34.3 6.1 29.4 4 24 4 16.3 4 9.7 8.3 6.3 14.7z"/><path fill="#4CAF50" d="M24 44c5.2 0 9.9-2 13.4-5.2l-6.2-5.2C29.2 35.1 26.7 36 24 36c-5.2 0-9.6-3.3-11.3-8l-6.5 5C9.5 39.6 16.2 44 24 44z"/><path fill="#1976D2" d="M43.6 20.5H42V20H24v8h11.3c-.8 2.3-2.3 4.3-4.1 5.7l6.2 5.2C36.9 39.2 44 34 44 24c0-1.3-.1-2.3-.4-3.5z"/></svg>
+      </span>
+      <span class="reviews-wall__badge-score">5.0</span>
+      <span class="reviews-wall__badge-stars" aria-label="Rated 5 out of 5 stars">
+        <svg viewBox="0 0 128 24" width="75" height="14" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+      </span>
+      <span class="reviews-wall__badge-count">Based on 55 Google reviews</span>
+    </div>
+    <div class="reviews-wall__heading">
+      <h2 class="reviews-wall__h">Reviews From Our <em class="reviews-wall__em">Satisfied Clients</em></h2>
+    </div>
+    <div class="reviews-wall__sub">
+      <p class="reviews-wall__p">Real Google reviews from homeowners across Fairfax, Prince William &amp; Loudoun Counties.</p>
+    </div>
+  </div>
+
+  <div class="reviews-wall__mask" data-wall-mask>
+    <div class="reviews-wall__cols">
+
+      <div class="reviews-wall__col" data-wall-col data-direction="up" data-speed="26">
+        <div class="reviews-wall__stack" data-wall-stack>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">I have a hard time hiring contractors to work on my home, because I've had a few experiences where I felt quality was lacking. Not so with Clifton Exteriors, who installed a new sliding door for my deck. It was a great experience throughout the process. Chris recommended a ProVia door, which we're very happy with it. It's very well built and has a number of high end features without being prohibitively expensive.</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">NG</span>
+              <span class="review-card__who">
+                <span class="review-card__name">N Goodall</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">Professional, great communication, high-quality work, (NoVA) local, and good price.</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">SH</span>
+              <span class="review-card__who">
+                <span class="review-card__name">Seth Hunter</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">Clifton Exteriors installed a new roof on my home and I couldn't be happier with the results. Not only does the roof look beautiful, but Clifton Exteriors is a wonderful company to work with. Mike and Chris kept me informed throughout the entire process and made sure to let me know of the various issues they came across during installation through texts, calls, and even pictures.</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">LD</span>
+              <span class="review-card__who">
+                <span class="review-card__name">Laura Danner</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">Great window replacement project. Thank you for the hassle free experience.</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">HX</span>
+              <span class="review-card__who">
+                <span class="review-card__name">Hongjun Xu</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+        </div>
+      </div>
+
+      <div class="reviews-wall__col is--second" data-wall-col data-direction="down" data-speed="20">
+        <div class="reviews-wall__stack" data-wall-stack>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">We've used Clifton Exteriors for multiple projects around the exterior of our house and will continue to use them for any future projects. We've gotten windows, siding, roofing, trim, and gutters replaced and each time the crew was prompt, courteous, and cleaned up thoroughly once they were finished. There was full transparency and honesty with cost, and no unexpected bills came our way.</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">BS</span>
+              <span class="review-card__who">
+                <span class="review-card__name">Ben Shuman</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">Clifton Exteriors replaced my front door and side lights and I couldn't be happier! Excellent communication and the work is superb! Highly recommend them for your home project - such an excellent contractor is very hard to find!</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">GH</span>
+              <span class="review-card__who">
+                <span class="review-card__name">Gail Hogan</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">Excellent, reliable service with very reasonable prices. The owner oversees all of the work.</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">TO</span>
+              <span class="review-card__who">
+                <span class="review-card__name">Tricia O'Grady</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">17 new windows for our 30-year-old house. Very pleased with the initial visit with Chris McNulty, the owner; ordering/delivery process went seamlessly; 1-day installation went great (including a very good interior/exterior cleanup and window cleaning before the excellent crew left the job. We were very pleased from start to finish!</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">BC</span>
+              <span class="review-card__who">
+                <span class="review-card__name">Barbara Corcoran</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+        </div>
+      </div>
+
+      <div class="reviews-wall__col is--third" data-wall-col data-direction="up" data-speed="23">
+        <div class="reviews-wall__stack" data-wall-stack>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">My experience with this company was stellar. The customer service, products, and quality of the installation all 5 stars. Extremely pleased with Mike who has a great eye for aesthetics and is very detailed. His recommendations were within our budget and exceeded our expectations. The windows elevated the look of our property, the difference is astonishing!</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">GM</span>
+              <span class="review-card__who">
+                <span class="review-card__name">GG MIA</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">Great customer service. Professional, fast.</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">AD</span>
+              <span class="review-card__who">
+                <span class="review-card__name">Art DesLauriers</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">Chris worked with me to navigate the process of submitting a claim to my home insurance, and my insurer ended up covering the replacement of my roof. The team at Clifton Exteriors was professional and detail-oriented. I'm very please with the work the did and would recommend them to others without reservation!</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">EM</span>
+              <span class="review-card__who">
+                <span class="review-card__name">Erik Matson</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+          <figure class="review-card">
+            <div class="review-card__stars" aria-label="5 out of 5 stars">
+              <svg viewBox="0 0 128 24" width="86" height="16" xmlns="http://www.w3.org/2000/svg"><path fill="currentColor" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(26,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(52,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(78,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/><path fill="currentColor" transform="translate(104,0)" d="M12 2l2.9 6.3 6.9.8-5.1 4.7 1.4 6.8L12 17.2 5.9 20.6l1.4-6.8L2.2 9.1l6.9-.8L12 2z"/></svg>
+            </div>
+            <blockquote class="review-card__text">
+              <p class="review-card__p">The service provided by Clifton Exteriors was nothing short of exceptional. Mike was always available to answer questions and never once tried to hard sell any of their products. The payment process was super easy and the never once did they require an initial down payment for their services. The installation was excellent and their warranty is lifetime.</p>
+            </blockquote>
+            <figcaption class="review-card__meta">
+              <span class="review-card__avatar" aria-hidden="true">GF</span>
+              <span class="review-card__who">
+                <span class="review-card__name">Gelf</span>
+                <span class="review-card__source">Google review</span>
+              </span>
+            </figcaption>
+          </figure>
+
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="reviews-wall__actions">
+    <a href="https://search.google.com/local/reviews?placeid=ChIJQ6AF4YZFtokRkW4KDIt1r_M" target="_blank" rel="noopener" class="cx-btn">
+      <div class="cx-btn__hide">
+        <div class="cx-btn__wrap">
+          <div class="cx-btn__tile">
+            <div>Read all reviews</div>
+            <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+          </div>
+          <div class="cx-btn__tile is--bottom">
+            <div>Read all reviews</div>
+            <div class="cx-btn__arrow"><svg width="7" height="10" viewBox="0 0 7 10" fill="none" xmlns="http://www.w3.org/2000/svg"><path d="M1 9L5 5L1 1" stroke="currentColor" stroke-width="2"/></svg></div>
+          </div>
+        </div>
+      </div>
+    </a>
+    <a href="https://search.google.com/local/writereview?placeid=ChIJQ6AF4YZFtokRkW4KDIt1r_M" target="_blank" rel="noopener" class="reviews-wall__writelink">Review us on Google</a>
+  </div>
+
+  <!-- EMBED 1 of 2: runtime CSS (rides as HtmlEmbed) -->
+  <style data-embed>
+    .reviews-wall__mask {
+      -webkit-mask-image: linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
+      mask-image: linear-gradient(180deg, transparent, #000 8%, #000 92%, transparent);
+    }
+    .reviews-wall__col { will-change: transform; }
+    .review-card__p {
+      display: -webkit-box;
+      -webkit-box-orient: vertical;
+      -webkit-line-clamp: 6;
+      overflow: hidden;
+    }
+    .section_reviews-v2 .cx-btn__wrap { transition: transform .3s cubic-bezier(.4, 0, .2, 1); }
+    .section_reviews-v2 .cx-btn:hover .cx-btn__wrap { transform: translateY(-50%); }
+    @media (prefers-reduced-motion: reduce) {
+      .reviews-wall__col { transform: none !important; }
+    }
+  </style>
+
+  <!-- EMBED 2 of 2: section JS (rides as HtmlEmbed) -->
+  <script data-embed>
+    /* section_reviews-v2 — vertical marquee wall (dependency-free) */
+    (function () {
+      function initWall(section) {
+        if (!section || section.getAttribute('data-wall-ready')) return;
+        section.setAttribute('data-wall-ready', '1');
+
+        var reduce = window.matchMedia('(prefers-reduced-motion: reduce)');
+        if (reduce.matches) return; /* static clamped wall, no animation */
+
+        var mask = section.querySelector('[data-wall-mask]');
+        var cols = section.querySelectorAll('[data-wall-col]');
+        if (!mask || !cols.length) return;
+
+        var visible = true;
+        if ('IntersectionObserver' in window) {
+          visible = false;
+          new IntersectionObserver(function (entries) {
+            visible = entries[0].isIntersecting;
+          }, { rootMargin: '120px' }).observe(section);
+        }
+
+        var paused = false;
+        mask.addEventListener('mouseenter', function () { paused = true; });
+        mask.addEventListener('mouseleave', function () { paused = false; });
+        mask.addEventListener('focusin', function () { paused = true; });
+        mask.addEventListener('focusout', function () { paused = false; });
+
+        cols.forEach(function (col) {
+          var stack = col.querySelector('[data-wall-stack]');
+          if (!stack) return;
+
+          var clone = stack.cloneNode(true);
+          clone.setAttribute('aria-hidden', 'true');
+          clone.querySelectorAll('a, button').forEach(function (el) {
+            el.setAttribute('tabindex', '-1');
+          });
+          col.appendChild(clone);
+
+          var down = col.getAttribute('data-direction') === 'down';
+          var speed = parseFloat(col.getAttribute('data-speed')) || 24; /* px/s */
+          var offset = 0;
+          var height = stack.offsetHeight;
+          var last = null;
+
+          if ('ResizeObserver' in window) {
+            new ResizeObserver(function () { height = stack.offsetHeight; }).observe(stack);
+          } else {
+            window.addEventListener('resize', function () { height = stack.offsetHeight; });
+          }
+
+          function frame(now) {
+            if (last === null) last = now;
+            var dt = (now - last) / 1000;
+            last = now;
+            if (visible && !paused && height > 0 && col.offsetParent !== null) {
+              offset = (offset + speed * dt) % height;
+              var y = down ? (offset - height) : -offset;
+              col.style.transform = 'translate3d(0,' + y.toFixed(2) + 'px,0)';
+            }
+            requestAnimationFrame(frame);
+          }
+          requestAnimationFrame(frame);
+        });
+      }
+
+      function boot() {
+        document.querySelectorAll('[data-reviews-wall]').forEach(initWall);
+      }
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', boot);
+      } else {
+        boot();
+      }
+    })();
+  </script>
+
+</section>
+<!-- ================== end pasteable component ================== -->
+
+</body>
+</html>

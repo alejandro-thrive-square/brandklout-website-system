@@ -1,0 +1,467 @@
+{
+  "source": "Generated paste payload styleLess var() references",
+  "note": "Use Webflow MCP style_tool after paste. Designer variable mapping requires properties[].variable_as_value = variable_id.",
+  "styleTool": {
+    "actions": []
+  },
+  "bindings": [
+    {
+      "section": "01_page_portfolio",
+      "className": "section_win-hero",
+      "sourceStyleId": "c07a2844-bcd6-4d5b-a19f-cd50770cb8e4",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--neutral-dark)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-dark"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_win-hero",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-dark",
+        "cssName": "--_primitives---neutral-colors--neutral-dark"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "win-hero__scrim",
+      "sourceStyleId": "00ac549a-fa64-4717-b638-7b91e1ed04ce",
+      "variant": "base",
+      "property": "background-image",
+      "value": "linear-gradient(180deg, #121c32b3, #121c3266 45%, var(--_primitives---neutral-colors--neutral-darkest))",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "win-hero__badge",
+      "sourceStyleId": "72793b56-c8a7-4de0-8c29-6804e9234795",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__badge",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "win-hero__badge-star",
+      "sourceStyleId": "83f3fe75-b20a-4e49-8773-7e98b9a1f03a",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__badge-star",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "win-hero__h1",
+      "sourceStyleId": "ca891b15-2560-4482-a65b-340adfa3590d",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__h1",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "win-hero__h2",
+      "sourceStyleId": "ef32e8c6-9795-46a3-9d70-628324626ad6",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "cx-btn",
+      "sourceStyleId": "6e3115dc-55e0-47d4-9f07-d4fd5e6c1d68",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "cx-btn",
+      "sourceStyleId": "6e3115dc-55e0-47d4-9f07-d4fd5e6c1d68",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "win-hero__badge-chip",
+      "sourceStyleId": "8f35d9f6-8fa6-4cd1-bb19-f6c17c42f209",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-hero__badge-chip",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "section_win-financing",
+      "sourceStyleId": "895b2e78-b4d6-426a-9760-a35d63fa2170",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--warm)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--warm"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--warm"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_win-financing",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--warm",
+        "cssName": "--_primitives---neutral-colors--brand-colors--warm"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "win-fin__eyebrow",
+      "sourceStyleId": "0ed4acb4-38f5-4c1c-beac-575cdf2de91c",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "win-fin__h",
+      "sourceStyleId": "76ddcda9-216c-48d6-9c9e-878cd332646d",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-fin__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "cx-btn",
+      "sourceStyleId": "bb1dce5f-3f76-4fd7-8916-3221e0718f84",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--blue)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--blue"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--blue",
+        "cssName": "--_primitives---neutral-colors--brand-colors--blue"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "cx-btn",
+      "sourceStyleId": "bb1dce5f-3f76-4fd7-8916-3221e0718f84",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-lightest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-lightest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "cx-btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-lightest",
+        "cssName": "--_primitives---neutral-colors--neutral-lightest"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "win-port__h",
+      "sourceStyleId": "f8a6d8ef-ffcc-4659-9f3e-c5f99b31e8a3",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-port__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "section_win-sunshine",
+      "sourceStyleId": "92ac89bb-9570-40f7-b901-dd7ba9e7cba5",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_primitives---neutral-colors--brand-colors--warm)",
+      "cssNames": [
+        "--_primitives---neutral-colors--brand-colors--warm"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--brand-colors--warm"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_win-sunshine",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--brand-colors--warm",
+        "cssName": "--_primitives---neutral-colors--brand-colors--warm"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "win-sun__h",
+      "sourceStyleId": "0c19a9ce-377f-4e50-8d6c-7272a1fcab16",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-sun__h",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    },
+    {
+      "section": "01_page_portfolio",
+      "className": "win-sun__area",
+      "sourceStyleId": "fc931164-e135-45a7-845e-e809dc70654c",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_primitives---neutral-colors--neutral-darkest)",
+      "cssNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "sourceNames": [
+        "--_primitives---neutral-colors--neutral-darkest"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "win-sun__area",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_primitives---neutral-colors--neutral-darkest",
+        "cssName": "--_primitives---neutral-colors--neutral-darkest"
+      }
+    }
+  ]
+}

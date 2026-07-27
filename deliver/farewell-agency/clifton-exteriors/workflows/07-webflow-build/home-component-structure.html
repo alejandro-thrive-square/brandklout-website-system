@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clifton Exteriors — Home Page Component Structure</title>
+<style>
+  :root{
+    --bg:#0f1115; --panel:#171a21; --panel2:#1e222b; --line:#2a2f3a;
+    --text:#e8eaf0; --muted:#9aa3b2; --accent:#f5b942; --green:#6fcf97; --red:#ef7d7d; --blue:#7db8ef;
+    --mono:'Consolas','Menlo',monospace;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{background:var(--bg);color:var(--text);font:15px/1.6 'Segoe UI',system-ui,sans-serif;padding:40px 20px}
+  .wrap{max-width:960px;margin:0 auto}
+  h1{font-size:1.6rem;margin-bottom:4px}
+  .sub{color:var(--muted);font-size:.9rem;margin-bottom:28px}
+  .sub code{color:var(--blue)}
+  h2{font-size:1.1rem;margin:34px 0 12px;color:var(--accent);border-bottom:1px solid var(--line);padding-bottom:6px}
+  code{font-family:var(--mono);font-size:.85em;background:var(--panel2);padding:2px 6px;border-radius:4px}
+  pre{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:18px;overflow-x:auto;font-family:var(--mono);font-size:.82rem;line-height:1.7}
+  pre .c{color:var(--muted)} pre .s{color:var(--green)} pre .g{color:var(--blue)}
+  table{width:100%;border-collapse:collapse;font-size:.86rem;background:var(--panel);border-radius:10px;overflow:hidden}
+  .tablebox{overflow-x:auto;border-radius:10px;border:1px solid var(--line)}
+  th,td{text-align:left;padding:9px 12px;border-bottom:1px solid var(--line);vertical-align:top}
+  th{background:var(--panel2);color:var(--muted);font-weight:600;white-space:nowrap}
+  tr:last-child td{border-bottom:none}
+  td:first-child{white-space:nowrap;font-weight:600}
+  .badge{display:inline-block;font-size:.72rem;padding:1px 8px;border-radius:99px;background:var(--panel2);color:var(--muted);border:1px solid var(--line);margin-left:6px}
+  ul{padding-left:20px}
+  li{margin-bottom:8px}
+  .cards{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-top:6px}
+  .card{background:var(--panel);border:1px solid var(--line);border-radius:10px;padding:16px}
+  .card h3{font-size:.95rem;margin-bottom:6px}
+  .card p{font-size:.85rem;color:var(--muted)}
+  .warn li::marker{color:var(--red)}
+  .pat li::marker{color:var(--green)}
+  .foot{margin-top:40px;color:var(--muted);font-size:.78rem;border-top:1px solid var(--line);padding-top:14px}
+</style>
+</head>
+<body>
+<div class="wrap">
+
+  <h1>Clifton Exteriors — Home Page Component Structure</h1>
+  <div class="sub">
+    Analyzed 2026-07-12 via Webflow MCP Data API (headless) ·
+    site <code>6a234fcd5732d1f0a674156f</code> · page <code>6a234fd15732d1f0a67415b2</code> ·
+    library: <strong>60 components</strong>
+  </div>
+
+  <h2>Page Tree — fully componentized</h2>
+  <pre>Body
+└── .page-wrapper <span class="c">(the only raw elements are 2 wrapper divs)</span>
+    ├── <span class="g">Global Styles</span>
+    ├── <span class="g">Navigation</span>
+    ├── .main-wrapper <span class="c">(&lt;main&gt;)</span>
+    │   ├── <span class="s">Section / Hero</span>
+    │   ├── <span class="s">Section / Services Grid</span>
+    │   ├── <span class="s">Section / Feature Split</span>   <span class="c">"Insurance Claims Made Easy"</span>
+    │   ├── <span class="s">Section / USP</span>             <span class="c">"Feel Confident Working With Us"</span>
+    │   ├── <span class="s">Section / Portfolio</span>
+    │   ├── <span class="s">Section / About</span>
+    │   ├── <span class="s">Section / Reviews</span>
+    │   └── <span class="s">Section / CTA Band</span>        <span class="c">"A Hassle Free Process"</span>
+    └── <span class="g">Footer</span></pre>
+
+  <h2>The 8 Home Sections</h2>
+  <div class="tablebox"><table>
+    <tr><th>Section</th><th>Site instances</th><th>Props</th><th>Notable</th></tr>
+    <tr><td>Hero</td><td>1</td><td>10</td><td>Background <code>&lt;video&gt;</code> DOM element; eyebrow is the H1, big heading is the H2</td></tr>
+    <tr><td>Services Grid</td><td>3</td><td><strong>37</strong></td><td>25 image props (5 × 5 service cards); sticky + scroll layout; nests Card&nbsp;/&nbsp;Services</td></tr>
+    <tr><td>Feature Split</td><td>7</td><td>9</td><td>The workhorse block; only real variants on the page: <em>Images Left / Right</em></td></tr>
+    <tr><td>USP</td><td>1</td><td>15</td><td>Cleanest example of prop forwarding into Row&nbsp;/&nbsp;Heading for Section</td></tr>
+    <tr><td>Portfolio</td><td>1</td><td>7</td><td>Draggable marquee via <code>data-draggable-marquee-init</code> attrs</td></tr>
+    <tr><td>About</td><td>1</td><td>9</td><td>Same internal shell as Feature Split — a fork, not a variant</td></tr>
+    <tr><td>Reviews</td><td><strong>19</strong></td><td>1</td><td>Most-reused section site-wide; review wall + Google place-id links + JS embeds</td></tr>
+    <tr><td>CTA Band</td><td>15</td><td>7</td><td>Standard page closer; reuses the hero's background-video classes</td></tr>
+  </table></div>
+
+  <h2>Shared Atoms</h2>
+  <div class="tablebox"><table>
+    <tr><th>Component</th><th>Instances</th><th>Variants</th></tr>
+    <tr><td>Button</td><td>107</td><td>Primary, Secondary</td></tr>
+    <tr><td>Heading Text</td><td>79</td><td>h1–h6, eyebrow</td></tr>
+    <tr><td>Paragraph Text</td><td>60</td><td>Base (+ visibility boolean)</td></tr>
+    <tr><td>Review Badge / Google Review Badge</td><td>19 each</td><td>Blue / Red / White Star</td></tr>
+    <tr><td>Row / Heading for Section</td><td>17</td><td>Standard section header, receives forwarded props</td></tr>
+    <tr><td>Card / Services · Spacer - Rows</td><td>15 · 2</td><td>Base · Large / Medium / Small</td></tr>
+  </table></div>
+
+  <h2>Architecture Patterns</h2>
+  <ul class="pat">
+    <li><strong>All content edits go through section-instance props</strong> — pages contain no raw content elements.</li>
+    <li><strong>Prop forwarding:</strong> section props bind into nested atoms via <code>{sourceType:"prop", propId}</code> bindings.</li>
+    <li><strong>Variant IDs as prop values:</strong> style props store IDs (<code>"base"</code> or a UUID), not names — look them up with <code>includeVariants</code> before setting.</li>
+    <li><strong>Links by page ID</strong> (<code>{mode:"page", to:{pageId}}</code>), <strong>images by asset ID</strong>.</li>
+    <li><strong>JS behaviors ride on data attributes</strong> (marquee, review wall) with logic in HTML embeds / global code.</li>
+  </ul>
+
+  <h2>In Depth: Components Inside Components</h2>
+  <p style="color:var(--muted);font-size:.9rem;margin-bottom:10px">
+    Every section definition nests further component instances. That creates a three-layer content model —
+    and only the top layer is per-page:
+  </p>
+  <pre>Layer 1 — PAGE INSTANCE props     <span class="s">per page</span>   <span class="c">the only per-page layer</span>
+Layer 2 — DEFINITION internals    <span class="g">shared</span>     <span class="c">elements + nested instances, same on every page</span>
+Layer 3 — NESTED INSTANCE props   <span class="g">shared</span>     <span class="c">forwarded (bound to Layer 1) or hardcoded</span></pre>
+  <ul class="pat">
+    <li><strong>Per-page content must arrive via an unbroken forwarding chain</strong> (<code>{sourceType:"prop", propId}</code>) from Layer&nbsp;1. Anything page-specific sitting at Layer&nbsp;2/3 is a bug — or a deliberately page-specific duplicate component.</li>
+    <li><strong>Editing a definition (Layer 2/3) hits every instance on every page</strong> — check <code>instanceCount</code> before touching it. Layer&nbsp;1 edits affect one page only.</li>
+    <li>Example: USP's nested Row&nbsp;/&nbsp;Heading for Section forwards 7 of 8 props from USP's own props; the 8th is hardcoded in the definition.</li>
+  </ul>
+
+  <h2>Proven Failure Mode: Clone Leftovers (gutters, 2026-07-12)</h2>
+  <p style="color:var(--muted);font-size:.9rem;margin-bottom:10px">
+    Duplicating a component (FAQ Windows → FAQ Gutters/Siding/Insurance) copies the <em>whole</em> Layer-2 tree.
+    Updating the name + Layer-1 props makes the page look done while source-page content still renders from inside the definition:
+  </p>
+  <ul class="warn">
+    <li><strong>FAQ Gutters:</strong> 2 windows Q&amp;A were rendering live on /gutters (6 hardcoded items; old site + paste artifact confirm 4) — <span style="color:var(--green)">deleted, verified 4 remain</span>.</li>
+    <li><strong>Gutters Layer-1 misses:</strong> 4 alt-text props still said "Bedroom windows" / "Tall windows" — <span style="color:var(--green)">fixed</span>.</li>
+    <li><strong>FAQ Siding:</strong> same leftovers but <code>visibility:false</code> — renders fine, clutter remains.</li>
+    <li><strong>FAQ Insurance:</strong> still carries the windows Q&amp;A — <strong>open item</strong> (visibility unverified).</li>
+    <li><strong>FAQ Roofing:</strong> clean.</li>
+  </ul>
+  <p style="color:var(--muted);font-size:.85rem;margin-top:8px">
+    Audit recipe: ① page tree depth 3 → scan instance props; ② per section, <code>get_all_elements</code> with
+    <code>scope_component_id</code> + <code>depth:-1</code> (batched, grep the saved output offline for source-page terms);
+    ③ check <code>visibility</code> on hits; ④ confirm intent vs old-site inventory / paste artifacts before deleting from a definition.
+  </p>
+
+  <h2>Quirks &amp; Watch-outs</h2>
+  <ul class="warn">
+    <li><code>"Section / Portfolio "</code> has a <strong>trailing space</strong> in its name (breaks name lookups).</li>
+    <li>Services Grid has <strong>five identically-named "Heading Text" props</strong> — target by propId.</li>
+    <li>Reviews' one prop is vestigial — still holds default "This is a heading".</li>
+    <li>Hero button 02 "Learn About Insurance Claims" links to the <strong>Contact Us</strong> page — likely meant for Insurance Claims.</li>
+    <li>Two class dialects coexist: Relume-style (<code>u-section</code>, <code>padding-global</code>) vs BEM (<code>reviews-wall__*</code>).</li>
+    <li>Prop-name typo: USP "Card 02 Blrub".</li>
+  </ul>
+
+  <div class="foot">
+    Full write-up: <code>HOME-COMPONENT-STRUCTURE.md</code> · <strong>Reusable procedure: <code>SOP-COMPONENT-AUDIT.md</code></strong> (same folder) ·
+    Generated from data_pages_tool → data_element_tool → data_component_tool
+  </div>
+
+</div>
+</body>
+</html>

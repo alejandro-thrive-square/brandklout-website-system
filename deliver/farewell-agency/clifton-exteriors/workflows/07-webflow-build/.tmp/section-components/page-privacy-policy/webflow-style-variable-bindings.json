@@ -1,0 +1,717 @@
+{
+  "source": "Generated paste payload styleLess var() references",
+  "note": "Use Webflow MCP style_tool after paste. Designer variable mapping requires properties[].variable_as_value = variable_id.",
+  "styleTool": {
+    "actions": []
+  },
+  "bindings": [
+    {
+      "section": "01_section_page-header",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--color-scheme-1--text)",
+      "cssNames": [
+        "--color-scheme-1--text"
+      ],
+      "sourceNames": [
+        "--color-scheme-1--text"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--color-scheme-1--text",
+        "cssName": "--color-scheme-1--text"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--color-scheme-1--background)",
+      "cssNames": [
+        "--color-scheme-1--background"
+      ],
+      "sourceNames": [
+        "--color-scheme-1--background"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--color-scheme-1--background",
+        "cssName": "--color-scheme-1--background"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--_typography---font-styles--font-family)",
+      "cssNames": [
+        "--_typography---font-styles--font-family"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-family"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-family",
+        "cssName": "--_typography---font-styles--font-family"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--_typography---font-styles--font-size)",
+      "cssNames": [
+        "--_typography---font-styles--font-size"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-size"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-size",
+        "cssName": "--_typography---font-styles--font-size"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "line-height",
+      "value": "var(--_typography---font-styles--line-height)",
+      "cssNames": [
+        "--_typography---font-styles--line-height"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--line-height"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "line-height",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--line-height",
+        "cssName": "--_typography---font-styles--line-height"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "font-weight",
+      "value": "var(--_typography---font-styles--font-weight)",
+      "cssNames": [
+        "--_typography---font-styles--font-weight"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-weight"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-weight",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-weight",
+        "cssName": "--_typography---font-styles--font-weight"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "letter-spacing",
+      "value": "var(--_typography---font-styles--letter-spacing)",
+      "cssNames": [
+        "--_typography---font-styles--letter-spacing"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--letter-spacing"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "letter-spacing",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--letter-spacing",
+        "cssName": "--_typography---font-styles--letter-spacing"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "h1-page-privacy-policy",
+      "sourceStyleId": "f7c09285-f702-4a51-aada-84c8c06ca48d",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--_typography---font-styles--font-size)",
+      "cssNames": [
+        "--_typography---font-styles--font-size"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-size"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h1-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-size",
+        "cssName": "--_typography---font-styles--font-size"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "h1-page-privacy-policy",
+      "sourceStyleId": "f7c09285-f702-4a51-aada-84c8c06ca48d",
+      "variant": "base",
+      "property": "font-weight",
+      "value": "var(--_typography---font-styles--font-weight)",
+      "cssNames": [
+        "--_typography---font-styles--font-weight"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-weight"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h1-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-weight",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-weight",
+        "cssName": "--_typography---font-styles--font-weight"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "h1-page-privacy-policy",
+      "sourceStyleId": "f7c09285-f702-4a51-aada-84c8c06ca48d",
+      "variant": "base",
+      "property": "line-height",
+      "value": "var(--_typography---font-styles--line-height)",
+      "cssNames": [
+        "--_typography---font-styles--line-height"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--line-height"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h1-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "line-height",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--line-height",
+        "cssName": "--_typography---font-styles--line-height"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "h1-page-privacy-policy",
+      "sourceStyleId": "f7c09285-f702-4a51-aada-84c8c06ca48d",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--_typography---font-styles--font-family)",
+      "cssNames": [
+        "--_typography---font-styles--font-family"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-family"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h1-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-family",
+        "cssName": "--_typography---font-styles--font-family"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "h1-page-privacy-policy",
+      "sourceStyleId": "f7c09285-f702-4a51-aada-84c8c06ca48d",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--color-scheme-1--text)",
+      "cssNames": [
+        "--color-scheme-1--text"
+      ],
+      "sourceNames": [
+        "--color-scheme-1--text"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h1-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--color-scheme-1--text",
+        "cssName": "--color-scheme-1--text"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "h1-page-privacy-policy",
+      "sourceStyleId": "f7c09285-f702-4a51-aada-84c8c06ca48d",
+      "variant": "base",
+      "property": "letter-spacing",
+      "value": "var(--_typography---font-styles--letter-spacing)",
+      "cssNames": [
+        "--_typography---font-styles--letter-spacing"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--letter-spacing"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h1-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "letter-spacing",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--letter-spacing",
+        "cssName": "--_typography---font-styles--letter-spacing"
+      }
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "button-1",
+      "sourceStyleId": "c4b554c2-0f02-4ce7-82d6-a7423fbc5f66",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--_field-manual---signal\\<deleted\\|variable-39d5e11c-6b02-794a-2461-d5aee83b0883\\>)",
+      "cssNames": [
+        "--_field-manual---signal"
+      ],
+      "sourceNames": [
+        "--_field-manual---signal"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "01_section_page-header",
+      "className": "button-1",
+      "sourceStyleId": "c4b554c2-0f02-4ce7-82d6-a7423fbc5f66",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--_field-manual---paper-on-ink\\<deleted\\|variable-fc66ad19-ce2e-770a-b05f-c06e6456e55a\\>)",
+      "cssNames": [
+        "--_field-manual---paper-on-ink"
+      ],
+      "sourceNames": [
+        "--_field-manual---paper-on-ink"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--color-scheme-1--text)",
+      "cssNames": [
+        "--color-scheme-1--text"
+      ],
+      "sourceNames": [
+        "--color-scheme-1--text"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--color-scheme-1--text",
+        "cssName": "--color-scheme-1--text"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "background-color",
+      "value": "var(--color-scheme-1--background)",
+      "cssNames": [
+        "--color-scheme-1--background"
+      ],
+      "sourceNames": [
+        "--color-scheme-1--background"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--color-scheme-1--background",
+        "cssName": "--color-scheme-1--background"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--_typography---font-styles--font-family)",
+      "cssNames": [
+        "--_typography---font-styles--font-family"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-family"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-family",
+        "cssName": "--_typography---font-styles--font-family"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--_typography---font-styles--font-size)",
+      "cssNames": [
+        "--_typography---font-styles--font-size"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-size"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-size",
+        "cssName": "--_typography---font-styles--font-size"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "line-height",
+      "value": "var(--_typography---font-styles--line-height)",
+      "cssNames": [
+        "--_typography---font-styles--line-height"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--line-height"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "line-height",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--line-height",
+        "cssName": "--_typography---font-styles--line-height"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "font-weight",
+      "value": "var(--_typography---font-styles--font-weight)",
+      "cssNames": [
+        "--_typography---font-styles--font-weight"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-weight"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-weight",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-weight",
+        "cssName": "--_typography---font-styles--font-weight"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "section_page-header",
+      "sourceStyleId": "4c3fa1f3-b7d3-4824-a5d2-4d4e022f54ae",
+      "variant": "base",
+      "property": "letter-spacing",
+      "value": "var(--_typography---font-styles--letter-spacing)",
+      "cssNames": [
+        "--_typography---font-styles--letter-spacing"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--letter-spacing"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "section_page-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "letter-spacing",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--letter-spacing",
+        "cssName": "--_typography---font-styles--letter-spacing"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "h2-page-privacy-policy",
+      "sourceStyleId": "0d1586cb-ec0a-4e9b-b168-4a1314b4f5f0",
+      "variant": "base",
+      "property": "font-weight",
+      "value": "var(--_typography---font-styles--font-weight)",
+      "cssNames": [
+        "--_typography---font-styles--font-weight"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-weight"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h2-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-weight",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-weight",
+        "cssName": "--_typography---font-styles--font-weight"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "h2-page-privacy-policy",
+      "sourceStyleId": "0d1586cb-ec0a-4e9b-b168-4a1314b4f5f0",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--_typography---font-styles--font-size)",
+      "cssNames": [
+        "--_typography---font-styles--font-size"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-size"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h2-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-size",
+        "cssName": "--_typography---font-styles--font-size"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "h2-page-privacy-policy",
+      "sourceStyleId": "0d1586cb-ec0a-4e9b-b168-4a1314b4f5f0",
+      "variant": "base",
+      "property": "line-height",
+      "value": "var(--_typography---font-styles--line-height)",
+      "cssNames": [
+        "--_typography---font-styles--line-height"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--line-height"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h2-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "line-height",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--line-height",
+        "cssName": "--_typography---font-styles--line-height"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "h2-page-privacy-policy",
+      "sourceStyleId": "0d1586cb-ec0a-4e9b-b168-4a1314b4f5f0",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--_typography---font-styles--font-family)",
+      "cssNames": [
+        "--_typography---font-styles--font-family"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--font-family"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h2-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--font-family",
+        "cssName": "--_typography---font-styles--font-family"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "h2-page-privacy-policy",
+      "sourceStyleId": "0d1586cb-ec0a-4e9b-b168-4a1314b4f5f0",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--color-scheme-1--text)",
+      "cssNames": [
+        "--color-scheme-1--text"
+      ],
+      "sourceNames": [
+        "--color-scheme-1--text"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h2-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--color-scheme-1--text",
+        "cssName": "--color-scheme-1--text"
+      }
+    },
+    {
+      "section": "02_section_rich-text",
+      "className": "h2-page-privacy-policy",
+      "sourceStyleId": "0d1586cb-ec0a-4e9b-b168-4a1314b4f5f0",
+      "variant": "base",
+      "property": "letter-spacing",
+      "value": "var(--_typography---font-styles--letter-spacing)",
+      "cssNames": [
+        "--_typography---font-styles--letter-spacing"
+      ],
+      "sourceNames": [
+        "--_typography---font-styles--letter-spacing"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "h2-page-privacy-policy",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "letter-spacing",
+          "variable_as_value": ""
+        },
+        "sourceName": "--_typography---font-styles--letter-spacing",
+        "cssName": "--_typography---font-styles--letter-spacing"
+      }
+    }
+  ]
+}
