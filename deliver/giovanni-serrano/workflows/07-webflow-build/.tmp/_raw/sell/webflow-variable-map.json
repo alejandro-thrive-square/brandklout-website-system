@@ -1,0 +1,146 @@
+{
+  "source": "Webflow variable map",
+  "note": "After MCP import, fill variableId with the Webflow variable ID and cssName with variable.getCSSName(). style_tool variable binding uses variableId via variable_as_value.",
+  "variables": [
+    {
+      "sourceName": "--body",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--body",
+      "binding": "var(--body)"
+    },
+    {
+      "sourceName": "--bone",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--bone",
+      "binding": "var(--bone)"
+    },
+    {
+      "sourceName": "--bone-d",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--bone-d",
+      "binding": "var(--bone-d)"
+    },
+    {
+      "sourceName": "--canvas",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--canvas",
+      "binding": "var(--canvas)"
+    },
+    {
+      "sourceName": "--display",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--display",
+      "binding": "var(--display)"
+    },
+    {
+      "sourceName": "--gold",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--gold",
+      "binding": "var(--gold)"
+    },
+    {
+      "sourceName": "--ink",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink",
+      "binding": "var(--ink)"
+    },
+    {
+      "sourceName": "--ink-fade",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink-fade",
+      "binding": "var(--ink-fade)"
+    },
+    {
+      "sourceName": "--ink-mute",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink-mute",
+      "binding": "var(--ink-mute)"
+    },
+    {
+      "sourceName": "--ink-soft",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink-soft",
+      "binding": "var(--ink-soft)"
+    },
+    {
+      "sourceName": "--line",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--line",
+      "binding": "var(--line)"
+    },
+    {
+      "sourceName": "--mono",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--mono",
+      "binding": "var(--mono)"
+    },
+    {
+      "sourceName": "--navy",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--navy",
+      "binding": "var(--navy)"
+    },
+    {
+      "sourceName": "--navy-d",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--navy-d",
+      "binding": "var(--navy-d)"
+    },
+    {
+      "sourceName": "--on-d",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--on-d",
+      "binding": "var(--on-d)"
+    },
+    {
+      "sourceName": "--on-d-line",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--on-d-line",
+      "binding": "var(--on-d-line)"
+    },
+    {
+      "sourceName": "--on-d-mute",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--on-d-mute",
+      "binding": "var(--on-d-mute)"
+    },
+    {
+      "sourceName": "--on-d-soft",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--on-d-soft",
+      "binding": "var(--on-d-soft)"
+    },
+    {
+      "sourceName": "--terra",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--terra",
+      "binding": "var(--terra)"
+    },
+    {
+      "sourceName": "--terra-d",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--terra-d",
+      "binding": "var(--terra-d)"
+    }
+  ]
+}

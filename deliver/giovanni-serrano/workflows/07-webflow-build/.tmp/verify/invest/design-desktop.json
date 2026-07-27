@@ -1,0 +1,102 @@
+{
+ "url": "http://127.0.0.1:8799/invest.html",
+ "visibility": "visible",
+ "focus": true,
+ "warnings": [],
+ "sectionIds": [
+  "(none)",
+  "why",
+  "strategy",
+  "why-me",
+  "proforma",
+  "sample",
+  "(none)",
+  "(none)",
+  "process",
+  "background",
+  "faq",
+  "contact",
+  "related"
+ ],
+ "headings": [
+  "Buying your first multifamily? Model the deal first.",
+  "Not just a different kind of house. A different financial instrument.",
+  "Tenants pay your mortgage.",
+  "Equity builds 4× faster.",
+  "Cash flow, not a money pit.",
+  "You exit on NOI — not comps.",
+  "Live in one unit.Rent the rest. Buy with owner-occupied financing.",
+  "The high-friction path.",
+  "The paththat actually opens.",
+  "What most agents won't dofor a first-time buyer — that I will.",
+  "A real proforma — not a vague \"should cash flow.\"",
+  "Sensitivity, before you sign anything.",
+  "A model you can use after close.",
+  "The proforma — line by line,the way real estate finance defines it.",
+  "Gross scheduled rent",
+  "Less vacancy → EGI",
+  "Less operating expenses → NOI",
+  "Less debt service → BTCF",
+  "Compute the four metrics",
+  "Stress-test the variables",
+  "A real proforma — line by line.",
+  "4-Unit Multifamilybuilt 1978 · 5,800 sf lot",
+  "From \"I'm thinking about it\" to \"I own this.\"",
+  "Strategy session & lender pre-approval.",
+  "Targeted San Diego search.",
+  "Full proforma on every property worth a second look.",
+  "Offer strategy & negotiation.",
+  "Due diligence — verify everything in the proforma.",
+  "Close — and the model becomes your operating playbook.",
+  "A licensed advisorwho's actually done this work.",
+  "What first-time buyers usually ask before we get started.",
+  "Ready to see the numbers?",
+  "One call.Then a model.",
+  "Three other waysI work with clients."
+ ],
+ "counts": {
+  "sections": 13,
+  "reveals": 31,
+  "revealed": 31,
+  "details": 5,
+  "forms": 1,
+  "inputs": 4,
+  "images": 1,
+  "svgs": 2,
+  "links": 37
+ },
+ "textLen": 14612,
+ "stuckReveals": [],
+ "probes": {
+  "body": {
+   "background-color": "rgb(244, 241, 222)",
+   "color": "rgb(61, 64, 91)",
+   "font-family": "Inter, -apple-system, sans-serif",
+   "overflow-x": "hidden"
+  },
+  "h1": {
+   "font-family": "Lora, Georgia, serif",
+   "font-size": "74.88px",
+   "color": "rgb(61, 64, 91)"
+  },
+  "sceneHeadSub": {
+   "font-family": "Lora, Georgia, serif",
+   "font-style": "italic",
+   "font-size": "22px"
+  },
+  "reveal": {
+   "opacity": "1",
+   "transform": "none"
+  },
+  "compareBar": {
+   "height": "8px",
+   "background-color": "rgba(61, 64, 91, 0.18)"
+  },
+  "faqAnswer": {
+   "opacity": "1"
+  },
+  "footMark": {
+   "color": "rgb(244, 241, 222)"
+  }
+ }
+}

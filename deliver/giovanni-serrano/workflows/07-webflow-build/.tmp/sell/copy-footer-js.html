@@ -1,0 +1,65 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8">
+<title>Copy FOOTER JS (script)</title></head>
+<body style="font:15px/1.5 system-ui,sans-serif;max-width:680px;margin:3rem auto;padding:0 1rem">
+<h1>Copy FOOTER JS (script)</h1>
+<p>Click, then focus the Webflow code field and press Ctrl/Cmd+V.</p>
+<button id="btn" style="font-size:1.1rem;padding:.9rem 1.6rem;border:0;border-radius:.5rem;background:#1463ff;color:#fff;cursor:pointer">Copy to clipboard</button>
+<span id="status" style="margin-left:1rem;font-weight:600"></span>
+<textarea id="payload" style="position:absolute;left:-9999px;top:-9999px">&lt;script&gt;
+(() =&gt; {
+const io = new IntersectionObserver((e) =&gt; { e.forEach(x =&gt; { if (x.isIntersecting) { x.target.classList.add(&#x27;in&#x27;); io.unobserve(x.target); } }); }, { threshold: 0.12 });
+    document.querySelectorAll(&#x27;.reveal, .reveal-stagger&#x27;).forEach(el =&gt; io.observe(el));
+
+    const spObs = new IntersectionObserver((e) =&gt; { e.forEach(x =&gt; { if (x.isIntersecting) x.target.classList.add(&#x27;in&#x27;); }); }, { threshold: 0.25 });
+    const sp = document.getElementById(&#x27;sitepane&#x27;);
+    if (sp) spObs.observe(sp);
+
+    document.querySelectorAll(&#x27;a[href^=&quot;#&quot;]&#x27;).forEach(a =&gt; {
+      a.addEventListener(&#x27;click&#x27;, e =&gt; { const t = document.querySelector(a.getAttribute(&#x27;href&#x27;)); if (t) { e.preventDefault(); window.scrollTo({ top: t.getBoundingClientRect().top + window.scrollY - 100, behavior: &#x27;smooth&#x27; }); } });
+    });
+
+    const progressBar = document.getElementById(&#x27;progressBar&#x27;);
+    window.addEventListener(&#x27;scroll&#x27;, () =&gt; { const h = document.documentElement; progressBar.style.width = (h.scrollTop / (h.scrollHeight - h.clientHeight) * 100) + &#x27;%&#x27;; }, { passive: true });
+
+    const spSvg = document.querySelector(&#x27;.site-pane svg&#x27;);
+    if (spSvg) window.addEventListener(&#x27;scroll&#x27;, () =&gt; { const y = window.scrollY; if (y &lt; 800) spSvg.style.transform = &#x27;translateY(&#x27; + (y * 0.05) + &#x27;px)&#x27;; }, { passive: true });
+
+    const navBtn = document.querySelector(&#x27;.nav-toggle&#x27;);
+    const navMenu = document.querySelector(&#x27;nav.top .links&#x27;);
+    if (navBtn &amp;&amp; navMenu) {
+      navBtn.addEventListener(&#x27;click&#x27;, () =&gt; {
+        navMenu.classList.toggle(&#x27;open&#x27;);
+        navBtn.textContent = navMenu.classList.contains(&#x27;open&#x27;) ? &#x27;✕&#x27; : &#x27;☰&#x27;;
+      });
+      document.addEventListener(&#x27;click&#x27;, (e) =&gt; {
+        if (!e.target.closest(&#x27;nav.top&#x27;)) {
+          navMenu.classList.remove(&#x27;open&#x27;);
+          navBtn.textContent = &#x27;☰&#x27;;
+        }
+      });
+    }
+
+    function applyDesktopZoom() {
+      const w = window.innerWidth;
+      document.documentElement.style.zoom = w &gt; 1920 ? (w / 1920) : &#x27;&#x27;;
+    }
+    applyDesktopZoom();
+    window.addEventListener(&#x27;resize&#x27;, applyDesktopZoom);
+
+    // sticky CTA
+    const stickyCta = document.getElementById(&#x27;stickyCta&#x27;); window.addEventListener(&#x27;scroll&#x27;, () =&gt; { stickyCta.style.display = window.scrollY &gt; 600 ? &#x27;inline-flex&#x27; : &#x27;none&#x27;; });
+})();
+
+&lt;/script&gt;</textarea>
+<script>
+const txt=document.getElementById('payload').value;
+document.getElementById('btn').addEventListener('click',()=>{
+  const h=(e)=>{e.preventDefault();e.clipboardData.setData('text/plain',txt);};
+  document.addEventListener('copy',h);
+  const ok=document.execCommand('copy');
+  document.removeEventListener('copy',h);
+  const s=document.getElementById('status');
+  s.textContent=ok?('\u2713 Copied '+txt.length+' chars'):'copy failed';
+});
+</script>
+</body></html>
