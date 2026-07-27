@@ -1,0 +1,40 @@
+{
+  "brand": "Webzite Studio",
+  "prepared_for": "New Webflow website design system",
+  "sources": {
+    "local_archive": "C:\\Users\\pc\\Documents\\Webzite Studio\\Interno\\Growth\\Our Website",
+    "website": "https://www.webzite.studio",
+    "upwork": "https://www.upwork.com/freelancers/alejandromilano",
+    "upwork_access_note": "Public fetch returned an anti-bot challenge; no authenticated scraping was used."
+  },
+  "tokens": {
+    "colors": {
+      "ink": "#111114",
+      "paper": "#F7F5EF",
+      "signal_blue": "#466FFF",
+      "blue_soft": "#A3B7FF",
+      "action_red": "#FF4646",
+      "red_soft": "#FFA3A3",
+      "profit_yellow": "#FFEC46",
+      "yellow_soft": "#FFF6A3",
+      "interface_mist": "#DCE6FF"
+    },
+    "typography": {
+      "primary_stack": "Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, Segoe UI, sans-serif",
+      "display": "Large editorial display type, 0.92 line-height, no negative tracking",
+      "body": "Readable sans body, 1.5 line-height"
+    },
+    "motion": {
+      "ease": "cubic-bezier(0.19, 1, 0.22, 1)",
+      "reveal": "720-780ms masked fade and translate",
+      "dust": "Subtle pointer-reactive canvas particles",
+      "testimonials": "Timed active quote rail with manual controls"
+    }
+  },
+  "content_signals": {
+    "positioning": "Webflow websites optimized for results, customer acquisition, SEO, speed, analytics, and conversion.",
+    "stats": ["35+ projects finished", "25+ clients worldwide", "4.5 stars on Upwork"],
+    "services": ["Branding", "Website Design", "Webflow Development", "SEO", "Speed Optimization", "Analytics", "Automation"],
+    "case_studies": ["3D Sellers", "Amble", "Commenting AI", "Enjoy Marketing", "Excellent Facets", "Michael Sjosten", "Mused Agency", "Verde Energy Group", "Video Three"]
+  }
+}

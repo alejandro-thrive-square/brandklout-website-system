@@ -33,9 +33,11 @@ Any Manage workflow that uses MCPs for payments, contracts, finance, HR, interna
 ## 4. Global Brand Assets
 To ensure brand consistency across all pillars, all agency-related graphics, logos, and videos are stored in a centralized hub:
 - `manage/brand-assets/`: The primary repository for all Webzite brand materials.
+- `manage/brand-assets/assets/`: Curated logo, brand, texture, motion, testimonial, pricing, 3D, and work-cover source assets for agency use.
+- `manage/brand-assets/design-system/`: HTML/CSS/JS design-system reference for the next Webzite website and future Webflow implementation.
 - **Usage**: Sales, Growth, and Deliver microsystems must extract assets from this folder for outreach, redesigns, and client delivery to maintain a unified brand identity.
 - **Updates**: Any change to the brand identity (new logo, updated color palette) must be reflected here first.
-- **Version Control**: All files in this directory are stored on the **VPS** (source of truth) and synced from local via `rclone` (SFTP). They are gitignored and never committed to the repository.
+- **Version Control**: Binary/media files in this directory are stored on the **VPS** (source of truth) and synced from local via `rclone` (SFTP). Repo-friendly reference files such as HTML, CSS, JS, JSON, and Markdown may be committed when useful.
 
 ## 5. Global Management Constraints
 - **Data Privacy**: All sensitive financial and legal data must be handled with strict confidentiality.
