@@ -1,0 +1,81 @@
+{
+  "source": ":root CSS custom properties",
+  "variables": [
+    {
+      "name": "--brand-300",
+      "value": "#c07861"
+    },
+    {
+      "name": "--brand-500",
+      "value": "#a13512"
+    },
+    {
+      "name": "--brand-600",
+      "value": "#66210b"
+    },
+    {
+      "name": "--card-gap",
+      "value": "1rem"
+    },
+    {
+      "name": "--cream",
+      "value": "#f1ece3"
+    },
+    {
+      "name": "--divider",
+      "value": "#66210b33"
+    },
+    {
+      "name": "--font-body",
+      "value": "\"Plus Jakarta Sans\", Arial, sans-serif"
+    },
+    {
+      "name": "--font-heading",
+      "value": "Petrona, Georgia, serif"
+    },
+    {
+      "name": "--hover-tint",
+      "value": "#66210b0d"
+    },
+    {
+      "name": "--max-width",
+      "value": "80rem"
+    },
+    {
+      "name": "--neutral-100",
+      "value": "#e3dfde"
+    },
+    {
+      "name": "--neutral-300",
+      "value": "#ada29f"
+    },
+    {
+      "name": "--neutral-50",
+      "value": "#f3f2f1"
+    },
+    {
+      "name": "--neutral-600",
+      "value": "#3d3533"
+    },
+    {
+      "name": "--neutral-700",
+      "value": "#251f1e"
+    },
+    {
+      "name": "--neutral-800",
+      "value": "#141110"
+    },
+    {
+      "name": "--radius-medium",
+      "value": "1rem"
+    },
+    {
+      "name": "--radius-small",
+      "value": ".375rem"
+    },
+    {
+      "name": "--row-spacing",
+      "value": "2rem"
+    }
+  ]
+}

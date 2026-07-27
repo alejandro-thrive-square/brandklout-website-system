@@ -1,0 +1,66 @@
+{
+  "collection": "Projects",
+  "slug": "projects",
+  "fields": [
+    {
+      "name": "Name",
+      "slug": "name",
+      "type": "PlainText",
+      "required": true
+    },
+    {
+      "name": "Sort Order",
+      "slug": "sort_order",
+      "type": "Number",
+      "required": false
+    },
+    {
+      "name": "Url",
+      "slug": "url",
+      "type": "Link",
+      "required": false
+    },
+    {
+      "name": "Image",
+      "slug": "image",
+      "type": "Image",
+      "required": false
+    },
+    {
+      "name": "Image Alt",
+      "slug": "image_alt",
+      "type": "PlainText",
+      "required": false
+    },
+    {
+      "name": "Index",
+      "slug": "index",
+      "type": "PlainText",
+      "required": false
+    },
+    {
+      "name": "Meta",
+      "slug": "meta",
+      "type": "PlainText",
+      "required": false
+    },
+    {
+      "name": "Service",
+      "slug": "service",
+      "type": "PlainText",
+      "required": false
+    },
+    {
+      "name": "Location",
+      "slug": "location",
+      "type": "PlainText",
+      "required": false
+    },
+    {
+      "name": "Year",
+      "slug": "year",
+      "type": "PlainText",
+      "required": false
+    }
+  ]
+}

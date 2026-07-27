@@ -1,0 +1,511 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Horizon — New Home Sections (Awwwards Edition)</title>
+<link rel="stylesheet" href="preview.css">
+<link rel="stylesheet" href="sections.css">
+<script src="https://cdn.prod.website-files.com/gsap/3.15.0/gsap.min.js"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.15.0/ScrollTrigger.min.js"></script>
+<script src="https://cdn.prod.website-files.com/gsap/3.15.0/SplitText.min.js"></script>
+</head>
+<body>
+
+<!-- ============================================================
+     SECTION: PROJECTS — index list + cursor-following preview
+     ============================================================ -->
+<section class="u-section section_projects">
+  <div class="u-section-content">
+    <div class="u-heading_row">
+      <div class="u-heading_divider is--span"></div>
+      <div class="u-heading_content-left">
+        <div class="u-eyebrow">Selected Work — (05)</div>
+        <div class="u-heading">
+          <h2 class="u-heading-display" data-hz-split>Visit the Homes We Built for <em>Families Like Yours</em></h2>
+        </div>
+      </div>
+      <div class="u-heading_content-right">
+        <div class="u-paragraph">
+          <p data-hz-reveal>From waterfront retreats on the Potomac to whole-house transformations across Northern Virginia — new home builds guided by true craftsmanship.</p>
+        </div>
+      </div>
+    </div>
+    <div class="projects_list" data-hz-projects>
+      <a class="projects_row" href="/projects/eagles-landing-coles-point-virginia" data-hz-preview="1" data-hz-reveal>
+        <div class="projects_index">01</div>
+        <img class="projects_thumb" src="https://cdn.prod.website-files.com/675b3bd3757cf1d3225bc88b/68f7cef76875cbf5e0ebb3df_2Y5A9451-2-p-1080.jpg" alt="Waterfront custom home on the Potomac River">
+        <div class="projects_row-main">
+          <h3 class="projects_title">Coastal Warmth on the Potomac</h3>
+          <div class="projects_meta">New Home Building · Coles Point, VA · 2022</div>
+        </div>
+        <div class="projects_arrow">→</div>
+      </a>
+      <a class="projects_row" href="/projects/abingdon-alexandria-va" data-hz-preview="2" data-hz-reveal>
+        <div class="projects_index">02</div>
+        <img class="projects_thumb" src="https://cdn.prod.website-files.com/675b3bd3757cf1d3225bc88b/68f1704b77449f4f8f662959_HeidiArwine_VA_100113.avif" alt="Renovated townhouse interior with transitional design in Alexandria, Virginia">
+        <div class="projects_row-main">
+          <h3 class="projects_title">A Precisely Tailored Masterpiece of Transitional Elegance</h3>
+          <div class="projects_meta">Whole House Remodeling · Alexandria, VA · 2023</div>
+        </div>
+        <div class="projects_arrow">→</div>
+      </a>
+      <a class="projects_row" href="/projects/waterview-coles-point-virginia" data-hz-preview="3" data-hz-reveal>
+        <div class="projects_index">03</div>
+        <img class="projects_thumb" src="https://cdn.prod.website-files.com/675b3bd3757cf1d3225bc88b/68f6fb5ff4d0df8b84078155_2Y5A9472-2-p-1080.jpg" alt="Craftsman-style waterfront home on the Potomac River">
+        <div class="projects_row-main">
+          <h3 class="projects_title">Timeless Craftsmanship on the Potomac</h3>
+          <div class="projects_meta">New Home Building · Coles Point, VA · 2022</div>
+        </div>
+        <div class="projects_arrow">→</div>
+      </a>
+      <a class="projects_row" href="/projects/greenfield" data-hz-preview="4" data-hz-reveal>
+        <div class="projects_index">04</div>
+        <img class="projects_thumb" src="https://cdn.prod.website-files.com/675b3bd3757cf1d3225bc88b/68f7da3cba498f24a2356087_2Y5A0950-2-Edit-p-1080.jpg" alt="Single-level custom home with abundant natural light in Annandale, Virginia">
+        <div class="projects_row-main">
+          <h3 class="projects_title">Single-Level Sanctuary Crafted for Tranquility</h3>
+          <div class="projects_meta">New Home Building · Annandale, VA · 2025</div>
+        </div>
+        <div class="projects_arrow">→</div>
+      </a>
+      <a class="projects_row" href="/projects/9th-street-north" data-hz-preview="5" data-hz-reveal>
+        <div class="projects_index">05</div>
+        <img class="projects_thumb" src="https://cdn.prod.website-files.com/675b3bd3757cf1d3225bc88b/676585510d4e2f2f58349314_horizon-building-corporation_ninth-street-north_thumbnail.avif" alt="Modern custom home exterior in Arlington, Virginia">
+        <div class="projects_row-main">
+          <h3 class="projects_title">Custom, Modern Masterpiece Tailored for Hosting</h3>
+          <div class="projects_meta">New Home Building · Arlington, VA · 2024</div>
+        </div>
+        <div class="projects_arrow">→</div>
+      </a>
+      <div class="projects_preview" data-hz-preview-box>
+        <img class="projects_preview-img" data-hz-preview-img="1" src="https://cdn.prod.website-files.com/675b3bd3757cf1d3225bc88b/68f7cef76875cbf5e0ebb3df_2Y5A9451-2-p-1080.jpg" alt="">
+        <img class="projects_preview-img" data-hz-preview-img="2" src="https://cdn.prod.website-files.com/675b3bd3757cf1d3225bc88b/68f1704b77449f4f8f662959_HeidiArwine_VA_100113.avif" alt="">
+        <img class="projects_preview-img" data-hz-preview-img="3" src="https://cdn.prod.website-files.com/675b3bd3757cf1d3225bc88b/68f6fb5ff4d0df8b84078155_2Y5A9472-2-p-1080.jpg" alt="">
+        <img class="projects_preview-img" data-hz-preview-img="4" src="https://cdn.prod.website-files.com/675b3bd3757cf1d3225bc88b/68f7da3cba498f24a2356087_2Y5A0950-2-Edit-p-1080.jpg" alt="">
+        <img class="projects_preview-img" data-hz-preview-img="5" src="https://cdn.prod.website-files.com/675b3bd3757cf1d3225bc88b/676585510d4e2f2f58349314_horizon-building-corporation_ninth-street-north_thumbnail.avif" alt="">
+      </div>
+    </div>
+    <div class="button-group">
+      <a class="button" href="/portfolio"><div>View Portfolio</div></a>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION: WHY CHOOSE US — sticky stacking cards
+     ============================================================ -->
+<section class="u-section section_why">
+  <div class="u-section-content">
+    <div class="u-heading_row">
+      <div class="u-heading_divider is--span"></div>
+      <div class="u-heading_content-left">
+        <div class="u-eyebrow">The Horizon Difference</div>
+        <div class="u-heading">
+          <h2 class="u-heading-display" data-hz-split>Why Choose Horizon Building for <em>Your New Home?</em></h2>
+        </div>
+      </div>
+      <div class="u-heading_content-right">
+        <div class="u-paragraph">
+          <p data-hz-reveal>One team, one contract, and 40 years of proven Northern Virginia expertise — from architecture and permitting to the final details of construction.</p>
+        </div>
+      </div>
+    </div>
+    <div class="why_stack" data-hz-stack>
+      <div class="why_card is--cream">
+        <div class="why_big-number">01</div>
+        <div class="why_card-body">
+          <h3 class="why_title">Single-Source Accountability</h3>
+          <p class="why_text">Unlike traditional builders, we manage your entire project — architecture, permitting, construction, and details. One team. One contract. One commitment to your satisfaction.</p>
+        </div>
+      </div>
+      <div class="why_card is--terra">
+        <div class="why_big-number">02</div>
+        <div class="why_card-body">
+          <h3 class="why_title-light">Transparent Process</h3>
+          <p class="why_text-light">Your secure client dashboard provides 24/7 access to schedules, budgets, selections, and progress photos. No guessing. No wondering. Complete clarity on your project status.</p>
+        </div>
+      </div>
+      <div class="why_card is--ink">
+        <div class="why_big-number">03</div>
+        <div class="why_card-body">
+          <h3 class="why_title-light">Proven Northern Virginia Expertise</h3>
+          <p class="why_text-light">40 years building in Fairfax County, Loudoun County, Arlington, and Alexandria means we know every municipality's codes, every quality subcontractor, and every potential site challenge before we begin.</p>
+        </div>
+      </div>
+      <div class="why_card is--brand">
+        <div class="why_big-number">04</div>
+        <div class="why_card-body">
+          <h3 class="why_title-light">Exceptional Craftsmanship Network</h3>
+          <p class="why_text-light">Our experienced team includes Northern Virginia's finest artisans; many who've worked with us for 20+ years. This consistency ensures high-quality craftsmanship and top priority on every detail of your home build.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION: TESTIMONIALS — dual-direction marquee
+     ============================================================ -->
+<section class="u-section section_testimonials">
+  <div class="testi_head">
+    <div class="u-heading_divider is--span"></div>
+    <div class="testi_head-left">
+      <div class="u-eyebrow">Google Reviews</div>
+      <div class="u-heading">
+        <h2 class="u-heading-display" data-hz-split>A Building Experience <em>Clients Remember</em></h2>
+      </div>
+    </div>
+    <div class="testi_score" data-hz-reveal>
+      <div class="testi_score-number">5.0</div>
+      <div class="testi_score-stars">★★★★★</div>
+      <div class="testi_score-label">Five stars on Google reviews</div>
+    </div>
+  </div>
+  <div class="testi_marquee" data-hz-marquee="1">
+    <div class="testi_track">
+      <div class="testi_card">
+        <p class="testi_quote">We are one year into living in our new home, and we are very happy and Horizon Building has remained proactive in addressing any concerns that come up as the house settles in. This is a full recommendation to consider working with Horizon Building for any investment you decide to make in your home.</p>
+        <div class="testi_who"><div class="testi_name">Aldus Chapin</div><div class="testi_year">2025</div></div>
+      </div>
+      <div class="testi_card is--dark">
+        <p class="testi_quote-light">“Excellent work from start to finish! Especially good with the innumerable change orders we asked for. Highly recommended!”</p>
+        <div class="testi_who"><div class="testi_name-light">Sam Mikkelson</div><div class="testi_year">2024</div></div>
+      </div>
+      <div class="testi_card">
+        <p class="testi_quote">“Since they have been in business so long, they know and use only the most skilled employees and subcontractors. Everyone who worked on my garage did excellent work and they literally charged me $20,000 less than another builder’s estimate to do it. I highly recommend them.”</p>
+        <div class="testi_who"><div class="testi_name">Jennifer J. McKinney</div><div class="testi_year">2024</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="testi_marquee is--second" data-hz-marquee="-1">
+    <div class="testi_track">
+      <div class="testi_card is--dark">
+        <p class="testi_quote-light">“We have been so very impressed with all the work that Mike and his team did for us. They were always professional and worked hard to make our vision for our project a reality. Their attention to detail was excellent. Mike was always true to his word and maintained the highest of standards.”</p>
+        <div class="testi_who"><div class="testi_name-light">Karen J</div><div class="testi_year">2023</div></div>
+      </div>
+      <div class="testi_card">
+        <p class="testi_quote">“Great work! Mike and his team made the process painlessly easy. The finished product came out better than I could have hoped for. I can’t recommend them enough, and will definitely use them again.”</p>
+        <div class="testi_who"><div class="testi_name">Dave Phelps</div><div class="testi_year">2022</div></div>
+      </div>
+      <div class="testi_card is--dark">
+        <p class="testi_quote-light">“Attention to detail, timeliness, quality of workmanship, you name it Horizon delivered. Extremely responsive throughout the project. Highly recommend.”</p>
+        <div class="testi_who"><div class="testi_name-light">Alan Evans</div><div class="testi_year">2021</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION: FAQ — oversized numbered accordion
+     ============================================================ -->
+<section class="u-section section_faq">
+  <div class="u-section-content">
+    <div class="faq_head">
+      <div class="u-eyebrow">FAQ</div>
+      <div class="u-heading">
+        <h2 class="u-heading-display" data-hz-split>Answers <em>Before You Ask</em></h2>
+      </div>
+    </div>
+    <div class="faq_list">
+      <div class="faq_item" data-hz-reveal>
+        <div class="faq_question" data-hz-faq>
+          <div class="faq_number">01</div>
+          <h3 class="faq_q">What makes Horizon different from other custom home builders in Northern Virginia?</h3>
+          <div class="faq_icon">+</div>
+        </div>
+        <div class="faq_answer">
+          <p class="faq_answer-text">Horizon Building offers true design/build integration. We manage your entire home-building process under one contract. Our team partners with you to provide architectural design, permitting, and construction management - all through a single experienced team. Our reputation in Fairfax County, Loudoun County, and Arlington is a testament to our commitment to exceptional customer service and customer satisfaction.</p>
+        </div>
+      </div>
+      <div class="faq_item" data-hz-reveal>
+        <div class="faq_question" data-hz-faq>
+          <div class="faq_number">02</div>
+          <h3 class="faq_q">How much does a custom home cost in Northern Virginia?</h3>
+          <div class="faq_icon">+</div>
+        </div>
+        <div class="faq_answer">
+          <p class="faq_answer-text">Luxury custom homes in Northern Virginia typically range from $1.2 million to $5 million+, depending on location, size, and finishes. Whole-home remodels generally range from $400,000 to $2 million. Primary factors affecting your investment include site preparation requirements, architectural design complexity, material selections, and square footage.</p>
+        </div>
+      </div>
+      <div class="faq_item" data-hz-reveal>
+        <div class="faq_question" data-hz-faq>
+          <div class="faq_number">03</div>
+          <h3 class="faq_q">How long does it take to build a custom home in Virginia?</h3>
+          <div class="faq_icon">+</div>
+        </div>
+        <div class="faq_answer">
+          <p class="faq_answer-text">Most custom home construction projects take 14-18 months from architectural design to move-in. This includes design development (2-4 months), permitting (2-3 months), and construction (10-12 months). Whole-home remodels typically require 6-12 months. Timeline factors include county permitting processes, site preparation needs, and material lead times.</p>
+        </div>
+      </div>
+      <div class="faq_item" data-hz-reveal>
+        <div class="faq_question" data-hz-faq>
+          <div class="faq_number">04</div>
+          <h3 class="faq_q">What areas do you serve? Do you build in Fairfax County, Loudoun County, and Arlington?</h3>
+          <div class="faq_icon">+</div>
+        </div>
+        <div class="faq_answer">
+          <p class="faq_answer-text">Yes. Horizon Building primarily serves all of Northern Virginia, including Fairfax County, Prince William County, Arlington, Alexandria, Vienna, VA, McLean, Falls Church, and Annandale. We also serve Montgomery County, Maryland, Loudon County, and rural areas around the DC Metro and Richmond areas on case-by-case basis.</p>
+        </div>
+      </div>
+      <div class="faq_item" data-hz-reveal>
+        <div class="faq_question" data-hz-faq>
+          <div class="faq_number">05</div>
+          <h3 class="faq_q">Do you handle all permits and work with county inspectors?</h3>
+          <div class="faq_icon">+</div>
+        </div>
+        <div class="faq_answer">
+          <p class="faq_answer-text">Absolutely. Our experienced team knows every jurisdiction's requirements, reducing delays that plague projects managed by less knowledgeable builders. We schedule all inspections, address any concerns immediately, and ensure your home is built to meet or exceed all code requirements.</p>
+        </div>
+      </div>
+      <div class="faq_item" data-hz-reveal>
+        <div class="faq_question" data-hz-faq>
+          <div class="faq_number">06</div>
+          <h3 class="faq_q">What happens during the first meeting? Is there a consultation fee?</h3>
+          <div class="faq_icon">+</div>
+        </div>
+        <div class="faq_answer">
+          <p class="faq_answer-text">Your first meeting is complimentary and pressure-free. We'll discuss your vision, lifestyle needs, timeline expectations, and budget. We'll review relevant projects from our portfolio, explain our design/build process in detail, and answer every question you have. If your project involves a specific site (either land you own or are considering), we can evaluate it for feasibility.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION: CTA — kinetic statement + parallax panel
+     ============================================================ -->
+<section class="u-section section_cta">
+  <div class="cta_panel">
+    <img class="cta_image" data-hz-parallax src="https://cdn.prod.website-files.com/675b24600dce6f2388670f18/67e1e05d9f16813171a13311_HeidiArwine_VA_100113-p-1600.avif" alt="Interior of a custom home built by Horizon Building Corporation">
+    <div class="cta_overlay"></div>
+    <div class="cta_content">
+      <div class="u-eyebrow is--on-dark">Start the Conversation</div>
+      <h2 class="cta_heading" data-hz-split>Ready to Start <em>Your Project?</em></h2>
+      <p class="cta_text" data-hz-reveal>Experience the Horizon Building difference. Schedule a consultation to discuss your vision with Northern Virginia's most trusted design/build firm.</p>
+      <div class="button-group is--center">
+        <a class="button is-alternate" href="/contact-us"><div>Discuss Your Project</div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============================================================
+     SECTION: FOOTER — monumental wordmark
+     ============================================================ -->
+<footer class="footer-main_component">
+  <div class="footer-main_inner">
+    <div class="footer-main_grid">
+      <div class="footer-main_brand">
+        <p class="footer-main_brand-name">Horizon Building Corp.</p>
+        <p class="footer-main_tagline">Building luxury homes in Northern Virginia since 1984.</p>
+        <a class="button is-alternate" href="/contact-us"><div>Discuss Your Project</div></a>
+        <a class="footer-main_bbb-link" href="https://www.bbb.org/us/va/annandale/profile/custom-home-builder/horizon-building-0241-236094932"><img class="footer-main_bbb" src="https://cdn.prod.website-files.com/675b24600dce6f2388670f18/6986ff2b9db68fa2b0dddd71_bbb.svg" alt="BBB Accredited Business"></a>
+      </div>
+      <div class="footer-main_col">
+        <p class="footer-main_label">Services</p>
+        <div class="footer-main_list">
+          <a class="footer-main_link" href="/services/new-home-building">New Home Building</a>
+          <a class="footer-main_link" href="/services/home-remodeling">Whole House Remodeling</a>
+          <a class="footer-main_link" href="/services/home-renovation">Whole House Renovation</a>
+          <a class="footer-main_link" href="/services/kitchen-remodel">Kitchen Remodel</a>
+          <a class="footer-main_link" href="/services/bathroom-remodel">Bathroom Remodel</a>
+          <a class="footer-main_link" href="/services/home-additions">Home Additions</a>
+          <a class="footer-main_link" href="/services/insurance-restoration-services">Insurance Restoration</a>
+        </div>
+      </div>
+      <div class="footer-main_col">
+        <p class="footer-main_label">Company</p>
+        <div class="footer-main_list">
+          <a class="footer-main_link" href="/portfolio">Our Portfolio</a>
+          <a class="footer-main_link" href="/about">About Us</a>
+          <a class="footer-main_link" href="/our-process">Our Process</a>
+        </div>
+      </div>
+      <div class="footer-main_col">
+        <p class="footer-main_label">Contact</p>
+        <div class="footer-main_list">
+          <a class="footer-main_link" href="https://maps.app.goo.gl/WcU7fhWtn78p9dgo6">7520 Greenfield Rd, Annandale, VA 22003</a>
+          <p class="footer-main_hours">Monday - Friday: 8:00 AM - 6:00 PM<br>Saturday: By Appointment</p>
+          <a class="footer-main_link" href="tel:+17033545712">(703) 354-5712</a>
+          <a class="footer-main_link" href="mailto:office@horizonbuildingcorp.com">office@horizonbuildingcorp.com</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-main_wordmark-wrap">
+      <p class="footer-main_wordmark" data-hz-wordmark>HORIZON</p>
+    </div>
+    <div class="footer-main_bottom">
+      <p class="footer-main_legal">© 2026 Horizon Building Corporation. All rights reserved.</p>
+      <div class="footer-main_social">
+        <a class="footer-main_social-link" href="https://www.instagram.com/horizon.building.corp/">Instagram</a>
+        <a class="footer-main_social-link" href="https://www.facebook.com/people/Horizon-Building/61567515634140/">Facebook</a>
+        <a class="footer-main_social-link" href="https://www.linkedin.com/company/horizon-building-corporation/">LinkedIn</a>
+        <a class="footer-main_social-link" href="https://www.houzz.com/pro/michael-ipsan">Houzz</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+(function () {
+  var hasGsap = typeof window.gsap !== 'undefined';
+  var hasST = hasGsap && typeof window.ScrollTrigger !== 'undefined';
+  var hasSplit = hasGsap && typeof window.SplitText !== 'undefined';
+  if (hasST) { gsap.registerPlugin(ScrollTrigger); }
+
+  /* ---------- scroll reveals ---------- */
+  if (hasST) {
+    document.querySelectorAll('[data-hz-reveal]').forEach(function (el) {
+      gsap.from(el, {
+        y: 48, opacity: 0, duration: 1, ease: 'power3.out',
+        scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+      });
+    });
+  }
+
+  /* ---------- split-text heading reveals ---------- */
+  if (hasST && hasSplit) {
+    document.querySelectorAll('[data-hz-split]').forEach(function (el) {
+      var split = new SplitText(el, { type: 'lines', linesClass: 'hz-line' });
+      gsap.from(split.lines, {
+        yPercent: 110, opacity: 0, stagger: 0.09, duration: 1.1, ease: 'power4.out',
+        scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+      });
+    });
+  }
+
+  /* ---------- projects: cursor-following preview ---------- */
+  var list = document.querySelector('[data-hz-projects]');
+  var box = document.querySelector('[data-hz-preview-box]');
+  if (list && box && hasGsap && window.matchMedia('(hover: hover) and (min-width: 992px)').matches) {
+    var xTo = gsap.quickTo(box, 'x', { duration: 0.45, ease: 'power3.out' });
+    var yTo = gsap.quickTo(box, 'y', { duration: 0.45, ease: 'power3.out' });
+    list.addEventListener('mousemove', function (e) {
+      var r = list.getBoundingClientRect();
+      xTo(e.clientX - r.left - 160);
+      yTo(e.clientY - r.top - 110);
+    });
+    /* States are set inline (the base classes carry the transitions), so the
+       preview works without any extra runtime-state CSS install. */
+    list.querySelectorAll('[data-hz-preview]').forEach(function (row) {
+      row.addEventListener('mouseenter', function () {
+        var n = row.getAttribute('data-hz-preview');
+        box.style.opacity = '1';
+        box.querySelectorAll('[data-hz-preview-img]').forEach(function (img) {
+          var on = img.getAttribute('data-hz-preview-img') === n;
+          img.style.opacity = on ? '1' : '0';
+          img.style.transform = on ? 'scale(1)' : 'scale(1.08)';
+        });
+      });
+    });
+    list.addEventListener('mouseleave', function () { box.style.opacity = '0'; });
+  }
+
+  /* ---------- why: scale previous card as the next stacks ---------- */
+  if (hasST) {
+    var cards = document.querySelectorAll('[data-hz-stack] .why_card');
+    cards.forEach(function (card, i) {
+      if (i === cards.length - 1) { return; }
+      var next = cards[i + 1];
+      gsap.to(card, {
+        scale: 0.95, opacity: 0.85, ease: 'none',
+        scrollTrigger: { trigger: next, start: 'top bottom', end: 'top top+=120', scrub: true }
+      });
+    });
+  }
+
+  /* ---------- testimonial marquees ---------- */
+  /* Each track holds ONE set of cards; the set is cloned here until the track
+     covers the viewport plus one full period, so the loop never runs out of
+     cards no matter how wide the screen is. */
+  if (hasGsap) {
+    document.querySelectorAll('[data-hz-marquee]').forEach(function (wrap) {
+      var track = wrap.querySelector('.testi_track');
+      if (!track || !track.children.length) { return; }
+      var dir = parseInt(wrap.getAttribute('data-hz-marquee'), 10) || 1;
+      var set = Array.prototype.slice.call(track.children);
+      var addSet = function () {
+        set.forEach(function (card) { track.appendChild(card.cloneNode(true)); });
+      };
+      var oneSet = track.scrollWidth;
+      addSet();
+      var period = track.scrollWidth - oneSet; /* set width + inter-set gap */
+      var guard = 0;
+      while (period > 0 && guard++ < 12 &&
+             track.scrollWidth < wrap.offsetWidth * 2 + period) { addSet(); }
+      var x = 0, speed = 0.6, target = 0.6;
+      wrap.addEventListener('mouseenter', function () { target = 0.12; });
+      wrap.addEventListener('mouseleave', function () { target = 0.6; });
+      gsap.ticker.add(function () {
+        if (!period) { return; }
+        speed += (target - speed) * 0.08;
+        x -= dir * speed;
+        if (x <= -period) { x += period; }
+        if (x > 0) { x -= period; }
+        gsap.set(track, { x: x });
+      });
+    });
+  }
+
+  /* ---------- faq accordion ---------- */
+  /* Open-state styling is applied inline (base classes carry the transitions),
+     so the accordion works without any extra runtime-state CSS install. */
+  document.querySelectorAll('[data-hz-faq]').forEach(function (q) {
+    q.addEventListener('click', function () {
+      var item = q.closest('.faq_item');
+      var answer = item.querySelector('.faq_answer');
+      var icon = item.querySelector('.faq_icon');
+      var title = item.querySelector('.faq_q');
+      var isOpen = item.classList.contains('is--open');
+      if (isOpen) {
+        item.classList.remove('is--open');
+        if (icon) {
+          icon.style.transform = '';
+          icon.style.backgroundColor = '';
+          icon.style.borderColor = '';
+          icon.style.color = '';
+        }
+        if (title) { title.style.color = ''; }
+        if (hasGsap) { gsap.to(answer, { maxHeight: 0, duration: 0.5, ease: 'power3.inOut' }); }
+        else { answer.style.maxHeight = '0px'; }
+      } else {
+        item.classList.add('is--open');
+        if (icon) {
+          icon.style.transform = 'rotate(45deg)';
+          icon.style.backgroundColor = '#a13512';
+          icon.style.borderColor = '#a13512';
+          icon.style.color = '#f1ece3';
+        }
+        if (title) { title.style.color = '#a13512'; }
+        if (hasGsap) { gsap.to(answer, { maxHeight: answer.scrollHeight, duration: 0.6, ease: 'power3.out' }); }
+        else { answer.style.maxHeight = answer.scrollHeight + 'px'; }
+      }
+    });
+  });
+
+  /* ---------- cta parallax ---------- */
+  if (hasST) {
+    document.querySelectorAll('[data-hz-parallax]').forEach(function (img) {
+      gsap.fromTo(img, { yPercent: -8, scale: 1.12 }, {
+        yPercent: 8, scale: 1.12, ease: 'none',
+        scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true }
+      });
+    });
+  }
+
+  /* ---------- footer wordmark character reveal ---------- */
+  if (hasST && hasSplit) {
+    var wm = document.querySelector('[data-hz-wordmark]');
+    if (wm) {
+      var chars = new SplitText(wm, { type: 'chars' }).chars;
+      gsap.from(chars, {
+        yPercent: 60, opacity: 0, stagger: 0.05, duration: 0.9, ease: 'power4.out',
+        scrollTrigger: { trigger: wm, start: 'top 92%', once: true }
+      });
+    }
+  }
+})();
+</script>
+
+</body>
+</html>

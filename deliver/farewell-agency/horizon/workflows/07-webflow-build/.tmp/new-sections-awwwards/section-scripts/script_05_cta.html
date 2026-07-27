@@ -1,0 +1,58 @@
+<script>
+(function () {
+  var script = document.currentScript;
+  function ready(fn) {
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', fn, { once: true });
+    } else {
+      fn();
+    }
+  }
+  function markOnce(el, key) {
+    if (!el || el.getAttribute(key) === 'true') { return false; }
+    el.setAttribute(key, 'true');
+    return true;
+  }
+  function initMotion(scope, hasST, hasSplit) {
+    if (hasST) {
+      scope.querySelectorAll('[data-hz-reveal]').forEach(function (el) {
+        if (!markOnce(el, 'data-hz-reveal-ready')) { return; }
+        gsap.from(el, {
+          y: 48, opacity: 0, duration: 1, ease: 'power3.out',
+          scrollTrigger: { trigger: el, start: 'top 88%', once: true }
+        });
+      });
+    }
+    if (hasST && hasSplit) {
+      scope.querySelectorAll('[data-hz-split]').forEach(function (el) {
+        if (!markOnce(el, 'data-hz-split-ready')) { return; }
+        var split = new SplitText(el, { type: 'lines', linesClass: 'hz-line' });
+        gsap.from(split.lines, {
+          yPercent: 110, opacity: 0, stagger: 0.09, duration: 1.1, ease: 'power4.out',
+          scrollTrigger: { trigger: el, start: 'top 85%', once: true }
+        });
+      });
+    }
+  }
+  ready(function () {
+    var section = script && script.closest('.section_cta');
+    if (!section || !markOnce(section, 'data-hz-cta-section-ready')) { return; }
+
+    var hasGsap = typeof window.gsap !== 'undefined';
+    var hasST = hasGsap && typeof window.ScrollTrigger !== 'undefined';
+    var hasSplit = hasGsap && typeof window.SplitText !== 'undefined';
+    if (hasST) { gsap.registerPlugin(ScrollTrigger); }
+    initMotion(section, hasST, hasSplit);
+    if (!hasST) { return; }
+
+    section.querySelectorAll('[data-hz-parallax]').forEach(function (img) {
+      if (!markOnce(img, 'data-hz-parallax-ready')) { return; }
+      gsap.fromTo(img, { yPercent: -8, scale: 1.12 }, {
+        yPercent: 8, scale: 1.12, ease: 'none',
+        scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: true }
+      });
+    });
+    ScrollTrigger.refresh();
+  });
+})();
+</script>
