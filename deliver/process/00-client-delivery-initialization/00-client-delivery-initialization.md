@@ -51,6 +51,11 @@ This is currently a documented manual structure process. The Python executor and
 - **Initialization behavior**: Copy only the selected package into `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/design-system/`.
 - **Design workflow behavior**: `04-design` reads the initialized package from `00/.tmp/design-system/` and writes project-specific outputs to its own `.tmp/`.
 
+## Reference Material
+- **`style-guide/`**: Extracted published source of https://webzite-relume.webflow.io/style-guide (HTML + compiled CSS/JS, plus an offline-viewable copy). The compiled CSS is the canonical class/variable reference for the Webzite Relume style guide. See `style-guide/README.md`.
+- **`client-first-docs/`**: The complete Finsweet Client-First (V2) documentation (all 29 pages) as one markdown file for offline agent reference. See `client-first-docs/README.md`.
+- Re-extract both when the upstream source changes; extraction dates are recorded in each README.
+
 ## Technical Setup
 - **Executor status**: Placeholder. No automated copying is implemented yet.
 - **Future automation**: Read a handoff package, create the client folder tree, copy routed workflow folders, seed the selected design-system package when applicable, generate `project-overview.md`, generate `mcp-access.md` when MCPs are in scope, and report missing required handoff fields.
