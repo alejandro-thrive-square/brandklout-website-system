@@ -1,0 +1,209 @@
+{
+  "status": "ok",
+  "url": "https://isadoradigitalagency.com/",
+  "title": "Isadora Digital Agency - Enterprise Level Web & Product Design",
+  "viewport": "1440x900",
+  "fps": 5,
+  "frame_start_offset_seconds": 2.0,
+  "scroll_duration_seconds": 100,
+  "accepted_cookie_label": "preset cookieconsent_status=allow",
+  "output_dir": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final",
+  "video": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\video.webm",
+  "frames_dir": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\frames",
+  "frame_count": 561,
+  "contact_sheets": [
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-001.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-002.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-003.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-004.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-005.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-006.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-007.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-008.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-009.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-010.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-011.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-012.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-013.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-014.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-015.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-016.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-017.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-018.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-019.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-020.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-021.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-022.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-023.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-024.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-025.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-026.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-027.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-028.png",
+    "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\contact-sheets\\contact-sheet-029.png"
+  ],
+  "code": {
+    "source_html": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\source.html",
+    "html": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\page.html",
+    "dom_before_interaction": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\dom-before-interaction.html",
+    "dom_after_interaction": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\dom-after-interaction.html",
+    "visible_text": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\visible-text.md",
+    "visible_text_after_interaction": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\visible-text-after-interaction.md",
+    "resource_urls": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resource-urls.json",
+    "stylesheets": [
+      {
+        "url": "https://isadoradigitalagency.com/wp-content/cache/autoptimize/css/autoptimize_00745016802e2eca3848b15b6b0ca6d8.css",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\css\\001-isadoradigitalagency.com_wp-content_cache_autoptimize_css_autoptimize_00745016802e2eca3848b15b6b0ca6d8.css-19f1608c.css",
+        "error": null
+      },
+      {
+        "url": "https://tags.srv.stackadapt.com/sa.css",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\css\\002-tags.srv.stackadapt.com_sa.css-1f660214.css",
+        "error": null
+      }
+    ],
+    "scripts": [
+      {
+        "url": "https://scripts.clarity.ms/0.8.67-beta/clarity.js",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\001-scripts.clarity.ms_0.8.67-beta_clarity.js-33999bf6.js",
+        "error": null
+      },
+      {
+        "url": "https://s.pinimg.com/ct/lib/main.3c5b736e.js",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\002-s.pinimg.com_ct_lib_main.3c5b736e.js-c8c173df.js",
+        "error": null
+      },
+      {
+        "url": "https://edge.fullstory.com/s/fs.js",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\003-edge.fullstory.com_s_fs.js-8ab92459.js",
+        "error": null
+      },
+      {
+        "url": "https://www.clarity.ms/tag/lqgz6c7e1t?ref=gtm2",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\004-www.clarity.ms_tag_lqgz6c7e1t-18239b4f.js",
+        "error": null
+      },
+      {
+        "url": "https://bat.bing.com/bat.js",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\005-bat.bing.com_bat.js-fa27d6d2.js",
+        "error": null
+      },
+      {
+        "url": "https://s.pinimg.com/ct/core.js",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\006-s.pinimg.com_ct_core.js-db1f1ea1.js",
+        "error": null
+      },
+      {
+        "url": "https://static.hotjar.com/c/hotjar-607297.js?sv=7",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\007-static.hotjar.com_c_hotjar-607297.js-f0d06f77.js",
+        "error": null
+      },
+      {
+        "url": "https://www.googletagmanager.com/gtag/destination?id=AW-997147849&cx=c&gtm=4e67f0",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\008-www.googletagmanager.com_gtag_destination-a09383bb.js",
+        "error": null
+      },
+      {
+        "url": "https://connect.facebook.net/signals/config/568842002189644?v=2.9.357&r=stable&domain=isadoradigitalagency.com&hme=1179b74563cacb97c6ebae600e40937237ab12824fb84996eee07eca65cabbd4&ex_m=107%2C208%2C158%2C22%2C73%2C74%2C149%2C69%2C68%2C11%2C167%2C93%2C16%2C141%2C130%2C39%2C76%2C81%2C137%2C163%2C169%2C26%2C27%2C28%2C30%2C48%2C150%2C78%2C115%2C18%2C20%2C44%2C40%2C42%2C41%2C86%2C95%2C99%2C113%2C148%2C151%2C46%2C114%2C24%2C21%2C122%2C70%2C36%2C153%2C152%2C154%2C145%2C143%2C25%2C35%2C59%2C112%2C165%2C71%2C17%2C156%2C117%2C84%2C67%2C19%2C88%2C89%2C119%2C87%2C139%2C138%2C142%2C164%2C34%2C49%2C116%2C47%2C8%2C4%2C5%2C7%2C6%2C3%2C94%2C104%2C170%2C175%2C222%2C75%2C235%2C234%2C233%2C23%2C33%2C55%2C106%2C61%2C10%2C64%2C100%2C101%2C102%2C108%2C133%2C31%2C29%2C135%2C136%2C132%2C131%2C159%2C77%2C162%2C160%2C161%2C50%2C60%2C126%2C15%2C166%2C45%2C280%2C281%2C279%2C294%2C310%2C215%2C204%2C62%2C205%2C203%2C313%2C304%2C52%2C216%2C110%2C134%2C83%2C124%2C54%2C123%2C129%2C128%2C58%2C65%2C63%2C155%2C79%2C80%2C118%2C37%2C32%2C53%2C56%2C103%2C168%2C1%2C127%2C14%2C125%2C12%2C2%2C57%2C96%2C66%2C121%2C92%2C91%2C171%2C172%2C97%2C98%2C9%2C105%2C51%2C146%2C90%2C82%2C72%2C120%2C109%2C43%2C147%2C0%2C85%2C140%2C144%2C157%2C38%2C111%2C13%2C173",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\009-connect.facebook.net_signals_config_568842002189644-cca1dcee.js",
+        "error": null
+      },
+      {
+        "url": "https://connect.facebook.net/en_US/fbevents.js",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\010-connect.facebook.net_en_US_fbevents.js-20e1ef35.js",
+        "error": null
+      },
+      {
+        "url": "https://www.googletagmanager.com/gtag/js?id=G-22ZR082G6E&cx=c&gtm=4e67f0",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\011-www.googletagmanager.com_gtag_js-6cecc9af.js",
+        "error": null
+      },
+      {
+        "url": "https://tags.srv.stackadapt.com/events.js",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\012-tags.srv.stackadapt.com_events.js-7aa768b6.js",
+        "error": null
+      },
+      {
+        "url": "https://www.gstatic.com/recaptcha/releases/rL1ELiQAg1kPezz6_H9hTZ_i/recaptcha__en.js",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\013-www.gstatic.com_recaptcha_releases_rL1ELiQAg1kPezz6_H9hTZ_i_recaptcha__en.js-12deb3a2.js",
+        "error": null
+      },
+      {
+        "url": "https://www.googletagmanager.com/gtm.js?id=GTM-N9KBFQX",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\014-www.googletagmanager.com_gtm.js-dabdf41d.js",
+        "error": null
+      },
+      {
+        "url": "https://isadoradigitalagency.com/wp-includes/js/jquery/jquery.min.js?ver=3.7.1",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\015-isadoradigitalagency.com_wp-includes_js_jquery_jquery.min.js-7bebb9b3.js",
+        "error": null
+      },
+      {
+        "url": "https://assets.apollo.io/micro/website-tracker/tracker.iife.js?nocache=j42qqh",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\016-assets.apollo.io_micro_website-tracker_tracker.iife.js-02a9dc3c.js",
+        "error": null
+      },
+      {
+        "url": "https://googleads.g.doubleclick.net/pagead/viewthroughconversion/997147849/?random=1784342599280&cv=11&fst=1784342599280&bg=ffffff&guid=ON&async=1&gtm=45be67f0v9133711857z8811172323za20gzb811172323zd811172323xea&gcd=13l3l3l3l1l1&dma=0&tag_exp=115616985~115938465~115938468~118897920~118897930&u_w=1440&u_h=900&url=https%3A%2F%2Fisadoradigitalagency.com%2F&rcb=7&frm=0&tiba=Isadora%20Digital%20Agency%20-%20Enterprise%20Level%20Web%20%26%20Product%20Design&hn=www.googleadservices.com&npa=0&pscdl=noapi&auid=1367631261.1784342599&uaa=x86&uab=64&uafvl=Not%253AA-Brand%3B99.0.0.0%7CHeadlessChrome%3B145.0.7632.6%7CChromium%3B145.0.7632.6&uamb=0&uam=&uap=Windows&uapv=10.0.0&uaw=0&_tu=CA&gap.plf=5&ept=9&rfmt=3&fmt=4",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\017-googleads.g.doubleclick.net_pagead_viewthroughconversion_997147849-e5c7fe51.js",
+        "error": null
+      },
+      {
+        "url": "https://bat.bing.com/p/action/187137334.js",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\018-bat.bing.com_p_action_187137334.js-7dbc0b04.js",
+        "error": null
+      },
+      {
+        "url": "https://isadoradigitalagency.com/wp-includes/js/dist/hooks.min.js?ver=7496969728ca0f95732d",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\019-isadoradigitalagency.com_wp-includes_js_dist_hooks.min.js-c23c18f1.js",
+        "error": null
+      },
+      {
+        "url": "https://isadoradigitalagency.com/wp-includes/js/dist/i18n.min.js?ver=781d11515ad3d91786ec",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\020-isadoradigitalagency.com_wp-includes_js_dist_i18n.min.js-00680734.js",
+        "error": null
+      },
+      {
+        "url": "https://www.google.com/recaptcha/api.js?render=6LcUP6QrAAAAADqcE58xQxW6DBBXMu2f9jR1lWMf&ver=3.0",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\021-www.google.com_recaptcha_api.js-4f867d3a.js",
+        "error": null
+      },
+      {
+        "url": "https://isadoradigitalagency.com/wp-includes/js/dist/vendor/wp-polyfill.min.js?ver=3.15.0",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\022-isadoradigitalagency.com_wp-includes_js_dist_vendor_wp-polyfill.min.js-c8c10832.js",
+        "error": null
+      },
+      {
+        "url": "https://isadoradigitalagency.com/wp-content/cache/autoptimize/js/autoptimize_672f6ffd8e4bf32cdb9a7a00a0b15933.js",
+        "status": 200,
+        "path": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\code\\resources\\js\\023-isadoradigitalagency.com_wp-content_cache_autoptimize_js_autoptimize_672f6ffd8e4bf32cdb9a7a00a0b15933.js-cb052b96.js",
+        "error": null
+      }
+    ]
+  },
+  "log": "manage\\browser-tools\\playwright-browser\\.tmp\\style-capture-isadora-final\\console.log"
+}
