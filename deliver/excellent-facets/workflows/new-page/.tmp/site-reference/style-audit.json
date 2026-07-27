@@ -1,0 +1,102 @@
+{
+  "scraped_urls": {
+    "home": "https://excellentfacets.com/",
+    "sustainability": "https://excellentfacets.com/sustainability",
+    "about": "https://excellentfacets.com/about"
+  },
+  "css_url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/css/excellent-facets.webflow.shared.a8852c5f5.min.css",
+  "site_id": "667ba12b8def17ce19a9419b",
+  "brand_tokens": {
+    "green": "#245c52",
+    "red": "#662136",
+    "pink": "#d1abab",
+    "dark": "#202020",
+    "dark_secondary": "#585254",
+    "light": "#ffffff",
+    "light_secondary": "#d1c7bd",
+    "light_tertiary": "#edede5",
+    "radius_main": "1rem",
+    "radius_small": ".5rem"
+  },
+  "font_families": {
+    "display": "Scotchdisplay",
+    "secondary": "Bodoni",
+    "body": "Kantumruypro"
+  },
+  "font_faces": [
+    {
+      "family": "Kantumruypro",
+      "url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b06d4bbd2001e10e0_KantumruyPro-Regular.woff",
+      "weight": 400,
+      "style": "normal"
+    },
+    {
+      "family": "Kantumruypro",
+      "url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b8bb651b4672d48fe_KantumruyPro-Italic.woff",
+      "weight": 400,
+      "style": "italic"
+    },
+    {
+      "family": "Kantumruypro",
+      "url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b35c19c68b049d070_KantumruyPro-SemiBold.woff",
+      "weight": 600,
+      "style": "normal"
+    },
+    {
+      "family": "Scotchdisplay Roman",
+      "url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9bf6cb86f50b2d3b57_ScotchDisplay-Roman.woff",
+      "weight": 400,
+      "style": "normal"
+    },
+    {
+      "family": "Bodoni",
+      "url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b62842150a688b887_Bodoni-Book.woff",
+      "weight": 400,
+      "style": "normal"
+    },
+    {
+      "family": "Kantumruypro",
+      "url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b83a1bafe3143e16c_KantumruyPro-Bold.woff",
+      "weight": 700,
+      "style": "normal"
+    },
+    {
+      "family": "Kantumruypro",
+      "url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b88f8db319abf841e_KantumruyPro-Medium.woff",
+      "weight": 500,
+      "style": "normal"
+    },
+    {
+      "family": "Scotchdisplay",
+      "url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b511a346fd806807d_ScotchDisplay-SemiBold.woff",
+      "weight": 600,
+      "style": "normal"
+    },
+    {
+      "family": "Bodoni",
+      "url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b2723528191500c95_Bodoni-Bold.woff",
+      "weight": 700,
+      "style": "normal"
+    },
+    {
+      "family": "Scotchdisplay",
+      "url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/66a2cf9b35c19c68b049d08b_ScotchDisplay-Medium.woff",
+      "weight": 500,
+      "style": "normal"
+    },
+    {
+      "family": "Kantumruypro",
+      "url": "https://cdn.prod.website-files.com/667ba12b8def17ce19a9419b/667c4858ecde84bd19d12534_KantumruyPro-Light.woff",
+      "weight": 300,
+      "style": "normal"
+    }
+  ],
+  "layout_findings": [
+    "Current site uses a Client-First-inspired 12-column fluid grid.",
+    "Desktop horizontal navigation collapses to a full-screen green menu on tablet/mobile.",
+    "Headings use Scotch Display; body/UI copy uses Kantumruy Pro.",
+    "Primary palette is dark green, warm off-white, dark charcoal, muted sand, burgundy, and dusty pink.",
+    "Existing sustainability pages use large editorial serif headings and direct report links.",
+    "The requested /documents page intentionally omits the site navigation and uses only the brand wordmark."
+  ]
+}
