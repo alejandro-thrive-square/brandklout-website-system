@@ -4,16 +4,25 @@
 We build the approved design in Webflow with clean structure, responsive behavior, CMS setup, custom code, and the integrations needed for the website to work properly.
 
 > [!IMPORTANT]
-> **Integrity Rule**: Any change to the Python executor or technical logic of this workflow must be documented here immediately.
+> **Integrity Rule**: Any change to the Python executor, the converter toolchain, or technical logic of this workflow must be documented here and in [html-to-webflow-clipboard.md](./html-to-webflow-clipboard.md) immediately.
+
+> [!NOTE]
+> This is the **canonical template**. It is cloned into
+> `deliver/[client-name]/workflows/07-webflow-build/` per engagement. Fill in
+> `webflow-build.config.json`, replace `[client-name]`/`<DEPLOYED_SITE_URL>`
+> placeholders, and record deviations in a `## Project Notes` section. The
+> converter + diagnostics scripts ship inside this folder so each project is
+> self-contained.
 
 > [!NOTE]
 > Planned evolution: [TEMPLATE_LIBRARY_PLAN.md](./TEMPLATE_LIBRARY_PLAN.md) — Relume-based template library (one shared class system, 20–30 variable-themed templates) feeding the pasteable-components converter.
+> Scheduled fresh-session loop: [WEBFLOW_BUILD_LOOP.md](./WEBFLOW_BUILD_LOOP.md) — the hourly one-page Webflow build loop.
 
 ## Operational Purpose
 Reproduce the approved final design source in Webflow with CMS-first structure, token consistency, responsive coverage, and staging readiness. Valid approved sources include revised Claude Design HTML/CSS/JS packages and Figma designs.
 
 ## Inputs From Sales / Previous Phase
-- Approved final design package from `05-design-revisions`.
+- Approved final design package from `05-design-revisions` (fall back to `04-design/.tmp/final-design/` if no revisions exist).
 - Final copy, metadata, alt text, and SEO decisions from `06-content-seo`.
 - Required Webflow workspace access, integrations, CMS requirements, and tracking scripts.
 - Approved scope and constraints from the Sales handoff.
@@ -34,18 +43,70 @@ Reproduce the approved final design source in Webflow with CMS-first structure, 
 - **Webflow Improvements & Updates**: Implement only the approved change list from `15`.
 
 ## Technical Setup
-- **Executor status**: Directive-driven (Claude runs the HTML→Webflow converter).
-- **Primary operating model — Clipboard Copy-Paste build**: Claude runs `html_to_webflow.py` to convert the approved HTML/CSS into Webflow's clipboard payload (`@webflow/XscpData`), emits a browser copy page, and pastes each section straight into the Designer. A cascade resolver bakes descendant/compound/state CSS into flat Webflow classes, resolves `:root` design tokens, materializes `::before`/`::after`, and applies the Webflow-specific CSS translation rules (gap→grid-gap, grid track defaults + ordering, `inset` expansion, etc.). This is faster and higher-fidelity than per-element MCP calls for full pages. **Full method + translation rules:** the workflow's `html-to-webflow-clipboard.md`.
+- **Executor status**: The `07-webflow-build.py` executor is a **config-driven orchestrator** that reads `webflow-build.config.json` and drives the converter (`html_to_webflow.py`) + diagnostics (`wf_tools.py`). It wraps the directives below; the converter is the engine.
+- **Primary operating model — Clipboard Copy-Paste build**: Claude runs `html_to_webflow.py` to convert the approved HTML/CSS into Webflow's clipboard payload (`@webflow/XscpData`), emits a browser copy page, and pastes each section straight into the Designer. A cascade resolver bakes descendant/compound/state CSS into flat Webflow classes, resolves `:root` design tokens, materializes `::before`/`::after`, and applies the Webflow-specific CSS translation rules (gap→grid-gap, grid track defaults + ordering, `inset` expansion, etc.). This is faster and higher-fidelity than per-element MCP calls for full pages. **Full method + translation rules + Build→Paste→Verify protocol:** [html-to-webflow-clipboard.md](./html-to-webflow-clipboard.md).
 - **Going-forward standard**: author designs (`04`/`05`) in **Client-First flat classes** (one semantic class per styled element, no descendant selectors) so the converter stays a clean 1:1 map and the Webflow project has tidy class names for handoff.
+- **Self-contained section packaging (required)**: author and package HTML, CSS, and JS **per section**. Every pasteable component must carry, inside its section root, two Webflow Embed (HtmlEmbed) elements — one `<style>` embed holding all CSS the section needs beyond the shared class system, and one `<script>` embed holding all JS the section needs (omit the JS embed only if the section has no behavior). A pasted section must render and behave correctly on **any page with zero page-settings changes** (no per-page head/footer custom code), so sections can be moved freely between pages. Keep only true site-wide concerns (fonts, resets, design tokens) in global custom code; everything section-specific rides inside the section. Scope embedded CSS/JS to the section's root class and guard scripts against double-initialization (the same section may appear on multiple pages or twice in the Designer).
 - **Fallback A — MCP Build Protocol**: the HTML Decomposition Pipeline below (native `element_builder` build). Use when CMS bindings/native Designer editing must be authored programmatically rather than pasted.
 - **Fallback B**: manual developer build in Webflow Designer, referencing the Vercel preview side-by-side.
-- **Available integrations**: Webflow MCP (`element_builder`, `style_tool`, `variable_tool`, `data_cms_tool`, `component_builder`, `whtml_builder`, `data_assets_tool`, `data_scripts_tool`, `de_page_tool`) — used by Fallback A and for CMS setup.
+- **Available integrations**: Webflow MCP (`element_builder`, `style_tool`, `variable_tool`, `data_cms_tool`, `component_builder`, `whtml_builder`, `data_assets_tool`, `data_scripts_tool`, `de_page_tool`) — used by Fallback A, for CMS setup, and for post-paste variable binding.
+
+### Toolchain (ships with this folder)
+
+| File | Role |
+|:---|:---|
+| [html_to_webflow.py](html_to_webflow.py) | Core converter — HTML+CSS → Webflow clipboard JSON (`--split` / `--copy-page`). |
+| [html_to_webflow_wholepage.py](html_to_webflow_wholepage.py) | Experimental whole-page (single-paste) variant; imports the core engine. |
+| [wf_tools.py](wf_tools.py) | Diagnostics multitool (`qa`, `collisions`, `inspect`, `expect`, `audit-diff`, `compare`). |
+| [build_vocab.py](build_vocab.py) | Multi-page shared-class vocabulary (`--sources <json>`). |
+| [gen_install_pages.py](gen_install_pages.py) / [gen_code_helpers.py](gen_code_helpers.py) | Clipboard-helper pages for head/footer custom code. |
+| [verify.mjs](verify.mjs) | Token-light Playwright design-vs-staging diff. |
+| [html-to-webflow-clipboard.md](html-to-webflow-clipboard.md) | Full method directive (the load-bearing knowledge). |
+| [07-webflow-build.py](07-webflow-build.py) | Config-driven orchestrator (`webflow-build.config.json`). |
+| [tests/](tests) | Converter regression tests (`python -m unittest discover -s tests`). |
+
+### Config-driven orchestrator
+
+Fill in `webflow-build.config.json` once per project:
+
+```json
+{
+  "asset_base": "https://[client-name].vercel.app",
+  "css": "../04-design/.tmp/final-design/site.css",
+  "design_dir": "../05-design-revisions/.tmp/final-design",
+  "var_map_seed": ".tmp/webflow-variable-map.json",
+  "pages": {
+    "index": "../05-design-revisions/.tmp/final-design/index.html",
+    "about": "../05-design-revisions/.tmp/final-design/about.html"
+  }
+}
+```
+
+Then:
+
+```bash
+python 07-webflow-build.py init-config     # scaffold the config + .tmp/
+python 07-webflow-build.py build-page <page>
+python 07-webflow-build.py vocab            # multi-page shared-class system
+python 07-webflow-build.py qa <page>
+```
+
+Raw converter access (always available):
+
+```bash
+python html_to_webflow.py --html "../05-design-revisions/.tmp/final-design/[page].html" \
+  --css ../04-design/.tmp/final-design/site.css \
+  --asset-base "<DEPLOYED_SITE_URL>" \
+  --var-map .tmp/[page]/webflow-variable-map.json \
+  --split .tmp/[page]
+python wf_tools.py qa .tmp/[page]
+```
 
 ---
 
 ## MCP Build Protocol — HTML Decomposition Pipeline
 
-> **Why this protocol exists**: The Webflow MCP's `whtml_builder` creates HtmlEmbed blocks (code embeds), which look correct visually but are opaque — no CMS bindings, no Designer editing, no responsive breakpoint controls. Native Webflow elements via `element_builder` are the correct path. This protocol defines how Claude decomposes an approved HTML prototype into native Webflow elements.
+> **Why this protocol exists**: The Webflow MCP's `whtml_builder` creates HtmlEmbed blocks (code embeds), which look correct visually but are opaque — no CMS bindings, no Designer editing, no responsive breakpoint controls. Native Webflow elements via `element_builder` are the correct path. This protocol defines how Claude decomposes an approved HTML prototype into native Webflow elements. Use only when the clipboard paste model is unsuitable.
 
 ### Phase 1: Site Setup & Token Extraction
 
@@ -54,20 +115,20 @@ Reproduce the approved final design source in Webflow with CMS-first structure, 
 3. Read the approved HTML from `05-design-revisions/.tmp/final-design/` (or `04-design/.tmp/final-design/` if no revisions exist).
 4. Extract CSS custom properties from the `:root {}` block.
 5. Call `variable_tool` to create Webflow variable collections:
-   - **Colors**: every `--color-name` token (e.g., `--terra`, `--navy`, `--gold`, `--canvas`, `--bone`, `--ink`, and their opacity variants).
+   - **Colors**: every `--color-name` token (and opacity variants).
    - **Typography**: `--display`, `--body`, `--mono` font-family tokens.
    - **Spacing/sizing**: any token-based spacing values found in the prototype.
 6. Save `07-webflow-build/.tmp/token-map.json` mapping CSS variable names → Webflow variable IDs.
 
 ### Phase 2: Style System Creation
 
-1. Identify CSS class patterns from the HTML (`.hero`, `.scene`, `.card`, `nav.top`, etc.).
+1. Identify CSS class patterns from the HTML.
 2. For each class, call `style_tool` to create a Webflow style with:
    - **Desktop** properties (the base CSS declarations).
    - **Tablet** overrides (from `@media (max-width: 1024px)` or similar).
    - **Mobile Landscape** overrides (from `@media (max-width: 768px)`).
    - **Mobile Portrait** overrides (from `@media (max-width: 480px)`).
-3. Create combo classes for variants (e.g., `.scene.dark`, `.scene.bone`, `.hero-cta-row a.alt`).
+3. Create combo classes for variants.
 4. Reference Webflow variables (from Phase 1) in style values wherever the HTML used `var(--token)`.
 5. Save `07-webflow-build/.tmp/style-map.json` mapping CSS class names → Webflow style names/IDs.
 
@@ -75,9 +136,7 @@ Reproduce the approved final design source in Webflow with CMS-first structure, 
 
 1. Extract all image/media references from the HTML (`<img src>`, `background-image` URLs, inline SVGs).
 2. Upload raster images (PNG, JPG, WebP) via `data_assets_tool`.
-3. For inline SVGs, decide per case:
-   - **Simple icons/logos** → upload as SVG asset, use Image element.
-   - **Complex decorative SVGs** (architectural drawings, animated patterns) → keep as `whtml_builder` embed.
+3. For inline SVGs, decide per case: simple icons/logos → upload as SVG asset; complex decorative SVGs → keep as `whtml_builder` embed.
 4. Save `07-webflow-build/.tmp/asset-map.json` mapping original paths → Webflow asset IDs.
 
 ### Phase 4: Page Structure Build
@@ -104,36 +163,23 @@ For each page in the approved design:
    | `<video>` | Video | |
 
 3. Build top-down, section by section: navbar → hero → each content section → footer.
-4. For each element, set:
-   - `set_style` → reference style names from Phase 2.
-   - `set_text` → copy text content from the HTML.
-   - `set_link` → copy `href` values.
-   - `set_image_asset` → reference asset IDs from Phase 3.
-   - `set_heading_level` → match `h1`–`h6` levels.
+4. For each element, set: `set_style`, `set_text`, `set_link`, `set_image_asset`, `set_heading_level`.
 5. Build children recursively using the `children` array in `element_schema`.
 6. After each major section, call `element_snapshot_tool` to visually verify the build.
 
 ### Phase 5: CMS & Dynamic Content
 
 1. Identify repeating content patterns in the HTML (portfolio items, service cards, testimonials, team members).
-2. Call `data_cms_tool` to create a Collection for each pattern, with fields matching the content shape (PlainText, RichText, Image, Link, etc.).
+2. Call `data_cms_tool` to create a Collection for each pattern, with fields matching the content shape.
 3. Populate Collection items with the content extracted from the HTML.
 4. Replace the static elements with `CMSCollection` list/item elements, binding fields via `settings.binding`.
 
 ### Phase 6: Embeds & Custom Code (whtml_builder — targeted use only)
 
 Use `whtml_builder` ONLY for elements that cannot be native Webflow elements:
-- **Keyframe animations** (e.g., marquee `@keyframes scroll-left`).
-- **Pseudo-element decorations** (`::before`/`::after` with gradients, decorative bars).
-- **Complex inline SVG** (architectural drawings, animated patterns).
-- **Third-party embeds** (calendars, widgets, external components).
+- **Keyframe animations**, **Pseudo-element decorations**, **Complex inline SVG**, **Third-party embeds**.
 
-For each embed, provide the HTML in the `html` parameter and extracted CSS in the `css` parameter. Never include `<style>` tags inside the HTML string.
-
-Register site-level scripts via `data_scripts_tool` for:
-- Google Fonts `<link>` tag.
-- Analytics/tracking scripts.
-- Any custom JS interactions from the prototype.
+Register site-level scripts via `data_scripts_tool` for Google Fonts, analytics/tracking, and custom JS.
 
 ### Tool Decision Guide
 
@@ -151,10 +197,12 @@ Register site-level scripts via `data_scripts_tool` for:
 | CMS-bound repeating content | `element_builder` + `data_cms_tool` | Dynamic content binding required |
 
 ## Output Artifacts
-- `deliver/[client-name]/workflows/07-webflow-build/.tmp/token-map.json` — CSS vars → Webflow variable IDs
-- `deliver/[client-name]/workflows/07-webflow-build/.tmp/style-map.json` — CSS classes → Webflow style names/IDs
-- `deliver/[client-name]/workflows/07-webflow-build/.tmp/asset-map.json` — image paths → Webflow asset IDs
-- `deliver/[client-name]/workflows/07-webflow-build/.tmp/build-manifest.json` — full build log with element IDs, page IDs, CMS collection IDs
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/paste_*.html` — generated section paste components
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/webflow-custom-code.js` + `animation-manifest.json` — page JS and hook manifest
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/webflow-runtime-states.css` — runtime-state CSS for the head
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/webflow-variable-{import,map}.json` and `webflow-style-variable-bindings.json` — variable artifacts
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/site.css` — copy of source CSS
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/build-manifest.json` — full build log with element IDs, page IDs, CMS collection IDs (MCP path)
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/visual-diff/` — staging vs preview comparison screenshots
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/cms-import.json`
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/change-manifest.json` (improvements only)
@@ -164,6 +212,7 @@ Register site-level scripts via `data_scripts_tool` for:
 - **`.tmp/` folder**: Commit lightweight artifacts that support review, replay, handoff, or agent continuity. Binary/media assets remain gitignored and synced to the VPS.
 - **Branch naming**: `deliver/[client-name]-webflow-build-<change>` once cloned into a client folder.
 - **Commit discipline**: Atomic commits with descriptive messages. One logical change per commit.
+- **Toolchain**: The converter and diagnostics scripts are committed as part of this template so cloned client workflows are self-contained. Keep them in sync with this folder when the canonical tooling evolves.
 
 ## Infrastructure
 - **Hosting**: Hostinger VPS

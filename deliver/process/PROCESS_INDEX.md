@@ -21,7 +21,7 @@ Each numbered module mirrors the standard workflow structure defined in [SYSTEM_
 5. Copy only the required and scoped execution module folders into `deliver/[client-name]/workflows/` and keep the same internal structure.
 6. Store the original signed handoff package and all client-provided starting materials in `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/client-handoff/`.
 7. When Deliver owns design creation or redesign, seed `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/design-system/` from the handoff's `selected_design_system_reference`.
-8. Fill in the empty `.py` executor and `TRIGGER_PROMPT.txt` for that engagement when automation is needed.
+8. Fill in the `.py` executor and `TRIGGER_PROMPT.txt` for that engagement when automation is needed. Note: module `07-webflow-build` is an exception — its executor (`07-webflow-build.py`, a config-driven orchestrator) and the full HTML→Webflow converter toolchain ship populated in the process source and are cloned as-is into client workflows; per-project setup is done through `webflow-build.config.json`.
 9. Update the cloned `.md` files to reflect offer-specific adaptations, skipped phases, or client-specific deviations.
 
 ## Offer-to-Delivery Matrix
@@ -77,6 +77,16 @@ Non-sequential tools that delivery phases call as needed. They live flat inside 
 |-- TRIGGER_PROMPT.txt         Trigger prompt - empty in the process source; populated per-client.
 `-- .tmp/                      Artifact storage - lightweight files committed; heavy media synced to VPS via rclone.
 ```
+
+> [!NOTE]
+> **Exception — `07-webflow-build`:** this module ships with a full, tested
+> HTML/CSS/JS → Webflow clipboard converter toolchain (`html_to_webflow.py`,
+> `wf_tools.py`, `build_vocab.py`, `html_to_webflow_wholepage.py`, the
+> `gen_*.py` clipboard helpers, `verify.mjs`, regression `tests/`, and the
+> `html-to-webflow-clipboard.md` method directive) plus a config-driven
+> executor (`07-webflow-build.py`). It is cloned whole into client workflows;
+> per-project values live in `webflow-build.config.json`. See
+> [07-webflow-build.md](./07-webflow-build/07-webflow-build.md).
 
 ## Non-Copy Resources
 
