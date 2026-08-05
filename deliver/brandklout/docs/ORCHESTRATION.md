@@ -46,21 +46,41 @@ scope decision — reports it back here rather than deciding alone.
 Client work is billed and owned through the ThriveSquare/Brandklout side, so client worktrees must
 not run on the personal account. Note the team account is also the one holding the Asana grant.
 
-> [!IMPORTANT]
-> **Account selection is global, not per-worktree.** As of Orca 1.4.169 neither
-> `orca worktree create` nor `orca terminal create` accepts an account/profile flag, and the CLI
-> exposes only `orca account add` / `orca account list` — there is no `account use`. The active
-> account lives at `activeAccountIdsByRuntime.host` and is switched in the Orca UI.
->
-> Practical consequence: **switch the active account to the team account *before* launching agents
-> into client worktrees.** An agent inherits whatever account was active when its terminal started.
-> Already-running sessions keep the account they started with, which is why this orchestration
-> session can stay on personal while client agents run on team.
+### How to select the account — use the PowerShell profile wrapper
 
-Verify before dispatching:
+`~/.claude-profiles.ps1` (loaded from the PowerShell profile) defines a `claude` function that
+switches account by setting `CLAUDE_CONFIG_DIR` per terminal:
+
+```powershell
+claude team       # -> CLAUDE_CONFIG_DIR=~/.claude-team,     then launches Claude Code
+claude personal   # -> CLAUDE_CONFIG_DIR=~/.claude-personal, then launches Claude Code
+claude which      # report the active profile without launching
+```
+
+The choice is **sticky for that terminal session**, so it is genuinely per-worktree. Credentials are
+per-profile; history, memories, skills and plugins are shared back into `~/.claude` via directory
+junctions, so both accounts see the same project context.
+
+Launch a client agent like this:
 
 ```text
-orca account list --json
+orca terminal send --terminal <handle> --text 'claude team --permission-mode bypassPermissions' --enter --json
+orca terminal wait --terminal <handle> --for tui-idle --timeout-ms 120000 --json
+orca terminal send --terminal <handle> --text '<brief>' --enter --json
+```
+
+> [!NOTE]
+> Do **not** rely on Orca's own account switching for this. As of Orca 1.4.169 neither
+> `orca worktree create` nor `orca terminal create` takes an account/profile flag, and the CLI
+> exposes only `account add` / `account list` — no `account use`. Orca's active account is global
+> (`activeAccountIdsByRuntime.host`) and switched in the UI, which cannot give two worktrees
+> different accounts at once. The profile wrapper can, so prefer it.
+
+Verifying which account an agent actually got is not possible from scrollback — the TUI clears it.
+Ask the agent directly instead:
+
+```text
+orca terminal send --terminal <handle> --text 'Run this and reply with only its output: echo $env:CLAUDE_CONFIG_DIR' --enter --json
 ```
 
 ## Creating a worktree for a new client
