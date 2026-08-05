@@ -1,38 +1,40 @@
 # MCP Access: Excellent Facets
 
-This file controls MCP usage for the Excellent Facets client project (past client, site built and delivered entirely on Webflow; now in update/support engagements).
+This file controls MCP usage for the Excellent Facets client project (past client, site built and delivered entirely on Webflow; now in maintenance/update engagements).
 
 ## Access Scope
 
 - **Access level:** `client`
 - **Profile:** [client-delivery.md](../../../mcp-servers/profiles/client-delivery.md)
-- **Active spec:** [EXCELLENT FACETS — Website Update Spec, páginas francesas (_fr) · v1.md](../EXCELLENT%20FACETS%20%E2%80%94%20Website%20Update%20Spec,%20p%C3%A1ginas%20francesas%20(_fr)%20%C2%B7%20v1.md)
+- **Project overview:** [project-overview.md](./project-overview.md)
+- **Current maintenance intake:** Pending client-provided documents in `../workflows/15-improvement-intake-audit/.tmp/client-docs/`.
+- **Previous spec reference:** legacy French-page update spec stored in the client root with its original filename.
 - **Primary artifact path:** `deliver/excellent-facets/workflows/[workflow-name]/.tmp/`
 
 ## Active MCP Servers
 
 | MCP Server | Status | Allowed Purpose |
 | :--- | :--- | :--- |
-| `webflow-excellent-facets` | Active for confirmed website update work | Page/CMS content edits, page creation, SEO metadata, redirects, staging QA, and publishing only after target site confirmation and per-change approval. Grant must cover the Excellent Facets site only — see the [server-per-principal model](../../../mcp-servers/ACCESS_MODEL.md#server-instances-one-per-principal). |
+| `webflow-excellent-facets` | Active for confirmed website update work | Page/CMS content edits, page creation, SEO metadata, redirects, staging QA, and publishing only after target site confirmation and per-change approval. Grant must cover the Excellent Facets site only. See the [server-per-principal model](../../../mcp-servers/ACCESS_MODEL.md#server-instances-one-per-principal). |
 
 ## Target Resources
 
 - **Production domain:** `excellentfacets.com`
-- **Webflow target:** Excellent Facets production site — site ID `667ba12b8def17ce19a9419b` (confirmed via `list_sites` on 2026-07-08; the grant exposes only this site). Custom domains: `excellentfacets.com`, `www.excellentfacets.com`.
+- **Webflow target:** Excellent Facets production site - site ID `667ba12b8def17ce19a9419b` (confirmed via `list_sites` on 2026-07-08; the grant exposes only this site). Custom domains: `excellentfacets.com`, `www.excellentfacets.com`.
 - **Localization note:** The site does NOT use Webflow Localization. French pages are static duplicates of the English pages inside a `/fr` page folder. Work through the regular pages/element tools, never `data_localization_tool` locale IDs.
-- **Current scope of work:** French locale (`/fr`) page updates per the active spec (global elements, home, about, diamonds pages, sustainability, sourcing, manufacturing, philanthropy, human rights, contact).
+- **Current scope of work:** Maintenance updates are pending the new client documents. Until the new change list is normalized and approved, Webflow use should remain read-only except for explicitly confirmed work.
 
 ## Allowed Operations
 
 - Read project docs and workflow artifacts.
 - List and inspect the site's pages, CMS collections, styles, and locales via `webflow-excellent-facets`.
-- Draft-level edits to `/fr` pages and CMS items within the approved spec scope, applied to staging first.
+- Draft-level edits for pages, CMS items, SEO metadata, redirects, forms, or components only after the requested change is documented and approved for this maintenance cycle.
 - Inspect staging, preview, or public URLs for QA.
 
 ## Forbidden Operations
 
 - Do not publish, delete, overwrite, bulk edit, transfer access, change DNS, or modify production data without explicit confirmation.
-- Do not touch English (or any non-`/fr`) pages except where the spec explicitly requires it (e.g., shared global elements) and only with confirmation.
+- Do not touch pages, shared components, CMS collections, forms, custom code, redirects, or integrations outside the approved maintenance scope.
 - Do not use private client credentials, OAuth tokens, cookies, passwords, or recovery codes in repo artifacts.
 - Do not use Webflow MCP against a guessed site. Confirm the site ID first.
 - Do not commit `.env` files, token values, private exports, or binary/media assets.
@@ -44,7 +46,7 @@ Explicit confirmation is required before:
 - Production deploys or publishing.
 - DNS or domain changes.
 - Page deletion, slug changes, or 301 redirect creation.
-- Webflow site/page/CMS mutations outside the approved spec scope.
+- Webflow site/page/CMS mutations outside the approved maintenance scope.
 - Access grants, revocations, transfers, or credential/session use.
 - Emailing, billing, or any client-facing notification.
 

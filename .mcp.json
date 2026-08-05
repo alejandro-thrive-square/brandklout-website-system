@@ -23,6 +23,25 @@
     "webflow-excellent-facets": {
       "type": "http",
       "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-livewell-dental": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-dealer-websites": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-dr-nahlah": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
+    },
+    "webflow-clientfirst": {
+      "type": "stdio",
+      "command": "node",
+      "args": [
+        "mcp-servers/webflow-clientfirst/server.mjs"
+      ]
     }
   }
 }

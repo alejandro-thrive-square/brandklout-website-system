@@ -44,6 +44,22 @@
         "content_volume"
       ],
       "notes": "Stub handoff in use; 04-content-seo is required-per-routing for migrations and should be copied in once audit confirms content scope."
+    },
+    {
+      "client_id": "workflow-test",
+      "checked_at": "2026-07-28",
+      "selected_offer": "Development from Scratch",
+      "canonical_offer_file": "sales/process/01-define-offers/offers/offer-development-from-scratch.md",
+      "handoff_file": "deliver/workflow-test/workflows/00-client-delivery-initialization/.tmp/client-handoff/deliver-handoff-workflow-test.md",
+      "routing_valid": true,
+      "default_path": ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+      "optional_phases": ["16"],
+      "skipped_phases": ["11", "12", "13", "14", "15", "16", "17"],
+      "missing_required_handoff_fields": [
+        "pages_or_templates",
+        "selected_design_system_reference"
+      ],
+      "notes": "Internal test project. SYNTHETIC handoff authored by Deliver (no Sales process ran). Timeline N/A; design-system seed skipped; no mcp-access.md yet — add before any MCP-backed test run."
     }
   ]
 }

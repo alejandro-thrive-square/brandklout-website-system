@@ -1985,15 +1985,19 @@ def write_style_variable_bindings(sections: list, output_dir: str,
 def convert(html: str, css: str = "", root_selector: Optional[str] = None,
             resolve: bool = True, asset_base: str = "",
             preserve_vars: bool = False,
-            variable_css_names: Optional[dict] = None) -> dict:
+            variable_css_names: Optional[dict] = None,
+            page_prefix: str = "") -> dict:
     """Convert HTML+CSS to a Webflow XscpData payload.
 
     root_selector: if given, only that element (matched in the FULL document so
     ancestor-dependent selectors still resolve) is converted. Otherwise the
     direct children of <body> (or the document root) are used.
+
+    page_prefix: namespace tag-derived auto-names (`p` -> `vnr-p`). See the
+    --page-prefix CLI flag.
     """
     soup, builder = _setup(html, css, resolve, asset_base, preserve_vars,
-                           variable_css_names)
+                           variable_css_names, page_prefix=page_prefix)
     roots = soup.select(root_selector) if root_selector else _body_roots(soup)
     payload = builder.build(roots)
     _warn_unsupported(builder)
@@ -2265,6 +2269,14 @@ def main(argv=None):
                          "(default: the --split folder name)")
     ap.add_argument("--clip", action="store_true",
                     help="copy JSON to clipboard as text/plain (NOT Webflow-pasteable)")
+    ap.add_argument("--page-prefix", dest="page_prefix", default="",
+                    help="namespace tag-derived AUTO-NAMES (`p` -> `vnr-p`, "
+                         "`div` -> `vnr-div`). Webflow merges classes by name "
+                         "SITE-WIDE, so a bare `p`/`div`/`span` class pasted "
+                         "into an existing project collides with the client's "
+                         "own classes. Always set this when pasting into a site "
+                         "you did not build. Source class names and JS hooks "
+                         "are untouched.")
     ap.add_argument("--indent", type=int, default=None, help="pretty-print indent")
     args = ap.parse_args(argv)
 
@@ -2297,7 +2309,8 @@ def main(argv=None):
                                     asset_base=args.asset_base,
                                     preserve_vars=args.preserve_vars,
                                     variable_css_names=variable_css_names,
-                                    extra_shared_utility_names=extra_shared)
+                                    extra_shared_utility_names=extra_shared,
+                                    page_prefix=args.page_prefix)
         if args.avoid:
             suffix = args.avoid_suffix or os.path.basename(
                 os.path.normpath(args.split))
@@ -2351,7 +2364,8 @@ def main(argv=None):
     payload = convert(html, css, root_selector=args.root,
                       resolve=not args.no_resolve, asset_base=args.asset_base,
                       preserve_vars=args.preserve_vars,
-                      variable_css_names=variable_css_names)
+                      variable_css_names=variable_css_names,
+                      page_prefix=args.page_prefix)
     text = (json.dumps(payload, separators=(",", ":")) if args.indent is None
             else json.dumps(payload, indent=args.indent))
     compact = json.dumps(payload, separators=(",", ":"))

@@ -159,6 +159,73 @@ expectations). Run `python wf_tools.py -h`.
    sections against the build report before moving on — a missed `paste_*`
    silently drops an entire section from staging.
 
+4. **Bind the images to real assets.** A pasted `<img>` arrives with
+   **`assetId: null`** — it is an unmanaged image pointing at an external URL,
+   so it gets no Webflow responsive variants, no link in the Assets panel, and
+   no alt inheritance. Fix it headlessly with `data_element_tool >
+   set_image_asset` (Data API, no bridge app needed). If the design already
+   references the target site's own CDN, the asset almost certainly **exists
+   already** — the asset id is the filename prefix in the URL
+   (`/{siteId}/{assetId}_{name}`), so confirm with `data_assets_tool >
+   get_asset` and **do not re-upload**, which would duplicate the client's
+   library with no bulk-delete to undo it.
+
+> [!IMPORTANT]
+> **Never re-paste to fix a live page that has been edited in the Designer** —
+> re-pasting a regenerated payload discards those edits. Patch the live page
+> through the Data API instead (`set_image_asset`, `set_text`, `set_settings`).
+> This is the same headless bug-patch loop used on Giovanni.
+
+Two constraints when binding images after a paste:
+
+- **The Data API cannot read an image's `src`.** `get_attributes name:"src"`
+  returns null (it is an intrinsic setting, not an xattr) and `get_settings`
+  exposes only `assetId` / `altText` / `domId` / `visibility` / `attributes`.
+  So there is no way to read back which file a pasted image points at, and the
+  only reliable join key from the design source is **altText**. Author unique,
+  descriptive alt text per image and the mapping stays mechanical; where alt
+  text legitimately repeats, document order holds and uniquely-identified
+  neighbours pin it.
+- **Rate limits.** `set_image_asset` performs an internal `GET /v2/assets` per
+  call, so large batches 429 partway (observed: 15 actions, failed after the
+  7th). Batch **3 to 4 actions per call**. Failed actions are safe to retry
+  verbatim. Verification reads can 429 on `GET /v2/pages` the same way.
+
+### C-alt. API paste — build the page headlessly with `data_whtml_builder` (no browser)
+
+Proven on Livewell implants 2026-07-29: a full 17-section, 580-node page built on the
+live page entirely through the Data API, **zero style forks**, ~10 tool calls. Works when
+the payload's styles ALREADY exist site-wide (a prior clipboard paste of the same payload
+anywhere on the site). Flow:
+
+1. Serialize the **XscpData payload** (not the design source) back to per-section HTML —
+   the inserted markup must carry the payload's post-conversion class stacks
+   (`imp-a-2 imp-btn imp-btn-gold`, sig-deduped content classes) so WHTML resolves them to
+   the existing styles by name instead of minting forks. Reference implementation:
+   `deliver/brandklout/livewell-dental/workflows/07-webflow-build/.tmp/payload_to_whtml.py`.
+2. `data_whtml_builder`: insert the single root div into the body, then each top-level
+   section appended to it. Constraints: single-root HTML per action, ≤5 actions/call, no
+   `<style>`/`<script>` tags, no `@keyframes`, only canonical breakpoint media queries.
+   `details`/`summary` paste as native tags. A transient Cloudflare **1101 worker error**
+   can appear ("do not retry" — but the identical retry succeeded; retry once).
+3. HtmlEmbeds cannot ride WHTML: serialize them as `<div data-embed-slot="N">`
+   placeholders, then create real HtmlEmbeds (`data_element_builder`, `set_style` with the
+   embed's payload class, position `before` the placeholder), write the code with
+   `data_element_settings_tool > set_settings key:"code"`, and remove the placeholders.
+   **Script embeds created this way do NOT execute in Designer preview** (even with
+   custom-code compilation on): clipboard-pasted embeds carry `embed.meta.script: true`,
+   and the Data API cannot set that flag (settings expose only domId/visibility/code).
+   Install behaviour JS additionally as a **registered page script**
+   (`register_inline_script`, ≤2000 chars raw JS, then `set_page_scripts` — NOT
+   `add_page_script`, which 404s when the page has no code block yet; and NOT
+   `set_page_freeform_code`, which returns 406 for any content containing a `<script>`
+   tag). Double-init-guard the IIFEs so embed + page-script copies coexist safely.
+4. WHTML's image URL→asset lookup misses the site's own CDN URLs — images insert
+   **unmanaged** exactly like a clipboard paste. Run the standard `set_image_asset`
+   binding pass (C.4) afterwards.
+5. The MCP token may lack publish permission (`publish_site` → 403); publish from the
+   Designer and verify per section E.
+
 ### D. Custom code
 
 > [!IMPORTANT]
@@ -220,6 +287,68 @@ expectations). Run `python wf_tools.py -h`.
    > correct model stays per-page: each page's script only queries ids that
    > exist on that page.
 3. Publish to staging.
+
+#### `overflow: hidden` on ANY ancestor silently disables `position: sticky`
+
+> [!WARNING]
+> An ancestor with `overflow` set to anything other than `visible` or `clip`
+> becomes the **sticky scrollport**. Because that box never scrolls, the sticky
+> descendant never pins — the section simply scrolls past with its content
+> fixed inside it. There is no error, nothing looks broken in the Designer, and
+> any JS driven by *scroll position* still computes perfectly, so data-level
+> verification passes while the visual effect is completely absent.
+
+Found on Livewell 2026-07-28: `.section_vnr-layers{overflow:hidden}` disabled
+`.vnr-lay__stage{position:sticky}`, so the page's signature pinned scroll-scrub
+played entirely off-screen. The scrub numbers were correct the whole time
+(rail 0→100%, bands scrubbing exactly as designed), which is why an earlier
+behaviour probe "passed" — **it measured the data, never the pinning.**
+
+- **Fix**: `overflow: clip`. It clips identically but does **not** create a
+  scroll container, so sticky still resolves against the viewport. Webflow
+  accepts it via `data_style_tool > update_style`. Removing `overflow` entirely
+  also works when nothing actually needs clipping — check for horizontal
+  overflow first.
+- **Detection**: `wf_tools.py qa` check `[4]` now walks **every** element and
+  pairs each sticky with the specific ancestor disabling it. It previously
+  inspected only top-level ROOT nodes, so on the now-standard single-root
+  whole-page payload it only ever looked at the page wrapper and was
+  structurally blind to this. Treat `clip` as safe; anything else as a failure.
+- **When probing motion, assert the GEOMETRY, not just the state.** For a
+  pinned section, sample `stage.getBoundingClientRect().top` across the scroll
+  range: it must stay ~0 while the track's own top goes negative. If the two
+  track each other one-to-one, the element is not pinning.
+
+#### Webflow can silently DROP a property on paste — diff the live styles, don't trust the payload
+
+> [!WARNING]
+> A property present and correct in the payload can be **absent from the pasted
+> style**. Observed on Livewell 2026-07-28: `.vnr-lay__track{height:280vh}` and
+> `.vnr-lay__stage{height:100vh}` were both in the payload's base `styleLess`,
+> and both were missing at base on the live page afterwards — while the *same*
+> property survived on those classes at the `medium`/`small`/`tiny`
+> breakpoints, and every other height on the page (21 styles audited) came
+> through intact. The loss was silent: no QA check fires, the page still
+> renders, and only the behaviour is wrong.
+
+Those two heights are what give a pinned scroll-scrub its scroll distance, so
+losing them killed the animation **on desktop only** (the breakpoint overrides
+kept tablet and mobile working) — a confusing symptom that looks like a JS bug
+and is not.
+
+Verify post-paste by **diffing the payload's styles against the live site's**
+through the Data API, which is exact and needs no Designer bridge:
+
+```text
+data_style_tool > query_styles   name_path:["<class>"]  include_properties:true
+                                 include_breakpoints:["main","medium","small","tiny"]
+```
+
+Compare against the payload's `styleLess` (+ `variants`) for the same class.
+Prioritise classes whose properties are load-bearing for behaviour — anything
+carrying `height`, `position:sticky`, `overflow`, or `transform`. Repair with
+`data_style_tool > update_style` (`breakpoint_id:"main"`), which patches the
+live page **without re-pasting**, so Designer edits are preserved.
 
 ### E. Live verification — design vs staging (foreground tab only)
 
@@ -537,6 +666,35 @@ name is split into `[content, utility]` — the utility keeps only its own
 simple-rule declarations, and the element's own typography/layout is baked onto
 a separate content class applied as the base with the utility chained on top.
 
+#### The guard is per-document, so cross-page design-system atoms can still fork
+
+> [!IMPORTANT]
+> **Byte-identical source CSS is NOT sufficient** for a shared atom to paste as a
+> no-op on a second page. The shared-utility test above is evaluated **per page**.
+> If an atom (`lw-btn`, `lw-eyebrow`, …) happens to appear in a multi-class stack
+> on page A but only ever as a sole class on page B, then on page B it takes the
+> plain single-class path and **bakes that page's element base rules into the
+> shared name** — typically `box-sizing: border-box` from a `*` reset and
+> `margin: 0` from a tag reset like `.page_x p{margin:0}`.
+>
+> Webflow merges by name site-wide and the **first pasted definition wins**, so
+> the second page silently loses (or gains) those declarations. Found on Livewell
+> 2026-07-28: `lw-eyebrow` was copied verbatim between two packages and still
+> resolved differently, because one page had a companion `vnr-p` class (created by
+> its remaining unclassed `<p>` elements) that absorbed the base rules and the
+> other classed every `<p>` and so had none.
+
+- **`--avoid` does not catch this.** It renames only *auto-named* classes; a
+  source class name like `lw-eyebrow` is deliberately left untouched so it stays
+  shareable.
+- **The check that does catch it** is `wf_tools.py qa <page> --against <every
+  already-built page>`, check `[6]`. Run it for every page after the first, and
+  treat a hit on a `lw-*`/design-system name as a real defect, not noise.
+- **The fix** is to give the atom a genuine modifier so it re-enters a multi-class
+  stack on the affected page (e.g. `lw-eyebrow lw-eyebrow--center`), which forces
+  the `[content, utility]` split and restores a byte-identical thin record.
+  Verify with a direct diff of the two payloads' `styleLess` for that name.
+
 ## Cascade Resolver
 
 Webflow's class model is flat, while hand-authored HTML often relies on
@@ -567,6 +725,8 @@ classes. The resolver exists so existing custom designs still paste correctly.
 | `font-family: var(--font-token)` | Concrete stack in clipboard; `variable_as_value` action in the post-paste binding manifest | Webflow strips font variable declarations on re-copy, but the Designer API can bind after paste. |
 | `::before`, `::after` | Real child `div` nodes | Webflow has no class-level pseudo-elements. |
 | CSS string escapes in `content` (`'\2014'`) | Decoded to the literal character (—) | Otherwise the escape pastes as visible `\2014` text. |
+| `content: counter()` / state-dependent `content` (`details[open] summary::after{content:"−"}`) | NOT carried — the materialized pseudo div gets no text and cannot swap it | Replace in prep with explicit markup: literal number spans; two state spans display-toggled by a `data-embed` style (Livewell implants, 2026-07-29). |
+| Inline tags outside the native map (`<s>`, `<small>`, `<u>`, `<sub>`, …) | `HtmlEmbed` fallback | Swap for a classed `<span>` in prep — a one-word embed is noise. |
 | `<br>` | Each line after the first wraps in a `span` Block with class `br-line` (`display: block`) | The clipboard format has no line-break node; dropping `<br>` fused words. |
 | Whitespace-only text between inline siblings | Preserved as a `" "` text node | Dropping it fused words around `<em>`/`<span>` boundaries. |
 | Inline `style=""` | Folded into the emitted class | More reliable than Webflow `data.style`. |
@@ -587,6 +747,20 @@ the per-class records, and when a residual exists emits the element as
 after the tag (sig-deduped, name-uniquified), the source classes chained after
 it as thin utilities. Stacks fully described by simple rules keep the clean
 native combo emission.
+
+> [!WARNING]
+> **Known residual gap: a context override of a property a class record already
+> declares is silently DROPPED.** The residual diff covers by property NAME, so
+> when `.journey .sub{color:LIGHT}` overrides the thin `.sub{color:DARK}` record,
+> the element's winning light value never lands anywhere — the pasted page keeps
+> the dark value, and data-level QA cannot see it (Livewell implants 2026-07-29:
+> two dark-band paragraphs rendered dark-on-dark; an inline `style="color:…"`
+> on an element whose class also sets color is dropped the same way). Until the
+> converter diffs by VALUE, author an explicit modifier class for any
+> context/inline override of a property that a shared class in the stack already
+> sets (`sub` → `sub sub-light`), which routes it through a real combo record.
+> Audit a package for the pattern before converting: for every context rule
+> (`.scope .cls{prop:v}`), flag it when `.cls{prop:other-v}` also exists.
 
 ### Re-paste hygiene (required when iterating)
 
@@ -700,6 +874,75 @@ page bakes from the **same** CSS, shared components resolve to byte-identical
 records across pages — which removes the cross-page collisions that per-page
 `<style>` blocks caused.
 
+## Tag-derived auto-names — `--page-prefix` (REQUIRED when pasting into a site you did not build)
+
+Any element the converter styles but which carries **no class of its own** gets a
+tag-derived auto-name: `p`, `div`, `span`, `a`, `h3`, `em`, `strong`, then
+`p-2`, `p-3` … The same happens when an element *has* a class but also picks up
+declarations from an element-level base rule (`.page_root p{margin:0}`,
+`.page_root a{color:inherit}`) — those declarations cannot live on the semantic
+class, so they are split into a tag-named companion class.
+
+**Webflow merges classes by NAME site-wide.** A payload carrying a class literally
+called `p`, `div` or `span` therefore either collides with the client's own
+same-named class (their definition wins; your styling silently changes) or
+permanently litters their project with junk names.
+
+Two independent fixes, use both:
+
+1. **Author every styled element with its own class** (Client-First flat classes).
+   This is the going-forward standard and removes most auto-names at the source.
+   Audit a design package before converting:
+
+   ```bash
+   # lists every classless styled element in the source
+   python - <<'EOF'
+   import io, re
+   from collections import Counter
+   h = io.open("<source>.html", encoding="utf-8").read()
+   b = re.sub(r"<(style|script)[\s\S]*?</\1>", "", h)
+   b = re.sub(r"<!--[\s\S]*?-->", "", b)
+   hits = [m.group(1) for m in re.finditer(
+       r"<(p|a|span|div|h[1-6]|img|li|i|b|em|strong|ul|figure|figcaption)(\s[^>]*)?>", b)
+       if "class=" not in (m.group(2) or "")]
+   print(len(hits), Counter(hits))
+   EOF
+   ```
+
+2. **Always pass `--page-prefix <slug>`.** It namespaces the residual auto-names
+   that step 1 cannot remove (`p` → `vnr-p`, `div` → `vnr-div`). Source class
+   names and JS hook tokens are left untouched. The engine has always supported
+   this; the CLI flag was added 2026-07-28 (previously reachable only from the
+   Python API, so every CLI-generated payload shipped bare `p`/`div` classes).
+
+Verify after generating — this must print an empty list:
+
+```bash
+python - <<'EOF'
+import io, json, re
+h = io.open(".tmp/<page>/paste_01_<page>.html", encoding="utf-8").read()
+d = json.loads(re.search(r'<script type="application/json"[^>]*>(.*?)</script>', h, re.S).group(1))
+bare = [s["name"] for s in d["payload"]["styles"] if re.fullmatch(
+    r"(div|span|section|p|a|ul|li|h[1-6]|figure|figcaption|img|i|b|em|strong|nav|article)(-\d+)?", s["name"])]
+print("bare tag-named classes:", bare)
+EOF
+```
+
+### Client-sent pages with generic class vocabularies — prefix EVERYTHING in prep
+
+`--page-prefix` only namespaces tag-derived auto-names; SOURCE class names are
+deliberately left untouched. A third-party/client-authored page whose classes
+are bare generic words (`btn`, `card`, `wrap`, `hero`, `a`) therefore still
+pastes those names verbatim — and Webflow merges classes by name site-wide, so
+they collide with the target site's own vocabulary (a Relume-derived site
+almost certainly has `card`). For such pages, rename the WHOLE class vocabulary
+in the prep script (markup class tokens + selectors inside `<style>` blocks)
+with a page prefix (`btn` → `imp-btn`), keeping only the `page_<slug>` root
+conventional. Safe when the page JS queries by id only — verify before
+renaming. A whole-vocabulary prefix also makes `--avoid` unnecessary: every
+name is page-unique by construction. First done for the Livewell implants
+landing (`.tmp/prep_source_implants.py`, 2026-07-29).
+
 ## Usage
 
 Recommended full-page section split:
@@ -709,6 +952,7 @@ python html_to_webflow.py --html "../05-design-revisions/.tmp/final-design/[page
   --css ../04-design/.tmp/final-design/site.css \
   --asset-base "<DEPLOYED_SITE_URL>" \
   --var-map .tmp/[page]/webflow-variable-map.json \
+  --page-prefix [slug] \
   --split .tmp/[page]
 python wf_tools.py qa .tmp/[page]
 ```

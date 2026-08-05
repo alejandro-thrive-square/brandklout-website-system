@@ -99,6 +99,32 @@ orca orchestration gate-resolve --id <gateId> --resolution "..." --json
 
 Mutating actions (commit, push, deploy, publish) still require explicit confirmation — Orca does not auto-commit or auto-deploy on your behalf.
 
+### CLI — an agent starting another session
+
+> [!IMPORTANT]
+> **An agent can start a new session itself.** When the user says "start a new session", "hand this off", or "spawn an agent", execute it with the Orca CLI. Never reply that you cannot launch a session and hand the user a prompt to paste manually.
+
+Load the `orca-cli` skill first, then run `orca skills get orca-cli` for the version-matched command reference — subcommands and flags change between Orca releases, so do not work from memory.
+
+Pick the spawn mode by **whether the new session needs uncommitted files**:
+
+```bash
+# Same checkout — the new agent sees uncommitted .tmp/ artifacts. Matches the normal
+# multi-tab pattern (several CLIs in one worktree) and is the usual choice.
+orca terminal create --worktree active --command "claude" --json
+orca terminal wait   --terminal <handle> --for tui-idle --timeout-ms 60000 --json
+orca terminal send   --terminal <handle> --text "<task brief>" --enter --json
+
+# Separate checkout — isolated worktree, its own branch and terminal.
+orca worktree create --name <task-name> --agent claude --prompt "<task brief>" --json
+```
+
+A new **worktree** is a different working directory: uncommitted artifacts from the current worktree will **not** be present. Commit them first, or use the `terminal create --worktree active` path.
+
+Hand the new session a written brief it can act on alone — for this system that means a `TRIGGER_PROMPT.txt` plus an execution plan under the relevant workflow's `.tmp/`, not a summary in the prompt text. Prefer `--agent` on `worktree create` over creating a worktree and then opening an agent; the two-step path leaves a stray fallback shell when no default tabs are configured.
+
+For a genuine handoff, deliver the brief and stop monitoring. Use the `orchestration` skill and `orca orchestration ...` only when the user actually asked to supervise, wait for results, or coordinate a task DAG.
+
 ## Relationship to This Repo
 
 - Orca operates on the **same local git checkout** all other tooling uses; commits it makes are normal git commits that flow through the existing [DEPLOYMENT.md](./DEPLOYMENT.md) / [HERMES.md](./HERMES.md) sync model.

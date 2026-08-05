@@ -29,7 +29,11 @@ Platform MCPs that hold OAuth grants are registered once **per principal** (see 
 | `webflow-giovanni-serrano` | Giovanni Serrano | `client` | Giovanni Serrano site only | [mcp-access.md](../deliver/giovanni-serrano/docs/mcp-access.md) |
 | `webflow-horizon` | Horizon Building Corp (via Farewell Agency) | `client` | Horizon sites only (`6a1f7d0be8345316ba21999c`) | [mcp-access.md](../deliver/farewell-agency/horizon/docs/mcp-access.md) |
 | `webflow-excellent-facets` | Excellent Facets | `client` | Excellent Facets site only (`excellentfacets.com`) | [mcp-access.md](../deliver/excellent-facets/docs/mcp-access.md) |
-| `webflow` | **Legacy — deprecated** | — | Whatever the last OAuth covered (unscoped) | Remove after active work migrates to per-client instances |
+| `webflow-livewell-dental` | Livewell Dental (via Brandklout) | `client` | Livewell Dental site only (`livewelldentalva.webflow.io`) | [mcp-access.md](../deliver/brandklout/livewell-dental/docs/mcp-access.md) |
+| `webflow-dealer-websites` | Dealer Websites | `client` | Dealer Websites site only (site ID TBD — confirm via `list_sites`) | [mcp-access.md](../deliver/dealer-websites/docs/mcp-access.md) |
+| `webflow-dr-nahlah` | Dr. Nahlah | `client` | Dr. Nahlah site only — **not yet created / not yet authenticated** | [mcp-access.md](../deliver/dr-nahlah/docs/mcp-access.md) |
+| `webflow-clientfirst` | Local tool server (no principal) | n/a | No network. Reads repo files, writes `mcp-servers/webflow-clientfirst/.tmp/` | [setup.md](./webflow-clientfirst/setup.md) |
+| `webflow` | **Legacy — deprecated** | — | Whatever the last OAuth covered (currently returns 401) | Remove after active work migrates to per-client instances |
 
 > [!WARNING]
 > The `claude.ai Webflow` connector that may appear in `/mcp` is a claude.ai **account** connector, not part of this project's structure. Do not use it for project work — it belongs to whichever claude.ai account the terminal is logged into and bypasses the per-principal grant model. Always use the project-scoped instances above.

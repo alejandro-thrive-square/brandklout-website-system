@@ -153,35 +153,62 @@ def cmd_qa(args) -> int:
         print("    ", m3)
     fail += bool(missing)
 
-    # Root overflow only breaks things when the payload actually contains a
-    # position:sticky element (an overflow ancestor disables sticky). A section
-    # with intentional overflow (rounded dark bands, marquee masks) and no
-    # sticky content is fine — report it as info, not failure.
-    bad_roots = []
-    warn_roots = []
+    # An `overflow` ancestor makes itself the sticky scrollport, and because
+    # that box never scrolls the descendant never pins — the pinned section just
+    # scrolls past with its content fixed inside it. `overflow: clip` clips
+    # identically WITHOUT creating a scroll container, so it is the safe fix.
+    #
+    # This used to inspect only top-level ROOT nodes and only ask whether the
+    # payload contained a sticky style *anywhere*. On the now-standard
+    # single-root whole-page payload that meant it only ever looked at the page
+    # wrapper, never the section carrying the overflow, so it was structurally
+    # blind. It missed exactly this on Livewell's veneers page (2026-07-28):
+    # `.section_vnr-layers{overflow:hidden}` silently disabled
+    # `.vnr-lay__stage{position:sticky}` and the signature scroll-scrub never
+    # pinned. Now every element is walked and each sticky is paired with the
+    # specific ancestor that disables it.
+    bad_pairs = []
     for name, p in payloads.items():
         styles_by_id = {s["_id"]: s for s in p["payload"]["styles"]}
-        has_sticky = any("sticky" in s.get("styleLess", "") or
-                         "sticky" in json.dumps(s.get("variants", {}))
-                         for s in p["payload"]["styles"])
-        children = set()
+        nodes_by_id = {n["_id"]: n for n in p["payload"]["nodes"]}
+        parent = {}
         for n in p["payload"]["nodes"]:
-            children.update(n.get("children", []))
-        roots = [n for n in p["payload"]["nodes"]
-                 if n["_id"] not in children and n.get("type") not in ("Text",)]
-        for r in roots:
-            cls = r.get("classes", [])
-            if cls and cls[0] in styles_by_id:
-                if "overflow" in styles_by_id[cls[0]].get("styleLess", ""):
-                    (bad_roots if has_sticky else warn_roots).append(
-                        (name, styles_by_id[cls[0]]["name"]))
-    print(f"[4] section roots with overflow on first class + sticky content: "
-          f"{len(bad_roots)}")
-    for b in bad_roots:
-        print("    ", b)
-    for w in warn_roots:
-        print(f"     info: root overflow, no sticky content (OK): {w}")
-    fail += bool(bad_roots)
+            for c in n.get("children", []):
+                parent[c] = n["_id"]
+
+        def _decls(node):
+            out = []
+            for cid in node.get("classes", []):
+                s = styles_by_id.get(cid)
+                if s:
+                    out.append(s.get("styleLess") or "")
+                    out.append(json.dumps(s.get("variants", {})))
+            return " ".join(out)
+
+        def _label(node):
+            names = [styles_by_id[c]["name"] for c in node.get("classes", [])
+                     if c in styles_by_id]
+            return ".".join(names) if names else node.get("tag", "?")
+
+        for n in p["payload"]["nodes"]:
+            if not re.search(r"position\s*:\s*sticky", _decls(n)):
+                continue
+            pid = parent.get(n["_id"])
+            while pid:
+                anc = nodes_by_id.get(pid)
+                if anc is None:
+                    break
+                m = re.search(r"overflow(?:-x|-y)?\s*:\s*([a-z]+)", _decls(anc))
+                if m and m.group(1) not in ("visible", "clip"):
+                    bad_pairs.append((name, _label(n), _label(anc), m.group(1)))
+                    break
+                pid = parent.get(pid)
+    print(f"[4] sticky elements disabled by an overflow ancestor: "
+          f"{len(bad_pairs)}")
+    for nm, sticky, anc, ov in bad_pairs:
+        print(f"     {nm}: .{sticky} blocked by .{anc} {{overflow:{ov}}} "
+              f"-> use `overflow: clip`")
+    fail += bool(bad_pairs)
 
     forms = []
     for name, p in payloads.items():

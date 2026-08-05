@@ -98,9 +98,21 @@ python html_to_webflow.py --html "../05-design-revisions/.tmp/final-design/[page
   --css ../04-design/.tmp/final-design/site.css \
   --asset-base "<DEPLOYED_SITE_URL>" \
   --var-map .tmp/[page]/webflow-variable-map.json \
+  --page-prefix [slug] \
   --split .tmp/[page]
 python wf_tools.py qa .tmp/[page]
 ```
+
+> [!IMPORTANT]
+> **`--page-prefix` is required when pasting into a site you did not build**
+> (added 2026-07-28). Without it the payload can carry classes named literally
+> `p`, `div`, `span`, `a`, `h3` — and Webflow merges classes by NAME site-wide,
+> so those either collide with the client's own classes or litter their project.
+> The flag namespaces tag-derived auto-names only (`p` → `vnr-p`); source class
+> names and JS hook tokens are untouched. The converter engine always supported
+> this; only the CLI flag was missing, so any payload generated before that date
+> should be re-checked. Full detail and the verification snippet:
+> [html-to-webflow-clipboard.md](./html-to-webflow-clipboard.md) §Tag-derived auto-names.
 
 ---
 
