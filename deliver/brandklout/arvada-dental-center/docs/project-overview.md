@@ -105,10 +105,19 @@ templates. See
 4. **Content sourcing.** Real reviews, doctor names, and credentials only — **never invent
    testimonials or statistics for a real practice**. Sources used are listed in
    `01-content-intake/.tmp/content-intake-summary.md`.
-5. **Timeline/pricing** per
-   [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md). Six pages is the
-   largest engagement in this batch and the due date is the same as everyone else's — flag the
-   capacity conflict to Brandklout rather than silently slipping.
+5. **Capacity.** Six pages is the largest scope in this batch and the due date is the same as
+   everyone else's. Flag the sequencing conflict to Brandklout rather than silently slipping.
+
+> [!NOTE]
+> **Commercial terms are out of scope for this folder.** Brandklout is a partner engagement, not a
+> per-page client, so [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md) does
+> **not** apply to anything under `deliver/brandklout/`. Page count and scope matter here only for
+> sequencing and capacity — never for cost. Do not compute or record a rate, quote or cost in this
+> folder.
+>
+> Dollar figures that *do* appear in these artifacts are **the dental practice's own published
+> patient-facing prices** — their $109 new-patient special and their full-arch figure. Those are
+> landing-page content for the end patient and are unrelated to Webzite's commercial terms.
 
 ## Open Questions — for Brandklout
 

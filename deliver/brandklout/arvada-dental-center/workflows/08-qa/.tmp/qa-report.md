@@ -1,7 +1,7 @@
 # QA Report — Arvada Dental Center landing pages
 
 **Asana parent task**: `1217040406855586`
-**Run**: 2026-08-05 · `node qa.mjs` · **238/238 checks passed**
+**Run**: 2026-08-05 · `node qa.mjs` · **258/258 checks passed**
 Machine-readable results: [`qa-results.json`](./qa-results.json)
 
 ## Why this is a driven test, not a screenshot review
@@ -23,6 +23,7 @@ whether reduced-motion actually reveals the content rather than leaving it at `o
 | **Live status** | the open/closed pill resolves to a real state and a sensible label |
 | **Motion** | every `[data-reveal]` fires on a human-paced scroll; under `prefers-reduced-motion` nothing is left hidden |
 | **Responsive** | no horizontal overflow at 1440 / 1024 / 768 / 390 / 320px; mobile action bar hidden over the hero and shown after it; action bar has a tap-to-call |
+| **Commercial terms** | no Webzite rate, quote or cost, and no reference to `PRICING_TIMELINE_RULES.md`, in any authored artifact. Brandklout is a partner engagement, so those rules do not apply under `deliver/brandklout/`. The dental practice's **own** patient-facing prices are page content and are expected. |
 | **Content** | only the main line `(303) 421-7611` appears as a `tel:` — the tracking number does not |
 
 ## Cross-page content audit

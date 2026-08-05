@@ -364,6 +364,40 @@ for (const p of PAGES) {
   }
 }
 
+// ---- commercial-terms guard ----
+// Brandklout is a partner engagement, not a per-page client: sales/PRICING_TIMELINE_RULES.md
+// does not apply anywhere under deliver/brandklout/, and no rate, quote or cost belongs in
+// this folder. The dental practice's OWN patient-facing prices ($109 special, full-arch
+// figure) are landing-page content and are expected — this checks for *our* commercial terms.
+console.log(`\n=== commercial-terms guard`);
+const OURS = /PRICING_TIMELINE_RULES|per-page rate|our (?:rate|fee)\b|we (?:charge|quote)\b|project (?:cost|fee)\b|day rate|\bretainer fee\b|\bdeposit of\b/i;
+const docRoots = [
+  path.resolve(here, "../../../docs"),
+  path.resolve(here, ".."),
+  path.resolve(here, "../../01-content-intake/.tmp"),
+  path.resolve(here, "../../04-design/.tmp"),
+];
+function walk(dir, acc = []) {
+  if (!fs.existsSync(dir)) return acc;
+  for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+    const full = path.join(dir, e.name);
+    if (e.isDirectory()) {
+      // Skip scraped third-party mirrors — those are the client's words, not ours.
+      if (e.name === "client-site" || e.name === "reference-captures" || e.name === "assets") continue;
+      walk(full, acc);
+    } else if (/\.(md|html|css|js|mjs)$/.test(e.name)) acc.push(full);
+  }
+  return acc;
+}
+for (const f of [...new Set(docRoots.flatMap((d) => walk(d)))]) {
+  const text = fs.readFileSync(f, "utf8");
+  const hit = text.match(OURS);
+  // An explicit statement that the rules do NOT apply is the point, not a violation.
+  const isTheRuleItself = hit && /does \*\*not\*\* apply|does not apply|out of scope|never for cost|not a per-page client/i.test(text);
+  check("commercial", `no Webzite rate/quote in ${path.basename(f)}`, !hit || isTheRuleItself,
+    hit && !isTheRuleItself ? hit[0] : "");
+}
+
 const summary = {
   ranAt: new Date().toISOString(),
   asanaTaskGid: "1217040406855586",
