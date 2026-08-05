@@ -37,6 +37,16 @@ structure references, not the platform.
 Delivery sequence: **design and build locally first → review → then Webflow.** No Webflow paste
 happens until a page is approved locally, and no client here has a Webflow grant yet.
 
+## Commercial terms — no pricing on this batch
+
+Brandklout is a **partner engagement**, not a per-page client. [PRICING_TIMELINE_RULES.md](../../../sales/PRICING_TIMELINE_RULES.md)
+does **not** apply to any client under `deliver/brandklout/`, and no agent should compute a price,
+a per-page rate, or a quote for this work.
+
+Scope and page count still matter — for **sequencing and capacity**, not cost. Twelve landing pages
+sharing one due date is a real scheduling problem worth surfacing to Brandklout; it is not a
+pricing conversation.
+
 ## How to use the reference URLs — READ THIS BEFORE DESIGNING
 
 Confirmed with the client 2026-08-05:
