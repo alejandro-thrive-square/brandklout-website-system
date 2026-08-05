@@ -17,10 +17,11 @@ MCP server definitions are centralized, but MCP usage is controlled by the activ
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | Webflow | HTTP (remote) | Project | Agency, Client, Workflow | [webflow/setup.md](./webflow/setup.md) | CMS management, site audits, collection item CRUD, SEO, publishing |
 | Figma | HTTP (remote) | User/Global | Global, Agency, Client, Workflow | [figma/setup.md](./figma/setup.md) | Design file generation, design inspection, and conversion from HTML/CSS prototypes |
+| Asana | HTTP (remote) | Project | Client | [asana/setup.md](./asana/setup.md) | Reading a partner's/client's project-management workspace: tasks, projects, assignees, comments — used to pick up delegated work. **Blocked in Claude Code** (token-exchange bug); accessed via direct-token scripts. |
 
 ## Server Instances (One Per Principal)
 
-Platform MCPs that hold OAuth grants are registered once **per principal** (see [ACCESS_MODEL.md — Server Instances](./ACCESS_MODEL.md#server-instances-one-per-principal)). All Webflow instances point at `https://mcp.webflow.com/mcp`; each holds its own runtime grant scoped to its principal's sites only.
+Platform MCPs that hold OAuth grants are registered once **per principal** (see [ACCESS_MODEL.md — Server Instances](./ACCESS_MODEL.md#server-instances-one-per-principal)). All Webflow instances point at `https://mcp.webflow.com/mcp`; each holds its own runtime grant scoped to its principal's sites only. Asana instances follow the same naming rule but a weaker grant boundary — see the note under the table.
 
 | Instance Name | Principal | Access Level | Grant Scope | Access File |
 | :--- | :--- | :--- | :--- | :--- |
@@ -31,12 +32,16 @@ Platform MCPs that hold OAuth grants are registered once **per principal** (see 
 | `webflow-excellent-facets` | Excellent Facets | `client` | Excellent Facets site only (`excellentfacets.com`) | [mcp-access.md](../deliver/excellent-facets/docs/mcp-access.md) |
 | `webflow-livewell-dental` | Livewell Dental (via Brandklout) | `client` | Livewell Dental site only (`livewelldentalva.webflow.io`) | [mcp-access.md](../deliver/brandklout/livewell-dental/docs/mcp-access.md) |
 | `webflow-dealer-websites` | Dealer Websites | `client` | Dealer Websites site only (site ID TBD — confirm via `list_sites`) | [mcp-access.md](../deliver/dealer-websites/docs/mcp-access.md) |
-| `webflow-dr-nahlah` | Dr. Nahlah | `client` | Dr. Nahlah site only — **not yet created / not yet authenticated** | [mcp-access.md](../deliver/dr-nahlah/docs/mcp-access.md) |
+| `webflow-dr-nahlah` | Dr. Nahlah | `client` | Dr. Nahlah site only — **not yet created / not yet authenticated** | [mcp-access.md](../deliver/brandklout/dr-nahlah/docs/mcp-access.md) |
 | `webflow-clientfirst` | Local tool server (no principal) | n/a | No network. Reads repo files, writes `mcp-servers/webflow-clientfirst/.tmp/` | [setup.md](./webflow-clientfirst/setup.md) |
 | `webflow` | **Legacy — deprecated** | — | Whatever the last OAuth covered (currently returns 401) | Remove after active work migrates to per-client instances |
+| `asana-brandklout` | Brandklout (white-label partner) | `client` | Workspace `1210572425689866` (the only one the grant can see) — registered 2026-08-05 (client ID `1217205892702386`, callback port 8080). **Cannot authenticate: Claude Code token-exchange bug.** Working access is via [scripts](../deliver/brandklout/scripts/README.md). | [mcp-access.md](../deliver/brandklout/docs/mcp-access.md) |
 
 > [!WARNING]
-> The `claude.ai Webflow` connector that may appear in `/mcp` is a claude.ai **account** connector, not part of this project's structure. Do not use it for project work — it belongs to whichever claude.ai account the terminal is logged into and bypasses the per-principal grant model. Always use the project-scoped instances above.
+> The `claude.ai Webflow` connector that may appear in `/mcp` is a claude.ai **account** connector, not part of this project's structure. Do not use it for project work — it belongs to whichever claude.ai account the terminal is logged into and bypasses the per-principal grant model. Always use the project-scoped instances above. The same applies to a `claude.ai Asana` connector.
+
+> [!IMPORTANT]
+> **Asana's grant boundary is weaker than Webflow's.** Webflow's OAuth screen lets you select individual sites, so a per-client instance really is scoped to that client. Asana has no workspace picker — the grant follows the **user**, so an Asana token reaches every workspace that user belongs to. Per-instance naming still gives each engagement a persistent grant and a self-evident tool prefix, but the actual isolation must come from the Asana membership (limited-access member/guest, or a dedicated Asana account). See [asana/setup.md — Grant Scope](./asana/setup.md#grant-scope-read-this-before-authorizing).
 
 ## Configuration
 

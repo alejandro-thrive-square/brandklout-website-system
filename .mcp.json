@@ -42,6 +42,14 @@
       "args": [
         "mcp-servers/webflow-clientfirst/server.mjs"
       ]
+    },
+    "asana-brandklout": {
+      "type": "http",
+      "url": "https://mcp.asana.com/v2/mcp",
+      "oauth": {
+        "clientId": "1217205892702386",
+        "callbackPort": 8080
+      }
     }
   }
 }

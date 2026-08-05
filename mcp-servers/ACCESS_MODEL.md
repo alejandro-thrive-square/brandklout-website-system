@@ -42,6 +42,25 @@ A **principal** is the account boundary a grant should cover: Webzite Studio its
 3. Authenticate via `/mcp`, selecting only that client's sites in the OAuth screen.
 4. Register the instance in [MCP_INDEX.md](./MCP_INDEX.md) and the client's `docs/mcp-access.md`.
 
+**Platforms without dynamic client registration:**
+
+Step 1 above assumes the platform supports RFC 7591 dynamic client registration, so Claude Code can register itself and open the browser unaided. Webflow does. Some platforms do not — Asana's V2 server, for example, delegates authorization to `https://app.asana.com`, whose metadata advertises no `registration_endpoint` and requires a confidential client.
+
+For those platforms, a human must first create an OAuth app in the platform's developer console with a **pinned loopback redirect URI**, then register the instance with the resulting credentials:
+
+```bash
+claude mcp add --transport http \
+  --client-id <CLIENT_ID> --client-secret --callback-port 8080 \
+  <platform>-<client-name> <platform-mcp-url> -s project
+```
+
+- `--callback-port` pins the loopback port so the redirect URI (`http://localhost:<port>/callback`) is stable enough to pre-register. Without it Claude Code picks a random port and the platform rejects the callback.
+- `--client-secret` takes no value; it opens a hidden prompt. Prefer the prompt over the `MCP_CLIENT_SECRET` environment variable, which leaks the secret into shell history and agent transcripts.
+- **Verified 2026-08-05 (Claude Code 2.1.222):** only `oauth: { clientId, callbackPort }` is written to `.mcp.json`. The client secret goes to the OS credential store, not to `.mcp.json` and not to `~/.claude.json`. A client ID is a public identifier, so the file remains safe to commit.
+- `claude mcp remove` strips `.mcp.json`'s trailing newline; restore it before committing.
+
+**Grant boundary is platform-specific.** Per-instance naming guarantees a persistent grant and a self-evident tool prefix, but it does not by itself guarantee least privilege. Check what the platform's authorization screen actually lets you scope: Webflow scopes to selected sites, whereas Asana's grant follows the **user** and reaches every workspace that user belongs to. Where the platform cannot scope the grant, isolation must come from the account itself (a limited-access/guest membership, or a dedicated account), and the client's `mcp-access.md` must name the allowed workspace explicitly.
+
 ## Folder-Based Control
 
 MCP server definitions are stored in `.mcp.json` and documented in `mcp-servers/`. Folder-level access is controlled by `mcp-access.md` files.
