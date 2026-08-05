@@ -36,6 +36,33 @@ branch and can be reviewed and merged independently.
 A client worktree that needs something cross-cutting — a new shared archetype, a platform grant, a
 scope decision — reports it back here rather than deciding alone.
 
+## Claude accounts — which profile runs what
+
+| Account | Used for |
+| :--- | :--- |
+| `alejandromilanoescalona@gmail.com` (personal) | **Orchestration only** — this main checkout |
+| `alejandro@thrivesquare.com` (team) | **All Brandklout client work** in the per-client worktrees |
+
+Client work is billed and owned through the ThriveSquare/Brandklout side, so client worktrees must
+not run on the personal account. Note the team account is also the one holding the Asana grant.
+
+> [!IMPORTANT]
+> **Account selection is global, not per-worktree.** As of Orca 1.4.169 neither
+> `orca worktree create` nor `orca terminal create` accepts an account/profile flag, and the CLI
+> exposes only `orca account add` / `orca account list` — there is no `account use`. The active
+> account lives at `activeAccountIdsByRuntime.host` and is switched in the Orca UI.
+>
+> Practical consequence: **switch the active account to the team account *before* launching agents
+> into client worktrees.** An agent inherits whatever account was active when its terminal started.
+> Already-running sessions keep the account they started with, which is why this orchestration
+> session can stay on personal while client agents run on team.
+
+Verify before dispatching:
+
+```text
+orca account list --json
+```
+
 ## Creating a worktree for a new client
 
 ```text
