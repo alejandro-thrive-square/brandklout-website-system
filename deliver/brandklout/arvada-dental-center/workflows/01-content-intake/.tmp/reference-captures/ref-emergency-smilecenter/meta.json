@@ -1,0 +1,442 @@
+{
+  "url": "https://smilecenter.com/treatments/emergency-dentistry",
+  "title": "Emergency Dentist Open Now | Same-Day Tooth Extraction | Walk-In Dental Care",
+  "metaDescription": "Walk-in emergency dentist with same-day appointments. Gentle care for anxious patients. No surprise bills. Medi-Cal, Delta Dental, Cigna, Aetna, United Healthcare accepted. 5 LA County locations. Free consultation.",
+  "bodyFont": "\"DM Sans\", sans-serif",
+  "bodyBg": "rgb(248, 250, 252)",
+  "topColors": [
+    [
+      "rgb(225, 231, 239)",
+      490
+    ],
+    [
+      "rgb(15, 23, 41)",
+      124
+    ],
+    [
+      "rgb(13, 162, 231)",
+      84
+    ],
+    [
+      "rgb(0, 0, 0)",
+      83
+    ],
+    [
+      "rgb(255, 255, 255)",
+      44
+    ],
+    [
+      "rgb(148, 163, 184)",
+      44
+    ],
+    [
+      "rgb(101, 117, 139)",
+      39
+    ],
+    [
+      "rgba(255, 255, 255, 0.9)",
+      28
+    ],
+    [
+      "rgb(239, 68, 68)",
+      16
+    ],
+    [
+      "rgba(255, 255, 255, 0.6)",
+      15
+    ],
+    [
+      "rgba(13, 162, 231, 0.1)",
+      11
+    ],
+    [
+      "rgb(251, 191, 36)",
+      11
+    ],
+    [
+      "rgb(52, 66, 86)",
+      10
+    ],
+    [
+      "rgb(100, 116, 139)",
+      8
+    ],
+    [
+      "rgb(248, 250, 252)",
+      6
+    ],
+    [
+      "rgba(255, 255, 255, 0.1)",
+      6
+    ],
+    [
+      "rgb(71, 85, 105)",
+      6
+    ],
+    [
+      "rgba(255, 255, 255, 0.05)",
+      5
+    ],
+    [
+      "rgba(239, 68, 68, 0.1)",
+      4
+    ],
+    [
+      "rgba(241, 245, 249, 0.3)",
+      2
+    ],
+    [
+      "rgb(203, 213, 225)",
+      2
+    ],
+    [
+      "rgb(15, 23, 42)",
+      2
+    ]
+  ],
+  "topFonts": [
+    [
+      "\"DM Sans\", sans-serif",
+      127
+    ],
+    [
+      "\"Bricolage Grotesque\", sans-serif",
+      27
+    ],
+    [
+      "Newsreader, serif",
+      1
+    ]
+  ],
+  "cssVars": {
+    "--tw-border-spacing-x": "0",
+    "--tw-border-spacing-y": "0",
+    "--tw-translate-x": "0px",
+    "--tw-translate-y": "-3px",
+    "--tw-rotate": "180deg",
+    "--tw-skew-x": "0",
+    "--tw-skew-y": "0",
+    "--tw-scale-x": "1.1",
+    "--tw-scale-y": "1.1",
+    "--tw-pan-x": "",
+    "--tw-pan-y": "pan-y",
+    "--tw-pinch-zoom": "",
+    "--tw-scroll-snap-strictness": "proximity",
+    "--tw-gradient-from-position": "",
+    "--tw-gradient-via-position": "",
+    "--tw-gradient-to-position": "",
+    "--tw-ordinal": "",
+    "--tw-slashed-zero": "",
+    "--tw-numeric-figure": "",
+    "--tw-numeric-spacing": "tabular-nums",
+    "--tw-numeric-fraction": "",
+    "--tw-ring-inset": "inset",
+    "--tw-ring-offset-width": "2px",
+    "--tw-ring-offset-color": "#dc2626",
+    "--tw-ring-color": "rgb(248 113 113 / var(--tw-ring-opacity, 1))",
+    "--tw-ring-offset-shadow": "var(--tw-ring-inset) 0 0 0 var(--tw-ring-offset-width) var(--tw-ring-offset-color)",
+    "--tw-ring-shadow": "var(--tw-ring-inset) 0 0 0 calc(2px + var(--tw-ring-offset-width)) var(--tw-ring-color)",
+    "--tw-shadow": "0 1px 3px 0 rgb(0 0 0 / .1), 0 1px 2px -1px rgb(0 0 0 / .1)",
+    "--tw-shadow-colored": "0 1px 3px 0 var(--tw-shadow-color), 0 1px 2px -1px var(--tw-shadow-color)",
+    "--tw-blur": "blur(12px)",
+    "--tw-brightness": "brightness(1.1)",
+    "--tw-contrast": "",
+    "--tw-grayscale": "",
+    "--tw-hue-rotate": "",
+    "--tw-invert": "invert(100%)",
+    "--tw-saturate": "",
+    "--tw-sepia": "",
+    "--tw-drop-shadow": "",
+    "--tw-backdrop-blur": "blur(24px)",
+    "--tw-backdrop-brightness": "",
+    "--tw-backdrop-contrast": "",
+    "--tw-backdrop-grayscale": "",
+    "--tw-backdrop-hue-rotate": "",
+    "--tw-backdrop-invert": "",
+    "--tw-backdrop-opacity": "",
+    "--tw-backdrop-saturate": "",
+    "--tw-backdrop-sepia": "",
+    "--tw-contain-size": "",
+    "--tw-contain-layout": "",
+    "--tw-contain-paint": "",
+    "--tw-contain-style": "",
+    "--tw-content": "\"\"",
+    "--primary": "210 40% 80%",
+    "--primary-foreground": "222 47% 11%",
+    "--background": "222 47% 11%",
+    "--foreground": "210 40% 98%",
+    "--card": "222 47% 14%",
+    "--card-foreground": "210 40% 98%",
+    "--popover": "222 47% 14%",
+    "--popover-foreground": "210 40% 98%",
+    "--secondary": "217 33% 17%",
+    "--secondary-foreground": "210 40% 98%",
+    "--muted": "210 40% 96%",
+    "--muted-foreground": "215 16% 47%",
+    "--accent": "199 89% 48%",
+    "--accent-foreground": "0 0% 100%",
+    "--destructive": "0 63% 31%",
+    "--destructive-foreground": "210 40% 98%",
+    "--border": "217 33% 17%",
+    "--input": "217 33% 17%",
+    "--ring": "199 89% 48%",
+    "--radius": ".5rem",
+    "--accent-sky": "199 89% 48%",
+    "--accent-sky-light": "199 89% 65%",
+    "--accent-sky-dark": "199 89% 38%",
+    "--slate-950": "222 47% 11%",
+    "--slate-50": "210 40% 98%",
+    "--forest": "222 47% 11%",
+    "--emerald": "160 84% 39%",
+    "--indigo": "234 89% 74%",
+    "--amber": "38 92% 50%",
+    "--sidebar-background": "222 47% 11%",
+    "--sidebar-foreground": "210 40% 98%",
+    "--sidebar-primary": "210 40% 80%",
+    "--sidebar-primary-foreground": "222 47% 11%",
+    "--sidebar-accent": "217 33% 17%",
+    "--sidebar-accent-foreground": "210 40% 98%",
+    "--sidebar-border": "217 33% 17%",
+    "--sidebar-ring": "199 89% 48%",
+    "--tw-space-x-reverse": "0",
+    "--tw-space-y-reverse": "0",
+    "--tw-border-opacity": "1",
+    "--tw-bg-opacity": "1",
+    "--tw-gradient-from": "#7c3aed var(--tw-gradient-from-position)",
+    "--tw-gradient-to": "#7e22ce var(--tw-gradient-to-position)",
+    "--tw-gradient-stops": "var(--tw-gradient-from), var(--tw-gradient-to)",
+    "--tw-text-opacity": "1",
+    "--tw-shadow-color": "hsl(var(--accent) / .3)",
+    "--tw-ring-opacity": "1",
+    "--tw-enter-opacity": "0",
+    "--tw-enter-scale": ".95",
+    "--tw-enter-rotate": "initial",
+    "--tw-enter-translate-x": "100%",
+    "--tw-enter-translate-y": "-100%",
+    "--tw-exit-opacity": "0",
+    "--tw-exit-scale": ".95",
+    "--tw-exit-rotate": "initial",
+    "--tw-exit-translate-x": "100%",
+    "--tw-exit-translate-y": "-48%",
+    "--toast-icon-margin-start": "4px",
+    "--toast-icon-margin-end": "-3px",
+    "--toast-svg-margin-start": "0px",
+    "--toast-svg-margin-end": "-1px",
+    "--toast-button-margin-start": "0",
+    "--toast-button-margin-end": "auto",
+    "--toast-close-button-start": "unset",
+    "--toast-close-button-end": "0",
+    "--toast-close-button-transform": "translate(35%, -35%)",
+    "--gray1": "hsl(0, 0%, 99%)",
+    "--gray2": "hsl(0, 0%, 97.3%)",
+    "--gray3": "hsl(0, 0%, 95.1%)",
+    "--gray4": "hsl(0, 0%, 93%)",
+    "--gray5": "hsl(0, 0%, 90.9%)",
+    "--gray6": "hsl(0, 0%, 88.7%)",
+    "--gray7": "hsl(0, 0%, 85.8%)",
+    "--gray8": "hsl(0, 0%, 78%)",
+    "--gray9": "hsl(0, 0%, 56.1%)",
+    "--gray10": "hsl(0, 0%, 52.3%)",
+    "--gray11": "hsl(0, 0%, 43.5%)",
+    "--gray12": "hsl(0, 0%, 9%)",
+    "--border-radius": "8px",
+    "--y": "translateY(40%)",
+    "--lift-amount": "calc(var(--lift) * var(--gap))",
+    "--lift": "-1",
+    "--scale": "var(--toasts-before) * .05 + 1",
+    "--normal-bg": "#000",
+    "--normal-border": "hsl(0, 0%, 20%)",
+    "--normal-text": "var(--gray1)",
+    "--success-bg": "hsl(150, 100%, 6%)",
+    "--success-border": "hsl(147, 100%, 12%)",
+    "--success-text": "hsl(150, 86%, 65%)",
+    "--info-bg": "hsl(215, 100%, 6%)",
+    "--info-border": "hsl(223, 100%, 12%)",
+    "--info-text": "hsl(216, 87%, 65%)",
+    "--warning-bg": "hsl(64, 100%, 6%)",
+    "--warning-border": "hsl(60, 100%, 12%)",
+    "--warning-text": "hsl(46, 87%, 65%)",
+    "--error-bg": "hsl(358, 76%, 10%)",
+    "--error-border": "hsl(357, 89%, 16%)",
+    "--error-text": "hsl(358, 100%, 81%)",
+    "--normal-bg-hover": "hsl(0, 0%, 12%)",
+    "--normal-border-hover": "hsl(0, 0%, 25%)",
+    "--size": "16px"
+  },
+  "stylesheets": [
+    "https://fonts.googleapis.com/css2?family=Instrument+Serif&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500;9..40,600;9..40,700&family=Newsreader:ital,wght@0,400;0,500;1,400;1,500&display=swap",
+    "https://smilecenter.com/assets/index-Cysb1QlK.css"
+  ],
+  "headings": [
+    {
+      "tag": "H1",
+      "text": "Emergency Dentist Open Now"
+    },
+    {
+      "tag": "H2",
+      "text": "Are You Experiencing a Dental Emergency"
+    },
+    {
+      "tag": "H3",
+      "text": "Severe Toothache"
+    },
+    {
+      "tag": "H3",
+      "text": "Broken or Chipped Tooth"
+    },
+    {
+      "tag": "H3",
+      "text": "Knocked-Out Tooth"
+    },
+    {
+      "tag": "H3",
+      "text": "Dental Abscess"
+    },
+    {
+      "tag": "H2",
+      "text": "Same-Day Emergency Dental Services"
+    },
+    {
+      "tag": "H3",
+      "text": "Why Choose Smile Center for Emergencies?"
+    },
+    {
+      "tag": "H2",
+      "text": "Emergency Dentist Near You"
+    },
+    {
+      "tag": "H3",
+      "text": "Long Beach"
+    },
+    {
+      "tag": "H3",
+      "text": "Downey"
+    },
+    {
+      "tag": "H3",
+      "text": "Whittier"
+    },
+    {
+      "tag": "H3",
+      "text": "Palmdale"
+    },
+    {
+      "tag": "H3",
+      "text": "Panorama City"
+    },
+    {
+      "tag": "H2",
+      "text": "Emergency Dental FAQs"
+    },
+    {
+      "tag": "H2",
+      "text": "Dental Emergency? We're Here to Help."
+    },
+    {
+      "tag": "H2",
+      "text": "Related Treatments"
+    },
+    {
+      "tag": "H3",
+      "text": "Dental Implants"
+    },
+    {
+      "tag": "H3",
+      "text": "Root Canal"
+    },
+    {
+      "tag": "H3",
+      "text": "Porcelain Veneers"
+    },
+    {
+      "tag": "H4",
+      "text": "Top Procedures"
+    },
+    {
+      "tag": "H4",
+      "text": "Locations"
+    },
+    {
+      "tag": "H4",
+      "text": "Patient Resources"
+    }
+  ],
+  "links": [
+    "https://smilecenter.com/",
+    "https://smilecenter.com/locations",
+    "https://smilecenter.com/locations/downey",
+    "https://smilecenter.com/locations/long-beach",
+    "https://smilecenter.com/locations/whittier",
+    "https://smilecenter.com/locations/palmdale",
+    "https://smilecenter.com/locations/panorama-city",
+    "https://smilecenter.com/treatments",
+    "https://smilecenter.com/treatments/emergency-dentistry",
+    "https://smilecenter.com/treatments/dental-implants",
+    "https://smilecenter.com/treatments/invisalign",
+    "https://smilecenter.com/treatments/root-canal",
+    "https://smilecenter.com/treatments/veneers",
+    "https://smilecenter.com/about",
+    "https://smilecenter.com/reviews",
+    "https://smilecenter.com/admin/login",
+    "https://smilecenter.com/treatments/emergency-dentistry#",
+    "https://smilecenter.com/resources",
+    "https://smilecenter.com/privacy-policy",
+    "https://smilecenter.com/accessibility",
+    "https://smilecenter.com/sitemap"
+  ],
+  "navLinks": [
+    {
+      "text": "Smile Center\nDENTISTRY",
+      "href": "https://smilecenter.com/"
+    },
+    {
+      "text": "Find a Location",
+      "href": "https://smilecenter.com/locations"
+    },
+    {
+      "text": "Treatments",
+      "href": "https://smilecenter.com/treatments"
+    },
+    {
+      "text": "About Dr. Nikjoo",
+      "href": "https://smilecenter.com/about"
+    },
+    {
+      "text": "Leave a Review",
+      "href": "https://smilecenter.com/reviews"
+    },
+    {
+      "text": "(562) 203-1483",
+      "href": "tel:5622031483"
+    },
+    {
+      "text": "Log In",
+      "href": "https://smilecenter.com/admin/login"
+    }
+  ],
+  "phones": [
+    "5622031483",
+    "5624221000",
+    "5629044800",
+    "5624633332",
+    "6612657694"
+  ],
+  "emails": [],
+  "images": [
+    {
+      "src": "https://smilecenter.com/assets/emergency-dentistry-BkR-0rAC.jpg",
+      "alt": "Emergency dentist performing same-day tooth extraction at Smile Center Downey CA",
+      "w": 1920,
+      "h": 1080
+    }
+  ],
+  "bgImages": [],
+  "videos": [],
+  "iframes": [],
+  "jsonLd": [
+    "{\"@context\":\"https://schema.org\",\"@type\":\"MedicalWebPage\",\"name\":\"Emergency Dentist Open Now | Same-Day Tooth Extraction | Walk-In Dental Care\",\"description\":\"Walk-in emergency dentist open now in Long Beach, Downey, Whittier & Palmdale. Same-day tooth extraction, broken tooth repair, sedation dentistry for anxiety. No appointment needed. Call now!\",\"url\":\"https://smilecenter.com/treatments/emergency-dentistry\",\"inLanguage\":\"en\",\"speakable\":{\"@type\":\"SpeakableSpecification\",\"cssSelector\":[\"h1\",\".hero-description\"]},\"mainEntity\":{\"@type\":\"MedicalProcedure\",\"name\":\"Emergency Dental Care\",\"procedureType\":\"http://schema.org/NoninvasiveProcedure\",\"description\":\"Walk-in emergency dentist open now in Long Beach, Downey, Whittier & Palmdale. Same-day tooth extraction, broken tooth repair, sedation dentistry for anxiety. No appointment needed. Call now!\",\"provider\":{\"@type\":\"Dentist\",\"@id\":\"https://smilecenter.com/#dentist\",\"name\":\"Smile Center\"},\"aggregateRating\":{\"@type\":\"AggregateRating\",\"ratingValue\":\"4.9\",\"reviewCount\":\"187\",\"bestRating\":\"5\",\"worstRating\":\"1\"},\"offers\":{\"@type\":\"Offer\",\"priceRange\":\"$$\",\"availability\":\"https://schema.org/InStock\"}}}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"BreadcrumbList\",\"itemListElement\":[{\"@type\":\"ListItem\",\"position\":1,\"name\":\"Home\",\"item\":\"https://smilecenter.com/\"},{\"@type\":\"ListItem\",\"position\":2,\"name\":\"Treatments\",\"item\":\"https://smilecenter.com/treatments\"},{\"@type\":\"ListItem\",\"position\":3,\"name\":\"Emergency Dentistry\"}]}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"What qualifies as a dental emergency?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Severe toothaches, knocked-out teeth, broken teeth, dental abscesses, lost fillings or crowns, and uncontrolled bleeding are all dental emergencies that require immediate care.\"}},{\"@type\":\"Question\",\"name\":\"Do you accept walk-ins for emergencies?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes! We welcome walk-in emergency patients during business hours. For after-hours emergencies, call our main line and follow the prompts for emergency care instructions.\"}},{\"@type\":\"Question\",\"name\":\"Will I be seen the same day?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Absolutely. Dental emergencies are our priority. Call now and we'll get you in as quickly as possible — often within the hour.\"}},{\"@type\":\"Question\",\"name\":\"Do you offer sedation for anxious patients?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Yes! We offer sedation dentistry options for patients with dental anxiety, including nitrous oxide (laughing gas) and oral sedation to help you stay calm during treatment.\"}}]}"
+  ],
+  "text": "Smile Center\nDENTISTRY\nFind a Location\nTreatments\nAbout Dr. Nikjoo\nLeave a Review\n(562) 203-1483\nEN\nLog In\nBook Online\nOpen for Emergencies\nEmergency Dentist Open Now\n\nDon't suffer through dental pain. Walk-in emergency dental care with same-day appointments. No referral needed. Most insurance accepted.\n\nSame-Day Appointments\nSedation Available\nCall Now\nBook Emergency Visit\nAre You Experiencing a Dental Emergency\n\nDon't wait — dental emergencies can worsen quickly. We're here to help with immediate relief.\n\nSevere Toothache\n\nThrobbing pain that won't go away, keeping you up at night\n\nBroken or Chipped Tooth\n\nCracked from an accident, sports injury, or biting something hard\n\nKnocked-Out Tooth\n\nTime-sensitive emergency — every minute counts for saving your tooth\n\nDental Abscess\n\nPainful infection causing swelling, fever, or a bad taste in your mouth\n\nSame-Day Emergency Dental Services\n\nFrom severe toothaches to knocked-out teeth, our emergency dentists are trained to handle all urgent dental situations with care and precision.\n\nSame-day tooth extraction\nBroken tooth repair & bonding\nEmergency root canal therapy\nAbscess drainage & antibiotics\nLost filling or crown replacement\nSevere toothache relief\nKnocked-out tooth reimplantation\nDental trauma treatment\nWhy Choose Smile Center for Emergencies?\n\nWhen dental pain strikes, you need a team that can see you fast and get you relief right away.\n\nSame-day appointments guaranteed\nMost insurance plans accepted\nFlexible payment options available\nSedation for anxious patients\nEmergency Dentist Near You\n\n5 convenient locations across Southern California. Walk-ins welcome.\n\nLong Beach\n(562) 422-1000\nView Location\nDowney\n(562) 904-4800\nView Location\nWhittier\n(562) 463-3332\nView Location\nPalmdale\n(661) 265-7694\nView Location\nPanorama City\n(562) 422-1000\nView Location\nEmergency Dental FAQs\nWhat qualifies as a dental emergency?\nDo you accept walk-ins for emergencies?\nWill I be seen the same day?\nDo you offer sedation for anxious patients?\nDental Emergency? We're Here to Help.\n\nDon't wait in pain. Call now for same-day emergency dental care.\n\nCall (562) 422-1000\nRelated Treatments\n\nExplore other services that may complement your treatment.\n\nDental Implants\n\nPermanent tooth replacement with 98% success rate\n\nLearn more\nRoot Canal\n\nPain-free treatment to save your natural tooth\n\nLearn more\nPorcelain Veneers\n\nTransform your smile with custom veneers\n\nLearn more\n\nReady to schedule your consultation?\n\nFind a Location Near You\nSmile Center\nDENTISTRY\n\nModern Dentistry for\nSouthern California\n\n4.9 Stars on Google\nTop Procedures\nEmergency Dentistry\nDental Implants\nInvisalign® Aligners\nRoot Canal Therapy\nPorcelain Veneers\nLocations\nDentist in Downey\nDentist in Long Beach\nDentist in Whittier\nDentist in Palmdale\nDentist in Panorama City\nPatient Resources\nInsurance Accepted\nMembership Plan\nPay Bill Online\nCareers\nBlog / Articles\nLeave a Review\n\n© 2026 Smile Center. All rights reserved. Powered by Upgo.\n\nPrivacy Policy\nAccessibility Statement\nSitemap\n\nWe use cookies to enhance your browsing experience and analyze site traffic. By clicking \"Accept All\", you consent to our use of cookies. Privacy Policy\n\nAccept All\nReject All"
+}

@@ -1,0 +1,625 @@
+{
+  "url": "https://yjoms.com/about-full-arch/",
+  "title": "Full-Arch Restoration | YJ OMS Dental Implants & Oral Surgery",
+  "metaDescription": "Full-arch restoration offers a fixed, long-term solution for patients missing most or all teeth. Learn how YJ OMS in Placentia and Huntington Beach, CA can help restore your smile and quality of life.",
+  "bodyFont": "\"Inter Variable\", sans-serif",
+  "bodyBg": "rgba(0, 0, 0, 0)",
+  "topColors": [
+    [
+      "rgb(95, 95, 95)",
+      775
+    ],
+    [
+      "rgb(28, 36, 80)",
+      492
+    ],
+    [
+      "rgb(255, 255, 255)",
+      78
+    ],
+    [
+      "oklch(0.446 0.03 256.802)",
+      22
+    ],
+    [
+      "oklch(0.21 0.034 264.665)",
+      20
+    ],
+    [
+      "oklch(0.373 0.034 259.733)",
+      18
+    ],
+    [
+      "rgb(0, 0, 0)",
+      11
+    ],
+    [
+      "rgb(10, 183, 235)",
+      10
+    ],
+    [
+      "oklch(0.98 0 0)",
+      9
+    ],
+    [
+      "rgb(26, 47, 110)",
+      6
+    ],
+    [
+      "oklch(1 0 0)",
+      5
+    ],
+    [
+      "oklab(0.999994 0.0000455678 0.0000200868 / 0.95)",
+      5
+    ],
+    [
+      "oklab(0.279938 0.00340302 -0.0806395 / 0.05)",
+      5
+    ],
+    [
+      "oklch(0.872 0.01 258.338)",
+      5
+    ],
+    [
+      "rgb(242, 248, 250)",
+      4
+    ],
+    [
+      "oklab(0.279938 0.00340302 -0.0806395)",
+      4
+    ],
+    [
+      "oklch(0.967 0.003 264.542)",
+      4
+    ],
+    [
+      "oklch(0.928 0.006 264.531)",
+      4
+    ],
+    [
+      "oklab(0.98 0 0)",
+      3
+    ],
+    [
+      "oklab(0.999994 0.0000455677 0.0000200868 / 0.8)",
+      2
+    ],
+    [
+      "oklch(0.95 0 0)",
+      2
+    ],
+    [
+      "oklab(0.975174 -0.00529358 -0.00438994 / 0.6)",
+      1
+    ]
+  ],
+  "topFonts": [
+    [
+      "\"Inter Variable\", sans-serif",
+      353
+    ]
+  ],
+  "cssVars": {
+    "--f-button-width": "var(--f-close-button-width)",
+    "--f-button-height": "var(--f-close-button-height)",
+    "--f-button-border": "0",
+    "--f-button-border-radius": "var(--f-close-border-radius)",
+    "--f-button-color": "var(--f-close-button-color)",
+    "--f-button-bg": "var(--f-close-button-bg)",
+    "--f-button-shadow": "none",
+    "--f-button-transition": "all .2s ease",
+    "--f-button-transform": "none",
+    "--f-button-outline-width": "1px",
+    "--f-button-outline-color": "rgba(0, 0, 0, .85)",
+    "--f-button-svg-width": "var(--f-close-button-svg-width)",
+    "--f-button-svg-height": "var(--f-close-button-svg-height)",
+    "--f-button-svg-stroke-width": "var(--f-close-button-svg-stroke-width)",
+    "--f-button-svg-fill": "none",
+    "--f-button-svg-filter": "none",
+    "--f-button-svg-opacity": "1",
+    "--f-button-svg-disabled-opacity": ".5",
+    "--f-button-svg-transition": "opacity .15s ease",
+    "--f-button-svg-transform": "none",
+    "--f-spinner-color-1": "rgba(0, 0, 0, .2)",
+    "--f-spinner-color-2": "rgba(0, 0, 0, .8)",
+    "--f-spinner-width": "50px",
+    "--f-spinner-height": "50px",
+    "--f-spinner-border-radius": "50%",
+    "--f-spinner-border-width": "3.5px",
+    "--f-button-hover-bg": "var(--f-close-button-hover-bg)",
+    "--f-button-active-bg": "var(--f-close-button-active-bg)",
+    "--f-button-hover-color": "var(--f-close-button-hover-color)",
+    "--f-button-active-color": "var( --f-arrow-active-color, var(--f-arrow-hover-color) )",
+    "--f-thumbs-gap": "8px",
+    "--f-thumbs-margin": "0px",
+    "--f-thumbs-padding-x": "0",
+    "--f-thumbs-padding-y": "unset",
+    "--f-thumbs-bg": "none",
+    "--f-thumbs-transition": "none",
+    "--f-thumbs-z-index": "1",
+    "--f-thumbs-viewport-padding-x": "4px",
+    "--f-thumbs-viewport-padding-y": "0px",
+    "--f-thumb-width": "94px",
+    "--f-thumb-height": "76px",
+    "--f-thumb-clip-width": "46px",
+    "--f-thumb-extra-gap": "16px",
+    "--f-thumb-opacity": "1",
+    "--f-thumb-transition": "all .2s ease",
+    "--f-thumb-border": "none",
+    "--f-thumb-border-radius": "4px",
+    "--f-thumb-shadow": "none",
+    "--f-thumb-bg": "linear-gradient(#ebeff2, #e2e8f0)",
+    "--f-thumb-focus-shadow": "0 0 0 1.8px #fff, 0px 0px 0px 2.25px #888",
+    "--f-thumb-selected-shadow": "0 0 0 1.8px #fff, 0px 0px 0px 2.25px #000",
+    "--f-thumb-border-transition": "all .1s ease",
+    "--f-thumb-img-width": "100%",
+    "--f-thumb-img-height": "100%",
+    "--f-thumb-img-fit": "cover",
+    "--f-thumb-img-position": "50% 20%",
+    "--f-carousel-slide-width": "100%",
+    "--f-carousel-slide-height": "100%",
+    "--f-carousel-gap": "17px",
+    "--width-diff": "calc((var(--f-thumb-width) - var(--f-thumb-clip-width)))",
+    "--clip-shift": "calc((var(--width-diff) * .5) * var(--progress))",
+    "--clip-path": "inset( 0 var(--clip-shift) round var(--f-thumb-border-radius, 0) )",
+    "--f-transition-duration": "0s",
+    "--f-transition-easing": "ease-out",
+    "--f-progressbar-height": "100%",
+    "--f-progressbar-color": "rgba(111, 111, 116)",
+    "--f-progressbar-opacity": ".2",
+    "--f-progressbar-z-index": "30",
+    "--fancybox-color": "#222",
+    "--fancybox-backdrop-bg": "rgba(255, 255, 255, .97)",
+    "--f-toolbar-margin": "0",
+    "--f-toolbar-padding": "8px",
+    "--f-toolbar-gap": "0",
+    "--f-toolbar-color": "var(--fancybox-color, #222)",
+    "--f-toolbar-font-size": "16px",
+    "--f-toolbar-font-weight": "400",
+    "--f-toolbar-font": "-apple-system, BlinkMacSystemFont, \"Segoe UI Adjusted\", \"Segoe UI\", \"Liberation Sans\", sans-serif",
+    "--f-toolbar-line-height": "var(--f-button-height)",
+    "--f-toolbar-text-shadow": "none",
+    "--f-toolbar-shadow": "none",
+    "--f-toolbar-bg": "none",
+    "--f-counter-margin": "0",
+    "--f-counter-padding": "0px 10px",
+    "--f-counter-gap": "4px",
+    "--f-counter-line-height": "var(--f-button-height)",
+    "--f-carousel-slide-padding": "0",
+    "--f-carousel-slide-bg": "unset",
+    "--f-html-color": "var(--f-error-color, --f-html-color)",
+    "--f-html-bg": "var(--f-error-bg, --f-html-bg)",
+    "--f-error-color": "#555",
+    "--f-error-bg": "#fff",
+    "--f-caption-margin": "0",
+    "--f-caption-padding": "16px 8px",
+    "--f-caption-color": "#333",
+    "--f-caption-bg": "transparent",
+    "--f-caption-font": "inherit",
+    "--f-caption-line-height": "1.375",
+    "--f-button-outline-offset": "0px",
+    "--f-arrow-pos": "32px",
+    "--f-arrow-width": "50px",
+    "--f-arrow-height": "50px",
+    "--f-arrow-svg-width": "24px",
+    "--f-arrow-svg-height": "24px",
+    "--f-arrow-svg-stroke-width": "1.3",
+    "--f-arrow-border-radius": "50%",
+    "--f-arrow-bg": "rgba(255, 255, 255, .85)",
+    "--f-arrow-color": "#333",
+    "--f-arrow-hover-color": "#000",
+    "--f-close-button-width": "30px",
+    "--f-close-button-height": "30px",
+    "--f-close-button-svg-width": "24px",
+    "--f-close-button-svg-height": "24px",
+    "--f-close-button-svg-stroke-width": "1.75",
+    "--f-close-border-radius": "4px",
+    "--f-close-button-color": "#555",
+    "--f-close-button-hover-color": "#000",
+    "--f-close-button-bg": "transparent",
+    "--f-close-button-hover-bg": "transparent",
+    "--f-close-button-active-bg": "transparent",
+    "--f-thumb-transform": "none",
+    "--f-thumb-focus-opacity": "1",
+    "--f-thumb-focus-border": "none",
+    "--f-thumb-focus-transform": "none",
+    "--f-thumb-hover-opacity": "1",
+    "--f-thumb-hover-border": "none",
+    "--f-thumb-hover-transform": "none",
+    "--f-thumb-active-opacity": "var(--f-thumb-hover-opacity)",
+    "--f-thumb-active-border": "var(--f-thumb-hover-border)",
+    "--f-thumb-active-transform": "var(--f-thumb-hover-transform)",
+    "--f-thumb-selected-opacity": "1",
+    "--f-thumb-selected-border": "none",
+    "--f-thumb-selected-transform": "none",
+    "--f-scrollbar-width": "7px",
+    "--f-scrollbar-track-bg": "#ddd",
+    "--f-scrollbar-track-border-radius": "10px",
+    "--f-scrollbar-track-shadow": "inset 0 0 6px rgba(0, 0, 0, .2)",
+    "--f-scrollbar-thumb-bg": "#444",
+    "--f-scrollbar-thumb-border-radius": "10px",
+    "--f-video-bg": "#fff",
+    "--f-thumbs-cols": "1"
+  },
+  "stylesheets": [
+    "https://yjoms.com/_astro/fancybox.DvjMyCCO.css",
+    "https://yjoms.com/_astro/Layout.5pc8uUJq.css"
+  ],
+  "headings": [
+    {
+      "tag": "H1",
+      "text": "A NEW SMILE. A FRESH START.\nTEETH THAT FEEL LIKE YOUR OWN."
+    },
+    {
+      "tag": "H2",
+      "text": "What Patients Are Saying"
+    },
+    {
+      "tag": "H2",
+      "text": "Full-Arch May Be Right for You If You:"
+    },
+    {
+      "tag": "H2",
+      "text": "Contact Us"
+    },
+    {
+      "tag": "H2",
+      "text": "More Than Teeth—A Complete Upgrade to Your Daily Life"
+    },
+    {
+      "tag": "H3",
+      "text": "Fixed, Stable Teeth"
+    },
+    {
+      "tag": "H3",
+      "text": "Eat with Confidence Again"
+    },
+    {
+      "tag": "H3",
+      "text": "Natural Appearance"
+    },
+    {
+      "tag": "H3",
+      "text": "Improved Quality of Life"
+    },
+    {
+      "tag": "H2",
+      "text": "Advanced Planning. Precision Execution."
+    },
+    {
+      "tag": "H2",
+      "text": "What to Expect"
+    },
+    {
+      "tag": "H3",
+      "text": "Consultation & Evaluation"
+    },
+    {
+      "tag": "H3",
+      "text": "Personalized Treatment Plan"
+    },
+    {
+      "tag": "H3",
+      "text": "Surgical Placement & Restoration"
+    },
+    {
+      "tag": "H2",
+      "text": "You Don't Have to Keep Living This Way"
+    },
+    {
+      "tag": "H2",
+      "text": "A Long-Term Investment in Your Health and Confidence"
+    },
+    {
+      "tag": "H2",
+      "text": "Frequently Asked Questions"
+    },
+    {
+      "tag": "H2",
+      "text": "This Is More Than a Dental Procedure—It's a Life Upgrade"
+    }
+  ],
+  "links": [
+    "https://yjoms.com/about-full-arch/#main-content",
+    "https://yjoms.com/",
+    "https://yjoms.com/dental-implants-placentia-ca/",
+    "https://yjoms.com/dental-implants-huntington-beach-ca/",
+    "https://yjoms.com/wisdom-teeth-removal-placentia-ca/",
+    "https://yjoms.com/wisdom-teeth-removal-huntington-beach-ca/",
+    "https://yjoms.com/procedures/",
+    "https://yjoms.com/full-mouth-restoration/",
+    "https://yjoms.com/bone-grafting/",
+    "https://yjoms.com/tooth-extractions/",
+    "https://yjoms.com/cosmetic-procedures/",
+    "https://yjoms.com/orthognathic-surgery/",
+    "https://yjoms.com/oral-pathology/",
+    "https://yjoms.com/facial-trauma/",
+    "https://yjoms.com/gum-grafting/",
+    "https://yjoms.com/implant-supported-dentures/",
+    "https://yjoms.com/sinus-lift/",
+    "https://yjoms.com/platelet-rich-plasma/",
+    "https://yjoms.com/tmj-treatment/",
+    "https://yjoms.com/botox-for-tmj/",
+    "https://yjoms.com/dental-trauma/",
+    "https://yjoms.com/zygomatic-and-pterygoid-implants/",
+    "https://yjoms.com/ridge-augmentation/",
+    "https://yjoms.com/bone-regeneration/",
+    "https://yjoms.com/bone-resorption/",
+    "https://yjoms.com/single-tooth-replacement/",
+    "https://yjoms.com/multiple-teeth-replacement/",
+    "https://yjoms.com/aesthetic-dental-implants/",
+    "https://yjoms.com/about-us/",
+    "https://yjoms.com/registration-placentia/",
+    "https://yjoms.com/registration-huntington-beach/",
+    "https://yjoms.com/your-first-visit/#financial--insurance-information",
+    "https://yjoms.com/instructions/#pre",
+    "https://yjoms.com/instructions/#post",
+    "https://yjoms.com/referral-placentia/",
+    "https://yjoms.com/referral-huntington-beach/",
+    "https://yjoms.com/pay-online/",
+    "https://yjoms.com/contact-us/",
+    "https://yjoms.com/search-results/",
+    "https://yjoms.com/young-jun-dds-md-facs/",
+    "https://yjoms.com/david-roe-dmd/",
+    "https://yjoms.com/your-first-visit/",
+    "https://yjoms.com/anesthesia/",
+    "https://yjoms.com/3d-imaging/",
+    "https://yjoms.com/oral-surgery-placentia-ca/",
+    "https://yjoms.com/oral-surgery-huntington-beach-ca/",
+    "https://yjoms.com/instructions/",
+    "https://yjoms.com/blog/",
+    "https://yjoms.com/video-reviews/",
+    "https://yjoms.com/smile-gallery/",
+    "https://yjoms.com/about-full-arch/#dtc-form",
+    "https://www.google.com/maps/place/YJ+OMS+Dental+Implants+%26+Oral+Surgery/@33.8897686,-117.8544163,17z/data=!4m6!3m5!1s0x80dcd416299dba03:0x1e10a0c0b276edf6!8m2!3d33.8897686!4d-117.8544163!16s%2Fg%2F1td20kkt?entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D",
+    "https://www.google.com/maps/place/YJ+OMS+Dental+Implants+%26+Oral+Surgery/@33.7033467,-117.9878203,15z/data=!4m6!3m5!1s0x80dd26e960b5403f:0x5b31be789d728ad8!8m2!3d33.7018896!4d-117.9895521!16s%2Fg%2F1vljgmvj?entry=ttu&g_ep=EgoyMDI1MDQzMC4xIKXMDSoASAFQAw%3D%3D",
+    "https://www.facebook.com/yjomsdental/",
+    "https://www.instagram.com/yj_oms/?hl=en",
+    "https://yjoms.com/privacy-policy/",
+    "https://yjoms.com/terms-of-use/",
+    "https://yjoms.com/accessibility-statement/",
+    "https://yjoms.com/hipaa-compliance/"
+  ],
+  "navLinks": [
+    {
+      "text": "Dental Implants in Placentia, CA",
+      "href": "https://yjoms.com/dental-implants-placentia-ca/"
+    },
+    {
+      "text": "Dental Implants in Huntington Beach, CA",
+      "href": "https://yjoms.com/dental-implants-huntington-beach-ca/"
+    },
+    {
+      "text": "Wisdom Teeth in Placentia, CA",
+      "href": "https://yjoms.com/wisdom-teeth-removal-placentia-ca/"
+    },
+    {
+      "text": "Wisdom Teeth in Huntington Beach, CA",
+      "href": "https://yjoms.com/wisdom-teeth-removal-huntington-beach-ca/"
+    },
+    {
+      "text": "All Procedures",
+      "href": "https://yjoms.com/procedures/"
+    },
+    {
+      "text": "Dental Implants in Placentia, CA",
+      "href": "https://yjoms.com/dental-implants-placentia-ca/"
+    },
+    {
+      "text": "Dental Implants in Huntington Beach, CA",
+      "href": "https://yjoms.com/dental-implants-huntington-beach-ca/"
+    },
+    {
+      "text": "Wisdom Teeth in Placentia, CA",
+      "href": "https://yjoms.com/wisdom-teeth-removal-placentia-ca/"
+    },
+    {
+      "text": "Wisdom Teeth in Huntington Beach, CA",
+      "href": "https://yjoms.com/wisdom-teeth-removal-huntington-beach-ca/"
+    },
+    {
+      "text": "Full-Arch Restoration",
+      "href": "https://yjoms.com/full-mouth-restoration/"
+    },
+    {
+      "text": "Bone Grafting",
+      "href": "https://yjoms.com/bone-grafting/"
+    },
+    {
+      "text": "Tooth Extractions",
+      "href": "https://yjoms.com/tooth-extractions/"
+    },
+    {
+      "text": "Cosmetic Procedures",
+      "href": "https://yjoms.com/cosmetic-procedures/"
+    },
+    {
+      "text": "Orthognathic Surgery",
+      "href": "https://yjoms.com/orthognathic-surgery/"
+    },
+    {
+      "text": "Oral Pathology",
+      "href": "https://yjoms.com/oral-pathology/"
+    },
+    {
+      "text": "Facial Trauma",
+      "href": "https://yjoms.com/facial-trauma/"
+    },
+    {
+      "text": "Gum Grafting",
+      "href": "https://yjoms.com/gum-grafting/"
+    },
+    {
+      "text": "Implant Supported Dentures",
+      "href": "https://yjoms.com/implant-supported-dentures/"
+    },
+    {
+      "text": "Sinus Lift",
+      "href": "https://yjoms.com/sinus-lift/"
+    },
+    {
+      "text": "Platelet Rich Plasma",
+      "href": "https://yjoms.com/platelet-rich-plasma/"
+    },
+    {
+      "text": "TMJ Treatment",
+      "href": "https://yjoms.com/tmj-treatment/"
+    },
+    {
+      "text": "BOTOX for TMJ",
+      "href": "https://yjoms.com/botox-for-tmj/"
+    },
+    {
+      "text": "Dental Trauma",
+      "href": "https://yjoms.com/dental-trauma/"
+    },
+    {
+      "text": "Zygomatic and Pterygoid Implants",
+      "href": "https://yjoms.com/zygomatic-and-pterygoid-implants/"
+    },
+    {
+      "text": "Ridge Augmentation",
+      "href": "https://yjoms.com/ridge-augmentation/"
+    },
+    {
+      "text": "Bone Regeneration",
+      "href": "https://yjoms.com/bone-regeneration/"
+    },
+    {
+      "text": "Bone Resorption",
+      "href": "https://yjoms.com/bone-resorption/"
+    },
+    {
+      "text": "Single Tooth Replacement",
+      "href": "https://yjoms.com/single-tooth-replacement/"
+    },
+    {
+      "text": "Multiple Teeth Replacement",
+      "href": "https://yjoms.com/multiple-teeth-replacement/"
+    },
+    {
+      "text": "Aesthetic Dental Implants",
+      "href": "https://yjoms.com/aesthetic-dental-implants/"
+    },
+    {
+      "text": "About Us",
+      "href": "https://yjoms.com/about-us/"
+    },
+    {
+      "text": "Patient Registration - Placentia",
+      "href": "https://yjoms.com/registration-placentia/"
+    },
+    {
+      "text": "Patient Registration - Huntington Beach",
+      "href": "https://yjoms.com/registration-huntington-beach/"
+    },
+    {
+      "text": "Payment & Insurance",
+      "href": "https://yjoms.com/your-first-visit/#financial--insurance-information"
+    },
+    {
+      "text": "Before Surgery Instructions",
+      "href": "https://yjoms.com/instructions/#pre"
+    },
+    {
+      "text": "After Surgery Instructions",
+      "href": "https://yjoms.com/instructions/#post"
+    },
+    {
+      "text": "Referral Form - Placentia",
+      "href": "https://yjoms.com/referral-placentia/"
+    },
+    {
+      "text": "Referral Form - Huntington Beach",
+      "href": "https://yjoms.com/referral-huntington-beach/"
+    },
+    {
+      "text": "Pay Online",
+      "href": "https://yjoms.com/pay-online/"
+    },
+    {
+      "text": "Contact Us",
+      "href": "https://yjoms.com/contact-us/"
+    }
+  ],
+  "phones": [
+    "+17144106684",
+    "+17148884684",
+    "7142159614",
+    "7146134382"
+  ],
+  "emails": [
+    "info@yjoms.com",
+    "hb@yjoms.com"
+  ],
+  "images": [
+    {
+      "src": "https://res.cloudinary.com/nuvolum/image/upload/c_limit,w_260/f_auto/q_auto/v1/YJOMS/DEV/yjoms-logo?_a=BBGMR9GW0",
+      "alt": "Yjoms logo",
+      "w": 260,
+      "h": 185
+    },
+    {
+      "src": "https://res.cloudinary.com/nuvolum/image/upload/c_limit,w_80/f_auto/q_auto/v1/YJOMS/DEV/yjoms-favicon?_a=BBGMR9GW0",
+      "alt": "Yjoms favicon",
+      "w": 0,
+      "h": 0
+    },
+    {
+      "src": "https://res.cloudinary.com/nuvolum/image/upload/c_limit,w_1668/f_auto/q_auto/v1/YJOMS/DEV/TESTIMONIALS/wendy-all-on-4-testimonial-desktop?_a=BBGMR9GW0",
+      "alt": "Wendy all on 4 testimonial desktop",
+      "w": 1440,
+      "h": 809
+    },
+    {
+      "src": "https://res.cloudinary.com/nuvolum/image/upload/c_limit,w_1668/f_auto/q_auto/v1/YJOMS/DEV/TESTIMONIALS/steve-all-on-4-testimonial-desktop?_a=BBGMR9GW0",
+      "alt": "Steve all on 4 testimonial desktop",
+      "w": 1440,
+      "h": 809
+    },
+    {
+      "src": "https://res.cloudinary.com/nuvolum/image/upload/c_limit,w_1668/f_auto/q_auto/v1/YJOMS/DEV/TESTIMONIALS/steve2-all-on-4-testimonial-desktop?_a=BBGMR9GW0",
+      "alt": "Steve2 all on 4 testimonial desktop",
+      "w": 1440,
+      "h": 809
+    },
+    {
+      "src": "https://res.cloudinary.com/nuvolum/image/upload/c_limit,w_740/f_auto/q_auto/v1/YJOMS/DEV/DTC/do-you-have-missing-teeth?_a=BBGMR9GW0",
+      "alt": "Do you have missing teeth",
+      "w": 740,
+      "h": 821
+    },
+    {
+      "src": "https://res.cloudinary.com/nuvolum/image/upload/c_limit,w_1022/f_auto/q_auto/v1/YJOMS/DEV/DTC/better-living-with-full-arch-restoration?_a=BBGMR9GW0",
+      "alt": "Better living with full arch restoration",
+      "w": 1022,
+      "h": 1000
+    },
+    {
+      "src": "https://res.cloudinary.com/nuvolum/image/upload/c_limit,w_1170/f_auto/q_auto/v1/YJOMS/DEV/DTC/schedule-your-consultation-today?_a=BBGMR9GW0",
+      "alt": "Schedule your consultation today",
+      "w": 1170,
+      "h": 856
+    },
+    {
+      "src": "https://res.cloudinary.com/nuvolum/image/upload/c_limit,w_192/f_auto/q_auto/v1/YJOMS/DEV/yjoms-favicon?_a=BBGMR9GW0",
+      "alt": "Yjoms favicon",
+      "w": 192,
+      "h": 192
+    }
+  ],
+  "bgImages": [
+    "https://res.cloudinary.com/nuvolum/image/upload/q_auto/f_auto/v1/YJOMS/DEV/DTC/yjoms-dtc-banner-background"
+  ],
+  "videos": [],
+  "iframes": [],
+  "jsonLd": [
+    "{\n  \"@context\": {\n    \"@vocab\": \"https://schema.org/\"\n  },\n  \"@graph\": [\n    {\n      \"@type\": \"WebPage\",\n      \"@id\": \"https://yjoms.com/about-full-arch/#webpage\",\n      \"url\": \"https://yjoms.com/about-full-arch/\",\n      \"inLanguage\": \"en-US\",\n      \"name\": \"YJ OMS Dental Implants & Oral Surgery\",\n      \"datePublished\": \"2026-03-10T15:43:00\",\n      \"dateModified\": \"2026-03-10T15:43:00\",\n      \"description\": \"Full-arch restoration offers a fixed, long-term solution for patients missing most or all teeth. Learn how YJ OMS in Placentia and Huntington Beach, CA can help restore your smile and quality of life.\",\n      \"image\": {\n        \"@type\": \"ImageObject\",\n        \"url\": \"https://res.cloudinary.com/nuvolum/image/upload/q_99,f_auto/v1/YJOMS/DEV/yjoms-social-image.jpg\",\n        \"width\": 1200,\n        \"height\": 627\n      }\n    },\n    {\n      \"@type\": \"WebSite\",\n      \"@id\": \"https://yjoms.com/about-full-arch/#website\",\n      \"url\": \"https://yjoms.com/about-full-arch/\",\n      \"thumbnailUrl\": \"https://res.cloudinary.com/nuvolum/image/upload/q_99,f_auto/v1/YJOMS/DEV/yjoms-social-image.jpg\",\n      \"name\": \"YJ OMS Dental Implants & Oral Surgery\",\n      \"potentialAction\": {\n        \"@type\": \"SearchAction\",\n        \"target\": \"https://yjoms.com/about-full-arch/search-results/?q={search_term_string}\",\n        \"query-input\": \"required name=search_term_string\"\n      }\n    },\n    {\n      \"@type\": \"Organization\",\n      \"@id\": \"https://yjoms.com/about-full-arch/\",\n      \"name\": \"YJ OMS Dental Implants & Oral Surgery\",\n      \"url\": \"https://yjoms.com/about-full-arch/\",\n      \"logo\": \"https://res.cloudinary.com/nuvolum/image/upload/q_99,f_auto/v1/YJOMS/DEV/yjoms-social-image.jpg\",\n      \"image\": \"https://res.cloudinary.com/nuvolum/image/upload/q_99,f_auto/v1/YJOMS/DEV/yjoms-social-image.jpg\",\n      \"sameAs\": [\n        \"https://www.google.com/maps/place/YJ+OMS+Dental+Implants+%26+Oral+Surgery/@33.7033467,-117.9878203,15z/data=!4m6!3m5!1s0x80dd26e960b5403f:0x5b31be789d728ad8!8m2!3d33.7018896!4d-117.9895521!16s%2Fg%2F1vljgmvj?entry=ttu&g_ep=EgoyMDI1MDQzMC4xIKXMDSoASAFQAw%3D%3D\",\n        \"https://www.google.com/maps/place/YJ+OMS+Dental+Implants+%26+Oral+Surgery/@33.8897686,-117.8544163,17z/data=!4m6!3m5!1s0x80dcd416299dba03:0x1e10a0c0b276edf6!8m2!3d33.8897686!4d-117.8544163!16s%2Fg%2F1td20kkt?entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D\",\n        \"https://www.facebook.com/yjomsdental/\",\n        \"https://www.instagram.com/yj_oms/?hl=en\"\n      ]\n    },\n    {\n      \"@type\": \"LocalBusiness\",\n      \"additionalType\": [\n        \"http://www.productontology.org/id/Dental_implant\",\n        \"http://www.productontology.org/id/Oral_and_maxillofacial_surgery\",\n        \"http://www.productontology.org/id/Wisdom_tooth\",\n        \"http://www.productontology.org/id/All-on-4\",\n        \"http://www.productontology.org/id/Bone_grafting\",\n        \"http://www.productontology.org/id/Tooth_impaction\",\n        \"http://www.productontology.org/id/Impacted_wisdom_teeth\",\n        \"http://www.productontology.org/id/Oral_and_maxillofacial_pathology\",\n        \"http://www.productontology.org/id/Facial_trauma\"\n      ],\n      \"parentOrganization\": {\n        \"name\": \"YJ OMS Dental Implants & Oral Surgery\",\n        \"@id\": \"https://yjoms.com/about-full-arch/#organization\"\n      },\n      \"image\": \"https://res.cloudinary.com/nuvolum/image/upload/q_99,f_auto/v1/YJOMS/DEV/yjoms-social-image.jpg\",\n      \"priceRange\": \"unset\",\n      \"name\": \"YJ OMS Dental Implants & Oral Surgery - Huntington Beach\",\n      \"telephone\": \"+17148476044\",\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"17931 Beach Blvd Suite #100\",\n        \"addressLocality\": \"Huntington Beach\",\n        \"addressRegion\": \"CA\",\n        \"postalCode\": \"92647\"\n      },\n      \"openingHours\": [\n        \"Mo 8:00-17:00\",\n        \"Tu 8:00-17:00\",\n        \"We 8:00-17:00\",\n        \"Th 8:00-17:00\",\n        \"Fr 8:00-17:00\",\n        \"Sa 00:00-00:00\",\n        \"Su 00:00-00:00\"\n      ],\n      \"hasmap\": \"https://www.google.com/maps/place/YJ+OMS+Dental+Implants+%26+Oral+Surgery/@33.7033467,-117.9878203,15z/data=!4m6!3m5!1s0x80dd26e960b5403f:0x5b31be789d728ad8!8m2!3d33.7018896!4d-117.9895521!16s%2Fg%2F1vljgmvj?entry=ttu&g_ep=EgoyMDI1MDQzMC4xIKXMDSoASAFQAw%3D%3D\",\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": \"33.7033467\",\n        \"longitude\": \"-117.9878203\"\n      }\n    },\n    {\n      \"@type\": \"LocalBusiness\",\n      \"additionalType\": [\n        \"http://www.productontology.org/id/Dental_implant\",\n        \"http://www.productontology.org/id/Oral_and_maxillofacial_surgery\",\n        \"http://www.productontology.org/id/Wisdom_tooth\",\n        \"http://www.productontology.org/id/All-on-4\",\n        \"http://www.productontology.org/id/Bone_grafting\",\n        \"http://www.productontology.org/id/Tooth_impaction\",\n        \"http://www.productontology.org/id/Impacted_wisdom_teeth\",\n        \"http://www.productontology.org/id/Oral_and_maxillofacial_pathology\",\n        \"http://www.productontology.org/id/Facial_trauma\"\n      ],\n      \"parentOrganization\": {\n        \"name\": \"YJ OMS Dental Implants & Oral Surgery\",\n        \"@id\": \"https://yjoms.com/about-full-arch/#organization\"\n      },\n      \"image\": \"https://res.cloudinary.com/nuvolum/image/upload/q_99,f_auto/v1/YJOMS/DEV/yjoms-social-image.jpg\",\n      \"priceRange\": \"unset\",\n      \"name\": \"YJ OMS Dental Implants & Oral Surgery - Placentia\",\n      \"telephone\": \"+17149859690\",\n      \"address\": {\n        \"@type\": \"PostalAddress\",\n        \"streetAddress\": \"601 E. Yorba Linda Blvd Suite #9\",\n        \"addressLocality\": \"Placentia\",\n        \"addressRegion\": \"CA\",\n        \"postalCode\": \"92870\"\n      },\n      \"openingHours\": [\n        \"Mo 8:00-17:00\",\n        \"Tu 8:00-17:00\",\n        \"We 8:00-17:00\",\n        \"Th 8:00-17:00\",\n        \"Fr 8:00-17:00\",\n        \"Sa 00:00-00:00\",\n        \"Su 00:00-00:00\"\n      ],\n      \"hasmap\": \"https://www.google.com/maps/place/YJ+OMS+Dental+Implants+%26+Oral+Surgery/@33.8897686,-117.8544163,17z/data=!4m6!3m5!1s0x80dcd416299dba03:0x1e10a0c0b276edf6!8m2!3d33.8897686!4d-117.8544163!16s%2Fg%2F1td20kkt?entry=ttu&g_ep=EgoyMDI1MTAxNC4wIKXMDSoASAFQAw%3D%3D\",\n      \"geo\": {\n        \"@type\": \"GeoCoordinates\",\n        \"latitude\": \"-117.8544163\",\n        \"longitude\": \"33.889942269435885\"\n      }\n    }\n  ]\n}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"VideoObject\",\"name\":\"Wendy's Full-Arch Experience at YJ OMS Dental Implants & Oral Surgery\",\"description\":\"Wendy, from Yorba Linda, discusses her positive experience with Dr. Jun following her powerful surgery.\\n\\nYJ OMS Dental Implants & Oral Surgery\\nYoung Jun, DDS, MD\\n\\n601 E. Yorba Linda Blvd.\\nSuite 9\\nPlacentia, CA 92870\\n\\nServices Provided:\\nDental Implants | Wisdom Teeth Removal | Tooth Replacement Options | General Tooth Extractions | All-on-4 Treatment Concept | Impacted Canines | Bone Grafting | PRP | Jaw Surgery | Diagnosis and Treatment for Oral Pathology | Treatment for Facial Trauma | Pre-Prosthetic Surgery | Treatment for Sleep Apnea | Stem Cell Banking | Treatment for TMJ  | Fillers and Botox | Eyelid Surgery (Blepharoplasty) | Cheek and Chin Implants\\n\\nCities Serviced:\\nPlacentia | Fullerton | Buena Park | Brea | Anaheim | La Habra | East Whittier | La Mirada | Yorba Linda | La Palma |\",\"thumbnailUrl\":\"https://i.ytimg.com/vi/1SL8uWVE1rE/maxresdefault.jpg\",\"uploadDate\":\"2026-01-29T00:36:05Z\",\"duration\":\"PT22S\",\"embedUrl\":\"https://www.youtube.com/embed/$1SL8uWVE1rE\"}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"VideoObject\",\"name\":\"Steve's Full Arch at YJ OMS Dental Implants & Oral Surgery\",\"description\":\"Steve has gotten more confidence with his smile after his full arch procedure. \\n\\nYJ OMS Dental Implants & Oral Surgery\\nYoung Jun, DDS, MD\\nhttps://yjoms.com/\\n\\nPlacentia Office:\\n601 E. Yorba Linda Blvd.\\nSuite 9\\nPlacentia, CA 92870\\n\\nCities Serviced:\\nPlacentia | Fullerton | Buena Park | Brea | Anaheim | La Habra | East Whittier | La Mirada | Yorba Linda | La Palma |\\n\\nHuntington Beach Office:\\n17931 Beach Blvd Suite 100\\nHuntington Beach, CA 92647\\n\\nCities Serviced:\\nHuntington Beach | Costa Mesa | Fountain Valley | Midway City | Westminster | Seal Beach | Newport Beach | Irvine | Long Beach |\\n\\nServices Provided:\\nDental Implants | Wisdom Teeth Removal | Tooth Replacement Options | General Tooth Extractions | All-on-4 Treatment Concept | Impacted Canines | Bone Grafting | PRP | Jaw Surgery | Diagnosis and Treatment for Oral Pathology | Treatment for Facial Trauma | Pre-Prosthetic Surgery | Treatment for Sleep Apnea | Stem Cell Banking | Treatment for TMJ  | Fillers and Botox | Eyelid Surgery (Blepharoplasty) | Cheek and Chin Implants\",\"thumbnailUrl\":\"https://i.ytimg.com/vi/ors4dm05lYI/maxresdefault.jpg\",\"uploadDate\":\"2024-12-18T17:09:38Z\",\"duration\":\"PT41S\",\"embedUrl\":\"https://www.youtube.com/embed/$ors4dm05lYI\"}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"VideoObject\",\"name\":\"Steve's All On Four at YJ OMS Dental Implants & Oral Surgery\",\"description\":\"Steve from Buena Park shares his experience receiving an All on Four from YJ OMS Dental Implants & Oral Surgery\\n\\nYJ OMS Dental Implants & Oral Surgery\\nYoung Jun, DDS, MD\\n\\n601 E. Yorba Linda Blvd.\\nSuite 9\\nPlacentia, CA 92870\\n\\nServices Provided:\\nDental Implants | Wisdom Teeth Removal | Tooth Replacement Options | General Tooth Extractions | All-on-4 Treatment Concept | Impacted Canines | Bone Grafting | PRP | Jaw Surgery | Diagnosis and Treatment for Oral Pathology | Treatment for Facial Trauma | Pre-Prosthetic Surgery | Treatment for Sleep Apnea | Stem Cell Banking | Treatment for TMJ  | Fillers and Botox | Eyelid Surgery (Blepharoplasty) | Cheek and Chin Implants\\n\\nCities Serviced:\\nPlacentia | Fullerton | Buena Park | Brea | Anaheim | La Habra | East Whittier | La Mirada | Yorba Linda | La Palma |\",\"thumbnailUrl\":\"https://i.ytimg.com/vi/fWmivLYD5IY/maxresdefault.jpg\",\"uploadDate\":\"2025-10-31T23:45:10Z\",\"duration\":\"PT44S\",\"embedUrl\":\"https://www.youtube.com/embed/$fWmivLYD5IY\"}",
+    "{\"@context\":\"https://schema.org\",\"@type\":\"FAQPage\",\"mainEntity\":[{\"@type\":\"Question\",\"name\":\"Is full-arch restoration better than dentures?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Many patients choose full-arch solutions because they are fixed, more stable, and feel more like natural teeth.\"}},{\"@type\":\"Question\",\"name\":\"How long does the process take?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Treatment timelines vary depending on your specific case and plan. Your consultation will give you a clearer picture of what to expect.\"}},{\"@type\":\"Question\",\"name\":\"Am I a candidate for full-arch restoration?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Candidacy depends on factors like bone support and overall health—this is determined during your consultation.\"}},{\"@type\":\"Question\",\"name\":\"Will my new teeth look natural?\",\"acceptedAnswer\":{\"@type\":\"Answer\",\"text\":\"Restorations are designed to look balanced, natural, and fit your facial structure.\"}}]}"
+  ],
+  "text": "Skip Navigation\nDental Implants\nWisdom Teeth\nAll Procedures\nAbout Us\nPatient Info\nReferring Doctors\nPay Online\nContact Us\nA NEW SMILE. A FRESH START.\nTEETH THAT FEEL LIKE YOUR OWN.\n\nFULL-ARCH RESTORATION OFFERS A FIXED, LONG-TERM SOLUTION FOR PATIENTS MISSING MOST OR ALL TEETH—DESIGNED FOR FUNCTION, CONFIDENCE, AND QUALITY OF LIFE.\n\nSCHEDULE YOUR CONSULTATION\nCALL PLACENTIA\nCALL HUNTINGTON BEACH\nExperienced Oral Surgery Team\nAdvanced Treatment Planning\nCustomized Full-Arch Solutions\nConvenient Placentia and Huntington Beach, CA Locations\nWhat Patients Are Saying\n\nWhen I first came to the practice, people made me feel comfortable. I really like Dr. Jun. I trust him. He did a good job.\n\n- Wendy\n\nThe procedure were they all went well and recovery was pretty quick. It feels great to have a healthy smile and I could eat whatever I want. This practice is fantastic. I would recommend Dr. Jun.\n\n- Steve\n\nDr. Jun is just a great human being. From the initial consultation to the final steps in getting my dental implants went flawlessly. Today I feel great.\n\n- Steve\n\nFull-Arch May Be Right for You If You:\nAre missing most or all of your teeth\nAre struggling with dentures\nHave multiple failing or severely damaged teeth\nWant a more stable, long-term solution\nAre ready to restore your smile and confidence\n\nA consultation is the best way to determine your options.\n\nContact Us\nName\nEmail\nPhone Number\nLocation\nSelect a location\nPlacentia\nHuntington Beach\nMessage\nSUBMIT\n\nMore Than Teeth—A Complete Upgrade to Your Daily Life\nFixed, Stable Teeth\n\nDesigned to stay in place—no slipping or removal.\n\nEat with Confidence Again\n\nEnjoy foods that are difficult with dentures or missing teeth.\n\nNatural Appearance\n\nRestorations are designed to look balanced and natural.\n\nImproved Quality of Life\n\nSpeak clearly, smile freely, and feel more like yourself again.\n\nAdvanced Planning. Precision Execution.\n\nFull-arch restoration requires careful planning and coordination. At YJ OMS, treatment is approached with a focus on detailed evaluation, modern imaging, and a customized plan tailored to each patient.\n\nEvery step is designed for long-term function and stability.\n\nWhat to Expect\n\nYou'll know what to expect every step of the way.\n\n1\nConsultation & Evaluation\n\nWe assess your current condition and discuss your goals.\n\n2\nPersonalized Treatment Plan\n\nWe outline your options, timeline, and what the process looks like.\n\n3\nSurgical Placement & Restoration\n\nYour treatment is carefully planned and executed in phases to achieve your final result.\n\nYou Don't Have to Keep Living This Way\n\nIf you're tired of working around your teeth—or avoiding things you used to enjoy—there are better options available.\n\nSchedule Your Consultation\nCall Placentia\nCall Huntington Beach\nA Long-Term Investment in Your Health and Confidence\n\nFull-arch restoration is a comprehensive solution designed for durability and long-term function. Our team will walk you through your options so you can make an informed decision.\n\nClear guidance. No pressure.\n\nFrequently Asked Questions\nIs full-arch restoration better than dentures?\nHow long does the process take?\nAm I a candidate for full-arch restoration?\nWill my new teeth look natural?\nThis Is More Than a Dental Procedure—It's a Life Upgrade\n\nIf you're ready to move beyond dentures or missing teeth, the first step is a conversation.\n\nSchedule Your Consultation\nCall Placentia\nCall Huntington Beach\nPositively changing the lives\nand oral health of our patients.\nAbout Us\nPatient Registration\nAll Procedures\nContact Us\nDental Implants\nPlacentia\n\n601 E. Yorba Linda Blvd Suite #9\nPlacentia, CA 92870\n\n(714) 215-9614\ninfo@yjoms.com\nHours\n\nMon-Fri: 8:00 AM-5:00 PM\n\nHuntington Beach\n\n17931 Beach Blvd Suite #100\nHuntington Beach, CA 92647\n\n(714) 613-4382\nhb@yjoms.com\nHours\n\nMon-Fri: 8:00 AM-5:00 PM\n\nFollow Us!\n\n©2026 YJ OMS Dental Implants & Oral Surgery\n\nAll rights reserved.\n\nPrivacy Policy\nTerms of Use\nAccessibility Statement\nHIPAA Compliance"
+}
