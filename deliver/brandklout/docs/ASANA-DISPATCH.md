@@ -111,6 +111,12 @@ The thank-you page has an identical 4-section spec in both clients. The prior de
 work in [`livewell-dental/`](../livewell-dental/docs/project-overview.md) is the closest existing
 reference.
 
+- **Thank-you archetype is BUILT** at `mason-park/workflows/04-design/.tmp/thank-you/` (2026-08-05).
+  Client-specific values are isolated to one constants block — Grand Mission should clone, not rebuild.
+- **Heads-up on the GHL preview reference** (`sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC`):
+  it is a *Grand Mission* page. Its award, insurance carriers, review count and hours are theirs — do
+  not copy them into another client.
+
 ## Parallel agent rules
 
 1. **One agent per client folder.** The folders are independent; the shared page archetypes are
