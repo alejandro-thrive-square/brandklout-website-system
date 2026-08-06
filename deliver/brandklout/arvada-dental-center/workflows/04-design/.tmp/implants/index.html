@@ -20,6 +20,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/brand.css">
+<style>
+  /* Per-page motion contract. The shared system lives in ../_shared/brand.css;
+     this block guarantees the two rules that must hold even if that file is
+     swapped, minified or ported: motion never hides content, and
+     prefers-reduced-motion removes movement rather than removing information. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal], [data-split] .ln__i, [data-split] .wd,
+    .trust__item, .form-card, [data-parallax] {
+      opacity: 1 !important;
+      transform: none !important;
+      clip-path: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+    .progress { display: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  /* If the motion script never arms the system, nothing is left hidden. */
+  html:not([data-motion="on"]) [data-reveal] { opacity: 1; transform: none; }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -49,7 +69,7 @@
     <div class="wrap hero__inner">
       <div>
         <p class="eyebrow hero__eyebrow">Dental Implants · Arvada, Colorado</p>
-        <h1 class="display">Teeth that stay put.<br>Often in a single day.</h1>
+        <h1 class="display" data-split="lines">Teeth that stay put.<br>Often in a single day.</h1>
         <p class="lede mt-sm">
           One missing tooth or a whole arch — Dr. Gregory Bennett has placed and restored
           thousands of implants right here on Wadsworth Boulevard. Consultation, surgery,
@@ -62,7 +82,7 @@
             (303) 421-7611
           </a>
         </div>
-        <div class="trust">
+        <div class="trust" data-stagger="90">
           <span class="trust__item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
             Serving Arvada since 2003
@@ -165,16 +185,16 @@
 
   <!-- ============ QUALIFIER / SYMPTOMS ============ -->
   <section class="section band-base">
-    <div class="ridge-mark" aria-hidden="true">
+    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
       <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
     </div>
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">Is this you?</p>
-        <h2 class="display">Missing teeth change more than your smile</h2>
+        <h2 class="display" data-split="lines">Missing teeth change more than your smile</h2>
         <p class="lede">If any of these sound familiar, your teeth are probably the cause — and it's worth getting a straight answer.</p>
       </div>
-      <div class="symptoms">
+      <div class="symptoms" data-stagger="65">
         <div class="symptom" data-reveal>
           <h3>Your teeth move when you eat</h3>
           <p>Teeth that shift or feel loose make chewing unpredictable, and the foods you avoid keep adding up.</p>
@@ -204,7 +224,7 @@
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));align-items:center;gap:clamp(2rem,5vw,4.5rem)">
         <div data-reveal>
           <p class="eyebrow">How an implant works</p>
-          <h2 class="display">Three parts that behave like a real tooth</h2>
+          <h2 class="display" data-split="lines">Three parts that behave like a real tooth</h2>
           <p class="mt-sm">A dental implant has a titanium or zirconium post that sits in your jawbone the way a
             tooth root does, an abutment on top of it, and the crown that attaches to the abutment. In the weeks
             after surgery the post fuses with the bone, which is what makes the result stable rather than
@@ -215,7 +235,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>IV sedation available</strong> — Dr. Bennett is board certified to administer it himself.</span></li>
           </ul>
         </div>
-        <figure class="media-frame media-frame--wide" data-reveal data-delay="1" style="margin:0">
+        <figure class="media-frame media-frame--wide" data-reveal="scale" data-delay="1" style="margin:0">
           <img src="../_shared/assets/dent-impl-2000.jpg.webp" alt="Close-up of a dental implant showing the post seated in the jawbone beneath the crown" loading="lazy">
         </figure>
       </div>
@@ -224,16 +244,16 @@
 
   <!-- ============ OPTIONS ============ -->
   <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="ridge-mark" aria-hidden="true">
+    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
       <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 160 110l140 66 130-150 150 130 140-146 150 160 130-100 140 116 150-80 150 94v190z"/></svg>
     </div>
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">Your options</p>
-        <h2 class="display">Four ways to replace what's missing</h2>
+        <h2 class="display" data-split="lines">Four ways to replace what's missing</h2>
         <p class="lede">Which one is right depends on how many teeth are gone and how much bone is left to work with. That is what the consultation is for.</p>
       </div>
-      <div class="grid grid--4">
+      <div class="grid grid--4" data-stagger="70">
         <article class="card card--lift" data-reveal>
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M8 6h8"/></svg></div>
           <h3 class="h3">Single tooth implant</h3>
@@ -264,7 +284,7 @@
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:center;gap:clamp(2rem,5vw,4rem)">
         <div data-reveal>
           <p class="eyebrow">What it costs</p>
-          <h2 class="display">A real number, published</h2>
+          <h2 class="display" data-split="lines">A real number, published</h2>
           <p class="mt-sm">Most implant clinics won't put a price on a page. Arvada Dental Center does:
             a fixed full upper or lower arch is</p>
           <p class="price-tag" data-price><span data-count>$18,795</span></p>
@@ -289,7 +309,7 @@
           <p class="mt-sm">Treatment can usually be spread over monthly payments, and a plan is built
             around the case rather than the other way round. You can check what you qualify for before
             committing to anything.</p>
-          <ul class="checks mt-sm" style="grid-template-columns:1fr">
+          <ul class="checks mt-sm" data-stagger="45" style="grid-template-columns:1fr">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Monthly payment plans available</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Most dental insurance accepted — not HMO or Medicaid</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Ask the patient coordinator to talk options through</li>
@@ -308,7 +328,7 @@
         </figure>
         <div data-reveal data-delay="1">
           <p class="eyebrow">Who will treat you</p>
-          <h2 class="display">Dr. Gregory Bennett, DDS</h2>
+          <h2 class="display" data-split="lines">Dr. Gregory Bennett, DDS</h2>
           <p class="mt-sm">Dr. Bennett founded Arvada Dental Center and has practised in Colorado for almost twenty
             years. He oversees every phase of an implant case himself — the planning, the surgery, the sedation
             and the lab work — which is why you are not handed between offices halfway through.</p>
@@ -328,9 +348,9 @@
     <div class="wrap-narrow">
       <div class="mb-lg" data-reveal>
         <p class="eyebrow">What happens</p>
-        <h2 class="display">From first call to new teeth</h2>
+        <h2 class="display" data-split="lines">From first call to new teeth</h2>
       </div>
-      <div class="steps">
+      <div class="steps" data-stagger="120">
         <div class="step" data-reveal>
           <h3 class="h3">Free consultation and 3D scan</h3>
           <p>Dr. Bennett examines you, scans the jaw, and tells you what is actually possible — including when
@@ -360,9 +380,9 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">What patients say</p>
-        <h2 class="display">In our patients' own words</h2>
+        <h2 class="display" data-split="lines">In our patients' own words</h2>
       </div>
-      <div class="grid grid--3">
+      <div class="grid grid--3" data-stagger="90">
         <div class="review" data-reveal>
           <blockquote>My first visit and I was extremely impressed. A clear plan was put together, including personal input from Dr. Bennett. Pricing was fully transparent, no hidden surprises expected.</blockquote>
           <p class="review__who">Rick Willcox<br><span class="review__src">Google review</span></p>
@@ -384,7 +404,7 @@
     <div class="wrap-narrow">
       <div class="mb-lg" data-reveal>
         <p class="eyebrow">Questions</p>
-        <h2 class="display">The things people ask first</h2>
+        <h2 class="display" data-split="lines">The things people ask first</h2>
       </div>
       <div class="faq" data-reveal>
         <div class="faq__item">
@@ -415,7 +435,7 @@
   <section class="section band-summit" style="--band-bg:var(--navy)">
     <div class="wrap-narrow center" data-reveal>
       <p class="eyebrow eyebrow--center">Next step</p>
-      <h2 class="display">Find out where you actually stand</h2>
+      <h2 class="display" data-split="lines">Find out where you actually stand</h2>
       <p class="lede" style="margin-inline:auto">A free consultation, a 3D scan, and a written plan. No cost, and no pressure to book anything on the day.</p>
       <div class="btn-row btn-row--center mt">
         <a class="btn btn--primary btn--lg" href="#consult">Book my free consultation</a>

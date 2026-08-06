@@ -1,7 +1,7 @@
 # QA Report — Arvada Dental Center landing pages
 
 **Asana parent task**: `1217040406855586`
-**Run**: 2026-08-06 · `node qa.mjs` · **395/395 checks passed** (focused-tab emulation on)
+**Run**: 2026-08-06 · `node qa.mjs` · **427/427 checks passed** (focused-tab emulation on)
 Machine-readable results: [`qa-results.json`](./qa-results.json)
 
 ## Why this is a driven test, not a screenshot review
@@ -21,6 +21,7 @@ whether reduced-motion actually reveals the content rather than leaving it at `o
 | **Qualifier** (implants, AOX) | advances exactly one step at a time; reaches the contact form; captures all four answers; progress ticks fill; back button returns to the previous step |
 | **FAQ** | opens — `aria-expanded` flips *and* the panel height actually grows; closes again |
 | **Live status** | the open/closed pill resolves to a real state and a sensible label |
+| **Motion declared per page** | every page authors its own `data-split`, `data-stagger` and `data-parallax`, plus an inline `prefers-reduced-motion` guard and a no-JS visibility guard — a page cannot quietly drift back to plain |
 | **Motion** | the system is armed (`data-motion="on"`); headings are split into line masks or a word fallback; groups carry a stagger index; the scroll progress bar exists and advances; the hero is lit; the hero media parallax actually changes on scroll; **nothing is left invisible after the scroll pass — including anything still translated outside its own mask** |
 | **Reduced motion** | everything visible immediately; **no residual transform left on anything**; the scroll layer is skipped entirely (`data-motion="reduced"`, no progress bar) |
 | **Offer never buried** | at **five scroll depths × two viewports**, a phone link, a route to the lead form and the offer are each actually inside the viewport — measured by geometry, not by markup existing somewhere |
@@ -101,6 +102,27 @@ the existing DOM and choreographs it, so all six pages were upgraded by editing 
 | **Scroll progress** | A cyan→amber bar, `transform: scaleX()` only. |
 
 Everything is transform/opacity only, on one rAF loop that parks itself when the tab is hidden.
+
+### Choreography is authored per page, not inferred at runtime
+
+The first version of this system inferred everything from element classes. It worked and it tested
+green — but **the page files themselves declared no motion at all**: no `data-split`, no
+`data-stagger`, no `prefers-reduced-motion`. Auditing a page on its own turned up nothing, the
+choreography was tunable nowhere, and runtime-only classes are fragile to port into Webflow later.
+
+Each page now declares its own:
+
+| Attribute | Meaning | Per page |
+| :--- | :--- | :--- |
+| `data-split="lines\|words"` | heading resolves behind a line mask, or falls back to a word stagger | 6–11 |
+| `data-stagger="ms"` | group cascades, with a per-step interval tuned to what the group is (checklists 45ms, cards 70–110ms, process steps 120ms) | 5–6 |
+| `data-parallax="k"` | element drifts against scroll | 1–2 |
+| `data-reveal="scale"` | media enters with a scale rather than a rise | 0–2 |
+| inline `@media (prefers-reduced-motion: reduce)` guard | the contract holds even if the shared stylesheet is swapped, minified or ported | every page |
+| `html:not([data-motion="on"]) [data-reveal]` guard | nothing is left hidden if the script never runs | every page |
+
+The engine honours declarations and falls back to inference for anything undeclared, so nothing
+regressed. QA now asserts the declarations exist, so a page cannot quietly drift back to plain.
 
 ### Two real bugs the new checks caught
 

@@ -89,10 +89,12 @@
      mask. Only safe when the heading is text and <br> — anything with inline
      elements (a link, a coloured span) falls back to a word stagger, because
      regrouping across element boundaries would break the markup. */
-  function splitLines(el) {
-    var simple = Array.prototype.every.call(el.childNodes, function (n) {
-      return n.nodeType === 3 || (n.nodeType === 1 && n.tagName === "BR");
-    });
+  function splitLines(el, forceWords) {
+    var simple =
+      !forceWords &&
+      Array.prototype.every.call(el.childNodes, function (n) {
+        return n.nodeType === 3 || (n.nodeType === 1 && n.tagName === "BR");
+      });
 
     // Wrap every word, preserving element structure.
     var words = [];
@@ -155,26 +157,54 @@
   }
 
   function initHeadings() {
-    // Only display headings — body copy splitting reads as gimmick, and it
-    // would also break text selection for no benefit.
-    document.querySelectorAll("h1.display, h2.display").forEach(function (h) {
-      try { splitLines(h); } catch (e) { /* leave the heading exactly as authored */ }
+    // Choreography is AUTHORED, not guessed: every heading that should split
+    // declares data-split="lines" or "words" in its own page. Pages that predate
+    // the attribute still work — anything undeclared falls back to the old
+    // automatic behaviour, so nothing regresses.
+    var declared = document.querySelectorAll("[data-split]");
+    var targets = declared.length
+      ? declared
+      : document.querySelectorAll("h1.display, h2.display");
+    targets.forEach(function (h) {
+      try {
+        splitLines(h, h.getAttribute("data-split") === "words");
+      } catch (e) {
+        /* leave the heading exactly as authored */
+      }
     });
   }
 
   /* Assign a stagger index to the children of any group, so cards, symptoms,
      checklist items and table rows cascade instead of arriving as a slab. */
   function initStagger() {
-    var GROUPS = ".grid, .symptoms, .checks, .steps, .offer__includes, .stat-row, .trust";
-    document.querySelectorAll(GROUPS).forEach(function (group) {
+    // Authored: [data-stagger] on the container, optionally with a per-step
+    // interval in ms (data-stagger="60"). Undeclared groups keep the automatic
+    // behaviour so nothing regresses.
+    var declared = document.querySelectorAll("[data-stagger]");
+    var groups = declared.length
+      ? declared
+      : document.querySelectorAll(
+          ".grid, .symptoms, .checks, .steps, .offer__includes, .stat-row, .trust"
+        );
+    groups.forEach(function (group) {
+      var step = parseInt(group.getAttribute("data-stagger"), 10);
+      if (step > 0) group.style.setProperty("--stagger", step + "ms");
       Array.prototype.forEach.call(group.children, function (child, i) {
         child.style.setProperty("--i", i);
-        // Authored data-delay would fight the computed cascade.
+        // An authored data-delay would fight the computed cascade.
         child.removeAttribute("data-delay");
       });
     });
     document.querySelectorAll(".compare tbody tr").forEach(function (row, i) {
       row.style.setProperty("--i", i);
+    });
+  }
+
+  /* Authored parallax: data-parallax="0.18" on any element, where the number is
+     how far it drifts relative to scroll. Read once here, applied in the rAF loop. */
+  function collectParallax() {
+    return [].slice.call(document.querySelectorAll("[data-parallax]")).map(function (el) {
+      return { el: el, k: parseFloat(el.getAttribute("data-parallax")) || 0.12 };
     });
   }
 
@@ -224,6 +254,7 @@
     var heroMedia = document.querySelector(".hero__media img");
     var hero = document.querySelector(".hero");
     var ridges = [].slice.call(document.querySelectorAll(".ridge-mark, .hero__ridge svg"));
+    var drifters = collectParallax();
     var ticking = false;
 
     function frame() {
@@ -246,6 +277,13 @@
         if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
         var p = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
         r.style.setProperty("--ridge-shift", ((p - 0.5) * -46).toFixed(1) + "px");
+      });
+
+      drifters.forEach(function (d) {
+        var rect = d.el.getBoundingClientRect();
+        if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
+        var p = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        d.el.style.setProperty("--drift", ((p - 0.5) * -100 * d.k).toFixed(1) + "px");
       });
     }
 

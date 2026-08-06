@@ -21,6 +21,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/brand.css">
+<style>
+  /* Per-page motion contract. The shared system lives in ../_shared/brand.css;
+     this block guarantees the two rules that must hold even if that file is
+     swapped, minified or ported: motion never hides content, and
+     prefers-reduced-motion removes movement rather than removing information. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal], [data-split] .ln__i, [data-split] .wd,
+    .trust__item, .form-card, [data-parallax] {
+      opacity: 1 !important;
+      transform: none !important;
+      clip-path: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+    .progress { display: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  /* If the motion script never arms the system, nothing is left hidden. */
+  html:not([data-motion="on"]) [data-reveal] { opacity: 1; transform: none; }
+</style>
 <!--
   Structured data. The previous vendor's index_1.html shipped a Dentist block containing
   an "aggregateRating" of 4.8 / 1000 — a figure their own README admits was a placeholder.
@@ -106,7 +126,7 @@
     <div class="wrap hero__inner">
       <div>
         <p class="eyebrow hero__eyebrow">Porcelain Veneers · Arvada, Colorado</p>
-        <h1 class="display">A smile designed<br>around your face.</h1>
+        <h1 class="display" data-split="lines">A smile designed<br>around your face.</h1>
         <p class="lede mt-sm">
           Chips, gaps, irregular shape, stubborn discolouration — porcelain veneers cover the lot, in as
           few as two visits. Dr. Gregory Bennett has designed countless smiles, matched to your facial
@@ -119,7 +139,7 @@
             (303) 421-7611
           </a>
         </div>
-        <div class="trust">
+        <div class="trust" data-stagger="90">
           <span class="trust__item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
             As few as two visits
@@ -183,16 +203,16 @@
 
   <!-- ============ WHAT VENEERS FIX ============ -->
   <section class="section band-base">
-    <div class="ridge-mark" aria-hidden="true">
+    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
       <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
     </div>
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">What they fix</p>
-        <h2 class="display">Veneers erase smile-zone flaws</h2>
+        <h2 class="display" data-split="lines">Veneers erase smile-zone flaws</h2>
         <p class="lede">Thin porcelain shells bonded to the front of your teeth. What they cover is narrow, and it is worth being precise about it.</p>
       </div>
-      <div class="symptoms">
+      <div class="symptoms" data-stagger="65">
         <div class="symptom" data-reveal>
           <h3>Chips and cracks</h3>
           <p>Damage to the visible edge of a tooth, covered rather than patched.</p>
@@ -219,7 +239,7 @@
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(2rem,5vw,4.5rem);align-items:center">
         <div data-reveal>
           <p class="eyebrow">Straight answer</p>
-          <h2 class="display">When veneers are the wrong choice</h2>
+          <h2 class="display" data-split="lines">When veneers are the wrong choice</h2>
           <p class="lede mt-sm">A cosmetic dentist who only ever recommends the cosmetic treatment is not worth trusting with your face.</p>
           <p>Veneers hide problem areas. They do <strong>not</strong> address functional concerns. If your issue is a
             missing tooth, a failing tooth, or a bite that is doing damage, a veneer sits on top of an unsolved
@@ -231,7 +251,7 @@
             <a class="btn btn--ghost" href="../implants/">See dental implants →</a>
           </div>
         </div>
-        <figure class="media-frame media-frame--tall" data-reveal data-delay="1" style="margin:0">
+        <figure class="media-frame media-frame--tall" data-reveal="scale" data-delay="1" style="margin:0">
           <img src="../_shared/assets/dental-veneers-graphic-4.jpg.webp" alt="Porcelain veneer shells shown against a model of the upper front teeth" loading="lazy">
         </figure>
       </div>
@@ -243,10 +263,10 @@
     <div class="wrap-narrow">
       <div class="mb-lg" data-reveal>
         <p class="eyebrow">Candidacy</p>
-        <h2 class="display">How Dr. Bennett decides</h2>
+        <h2 class="display" data-split="lines">How Dr. Bennett decides</h2>
         <p class="lede">Most people with common cosmetic problems are good candidates. Three things get checked before anything is prepared.</p>
       </div>
-      <div class="steps">
+      <div class="steps" data-stagger="120">
         <div class="step" data-reveal>
           <h3 class="h3">Gum health</h3>
           <p>Veneers meet the gum line, so inflammation or periodontal disease has to be resolved first. The practice offers LANAP laser therapy where it is needed.</p>
@@ -267,12 +287,12 @@
   <section class="section band-warm">
     <div class="wrap">
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(2rem,5vw,4.5rem);align-items:center">
-        <figure class="media-frame media-frame--wide" data-reveal style="margin:0">
+        <figure class="media-frame media-frame--wide" data-reveal="scale" style="margin:0">
           <img src="../_shared/assets/dental-patient-undergoing-porcelain-veneers-procedure-3.jpg.webp" alt="Shade matching a porcelain veneer against a patient's natural teeth" loading="lazy">
         </figure>
         <div data-reveal data-delay="1">
           <p class="eyebrow">The smile design process</p>
-          <h2 class="display">Two visits, one design</h2>
+          <h2 class="display" data-split="lines">Two visits, one design</h2>
           <p class="mt-sm">At your first consultation Dr. Bennett removes a small portion of enamel from the front
             of the teeth being treated, and the design is worked out against your facial features, skin tone and
             gum line rather than a catalogue shade.</p>
@@ -302,7 +322,7 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">Materials</p>
-        <h2 class="display">Not all veneers are the same thing</h2>
+        <h2 class="display" data-split="lines">Not all veneers are the same thing</h2>
         <p class="lede">"Veneer" covers two quite different treatments. The difference shows up years later, which is exactly when it is hardest to undo.</p>
       </div>
       <div class="compare-scroll" data-reveal>
@@ -355,10 +375,10 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">In the room</p>
-        <h2 class="display">Technology you'll actually notice</h2>
+        <h2 class="display" data-split="lines">Technology you'll actually notice</h2>
         <p class="lede">Not a spec sheet — four things that change what the appointment feels like.</p>
       </div>
-      <div class="grid grid--4">
+      <div class="grid grid--4" data-stagger="70">
         <article class="card card--lift" data-reveal>
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
           <h3 class="h3">CEREC digital scanning</h3>
@@ -396,7 +416,7 @@
         <p class="offer__label">Your first step</p>
         <span class="offer__price">Free</span>
         <p class="h3 mt-sm" style="color:#5a4426">Smile evaluation with Dr. Bennett</p>
-        <ul class="offer__includes">
+        <ul class="offer__includes" data-stagger="70">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A look at what is actually achievable for your teeth</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>An honest answer on whether veneers are the right treatment</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A written plan and price before you commit to anything</li>
@@ -417,7 +437,7 @@
         </figure>
         <div data-reveal data-delay="1">
           <p class="eyebrow">Who designs your smile</p>
-          <h2 class="display">Dr. Gregory Bennett, DDS</h2>
+          <h2 class="display" data-split="lines">Dr. Gregory Bennett, DDS</h2>
           <p class="mt-sm">Cosmetic work is as much artistic as technical, and Dr. Bennett has spent nearly twenty
             years refining both. He has designed countless smiles at the practice, blending advanced technology with
             the judgement that decides how a tooth should be shaped for a particular face.</p>
@@ -437,9 +457,9 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">What patients say</p>
-        <h2 class="display">In our patients' own words</h2>
+        <h2 class="display" data-split="lines">In our patients' own words</h2>
       </div>
-      <div class="grid grid--3">
+      <div class="grid grid--3" data-stagger="90">
         <div class="review" data-reveal>
           <blockquote>Top percentile in terms of quality, technology and the atmosphere! The folks at Arvada Dental Center were down to earth and welcoming</blockquote>
           <p class="review__who">Jon Jon<br><span class="review__src">Google review</span></p>
@@ -461,7 +481,7 @@
     <div class="wrap-narrow">
       <div class="mb-lg" data-reveal>
         <p class="eyebrow">Questions</p>
-        <h2 class="display">Before you commit</h2>
+        <h2 class="display" data-split="lines">Before you commit</h2>
       </div>
       <div class="faq" data-reveal>
         <div class="faq__item">
@@ -496,7 +516,7 @@
   <section class="section band-summit" style="--band-bg:var(--navy)">
     <div class="wrap-narrow center" data-reveal>
       <p class="eyebrow eyebrow--center">Next step</p>
-      <h2 class="display">Start with a conversation</h2>
+      <h2 class="display" data-split="lines">Start with a conversation</h2>
       <p class="lede" style="margin-inline:auto">Bring the photo you keep avoiding. Dr. Bennett will tell you what veneers can and cannot do for it.</p>
       <div class="btn-row btn-row--center mt">
         <a class="btn btn--primary btn--lg" href="#evaluation">Book my smile evaluation</a>

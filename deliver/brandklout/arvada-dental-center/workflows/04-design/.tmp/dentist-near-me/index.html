@@ -26,6 +26,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/brand.css">
 <style>
+  /* Per-page motion contract. The shared system lives in ../_shared/brand.css;
+     this block guarantees the two rules that must hold even if that file is
+     swapped, minified or ported: motion never hides content, and
+     prefers-reduced-motion removes movement rather than removing information. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal], [data-split] .ln__i, [data-split] .wd,
+    .trust__item, .form-card, [data-parallax] {
+      opacity: 1 !important;
+      transform: none !important;
+      clip-path: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+    .progress { display: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  /* If the motion script never arms the system, nothing is left hidden. */
+  html:not([data-motion="on"]) [data-reveal] { opacity: 1; transform: none; }
+</style>
+<style>
   /* Offer-led hero: the price is the headline, so it gets display treatment. */
   .hero__offerline {
     font-family: var(--display);
@@ -68,7 +88,7 @@
     <div class="wrap hero__inner">
       <div>
         <p class="eyebrow hero__eyebrow">New Patient Special · Arvada, Colorado</p>
-        <h1 class="display">
+        <h1 class="display" data-split="lines">
           <span class="hero__offerline">$109</span>
           new patient visit at your local Arvada dentist.
         </h1>
@@ -83,7 +103,7 @@
             (303) 421-7611
           </a>
         </div>
-        <div class="trust">
+        <div class="trust" data-stagger="90">
           <span class="trust__item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
             Serving Arvada since 2003
@@ -137,7 +157,7 @@
 
   <!-- ============ THE OFFER ============ -->
   <section class="section band-base" style="--band-bg:var(--paper)">
-    <div class="ridge-mark" aria-hidden="true">
+    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
       <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
     </div>
     <div class="wrap">
@@ -146,7 +166,7 @@
           <p class="offer__label">New patient special</p>
           <span class="offer__price"><sup>$</sup><span data-count>109</span></span>
           <p class="h3 mt-sm" style="color:#5a4426">Exam · X-rays · OralID cancer screening</p>
-          <ul class="offer__includes">
+          <ul class="offer__includes" data-stagger="70">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Comprehensive exam of your teeth, mouth and gums</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Digital X-rays — a proper look beneath the surface</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>OralID oral cancer screening</li>
@@ -157,7 +177,7 @@
         </div>
         <div data-reveal data-delay="1">
           <p class="eyebrow">What you get for it</p>
-          <h2 class="display">A first visit that actually tells you something</h2>
+          <h2 class="display" data-split="lines">A first visit that actually tells you something</h2>
           <p class="mt-sm">Most "new patient" offers buy you a rushed look and a quote. This one includes the
             diagnostics — digital imaging and an OralID screening — so the plan you leave with is based on
             what is actually going on rather than what is visible from the doorway.</p>
@@ -177,7 +197,7 @@
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(2rem,5vw,4rem);align-items:center">
         <div data-reveal>
           <p class="eyebrow">Finding us</p>
-          <h2 class="display">6695 Wadsworth Blvd</h2>
+          <h2 class="display" data-split="lines">6695 Wadsworth Blvd</h2>
           <p class="lede mt-sm">On Wadsworth between 64th and 68th, with parking at the door. If you searched
             "dentist near me" from anywhere in north-west Denver, you are probably closer than you think.</p>
           <ul class="areas mt">
@@ -192,7 +212,7 @@
             <a class="btn btn--ghost" href="https://goo.gl/maps/yzuR6hXzr1K4R7XQ9" rel="noopener">Get directions</a>
           </div>
         </div>
-        <figure class="media-frame media-frame--wide" data-reveal data-delay="1" style="margin:0">
+        <figure class="media-frame media-frame--wide" data-reveal="scale" data-delay="1" style="margin:0">
           <img src="../_shared/assets/video-1-3.png.webp" alt="The Arvada Dental Center &amp; Implants building on Wadsworth Boulevard" loading="lazy">
         </figure>
       </div>
@@ -204,9 +224,9 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">Why patients stay</p>
-        <h2 class="display">Choosing a dentist shouldn't be a gamble</h2>
+        <h2 class="display" data-split="lines">Choosing a dentist shouldn't be a gamble</h2>
       </div>
-      <div class="grid grid--4">
+      <div class="grid grid--4" data-stagger="70">
         <article class="card card--lift" data-reveal>
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
           <h3 class="h3">A welcoming team</h3>
@@ -236,9 +256,9 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">What we do</p>
-        <h2 class="display">Comprehensive dental care in Arvada</h2>
+        <h2 class="display" data-split="lines">Comprehensive dental care in Arvada</h2>
       </div>
-      <ul class="checks" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
+      <ul class="checks" data-stagger="45" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
         <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Checkups &amp; cleanings</li>
         <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Fillings &amp; restorations</li>
         <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Root canal therapy</li>
@@ -260,9 +280,9 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">Who you'll see</p>
-        <h2 class="display">Meet the doctors</h2>
+        <h2 class="display" data-split="lines">Meet the doctors</h2>
       </div>
-      <div class="grid grid--3">
+      <div class="grid grid--3" data-stagger="90">
         <article class="card" data-reveal>
           <figure class="media-frame media-frame--square" style="margin:0 0 1.1rem">
             <img src="../_shared/assets/dr_bennett-square-close.jpg.webp" alt="Dr. Gregory Bennett, DDS" loading="lazy">
@@ -293,9 +313,9 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">What patients say</p>
-        <h2 class="display">In our patients' own words</h2>
+        <h2 class="display" data-split="lines">In our patients' own words</h2>
       </div>
-      <div class="grid grid--3">
+      <div class="grid grid--3" data-stagger="90">
         <div class="review" data-reveal>
           <blockquote>I've had such a hard time trying to find a good dentist that is punctual and doesn't try to upsell you on things. I finally found a good one!</blockquote>
           <p class="review__who">Sonja Welch<br><span class="review__src">Google review</span></p>
@@ -317,7 +337,7 @@
     <div class="wrap-narrow">
       <div class="mb-lg" data-reveal>
         <p class="eyebrow">Questions</p>
-        <h2 class="display">Before you book</h2>
+        <h2 class="display" data-split="lines">Before you book</h2>
       </div>
       <div class="faq" data-reveal>
         <div class="faq__item">
@@ -348,7 +368,7 @@
   <section class="section band-summit" style="--band-bg:var(--navy)">
     <div class="wrap-narrow center" data-reveal>
       <p class="eyebrow eyebrow--center">Ready when you are</p>
-      <h2 class="display">Book your $109 first visit</h2>
+      <h2 class="display" data-split="lines">Book your $109 first visit</h2>
       <p class="lede" style="margin-inline:auto">Exam, X-rays, OralID screening and a plan. Right here in Arvada.</p>
       <div class="btn-row btn-row--center mt">
         <a class="btn btn--offer btn--lg" href="#book">Claim the $109 special</a>

@@ -1070,6 +1070,27 @@ html[data-motion="on"] .hero__ridge svg {
 .offer-chip:hover { background: #ffa246; }
 @media (max-width: 859px) { .offer-chip { display: none; } }
 
+/* ---------- authored parallax: data-parallax="0.18" ---------- */
+html[data-motion="on"] [data-parallax] {
+  transform: translate3d(0, var(--drift, 0px), 0);
+  will-change: transform;
+}
+
+/* ---------- authored reveal variants: data-reveal="mask|scale|left" ---------- */
+html[data-motion="on"] [data-reveal="scale"] {
+  transform: translate3d(0, 24px, 0) scale(0.965);
+}
+html[data-motion="on"] [data-reveal="scale"].is-in { transform: none; }
+html[data-motion="on"] [data-reveal="left"] { transform: translate3d(-28px, 0, 0); }
+html[data-motion="on"] [data-reveal="left"].is-in { transform: none; }
+html[data-motion="on"] [data-reveal="mask"] {
+  opacity: 1;
+  transform: none;
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.05s var(--ease-out) var(--delay, 0ms);
+}
+html[data-motion="on"] [data-reveal="mask"].is-in { clip-path: inset(0 0 0 0); }
+
 /* ---------- counting numbers ---------- */
 .count { font-variant-numeric: tabular-nums; }
 
@@ -1098,7 +1119,9 @@ html[data-motion="on"] .hero__ridge svg {
   .ln__i { transform: none !important; }
   html[data-motion="on"] .media-frame img,
   html[data-motion="on"] .doctor__photo img,
-  html[data-motion="on"] .hero__media img { transform: none !important; }
+  html[data-motion="on"] .hero__media img,
+  html[data-motion="on"] [data-parallax] { transform: none !important; }
+  html[data-motion="on"] [data-reveal="mask"] { clip-path: none !important; }
   html[data-motion="on"] .ridge-mark,
   html[data-motion="on"] .hero__ridge svg { transform: none !important; }
   .btn:hover, .card--lift:hover, .quiz__opt:hover, .symptom:hover { transform: none; }

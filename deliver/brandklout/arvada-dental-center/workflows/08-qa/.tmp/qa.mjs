@@ -495,6 +495,27 @@ for (const p of PAGES) {
   check(p.slug, "no console errors", consoleErrors.length === 0, consoleErrors.slice(0, 3).join(" | "));
 }
 
+// ---- each page must DECLARE its own motion ----
+// The engine can infer choreography at runtime, but a page that declares nothing
+// is unauditable on its own, untunable per section, and fragile to port. Every
+// page authors its own split/stagger/parallax and carries its own
+// prefers-reduced-motion guard.
+console.log(`\n=== per-page motion declarations`);
+for (const p of PAGES) {
+  const src = fs.readFileSync(path.join(design, p.slug, "index.html"), "utf8");
+  const count = (re) => (src.match(re) || []).length;
+  const splits = count(/data-split="/g);
+  const staggers = count(/data-stagger="/g);
+  const parallax = count(/data-parallax="/g);
+  const reduced = /@media \(prefers-reduced-motion: reduce\)/.test(src);
+  const noJsGuard = /html:not\(\[data-motion="on"\]\) \[data-reveal\]/.test(src);
+  check(p.slug, "declares heading splits", splits >= 5, `${splits}`);
+  check(p.slug, "declares group staggers", staggers >= 4, `${staggers}`);
+  check(p.slug, "declares parallax", parallax >= 1, `${parallax}`);
+  check(p.slug, "carries its own prefers-reduced-motion guard", reduced);
+  check(p.slug, "carries a no-JS visibility guard", noJsGuard);
+}
+
 // ---- cross-page content audit ----
 console.log(`\n=== cross-page content audit`);
 const FORBIDDEN = [

@@ -26,6 +26,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/brand.css">
 <style>
+  /* Per-page motion contract. The shared system lives in ../_shared/brand.css;
+     this block guarantees the two rules that must hold even if that file is
+     swapped, minified or ported: motion never hides content, and
+     prefers-reduced-motion removes movement rather than removing information. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal], [data-split] .ln__i, [data-split] .wd,
+    .trust__item, .form-card, [data-parallax] {
+      opacity: 1 !important;
+      transform: none !important;
+      clip-path: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+    .progress { display: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  /* If the motion script never arms the system, nothing is left hidden. */
+  html:not([data-motion="on"]) [data-reveal] { opacity: 1; transform: none; }
+</style>
+<style>
   .since {
     font-family: var(--display);
     /* The floor has to stay low enough that "Wadsworth" fits a 280px column at
@@ -77,7 +97,7 @@
     <div class="wrap hero__inner">
       <div>
         <p class="eyebrow hero__eyebrow">Your neighbourhood dentist · Arvada, Colorado</p>
-        <h1 class="display">The dentist your<br>neighbours already use.</h1>
+        <h1 class="display" data-split="lines">The dentist your<br>neighbours already use.</h1>
         <p class="lede mt-sm">
           Arvada Dental Center has been on Wadsworth since 2003 — long enough that the people
           recommending us are the ones on your street. World-class dental care with small-town appeal,
@@ -90,7 +110,7 @@
             (303) 421-7611
           </a>
         </div>
-        <div class="trust">
+        <div class="trust" data-stagger="90">
           <span class="trust__item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
             Serving Arvada since 2003
@@ -146,7 +166,7 @@
 
   <!-- ============ NEIGHBOURHOOD ============ -->
   <section class="section band-base">
-    <div class="ridge-mark" aria-hidden="true">
+    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
       <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
     </div>
     <div class="wrap">
@@ -160,7 +180,7 @@
           <p>It is the difference between a dental office in your neighbourhood and a dental office <em>of</em>
             your neighbourhood.</p>
         </div>
-        <figure class="media-frame media-frame--wide" data-reveal data-delay="1" style="margin:0">
+        <figure class="media-frame media-frame--wide" data-reveal="scale" data-delay="1" style="margin:0">
           <img src="../_shared/assets/dental-implants-denver-dentist-in-arvada-dental-implants-arvada-dentist-near-me-arvada-denver.png" alt="The Arvada Dental Center &amp; Implants team" loading="lazy">
         </figure>
       </div>
@@ -170,7 +190,7 @@
         source material is an aggregated estimate, not a real number. Only stats that
         are independently verifiable from the practice's own record remain.
       -->
-      <div class="stat-row mt-lg" data-reveal>
+      <div class="stat-row mt-lg" data-stagger="90" data-reveal>
         <div class="stat">
           <p class="stat__n">2003</p>
           <p class="stat__l">Serving Arvada since</p>
@@ -193,7 +213,7 @@
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(2rem,5vw,4rem);align-items:center">
         <div data-reveal>
           <p class="eyebrow">A proper introduction</p>
-          <h2 class="display">Start with $109</h2>
+          <h2 class="display" data-split="lines">Start with $109</h2>
           <p class="lede mt-sm">Not a teaser rate that turns into a quote. A real first appointment with the
             diagnostics included, so you leave knowing where you stand.</p>
           <p>If nothing needs doing, we will tell you that too — which is, judging by the reviews, the part
@@ -203,7 +223,7 @@
           <p class="offer__label">New patient special</p>
           <span class="offer__price"><sup>$</sup><span data-count>109</span></span>
           <p class="h3 mt-sm" style="color:#5a4426">Exam · X-rays · OralID cancer screening</p>
-          <ul class="offer__includes">
+          <ul class="offer__includes" data-stagger="70">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Comprehensive exam of your teeth, mouth and gums</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Digital X-rays</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>OralID oral cancer screening</li>
@@ -221,10 +241,10 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">From people down the road</p>
-        <h2 class="display">What your neighbours actually said</h2>
+        <h2 class="display" data-split="lines">What your neighbours actually said</h2>
         <p class="lede">Real Google reviews, published under their own names.</p>
       </div>
-      <div class="grid grid--3">
+      <div class="grid grid--3" data-stagger="90">
         <div class="review" data-reveal>
           <blockquote>Top percentile in terms of quality, technology and the atmosphere! The folks at Arvada Dental Center were down to earth and welcoming</blockquote>
           <p class="review__who">Jon Jon<br><span class="review__src">Google review</span></p>
@@ -257,15 +277,15 @@
   <section class="section band-warm">
     <div class="wrap">
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(2rem,5vw,4rem);align-items:center">
-        <figure class="media-frame media-frame--wide" data-reveal style="margin:0">
+        <figure class="media-frame media-frame--wide" data-reveal="scale" style="margin:0">
           <img src="../_shared/assets/home-hero3.jpg.webp" alt="The waiting area at Arvada Dental Center &amp; Implants" loading="lazy">
         </figure>
         <div data-reveal data-delay="1">
           <p class="eyebrow">The whole household</p>
-          <h2 class="display">One practice for everyone at your address</h2>
+          <h2 class="display" data-split="lines">One practice for everyone at your address</h2>
           <p class="mt-sm">Family dentistry for every age, from a child's first checkup to a parent's implants —
             which means one place to remember, one set of records, and one team who knows your family.</p>
-          <ul class="checks mt-sm" style="grid-template-columns:1fr">
+          <ul class="checks mt-sm" data-stagger="45" style="grid-template-columns:1fr">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Preventive care and cleanings for all ages</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Pediatric dentistry, sealants and fluoride</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Cosmetic work — veneers, whitening, Invisalign®</li>
@@ -282,7 +302,7 @@
     <div class="wrap-narrow">
       <div class="mb-lg" data-reveal>
         <p class="eyebrow">Questions</p>
-        <h2 class="display">Neighbourly questions</h2>
+        <h2 class="display" data-split="lines">Neighbourly questions</h2>
       </div>
       <div class="faq" data-reveal>
         <div class="faq__item">
@@ -313,7 +333,7 @@
   <section class="section band-summit" style="--band-bg:var(--navy)">
     <div class="wrap-narrow center" data-reveal>
       <p class="eyebrow eyebrow--center">Come and meet us</p>
-      <h2 class="display">Your first visit is $109</h2>
+      <h2 class="display" data-split="lines">Your first visit is $109</h2>
       <p class="lede" style="margin-inline:auto">Exam, X-rays, OralID screening and a plan — from the practice your neighbours have used for twenty-two years.</p>
       <div class="btn-row btn-row--center mt">
         <a class="btn btn--offer btn--lg" href="#book">Claim the $109 special</a>

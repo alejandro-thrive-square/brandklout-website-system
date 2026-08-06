@@ -26,6 +26,26 @@
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/brand.css">
 <style>
+  /* Per-page motion contract. The shared system lives in ../_shared/brand.css;
+     this block guarantees the two rules that must hold even if that file is
+     swapped, minified or ported: motion never hides content, and
+     prefers-reduced-motion removes movement rather than removing information. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal], [data-split] .ln__i, [data-split] .wd,
+    .trust__item, .form-card, [data-parallax] {
+      opacity: 1 !important;
+      transform: none !important;
+      clip-path: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+    .progress { display: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  /* If the motion script never arms the system, nothing is left hidden. */
+  html:not([data-motion="on"]) [data-reveal] { opacity: 1; transform: none; }
+</style>
+<style>
   /* Emergency pages earn a louder call affordance than the rest of the set. */
   .callout-call {
     background: linear-gradient(150deg, #fff6ec 0%, #ffeada 100%);
@@ -82,7 +102,7 @@
     <div class="wrap hero__inner">
       <div style="max-width:56rem">
         <p class="eyebrow hero__eyebrow">Emergency Dentistry · Arvada, Colorado</p>
-        <h1 class="display">In pain right now?<br>Call us first.</h1>
+        <h1 class="display" data-split="lines">In pain right now?<br>Call us first.</h1>
         <p class="lede mt-sm" data-status-swap
            data-open-text="We're open right now. Call and we'll get you assessed today — whenever possible we make space in the schedule the same day."
            data-closed-text="We're closed at the moment, but leave us a message or call the moment we open at 8am. Whenever possible we make space in the schedule the same day.">
@@ -97,7 +117,7 @@
           <a class="btn btn--ghost btn--lg" href="#callback">Request a call back</a>
         </div>
 
-        <div class="trust">
+        <div class="trust" data-stagger="90">
           <span class="trust__item">
             <span class="status" data-status style="border-color:rgba(255,255,255,.3)"><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
           </span>
@@ -132,16 +152,16 @@
 
   <!-- ============ TRIAGE ============ -->
   <section class="section band-base" style="padding-top:0">
-    <div class="ridge-mark" aria-hidden="true">
+    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
       <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
     </div>
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">What's happening</p>
-        <h2 class="display">Find your symptom</h2>
+        <h2 class="display" data-split="lines">Find your symptom</h2>
         <p class="lede">Dental problems get worse quickly and rarely settle on their own. These are the ones we treat most often.</p>
       </div>
-      <div class="symptoms">
+      <div class="symptoms" data-stagger="65">
         <div class="symptom" data-reveal>
           <h3>Sudden or severe toothache</h3>
           <p>Pain that keeps you awake, or that has stopped responding to painkillers.</p>
@@ -196,9 +216,9 @@
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(2rem,5vw,4.5rem);align-items:center">
         <div data-reveal>
           <p class="eyebrow">Emergency treatments</p>
-          <h2 class="display">What we can do today</h2>
+          <h2 class="display" data-split="lines">What we can do today</h2>
           <p class="lede mt-sm">A trip to the emergency room is rarely the right answer for a dental problem. These are treated here, in one place.</p>
-          <ul class="checks mt">
+          <ul class="checks mt" data-stagger="45">
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Root canal therapy</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Repair of a loose or lost filling</li>
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Treatment of painful infections</li>
@@ -209,7 +229,7 @@
             <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Denture repair</li>
           </ul>
         </div>
-        <figure class="media-frame media-frame--wide" data-reveal data-delay="1" style="margin:0">
+        <figure class="media-frame media-frame--wide" data-reveal="scale" data-delay="1" style="margin:0">
           <img src="../_shared/assets/conditions-copy.jpg" alt="Dentist reviewing a patient's dental imaging at Arvada Dental Center" loading="lazy">
         </figure>
       </div>
@@ -221,9 +241,9 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">Why here</p>
-        <h2 class="display">Built for the appointment you didn't plan</h2>
+        <h2 class="display" data-split="lines">Built for the appointment you didn't plan</h2>
       </div>
-      <div class="grid grid--3">
+      <div class="grid grid--3" data-stagger="90">
         <article class="card" data-reveal>
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></div>
           <h3 class="h3">Same day whenever possible</h3>
@@ -249,7 +269,7 @@
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(2rem,5vw,4rem);align-items:center">
         <div data-reveal>
           <p class="eyebrow">If you can't call right now</p>
-          <h2 class="display">Leave your number</h2>
+          <h2 class="display" data-split="lines">Leave your number</h2>
           <p class="lede mt-sm">Tell us what's happening and we'll ring you back as soon as the office opens. If you are in
             severe pain, please call rather than wait for us.</p>
           <p><a class="tel" href="tel:+13034217611" style="font-size:1.3rem">(303) 421-7611</a></p>
@@ -295,9 +315,9 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">What patients say</p>
-        <h2 class="display">In our patients' own words</h2>
+        <h2 class="display" data-split="lines">In our patients' own words</h2>
       </div>
-      <div class="grid grid--3">
+      <div class="grid grid--3" data-stagger="90">
         <div class="review" data-reveal>
           <blockquote>They got me in immediately for an emergency visit, their prices were more than reasonable, and they were so friendly, and quick to help me with my problem and get me out of pain.</blockquote>
           <p class="review__who">keri c<br><span class="review__src">Google review</span></p>
@@ -319,7 +339,7 @@
     <div class="wrap-narrow">
       <div class="mb-lg" data-reveal>
         <p class="eyebrow">Questions</p>
-        <h2 class="display">Emergency questions, answered</h2>
+        <h2 class="display" data-split="lines">Emergency questions, answered</h2>
       </div>
       <div class="faq" data-reveal>
         <div class="faq__item">
@@ -354,7 +374,7 @@
   <section class="section band-summit" style="--band-bg:var(--navy)">
     <div class="wrap-narrow center" data-reveal>
       <p class="eyebrow eyebrow--center">Don't wait it out</p>
-      <h2 class="display">Resolve your toothache today</h2>
+      <h2 class="display" data-split="lines">Resolve your toothache today</h2>
       <p class="lede" style="margin-inline:auto">Dental pain almost never improves on its own, and infections least of all.</p>
       <div class="btn-row btn-row--center mt">
         <a class="btn btn--offer btn--lg tel" href="tel:+13034217611">Call (303) 421-7611</a>

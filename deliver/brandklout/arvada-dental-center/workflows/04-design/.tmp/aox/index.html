@@ -18,6 +18,26 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/brand.css">
+<style>
+  /* Per-page motion contract. The shared system lives in ../_shared/brand.css;
+     this block guarantees the two rules that must hold even if that file is
+     swapped, minified or ported: motion never hides content, and
+     prefers-reduced-motion removes movement rather than removing information. */
+  @media (prefers-reduced-motion: reduce) {
+    [data-reveal], [data-split] .ln__i, [data-split] .wd,
+    .trust__item, .form-card, [data-parallax] {
+      opacity: 1 !important;
+      transform: none !important;
+      clip-path: none !important;
+      transition: none !important;
+      animation: none !important;
+    }
+    .progress { display: none !important; }
+    html { scroll-behavior: auto; }
+  }
+  /* If the motion script never arms the system, nothing is left hidden. */
+  html:not([data-motion="on"]) [data-reveal] { opacity: 1; transform: none; }
+</style>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -47,7 +67,7 @@
     <div class="wrap hero__inner">
       <div>
         <p class="eyebrow hero__eyebrow">All-on-X Full Arch · Arvada, Colorado</p>
-        <h1 class="display">Stop planning your life<br>around your dentures.</h1>
+        <h1 class="display" data-split="lines">Stop planning your life<br>around your dentures.</h1>
         <p class="lede mt-sm">
           A full arch of fixed teeth on four or more implants — secured to the jawbone, so they never
           move when you smile, talk or eat. Most patients walk out with teeth the same day as surgery.
@@ -59,7 +79,7 @@
             (303) 421-7611
           </a>
         </div>
-        <div class="trust">
+        <div class="trust" data-stagger="90">
           <span class="trust__item">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
             Fixed teeth, often in one day
@@ -163,16 +183,16 @@
 
   <!-- ============ QUALIFIER ============ -->
   <section class="section band-base">
-    <div class="ridge-mark" aria-hidden="true">
+    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
       <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
     </div>
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">Is full arch right for you?</p>
-        <h2 class="display">You don't have to keep living this way</h2>
+        <h2 class="display" data-split="lines">You don't have to keep living this way</h2>
         <p class="lede">Full-arch implants are usually the answer when the problem has stopped being one tooth and started being every meal.</p>
       </div>
-      <ul class="checks" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:1.1rem">
+      <ul class="checks" data-stagger="45" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:1.1rem">
         <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>You are missing most or all of the teeth in an arch</span></li>
         <li data-reveal data-delay="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Your dentures slip, click, or need adhesive to stay put</span></li>
         <li data-reveal data-delay="2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>You avoid whole categories of food and have stopped mentioning it</span></li>
@@ -191,7 +211,7 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">Your three options</p>
-        <h2 class="display">What full-arch replacement actually compares against</h2>
+        <h2 class="display" data-split="lines">What full-arch replacement actually compares against</h2>
         <p class="lede">Arvada Dental Center offers all three. This is the practice's own comparison, not a sales chart.</p>
       </div>
       <div class="compare-scroll" data-reveal>
@@ -248,9 +268,9 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">What changes</p>
-        <h2 class="display">More than teeth</h2>
+        <h2 class="display" data-split="lines">More than teeth</h2>
       </div>
-      <div class="grid grid--4">
+      <div class="grid grid--4" data-stagger="70">
         <article class="card card--lift" data-reveal>
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
           <h3 class="h3">Fixed, stable teeth</h3>
@@ -281,13 +301,13 @@
       <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(2rem,5vw,4.5rem);align-items:start">
         <div data-reveal>
           <p class="eyebrow">What to expect</p>
-          <h2 class="display">Four steps to a fixed arch</h2>
+          <h2 class="display" data-split="lines">Four steps to a fixed arch</h2>
           <p class="lede mt-sm">Planning happens digitally before anyone picks up an instrument, which is what makes same-day placement possible.</p>
           <figure class="media-frame media-frame--wide mt" style="margin:0">
             <img src="../_shared/assets/recieving.jpg.webp" alt="Dr. Bennett and team performing implant surgery at Arvada Dental Center" loading="lazy">
           </figure>
         </div>
-        <div class="steps" data-reveal data-delay="1">
+        <div class="steps" data-stagger="120" data-reveal data-delay="1">
           <div class="step">
             <h3 class="h3">Consultation and 3D scan</h3>
             <p>A free consultation with Dr. Bennett, plus the imaging that shows how much bone there is to anchor into.</p>
@@ -314,7 +334,7 @@
     <div class="wrap-narrow center">
       <div data-reveal>
         <p class="eyebrow eyebrow--center">The investment</p>
-        <h2 class="display">A published price, not a phone-call estimate</h2>
+        <h2 class="display" data-split="lines">A published price, not a phone-call estimate</h2>
         <p class="lede" style="margin-inline:auto">A fixed full upper or lower arch at Arvada Dental Center is</p>
         <p class="price-tag" style="justify-content:center;margin:1.25rem 0" data-price><span data-count>$18,795</span></p>
         <p>which the practice states is more than $10,000 below the national chains advertised on television.<a href="#terms" aria-label="See pricing terms">*</a>
@@ -338,7 +358,7 @@
         </figure>
         <div data-reveal data-delay="1">
           <p class="eyebrow">Who will treat you</p>
-          <h2 class="display">Every phase, one surgeon</h2>
+          <h2 class="display" data-split="lines">Every phase, one surgeon</h2>
           <p class="mt-sm">Dr. Gregory Bennett delivers and oversees every phase of a full-arch case himself — surgery,
             sedation, restoration and the lab portions of implantology. That is unusual, and it is the reason the
             practice can quote one price and one timeline rather than coordinating three.</p>
@@ -358,9 +378,9 @@
     <div class="wrap">
       <div class="center mb-lg" data-reveal>
         <p class="eyebrow eyebrow--center">What patients say</p>
-        <h2 class="display">In our patients' own words</h2>
+        <h2 class="display" data-split="lines">In our patients' own words</h2>
       </div>
-      <div class="grid grid--3">
+      <div class="grid grid--3" data-stagger="90">
         <div class="review" data-reveal>
           <blockquote>My first visit and I was extremely impressed. A clear plan was put together, including personal input from Dr. Bennett. Pricing was fully transparent, no hidden surprises expected.</blockquote>
           <p class="review__who">Rick Willcox<br><span class="review__src">Google review</span></p>
@@ -383,7 +403,7 @@
     <div class="wrap-narrow">
       <div class="mb-lg" data-reveal>
         <p class="eyebrow">Questions</p>
-        <h2 class="display">Full-arch, answered honestly</h2>
+        <h2 class="display" data-split="lines">Full-arch, answered honestly</h2>
       </div>
       <div class="faq" data-reveal>
         <div class="faq__item">
@@ -414,7 +434,7 @@
   <section class="section band-summit" style="--band-bg:var(--navy)">
     <div class="wrap-narrow center" data-reveal>
       <p class="eyebrow eyebrow--center">Next step</p>
-      <h2 class="display">One consultation tells you where you stand</h2>
+      <h2 class="display" data-split="lines">One consultation tells you where you stand</h2>
       <p class="lede" style="margin-inline:auto">Free, with a 3D scan and a written plan. If full-arch isn't right for you, Dr. Bennett will say so.</p>
       <div class="btn-row btn-row--center mt">
         <a class="btn btn--primary btn--lg" href="#consult">Book my free consultation</a>
