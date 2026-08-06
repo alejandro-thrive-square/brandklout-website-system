@@ -28,16 +28,24 @@ and are ready for Sang Huynh's review.
 > both — they are the priority. The parent brief has been rewritten three times and moved five
 > times; **the current Asana description is authoritative**, nothing from earlier revisions applies.
 
-Design packages, in `workflows/04-design/.tmp/`:
+Design packages, in `workflows/04-design/.tmp/` — see its
+[README](../workflows/04-design/.tmp/README.md) for the full technique list:
 
 | Package | Asana task | State |
 | :--- | :--- | :--- |
-| [`implant-landing-page/`](../workflows/04-design/.tmp/implant-landing-page/) | `1217133289235653` | All 7 spec sections + multi-step qualification quiz. Verified. |
-| [`cosmetic-landing-page/`](../workflows/04-design/.tmp/cosmetic-landing-page/) | `1217072657902270` | All 7 spec sections incl. sticky mobile bar + 8 real patient cases. Verified. |
-| [`thank-you-landing-page/`](../workflows/04-design/.tmp/thank-you-landing-page/) | `1217162605683014` | All 4 spec sections. **Shared archetype** — reuse for Mason Park. Verified. |
-| `verify.mjs` | — | Headless-Chrome functional suite: 40 checks, screenshots in `verify-shots/`. |
+| [`implant-landing-page/`](../workflows/04-design/.tmp/implant-landing-page/) | `1217133289235653` | All 7 spec sections + multi-step quiz. **Rebuilt to the motion standard 2026-08-06.** Signature: pinned horizontal solutions track. |
+| [`cosmetic-landing-page/`](../workflows/04-design/.tmp/cosmetic-landing-page/) | `1217072657902270` | All 7 spec sections incl. sticky mobile bar. **Rebuilt to the motion standard 2026-08-06.** Signature: pinned 8-case patient ribbon. |
+| [`thank-you-landing-page/`](../workflows/04-design/.tmp/thank-you-landing-page/) | `1217162605683014` | All 4 spec sections, verified — but **still the first-pass build, not yet rebuilt** to the motion standard. **Shared archetype** for Mason Park. |
+| `verify.mjs` | — | Headless-Chrome behavioural suite: **65 checks**, screenshots in `verify-shots/`. |
 
 Run `node verify.mjs` from `workflows/04-design/.tmp/` to re-check all three.
+
+> [!NOTE]
+> The first pass was reviewed as plain and templatised and did not pass. The Implant and Cosmetic
+> pages were **rebuilt in execution only** — section order and the verified real content carried
+> over unchanged — against [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md): GSAP 3.13 with
+> ScrollSmoother, SplitText line reveals, pinned horizontal sequences, scroll-scrubbed counters,
+> clip-path wipes, magnetic and cursor-aware interaction, and reduced-motion guards throughout.
 
 Intake artifacts, all in `workflows/01-content-intake/.tmp/`:
 
