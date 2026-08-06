@@ -6,15 +6,435 @@
   "nodes": [
     {
       "gid": "1217040406855582",
+      "actual_time_minutes": null,
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
+      "assignee_status": "inbox",
       "completed": false,
+      "completed_at": null,
+      "completed_by": null,
       "created_at": "2026-07-30T22:59:29.760Z",
+      "custom_fields": [
+        {
+          "gid": "1217194751836357",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1217194751836358",
+              "color": "red",
+              "enabled": true,
+              "name": "Highest - Urgent",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836359",
+              "color": "orange",
+              "enabled": true,
+              "name": "High - Close to deadline",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836360",
+              "color": "green",
+              "enabled": true,
+              "name": "Medium - On track",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836361",
+              "color": "blue",
+              "enabled": true,
+              "name": "Low - Next Week",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Priority",
+          "description": "",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1211830978949300",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1216937025018723",
+              "color": "red",
+              "enabled": true,
+              "name": "Urgent",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949301",
+              "color": "orange",
+              "enabled": true,
+              "name": "High",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949302",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Medium",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949303",
+              "color": "yellow-green",
+              "enabled": true,
+              "name": "Low",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Priority",
+          "description": "Asana-created. Track the priority of each task.",
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1213654480386510",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1213654480386511",
+              "color": "blue",
+              "enabled": true,
+              "name": "Not Started",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386512",
+              "color": "cool-gray",
+              "enabled": true,
+              "name": "In Progress",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386513",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Awaiting Client Response",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386514",
+              "color": "orange",
+              "enabled": true,
+              "name": "Client Review",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386515",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Done",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": {
+            "gid": "1213654480386511",
+            "color": "blue",
+            "enabled": true,
+            "name": "Not Started",
+            "resource_type": "enum_option"
+          },
+          "name": "Task Progress",
+          "description": "Asana-created. Track the progress of each task.",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica",
+            "resource_type": "user"
+          },
+          "display_value": "Not Started",
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1210907656178881",
+          "enabled": true,
+          "name": "Estimated time",
+          "description": "Asana-created. Estimate time to complete a task.",
+          "number_value": null,
+          "precision": 0,
+          "created_by": null,
+          "display_value": null,
+          "resource_subtype": "number",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "number"
+        },
+        {
+          "gid": "1215611096046618",
+          "enabled": true,
+          "name": "Original Due Date",
+          "description": "",
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": "2026-07-31T00:00:00.000Z",
+          "resource_subtype": "date",
+          "resource_type": "custom_field",
+          "date_value": {
+            "date": "2026-07-31",
+            "date_time": null
+          },
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "date"
+        },
+        {
+          "gid": "1216224867752821",
+          "enabled": true,
+          "name": "TaskTime",
+          "description": "",
+          "number_value": null,
+          "precision": 0,
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "number",
+          "resource_type": "custom_field",
+          "is_formula_field": true,
+          "is_value_read_only": true,
+          "type": "number"
+        },
+        {
+          "gid": "1216937025018707",
+          "enabled": true,
+          "name": "Email Address",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1216937025018709",
+          "enabled": true,
+          "name": "Name",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1216937025018727",
+          "enabled": true,
+          "name": "Short Summary of Request",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1215184673274456",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1215184637115807",
+              "color": "blue",
+              "enabled": true,
+              "name": "Not Started",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115808",
+              "color": "cool-gray",
+              "enabled": true,
+              "name": "In Progress",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115809",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Waiting",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115810",
+              "color": "orange",
+              "enabled": true,
+              "name": "Deferred",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115811",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Done",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Task Progress",
+          "description": "Asana-created. Track the progress of each task.",
+          "created_by": {
+            "gid": "1216273111321713",
+            "name": "Domeneque Camacho",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1215184637115822",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1215184637115823",
+              "color": "green",
+              "enabled": true,
+              "name": "Sales",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115824",
+              "color": "red",
+              "enabled": true,
+              "name": "Customer Success",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115825",
+              "color": "orange",
+              "enabled": true,
+              "name": "Web Designer",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115826",
+              "color": "yellow-orange",
+              "enabled": true,
+              "name": "Client",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1216538623212278",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Ads",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Responsible Team",
+          "description": "",
+          "created_by": {
+            "gid": "1216273111321713",
+            "name": "Domeneque Camacho",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        }
+      ],
+      "dependencies": [],
+      "dependents": [],
       "due_at": null,
       "due_on": "2026-08-05",
+      "followers": [
+        {
+          "gid": "1213912114353154",
+          "name": "Gauge Hill"
+        },
+        {
+          "gid": "1211675097206163",
+          "name": "Jessica"
+        },
+        {
+          "gid": "1217162291350352",
+          "name": "Alejandro Milano"
+        }
+      ],
       "html_notes": "<body>Use this one for inspiration:\n<a href=\"https://start.smartarchesdental.com/?step=start\">https://start.smartarchesdental.com/?step=start</a>\nUse this one as inspiration as well: \n<a href=\"https://novismilerogers.com/?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=24091810786&amp;utm_content=818968089590&amp;utm_term=all%20on%20x%20dental%20implants&amp;mt=p&amp;nw=g&amp;dv=c&amp;gad_source=1&amp;gad_campaignid=24091810786&amp;gbraid=0AAAABEQDY-pcwGGqqmMpWSRrQduvavM4A&amp;gclid=CjwKCAjwj7HTBhBiEiwA8s35OhO819xkzHFuex1g5sqcnuhcLbjnxa_kkwjRIn1SAaGXk3ycoB27UhoCx2gQAvD_BwE\">https://novismilerogers.com/?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=24091810786&amp;utm_content=818968089590&amp;utm_term=all%20on%20x%20dental%20implants&amp;mt=p&amp;nw=g&amp;dv=c&amp;gad_source=1&amp;gad_campaignid=24091810786&amp;gbraid=0AAAABEQDY-pcwGGqqmMpWSRrQduvavM4A&amp;gclid=CjwKCAjwj7HTBhBiEiwA8s35OhO819xkzHFuex1g5sqcnuhcLbjnxa_kkwjRIn1SAaGXk3ycoB27UhoCx2gQAvD_BwE</a>\n\nAttached are the originals from the other Ad company. Use it as a reference point</body>",
+      "memberships": [
+        {
+          "project": {
+            "gid": "1215184535967345",
+            "name": "BK Implementation - Mason Park Dental"
+          },
+          "section": {
+            "gid": "1215184637174188",
+            "name": "Growth Engine"
+          }
+        },
+        {
+          "project": {
+            "gid": "1211830976769588",
+            "name": "Success Daily Stand-Up"
+          },
+          "section": {
+            "gid": "1211830976769601",
+            "name": "Open Tasks"
+          }
+        }
+      ],
       "modified_at": "2026-08-05T15:33:34.464Z",
       "name": "Landing Page - Mason Park",
       "notes": "Use this one for inspiration:\nhttps://start.smartarchesdental.com/?step=start\nUse this one as inspiration as well: \nhttps://novismilerogers.com/?utm_source=google&utm_medium=cpc&utm_campaign=24091810786&utm_content=818968089590&utm_term=all%20on%20x%20dental%20implants&mt=p&nw=g&dv=c&gad_source=1&gad_campaignid=24091810786&gbraid=0AAAABEQDY-pcwGGqqmMpWSRrQduvavM4A&gclid=CjwKCAjwj7HTBhBiEiwA8s35OhO819xkzHFuex1g5sqcnuhcLbjnxa_kkwjRIn1SAaGXk3ycoB27UhoCx2gQAvD_BwE\n\nAttached are the originals from the other Ad company. Use it as a reference point",
@@ -31,7 +451,13 @@
           "name": "BK Implementation - Mason Park Dental"
         }
       ],
+      "start_on": null,
       "tags": [],
+      "resource_subtype": "default_task",
+      "workspace": {
+        "gid": "1210572425689866",
+        "name": "ThriveSquare"
+      },
       "subtasks": [
         {
           "gid": "1217040406855602",
@@ -58,38 +484,655 @@
         {
           "gid": "1217162344633748",
           "created_at": "2026-08-04T16:30:04.642Z",
-          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683022/0cae1ec5fdaac3bc47d42c7246627121?e=1786027793&v=0&t=WjAG3UkcQP8MGa8FvWplM7qyuFA4nX70_nHc67KjGVA",
+          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683022/0cae1ec5fdaac3bc47d42c7246627121?e=1786028378&v=0&t=DD-gVdHGohJiUigHiEbRAek2PA1aTOkwsYNQVDswFJE",
           "host": "asana",
           "name": "mpd-invisalign-lp.html",
           "permanent_url": "https://app.asana.com/app/asana/-/get_asset?asset_id=1217162344633748",
           "resource_subtype": "asana",
-          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683022/0cae1ec5fdaac3bc47d42c7246627121?e=1786027793&v=0&t=WjAG3UkcQP8MGa8FvWplM7qyuFA4nX70_nHc67KjGVA",
+          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683022/0cae1ec5fdaac3bc47d42c7246627121?e=1786028378&v=0&t=DD-gVdHGohJiUigHiEbRAek2PA1aTOkwsYNQVDswFJE",
           "size": 26957
         },
         {
           "gid": "1217162344633750",
           "created_at": "2026-08-04T16:30:05.235Z",
-          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162344633749/5a934f5cc05dddc4a75d48a9523bf843?e=1786027793&v=0&t=6yaf-6zIgzNV1C2uxLpw0BQSjE8hsfg6bskhwzWafQY",
+          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162344633749/5a934f5cc05dddc4a75d48a9523bf843?e=1786028378&v=0&t=8dfHdOTjmSw6OJ378AjYGyTIjKte_zP6sdL2p1XHyVY",
           "host": "asana",
           "name": "mpd-new-patient-lp.html",
           "permanent_url": "https://app.asana.com/app/asana/-/get_asset?asset_id=1217162344633750",
           "resource_subtype": "asana",
-          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162344633749/5a934f5cc05dddc4a75d48a9523bf843?e=1786027793&v=0&t=6yaf-6zIgzNV1C2uxLpw0BQSjE8hsfg6bskhwzWafQY",
+          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162344633749/5a934f5cc05dddc4a75d48a9523bf843?e=1786028378&v=0&t=8dfHdOTjmSw6OJ378AjYGyTIjKte_zP6sdL2p1XHyVY",
           "size": 31121
         }
-      ]
+      ],
+      "storyCounts": {
+        "assigned": 3,
+        "added_to_project": 2,
+        "due_date_changed": 5,
+        "date_custom_field_changed": 1,
+        "notes_changed": 2,
+        "follower_added": 2,
+        "attachment_added": 2,
+        "unassigned": 1,
+        "enum_custom_field_changed": 1
+      },
+      "stories": [
+        {
+          "gid": "1217040435585750",
+          "created_at": "2026-07-30T22:59:29.833Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to Gauge Hill",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217040435585756",
+          "created_at": "2026-07-30T22:59:30.212Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill added this task to BK Implementation - Mason Park Dental",
+          "type": "system",
+          "resource_subtype": "added_to_project"
+        },
+        {
+          "gid": "1217040559189956",
+          "created_at": "2026-07-30T23:05:59.554Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill changed the due date to Jul 30",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        },
+        {
+          "gid": "1217040453189060",
+          "created_at": "2026-07-30T23:06:03.822Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill added this task to Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "added_to_project"
+        },
+        {
+          "gid": "1217064318028083",
+          "created_at": "2026-07-31T14:01:26.793Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill changed the due date to Jul 31",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        },
+        {
+          "gid": "1217082825234888",
+          "created_at": "2026-07-31T14:01:28.058Z",
+          "created_by": null,
+          "text": "Asana changed Original Due Date to \"Jul 31\"",
+          "type": "system",
+          "resource_subtype": "date_custom_field_changed"
+        },
+        {
+          "gid": "1217070010752721",
+          "created_at": "2026-07-31T17:12:25.983Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill removed the description",
+          "type": "system",
+          "resource_subtype": "notes_changed"
+        },
+        {
+          "gid": "1217117143010492",
+          "created_at": "2026-08-03T13:09:36.706Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill changed the due date to Aug 3",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        },
+        {
+          "gid": "1217156634787375",
+          "created_at": "2026-08-04T14:22:02.570Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill changed the due date to Aug 4",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        },
+        {
+          "gid": "1217164070008683",
+          "created_at": "2026-08-04T16:28:12.625Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill added Nayeli Ortega as a collaborator",
+          "type": "system",
+          "resource_subtype": "follower_added"
+        },
+        {
+          "gid": "1217164114019811",
+          "created_at": "2026-08-04T16:30:04.819Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill attached mpd-invisalign-lp.html",
+          "type": "system",
+          "resource_subtype": "attachment_added"
+        },
+        {
+          "gid": "1217164166010904",
+          "created_at": "2026-08-04T16:30:05.403Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill attached mpd-new-patient-lp.html",
+          "type": "system",
+          "resource_subtype": "attachment_added"
+        },
+        {
+          "gid": "1217164114460258",
+          "created_at": "2026-08-04T16:30:14.337Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill unassigned from Gauge Hill",
+          "type": "system",
+          "resource_subtype": "unassigned"
+        },
+        {
+          "gid": "1217164071200778",
+          "created_at": "2026-08-04T16:30:21.468Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to Nayeli Ortega",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217164166447881",
+          "created_at": "2026-08-04T16:30:22.668Z",
+          "created_by": null,
+          "text": "Asana changed Task Progress to Not Started",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217164291098494",
+          "created_at": "2026-08-04T16:31:33.746Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill added the description",
+          "type": "system",
+          "resource_subtype": "notes_changed"
+        },
+        {
+          "gid": "1217164411956034",
+          "created_at": "2026-08-04T16:39:07.724Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill added Jessica as a collaborator",
+          "type": "system",
+          "resource_subtype": "follower_added"
+        },
+        {
+          "gid": "1217176575505721",
+          "created_at": "2026-08-05T01:17:58.829Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to you",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217195407381710",
+          "created_at": "2026-08-05T15:33:34.383Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica changed the due date to Yesterday",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        }
+      ],
+      "dependentTasks": [],
+      "dependencyTasks": []
     },
     {
       "gid": "1217040406855602",
+      "actual_time_minutes": null,
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
+      "assignee_status": "inbox",
       "completed": false,
+      "completed_at": null,
+      "completed_by": null,
       "created_at": "2026-07-31T10:09:28.543Z",
+      "custom_fields": [
+        {
+          "gid": "1217194751836357",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1217194751836358",
+              "color": "red",
+              "enabled": true,
+              "name": "Highest - Urgent",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836359",
+              "color": "orange",
+              "enabled": true,
+              "name": "High - Close to deadline",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836360",
+              "color": "green",
+              "enabled": true,
+              "name": "Medium - On track",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836361",
+              "color": "blue",
+              "enabled": true,
+              "name": "Low - Next Week",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Priority",
+          "description": "",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1211830978949300",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1216937025018723",
+              "color": "red",
+              "enabled": true,
+              "name": "Urgent",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949301",
+              "color": "orange",
+              "enabled": true,
+              "name": "High",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949302",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Medium",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949303",
+              "color": "yellow-green",
+              "enabled": true,
+              "name": "Low",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Priority",
+          "description": "Asana-created. Track the priority of each task.",
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1213654480386510",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1213654480386511",
+              "color": "blue",
+              "enabled": true,
+              "name": "Not Started",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386512",
+              "color": "cool-gray",
+              "enabled": true,
+              "name": "In Progress",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386513",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Awaiting Client Response",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386514",
+              "color": "orange",
+              "enabled": true,
+              "name": "Client Review",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386515",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Done",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": {
+            "gid": "1213654480386511",
+            "color": "blue",
+            "enabled": true,
+            "name": "Not Started",
+            "resource_type": "enum_option"
+          },
+          "name": "Task Progress",
+          "description": "Asana-created. Track the progress of each task.",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica",
+            "resource_type": "user"
+          },
+          "display_value": "Not Started",
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1210907656178881",
+          "enabled": true,
+          "name": "Estimated time",
+          "description": "Asana-created. Estimate time to complete a task.",
+          "number_value": null,
+          "precision": 0,
+          "created_by": null,
+          "display_value": null,
+          "resource_subtype": "number",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "number"
+        },
+        {
+          "gid": "1215611096046618",
+          "enabled": true,
+          "name": "Original Due Date",
+          "description": "",
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": "2026-08-04T00:00:00.000Z",
+          "resource_subtype": "date",
+          "resource_type": "custom_field",
+          "date_value": {
+            "date": "2026-08-04",
+            "date_time": null
+          },
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "date"
+        },
+        {
+          "gid": "1216224867752821",
+          "enabled": true,
+          "name": "TaskTime",
+          "description": "",
+          "number_value": null,
+          "precision": 0,
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "number",
+          "resource_type": "custom_field",
+          "is_formula_field": true,
+          "is_value_read_only": true,
+          "type": "number"
+        },
+        {
+          "gid": "1216937025018707",
+          "enabled": true,
+          "name": "Email Address",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1216937025018709",
+          "enabled": true,
+          "name": "Name",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1216937025018727",
+          "enabled": true,
+          "name": "Short Summary of Request",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1215184673274456",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1215184637115807",
+              "color": "blue",
+              "enabled": true,
+              "name": "Not Started",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115808",
+              "color": "cool-gray",
+              "enabled": true,
+              "name": "In Progress",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115809",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Waiting",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115810",
+              "color": "orange",
+              "enabled": true,
+              "name": "Deferred",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115811",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Done",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Task Progress",
+          "description": "Asana-created. Track the progress of each task.",
+          "created_by": {
+            "gid": "1216273111321713",
+            "name": "Domeneque Camacho",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1215184637115822",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1215184637115823",
+              "color": "green",
+              "enabled": true,
+              "name": "Sales",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115824",
+              "color": "red",
+              "enabled": true,
+              "name": "Customer Success",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115825",
+              "color": "orange",
+              "enabled": true,
+              "name": "Web Designer",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115826",
+              "color": "yellow-orange",
+              "enabled": true,
+              "name": "Client",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1216538623212278",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Ads",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Responsible Team",
+          "description": "",
+          "created_by": {
+            "gid": "1216273111321713",
+            "name": "Domeneque Camacho",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        }
+      ],
+      "dependencies": [],
+      "dependents": [],
       "due_at": null,
       "due_on": "2026-08-05",
+      "followers": [
+        {
+          "gid": "1213912114353154",
+          "name": "Gauge Hill"
+        },
+        {
+          "gid": "1216725885824030",
+          "name": "Nayeli Ortega"
+        },
+        {
+          "gid": "1217162291350352",
+          "name": "Alejandro Milano"
+        }
+      ],
       "html_notes": "<body>1. Immediate Status Banner\n2. Fast-Track Immediate Call Box (High-Intent Prompt)\n3. What to Expect (3-Step Timeline)\n4. Practice Details &amp; Location Map\n\nCheck GHL for proper tracking number</body>",
+      "memberships": [],
       "modified_at": "2026-08-05T04:08:28.918Z",
       "name": "Thank you Page",
       "notes": "1. Immediate Status Banner\n2. Fast-Track Immediate Call Box (High-Intent Prompt)\n3. What to Expect (3-Step Timeline)\n4. Practice Details & Location Map\n\nCheck GHL for proper tracking number",
@@ -100,23 +1143,545 @@
       },
       "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217040406855602",
       "projects": [],
+      "start_on": null,
       "tags": [],
+      "resource_subtype": "default_task",
+      "workspace": {
+        "gid": "1210572425689866",
+        "name": "ThriveSquare"
+      },
       "subtasks": [],
       "comments": [],
       "depth": 1,
-      "attachments": []
+      "attachments": [],
+      "storyCounts": {
+        "added_to_task": 1,
+        "due_date_changed": 2,
+        "date_custom_field_changed": 1,
+        "assigned": 3,
+        "enum_custom_field_changed": 1,
+        "notes_changed": 1,
+        "due_today": 1
+      },
+      "stories": [
+        {
+          "gid": "1217049580503451",
+          "created_at": "2026-07-31T10:09:28.673Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill added this task as a subtask of Landing Page - Mason Park",
+          "type": "system",
+          "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217163966760144",
+          "created_at": "2026-08-04T16:30:29.531Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill changed the due date to Aug 4",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        },
+        {
+          "gid": "1217164166704869",
+          "created_at": "2026-08-04T16:30:30.839Z",
+          "created_by": null,
+          "text": "Asana changed Original Due Date to \"Aug 4\"",
+          "type": "system",
+          "resource_subtype": "date_custom_field_changed"
+        },
+        {
+          "gid": "1217164166599276",
+          "created_at": "2026-08-04T16:30:35.370Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to Gauge Hill",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217164114638911",
+          "created_at": "2026-08-04T16:30:36.798Z",
+          "created_by": null,
+          "text": "Asana changed Task Progress to Not Started",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217164071561273",
+          "created_at": "2026-08-04T16:31:42.239Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to Nayeli Ortega",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217164115619674",
+          "created_at": "2026-08-04T16:32:17.313Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill added the description",
+          "type": "system",
+          "resource_subtype": "notes_changed"
+        },
+        {
+          "gid": "1217175915153292",
+          "created_at": "2026-08-05T00:26:24.690Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to you",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217176136776025",
+          "created_at": "2026-08-05T00:26:27.741Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill changed the due date to Yesterday",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        },
+        {
+          "gid": "1217178337737581",
+          "created_at": "2026-08-05T04:08:28.917Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano have a task due Yesterday",
+          "type": "system",
+          "resource_subtype": "due_today"
+        }
+      ],
+      "dependentTasks": [],
+      "dependencyTasks": []
     },
     {
       "gid": "1217133289235652",
+      "actual_time_minutes": null,
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
+      "assignee_status": "inbox",
       "completed": false,
+      "completed_at": null,
+      "completed_by": null,
       "created_at": "2026-08-03T22:32:57.453Z",
+      "custom_fields": [
+        {
+          "gid": "1217194751836357",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1217194751836358",
+              "color": "red",
+              "enabled": true,
+              "name": "Highest - Urgent",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836359",
+              "color": "orange",
+              "enabled": true,
+              "name": "High - Close to deadline",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836360",
+              "color": "green",
+              "enabled": true,
+              "name": "Medium - On track",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836361",
+              "color": "blue",
+              "enabled": true,
+              "name": "Low - Next Week",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Priority",
+          "description": "",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1211830978949300",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1216937025018723",
+              "color": "red",
+              "enabled": true,
+              "name": "Urgent",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949301",
+              "color": "orange",
+              "enabled": true,
+              "name": "High",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949302",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Medium",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949303",
+              "color": "yellow-green",
+              "enabled": true,
+              "name": "Low",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Priority",
+          "description": "Asana-created. Track the priority of each task.",
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1213654480386510",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1213654480386511",
+              "color": "blue",
+              "enabled": true,
+              "name": "Not Started",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386512",
+              "color": "cool-gray",
+              "enabled": true,
+              "name": "In Progress",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386513",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Awaiting Client Response",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386514",
+              "color": "orange",
+              "enabled": true,
+              "name": "Client Review",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386515",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Done",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": {
+            "gid": "1213654480386511",
+            "color": "blue",
+            "enabled": true,
+            "name": "Not Started",
+            "resource_type": "enum_option"
+          },
+          "name": "Task Progress",
+          "description": "Asana-created. Track the progress of each task.",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica",
+            "resource_type": "user"
+          },
+          "display_value": "Not Started",
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1210907656178881",
+          "enabled": true,
+          "name": "Estimated time",
+          "description": "Asana-created. Estimate time to complete a task.",
+          "number_value": null,
+          "precision": 0,
+          "created_by": null,
+          "display_value": null,
+          "resource_subtype": "number",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "number"
+        },
+        {
+          "gid": "1215611096046618",
+          "enabled": true,
+          "name": "Original Due Date",
+          "description": "",
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": "2026-08-04T00:00:00.000Z",
+          "resource_subtype": "date",
+          "resource_type": "custom_field",
+          "date_value": {
+            "date": "2026-08-04",
+            "date_time": null
+          },
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "date"
+        },
+        {
+          "gid": "1216224867752821",
+          "enabled": true,
+          "name": "TaskTime",
+          "description": "",
+          "number_value": null,
+          "precision": 0,
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "number",
+          "resource_type": "custom_field",
+          "is_formula_field": true,
+          "is_value_read_only": true,
+          "type": "number"
+        },
+        {
+          "gid": "1216937025018707",
+          "enabled": true,
+          "name": "Email Address",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1216937025018709",
+          "enabled": true,
+          "name": "Name",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1216937025018727",
+          "enabled": true,
+          "name": "Short Summary of Request",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1215184673274456",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1215184637115807",
+              "color": "blue",
+              "enabled": true,
+              "name": "Not Started",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115808",
+              "color": "cool-gray",
+              "enabled": true,
+              "name": "In Progress",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115809",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Waiting",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115810",
+              "color": "orange",
+              "enabled": true,
+              "name": "Deferred",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115811",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Done",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Task Progress",
+          "description": "Asana-created. Track the progress of each task.",
+          "created_by": {
+            "gid": "1216273111321713",
+            "name": "Domeneque Camacho",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1215184637115822",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1215184637115823",
+              "color": "green",
+              "enabled": true,
+              "name": "Sales",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115824",
+              "color": "red",
+              "enabled": true,
+              "name": "Customer Success",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115825",
+              "color": "orange",
+              "enabled": true,
+              "name": "Web Designer",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115826",
+              "color": "yellow-orange",
+              "enabled": true,
+              "name": "Client",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1216538623212278",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Ads",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Responsible Team",
+          "description": "",
+          "created_by": {
+            "gid": "1216273111321713",
+            "name": "Domeneque Camacho",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        }
+      ],
+      "dependencies": [],
+      "dependents": [],
       "due_at": null,
       "due_on": "2026-08-05",
+      "followers": [
+        {
+          "gid": "1213912114353154",
+          "name": "Gauge Hill"
+        },
+        {
+          "gid": "1216725885824030",
+          "name": "Nayeli Ortega"
+        },
+        {
+          "gid": "1217162291350352",
+          "name": "Alejandro Milano"
+        }
+      ],
       "html_notes": "<body>Use as Inspiration:\n\n<a href=\"https://tulipdent.com/Beautifulsmile/invisalign-treatment-in-redlands/?gad_source=1&amp;gad_campaignid=23801751528&amp;gbraid=0AAAAAoxO05erTKcyjyEp0Fc2sE-nnqMNq&amp;gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lJgSbluMkRA5peaAr4gakmopPXAbmTVBG1A6LhuBKif8vDQpsNp08aAlepEALw_wcB\">https://tulipdent.com/Beautifulsmile/invisalign-treatment-in-redlands/?gad_source=1&amp;gad_campaignid=23801751528&amp;gbraid=0AAAAAoxO05erTKcyjyEp0Fc2sE-nnqMNq&amp;gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lJgSbluMkRA5peaAr4gakmopPXAbmTVBG1A6LhuBKif8vDQpsNp08aAlepEALw_wcB</a>\n\n\n</body>",
+      "memberships": [],
       "modified_at": "2026-08-05T04:10:07.162Z",
       "name": "Invisalign Landing Page",
       "notes": "Use as Inspiration:\n\nhttps://tulipdent.com/Beautifulsmile/invisalign-treatment-in-redlands/?gad_source=1&gad_campaignid=23801751528&gbraid=0AAAAAoxO05erTKcyjyEp0Fc2sE-nnqMNq&gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lJgSbluMkRA5peaAr4gakmopPXAbmTVBG1A6LhuBKif8vDQpsNp08aAlepEALw_wcB\n\n\n",
@@ -127,23 +1692,545 @@
       },
       "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217133289235652",
       "projects": [],
+      "start_on": null,
       "tags": [],
+      "resource_subtype": "default_task",
+      "workspace": {
+        "gid": "1210572425689866",
+        "name": "ThriveSquare"
+      },
       "subtasks": [],
       "comments": [],
       "depth": 1,
-      "attachments": []
+      "attachments": [],
+      "storyCounts": {
+        "added_to_task": 1,
+        "due_date_changed": 2,
+        "date_custom_field_changed": 1,
+        "assigned": 3,
+        "enum_custom_field_changed": 1,
+        "notes_changed": 1,
+        "due_today": 1
+      },
+      "stories": [
+        {
+          "gid": "1217136836465654",
+          "created_at": "2026-08-03T22:32:57.631Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill added this task as a subtask of Landing Page - Mason Park",
+          "type": "system",
+          "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217164223524184",
+          "created_at": "2026-08-04T16:30:38.746Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill changed the due date to Aug 4",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        },
+        {
+          "gid": "1217164166802840",
+          "created_at": "2026-08-04T16:30:39.861Z",
+          "created_by": null,
+          "text": "Asana changed Original Due Date to \"Aug 4\"",
+          "type": "system",
+          "resource_subtype": "date_custom_field_changed"
+        },
+        {
+          "gid": "1217164071484764",
+          "created_at": "2026-08-04T16:30:46.951Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to Gauge Hill",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217164223728655",
+          "created_at": "2026-08-04T16:30:48.260Z",
+          "created_by": null,
+          "text": "Asana changed Task Progress to Not Started",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217164224247276",
+          "created_at": "2026-08-04T16:31:48.450Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to Nayeli Ortega",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217164471988362",
+          "created_at": "2026-08-04T16:34:49.321Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill added the description",
+          "type": "system",
+          "resource_subtype": "notes_changed"
+        },
+        {
+          "gid": "1217175938241772",
+          "created_at": "2026-08-05T00:26:35.541Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to you",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217175938145945",
+          "created_at": "2026-08-05T00:26:38.061Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill changed the due date to Yesterday",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        },
+        {
+          "gid": "1217178266387398",
+          "created_at": "2026-08-05T04:10:07.161Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano have a task due Yesterday",
+          "type": "system",
+          "resource_subtype": "due_today"
+        }
+      ],
+      "dependentTasks": [],
+      "dependencyTasks": []
     },
     {
       "gid": "1217162605683021",
+      "actual_time_minutes": null,
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
+      "assignee_status": "inbox",
       "completed": false,
+      "completed_at": null,
+      "completed_by": null,
       "created_at": "2026-08-04T16:27:43.805Z",
+      "custom_fields": [
+        {
+          "gid": "1217194751836357",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1217194751836358",
+              "color": "red",
+              "enabled": true,
+              "name": "Highest - Urgent",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836359",
+              "color": "orange",
+              "enabled": true,
+              "name": "High - Close to deadline",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836360",
+              "color": "green",
+              "enabled": true,
+              "name": "Medium - On track",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1217194751836361",
+              "color": "blue",
+              "enabled": true,
+              "name": "Low - Next Week",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Priority",
+          "description": "",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1211830978949300",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1216937025018723",
+              "color": "red",
+              "enabled": true,
+              "name": "Urgent",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949301",
+              "color": "orange",
+              "enabled": true,
+              "name": "High",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949302",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Medium",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1211830978949303",
+              "color": "yellow-green",
+              "enabled": true,
+              "name": "Low",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Priority",
+          "description": "Asana-created. Track the priority of each task.",
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1213654480386510",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1213654480386511",
+              "color": "blue",
+              "enabled": true,
+              "name": "Not Started",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386512",
+              "color": "cool-gray",
+              "enabled": true,
+              "name": "In Progress",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386513",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Awaiting Client Response",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386514",
+              "color": "orange",
+              "enabled": true,
+              "name": "Client Review",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1213654480386515",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Done",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": {
+            "gid": "1213654480386511",
+            "color": "blue",
+            "enabled": true,
+            "name": "Not Started",
+            "resource_type": "enum_option"
+          },
+          "name": "Task Progress",
+          "description": "Asana-created. Track the progress of each task.",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica",
+            "resource_type": "user"
+          },
+          "display_value": "Not Started",
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1210907656178881",
+          "enabled": true,
+          "name": "Estimated time",
+          "description": "Asana-created. Estimate time to complete a task.",
+          "number_value": null,
+          "precision": 0,
+          "created_by": null,
+          "display_value": null,
+          "resource_subtype": "number",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "number"
+        },
+        {
+          "gid": "1215611096046618",
+          "enabled": true,
+          "name": "Original Due Date",
+          "description": "",
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": "2026-08-04T00:00:00.000Z",
+          "resource_subtype": "date",
+          "resource_type": "custom_field",
+          "date_value": {
+            "date": "2026-08-04",
+            "date_time": null
+          },
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "date"
+        },
+        {
+          "gid": "1216224867752821",
+          "enabled": true,
+          "name": "TaskTime",
+          "description": "",
+          "number_value": null,
+          "precision": 0,
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "number",
+          "resource_type": "custom_field",
+          "is_formula_field": true,
+          "is_value_read_only": true,
+          "type": "number"
+        },
+        {
+          "gid": "1216937025018707",
+          "enabled": true,
+          "name": "Email Address",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1216937025018709",
+          "enabled": true,
+          "name": "Name",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1216937025018727",
+          "enabled": true,
+          "name": "Short Summary of Request",
+          "description": "",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "text",
+          "resource_type": "custom_field",
+          "text_value": null,
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "text"
+        },
+        {
+          "gid": "1215184673274456",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1215184637115807",
+              "color": "blue",
+              "enabled": true,
+              "name": "Not Started",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115808",
+              "color": "cool-gray",
+              "enabled": true,
+              "name": "In Progress",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115809",
+              "color": "yellow",
+              "enabled": true,
+              "name": "Waiting",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115810",
+              "color": "orange",
+              "enabled": true,
+              "name": "Deferred",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115811",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Done",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Task Progress",
+          "description": "Asana-created. Track the progress of each task.",
+          "created_by": {
+            "gid": "1216273111321713",
+            "name": "Domeneque Camacho",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        },
+        {
+          "gid": "1215184637115822",
+          "enabled": true,
+          "enum_options": [
+            {
+              "gid": "1215184637115823",
+              "color": "green",
+              "enabled": true,
+              "name": "Sales",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115824",
+              "color": "red",
+              "enabled": true,
+              "name": "Customer Success",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115825",
+              "color": "orange",
+              "enabled": true,
+              "name": "Web Designer",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1215184637115826",
+              "color": "yellow-orange",
+              "enabled": true,
+              "name": "Client",
+              "resource_type": "enum_option"
+            },
+            {
+              "gid": "1216538623212278",
+              "color": "blue-green",
+              "enabled": true,
+              "name": "Ads",
+              "resource_type": "enum_option"
+            }
+          ],
+          "enum_value": null,
+          "name": "Responsible Team",
+          "description": "",
+          "created_by": {
+            "gid": "1216273111321713",
+            "name": "Domeneque Camacho",
+            "resource_type": "user"
+          },
+          "display_value": null,
+          "resource_subtype": "enum",
+          "resource_type": "custom_field",
+          "is_formula_field": false,
+          "is_value_read_only": false,
+          "type": "enum"
+        }
+      ],
+      "dependencies": [],
+      "dependents": [],
       "due_at": null,
       "due_on": "2026-08-05",
+      "followers": [
+        {
+          "gid": "1213912114353154",
+          "name": "Gauge Hill"
+        },
+        {
+          "gid": "1216725885824030",
+          "name": "Nayeli Ortega"
+        },
+        {
+          "gid": "1217162291350352",
+          "name": "Alejandro Milano"
+        }
+      ],
       "html_notes": "<body><a href=\"https://sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC\">https://sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC</a>\n<a href=\"https://www.greenspotcrossingsdentistry.com/lp/59-nps/?sc_cid=Google_PMAX:P:GP:1257:Paid:Generic:offer_nps&amp;ef_id=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB:G:s&amp;_vsrefdom=pmax&amp;gclsrc=aw.ds&amp;gad_source=1&amp;gad_campaignid=22786579408&amp;gbraid=0AAAAAD86Pj7IsHgfsRsOFegiih3ctJtAO&amp;gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB\">https://www.greenspotcrossingsdentistry.com/lp/59-nps/?sc_cid=Google_PMAX:P:GP:1257:Paid:Generic:offer_nps&amp;ef_id=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB:G:s&amp;_vsrefdom=pmax&amp;gclsrc=aw.ds&amp;gad_source=1&amp;gad_campaignid=22786579408&amp;gbraid=0AAAAAD86Pj7IsHgfsRsOFegiih3ctJtAO&amp;gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB</a>\n\n</body>",
+      "memberships": [],
       "modified_at": "2026-08-05T04:11:20.956Z",
       "name": "New Patient Special Landing Page",
       "notes": "https://sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC\nhttps://www.greenspotcrossingsdentistry.com/lp/59-nps/?sc_cid=Google_PMAX:P:GP:1257:Paid:Generic:offer_nps&ef_id=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB:G:s&_vsrefdom=pmax&gclsrc=aw.ds&gad_source=1&gad_campaignid=22786579408&gbraid=0AAAAAD86Pj7IsHgfsRsOFegiih3ctJtAO&gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB\n\n",
@@ -154,29 +2241,327 @@
       },
       "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217162605683021",
       "projects": [],
+      "start_on": null,
       "tags": [],
+      "resource_subtype": "default_task",
+      "workspace": {
+        "gid": "1210572425689866",
+        "name": "ThriveSquare"
+      },
       "subtasks": [],
       "comments": [],
       "depth": 1,
+      "attachments": [],
+      "storyCounts": {
+        "added_to_task": 1,
+        "assigned": 3,
+        "enum_custom_field_changed": 1,
+        "due_date_changed": 2,
+        "date_custom_field_changed": 1,
+        "notes_changed": 1,
+        "due_today": 1
+      },
+      "stories": [
+        {
+          "gid": "1217163741149177",
+          "created_at": "2026-08-04T16:27:43.921Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill added this task as a subtask of Landing Page - Mason Park",
+          "type": "system",
+          "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217164114705061",
+          "created_at": "2026-08-04T16:30:51.625Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to Gauge Hill",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217164223998820",
+          "created_at": "2026-08-04T16:30:52.641Z",
+          "created_by": null,
+          "text": "Asana changed Task Progress to Not Started",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217164071575352",
+          "created_at": "2026-08-04T16:30:55.080Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill changed the due date to Aug 4",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        },
+        {
+          "gid": "1217164291047494",
+          "created_at": "2026-08-04T16:30:56.368Z",
+          "created_by": null,
+          "text": "Asana changed Original Due Date to \"Aug 4\"",
+          "type": "system",
+          "resource_subtype": "date_custom_field_changed"
+        },
+        {
+          "gid": "1217164114705195",
+          "created_at": "2026-08-04T16:31:52.861Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to Nayeli Ortega",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217164411055938",
+          "created_at": "2026-08-04T16:36:59.627Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill added the description",
+          "type": "system",
+          "resource_subtype": "notes_changed"
+        },
+        {
+          "gid": "1217175914956179",
+          "created_at": "2026-08-05T00:26:41.893Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill assigned to you",
+          "type": "system",
+          "resource_subtype": "assigned"
+        },
+        {
+          "gid": "1217176136924189",
+          "created_at": "2026-08-05T00:26:44.392Z",
+          "created_by": {
+            "gid": "1213912114353154",
+            "name": "Gauge Hill"
+          },
+          "text": "Gauge Hill changed the due date to Yesterday",
+          "type": "system",
+          "resource_subtype": "due_date_changed"
+        },
+        {
+          "gid": "1217178338230005",
+          "created_at": "2026-08-05T04:11:20.956Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano have a task due Yesterday",
+          "type": "system",
+          "resource_subtype": "due_today"
+        }
+      ],
+      "dependentTasks": [],
+      "dependencyTasks": []
+    }
+  ],
+  "projects": [
+    {
+      "gid": "1211830976769588",
+      "archived": false,
+      "current_status": null,
+      "members": [
+        {
+          "gid": "1210572357798246",
+          "name": "Sang Huynh"
+        },
+        {
+          "gid": "1211675097206163",
+          "name": "Jessica"
+        },
+        {
+          "gid": "1211145565450724",
+          "name": "Trong Huynh"
+        },
+        {
+          "gid": "1213912114353154",
+          "name": "Gauge Hill"
+        },
+        {
+          "gid": "1216024794859709",
+          "name": "Gabby Reyes"
+        },
+        {
+          "gid": "1216542054488393",
+          "name": "Juliana Medina"
+        },
+        {
+          "gid": "1216542200957989",
+          "name": "Maria J Alvarez"
+        },
+        {
+          "gid": "1216639144002502",
+          "name": "Jiseth Valderrama"
+        },
+        {
+          "gid": "1216725885824030",
+          "name": "Nayeli Ortega"
+        },
+        {
+          "gid": "1217162291350352",
+          "name": "Alejandro Milano"
+        }
+      ],
+      "name": "Success Daily Stand-Up",
+      "notes": "Capture agenda items, next steps, and action items to keep meetings focused and productive.",
+      "owner": {
+        "gid": "1210572357798246",
+        "name": "Sang Huynh"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 1426,
+        "num_completed_tasks": 1253,
+        "num_incomplete_tasks": 173
+      },
+      "attachments": []
+    },
+    {
+      "gid": "1215184535967345",
+      "archived": false,
+      "current_status": null,
+      "members": [
+        {
+          "gid": "1210572357798246",
+          "name": "Sang Huynh"
+        },
+        {
+          "gid": "1211145565450724",
+          "name": "Trong Huynh"
+        },
+        {
+          "gid": "1211675097206163",
+          "name": "Jessica"
+        }
+      ],
+      "name": "BK Implementation - Mason Park Dental",
+      "notes": "",
+      "owner": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1215184535967345",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 90,
+        "num_completed_tasks": 33,
+        "num_incomplete_tasks": 57
+      },
       "attachments": []
     }
   ],
   "downloads": [
     {
-      "task": "Landing Page - Mason Park",
-      "taskGid": "1217040406855582",
+      "owner": "Landing Page - Mason Park",
+      "ownerGid": "1217040406855582",
       "name": "mpd-invisalign-lp.html",
       "size": 26957,
       "dest": "C:\\Users\\ACER\\Documents\\Webzite Studio\\Webzite Agentic Workflow\\deliver\\brandklout\\mason-park\\workflows\\01-content-intake\\.tmp\\asana-context\\attachments\\1217162344633748-mpd-invisalign-lp.html",
+      "skipped": true,
       "bytes": 26957
     },
     {
-      "task": "Landing Page - Mason Park",
-      "taskGid": "1217040406855582",
+      "owner": "Landing Page - Mason Park",
+      "ownerGid": "1217040406855582",
       "name": "mpd-new-patient-lp.html",
       "size": 31121,
       "dest": "C:\\Users\\ACER\\Documents\\Webzite Studio\\Webzite Agentic Workflow\\deliver\\brandklout\\mason-park\\workflows\\01-content-intake\\.tmp\\asana-context\\attachments\\1217162344633750-mpd-new-patient-lp.html",
+      "skipped": true,
       "bytes": 31121
+    }
+  ],
+  "people": [
+    {
+      "name": "Alejandro Milano",
+      "roles": [
+        "assignee",
+        "follower",
+        "activity",
+        "member of \"Success Daily Stand-Up\""
+      ]
+    },
+    {
+      "name": "Gauge Hill",
+      "roles": [
+        "follower",
+        "activity",
+        "member of \"Success Daily Stand-Up\""
+      ]
+    },
+    {
+      "name": "Jessica",
+      "roles": [
+        "follower",
+        "activity",
+        "member of \"Success Daily Stand-Up\"",
+        "member of \"BK Implementation - Mason Park Dental\""
+      ]
+    },
+    {
+      "name": "Nayeli Ortega",
+      "roles": [
+        "follower",
+        "member of \"Success Daily Stand-Up\""
+      ]
+    },
+    {
+      "name": "Sang Huynh",
+      "roles": [
+        "owner of \"Success Daily Stand-Up\"",
+        "member of \"Success Daily Stand-Up\"",
+        "member of \"BK Implementation - Mason Park Dental\""
+      ]
+    },
+    {
+      "name": "Trong Huynh",
+      "roles": [
+        "member of \"Success Daily Stand-Up\"",
+        "member of \"BK Implementation - Mason Park Dental\""
+      ]
+    },
+    {
+      "name": "Gabby Reyes",
+      "roles": [
+        "member of \"Success Daily Stand-Up\""
+      ]
+    },
+    {
+      "name": "Juliana Medina",
+      "roles": [
+        "member of \"Success Daily Stand-Up\""
+      ]
+    },
+    {
+      "name": "Maria J Alvarez",
+      "roles": [
+        "member of \"Success Daily Stand-Up\""
+      ]
+    },
+    {
+      "name": "Jiseth Valderrama",
+      "roles": [
+        "member of \"Success Daily Stand-Up\""
+      ]
     }
   ]
 }

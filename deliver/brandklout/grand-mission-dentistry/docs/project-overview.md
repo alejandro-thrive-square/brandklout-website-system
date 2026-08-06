@@ -9,7 +9,9 @@
 | **Scope** | 3 paid-traffic landing pages |
 | **Due** | 2026-08-05 |
 | **Started** | 2026-08-05 (folder created from Asana dispatch) |
-| **Named contact** | "Sang" — per task note *"Add Landing page needs for Sang for Grand Mission"*. Role unconfirmed. |
+| **Approver** | **Sang Huynh** — owner of both Asana projects, Customer Success team |
+| **Other contacts** | Trong Huynh, Jessica (project members); Gauge Hill, Nayeli Ortega (task followers) |
+| **Blocks** | `Finalize Account Transfer for Grand Mission` (Gauge Hill, due 2026-08-06) — waiting on these pages |
 
 ## Status
 
@@ -80,7 +82,9 @@ angles, then design original work. See
 
 1. **No client website URL is recorded anywhere in the Asana task.** Needed for brand extraction
    (logo, palette, type, real doctor names, real reviews).
-2. **Who is "Sang"?** Approver, practice contact, or Brandklout staff — this sets the review loop.
+2. ~~Who is "Sang"?~~ **RESOLVED 2026-08-06.** **Sang Huynh**, owner of both the
+   `BK Implementation - Grand Mission Dentistry` and `Success Daily Stand-Up` projects, on the
+   Customer Success team — the approver, and who sets the review loop.
 3. **Content sourcing.** Per
    [client-assets-before-stock rules](../../livewell-dental/docs/project-overview.md), testimonials,
    reviews, doctor bios and stats must come from the client's real material. **Never invent
