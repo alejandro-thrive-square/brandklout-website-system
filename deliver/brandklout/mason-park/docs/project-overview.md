@@ -146,8 +146,14 @@ House references cited on the parent task, captured to
 
 **Webflow** (confirmed 2026-08-05). GHL is the lead destination only.
 
-Sequence: build locally → review → Webflow. The local stage is complete. Webflow needs a per-client
-grant that does not exist yet — see [mcp-access.md](./mcp-access.md).
+Sequence: build locally → review → Webflow. Local output goes to
+`workflows/04-design/.tmp/<page-slug>/`, one self-contained HTML/CSS/JS package per page. The local
+stage is complete. Webflow needs a per-client grant that does not exist yet — see
+[mcp-access.md](./mcp-access.md).
+
+Reference URLs are **structure and content only** — screenshot, extract section order and copy
+angles, then design original work. See
+[ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md#how-to-use-the-reference-urls--read-this-before-designing).
 
 ## Routed workflows
 
@@ -155,9 +161,9 @@ grant that does not exist yet — see [mcp-access.md](./mcp-access.md).
 | :--- | :--- | :--- |
 | `00-client-delivery-initialization` | This doc | Scope captured from Asana; no Sales handoff exists. |
 | `01-content-intake` | **Done** | Client site, offers, doctors, real reviews, reference captures, vendor-original triage. |
-| `04-design` | **Done — awaiting review** | Three self-contained packages plus a shared design system. |
+| `04-design` | **Rebuilding** | Journey architecture — see [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md). |
 | `07-webflow-build` | **Blocked** | Needs local approval and a Webflow grant. |
-| `08-qa` | **Done for the local build** | `verify.mjs`, 81/81. Re-run after any change. |
+| `08-qa` | **Required after every change** | Scrub proof + responsive screenshots. |
 
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).
 

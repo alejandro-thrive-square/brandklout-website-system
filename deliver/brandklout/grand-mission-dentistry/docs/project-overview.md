@@ -9,7 +9,9 @@
 | **Scope** | 3 paid-traffic landing pages |
 | **Due** | 2026-08-05 |
 | **Started** | 2026-08-05 (folder created from Asana dispatch) |
-| **Named contact** | "Sang" — per task note *"Add Landing page needs for Sang for Grand Mission"*. Role unconfirmed. |
+| **Approver** | **Sang Huynh** — owner of both Asana projects, Customer Success team |
+| **Other contacts** | Trong Huynh, Jessica (project members); Gauge Hill, Nayeli Ortega (task followers) |
+| **Blocks** | `Finalize Account Transfer for Grand Mission` (Gauge Hill, due 2026-08-06) — waiting on these pages |
 
 ## Status
 
@@ -80,15 +82,17 @@ angles, then design original work. See
 
 1. **No client website URL is recorded anywhere in the Asana task.** Needed for brand extraction
    (logo, palette, type, real doctor names, real reviews).
-3. **Who is "Sang"?** Approver, practice contact, or Brandklout staff — this sets the review loop.
-4. **Content sourcing.** Per
+2. ~~Who is "Sang"?~~ **RESOLVED 2026-08-06.** **Sang Huynh**, owner of both the
+   `BK Implementation - Grand Mission Dentistry` and `Success Daily Stand-Up` projects, on the
+   Customer Success team — the approver, and who sets the review loop.
+3. **Content sourcing.** Per
    [client-assets-before-stock rules](../../livewell-dental/docs/project-overview.md), testimonials,
    reviews, doctor bios and stats must come from the client's real material. **Never invent
    reviews, patient stories, or statistics for a real dental practice** — that is both a
    credibility and a regulatory problem.
-5. **Page count → timeline/pricing** per
-   [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md). 3 pages, but the rate
-   depends on whether these are new designs or rebuilds of the attached originals.
+4. **Are these new designs or rebuilds of the attached originals?** Changes the amount of design
+   work, not the commercial terms — Brandklout is a partner engagement, so per-page pricing does
+   not apply here.
 
 ## Routed workflows
 
@@ -97,7 +101,7 @@ angles, then design original work. See
 | `00-client-delivery-initialization` | This doc | No Sales handoff package exists; scope captured from Asana. |
 | `01-content-intake` | **Next** | Retrieve the Asana attachments and the client's live site first. |
 | `04-design` | Blocked on intake | Platform-independent — can start once references exist. |
-| `07-webflow-build` | **Conditional** | Only if the platform question resolves to Webflow. |
+| `07-webflow-build` | Blocked on grant | Platform is confirmed Webflow; needs a per-client Webflow grant and local approval first. |
 | `08-qa` | Required | For every shipped page. |
 
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).

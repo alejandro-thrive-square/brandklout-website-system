@@ -66,15 +66,14 @@ templates. See
 
 1. **No client website URL recorded.** Required for brand extraction and for real doctor/review
    content.
-3. **No section specs.** Decide whether to derive structure per inspiration link or standardise on
+2. **No section specs.** Decide whether to derive structure per inspiration link or standardise on
    the archetypes; record the decision here so the six pages stay coherent.
-4. **Are "Next Door", "Dentist Near Me" and "New Patient Special" one page or three?**
-5. **Content sourcing.** Real reviews, doctor names, and credentials only — **never invent
+3. **Are "Next Door", "Dentist Near Me" and "New Patient Special" one page or three?**
+4. **Content sourcing.** Real reviews, doctor names, and credentials only — **never invent
    testimonials or statistics for a real practice**.
-6. **Timeline/pricing** per
-   [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md). Six pages is the
-   largest engagement in this batch and the due date is the same as everyone else's — flag the
-   capacity conflict to Brandklout rather than silently slipping.
+5. **Capacity.** Six pages is the largest slice of this batch and carries the same due date as
+   everyone else's. Flag the conflict to Brandklout rather than silently slipping. No pricing
+   question applies — Brandklout is a partner engagement, not a per-page client.
 
 ## Routed workflows
 
@@ -84,7 +83,7 @@ templates. See
 | `01-content-intake` | **Next** | Client site + brand assets + real review sources. |
 | `02-wireframe` | Recommended | Six pages with no specs — wireframe first to lock structure cheaply. |
 | `04-design` | Blocked on intake | Platform-independent. |
-| `07-webflow-build` | **Conditional** | Only if the platform question resolves to Webflow. |
+| `07-webflow-build` | Blocked on grant | Platform is confirmed Webflow; needs a per-client Webflow grant and local approval first. |
 | `08-qa` | Required | For every shipped page. |
 
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).
