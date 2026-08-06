@@ -79,11 +79,61 @@ respected. Verify by driving the page (Chrome CDP or equivalent) and asserting b
 **Test in a focused tab.** Background tabs freeze transitions, IntersectionObserver, and timers,
 so a backgrounded check will report broken animation that is actually fine.
 
+## Responsive QA — screenshots, every page, every breakpoint
+
+Separate from motion verification, and it needs the opposite tool. **Screenshots are the right
+instrument for layout and responsiveness** — they are simply the wrong one for animation.
+
+Capture every page full-height at each breakpoint and **look at the images**:
+
+| Width | Represents |
+| :--- | :--- |
+| 360 | Small Android |
+| 390 | iPhone |
+| 768 | Tablet portrait |
+| 1024 | Tablet landscape / small laptop |
+| 1440 | Desktop |
+| 1920 | Large desktop |
+
+Store under `workflows/08-qa/.tmp/screenshots/<page-slug>/<width>.png`.
+
+Check for, and fix:
+
+- **Horizontal overflow** — the single most common failure. Assert
+  `document.documentElement.scrollWidth <= window.innerWidth`. A page that scrolls sideways on
+  mobile is broken, and it is invisible in a desktop-only check.
+- Text clipped, overlapping, or shrunk below ~14px on mobile
+- Tap targets under 44×44px
+- Sticky/fixed bars covering content or each other — especially a sticky mobile call bar sitting on
+  top of the form submit
+- Images distorted, stretched, or overflowing their container
+- Hero text unreadable over its media at narrow widths
+- Nav/drawer opening, closing, and trapping focus correctly
+- Motion that works at 1440 but breaks or janks at 390
+
+Paid dental traffic is mostly mobile, so 360 and 390 matter more than 1920.
+
+### Capture gotchas
+
+- Use full-page capture (`captureBeyondViewport`), not just the viewport.
+- **Let the page settle before capturing.** Pending fonts and per-section script embeds can
+  truncate a capture silently; allow a generous settle window and confirm the image is not a
+  partial paint.
+- Lazy-loaded images often half-paint — scroll the page first, then capture.
+- **ScrollSmoother breaks full-page captures.** Capture per-viewport-step and stitch, or
+  temporarily disable smoothing for the capture pass only — never ship that change.
+- Do not pipe capture scripts through `head`; SIGPIPE truncates the run mid-way.
+
 ## Definition of done
 
-A page is not done when the sections exist. It is done when it has the hero motion, the
-scroll-choreographed sections, the interaction states, the signature moment, working
-reduced-motion, and verified behaviour on a focused tab at mobile and desktop.
+A page is not done when the sections exist. It is done when **all** of these hold:
+
+1. Hero motion, 2–3 scroll-choreographed sections, interaction states, and a signature moment
+2. `prefers-reduced-motion` disables motion without hiding content
+3. Behaviour verified by driving the page on a **focused** tab — not by screenshots
+4. Screenshots captured at all six breakpoints and **reviewed**, with responsive issues fixed
+5. Zero horizontal overflow at 360 and 390
+6. Offer, phone and form reachable at every scroll depth on mobile
 
 If a page would not look out of place on awwwards, it passes. If it looks like a dental PPC
 template, it does not — rebuild the execution, keep the content.
