@@ -7,7 +7,7 @@
 <meta name="description" content="Looking for a dentist near you in Arvada? $109 new patient special includes exam, X-rays and OralID cancer screening. On Wadsworth since 2003.">
 <meta name="robots" content="noindex, nofollow">
 <!--
-  Landing page — Dentist Near Me
+  Landing page — Dentist Near Me.  Journey architecture: 7 chapters.
   Asana task: 1217162344633759 (parent 1217040406855586)
   Reference cited: greenspotcrossingsdentistry.com/lp/59-nps/ — CLOUDFLARE BLOCKED, could not
   be retrieved (see content-intake-summary.md). The GHL preview cited by the Next Door task
@@ -20,326 +20,620 @@
 
   The $109 offer, its inclusions and its restrictions are the client's own published
   offer. Nothing here is invented.
+
+  Scroll-driven chapters (pinned + scrubbed):
+    01 The Search   — the statement resolves, then what makes the choice a gamble
+    02 The Offer    — the visit itemises itself, line by line, and the price lands
+    04 The Practice — the people you would actually see, travelling horizontally
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../_shared/brand.css">
+<link rel="stylesheet" href="../_shared/journey.css">
 <style>
-  /* Per-page motion contract. The shared system lives in ../_shared/brand.css;
-     this block guarantees the two rules that must hold even if that file is
-     swapped, minified or ported: motion never hides content, and
-     prefers-reduced-motion removes movement rather than removing information. */
-  @media (prefers-reduced-motion: reduce) {
-    [data-reveal], [data-split] .ln__i, [data-split] .wd,
-    .trust__item, .form-card, [data-parallax] {
-      opacity: 1 !important;
-      transform: none !important;
-      clip-path: none !important;
-      transition: none !important;
-      animation: none !important;
-    }
-    .progress { display: none !important; }
-    html { scroll-behavior: auto; }
+  @media (prefers-reduced-motion: reduce){
+    [data-rv],[data-anim="hide"],.wz-line>*,.wz-word,
+    .rcpt-row,.path-track,.srch-card{
+      opacity:1!important;visibility:visible!important;transform:none!important;
+      clip-path:none!important;transition:none!important;animation:none!important}
+    .nav-progress{display:none!important}
   }
-  /* If the motion script never arms the system, nothing is left hidden. */
-  html:not([data-motion="on"]) [data-reveal] { opacity: 1; transform: none; }
+  html:not(.js-motion) [data-rv]{opacity:1}
+
+  .areas{display:flex;flex-wrap:wrap;gap:.45rem;list-style:none;margin:0;padding:0}
+  .areas li{font-family:var(--f-ui);font-weight:600;font-size:.8rem;padding:.4rem .85rem;
+    border:1px solid var(--line);border-radius:999px;color:var(--fg-soft)}
 </style>
-<style>
-  /* Offer-led hero: the price is the headline, so it gets display treatment. */
-  .hero__offerline {
-    font-family: var(--display);
-    font-weight: 700;
-    color: var(--amber);
-    display: block;
-  }
-  .areas { display: flex; flex-wrap: wrap; gap: 0.5rem; }
-  .areas li {
-    font-family: var(--ui); font-weight: 600; font-size: 0.85rem;
-    padding: 0.45rem 0.9rem; border: 1px solid var(--line); border-radius: 999px;
-  }
-</style>
+<script src="../_shared/vendor/gsap/gsap.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollToPlugin.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollSmoother.min.js"></script>
+<script src="../_shared/vendor/gsap/SplitText.min.js"></script>
+<script src="../_shared/journey.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="hdr">
-  <div class="wrap hdr__bar">
-    <a class="hdr__logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
-      <img src="../_shared/assets/best-dental-imaplant-dentist-denver-dental-implants-arvada-dentist.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
+<header class="nav" id="nav">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap nav-in">
+    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
+      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
     </a>
-    <div class="hdr__spacer"></div>
-    <div class="hdr__meta">
-      <span class="status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
-      <strong><a class="tel" href="tel:+13034217611">(303) 421-7611</a></strong>
+    <div class="nav-mid">
+      <p class="nav-chapter" aria-hidden="true"><b id="navChNum">00</b><i id="navChBar"></i><span id="navChName">Arrival</span></p>
     </div>
-    <a class="btn btn--offer hdr__cta-sm" href="#book">Claim $109 offer</a>
+    <div class="nav-right">
+      <span class="status nav-status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
+      <a class="nav-tel tel" href="tel:+13034217611">(303) 421-7611</a>
+      <a class="btn btn--offer nav-cta magnetic" href="#book"><span>Claim $109 offer</span></a>
+    </div>
   </div>
 </header>
 
+<div id="smooth-wrapper">
+<div id="smooth-content">
 <main id="main">
 
-  <!-- ============ HERO — offer is the H1 ============ -->
-  <section class="hero">
-    <div class="hero__media">
-      <img src="../_shared/assets/office1.jpg.webp" alt="" aria-hidden="true" style="--hero-pos:50% 50%">
-    </div>
-    <div class="hero__scrim"></div>
-    <div class="wrap hero__inner">
-      <div>
-        <p class="eyebrow hero__eyebrow">New Patient Special · Arvada, Colorado</p>
-        <h1 class="display" data-split="lines">
-          <span class="hero__offerline">$109</span>
-          new patient visit at your local Arvada dentist.
-        </h1>
-        <p class="lede mt-sm">
-          Comprehensive exam, digital X-rays and an OralID oral cancer screening — with a personalised,
-          pressure-free treatment plan at the end of it. Six minutes from Olde Town, on Wadsworth.
-        </p>
-        <div class="btn-row mt">
-          <a class="btn btn--offer btn--lg" href="#book">Claim the $109 special</a>
-          <a class="btn btn--ghost btn--lg tel" href="tel:+13034217611">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            (303) 421-7611
-          </a>
-        </div>
-        <div class="trust" data-stagger="90">
-          <span class="trust__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            Serving Arvada since 2003
-          </span>
-          <span class="trust__item">
-            <span class="status" data-status style="border-color:rgba(255,255,255,.3)"><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
-          </span>
-        </div>
-      </div>
+<!-- ==========================================================================
+     CHAPTER 00 — ARRIVAL   (the offer is the H1 on this page)
+     ========================================================================== -->
+<section class="ch ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival">
+  <style>
+    .ch-arrival{min-height:100svh;display:flex;align-items:center;overflow:hidden;
+      padding-top:clamp(6rem,12vw,9rem);padding-bottom:clamp(4rem,9vw,7rem)}
+    .ch-arrival .ch-media img{transform:scale(1.12)}
+    .ch-arrival .ch-media::after{content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(88% 70% at 76% 32%,rgba(251,142,40,.16),transparent 60%),
+        linear-gradient(100deg,rgba(10,13,20,.96) 0%,rgba(10,13,20,.9) 40%,rgba(10,13,20,.54) 72%,rgba(10,13,20,.28) 100%),
+        linear-gradient(180deg,rgba(10,13,20,.9) 0%,rgba(10,13,20,.25) 30%,rgba(10,13,20,.86) 100%)}
+    .ch-arrival .in{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-arrival h1{font-size:clamp(2rem,5vw,4.6rem);max-width:16ch}
+    .ch-arrival h1 .amt{font-family:var(--f-display);font-weight:700;color:var(--amber);display:block;
+      font-size:clamp(3.2rem,9vw,7rem);line-height:.95}
+    .ch-arrival .lede{max-width:52ch}
+    .ch-arrival .trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;align-items:center;
+      padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
+    .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
+      font-family:var(--f-ui);font-size:.76rem;font-weight:600;color:var(--fg-soft)}
+    .ch-arrival .trust svg{width:16px;height:16px;color:var(--amber);flex:none}
+    @media(min-width:1000px){ .ch-arrival .in{grid-template-columns:1.1fr .9fr;gap:clamp(2.5rem,4vw,4.5rem)} }
+  </style>
 
-      <div class="form-card" id="book">
-        <div class="form-card__head">
-          <p class="eyebrow" style="color:var(--amber-deep)">$109 new patient special</p>
-          <p class="h3">Book your first visit</p>
-          <p class="form__note">Two fields. We'll call you to find a time that works.</p>
-        </div>
-        <form class="form" data-lead="near-me-nps" data-thanks="Thank you — your $109 new patient visit request is in.">
-          <div class="field">
-            <label for="n-name">Full name</label>
-            <input id="n-name" name="name" type="text" autocomplete="name" required>
-            <span class="field__err" aria-live="polite"></span>
-          </div>
-          <div class="field">
-            <label for="n-phone">Phone</label>
-            <input id="n-phone" name="phone" type="tel" autocomplete="tel" required>
-            <span class="field__err" aria-live="polite"></span>
-          </div>
-          <div class="field">
-            <label for="n-email">Email <span style="font-weight:400;color:var(--muted)">(optional)</span></label>
-            <input id="n-email" name="email" type="email" autocomplete="email">
-            <span class="field__err" aria-live="polite"></span>
-          </div>
-          <div class="field">
-            <label for="n-when">Best time to reach you</label>
-            <select id="n-when" name="preferredTime">
-              <option value="morning">Morning (8am–12pm)</option>
-              <option value="afternoon">Afternoon (12pm–5pm)</option>
-              <option value="any">Any time</option>
-            </select>
-          </div>
-          <button class="btn btn--offer btn--block btn--lg" type="submit">Claim my $109 visit</button>
-          <p class="form__note">New patients, 18 and older. Restrictions apply — <a href="#terms">see terms</a>. We don't accept HMO or Medicaid plans.</p>
-        </form>
+  <div class="ch-media" aria-hidden="true">
+    <img id="arrImg" src="../_shared/assets/office1.jpg.webp" alt="" style="object-position:50% 50%">
+  </div>
+
+  <div class="wrap ch-in in">
+    <div>
+      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Chapter 00 &middot; Arrival</span></div>
+      <h1 data-anim="hide" id="arrTitle"><span class="amt">$109</span>new patient visit at your local Arvada dentist.</h1>
+      <p class="lede mt" data-anim="hide" id="arrLead">
+        Comprehensive exam, digital X-rays and an OralID oral cancer screening — with a personalised,
+        pressure-free treatment plan at the end of it. Six minutes from Olde Town, on Wadsworth.
+      </p>
+      <div class="btn-row mt" data-anim="hide" id="arrActions">
+        <a class="btn btn--offer btn--lg magnetic" href="#book"><span>Claim the $109 special</span></a>
+        <a class="btn btn--ghost btn--lg tel magnetic" href="tel:+13034217611"><span>(303) 421-7611</span></a>
+      </div>
+      <div class="trust mt" data-anim="hide" id="arrTrust">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Serving Arvada since 2003</span>
+        <span class="status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
       </div>
     </div>
 
-    <div class="hero__ridge" aria-hidden="true">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="currentColor" d="M0 90V56l112-24 108 26 128-46 110 32 122-50 126 46 106-28 118 34 102-20 122 30 106-16 92 18v92z"/></svg>
+    <div class="form-card" id="book" data-anim="hide">
+      <div class="form-card__head">
+        <p class="eyebrow" style="color:var(--amber-ink)">$109 new patient special</p>
+        <p class="h3">Book your first visit</p>
+        <p class="form__note">Two fields. We'll call you to find a time that works.</p>
+      </div>
+      <form class="form" novalidate data-lead="near-me-nps" data-thanks="Thank you — your $109 new patient visit request is in.">
+        <div class="field">
+          <label for="n-name">Full name</label>
+          <input id="n-name" name="name" type="text" autocomplete="name" required>
+          <span class="field__err" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="n-phone">Phone</label>
+          <input id="n-phone" name="phone" type="tel" autocomplete="tel" required>
+          <span class="field__err" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="n-email">Email <span style="font-weight:400;color:#5C6B80">(optional)</span></label>
+          <input id="n-email" name="email" type="email" autocomplete="email">
+          <span class="field__err" aria-live="polite"></span>
+        </div>
+        <div class="field">
+          <label for="n-when">Best time to reach you</label>
+          <select id="n-when" name="preferredTime">
+            <option value="morning">Morning (8am–12pm)</option>
+            <option value="afternoon">Afternoon (12pm–5pm)</option>
+            <option value="any">Any time</option>
+          </select>
+        </div>
+        <button class="btn btn--offer btn--block btn--lg" type="submit"><span>Claim my $109 visit</span></button>
+        <p class="form__note">New patients, 18 and older. Restrictions apply — <a href="#terms">see terms</a>. We don't accept HMO or Medicaid plans.</p>
+      </form>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ THE OFFER ============ -->
-  <section class="section band-base" style="--band-bg:var(--paper)">
-    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
-      <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
-    </div>
+  <script>
+  WZ.add(function (W) {
+    var root = document.getElementById('arrival');
+    var hide = root.querySelectorAll('[data-anim="hide"]');
+    gsap.set(hide, { visibility: 'visible' });
+    if (W.reduced) { gsap.set(hide, { opacity: 1, y: 0 }); return; }
+
+    var tl = gsap.timeline({ delay: .12 });
+    var split = W.splitLines(document.getElementById('arrTitle'));
+    if (split && split.lines && split.lines.length) {
+      gsap.set(split.lines, { yPercent: 112 });
+      tl.to(split.lines, { yPercent: 0, duration: 1.15, stagger: .09, ease: 'power4.out' }, 0);
+    } else {
+      tl.from('#arrTitle', { opacity: 0, y: 40, duration: 1, ease: 'power3.out' }, 0);
+    }
+    tl.from(root.querySelector('.chapter-tag'), { opacity: 0, x: -24, duration: .9, ease: 'power3.out' }, .05)
+      .from('#arrLead',    { opacity: 0, y: 26, duration: .9, ease: 'power3.out' }, .55)
+      .from('#arrActions', { opacity: 0, y: 26, duration: .9, ease: 'power3.out' }, .66)
+      .from('#arrTrust > *', { opacity: 0, y: 20, duration: .8, stagger: .08, ease: 'power3.out' }, .76)
+      .from('#book',      { opacity: 0, y: 44, duration: 1.05, ease: 'power3.out' }, .3)
+      .from('#arrImg',    { opacity: 0, scale: 1.26, duration: 1.8, ease: 'power3.out' }, 0);
+
+    gsap.timeline({ scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: .6 } })
+      .to(root.querySelector('.in'), { yPercent: -14, opacity: .12, ease: 'none' }, 0)
+      .to('#arrImg', { yPercent: 6, scale: 1.2, ease: 'none' }, 0);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 01 — THE SEARCH   (pinned; the statement resolves, then the four
+     things that make choosing a dentist a gamble surface)
+     ========================================================================== -->
+<section class="ch ch-search" id="search" data-chapter="1" data-chapter-name="The Search">
+  <style>
+    .ch-search{background:var(--ink-950)}
+    .ch-search .stage{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
+    .ch-search .big{font-family:var(--f-display);font-size:clamp(1.65rem,4.2vw,3.7rem);
+      line-height:1.16;max-width:21ch;font-weight:600}
+    .ch-search .big .wz-word{color:rgba(255,255,255,.17)}
+    .srch-grid{display:grid;gap:clamp(.8rem,1.6vw,1.3rem);margin-top:clamp(2rem,4vw,3.25rem);
+      grid-template-columns:1fr}
+    .srch-card{border:1px solid var(--line);border-radius:var(--radius-lg);
+      padding:clamp(1.1rem,2vw,1.6rem);background:rgba(255,255,255,.03);display:grid;gap:.6rem}
+    .srch-card h3{font-size:1.02rem}
+    .srch-card p{font-size:.9rem;color:var(--fg-body)}
+    .srch-card .card__icon{background:rgba(251,142,40,.14);color:var(--amber)}
+    @media(min-width:700px){ .srch-grid{grid-template-columns:repeat(2,1fr)} }
+    @media(min-width:1120px){ .srch-grid{grid-template-columns:repeat(4,1fr)} }
+  </style>
+
+  <div class="stage" id="srchPin">
     <div class="wrap">
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(2rem,5vw,4rem);align-items:center">
-        <div class="offer" data-offer="nps-109" data-reveal>
-          <p class="offer__label">New patient special</p>
-          <span class="offer__price"><sup>$</sup><span data-count>109</span></span>
-          <p class="h3 mt-sm" style="color:#5a4426">Exam · X-rays · OralID cancer screening</p>
-          <ul class="offer__includes" data-stagger="70">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Comprehensive exam of your teeth, mouth and gums</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Digital X-rays — a proper look beneath the surface</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>OralID oral cancer screening</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A personalised, pressure-free treatment plan</li>
-          </ul>
-          <a class="btn btn--offer btn--lg btn--block" href="#book">Claim the $109 special</a>
-          <p class="offer__terms">Restrictions apply. New patients only. 18 and older. We do not accept HMO or Medicaid plans.</p>
-        </div>
-        <div data-reveal data-delay="1">
-          <p class="eyebrow">What you get for it</p>
-          <h2 class="display" data-split="lines">A first visit that actually tells you something</h2>
-          <p class="mt-sm">Most "new patient" offers buy you a rushed look and a quote. This one includes the
-            diagnostics — digital imaging and an OralID screening — so the plan you leave with is based on
-            what is actually going on rather than what is visible from the doorway.</p>
-          <p>One of the doctors talks you through it personally, answers your questions, and sets out priorities.
-            No upselling: the practice's reviews say so more convincingly than we can.</p>
-          <div class="btn-row mt">
-            <a class="btn btn--ghost tel" href="tel:+13034217611">Or just call (303) 421-7611</a>
-          </div>
-        </div>
-      </div>
-    </div>
-  </section>
+      <div class="chapter-tag"><i></i><span class="label">Chapter 01 &middot; The Search</span></div>
+      <p class="big" id="srchBig">You searched for a dentist near you and got a list. Choosing from it
+        shouldn't be a gamble.</p>
 
-  <!-- ============ NEAR YOU ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap">
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(2rem,5vw,4rem);align-items:center">
-        <div data-reveal>
-          <p class="eyebrow">Finding us</p>
-          <h2 class="display" data-split="lines">6695 Wadsworth Blvd</h2>
-          <p class="lede mt-sm">On Wadsworth between 64th and 68th, with parking at the door. If you searched
-            "dentist near me" from anywhere in north-west Denver, you are probably closer than you think.</p>
-          <ul class="areas mt">
-            <li>Arvada</li><li>Westminster</li><li>Broomfield</li><li>Applewood</li>
-            <li>Lakeside</li><li>Denver</li><li>Wheat Ridge</li><li>Olde Town</li>
-          </ul>
-          <p class="mt">
-            <span class="status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
-          </p>
-          <p style="font-size:0.95rem">Monday to Friday, 8am to 5pm. Closed weekends.</p>
-          <div class="btn-row mt">
-            <a class="btn btn--ghost" href="https://goo.gl/maps/yzuR6hXzr1K4R7XQ9" rel="noopener">Get directions</a>
-          </div>
-        </div>
-        <figure class="media-frame media-frame--wide" data-reveal="scale" data-delay="1" style="margin:0">
-          <img src="../_shared/assets/video-1-3.png.webp" alt="The Arvada Dental Center &amp; Implants building on Wadsworth Boulevard" loading="lazy">
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ WHY PATIENTS PICK US ============ -->
-  <section class="section band-paper">
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">Why patients stay</p>
-        <h2 class="display" data-split="lines">Choosing a dentist shouldn't be a gamble</h2>
-      </div>
-      <div class="grid grid--4" data-stagger="70">
-        <article class="card card--lift" data-reveal>
+      <div class="srch-grid" id="srchGrid">
+        <article class="srch-card">
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/></svg></div>
-          <h3 class="h3">A welcoming team</h3>
+          <h3>A welcoming team</h3>
           <p>Staff whose whole job is making a nervous patient feel looked after. It comes up in review after review.</p>
         </article>
-        <article class="card card--lift" data-reveal data-delay="1">
+        <article class="srch-card">
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2zM22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg></div>
-          <h3 class="h3">Education, not pressure</h3>
+          <h3>Education, not pressure</h3>
           <p>You get told what is happening and why, then choose. Patients specifically mention not being upsold.</p>
         </article>
-        <article class="card card--lift" data-reveal data-delay="2">
+        <article class="srch-card">
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
-          <h3 class="h3">Comfort comes first</h3>
+          <h3>Comfort comes first</h3>
           <p>A modern, calm office, and sedation options for anyone whose anxiety has kept them away for years.</p>
         </article>
-        <article class="card card--lift" data-reveal data-delay="3">
+        <article class="srch-card">
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="16" rx="2"/><path d="M3 10h18M8 4v4M16 4v4"/></svg></div>
-          <h3 class="h3">Everything under one roof</h3>
+          <h3>Everything under one roof</h3>
           <p>Cleanings through to implants, so you are not referred across town the moment something needs doing.</p>
         </article>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ SERVICES ============ -->
-  <section class="section band-warm">
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">What we do</p>
-        <h2 class="display" data-split="lines">Comprehensive dental care in Arvada</h2>
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('srchPin'),
+        big = document.getElementById('srchBig'),
+        cards = gsap.utils.toArray('#srchGrid .srch-card');
+
+    if (W.reduced) return;
+    gsap.set(cards, { opacity: 0, y: 44 });
+
+    var sp = W.splitWords(big);
+    var words = (sp && sp.words && sp.words.length) ? sp.words : null;
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.4),
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    if (words) {
+      var tail = words.slice(-5), body = words.slice(0, -5);
+      tl.to(body, { color: '#ffffff', stagger: .36, ease: 'none' }, 0)
+        .to(tail, { color: '#fb8e28', stagger: .3, ease: 'none' }, .42);
+    } else {
+      tl.from(big, { opacity: .2, ease: 'none' }, 0);
+    }
+    tl.to(cards, { opacity: 1, y: 0, stagger: .16, ease: 'none' }, .58);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 02 — THE OFFER   (signature moment: pinned, and the first visit
+     itemises itself line by line as you scroll before the price lands.
+     Every line is the practice's own published inclusion list.)
+     ========================================================================== -->
+<section class="ch ch-offer" id="offer" data-chapter="2" data-chapter-name="The Offer" data-theme="light">
+  <style>
+    .ch-offer{background:var(--bg)}
+    .ch-offer .stage{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(3rem,6vw,5rem);overflow:hidden}
+    .ch-offer .lay{display:grid;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-offer h2{font-size:var(--h2);max-width:15ch}
+    .rcpt{background:#fff;border:1px solid rgba(20,24,33,.12);border-radius:var(--radius-lg);
+      padding:clamp(1.3rem,2.6vw,2.2rem);box-shadow:0 24px 60px -30px rgba(20,24,33,.35);
+      display:grid;gap:0}
+    .rcpt-head{font-family:var(--f-ui);font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+      font-weight:700;color:var(--amber-ink);padding-bottom:.9rem;
+      border-bottom:1px dashed rgba(20,24,33,.18)}
+    .rcpt-row{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:start;
+      padding-block:.9rem;border-bottom:1px dashed rgba(20,24,33,.14);font-size:.95rem;color:#3B4657}
+    .rcpt-row svg{width:20px;height:20px;color:var(--amber-deep);flex:none;margin-top:.15rem}
+    .rcpt-tot{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
+      padding-top:1.1rem;flex-wrap:wrap}
+    .rcpt-tot span{font-family:var(--f-ui);font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+      font-weight:700;color:#5C6B80}
+    .rcpt-tot b{font-family:var(--f-display);font-weight:700;line-height:1;color:var(--amber-deep);
+      font-size:clamp(2.6rem,6vw,4.2rem);font-variant-numeric:tabular-nums}
+    .rcpt-terms{font-size:.76rem;color:#7a6244;line-height:1.6;margin-top:.9rem}
+    @media(min-width:900px){ .ch-offer .lay{grid-template-columns:1fr 1fr;gap:clamp(2.5rem,5vw,5rem)} }
+  </style>
+
+  <div class="stage" id="offPin">
+    <div class="wrap lay">
+      <div>
+        <div class="chapter-tag"><i></i><span class="label">Chapter 02 &middot; The Offer</span></div>
+        <h2 class="h2" id="offTitle">A first visit that actually tells you something</h2>
+        <p class="lede mt-s">Most "new patient" offers buy you a rushed look and a quote. This one includes
+          the diagnostics — digital imaging and an OralID screening — so the plan you leave with is based on
+          what is actually going on rather than what is visible from the doorway.</p>
+        <p class="mt-s">One of the doctors talks you through it personally, answers your questions, and sets
+          out priorities. No upselling: the practice's reviews say so more convincingly than we can.</p>
+        <div class="btn-row mt">
+          <a class="btn btn--offer btn--lg magnetic" href="#book"><span>Claim the $109 special</span></a>
+          <a class="btn btn--ghost tel magnetic" href="tel:+13034217611"><span>Or just call</span></a>
+        </div>
       </div>
-      <ul class="checks" data-stagger="45" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))">
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Checkups &amp; cleanings</li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Fillings &amp; restorations</li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Root canal therapy</li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>CEREC same-day crowns</li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Emergency dentistry</li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Dental implants</li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Invisalign® &amp; Six Month Smiles</li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Porcelain veneers</li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Teeth whitening</li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Gum disease treatment</li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Pediatric dentistry</li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>IV sedation dentistry</li>
+
+      <div class="rcpt" id="rcpt" data-offer="nps-109">
+        <p class="rcpt-head">New patient special &middot; what's included</p>
+        <div class="rcpt-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Comprehensive exam of your teeth, mouth and gums</span></div>
+        <div class="rcpt-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Digital X-rays — a proper look beneath the surface</span></div>
+        <div class="rcpt-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>OralID oral cancer screening</span></div>
+        <div class="rcpt-row"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>A personalised, pressure-free treatment plan</span></div>
+        <div class="rcpt-tot"><span>Your first visit</span><b id="rcptTot">$0</b></div>
+        <p class="rcpt-terms">Restrictions apply. New patients only. 18 and older. We do not accept HMO or
+          Medicaid plans.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('offPin'),
+        rows = gsap.utils.toArray('#rcpt .rcpt-row'),
+        tot = document.getElementById('rcptTot');
+
+    W.headline(document.getElementById('offTitle'), { start: 'top 86%' });
+
+    if (W.reduced) { tot.textContent = '$109'; return; }
+
+    /* Each line wipes in from the left, which is what the scroll actually
+       drives — the state at a quarter, half and three-quarters through is
+       genuinely different rather than one of two snapped states.
+
+       The PRICE deliberately does not count up. A scrubbed number sits at
+       whatever value the visitor stopped scrolling at, and this one is labelled
+       "your first visit" — so a paused scroll would have the page stating a
+       price this practice does not charge. It reads as pending until every line
+       is in, then arrives. Counting is fine for a year or a tally; it is not
+       fine for an offer. */
+    gsap.set(rows, { clipPath: 'inset(0 100% 0 0)', opacity: .25 });
+    tot.textContent = '—';
+    gsap.set(tot, { opacity: .35 });
+
+    var settled = false;
+    function settle(on) {
+      if (on === settled) return;
+      settled = on;
+      tot.textContent = on ? '$109' : '—';
+    }
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.8),
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true,
+        // Reversing the scroll has to put it back to pending, or the price
+        // would appear before its line items on the way back up.
+        onUpdate: function (self) { settle(self.progress > 0.82); }
+      }
+    });
+
+    rows.forEach(function (row, i) {
+      tl.to(row, { clipPath: 'inset(0 0% 0 0)', opacity: 1, ease: 'none', duration: .8 }, i * .8);
+    });
+    tl.fromTo(tot, { opacity: .35, scale: .92 },
+      { opacity: 1, scale: 1.04, ease: 'none', duration: .6 }, 3.2);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 03 — SIX MINUTES AWAY   (where we are, and everything we do,
+     folded into the same beat — proximity is the whole promise of this page)
+     ========================================================================== -->
+<section class="ch ch-near" id="near" data-chapter="3" data-chapter-name="Six Minutes Away">
+  <style>
+    .ch-near{background:var(--ink-900);overflow:hidden}
+    .ch-near .lay{display:grid;gap:clamp(2rem,5vw,4.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-near h2{font-size:var(--h2);max-width:14ch}
+    .ch-near .plate{position:relative;overflow:hidden;border-radius:var(--radius-lg);aspect-ratio:16/11;
+      background:var(--ink-800);clip-path:inset(0 0 100% 0)}
+    .ch-near .plate img{width:100%;height:100%;object-fit:cover}
+    .svc{margin-top:clamp(2.5rem,5vw,4rem)}
+    .svc ul{display:grid;gap:.5rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));
+      list-style:none;margin:0;padding:0}
+    .svc li{display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center;font-size:.92rem;
+      color:var(--fg-body)}
+    .svc svg{width:17px;height:17px;color:var(--cyan);flex:none}
+    @media(min-width:900px){ .ch-near .lay{grid-template-columns:1fr 1fr} }
+  </style>
+
+  <div class="wrap pad">
+    <div class="lay">
+      <div>
+        <div class="chapter-tag"><i></i><span class="label">Chapter 03 &middot; Six Minutes Away</span></div>
+        <h2 class="h2" id="nearTitle">6695 Wadsworth Blvd</h2>
+        <p class="lede mt-s" data-rv>On Wadsworth between 64th and 68th, with parking at the door. If you
+          searched "dentist near me" from anywhere in north-west Denver, you are probably closer than you think.</p>
+        <ul class="areas mt" id="areaList">
+          <li>Arvada</li><li>Westminster</li><li>Broomfield</li><li>Applewood</li>
+          <li>Lakeside</li><li>Denver</li><li>Wheat Ridge</li><li>Olde Town</li>
+        </ul>
+        <p class="mt" data-rv>
+          <span class="status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
+        </p>
+        <p style="font-size:.94rem" data-rv>Monday to Friday, 8am to 5pm. Closed weekends.</p>
+        <div class="btn-row mt" data-rv>
+          <a class="btn btn--ghost magnetic" href="https://goo.gl/maps/yzuR6hXzr1K4R7XQ9" rel="noopener"><span>Get directions</span></a>
+        </div>
+      </div>
+      <figure class="plate" id="nearPlate" style="margin:0">
+        <img id="nearImg" src="../_shared/assets/video-1-3.png.webp"
+             alt="The Arvada Dental Center &amp; Implants building on Wadsworth Boulevard" loading="lazy">
+      </figure>
+    </div>
+
+    <div class="svc">
+      <p class="eyebrow" data-rv>Comprehensive dental care in Arvada</p>
+      <ul class="mt" id="svcList">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Checkups &amp; cleanings</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Fillings &amp; restorations</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Root canal therapy</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>CEREC same-day crowns</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Emergency dentistry</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Dental implants</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Invisalign&reg; &amp; Six Month Smiles</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Porcelain veneers</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Teeth whitening</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Gum disease treatment</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Pediatric dentistry</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>IV sedation dentistry</li>
       </ul>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ DOCTORS ============ -->
-  <section class="section band-paper">
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">Who you'll see</p>
-        <h2 class="display" data-split="lines">Meet the doctors</h2>
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('nearTitle'), { start: 'top 86%' });
+    if (W.reduced) { gsap.set('#nearPlate', { clipPath: 'inset(0 0 0% 0)' }); return; }
+    gsap.to('#nearPlate', { clipPath: 'inset(0 0 0% 0)', duration: 1.25, ease: 'power4.inOut',
+      scrollTrigger: { trigger: '#nearPlate', start: 'top 84%' } });
+    gsap.fromTo('#nearImg', { scale: 1.2, yPercent: -5 }, { scale: 1.08, yPercent: 5, ease: 'none',
+      scrollTrigger: { trigger: '#nearPlate', start: 'top bottom', end: 'bottom top', scrub: .8 } });
+    gsap.from('#areaList li', { opacity: 0, y: 14, duration: .5, stagger: .05, ease: 'power2.out',
+      scrollTrigger: { trigger: '#areaList', start: 'top 90%' } });
+    gsap.from('#svcList li', { opacity: 0, x: -18, duration: .5, stagger: .04, ease: 'power2.out',
+      scrollTrigger: { trigger: '#svcList', start: 'top 90%' } });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 04 — THE PRACTICE   (pinned horizontal: the people you'd see)
+     ========================================================================== -->
+<section class="ch ch-practice" id="practice" data-chapter="4" data-chapter-name="The Practice" data-theme="light">
+  <style>
+    .ch-practice{background:var(--bg);overflow:hidden}
+    .ch-practice .pin{height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative}
+    .ch-practice .head{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter);
+      margin-bottom:clamp(1.2rem,2.6vw,2.2rem)}
+    .ch-practice h2{font-size:var(--h2);max-width:16ch}
+    .path-track{display:flex;gap:clamp(.9rem,2.2vw,1.8rem);padding-inline:var(--gutter);
+      width:max-content;align-items:stretch}
+    .path-card{width:clamp(240px,25vw,360px);flex:none;border:1px solid var(--line);
+      border-radius:var(--radius-lg);padding:clamp(1.1rem,2vw,1.6rem);background:var(--card);
+      display:flex;flex-direction:column;gap:.7rem;transition:border-color .5s ease,box-shadow .5s ease}
+    .path-card .shot{aspect-ratio:1;overflow:hidden;border-radius:14px;background:var(--paper-3)}
+    .path-card .shot img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);
+      transition:filter .7s var(--ease),transform .9s var(--ease)}
+    .path-card:hover .shot img{filter:grayscale(0);transform:scale(1.05)}
+    .path-card h3{font-size:1.08rem}
+    .path-card p{font-size:.9rem;color:var(--fg-body)}
+    .ch-practice .bar{position:absolute;left:var(--gutter);right:var(--gutter);
+      bottom:clamp(1.2rem,3.5vw,2.6rem);height:2px;background:var(--line)}
+    .ch-practice .bar i{position:absolute;inset:0;background:var(--cyan-deep);transform:scaleX(0);
+      transform-origin:left}
+    @media(max-width:700px){ .path-card{width:72vw} }
+  </style>
+
+  <div class="pin" id="pracPin">
+    <div class="head">
+      <div class="chapter-tag"><i></i><span class="label">Chapter 04 &middot; The Practice</span></div>
+      <h2 class="h2">Who you'll actually see.</h2>
+    </div>
+    <div class="path-track" id="pracTrack">
+      <article class="path-card">
+        <div class="shot"><img src="../_shared/assets/dr_bennett-square-close.jpg.webp" alt="Dr. Gregory Bennett, DDS" loading="lazy"></div>
+        <h3>Dr. Gregory Bennett, DDS</h3>
+        <p>Founder. Doctorate of Dental Surgery, University of Iowa, 2001, and nearly twenty years practising
+          in Colorado. Implants, full-mouth restoration and IV sedation.</p>
+      </article>
+      <article class="path-card">
+        <div class="shot"><img src="../_shared/assets/dr-suzanna-mcaninley-square-close.jpg.webp" alt="Dr. Suzanna McAninley" loading="lazy"></div>
+        <h3>Dr. Suzanna McAninley</h3>
+        <p>Known to patients as "Dr. Mac" — repeatedly named in reviews for checking in and making sure you
+          are comfortable throughout.</p>
+      </article>
+      <article class="path-card">
+        <div class="shot"><img src="../_shared/assets/dental-implants-denver-dentist-in-arvada-dental-implants-arvada-dentist-near-me-arvada-denver.png" alt="The Arvada Dental Center &amp; Implants team" loading="lazy"></div>
+        <h3>…and the rest of the team</h3>
+        <p>Dr. John McShane and Dr. Meghan Holub complete the clinical team, alongside the hygienists patients
+          keep naming by name.</p>
+      </article>
+      <article class="path-card">
+        <div class="shot"><img src="../_shared/assets/office1.jpg.webp" alt="Inside Arvada Dental Center &amp; Implants" loading="lazy"></div>
+        <h3>One roof, start to finish</h3>
+        <p>Cleanings through to implants happen in this building, so you are not referred across town the
+          moment something needs doing.</p>
+      </article>
+    </div>
+    <div class="bar" aria-hidden="true"><i id="pracBar"></i></div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('pracPin'),
+        track = document.getElementById('pracTrack'),
+        bar = document.getElementById('pracBar');
+
+    if (W.reduced) {
+      pin.style.height = 'auto';
+      pin.style.paddingBlock = 'clamp(3rem,6vw,5rem)';
+      track.style.overflowX = 'auto';
+      track.style.width = '100%';
+      return;
+    }
+
+    function distance() { return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
+
+    var tween = gsap.to(track, {
+      x: function () { return -distance(); }, ease: 'none',
+      scrollTrigger: {
+        trigger: pin, start: 'top top',
+        end: function () { return '+=' + (distance() + window.innerHeight * .6); },
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) { gsap.set(bar, { scaleX: self.progress }); }
+      }
+    });
+
+    gsap.utils.toArray('#pracTrack .path-card').forEach(function (card) {
+      var img = card.querySelector('.shot img');
+      ScrollTrigger.create({
+        trigger: card, containerAnimation: tween, start: 'left 74%', end: 'right 26%',
+        onEnter: function () { light(card, img, true); }, onEnterBack: function () { light(card, img, true); },
+        onLeave: function () { light(card, img, false); }, onLeaveBack: function () { light(card, img, false); }
+      });
+    });
+
+    function light(card, img, on) {
+      gsap.to(card, { borderColor: on ? 'rgba(2,153,182,.6)' : 'rgba(20,24,33,.14)',
+        boxShadow: on ? '0 18px 44px rgba(20,24,33,.1)' : '0 0 0 rgba(0,0,0,0)', duration: .5 });
+      if (img) gsap.to(img, { filter: on ? 'grayscale(0)' : 'grayscale(1)', duration: .6 });
+    }
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 05 — THE PROOF
+     ========================================================================== -->
+<section class="ch ch-proof" id="proof" data-chapter="5" data-chapter-name="The Proof">
+  <style>
+    .ch-proof{background:var(--ink-850);overflow:hidden}
+    .ch-proof h2{font-size:var(--h2);max-width:18ch}
+  </style>
+
+  <div class="ridge-mark" aria-hidden="true" id="prRidge">
+    <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
+  </div>
+
+  <div class="wrap pad">
+    <div class="chapter-tag"><i></i><span class="label">Chapter 05 &middot; The Proof</span></div>
+    <h2 class="h2 mb-l" id="prTitle">In our patients' own words</h2>
+    <div class="grid g3" id="prReviews">
+      <div class="review">
+        <blockquote>I've had such a hard time trying to find a good dentist that is punctual and doesn't try to upsell you on things. I finally found a good one!</blockquote>
+        <p class="review__who">Sonja Welch<br><span class="review__src">Google review</span></p>
       </div>
-      <div class="grid grid--3" data-stagger="90">
-        <article class="card" data-reveal>
-          <figure class="media-frame media-frame--square" style="margin:0 0 1.1rem">
-            <img src="../_shared/assets/dr_bennett-square-close.jpg.webp" alt="Dr. Gregory Bennett, DDS" loading="lazy">
-          </figure>
-          <h3 class="h3">Dr. Gregory Bennett, DDS</h3>
-          <p>Founder. Doctorate of Dental Surgery, University of Iowa, 2001, and nearly twenty years practising in Colorado. Implants, full-mouth restoration and IV sedation.</p>
-        </article>
-        <article class="card" data-reveal data-delay="1">
-          <figure class="media-frame media-frame--square" style="margin:0 0 1.1rem">
-            <img src="../_shared/assets/dr-suzanna-mcaninley-square-close.jpg.webp" alt="Dr. Suzanna McAninley" loading="lazy">
-          </figure>
-          <h3 class="h3">Dr. Suzanna McAninley</h3>
-          <p>Known to patients as "Dr. Mac" — repeatedly named in reviews for checking in and making sure you are comfortable throughout.</p>
-        </article>
-        <article class="card" data-reveal data-delay="2">
-          <figure class="media-frame media-frame--square" style="margin:0 0 1.1rem">
-            <img src="../_shared/assets/dental-implants-denver-dentist-in-arvada-dental-implants-arvada-dentist-near-me-arvada-denver.png" alt="The Arvada Dental Center &amp; Implants team" loading="lazy">
-          </figure>
-          <h3 class="h3">…and the rest of the team</h3>
-          <p>Dr. John McShane and Dr. Meghan Holub complete the clinical team, alongside the hygienists patients keep naming by name.</p>
-        </article>
+      <div class="review">
+        <blockquote>Kate is an excellent dental hygienist. She is always very personable and happy. She always makes sure you are comfortable! Dr. Mac is also great at what she does.</blockquote>
+        <p class="review__who">Katie Springer<br><span class="review__src">Google review</span></p>
+      </div>
+      <div class="review">
+        <blockquote>The times I've had work done, cavities, crowns etc., Dr Bennett did a fabulous job. Won't go anywhere else.</blockquote>
+        <p class="review__who">Linda Hoffner<br><span class="review__src">Google review</span></p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ PROOF ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">What patients say</p>
-        <h2 class="display" data-split="lines">In our patients' own words</h2>
-      </div>
-      <div class="grid grid--3" data-stagger="90">
-        <div class="review" data-reveal>
-          <blockquote>I've had such a hard time trying to find a good dentist that is punctual and doesn't try to upsell you on things. I finally found a good one!</blockquote>
-          <p class="review__who">Sonja Welch<br><span class="review__src">Google review</span></p>
-        </div>
-        <div class="review" data-reveal data-delay="1">
-          <blockquote>Kate is an excellent dental hygienist. She is always very personable and happy. She always makes sure you are comfortable! Dr. Mac is also great at what she does.</blockquote>
-          <p class="review__who">Katie Springer<br><span class="review__src">Google review</span></p>
-        </div>
-        <div class="review" data-reveal data-delay="2">
-          <blockquote>The times I've had work done, cavities, crowns etc., Dr Bennett did a fabulous job. Won't go anywhere else.</blockquote>
-          <p class="review__who">Linda Hoffner<br><span class="review__src">Google review</span></p>
-        </div>
-      </div>
-    </div>
-  </section>
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('prTitle'), { start: 'top 86%' });
+    if (W.reduced) return;
+    gsap.fromTo('#prRidge', { yPercent: 12 }, { yPercent: -6, ease: 'none',
+      scrollTrigger: { trigger: '#proof', start: 'top bottom', end: 'bottom top', scrub: .9 } });
+    gsap.from('#prReviews .review', { opacity: 0, y: 36, duration: .85, stagger: .1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#prReviews', start: 'top 88%' } });
+  });
+  </script>
+</section>
 
-  <!-- ============ FAQ ============ -->
-  <section class="section band-base">
-    <div class="wrap-narrow">
-      <div class="mb-lg" data-reveal>
-        <p class="eyebrow">Questions</p>
-        <h2 class="display" data-split="lines">Before you book</h2>
-      </div>
-      <div class="faq" data-reveal>
+<!-- ==========================================================================
+     CHAPTER 06 — THE INVITATION
+     ========================================================================== -->
+<section class="ch ch-invite" id="invitation" data-chapter="6" data-chapter-name="The Invitation" data-theme="light">
+  <style>
+    .ch-invite{background:var(--bg)}
+    .ch-invite h2{font-size:var(--h2);max-width:18ch}
+    .ch-invite .close{background:var(--ink-950);color:#fff;border-radius:var(--radius-lg);
+      padding:clamp(2rem,5vw,4rem);text-align:center;display:grid;gap:1rem;justify-items:center;
+      margin-top:clamp(2.5rem,5vw,4.5rem)}
+    .ch-invite .close h2{color:#fff;max-width:20ch;margin-inline:auto}
+    .ch-invite .close p{color:rgba(255,255,255,.72);max-width:46ch}
+    .ch-invite .close .addr{font-size:.85rem;color:rgba(255,255,255,.5)}
+  </style>
+
+  <div class="wrap pad">
+    <div class="chapter-tag"><i></i><span class="label">Chapter 06 &middot; The Invitation</span></div>
+    <div class="wrap--narrow" style="padding-inline:0;margin-inline:auto">
+      <h2 class="h2 mb-l" id="faqTitle">Before you book</h2>
+      <div class="faq">
         <div class="faq__item">
           <h3><button class="faq__q" aria-controls="nq1" aria-expanded="false">What exactly does the $109 cover?</button></h3>
           <div class="faq__a" id="nq1"><div><p>A comprehensive exam, digital X-rays, an OralID oral cancer screening, and a personalised treatment plan discussed with one of the doctors. Restrictions apply; it is for new patients aged 18 and over.</p></div></div>
@@ -362,21 +656,29 @@
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ============ CLOSE ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap-narrow center" data-reveal>
-      <p class="eyebrow eyebrow--center">Ready when you are</p>
-      <h2 class="display" data-split="lines">Book your $109 first visit</h2>
-      <p class="lede" style="margin-inline:auto">Exam, X-rays, OralID screening and a plan. Right here in Arvada.</p>
-      <div class="btn-row btn-row--center mt">
-        <a class="btn btn--offer btn--lg" href="#book">Claim the $109 special</a>
-        <a class="btn btn--ghost btn--lg tel" href="tel:+13034217611">(303) 421-7611</a>
+    <div class="close" data-rv>
+      <p class="eyebrow">Ready when you are</p>
+      <h2 class="h2" id="closeTitle">Book your $109 first visit</h2>
+      <p>Exam, X-rays, OralID screening and a plan. Right here in Arvada.</p>
+      <div class="btn-row center mt">
+        <a class="btn btn--offer btn--lg magnetic" href="#book"><span>Claim the $109 special</span></a>
+        <a class="btn btn--ghost btn--lg tel magnetic" href="tel:+13034217611"><span>(303) 421-7611</span></a>
       </div>
-      <p class="mt-sm" style="font-size:0.9rem;color:#9aa6b8">6695 Wadsworth Blvd, Arvada, CO 80003 · Monday to Friday, 8am to 5pm</p>
+      <p class="addr">6695 Wadsworth Blvd, Arvada, CO 80003 &middot; Monday to Friday, 8am to 5pm</p>
     </div>
-  </section>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('faqTitle'), { start: 'top 86%' });
+    if (W.reduced) return;
+    gsap.from('#invitation .faq__item', { opacity: 0, x: -20, duration: .6, stagger: .07,
+      ease: 'power2.out', scrollTrigger: { trigger: '#invitation .faq', start: 'top 86%' } });
+  });
+  </script>
+</section>
+
 </main>
 
 <footer class="ftr">
@@ -384,7 +686,7 @@
     <div class="ftr__grid">
       <div>
         <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
-        <p style="font-size:0.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
+        <p style="font-size:.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
         <h3>Visit</h3>
@@ -396,8 +698,8 @@
       </div>
       <div>
         <h3>This page</h3>
-        <p style="font-size:0.9rem">General and family dentistry for Arvada, Westminster, Broomfield, Applewood, Lakeside and north-west Denver.</p>
-        <p style="font-size:0.9rem"><a href="../">All landing pages</a></p>
+        <p style="font-size:.9rem">General and family dentistry for Arvada, Westminster, Broomfield, Applewood, Lakeside and north-west Denver.</p>
+        <p style="font-size:.9rem"><a href="../">All landing pages</a></p>
       </div>
     </div>
     <div class="ftr__legal" id="terms">
@@ -406,12 +708,14 @@
     </div>
   </div>
 </footer>
-
-<div class="actionbar">
-  <a class="btn btn--ghost tel" href="tel:+13034217611">Call now</a>
-  <a class="btn btn--offer" href="#book">$109 visit</a>
+</div>
 </div>
 
-<script src="../_shared/brand.js"></script>
+<div class="actionbar">
+  <a class="btn btn--ghost tel" href="tel:+13034217611"><span>Call now</span></a>
+  <a class="btn btn--offer" href="#book"><span>$109 visit</span></a>
+</div>
+
+<script src="../_shared/journey-boot.js"></script>
 </body>
 </html>

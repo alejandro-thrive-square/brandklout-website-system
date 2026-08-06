@@ -7,405 +7,755 @@
 <meta name="description" content="Full-arch All-on-X dental implants in Arvada, CO. A fixed set of teeth on four or more implants, often placed the same day, by Dr. Gregory Bennett.">
 <meta name="robots" content="noindex, nofollow">
 <!--
-  Landing page — AOX (All-on-X full arch)
+  Landing page — AOX (All-on-X full arch).  Journey architecture: 8 chapters.
   Asana task: 1217162344633761 (parent 1217040406855586)
   Reference cited on the task: yjoms.com/about-full-arch/
     Used for SECTION ORDER AND COPY ANGLES ONLY, per docs/ASANA-DISPATCH.md.
   The comparison table is the client's own published content (all-on-4-dental-implants/).
   All copy, pricing, credentials, reviews and imagery are the client's own.
+
+  Scroll-driven chapters (pinned + scrubbed):
+    01 The Verdict — statement written word by word, then the candidacy list
+    03 The Four    — four implants seat into the arch, one per scroll segment
+    04 The Day     — the day of surgery travels horizontally, hour by hour
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../_shared/brand.css">
+<link rel="stylesheet" href="../_shared/journey.css">
 <style>
-  /* Per-page motion contract. The shared system lives in ../_shared/brand.css;
-     this block guarantees the two rules that must hold even if that file is
-     swapped, minified or ported: motion never hides content, and
-     prefers-reduced-motion removes movement rather than removing information. */
-  @media (prefers-reduced-motion: reduce) {
-    [data-reveal], [data-split] .ln__i, [data-split] .wd,
-    .trust__item, .form-card, [data-parallax] {
-      opacity: 1 !important;
-      transform: none !important;
-      clip-path: none !important;
-      transition: none !important;
-      animation: none !important;
-    }
-    .progress { display: none !important; }
-    html { scroll-behavior: auto; }
+  /* Per-page motion contract — reduced motion removes MOVEMENT, never
+     information, and holds even if the shared kit is swapped or minified. */
+  @media (prefers-reduced-motion: reduce){
+    [data-rv],[data-anim="hide"],.wz-line>*,.wz-word,
+    .arch g,.path-track,.vd-item{
+      opacity:1!important;visibility:visible!important;transform:none!important;
+      clip-path:none!important;transition:none!important;animation:none!important}
+    .nav-progress{display:none!important}
   }
-  /* If the motion script never arms the system, nothing is left hidden. */
-  html:not([data-motion="on"]) [data-reveal] { opacity: 1; transform: none; }
+  html:not(.js-motion) [data-rv]{opacity:1}
 </style>
+<script src="../_shared/vendor/gsap/gsap.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollToPlugin.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollSmoother.min.js"></script>
+<script src="../_shared/vendor/gsap/SplitText.min.js"></script>
+<script src="../_shared/journey.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="hdr">
-  <div class="wrap hdr__bar">
-    <a class="hdr__logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
-      <img src="../_shared/assets/best-dental-imaplant-dentist-denver-dental-implants-arvada-dentist.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
+<header class="nav" id="nav">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap nav-in">
+    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
+      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
     </a>
-    <div class="hdr__spacer"></div>
-    <div class="hdr__meta">
-      <span class="status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
-      <strong><a class="tel" href="tel:+13034217611">(303) 421-7611</a></strong>
+    <div class="nav-mid">
+      <p class="nav-chapter" aria-hidden="true"><b id="navChNum">00</b><i id="navChBar"></i><span id="navChName">Arrival</span></p>
     </div>
-    <a class="btn btn--primary hdr__cta-sm" href="#consult">Free consultation</a>
+    <div class="nav-right">
+      <span class="status nav-status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
+      <a class="nav-tel tel" href="tel:+13034217611">(303) 421-7611</a>
+      <a class="btn btn--primary nav-cta magnetic" href="#consult"><span>Free consultation</span></a>
+    </div>
   </div>
 </header>
 
+<div id="smooth-wrapper">
+<div id="smooth-content">
 <main id="main">
 
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="hero__media">
-      <img src="../_shared/assets/dreams_reality.jpg.webp" alt="" aria-hidden="true" style="--hero-pos:60% 40%">
-    </div>
-    <div class="hero__scrim"></div>
-    <div class="wrap hero__inner">
-      <div>
-        <p class="eyebrow hero__eyebrow">All-on-X Full Arch · Arvada, Colorado</p>
-        <h1 class="display" data-split="lines">Stop planning your life<br>around your dentures.</h1>
-        <p class="lede mt-sm">
-          A full arch of fixed teeth on four or more implants — secured to the jawbone, so they never
-          move when you smile, talk or eat. Most patients walk out with teeth the same day as surgery.
-        </p>
-        <div class="btn-row mt">
-          <a class="btn btn--primary btn--lg" href="#consult">See if you're a candidate</a>
-          <a class="btn btn--ghost btn--lg tel" href="tel:+13034217611">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            (303) 421-7611
-          </a>
-        </div>
-        <div class="trust" data-stagger="90">
-          <span class="trust__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            Fixed teeth, often in one day
-          </span>
-          <span class="trust__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            Fully guided All-on-X technique
-          </span>
-          <span class="trust__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            Serving Arvada since 2003
-          </span>
-        </div>
+<!-- ==========================================================================
+     CHAPTER 00 — ARRIVAL
+     ========================================================================== -->
+<section class="ch ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival">
+  <style>
+    .ch-arrival{min-height:100svh;display:flex;align-items:center;overflow:hidden;
+      padding-top:clamp(6rem,12vw,9rem);padding-bottom:clamp(4rem,9vw,7rem)}
+    .ch-arrival .ch-media img{transform:scale(1.12)}
+    .ch-arrival .ch-media::after{content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(85% 70% at 76% 32%,rgba(3,197,236,.2),transparent 60%),
+        linear-gradient(100deg,rgba(10,13,20,.96) 0%,rgba(10,13,20,.9) 38%,rgba(10,13,20,.54) 70%,rgba(10,13,20,.28) 100%),
+        linear-gradient(180deg,rgba(10,13,20,.9) 0%,rgba(10,13,20,.25) 30%,rgba(10,13,20,.86) 100%)}
+    .ch-arrival .in{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-arrival h1{font-size:var(--d1);max-width:14ch}
+    .ch-arrival .lede{max-width:50ch}
+    .ch-arrival .trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;
+      padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
+    .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
+      font-family:var(--f-ui);font-size:.76rem;font-weight:600;color:var(--fg-soft)}
+    .ch-arrival .trust svg{width:16px;height:16px;color:var(--cyan);flex:none}
+    @media(min-width:1000px){ .ch-arrival .in{grid-template-columns:1.12fr .88fr;gap:clamp(2.5rem,4vw,4.5rem)} }
+  </style>
+
+  <div class="ch-media" aria-hidden="true">
+    <img id="arrImg" src="../_shared/assets/dreams_reality.jpg.webp" alt="" style="object-position:60% 40%">
+  </div>
+
+  <div class="wrap ch-in in">
+    <div>
+      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Chapter 00 &middot; Arrival</span></div>
+      <h1 class="d1" data-anim="hide" id="arrTitle">Stop planning your life<br>around your dentures.</h1>
+      <p class="lede mt" data-anim="hide" id="arrLead">
+        A full arch of fixed teeth on four or more implants — secured to the jawbone, so they never
+        move when you smile, talk or eat. Most patients walk out with teeth the same day as surgery.
+      </p>
+      <div class="btn-row mt" data-anim="hide" id="arrActions">
+        <a class="btn btn--primary btn--lg magnetic" href="#consult"><span>See if you're a candidate</span></a>
+        <a class="btn btn--ghost btn--lg tel magnetic" href="tel:+13034217611"><span>(303) 421-7611</span></a>
       </div>
+      <div class="trust mt" data-anim="hide" id="arrTrust">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Fixed teeth, often in one day</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Fully guided All-on-X technique</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Serving Arvada since 2003</span>
+      </div>
+    </div>
 
-      <div class="form-card" id="consult" data-quiz>
-        <div class="form-card__head">
-          <p class="eyebrow" style="color:var(--cyan-ink)">Free consultation</p>
-          <p class="h3">Are you a full-arch candidate?</p>
-          <p class="form__note">Four questions, then we'll call you back.</p>
+    <div class="form-card" id="consult" data-quiz data-anim="hide">
+      <div class="form-card__head">
+        <p class="eyebrow" style="color:var(--cyan-ink)">Free consultation</p>
+        <p class="h3">Are you a full-arch candidate?</p>
+        <p class="form__note">Four questions, then we'll call you back.</p>
+      </div>
+      <div class="quiz">
+        <div class="quiz__progress" aria-hidden="true"><i></i></div>
+        <p class="vh" data-quiz-live role="status"></p>
+
+        <div class="quiz__step" data-name="situation" data-active="true">
+          <p class="quiz__q">Where are you starting from?</p>
+          <div class="quiz__opts">
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="dentures"><span class="dot"></span>I wear full dentures now</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="partial"><span class="dot"></span>I wear a partial denture</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="failing"><span class="dot"></span>My remaining teeth are failing</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="missing"><span class="dot"></span>Most of my teeth are already gone</button>
+          </div>
         </div>
-        <div class="quiz">
-          <div class="quiz__progress" aria-hidden="true"></div>
-          <p class="vh" data-quiz-live role="status"></p>
 
-          <div class="quiz__step" data-name="situation" data-active="true">
-            <p class="quiz__q">Where are you starting from?</p>
-            <div class="quiz__opts">
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="dentures"><span class="dot"></span>I wear full dentures now</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="partial"><span class="dot"></span>I wear a partial denture</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="failing"><span class="dot"></span>My remaining teeth are failing</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="missing"><span class="dot"></span>Most of my teeth are already gone</button>
-            </div>
+        <div class="quiz__step" data-name="arch">
+          <p class="quiz__q">Which arch are we talking about?</p>
+          <div class="quiz__opts">
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="upper"><span class="dot"></span>Upper</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="lower"><span class="dot"></span>Lower</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="both"><span class="dot"></span>Both</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="unsure"><span class="dot"></span>I'm not sure yet</button>
           </div>
+          <div class="quiz__nav"><button type="button" class="quiz__back">&larr; Back</button></div>
+        </div>
 
-          <div class="quiz__step" data-name="arch">
-            <p class="quiz__q">Which arch are we talking about?</p>
-            <div class="quiz__opts">
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="upper"><span class="dot"></span>Upper</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="lower"><span class="dot"></span>Lower</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="both"><span class="dot"></span>Both</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="unsure"><span class="dot"></span>I'm not sure yet</button>
-            </div>
-            <div class="quiz__nav"><button type="button" class="quiz__back">← Back</button></div>
+        <div class="quiz__step" data-name="motivation">
+          <p class="quiz__q">What would make the biggest difference to you?</p>
+          <div class="quiz__opts">
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="eat"><span class="dot"></span>Eating everything I want again</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="confidence"><span class="dot"></span>Smiling without thinking about it</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="fixed"><span class="dot"></span>Teeth I never have to take out</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="pain"><span class="dot"></span>Getting out of discomfort</button>
           </div>
+          <div class="quiz__nav"><button type="button" class="quiz__back">&larr; Back</button></div>
+        </div>
 
-          <div class="quiz__step" data-name="motivation">
-            <p class="quiz__q">What would make the biggest difference to you?</p>
-            <div class="quiz__opts">
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="eat"><span class="dot"></span>Eating everything I want again</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="confidence"><span class="dot"></span>Smiling without thinking about it</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="fixed"><span class="dot"></span>Teeth I never have to take out</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="pain"><span class="dot"></span>Getting out of discomfort</button>
-            </div>
-            <div class="quiz__nav"><button type="button" class="quiz__back">← Back</button></div>
+        <div class="quiz__step" data-name="payment">
+          <p class="quiz__q">How would you prefer to handle the cost?</p>
+          <div class="quiz__opts">
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="full"><span class="dot"></span>Paying in full</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="financing"><span class="dot"></span>Monthly financing</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="unsure"><span class="dot"></span>I'd like to talk it through</button>
           </div>
+          <div class="quiz__nav"><button type="button" class="quiz__back">&larr; Back</button></div>
+        </div>
 
-          <div class="quiz__step" data-name="payment">
-            <p class="quiz__q">How would you prefer to handle the cost?</p>
-            <div class="quiz__opts">
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="full"><span class="dot"></span>Paying in full</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="financing"><span class="dot"></span>Monthly financing</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="unsure"><span class="dot"></span>I'd like to talk it through</button>
+        <div class="quiz__done">
+          <p class="quiz__q">Where should we reach you?</p>
+          <form class="form" novalidate data-lead="aox-qualifier" data-thanks="Thank you — your full-arch consultation request is in.">
+            <input type="hidden" name="answers" data-quiz-answers>
+            <div class="field">
+              <label for="a-name">Full name</label>
+              <input id="a-name" name="name" type="text" autocomplete="name" required>
+              <span class="field__err" aria-live="polite"></span>
             </div>
-            <div class="quiz__nav"><button type="button" class="quiz__back">← Back</button></div>
-          </div>
-
-          <div class="quiz__done">
-            <p class="quiz__q">Where should we reach you?</p>
-            <form class="form" data-lead="aox-qualifier" data-thanks="Thank you — your full-arch consultation request is in.">
-              <input type="hidden" name="answers" data-quiz-answers>
+            <div class="field--row">
               <div class="field">
-                <label for="a-name">Full name</label>
-                <input id="a-name" name="name" type="text" autocomplete="name" required>
+                <label for="a-phone">Phone</label>
+                <input id="a-phone" name="phone" type="tel" autocomplete="tel" required>
                 <span class="field__err" aria-live="polite"></span>
               </div>
-              <div class="field--row">
-                <div class="field">
-                  <label for="a-phone">Phone</label>
-                  <input id="a-phone" name="phone" type="tel" autocomplete="tel" required>
-                  <span class="field__err" aria-live="polite"></span>
-                </div>
-                <div class="field">
-                  <label for="a-email">Email</label>
-                  <input id="a-email" name="email" type="email" autocomplete="email">
-                  <span class="field__err" aria-live="polite"></span>
-                </div>
+              <div class="field">
+                <label for="a-email">Email</label>
+                <input id="a-email" name="email" type="email" autocomplete="email">
+                <span class="field__err" aria-live="polite"></span>
               </div>
-              <button class="btn btn--primary btn--block btn--lg" type="submit">Request my free consultation</button>
-              <p class="form__note">We'll call you back Monday to Friday, 8am to 5pm. Prefer to talk now? <a class="tel" href="tel:+13034217611">(303) 421-7611</a></p>
-            </form>
-          </div>
+            </div>
+            <button class="btn btn--primary btn--block btn--lg" type="submit"><span>Request my free consultation</span></button>
+            <p class="form__note">We'll call you back Monday to Friday, 8am to 5pm. Prefer to talk now? <a class="tel" href="tel:+13034217611">(303) 421-7611</a></p>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="hero__ridge" aria-hidden="true">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="currentColor" d="M0 90V62l120-30 104 24 132-46 108 32 120-52 128 48 112-30 116 36 100-22 128 32 100-18 92 20v96z"/></svg>
-    </div>
-  </section>
+  <script>
+  WZ.add(function (W) {
+    var root = document.getElementById('arrival');
+    var hide = root.querySelectorAll('[data-anim="hide"]');
+    gsap.set(hide, { visibility: 'visible' });
+    if (W.reduced) { gsap.set(hide, { opacity: 1, y: 0 }); return; }
 
-  <!-- ============ QUALIFIER ============ -->
-  <section class="section band-base">
-    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
-      <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
-    </div>
+    var tl = gsap.timeline({ delay: .12 });
+    var split = W.splitLines(document.getElementById('arrTitle'));
+    if (split && split.lines && split.lines.length) {
+      gsap.set(split.lines, { yPercent: 112 });
+      tl.to(split.lines, { yPercent: 0, duration: 1.15, stagger: .09, ease: 'power4.out' }, 0);
+    } else {
+      tl.from('#arrTitle', { opacity: 0, y: 40, duration: 1, ease: 'power3.out' }, 0);
+    }
+    tl.from(root.querySelector('.chapter-tag'), { opacity: 0, x: -24, duration: .9, ease: 'power3.out' }, .05)
+      .from('#arrLead',    { opacity: 0, y: 26, duration: .9, ease: 'power3.out' }, .5)
+      .from('#arrActions', { opacity: 0, y: 26, duration: .9, ease: 'power3.out' }, .62)
+      .from('#arrTrust > *', { opacity: 0, y: 20, duration: .8, stagger: .08, ease: 'power3.out' }, .72)
+      .from('#consult',   { opacity: 0, y: 44, duration: 1.05, ease: 'power3.out' }, .3)
+      .from('#arrImg',    { opacity: 0, scale: 1.26, duration: 1.8, ease: 'power3.out' }, 0);
+
+    gsap.timeline({ scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: .6 } })
+      .to(root.querySelector('.in'), { yPercent: -14, opacity: .12, ease: 'none' }, 0)
+      .to('#arrImg', { yPercent: 6, scale: 1.2, ease: 'none' }, 0);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 01 — THE VERDICT   (pinned; the statement is written word by word,
+     then the six things that put people here surface one at a time)
+     ========================================================================== -->
+<section class="ch ch-verdict" id="verdict" data-chapter="1" data-chapter-name="The Verdict">
+  <style>
+    .ch-verdict{background:var(--ink-950)}
+    .ch-verdict .stage{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
+    .ch-verdict .big{font-family:var(--f-display);font-size:clamp(1.65rem,4.2vw,3.7rem);
+      line-height:1.16;max-width:21ch;font-weight:600}
+    .ch-verdict .big .wz-word{color:rgba(255,255,255,.17)}
+    .vd-list{display:grid;gap:.55rem;margin-top:clamp(1.8rem,3.5vw,3rem);grid-template-columns:1fr}
+    .vd-item{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:start;
+      padding:.85rem 1rem;border:1px solid var(--line);border-radius:12px;
+      background:rgba(255,255,255,.03);font-size:.93rem;color:var(--fg-body)}
+    .vd-item svg{width:18px;height:18px;color:var(--cyan);margin-top:.2rem;flex:none}
+    @media(min-width:760px){ .vd-list{grid-template-columns:repeat(2,1fr)} }
+    @media(min-width:1180px){ .vd-list{grid-template-columns:repeat(3,1fr)} }
+  </style>
+
+  <div class="stage" id="vdPin">
     <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">Is full arch right for you?</p>
-        <h2 class="display" data-split="lines">You don't have to keep living this way</h2>
-        <p class="lede">Full-arch implants are usually the answer when the problem has stopped being one tooth and started being every meal.</p>
+      <div class="chapter-tag"><i></i><span class="label">Chapter 01 &middot; The Verdict</span></div>
+      <p class="big" id="vdBig">You have probably been told dentures are the end of it. That is a verdict
+        on the tools someone had, not on your mouth.</p>
+
+      <div class="vd-list" id="vdList">
+        <div class="vd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>You are missing most or all of the teeth in an arch</span></div>
+        <div class="vd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Your dentures slip, click, or need adhesive to stay put</span></div>
+        <div class="vd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>You avoid whole categories of food and have stopped mentioning it</span></div>
+        <div class="vd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Your remaining teeth are decayed or failing and you're facing extractions</span></div>
+        <div class="vd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Your face has begun to change shape as the jawbone recedes</span></div>
+        <div class="vd-item"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>You want something fixed in place, not something you take out at night</span></div>
       </div>
-      <ul class="checks" data-stagger="45" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:1.1rem">
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>You are missing most or all of the teeth in an arch</span></li>
-        <li data-reveal data-delay="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Your dentures slip, click, or need adhesive to stay put</span></li>
-        <li data-reveal data-delay="2"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>You avoid whole categories of food and have stopped mentioning it</span></li>
-        <li data-reveal data-delay="3"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Your remaining teeth are decayed or failing and you're facing extractions</span></li>
-        <li data-reveal><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Your face has begun to change shape as the jawbone recedes</span></li>
-        <li data-reveal data-delay="1"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>You want something fixed in place, not something you take out at night</span></li>
-      </ul>
-      <div class="btn-row btn-row--center mt-lg" data-reveal>
-        <a class="btn btn--primary btn--lg" href="#consult">Check my candidacy</a>
+
+      <div class="btn-row mt-l" id="vdFoot">
+        <a class="btn btn--primary magnetic" href="#consult"><span>Check my candidacy</span></a>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ COMPARISON — the client's own published table ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">Your three options</p>
-        <h2 class="display" data-split="lines">What full-arch replacement actually compares against</h2>
-        <p class="lede">Arvada Dental Center offers all three. This is the practice's own comparison, not a sales chart.</p>
-      </div>
-      <div class="compare-scroll" data-reveal>
-        <table class="compare">
-          <caption class="vh">Comparison of removable dentures, implant-supported dentures and All-on-4 dental implants</caption>
-          <thead>
-            <tr>
-              <th scope="col">&nbsp;</th>
-              <th scope="col">Removable dentures</th>
-              <th scope="col">Implant-supported dentures</th>
-              <th scope="col" class="is-best">All-on-4 implants</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Stability</th>
-              <td>Removable</td>
-              <td>Removable or fixed</td>
-              <td class="is-best">Fixed for top stability</td>
-            </tr>
-            <tr>
-              <th scope="row">Lifespan</th>
-              <td>Last 5+ years</td>
-              <td>Last 10+ years</td>
-              <td class="is-best">Many years to a lifetime</td>
-            </tr>
-            <tr>
-              <th scope="row">How it's held</th>
-              <td>Struggle with messy adhesives</td>
-              <td>Attached to 2+ implants</td>
-              <td class="is-best">Secured by 4+ implants</td>
-            </tr>
-            <tr>
-              <th scope="row">Effect on bone</th>
-              <td>Experience bone recession</td>
-              <td>Reduced bone recession</td>
-              <td class="is-best">Stimulate bone growth</td>
-            </tr>
-            <tr>
-              <th scope="row">What you can eat</th>
-              <td>Limited food options</td>
-              <td>More food options</td>
-              <td class="is-best">Endless food options</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="caption" data-reveal>Source: Arvada Dental Center &amp; Implants, all-on-4-dental-implants page.</p>
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('vdPin'),
+        big = document.getElementById('vdBig'),
+        items = gsap.utils.toArray('#vdList .vd-item'),
+        foot = document.getElementById('vdFoot');
+
+    if (W.reduced) return;
+
+    gsap.set(items, { opacity: 0, y: 38 });
+    gsap.set(foot, { opacity: 0, y: 22 });
+
+    var sp = W.splitWords(big);
+    var words = (sp && sp.words && sp.words.length) ? sp.words : null;
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.6),
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    if (words) {
+      /* The closing clause is owned by the cyan tween. Two scrubbed tweens
+         writing colour on the same word over overlapping ranges overwrite each
+         other every frame and flicker — one word, one owner. */
+      var tail = words.slice(-9), body = words.slice(0, -9);
+      tl.to(body, { color: '#ffffff', stagger: .32, ease: 'none' }, 0)
+        .to(tail, { color: '#03c5ec', stagger: .26, ease: 'none' }, .4);
+    } else {
+      tl.from(big, { opacity: .2, ease: 'none' }, 0);
+    }
+
+    tl.to(items, { opacity: 1, y: 0, stagger: .13, ease: 'none' }, .55)
+      .to(foot, { opacity: 1, y: 0, ease: 'none' }, .95);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 02 — THE COMPARISON   (the practice's own published table, with
+     what actually changes folded in underneath it)
+     ========================================================================== -->
+<section class="ch ch-compare" id="compare" data-chapter="2" data-chapter-name="The Comparison" data-theme="light">
+  <style>
+    .ch-compare{background:var(--bg);overflow:hidden}
+    .ch-compare .head{max-width:46ch;margin-bottom:clamp(2rem,4vw,3rem)}
+    .ch-compare h2{font-size:var(--h2)}
+    .ch-compare .benefits{margin-top:clamp(2.5rem,5vw,4rem)}
+  </style>
+
+  <div class="wrap pad">
+    <div class="head" data-rv>
+      <div class="chapter-tag"><i></i><span class="label">Chapter 02 &middot; The Comparison</span></div>
+      <h2 class="h2" id="cmpTitle">What full-arch replacement actually compares against</h2>
+      <p class="lede mt-s">Arvada Dental Center offers all three. This is the practice's own comparison,
+        not a sales chart.</p>
     </div>
-  </section>
 
-  <!-- ============ BENEFITS ============ -->
-  <section class="section band-paper">
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">What changes</p>
-        <h2 class="display" data-split="lines">More than teeth</h2>
-      </div>
-      <div class="grid grid--4" data-stagger="70">
-        <article class="card card--lift" data-reveal>
+    <div class="compare-scroll" data-rv>
+      <table class="compare">
+        <caption class="vh">Comparison of removable dentures, implant-supported dentures and All-on-4 dental implants</caption>
+        <thead>
+          <tr>
+            <th scope="col">&nbsp;</th>
+            <th scope="col">Removable dentures</th>
+            <th scope="col">Implant-supported dentures</th>
+            <th scope="col" class="is-best">All-on-4 implants</th>
+          </tr>
+        </thead>
+        <tbody id="cmpBody">
+          <tr><th scope="row">Stability</th><td>Removable</td><td>Removable or fixed</td><td class="is-best">Fixed for top stability</td></tr>
+          <tr><th scope="row">Lifespan</th><td>Last 5+ years</td><td>Last 10+ years</td><td class="is-best">Many years to a lifetime</td></tr>
+          <tr><th scope="row">How it's held</th><td>Struggle with messy adhesives</td><td>Attached to 2+ implants</td><td class="is-best">Secured by 4+ implants</td></tr>
+          <tr><th scope="row">Effect on bone</th><td>Experience bone recession</td><td>Reduced bone recession</td><td class="is-best">Stimulate bone growth</td></tr>
+          <tr><th scope="row">What you can eat</th><td>Limited food options</td><td>More food options</td><td class="is-best">Endless food options</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption" data-rv>Source: Arvada Dental Center &amp; Implants, all-on-4-dental-implants page.</p>
+
+    <div class="benefits">
+      <p class="eyebrow" data-rv>What changes</p>
+      <div class="grid g4 mt" id="benGrid">
+        <article class="card">
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg></div>
           <h3 class="h3">Fixed, stable teeth</h3>
           <p>Secured on the upper and/or lower jaw, so nothing moves when you smile, talk or eat.</p>
         </article>
-        <article class="card card--lift" data-reveal data-delay="1">
+        <article class="card">
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3v18M10 3v7a2 2 0 0 1-4 0M18 3c-1.5 2-2 4-2 7h4c0-3-.5-5-2-7zM18 10v11"/></svg></div>
           <h3 class="h3">Eat what you want</h3>
           <p>The practice's own comparison puts it plainly: endless food options, rather than a list of things to avoid.</p>
         </article>
-        <article class="card card--lift" data-reveal data-delay="2">
+        <article class="card">
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
           <h3 class="h3">A natural-looking result</h3>
           <p>Designed around your facial features, skin tone and gum line, and finished in the practice's own lab.</p>
         </article>
-        <article class="card card--lift" data-reveal data-delay="3">
+        <article class="card">
           <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h4l3-8 4 16 3-8h4"/></svg></div>
           <h3 class="h3">Bone that stays put</h3>
           <p>Implants fuse to the jawbone and keep stimulating it, which is what stops the recession dentures allow.</p>
         </article>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ PROCESS ============ -->
-  <section class="section band-warm">
-    <div class="wrap">
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(2rem,5vw,4.5rem);align-items:start">
-        <div data-reveal>
-          <p class="eyebrow">What to expect</p>
-          <h2 class="display" data-split="lines">Four steps to a fixed arch</h2>
-          <p class="lede mt-sm">Planning happens digitally before anyone picks up an instrument, which is what makes same-day placement possible.</p>
-          <figure class="media-frame media-frame--wide mt" style="margin:0">
-            <img src="../_shared/assets/recieving.jpg.webp" alt="Dr. Bennett and team performing implant surgery at Arvada Dental Center" loading="lazy">
-          </figure>
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('cmpTitle'), { start: 'top 86%' });
+    if (W.reduced) return;
+    gsap.from('#cmpBody tr', { opacity: 0, x: -30, duration: .8, stagger: .09, ease: 'power3.out',
+      scrollTrigger: { trigger: '#cmpBody', start: 'top 86%' } });
+    gsap.from('#benGrid .card', { opacity: 0, y: 38, duration: .9, stagger: .1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#benGrid', start: 'top 88%' } });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 03 — THE FOUR   (signature moment: pinned, and the four implants
+     seat into the arch one per scroll segment before the fixed teeth go on.
+     Illustration — nothing here is presented as a patient photograph.)
+     ========================================================================== -->
+<section class="ch ch-four" id="four" data-chapter="3" data-chapter-name="The Four">
+  <style>
+    .ch-four{background:var(--ink-900)}
+    .ch-four .stage{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(3rem,6vw,5rem);overflow:hidden}
+    .ch-four .lay{display:grid;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-four h2{font-size:var(--h2);max-width:14ch}
+    .arch-fig{position:relative;justify-self:center;width:min(84vw,420px);max-width:100%}
+    .arch{width:100%;height:auto;display:block;overflow:visible}
+    .arch .ridge-b{fill:none;stroke:#2C3648;stroke-width:46;stroke-linecap:round}
+    .arch .gumline{fill:none;stroke:#7C4650;stroke-width:16;stroke-linecap:round;opacity:.75}
+    .arch .imp circle{fill:#03c5ec}
+    .arch .imp rect{fill:#0A0D14}
+    .arch .bridge{fill:none;stroke:#FFFFFF;stroke-width:34;stroke-linecap:round;opacity:0}
+    .arch .tick{stroke:#0A0D14;stroke-width:2.4;opacity:0}
+    .four-count{font-family:var(--f-display);font-weight:700;line-height:.9;color:var(--cyan);
+      font-size:clamp(4rem,11vw,8rem);font-variant-numeric:tabular-nums}
+    .four-of{font-family:var(--f-ui);font-size:.7rem;letter-spacing:.24em;text-transform:uppercase;
+      color:var(--fg-soft);margin-top:.3rem}
+    .four-cap{margin-top:clamp(1.2rem,2.4vw,1.8rem);min-height:5.2em}
+    .four-cap b{display:block;font-family:var(--f-display);font-size:1.15rem;color:var(--fg);
+      margin-bottom:.3rem}
+    .four-cap p{font-size:.94rem;color:var(--fg-body)}
+    .four-note{margin-top:1.1rem;font-size:.78rem;color:var(--fg-soft)}
+    @media(min-width:900px){
+      .ch-four .lay{grid-template-columns:1.05fr .95fr;gap:clamp(2.5rem,5vw,5rem)}
+      .arch-fig{width:min(40vw,430px)}
+    }
+  </style>
+
+  <div class="stage" id="fourPin">
+    <div class="wrap lay">
+      <div class="arch-fig">
+        <svg class="arch" id="archSvg" viewBox="0 0 360 300" role="img"
+             aria-label="Illustration of a full arch restored on four implants: four posts placed into the jaw, carrying one fixed set of teeth">
+          <path class="ridge-b" d="M40 46C40 196 96 254 180 254S320 196 320 46"/>
+          <path class="gumline" d="M40 46C40 196 96 254 180 254S320 196 320 46"/>
+          <g class="imp" id="imp1"><circle cx="46" cy="112" r="16"/><rect x="42" y="104" width="8" height="16" rx="2"/></g>
+          <g class="imp" id="imp2"><circle cx="104" cy="222" r="16"/><rect x="100" y="214" width="8" height="16" rx="2"/></g>
+          <g class="imp" id="imp3"><circle cx="256" cy="222" r="16"/><rect x="252" y="214" width="8" height="16" rx="2"/></g>
+          <g class="imp" id="imp4"><circle cx="314" cy="112" r="16"/><rect x="310" y="104" width="8" height="16" rx="2"/></g>
+          <path class="bridge" id="archBridge" d="M40 46C40 196 96 254 180 254S320 196 320 46"/>
+          <g id="archTicks">
+            <path class="tick" d="M92 40v34M132 30v36M180 26v38M228 30v36M268 40v34"/>
+          </g>
+        </svg>
+      </div>
+
+      <div>
+        <div class="chapter-tag"><i></i><span class="label">Chapter 03 &middot; The Four</span></div>
+        <h2 class="h2" id="fourTitle">Four implants. One fixed arch.</h2>
+        <p class="four-count" id="fourCount">0</p>
+        <p class="four-of">Implants placed</p>
+        <div class="four-cap" id="fourCap">
+          <b>Planned before anything is placed</b>
+          <p>Implant positions are worked out on a 3D scan using fully guided All-on-X technique,
+            for accuracy and precision.</p>
         </div>
-        <div class="steps" data-stagger="120" data-reveal data-delay="1">
-          <div class="step">
-            <h3 class="h3">Consultation and 3D scan</h3>
-            <p>A free consultation with Dr. Bennett, plus the imaging that shows how much bone there is to anchor into.</p>
-          </div>
-          <div class="step">
-            <h3 class="h3">A plan built for your jaw</h3>
-            <p>Implant positions are planned on the scan using fully guided All-on-X technique, for accuracy and precision.</p>
-          </div>
-          <div class="step">
-            <h3 class="h3">Placement and same-day teeth</h3>
-            <p>Four or more implants are placed securely into the jawbone. Most patients receive their full mouth implants the same day as surgery, with IV sedation if they want it.</p>
-          </div>
-          <div class="step">
-            <h3 class="h3">Healing and final restoration</h3>
-            <p>Once the implants have integrated, your final arch goes on — the one you keep.</p>
-          </div>
-        </div>
+        <p class="four-note">Illustration, not a patient photograph. Four or more implants are used;
+          how many, and where, depends on your scan.</p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ PRICE ============ -->
-  <section class="section band-base" style="--band-bg:var(--paper)">
-    <div class="wrap-narrow center">
-      <div data-reveal>
-        <p class="eyebrow eyebrow--center">The investment</p>
-        <h2 class="display" data-split="lines">A published price, not a phone-call estimate</h2>
-        <p class="lede" style="margin-inline:auto">A fixed full upper or lower arch at Arvada Dental Center is</p>
-        <p class="price-tag" style="justify-content:center;margin:1.25rem 0" data-price><span data-count>$18,795</span></p>
-        <p>which the practice states is more than $10,000 below the national chains advertised on television.<a href="#terms" aria-label="See pricing terms">*</a>
-          One team, one location, one bill — no travelling between offices, no meeting three different doctors, no separate invoices.</p>
-        <p><strong>Consultations are free</strong>, and monthly payment plans are available if you would rather spread the cost.</p>
-        <div class="btn-row btn-row--center mt">
-          <a class="btn btn--offer btn--lg" href="#consult">Get my written quote</a>
-        </div>
-        <!-- Named finance partners removed 2026-08-06 — unconfirmed. See Open Question 10. -->
-        <p class="caption mt-sm">Monthly payment plans are available; ask the patient coordinator what you qualify for.</p>
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('fourPin'),
+        imps = ['#imp1', '#imp2', '#imp3', '#imp4'].map(function (s) { return document.querySelector(s); }),
+        bridge = document.getElementById('archBridge'),
+        ticks = document.getElementById('archTicks'),
+        count = document.getElementById('fourCount'),
+        cap = document.getElementById('fourCap');
+
+    var CAPS = [
+      ['Planned before anything is placed', 'Implant positions are worked out on a 3D scan using fully guided All-on-X technique, for accuracy and precision.'],
+      ['Anchored where the bone is strongest', 'The posts are angled to use the bone you actually have, which is what avoids grafting in many cases.'],
+      ['Four posts carry the whole arch', 'Four or more implants are placed securely into the jawbone — the arch is supported by bone, not by suction or adhesive.'],
+      ['Teeth the same day', 'Most patients receive their full mouth implants the same day as surgery, with IV sedation if they want it.']
+    ];
+
+    W.headline(document.getElementById('fourTitle'), { start: 'top 86%' });
+
+    if (W.reduced) {
+      count.textContent = '4';
+      gsap.set(bridge, { opacity: .95 });
+      return;
+    }
+
+    gsap.set(imps, { opacity: 0, scale: 0, transformOrigin: 'center' });
+    gsap.set(bridge, { opacity: 0 });
+    gsap.set('#archTicks .tick', { opacity: 0 });
+
+    var state = { v: 0, idx: -1 };
+    function paint() {
+      var n = Math.min(4, Math.floor(state.v + 0.001));
+      count.textContent = String(n);
+      var i = Math.max(0, Math.min(3, Math.ceil(state.v) - 1));
+      if (i !== state.idx) {
+        state.idx = i;
+        cap.innerHTML = '<b>' + CAPS[i][0] + '</b><p>' + CAPS[i][1] + '</p>';
+      }
+    }
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 3.2),
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    /* One post per segment. The counter is tweened rather than stepped by a
+       callback so scrubbing backwards restores it exactly. */
+    imps.forEach(function (el, i) {
+      tl.to(el, { opacity: 1, scale: 1, ease: 'none', duration: .7 }, i * 1);
+    });
+    tl.to(state, { v: 4, ease: 'none', duration: 4, onUpdate: paint }, 0)
+      .to(bridge, { opacity: .95, ease: 'none', duration: .9 }, 4.1)
+      .to('#archTicks .tick', { opacity: 1, ease: 'none', duration: .5, stagger: .08 }, 4.5);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 04 — THE DAY   (pinned horizontal journey)
+     ========================================================================== -->
+<section class="ch ch-day" id="day" data-chapter="4" data-chapter-name="The Day" data-theme="light">
+  <style>
+    .ch-day{background:var(--bg);overflow:hidden}
+    .ch-day .pin{height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative}
+    .ch-day .head{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter);
+      margin-bottom:clamp(1.2rem,2.6vw,2.2rem)}
+    .ch-day h2{font-size:var(--h2);max-width:16ch}
+    .path-track{display:flex;gap:clamp(.9rem,2.2vw,1.8rem);padding-inline:var(--gutter);
+      width:max-content;align-items:stretch}
+    .path-card{width:clamp(250px,28vw,410px);flex:none;border:1px solid var(--line);
+      border-radius:var(--radius-lg);padding:clamp(1.2rem,2.2vw,2rem);background:var(--card);
+      display:flex;flex-direction:column;gap:.7rem;transition:border-color .5s ease,box-shadow .5s ease}
+    .path-card .no{font-family:var(--f-display);font-size:clamp(2.2rem,4.2vw,3.4rem);
+      color:var(--cyan-deep);line-height:.9;opacity:.35}
+    .path-card h3{font-size:var(--h3)}
+    .path-card p{font-size:.92rem;color:var(--fg-body)}
+    .ch-day .bar{position:absolute;left:var(--gutter);right:var(--gutter);
+      bottom:clamp(1.2rem,3.5vw,2.6rem);height:2px;background:var(--line)}
+    .ch-day .bar i{position:absolute;inset:0;background:var(--cyan-deep);transform:scaleX(0);
+      transform-origin:left}
+    @media(max-width:700px){ .path-card{width:76vw} }
+  </style>
+
+  <div class="pin" id="dayPin">
+    <div class="head">
+      <div class="chapter-tag"><i></i><span class="label">Chapter 04 &middot; The Day</span></div>
+      <h2 class="h2">Four steps to a fixed arch.</h2>
+    </div>
+    <div class="path-track" id="dayTrack">
+      <article class="path-card">
+        <span class="no">01</span>
+        <h3>Consultation and 3D scan</h3>
+        <p>A free consultation with Dr. Bennett, plus the imaging that shows how much bone there is to anchor into.</p>
+      </article>
+      <article class="path-card">
+        <span class="no">02</span>
+        <h3>A plan built for your jaw</h3>
+        <p>Implant positions are planned on the scan using fully guided All-on-X technique, for accuracy and precision.</p>
+      </article>
+      <article class="path-card">
+        <span class="no">03</span>
+        <h3>Placement and same-day teeth</h3>
+        <p>Four or more implants are placed securely into the jawbone. Most patients receive their full mouth
+          implants the same day as surgery, with IV sedation if they want it.</p>
+      </article>
+      <article class="path-card">
+        <span class="no">04</span>
+        <h3>Healing and final restoration</h3>
+        <p>Once the implants have integrated, your final arch goes on — the one you keep.</p>
+      </article>
+    </div>
+    <div class="bar" aria-hidden="true"><i id="dayBar"></i></div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('dayPin'),
+        track = document.getElementById('dayTrack'),
+        bar = document.getElementById('dayBar');
+
+    if (W.reduced) {
+      pin.style.height = 'auto';
+      pin.style.paddingBlock = 'clamp(3rem,6vw,5rem)';
+      track.style.overflowX = 'auto';
+      track.style.width = '100%';
+      return;
+    }
+
+    function distance() { return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
+
+    var tween = gsap.to(track, {
+      x: function () { return -distance(); }, ease: 'none',
+      scrollTrigger: {
+        trigger: pin, start: 'top top',
+        end: function () { return '+=' + (distance() + window.innerHeight * .6); },
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) { gsap.set(bar, { scaleX: self.progress }); }
+      }
+    });
+
+    gsap.utils.toArray('#dayTrack .path-card').forEach(function (card) {
+      ScrollTrigger.create({
+        trigger: card, containerAnimation: tween, start: 'left 72%', end: 'right 28%',
+        onEnter: function () { light(card, true); }, onEnterBack: function () { light(card, true); },
+        onLeave: function () { light(card, false); }, onLeaveBack: function () { light(card, false); }
+      });
+      gsap.fromTo(card.querySelector('.no'), { opacity: .35 }, { opacity: 1, duration: .4,
+        scrollTrigger: { trigger: card, containerAnimation: tween, start: 'left 78%',
+          toggleActions: 'play none none reverse' } });
+    });
+
+    function light(card, on) {
+      gsap.to(card, { borderColor: on ? 'rgba(2,153,182,.6)' : 'rgba(20,24,33,.14)',
+        boxShadow: on ? '0 18px 44px rgba(20,24,33,.1)' : '0 0 0 rgba(0,0,0,0)', duration: .5 });
+    }
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 05 — THE INVESTMENT
+     ========================================================================== -->
+<section class="ch ch-invest" id="investment" data-chapter="5" data-chapter-name="The Investment">
+  <style>
+    .ch-invest{background:var(--ink-900);overflow:hidden}
+    .ch-invest .in{max-width:64ch;margin-inline:auto;text-align:center}
+    .ch-invest h2{font-size:var(--h2);max-width:18ch;margin-inline:auto}
+    .ch-invest .price{margin-block:clamp(1rem,2.4vw,1.8rem)}
+    .ch-invest sup a{color:var(--cyan)}
+  </style>
+
+  <div class="ridge-mark" aria-hidden="true" id="invRidge">
+    <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 160 110l140 66 130-150 150 130 140-146 150 160 130-100 140 116 150-80 150 94v190z"/></svg>
+  </div>
+
+  <div class="wrap pad">
+    <div class="in">
+      <div class="chapter-tag center"><i></i><span class="label">Chapter 05 &middot; The Investment</span></div>
+      <h2 class="h2" id="invTitle">A published price, not a phone-call estimate</h2>
+      <p class="lede center mt-s" data-rv>A fixed full upper or lower arch at Arvada Dental Center is</p>
+      <!-- The figure does not count up. A number animating toward a published
+           price displays wrong prices on the way, and this is a real practice's
+           real quote — it arrives, it does not tally. -->
+      <p class="price" id="invPrice"><span>$18,795</span></p>
+      <p data-rv>which the practice states is more than $10,000 below the national chains advertised on
+        television.<sup><a href="#terms" aria-label="See pricing terms">*</a></sup>
+        One team, one location, one bill — no travelling between offices, no meeting three different
+        doctors, no separate invoices.</p>
+      <p class="mt-s" data-rv><strong style="color:var(--fg)">Consultations are free</strong>, and monthly
+        payment plans are available if you would rather spread the cost.</p>
+      <div class="btn-row center mt" data-rv>
+        <a class="btn btn--offer btn--lg magnetic" href="#consult"><span>Get my written quote</span></a>
+      </div>
+      <!-- Named finance partners removed 2026-08-06 — unconfirmed. See Open Question 10. -->
+      <p class="caption" data-rv>Monthly payment plans are available; ask the patient coordinator what
+        you qualify for. HMO and Medicaid plans are not accepted.</p>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('invTitle'), { start: 'top 86%' });
+    if (W.reduced) return;
+    gsap.fromTo('#invRidge', { yPercent: 12 }, { yPercent: -6, ease: 'none',
+      scrollTrigger: { trigger: '#investment', start: 'top bottom', end: 'bottom top', scrub: .9 } });
+    gsap.from('#invPrice', { opacity: 0, scale: .88, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#invPrice', start: 'top 88%' } });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 06 — THE PROOF   (who does the work, and what patients say about it)
+     ========================================================================== -->
+<section class="ch ch-proof" id="proof" data-chapter="6" data-chapter-name="The Proof">
+  <style>
+    .ch-proof{background:var(--ink-850);overflow:hidden}
+    .ch-proof .lay{display:grid;gap:clamp(2rem,5vw,4.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-proof .plate{position:relative;overflow:hidden;border-radius:var(--radius-lg);aspect-ratio:4/5;
+      background:var(--ink-800);clip-path:inset(0 0 100% 0)}
+    .ch-proof .plate img{width:100%;height:100%;object-fit:cover}
+    .ch-proof h2{font-size:var(--h2);max-width:15ch}
+    @media(min-width:900px){ .ch-proof .lay{grid-template-columns:.8fr 1.2fr} }
+  </style>
+
+  <div class="wrap pad">
+    <div class="lay">
+      <figure class="plate" id="prPlate" style="margin:0">
+        <img id="prImg" src="../_shared/assets/video_cover-1.jpg.webp"
+             alt="Dr. Gregory Bennett at Arvada Dental Center &amp; Implants" loading="lazy">
+      </figure>
+      <div>
+        <div class="chapter-tag"><i></i><span class="label">Chapter 06 &middot; The Proof</span></div>
+        <h2 class="h2" id="prTitle">Every phase, one surgeon</h2>
+        <p class="lede mt-s" data-rv>Dr. Gregory Bennett delivers and oversees every phase of a full-arch case
+          himself — surgery, sedation, restoration and the lab portions of implantology. That is unusual, and
+          it is the reason the practice can quote one price and one timeline rather than coordinating three.</p>
+        <ul class="rule-list mt" id="prCreds">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Doctorate of Dental Surgery, University of Iowa, 2001</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Thousands of implant cases completed</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Full-arch and full-mouth restorative specialist</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Board certified to administer IV sedation</span></li>
+        </ul>
       </div>
     </div>
-  </section>
 
-  <!-- ============ DOCTOR ============ -->
-  <section class="section band-paper">
-    <div class="wrap">
-      <div class="doctor">
-        <figure class="doctor__photo" data-reveal style="margin:0">
-          <img src="../_shared/assets/video_cover-1.jpg.webp" alt="Dr. Gregory Bennett at Arvada Dental Center &amp; Implants" loading="lazy">
-        </figure>
-        <div data-reveal data-delay="1">
-          <p class="eyebrow">Who will treat you</p>
-          <h2 class="display" data-split="lines">Every phase, one surgeon</h2>
-          <p class="mt-sm">Dr. Gregory Bennett delivers and oversees every phase of a full-arch case himself — surgery,
-            sedation, restoration and the lab portions of implantology. That is unusual, and it is the reason the
-            practice can quote one price and one timeline rather than coordinating three.</p>
-          <ul class="creds">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Doctorate of Dental Surgery, University of Iowa, 2001</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Thousands of implant cases completed</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Full-arch and full-mouth restorative specialist</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Board certified to administer IV sedation</li>
-          </ul>
-        </div>
+    <div class="grid g3 mt-l" id="prReviews">
+      <div class="review">
+        <blockquote>My first visit and I was extremely impressed. A clear plan was put together, including personal input from Dr. Bennett. Pricing was fully transparent, no hidden surprises expected.</blockquote>
+        <p class="review__who">Rick Willcox<br><span class="review__src">Google review</span></p>
+      </div>
+      <div class="review">
+        <blockquote>Pleasant and caring staff along with great doctors providing the best outcome for you !!</blockquote>
+        <p class="review__who">Art Golembeski<br><span class="review__src">Google review</span></p>
+      </div>
+      <div class="review">
+        <blockquote>Top notch in every regard. Everyone is fantastic and the office is beyond reproach. 10/10 recommend.</blockquote>
+        <p class="review__who">ryan syme<br><span class="review__src">Google review</span></p>
       </div>
     </div>
-  </section>
-
-  <!-- ============ PROOF ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">What patients say</p>
-        <h2 class="display" data-split="lines">In our patients' own words</h2>
-      </div>
-      <div class="grid grid--3" data-stagger="90">
-        <div class="review" data-reveal>
-          <blockquote>My first visit and I was extremely impressed. A clear plan was put together, including personal input from Dr. Bennett. Pricing was fully transparent, no hidden surprises expected.</blockquote>
-          <p class="review__who">Rick Willcox<br><span class="review__src">Google review</span></p>
-        </div>
-        <div class="review" data-reveal data-delay="1">
-          <blockquote>Pleasant and caring staff along with great doctors providing the best outcome for you !!</blockquote>
-          <p class="review__who">Art Golembeski<br><span class="review__src">Google review</span></p>
-        </div>
-        <div class="review" data-reveal data-delay="2">
-          <blockquote>Top notch in every regard. Everyone is fantastic and the office is beyond reproach. 10/10 recommend.</blockquote>
-          <p class="review__who">ryan syme<br><span class="review__src">Google review</span></p>
-        </div>
-      </div>
-      <p class="center mt-lg" data-reveal><a class="btn btn--ghost" href="#consult">Talk to Dr. Bennett's team</a></p>
+    <div class="btn-row center mt-l" data-rv>
+      <a class="btn btn--ghost magnetic" href="#consult"><span>Talk to Dr. Bennett's team</span></a>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ FAQ ============ -->
-  <section class="section band-base">
-    <div class="wrap-narrow">
-      <div class="mb-lg" data-reveal>
-        <p class="eyebrow">Questions</p>
-        <h2 class="display" data-split="lines">Full-arch, answered honestly</h2>
-      </div>
-      <div class="faq" data-reveal>
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('prTitle'), { start: 'top 86%' });
+    if (W.reduced) { gsap.set('#prPlate', { clipPath: 'inset(0 0 0% 0)' }); return; }
+    gsap.to('#prPlate', { clipPath: 'inset(0 0 0% 0)', duration: 1.25, ease: 'power4.inOut',
+      scrollTrigger: { trigger: '#prPlate', start: 'top 84%' } });
+    gsap.fromTo('#prImg', { scale: 1.22, yPercent: -5 }, { scale: 1.08, yPercent: 5, ease: 'none',
+      scrollTrigger: { trigger: '#prPlate', start: 'top bottom', end: 'bottom top', scrub: .8 } });
+    gsap.from('#prCreds li', { opacity: 0, x: -22, duration: .65, stagger: .08, ease: 'power2.out',
+      scrollTrigger: { trigger: '#prCreds', start: 'top 88%' } });
+    gsap.from('#prReviews .review', { opacity: 0, y: 36, duration: .85, stagger: .1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#prReviews', start: 'top 88%' } });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 07 — THE INVITATION   (the questions, then the ask)
+     ========================================================================== -->
+<section class="ch ch-invite" id="invitation" data-chapter="7" data-chapter-name="The Invitation" data-theme="light">
+  <style>
+    .ch-invite{background:var(--bg)}
+    .ch-invite h2{font-size:var(--h2);max-width:18ch}
+    .ch-invite .close{background:var(--ink-950);color:#fff;border-radius:var(--radius-lg);
+      padding:clamp(2rem,5vw,4rem);text-align:center;display:grid;gap:1rem;justify-items:center;
+      margin-top:clamp(2.5rem,5vw,4.5rem)}
+    .ch-invite .close h2{color:#fff;max-width:20ch;margin-inline:auto}
+    .ch-invite .close p{color:rgba(255,255,255,.72);max-width:46ch}
+    .ch-invite .close .addr{font-size:.85rem;color:rgba(255,255,255,.5)}
+  </style>
+
+  <div class="wrap pad">
+    <div class="chapter-tag"><i></i><span class="label">Chapter 07 &middot; The Invitation</span></div>
+    <div class="wrap--narrow" style="padding-inline:0;margin-inline:auto">
+      <h2 class="h2 mb-l" id="faqTitle">Full-arch, answered honestly</h2>
+      <div class="faq">
         <div class="faq__item">
           <h3><button class="faq__q" aria-controls="aq1" aria-expanded="false">Do I really walk out with teeth the same day?</button></h3>
           <div class="faq__a" id="aq1"><div><p>Usually, yes. The practice places four or more implants and fits a fixed set of teeth on the day of surgery. The final restoration comes later, once the implants have fused with the bone. Whether same-day placement is possible in your case depends on your scan — that is what the free consultation establishes.</p></div></div>
@@ -428,21 +778,29 @@
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ============ CLOSE ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap-narrow center" data-reveal>
-      <p class="eyebrow eyebrow--center">Next step</p>
-      <h2 class="display" data-split="lines">One consultation tells you where you stand</h2>
-      <p class="lede" style="margin-inline:auto">Free, with a 3D scan and a written plan. If full-arch isn't right for you, Dr. Bennett will say so.</p>
-      <div class="btn-row btn-row--center mt">
-        <a class="btn btn--primary btn--lg" href="#consult">Book my free consultation</a>
-        <a class="btn btn--ghost btn--lg tel" href="tel:+13034217611">(303) 421-7611</a>
+    <div class="close" data-rv>
+      <p class="eyebrow">Next step</p>
+      <h2 class="h2" id="closeTitle">One consultation tells you where you stand</h2>
+      <p>Free, with a 3D scan and a written plan. If full-arch isn't right for you, Dr. Bennett will say so.</p>
+      <div class="btn-row center mt">
+        <a class="btn btn--primary btn--lg magnetic" href="#consult"><span>Book my free consultation</span></a>
+        <a class="btn btn--ghost btn--lg tel magnetic" href="tel:+13034217611"><span>(303) 421-7611</span></a>
       </div>
-      <p class="mt-sm" style="font-size:0.9rem;color:#9aa6b8">6695 Wadsworth Blvd, Arvada, CO 80003 · Monday to Friday, 8am to 5pm</p>
+      <p class="addr">6695 Wadsworth Blvd, Arvada, CO 80003 &middot; Monday to Friday, 8am to 5pm</p>
     </div>
-  </section>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('faqTitle'), { start: 'top 86%' });
+    if (W.reduced) return;
+    gsap.from('#invitation .faq__item', { opacity: 0, x: -20, duration: .6, stagger: .07,
+      ease: 'power2.out', scrollTrigger: { trigger: '#invitation .faq', start: 'top 86%' } });
+  });
+  </script>
+</section>
+
 </main>
 
 <footer class="ftr">
@@ -450,7 +808,7 @@
     <div class="ftr__grid">
       <div>
         <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
-        <p style="font-size:0.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
+        <p style="font-size:.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
         <h3>Visit</h3>
@@ -462,8 +820,8 @@
       </div>
       <div>
         <h3>This page</h3>
-        <p style="font-size:0.9rem">All-on-X full-arch implants for Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
-        <p style="font-size:0.9rem"><a href="../implants/">Single &amp; multiple implants</a> · <a href="../">All landing pages</a></p>
+        <p style="font-size:.9rem">All-on-X full-arch implants for Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
+        <p style="font-size:.9rem"><a href="../implants/">Single &amp; multiple implants</a> &middot; <a href="../">All landing pages</a></p>
       </div>
     </div>
     <div class="ftr__legal" id="terms">
@@ -473,12 +831,14 @@
     </div>
   </div>
 </footer>
-
-<div class="actionbar">
-  <a class="btn btn--ghost tel" href="tel:+13034217611">Call now</a>
-  <a class="btn btn--primary" href="#consult">Free consult</a>
+</div>
 </div>
 
-<script src="../_shared/brand.js"></script>
+<div class="actionbar">
+  <a class="btn btn--ghost tel" href="tel:+13034217611"><span>Call now</span></a>
+  <a class="btn btn--primary" href="#consult"><span>Free consult</span></a>
+</div>
+
+<script src="../_shared/journey-boot.js"></script>
 </body>
 </html>

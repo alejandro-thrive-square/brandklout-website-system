@@ -12,8 +12,12 @@
 
 ## Status
 
-**Intake complete, build in progress.** Client site found and scraped 2026-08-05; brand, doctors,
-services and real reviews extracted; the six reference URLs captured.
+**Six pages built, rebuilt as journeys, and verified — awaiting Brandklout review.**
+Client site found and scraped 2026-08-05; brand, doctors, services and real reviews extracted; the
+six reference URLs captured. Pages built 2026-08-05 and **re-architected 2026-08-06** after the
+client rejected round 1 as "a plain card website design" — see
+[Page architecture](#revised-2026-08-06--chapters-not-bands). Verification:
+[QA report](../workflows/08-qa/.tmp/qa-report.md).
 
 ## Client facts (scraped 2026-08-05 from the live site)
 
@@ -200,7 +204,9 @@ assumption that needs confirming before the pages go live.
 > **Three fabrications inherited from the source material, purged 2026-08-06.** Questions 9, 10 and
 > 11 above all originate from the same place: the rating aggregate, the before/after photography and
 > the finance partner names were **carried forward as facts when they were not**. All three are now
-> treated as gaps, and `08-qa/.tmp/qa.mjs` fails the build if any of them reappears on any page.
+> treated as gaps, and `08-qa/.tmp/content-gate.mjs` fails the build if any of them reappears on any
+> page. That guard survived the 2026-08-06 architecture rebuild unchanged — it is the check with
+> real-world consequences for a real practice.
 
 ## The previous vendor's page (`index_1.html`)
 
@@ -257,6 +263,28 @@ visitor considering an $18,795 full-arch case are at opposite ends of the delibe
 | Dentist Near Me | `dentist-near-me` | $109 special as H1 | Single fast form | Loudest — the H1 |
 | Next Door | `next-door` | Neighbour proximity | Single fast form | Loudest — the H1 |
 
+### Revised 2026-08-06 — chapters, not bands
+
+The nine-beat spine above still describes **what each page says**, and every word of it survived the
+rebuild. What changed is **how it is composed**. Round 1 rendered those beats as a vertical stack of
+coloured bands (`band-base`, `band-paper`, `band-summit`) each holding a grid of cards; the client
+read that, correctly, as a plain card site. Each page is now **6–8 named chapters** in an order that
+cannot be shuffled, with at least three chapters per page where scroll position *is* the interaction.
+
+| Page | Chapters | Scroll-driven chapters (pinned + scrubbed) | Signature moment |
+| :--- | :--- | :--- | :--- |
+| `implants` | 8 | 01 The Gap · 02 The Anatomy · 05 The Path | An implant assembles itself — post, abutment, crown |
+| `aox` | 8 | 01 The Verdict · 03 The Four · 04 The Day | Four implants seat into the arch, one per scroll segment |
+| `veneers` | 8 | 01 The Mirror · 03 The Design · 04 The Method | Shade, shape and proportion resolve in turn |
+| `emergency` | 7 | 01 Right Now · 02 The First Minutes · 04 When You Arrive | The dial sweeps and each instruction lights |
+| `dentist-near-me` | 7 | 01 The Search · 02 The Offer · 04 The Practice | The visit itemises itself and the price lands |
+| `next-door` | 7 | 01 Twenty-Two Years · 03 The Whole Household · 04 The Voices | The years run forward from 2003 |
+
+FAQ, financing and insurance are folded **into** the chapter that answers the objection rather than
+sitting in bands of their own. The three signature moments that wanted a before/after are SVG
+illustrations captioned as such — there is no consented patient photography for this practice, and
+inventing it was never an option (see the note under Open Questions).
+
 **Three near-identical pages, deliberately.** "Dentist Near Me", "Next Door" and Mason Park's "New
 Patient Special" cite the same reference and are one archetype. They are built as three pages
 sharing a section vocabulary but differing in **targeting and lead beat** — `dentist-near-me` is
@@ -266,8 +294,14 @@ paid search vs. paid social, but it is worth confirming — see Open Question 4.
 
 ## Deliverables
 
-All six pages are built and QA'd. **Open `workflows/04-design/.tmp/index.html` to review them** —
-it is a contact sheet linking all six with previews and the three questions that need answering.
+All six pages are built, rebuilt as journeys, and QA'd. **Open `workflows/04-design/.tmp/index.html`
+to review them** — it links all six with their chapter arcs, and states the three questions that need
+answering.
+
+> [!TIP]
+> **Scroll slowly through the pinned chapters.** They are scrubbed: the page holds still and the
+> scene plays at whatever pace you scroll, forwards or backwards. Scrolling past quickly is the one
+> way to miss the point of the rebuild.
 
 Full paths:
 
@@ -281,21 +315,28 @@ Full paths:
 | Next Door | `deliver/brandklout/arvada-dental-center/workflows/04-design/.tmp/next-door/index.html` |
 | Review index | `deliver/brandklout/arvada-dental-center/workflows/04-design/.tmp/index.html` |
 
-Shared across all six: `_shared/brand.css` (tokens, components, motion system), `_shared/brand.js`
-(behaviour + motion engine), `_shared/assets/` (42 client-owned images, gitignored, re-fetchable via
-`fetch-assets.mjs`).
+Shared across all six: `_shared/journey.css` (tokens, `data-theme` layer, components),
+`_shared/journey.js` (the WZ bootstrap), `_shared/journey-boot.js` (plugin registration, smoother,
+global UI and behaviour), `_shared/vendor/gsap/` (GSAP 3.13, vendored so the packages run offline and
+verification is deterministic), and `_shared/assets/` (42 client-owned images, gitignored,
+re-fetchable via `fetch-assets.mjs`).
 
-**Motion** (rebuilt 2026-08-06): line-masked headings, cascading groups, masked media, hero and
-mountain-ridge parallax, counting offer figures, an offer chip that docks into the header once the
-offer scrolls past, and a scroll progress bar. Transform/opacity only, one rAF loop that parks when
-the tab is hidden. `prefers-reduced-motion` removes movement without removing content. Because the
-engine reads the existing DOM, all six pages were upgraded without touching any page's content or
-section order. Detail: [QA report](../workflows/08-qa/.tmp/qa-report.md#motion-rebuild-2026-08-06).
+**Motion** (re-architected 2026-08-06): every page is 6–8 named chapters, each carrying its own
+`<style>` and `<script>` so it can be lifted into Webflow as one self-contained embed. Three chapters
+per page are **pinned and scrubbed** — scroll position *is* the interaction, not a trigger for one.
+Continuity comes from a reading-progress bar, a chapter readout in the nav, and `data-theme` shifts
+across the arc. Each chapter arrives *and* departs. `prefers-reduced-motion` removes movement without
+removing content, and every pinned scene has a real fallback rather than a dead `100svh` box.
+
+This replaced a shared `brand.css` + `brand.js` built entirely from `IntersectionObserver`. That was
+not a refactor: an observer cannot express *how far through* a scene you are, so the previous
+architecture could not produce a scrubbed moment at all. Detail:
+[QA report](../workflows/08-qa/.tmp/qa-report.md).
 
 > [!NOTE]
 > **Verify these pages in a focused tab.** Background tabs throttle `requestAnimationFrame` and
-> freeze CSS transitions and `IntersectionObserver`, so motion that works fine reads as broken.
-> `qa.mjs` and `preview.mjs` both force focus emulation; if you check by hand, keep the tab in front.
+> freeze CSS transitions and timers, so motion that works fine reads as broken. `scrub-proof.mjs` and
+> `shots.mjs` both force focus emulation; if you check by hand, keep the tab in front.
 
 **Every image is client-hosted**, pulled from `arvadadentalcenter.com` rather than a stock library.
 That is *not* the same as saying none of it is stock — several are evidently licensed images the
@@ -314,9 +355,9 @@ been removed. See the note under Open Questions.
 | `00-client-delivery-initialization` | Done | Scope captured from Asana; no Sales handoff exists. |
 | `01-content-intake` | **Done 2026-08-05** | Site found and scraped; brand, doctors, offers, reviews and 42 assets extracted; 9 references captured (1 blocked). |
 | `02-wireframe` | Skipped, deliberately | The reference captures plus the derived section vocabulary served as the wireframe; going straight to coded pages was cheaper than an intermediate artifact for a set this repetitive. |
-| `04-design` | **Done 2026-08-05** | Six self-contained HTML/CSS/JS packages. |
-| `08-qa` | **Done 2026-08-05** | 238/238 functional checks pass. [QA report](../workflows/08-qa/.tmp/qa-report.md). |
-| `05-design-revisions` | **Next** | Awaiting Brandklout review and the answers to the Open Questions. |
+| `04-design` | **Rebuilt 2026-08-06** | Six self-contained HTML/CSS/JS packages, re-architected as journeys — see below. |
+| `05-design-revisions` | **Round 1 applied 2026-08-06; round 2 next** | Client rejected round 1 as "a plain card website design" and asked for an interactive journey closer to the Dr. Nahlah build. Rebuilt the architecture rather than patching it; content carried over unchanged. Awaiting review of the rebuild. |
+| `08-qa` | **Done 2026-08-06** | Journey gate 6/6, scrub proof 18/18 pinned chapters, content gate 192/192, six-breakpoint captures. [QA report](../workflows/08-qa/.tmp/qa-report.md). |
 | `07-webflow-build` | Blocked | Needs local approval **and** a Webflow grant, which does not exist for this client. |
 
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).
@@ -337,13 +378,17 @@ deliver/brandklout/arvada-dental-center/
     │   ├── client-site/               # 16 pages: meta.json + full-page PNGs
     │   └── reference-captures/        # 9 references, desktop + mobile
     ├── 04-design/.tmp/
-    │   ├── index.html                 # Review contact sheet — START HERE
-    │   ├── _shared/                   # brand.css, brand.js, preview.mjs, assets/
-    │   └── <page-slug>/index.html     # The six pages
+    │   ├── index.html                 # Review index — START HERE
+    │   ├── _shared/                   # journey.css/.js, journey-boot.js, vendor/gsap/, assets/
+    │   └── <page-slug>/index.html     # The six pages, 6-8 chapters each
     └── 08-qa/.tmp/
-        ├── qa.mjs                     # Driven functional test
+        ├── content-gate.mjs           # Static: fabrications, journey integrity, conversion
+        ├── scrub-proof.mjs            # Driven: is the motion scrubbed or merely triggered
+        ├── shots.mjs                  # Six breakpoints + overflow + interaction
+        ├── screenshots/<slug>/        # <width>.png, plus motion/<width>.png
         ├── qa-report.md
-        └── qa-results.json
+        ├── scrub-proof.json
+        └── shots-report.json
 ```
 
 ## Version Control

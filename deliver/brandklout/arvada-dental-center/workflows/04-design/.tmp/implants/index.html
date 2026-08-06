@@ -7,406 +7,858 @@
 <meta name="description" content="Replace missing teeth with dental implants in Arvada, CO. Single implants to full-arch, placed by Dr. Gregory Bennett. Free consultation and financing available.">
 <meta name="robots" content="noindex, nofollow">
 <!--
-  Landing page — Implants
+  Landing page — Implants.  Journey architecture: 8 named chapters.
   Asana task: 1217162344633760 (parent 1217040406855586)
   Client: Arvada Dental Center & Implants — arvadadentalcenter.com
   Reference cited on the task: smile.dentalimplantsgps.com/dental-implants/ppc/
     Used for SECTION ORDER AND COPY ANGLES ONLY, per docs/ASANA-DISPATCH.md.
-    Structure notes: 01-content-intake/.tmp/reference-structure-notes.md
   All copy, pricing, credentials, reviews and imagery are the client's own.
   Nothing on this page is invented — see 01-content-intake/.tmp/content-intake-summary.md
+
+  Scroll-driven chapters (pinned + scrubbed, not triggered):
+    01 The Gap       — statement written word by word, then the symptoms deal in
+    02 The Anatomy   — an implant assembles itself; scroll position IS the build
+    04 The Path      — the treatment journey travels horizontally
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../_shared/brand.css">
+<link rel="stylesheet" href="../_shared/journey.css">
 <style>
-  /* Per-page motion contract. The shared system lives in ../_shared/brand.css;
-     this block guarantees the two rules that must hold even if that file is
-     swapped, minified or ported: motion never hides content, and
-     prefers-reduced-motion removes movement rather than removing information. */
-  @media (prefers-reduced-motion: reduce) {
-    [data-reveal], [data-split] .ln__i, [data-split] .wd,
-    .trust__item, .form-card, [data-parallax] {
-      opacity: 1 !important;
-      transform: none !important;
-      clip-path: none !important;
-      transition: none !important;
-      animation: none !important;
-    }
-    .progress { display: none !important; }
-    html { scroll-behavior: auto; }
+  /* Per-page motion contract. The shared kit carries the same rules; this
+     block guarantees them even if that file is swapped, minified or ported.
+     Reduced motion removes MOVEMENT, never information. */
+  @media (prefers-reduced-motion: reduce){
+    [data-rv],[data-anim="hide"],.wz-line>*,.wz-word,
+    .anat g,.path-track,.gap-card{
+      opacity:1!important;visibility:visible!important;transform:none!important;
+      clip-path:none!important;transition:none!important;animation:none!important}
+    .nav-progress{display:none!important}
   }
-  /* If the motion script never arms the system, nothing is left hidden. */
-  html:not([data-motion="on"]) [data-reveal] { opacity: 1; transform: none; }
+  /* If the motion layer never arms, nothing is left hidden. */
+  html:not(.js-motion) [data-rv]{opacity:1}
 </style>
+<script src="../_shared/vendor/gsap/gsap.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollToPlugin.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollSmoother.min.js"></script>
+<script src="../_shared/vendor/gsap/SplitText.min.js"></script>
+<script src="../_shared/journey.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="hdr">
-  <div class="wrap hdr__bar">
-    <a class="hdr__logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
-      <img src="../_shared/assets/best-dental-imaplant-dentist-denver-dental-implants-arvada-dentist.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
+<header class="nav" id="nav">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap nav-in">
+    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
+      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
     </a>
-    <div class="hdr__spacer"></div>
-    <div class="hdr__meta">
-      <span class="status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
-      <strong><a class="tel" href="tel:+13034217611">(303) 421-7611</a></strong>
+    <div class="nav-mid">
+      <p class="nav-chapter" aria-hidden="true"><b id="navChNum">00</b><i id="navChBar"></i><span id="navChName">Arrival</span></p>
     </div>
-    <a class="btn btn--primary hdr__cta-sm" href="#consult">Free consultation</a>
+    <div class="nav-right">
+      <span class="status nav-status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
+      <a class="nav-tel tel" href="tel:+13034217611">(303) 421-7611</a>
+      <a class="btn btn--primary nav-cta magnetic" href="#consult"><span>Free consultation</span></a>
+    </div>
   </div>
 </header>
 
+<div id="smooth-wrapper">
+<div id="smooth-content">
 <main id="main">
 
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="hero__media">
-      <img src="../_shared/assets/mimic.jpg.webp" alt="" aria-hidden="true" style="--hero-pos:65% 45%">
-    </div>
-    <div class="hero__scrim"></div>
-    <div class="wrap hero__inner">
-      <div>
-        <p class="eyebrow hero__eyebrow">Dental Implants · Arvada, Colorado</p>
-        <h1 class="display" data-split="lines">Teeth that stay put.<br>Often in a single day.</h1>
-        <p class="lede mt-sm">
-          One missing tooth or a whole arch — Dr. Gregory Bennett has placed and restored
-          thousands of implants right here on Wadsworth Boulevard. Consultation, surgery,
-          sedation and the lab work all happen under one roof, with one team.
-        </p>
-        <div class="btn-row mt">
-          <a class="btn btn--primary btn--lg" href="#consult">Start with a free consultation</a>
-          <a class="btn btn--ghost btn--lg tel" href="tel:+13034217611">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            (303) 421-7611
-          </a>
-        </div>
-        <div class="trust" data-stagger="90">
-          <span class="trust__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            Serving Arvada since 2003
-          </span>
-          <span class="trust__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            IV sedation, board certified
-          </span>
-          <span class="trust__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            One location, one team, one bill
-          </span>
-        </div>
+<!-- ==========================================================================
+     CHAPTER 00 — ARRIVAL
+     ========================================================================== -->
+<section class="ch ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival">
+  <style>
+    .ch-arrival{min-height:100svh;display:flex;align-items:center;overflow:hidden;
+      padding-top:clamp(6rem,12vw,9rem);padding-bottom:clamp(4rem,9vw,7rem)}
+    .ch-arrival .ch-media img{transform:scale(1.12)}
+    /* Two stacked scrims: a horizontal one so the copy column always has a
+       floor, and a vertical one so the nav and the ridge seam stay legible. */
+    .ch-arrival .ch-media::after{content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(90% 70% at 78% 34%,rgba(3,197,236,.18),transparent 62%),
+        linear-gradient(100deg,rgba(10,13,20,.96) 0%,rgba(10,13,20,.9) 38%,rgba(10,13,20,.55) 68%,rgba(10,13,20,.3) 100%),
+        linear-gradient(180deg,rgba(10,13,20,.9) 0%,rgba(10,13,20,.25) 30%,rgba(10,13,20,.86) 100%)}
+    .ch-arrival .in{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;
+      grid-template-columns:1fr}
+    .ch-arrival h1{font-size:var(--d1);max-width:15ch}
+    .ch-arrival .lede{max-width:50ch}
+    .ch-arrival .trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;
+      padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
+    .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
+      font-family:var(--f-ui);font-size:.76rem;font-weight:600;color:var(--fg-soft)}
+    .ch-arrival .trust svg{width:16px;height:16px;color:var(--cyan);flex:none}
+    .ch-arrival .cue{display:none}
+    @media(min-width:1000px){
+      .ch-arrival .in{grid-template-columns:1.12fr .88fr;gap:clamp(2.5rem,4vw,4.5rem)}
+      .ch-arrival .cue{position:absolute;left:var(--gutter);bottom:clamp(1.5rem,3vw,2.5rem);
+        z-index:4;display:flex;align-items:center;gap:.7rem;font-family:var(--f-ui);
+        font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-soft)}
+      .ch-arrival .cue i{display:block;width:1px;height:42px;
+        background:linear-gradient(180deg,var(--cyan),transparent)}
+    }
+  </style>
+
+  <div class="ch-media" aria-hidden="true">
+    <img id="arrImg" src="../_shared/assets/mimic.jpg.webp" alt="" style="object-position:65% 45%">
+  </div>
+
+  <div class="wrap ch-in in">
+    <div>
+      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Chapter 00 &middot; Arrival</span></div>
+      <h1 class="d1" data-anim="hide" id="arrTitle">Teeth that stay put.<br>Often in a single day.</h1>
+      <p class="lede mt" data-anim="hide" id="arrLead">
+        One missing tooth or a whole arch — Dr. Gregory Bennett has placed and restored
+        thousands of implants right here on Wadsworth Boulevard. Consultation, surgery,
+        sedation and the lab work all happen under one roof, with one team.
+      </p>
+      <div class="btn-row mt" data-anim="hide" id="arrActions">
+        <a class="btn btn--primary btn--lg magnetic" href="#consult"><span>Start with a free consultation</span></a>
+        <a class="btn btn--ghost btn--lg tel magnetic" href="tel:+13034217611"><span>(303) 421-7611</span></a>
       </div>
+      <div class="trust mt" data-anim="hide" id="arrTrust">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Serving Arvada since 2003</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>IV sedation, board certified</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>One location, one team, one bill</span>
+      </div>
+    </div>
 
-      <!-- stepped qualifier: matches the house reference and the widget the client already runs -->
-      <div class="form-card" id="consult" data-quiz>
-        <div class="form-card__head">
-          <p class="eyebrow" style="color:var(--cyan-ink)">Free consultation</p>
-          <p class="h3">See if implants are right for you</p>
-          <p class="form__note">Four quick questions. No cost, no obligation.</p>
+    <!-- Stepped qualifier: the practice already runs a widget like this, and
+         four answered questions before the phone field is a real qualification
+         step rather than decoration. -->
+    <div class="form-card" id="consult" data-quiz data-anim="hide">
+      <div class="form-card__head">
+        <p class="eyebrow" style="color:var(--cyan-ink)">Free consultation</p>
+        <p class="h3">See if implants are right for you</p>
+        <p class="form__note">Four quick questions. No cost, no obligation.</p>
+      </div>
+      <div class="quiz">
+        <div class="quiz__progress" aria-hidden="true"><i></i></div>
+        <p class="vh" data-quiz-live role="status"></p>
+
+        <div class="quiz__step" data-name="need" data-active="true">
+          <p class="quiz__q">Which of these sounds most like you?</p>
+          <div class="quiz__opts">
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="single"><span class="dot"></span>I'm missing one tooth</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="several"><span class="dot"></span>I'm missing several teeth</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="arch"><span class="dot"></span>I'm missing most or all of my teeth</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="denture"><span class="dot"></span>I wear dentures and want something fixed</button>
+          </div>
         </div>
-        <div class="quiz">
-          <div class="quiz__progress" aria-hidden="true"></div>
-          <p class="vh" data-quiz-live role="status"></p>
 
-          <div class="quiz__step" data-name="need" data-active="true">
-            <p class="quiz__q">Which of these sounds most like you?</p>
-            <div class="quiz__opts">
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="single"><span class="dot"></span>I'm missing one tooth</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="several"><span class="dot"></span>I'm missing several teeth</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="arch"><span class="dot"></span>I'm missing most or all of my teeth</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="denture"><span class="dot"></span>I wear dentures and want something fixed</button>
-            </div>
+        <div class="quiz__step" data-name="timing">
+          <p class="quiz__q">How soon would you like to get started?</p>
+          <div class="quiz__opts">
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="asap"><span class="dot"></span>As soon as possible — I'm in discomfort</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="months"><span class="dot"></span>In the next few months</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="researching"><span class="dot"></span>I'm still researching my options</button>
           </div>
+          <div class="quiz__nav"><button type="button" class="quiz__back">&larr; Back</button></div>
+        </div>
 
-          <div class="quiz__step" data-name="timing">
-            <p class="quiz__q">How soon would you like to get started?</p>
-            <div class="quiz__opts">
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="asap"><span class="dot"></span>As soon as possible — I'm in discomfort</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="months"><span class="dot"></span>In the next few months</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="researching"><span class="dot"></span>I'm still researching my options</button>
-            </div>
-            <div class="quiz__nav"><button type="button" class="quiz__back">← Back</button></div>
+        <div class="quiz__step" data-name="payment">
+          <p class="quiz__q">How would you prefer to handle the cost?</p>
+          <div class="quiz__opts">
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="full"><span class="dot"></span>Paying in full</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="financing"><span class="dot"></span>Monthly financing</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="unsure"><span class="dot"></span>I'd like to talk through the options</button>
           </div>
+          <div class="quiz__nav"><button type="button" class="quiz__back">&larr; Back</button></div>
+        </div>
 
-          <div class="quiz__step" data-name="payment">
-            <p class="quiz__q">How would you prefer to handle the cost?</p>
-            <div class="quiz__opts">
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="full"><span class="dot"></span>Paying in full</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="financing"><span class="dot"></span>Monthly financing</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="unsure"><span class="dot"></span>I'd like to talk through the options</button>
-            </div>
-            <div class="quiz__nav"><button type="button" class="quiz__back">← Back</button></div>
+        <div class="quiz__step" data-name="sedation">
+          <p class="quiz__q">Does dental anxiety put you off treatment?</p>
+          <div class="quiz__opts">
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="yes"><span class="dot"></span>Yes — I'd want sedation</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="maybe"><span class="dot"></span>A little — tell me more</button>
+            <button type="button" class="quiz__opt" aria-pressed="false" data-value="no"><span class="dot"></span>Not really</button>
           </div>
+          <div class="quiz__nav"><button type="button" class="quiz__back">&larr; Back</button></div>
+        </div>
 
-          <div class="quiz__step" data-name="sedation">
-            <p class="quiz__q">Does dental anxiety put you off treatment?</p>
-            <div class="quiz__opts">
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="yes"><span class="dot"></span>Yes — I'd want sedation</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="maybe"><span class="dot"></span>A little — tell me more</button>
-              <button type="button" class="quiz__opt" aria-pressed="false" data-value="no"><span class="dot"></span>Not really</button>
+        <div class="quiz__done">
+          <p class="quiz__q">Where should Dr. Bennett's team reach you?</p>
+          <form class="form" novalidate data-lead="implants-qualifier" data-thanks="Thank you — your consultation request is in.">
+            <input type="hidden" name="answers" data-quiz-answers>
+            <div class="field">
+              <label for="i-name">Full name</label>
+              <input id="i-name" name="name" type="text" autocomplete="name" required>
+              <span class="field__err" aria-live="polite"></span>
             </div>
-            <div class="quiz__nav"><button type="button" class="quiz__back">← Back</button></div>
-          </div>
-
-          <div class="quiz__done">
-            <p class="quiz__q">Where should Dr. Bennett's team reach you?</p>
-            <form class="form" data-lead="implants-qualifier" data-thanks="Thank you — your consultation request is in.">
-              <input type="hidden" name="answers" data-quiz-answers>
+            <div class="field--row">
               <div class="field">
-                <label for="i-name">Full name</label>
-                <input id="i-name" name="name" type="text" autocomplete="name" required>
+                <label for="i-phone">Phone</label>
+                <input id="i-phone" name="phone" type="tel" autocomplete="tel" required>
                 <span class="field__err" aria-live="polite"></span>
               </div>
-              <div class="field--row">
-                <div class="field">
-                  <label for="i-phone">Phone</label>
-                  <input id="i-phone" name="phone" type="tel" autocomplete="tel" required>
-                  <span class="field__err" aria-live="polite"></span>
-                </div>
-                <div class="field">
-                  <label for="i-email">Email</label>
-                  <input id="i-email" name="email" type="email" autocomplete="email">
-                  <span class="field__err" aria-live="polite"></span>
-                </div>
+              <div class="field">
+                <label for="i-email">Email</label>
+                <input id="i-email" name="email" type="email" autocomplete="email">
+                <span class="field__err" aria-live="polite"></span>
               </div>
-              <button class="btn btn--primary btn--block btn--lg" type="submit">Request my free consultation</button>
-              <p class="form__note">We'll call you back Monday to Friday, 8am to 5pm. Prefer to talk now? <a class="tel" href="tel:+13034217611">(303) 421-7611</a></p>
-            </form>
-          </div>
+            </div>
+            <button class="btn btn--primary btn--block btn--lg" type="submit"><span>Request my free consultation</span></button>
+            <p class="form__note">We'll call you back Monday to Friday, 8am to 5pm. Prefer to talk now? <a class="tel" href="tel:+13034217611">(303) 421-7611</a></p>
+          </form>
         </div>
       </div>
     </div>
+  </div>
 
-    <div class="hero__ridge" aria-hidden="true">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="currentColor" d="M0 90V58l112-26 96 21 128-43 104 30 116-49 132 44 108-27 120 34 96-20 124 30 104-16 100 22v92z"/></svg>
-    </div>
-  </section>
+  <div class="cue" data-anim="hide"><span>Begin</span><i></i></div>
 
-  <!-- ============ QUALIFIER / SYMPTOMS ============ -->
-  <section class="section band-base">
-    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
-      <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
-    </div>
+  <script>
+  WZ.add(function (W) {
+    var root = document.getElementById('arrival');
+    var hide = root.querySelectorAll('[data-anim="hide"]');
+    gsap.set(hide, { visibility: 'visible' });
+    if (W.reduced) { gsap.set(hide, { opacity: 1, y: 0 }); return; }
+
+    var tl = gsap.timeline({ delay: .12 });
+    var split = W.splitLines(document.getElementById('arrTitle'));
+    if (split && split.lines && split.lines.length) {
+      gsap.set(split.lines, { yPercent: 112 });
+      tl.to(split.lines, { yPercent: 0, duration: 1.15, stagger: .09, ease: 'power4.out' }, 0);
+    } else {
+      tl.from('#arrTitle', { opacity: 0, y: 40, duration: 1, ease: 'power3.out' }, 0);
+    }
+    tl.from(root.querySelector('.chapter-tag'), { opacity: 0, x: -24, duration: .9, ease: 'power3.out' }, .05)
+      .from('#arrLead',    { opacity: 0, y: 26, duration: .9, ease: 'power3.out' }, .5)
+      .from('#arrActions', { opacity: 0, y: 26, duration: .9, ease: 'power3.out' }, .62)
+      .from('#arrTrust > *', { opacity: 0, y: 20, duration: .8, stagger: .08, ease: 'power3.out' }, .72)
+      .from('#consult',   { opacity: 0, y: 44, duration: 1.05, ease: 'power3.out' }, .3)
+      .from('#arrImg',    { opacity: 0, scale: 1.26, duration: 1.8, ease: 'power3.out' }, 0)
+      .from(root.querySelector('.cue'), { opacity: 0, duration: .8 }, .9);
+
+    /* Departure — the chapter recedes as you leave it, so moving on feels
+       like leaving a room rather than scrolling past a block. */
+    gsap.timeline({ scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: .6 } })
+      .to(root.querySelector('.in'), { yPercent: -14, opacity: .12, ease: 'none' }, 0)
+      .to('#arrImg', { yPercent: 6, scale: 1.2, ease: 'none' }, 0);
+
+    gsap.to(root.querySelector('.cue i'), { scaleY: .3, transformOrigin: 'top', duration: 1.1,
+      repeat: -1, yoyo: true, ease: 'power1.inOut' });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 01 — THE GAP   (pinned; the statement is written word by word,
+     then the four symptoms deal in — both driven by scroll position)
+     ========================================================================== -->
+<section class="ch ch-gap" id="gap" data-chapter="1" data-chapter-name="The Gap">
+  <style>
+    .ch-gap{background:var(--ink-950)}
+    .ch-gap .stage{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
+    .ch-gap .big{font-family:var(--f-display);font-size:clamp(1.7rem,4.4vw,3.9rem);
+      line-height:1.16;max-width:20ch;font-weight:600}
+    /* The unread state has to read as "not yet" and still be legible copy. */
+    .ch-gap .big .wz-word{color:rgba(255,255,255,.17)}
+    .ch-gap .cards{display:grid;gap:clamp(.8rem,1.6vw,1.3rem);margin-top:clamp(2rem,4vw,3.25rem);
+      grid-template-columns:1fr}
+    .gap-card{border:1px solid var(--line);border-radius:var(--radius-lg);
+      padding:clamp(1.1rem,2vw,1.6rem);background:rgba(255,255,255,.03)}
+    .gap-card h3{font-size:1.02rem;margin-bottom:.5rem}
+    .gap-card p{font-size:.9rem;color:var(--fg-body)}
+    .ch-gap .foot{margin-top:clamp(1.6rem,3vw,2.5rem);display:flex;flex-wrap:wrap;gap:1rem;
+      align-items:center}
+    @media(min-width:700px){ .ch-gap .cards{grid-template-columns:repeat(2,1fr)} }
+    @media(min-width:1120px){ .ch-gap .cards{grid-template-columns:repeat(4,1fr)} }
+  </style>
+
+  <div class="stage" id="gapPin">
     <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">Is this you?</p>
-        <h2 class="display" data-split="lines">Missing teeth change more than your smile</h2>
-        <p class="lede">If any of these sound familiar, your teeth are probably the cause — and it's worth getting a straight answer.</p>
-      </div>
-      <div class="symptoms" data-stagger="65">
-        <div class="symptom" data-reveal>
+      <div class="chapter-tag"><i></i><span class="label">Chapter 01 &middot; The Gap</span></div>
+      <p class="big" id="gapBig">Missing teeth change more than your smile. They change what you
+        eat, how you speak, and the shape of your jaw.</p>
+
+      <div class="cards" id="gapCards">
+        <article class="gap-card">
           <h3>Your teeth move when you eat</h3>
           <p>Teeth that shift or feel loose make chewing unpredictable, and the foods you avoid keep adding up.</p>
-        </div>
-        <div class="symptom" data-reveal data-delay="1">
+        </article>
+        <article class="gap-card">
           <h3>You cover your mouth when you laugh</h3>
           <p>Hiding your smile in photos and conversations is exhausting, and it rarely stays at the mouth.</p>
-        </div>
-        <div class="symptom" data-reveal data-delay="2">
+        </article>
+        <article class="gap-card">
           <h3>Your dentures need adhesive to stay in</h3>
           <p>Messy adhesives, dietary restrictions, and the constant background worry that something slips.</p>
-        </div>
-        <div class="symptom" data-reveal data-delay="3">
+        </article>
+        <article class="gap-card">
           <h3>Your jaw has started to change shape</h3>
           <p>Missing roots let the jawbone recede. Implants fuse to the bone and stop that drift.</p>
-        </div>
-      </div>
-      <div class="btn-row btn-row--center mt-lg" data-reveal>
-        <a class="btn btn--primary btn--lg" href="#consult">Find out if you're a candidate</a>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ MECHANISM ============ -->
-  <section class="section band-paper">
-    <div class="wrap">
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));align-items:center;gap:clamp(2rem,5vw,4.5rem)">
-        <div data-reveal>
-          <p class="eyebrow">How an implant works</p>
-          <h2 class="display" data-split="lines">Three parts that behave like a real tooth</h2>
-          <p class="mt-sm">A dental implant has a titanium or zirconium post that sits in your jawbone the way a
-            tooth root does, an abutment on top of it, and the crown that attaches to the abutment. In the weeks
-            after surgery the post fuses with the bone, which is what makes the result stable rather than
-            merely attached.</p>
-          <ul class="creds">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>Fully guided All-on-X placement</strong> for accuracy and precision on full-arch cases.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>3D scanning before surgery</strong> — planning happens digitally, not in the chair.</span></li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span><strong>IV sedation available</strong> — Dr. Bennett is board certified to administer it himself.</span></li>
-          </ul>
-        </div>
-        <figure class="media-frame media-frame--wide" data-reveal="scale" data-delay="1" style="margin:0">
-          <img src="../_shared/assets/dent-impl-2000.jpg.webp" alt="Close-up of a dental implant showing the post seated in the jawbone beneath the crown" loading="lazy">
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ OPTIONS ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
-      <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 160 110l140 66 130-150 150 130 140-146 150 160 130-100 140 116 150-80 150 94v190z"/></svg>
-    </div>
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">Your options</p>
-        <h2 class="display" data-split="lines">Four ways to replace what's missing</h2>
-        <p class="lede">Which one is right depends on how many teeth are gone and how much bone is left to work with. That is what the consultation is for.</p>
-      </div>
-      <div class="grid grid--4" data-stagger="70">
-        <article class="card card--lift" data-reveal>
-          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M8 6h8"/></svg></div>
-          <h3 class="h3">Single tooth implant</h3>
-          <p>Replaces one tooth without touching the healthy teeth on either side, and stops the shifting that follows a gap.</p>
-        </article>
-        <article class="card card--lift" data-reveal data-delay="1">
-          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8v8M12 6v12M20 8v8"/></svg></div>
-          <h3 class="h3">Multiple teeth</h3>
-          <p>Bridges and crowns supported by implants — no adhesives and none of the dietary restrictions that come with partial dentures.</p>
-        </article>
-        <article class="card card--lift" data-reveal data-delay="2">
-          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M6 8h12M8 16h8"/></svg></div>
-          <h3 class="h3">Implant-supported denture</h3>
-          <p>Attaches to surgically placed posts, so it holds far better than a conventional denture.</p>
-        </article>
-        <article class="card card--lift" data-reveal data-delay="3">
-          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7c0 8 4 12 8 12s8-4 8-12c0-2-2-3-4-3s-3 1-4 1-2-1-4-1-4 1-4 3z"/></svg></div>
-          <h3 class="h3">Full arch (All-on-X)</h3>
-          <p>A whole new set of teeth on four or more implants — often placed the same day as surgery. <a href="../aox/">See the full-arch page →</a></p>
         </article>
       </div>
-    </div>
-  </section>
 
-  <!-- ============ PRICE ============ -->
-  <section class="section band-base" style="--band-bg:var(--paper)">
-    <div class="wrap">
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));align-items:center;gap:clamp(2rem,5vw,4rem)">
-        <div data-reveal>
-          <p class="eyebrow">What it costs</p>
-          <h2 class="display" data-split="lines">A real number, published</h2>
-          <p class="mt-sm">Most implant clinics won't put a price on a page. Arvada Dental Center does:
-            a fixed full upper or lower arch is</p>
-          <p class="price-tag" data-price><span data-count>$18,795</span></p>
-          <p class="mt-sm">which the practice states is more than $10,000 below the national chains advertised on
-            television.<a href="#terms" aria-label="See pricing terms">*</a> Single-tooth and multi-tooth cases are
-            quoted at your consultation, because the honest answer depends on your scan.</p>
-          <p><strong>Every consultation is free</strong>, and you leave with a written plan rather than an estimate over the phone.</p>
-          <div class="btn-row mt">
-            <a class="btn btn--offer btn--lg" href="#consult">Get my written quote</a>
-          </div>
-        </div>
-        <div class="card" data-reveal data-delay="1">
-          <p class="eyebrow">Financing</p>
-          <p class="h3">Cost shouldn't be the reason you wait</p>
-          <!--
-            The named finance partners that sat here (Cherry, Sunbit, PatientFi, Proceed
-            Finance, LendingClub, CareCredit) were removed 2026-08-06: Brandklout advised the
-            list was assumed rather than confirmed. Naming a lender the practice may not
-            actually work with is not a risk worth carrying on a paid-traffic page.
-            Restore the list only once Brandklout confirms it — see Open Question 10.
-          -->
-          <p class="mt-sm">Treatment can usually be spread over monthly payments, and a plan is built
-            around the case rather than the other way round. You can check what you qualify for before
-            committing to anything.</p>
-          <ul class="checks mt-sm" data-stagger="45" style="grid-template-columns:1fr">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Monthly payment plans available</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Most dental insurance accepted — not HMO or Medicaid</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Ask the patient coordinator to talk options through</li>
-          </ul>
-        </div>
+      <div class="foot" id="gapFoot">
+        <a class="btn btn--primary magnetic" href="#consult"><span>Find out if you're a candidate</span></a>
+        <span class="caption" style="margin:0">Free consultation &middot; 3D scan &middot; a written plan</span>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ DOCTOR ============ -->
-  <section class="section band-paper">
-    <div class="wrap">
-      <div class="doctor">
-        <figure class="doctor__photo" data-reveal style="margin:0">
-          <img src="../_shared/assets/dr_bennett-square-close.jpg.webp" alt="Dr. Gregory Bennett, DDS, founder of Arvada Dental Center &amp; Implants" loading="lazy">
-        </figure>
-        <div data-reveal data-delay="1">
-          <p class="eyebrow">Who will treat you</p>
-          <h2 class="display" data-split="lines">Dr. Gregory Bennett, DDS</h2>
-          <p class="mt-sm">Dr. Bennett founded Arvada Dental Center and has practised in Colorado for almost twenty
-            years. He oversees every phase of an implant case himself — the planning, the surgery, the sedation
-            and the lab work — which is why you are not handed between offices halfway through.</p>
-          <ul class="creds">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Doctorate of Dental Surgery, University of Iowa, 2001</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Thousands of implants placed and restored</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Board certified to administer IV sedation</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Immersive dental surgery training every year</li>
-          </ul>
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('gapPin'),
+        big = document.getElementById('gapBig'),
+        cards = gsap.utils.toArray('#gapCards .gap-card'),
+        foot = document.getElementById('gapFoot');
+
+    if (W.reduced) return;
+
+    gsap.set(cards, { opacity: 0, y: 44 });
+    gsap.set(foot, { opacity: 0, y: 24 });
+
+    var sp = W.splitWords(big);
+    var words = (sp && sp.words && sp.words.length) ? sp.words : null;
+
+    /* One pin, two phases. Words brighten across the first half; the four
+       symptoms deal in across the second. Scroll position IS the progress —
+       there is no state this snaps between. */
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.4),
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    if (words) {
+      /* The closing clause is owned by the cyan tween below. Two scrubbed
+         tweens writing colour on the same word over overlapping ranges
+         overwrite each other every frame and flicker. One word, one owner. */
+      var tail = words.slice(-6), body = words.slice(0, -6);
+      tl.to(body, { color: '#ffffff', stagger: .35, ease: 'none' }, 0)
+        .to(tail, { color: '#03c5ec', stagger: .3, ease: 'none' }, .38);
+    } else {
+      tl.from(big, { opacity: .2, ease: 'none' }, 0);
+    }
+
+    tl.to(cards, { opacity: 1, y: 0, stagger: .16, ease: 'none' }, .55)
+      .to(foot, { opacity: 1, y: 0, ease: 'none' }, .9);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 02 — THE ANATOMY   (signature moment: pinned, and the implant
+     assembles itself as you scroll — post, abutment, crown. Illustration,
+     deliberately: nothing here is presented as a patient photograph.)
+     ========================================================================== -->
+<section class="ch ch-anat" id="anatomy" data-chapter="2" data-chapter-name="The Anatomy" data-theme="light">
+  <style>
+    .ch-anat{background:var(--bg)}
+    .ch-anat .stage{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(3rem,6vw,5rem);overflow:hidden}
+    .ch-anat .lay{display:grid;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;
+      grid-template-columns:1fr}
+    .ch-anat h2{font-size:var(--h2);max-width:15ch}
+    .anat-fig{position:relative;justify-self:center;width:min(70vw,300px);max-width:100%}
+    .anat{width:100%;height:auto;display:block;overflow:visible}
+    .anat .bone{fill:#DCE4EC}
+    .anat .bone-tex{stroke:#C3CEDA;stroke-width:2;fill:none}
+    .anat .gum{fill:#D99A9F}
+    .anat .post{fill:#8A97A8}
+    .anat .thread{stroke:#6F7D8F;stroke-width:2.4;fill:none}
+    .anat .abut{fill:#B7C2CF}
+    .anat .crown{fill:#FFFFFF;stroke:#D3DCE5;stroke-width:2}
+    .anat .halo{fill:none;stroke:var(--cyan-deep);stroke-width:2;opacity:0}
+    .anat-steps{display:grid;gap:0;margin-top:clamp(1.2rem,2.4vw,2rem)}
+    .anat-step{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
+      padding-block:clamp(.8rem,1.6vw,1.15rem);border-top:1px solid var(--line);opacity:.32}
+    .anat-step:last-child{border-bottom:1px solid var(--line)}
+    .anat-step b{font-family:var(--f-display);font-size:1.4rem;color:var(--cyan-deep);
+      line-height:1;font-variant-numeric:tabular-nums}
+    .anat-step h3{font-size:1.02rem;margin-bottom:.25rem}
+    .anat-step p{font-size:.9rem;color:var(--fg-body)}
+    .anat-note{margin-top:1rem;font-size:.78rem;color:var(--fg-soft)}
+    @media(min-width:900px){
+      .ch-anat .lay{grid-template-columns:.9fr 1.1fr;gap:clamp(2.5rem,5vw,5rem)}
+      .anat-fig{width:min(34vw,340px)}
+    }
+  </style>
+
+  <div class="stage" id="anatPin">
+    <div class="wrap lay">
+      <div class="anat-fig">
+        <svg class="anat" id="anatSvg" viewBox="0 0 300 440" role="img"
+             aria-label="Illustration of a dental implant: a titanium post in the jawbone, an abutment on top of it, and a crown attached to the abutment">
+          <!-- jawbone -->
+          <g class="bone-g">
+            <path class="bone" d="M12 236c26-12 44 6 70-2s40-14 66-8 44 16 68 10 42-14 72-4v196H12z"/>
+            <path class="bone-tex" d="M40 300h44M120 288h56M196 312h58M60 344h48M148 356h72M36 388h70M170 392h84"/>
+          </g>
+          <!-- gum -->
+          <path class="gum" d="M10 224c30-16 52 4 78-4s44-16 70-10 46 18 70 12 40-16 72-6v34c-32-10-48 6-72 12s-46-6-70-12-44 2-70 10-48-12-78 4z"/>
+          <!-- post -->
+          <g id="anatPost">
+            <path class="post" d="M126 244h48l-7 150a17 17 0 0 1-34 0z"/>
+            <path class="thread" d="M128 268h44M129 292h42M131 316h38M133 340h34M135 364h30"/>
+          </g>
+          <!-- abutment -->
+          <g id="anatAbut">
+            <path class="abut" d="M132 196h36l8 52h-52z"/>
+          </g>
+          <!-- crown -->
+          <g id="anatCrown">
+            <path class="crown" d="M150 34c34 0 56 30 56 70 0 44-16 78-24 96-6 14-18 16-32 16s-26-2-32-16c-8-18-24-52-24-96 0-40 22-70 56-70z"/>
+          </g>
+          <circle class="halo" id="anatHalo" cx="150" cy="300" r="86"/>
+        </svg>
+      </div>
+
+      <div>
+        <div class="chapter-tag"><i></i><span class="label">Chapter 02 &middot; The Anatomy</span></div>
+        <h2 class="h2" id="anatTitle">Three parts that behave like a real tooth</h2>
+        <p class="lede mt-s">A dental implant has a titanium or zirconium post that sits in your jawbone
+          the way a tooth root does, an abutment on top of it, and the crown that attaches to the abutment.
+          In the weeks after surgery the post fuses with the bone, which is what makes the result stable
+          rather than merely attached.</p>
+
+        <div class="anat-steps" id="anatSteps">
+          <div class="anat-step"><b>01</b><div><h3>The post</h3><p>Placed into the jawbone using fully guided All-on-X technique, for accuracy and precision.</p></div></div>
+          <div class="anat-step"><b>02</b><div><h3>The abutment</h3><p>Seats on the post once it has integrated, and carries the tooth above it.</p></div></div>
+          <div class="anat-step"><b>03</b><div><h3>The crown</h3><p>Matched to your face, skin tone and gum line, and finished in the practice's own lab.</p></div></div>
         </div>
+
+        <p class="anat-note">Illustration, not a patient photograph. Planning is done on a 3D scan
+          before surgery — digitally, rather than in the chair.</p>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ PROCESS ============ -->
-  <section class="section band-warm">
-    <div class="wrap-narrow">
-      <div class="mb-lg" data-reveal>
-        <p class="eyebrow">What happens</p>
-        <h2 class="display" data-split="lines">From first call to new teeth</h2>
-      </div>
-      <div class="steps" data-stagger="120">
-        <div class="step" data-reveal>
-          <h3 class="h3">Free consultation and 3D scan</h3>
-          <p>Dr. Bennett examines you, scans the jaw, and tells you what is actually possible — including when
-            an implant is not the right answer. You leave with a written plan and a real number.</p>
-        </div>
-        <div class="step" data-reveal>
-          <h3 class="h3">Placement, with sedation if you want it</h3>
-          <p>The posts are placed using fully guided technique. Most patients choose IV sedation, which Dr. Bennett
-            administers himself.</p>
-        </div>
-        <div class="step" data-reveal>
-          <h3 class="h3">Healing and integration</h3>
-          <p>The implants fuse with the jawbone over the following weeks. On full-arch cases you go home with
-            fixed teeth the same day rather than waiting it out.</p>
-        </div>
-        <div class="step" data-reveal>
-          <h3 class="h3">Final restoration</h3>
-          <p>Your permanent crowns or arch go on, matched to your face, skin tone and gum line, and finished in
-            the practice's own lab.</p>
-        </div>
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('anatPin'),
+        post = document.getElementById('anatPost'),
+        abut = document.getElementById('anatAbut'),
+        crown = document.getElementById('anatCrown'),
+        halo = document.getElementById('anatHalo'),
+        steps = gsap.utils.toArray('#anatSteps .anat-step');
+
+    W.headline(document.getElementById('anatTitle'), { start: 'top 86%' });
+
+    if (W.reduced) return;
+
+    /* Assembled state is the resting state; the scrub takes it apart at the
+       top of the range and puts it back together as you scroll. */
+    gsap.set(post, { yPercent: 46, opacity: 0 });
+    gsap.set(abut, { yPercent: -120, opacity: 0 });
+    gsap.set(crown, { yPercent: -150, opacity: 0 });
+    gsap.set(steps, { opacity: .32 });
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 3),
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    tl.to(post,  { yPercent: 0, opacity: 1, ease: 'none', duration: 1 }, 0)
+      .to(steps[0], { opacity: 1, ease: 'none', duration: .4 }, 0)
+      /* The halo marks osseointegration — the post fusing to the bone — which
+         is the part of the process a photograph cannot show. */
+      .to(halo, { opacity: .55, scale: 1.06, transformOrigin: '150px 300px', ease: 'none', duration: .5 }, .85)
+      .to(halo, { opacity: 0, ease: 'none', duration: .4 }, 1.35)
+      .to(steps[0], { opacity: .32, ease: 'none', duration: .3 }, 1.3)
+      .to(abut,  { yPercent: 0, opacity: 1, ease: 'none', duration: .9 }, 1.3)
+      .to(steps[1], { opacity: 1, ease: 'none', duration: .4 }, 1.3)
+      .to(steps[1], { opacity: .32, ease: 'none', duration: .3 }, 2.3)
+      .to(crown, { yPercent: 0, opacity: 1, ease: 'none', duration: 1 }, 2.3)
+      .to(steps[2], { opacity: 1, ease: 'none', duration: .4 }, 2.4);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 03 — THE OPTIONS
+     ========================================================================== -->
+<section class="ch ch-options" id="options" data-chapter="3" data-chapter-name="The Options">
+  <style>
+    .ch-options{background:var(--ink-900);overflow:hidden}
+    .ch-options .head{max-width:44ch;margin-bottom:clamp(2rem,4vw,3.25rem)}
+    .ch-options h2{font-size:var(--h2)}
+    .opt-card{position:relative;overflow:hidden}
+    .opt-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+      background:var(--cyan);transform:scaleX(0);transform-origin:left;
+      transition:transform .55s var(--ease)}
+    .opt-card:hover::after{transform:scaleX(1)}
+    .opt-card a{color:var(--cyan);font-weight:600}
+    .mq{margin-top:clamp(2.5rem,5vw,4.5rem);overflow:hidden;
+      border-block:1px solid var(--line);padding-block:clamp(.8rem,1.5vw,1.2rem)}
+    .mq .row{display:flex;width:max-content;will-change:transform}
+    .mq .row span{font-family:var(--f-display);font-size:clamp(.95rem,1.6vw,1.4rem);
+      color:var(--fg-soft);white-space:nowrap;padding-inline:clamp(.8rem,2vw,1.6rem)}
+    .mq .row b{color:var(--cyan);align-self:center;font-size:.6rem}
+  </style>
+
+  <div class="wrap pad">
+    <div class="head" data-rv>
+      <div class="chapter-tag"><i></i><span class="label">Chapter 03 &middot; The Options</span></div>
+      <h2 class="h2" id="optTitle">Four ways to replace what's missing</h2>
+      <p class="lede mt-s">Which one is right depends on how many teeth are gone and how much bone is
+        left to work with. That is what the consultation is for.</p>
+    </div>
+
+    <div class="grid g4" id="optGrid">
+      <article class="card opt-card">
+        <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2v20M8 6h8"/></svg></div>
+        <h3 class="h3">Single tooth implant</h3>
+        <p>Replaces one tooth without touching the healthy teeth on either side, and stops the shifting that follows a gap.</p>
+      </article>
+      <article class="card opt-card">
+        <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 8v8M12 6v12M20 8v8"/></svg></div>
+        <h3 class="h3">Multiple teeth</h3>
+        <p>Bridges and crowns supported by implants — no adhesives and none of the dietary restrictions that come with partial dentures.</p>
+      </article>
+      <article class="card opt-card">
+        <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12h18M6 8h12M8 16h8"/></svg></div>
+        <h3 class="h3">Implant-supported denture</h3>
+        <p>Attaches to surgically placed posts, so it holds far better than a conventional denture.</p>
+      </article>
+      <article class="card opt-card">
+        <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M4 7c0 8 4 12 8 12s8-4 8-12c0-2-2-3-4-3s-3 1-4 1-2-1-4-1-4 1-4 3z"/></svg></div>
+        <h3 class="h3">Full arch (All-on-X)</h3>
+        <p>A whole new set of teeth on four or more implants — often placed the same day as surgery. <a href="../aox/">See the full-arch page &rarr;</a></p>
+      </article>
+    </div>
+  </div>
+
+  <div class="mq" aria-hidden="true">
+    <div class="row" id="optMq">
+      <span>Fully Guided All-on-X Placement</span><b>&#9670;</b>
+      <span>3D Scanning Before Surgery</span><b>&#9670;</b>
+      <span>IV Sedation, Administered In-House</span><b>&#9670;</b>
+      <span>One Location, One Team, One Bill</span><b>&#9670;</b>
+      <span>Serving Arvada Since 2003</span><b>&#9670;</b>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    if (W.reduced) return;
+
+    gsap.from('#optGrid .card', {
+      opacity: 0, y: 40, duration: .9, stagger: .1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#optGrid', start: 'top 84%' }
+    });
+
+    /* The marquee loops continuously and scroll velocity bends its speed and
+       direction, so the page feels physically connected to the wheel. */
+    var row = document.getElementById('optMq');
+    row.innerHTML += row.innerHTML;
+    var half = row.scrollWidth / 2;
+    var loop = gsap.to(row, { x: -half, duration: 24, ease: 'none', repeat: -1,
+      modifiers: { x: function (x) { return (parseFloat(x) % half) + 'px'; } } });
+
+    var vt = gsap.quickTo(loop, 'timeScale', { duration: .5, ease: 'power2' });
+    ScrollTrigger.create({
+      onUpdate: function (self) {
+        var v = self.getVelocity() / 380;
+        vt(gsap.utils.clamp(-7, 7, v === 0 ? 1 : (v < 0 ? Math.min(-1, v) : Math.max(1, v))));
+      }
+    });
+    ScrollTrigger.addEventListener('scrollEnd', function () { vt(1); });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 04 — THE SURGEON
+     ========================================================================== -->
+<section class="ch ch-surgeon" id="surgeon" data-chapter="4" data-chapter-name="The Surgeon">
+  <style>
+    .ch-surgeon{background:var(--ink-850);overflow:hidden}
+    .ch-surgeon .lay{display:grid;gap:clamp(2rem,5vw,4.5rem);align-items:center;
+      grid-template-columns:1fr}
+    .ch-surgeon .plate{position:relative;overflow:hidden;border-radius:var(--radius-lg);
+      aspect-ratio:4/5;background:var(--ink-800);clip-path:inset(0 0 100% 0)}
+    .ch-surgeon .plate img{width:100%;height:100%;object-fit:cover}
+    .ch-surgeon .sig{margin-top:1rem;display:grid;gap:.2rem}
+    .ch-surgeon .sig b{font-family:var(--f-display);font-size:1.25rem;color:var(--fg)}
+    .ch-surgeon .sig span{font-family:var(--f-ui);font-size:.68rem;letter-spacing:.18em;
+      text-transform:uppercase;color:var(--accent)}
+    .ch-surgeon h2{font-size:var(--h2);max-width:15ch}
+    @media(min-width:900px){ .ch-surgeon .lay{grid-template-columns:.8fr 1.2fr} }
+  </style>
+
+  <div class="wrap pad lay">
+    <div>
+      <figure class="plate" id="surPlate" style="margin:0">
+        <img id="surImg" src="../_shared/assets/dr_bennett-square-close.jpg.webp"
+             alt="Dr. Gregory Bennett, DDS, founder of Arvada Dental Center &amp; Implants" loading="lazy">
+      </figure>
+      <div class="sig" data-rv><b>Dr. Gregory Bennett</b><span>DDS &middot; Founder</span></div>
+    </div>
+    <div>
+      <div class="chapter-tag"><i></i><span class="label">Chapter 04 &middot; The Surgeon</span></div>
+      <h2 class="h2" id="surTitle">Every phase of your case, one surgeon</h2>
+      <p class="lede mt-s" data-rv>Dr. Bennett founded Arvada Dental Center and has practised in Colorado for
+        almost twenty years. He oversees every phase of an implant case himself — the planning, the surgery,
+        the sedation and the lab work — which is why you are not handed between offices halfway through.</p>
+      <ul class="rule-list mt" id="surCreds">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Doctorate of Dental Surgery, University of Iowa, 2001</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Thousands of implants placed and restored</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Board certified to administer IV sedation</span></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Immersive dental surgery training every year</span></li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('surTitle'), { start: 'top 86%' });
+    if (W.reduced) { gsap.set('#surPlate', { clipPath: 'inset(0 0 0% 0)' }); return; }
+
+    gsap.to('#surPlate', { clipPath: 'inset(0 0 0% 0)', duration: 1.25, ease: 'power4.inOut',
+      scrollTrigger: { trigger: '#surPlate', start: 'top 84%' } });
+    /* Scale stays above 1 at both ends so the photo always overfills its
+       frame — a scrub that lands on exactly 1 flickers at the edges. */
+    gsap.fromTo('#surImg', { scale: 1.22, yPercent: -5 }, { scale: 1.08, yPercent: 5, ease: 'none',
+      scrollTrigger: { trigger: '#surPlate', start: 'top bottom', end: 'bottom top', scrub: .8 } });
+    gsap.from('#surCreds li', { opacity: 0, x: -22, duration: .65, stagger: .08, ease: 'power2.out',
+      scrollTrigger: { trigger: '#surCreds', start: 'top 88%' } });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 05 — THE PATH   (pinned horizontal journey, progress driven by
+     self.progress — the treatment travels sideways as you scroll down)
+     ========================================================================== -->
+<section class="ch ch-path" id="path" data-chapter="5" data-chapter-name="The Path" data-theme="light">
+  <style>
+    .ch-path{background:var(--bg);overflow:hidden}
+    .ch-path .pin{height:100svh;display:flex;flex-direction:column;justify-content:center;
+      position:relative}
+    .ch-path .head{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter);
+      margin-bottom:clamp(1.2rem,2.6vw,2.2rem)}
+    .ch-path h2{font-size:var(--h2);max-width:16ch}
+    .path-track{display:flex;gap:clamp(.9rem,2.2vw,1.8rem);padding-inline:var(--gutter);
+      width:max-content;align-items:stretch}
+    .path-card{width:clamp(250px,28vw,410px);flex:none;border:1px solid var(--line);
+      border-radius:var(--radius-lg);padding:clamp(1.2rem,2.2vw,2rem);background:var(--card);
+      display:flex;flex-direction:column;gap:.7rem;position:relative;
+      transition:border-color .5s ease,box-shadow .5s ease}
+    .path-card .no{font-family:var(--f-display);font-size:clamp(2.2rem,4.2vw,3.4rem);
+      color:var(--cyan-deep);line-height:.9;opacity:.35}
+    .path-card h3{font-size:var(--h3)}
+    .path-card p{font-size:.92rem;color:var(--fg-body)}
+    .ch-path .bar{position:absolute;left:var(--gutter);right:var(--gutter);
+      bottom:clamp(1.2rem,3.5vw,2.6rem);height:2px;background:var(--line)}
+    .ch-path .bar i{position:absolute;inset:0;background:var(--cyan-deep);transform:scaleX(0);
+      transform-origin:left}
+    @media(max-width:700px){ .path-card{width:76vw} }
+  </style>
+
+  <div class="pin" id="pathPin">
+    <div class="head">
+      <div class="chapter-tag"><i></i><span class="label">Chapter 05 &middot; The Path</span></div>
+      <h2 class="h2">From first call to new teeth.</h2>
+    </div>
+    <div class="path-track" id="pathTrack">
+      <article class="path-card">
+        <span class="no">01</span>
+        <h3>Free consultation and 3D scan</h3>
+        <p>Dr. Bennett examines you, scans the jaw, and tells you what is actually possible — including when
+          an implant is not the right answer. You leave with a written plan and a real number.</p>
+      </article>
+      <article class="path-card">
+        <span class="no">02</span>
+        <h3>Placement, with sedation if you want it</h3>
+        <p>The posts are placed using fully guided technique. Most patients choose IV sedation, which
+          Dr. Bennett administers himself.</p>
+      </article>
+      <article class="path-card">
+        <span class="no">03</span>
+        <h3>Healing and integration</h3>
+        <p>The implants fuse with the jawbone over the following weeks. On full-arch cases you go home with
+          fixed teeth the same day rather than waiting it out.</p>
+      </article>
+      <article class="path-card">
+        <span class="no">04</span>
+        <h3>Final restoration</h3>
+        <p>Your permanent crowns or arch go on, matched to your face, skin tone and gum line, and finished in
+          the practice's own lab.</p>
+      </article>
+    </div>
+    <div class="bar" aria-hidden="true"><i id="pathBar"></i></div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('pathPin'),
+        track = document.getElementById('pathTrack'),
+        bar = document.getElementById('pathBar');
+
+    if (W.reduced) {
+      /* Falls back to an ordinary horizontal scroll region — the content is
+         all still reachable, it simply is not driven by the page scroll. */
+      pin.style.height = 'auto';
+      pin.style.paddingBlock = 'clamp(3rem,6vw,5rem)';
+      track.style.overflowX = 'auto';
+      track.style.width = '100%';
+      return;
+    }
+
+    /* Travel is recomputed on refresh so it survives resize and font loading. */
+    function distance() { return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
+
+    var tween = gsap.to(track, {
+      x: function () { return -distance(); },
+      ease: 'none',
+      scrollTrigger: {
+        trigger: pin, start: 'top top',
+        end: function () { return '+=' + (distance() + window.innerHeight * .6); },
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) { gsap.set(bar, { scaleX: self.progress }); }
+      }
+    });
+
+    gsap.utils.toArray('#pathTrack .path-card').forEach(function (card) {
+      ScrollTrigger.create({
+        trigger: card, containerAnimation: tween, start: 'left 72%', end: 'right 28%',
+        onEnter: function () { light(card, true); },
+        onEnterBack: function () { light(card, true); },
+        onLeave: function () { light(card, false); },
+        onLeaveBack: function () { light(card, false); }
+      });
+      gsap.fromTo(card.querySelector('.no'), { opacity: .35 }, {
+        opacity: 1, duration: .4,
+        scrollTrigger: { trigger: card, containerAnimation: tween, start: 'left 78%',
+          toggleActions: 'play none none reverse' }
+      });
+    });
+
+    function light(card, on) {
+      gsap.to(card, {
+        borderColor: on ? 'rgba(2,153,182,.6)' : 'rgba(20,24,33,.14)',
+        boxShadow: on ? '0 18px 44px rgba(20,24,33,.1)' : '0 0 0 rgba(0,0,0,0)',
+        duration: .5
+      });
+    }
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 06 — THE NUMBER   (price, with financing folded in where the
+     objection actually lands rather than sitting in a band of its own)
+     ========================================================================== -->
+<section class="ch ch-number" id="number" data-chapter="6" data-chapter-name="The Number">
+  <style>
+    .ch-number{background:var(--ink-900);overflow:hidden}
+    .ch-number .lay{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;
+      grid-template-columns:1fr}
+    .ch-number h2{font-size:var(--h2);max-width:14ch}
+    .fin{border:1px solid var(--line);border-radius:var(--radius-lg);
+      padding:clamp(1.3rem,2.4vw,2rem);background:rgba(255,255,255,.03);display:grid;gap:.8rem}
+    .ch-number sup a{color:var(--cyan)}
+    @media(min-width:900px){ .ch-number .lay{grid-template-columns:1.1fr .9fr} }
+  </style>
+
+  <div class="ridge-mark" aria-hidden="true" id="numRidge">
+    <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
+  </div>
+
+  <div class="wrap pad lay">
+    <div>
+      <div class="chapter-tag"><i></i><span class="label">Chapter 06 &middot; The Number</span></div>
+      <h2 class="h2" id="numTitle">A real number, published</h2>
+      <p class="lede mt-s" data-rv>Most implant clinics won't put a price on a page. Arvada Dental Center does:
+        a fixed full upper or lower arch is</p>
+      <!-- The figure does not count up. A number animating toward a published
+           price displays wrong prices on the way, and this is a real practice's
+           real quote — it arrives, it does not tally. -->
+      <p class="price" id="numPrice"><span>$18,795</span></p>
+      <p class="mt-s" data-rv>which the practice states is more than $10,000 below the national chains advertised
+        on television.<sup><a href="#terms" aria-label="See pricing terms">*</a></sup> Single-tooth and multi-tooth
+        cases are quoted at your consultation, because the honest answer depends on your scan.</p>
+      <p class="mt-s" data-rv><strong style="color:var(--fg)">Every consultation is free</strong>, and you leave
+        with a written plan rather than an estimate over the phone.</p>
+      <div class="btn-row mt" data-rv>
+        <a class="btn btn--offer btn--lg magnetic" href="#consult"><span>Get my written quote</span></a>
       </div>
     </div>
-  </section>
 
-  <!-- ============ PROOF ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">What patients say</p>
-        <h2 class="display" data-split="lines">In our patients' own words</h2>
+    <div class="fin" data-rv>
+      <p class="eyebrow">Financing</p>
+      <p class="h3">Cost shouldn't be the reason you wait</p>
+      <!--
+        The named finance partners that sat here (Cherry, Sunbit, PatientFi, Proceed
+        Finance, LendingClub, CareCredit) were removed 2026-08-06: Brandklout advised the
+        list was assumed rather than confirmed. Naming a lender the practice may not
+        actually work with is not a risk worth carrying on a paid-traffic page.
+        Restore the list only once Brandklout confirms it — see Open Question 10.
+      -->
+      <p style="font-size:.94rem">Treatment can usually be spread over monthly payments, and a plan is built
+        around the case rather than the other way round. You can check what you qualify for before
+        committing to anything.</p>
+      <ul class="checks mt-s">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Monthly payment plans available</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Most dental insurance accepted — not HMO or Medicaid</li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Ask the patient coordinator to talk options through</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('numTitle'), { start: 'top 86%' });
+    if (W.reduced) return;
+    /* The ridge motif drifts against the scroll — the one device that repeats
+       across all eight chapters and ties them to one place. */
+    gsap.fromTo('#numRidge', { yPercent: 12 }, { yPercent: -6, ease: 'none',
+      scrollTrigger: { trigger: '#number', start: 'top bottom', end: 'bottom top', scrub: .9 } });
+    gsap.from('#numPrice', { opacity: 0, scale: .88, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#numPrice', start: 'top 88%' } });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 07 — THE INVITATION   (proof, the questions people ask first,
+     and the ask — the FAQ lives here because this is where the objection is)
+     ========================================================================== -->
+<section class="ch ch-invite" id="invitation" data-chapter="7" data-chapter-name="The Invitation" data-theme="light">
+  <style>
+    .ch-invite{background:var(--bg)}
+    .ch-invite h2{font-size:var(--h2);max-width:17ch}
+    .ch-invite .close{background:var(--ink-950);color:#fff;border-radius:var(--radius-lg);
+      padding:clamp(2rem,5vw,4rem);text-align:center;display:grid;gap:1rem;justify-items:center;
+      margin-top:clamp(2.5rem,5vw,4.5rem)}
+    .ch-invite .close h2{color:#fff;max-width:18ch;margin-inline:auto}
+    .ch-invite .close p{color:rgba(255,255,255,.72);max-width:46ch}
+    .ch-invite .close .addr{font-size:.85rem;color:rgba(255,255,255,.5)}
+  </style>
+
+  <div class="wrap pad">
+    <div class="chapter-tag"><i></i><span class="label">Chapter 07 &middot; The Invitation</span></div>
+
+    <div class="grid g3 mb-l" id="invReviews">
+      <div class="review">
+        <blockquote>My first visit and I was extremely impressed. A clear plan was put together, including personal input from Dr. Bennett. Pricing was fully transparent, no hidden surprises expected.</blockquote>
+        <p class="review__who">Rick Willcox<br><span class="review__src">Google review</span></p>
       </div>
-      <div class="grid grid--3" data-stagger="90">
-        <div class="review" data-reveal>
-          <blockquote>My first visit and I was extremely impressed. A clear plan was put together, including personal input from Dr. Bennett. Pricing was fully transparent, no hidden surprises expected.</blockquote>
-          <p class="review__who">Rick Willcox<br><span class="review__src">Google review</span></p>
-        </div>
-        <div class="review" data-reveal data-delay="1">
-          <blockquote>The times I've had work done, cavities, crowns etc., Dr Bennett did a fabulous job. Won't go anywhere else.</blockquote>
-          <p class="review__who">Linda Hoffner<br><span class="review__src">Google review</span></p>
-        </div>
-        <div class="review" data-reveal data-delay="2">
-          <blockquote>Came in for consultation about an implant. The employee who helped me, Justeen, was very accommodating and helpful.</blockquote>
-          <p class="review__who">Dean Brancucci<br><span class="review__src">Google review</span></p>
-        </div>
+      <div class="review">
+        <blockquote>The times I've had work done, cavities, crowns etc., Dr Bennett did a fabulous job. Won't go anywhere else.</blockquote>
+        <p class="review__who">Linda Hoffner<br><span class="review__src">Google review</span></p>
+      </div>
+      <div class="review">
+        <blockquote>Came in for consultation about an implant. The employee who helped me, Justeen, was very accommodating and helpful.</blockquote>
+        <p class="review__who">Dean Brancucci<br><span class="review__src">Google review</span></p>
       </div>
     </div>
-  </section>
 
-  <!-- ============ FAQ ============ -->
-  <section class="section band-base">
-    <div class="wrap-narrow">
-      <div class="mb-lg" data-reveal>
-        <p class="eyebrow">Questions</p>
-        <h2 class="display" data-split="lines">The things people ask first</h2>
-      </div>
-      <div class="faq" data-reveal>
+    <div class="wrap--narrow" style="padding-inline:0;margin-inline:auto">
+      <h2 class="h2 mb-l" id="invTitle">The things people ask first</h2>
+      <div class="faq">
         <div class="faq__item">
           <h3><button class="faq__q" aria-controls="fq1" aria-expanded="false">Am I too old for dental implants?</button></h3>
           <div class="faq__a" id="fq1"><div><p>Age on its own is rarely the deciding factor — bone volume and general health matter far more. That is exactly what the 3D scan at your free consultation is for, and Dr. Bennett will tell you plainly if implants are not the right route for you.</p></div></div>
@@ -429,21 +881,31 @@
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ============ CLOSE ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap-narrow center" data-reveal>
-      <p class="eyebrow eyebrow--center">Next step</p>
-      <h2 class="display" data-split="lines">Find out where you actually stand</h2>
-      <p class="lede" style="margin-inline:auto">A free consultation, a 3D scan, and a written plan. No cost, and no pressure to book anything on the day.</p>
-      <div class="btn-row btn-row--center mt">
-        <a class="btn btn--primary btn--lg" href="#consult">Book my free consultation</a>
-        <a class="btn btn--ghost btn--lg tel" href="tel:+13034217611">(303) 421-7611</a>
+    <div class="close" data-rv>
+      <p class="eyebrow">Next step</p>
+      <h2 class="h2" id="closeTitle">Find out where you actually stand</h2>
+      <p>A free consultation, a 3D scan, and a written plan. No cost, and no pressure to book anything on the day.</p>
+      <div class="btn-row center mt">
+        <a class="btn btn--primary btn--lg magnetic" href="#consult"><span>Book my free consultation</span></a>
+        <a class="btn btn--ghost btn--lg tel magnetic" href="tel:+13034217611"><span>(303) 421-7611</span></a>
       </div>
-      <p class="mt-sm" style="font-size:0.9rem;color:#9aa6b8">6695 Wadsworth Blvd, Arvada, CO 80003 · Monday to Friday, 8am to 5pm</p>
+      <p class="addr">6695 Wadsworth Blvd, Arvada, CO 80003 &middot; Monday to Friday, 8am to 5pm</p>
     </div>
-  </section>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('invTitle'), { start: 'top 86%' });
+    if (W.reduced) return;
+    gsap.from('#invReviews .review', { opacity: 0, y: 36, duration: .85, stagger: .1,
+      ease: 'power3.out', scrollTrigger: { trigger: '#invReviews', start: 'top 86%' } });
+    gsap.from('#invitation .faq__item', { opacity: 0, x: -20, duration: .6, stagger: .07,
+      ease: 'power2.out', scrollTrigger: { trigger: '#invitation .faq', start: 'top 86%' } });
+  });
+  </script>
+</section>
+
 </main>
 
 <footer class="ftr">
@@ -451,27 +913,23 @@
     <div class="ftr__grid">
       <div>
         <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
-        <p style="font-size:0.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
+        <p style="font-size:.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
         <h3>Visit</h3>
-        <address>
-          6695 Wadsworth Blvd<br>Arvada, CO 80003<br>
-          <a href="https://goo.gl/maps/yzuR6hXzr1K4R7XQ9" rel="noopener">Get directions</a>
-        </address>
+        <address>6695 Wadsworth Blvd<br>Arvada, CO 80003<br>
+          <a href="https://goo.gl/maps/yzuR6hXzr1K4R7XQ9" rel="noopener">Get directions</a></address>
       </div>
       <div>
         <h3>Contact</h3>
-        <address>
-          <a class="tel" href="tel:+13034217611">(303) 421-7611</a><br>
+        <address><a class="tel" href="tel:+13034217611">(303) 421-7611</a><br>
           <a href="mailto:info@arvadadentalcenter.com">info@arvadadentalcenter.com</a><br>
-          Monday–Friday, 8am–5pm
-        </address>
+          Monday–Friday, 8am–5pm</address>
       </div>
       <div>
         <h3>This page</h3>
-        <p style="font-size:0.9rem">Dental implants in Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
-        <p style="font-size:0.9rem"><a href="../">All landing pages</a></p>
+        <p style="font-size:.9rem">Dental implants in Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
+        <p style="font-size:.9rem"><a href="../">All landing pages</a></p>
       </div>
     </div>
     <div class="ftr__legal" id="terms">
@@ -481,12 +939,14 @@
     </div>
   </div>
 </footer>
-
-<div class="actionbar">
-  <a class="btn btn--ghost tel" href="tel:+13034217611">Call now</a>
-  <a class="btn btn--primary" href="#consult">Free consult</a>
+</div>
 </div>
 
-<script src="../_shared/brand.js"></script>
+<div class="actionbar">
+  <a class="btn btn--ghost tel" href="tel:+13034217611"><span>Call now</span></a>
+  <a class="btn btn--primary" href="#consult"><span>Free consult</span></a>
+</div>
+
+<script src="../_shared/journey-boot.js"></script>
 </body>
 </html>

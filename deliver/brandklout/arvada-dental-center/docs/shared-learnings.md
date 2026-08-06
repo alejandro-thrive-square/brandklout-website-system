@@ -30,23 +30,32 @@ At [`../workflows/04-design/.tmp/`](../workflows/04-design/.tmp/): implants, All
 cosmetic/veneers, and the new-patient special (built twice, once for search intent and once for
 neighbourhood intent).
 
-They share `_shared/brand.css` and `_shared/brand.js`, which between them provide: a token system
-with light/dark section bands, a mountain-ridge section motif, the stepped qualifier, an accessible
-FAQ accordion, form validation with a single swappable `submitLead()`, a live opening-hours pill, the
-offer "ticket" component, a reveal system with a proper reduced-motion path, and a sticky mobile
-action bar.
+They share `_shared/journey.css`, `_shared/journey.js` and `_shared/journey-boot.js`, plus a vendored
+GSAP 3.13 in `_shared/vendor/gsap/`. Between them these provide: a token system with a `data-theme`
+light/dark layer, the nav with its reading-progress bar and chapter readout, the stepped qualifier,
+an accessible FAQ accordion, form validation through one swappable choke-point, a live opening-hours
+pill, the offer component, and a sticky mobile action bar.
 
 **Re-skin the tokens; do not rebuild the components.** The `:root` block is the only part that should
 need to change for another practice.
 
-Two things in there are worth copying regardless of design direction:
+> [!IMPORTANT]
+> **This replaced a shared `brand.css` + `brand.js` that drove everything from `IntersectionObserver`,
+> and the replacement was an architecture change, not a refactor.** The client rejected the first
+> round as "a plain card website design". An observer can only say *this is now visible*; it cannot
+> express *how far through* a scene you are, which is what every scrubbed moment depends on. If your
+> client folder still has a `brand.js` full of observers, you have the same problem — see
+> [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md), "Journey architecture — chapters, not bands".
 
-- **`submitLead()` is the single lead choke-point.** No client in this batch has a GoHighLevel
-  endpoint yet. Routing every form through one function means wiring GHL up later is a one-function
-  change rather than a hunt.
+Three things in there are worth copying regardless of design direction:
+
+- **The lead choke-point.** No client in this batch has a GoHighLevel endpoint yet. Routing every
+  form through one function means wiring GHL up later is a one-function change rather than a hunt.
 - **The live opening-hours pill.** Several references headline "Open Now" and guarantee same-day
   appointments. If your client is not actually open, do not copy that claim — compute the real state
   and say it.
+- **The chapter shell.** `data-chapter` / `data-chapter-name` on each `<section>` is what drives the
+  nav readout and the progress bar for free, and it is what the journey audit counts.
 
 ## 3. Two scrapers, because these sites fight back
 
@@ -66,21 +75,28 @@ Gotchas both scripts already handle, which cost time to find:
 - **Assets are gitignored repo-wide** (`*.webp`, `*.png`, …). Commit the `assets-manifest.json` the
   script writes; it is the record that lets anyone re-fetch.
 
-## 4. Screenshots cannot verify these pages
+## 4. Three harnesses, because they answer three different questions
 
-A static capture of any page in this batch shows **blank sections**, because nothing has scrolled and
-so `IntersectionObserver` never fired. Two consequences:
+All in [`../workflows/08-qa/.tmp/`](../workflows/08-qa/.tmp/); point any of them at another client by
+editing the `PAGES` array.
 
-- Use [`../workflows/04-design/.tmp/_shared/preview.mjs`](../workflows/04-design/.tmp/_shared/preview.mjs)
-  to render previews — it scrolls the page first.
-- Verify behaviour by driving it, not by looking at it.
-  [`../workflows/08-qa/.tmp/qa.mjs`](../workflows/08-qa/.tmp/qa.mjs) is a 238-check suite covering
-  the qualifier, form validation, FAQ, live status, responsive overflow at five widths, and
-  reduced-motion. Point it at another client's pages by editing its `PAGES` array.
+| Script | Question it answers |
+| :--- | :--- |
+| `content-gate.mjs` | *Has a fabrication got back in?* Static, instant, no browser. Also checks chapter numbering, that no section is named for a background colour, and that the phone and form are present. Run it on every change. |
+| `scrub-proof.mjs` | *Is the motion real?* Step-scrolls each pinned chapter and asserts a **different intermediate state at 25 / 50 / 75 %**. Also proves pins release cleanly at both ends, the progress bar tracks the document, and reduced motion hides nothing. |
+| `shots.mjs` | *Does it hold together at every width?* Six breakpoints, full page, plus the horizontal-overflow assertion and one interaction pass at 390. |
 
-**Scroll at human pace when testing.** At 0.6 viewport-heights every 130ms the harness outran
-IntersectionObserver and under-reported reveals as a failure; 0.45vh / 220ms is honest. Also check
-image integrity *after* scrolling, or every `loading="lazy"` image reports as broken.
+A static capture of a scroll-driven page shows **half-built scenes**, because the pinned chapters are
+deliberately mid-assembly until you scroll them. So:
+
+- **Capture the required full-page shots under `prefers-reduced-motion: reduce`.** That is the one
+  state where every chapter renders complete and in normal flow, so it is the honest layout view —
+  and it doubles as evidence that reduced motion hides nothing. Capture the motion state separately,
+  parked mid-journey.
+- **ScrollSmoother breaks `captureBeyondViewport`** — it transforms the content instead of scrolling
+  it, so you photograph one viewport and a lot of empty page. `shots.mjs` disables smoothing for the
+  capture pass through a `?nosmooth=1` URL parameter, which is never shipped in the markup.
+- Check image integrity *after* scrolling, or every `loading="lazy"` image reports as broken.
 
 ## 5. Two contrast traps in dental brand palettes
 
@@ -121,25 +137,60 @@ These came up on Arvada but are almost certainly batch-wide:
 4. **Check the client's own site for a published offer before assuming there isn't one.** Arvada's
    was on a page not linked from the main navigation.
 
-## 7b. Motion: three traps that will hit you too
+## 7b. Motion: the traps that will hit you too
 
-The motion system in `_shared/brand.css` + `brand.js` is reusable as-is. Three things it exists to
-get right, all of which broke first:
+Carried over from the observer build, still true:
 
-1. **Never let a reveal style apply without JS confirming it can also remove it.** The reveal state
-   is armed by `html[data-motion="on"]`, set by the script itself. A page that ships `opacity: 0` in
-   CSS and relies on a script to undo it is one script error away from being blank.
-2. **A masked heading outside a `[data-reveal]` never resolves.** The hero headline on all six pages
-   sat translated 105% below its own line box, permanently, because the mask resolved on a class the
-   hero never received. An opacity-only QA check cannot see this — it is transform-hidden, not
-   transparent. Check translation against element height too.
-3. **Sticky CTAs must trigger on scroll depth, not on the hero leaving the viewport.** On a tall
+1. **Never let a reveal style apply without JS confirming it can also remove it.** The pre-reveal
+   state is armed by `html.js-motion`, added by the script itself once GSAP is confirmed live. A page
+   that ships `opacity: 0` in CSS and relies on a script to undo it is one script error away from
+   being blank.
+2. **Sticky CTAs must trigger on scroll depth, not on the hero leaving the viewport.** On a tall
    mobile hero that leaves a dead zone: the hero's own phone link has scrolled away, the sticky bar
    has not arrived, and for several hundred pixels there is no way to call.
 
+New, from the GSAP rebuild:
+
+3. **Register plugins in `<body>`, not `<head>`.** In `<head>` there is no `document.body` yet;
+   ScrollTrigger initialises half-built and ScrollSmoother then dies on `getScrollFunc` — silently.
+   No console error, the page merely feels flat. Split the bootstrap: define your queue in `<head>`,
+   register and flush at the end of `<body>`.
+4. **One property, one owner.** Two scrubbed tweens writing the same property on the same element
+   over overlapping ranges overwrite each other every frame and flicker. Both word-by-word statements
+   in this build split their words into two disjoint sets for exactly this reason.
+5. **Scrubbed scale on raster media must never land on exactly 1.** Sub-pixel rounding under
+   ScrollSmoother makes the edges shimmer. End at 1.08, and bleed the element past its clip.
+6. **Give a pinned scene a real fallback under reduced motion.** A pinned horizontal track with the
+   pin removed is a `height:100svh` box containing a `width:max-content` row — i.e. unreachable
+   content. Each one here converts to an ordinary `overflow-x:auto` region instead.
+
+7. **Animate the arrival of a number, never its value, when the number is a price.** A scrubbed
+   counter does not animate *past* a wrong value — it **sits** at it for as long as the visitor
+   stays there. The `$109` offer total was caught reading **"YOUR FIRST VISIT — $43"** mid-chapter.
+   Counting is fine where the intermediate values are true (a year running 2003→2025, implants
+   placed 0→4); it is not fine for anything a real practice actually charges.
+
+And four harness traps that cost real time. **Every one of them reports the page as broken when the
+page is fine**, so each is an invitation to "fix" something that was never wrong:
+
+- **Measure the pinned element, not the `<section>`.** ScrollTrigger pins the inner stage and grows
+  the section to hold the pin-spacer, so the section's own rect keeps scrolling normally. Read
+  `trigger.pin`.
+- **CDP serialises `-0` as `unserializableValue` with no `value` field.** A perfectly held pin
+  measures exactly `-0`, so a probe reading `result.value` alone reports "element missing" for the
+  pins that are working *best*. Normalise with `| 0`, and read `unserializableValue` as a fallback.
+- **`scrollTo` is instant; ScrollSmoother is not.** Native `scrollY` jumps immediately while
+  ScrollTrigger follows the *smoothed* position for ~1s afterwards. Comparing the two before the
+  glide settles reports a progress bar as mistracking and a released pin as still engaged. Allow
+  ~1.5s after every programmatic scroll.
+- **Never use a fixed remote-debugging port.** If a previous run's Chrome has not fully exited it
+  keeps the port, the next launch exits immediately, and the run dies with *"did not expose a
+  debugging port"* — which reads as a page failure and is not. Derive one per process
+  (`9200 + process.pid % 700`). This was the single largest source of flakiness in this harness.
+
 And the testing rule: **drive motion in a focused tab.** Background tabs throttle rAF and freeze
-transitions and `IntersectionObserver`. `Emulation.setFocusEmulationEnabled` +  `Page.bringToFront`
-in the CDP script, or the failures are fiction.
+transitions and timers. `Emulation.setFocusEmulationEnabled` + `Page.bringToFront` in the CDP script,
+or the failures are fiction.
 
 ## 8. The previous vendor's pages contain placeholders presented as facts
 
@@ -167,9 +218,17 @@ Two general rules that fall out of this:
 2. **Never ship `aggregateRating` without a verified figure and its source.** It is the one piece of
    fabricated content that carries a search-engine penalty on top of the credibility problem.
 
-`08-qa/.tmp/qa.mjs` now fails the build on any of it — ratings, star language, lender names,
-soft-pull credit claims, before/after language, the vendor's monthly figures, and Unsplash URLs.
-Copy that `FORBIDDEN` list into your client's QA run.
+`08-qa/.tmp/content-gate.mjs` fails the build on any of it — ratings, star language, lender names,
+soft-pull credit claims, before/after language, `aggregateRating`, the vendor's monthly figures, and
+Unsplash URLs. Copy that `FORBIDDEN` list into your client's QA run; it survived the architecture
+rebuild precisely because it is the check with real-world consequences.
+
+A third rule fell out of the rebuild: **when a scene wants a before/after and you have no consented
+photography, build the scene as a labelled illustration instead of dropping the scene.** Three
+chapters here needed a visual transformation — the implant assembling, four posts seating into an
+arch, a smile design resolving — and all three are SVG, captioned "Illustration, not a patient
+photograph". That keeps the strongest moment on the page without pretending stock imagery is a
+patient result.
 
 ## Version Control
 

@@ -7,39 +7,34 @@
 <meta name="description" content="Porcelain veneers in Arvada, CO, designed by Dr. Gregory Bennett. Chips, gaps, irregular shape and discolouration, in as few as two visits.">
 <meta name="robots" content="noindex, nofollow">
 <!--
-  Landing page — Porcelain Veneers
+  Landing page — Porcelain Veneers.  Journey architecture: 8 chapters.
   Asana task: 1217133289235649 (parent 1217040406855586)
   References cited: avenue.dental/services/veneers/, drpaulomalley.com/services/ultra-thin-veneers/
     Used for SECTION ORDER AND COPY ANGLES ONLY, per docs/ASANA-DISPATCH.md.
-    The "when a veneer is the wrong answer" section is carried over as a trust device;
-    the client's own veneers page already makes exactly that argument.
+  The previous vendor's index_1.html is a STRUCTURE AND CONTENT reference only; none of
+  its visual design is reproduced here.
   All copy, credentials, reviews and imagery are the client's own.
   NOTE: no veneers-specific offer or price exists in the client's public material.
   The offer slot is a labelled placeholder — see Open Question 1 in docs/project-overview.md.
+
+  Scroll-driven chapters (pinned + scrubbed):
+    01 The Mirror  — statement written word by word, then the four flaws surface
+    03 The Design  — shade, shape and proportion resolve as you scroll
+    04 The Method  — the two-visit course travels horizontally
 -->
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="../_shared/brand.css">
+<link rel="stylesheet" href="../_shared/journey.css">
 <style>
-  /* Per-page motion contract. The shared system lives in ../_shared/brand.css;
-     this block guarantees the two rules that must hold even if that file is
-     swapped, minified or ported: motion never hides content, and
-     prefers-reduced-motion removes movement rather than removing information. */
-  @media (prefers-reduced-motion: reduce) {
-    [data-reveal], [data-split] .ln__i, [data-split] .wd,
-    .trust__item, .form-card, [data-parallax] {
-      opacity: 1 !important;
-      transform: none !important;
-      clip-path: none !important;
-      transition: none !important;
-      animation: none !important;
-    }
-    .progress { display: none !important; }
-    html { scroll-behavior: auto; }
+  @media (prefers-reduced-motion: reduce){
+    [data-rv],[data-anim="hide"],.wz-line>*,.wz-word,
+    .smile g,.path-track,.mir-card{
+      opacity:1!important;visibility:visible!important;transform:none!important;
+      clip-path:none!important;transition:none!important;animation:none!important}
+    .nav-progress{display:none!important}
   }
-  /* If the motion script never arms the system, nothing is left hidden. */
-  html:not([data-motion="on"]) [data-reveal] { opacity: 1; transform: none; }
+  html:not(.js-motion) [data-rv]{opacity:1}
 </style>
 <!--
   Structured data. The previous vendor's index_1.html shipped a Dentist block containing
@@ -47,7 +42,6 @@
   Fabricated review markup is a Google structured-data policy violation and can cost the
   practice its rich results, so there is DELIBERATELY no aggregateRating here. Do not add
   one until Brandklout supplies a verified figure (Open Question 9).
-  Facts below are from the client's own site and JSON-LD.
 -->
 <script type="application/ld+json">
 {
@@ -97,434 +91,770 @@
   ]
 }
 </script>
+<script src="../_shared/vendor/gsap/gsap.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollToPlugin.min.js"></script>
+<script src="../_shared/vendor/gsap/ScrollSmoother.min.js"></script>
+<script src="../_shared/vendor/gsap/SplitText.min.js"></script>
+<script src="../_shared/journey.js"></script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
 
-<header class="hdr">
-  <div class="wrap hdr__bar">
-    <a class="hdr__logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
-      <img src="../_shared/assets/best-dental-imaplant-dentist-denver-dental-implants-arvada-dentist.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
+<header class="nav" id="nav">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap nav-in">
+    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
+      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
     </a>
-    <div class="hdr__spacer"></div>
-    <div class="hdr__meta">
-      <span class="status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
-      <strong><a class="tel" href="tel:+13034217611">(303) 421-7611</a></strong>
+    <div class="nav-mid">
+      <p class="nav-chapter" aria-hidden="true"><b id="navChNum">00</b><i id="navChBar"></i><span id="navChName">Arrival</span></p>
     </div>
-    <a class="btn btn--primary hdr__cta-sm" href="#evaluation">Smile evaluation</a>
+    <div class="nav-right">
+      <span class="status nav-status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
+      <a class="nav-tel tel" href="tel:+13034217611">(303) 421-7611</a>
+      <a class="btn btn--primary nav-cta magnetic" href="#evaluation"><span>Smile evaluation</span></a>
+    </div>
   </div>
 </header>
 
+<div id="smooth-wrapper">
+<div id="smooth-content">
 <main id="main">
 
-  <!-- ============ HERO ============ -->
-  <section class="hero">
-    <div class="hero__media">
-      <img src="../_shared/assets/home-card-3-vertical.jpg.webp" alt="" aria-hidden="true" style="--hero-pos:70% 35%">
-    </div>
-    <div class="hero__scrim"></div>
-    <div class="wrap hero__inner">
-      <div>
-        <p class="eyebrow hero__eyebrow">Porcelain Veneers · Arvada, Colorado</p>
-        <h1 class="display" data-split="lines">A smile designed<br>around your face.</h1>
-        <p class="lede mt-sm">
-          Chips, gaps, irregular shape, stubborn discolouration — porcelain veneers cover the lot, in as
-          few as two visits. Dr. Gregory Bennett has designed countless smiles, matched to your facial
-          features, skin tone and gum line.
-        </p>
-        <div class="btn-row mt">
-          <a class="btn btn--primary btn--lg" href="#evaluation">Book a smile evaluation</a>
-          <a class="btn btn--ghost btn--lg tel" href="tel:+13034217611">
-            <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.36 1.9.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.9.34 1.85.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-            (303) 421-7611
-          </a>
-        </div>
-        <div class="trust" data-stagger="90">
-          <span class="trust__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            As few as two visits
-          </span>
-          <span class="trust__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            Designed and finished in-house
-          </span>
-          <span class="trust__item">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>
-            Serving Arvada since 2003
-          </span>
-        </div>
-      </div>
+<!-- ==========================================================================
+     CHAPTER 00 — ARRIVAL
+     ========================================================================== -->
+<section class="ch ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival">
+  <style>
+    .ch-arrival{min-height:100svh;display:flex;align-items:center;overflow:hidden;
+      padding-top:clamp(6rem,12vw,9rem);padding-bottom:clamp(4rem,9vw,7rem)}
+    .ch-arrival .ch-media img{transform:scale(1.12)}
+    .ch-arrival .ch-media::after{content:"";position:absolute;inset:0;
+      background:
+        radial-gradient(80% 68% at 74% 30%,rgba(3,197,236,.16),transparent 60%),
+        linear-gradient(100deg,rgba(10,13,20,.96) 0%,rgba(10,13,20,.9) 40%,rgba(10,13,20,.52) 72%,rgba(10,13,20,.26) 100%),
+        linear-gradient(180deg,rgba(10,13,20,.9) 0%,rgba(10,13,20,.25) 30%,rgba(10,13,20,.86) 100%)}
+    .ch-arrival .in{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-arrival h1{font-size:var(--d1);max-width:13ch}
+    .ch-arrival .lede{max-width:52ch}
+    .ch-arrival .trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;
+      padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
+    .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
+      font-family:var(--f-ui);font-size:.76rem;font-weight:600;color:var(--fg-soft)}
+    .ch-arrival .trust svg{width:16px;height:16px;color:var(--cyan);flex:none}
+    @media(min-width:1000px){ .ch-arrival .in{grid-template-columns:1.12fr .88fr;gap:clamp(2.5rem,4vw,4.5rem)} }
+  </style>
 
-      <div class="form-card" id="evaluation">
-        <div class="form-card__head">
-          <p class="eyebrow" style="color:var(--cyan-ink)">Smile evaluation</p>
-          <p class="h3">Tell us what you'd change</p>
-          <p class="form__note">Dr. Bennett's team will call you back to arrange a consultation.</p>
+  <div class="ch-media" aria-hidden="true">
+    <img id="arrImg" src="../_shared/assets/home-card-3-vertical.jpg.webp" alt="" style="object-position:70% 35%">
+  </div>
+
+  <div class="wrap ch-in in">
+    <div>
+      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Chapter 00 &middot; Arrival</span></div>
+      <h1 class="d1" data-anim="hide" id="arrTitle">A smile designed<br>around your face.</h1>
+      <p class="lede mt" data-anim="hide" id="arrLead">
+        Chips, gaps, irregular shape, stubborn discolouration — porcelain veneers cover the lot, in as
+        few as two visits. Dr. Gregory Bennett has designed countless smiles, matched to your facial
+        features, skin tone and gum line.
+      </p>
+      <div class="btn-row mt" data-anim="hide" id="arrActions">
+        <a class="btn btn--primary btn--lg magnetic" href="#evaluation"><span>Book a smile evaluation</span></a>
+        <a class="btn btn--ghost btn--lg tel magnetic" href="tel:+13034217611"><span>(303) 421-7611</span></a>
+      </div>
+      <div class="trust mt" data-anim="hide" id="arrTrust">
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>As few as two visits</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Designed and finished in-house</span>
+        <span><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg>Serving Arvada since 2003</span>
+      </div>
+    </div>
+
+    <div class="form-card" id="evaluation" data-anim="hide">
+      <div class="form-card__head">
+        <p class="eyebrow" style="color:var(--cyan-ink)">Smile evaluation</p>
+        <p class="h3">Tell us what you'd change</p>
+        <p class="form__note">Dr. Bennett's team will call you back to arrange a consultation.</p>
+      </div>
+      <form class="form" novalidate data-lead="veneers-evaluation" data-thanks="Thank you — your smile evaluation request is in.">
+        <div class="field">
+          <label for="v-name">Full name</label>
+          <input id="v-name" name="name" type="text" autocomplete="name" required>
+          <span class="field__err" aria-live="polite"></span>
         </div>
-        <form class="form" data-lead="veneers-evaluation" data-thanks="Thank you — your smile evaluation request is in.">
+        <div class="field--row">
           <div class="field">
-            <label for="v-name">Full name</label>
-            <input id="v-name" name="name" type="text" autocomplete="name" required>
+            <label for="v-phone">Phone</label>
+            <input id="v-phone" name="phone" type="tel" autocomplete="tel" required>
             <span class="field__err" aria-live="polite"></span>
           </div>
-          <div class="field--row">
-            <div class="field">
-              <label for="v-phone">Phone</label>
-              <input id="v-phone" name="phone" type="tel" autocomplete="tel" required>
-              <span class="field__err" aria-live="polite"></span>
-            </div>
-            <div class="field">
-              <label for="v-email">Email</label>
-              <input id="v-email" name="email" type="email" autocomplete="email">
-              <span class="field__err" aria-live="polite"></span>
-            </div>
-          </div>
           <div class="field">
-            <label for="v-concern">What bothers you most about your smile?</label>
-            <select id="v-concern" name="concern">
-              <option value="chips">Chips and cracks</option>
-              <option value="gaps">Gaps between teeth</option>
-              <option value="shape">Irregular tooth shape</option>
-              <option value="stains">Stains and discolouration</option>
-              <option value="several">Several of these</option>
-              <option value="unsure">I'm not sure — I just want it to look better</option>
-            </select>
+            <label for="v-email">Email</label>
+            <input id="v-email" name="email" type="email" autocomplete="email">
+            <span class="field__err" aria-live="polite"></span>
           </div>
-          <button class="btn btn--primary btn--block btn--lg" type="submit">Request my smile evaluation</button>
-          <p class="form__note">We'll call you back Monday to Friday, 8am to 5pm. Prefer to talk now? <a class="tel" href="tel:+13034217611">(303) 421-7611</a></p>
-        </form>
-      </div>
+        </div>
+        <div class="field">
+          <label for="v-concern">What bothers you most about your smile?</label>
+          <select id="v-concern" name="concern">
+            <option value="chips">Chips and cracks</option>
+            <option value="gaps">Gaps between teeth</option>
+            <option value="shape">Irregular tooth shape</option>
+            <option value="stains">Stains and discolouration</option>
+            <option value="several">Several of these</option>
+            <option value="unsure">I'm not sure — I just want it to look better</option>
+          </select>
+        </div>
+        <button class="btn btn--primary btn--block btn--lg" type="submit"><span>Request my smile evaluation</span></button>
+        <p class="form__note">We'll call you back Monday to Friday, 8am to 5pm. Prefer to talk now? <a class="tel" href="tel:+13034217611">(303) 421-7611</a></p>
+      </form>
     </div>
+  </div>
 
-    <div class="hero__ridge" aria-hidden="true">
-      <svg viewBox="0 0 1440 90" preserveAspectRatio="none"><path fill="currentColor" d="M0 90V54l104-22 116 28 120-48 116 34 128-52 120 46 104-26 128 32 96-18 116 28 112-14 80 16v96z"/></svg>
-    </div>
-  </section>
+  <script>
+  WZ.add(function (W) {
+    var root = document.getElementById('arrival');
+    var hide = root.querySelectorAll('[data-anim="hide"]');
+    gsap.set(hide, { visibility: 'visible' });
+    if (W.reduced) { gsap.set(hide, { opacity: 1, y: 0 }); return; }
 
-  <!-- ============ WHAT VENEERS FIX ============ -->
-  <section class="section band-base">
-    <div class="ridge-mark" data-parallax="0.16" aria-hidden="true">
-      <svg viewBox="0 0 1440 260" preserveAspectRatio="none"><path fill="currentColor" d="M0 260 180 96l120 74 150-140 130 118 160-160 140 150 150-96 130 110 140-70 140 84v190z"/></svg>
-    </div>
+    var tl = gsap.timeline({ delay: .12 });
+    var split = W.splitLines(document.getElementById('arrTitle'));
+    if (split && split.lines && split.lines.length) {
+      gsap.set(split.lines, { yPercent: 112 });
+      tl.to(split.lines, { yPercent: 0, duration: 1.15, stagger: .09, ease: 'power4.out' }, 0);
+    } else {
+      tl.from('#arrTitle', { opacity: 0, y: 40, duration: 1, ease: 'power3.out' }, 0);
+    }
+    tl.from(root.querySelector('.chapter-tag'), { opacity: 0, x: -24, duration: .9, ease: 'power3.out' }, .05)
+      .from('#arrLead',    { opacity: 0, y: 26, duration: .9, ease: 'power3.out' }, .5)
+      .from('#arrActions', { opacity: 0, y: 26, duration: .9, ease: 'power3.out' }, .62)
+      .from('#arrTrust > *', { opacity: 0, y: 20, duration: .8, stagger: .08, ease: 'power3.out' }, .72)
+      .from('#evaluation', { opacity: 0, y: 44, duration: 1.05, ease: 'power3.out' }, .3)
+      .from('#arrImg',    { opacity: 0, scale: 1.26, duration: 1.8, ease: 'power3.out' }, 0);
+
+    gsap.timeline({ scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: .6 } })
+      .to(root.querySelector('.in'), { yPercent: -14, opacity: .12, ease: 'none' }, 0)
+      .to('#arrImg', { yPercent: 6, scale: 1.2, ease: 'none' }, 0);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 01 — THE MIRROR   (pinned; the statement is written word by word,
+     then the four things veneers actually fix surface one at a time)
+     ========================================================================== -->
+<section class="ch ch-mirror" id="mirror" data-chapter="1" data-chapter-name="The Mirror">
+  <style>
+    .ch-mirror{background:var(--ink-950)}
+    .ch-mirror .stage{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
+    .ch-mirror .big{font-family:var(--f-display);font-size:clamp(1.65rem,4.2vw,3.7rem);
+      line-height:1.16;max-width:21ch;font-weight:600}
+    .ch-mirror .big .wz-word{color:rgba(255,255,255,.17)}
+    .mir-grid{display:grid;gap:clamp(.8rem,1.6vw,1.3rem);margin-top:clamp(2rem,4vw,3.25rem);
+      grid-template-columns:1fr}
+    .mir-card{border:1px solid var(--line);border-radius:var(--radius-lg);
+      padding:clamp(1.1rem,2vw,1.6rem);background:rgba(255,255,255,.03)}
+    .mir-card h3{font-size:1.02rem;margin-bottom:.45rem}
+    .mir-card p{font-size:.9rem;color:var(--fg-body)}
+    @media(min-width:700px){ .mir-grid{grid-template-columns:repeat(2,1fr)} }
+    @media(min-width:1120px){ .mir-grid{grid-template-columns:repeat(4,1fr)} }
+  </style>
+
+  <div class="stage" id="mirPin">
     <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">What they fix</p>
-        <h2 class="display" data-split="lines">Veneers erase smile-zone flaws</h2>
-        <p class="lede">Thin porcelain shells bonded to the front of your teeth. What they cover is narrow, and it is worth being precise about it.</p>
-      </div>
-      <div class="symptoms" data-stagger="65">
-        <div class="symptom" data-reveal>
+      <div class="chapter-tag"><i></i><span class="label">Chapter 01 &middot; The Mirror</span></div>
+      <p class="big" id="mirBig">Thin porcelain shells bonded to the front of your teeth. What they cover
+        is narrow, and it is worth being precise about it.</p>
+
+      <div class="mir-grid" id="mirGrid">
+        <article class="mir-card">
           <h3>Chips and cracks</h3>
           <p>Damage to the visible edge of a tooth, covered rather than patched.</p>
-        </div>
-        <div class="symptom" data-reveal data-delay="1">
+        </article>
+        <article class="mir-card">
           <h3>Gaps between teeth</h3>
           <p>Spacing closed without orthodontics, when the gap is cosmetic rather than structural.</p>
-        </div>
-        <div class="symptom" data-reveal data-delay="2">
+        </article>
+        <article class="mir-card">
           <h3>Irregular tooth shape</h3>
           <p>Teeth that are short, worn, or simply the wrong proportion for your face.</p>
-        </div>
-        <div class="symptom" data-reveal data-delay="3">
+        </article>
+        <article class="mir-card">
           <h3>Stains and discolouration</h3>
           <p>Deep staining that professional whitening cannot lift.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ THE HONEST SECTION ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap">
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,320px),1fr));gap:clamp(2rem,5vw,4.5rem);align-items:center">
-        <div data-reveal>
-          <p class="eyebrow">Straight answer</p>
-          <h2 class="display" data-split="lines">When veneers are the wrong choice</h2>
-          <p class="lede mt-sm">A cosmetic dentist who only ever recommends the cosmetic treatment is not worth trusting with your face.</p>
-          <p>Veneers hide problem areas. They do <strong>not</strong> address functional concerns. If your issue is a
-            missing tooth, a failing tooth, or a bite that is doing damage, a veneer sits on top of an unsolved
-            problem — and Arvada Dental Center will tell you so.</p>
-          <p>Patients with serious oral health issues such as periodontitis are generally not candidates until that
-            is treated. Where the concern is alignment rather than appearance, Invisalign® or Six Month Smiles is
-            usually the better answer. Where it is function, that is what implants are for.</p>
-          <div class="btn-row mt">
-            <a class="btn btn--ghost" href="../implants/">See dental implants →</a>
-          </div>
-        </div>
-        <figure class="media-frame media-frame--tall" data-reveal="scale" data-delay="1" style="margin:0">
-          <img src="../_shared/assets/dental-veneers-graphic-4.jpg.webp" alt="Porcelain veneer shells shown against a model of the upper front teeth" loading="lazy">
-        </figure>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ CANDIDACY ============ -->
-  <section class="section band-paper">
-    <div class="wrap-narrow">
-      <div class="mb-lg" data-reveal>
-        <p class="eyebrow">Candidacy</p>
-        <h2 class="display" data-split="lines">How Dr. Bennett decides</h2>
-        <p class="lede">Most people with common cosmetic problems are good candidates. Three things get checked before anything is prepared.</p>
-      </div>
-      <div class="steps" data-stagger="120">
-        <div class="step" data-reveal>
-          <h3 class="h3">Gum health</h3>
-          <p>Veneers meet the gum line, so inflammation or periodontal disease has to be resolved first. The practice offers LANAP laser therapy where it is needed.</p>
-        </div>
-        <div class="step" data-reveal>
-          <h3 class="h3">Decay and structural soundness</h3>
-          <p>A veneer bonds to enamel. Where there is significant decay or a tooth is structurally compromised, a crown is the sounder option.</p>
-        </div>
-        <div class="step" data-reveal>
-          <h3 class="h3">Bite, grinding and clenching</h3>
-          <p>Porcelain is strong but not indestructible. If you grind, that gets addressed as part of the plan rather than discovered afterwards.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ============ PROCESS ============ -->
-  <section class="section band-warm">
-    <div class="wrap">
-      <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,300px),1fr));gap:clamp(2rem,5vw,4.5rem);align-items:center">
-        <figure class="media-frame media-frame--wide" data-reveal="scale" style="margin:0">
-          <img src="../_shared/assets/dental-patient-undergoing-porcelain-veneers-procedure-3.jpg.webp" alt="Shade matching a porcelain veneer against a patient's natural teeth" loading="lazy">
-        </figure>
-        <div data-reveal data-delay="1">
-          <p class="eyebrow">The smile design process</p>
-          <h2 class="display" data-split="lines">Two visits, one design</h2>
-          <p class="mt-sm">At your first consultation Dr. Bennett removes a small portion of enamel from the front
-            of the teeth being treated, and the design is worked out against your facial features, skin tone and
-            gum line rather than a catalogue shade.</p>
-          <p>The practice's own technology handles the design; the veneers are fabricated and fitted at the second
-            visit. Veneers can be combined with laser gum surgery where the gum line itself is part of the problem —
-            a full smile makeover rather than a set of shells.</p>
-          <p class="price-tag" style="font-size:clamp(1.6rem,1.2rem+1.6vw,2.2rem)"><span>2 visits</span> <small>typical course</small></p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!--
-    ============ COMPARISON ============
-    Section and content taken from the previous vendor's index_1.html (Asana attachment
-    1217133289235647), which is a STRUCTURE AND CONTENT reference only — its visual design
-    is not reproduced anywhere on this page. Rendered here with our own .compare component,
-    the same one the AOX page uses.
-
-    The two durability figures are the vendor's and are NOT independently verified — that
-    author also supplied three figures Brandklout has since confirmed were fabricated. They
-    are presented as general characteristics of the materials rather than as a promise by
-    this practice, and flagged for clinical sign-off (Open Question 12). Every other row is
-    corroborated by the client's own veneers page.
-  -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">Materials</p>
-        <h2 class="display" data-split="lines">Not all veneers are the same thing</h2>
-        <p class="lede">"Veneer" covers two quite different treatments. The difference shows up years later, which is exactly when it is hardest to undo.</p>
-      </div>
-      <div class="compare-scroll" data-reveal>
-        <table class="compare">
-          <caption class="vh">Composite veneers compared with the porcelain veneers used at Arvada Dental Center</caption>
-          <thead>
-            <tr>
-              <th scope="col">&nbsp;</th>
-              <th scope="col">Composite / traditional</th>
-              <th scope="col" class="is-best">Porcelain, minimal-prep</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <th scope="row">Appearance in daylight</th>
-              <td>More opaque — can read flat</td>
-              <td class="is-best">Translucency matched to real enamel</td>
-            </tr>
-            <tr>
-              <th scope="row">Tooth preparation</th>
-              <td>Often more enamel removed</td>
-              <td class="is-best">Minimal-prep, tooth-conserving</td>
-            </tr>
-            <tr>
-              <th scope="row">Staining</th>
-              <td>Picks up stain over time</td>
-              <td class="is-best">Highly stain-resistant</td>
-            </tr>
-            <tr>
-              <th scope="row">Visits to complete</th>
-              <td>Varies, often repeat touch-ups</td>
-              <td class="is-best">As few as two</td>
-            </tr>
-            <tr>
-              <th scope="row">Typical service life<a href="#clinical-note" aria-label="See note on durability figures">†</a></th>
-              <td>Around 4–8 years</td>
-              <td class="is-best">10–20+ years with proper care</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-      <p class="caption" id="clinical-note" data-reveal>† Service-life ranges are general characteristics of the materials, not a guarantee for any individual case. How long yours last depends on your bite, your habits and your hygiene — Dr. Bennett will be straight with you about that at the consultation.</p>
-    </div>
-  </section>
-
-  <!-- ============ TECHNOLOGY ============
-       Section and equipment list from index_1.html; all four are corroborated by the
-       client's own site navigation (CEREC, panoramic X-rays, Waterlase, IV sedation). -->
-  <section class="section band-paper">
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">In the room</p>
-        <h2 class="display" data-split="lines">Technology you'll actually notice</h2>
-        <p class="lede">Not a spec sheet — four things that change what the appointment feels like.</p>
-      </div>
-      <div class="grid grid--4" data-stagger="70">
-        <article class="card card--lift" data-reveal>
-          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
-          <h3 class="h3">CEREC digital scanning</h3>
-          <p>Digital impressions instead of a tray of setting putty. Faster, and considerably more pleasant if you have a gag reflex.</p>
-        </article>
-        <article class="card card--lift" data-reveal data-delay="1">
-          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a9 9 0 0 1 18 0"/><path d="M5 9v6a7 7 0 0 0 14 0V9"/><path d="M9 20h6"/></svg></div>
-          <h3 class="h3">Digital panoramic X-rays</h3>
-          <p>Full-mouth visibility at a fraction of the radiation of traditional film.</p>
-        </article>
-        <article class="card card--lift" data-reveal data-delay="2">
-          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7s5 5.4 5 9.3a5 5 0 0 1-10 0c0-3.9 5-9.3 5-9.3z"/></svg></div>
-          <h3 class="h3">Waterlase laser dentistry</h3>
-          <p>Gentle laser work on soft tissue, which is what makes combining veneers with gum contouring practical.</p>
-        </article>
-        <article class="card card--lift" data-reveal data-delay="3">
-          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
-          <h3 class="h3">IV sedation</h3>
-          <p>Dr. Bennett is board certified to administer it himself, so dental anxiety doesn't have to be the reason you never start.</p>
         </article>
       </div>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ OFFER PLACEHOLDER ============ -->
-  <section class="section band-base" style="--band-bg:var(--paper)">
-    <div class="wrap-narrow">
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('mirPin'),
+        big = document.getElementById('mirBig'),
+        cards = gsap.utils.toArray('#mirGrid .mir-card');
+
+    if (W.reduced) return;
+    gsap.set(cards, { opacity: 0, y: 44 });
+
+    var sp = W.splitWords(big);
+    var words = (sp && sp.words && sp.words.length) ? sp.words : null;
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.4),
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    if (words) {
+      var tail = words.slice(-8), body = words.slice(0, -8);
+      tl.to(body, { color: '#ffffff', stagger: .34, ease: 'none' }, 0)
+        .to(tail, { color: '#03c5ec', stagger: .28, ease: 'none' }, .4);
+    } else {
+      tl.from(big, { opacity: .2, ease: 'none' }, 0);
+    }
+    tl.to(cards, { opacity: 1, y: 0, stagger: .16, ease: 'none' }, .58);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 02 — THE STRAIGHT ANSWER   (when a veneer is the wrong treatment,
+     with the candidacy checks folded in — the objection and its answer together)
+     ========================================================================== -->
+<section class="ch ch-honest" id="honest" data-chapter="2" data-chapter-name="The Straight Answer">
+  <style>
+    .ch-honest{background:var(--ink-900);overflow:hidden}
+    .ch-honest .lay{display:grid;gap:clamp(2rem,5vw,4.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-honest h2{font-size:var(--h2);max-width:15ch}
+    .ch-honest .plate{position:relative;overflow:hidden;border-radius:var(--radius-lg);aspect-ratio:4/5;
+      background:var(--ink-800);clip-path:inset(0 0 100% 0)}
+    .ch-honest .plate img{width:100%;height:100%;object-fit:cover}
+    .cand{margin-top:clamp(2.5rem,5vw,4rem)}
+    .cand h3{font-size:1.05rem;margin-bottom:.35rem}
+    @media(min-width:900px){ .ch-honest .lay{grid-template-columns:1.15fr .85fr} }
+  </style>
+
+  <div class="wrap pad">
+    <div class="lay">
+      <div>
+        <div class="chapter-tag"><i></i><span class="label">Chapter 02 &middot; The Straight Answer</span></div>
+        <h2 class="h2" id="honTitle">When veneers are the wrong choice</h2>
+        <p class="lede mt-s" data-rv>A cosmetic dentist who only ever recommends the cosmetic treatment is not
+          worth trusting with your face.</p>
+        <p class="mt-s" data-rv>Veneers hide problem areas. They do <strong style="color:var(--fg)">not</strong>
+          address functional concerns. If your issue is a missing tooth, a failing tooth, or a bite that is doing
+          damage, a veneer sits on top of an unsolved problem — and Arvada Dental Center will tell you so.</p>
+        <p class="mt-s" data-rv>Patients with serious oral health issues such as periodontitis are generally not
+          candidates until that is treated. Where the concern is alignment rather than appearance, Invisalign&reg;
+          or Six Month Smiles is usually the better answer. Where it is function, that is what implants are for.</p>
+        <div class="btn-row mt" data-rv>
+          <a class="btn btn--ghost magnetic" href="../implants/"><span>See dental implants &rarr;</span></a>
+        </div>
+      </div>
+      <figure class="plate" id="honPlate" style="margin:0">
+        <img id="honImg" src="../_shared/assets/dental-veneers-graphic-4.jpg.webp"
+             alt="Porcelain veneer shells shown against a model of the upper front teeth" loading="lazy">
+      </figure>
+    </div>
+
+    <div class="cand">
+      <p class="eyebrow" data-rv>Candidacy &middot; three things Dr. Bennett checks first</p>
+      <div class="grid g3 mt" id="candGrid">
+        <article class="card">
+          <h3>Gum health</h3>
+          <p>Veneers meet the gum line, so inflammation or periodontal disease has to be resolved first.
+            The practice offers LANAP laser therapy where it is needed.</p>
+        </article>
+        <article class="card">
+          <h3>Decay and structural soundness</h3>
+          <p>A veneer bonds to enamel. Where there is significant decay or a tooth is structurally
+            compromised, a crown is the sounder option.</p>
+        </article>
+        <article class="card">
+          <h3>Bite, grinding and clenching</h3>
+          <p>Porcelain is strong but not indestructible. If you grind, that gets addressed as part of the
+            plan rather than discovered afterwards.</p>
+        </article>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('honTitle'), { start: 'top 86%' });
+    if (W.reduced) { gsap.set('#honPlate', { clipPath: 'inset(0 0 0% 0)' }); return; }
+    gsap.to('#honPlate', { clipPath: 'inset(0 0 0% 0)', duration: 1.25, ease: 'power4.inOut',
+      scrollTrigger: { trigger: '#honPlate', start: 'top 84%' } });
+    gsap.fromTo('#honImg', { scale: 1.22, yPercent: -5 }, { scale: 1.08, yPercent: 5, ease: 'none',
+      scrollTrigger: { trigger: '#honPlate', start: 'top bottom', end: 'bottom top', scrub: .8 } });
+    gsap.from('#candGrid .card', { opacity: 0, y: 38, duration: .9, stagger: .1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#candGrid', start: 'top 88%' } });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 03 — THE DESIGN   (signature moment: pinned, and the three
+     decisions a smile design actually makes — shade, shape, proportion —
+     resolve as you scroll. An illustration of the decisions, deliberately:
+     it is not a photograph and it is not a simulation of anyone's result.)
+     ========================================================================== -->
+<section class="ch ch-design" id="design" data-chapter="3" data-chapter-name="The Design" data-theme="light">
+  <style>
+    .ch-design{background:var(--bg)}
+    .ch-design .stage{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(3rem,6vw,5rem);overflow:hidden}
+    .ch-design .lay{display:grid;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-design h2{font-size:var(--h2);max-width:14ch}
+    .smile-fig{position:relative;justify-self:center;width:min(88vw,480px);max-width:100%}
+    .smile{width:100%;height:auto;display:block;overflow:visible}
+    .smile .lip{fill:#E8D5D3}
+    .smile .mouth{fill:#3A2226}
+    .smile .tooth{stroke:#D8DEE6;stroke-width:1.6}
+    .dsn-steps{display:grid;margin-top:clamp(1.2rem,2.4vw,2rem)}
+    .dsn-step{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
+      padding-block:clamp(.8rem,1.6vw,1.15rem);border-top:1px solid var(--line);opacity:.32}
+    .dsn-step:last-child{border-bottom:1px solid var(--line)}
+    .dsn-step b{font-family:var(--f-display);font-size:1.4rem;color:var(--cyan-deep);line-height:1;
+      font-variant-numeric:tabular-nums}
+    .dsn-step h3{font-size:1.02rem;margin-bottom:.25rem}
+    .dsn-step p{font-size:.9rem;color:var(--fg-body)}
+    .dsn-note{margin-top:1rem;font-size:.78rem;color:var(--fg-soft)}
+    @media(min-width:900px){
+      .ch-design .lay{grid-template-columns:1.05fr .95fr;gap:clamp(2.5rem,5vw,5rem)}
+      .smile-fig{width:min(44vw,500px)}
+    }
+  </style>
+
+  <div class="stage" id="dsnPin">
+    <div class="wrap lay">
+      <div class="smile-fig">
+        <svg class="smile" id="smileSvg" viewBox="0 0 480 260" role="img"
+             aria-label="Illustration of the three decisions a smile design makes: shade, shape and proportion">
+          <path class="mouth" d="M46 78c62-40 326-40 388 0 6 60-84 138-194 138S40 138 46 78z"/>
+          <g id="smileTeeth">
+            <g class="tth" id="t1"><path class="tooth" fill="#CFC6A8" d="M96 84h44a10 10 0 0 1 10 10v34c0 12-10 22-22 22h-20c-12 0-22-10-22-22V94a10 10 0 0 1 10-10z"/></g>
+            <g class="tth" id="t2"><path class="tooth" fill="#CFC6A8" d="M152 82h50a10 10 0 0 1 10 10v46c0 14-12 26-26 26h-18c-14 0-26-12-26-26V92a10 10 0 0 1 10-10z"/></g>
+            <g class="tth" id="t3"><path class="tooth" fill="#CFC6A8" d="M216 80h52a10 10 0 0 1 10 10v52c0 15-13 28-28 28h-16c-15 0-28-13-28-28V90a10 10 0 0 1 10-10z"/></g>
+            <g class="tth" id="t4"><path class="tooth" fill="#CFC6A8" d="M286 82h50a10 10 0 0 1 10 10v46c0 14-12 26-26 26h-18c-14 0-26-12-26-26V92a10 10 0 0 1 10-10z"/></g>
+            <g class="tth" id="t5"><path class="tooth" fill="#CFC6A8" d="M350 84h44a10 10 0 0 1 10 10v34c0 12-10 22-22 22h-20c-12 0-22-10-22-22V94a10 10 0 0 1 10-10z"/></g>
+          </g>
+          <path class="lip" d="M40 74c66-44 334-44 400 0 4 8-8 16-16 12-58-30-310-30-368 0-8 4-20-4-16-12z"/>
+        </svg>
+      </div>
+
+      <div>
+        <div class="chapter-tag"><i></i><span class="label">Chapter 03 &middot; The Design</span></div>
+        <h2 class="h2" id="dsnTitle">Three decisions, made with you</h2>
+        <p class="lede mt-s">The design is worked out against your facial features, skin tone and gum line
+          rather than a catalogue shade. Shade, shape and proportion are decided with you — which is the
+          whole answer to "will they look obviously fake".</p>
+
+        <div class="dsn-steps" id="dsnSteps">
+          <div class="dsn-step"><b>01</b><div><h3>Shade</h3><p>Translucency matched to real enamel, not a flat white. Porcelain holds that colour rather than picking up stain.</p></div></div>
+          <div class="dsn-step"><b>02</b><div><h3>Shape</h3><p>Worn, chipped and short teeth are given an edge and a contour that suits your face.</p></div></div>
+          <div class="dsn-step"><b>03</b><div><h3>Proportion</h3><p>Widths and spacing are set together, so gaps close without the result looking like a row of tiles.</p></div></div>
+        </div>
+
+        <p class="dsn-note">Illustration of the decisions, not a photograph and not a simulation of your
+          result. What is achievable for your teeth is settled at the evaluation.</p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('dsnPin'),
+        teeth = ['#t1', '#t2', '#t3', '#t4', '#t5'].map(function (s) { return document.querySelector(s); }),
+        paths = teeth.map(function (g) { return g.querySelector('path'); }),
+        steps = gsap.utils.toArray('#dsnSteps .dsn-step');
+
+    W.headline(document.getElementById('dsnTitle'), { start: 'top 86%' });
+
+    if (W.reduced) {
+      gsap.set(paths, { fill: '#FFFFFF' });
+      gsap.set(steps, { opacity: 1 });
+      return;
+    }
+
+    /* The "before" state: dull shade, uneven edges, and spacing pushed apart.
+       Every one of those is a separate scrubbed phase, so the scene is at a
+       genuinely different state a quarter, half and three-quarters through. */
+    gsap.set(paths, { fill: '#CFC6A8' });
+    gsap.set(teeth[0], { scaleY: .82, x: -14, transformOrigin: '50% 0%' });
+    gsap.set(teeth[1], { scaleY: .9, x: -7, transformOrigin: '50% 0%' });
+    gsap.set(teeth[2], { scaleY: .84, rotate: -3, transformOrigin: '50% 0%' });
+    gsap.set(teeth[3], { scaleY: .93, x: 7, transformOrigin: '50% 0%' });
+    gsap.set(teeth[4], { scaleY: .8, x: 14, transformOrigin: '50% 0%' });
+    gsap.set(steps, { opacity: .32 });
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 3),
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    /* Phase 1 — shade */
+    tl.to(paths, { fill: '#FCFCFA', ease: 'none', duration: 1, stagger: .08 }, 0)
+      .to(steps[0], { opacity: 1, ease: 'none', duration: .3 }, 0)
+      .to(steps[0], { opacity: .32, ease: 'none', duration: .3 }, 1.1)
+    /* Phase 2 — shape: the edges come back to a full, even contour */
+      .to(teeth, { scaleY: 1, rotate: 0, ease: 'none', duration: 1, stagger: .07 }, 1.1)
+      .to(steps[1], { opacity: 1, ease: 'none', duration: .3 }, 1.1)
+      .to(steps[1], { opacity: .32, ease: 'none', duration: .3 }, 2.2)
+    /* Phase 3 — proportion: spacing closes to an even row */
+      .to(teeth, { x: 0, ease: 'none', duration: 1, stagger: .06 }, 2.2)
+      .to(steps[2], { opacity: 1, ease: 'none', duration: .3 }, 2.3);
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 04 — THE METHOD   (pinned horizontal: the two-visit course, with
+     the equipment that changes what the appointment feels like folded in)
+     ========================================================================== -->
+<section class="ch ch-method" id="method" data-chapter="4" data-chapter-name="The Method">
+  <style>
+    .ch-method{background:var(--ink-900);overflow:hidden}
+    .ch-method .pin{height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative}
+    .ch-method .head{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter);
+      margin-bottom:clamp(1.2rem,2.6vw,2.2rem)}
+    .ch-method h2{font-size:var(--h2);max-width:16ch}
+    .path-track{display:flex;gap:clamp(.9rem,2.2vw,1.8rem);padding-inline:var(--gutter);
+      width:max-content;align-items:stretch}
+    .path-card{width:clamp(250px,27vw,400px);flex:none;border:1px solid var(--line);
+      border-radius:var(--radius-lg);padding:clamp(1.2rem,2.2vw,2rem);background:var(--card);
+      display:flex;flex-direction:column;gap:.7rem;transition:border-color .5s ease,background .5s ease}
+    .path-card .no{font-family:var(--f-display);font-size:clamp(2rem,3.8vw,3rem);color:var(--cyan);
+      line-height:.9;opacity:.35}
+    .path-card h3{font-size:var(--h3)}
+    .path-card p{font-size:.92rem;color:var(--fg-body)}
+    .path-card .k{font-family:var(--f-ui);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+      font-weight:700;color:var(--cyan)}
+    .ch-method .bar{position:absolute;left:var(--gutter);right:var(--gutter);
+      bottom:clamp(1.2rem,3.5vw,2.6rem);height:2px;background:var(--line)}
+    .ch-method .bar i{position:absolute;inset:0;background:var(--cyan);transform:scaleX(0);transform-origin:left}
+    @media(max-width:700px){ .path-card{width:76vw} }
+  </style>
+
+  <div class="pin" id="mthPin">
+    <div class="head">
+      <div class="chapter-tag"><i></i><span class="label">Chapter 04 &middot; The Method</span></div>
+      <h2 class="h2">Two visits, one design.</h2>
+    </div>
+    <div class="path-track" id="mthTrack">
+      <article class="path-card">
+        <span class="k">Visit one</span>
+        <span class="no">01</span>
+        <h3>Preparation and design</h3>
+        <p>Dr. Bennett removes a small portion of enamel from the front of the teeth being treated, and the
+          design is worked out against your facial features, skin tone and gum line rather than a catalogue shade.</p>
+      </article>
+      <article class="path-card">
+        <span class="k">Between</span>
+        <span class="no">02</span>
+        <h3>Made to fit you</h3>
+        <p>The practice's own technology handles the design, and the veneers are fabricated for your case
+          rather than picked from a tray.</p>
+      </article>
+      <article class="path-card">
+        <span class="k">Visit two</span>
+        <span class="no">03</span>
+        <h3>Fitted and bonded</h3>
+        <p>The finished veneers go on. Veneers can be combined with laser gum surgery where the gum line
+          itself is part of the problem — a full smile makeover rather than a set of shells.</p>
+      </article>
+      <article class="path-card">
+        <span class="k">In the room</span>
+        <span class="no">04</span>
+        <h3>CEREC &amp; digital X-rays</h3>
+        <p>Digital impressions instead of a tray of setting putty — considerably more pleasant if you have a
+          gag reflex — and full-mouth panoramic imaging at a fraction of the radiation of film.</p>
+      </article>
+      <article class="path-card">
+        <span class="k">In the room</span>
+        <span class="no">05</span>
+        <h3>Waterlase &amp; IV sedation</h3>
+        <p>Gentle laser work on soft tissue makes combining veneers with gum contouring practical, and
+          Dr. Bennett is board certified to administer IV sedation himself.</p>
+      </article>
+    </div>
+    <div class="bar" aria-hidden="true"><i id="mthBar"></i></div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    var pin = document.getElementById('mthPin'),
+        track = document.getElementById('mthTrack'),
+        bar = document.getElementById('mthBar');
+
+    if (W.reduced) {
+      pin.style.height = 'auto';
+      pin.style.paddingBlock = 'clamp(3rem,6vw,5rem)';
+      track.style.overflowX = 'auto';
+      track.style.width = '100%';
+      return;
+    }
+
+    function distance() { return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
+
+    var tween = gsap.to(track, {
+      x: function () { return -distance(); }, ease: 'none',
+      scrollTrigger: {
+        trigger: pin, start: 'top top',
+        end: function () { return '+=' + (distance() + window.innerHeight * .6); },
+        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) { gsap.set(bar, { scaleX: self.progress }); }
+      }
+    });
+
+    gsap.utils.toArray('#mthTrack .path-card').forEach(function (card) {
+      ScrollTrigger.create({
+        trigger: card, containerAnimation: tween, start: 'left 72%', end: 'right 28%',
+        onEnter: function () { light(card, true); }, onEnterBack: function () { light(card, true); },
+        onLeave: function () { light(card, false); }, onLeaveBack: function () { light(card, false); }
+      });
+      gsap.fromTo(card.querySelector('.no'), { opacity: .35 }, { opacity: 1, duration: .4,
+        scrollTrigger: { trigger: card, containerAnimation: tween, start: 'left 78%',
+          toggleActions: 'play none none reverse' } });
+    });
+
+    function light(card, on) {
+      gsap.to(card, { borderColor: on ? 'rgba(3,197,236,.55)' : 'rgba(255,255,255,.12)',
+        backgroundColor: on ? 'rgba(3,197,236,.07)' : 'rgba(255,255,255,.045)', duration: .5 });
+    }
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 05 — THE MATERIALS
+     Section and content carried from the previous vendor's index_1.html (Asana
+     attachment 1217133289235647), a STRUCTURE AND CONTENT reference only — none
+     of its visual design appears here.
+
+     The two durability figures are the vendor's and are NOT independently
+     verified; that author also supplied three figures Brandklout has since
+     confirmed were fabricated. They are presented as general characteristics of
+     the materials rather than as a promise by this practice, and flagged for
+     clinical sign-off (Open Question 12).
+     ========================================================================== -->
+<section class="ch ch-materials" id="materials" data-chapter="5" data-chapter-name="The Materials" data-theme="light">
+  <style>
+    .ch-materials{background:var(--bg);overflow:hidden}
+    .ch-materials .head{max-width:46ch;margin-bottom:clamp(2rem,4vw,3rem)}
+    .ch-materials h2{font-size:var(--h2)}
+    .ch-materials sup a{color:var(--accent)}
+  </style>
+
+  <div class="wrap pad">
+    <div class="head" data-rv>
+      <div class="chapter-tag"><i></i><span class="label">Chapter 05 &middot; The Materials</span></div>
+      <h2 class="h2" id="matTitle">Not all veneers are the same thing</h2>
+      <p class="lede mt-s">"Veneer" covers two quite different treatments. The difference shows up years
+        later, which is exactly when it is hardest to undo.</p>
+    </div>
+
+    <div class="compare-scroll" data-rv>
+      <table class="compare">
+        <caption class="vh">Composite veneers compared with the porcelain veneers used at Arvada Dental Center</caption>
+        <thead>
+          <tr>
+            <th scope="col">&nbsp;</th>
+            <th scope="col">Composite / traditional</th>
+            <th scope="col" class="is-best">Porcelain, minimal-prep</th>
+          </tr>
+        </thead>
+        <tbody id="matBody">
+          <tr><th scope="row">Appearance in daylight</th><td>More opaque — can read flat</td><td class="is-best">Translucency matched to real enamel</td></tr>
+          <tr><th scope="row">Tooth preparation</th><td>Often more enamel removed</td><td class="is-best">Minimal-prep, tooth-conserving</td></tr>
+          <tr><th scope="row">Staining</th><td>Picks up stain over time</td><td class="is-best">Highly stain-resistant</td></tr>
+          <tr><th scope="row">Visits to complete</th><td>Varies, often repeat touch-ups</td><td class="is-best">As few as two</td></tr>
+          <tr><th scope="row">Typical service life<sup><a href="#clinical-note" aria-label="See note on durability figures">&dagger;</a></sup></th><td>Around 4–8 years</td><td class="is-best">10–20+ years with proper care</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="caption" id="clinical-note" data-rv>&dagger; Service-life ranges are general characteristics of
+      the materials, not a guarantee for any individual case. How long yours last depends on your bite, your
+      habits and your hygiene — Dr. Bennett will be straight with you about that at the consultation.</p>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('matTitle'), { start: 'top 86%' });
+    if (W.reduced) return;
+    gsap.from('#matBody tr', { opacity: 0, x: -30, duration: .8, stagger: .09, ease: 'power3.out',
+      scrollTrigger: { trigger: '#matBody', start: 'top 86%' } });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 06 — THE PROOF
+     ========================================================================== -->
+<section class="ch ch-proof" id="proof" data-chapter="6" data-chapter-name="The Proof">
+  <style>
+    .ch-proof{background:var(--ink-850);overflow:hidden}
+    .ch-proof .lay{display:grid;gap:clamp(2rem,5vw,4.5rem);align-items:center;grid-template-columns:1fr}
+    .ch-proof .plate{position:relative;overflow:hidden;border-radius:var(--radius-lg);aspect-ratio:4/5;
+      background:var(--ink-800);clip-path:inset(0 0 100% 0)}
+    .ch-proof .plate img{width:100%;height:100%;object-fit:cover}
+    .ch-proof h2{font-size:var(--h2);max-width:15ch}
+    @media(min-width:900px){ .ch-proof .lay{grid-template-columns:.8fr 1.2fr} }
+  </style>
+
+  <div class="wrap pad">
+    <div class="lay">
+      <figure class="plate" id="prPlate" style="margin:0">
+        <img id="prImg" src="../_shared/assets/dr_bennett-square-close.jpg.webp"
+             alt="Dr. Gregory Bennett, DDS, cosmetic and implant dentist at Arvada Dental Center" loading="lazy">
+      </figure>
+      <div>
+        <div class="chapter-tag"><i></i><span class="label">Chapter 06 &middot; The Proof</span></div>
+        <h2 class="h2" id="prTitle">Dr. Gregory Bennett, DDS</h2>
+        <p class="lede mt-s" data-rv>Cosmetic work is as much artistic as technical, and Dr. Bennett has spent
+          nearly twenty years refining both. He has designed countless smiles at the practice, blending advanced
+          technology with the judgement that decides how a tooth should be shaped for a particular face.</p>
+        <ul class="rule-list mt" id="prCreds">
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Doctorate of Dental Surgery, University of Iowa, 2001</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Cosmetic dentistry, smile makeovers and full-mouth rehabilitation</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Laser gum surgery for combined smile makeovers</span></li>
+          <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg><span>Board certified to administer IV sedation</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="grid g3 mt-l" id="prReviews">
+      <div class="review">
+        <blockquote>Top percentile in terms of quality, technology and the atmosphere! The folks at Arvada Dental Center were down to earth and welcoming</blockquote>
+        <p class="review__who">Jon Jon<br><span class="review__src">Google review</span></p>
+      </div>
+      <div class="review">
+        <blockquote>Top notch in every regard. Everyone is fantastic and the office is beyond reproach. 10/10 recommend.</blockquote>
+        <p class="review__who">ryan syme<br><span class="review__src">Google review</span></p>
+      </div>
+      <div class="review">
+        <blockquote>Made me feel so comfortable. Great pricing. Friendly staff</blockquote>
+        <p class="review__who">Dorothy Padgett<br><span class="review__src">Google review</span></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('prTitle'), { start: 'top 86%' });
+    if (W.reduced) { gsap.set('#prPlate', { clipPath: 'inset(0 0 0% 0)' }); return; }
+    gsap.to('#prPlate', { clipPath: 'inset(0 0 0% 0)', duration: 1.25, ease: 'power4.inOut',
+      scrollTrigger: { trigger: '#prPlate', start: 'top 84%' } });
+    gsap.fromTo('#prImg', { scale: 1.22, yPercent: -5 }, { scale: 1.08, yPercent: 5, ease: 'none',
+      scrollTrigger: { trigger: '#prPlate', start: 'top bottom', end: 'bottom top', scrub: .8 } });
+    gsap.from('#prCreds li', { opacity: 0, x: -22, duration: .65, stagger: .08, ease: 'power2.out',
+      scrollTrigger: { trigger: '#prCreds', start: 'top 88%' } });
+    gsap.from('#prReviews .review', { opacity: 0, y: 36, duration: .85, stagger: .1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#prReviews', start: 'top 88%' } });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 07 — THE INVITATION   (the offer, the questions, the ask)
+     ========================================================================== -->
+<section class="ch ch-invite" id="invitation" data-chapter="7" data-chapter-name="The Invitation" data-theme="light">
+  <style>
+    .ch-invite{background:var(--bg)}
+    .ch-invite h2{font-size:var(--h2);max-width:18ch}
+    .ch-invite .lay{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:start;grid-template-columns:1fr}
+    .ch-invite .close{background:var(--ink-950);color:#fff;border-radius:var(--radius-lg);
+      padding:clamp(2rem,5vw,4rem);text-align:center;display:grid;gap:1rem;justify-items:center;
+      margin-top:clamp(2.5rem,5vw,4.5rem)}
+    .ch-invite .close h2{color:#fff;max-width:20ch;margin-inline:auto}
+    .ch-invite .close p{color:rgba(255,255,255,.72);max-width:46ch}
+    .ch-invite .close .addr{font-size:.85rem;color:rgba(255,255,255,.5)}
+    @media(min-width:980px){ .ch-invite .lay{grid-template-columns:.85fr 1.15fr} }
+  </style>
+
+  <div class="wrap pad">
+    <div class="chapter-tag"><i></i><span class="label">Chapter 07 &middot; The Invitation</span></div>
+
+    <div class="lay">
       <!--
         OPEN QUESTION 1 (docs/project-overview.md): Arvada publishes no veneers-specific
         offer. Rather than invent a discount for a real dental practice, this block runs
         the free consultation that IS published. If Brandklout supplies a veneers offer,
         swap the contents of [data-offer] and nothing else changes.
       -->
-      <div class="offer" data-offer="veneers-consultation" data-reveal>
+      <div class="offer" data-offer="veneers-consultation" data-rv>
         <p class="offer__label">Your first step</p>
         <span class="offer__price">Free</span>
-        <p class="h3 mt-sm" style="color:#5a4426">Smile evaluation with Dr. Bennett</p>
-        <ul class="offer__includes" data-stagger="70">
+        <p class="h3">Smile evaluation with Dr. Bennett</p>
+        <ul class="checks mt-s">
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A look at what is actually achievable for your teeth</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>An honest answer on whether veneers are the right treatment</li>
           <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>A written plan and price before you commit to anything</li>
         </ul>
-        <a class="btn btn--offer btn--lg" href="#evaluation">Book my smile evaluation</a>
+        <a class="btn btn--offer btn--lg magnetic mt-s" href="#evaluation"><span>Book my smile evaluation</span></a>
         <!-- Named finance partners removed 2026-08-06 — unconfirmed. See Open Question 10. -->
-        <p class="offer__terms">Veneer fees depend on the number of teeth treated and are quoted in writing after examination. Monthly payment plans are available; HMO and Medicaid plans are not accepted.</p>
+        <p class="offer__terms">Veneer fees depend on the number of teeth treated and are quoted in writing
+          after examination. Monthly payment plans are available; HMO and Medicaid plans are not accepted.</p>
       </div>
-    </div>
-  </section>
 
-  <!-- ============ DOCTOR ============ -->
-  <section class="section band-paper">
-    <div class="wrap">
-      <div class="doctor">
-        <figure class="doctor__photo" data-reveal style="margin:0">
-          <img src="../_shared/assets/dr_bennett-square-close.jpg.webp" alt="Dr. Gregory Bennett, DDS, cosmetic and implant dentist at Arvada Dental Center" loading="lazy">
-        </figure>
-        <div data-reveal data-delay="1">
-          <p class="eyebrow">Who designs your smile</p>
-          <h2 class="display" data-split="lines">Dr. Gregory Bennett, DDS</h2>
-          <p class="mt-sm">Cosmetic work is as much artistic as technical, and Dr. Bennett has spent nearly twenty
-            years refining both. He has designed countless smiles at the practice, blending advanced technology with
-            the judgement that decides how a tooth should be shaped for a particular face.</p>
-          <ul class="creds">
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Doctorate of Dental Surgery, University of Iowa, 2001</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Cosmetic dentistry, smile makeovers and full-mouth rehabilitation</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Laser gum surgery for combined smile makeovers</li>
-            <li><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>Board certified to administer IV sedation</li>
-          </ul>
+      <div>
+        <h2 class="h2 mb-l" id="faqTitle">Before you commit</h2>
+        <div class="faq">
+          <div class="faq__item">
+            <h3><button class="faq__q" aria-controls="vq1" aria-expanded="false">How many visits does it take?</button></h3>
+            <div class="faq__a" id="vq1"><div><p>As few as two. The first prepares the teeth and settles the design; the second fits the finished veneers.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__q" aria-controls="vq2" aria-expanded="false">Will they look obviously fake?</button></h3>
+            <div class="faq__a" id="vq2"><div><p>That is a design question rather than a materials one. The practice designs each case against your facial features, skin tone and gum line — which is exactly why the shade, shape and proportion are decided with you rather than off a chart.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__q" aria-controls="vq3" aria-expanded="false">Is enamel really removed?</button></h3>
+            <div class="faq__a" id="vq3"><div><p>Yes — a small portion from the front of each treated tooth, so the veneer sits flush rather than proud. It is not reversible, which is why the candidacy checks above happen first.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__q" aria-controls="vq6" aria-expanded="false">What's the difference between porcelain veneers and composite bonding?</button></h3>
+            <div class="faq__a" id="vq6"><div><p>Bonding is resin shaped onto the tooth in the chair — quicker and cheaper, but more opaque, more prone to staining, and shorter-lived. Porcelain is made to fit you and holds its colour. For a single small chip, bonding is often the sensible answer; for a smile you want to stop thinking about, it usually isn't. See the comparison above.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__q" aria-controls="vq4" aria-expanded="false">What if I want straighter teeth, not covered ones?</button></h3>
+            <div class="faq__a" id="vq4"><div><p>Then say so at the evaluation. The practice offers Invisalign&reg; and Six Month Smiles, and for misalignment those are usually the better answer.</p></div></div>
+          </div>
+          <div class="faq__item">
+            <h3><button class="faq__q" aria-controls="vq5" aria-expanded="false">What will it cost?</button></h3>
+            <div class="faq__a" id="vq5"><div><p>It depends entirely on how many teeth are treated, so the practice quotes in writing after examining you rather than publishing a per-tooth figure. Monthly payment plans are available if you would rather spread the cost.</p></div></div>
+          </div>
         </div>
       </div>
     </div>
-  </section>
 
-  <!-- ============ PROOF ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap">
-      <div class="center mb-lg" data-reveal>
-        <p class="eyebrow eyebrow--center">What patients say</p>
-        <h2 class="display" data-split="lines">In our patients' own words</h2>
+    <div class="close" data-rv>
+      <p class="eyebrow">Next step</p>
+      <h2 class="h2" id="closeTitle">Start with a conversation</h2>
+      <p>Bring the photo you keep avoiding. Dr. Bennett will tell you what veneers can and cannot do for it.</p>
+      <div class="btn-row center mt">
+        <a class="btn btn--primary btn--lg magnetic" href="#evaluation"><span>Book my smile evaluation</span></a>
+        <a class="btn btn--ghost btn--lg tel magnetic" href="tel:+13034217611"><span>(303) 421-7611</span></a>
       </div>
-      <div class="grid grid--3" data-stagger="90">
-        <div class="review" data-reveal>
-          <blockquote>Top percentile in terms of quality, technology and the atmosphere! The folks at Arvada Dental Center were down to earth and welcoming</blockquote>
-          <p class="review__who">Jon Jon<br><span class="review__src">Google review</span></p>
-        </div>
-        <div class="review" data-reveal data-delay="1">
-          <blockquote>Top notch in every regard. Everyone is fantastic and the office is beyond reproach. 10/10 recommend.</blockquote>
-          <p class="review__who">ryan syme<br><span class="review__src">Google review</span></p>
-        </div>
-        <div class="review" data-reveal data-delay="2">
-          <blockquote>Made me feel so comfortable. Great pricing. Friendly staff</blockquote>
-          <p class="review__who">Dorothy Padgett<br><span class="review__src">Google review</span></p>
-        </div>
-      </div>
+      <p class="addr">6695 Wadsworth Blvd, Arvada, CO 80003 &middot; Monday to Friday, 8am to 5pm</p>
     </div>
-  </section>
+  </div>
 
-  <!-- ============ FAQ ============ -->
-  <section class="section band-base">
-    <div class="wrap-narrow">
-      <div class="mb-lg" data-reveal>
-        <p class="eyebrow">Questions</p>
-        <h2 class="display" data-split="lines">Before you commit</h2>
-      </div>
-      <div class="faq" data-reveal>
-        <div class="faq__item">
-          <h3><button class="faq__q" aria-controls="vq1" aria-expanded="false">How many visits does it take?</button></h3>
-          <div class="faq__a" id="vq1"><div><p>As few as two. The first prepares the teeth and settles the design; the second fits the finished veneers.</p></div></div>
-        </div>
-        <div class="faq__item">
-          <h3><button class="faq__q" aria-controls="vq2" aria-expanded="false">Will they look obviously fake?</button></h3>
-          <div class="faq__a" id="vq2"><div><p>That is a design question rather than a materials one. The practice designs each case against your facial features, skin tone and gum line — which is exactly why the shade, shape and proportion are decided with you rather than off a chart.</p></div></div>
-        </div>
-        <div class="faq__item">
-          <h3><button class="faq__q" aria-controls="vq3" aria-expanded="false">Is enamel really removed?</button></h3>
-          <div class="faq__a" id="vq3"><div><p>Yes — a small portion from the front of each treated tooth, so the veneer sits flush rather than proud. It is not reversible, which is why the candidacy checks above happen first.</p></div></div>
-        </div>
-        <div class="faq__item">
-          <h3><button class="faq__q" aria-controls="vq6" aria-expanded="false">What's the difference between porcelain veneers and composite bonding?</button></h3>
-          <div class="faq__a" id="vq6"><div><p>Bonding is resin shaped onto the tooth in the chair — quicker and cheaper, but more opaque, more prone to staining, and shorter-lived. Porcelain is made to fit you and holds its colour. For a single small chip, bonding is often the sensible answer; for a smile you want to stop thinking about, it usually isn't. See the comparison above.</p></div></div>
-        </div>
-        <div class="faq__item">
-          <h3><button class="faq__q" aria-controls="vq4" aria-expanded="false">What if I want straighter teeth, not covered ones?</button></h3>
-          <div class="faq__a" id="vq4"><div><p>Then say so at the evaluation. The practice offers Invisalign® and Six Month Smiles, and for misalignment those are usually the better answer.</p></div></div>
-        </div>
-        <div class="faq__item">
-          <h3><button class="faq__q" aria-controls="vq5" aria-expanded="false">What will it cost?</button></h3>
-          <div class="faq__a" id="vq5"><div><p>It depends entirely on how many teeth are treated, so the practice quotes in writing after examining you rather than publishing a per-tooth figure. Monthly payment plans are available if you would rather spread the cost.</p></div></div>
-        </div>
-      </div>
-    </div>
-  </section>
+  <script>
+  WZ.add(function (W) {
+    W.headline(document.getElementById('faqTitle'), { start: 'top 86%' });
+    if (W.reduced) return;
+    gsap.from('#invitation .faq__item', { opacity: 0, x: -20, duration: .6, stagger: .07,
+      ease: 'power2.out', scrollTrigger: { trigger: '#invitation .faq', start: 'top 86%' } });
+  });
+  </script>
+</section>
 
-  <!-- ============ CLOSE ============ -->
-  <section class="section band-summit" style="--band-bg:var(--navy)">
-    <div class="wrap-narrow center" data-reveal>
-      <p class="eyebrow eyebrow--center">Next step</p>
-      <h2 class="display" data-split="lines">Start with a conversation</h2>
-      <p class="lede" style="margin-inline:auto">Bring the photo you keep avoiding. Dr. Bennett will tell you what veneers can and cannot do for it.</p>
-      <div class="btn-row btn-row--center mt">
-        <a class="btn btn--primary btn--lg" href="#evaluation">Book my smile evaluation</a>
-        <a class="btn btn--ghost btn--lg tel" href="tel:+13034217611">(303) 421-7611</a>
-      </div>
-      <p class="mt-sm" style="font-size:0.9rem;color:#9aa6b8">6695 Wadsworth Blvd, Arvada, CO 80003 · Monday to Friday, 8am to 5pm</p>
-    </div>
-  </section>
 </main>
 
 <footer class="ftr">
@@ -532,7 +862,7 @@
     <div class="ftr__grid">
       <div>
         <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
-        <p style="font-size:0.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
+        <p style="font-size:.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
         <h3>Visit</h3>
@@ -544,8 +874,8 @@
       </div>
       <div>
         <h3>This page</h3>
-        <p style="font-size:0.9rem">Porcelain veneers and smile makeovers for Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
-        <p style="font-size:0.9rem"><a href="../">All landing pages</a></p>
+        <p style="font-size:.9rem">Porcelain veneers and smile makeovers for Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
+        <p style="font-size:.9rem"><a href="../">All landing pages</a></p>
       </div>
     </div>
     <div class="ftr__legal">
@@ -554,12 +884,14 @@
     </div>
   </div>
 </footer>
-
-<div class="actionbar">
-  <a class="btn btn--ghost tel" href="tel:+13034217611">Call now</a>
-  <a class="btn btn--primary" href="#evaluation">Book evaluation</a>
+</div>
 </div>
 
-<script src="../_shared/brand.js"></script>
+<div class="actionbar">
+  <a class="btn btn--ghost tel" href="tel:+13034217611"><span>Call now</span></a>
+  <a class="btn btn--primary" href="#evaluation"><span>Book evaluation</span></a>
+</div>
+
+<script src="../_shared/journey-boot.js"></script>
 </body>
 </html>

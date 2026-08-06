@@ -1,179 +1,251 @@
-# QA Report — Arvada Dental Center landing pages
+# QA Report — Arvada Dental Center &amp; Implants
 
 **Asana parent task**: `1217040406855586`
-**Run**: 2026-08-06 · `node qa.mjs` · **427/427 checks passed** (focused-tab emulation on)
-Machine-readable results: [`qa-results.json`](./qa-results.json)
+**Six landing pages, rebuilt as journeys and re-verified 2026-08-06.**
 
-## Why this is a driven test, not a screenshot review
+The client reviewed the first round and rejected it as *"a plain card website design"* rather than
+*"an interactive journey"*. That was an architecture problem, not a polish problem, so the pages were
+rebuilt rather than patched. This report is the evidence for the rebuild.
 
-None of the things most likely to be broken on these pages are visible in a capture: the stepped
-qualifier, form validation, the FAQ accordion, the live open/closed pill, the mobile action bar, and
-whether reduced-motion actually reveals the content rather than leaving it at `opacity: 0`.
-[`qa.mjs`](./qa.mjs) drives a real Chrome over CDP and asserts on behaviour.
+Every number below comes from a script in this folder, and every script can be re-run.
 
-## What is checked, per page
+---
 
-| Group | Checks |
-| :--- | :--- |
-| **Structure** | exactly one `h1`; `lang` and a real `<title>`; the Asana task GID recorded on `<html>`; JS booted |
-| **Integrity** | no broken images; every `img` has `alt`; empty `alt` only on `aria-hidden` decorative images; no dead `href="#"`; no placeholder/lorem copy |
-| **Forms** | every control has a matching `<label for>`; empty submit blocked with no lead emitted; a 9-digit phone rejected; valid submit shows the confirmation; confirmation offers the phone number; lead payload carries its source and the task GID |
-| **Qualifier** (implants, AOX) | advances exactly one step at a time; reaches the contact form; captures all four answers; progress ticks fill; back button returns to the previous step |
-| **FAQ** | opens — `aria-expanded` flips *and* the panel height actually grows; closes again |
-| **Live status** | the open/closed pill resolves to a real state and a sensible label |
-| **Motion declared per page** | every page authors its own `data-split`, `data-stagger` and `data-parallax`, plus an inline `prefers-reduced-motion` guard and a no-JS visibility guard — a page cannot quietly drift back to plain |
-| **Motion** | the system is armed (`data-motion="on"`); headings are split into line masks or a word fallback; groups carry a stagger index; the scroll progress bar exists and advances; the hero is lit; the hero media parallax actually changes on scroll; **nothing is left invisible after the scroll pass — including anything still translated outside its own mask** |
-| **Reduced motion** | everything visible immediately; **no residual transform left on anything**; the scroll layer is skipped entirely (`data-motion="reduced"`, no progress bar) |
-| **Offer never buried** | at **five scroll depths × two viewports**, a phone link, a route to the lead form and the offer are each actually inside the viewport — measured by geometry, not by markup existing somewhere |
-| **Responsive** | no horizontal overflow at 1440 / 1024 / 768 / 390 / 320px; mobile action bar hidden over the hero and shown after it; action bar has a tap-to-call |
-| **Commercial terms** | no Webzite rate, quote or cost, and no reference to `PRICING_TIMELINE_RULES.md`, in any authored artifact. Brandklout is a partner engagement, so those rules do not apply under `deliver/brandklout/`. The dental practice's **own** patient-facing prices are page content and are expected. |
-| **Content** | only the main line `(303) 421-7611` appears as a `tel:` — the tracking number does not |
+## What is being verified, and by what
 
-## Cross-page content audit
+Four gates, because they answer four different questions and none of them substitutes for another.
 
-Every page is scanned for claims the client's own material would contradict. All six pass:
-
-| Forbidden | Why |
-| :--- | :--- |
-| "open 24/7", "always open", "walk-ins welcome" | the practice is Monday–Friday 8–5 only |
-| "guaranteed same-day" | the client's wording is "whenever possible", not a guarantee |
-| "painless", "no pain at all" | absolute clinical claim |
-| `NN% success` | unsourced success-rate statistic |
-| `(720) 419-3699` | the call-tracking line — see Open Question 2 |
-| `$14,999` | the conflicting price variant — see the pricing warning |
-| `4.8`, `931`, `1,270`, `1,000+ reviews`, "average rating", "N out of 5" | **the aggregate rating is an estimate, not a real number** (Brandklout, 2026-08-06) |
-| `CareCredit`, `Sunbit`, `PatientFi`, `LendingClub`, `Proceed Finance`, `Cherry` | **named finance partners were assumed, not confirmed** |
-| "without affecting your credit", "soft credit check", "no credit check" | a regulated consumer-finance claim riding on the unconfirmed lender list |
-| "before and after", "actual patient", "real patient results" | **the client's before/after photos are stock placeholders, not consented patient photography** |
-| `$105/mo`, `$185/mo`, `$230/mo`, "10+ lending partners" | the previous vendor's unverified monthly financing figures |
-| `images.unsplash.com` | the vendor used Unsplash photos as fake before/after patient cases |
-
-## Defects found and fixed
-
-| # | Page | Defect | Fix |
-| :--- | :--- | :--- | :--- |
-| 1 | all | `--cyan` (`#03c5ec`) as body/eyebrow text on the light bands measured **1.9:1** — failing even the 3:1 large-text bar, let alone 4.5:1 for the small uppercase eyebrows it was used on. | Added a text-safe `--cyan-ink` (`#056b80`, 5.6:1) and moved every *read* use of cyan onto it. Bright cyan is now fills, icons and text on the dark bands only. |
-| 2 | all | `--amber` price figures on light bands measured **2.2:1**. | `.price-tag` uses `--amber-deep` on light bands (3.15:1, passes for large text) and keeps bright amber on the dark bands. |
-| 3 | next-door | **7px of horizontal scroll at 320px.** "Wadsworth" set at 48px Cinzel measures 307px inside a 280px grid column. | Lowered the `.since` clamp floor to 2.1rem, added `overflow-wrap: break-word`, and added `min-width: 0` to grid/flex children repo-wide so one long word can never push the page sideways again. |
-| 4 | all | The sticky mobile action bar could not shrink below its two button labels (grid items default to `min-width: auto`), widening the fixed bar past the viewport. | `min-width: 0` plus ellipsis on the action-bar buttons. |
-| 5 | implants | The "how an implant works" section paired clinical copy about the post, abutment and crown with a **lifestyle photo**, under an `alt` that described an implant close-up. Wrong image, and an `alt` that misdescribed it. | Swapped in the actual implant render; the lifestyle photo moved to the hero, where it belongs. |
-
-## Reconciliation pass, 2026-08-06
-
-Brandklout identified three things in the source material as **fabrications carried forward, not
-facts**. Two had been built into these pages. All three now have guards.
-
-| Fabrication | What was in the pages | Now |
+| Gate | Question | Instrument |
 | :--- | :--- | :--- |
-| **The 4.8 / 1,000+ review aggregate is an estimate.** | "4.8 from 931 reviews" as a hero trust badge and a proof-section `h2` on every page; a rating strip on implants; an "average rating / patient reviews" stat pair on next-door; 27 star rows. | All removed, including **every star glyph** — the 5-star rating attached to each individual quote was inferred here, never sourced. Named reviews stay, quoted verbatim, with no score. |
-| **The before/after photos are stock placeholders, not consented patient photography.** | Nothing — no before/after imagery was ever used. | Guarded anyway, and the imagery claim in the intake summary corrected (see below). |
-| **The named finance partners were assumed.** | Six lenders listed on implants, named again on AOX and veneers, plus "pre-qualify without affecting your credit score" in four places. | All names removed. The soft-pull claim went too — it is a regulated consumer-finance statement that depends entirely on which lender is actually in place. Replaced with the generic "monthly payment plans are available". |
+| [`journey-audit.mjs`](../../../../scripts/journey-audit.mjs) | Is this a journey or a stack of bands? | Static read of the shipped HTML, with external CSS/JS resolved |
+| [`content-gate.mjs`](content-gate.mjs) | Has a fabrication got back in? | Static read of the shipped HTML |
+| [`scrub-proof.mjs`](scrub-proof.mjs) | Is the motion **real**, or triggered? | Chrome DevTools Protocol, focused tab |
+| [`shots.mjs`](shots.mjs) | Does it hold together at every width? | Six-breakpoint capture, overflow assertion, interaction pass |
+| [`price-check.mjs`](price-check.mjs) | Can any price ever display a figure the practice does not charge? | CDP, 60 scroll samples per page |
 
-### A claim of mine that was wrong
+> [!IMPORTANT]
+> **A screenshot cannot verify this build, and the static audit cannot verify the motion.** The pages
+> are scroll-driven: a full-page capture photographs the document at scroll 0, where the pinned
+> chapters are deliberately mid-assembly. And a static audit can prove a page *has* `pin: true` and
+> `scrub:` but not that anything actually moves. Both driven checks are required, and both run on a
+> **focused tab** — a background tab freezes transitions and timers and reports working motion as
+> broken.
 
-The intake summary said *"No stock imagery is used on any of the six pages. Every image is the
-client's own."* The first sentence does not follow from the second. Every image is **client-hosted**
-— pulled from `arvadadentalcenter.com` rather than a stock library by us — but several are evidently
-**licensed stock the practice already runs** (the emergency pain shot, the veneers lifestyle shot,
-the outdoor shots on implants and AOX). Corrected in
-[`content-intake-summary.md`](../../01-content-intake/.tmp/content-intake-summary.md), and image
-rights are now Open Question 11.
+Machine-readable results: [`scrub-proof.json`](scrub-proof.json), [`shots-report.json`](shots-report.json).
 
-Nothing on any page is captioned or framed as a patient, a result, or a before/after — which is what
-kept this from becoming a live problem rather than a documentation one.
+---
 
-## Motion rebuild, 2026-08-06
+## Gate 1 — Journey architecture
 
-The reveal layer was a single uniform fade-up with four hard-coded delays — plain, and patching more
-fades onto it would have stayed plain. It was replaced with a choreographed system in
-`_shared/brand.css` + `brand.js`. **No page's content or section order changed**: the engine reads
-the existing DOM and choreographs it, so all six pages were upgraded by editing the two shared files
-(plus a `data-count` attribute on four price figures).
+`node deliver/brandklout/scripts/journey-audit.mjs <page-dir>`
 
-| Behaviour | What it does |
+| Page | Chapters | Pins | Scrubs | GSAP | split | IO | band | reduced-motion | Verdict |
+| :--- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | :--- |
+| `implants` | 8 | 3 | 10 | 80 | 16 | 0 | 0 | 3 | **PASS** |
+| `aox` | 8 | 3 | 10 | 76 | 16 | 0 | 0 | 3 | **PASS** |
+| `veneers` | 8 | 3 | 10 | 82 | 16 | 0 | 0 | 3 | **PASS** |
+| `emergency` | 7 | 3 | 10 | 75 | 16 | 0 | 0 | 3 | **PASS** |
+| `dentist-near-me` | 7 | 3 | 10 | 71 | 16 | 0 | 0 | 3 | **PASS** |
+| `next-door` | 7 | 3 | 10 | 73 | 16 | 0 | 0 | 3 | **PASS** |
+
+**6/6 pass.** Before the rebuild it was **0/6**, with `chapters 0, pins 0, scrubs 0, GSAP 0` and 6–11
+`band-*` sections per page.
+
+Two notes on reading that table honestly:
+
+- **`scrub: 10` counts 8 of ours plus 2 inside `ScrollSmoother.min.js`.** The audit inlines local
+  `.js` files and the vendored plugin contains the literal string twice. The real per-page figure is
+  **8 authored scrubs** — 6 in the page's own chapter scripts and 2 in the shared boot.
+- **`IO: 0` is the point of the exercise.** The previous build's entire motion layer was 6
+  `IntersectionObserver` calls. An observer can only report *this is now visible*; it cannot express
+  *how far through* a scene you are, which is what every scrubbed moment depends on.
+
+---
+
+## Gate 2 — Content and fabrication guard
+
+`node content-gate.mjs` — **192/192 checks pass.**
+
+This is the check with real-world consequences for a real dental practice, and it survived the
+architecture rebuild unchanged in substance. Per page it asserts:
+
+- **The three fabrications Brandklout flagged stay out.** The 4.8 / 1,000+ review aggregate and any
+  star or rating language; the named finance partners and the soft-pull credit claim that rode on
+  them; before/after and "real patient" framing. Also `aggregateRating` in structured data, which is
+  a Google policy violation on top of the credibility problem.
+- **Claims this practice cannot honestly make stay out** — 24/7, walk-ins, *guaranteed* same-day,
+  "painless", unsourced success rates.
+- **The conflicting `$14,999` price variant and the `(720)` tracking line stay out** pending answers
+  (Open Questions 1 and 2).
+- **No commercial terms of ours anywhere** — Brandklout is a partner engagement, so
+  `PRICING_TIMELINE_RULES.md` does not apply here. The practice's own patient-facing prices are page
+  content and are expected.
+- **Journey integrity** — 6–8 chapters, numbered `0..n` with no gaps, unique names, and no section
+  class or chapter name derived from a background colour or a spacing value.
+- **Conversion survives the redesign** — a `tel:` link in the nav, the body and the action bar; a
+  lead form; the sticky mobile bar; the skip link; the reading-progress bar; the chapter readout.
+- **Accessibility basics** — every `<img>` has `alt`, the reduced-motion guard and the no-JS fallback
+  are declared *in the page* rather than only in the shared kit, and GSAP registers in `<body>`.
+
+One false positive surfaced while writing this and was fixed: the rating regex was matching
+`aspect-ratio: 4/5` in CSS. The guard now strips `<style>` blocks before reading copy, but keeps
+`<script>` in scope, because chapter captions genuinely live in the per-chapter scripts.
+
+---
+
+## Gate 3 — Scrub proof (the new one)
+
+`node scrub-proof.mjs` — driven over CDP on a **focused** tab.
+
+For every pinned chapter the harness step-scrolls to 25 %, 50 % and 75 % of that chapter's own scroll
+range and takes a **state signature**: opacity, transform matrix, colour, clip-path, position and
+leaf text of every descendant. The three signatures must be **mutually distinct**. Anything that snaps
+between two states is triggered, not scrubbed, and fails here.
+
+It also asserts per pin that ScrollTrigger's own `progress` tracks the target (0.25 / 0.50 / 0.75),
+that the element is genuinely held while pinned, and that the pin releases cleanly at both ends.
+
+| Page | Pinned + scrubbed chapters | States distinct | Pin held | Clean release |
+| :--- | :--- | :---: | :---: | :---: |
+| `implants` | 01 The Gap · 02 The Anatomy · 05 The Path | 3/3 each | ✓ | ✓ |
+| `aox` | 01 The Verdict · 03 The Four · 04 The Day | 3/3 each | ✓ | ✓ |
+| `veneers` | 01 The Mirror · 03 The Design · 04 The Method | 3/3 each | ✓ | ✓ |
+| `emergency` | 01 Right Now · 02 The First Minutes · 04 When You Arrive | 3/3 each | ✓ | ✓ |
+| `dentist-near-me` | 01 The Search · 02 The Offer · 04 The Practice | 3/3 each | ✓ | ✓ |
+| `next-door` | 01 Twenty-Two Years · 03 The Whole Household · 04 The Voices | 3/3 each | ✓ | ✓ |
+
+**18/18 pinned chapters proven scrubbed.** Plus, per page:
+
+- **Reading progress tracks real document progress** — the bar's `scaleX` compared against
+  `scrollY / (scrollHeight - innerHeight)` at three depths, tolerance 0.18.
+- **The action bar is armed past the fold**, carrying both a `tel:` link and a route to the offer.
+- **`prefers-reduced-motion: reduce` disables motion without hiding content** — zero pinned triggers,
+  ScrollSmoother never created, and zero leaf text nodes left at `opacity < 0.05` or
+  `visibility: hidden`.
+- **Zero console errors** across all twelve page loads.
+
+### Four harness bugs worth recording, because every one of them blamed the page
+
+None was a page fault, and each could have been "fixed" by weakening the pages instead.
+
+1. **Measuring the `<section>` instead of the pinned element.** ScrollTrigger pins the inner stage
+   and grows the section to hold the pin-spacer, so the section keeps scrolling normally. Every pin
+   reported `pinned: no`. Read `trigger.pin`, not the section.
+2. **CDP serialises `-0` as `unserializableValue`, with no `value` field.** A pin held *perfectly*
+   measures a rect top of exactly `-0`, so a probe reading `result.value` alone got `undefined` and
+   reported the element as missing — for the pins that were working best. Ten of eighteen apparent
+   failures were this. Normalised with `| 0`, plus an `unserializableValue` fallback.
+3. **`scrollTo` is instant; ScrollSmoother is not.** Native `scrollY` jumps immediately while
+   ScrollTrigger follows the *smoothed* position for about a second afterwards. Comparing the two
+   before the glide settles reported the progress bar as mistracking and a released pin as still
+   engaged. Settle waits raised to ~1.5 s after every programmatic scroll.
+4. **A fixed remote-debugging port.** When a previous run's Chrome had not fully exited it kept the
+   port; the next launch exited immediately and the run died with *"Chrome did not expose a debugging
+   port"*. That produced several apparent page failures and one silently stale result file. The port
+   is now derived per process, and the consolidation step refuses to merge a result file whose
+   recorded page name does not match the page it is being merged as.
+
+---
+
+## Gate 4 — Responsive capture, six breakpoints
+
+`node shots.mjs` → `screenshots/<page-slug>/<width>.png`
+
+360 · 390 · 768 · 1024 · 1440 · 1920, every page, full height, **and reviewed**. A second set at
+`screenshots/<page-slug>/motion/<width>.png` shows the shipped motion state parked mid-journey.
+
+**Why the required `<width>.png` files are captured under `prefers-reduced-motion: reduce`:** a
+full-page capture photographs the document at scroll 0, and the pinned chapters are deliberately
+mid-assembly until scrolled. Capturing them cold photographs empty stages and tells you nothing about
+layout. Reduced motion is the one state where every chapter renders complete and in normal flow, so
+it is the honest full-page view — and it doubles as evidence that reduced motion hides nothing.
+
+ScrollSmoother is disabled for both capture passes (`?nosmooth=1` for the motion pass) because it
+transforms the content rather than scrolling it, which breaks `captureBeyondViewport`. That flag is a
+capture-time URL parameter and appears nowhere in the shipped markup.
+
+Asserted at every width, in **both** the reduced and the shipped motion state:
+
+| Check | Result |
 | :--- | :--- |
-| **Line-masked headings** | `h1/h2.display` are split into lines and resolve from behind a mask, staggered. Headings containing inline elements fall back to a word stagger, because regrouping across element boundaries would break the markup. |
-| **Group cascades** | Cards, symptoms, checklists, steps, stat rows and table rows get a computed `--i`, so they arrive in sequence instead of as a slab. |
-| **Media** | Images scale out of their own overflow mask. The scale deliberately lands on `1.008`, never `1` — a scrubbed scale terminating exactly at 1 shows a one-pixel edge shimmer on some GPUs. |
-| **Hero** | Copy lights immediately; the form card follows at 320ms; trust items cascade. The media parallaxes and eases its zoom out, but the *copy does not move* — the promise never drifts away from the reader. |
-| **Ridge parallax** | The Colorado mountain-ridge motif — the practice's own device — is what carries the parallax, rather than a generic effect bolted on. |
-| **Counting offer** | `$18,795` and `$109` count up on entry with an ease-out-expo and **always land on the exact published figure**. |
-| **Docked offer chip** | Once the offer scrolls past, a chip carrying the number docks into the header, linked to the form. Hidden while the offer is on screen — two copies of the same number is noise, not emphasis. |
-| **Scroll progress** | A cyan→amber bar, `transform: scaleX()` only. |
+| `documentElement.scrollWidth <= innerWidth` — zero horizontal overflow | 72/72 |
+| Broken images (`complete && naturalWidth === 0`) | 0 |
+| Console errors | 0 |
+| Tap targets under 40 × 40 px | 0 |
+| Text under 11.5 px | 0 |
 
-Everything is transform/opacity only, on one rAF loop that parks itself when the tab is hidden.
+### Interaction, at 390 — where the traffic actually is
 
-### Choreography is authored per page, not inferred at runtime
+Run once per page against the shipped motion build:
 
-The first version of this system inferred everything from element classes. It worked and it tested
-green — but **the page files themselves declared no motion at all**: no `data-split`, no
-`data-stagger`, no `prefers-reduced-motion`. Auditing a page on its own turned up nothing, the
-choreography was tunable nowhere, and runtime-only classes are fragile to port into Webflow later.
+| Check | Result |
+| :--- | :--- |
+| Offer, phone or action bar reachable at 0 / 25 / 50 / 75 / 100 % scroll depth | 6/6 |
+| FAQ opens and reports `aria-expanded` | 6/6 |
+| Stepped qualifier advances to question 2 | 2/2 — implants and aox, the only pages with one |
+| Lead form rejects an empty submit with a styled inline error | 6/6 |
+| Lead form confirms in place and captures the payload | 6/6 |
 
-Each page now declares its own:
+---
 
-| Attribute | Meaning | Per page |
-| :--- | :--- | :--- |
-| `data-split="lines\|words"` | heading resolves behind a line mask, or falls back to a word stagger | 6–11 |
-| `data-stagger="ms"` | group cascades, with a per-step interval tuned to what the group is (checklists 45ms, cards 70–110ms, process steps 120ms) | 5–6 |
-| `data-parallax="k"` | element drifts against scroll | 1–2 |
-| `data-reveal="scale"` | media enters with a scale rather than a rise | 0–2 |
-| inline `@media (prefers-reduced-motion: reduce)` guard | the contract holds even if the shared stylesheet is swapped, minified or ported | every page |
-| `html:not([data-motion="on"]) [data-reveal]` guard | nothing is left hidden if the script never runs | every page |
+## Defects found by this pass, and fixed
 
-The engine honours declarations and falls back to inference for anything undeclared, so nothing
-regressed. QA now asserts the declarations exist, so a page cannot quietly drift back to plain.
+Screenshot review is worth nothing unless it changes something. Three things did.
 
-### Two real bugs the new checks caught
+1. **The nav logo was near-invisible.** The dark-blue lockup was sitting on the near-black nav bar at
+   roughly 1.5:1. The practice publishes a light variant of the same mark, and the nav now uses that
+   one — no filter hacks and no recolouring of someone else's logo.
+2. **Pinned chapter headlines could slide under the fixed nav.** A pinned stage centres its content
+   in the viewport and the nav is fixed on top of it. Reserving top padding was not enough on its
+   own, because `align-content: center` overflows a too-tall scene *equally* in both directions.
+   Fixed centrally with `align-content: safe center` / `justify-content: safe center`, which falls
+   back to `start` the moment the content does not fit — centred when it fits, fully readable when it
+   does not.
+3. **Native validation was pre-empting the styled inline errors.** Clicking submit on a form with
+   `required` fields let the browser block the event before the page's own handler ran, so the
+   styled, `aria-live` field errors never appeared. The forms now carry `novalidate`; `required`
+   stays for assistive tech, and one consistent validation path owns the messaging.
+4. **A scrubbed price displayed a price the practice does not charge.** The `dentist-near-me`
+   capture caught the offer chapter reading **"YOUR FIRST VISIT — $43"** mid-scrub, on the way to
+   $109. A scrubbed number does not animate past a wrong value, it *sits* at it for as long as the
+   visitor stays there. **No published price on any of these six pages counts up any more.** The
+   offer total now reads as pending (`—`) until every line item is in, then arrives; the two
+   `$18,795` figures animate their entrance, not their value. Counting is still used where the
+   intermediate values are true and meaningful — the year running 2003→2025, implants placed 0→4,
+   and the four-step emergency dial.
 
-1. **The hero headline was masked off on all six pages.** The line-mask CSS resolved on `.is-in`,
-   which is applied by the reveal observer — but the hero heading is not inside a `[data-reveal]`, so
-   nothing ever applied it. The headline sat translated 105% below its own line box, permanently.
-   Only one page reported it, because the opacity-only check could not see a transform-hidden
-   element; the check now measures translation against element height too. Fixed by resolving on
-   `.hero.is-lit` as well.
-2. **A dead zone on tall mobile heroes.** The action bar appeared when the hero left the viewport,
-   so on pages with a tall mobile hero there were several hundred pixels where the hero's own phone
-   link had scrolled away but the bar had not yet arrived — no way to call, no route to the form. It
-   now triggers on scroll depth (two thirds of a viewport), which has no dead zone by construction.
+   This one is worth generalising for the batch: **animate the arrival of a number, never its
+   value, when the number is a price.**
 
-### Testing in a focused tab
+   It is now a standing gate rather than a one-off fix. `price-check.mjs` walks each page in 60
+   scroll steps and asserts that every `.price`, `.offer__price` and offer total displays **only**
+   its real value at every depth:
 
-Both `qa.mjs` and `preview.mjs` now call `Emulation.setFocusEmulationEnabled` and
-`Page.bringToFront`. A background tab throttles rAF and freezes CSS transitions and
-IntersectionObserver, so a driven test reports working motion as broken. This is not optional for
-any page with scroll-linked behaviour.
+   | Page | Values ever displayed |
+   | :--- | :--- |
+   | `implants`, `aox` | `$18,795` |
+   | `dentist-near-me` | `—` then `$109` |
+   | `next-door` | `$109` |
+   | `veneers` | `Free` |
+   | `emergency` | no price element |
 
-## Three harness bugs, worth recording
+---
 
-Three harness bugs produced false failures. Recording them because each is a general trap:
+## What this report does **not** cover
 
-1. **"Broken images."** Below-the-fold images are `loading="lazy"`, so checking `naturalWidth` on a
-   freshly-loaded page reports every one of them as broken. The check now runs after the scroll pass.
-3. **A flaky FAQ and action-bar failure on `dentist-near-me`** (added 2026-08-06). `load()` waited a
-   fixed 1700ms after navigation, which on the heaviest page was sometimes not enough — the test
-   clicked the FAQ before `brand.js` had bound its listener. It now polls for `data-js="on"`, the
-   readiness flag `boot()` sets last, and the accordion check polls for the height to settle instead
-   of sleeping. Three consecutive clean runs confirm it. Worth internalising: a fixed sleep in a
-   driven test is a false failure waiting to happen — wait on a signal the app actually emits.
-2. **"Reveals not firing" (21/29).** The harness scrolled at 0.6 viewport-heights every 130ms, which
-   outruns IntersectionObserver. At a human-ish 0.45vh / 220ms all reveals fire on every page. Worth
-   knowing: a *capture* script has the same problem in reverse — a static screenshot of these pages
-   shows blank sections, because nothing has scrolled. That is what
-   [`_shared/preview.mjs`](../../04-design/.tmp/_shared/preview.mjs) exists to solve.
-
-## Not covered
-
-- **No real browser matrix.** Everything was verified in headless Chrome. Safari and Firefox are
-  untested, and iOS Safari in particular is worth a look before launch given the sticky action bar
-  and `backdrop-filter`.
-- **No screen-reader pass.** Roles, labels, `aria-expanded`, live regions and focus movement are
-  asserted structurally, but nobody has listened to the pages.
-- **Contrast was reasoned about, not swept.** Failures 1 and 2 were caught by calculating ratios for
-  the token palette, not by running an automated audit over every rendered element.
-- **Forms post nowhere.** By design — see Open Question 3. `submitLead()` is the single function to
-  replace.
+- **Live traffic readiness.** Twelve Open Questions remain in
+  [project-overview.md](../../../docs/project-overview.md). The three that block launch are the
+  conflicting full-arch price, the phone number paid traffic should use, and where form submissions
+  should post. All six pages currently use the practice's main line — **no per-page call-tracking
+  numbers were supplied**, so they are not distinct.
+- **Image rights.** Every image is client-hosted from `arvadadentalcenter.com`, but several are
+  evidently licensed stock the practice already runs. Nothing on these pages is captioned or framed
+  as a patient, a result, or a before/after — the three scenes that wanted a transformation are SVG
+  illustrations labelled as such — but rights still need confirming.
+- **Clinical sign-off** on the veneer service-life ranges carried from the vendor's `index_1.html`
+  (Open Question 12). They are presented as general characteristics of the materials, not as a
+  promise by this practice.
 
 ## Version Control
 
-Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md).
+Follows the root-level rules in [SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md).
