@@ -48,7 +48,10 @@
   --h3: clamp(1.2rem, 1.7vw, 1.55rem);
   --body-lg: clamp(1.05rem, 1.25vw, 1.24rem);
   --body: clamp(0.97rem, 1.05vw, 1.06rem);
-  --label: clamp(0.68rem, 0.78vw, 0.78rem);
+  /* Floor is 11.5px, not 10.9px. Uppercase tracked eyebrows are the smallest
+     type on the page and a phone is where they are read — below ~11px the
+     letter-spacing that makes them work starts costing legibility. */
+  --label: clamp(0.72rem, 0.78vw, 0.78rem);
 
   --gutter: clamp(1.25rem, 4vw, 4rem);
   --section: clamp(4.5rem, 8.5vw, 9rem);
@@ -136,6 +139,147 @@ button {
   width: var(--shell);
   margin-inline: auto;
 }
+
+/* ==========================================================================
+   CHAPTERS
+   Every section on every page is a named narrative beat, not a coloured band.
+   The class says what the beat DOES to the reader — .ch-loss, .ch-options,
+   .ch-invitation — never what colour it is. A class named for a background or
+   a spacing value means that section has not been designed yet.
+
+   Atmosphere is carried by data-theme on the chapter, so the arc can turn
+   dark and come back rather than alternating two tints forever.
+   ========================================================================== */
+.ch {
+  position: relative;
+  padding-block: var(--section);
+}
+.ch--tight {
+  padding-block: clamp(3rem, 5vw, 5rem);
+}
+/* A pinned chapter holds the viewport while its scene plays; it must be
+   exactly one screen tall or the pin start and end fight each other. */
+.ch--pin {
+  padding-block: 0;
+}
+.ch__pin {
+  min-height: 100svh;
+  display: grid;
+  align-content: center;
+  gap: clamp(1.25rem, 2.6vw, 2.25rem);
+  padding-block: clamp(3rem, 6vw, 5rem);
+  overflow: hidden;
+}
+/* Below the pin breakpoint the scene plays as the section passes instead of
+   holding the viewport, so a full-screen minimum is no longer buying anything
+   — it just leaves a screenful of dead space above and below short content on
+   exactly the devices with the least of it. */
+@media (max-width: 759px) {
+  .ch__pin {
+    min-height: 0;
+    padding-block: var(--section);
+  }
+}
+
+.ch[data-theme="paper"] {
+  background: var(--light);
+}
+.ch[data-theme="tint"] {
+  background: linear-gradient(180deg, var(--n-100), var(--white));
+}
+.ch[data-theme="dark"] {
+  background: var(--blue-deep);
+  color: rgba(255, 255, 255, 0.82);
+}
+.ch[data-theme="ink"] {
+  background: var(--blue-ink);
+  color: rgba(255, 255, 255, 0.82);
+}
+.ch[data-theme="dark"] h2,
+.ch[data-theme="dark"] h3,
+.ch[data-theme="ink"] h2,
+.ch[data-theme="ink"] h3 {
+  color: #fff;
+}
+.ch[data-theme="dark"] .label,
+.ch[data-theme="ink"] .label {
+  color: var(--blue-light);
+}
+.ch[data-theme="dark"] .lede,
+.ch[data-theme="ink"] .lede {
+  color: rgba(255, 255, 255, 0.78);
+}
+.ch[data-theme="dark"] .btn--ghost,
+.ch[data-theme="ink"] .btn--ghost {
+  color: #fff;
+}
+.ch[data-theme="dark"] .btn--ghost::before,
+.ch[data-theme="ink"] .btn--ghost::before {
+  background: #fff;
+}
+.ch[data-theme="dark"] .btn--ghost:hover,
+.ch[data-theme="ink"] .btn--ghost:hover {
+  color: var(--blue-deep);
+}
+.ch[data-theme="dark"] .checklist li,
+.ch[data-theme="ink"] .checklist li {
+  color: rgba(255, 255, 255, 0.82);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.ch[data-theme="dark"] .checklist svg,
+.ch[data-theme="ink"] .checklist svg {
+  color: var(--blue-light);
+}
+
+/* ---------- chapter tag: "Chapter 03 · The Options" ---------- */
+/* Numbering the journey is what stops eight scenes reading as eight sections.
+   The rule draws itself in as the tag arrives. */
+.chapter-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: var(--label);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: var(--blue);
+  margin-bottom: 1rem;
+}
+.chapter-tag i {
+  display: block;
+  width: clamp(24px, 4vw, 52px);
+  height: 1px;
+  background: currentColor;
+  flex: none;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+.chapter-tag b {
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+}
+.chapter-tag em {
+  font-style: normal;
+  color: var(--n-500);
+  font-weight: 600;
+}
+.ch[data-theme="dark"] .chapter-tag,
+.ch[data-theme="ink"] .chapter-tag {
+  color: var(--blue-light);
+}
+.ch[data-theme="dark"] .chapter-tag em,
+.ch[data-theme="ink"] .chapter-tag em {
+  color: rgba(255, 255, 255, 0.6);
+}
+.chapter-tag--center {
+  justify-content: center;
+}
+/* Without GSAP the rule would sit at scaleX(0) forever. */
+html:not(.wz-ready) .chapter-tag i,
+.wz-static .chapter-tag i {
+  transform: none;
+}
+
 .section {
   padding-block: var(--section);
   position: relative;
@@ -391,6 +535,65 @@ button {
   background: linear-gradient(90deg, var(--blue), var(--blue-light));
   transform: scaleX(0);
   transform-origin: 0 50%;
+}
+
+/* ---------- chapter readout ---------- */
+/* "03 · The Options ————" in the middle of the header. It answers "where am I
+   in this" without the visitor having to scroll back. Appears once the journey
+   has actually started; over the hero it would just be noise. */
+.header__chapter {
+  display: none;
+  align-items: center;
+  gap: 0.7rem;
+  font-size: var(--label);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  font-weight: 700;
+  color: rgba(255, 255, 255, 0.72);
+  white-space: nowrap;
+  opacity: 0;
+  transition: opacity 0.5s var(--ease), color 0.45s var(--ease);
+  pointer-events: none;
+}
+.header__chapter.is-on {
+  opacity: 1;
+}
+.header.is-stuck .header__chapter {
+  color: var(--n-500);
+}
+.header__chapter b {
+  color: var(--blue-light);
+  font-variant-numeric: tabular-nums;
+  font-weight: 800;
+}
+.header.is-stuck .header__chapter b {
+  color: var(--blue);
+}
+.header__chapter i {
+  display: block;
+  width: clamp(40px, 6vw, 84px);
+  height: 1px;
+  background: currentColor;
+  opacity: 0.35;
+  position: relative;
+}
+.header__chapter i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--blue);
+  transform: scaleX(var(--p, 0));
+  transform-origin: 0 50%;
+  transition: transform 0.55s var(--ease);
+}
+@media (min-width: 1080px) {
+  .header__chapter { display: flex; }
+}
+/* A header CTA that wraps to two lines grows the fixed bar and crowds the
+   logo. The short labels above handle the long copy; this stops even a short
+   label breaking at 360px. */
+.header .btn {
+  white-space: nowrap;
 }
 @media (max-width: 800px) {
   .header__phone .header__phone-text {

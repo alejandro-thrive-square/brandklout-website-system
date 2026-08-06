@@ -36,12 +36,26 @@ window.WZ = (function () {
     }
   }
 
+  /* Per-word split, for statements that are written out as you scroll rather
+     than revealed all at once. Returns null if SplitText is missing, and every
+     caller must cope with that — the words are already in the markup. */
+  function splitWords(el) {
+    if (!window.SplitText) return null;
+    try {
+      var opts = { type: 'words', wordsClass: 'wz-word' };
+      return SplitText.create ? SplitText.create(el, opts) : new SplitText(el, opts);
+    } catch (e) {
+      return null;
+    }
+  }
+
   return {
     reduced: reduced,
     fine: fine,
     ok: ok,
     smoother: null,
     splitLines: splitLines,
+    splitWords: splitWords,
     add: function (fn) { flushed ? this.run(fn) : q.push(fn); },
     run: function (fn) { try { fn(this); } catch (e) { console.error('[WZ]', e); } },
     flush: function () {
@@ -199,6 +213,59 @@ WZ.add(function (W) {
   if (bar) {
     gsap.to(bar, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.25 } });
   }
+
+  /* ---------- chapter tags arrive ---------------------------------------- */
+  /* The rule draws itself out from the number. Small, but it is what makes a
+     tag read as a chapter heading rather than a caption. */
+  gsap.utils.toArray('.chapter-tag').forEach(function (tag) {
+    gsap.fromTo(
+      tag.querySelector('i'),
+      { scaleX: 0 },
+      {
+        scaleX: 1,
+        duration: 0.9,
+        ease: 'power3.out',
+        scrollTrigger: { trigger: tag, start: 'top 92%' },
+      }
+    );
+  });
+
+  /* ---------- chapter readout: where am I in the journey ----------------- */
+  /* Continuity device. Without it, eight scenes still read as eight sections;
+     with it the page keeps telling you which beat you are in and how far
+     through the arc that is. */
+  var chapters = gsap.utils.toArray('section[data-chapter]');
+  var num = document.getElementById('chNum'),
+    name = document.getElementById('chName'),
+    chBar = document.getElementById('chBar'),
+    readout = document.getElementById('chapterReadout');
+
+  if (chapters.length && readout) {
+    var last = chapters.length - 1;
+    chapters.forEach(function (sec) {
+      var i = parseInt(sec.getAttribute('data-chapter'), 10);
+      var label = sec.getAttribute('data-chapter-name');
+      var activate = function () {
+        if (num) num.textContent = String(i).padStart(2, '0');
+        if (name) name.textContent = label;
+        if (chBar) chBar.style.setProperty('--p', last ? (i / last).toFixed(3) : '1');
+      };
+      ScrollTrigger.create({
+        trigger: sec,
+        start: 'top 55%',
+        end: 'bottom 45%',
+        onEnter: activate,
+        onEnterBack: activate,
+      });
+    });
+    /* Hidden until the visitor has actually entered the journey — on the hero
+       it would be noise. */
+    ScrollTrigger.create({
+      start: 220,
+      end: 'max',
+      onToggle: function (self) { readout.classList.toggle('is-on', self.isActive); },
+    });
+  }
 });
 
 /* ==========================================================================
@@ -306,13 +373,43 @@ WZ.add(function (W) {
    FLUSH — smoother first, then every queued section, then refresh.
    Runs last in <body>.
    ========================================================================== */
+/* Entry point, called at the very end of <body>.
+
+   Setup waits for the webfont, and that wait is not cosmetic. SplitText runs
+   with autoSplit, so when Montserrat swaps in it re-splits every headline and
+   replaces those nodes. If a pinned chapter has already been built, its
+   heading is living inside a ScrollTrigger pin-spacer at that moment — and the
+   next refresh throws `NotFoundError: insertBefore … node is no longer a child
+   of this node` while unwrapping it. The throw lands between the revert and
+   the re-apply, so the spacers are gone, the triggers keep their old start/end
+   values, and the document is silently thousands of pixels shorter than
+   ScrollTrigger believes. Every scrollTo then lands in the wrong chapter and
+   the pins look like they never scrub. Splitting before anything is pinned
+   removes the race entirely.
+
+   The race is against a timeout, not just the promise: a font that never
+   arrives must not cost the visitor the whole page. */
 function wzFlush() {
+  var ready =
+    document.fonts && document.fonts.ready
+      ? Promise.race([
+          document.fonts.ready,
+          new Promise(function (r) { setTimeout(r, 1800); }),
+        ])
+      : Promise.resolve();
+  ready.then(wzBoot, wzBoot);
+}
+
+function wzBoot() {
   var W = window.WZ;
   document.documentElement.classList.add('wz-ready');
 
   if (!W || !W.ok) {
     /* GSAP missing: paint everything so the page is still readable and the
        offer is still reachable. */
+    /* Chapter-tag rules and pinned scenes are pre-staged in CSS at their
+       "not yet" value; without motion nothing would ever move them off it. */
+    document.documentElement.classList.add('wz-static');
     document.querySelectorAll('[data-rv],[data-split],[data-wipe]').forEach(function (el) {
       el.style.opacity = '1';
       el.style.clipPath = 'none';
@@ -330,6 +427,9 @@ function wzFlush() {
   if (window.SplitText) gsap.registerPlugin(SplitText);
 
   if (W.reduced) {
+    /* Chapter-tag rules and pinned scenes are pre-staged in CSS at their
+       "not yet" value; without motion nothing would ever move them off it. */
+    document.documentElement.classList.add('wz-static');
     document.querySelectorAll('[data-rv],[data-split],[data-wipe]').forEach(function (el) {
       el.style.opacity = '1';
       el.style.clipPath = 'none';
@@ -376,11 +476,19 @@ function wzFlush() {
     });
   });
 
-  /* Pinned sections measure wrong if fonts or images land late. */
-  if (document.fonts && document.fonts.ready) {
-    document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
-  }
-  window.addEventListener('load', function () { ScrollTrigger.refresh(); });
+  /* Images can still land after this, and a late image changes the height of
+     everything below it, so pinned scenes need one more measurement once the
+     page has finished loading. Deferred a frame and guarded: a refresh that
+     throws must not take the page's scroll geometry down with it. */
+  window.addEventListener('load', function () {
+    requestAnimationFrame(function () {
+      try {
+        ScrollTrigger.refresh();
+      } catch (e) {
+        console.warn('ScrollTrigger refresh skipped', e);
+      }
+    });
+  });
 }
 
 function paintFinal(el) {

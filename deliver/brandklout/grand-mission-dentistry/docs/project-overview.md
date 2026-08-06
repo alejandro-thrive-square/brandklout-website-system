@@ -16,10 +16,11 @@
 
 ## Status
 
-**All three pages built and verified locally (2026-08-06).** Content intake completed 2026-08-05 —
-Asana attachments retrieved, the client's live site identified and scraped for brand and content, 48
-real assets downloaded. All three coded packages are built to the motion standard, pass a
-91-check behavioural verification, and are ready for Sang Huynh's review.
+**All three pages re-architected as journeys and verified locally (2026-08-06).** Content intake
+completed 2026-08-05 — Asana attachments retrieved, the client's live site identified and scraped
+for brand and content, 48 real assets downloaded. All three coded packages pass the static journey
+gate, a 146-check behavioural verification including the scrub proof, and six-breakpoint responsive
+QA. Ready for Sang Huynh's review.
 
 > [!IMPORTANT]
 > **This work blocks an account transfer.** The parent task blocks `Finalize Account Transfer for
@@ -33,19 +34,27 @@ Design packages, in `workflows/04-design/.tmp/` — see its
 
 | Package | Asana task | State |
 | :--- | :--- | :--- |
-| [`implant-landing-page/`](../workflows/04-design/.tmp/implant-landing-page/) | `1217133289235653` | All 7 spec sections + multi-step quiz. **Rebuilt to the motion standard 2026-08-06.** Signature: pinned horizontal solutions track. |
-| [`cosmetic-landing-page/`](../workflows/04-design/.tmp/cosmetic-landing-page/) | `1217072657902270` | All 7 spec sections incl. sticky mobile bar. **Rebuilt to the motion standard 2026-08-06.** Signature: pinned 8-case patient ribbon. |
-| [`thank-you-landing-page/`](../workflows/04-design/.tmp/thank-you-landing-page/) | `1217162605683014` | All 4 spec sections. **Rebuilt to the motion standard 2026-08-06.** Signature: the receipt stamp that draws itself. **Shared archetype** for Mason Park. |
-| `verify.mjs` | — | Headless-Chrome behavioural suite: **91 checks**, screenshots in `verify-shots/`. `qa-viewports.mjs` adds real mobile viewport shots. |
+| [`implant-landing-page/`](../workflows/04-design/.tmp/implant-landing-page/) | `1217133289235653` | All 7 spec sections, as **8 named chapters**. 3 pinned scenes: The Loss, The Answer, The Options. Signature: the scan line that resolves the implant as six reasons light. |
+| [`cosmetic-landing-page/`](../workflows/04-design/.tmp/cosmetic-landing-page/) | `1217072657902270` | All 7 spec sections, as **7 named chapters**. 3 pinned scenes: The Work, The Standard, The Proof. Signature: the pinned 8-case patient ribbon. |
+| [`thank-you-landing-page/`](../workflows/04-design/.tmp/thank-you-landing-page/) | `1217162605683014` | All 4 spec sections, as **6 named chapters**. 3 pinned scenes: The Path, The Preparation, The Place. Signature: the receipt stamp that draws itself. **Shared archetype** for Mason Park. |
+| `verify.mjs` | — | Headless-Chrome behavioural suite: **146 checks**, one process per page. Centre of it is the scrub proof — a different intermediate state at 25/50/75% of every pinned chapter. |
+| `qa-shots.mjs` | — | Responsive QA: six breakpoints per page into [`08-qa/.tmp/screenshots/`](../workflows/08-qa/.tmp/screenshots/). |
 
-Run `node verify.mjs` from `workflows/04-design/.tmp/` to re-check all three.
+From `workflows/04-design/.tmp/`: `node verify.mjs` re-checks all three behaviourally,
+`node qa-shots.mjs` re-captures the six breakpoints, and
+`node ../../../../scripts/journey-audit.mjs <page-dir>` runs the static journey gate.
 
 > [!NOTE]
-> The first pass was reviewed as plain and templatised and did not pass. All three pages were
-> **rebuilt in execution only** — section order and the verified real content carried
-> over unchanged — against [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md): GSAP 3.13 with
-> ScrollSmoother, SplitText line reveals, pinned horizontal sequences, scroll-scrubbed counters,
-> clip-path wipes, magnetic and cursor-aware interaction, and reduced-motion guards throughout.
+> **Two review rounds, two different problems.** The first pass came back plain and templatised, and
+> was rebuilt for motion. The client then rejected *that* as "a plain card website design" rather
+> than "an interactive journey" — and the diagnosis was right: the motion layer was real (60-80 GSAP
+> references per page) but the architecture was still a stack of colour-named bands with `pin: true`
+> appearing zero times. The third pass is an **architecture rebuild**: every section is now a named
+> chapter carrying `data-chapter`, each page has three chapters the page genuinely holds still for,
+> and continuity devices (reading progress, chapter tags, chapter readout, theme shifts) tie the arc
+> together. Section order and the verified real content carried over unchanged — this changed how
+> the pages are built, not what they say. Full technique list and the traps in
+> [README](../workflows/04-design/.tmp/README.md).
 
 Intake artifacts, all in `workflows/01-content-intake/.tmp/`:
 

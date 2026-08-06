@@ -31,8 +31,25 @@
          GRAND MISSION DENTISTRY — COSMETIC LANDING PAGE
          Asana task 1217072657902270 (parent 1217040406855578)
 
-         Section order is the Asana spec, verbatim, including the sticky mobile
-         bar as item 6. Body copy is the client's own — from the vendor original
+         SEVEN CHAPTERS, in an order that cannot be shuffled:
+
+           00  Arrival       the offer and the free second opinion
+           01  The Hands     the two dentists who will actually do the work
+           02  The Work      PINNED — the six services take the stage one at a
+                             time as you scroll down the index
+           03  The Standard  PINNED — why this practice, three pillars advanced
+                             by scroll position
+           04  The Proof     PINNED — eight real cases travelling sideways
+           05  The Voices    what patients said afterwards
+           06  The Invitation the offer restated at the point of decision
+
+         Asana's seven-section spec maps on intact and in order: hero (00),
+         meet the cosmetic doctors (01), service offerings grid (02), why
+         choose Grand Mission Dentistry (03), social proof and real patient
+         gallery (04), sticky mobile bar (global, bottom of this file),
+         reviews (05).
+
+         Body copy is the client's own — from the vendor original
          gmd-cosmetic-lp.html attached to the parent task, and from
          grandmissiondentistry.com. Execution is ours.
          ==================================================================== -->
@@ -41,10 +58,15 @@
 
     <header class="header" id="header">
       <div class="shell header__inner">
-        <a class="header__logo" href="#hero" aria-label="Grand Mission Dentistry">
+        <a class="header__logo" href="#arrival" aria-label="Grand Mission Dentistry">
           <img class="logo-light" src="assets/logo-light.webp" alt="Grand Mission Dentistry" />
           <img class="logo-dark" src="assets/logo-dark.webp" alt="Grand Mission Dentistry" />
         </a>
+
+        <div class="header__chapter" id="chapterReadout" aria-hidden="true">
+          <b id="chNum">00</b><span id="chName">Arrival</span><i id="chBar"></i>
+        </div>
+
         <div class="header__actions">
           <a class="header__phone" href="#" data-tel-link>
             <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
@@ -52,7 +74,7 @@
             </svg>
             <span class="header__phone-text">
               <small>Call the practice</small>
-              <strong data-tel>(281) 789-8836</strong>
+              <strong data-tel>(281) 729-4615</strong>
             </span>
           </a>
           <a class="btn magnetic" href="#book"><span class="lbl-lg">Book a free consultation</span><span class="lbl-sm">Book</span></a>
@@ -63,19 +85,23 @@
 
     <div id="smooth-wrapper">
       <div id="smooth-content">
-        <!-- =========================== 1. HERO ========================= -->
-        <section class="hero" id="hero">
-          <div class="hero__media">
-            <img src="assets/cosmetic-patient.jpeg" alt="" aria-hidden="true" data-drift="5" />
+        <!-- ==================================================================
+             CHAPTER 00 — ARRIVAL
+             ================================================================== -->
+        <section class="ch ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival">
+          <div class="arrival__media">
+            <img src="assets/cosmetic-patient.jpeg" alt="" aria-hidden="true" id="arrivalImg" />
           </div>
-          <div class="hero__aurora" aria-hidden="true"></div>
+          <div class="arrival__aurora" aria-hidden="true"></div>
+          <div class="arrival__veil" id="arrivalVeil" aria-hidden="true"></div>
 
-          <div class="shell hero__inner">
-            <div class="hero__copy">
+          <div class="shell arrival__inner" id="arrivalInner">
+            <div class="arrival__copy">
+              <p class="chapter-tag"><i></i><b>00</b><em>Arrival</em></p>
               <p class="label" data-rv>Cosmetic dentistry · Richmond, TX</p>
               <!-- Headline and subhead verbatim from gmd-cosmetic-lp.html. -->
-              <h1 data-split>Your trusted destination for <em>cosmetic dentistry</em> in Richmond, TX</h1>
-              <p class="hero__sub" data-rv>Advanced care and tailored solutions for a stunning smile.</p>
+              <h1 id="arrivalTitle">Your trusted destination for <em>cosmetic dentistry</em> in Richmond, TX</h1>
+              <p class="arrival__sub" data-rv>Advanced care and tailored solutions for a stunning smile.</p>
 
               <div class="offer" data-rv>
                 <p class="offer__price"><span class="script">Free</span></p>
@@ -167,24 +193,27 @@
                 <h2>Your request is in</h2>
                 <p>
                   Our cosmetic team will call you shortly to book your consultation. If you'd rather
-                  not wait, call <a href="#" data-tel-link><strong data-tel>(281) 789-8836</strong></a> now.
+                  not wait, call <a href="#" data-tel-link><strong data-tel>(281) 729-4615</strong></a> now.
                 </p>
               </div>
             </div>
           </div>
 
-          <a class="scroll-cue" href="#doctors" aria-label="Scroll down"><span></span></a>
+          <a class="scroll-cue" href="#hands" aria-label="Begin"><span></span></a>
         </section>
 
-        <!-- ================ 2. MEET THE COSMETIC DOCTORS =============== -->
-        <section class="section section--light" id="doctors">
+        <!-- ==================================================================
+             CHAPTER 01 — THE HANDS
+             Asana section 2: meet the cosmetic doctors. Both bios verbatim
+             from gmd-cosmetic-lp.html.
+             ================================================================== -->
+        <section class="ch ch-hands" id="hands" data-chapter="1" data-chapter-name="The Hands" data-theme="paper">
           <div class="shell">
             <div class="head head--center" data-rv>
-              <p class="label label--center">Meet the doctors</p>
+              <p class="chapter-tag chapter-tag--center"><i></i><b>01</b><em>The Hands</em></p>
               <h2 data-split>Expert care you can trust</h2>
             </div>
 
-            <!-- Both bios verbatim from gmd-cosmetic-lp.html. -->
             <div class="doctors">
               <article class="doc" data-doc>
                 <div class="doc__portrait">
@@ -237,49 +266,40 @@
           </div>
         </section>
 
-        <!-- =================== 3. SERVICE OFFERINGS GRID =============== -->
-        <section class="section" id="services">
+        <!-- ==================================================================
+             CHAPTER 02 — THE WORK   (PINNED · scrubbed index)
+             Asana section 3: the service offerings grid, rebuilt as a scene.
+             The page holds still, the marker travels the index, and each
+             service takes the stage as the marker reaches it. Names and
+             taglines verbatim from gmd-cosmetic-lp.html.
+             ================================================================== -->
+        <section class="ch ch--pin ch-work" id="work" data-chapter="2" data-chapter-name="The Work">
+          <div class="ch__pin work__pin" id="workPin">
+            <div class="shell work__grid">
+              <div class="work__stage">
+                <p class="chapter-tag"><i></i><b>02</b><em>The Work</em></p>
+                <span class="work__count"><b id="workNum">01</b>/06</span>
+                <div class="work__card" id="workCard" data-scrub-probe="workCard">
+                  <img class="work__icon" id="workIcon" src="assets/icon-1.svg" alt="" aria-hidden="true" />
+                  <h2 id="workTitle">Preventive Dentistry</h2>
+                  <p id="workTag">Transform your smile with a touch of perfection.</p>
+                </div>
+              </div>
+
+              <ol class="work__index" id="workIndex">
+                <span class="work__marker" id="workMarker" data-scrub-probe="workMarker" aria-hidden="true"></span>
+                <li class="work__row" data-svc data-icon="assets/icon-1.svg" data-tag="Transform your smile with a touch of perfection.">Preventive Dentistry</li>
+                <li class="work__row" data-svc data-icon="assets/icon-2.svg" data-tag="Seamless solutions for a flawless smile.">Children's Dentistry</li>
+                <li class="work__row" data-svc data-icon="assets/icon-3.svg" data-tag="A crown fit for your beautiful smile.">Cosmetic Dentistry</li>
+                <li class="work__row" data-svc data-icon="assets/icon-4.svg" data-tag="Because every smile deserves to shine.">Smile Makeovers</li>
+                <li class="work__row" data-svc data-icon="assets/icon-5.svg" data-tag="Fillings that blend for a naturally beautiful smile.">Composite Fillings</li>
+                <li class="work__row" data-svc data-icon="assets/icon-6.svg" data-tag="Brighten your smile, light up your world.">Teeth Whitening</li>
+              </ol>
+            </div>
+            <div class="ch__rail ch__rail--shell"><i id="workRail"></i></div>
+          </div>
+
           <div class="shell">
-            <div class="head" data-rv>
-              <p class="label">Our services</p>
-              <h2 data-split>Cosmetic dentistry services at Grand Mission Dentistry</h2>
-              <p class="lede">At Grand Mission Dentistry in Richmond, TX.</p>
-            </div>
-
-            <!-- Service names and taglines verbatim from gmd-cosmetic-lp.html. -->
-            <div class="grid c3" data-rv="stagger">
-              <article class="card svc" data-cursor-card>
-                <img class="svc__icon" src="assets/icon-1.svg" alt="" aria-hidden="true" />
-                <h3>Preventive Dentistry</h3>
-                <p>Transform your smile with a touch of perfection.</p>
-              </article>
-              <article class="card svc" data-cursor-card>
-                <img class="svc__icon" src="assets/icon-2.svg" alt="" aria-hidden="true" />
-                <h3>Children's Dentistry</h3>
-                <p>Seamless solutions for a flawless smile.</p>
-              </article>
-              <article class="card svc" data-cursor-card>
-                <img class="svc__icon" src="assets/icon-3.svg" alt="" aria-hidden="true" />
-                <h3>Cosmetic Dentistry</h3>
-                <p>A crown fit for your beautiful smile.</p>
-              </article>
-              <article class="card svc" data-cursor-card>
-                <img class="svc__icon" src="assets/icon-4.svg" alt="" aria-hidden="true" />
-                <h3>Smile Makeovers</h3>
-                <p>Because every smile deserves to shine.</p>
-              </article>
-              <article class="card svc" data-cursor-card>
-                <img class="svc__icon" src="assets/icon-5.svg" alt="" aria-hidden="true" />
-                <h3>Composite Fillings</h3>
-                <p>Fillings that blend for a naturally beautiful smile.</p>
-              </article>
-              <article class="card svc" data-cursor-card>
-                <img class="svc__icon" src="assets/icon-6.svg" alt="" aria-hidden="true" />
-                <h3>Teeth Whitening</h3>
-                <p>Brighten your smile, light up your world.</p>
-              </article>
-            </div>
-
             <div class="offers" data-rv data-count-scope>
               <div class="offers__item">
                 <h3>New patient special — $<span data-offer-count="new-patient" data-count="189">189</span></h3>
@@ -299,8 +319,12 @@
           </div>
         </section>
 
-        <!-- ============ 4. WHY CHOOSE GRAND MISSION DENTISTRY ========== -->
-        <section class="section section--tint" id="why">
+        <!-- ==================================================================
+             CHAPTER 03 — THE STANDARD   (PINNED · scrubbed pillars)
+             Asana section 4: why choose Grand Mission Dentistry. The paragraph
+             and all three pillars are verbatim from gmd-cosmetic-lp.html.
+             ================================================================== -->
+        <section class="ch ch-standard" id="standard" data-chapter="3" data-chapter-name="The Standard" data-theme="tint">
           <div class="shell">
             <div class="split">
               <div class="split__media">
@@ -309,9 +333,8 @@
                 </div>
               </div>
               <div>
-                <p class="label" data-rv>Cosmetic dentist in Richmond, TX 77407</p>
+                <p class="chapter-tag"><i></i><b>03</b><em>The Standard</em></p>
                 <h2 data-split>Boost your confidence</h2>
-                <!-- Paragraph verbatim from gmd-cosmetic-lp.html. -->
                 <p class="lede" data-rv style="margin-top: 1rem">
                   At Grand Mission Dentistry, we believe a cosmetic dentist can boost your confidence
                   with sparkling white teeth. Our cosmetic dentist in Richmond, TX is here to help
@@ -324,17 +347,17 @@
                 <a class="btn btn--ghost magnetic" href="#book" data-rv style="margin-top: 1.4rem"><span>Connect to know more</span></a>
               </div>
             </div>
+          </div>
 
-            <!-- Sticky heading, pillars advancing: the three reasons take the
-                 stage one at a time as the column scrolls past. -->
-            <div class="pillars" id="pillars">
+          <!-- The three reasons take the stage one at a time while the page
+               holds still. Scroll position IS which reason you are on. -->
+          <div class="ch__pin pillars__pin" id="pillarsPin">
+            <div class="shell pillars">
               <div class="pillars__head">
                 <p class="label">Why us</p>
                 <h2 data-split>Why choose Grand Mission Dentistry, Richmond, TX?</h2>
-                <div class="pillars__rail"><i id="pillarBar"></i></div>
               </div>
-              <div class="pillars__list">
-                <!-- Three pillars verbatim from gmd-cosmetic-lp.html. -->
+              <div class="pillars__list" id="pillarList">
                 <article class="pillar" data-pillar>
                   <span class="pillar__n">01</span>
                   <h3>State-of-the-art technology</h3>
@@ -352,31 +375,34 @@
                 </article>
               </div>
             </div>
+            <div class="ch__rail ch__rail--shell"><i id="pillarBar" data-scrub-probe="pillarBar"></i></div>
           </div>
         </section>
 
-        <!-- ====== 5. SOCIAL PROOF & REAL PATIENT GALLERY (SIGNATURE) === -->
-        <section class="ribbon" id="results">
-          <div class="ribbon__pin">
-            <div class="ribbon__head shell">
-              <p class="label">The results speak for themselves</p>
+        <!-- ==================================================================
+             CHAPTER 04 — THE PROOF   (PINNED · horizontal patient ribbon)
+             Asana section 5: social proof and the real patient gallery. The
+             signature moment of this page.
+             ================================================================== -->
+        <section class="ch ch--pin ch-proof" id="proof" data-chapter="4" data-chapter-name="The Proof" data-theme="dark">
+          <div class="ch__pin proof__pin" id="proofPin">
+            <div class="proof__head shell">
+              <p class="chapter-tag"><i></i><b>04</b><em>The Proof</em></p>
               <h2 data-split>Real smiles from Grand Mission Dentistry patients</h2>
-              <p class="lede">
-                Before and after, actual patients. Tap any case to see it full size.
-              </p>
+              <p class="lede">Before and after, actual patients. Tap any case to see it full size.</p>
             </div>
-            <div class="ribbon__rail" id="ribbonRail">
-              <button class="ribbon__case" data-lightbox="assets/case-1.jpeg"><span class="gallery__badge">Case 01</span><img src="assets/case-1.jpeg" alt="Before and after cosmetic treatment, case one" data-ribbon-img /></button>
-              <button class="ribbon__case" data-lightbox="assets/case-2.jpeg"><span class="gallery__badge">Case 02</span><img src="assets/case-2.jpeg" alt="Before and after cosmetic treatment, case two" data-ribbon-img /></button>
-              <button class="ribbon__case" data-lightbox="assets/case-3.jpeg"><span class="gallery__badge">Case 03</span><img src="assets/case-3.jpeg" alt="Before and after cosmetic treatment, case three" data-ribbon-img /></button>
-              <button class="ribbon__case" data-lightbox="assets/case-4.jpeg"><span class="gallery__badge">Case 04</span><img src="assets/case-4.jpeg" alt="Before and after cosmetic treatment, case four" data-ribbon-img /></button>
-              <button class="ribbon__case" data-lightbox="assets/case-5.jpeg"><span class="gallery__badge">Case 05</span><img src="assets/case-5.jpeg" alt="Before and after cosmetic treatment, case five" data-ribbon-img /></button>
-              <button class="ribbon__case" data-lightbox="assets/case-6.jpeg"><span class="gallery__badge">Case 06</span><img src="assets/case-6.jpeg" alt="Before and after cosmetic treatment, case six" data-ribbon-img /></button>
-              <button class="ribbon__case" data-lightbox="assets/case-7.jpeg"><span class="gallery__badge">Case 07</span><img src="assets/case-7.jpeg" alt="Before and after cosmetic treatment, case seven" data-ribbon-img /></button>
-              <button class="ribbon__case" data-lightbox="assets/case-8.jpeg"><span class="gallery__badge">Case 08</span><img src="assets/case-8.jpeg" alt="Before and after cosmetic treatment, case eight" data-ribbon-img /></button>
+            <div class="proof__rail" id="ribbonRail" data-scrub-probe="ribbonRail">
+              <button class="case" data-lightbox="assets/case-1.jpeg"><span class="gallery__badge">Case 01</span><img src="assets/case-1.jpeg" alt="Before and after cosmetic treatment, case one" /></button>
+              <button class="case" data-lightbox="assets/case-2.jpeg"><span class="gallery__badge">Case 02</span><img src="assets/case-2.jpeg" alt="Before and after cosmetic treatment, case two" /></button>
+              <button class="case" data-lightbox="assets/case-3.jpeg"><span class="gallery__badge">Case 03</span><img src="assets/case-3.jpeg" alt="Before and after cosmetic treatment, case three" /></button>
+              <button class="case" data-lightbox="assets/case-4.jpeg"><span class="gallery__badge">Case 04</span><img src="assets/case-4.jpeg" alt="Before and after cosmetic treatment, case four" /></button>
+              <button class="case" data-lightbox="assets/case-5.jpeg"><span class="gallery__badge">Case 05</span><img src="assets/case-5.jpeg" alt="Before and after cosmetic treatment, case five" /></button>
+              <button class="case" data-lightbox="assets/case-6.jpeg"><span class="gallery__badge">Case 06</span><img src="assets/case-6.jpeg" alt="Before and after cosmetic treatment, case six" /></button>
+              <button class="case" data-lightbox="assets/case-7.jpeg"><span class="gallery__badge">Case 07</span><img src="assets/case-7.jpeg" alt="Before and after cosmetic treatment, case seven" /></button>
+              <button class="case" data-lightbox="assets/case-8.jpeg"><span class="gallery__badge">Case 08</span><img src="assets/case-8.jpeg" alt="Before and after cosmetic treatment, case eight" /></button>
             </div>
-            <div class="ribbon__foot shell">
-              <div class="track__progress" style="width: 100%"><i id="ribbonBar"></i></div>
+            <div class="proof__foot shell">
+              <div class="ch__rail" style="width: 100%"><i id="ribbonBar"></i></div>
               <p class="disclaimer">
                 Results vary from patient to patient. These are individual outcomes and depend on
                 oral health, lifestyle and the specifics of treatment. Yours will be discussed at
@@ -386,12 +412,16 @@
           </div>
         </section>
 
-        <!-- ========================= 7. REVIEWS ======================== -->
-        <section class="section section--light" id="reviews">
+        <!-- ==================================================================
+             CHAPTER 05 — THE VOICES
+             Asana section 7: reviews. All three verbatim from the original.
+             ================================================================== -->
+        <section class="ch ch-voices" id="voices" data-chapter="5" data-chapter-name="The Voices" data-theme="paper">
           <div class="shell">
             <div class="head head--center" data-rv>
-              <p class="label label--center">Here's what our happy patients say</p>
+              <p class="chapter-tag chapter-tag--center"><i></i><b>05</b><em>The Voices</em></p>
               <h2 data-split>Rated highly by the Richmond, TX community</h2>
+              <p class="lede">Here's what our happy patients say.</p>
             </div>
             <div class="badges" data-rv="stagger" style="margin-bottom: 2.4rem">
               <span class="badge"><span class="stars" aria-hidden="true">★★★★★</span> <strong>1,700+</strong> Google reviews</span>
@@ -399,7 +429,6 @@
               <span class="badge"><strong>Healthgrades</strong> 2023 Patient Safety Award</span>
               <span class="badge"><span class="stars" aria-hidden="true">★★★★★</span> <strong>Yelp</strong> five-star business</span>
             </div>
-            <!-- All three reviews verbatim from gmd-cosmetic-lp.html. -->
             <div class="grid c3" data-rv="stagger">
               <figure class="quote">
                 <span class="stars" aria-label="Five out of five stars">★★★★★</span>
@@ -420,20 +449,22 @@
           </div>
         </section>
 
-        <!-- ========================= FINAL CTA ========================= -->
-        <section class="section final" id="cta">
-          <div class="final__glow" aria-hidden="true"></div>
-          <div class="shell final__inner">
-            <p class="label label--center" data-rv>Ready when you are</p>
+        <!-- ==================================================================
+             CHAPTER 06 — THE INVITATION
+             ================================================================== -->
+        <section class="ch ch-invitation" id="invitation" data-chapter="6" data-chapter-name="The Invitation" data-theme="dark">
+          <div class="invitation__glow" aria-hidden="true"></div>
+          <div class="shell closing">
+            <p class="chapter-tag chapter-tag--center" data-rv><i></i><b>06</b><em>The Invitation</em></p>
             <h2 data-split>Ready for a confident, radiant smile?</h2>
             <p class="lede" data-rv>
               Take the first step toward your dream smile. Schedule your consultation at Grand
               Mission Dentistry in Richmond, TX, and experience advanced cosmetic care with a
               personal touch.
             </p>
-            <div class="final__actions" data-rv="stagger">
+            <div class="closing__actions" data-rv="stagger">
               <a class="btn btn--light btn--lg magnetic" href="#book"><span>Book your free consultation</span></a>
-              <a class="btn btn--ghost btn--lg magnetic" href="#" data-tel-link><span>Call <span data-tel>(281) 789-8836</span></span></a>
+              <a class="btn btn--ghost btn--lg magnetic" href="#" data-tel-link><span>Call <span data-tel>(281) 729-4615</span></span></a>
             </div>
           </div>
         </section>
@@ -445,7 +476,7 @@
                 <img class="footer__logo" src="assets/logo-light.webp" alt="Grand Mission Dentistry" />
                 <p>Grand Mission Dentistry of Richmond<br />8620 Grand Mission Blvd Ste E<br />Richmond, TX 77407</p>
                 <p style="margin-top: 0.8rem">
-                  <a href="#" data-tel-link data-tel>(281) 789-8836</a><br />
+                  <a href="#" data-tel-link data-tel>(281) 729-4615</a><br />
                   <a href="https://maps.app.goo.gl/h8xXwxeF26pKio8n6" target="_blank" rel="noopener">Get directions →</a>
                 </p>
               </div>
@@ -480,7 +511,7 @@
       </div>
     </div>
 
-    <!-- ================= 6. STICKY MOBILE BAR (Asana spec) ============ -->
+    <!-- ============ STICKY MOBILE BAR (Asana section 6) ================ -->
     <nav class="mobile-bar" id="mobileBar" aria-label="Quick actions">
       <a href="#" data-tel-link>
         <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 4 5.1 1 1 0 0 1 5 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>

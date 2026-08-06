@@ -1,24 +1,145 @@
 /* ==========================================================================
-   IMPLANT LANDING PAGE — page-specific sections
+   IMPLANT LANDING PAGE — chapter styles
    Asana task 1217133289235653 (parent 1217040406855578)
-   Tokens and shared components live in assets/kit.css.
+
+   One block per chapter, in the order the page plays them. Tokens and the
+   shared vocabulary (buttons, cards, figures, forms, footer) live in
+   assets/kit.css. Nothing here is named for a background colour: if a rule
+   set is called .ch-loss it is because that chapter's job is the loss.
    ========================================================================== */
 
-/* ---------- hero ---------- */
-.hero__inner {
+/* ==========================================================================
+   SHARED — chapter progress rail
+   Every pinned chapter carries one. It is the honest readout of how far
+   through the scene you are, and the thing that makes a pin feel like
+   progress rather than a page that has stopped responding.
+   ========================================================================== */
+.ch__rail {
+  position: relative;
+  height: 2px;
+  width: var(--shell);
+  margin-inline: auto;
+  background: rgba(0, 34, 65, 0.12);
+  overflow: hidden;
+}
+.ch[data-theme="dark"] .ch__rail,
+.ch[data-theme="ink"] .ch__rail {
+  background: rgba(255, 255, 255, 0.16);
+}
+.ch__rail i {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  background: linear-gradient(90deg, var(--blue), var(--blue-light));
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+.ch[data-theme="dark"] .ch__rail i {
+  background: linear-gradient(90deg, var(--blue-light), #fff);
+}
+/* Without motion the rail would sit empty and read as a broken control. */
+.wz-static .ch__rail i {
+  transform: none;
+}
+
+/* ==========================================================================
+   CHAPTER 00 — ARRIVAL
+   ========================================================================== */
+.ch-arrival {
+  position: relative;
+  isolation: isolate;
+  background: var(--blue-deep);
+  color: #fff;
+  overflow: hidden;
+  padding-top: clamp(7rem, 12vw, 10rem);
+  padding-bottom: clamp(3.5rem, 7vw, 6rem);
+}
+.arrival__media {
+  position: absolute;
+  inset: 0;
+  z-index: -2;
+}
+.arrival__media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0.5;
+  will-change: transform;
+}
+.arrival__media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(104deg, rgba(0, 34, 65, 0.97) 0%, rgba(0, 34, 65, 0.9) 46%, rgba(0, 34, 65, 0.55) 100%),
+    radial-gradient(70% 60% at 82% 20%, rgba(4, 102, 156, 0.5), transparent 70%);
+}
+.arrival__aurora {
+  position: absolute;
+  inset: -25% -10% auto -10%;
+  height: 150%;
+  z-index: -1;
+  pointer-events: none;
+  background: radial-gradient(40% 38% at 20% 28%, rgba(4, 102, 156, 0.55), transparent 68%),
+    radial-gradient(34% 40% at 84% 16%, rgba(171, 214, 255, 0.22), transparent 70%),
+    radial-gradient(44% 40% at 62% 88%, rgba(111, 72, 133, 0.28), transparent 72%);
+  filter: blur(10px);
+  animation: drift 26s ease-in-out infinite alternate;
+}
+@keyframes drift {
+  from { transform: translate3d(-2%, -1%, 0) scale(1); }
+  to { transform: translate3d(3%, 2%, 0) scale(1.08); }
+}
+/* The chapter departs into this as you leave it, so the seam into The Loss
+   reads as one room closing and another opening. */
+.arrival__veil {
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: var(--blue-ink);
+  opacity: 0;
+  pointer-events: none;
+}
+.ch-arrival h1 {
+  color: #fff;
+  max-width: 15ch;
+}
+.ch-arrival h1 em {
+  font-style: normal;
+  color: var(--blue-light);
+}
+.arrival__sub {
+  font-size: var(--body-lg);
+  color: rgba(255, 255, 255, 0.82);
+  font-weight: 400;
+  max-width: 50ch;
+}
+.arrival__inner {
   display: grid;
   gap: clamp(2rem, 4vw, 4rem);
   align-items: center;
 }
 @media (min-width: 1000px) {
-  .hero__inner {
+  .arrival__inner {
     grid-template-columns: 1.06fr 0.94fr;
   }
 }
-.hero__copy {
+.arrival__copy {
   display: grid;
   gap: 1.25rem;
   align-content: start;
+}
+.ch-arrival .chapter-tag {
+  color: var(--blue-light);
+  margin-bottom: 0;
+}
+/* The eyebrow inherits --blue, which is a mid-blue chosen for white grounds.
+   On the navy hero that is barely legible — the arrival chapter is the one
+   place .label sits on a dark ground without a data-theme to catch it. */
+.ch-arrival .label {
+  color: var(--blue-light);
+}
+.ch-arrival .chapter-tag em {
+  color: rgba(255, 255, 255, 0.62);
 }
 
 /* The price is the loudest number on the page and it counts up on entry —
@@ -193,99 +314,276 @@
   color: var(--blue);
 }
 
-.services__note {
-  text-align: center;
-  margin-top: 1.4rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  color: var(--brown);
-}
-
-/* ---------- pinned, scrubbed stat band ---------- */
-/* The four numbers are driven by scroll position, not a one-shot tween: the
-   band pins and the figures resolve as you move through it. */
-.stats {
-  background: var(--blue-deep);
-  color: rgba(255, 255, 255, 0.8);
+/* ==========================================================================
+   CHAPTER 01 — THE LOSS   (pinned, scrubbed word by word)
+   The unread state has to be faint enough to read as "not yet" and bright
+   enough to still be legible copy on navy.
+   ========================================================================== */
+.ch-loss {
   overflow: hidden;
 }
-.stats__inner {
-  padding-block: clamp(3.5rem, 8vw, 7rem);
+.loss__pin {
+  gap: clamp(2rem, 4vw, 3.25rem);
 }
-.stats__grid {
+.loss__grid {
   display: grid;
-  gap: clamp(1.5rem, 3vw, 2.75rem);
-  margin-top: 1.5rem;
+  gap: clamp(2rem, 5vw, 4.5rem);
+  align-items: center;
 }
-@media (min-width: 720px) {
-  .stats__grid { grid-template-columns: repeat(2, 1fr); }
+@media (min-width: 960px) {
+  .loss__grid { grid-template-columns: 1.25fr 0.75fr; }
 }
-@media (min-width: 1040px) {
-  .stats__grid { grid-template-columns: repeat(4, 1fr); }
+.loss__big {
+  font-size: clamp(1.7rem, 3.5vw, 3.1rem);
+  font-weight: 800;
+  line-height: 1.16;
+  letter-spacing: -0.035em;
+  color: #fff;
+  max-width: 24ch;
 }
-.stat {
-  padding-left: 1.25rem;
-  border-left: 2px solid rgba(171, 214, 255, 0.35);
+/* Words start unread. The scrub brightens them one by one. */
+.wz-motion .ch-loss .wz-word {
+  color: rgba(255, 255, 255, 0.22);
 }
-.stat__num {
+.loss__after {
+  margin-top: clamp(1.25rem, 2.5vw, 2rem);
+  max-width: 52ch;
+  color: rgba(255, 255, 255, 0.74);
+  font-weight: 400;
+  line-height: 1.8;
+}
+
+/* The ridge gauge: full width is the bone you had, the bar is what is left.
+   It narrows against scroll and lands on the client's own figure. */
+.ridge {
+  margin: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+.ridge__stack {
+  position: relative;
+  height: clamp(120px, 20vw, 190px);
+  border-radius: var(--r-md);
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(171, 214, 255, 0.28);
+}
+.ridge__ghost {
+  position: absolute;
+  inset: 0;
+  background: repeating-linear-gradient(
+    -45deg,
+    rgba(171, 214, 255, 0.16) 0 6px,
+    transparent 6px 13px
+  );
+}
+.ridge__bar {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  background: linear-gradient(120deg, var(--blue), var(--blue-light));
+  transform: scaleX(1);
+  transform-origin: 0 50%;
+  will-change: transform;
+}
+.ridge__read {
+  font-size: 0.92rem;
+  color: rgba(255, 255, 255, 0.74);
+  font-weight: 400;
+  line-height: 1.55;
+}
+.ridge__num {
   display: block;
-  font-size: clamp(2.1rem, 4vw, 3.2rem);
+  font-size: clamp(2rem, 4vw, 3.1rem);
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 1;
   color: #fff;
-  margin-bottom: 0.6rem;
+  margin-bottom: 0.5rem;
   font-variant-numeric: tabular-nums;
 }
-.stat p {
-  font-size: 0.92rem;
-  color: rgba(255, 255, 255, 0.74);
-  font-weight: 400;
-  line-height: 1.5;
-}
-.stats__rail {
-  margin-top: clamp(1.75rem, 3vw, 2.5rem);
-  height: 2px;
-  background: rgba(255, 255, 255, 0.14);
-  position: relative;
-  overflow: hidden;
-}
-.stats__rail i {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 100%;
-  background: linear-gradient(90deg, var(--blue-light), #fff);
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-}
 
-/* ---------- pinned horizontal track ---------- */
-/* THE SIGNATURE MOMENT. The page stops, and the four implant solutions move
-   past horizontally under a fixed heading. On mobile this is a swipeable
-   scroll-snap rail instead — designed for the thumb, not a degraded pin. */
-.track {
+/* ==========================================================================
+   CHAPTER 02 — THE ANSWER   (pinned, scrubbed scan line)
+   Two copies of the same photograph, stacked. The top one is clipped to
+   whatever the scan line has already passed, so the implant resolves from
+   grey to full colour as you scroll rather than fading in.
+   ========================================================================== */
+.ch-answer {
+  overflow: hidden;
   background: var(--white);
 }
-.track__pin {
-  min-height: 100svh;
+.answer__grid {
   display: grid;
-  align-content: center;
-  gap: clamp(1.5rem, 3vw, 2.5rem);
-  padding-block: clamp(3rem, 6vw, 5rem);
+  gap: clamp(1.75rem, 4vw, 3.5rem);
+  align-items: center;
+}
+@media (min-width: 960px) {
+  .answer__grid { grid-template-columns: 0.85fr 1.15fr; }
+}
+.scan {
+  margin: 0;
+  display: grid;
+  gap: 1.1rem;
+}
+.scan__plate {
+  position: relative;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--r-lg);
+  overflow: hidden;
+  background: var(--n-100);
+  box-shadow: var(--shadow-md);
+}
+.scan__img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.scan__img--flat {
+  filter: grayscale(1) brightness(1.05) contrast(0.95);
+}
+.scan__img--lit {
+  /* Clipped to the travelled distance; the scrub moves the bottom inset. */
+  clip-path: inset(0 0 100% 0);
+  will-change: clip-path;
+}
+.scan__line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, var(--blue-light), transparent);
+  box-shadow: 0 0 22px 4px rgba(171, 214, 255, 0.55);
+  will-change: transform;
+}
+.scan__figures {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem 2.2rem;
+}
+.scan__figures span {
+  display: flex;
+  flex-direction: column;
+  font-size: 0.76rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--n-500);
+  font-weight: 600;
+}
+.scan__figures b {
+  font-size: clamp(1.5rem, 2.8vw, 2.3rem);
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--blue-deep);
+  text-transform: none;
+  font-variant-numeric: tabular-nums;
+  line-height: 1.1;
+}
+.answer__title {
+  max-width: 18ch;
+  margin-bottom: 0.9rem;
+}
+.answer__lede {
+  font-size: var(--body-lg);
+  color: var(--n-700);
+  font-weight: 400;
+  max-width: 56ch;
+  margin-bottom: clamp(1.25rem, 2.5vw, 2rem);
+}
+.reasons {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  counter-reset: reason;
+  border-top: 1px solid var(--n-200);
+}
+.reason {
+  counter-increment: reason;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 0.3rem 1rem;
+  align-items: baseline;
+  padding-block: clamp(0.6rem, 1.2vw, 0.9rem);
+  border-bottom: 1px solid var(--n-200);
+  /* Unreached steps are legible but clearly not the current one. */
+  opacity: 0.42;
+  transition: opacity 0.45s var(--ease), border-color 0.45s var(--ease);
+}
+.reason::before {
+  content: "0" counter(reason);
+  grid-row: span 2;
+  font-size: 0.74rem;
+  letter-spacing: 0.14em;
+  font-weight: 800;
+  color: var(--n-300);
+  transition: color 0.45s var(--ease);
+}
+.reason b {
+  font-size: clamp(1rem, 1.5vw, 1.2rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  color: var(--blue-deep);
+}
+.reason span {
+  font-size: 0.92rem;
+  color: var(--n-700);
+  font-weight: 400;
+  line-height: 1.6;
+}
+.reason.is-lit {
+  opacity: 1;
+  border-color: var(--blue-light);
+}
+.reason.is-lit::before {
+  color: var(--blue);
+}
+/* Nothing may be left dimmed, unlit or half-drawn when motion is off. The
+   scene does not play, so its resolved state is the state it ships in. */
+.wz-static .reason {
+  opacity: 1;
+}
+.wz-static .scan__img--lit {
+  clip-path: none;
+}
+.wz-static .scan__line {
+  display: none;
+}
+.wz-static .ridge__bar {
+  transform: scaleX(0.75);
+}
+@media (max-width: 720px) {
+  .reason span { font-size: 0.88rem; }
+}
+
+/* ==========================================================================
+   CHAPTER 03 — THE OPTIONS   (pinned horizontal journey)
+   The page stops and the four solutions travel sideways under a fixed
+   heading. On a phone this becomes a real swipe rail — designed for the
+   thumb, not a pin that has been switched off.
+   ========================================================================== */
+.ch-options {
   overflow: hidden;
 }
-.track__head {
+.options__pin {
+  gap: clamp(1.5rem, 3vw, 2.5rem);
+}
+.options__head {
   display: grid;
   gap: 0.9rem;
   max-width: 780px;
 }
-.track__rail {
+.options__rail {
   display: flex;
   gap: clamp(1rem, 2vw, 1.75rem);
   padding-inline: var(--gutter);
+  width: max-content;
   will-change: transform;
 }
-.track__panel {
+.opt {
   flex: none;
   width: min(78vw, 420px);
   background: #fff;
@@ -299,71 +597,109 @@
   padding-bottom: 1.5rem;
   transition: border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
 }
-.track__panel:hover {
+.opt:hover {
   border-color: var(--blue-light);
   box-shadow: var(--shadow-md);
 }
-.track__panel .figure {
+.opt .figure {
   border-radius: 0;
   margin-bottom: 1rem;
 }
-.track__panel .figure img {
-  transition: transform 0.8s var(--ease);
+.opt .figure img {
+  filter: grayscale(0.55);
+  transition: transform 0.8s var(--ease), filter 0.6s var(--ease);
 }
-.track__panel:hover .figure img {
+.opt:hover .figure img,
+.opt.is-centre .figure img {
+  filter: grayscale(0);
   transform: scale(1.05);
 }
-.track__n {
+.opt__n {
   font-size: 0.72rem;
   letter-spacing: 0.2em;
   font-weight: 700;
   color: var(--blue-light);
   padding-inline: clamp(1.25rem, 2vw, 1.6rem);
+  transition: color 0.45s var(--ease);
 }
-.track__panel h3,
-.track__panel p {
+.opt.is-centre .opt__n {
+  color: var(--blue);
+}
+.opt h3,
+.opt p {
   padding-inline: clamp(1.25rem, 2vw, 1.6rem);
 }
-.track__panel p {
+.opt p {
   color: var(--n-700);
   font-weight: 400;
   font-size: 0.94rem;
 }
-.track__progress {
+.ch__rail--shell {
   width: var(--shell);
-  margin-inline: auto;
-  height: 2px;
-  background: var(--n-200);
-  position: relative;
-  overflow: hidden;
 }
-.track__progress i {
-  position: absolute;
-  inset: 0 auto 0 0;
-  width: 100%;
-  background: linear-gradient(90deg, var(--blue), var(--blue-light));
-  transform: scaleX(0);
-  transform-origin: 0 50%;
-}
-/* Mobile + reduced motion: a real swipe rail, no pin. */
+/* Mobile and reduced motion: a real swipe rail, no pin. */
 @media (max-width: 900px), (prefers-reduced-motion: reduce) {
-  .track__pin {
+  .options__pin {
     min-height: 0;
   }
-  .track__rail {
+  .options__rail {
     overflow-x: auto;
     scroll-snap-type: x mandatory;
     -webkit-overflow-scrolling: touch;
     padding-bottom: 0.5rem;
+    width: auto;
     transform: none !important;
   }
-  .track__panel {
+  .opt {
     scroll-snap-align: start;
     width: min(84vw, 380px);
   }
+  .opt .figure img {
+    filter: none;
+  }
 }
 
-/* ---------- financing matrix ---------- */
+/* ==========================================================================
+   CHAPTER 05 — THE SPECIALIST
+   ========================================================================== */
+.doctor {
+  display: grid;
+  gap: clamp(1.75rem, 4vw, 4rem);
+  align-items: center;
+}
+@media (min-width: 900px) {
+  .doctor { grid-template-columns: 0.8fr 1.2fr; }
+}
+.doctor__portrait {
+  position: relative;
+}
+.doctor__portrait::after {
+  content: "";
+  position: absolute;
+  inset: 1rem -1rem -1rem 1rem;
+  border: 2px solid var(--blue-light);
+  border-radius: var(--r-lg);
+  z-index: -1;
+}
+.doctor__role {
+  font-size: 0.78rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--brown);
+  font-weight: 700;
+  margin: 0.4rem 0 1.1rem;
+}
+.services__note {
+  text-align: center;
+  margin-top: 1.4rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--brown);
+}
+
+/* ==========================================================================
+   CHAPTER 06 — THE TERMS
+   ========================================================================== */
 .matrix-wrap {
   overflow-x: auto;
   border-radius: var(--r-lg);
@@ -432,80 +768,64 @@
   color: var(--brown-dark);
 }
 
-/* ---------- doctor ---------- */
-.doctor {
-  display: grid;
-  gap: clamp(1.75rem, 4vw, 4rem);
-  align-items: center;
-}
-@media (min-width: 900px) {
-  .doctor { grid-template-columns: 0.8fr 1.2fr; }
-}
-.doctor__portrait {
+/* ==========================================================================
+   CHAPTER 07 — THE INVITATION
+   ========================================================================== */
+.ch-invitation {
   position: relative;
-}
-.doctor__portrait::after {
-  content: "";
-  position: absolute;
-  inset: 1rem -1rem -1rem 1rem;
-  border: 2px solid var(--blue-light);
-  border-radius: var(--r-lg);
-  z-index: -1;
-}
-.doctor__role {
-  font-size: 0.78rem;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--brown);
-  font-weight: 700;
-  margin: 0.4rem 0 1.1rem;
-}
-
-/* ---------- final CTA ---------- */
-.final {
-  position: relative;
-  background: var(--blue-deep);
-  color: #fff;
   overflow: hidden;
   isolation: isolate;
-  text-align: center;
 }
-.final__glow {
+.invitation__glow {
   position: absolute;
   inset: auto -20% -70% -20%;
   height: 130%;
   z-index: -1;
   background: radial-gradient(50% 50% at 50% 50%, rgba(4, 102, 156, 0.8), transparent 70%);
 }
-.final h2 {
+.ch-invitation .quote {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(171, 214, 255, 0.24);
+  box-shadow: none;
+}
+.ch-invitation .quote p {
+  color: rgba(255, 255, 255, 0.82);
+}
+.ch-invitation .quote figcaption {
   color: #fff;
 }
-.final__inner {
+.ch-invitation .quote figcaption span {
+  color: rgba(255, 255, 255, 0.6);
+}
+.closing {
   max-width: 780px;
-  margin-inline: auto;
+  margin: clamp(3.5rem, 6vw, 5.5rem) auto 0;
   display: grid;
   gap: 1.1rem;
   justify-items: center;
+  text-align: center;
 }
-.final .lede {
+.closing h2 {
+  color: #fff;
+}
+.closing .lede {
   color: rgba(255, 255, 255, 0.85);
 }
-.final__actions {
+.closing__actions {
   display: flex;
   gap: 0.9rem;
   justify-content: center;
   flex-wrap: wrap;
   margin-top: 0.9rem;
 }
-
-/* The final band is dark, so a ghost button's default ink colour would paint
-   it invisible against its own background. */
-.final .btn--ghost {
+/* The chapter is dark, so a ghost button's default ink would paint it
+   invisible against its own background. */
+.closing .btn--ghost {
   color: #fff;
 }
-.final .btn--ghost::before {
+.closing .btn--ghost::before {
   background: #fff;
 }
-.final .btn--ghost:hover {
+.closing .btn--ghost:hover {
   color: var(--blue-deep);
 }

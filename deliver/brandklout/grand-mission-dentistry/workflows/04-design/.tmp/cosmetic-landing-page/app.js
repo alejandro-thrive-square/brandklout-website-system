@@ -12,10 +12,13 @@ var OFFER = {
   newPatient: 189, // exam, X-rays, cleaning, treatment plan
   invisalign: 3799, // aligners, refinements, retainer, whitening
 
-  /* The practice's main line. The previous cosmetic campaign used the tracking
-     number (281) 729-4615; swap it in once Brandklout confirms ownership. */
-  phoneDisplay: '(281) 789-8836',
-  phoneDial: '+12817898836',
+  /* The cosmetic campaign's own call-tracking number, as published on the
+     vendor original — distinct from the implant page's, which is the point of
+     tracking numbers. OPEN with Brandklout: if it belongs to the outgoing ad
+     company it may be disconnected at handover. Fallback is the main line,
+     (281) 789-8836 / +12817898836. */
+  phoneDisplay: '(281) 729-4615',
+  phoneDial: '+12817294615',
 };
 
 /* GHL lead destination — Asana task 1217072657902270 requires the form to live

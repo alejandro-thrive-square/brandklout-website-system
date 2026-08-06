@@ -14,11 +14,15 @@ var OFFER = {
      Brandklout confirms that offer is live, change this one value. */
   implantPrice: 2999,
 
-  /* The practice's main line. The previous implant campaign used the tracking
-     number (281) 747-5929; swap it in here once Brandklout confirms who owns
-     that number and that it stays connected after the agency handover. */
-  phoneDisplay: '(281) 789-8836',
-  phoneDial: '+12817898836',
+  /* The implant campaign's own call-tracking number, as published on the
+     vendor original. Per-page numbers are what make paid-channel attribution
+     possible, so they stay distinct rather than collapsing to the main line.
+     OPEN with Brandklout: if this number belongs to the outgoing ad company
+     it may be disconnected at handover, at which point every CTA on this page
+     dies silently. Fallback is the practice's main line, (281) 789-8836 /
+     +12817898836 — a two-line change here, nowhere else. */
+  phoneDisplay: '(281) 747-5929',
+  phoneDial: '+12817475929',
 };
 
 /* GHL lead destination. Asana task 1217133289235653 requires the lead form to
