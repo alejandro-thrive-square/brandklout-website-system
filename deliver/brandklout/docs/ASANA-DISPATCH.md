@@ -37,6 +37,16 @@ structure references, not the platform.
 Delivery sequence: **design and build locally first → review → then Webflow.** No Webflow paste
 happens until a page is approved locally, and no client here has a Webflow grant yet.
 
+## Commercial terms — no pricing on this batch
+
+Brandklout is a **partner engagement**, not a per-page client. [PRICING_TIMELINE_RULES.md](../../../sales/PRICING_TIMELINE_RULES.md)
+does **not** apply to any client under `deliver/brandklout/`, and no agent should compute a price,
+a per-page rate, or a quote for this work.
+
+Scope and page count still matter — for **sequencing and capacity**, not cost. Twelve landing pages
+sharing one due date is a real scheduling problem worth surfacing to Brandklout; it is not a
+pricing conversation.
+
 ## How to use the reference URLs — READ THIS BEFORE DESIGNING
 
 Confirmed with the client 2026-08-05:
@@ -46,9 +56,15 @@ Confirmed with the client 2026-08-05:
 > design.**
 
 So the reference is a **wireframe and a content brief**, not a visual target. The visual design is
-ours to author, and the bar is *beautiful* — these are paid-traffic pages competing against the
-same handful of dental-PPC templates everyone else is running, so looking like the reference is a
-commercial failure, not a success.
+ours to author, and the bar is set by [DESIGN-STANDARD.md](./DESIGN-STANDARD.md): **awwwards-grade,
+motion-led, high-interaction**, benchmarked against the Dr. Nahlah build. These are paid-traffic
+pages competing against the same handful of dental-PPC templates everyone else runs, so looking
+like the reference is a commercial failure, not a success.
+
+> [!IMPORTANT]
+> Read [DESIGN-STANDARD.md](./DESIGN-STANDARD.md) before designing. "Beautiful" as a brief produced
+> a plain templatised page on the first Grand Mission pass; the standard replaces the adjective
+> with a checklist.
 
 Practical method per page:
 
@@ -93,9 +109,22 @@ than per-client direction:
 - https://start.smartarchesdental.com/?step=start
 - https://novismilerogers.com/
 
-Grand Mission and Mason Park additionally note *"Attached are the originals from the other Ad
-company. Use it as a reference point"* — **those attachments have not been downloaded.** They live
-on the Asana tasks; `get_attachments` is available in the MCP tool set if we need them.
+Grand Mission and Mason Park note *"Attached are the originals from the other Ad company. Use it as
+a reference point."* **Those attachments are now downloaded** (2026-08-06) — run
+[`asana-context.mjs`](../scripts/README.md#getting-the-real-brief--asana-contextmjs) and read
+`<client>/workflows/01-content-intake/.tmp/asana-context/CONTEXT.md`.
+
+They are the real brief, and they carry verified practice facts — doctors, offers, phone numbers,
+genuine testimonials — that remove most of the "never invent content" risk. Key gotcha: attachments
+hang off the **parent** task, not the subtasks, so per-subtask queries return nothing and look like
+there are none.
+
+| Client | Attachments | Notable |
+| :--- | :--- | :--- |
+| Grand Mission | 2 HTML originals | Richmond TX; Dr. William Sung DMD, Dr. Van Nguyen; $3,499 single-tooth implant; **per-page call-tracking numbers** — do not unify them |
+| Arvada | README + full LP + schema | Client site is `arvadadentalcenter.com`; phone, address, 4 named doctors, financing tiers |
+| Mason Park | 2 HTML originals | The loose `mpd-invisalign-lp.html` at the client root is byte-identical to the attachment — a vendor original, **not** our deliverable |
+| Dr. Nahlah, Stone | none | Confirmed empty |
 
 Recurring page archetypes across clients — build these once as a reusable pattern rather than five
 times from scratch:

@@ -1,0 +1,291 @@
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+<div class="pagekit" hidden aria-hidden="true"></div>
+<style>
+/* ---------- hero ---------- */
+.pg-hero{position:relative;min-height:clamp(560px,78svh,860px);display:flex;align-items:flex-end;
+  overflow:hidden;padding-top:clamp(8rem,15vw,11rem);padding-bottom:clamp(2.5rem,6vw,4.5rem);
+  background:var(--bg)}
+.pg-hero .ph-bg{position:absolute;inset:0;z-index:0}
+.pg-hero .ph-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:grayscale(.18) contrast(1.02) brightness(1.06)}
+/* Two stacked scrims: a horizontal one so the copy column always has a floor,
+   and a vertical one so the nav and the section seam both stay legible. */
+.pg-hero .ph-bg::after{content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(90% 70% at 80% 38%,rgba(171,158,106,.20),transparent 62%),
+    linear-gradient(100deg,rgba(250,248,243,.98) 0%,rgba(250,248,243,.94) 44%,rgba(250,248,243,.34) 80%),
+    linear-gradient(180deg,rgba(250,248,243,.86) 0%,rgba(250,248,243,.22) 34%,rgba(250,248,243,.96) 100%)}
+.pg-hero .ph-in{position:relative;z-index:2;width:100%;display:grid;gap:clamp(1.25rem,2.6vw,2rem)}
+.pg-hero h1{font-size:var(--d2);max-width:17ch}
+.pg-hero h1 em{font-style:italic;color:var(--accent-lg)}
+.pg-hero .ph-lead{max-width:52ch;color:var(--fg-body);font-size:var(--body-lg);font-weight:400}
+.pg-hero .ph-actions{display:flex;flex-wrap:wrap;gap:.85rem}
+.pg-hero .ph-meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);margin-top:.5rem;
+  padding-top:clamp(1rem,2.4vw,1.6rem);border-top:1px solid var(--line)}
+.pg-hero .ph-meta div{display:grid;gap:.15rem}
+.pg-hero .ph-meta b{font-family:var(--f-display);font-size:clamp(1.15rem,2vw,1.7rem);font-weight:500}
+.pg-hero .ph-meta span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--fg-soft)}
+@media(max-width:719px){ .pg-hero .btn{flex:1 1 auto} }
+
+/* ---------- crumb ---------- */
+.pk-crumb{display:flex;align-items:center;gap:.6rem;font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;color:var(--fg-soft)}
+.pk-crumb a{color:var(--accent)}
+.pk-crumb a:hover{text-decoration:underline}
+.pk-crumb i{width:16px;height:1px;background:var(--line-strong);display:block}
+
+/* ---------- generic section ---------- */
+/* Three light grounds in rotation give the page rhythm without a dark band:
+   cream is the default, .alt lifts to white, .light drops to the gold wash.
+   .pk[data-theme="dark"] is the deliberate exception, used twice on the site. */
+.pk{background:var(--bg);color:var(--fg-body)}
+.pk.alt{background:var(--bg-2)}
+.pk.light{background:var(--bg-3)}
+.pk h2{font-size:var(--h2);max-width:18ch}
+.pk h3{font-size:var(--h3)}
+.pk-head{display:grid;gap:1.1rem;max-width:52ch;margin-bottom:clamp(2rem,4.5vw,3.5rem)}
+.pk-head p{color:var(--fg-body);font-weight:400;font-size:var(--body-lg)}
+
+/* ---------- lede: sticky heading + prose ---------- */
+.pk-lede{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:start}
+.pk-lede .lc-head{position:relative}
+.pk-lede .lc-body{display:grid;gap:1.15rem;max-width:64ch}
+.pk-lede .lc-body p{color:var(--fg-body);font-weight:400;line-height:1.85}
+.pk-lede .lc-body strong{color:var(--fg);font-weight:600}
+@media(min-width:960px){
+  .pk-lede{grid-template-columns:.85fr 1.15fr}
+  .pk-lede .lc-head{position:sticky;top:clamp(6rem,10vw,8rem)}
+}
+
+/* ---------- numbered / icon cards ---------- */
+.pk-cards{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem)}
+.pk-card{background:var(--card);border:1px solid var(--line);
+  padding:clamp(1.4rem,2.4vw,2.1rem);display:grid;gap:.75rem;align-content:start;
+  transition:border-color .45s ease,transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease}
+/* On the white band a white card would vanish, so it takes the cream instead. */
+.pk.alt .pk-card{background:var(--bg)}
+.pk-card:hover{border-color:rgba(138,126,78,.5);transform:translateY(-4px);
+  box-shadow:0 14px 40px rgba(20,20,22,.07)}
+.pk[data-theme="dark"] .pk-card:hover{box-shadow:none;border-color:rgba(171,158,106,.55)}
+.pk-card .n{font-family:var(--f-display);font-size:clamp(1.6rem,2.6vw,2.4rem);color:var(--accent-lg);
+  line-height:1}
+.pk-card h3{font-size:clamp(1.1rem,1.5vw,1.4rem)}
+.pk-card p{color:var(--fg-body);font-weight:400;font-size:.94rem;line-height:1.75}
+/* Partner marks (CareCredit, Proceed Finance, LendingClub) are drawn for white
+   stationery — dark green, navy and red on transparent. Dropped straight onto a
+   near-black card they all but vanish. Give them the white ground they were
+   designed for rather than recolouring someone else's logo. */
+/* A hairline keeps the plate legible when the card itself is white. */
+.pk-card .brandmark{background:#fff;border:1px solid var(--line-2);border-radius:3px;padding:.7rem .9rem;
+  justify-self:start;display:inline-flex;align-items:center;margin-bottom:.2rem}
+.pk-card .brandmark img{height:26px;width:auto;object-fit:contain;display:block}
+.pk-card a.more{margin-top:.35rem;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:var(--accent)}
+@media(min-width:720px){ .pk-cards.c2{grid-template-columns:repeat(2,1fr)}
+  .pk-cards.c3{grid-template-columns:repeat(2,1fr)}
+  .pk-cards.c4{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:1040px){ .pk-cards.c3{grid-template-columns:repeat(3,1fr)}
+  .pk-cards.c4{grid-template-columns:repeat(4,1fr)} }
+
+/* ---------- split: image + copy ---------- */
+.pk-split{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:center}
+.pk-split .sp-fig{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist)}
+.pk-split .sp-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  will-change:transform}
+.pk-split .sp-copy{display:grid;gap:1.1rem;max-width:56ch}
+.pk-split .sp-copy p{color:var(--fg-body);font-weight:400;line-height:1.85}
+.sp-list{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:0}
+.sp-list li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:baseline;
+  padding-block:.72rem;border-top:1px solid var(--line);font-weight:400;font-size:.94rem;
+  color:var(--fg-body)}
+.sp-list li:last-child{border-bottom:1px solid var(--line)}
+.sp-list i{width:5px;height:5px;border-radius:50%;background:var(--rule);display:block;
+  transform:translateY(-2px)}
+@media(min-width:900px){
+  .pk-split{grid-template-columns:1fr 1fr}
+  .pk-split.rev .sp-fig{order:2}
+}
+
+/* ---------- stat row ---------- */
+.pk-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.5rem,3vw,2.5rem);
+  padding-top:clamp(1.5rem,3vw,2.25rem);border-top:1px solid var(--line)}
+.pk-stats div{display:grid;gap:.3rem}
+.pk-stats b{font-family:var(--f-display);font-size:clamp(2rem,4.4vw,3.4rem);font-weight:500;
+  color:var(--accent-lg);line-height:1}
+.pk-stats span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft)}
+
+/* ---------- inline "more" link ---------- */
+.pk-more{display:inline-flex;align-items:center;gap:.55rem;
+  font-size:var(--label);letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  color:var(--accent);border-bottom:1px solid rgba(138,126,78,.5);padding-bottom:.35rem;
+  transition:color .35s,border-color .35s}
+.pk-more::after{content:"\2192";transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.pk-more:hover{color:var(--fg);border-color:var(--fg)}
+.pk-more:hover::after{transform:translateX(5px)}
+@media(min-width:820px){ .pk-stats{grid-template-columns:repeat(4,1fr)} }
+
+/* ---------- before / after pair ---------- */
+.pk-ba-grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.75rem)}
+@media(min-width:700px){ .pk-ba-grid{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:1100px){ .pk-ba-grid.g3{grid-template-columns:repeat(3,1fr)} }
+.pk-ba{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist);
+  --pos:50%;isolation:isolate}
+.pk-ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pk-ba img.after{clip-path:inset(0 0 0 var(--pos))}
+.pk-ba .ba-line{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;background:var(--gold-deep);
+  transform:translateX(-1px);z-index:3;pointer-events:none}
+.pk-ba .ba-line::before{content:"";position:absolute;top:50%;left:50%;width:40px;height:40px;
+  transform:translate(-50%,-50%);border-radius:50%;background:var(--gold-deep);
+  box-shadow:0 6px 24px rgba(0,0,0,.32)}
+.pk-ba .ba-tag{position:absolute;top:.7rem;z-index:4;padding:.32rem .7rem;font-size:.58rem;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+.pk-ba .ba-tag.b{left:.7rem;background:rgba(11,11,12,.78);color:#fff}
+.pk-ba .ba-tag.a{right:.7rem;background:var(--gold-ink);color:#fff}
+/* A range input, not a mouse-only drag handle: this stays operable from the
+   keyboard and reads as a slider to assistive tech. */
+.pk-ba input[type=range]{position:absolute;inset:0;width:100%;height:100%;z-index:5;margin:0;
+  opacity:0;cursor:ew-resize}
+.pk-ba:focus-within{outline:2px solid var(--gold-light);outline-offset:3px}
+.pk-ba-cap{margin-top:.7rem;font-size:.8rem;color:var(--fg-soft);font-weight:400}
+
+/* ---------- pull quote ---------- */
+.pk-quote{max-width:24ch;font-family:var(--f-display);font-size:var(--h2);line-height:1.12;
+  letter-spacing:-.02em}
+.pk-quote-mark{font-family:var(--f-display);font-size:clamp(2.5rem,6vw,4.5rem);color:var(--accent-lg);
+  line-height:.6;display:block;margin-bottom:.6rem}
+.pk-quote-by{margin-top:1.4rem;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent)}
+
+/* ---------- faq ---------- */
+.pk-faq{display:grid;gap:0;max-width:80ch}
+.pk-faq details{border-top:1px solid var(--line)}
+.pk-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.pk-faq summary{list-style:none;cursor:pointer;padding-block:clamp(1rem,2vw,1.4rem);
+  display:flex;align-items:flex-start;gap:1rem;font-family:var(--f-display);
+  font-size:clamp(1.05rem,1.7vw,1.35rem);font-weight:500;transition:color .3s}
+.pk-faq summary::-webkit-details-marker{display:none}
+.pk-faq summary{color:var(--fg)}
+.pk-faq summary:hover{color:var(--accent-lg)}
+.pk-faq summary::after{content:"";flex:none;margin-left:auto;width:12px;height:12px;
+  border-right:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule);
+  transform:rotate(45deg) translateY(-2px);transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.pk-faq details[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
+.pk-faq .fa-body{padding-bottom:clamp(1.1rem,2.2vw,1.6rem);color:var(--fg-body);
+  font-weight:400;line-height:1.85;max-width:68ch}
+
+/* ---------- next-steps cross links ---------- */
+.pk-next{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line)}
+.pk-next a{background:var(--bg);padding:clamp(1.4rem,2.6vw,2.1rem);display:grid;gap:.5rem;
+  transition:background .4s ease}
+.pk.alt .pk-next a{background:var(--bg-2)}
+.pk-next a:hover{background:var(--bg-3)}
+.pk[data-theme="dark"] .pk-next a:hover{background:var(--ink-800)}
+.pk-next .nx-k{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.pk-next .nx-t{font-family:var(--f-display);font-size:clamp(1.15rem,1.8vw,1.5rem);font-weight:500}
+.pk-next .nx-d{color:var(--fg-body);font-weight:400;font-size:.9rem}
+@media(min-width:760px){ .pk-next{grid-template-columns:repeat(3,1fr)} }
+
+/* ---------- closing CTA band ---------- */
+.pk-cta{position:relative;overflow:hidden;
+  background:linear-gradient(115deg,var(--gold-deep),var(--gold) 48%,var(--gold-light));
+  color:var(--black);text-align:center}
+.pk-cta .cta-in{display:grid;gap:1.25rem;justify-items:center;max-width:60ch;margin-inline:auto}
+.pk-cta h2{font-size:var(--d2);max-width:15ch}
+.pk-cta p{color:rgba(11,11,12,.78);font-weight:400;max-width:46ch}
+.pk-cta .cta-phones{display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:center;
+  margin-top:.5rem;font-size:.8rem;letter-spacing:.06em;color:rgba(11,11,12,.72)}
+.pk-cta .cta-phones a{font-family:var(--f-display);font-size:1.15rem;color:var(--black);
+  border-bottom:1px solid rgba(11,11,12,.3)}
+
+/* Pre-reveal state. Applied only once the kit's script confirms GSAP is live,
+   so a scripting failure leaves a fully readable page rather than a blank one. */
+.wz-kit [data-rv]{opacity:0}
+@media(prefers-reduced-motion:reduce){ .wz-kit [data-rv]{opacity:1} }
+</style>
+
+<script>
+WZ.add(function (W) {
+  var kit = document.body;
+  if (!W.reduced) kit.classList.add('wz-kit');
+
+  /* Before/after sliders work with or without GSAP — they are content, not motion. */
+  document.querySelectorAll('.pk-ba').forEach(function (ba) {
+    var range = ba.querySelector('input[type=range]');
+    if (!range) return;
+    var paint = function () { ba.style.setProperty('--pos', range.value + '%'); };
+    range.addEventListener('input', paint);
+    paint();
+  });
+
+  if (W.reduced) return;
+
+  /* One reveal rule for the whole kit: anything tagged data-rv rises into place
+     when it crosses 86% of the viewport. data-rv="stagger" walks its children. */
+  gsap.utils.toArray('[data-rv]').forEach(function (el) {
+    // A nested data-rv is animated twice — once as its parent's stagger child
+    // and once in its own right — and the two `from` tweens fight over opacity,
+    // which can strand it invisible. The outer reveal already covers it.
+    if (el.parentElement && el.parentElement.closest('[data-rv]')) return;
+    var mode = el.getAttribute('data-rv');
+    var targets = mode === 'stagger' ? el.children : el;
+    gsap.set(el, { opacity: 1 });
+    gsap.from(targets, {
+      opacity: 0, y: 30, duration: .95, ease: 'power3.out',
+      stagger: mode === 'stagger' ? .09 : 0,
+      scrollTrigger: { trigger: el, start: 'top 86%' }
+    });
+  });
+
+  /* Masked line reveal for anything asking for it. */
+  gsap.utils.toArray('[data-split]').forEach(function (el) {
+    W.splitLines(el, function (self) {
+      return gsap.from(self.lines, {
+        yPercent: 108, duration: 1.05, stagger: .08, ease: 'power4.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' }
+      });
+    });
+  });
+
+  /* Photos drift against the scroll so a static page still feels alive. */
+  gsap.utils.toArray('[data-drift]').forEach(function (img) {
+    gsap.fromTo(img, { yPercent: -6, scale: 1.12 }, {
+      yPercent: 6, scale: 1.12, ease: 'none',
+      scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: .8 }
+    });
+  });
+
+  /* Counters. Reduced motion prints the final value immediately (above). */
+  gsap.utils.toArray('.pk-stats [data-count]').forEach(function (el) {
+    var target = parseFloat(el.getAttribute('data-count')),
+        dec = parseInt(el.getAttribute('data-decimals') || '0', 10),
+        suffix = el.getAttribute('data-suffix') || '',
+        obj = { v: 0 };
+    gsap.to(obj, {
+      v: target, duration: 1.9, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 90%' },
+      onUpdate: function () {
+        el.textContent = obj.v.toLocaleString('en-US',
+          { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suffix;
+      }
+    });
+  });
+});
+/* Reduced motion never runs the counter tween, so paint the finals up front. */
+(function () {
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.pk-stats [data-count]').forEach(function (el) {
+    var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    el.textContent = parseFloat(el.getAttribute('data-count'))
+      .toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec })
+      + (el.getAttribute('data-suffix') || '');
+  });
+})();
+</script>

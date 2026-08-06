@@ -31,15 +31,15 @@ with **no description, no references, no due date, and no attachments**.
 Also note the naming: the Asana project is *Stone Dental Implant Center*, but the two deliverables
 are *Stone Med Spa* and *Stone Surgical Arts*. That is plausibly one ownership group with three
 brands. Confirm whether these are two sites for one client, two separate clients, or sub-brands —
-it changes the folder structure, the pricing, and the number of platform grants needed.
+it changes the folder structure and the number of platform grants needed.
 
 ## Blocking unknowns
 
 Effectively everything. At minimum, before any estimate:
 
 1. **Are these redesigns of existing sites, or greenfield builds?** No URLs exist in Asana.
-2. **Page count per site** — the single biggest driver of both timeline and price per
-   [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md).
+2. **Page count per site** — the single biggest driver of how long this takes and whether it is
+   deliverable alongside the landing-page batch.
 3. **Relationship between Stone Dental Implant Center, Stone Med Spa, and Stone Surgical Arts.**
 4. **Brand assets** — do they exist, or is identity work in scope too? A med spa and a surgical
    practice would not share one visual system.
@@ -61,7 +61,8 @@ Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING
 
 Send Brandklout a short scoping question set covering items 1–3 above. Two undated full-site builds
 sitting alongside twelve landing pages due the same week is a capacity question as much as a scope
-question — surface it rather than absorbing it.
+question — surface it rather than absorbing it. This is a partner engagement, so the question is
+sequencing and capacity, never price.
 
 ## Project structure
 
