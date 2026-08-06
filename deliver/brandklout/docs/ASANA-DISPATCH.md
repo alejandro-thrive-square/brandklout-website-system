@@ -140,8 +140,12 @@ The thank-you page has an identical 4-section spec in both clients. The prior de
 work in [`livewell-dental/`](../livewell-dental/docs/project-overview.md) is the closest existing
 reference.
 
-- **Thank-you archetype is BUILT** at `mason-park/workflows/04-design/.tmp/thank-you/` (2026-08-05).
-  Client-specific values are isolated to one constants block — Grand Mission should clone, not rebuild.
+- **Thank-you archetype is BUILT** at `mason-park/workflows/04-design/.tmp/thank-you/` (2026-08-05,
+  rebuilt as a 4-chapter journey 2026-08-06). Client-specific values are isolated to one constants
+  block — Grand Mission should clone, not rebuild.
+- **Before adding a manual `ScrollTrigger.refresh()`, read the bug note in
+  `mason-park/workflows/04-design/.tmp/README.md`** — racing SplitText's post-font re-split reverts
+  every pin on the page, silently, and makes later chapters unreachable by scrolling.
 - **Heads-up on the GHL preview reference** (`sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC`):
   it is a *Grand Mission* page. Its award, insurance carriers, review count and hours are theirs — do
   not copy them into another client.

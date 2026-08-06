@@ -12,317 +12,850 @@
   Mason Park Dental — New Patient Special landing page
   Source Asana task GID: 1217162605683021
   Parent task GID:       1217040406855582
-  Built: 2026-08-05 | deliver/brandklout/mason-park/workflows/04-design/.tmp/new-patient-special/
+  Rebuilt as a journey: 2026-08-06
+  deliver/brandklout/mason-park/workflows/04-design/.tmp/new-patient-special/
+
+  SEVEN CHAPTERS, three of them scroll-driven:
+    00 Arrival        the $189 offer, in motion
+    01 The Catch      PINNED + SCRUBBED — the cheap-first-visit trap, read word by word
+    02 What It Covers PINNED + SCRUBBED — $517 falls to $189 as the four items check off
+    03 The Visit      PINNED + SCRUBBED — the day itself, drawn step by step
+    04 The Team       who you will be seeing, and the other new-patient offers
+    05 The Proof      patients and accreditation
+    06 The Invitation paying for it, the full range of care, and the offer restated
+
   All offers, prices, names and reviews come from the client's own material.
   See ../../../01-content-intake/.tmp/content-intake-summary.md
 -->
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
-<script>
-  /* Arms the motion system's hidden states before first paint, so above-fold
-     content never paints and then flicks out. The timer is the failsafe: if
-     mpd.js never runs (blocked, 404, parse error) the class is removed and the
-     page renders as plain, fully visible HTML. */
-  document.documentElement.className += ' js';
-  setTimeout(function () {
-    if (!window.MPD) document.documentElement.classList.remove('js');
-  }, 3000);
-</script>
-<link rel="stylesheet" href="assets/mpd.css">
+<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../shared/mpd.css">
+
+<script src="../_vendor/gsap/gsap.min.js"></script>
+<script src="../_vendor/gsap/ScrollTrigger.min.js"></script>
+<script src="../_vendor/gsap/ScrollToPlugin.min.js"></script>
+<script src="../_vendor/gsap/SplitText.min.js"></script>
+<script src="../shared/mpd.js"></script>
 </head>
 <body data-page-key="new-patient-special">
 <a class="skip-link" href="#main">Skip to content</a>
 
-<!-- ============ UTILITY BAR ============ -->
-<div class="u-bar">
-  <div class="wrap">
-    <span>21830 Kingsland Blvd #104A, Katy, TX 77450</span>
-    <span class="dot" aria-hidden="true">•</span>
-    <span data-today-hours>Katy, TX</span>
-    <span class="dot" aria-hidden="true">•</span>
-    <a data-phone="href" href="tel:+12817698878"><span data-phone-text>(281) 769-8878</span></a>
-  </div>
-</div>
-
-<!-- ============ HEADER ============ -->
+<!-- ==========================================================================
+     PERSISTENT UI — fixed, and outside <main>, so the offer, the phone and
+     the form stay one tap away at every scroll depth.
+     ========================================================================== -->
 <header class="site-head">
+  <div class="head-progress" aria-hidden="true"><i id="headProgress"></i></div>
   <div class="wrap">
     <div class="brand">
-      <img src="assets/img/logo.webp" alt="Mason Park Dental of Katy" width="200" height="77">
+      <img src="../shared/img/logo.webp" alt="Mason Park Dental of Katy" width="200" height="77">
     </div>
+    <p class="chapter-readout" aria-hidden="true">
+      <b id="chapterNo">00</b><span id="chapterName">Arrival</span>
+    </p>
     <div class="head-actions">
       <a class="head-phone" data-phone="href" href="tel:+12817698878">
-        <span>Call the practice</span><span data-phone-text>(281) 769-8878</span>
+        <span data-today-hours>Katy, TX</span><span data-phone-text>(281) 769-8878</span>
       </a>
-      <a class="btn" href="#book">Claim $189 special</a>
+      <a class="btn magnetic" href="#book"><span>Claim $189 special</span></a>
     </div>
   </div>
 </header>
 
-<!-- ============ OFFER STRIP ============ -->
-<div class="offer-strip">
-  <div class="wrap">
-    <span><strong>$189 New Patient Special</strong> — exam, x-rays, cleaning and full treatment plan.</span>
-    <span class="dot" aria-hidden="true">•</span>
-    <span>That is $328 in savings.</span>
-  </div>
+<div class="offer-rail">
+  <span class="rail-offer">$189 New Patient Special — exam, x-rays, cleaning and full treatment plan.</span>
+  <span class="rail-sep" aria-hidden="true"></span>
+  <a class="rail-call" data-phone="href" href="tel:+12817698878"><span data-phone-text>(281) 769-8878</span></a>
+  <a class="btn btn--sand" href="#book"><span>Claim now</span></a>
+</div>
+
+<div class="sticky-bar">
+  <a class="btn btn--ghost" data-phone="href" href="tel:+12817698878">Call</a>
+  <a class="btn btn--sand" href="#book">Claim $189 special</a>
 </div>
 
 <main id="main">
 
-<!-- ============ HERO ============ -->
-<section class="hero">
-  <div class="wrap">
-    <div class="hero-grid">
+<!-- ==========================================================================
+     CHAPTER 00 — ARRIVAL
+     ========================================================================== -->
+<section class="chapter ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival" data-theme="light">
+  <style>
+    .ch-arrival { position: relative; overflow: hidden; padding-top: clamp(6rem, 12vw, 8.5rem); }
+    .ch-arrival .arr-bg { position: absolute; inset: 0; z-index: 0; }
+    .ch-arrival .arr-bg img {
+      position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; will-change: transform;
+    }
+    .ch-arrival .arr-bg::after {
+      content: ""; position: absolute; inset: 0;
+      background:
+        radial-gradient(90% 70% at 76% 28%, rgba(195, 169, 142, 0.26), transparent 62%),
+        linear-gradient(104deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.95) 46%, rgba(255,255,255,.6) 82%),
+        linear-gradient(180deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,.3) 30%, rgba(255,255,255,.96) 100%);
+    }
+    .ch-arrival .arr-in {
+      position: relative; z-index: 2;
+      display: grid; gap: clamp(2rem, 5vw, 3.5rem);
+      padding-block: clamp(2rem, 5vw, 4rem) clamp(3rem, 6vw, 5rem);
+      align-items: start;
+    }
+    @media (min-width: 980px) { .ch-arrival .arr-in { grid-template-columns: 1.15fr 0.85fr; } }
+    .ch-arrival h1 { max-width: 14ch; }
+    .ch-arrival h1 em { font-style: normal; color: var(--accent-lg); }
+    .ch-arrival .lead { margin-top: 1.1rem; }
+    .ch-arrival .arr-cue {
+      display: flex; align-items: center; gap: 0.7rem; margin-top: clamp(1.75rem, 3vw, 2.5rem);
+      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-soft);
+    }
+    .ch-arrival .arr-cue i {
+      display: block; width: 1px; height: 38px;
+      background: linear-gradient(180deg, var(--sand-deep), transparent);
+    }
+    @media (max-width: 979px) { .ch-arrival .arr-cue { display: none; } }
+  </style>
 
-      <div class="hero-copy">
-        <p class="eyebrow">New patients — Katy, TX</p>
-        <h1>
-          <span class="line">Your first visit,</span>
-          <span class="line">properly done.</span>
-        </h1>
-        <p class="lead">
-          A comprehensive exam, x-rays, a cleaning and a full treatment plan — everything needed to
-          know exactly where your teeth stand, in a single appointment.
+  <div class="arr-bg" aria-hidden="true">
+    <img id="arrBg" src="../shared/img/interior.jpg" alt="" width="1024" height="683">
+  </div>
+
+  <div class="wrap arr-in">
+    <div>
+      <p class="chapter-tag" data-anim="hide"><i></i><span>Chapter 00 &middot; Arrival</span></p>
+      <h1 data-anim="hide" id="arrTitle">Your first visit, <em>properly done.</em></h1>
+      <p class="lead" data-anim="hide" id="arrLead">
+        A comprehensive exam, x-rays, a cleaning and a full treatment plan — everything needed to
+        know exactly where your teeth stand, in a single appointment.
+      </p>
+
+      <div class="price-block" data-anim="hide" id="arrPrice">
+        <div class="price-now" data-count-to="189">$189</div>
+        <div class="price-meta">
+          <span class="price-save">Save $328</span>
+          <span class="price-was">Regular $517</span>
+        </div>
+        <p class="fine" style="flex:1 1 220px;max-width:32ch;">
+          New patients of Mason Park Dental of Katy. Any further treatment is quoted for your
+          approval before anything is started.
         </p>
-
-        <div class="price-block">
-          <div class="price-now">$189</div>
-          <div class="price-meta">
-            <span class="price-save">Save $328</span>
-            <span class="price-was">Regular $517</span>
-          </div>
-          <p class="fine" style="flex:1 1 220px;max-width:32ch;">
-            New patients of Mason Park Dental of Katy. Any further treatment is quoted for your
-            approval before anything is started.
-          </p>
-        </div>
-
-        <ul class="chips" style="margin-top:1.5rem;">
-          <li class="chip"><svg class="tick" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comprehensive exam</li>
-          <li class="chip"><svg class="tick" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>X-rays</li>
-          <li class="chip"><svg class="tick" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Cleaning</li>
-          <li class="chip"><svg class="tick" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Full treatment plan</li>
-        </ul>
-
-        <div class="rating" style="margin-top:1.75rem;">
-          <span class="stars" aria-hidden="true">
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
-            <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
-          </span>
-          <span class="score">5.0</span>
-          <span class="src">rated by our patients on Google</span>
-        </div>
       </div>
 
-      <!-- ---------- Lead form ---------- -->
-      <div class="form-card" id="book">
-        <div class="form-head">
-          <p class="eyebrow eyebrow--center">Claim the special</p>
-          <h2 class="h2">Book your first visit</h2>
-          <p class="small muted">Two quick steps. We will confirm your time by phone.</p>
-        </div>
+      <ul class="chips" id="arrChips" style="margin-top:1.5rem;" data-anim="hide">
+        <li class="chip"><svg class="tick" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Comprehensive exam</li>
+        <li class="chip"><svg class="tick" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>X-rays</li>
+        <li class="chip"><svg class="tick" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Cleaning</li>
+        <li class="chip"><svg class="tick" width="14" height="14" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>Full treatment plan</li>
+      </ul>
 
-        <form data-lead-form data-offer="$189 New Patient Special"
-              data-asana-gid="1217162605683021" novalidate>
-          <div class="progress" aria-hidden="true"><span class="on"></span><span></span></div>
-
-          <div class="step-panel active">
-            <p style="font-family:var(--display);font-weight:500;font-size:1.0625rem;margin-bottom:0.9rem;">
-              What brings you in?
-            </p>
-            <div class="choices">
-              <button type="button" class="choice" aria-pressed="false" data-value="Check-up and cleaning">
-                <span class="mark" aria-hidden="true"></span>A check-up and cleaning
-              </button>
-              <button type="button" class="choice" aria-pressed="false" data-value="Something is bothering me">
-                <span class="mark" aria-hidden="true"></span>Something is bothering me
-              </button>
-              <button type="button" class="choice" aria-pressed="false" data-value="Second opinion">
-                <span class="mark" aria-hidden="true"></span>A second opinion on a treatment plan
-              </button>
-              <button type="button" class="choice" aria-pressed="false" data-value="Appointment for my child">
-                <span class="mark" aria-hidden="true"></span>An appointment for my child
-              </button>
-            </div>
-          </div>
-
-          <div class="step-panel">
-            <div class="field">
-              <label for="np-name">Full name</label>
-              <input id="np-name" name="full_name" type="text" autocomplete="name" data-required>
-              <span class="err" role="alert"></span>
-            </div>
-            <div class="field">
-              <label for="np-phone">Phone</label>
-              <input id="np-phone" name="phone" type="tel" autocomplete="tel" placeholder="(281) 555-0100" data-required>
-              <span class="err" role="alert"></span>
-            </div>
-            <div class="field">
-              <label for="np-email">Email</label>
-              <input id="np-email" name="email" type="email" autocomplete="email" data-required>
-              <span class="err" role="alert"></span>
-            </div>
-
-            <input class="hp-field" type="text" name="company_website" tabindex="-1" autocomplete="off"
-                   aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;opacity:0;">
-
-            <label class="consent">
-              <input type="checkbox" name="consent">
-              <span>I agree to be contacted about my appointment. By providing my phone number I agree
-                to receive text messages from Mason Park Dental of Katy.</span>
-            </label>
-
-            <button class="btn btn--sand btn--block btn--lg" type="submit" disabled>Claim my $189 visit</button>
-            <button type="button" class="btn btn--ghost btn--block" data-back style="margin-top:0.6rem;">Back</button>
-            <p class="form-msg" role="status" aria-live="polite"></p>
-          </div>
-
-          <p class="form-trust">
-            <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5l5 2v4c0 3-2.1 5.6-5 7-2.9-1.4-5-4-5-7v-4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
-            Your details stay with the practice.
-          </p>
-        </form>
+      <div class="rating" style="margin-top:1.75rem;" data-anim="hide">
+        <span class="stars" aria-hidden="true">
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
+          <svg width="16" height="16" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
+        </span>
+        <span class="score">5.0</span>
+        <span class="src">rated by our patients on Google</span>
       </div>
 
+      <div class="arr-cue" data-anim="hide"><span>Begin</span><i></i></div>
+    </div>
+
+    <!-- ---------- Lead form ---------- -->
+    <div class="form-card" id="book" data-anim="hide">
+      <div class="form-head">
+        <p class="eyebrow">Claim the special</p>
+        <h2 class="h2">Book your first visit</h2>
+        <p class="small muted">Two quick steps. We will confirm your time by phone.</p>
+      </div>
+
+      <form data-lead-form data-offer="$189 New Patient Special"
+            data-asana-gid="1217162605683021" novalidate>
+        <div class="progress" aria-hidden="true"><span class="on"></span><span></span></div>
+
+        <div class="step-panel active">
+          <p style="font-family:var(--display);font-weight:600;font-size:1.0625rem;margin-bottom:0.9rem;">
+            What brings you in?
+          </p>
+          <div class="choices">
+            <button type="button" class="choice" aria-pressed="false" data-value="Check-up and cleaning">
+              <span class="mark" aria-hidden="true"></span>A check-up and cleaning
+            </button>
+            <button type="button" class="choice" aria-pressed="false" data-value="Something is bothering me">
+              <span class="mark" aria-hidden="true"></span>Something is bothering me
+            </button>
+            <button type="button" class="choice" aria-pressed="false" data-value="Second opinion">
+              <span class="mark" aria-hidden="true"></span>A second opinion on a treatment plan
+            </button>
+            <button type="button" class="choice" aria-pressed="false" data-value="Appointment for my child">
+              <span class="mark" aria-hidden="true"></span>An appointment for my child
+            </button>
+          </div>
+        </div>
+
+        <div class="step-panel">
+          <div class="field">
+            <label for="np-name">Full name</label>
+            <input id="np-name" name="full_name" type="text" autocomplete="name" data-required>
+            <span class="err" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="np-phone">Phone</label>
+            <input id="np-phone" name="phone" type="tel" autocomplete="tel" placeholder="(281) 555-0100" data-required>
+            <span class="err" role="alert"></span>
+          </div>
+          <div class="field">
+            <label for="np-email">Email</label>
+            <input id="np-email" name="email" type="email" autocomplete="email" data-required>
+            <span class="err" role="alert"></span>
+          </div>
+
+          <input class="hp-field" type="text" name="company_website" tabindex="-1" autocomplete="off" aria-hidden="true">
+
+          <label class="consent">
+            <input type="checkbox" name="consent">
+            <span>I agree to be contacted about my appointment. By providing my phone number I agree
+              to receive text messages from Mason Park Dental of Katy.</span>
+          </label>
+
+          <button class="btn btn--sand btn--block btn--lg" type="submit" disabled>Claim my $189 visit</button>
+          <button type="button" class="btn btn--ghost btn--block" data-back style="margin-top:0.6rem;">Back</button>
+          <p class="form-msg" role="status" aria-live="polite"></p>
+        </div>
+
+        <p class="form-trust">
+          <svg width="13" height="13" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 1.5l5 2v4c0 3-2.1 5.6-5 7-2.9-1.4-5-4-5-7v-4z" stroke="currentColor" stroke-width="1.4" stroke-linejoin="round"/></svg>
+          Your details stay with the practice.
+        </p>
+      </form>
     </div>
   </div>
+
+  <script>
+  MPD.add(function (M) {
+    var root = document.getElementById('arrival');
+    var reveal = root.querySelectorAll('[data-anim="hide"]');
+    gsap.set(reveal, { visibility: 'visible' });
+
+    if (M.reduced) { gsap.set(reveal, { opacity: 1, y: 0 }); return; }
+
+    var tl = gsap.timeline({ delay: 0.12 });
+    var split = M.splitOnce(document.getElementById('arrTitle'));
+    if (split && split.lines && split.lines.length) {
+      gsap.set(split.lines, { yPercent: 110 });
+      tl.to(split.lines, { yPercent: 0, duration: 1.05, stagger: 0.09, ease: 'power4.out' }, 0);
+    } else {
+      tl.from('#arrTitle', { opacity: 0, y: 40, duration: 1, ease: 'power3.out' }, 0);
+    }
+    tl.from(root.querySelector('.chapter-tag'), { opacity: 0, x: -22, duration: 0.85, ease: 'power3.out' }, 0.04)
+      .from('#arrLead',  { opacity: 0, y: 24, duration: 0.85, ease: 'power3.out' }, 0.5)
+      .from('#arrPrice', { opacity: 0, y: 24, duration: 0.85, ease: 'power3.out' }, 0.62)
+      .from('#arrChips .chip', { opacity: 0, y: 18, duration: 0.7, stagger: 0.06, ease: 'power3.out' }, 0.74)
+      .from(root.querySelector('.rating'), { opacity: 0, y: 18, duration: 0.7, ease: 'power3.out' }, 0.86)
+      .from('#book', { opacity: 0, y: 40, duration: 1.1, ease: 'power3.out' }, 0.3)
+      .from('#arrBg', { opacity: 0, scale: 1.12, duration: 1.7, ease: 'power3.out' }, 0)
+      .from(root.querySelector('.arr-cue'), { opacity: 0, duration: 0.7 }, 1);
+
+    var priceEl = root.querySelector('[data-count-to]');
+    if (priceEl) {
+      var target = parseInt(priceEl.getAttribute('data-count-to'), 10);
+      var o = { v: 0 };
+      tl.to(o, {
+        v: target, duration: 1.3, ease: 'power2.out',
+        onUpdate: function () { priceEl.textContent = '$' + Math.round(o.v).toLocaleString('en-US'); },
+        onComplete: function () { priceEl.textContent = '$' + target.toLocaleString('en-US'); }
+      }, 0.62);
+    }
+
+    gsap.fromTo(root.querySelector('.price-was'), { '--strike': 0 }, {
+      '--strike': 1, duration: 0.7, ease: 'power2.inOut', delay: 1.5
+    });
+
+    /* Departure — the chapter recedes as you leave it. */
+    gsap.timeline({ scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: 0.6 } })
+      .to(root.querySelector('.arr-in'), { yPercent: -12, opacity: 0.2, ease: 'none' }, 0)
+      .to('#arrBg', { yPercent: 8, scale: 1.08, ease: 'none' }, 0);
+
+    gsap.to(root.querySelector('.arr-cue i'), {
+      scaleY: 0.3, transformOrigin: 'top', duration: 1.1, repeat: -1, yoyo: true, ease: 'power1.inOut'
+    });
+  });
+  </script>
 </section>
 
-<!-- ============ ACCREDITATION ============ -->
-<section class="section--tight trust-strip">
-  <div class="wrap">
-    <p class="label">Continuing education and accreditation</p>
-    <div class="trust-row reveal">
-      <img src="assets/img/badge-kois.webp" alt="Kois Center" loading="lazy">
-      <img src="assets/img/badge-ssc.webp" alt="Seattle Study Club" loading="lazy">
-      <img src="assets/img/badge-agd.webp" alt="Academy of General Dentistry" loading="lazy">
-      <img src="assets/img/badge-aapd.webp" alt="American Academy of Pediatric Dentistry" loading="lazy">
-      <img src="assets/img/badge-abpd.webp" alt="American Board of Pediatric Dentistry" loading="lazy">
+<!-- ==========================================================================
+     CHAPTER 01 — THE CATCH                 [PINNED + SCRUBBED]
+     The objection this offer exists to answer, read one word at a time.
+     ========================================================================== -->
+<section class="chapter ch-catch" id="catch" data-chapter="1" data-chapter-name="The Catch" data-theme="light">
+  <style>
+    .ch-catch { background: var(--bg-2); }
+    .ch-catch .catch-pin {
+      min-height: 100svh; display: grid; align-content: center;
+      padding-block: clamp(3rem, 8vw, 6rem);
+    }
+    .ch-catch .catch-statement {
+      font-family: var(--display);
+      font-size: var(--t-statement);
+      font-weight: 600; line-height: 1.16; letter-spacing: -0.03em;
+      max-width: 20ch; color: var(--fg);
+    }
+    .ch-catch .catch-statement .mpd-word { color: rgba(27, 34, 36, 0.19); }
+    .ch-catch .catch-after {
+      margin-top: clamp(1.75rem, 4vw, 3rem); display: grid; gap: 1rem; max-width: 54ch;
+    }
+    .ch-catch .catch-after p { color: var(--fg-body); line-height: 1.85; }
+    .ch-catch .catch-meter {
+      margin-top: clamp(1.75rem, 3vw, 2.5rem); height: 1px;
+      background: var(--line); position: relative; max-width: 320px;
+    }
+    .ch-catch .catch-meter i {
+      position: absolute; inset: 0; background: var(--rule);
+      transform: scaleX(0); transform-origin: left;
+    }
+  </style>
+
+  <div class="catch-pin" id="catchPin">
+    <div class="wrap">
+      <p class="chapter-tag"><i></i><span>Chapter 01 &middot; The Catch</span></p>
+      <p class="catch-statement" id="catchStatement">
+        Plenty of practices advertise a cheap first visit, then charge separately for the x-rays that
+        make it useful.
+      </p>
+      <div class="catch-after" id="catchAfter">
+        <p>This is the whole appointment, in one price. The exam, the imaging, the cleaning and a
+          written plan — not a loss-leader that turns into a quote at the desk.</p>
+        <p>You leave knowing exactly where your teeth stand and exactly what anything further would
+          cost, before a single thing is started.</p>
+      </div>
+      <div class="catch-meter" aria-hidden="true"><i id="catchMeter"></i></div>
     </div>
   </div>
+
+  <script>
+  MPD.add(function (M) {
+    var pin = document.getElementById('catchPin');
+    var statement = document.getElementById('catchStatement');
+    var meter = document.getElementById('catchMeter');
+
+    if (M.reduced) return;   // the copy is already fully legible in the markup
+
+    var sp = M.splitWords(statement);
+    if (!sp || !sp.words || !sp.words.length) return;
+
+    /* One word, one owner: the closing clause is tinted by its own tween, so
+       no word is written by two scrubbed tweens over overlapping ranges. */
+    var tail = sp.words.slice(-5);
+    var body = sp.words.slice(0, -5);
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + Math.round(window.innerHeight * 1.9),
+        pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) { gsap.set(meter, { scaleX: self.progress }); }
+      }
+    });
+
+    tl.to(body, { color: '#1b2224', stagger: 0.5, ease: 'none' }, 0)
+      .to(tail, { color: '#a8875f', stagger: 0.5, ease: 'none' }, '>-0.2')
+      .from('#catchAfter p', { opacity: 0, y: 22, stagger: 0.4, ease: 'none' }, '>-0.4');
+  });
+  </script>
 </section>
 
-<!-- ============ WHAT'S INCLUDED ============ -->
-<section class="section section--paper">
-  <div class="wrap">
-    <div class="split">
-      <div class="split-body">
-        <p class="eyebrow">What $189 covers</p>
+<!-- ==========================================================================
+     CHAPTER 02 — WHAT IT COVERS            [PINNED + SCRUBBED — SIGNATURE]
+     The signature moment. One pin drives the whole value story: the regular
+     $517 falls to $189 while each of the four included items checks itself
+     off. The number IS the scroll position.
+     ========================================================================== -->
+<section class="chapter ch-covers" id="covers" data-chapter="2" data-chapter-name="What It Covers" data-theme="light">
+  <style>
+    .ch-covers { background: var(--bg); }
+    .ch-covers .cov-pin {
+      min-height: 100svh; display: grid; align-content: center;
+      padding-block: clamp(3rem, 7vw, 5rem); overflow: hidden;
+    }
+    .ch-covers .cov-grid { display: grid; gap: clamp(2rem, 4vw, 3.5rem); align-items: center; }
+    @media (min-width: 900px) { .ch-covers .cov-grid { grid-template-columns: 1fr 1fr; } }
+
+    .ch-covers .ledger {
+      background: var(--bg-3); border: 1px solid var(--line-warm);
+      border-radius: var(--radius-lg); padding: clamp(1.5rem, 3vw, 2.5rem);
+    }
+    .ch-covers .ledger-figure {
+      font-family: var(--display); font-size: clamp(3rem, 2rem + 5vw, 5.25rem);
+      font-weight: 700; line-height: 0.9; letter-spacing: -0.04em;
+      color: var(--fg); font-variant-numeric: tabular-nums;
+    }
+    .ch-covers .ledger-state {
+      margin-top: 0.75rem; font-size: 0.875rem; letter-spacing: 0.14em;
+      text-transform: uppercase; font-weight: 700; color: var(--accent); min-height: 1.2em;
+    }
+    .ch-covers .ledger-rail {
+      margin-top: clamp(1.25rem, 2.5vw, 1.75rem); height: 2px;
+      background: rgba(27,34,36,.1); position: relative; border-radius: 2px;
+    }
+    .ch-covers .ledger-rail i {
+      position: absolute; inset: 0; border-radius: 2px;
+      background: linear-gradient(90deg, var(--sand-deep), var(--sand));
+      transform: scaleX(0); transform-origin: left;
+    }
+    .ch-covers .ledger-saving {
+      margin-top: 1.25rem; padding-top: 1.25rem; border-top: 1px solid var(--line-warm);
+      display: flex; justify-content: space-between; align-items: baseline; gap: 1rem;
+    }
+    .ch-covers .ledger-saving b {
+      font-family: var(--display); font-size: 1.5rem; font-weight: 700; color: var(--sage);
+      font-variant-numeric: tabular-nums;
+    }
+
+    .ch-covers .cov-list { display: grid; gap: 0; margin-top: 0.5rem; }
+    .ch-covers .cov-item {
+      display: grid; grid-template-columns: auto 1fr; gap: 0.9rem; align-items: start;
+      padding-block: clamp(0.75rem, 1.6vw, 1rem); border-top: 1px solid var(--line);
+      color: var(--fg-body);
+    }
+    .ch-covers .cov-item:last-child { border-bottom: 1px solid var(--line); }
+    .ch-covers .cov-item strong { color: var(--fg); font-weight: 600; }
+    .ch-covers .cov-mark {
+      width: 22px; height: 22px; border-radius: 50%; flex: none;
+      border: 1.5px solid var(--line); display: grid; place-items: center;
+      margin-top: 0.15rem; color: var(--white); background: transparent;
+    }
+    .ch-covers .cov-mark svg { width: 12px; height: 12px; }
+    .ch-covers .cov-mark path { stroke-dasharray: 20; stroke-dashoffset: 20; }
+  </style>
+
+  <div class="cov-pin" id="covPin">
+    <div class="wrap cov-grid">
+      <div>
+        <p class="chapter-tag"><i></i><span>Chapter 02 &middot; What It Covers</span></p>
         <h2>A full picture, not a quick look.</h2>
-        <p class="lead">
-          Plenty of practices advertise a cheap first visit and then charge separately for the x-rays
-          that make it useful. This is the whole appointment, in one price.
+        <p class="lead" style="margin-top:1rem;">
+          Everything below is included in the one fee. Keep scrolling and watch it come off.
         </p>
-        <ul class="checks" style="margin-top:1.5rem;">
-          <li><svg class="tick" width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span><strong>Comprehensive exam</strong> — a full assessment of teeth, gums and bite, including an oral cancer screening.</span></li>
-          <li><svg class="tick" width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span><strong>X-rays</strong> — digital, so you see what we see, with a fraction of the radiation of film.</span></li>
-          <li><svg class="tick" width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span><strong>Cleaning</strong> — a professional clean to finish the visit.</span></li>
-          <li><svg class="tick" width="18" height="18" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
-            <span><strong>Full treatment plan</strong> — written, itemised and priced, so nothing arrives as a surprise later.</span></li>
-        </ul>
-        <div class="btn-row" style="margin-top:1.75rem;">
-          <a class="btn" href="#book">Claim the $189 special</a>
+
+        <div class="cov-list" id="covList">
+          <div class="cov-item">
+            <span class="cov-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span><strong>Comprehensive exam</strong> — a full assessment of teeth, gums and bite, including an oral cancer screening.</span>
+          </div>
+          <div class="cov-item">
+            <span class="cov-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span><strong>X-rays</strong> — digital, so you see what we see, with a fraction of the radiation of film.</span>
+          </div>
+          <div class="cov-item">
+            <span class="cov-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span><strong>Cleaning</strong> — a professional clean to finish the visit.</span>
+          </div>
+          <div class="cov-item">
+            <span class="cov-mark" aria-hidden="true"><svg viewBox="0 0 16 16" fill="none"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/></svg></span>
+            <span><strong>Full treatment plan</strong> — written, itemised and priced, so nothing arrives as a surprise later.</span>
+          </div>
         </div>
       </div>
-      <div class="split-media reveal">
-        <img src="assets/img/office.webp" alt="The treatment area at Mason Park Dental of Katy"
-             loading="lazy" width="1536" height="658" style="aspect-ratio:4/3;object-fit:cover;">
+
+      <div>
+        <div class="ledger">
+          <p class="label">Your first visit</p>
+          <p class="ledger-figure" id="covFigure">$517</p>
+          <p class="ledger-state" id="covState">Regular value</p>
+          <div class="ledger-rail" aria-hidden="true"><i id="covRail"></i></div>
+          <div class="ledger-saving">
+            <span class="small muted">You save</span>
+            <b id="covSaving">$0</b>
+          </div>
+          <p class="fine" style="margin-top:1.25rem;">
+            Available to new patients of Mason Park Dental of Katy. Additional services, where
+            clinically required, are quoted for your approval before treatment begins.
+          </p>
+        </div>
+
+        <div class="btn-row" style="margin-top:1.5rem;">
+          <a class="btn btn--sand btn--lg magnetic" href="#book"><span>Claim the $189 special</span></a>
+        </div>
       </div>
     </div>
   </div>
+
+  <script>
+  MPD.add(function (M) {
+    var pin = document.getElementById('covPin');
+    var figure = document.getElementById('covFigure');
+    var state = document.getElementById('covState');
+    var saving = document.getElementById('covSaving');
+    var rail = document.getElementById('covRail');
+    var marks = document.querySelectorAll('#covList .cov-mark');
+
+    function money(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
+
+    if (M.reduced) {
+      figure.textContent = '$189';
+      state.textContent = 'New patient special';
+      saving.textContent = '$328';
+      gsap.set(rail, { scaleX: 1 });
+      marks.forEach(function (m) {
+        m.style.background = '#7f9a8b';
+        m.style.borderColor = '#7f9a8b';
+        m.querySelector('path').style.strokeDashoffset = '0';
+      });
+      return;
+    }
+
+    /* The fee is interpolated continuously between the two published figures,
+       so 25%, 50% and 75% of the pin are three genuinely different states —
+       roughly $435, $353 and $271 — rather than a snap between $517 and $189. */
+    var o = { v: 517 };
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + Math.round(window.innerHeight * 2.1),
+        pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          gsap.set(rail, { scaleX: self.progress });
+          var label = self.progress >= 0.98 ? 'New patient special' : 'Regular value';
+          if (state.textContent !== label) state.textContent = label;
+        }
+      }
+    });
+
+    tl.to(o, {
+      v: 189, ease: 'none', duration: 1,
+      onUpdate: function () {
+        figure.textContent = money(o.v);
+        saving.textContent = money(517 - o.v);
+      },
+      onComplete: function () { figure.textContent = '$189'; saving.textContent = '$328'; }
+    }, 0);
+
+    /* Each inclusion checks itself off across the same pinned distance. */
+    marks.forEach(function (mark, i) {
+      tl.to(mark, {
+        backgroundColor: '#7f9a8b', borderColor: '#7f9a8b', ease: 'none', duration: 0.32
+      }, i * 0.24)
+        .to(mark.querySelector('path'), { strokeDashoffset: 0, ease: 'none', duration: 0.28 }, i * 0.24 + 0.08);
+    });
+
+    gsap.from('#covers .chapter-tag, #covers h2, #covers .lead', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#covers', start: 'top 70%' }
+    });
+  });
+  </script>
 </section>
 
-<!-- ============ OTHER OFFERS ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="head-block head-block--center">
-      <p class="eyebrow eyebrow--center">Also available</p>
-      <h2>Other new-patient offers</h2>
-      <p class="lead">Mention these when you book and we will apply them to your visit.</p>
-    </div>
-    <div class="grid" style="margin-top:clamp(2rem,4vw,3rem);">
-      <article class="tile reveal">
-        <p class="num">$129</p>
-        <h3>New patient exam for children</h3>
-        <p>For children under 13, seen by Dr. Tam Nguyen, our board certified pediatric dentist.</p>
-      </article>
-      <article class="tile reveal">
-        <p class="num">$350</p>
-        <h3>New patient whitening</h3>
-        <p>KOR<sup>&reg;</sup> whitening with at-home trays, at the new-patient rate.</p>
-      </article>
-      <article class="tile reveal">
-        <p class="num">Free</p>
-        <h3>Second opinion</h3>
-        <p>Confused about a treatment plan, or unsure about an opinion you have been given? See a
-          doctor you can trust, at no cost.</p>
-      </article>
-      <article class="tile reveal">
-        <p class="num">Free</p>
-        <h3>Invisalign<sup>&reg;</sup> consultation</h3>
-        <p>Complimentary clear-aligner consultation, with $1,000 off treatment currently available.</p>
-      </article>
+<!-- ==========================================================================
+     CHAPTER 03 — THE VISIT                 [PINNED + SCRUBBED]
+     What actually happens on the day. The timeline draws itself through the
+     three steps as you scroll, so the progression is the scroll progression.
+     ========================================================================== -->
+<section class="chapter ch-visit" id="visit" data-chapter="3" data-chapter-name="The Visit" data-theme="dark">
+  <style>
+    .ch-visit { background: var(--bg); }
+    .ch-visit .vis-pin {
+      min-height: 100svh; display: grid; align-content: center;
+      padding-block: clamp(3rem, 7vw, 5rem); overflow: hidden;
+    }
+    .ch-visit .vis-track { position: relative; margin-top: clamp(2rem, 4vw, 3rem); }
+    /* The spine the three steps hang from. Vertical on mobile, horizontal from
+       760px — the same drawn line either way. */
+    .ch-visit .vis-spine {
+      position: absolute; left: 11px; top: 0; bottom: 0; width: 2px;
+      background: var(--line); border-radius: 2px;
+    }
+    .ch-visit .vis-spine i {
+      position: absolute; inset: 0; background: var(--rule); border-radius: 2px;
+      transform: scaleY(0); transform-origin: top;
+    }
+    .ch-visit .vis-steps { display: grid; gap: clamp(1.75rem, 4vw, 2.5rem); }
+    .ch-visit .vis-step {
+      display: grid; grid-template-columns: auto 1fr; gap: 1.25rem; align-items: start;
+    }
+    .ch-visit .vis-dot {
+      width: 24px; height: 24px; border-radius: 50%; flex: none;
+      border: 2px solid var(--line); background: var(--bg);
+      display: grid; place-items: center; font-size: 0.75rem; font-weight: 700;
+      font-family: var(--display); color: var(--fg-soft);
+      transition: none;
+    }
+    .ch-visit .vis-step h3 { margin-bottom: 0.4rem; }
+    .ch-visit .vis-step p { color: var(--fg-body); font-size: 0.9375rem; max-width: 52ch; }
+    @media (min-width: 760px) {
+      .ch-visit .vis-spine { left: 0; right: 0; top: 11px; bottom: auto; width: auto; height: 2px; }
+      .ch-visit .vis-spine i { transform: scaleX(0); transform-origin: left; }
+      .ch-visit .vis-steps { grid-template-columns: repeat(3, 1fr); gap: clamp(1.5rem, 3vw, 2.5rem); }
+      .ch-visit .vis-step { grid-template-columns: 1fr; gap: 1.25rem; }
+    }
+  </style>
+
+  <div class="vis-pin" id="visPin">
+    <div class="wrap">
+      <p class="chapter-tag"><i></i><span>Chapter 03 &middot; The Visit</span></p>
+      <h2>What actually happens on the day.</h2>
+
+      <div class="vis-track">
+        <div class="vis-spine" aria-hidden="true"><i id="visSpine"></i></div>
+        <div class="vis-steps" id="visSteps">
+          <div class="vis-step">
+            <span class="vis-dot" aria-hidden="true">1</span>
+            <div>
+              <h3>We look properly</h3>
+              <p>A comprehensive exam and digital x-rays, using cone beam imaging and an intra-oral
+                camera so you can see what we are describing.</p>
+            </div>
+          </div>
+          <div class="vis-step">
+            <span class="vis-dot" aria-hidden="true">2</span>
+            <div>
+              <h3>We explain what we found</h3>
+              <p>Your oral health needs, goals and priorities are the focus of your customised
+                treatment plan — written down, itemised and priced.</p>
+            </div>
+          </div>
+          <div class="vis-step">
+            <span class="vis-dot" aria-hidden="true">3</span>
+            <div>
+              <h3>You decide what happens next</h3>
+              <p>Nothing beyond the cleaning is started on the day. You leave with the plan and the
+                costs, and choose in your own time.</p>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
+
+  <script>
+  MPD.add(function (M) {
+    var pin = document.getElementById('visPin');
+    var spine = document.getElementById('visSpine');
+    var steps = gsap.utils.toArray('#visSteps .vis-step');
+    var horizontal = window.matchMedia('(min-width: 760px)').matches;
+
+    function litDot(dot, on) {
+      gsap.to(dot, {
+        borderColor: on ? '#c3a98e' : 'rgba(255,255,255,.14)',
+        backgroundColor: on ? '#c3a98e' : 'rgba(0,0,0,0)',
+        color: on ? '#1b2224' : 'rgba(255,255,255,.6)',
+        duration: 0.35, ease: 'none'
+      });
+    }
+
+    if (M.reduced) {
+      gsap.set(spine, horizontal ? { scaleX: 1 } : { scaleY: 1 });
+      steps.forEach(function (s) { litDot(s.querySelector('.vis-dot'), true); });
+      return;
+    }
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + Math.round(window.innerHeight * 1.7),
+        pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    /* The spine draws across the whole pinned distance; each step arrives and
+       lights its dot at its own point along that draw. Because everything
+       hangs off one scrubbed timeline, halfway through the pin is genuinely
+       halfway through the story. */
+    tl.fromTo(spine,
+      horizontal ? { scaleX: 0 } : { scaleY: 0 },
+      horizontal ? { scaleX: 1, ease: 'none', duration: 3 } : { scaleY: 1, ease: 'none', duration: 3 }, 0);
+
+    steps.forEach(function (step, i) {
+      tl.fromTo(step.querySelector('div'), { opacity: 0.15, y: 18 },
+        { opacity: 1, y: 0, ease: 'none', duration: 0.7 }, i * 0.95)
+        .add(function () { litDot(step.querySelector('.vis-dot'), true); }, i * 0.95 + 0.2)
+        .add(function () { litDot(step.querySelector('.vis-dot'), false); }, i * 0.95 + 0.19);
+    });
+
+    /* Reverse scrolling must un-light the dots it passes back over, or the
+       chapter cannot be re-read on the way up. */
+    tl.eventCallback('onUpdate', function () {
+      var p = tl.progress() * 3;
+      steps.forEach(function (step, i) {
+        litDot(step.querySelector('.vis-dot'), p >= i * 0.95 + 0.2);
+      });
+    });
+
+    gsap.from('#visit .chapter-tag, #visit h2', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#visit', start: 'top 70%' }
+    });
+  });
+  </script>
 </section>
 
-<!-- ============ THE TEAM ============ -->
-<section class="section section--cloud">
-  <div class="wrap">
+<!-- ==========================================================================
+     CHAPTER 04 — THE TEAM
+     Who you will be seeing, and the other new-patient offers that only make
+     sense once you know which doctor they belong to.
+     ========================================================================== -->
+<section class="chapter ch-team" id="team" data-chapter="4" data-chapter-name="The Team" data-theme="light">
+  <style>
+    .ch-team { background: var(--bg-2); overflow: hidden; }
+    .ch-team .team figure .doc-photo { clip-path: inset(0 0 100% 0); }
+    .ch-team .offers { margin-top: clamp(3rem, 6vw, 4.5rem); }
+    .ch-team .offers-head { display: flex; flex-wrap: wrap; gap: 0.75rem 1.5rem; align-items: baseline; }
+    .ch-team .offers-head h3 { font-size: var(--t-h2); }
+  </style>
+
+  <div class="wrap chapter-body">
     <div class="head-block head-block--center">
-      <p class="eyebrow eyebrow--center">Dentist in Katy, TX</p>
-      <h2>Who you will be seeing</h2>
+      <p class="chapter-tag" style="justify-content:center;"><i></i><span>Chapter 04 &middot; The Team</span></p>
+      <h2>Who you will be seeing.</h2>
       <p class="lead">
         Dr. Sung, Dr. Cho and Dr. Nguyen are committed to providing excellent dentistry in a
         comfortable environment. We welcome new patients of all ages.
       </p>
     </div>
 
-    <div class="team" style="margin-top:clamp(2rem,4vw,3rem);">
-      <figure class="reveal">
-        <div class="doc-photo"><img src="assets/img/dr-cho.jpg" alt="Dr. Dave Cho" loading="lazy" width="683" height="1024"></div>
+    <div class="team" id="teamGrid" style="margin-top:clamp(2rem,4vw,3rem);">
+      <figure>
+        <div class="doc-photo"><img src="../shared/img/dr-cho.jpg" alt="Dr. Dave Cho" loading="lazy" width="683" height="1024"></div>
         <figcaption>
           <p class="name">Dr. Dave Cho</p>
           <p class="role">General Dentist</p>
         </figcaption>
       </figure>
-      <figure class="reveal">
-        <div class="doc-photo"><img src="assets/img/dr-sung.webp" alt="Dr. William Sung, DMD" loading="lazy" width="230" height="300"></div>
+      <figure>
+        <div class="doc-photo"><img src="../shared/img/dr-sung.webp" alt="Dr. William Sung, DMD" loading="lazy" width="230" height="300"></div>
         <figcaption>
           <p class="name">Dr. William Sung, DMD</p>
           <p class="role">General Dentist</p>
         </figcaption>
       </figure>
-      <figure class="reveal">
-        <div class="doc-photo"><img src="assets/img/dr-nguyen.jpg" alt="Dr. Tam Nguyen" loading="lazy" width="683" height="1024"></div>
+      <figure>
+        <div class="doc-photo"><img src="../shared/img/dr-nguyen.jpg" alt="Dr. Tam Nguyen" loading="lazy" width="683" height="1024"></div>
         <figcaption>
           <p class="name">Dr. Tam Nguyen</p>
           <p class="role">Board Certified Pediatric Dentist</p>
         </figcaption>
       </figure>
     </div>
+
+    <div class="offers">
+      <div class="offers-head">
+        <h3>Other new-patient offers</h3>
+        <p class="muted">Mention these when you book and we will apply them to your visit.</p>
+      </div>
+      <div class="grid" id="offerGrid" style="margin-top:clamp(1.5rem,3vw,2.25rem);">
+        <article class="tile">
+          <p class="num">$129</p>
+          <h3>New patient exam for children</h3>
+          <p>For children under 13, seen by Dr. Tam Nguyen, our board certified pediatric dentist.</p>
+        </article>
+        <article class="tile">
+          <p class="num">$350</p>
+          <h3>New patient whitening</h3>
+          <p>KOR<sup>&reg;</sup> whitening with at-home trays, at the new-patient rate.</p>
+        </article>
+        <article class="tile">
+          <p class="num">Free</p>
+          <h3>Second opinion</h3>
+          <p>Confused about a treatment plan, or unsure about an opinion you have been given? See a
+            doctor you can trust, at no cost.</p>
+        </article>
+        <article class="tile">
+          <p class="num">Free</p>
+          <h3>Invisalign<sup>&reg;</sup> consultation</h3>
+          <p>Complimentary clear-aligner consultation, with $1,000 off treatment currently available.</p>
+        </article>
+      </div>
+    </div>
   </div>
+
+  <script>
+  MPD.add(function (M) {
+    if (M.reduced) { gsap.set('#teamGrid .doc-photo', { clipPath: 'inset(0 0 0% 0)' }); return; }
+
+    /* Each portrait plate wipes open in turn, and the photo inside drifts
+       against the scroll. Scale never lands on exactly 1 — that is where the
+       edges hit sub-pixel boundaries and flicker. */
+    gsap.utils.toArray('#teamGrid figure').forEach(function (fig, i) {
+      gsap.to(fig.querySelector('.doc-photo'), {
+        clipPath: 'inset(0 0 0% 0)', duration: 1.1, delay: i * 0.11, ease: 'power4.inOut',
+        scrollTrigger: { trigger: '#teamGrid', start: 'top 82%' }
+      });
+      gsap.from(fig.querySelector('figcaption'), {
+        opacity: 0, y: 18, duration: 0.8, delay: 0.35 + i * 0.11, ease: 'power3.out',
+        scrollTrigger: { trigger: '#teamGrid', start: 'top 82%' }
+      });
+      gsap.fromTo(fig.querySelector('img'), { yPercent: -4, scale: 1.12 }, {
+        yPercent: 4, scale: 1.06, ease: 'none',
+        scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: 0.8 }
+      });
+    });
+
+    gsap.from('#team .head-block > *', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#team', start: 'top 72%' }
+    });
+    gsap.from('#offerGrid .tile', {
+      opacity: 0, y: 30, duration: 0.8, stagger: 0.08, ease: 'power3.out',
+      scrollTrigger: { trigger: '#offerGrid', start: 'top 86%' }
+    });
+
+    /* Departure. */
+    gsap.to('#team .chapter-body', {
+      yPercent: -4, opacity: 0.6, ease: 'none',
+      scrollTrigger: { trigger: '#team', start: 'bottom 80%', end: 'bottom top', scrub: 0.6 }
+    });
+  });
+  </script>
 </section>
 
-<!-- ============ REVIEWS ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="head-block head-block--center">
-      <p class="eyebrow eyebrow--center">From our patients</p>
-      <h2>Rated 5.0 on Google</h2>
-    </div>
-    <div class="grid" style="margin-top:clamp(2rem,4vw,3rem);">
+<!-- ==========================================================================
+     CHAPTER 05 — THE PROOF
+     ========================================================================== -->
+<section class="chapter ch-proof" id="proof" data-chapter="5" data-chapter-name="The Proof" data-theme="dark">
+  <style>
+    .ch-proof { background: var(--bg); }
+    .ch-proof .proof-score {
+      display: flex; align-items: center; justify-content: center; gap: 0.75rem; margin-top: 1.1rem;
+    }
+    .ch-proof .proof-score b {
+      font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700;
+      color: var(--fg); font-variant-numeric: tabular-nums;
+    }
+    .ch-proof .accred {
+      margin-top: clamp(3rem, 6vw, 4.5rem); padding-top: clamp(2rem, 4vw, 3rem);
+      border-top: 1px solid var(--line);
+    }
+    .ch-proof .accred-row {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: clamp(1.5rem, 4vw, 3.5rem); margin-top: 1.5rem;
+    }
+    .ch-proof .accred-row img { height: clamp(34px, 5vw, 52px); width: auto; opacity: 0.85; }
+  </style>
 
-      <figure class="review reveal">
+  <div class="wrap chapter-body">
+    <div class="proof-head head-block head-block--center">
+      <p class="chapter-tag" style="justify-content:center;"><i></i><span>Chapter 05 &middot; The Proof</span></p>
+      <h2>What our patients say afterwards.</h2>
+      <div class="proof-score">
+        <span class="stars" aria-hidden="true">
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
+          <svg width="18" height="18" viewBox="0 0 20 20" fill="currentColor"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
+        </span>
+        <b id="proofScore">5.0</b>
+        <span class="small" style="color:var(--fg-soft);">rated by our patients on Google</span>
+      </div>
+    </div>
+
+    <div class="grid grid--3" id="proofGrid" style="margin-top:clamp(2rem,4vw,3rem);">
+      <figure class="review">
         <span class="stars" aria-label="5 out of 5 stars">
           <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
           <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
@@ -339,7 +872,7 @@
         </figcaption>
       </figure>
 
-      <figure class="review reveal">
+      <figure class="review">
         <span class="stars" aria-label="5 out of 5 stars">
           <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
           <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
@@ -355,7 +888,7 @@
         </figcaption>
       </figure>
 
-      <figure class="review reveal">
+      <figure class="review">
         <span class="stars" aria-label="5 out of 5 stars">
           <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
           <svg width="15" height="15" viewBox="0 0 20 20" fill="currentColor" aria-hidden="true"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"/></svg>
@@ -371,55 +904,91 @@
           <svg class="g-mark" viewBox="0 0 24 24" aria-hidden="true"><path fill="#4285F4" d="M23 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.2a5.3 5.3 0 0 1-2.3 3.5v2.9h3.7c2.2-2 3.4-5 3.4-8.6z"/><path fill="#34A853" d="M12 23.5c3.1 0 5.7-1 7.6-2.8l-3.7-2.9c-1 .7-2.3 1.1-3.9 1.1-3 0-5.5-2-6.4-4.7H1.8v3a11.5 11.5 0 0 0 10.2 6.3z"/><path fill="#FBBC05" d="M5.6 14.2a6.9 6.9 0 0 1 0-4.4v-3H1.8a11.5 11.5 0 0 0 0 10.4z"/><path fill="#EA4335" d="M12 5.1c1.7 0 3.2.6 4.4 1.7l3.3-3.3A11.5 11.5 0 0 0 1.8 6.8l3.8 3a6.9 6.9 0 0 1 6.4-4.7z"/></svg>
         </figcaption>
       </figure>
-
     </div>
-  </div>
-</section>
 
-<!-- ============ FIRST VISIT ============ -->
-<section class="section section--ink">
-  <div class="wrap">
-    <div class="head-block">
-      <p class="eyebrow">Your first visit</p>
-      <h2>What actually happens on the day.</h2>
-    </div>
-    <div class="steps" style="margin-top:clamp(2rem,4vw,3rem);">
-      <div class="step reveal">
-        <h3>We look properly</h3>
-        <p>A comprehensive exam and digital x-rays, using cone beam imaging and an intra-oral camera
-          so you can see what we are describing.</p>
-      </div>
-      <div class="step reveal">
-        <h3>We explain what we found</h3>
-        <p>Your oral health needs, goals and priorities are the focus of your customised treatment
-          plan — written down, itemised and priced.</p>
-      </div>
-      <div class="step reveal">
-        <h3>You decide what happens next</h3>
-        <p>Nothing beyond the cleaning is started on the day. You leave with the plan and the costs,
-          and choose in your own time.</p>
+    <div class="accred">
+      <p class="label" style="text-align:center;">Continuing education and accreditation</p>
+      <div class="accred-row" id="accredRow">
+        <img src="../shared/img/badge-kois.webp" alt="Kois Center" loading="lazy">
+        <img src="../shared/img/badge-ssc.webp" alt="Seattle Study Club" loading="lazy">
+        <img src="../shared/img/badge-agd.webp" alt="Academy of General Dentistry" loading="lazy">
+        <img src="../shared/img/badge-aapd.webp" alt="American Academy of Pediatric Dentistry" loading="lazy">
+        <img src="../shared/img/badge-abpd.webp" alt="American Board of Pediatric Dentistry" loading="lazy">
       </div>
     </div>
   </div>
+
+  <script>
+  MPD.add(function (M) {
+    var score = document.getElementById('proofScore');
+    if (M.reduced) { score.textContent = '5.0'; return; }
+
+    gsap.from('#proof .proof-head > *', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#proof', start: 'top 74%' }
+    });
+    gsap.from('#proofGrid .review', {
+      opacity: 0, y: 34, duration: 0.8, stagger: 0.09, ease: 'power3.out',
+      scrollTrigger: { trigger: '#proofGrid', start: 'top 85%' }
+    });
+    gsap.from('#accredRow img', {
+      opacity: 0, y: 20, duration: 0.7, stagger: 0.07, ease: 'power3.out',
+      scrollTrigger: { trigger: '#accredRow', start: 'top 90%' }
+    });
+
+    var o = { v: 0 };
+    gsap.to(o, {
+      v: 5, duration: 1.5, ease: 'power2.out',
+      onUpdate: function () { score.textContent = o.v.toFixed(1); },
+      scrollTrigger: { trigger: '#proof', start: 'top 70%' }
+    });
+  });
+  </script>
 </section>
 
-<!-- ============ INSURANCE & FINANCING ============ -->
-<section class="section">
-  <div class="wrap">
-    <div class="split split--flip">
-      <div class="split-media reveal">
-        <img src="assets/img/interior.jpg" alt="Inside Mason Park Dental of Katy" loading="lazy"
-             width="1024" height="683" style="aspect-ratio:4/3;object-fit:cover;">
+<!-- ==========================================================================
+     CHAPTER 06 — THE INVITATION
+     Paying for it, the full range of care, and the offer restated. Insurance
+     and financing sit here, where the last objection actually lands, rather
+     than in a band of their own.
+     ========================================================================== -->
+<section class="chapter ch-invitation" id="invitation" data-chapter="6" data-chapter-name="The Invitation" data-theme="light">
+  <style>
+    .ch-invitation { background: var(--bg); overflow: hidden; }
+    .ch-invitation .inv-pay { align-items: center; }
+    .ch-invitation .inv-fig { clip-path: inset(0 0 100% 0); aspect-ratio: 4/3; }
+    .ch-invitation .inv-services { margin-top: clamp(3rem, 6vw, 5rem); }
+    .ch-invitation .inv-close {
+      margin-top: clamp(3rem, 6vw, 5rem);
+      background: linear-gradient(118deg, var(--sand-deep), var(--sand) 55%, #d8c3ab);
+      border-radius: var(--radius-lg); padding: clamp(2rem, 5vw, 3.5rem);
+      display: grid; gap: 1.75rem; align-items: center; position: relative; overflow: hidden;
+    }
+    @media (min-width: 900px) { .ch-invitation .inv-close { grid-template-columns: 1.3fr auto; } }
+    .ch-invitation .inv-close h2, .ch-invitation .inv-close .eyebrow { color: var(--ink); }
+    .ch-invitation .inv-close p { color: rgba(27, 34, 36, 0.78); margin-top: 0.75rem; max-width: 46ch; }
+    /* Not a themed scope, so both button variants are forced here or the ghost
+       renders dark-on-dark. */
+    .ch-invitation .inv-close .btn { background: var(--ink); color: var(--white); border-color: transparent; }
+    .ch-invitation .inv-close .btn--ghost { background: transparent; border-color: rgba(27,34,36,.45); color: var(--ink); }
+  </style>
+
+  <div class="wrap chapter-body">
+    <p class="chapter-tag"><i></i><span>Chapter 06 &middot; The Invitation</span></p>
+
+    <div class="split inv-pay">
+      <div class="split-media inv-fig" id="invFig">
+        <img id="invFigImg" src="../shared/img/office.webp" alt="The treatment area at Mason Park Dental of Katy"
+             loading="lazy" width="1536" height="658">
       </div>
-      <div class="split-body">
-        <p class="eyebrow">Paying for it</p>
-        <h2>Insurance-friendly, with a plan for everyone else.</h2>
-        <p class="lead">
+      <div>
+        <h2 id="invPayTitle">Insurance-friendly, with a plan for everyone else.</h2>
+        <p class="lead" style="margin-top:1rem;">
           We are an insurance-friendly office with financing options, and our team will help verify
           what your plan covers before you commit to treatment.
         </p>
         <div class="card card--warm" style="margin-top:1.5rem;">
-          <img src="assets/img/cherry.svg" alt="Cherry" width="110" height="28"
+          <img src="../shared/img/cherry.svg" alt="Cherry" width="110" height="28"
                style="margin-bottom:0.85rem;" loading="lazy">
           <h3>0% APR, no hard credit check</h3>
           <p class="muted" style="margin-top:0.5rem;">
@@ -433,61 +1002,91 @@
         </p>
       </div>
     </div>
-  </div>
-</section>
 
-<!-- ============ SERVICES ============ -->
-<section class="section section--paper">
-  <div class="wrap">
-    <div class="head-block head-block--center">
-      <p class="eyebrow eyebrow--center">Comprehensive care</p>
-      <h2>One practice for the whole family</h2>
-      <p class="lead">
-        For your convenience we provide a wide range of dental solutions in our local Katy location,
-        for patients of all ages.
+    <div class="inv-services">
+      <div class="head-block head-block--center">
+        <p class="eyebrow">Comprehensive care</p>
+        <h2 style="margin-top:0.6rem;">One practice for the whole family.</h2>
+        <p class="lead">
+          For your convenience we provide a wide range of dental solutions in our local Katy location,
+          for patients of all ages.
+        </p>
+      </div>
+      <ul class="chips" id="invChips" style="justify-content:center;margin-top:clamp(2rem,4vw,2.75rem);max-width:820px;margin-inline:auto;">
+        <li class="chip">Preventative dentistry</li>
+        <li class="chip">Cosmetic dentistry</li>
+        <li class="chip">Restorative dentistry</li>
+        <li class="chip">Pediatric dental care</li>
+        <li class="chip">Dental implants</li>
+        <li class="chip">Invisalign<sup>&reg;</sup></li>
+        <li class="chip">Root canal therapy</li>
+        <li class="chip">Oral surgery &amp; extractions</li>
+        <li class="chip">Emergency dentistry</li>
+        <li class="chip">Sedation dentistry</li>
+        <li class="chip">Laser dentistry</li>
+        <li class="chip">TMJ / TMD</li>
+        <li class="chip">Dentures &amp; bridges</li>
+        <li class="chip">Oral cancer screening</li>
+      </ul>
+      <p class="fine" style="text-align:center;margin-top:1.5rem;max-width:62ch;margin-inline:auto;">
+        Our technology includes cone beam imaging, digital x-rays, an intra-oral camera and a soft
+        tissue laser. Flexible scheduling and same-day emergency care are available.
       </p>
     </div>
-    <ul class="chips" style="justify-content:center;margin-top:clamp(2rem,4vw,2.75rem);max-width:820px;margin-inline:auto;">
-      <li class="chip">Preventative dentistry</li>
-      <li class="chip">Cosmetic dentistry</li>
-      <li class="chip">Restorative dentistry</li>
-      <li class="chip">Pediatric dental care</li>
-      <li class="chip">Dental implants</li>
-      <li class="chip">Invisalign<sup>&reg;</sup></li>
-      <li class="chip">Root canal therapy</li>
-      <li class="chip">Oral surgery &amp; extractions</li>
-      <li class="chip">Emergency dentistry</li>
-      <li class="chip">Sedation dentistry</li>
-      <li class="chip">Laser dentistry</li>
-      <li class="chip">TMJ / TMD</li>
-      <li class="chip">Dentures &amp; bridges</li>
-      <li class="chip">Oral cancer screening</li>
-    </ul>
-    <p class="fine" style="text-align:center;margin-top:1.5rem;max-width:62ch;margin-inline:auto;">
-      Our technology includes cone beam imaging, digital x-rays, an intra-oral camera and a soft
-      tissue laser. Flexible scheduling and same-day emergency care are available.
-    </p>
-  </div>
-</section>
 
-<!-- ============ FINAL CTA ============ -->
-<section class="section section--tight">
-  <div class="wrap">
-    <div class="cta-band">
+    <div class="inv-close" id="invClose">
       <div>
         <p class="eyebrow">New patient special</p>
-        <h2 style="margin-top:0.75rem;">$189 for the visit that tells you everything.</h2>
+        <h2 style="margin-top:0.75rem;" id="invCloseTitle">$189 for the visit that tells you everything.</h2>
         <p>Exam, x-rays, cleaning and a full written treatment plan — a saving of $328. We welcome new
           patients of all ages.</p>
       </div>
       <div class="btn-row">
-        <a class="btn btn--sand btn--lg" href="#book">Claim the special</a>
+        <a class="btn btn--lg magnetic" href="#book"><span>Claim the special</span></a>
         <a class="btn btn--ghost btn--lg" data-phone="href" href="tel:+12817698878">
           Call <span data-phone-text>(281) 769-8878</span>
         </a>
       </div>
     </div>
   </div>
+
+  <script>
+  MPD.add(function (M) {
+    if (M.reduced) { gsap.set('#invFig', { clipPath: 'inset(0 0 0% 0)' }); return; }
+
+    gsap.to('#invFig', {
+      clipPath: 'inset(0 0 0% 0)', duration: 1.2, ease: 'power4.inOut',
+      scrollTrigger: { trigger: '#invFig', start: 'top 84%' }
+    });
+    gsap.fromTo('#invFigImg', { yPercent: -5, scale: 1.14 }, {
+      yPercent: 5, scale: 1.08, ease: 'none',
+      scrollTrigger: { trigger: '#invFig', start: 'top bottom', end: 'bottom top', scrub: 0.8 }
+    });
+
+    M.splitLines(document.getElementById('invPayTitle'), function (self) {
+      return gsap.from(self.lines, {
+        yPercent: 110, duration: 1, stagger: 0.09, ease: 'power4.out',
+        scrollTrigger: { trigger: '#invPayTitle', start: 'top 86%' }
+      });
+    });
+
+    gsap.from('#invChips .chip', {
+      opacity: 0, y: 16, duration: 0.55, stagger: 0.035, ease: 'power2.out',
+      scrollTrigger: { trigger: '#invChips', start: 'top 88%' }
+    });
+
+    M.splitLines(document.getElementById('invCloseTitle'), function (self) {
+      return gsap.from(self.lines, {
+        yPercent: 110, duration: 1, stagger: 0.09, ease: 'power4.out',
+        scrollTrigger: { trigger: '#invClose', start: 'top 82%' }
+      });
+    });
+    gsap.from('#invClose .btn-row', {
+      opacity: 0, y: 24, duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: '#invClose', start: 'top 78%' }
+    });
+  });
+  </script>
 </section>
 
 </main>
@@ -498,7 +1097,7 @@
     <div class="foot-grid">
       <div>
         <div class="brand" style="margin-bottom:1rem;">
-          <img src="assets/img/logo.webp" alt="Mason Park Dental of Katy" width="180" height="69" loading="lazy">
+          <img src="../shared/img/logo.webp" alt="Mason Park Dental of Katy" width="180" height="69" loading="lazy">
         </div>
         <p class="small">We are located at the corner of Mason Rd and Kingsland Blvd, behind the
           Ranch 99 complex.</p>
@@ -550,12 +1149,6 @@
   </div>
 </footer>
 
-<!-- ============ STICKY MOBILE BAR ============ -->
-<div class="sticky-bar">
-  <a class="btn btn--ghost" data-phone="href" href="tel:+12817698878">Call</a>
-  <a class="btn btn--sand" href="#book">Claim $189 special</a>
-</div>
-
-<script src="assets/mpd.js"></script>
+<script src="../shared/mpd-flush.js"></script>
 </body>
 </html>

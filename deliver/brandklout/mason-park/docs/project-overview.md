@@ -13,8 +13,13 @@
 
 ## Status
 
-**All three pages are built, verified and awaiting review.** Nothing has been sent to Webflow, and
-nothing has been written to Asana.
+**All three pages were rebuilt as journeys on 2026-08-06 and are awaiting review.** The client
+rejected the first round as *"a plain card website design"* rather than *"an interactive journey"*.
+That was an architecture problem, not a polish problem: the pages were a vertical stack of coloured
+bands holding card grids, with the whole motion layer built from `IntersectionObserver`. They are
+now 6–8 named chapters each, with scroll-driven pinned and scrubbed beats, per
+[DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md). Content did not change — only how the pages
+are built. Nothing has been sent to Webflow, and nothing has been written to Asana.
 
 | Page | Package | Asana task GID |
 | :--- | :--- | :--- |
@@ -23,10 +28,21 @@ nothing has been written to Asana.
 | Thank you | [`workflows/04-design/.tmp/thank-you/`](../workflows/04-design/.tmp/thank-you/index.html) | `1217040406855602` |
 
 Start at [`workflows/04-design/.tmp/README.md`](../workflows/04-design/.tmp/README.md) — it covers the
-design system, how to restore the gitignored images, and what is deliberately not done.
+chapter arcs, the two deliberate deviations from the standard, how to restore the gitignored images,
+and what is deliberately not done.
 
-Verification is functional rather than visual: **81/81 checks pass** via
-[`workflows/08-qa/.tmp/verify.mjs`](../workflows/08-qa/.tmp/verify.mjs).
+Verification is functional rather than visual, and runs on a focused tab:
+
+| Gate | Invisalign | New Patient | Thank you |
+| :--- | :--- | :--- | :--- |
+| [`journey-audit.mjs`](../../scripts/journey-audit.mjs) — static architecture | PASS | PASS | **FAIL, by design** |
+| [`scrub-proof.mjs`](../workflows/08-qa/.tmp/scrub-proof.mjs) — motion actually scrubs | 20/20 | 20/20 | 17/17 |
+| [`screens.mjs`](../workflows/08-qa/.tmp/screens.mjs) — six breakpoints | 18/18 | 18/18 | 18/18 |
+
+The thank-you page fails the static gate on *"6-8 named chapters"* and *">=3 scroll-driven"* only.
+Asana specifies **four** sections for that page and the chapters map to them one for one; the
+rebuild brief explicitly allows 3–4 chapters there. Padding it would mean inventing beats for a
+real practice. **Raised for a decision rather than worked around** — see Open Question 10.
 
 ## Resolved since scaffolding
 
@@ -134,6 +150,14 @@ here rather than edited into the shared `ASANA-DISPATCH.md` from this worktree.
    original claims the practice is *"open on Saturdays as well, beyond regular hours"* where the live
    site says Friday, Saturday and Sunday closed. Our pages use the live site throughout. Worth one
    sanity check with the practice, since the thank-you page's open/closed indicator depends on it.
+
+10. **Thank-you page chapter count — needs a ruling.** It has 4 chapters and 2 scroll-driven beats
+    against the standard's 6–8 and 3, so it fails `journey-audit.mjs` on those two lines. The
+    reasoning is in [the design README](../workflows/04-design/.tmp/README.md#deliberate-deviations-from-the-standard):
+    Asana's spec for this page is four sections, and pinning the call box would bury the phone
+    number on a page whose only remaining job is to get the visitor to call. Either the page stays
+    as built and the gate records a sanctioned exception, or Brandklout supplies additional content
+    for two more beats. **Nothing was invented to close the gap.**
 
 ## Reference material
 

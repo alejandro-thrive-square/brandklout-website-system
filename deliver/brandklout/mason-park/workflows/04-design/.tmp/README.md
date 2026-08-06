@@ -1,210 +1,220 @@
-# Mason Park Dental — landing page packages
+# Mason Park Dental — journey packages
 
-**Source Asana parent task**: `1217040406855582` —
-[Landing Page - Mason Park](https://app.asana.com/1/1210572425689866/task/1217040406855582)
-**Built**: 2026-08-05 · **Status**: built locally, verified, **awaiting review**
+Source Asana parent task GID: `1217040406855582`
 
-Three self-contained coded HTML/CSS/JS packages. Open any `index.html` directly in a browser — no
-build step, no server.
+Three landing pages, rebuilt 2026-08-06 as **narrative journeys** rather than
+stacks of coloured bands, against
+[DESIGN-STANDARD.md](../../../../docs/DESIGN-STANDARD.md) — specifically the
+"Journey architecture — chapters, not bands" section.
 
-| Page | Folder | Asana task GID |
+| Page | Chapters | Scroll-driven | Full path |
+| :--- | :--- | :--- | :--- |
+| Invisalign<sup>&reg;</sup> — $1,000 off | 7 | 3 | `workflows/04-design/.tmp/invisalign/index.html` |
+| $189 New Patient Special | 7 | 3 | `workflows/04-design/.tmp/new-patient-special/index.html` |
+| Thank you | 4 | 2 | `workflows/04-design/.tmp/thank-you/index.html` |
+
+Open any `index.html` directly — the packages run from `file://` with no build
+step and no network beyond webfonts and the map embed.
+
+## One source, no duplicates
+
+The previous round kept a copy of `mpd.css` / `mpd.js` / `img/` in every page's
+`assets/`, so a fix had to be made three times or it silently diverged. Those
+copies are gone. There is now exactly one of everything:
+
+```
+.tmp/
+  _vendor/gsap/      GSAP 3.13 — vendored so the packages run offline and
+                     headless verification is deterministic
+  shared/
+    mpd.css          tokens, reset, primitives, persistent journey UI
+    mpd.js           BOOTSTRAP — client constants + the chapter queue (<head>)
+    mpd-flush.js     FLUSH — plugins, conversion layer, journey wiring (</body>)
+    img/             the client's own photography and marks
+    fetch-assets.mjs re-downloads img/ from the live site (they are gitignored)
+    fetch-gsap.mjs   re-downloads _vendor/gsap/ (also gitignored)
+  invisalign/index.html
+  new-patient-special/index.html
+  thank-you/index.html
+```
+
+Pages reference `../shared/…` and `../_vendor/…`. Each chapter still carries its
+own `<style>` and `<script>` inside the page, so a chapter lifts into Webflow as
+one self-contained embed.
+
+## The chapter arcs
+
+Section classes are named for the **story beat**, never the background colour —
+`.ch-hesitation`, `.ch-inclusion`, `.ch-proof`. `data-chapter` /
+`data-chapter-name` drive the header readout.
+
+**Invisalign** — 00 Arrival · 01 The Hesitation · 02 What It Corrects ·
+03 The Inclusion · 04 The Provider · 05 The Proof · 06 The Invitation
+
+**New Patient Special** — 00 Arrival · 01 The Catch · 02 What It Covers ·
+03 The Visit · 04 The Team · 05 The Proof · 06 The Invitation
+
+**Thank you** — 00 Received · 01 The Fast Track · 02 What Happens Next ·
+03 Where To Find Us
+
+FAQ, financing and insurance are folded **into** the beat that answers the
+objection rather than sitting in bands of their own: Invisalign's price ladder,
+Cherry and insurance all live inside The Inclusion; the FAQ sits inside The
+Invitation.
+
+### Where scroll does the work
+
+Each of these is pinned and **scrubbed** — the content's state is a continuous
+function of scroll position, not a class toggled once:
+
+| Page | Chapter | Mechanism |
 | :--- | :--- | :--- |
-| Invisalign<sup>&reg;</sup> — $1,000 off | [`invisalign/`](./invisalign/index.html) | `1217133289235652` |
-| $189 New Patient Special | [`new-patient-special/`](./new-patient-special/index.html) | `1217162605683021` |
-| Thank you | [`thank-you/`](./thank-you/index.html) | `1217040406855602` |
+| Invisalign | 01 The Hesitation | Pinned statement, read word by word |
+| Invisalign | 02 What It Corrects | Pinned horizontal journey, progress bar on `self.progress` |
+| Invisalign | 03 The Inclusion | **Signature.** One pin drives the fee from $4,800 → $3,800 → $3,300 while the four inclusions check off |
+| New Patient | 01 The Catch | Pinned statement, read word by word |
+| New Patient | 02 What It Covers | **Signature.** $517 → $189, saving counting up, four inclusions checking off |
+| New Patient | 03 The Visit | Pinned timeline drawing through the three steps |
+| Thank you | 02 What Happens Next | Pinned timeline drawing through the three steps |
+| Thank you | 03 Where To Find Us | Pinned map un-cropping while the week deals in |
 
-## Layout
+There is **no `IntersectionObserver`** anywhere in the runtime. An observer can
+only say "this is visible now"; it cannot express *how far through* a chapter
+you are, which is what every scrubbed moment depends on.
 
-```
-04-design/.tmp/
-├── shared/                  <- single source of truth
-│   ├── mpd.css              design system: tokens + components
-│   ├── mpd.js               behaviour + the CLIENT CONSTANTS block
-│   ├── img/                 the client's own photography (gitignored)
-│   ├── fetch-assets.mjs     re-downloads img/ from the client's site
-│   └── sync.sh              copies shared/ into each page package
-├── invisalign/{index.html, assets/}
-├── new-patient-special/{index.html, assets/}
-└── thank-you/{index.html, assets/}
-```
+### Continuity devices
 
-Edit `shared/`, then run `bash shared/sync.sh` to push changes into all three packages. Each page
-folder stays self-contained so it can be opened, zipped or handed over on its own.
+Reading-progress bar on the header edge (real document progress), a chapter
+readout (`03 · The Inclusion`) from 1000px up, chapter tags in every beat, and
+`data-theme` shifts across the arc rather than two alternating tints.
 
-> [!IMPORTANT]
-> `shared/img/` and the copies under each `assets/img/` are **gitignored** — the repo excludes all
-> binary and media assets. After a fresh clone the pages will show broken images until you run:
->
-> ```bash
-> node shared/fetch-assets.mjs && bash shared/sync.sh
-> ```
->
-> The images cannot simply be hotlinked from the client's site: `bestdentistinkatytx.com` sits
-> behind a SiteGround bot wall that returns a challenge page to cross-origin image requests, so
-> every hotlinked image renders broken. `fetch-assets.mjs` drives a real browser to clear the wall,
-> then pulls the files from the page's own origin.
+## Deliberate deviations from the standard
 
-## Design
+**1. The thank-you page has 4 chapters, not 6–8, and 2 scroll-driven chapters,
+not 3.** It therefore FAILS `journey-audit.mjs` on those two criteria. This is
+intentional and was directed: the rebuild brief states *"the thank-you page is
+short by nature — 3-4 chapters is fine there, but it still gets a real arrival
+and at least one scroll-driven moment."* Asana specifies **four** sections for
+this page and the chapters map to them one for one. Padding it to six would mean
+inventing beats for a real practice, and pinning the call box would bury the one
+action a post-conversion visitor might still take. Every other gate criterion
+passes. **Flagged for a decision rather than quietly worked around.**
 
-The visual design is original. Per
-[ASANA-DISPATCH.md](../../../../docs/ASANA-DISPATCH.md#how-to-use-the-reference-urls--read-this-before-designing),
-the reference URLs supplied **structure and copy angles only** — the section order was extracted into
-[structure-briefs.md](../../01-content-intake/.tmp/reference-captures/structure-briefs.md) and the
-design authored from the practice's own brand.
+**2. No ScrollSmoother.** The reference uses it; this build does not. It stopped
+driving the page a few seconds after load (`gsap.ticker` frozen while `rAF` ran
+on), and the standard itself warns it breaks the full-page captures the
+responsive pass depends on. It is a technique in the reference, not a
+requirement in the Definition of done. Native scrolling with ScrollTrigger gives
+the same pinned, scrubbed chapters with none of the fragility.
 
-Tokens come off the client's live site: their warm sand band (`#c3a98e`), slate utility bar, deep
-ink, and a warm paper ground, with DM Sans (which they already use) paired with Outfit for the
-wide-tracked geometric caps their licensed display face suggests. The result is deliberately calm and
-editorial rather than the neon-yellow dental-PPC look of the previous agency's page — these compete
-against a dozen identical templates, so looking like them is the failure case.
+## The bug worth remembering
 
-Conversion structure is still doing its job: an offer strip, a price block with the struck-through
-regular fee, a two-step form that opens with a low-commitment intent question rather than demanding a
-phone number, real Google reviews, a transparent price ladder, and a sticky call/book bar on mobile.
+**A manual `ScrollTrigger.refresh()` racing SplitText's post-font re-split
+silently deleted every pin on the page.**
 
-## Motion
+The refresh threw inside `_swapPinOut` ("node to be removed is no longer a child
+of this node") and aborted half-done — with the pins already reverted. Pin
+spacing never came back, so on the thank-you page a 5929px document collapsed to
+3436px and the last two chapters became **physically unreachable by scrolling**.
+Wrapping the refresh in try/catch made it worse: the page then failed in total
+silence.
 
-The motion layer lives entirely in `shared/mpd.css` and `shared/mpd.js`, so all three pages share one
-system. It is driven by `data-anim` attributes that JS assigns at runtime — **the page markup carries
-no animation classes**, which is why content and section order were able to stay exactly as they were.
+Two things hid it:
+- a scrub test that moves the page by calling the scroll API directly still
+  passes, because it never needs the document to be long enough;
+- a screenshot cannot show you a chapter you can't scroll to.
 
-| Primitive | Where it runs |
-| :--- | :--- |
-| `mask` | Headline lines and every section heading rise out from behind a hard edge |
-| `rise` | Eyebrows, leads, checklists, steps, trust marks |
-| `wipe` | Photography uncovers itself top-to-bottom |
-| `scale` | Card grids, reviews and team portraits settle in, staggered |
-| `rule` | Hairlines draw across — the step connectors and the struck-through regular price |
-
-Plus: a staged hero entrance on its own clock (it never waits for a scroll), the headline price
-counting up to its exact published figure, a scroll-progress hairline, gentle parallax on
-photography, pointer-following sheen on buttons, and FAQ answers that open with height instead of
-snapping.
-
-**No pinning and no scroll-jacking.** The page moves at the speed the visitor scrolls it.
-Everything animates on transform and opacity only, so it stays on the compositor.
-
-### Motion never buries the offer
-
-- The **offer rail** (`.offer-rail`) surfaces once the hero leaves the viewport and carries the
-  offer, the page's tracking number and a booking CTA. It is fixed, so all three are one tap away at
-  any scroll depth on desktop.
-- On mobile the existing **sticky call/book bar** does the same job.
-- The **header is sticky** on every page and carries the phone number and a CTA.
-- The hero — price, offer chips and form — is marked in on load and is never gated behind a scroll.
-
-### It fails safe
-
-The hidden states are all gated behind `html.js`. An inline head script arms that class before first
-paint, with a 3-second failsafe that removes it if `mpd.js` never runs. The motion module is also
-wrapped in its own `try/catch` that strips `html.js` on error. **Any failure degrades to a plain,
-complete, fully readable page — never a blank one.**
-
-A note on the observer: `IntersectionObserver` samples frames, so a fast flick-scroll can carry a
-section past the viewport between samples and it is never reported — leaving it permanently
-invisible. A throttled scroll sweep is therefore authoritative: anything that has reached or passed
-the viewport is shown whether or not the observer saw it. This was a real bug the tests caught, not a
-theoretical one.
-
-### Reduced motion
-
-`prefers-reduced-motion: reduce` removes the motion, not the content. Masks unclip, wipes drop their
-`clip-path`, transforms reset, the ambient hero drift stops and the price is written directly at its
-final value. The suite asserts both halves of this: nothing is left hidden **and** no transitions are
-still running.
+It was only caught by dispatching **real wheel input** and watching the scroll
+position stop advancing. The fix is in `mpd-flush.js`: wait for webfonts, build
+the journey once, and never refresh during startup.
 
 ## Content integrity
 
-Every price, name, credential, review and clinical claim is the client's own, sourced in
-[content-intake-summary.md](../../01-content-intake/.tmp/content-intake-summary.md). Nothing is
-invented. Specifically:
+Copy, offers, prices, doctor names, credentials and reviews are carried over
+**unchanged** from the previous round; the rebuild changed how the pages are
+built, not what they say. Everything traces to the client's own material in
+[content-intake-summary.md](../../01-content-intake/.tmp/content-intake-summary.md).
+Nothing about a real practice is invented.
 
-- **Real Google reviews** with real reviewer names, not the lorem ipsum the reference page ships.
-- **No aggregate review count** is claimed — the widget exposes the 5.0 rating but no total.
-- **No before/after gallery**, because no real before/after images exist for this practice.
-- **No "Neighborhood Favorite" award** — that belongs to the sibling Grand Mission page.
-- **No insurance carrier logos** — the reference's carrier list is Grand Mission's, not Mason Park's.
-
-## Phone numbers — call tracking is PER PAGE
-
-The outgoing vendor ran **a different tracking number on each landing page**, sharing one GTM
-container. Both originals are in
-[`asana-context/attachments/`](../../01-content-intake/.tmp/asana-context/attachments/):
-
-| Page | Number | Source |
-| :--- | :--- | :--- |
-| Invisalign | **(281) 767-8698** | vendor original |
-| New Patient Special | **(281) 688-1610** | vendor original |
-| Thank you | (281) 769-8878 (public fallback) | no vendor original exists |
-| Practice's public number | (281) 769-8878 | live site |
-
-Unifying these would destroy per-campaign call attribution, so each page declares its own via
-`MPD.TRACKING` in `shared/mpd.js`, keyed by the page's `<body data-page-key>`:
-
-```js
-TRACKING: {
-  invisalign:            { display: "(281) 767-8698", e164: "+12817678698" },
-  "new-patient-special": { display: "(281) 688-1610", e164: "+12816881610" },
-  "thank-you":           null,   // falls back to the public number
-},
-```
-
-The **thank-you page is shared by both landing pages**, so it cannot have one number baked in. The
-form appends `?src=<page-key>` on redirect and the thank-you page renders that campaign's number,
-keeping the call attributed at the last step. An unknown or spoofed `src` falls back to the public
-number rather than injecting an arbitrary one.
-
-> [!WARNING]
-> Ownership of the two tracking numbers is **unconfirmed** — the outgoing vendor provisioned them, so
-> they may no longer route to the practice. **Dial both before any spend starts.** If either is dead,
-> set its entry to `null` and it immediately falls back to the public number.
+**Per-page call tracking stays distinct** — `(281) 767-8698` on Invisalign,
+`(281) 688-1610` on the New Patient Special, the public `(281) 769-8878`
+elsewhere. The thank-you page inherits the originating campaign's number through
+`?src=`, validated against the `TRACKING` keys so an arbitrary `?src=` cannot
+inject a number. See Open Question 1 in
+[project-overview.md](../../../docs/project-overview.md) — **both tracking
+numbers must be dialled before any spend.**
 
 ## Forms
 
-The lead form posts JSON to `MPD.WEBHOOK_URL`, currently the placeholder
-`{{GHL_INBOUND_WEBHOOK_URL}}`. While unconfigured the form **tells the visitor plainly** that the
-endpoint is not connected and gives them the phone number — it never displays a false success. On
-success it redirects to `../thank-you/index.html?src=<page-key>`.
+Both landing pages post to `MPD.WEBHOOK_URL`, still `{{GHL_INBOUND_WEBHOOK_URL}}`.
+Until it is supplied the form says plainly that the endpoint is not connected and
+offers the phone number. It never fakes a success.
 
-The payload carries the offer name, the source Asana GID, the intent answer, the visitor's E.164
-phone number, the page key, the tracking number that page was displaying, and any
-UTM/gclid/fbclid parameters present on the URL.
+## Restoring the gitignored dependencies
+
+A fresh checkout has neither the images nor GSAP. Without them the pages still
+render as complete, readable HTML — they just lose their photography and all
+motion. Restore both:
+
+```bash
+node shared/fetch-assets.mjs   # 14 client images -> shared/img/
+node shared/fetch-gsap.mjs     # GSAP 3.13        -> _vendor/gsap/
+```
+
+`fetch-assets.mjs` warms a browser session past the client's SiteGround bot wall
+first, then fetches the assets same-origin — a plain `curl` gets a 202 challenge
+page instead. `fetch-gsap.mjs` pulls the exact version the packages were
+verified against and refuses to write a CDN error page over a real file.
 
 ## Verification
 
-Functional, not just visual — screenshots cannot prove a form advances or an accordion opens:
+Both gates live in [`../../08-qa/.tmp/`](../../08-qa/.tmp/) and must be re-run
+after any change:
 
 ```bash
-node ../../08-qa/.tmp/verify.mjs
+node ../../08-qa/.tmp/scrub-proof.mjs [page-slug]   # motion, per page
+node ../../08-qa/.tmp/screens.mjs     [page-slug]   # responsive, per page
+node ../../../../scripts/journey-audit.mjs <page-dir>
 ```
 
-**81/81 checks passing** across all three pages: image loading, font application, the correct
-page-specific tracking number, `?src=` inheritance on the thank-you page (including the spoofed-src
-fallback), two-step form advance, validation, phone auto-formatting, honest failure on the
-unconfigured webhook, payload contents, FAQ accordion, the thank-you page's four spec sections,
-open/closed state, mobile overflow at 390px and the sticky bar.
+Run them **one page at a time**. The full sweep exceeds the 10-minute foreground
+limit, and a backgrounded run dies without flushing its output *and* orphans its
+Chrome instances.
 
-Motion specifically:
+Last run, 2026-08-06:
 
-- **the tab is foregrounded** — a background tab freezes transitions, `IntersectionObserver` and
-  `requestAnimationFrame`, which reports working motion as broken. The runner passes
-  `--disable-renderer-backgrounding` and friends, calls `Page.bringToFront`, and then *asserts*
-  `document.visibilityState === "visible"` so a throttled run can never be mistaken for a page defect
-- no animated element left hidden after a full-page scroll — checked on opacity, transform,
-  `clip-path` and the mask inner, not just a class name
-- hero content visible without scrolling
-- the price counts up to exactly its published figure
-- scroll progress tracks the page
-- the offer rail surfaces at depth carrying offer + tracking number + booking CTA
-- under reduced motion: content fully visible **and** motion genuinely disabled rather than shortened
+| Gate | Invisalign | New Patient | Thank you |
+| :--- | :--- | :--- | :--- |
+| `journey-audit.mjs` | PASS | PASS | FAIL (documented above) |
+| `scrub-proof.mjs` | 20/20 | 20/20 | 17/17 |
+| `screens.mjs` | 18/18 | 18/18 | 18/18 |
 
-## Not done here
+Screenshots at 360 / 390 / 768 / 1024 / 1440 / 1920 are in
+`../../08-qa/.tmp/screenshots/<page-slug>/<width>.png` (gitignored — regenerate
+with `screens.mjs`).
 
-- **Nothing has gone to Webflow.** No client has a grant, and local approval comes first.
-- No analytics or conversion tag is installed. The previous agency's GTM container must not be
-  reused; the practice's own container drops into the marked slot on the thank-you page.
+### Reading the screenshots
+
+Two artefacts in those images are the capture, not the page, and both were
+checked before being dismissed:
+
+- **The sticky call bar appears mid-page** at 360/390. A fixed element renders
+  once at its viewport position in a full-page capture. At 1440, where the bar
+  is hidden, the same region is clean.
+- **The map is an empty grey box.** The embed loads correctly (HTTP 200, iframe
+  577×758, child frame present); cross-origin iframes just do not composite into
+  `captureBeyondViewport`.
+
+## Not done
+
+- Nothing has been sent to Webflow. That needs local approval **and** a
+  per-client Webflow grant that does not exist yet — see
+  [mcp-access.md](../../../docs/mcp-access.md).
+- No conversion tracking tag is installed. The previous agency's GTM container
+  is theirs and must not be reused; the practice's own drops into the marked
+  slot on the thank-you page.
+- Nothing has been written to Asana.
 
 ## Version Control
 
-Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). HTML, CSS, JS and
-docs are committed; images are not.
+Follows the root-level rules in [SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md).
