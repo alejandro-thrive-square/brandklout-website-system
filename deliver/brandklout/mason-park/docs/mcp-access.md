@@ -49,7 +49,11 @@ practice's, and carrying them into new work would leak the practice's traffic to
 | Google Tag Manager container | `GTM-KWL239K7` |
 | StatCounter project | `12978118` |
 | GHL sub-account (image CDN) | `GWgJnGNYokMRdIAB4fm2` |
-| Call-tracking number | `(281) 767-8698` - unverified owner |
+| Call-tracking number - Invisalign page | `(281) 767-8698` - unverified owner |
+| Call-tracking number - New Patient page | `(281) 688-1610` - unverified owner |
+
+The two tracking numbers are per-page, not per-client. They are in use on the built pages; **dial
+both before any spend** to confirm they still route to the practice.
 
 ## Allowed Operations
 - Read this client's Asana tasks through the read-only partnership scripts.

@@ -145,18 +145,25 @@ The identity is calm, warm-neutral and unhurried: letter-spaced caps, a fine lin
 photography of a bright office. It is deliberately **not** the neon-yellow/black dental-PPC look of
 the previous ad company's page.
 
-## Phone numbers — the tracking-number finding
+## Phone numbers — call tracking is per page
 
 | Number | Status |
 | :--- | :--- |
 | **(281) 769-8878** | The practice's real public number. On every page of the live site and every directory listing. |
-| **(281) 767-8698** | Hard-coded throughout the old ad-company LP. Appears in **no** public listing for this practice. |
+| **(281) 767-8698** | The **Invisalign** page's tracking number, hard-coded throughout the vendor original. In no public listing. |
+| **(281) 688-1610** | The **New Patient Special** page's tracking number, from the second vendor original. In no public listing. |
 
-That second number is, on the evidence, the **call-tracking number the previous ad company
-provisioned**. This is what the thank-you task means by *"check GHL for proper tracking number."*
-It cannot be verified from here — there is no GHL grant — so all three pages read their number from a
-single constant (`TRACKING_PHONE` in `assets/site.js`) and currently render the public number. See
-Open Questions.
+Two originals, two different numbers, one shared GTM container — the outgoing vendor ran **per-page
+call tracking**, the same pattern seen on Grand Mission's equivalent pages. So the tracking number is
+a per-page value, not a client-level one, and the pages are wired that way (`MPD.TRACKING` in
+`shared/mpd.js`, keyed by `<body data-page-key>`).
+
+The thank-you page has no vendor original, which is what the Asana task means by *"check GHL for
+proper tracking number."* It falls back to the public number, and inherits a campaign number through
+`?src=` when a form redirects into it.
+
+**Ownership of both tracking numbers is unconfirmed** — dial them before any spend. Full analysis in
+[vendor-originals.md](./vendor-originals.md).
 
 ## Version Control
 

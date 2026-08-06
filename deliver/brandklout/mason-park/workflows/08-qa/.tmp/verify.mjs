@@ -20,6 +20,18 @@ const DESIGN = path.resolve(here, "../../04-design/.tmp");
 const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 
 const PAGES = ["invisalign", "new-patient-special", "thank-you"];
+
+// The number each page must render. Sourced from the outgoing vendor's
+// originals, which ran a different tracking number per landing page.
+// See 01-content-intake/.tmp/vendor-originals.md
+const PUBLIC = { display: "(281) 769-8878", e164: "+12817698878" };
+const EXPECTED_PHONE = {
+  invisalign: { display: "(281) 767-8698", e164: "+12817678698" },
+  "new-patient-special": { display: "(281) 688-1610", e164: "+12816881610" },
+  // No vendor original and no GHL number yet, so it falls back to the public
+  // number unless a ?src= carries a campaign number through.
+  "thank-you": PUBLIC,
+};
 const only = process.argv[2];
 const targets = only ? PAGES.filter((p) => p === only) : PAGES;
 
@@ -37,8 +49,13 @@ function record(page, name, pass, detail) {
   console.log(`  [${mark}] ${name}${detail ? "  — " + detail : ""}`);
 }
 
+// Monotonic, never random. Random ports let a fresh run attach to a previous
+// Chrome that has not finished exiting, which silently verifies the WRONG page
+// — it showed up here as a ?src= case reading the prior navigation's number.
+let nextPort = 9500;
+
 async function withPage(url, fn, { reduced = false, width = 1440, height = 900 } = {}) {
-  const PORT = 9500 + Math.floor(Math.random() * 400);
+  const PORT = nextPort++;
   const profile = fs.mkdtempSync(path.join(os.tmpdir(), "cdp-verify-"));
   const chrome = spawn(CHROME, [
     "--headless=new",
@@ -143,13 +160,54 @@ async function withPage(url, fn, { reduced = false, width = 1440, height = 900 }
   };
 
   await send("Page.navigate", { url }, sessionId);
-  await wait(3200);
+
+  // Do not assert on a fixed sleep. Wait until the navigation has actually
+  // committed with the query string we asked for and the document is complete,
+  // otherwise a slow commit lets assertions read the PREVIOUS page — which is
+  // exactly how a ?src= check silently passed against the wrong number.
+  const expectedSearch = url.includes("?") ? "?" + url.split("?").slice(1).join("?") : "";
+  const expectedKey = url.split("/").slice(-2)[0].split("?")[0];
+
+  // Poll for OUR page's own marker rather than readyState 'complete'. 'complete'
+  // blocks on the Google Fonts stylesheet over the network, which made this
+  // flaky; and matching on location.search alone would pass instantly against
+  // the initial about:blank, which has an empty search too.
+  let settled = false;
+  for (let i = 0; i < 80; i++) {
+    try {
+      const st = await evaluate(
+        `JSON.stringify({
+          rs: document.readyState,
+          s: location.search,
+          key: document.body ? document.body.getAttribute('data-page-key') : null
+        })`
+      );
+      const o = JSON.parse(st);
+      if (o.rs !== "loading" && o.s === expectedSearch && o.key === expectedKey) {
+        settled = true;
+        break;
+      }
+    } catch {}
+    await wait(150);
+  }
+  if (!settled) {
+    throw new Error(
+      `navigation never settled at ${url} (expected key "${expectedKey}", search "${expectedSearch}")`
+    );
+  }
+  await wait(1400); // fonts, reveals, page-local scripts
 
   try {
     await fn({ evaluate, consoleErrors, send, sessionId });
   } finally {
     ws.close();
     chrome.kill();
+    // Wait for the process to actually go away before the next run starts.
+    await new Promise((r) => {
+      if (chrome.exitCode !== null) return r();
+      chrome.once("exit", r);
+      setTimeout(r, 3000);
+    });
   }
 }
 
@@ -197,14 +255,22 @@ async function commonChecks(page, ctx) {
   })()`);
   record(page, "display font applied", /Outfit/i.test(fonts || ""), fonts);
 
+  // Call tracking is PER PAGE. Each page must show exactly one number, and it
+  // must be that page's own tracking number — unifying them would destroy
+  // per-campaign call attribution.
   const phones = await evaluate(`JSON.stringify({
     hrefs: [...new Set([...document.querySelectorAll('a[href^="tel:"]')].map(a => a.getAttribute('href')))],
-    texts: [...new Set([...document.querySelectorAll('[data-phone-text]')].map(e => e.textContent.trim()))]
+    texts: [...new Set([...document.querySelectorAll('[data-phone-text]')].map(e => e.textContent.trim()))],
+    key: document.body.getAttribute('data-page-key')
   })`);
   const p = JSON.parse(phones);
-  record(page, "phone number painted consistently",
-    p.hrefs.length === 1 && p.texts.length === 1 && p.hrefs[0] === "tel:+12817698878",
-    JSON.stringify(p));
+  const expected = EXPECTED_PHONE[page];
+  record(page, "exactly one phone number on the page",
+    p.hrefs.length === 1 && p.texts.length === 1, JSON.stringify(p));
+  record(page, `page-specific tracking number (${expected.display})`,
+    p.hrefs[0] === "tel:" + expected.e164 && p.texts[0] === expected.display,
+    `${p.hrefs[0]} / ${p.texts[0]}`);
+  record(page, "page key declared", p.key === page, p.key);
 
   const contrastish = await evaluate(`(() => {
     const b = getComputedStyle(document.body);
@@ -408,6 +474,35 @@ for (const page of targets) {
     },
     { width: 390, height: 844 }
   );
+
+  // The thank-you page is shared by both landing pages, so it carries the
+  // originating campaign's number through ?src= rather than showing a generic
+  // one and losing the attribution at the last step.
+  if (page === "thank-you") {
+    console.log(`--- ${page} — inherits campaign number via ?src= ---`);
+    for (const src of ["invisalign", "new-patient-special"]) {
+      await withPage(fileUrl(page) + "?src=" + src, async ({ evaluate }) => {
+        const got = await evaluate(
+          `JSON.stringify({
+            href: (document.querySelector('a[href^="tel:"]')||{}).getAttribute ? document.querySelector('a[href^="tel:"]').getAttribute('href') : '',
+            text: (document.querySelector('[data-phone-text]')||{}).textContent || ''
+          })`
+        );
+        const g = JSON.parse(got);
+        const want = EXPECTED_PHONE[src];
+        record(page, `?src=${src} shows ${want.display}`,
+          g.href === "tel:" + want.e164 && g.text.trim() === want.display, got);
+      });
+    }
+    // An unknown or spoofed src must not inject an arbitrary number.
+    await withPage(fileUrl(page) + "?src=evil", async ({ evaluate }) => {
+      const got = await evaluate(
+        `(document.querySelector('[data-phone-text]')||{}).textContent || ''`
+      );
+      record(page, "unknown ?src falls back to the public number",
+        (got || "").trim() === PUBLIC.display, got);
+    });
+  }
 
   console.log(`--- ${page} — reduced motion ---`);
   await withPage(

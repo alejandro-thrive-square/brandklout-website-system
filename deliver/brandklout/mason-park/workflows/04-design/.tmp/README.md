@@ -74,32 +74,50 @@ invented. Specifically:
 - **No "Neighborhood Favorite" award** — that belongs to the sibling Grand Mission page.
 - **No insurance carrier logos** — the reference's carrier list is Grand Mission's, not Mason Park's.
 
-## The phone number
+## Phone numbers — call tracking is PER PAGE
 
-All three pages read the number from one place, `MPD.TRACKING_PHONE` in `shared/mpd.js`, which
-currently falls back to the practice's public number **(281) 769-8878**.
+The outgoing vendor ran **a different tracking number on each landing page**, sharing one GTM
+container. Both originals are in
+[`asana-context/attachments/`](../../01-content-intake/.tmp/asana-context/attachments/):
 
-The previous agency's page used **(281) 767-8698**, which appears in no public listing and is almost
-certainly their call-tracking number. Swapping in the practice's own GHL tracking number is a
-one-line change:
+| Page | Number | Source |
+| :--- | :--- | :--- |
+| Invisalign | **(281) 767-8698** | vendor original |
+| New Patient Special | **(281) 688-1610** | vendor original |
+| Thank you | (281) 769-8878 (public fallback) | no vendor original exists |
+| Practice's public number | (281) 769-8878 | live site |
+
+Unifying these would destroy per-campaign call attribution, so each page declares its own via
+`MPD.TRACKING` in `shared/mpd.js`, keyed by the page's `<body data-page-key>`:
 
 ```js
-TRACKING_PHONE: "(281) 555-0000",
-TRACKING_PHONE_E164: "+12815550000",
+TRACKING: {
+  invisalign:            { display: "(281) 767-8698", e164: "+12817678698" },
+  "new-patient-special": { display: "(281) 688-1610", e164: "+12816881610" },
+  "thank-you":           null,   // falls back to the public number
+},
 ```
 
-Until that is confirmed the pages ship a number that definitely reaches the practice, rather than one
-that may route to a third party's tracking pool.
+The **thank-you page is shared by both landing pages**, so it cannot have one number baked in. The
+form appends `?src=<page-key>` on redirect and the thank-you page renders that campaign's number,
+keeping the call attributed at the last step. An unknown or spoofed `src` falls back to the public
+number rather than injecting an arbitrary one.
+
+> [!WARNING]
+> Ownership of the two tracking numbers is **unconfirmed** — the outgoing vendor provisioned them, so
+> they may no longer route to the practice. **Dial both before any spend starts.** If either is dead,
+> set its entry to `null` and it immediately falls back to the public number.
 
 ## Forms
 
 The lead form posts JSON to `MPD.WEBHOOK_URL`, currently the placeholder
 `{{GHL_INBOUND_WEBHOOK_URL}}`. While unconfigured the form **tells the visitor plainly** that the
 endpoint is not connected and gives them the phone number — it never displays a false success. On
-success it redirects to the thank-you page.
+success it redirects to `../thank-you/index.html?src=<page-key>`.
 
-The payload carries the offer name, the source Asana GID, the intent answer, an E.164 phone number
-and any UTM/gclid/fbclid parameters present on the URL.
+The payload carries the offer name, the source Asana GID, the intent answer, the visitor's E.164
+phone number, the page key, the tracking number that page was displaying, and any
+UTM/gclid/fbclid parameters present on the URL.
 
 ## Verification
 
@@ -109,9 +127,10 @@ Functional, not just visual — screenshots cannot prove a form advances or an a
 node ../../08-qa/.tmp/verify.mjs
 ```
 
-**50/50 checks passing** across all three pages: image loading, font application, phone consistency,
-scroll reveals, two-step form advance, validation, phone auto-formatting, honest failure on the
-unconfigured webhook, payload contents, FAQ accordion, the thank-you page's four spec sections,
+**59/59 checks passing** across all three pages: image loading, font application, **the correct
+page-specific tracking number**, `?src=` inheritance on the thank-you page (including the spoofed-src
+fallback), scroll reveals, two-step form advance, validation, phone auto-formatting, honest failure on
+the unconfigured webhook, payload contents, FAQ accordion, the thank-you page's four spec sections,
 open/closed state, mobile overflow at 390px, sticky bar, and reduced-motion (nothing stuck invisible).
 
 ## Not done here

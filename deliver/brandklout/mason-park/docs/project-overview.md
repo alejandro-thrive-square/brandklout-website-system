@@ -25,18 +25,22 @@ nothing has been written to Asana.
 Start at [`workflows/04-design/.tmp/README.md`](../workflows/04-design/.tmp/README.md) — it covers the
 design system, how to restore the gitignored images, and what is deliberately not done.
 
-Verification is functional rather than visual: **50/50 checks pass** via
+Verification is functional rather than visual: **59/59 checks pass** via
 [`workflows/08-qa/.tmp/verify.mjs`](../workflows/08-qa/.tmp/verify.mjs).
 
 ## Resolved since scaffolding
 
 **1. `mpd-invisalign-lp.html` — resolved. It is the previous ad company's page, not a deliverable.**
 A static rebuild of the earlier agency's GoHighLevel landing page, carrying their GTM container,
-their StatCounter project, GHL-hosted images and a lead form wired to nothing. It is the "originals
-from the other Ad company" the parent task refers to. It did **not** remove any scope. It has been
-moved out of the folder root to
-[`workflows/01-content-intake/.tmp/prior-work/`](../workflows/01-content-intake/.tmp/prior-work/README.md)
-with a full provenance write-up, and mined for the client copy that exists nowhere else.
+their StatCounter project, GHL-hosted images and a lead form wired to nothing. It did **not** remove
+any scope.
+
+**Both** vendor originals have since been pulled from Asana into
+[`.tmp/asana-context/attachments/`](../workflows/01-content-intake/.tmp/asana-context/attachments/),
+GID-stamped — the Invisalign page *and* a New Patient Special page we did not previously have. That
+folder is now the single source of truth; the loose root-level copy has been removed rather than
+duplicated. Analysis of both lives in
+[vendor-originals.md](../workflows/01-content-intake/.tmp/vendor-originals.md).
 
 **2. Client website — found.** Not recorded anywhere in Asana; located by search and confirmed by
 the redirect from `masonparkdental.com`. Recorded in [mcp-access.md](./mcp-access.md).
@@ -77,12 +81,16 @@ here rather than edited into the shared `ASANA-DISPATCH.md` from this worktree.
 
 ## Open Questions
 
-1. **GHL call-tracking number — blocking launch, not build.** The previous agency's page hard-codes
-   **(281) 767-8698**, which appears in no public listing for this practice and is on the evidence
-   their tracking number. The practice's real public number is **(281) 769-8878**. All three pages
-   currently render the public number and read it from one constant (`TRACKING_PHONE` in
-   `shared/mpd.js`) so the swap is a one-line change. Needs GHL access, which this folder does not
-   have. **Do not reuse (281) 767-8698** without confirming who owns it.
+1. **Call-tracking numbers — now wired per page; ownership still needs confirming.** Both vendor
+   originals are in hand and they carry **different** numbers, confirming per-page call tracking:
+   **(281) 767-8698** on Invisalign, **(281) 688-1610** on the New Patient Special, against a public
+   number of **(281) 769-8878**. Each page now renders its own. The thank-you page has no original
+   and no GHL number, so it falls back to the public number unless the form's `?src=` carries a
+   campaign number through.
+   **Action needed: dial both tracking numbers before any spend starts.** The outgoing vendor
+   provisioned them and they may no longer route to the practice. If either is dead, set its entry
+   in `MPD.TRACKING` to `null` and it falls back to the public number immediately. A dedicated GHL
+   number for the thank-you page is still outstanding, as the Asana task asks.
 
 2. **GHL inbound webhook URL.** The lead forms post to `{{GHL_INBOUND_WEBHOOK_URL}}`. Until it is
    supplied the form states plainly that the endpoint is not connected and offers the phone number;
@@ -111,14 +119,21 @@ here rather than edited into the shared `ASANA-DISPATCH.md` from this worktree.
    is soft at landing-page scale. Request a high-resolution headshot; Dr. Cho's and Dr. Nguyen's are
    fine at 683×1024.
 
-8. **Asana attachments still not retrieved.** The parent task's *"originals from the other Ad
-   company"* attachments have not been downloaded. The loose HTML file appears to be exactly that
-   material, so this is likely already covered, but `get_attachments` on `1217040406855582` would
-   confirm and may surface the New Patient Special original too.
+8. **What the $189 special actually includes — NEW, needs a decision.** The now-retrieved vendor
+   original describes a **richer** offer than the client's own `/special-offers/` page: it adds a 3D
+   mouth scan, bite analysis, soft tissue evaluation, gum/periodontal analysis and a CT scan, plus a
+   *"Choose Your Exclusive Gift"* mechanic (free Sonicare or free KOR whitening kit, both PPO-only,
+   or $250 off treatment of $750+). Our page uses the client's own narrower description, because
+   under-describing is safer than over-promising and the gift tiers carry PPO eligibility conditions
+   we cannot assert. **If the vendor's version is the offer as actually run, our page is
+   under-selling it** and the gift choice is a strong conversion device worth adding. Detail in
+   [vendor-originals.md](../workflows/01-content-intake/.tmp/vendor-originals.md).
 
-9. **Office hours conflict — resolved in favour of the live site.** The old page flattens Tuesday and
-   Thursday to 9am–6pm; the live site says 8am–5pm. The pages use the live site. Worth a sanity check
-   with the practice.
+9. **Office hours — three sources disagree; the pages follow the live site.** The Invisalign original
+   flattens Tuesday and Thursday to 9am–6pm where the live site says 8am–5pm, and the New Patient
+   original claims the practice is *"open on Saturdays as well, beyond regular hours"* where the live
+   site says Friday, Saturday and Sunday closed. Our pages use the live site throughout. Worth one
+   sanity check with the practice, since the thank-you page's open/closed indicator depends on it.
 
 ## Reference material
 
@@ -139,10 +154,10 @@ grant that does not exist yet — see [mcp-access.md](./mcp-access.md).
 | Phase | Status | Notes |
 | :--- | :--- | :--- |
 | `00-client-delivery-initialization` | This doc | Scope captured from Asana; no Sales handoff exists. |
-| `01-content-intake` | **Done** | Client site, offers, doctors, real reviews, reference captures, prior-work triage. |
+| `01-content-intake` | **Done** | Client site, offers, doctors, real reviews, reference captures, vendor-original triage. |
 | `04-design` | **Done — awaiting review** | Three self-contained packages plus a shared design system. |
 | `07-webflow-build` | **Blocked** | Needs local approval and a Webflow grant. |
-| `08-qa` | **Done for the local build** | `verify.mjs`, 50/50. Re-run after any change. |
+| `08-qa` | **Done for the local build** | `verify.mjs`, 59/59. Re-run after any change. |
 
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).
 
@@ -156,10 +171,11 @@ deliver/brandklout/mason-park/
 └── workflows/
     ├── 01-content-intake/.tmp/
     │   ├── content-intake-summary.md    # every sourced fact, with provenance
+    │   ├── vendor-originals.md          # triage of the previous agency's two pages
     │   ├── capture.mjs                  # bot-wall-aware page capture
+    │   ├── asana-context/               # task tree + GID-stamped attachments
     │   ├── client-site/                 # captures of the practice's own pages
-    │   ├── reference-captures/          # + structure-briefs.md
-    │   └── prior-work/                  # the previous agency's page + triage
+    │   └── reference-captures/          # + structure-briefs.md
     ├── 04-design/.tmp/                  # the three packages + shared/
     └── 08-qa/.tmp/verify.mjs            # functional verification
 ```

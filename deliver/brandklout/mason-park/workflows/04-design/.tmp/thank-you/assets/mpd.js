@@ -14,13 +14,26 @@
     PUBLIC_PHONE: "(281) 769-8878",
     PUBLIC_PHONE_E164: "+12817698878",
 
-    // Call-tracking number for paid traffic.
-    // UNCONFIRMED — the previous ad company's page hard-coded (281) 767-8698,
-    // which appears in no public listing for this practice. Must be verified in
-    // GHL before launch. Until then both fall back to the public number so no
-    // page can ship a number that does not reach the practice.
-    TRACKING_PHONE: null,
-    TRACKING_PHONE_E164: null,
+    // ---- Call tracking is PER PAGE, not per client -------------------------
+    // The outgoing vendor ran a different tracking number on each landing page
+    // — (281) 767-8698 on Invisalign, (281) 688-1610 on the New Patient
+    // Special — sharing one GTM container. Grand Mission's equivalent pages do
+    // the same. Unifying these would destroy per-campaign call attribution, so
+    // each page declares its own.
+    //
+    // Keyed by the page's data-page-key. `null` means "no tracking number
+    // known for this page" and falls back to the public number.
+    //
+    // WARNING: the two numbers below were provisioned by the previous vendor
+    // and their ownership is unconfirmed. Dial both before any spend starts.
+    // See 01-content-intake/.tmp/vendor-originals.md
+    TRACKING: {
+      invisalign: { display: "(281) 767-8698", e164: "+12817678698" },
+      "new-patient-special": { display: "(281) 688-1610", e164: "+12816881610" },
+      // No vendor original exists for the thank-you page and Asana says
+      // "Check GHL for proper tracking number" for it specifically.
+      "thank-you": null,
+    },
 
     // GHL inbound webhook that receives the lead. Not yet provisioned.
     WEBHOOK_URL: "{{GHL_INBOUND_WEBHOOK_URL}}",
@@ -33,26 +46,52 @@
       "https://www.google.com/maps/place/21830+Kingsland+Blvd+%23104a,+Katy,+TX+77450/@29.775949,-95.7512199,17z",
   });
 
+  // Which page is this? Set by <body data-page-key="...">.
+  MPD.pageKey = function () {
+    return (document.body && document.body.getAttribute("data-page-key")) || "";
+  };
+
+  // The thank-you page is shared by both landing pages, so it cannot have a
+  // tracking number of its own baked in. The redirecting form appends ?src=,
+  // letting it carry the originating page's number through and keep the call
+  // attributed to the campaign that produced the lead.
+  MPD.sourceKey = function () {
+    var src = new URLSearchParams(window.location.search).get("src");
+    return src && Object.prototype.hasOwnProperty.call(MPD.TRACKING, src) ? src : "";
+  };
+
+  MPD.tracking = function () {
+    var own = MPD.TRACKING[MPD.pageKey()];
+    if (own) return own;
+    var inherited = MPD.TRACKING[MPD.sourceKey()];
+    return inherited || null;
+  };
+
   MPD.phone = function () {
-    return MPD.TRACKING_PHONE || MPD.PUBLIC_PHONE;
+    var t = MPD.tracking();
+    return t ? t.display : MPD.PUBLIC_PHONE;
   };
   MPD.phoneE164 = function () {
-    return MPD.TRACKING_PHONE_E164 || MPD.PUBLIC_PHONE_E164;
+    var t = MPD.tracking();
+    return t ? t.e164 : MPD.PUBLIC_PHONE_E164;
   };
 
   /* ------------------------------------------------------------------ *
    * Paint the active phone number into every [data-phone] slot.
    * ------------------------------------------------------------------ */
+  // Dial targets and visible text are painted independently. An earlier version
+  // treated data-phone="href" as "href only" and skipped the text, which meant
+  // the visible number silently kept whatever was hard-coded in the HTML — it
+  // only looked correct while that literal happened to match the constant.
   function paintPhones() {
-    document.querySelectorAll("[data-phone]").forEach(function (el) {
-      var mode = el.getAttribute("data-phone");
-      if (mode === "href" || el.tagName === "A") {
-        el.setAttribute("href", "tel:" + MPD.phoneE164());
-      }
-      if (mode !== "href") {
-        var slot = el.querySelector("[data-phone-text]") || el;
-        if (slot.children.length === 0) slot.textContent = MPD.phone();
-      }
+    var display = MPD.phone();
+    var href = "tel:" + MPD.phoneE164();
+
+    document.querySelectorAll("a[data-phone]").forEach(function (el) {
+      el.setAttribute("href", href);
+    });
+    document.querySelectorAll("[data-phone-text]").forEach(function (el) {
+      el.textContent = display;
     });
   }
 
@@ -244,6 +283,8 @@
           consent: true,
           lp_offer: form.getAttribute("data-offer") || "",
           lp_asana_gid: form.getAttribute("data-asana-gid") || "",
+          lp_page: MPD.pageKey(),
+          lp_tracking_phone: MPD.phone(),
           lp_url: window.location.href,
           lp_submitted_at: new Date().toISOString(),
         },
@@ -274,7 +315,11 @@
       })
         .then(function (r) {
           if (!r.ok) throw new Error("bad status " + r.status);
-          window.location.href = MPD.THANK_YOU_URL;
+          // Carry the page key so the shared thank-you page shows this
+          // campaign's tracking number rather than a generic one.
+          var key = MPD.pageKey();
+          window.location.href =
+            MPD.THANK_YOU_URL + (key ? "?src=" + encodeURIComponent(key) : "");
         })
         .catch(function () {
           if (statusEl) {
