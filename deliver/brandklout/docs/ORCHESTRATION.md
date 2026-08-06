@@ -109,8 +109,9 @@ Non-negotiables, repeated here because they are the ones most likely to be skipp
 pressure:
 
 - **Reference URLs are structure and content only.** Screenshot them, take the section order and
-  copy angles, then design something original and genuinely beautiful. Copying the reference's
-  visual design is a failure, not a shortcut.
+  copy angles, then design original work to [DESIGN-STANDARD.md](./DESIGN-STANDARD.md) —
+  awwwards-grade, motion-led, benchmarked against the Dr. Nahlah build. Copying the reference's
+  visual design is a failure, and so is shipping a plain templatised page.
 - **Build locally**, at
   `deliver/brandklout/<client>/workflows/04-design/.tmp/<page-slug>/`, and report the full path.
 - **Nothing goes to Webflow yet.** No client has a grant; local approval comes first.

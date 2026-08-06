@@ -56,9 +56,15 @@ Confirmed with the client 2026-08-05:
 > design.**
 
 So the reference is a **wireframe and a content brief**, not a visual target. The visual design is
-ours to author, and the bar is *beautiful* — these are paid-traffic pages competing against the
-same handful of dental-PPC templates everyone else is running, so looking like the reference is a
-commercial failure, not a success.
+ours to author, and the bar is set by [DESIGN-STANDARD.md](./DESIGN-STANDARD.md): **awwwards-grade,
+motion-led, high-interaction**, benchmarked against the Dr. Nahlah build. These are paid-traffic
+pages competing against the same handful of dental-PPC templates everyone else runs, so looking
+like the reference is a commercial failure, not a success.
+
+> [!IMPORTANT]
+> Read [DESIGN-STANDARD.md](./DESIGN-STANDARD.md) before designing. "Beautiful" as a brief produced
+> a plain templatised page on the first Grand Mission pass; the standard replaces the adjective
+> with a checklist.
 
 Practical method per page:
 
