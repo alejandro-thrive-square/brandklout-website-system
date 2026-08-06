@@ -25,7 +25,7 @@ nothing has been written to Asana.
 Start at [`workflows/04-design/.tmp/README.md`](../workflows/04-design/.tmp/README.md) — it covers the
 design system, how to restore the gitignored images, and what is deliberately not done.
 
-Verification is functional rather than visual: **59/59 checks pass** via
+Verification is functional rather than visual: **81/81 checks pass** via
 [`workflows/08-qa/.tmp/verify.mjs`](../workflows/08-qa/.tmp/verify.mjs).
 
 ## Resolved since scaffolding
@@ -157,7 +157,7 @@ grant that does not exist yet — see [mcp-access.md](./mcp-access.md).
 | `01-content-intake` | **Done** | Client site, offers, doctors, real reviews, reference captures, vendor-original triage. |
 | `04-design` | **Done — awaiting review** | Three self-contained packages plus a shared design system. |
 | `07-webflow-build` | **Blocked** | Needs local approval and a Webflow grant. |
-| `08-qa` | **Done for the local build** | `verify.mjs`, 59/59. Re-run after any change. |
+| `08-qa` | **Done for the local build** | `verify.mjs`, 81/81. Re-run after any change. |
 
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).
 

@@ -95,43 +95,386 @@
     });
   }
 
-  /* ------------------------------------------------------------------ *
-   * Scroll reveals. Staggered per section, disabled under reduced motion.
-   * ------------------------------------------------------------------ */
-  function initReveals() {
-    var items = document.querySelectorAll(".reveal");
-    if (!items.length) return;
+  /* ================================================================== *
+   * MOTION
+   *
+   * Content is visible unless this code is alive to animate it — the
+   * hidden states in the stylesheet are all gated behind `html.js`, so a
+   * thrown exception here leaves a plain readable page, not a blank one.
+   *
+   * Nothing pins, nothing hijacks the scroll, and nothing that carries the
+   * offer, the phone number or the form is gated behind an animation.
+   * ================================================================== */
+  var reduced =
+    window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    var reduced =
-      window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
-    if (reduced || !("IntersectionObserver" in window)) {
-      items.forEach(function (el) {
-        el.classList.add("in");
+  function setAnim(el, kind, delay) {
+    if (!el || el.hasAttribute("data-anim")) return;
+    el.setAttribute("data-anim", kind);
+    if (delay) el.style.setProperty("--d", delay + "ms");
+  }
+
+  // Text that rises from behind a hard edge needs an inner element to move.
+  function wrapInner(el) {
+    if (!el || el.querySelector(":scope > .anim-inner")) return;
+    var inner = document.createElement("span");
+    inner.className = "anim-inner";
+    while (el.firstChild) inner.appendChild(el.firstChild);
+    el.appendChild(inner);
+  }
+
+  function stagger(list, kind, step, base) {
+    Array.prototype.forEach.call(list, function (el, i) {
+      setAnim(el, kind, (base || 0) + Math.min(i, 6) * (step || 70));
+    });
+  }
+
+  /* ---- Decide what animates, without touching the page's markup ---- */
+  function planAnimations() {
+    // Headline lines and section headings rise out of a mask.
+    document.querySelectorAll("h1 .line").forEach(function (el, i) {
+      setAnim(el, "mask", i * 90);
+      wrapInner(el);
+    });
+    document.querySelectorAll("main h2").forEach(function (el) {
+      setAnim(el, "mask", 0);
+      wrapInner(el);
+    });
+
+    // Eyebrows and leads follow their heading.
+    stagger(document.querySelectorAll(".head-block .eyebrow"), "rise", 0, 0);
+    stagger(document.querySelectorAll(".head-block .lead, .split-body .lead"), "rise", 0, 140);
+
+    // Media uncovers itself.
+    document.querySelectorAll(".split-media, .doc-photo, .map-frame").forEach(function (el) {
+      setAnim(el, "wipe", 0);
+    });
+
+    // Card grids settle in sequence.
+    stagger(document.querySelectorAll(".grid .tile"), "scale", 80);
+    stagger(document.querySelectorAll(".grid .review"), "scale", 90);
+    stagger(document.querySelectorAll(".team figure"), "scale", 100);
+    stagger(document.querySelectorAll(".trust-row img"), "rise", 60);
+    stagger(document.querySelectorAll(".checks li"), "rise", 60);
+    stagger(document.querySelectorAll(".steps .step"), "rise", 110);
+
+    // The struck-through price draws its own line.
+    document.querySelectorAll(".price-was").forEach(function (el) {
+      el.classList.add("anim-price-was");
+    });
+  }
+
+  /* ---- One observer drives everything ---- */
+  function initObserver() {
+    var targets = document.querySelectorAll(
+      "[data-anim], .reveal, .price-was, .step"
+    );
+    if (!targets.length) return;
+
+    function showAll() {
+      Array.prototype.forEach.call(targets, function (el) {
+        el.classList.add("is-in", "in");
       });
+    }
+
+    if (reduced || !("IntersectionObserver" in window)) {
+      showAll();
       return;
+    }
+
+    var pending = new Set();
+
+    function show(el) {
+      el.classList.add("is-in", "in");
+      pending.delete(el);
+      if (io) io.unobserve(el);
     }
 
     var io = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (entry) {
-          if (!entry.isIntersecting) return;
-          entry.target.classList.add("in");
-          io.unobserve(entry.target);
+          if (entry.isIntersecting) show(entry.target);
         });
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.05 }
+      { rootMargin: "0px 0px -6% 0px", threshold: 0.04 }
     );
 
-    // Stagger siblings within a shared parent for a settled, unhurried feel.
-    var groups = new Map();
-    items.forEach(function (el) {
-      var parent = el.parentElement;
-      if (!groups.has(parent)) groups.set(parent, 0);
-      var i = groups.get(parent);
-      el.style.setProperty("--d", Math.min(i, 5) * 70 + "ms");
-      groups.set(parent, i + 1);
+    Array.prototype.forEach.call(targets, function (el) {
+      // Anything already on screen at load must never wait for a scroll.
+      var r = el.getBoundingClientRect();
+      if (r.top < window.innerHeight && r.bottom > 0) {
+        el.classList.add("is-in", "in");
+        return;
+      }
+      pending.add(el);
       io.observe(el);
     });
+
+    // IntersectionObserver samples frames, so a fast flick-scroll can carry an
+    // element past the viewport between samples and it is never reported —
+    // leaving that section permanently invisible. This sweep is authoritative:
+    // anything that has reached or passed the viewport is shown, whether or not
+    // the observer ever saw it.
+    function sweep() {
+      if (!pending.size) return;
+      var vh = window.innerHeight;
+      Array.prototype.forEach.call(Array.from(pending), function (el) {
+        if (el.getBoundingClientRect().top < vh * 0.94) show(el);
+      });
+      if (!pending.size) window.removeEventListener("scroll", onScroll);
+    }
+
+    var ticking = false;
+    function onScroll() {
+      if (ticking) return;
+      ticking = true;
+      requestAnimationFrame(function () {
+        ticking = false;
+        sweep();
+      });
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", sweep, { passive: true });
+    window.setTimeout(sweep, 2500);
+  }
+
+  /* ---- Hero plays on load, on its own clock ---- */
+  function initHero() {
+    var hero = document.querySelector(".hero, .status-banner");
+    if (!hero) return;
+    var seq = hero.querySelectorAll(
+      ".eyebrow, h1 .line, h1, .lead, .price-block, .chips .chip, .rating, .form-card, .ref-line, .status-mark"
+    );
+    Array.prototype.forEach.call(seq, function (el, i) {
+      if (!el.hasAttribute("data-anim") && !el.classList.contains("chip")) {
+        setAnim(el, "rise", 60 + i * 70);
+      } else {
+        el.style.setProperty("--d", 60 + i * 70 + "ms");
+      }
+    });
+    // Kick them in on the next frame so the delays actually stage.
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () {
+        Array.prototype.forEach.call(seq, function (el) {
+          el.classList.add("is-in", "in");
+        });
+      });
+    });
+  }
+
+  /* ---- The headline price counts up to its real value ---- */
+  function initCount() {
+    document.querySelectorAll(".price-now").forEach(function (el) {
+      var raw = (el.textContent || "").trim();
+      var m = raw.match(/^\$([\d,]+)$/);
+      if (!m) return;
+      var target = parseInt(m[1].replace(/,/g, ""), 10);
+      if (!isFinite(target) || target <= 0) return;
+
+      var fmt = function (n) {
+        return "$" + n.toLocaleString("en-US");
+      };
+      if (reduced) {
+        el.textContent = fmt(target);
+        return;
+      }
+
+      var started = false;
+      var run = function () {
+        if (started) return;
+        started = true;
+        var t0 = null;
+        var dur = 1100;
+        var tick = function (ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          var eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = fmt(Math.round(target * eased));
+          if (p < 1) requestAnimationFrame(tick);
+          // Always lands on the exact figure, never a rounded approximation.
+          else el.textContent = fmt(target);
+        };
+        requestAnimationFrame(tick);
+      };
+
+      if ("IntersectionObserver" in window) {
+        var io = new IntersectionObserver(
+          function (entries) {
+            entries.forEach(function (e) {
+              if (e.isIntersecting) {
+                run();
+                io.disconnect();
+              }
+            });
+          },
+          { threshold: 0.3 }
+        );
+        io.observe(el);
+        // The hero price is above the fold; do not make it wait.
+        window.setTimeout(run, 900);
+      } else {
+        run();
+      }
+    });
+  }
+
+  /* ---- Scroll progress hairline ---- */
+  function initProgress() {
+    if (reduced) return;
+    var bar = document.createElement("div");
+    bar.className = "scroll-progress";
+    bar.setAttribute("aria-hidden", "true");
+    document.body.appendChild(bar);
+
+    var ticking = false;
+    function update() {
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      var p = h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0;
+      bar.style.transform = "scaleX(" + p + ")";
+      ticking = false;
+    }
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      },
+      { passive: true }
+    );
+    update();
+  }
+
+  /* ---- Offer rail: offer + phone + form, one tap away at any depth ---- */
+  function initRail() {
+    var strip = document.querySelector(".offer-strip .wrap span");
+    var book = document.querySelector('a[href="#book"]');
+    if (!strip || !book) return; // post-conversion pages have neither
+
+    var rail = document.createElement("div");
+    rail.className = "offer-rail";
+    rail.innerHTML =
+      '<span class="rail-offer"></span>' +
+      '<span class="rail-sep" aria-hidden="true"></span>' +
+      '<a class="rail-call" data-phone="href" href="tel:' +
+      MPD.phoneE164() +
+      '"><span data-phone-text></span></a>' +
+      '<a class="btn btn--sand" href="#book">Book now</a>';
+    rail.querySelector(".rail-offer").textContent = (strip.textContent || "").trim();
+    document.body.appendChild(rail);
+
+    // Repaint so the rail carries this page's tracking number too.
+    paintPhones();
+
+    var anchor = document.querySelector(".hero");
+    if (!anchor) return;
+
+    if (!("IntersectionObserver" in window)) {
+      rail.classList.add("is-up");
+      return;
+    }
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          rail.classList.toggle("is-up", !e.isIntersecting);
+        });
+      },
+      { threshold: 0, rootMargin: "-120px 0px 0px 0px" }
+    );
+    io.observe(anchor);
+  }
+
+  /* ---- Gentle parallax on photography ---- */
+  function initParallax() {
+    if (reduced) return;
+    var items = document.querySelectorAll(".split-media img, .doc-photo img");
+    if (!items.length) return;
+
+    var ticking = false;
+    function update() {
+      var vh = window.innerHeight;
+      Array.prototype.forEach.call(items, function (img) {
+        var r = img.parentElement.getBoundingClientRect();
+        if (r.bottom < -200 || r.top > vh + 200) return;
+        var mid = r.top + r.height / 2;
+        var off = ((mid - vh / 2) / vh) * -18; // max ~18px, stays subtle
+        img.style.transform = "translate3d(0," + off.toFixed(2) + "px,0) scale(1.06)";
+      });
+      ticking = false;
+    }
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      },
+      { passive: true }
+    );
+    update();
+  }
+
+  /* ---- FAQ opens with height, not a snap ---- */
+  function initFaq() {
+    document.querySelectorAll(".faq details").forEach(function (d) {
+      var answer = d.querySelector(".answer");
+      var summary = d.querySelector("summary");
+      if (!answer || !summary) return;
+
+      if (!answer.parentElement.classList.contains("answer-wrap")) {
+        var wrap = document.createElement("div");
+        wrap.className = "answer-wrap";
+        answer.parentNode.insertBefore(wrap, answer);
+        wrap.appendChild(answer);
+      }
+      if (reduced) return;
+
+      summary.addEventListener("click", function (e) {
+        e.preventDefault();
+        if (d.open) {
+          d.classList.remove("is-open");
+          window.setTimeout(function () {
+            d.open = false;
+          }, 420);
+        } else {
+          d.open = true;
+          requestAnimationFrame(function () {
+            requestAnimationFrame(function () {
+              d.classList.add("is-open");
+            });
+          });
+        }
+      });
+    });
+  }
+
+  /* ---- Pointer-following sheen on buttons ---- */
+  function initButtons() {
+    if (reduced) return;
+    document.addEventListener(
+      "pointermove",
+      function (e) {
+        var btn = e.target.closest && e.target.closest(".btn");
+        if (!btn) return;
+        var r = btn.getBoundingClientRect();
+        btn.style.setProperty("--mx", ((e.clientX - r.left) / r.width) * 100 + "%");
+        btn.style.setProperty("--my", ((e.clientY - r.top) / r.height) * 100 + "%");
+      },
+      { passive: true }
+    );
+  }
+
+  function initMotion() {
+    document.documentElement.classList.add("js");
+    planAnimations();
+    initHero();
+    initObserver();
+    initCount();
+    initProgress();
+    initRail();
+    initParallax();
+    initFaq();
+    initButtons();
   }
 
   /* ------------------------------------------------------------------ *
@@ -382,9 +725,17 @@
   function init() {
     paintPhones();
     paintToday();
-    initReveals();
     initAnchors();
     document.querySelectorAll("form[data-lead-form]").forEach(initForm);
+
+    // Motion last, and isolated: if anything in here throws, the page is still
+    // a complete, readable, fully functional landing page.
+    try {
+      initMotion();
+    } catch (err) {
+      document.documentElement.classList.remove("js");
+      if (window.console && console.warn) console.warn("motion disabled:", err);
+    }
   }
 
   if (document.readyState === "loading") {

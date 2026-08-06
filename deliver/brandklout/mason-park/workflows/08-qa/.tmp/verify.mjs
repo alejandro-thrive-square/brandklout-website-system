@@ -49,6 +49,43 @@ function record(page, name, pass, detail) {
   console.log(`  [${mark}] ${name}${detail ? "  — " + detail : ""}`);
 }
 
+// Injected before motion assertions. An element counts as "stuck hidden" if it
+// is transparent, still displaced, still clipped, or its mask inner is still
+// parked below the edge. This is what catches a reveal that never fired —
+// which a screenshot of the top of the page would never show.
+const HIDDEN_PROBE = `
+  function isIdentity(t){
+    return !t || t === 'none' || /^matrix\\(1,\\s*0,\\s*0,\\s*1,\\s*0,\\s*0\\)$/.test(t);
+  }
+  function clipHides(c){
+    if (!c || c === 'none') return false;
+    var nums = c.match(/-?[\\d.]+%/g);
+    return !!(nums && nums.some(function (n) { return parseFloat(n) > 0.5; }));
+  }
+  function hiddenIn(root){
+    var scope = (root && root.querySelectorAll) ? root : document;
+    var els = [].slice.call(scope.querySelectorAll('[data-anim], .reveal'));
+    var stuck = [];
+    els.forEach(function (el) {
+      var cs = getComputedStyle(el), bad = false;
+      if (parseFloat(cs.opacity) < 0.99) bad = true;
+      if (!isIdentity(cs.transform)) bad = true;
+      if (clipHides(cs.clipPath)) bad = true;
+      var inner = el.querySelector(':scope > .anim-inner');
+      if (inner && !isIdentity(getComputedStyle(inner).transform)) bad = true;
+      if (bad) stuck.push((el.tagName || '').toLowerCase() + '.' +
+        String(el.className || '').split(' ')[0]);
+    });
+    return { total: els.length, stuck: stuck.length, samples: stuck.slice(0, 6) };
+  }
+`;
+
+// What the headline price must land on, exactly.
+const EXPECTED_PRICE = {
+  invisalign: "$3,800",
+  "new-patient-special": "$189",
+};
+
 // Monotonic, never random. Random ports let a fresh run attach to a previous
 // Chrome that has not finished exiting, which silently verifies the WRONG page
 // — it showed up here as a ?src= case reading the prior navigation's number.
@@ -68,6 +105,13 @@ async function withPage(url, fn, { reduced = false, width = 1440, height = 900 }
     "--no-first-run",
     "--no-default-browser-check",
     "--allow-file-access-from-files",
+    // A backgrounded/occluded tab freezes transitions, IntersectionObserver and
+    // rAF, which reports motion as broken when it is fine. Keep the page
+    // foregrounded and unthrottled, and assert on it below.
+    "--disable-background-timer-throttling",
+    "--disable-backgrounding-occluded-windows",
+    "--disable-renderer-backgrounding",
+    "--disable-features=CalculateNativeWinOcclusion",
     `--user-data-dir=${profile}`,
     "about:blank",
   ]);
@@ -136,6 +180,7 @@ async function withPage(url, fn, { reduced = false, width = 1440, height = 900 }
 
   await send("Page.enable", {}, sessionId);
   await send("Runtime.enable", {}, sessionId);
+  await send("Page.bringToFront", {}, sessionId); // never verify a background tab
   await send(
     "Emulation.setEmulatedMedia",
     { features: reduced ? [{ name: "prefers-reduced-motion", value: "reduce" }] : [] },
@@ -219,24 +264,43 @@ async function commonChecks(page, ctx) {
 
   record(page, "no uncaught JS errors", consoleErrors.length === 0, consoleErrors.join(" | "));
 
+  // A frozen tab reports working motion as broken. Fail loudly rather than
+  // letting it look like a page defect.
+  const vis = await evaluate(
+    `JSON.stringify({ v: document.visibilityState, js: document.documentElement.classList.contains('js') })`
+  );
+  const vs = JSON.parse(vis);
+  record(page, "tab is foregrounded (motion not throttled)", vs.v === "visible", vs.v);
+  record(page, "motion system armed (html.js)", vs.js === true, String(vs.js));
+
+  // Above-the-fold content must never wait for a scroll — the offer and the
+  // form are up there.
+  const heroVisible = await evaluate(`${HIDDEN_PROBE}(async () => {
+    await new Promise(r => setTimeout(r, 1800)); // let the entrance finish
+    return JSON.stringify(hiddenIn(document.querySelector('.hero, .status-banner')));
+  })()`);
+  const hv = JSON.parse(heroVisible);
+  record(page, "hero content visible without scrolling", hv.stuck === 0,
+    `${hv.stuck} hidden: ${hv.samples.join(", ")}`);
+
   // Scroll the whole page FIRST. Below-the-fold images are loading="lazy", so
   // asserting on them before a scroll measures the test's impatience rather
-  // than the page. The same pass is what drives the reveal observers.
-  const revealed = await evaluate(`(async () => {
+  // than the page. The same pass is what drives the observers.
+  const revealed = await evaluate(`${HIDDEN_PROBE}(async () => {
     const step = innerHeight * 0.7;
     for (let y = 0; y < document.body.scrollHeight; y += step) {
-      scrollTo(0, y); await new Promise(r => setTimeout(r, 90));
+      scrollTo(0, y); await new Promise(r => setTimeout(r, 110));
     }
     scrollTo(0, document.body.scrollHeight);
-    await new Promise(r => setTimeout(r, 900));
+    await new Promise(r => setTimeout(r, 1400));
+    const res = hiddenIn(document);
     scrollTo(0, 0);
     await new Promise(r => setTimeout(r, 400));
-    const all = [...document.querySelectorAll('.reveal')];
-    return JSON.stringify({ total: all.length, shown: all.filter(e => e.classList.contains('in')).length });
+    return JSON.stringify(res);
   })()`);
   const rv = JSON.parse(revealed);
-  record(page, `all ${rv.total} reveals fire`, rv.total === 0 || rv.shown === rv.total,
-    `${rv.shown}/${rv.total}`);
+  record(page, `no animated element left hidden (${rv.total} animated)`, rv.stuck === 0,
+    `${rv.stuck} stuck: ${rv.samples.join(", ")}`);
 
   const imgs = await evaluate(`(async () => {
     await Promise.all([...document.images].map(i => i.complete ? null : i.decode().catch(() => null)));
@@ -277,6 +341,80 @@ async function commonChecks(page, ctx) {
     return b.color + ' on ' + b.backgroundColor;
   })()`);
   record(page, "body colours resolve", !!contrastish, contrastish);
+}
+
+/* -------------------------------------------------------------- *
+ * Motion must serve the offer, never bury it.
+ * -------------------------------------------------------------- */
+async function motionChecks(page, ctx) {
+  const { evaluate } = ctx;
+
+  // The price must animate to the exact published figure, not near it.
+  if (EXPECTED_PRICE[page]) {
+    const price = await evaluate(`(async () => {
+      await new Promise(r => setTimeout(r, 2600));
+      return (document.querySelector('.price-now') || {}).textContent || '';
+    })()`);
+    record(page, `price counts up to exactly ${EXPECTED_PRICE[page]}`,
+      (price || "").trim() === EXPECTED_PRICE[page], price);
+  }
+
+  // Scroll progress must actually track scrolling.
+  const prog = await evaluate(`(async () => {
+    const bar = document.querySelector('.scroll-progress');
+    if (!bar) return JSON.stringify({ ok: false, why: 'missing' });
+    const at = () => new DOMMatrixReadOnly(getComputedStyle(bar).transform).a;
+    scrollTo(0, 0); await new Promise(r => setTimeout(r, 250));
+    const top = at();
+    scrollTo(0, document.body.scrollHeight); await new Promise(r => setTimeout(r, 450));
+    const bottom = at();
+    scrollTo(0, 0); await new Promise(r => setTimeout(r, 250));
+    return JSON.stringify({ ok: bottom > top + 0.5 && bottom > 0.9, top, bottom });
+  })()`);
+  const pr = JSON.parse(prog);
+  record(page, "scroll progress tracks the page", pr.ok === true, prog);
+
+  // At the very bottom of the page the offer, the phone and the form must all
+  // still be one tap away.
+  const reach = await evaluate(`(async () => {
+    scrollTo(0, document.body.scrollHeight);
+    await new Promise(r => setTimeout(r, 900));
+    const rail = document.querySelector('.offer-rail');
+    const railUp = rail && rail.classList.contains('is-up') &&
+      getComputedStyle(rail).display !== 'none';
+    const railBox = rail ? rail.getBoundingClientRect() : null;
+    const onScreen = railBox && railBox.top >= 0 && railBox.bottom <= innerHeight + 1;
+    const header = document.querySelector('.site-head');
+    const headBox = header ? header.getBoundingClientRect() : null;
+    const res = {
+      railUp: !!railUp,
+      railOnScreen: !!onScreen,
+      railOffer: rail ? (rail.querySelector('.rail-offer') || {}).textContent || '' : '',
+      railTel: rail ? ((rail.querySelector('a[href^="tel:"]') || {}).getAttribute
+        ? rail.querySelector('a[href^="tel:"]').getAttribute('href') : '') : '',
+      railBook: rail ? !!rail.querySelector('a[href="#book"]') : false,
+      headerStuck: headBox ? headBox.top <= 1 : false,
+      headerTel: !!document.querySelector('.site-head a[href^="tel:"]')
+    };
+    scrollTo(0, 0);
+    await new Promise(r => setTimeout(r, 250));
+    return JSON.stringify(res);
+  })()`);
+  const rc = JSON.parse(reach);
+
+  if (page === "thank-you") {
+    // No offer and no form here; the sticky header keeps the phone reachable.
+    record(page, "phone reachable at full scroll depth",
+      rc.headerStuck && rc.headerTel, JSON.stringify(rc));
+  } else {
+    record(page, "offer rail surfaces at depth", rc.railUp && rc.railOnScreen,
+      JSON.stringify({ up: rc.railUp, onScreen: rc.railOnScreen }));
+    record(page, "rail carries offer + tracking number + booking CTA",
+      rc.railOffer.length > 10 &&
+        rc.railTel === "tel:" + EXPECTED_PHONE[page].e164 &&
+        rc.railBook === true,
+      JSON.stringify({ offer: rc.railOffer.slice(0, 40), tel: rc.railTel, book: rc.railBook }));
+  }
 }
 
 async function overflowCheck(page, ctx) {
@@ -450,6 +588,7 @@ for (const page of targets) {
   console.log(`\n=== ${page} — desktop 1440 ===`);
   await withPage(fileUrl(page), async (ctx) => {
     await commonChecks(page, ctx);
+    await motionChecks(page, ctx);
     if (page !== "thank-you") {
       await formChecks(page, ctx);
       if (page === "invisalign") await faqChecks(page, ctx);
@@ -508,15 +647,31 @@ for (const page of targets) {
   await withPage(
     fileUrl(page),
     async (ctx) => {
-      const res = await ctx.evaluate(`(async () => {
+      const res = await ctx.evaluate(`${HIDDEN_PROBE}(async () => {
+        await new Promise(r => setTimeout(r, 700));
+        const step = innerHeight * 0.9;
+        for (let y = 0; y < document.body.scrollHeight; y += step) {
+          scrollTo(0, y); await new Promise(r => setTimeout(r, 60));
+        }
+        scrollTo(0, document.body.scrollHeight);
         await new Promise(r => setTimeout(r, 500));
-        const all = [...document.querySelectorAll('.reveal')];
-        const hidden = all.filter(e => getComputedStyle(e).opacity === '0').length;
-        return JSON.stringify({ total: all.length, hidden });
+        const h = hiddenIn(document);
+        const hero = document.querySelector('.hero');
+        const drift = hero ? getComputedStyle(hero, '::before').animationName : 'none';
+        const moving = [].slice.call(document.querySelectorAll('[data-anim]'))
+          .filter(function (e) { return parseFloat(getComputedStyle(e).transitionDuration) > 0.05; })
+          .length;
+        return JSON.stringify({
+          total: h.total, stuck: h.stuck, samples: h.samples, drift, moving
+        });
       })()`);
       const r = JSON.parse(res);
-      record(page, "content visible without motion", r.hidden === 0,
-        `${r.hidden}/${r.total} stuck hidden`);
+      // Reduced motion must remove the motion, not the content.
+      record(page, `content fully visible without motion (${r.total} animated)`,
+        r.stuck === 0, `${r.stuck} stuck: ${r.samples.join(", ")}`);
+      record(page, "motion actually disabled, not just shortened",
+        r.moving === 0 && (r.drift === "none" || !r.drift),
+        `transitions:${r.moving} drift:${r.drift}`);
     },
     { reduced: true }
   );

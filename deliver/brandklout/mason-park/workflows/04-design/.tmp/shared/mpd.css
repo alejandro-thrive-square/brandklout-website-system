@@ -852,27 +852,222 @@ h3, .h3 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.012em; }
   body { padding-bottom: 4.75rem; }
 }
 
-/* ---------- Reveal motion ---------- */
-.reveal {
+/* ==========================================================================
+   MOTION
+   --------------------------------------------------------------------------
+   Principles this system is built to:
+   - Motion serves the offer. Nothing that carries the price, the phone number
+     or the form is ever gated behind an animation.
+   - No scroll-jacking and no pinning. The page scrolls at the speed the
+     visitor scrolls it.
+   - Transform and opacity only, so everything stays on the compositor.
+   - Content is visible by default. The `.js` class (set by mpd.js on <html>)
+     is what arms the hidden state, so a JS failure degrades to a plain,
+     fully readable page rather than a blank one.
+   ========================================================================== */
+
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.22, 0.61, 0.36, 1);
+  --dur: 0.9s;
+}
+
+/* Nothing hides unless JS is alive to un-hide it. */
+.js [data-anim] { will-change: transform, opacity; }
+
+/* ---- rise: the workhorse ---- */
+.js [data-anim="rise"] {
   opacity: 0;
-  transform: translateY(14px);
-  transition: opacity 0.6s var(--ease), transform 0.6s var(--ease);
-  transition-delay: var(--d, 0ms);
-}
-.reveal.in { opacity: 1; transform: none; }
-
-@keyframes fadeUp {
-  from { opacity: 0; transform: translateY(8px); }
-  to { opacity: 1; transform: none; }
+  transform: translate3d(0, 26px, 0);
+  transition: opacity var(--dur) var(--ease-out) var(--d, 0ms),
+    transform var(--dur) var(--ease-out) var(--d, 0ms);
 }
 
+/* ---- mask: text rises out from behind a hard edge ----
+   The padding/negative-margin pair gives descenders (g, y, p) room so the
+   clipping edge never shaves them, without changing layout. */
+.js [data-anim="mask"] {
+  overflow: hidden;
+  padding-bottom: 0.14em;
+  margin-bottom: -0.14em;
+}
+.js [data-anim="mask"] > .anim-inner {
+  display: block;
+  transform: translate3d(0, 105%, 0);
+  transition: transform 1.05s var(--ease-out) var(--d, 0ms);
+}
+
+/* ---- wipe: media uncovers itself ---- */
+.js [data-anim="wipe"] {
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path 1.15s var(--ease-out) var(--d, 0ms);
+}
+.js [data-anim="wipe"] > img { transform: scale(1.08); transition: transform 1.4s var(--ease-out); }
+
+/* ---- rule: a hairline draws across ---- */
+.js [data-anim="rule"]::after,
+.js [data-anim="rule"] > .rule-line {
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 1s var(--ease-out) var(--d, 0ms);
+}
+
+/* ---- scale: cards settle in ---- */
+.js [data-anim="scale"] {
+  opacity: 0;
+  transform: translate3d(0, 20px, 0) scale(0.985);
+  transition: opacity 0.85s var(--ease-out) var(--d, 0ms),
+    transform 0.85s var(--ease-out) var(--d, 0ms);
+}
+
+/* ---- the in state ---- */
+.js [data-anim].is-in { opacity: 1; transform: none; }
+.js [data-anim="mask"].is-in > .anim-inner { transform: none; }
+.js [data-anim="wipe"].is-in { clip-path: inset(0 0 0 0); }
+.js [data-anim="wipe"].is-in > img { transform: none; }
+.js [data-anim="rule"].is-in::after,
+.js [data-anim="rule"].is-in > .rule-line { transform: scaleX(1); }
+.js [data-anim].is-in { will-change: auto; }
+
+/* Legacy hook kept so existing markup keeps working. */
+.js .reveal:not([data-anim]) {
+  opacity: 0;
+  transform: translate3d(0, 26px, 0);
+  transition: opacity var(--dur) var(--ease-out) var(--d, 0ms),
+    transform var(--dur) var(--ease-out) var(--d, 0ms);
+}
+.js .reveal.in:not([data-anim]) { opacity: 1; transform: none; }
+
+/* ---- struck-through price: the line draws rather than just existing ---- */
+.price-was { position: relative; text-decoration: none; }
+.price-was::after {
+  content: "";
+  position: absolute;
+  left: -2px; right: -2px;
+  top: 52%;
+  height: 1px;
+  background: var(--mist);
+}
+.js .price-was::after { transform: scaleX(0); transform-origin: left center; }
+.js .price-was.is-in::after { transform: scaleX(1); transition: transform 0.7s var(--ease-out) 0.5s; }
+
+/* ---- the numbered steps' connecting hairline ---- */
+.js .step::after { transform: scaleX(0); transform-origin: left center;
+  transition: transform 0.9s var(--ease-out) var(--d, 0ms); }
+.js .step.is-in::after { transform: scaleX(1); }
+
+/* ---- ambient drift behind the hero ---- */
+.hero::before { animation: drift 26s ease-in-out infinite alternate; }
+@keyframes drift {
+  from { transform: translate3d(0, 0, 0) scale(1); }
+  to { transform: translate3d(4%, -6%, 0) scale(1.12); }
+}
+
+/* ---- scroll progress hairline under the sticky header ---- */
+.scroll-progress {
+  position: fixed;
+  top: 0; left: 0;
+  height: 2px;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: left center;
+  background: linear-gradient(90deg, var(--sand), var(--sand-deep));
+  z-index: 90;
+  pointer-events: none;
+}
+
+/* ==========================================================================
+   OFFER RAIL — the offer, the phone and the form stay one tap away at any
+   scroll depth on desktop. The mobile equivalent is .sticky-bar.
+   ========================================================================== */
+.offer-rail {
+  position: fixed;
+  left: 50%;
+  bottom: 1.25rem;
+  transform: translate3d(-50%, 140%, 0);
+  z-index: 85;
+  display: none;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.6rem 0.7rem 0.6rem 1.4rem;
+  border-radius: 999px;
+  background: rgba(27, 34, 36, 0.96);
+  backdrop-filter: saturate(160%) blur(14px);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  box-shadow: 0 18px 44px -18px rgba(0, 0, 0, 0.55);
+  color: var(--white);
+  transition: transform 0.6s var(--ease-out), opacity 0.4s var(--ease-out);
+  opacity: 0;
+  max-width: calc(100vw - 2rem);
+}
+.offer-rail.is-up { transform: translate3d(-50%, 0, 0); opacity: 1; }
+.offer-rail .rail-offer {
+  font-size: 0.875rem;
+  line-height: 1.3;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.offer-rail .rail-offer strong { font-family: var(--display); font-weight: 600; }
+.offer-rail .rail-sep { width: 1px; height: 26px; background: rgba(255, 255, 255, 0.16); flex: none; }
+.offer-rail .rail-call {
+  font-family: var(--display);
+  font-weight: 600;
+  font-size: 0.9375rem;
+  white-space: nowrap;
+}
+.offer-rail .rail-call:hover { color: var(--sand); }
+.offer-rail .btn { padding: 0.7rem 1.35rem; font-size: 0.875rem; }
+@media (min-width: 768px) { .offer-rail { display: flex; } }
+
+/* ---- FAQ answers animate open instead of snapping ---- */
+.js .faq details .answer-wrap {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.45s var(--ease-soft);
+}
+.js .faq details.is-open .answer-wrap { grid-template-rows: 1fr; }
+.js .faq details .answer-wrap > .answer { overflow: hidden; }
+
+/* ---- buttons get a light sweep on hover ---- */
+.btn { position: relative; overflow: hidden; isolation: isolate; }
+.btn::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%),
+    rgba(255, 255, 255, 0.18), transparent 60%);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease-soft);
+}
+.btn:hover::before { opacity: 1; }
+
+/* ==========================================================================
+   REDUCED MOTION
+   Everything above collapses to "already arrived". Content is never hidden,
+   never clipped, never offset — it is simply there.
+   ========================================================================== */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
+    transition-delay: 0ms !important;
     scroll-behavior: auto !important;
   }
-  .reveal { opacity: 1; transform: none; }
+  .js [data-anim],
+  .js .reveal:not([data-anim]) { opacity: 1 !important; transform: none !important; }
+  .js [data-anim="mask"] { overflow: visible; }
+  .js [data-anim="mask"] > .anim-inner { transform: none !important; }
+  .js [data-anim="wipe"] { clip-path: none !important; }
+  .js [data-anim="wipe"] > img { transform: none !important; }
+  .js [data-anim="rule"]::after,
+  .js [data-anim="rule"] > .rule-line,
+  .js .step::after,
+  .js .price-was::after { transform: scaleX(1) !important; }
+  .hero::before { animation: none !important; }
+  .offer-rail { transition: none !important; }
   .btn:hover, .tile:hover, .choice:hover { transform: none; }
+  .js .faq details .answer-wrap { transition: none !important; }
 }

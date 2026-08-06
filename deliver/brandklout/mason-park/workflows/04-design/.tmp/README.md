@@ -62,6 +62,57 @@ Conversion structure is still doing its job: an offer strip, a price block with 
 regular fee, a two-step form that opens with a low-commitment intent question rather than demanding a
 phone number, real Google reviews, a transparent price ladder, and a sticky call/book bar on mobile.
 
+## Motion
+
+The motion layer lives entirely in `shared/mpd.css` and `shared/mpd.js`, so all three pages share one
+system. It is driven by `data-anim` attributes that JS assigns at runtime — **the page markup carries
+no animation classes**, which is why content and section order were able to stay exactly as they were.
+
+| Primitive | Where it runs |
+| :--- | :--- |
+| `mask` | Headline lines and every section heading rise out from behind a hard edge |
+| `rise` | Eyebrows, leads, checklists, steps, trust marks |
+| `wipe` | Photography uncovers itself top-to-bottom |
+| `scale` | Card grids, reviews and team portraits settle in, staggered |
+| `rule` | Hairlines draw across — the step connectors and the struck-through regular price |
+
+Plus: a staged hero entrance on its own clock (it never waits for a scroll), the headline price
+counting up to its exact published figure, a scroll-progress hairline, gentle parallax on
+photography, pointer-following sheen on buttons, and FAQ answers that open with height instead of
+snapping.
+
+**No pinning and no scroll-jacking.** The page moves at the speed the visitor scrolls it.
+Everything animates on transform and opacity only, so it stays on the compositor.
+
+### Motion never buries the offer
+
+- The **offer rail** (`.offer-rail`) surfaces once the hero leaves the viewport and carries the
+  offer, the page's tracking number and a booking CTA. It is fixed, so all three are one tap away at
+  any scroll depth on desktop.
+- On mobile the existing **sticky call/book bar** does the same job.
+- The **header is sticky** on every page and carries the phone number and a CTA.
+- The hero — price, offer chips and form — is marked in on load and is never gated behind a scroll.
+
+### It fails safe
+
+The hidden states are all gated behind `html.js`. An inline head script arms that class before first
+paint, with a 3-second failsafe that removes it if `mpd.js` never runs. The motion module is also
+wrapped in its own `try/catch` that strips `html.js` on error. **Any failure degrades to a plain,
+complete, fully readable page — never a blank one.**
+
+A note on the observer: `IntersectionObserver` samples frames, so a fast flick-scroll can carry a
+section past the viewport between samples and it is never reported — leaving it permanently
+invisible. A throttled scroll sweep is therefore authoritative: anything that has reached or passed
+the viewport is shown whether or not the observer saw it. This was a real bug the tests caught, not a
+theoretical one.
+
+### Reduced motion
+
+`prefers-reduced-motion: reduce` removes the motion, not the content. Masks unclip, wipes drop their
+`clip-path`, transforms reset, the ambient hero drift stops and the price is written directly at its
+final value. The suite asserts both halves of this: nothing is left hidden **and** no transitions are
+still running.
+
 ## Content integrity
 
 Every price, name, credential, review and clinical claim is the client's own, sourced in
@@ -127,11 +178,25 @@ Functional, not just visual — screenshots cannot prove a form advances or an a
 node ../../08-qa/.tmp/verify.mjs
 ```
 
-**59/59 checks passing** across all three pages: image loading, font application, **the correct
-page-specific tracking number**, `?src=` inheritance on the thank-you page (including the spoofed-src
-fallback), scroll reveals, two-step form advance, validation, phone auto-formatting, honest failure on
-the unconfigured webhook, payload contents, FAQ accordion, the thank-you page's four spec sections,
-open/closed state, mobile overflow at 390px, sticky bar, and reduced-motion (nothing stuck invisible).
+**81/81 checks passing** across all three pages: image loading, font application, the correct
+page-specific tracking number, `?src=` inheritance on the thank-you page (including the spoofed-src
+fallback), two-step form advance, validation, phone auto-formatting, honest failure on the
+unconfigured webhook, payload contents, FAQ accordion, the thank-you page's four spec sections,
+open/closed state, mobile overflow at 390px and the sticky bar.
+
+Motion specifically:
+
+- **the tab is foregrounded** — a background tab freezes transitions, `IntersectionObserver` and
+  `requestAnimationFrame`, which reports working motion as broken. The runner passes
+  `--disable-renderer-backgrounding` and friends, calls `Page.bringToFront`, and then *asserts*
+  `document.visibilityState === "visible"` so a throttled run can never be mistaken for a page defect
+- no animated element left hidden after a full-page scroll — checked on opacity, transform,
+  `clip-path` and the mask inner, not just a class name
+- hero content visible without scrolling
+- the price counts up to exactly its published figure
+- scroll progress tracks the page
+- the offer rail surfaces at depth carrying offer + tracking number + booking CTA
+- under reduced motion: content fully visible **and** motion genuinely disabled rather than shortened
 
 ## Not done here
 

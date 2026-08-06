@@ -20,6 +20,16 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Outfit:wght@400;500;600&display=swap" rel="stylesheet">
+<script>
+  /* Arms the motion system's hidden states before first paint, so above-fold
+     content never paints and then flicks out. The timer is the failsafe: if
+     mpd.js never runs (blocked, 404, parse error) the class is removed and the
+     page renders as plain, fully visible HTML. */
+  document.documentElement.className += ' js';
+  setTimeout(function () {
+    if (!window.MPD) document.documentElement.classList.remove('js');
+  }, 3000);
+</script>
 <link rel="stylesheet" href="assets/mpd.css">
 </head>
 <body data-page-key="invisalign">
