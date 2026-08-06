@@ -136,9 +136,28 @@
       setAnim(el, "mask", i * 90);
       wrapInner(el);
     });
+    // An h1 authored without .line spans (the thank-you banner) would otherwise
+    // get no mask at all. Mask it whole rather than splitting it into measured
+    // line boxes — splitting before webfonts settle can lock in line breaks
+    // that are wrong once the real face loads.
+    document.querySelectorAll("h1").forEach(function (h1) {
+      if (h1.querySelector(".line")) return;
+      setAnim(h1, "mask", 90);
+      wrapInner(h1);
+    });
     document.querySelectorAll("main h2").forEach(function (el) {
       setAnim(el, "mask", 0);
       wrapInner(el);
+    });
+
+    // Eyebrow rules draw themselves in.
+    document.querySelectorAll(".eyebrow").forEach(function (el) {
+      el.classList.add("anim-eyebrow");
+    });
+
+    // Offer chips arrive in sequence rather than all at once.
+    document.querySelectorAll(".chips").forEach(function (row) {
+      stagger(row.querySelectorAll(".chip"), "rise", 55);
     });
 
     // Eyebrows and leads follow their heading.
@@ -448,6 +467,27 @@
     });
   }
 
+  /* ---- Header condenses once the page starts moving ---- */
+  function initHeader() {
+    var head = document.querySelector(".site-head");
+    if (!head || reduced) return;
+    var ticking = false;
+    function update() {
+      head.classList.toggle("is-condensed", window.scrollY > 90);
+      ticking = false;
+    }
+    window.addEventListener(
+      "scroll",
+      function () {
+        if (ticking) return;
+        ticking = true;
+        requestAnimationFrame(update);
+      },
+      { passive: true }
+    );
+    update();
+  }
+
   /* ---- Pointer-following sheen on buttons ---- */
   function initButtons() {
     if (reduced) return;
@@ -474,6 +514,7 @@
     initRail();
     initParallax();
     initFaq();
+    initHeader();
     initButtons();
   }
 

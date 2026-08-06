@@ -267,6 +267,14 @@ h3, .h3 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.012em; }
 .brand { display: flex; align-items: center; gap: 0.75rem; }
 .brand img { width: clamp(150px, 20vw, 190px); }
 .head-actions { display: flex; align-items: center; gap: 0.75rem; }
+/* Below 600px the header CTA wraps onto three lines and doubles the header
+   height for no gain — the sticky bottom bar already carries Book and Call,
+   so the header keeps just the brand and the number. */
+@media (max-width: 600px) {
+  .site-head .head-actions .btn { display: none; }
+  .site-head .wrap { padding-block: 0.7rem; }
+  .head-phone { font-size: 1rem; text-align: right; }
+}
 .head-phone {
   font-family: var(--display);
   font-weight: 600;
@@ -956,6 +964,35 @@ h3, .h3 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.012em; }
   transition: transform 0.9s var(--ease-out) var(--d, 0ms); }
 .js .step.is-in::after { transform: scaleX(1); }
 
+/* An h1 masked whole (rather than per .line) still needs its lines to stack. */
+h1 .line { display: block; }
+
+/* ---- the eyebrow's rule draws itself ---- */
+.js .anim-eyebrow::before { transform: scaleX(0); transform-origin: left center;
+  transition: transform 0.7s var(--ease-out) var(--d, 0ms); }
+.js .anim-eyebrow.is-in::before { transform: scaleX(1); }
+
+/* ---- header condenses once the page moves ---- */
+.site-head { transition: padding 0.4s var(--ease-soft), box-shadow 0.4s var(--ease-soft); }
+.site-head .wrap { transition: padding-block 0.4s var(--ease-soft); }
+.site-head .brand img { transition: width 0.4s var(--ease-soft); }
+.site-head.is-condensed { box-shadow: 0 8px 24px -18px rgba(27, 34, 36, 0.5); }
+.site-head.is-condensed .wrap { padding-block: 0.5rem; }
+.site-head.is-condensed .brand img { width: clamp(128px, 15vw, 150px); }
+
+/* ---- the thank-you tick draws rather than pops ---- */
+.js .status-mark svg path {
+  stroke-dasharray: 30;
+  stroke-dashoffset: 30;
+  animation: drawTickPath 0.75s var(--ease-out) 0.45s forwards;
+}
+@keyframes drawTickPath { to { stroke-dashoffset: 0; } }
+.status-mark { animation: markIn 0.7s var(--ease-out) 0.15s both; }
+@keyframes markIn {
+  from { opacity: 0; transform: scale(0.72); }
+  to { opacity: 1; transform: none; }
+}
+
 /* ---- ambient drift behind the hero ---- */
 .hero::before { animation: drift 26s ease-in-out infinite alternate; }
 @keyframes drift {
@@ -1017,7 +1054,11 @@ h3, .h3 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.012em; }
   white-space: nowrap;
 }
 .offer-rail .rail-call:hover { color: var(--sand); }
-.offer-rail .btn { padding: 0.7rem 1.35rem; font-size: 0.875rem; }
+/* The offer text is the only element allowed to shrink here — the number and
+   the CTA must never wrap. */
+.offer-rail .rail-offer { flex: 0 1 auto; min-width: 0; }
+.offer-rail .rail-sep, .offer-rail .rail-call, .offer-rail .btn { flex: none; }
+.offer-rail .btn { padding: 0.7rem 1.35rem; font-size: 0.875rem; white-space: nowrap; }
 @media (min-width: 768px) { .offer-rail { display: flex; } }
 
 /* ---- FAQ answers animate open instead of snapping ---- */
@@ -1067,6 +1108,11 @@ h3, .h3 { font-size: var(--t-h3); line-height: 1.2; letter-spacing: -0.012em; }
   .js .step::after,
   .js .price-was::after { transform: scaleX(1) !important; }
   .hero::before { animation: none !important; }
+  .js .anim-eyebrow::before { transform: scaleX(1) !important; }
+  /* The tick must be drawn, not left as an invisible dashed outline. */
+  .js .status-mark svg path { stroke-dashoffset: 0 !important; animation: none !important; }
+  .status-mark { animation: none !important; opacity: 1 !important; transform: none !important; }
+  .site-head, .site-head .wrap, .site-head .brand img { transition: none !important; }
   .offer-rail { transition: none !important; }
   .btn:hover, .tile:hover, .choice:hover { transform: none; }
   .js .faq details .answer-wrap { transition: none !important; }

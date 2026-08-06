@@ -82,11 +82,8 @@
     border: 1px solid rgba(127, 154, 139, 0.5);
     color: #a8c6b5;
   }
-  .status-mark svg { animation: drawTick 0.5s var(--ease) 0.15s both; }
-  @keyframes drawTick {
-    from { opacity: 0; transform: scale(0.6); }
-    to { opacity: 1; transform: none; }
-  }
+  /* The mark's entrance and the tick's stroke draw are both in mpd.css so the
+     archetype carries them; nothing page-local competes with them here. */
   .status-banner h1 { margin-bottom: 0.9rem; }
   .status-banner .lead { color: rgba(255, 255, 255, 0.78); max-width: 54ch; margin-inline: auto; }
   .ref-line {
@@ -311,7 +308,7 @@
       <div class="map-frame reveal">
         <iframe
           title="Map showing Mason Park Dental of Katy at 21830 Kingsland Blvd #104A, Katy, TX 77450"
-          src="https://maps.google.com/maps?q=21830%20Kingsland%20Blvd%20%23104A%2C%20Katy%2C%20TX%2077450&t=&z=16&ie=UTF8&iwloc=&output=embed"
+          src="https://maps.google.com/maps?q=21830%20Kingsland%20Blvd%20%23104A%2C%20Katy%2C%20TX%2077450&t=&z=16&ie=UTF8&hl=en&gl=us&iwloc=&output=embed"
           loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
       </div>
     </div>
