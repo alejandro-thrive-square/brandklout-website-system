@@ -16,7 +16,7 @@ parallel agents can each take one client without colliding.
 
 | Client | Folder | Asana parent task | Pages / scope | Due | Folder status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Grand Mission Dentistry | [`grand-mission-dentistry/`](../grand-mission-dentistry/docs/project-overview.md) | `1217040406855578` | 3 landing pages | 2026-08-05 | **Created 2026-08-05** |
+| Grand Mission Dentistry | [`grand-mission-dentistry/`](../grand-mission-dentistry/docs/project-overview.md) | `1217040406855578` | 3 landing pages | 2026-08-05 | **Intake done 2026-08-05** — attachments, brand tokens, 48 assets; design next |
 | Arvada Dental Center & Implants | [`arvada-dental-center/`](../arvada-dental-center/docs/project-overview.md) | `1217040406855586` | 6 landing pages | 2026-08-05 | **Created 2026-08-05** |
 | Mason Park Dental | [`mason-park/`](../mason-park/docs/project-overview.md) | `1217040406855582` | 3 landing pages | 2026-08-05 | Scaffolded 2026-08-05 (was a loose HTML file) |
 | Dr. Esam Nahlah | [`dr-nahlah/`](../dr-nahlah/docs/project-overview.md) | `1216611404338509` | Research + dev assignment | 2026-08-05 | Pre-existing |
@@ -94,8 +94,23 @@ than per-client direction:
 - https://novismilerogers.com/
 
 Grand Mission and Mason Park additionally note *"Attached are the originals from the other Ad
-company. Use it as a reference point"* — **those attachments have not been downloaded.** They live
-on the Asana tasks; `get_attachments` is available in the MCP tool set if we need them.
+company. Use it as a reference point"*.
+
+**Grand Mission's are downloaded** (2026-08-05) — two GoHighLevel landing pages in
+`grand-mission-dentistry/workflows/01-content-intake/.tmp/originals/`. They turned out to be the
+richest brief on the project: real offers, doctor bios, named reviews and imagery. **Mason Park's
+have not been pulled** — do that first when that client is picked up.
+
+How: `get_attachments` with `parent: <task gid>` and
+`opt_fields: 'name,download_url,view_url,permanent_url,host,resource_subtype,size,created_at'`, then
+fetch `download_url` (a signed, expiring URL — re-pull rather than storing it). Attachments hang off
+the **parent** task, not the per-page subtasks.
+
+> [!TIP]
+> Before designing anything, find the client's **own live site** — none of these Asana tasks record
+> it. Grand Mission's turned out to be a modern Webflow site whose `:root` CSS variables are the
+> authoritative brand palette and type, and whose pages carry current offers that **contradict** the
+> older attached landing pages. A web search on practice name + address found it in one query.
 
 Recurring page archetypes across clients — build these once as a reusable pattern rather than five
 times from scratch:

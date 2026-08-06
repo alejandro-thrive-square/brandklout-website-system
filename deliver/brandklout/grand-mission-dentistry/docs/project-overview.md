@@ -9,12 +9,45 @@
 | **Scope** | 3 paid-traffic landing pages |
 | **Due** | 2026-08-05 |
 | **Started** | 2026-08-05 (folder created from Asana dispatch) |
-| **Named contact** | "Sang" — per task note *"Add Landing page needs for Sang for Grand Mission"*. Role unconfirmed. |
+| **Approver** | **Sang Huynh** — owner of both the `BK Implementation - Grand Mission Dentistry` project and `Success Daily Stand-Up`, Customer Success team. The "Sang" in the task note. He sets the review loop. |
+| **Other contacts** | Trong Huynh, Jessica (project members) · Gauge Hill, Nayeli Ortega (task followers) |
+| **Blocks** | `Finalize Account Transfer for Grand Mission` — Gauge Hill, due **2026-08-06**, still open. These pages are the blocker on that transfer. |
+| **Live site** | **https://grandmissiondentistry.com** — already on Webflow (site `698111847e9608eb30ee21c6`, Relume-based) |
 
 ## Status
 
-**Intake only.** This folder was created from the Asana task list; no discovery, no site scrape, no
-design work has happened yet. Everything below the task manifest is unconfirmed.
+**All three pages built and verified locally (2026-08-06).** Content intake completed 2026-08-05 —
+Asana attachments retrieved, the client's live site identified and scraped for brand and content, 48
+real assets downloaded. All three coded packages now exist, pass a 40-check functional verification,
+and are ready for Sang Huynh's review.
+
+> [!IMPORTANT]
+> **This work blocks an account transfer.** The parent task blocks `Finalize Account Transfer for
+> Grand Mission` (Gauge Hill, due 2026-08-06, incomplete). The Implant and Cosmetic pages carry
+> explicit section specs and a "as discussed by team, this is ready" sign-off from Nayeli Ortega on
+> both — they are the priority. The parent brief has been rewritten three times and moved five
+> times; **the current Asana description is authoritative**, nothing from earlier revisions applies.
+
+Design packages, in `workflows/04-design/.tmp/`:
+
+| Package | Asana task | State |
+| :--- | :--- | :--- |
+| [`implant-landing-page/`](../workflows/04-design/.tmp/implant-landing-page/) | `1217133289235653` | All 7 spec sections + multi-step qualification quiz. Verified. |
+| [`cosmetic-landing-page/`](../workflows/04-design/.tmp/cosmetic-landing-page/) | `1217072657902270` | All 7 spec sections incl. sticky mobile bar + 8 real patient cases. Verified. |
+| [`thank-you-landing-page/`](../workflows/04-design/.tmp/thank-you-landing-page/) | `1217162605683014` | All 4 spec sections. **Shared archetype** — reuse for Mason Park. Verified. |
+| `verify.mjs` | — | Headless-Chrome functional suite: 40 checks, screenshots in `verify-shots/`. |
+
+Run `node verify.mjs` from `workflows/04-design/.tmp/` to re-check all three.
+
+Intake artifacts, all in `workflows/01-content-intake/.tmp/`:
+
+| Artifact | What it holds |
+| :--- | :--- |
+| [`content-intake-summary.md`](../workflows/01-content-intake/.tmp/content-intake-summary.md) | Practice facts, doctors, offers, real reviews, brand tokens, asset inventory |
+| [`reference-briefs.md`](../workflows/01-content-intake/.tmp/reference-briefs.md) | Section-by-section wireframe briefs for both originals and all three reference URLs, plus a recommended section plan |
+| [`open-questions.md`](../workflows/01-content-intake/.tmp/open-questions.md) | What intake answered, and the nine items still needing Brandklout or the client |
+| `originals/` | The two original landing pages from the previous ad company |
+| `assets/` | 48 downloaded images incl. logos, doctor portraits, 8 real patient photos (gitignored media) |
 
 ## Task manifest
 
@@ -58,11 +91,12 @@ House references cited on the parent task:
 - https://novismilerogers.com/
 - https://go.voitdental.com/ *(cited only for Grand Mission)*
 
-> [!WARNING]
-> The parent task says *"Attached are the originals from the other Ad company. Use it as a
-> reference point."* **Those attachments have not been retrieved.** They are the closest thing to a
-> brief that exists. Pull them (MCP `get_attachments` on task `1217040406855578`) before designing,
-> or you are designing without the client's actual reference.
+**Attachments — retrieved 2026-08-05.** The parent task's *"originals from the other Ad company"*
+are two GoHighLevel landing pages, now in `workflows/01-content-intake/.tmp/originals/`:
+`gmd-implant-lp.html` (single-tooth implant, $3,499) and `gmd-cosmetic-lp.html`. They were built by
+"Digital Presence Matters" and carry the client's real copy, offers, doctor bios, reviews and
+imagery. Section-by-section breakdown in
+[`reference-briefs.md`](../workflows/01-content-intake/.tmp/reference-briefs.md).
 
 ## Build target
 
@@ -78,26 +112,39 @@ angles, then design original work. See
 
 ## Blocking unknowns
 
-1. **No client website URL is recorded anywhere in the Asana task.** Needed for brand extraction
-   (logo, palette, type, real doctor names, real reviews).
-3. **Who is "Sang"?** Approver, practice contact, or Brandklout staff — this sets the review loop.
-4. **Content sourcing.** Per
-   [client-assets-before-stock rules](../../livewell-dental/docs/project-overview.md), testimonials,
-   reviews, doctor bios and stats must come from the client's real material. **Never invent
-   reviews, patient stories, or statistics for a real dental practice** — that is both a
-   credibility and a regulatory problem.
+Full list with detail in
+[`open-questions.md`](../workflows/01-content-intake/.tmp/open-questions.md). What actually blocks
+work now:
+
+1. **Which implant price is live** — the client's site says a single implant *"starts at $2,999"*;
+   the original landing page sells *$3,499, extra $500 off paid in full*. Blocks the implant hero.
+2. **Which financing partners are current** — live site names Cherry only; the originals name
+   Alphaeon, LendingClub and CareCredit. Blocks the "Insurance & Flexible Financing Matrix" section.
+3. **GHL lead form** — two tasks require the form to live in GoHighLevel and we hold **no GHL
+   grant**. Either Brandklout supplies a per-page embed or we get a seat. The thank-you page is the
+   form's redirect target, so all three pages are one flow.
+4. **Build destination** — the live site is already Webflow, so these pages most likely belong on
+   it, which needs a per-client Webflow grant that does not exist yet.
 5. **Page count → timeline/pricing** per
-   [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md). 3 pages, but the rate
-   depends on whether these are new designs or rebuilds of the attached originals.
+   [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md). 3 pages; the rate
+   depends on whether these are new designs or rebuilds of the attached originals — the attachments
+   are now in hand, so the call can be made. Brandklout's commercial decision, not ours.
+
+**Content sourcing is not an unknown, it is a rule.** Testimonials, reviews, doctor bios and stats
+must come from the client's real material — all of it is inventoried in
+[`content-intake-summary.md`](../workflows/01-content-intake/.tmp/content-intake-summary.md).
+**Never invent reviews, patient stories, or statistics for a real dental practice**; that is both a
+credibility and a regulatory problem. See
+[ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md#how-to-use-the-reference-urls--read-this-before-designing).
 
 ## Routed workflows
 
 | Phase | Status | Notes |
 | :--- | :--- | :--- |
 | `00-client-delivery-initialization` | This doc | No Sales handoff package exists; scope captured from Asana. |
-| `01-content-intake` | **Next** | Retrieve the Asana attachments and the client's live site first. |
-| `04-design` | Blocked on intake | Platform-independent — can start once references exist. |
-| `07-webflow-build` | **Conditional** | Only if the platform question resolves to Webflow. |
+| `01-content-intake` | **Done 2026-08-05** | Attachments, live-site scrape, brand tokens, 48 assets, reference briefs. |
+| `04-design` | **Next** | Unblocked for the cosmetic and thank-you pages; the implant hero waits on the price answer. |
+| `07-webflow-build` | **Blocked** | Client site is Webflow, but no per-client grant exists. |
 | `08-qa` | Required | For every shipped page. |
 
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).
@@ -109,7 +156,15 @@ deliver/brandklout/grand-mission-dentistry/
 ├── docs/
 │   ├── project-overview.md   # This file
 │   └── mcp-access.md         # No grants yet — read before any platform action
-└── workflows/                # Copy phase folders from deliver/process/ as needed
+└── workflows/
+    └── 01-content-intake/.tmp/
+        ├── content-intake-summary.md   # Practice facts, brand tokens, real proof
+        ├── reference-briefs.md         # Wireframe briefs + recommended section plan
+        ├── open-questions.md           # Answered vs still open
+        ├── asana/tasks-raw.json        # Raw task + attachment metadata
+        ├── originals/                  # The previous agency's two landing pages
+        ├── live-site/                  # Home HTML + site CSS (brand token source)
+        └── assets/                     # 48 images, gitignored, catalogue.json committed
 ```
 
 ## Version Control

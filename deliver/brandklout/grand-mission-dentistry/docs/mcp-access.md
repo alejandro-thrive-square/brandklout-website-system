@@ -20,13 +20,20 @@ being able to read this client's Asana tasks confers no permission to touch thei
 hosting, CRM, or ad accounts.
 
 > [!IMPORTANT]
-> The build platform is **unconfirmed** - it may be Webflow or GoHighLevel. See
-> [ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md). Registering a Webflow instance before that is
-> settled would create a grant nobody needs. Resolve the platform question first.
+> The client's live site **is already Webflow** (found 2026-08-05), so the landing pages most likely
+> belong on that site rather than a standalone deploy. That does **not** create a grant: registering
+> a Webflow instance still requires Brandklout to hand over access explicitly. Ask first.
+>
+> GoHighLevel is a separate grant we also do not hold, and two of the three tasks require a lead
+> form in it. See [ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md).
 
 ## Target Resources
 - **Asana parent task**: `1217040406855578` (workspace `1210572425689866`)
-- **Live site**: unknown - not recorded in Asana. Record here once found.
+- **Live site**: **https://grandmissiondentistry.com** — Webflow, site id `698111847e9608eb30ee21c6`
+  (from the public CSS host; we have no API access to it).
+- **Previous landing pages**: GoHighLevel, location id `0e2uXXYZTFpKGnacy2NF`, GTM `GTM-TGSMNX3`,
+  built by the outgoing ad company "Digital Presence Matters". Read-only observation from the
+  attachments; no account access.
 - **Staging / platform account**: none.
 
 ## Allowed Operations
