@@ -125,10 +125,9 @@ work now:
    form's redirect target, so all three pages are one flow.
 4. **Build destination** — the live site is already Webflow, so these pages most likely belong on
    it, which needs a per-client Webflow grant that does not exist yet.
-5. **Page count → timeline/pricing** per
-   [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md). 3 pages; the rate
-   depends on whether these are new designs or rebuilds of the attached originals — the attachments
-   are now in hand, so the call can be made. Brandklout's commercial decision, not ours.
+5. **Are these new designs or rebuilds of the attached originals?** Changes the amount of design
+   work, not the commercial terms — Brandklout is a partner engagement, so per-page pricing does
+   **not** apply here. See [ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md).
 
 **Content sourcing is not an unknown, it is a rule.** Testimonials, reviews, doctor bios and stats
 must come from the client's real material — all of it is inventoried in

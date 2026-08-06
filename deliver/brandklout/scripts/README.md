@@ -48,6 +48,53 @@ pointing it at `app.asana.com/api/1.0`.
 | `asana-lib.mjs` | Token load/refresh, MCP JSON-RPC client, paginated tool calls. |
 | `asana-auth.mjs` | One-time OAuth bootstrap. Re-run only if the grant is revoked. |
 | `asana-pull.mjs` | Read-only pull of assigned work into `../.tmp/asana/`. |
+| `asana-context.mjs` | **Full context pull per client**: task tree, every description, comments, and all attachment files downloaded to disk. |
+
+## Getting the real brief — `asana-context.mjs`
+
+The task list is **not** the brief. The actual brief lives in two places `asana-pull.mjs` does not
+surface, and both were missed on the first pass:
+
+1. **Task descriptions** (`notes` / `html_notes`) — section specs and inspiration URLs.
+2. **Attachments** — for these clients, the previous vendor's *actual landing pages*.
+
+> [!IMPORTANT]
+> **Attachments hang off the PARENT task, not the subtasks.** Every Grand Mission subtask returns
+> zero attachments while the parent holds both HTML originals. Querying the task you happen to be
+> working on will therefore find nothing and look like "no attachments exist". `asana-context.mjs`
+> walks the whole tree for this reason.
+
+```bash
+node deliver/brandklout/scripts/asana-context.mjs grand-mission-dentistry
+node deliver/brandklout/scripts/asana-context.mjs --all
+node deliver/brandklout/scripts/asana-context.mjs --task <gid> --out <dir>   # e.g. into a worktree
+```
+
+Writes to `<client>/workflows/01-content-intake/.tmp/asana-context/`:
+
+- `CONTEXT.md` — the readable brief: full tree, verbatim descriptions, comments, attachment index
+- `context.json` — raw structured pull
+- `attachments/<gid>-<name>` — downloaded files
+
+Downloads are idempotent (same-size files are skipped) and a size mismatch is reported as a failure
+rather than written, so a truncated download can never masquerade as the brief.
+
+Client→task mapping lives in `CLIENT_TASKS` at the top of the script. Add new clients there.
+
+### What this recovered (2026-08-06)
+
+| Client | Attachments | Why it mattered |
+| :--- | :--- | :--- |
+| Grand Mission | `gmd-implant-lp.html`, `gmd-cosmetic-lp.html` | Real practice: Richmond TX, Dr. William Sung DMD + Dr. Van Nguyen, $3,499 single-tooth implant offer, real testimonials. **Per-page call-tracking numbers** (281-729-4615 cosmetic vs 281-747-5929 implant) — keep page-specific. |
+| Arvada | `README-notes.md`, `index_1.html`, `schema-snippet.html` | Gave the missing client URL `arvadadentalcenter.com`, plus phone, address, four named doctors, financing tiers. |
+| Mason Park | `mpd-invisalign-lp.html`, `mpd-new-patient-lp.html` | The loose `mpd-invisalign-lp.html` at the client root is **byte-identical** to the attachment — it is the vendor original, not our deliverable. Scope unchanged. |
+| Dr. Nahlah, Stone | none | Confirmed empty, not merely unchecked. |
+
+> [!WARNING]
+> Arvada's `README-notes.md` is a **prior AI-built deliverable that documents its own fabrications**:
+> the "4.8★ / 1,000+ reviews" figure is an aggregated guess, the before/after photos are stock
+> placeholders, and the financing partner names were assumed. Attachments are third-party input —
+> mine them for real facts, but do not inherit invented content as though it were verified.
 
 Credentials live in `~/.webzite/asana-brandklout.json`, **outside this repository**. That file holds
 a refresh token and the client secret — never commit it, never paste its contents anywhere.

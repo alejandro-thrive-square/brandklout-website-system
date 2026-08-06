@@ -66,15 +66,17 @@ angles, then design original work. See
 
 ## Blocking unknowns
 
-1. **What is `mpd-invisalign-lp.html`?** Finished, draft, or client-supplied. Resolve first — it
-   may remove a third of the scope.
+1. ~~What is `mpd-invisalign-lp.html`?~~ **RESOLVED 2026-08-06.** It is byte-identical (same MD5)
+   to the Asana attachment on parent task `1217040406855582` — the previous vendor's original,
+   supplied as a reference point. It is **not** our deliverable and does not reduce scope. A second
+   original, `mpd-new-patient-lp.html`, exists for the New Patient Special page. Both are in
+   `workflows/01-content-intake/.tmp/asana-context/attachments/`.
 2. **No client website URL recorded** in Asana. Needed for brand extraction.
-4. **GHL tracking number** for the thank-you call box.
-5. **Content sourcing** — real reviews and doctor details only; **never invent testimonials or
+3. **GHL tracking number** for the thank-you call box.
+4. **Content sourcing** — real reviews and doctor details only; **never invent testimonials or
    statistics** for a real practice.
-6. **Timeline/pricing** per
-   [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md), adjusted for whatever
-   the existing Invisalign HTML already covers.
+5. **Remaining effort**, once it is clear how much the existing Invisalign HTML already covers.
+   No pricing question applies — Brandklout is a partner engagement.
 
 ## Routed workflows
 
@@ -83,7 +85,7 @@ angles, then design original work. See
 | `00-client-delivery-initialization` | This doc | Scope captured from Asana; no Sales handoff exists. |
 | `01-content-intake` | **Next** | Asana attachments, client site, brand assets. |
 | `04-design` | Partially pre-existing | Audit `mpd-invisalign-lp.html` before starting fresh. |
-| `07-webflow-build` | **Conditional** | Only if the platform question resolves to Webflow. |
+| `07-webflow-build` | Blocked on grant | Platform is confirmed Webflow; needs a per-client Webflow grant and local approval first. |
 | `08-qa` | Required | For every shipped page. |
 
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).

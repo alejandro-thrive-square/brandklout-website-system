@@ -1,0 +1,95 @@
+<header class="nav" id="nav" data-journey="{{JOURNEY}}">
+  <style>
+    .nav{position:fixed;top:0;left:0;right:0;z-index:120;border-bottom:1px solid transparent;
+      transition:background .4s ease,border-color .4s ease}
+    /* Reading progress, pinned to the very top edge above the nav row. */
+    .nav-progress{position:absolute;top:0;left:0;right:0;height:2px;
+      background:var(--line-2);overflow:hidden}
+    .nav-progress i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;
+      background:linear-gradient(90deg,var(--gold-deep),var(--gold) 55%,var(--gold-light))}
+    .nav.solid{background:rgba(250,248,243,.9);backdrop-filter:blur(14px);border-bottom-color:rgba(138,126,78,.26)}
+    .nav-in{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+      padding-block:clamp(.85rem,1.6vw,1.35rem)}
+    .nav-logo img{width:clamp(132px,13vw,190px)}
+
+    /* One slot, shared by the site links and — on the journey page — the chapter
+       readout, so the nav row is the same shape on every page. */
+    .nav-slot{display:none;position:relative;align-items:center;min-height:1.4em}
+    .nav-links{display:flex;align-items:center;gap:clamp(1.1rem,2.2vw,2.2rem);
+      font-size:var(--label);letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+      transition:opacity .45s ease}
+    .nav-links a{color:var(--fg-soft);position:relative;padding-block:.4rem;
+      transition:color .35s ease}
+    .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+      background:var(--rule);transform:scaleX(0);transform-origin:right;
+      transition:transform .45s cubic-bezier(.22,1,.36,1)}
+    .nav-links a:hover{color:var(--fg)}
+    .nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+    .nav-links a[aria-current="page"]{color:var(--accent)}
+    .nav-links a[aria-current="page"]::after{transform:scaleX(1)}
+
+    .nav-chapter{position:absolute;left:0;top:50%;transform:translateY(-50%);
+      display:flex;align-items:center;gap:.8rem;font-size:var(--label);letter-spacing:.16em;
+      text-transform:uppercase;color:var(--fg-soft);opacity:0;pointer-events:none;
+      transition:opacity .45s ease;white-space:nowrap}
+    .nav-chapter b{color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums}
+    .nav-chapter i{display:block;width:56px;height:1px;background:var(--line);position:relative}
+    .nav-chapter i::after{content:"";position:absolute;inset:0;background:var(--rule);
+      transform:scaleX(var(--p,0));transform-origin:left;transition:transform .5s ease}
+    .nav[data-journey="1"].solid .nav-links{opacity:0;pointer-events:none}
+    .nav[data-journey="1"].solid .nav-chapter{opacity:1}
+
+    .nav-right{display:flex;align-items:center;gap:clamp(.5rem,1.4vw,1.1rem)}
+    .nav-cta{border:1px solid var(--rule);color:var(--fg);padding:.7rem 1.4rem;font-size:var(--label);
+      letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap;
+      transition:background .4s,color .4s}
+    .nav-cta:hover{background:var(--gold-deep);color:var(--white)}
+    /* The menu button stays at every breakpoint — the drawer is the full site
+       index, not a mobile fallback, so the sitemap is one tap from any page. */
+    .burger{display:block;width:44px;height:44px;position:relative;z-index:130;flex:none}
+    .burger span{position:absolute;left:10px;width:24px;height:1.5px;background:var(--fg);
+      transition:transform .45s cubic-bezier(.22,1,.36,1)}
+    .burger span:nth-child(1){top:18px}
+    .burger span:nth-child(2){top:25px}
+    .burger.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+    .burger.open span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
+    /* While the drawer is open the whole header rides above it, otherwise the
+       panel covers the button that closes it. Everything but the X steps back. */
+    .nav.menu-open{z-index:130;background:transparent;backdrop-filter:none;
+      border-bottom-color:transparent}
+    .nav-slot{transition:opacity .35s ease}
+    .nav.menu-open .nav-slot,.nav.menu-open .nav-cta,.nav.menu-open .nav-progress{
+      opacity:0;pointer-events:none}
+    .nav-close{opacity:0;pointer-events:none;font-size:var(--label);letter-spacing:.14em;
+      text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.62);
+      transition:opacity .35s ease .12s;white-space:nowrap}
+    .nav.menu-open .nav-close{opacity:1}
+    /* The panel it sits on is dark whatever the page behind it is doing. */
+    .nav.menu-open .burger span{background:#fff}
+    @media(min-width:1080px){ .nav-slot{display:flex} }
+    @media(max-width:679px){ .nav .nav-cta{display:none} }
+  </style>
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap no-rail nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+      <img src="assets/logo.png" alt="Dr. Nahlah — Implants and Prosthodontics Specialists">
+    </a>
+    <nav class="nav-slot" aria-label="Primary">
+      <div class="nav-links">
+        <a href="dental-implants.html"{{CUR_IMPLANTS}}>Implants</a>
+        <a href="smile-makeover.html"{{CUR_COSMETIC}}>Cosmetic</a>
+        <a href="smile-gallery.html"{{CUR_GALLERY}}>Smile Gallery</a>
+        <a href="about.html"{{CUR_ABOUT}}>The Specialist</a>
+        <a href="contact.html"{{CUR_CONTACT}}>Contact</a>
+      </div>
+      {{CHAPTER_READOUT}}
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
+      <span class="nav-close" aria-hidden="true">Close</span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
