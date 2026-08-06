@@ -189,7 +189,10 @@ async function load(send, slug, { reduced = false, width = 1440, height = 1000 }
 }
 
 /* ------------------------------------------------------- motion essentials */
-async function motionStack(send, key, { pins }) {
+/* Thresholds are per page: a four-section confirmation page legitimately
+   carries less choreography than a long lead page, and a global floor tuned
+   for the lead pages would just be noise here. */
+async function motionStack(send, key, { pins, minLines = 10, minTriggers = 25 }) {
   check(key, 'GSAP 3.13 loaded', (await evaluate(send, `window.gsap && gsap.version`)) === '3.13.0')
   check(
     key,
@@ -202,11 +205,11 @@ async function motionStack(send, key, { pins }) {
   )
   check(key, 'ScrollSmoother is live', await evaluate(send, `!!(window.WZ && WZ.smoother)`))
   const lines = await evaluate(send, `document.querySelectorAll('.wz-line').length`)
-  check(key, 'split-text headlines built', lines >= 10, `${lines} lines`)
+  check(key, 'split-text headlines built', lines >= minLines, `${lines} lines`)
   const pinCount = await evaluate(send, `ScrollTrigger.getAll().filter(t => t.pin).length`)
   check(key, `${pins} pinned section(s)`, pinCount === pins, `${pinCount} found`)
   const triggers = await evaluate(send, `ScrollTrigger.getAll().length`)
-  check(key, 'scroll choreography registered', triggers > 25, `${triggers} triggers`)
+  check(key, 'scroll choreography registered', triggers >= minTriggers, `${triggers} triggers`)
 }
 
 async function sharedBehaviour(send, key) {
@@ -254,7 +257,9 @@ async function sharedBehaviour(send, key) {
   )
   check(key, 'magnetic CTA follows the pointer', typeof magnetic === 'number' && magnetic > 1, String(magnetic))
 
-  /* Lightbox opens and closes on Escape. */
+  /* Lightbox opens and closes on Escape — only where the page has one. */
+  const hasLightbox = await evaluate(send, `!!document.querySelector('[data-lightbox]')`)
+  if (hasLightbox)
   check(
     key,
     'lightbox opens and closes on Escape',
@@ -386,13 +391,13 @@ async function shoot(send, name, { width, height, slug }) {
   await evaluate(
     send,
     `(async () => {
-       document.querySelectorAll('img[loading="lazy"]').forEach(i => { i.loading = 'eager'; });
+       document.querySelectorAll('img[loading="lazy"], iframe[loading="lazy"]').forEach(i => { i.loading = 'eager'; });
        const imgs = [...document.images].filter(i => (i.getAttribute('src') || '').trim() !== '');
        await Promise.all(imgs.map(i => i.complete ? null : new Promise(r => { i.onload = i.onerror = r; })));
        return imgs.length;
      })()`
   )
-  await new Promise((r) => setTimeout(r, 1400))
+  await new Promise((r) => setTimeout(r, 3200))
   const { data } = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true })
   await writeFile(join(SHOTS, `${name}.png`), Buffer.from(data, 'base64'))
 }
@@ -717,46 +722,155 @@ async function verifyCosmetic(send) {
 }
 
 /* ------------------------------------------------------------- thank-you */
-/* Not yet rebuilt to the motion standard — still the first-pass build, kept
-   verified so a regression there is still caught. */
 async function verifyThankYou(send) {
   const key = 'thank-you'
   await load(send, PAGES['thank-you'])
+
+  await motionStack(send, key, { pins: 0, minLines: 5, minTriggers: 15 })
+
   check(
     key,
     'all four spec sections present',
     await evaluate(send, `['top','fast-track','what-to-expect','practice'].every(id => document.getElementById(id))`)
   )
+
+  /* The signature: the receipt stamp draws itself. */
+  check(
+    key,
+    'confirmation check draws its stroke',
+    await evaluate(
+      send,
+      `(async () => {
+         await new Promise(r => setTimeout(r, 1800));
+         const p = document.getElementById('stampPath');
+         const offset = parseFloat(getComputedStyle(p).strokeDashoffset) || 0;
+         const dash = parseFloat(getComputedStyle(p).strokeDasharray) || 0;
+         return dash > 10 && Math.abs(offset) < 1;
+       })()`
+    )
+  )
+
+  /* Scrubbed 3-step timeline. */
+  await evaluate(send, SCROLL(0))
+  const expectY = await evaluate(send, TOP_OF('.expect__body'))
+  let railDrawn = 0
+  let activeSteps = 0
+  for (const delta of [-200, 0, 200, 400]) {
+    await evaluate(send, SCROLL(expectY + delta))
+    railDrawn = Math.max(railDrawn, await evaluate(send, `gsap.getProperty('#expectRail', 'scaleX')`))
+    activeSteps = Math.max(activeSteps, await evaluate(send, `document.querySelectorAll('.stepc.is-active').length`))
+    if (railDrawn > 0.05 && activeSteps) break
+  }
+  check(key, 'timeline rail draws against scroll', railDrawn > 0.05, `scaleX = ${railDrawn}`)
+  check(key, 'steps light up in turn', activeSteps >= 1, `${activeSteps} active`)
+
+  /* Practice details. */
   check(
     key,
     'open/closed banner resolves against the hours table',
     await evaluate(
       send,
       `(() => {
-         const s = document.getElementById('openStatus').textContent;
+         const s = document.getElementById('openStatusText').textContent;
+         const live = document.getElementById('openStatus').className;
          return (s === 'Open now' || s === 'Closed right now')
+           && /is-(open|closed)/.test(live)
            && document.getElementById('openNext').textContent.length > 10;
        })()`
     )
   )
   check(
     key,
-    'map and booking links point at the practice',
+    "today's row is highlighted in the hours list",
+    await evaluate(send, `!!document.querySelector('#hoursList .is-today')`)
+  )
+  /* A blocked embed renders as a blank panel and every src assertion still
+     passes — assert the frame actually loaded, not just that the URL is right. */
+  check(
+    key,
+    'map embed actually loads (not frame-blocked)',
+    await evaluate(
+      send,
+      `(async () => {
+         const f = document.getElementById('practiceMap');
+         if (!f || !f.src) return false;
+         f.loading = 'eager';
+         // Re-assign the src to force a fresh load: a load event that already
+         // fired never fires again, and waiting for it reports a working embed
+         // as blocked.
+         const src = f.src;
+         const loaded = new Promise((res) => {
+           f.addEventListener('load', () => res(true), { once: true });
+           setTimeout(() => res(false), 8000);
+         });
+         f.src = 'about:blank';
+         f.src = src;
+         return await loaded;
+       })()`
+    )
+  )
+  check(
+    key,
+    'map, directions and booking links point at the practice',
     await evaluate(
       send,
       `document.querySelector('.practice__map iframe').src.includes('Grand%20Mission%20Blvd')
+       && !!document.querySelector('a[href*="maps.app.goo.gl"]')
        && !!document.querySelector('a[href*="flexbook.me/gmdent"]')`
     )
   )
-  const missing = await evaluate(
-    send,
-    `(async () => {
-       const imgs = [...document.images].filter(i => (i.getAttribute('src') || '').trim() !== '');
-       await Promise.all(imgs.map(i => i.complete ? null : new Promise(r => { i.onload = i.onerror = r; })));
-       return imgs.filter(i => !i.naturalWidth).map(i => i.getAttribute('src'));
-     })()`
+
+  await sharedBehaviour(send, key)
+
+  await load(send, PAGES['thank-you'], { width: 390, height: 844 })
+  await evaluate(send, SCROLL(700))
+  check(
+    key,
+    'mobile: sticky call bar appears on scroll',
+    await evaluate(
+      send,
+      `document.getElementById('mobileBar').classList.contains('is-visible')
+       && getComputedStyle(document.getElementById('mobileBar')).display === 'flex'`
+    )
   )
-  check(key, 'every image resolves', missing.length === 0, missing.join(', '))
+  check(
+    key,
+    'mobile: timeline rail runs vertically',
+    await evaluate(
+      send,
+      `(() => {
+         const r = document.querySelector('.expect__rail').getBoundingClientRect();
+         return r.height > r.width;
+       })()`
+    )
+  )
+  check(
+    key,
+    'mobile: no horizontal overflow at 390px',
+    await evaluate(send, `document.documentElement.scrollWidth <= window.innerWidth + 1`)
+  )
+
+  await reducedMotion(send, key, PAGES['thank-you'])
+  check(
+    key,
+    'reduced motion: the check is drawn, not an empty ring',
+    await evaluate(
+      send,
+      `(() => {
+         const p = document.getElementById('stampPath');
+         const offset = parseFloat(getComputedStyle(p).strokeDashoffset) || 0;
+         return Math.abs(offset) < 1;
+       })()`
+    )
+  )
+  check(
+    key,
+    'reduced motion: every timeline step is shown as complete',
+    (await evaluate(send, `document.querySelectorAll('.stepc.is-active').length`)) === 3
+  )
+
+  await shoot(send, 'thank-you-desktop', { width: 1440, height: 1000, slug: PAGES['thank-you'] })
+  await shoot(send, 'thank-you-mobile', { width: 390, height: 844, slug: PAGES['thank-you'] })
 }
 
 /* --------------------------------------------------------------------- run */

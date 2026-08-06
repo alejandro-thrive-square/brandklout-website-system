@@ -1118,6 +1118,15 @@ button {
   color: rgba(255, 255, 255, 0.55);
 }
 
+/* Responsive button labels. A header CTA long enough to read well on desktop
+   wraps to two lines on a 390px screen and crowds the logo, so the small
+   screen gets a short label instead of a smaller font. */
+.lbl-sm { display: none; }
+@media (max-width: 800px) {
+  .lbl-lg { display: none; }
+  .lbl-sm { display: inline; }
+}
+
 /* ---------- sticky mobile call bar ---------- */
 /* Outside #smooth-wrapper, like the header. The offer must stay reachable at
    every scroll depth — that is the conversion floor the standard sets. */

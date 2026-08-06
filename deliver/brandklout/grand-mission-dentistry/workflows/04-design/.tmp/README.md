@@ -10,7 +10,7 @@ high-interaction, benchmarked against the Dr. Nahlah reference build.
 | :--- | :--- | :--- | :--- |
 | `implant-landing-page/` | **`1217133289235653`** | 7, per spec | Pinned horizontal track — four implant solutions travel sideways while the page holds |
 | `cosmetic-landing-page/` | **`1217072657902270`** | 7, per spec, incl. sticky mobile bar | Pinned patient ribbon — eight real before/after cases move as one strip |
-| `thank-you-landing-page/` | **`1217162605683014`** | 4, per spec | *(first-pass build — not yet rebuilt to the motion standard)* |
+| `thank-you-landing-page/` | **`1217162605683014`** | 4, per spec | The receipt stamp — the confirmation ring lands, the check draws itself, a ripple leaves the mark |
 
 Each package is `index.html` + `styles.css` + `page.js` + `app.js` + `assets/` (including its own
 copy of `kit.css`, `wz.js` and GSAP 3.13). Nothing loads from a CDN except Google Fonts, so a
@@ -77,6 +77,25 @@ the page does not error, it just feels flat.
 6. **Clip-path wipes** on the technology photo and both portraits, **magnetic CTAs**,
    **cursor-aware service cards** with icon micro-motion, animated lightbox.
 
+### Thank-you — `thank-you-landing-page/`
+
+1. **The receipt stamp — the signature moment.** The ring drops in on a `back` ease, the check
+   *draws itself* by animating `stroke-dashoffset` along the path, and a ripple expands past the
+   ring and fades. A confirmation page has one emotional job: make it look like something actually
+   happened.
+2. **Scrubbed 3-step timeline** — the rail draws against scroll position and each step lights up as
+   the draw reaches it, so "what happens next" is progressed through rather than listed. The rail
+   runs horizontally on desktop and **vertically on mobile**, because that is the axis the steps
+   actually run on there.
+3. **Live open/closed pill** — reads the hours table on the visitor's clock, and the dot pulses only
+   when the practice is actually open. A confirmation page is read minutes after submit, so "call
+   us" is only useful if you know somebody is there.
+4. Call box lifting into the banner, parallax on the stamp and the map, clip-path wipes, magnetic
+   CTAs, and a sticky call bar — on this page, calling *is* the conversion.
+
+Under reduced motion the check is painted already drawn and all three steps are marked complete —
+an undrawn stroke would leave an empty circle, which is worse than no motion at all.
+
 ### Both
 
 Fluid `clamp()` type scale in `kit.css` (`--d1` through `--label`), weight contrast 800 display
@@ -93,11 +112,16 @@ asserts this, not just the media query.
 ## Verification
 
 ```bash
-node verify.mjs               # all pages
+node verify.mjs               # all pages — behaviour + full-page screenshots
 node verify.mjs implant       # one package
+node qa-viewports.mjs         # real 390x844 mobile viewport shots at 2x
 ```
 
-**65/65 checks pass.** The suite drives the real pages over CDP and asserts behaviour: plugins
+`verify.mjs` captures full-page screenshots, which at 390px wide run to ~18,000px on the implant
+page — unreadable, and they flatten the details worth judging. `qa-viewports.mjs` takes real mobile
+viewport shots at the moments that matter.
+
+**91/91 checks pass**, across all three pages. The suite drives the real pages over CDP and asserts behaviour: plugins
 registered, ScrollSmoother live, split-text built, pins created, stat band scrubbing, horizontal
 tracks translating, pillars activating, counters reaching real values, accordion animating and
 closing its sibling, magnetic CTAs responding to a synthetic pointer, lightbox open/close, quiz
@@ -120,6 +144,14 @@ Traps this suite exists to catch, all hit during this build:
   exist. It now records the crash as a failure.
 - **Test in a focused tab.** Background tabs freeze transitions, timers and IntersectionObserver.
 - Screenshots are taken in the reduced-motion pass, because ScrollSmoother breaks full-page capture.
+- **`maps.google.com/maps?...&output=embed` 301s to a URL whose redirect carries
+  `X-Frame-Options: SAMEORIGIN`** — the frame renders blank and every `src` assertion still passes.
+  `www.google.com/maps?...&hl=en&output=embed` returns 200, needs no API key, and `hl=en` stops
+  Google localising the map UI to the viewer's IP.
+- **A cross-origin iframe does not paint in a `captureBeyondViewport` screenshot.** The map looks
+  blank in the full-page shot and renders fine in a real viewport — that is why the suite asserts
+  the frame's `load` event (after re-assigning `src`, since an event that already fired never fires
+  again) rather than trusting the picture.
 
 ## Offer and phone tokens — one place to edit
 
@@ -170,12 +202,6 @@ real content carried over intact from the first pass — only the execution chan
 The cosmetic services grid uses the client's own service names *and* their own taglines, and their
 pairings are scrambled at source — "Preventive Dentistry / Transform your smile with a touch of
 perfection". Reproduced faithfully rather than silently rewritten. Worth raising with Sang Huynh.
-
-## Still to do
-
-The **thank-you page has not been rebuilt** to the motion standard — it is the first-pass build,
-still verified but plain. It is the lowest-traffic page of the three and the two signed-off pages
-were the priority. Rebuild it before the Mason Park reuse.
 
 ## Version Control
 
