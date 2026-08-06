@@ -66,8 +66,11 @@ angles, then design original work. See
 
 ## Blocking unknowns
 
-1. **What is `mpd-invisalign-lp.html`?** Finished, draft, or client-supplied. Resolve first — it
-   may remove a third of the scope.
+1. ~~What is `mpd-invisalign-lp.html`?~~ **RESOLVED 2026-08-06.** It is byte-identical (same MD5)
+   to the Asana attachment on parent task `1217040406855582` — the previous vendor's original,
+   supplied as a reference point. It is **not** our deliverable and does not reduce scope. A second
+   original, `mpd-new-patient-lp.html`, exists for the New Patient Special page. Both are in
+   `workflows/01-content-intake/.tmp/asana-context/attachments/`.
 2. **No client website URL recorded** in Asana. Needed for brand extraction.
 3. **GHL tracking number** for the thank-you call box.
 4. **Content sourcing** — real reviews and doctor details only; **never invent testimonials or

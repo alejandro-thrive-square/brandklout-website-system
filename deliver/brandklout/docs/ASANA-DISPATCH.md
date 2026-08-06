@@ -103,9 +103,22 @@ than per-client direction:
 - https://start.smartarchesdental.com/?step=start
 - https://novismilerogers.com/
 
-Grand Mission and Mason Park additionally note *"Attached are the originals from the other Ad
-company. Use it as a reference point"* — **those attachments have not been downloaded.** They live
-on the Asana tasks; `get_attachments` is available in the MCP tool set if we need them.
+Grand Mission and Mason Park note *"Attached are the originals from the other Ad company. Use it as
+a reference point."* **Those attachments are now downloaded** (2026-08-06) — run
+[`asana-context.mjs`](../scripts/README.md#getting-the-real-brief--asana-contextmjs) and read
+`<client>/workflows/01-content-intake/.tmp/asana-context/CONTEXT.md`.
+
+They are the real brief, and they carry verified practice facts — doctors, offers, phone numbers,
+genuine testimonials — that remove most of the "never invent content" risk. Key gotcha: attachments
+hang off the **parent** task, not the subtasks, so per-subtask queries return nothing and look like
+there are none.
+
+| Client | Attachments | Notable |
+| :--- | :--- | :--- |
+| Grand Mission | 2 HTML originals | Richmond TX; Dr. William Sung DMD, Dr. Van Nguyen; $3,499 single-tooth implant; **per-page call-tracking numbers** — do not unify them |
+| Arvada | README + full LP + schema | Client site is `arvadadentalcenter.com`; phone, address, 4 named doctors, financing tiers |
+| Mason Park | 2 HTML originals | The loose `mpd-invisalign-lp.html` at the client root is byte-identical to the attachment — a vendor original, **not** our deliverable |
+| Dr. Nahlah, Stone | none | Confirmed empty |
 
 Recurring page archetypes across clients — build these once as a reusable pattern rather than five
 times from scratch:

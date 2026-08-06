@@ -1,0 +1,110 @@
+{
+  "slug": "dr-nahlah",
+  "gids": [
+    "1216611404338509"
+  ],
+  "nodes": [
+    {
+      "gid": "1216611404338509",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "created_at": "2026-07-15T21:19:27.007Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "html_notes": "<body>Conduct initial research on new client. Check out their website and assign the development to someone on the team. Make the necessary Project inside of Asana for tracking.</body>",
+      "modified_at": "2026-08-05T15:14:44.727Z",
+      "name": "Conduct Research on New Client",
+      "notes": "Conduct initial research on new client. Check out their website and assign the development to someone on the team. Make the necessary Project inside of Asana for tracking.",
+      "num_subtasks": 1,
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1216611404338509",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": [],
+      "subtasks": [
+        {
+          "gid": "1217160494543286",
+          "name": "Need sign off and feedback on first draft",
+          "resource_type": "task",
+          "resource_subtype": "default_task"
+        }
+      ],
+      "comments": [
+        {
+          "gid": "1216862252315420",
+          "created_at": "2026-07-24T20:21:29.886Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "https://app.asana.com/1/1210572425689866/profile/1211145565450731Dr. Nahlah wants to use Makris template.",
+          "type": "comment",
+          "resource_subtype": "comment_added"
+        },
+        {
+          "gid": "1210609244432955",
+          "created_at": "2026-07-28T14:13:39.723Z",
+          "created_by": {
+            "gid": "1210572357798246",
+            "name": "Sang Huynh"
+          },
+          "text": "https://app.asana.com/0/1211145565869133/1211145565869133 don’t work on this site. I’m assigning it to someone else",
+          "type": "comment",
+          "resource_subtype": "comment_added"
+        },
+        {
+          "gid": "1217175051759527",
+          "created_at": "2026-08-04T23:50:04.625Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "https://app.asana.com/1/1210572425689866/project/1216581591101810/task/1216611120941135?focus=true",
+          "type": "comment",
+          "resource_subtype": "comment_added"
+        }
+      ],
+      "depth": 0,
+      "attachments": []
+    },
+    {
+      "gid": "1217160494543286",
+      "assignee": {
+        "gid": "1211145565450724",
+        "name": "Trong Huynh"
+      },
+      "completed": false,
+      "created_at": "2026-08-04T16:36:28.002Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "html_notes": "<body></body>",
+      "modified_at": "2026-08-05T15:14:44.435Z",
+      "name": "Need sign off and feedback on first draft",
+      "notes": "",
+      "num_subtasks": 0,
+      "parent": {
+        "gid": "1216611404338509",
+        "name": "Conduct Research on New Client"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217160494543286",
+      "projects": [],
+      "tags": [],
+      "subtasks": [],
+      "comments": [],
+      "depth": 1,
+      "attachments": []
+    }
+  ],
+  "downloads": []
+}

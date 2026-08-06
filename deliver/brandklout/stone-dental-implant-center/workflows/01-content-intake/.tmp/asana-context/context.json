@@ -1,0 +1,68 @@
+{
+  "slug": "stone-dental-implant-center",
+  "gids": [
+    "1217160668112180",
+    "1217160668112175"
+  ],
+  "nodes": [
+    {
+      "gid": "1217160668112180",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "created_at": "2026-08-04T17:38:28.197Z",
+      "due_at": null,
+      "due_on": null,
+      "html_notes": "<body></body>",
+      "modified_at": "2026-08-04T17:38:48.583Z",
+      "name": "Build New Stone Med Spa",
+      "notes": "",
+      "num_subtasks": 0,
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1213901750672059/task/1217160668112180",
+      "projects": [
+        {
+          "gid": "1213901750672059",
+          "name": "BK Activation - Stone Dental Implant Center"
+        }
+      ],
+      "tags": [],
+      "subtasks": [],
+      "comments": [],
+      "depth": 0,
+      "attachments": []
+    },
+    {
+      "gid": "1217160668112175",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "created_at": "2026-08-04T17:37:46.864Z",
+      "due_at": null,
+      "due_on": null,
+      "html_notes": "<body></body>",
+      "modified_at": "2026-08-04T17:38:23.649Z",
+      "name": "Build New Stone Surgical Arts website",
+      "notes": "",
+      "num_subtasks": 0,
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1213901750672059/task/1217160668112175",
+      "projects": [
+        {
+          "gid": "1213901750672059",
+          "name": "BK Activation - Stone Dental Implant Center"
+        }
+      ],
+      "tags": [],
+      "subtasks": [],
+      "comments": [],
+      "depth": 0,
+      "attachments": []
+    }
+  ],
+  "downloads": []
+}

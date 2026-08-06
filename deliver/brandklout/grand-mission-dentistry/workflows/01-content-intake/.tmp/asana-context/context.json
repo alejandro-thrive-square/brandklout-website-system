@@ -1,0 +1,223 @@
+{
+  "slug": "grand-mission-dentistry",
+  "gids": [
+    "1217040406855578"
+  ],
+  "nodes": [
+    {
+      "gid": "1217040406855578",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "created_at": "2026-07-30T22:58:57.514Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "html_notes": "<body>Add Landing page needs for Sang for Grand Mission\n\nUse this one for inspiration:\n<a href=\"https://start.smartarchesdental.com/?step=start\">https://start.smartarchesdental.com/?step=start</a>\nUse this one as inspiration as well: \n<a href=\"https://novismilerogers.com/?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=24091810786&amp;utm_content=818968089590&amp;utm_term=all%20on%20x%20dental%20implants&amp;mt=p&amp;nw=g&amp;dv=c&amp;gad_source=1&amp;gad_campaignid=24091810786&amp;gbraid=0AAAABEQDY-pcwGGqqmMpWSRrQduvavM4A&amp;gclid=CjwKCAjwj7HTBhBiEiwA8s35OhO819xkzHFuex1g5sqcnuhcLbjnxa_kkwjRIn1SAaGXk3ycoB27UhoCx2gQAvD_BwE\">https://novismilerogers.com/?utm_source=google&amp;utm_medium=cpc&amp;utm_campaign=24091810786&amp;utm_content=818968089590&amp;utm_term=all%20on%20x%20dental%20implants&amp;mt=p&amp;nw=g&amp;dv=c&amp;gad_source=1&amp;gad_campaignid=24091810786&amp;gbraid=0AAAABEQDY-pcwGGqqmMpWSRrQduvavM4A&amp;gclid=CjwKCAjwj7HTBhBiEiwA8s35OhO819xkzHFuex1g5sqcnuhcLbjnxa_kkwjRIn1SAaGXk3ycoB27UhoCx2gQAvD_BwE</a>\n\nAttached are the originals from the other Ad company. Use it as a reference point\n\n<a href=\"https://go.voitdental.com/\">https://go.voitdental.com/</a></body>",
+      "modified_at": "2026-08-06T14:14:52.488Z",
+      "name": "Landing Page - Grand Mission",
+      "notes": "Add Landing page needs for Sang for Grand Mission\n\nUse this one for inspiration:\nhttps://start.smartarchesdental.com/?step=start\nUse this one as inspiration as well: \nhttps://novismilerogers.com/?utm_source=google&utm_medium=cpc&utm_campaign=24091810786&utm_content=818968089590&utm_term=all%20on%20x%20dental%20implants&mt=p&nw=g&dv=c&gad_source=1&gad_campaignid=24091810786&gbraid=0AAAABEQDY-pcwGGqqmMpWSRrQduvavM4A&gclid=CjwKCAjwj7HTBhBiEiwA8s35OhO819xkzHFuex1g5sqcnuhcLbjnxa_kkwjRIn1SAaGXk3ycoB27UhoCx2gQAvD_BwE\n\nAttached are the originals from the other Ad company. Use it as a reference point\n\nhttps://go.voitdental.com/",
+      "num_subtasks": 3,
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217040406855578",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1212973917258998",
+          "name": "BK Implementation - Grand Mission Dentistry"
+        }
+      ],
+      "tags": [],
+      "subtasks": [
+        {
+          "gid": "1217072657902270",
+          "name": "Cosmetic Landing Page",
+          "resource_type": "task",
+          "resource_subtype": "default_task"
+        },
+        {
+          "gid": "1217133289235653",
+          "name": "Implant Landing Page",
+          "resource_type": "task",
+          "resource_subtype": "default_task"
+        },
+        {
+          "gid": "1217162605683014",
+          "name": "Thank you Landing Page",
+          "resource_type": "task",
+          "resource_subtype": "default_task"
+        }
+      ],
+      "comments": [],
+      "depth": 0,
+      "attachments": [
+        {
+          "gid": "1217162605683017",
+          "created_at": "2026-08-04T16:06:21.586Z",
+          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683016/289bd26ddaadc9ec346ff004e1cb3782?e=1786027780&v=0&t=FYnilKGwCTFQrsNWCEFeJk4GsCklDh9B-mMgdFpvnoA",
+          "host": "asana",
+          "name": "gmd-cosmetic-lp.html",
+          "permanent_url": "https://app.asana.com/app/asana/-/get_asset?asset_id=1217162605683017",
+          "resource_subtype": "asana",
+          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683016/289bd26ddaadc9ec346ff004e1cb3782?e=1786027780&v=0&t=FYnilKGwCTFQrsNWCEFeJk4GsCklDh9B-mMgdFpvnoA",
+          "size": 31179
+        },
+        {
+          "gid": "1217162605683019",
+          "created_at": "2026-08-04T16:06:22.020Z",
+          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683018/31445ce9b3951c296980b2b0b878b01e?e=1786027780&v=0&t=58UI4p9UjTE90DNTfpk2FDGyev3U3tfKPRc9JPNysQg",
+          "host": "asana",
+          "name": "gmd-implant-lp.html",
+          "permanent_url": "https://app.asana.com/app/asana/-/get_asset?asset_id=1217162605683019",
+          "resource_subtype": "asana",
+          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683018/31445ce9b3951c296980b2b0b878b01e?e=1786027780&v=0&t=58UI4p9UjTE90DNTfpk2FDGyev3U3tfKPRc9JPNysQg",
+          "size": 33845
+        }
+      ]
+    },
+    {
+      "gid": "1217072657902270",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "created_at": "2026-07-31T18:44:52.956Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "html_notes": "<body>1. Header &amp; Hero Section\n2. Meet the Cosmetic Doctors\n3. Service Offerings Grid\n4. Why Choose Grand Mission Dentistry\n5. Social Proof &amp; Real Patient Gallery\n6. Sticky Mobile Bar\n7. Reviews\n\nMake sure lead form is created in GHL for this specific page</body>",
+      "modified_at": "2026-08-05T21:18:03.292Z",
+      "name": "Cosmetic Landing Page",
+      "notes": "1. Header & Hero Section\n2. Meet the Cosmetic Doctors\n3. Service Offerings Grid\n4. Why Choose Grand Mission Dentistry\n5. Social Proof & Real Patient Gallery\n6. Sticky Mobile Bar\n7. Reviews\n\nMake sure lead form is created in GHL for this specific page",
+      "num_subtasks": 0,
+      "parent": {
+        "gid": "1217040406855578",
+        "name": "Landing Page - Grand Mission"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217072657902270",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": [],
+      "subtasks": [],
+      "comments": [
+        {
+          "gid": "1217161964385804",
+          "created_at": "2026-08-04T22:19:13.054Z",
+          "created_by": {
+            "gid": "1216725885824030",
+            "name": "Nayeli Ortega"
+          },
+          "text": "https://app.asana.com/1/1210572425689866/profile/1213912114353152 as discussed by team, this is ready",
+          "type": "comment",
+          "resource_subtype": "comment_added"
+        }
+      ],
+      "depth": 1,
+      "attachments": []
+    },
+    {
+      "gid": "1217133289235653",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "created_at": "2026-08-03T22:33:09.217Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "html_notes": "<body>1. Header &amp; Hero Section\n2. Solution Breakdown: Why Dental Implants?\n3. Patient Eligibility &amp; Preliminary Procedures Section\n4. Insurance &amp; Flexible Financing Matrix\n5. Doctor Spotlight &amp; Patient Testimonials\n6. FAQ Section (Accordion Format)\n7. Reviews\n\nMake sure lead form is created in GHL for this specific page</body>",
+      "modified_at": "2026-08-05T21:18:05.750Z",
+      "name": "Implant Landing Page",
+      "notes": "1. Header & Hero Section\n2. Solution Breakdown: Why Dental Implants?\n3. Patient Eligibility & Preliminary Procedures Section\n4. Insurance & Flexible Financing Matrix\n5. Doctor Spotlight & Patient Testimonials\n6. FAQ Section (Accordion Format)\n7. Reviews\n\nMake sure lead form is created in GHL for this specific page",
+      "num_subtasks": 0,
+      "parent": {
+        "gid": "1217040406855578",
+        "name": "Landing Page - Grand Mission"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217133289235653",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": [],
+      "subtasks": [],
+      "comments": [
+        {
+          "gid": "1217161964385795",
+          "created_at": "2026-08-04T22:18:21.978Z",
+          "created_by": {
+            "gid": "1216725885824030",
+            "name": "Nayeli Ortega"
+          },
+          "text": "https://app.asana.com/1/1210572425689866/profile/1213912114353152 as discussed by team, this is ready",
+          "type": "comment",
+          "resource_subtype": "comment_added"
+        }
+      ],
+      "depth": 1,
+      "attachments": []
+    },
+    {
+      "gid": "1217162605683014",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "created_at": "2026-08-04T16:05:08.367Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "html_notes": "<body>1. Immediate Status Banner\n2. Fast-Track Immediate Call Box (High-Intent Prompt)\n3. What to Expect (3-Step Timeline)\n4. Practice Details &amp; Location Map</body>",
+      "modified_at": "2026-08-05T21:18:00.768Z",
+      "name": "Thank you Landing Page",
+      "notes": "1. Immediate Status Banner\n2. Fast-Track Immediate Call Box (High-Intent Prompt)\n3. What to Expect (3-Step Timeline)\n4. Practice Details & Location Map",
+      "num_subtasks": 0,
+      "parent": {
+        "gid": "1217040406855578",
+        "name": "Landing Page - Grand Mission"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217162605683014",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": [],
+      "subtasks": [],
+      "comments": [],
+      "depth": 1,
+      "attachments": []
+    }
+  ],
+  "downloads": [
+    {
+      "task": "Landing Page - Grand Mission",
+      "taskGid": "1217040406855578",
+      "name": "gmd-cosmetic-lp.html",
+      "size": 31179,
+      "dest": "C:\\Users\\ACER\\Documents\\Webzite Studio\\Webzite Agentic Workflow\\deliver\\brandklout\\grand-mission-dentistry\\workflows\\01-content-intake\\.tmp\\asana-context\\attachments\\1217162605683017-gmd-cosmetic-lp.html",
+      "skipped": true,
+      "bytes": 31179
+    },
+    {
+      "task": "Landing Page - Grand Mission",
+      "taskGid": "1217040406855578",
+      "name": "gmd-implant-lp.html",
+      "size": 33845,
+      "dest": "C:\\Users\\ACER\\Documents\\Webzite Studio\\Webzite Agentic Workflow\\deliver\\brandklout\\grand-mission-dentistry\\workflows\\01-content-intake\\.tmp\\asana-context\\attachments\\1217162605683019-gmd-implant-lp.html",
+      "skipped": true,
+      "bytes": 33845
+    }
+  ]
+}
