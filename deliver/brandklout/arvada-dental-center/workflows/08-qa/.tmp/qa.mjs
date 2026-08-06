@@ -98,8 +98,19 @@ async function load(slug, reduced = false) {
   await send("Emulation.setEmulatedMedia",
     { features: reduced ? [{ name: "prefers-reduced-motion", value: "reduce" }] : [] }, sessionId);
   await send("Page.navigate", { url: pathToFileURL(path.join(design, slug, "index.html")).href }, sessionId);
-  await wait(1700);
+  // Wait for the real readiness signal, not a guessed delay. brand.js sets
+  // data-js="on" as the last thing boot() does, so this is the moment every
+  // handler is bound. A fixed sleep here made the FAQ and action-bar checks
+  // flaky on the heaviest page — the test clicked before the listener existed.
+  let booted = false;
+  for (let i = 0; i < 60; i++) {
+    booted = (await evaluate("document.documentElement.getAttribute('data-js') === 'on'")) === true;
+    if (booted) break;
+    await wait(100);
+  }
+  if (!booted) console.log("  !! brand.js never booted within 6s");
   await evaluate("document.fonts ? document.fonts.ready.then(()=>1) : 1");
+  await wait(150);
 }
 
 for (const p of PAGES) {
@@ -177,13 +188,24 @@ for (const p of PAGES) {
     const btn = document.querySelector('.faq__q');
     if (!btn) return { skip: true };
     const panel = document.getElementById(btn.getAttribute('aria-controls'));
+    // Poll for the height to settle rather than sleeping a fixed interval — the
+    // grid-template-rows transition is 360ms but the first paint can lag on a
+    // heavy page, and a fixed wait turned that into a false failure.
+    const settle = async (want) => {
+      for (let i = 0; i < 30; i++) {
+        const h = panel.getBoundingClientRect().height;
+        if (want === 'open' ? h > 10 : h < 1) return h;
+        await new Promise(r => setTimeout(r, 60));
+      }
+      return panel.getBoundingClientRect().height;
+    };
     const before = { exp: btn.getAttribute('aria-expanded'), open: panel.getAttribute('data-open'), h: panel.getBoundingClientRect().height };
     btn.click();
-    await new Promise(r => setTimeout(r, 520));
-    const after = { exp: btn.getAttribute('aria-expanded'), open: panel.getAttribute('data-open'), h: panel.getBoundingClientRect().height };
+    const openH = await settle('open');
+    const after = { exp: btn.getAttribute('aria-expanded'), open: panel.getAttribute('data-open'), h: openH };
     btn.click();
-    await new Promise(r => setTimeout(r, 520));
-    const closed = { exp: btn.getAttribute('aria-expanded'), h: panel.getBoundingClientRect().height };
+    const closeH = await settle('closed');
+    const closed = { exp: btn.getAttribute('aria-expanded'), h: closeH };
     return { before, after, closed };
   })()`);
   if (faq && !faq.skip) {
@@ -355,6 +377,20 @@ const FORBIDDEN = [
   { re: /\b\d{1,3}% success\b/i, why: "unsourced success-rate statistic" },
   { re: /\(720\)\s*419-3699/, why: "tracking line — see Open Question 2" },
   { re: /\$14,999/, why: "the conflicting price variant" },
+  // --- three fabrications Brandklout flagged in the source material, 2026-08-06.
+  // These are not ours to inherit; each is a gap to raise, never a fact to copy forward.
+  { re: /\b4[.,]8\b|\b931\b|\b1,?270\b|\b1,?000\+?\s*(?:reviews|patients)/i,
+    why: "the aggregated 4.8 / 1,000+ review figure — an estimate, not a real number" },
+  { re: /average rating|star rating|\b\d(?:\.\d)?\s*(?:out of|\/)\s*5\b|rated \d(?:\.\d)? stars/i,
+    why: "an aggregate rating claim" },
+  { re: /\bCareCredit\b|\bSunbit\b|\bPatientFi\b|\bLendingClub\b|\bProceed Finance\b|\bCherry\b/,
+    why: "an unconfirmed named finance partner" },
+  { re: /without affecting your credit( score)?|soft credit (check|pull)|no credit check/i,
+    why: "a soft-pull credit claim that rides on the unconfirmed lender list" },
+  { re: /before[- ]and[- ]after|before ?\/ ?after|\bsmile transformation photo/i,
+    why: "before/after imagery — the client's are stock placeholders, not consented patient photos" },
+  { re: /actual patient|real patient results?|patient photo/i,
+    why: "presenting imagery as a real patient result" },
 ];
 for (const p of PAGES) {
   const html = fs.readFileSync(path.join(design, p.slug, "index.html"), "utf8");
@@ -393,7 +429,8 @@ for (const f of [...new Set(docRoots.flatMap((d) => walk(d)))]) {
   const text = fs.readFileSync(f, "utf8");
   const hit = text.match(OURS);
   // An explicit statement that the rules do NOT apply is the point, not a violation.
-  const isTheRuleItself = hit && /does \*\*not\*\* apply|does not apply|out of scope|never for cost|not a per-page client/i.test(text);
+  const isTheRuleItself =
+    hit && /do(?:es)? \*?\*?not\*?\*? apply|out of scope|never for cost|not a per-page client/i.test(text);
   check("commercial", `no Webzite rate/quote in ${path.basename(f)}`, !hit || isTheRuleItself,
     hit && !isTheRuleItself ? hit[0] : "");
 }

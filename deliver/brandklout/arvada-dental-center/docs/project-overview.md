@@ -28,7 +28,7 @@ services and real reviews extracted; the six reference URLs captured.
 | **Founder** | Dr. Gregory Bennett, DDS — University of Iowa, 2001 |
 | **Associates** | Dr. Meghan Holub, Dr. John McShane, Dr. Suzanna McAninley |
 | **Positioning** | "World-Class Dental Care With Small-Town Appeal"; "Top Rated Implant Dentist Arvada, CO" |
-| **Rating** | 4.8 / 1,270 reviews (Birdeye); 77 reviews on Yelp |
+| **Rating** | **Unverified — do not publish a figure.** See Open Question 9; the aggregate in the source material is an estimate. |
 
 Brand tokens read off the live CSS — navy `#242A3A`, cyan `#03C5EC`, amber `#FB8E28`, slate
 `#5C6B80`, deep blue `#0E2F60`; type is Cinzel (display) / Montserrat (UI) / Open Sans (body). A
@@ -163,9 +163,36 @@ assumption that needs confirming before the pages go live.
    Wayback Machine. The GHL preview cited alongside it (a `$189` new-patient-special page) is the
    same archetype and was used as the structural brief instead. **A screenshot or PDF from
    Brandklout would close this.**
-9. **Which rating should the pages show?** Three real figures exist: 4.8/1,270 (Birdeye), 4.8/931
-   (the client's own published figure), 77 reviews (Yelp). **Assumption used:** 4.8 from 931, because
-   the practice publishes it themselves.
+9. **What is the practice's real review rating and count?** ~~Three figures exist…~~
+   **REOPENED 2026-08-06.** Brandklout advised the "4.8 / 1,000+ reviews" aggregate carried in the
+   source material is **an estimate, not a real number**. Every aggregate rating, review count and
+   star glyph has been **removed from all six pages**. Individually attributed reviews stay — each is
+   a named person's published words, quoted verbatim, with no score attached. **Supply a verified
+   figure and its source if you want a rating back on these pages.**
+10. **Which finance partners does the practice actually work with?** The six names in the source
+    material (Cherry, Sunbit, PatientFi, Proceed Finance, LendingClub, CareCredit) were flagged by
+    Brandklout as **assumed and unconfirmed**, so all of them are removed, along with the
+    "pre-qualify without affecting your credit score" line — that is a regulated consumer-finance
+    claim which depends on which lender is in place. The pages now say only that monthly payment
+    plans exist and the patient coordinator will go through the options.
+    *Worth knowing:* those names were read off the client's own live `insurance-and-financing/` page
+    during the scrape, not invented here. That is evidence, not confirmation — and it is a plausible
+    origin for the original assumption. **Confirm with the practice directly.**
+11. **Which imagery does the practice hold rights to, and is there any consented patient
+    photography?** Brandklout advised the before/after photos in the source material are **stock
+    placeholders, not consented patient photography**. None were used on any page, and nothing on
+    these pages is captioned or framed as a patient, a result, or a before/after. But several images
+    that *are* used are evidently licensed stock the practice already runs (the emergency pain shot,
+    the veneers lifestyle shot). **Confirm rights before launch**, and supply consented patient
+    photography if before/after proof is wanted — it is the strongest asset these pages currently
+    lack.
+
+> [!IMPORTANT]
+> **Three fabrications inherited from the source material, purged 2026-08-06.** Questions 9, 10 and
+> 11 above all originate from the same instruction: the rating aggregate, the before/after
+> photography and the finance partner names were **carried forward as facts when they were not**.
+> All three are now treated as gaps, and `08-qa/.tmp/qa.mjs` fails the build if any of them
+> reappears on any page.
 
 ## Page architecture
 
@@ -213,8 +240,15 @@ Full paths:
 Shared across all six: `_shared/brand.css` (tokens + components), `_shared/brand.js` (behaviour),
 `_shared/assets/` (42 client-owned images, gitignored, re-fetchable via `fetch-assets.mjs`).
 
-**No stock imagery is used anywhere.** Every image is the client's own. Every review is real and
-attributed. No statistic, testimonial or price on these pages was invented.
+**Every image is client-hosted**, pulled from `arvadadentalcenter.com` rather than a stock library.
+That is *not* the same as saying none of it is stock — several are evidently licensed images the
+practice already runs, and rights need confirming before launch (Open Question 11). Nothing on these
+pages is captioned or framed as a patient, a result, or a before/after.
+
+**Every review is real, named and quoted verbatim, with no score attached.** No testimonial or price
+on these pages was invented, and the three figures that *were* inherited as facts rather than
+verified — the rating aggregate, the before/after photography and the finance partner names — have
+been removed. See the note under Open Questions.
 
 ## Routed workflows
 

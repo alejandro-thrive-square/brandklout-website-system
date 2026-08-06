@@ -67,21 +67,49 @@ Dr. Gregory Bennett").
 | Insurance limit | "We Don't Accept HMO and Medicaid" | new-patient page |
 | Veneers timeline | "Receive porcelain veneers in as few as two visits" | `veneers/` |
 | Emergency promise | "Whenever possible, we'll make space in our schedule so that we can see you the same day" | `emergency-dentistry/` |
-| Financing partners | Cherry, Sunbit, PatientFi, Proceed Finance, LendingClub, CareCredit; "PRE-QUALIFY WITHOUT AFFECTING YOUR CREDIT SCORE!" | `insurance-and-financing/` |
+| ~~Financing partners~~ | **DO NOT USE — see the warning below.** | ~~`insurance-and-financing/`~~ |
 
 `NOT FOUND`: any offer specific to veneers, emergency, or All-on-X. Those pages use the free
 consultation plus a labelled `data-offer` placeholder — see Open Question 1 in the project overview.
 
-## Ratings — three different numbers, all real
+> [!WARNING]
+> **Financing partners — removed 2026-08-06, do not reinstate without confirmation.**
+> Brandklout advised that the named finance partners in the source material were **assumed, not
+> confirmed**. For transparency about where they came from here: the six names (Cherry, Sunbit,
+> PatientFi, Proceed Finance, LendingClub, CareCredit) and the "pre-qualify without affecting your
+> credit score" line were read off the client's own live `insurance-and-financing/` page during the
+> 2026-08-05 scrape — they were not invented at this end. **That is evidence, not confirmation**: a
+> practice's website can list a lender it no longer works with, and the same page is a plausible
+> origin for the assumption in the first place.
+>
+> Naming a specific finance company on a paid-traffic page for a practice that may not work with it
+> is not a risk worth carrying, and "without affecting your credit score" is a regulated
+> consumer-finance claim that depends entirely on which lender is actually in place. Both are gone
+> from all pages. What remains is the generic, separately safe statement that monthly payment plans
+> exist and the patient coordinator will go through the options.
+>
+> See Open Question 10. A QA guard now fails the build if any partner name or soft-pull claim
+> reappears.
 
-Use whichever the client prefers; each is attributable.
+## Ratings — DO NOT USE
 
-- **4.8 from 1,270 reviews** — Birdeye aggregate
-- **4.8 rating from 931 reviews** — the figure the client publishes on their own new-patient page
-- **77 reviews** — Yelp
-- "80+ Visitors Chose This Office This Month" — client's own new-patient page
+> [!WARNING]
+> **Corrected 2026-08-06.** Brandklout advised that the "4.8 stars / 1,000+ reviews" aggregate
+> carried in the source material is **an estimated figure, not a real number**. It has been removed
+> from all six pages, along with every star glyph — including the per-review 5-star rows, since the
+> star rating attached to an individual quote was inferred here and never sourced.
+>
+> **Do not reintroduce any aggregate rating for this client** until Brandklout supplies a verified
+> figure with its source. A QA guard in `08-qa/.tmp/qa.mjs` now fails the build if one appears.
 
-The built pages use **4.8 / 931 reviews**, because that is the number the practice itself publishes.
+For the record, these are the numbers that were visible during the scrape, none of which should be
+treated as verified: 4.8/1,270 (Birdeye), 4.8/931 (the client's own new-patient page), 77 reviews
+(Yelp), and "80+ Visitors Chose This Office This Month" (client's own page). The last is marketing
+copy, not a metric.
+
+What the pages use instead: **individually attributed reviews**, quoted verbatim under the
+reviewer's published name, with no score attached. Those remain sound — each is a real person's
+published words. It was the arithmetic on top of them that was invented.
 
 ## Real reviews used (verbatim, with the reviewer names as published)
 
@@ -141,10 +169,27 @@ re-fetches them.
 
 Coverage: logo (colour + white), Dr. Bennett (3 shots), Dr. McAninley, a 4-person team photo,
 reception/waiting/operatory interiors, clinical renders (single implant, All-on-4 arch, crown,
-veneers), veneer shade-matching, emergency pain, sedation, real patient moments (CJ handshake, a
-patient holding his before/after), and the full mountain-motif set.
+veneers), veneer shade-matching, and the full mountain-motif set.
 
-**No stock imagery is used on any of the six pages.** Every image is the client's own.
+> [!WARNING]
+> **Corrected 2026-08-06 — an earlier version of this file overstated the imagery position.** It
+> said "no stock imagery is used; every image is the client's own." That is wrong, and the
+> distinction matters:
+>
+> Every image on the six pages is **client-hosted** — pulled from `arvadadentalcenter.com`, not from
+> a stock library by us. But client-hosted is not the same as client-owned original photography.
+> Several are evidently **licensed stock the practice already uses** (the woman holding her jaw on
+> the emergency page, the woman touching her face on veneers, the outdoor lifestyle shots on
+> implants and AOX). Genuinely original practice photography is limited to the logo, the doctor
+> portraits, the team photo and the interiors.
+>
+> **Brandklout confirmed the before/after photos in the source material are stock placeholders, not
+> consented patient photography.** None were used on any page — but the rule generalises: nothing on
+> these pages is captioned or framed as a real patient, a real result, or a before/after, and
+> nothing should be. A QA guard now enforces it.
+>
+> **Before any page goes live, the practice needs to confirm which images it holds rights to**, and
+> supply consented patient photography if before/after proof is wanted. See Open Question 11.
 
 ## Reference captures
 
