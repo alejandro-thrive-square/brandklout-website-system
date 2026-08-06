@@ -900,27 +900,211 @@ h2.display { font-size: var(--t-h2); }
 }
 .ftr__legal p { margin: 0 0 0.5rem; }
 
-/* ---------- reveal animation ---------- */
-[data-reveal] {
-  opacity: 0;
-  transform: translateY(22px);
-  transition: opacity 0.7s var(--ease), transform 0.7s var(--ease);
-}
-[data-reveal].is-in { opacity: 1; transform: none; }
-[data-reveal][data-delay="1"] { transition-delay: 0.08s; }
-[data-reveal][data-delay="2"] { transition-delay: 0.16s; }
-[data-reveal][data-delay="3"] { transition-delay: 0.24s; }
-[data-reveal][data-delay="4"] { transition-delay: 0.32s; }
+/* ===========================================================================
+   MOTION SYSTEM
+   ---------------------------------------------------------------------------
+   Rules this obeys, in order of precedence:
 
+   1. Motion never gates access. The sticky header (phone + CTA), the docked
+      offer chip and the mobile action bar are OUTSIDE the reveal system and are
+      never animated out of reach. Everything that converts stays reachable at
+      every scroll depth.
+   2. Nothing is ever hidden waiting for a script. `.no-js` never applies
+      opacity:0 — the reveal state is only armed once JS confirms it can also
+      disarm it (html[data-motion="on"]).
+   3. prefers-reduced-motion removes movement, never content.
+   4. Compositor-only properties. Transform and opacity, nothing that lays out.
+
+   Choreography, coarse to fine: sections rise as a unit; headings resolve line
+   by line behind a mask; groups (cards, symptoms, checks, table rows) stagger
+   off a shared --i; media scales out of an overflow mask; the offer's number
+   counts. The mountain ridge — the practice's own motif — drifts on scroll, so
+   the brand device is what carries the parallax rather than a stock effect.
+   =========================================================================== */
+
+:root {
+  --ease-out: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-soft: cubic-bezier(0.33, 1, 0.68, 1);
+  --stagger: 78ms;
+}
+
+/* Armed only when JS is present and motion is allowed. Without this guard a
+   script failure would leave the whole page invisible. */
+html[data-motion="on"] [data-reveal] {
+  opacity: 0;
+  transform: translate3d(0, 30px, 0);
+  transition:
+    opacity 0.85s var(--ease-out) var(--delay, 0ms),
+    transform 0.85s var(--ease-out) var(--delay, 0ms);
+}
+html[data-motion="on"] [data-reveal].is-in {
+  opacity: 1;
+  transform: none;
+}
+/* legacy authored delays still work, and JS-assigned --i takes over for groups */
+[data-reveal][data-delay="1"] { --delay: 80ms; }
+[data-reveal][data-delay="2"] { --delay: 160ms; }
+[data-reveal][data-delay="3"] { --delay: 240ms; }
+[data-reveal][data-delay="4"] { --delay: 320ms; }
+[data-reveal][style*="--i"] { --delay: calc(var(--i) * var(--stagger)); }
+
+/* ---------- headings resolve line by line behind a mask ---------- */
+.ln {
+  display: block;
+  overflow: hidden;
+  /* descenders would otherwise be clipped by the mask */
+  padding-bottom: 0.09em;
+  margin-bottom: -0.09em;
+}
+.ln__i {
+  display: block;
+  transform: translate3d(0, 105%, 0);
+  transition: transform 1s var(--ease-out) calc(var(--i, 0) * 85ms);
+}
+/* The hero heading is NOT inside a [data-reveal] — it resolves with the hero
+   itself. Without the .is-lit branch here the headline stays masked off the
+   bottom of its own line box forever, on every page. */
+.is-in .ln__i,
+.hero.is-lit .ln__i { transform: none; }
+
+/* word-level fallback where a heading contains inline elements and cannot be
+   safely regrouped into line wrappers */
+.wd {
+  display: inline-block;
+  opacity: 0;
+  transform: translate3d(0, 0.45em, 0);
+  transition:
+    opacity 0.7s var(--ease-out) calc(var(--i, 0) * 34ms),
+    transform 0.7s var(--ease-out) calc(var(--i, 0) * 34ms);
+}
+.is-in .wd,
+.hero.is-lit .wd { opacity: 1; transform: none; }
+
+/* ---------- media scales out of its own mask ---------- */
+html[data-motion="on"] .media-frame img,
+html[data-motion="on"] .doctor__photo img {
+  transform: scale(1.14);
+  transition: transform 1.5s var(--ease-soft);
+}
+html[data-motion="on"] .media-frame.is-in img,
+html[data-motion="on"] .doctor__photo.is-in img,
+html[data-motion="on"] .is-in .media-frame img,
+html[data-motion="on"] .is-in .doctor__photo img {
+  /* never lands exactly on 1 — a scrubbed scale that terminates at 1.0 shows a
+     one-pixel edge shimmer against the mask on some GPUs */
+  transform: scale(1.008);
+}
+
+/* ---------- hero ---------- */
+html[data-motion="on"] .hero__media img {
+  transform: translate3d(0, var(--hero-shift, 0px), 0) scale(var(--hero-zoom, 1.12));
+  will-change: transform;
+}
+html[data-motion="on"] .hero__inner > * { --delay: 60ms; }
+/* the form card arrives after the promise it supports, never before */
+html[data-motion="on"] .hero__inner > .form-card {
+  opacity: 0;
+  transform: translate3d(0, 34px, 0);
+  transition: opacity 0.9s var(--ease-out) 320ms, transform 0.9s var(--ease-out) 320ms;
+}
+html[data-motion="on"] .hero.is-lit .hero__inner > .form-card { opacity: 1; transform: none; }
+
+html[data-motion="on"] .trust { --delay: 480ms; }
+html[data-motion="on"] .trust__item {
+  opacity: 0;
+  transform: translate3d(0, 12px, 0);
+  transition:
+    opacity 0.6s var(--ease-out) calc(480ms + var(--i, 0) * 90ms),
+    transform 0.6s var(--ease-out) calc(480ms + var(--i, 0) * 90ms);
+}
+html[data-motion="on"] .hero.is-lit .trust__item { opacity: 1; transform: none; }
+
+/* ---------- the ridge drifts: brand motif carries the parallax ---------- */
+html[data-motion="on"] .ridge-mark {
+  transform: translate3d(0, var(--ridge-shift, 0px), 0);
+  will-change: transform;
+}
+html[data-motion="on"] .hero__ridge svg {
+  transform: translate3d(0, var(--ridge-shift, 0px), 0);
+}
+
+/* ---------- scroll progress ---------- */
+.progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 3px;
+  z-index: 90;
+  background: linear-gradient(90deg, var(--cyan) 0%, var(--amber) 100%);
+  transform: scaleX(var(--p, 0));
+  transform-origin: 0 50%;
+  pointer-events: none;
+  opacity: 0.9;
+}
+
+/* ---------- the offer chip: docks into the header once the offer scrolls past,
+   so the number is never more than one glance away at any scroll depth ------- */
+.offer-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-family: var(--ui);
+  font-weight: 700;
+  font-size: 0.85rem;
+  text-decoration: none;
+  padding: 0.55rem 1rem;
+  border-radius: 999px;
+  background: var(--amber);
+  color: #2a1602;
+  white-space: nowrap;
+  opacity: 0;
+  transform: translate3d(0, -8px, 0) scale(0.94);
+  transition: opacity 0.4s var(--ease-out), transform 0.4s var(--ease-out);
+  pointer-events: none;
+  box-shadow: 0 8px 20px -10px rgba(217, 112, 15, 0.9);
+}
+.offer-chip.is-on {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+.offer-chip:hover { background: #ffa246; }
+@media (max-width: 859px) { .offer-chip { display: none; } }
+
+/* ---------- counting numbers ---------- */
+.count { font-variant-numeric: tabular-nums; }
+
+/* ---------- refined interaction feedback ---------- */
+.card--lift { transition: transform 0.45s var(--ease-out), box-shadow 0.45s var(--ease-out); }
+.card--lift:hover { transform: translate3d(0, -6px, 0); }
+.symptom { transition: transform 0.4s var(--ease-out), border-left-color 0.4s var(--ease-out); }
+.symptom:hover { transform: translate3d(4px, 0, 0); border-left-color: var(--amber); }
+
+/* ---------- reduced motion: remove movement, never content ---------- */
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
   *, *::before, *::after {
     animation-duration: 0.001ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.001ms !important;
+    transition-delay: 0ms !important;
   }
-  [data-reveal] { opacity: 1; transform: none; }
-  .btn:hover, .card--lift:hover, .quiz__opt:hover { transform: none; }
+  html[data-motion="on"] [data-reveal],
+  html[data-motion="on"] .hero__inner > .form-card,
+  html[data-motion="on"] .trust__item,
+  .wd {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+  .ln__i { transform: none !important; }
+  html[data-motion="on"] .media-frame img,
+  html[data-motion="on"] .doctor__photo img,
+  html[data-motion="on"] .hero__media img { transform: none !important; }
+  html[data-motion="on"] .ridge-mark,
+  html[data-motion="on"] .hero__ridge svg { transform: none !important; }
+  .btn:hover, .card--lift:hover, .quiz__opt:hover, .symptom:hover { transform: none; }
+  .progress { display: none; }
+  /* the chip still docks — it is access, not decoration — it just doesn't slide */
+  .offer-chip { transition: none; }
 }
 
 /* ---------- utilities ---------- */

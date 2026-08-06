@@ -1,7 +1,7 @@
 # QA Report — Arvada Dental Center landing pages
 
 **Asana parent task**: `1217040406855586`
-**Run**: 2026-08-06 · `node qa.mjs` · **311/311 checks passed** (stable across repeated runs)
+**Run**: 2026-08-06 · `node qa.mjs` · **395/395 checks passed** (focused-tab emulation on)
 Machine-readable results: [`qa-results.json`](./qa-results.json)
 
 ## Why this is a driven test, not a screenshot review
@@ -21,7 +21,9 @@ whether reduced-motion actually reveals the content rather than leaving it at `o
 | **Qualifier** (implants, AOX) | advances exactly one step at a time; reaches the contact form; captures all four answers; progress ticks fill; back button returns to the previous step |
 | **FAQ** | opens — `aria-expanded` flips *and* the panel height actually grows; closes again |
 | **Live status** | the open/closed pill resolves to a real state and a sensible label |
-| **Motion** | every `[data-reveal]` fires on a human-paced scroll; under `prefers-reduced-motion` nothing is left hidden |
+| **Motion** | the system is armed (`data-motion="on"`); headings are split into line masks or a word fallback; groups carry a stagger index; the scroll progress bar exists and advances; the hero is lit; the hero media parallax actually changes on scroll; **nothing is left invisible after the scroll pass — including anything still translated outside its own mask** |
+| **Reduced motion** | everything visible immediately; **no residual transform left on anything**; the scroll layer is skipped entirely (`data-motion="reduced"`, no progress bar) |
+| **Offer never buried** | at **five scroll depths × two viewports**, a phone link, a route to the lead form and the offer are each actually inside the viewport — measured by geometry, not by markup existing somewhere |
 | **Responsive** | no horizontal overflow at 1440 / 1024 / 768 / 390 / 320px; mobile action bar hidden over the hero and shown after it; action bar has a tap-to-call |
 | **Commercial terms** | no Webzite rate, quote or cost, and no reference to `PRICING_TIMELINE_RULES.md`, in any authored artifact. Brandklout is a partner engagement, so those rules do not apply under `deliver/brandklout/`. The dental practice's **own** patient-facing prices are page content and are expected. |
 | **Content** | only the main line `(303) 421-7611` appears as a `tel:` — the tracking number does not |
@@ -78,6 +80,47 @@ rights are now Open Question 11.
 
 Nothing on any page is captioned or framed as a patient, a result, or a before/after — which is what
 kept this from becoming a live problem rather than a documentation one.
+
+## Motion rebuild, 2026-08-06
+
+The reveal layer was a single uniform fade-up with four hard-coded delays — plain, and patching more
+fades onto it would have stayed plain. It was replaced with a choreographed system in
+`_shared/brand.css` + `brand.js`. **No page's content or section order changed**: the engine reads
+the existing DOM and choreographs it, so all six pages were upgraded by editing the two shared files
+(plus a `data-count` attribute on four price figures).
+
+| Behaviour | What it does |
+| :--- | :--- |
+| **Line-masked headings** | `h1/h2.display` are split into lines and resolve from behind a mask, staggered. Headings containing inline elements fall back to a word stagger, because regrouping across element boundaries would break the markup. |
+| **Group cascades** | Cards, symptoms, checklists, steps, stat rows and table rows get a computed `--i`, so they arrive in sequence instead of as a slab. |
+| **Media** | Images scale out of their own overflow mask. The scale deliberately lands on `1.008`, never `1` — a scrubbed scale terminating exactly at 1 shows a one-pixel edge shimmer on some GPUs. |
+| **Hero** | Copy lights immediately; the form card follows at 320ms; trust items cascade. The media parallaxes and eases its zoom out, but the *copy does not move* — the promise never drifts away from the reader. |
+| **Ridge parallax** | The Colorado mountain-ridge motif — the practice's own device — is what carries the parallax, rather than a generic effect bolted on. |
+| **Counting offer** | `$18,795` and `$109` count up on entry with an ease-out-expo and **always land on the exact published figure**. |
+| **Docked offer chip** | Once the offer scrolls past, a chip carrying the number docks into the header, linked to the form. Hidden while the offer is on screen — two copies of the same number is noise, not emphasis. |
+| **Scroll progress** | A cyan→amber bar, `transform: scaleX()` only. |
+
+Everything is transform/opacity only, on one rAF loop that parks itself when the tab is hidden.
+
+### Two real bugs the new checks caught
+
+1. **The hero headline was masked off on all six pages.** The line-mask CSS resolved on `.is-in`,
+   which is applied by the reveal observer — but the hero heading is not inside a `[data-reveal]`, so
+   nothing ever applied it. The headline sat translated 105% below its own line box, permanently.
+   Only one page reported it, because the opacity-only check could not see a transform-hidden
+   element; the check now measures translation against element height too. Fixed by resolving on
+   `.hero.is-lit` as well.
+2. **A dead zone on tall mobile heroes.** The action bar appeared when the hero left the viewport,
+   so on pages with a tall mobile hero there were several hundred pixels where the hero's own phone
+   link had scrolled away but the bar had not yet arrived — no way to call, no route to the form. It
+   now triggers on scroll depth (two thirds of a viewport), which has no dead zone by construction.
+
+### Testing in a focused tab
+
+Both `qa.mjs` and `preview.mjs` now call `Emulation.setFocusEmulationEnabled` and
+`Page.bringToFront`. A background tab throttles rAF and freezes CSS transitions and
+IntersectionObserver, so a driven test reports working motion as broken. This is not optional for
+any page with scroll-linked behaviour.
 
 ## Three harness bugs, worth recording
 

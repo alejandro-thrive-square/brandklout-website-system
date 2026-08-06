@@ -76,9 +76,111 @@
     window.addEventListener("scroll", onScroll, { passive: true });
   }
 
+  /* =======================================================================
+     MOTION ENGINE
+     -----------------------------------------------------------------------
+     Progressive enhancement only: it reads the DOM that is already there and
+     choreographs it. No page's content or section order is touched by any of
+     this, and if it throws, the CSS guard (html[data-motion="on"]) means the
+     page stays fully visible rather than stuck at opacity 0.
+     ======================================================================= */
+
+  /* Split a heading into line groups so it can resolve line by line behind a
+     mask. Only safe when the heading is text and <br> — anything with inline
+     elements (a link, a coloured span) falls back to a word stagger, because
+     regrouping across element boundaries would break the markup. */
+  function splitLines(el) {
+    var simple = Array.prototype.every.call(el.childNodes, function (n) {
+      return n.nodeType === 3 || (n.nodeType === 1 && n.tagName === "BR");
+    });
+
+    // Wrap every word, preserving element structure.
+    var words = [];
+    function wrapText(node) {
+      var parts = node.textContent.split(/(\s+)/);
+      var frag = document.createDocumentFragment();
+      parts.forEach(function (p) {
+        if (!p) return;
+        if (/^\s+$/.test(p)) { frag.appendChild(document.createTextNode(p)); return; }
+        var s = document.createElement("span");
+        s.className = "wd";
+        s.textContent = p;
+        frag.appendChild(s);
+        words.push(s);
+      });
+      node.parentNode.replaceChild(frag, node);
+    }
+    (function walk(parent) {
+      Array.prototype.slice.call(parent.childNodes).forEach(function (n) {
+        if (n.nodeType === 3 && n.textContent.trim()) wrapText(n);
+        else if (n.nodeType === 1 && n.tagName !== "BR") walk(n);
+      });
+    })(el);
+    if (!words.length) return;
+
+    // Group by vertical position — that is what a "line" actually is.
+    var lines = [];
+    var lastTop = null;
+    words.forEach(function (w) {
+      var top = Math.round(w.offsetTop);
+      if (lastTop === null || Math.abs(top - lastTop) > 4) { lines.push([]); lastTop = top; }
+      lines[lines.length - 1].push(w);
+    });
+
+    if (!simple) {
+      // Word stagger, indexed by line so a line still moves together.
+      lines.forEach(function (line, li) {
+        line.forEach(function (w) { w.style.setProperty("--i", li); });
+      });
+      return;
+    }
+
+    // True line masks: rebuild the heading as .ln > .ln__i per line.
+    var frag = document.createDocumentFragment();
+    lines.forEach(function (line, li) {
+      var outer = document.createElement("span");
+      outer.className = "ln";
+      var inner = document.createElement("span");
+      inner.className = "ln__i";
+      inner.style.setProperty("--i", li);
+      line.forEach(function (w, wi) {
+        if (wi) inner.appendChild(document.createTextNode(" "));
+        inner.appendChild(document.createTextNode(w.textContent));
+      });
+      outer.appendChild(inner);
+      frag.appendChild(outer);
+    });
+    el.textContent = "";
+    el.appendChild(frag);
+  }
+
+  function initHeadings() {
+    // Only display headings — body copy splitting reads as gimmick, and it
+    // would also break text selection for no benefit.
+    document.querySelectorAll("h1.display, h2.display").forEach(function (h) {
+      try { splitLines(h); } catch (e) { /* leave the heading exactly as authored */ }
+    });
+  }
+
+  /* Assign a stagger index to the children of any group, so cards, symptoms,
+     checklist items and table rows cascade instead of arriving as a slab. */
+  function initStagger() {
+    var GROUPS = ".grid, .symptoms, .checks, .steps, .offer__includes, .stat-row, .trust";
+    document.querySelectorAll(GROUPS).forEach(function (group) {
+      Array.prototype.forEach.call(group.children, function (child, i) {
+        child.style.setProperty("--i", i);
+        // Authored data-delay would fight the computed cascade.
+        child.removeAttribute("data-delay");
+      });
+    });
+    document.querySelectorAll(".compare tbody tr").forEach(function (row, i) {
+      row.style.setProperty("--i", i);
+    });
+  }
+
   /* ---------- scroll reveals ---------- */
   function initReveals() {
-    var els = document.querySelectorAll("[data-reveal]");
+    var els = document.querySelectorAll("[data-reveal], .media-frame, .doctor__photo");
     if (!els.length) return;
     if (reduced || !("IntersectionObserver" in window)) {
       els.forEach(function (el) { el.classList.add("is-in"); });
@@ -87,15 +189,163 @@
     var io = new IntersectionObserver(
       function (entries) {
         entries.forEach(function (e) {
-          if (e.isIntersecting) {
-            e.target.classList.add("is-in");
-            io.unobserve(e.target);
-          }
+          if (!e.isIntersecting) return;
+          e.target.classList.add("is-in");
+          io.unobserve(e.target);
         });
       },
-      { rootMargin: "0px 0px -8% 0px", threshold: 0.08 }
+      // Generous margin: content resolves as it enters, never after the reader
+      // has already arrived and is looking at nothing.
+      { rootMargin: "0px 0px -6% 0px", threshold: 0.05 }
     );
     els.forEach(function (el) { io.observe(el); });
+  }
+
+  /* ---------- hero: light it as soon as it is on screen ---------- */
+  function initHero() {
+    var hero = document.querySelector(".hero");
+    if (!hero) return;
+    requestAnimationFrame(function () {
+      requestAnimationFrame(function () { hero.classList.add("is-lit"); });
+    });
+  }
+
+  /* ---------- scroll-linked layer: parallax, progress ----------
+     One rAF loop, one read, batched writes. Parked whenever the tab is hidden,
+     because a background tab throttles rAF to a crawl and the transforms would
+     land in visible jumps when the reader comes back. */
+  function initScrollLayer() {
+    if (reduced) return;
+    var progress = document.createElement("div");
+    progress.className = "progress";
+    progress.setAttribute("aria-hidden", "true");
+    document.body.appendChild(progress);
+
+    var heroMedia = document.querySelector(".hero__media img");
+    var hero = document.querySelector(".hero");
+    var ridges = [].slice.call(document.querySelectorAll(".ridge-mark, .hero__ridge svg"));
+    var ticking = false;
+
+    function frame() {
+      ticking = false;
+      var y = window.scrollY || window.pageYOffset;
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      progress.style.setProperty("--p", max > 0 ? Math.min(1, y / max) : 0);
+
+      if (heroMedia && hero) {
+        var h = hero.offsetHeight || 1;
+        var t = Math.max(0, Math.min(1, y / h));
+        // Media drifts slower than the page and eases its zoom out; the copy
+        // above it stays put, so the promise never moves away from the reader.
+        heroMedia.style.setProperty("--hero-shift", (t * 72).toFixed(1) + "px");
+        heroMedia.style.setProperty("--hero-zoom", (1.12 - t * 0.07).toFixed(4));
+      }
+
+      ridges.forEach(function (r) {
+        var rect = r.getBoundingClientRect();
+        if (rect.bottom < -200 || rect.top > window.innerHeight + 200) return;
+        var p = (window.innerHeight - rect.top) / (window.innerHeight + rect.height);
+        r.style.setProperty("--ridge-shift", ((p - 0.5) * -46).toFixed(1) + "px");
+      });
+    }
+
+    function onScroll() {
+      if (ticking || document.hidden) return;
+      ticking = true;
+      requestAnimationFrame(frame);
+    }
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
+    document.addEventListener("visibilitychange", function () {
+      if (!document.hidden) onScroll();
+    });
+    frame();
+  }
+
+  /* ---------- the offer's number counts when it lands ---------- */
+  function initCounters() {
+    var els = document.querySelectorAll("[data-count]");
+    if (!els.length) return;
+    els.forEach(function (el) {
+      var target = el.textContent.trim();
+      var digits = target.replace(/[^\d]/g, "");
+      if (!digits) return;
+      var end = parseInt(digits, 10);
+      var prefix = target.slice(0, target.indexOf(digits[0]));
+      var suffix = target.slice(target.lastIndexOf(digits[digits.length - 1]) + 1);
+      var grouped = /,/.test(target);
+      el.classList.add("count");
+
+      if (reduced || !("IntersectionObserver" in window)) return; // leave the real number
+
+      var run = function () {
+        var dur = 1100;
+        var t0 = null;
+        function step(ts) {
+          if (t0 === null) t0 = ts;
+          var p = Math.min(1, (ts - t0) / dur);
+          // ease-out-expo: fast to near-final, then settles — reads as precise
+          var e = p === 1 ? 1 : 1 - Math.pow(2, -10 * p);
+          var v = Math.round(end * e);
+          el.textContent = prefix + (grouped ? v.toLocaleString("en-US") : String(v)) + suffix;
+          if (p < 1) requestAnimationFrame(step);
+          else el.textContent = target; // always lands on the real figure, exactly
+        }
+        requestAnimationFrame(step);
+      };
+
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          io.unobserve(e.target);
+          el.textContent = prefix + "0" + suffix;
+          run();
+        });
+      }, { threshold: 0.6 });
+      io.observe(el);
+    });
+  }
+
+  /* ---------- offer chip: docks into the header once the offer scrolls past ----
+     This is the "motion serves the offer" rule made literal. Below the offer
+     section the number would otherwise be gone from the screen entirely; the
+     chip keeps it, and a route back to the form, one glance away at any depth. */
+  function initOfferChip() {
+    var hdr = document.querySelector(".hdr__bar");
+    if (!hdr) return;
+    var source = document.querySelector("[data-offer], [data-price]");
+    var cta = document.querySelector(".hdr__cta-sm");
+    if (!source || !cta) return;
+
+    var label = "";
+    var priceEl = source.querySelector(".offer__price") || source.querySelector("span");
+    if (priceEl) label = priceEl.textContent.replace(/\s+/g, " ").trim();
+    if (!label) return;
+    var isFree = /free/i.test(label);
+    var text = isFree ? "Free consultation" : label + " offer";
+
+    var chip = document.createElement("a");
+    chip.className = "offer-chip";
+    chip.href = cta.getAttribute("href") || "#";
+    chip.innerHTML =
+      '<svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 6 9 17l-5-5"/></svg><span></span>';
+    chip.querySelector("span").textContent = text;
+    chip.setAttribute("aria-label", text + " — jump to the form");
+    hdr.insertBefore(chip, cta);
+
+    if (!("IntersectionObserver" in window)) { chip.classList.add("is-on"); return; }
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          // Show it once the offer has left upward, hide it while the offer is
+          // on screen — two copies of the same number is noise, not emphasis.
+          var gone = !e.isIntersecting && e.boundingClientRect.top < 0;
+          chip.classList.toggle("is-on", gone);
+        });
+      },
+      { threshold: 0 }
+    );
+    io.observe(source);
   }
 
   /* ---------- FAQ accordion ---------- */
@@ -113,22 +363,21 @@
     });
   }
 
-  /* ---------- sticky mobile action bar ---------- */
+  /* ---------- sticky mobile action bar ----------
+     Threshold on scroll depth, not on the hero leaving the viewport. Tying it to
+     the hero left a dead zone on pages with a tall mobile hero: the hero's own
+     phone link had scrolled away while the hero was still technically on screen,
+     so for several hundred pixels there was no way to call or reach the form.
+     Two thirds of a viewport is past the fold on every page in the set. */
   function initActionBar() {
     var bar = document.querySelector(".actionbar");
     if (!bar) return;
-    var trigger = document.querySelector(".hero");
-    if (!trigger || !("IntersectionObserver" in window)) {
-      bar.classList.add("is-on");
-      return;
-    }
-    var io = new IntersectionObserver(
-      function (entries) {
-        bar.classList.toggle("is-on", !entries[0].isIntersecting);
-      },
-      { threshold: 0 }
-    );
-    io.observe(trigger);
+    var onScroll = function () {
+      bar.classList.toggle("is-on", (window.scrollY || window.pageYOffset) > window.innerHeight * 0.66);
+    };
+    onScroll();
+    window.addEventListener("scroll", onScroll, { passive: true });
+    window.addEventListener("resize", onScroll, { passive: true });
   }
 
   /* ---------- lead handling ----------
@@ -285,9 +534,22 @@
   }
 
   function boot() {
+    // Arm the reveal styles only now, when we know we are here to disarm them.
+    // Setting this before the DOM prep below would flash the page empty.
+    document.documentElement.setAttribute("data-motion", reduced ? "reduced" : "on");
+
+    // Order matters: split and index the DOM before anything observes it,
+    // otherwise the first elements resolve without their choreography.
+    initHeadings();
+    initStagger();
+
     initStatus();
     initHeader();
+    initHero();
     initReveals();
+    initScrollLayer();
+    initCounters();
+    initOfferChip();
     initFaq();
     initActionBar();
     initForms();

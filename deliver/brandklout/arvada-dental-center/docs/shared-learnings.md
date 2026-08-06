@@ -121,6 +121,26 @@ These came up on Arvada but are almost certainly batch-wide:
 4. **Check the client's own site for a published offer before assuming there isn't one.** Arvada's
    was on a page not linked from the main navigation.
 
+## 7b. Motion: three traps that will hit you too
+
+The motion system in `_shared/brand.css` + `brand.js` is reusable as-is. Three things it exists to
+get right, all of which broke first:
+
+1. **Never let a reveal style apply without JS confirming it can also remove it.** The reveal state
+   is armed by `html[data-motion="on"]`, set by the script itself. A page that ships `opacity: 0` in
+   CSS and relies on a script to undo it is one script error away from being blank.
+2. **A masked heading outside a `[data-reveal]` never resolves.** The hero headline on all six pages
+   sat translated 105% below its own line box, permanently, because the mask resolved on a class the
+   hero never received. An opacity-only QA check cannot see this — it is transform-hidden, not
+   transparent. Check translation against element height too.
+3. **Sticky CTAs must trigger on scroll depth, not on the hero leaving the viewport.** On a tall
+   mobile hero that leaves a dead zone: the hero's own phone link has scrolled away, the sticky bar
+   has not arrived, and for several hundred pixels there is no way to call.
+
+And the testing rule: **drive motion in a focused tab.** Background tabs throttle rAF and freeze
+transitions and `IntersectionObserver`. `Emulation.setFocusEmulationEnabled` +  `Page.bringToFront`
+in the CDP script, or the failures are fiction.
+
 ## 8. The previous vendor's pages contain placeholders presented as facts
 
 **This is the single most important thing on this page for the other clients.** Arvada's Asana

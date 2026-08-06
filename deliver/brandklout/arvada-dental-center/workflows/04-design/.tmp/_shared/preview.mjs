@@ -100,6 +100,11 @@ const t = targetInfos.find((x) => x.type === "page");
 const { sessionId } = await send("Target.attachToTarget", { targetId: t.targetId, flatten: true });
 await send("Page.enable", {}, sessionId);
 await send("Runtime.enable", {}, sessionId);
+// Background tabs freeze CSS transitions, rAF and IntersectionObserver, which makes a
+// driven test report motion as broken when it is fine. Force this target to behave as
+// the focused, foreground tab for the whole run.
+await send("Emulation.setFocusEmulationEnabled", { enabled: true }, sessionId);
+await send("Page.bringToFront", {}, sessionId);
 await send(
   "Emulation.setDeviceMetricsOverride",
   { width, height: 1000, deviceScaleFactor: 1, mobile: width < 700 },

@@ -78,6 +78,11 @@ const t = targetInfos.find((x) => x.type === "page");
 const { sessionId } = await send("Target.attachToTarget", { targetId: t.targetId, flatten: true });
 await send("Page.enable", {}, sessionId);
 await send("Runtime.enable", {}, sessionId);
+// Background tabs freeze CSS transitions, rAF and IntersectionObserver, which makes a
+// driven test report motion as broken when it is fine. Force this target to behave as
+// the focused, foreground tab for the whole run.
+await send("Emulation.setFocusEmulationEnabled", { enabled: true }, sessionId);
+await send("Page.bringToFront", {}, sessionId);
 
 const evaluate = async (expr) =>
   (await send("Runtime.evaluate", { expression: expr, returnByValue: true, awaitPromise: true }, sessionId))?.result?.value;
@@ -182,6 +187,113 @@ for (const p of PAGES) {
   })`);
   const rv = JSON.parse(rev);
   check(p.slug, "all reveals fire", rv.all === rv.shown, `${rv.shown}/${rv.all}`);
+
+  // ---- MOTION: choreography actually ran ----
+  const motion = await evaluate(`(() => {
+    const html = document.documentElement;
+    return {
+      armed: html.getAttribute('data-motion'),
+      lineMasks: document.querySelectorAll('.ln__i').length,
+      wordFallback: document.querySelectorAll('.wd').length,
+      staggered: document.querySelectorAll('[style*="--i"]').length,
+      progress: !!document.querySelector('.progress'),
+      chip: !!document.querySelector('.offer-chip'),
+      heroLit: !!document.querySelector('.hero.is-lit'),
+      // Nothing may be left invisible after the scroll pass — and "invisible"
+      // includes a line mask still parked outside its own overflow box, which an
+      // opacity-only check sails straight past. That is exactly how the hero
+      // headline stayed masked off on every page while the tests were green.
+      stillHidden: [...document.querySelectorAll('[data-reveal], .ln__i, .wd, .trust__item, .form-card')]
+        .filter(el => {
+          const cs = getComputedStyle(el);
+          if (+cs.opacity < 0.05) return true;
+          const m = new DOMMatrixReadOnly(cs.transform);
+          // translated by more than a third of its own height = clipped away
+          return Math.abs(m.m42) > Math.max(12, el.getBoundingClientRect().height * 0.34);
+        }).length
+    };
+  })()`);
+  check(p.slug, "motion armed", motion.armed === "on", motion.armed || "not set");
+  check(p.slug, "headings split into line masks", motion.lineMasks > 0 || motion.wordFallback > 0,
+    `${motion.lineMasks} lines / ${motion.wordFallback} words`);
+  check(p.slug, "groups carry a stagger index", motion.staggered > 5, `${motion.staggered} indexed`);
+  check(p.slug, "scroll progress bar present", motion.progress);
+  check(p.slug, "hero lit", motion.heroLit);
+  check(p.slug, "nothing left invisible after scroll", motion.stillHidden === 0,
+    `${motion.stillHidden} still at opacity 0`);
+
+  // ---- MOTION: parallax is actually driven by scroll ----
+  const parallax = await evaluate(`(async () => {
+    const media = document.querySelector('.hero__media img');
+    const read = () => media ? getComputedStyle(media).transform : null;
+    window.scrollTo(0, 0);
+    await new Promise(r => setTimeout(r, 260));
+    const top = read();
+    window.scrollTo(0, Math.min(700, document.body.scrollHeight));
+    await new Promise(r => setTimeout(r, 320));
+    const moved = read();
+    const prog = getComputedStyle(document.querySelector('.progress')).transform;
+    window.scrollTo(0, 0);
+    await new Promise(r => setTimeout(r, 200));
+    return { top, moved, changed: top !== moved, prog };
+  })()`);
+  check(p.slug, "hero media parallaxes on scroll", parallax.changed,
+    parallax.changed ? "" : "transform did not change");
+  check(p.slug, "progress bar advances", parallax.prog && parallax.prog !== "none");
+
+  // ---- THE RULE: offer, phone and form reachable at EVERY scroll depth ----
+  // Motion must never bury the things that convert. Checked at five depths, on
+  // desktop and again on mobile, by asking what is actually inside the viewport.
+  async function reachability(label) {
+    const r = await evaluate(`(async () => {
+      const inView = (el) => {
+        if (!el) return false;
+        const b = el.getBoundingClientRect();
+        const cs = getComputedStyle(el);
+        if (cs.visibility === 'hidden' || cs.display === 'none' || +cs.opacity < 0.15) return false;
+        return b.bottom > 0 && b.top < innerHeight && b.right > 0 && b.left < innerWidth && b.height > 4;
+      };
+      const anyInView = (sel) => [...document.querySelectorAll(sel)].some(inView);
+      // Any in-page anchor that lands on a container holding the lead form is a
+      // legitimate route to it — including the hero's own CTA, which is what the
+      // reader actually sees at the top of the page.
+      const formLinks = [...document.querySelectorAll('a[href^="#"]')].filter(a => {
+        const id = a.getAttribute('href');
+        if (!id || id === '#') return false;
+        let t; try { t = document.querySelector(id); } catch { return false; }
+        return t && (t.matches('form[data-lead]') || t.querySelector('form[data-lead]'));
+      });
+      const out = [];
+      const max = document.documentElement.scrollHeight - innerHeight;
+      for (const frac of [0, 0.25, 0.5, 0.75, 1]) {
+        scrollTo(0, Math.round(max * frac));
+        await new Promise(r => setTimeout(r, 620));
+        out.push({
+          at: frac,
+          phone: anyInView('a[href^="tel:"]'),
+          form: formLinks.some(inView) || anyInView('.actionbar a, form[data-lead]'),
+          // The offer is reachable if the offer itself, the docked chip, or a
+          // persistent CTA that leads to claiming it is on screen.
+          offer: anyInView('.offer-chip, [data-offer], [data-price], .hdr__cta-sm, .actionbar .btn')
+            || formLinks.some(inView)
+        });
+      }
+      scrollTo(0, 0);
+      return out;
+    })()`);
+    const bad = r.filter((x) => !x.phone || !x.form);
+    check(p.slug, `phone + form reachable at every depth (${label})`, bad.length === 0,
+      bad.length ? bad.map((b) => `${Math.round(b.at * 100)}%:${b.phone ? "" : "no-phone"}${b.form ? "" : " no-form"}`).join(", ") : "");
+    const noOffer = r.filter((x) => !x.offer);
+    check(p.slug, `offer reachable at every depth (${label})`, noOffer.length === 0,
+      noOffer.length ? noOffer.map((b) => Math.round(b.at * 100) + "%").join(", ") : "");
+  }
+  await reachability("1440px");
+  await setViewport(390, 800, true);
+  await load(p.slug);
+  await reachability("390px");
+  await setViewport(1440);
+  await load(p.slug);
 
   // ---- FAQ accordion ----
   const faq = await evaluate(`(async () => {
@@ -358,12 +470,27 @@ for (const p of PAGES) {
   await setViewport(1440);
   await load(p.slug, true);
   const rm = await evaluate(`(() => {
-    const all = [...document.querySelectorAll('[data-reveal]')];
+    const sel = '[data-reveal], .ln__i, .wd, .trust__item, .form-card, .media-frame img';
+    const all = [...document.querySelectorAll(sel)];
     const hidden = all.filter(el => getComputedStyle(el).opacity === '0');
-    return { all: all.length, hidden: hidden.length };
+    // Reduced motion must remove MOVEMENT, not just speed it up: no residual
+    // translate/scale should be sitting on anything once the media query is on.
+    const moved = all.filter(el => {
+      const t = getComputedStyle(el).transform;
+      return t && t !== 'none' && t !== 'matrix(1, 0, 0, 1, 0, 0)';
+    });
+    return {
+      all: all.length, hidden: hidden.length, moved: moved.length,
+      armed: document.documentElement.getAttribute('data-motion'),
+      progress: !!document.querySelector('.progress')
+    };
   })()`);
   check(p.slug, "reduced-motion reveals everything immediately",
     rm.hidden === 0, `${rm.hidden}/${rm.all} still hidden`);
+  check(p.slug, "reduced-motion leaves no residual transform",
+    rm.moved === 0, `${rm.moved}/${rm.all} still transformed`);
+  check(p.slug, "reduced-motion skips the scroll layer entirely",
+    rm.armed === "reduced" && !rm.progress, `motion=${rm.armed}, progressBar=${rm.progress}`);
 
   check(p.slug, "no console errors", consoleErrors.length === 0, consoleErrors.slice(0, 3).join(" | "));
 }

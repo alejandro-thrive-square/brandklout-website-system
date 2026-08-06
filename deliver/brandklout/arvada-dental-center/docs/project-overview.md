@@ -281,8 +281,21 @@ Full paths:
 | Next Door | `deliver/brandklout/arvada-dental-center/workflows/04-design/.tmp/next-door/index.html` |
 | Review index | `deliver/brandklout/arvada-dental-center/workflows/04-design/.tmp/index.html` |
 
-Shared across all six: `_shared/brand.css` (tokens + components), `_shared/brand.js` (behaviour),
-`_shared/assets/` (42 client-owned images, gitignored, re-fetchable via `fetch-assets.mjs`).
+Shared across all six: `_shared/brand.css` (tokens, components, motion system), `_shared/brand.js`
+(behaviour + motion engine), `_shared/assets/` (42 client-owned images, gitignored, re-fetchable via
+`fetch-assets.mjs`).
+
+**Motion** (rebuilt 2026-08-06): line-masked headings, cascading groups, masked media, hero and
+mountain-ridge parallax, counting offer figures, an offer chip that docks into the header once the
+offer scrolls past, and a scroll progress bar. Transform/opacity only, one rAF loop that parks when
+the tab is hidden. `prefers-reduced-motion` removes movement without removing content. Because the
+engine reads the existing DOM, all six pages were upgraded without touching any page's content or
+section order. Detail: [QA report](../workflows/08-qa/.tmp/qa-report.md#motion-rebuild-2026-08-06).
+
+> [!NOTE]
+> **Verify these pages in a focused tab.** Background tabs throttle `requestAnimationFrame` and
+> freeze CSS transitions and `IntersectionObserver`, so motion that works fine reads as broken.
+> `qa.mjs` and `preview.mjs` both force focus emulation; if you check by hand, keep the tab in front.
 
 **Every image is client-hosted**, pulled from `arvadadentalcenter.com` rather than a stock library.
 That is *not* the same as saying none of it is stock — several are evidently licensed images the
