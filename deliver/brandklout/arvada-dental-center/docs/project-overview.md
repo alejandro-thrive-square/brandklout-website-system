@@ -150,9 +150,11 @@ assumption that needs confirming before the pages go live.
    and copy angle — confirm that is the intent rather than one page.
 5. **Is the practice's "Next Door" page meant to target the Nextdoor ad platform?** Read as
    neighbourhood-proximity targeting. Confirm.
-6. **The Asana attachments ("originals from the other Ad company") were never downloaded.** They
-   were noted on Grand Mission and Mason Park; if equivalents exist for Arvada they would settle
-   questions 1–3 immediately.
+6. ~~**The Asana attachments were never downloaded.**~~ **CLOSED 2026-08-06** — they arrived in
+   `01-content-intake/.tmp/asana-context/` mid-build: `index_1.html` (the previous vendor's veneers
+   page), `schema-snippet.html` and `README-notes.md`. They did not settle questions 1–3, but they
+   did explain where all three fabrications came from. See [The previous vendor's
+   page](#the-previous-vendors-page-index_1html) below.
 7. **Do any of the four associate dentists need to appear on these pages?** Only Dr. Bennett leads
    the implant and cosmetic pages, since the practice's own implant marketing is built entirely
    around him ("Work **exclusively** with Dr. Gregory Bennett"). Dr. McAninley and the team appear on
@@ -187,12 +189,54 @@ assumption that needs confirming before the pages go live.
     photography if before/after proof is wanted — it is the strongest asset these pages currently
     lack.
 
+12. **Clinical sign-off on the veneer durability figures.** The comparison table on the veneers page
+    carries "around 4–8 years" for composite and "10–20+ years with proper care" for porcelain,
+    taken from the previous vendor's page. They are presented as general material characteristics
+    with an explicit "not a guarantee" note, not as a promise by this practice — but they come from
+    an author with three confirmed fabrications, so **Dr. Bennett should sign them off** or supply
+    his own figures.
+
 > [!IMPORTANT]
 > **Three fabrications inherited from the source material, purged 2026-08-06.** Questions 9, 10 and
-> 11 above all originate from the same instruction: the rating aggregate, the before/after
-> photography and the finance partner names were **carried forward as facts when they were not**.
-> All three are now treated as gaps, and `08-qa/.tmp/qa.mjs` fails the build if any of them
-> reappears on any page.
+> 11 above all originate from the same place: the rating aggregate, the before/after photography and
+> the finance partner names were **carried forward as facts when they were not**. All three are now
+> treated as gaps, and `08-qa/.tmp/qa.mjs` fails the build if any of them reappears on any page.
+
+## The previous vendor's page (`index_1.html`)
+
+The Asana attachments arrived in `01-content-intake/.tmp/asana-context/` on 2026-08-06, after the
+six pages were built. They are the previous ad company's **porcelain veneers** page plus its schema
+block and a build README.
+
+**Their README is the origin of all three fabrications, and admits each one in writing:**
+
+| Their note | What it means |
+| :--- | :--- |
+| *"I used **4.8★ / 1,000+ reviews** as a defensible placeholder"* | The rating was never real. It is also embedded as an `aggregateRating` in their JSON-LD — fabricated review markup, which is a Google structured-data policy violation and can cost the practice its rich results. |
+| *"the before/after slider currently uses **stock placeholder images**"* | Six Unsplash URLs, presented as patient cases. |
+| *"I referenced **CareCredit/Sunbit as common industry examples** per your brief"* | Invented partner names. |
+
+Two further things their README asserts that should **not** be inherited:
+
+- *"the site only says '10+ lending partners,' not specific brand names"* — **our scrape contradicts
+  this.** The client's live `insurance-and-financing/` page does list six named partners. The vendor
+  most likely never got past the site's bot challenge. Either way, unconfirmed until the practice
+  says so.
+- Monthly financing figures of **$105 / $185 / $230** for 4, 8 and 10 veneers. Same provenance as
+  everything else on this list. Not used; now guarded against.
+
+**What we took from it, per the "structure and content only" rule:** its section spec. Two sections
+it had that our veneers page lacked have been added — a **composite-vs-porcelain comparison table**
+and a **technology section** (CEREC, digital panoramic X-rays, Waterlase, IV sedation, all
+corroborated by the client's own site) — plus one FAQ, on porcelain versus composite bonding. A
+`Dentist` and `FAQPage` JSON-LD block was added too, **deliberately without `aggregateRating`**.
+
+**What we did not take:** its visual design. Their page is Tailwind-via-CDN with emoji icons, a
+teal/navy/gold palette the author admits was guessed because they could not extract the real brand
+colours, a before/after slider, and a testimonial carousel. Ours is an original design on brand
+tokens sampled from the live site. The one section of theirs that cannot be reproduced honestly —
+the before/after slider — is **deliberately absent** rather than filled with stock, and is Open
+Question 11.
 
 ## Page architecture
 

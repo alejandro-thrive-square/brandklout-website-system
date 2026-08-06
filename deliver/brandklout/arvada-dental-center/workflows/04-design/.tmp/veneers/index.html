@@ -21,6 +21,62 @@
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;600;700&family=Montserrat:wght@500;600;700&family=Open+Sans:wght@400;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../_shared/brand.css">
+<!--
+  Structured data. The previous vendor's index_1.html shipped a Dentist block containing
+  an "aggregateRating" of 4.8 / 1000 — a figure their own README admits was a placeholder.
+  Fabricated review markup is a Google structured-data policy violation and can cost the
+  practice its rich results, so there is DELIBERATELY no aggregateRating here. Do not add
+  one until Brandklout supplies a verified figure (Open Question 9).
+  Facts below are from the client's own site and JSON-LD.
+-->
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "Dentist",
+  "name": "Arvada Dental Center & Implants",
+  "url": "https://arvadadentalcenter.com/",
+  "telephone": "+1-303-421-7611",
+  "email": "info@arvadadentalcenter.com",
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "6695 Wadsworth Blvd",
+    "addressLocality": "Arvada",
+    "addressRegion": "CO",
+    "postalCode": "80003",
+    "addressCountry": "US"
+  },
+  "geo": { "@type": "GeoCoordinates", "latitude": 39.8180688, "longitude": -105.08195 },
+  "openingHoursSpecification": {
+    "@type": "OpeningHoursSpecification",
+    "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+    "opens": "08:00",
+    "closes": "17:00"
+  },
+  "availableService": {
+    "@type": "MedicalProcedure",
+    "name": "Porcelain Veneers",
+    "procedureType": "https://schema.org/NoninvasiveProcedure"
+  }
+}
+</script>
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    { "@type": "Question", "name": "How many visits do porcelain veneers take?",
+      "acceptedAnswer": { "@type": "Answer", "text": "As few as two. The first prepares the teeth and settles the design; the second fits the finished veneers." } },
+    { "@type": "Question", "name": "Do veneers look obviously fake?",
+      "acceptedAnswer": { "@type": "Answer", "text": "That is a design question rather than a materials one. Each case is designed against your facial features, skin tone and gum line, so shade, shape and proportion are decided with you rather than off a chart." } },
+    { "@type": "Question", "name": "Is enamel really removed for veneers?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Yes, a small portion from the front of each treated tooth so the veneer sits flush. It is not reversible, which is why candidacy is assessed first." } },
+    { "@type": "Question", "name": "What is the difference between porcelain veneers and composite bonding?",
+      "acceptedAnswer": { "@type": "Answer", "text": "Bonding is resin shaped onto the tooth in the chair - quicker and cheaper, but more opaque, more prone to staining and shorter-lived. Porcelain is custom made and holds its colour." } },
+    { "@type": "Question", "name": "What do porcelain veneers cost in Arvada, CO?",
+      "acceptedAnswer": { "@type": "Answer", "text": "It depends on how many teeth are treated, so Arvada Dental Center quotes in writing after examining you rather than publishing a per-tooth figure. Monthly payment plans are available." } }
+  ]
+}
+</script>
 </head>
 <body>
 <a class="skip" href="#main">Skip to content</a>
@@ -229,6 +285,104 @@
     </div>
   </section>
 
+  <!--
+    ============ COMPARISON ============
+    Section and content taken from the previous vendor's index_1.html (Asana attachment
+    1217133289235647), which is a STRUCTURE AND CONTENT reference only — its visual design
+    is not reproduced anywhere on this page. Rendered here with our own .compare component,
+    the same one the AOX page uses.
+
+    The two durability figures are the vendor's and are NOT independently verified — that
+    author also supplied three figures Brandklout has since confirmed were fabricated. They
+    are presented as general characteristics of the materials rather than as a promise by
+    this practice, and flagged for clinical sign-off (Open Question 12). Every other row is
+    corroborated by the client's own veneers page.
+  -->
+  <section class="section band-summit" style="--band-bg:var(--navy)">
+    <div class="wrap">
+      <div class="center mb-lg" data-reveal>
+        <p class="eyebrow eyebrow--center">Materials</p>
+        <h2 class="display">Not all veneers are the same thing</h2>
+        <p class="lede">"Veneer" covers two quite different treatments. The difference shows up years later, which is exactly when it is hardest to undo.</p>
+      </div>
+      <div class="compare-scroll" data-reveal>
+        <table class="compare">
+          <caption class="vh">Composite veneers compared with the porcelain veneers used at Arvada Dental Center</caption>
+          <thead>
+            <tr>
+              <th scope="col">&nbsp;</th>
+              <th scope="col">Composite / traditional</th>
+              <th scope="col" class="is-best">Porcelain, minimal-prep</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <th scope="row">Appearance in daylight</th>
+              <td>More opaque — can read flat</td>
+              <td class="is-best">Translucency matched to real enamel</td>
+            </tr>
+            <tr>
+              <th scope="row">Tooth preparation</th>
+              <td>Often more enamel removed</td>
+              <td class="is-best">Minimal-prep, tooth-conserving</td>
+            </tr>
+            <tr>
+              <th scope="row">Staining</th>
+              <td>Picks up stain over time</td>
+              <td class="is-best">Highly stain-resistant</td>
+            </tr>
+            <tr>
+              <th scope="row">Visits to complete</th>
+              <td>Varies, often repeat touch-ups</td>
+              <td class="is-best">As few as two</td>
+            </tr>
+            <tr>
+              <th scope="row">Typical service life<a href="#clinical-note" aria-label="See note on durability figures">†</a></th>
+              <td>Around 4–8 years</td>
+              <td class="is-best">10–20+ years with proper care</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="caption" id="clinical-note" data-reveal>† Service-life ranges are general characteristics of the materials, not a guarantee for any individual case. How long yours last depends on your bite, your habits and your hygiene — Dr. Bennett will be straight with you about that at the consultation.</p>
+    </div>
+  </section>
+
+  <!-- ============ TECHNOLOGY ============
+       Section and equipment list from index_1.html; all four are corroborated by the
+       client's own site navigation (CEREC, panoramic X-rays, Waterlase, IV sedation). -->
+  <section class="section band-paper">
+    <div class="wrap">
+      <div class="center mb-lg" data-reveal>
+        <p class="eyebrow eyebrow--center">In the room</p>
+        <h2 class="display">Technology you'll actually notice</h2>
+        <p class="lede">Not a spec sheet — four things that change what the appointment feels like.</p>
+      </div>
+      <div class="grid grid--4">
+        <article class="card card--lift" data-reveal>
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><path d="M8 21h8M12 17v4"/></svg></div>
+          <h3 class="h3">CEREC digital scanning</h3>
+          <p>Digital impressions instead of a tray of setting putty. Faster, and considerably more pleasant if you have a gag reflex.</p>
+        </article>
+        <article class="card card--lift" data-reveal data-delay="1">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9a9 9 0 0 1 18 0"/><path d="M5 9v6a7 7 0 0 0 14 0V9"/><path d="M9 20h6"/></svg></div>
+          <h3 class="h3">Digital panoramic X-rays</h3>
+          <p>Full-mouth visibility at a fraction of the radiation of traditional film.</p>
+        </article>
+        <article class="card card--lift" data-reveal data-delay="2">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2.7s5 5.4 5 9.3a5 5 0 0 1-10 0c0-3.9 5-9.3 5-9.3z"/></svg></div>
+          <h3 class="h3">Waterlase laser dentistry</h3>
+          <p>Gentle laser work on soft tissue, which is what makes combining veneers with gum contouring practical.</p>
+        </article>
+        <article class="card card--lift" data-reveal data-delay="3">
+          <div class="card__icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3a9 9 0 1 0 9 9M8 14s1.5 2 4 2 4-2 4-2M9 9h.01M15 9h.01"/></svg></div>
+          <h3 class="h3">IV sedation</h3>
+          <p>Dr. Bennett is board certified to administer it himself, so dental anxiety doesn't have to be the reason you never start.</p>
+        </article>
+      </div>
+    </div>
+  </section>
+
   <!-- ============ OFFER PLACEHOLDER ============ -->
   <section class="section band-base" style="--band-bg:var(--paper)">
     <div class="wrap-narrow">
@@ -321,6 +475,10 @@
         <div class="faq__item">
           <h3><button class="faq__q" aria-controls="vq3" aria-expanded="false">Is enamel really removed?</button></h3>
           <div class="faq__a" id="vq3"><div><p>Yes — a small portion from the front of each treated tooth, so the veneer sits flush rather than proud. It is not reversible, which is why the candidacy checks above happen first.</p></div></div>
+        </div>
+        <div class="faq__item">
+          <h3><button class="faq__q" aria-controls="vq6" aria-expanded="false">What's the difference between porcelain veneers and composite bonding?</button></h3>
+          <div class="faq__a" id="vq6"><div><p>Bonding is resin shaped onto the tooth in the chair — quicker and cheaper, but more opaque, more prone to staining, and shorter-lived. Porcelain is made to fit you and holds its colour. For a single small chip, bonding is often the sensible answer; for a smile you want to stop thinking about, it usually isn't. See the comparison above.</p></div></div>
         </div>
         <div class="faq__item">
           <h3><button class="faq__q" aria-controls="vq4" aria-expanded="false">What if I want straighter teeth, not covered ones?</button></h3>

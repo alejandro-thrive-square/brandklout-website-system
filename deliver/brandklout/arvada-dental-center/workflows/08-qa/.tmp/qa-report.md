@@ -1,7 +1,7 @@
 # QA Report — Arvada Dental Center landing pages
 
 **Asana parent task**: `1217040406855586`
-**Run**: 2026-08-06 · `node qa.mjs` · **299/299 checks passed** (stable across three consecutive runs)
+**Run**: 2026-08-06 · `node qa.mjs` · **311/311 checks passed** (stable across repeated runs)
 Machine-readable results: [`qa-results.json`](./qa-results.json)
 
 ## Why this is a driven test, not a screenshot review
@@ -42,6 +42,8 @@ Every page is scanned for claims the client's own material would contradict. All
 | `CareCredit`, `Sunbit`, `PatientFi`, `LendingClub`, `Proceed Finance`, `Cherry` | **named finance partners were assumed, not confirmed** |
 | "without affecting your credit", "soft credit check", "no credit check" | a regulated consumer-finance claim riding on the unconfirmed lender list |
 | "before and after", "actual patient", "real patient results" | **the client's before/after photos are stock placeholders, not consented patient photography** |
+| `$105/mo`, `$185/mo`, `$230/mo`, "10+ lending partners" | the previous vendor's unverified monthly financing figures |
+| `images.unsplash.com` | the vendor used Unsplash photos as fake before/after patient cases |
 
 ## Defects found and fixed
 
@@ -77,7 +79,7 @@ rights are now Open Question 11.
 Nothing on any page is captioned or framed as a patient, a result, or a before/after — which is what
 kept this from becoming a live problem rather than a documentation one.
 
-## Two false positives in the harness, worth recording
+## Three harness bugs, worth recording
 
 Three harness bugs produced false failures. Recording them because each is a general trap:
 

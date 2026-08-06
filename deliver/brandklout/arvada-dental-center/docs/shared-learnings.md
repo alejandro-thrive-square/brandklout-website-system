@@ -114,10 +114,42 @@ These came up on Arvada but are almost certainly batch-wide:
    alongside their main number.
 2. **Where form submissions post** — no GoHighLevel endpoint, form ID or location ID has been
    supplied for any client.
-3. **The Asana attachments** ("originals from the other Ad company") have never been downloaded for
-   any client. `get_attachments` is available in the MCP tool set.
+3. **The Asana attachments** ("originals from the other Ad company"). Arvada's arrived 2026-08-06 in
+   `01-content-intake/.tmp/asana-context/`. **Get yours, and read the README first** — Arvada's
+   admitted in writing that the rating, the before/after photos and the finance partner names in
+   the delivered page were all placeholders. See item 8 below.
 4. **Check the client's own site for a published offer before assuming there isn't one.** Arvada's
    was on a page not linked from the main navigation.
+
+## 8. The previous vendor's pages contain placeholders presented as facts
+
+**This is the single most important thing on this page for the other clients.** Arvada's Asana
+attachment (`index_1.html`, a veneers landing page from the previous ad company) ships with a
+README that admits, in writing, that three of its most prominent "facts" were invented:
+
+- **"I used 4.8★ / 1,000+ reviews as a defensible placeholder."** The rating is also baked into
+  their JSON-LD as an `aggregateRating` — fabricated review markup, which is a Google
+  structured-data policy violation and can cost a practice its rich results.
+- **"the before/after slider currently uses stock placeholder images."** Six Unsplash URLs, shown
+  as patient cases.
+- **"I referenced CareCredit/Sunbit as common industry examples per your brief."** Invented lender
+  names, alongside unverified $105/$185/$230 monthly figures.
+
+If your client has an equivalent attachment, **assume the same and check its README before copying
+anything numeric out of it.** Ratings, review counts, prices, monthly payments, partner names,
+success rates and before/after imagery are all suspect by default.
+
+Two general rules that fall out of this:
+
+1. **A star rating on an individual quote is a claim too.** Ours were inferred, not sourced, so all
+   star glyphs came off — not just the aggregate. Quote + name + "Google review" is defensible;
+   quote + name + five stars is not.
+2. **Never ship `aggregateRating` without a verified figure and its source.** It is the one piece of
+   fabricated content that carries a search-engine penalty on top of the credibility problem.
+
+`08-qa/.tmp/qa.mjs` now fails the build on any of it — ratings, star language, lender names,
+soft-pull credit claims, before/after language, the vendor's monthly figures, and Unsplash URLs.
+Copy that `FORBIDDEN` list into your client's QA run.
 
 ## Version Control
 

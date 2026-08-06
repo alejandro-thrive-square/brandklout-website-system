@@ -391,6 +391,13 @@ const FORBIDDEN = [
     why: "before/after imagery — the client's are stock placeholders, not consented patient photos" },
   { re: /actual patient|real patient results?|patient photo/i,
     why: "presenting imagery as a real patient result" },
+  // From the previous vendor's index_1.html (Asana attachment 1217133289235647). Its own
+  // README admits the site says only "10+ lending partners" with no named brands, so these
+  // monthly figures are unverified in the same way the lender names were.
+  { re: /\$105\s*\/?\s*mo|\$185\s*\/?\s*mo|\$230\s*\/?\s*mo|\$105 per month|10\+ lending partners/i,
+    why: "the vendor's unverified monthly financing figures" },
+  { re: /images\.unsplash\.com|unsplash/i,
+    why: "stock photography — the vendor used Unsplash images as fake before/after patient photos" },
 ];
 for (const p of PAGES) {
   const html = fs.readFileSync(path.join(design, p.slug, "index.html"), "utf8");
