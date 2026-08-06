@@ -200,6 +200,23 @@ respected. Verify by driving the page (Chrome CDP or equivalent) and asserting b
 **Test in a focused tab.** Background tabs freeze transitions, IntersectionObserver, and timers,
 so a backgrounded check will report broken animation that is actually fine.
 
+### The static gate — `journey-audit.mjs`
+
+Run before claiming a page is done:
+
+```
+node deliver/brandklout/scripts/journey-audit.mjs <page-dir> [...]
+node deliver/brandklout/scripts/journey-audit.mjs --all      # from the orchestration checkout
+```
+
+It resolves linked CSS/JS before counting — a body-only grep reports a false zero when the motion
+layer lives in a shared external file — and it scores chapters, pins, scrubs, GSAP usage, band-named
+sections and reduced-motion guards.
+
+Passing it is **necessary, not sufficient**: it catches the architectural failure, which is visible
+in source, and cannot tell you whether a scrub actually scrubs. The focused-tab scrub proof and the
+screenshot pass are still required. Baseline on 2026-08-06: **0 / 13 pages passed.**
+
 ## Responsive QA — screenshots, every page, every breakpoint
 
 Separate from motion verification, and it needs the opposite tool. **Screenshots are the right
