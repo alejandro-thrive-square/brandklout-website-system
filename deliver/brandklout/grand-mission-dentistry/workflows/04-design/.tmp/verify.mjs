@@ -290,8 +290,15 @@ const SCROLL = (y) => `(async () => {
   return Math.round(window.scrollY);
 })()`
 
+/* `+ 0` guards negative zero. A perfectly held pin sits a hair above the
+   viewport top (top = -0.265625); Math.round returns -0, which CDP's
+   returnByValue cannot express in JSON — it sends unserializableValue:"-0"
+   with no `value`, so the reading arrives as undefined and Math.abs(undefined)
+   is NaN. The "holds the viewport" check then fails exactly when the pin is
+   behaving perfectly. This currently passes only because these pins happen to
+   round to +0; a fraction of a pixel of layout drift would flip it. */
 const RECT_TOP = (sel) =>
-  `Math.round(document.querySelector(${JSON.stringify(sel)}).getBoundingClientRect().top)`
+  `Math.round(document.querySelector(${JSON.stringify(sel)}).getBoundingClientRect().top) + 0`
 
 async function load(send, slug, { reduced = false, width = 1440, height = 1000 } = {}) {
   /* Tear the previous page down BEFORE anything else, emulation included.

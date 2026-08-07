@@ -217,14 +217,88 @@ anywhere on the site). Flow:
    and the Data API cannot set that flag (settings expose only domId/visibility/code).
    Install behaviour JS additionally as a **registered page script**
    (`register_inline_script`, ≤2000 chars raw JS, then `set_page_scripts` — NOT
-   `add_page_script`, which 404s when the page has no code block yet; and NOT
-   `set_page_freeform_code`, which returns 406 for any content containing a `<script>`
-   tag). Double-init-guard the IIFEs so embed + page-script copies coexist safely.
+   `add_page_script`, which 404s when the page has no code block yet).
+   Double-init-guard the IIFEs so embed + page-script copies coexist safely.
+
+   > [!WARNING]
+   > This step previously claimed `set_page_freeform_code` **returns 406 for any content
+   > containing a `<script>` tag**. That is wrong, and it steered a build toward the
+   > 2000-char `register_inline_script` route for no reason. Re-measured on Grand Mission
+   > Dentistry 2026-08-07: a footer freeform block containing `<script>` is accepted
+   > normally. See the measured-ceilings table in section C-alt2 below — freeform is the
+   > right home for a large JS runtime.
 4. WHTML's image URL→asset lookup misses the site's own CDN URLs — images insert
    **unmanaged** exactly like a clipboard paste. Run the standard `set_image_asset`
    binding pass (C.4) afterwards.
 5. The MCP token may lack publish permission (`publish_site` → 403); publish from the
-   Designer and verify per section E.
+   Designer and verify per section E. (On Brandklout's workspace the token **does** have
+   it — `publish_site` with `publishToWebflowSubdomain: true` and `customDomains: []`
+   worked headlessly 2026-08-07 and left the live domain untouched.)
+
+### C-alt2. Verbatim build — one HtmlEmbed per page, CSS and JS in page custom code
+
+Proven on Grand Mission Dentistry 2026-08-07: three GSAP-pinned journey landing pages
+built onto a **live 303-page production site** with **zero new Webflow classes created**.
+
+**Choose this over a class conversion when the design's CSS cannot be expressed as Webflow
+classes.** That is a question of expressiveness, not size, and it is decided by measuring —
+not by how big the stylesheet is. Disqualifiers, any one of which is enough:
+
+| Measure it | Why a class conversion loses |
+| :--- | :--- |
+| media queries that are not 991 / 767 / 479 / 1280 / 1440 / 1920 | `data_whtml_builder` **hard-errors**: "Unsupported media query … Use exactly one of …". Webflow has six breakpoints and no way to add a seventh. |
+| `@keyframes` | not a class property |
+| `clamp()` / `calc()` font sizes | canvas is fine, but the Designer style panel cannot parse CSS functions and shows `0px` |
+| `[data-*]`, `.state .child`, `::before` chains | not class properties |
+| `:root` custom-property token layers | not class properties |
+| `prefers-reduced-motion` blocks | not a Webflow breakpoint |
+
+Grand Mission measured 35 media queries (only 4 canonical — 759px was the pin on/off line),
+4 `@keyframes`, 43 `clamp()`, 86 state/attribute selectors. Converting would have shipped
+pages that render and are dead.
+
+**Measured API ceilings** (2026-08-07, paid plan — all three previously documented wrong):
+
+| Surface | Real limit | Note |
+| :--- | ---: | :--- |
+| `set_page_freeform_code` | **50,000 chars per block** | head AND footer, so 100k/page. `<script>` and `<style>` both accepted. |
+| HtmlEmbed `code` | **50,000 chars** | 10,000 is the *Designer UI* limit, not the API's. |
+| `register_inline_script` | 2,000 chars | genuinely too small for a runtime; ignore it. |
+
+Flow:
+
+1. **Markup** — one HtmlEmbed as the page's only body child, holding the design's entire
+   `<body>` verbatim minus its `<script>` tags. Webflow emits embed code untouched, so
+   forms stay forms (WHTML otherwise rewrites `<form>` into FormWrapper/FormForm and
+   injects its own success/error blocks), tables stay tables, and class attributes survive.
+   Compact to fit 50k by dropping HTML comments and per-line indentation — safe only when
+   nothing preserves whitespace (no `<pre>`, empty `<textarea>`, no `white-space: pre*`).
+2. **CSS** — `kit.css` + the page's `styles.css`, minified with **esbuild** (it preserves
+   every media query, `@keyframes`, custom property and `clamp()`/`calc()` exactly, and
+   merges only byte-identical duplicates), into the **head** freeform block. ~58KB of
+   source minified to ~35KB here.
+3. **JS** — GSAP from CDN (`cdn.jsdelivr.net/npm/gsap@3.13.0/dist/*.min.js`; all plugins
+   free since 3.13, and these files are byte-identical to the usual vendored copies), then
+   `wz.js`, `page.js`, `app.js` in **separate `<script>` blocks** in the design's own
+   order, into the **footer** freeform block. Do not concatenate them into one block: that
+   merges three top-level scopes and a single repeated `const` is a SyntaxError that kills
+   the whole bundle silently. Plugins register in the body, never head.
+4. **Assets** — relative `assets/*` paths resolve to nothing on webflow.io. Upload with
+   `create_asset` (MD5 → pre-signed S3 form) and rewrite every reference. Two traps:
+   the MCP layer **camelCases the S3 form fields** but S3 is signed against the AWS names
+   (`xAmzSignature` → `X-Amz-Signature`, `policy` → `Policy`, `contentType` →
+   `Content-Type`, `successActionStatus` → `success_action_status`, `cacheControl` →
+   `cache-control`) — post the camelCase versions and S3 answers a bare 403 AccessDenied;
+   and scan **every attribute**, not just `src`/`href`, because runtime-swapped media hides
+   in `data-*` (5 of 32 images on this build).
+5. **Trade-off, stated plainly.** The page is not Designer-editable — its styling lives in
+   a page-level `<style>`. On three ad landing pages whose motion layer was never
+   Designer-editable anyway, that costs nothing; and in exchange **no Webflow style is
+   created**, so none of the site's existing classes can be forked or restyled. On a live
+   production site with 1,500 classes that is the safer trade. Verify it: diff the site's
+   style-name set before and after (`get_styles query:"all"`) and expect **ADDED: none**.
+6. Expect **429 too_many_requests** partway through a multi-page run — several of these
+   actions do internal reads. Retry with backoff; every step is idempotent.
 
 ### D. Custom code
 
@@ -253,7 +327,7 @@ anywhere on the site). Flow:
 > Webflow classes — class styles travel with in-Designer copy/paste anyway;
 > the `data-embed` CSS carries only what classes can't: JS-applied state
 > rules, ancestor-hover chains, keyframes, and exotic properties
-> (`mask-image`, line-clamp). Keep each embed under Webflow's 10,000-char
+> (`mask-image`, line-clamp). Keep each embed under the Designer's 10,000-char
 > HtmlEmbed limit. Regression test:
 > `tests/test_html_to_webflow.py::test_data_embed_style_script_ride_as_html_embeds`.
 
