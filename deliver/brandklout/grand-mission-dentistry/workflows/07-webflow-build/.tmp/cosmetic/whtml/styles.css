@@ -338,7 +338,7 @@
   .cos-p.lede { font-size: 17.91px; }
   .cos-p.lede { font-size: 21.6px; }
   .proof__rail { grid-row-gap: 22.4px; grid-column-gap: 22.4px; padding-inline: 57.6px; }
-  .proof__rail { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; width: auto; transform: none !important; grid-row-gap: 14.08px; grid-column-gap: 14.08px; padding-inline: 35.2px; }
+  .proof__rail { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; padding-bottom: 0.5rem; width: auto; grid-row-gap: 14.08px; grid-column-gap: 14.08px; padding-inline: 35.2px; }
   .cos-disclaimer { font-size: 12.87px; }
   .cos-disclaimer { font-size: 15.52px; }
   .badge { font-size: 13.67px; }

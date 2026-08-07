@@ -158,6 +158,30 @@ def clean_decls(decls: str) -> str:
     return d.replace("<", "").replace(">", "")
 
 
+_RULE = re.compile(r"^(?P<sel>[^{]+)\{(?P<body>.*)\}\s*$", re.S)
+
+
+def split_important(rule: str):
+    """Split an emitted `sel { … }` rule into (rule-without-important, rule-of-
+    important-only). Either half is `None` when it would be empty.
+
+    `!important` cannot be sent to data_whtml_builder at all — it does not warn
+    and skip the declaration, it errors the whole insert — and a Webflow style
+    cannot carry it either, so the only place it can survive is page head code.
+    """
+    m = _RULE.match(rule.strip())
+    if not m or "!important" not in m.group("body"):
+        return rule, None
+    sel = m.group("sel").strip()
+    plain, bang = [], []
+    for decl in m.group("body").split(";"):
+        if not decl.strip():
+            continue
+        (bang if "!important" in decl else plain).append(decl.strip())
+    return (f"{sel} {{ {'; '.join(plain)}; }}" if plain else None,
+            f"{sel}{{{';'.join(bang)}}}")
+
+
 # ---------------------------------------------------------------------------
 # payload loading
 # ---------------------------------------------------------------------------
@@ -458,6 +482,23 @@ def emit_css(st: Styles, prefix: str, used=None, thresholds=None, resolve_px=Non
             suffix = PSEUDO.get(ps, "") if ps else ""
             blocks[bp].append(f"{sel}{suffix} {{ {clean_decls(decls)} }}")
 
+    # `!important` is rejected outright by data_whtml_builder ("!important
+    # declarations are not allowed"), and one such declaration aborts the whole
+    # page insert. Webflow has no way to express it as a style anyway, so lift
+    # every important declaration out of the class CSS and re-emit it verbatim,
+    # inside its own media query, in the page's head custom code — which is
+    # where a rule that has to beat GSAP's inline transform belongs.
+    important = OrderedDict((k, []) for k in MEDIA)
+    for key, rules in blocks.items():
+        kept = []
+        for rule in rules:
+            plain, bang = split_important(rule)
+            if bang:
+                important[key].append(bang)
+            if plain:
+                kept.append(plain)
+        blocks[key] = kept
+
     out = []
     for key, rules in blocks.items():
         if not rules:
@@ -473,6 +514,14 @@ def emit_css(st: Styles, prefix: str, used=None, thresholds=None, resolve_px=Non
               f"`padding-bottom: 0` override(s) from the --bar-h carry "
               f"(bases: {', '.join(sorted(set(bar_fix)))})", file=sys.stderr)
     head_css = ("@media (max-width:1439px){" + "".join(tier_1439) + "}\n") if tier_1439 else ""
+    for key, rules in important.items():
+        if not rules:
+            continue
+        body = "".join(rules)
+        head_css += (body if MEDIA[key] is None
+                     else MEDIA[key] + "{" + body + "}") + "\n"
+        print(f"[payload_to_whtml] lifted {len(rules)} !important rule(s) out of "
+              f"`{key}` into the page head", file=sys.stderr)
     return "\n".join(out) + "\n", unresolved, head_css
 
 

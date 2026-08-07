@@ -39,8 +39,17 @@ for (const [name, pageId] of Object.entries(PAGES)) {
     ],
     `Backing up the ${name} LP page's existing custom code before installing the pasteable-component shared layer, so the superseded embed build stays restorable.`,
   );
-  fs.writeFileSync(`page-code-backup-${name}.jsonl`, backup, 'utf8');
-  console.log(`${name}: backed up existing page code (${backup.length} bytes) -> page-code-backup-${name}.jsonl`);
+  /* NEVER overwrite an existing backup. This script is re-runnable — all three
+     blocks were later found EMPTY on the live site despite a verified install,
+     cause unknown — and a second run would otherwise replace 80KB of the
+     superseded embed build with the empty string it just read back. */
+  const bak = `page-code-backup-${name}.jsonl`;
+  if (fs.existsSync(bak)) {
+    console.log(`${name}: keeping the existing ${bak} (${fs.statSync(bak).size} bytes) — not overwriting`);
+  } else {
+    fs.writeFileSync(bak, backup, 'utf8');
+    console.log(`${name}: backed up existing page code (${backup.length} bytes) -> ${bak}`);
+  }
 
   // 2. install the shared layer (replaces the old blocks)
   await call(
