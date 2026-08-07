@@ -125,6 +125,41 @@ Hand the new session a written brief it can act on alone — for this system tha
 
 For a genuine handoff, deliver the brief and stop monitoring. Use the `orchestration` skill and `orca orchestration ...` only when the user actually asked to supervise, wait for results, or coordinate a task DAG.
 
+## Client Worktrees and Directive Propagation
+
+Use the root `main` worktree as the **orchestration and canonical-process worktree**. Perform client
+delivery in one long-lived Orca worktree per client, with the same client slug in the branch,
+worktree path, and Orca display name. Isolation is valuable, but it is also a version boundary:
+commits and untracked files in one worktree do not appear automatically in another.
+
+Before dispatching a new client task:
+
+1. Finish and commit any reusable process or standard changes in the root worktree. A worktree made
+   from `origin/main` does not include unpushed local `main` commits.
+2. Require the client worktree to be clean, or make a named checkpoint commit. Do not merge a new
+   standard into a dirty, half-finished run.
+3. Merge the current local `main` into the client branch, resolve conflicts as a union of the client
+   adaptation and the canonical correction, and record the resulting baseline commit in the client
+   `docs/project-overview.md` and `.claude/RUNBOOK.md`.
+4. Read the canonical directive under `deliver/process/` first, then the client workflow instance
+   and its documented deviations. A client workflow copied earlier is a snapshot, not a live link.
+5. Confirm that every required reference and lightweight tool exists inside the active worktree.
+   Never make an operational brief depend on an untracked absolute path in another checkout. Commit
+   lightweight reference code/docs; sync ignored media into the active worktree through the normal
+   asset workflow.
+
+When a client run discovers a reusable improvement, keep the client-specific fix on the client
+branch and promote the generalized rule/tool to `deliver/process/` in a separate canonical commit.
+Merge that commit into sibling clients only at a task boundary, then re-run their preflight gates.
+Do not edit `deliver/process/` opportunistically inside several client worktrees: that creates
+multiple competing canonical versions and makes the eventual merge decide the standard by accident.
+
+Pin each dispatched brief to the baseline commit it was written against. A new standard should not
+interrupt an active run unless it fixes correctness, safety, data loss, or an acceptance-blocking
+defect. Otherwise finish the bounded run, checkpoint it, merge the new baseline, and start the next
+run with a fresh brief. This preserves learning between runs without forcing agents to repeatedly
+rebuild work already in flight.
+
 ## Relationship to This Repo
 
 - Orca operates on the **same local git checkout** all other tooling uses; commits it makes are normal git commits that flow through the existing [DEPLOYMENT.md](./DEPLOYMENT.md) / [HERMES.md](./HERMES.md) sync model.

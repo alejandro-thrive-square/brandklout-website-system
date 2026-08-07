@@ -52,7 +52,34 @@ The canonical post-contract delivery template library lives in `deliver/process/
 - Offer-specific and optional modules covered: Figma Review & Build Planning, Migration Audit & Plan, Content Export & Import, Migration SEO & Redirects, Improvement Intake & Audit, Vercel Deployment, and AI Site Build & Airtable.
 - New client projects are instantiated by manually copying routed workflow templates from `deliver/process/` into `deliver/[client-name]/workflows/`. No automated executor for this initialization exists yet.
 
+### 3.2 Versioned Workflow Instances
+
+Client workflow folders are **versioned instances**, not live mirrors of `deliver/process/`.
+Copying a module makes the client self-contained, but later canonical corrections do not cascade
+into that copy or into an Orca client worktree automatically.
+
+- `deliver/process/` owns reusable directives, executors, gates, and toolchain logic.
+- `deliver/[client-name]/workflows/` owns client configuration, scoped adaptations, artifacts, and
+  documented deviations from the canonical module.
+- `docs/project-overview.md` must record `process_baseline_commit`, the routed module list, and any
+  intentional module deviations. Update the baseline at each clean task-boundary refresh.
+- Before starting a phase, merge current local `main` into the clean client branch, read the
+  canonical module first, compare it with the client instance, and bring across applicable fixes
+  without overwriting client configuration or artifacts.
+- Promote reusable learning from a client branch into `deliver/process/` as a separate canonical
+  change. Do not leave the only copy of a new rule or tool in one client workflow.
+- Never use untracked files in the root worktree as cross-worktree inputs. Commit lightweight
+  references and sync ignored media into the active client worktree.
+
+Until initialization and refresh executors exist, this comparison and baseline update are manual
+release gates. A client task must not claim it is running the current process without completing
+them.
+
 ## 4. Quality Standards
+- **Authoritative Brand Source**: Inventory and rank all client/partner brand sources, including
+  embeds and linked assets, before choosing tokens. Unresolved authority conflicts block batch work.
+- **Canary Before Multiplication**: Approve one representative page or shared shell/complex-section
+  canary at mobile and desktop before applying the system to the remaining page set.
 - **Pixel Perfection**: Final builds must match the approved design source 1:1, whether that source is a Claude Design HTML/CSS/JS package or a Figma design.
 - **CMS First**: Dynamic content must use a scoped, maintainable content structure rather than hardcoded repeated records. Webflow routes use Webflow CMS; AI Vercel routes may use Airtable through server-side content access when that is the signed scope.
 - **Responsiveness**: Mandatory testing on Mobile (320px) to Desktop (1920px+).
@@ -65,7 +92,8 @@ The canonical post-contract delivery template library lives in `deliver/process/
 - Any client project with negotiated different timing (rush delivery, parallel teams, paused weeks) must be flagged in the Sales handoff package and noted in `project-overview.md`.
 
 ## 5. Active Workflows
-- [Scrape, SEO & Rewrite (Webflow)](./company-1/workflows/scrape-seo-rewrite-webflow/scrape-seo-rewrite-webflow.md)
+- [Brandklout Dispatch](./brandklout/docs/ASANA-DISPATCH.md)
+- [Brandklout Design Standard](./brandklout/docs/DESIGN-STANDARD.md)
 
 ## Version Control
 - This microsystem is part of a **GitHub repository**. All changes must follow the version control rules defined in [SYSTEM_RULES.md - Section 4](../SYSTEM_RULES.md).

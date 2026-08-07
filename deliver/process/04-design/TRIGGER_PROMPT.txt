@@ -1,131 +1,43 @@
-You are executing the 04-Design workflow for client: [CLIENT_NAME].
+Execute the 04-Design workflow for client [CLIENT_NAME].
 
-## Context
-- Client folder: deliver/[CLIENT_NAME]/
-- Project overview: deliver/[CLIENT_NAME]/docs/project-overview.md
-- Wireframes: deliver/[CLIENT_NAME]/workflows/02-wireframe/.tmp/final-wireframes/
-- Graphic resources: deliver/[CLIENT_NAME]/workflows/03-graphic-resources/.tmp/
-- Selected design-system package: deliver/[CLIENT_NAME]/workflows/00-client-delivery-initialization/.tmp/design-system/
-- Output folder: deliver/[CLIENT_NAME]/workflows/04-design/.tmp/
+Preflight:
+1. Confirm the client worktree is clean or checkpointed and contains the current
+   local-main baseline recorded in docs/project-overview.md.
+2. Read the canonical directive:
+   deliver/process/04-design/04-design.md
+3. Read the client project overview, handoff, wireframes, graphic resources,
+   selected design-system package, and any client/partner design standard.
+4. Inventory every authoritative design source, including current public pages,
+   Webflow embeds, Figma, moodboards, guidelines, and reference URLs. Download
+   required assets into the active worktree. Write `.tmp/reference-inventory.md`.
+   Do not infer that a page is empty without inspecting its embeds and linked assets.
+5. Resolve conflicts in source authority before design. If brand identity or
+   reference priority is unclear, stop before building multiple pages.
 
-## Instructions
+Canary:
+6. Create `.tmp/style-direction.md` and `.tmp/design-tokens.json` from the selected
+   authority and initialized design-system package. Install the canonical fluid
+   root before sizing type or spacing.
+7. Build one representative canary page, or the shared shell plus the most complex
+   section. Do not build the remaining page set yet.
+8. Test the canary at 360, 390, 768, 1024, 1440, and 1920. Review screenshots,
+   assert zero mobile overflow, drive interactions in a focused tab, check reduced
+   motion and console state, and compare computed typography/palette/geometry to
+   the selected authority.
+9. Record findings and approval in `.tmp/canary-review.md`. Freeze the accepted
+   tokens, shell, component vocabulary, and interaction runtime for the batch.
 
-Execute the design workflow defined in deliver/process/04-design/04-design.md.
+Batch:
+10. Build the remaining approved pages from the frozen system while preserving
+    real client content, per-page conversion goals, and responsive behavior.
+11. Produce the prototype manifest, final design package, component specification,
+    six-breakpoint screenshots, token audit, and interaction results required by
+    the canonical directive and any client/partner standard.
+12. Gate every page on `node scripts/fluid-root.mjs --check <package>`, mobile
+    overflow, visual review, and live interaction. Passing a structural/static
+    audit is necessary but not sufficient.
+13. Publish the review package only to the approved preview target. Record the
+    review URL and route accepted corrections into 05-design-revisions.
 
-### Phase 1: Style Direction
-
-1. Read the project overview at deliver/[CLIENT_NAME]/docs/project-overview.md. Extract: industry, audience, brand personality, positioning, existing brand assets.
-
-2. Read approved wireframes from deliver/[CLIENT_NAME]/workflows/02-wireframe/.tmp/final-wireframes/. Note: page count, page types, section structure per page, content hierarchy.
-
-3. Read graphic resources from deliver/[CLIENT_NAME]/workflows/03-graphic-resources/.tmp/. Note: logos, brand colors, fonts, imagery style, any mood board or style references.
-
-4. Open the initialized selected design-system package in deliver/[CLIENT_NAME]/workflows/00-client-delivery-initialization/.tmp/design-system/.
-   - modern-saas: SaaS, developer tools, fintech
-   - corporate: Enterprise, consulting, professional services
-   - creative-agency: Creative studios, agencies, portfolio brands
-   - minimal-portfolio: Designers, photographers, personal brands
-   - bold-startup: Startups, consumer apps, modern brands
-   - luxury: High-end brands, fashion, premium products
-
-5. Read the matching token file from deliver/process/design-system-library/foundations/tokens/ as a starting point.
-
-6. If the client brief strongly matches a known brand style, read the corresponding file in deliver/process/design-system-library/design-systems/ for deeper philosophy guidance.
-
-7. Create a custom token JSON by merging:
-   - Base token structure from the selected style
-   - Client's actual brand colors (replace primary/secondary/accent)
-   - Client's fonts (replace font-primary/font-secondary)
-   - Adjust spacing/radius/shadows to match the client's brand personality
-
-8. Write outputs:
-   - deliver/[CLIENT_NAME]/workflows/04-design/.tmp/style-direction.md (rationale, selected style, references used, deviations from base)
-   - deliver/[CLIENT_NAME]/workflows/04-design/.tmp/design-tokens.json (custom token set)
-
-### Phase 2: HTML/CSS/JS Prototype Generation
-
-9. For each page from the wireframes, compose a prototype HTML file:
-
-   a. Open deliver/process/design-system-library/sections/SECTION_INDEX.md. For each section in the wireframe, find the closest matching section pattern.
-
-   b. Read the matching section HTML files from deliver/process/design-system-library/sections/.
-
-   c. Assemble sections into a complete page:
-      - Apply the custom design-tokens.json as CSS custom properties in the <style> block
-      - Replace placeholder content with client content (from wireframes/project overview)
-      - Replace placeholder images with client images (from graphic resources) or appropriate picsum.photos URLs
-      - Integrate client logo and brand elements
-      - Ensure all sections flow together cohesively
-
-   d. Add animations:
-      - Open deliver/process/design-system-library/animations/ANIMATION_INDEX.md
-      - Select appropriate animation modules for the style direction
-      - Include CDN dependencies (GSAP, ScrollTrigger, Lottie as needed)
-      - Add data attributes to elements: data-reveal, data-text-split, data-parallax, etc.
-      - Include the animation JS inline or reference from deliver/process/design-system-library/animations/
-
-   e. Ensure responsive design:
-      - Test at 1440px, 1024px, 768px, 375px breakpoints
-      - Adjust grid layouts, font sizes, spacing, and visibility per breakpoint
-      - Mobile navigation pattern (hamburger menu)
-
-   f. Each prototype must be a self-contained HTML file (inline <style> and <script>).
-
-10. Create a prototype manifest:
-    ```json
-    {
-      "client": "[CLIENT_NAME]",
-      "style_base": "modern-saas",
-      "pages": [
-        {
-          "file": "home.html",
-          "wireframe_ref": "wireframe-home.pdf",
-          "sections": ["hero-split-image", "features-bento-grid", "testimonials-carousel", "cta-full-width-gradient", "footer-mega-columns"],
-          "animations": ["scroll-reveal-gsap", "counter-animation"],
-          "breakpoints": ["1440", "1024", "768", "375"]
-        }
-      ]
-    }
-    ```
-
-11. Write outputs:
-    - deliver/[CLIENT_NAME]/workflows/04-design/.tmp/prototypes/*.html
-    - deliver/[CLIENT_NAME]/workflows/04-design/.tmp/prototype-manifest.json
-
-### Phase 3: Figma Conversion
-
-12. For each prototype HTML file:
-    - Document conversion method: html.to.design plugin OR Figma MCP API
-    - If using Figma MCP: call the appropriate Figma MCP tools to create the design
-    - If using html.to.design: note that the user will need to open the HTML in a browser and use the plugin manually
-
-13. Import design tokens as Figma Variables from design-tokens.json.
-
-14. Write output:
-    - deliver/[CLIENT_NAME]/workflows/04-design/.tmp/figma-conversion-log.json
-
-### Phase 4: Refinement & Approval
-
-15. Document component specifications:
-    - List every unique component with its states (default, hover, active, disabled, loading)
-    - Note CMS-bound content regions
-    - Document responsive behavior per component
-
-16. Run token-consistency audit:
-    - Scan all prototype HTML files for hardcoded color/font/spacing values
-    - Flag any value that doesn't reference a CSS custom property from the token set
-
-17. Write outputs:
-    - deliver/[CLIENT_NAME]/workflows/04-design/.tmp/component-spec.json
-    - deliver/[CLIENT_NAME]/workflows/04-design/.tmp/screenshots/ (if screenshot capture is available)
-    - deliver/[CLIENT_NAME]/workflows/04-design/.tmp/token-violations.json
-
-18. Present designs to client. After approval, write:
-    - deliver/[CLIENT_NAME]/docs/design-approval.md
-
-## Important Rules
-- Treat the initialized design-system package as the project seed. Write all project-specific outputs to deliver/[CLIENT_NAME]/workflows/04-design/.tmp/.
-- ALL outputs go to deliver/[CLIENT_NAME]/workflows/04-design/.tmp/ or deliver/[CLIENT_NAME]/docs/.
-- Every HTML prototype must be self-contained and browser-previewable.
-- Respect the client's existing brand. The library provides structure, not identity.
-- When in doubt about style direction, present 2-3 options in style-direction.md and ask for client input.
+All project-specific outputs belong in:
+deliver/[CLIENT_NAME]/workflows/04-design/.tmp/

@@ -5,10 +5,12 @@ decision 2026-08-07). Headless builds (verbatim-embed and `whtml_builder`
 element builds) produced local-vs-Webflow discrepancies and layout regressions
 when patched, and their custom code sits in page settings where it blocks
 moving sections around. The reference for "done right" is the **Dr. Nahlah
-site** (`6a6b84cc7fe55ddeabc0b314`) — inspect it over the Webflow MCP and in
-`deliver/brandklout/dr-nahlah/workflows/07-webflow-build/.tmp/` (in `main`'s
-working tree; the folder is untracked, so use the absolute path from a
-worktree).
+site** (`6a6b84cc7fe55ddeabc0b314`) — inspect the published build over the Webflow
+MCP. The current local Dr. Nahlah build package is not yet a portable canonical
+reference because parts of it are untracked. Never make a client run depend on
+an absolute path into the root or a sibling worktree. Commit lightweight
+reference code/docs to `deliver/process/` and sync required ignored media into
+the active client worktree before execution.
 
 ## The pipeline (end to end)
 
@@ -70,7 +72,7 @@ python html_to_webflow_wholepage.py --html <design>/index.html --css <design>/st
        --wrap --page-prefix <pfx> --out .tmp/<page>
 # 2. Resolve clamp()/fluid type into per-breakpoint style variants
 #    (webflow-clientfirst resolve_fluid + resolve_wholepage.mjs — see the
-#    Dr. Nahlah 07-webflow-build for the working copies; Webflow's ladder is
+#    canonical toolchain/reference fixture for the working copies; Webflow's ladder is
 #    large=1280, xl=1440, xxl=1920, and bands evaluate at their MIDPOINT)
 # 3. Upload + rebind assets (upload_assets.mjs / rebind_assets.mjs) so every
 #    image has a CDN hostedUrl AND data.img.id AND a payload.assets[] entry
@@ -85,8 +87,9 @@ python make_paste_page.py --payload .tmp/components/<page>/<nn>-<id>/final.json 
 If the design keeps its JS in shared files (`app.js` / `page.js`), it must be
 **re-authored into per-section `WZ.add` embeds** placed inside each section
 before conversion — that is design work, not converter work. Only the
-page-generic kit and the bootstrap stay shared. Dr. Nahlah's
-`04-design/.tmp/site-src/pages/home.body.html` is the model.
+page-generic kit and the bootstrap stay shared. Inspect the Dr. Nahlah live
+implementation as the behavioral model until its lightweight fixture is
+committed into `deliver/process/`.
 
 `EMIT_SHELL=1` on the extractor also emits a `00-page-shell` component (nav +
 drawer + smooth wrapper + empty `<main>` + footer) — paste it first on a NEW

@@ -34,8 +34,13 @@ This is currently a documented manual structure process. The Python executor and
 12. Store later incoming files, generated files, extracted media, design outputs, and final workflow assets inside the `.tmp/` folder of the workflow that receives, produces, or uses them.
 13. Update the copied workflow `.md` files only when client-specific scope, skipped modules, adapted behavior, asset locations, or open questions need to be documented.
 14. Add `deliver/[client-name]/docs/project-overview.md` with the approved scope, selected offer, routed workflow list, timeline, setup items, selected design-system reference when applicable, workflow-owned asset locations, and open questions.
+    - Record the current Git commit as `process_baseline_commit`. This identifies the canonical
+      `deliver/process/` version from which the client workflow instances were copied.
     - **Estimated duration**: compute from the handoff `pages_or_templates` count using the per-page formula in [PRICING_TIMELINE_RULES.md](../../../sales/PRICING_TIMELINE_RULES.md): `pages × 2 days` for full-build offers, `pages × 1 day` for Figma-to-Webflow. Surface this as the `timeline` field in `project-overview.md`. If the handoff `timeline` differs from the formula output, record both and flag the deviation in `open_questions`.
 15. If any scoped workflow uses MCPs, add `deliver/[client-name]/docs/mcp-access.md` using [MCP Access Model](../../../mcp-servers/ACCESS_MODEL.md) and the relevant profile from `mcp-servers/profiles/`.
+16. Before dispatching the first phase, verify that the client branch contains the recorded baseline,
+    every required lightweight reference exists in that worktree, and ignored media has been synced
+    there. Do not reference untracked files in the root checkout by absolute path.
 
 ## Routing Rules
 - `deliver/process/` is the canonical template library.
@@ -44,6 +49,11 @@ This is currently a documented manual structure process. The Python executor and
 - Offer execution order is defined by `deliver/process/OFFER_ROUTING.md`.
 - Skipped modules should be noted in `project-overview.md` when their absence affects client expectations or delivery scope.
 - Client projects that use MCPs must include `docs/mcp-access.md`; agents must read it before using any MCP in the client folder.
+- Copied workflows are versioned snapshots. Before each phase, refresh the clean client branch from
+  local `main`, compare the canonical module with the client instance, apply relevant corrections
+  without overwriting client-specific configuration, and update `process_baseline_commit`.
+- Reusable improvements discovered during client execution must be promoted to `deliver/process/`
+  in a separate canonical commit before they are distributed to other clients.
 
 ## Design-System Library
 - **Source of truth**: `deliver/process/design-system-library/`.

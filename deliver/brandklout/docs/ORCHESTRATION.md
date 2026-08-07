@@ -13,6 +13,7 @@ Webzite Agentic Workflow  (main, refs/heads/main)   <-- orchestration only
 ├── bk-grand-mission        worktree   -> deliver/brandklout/grand-mission-dentistry/
 ├── bk-arvada               worktree   -> deliver/brandklout/arvada-dental-center/
 ├── bk-mason-park           worktree   -> deliver/brandklout/mason-park/
+├── bk-dr-nahlah            worktree   -> deliver/brandklout/dr-nahlah/
 └── bk-stone                worktree   -> deliver/brandklout/stone-dental-implant-center/
 ```
 
@@ -35,6 +36,18 @@ branch and can be reviewed and merged independently.
 
 A client worktree that needs something cross-cutting — a new shared archetype, a platform grant, a
 scope decision — reports it back here rather than deciding alone.
+
+### Propagation is versioned, not live
+
+A client worktree is isolated at a Git commit. It does not see later local `main` commits, changes
+to `deliver/process/`, or untracked root-worktree files until those inputs are deliberately made
+available. Before dispatch, checkpoint a clean client branch, merge current local `main`, record
+`process_baseline_commit` in the project overview and runbook, and confirm the task's references
+exist inside that worktree. Follow [ORCA.md](../../../ORCA.md#client-worktrees-and-directive-propagation).
+
+Reusable client learning is promoted to `deliver/process/` in a separate canonical commit. Merge
+that commit into sibling clients only between bounded runs. Client agents do not edit the canonical
+process opportunistically while also changing their client deliverable.
 
 ## Claude accounts — which profile runs what
 
@@ -92,9 +105,9 @@ orca worktree create --repo id:7b269532-4e7a-4ceb-baa4-707929ee41d3 \
 
 `--no-parent` keeps each client independent rather than stacked on another client's branch.
 
-**Commit the client's starter docs to `main` before creating the worktree.** A git worktree is
-created from a commit, so anything still untracked in `main` will simply not exist in the new
-checkout — the agent would arrive to an empty client folder.
+**Commit the client's starter docs to local `main` before creating the worktree, then verify the
+new worktree contains that commit.** Orca can branch from `origin/main`, which may lag local `main`;
+anything uncommitted or untracked in the orchestration checkout will not exist in the new checkout.
 
 ## Standing brief for every client agent
 
@@ -102,8 +115,9 @@ Every dispatched agent is expected to have read, in this order:
 
 1. `deliver/brandklout/docs/ASANA-DISPATCH.md` — the batch-wide rules, especially how reference
    URLs may be used and where pages get built
-2. `deliver/brandklout/<client>/docs/project-overview.md` — the task manifest
-3. `deliver/brandklout/<client>/docs/mcp-access.md` — what is *not* permitted
+2. The relevant canonical directive under `deliver/process/` and the current baseline commit
+3. `deliver/brandklout/<client>/docs/project-overview.md` — the task manifest and deviations
+4. `deliver/brandklout/<client>/docs/mcp-access.md` — the exact target and what is not permitted
 
 Non-negotiables, repeated here because they are the ones most likely to be skipped under time
 pressure:
@@ -114,20 +128,52 @@ pressure:
   visual design is a failure, and so is shipping a plain templatised page.
 - **Build locally**, at
   `deliver/brandklout/<client>/workflows/04-design/.tmp/<page-slug>/`, and report the full path.
-- **Nothing goes to Webflow yet.** No client has a grant; local approval comes first.
+- **Local approval comes before Webflow.** Use the shared `webflow-brandklout` grant only for the
+  exact site ID in the client's access file, and follow the pasteable-components build standard.
 - **Never invent testimonials, reviews, patient stories, or statistics.** Real practices, real
   content, sourced from the client's own material.
 - **Never write to Asana.** Comments and status changes notify real Brandklout staff.
 - **Stay inside your client folder.** Cross-client changes come back to main.
 - Record the source Asana task GID in every artifact produced.
 
+## Bounded Iteration Loop
+
+Orca schedules sessions; it does not supply shared memory or quality control. Every repeated design
+or build run must therefore operate as a small persisted state machine, not as an open-ended prompt.
+
+Store `iteration-state.json` in the active workflow's `.tmp/` folder with:
+
+- `baseline_commit` and `process_baseline_commit`;
+- approved brand/reference authority and canary artifact;
+- current page/component and the single acceptance transition this run owns;
+- required gates with commands and expected results;
+- attempt count, last failure, next action, and stop reason;
+- files changed and checkpoint commit after a successful transition.
+
+Each fresh session performs exactly one bounded unit: one canary, one page, one component batch, or
+one named failed gate. It reads the state and runbook, verifies the baseline, executes that unit,
+runs its acceptance gates, updates the state, and checkpoints before exiting. It may not silently
+change the design system, delivery method, or target site to make a gate pass.
+
+Stop and return to orchestration when any of these occurs:
+
+- the same acceptance gate fails after two repair attempts;
+- the required fix changes shared architecture, brand authority, approved content, or build method;
+- the worktree is dirty with unrelated work or is missing its recorded baseline/reference inputs;
+- a production mutation, publish, access change, or unresolved client decision is required;
+- automated gates pass but visual review still rejects the direction — revise the canary instead of
+  multiplying the rejected system across more pages.
+
+This loop optimizes for accepted transitions per run. Page count, elapsed sessions, or static-gate
+scores alone are not progress measures.
+
 ## Coordination
 
 - Shared page archetypes (thank-you page, new-patient-special, implants) are tracked in
   [ASANA-DISPATCH.md](./ASANA-DISPATCH.md). An agent that authors a new archetype reports it so the
   other clients reuse rather than reinvent it.
-- Blockers that main must resolve: missing client website URLs, the unretrieved Asana attachments,
-  Webflow grants, and the Stone scope questions.
+- Cross-client blockers, baseline changes, platform access, and scope decisions are resolved in
+  orchestration and then distributed at clean task boundaries.
 - Read a worktree's state with `orca worktree list --json` / `orca terminal list --json`; send
   follow-up work with `orca terminal send`.
 
@@ -136,3 +182,8 @@ pressure:
 One branch per client worktree, merged back to `main` after review. Documentation and lightweight
 `.tmp/` artifacts only — never secrets or binary/media assets. Follows the root-level rules in
 [SYSTEM_RULES.md](../../../SYSTEM_RULES.md).
+
+## Infrastructure
+
+- **Workstation orchestration**: Windows 10/11 with Orca
+- **Deployment host**: Hostinger VPS, Ubuntu 24.04 LTS
