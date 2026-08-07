@@ -89,7 +89,7 @@
      "styleLess": "grid-template-columns: 1fr;"
     },
     "medium": {
-     "styleLess": "grid-template-columns: 1fr;"
+     "styleLess": "grid-template-columns: 1fr 1fr;"
     }
    }
   },
@@ -116,7 +116,17 @@
   "grid--3": {
    "comb": "&",
    "styleLess": "grid-template-columns: 1fr 1fr 1fr;",
-   "variants": {}
+   "variants": {
+    "small": {
+     "styleLess": "grid-template-columns: 1fr;"
+    },
+    "tiny": {
+     "styleLess": "grid-template-columns: 1fr;"
+    },
+    "medium": {
+     "styleLess": "grid-template-columns: 1fr 1fr;"
+    }
+   }
   },
   "head-actions": {
    "comb": "",
@@ -277,11 +287,11 @@
    "comb": "",
    "styleLess": "box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #ffffff; font-family: \"Inter\", \"Segoe UI\", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; text-decoration: none; position: absolute; left: -9999px; top: 0; z-index: 200; background: #26292F; padding-top: 0.75rem; padding-right: 1.25rem; padding-bottom: 0.75rem; padding-left: 1.25rem; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0.875rem; border-bottom-left-radius: 0;",
    "variants": {
-    "small": {
-     "styleLess": "padding-bottom: 0px;"
-    },
     "main_focus": {
      "styleLess": "left: 0;"
+    },
+    "small": {
+     "styleLess": "padding-bottom: 0px;"
     }
    }
   },

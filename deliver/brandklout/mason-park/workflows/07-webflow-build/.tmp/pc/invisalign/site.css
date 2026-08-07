@@ -799,10 +799,24 @@ h3 { font-size: var(--t-h3); }
 .card--flat { box-shadow: none; }
 
 .grid { display: grid; gap: clamp(1rem, 2vw, 1.5rem); grid-template-columns: 1fr; }
-@media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 980px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+/* .grid--3 states its own column count at EVERY width, rather than leaning on
+   .grid below 980. A combo beats its base class at equal specificity in every
+   media query, so a combo that only declares its widest value keeps that value
+   all the way down once the Webflow conversion bakes min-width rules to base —
+   which put three review cards side by side on a 478px phone.
+   Its middle tier is authored at the WEBFLOW-CANONICAL 768/992 widths, not the
+   640/980 the rest of this sheet uses. A three-tier ladder is the one shape the
+   converter cannot express off non-canonical widths: it bakes the widest rule to
+   base and resolves the rest per Webflow breakpoint, and a 640 middle tier falls
+   between `small` (<=767) and `medium` (<=991), so it is dropped and tablets
+   inherit the 1fr source base instead of two columns. Two-tier rules like .grid
+   are unaffected. Match the live site: medium 2col, small/tiny 1col. */
+.grid--3 { grid-template-columns: 1fr; }
+@media (min-width: 768px) { .grid--3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 992px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
 .grid--2 { grid-template-columns: 1fr; }
-@media (min-width: 640px) { .grid--2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 768px) { .grid--2 { grid-template-columns: repeat(2, 1fr); } }
 
 .tile {
   background: var(--card);
@@ -1096,7 +1110,7 @@ button[disabled]:hover { transform: none; box-shadow: none; }
   gap: clamp(1.75rem, 4vw, 2.5rem);
   grid-template-columns: 1fr;
 }
-@media (min-width: 640px) { .foot-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 768px) { .foot-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 980px) { .foot-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
 .site-foot .brand img { filter: brightness(0) invert(1); opacity: 0.92; }
 .site-foot a:hover { color: var(--sand); }

@@ -643,30 +643,40 @@ def _invert_mobile_first(rules: list) -> list:
     nearest of those boundaries. For `min-width: 720px` that is 767, making the
     narrow value apply to 0-767 instead of 0-719 — a 48px band, versus the
     alternative of losing the desktop layout entirely (the footer's 4-column
-    grid, live 2026-07-30)."""
+    grid, live 2026-07-30).
+
+    The re-asserted value is resolved PER TARGET BREAKPOINT, at the widest width
+    that breakpoint covers (991/767/479), against every earlier rule that still
+    applies there — including lower `min-width` tiers. Reading only the original
+    base declaration collapses a THREE-tier ladder: `.grid--3` (1col / 2col from
+    768 / 3col from 992) put 1col back on `medium`, losing the tablet's two
+    columns, because the 768 tier was never considered."""
     inverted: list = []
     for r in rules:
         if r.media or r.breakpoint is not None or not r.min_width:
             continue
         boundary = min(MAXWIDTH_TO_BREAKPOINT.items(),
                        key=lambda kv: abs(kv[0] - r.min_width))[0]
-        targets = [bp for px, bp in MAXWIDTH_TO_BREAKPOINT.items()
+        targets = [(px, bp) for px, bp in MAXWIDTH_TO_BREAKPOINT.items()
                    if px <= boundary]
-        # The value each property had before the min-width block overrode it.
         props = {p for p, _ in r.decls}
-        prior: dict = {}
-        for earlier in rules:
-            if earlier is r:
-                break
-            if (earlier.selector != r.selector or earlier.media
-                    or earlier.breakpoint is not None or earlier.min_width):
+        for px, bp in targets:
+            # The value each property holds at `px` once this rule is removed:
+            # the last earlier rule that applies at that width wins.
+            prior: dict = {}
+            for earlier in rules:
+                if earlier is r:
+                    break
+                if (earlier.selector != r.selector or earlier.media
+                        or earlier.breakpoint is not None):
+                    continue
+                if earlier.min_width and earlier.min_width > px:
+                    continue
+                for p, v in earlier.decls:
+                    if p in props:
+                        prior[p] = v
+            if not prior:
                 continue
-            for p, v in earlier.decls:
-                if p in props:
-                    prior[p] = v
-        if not prior:
-            continue
-        for bp in targets:
             inverted.append(Rule(r.selector, list(prior.items()), r.specificity,
                                  r.order, bp, r.state, pseudo=r.pseudo,
                                  media=None))
