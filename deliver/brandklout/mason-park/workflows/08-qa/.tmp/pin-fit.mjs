@@ -20,6 +20,10 @@ const here = path.dirname(fileURLToPath(import.meta.url));
 const D = path.resolve(here, "../../04-design/.tmp").split(path.sep).join("/");
 const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+// See scrub-proof.mjs — MPD_BASE_URL retargets the suite at a deployed build.
+const BASE = (process.env.MPD_BASE_URL || "").replace(/\/+$/, "");
+const pageUrl = (page) =>
+  BASE ? `${BASE}/${page}` : `file:///${D}/${page}/index.html`.replace(/ /g, "%20");
 
 const PROBE = `(function(){
   var res = [];
@@ -81,7 +85,7 @@ for (const [w, h] of [[1440, 900], [1920, 1080], [2400, 1350]]) {
     // Reduced motion removes the pins, so each scene renders as a plain 100svh
     // box holding its real content — which is exactly what needs measuring.
     await send("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "reduce" }] }, sessionId);
-    await send("Page.navigate", { url: `file:///${D}/${page}/index.html`.replace(/ /g, "%20") }, sessionId);
+    await send("Page.navigate", { url: pageUrl(page) }, sessionId);
     await wait(3800);
     const ev = (e) => send("Runtime.evaluate", { expression: e, returnByValue: true, awaitPromise: true }, sessionId).then((r) => r?.result?.value);
     for (const r of await ev(PROBE)) {

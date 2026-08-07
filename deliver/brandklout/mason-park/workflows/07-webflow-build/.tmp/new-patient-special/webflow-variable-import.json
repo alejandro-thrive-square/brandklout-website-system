@@ -1,0 +1,221 @@
+{
+  "source": ":root CSS custom properties",
+  "variables": [
+    {
+      "name": "--accent",
+      "value": "#8a6c46"
+    },
+    {
+      "name": "--accent-lg",
+      "value": "#a8875f"
+    },
+    {
+      "name": "--bar-h",
+      "value": "0px"
+    },
+    {
+      "name": "--base",
+      "value": "calc((18 - calc(1920 / 100) * calc((20 - 18) / (calc(2400 / 100) - calc(1920 / 100)))) / 16)"
+    },
+    {
+      "name": "--bg",
+      "value": "#ffffff"
+    },
+    {
+      "name": "--bg-2",
+      "value": "#fbf9f7"
+    },
+    {
+      "name": "--bg-3",
+      "value": "#f4ece2"
+    },
+    {
+      "name": "--body",
+      "value": "\"DM Sans\", \"Segoe UI\", system-ui, sans-serif"
+    },
+    {
+      "name": "--card",
+      "value": "#ffffff"
+    },
+    {
+      "name": "--chapter-y",
+      "value": "clamp(3.5rem, 7vw, 7rem)"
+    },
+    {
+      "name": "--cloud",
+      "value": "#eff2f3"
+    },
+    {
+      "name": "--coefficient",
+      "value": "calc((20 - 18) / (calc(2400 / 100) - calc(1920 / 100)))"
+    },
+    {
+      "name": "--display",
+      "value": "\"Outfit\", \"Segoe UI\", system-ui, sans-serif"
+    },
+    {
+      "name": "--ease",
+      "value": "cubic-bezier(0.22, 0.61, 0.36, 1)"
+    },
+    {
+      "name": "--fg",
+      "value": "#1b2224"
+    },
+    {
+      "name": "--fg-body",
+      "value": "#4e585b"
+    },
+    {
+      "name": "--fg-soft",
+      "value": "#778386"
+    },
+    {
+      "name": "--focus",
+      "value": "#a8875f"
+    },
+    {
+      "name": "--font-from",
+      "value": "18"
+    },
+    {
+      "name": "--font-to",
+      "value": "20"
+    },
+    {
+      "name": "--gutter",
+      "value": "clamp(1.25rem, 4vw, 2.5rem)"
+    },
+    {
+      "name": "--ink",
+      "value": "#1b2224"
+    },
+    {
+      "name": "--ink-deep",
+      "value": "#121719"
+    },
+    {
+      "name": "--ink-soft",
+      "value": "#2c3538"
+    },
+    {
+      "name": "--line",
+      "value": "#dfe4e6"
+    },
+    {
+      "name": "--line-warm",
+      "value": "#e6dccf"
+    },
+    {
+      "name": "--max",
+      "value": "73.75rem"
+    },
+    {
+      "name": "--max-narrow",
+      "value": "48.75rem"
+    },
+    {
+      "name": "--mist",
+      "value": "#778386"
+    },
+    {
+      "name": "--paper",
+      "value": "#fbf9f7"
+    },
+    {
+      "name": "--radius",
+      "value": "0.875rem"
+    },
+    {
+      "name": "--radius-lg",
+      "value": "1.375rem"
+    },
+    {
+      "name": "--rule",
+      "value": "#a8875f"
+    },
+    {
+      "name": "--sage",
+      "value": "#7f9a8b"
+    },
+    {
+      "name": "--sand",
+      "value": "#c3a98e"
+    },
+    {
+      "name": "--sand-deep",
+      "value": "#a8875f"
+    },
+    {
+      "name": "--sand-ink",
+      "value": "#8a6c46"
+    },
+    {
+      "name": "--sand-wash",
+      "value": "#f4ece2"
+    },
+    {
+      "name": "--shadow-card",
+      "value": "0 1px 2px rgba(27, 34, 36, 0.04), 0 12px 32px -18px rgba(27, 34, 36, 0.18)"
+    },
+    {
+      "name": "--shadow-lift",
+      "value": "0 2px 4px rgba(27, 34, 36, 0.05), 0 22px 48px -20px rgba(27, 34, 36, 0.26)"
+    },
+    {
+      "name": "--slate",
+      "value": "#4e585b"
+    },
+    {
+      "name": "--t-body",
+      "value": "1.0625rem"
+    },
+    {
+      "name": "--t-eyebrow",
+      "value": "0.72rem"
+    },
+    {
+      "name": "--t-h1",
+      "value": "3.75rem"
+    },
+    {
+      "name": "--t-h2",
+      "value": "2.75rem"
+    },
+    {
+      "name": "--t-h3",
+      "value": "1.5rem"
+    },
+    {
+      "name": "--t-lead",
+      "value": "1.25rem"
+    },
+    {
+      "name": "--t-price",
+      "value": "5.5rem"
+    },
+    {
+      "name": "--t-small",
+      "value": "0.875rem"
+    },
+    {
+      "name": "--t-statement",
+      "value": "3.4rem"
+    },
+    {
+      "name": "--t-ui",
+      "value": "0.9375rem"
+    },
+    {
+      "name": "--vw-from",
+      "value": "calc(1920 / 100)"
+    },
+    {
+      "name": "--vw-to",
+      "value": "calc(2400 / 100)"
+    },
+    {
+      "name": "--white",
+      "value": "#ffffff"
+    }
+  ]
+}
