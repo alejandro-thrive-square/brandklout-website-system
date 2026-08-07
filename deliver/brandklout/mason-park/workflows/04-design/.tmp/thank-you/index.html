@@ -142,7 +142,7 @@
     <p class="ref-line" data-anim="hide" data-received-line>Received just now</p>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     var root = document.getElementById('received');
     var reveal = root.querySelectorAll('[data-anim="hide"]');
@@ -182,6 +182,18 @@
       scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: 0.6 }
     });
   });
+  </script>
+  <script data-embed>
+  /* Received timestamp — conversion layer, runs without GSAP. Guarded so the
+     section stays movable: it no-ops anywhere its hook is absent. */
+  (function () {
+    "use strict";
+    var ref = document.querySelector("[data-received-line]");
+    if (!ref) return;
+    ref.textContent =
+      "Received " +
+      new Date().toLocaleString("en-US", { weekday: "long", hour: "numeric", minute: "2-digit" });
+  })();
   </script>
 </section>
 
@@ -258,7 +270,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     if (M.reduced) return;
     gsap.from('#callBox', {
@@ -270,6 +282,60 @@
       scrollTrigger: { trigger: '#callBox', start: 'top 82%' }
     });
   });
+  </script>
+  <script data-embed>
+  /* Open/closed indicator — conversion layer, runs without GSAP.
+     CLIENT-SPECIFIC BLOCK: the HOURS table is the practice's own; Grand
+     Mission's hours differ. Guarded so the section stays movable. */
+  (function () {
+    "use strict";
+    var stateEl = document.querySelector("[data-open-state]");
+    var dotEl = document.querySelector("[data-open-dot]");
+    if (!stateEl && !dotEl) return;
+    var HOURS = [
+      null,                                  // Sunday
+      { open: [9, 0], close: [18, 0] },      // Monday
+      { open: [8, 0], close: [17, 0] },      // Tuesday
+      { open: [9, 0], close: [18, 0] },      // Wednesday
+      { open: [8, 0], close: [17, 0] },      // Thursday
+      null,                                  // Friday
+      null,                                  // Saturday
+    ];
+    var NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    function fmt(hm) {
+      var h = hm[0], m = hm[1];
+      var ap = h >= 12 ? "pm" : "am";
+      var hh = h % 12 || 12;
+      return hh + (m ? ":" + String(m).padStart(2, "0") : ":00") + " " + ap;
+    }
+    var now = new Date();
+    var today = HOURS[now.getDay()];
+    var mins = now.getHours() * 60 + now.getMinutes();
+    var isOpen =
+      !!today &&
+      mins >= today.open[0] * 60 + today.open[1] &&
+      mins < today.close[0] * 60 + today.close[1];
+    if (stateEl) {
+      if (isOpen) {
+        stateEl.textContent = "Open now until " + fmt(today.close);
+      } else if (today) {
+        stateEl.textContent =
+          mins < today.open[0] * 60
+            ? "Opens today at " + fmt(today.open)
+            : "Closed for today — opens tomorrow";
+      } else {
+        for (var i = 1; i <= 7; i++) {
+          var d = (now.getDay() + i) % 7;
+          if (HOURS[d]) {
+            stateEl.textContent =
+              "Closed today — opens " + (i === 1 ? "tomorrow" : NAMES[d]) + " at " + fmt(HOURS[d].open);
+            break;
+          }
+        }
+      }
+    }
+    if (dotEl && isOpen) dotEl.classList.add("is-open");
+  })();
   </script>
 </section>
 
@@ -355,7 +421,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     var pin = document.getElementById('nextPin');
     var spine = document.getElementById('nextSpine');
@@ -529,7 +595,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     var pin = document.getElementById('prepPin');
     var cards = gsap.utils.toArray('#prepList .prep-card');
@@ -661,7 +727,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     if (M.reduced) { gsap.set('#teamGrid .doc-photo', { clipPath: 'inset(0 0 0% 0)' }); return; }
 
@@ -775,7 +841,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     var pin = document.getElementById('findPin');
     var rows = gsap.utils.toArray('#findHours li');
@@ -853,73 +919,6 @@
 </footer>
 
 <script src="../shared/mpd-flush.js"></script>
-<script>
-/* ==========================================================================
-   Page-local: the open/closed indicator and the received timestamp.
-   CLIENT-SPECIFIC BLOCK — the HOURS table below is the practice's own.
-   Kept out of the shared runtime because only this page has a live
-   open/closed readout, and Grand Mission's hours differ.
-   ========================================================================== */
-(function () {
-  "use strict";
-  var HOURS = [
-    null,                                  // Sunday
-    { open: [9, 0], close: [18, 0] },      // Monday
-    { open: [8, 0], close: [17, 0] },      // Tuesday
-    { open: [9, 0], close: [18, 0] },      // Wednesday
-    { open: [8, 0], close: [17, 0] },      // Thursday
-    null,                                  // Friday
-    null,                                  // Saturday
-  ];
-  var NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-  function fmt(hm) {
-    var h = hm[0], m = hm[1];
-    var ap = h >= 12 ? "pm" : "am";
-    var hh = h % 12 || 12;
-    return hh + (m ? ":" + String(m).padStart(2, "0") : ":00") + " " + ap;
-  }
-
-  var now = new Date();
-  var today = HOURS[now.getDay()];
-  var mins = now.getHours() * 60 + now.getMinutes();
-  var isOpen =
-    !!today &&
-    mins >= today.open[0] * 60 + today.open[1] &&
-    mins < today.close[0] * 60 + today.close[1];
-
-  var stateEl = document.querySelector("[data-open-state]");
-  var dotEl = document.querySelector("[data-open-dot]");
-
-  if (stateEl) {
-    if (isOpen) {
-      stateEl.textContent = "Open now until " + fmt(today.close);
-    } else if (today) {
-      stateEl.textContent =
-        mins < today.open[0] * 60
-          ? "Opens today at " + fmt(today.open)
-          : "Closed for today — opens tomorrow";
-    } else {
-      // Find the next open day so the message is useful, not just "closed".
-      for (var i = 1; i <= 7; i++) {
-        var d = (now.getDay() + i) % 7;
-        if (HOURS[d]) {
-          stateEl.textContent =
-            "Closed today — opens " + (i === 1 ? "tomorrow" : NAMES[d]) + " at " + fmt(HOURS[d].open);
-          break;
-        }
-      }
-    }
-  }
-  if (dotEl && isOpen) dotEl.classList.add("is-open");
-
-  var ref = document.querySelector("[data-received-line]");
-  if (ref) {
-    ref.textContent =
-      "Received " +
-      now.toLocaleString("en-US", { weekday: "long", hour: "numeric", minute: "2-digit" });
-  }
-})();
-</script>
 </body>
 </html>

@@ -966,7 +966,7 @@ h3 { font-size: var(--t-h3); }
   box-shadow: var(--shadow-card);
 }
 .form-head { text-align: center; margin-bottom: 1.25rem; }
-.form-head .h2 { font-family: var(--display); font-size: 1.35rem; font-weight: 600; margin-block: 0.5rem 0.35rem; }
+.form-head .form-h2 { font-family: var(--display); font-size: 1.35rem; font-weight: 600; margin-block: 0.5rem 0.35rem; }
 
 .progress { display: flex; gap: 0.35rem; margin-bottom: 1.25rem; }
 .progress span {
