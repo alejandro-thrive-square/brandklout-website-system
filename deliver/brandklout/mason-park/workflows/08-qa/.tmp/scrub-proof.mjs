@@ -34,8 +34,15 @@ const ALL = ["invisalign", "new-patient-special", "thank-you"];
 const PAGES = process.argv[2] ? ALL.filter((p) => p === process.argv[2]) : ALL;
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+// MPD_BASE_URL points the whole suite at a deployed build instead of the local
+// design package — `MPD_BASE_URL=https://mason-park-dental.webflow.io`. The
+// checks are identical either way; only the origin moves. Without it the
+// harness verifies the design source, which is what it was written against.
+const BASE = (process.env.MPD_BASE_URL || "").replace(/\/+$/, "");
 const fileUrl = (p) =>
-  "file:///" + path.join(DESIGN, p, "index.html").replace(/\\/g, "/").replace(/ /g, "%20");
+  BASE
+    ? `${BASE}/${p}`
+    : "file:///" + path.join(DESIGN, p, "index.html").replace(/\\/g, "/").replace(/ /g, "%20");
 
 // Monotonic ports. Reusing one lets a run attach to a previous Chrome that has
 // not exited yet and verify the WRONG page — which has happened.
