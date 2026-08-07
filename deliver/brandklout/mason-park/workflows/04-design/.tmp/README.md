@@ -11,7 +11,7 @@ stacks of coloured bands, against
 | :--- | :--- | :--- | :--- |
 | Invisalign<sup>&reg;</sup> — $1,000 off | 7 | 3 | `workflows/04-design/.tmp/invisalign/index.html` |
 | $189 New Patient Special | 7 | 3 | `workflows/04-design/.tmp/new-patient-special/index.html` |
-| Thank you | 4 | 2 | `workflows/04-design/.tmp/thank-you/index.html` |
+| Thank you | 6 | 3 | `workflows/04-design/.tmp/thank-you/index.html` |
 
 Open any `index.html` directly — the packages run from `file://` with no build
 step and no network beyond webfonts and the map embed.
@@ -55,7 +55,7 @@ Section classes are named for the **story beat**, never the background colour �
 03 The Visit · 04 The Team · 05 The Proof · 06 The Invitation
 
 **Thank you** — 00 Received · 01 The Fast Track · 02 What Happens Next ·
-03 Where To Find Us
+03 The Preparation · 04 The Team · 05 Where To Find Us
 
 FAQ, financing and insurance are folded **into** the beat that answers the
 objection rather than sitting in bands of their own: Invisalign's price ladder,
@@ -76,7 +76,8 @@ function of scroll position, not a class toggled once:
 | New Patient | 02 What It Covers | **Signature.** $517 → $189, saving counting up, four inclusions checking off |
 | New Patient | 03 The Visit | Pinned timeline drawing through the three steps |
 | Thank you | 02 What Happens Next | Pinned timeline drawing through the three steps |
-| Thank you | 03 Where To Find Us | Pinned map un-cropping while the week deals in |
+| Thank you | 03 The Preparation | Pinned; three cards laid down in turn, a tick **drawing** inside each as it lands |
+| Thank you | 05 Where To Find Us | Pinned map un-cropping while the week deals in |
 
 There is **no `IntersectionObserver`** anywhere in the runtime. An observer can
 only say "this is visible now"; it cannot express *how far through* a chapter
@@ -90,15 +91,37 @@ readout (`03 · The Inclusion`) from 1000px up, chapter tags in every beat, and
 
 ## Deliberate deviations from the standard
 
-**1. The thank-you page has 4 chapters, not 6–8, and 2 scroll-driven chapters,
-not 3.** It therefore FAILS `journey-audit.mjs` on those two criteria. This is
-intentional and was directed: the rebuild brief states *"the thank-you page is
-short by nature — 3-4 chapters is fine there, but it still gets a real arrival
-and at least one scroll-driven moment."* Asana specifies **four** sections for
-this page and the chapters map to them one for one. Padding it to six would mean
-inventing beats for a real practice, and pinning the call box would bury the one
-action a post-conversion visitor might still take. Every other gate criterion
-passes. **Flagged for a decision rather than quietly worked around.**
+**1. ~~The thank-you page has 4 chapters, not 6–8.~~ Withdrawn 2026-08-07 — the
+page was brought up to the standard instead.** The deviation was flagged for a
+decision rather than quietly worked around, and the decision was to fix the
+page: Grand Mission's thank-you passes at six chapters and three pins on the
+same Asana structure, so the bar is reachable on this page type.
+
+Two beats were added between the timeline and the map, both from material
+already sourced and already used elsewhere in this package:
+
+- **03 The Preparation** (pinned, scrubbed) — the only part of the wait the
+  visitor can act on, and the one thing the page never said. Insurance card,
+  any treatment plan from another office (against the practice's own standing
+  free second opinion), and the questions to write down.
+- **04 The Team** — the three doctors and the five accreditation marks. Dark,
+  because those marks are white logos on transparency and vanish on a light
+  ground; that is how the chapter came back from the first capture.
+
+Chapter 01, the call box, is still **not** pinned, for the original reason:
+holding the page hostage in front of the phone number would bury the one action
+a post-conversion visitor might still take.
+
+Nothing was invented to close the gap. There is still no bio for Dr. Nguyen,
+because none exists on any client source.
+
+> [!NOTE]
+> `journey-audit.mjs` reports **7** chapters for these pages, not 6. It counts
+> `data-chapter=` across the page *and* its linked scripts, and `mpd-flush.js`
+> contains one `[data-chapter='0']` selector. Every Mason Park page reads one
+> high for that reason — invisalign and new-patient-special report 8 against 7
+> real chapters. Worth knowing before trusting the number: the real counts are
+> the ones in the table at the top of this file.
 
 **2. No ScrollSmoother.** The reference uses it; this build does not. It stopped
 driving the page a few seconds after load (`gsap.ticker` frozen while `rAF` ran
@@ -181,13 +204,15 @@ Run them **one page at a time**. The full sweep exceeds the 10-minute foreground
 limit, and a backgrounded run dies without flushing its output *and* orphans its
 Chrome instances.
 
-Last run, 2026-08-06:
+Last run, 2026-08-07:
 
 | Gate | Invisalign | New Patient | Thank you |
 | :--- | :--- | :--- | :--- |
-| `journey-audit.mjs` | PASS | PASS | FAIL (documented above) |
-| `scrub-proof.mjs` | 20/20 | 20/20 | 17/17 |
+| `journey-audit.mjs` | PASS | PASS | PASS |
+| `scrub-proof.mjs` | 20/20 | 20/20 | 20/20 |
 | `screens.mjs` | 18/18 | 18/18 | 18/18 |
+| `root-proof.mjs` | 46/46 | 46/46 | 37/37 |
+| `pin-fit.mjs` | all 9 pinned scenes fit at 1440 / 1920 / 2400 | | |
 
 Screenshots at 360 / 390 / 768 / 1024 / 1440 / 1920 are in
 `../../08-qa/.tmp/screenshots/<page-slug>/<width>.png` (gitignored — regenerate

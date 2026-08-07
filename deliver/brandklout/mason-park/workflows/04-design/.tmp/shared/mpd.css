@@ -214,9 +214,16 @@ html {
    copy to 11.4px and body copy to 14.6px. Legibility floors are absolute, so
    the reading tokens step UP here by roughly the amount the root steps down.
 
-   This is a deliberate ~20% jump at the 479/480 boundary — the same boundary
-   the root scale itself is authored around, and Webflow's mobile-portrait
-   breakpoint. Above it the root is a flat 16px and none of this is needed.
+   The boundary is <= 478, NOT <= 479, and the difference is the whole point.
+   The house root is flat at 16px all the way DOWN TO AND INCLUDING 479 — its
+   ramp starts below that. A tier bounded at 479 therefore fires one pixel too
+   early, applying its full compensation against a root that has not moved
+   yet, and reading type steps ~16-25% between 480 and 479 with the root
+   identical (16.00px) on both sides. At 478 the compensation and the ramp
+   start together. Verified by root-proof.mjs, which measures the 479/480 seam
+   directly and requires the largest step to be ~0%.
+   House rule: deliver/process/04-design/fluid-root.md.
+
    px shown at 390 / 360. Every value is chosen against 360, the narrowest
    width the QA pass captures, so the floors hold at both audited phone widths
    rather than only at 390.
@@ -226,7 +233,7 @@ html {
    because the base rules further down have equal specificity and would win on
    order. The two element-level overrides sit next to the rules they beat.
    ------------------------------------------------------------------ */
-@media (max-width: 479px) {
+@media (max-width: 478px) {
   :root {
     --t-eyebrow: 0.9rem;    /* 12.4 / 11.7 — micro-label floor is 11.5 */
     --t-small: 1.0625rem;   /* 14.6 / 13.8 — prose floor is 13.5 */
@@ -470,8 +477,9 @@ h3 { font-size: var(--t-h3); }
 [data-theme="dark"] .btn--ghost { border-color: rgba(255, 255, 255, 0.34); color: var(--white); }
 .btn--lg { padding: 1.1rem 2rem; font-size: 1rem; }
 /* The primary CTA keeps its weight against the shrinking root. Must come after
-   the rule above: same specificity, so order decides. */
-@media (max-width: 479px) { .btn--lg { font-size: 1.2rem; } }
+   the rule above: same specificity, so order decides. 478 not 479, for the
+   same reason as the reading tokens — see MOBILE READING SIZES. */
+@media (max-width: 478px) { .btn--lg { font-size: 1.2rem; } }
 .btn--block { width: 100%; }
 
 .btn-row { display: flex; flex-wrap: wrap; gap: 0.75rem; }
@@ -1006,11 +1014,12 @@ h3 { font-size: var(--t-h3); }
   font-size: 1rem;
   min-height: 44px;
 }
-/* iOS zooms the whole page on focus when an input COMPUTES under 16px. Above
-   479 the root is a flat 16px and the 1rem above is already safe; below it the
-   root ramps down, so the field takes the body size, which is floored at 16px
-   for exactly this reason. Must come after the rule above — same specificity. */
-@media (max-width: 479px) { .field input { font-size: var(--t-body); } }
+/* iOS zooms the whole page on focus when an input COMPUTES under 16px. At 479
+   and above the root is a flat 16px and the 1rem above is already safe; below
+   it the root ramps down, so the field takes the body size, which is floored
+   at 16px for exactly this reason. Must come after the rule above — same
+   specificity. Bounded at 478 to match the reading tier it borrows from. */
+@media (max-width: 478px) { .field input { font-size: var(--t-body); } }
 .field input:focus { border-color: var(--sand-deep); outline: none; box-shadow: 0 0 0 3px rgba(168, 135, 95, 0.16); }
 .field input.invalid { border-color: #c0523f; }
 .field .err { font-size: var(--t-small); color: #c0523f; min-height: 1em; }

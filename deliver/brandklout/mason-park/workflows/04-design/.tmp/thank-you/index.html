@@ -15,24 +15,31 @@
   Rebuilt as a journey: 2026-08-06
   deliver/brandklout/mason-park/workflows/04-design/.tmp/thank-you/
 
-  FOUR CHAPTERS — a deliberate, documented deviation from the 6-8 in
-  DESIGN-STANDARD.md, on the instruction in the rebuild brief that "the
-  thank-you page is short by nature — 3-4 chapters is fine there, but it still
-  gets a real arrival and at least one scroll-driven moment."
+  SIX CHAPTERS, THREE PINNED — meets DESIGN-STANDARD.md (6-8 named chapters,
+  at least 3 scroll-driven). This page was built at four, as a documented
+  deviation, and the deviation was overruled: Grand Mission's thank-you passes
+  at six on the same Asana structure, so the bar is reachable on this page
+  type and the page was brought up to it rather than the standard relaxed.
 
-  The count is not a shortcut: Asana specifies FOUR sections for this page, in
-  this order, and the chapters map to them one for one. Padding it to six
-  would mean inventing beats for a real practice, and pinning the call box
-  would bury the one action a post-conversion visitor might still take.
+  Asana's four sections all survive, in order, with two beats added between
+  the timeline and the map. Neither invents anything about the practice:
     Chapter 00 -> 1. Immediate Status Banner
     Chapter 01 -> 2. Fast-Track Immediate Call Box (High-Intent Prompt)
     Chapter 02 -> 3. What to Expect (3-Step Timeline)     [PINNED + SCRUBBED]
-    Chapter 03 -> 4. Practice Details & Location Map      [PINNED + SCRUBBED]
+    Chapter 03 -> The Preparation                         [PINNED + SCRUBBED]
+    Chapter 04 -> The Team
+    Chapter 05 -> 4. Practice Details & Location Map      [PINNED + SCRUBBED]
+
+  Chapter 01 stays UNPINNED on purpose. It carries the only action a
+  post-conversion visitor might still take, and holding the page hostage in
+  front of a phone number would bury the offer.
 
   SHARED ARCHETYPE. Asana specifies this same four-section structure for Grand
-  Mission Dentistry (task 1217040406855578). Structure and stylesheet are
-  shared; everything client-specific lives in the constants block at the top of
-  ../shared/mpd.js plus the two blocks marked CLIENT-SPECIFIC below.
+  Mission Dentistry (task 1217040406855578), whose build also runs six
+  chapters, with The Preparation and The Team in these positions. Structure
+  and stylesheet are shared; everything client-specific lives in the constants
+  block at the top of ../shared/mpd.js plus the blocks marked CLIENT-SPECIFIC
+  below (the doctors and accreditations in Chapter 04, and Chapter 05).
 
   CONVERSION TRACKING: no tag is installed. The previous ad company's page
   carried GTM container GTM-KWL239K7, which is theirs, not the practice's, and
@@ -406,14 +413,297 @@
 </section>
 
 <!-- ==========================================================================
-     CHAPTER 03 — WHERE TO FIND US           [PINNED + SCRUBBED]
+     CHAPTER 03 — THE PREPARATION            [PINNED + SCRUBBED]
+
+     The beat this page was missing. Chapter 02 answers "what happens next" —
+     which is entirely a list of things WE do. This one is the only part of the
+     wait the visitor can act on, and it was previously not told at all.
+
+     Every item is sourced: benefit verification is the practice's own stated
+     process, and the free second opinion is a standing offer on the client's
+     own /special-offers/ page. Nothing here is invented.
+
+     Scrubbed, not toggled: three cards are laid down in turn and a tick DRAWS
+     inside each one, so the state at any point in the pin is a partial draw
+     rather than a class that is either on or off. All of it lives on one
+     timeline, so scrolling back up un-draws it and the chapter can be re-read.
+     ========================================================================== -->
+<section class="chapter ch-prep" id="prepare" data-chapter="3" data-chapter-name="The Preparation" data-theme="light">
+  <style>
+    .ch-prep { background: var(--bg-3); }
+    .ch-prep .prep-pin {
+      min-height: 100svh; display: grid; align-content: center;
+      padding-block: clamp(3rem, 7vw, 5rem); overflow: hidden;
+    }
+    .ch-prep .prep-head { max-width: 58ch; }
+    .ch-prep .prep-list {
+      display: grid; gap: clamp(1rem, 2.5vw, 1.5rem);
+      margin-top: clamp(1.75rem, 4vw, 2.75rem);
+    }
+    @media (min-width: 820px) { .ch-prep .prep-list { grid-template-columns: repeat(3, 1fr); } }
+    .ch-prep .prep-card {
+      background: var(--card); border: 1px solid var(--line-warm);
+      border-radius: var(--radius-lg); padding: clamp(1.25rem, 2.5vw, 1.75rem);
+      display: grid; gap: 0.6rem; align-content: start;
+    }
+    .ch-prep .prep-mark { display: flex; align-items: center; gap: 0.7rem; margin-bottom: 0.2rem; }
+    .ch-prep .prep-tick {
+      width: 34px; height: 34px; flex: none; border-radius: 50%;
+      display: grid; place-items: center;
+      border: 1px solid var(--line-warm); background: var(--bg-3); color: var(--accent);
+    }
+    /* The draw itself. 34 is the path length; the reduced-motion branch and the
+       scrubbed timeline both write this property, nothing else does. */
+    .ch-prep .prep-tick path { stroke-dasharray: 34; stroke-dashoffset: 34; }
+    .ch-prep .prep-n {
+      font-family: var(--display); font-size: var(--t-eyebrow); font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--fg-soft);
+    }
+    .ch-prep .prep-card h3 { font-size: var(--t-h3); }
+    .ch-prep .prep-card p { color: var(--fg-body); font-size: var(--t-ui); }
+    .ch-prep .prep-close {
+      margin-top: clamp(1.5rem, 3vw, 2.25rem); text-align: center;
+      font-size: var(--t-lead); color: var(--fg); font-family: var(--display); font-weight: 500;
+    }
+  </style>
+
+  <div class="prep-pin" id="prepPin">
+    <div class="wrap">
+      <div class="prep-head">
+        <p class="chapter-tag"><i></i><span>Chapter 03 &middot; The Preparation</span></p>
+        <h2>Before you come in.</h2>
+        <p class="lead" style="margin-top:0.9rem;">
+          Nothing has to happen before we call — this is not a to-do list. But if these three are to
+          hand, your first visit is spent on your teeth rather than on admin.
+        </p>
+      </div>
+
+      <div class="prep-list" id="prepList">
+        <article class="prep-card">
+          <div class="prep-mark">
+            <span class="prep-tick" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.4"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="prep-n">01</span>
+          </div>
+          <h3>Your insurance card</h3>
+          <p>We check your benefits before you arrive, so what is covered — and what is not — is
+            settled between us before anything is started.</p>
+        </article>
+
+        <article class="prep-card">
+          <div class="prep-mark">
+            <span class="prep-tick" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.4"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="prep-n">02</span>
+          </div>
+          <h3>Any treatment plan you were given elsewhere</h3>
+          <p>Bring it with you. A second opinion here is free, and it is the quickest way to know
+            whether the plan you were handed is the one you actually need.</p>
+        </article>
+
+        <article class="prep-card">
+          <div class="prep-mark">
+            <span class="prep-tick" aria-hidden="true">
+              <svg width="18" height="18" viewBox="0 0 24 24" fill="none">
+                <path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-width="2.4"
+                      stroke-linecap="round" stroke-linejoin="round"/>
+              </svg>
+            </span>
+            <span class="prep-n">03</span>
+          </div>
+          <h3>The questions you have not asked yet</h3>
+          <p>Write them down while they are fresh. Nothing is started at your visit without your
+            say-so, so the more you ask now, the less there is to decide in the chair.</p>
+        </article>
+      </div>
+
+      <p class="prep-close" id="prepClose">That is the whole list. The rest of it is ours to do.</p>
+    </div>
+  </div>
+
+  <script>
+  MPD.add(function (M) {
+    var pin = document.getElementById('prepPin');
+    var cards = gsap.utils.toArray('#prepList .prep-card');
+    var ticks = gsap.utils.toArray('#prepList .prep-tick');
+    var paths = gsap.utils.toArray('#prepList .prep-tick path');
+    var close = document.getElementById('prepClose');
+
+    if (M.reduced) {
+      gsap.set(paths, { strokeDashoffset: 0 });
+      gsap.set(ticks, { borderColor: '#a8875f', backgroundColor: '#f4ece2' });
+      return;
+    }
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + Math.round(window.innerHeight * 1.6),
+        pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    /* Offsets are chosen so that at 25%, 50% and 75% of the pin exactly one
+       tick is mid-draw and the two either side are full or empty — the three
+       readings the scrub proof samples are then genuinely different values,
+       not three snapshots of the same finished state. */
+    cards.forEach(function (card, i) {
+      tl.fromTo(card,
+        { opacity: 0.14, y: 56, rotate: -1.2 },
+        { opacity: 1, y: 0, rotate: 0, ease: 'none', duration: 0.7 }, i * 1.0);
+    });
+
+    paths.forEach(function (path, i) {
+      tl.fromTo(path, { strokeDashoffset: 34 },
+        { strokeDashoffset: 0, ease: 'none', duration: 0.8 }, 0.4 + i * 0.9);
+      /* The ring warms as its own tick lands. On the same timeline as the
+         draw, so it reverses with the scroll instead of latching. */
+      tl.fromTo(ticks[i],
+        { borderColor: '#e6dccf', backgroundColor: '#f4ece2' },
+        { borderColor: '#a8875f', backgroundColor: '#ffffff', ease: 'none', duration: 0.8 },
+        0.4 + i * 0.9);
+    });
+
+    tl.fromTo(close, { opacity: 0.15, y: 16 },
+      { opacity: 1, y: 0, ease: 'none', duration: 0.5 }, 2.5);
+
+    gsap.from('#prepare .chapter-tag, #prepare h2, #prepare .lead', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#prepare', start: 'top 70%' }
+    });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 04 — THE TEAM
+
+     "What to expect at the visit" is a person, not a process. The three
+     doctors, their real titles and the practice's real accreditations —
+     no bio is written for Dr. Nguyen because none exists on any client
+     source, so her title stands alone rather than being padded.
+
+     Deliberately NOT pinned: three pinned chapters already carry the journey,
+     and a fourth would put two consecutive held scenes between the visitor and
+     the map.
+
+     DARK, and not for rhythm. The five accreditation marks are white logos on
+     transparency — the client's own assets, used on the dark proof chapter of
+     the New Patient Special page. On a light ground they render as nothing at
+     all, which is exactly how this chapter first came back from the capture.
+     The theme shift is the fix, and it also gives the page its second dark
+     beat between the warm preparation and the light map.
+     ========================================================================== -->
+<section class="chapter ch-team" id="team" data-chapter="4" data-chapter-name="The Team" data-theme="dark">
+  <style>
+    .ch-team { background: var(--bg); overflow: hidden; }
+    .ch-team .doc-photo { clip-path: inset(0 0 100% 0); }
+    .ch-team .accred { margin-top: clamp(2.5rem, 5vw, 3.5rem); }
+    .ch-team .accred-row {
+      display: flex; flex-wrap: wrap; align-items: center; justify-content: center;
+      gap: clamp(1.25rem, 4vw, 2.75rem); margin-top: 1rem;
+    }
+    .ch-team .accred-row img { height: clamp(34px, 5vw, 52px); width: auto; opacity: 0.85; }
+  </style>
+
+  <div class="wrap chapter-body">
+    <div class="head-block head-block--center">
+      <p class="chapter-tag" style="justify-content:center;"><i></i><span>Chapter 04 &middot; The Team</span></p>
+      <h2>Who you will be seeing.</h2>
+      <p class="lead">
+        Dr. Sung, Dr. Cho and Dr. Nguyen are committed to providing excellent dentistry in a
+        comfortable environment. We welcome new patients of all ages.
+      </p>
+    </div>
+
+    <div class="team" id="teamGrid" style="margin-top:clamp(2rem,4vw,3rem);">
+      <figure>
+        <div class="doc-photo"><img src="../shared/img/dr-cho.jpg" alt="Dr. Dave Cho" loading="lazy" width="683" height="1024"></div>
+        <figcaption>
+          <p class="name">Dr. Dave Cho</p>
+          <p class="role">General Dentist</p>
+        </figcaption>
+      </figure>
+      <figure>
+        <div class="doc-photo"><img src="../shared/img/dr-sung.webp" alt="Dr. William Sung, DMD" loading="lazy" width="230" height="300"></div>
+        <figcaption>
+          <p class="name">Dr. William Sung, DMD</p>
+          <p class="role">General Dentist</p>
+        </figcaption>
+      </figure>
+      <figure>
+        <div class="doc-photo"><img src="../shared/img/dr-nguyen.jpg" alt="Dr. Tam Nguyen" loading="lazy" width="683" height="1024"></div>
+        <figcaption>
+          <p class="name">Dr. Tam Nguyen</p>
+          <p class="role">Board Certified Pediatric Dentist</p>
+        </figcaption>
+      </figure>
+    </div>
+
+    <div class="accred">
+      <p class="label" style="text-align:center;">Continuing education and accreditation</p>
+      <div class="accred-row" id="accredRow">
+        <img src="../shared/img/badge-kois.webp" alt="Kois Center" loading="lazy">
+        <img src="../shared/img/badge-ssc.webp" alt="Seattle Study Club" loading="lazy">
+        <img src="../shared/img/badge-agd.webp" alt="Academy of General Dentistry" loading="lazy">
+        <img src="../shared/img/badge-aapd.webp" alt="American Academy of Pediatric Dentistry" loading="lazy">
+        <img src="../shared/img/badge-abpd.webp" alt="American Board of Pediatric Dentistry" loading="lazy">
+      </div>
+    </div>
+  </div>
+
+  <script>
+  MPD.add(function (M) {
+    if (M.reduced) { gsap.set('#teamGrid .doc-photo', { clipPath: 'inset(0 0 0% 0)' }); return; }
+
+    /* Each portrait plate wipes open in turn and the photo drifts against the
+       scroll. Scale never lands on exactly 1 — that is where the edges hit
+       sub-pixel boundaries and flicker. */
+    gsap.utils.toArray('#teamGrid figure').forEach(function (fig, i) {
+      gsap.to(fig.querySelector('.doc-photo'), {
+        clipPath: 'inset(0 0 0% 0)', duration: 1.1, delay: i * 0.11, ease: 'power4.inOut',
+        scrollTrigger: { trigger: '#teamGrid', start: 'top 82%' }
+      });
+      gsap.from(fig.querySelector('figcaption'), {
+        opacity: 0, y: 18, duration: 0.8, delay: 0.35 + i * 0.11, ease: 'power3.out',
+        scrollTrigger: { trigger: '#teamGrid', start: 'top 82%' }
+      });
+      gsap.fromTo(fig.querySelector('img'), { yPercent: -4, scale: 1.12 }, {
+        yPercent: 4, scale: 1.06, ease: 'none',
+        scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: 0.8 }
+      });
+    });
+
+    gsap.from('#team .head-block > *', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#team', start: 'top 72%' }
+    });
+    gsap.from('#accredRow img', {
+      opacity: 0, y: 16, duration: 0.7, stagger: 0.07, ease: 'power3.out',
+      scrollTrigger: { trigger: '#accredRow', start: 'top 90%' }
+    });
+  });
+  </script>
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 05 — WHERE TO FIND US           [PINNED + SCRUBBED]
      (Asana section 4: Practice Details & Location Map)
      The map un-crops and today's row lights up as the chapter plays out.
 
      CLIENT-SPECIFIC BLOCK — address, map query and hours. Everything else in
      this page is archetype and can be reused for Grand Mission unchanged.
      ========================================================================== -->
-<section class="chapter ch-find" id="find" data-chapter="3" data-chapter-name="Where To Find Us" data-theme="light">
+<section class="chapter ch-find" id="find" data-chapter="5" data-chapter-name="Where To Find Us" data-theme="light">
   <style>
     .ch-find { background: var(--bg); }
     .ch-find .find-pin {
@@ -441,7 +731,7 @@
   <div class="find-pin" id="findPin">
     <div class="wrap find-grid">
       <div>
-        <p class="chapter-tag"><i></i><span>Chapter 03 &middot; Where To Find Us</span></p>
+        <p class="chapter-tag"><i></i><span>Chapter 05 &middot; Where To Find Us</span></p>
         <h2>Where to find us.</h2>
 
         <div class="card card--flat" style="margin-top:1.5rem;">

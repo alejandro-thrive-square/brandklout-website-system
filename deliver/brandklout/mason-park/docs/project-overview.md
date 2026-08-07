@@ -35,14 +35,14 @@ Verification is functional rather than visual, and runs on a focused tab:
 
 | Gate | Invisalign | New Patient | Thank you |
 | :--- | :--- | :--- | :--- |
-| [`journey-audit.mjs`](../../scripts/journey-audit.mjs) — static architecture | PASS | PASS | **FAIL, by design** |
-| [`scrub-proof.mjs`](../workflows/08-qa/.tmp/scrub-proof.mjs) — motion actually scrubs | 20/20 | 20/20 | 17/17 |
+| [`journey-audit.mjs`](../../scripts/journey-audit.mjs) — static architecture | PASS | PASS | PASS |
+| [`scrub-proof.mjs`](../workflows/08-qa/.tmp/scrub-proof.mjs) — motion actually scrubs | 20/20 | 20/20 | 20/20 |
 | [`screens.mjs`](../workflows/08-qa/.tmp/screens.mjs) — six breakpoints | 18/18 | 18/18 | 18/18 |
+| [`root-proof.mjs`](../workflows/08-qa/.tmp/root-proof.mjs) — fluid root is live | 46/46 | 46/46 | 37/37 |
 
-The thank-you page fails the static gate on *"6-8 named chapters"* and *">=3 scroll-driven"* only.
-Asana specifies **four** sections for that page and the chapters map to them one for one; the
-rebuild brief explicitly allows 3–4 chapters there. Padding it would mean inventing beats for a
-real practice. **Raised for a decision rather than worked around** — see Open Question 10.
+All three pages now pass the static gate. The thank-you page was built at four chapters as a
+documented deviation; that deviation was **overruled on 2026-08-07** and the page brought up to the
+standard instead — six named chapters, three pinned and scrubbed. See Open Question 10, now closed.
 
 ## Resolved since scaffolding
 
@@ -151,13 +151,15 @@ here rather than edited into the shared `ASANA-DISPATCH.md` from this worktree.
    site says Friday, Saturday and Sunday closed. Our pages use the live site throughout. Worth one
    sanity check with the practice, since the thank-you page's open/closed indicator depends on it.
 
-10. **Thank-you page chapter count — needs a ruling.** It has 4 chapters and 2 scroll-driven beats
-    against the standard's 6–8 and 3, so it fails `journey-audit.mjs` on those two lines. The
-    reasoning is in [the design README](../workflows/04-design/.tmp/README.md#deliberate-deviations-from-the-standard):
-    Asana's spec for this page is four sections, and pinning the call box would bury the phone
-    number on a page whose only remaining job is to get the visitor to call. Either the page stays
-    as built and the gate records a sanctioned exception, or Brandklout supplies additional content
-    for two more beats. **Nothing was invented to close the gap.**
+10. ~~**Thank-you page chapter count — needs a ruling.**~~ **CLOSED 2026-08-07: fix the page, not
+    the standard.** Grand Mission's thank-you page passes at six chapters and three pins on the
+    same Asana structure, so the bar is reachable on this page type and the exception was refused.
+    Two beats were added from already-sourced material — **The Preparation** (pinned and scrubbed;
+    insurance card, an existing treatment plan against the practice's standing free second opinion,
+    and the questions to write down) and **The Team** (the three doctors and the five accreditation
+    marks, all already used on the New Patient Special page). Asana's four sections all survive in
+    order. **Still nothing invented**: no bio was written for Dr. Nguyen, because none exists on any
+    client source.
 
 ## Reference material
 

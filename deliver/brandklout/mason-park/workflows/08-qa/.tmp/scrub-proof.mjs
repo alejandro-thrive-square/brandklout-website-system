@@ -99,6 +99,19 @@ const PROBES = {
     var el = document.querySelector('${sel}');
     return el ? 'clip=' + getComputedStyle(el).clipPath : 'missing';
   })()`,
+
+  // How far each stroke in a set has DRAWN. A tick that is half-drawn cannot be
+  // faked by a class toggle, which is the whole point of reading it: the
+  // signature is a vector of partial lengths, not an on/off state.
+  dash: (sel) => `(function(){
+    var els = document.querySelectorAll('${sel}');
+    if (!els.length) return 'missing';
+    var out = [];
+    for (var i = 0; i < els.length; i++) {
+      out.push(parseFloat(getComputedStyle(els[i]).strokeDashoffset).toFixed(1));
+    }
+    return 'dash=' + out.join(',');
+  })()`,
 };
 
 // Which pinned chapter carries which probe, per page.
@@ -115,7 +128,8 @@ const CHAPTERS = {
   ],
   "thank-you": [
     { id: "nextPin", name: "02 What Happens Next — timeline draws", probe: PROBES.opacities("#nextSteps .next-step > div") },
-    { id: "findPin", name: "03 Where To Find Us — map un-crops", probe: PROBES.clip("#mapFrame") },
+    { id: "prepPin", name: "03 The Preparation — ticks draw in turn", probe: PROBES.dash("#prepList .prep-tick path") },
+    { id: "findPin", name: "05 Where To Find Us — map un-crops", probe: PROBES.clip("#mapFrame") },
   ],
 };
 

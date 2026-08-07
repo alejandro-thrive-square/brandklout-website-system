@@ -26,9 +26,12 @@ const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 
 const ALL = ["invisalign", "new-patient-special", "thank-you"];
 const PAGES = process.argv[2] ? ALL.filter((p) => p === process.argv[2]) : ALL;
-// 479 and 480 bracket the one breakpoint in the scale where the design steps on
-// purpose; 2400 is the top of the curve.
-const WIDTHS = [360, 390, 479, 480, 768, 1024, 1440, 1920, 2400];
+// 478/479/480 bracket the seam. The house root is flat at 16px down to AND
+// INCLUDING 479 and only ramps below it, so 479/480 must be a NON-event: same
+// root, same type. The real step belongs at 478/479, where the root itself
+// starts to move. Measuring only 479 and 480 cannot tell those two apart —
+// hence three widths, not two. 2400 is the top of the curve.
+const WIDTHS = [360, 390, 478, 479, 480, 768, 1024, 1440, 1920, 2400];
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const fileUrl = (p) =>
@@ -128,6 +131,7 @@ const PROBE = `(function(){
 
 for (const page of PAGES) {
   console.log(`\n=== ${page} ===`);
+  const seen = {};
   for (const width of WIDTHS) {
     const mobile = width <= 430;
     await session(async ({ evaluate, send, sessionId }) => {
@@ -171,8 +175,47 @@ for (const page of PAGES) {
         ok(`${label}: form input >= 16px (iOS zoom guard)`, p.input >= 15.95,
           `input computes ${p.input}px`);
       }
+      seen[width] = p;
       console.log(`        root ${p.root.toFixed(2)} · body ${p.bodyBase} · prose ${p.prose} · label ${p.label} · h1 ${p.h1} · input ${p.input}`);
     }, { width, height: mobile ? 844 : 900, mobile });
+  }
+
+  /* ---------- the 479/480 seam ----------
+     A type tier bounded at <=479 passes every check above — each width is
+     individually correct — and still steps ~25% at a boundary where the root
+     does not move at all. The only way to see it is to compare two adjacent
+     widths, which is what this does. `seam()` is reported for 478/479 too, not
+     asserted: the reading tier has to step SOMEWHERE, and 478/479 is where it
+     belongs, because that is where the root starts to ramp. */
+  const seam = (lo, hi) => {
+    const a = seen[lo], b = seen[hi];
+    if (!a || !b) return null;
+    const keys = ["bodyBase", "prose", "label", "h1"];
+    let worst = { key: null, pct: 0 };
+    for (const k of keys) {
+      if (a[k] == null || b[k] == null || !b[k]) continue;
+      const pct = Math.abs(a[k] - b[k]) / b[k] * 100;
+      if (pct > worst.pct) worst = { key: k, pct };
+    }
+    return { a, b, worst };
+  };
+
+  const s = seam(479, 480);
+  if (s) {
+    console.log(
+      `        479/480 seam: root ${s.a.root.toFixed(2)} -> ${s.b.root.toFixed(2)}, ` +
+      `largest type step ${s.worst.key || "none"} ${s.worst.pct.toFixed(1)}%`
+    );
+    ok(`${page} @ 479/480: type does not step where the root does not`,
+      s.worst.pct < 1, `${s.worst.key} steps ${s.worst.pct.toFixed(1)}%`);
+  }
+  const r = seam(478, 479);
+  if (r) {
+    console.log(
+      `        478/479 seam: root ${r.a.root.toFixed(2)} -> ${r.b.root.toFixed(2)}, ` +
+      `largest type step ${r.worst.key || "none"} ${r.worst.pct.toFixed(1)}%  (reported, not asserted — ` +
+      `this is where the reading tier is SUPPOSED to step)`
+    );
   }
 }
 
