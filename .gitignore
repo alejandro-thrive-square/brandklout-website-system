@@ -66,6 +66,13 @@ desktop.ini
 *.swp
 *.swo
 
+# Session rotation working state (SYSTEM_RULES.md section 5).
+# Deliberately untracked: every worktree writes the same two paths, so tracking them
+# would guarantee a merge conflict on every client branch. The durable record of what
+# a session did is its commits; the runbook is only the handoff between sessions.
+.claude/RUNBOOK.md
+.claude/session-state.json
+
 # ===== Logs =====
 *.log
 logs/

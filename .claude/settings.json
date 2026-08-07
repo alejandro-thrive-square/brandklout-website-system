@@ -1,0 +1,27 @@
+{
+  "$comment": "Project hooks implementing SYSTEM_RULES.md section 5 (Session Rotation). These MERGE with the user-level hooks in ~/.claude/settings.json, which are owned by Orca - do not move these there, and do not edit Orca's file to add them.",
+  "hooks": {
+    "SessionStart": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/session-resume.mjs\"",
+            "timeout": 20
+          }
+        ]
+      }
+    ],
+    "Stop": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "node \"$CLAUDE_PROJECT_DIR/scripts/session-guard.mjs\"",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
+  }
+}

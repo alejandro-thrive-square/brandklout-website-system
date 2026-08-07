@@ -8,11 +8,10 @@ Client delivery (via the Brandklout partnership).
 
 ## Active MCP Servers
 
-**None. No platform grant exists for this client yet.**
-
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-grand-mission-dentistry` | Would cover this client's Webflow site. | **Not registered.** Do not create it until the build platform is confirmed and Brandklout grants access. |
+| `webflow-grand-mission-dentistry` | This client's Webflow site. | **Registered 2026-08-06.** Authenticate on the **team** profile, scoping the OAuth screen to this client's sites only. |
+| `webflow-clientfirst` | Local Client-First conversion helper. Reads files, holds no credentials, makes no network calls. | Always available. |
 
 Partnership-level Asana access is covered by
 [../../docs/mcp-access.md](../../docs/mcp-access.md) and is **read-only**. It grants nothing here:
@@ -20,9 +19,14 @@ being able to read this client's Asana tasks confers no permission to touch thei
 hosting, CRM, or ad accounts.
 
 > [!IMPORTANT]
-> The build platform is **unconfirmed** - it may be Webflow or GoHighLevel. See
-> [ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md). Registering a Webflow instance before that is
-> settled would create a grant nobody needs. Resolve the platform question first.
+> **Registration is not a grant.** The instance exists so that it *can* be authenticated. It confers
+> nothing until Brandklout invites the agency Webflow account to this client's workspace or site,
+> and the OAuth screen is completed with **only this client's sites** selected. Authorising another
+> client's sites into this instance breaks the per-principal boundary the naming exists to enforce.
+
+> [!NOTE]
+> Build platform is **resolved: Webflow** (see [ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md)).
+> GoHighLevel appears only as a lead destination, not as the page builder.
 
 ## Target Resources
 - **Asana parent task**: `1217040406855578` (workspace `1210572425689866`)
@@ -35,8 +39,10 @@ hosting, CRM, or ad accounts.
 - Create design and planning artifacts in this folder's workflow `.tmp/` directories.
 
 ## Forbidden Operations
-- Do not authenticate to, or mutate, **any** client platform - no Webflow, GHL, hosting, DNS,
-  analytics, CRM, or ad account - until this file names the target and access is granted.
+- Do not authenticate to, or mutate, any client platform other than the Webflow instance named
+  above - no GHL, hosting, DNS, analytics, CRM, or ad account.
+- **Do not publish.** Local design approval comes first, then a Webflow build, and publishing is a
+  separate explicit go-ahead. A published page is live to real paid traffic.
 - Do not create MCP server instances for this client on your own initiative.
 - Do not write to Asana. Comments and status changes notify real Brandklout staff.
 - Do not invent testimonials, reviews, patient stories, or statistics for this practice. Real
@@ -48,9 +54,17 @@ Any first contact with a client-owned system requires explicit confirmation in t
 conversation, plus an update to this file naming the target account and site ID.
 
 ## Runtime Authentication Notes
-Nothing to authenticate yet. If a task appears to need platform access, stop and request it rather
-than reusing another client's grant - grants are per principal, and reusing one silently wipes the
-previous client's. See
+
+Authenticate in a **team-profile** terminal (`claude team`). OAuth grants are stored in
+`~/.claude-<profile>/.credentials.json` keyed `<server-name>|<url-hash>`, which makes them **per
+profile and global across projects** — not per worktree. Authenticating on the personal profile puts
+the grant where client agents cannot see it, because all client work runs on team.
+
+Verify the connection through `/mcp`, and confirm the target site ID, before any write.
+
+Grants are per principal. Never re-authenticate this instance against another client's sites, and
+never borrow another client's instance for this one — re-authenticating a server name silently wipes
+the previous grant. See
 [ACCESS_MODEL.md](../../../../mcp-servers/ACCESS_MODEL.md#server-instances-one-per-principal).
 
 ## Artifact Storage
