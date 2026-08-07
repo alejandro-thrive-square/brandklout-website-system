@@ -141,7 +141,7 @@
     .ch-arrival .trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;
       padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
     .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
-      font-family:var(--f-ui);font-size:.76rem;font-weight:600;color:var(--fg-soft)}
+      font-family:var(--f-ui);font-size:calc(.76rem*var(--s-tx));font-weight:600;color:var(--fg-soft)}
     .ch-arrival .trust svg{width:16px;height:16px;color:var(--cyan);flex:none}
     @media(min-width:1000px){ .ch-arrival .in{grid-template-columns:1.12fr .88fr;gap:clamp(2.5rem,4vw,4.5rem)} }
   </style>
@@ -249,15 +249,15 @@
     .ch-mirror{background:var(--ink-950)}
     .ch-mirror .stage{min-height:100svh;display:grid;align-content:center;
       padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
-    .ch-mirror .big{font-family:var(--f-display);font-size:clamp(1.65rem,4.2vw,3.7rem);
+    .ch-mirror .big{font-family:var(--f-display);font-size:calc(3.7rem*var(--s-d1));
       line-height:1.16;max-width:21ch;font-weight:600}
     .ch-mirror .big .wz-word{color:rgba(255,255,255,.17)}
     .mir-grid{display:grid;gap:clamp(.8rem,1.6vw,1.3rem);margin-top:clamp(2rem,4vw,3.25rem);
       grid-template-columns:1fr}
     .mir-card{border:1px solid var(--line);border-radius:var(--radius-lg);
       padding:clamp(1.1rem,2vw,1.6rem);background:rgba(255,255,255,.03)}
-    .mir-card h3{font-size:1.02rem;margin-bottom:.45rem}
-    .mir-card p{font-size:.9rem;color:var(--fg-body)}
+    .mir-card h3{font-size:calc(1.02rem*var(--s-tx));margin-bottom:.45rem}
+    .mir-card p{font-size:calc(.9rem*var(--s-tx));color:var(--fg-body)}
     @media(min-width:700px){ .mir-grid{grid-template-columns:repeat(2,1fr)} }
     @media(min-width:1120px){ .mir-grid{grid-template-columns:repeat(4,1fr)} }
   </style>
@@ -333,7 +333,7 @@
       background:var(--ink-800);clip-path:inset(0 0 100% 0)}
     .ch-honest .plate img{width:100%;height:100%;object-fit:cover}
     .cand{margin-top:clamp(2.5rem,5vw,4rem)}
-    .cand h3{font-size:1.05rem;margin-bottom:.35rem}
+    .cand h3{font-size:calc(1.05rem*var(--s-tx));margin-bottom:.35rem}
     @media(min-width:900px){ .ch-honest .lay{grid-template-columns:1.15fr .85fr} }
   </style>
 
@@ -418,11 +418,11 @@
     .dsn-step{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
       padding-block:clamp(.8rem,1.6vw,1.15rem);border-top:1px solid var(--line);opacity:.32}
     .dsn-step:last-child{border-bottom:1px solid var(--line)}
-    .dsn-step b{font-family:var(--f-display);font-size:1.4rem;color:var(--cyan-deep);line-height:1;
+    .dsn-step b{font-family:var(--f-display);font-size:calc(1.4rem*var(--s-tx));color:var(--cyan-deep);line-height:1;
       font-variant-numeric:tabular-nums}
-    .dsn-step h3{font-size:1.02rem;margin-bottom:.25rem}
-    .dsn-step p{font-size:.9rem;color:var(--fg-body)}
-    .dsn-note{margin-top:1rem;font-size:.78rem;color:var(--fg-soft)}
+    .dsn-step h3{font-size:calc(1.02rem*var(--s-tx));margin-bottom:.25rem}
+    .dsn-step p{font-size:calc(.9rem*var(--s-tx));color:var(--fg-body)}
+    .dsn-note{margin-top:1rem;font-size:calc(.78rem*var(--s-tx));color:var(--fg-soft)}
     @media(min-width:900px){
       .ch-design .lay{grid-template-columns:1.05fr .95fr;gap:clamp(2.5rem,5vw,5rem)}
       .smile-fig{width:min(44vw,500px)}
@@ -529,11 +529,11 @@
     .path-card{width:clamp(250px,27vw,400px);flex:none;border:1px solid var(--line);
       border-radius:var(--radius-lg);padding:clamp(1.2rem,2.2vw,2rem);background:var(--card);
       display:flex;flex-direction:column;gap:.7rem;transition:border-color .5s ease,background .5s ease}
-    .path-card .no{font-family:var(--f-display);font-size:clamp(2rem,3.8vw,3rem);color:var(--cyan);
+    .path-card .no{font-family:var(--f-display);font-size:calc(3rem*var(--s-h2));color:var(--cyan);
       line-height:.9;opacity:.35}
     .path-card h3{font-size:var(--h3)}
-    .path-card p{font-size:.92rem;color:var(--fg-body)}
-    .path-card .k{font-family:var(--f-ui);font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;
+    .path-card p{font-size:calc(.92rem*var(--s-tx));color:var(--fg-body)}
+    .path-card .k{font-family:var(--f-ui);font-size:calc(.62rem*var(--s-tx));letter-spacing:.2em;text-transform:uppercase;
       font-weight:700;color:var(--cyan)}
     .ch-method .bar{position:absolute;left:var(--gutter);right:var(--gutter);
       bottom:clamp(1.2rem,3.5vw,2.6rem);height:2px;background:var(--line)}
@@ -773,7 +773,7 @@
       margin-top:clamp(2.5rem,5vw,4.5rem)}
     .ch-invite .close h2{color:#fff;max-width:20ch;margin-inline:auto}
     .ch-invite .close p{color:rgba(255,255,255,.72);max-width:46ch}
-    .ch-invite .close .addr{font-size:.85rem;color:rgba(255,255,255,.5)}
+    .ch-invite .close .addr{font-size:calc(.85rem*var(--s-tx));color:rgba(255,255,255,.5)}
     @media(min-width:980px){ .ch-invite .lay{grid-template-columns:.85fr 1.15fr} }
   </style>
 
@@ -862,7 +862,7 @@
     <div class="ftr__grid">
       <div>
         <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
-        <p style="font-size:.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
+        <p style="font-size:calc(.9rem*var(--s-tx))">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
         <h3>Visit</h3>
@@ -874,8 +874,8 @@
       </div>
       <div>
         <h3>This page</h3>
-        <p style="font-size:.9rem">Porcelain veneers and smile makeovers for Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
-        <p style="font-size:.9rem"><a href="../">All landing pages</a></p>
+        <p style="font-size:calc(.9rem*var(--s-tx))">Porcelain veneers and smile makeovers for Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
+        <p style="font-size:calc(.9rem*var(--s-tx))"><a href="../">All landing pages</a></p>
       </div>
     </div>
     <div class="ftr__legal">

@@ -89,7 +89,7 @@
     .ch-arrival .trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;
       padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
     .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
-      font-family:var(--f-ui);font-size:.76rem;font-weight:600;color:var(--fg-soft)}
+      font-family:var(--f-ui);font-size:calc(.76rem*var(--s-tx));font-weight:600;color:var(--fg-soft)}
     .ch-arrival .trust svg{width:16px;height:16px;color:var(--cyan);flex:none}
     @media(min-width:1000px){ .ch-arrival .in{grid-template-columns:1.1fr .9fr;gap:clamp(2.5rem,4vw,4.5rem)} }
   </style>
@@ -193,11 +193,11 @@
     .ch-years .stage{min-height:100svh;display:grid;align-content:center;
       padding-block:clamp(3rem,6vw,5rem);overflow:hidden}
     .yr-big{font-family:var(--f-display);font-weight:700;line-height:.9;color:#fff;
-      font-size:clamp(4.5rem,18vw,14rem);font-variant-numeric:tabular-nums;letter-spacing:-.01em}
+      font-size:calc(14rem*var(--s-d1));font-variant-numeric:tabular-nums;letter-spacing:-.01em}
     .yr-rail{position:relative;height:2px;background:rgba(255,255,255,.12);
       margin-block:clamp(1.4rem,3vw,2.4rem)}
     .yr-rail i{position:absolute;inset:0;background:var(--cyan);transform:scaleX(0);transform-origin:left}
-    .yr-ends{display:flex;justify-content:space-between;font-family:var(--f-ui);font-size:.66rem;
+    .yr-ends{display:flex;justify-content:space-between;font-family:var(--f-ui);font-size:calc(.66rem*var(--s-tx));
       letter-spacing:.2em;text-transform:uppercase;color:var(--fg-soft)}
     .yr-notes{margin-top:clamp(1.4rem,3vw,2.4rem);min-height:7.5em;max-width:56ch}
     .yr-note{font-size:var(--body-lg);color:var(--fg-body)}
@@ -205,8 +205,8 @@
     .yr-stats{display:grid;gap:1.2rem;margin-top:clamp(1.8rem,3.5vw,2.8rem);
       grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
     .yr-stat b{display:block;font-family:var(--f-display);font-weight:700;line-height:1;
-      color:var(--cyan);font-size:clamp(1.9rem,4vw,3rem)}
-    .yr-stat span{display:block;margin-top:.45rem;font-family:var(--f-ui);font-size:.68rem;
+      color:var(--cyan);font-size:calc(3rem*var(--s-h2))}
+    .yr-stat span{display:block;margin-top:.45rem;font-family:var(--f-ui);font-size:calc(.68rem*var(--s-tx));
       letter-spacing:.16em;text-transform:uppercase;color:var(--fg-soft)}
   </style>
 
@@ -293,7 +293,7 @@
       /* The floor has to stay low enough that "Wadsworth" fits a 280px column
          at 320px wide — at 3rem the word measures 307px and pushes the page
          sideways. */
-      font-size:clamp(2.1rem,1.1rem + 5vw,5rem);overflow-wrap:break-word}
+      font-size:calc(5rem*var(--s-d1));overflow-wrap:break-word}
     .ch-hood .plate{position:relative;overflow:hidden;border-radius:var(--radius-lg);aspect-ratio:16/11;
       background:var(--paper-3);clip-path:inset(0 0 100% 0)}
     .ch-hood .plate img{width:100%;height:100%;object-fit:cover}
@@ -344,11 +344,11 @@
     .hh-rail .dot{position:absolute;top:-7px;left:0;width:16px;height:16px;border-radius:50%;
       background:var(--cyan);box-shadow:0 0 0 6px rgba(3,197,236,.18);margin-left:-8px}
     .hh-ends{display:flex;justify-content:space-between;margin-top:.9rem;font-family:var(--f-ui);
-      font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-soft)}
+      font-size:calc(.66rem*var(--s-tx));letter-spacing:.18em;text-transform:uppercase;color:var(--fg-soft)}
     .hh-rows{display:grid;margin-top:clamp(1.6rem,3vw,2.4rem)}
     .hh-row{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:center;
       padding-block:clamp(.75rem,1.5vw,1.05rem);border-top:1px solid var(--line);opacity:.3;
-      font-size:.98rem;color:var(--fg-body)}
+      font-size:calc(.98rem*var(--s-tx));color:var(--fg-body)}
     .hh-row:last-child{border-bottom:1px solid var(--line)}
     .hh-row svg{width:19px;height:19px;color:var(--cyan);flex:none}
   </style>
@@ -431,12 +431,12 @@
     .path-card{width:clamp(240px,25vw,370px);flex:none;border:1px solid var(--line);
       border-radius:var(--radius-lg);padding:clamp(1.2rem,2.2vw,1.9rem);background:var(--card);
       display:flex;flex-direction:column;gap:.9rem;transition:border-color .5s ease,box-shadow .5s ease}
-    .path-card blockquote{margin:0;font-size:.96rem;line-height:1.75;color:var(--fg-body)}
-    .path-card blockquote::before{content:"\201C";font-family:var(--f-display);font-size:2.4rem;
+    .path-card blockquote{margin:0;font-size:calc(.96rem*var(--s-tx));line-height:1.75;color:var(--fg-body)}
+    .path-card blockquote::before{content:"\201C";font-family:var(--f-display);font-size:calc(2.4rem*var(--s-tx));
       color:var(--cyan-deep);line-height:0;display:block;height:.65em}
     .path-card .who{margin-top:auto;padding-top:.9rem;border-top:1px solid var(--line);
-      font-family:var(--f-ui);font-weight:700;font-size:.86rem;color:var(--fg)}
-    .path-card .src{display:block;font-size:.7rem;letter-spacing:.12em;text-transform:uppercase;
+      font-family:var(--f-ui);font-weight:700;font-size:calc(.86rem*var(--s-tx));color:var(--fg)}
+    .path-card .src{display:block;font-size:calc(.7rem*var(--s-tx));letter-spacing:.12em;text-transform:uppercase;
       color:var(--fg-soft);font-weight:600}
     .ch-voices .bar{position:absolute;left:var(--gutter);right:var(--gutter);
       bottom:clamp(1.2rem,3.5vw,2.6rem);height:2px;background:var(--line)}
@@ -587,7 +587,7 @@
       margin-top:clamp(2.5rem,5vw,4.5rem)}
     .ch-invite .close h2{color:#fff;max-width:20ch;margin-inline:auto}
     .ch-invite .close p{color:rgba(255,255,255,.72);max-width:48ch}
-    .ch-invite .close .addr{font-size:.85rem;color:rgba(255,255,255,.5)}
+    .ch-invite .close .addr{font-size:calc(.85rem*var(--s-tx));color:rgba(255,255,255,.5)}
   </style>
 
   <div class="wrap pad">
@@ -648,7 +648,7 @@
     <div class="ftr__grid">
       <div>
         <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
-        <p style="font-size:.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
+        <p style="font-size:calc(.9rem*var(--s-tx))">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
         <h3>Visit</h3>
@@ -660,8 +660,8 @@
       </div>
       <div>
         <h3>This page</h3>
-        <p style="font-size:.9rem">Family and general dentistry for Arvada and the surrounding neighbourhoods.</p>
-        <p style="font-size:.9rem"><a href="../">All landing pages</a></p>
+        <p style="font-size:calc(.9rem*var(--s-tx))">Family and general dentistry for Arvada and the surrounding neighbourhoods.</p>
+        <p style="font-size:calc(.9rem*var(--s-tx))"><a href="../">All landing pages</a></p>
       </div>
     </div>
     <div class="ftr__legal" id="terms">

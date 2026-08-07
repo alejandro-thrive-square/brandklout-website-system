@@ -244,7 +244,7 @@
           },
           "releaseBefore": true,
           "releaseAfter": true,
-          "beforeTop": 399,
+          "beforeTop": 400,
           "afterTop": -501
         },
         {
@@ -321,7 +321,7 @@
           "releaseBefore": true,
           "releaseAfter": true,
           "beforeTop": 399,
-          "afterTop": -501
+          "afterTop": -500
         },
         {
           "chapter": "2",
@@ -592,56 +592,6 @@
           "pass": true
         }
       ],
-      "errors": []
-    }
-  ],
-  "reduced": [
-    {
-      "page": "implants",
-      "hiddenLeafNodes": [],
-      "pinnedTriggers": 0,
-      "smootherActive": false,
-      "pass": true,
-      "errors": []
-    },
-    {
-      "page": "aox",
-      "hiddenLeafNodes": [],
-      "pinnedTriggers": 0,
-      "smootherActive": false,
-      "pass": true,
-      "errors": []
-    },
-    {
-      "page": "veneers",
-      "hiddenLeafNodes": [],
-      "pinnedTriggers": 0,
-      "smootherActive": false,
-      "pass": true,
-      "errors": []
-    },
-    {
-      "page": "emergency",
-      "hiddenLeafNodes": [],
-      "pinnedTriggers": 0,
-      "smootherActive": false,
-      "pass": true,
-      "errors": []
-    },
-    {
-      "page": "dentist-near-me",
-      "hiddenLeafNodes": [],
-      "pinnedTriggers": 0,
-      "smootherActive": false,
-      "pass": true,
-      "errors": []
-    },
-    {
-      "page": "next-door",
-      "hiddenLeafNodes": [],
-      "pinnedTriggers": 0,
-      "smootherActive": false,
-      "pass": true,
       "errors": []
     }
   ]

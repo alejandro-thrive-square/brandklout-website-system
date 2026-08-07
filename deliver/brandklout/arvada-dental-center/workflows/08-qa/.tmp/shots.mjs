@@ -201,7 +201,11 @@ for (const slug of PAGES) {
           if (q) {
             var panel = document.getElementById(q.getAttribute('aria-controls'));
             var before = panel.getBoundingClientRect().height;
-            q.click(); await sleep(700);
+            // The panel opens on a 450ms grid-template-rows transition. A 700ms
+            // wait left only 250ms of margin and intermittently reported a
+            // working accordion as broken — next-door failed once in six runs
+            // and passed twice on re-run. Widen the margin rather than trust it.
+            q.click(); await sleep(1200);
             out.faqOpens = panel.getBoundingClientRect().height > before + 8
               && q.getAttribute('aria-expanded') === 'true';
             q.click(); await sleep(500);

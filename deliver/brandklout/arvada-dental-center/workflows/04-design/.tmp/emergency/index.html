@@ -44,10 +44,10 @@
 
   /* An emergency page earns a louder call affordance than the rest of the set. */
   .urgent{border-left:4px solid #ff6b5b;background:rgba(192,57,43,.14);
-    border-radius:12px;padding:1.1rem 1.3rem;font-size:.94rem}
+    border-radius:12px;padding:1.1rem 1.3rem;font-size:calc(.94rem*var(--s-tx))}
   .urgent strong{color:#fff}
   .tel-big{font-family:var(--f-display);font-weight:700;line-height:1.05;
-    font-size:clamp(2rem,6vw,3.4rem);color:var(--amber);display:inline-block}
+    font-size:calc(3.4rem*var(--s-h2));color:var(--amber);display:inline-block}
   .tel-big:hover{color:#fff}
 </style>
 <script src="../_shared/vendor/gsap/gsap.min.js"></script>
@@ -102,7 +102,7 @@
     .ch-arrival .trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;align-items:center;
       padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
     .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
-      font-family:var(--f-ui);font-size:.76rem;font-weight:600;color:var(--fg-soft)}
+      font-family:var(--f-ui);font-size:calc(.76rem*var(--s-tx));font-weight:600;color:var(--fg-soft)}
     .ch-arrival .trust svg{width:16px;height:16px;color:var(--amber);flex:none}
   </style>
 
@@ -177,14 +177,14 @@
     .ch-now{background:var(--ink-950)}
     .ch-now .stage{min-height:100svh;display:grid;align-content:center;
       padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
-    .ch-now .big{font-family:var(--f-display);font-size:clamp(1.6rem,4vw,3.5rem);
+    .ch-now .big{font-family:var(--f-display);font-size:calc(3.5rem*var(--s-d2));
       line-height:1.16;max-width:22ch;font-weight:600}
     .ch-now .big .wz-word{color:rgba(255,255,255,.17)}
     .sym-grid{display:grid;gap:.6rem;margin-top:clamp(1.8rem,3.5vw,2.8rem);grid-template-columns:1fr}
     .sym-card{border:1px solid var(--line);border-radius:12px;padding:.9rem 1.1rem;
       background:rgba(255,255,255,.03)}
-    .sym-card h3{font-size:.98rem;margin-bottom:.25rem}
-    .sym-card p{font-size:.86rem;color:var(--fg-body)}
+    .sym-card h3{font-size:calc(.98rem*var(--s-tx));margin-bottom:.25rem}
+    .sym-card p{font-size:calc(.86rem*var(--s-tx));color:var(--fg-body)}
     @media(min-width:640px){ .sym-grid{grid-template-columns:repeat(2,1fr)} }
     @media(min-width:1100px){ .sym-grid{grid-template-columns:repeat(4,1fr)} }
   </style>
@@ -258,19 +258,19 @@
     .dial .arc{fill:none;stroke:var(--amber);stroke-width:14;stroke-linecap:round}
     .dial .pip{fill:rgba(255,255,255,.25)}
     .dial-mid{position:absolute;inset:0;display:grid;place-items:center;text-align:center}
-    .dial-mid b{display:block;font-family:var(--f-display);font-size:clamp(2.4rem,7vw,3.6rem);
+    .dial-mid b{display:block;font-family:var(--f-display);font-size:calc(3.6rem*var(--s-h2));
       color:#fff;line-height:1;font-variant-numeric:tabular-nums}
-    .dial-mid span{font-family:var(--f-ui);font-size:.62rem;letter-spacing:.22em;
+    .dial-mid span{font-family:var(--f-ui);font-size:calc(.62rem*var(--s-tx));letter-spacing:.22em;
       text-transform:uppercase;color:var(--fg-soft);margin-top:.4rem;display:block}
     .clk-steps{display:grid;margin-top:clamp(1.2rem,2.4vw,2rem)}
     .clk-step{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
       padding-block:clamp(.8rem,1.6vw,1.1rem);border-top:1px solid var(--line);opacity:.3}
     .clk-step:last-child{border-bottom:1px solid var(--line)}
-    .clk-step b{font-family:var(--f-display);font-size:1.3rem;color:var(--amber);line-height:1;
+    .clk-step b{font-family:var(--f-display);font-size:calc(1.3rem*var(--s-tx));color:var(--amber);line-height:1;
       font-variant-numeric:tabular-nums}
-    .clk-step h3{font-size:1rem;margin-bottom:.2rem}
-    .clk-step p{font-size:.9rem;color:var(--fg-body)}
-    .clk-note{margin-top:1rem;font-size:.78rem;color:var(--fg-soft)}
+    .clk-step h3{font-size:calc(1rem*var(--s-tx));margin-bottom:.2rem}
+    .clk-step p{font-size:calc(.9rem*var(--s-tx));color:var(--fg-body)}
+    .clk-note{margin-top:1rem;font-size:calc(.78rem*var(--s-tx));color:var(--fg-soft)}
     @media(min-width:900px){
       .ch-clock .lay{grid-template-columns:.9fr 1.1fr;gap:clamp(2.5rem,5vw,5rem)}
       .dial-fig{width:min(32vw,340px)}
@@ -368,7 +368,7 @@
       border:1px solid rgba(251,142,40,.42);border-radius:var(--radius-lg);
       padding:clamp(1.5rem,3vw,2.4rem);text-align:center;margin-top:clamp(2.5rem,5vw,4rem);
       display:grid;gap:.5rem;justify-items:center;color:#4a3418}
-    .callout .lbl{font-family:var(--f-ui);font-size:.68rem;letter-spacing:.2em;text-transform:uppercase;
+    .callout .lbl{font-family:var(--f-ui);font-size:calc(.68rem*var(--s-tx));letter-spacing:.2em;text-transform:uppercase;
       font-weight:700;color:var(--amber-ink)}
     .callout .tel-big{color:var(--amber-deep)}
     .callout .tel-big:hover{color:#4a3418}
@@ -424,7 +424,7 @@
       <p class="lbl">Stay calm and contact us without delay</p>
       <a class="tel-big tel" href="tel:+13034217611">(303) 421-7611</a>
       <span class="status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
-      <p style="font-size:.9rem;color:#7a6244;margin:0">Monday to Friday, 8am to 5pm &middot; 6695 Wadsworth Blvd, Arvada, CO 80003</p>
+      <p style="font-size:calc(.9rem*var(--s-tx));color:#7a6244;margin:0">Monday to Friday, 8am to 5pm &middot; 6695 Wadsworth Blvd, Arvada, CO 80003</p>
     </div>
   </div>
 
@@ -459,10 +459,10 @@
     .path-card{width:clamp(250px,27vw,400px);flex:none;border:1px solid var(--line);
       border-radius:var(--radius-lg);padding:clamp(1.2rem,2.2vw,2rem);background:var(--card);
       display:flex;flex-direction:column;gap:.7rem;transition:border-color .5s ease,background .5s ease}
-    .path-card .no{font-family:var(--f-display);font-size:clamp(2rem,3.8vw,3rem);color:var(--amber);
+    .path-card .no{font-family:var(--f-display);font-size:calc(3rem*var(--s-h2));color:var(--amber);
       line-height:.9;opacity:.35}
     .path-card h3{font-size:var(--h3)}
-    .path-card p{font-size:.92rem;color:var(--fg-body)}
+    .path-card p{font-size:calc(.92rem*var(--s-tx));color:var(--fg-body)}
     .ch-arrive .bar{position:absolute;left:var(--gutter);right:var(--gutter);
       bottom:clamp(1.2rem,3.5vw,2.6rem);height:2px;background:var(--line)}
     .ch-arrive .bar i{position:absolute;inset:0;background:var(--amber);transform:scaleX(0);transform-origin:left}
@@ -606,7 +606,7 @@
       margin-top:clamp(2.5rem,5vw,4.5rem)}
     .ch-invite .close h2{color:#fff;max-width:20ch;margin-inline:auto}
     .ch-invite .close p{color:rgba(255,255,255,.72);max-width:46ch}
-    .ch-invite .close .addr{font-size:.85rem;color:rgba(255,255,255,.5)}
+    .ch-invite .close .addr{font-size:calc(.85rem*var(--s-tx));color:rgba(255,255,255,.5)}
     @media(min-width:980px){ .ch-invite .lay{grid-template-columns:1fr 1fr} }
   </style>
 
@@ -713,7 +713,7 @@
     <div class="ftr__grid">
       <div>
         <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
-        <p style="font-size:.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
+        <p style="font-size:calc(.9rem*var(--s-tx))">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
         <h3>Visit</h3>
@@ -725,8 +725,8 @@
       </div>
       <div>
         <h3>This page</h3>
-        <p style="font-size:.9rem">Emergency dentistry for Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
-        <p style="font-size:.9rem"><a href="../">All landing pages</a></p>
+        <p style="font-size:calc(.9rem*var(--s-tx))">Emergency dentistry for Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
+        <p style="font-size:calc(.9rem*var(--s-tx))"><a href="../">All landing pages</a></p>
       </div>
     </div>
     <div class="ftr__legal">

@@ -91,14 +91,14 @@
     .ch-arrival .trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;
       padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
     .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
-      font-family:var(--f-ui);font-size:.76rem;font-weight:600;color:var(--fg-soft)}
+      font-family:var(--f-ui);font-size:calc(.76rem*var(--s-tx));font-weight:600;color:var(--fg-soft)}
     .ch-arrival .trust svg{width:16px;height:16px;color:var(--cyan);flex:none}
     .ch-arrival .cue{display:none}
     @media(min-width:1000px){
       .ch-arrival .in{grid-template-columns:1.12fr .88fr;gap:clamp(2.5rem,4vw,4.5rem)}
       .ch-arrival .cue{position:absolute;left:var(--gutter);bottom:clamp(1.5rem,3vw,2.5rem);
         z-index:4;display:flex;align-items:center;gap:.7rem;font-family:var(--f-ui);
-        font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--fg-soft)}
+        font-size:calc(.64rem*var(--s-tx));letter-spacing:.2em;text-transform:uppercase;color:var(--fg-soft)}
       .ch-arrival .cue i{display:block;width:1px;height:42px;
         background:linear-gradient(180deg,var(--cyan),transparent)}
     }
@@ -256,7 +256,7 @@
     .ch-gap{background:var(--ink-950)}
     .ch-gap .stage{min-height:100svh;display:grid;align-content:center;
       padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
-    .ch-gap .big{font-family:var(--f-display);font-size:clamp(1.7rem,4.4vw,3.9rem);
+    .ch-gap .big{font-family:var(--f-display);font-size:calc(3.9rem*var(--s-d1));
       line-height:1.16;max-width:20ch;font-weight:600}
     /* The unread state has to read as "not yet" and still be legible copy. */
     .ch-gap .big .wz-word{color:rgba(255,255,255,.17)}
@@ -264,8 +264,8 @@
       grid-template-columns:1fr}
     .gap-card{border:1px solid var(--line);border-radius:var(--radius-lg);
       padding:clamp(1.1rem,2vw,1.6rem);background:rgba(255,255,255,.03)}
-    .gap-card h3{font-size:1.02rem;margin-bottom:.5rem}
-    .gap-card p{font-size:.9rem;color:var(--fg-body)}
+    .gap-card h3{font-size:calc(1.02rem*var(--s-tx));margin-bottom:.5rem}
+    .gap-card p{font-size:calc(.9rem*var(--s-tx));color:var(--fg-body)}
     .ch-gap .foot{margin-top:clamp(1.6rem,3vw,2.5rem);display:flex;flex-wrap:wrap;gap:1rem;
       align-items:center}
     @media(min-width:700px){ .ch-gap .cards{grid-template-columns:repeat(2,1fr)} }
@@ -373,11 +373,11 @@
     .anat-step{display:grid;grid-template-columns:auto 1fr;gap:1rem;align-items:start;
       padding-block:clamp(.8rem,1.6vw,1.15rem);border-top:1px solid var(--line);opacity:.32}
     .anat-step:last-child{border-bottom:1px solid var(--line)}
-    .anat-step b{font-family:var(--f-display);font-size:1.4rem;color:var(--cyan-deep);
+    .anat-step b{font-family:var(--f-display);font-size:calc(1.4rem*var(--s-tx));color:var(--cyan-deep);
       line-height:1;font-variant-numeric:tabular-nums}
-    .anat-step h3{font-size:1.02rem;margin-bottom:.25rem}
-    .anat-step p{font-size:.9rem;color:var(--fg-body)}
-    .anat-note{margin-top:1rem;font-size:.78rem;color:var(--fg-soft)}
+    .anat-step h3{font-size:calc(1.02rem*var(--s-tx));margin-bottom:.25rem}
+    .anat-step p{font-size:calc(.9rem*var(--s-tx));color:var(--fg-body)}
+    .anat-note{margin-top:1rem;font-size:calc(.78rem*var(--s-tx));color:var(--fg-soft)}
     @media(min-width:900px){
       .ch-anat .lay{grid-template-columns:.9fr 1.1fr;gap:clamp(2.5rem,5vw,5rem)}
       .anat-fig{width:min(34vw,340px)}
@@ -493,9 +493,9 @@
     .mq{margin-top:clamp(2.5rem,5vw,4.5rem);overflow:hidden;
       border-block:1px solid var(--line);padding-block:clamp(.8rem,1.5vw,1.2rem)}
     .mq .row{display:flex;width:max-content;will-change:transform}
-    .mq .row span{font-family:var(--f-display);font-size:clamp(.95rem,1.6vw,1.4rem);
+    .mq .row span{font-family:var(--f-display);font-size:calc(1.4rem*var(--s-h2));
       color:var(--fg-soft);white-space:nowrap;padding-inline:clamp(.8rem,2vw,1.6rem)}
-    .mq .row b{color:var(--cyan);align-self:center;font-size:.6rem}
+    .mq .row b{color:var(--cyan);align-self:center;font-size:calc(.6rem*var(--s-tx))}
   </style>
 
   <div class="wrap pad">
@@ -581,8 +581,8 @@
       aspect-ratio:4/5;background:var(--ink-800);clip-path:inset(0 0 100% 0)}
     .ch-surgeon .plate img{width:100%;height:100%;object-fit:cover}
     .ch-surgeon .sig{margin-top:1rem;display:grid;gap:.2rem}
-    .ch-surgeon .sig b{font-family:var(--f-display);font-size:1.25rem;color:var(--fg)}
-    .ch-surgeon .sig span{font-family:var(--f-ui);font-size:.68rem;letter-spacing:.18em;
+    .ch-surgeon .sig b{font-family:var(--f-display);font-size:calc(1.25rem*var(--s-tx));color:var(--fg)}
+    .ch-surgeon .sig span{font-family:var(--f-ui);font-size:calc(.68rem*var(--s-tx));letter-spacing:.18em;
       text-transform:uppercase;color:var(--accent)}
     .ch-surgeon h2{font-size:var(--h2);max-width:15ch}
     @media(min-width:900px){ .ch-surgeon .lay{grid-template-columns:.8fr 1.2fr} }
@@ -646,10 +646,10 @@
       border-radius:var(--radius-lg);padding:clamp(1.2rem,2.2vw,2rem);background:var(--card);
       display:flex;flex-direction:column;gap:.7rem;position:relative;
       transition:border-color .5s ease,box-shadow .5s ease}
-    .path-card .no{font-family:var(--f-display);font-size:clamp(2.2rem,4.2vw,3.4rem);
+    .path-card .no{font-family:var(--f-display);font-size:calc(3.4rem*var(--s-h2));
       color:var(--cyan-deep);line-height:.9;opacity:.35}
     .path-card h3{font-size:var(--h3)}
-    .path-card p{font-size:.92rem;color:var(--fg-body)}
+    .path-card p{font-size:calc(.92rem*var(--s-tx));color:var(--fg-body)}
     .ch-path .bar{position:absolute;left:var(--gutter);right:var(--gutter);
       bottom:clamp(1.2rem,3.5vw,2.6rem);height:2px;background:var(--line)}
     .ch-path .bar i{position:absolute;inset:0;background:var(--cyan-deep);transform:scaleX(0);
@@ -797,7 +797,7 @@
         actually work with is not a risk worth carrying on a paid-traffic page.
         Restore the list only once Brandklout confirms it — see Open Question 10.
       -->
-      <p style="font-size:.94rem">Treatment can usually be spread over monthly payments, and a plan is built
+      <p style="font-size:calc(.94rem*var(--s-tx))">Treatment can usually be spread over monthly payments, and a plan is built
         around the case rather than the other way round. You can check what you qualify for before
         committing to anything.</p>
       <ul class="checks mt-s">
@@ -835,7 +835,7 @@
       margin-top:clamp(2.5rem,5vw,4.5rem)}
     .ch-invite .close h2{color:#fff;max-width:18ch;margin-inline:auto}
     .ch-invite .close p{color:rgba(255,255,255,.72);max-width:46ch}
-    .ch-invite .close .addr{font-size:.85rem;color:rgba(255,255,255,.5)}
+    .ch-invite .close .addr{font-size:calc(.85rem*var(--s-tx));color:rgba(255,255,255,.5)}
   </style>
 
   <div class="wrap pad">
@@ -913,7 +913,7 @@
     <div class="ftr__grid">
       <div>
         <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
-        <p style="font-size:.9rem">World-class dental care with small-town appeal, in Arvada since 2003.</p>
+        <p style="font-size:calc(.9rem*var(--s-tx))">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
         <h3>Visit</h3>
@@ -928,8 +928,8 @@
       </div>
       <div>
         <h3>This page</h3>
-        <p style="font-size:.9rem">Dental implants in Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
-        <p style="font-size:.9rem"><a href="../">All landing pages</a></p>
+        <p style="font-size:calc(.9rem*var(--s-tx))">Dental implants in Arvada, Denver, Westminster, Broomfield, Applewood and Lakeside.</p>
+        <p style="font-size:calc(.9rem*var(--s-tx))"><a href="../">All landing pages</a></p>
       </div>
     </div>
     <div class="ftr__legal" id="terms">

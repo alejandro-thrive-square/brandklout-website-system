@@ -246,6 +246,61 @@ Screenshot review is worth nothing unless it changes something. Three things did
   (Open Question 12). They are presented as general characteristics of the materials, not as a
   promise by this practice.
 
+## Addendum — the house fluid root font-size (2026-08-07)
+
+The pages now carry the house fluid root
+([`deliver/process/04-design/fluid-root.md`](../../../../../process/04-design/fluid-root.md)),
+installed once as the first rule of `_shared/journey.css`. `html` font-size interpolates with the
+viewport on `webzite-house-v1`: 12px at 320, ramping to **16px at 479, flat to 1440**, then 18px at
+1920 and 20px at 2400.
+
+**A fifth gate**, [`root-proof.mjs`](./root-proof.mjs), was added for it. The static check
+(`scripts/fluid-root.mjs --check`) can only see that the snippet is in the file; it cannot see a
+reset, a vendor sheet or a stray `html{font-size}` winning later in the cascade. `root-proof.mjs`
+asks a real, focused browser what the computed root font-size actually is at 26 widths and compares
+it with the generator's own table, then measures what the reader gets.
+
+| Check | Result |
+| :--- | :--- |
+| `fluid-root.mjs --check` | **7/7 pages**, 0 problems (was 0/7, 47 `clamp()` font-sizes) |
+| computed root vs `webzite-house-v1` | **156/156 measurements exact** (26 widths x 6 pages) |
+| reading text below 480px | **>= 16px everywhere**, at every real phone width |
+| tap targets | 0 under 44px |
+| 479/480 seam | root 16.00 -> 16.00, largest type step **0.0%** |
+| journey-audit / content-gate | 6/6 and 192/192, unchanged |
+| shots | 72 captures, 72 no-overflow, 0 broken images, 0 console errors, 6/6 interaction |
+| scrub-proof / price-check | 18/18 pins, prices clean |
+
+### Why the pages needed more than a search-and-replace
+
+The rule is "no `clamp()` font-size", and the replacement is "the plain `rem` that preserves the
+rendered size at 1440". That is sufficient only where the `clamp()`'s `vw` term was inactive. It was
+not, for display type: `--d1` was `clamp(2.4rem, 6.4vw, 6.4rem)`, which rendered **49px at 768** and
+92px at 1440. The 1440-preserving `5.76rem` renders 92px at *both*, because the root is flat across
+that whole range — the hero headline would have nearly doubled on a tablet.
+
+So display type is `calc(<rem> * var(--s-d1))` and the responsive curve lives in one block of `px`
+media queries that step five multipliers. Each band is solved against a width where the old
+rendering is known, so **768, 1024 and 1440 reproduce the approved sizes exactly** and 360/390 land
+within 3%. The text multiplier `--s-tx` runs the other way: below 479 the root ramps down to 12px,
+so text has to grow in `rem` terms to hold its size, and grow further to clear the 16px floor. Its
+bands are solved at each band's *narrow* end, because 320, 375, 412 and 414 are all real phones and
+all sit near a band edge.
+
+Body copy below 480px now renders 16.3-17.6px, against 15.2px in the approved design. Above 480 the
+approved sizes are untouched.
+
+### Two defects the inspection turned up
+
+- **`.faq__q` fell to 40px tall at 320**, under the 44px touch minimum, without a single declaration
+  changing: the row is built from `rem` padding and the fluid root shrinks a `rem` to 12px there. It
+  now carries `min-height:44px` in `px`, deliberately outside the scale.
+- **The nav's open/closed pill never hid.** `.status{display:inline-flex}` is defined after
+  `.nav-status{display:none}` at equal specificity, so source order beat the author's intent at
+  every width, and on a 360px screen the pill pushed **the phone number — the primary CTA — off the
+  right edge**. `body{overflow-x:hidden}` is why the overflow assertion never saw it. Pre-existing,
+  unrelated to the fluid root, fixed here because it was visible in this round's evidence.
+
 ## Version Control
 
 Follows the root-level rules in [SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md).
