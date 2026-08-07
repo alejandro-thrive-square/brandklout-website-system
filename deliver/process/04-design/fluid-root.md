@@ -94,11 +94,68 @@ Because 479–1440 is flat, the six-breakpoint QA effectively reduces to **360, 
 type-scale purposes. The mid-range captures should be byte-identical to the pre-install ones — if
 they are not, something else in the cascade is fighting the root.
 
+That last sentence holds for installing the *snippet*. It does **not** survive removing a `clamp()`
+type scale in the same pass: a `clamp()` with a live `vw` term was scaling across 479–1440 and a
+bare `rem` does not, so the mid-range legitimately changes. See the warning under *Replacing an
+existing `clamp()` type scale* — if you are doing both at once, expect to justify the mid-range, not
+assert it is untouched.
+
 ### Replacing an existing `clamp()` type scale
 
 Do not swap `clamp(3rem, 7vw, 5.2rem)` for an arbitrary `rem`. Pick the value that **preserves the
 rendered size at 1440px** (root = 16px, so `rem = px / 16`), then verify the extremes at 390 and
 1920 still read correctly and adjust the *scale*, not the individual declaration.
+
+> [!WARNING]
+> **Preserving 1440 is not enough on its own, and the mid-range is where it bites.** The root is
+> flat from 479 to 1440, so a plain `rem` does not scale anywhere in that range — but the `clamp()`
+> you are removing *did*, through its `vw` term. `clamp(2.4rem, 6.4vw, 6.4rem)` rendered **49px at
+> 768** and 92px at 1440; the 1440-preserving `5.76rem` renders **92px at both**. The headline
+> nearly doubles on a tablet and bursts the layout. This is not a rounding error and no amount of
+> checking 390 and 1920 will reveal it.
+>
+> A `clamp()` is only safely replaced by a bare `rem` when its `vw` term was **inactive** across
+> 479–1440 — i.e. it was pinned to its `min` or `max` throughout. Body copy and small labels usually
+> qualify (`clamp(.95rem, 1vw, 1.04rem)` is 15.2px at every width up to 1520). Display type
+> essentially never does.
+
+### Stepping display type without `clamp()`
+
+Where the `vw` term *was* doing work, the replacement is a plain `rem` **times a multiplier that the
+`px` media queries step**. Multipliers, not per-element declarations — the whole scale moves
+together and the responsive curve lives in one readable block:
+
+```css
+:root{ --s-d1:1; --s-d2:1; --s-h2:1; --s-h3:1; --s-tx:1 }   /* base: exact at 1440 */
+@media screen and (max-width:1200px){ :root{ --s-d1:.7111; --s-d2:.7111; --s-h2:.7111 } }
+@media screen and (max-width:768px) { :root{ --s-d1:.5333; --s-d2:.5333; --s-h2:.5729 } }
+@media screen and (max-width:400px) { :root{ --s-d1:.4889; --s-h2:.6723; --s-tx:1.235 } }
+
+--d1: calc(5.76rem * var(--s-d1));           /* 92.16px at 1440, 49px at 768 */
+.hero-figure{ font-size: calc(14rem * var(--s-d1)) }
+```
+
+Solve each band against a **reference width where the old rendering is known**, so the captured
+breakpoints land on the values they already had: multiplier = `old_px(ref) / (base_rem × root(ref))`.
+Declare only what changes from the band above — custom properties cascade, so the rest carries.
+
+Two rules keep this honest:
+
+- **The multipliers for display type fall as the screen narrows; the one for text rises.** Below
+  479 the root ramps down to 12px, so text has to grow in `rem` terms merely to hold its pixel size,
+  and grow further still to clear the 16px body-copy floor. Any plain `rem` that is body copy needs
+  that text multiplier too, or it silently drops to 13px on a phone.
+- **This is not a licence to reintroduce per-element media queries.** Four or five multipliers cover
+  a whole design. If you find yourself writing a media query for one heading, the tier is missing.
+- **On a build destined for Webflow, step at the Designer's own breakpoints** — `1279 / 991 / 767 /
+  478` — rather than round numbers like the `1200 / 768 / 400` above. The scale then maps 1:1 onto
+  the breakpoints someone will later edit in the Designer, instead of falling between them where no
+  Webflow control can reach it. Dr. Nahlah uses five groups on exactly these.
+- **Do not put a `<=478` tier on display type.** Below 479 the root is already shrinking, which *is*
+  the reduction display type wants; a tier there fires at 478, where the root has not yet moved, and
+  produces a step up at the breakpoint. Only the text group needs that tier, to stop body copy
+  following the root down. Verify the seam directly: measure the rendered size at 479 and 480 and
+  require the largest step to be ~0%.
 
 ## Install
 
