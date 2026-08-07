@@ -28,13 +28,21 @@ for (let i = 0; i < 60; i++) {
   await evaluate(`window.scrollBy(0, 400)`);
   await wait(220);
   const s = await evaluate(`(function(){
-    var t = ScrollTrigger.getAll().filter(x=>x.trigger&&x.trigger.id==='findPin')[0];
-    return { y: Math.round(scrollY), max: Math.round(document.documentElement.scrollHeight-innerHeight),
-             prog: +t.progress.toFixed(2),
-             clip: getComputedStyle(document.getElementById('mapFrame')).clipPath };
+    try {
+      var t = (window.ScrollTrigger ? ScrollTrigger.getAll() : [])
+                .filter(function(x){return x.trigger && x.trigger.id==='findPin';})[0];
+      var el = document.getElementById('mapFrame');
+      return { y: Math.round(scrollY),
+               max: Math.round(document.documentElement.scrollHeight-innerHeight),
+               prog: t ? +t.progress.toFixed(2) : -1,
+               active: t ? t.isActive : null,
+               st: t ? Math.round(t.start) : -1, en: t ? Math.round(t.end) : -1,
+               clip: el ? getComputedStyle(el).clipPath : '(no el)' };
+    } catch (e) { return { y: Math.round(scrollY), max: -1, prog: -1, clip: 'ERR ' + e.message }; }
   })()`);
+  if (!s) { console.log('  (no reading)'); continue; }
   seen.add(s.clip);
-  if (s.prog > 0 && s.prog < 1) console.log(`  y=${String(s.y).padStart(5)} max=${s.max} findPin prog=${s.prog}  clip=${s.clip}`);
+  if (i % 4 === 0 || (s.prog > 0 && s.prog < 1)) console.log(`  y=${String(s.y).padStart(5)} max=${String(s.max).padStart(5)} findPin ${s.st}..${s.en} prog=${s.prog} active=${s.active}  clip=${s.clip}`);
   if (s.y === last) break;
   last = s.y;
 }
