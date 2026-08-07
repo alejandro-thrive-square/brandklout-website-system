@@ -29,8 +29,14 @@ import { call, sleep, SITE, PAGES } from './mcp.mjs';
 
 const name = process.argv[2];
 const dry = process.argv.includes('--dry');
+/* `get_all_elements` does not report `domId`, so this script cannot tell an id
+   that is already correct from one that is missing. Without --only it would
+   rewrite every id on the page — harmless but ~40 needless calls. Pass the ids
+   actually absent from the SERVED html (diff it against the design's own). */
+const oi = process.argv.indexOf('--only');
+const only = oi > -1 ? new Set(process.argv[oi + 1].split(',').map((s) => s.trim())) : null;
 const pageId = PAGES[name];
-if (!pageId) { console.error(`usage: node restore_ids.mjs <${Object.keys(PAGES).join('|')}> [--dry]`); process.exit(2); }
+if (!pageId) { console.error(`usage: node restore_ids.mjs <${Object.keys(PAGES).join('|')}> [--only a,b] [--dry]`); process.exit(2); }
 
 /* --- every id the payload asks for, with its class and its index among the
        elements sharing that class, in document order ---------------------- */
@@ -75,6 +81,7 @@ for (const el of live) {
 const todo = [];
 const skipped = [];
 for (const w of wanted) {
+  if (only && !only.has(w.id)) continue;
   const bucket = liveByClass.get(w.cls) ?? [];
   const payloadCount = seen.get(w.cls);
   const el = bucket[w.nth];

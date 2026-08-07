@@ -832,7 +832,16 @@ class Serializer:
         m = re.match(r"^<style>(.*?)</style>(.*)$", raw, re.S)
         prefix_css, body = (m.group(1), m.group(2)) if m else ("", raw)
 
-        opaque = body.lstrip().startswith("<form") or "<iframe" in body
+        # `<script>` MUST be opaque. Left to inline_embed it becomes ordinary
+        # markup, and data_whtml_builder then drops it without a warning — which
+        # is how cosmetic and thank-you shipped with every per-section chapter
+        # script missing. Nothing errors, because nothing runs: no chapter code
+        # means no pinned scenes and no scrubbed rails, so the pages render as a
+        # stack of static bands and pass every static gate. The clipboard build
+        # kept all 9 of implant's; WHTML kept 0 of cosmetic's 7.
+        opaque = (body.lstrip().startswith("<form")
+                  or "<iframe" in body
+                  or "<script" in body)
         if opaque:
             cls = self.meaningful_classes(n)
             slot = self.embed_slots.get(n["_id"])
