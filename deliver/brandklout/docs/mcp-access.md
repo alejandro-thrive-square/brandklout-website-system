@@ -1,9 +1,9 @@
 # Brandklout - MCP Access
 
 Partner-agency level access file. Brandklout is a white-label partner; individual client
-engagements underneath it (`livewell-dental/`, `dr-nahlah/`, `mason-park/`) carry their own
-`docs/mcp-access.md` for client-platform access. This file covers the MCPs that operate at
-the **Brandklout partnership level**, not at any single client's site.
+engagements underneath it (`livewell-dental/`, `dr-nahlah/`, `mason-park/`, and the rest) carry
+their own `docs/mcp-access.md`. Those files define **which site each client is allowed to touch**;
+this file defines the **grants**, both of which operate at the Brandklout partnership level.
 
 ## Access Level
 Client delivery (partner agency).
@@ -14,7 +14,67 @@ Client delivery (partner agency).
 ## Active MCP Servers
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
+| `webflow-brandklout` | Webflow reads and writes for **every** Brandklout client site. One instance, one grant, covering the single workspace Brandklout owns. | **Registered 2026-08-07, awaiting OAuth.** Authenticate on the **team** profile. |
 | `asana-brandklout` | Read Brandklout's Asana workspace: tasks, projects, assignees, due dates, comments. Used to pick up delegated work and to report progress back. | **Registered 2026-08-05, BLOCKED** - Claude Code's OAuth token exchange fails against Asana V2 (`The client_id and client_secret must authorize the app`). Credentials themselves are proven good. See [setup.md](../../../mcp-servers/asana/setup.md). |
+
+### Why one Webflow instance, not one per client
+
+Superseded on 2026-08-07 the six per-client instances registered on 2026-07-30 and 2026-08-06
+(`webflow-dr-nahlah`, `webflow-livewell-dental`, `webflow-grand-mission-dentistry`,
+`webflow-arvada-dental-center`, `webflow-mason-park`, `webflow-stone-dental-implant-center`).
+None of them had ever been authenticated, so nothing was lost in the change.
+
+All Brandklout clients live in **one Webflow workspace that Brandklout owns**. A per-client
+instance therefore authorizes against that same workspace and can see every sibling site anyway —
+the split bought no isolation, while costing one OAuth round trip, one `.mcp.json` edit and one
+session restart per client, forever. See
+[ACCESS_MODEL.md — When the partner owns the workspace](../../../mcp-servers/ACCESS_MODEL.md#when-the-partner-owns-the-workspace-one-instance-is-correct).
+
+> [!IMPORTANT]
+> **The boundary is now the site ID, not the tool prefix.** Every client shares the
+> `mcp__webflow-brandklout__*` prefix, so the prefix no longer tells an agent which client it is
+> acting on. Before any mutating call: read the site ID from the `mcp-access.md` of the client
+> folder you are working in, and pass it explicitly. Never act on a site that a tool defaulted to,
+> listed first, or that came up in conversation. A client with no site ID recorded below is
+> **read-only** until one is confirmed and written down.
+
+### Client site registry
+
+The authoritative map from client folder to Webflow site. Fill in each ID from `list_sites` at
+first contact; an unconfirmed ID is not authorization to write.
+
+| Client folder | Webflow site | Site ID | Status |
+| :--- | :--- | :--- | :--- |
+| `livewell-dental/` | Livewell Dental | `69d03fdbe999e9907724a69d` | Read from published HTML 2026-07-27 — **confirm via `list_sites` before any write** |
+| `dr-nahlah/` | Dr. Nahlah | `6a6b84cc7fe55ddeabc0b314` | Confirmed 2026-07-30. Recorded workspace `63b4b7393e89b78575e9a9bb` — **verify this is Brandklout's workspace** (see caveat below) |
+| `grand-mission-dentistry/` | unknown | — | Not yet identified |
+| `arvada-dental-center/` | unknown (`arvadadentalcenter.com`) | — | Not yet identified |
+| `mason-park/` | unknown | — | Not yet identified |
+| `stone-dental-implant-center/` | unknown | — | Scope itself unconfirmed with Brandklout |
+
+> [!CAUTION]
+> **The single-workspace premise is not yet verified against the platform.** It rests on the
+> partnership's account structure, not on a `list_sites` call — no Webflow instance has ever held a
+> token on this machine. Dr. Nahlah in particular has a workspace ID recorded from a build site
+> that may sit in Webzite's own workspace rather than Brandklout's.
+>
+> The OAuth screen settles it. If a client's site is **absent** from the site list when
+> authenticating this instance, that site is in a different workspace: leave it out, and give that
+> one client back its own dedicated instance rather than widening this grant. Update this file with
+> what the site list actually showed.
+
+### Onboarding a new Brandklout client
+
+No new MCP server. No `.mcp.json` edit. No session restart.
+
+1. Confirm Brandklout has added the client's site to the workspace and invited the agency account.
+2. `claude team`, then `/mcp` → re-authenticate `webflow-brandklout`, ticking **every** active
+   client site plus the new one. Re-authorization replaces the grant wholesale — a site left
+   unticked loses access silently.
+3. `list_sites`, then record the new site ID in the registry above **and** in the client's
+   `docs/mcp-access.md` under Target Resources.
+4. Add `webflow-brandklout` and `webflow-clientfirst` to the new worktree's
+   `.claude/settings.local.json` → `enabledMcpjsonServers` (gitignored, so it does not travel).
 
 **Working access path:** [`../scripts/`](../scripts/README.md) - Node scripts that call the same
 Asana MCP server directly with our own OAuth token, bypassing the Claude Code bug. Read-only.
@@ -44,10 +104,10 @@ Asana workspace connected.
 > added to another workspace, that stops being true and this file must be revisited.
 
 > [!IMPORTANT]
-> Client engagements seen in Asana that have **no folder yet** under `deliver/brandklout/`:
-> **Grand Mission Dentistry** and **Arvada Dental Center & Implants**. Existing folders cover
-> `dr-nahlah`, `livewell-dental`, and `mason-park`. Create the folder and its `mcp-access.md`
-> before doing platform work for a new client.
+> Every client engagement seen in Asana now has a folder under `deliver/brandklout/`:
+> `arvada-dental-center`, `dr-nahlah`, `grand-mission-dentistry`, `livewell-dental`, `mason-park`,
+> `stone-dental-implant-center`. For any *new* client, create the folder and its `mcp-access.md`
+> before doing platform work, and add a row to the client site registry above.
 
 ## Allowed Operations
 - Read tasks, subtasks, projects, sections, custom fields, assignees, due dates, attachments

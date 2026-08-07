@@ -8,6 +8,10 @@
       "type": "http",
       "url": "https://mcp.webflow.com/mcp"
     },
+    "webflow-brandklout": {
+      "type": "http",
+      "url": "https://mcp.webflow.com/mcp"
+    },
     "webflow-clifton-exteriors": {
       "type": "http",
       "url": "https://mcp.webflow.com/mcp"
@@ -24,15 +28,7 @@
       "type": "http",
       "url": "https://mcp.webflow.com/mcp"
     },
-    "webflow-livewell-dental": {
-      "type": "http",
-      "url": "https://mcp.webflow.com/mcp"
-    },
     "webflow-dealer-websites": {
-      "type": "http",
-      "url": "https://mcp.webflow.com/mcp"
-    },
-    "webflow-dr-nahlah": {
       "type": "http",
       "url": "https://mcp.webflow.com/mcp"
     },
@@ -50,22 +46,6 @@
         "clientId": "1217205892702386",
         "callbackPort": 8080
       }
-    },
-    "webflow-grand-mission-dentistry": {
-      "type": "http",
-      "url": "https://mcp.webflow.com/mcp"
-    },
-    "webflow-arvada-dental-center": {
-      "type": "http",
-      "url": "https://mcp.webflow.com/mcp"
-    },
-    "webflow-mason-park": {
-      "type": "http",
-      "url": "https://mcp.webflow.com/mcp"
-    },
-    "webflow-stone-dental-implant-center": {
-      "type": "http",
-      "url": "https://mcp.webflow.com/mcp"
     }
   }
 }

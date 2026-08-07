@@ -23,6 +23,8 @@ MCP server definitions are centralized, but MCP usage is controlled by the activ
 
 Platform MCPs that hold OAuth grants are registered once **per principal** (see [ACCESS_MODEL.md — Server Instances](./ACCESS_MODEL.md#server-instances-one-per-principal)). All Webflow instances point at `https://mcp.webflow.com/mcp`; each holds its own runtime grant scoped to its principal's sites only. Asana instances follow the same naming rule but a weaker grant boundary — see the note under the table.
 
+A principal is the party that **owns the platform account**. For a direct client that is the client. For a white-label partner whose clients all live in one workspace the partner owns, the principal is the **partner** — one instance covers every client under it, because per-client instances would authorize against that same shared workspace and isolate nothing.
+
 | Instance Name | Principal | Access Level | Grant Scope | Access File |
 | :--- | :--- | :--- | :--- | :--- |
 | `webflow-webzite` | Webzite Studio | `agency` | Webzite-owned sites only | [agency-site profile](./profiles/agency-site.md) |
@@ -30,15 +32,10 @@ Platform MCPs that hold OAuth grants are registered once **per principal** (see 
 | `webflow-giovanni-serrano` | Giovanni Serrano | `client` | Giovanni Serrano site only | [mcp-access.md](../deliver/giovanni-serrano/docs/mcp-access.md) |
 | `webflow-horizon` | Horizon Building Corp (via Farewell Agency) | `client` | Horizon sites only (`6a1f7d0be8345316ba21999c`) | [mcp-access.md](../deliver/farewell-agency/horizon/docs/mcp-access.md) |
 | `webflow-excellent-facets` | Excellent Facets | `client` | Excellent Facets site only (`excellentfacets.com`) | [mcp-access.md](../deliver/excellent-facets/docs/mcp-access.md) |
-| `webflow-livewell-dental` | Livewell Dental (via Brandklout) | `client` | Livewell Dental site only (`livewelldentalva.webflow.io`) | [mcp-access.md](../deliver/brandklout/livewell-dental/docs/mcp-access.md) |
+| `webflow-brandklout` | Brandklout (white-label partner) — **all** its clients | `client` | Every Brandklout client site Webzite is engaged on, in the single workspace Brandklout owns: Livewell Dental, Dr. Nahlah, Grand Mission Dentistry, Arvada Dental Center, Mason Park Dental, Stone Dental Implant Center. Registered 2026-08-07, **awaiting OAuth**. Per-client isolation is not available — the boundary is the **site ID**, per client `mcp-access.md`. | [partner registry](../deliver/brandklout/docs/mcp-access.md) |
 | `webflow-dealer-websites` | Dealer Websites | `client` | Dealer Websites site only (site ID TBD — confirm via `list_sites`) | [mcp-access.md](../deliver/dealer-websites/docs/mcp-access.md) |
-| `webflow-dr-nahlah` | Dr. Nahlah | `client` | Dr. Nahlah site only — **not yet created / not yet authenticated** | [mcp-access.md](../deliver/brandklout/dr-nahlah/docs/mcp-access.md) |
-| `webflow-grand-mission-dentistry` | Grand Mission Dentistry (via Brandklout) | `client` | Grand Mission sites only — registered 2026-08-06, **awaiting OAuth** | [mcp-access.md](../deliver/brandklout/grand-mission-dentistry/docs/mcp-access.md) |
-| `webflow-arvada-dental-center` | Arvada Dental Center (via Brandklout) | `client` | Arvada sites only (`arvadadentalcenter.com`) — registered 2026-08-06, **awaiting OAuth** | [mcp-access.md](../deliver/brandklout/arvada-dental-center/docs/mcp-access.md) |
-| `webflow-mason-park` | Mason Park Dental (via Brandklout) | `client` | Mason Park sites only — registered 2026-08-06, **awaiting OAuth** | [mcp-access.md](../deliver/brandklout/mason-park/docs/mcp-access.md) |
-| `webflow-stone-dental-implant-center` | Stone Dental Implant Center (via Brandklout) | `client` | Stone sites only — registered 2026-08-06, **awaiting OAuth**; scope still unconfirmed with Brandklout | [mcp-access.md](../deliver/brandklout/stone-dental-implant-center/docs/mcp-access.md) |
 | `webflow-clientfirst` | Local tool server (no principal) | n/a | No network. Reads repo files, writes `mcp-servers/webflow-clientfirst/.tmp/` | [setup.md](./webflow-clientfirst/setup.md) |
-| `webflow` | **Legacy — deprecated** | — | Whatever the last OAuth covered (currently returns 401) | Remove after active work migrates to per-client instances |
+| `webflow` | **Legacy — deprecated** | — | Whatever the last OAuth covered (currently returns 401) | Remove after active work migrates to per-principal instances |
 | `asana-brandklout` | Brandklout (white-label partner) | `client` | Workspace `1210572425689866` (the only one the grant can see) — registered 2026-08-05 (client ID `1217205892702386`, callback port 8080). **Cannot authenticate: Claude Code token-exchange bug.** Working access is via [scripts](../deliver/brandklout/scripts/README.md). | [mcp-access.md](../deliver/brandklout/docs/mcp-access.md) |
 
 > [!WARNING]
@@ -64,7 +61,9 @@ Verified 2026-08-06. Grants are stored in `~/.claude-<profile>/.credentials.json
 - **Grants are per profile.** `.credentials.json` is a real file in each of `~/.claude`, `~/.claude-team` and `~/.claude-personal` — it is *not* one of the directories junctioned back into `~/.claude`. Authenticating a client MCP on the personal profile puts the grant somewhere the client agents cannot reach, because all client work runs on `claude team` (see [ORCHESTRATION.md](../deliver/brandklout/docs/ORCHESTRATION.md)).
 - **Grants are global across projects, not per worktree.** The hash is derived from the server URL, not the project path, so one authentication per profile covers every checkout and every worktree. There is no need to repeat OAuth in each client worktree.
 
-What *is* per worktree is `enabledMcpjsonServers` in `.claude/settings.local.json`, which is gitignored and therefore does not travel with a new worktree. A server missing from that list never appears in `/mcp` at all, and the omission is silent. Each Brandklout client worktree is deliberately scoped to its own instance plus `webflow-clientfirst`.
+What *is* per worktree is `enabledMcpjsonServers` in `.claude/settings.local.json`, which is gitignored and therefore does not travel with a new worktree. A server missing from that list never appears in `/mcp` at all, and the omission is silent. Each Brandklout client worktree is scoped to `webflow-brandklout` plus `webflow-clientfirst`.
+
+Because the partner instance is a single server name, **one authentication on the team profile covers every Brandklout client worktree** — this is the main practical win of the consolidation. The prior per-client scheme needed one OAuth round trip per client, each one presenting the operator with a site picker listing every sibling site.
 
 ## Adding a New MCP Server
 

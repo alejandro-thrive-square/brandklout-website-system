@@ -16,23 +16,43 @@ This document defines how agents use Model Context Protocol (MCP) servers across
 
 For platform MCPs that authenticate via OAuth grants (Webflow, and any future platform where one grant covers a set of accounts/sites), we register **one named server instance per principal** instead of one shared server for the whole platform.
 
-A **principal** is the account boundary a grant should cover: Webzite Studio itself, or one client engagement.
+A **principal** is the account boundary a grant should cover — and it is defined by **whoever owns the platform account**, not by whoever the invoice is addressed to. In practice that is one of three things: Webzite Studio itself, one direct client engagement, or one **white-label partner agency** whose clients all live inside a single account the partner owns.
 
 **Why:** the MCP client stores the OAuth grant keyed by *server name*. A single shared server therefore forces a choice between one grant that spans every client's sites (over-broad access) or re-authenticating on every client switch (which silently wipes the previous client's grant). Named instances give each principal a persistent, least-privilege grant — and the tool prefix (`mcp__webflow-clifton-exteriors__...`) makes it self-evident which account an agent is acting on.
 
-**Naming convention:** `<platform>-<principal-slug>`, where the principal slug matches the folder name under `deliver/` (or `webzite` for agency-owned properties).
+**Naming convention:** `<platform>-<principal-slug>`, where the principal slug matches the folder name under `deliver/` (or `webzite` for agency-owned properties). For a partner agency the slug is the **partner** folder (`brandklout`), not the client subfolder beneath it.
 
 | Instance pattern | Access level | Grant scope when authorizing |
 | :--- | :--- | :--- |
 | `<platform>-webzite` | `agency` | Webzite-owned sites/workspaces only |
 | `<platform>-<client-name>` | `client` | Only that client's site(s) — never select other clients' sites in the OAuth screen |
+| `<platform>-<partner-name>` | `client` | Every site in the partner's workspace that Webzite is engaged on. Per-client isolation is **not available** here — see below |
 | *(none — no authenticated instance)* | `prospect` | Prospect analysis uses public URLs only, never an authenticated grant |
+
+### When the partner owns the workspace, one instance is correct
+
+Splitting by client only buys isolation when the clients sit in **separate platform accounts**. When a white-label partner keeps every client site in one workspace it owns, per-client instances are isolation theatre: each instance authorizes against the same workspace, so each one can see every sibling site anyway. What the split actually costs is real —
+
+- one OAuth round trip per client, multiplying with every new engagement;
+- a `.mcp.json` edit, a session restart, and a project-scoped server approval per client;
+- a standing invitation to the exact mistake the naming was meant to prevent, because the operator re-authenticating instance #7 is looking at a site picker listing all of them.
+
+So for a partner-owned workspace, register **one instance for the partner** and re-authenticate it when a new client joins, adding that client's site to the same grant.
+
+**The compensating control is the site ID, not the server name.** With one instance the tool prefix no longer tells an agent which client it is acting on, so the boundary has to move into the folder docs and be enforced per call:
+
+1. Every client subfolder's `mcp-access.md` must name that client's **site ID** under Target Resources. A client whose site ID is unknown has no authorization to write, only to read.
+2. Before any mutating call, resolve the site ID from the `mcp-access.md` of the folder you are working in, and pass it explicitly. Never let a tool default to "the first site" or infer one from conversation.
+3. Never widen a call to `list_sites`-and-act. Listing is fine for discovery; acting requires the ID from the folder doc.
+4. One worktree per client (see the partner's orchestration doc) keeps the folder context unambiguous, which is what makes rule 2 reliable.
+
+This is a weaker guarantee than a scoped grant, and it should be recorded as such. It is the correct trade only because the scoped-grant alternative was never actually available for this topology.
 
 **Runtime rules:**
 
 1. Authenticate only the instance for the principal you are actively working on; leave other instances unauthenticated.
 2. When completing the OAuth authorization screen, select **only** the sites belonging to that instance's principal.
-3. Before any mutation, verify the tool prefix matches the client folder you are working in (e.g., work under `deliver/farewell-agency/clifton-exteriors/` must use `webflow-clifton-exteriors` tools).
+3. Before any mutation, verify the tool prefix matches the client folder you are working in (e.g., work under `deliver/farewell-agency/clifton-exteriors/` must use `webflow-clifton-exteriors` tools). Under a partner instance the prefix is the same for every client, so verify the **site ID** against the folder's `mcp-access.md` instead.
 4. Each machine/account holds its own runtime grants; instance definitions in `.mcp.json` are shared and safe to commit (they contain no secrets).
 
 **Adding a client instance:**
@@ -41,6 +61,15 @@ A **principal** is the account boundary a grant should cover: Webzite Studio its
 2. Restart the session and approve the new project-scoped server when prompted.
 3. Authenticate via `/mcp`, selecting only that client's sites in the OAuth screen.
 4. Register the instance in [MCP_INDEX.md](./MCP_INDEX.md) and the client's `docs/mcp-access.md`.
+
+**Onboarding a client under an existing partner instance:**
+
+No new server, no `.mcp.json` edit, no session restart.
+
+1. Confirm the partner has added the new client's site to the workspace the instance already covers, and has invited the agency account to it.
+2. Re-authenticate the existing partner instance via `/mcp` on the **team** profile, selecting the previously-authorized sites **plus** the new one. Re-authorizing replaces the grant wholesale, so a site left unticked loses access — tick every active client, not just the new one.
+3. Run `list_sites` and record the new site's ID in the client's `docs/mcp-access.md` under Target Resources, and in the partner's site registry.
+4. Add the client to the partner's row in [MCP_INDEX.md](./MCP_INDEX.md).
 
 **Platforms without dynamic client registration:**
 
