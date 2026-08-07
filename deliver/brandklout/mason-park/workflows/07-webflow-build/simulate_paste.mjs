@@ -383,26 +383,29 @@ check("payload structure (class refs, unique ids, single root)",
    returned, and not one of the nine chapters ever animated — because a
    revealed, un-animated page looks fine in every static probe. Assert that the
    motion layer actually came up. */
+/* Mason Park runtime: the queue namespace is MPD (same pattern as WZ), and
+   there is deliberately NO ScrollSmoother — gsap.ticker freezes headless a
+   few seconds after load while native scrolling keeps ScrollTrigger correct,
+   and the standard's full-page captures break under a smoother. */
 const motion = await pg.evaluate(() => ({
-  wz: typeof window.WZ,
-  ok: window.WZ ? window.WZ.ok : null,
+  mpd: typeof window.MPD,
+  ok: window.MPD ? window.MPD.ok : null,
   gsap: typeof window.gsap,
-  smoother: window.WZ ? !!window.WZ.smoother : null,
   triggers: window.ScrollTrigger ? ScrollTrigger.getAll().length : 0,
   tweens: window.gsap ? gsap.globalTimeline.getChildren(true, true, true).length : 0,
 }));
-check("motion layer initialised (WZ.ok, smoother, ScrollTriggers registered)",
-  motion.ok === true && motion.smoother === true && motion.triggers > 5,
+check("motion layer initialised (MPD.ok, ScrollTriggers registered)",
+  motion.ok === true && motion.triggers > 5,
   JSON.stringify(motion));
 
 /* 0. The nav's scroll state targets the element the page code actually finds.
       `getElementById('nav')` must land on the styled header, not on a wrapper
       that happens to share the id. */
 const navSolid = await pg.evaluate(async () => {
-  const el = document.getElementById("nav");
-  if (!el) return { err: "no #nav" };
+  const el = document.querySelector(".site-head");
+  if (!el) return { err: "no .site-head" };
   const before = getComputedStyle(el).backgroundColor;
-  el.classList.add("solid");
+  el.classList.add("is-solid");
   /* Settle-poll, not a fixed sleep — the background rides a transition that
      costs MAIN-THREAD time, and this page keeps it busy. A fixed 700ms read
      the pre-transition colour and failed a build whose state CSS was correct
@@ -415,7 +418,7 @@ const navSolid = await pg.evaluate(async () => {
   }
   return { classes: [...el.classList], before, after };
 });
-check("nav: .solid on #nav changes its background",
+check("header: .is-solid on .site-head changes its background",
   !navSolid.err && navSolid.before !== navSolid.after, JSON.stringify(navSolid));
 
 /* Every `[data-theme="dark"]` container must actually read as dark: light text
@@ -467,8 +470,11 @@ check("dark-themed sections keep readable text (scoped tokens resolved)",
    body's opaque background: the bar looked permanently scrolled, and the whole
    transparent-over-hero effect was gone. A "changes on scroll" check cannot
    see that, because it never asks what the start state was. */
-const navRest = /^(rgba\(0, 0, 0, 0\)|transparent)$/.test(navSolid.before || "");
-check("nav: #nav is transparent before scrolling (no inherited body background)",
+/* Mason Park's header rests as 0.86 white glass (mpd.css .site-head), NOT
+   transparent — assert the design's own rest value so an inherited body
+   background (opaque white, 1.0) still fails. */
+const navRest = /^rgba\(255, 255, 255, 0\.86\)$/.test(navSolid.before || "");
+check("header: .site-head rests at the design's 0.86 glass (no inherited body background)",
   navRest, `at rest: ${navSolid.before}`);
 
 /* 1. The before/after carousel: `.on` must actually change opacity, and the
@@ -548,28 +554,28 @@ check("no reset-generated phantom pseudo divs (paint nothing at any breakpoint)"
         .map((c) => styles.get(c)?.name).join(".")).join(", ")}`
     : ""));
 
-/* 4. Nav state class works (drawer/burger/solid). The drawer carries an 800ms
-      clip-path transition, so the computed value must be read AFTER it lands —
-      reading immediately returns the start value and fails a working build. */
+/* 4. Persistent-UI state class works. Mason Park has no drawer; the offer
+      rail is the state-carried fixture (`.offer-rail.is-up` raises it). The
+      rule ships in the head block with a doubled selector, so this also
+      proves the runtime-state CSS was installed. Poll to settle rather than
+      sleeping — the transform rides a transition on a busy main thread. */
 const nav = await pg.evaluate(async () => {
-  const d = document.querySelector(".drawer");
-  if (!d) return { err: "no drawer" };
-  const closed = getComputedStyle(d).clipPath;
-  d.classList.add("open");
-  /* Poll to settle rather than sleeping a fixed 1100ms. The transition is
-     800ms of MAIN-THREAD time, and this page keeps the main thread busy with
-     ScrollSmoother, 48 ScrollTriggers and image decode — a fixed sleep read
-     the start value and failed a build that works. */
+  const d = document.querySelector(".offer-rail");
+  if (!d) return { err: "no .offer-rail" };
+  const closed = getComputedStyle(d).transform + "/" + getComputedStyle(d).opacity;
+  d.classList.add("is-up");
   let open = closed, prev = null;
   for (let i = 0; i < 40 && (open === closed || open !== prev); i++) {
     prev = open;
     await new Promise((r) => setTimeout(r, 250));
-    open = getComputedStyle(d).clipPath;
+    open = getComputedStyle(d).transform + "/" + getComputedStyle(d).opacity;
   }
   return { closed, open };
 });
-check("nav: .open changes drawer clip-path", !nav.err && nav.closed !== nav.open,
-  JSON.stringify(nav));
+if (nav.err) skip("offer rail: .is-up raises it (state CSS installed)",
+  "page has no .offer-rail (the thank-you page has nothing left to sell)");
+else check("offer rail: .is-up raises it (state CSS installed)",
+  nav.closed !== nav.open, JSON.stringify(nav));
 
 /* 5. Type scale survived — headings must not collapse to a browser default. */
 const type = await pg.evaluate(() => {
@@ -618,7 +624,10 @@ const canvasVis = await pg.evaluate(() => {
         (parseFloat(s.opacity) === 0 && s.pointerEvents !== "none")) {
       invisible.push(`${el.tagName}${el.id ? "#" + el.id : ""}.${el.className}`
         .slice(0, 44));
-    } else if (r.width < 1 && r.height < 1) {
+    } else if (r.width < 1 && r.height < 1 &&
+               (el.textContent.trim() || el.querySelector("img, svg"))) {
+      // a zero-size element with no content is a runtime placeholder
+      // (e.g. the form's empty aria-live .form-msg), not uneditable content
       invisible.push(`${el.tagName}#${el.id || "?"} zero-size`);
     }
   }

@@ -267,6 +267,49 @@ Register site-level scripts via `data_scripts_tool` for Google Fonts, analytics/
 | Gradient decorative bars | `whtml_builder` | `::before`/`::after` pseudo-elements |
 | CMS-bound repeating content | `element_builder` + `data_cms_tool` | Dynamic content binding required |
 
+## Project Notes — Mason Park pasteable-components build (2026-08-07)
+
+The headless WHTML element build (everything under `.tmp/<page>/`, `_js/`,
+`_installed/`) is **superseded** by pasteable section components
+(`deliver/process/07-webflow-build/PASTEABLE-COMPONENTS.md` is the spec).
+The user pastes manually via the Claude Chrome extension; agents patch
+content over the MCP afterwards. Do not touch the live pages headlessly.
+
+Pipeline (rerun end-to-end after any design change; all steps deterministic):
+
+```bash
+# raws (no avoid) -> vocabulary
+python html_to_webflow_wholepage.py --html ../04-design/.tmp/<page>/index.html \
+  --css ../04-design/.tmp/shared/mpd.css --wrap --page-prefix <inv|nps|ty> \
+  --out .tmp/_raw/<page>
+python build_vocab.py --sources .tmp/build-sources.json
+# finals with vocab + avoid chain (inv first; nps avoids inv; ty avoids both,
+# --avoid-suffix nps|ty — matches the live class names label-ty/fine-ty)
+python html_to_webflow_wholepage.py ... --vocab .tmp/style-vocabulary.json \
+  [--avoid <prior dirs> --avoid-suffix <sfx>] --out .tmp/pc/<page>
+node resolve_wholepage.mjs .tmp/pc/<page>/paste_00_full-page.html .tmp/pc/<page>/resolved
+node rebind_assets.mjs .tmp/pc/<page>/resolved.json .tmp/asset-uploads.json .tmp/pc/<page>/final.json
+node fix_variant_fns.mjs .tmp/pc/*/final.json          # fluid fns left in variants
+node bake_display_ladder.mjs .tmp/pc/*/final.json      # token ladders + head-tier.json
+node gen_install_blocks.mjs                            # site head/footer (<10k each)
+python make_paste_page.py --payload .tmp/pc/<page>/final.json --out .tmp/pc/<page>/PASTE-full-page.html
+python wf_tools.py qa .tmp/pc/<page> [--against <prior dirs>]
+EMIT_SHELL=1 node extract_section_components.mjs .tmp/pc/<page> <page> .tmp/components
+python make_paste_page.py per component; node gen_component_docs.mjs
+node check_components.mjs .tmp/components
+node simulate_paste.mjs .tmp/pc/<page>/final.json .tmp/pc/<page> ../04-design/.tmp/shared/img
+```
+
+Key artifacts: `.tmp/components/<page>/PASTE-QUEUE.md` (the paste protocol,
+prerequisites and cleanup list), `.tmp/pc/install-head.html` /
+`install-footer.html` (site-level shared layer), `.tmp/pc/<page>/PASTE-full-page.html`
+(one-paste alternative). `.tmp/asset-uploads.json` is synthesized from
+`.tmp/asset-ids.json` — all 13 images are already in the site library.
+
+Local simulate_paste.mjs is adapted to this runtime (MPD namespace, no
+ScrollSmoother, `.site-head.is-solid`, `.offer-rail.is-up`, 0.86-glass header
+rest state); the Dr. Nahlah copy is the generic original.
+
 ## Output Artifacts
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/paste_*.html` — generated section paste components
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/webflow-custom-code.js` + `animation-manifest.json` — page JS and hook manifest
