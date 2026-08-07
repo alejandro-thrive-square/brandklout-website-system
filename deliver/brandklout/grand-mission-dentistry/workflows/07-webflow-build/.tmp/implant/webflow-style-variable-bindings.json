@@ -1,0 +1,1999 @@
+{
+  "source": "Generated paste payload styleLess var() references",
+  "note": "Use Webflow MCP style_tool after paste. Designer variable mapping requires properties[].variable_as_value = variable_id.",
+  "styleTool": {
+    "actions": []
+  },
+  "bindings": [
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ch-arrival",
+      "sourceStyleId": "fd0cecdc-b438-4136-b449-246d37e3bfe0",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--blue-deep)",
+      "cssNames": [
+        "--blue-deep"
+      ],
+      "sourceNames": [
+        "--blue-deep"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ch-arrival",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-deep",
+        "cssName": "--blue-deep"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "arrival__veil",
+      "sourceStyleId": "b46bdbb3-2eb5-485a-bff0-cd5853d44994",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--blue-ink)",
+      "cssNames": [
+        "--blue-ink"
+      ],
+      "sourceNames": [
+        "--blue-ink"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "arrival__veil",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-ink",
+        "cssName": "--blue-ink"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-p",
+      "sourceStyleId": "6d98edbc-17b5-4c9a-9af3-ace969f955f0",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "imp-p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-p-2",
+      "sourceStyleId": "8eb3a6f6-4bda-4ffb-b1f0-112666bea4da",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "imp-p-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-em-2",
+      "sourceStyleId": "8f6bb8b6-88fe-4c44-90a2-a3b2df2496ba",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "imp-em-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "arrival__sub",
+      "sourceStyleId": "4525d6e4-02c5-4c40-9483-b7ae85c2dff9",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--body-lg)",
+      "cssNames": [
+        "--body-lg"
+      ],
+      "sourceNames": [
+        "--body-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "arrival__sub",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body-lg",
+        "cssName": "--body-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "offer",
+      "sourceStyleId": "99a7c350-4c5a-4847-a81f-59d2733ca546",
+      "variant": "base",
+      "property": "border-top-left-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "offer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "offer",
+      "sourceStyleId": "99a7c350-4c5a-4847-a81f-59d2733ca546",
+      "variant": "base",
+      "property": "border-top-right-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "offer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "offer",
+      "sourceStyleId": "99a7c350-4c5a-4847-a81f-59d2733ca546",
+      "variant": "base",
+      "property": "border-bottom-right-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "offer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "offer",
+      "sourceStyleId": "99a7c350-4c5a-4847-a81f-59d2733ca546",
+      "variant": "base",
+      "property": "border-bottom-left-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "offer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "i-after",
+      "sourceStyleId": "325d3a54-3519-4da7-b931-5f334c5c9f0e",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "i-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "i-after",
+      "sourceStyleId": "325d3a54-3519-4da7-b931-5f334c5c9f0e",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "i-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-span",
+      "sourceStyleId": "7fefcdbf-31a6-40d6-9b93-96ec12c35eea",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "imp-span",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-span",
+      "sourceStyleId": "7fefcdbf-31a6-40d6-9b93-96ec12c35eea",
+      "variant": "base",
+      "property": "animation",
+      "value": "cue 1.9s var(--ease) infinite",
+      "cssNames": [
+        "--ease"
+      ],
+      "sourceNames": [
+        "--ease"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ridge__stack",
+      "sourceStyleId": "9699c174-9b6a-427e-88f8-68c80eb3a361",
+      "variant": "base",
+      "property": "border-top-left-radius",
+      "value": "var(--r-md)",
+      "cssNames": [
+        "--r-md"
+      ],
+      "sourceNames": [
+        "--r-md"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ridge__stack",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-md",
+        "cssName": "--r-md"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ridge__stack",
+      "sourceStyleId": "9699c174-9b6a-427e-88f8-68c80eb3a361",
+      "variant": "base",
+      "property": "border-top-right-radius",
+      "value": "var(--r-md)",
+      "cssNames": [
+        "--r-md"
+      ],
+      "sourceNames": [
+        "--r-md"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ridge__stack",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-md",
+        "cssName": "--r-md"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ridge__stack",
+      "sourceStyleId": "9699c174-9b6a-427e-88f8-68c80eb3a361",
+      "variant": "base",
+      "property": "border-bottom-right-radius",
+      "value": "var(--r-md)",
+      "cssNames": [
+        "--r-md"
+      ],
+      "sourceNames": [
+        "--r-md"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ridge__stack",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-md",
+        "cssName": "--r-md"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ridge__stack",
+      "sourceStyleId": "9699c174-9b6a-427e-88f8-68c80eb3a361",
+      "variant": "base",
+      "property": "border-bottom-left-radius",
+      "value": "var(--r-md)",
+      "cssNames": [
+        "--r-md"
+      ],
+      "sourceNames": [
+        "--r-md"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ridge__stack",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-md",
+        "cssName": "--r-md"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ridge__bar",
+      "sourceStyleId": "8f115057-29e4-41c8-b19f-7bb97ee6cbeb",
+      "variant": "base",
+      "property": "background",
+      "value": "linear-gradient(120deg, var(--blue), var(--blue-light))",
+      "cssNames": [
+        "--blue",
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue",
+        "--blue-light"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ch__rail",
+      "sourceStyleId": "1486d423-8f94-4548-b0a3-352119aac4c3",
+      "variant": "base",
+      "property": "width",
+      "value": "var(--shell)",
+      "cssNames": [
+        "--shell"
+      ],
+      "sourceNames": [
+        "--shell"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ch__rail",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "width",
+          "variable_as_value": ""
+        },
+        "sourceName": "--shell",
+        "cssName": "--shell"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-i-2",
+      "sourceStyleId": "e4a703c2-a788-41a7-baf7-00e2def5ddff",
+      "variant": "base",
+      "property": "background",
+      "value": "linear-gradient(90deg, var(--blue-light), #fff)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ch-answer",
+      "sourceStyleId": "62f76c1b-ea2c-444c-91bc-8407f42d610a",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--white)",
+      "cssNames": [
+        "--white"
+      ],
+      "sourceNames": [
+        "--white"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ch-answer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--white",
+        "cssName": "--white"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "scan__plate",
+      "sourceStyleId": "fe09d7c5-fef2-42b4-87bf-9b26875e0d61",
+      "variant": "base",
+      "property": "border-top-left-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "scan__plate",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "scan__plate",
+      "sourceStyleId": "fe09d7c5-fef2-42b4-87bf-9b26875e0d61",
+      "variant": "base",
+      "property": "border-top-right-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "scan__plate",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "scan__plate",
+      "sourceStyleId": "fe09d7c5-fef2-42b4-87bf-9b26875e0d61",
+      "variant": "base",
+      "property": "border-bottom-right-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "scan__plate",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "scan__plate",
+      "sourceStyleId": "fe09d7c5-fef2-42b4-87bf-9b26875e0d61",
+      "variant": "base",
+      "property": "border-bottom-left-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "scan__plate",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "scan__plate",
+      "sourceStyleId": "fe09d7c5-fef2-42b4-87bf-9b26875e0d61",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--n-100)",
+      "cssNames": [
+        "--n-100"
+      ],
+      "sourceNames": [
+        "--n-100"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "scan__plate",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-100",
+        "cssName": "--n-100"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "scan__plate",
+      "sourceStyleId": "fe09d7c5-fef2-42b4-87bf-9b26875e0d61",
+      "variant": "base",
+      "property": "box-shadow",
+      "value": "var(--shadow-md)",
+      "cssNames": [
+        "--shadow-md"
+      ],
+      "sourceNames": [
+        "--shadow-md"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "scan__plate",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "box-shadow",
+          "variable_as_value": ""
+        },
+        "sourceName": "--shadow-md",
+        "cssName": "--shadow-md"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "scan__line",
+      "sourceStyleId": "e72be6c5-9256-4039-a6a1-00f1b1ece263",
+      "variant": "base",
+      "property": "background",
+      "value": "linear-gradient(90deg, transparent, var(--blue-light), transparent)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-span-2",
+      "sourceStyleId": "c41271aa-5c4c-45f2-90ec-90d5eeffa132",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--n-500)",
+      "cssNames": [
+        "--n-500"
+      ],
+      "sourceNames": [
+        "--n-500"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "imp-span-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-500",
+        "cssName": "--n-500"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-b",
+      "sourceStyleId": "909da33b-ba86-4791-a5a6-59962d77c586",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--blue-deep)",
+      "cssNames": [
+        "--blue-deep"
+      ],
+      "sourceNames": [
+        "--blue-deep"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "imp-b",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-deep",
+        "cssName": "--blue-deep"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "answer__lede",
+      "sourceStyleId": "02269e97-02b6-4513-a867-de4d62b4bc9e",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--body-lg)",
+      "cssNames": [
+        "--body-lg"
+      ],
+      "sourceNames": [
+        "--body-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "answer__lede",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body-lg",
+        "cssName": "--body-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "answer__lede",
+      "sourceStyleId": "02269e97-02b6-4513-a867-de4d62b4bc9e",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--n-700)",
+      "cssNames": [
+        "--n-700"
+      ],
+      "sourceNames": [
+        "--n-700"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "answer__lede",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-700",
+        "cssName": "--n-700"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "reasons",
+      "sourceStyleId": "827cafb9-270c-4785-92a1-f8ea100af2cd",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--n-200)",
+      "cssNames": [
+        "--n-200"
+      ],
+      "sourceNames": [
+        "--n-200"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "reasons",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-200",
+        "cssName": "--n-200"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "reason",
+      "sourceStyleId": "1780ad0a-a1ca-40e9-94bf-ccaa8f1540a4",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--n-200)",
+      "cssNames": [
+        "--n-200"
+      ],
+      "sourceNames": [
+        "--n-200"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "reason",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-200",
+        "cssName": "--n-200"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "reason",
+      "sourceStyleId": "1780ad0a-a1ca-40e9-94bf-ccaa8f1540a4",
+      "variant": "base",
+      "property": "transition",
+      "value": "opacity 0.45s var(--ease), border-color 0.45s var(--ease)",
+      "cssNames": [
+        "--ease",
+        "--ease"
+      ],
+      "sourceNames": [
+        "--ease",
+        "--ease"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "reason-before",
+      "sourceStyleId": "c578ee25-1467-4beb-9859-780621ddfb87",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--n-300)",
+      "cssNames": [
+        "--n-300"
+      ],
+      "sourceNames": [
+        "--n-300"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "reason-before",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-300",
+        "cssName": "--n-300"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "reason-before",
+      "sourceStyleId": "c578ee25-1467-4beb-9859-780621ddfb87",
+      "variant": "base",
+      "property": "transition",
+      "value": "color 0.45s var(--ease)",
+      "cssNames": [
+        "--ease"
+      ],
+      "sourceNames": [
+        "--ease"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-b-2",
+      "sourceStyleId": "26d9c868-c982-44db-84b5-4a851c314b8d",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--blue-deep)",
+      "cssNames": [
+        "--blue-deep"
+      ],
+      "sourceNames": [
+        "--blue-deep"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "imp-b-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-deep",
+        "cssName": "--blue-deep"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-span-3",
+      "sourceStyleId": "60a2f597-2398-4f46-ae5d-4b559dd465ab",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--n-700)",
+      "cssNames": [
+        "--n-700"
+      ],
+      "sourceNames": [
+        "--n-700"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "imp-span-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-700",
+        "cssName": "--n-700"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-i-3",
+      "sourceStyleId": "b22faa64-88a8-431e-9f72-ea332a813c77",
+      "variant": "base",
+      "property": "background",
+      "value": "linear-gradient(90deg, var(--blue), var(--blue-light))",
+      "cssNames": [
+        "--blue",
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue",
+        "--blue-light"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "options__rail",
+      "sourceStyleId": "763762fd-6822-4da8-adc3-9a86a00f87dd",
+      "variant": "base",
+      "property": "padding-inline",
+      "value": "var(--gutter)",
+      "cssNames": [
+        "--gutter"
+      ],
+      "sourceNames": [
+        "--gutter"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "options__rail",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "padding-inline",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gutter",
+        "cssName": "--gutter"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--n-200)",
+      "cssNames": [
+        "--n-200"
+      ],
+      "sourceNames": [
+        "--n-200"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-200",
+        "cssName": "--n-200"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--n-200)",
+      "cssNames": [
+        "--n-200"
+      ],
+      "sourceNames": [
+        "--n-200"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-200",
+        "cssName": "--n-200"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--n-200)",
+      "cssNames": [
+        "--n-200"
+      ],
+      "sourceNames": [
+        "--n-200"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-200",
+        "cssName": "--n-200"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--n-200)",
+      "cssNames": [
+        "--n-200"
+      ],
+      "sourceNames": [
+        "--n-200"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-200",
+        "cssName": "--n-200"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "base",
+      "property": "border-top-left-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "base",
+      "property": "border-top-right-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "base",
+      "property": "border-bottom-right-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "base",
+      "property": "border-bottom-left-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "base",
+      "property": "box-shadow",
+      "value": "var(--shadow-sm)",
+      "cssNames": [
+        "--shadow-sm"
+      ],
+      "sourceNames": [
+        "--shadow-sm"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "box-shadow",
+          "variable_as_value": ""
+        },
+        "sourceName": "--shadow-sm",
+        "cssName": "--shadow-sm"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "base",
+      "property": "transition",
+      "value": "border-color 0.5s var(--ease), box-shadow 0.5s var(--ease)",
+      "cssNames": [
+        "--ease",
+        "--ease"
+      ],
+      "sourceNames": [
+        "--ease",
+        "--ease"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "main_hover",
+      "property": "border-color",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "border-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt",
+      "sourceStyleId": "e9daf77e-08a3-4a50-bb4f-fa6a13a339b9",
+      "variant": "main_hover",
+      "property": "box-shadow",
+      "value": "var(--shadow-md)",
+      "cssNames": [
+        "--shadow-md"
+      ],
+      "sourceNames": [
+        "--shadow-md"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "box-shadow",
+          "variable_as_value": ""
+        },
+        "sourceName": "--shadow-md",
+        "cssName": "--shadow-md"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-img-2",
+      "sourceStyleId": "bc4bd42f-d2c7-408b-bdc1-e9e2b2438d44",
+      "variant": "base",
+      "property": "transition",
+      "value": "transform 0.8s var(--ease), filter 0.6s var(--ease)",
+      "cssNames": [
+        "--ease",
+        "--ease"
+      ],
+      "sourceNames": [
+        "--ease",
+        "--ease"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt__n",
+      "sourceStyleId": "0e1cd2e9-9bee-4874-a9a9-4ff379226664",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "opt__n",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "opt__n",
+      "sourceStyleId": "0e1cd2e9-9bee-4874-a9a9-4ff379226664",
+      "variant": "base",
+      "property": "transition",
+      "value": "color 0.45s var(--ease)",
+      "cssNames": [
+        "--ease"
+      ],
+      "sourceNames": [
+        "--ease"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-p-3",
+      "sourceStyleId": "07c90ddb-a3d6-4c62-a016-c2ce42de9c24",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--n-700)",
+      "cssNames": [
+        "--n-700"
+      ],
+      "sourceNames": [
+        "--n-700"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "imp-p-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-700",
+        "cssName": "--n-700"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ch__rail--shell",
+      "sourceStyleId": "36ddf99b-3b69-438d-b086-565d409dae30",
+      "variant": "base",
+      "property": "width",
+      "value": "var(--shell)",
+      "cssNames": [
+        "--shell"
+      ],
+      "sourceNames": [
+        "--shell"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ch__rail--shell",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "width",
+          "variable_as_value": ""
+        },
+        "sourceName": "--shell",
+        "cssName": "--shell"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "doctor__portrait-after",
+      "sourceStyleId": "6e145d0f-94bb-49fa-8d16-eb978b20e0fe",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "doctor__portrait-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "doctor__portrait-after",
+      "sourceStyleId": "6e145d0f-94bb-49fa-8d16-eb978b20e0fe",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "doctor__portrait-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "doctor__portrait-after",
+      "sourceStyleId": "6e145d0f-94bb-49fa-8d16-eb978b20e0fe",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "doctor__portrait-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "doctor__portrait-after",
+      "sourceStyleId": "6e145d0f-94bb-49fa-8d16-eb978b20e0fe",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--blue-light)",
+      "cssNames": [
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "doctor__portrait-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-light",
+        "cssName": "--blue-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "doctor__portrait-after",
+      "sourceStyleId": "6e145d0f-94bb-49fa-8d16-eb978b20e0fe",
+      "variant": "base",
+      "property": "border-top-left-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "doctor__portrait-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "doctor__portrait-after",
+      "sourceStyleId": "6e145d0f-94bb-49fa-8d16-eb978b20e0fe",
+      "variant": "base",
+      "property": "border-top-right-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "doctor__portrait-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "doctor__portrait-after",
+      "sourceStyleId": "6e145d0f-94bb-49fa-8d16-eb978b20e0fe",
+      "variant": "base",
+      "property": "border-bottom-right-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "doctor__portrait-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "doctor__portrait-after",
+      "sourceStyleId": "6e145d0f-94bb-49fa-8d16-eb978b20e0fe",
+      "variant": "base",
+      "property": "border-bottom-left-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "doctor__portrait-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "doctor__role",
+      "sourceStyleId": "93bd3b7e-a3ad-4916-b91c-7c98d942f454",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--brown)",
+      "cssNames": [
+        "--brown"
+      ],
+      "sourceNames": [
+        "--brown"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "doctor__role",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--brown",
+        "cssName": "--brown"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "services__note",
+      "sourceStyleId": "a47fa762-1d88-49a6-a53a-0906219e5704",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--brown)",
+      "cssNames": [
+        "--brown"
+      ],
+      "sourceNames": [
+        "--brown"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "services__note",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--brown",
+        "cssName": "--brown"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "matrix-wrap",
+      "sourceStyleId": "e5de553d-0d7a-42ab-8b6d-ee92cfa401ce",
+      "variant": "base",
+      "property": "border-top-left-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "matrix-wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "matrix-wrap",
+      "sourceStyleId": "e5de553d-0d7a-42ab-8b6d-ee92cfa401ce",
+      "variant": "base",
+      "property": "border-top-right-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "matrix-wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "matrix-wrap",
+      "sourceStyleId": "e5de553d-0d7a-42ab-8b6d-ee92cfa401ce",
+      "variant": "base",
+      "property": "border-bottom-right-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "matrix-wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-right-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "matrix-wrap",
+      "sourceStyleId": "e5de553d-0d7a-42ab-8b6d-ee92cfa401ce",
+      "variant": "base",
+      "property": "border-bottom-left-radius",
+      "value": "var(--r-lg)",
+      "cssNames": [
+        "--r-lg"
+      ],
+      "sourceNames": [
+        "--r-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "matrix-wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-left-radius",
+          "variable_as_value": ""
+        },
+        "sourceName": "--r-lg",
+        "cssName": "--r-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "matrix-wrap",
+      "sourceStyleId": "e5de553d-0d7a-42ab-8b6d-ee92cfa401ce",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--n-200)",
+      "cssNames": [
+        "--n-200"
+      ],
+      "sourceNames": [
+        "--n-200"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "matrix-wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-200",
+        "cssName": "--n-200"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "matrix-wrap",
+      "sourceStyleId": "e5de553d-0d7a-42ab-8b6d-ee92cfa401ce",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--n-200)",
+      "cssNames": [
+        "--n-200"
+      ],
+      "sourceNames": [
+        "--n-200"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "matrix-wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-200",
+        "cssName": "--n-200"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "matrix-wrap",
+      "sourceStyleId": "e5de553d-0d7a-42ab-8b6d-ee92cfa401ce",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--n-200)",
+      "cssNames": [
+        "--n-200"
+      ],
+      "sourceNames": [
+        "--n-200"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "matrix-wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-200",
+        "cssName": "--n-200"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "matrix-wrap",
+      "sourceStyleId": "e5de553d-0d7a-42ab-8b6d-ee92cfa401ce",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--n-200)",
+      "cssNames": [
+        "--n-200"
+      ],
+      "sourceNames": [
+        "--n-200"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "matrix-wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--n-200",
+        "cssName": "--n-200"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "matrix-wrap",
+      "sourceStyleId": "e5de553d-0d7a-42ab-8b6d-ee92cfa401ce",
+      "variant": "base",
+      "property": "box-shadow",
+      "value": "var(--shadow-sm)",
+      "cssNames": [
+        "--shadow-sm"
+      ],
+      "sourceNames": [
+        "--shadow-sm"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "matrix-wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "box-shadow",
+          "variable_as_value": ""
+        },
+        "sourceName": "--shadow-sm",
+        "cssName": "--shadow-sm"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-h3-2",
+      "sourceStyleId": "5934f421-b422-43f8-b727-0fbbc6a73f14",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--h2)",
+      "cssNames": [
+        "--h2"
+      ],
+      "sourceNames": [
+        "--h2"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "imp-h3-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--h2",
+        "cssName": "--h2"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "imp-a-2",
+      "sourceStyleId": "688f3e38-8e35-4c6a-9012-3cc6cc1368c6",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--blue-deep)",
+      "cssNames": [
+        "--blue-deep"
+      ],
+      "sourceNames": [
+        "--blue-deep"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "imp-a-2",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--blue-deep",
+        "cssName": "--blue-deep"
+      }
+    }
+  ]
+}
