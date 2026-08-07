@@ -33,8 +33,12 @@ const PAGES = process.argv[2] ? ALL.filter((p) => p === process.argv[2]) : ALL;
 const WIDTHS = [360, 390, 768, 1024, 1440, 1920];
 
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+// See scrub-proof.mjs — MPD_BASE_URL retargets the suite at a deployed build.
+const BASE = (process.env.MPD_BASE_URL || "").replace(/\/+$/, "");
 const fileUrl = (p) =>
-  "file:///" + path.join(DESIGN, p, "index.html").replace(/\\/g, "/").replace(/ /g, "%20");
+  BASE
+    ? `${BASE}/${p}`
+    : "file:///" + path.join(DESIGN, p, "index.html").replace(/\\/g, "/").replace(/ /g, "%20");
 
 let port = 9700;
 let pass = 0, fail = 0;

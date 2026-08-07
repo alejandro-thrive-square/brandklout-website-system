@@ -16,6 +16,7 @@ We build the approved design in Webflow with clean structure, responsive behavio
 
 > [!NOTE]
 > Planned evolution: [TEMPLATE_LIBRARY_PLAN.md](./TEMPLATE_LIBRARY_PLAN.md) — Relume-based template library (one shared class system, 20–30 variable-themed templates) feeding the pasteable-components converter.
+> **Build standard: [PASTEABLE-COMPONENTS.md](./PASTEABLE-COMPONENTS.md)** — per-section pasteable components with the custom code inside each section (the Dr. Nahlah pattern); manual paste, then surgical MCP edits. Headless whole-page builds are superseded.
 > Scheduled fresh-session loop: [WEBFLOW_BUILD_LOOP.md](./WEBFLOW_BUILD_LOOP.md) — the hourly one-page Webflow build loop.
 
 ## Operational Purpose
