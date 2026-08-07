@@ -101,10 +101,15 @@ class HtmlToWebflowTest(unittest.TestCase):
         self.assertEqual("&", by_name["bone"]["comb"])
 
     def test_preserved_vars_can_use_webflow_css_name_map(self) -> None:
+        # `background` is declared on the SECTION, not on body. It used to be
+        # read off body here, which quietly depended on body's background being
+        # copied onto every section root — see
+        # test_body_background_is_not_copied_onto_sections for why that is wrong.
         html = '<body><section class="scene">Title</section></body>'
         css = """
         :root { --canvas: #F4F1DE; --body: Inter, sans-serif; }
-        body { background: var(--canvas); font-family: var(--body); }
+        body { font-family: var(--body); }
+        .scene { background: var(--canvas); }
         """
 
         payload = converter.convert(
@@ -125,6 +130,70 @@ class HtmlToWebflowTest(unittest.TestCase):
         self.assertIn("font-family: var(--base--body)", scene["styleLess"])
         self.assertNotIn("var(--canvas)", scene["styleLess"])
         self.assertNotIn("var(--body)", scene["styleLess"])
+
+    def test_scoped_custom_properties_resolve_per_ancestor(self) -> None:
+        """A theme layer scopes tokens; resolution must follow the DOM.
+
+        `:root`, `[data-theme="dark"]` and `[data-theme="light"]` all declare
+        `--fg`. Collapsing them into one flat map let whichever block came last
+        win for the whole document, so every dark chapter baked light-theme
+        text and the headings shipped near-black on near-black.
+        """
+        html = (
+            '<body>'
+            '<section class="lightsec"><h2 class="t1">L</h2></section>'
+            '<section class="darksec" data-theme="dark"><h2 class="t2">D</h2>'
+            '<div class="island" data-theme="light"><h2 class="t3">I</h2></div>'
+            '</section></body>'
+        )
+        css = """
+        :root{--fg:#141416;--bg:#FAF8F3}
+        [data-theme="dark"]{--fg:#FFFFFF;--bg:#0B0B0C;background:var(--bg)}
+        [data-theme="light"]{--fg:#141416;--bg:#FAF8F3;background:var(--bg)}
+        h2{color:var(--fg)}
+        """
+
+        payload = converter.convert(html, css)
+        by_id = {s["_id"]: s for s in payload["payload"]["styles"]}
+        headings = [
+            [by_id[c]["styleLess"] for c in n.get("classes", []) if c in by_id]
+            for n in payload["payload"]["nodes"] if n.get("tag") == "h2"
+        ]
+
+        self.assertIn("color: #141416", headings[0][0])   # light section
+        self.assertIn("color: #FFFFFF", headings[1][0])   # dark section
+        self.assertIn("color: #141416", headings[2][0])   # light island inside dark
+
+        by_name = {s["name"]: s for s in payload["payload"]["styles"]}
+        self.assertIn("background: #0B0B0C", by_name["darksec"]["styleLess"])
+        self.assertIn("background: #FAF8F3", by_name["island"]["styleLess"])
+
+    def test_body_background_is_not_copied_onto_sections(self) -> None:
+        """`background` is not an inherited property.
+
+        Copying body's onto each top-level element painted the fixed header
+        opaque at rest, so the nav read as permanently scrolled and the
+        transparent-over-hero effect was gone (Dr. Nahlah, live 2026-08-04).
+        Inherited properties like `color` must still come through, because
+        Webflow's Body does not always carry them.
+        """
+        html = '<body><header class="bar">x</header><section class="scene">y</section></body>'
+        css = "body { background: #F4F1DE; overflow-x: hidden; color: #222; }"
+
+        payload = converter.convert(html, css)
+        styles = payload["payload"]["styles"]
+        self.assertTrue(styles, "expected at least one emitted style")
+
+        # Asserted across every emitted style rather than by class name:
+        # elements whose resolved definitions are identical are deduped into
+        # one record, so `.scene` may not have a style of its own.
+        for style in styles:
+            self.assertNotIn("background", style["styleLess"], style["name"])
+            self.assertNotIn("overflow", style["styleLess"], style["name"])
+        self.assertTrue(
+            any("color: #222" in s["styleLess"] for s in styles),
+            "inherited color must still reach the section roots",
+        )
 
     def test_variable_artifact_preserves_existing_webflow_css_names(self) -> None:
         css = ":root { --canvas: #F4F1DE; --ink: #3D405B; }"

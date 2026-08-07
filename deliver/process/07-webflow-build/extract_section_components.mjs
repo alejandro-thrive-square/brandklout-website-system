@@ -115,7 +115,7 @@ function emitComponent(sectionNode, index, total, kind) {
   const styles = styleClosure(ids);
   const assets = assetSubset(ids);
   const embeds = nodes.filter((n) => n.type === 'HtmlEmbed');
-  const scripted = embeds.some((e) => /WZ\.add/.test(e.v || ''));
+  const scripted = embeds.some((e) => /(?:WZ|MPD)\.add/.test(e.v || ''));
 
   const out = {
     type: raw.type,
@@ -128,8 +128,13 @@ function emitComponent(sectionNode, index, total, kind) {
   fs.mkdirSync(dir, { recursive: true });
   fs.writeFileSync(path.join(dir, 'final.json'), JSON.stringify(out));
 
+  // custom data-* attributes ride in data.xattr, not data.attr
+  const xattr = (name) =>
+    ((sectionNode.data && sectionNode.data.xattr) || []).find((a) => a.name === name)?.value || '';
   const chapterName =
-    (sectionNode.data && sectionNode.data.attr && sectionNode.data.attr['data-chapter-name']) || '';
+    (sectionNode.data && sectionNode.data.attr && sectionNode.data.attr['data-chapter-name']) ||
+    xattr('data-chapter-name');
+  const theme = xattr('data-theme');
 
   return {
     page: pageSlug,
@@ -137,6 +142,7 @@ function emitComponent(sectionNode, index, total, kind) {
     kind,
     sectionId: secId,
     chapterName,
+    theme,
     order: index,
     of: total,
     nodes: nodes.length,
