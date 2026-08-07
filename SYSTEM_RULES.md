@@ -174,7 +174,67 @@ The system has **two workspaces that can both change repo state**: the local mac
 - **Concurrency**: do not run `vps-commit-push.sh` on the VPS and `sync.sh` on local at the same time. If a push is rejected because the other side pushed first, simply re-run the safe command.
 - **Hermes**: when committing inside this repo, Hermes must use `scripts/vps-commit-push.sh` (which pulls before pushing) and must never force-push or rewrite shared history.
 
-## 5. Key Directives
+## 5. Session Rotation — hand off at 200k tokens
+
+**A session that reaches 200,000 tokens of context does not continue. It hands off to a fresh session through a runbook.** This applies to every agent in this system, in every worktree.
+
+### Why a handoff and not a resume
+
+Context is paid for on **every** turn, not once. A 200k-token session spends 200k on its next reply, and on the one after that, no matter how small the actual question is. Resuming such a session inherits that cost permanently; compacting it keeps a lossy summary of the whole history whether or not it is still relevant.
+
+A runbook costs a few thousand tokens, once. Measured on this repo: a full handoff was **~1.6k tokens** against a **200k** resume. The ratio, not the absolute number, is the reason for the rule.
+
+The trade is real and worth stating: a fresh session genuinely forgets things the runbook does not record. That is why the runbook is mandatory and why **Gotchas** is its most important section — failed approaches and environment quirks are exactly what a new session would otherwise pay to rediscover.
+
+### The runbook
+
+`.claude/RUNBOOK.md` at the worktree root. Untracked by design (see `.gitignore`): every worktree writes the same path, so tracking it would guarantee a merge conflict on every client branch. The durable record of what a session did is its **commits**; the runbook is only the bridge between sessions.
+
+Two halves:
+
+| Half | Owner | Content |
+| :--- | :--- | :--- |
+| `AUTO:BEGIN`…`AUTO:END` | `session-guard.mjs` | Branch, HEAD, recent commits, uncommitted files, context size. Regenerated on every write, so it cannot drift. |
+| Everything below | **The agent** | Objective, Done (with SHAs), In progress, Next, Gotchas, Open questions. |
+
+**Update the runbook after each completed task**, not only at the threshold. A runbook written under duress at 200k is written by an agent with no room left to write it well.
+
+### How it is enforced
+
+Two hooks, registered in the project's `.claude/settings.json`. They **merge with** the user-level hooks in `~/.claude/settings.json`, which belong to Orca — never move these there.
+
+| Threshold | Behaviour |
+| :--- | :--- |
+| < 150k | Silent. |
+| ≥ 150k | `Stop` hook nudges the agent to keep the runbook current. Non-blocking; at most one nudge per 20 minutes. |
+| ≥ 200k | `Stop` hook **blocks the stop** (`decision: "block"`) until the tree is committed and the runbook is current. Then it rotates the terminal into a fresh session. |
+
+Blocking is deliberate. A soft reminder at the threshold is ignored precisely when it matters, because the agent is mid-task and its next action always looks more urgent than writing a handoff. Making the handoff the only exit is what turns the rule into a guarantee.
+
+`SessionStart` then injects the runbook into the new session automatically, so the rotation needs no human in the loop.
+
+### Safety properties
+
+- **Never rotates a dirty tree.** Uncommitted work is the one thing a handoff cannot carry, so the guard blocks and demands a commit instead.
+- **Never rotates on a stale runbook.** Older than 45 minutes counts as stale.
+- **Never wedges a session.** Every internal failure exits 0 silently; a broken guard is worse than no guard.
+- **Rotation is a no-op if Orca is unavailable.** The runbook is already written, so the worst case is a manual restart, never lost work.
+- **Relaunches on the same profile.** `session-rotate.mjs` reads `CLAUDE_CONFIG_DIR` so a client worktree comes back on `team`, not `personal` — otherwise the new session would silently hold different MCP grants.
+
+### Files
+
+| Path | Role |
+| :--- | :--- |
+| `scripts/session-lib.mjs` | Token measurement, git state, runbook template |
+| `scripts/session-guard.mjs` | `Stop` hook — the ladder above |
+| `scripts/session-resume.mjs` | `SessionStart` hook — injects the runbook |
+| `scripts/session-rotate.mjs` | Closes and relaunches the Orca terminal |
+
+Thresholds are overridable for tuning without editing code: `WEBZITE_CONTEXT_LIMIT`, `WEBZITE_CONTEXT_WARN`.
+
+Context size is read from the transcript's recorded usage — `input + cache_creation + cache_read + output` of the **last** non-sidechain assistant message. The cache fields are the bulk of it, so counting `input_tokens` alone under-reports by roughly 100×. It reads the last message rather than the peak, because a compact genuinely shrinks the window and a peak-based measure would leave a compacted session permanently above the threshold.
+
+## 6. Key Directives
 - **Agent Hermes & Two-Workspace Sync**: [HERMES.md](./HERMES.md) — how Telegram-driven VPS work and local work stay in sync via `scripts/sync.sh`.
 - **New Computer Install**: [INSTALL.md](./INSTALL.md) - restore this system on a new local workstation from GitHub, the VPS, and private credentials.
 - **Pricing & Timeline Rules**: [PRICING_TIMELINE_RULES.md](./sales/PRICING_TIMELINE_RULES.md) — canonical per-page rates and execution duration. Single source of truth for Sales quoting, Deliver scheduling, and Manage invoicing.

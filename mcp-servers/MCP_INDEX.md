@@ -33,6 +33,10 @@ Platform MCPs that hold OAuth grants are registered once **per principal** (see 
 | `webflow-livewell-dental` | Livewell Dental (via Brandklout) | `client` | Livewell Dental site only (`livewelldentalva.webflow.io`) | [mcp-access.md](../deliver/brandklout/livewell-dental/docs/mcp-access.md) |
 | `webflow-dealer-websites` | Dealer Websites | `client` | Dealer Websites site only (site ID TBD — confirm via `list_sites`) | [mcp-access.md](../deliver/dealer-websites/docs/mcp-access.md) |
 | `webflow-dr-nahlah` | Dr. Nahlah | `client` | Dr. Nahlah site only — **not yet created / not yet authenticated** | [mcp-access.md](../deliver/brandklout/dr-nahlah/docs/mcp-access.md) |
+| `webflow-grand-mission-dentistry` | Grand Mission Dentistry (via Brandklout) | `client` | Grand Mission sites only — registered 2026-08-06, **awaiting OAuth** | [mcp-access.md](../deliver/brandklout/grand-mission-dentistry/docs/mcp-access.md) |
+| `webflow-arvada-dental-center` | Arvada Dental Center (via Brandklout) | `client` | Arvada sites only (`arvadadentalcenter.com`) — registered 2026-08-06, **awaiting OAuth** | [mcp-access.md](../deliver/brandklout/arvada-dental-center/docs/mcp-access.md) |
+| `webflow-mason-park` | Mason Park Dental (via Brandklout) | `client` | Mason Park sites only — registered 2026-08-06, **awaiting OAuth** | [mcp-access.md](../deliver/brandklout/mason-park/docs/mcp-access.md) |
+| `webflow-stone-dental-implant-center` | Stone Dental Implant Center (via Brandklout) | `client` | Stone sites only — registered 2026-08-06, **awaiting OAuth**; scope still unconfirmed with Brandklout | [mcp-access.md](../deliver/brandklout/stone-dental-implant-center/docs/mcp-access.md) |
 | `webflow-clientfirst` | Local tool server (no principal) | n/a | No network. Reads repo files, writes `mcp-servers/webflow-clientfirst/.tmp/` | [setup.md](./webflow-clientfirst/setup.md) |
 | `webflow` | **Legacy — deprecated** | — | Whatever the last OAuth covered (currently returns 401) | Remove after active work migrates to per-client instances |
 | `asana-brandklout` | Brandklout (white-label partner) | `client` | Workspace `1210572425689866` (the only one the grant can see) — registered 2026-08-05 (client ID `1217205892702386`, callback port 8080). **Cannot authenticate: Claude Code token-exchange bug.** Working access is via [scripts](../deliver/brandklout/scripts/README.md). | [mcp-access.md](../deliver/brandklout/docs/mcp-access.md) |
@@ -52,6 +56,15 @@ MCP server definitions are stored in `.mcp.json` at the project root (project-sc
 - **Local-scoped**: Managed outside the repository and used only for private credentials, experimental servers, or stronger client isolation.
 
 Runtime authorization is account-specific. Agents must read the nearest `mcp-access.md` and the referenced profile before using an MCP, even when the MCP server appears connected.
+
+### Where OAuth grants actually live — authenticate on the right profile
+
+Verified 2026-08-06. Grants are stored in `~/.claude-<profile>/.credentials.json` under `mcpOAuth`, keyed **`<server-name>|<url-hash>`**. Two consequences:
+
+- **Grants are per profile.** `.credentials.json` is a real file in each of `~/.claude`, `~/.claude-team` and `~/.claude-personal` — it is *not* one of the directories junctioned back into `~/.claude`. Authenticating a client MCP on the personal profile puts the grant somewhere the client agents cannot reach, because all client work runs on `claude team` (see [ORCHESTRATION.md](../deliver/brandklout/docs/ORCHESTRATION.md)).
+- **Grants are global across projects, not per worktree.** The hash is derived from the server URL, not the project path, so one authentication per profile covers every checkout and every worktree. There is no need to repeat OAuth in each client worktree.
+
+What *is* per worktree is `enabledMcpjsonServers` in `.claude/settings.local.json`, which is gitignored and therefore does not travel with a new worktree. A server missing from that list never appears in `/mcp` at all, and the omission is silent. Each Brandklout client worktree is deliberately scoped to its own instance plus `webflow-clientfirst`.
 
 ## Adding a New MCP Server
 
