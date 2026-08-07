@@ -206,6 +206,13 @@
       "binding": "var(--mist)"
     },
     {
+      "sourceName": "--on-accent",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--on-accent",
+      "binding": "var(--on-accent)"
+    },
+    {
       "sourceName": "--paper",
       "variableId": "",
       "collectionId": "",
@@ -232,13 +239,6 @@
       "collectionId": "",
       "cssName": "--rule",
       "binding": "var(--rule)"
-    },
-    {
-      "sourceName": "--sage",
-      "variableId": "",
-      "collectionId": "",
-      "cssName": "--sage",
-      "binding": "var(--sage)"
     },
     {
       "sourceName": "--sand",

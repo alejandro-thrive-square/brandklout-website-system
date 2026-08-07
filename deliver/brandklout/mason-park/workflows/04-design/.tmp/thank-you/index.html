@@ -6,7 +6,7 @@
 <title>Thank you — we have your request | Mason Park Dental of Katy</title>
 <meta name="description" content="Your request has reached Mason Park Dental of Katy. Here is what happens next.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#1b2224">
+<meta name="theme-color" content="#26292F">
 
 <!--
   Mason Park Dental — Thank-you page
@@ -49,7 +49,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../shared/mpd.css">
 
 <!-- ===== CONVERSION TRACKING SLOT — intentionally empty ===== -->
@@ -106,7 +106,7 @@
     .ch-received::after {
       content: ""; position: absolute; inset: -50% -10% auto auto;
       width: 460px; height: 460px; pointer-events: none;
-      background: radial-gradient(circle, rgba(195, 169, 142, 0.26), transparent 65%);
+      background: radial-gradient(circle, rgba(0, 180, 216, 0.26), transparent 65%);
     }
     .ch-received .wrap { position: relative; z-index: 2; }
     .ch-received .status-mark {
@@ -207,8 +207,8 @@
       .ch-fasttrack .call-box { grid-template-columns: minmax(0, 1fr) auto; text-align: left; gap: 2.5rem; }
     }
     .ch-fasttrack .urgency {
-      display: inline-block; font-family: var(--display); font-size: var(--t-eyebrow); font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase; color: var(--white);
+      display: inline-block; font-family: var(--body); font-size: var(--t-eyebrow); font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--on-accent);
       background: var(--sand-deep); padding: 0.3rem 0.75rem; border-radius: 999px; margin-bottom: 0.9rem;
     }
     .ch-fasttrack .big-number {
@@ -364,9 +364,9 @@
 
     function litDot(dot, on) {
       gsap.to(dot, {
-        borderColor: on ? '#a8875f' : '#dfe4e6',
-        backgroundColor: on ? '#a8875f' : '#fbf9f7',
-        color: on ? '#ffffff' : '#778386',
+        borderColor: on ? '#00B4D8' : 'rgba(32, 36, 42, 0.12)',
+        backgroundColor: on ? '#00B4D8' : '#F4F7F9',
+        color: on ? '#ffffff' : '#5A6472',
         duration: 0.35, ease: 'none'
       });
     }
@@ -539,7 +539,7 @@
 
     if (M.reduced) {
       gsap.set(paths, { strokeDashoffset: 0 });
-      gsap.set(ticks, { borderColor: '#a8875f', backgroundColor: '#f4ece2' });
+      gsap.set(ticks, { borderColor: '#00B4D8', backgroundColor: '#E8F6FA' });
       return;
     }
 
@@ -568,8 +568,8 @@
       /* The ring warms as its own tick lands. On the same timeline as the
          draw, so it reverses with the scroll instead of latching. */
       tl.fromTo(ticks[i],
-        { borderColor: '#e6dccf', backgroundColor: '#f4ece2' },
-        { borderColor: '#a8875f', backgroundColor: '#ffffff', ease: 'none', duration: 0.8 },
+        { borderColor: 'rgba(0, 126, 155, 0.16)', backgroundColor: '#E8F6FA' },
+        { borderColor: '#00B4D8', backgroundColor: '#ffffff', ease: 'none', duration: 0.8 },
         0.4 + i * 0.9);
     });
 
@@ -832,7 +832,7 @@
       </div>
       <div>
         <h3>Call</h3>
-        <p><a data-phone="href" href="tel:+12817698878" style="font-family:var(--display);font-size:1.25rem;color:#fff;">
+        <p><a data-phone="href" href="tel:+12817698878" style="font-family:var(--display);font-size:var(--t-lead);color:#fff;">
           <span data-phone-text>(281) 769-8878</span></a></p>
       </div>
       <div>

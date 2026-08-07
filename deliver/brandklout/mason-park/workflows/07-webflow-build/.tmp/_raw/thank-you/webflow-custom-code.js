@@ -69,9 +69,9 @@ MPD.add(function (M) {
 
     function litDot(dot, on) {
       gsap.to(dot, {
-        borderColor: on ? '#a8875f' : '#dfe4e6',
-        backgroundColor: on ? '#a8875f' : '#fbf9f7',
-        color: on ? '#ffffff' : '#778386',
+        borderColor: on ? '#00B4D8' : 'rgba(32, 36, 42, 0.12)',
+        backgroundColor: on ? '#00B4D8' : '#F4F7F9',
+        color: on ? '#ffffff' : '#5A6472',
         duration: 0.35, ease: 'none'
       });
     }
@@ -124,7 +124,7 @@ MPD.add(function (M) {
 
     if (M.reduced) {
       gsap.set(paths, { strokeDashoffset: 0 });
-      gsap.set(ticks, { borderColor: '#a8875f', backgroundColor: '#f4ece2' });
+      gsap.set(ticks, { borderColor: '#00B4D8', backgroundColor: '#E8F6FA' });
       return;
     }
 
@@ -153,8 +153,8 @@ MPD.add(function (M) {
       /* The ring warms as its own tick lands. On the same timeline as the
          draw, so it reverses with the scroll instead of latching. */
       tl.fromTo(ticks[i],
-        { borderColor: '#e6dccf', backgroundColor: '#f4ece2' },
-        { borderColor: '#a8875f', backgroundColor: '#ffffff', ease: 'none', duration: 0.8 },
+        { borderColor: 'rgba(0, 126, 155, 0.16)', backgroundColor: '#E8F6FA' },
+        { borderColor: '#00B4D8', backgroundColor: '#ffffff', ease: 'none', duration: 0.8 },
         0.4 + i * 0.9);
     });
 

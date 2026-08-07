@@ -98,8 +98,8 @@ MPD.add(function (M) {
       onUpdate: function (self) { gsap.set(meter, { scaleX: self.progress }); }
     }) });
 
-    tl.to(body, { color: '#1b2224', stagger: 0.5, ease: 'none' }, 0)
-      .to(tail, { color: '#a8875f', stagger: 0.5, ease: 'none' }, '>-0.2')
+    tl.to(body, { color: '#26292F', stagger: 0.5, ease: 'none' }, 0)
+      .to(tail, { color: '#00B4D8', stagger: 0.5, ease: 'none' }, '>-0.2')
       .from('#hesAfter p', { opacity: 0, y: 22, stagger: 0.4, ease: 'none' }, '>-0.4');
   });
 
@@ -153,7 +153,7 @@ MPD.add(function (M) {
       });
     });
     function light(card, on) {
-      gsap.to(card, { borderColor: on ? 'rgba(195,169,142,.55)' : 'rgba(255,255,255,.14)', duration: 0.45 });
+      gsap.to(card, { borderColor: on ? 'rgba(0,180,216,.55)' : 'rgba(255,255,255,.14)', duration: 0.45 });
       gsap.to(card.querySelector('.no'), { opacity: on ? 1 : 0.4, duration: 0.45 });
     }
 
@@ -186,8 +186,8 @@ MPD.add(function (M) {
       state.textContent = 'Invisalign® special — $1,000 off';
       gsap.set(rail, { scaleX: 0.5 });
       marks.forEach(function (m) {
-        m.style.background = '#7f9a8b';
-        m.style.borderColor = '#7f9a8b';
+        m.style.background = '#00B4D8';
+        m.style.borderColor = '#00B4D8';
         m.querySelector('path').style.strokeDashoffset = '0';
       });
       return;
@@ -232,7 +232,7 @@ MPD.add(function (M) {
     /* Each inclusion checks itself off across the same pinned distance. */
     marks.forEach(function (mark, i) {
       tl.to(mark, {
-        backgroundColor: '#7f9a8b', borderColor: '#7f9a8b', ease: 'none', duration: 0.35
+        backgroundColor: '#00B4D8', borderColor: '#00B4D8', ease: 'none', duration: 0.35
       }, i * 0.45)
         .to(mark.querySelector('path'), { strokeDashoffset: 0, ease: 'none', duration: 0.3 }, i * 0.45 + 0.1);
     });

@@ -3,11 +3,11 @@
   "variables": [
     {
       "name": "--accent",
-      "value": "#8a6c46"
+      "value": "#00738D"
     },
     {
       "name": "--accent-lg",
-      "value": "#a8875f"
+      "value": "#00B4D8"
     },
     {
       "name": "--bar-h",
@@ -23,15 +23,15 @@
     },
     {
       "name": "--bg-2",
-      "value": "#fbf9f7"
+      "value": "#F4F7F9"
     },
     {
       "name": "--bg-3",
-      "value": "#f4ece2"
+      "value": "#E8F6FA"
     },
     {
       "name": "--body",
-      "value": "\"DM Sans\", \"Segoe UI\", system-ui, sans-serif"
+      "value": "\"Inter\", \"Segoe UI\", system-ui, sans-serif"
     },
     {
       "name": "--card",
@@ -43,7 +43,7 @@
     },
     {
       "name": "--cloud",
-      "value": "#eff2f3"
+      "value": "#E8F6FA"
     },
     {
       "name": "--coefficient",
@@ -51,7 +51,7 @@
     },
     {
       "name": "--display",
-      "value": "\"Outfit\", \"Segoe UI\", system-ui, sans-serif"
+      "value": "\"Fraunces\", Georgia, \"Times New Roman\", serif"
     },
     {
       "name": "--ease",
@@ -59,19 +59,19 @@
     },
     {
       "name": "--fg",
-      "value": "#1b2224"
+      "value": "#26292F"
     },
     {
       "name": "--fg-body",
-      "value": "#4e585b"
+      "value": "#525A64"
     },
     {
       "name": "--fg-soft",
-      "value": "#778386"
+      "value": "#5A6472"
     },
     {
       "name": "--focus",
-      "value": "#a8875f"
+      "value": "#00B4D8"
     },
     {
       "name": "--font-from",
@@ -87,23 +87,23 @@
     },
     {
       "name": "--ink",
-      "value": "#1b2224"
+      "value": "#26292F"
     },
     {
       "name": "--ink-deep",
-      "value": "#121719"
+      "value": "#1B1E23"
     },
     {
       "name": "--ink-soft",
-      "value": "#2c3538"
+      "value": "#2F343C"
     },
     {
       "name": "--line",
-      "value": "#dfe4e6"
+      "value": "rgba(32, 36, 42, 0.12)"
     },
     {
       "name": "--line-warm",
-      "value": "#e6dccf"
+      "value": "rgba(0, 126, 155, 0.16)"
     },
     {
       "name": "--max",
@@ -115,11 +115,15 @@
     },
     {
       "name": "--mist",
-      "value": "#778386"
+      "value": "#5A6472"
+    },
+    {
+      "name": "--on-accent",
+      "value": "#20242A"
     },
     {
       "name": "--paper",
-      "value": "#fbf9f7"
+      "value": "#F4F7F9"
     },
     {
       "name": "--radius",
@@ -131,43 +135,39 @@
     },
     {
       "name": "--rule",
-      "value": "#a8875f"
-    },
-    {
-      "name": "--sage",
-      "value": "#7f9a8b"
+      "value": "#00B4D8"
     },
     {
       "name": "--sand",
-      "value": "#c3a98e"
+      "value": "#8FDCEC"
     },
     {
       "name": "--sand-deep",
-      "value": "#a8875f"
+      "value": "#00B4D8"
     },
     {
       "name": "--sand-ink",
-      "value": "#8a6c46"
+      "value": "#007E9B"
     },
     {
       "name": "--sand-wash",
-      "value": "#f4ece2"
+      "value": "#E8F6FA"
     },
     {
       "name": "--shadow-card",
-      "value": "0 1px 2px rgba(27, 34, 36, 0.04), 0 12px 32px -18px rgba(27, 34, 36, 0.18)"
+      "value": "0 1px 2px rgba(32, 36, 42, 0.04), 0 12px 32px -18px rgba(32, 36, 42, 0.18)"
     },
     {
       "name": "--shadow-lift",
-      "value": "0 2px 4px rgba(27, 34, 36, 0.05), 0 22px 48px -20px rgba(27, 34, 36, 0.26)"
+      "value": "0 2px 4px rgba(32, 36, 42, 0.05), 0 22px 48px -20px rgba(32, 36, 42, 0.26)"
     },
     {
       "name": "--slate",
-      "value": "#4e585b"
+      "value": "#525A64"
     },
     {
       "name": "--t-body",
-      "value": "1.0625rem"
+      "value": "1.125rem"
     },
     {
       "name": "--t-eyebrow",
@@ -175,23 +175,23 @@
     },
     {
       "name": "--t-h1",
-      "value": "3.75rem"
+      "value": "3.25rem"
     },
     {
       "name": "--t-h2",
-      "value": "2.75rem"
+      "value": "2.375rem"
     },
     {
       "name": "--t-h3",
-      "value": "1.5rem"
+      "value": "1.625rem"
     },
     {
       "name": "--t-lead",
-      "value": "1.25rem"
+      "value": "1.3125rem"
     },
     {
       "name": "--t-price",
-      "value": "5.5rem"
+      "value": "4.75rem"
     },
     {
       "name": "--t-small",
@@ -199,7 +199,7 @@
     },
     {
       "name": "--t-statement",
-      "value": "3.4rem"
+      "value": "2.95rem"
     },
     {
       "name": "--t-ui",
