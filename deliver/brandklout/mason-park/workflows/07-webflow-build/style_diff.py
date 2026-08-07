@@ -37,12 +37,41 @@ MEDIA_TO_BP = {
 PSEUDO_RE = re.compile(r"(:{1,2}[a-z-]+(?:\([^)]*\))?)$")
 
 
+def _logical_lines(path):
+    """Yield one rule per item, re-joining rules that wrap across lines.
+
+    payload_to_whtml writes one rule per line, EXCEPT where a single value is
+    long enough to wrap — a multi-property `transition:` shorthand does it on
+    every page. A line-based parser drops those rules from BOTH sides of the
+    diff, so their changes are never emitted and never applied, and nothing
+    reports a problem. That silently left `.site-head` on the old heading font
+    and `.btn--ghost` on the old hairline after a re-theme that otherwise
+    verified clean. Balance the braces instead of trusting the newlines.
+    """
+    buf = ""
+    depth = 0
+    for raw in io.open(path, encoding="utf-8"):
+        line = raw.strip()
+        if not line:
+            continue
+        if not buf and (line.startswith("/*") or line.startswith("@media") or line == "}"):
+            yield line
+            continue
+        buf = f"{buf} {line}" if buf else line
+        depth += line.count("{") - line.count("}")
+        if depth <= 0:
+            yield buf
+            buf = ""
+            depth = 0
+    if buf:
+        yield buf
+
+
 def parse(path):
     """{(breakpoint, selector, pseudo): {prop: value}}"""
     out = {}
     media = ""
-    for raw in io.open(path, encoding="utf-8"):
-        line = raw.strip()
+    for line in _logical_lines(path):
         if not line or line.startswith("/*"):
             continue
         if line.startswith("@media"):

@@ -1,6 +1,18 @@
 {
  "actions": [
   {
+   "style": "site-head",
+   "parents": [],
+   "breakpoint": "main",
+   "pseudo": null,
+   "new_rule": false,
+   "properties": {
+    "color": "#525A64",
+    "font-family": "\"Inter\", \"Segoe UI\", system-ui, sans-serif",
+    "font-size": "1.125rem"
+   }
+  },
+  {
    "style": "nps-i",
    "parents": [],
    "breakpoint": "main",
@@ -246,6 +258,16 @@
    }
   },
   {
+   "style": "arr-bg-after-nps",
+   "parents": [],
+   "breakpoint": "main",
+   "pseudo": null,
+   "new_rule": false,
+   "properties": {
+    "background-image": "radial-gradient(90% 70% at 76% 28%, rgba(0, 180, 216, 0.26), transparent 62%), linear-gradient(104deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.95) 46%, rgba(255,255,255,.6) 82%), linear-gradient(180deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,.3) 30%, rgba(255,255,255,.96) 100%)"
+   }
+  },
+  {
    "style": "chapter-tag",
    "parents": [
     "nps-p"
@@ -350,6 +372,20 @@
    "new_rule": false,
    "properties": {
     "color": "#5A6472"
+   }
+  },
+  {
+   "style": "chip",
+   "parents": [],
+   "breakpoint": "main",
+   "pseudo": null,
+   "new_rule": false,
+   "properties": {
+    "border-top-color": "rgba(32, 36, 42, 0.12)",
+    "border-right-color": "rgba(32, 36, 42, 0.12)",
+    "border-bottom-color": "rgba(32, 36, 42, 0.12)",
+    "border-left-color": "rgba(32, 36, 42, 0.12)",
+    "color": "#525A64"
    }
   },
   {
@@ -888,6 +924,19 @@
    "style": "tile",
    "parents": [],
    "breakpoint": "main",
+   "pseudo": null,
+   "new_rule": false,
+   "properties": {
+    "border-top-color": "rgba(32, 36, 42, 0.12)",
+    "border-right-color": "rgba(32, 36, 42, 0.12)",
+    "border-bottom-color": "rgba(32, 36, 42, 0.12)",
+    "border-left-color": "rgba(32, 36, 42, 0.12)"
+   }
+  },
+  {
+   "style": "tile",
+   "parents": [],
+   "breakpoint": "main",
    "pseudo": "hover",
    "new_rule": false,
    "properties": {
@@ -954,6 +1003,19 @@
    "new_rule": false,
    "properties": {
     "color": "#5A6472"
+   }
+  },
+  {
+   "style": "review",
+   "parents": [],
+   "breakpoint": "main",
+   "pseudo": null,
+   "new_rule": false,
+   "properties": {
+    "border-top-color": "rgba(32, 36, 42, 0.12)",
+    "border-right-color": "rgba(32, 36, 42, 0.12)",
+    "border-bottom-color": "rgba(32, 36, 42, 0.12)",
+    "border-left-color": "rgba(32, 36, 42, 0.12)"
    }
   },
   {

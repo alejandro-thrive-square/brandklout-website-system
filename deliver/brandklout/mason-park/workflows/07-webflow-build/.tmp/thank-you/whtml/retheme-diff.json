@@ -13,6 +13,18 @@
    }
   },
   {
+   "style": "site-head",
+   "parents": [],
+   "breakpoint": "main",
+   "pseudo": null,
+   "new_rule": false,
+   "properties": {
+    "color": "#525A64",
+    "font-family": "\"Inter\", \"Segoe UI\", system-ui, sans-serif",
+    "font-size": "1.125rem"
+   }
+  },
+  {
    "style": "head-progress",
    "parents": [],
    "breakpoint": "main",

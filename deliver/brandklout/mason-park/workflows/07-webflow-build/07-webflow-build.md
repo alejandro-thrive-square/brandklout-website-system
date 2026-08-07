@@ -64,6 +64,65 @@ Reproduce the approved final design source in Webflow with CMS-first structure, 
 | [html-to-webflow-clipboard.md](html-to-webflow-clipboard.md) | Full method directive (the load-bearing knowledge). |
 | [07-webflow-build.py](07-webflow-build.py) | Config-driven orchestrator (`webflow-build.config.json`). |
 | [tests/](tests) | Converter regression tests (`python -m unittest discover -s tests`). |
+| [style_diff.py](style_diff.py) | Diff two generated `styles.css` files → the per-property `update_style` actions that turn the first into the second. |
+| [mkactions.py](mkactions.py) | Turn a `style_diff.py` diff into ready-to-send `update_style` action batches. |
+
+## Re-theming a site that is already built
+
+A re-theme changes VALUES, not structure, so it goes through `update_style` property by
+property rather than through a rebuild — the whole job is ~300 rules against ~200KB of markup,
+and `data_whtml_builder`'s `css` parameter **creates** styles, it does not update them
+(probed directly: re-sending a definition for an existing class left the original untouched
+and minted a stray combo).
+
+```
+style_diff.py --old <git show <pre-theme>:…/styles.css> --new …/styles.css --out retheme-diff.json
+mkactions.py  --diff retheme-diff.json --out <batchDir>
+push_styles.mjs   <batchDir> <pageId>     # in .tmp/ — drives the MCP directly
+verify_styles.mjs --repair <dir>          # reads every style back off the SITE
+push_styles.mjs   <repairDir> <pageId>    # only what is actually missing
+```
+
+**The style pass is the smaller half.** These carry colour and type too, and none of them is
+reachable by a style update — each one shipped the old palette on a build that had verified
+313/313 rules clean:
+
+1. **The page footer JS animates concrete hex values** (`gsap.to(el,{color:'#26292F'})`,
+   `m.style.background='#00B4D8'`). Rebuild it with `build_page_footers.mjs`. The mapping is
+   not a global hex substitution — the same old hex maps to different new ones in different
+   places — so rebuild from the re-themed source, never patch the minified bundle.
+2. **Any HtmlEmbed carrying its own `<style>`.** The lead form does. Nothing in the Designer
+   model can see inside it. `push_embeds.mjs`. Note the payload's inline styles still contain
+   `var(--display)` / `var(--t-body)`: `:root` never reaches Webflow, so those must be
+   resolved to concrete values on the way in or the form loses its typeface entirely.
+3. **The site head and the page heads** — the fluid root, the reading tier, the 1439 display
+   rung, and the runtime-state rules Webflow classes cannot express. Read what the site
+   actually serves and patch that (`dump_custom_code.mjs` → `build_head_blocks.mjs` →
+   `push_custom_code.mjs`); the `_js/` artifacts are what a build *intended* and they drift.
+
+**Finish by reading the PUBLISHED stylesheet**, not the API. Fetch each page and its `.css`
+and grep for the old palette and the old font names. That is what found the form embed after
+every other gate was green.
+
+### API behaviour that will otherwise cost a round trip each
+
+- **Webflow stores CSS shorthands as LONGHANDS**, and `update_style` merges by property NAME.
+  `background: X` lands ALONGSIDE the stored `background-color`, so the style then holds both
+  colours. Send `background-color` / `background-image` / the four `border-*-color`.
+  `style_diff.py::expand_shorthands` does this.
+- **`font-family` stores ONE family, not a stack.** Send `Inter`.
+- **`"Too Many Requests"` and `"[Conflict] … style block store" are reported PER ACTION**,
+  inside an otherwise successful call. A script that checks only the HTTP status reports a
+  clean run over a half-applied re-theme. `[Conflict]` in particular is what you get for a
+  no-op update on an already-correct global style — so treat the site read-back, not the
+  push, as the gate.
+- **A class named after a bare HTML tag is silently dropped at build time.** A payload class
+  `h2` produced an element with no style at all on two pages. Give it a real name.
+- **`get_*_freeform_code` returns an ARRAY when `location` is omitted and an OBJECT when it is
+  given.** Reading `result[0].content` off the object reports every block as empty.
+- The direct MCP client memoises its access token for the life of the process, so a long run
+  outlives its own token and everything after it fails `HTTP 401 invalid_token` — which looks
+  exactly like a revoked grant. `wfmcp.mjs` re-handshakes once on 401.
 
 ### Config-driven orchestrator
 
@@ -215,6 +274,8 @@ Register site-level scripts via `data_scripts_tool` for Google Fonts, analytics/
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/webflow-variable-{import,map}.json` and `webflow-style-variable-bindings.json` — variable artifacts
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/site.css` — copy of source CSS
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/build-manifest.json` — full build log with element IDs, page IDs, CMS collection IDs (MCP path)
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/_installed/` — every custom-code block and embed **exactly as installed**, read back off the site to confirm. This is the record to patch against; `_js/` is only what a build intended
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/whtml/retheme-diff.json` — every rule and property a re-theme must change
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/visual-diff/` — staging vs preview comparison screenshots
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/cms-import.json`
 - `deliver/[client-name]/workflows/07-webflow-build/.tmp/change-manifest.json` (improvements only)
