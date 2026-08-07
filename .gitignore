@@ -80,3 +80,6 @@ desktop.ini
 # ===== Logs =====
 *.log
 logs/
+
+# Orca per-worktree briefs and review notes — deliberately local, never committed (959b916)
+.orca-*.md

@@ -140,14 +140,29 @@ this directory exits 0.
 The root is flat 16px from 479 to 1440, so it only moves the design below 479 and above 1440. Two
 consequences shaped the scale, and both are design decisions rather than mechanical swaps:
 
-- **Text is anchored at 390, not 1440.** Body copy has to clear 16px on a phone, and at 390 the root
-  is 13.76px, so `--body` is `1.17rem`. That forces the desktop size from 15.5px to 18.7px — there is
-  no value that satisfies both, and the mobile floor wins. Every bare `rem` font-size in the build
-  moved by the same 1.206 factor, so the relationships inside the text tier are unchanged.
+- **Text is authored at 390 and scaled down for desktop by `--tx`.** Body copy has to clear 16px on
+  a phone, and at 390 the root is 13.76px, so `--body` is `1.17rem`. Held flat, that same token
+  renders 18.7px on every desktop — 20.6% over the approved sizes, which is what made every chapter
+  run a screen and a half tall and drew *"I have to zoom out the page in order to fit"* in client
+  review. So every font-size in the build — all 91 of them, kit and page stylesheets — is written
+  `calc(Nrem * var(--tx))`, and `--tx` is `1` up to 1023px and `0.8292` (= 1/1.206) from 1024px.
+  At 1440 that is body 15.5px, h1 84px, h2 46.6px; at 390 nothing changes.
+  **To retune desktop type, change `--tx` and nothing else** — the tier moves as one unit, which is
+  the whole point of doing it this way rather than editing 91 numbers.
 - **Display type needs a staircase.** The hero was authored at `7vw` (46px at 390, 101px at 1440);
   a plain `rem` is constant across 479–1440 and cannot be both. `--d1` and `--h2` therefore step at
   1199 and 767 — px queries, tokens only, 1440 exact. The reasoning and the measured overflow
-  ceilings are in the comment block in `kit.css`.
+  ceilings are in the comment block in `kit.css`. A third step,
+  `(min-width: 1024px) and (max-width: 1199px)`, exists **only** because that band would otherwise
+  inherit both the 1199 display step and the `--tx` reduction and land 45% below the band above it.
+  It must stay ordered after the `max-width: 1199px` block.
+
+- **A `width: max-content` child inside `.ch__pin` will drag every centred sibling off-centre.**
+  `.ch__pin` is a grid, and a single implicit `auto` track sizes to max-content — so the horizontal
+  rails in The Options and The Proof inflated the track to ~2000px and their headings centred
+  themselves in *that*, drifting up to 843px right of the viewport. `grid-template-columns:
+  minmax(0, 1fr)` pins the track to the container. It is invisible at rest and in the reduced-motion
+  pass; only a motion-on probe with the pin engaged catches it.
 
 `_vendor/kit/kit.css` is the source of truth and is **manually copied** into each package. After
 editing it:

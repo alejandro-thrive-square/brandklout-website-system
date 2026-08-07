@@ -228,6 +228,46 @@ Two runtime checks are worth copying rather than re-deriving. Reference implemen
   comparison proves nothing. Measure the bounding boxes of its visible descendants against the
   scene's own box, at 1920 and 2400, where its contents are 12.5% and 25% larger.
 
+## The phone floor will oversize your desktop. Plan for `--tx` up front.
+
+The house scale is flat 16px from 479 to 1440 and drops to 13.76px at 390. So a token sized to
+clear a 16px legibility floor on a phone — `--body: 1.17rem` — renders **18.7px on every desktop**,
+about 20% larger than a design approved at 1440. Sizing the token for the desktop instead puts
+body copy at 14.7px on a phone. **No single rem value satisfies both ends, and the root cannot
+rescue it**: the curve is continuous by design, so any shape that gives 16px at 390 gives ~16px at
+1440 too.
+
+Grand Mission shipped the phone-anchored version and the client's first note was *"I have to zoom
+out the page in order to fit"*. Every chapter ran a screen and a half tall.
+
+The fix is one multiplier, declared with the tokens:
+
+```css
+:root { --tx: 1; }                                  /* phone: the floor binds  */
+@media (min-width: 1024px) { :root { --tx: 0.8292; } }   /* desktop: 1/1.206   */
+
+--body: calc(1.17rem * var(--tx));
+.offer__price { font-size: calc(3.9rem * var(--tx)); }
+```
+
+Author every font-size at its **phone** value and wrap it. Why a multiplier rather than bucketing
+the sizes onto semantic tokens: bucketing changes the relationships between sizes as well as the
+sizes, so it is a redesign wearing a refactor's clothes. `--tx` moves the whole tier as one unit
+and leaves every relationship exactly as drawn — and retuning desktop type afterwards is one
+number, not another sweep.
+
+Two things to get right:
+
+- **Apply it to the display tokens too.** If `--d1` scales and `--body` does not (or vice versa)
+  the hierarchy shears at the breakpoint.
+- **A display staircase that already exists must be restated inside the `--tx` band.** Grand
+  Mission had a `max-width: 1199px` step at `4.4rem`; once `--tx` started at 1024, the 1024–1199
+  band inherited both and fell to 58px against 84px at 1200. It needed
+  `@media (min-width: 1024px) and (max-width: 1199px)`, ordered *after* the block it overrides.
+
+`fluid-root.mjs --check` passes with `--tx` in place — the generated root snippet is untouched and
+the multiplier sits below it in the token block.
+
 ## Version Control
 
 - Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md).
