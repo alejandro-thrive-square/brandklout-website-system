@@ -379,11 +379,18 @@
   max-width: 40ch;
 }
 
+/* The scrub marker is absolutely positioned against this box. It cannot live
+   INSIDE the <ol> (a non-list-item child of a list is invalid HTML and the
+   headless WHTML builder rejects the whole page insert), so this wrapper owns
+   the positioning context instead — the <ol> has no margin, so the two boxes
+   coincide and the marker geometry is unchanged. */
+.work__list {
+  position: relative;
+}
 .work__index {
   list-style: none;
   margin: 0;
   padding: 0;
-  position: relative;
   border-top: 1px solid var(--n-200);
 }
 /* The marker travels the index continuously — it is the readout of scroll

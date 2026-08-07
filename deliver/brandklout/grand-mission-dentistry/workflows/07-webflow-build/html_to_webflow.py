@@ -1386,15 +1386,26 @@ class WebflowBuilder:
         sid = self._style_id(name, base, variants)
         nid = new_id()
         data = self._common_data()
-        # A <div> is invalid inside <p> (and any inline element): the HTML
-        # parser auto-closes the paragraph at the div, so the pasted page
-        # publishes an EMPTY <p> plus orphaned text — the Grand Mission
-        # `.gm-label::before` rule-line emptied every eyebrow this way
-        # (2026-08-07). A <span> flows identically under the flex/grid layouts
-        # these pseudos live in and is valid everywhere.
+        # The materialized pseudo must be a tag that is VALID inside its host,
+        # or the markup is malformed in ways that surface much later:
+        #   - a <div> inside <p> (or any inline element) auto-closes the
+        #     paragraph, publishing an EMPTY <p> plus orphaned text — this
+        #     emptied every Grand Mission eyebrow (`.gm-label::before`);
+        #   - a <div> inside <ul>/<ol> is rejected outright by the headless
+        #     WHTML builder ("Non-List Item can not be placed in a List"), so
+        #     the whole page insert fails. The Designer silently tolerates it
+        #     on a clipboard paste, which is why it survived until the first
+        #     headless build (2026-08-07).
+        # A <span>/<li> flows identically under the flex/grid layouts these
+        # pseudos live in.
         P_SAFE = {"p", "span", "a", "b", "i", "em", "strong", "small", "cite",
                   "label", "button", "h1", "h2", "h3", "h4", "h5", "h6"}
-        ptag = "span" if tag.name in P_SAFE else "div"
+        if tag.name in ("ul", "ol"):
+            ptag = "li"
+        elif tag.name in P_SAFE:
+            ptag = "span"
+        else:
+            ptag = "div"
         data["tag"] = ptag
         data["text"] = bool(text)
         node = {"_id": nid, "type": "Block", "tag": ptag,

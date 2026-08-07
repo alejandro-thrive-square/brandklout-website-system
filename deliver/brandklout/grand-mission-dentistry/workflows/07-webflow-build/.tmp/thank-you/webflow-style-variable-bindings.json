@@ -8,7 +8,7 @@
     {
       "section": "01_header",
       "className": "gm-header",
-      "sourceStyleId": "304081f8-4b2d-4b4c-9bb3-91569ffc0127",
+      "sourceStyleId": "b9eabbae-b975-4fb4-af0f-607fa33e96ae",
       "variant": "base",
       "property": "font-family",
       "value": "var(--font)",
@@ -34,7 +34,7 @@
     {
       "section": "01_header",
       "className": "gm-header",
-      "sourceStyleId": "304081f8-4b2d-4b4c-9bb3-91569ffc0127",
+      "sourceStyleId": "b9eabbae-b975-4fb4-af0f-607fa33e96ae",
       "variant": "base",
       "property": "color",
       "value": "var(--n-900)",
@@ -60,7 +60,7 @@
     {
       "section": "01_header",
       "className": "gm-header",
-      "sourceStyleId": "304081f8-4b2d-4b4c-9bb3-91569ffc0127",
+      "sourceStyleId": "b9eabbae-b975-4fb4-af0f-607fa33e96ae",
       "variant": "base",
       "property": "transition",
       "value": "background 0.45s var(--ease), box-shadow 0.45s var(--ease),\n    backdrop-filter 0.45s var(--ease)",
@@ -80,7 +80,7 @@
     {
       "section": "01_header",
       "className": "shell",
-      "sourceStyleId": "3f5ce890-b3a2-4ac1-a3ba-d815c76d7e1b",
+      "sourceStyleId": "d7e4d67c-c3ae-4bd1-bed3-71299580c9e7",
       "variant": "base",
       "property": "width",
       "value": "var(--shell)",
@@ -106,7 +106,7 @@
     {
       "section": "01_header",
       "className": "header__inner",
-      "sourceStyleId": "6d1e5283-aafd-431c-8800-65432431cca6",
+      "sourceStyleId": "20c989e5-2754-4861-82f9-9e177283efba",
       "variant": "base",
       "property": "transition",
       "value": "padding 0.45s var(--ease)",
@@ -122,7 +122,7 @@
     {
       "section": "01_header",
       "className": "logo-light",
-      "sourceStyleId": "7f5411ee-801e-4767-8ae8-a14eade3f025",
+      "sourceStyleId": "1805d47f-32d5-4f0f-aaa4-491ef9281b04",
       "variant": "base",
       "property": "transition",
       "value": "height 0.45s var(--ease)",
@@ -138,7 +138,7 @@
     {
       "section": "01_header",
       "className": "logo-dark",
-      "sourceStyleId": "1d367db0-afa5-4a05-8574-72d514cbbcd6",
+      "sourceStyleId": "9f0b61ea-829b-4767-99be-43f51c299979",
       "variant": "base",
       "property": "transition",
       "value": "height 0.45s var(--ease)",
@@ -154,7 +154,7 @@
     {
       "section": "01_header",
       "className": "ty-b",
-      "sourceStyleId": "d3ec135f-0d3f-4c36-89ce-ccbfcf3830c5",
+      "sourceStyleId": "1130e24d-5b81-4d1f-b9d7-1c9ad6d1ebf8",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-light)",
@@ -180,7 +180,7 @@
     {
       "section": "01_header",
       "className": "header__phone",
-      "sourceStyleId": "1438fffd-5ea5-47dc-bab8-0ac850e4e73f",
+      "sourceStyleId": "5ed30f54-41f2-4b3c-8611-b128f84a7b4c",
       "variant": "base",
       "property": "transition",
       "value": "color 0.45s var(--ease)",
@@ -196,7 +196,7 @@
     {
       "section": "01_header",
       "className": "btn",
-      "sourceStyleId": "2350f01a-fafc-4be1-92c6-6daeca8ff790",
+      "sourceStyleId": "cf9dc6ad-b5aa-46fb-94f4-f4dfc0a91d25",
       "variant": "base",
       "property": "border-top-left-radius",
       "value": "var(--r-xl)",
@@ -222,7 +222,7 @@
     {
       "section": "01_header",
       "className": "btn",
-      "sourceStyleId": "2350f01a-fafc-4be1-92c6-6daeca8ff790",
+      "sourceStyleId": "cf9dc6ad-b5aa-46fb-94f4-f4dfc0a91d25",
       "variant": "base",
       "property": "border-top-right-radius",
       "value": "var(--r-xl)",
@@ -248,7 +248,7 @@
     {
       "section": "01_header",
       "className": "btn",
-      "sourceStyleId": "2350f01a-fafc-4be1-92c6-6daeca8ff790",
+      "sourceStyleId": "cf9dc6ad-b5aa-46fb-94f4-f4dfc0a91d25",
       "variant": "base",
       "property": "border-bottom-right-radius",
       "value": "var(--r-xl)",
@@ -274,7 +274,7 @@
     {
       "section": "01_header",
       "className": "btn",
-      "sourceStyleId": "2350f01a-fafc-4be1-92c6-6daeca8ff790",
+      "sourceStyleId": "cf9dc6ad-b5aa-46fb-94f4-f4dfc0a91d25",
       "variant": "base",
       "property": "border-bottom-left-radius",
       "value": "var(--r-xl)",
@@ -300,7 +300,7 @@
     {
       "section": "01_header",
       "className": "btn",
-      "sourceStyleId": "2350f01a-fafc-4be1-92c6-6daeca8ff790",
+      "sourceStyleId": "cf9dc6ad-b5aa-46fb-94f4-f4dfc0a91d25",
       "variant": "base",
       "property": "background",
       "value": "var(--blue)",
@@ -326,7 +326,7 @@
     {
       "section": "01_header",
       "className": "btn",
-      "sourceStyleId": "2350f01a-fafc-4be1-92c6-6daeca8ff790",
+      "sourceStyleId": "cf9dc6ad-b5aa-46fb-94f4-f4dfc0a91d25",
       "variant": "base",
       "property": "transition",
       "value": "color 0.45s var(--ease), border-color 0.45s var(--ease),\n    box-shadow 0.45s var(--ease)",
@@ -346,7 +346,7 @@
     {
       "section": "01_header",
       "className": "btn-before",
-      "sourceStyleId": "d038e726-671f-469c-a525-d090c06c13a2",
+      "sourceStyleId": "650c1048-a02a-4c86-944a-d39afc5bbe29",
       "variant": "base",
       "property": "background",
       "value": "var(--blue-deep)",
@@ -372,7 +372,7 @@
     {
       "section": "01_header",
       "className": "btn-before",
-      "sourceStyleId": "d038e726-671f-469c-a525-d090c06c13a2",
+      "sourceStyleId": "650c1048-a02a-4c86-944a-d39afc5bbe29",
       "variant": "base",
       "property": "transition",
       "value": "transform 0.55s var(--ease)",
@@ -388,7 +388,7 @@
     {
       "section": "01_header",
       "className": "header__progress",
-      "sourceStyleId": "c5d48bfe-c232-4109-b662-5820e2d0a56e",
+      "sourceStyleId": "ac6eab65-8cc8-4216-9d7b-738e992f1a64",
       "variant": "base",
       "property": "background",
       "value": "linear-gradient(90deg, var(--blue), var(--blue-light))",
@@ -406,7 +406,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "shell",
-      "sourceStyleId": "3f5ce890-b3a2-4ac1-a3ba-d815c76d7e1b",
+      "sourceStyleId": "d7e4d67c-c3ae-4bd1-bed3-71299580c9e7",
       "variant": "base",
       "property": "width",
       "value": "var(--shell)",
@@ -432,7 +432,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn-before",
-      "sourceStyleId": "d038e726-671f-469c-a525-d090c06c13a2",
+      "sourceStyleId": "650c1048-a02a-4c86-944a-d39afc5bbe29",
       "variant": "base",
       "property": "background",
       "value": "var(--blue-deep)",
@@ -458,7 +458,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn-before",
-      "sourceStyleId": "d038e726-671f-469c-a525-d090c06c13a2",
+      "sourceStyleId": "650c1048-a02a-4c86-944a-d39afc5bbe29",
       "variant": "base",
       "property": "transition",
       "value": "transform 0.55s var(--ease)",
@@ -474,7 +474,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-div-2",
-      "sourceStyleId": "1e19ab76-0f5c-4901-b3f2-927aca6cae78",
+      "sourceStyleId": "42ea49d6-69d3-4414-adac-4a556c61ef8f",
       "variant": "base",
       "property": "font-family",
       "value": "var(--font)",
@@ -500,7 +500,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-div-2",
-      "sourceStyleId": "1e19ab76-0f5c-4901-b3f2-927aca6cae78",
+      "sourceStyleId": "42ea49d6-69d3-4414-adac-4a556c61ef8f",
       "variant": "base",
       "property": "color",
       "value": "var(--n-900)",
@@ -526,7 +526,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ch",
-      "sourceStyleId": "ac6d9b0e-be19-4fc4-a454-9138c0b7a69b",
+      "sourceStyleId": "d797ce6c-f1bb-416b-a36d-b920761a25b3",
       "variant": "base",
       "property": "padding-block",
       "value": "var(--section)",
@@ -552,7 +552,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-ch-arrival",
-      "sourceStyleId": "e8448f37-8770-4cff-ab89-7f9b3a47c6ab",
+      "sourceStyleId": "bdeb1a34-8c91-445b-9c4b-827e132cbd2f",
       "variant": "base",
       "property": "background",
       "value": "var(--blue-deep)",
@@ -578,7 +578,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "arrival__veil",
-      "sourceStyleId": "0bf4f540-a62d-4e71-8b57-4239c70780b5",
+      "sourceStyleId": "a1c27029-7809-462c-8443-ce1253a2070c",
       "variant": "base",
       "property": "background",
       "value": "var(--blue-ink)",
@@ -604,7 +604,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "stamp",
-      "sourceStyleId": "f1138b76-4487-441a-80e7-8dc462727abe",
+      "sourceStyleId": "daf2f14a-3951-49f4-bf4a-65ad59bf6f22",
       "variant": "base",
       "property": "width",
       "value": "var(--size)",
@@ -630,7 +630,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "stamp",
-      "sourceStyleId": "f1138b76-4487-441a-80e7-8dc462727abe",
+      "sourceStyleId": "daf2f14a-3951-49f4-bf4a-65ad59bf6f22",
       "variant": "base",
       "property": "height",
       "value": "var(--size)",
@@ -656,7 +656,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "stamp",
-      "sourceStyleId": "f1138b76-4487-441a-80e7-8dc462727abe",
+      "sourceStyleId": "daf2f14a-3951-49f4-bf4a-65ad59bf6f22",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-light)",
@@ -682,7 +682,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-p",
-      "sourceStyleId": "fb982109-6be7-4cd6-9fab-a521eff6aa84",
+      "sourceStyleId": "d6145c5a-c614-47a5-b2d7-f5a24644b0c2",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-light)",
@@ -708,7 +708,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "chapter-tag",
-      "sourceStyleId": "e54655be-b3d8-44b0-a8c2-29ef7a441739",
+      "sourceStyleId": "18154f39-5f81-4e1d-8cbf-64659a0f40b3",
       "variant": "base",
       "property": "color",
       "value": "var(--blue)",
@@ -734,7 +734,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-p-2",
-      "sourceStyleId": "e88f4370-35f9-47f2-8eee-6fd69e5a8d7d",
+      "sourceStyleId": "d25f134f-3013-47f6-bf82-98b11821e1bd",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-light)",
@@ -760,7 +760,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-label",
-      "sourceStyleId": "905cb209-4d2b-43da-871c-a24635cea625",
+      "sourceStyleId": "2779b0ae-62d0-462b-90e3-eabed6ef094e",
       "variant": "base",
       "property": "color",
       "value": "var(--blue)",
@@ -786,7 +786,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-strong-2",
-      "sourceStyleId": "aee76a46-4c9e-4016-a36f-71ed4f71e53d",
+      "sourceStyleId": "d283818c-3c83-4714-b4c4-c965a536f3e5",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-light)",
@@ -812,7 +812,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "call-box",
-      "sourceStyleId": "62851edd-e5c3-4677-be3d-6af7fdceb7c0",
+      "sourceStyleId": "ad7d9cd3-d10c-41c9-9281-c76fcbf070f0",
       "variant": "base",
       "property": "border-top-left-radius",
       "value": "var(--r-lg)",
@@ -838,7 +838,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "call-box",
-      "sourceStyleId": "62851edd-e5c3-4677-be3d-6af7fdceb7c0",
+      "sourceStyleId": "ad7d9cd3-d10c-41c9-9281-c76fcbf070f0",
       "variant": "base",
       "property": "border-top-right-radius",
       "value": "var(--r-lg)",
@@ -864,7 +864,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "call-box",
-      "sourceStyleId": "62851edd-e5c3-4677-be3d-6af7fdceb7c0",
+      "sourceStyleId": "ad7d9cd3-d10c-41c9-9281-c76fcbf070f0",
       "variant": "base",
       "property": "border-bottom-right-radius",
       "value": "var(--r-lg)",
@@ -890,7 +890,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "call-box",
-      "sourceStyleId": "62851edd-e5c3-4677-be3d-6af7fdceb7c0",
+      "sourceStyleId": "ad7d9cd3-d10c-41c9-9281-c76fcbf070f0",
       "variant": "base",
       "property": "border-bottom-left-radius",
       "value": "var(--r-lg)",
@@ -916,7 +916,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "call-box",
-      "sourceStyleId": "62851edd-e5c3-4677-be3d-6af7fdceb7c0",
+      "sourceStyleId": "ad7d9cd3-d10c-41c9-9281-c76fcbf070f0",
       "variant": "base",
       "property": "border-top-color",
       "value": "var(--n-200)",
@@ -942,7 +942,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "call-box",
-      "sourceStyleId": "62851edd-e5c3-4677-be3d-6af7fdceb7c0",
+      "sourceStyleId": "ad7d9cd3-d10c-41c9-9281-c76fcbf070f0",
       "variant": "base",
       "property": "border-right-color",
       "value": "var(--n-200)",
@@ -968,7 +968,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "call-box",
-      "sourceStyleId": "62851edd-e5c3-4677-be3d-6af7fdceb7c0",
+      "sourceStyleId": "ad7d9cd3-d10c-41c9-9281-c76fcbf070f0",
       "variant": "base",
       "property": "border-bottom-color",
       "value": "var(--n-200)",
@@ -994,7 +994,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "call-box",
-      "sourceStyleId": "62851edd-e5c3-4677-be3d-6af7fdceb7c0",
+      "sourceStyleId": "ad7d9cd3-d10c-41c9-9281-c76fcbf070f0",
       "variant": "base",
       "property": "border-left-color",
       "value": "var(--n-200)",
@@ -1020,7 +1020,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "call-box",
-      "sourceStyleId": "62851edd-e5c3-4677-be3d-6af7fdceb7c0",
+      "sourceStyleId": "ad7d9cd3-d10c-41c9-9281-c76fcbf070f0",
       "variant": "base",
       "property": "box-shadow",
       "value": "var(--shadow-lg)",
@@ -1046,7 +1046,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "chapter-tag",
-      "sourceStyleId": "2165f55d-7bb3-49a2-89bf-8c42ae43aa53",
+      "sourceStyleId": "693bbc43-894d-4d96-898c-bc1790cce966",
       "variant": "base",
       "property": "color",
       "value": "var(--blue)",
@@ -1072,7 +1072,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-em-2",
-      "sourceStyleId": "a8f212bc-b526-46fd-bb80-1e4233ced9f6",
+      "sourceStyleId": "af3a13bb-25b1-489e-a82b-7dbb6570aeea",
       "variant": "base",
       "property": "color",
       "value": "var(--n-500)",
@@ -1098,7 +1098,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-h2",
-      "sourceStyleId": "5813af8e-5ebf-4606-96c5-2da448a19fa3",
+      "sourceStyleId": "67d61e0d-b6eb-4d77-97b6-6a02163d7801",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-deep)",
@@ -1124,7 +1124,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "lede",
-      "sourceStyleId": "0573846c-9b5e-488b-a63d-8df09f855dd6",
+      "sourceStyleId": "d973c9b1-a2be-4dd0-8b03-1dcd916da7a2",
       "variant": "base",
       "property": "color",
       "value": "var(--n-700)",
@@ -1150,7 +1150,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4c04af40-b17e-49ed-857e-6d2277080275",
+      "sourceStyleId": "8d522c29-47e2-4a3c-bd3f-486ffacd6a8d",
       "variant": "base",
       "property": "border-top-left-radius",
       "value": "var(--r-xl)",
@@ -1176,7 +1176,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4c04af40-b17e-49ed-857e-6d2277080275",
+      "sourceStyleId": "8d522c29-47e2-4a3c-bd3f-486ffacd6a8d",
       "variant": "base",
       "property": "border-top-right-radius",
       "value": "var(--r-xl)",
@@ -1202,7 +1202,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4c04af40-b17e-49ed-857e-6d2277080275",
+      "sourceStyleId": "8d522c29-47e2-4a3c-bd3f-486ffacd6a8d",
       "variant": "base",
       "property": "border-bottom-right-radius",
       "value": "var(--r-xl)",
@@ -1228,7 +1228,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4c04af40-b17e-49ed-857e-6d2277080275",
+      "sourceStyleId": "8d522c29-47e2-4a3c-bd3f-486ffacd6a8d",
       "variant": "base",
       "property": "border-bottom-left-radius",
       "value": "var(--r-xl)",
@@ -1254,7 +1254,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4c04af40-b17e-49ed-857e-6d2277080275",
+      "sourceStyleId": "8d522c29-47e2-4a3c-bd3f-486ffacd6a8d",
       "variant": "base",
       "property": "background",
       "value": "var(--blue)",
@@ -1280,7 +1280,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4c04af40-b17e-49ed-857e-6d2277080275",
+      "sourceStyleId": "8d522c29-47e2-4a3c-bd3f-486ffacd6a8d",
       "variant": "base",
       "property": "transition",
       "value": "color 0.45s var(--ease), border-color 0.45s var(--ease),\n    box-shadow 0.45s var(--ease)",
@@ -1300,7 +1300,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn--ghost",
-      "sourceStyleId": "d4132008-393a-472f-968a-8a43d97ad3e6",
+      "sourceStyleId": "fe4cffc5-e323-44fc-b5e8-5662f5b5590f",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-deep)",
@@ -1326,7 +1326,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now",
-      "sourceStyleId": "b26dfeea-1d9a-4703-9cb8-c65595e7642b",
+      "sourceStyleId": "000b1cb4-86d8-4b40-9279-8011f10ce6bf",
       "variant": "base",
       "property": "border-top-left-radius",
       "value": "var(--r-md)",
@@ -1352,7 +1352,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now",
-      "sourceStyleId": "b26dfeea-1d9a-4703-9cb8-c65595e7642b",
+      "sourceStyleId": "000b1cb4-86d8-4b40-9279-8011f10ce6bf",
       "variant": "base",
       "property": "border-top-right-radius",
       "value": "var(--r-md)",
@@ -1378,7 +1378,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now",
-      "sourceStyleId": "b26dfeea-1d9a-4703-9cb8-c65595e7642b",
+      "sourceStyleId": "000b1cb4-86d8-4b40-9279-8011f10ce6bf",
       "variant": "base",
       "property": "border-bottom-right-radius",
       "value": "var(--r-md)",
@@ -1404,7 +1404,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now",
-      "sourceStyleId": "b26dfeea-1d9a-4703-9cb8-c65595e7642b",
+      "sourceStyleId": "000b1cb4-86d8-4b40-9279-8011f10ce6bf",
       "variant": "base",
       "property": "border-bottom-left-radius",
       "value": "var(--r-md)",
@@ -1430,7 +1430,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now",
-      "sourceStyleId": "b26dfeea-1d9a-4703-9cb8-c65595e7642b",
+      "sourceStyleId": "000b1cb4-86d8-4b40-9279-8011f10ce6bf",
       "variant": "base",
       "property": "background",
       "value": "var(--n-100)",
@@ -1456,7 +1456,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now",
-      "sourceStyleId": "b26dfeea-1d9a-4703-9cb8-c65595e7642b",
+      "sourceStyleId": "000b1cb4-86d8-4b40-9279-8011f10ce6bf",
       "variant": "base",
       "property": "border-top-color",
       "value": "var(--n-200)",
@@ -1482,7 +1482,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now",
-      "sourceStyleId": "b26dfeea-1d9a-4703-9cb8-c65595e7642b",
+      "sourceStyleId": "000b1cb4-86d8-4b40-9279-8011f10ce6bf",
       "variant": "base",
       "property": "border-right-color",
       "value": "var(--n-200)",
@@ -1508,7 +1508,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now",
-      "sourceStyleId": "b26dfeea-1d9a-4703-9cb8-c65595e7642b",
+      "sourceStyleId": "000b1cb4-86d8-4b40-9279-8011f10ce6bf",
       "variant": "base",
       "property": "border-bottom-color",
       "value": "var(--n-200)",
@@ -1534,7 +1534,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now",
-      "sourceStyleId": "b26dfeea-1d9a-4703-9cb8-c65595e7642b",
+      "sourceStyleId": "000b1cb4-86d8-4b40-9279-8011f10ce6bf",
       "variant": "base",
       "property": "border-left-color",
       "value": "var(--n-200)",
@@ -1560,7 +1560,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-h3",
-      "sourceStyleId": "95b04069-8ad8-47b3-b31b-500223f58583",
+      "sourceStyleId": "c8eec3aa-23fa-43f9-ac14-f051ec35d2df",
       "variant": "base",
       "property": "color",
       "value": "var(--n-500)",
@@ -1586,7 +1586,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now__status",
-      "sourceStyleId": "57fd2c1a-f8d8-46af-8c5e-b1da6176269b",
+      "sourceStyleId": "1f4a89c6-2eac-4147-8cb5-404323c2124a",
       "variant": "base",
       "property": "color",
       "value": "var(--n-700)",
@@ -1612,7 +1612,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now__dot",
-      "sourceStyleId": "95082972-8e4e-4603-bede-3ae1d25bf80d",
+      "sourceStyleId": "09e78b67-5007-4a1d-86e7-b40abfa29d3a",
       "variant": "base",
       "property": "background",
       "value": "var(--n-300)",
@@ -1638,7 +1638,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now__next",
-      "sourceStyleId": "a1b293f9-eecc-4fa4-b9bd-fbd01e062348",
+      "sourceStyleId": "7cd57fa0-bb2e-4ef5-b60f-642893c4c158",
       "variant": "base",
       "property": "color",
       "value": "var(--n-700)",
@@ -1664,7 +1664,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "now__langs",
-      "sourceStyleId": "0e309f7e-6596-448c-aa42-7b93e07456c8",
+      "sourceStyleId": "a31f02d9-825a-4f40-bddc-408f39aa814b",
       "variant": "base",
       "property": "color",
       "value": "var(--n-500)",
@@ -1690,7 +1690,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-section",
-      "sourceStyleId": "82644c83-7077-4054-916d-7a5a595ea731",
+      "sourceStyleId": "5ac050b6-cad5-4754-82a1-f89233b8e3c5",
       "variant": "base",
       "property": "background",
       "value": "var(--light)",
@@ -1716,7 +1716,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ch",
-      "sourceStyleId": "1418003c-216c-40e4-baa0-2847a54f337c",
+      "sourceStyleId": "354645da-1baa-4ed0-b433-9405652dfd51",
       "variant": "base",
       "property": "padding-block",
       "value": "var(--section)",
@@ -1742,7 +1742,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ch__pin",
-      "sourceStyleId": "70524027-d786-4525-bbc8-6489b6709164",
+      "sourceStyleId": "6be3d7f5-5c31-441d-9c7e-13619945c61a",
       "variant": "small",
       "property": "padding-block",
       "value": "var(--section)",
@@ -1768,7 +1768,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-h2-2",
-      "sourceStyleId": "171187bc-0276-42e0-a2ae-25e629219c07",
+      "sourceStyleId": "a22c5608-fbed-472e-8de3-5d569528b2f1",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-deep)",
@@ -1794,7 +1794,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "path__rail",
-      "sourceStyleId": "cc9d3738-2c99-44aa-8953-83fa025a9451",
+      "sourceStyleId": "10e20ca2-45c1-454d-b38b-839878721724",
       "variant": "base",
       "property": "background",
       "value": "var(--n-200)",
@@ -1820,7 +1820,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-i-3",
-      "sourceStyleId": "b93e596f-5628-4428-8273-4f871a0032a0",
+      "sourceStyleId": "44e431a5-e6aa-40b2-8d74-0709ed1ddfdb",
       "variant": "base",
       "property": "background",
       "value": "linear-gradient(90deg, var(--blue), var(--blue-light))",
@@ -1838,7 +1838,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "stepc",
-      "sourceStyleId": "9beafa57-8a98-4c0e-bba5-c33fb77a6e28",
+      "sourceStyleId": "cb72b563-0f6b-4482-b757-315490ac24ba",
       "variant": "base",
       "property": "transition",
       "value": "transform 0.55s var(--ease)",
@@ -1854,7 +1854,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "stepc__n",
-      "sourceStyleId": "bac5843c-45bf-47f3-b63b-1bea50776a72",
+      "sourceStyleId": "30d8c0ac-2c0a-4b48-a7d3-88b79fc74b5c",
       "variant": "base",
       "property": "background",
       "value": "var(--white)",
@@ -1880,7 +1880,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "stepc__n",
-      "sourceStyleId": "bac5843c-45bf-47f3-b63b-1bea50776a72",
+      "sourceStyleId": "30d8c0ac-2c0a-4b48-a7d3-88b79fc74b5c",
       "variant": "base",
       "property": "color",
       "value": "var(--n-300)",
@@ -1906,7 +1906,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "stepc__n",
-      "sourceStyleId": "bac5843c-45bf-47f3-b63b-1bea50776a72",
+      "sourceStyleId": "30d8c0ac-2c0a-4b48-a7d3-88b79fc74b5c",
       "variant": "base",
       "property": "border-top-color",
       "value": "var(--n-200)",
@@ -1932,7 +1932,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "stepc__n",
-      "sourceStyleId": "bac5843c-45bf-47f3-b63b-1bea50776a72",
+      "sourceStyleId": "30d8c0ac-2c0a-4b48-a7d3-88b79fc74b5c",
       "variant": "base",
       "property": "border-right-color",
       "value": "var(--n-200)",
@@ -1958,7 +1958,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "stepc__n",
-      "sourceStyleId": "bac5843c-45bf-47f3-b63b-1bea50776a72",
+      "sourceStyleId": "30d8c0ac-2c0a-4b48-a7d3-88b79fc74b5c",
       "variant": "base",
       "property": "border-bottom-color",
       "value": "var(--n-200)",
@@ -1984,7 +1984,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "stepc__n",
-      "sourceStyleId": "bac5843c-45bf-47f3-b63b-1bea50776a72",
+      "sourceStyleId": "30d8c0ac-2c0a-4b48-a7d3-88b79fc74b5c",
       "variant": "base",
       "property": "border-left-color",
       "value": "var(--n-200)",
@@ -2010,7 +2010,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "stepc__n",
-      "sourceStyleId": "bac5843c-45bf-47f3-b63b-1bea50776a72",
+      "sourceStyleId": "30d8c0ac-2c0a-4b48-a7d3-88b79fc74b5c",
       "variant": "base",
       "property": "transition",
       "value": "background 0.5s var(--ease), color 0.5s var(--ease),\n    border-color 0.5s var(--ease), transform 0.5s var(--ease)",
@@ -2032,7 +2032,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-h3-2",
-      "sourceStyleId": "13e37d36-559a-4e1e-8fcd-2283dcc8d7cd",
+      "sourceStyleId": "65b751ed-8a94-4ed6-b61d-43c2053fb363",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-deep)",
@@ -2058,7 +2058,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-h3-2",
-      "sourceStyleId": "13e37d36-559a-4e1e-8fcd-2283dcc8d7cd",
+      "sourceStyleId": "65b751ed-8a94-4ed6-b61d-43c2053fb363",
       "variant": "base",
       "property": "transition",
       "value": "color 0.5s var(--ease)",
@@ -2074,7 +2074,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-p-4",
-      "sourceStyleId": "67940f07-fc3e-408e-9ab1-96b30d98222b",
+      "sourceStyleId": "804f0063-9868-4289-bfac-800a191adad0",
       "variant": "base",
       "property": "color",
       "value": "var(--n-700)",
@@ -2100,7 +2100,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-h2-3",
-      "sourceStyleId": "dc15212a-c5f2-46da-ab4c-bb601a566987",
+      "sourceStyleId": "48b0f8df-bfa9-48e3-802e-b25a17ba8a86",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-deep)",
@@ -2126,7 +2126,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "prep__item",
-      "sourceStyleId": "c39b45cc-ad48-4c34-968c-255ecd0e5b4b",
+      "sourceStyleId": "cf6023a2-9030-4f58-890d-89139a4c32bd",
       "variant": "base",
       "property": "border-top-left-radius",
       "value": "var(--r-lg)",
@@ -2152,7 +2152,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "prep__item",
-      "sourceStyleId": "c39b45cc-ad48-4c34-968c-255ecd0e5b4b",
+      "sourceStyleId": "cf6023a2-9030-4f58-890d-89139a4c32bd",
       "variant": "base",
       "property": "border-top-right-radius",
       "value": "var(--r-lg)",
@@ -2178,7 +2178,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "prep__item",
-      "sourceStyleId": "c39b45cc-ad48-4c34-968c-255ecd0e5b4b",
+      "sourceStyleId": "cf6023a2-9030-4f58-890d-89139a4c32bd",
       "variant": "base",
       "property": "border-bottom-right-radius",
       "value": "var(--r-lg)",
@@ -2204,7 +2204,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "prep__item",
-      "sourceStyleId": "c39b45cc-ad48-4c34-968c-255ecd0e5b4b",
+      "sourceStyleId": "cf6023a2-9030-4f58-890d-89139a4c32bd",
       "variant": "base",
       "property": "border-bottom-left-radius",
       "value": "var(--r-lg)",
@@ -2230,7 +2230,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "prep__item",
-      "sourceStyleId": "c39b45cc-ad48-4c34-968c-255ecd0e5b4b",
+      "sourceStyleId": "cf6023a2-9030-4f58-890d-89139a4c32bd",
       "variant": "base",
       "property": "border-top-color",
       "value": "var(--n-200)",
@@ -2256,7 +2256,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "prep__item",
-      "sourceStyleId": "c39b45cc-ad48-4c34-968c-255ecd0e5b4b",
+      "sourceStyleId": "cf6023a2-9030-4f58-890d-89139a4c32bd",
       "variant": "base",
       "property": "border-right-color",
       "value": "var(--n-200)",
@@ -2282,7 +2282,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "prep__item",
-      "sourceStyleId": "c39b45cc-ad48-4c34-968c-255ecd0e5b4b",
+      "sourceStyleId": "cf6023a2-9030-4f58-890d-89139a4c32bd",
       "variant": "base",
       "property": "border-bottom-color",
       "value": "var(--n-200)",
@@ -2308,7 +2308,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "prep__item",
-      "sourceStyleId": "c39b45cc-ad48-4c34-968c-255ecd0e5b4b",
+      "sourceStyleId": "cf6023a2-9030-4f58-890d-89139a4c32bd",
       "variant": "base",
       "property": "border-left-color",
       "value": "var(--n-200)",
@@ -2334,7 +2334,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "prep__item",
-      "sourceStyleId": "c39b45cc-ad48-4c34-968c-255ecd0e5b4b",
+      "sourceStyleId": "cf6023a2-9030-4f58-890d-89139a4c32bd",
       "variant": "base",
       "property": "transition",
       "value": "opacity 0.5s var(--ease), transform 0.5s var(--ease),\n    border-color 0.5s var(--ease), box-shadow 0.5s var(--ease)",
@@ -2356,7 +2356,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "prep__n",
-      "sourceStyleId": "28bde35d-ccb8-4064-aa34-04745cb6c59d",
+      "sourceStyleId": "01e94f41-8df0-4a9b-85ad-b114ed71a226",
       "variant": "base",
       "property": "color",
       "value": "var(--n-300)",
@@ -2382,7 +2382,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "prep__n",
-      "sourceStyleId": "28bde35d-ccb8-4064-aa34-04745cb6c59d",
+      "sourceStyleId": "01e94f41-8df0-4a9b-85ad-b114ed71a226",
       "variant": "base",
       "property": "transition",
       "value": "color 0.5s var(--ease)",
@@ -2398,7 +2398,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-h3-3",
-      "sourceStyleId": "c5b8e592-6a35-4f0d-9647-73b7d3242f74",
+      "sourceStyleId": "2b32c05f-5d53-4c2d-8baa-9e44d0ecf9f0",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-deep)",
@@ -2424,7 +2424,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-p-5",
-      "sourceStyleId": "97bbdcd0-0f13-4b4d-9d0f-faa53cb99802",
+      "sourceStyleId": "649fc1b5-cdad-4d02-9560-439b59376ad1",
       "variant": "base",
       "property": "color",
       "value": "var(--n-700)",
@@ -2450,7 +2450,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ch__rail",
-      "sourceStyleId": "52864c1a-b415-4d45-8400-b3f8078b7eb7",
+      "sourceStyleId": "c223feb7-7d9b-419c-9f77-58886598b920",
       "variant": "base",
       "property": "width",
       "value": "var(--shell)",
@@ -2476,7 +2476,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ch__rail--shell",
-      "sourceStyleId": "9d668d59-3eaa-4727-9d69-e27cb5fe9335",
+      "sourceStyleId": "dbc70404-4142-4a56-9bcf-c6fc45ec35ab",
       "variant": "base",
       "property": "width",
       "value": "var(--shell)",
@@ -2502,7 +2502,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-i-4",
-      "sourceStyleId": "9096b2c5-6332-47f6-b591-0bb245182f1d",
+      "sourceStyleId": "8b210679-eb34-4526-a6bc-592ee2a67311",
       "variant": "base",
       "property": "background",
       "value": "linear-gradient(90deg, var(--blue), var(--blue-light))",
@@ -2520,7 +2520,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-card",
-      "sourceStyleId": "5ccf857c-162b-437f-aec8-0b94d741f462",
+      "sourceStyleId": "eb1878f8-71c5-4210-bdb5-124df75039c2",
       "variant": "base",
       "property": "border-top-color",
       "value": "var(--n-200)",
@@ -2546,7 +2546,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-card",
-      "sourceStyleId": "5ccf857c-162b-437f-aec8-0b94d741f462",
+      "sourceStyleId": "eb1878f8-71c5-4210-bdb5-124df75039c2",
       "variant": "base",
       "property": "border-right-color",
       "value": "var(--n-200)",
@@ -2572,7 +2572,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-card",
-      "sourceStyleId": "5ccf857c-162b-437f-aec8-0b94d741f462",
+      "sourceStyleId": "eb1878f8-71c5-4210-bdb5-124df75039c2",
       "variant": "base",
       "property": "border-bottom-color",
       "value": "var(--n-200)",
@@ -2598,7 +2598,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-card",
-      "sourceStyleId": "5ccf857c-162b-437f-aec8-0b94d741f462",
+      "sourceStyleId": "eb1878f8-71c5-4210-bdb5-124df75039c2",
       "variant": "base",
       "property": "border-left-color",
       "value": "var(--n-200)",
@@ -2624,7 +2624,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-card",
-      "sourceStyleId": "5ccf857c-162b-437f-aec8-0b94d741f462",
+      "sourceStyleId": "eb1878f8-71c5-4210-bdb5-124df75039c2",
       "variant": "base",
       "property": "border-top-left-radius",
       "value": "var(--r-lg)",
@@ -2650,7 +2650,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-card",
-      "sourceStyleId": "5ccf857c-162b-437f-aec8-0b94d741f462",
+      "sourceStyleId": "eb1878f8-71c5-4210-bdb5-124df75039c2",
       "variant": "base",
       "property": "border-top-right-radius",
       "value": "var(--r-lg)",
@@ -2676,7 +2676,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-card",
-      "sourceStyleId": "5ccf857c-162b-437f-aec8-0b94d741f462",
+      "sourceStyleId": "eb1878f8-71c5-4210-bdb5-124df75039c2",
       "variant": "base",
       "property": "border-bottom-right-radius",
       "value": "var(--r-lg)",
@@ -2702,7 +2702,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-card",
-      "sourceStyleId": "5ccf857c-162b-437f-aec8-0b94d741f462",
+      "sourceStyleId": "eb1878f8-71c5-4210-bdb5-124df75039c2",
       "variant": "base",
       "property": "border-bottom-left-radius",
       "value": "var(--r-lg)",
@@ -2728,7 +2728,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-card",
-      "sourceStyleId": "5ccf857c-162b-437f-aec8-0b94d741f462",
+      "sourceStyleId": "eb1878f8-71c5-4210-bdb5-124df75039c2",
       "variant": "base",
       "property": "transition",
       "value": "transform 0.5s var(--ease), box-shadow 0.5s var(--ease),\n    border-color 0.5s var(--ease)",
@@ -2748,7 +2748,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-card",
-      "sourceStyleId": "5ccf857c-162b-437f-aec8-0b94d741f462",
+      "sourceStyleId": "eb1878f8-71c5-4210-bdb5-124df75039c2",
       "variant": "main_hover",
       "property": "border-color",
       "value": "var(--blue-light)",
@@ -2774,7 +2774,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-card",
-      "sourceStyleId": "5ccf857c-162b-437f-aec8-0b94d741f462",
+      "sourceStyleId": "eb1878f8-71c5-4210-bdb5-124df75039c2",
       "variant": "main_hover",
       "property": "box-shadow",
       "value": "var(--shadow-md)",
@@ -2800,7 +2800,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-p-6",
-      "sourceStyleId": "4fa0a700-5c90-42d2-a257-47c0f3a4a9d4",
+      "sourceStyleId": "289dde44-f9de-4041-8859-00816657e559",
       "variant": "base",
       "property": "color",
       "value": "var(--n-700)",
@@ -2826,7 +2826,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-figure",
-      "sourceStyleId": "fabef0d1-527a-4c2a-aace-fd822324eaaa",
+      "sourceStyleId": "338efe98-5379-4006-8830-0986e9f188d7",
       "variant": "base",
       "property": "border-top-left-radius",
       "value": "var(--r-lg)",
@@ -2852,7 +2852,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-figure",
-      "sourceStyleId": "fabef0d1-527a-4c2a-aace-fd822324eaaa",
+      "sourceStyleId": "338efe98-5379-4006-8830-0986e9f188d7",
       "variant": "base",
       "property": "border-top-right-radius",
       "value": "var(--r-lg)",
@@ -2878,7 +2878,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-figure",
-      "sourceStyleId": "fabef0d1-527a-4c2a-aace-fd822324eaaa",
+      "sourceStyleId": "338efe98-5379-4006-8830-0986e9f188d7",
       "variant": "base",
       "property": "border-bottom-right-radius",
       "value": "var(--r-lg)",
@@ -2904,7 +2904,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-figure",
-      "sourceStyleId": "fabef0d1-527a-4c2a-aace-fd822324eaaa",
+      "sourceStyleId": "338efe98-5379-4006-8830-0986e9f188d7",
       "variant": "base",
       "property": "border-bottom-left-radius",
       "value": "var(--r-lg)",
@@ -2930,7 +2930,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-figure",
-      "sourceStyleId": "fabef0d1-527a-4c2a-aace-fd822324eaaa",
+      "sourceStyleId": "338efe98-5379-4006-8830-0986e9f188d7",
       "variant": "base",
       "property": "background",
       "value": "var(--n-100)",
@@ -2956,7 +2956,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-figcaption",
-      "sourceStyleId": "0c7e3821-de71-4391-b541-89f4681e12e1",
+      "sourceStyleId": "d3779ba0-8938-472b-8aae-4b76829bdf3f",
       "variant": "base",
       "property": "color",
       "value": "var(--n-500)",
@@ -2982,7 +2982,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-section-2",
-      "sourceStyleId": "071eda48-54d4-4781-b94d-b51725cfc9fa",
+      "sourceStyleId": "ac0e8433-e9ea-4aa8-b625-52dd721bdfd5",
       "variant": "base",
       "property": "background",
       "value": "linear-gradient(180deg, var(--n-100), var(--white))",
@@ -3000,7 +3000,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ch",
-      "sourceStyleId": "5045b907-d014-4fd2-a7e3-960c2a24d3a8",
+      "sourceStyleId": "ce9ad1f8-8276-43d3-bc73-9b44290f1dff",
       "variant": "base",
       "property": "padding-block",
       "value": "var(--section)",
@@ -3026,7 +3026,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-h2-4",
-      "sourceStyleId": "a14e0595-bbb5-490b-a3dd-c611f0e9b4bc",
+      "sourceStyleId": "9389ab75-a971-4961-990f-a38f0d36b0e2",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-deep)",
@@ -3051,8 +3051,26 @@
     },
     {
       "section": "02_smooth-wrapper",
+      "className": "place__marker",
+      "sourceStyleId": "fd942607-02be-4f48-be47-1c679ce322f5",
+      "variant": "base",
+      "property": "background",
+      "value": "linear-gradient(180deg, var(--blue), var(--blue-light))",
+      "cssNames": [
+        "--blue",
+        "--blue-light"
+      ],
+      "sourceNames": [
+        "--blue",
+        "--blue-light"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "02_smooth-wrapper",
       "className": "place__details",
-      "sourceStyleId": "ad237443-1f44-44c0-a89c-dd8df4af3003",
+      "sourceStyleId": "a8afff74-7fc3-4a73-90f0-76263d2aa61d",
       "variant": "base",
       "property": "border-left-color",
       "value": "var(--n-200)",
@@ -3077,26 +3095,8 @@
     },
     {
       "section": "02_smooth-wrapper",
-      "className": "place__marker",
-      "sourceStyleId": "833f4540-4e0e-4769-934e-09fccb0d146c",
-      "variant": "base",
-      "property": "background",
-      "value": "linear-gradient(180deg, var(--blue), var(--blue-light))",
-      "cssNames": [
-        "--blue",
-        "--blue-light"
-      ],
-      "sourceNames": [
-        "--blue",
-        "--blue-light"
-      ],
-      "status": "unsupported_compound_value",
-      "mcp": null
-    },
-    {
-      "section": "02_smooth-wrapper",
       "className": "detail",
-      "sourceStyleId": "a71df8be-6c8c-44e9-9dbc-9e3be24a546b",
+      "sourceStyleId": "1c505523-45c9-428a-91a2-e0d75252db69",
       "variant": "base",
       "property": "transition",
       "value": "opacity 0.5s var(--ease)",
@@ -3112,7 +3112,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-h3-4",
-      "sourceStyleId": "d2a02bc7-e2e7-47b4-a926-892104903b95",
+      "sourceStyleId": "2c2071e8-5757-4270-b1ab-46e2d2afba43",
       "variant": "base",
       "property": "color",
       "value": "var(--blue)",
@@ -3138,7 +3138,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-p-7",
-      "sourceStyleId": "6f09f219-fb56-4b5b-999c-948a4d93607d",
+      "sourceStyleId": "994ee3f7-4eac-41e4-92dc-32b3939fb3f7",
       "variant": "base",
       "property": "color",
       "value": "var(--n-700)",
@@ -3164,7 +3164,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-more",
-      "sourceStyleId": "cc1a9995-cdc9-41ae-a507-a30e88f90f8b",
+      "sourceStyleId": "a73e71f4-8573-46b2-aff6-914eb8699e5c",
       "variant": "base",
       "property": "color",
       "value": "var(--blue)",
@@ -3190,7 +3190,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-more",
-      "sourceStyleId": "cc1a9995-cdc9-41ae-a507-a30e88f90f8b",
+      "sourceStyleId": "a73e71f4-8573-46b2-aff6-914eb8699e5c",
       "variant": "main_hover",
       "property": "color",
       "value": "var(--blue-deep)",
@@ -3216,7 +3216,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-more",
-      "sourceStyleId": "cc1a9995-cdc9-41ae-a507-a30e88f90f8b",
+      "sourceStyleId": "a73e71f4-8573-46b2-aff6-914eb8699e5c",
       "variant": "main_hover",
       "property": "border-color",
       "value": "var(--blue-deep)",
@@ -3242,7 +3242,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-more-after",
-      "sourceStyleId": "069a8664-49fc-47e4-a0ce-8bdab148c8af",
+      "sourceStyleId": "903afcc6-30b3-4e16-b448-2bc1d248884d",
       "variant": "base",
       "property": "transition",
       "value": "transform 0.4s var(--ease)",
@@ -3258,7 +3258,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-a-3",
-      "sourceStyleId": "615a65fd-2f89-4ca0-b774-8e388589d4d9",
+      "sourceStyleId": "56f9f655-f5ca-4b4e-81fa-2f5908a1aa99",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-deep)",
@@ -3284,7 +3284,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-a-3",
-      "sourceStyleId": "615a65fd-2f89-4ca0-b774-8e388589d4d9",
+      "sourceStyleId": "56f9f655-f5ca-4b4e-81fa-2f5908a1aa99",
       "variant": "base",
       "property": "border-bottom-color",
       "value": "var(--n-200)",
@@ -3310,7 +3310,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "ty-a-3",
-      "sourceStyleId": "615a65fd-2f89-4ca0-b774-8e388589d4d9",
+      "sourceStyleId": "56f9f655-f5ca-4b4e-81fa-2f5908a1aa99",
       "variant": "main_hover",
       "property": "border-color",
       "value": "var(--blue)",
@@ -3336,7 +3336,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "place__map",
-      "sourceStyleId": "205085a1-9713-481b-9815-f9e3144698fc",
+      "sourceStyleId": "0f52c4ad-2eb9-4f51-9793-846b49fefdbb",
       "variant": "base",
       "property": "border-top-left-radius",
       "value": "var(--r-lg)",
@@ -3362,7 +3362,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "place__map",
-      "sourceStyleId": "205085a1-9713-481b-9815-f9e3144698fc",
+      "sourceStyleId": "0f52c4ad-2eb9-4f51-9793-846b49fefdbb",
       "variant": "base",
       "property": "border-top-right-radius",
       "value": "var(--r-lg)",
@@ -3388,7 +3388,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "place__map",
-      "sourceStyleId": "205085a1-9713-481b-9815-f9e3144698fc",
+      "sourceStyleId": "0f52c4ad-2eb9-4f51-9793-846b49fefdbb",
       "variant": "base",
       "property": "border-bottom-right-radius",
       "value": "var(--r-lg)",
@@ -3414,7 +3414,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "place__map",
-      "sourceStyleId": "205085a1-9713-481b-9815-f9e3144698fc",
+      "sourceStyleId": "0f52c4ad-2eb9-4f51-9793-846b49fefdbb",
       "variant": "base",
       "property": "border-bottom-left-radius",
       "value": "var(--r-lg)",
@@ -3440,7 +3440,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "place__map",
-      "sourceStyleId": "205085a1-9713-481b-9815-f9e3144698fc",
+      "sourceStyleId": "0f52c4ad-2eb9-4f51-9793-846b49fefdbb",
       "variant": "base",
       "property": "border-top-color",
       "value": "var(--n-200)",
@@ -3466,7 +3466,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "place__map",
-      "sourceStyleId": "205085a1-9713-481b-9815-f9e3144698fc",
+      "sourceStyleId": "0f52c4ad-2eb9-4f51-9793-846b49fefdbb",
       "variant": "base",
       "property": "border-right-color",
       "value": "var(--n-200)",
@@ -3492,7 +3492,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "place__map",
-      "sourceStyleId": "205085a1-9713-481b-9815-f9e3144698fc",
+      "sourceStyleId": "0f52c4ad-2eb9-4f51-9793-846b49fefdbb",
       "variant": "base",
       "property": "border-bottom-color",
       "value": "var(--n-200)",
@@ -3518,7 +3518,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "place__map",
-      "sourceStyleId": "205085a1-9713-481b-9815-f9e3144698fc",
+      "sourceStyleId": "0f52c4ad-2eb9-4f51-9793-846b49fefdbb",
       "variant": "base",
       "property": "border-left-color",
       "value": "var(--n-200)",
@@ -3544,7 +3544,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "place__map",
-      "sourceStyleId": "205085a1-9713-481b-9815-f9e3144698fc",
+      "sourceStyleId": "0f52c4ad-2eb9-4f51-9793-846b49fefdbb",
       "variant": "base",
       "property": "box-shadow",
       "value": "var(--shadow-md)",
@@ -3570,7 +3570,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "place__map",
-      "sourceStyleId": "205085a1-9713-481b-9815-f9e3144698fc",
+      "sourceStyleId": "0f52c4ad-2eb9-4f51-9793-846b49fefdbb",
       "variant": "base",
       "property": "background",
       "value": "var(--n-100)",
@@ -3596,7 +3596,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "gm-footer",
-      "sourceStyleId": "1cf8f7a9-b71f-4d98-85ab-fd5b00213eda",
+      "sourceStyleId": "5461bfda-e450-432d-a556-b2e6a36d973b",
       "variant": "base",
       "property": "background",
       "value": "var(--blue-ink)",
@@ -3622,7 +3622,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4800e09e-1477-4c35-b3a2-4f01e22b4bea",
+      "sourceStyleId": "a870c641-200e-4773-b399-96d0c716aae6",
       "variant": "base",
       "property": "border-top-left-radius",
       "value": "var(--r-xl)",
@@ -3648,7 +3648,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4800e09e-1477-4c35-b3a2-4f01e22b4bea",
+      "sourceStyleId": "a870c641-200e-4773-b399-96d0c716aae6",
       "variant": "base",
       "property": "border-top-right-radius",
       "value": "var(--r-xl)",
@@ -3674,7 +3674,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4800e09e-1477-4c35-b3a2-4f01e22b4bea",
+      "sourceStyleId": "a870c641-200e-4773-b399-96d0c716aae6",
       "variant": "base",
       "property": "border-bottom-right-radius",
       "value": "var(--r-xl)",
@@ -3700,7 +3700,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4800e09e-1477-4c35-b3a2-4f01e22b4bea",
+      "sourceStyleId": "a870c641-200e-4773-b399-96d0c716aae6",
       "variant": "base",
       "property": "border-bottom-left-radius",
       "value": "var(--r-xl)",
@@ -3726,7 +3726,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4800e09e-1477-4c35-b3a2-4f01e22b4bea",
+      "sourceStyleId": "a870c641-200e-4773-b399-96d0c716aae6",
       "variant": "base",
       "property": "background",
       "value": "var(--blue)",
@@ -3752,7 +3752,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn",
-      "sourceStyleId": "4800e09e-1477-4c35-b3a2-4f01e22b4bea",
+      "sourceStyleId": "a870c641-200e-4773-b399-96d0c716aae6",
       "variant": "base",
       "property": "transition",
       "value": "color 0.45s var(--ease), border-color 0.45s var(--ease),\n    box-shadow 0.45s var(--ease)",
@@ -3772,7 +3772,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn--light",
-      "sourceStyleId": "a5dc25bd-2863-43dd-9331-c57a9875049e",
+      "sourceStyleId": "54b59a34-b073-4d1d-a315-909010ba2067",
       "variant": "base",
       "property": "color",
       "value": "var(--blue-deep)",
@@ -3798,7 +3798,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn--light",
-      "sourceStyleId": "a5dc25bd-2863-43dd-9331-c57a9875049e",
+      "sourceStyleId": "54b59a34-b073-4d1d-a315-909010ba2067",
       "variant": "main_hover",
       "property": "color",
       "value": "var(--blue-deep)",
@@ -3824,7 +3824,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn-before-2",
-      "sourceStyleId": "6fa3ed2c-1817-4d4b-bc73-9fc17b14e367",
+      "sourceStyleId": "e5b8b554-14fb-4bf1-9955-058cd557b5b1",
       "variant": "base",
       "property": "background",
       "value": "var(--blue-light)",
@@ -3850,7 +3850,7 @@
     {
       "section": "02_smooth-wrapper",
       "className": "btn-before-2",
-      "sourceStyleId": "6fa3ed2c-1817-4d4b-bc73-9fc17b14e367",
+      "sourceStyleId": "e5b8b554-14fb-4bf1-9955-058cd557b5b1",
       "variant": "base",
       "property": "transition",
       "value": "transform 0.55s var(--ease)",
@@ -3866,7 +3866,7 @@
     {
       "section": "03_mobileBar",
       "className": "mobile-bar",
-      "sourceStyleId": "25385445-49a1-4485-8e26-c74fc01cc9c2",
+      "sourceStyleId": "a289cbe1-b90d-4b0f-b833-0e98409eb7cd",
       "variant": "base",
       "property": "font-family",
       "value": "var(--font)",
@@ -3892,7 +3892,7 @@
     {
       "section": "03_mobileBar",
       "className": "mobile-bar",
-      "sourceStyleId": "25385445-49a1-4485-8e26-c74fc01cc9c2",
+      "sourceStyleId": "a289cbe1-b90d-4b0f-b833-0e98409eb7cd",
       "variant": "base",
       "property": "color",
       "value": "var(--n-900)",
@@ -3918,7 +3918,7 @@
     {
       "section": "03_mobileBar",
       "className": "mobile-bar",
-      "sourceStyleId": "25385445-49a1-4485-8e26-c74fc01cc9c2",
+      "sourceStyleId": "a289cbe1-b90d-4b0f-b833-0e98409eb7cd",
       "variant": "base",
       "property": "transition",
       "value": "transform 0.45s var(--ease)",
@@ -3934,7 +3934,7 @@
     {
       "section": "03_mobileBar",
       "className": "ty-a-6",
-      "sourceStyleId": "6d953678-7e8a-4340-ba93-f96f7d94117d",
+      "sourceStyleId": "6459c656-e788-44bd-ade3-b3ced1da9bd8",
       "variant": "base",
       "property": "background",
       "value": "var(--blue-deep)",
@@ -3960,7 +3960,7 @@
     {
       "section": "03_mobileBar",
       "className": "ty-a-7",
-      "sourceStyleId": "79b4198d-f47e-4ba1-99ee-f81fed469c78",
+      "sourceStyleId": "e72505bd-560e-4253-9b1b-b8e07c1698fd",
       "variant": "base",
       "property": "background",
       "value": "var(--blue)",

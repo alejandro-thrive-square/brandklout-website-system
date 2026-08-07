@@ -2095,11 +2095,19 @@ html:not(.wz-ready) .chapter-tag i,
   font-size: calc(2.4rem * var(--tx));
   max-width: 14ch;
 }
+/* The scrub marker is absolutely positioned against this box and rides on
+   its border-left. It cannot live INSIDE the <ol> (a non-list-item child of a
+   list is invalid HTML and the headless WHTML builder rejects the whole page
+   insert), so the wrapper below owns the positioning context and the outer
+   margin instead — same box, same geometry. */
+.place__list {
+  position: relative;
+  margin: 0.4rem 0 0;
+}
 .place__details {
   list-style: none;
-  margin: 0.4rem 0 0;
+  margin: 0;
   padding: 0;
-  position: relative;
   display: grid;
   gap: clamp(0.9rem, 2vw, 1.5rem);
   padding-left: 1.4rem;
