@@ -19,6 +19,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 /**
  * The house scale. Each segment is [screenWidthPx, rootFontPx] at its two ends.
@@ -166,11 +167,20 @@ function check (targets) {
   return problems.length === 0 && installed === htmls.length
 }
 
-const argv = process.argv.slice(2)
+// Only act as a CLI when invoked as one. `rootPxAt` is this scale's single source of truth, and the
+// per-client QA harnesses import it to assert the *computed* root against the table rather than
+// hard-coding a second copy of the numbers. Without this guard that import also falls through to
+// the default branch below and writes a <style> block into the importer's stdout, corrupting its
+// report. Found by the Arvada root-proof harness.
+const RAN_DIRECTLY = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
+
+const argv = RAN_DIRECTLY ? process.argv.slice(2) : []
 const cfgIdx = argv.indexOf('--config')
 const scale = cfgIdx !== -1 ? JSON.parse(fs.readFileSync(argv[cfgIdx + 1], 'utf8')) : HOUSE_SCALE
 
-if (argv.includes('--check')) {
+if (!RAN_DIRECTLY) {
+  // imported as a module — expose the API and emit nothing
+} else if (argv.includes('--check')) {
   const targets = argv.slice(argv.indexOf('--check') + 1).filter((a) => !a.startsWith('--'))
   process.exit(check(targets.length ? targets : ['.']) ? 0 : 1)
 } else if (argv.includes('--verify')) {
