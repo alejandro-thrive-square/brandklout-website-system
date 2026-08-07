@@ -167,25 +167,29 @@ function check (targets) {
   return problems.length === 0 && installed === htmls.length
 }
 
-/* Only run the CLI when invoked directly. Without this, importing `rootPxAt`
-   to check a real browser against the table prints the whole <style> block into
-   the importer's output. */
-if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
-  const argv = process.argv.slice(2)
-  const cfgIdx = argv.indexOf('--config')
-  const scale = cfgIdx !== -1 ? JSON.parse(fs.readFileSync(argv[cfgIdx + 1], 'utf8')) : HOUSE_SCALE
+// Only act as a CLI when invoked as one. `rootPxAt` is this scale's single source of truth, and the
+// per-client QA harnesses import it to assert the *computed* root against the table rather than
+// hard-coding a second copy of the numbers. Without this guard that import also falls through to
+// the default branch below and writes a <style> block into the importer's stdout, corrupting its
+// report. Found by the Arvada root-proof harness.
+const RAN_DIRECTLY = process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)
 
-  if (argv.includes('--check')) {
-    const targets = argv.slice(argv.indexOf('--check') + 1).filter((a) => !a.startsWith('--'))
-    process.exit(check(targets.length ? targets : ['.']) ? 0 : 1)
-  } else if (argv.includes('--verify')) {
-    console.log(`${scale.name} — rendered root font-size\n`)
-    for (const w of [320, 390, 479, 480, 768, 991, 1280, 1440, 1920, 2400, 2560]) {
-      console.log(`  ${String(w).padStart(4)}px viewport -> ${rootPxAt(w, scale).toFixed(2)}px root`)
-    }
-  } else if (argv.includes('--css')) {
-    process.stdout.write(generate(scale))
-  } else {
-    process.stdout.write('<style>\n' + generate(scale) + '</style>\n')
+const argv = RAN_DIRECTLY ? process.argv.slice(2) : []
+const cfgIdx = argv.indexOf('--config')
+const scale = cfgIdx !== -1 ? JSON.parse(fs.readFileSync(argv[cfgIdx + 1], 'utf8')) : HOUSE_SCALE
+
+if (!RAN_DIRECTLY) {
+  // imported as a module — expose the API and emit nothing
+} else if (argv.includes('--check')) {
+  const targets = argv.slice(argv.indexOf('--check') + 1).filter((a) => !a.startsWith('--'))
+  process.exit(check(targets.length ? targets : ['.']) ? 0 : 1)
+} else if (argv.includes('--verify')) {
+  console.log(`${scale.name} — rendered root font-size\n`)
+  for (const w of [320, 390, 479, 480, 768, 991, 1280, 1440, 1920, 2400, 2560]) {
+    console.log(`  ${String(w).padStart(4)}px viewport -> ${rootPxAt(w, scale).toFixed(2)}px root`)
   }
+} else if (argv.includes('--css')) {
+  process.stdout.write(generate(scale))
+} else {
+  process.stdout.write('<style>\n' + generate(scale) + '</style>\n')
 }

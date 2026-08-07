@@ -9,12 +9,19 @@ Client delivery.
 ## Active MCP Servers
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-livewell-dental` | Site inspection, audit reads, section paste support, component conversion, CMS work, staging publish after confirmation. | **Not registered yet** - register with `claude mcp add --scope project` once Brandklout grants access. |
+| `webflow-brandklout` | Site inspection, audit reads, section paste support, component conversion, CMS work, staging publish after confirmation. Shared instance covering all Brandklout clients. | **Registered 2026-08-07, awaiting OAuth** on the `team` profile. |
 
-Per the [server-per-principal model](../../../../mcp-servers/ACCESS_MODEL.md#server-instances-one-per-principal),
-the `webflow-livewell-dental` grant must cover **only** the Livewell Dental site - never
-other Brandklout clients, and never other agencies' sites. Do not reuse the `webflow`,
-`webflow-clifton-exteriors`, or any other existing instance for this project.
+The dedicated `webflow-livewell-dental` instance was retired unauthenticated on 2026-08-07. All
+Brandklout clients live in one workspace Brandklout owns, so a per-client instance authorized
+against that same workspace and isolated nothing — see
+[ACCESS_MODEL.md](../../../../mcp-servers/ACCESS_MODEL.md#when-the-partner-owns-the-workspace-one-instance-is-correct).
+
+> [!IMPORTANT]
+> **The site ID is the boundary now, not the tool prefix.** Every Brandklout client shares the
+> `mcp__webflow-brandklout__*` prefix, so it cannot tell you which client you are acting on. This
+> folder authorizes **only** the Livewell Dental site recorded below — pass its ID explicitly on
+> every call, and never act on a site the tool defaulted to or listed first. Do not use `webflow`,
+> `webflow-webzite`, `webflow-clifton-exteriors`, or any other agency's instance here.
 
 ## Target Resources
 - **Workspace**: TBD (Brandklout or client-owned) - record after first `list_sites`
@@ -40,6 +47,9 @@ other Brandklout clients, and never other agencies' sites. Do not reuse the `web
   explicit confirmation.
 - Do not modify forms or form-submission destinations without confirmation (patient enquiry flow).
 - Do not change DNS, domains, billing, access, OAuth apps, or workspace settings.
+- **Do not touch another Brandklout client's site.** The shared instance can reach all of them;
+  this folder authorizes exactly one. A call carrying a sibling's site ID is out of bounds even
+  though the grant permits it.
 - Do not store API keys, OAuth tokens, private cookies, passwords, or session exports in this repository.
 
 ## Confirmation Requirements
@@ -53,10 +63,17 @@ Publishing, deleting, overwriting, production data edits, form changes, DNS/doma
 billing changes, and access changes require explicit confirmation in the current conversation.
 
 ## Runtime Authentication Notes
-Webflow MCP uses runtime OAuth keyed to the instance name. Verify the connection through
-`/mcp` before using Webflow tools. If authentication is missing or the target site is not
-visible, stop and ask for runtime access rather than guessing or falling back to another
-Webflow instance.
+Webflow MCP uses runtime OAuth keyed to the instance name. Authenticate `webflow-brandklout` in a
+**team-profile** terminal (`claude team`, then `/mcp`); one authentication covers every Brandklout
+client worktree. Verify the connection through `/mcp` before using Webflow tools. If authentication
+is missing or the target site is not visible, stop and ask for runtime access rather than guessing
+or falling back to another Webflow instance.
+
+Adding a site to this grant is a **partnership-level** action, not a client-level one:
+re-authorization replaces the grant wholesale, so the OAuth screen must have every active
+Brandklout client ticked. Follow
+[the partner file](../../docs/mcp-access.md#onboarding-a-new-brandklout-client); never run it from
+this folder.
 
 Practical note: Designer-bridge (`designer_tool`) actions are slow and must run one at a
 time; the `data_*` Data API tools are fast and headless and should be preferred for audit

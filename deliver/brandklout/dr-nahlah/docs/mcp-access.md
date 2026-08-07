@@ -12,15 +12,20 @@ profile before calling any MCP tool in this folder.
 
 | Server | Type | Purpose | Auth |
 | :--- | :--- | :--- | :--- |
-| `webflow-dr-nahlah` | Webflow platform (HTTP) | All Webflow reads and writes for this client | OAuth — **authenticated 2026-07-30** |
+| `webflow-brandklout` | Webflow platform (HTTP) | All Webflow reads and writes for this client, via the shared Brandklout instance | OAuth — **registered 2026-08-07, awaiting authentication** on the `team` profile |
 | `webflow-clientfirst` | Local stdio (this repo) | Client-First conversion: harvest style guides, validate payloads, resolve fluid values, suggest class reuse | None — no network, no secrets |
 
 > [!IMPORTANT]
-> Per [ACCESS_MODEL.md](../../../../mcp-servers/ACCESS_MODEL.md) §"Server Instances: One Per
-> Principal", work in this folder must use the **`webflow-dr-nahlah`** tool prefix.
-> Never use `webflow`, `webflow-webzite`, or another client's instance here — the OAuth
-> grant is keyed by server name, and using a shared instance either over-broadens access
-> or silently wipes another client's grant.
+> **Use `webflow-brandklout`, and pass the site ID on every write.** This folder's dedicated
+> instance (`webflow-dr-nahlah`) was retired on 2026-08-07 in favour of one shared instance
+> covering all Brandklout clients — they sit in a single workspace Brandklout owns, so a
+> per-client instance authorized against that same workspace and isolated nothing. See
+> [ACCESS_MODEL.md](../../../../mcp-servers/ACCESS_MODEL.md#when-the-partner-owns-the-workspace-one-instance-is-correct).
+>
+> The consequence: the tool prefix is now identical for every Brandklout client, so it can no
+> longer tell you which site you are acting on. **Site `6a6b84cc7fe55ddeabc0b314` is the only
+> one this folder authorizes** — pass it explicitly, and never act on a site the tool
+> defaulted to or listed first. Never use `webflow` or `webflow-webzite` here.
 
 ## Target Resources
 
@@ -61,10 +66,12 @@ reused class inherits them and a forked class does not.
 
 ## Allowed Operations
 
-**`webflow-dr-nahlah`** (once authenticated):
+**`webflow-brandklout`** (once authenticated), **scoped to site `6a6b84cc7fe55ddeabc0b314`**:
 - Read: list sites, pages, styles, variables, components, assets; query elements.
 - Write, after the site is confirmed: create/update pages, styles, variables, elements;
   upload assets; paste payloads.
+- **Never** against another Brandklout client's site. The shared grant reaches all of them;
+  this folder authorizes exactly one.
 
 **`webflow-clientfirst`** (always allowed — local, read-only against the repo, writes
 only into its own `.tmp/`):
@@ -83,8 +90,20 @@ and can corrupt it — the existing definition wins site-wide.
 
 ## Runtime Auth Notes
 
-`webflow-dr-nahlah` was authenticated on 2026-07-30 and reaches exactly one site
-(Dr. Nahlah), which is the correct least-privilege scope.
+Authenticate `webflow-brandklout` in a **team-profile** terminal (`claude team`, then `/mcp`).
+Grants live in `~/.claude-<profile>/.credentials.json` keyed `<server-name>|<url-hash>` — per
+profile, global across worktrees. One authentication covers every Brandklout client worktree.
+
+The retired `webflow-dr-nahlah` instance was documented as "authenticated 2026-07-30", but as of
+2026-08-07 no Webflow instance holds a token in any profile's credential store — the record exists
+with an empty `accessToken`, most likely cleared by the laptop migration. **Treat all Webflow
+access as unauthenticated until `/mcp` proves otherwise.**
+
+> [!CAUTION]
+> This site's recorded workspace is `63b4b7393e89b78575e9a9bb`, which has **not** been verified to
+> be Brandklout's — it may be a build site in Webzite's own workspace. If Dr. Nahlah does not
+> appear in the site list when authenticating `webflow-brandklout`, that is the answer: leave it
+> unticked and re-register a dedicated instance for this client alone.
 
 The generic `webflow` instance currently returns 401 and must not be used for this client
 even if it is later authenticated.
