@@ -153,6 +153,15 @@ All four archetypes were built on Arvada 2026-08-05, plus a shared nine-beat spi
 `brand.css`/`brand.js`, bot-challenge scrapers, and a warning that the Greenspot NPS reference is
 Cloudflare-blocked. Reuse rather than rebuild —
 [`arvada-dental-center/docs/shared-learnings.md`](../arvada-dental-center/docs/shared-learnings.md).
+- **Thank-you archetype is BUILT** at `mason-park/workflows/04-design/.tmp/thank-you/` (2026-08-05,
+  rebuilt as a 4-chapter journey 2026-08-06). Client-specific values are isolated to one constants
+  block — Grand Mission should clone, not rebuild.
+- **Before adding a manual `ScrollTrigger.refresh()`, read the bug note in
+  `mason-park/workflows/04-design/.tmp/README.md`** — racing SplitText's post-font re-split reverts
+  every pin on the page, silently, and makes later chapters unreachable by scrolling.
+- **Heads-up on the GHL preview reference** (`sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC`):
+  it is a *Grand Mission* page. Its award, insurance carriers, review count and hours are theirs — do
+  not copy them into another client.
 
 ## Parallel agent rules
 

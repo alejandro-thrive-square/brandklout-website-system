@@ -1,0 +1,13 @@
+# Raw rendered DOM dumps from capture.mjs — ~4MB of minified WordPress markup
+# across the captures, which is neither lightweight nor useful for review. The
+# extracted copy lives in rendered.txt and meta.json (both committed), and the
+# conclusions in content-intake-summary.md. Re-create with capture.mjs.
+workflows/01-content-intake/.tmp/**/rendered.html
+
+# Responsive QA captures — ~7MB of PNGs per run, regenerate with screens.mjs
+workflows/08-qa/.tmp/screenshots/
+
+# Vendored GSAP 3.13. Third-party library, not our source, and not tracked
+# anywhere else in this repo. Restore with:
+#   node workflows/04-design/.tmp/shared/fetch-gsap.mjs
+workflows/04-design/.tmp/_vendor/

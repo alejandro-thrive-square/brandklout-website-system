@@ -164,6 +164,14 @@ Two rules keep this honest:
   produces a step up at the breakpoint. Only the text group needs that tier, to stop body copy
   following the root down. Verify the seam directly: measure the rendered size at 479 and 480 and
   require the largest step to be ~0%.
+- **Override tokens, not elements.** Custom properties resolve at use time, so a `:root` override
+  inside a media query works from anywhere in the file. An *element* override does not — the base
+  rule further down has equal specificity and wins on order. Where an element genuinely needs its
+  own override (a form input held at 16px for the iOS zoom guard, say), put it **immediately after
+  the rule it must beat**, not up with the tokens.
+- **Anchor the mobile values at 360, not 390.** 390 is the width everyone quotes, but 360 is
+  narrower and is what the QA pass captures. Sizing against 390 leaves body copy at ~15.4px on a
+  360 phone.
 
 #### Choosing the step values — measure the ceiling, never estimate it
 
@@ -208,6 +216,17 @@ font-size, and `rem`-based media queries.
 The static gate cannot see rendering. Also confirm during responsive QA that computed
 `document.documentElement` font-size matches `--verify` at each captured breakpoint, and that the
 479/480 boundary looks deliberate.
+
+Two runtime checks are worth copying rather than re-deriving. Reference implementations:
+`deliver/brandklout/mason-park/workflows/08-qa/.tmp/root-proof.mjs` and `pin-fit.mjs`.
+
+- **Root proof.** Read the computed root at each breakpoint and compare it to `rootPxAt()` imported
+  from `scripts/fluid-root.mjs`, so the table and the browser can never drift apart. Assert the
+  page actually loaded *first*: `about:blank` reports a perfectly plausible **16px root** and will
+  pass every root assertion you write. Probe a real element and fail on `null`.
+- **Pin fit.** A scene that is `100svh` tall always reports `scrollHeight === clientHeight`, so that
+  comparison proves nothing. Measure the bounding boxes of its visible descendants against the
+  scene's own box, at 1920 and 2400, where its contents are 12.5% and 25% larger.
 
 ## Version Control
 
