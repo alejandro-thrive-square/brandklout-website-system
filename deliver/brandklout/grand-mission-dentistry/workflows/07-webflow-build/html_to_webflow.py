@@ -51,7 +51,7 @@ import subprocess
 import sys
 import uuid
 from dataclasses import dataclass, field
-from typing import Optional
+from typing import NamedTuple, Optional
 
 try:
     from bs4 import BeautifulSoup, Comment, NavigableString, Tag
@@ -95,7 +95,11 @@ INLINE_TAGS = {"a", "abbr", "b", "code", "em", "i", "mark", "small", "span",
 
 # @media (max-width: N) -> Webflow breakpoint variant key.
 MAXWIDTH_TO_BREAKPOINT = {991: "medium", 767: "small", 479: "tiny"}
-MINWIDTH_TO_BREAKPOINT = {1280: "xl", 1440: "xl", 1920: "xxl"}
+MINWIDTH_TO_BREAKPOINT = {1280: "large", 1440: "xl", 1920: "xxl"}
+# A `min-width` below this is a MOBILE-FIRST enhancement that is already true on
+# Webflow's desktop base, not a large-screen addition. Above it, the query really
+# does target Webflow's xl/xxl breakpoints.
+MOBILE_FIRST_CUTOFF = 1280
 
 # Pseudo-classes that represent interactive STATES -> Webflow variant suffixes.
 STATE_PSEUDOS = {"hover", "focus", "active", "visited",
@@ -407,6 +411,14 @@ def _breakpoint_for_media(condition: str) -> Optional[str]:
     m = re.search(r"min-width\s*:\s*(\d+)", condition)
     if m:
         px = int(m.group(1))
+        if px < MOBILE_FIRST_CUTOFF:
+            # A mobile-first enhancement, NOT a large-screen one. Webflow's
+            # model is desktop-base + max-width overrides, so `min-width:720px`
+            # belongs at BASE with the pre-media value pushed DOWN to the
+            # breakpoints below it (handled by _invert_mobile_first).
+            # Nearest-matching it to xl (1280) filed the footer's 4-column
+            # grid under XL and left the live desktop page single-column.
+            return None
         return min(MINWIDTH_TO_BREAKPOINT.items(),
                    key=lambda kv: abs(kv[0] - px))[1]
     return None
@@ -433,6 +445,9 @@ class Rule:
                                   # styling to everyone (the desktop drag cursor
                                   # pasted display:none). They ship via the
                                   # runtime-state CSS artifact instead.
+    min_width: Optional[int] = None  # source `min-width` px when the rule came
+                                  # from a mobile-first block that maps onto
+                                  # Webflow's base (see _invert_mobile_first).
 
 
 def _specificity(selector: str) -> tuple:
@@ -520,20 +535,33 @@ def rewrite_var_names(value: str, css_name_map: dict) -> str:
     return re.sub(r"var\(\s*(--[\w-]+)\s*(,\s*[^()]*)?\)", repl, value)
 
 
-def parse_rules(css: str):
+class ParsedCss(NamedTuple):
+    """`var_scopes` carries the selector each custom-property block was declared
+    on, which the flat `var_map` cannot express — see the note at the scope
+    recording site below."""
+    rules: list
+    skipped: list
+    var_map: dict
+    var_scopes: list
+
+
+def parse_rules(css: str) -> "ParsedCss":
     """Parse a stylesheet into a flat list of Rule objects. Returns
     (rules, skipped_pseudo_element_selectors, custom_property_map)."""
     css = _strip_comments(css)
     rules: list[Rule] = []
     skipped: list[str] = []
     var_map: dict[str, str] = {}
+    var_scopes: list[tuple[str, dict, tuple, int]] = []
     order = 0
 
-    def handle(group: str, body: str, bp, media: Optional[str] = None):
+    def handle(group: str, body: str, bp, media: Optional[str] = None,
+               min_width: Optional[int] = None):
         nonlocal order
         decls = _parse_decls(body)
         if not decls:
             return
+        custom = {p: v for p, v in decls if p.startswith("--")}
         for prop, val in decls:                       # collect design tokens
             if prop.startswith("--") and bp is None and media is None:
                 var_map[prop] = val
@@ -548,37 +576,228 @@ def parse_rules(css: str):
             cleaned = _clean_selector(sel)
             if not cleaned:
                 continue
+            # A rule that declares custom properties defines a VARIABLE SCOPE.
+            # Recorded per selector, because custom properties inherit from the
+            # nearest ancestor that sets them — collapsing them all into the flat
+            # `var_map` above makes whichever block comes last in the file win
+            # for the whole document. This design declares `:root`,
+            # `[data-theme="dark"]` and `[data-theme="light"]`, so `light` won
+            # everywhere and every dark chapter baked light-theme colours: the
+            # Proof and Invitation headings shipped as #141416 on #141416.
+            if custom and bp is None and media is None:
+                var_scopes.append((cleaned, custom, _specificity(sel), order))
             rules.append(Rule(cleaned, decls, _specificity(sel), order, bp,
-                              _state(sel), pseudo=pe, media=media))
+                              _state(sel), pseudo=pe, media=media,
+                              min_width=min_width))
             order += 1
 
     for selector, body in _iter_rule_blocks(css):
         if selector.startswith("@media"):
             bp = _breakpoint_for_media(selector)
-            media = None if bp else selector[len("@media"):].strip()
+            # A block whose ONLY condition is a sub-cutoff min-width is
+            # mobile-first: bake it at base and invert (see
+            # _invert_mobile_first). Anything with a second condition
+            # (`and (pointer:fine)`) stays media-locked — dropping that
+            # condition would apply pointer/motion styling to everyone.
+            only_min = re.fullmatch(
+                r"@media\s*\(\s*min-width\s*:\s*(\d+)px\s*\)", selector.strip())
+            mobile_first = bool(
+                bp is None and only_min
+                and int(only_min.group(1)) < MOBILE_FIRST_CUTOFF)
+            media = None if (bp or mobile_first) else selector[len("@media"):].strip()
+            mw = int(only_min.group(1)) if mobile_first else None
             for s2, b2 in _iter_rule_blocks(body):
                 if not s2.startswith("@"):
-                    handle(s2, b2, bp, media)
+                    handle(s2, b2, bp, media, mw)
         elif selector.startswith("@"):
             continue
         else:
             handle(selector, body, None)
+    rules = _invert_mobile_first(rules)
     # resolve token-to-token references within the map itself
     for k in list(var_map):
         var_map[k] = expand_vars(var_map[k], var_map)
-    return rules, skipped, var_map
+    # Scoped tokens resolve against their OWN scope first, then the global map,
+    # so `[data-theme="dark"]{--accent:var(--gold)}` picks up the dark values
+    # rather than the ones that happened to land in `var_map` last.
+    for _sel, decls, _spec, _ord in var_scopes:
+        merged = {**var_map, **decls}
+        for k in list(decls):
+            decls[k] = expand_vars(decls[k], merged)
+    return ParsedCss(rules, skipped, var_map, var_scopes)
+
+
+def _invert_mobile_first(rules: list) -> list:
+    """Translate mobile-first `@media (min-width: X)` blocks into Webflow's
+    desktop-first model, for X below MOBILE_FIRST_CUTOFF.
+
+    Source CSS written mobile-first says "narrow gets 1 column; from 720px up
+    get 4". Webflow has no min-width breakpoints: base IS the wide view and
+    every breakpoint is a max-width override. So the min-width declarations
+    belong at BASE (already handled — `_breakpoint_for_media` returns None for
+    them, and later source order makes them win), and the value they replaced
+    must be re-asserted on the breakpoints BELOW X, or those inherit the wide
+    value and the mobile layout is lost.
+
+    Approximation: Webflow can only switch at 991/767/479, so X snaps to the
+    nearest of those boundaries. For `min-width: 720px` that is 767, making the
+    narrow value apply to 0-767 instead of 0-719 — a 48px band, versus the
+    alternative of losing the desktop layout entirely (the footer's 4-column
+    grid, live 2026-07-30)."""
+    inverted: list = []
+    for r in rules:
+        if r.media or r.breakpoint is not None or not r.min_width:
+            continue
+        boundary = min(MAXWIDTH_TO_BREAKPOINT.items(),
+                       key=lambda kv: abs(kv[0] - r.min_width))[0]
+        targets = [bp for px, bp in MAXWIDTH_TO_BREAKPOINT.items()
+                   if px <= boundary]
+        # The value each property had before the min-width block overrode it.
+        props = {p for p, _ in r.decls}
+        prior: dict = {}
+        for earlier in rules:
+            if earlier is r:
+                break
+            if (earlier.selector != r.selector or earlier.media
+                    or earlier.breakpoint is not None or earlier.min_width):
+                continue
+            for p, v in earlier.decls:
+                if p in props:
+                    prior[p] = v
+        if not prior:
+            continue
+        for bp in targets:
+            inverted.append(Rule(r.selector, list(prior.items()), r.specificity,
+                                 r.order, bp, r.state, pseudo=r.pseudo,
+                                 media=None))
+    return rules + inverted
+
+
+# Webflow's published base stylesheet is NOT a plain browser reset — it styles
+# some tags opinionatedly. The design was authored against browser defaults, so
+# wherever the design leaves one of these properties unset, Webflow's value
+# leaks in and the pasted page silently diverges.
+#
+# `li { margin-top: .25rem; margin-bottom: .25rem; padding-left: .5rem }` alone
+# made the credentials list 64px taller (8 rows x 8px of margin, which adds to
+# grid row size without changing any item's own height) and narrowed its content
+# column by 8px — while every `li` measured byte-identical to the design
+# (Dr. Nahlah, live 2026-07-30).
+#
+# Only tags whose BROWSER default is unambiguous belong here: the counter-value
+# has to be correct without running a browser.
+WEBFLOW_TAG_DEFAULT_RESETS = {
+    "li": {"margin-top": "0", "margin-bottom": "0", "padding-left": "0"},
+}
+
+
+def _neutralize_webflow_defaults(tag_name: str, base: dict) -> dict:
+    """Re-assert the browser default for properties Webflow's base stylesheet
+    overrides, but only where the design's own cascade says nothing."""
+    resets = WEBFLOW_TAG_DEFAULT_RESETS.get((tag_name or "").lower())
+    if not resets:
+        return base
+    out = dict(base)
+    for prop, value in resets.items():
+        # A shorthand in the design (`margin`, `padding`) already covers it.
+        shorthand = prop.split("-")[0]
+        if prop in out or shorthand in out:
+            continue
+        out[prop] = value
+    return out
+
+
+_HIDDEN_AT_REST = {"visibility": "hidden", "opacity": "0"}
+
+
+def _js_gated_initial_state(rules: list, dom_classes: set,
+                            toggled: Optional[set] = None) -> set:
+    """ids of rules that hide an element ONLY until the page JS reveals it.
+
+    The design writes anti-FOUC pairs:
+
+        [data-anim="hide"]      { visibility: hidden }   <- A
+        .wz-ready [data-anim="hide"] { visibility: visible }   <- B
+
+    Baking A into the class records is what made the whole hero INVISIBLE IN
+    THE DESIGNER: Webflow does not run site custom code on the canvas, so
+    `.wz-ready` never appears there and B can never fire. The team opened the
+    page and could not see — let alone edit — the hero (2026-07-30).
+
+    Shipping A through the runtime-state CSS artifact instead fixes both ends
+    at once: the Designer has no custom code, so the element is visible and
+    editable; the published page does, so it still hides until GSAP reveals it.
+
+    A rule qualifies when it sets a hidden-at-rest value AND another rule
+    un-sets that property with a selector that is this one plus tokens the
+    markup never carries (`wz-ready`) or that the JS toggles (`on`)."""
+    gated: set = set()
+    hidden = [r for r in rules
+              if not r.media and any(p in _HIDDEN_AT_REST
+                                     and v.strip() == _HIDDEN_AT_REST[p]
+                                     for p, v in r.decls)]
+    if not hidden:
+        return gated
+    for a in hidden:
+        props = {p for p, v in a.decls
+                 if p in _HIDDEN_AT_REST and v.strip() == _HIDDEN_AT_REST[p]}
+        for b in rules:
+            if b is a or b.media:
+                continue
+            if not any(p in props and v.strip() != _HIDDEN_AT_REST[p]
+                       for p, v in b.decls):
+                continue
+            # Strip B's runtime-only class tokens; what remains must be A.
+            # "Runtime-only" is either a token the markup never carries
+            # (`wz-ready`) OR one the JS toggles (`on`) — the latter DOES
+            # appear in markup, on whichever element starts active, so a
+            # dom_classes test alone misses the carousel's `.slide`/`.slide.on`
+            # pair and leaves all three slides invisible on the canvas.
+            runtime_only = (set(re.findall(r"\.([A-Za-z_][\w-]*)", b.selector))
+                            - dom_classes) | set(toggled or ())
+            stripped = b.selector
+            for tok in set(re.findall(r"\.([A-Za-z_][\w-]*)", b.selector)):
+                if tok in runtime_only:
+                    stripped = re.sub(rf"\.{re.escape(tok)}(?![\w-])", "", stripped)
+            if re.sub(r"\s+", " ", stripped).strip() == \
+                    re.sub(r"\s+", " ", a.selector).strip():
+                gated.add(id(a))
+                break
+    return gated
 
 
 class CascadeResolver:
     """Match every rule against the document and compute each element's
     effective declarations, bucketed by (breakpoint, state)."""
 
-    def __init__(self, soup, rules):
+    def __init__(self, soup, rules, toggled_tokens: Optional[set] = None,
+                 runtime_vars: Optional[set] = None,
+                 dom_classes: Optional[set] = None,
+                 var_map: Optional[dict] = None,
+                 var_scopes: Optional[list] = None):
+        self.base_vars: dict = dict(var_map or {})
+        # elementId -> the custom properties declared ON that element, highest
+        # specificity last. Custom properties INHERIT, so an element's effective
+        # map is built by walking its ancestor chain (see vars_for).
+        self._scope_decls: dict[int, dict] = {}
+        self._vars_cache: dict[int, dict] = {}
+        for sel, decls, spec, order in sorted(var_scopes or [],
+                                              key=lambda s: (s[2], s[3])):
+            try:
+                found = soup.select(sel)
+            except Exception:
+                continue
+            for el in found:
+                self._scope_decls.setdefault(id(el), {}).update(decls)
         self.matches: dict[int, list[Rule]] = {}
         self.pseudo: dict[int, dict[str, list[Rule]]] = {}
-        self.rules = rules
+        self.toggled_tokens: set = set(toggled_tokens or ())
+        self.runtime_vars: set = set(runtime_vars or ())
+        self.gated_initial: set = _js_gated_initial_state(
+            rules, dom_classes or set(), self.toggled_tokens)
+        self.rules = [r for r in rules if not self._is_runtime_state(r)]
         self.bad_selectors: list[str] = []
-        for r in rules:
+        for r in self.rules:
             if r.media:
                 # media-locked (pointer/hover/motion conditions): never baked
                 # into classes; shipped via the runtime-state CSS artifact.
@@ -593,6 +812,52 @@ class CascadeResolver:
                     self.pseudo.setdefault(id(el), {}).setdefault(r.pseudo, []).append(r)
                 else:
                     self.matches.setdefault(id(el), []).append(r)
+
+    def vars_for(self, el) -> dict:
+        """The custom properties in effect ON this element.
+
+        Walks el -> ancestors, taking each property from the NEAREST ancestor
+        that declares it, which is what makes a scoped theme layer work:
+        `[data-theme="dark"]` overrides `:root` for its subtree only, and a
+        nested `[data-theme="light"]` island comes back to the light values.
+        """
+        key = id(el)
+        hit = self._vars_cache.get(key)
+        if hit is not None:
+            return hit
+        out: dict = {}
+        node = el
+        while node is not None and getattr(node, "name", None):
+            for prop, val in (self._scope_decls.get(id(node)) or {}).items():
+                out.setdefault(prop, val)      # nearest declaration wins
+            node = node.parent
+        for prop, val in self.base_vars.items():
+            out.setdefault(prop, val)
+        self._vars_cache[key] = out
+        return out
+
+    def _is_runtime_state(self, r) -> bool:
+        if id(r) in self.gated_initial:
+            return True
+        """A rule gated on a JS-toggled class describes RUNTIME state, not
+        markup state, and must never be baked into a class record.
+
+        `<div class="slide on">` marks only the first slide, so baking
+        `.cmp .slide.on{opacity:1}` pins `opacity:1` onto that element
+        permanently — toggling `on` off then cannot hide it, and the carousel
+        stays stuck on slide 1 no matter what the JS does. These rules ship
+        via the runtime-state CSS artifact instead (extract_runtime_state_css
+        boosts them so they outrank any baked chain)."""
+        if self.runtime_vars:
+            # A declaration reading a JS-written custom property must stay a
+            # live var(); baking freezes it at the fallback.
+            for _prop, val in r.decls:
+                if any(v in val for v in self.runtime_vars):
+                    return True
+        if not self.toggled_tokens:
+            return False
+        toks = set(re.findall(r"\.([A-Za-z_][\w-]*)", r.selector))
+        return bool(toks & self.toggled_tokens)
 
     @staticmethod
     def _compute(rules: list):
@@ -702,6 +967,10 @@ class WebflowBuilder:
         #   the concrete pass so the preserve_vars binding pass keeps var().
         self.page_prefix = page_prefix
         self.vocab = vocab or {}
+        # data-cf reuse: name -> style id, emitted once with an empty definition
+        # so the target site's existing class (and its variable bindings) wins.
+        self._cf_ids: dict = {}
+        self.cf_reused: set = set()
         self.var_map = var_map or {}
         self.asset_base = asset_base.rstrip("/")
         self.preserve_vars = preserve_vars
@@ -734,8 +1003,14 @@ class WebflowBuilder:
         self._flat_classes: dict[str, str] = {}  # flat-mode class name -> styleId
         self._native_classes: dict[tuple, str] = {}
         self._style_by_id: dict[str, dict] = {}
+        self._active_vars: Optional[dict] = None
 
     # -- styles -------------------------------------------------------------- #
+    def _vars(self) -> dict:
+        """The custom-property map to bake against: the current element's scoped
+        map when one is parked by `classes_for`, else the document-wide map."""
+        return self._active_vars if self._active_vars is not None else self.var_map
+
     def _clean_decls(self, d: dict) -> dict:
         """Drop custom-property declarations and optionally resolve var() values.
 
@@ -760,11 +1035,11 @@ class WebflowBuilder:
             if prop == "font-family" and "var(" in val:
                 out[prop] = (rewrite_var_names(val, self.variable_css_names)
                              if self.preserve_vars
-                             else expand_vars(val, self.var_map))
+                             else expand_vars(val, self._vars()))
             elif self.preserve_vars:
                 out[prop] = rewrite_var_names(val, self.variable_css_names)
             else:
-                out[prop] = expand_vars(val, self.var_map) if "var(" in val else val
+                out[prop] = expand_vars(val, self._vars()) if "var(" in val else val
         return _expand_shorthands(out)
 
     def _emit_style(self, name: str, base: dict, variants: dict,
@@ -796,6 +1071,22 @@ class WebflowBuilder:
         if parent is not None and combo_id not in parent["children"]:
             parent["children"].append(combo_id)
 
+    def _sig(self, base: dict, variants: dict) -> str:
+        """De-dup key built from the RESOLVED declarations.
+
+        Keying on the raw ones merged elements that only look alike before
+        var() expansion: every `<h2>` carries the same literal
+        `color: var(--fg)`, so a heading in a `[data-theme="dark"]` section
+        deduped onto the light one and the dark chapters shipped with light
+        text. Resolving first keeps genuine duplicates merged while letting
+        the same declaration in two theme scopes emit two classes.
+        """
+        return json.dumps(
+            [sorted(self._clean_decls(base).items()),
+             {k: sorted(self._clean_decls(v).items())
+              for k, v in variants.items()}],
+            sort_keys=True)
+
     def _style_id(self, display: str, base: dict, variants: dict,
                   auto: bool = False) -> str:
         """De-duplicate identical computed styles; uniquify display names.
@@ -810,9 +1101,7 @@ class WebflowBuilder:
             # content classes must not squat a hook token's name (see
             # hook_class_names in __init__)
             display = f"{display}-el"
-        sig = json.dumps([sorted(base.items()),
-                          {k: sorted(v.items()) for k, v in variants.items()}],
-                         sort_keys=True)
+        sig = self._sig(base, variants)
         if sig in self._sig_to_id:
             return self._sig_to_id[sig]
         n = self._name_counts.get(display, 0)
@@ -825,8 +1114,7 @@ class WebflowBuilder:
 
     def _native_class_id(self, name: str, base: dict, variants: dict,
                          parent_id: Optional[str] = None) -> str:
-        key = (name, parent_id, json.dumps([sorted(base.items()),
-               {k: sorted(v.items()) for k, v in variants.items()}], sort_keys=True))
+        key = (name, parent_id, self._sig(base, variants))
         if key in self._native_classes:
             return self._native_classes[key]
         sid = self._emit_style(name, base, variants, comb="&" if parent_id else "")
@@ -846,7 +1134,44 @@ class WebflowBuilder:
             self._merge_variants(self.page_variants, variants),
         )
 
+    def _cf_class_ids(self, tag: Tag) -> list[str]:
+        """Style ids for `data-cf` names — reuse of the target site's existing
+        Client-First / Relume classes.
+
+        Emitted with an EMPTY styleLess on purpose. Webflow reconciles pasted
+        classes by NAME, and the pasted definition only wins for properties it
+        actually sets; setting none means the site's existing definition (and
+        its variable bindings, which the clipboard format cannot carry) survives
+        untouched. That is what makes reuse work instead of forking.
+        """
+        raw = tag.get("data-cf") or ""
+        out = []
+        for name in raw.split():
+            if name not in self._cf_ids:
+                self._cf_ids[name] = self._emit_style(name, {}, {})
+                self.cf_reused.add(name)
+            out.append(self._cf_ids[name])
+        return out
+
     def classes_for(self, tag: Tag, include_page_base: bool = False) -> list[str]:
+        """Style ids for an element, honouring `data-cf` reuse annotations."""
+        # var() values are baked at style-emission time, which has no element in
+        # hand — so the element's scoped map is parked here for _clean_decls to
+        # pick up. Without it every var() resolves against the flat global map
+        # and a scoped theme layer collapses to whichever block came last.
+        self._active_vars = (self.resolver.vars_for(tag)
+                             if self.resolver is not None else None)
+        cf_ids = self._cf_class_ids(tag)
+        if not cf_ids:
+            return self._classes_for_own(tag, include_page_base)
+        if not tag.get("class"):
+            # Fully covered by the style guide: emit no style of our own, and in
+            # particular no tag-derived auto-name.
+            return cf_ids
+        # Style-guide base + our own class carrying only the deltas.
+        return cf_ids + self._classes_for_own(tag, include_page_base)
+
+    def _classes_for_own(self, tag: Tag, include_page_base: bool = False) -> list[str]:
         names = tag.get("class", [])
         if self.resolver is None:
             # flat mode: one shared style per raw class name
@@ -935,6 +1260,7 @@ class WebflowBuilder:
         # resolver mode: a single computed class baked from the cascade,
         # with any inline style="" folded in at highest priority.
         base, variants = self.resolver.computed(tag)
+        base = _neutralize_webflow_defaults(tag.name, base)
         raw_inline = tag.get("style")
         if raw_inline:
             base = {**base, **dict(_parse_decls(raw_inline))}
@@ -1004,13 +1330,55 @@ class WebflowBuilder:
         m = re.match(r"""^(['"])(.*)\1$""", c, re.DOTALL)
         return WebflowBuilder._css_unescape(m.group(2)) if m else ""
 
+    @staticmethod
+    def _generates_box(base: dict, variants: dict) -> bool:
+        """Per CSS, a ::before/::after with no `content` (or `content: none`)
+        generates NO box at all. Materializing one anyway turns an ordinary
+        reset — `*,*::before,*::after{box-sizing:border-box}` — into one empty
+        <div> per element: 636 phantom divs across the 9-chapter Dr. Nahlah
+        journey page, 54% of all nodes, which broke every flex/grid gap and
+        nth-child in the paste. A `content` declared only in a variant
+        (`.x:hover::after{content:"->"}`) still counts."""
+        for d in (base, *variants.values()):
+            c = (d.get("content") or "").strip()
+            if c and c not in ("none", "normal"):
+                return True
+        return False
+
     def _make_pseudo(self, tag: Tag, which: str) -> Optional[str]:
         """Materialize ::before / ::after as a real child <div> node."""
         base, variants = self.resolver.computed_pseudo(tag, which)
+        if not self._generates_box(base, variants):
+            return None
         text = self._pseudo_text(base.get("content"))
+
+        # A `content` string declared ONLY inside a media query still generates
+        # a box, and `_generates_box` above says so — but reading the literal
+        # from `base` alone shipped that box EMPTY. The Dr. Nahlah comparison
+        # table lost both of its mobile column labels this way
+        # (`@media(max-width:719px){.vs-us::before{content:"Here"}}` → 10 blank
+        # divs). Webflow cannot vary TEXT per breakpoint, only `display`, so the
+        # text is emitted once and hidden at every width that does not declare
+        # it — which is what the media query meant.
+        variant_only_text = ""
+        if not text:
+            for key, decl in variants.items():
+                lit = self._pseudo_text(decl.get("content"))
+                if lit:
+                    variant_only_text = text = lit
+                    break
+
         base = {k: v for k, v in base.items() if k != "content"}
         variants = {k: {p: v for p, v in d.items() if p != "content"}
                     for k, d in variants.items()}
+
+        if variant_only_text:
+            declaring = {k for k, d in self.resolver.computed_pseudo(tag, which)[1].items()
+                         if self._pseudo_text(d.get("content"))}
+            base.setdefault("display", "none")
+            for key in declaring:
+                variants.setdefault(key, {}).setdefault("display", "block")
+
         variants = {k: d for k, d in variants.items() if d}
         if not base and not variants and not text:
             return None
@@ -1018,9 +1386,18 @@ class WebflowBuilder:
         sid = self._style_id(name, base, variants)
         nid = new_id()
         data = self._common_data()
-        data["tag"] = "div"
+        # A <div> is invalid inside <p> (and any inline element): the HTML
+        # parser auto-closes the paragraph at the div, so the pasted page
+        # publishes an EMPTY <p> plus orphaned text — the Grand Mission
+        # `.gm-label::before` rule-line emptied every eyebrow this way
+        # (2026-08-07). A <span> flows identically under the flex/grid layouts
+        # these pseudos live in and is valid everywhere.
+        P_SAFE = {"p", "span", "a", "b", "i", "em", "strong", "small", "cite",
+                  "label", "button", "h1", "h2", "h3", "h4", "h5", "h6"}
+        ptag = "span" if tag.name in P_SAFE else "div"
+        data["tag"] = ptag
         data["text"] = bool(text)
-        node = {"_id": nid, "type": "Block", "tag": "div",
+        node = {"_id": nid, "type": "Block", "tag": ptag,
                 "classes": [sid], "children": [], "data": data}
         self.nodes.append(node)
         if text:
@@ -1055,7 +1432,8 @@ class WebflowBuilder:
     _BP_MEDIA = {"medium": "@media (max-width: 991px)",
                  "small": "@media (max-width: 767px)",
                  "tiny": "@media (max-width: 479px)",
-                 "xl": "@media (min-width: 1280px)",
+                 "large": "@media (min-width: 1280px)",
+                 "xl": "@media (min-width: 1440px)",
                  "xxl": "@media (min-width: 1920px)"}
 
     def _embed_css(self, tag: Tag) -> str:
@@ -1376,20 +1754,33 @@ def _setup(html: str, css: str, resolve: bool, asset_base: str,
     contested_combo_names: set = set()
     hook_class_names: set = set()
     if resolve:
-        rules, _skipped, var_map = parse_rules(css)
-        resolver = CascadeResolver(soup, rules)
+        rules, _skipped, var_map, var_scopes = parse_rules(css)
+        resolver = CascadeResolver(
+            soup, rules, toggled_class_tokens(html),
+            js_set_custom_properties(html),
+            {c for el in soup.find_all(True) for c in (el.get("class") or [])},
+            var_map=var_map, var_scopes=var_scopes)
         if soup.body:
             page_base, page_variants = resolver.computed(soup.body)
-        # body overflow rules (e.g. `overflow-x: hidden`) must NOT be carried
-        # onto every pasted section root: any ancestor with non-visible overflow
-        # disables `position: sticky` for everything inside it (the thesis pull
-        # quote / section markers regression). The body-level clip belongs in
-        # the runtime-state CSS artifact instead (html/body selector).
-        page_base = {k: v for k, v in page_base.items()
-                     if not k.startswith("overflow")}
-        page_variants = {
-            vk: {k: v for k, v in vd.items() if not k.startswith("overflow")}
-            for vk, vd in page_variants.items()}
+        # Page-level declarations that must NOT be carried onto every pasted
+        # section root. Both of these are already emitted as a real `body{...}`
+        # rule in the runtime-state CSS artifact, so dropping them here loses
+        # nothing — it only stops them being duplicated onto children:
+        #
+        #   overflow* — any ancestor with non-visible overflow disables
+        #     `position: sticky` for everything inside it (the thesis pull
+        #     quote / section markers regression).
+        #   background* — background is NOT an inherited property, so copying
+        #     the body's onto a child is simply wrong. It painted the fixed
+        #     header opaque cream at rest, so the nav looked permanently
+        #     "solid" instead of transparent-until-scrolled, and it painted the
+        #     dark drawer cream underneath its own theme. Caught only by
+        #     diffing the published page against the design (2026-08-04).
+        _PAGE_ONLY = ("overflow", "background")
+        _drop = lambda d: {k: v for k, v in d.items()
+                           if not k.startswith(_PAGE_ONLY)}
+        page_base = _drop(page_base)
+        page_variants = {vk: _drop(vd) for vk, vd in page_variants.items()}
         page_variants = {vk: vd for vk, vd in page_variants.items() if vd}
         # Names that appear in any multi-class stack are utility/combo classes;
         # single-class uses of them are split so the bare name stays thin.
@@ -1500,16 +1891,26 @@ def extract_custom_code(html: str) -> tuple[str, dict]:
     ids: set[str] = set()
     classes: set[str] = set()
 
+    head_chunks: list[str] = []
     for script in soup.find_all("script"):
         if script.has_attr("data-embed"):
             continue  # section JS embed — rides inside the section payload
+        # Head scripts must STAY in the head. The section embeds are inline in
+        # the body and call the shared bootstrap (`WZ.add(...)`) as the parser
+        # reaches them, so a bootstrap moved to the footer is defined too late
+        # and every chapter throws "WZ is not defined" — the page then renders
+        # but nothing animates (Dr. Nahlah, 2026-07-30). Merging both halves
+        # into one footer bundle is what collapsed the design's own documented
+        # head-bootstrap / footer-flush split.
+        in_head = any(getattr(a, "name", None) == "head" for a in script.parents)
+        sink = head_chunks if in_head else chunks
         src = script.get("src")
         if src:
             external.append(src)
-            chunks.append(f'// External script from source design: {src}')
+            sink.append(f'// External script from source design: {src}')
         body = script.get_text().strip()
         if body:
-            chunks.append(body)
+            sink.append(body)
 
     for tag in soup.find_all(True):
         for attr, val in list(tag.attrs.items()):
@@ -1527,22 +1928,27 @@ def extract_custom_code(html: str) -> tuple[str, dict]:
             classes.add(c)
 
     code = "\n\n".join(chunks).strip()
-    for m in re.finditer(r"querySelector(?:All)?\(\s*(['\"])(.*?)\1\s*\)", code):
+    head_code = "\n\n".join(head_chunks).strip()
+    for m in re.finditer(r"querySelector(?:All)?\(\s*(['\"])(.*?)\1\s*\)",
+                         code + "\n" + head_code):
         selectors.add(m.group(2))
     manifest = {
+        "headCode": bool(head_code),
         "externalScripts": external,
         "inlineHandlers": inline_handlers,
         "querySelectors": sorted(selectors),
         "ids": sorted(ids),
         "classes": sorted(classes),
     }
+    manifest["_headCode"] = head_code
     return code, manifest
 
 
 _RUNTIME_BP_MEDIA = {"medium": "@media (max-width: 991px)",
                      "small": "@media (max-width: 767px)",
                      "tiny": "@media (max-width: 479px)",
-                     "xl": "@media (min-width: 1280px)",
+                     "large": "@media (min-width: 1280px)",
+                     "xl": "@media (min-width: 1440px)",
                      "xxl": "@media (min-width: 1920px)"}
 
 
@@ -1577,15 +1983,40 @@ def extract_runtime_state_css(html: str, css: str = "") -> str:
     """
     soup = BeautifulSoup(html, "html.parser")
     css = collect_css(html, css)
-    rules, _skipped, var_map = parse_rules(css)
+    rules, _skipped, var_map, var_scopes = parse_rules(css)
     dom_classes: set[str] = set()
-    inline_vars: set[str] = set()
+    toggled_toks: set[str] = toggled_class_tokens(html)
+    # JS-written custom properties are shielded exactly like inline-declared
+    # ones: the artifact must keep `var(--pos,0%)` live so the runtime writes
+    # take effect, instead of freezing the fallback.
+    runtime_vars: set[str] = js_set_custom_properties(html)
+    gated_ids: set = set()
+    inline_vars: set[str] = set(runtime_vars)
     for el in soup.find_all(True):
         dom_classes.update(el.get("class", []))
         st = el.get("style")
         if st:
             inline_vars.update(p for p, _ in _parse_decls(st)
                                if p.startswith("--"))
+    gated_ids = _js_gated_initial_state(rules, dom_classes, toggled_toks)
+    # Class tokens the page's inline JS mentions INSIDE STRING LITERALS —
+    # either as a dotted selector ('.faq__item') or as a whole literal
+    # ('wz-line' for SplitText's linesClass, 'is-lit' for classList). A
+    # selector class that is absent from the markup only signals RUNTIME
+    # state when the JS mentions it like that. Without this narrowing, a
+    # design whose pages share one kit stylesheet ships every OTHER page's
+    # unused kit rules as "state" CSS — the thank-you artifact came out at
+    # 21 KB, twice the custom-code slot (Grand Mission, 2026-08-07). A bare
+    # word-set test is too loose the other way: 'section[data-chapter]' and
+    # splitLines() would keep dead .section/.split kit rules on every page.
+    js_words: set = set()
+    for s in soup.find_all("script"):
+        for a, b in re.findall(r"'([^'\n]*)'|\"([^\"\n]*)\"",
+                               s.get_text() or ""):
+            lit = a or b
+            js_words.update(re.findall(r"\.([A-Za-z_][\w-]*)", lit))
+            if re.fullmatch(r"[\w-]+", lit):
+                js_words.add(lit)
 
     def _expand_keep_inline(v: str) -> str:
         """Expand :root vars but keep references to INLINE-defined custom
@@ -1654,11 +2085,35 @@ def extract_runtime_state_css(html: str, css: str = "") -> str:
                 f"{sel}{{{_resolve(r.decls)}}}")
             continue
         toks = set(re.findall(r"\.([A-Za-z_][\w-]*)", r.selector))
-        has_unknown_token = bool(toks - dom_classes)
+        unknown_toks = toks - dom_classes
+        has_unknown_token = any(
+            t in toggled_toks or t in js_words for t in unknown_toks)
+        if unknown_toks and not has_unknown_token:
+            # Every unknown class is unmentioned by this page's JS: a kit rule
+            # for a class this page simply does not use. Dead here — skip it
+            # even if another clause below would have matched.
+            continue
         has_attr_state = "[open]" in r.selector
         runtime_combo = (not has_unknown_token and not has_attr_state and toks
                          and not _markup_matches(r.selector))
-        if not (has_unknown_token or has_attr_state or runtime_combo):
+        # A token the JS toggles must ship even when it DOES match markup: the
+        # match is only the initial state (`<div class="slide on">` = slide 1),
+        # and baking it freezes that state while leaving the toggled class
+        # empty. Cases 1-3 above all miss this because the selector looks
+        # perfectly markup-time.
+        js_toggled = bool(toks & toggled_toks)
+        # Same for a rule reading a JS-written custom property: it is excluded
+        # from the bake (CascadeResolver._is_runtime_state), so this artifact
+        # is the only place it can ship from.
+        reads_runtime_var = any(v in val for _p, val in r.decls
+                                for v in runtime_vars)
+        # The anti-FOUC "hidden until JS" half of a pair. Excluded from the
+        # bake so the element stays visible/editable on the Designer canvas
+        # (which never runs this artifact); shipped here so the published page
+        # still hides it until GSAP takes over.
+        gated_initial = id(r) in gated_ids
+        if not (has_unknown_token or has_attr_state or runtime_combo
+                or js_toggled or reads_runtime_var or gated_initial):
             continue
         # Specificity boost: Webflow publishes baked combo chains like
         # `.span-4.contact-grid.reveal{opacity:0}` at (0,3,0), which outranks a
@@ -1666,17 +2121,23 @@ def extract_runtime_state_css(html: str, css: str = "") -> str:
         # invisible contact-grid regression). Repeating the runtime-class token
         # (`.in` -> `.in.in.in`) lifts each state rule above any chain the
         # converter can emit without changing what it matches.
-        for tok in toks - dom_classes:
+        # Boost each qualifying token exactly ONCE — a token can qualify under
+        # several of these clauses at the same time, and boosting twice would
+        # emit `.on` nine times over.
+        boost = set(toks - dom_classes)
+        # A JS-toggled token's declarations are also baked into the markup-time
+        # element's combo chain; the toggled rule must outrank that chain on
+        # every sibling the class later moves to.
+        boost |= toks & toggled_toks
+        if runtime_combo or has_attr_state:
+            # discriminator tokens of a runtime combination: the ones whose
+            # removal makes the selector match markup again (`.active` — and
+            # `.pin-step` too when the nav has `a.active`)
+            boost |= {tok for tok in toks & dom_classes
+                      if _markup_matches(_strip_token(r.selector, tok))}
+        for tok in boost:
             sel = re.sub(rf"\.{re.escape(tok)}(?![\w-])",
                          f".{tok}.{tok}.{tok}", sel)
-        if runtime_combo or has_attr_state:
-            # boost the discriminator tokens of a runtime combination: the
-            # ones whose removal makes the selector match markup again
-            # (`.active` — and `.pin-step` too when the nav has `a.active`)
-            for tok in toks & dom_classes:
-                if _markup_matches(_strip_token(r.selector, tok)):
-                    sel = re.sub(rf"\.{re.escape(tok)}(?![\w-])",
-                                 f".{tok}.{tok}.{tok}", sel)
         sel = sel.replace("[open]", "[open][open][open]")
         grouped.setdefault(r.breakpoint, []).append(
             f"{sel}{{{_resolve(r.decls)}}}")
@@ -1694,7 +2155,8 @@ def extract_runtime_state_css(html: str, css: str = "") -> str:
             parts.append(f'@import url("{href}");')
     body_overflow = {}
     body_base = {}
-    resolver = CascadeResolver(soup, rules)
+    resolver = CascadeResolver(soup, rules, var_map=var_map,
+                               var_scopes=var_scopes)
     if soup.body:
         bb, _bv = resolver.computed(soup.body)
         body_overflow = {k: v for k, v in bb.items() if k.startswith("overflow")}
@@ -1772,10 +2234,23 @@ def extract_inline_var_restorations(html: str) -> list:
 
 
 def write_text_artifacts(html: str, output_dir: str,
-                         class_renames: Optional[dict] = None) -> None:
+                         class_renames: Optional[dict] = None,
+                         css: str = "") -> None:
+    # `css` carries the design's EXTERNAL stylesheets. Without it, a design
+    # that links its CSS (instead of inlining <style> blocks) produces a
+    # runtime-states artifact with no state rules at all — every JS-toggled
+    # class is then empty on the pasted page (Grand Mission, 2026-08-07).
     import os
     os.makedirs(output_dir, exist_ok=True)
     code, manifest = extract_custom_code(html)
+    head_code = manifest.pop("_headCode", "")
+    if head_code:
+        # Site Settings -> Custom Code -> HEAD. Not IIFE-wrapped: this half is
+        # the shared bootstrap the body's inline section embeds call into, so
+        # its globals (window.WZ) must stay global.
+        with open(os.path.join(output_dir, "webflow-custom-code-head.js"),
+                  "w", encoding="utf-8") as f:
+            f.write(head_code + "\n")
     restorations = extract_inline_var_restorations(html)
     if restorations:
         for entry in restorations:
@@ -1804,7 +2279,7 @@ def write_text_artifacts(html: str, output_dir: str,
     with open(os.path.join(output_dir, "animation-manifest.json"),
               "w", encoding="utf-8") as f:
         json.dump(manifest, f, indent=2)
-    state_css = extract_runtime_state_css(html)
+    state_css = extract_runtime_state_css(html, css)
     if state_css:
         # --avoid renamed state-CSS-only class tokens (e.g. `bar` ->
         # `bar-invest`) on the pasted elements; the runtime-state selectors
@@ -1820,7 +2295,7 @@ def write_text_artifacts(html: str, output_dir: str,
 def write_variable_artifacts(css: str, output_dir: str) -> None:
     import os
     os.makedirs(output_dir, exist_ok=True)
-    _rules, _skipped, var_map = parse_rules(css)
+    _rules, _skipped, var_map, var_scopes = parse_rules(css)
     os.makedirs(output_dir, exist_ok=True)
     payload = {
         "source": ":root CSS custom properties",
@@ -1986,18 +2461,21 @@ def convert(html: str, css: str = "", root_selector: Optional[str] = None,
             resolve: bool = True, asset_base: str = "",
             preserve_vars: bool = False,
             variable_css_names: Optional[dict] = None,
-            page_prefix: str = "") -> dict:
+            page_prefix: str = "", vocab: Optional[dict] = None) -> dict:
     """Convert HTML+CSS to a Webflow XscpData payload.
 
     root_selector: if given, only that element (matched in the FULL document so
     ancestor-dependent selectors still resolve) is converted. Otherwise the
     direct children of <body> (or the document root) are used.
 
-    page_prefix: namespace tag-derived auto-names (`p` -> `vnr-p`). See the
-    --page-prefix CLI flag.
+    page_prefix: namespaces tag-derived auto-names. Without it a single-root
+    conversion emits classes literally called `div`, `h2`, `p` — which Webflow
+    merges BY NAME against the target site and can overwrite a style guide's
+    tag-level styles site-wide.
     """
     soup, builder = _setup(html, css, resolve, asset_base, preserve_vars,
-                           variable_css_names, page_prefix=page_prefix)
+                           variable_css_names, page_prefix=page_prefix,
+                           vocab=vocab)
     roots = soup.select(root_selector) if root_selector else _body_roots(soup)
     payload = builder.build(roots)
     _warn_unsupported(builder)
@@ -2051,6 +2529,59 @@ def load_reserved_styles(dirs: list[str]) -> dict:
             for s in json.loads(m.group(1))["payload"]["styles"]:
                 reserved.setdefault(s["name"], set()).add(style_signature(s))
     return reserved
+
+
+_TOGGLE_CALL_RE = re.compile(
+    r"""classList\s*\.\s*(?:add|remove|toggle|replace)\s*\(([^)]*)\)"""
+    r"""|toggleClass\s*:\s*(['"])([\w\s-]+)\2"""
+    r"""|className\s*=\s*(['"])([\w\s-]+)\4""")
+
+
+_SET_PROP_RE = re.compile(
+    r"""setProperty\s*\(\s*['"](--[\w-]+)['"]|style\s*\[\s*['"](--[\w-]+)['"]""")
+
+
+def js_set_custom_properties(html: str) -> set:
+    """CSS custom properties the page JS writes at runtime
+    (`cmp.style.setProperty('--pos', p + '%')`).
+
+    These are never declared in the stylesheet, so `expand_vars` collapses
+    every `var(--pos, 0%)` reference to its FALLBACK and bakes `left: 0%` into
+    the class. The scrub handle then cannot move even though the JS is setting
+    the property correctly (the Dr. Nahlah before/after wipe, 2026-07-30).
+    Rules referencing one must keep a live `var()` and ship as runtime state
+    rather than being baked."""
+    soup = BeautifulSoup(html, "html.parser")
+    props: set = set()
+    for script in soup.find_all("script"):
+        for m in _SET_PROP_RE.finditer(script.get_text() or ""):
+            props.add(m.group(1) or m.group(2))
+    return props
+
+
+def toggled_class_tokens(html: str) -> set:
+    """Class tokens the page JS ADDS, REMOVES or TOGGLES at runtime.
+
+    Distinct from `protected_class_tokens`' js_tokens, which are merely
+    QUERIED (`.querySelector('.cmp')`) and so are safe to bake. A toggled
+    token's markup-time presence is incidental: `<div class="slide on">` marks
+    only the FIRST slide, and `classList.toggle('on', i===n)` moves it. Baking
+    `.slide.on{opacity:1}` into that one element's class freezes the carousel
+    on slide 1 and leaves `on` an empty class, so every later toggle is a
+    no-op (the Dr. Nahlah before/after wipe, 2026-07-30).
+
+    Unlike extract_custom_code this DOES scan `<script data-embed>` blocks —
+    those ride inside the payload as HtmlEmbeds and still run on the pasted
+    page, and on this design they own every chapter's state machine."""
+    soup = BeautifulSoup(html, "html.parser")
+    toks: set = set()
+    for script in soup.find_all("script"):
+        for m in _TOGGLE_CALL_RE.finditer(script.get_text() or ""):
+            raw = m.group(1) or m.group(3) or m.group(5) or ""
+            for lit in re.findall(r"""['"]([\w\s-]+)['"]""", raw) \
+                    if m.group(1) else [raw]:
+                toks.update(t for t in lit.split() if t)
+    return toks
 
 
 def protected_class_tokens(html: str) -> tuple[set, set]:
@@ -2269,15 +2800,13 @@ def main(argv=None):
                          "(default: the --split folder name)")
     ap.add_argument("--clip", action="store_true",
                     help="copy JSON to clipboard as text/plain (NOT Webflow-pasteable)")
-    ap.add_argument("--page-prefix", dest="page_prefix", default="",
-                    help="namespace tag-derived AUTO-NAMES (`p` -> `vnr-p`, "
-                         "`div` -> `vnr-div`). Webflow merges classes by name "
-                         "SITE-WIDE, so a bare `p`/`div`/`span` class pasted "
-                         "into an existing project collides with the client's "
-                         "own classes. Always set this when pasting into a site "
-                         "you did not build. Source class names and JS hooks "
-                         "are untouched.")
     ap.add_argument("--indent", type=int, default=None, help="pretty-print indent")
+    ap.add_argument("--page-prefix", dest="page_prefix", default="",
+                    help="namespace tag-derived AUTO-NAMES (div, h2, p, ...). "
+                         "Without this the payload ships classes named literally "
+                         "`h2`/`p`/`img`, which Webflow merges BY NAME against the "
+                         "target site and can overwrite a style guide's tag-level "
+                         "styles site-wide. Strongly recommended.")
     args = ap.parse_args(argv)
 
     with open(args.html, encoding="utf-8") as f:
@@ -2309,8 +2838,7 @@ def main(argv=None):
                                     asset_base=args.asset_base,
                                     preserve_vars=args.preserve_vars,
                                     variable_css_names=variable_css_names,
-                                    extra_shared_utility_names=extra_shared,
-                                    page_prefix=args.page_prefix)
+                                    extra_shared_utility_names=extra_shared)
         if args.avoid:
             suffix = args.avoid_suffix or os.path.basename(
                 os.path.normpath(args.split))

@@ -78,7 +78,17 @@ function render(id) {
   const n = nodes.get(id);
   if (!n) return "";
   if (n.text === true && "v" in n) return esc(n.v);
-  if (n.type === "HtmlEmbed") return n.v || "";
+  if (n.type === "HtmlEmbed") {
+    /* Webflow renders an embed inside a real `div.w-embed` wrapper that also
+       carries the node's own classes. Rendering the raw HTML bare hid two
+       whole failure classes: a script-only embed occupying a grid cell, and
+       an embed's classes styling BOTH the wrapper and the inner element. */
+    const ecls = (n.classes || [])
+      .map((c) => styles.get(c)?.name)
+      .filter(Boolean)
+      .join(" ");
+    return `<div class="${ecls ? ecls + " " : ""}w-embed">${n.v || ""}</div>`;
+  }
   const tag = n.tag || "div";
   const cls = (n.classes || [])
     .map((c) => styles.get(c)?.name)
@@ -331,9 +341,10 @@ await send("Runtime.enable", {}, sessionId);
 await send("Page.enable", {}, sessionId);
 await send("Page.navigate", { url: `http://127.0.0.1:${PORT}/simulated-paste.html` }, sessionId);
 
-const evaluate = async (fn) => {
+const evaluate = async (fn, ...args) => {
   const r = await send("Runtime.evaluate", {
-    expression: `(${fn.toString()})()`, returnByValue: true, awaitPromise: true,
+    expression: `(${fn.toString()})(${args.map((a) => JSON.stringify(a)).join(",")})`,
+    returnByValue: true, awaitPromise: true,
   }, sessionId);
   if (r.exceptionDetails) return { err: r.exceptionDetails.text };
   return r.result.value;
@@ -399,10 +410,14 @@ check("motion layer initialised (WZ.ok, smoother, ScrollTriggers registered)",
       `getElementById('nav')` must land on the styled header, not on a wrapper
       that happens to share the id. */
 const navSolid = await pg.evaluate(async () => {
-  const el = document.getElementById("nav");
-  if (!el) return { err: "no #nav" };
+  /* Two nav shapes exist across the builds this gate serves: Dr. Nahlah's
+     `#nav` + `.solid`, and the Grand Mission kit's `#header` + `.is-stuck`.
+     Same contract either way: transparent at rest, painted once scrolled. */
+  const el = document.getElementById("nav") || document.getElementById("header");
+  if (!el) return { err: "no #nav/#header" };
+  const stateClass = document.getElementById("nav") ? "solid" : "is-stuck";
   const before = getComputedStyle(el).backgroundColor;
-  el.classList.add("solid");
+  el.classList.add(stateClass);
   /* Settle-poll, not a fixed sleep — the background rides a transition that
      costs MAIN-THREAD time, and this page keeps it busy. A fixed 700ms read
      the pre-transition colour and failed a build whose state CSS was correct
@@ -415,7 +430,7 @@ const navSolid = await pg.evaluate(async () => {
   }
   return { classes: [...el.classList], before, after };
 });
-check("nav: .solid on #nav changes its background",
+check("nav: scrolled state class changes the header background",
   !navSolid.err && navSolid.before !== navSolid.after, JSON.stringify(navSolid));
 
 /* Every `[data-theme="dark"]` container must actually read as dark: light text
@@ -467,8 +482,10 @@ check("dark-themed sections keep readable text (scoped tokens resolved)",
    body's opaque background: the bar looked permanently scrolled, and the whole
    transparent-over-hero effect was gone. A "changes on scroll" check cannot
    see that, because it never asks what the start state was. */
-const navRest = /^(rgba\(0, 0, 0, 0\)|transparent)$/.test(navSolid.before || "");
-check("nav: #nav is transparent before scrolling (no inherited body background)",
+// Any zero-alpha colour is transparent — rgba(255, 255, 255, 0) is how a
+// header that will BECOME white reads at rest, and it paints nothing.
+const navRest = /^(rgba\([\d, ]+, 0\)|transparent)$/.test(navSolid.before || "");
+check("nav: header is transparent before scrolling (no inherited body background)",
   navRest, `at rest: ${navSolid.before}`);
 
 /* 1. The before/after carousel: `.on` must actually change opacity, and the
@@ -551,7 +568,8 @@ check("no reset-generated phantom pseudo divs (paint nothing at any breakpoint)"
 /* 4. Nav state class works (drawer/burger/solid). The drawer carries an 800ms
       clip-path transition, so the computed value must be read AFTER it lands —
       reading immediately returns the start value and fails a working build. */
-const nav = await pg.evaluate(async () => {
+const drawerApplies = payloadHas("drawer");
+const nav = !drawerApplies ? null : await pg.evaluate(async () => {
   const d = document.querySelector(".drawer");
   if (!d) return { err: "no drawer" };
   const closed = getComputedStyle(d).clipPath;
@@ -568,7 +586,9 @@ const nav = await pg.evaluate(async () => {
   }
   return { closed, open };
 });
-check("nav: .open changes drawer clip-path", !nav.err && nav.closed !== nav.open,
+if (!drawerApplies) skip("nav: .open changes drawer clip-path",
+  "page has no .drawer (mobile nav is the sticky call bar)");
+else check("nav: .open changes drawer clip-path", !nav.err && nav.closed !== nav.open,
   JSON.stringify(nav));
 
 /* 5. Type scale survived — headings must not collapse to a browser default. */
@@ -593,7 +613,11 @@ const imgs = await pg.evaluate(async () => {
     i.addEventListener("error", r, { once: true });
     setTimeout(r, 8000);
   })));
-  const broken = list.filter((i) => !i.naturalWidth).map((i) => i.getAttribute("src"));
+  const broken = list
+    // An intentionally empty src (the lightbox's stage img before any case is
+    // opened) is not a broken asset — flagging it drowned the real signal.
+    .filter((i) => !i.naturalWidth && (i.getAttribute("src") || "").trim() !== "")
+    .map((i) => i.getAttribute("src"));
   return { total: list.length, broken: [...new Set(broken)] };
 });
 check("every image loads (no relative or dead src)",
@@ -608,10 +632,21 @@ check("no page errors", errors.length === 0, errors.slice(0, 3).join(" | ") || "
 await send("Page.navigate",
   { url: `http://127.0.0.1:${PORT}/simulated-designer-canvas.html` }, sessionId);
 await wait(2500);
-const canvasVis = await pg.evaluate(() => {
+/* Content that is SUPPOSED to be hidden until a runtime state (the quiz
+   form's success message, revealed by `.is-done`) is declared here instead of
+   special-cased in the probe: it is real, Navigator-selectable content whose
+   hidden canvas state is the design. */
+const EXPECT_HIDDEN = process.env.EXPECT_HIDDEN || ".panel__success *, .panel__success";
+const canvasVis = await pg.evaluate((expectHidden) => {
   const invisible = [];
   for (const el of document.querySelectorAll(
     "h1, h2, p, [data-anim], .slide, section[data-chapter]")) {
+    try { if (expectHidden && el.matches(expectHidden)) continue; } catch {}
+    /* Elements INSIDE an HtmlEmbed are not individually selectable in the
+       Designer — the embed is edited as one code block — so their canvas
+       visibility says nothing about editability (empty .field__error slots
+       and the form's hidden success panel live there by design). */
+    if (el.closest(".w-embed")) continue;
     const s = getComputedStyle(el);
     const r = el.getBoundingClientRect();
     if (s.visibility === "hidden" || s.display === "none" ||
@@ -625,7 +660,7 @@ const canvasVis = await pg.evaluate(() => {
   return { checked: document.querySelectorAll(
     "h1, h2, p, [data-anim], .slide, section[data-chapter]").length,
     invisible };
-});
+}, EXPECT_HIDDEN);
 check("Designer canvas: content visible without custom code (editable)",
   canvasVis.invisible.length === 0,
   `${canvasVis.checked} elements checked` +

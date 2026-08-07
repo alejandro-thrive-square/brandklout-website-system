@@ -40,7 +40,7 @@
 /* ==========================================================================
    CHAPTER 00 — ARRIVAL
    ========================================================================== */
-.ch-arrival {
+.cos-ch-arrival {
   position: relative;
   isolation: isolate;
   background: var(--blue-deep);
@@ -92,15 +92,15 @@
   opacity: 0;
   pointer-events: none;
 }
-.ch-arrival h1 {
+.cos-ch-arrival h1 {
   color: #fff;
   max-width: 15ch;
 }
-.ch-arrival h1 em {
+.cos-ch-arrival h1 em {
   font-style: normal;
   color: var(--blue-light);
 }
-.arrival__sub {
+.cos-arrival__sub {
   font-size: var(--body-lg);
   color: rgba(255, 255, 255, 0.82);
   font-weight: 400;
@@ -123,17 +123,17 @@
   gap: 1.25rem;
   align-content: start;
 }
-.ch-arrival .chapter-tag {
+.cos-ch-arrival .chapter-tag {
   color: var(--blue-light);
   margin-bottom: 0;
 }
 /* The eyebrow inherits --blue, which is a mid-blue chosen for white grounds.
    On the navy hero that is barely legible — the arrival chapter is the one
-   place .label sits on a dark ground without a data-theme to catch it. */
-.ch-arrival .label {
+   place .gm-label sits on a dark ground without a data-theme to catch it. */
+.cos-ch-arrival .gm-label {
   color: var(--blue-light);
 }
-.ch-arrival .chapter-tag em {
+.cos-ch-arrival .chapter-tag em {
   color: rgba(255, 255, 255, 0.62);
 }
 
@@ -563,7 +563,7 @@
   display: grid;
   gap: 0.9rem;
 }
-.ch-proof .disclaimer {
+.ch-proof .cos-disclaimer {
   color: rgba(255, 255, 255, 0.55);
 }
 .ch__rail--shell {
@@ -606,17 +606,17 @@
   z-index: -1;
   background: radial-gradient(50% 50% at 50% 50%, rgba(4, 102, 156, 0.8), transparent 70%);
 }
-.closing {
+.cos-closing {
   max-width: 800px;
   display: grid;
   gap: 1.1rem;
   justify-items: center;
   text-align: center;
 }
-.closing h2 {
+.cos-closing h2 {
   color: #fff;
 }
-.closing .lede {
+.cos-closing .lede {
   color: rgba(255, 255, 255, 0.85);
 }
 .closing__actions {
@@ -626,12 +626,16 @@
   flex-wrap: wrap;
   margin-top: 0.9rem;
 }
-.closing .btn--ghost {
+.cos-closing .btn--ghost {
   color: #fff;
 }
-.closing .btn--ghost::before {
+.cos-closing .btn--ghost::before {
   background: #fff;
 }
-.closing .btn--ghost:hover {
+.cos-closing .btn--ghost:hover {
   color: var(--blue-deep);
 }
+
+/* Script embeds: layout-inert. In Webflow a script-only HtmlEmbed is a
+   visible div.w-embed — without this it occupies a grid/flex cell. */
+.wz-js { display: none; }

@@ -371,8 +371,8 @@ button {
 .ch[data-theme="ink"] h3 {
   color: #fff;
 }
-.ch[data-theme="dark"] .label,
-.ch[data-theme="ink"] .label {
+.ch[data-theme="dark"] .gm-label,
+.ch[data-theme="ink"] .gm-label {
   color: var(--blue-light);
 }
 .ch[data-theme="dark"] .lede,
@@ -472,7 +472,7 @@ html:not(.wz-ready) .chapter-tag i,
   color: #fff;
 }
 
-.label {
+.gm-label {
   display: inline-flex;
   align-items: center;
   gap: 0.7rem;
@@ -483,7 +483,7 @@ html:not(.wz-ready) .chapter-tag i,
   color: var(--blue);
   margin: 0 0 1rem;
 }
-.label::before {
+.gm-label::before {
   content: "";
   width: clamp(20px, 3vw, 40px);
   height: 1px;
@@ -493,7 +493,7 @@ html:not(.wz-ready) .chapter-tag i,
 .label--center {
   justify-content: center;
 }
-.section--dark .label {
+.section--dark .gm-label {
   color: var(--blue-light);
 }
 .lede {
@@ -505,7 +505,7 @@ html:not(.wz-ready) .chapter-tag i,
 .section--dark .lede {
   color: rgba(255, 255, 255, 0.78);
 }
-.head {
+.ty-head {
   max-width: 820px;
   margin-bottom: clamp(2.2rem, 4vw, 3.6rem);
   display: grid;
@@ -601,7 +601,7 @@ html:not(.wz-ready) .chapter-tag i,
   color: var(--blue-deep);
 }
 
-.more {
+.gm-more {
   display: inline-flex;
   align-items: center;
   gap: 0.5rem;
@@ -614,22 +614,22 @@ html:not(.wz-ready) .chapter-tag i,
   padding-bottom: 0.3rem;
   transition: color 0.35s, border-color 0.35s;
 }
-.more::after {
+.gm-more::after {
   content: "\2192";
   transition: transform 0.4s var(--ease);
 }
-.more:hover {
+.gm-more:hover {
   color: var(--blue-deep);
   border-color: var(--blue-deep);
 }
-.more:hover::after {
+.gm-more:hover::after {
   transform: translateX(5px);
 }
 
 /* ---------- fixed header ---------- */
 /* Lives OUTSIDE #smooth-wrapper: ScrollSmoother transforms its content, and a
    sticky element inside it travels with the transform. */
-.header {
+.gm-header {
   position: fixed;
   inset: 0 0 auto;
   z-index: 80;
@@ -637,7 +637,7 @@ html:not(.wz-ready) .chapter-tag i,
   transition: background 0.45s var(--ease), box-shadow 0.45s var(--ease),
     backdrop-filter 0.45s var(--ease);
 }
-.header.is-stuck {
+.gm-header.is-stuck {
   background: rgba(255, 255, 255, 0.9);
   backdrop-filter: blur(16px);
   box-shadow: 0 1px 0 var(--n-200), var(--shadow-sm);
@@ -650,7 +650,7 @@ html:not(.wz-ready) .chapter-tag i,
   padding-block: clamp(0.85rem, 1.6vw, 1.35rem);
   transition: padding 0.45s var(--ease);
 }
-.header.is-stuck .header__inner {
+.gm-header.is-stuck .header__inner {
   padding-block: 0.7rem;
 }
 .header__logo img {
@@ -661,10 +661,10 @@ html:not(.wz-ready) .chapter-tag i,
 .header__logo .logo-dark {
   display: none;
 }
-.header.is-stuck .header__logo .logo-dark {
+.gm-header.is-stuck .header__logo .logo-dark {
   display: block;
 }
-.header.is-stuck .header__logo .logo-light {
+.gm-header.is-stuck .header__logo .logo-light {
   display: none;
 }
 .header__actions {
@@ -681,7 +681,7 @@ html:not(.wz-ready) .chapter-tag i,
   white-space: nowrap;
   transition: color 0.45s var(--ease);
 }
-.header.is-stuck .header__phone {
+.gm-header.is-stuck .header__phone {
   color: var(--blue-deep);
 }
 .header__phone small {
@@ -728,7 +728,7 @@ html:not(.wz-ready) .chapter-tag i,
 .header__chapter.is-on {
   opacity: 1;
 }
-.header.is-stuck .header__chapter {
+.gm-header.is-stuck .header__chapter {
   color: var(--n-500);
 }
 .header__chapter b {
@@ -736,7 +736,7 @@ html:not(.wz-ready) .chapter-tag i,
   font-variant-numeric: tabular-nums;
   font-weight: 800;
 }
-.header.is-stuck .header__chapter b {
+.gm-header.is-stuck .header__chapter b {
   color: var(--blue);
 }
 .header__chapter i {
@@ -762,14 +762,14 @@ html:not(.wz-ready) .chapter-tag i,
 /* A header CTA that wraps to two lines grows the fixed bar and crowds the
    logo. The short labels above handle the long copy; this stops even a short
    label breaking at 360px. */
-.header .btn {
+.gm-header .btn {
   white-space: nowrap;
 }
 @media (max-width: 800px) {
   .header__phone .header__phone-text {
     display: none;
   }
-  .header .btn {
+  .gm-header .btn {
     padding: 0.85rem 1.3rem;
   }
 }
@@ -845,7 +845,7 @@ html:not(.wz-ready) .chapter-tag i,
 }
 
 /* ---------- cards ---------- */
-.card {
+.gm-card {
   position: relative;
   background: #fff;
   border: 1px solid var(--n-200);
@@ -858,7 +858,7 @@ html:not(.wz-ready) .chapter-tag i,
   transition: transform 0.5s var(--ease), box-shadow 0.5s var(--ease),
     border-color 0.5s var(--ease);
 }
-.card::after {
+.gm-card::after {
   content: "";
   position: absolute;
   inset: 0;
@@ -867,15 +867,15 @@ html:not(.wz-ready) .chapter-tag i,
   background: radial-gradient(180px circle at var(--mx, 50%) var(--my, 50%), rgba(4, 102, 156, 0.1), transparent 65%);
   transition: opacity 0.45s var(--ease);
 }
-.card:hover {
+.gm-card:hover {
   transform: translateY(-6px);
   border-color: var(--blue-light);
   box-shadow: var(--shadow-md);
 }
-.card:hover::after {
+.gm-card:hover::after {
   opacity: 1;
 }
-.card p {
+.gm-card p {
   color: var(--n-700);
   font-weight: 400;
   font-size: calc(1.15rem * var(--tx));
@@ -897,18 +897,18 @@ html:not(.wz-ready) .chapter-tag i,
   color: var(--blue);
   margin-bottom: 0.4rem;
 }
-.grid {
+.gm-grid {
   display: grid;
   gap: clamp(1rem, 1.8vw, 1.5rem);
 }
 @media (min-width: 720px) {
-  .grid.c2 { grid-template-columns: repeat(2, 1fr); }
-  .grid.c3 { grid-template-columns: repeat(2, 1fr); }
-  .grid.c4 { grid-template-columns: repeat(2, 1fr); }
+  .gm-grid.c2 { grid-template-columns: repeat(2, 1fr); }
+  .gm-grid.c3 { grid-template-columns: repeat(2, 1fr); }
+  .gm-grid.c4 { grid-template-columns: repeat(2, 1fr); }
 }
 @media (min-width: 1040px) {
-  .grid.c3 { grid-template-columns: repeat(3, 1fr); }
-  .grid.c4 { grid-template-columns: repeat(4, 1fr); }
+  .gm-grid.c3 { grid-template-columns: repeat(3, 1fr); }
+  .gm-grid.c4 { grid-template-columns: repeat(4, 1fr); }
 }
 
 /* ---------- marquee ---------- */
@@ -952,13 +952,13 @@ html:not(.wz-ready) .chapter-tag i,
 }
 
 /* ---------- media / figures ---------- */
-.figure {
+.gm-figure {
   position: relative;
   overflow: hidden;
   border-radius: var(--r-lg);
   background: var(--n-100);
 }
-.figure img {
+.gm-figure img {
   width: 100%;
   height: 100%;
   object-fit: cover;
@@ -1043,7 +1043,7 @@ html:not(.wz-ready) .chapter-tag i,
   font-weight: 600;
   color: var(--n-500);
 }
-.stars {
+.gm-stars {
   color: #f5b83d;
   letter-spacing: 0.14em;
   font-size: calc(1.15rem * var(--tx));
@@ -1125,7 +1125,7 @@ html:not(.wz-ready) .chapter-tag i,
   text-transform: uppercase;
   font-weight: 700;
 }
-.disclaimer {
+.ty-disclaimer {
   font-size: calc(0.97rem * var(--tx));
   color: var(--n-500);
   max-width: 74ch;
@@ -1422,28 +1422,28 @@ html:not(.wz-ready) .chapter-tag i,
 }
 
 /* ---------- footer ---------- */
-.footer {
+.gm-footer {
   background: var(--blue-ink);
   color: rgba(255, 255, 255, 0.72);
   padding-block: clamp(3rem, 6vw, 4.5rem) 2rem;
   font-size: calc(1.11rem * var(--tx));
   font-weight: 400;
 }
-.footer h3 {
+.gm-footer h3 {
   color: #fff;
   font-size: calc(0.92rem * var(--tx));
   letter-spacing: 0.16em;
   text-transform: uppercase;
   margin-bottom: 1rem;
 }
-.footer a {
+.gm-footer a {
   color: #fff;
 }
-.footer a:not(.btn):hover {
+.gm-footer a:not(.btn):hover {
   text-decoration: underline;
 }
-/* .footer a would otherwise repaint a .btn--light white-on-white. */
-.footer a.btn {
+/* .gm-footer a would otherwise repaint a .btn--light white-on-white. */
+.gm-footer a.btn {
   color: var(--blue-deep);
   text-decoration: none;
 }
@@ -1459,23 +1459,23 @@ html:not(.wz-ready) .chapter-tag i,
   width: auto;
   margin-bottom: 1.1rem;
 }
-.hours {
+.ty-hours {
   display: grid;
   gap: 0.35rem;
   margin: 0;
 }
-.hours div {
+.ty-hours div {
   display: flex;
   justify-content: space-between;
   gap: 1rem;
   border-bottom: 1px dashed rgba(255, 255, 255, 0.12);
   padding-bottom: 0.3rem;
 }
-.hours dt {
+.ty-hours dt {
   font-weight: 600;
   color: rgba(255, 255, 255, 0.86);
 }
-.hours dd {
+.ty-hours dd {
   margin: 0;
   color: rgba(255, 255, 255, 0.66);
 }

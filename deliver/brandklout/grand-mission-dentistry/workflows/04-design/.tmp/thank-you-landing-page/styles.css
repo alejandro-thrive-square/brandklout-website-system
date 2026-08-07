@@ -35,7 +35,7 @@
 /* ==========================================================================
    CHAPTER 00 — ARRIVAL   (Asana section 1: immediate status banner)
    ========================================================================== */
-.ch-arrival {
+.ty-ch-arrival {
   position: relative;
   isolation: isolate;
   background: var(--blue-deep);
@@ -100,24 +100,24 @@
   font-size: calc(4.4rem * var(--tx));
   max-width: 18ch;
 }
-.arrival__sub {
+.ty-arrival__sub {
   margin-inline: auto;
   max-width: 56ch;
   font-size: var(--body-lg);
   color: rgba(255, 255, 255, 0.82);
   font-weight: 400;
 }
-.ch-arrival .chapter-tag {
+.ty-ch-arrival .chapter-tag {
   color: var(--blue-light);
   margin-bottom: 0;
 }
 /* The eyebrow inherits --blue, which is a mid-blue chosen for white grounds.
    On the navy hero that is barely legible — the arrival chapter is the one
-   place .label sits on a dark ground without a data-theme to catch it. */
-.ch-arrival .label {
+   place .gm-label sits on a dark ground without a data-theme to catch it. */
+.ty-ch-arrival .gm-label {
   color: var(--blue-light);
 }
-.ch-arrival .chapter-tag em {
+.ty-ch-arrival .chapter-tag em {
   color: rgba(255, 255, 255, 0.62);
 }
 
@@ -562,13 +562,13 @@
   color: var(--n-700);
   font-weight: 400;
 }
-.detail a:not(.more) {
+.detail a:not(.gm-more) {
   color: var(--blue-deep);
   font-weight: 600;
   border-bottom: 1px solid var(--n-200);
   transition: border-color 0.3s;
 }
-.detail a:not(.more):hover {
+.detail a:not(.gm-more):hover {
   border-color: var(--blue);
 }
 .hours--light div {
@@ -612,3 +612,7 @@
     height: 340px;
   }
 }
+
+/* Script embeds: layout-inert. In Webflow a script-only HtmlEmbed is a
+   visible div.w-embed — without this it occupies a grid/flex cell. */
+.wz-js { display: none; }

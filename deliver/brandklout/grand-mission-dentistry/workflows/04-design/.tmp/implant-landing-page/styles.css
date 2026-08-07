@@ -45,7 +45,7 @@
 /* ==========================================================================
    CHAPTER 00 — ARRIVAL
    ========================================================================== */
-.ch-arrival {
+.imp-ch-arrival {
   position: relative;
   isolation: isolate;
   background: var(--blue-deep);
@@ -99,15 +99,15 @@
   opacity: 0;
   pointer-events: none;
 }
-.ch-arrival h1 {
+.imp-ch-arrival h1 {
   color: #fff;
   max-width: 15ch;
 }
-.ch-arrival h1 em {
+.imp-ch-arrival h1 em {
   font-style: normal;
   color: var(--blue-light);
 }
-.arrival__sub {
+.imp-arrival__sub {
   font-size: var(--body-lg);
   color: rgba(255, 255, 255, 0.82);
   font-weight: 400;
@@ -142,17 +142,17 @@
   gap: 1.25rem;
   align-content: start;
 }
-.ch-arrival .chapter-tag {
+.imp-ch-arrival .chapter-tag {
   color: var(--blue-light);
   margin-bottom: 0;
 }
 /* The eyebrow inherits --blue, which is a mid-blue chosen for white grounds.
    On the navy hero that is barely legible — the arrival chapter is the one
-   place .label sits on a dark ground without a data-theme to catch it. */
-.ch-arrival .label {
+   place .gm-label sits on a dark ground without a data-theme to catch it. */
+.imp-ch-arrival .gm-label {
   color: var(--blue-light);
 }
-.ch-arrival .chapter-tag em {
+.imp-ch-arrival .chapter-tag em {
   color: rgba(255, 255, 255, 0.62);
 }
 
@@ -288,13 +288,13 @@
 }
 
 /* ---------- quiz steps ---------- */
-.step {
+.gm-step {
   display: none;
   border: 0;
   margin: 0;
   padding: 0;
 }
-.step.is-active {
+.gm-step.is-active {
   display: block;
   animation: stepIn 0.42s var(--ease) both;
 }
@@ -512,11 +512,9 @@
   margin: 0;
   padding: 0;
   display: grid;
-  counter-reset: reason;
   border-top: 1px solid var(--n-200);
 }
 .reason {
-  counter-increment: reason;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.3rem 1rem;
@@ -527,8 +525,8 @@
   opacity: 0.42;
   transition: opacity 0.45s var(--ease), border-color 0.45s var(--ease);
 }
-.reason::before {
-  content: "0" counter(reason);
+.reason__n {
+  font-style: normal;
   grid-row: span 2;
   font-size: calc(0.89rem * var(--tx));
   letter-spacing: 0.14em;
@@ -552,7 +550,7 @@
   opacity: 1;
   border-color: var(--blue-light);
 }
-.reason.is-lit::before {
+.reason.is-lit .reason__n {
   color: var(--blue);
 }
 /* Nothing may be left dimmed, unlit or half-drawn when motion is off. The
@@ -615,16 +613,16 @@
   border-color: var(--blue-light);
   box-shadow: var(--shadow-md);
 }
-.opt .figure {
+.opt .gm-figure {
   border-radius: 0;
   margin-bottom: 1rem;
 }
-.opt .figure img {
+.opt .gm-figure img {
   filter: grayscale(0.55);
   transition: transform 0.8s var(--ease), filter 0.6s var(--ease);
 }
-.opt:hover .figure img,
-.opt.is-centre .figure img {
+.opt:hover .gm-figure img,
+.opt.is-centre .gm-figure img {
   filter: grayscale(0);
   transform: scale(1.05);
 }
@@ -668,7 +666,7 @@
     scroll-snap-align: start;
     width: min(84vw, 380px);
   }
-  .opt .figure img {
+  .opt .gm-figure img {
     filter: none;
   }
 }
@@ -811,7 +809,7 @@
 .ch-invitation .quote figcaption span {
   color: rgba(255, 255, 255, 0.6);
 }
-.closing {
+.imp-closing {
   max-width: 780px;
   margin: clamp(3.5rem, 6vw, 5.5rem) auto 0;
   display: grid;
@@ -819,10 +817,10 @@
   justify-items: center;
   text-align: center;
 }
-.closing h2 {
+.imp-closing h2 {
   color: #fff;
 }
-.closing .lede {
+.imp-closing .lede {
   color: rgba(255, 255, 255, 0.85);
 }
 .closing__actions {
@@ -834,12 +832,16 @@
 }
 /* The chapter is dark, so a ghost button's default ink would paint it
    invisible against its own background. */
-.closing .btn--ghost {
+.imp-closing .btn--ghost {
   color: #fff;
 }
-.closing .btn--ghost::before {
+.imp-closing .btn--ghost::before {
   background: #fff;
 }
-.closing .btn--ghost:hover {
+.imp-closing .btn--ghost:hover {
   color: var(--blue-deep);
 }
+
+/* Script embeds: layout-inert. In Webflow a script-only HtmlEmbed is a
+   visible div.w-embed — without this it occupies a grid/flex cell. */
+.wz-js { display: none; }

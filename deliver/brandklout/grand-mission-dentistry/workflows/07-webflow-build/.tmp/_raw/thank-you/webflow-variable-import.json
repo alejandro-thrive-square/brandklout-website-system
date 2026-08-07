@@ -1,0 +1,181 @@
+{
+  "source": ":root CSS custom properties",
+  "variables": [
+    {
+      "name": "--base",
+      "value": "calc((18 - calc(1920 / 100) * calc((20 - 18) / (calc(2400 / 100) - calc(1920 / 100)))) / 16)"
+    },
+    {
+      "name": "--blue",
+      "value": "#04669c"
+    },
+    {
+      "name": "--blue-deep",
+      "value": "#002241"
+    },
+    {
+      "name": "--blue-ink",
+      "value": "#001525"
+    },
+    {
+      "name": "--blue-light",
+      "value": "#abd6ff"
+    },
+    {
+      "name": "--body",
+      "value": "calc(1.17rem * 0.8292)"
+    },
+    {
+      "name": "--body-lg",
+      "value": "calc(1.35rem * 0.8292)"
+    },
+    {
+      "name": "--brown",
+      "value": "#8c6946"
+    },
+    {
+      "name": "--brown-dark",
+      "value": "#403830"
+    },
+    {
+      "name": "--coefficient",
+      "value": "calc((20 - 18) / (calc(2400 / 100) - calc(1920 / 100)))"
+    },
+    {
+      "name": "--d1",
+      "value": "calc(6.3rem * 0.8292)"
+    },
+    {
+      "name": "--ease",
+      "value": "cubic-bezier(0.22, 1, 0.36, 1)"
+    },
+    {
+      "name": "--font",
+      "value": "\"Montserrat\", system-ui, -apple-system, \"Segoe UI\", Arial, sans-serif"
+    },
+    {
+      "name": "--font-from",
+      "value": "18"
+    },
+    {
+      "name": "--font-to",
+      "value": "20"
+    },
+    {
+      "name": "--green",
+      "value": "#1f7a4d"
+    },
+    {
+      "name": "--gutter",
+      "value": "clamp(1.25rem, 4vw, 4rem)"
+    },
+    {
+      "name": "--h2",
+      "value": "calc(3.51rem * 0.8292)"
+    },
+    {
+      "name": "--h3",
+      "value": "calc(1.53rem * 0.8292)"
+    },
+    {
+      "name": "--label",
+      "value": "calc(0.88rem * 0.8292)"
+    },
+    {
+      "name": "--light",
+      "value": "#fcfcfc"
+    },
+    {
+      "name": "--n-100",
+      "value": "#f2f5f8"
+    },
+    {
+      "name": "--n-200",
+      "value": "#e7ecf1"
+    },
+    {
+      "name": "--n-300",
+      "value": "#ccc"
+    },
+    {
+      "name": "--n-50",
+      "value": "#f7f9fb"
+    },
+    {
+      "name": "--n-500",
+      "value": "#666"
+    },
+    {
+      "name": "--n-700",
+      "value": "#444"
+    },
+    {
+      "name": "--n-900",
+      "value": "#222"
+    },
+    {
+      "name": "--purple",
+      "value": "#6f4885"
+    },
+    {
+      "name": "--r-lg",
+      "value": "24px"
+    },
+    {
+      "name": "--r-md",
+      "value": "8px"
+    },
+    {
+      "name": "--r-sm",
+      "value": "4px"
+    },
+    {
+      "name": "--r-xl",
+      "value": "48px"
+    },
+    {
+      "name": "--script",
+      "value": "\"Great Vibes\", cursive"
+    },
+    {
+      "name": "--section",
+      "value": "clamp(4.5rem, 8.5vw, 9rem)"
+    },
+    {
+      "name": "--shadow-lg",
+      "value": "0 34px 90px rgba(0, 34, 65, 0.22)"
+    },
+    {
+      "name": "--shadow-md",
+      "value": "0 18px 44px rgba(0, 34, 65, 0.12)"
+    },
+    {
+      "name": "--shadow-sm",
+      "value": "0 1px 2px rgba(0, 34, 65, 0.05), 0 6px 18px rgba(0, 34, 65, 0.06)"
+    },
+    {
+      "name": "--shell",
+      "value": "min(1280px, 100% - (2 * clamp(1.25rem, 4vw, 4rem)))"
+    },
+    {
+      "name": "--size",
+      "value": "clamp(84px, 11vw, 116px)"
+    },
+    {
+      "name": "--tx",
+      "value": "0.8292"
+    },
+    {
+      "name": "--vw-from",
+      "value": "calc(1920 / 100)"
+    },
+    {
+      "name": "--vw-to",
+      "value": "calc(2400 / 100)"
+    },
+    {
+      "name": "--white",
+      "value": "#fff"
+    }
+  ]
+}

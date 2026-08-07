@@ -106,6 +106,52 @@ Each component folder carries `final.json` + `PASTE.html` + a README stating:
 - what to do after: ask the agent to patch content over the MCP — never
   re-paste to fix a typo.
 
+## Conversion traps the Grand Mission build hit (2026-08-07)
+
+All fixed in the Grand Mission copy of the toolchain
+(`deliver/brandklout/grand-mission-dentistry/workflows/07-webflow-build/`) —
+the newest converter lives THERE, not in the Dr. Nahlah folder:
+
+1. **Linked stylesheets produce an empty runtime-states artifact.** The state
+   CSS extractor read inline `<style>` blocks only; a design that `<link>`s
+   its CSS shipped no state rules at all, so every JS-toggled class was empty
+   after paste. `write_text_artifacts(..., css=)` now receives the external
+   CSS — pass it.
+2. **A shared kit stylesheet over-collects state CSS.** "Class not in this
+   page's markup" also matches every other page's unused kit rules (the
+   smallest page produced the biggest artifact, 21 KB). An unknown-class rule
+   now ships only when the page's JS names the class in a string literal.
+3. **Token-ladder type systems convert flat.** A fluid root font-size, a
+   `--tx`-style multiplier, or display tokens redefined inside media queries
+   are all expanded at BASE value by the converter, so every band gets the
+   reference-width value (a tablet hero rendered 43% oversized). Run
+   `expand_type_tier.mjs` (evaluates every base font-size at the 7 band
+   widths and appends canonical media overrides) on the combined CSS BEFORE
+   converting, and validate its numbers against the live design at the band
+   widths. Residual: bare rem paddings still drift with the root curve at
+   phone bands (~14%); vw-clamp spacing tokens resolve exactly.
+4. **A materialized pseudo `<div>` inside a `<p>` is invalid HTML** — the
+   parser auto-closes the paragraph, so eyebrows/labels publish EMPTY.
+   `_make_pseudo` emits `<span>` for paragraph/inline hosts now.
+5. **CSS counters (`content: counter()`) cannot convert** — put the numbers
+   in the markup as real elements.
+6. **Check class names against the live site before converting** (`get_styles
+   query:all` → intersect with the design's class attributes). Same-name
+   classes fork `-2` twins per page on paste; rename collisions at the design
+   source. Same for classes shared by name across your OWN pages whose
+   resolved defs differ (build_vocab reports them as `pending`) — page-prefix
+   them; a healthy build converts with 0 pending.
+7. **The shared head/footer layer may exceed 10k.** That only blocks the
+   page-settings UI — the Data API (`data_scripts_tool`) accepts 50k per
+   block, and installing page-level code over the MCP is part of this
+   workflow's prerequisites anyway. Only SECTION EMBEDS must stay under 10k
+   (they go through the Designer's paste path).
+8. **Script-only embeds render as a visible `div.w-embed` in Webflow** (a
+   `<script>` is display:none locally, so local verify cannot see the
+   difference). Class every script embed (`wz-js`) and ship
+   `.wz-js{display:none}` in the page CSS so the wrapper can never occupy a
+   grid/flex cell — and make the simulator render the `w-embed` wrapper too.
+
 ## Gates
 
 - `simulate_paste.mjs` on the payload before anyone pastes — a payload can
