@@ -62,7 +62,7 @@ import { spawn } from 'node:child_process'
 import { tmpdir } from 'node:os'
 import { createServer } from 'node:http'
 import { readFile } from 'node:fs/promises'
-import { extname, join, resolve } from 'node:path'
+import { basename, dirname, extname, join, resolve } from 'node:path'
 
 /* ----------------------------------------------------------------- args */
 function arg(name, fallback = null) {
@@ -429,13 +429,21 @@ const record = (name, pass, detail = '') => {
   process.stdout.write(`${pass ? 'PASS' : 'FAIL'}  ${name}${detail ? `  — ${detail}` : ''}\n`)
 }
 
-const server = BASELINE ? await serve(resolve(BASELINE)) : null
+/* Serve the package's PARENT and navigate into it, rather than serving the
+   package itself. Packages are not self-contained: Mason Park's pages pull
+   `shared/mpd.css` and `shared/mpd.js` from one level ABOVE the package dir.
+   Rooting the server at the package makes that runtime 404, the journey never
+   boots, and the baseline reports zero pins — which used to make every diff
+   check below pass vacuously. Grand Mission's packages keep their assets
+   inside, and those still resolve correctly through the parent. */
+const server = BASELINE ? await serve(dirname(resolve(BASELINE))) : null
+const BASELINE_ENTRY = BASELINE ? `${basename(resolve(BASELINE))}/index.html` : null
 const { send, chrome, ws, net, resetNet } = await connect()
 
 let staging, base
 try {
   staging = await measure(send, resetNet, net, URL_ARG, 'staging')
-  if (server) base = await measure(send, resetNet, net, `http://127.0.0.1:${PORT}/index.html`, 'baseline')
+  if (server) base = await measure(send, resetNet, net, `http://127.0.0.1:${PORT}/${BASELINE_ENTRY}`, 'baseline')
 } finally {
   if (!KEEP) {
     try { ws.close() } catch { /* already gone */ }
@@ -469,6 +477,22 @@ for (const s of staging.scrubs) {
 
 if (base) {
   process.stdout.write(`\n--- diff against ${BASELINE}\n`)
+
+  /* A baseline that never booted makes every check below pass for the wrong
+     reason: `missing` is empty against zero pins, and `staging >= 0 * 0.8` is
+     trivially true. That is the same vacuous-pass this script exists to
+     prevent on the staging side, so it has to be an explicit failure here —
+     otherwise a dead baseline silently certifies anything. Usually it means
+     the package could not load a runtime file (see the parent-dir note above),
+     not that the design is broken. */
+  const baseUsable = base.runtime.gsap && base.pins.length > 0
+  record('baseline is a usable reference', baseUsable,
+    baseUsable
+      ? `${base.pins.length} pins, ${base.runtime.triggers} triggers`
+      : `baseline booted=${base.boot.booted} gsap=${base.runtime.gsap} pins=${base.pins.length}` +
+        ` — the diff below is meaningless; fix the baseline before trusting it` +
+        (base.failed.length ? ` | first failures: ${base.failed.slice(0, 3).join(' | ')}` : ''))
+
   const bIds = (base.pins.map((p) => p.id).filter(Boolean)).sort()
   const sIds = (staging.pins.map((p) => p.id).filter(Boolean)).sort()
   const missing = bIds.filter((i) => !sIds.includes(i))
