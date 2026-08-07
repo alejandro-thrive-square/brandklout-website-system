@@ -10,7 +10,7 @@ Client delivery (via the Brandklout partnership).
 
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-brandklout` | Webflow access for every Brandklout client, this one included. Shared instance — **the site ID under Target Resources is the boundary, not the tool prefix**. | **Registered 2026-08-07, awaiting OAuth.** Authenticated once on the **team** profile, covering all Brandklout clients at once. |
+| `webflow-brandklout` | Webflow access for every Brandklout client, this one included. Shared instance — **the site ID under Target Resources is the boundary, not the tool prefix**. | **LIVE — authenticated on the `team` profile 2026-08-07.** One grant, all Brandklout clients. |
 | `webflow-clientfirst` | Local Client-First conversion helper. Reads files, holds no credentials, makes no network calls. | Always available. |
 
 Partnership-level Asana access is covered by
@@ -25,8 +25,13 @@ hosting, CRM, or ad accounts.
 > Target Resources below and pass it explicitly. Never act on a site the tool defaulted to, listed
 > first, or that merely came up in conversation.
 >
-> **This client has no confirmed site ID yet, so it is read-only.** Discovery via `list_sites` is
-> fine; writing is not, until the ID is confirmed and recorded here and in the
+> **This client is read-only, and now for a stronger reason than "not yet discovered".**
+> `list_sites` on 2026-08-07 against the live grant returned 9 sites and **none of them is Stone's**
+> — there is no site in Brandklout's workspace for this client, so there is no ID to act on. That
+> matches the unconfirmed scope: nothing has been built. Before any Webflow work here, Brandklout
+> must create the site in workspace `63b4b7393e89b78575e9a9bb` and the grant must be
+> **re-authorized ticking every existing client plus Stone** (re-authorization replaces the grant
+> wholesale — a sibling left unticked is silently revoked). Then record the ID here and in the
 > [client site registry](../../docs/mcp-access.md#client-site-registry).
 
 > [!NOTE]

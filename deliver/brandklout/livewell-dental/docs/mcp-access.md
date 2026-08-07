@@ -9,7 +9,7 @@ Client delivery.
 ## Active MCP Servers
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-brandklout` | Site inspection, audit reads, section paste support, component conversion, CMS work, staging publish after confirmation. Shared instance covering all Brandklout clients. | **Registered 2026-08-07, awaiting OAuth** on the `team` profile. |
+| `webflow-brandklout` | Site inspection, audit reads, section paste support, component conversion, CMS work, staging publish after confirmation. Shared instance covering all Brandklout clients. | **LIVE — authenticated on the `team` profile 2026-08-07.** |
 
 The dedicated `webflow-livewell-dental` instance was retired unauthenticated on 2026-08-07. All
 Brandklout clients live in one workspace Brandklout owns, so a per-client instance authorized

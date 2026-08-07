@@ -10,7 +10,7 @@ Client delivery (via the Brandklout partnership).
 
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-brandklout` | Webflow access for every Brandklout client, this one included. Shared instance — **the site ID under Target Resources is the boundary, not the tool prefix**. | **Registered 2026-08-07, awaiting OAuth.** Authenticated once on the **team** profile, covering all Brandklout clients at once. |
+| `webflow-brandklout` | Webflow access for every Brandklout client, this one included. Shared instance — **the site ID under Target Resources is the boundary, not the tool prefix**. | **LIVE — authenticated on the `team` profile 2026-08-07.** One grant, all Brandklout clients. |
 | `webflow-clientfirst` | Local Client-First conversion helper. Reads files, holds no credentials, makes no network calls. | Always available. |
 
 Partnership-level Asana access is covered by
@@ -25,9 +25,9 @@ hosting, CRM, or ad accounts.
 > Target Resources below and pass it explicitly. Never act on a site the tool defaulted to, listed
 > first, or that merely came up in conversation.
 >
-> **This client has no confirmed site ID yet, so it is read-only.** Discovery via `list_sites` is
-> fine; writing is not, until the ID is confirmed and recorded here and in the
-> [client site registry](../../docs/mcp-access.md#client-site-registry).
+> **Site ID confirmed 2026-08-07 via `list_sites`: `6a60bdc0340e5f1784b4d553`.** Writes to that
+> site are now in scope. The site is effectively **empty — one page (Home)** and has no custom
+> domain, so it is the lowest-risk of the Brandklout sites to build into.
 
 > [!NOTE]
 > Build platform is **resolved: Webflow**, confirmed 2026-08-05 (see
@@ -39,8 +39,14 @@ hosting, CRM, or ad accounts.
 ## Target Resources
 - **Asana parent task**: `1217040406855582` (workspace `1210572425689866`)
 - **Live site**: **https://bestdentistinkatytx.com/** — found 2026-08-05.
-  `masonparkdental.com` 302-redirects to it. Public, read-only research only.
-- **Staging / platform account**: none.
+  `masonparkdental.com` 302-redirects to it. Public, read-only research only. **This is not the
+  Webflow site below** — it is the client's existing site on another platform.
+- **Webflow site**: **Mason Park Dental**, site id `6a60bdc0340e5f1784b4d553`, workspace
+  `63b4b7393e89b78575e9a9bb`. Confirmed via `list_sites` 2026-08-07.
+- **Staging URL**: https://mason-park-dental.webflow.io (live, returns 200)
+- **Existing pages**: **1** — Home (`6a60bdc3340e5f1784b4d5e3`). No custom domain. The three
+  landing pages (`invisalign`, `new-patient-special`, `thank-you`) do **not** exist yet and must be
+  created with `create_page`.
 - **Online booking**: `https://www.flexbook.me/masonpark/1` (FlexBook, linked from the client's own
   site). Public link only - no account, no credentials, nothing written to it.
 

@@ -10,7 +10,7 @@ Client delivery (via the Brandklout partnership).
 
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-brandklout` | Webflow access for every Brandklout client, this one included. Shared instance — **the site ID under Target Resources is the boundary, not the tool prefix**. | **Registered 2026-08-07, awaiting OAuth.** Authenticated once on the **team** profile, covering all Brandklout clients at once. |
+| `webflow-brandklout` | Webflow access for every Brandklout client, this one included. Shared instance — **the site ID under Target Resources is the boundary, not the tool prefix**. | **LIVE — authenticated on the `team` profile 2026-08-07.** One grant, all Brandklout clients. |
 | `webflow-clientfirst` | Local Client-First conversion helper. Reads files, holds no credentials, makes no network calls. | Always available. |
 
 Partnership-level Asana access is covered by
@@ -25,9 +25,9 @@ hosting, CRM, or ad accounts.
 > Target Resources below and pass it explicitly. Never act on a site the tool defaulted to, listed
 > first, or that merely came up in conversation.
 >
-> **This client has no confirmed site ID yet, so it is read-only.** Discovery via `list_sites` is
-> fine; writing is not, until the ID is confirmed and recorded here and in the
-> [client site registry](../../docs/mcp-access.md#client-site-registry).
+> **Site ID confirmed 2026-08-07 via `list_sites`: `698111847e9608eb30ee21c6`.** Writes to that
+> site are now in scope. This is a **large live site — 303 pages** on a production domain, so scope
+> every call to a specific page ID as well; do not run site-wide mutations.
 
 > [!NOTE]
 > Build platform is **resolved: Webflow** (see [ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md)).
@@ -40,8 +40,23 @@ hosting, CRM, or ad accounts.
 
 ## Target Resources
 - **Asana parent task**: `1217040406855578` (workspace `1210572425689866`)
-- **Live site**: **https://grandmissiondentistry.com** — Webflow, site id `698111847e9608eb30ee21c6`
-  (from the public CSS host; we have no API access to it).
+- **Live site**: **https://grandmissiondentistry.com** — Webflow, site id `698111847e9608eb30ee21c6`,
+  **confirmed via `list_sites` 2026-08-07**. API access is live (`webflow-brandklout`).
+- **Staging URL**: https://grandmissiondentistry.webflow.io
+- **Landing-page destinations** — these three pages **already exist and already hold a build**
+  (created 2026-08-04, last updated 2026-08-05), matching the three local packages 1:1:
+
+  | Local package | Webflow page | Page ID | Live? |
+  | :--- | :--- | :--- | :--- |
+  | `implant-landing-page` | `implant-ai` | `6a724b6977f9b0019d2a03f8` | no — 404 on staging and production |
+  | `cosmetic-landing-page` | `cosmetic-ai` | `6a723ad5534774f35f17d119` | no — 404 on staging and production |
+  | `thank-you-landing-page` | `thank-u-landing-ai` | `6a7268a862a728c1cd4df73b` | no — 404 on staging and production |
+
+  All three are `draft: false` (so they publish with the site) but the site has not been published
+  since they were created, which is why they 404. **What they contain is the superseded band-stack
+  build** — `iai_section-tint` / `iai_section-white` / `cai_section-light` / `cai_section-dark`
+  alternating, the exact architecture this campaign replaces. They are destinations to overwrite,
+  not work to preserve.
 - **Previous landing pages**: GoHighLevel, location id `0e2uXXYZTFpKGnacy2NF`, GTM `GTM-TGSMNX3`,
   built by the outgoing ad company "Digital Presence Matters". Read-only observation from the
   attachments; no account access.
