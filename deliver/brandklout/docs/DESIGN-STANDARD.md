@@ -159,8 +159,10 @@ or The Invitation where the objection actually lands, not as its own band.
 5. **Continuity devices** — reading progress, chapter tags, theme shifts across the arc.
 6. **Interaction on every interactive element** — magnetic or cursor-aware CTAs, hover states with
    real transitions, animated accordions/tabs/sliders.
-7. **Considered typography** — scale, weight contrast, and rhythm doing visible work. Fluid
-   `clamp()` sizing.
+7. **Considered typography** — scale, weight contrast, and rhythm doing visible work, sized off the
+   **fluid root font-size** (see [fluid-root.md](../../process/04-design/fluid-root.md)). Type,
+   spacing and radii in `rem`; **no `px` font-sizes and no `clamp()` font-sizes** — the fluid root
+   already does that job, and `clamp()` on top of it scales twice.
 8. **A signature moment** — one thing per page a visitor would remember and describe.
 9. **`prefers-reduced-motion` honoured throughout.** Non-negotiable, medical audience.
 10. **Mobile is designed, not degraded.** Most paid dental traffic is mobile; motion must survive.
@@ -275,6 +277,7 @@ A page is not done when the sections exist. It is done when **all** of these hol
 7. Screenshots captured at all six breakpoints and **reviewed**, with responsive issues fixed
 8. Zero horizontal overflow at 360 and 390
 9. Offer, phone and form reachable at every scroll depth on mobile
+10. **Fluid root installed and clean** — `node scripts/fluid-root.mjs --check <package>` exits 0
 
 The one-sentence test: **would a visitor describe this as a place they went, or a page they read?**
 If it reads as a stack of cards with animation on it, it fails — rebuild the architecture, keep the

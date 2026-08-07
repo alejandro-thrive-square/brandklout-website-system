@@ -13,6 +13,12 @@ Produce the first approved design draft that can be reproduced 1:1 in Webflow. E
 
 This module uses the selected design-system package initialized during `00-client-delivery-initialization`. It is required when Deliver owns design creation or redesign, and skipped when the signed offer is development-only from approved design files.
 
+## Non-Negotiable Foundations
+- **Fluid root font-size**: every site scales from one fluid `html { font-size }`, so every `rem`
+  is viewport-relative. Mandatory on all builds. Generate with `node scripts/fluid-root.mjs`, and
+  size type, spacing and radii in `rem` — never `px`, and never `clamp()` for font-size. Full rules
+  and the approved scale: [fluid-root.md](./fluid-root.md).
+
 ## Design-System Source
 - The reusable source of truth lives at `deliver/process/design-system-library/`.
 - Sales discovery selects one approved reference from that library.
@@ -32,29 +38,32 @@ All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.t
 1. Read the approved final wireframes, prepared graphic resources, project overview, and initialized selected design-system package.
 2. Review the copied reference package in `00-client-delivery-initialization/.tmp/design-system/`.
 3. Merge client brand guidelines with the selected reference package into a custom token set.
-4. Document the style direction rationale.
-5. **Output**: `.tmp/style-direction.md`, `.tmp/design-tokens.json`
+4. Install the fluid root snippet (`node scripts/fluid-root.mjs --css`) as the first rule of the
+   project's shared stylesheet, and express the token set in `rem` so it inherits the fluid scale.
+5. Document the style direction rationale.
+6. **Output**: `.tmp/style-direction.md`, `.tmp/design-tokens.json`
 
 ### Phase 2A: Claude Design Path
-6. Compose self-contained HTML/CSS/JS prototypes for each approved page template.
-7. Create a prototype manifest listing page composition, sections, and animations.
-8. Export the first-draft HTML/CSS/JS package into `.tmp/final-design/`.
-9. Convert the HTML package into a Figma file through the approved HTML-to-Figma workflow.
-10. Publish the first-draft design package to Vercel for client review.
-11. **Output**: `.tmp/prototypes/*.html`, `.tmp/prototype-manifest.json`, `.tmp/final-design/`, `.tmp/figma-conversion-log.json`, `.tmp/vercel-preview-url.txt`
+7. Compose self-contained HTML/CSS/JS prototypes for each approved page template.
+8. Create a prototype manifest listing page composition, sections, and animations.
+9. Export the first-draft HTML/CSS/JS package into `.tmp/final-design/`.
+10. Convert the HTML package into a Figma file through the approved HTML-to-Figma workflow.
+11. Publish the first-draft design package to Vercel for client review.
+12. **Output**: `.tmp/prototypes/*.html`, `.tmp/prototype-manifest.json`, `.tmp/final-design/`, `.tmp/figma-conversion-log.json`, `.tmp/vercel-preview-url.txt`
 
 ### Phase 2B: Figma From Scratch Path
-6. Create first-draft Figma designs directly from the tokens, wireframes, and graphic resources.
-7. Apply auto-layout, components, constraints, and responsive breakpoints.
-8. Publish a reviewable static package to Vercel so the client receives both Figma and Vercel review links.
-9. **Output**: Figma file/link plus `.tmp/figma-conversion-log.json` and `.tmp/vercel-preview-url.txt`
+7. Create first-draft Figma designs directly from the tokens, wireframes, and graphic resources.
+8. Apply auto-layout, components, constraints, and responsive breakpoints.
+9. Publish a reviewable static package to Vercel so the client receives both Figma and Vercel review links.
+10. **Output**: Figma file/link plus `.tmp/figma-conversion-log.json` and `.tmp/vercel-preview-url.txt`
 
 ### Phase 3: Review Handoff
-12. Document component specifications, CMS bindings, and responsive behavior.
-13. Capture screenshots across breakpoints and run a token-consistency audit.
-14. Send the Figma link and Vercel review URL to the client for first-round feedback.
-15. Record the selected design path and move approved corrections into `05-design-revisions`.
-16. **Output**: `.tmp/component-spec.json`, `.tmp/screenshots/`, `.tmp/token-violations.json`, `deliver/[client-name]/docs/design-draft-review.md`
+13. Document component specifications, CMS bindings, and responsive behavior.
+14. Capture screenshots across breakpoints and run a token-consistency audit.
+15. Gate the package on the fluid root: `node scripts/fluid-root.mjs --check <package>` must exit 0.
+16. Send the Figma link and Vercel review URL to the client for first-round feedback.
+17. Record the selected design path and move approved corrections into `05-design-revisions`.
+18. **Output**: `.tmp/component-spec.json`, `.tmp/screenshots/`, `.tmp/token-violations.json`, `deliver/[client-name]/docs/design-draft-review.md`
 
 ## Offer-Specific Adaptations
 - **Development from Scratch**: Required after approved wireframes and graphic resources. Produces the first draft, Figma output, and required Vercel review URL before `05-design-revisions`.
