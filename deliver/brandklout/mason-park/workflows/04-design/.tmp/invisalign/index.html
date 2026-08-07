@@ -115,7 +115,7 @@
     .ch-arrival .arr-cue {
       display: flex; align-items: center; gap: 0.7rem;
       margin-top: clamp(1.75rem, 3vw, 2.5rem);
-      font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-soft);
+      font-size: var(--t-eyebrow); letter-spacing: 0.2em; text-transform: uppercase; color: var(--fg-soft);
     }
     .ch-arrival .arr-cue i {
       display: block; width: 1px; height: 38px;
@@ -186,7 +186,7 @@
 
         <!-- Step 1 — low-commitment intent question -->
         <div class="step-panel active">
-          <p style="font-family:var(--display);font-weight:600;font-size:1.0625rem;margin-bottom:0.9rem;">
+          <p style="font-family:var(--display);font-weight:600;font-size:var(--t-body);margin-bottom:0.9rem;">
             When would you like to start?
           </p>
           <div class="choices">
@@ -433,11 +433,16 @@
       transition: border-color 0.5s var(--ease);
     }
     .ch-correction .cor-card .no {
-      font-family: var(--display); font-size: clamp(2rem, 3.6vw, 3rem);
+      font-family: var(--display); font-size: 3rem;          /* 48 @1440 */
       font-weight: 700; color: var(--accent-lg); line-height: 0.9;
       opacity: 0.4; transition: opacity 0.45s var(--ease);
     }
-    .ch-correction .cor-card p { color: var(--fg-body); font-size: 0.9375rem; }
+    /* The root is flat from 479 to 1440, so this numeral would hold 48px onto
+       a tablet. Steps trace the clamp it replaces; below 479 the root's own
+       ramp takes over. Bracketed px are the old rendering. */
+    @media (max-width: 1279px) { .ch-correction .cor-card .no { font-size: 2.35rem; } }  /* 37.6 (36.9 @1024) */
+    @media (max-width: 991px)  { .ch-correction .cor-card .no { font-size: 2.1rem; } }   /* 33.6 (35.7 @991 · 32 @768) · 28.9 @390 (32) */
+    .ch-correction .cor-card p { color: var(--fg-body); font-size: var(--t-ui); }
     .ch-correction .cor-bar {
       position: absolute; left: var(--gutter); right: var(--gutter);
       bottom: clamp(1.5rem, 4vw, 2.75rem);
@@ -450,7 +455,7 @@
     .ch-correction .cor-foot {
       position: absolute; left: var(--gutter); right: var(--gutter);
       bottom: clamp(0.5rem, 2vw, 1rem);
-      font-size: 0.875rem; color: var(--fg-soft);
+      font-size: var(--t-small); color: var(--fg-soft);
     }
     @media (max-width: 719px) { .ch-correction .cor-card { width: 76vw; } }
   </style>
@@ -597,12 +602,14 @@
     }
     .ch-inclusion .ledger-figure {
       font-family: var(--display);
-      font-size: clamp(3rem, 2rem + 5vw, 5.25rem);
+      font-size: 5.25rem;                                    /* 84 @1440, and the old clamp was already capped at 84 from 1040 up */
       font-weight: 700; line-height: 0.9; letter-spacing: -0.04em;
       color: var(--fg); font-variant-numeric: tabular-nums;
     }
+    @media (max-width: 991px) { .ch-inclusion .ledger-figure { font-size: 4.6rem; } }  /* 73.6 (81.6 @991 · 70.4 @768) */
+    @media (max-width: 767px) { .ch-inclusion .ledger-figure { font-size: 4rem; } }    /* 64 @767 (70.4) · 55 @390 (51.5) */
     .ch-inclusion .ledger-state {
-      margin-top: 0.75rem; font-size: 0.875rem; letter-spacing: 0.14em;
+      margin-top: 0.75rem; font-size: var(--t-eyebrow); letter-spacing: 0.14em;
       text-transform: uppercase; font-weight: 700; color: var(--accent);
       min-height: 1.2em;
     }
@@ -617,7 +624,7 @@
     }
     .ch-inclusion .ledger-steps {
       display: flex; justify-content: space-between; margin-top: 0.6rem;
-      font-size: 0.72rem; letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-soft);
+      font-size: var(--t-eyebrow); letter-spacing: 0.1em; text-transform: uppercase; color: var(--fg-soft);
     }
     .ch-inclusion .ledger-steps span.on { color: var(--accent); font-weight: 700; }
 
@@ -642,7 +649,7 @@
 
     .ch-inclusion .inc-support { display: grid; gap: 0.9rem; margin-top: clamp(1.5rem, 3vw, 2rem); }
     @media (min-width: 560px) { .ch-inclusion .inc-support { grid-template-columns: 1fr 1fr; } }
-    .ch-inclusion .inc-support .tile p { font-size: 0.875rem; }
+    .ch-inclusion .inc-support .tile p { font-size: var(--t-small); }
     .ch-inclusion .inc-support img { height: 22px; width: auto; margin-bottom: 0.5rem; }
   </style>
 
@@ -693,14 +700,14 @@
 
         <div class="inc-support">
           <div class="tile">
-            <h3 style="font-size:1rem;">Insurance</h3>
+            <h3 style="font-size:var(--t-body);">Insurance</h3>
             <p>Many plans include benefits that apply to Invisalign<sup>&reg;</sup>, and our team can
               help verify your coverage. Where you have prepaid, insurance payments are reimbursed
               back to you.</p>
           </div>
           <div class="tile">
             <img src="../shared/img/cherry.svg" alt="Cherry" width="110" height="28" loading="lazy">
-            <h3 style="font-size:1rem;">Payment plans</h3>
+            <h3 style="font-size:var(--t-body);">Payment plans</h3>
             <p>In-office and third-party plans are available, including Cherry — 0% APR with no hard
               credit check, so you can pay monthly.</p>
           </div>
@@ -808,12 +815,12 @@
       border-top: 1px solid var(--line-warm);
     }
     .ch-provider .prov-sig b { display: block; font-family: var(--display); font-weight: 600; font-size: 1.15rem; }
-    .ch-provider .prov-sig span { font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
+    .ch-provider .prov-sig span { font-size: var(--t-eyebrow); letter-spacing: 0.16em; text-transform: uppercase; color: var(--accent); }
     .ch-provider .prov-why { margin-top: clamp(2rem, 4vw, 3rem); }
     .ch-provider .why-list { display: grid; gap: 0; margin-top: 1rem; }
     .ch-provider .why-list li {
       display: grid; grid-template-columns: auto 1fr; gap: 0.85rem; align-items: baseline;
-      padding-block: 0.8rem; border-top: 1px solid var(--line); color: var(--fg-body); font-size: 0.9375rem;
+      padding-block: 0.8rem; border-top: 1px solid var(--line); color: var(--fg-body); font-size: var(--t-ui);
     }
     .ch-provider .why-list li:last-child { border-bottom: 1px solid var(--line); }
     .ch-provider .why-list i { width: 5px; height: 5px; border-radius: 50%; background: var(--rule); display: block; }
@@ -931,9 +938,11 @@
       margin-top: 1.1rem;
     }
     .ch-proof .proof-score b {
-      font-family: var(--display); font-size: clamp(1.5rem, 3vw, 2.25rem); font-weight: 700;
+      font-family: var(--display); font-size: 2.25rem; font-weight: 700;   /* 36 @1440 */
       color: var(--fg); font-variant-numeric: tabular-nums;
     }
+    @media (max-width: 1279px) { .ch-proof .proof-score b { font-size: 1.95rem; } }  /* 31.2 (30.7 @1024) */
+    @media (max-width: 991px)  { .ch-proof .proof-score b { font-size: 1.6rem; } }   /* 25.6 (29.7 @991 · 24 @768) · 22 @390 (24) */
     .ch-proof .accred {
       margin-top: clamp(3rem, 6vw, 4.5rem);
       padding-top: clamp(2rem, 4vw, 3rem);

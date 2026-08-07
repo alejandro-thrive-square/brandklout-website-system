@@ -100,6 +100,40 @@ Do not swap `clamp(3rem, 7vw, 5.2rem)` for an arbitrary `rem`. Pick the value th
 rendered size at 1440px** (root = 16px, so `rem = px / 16`), then verify the extremes at 390 and
 1920 still read correctly and adjust the *scale*, not the individual declaration.
 
+> [!WARNING]
+> **Removing a `clamp()` is not a no-op in the flat band.** The "mid-range is unchanged" promise
+> above holds for a design already sized in plain `rem`. A `clamp()` with a `vw` term was *never*
+> flat across 479–1440 — a `clamp(2.125rem, 1.6rem + 2.4vw, 3.75rem)` h1 ran 60px at 1440 down to
+> 37px at 479. Replace it with the plain `rem` that matches 1440 and every headline holds its full
+> desktop size onto a tablet. **The steps the `clamp()` was providing have to be re-authored as `px`
+> media queries.** Budget for this: it is the bulk of a retrofit, not a footnote.
+
+**Split the scale in two.** The two ends of the curve pull in opposite directions, and one value per
+token cannot serve both:
+
+| | Below 479 (root shrinks to 12px) | 479–1440 (root flat at 16px) |
+| :--- | :--- | :--- |
+| **Reading** — body, meta, labels, buttons | Step **up**. Legibility floors are absolute: a 14px caption becomes 11.4px at 360. | Leave alone. Already correct. |
+| **Display** — h1, h2, statement, price | Leave alone. The root's own ramp lands within a few percent of the old mobile rendering. | Step **down**, replacing the `clamp()` curve. |
+
+Two consequences worth knowing before you start:
+
+- **Override tokens, not elements.** Custom properties resolve at use time, so a `:root` override
+  inside a media query works from anywhere in the file. An *element* override does not — the base
+  rule further down has equal specificity and wins on order. Where an element genuinely needs its
+  own override (a form input held at 16px for the iOS zoom guard, say), put it **immediately after
+  the rule it must beat**, not up with the tokens.
+- **Anchor the mobile values at 360, not 390.** 390 is the width everyone quotes, but 360 is
+  narrower and is what the QA pass captures. Sizing against 390 leaves body copy at ~15.4px on a
+  360 phone.
+
+The visible cost of the reading step-up is a jump at the 479/480 boundary — around 20% on reading
+type. Put it at **479**, matching the scale's own segment boundary and Webflow's mobile-portrait
+breakpoint: any narrower breakpoint leaves a band where the root has already fallen but the
+compensation has not kicked in. Check the boundary by eye during QA. It reads as deliberate when
+display type does *not* jump with it — headlines the same size on both sides, body copy larger on
+the phone side, which is exactly what a reader expects.
+
 ## Install
 
 Preferred: emit with `--css` into the project's **shared stylesheet**, as the first rule, before any
@@ -126,6 +160,17 @@ font-size, and `rem`-based media queries.
 The static gate cannot see rendering. Also confirm during responsive QA that computed
 `document.documentElement` font-size matches `--verify` at each captured breakpoint, and that the
 479/480 boundary looks deliberate.
+
+Two runtime checks are worth copying rather than re-deriving. Reference implementations:
+`deliver/brandklout/mason-park/workflows/08-qa/.tmp/root-proof.mjs` and `pin-fit.mjs`.
+
+- **Root proof.** Read the computed root at each breakpoint and compare it to `rootPxAt()` imported
+  from `scripts/fluid-root.mjs`, so the table and the browser can never drift apart. Assert the
+  page actually loaded *first*: `about:blank` reports a perfectly plausible **16px root** and will
+  pass every root assertion you write. Probe a real element and fail on `null`.
+- **Pin fit.** A scene that is `100svh` tall always reports `scrollHeight === clientHeight`, so that
+  comparison proves nothing. Measure the bounding boxes of its visible descendants against the
+  scene's own box, at 1920 and 2400, where its contents are 12.5% and 25% larger.
 
 ## Version Control
 

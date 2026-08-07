@@ -19,6 +19,7 @@
 
 import fs from 'node:fs'
 import path from 'node:path'
+import { fileURLToPath } from 'node:url'
 
 /**
  * The house scale. Each segment is [screenWidthPx, rootFontPx] at its two ends.
@@ -166,20 +167,25 @@ function check (targets) {
   return problems.length === 0 && installed === htmls.length
 }
 
-const argv = process.argv.slice(2)
-const cfgIdx = argv.indexOf('--config')
-const scale = cfgIdx !== -1 ? JSON.parse(fs.readFileSync(argv[cfgIdx + 1], 'utf8')) : HOUSE_SCALE
+/* Only run the CLI when invoked directly. Without this, importing `rootPxAt`
+   to check a real browser against the table prints the whole <style> block into
+   the importer's output. */
+if (process.argv[1] && path.resolve(process.argv[1]) === fileURLToPath(import.meta.url)) {
+  const argv = process.argv.slice(2)
+  const cfgIdx = argv.indexOf('--config')
+  const scale = cfgIdx !== -1 ? JSON.parse(fs.readFileSync(argv[cfgIdx + 1], 'utf8')) : HOUSE_SCALE
 
-if (argv.includes('--check')) {
-  const targets = argv.slice(argv.indexOf('--check') + 1).filter((a) => !a.startsWith('--'))
-  process.exit(check(targets.length ? targets : ['.']) ? 0 : 1)
-} else if (argv.includes('--verify')) {
-  console.log(`${scale.name} — rendered root font-size\n`)
-  for (const w of [320, 390, 479, 480, 768, 991, 1280, 1440, 1920, 2400, 2560]) {
-    console.log(`  ${String(w).padStart(4)}px viewport -> ${rootPxAt(w, scale).toFixed(2)}px root`)
+  if (argv.includes('--check')) {
+    const targets = argv.slice(argv.indexOf('--check') + 1).filter((a) => !a.startsWith('--'))
+    process.exit(check(targets.length ? targets : ['.']) ? 0 : 1)
+  } else if (argv.includes('--verify')) {
+    console.log(`${scale.name} — rendered root font-size\n`)
+    for (const w of [320, 390, 479, 480, 768, 991, 1280, 1440, 1920, 2400, 2560]) {
+      console.log(`  ${String(w).padStart(4)}px viewport -> ${rootPxAt(w, scale).toFixed(2)}px root`)
+    }
+  } else if (argv.includes('--css')) {
+    process.stdout.write(generate(scale))
+  } else {
+    process.stdout.write('<style>\n' + generate(scale) + '</style>\n')
   }
-} else if (argv.includes('--css')) {
-  process.stdout.write(generate(scale))
-} else {
-  process.stdout.write('<style>\n' + generate(scale) + '</style>\n')
 }

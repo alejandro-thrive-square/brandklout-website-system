@@ -115,7 +115,7 @@
     .ch-received .ref-line {
       display: inline-block; margin-top: 1.5rem; padding: 0.5rem 1.1rem;
       border: 1px solid var(--line); border-radius: 999px;
-      font-size: 0.875rem; color: var(--fg-soft);
+      font-size: var(--t-small); color: var(--fg-soft);
     }
   </style>
 
@@ -200,19 +200,23 @@
       .ch-fasttrack .call-box { grid-template-columns: minmax(0, 1fr) auto; text-align: left; gap: 2.5rem; }
     }
     .ch-fasttrack .urgency {
-      display: inline-block; font-family: var(--display); font-size: 0.75rem; font-weight: 700;
+      display: inline-block; font-family: var(--display); font-size: var(--t-eyebrow); font-weight: 700;
       letter-spacing: 0.16em; text-transform: uppercase; color: var(--white);
       background: var(--sand-deep); padding: 0.3rem 0.75rem; border-radius: 999px; margin-bottom: 0.9rem;
     }
     .ch-fasttrack .big-number {
-      font-family: var(--display); font-size: clamp(2rem, 1.3rem + 3vw, 3rem);
+      font-family: var(--display); font-size: 3rem;          /* 48 @1440, and the old clamp was already capped at 48 from 1291 up */
       font-weight: 700; letter-spacing: -0.03em; line-height: 1; color: var(--ink);
       display: inline-block; margin-top: 0.35rem;
     }
+    /* This is the phone number — the only job left on this page — so it is
+       stepped rather than left to run wide on a small screen. */
+    @media (max-width: 991px) { .ch-fasttrack .big-number { font-size: 2.8rem; } }  /* 44.8 (48 @991 · 43.8 @768) */
+    @media (max-width: 767px) { .ch-fasttrack .big-number { font-size: 2.4rem; } }  /* 38.4 @767 (43.8) · 33 @390 (32.5) */
     .ch-fasttrack .big-number:hover { color: var(--sand-deep); }
     .ch-fasttrack .open-state {
       display: flex; align-items: center; justify-content: center; gap: 0.5rem;
-      font-size: 0.875rem; color: var(--fg-body); margin-top: 0.85rem;
+      font-size: var(--t-small); color: var(--fg-body); margin-top: 0.85rem;
     }
     @media (min-width: 860px) { .ch-fasttrack .open-state { justify-content: flex-start; } }
     .ch-fasttrack .open-dot {
@@ -289,11 +293,11 @@
     .ch-next .next-dot {
       width: 24px; height: 24px; border-radius: 50%; flex: none;
       border: 2px solid var(--line); background: var(--bg-2);
-      display: grid; place-items: center; font-size: 0.75rem; font-weight: 700;
+      display: grid; place-items: center; font-size: var(--t-eyebrow); font-weight: 700;
       font-family: var(--display); color: var(--fg-soft);
     }
     .ch-next .next-step h3 { margin-bottom: 0.4rem; }
-    .ch-next .next-step p { color: var(--fg-body); font-size: 0.9375rem; max-width: 52ch; }
+    .ch-next .next-step p { color: var(--fg-body); font-size: var(--t-ui); max-width: 52ch; }
     @media (min-width: 760px) {
       .ch-next .next-spine { left: 0; right: 0; top: 11px; bottom: auto; width: auto; height: 2px; }
       .ch-next .next-spine i { transform: scaleX(0); transform-origin: left; }
@@ -441,7 +445,7 @@
         <h2>Where to find us.</h2>
 
         <div class="card card--flat" style="margin-top:1.5rem;">
-          <h3 style="font-size:1rem;">Mason Park Dental of Katy</h3>
+          <h3 style="font-size:var(--t-body);">Mason Park Dental of Katy</h3>
           <p class="muted" style="margin-top:0.5rem;">
             21830 Kingsland Blvd #104A<br>Katy, TX 77450
           </p>
@@ -459,7 +463,7 @@
         </div>
 
         <div class="card card--flat" style="margin-top:1rem;">
-          <h3 style="font-size:1rem;">Office hours</h3>
+          <h3 style="font-size:var(--t-body);">Office hours</h3>
           <ul class="hours-list small" id="findHours" style="margin-top:0.75rem;color:var(--fg-body);">
             <li data-day="1"><span>Monday</span><span>9:00 am – 6:00 pm</span></li>
             <li data-day="2"><span>Tuesday</span><span>8:00 am – 5:00 pm</span></li>
