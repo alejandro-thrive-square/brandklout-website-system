@@ -118,6 +118,14 @@ rendered size at 1440px** (root = 16px, so `rem = px / 16`), then verify the ext
 > 479–1440 — i.e. it was pinned to its `min` or `max` throughout. Body copy and small labels usually
 > qualify (`clamp(.95rem, 1vw, 1.04rem)` is 15.2px at every width up to 1520). Display type
 > essentially never does.
+>
+> A second worked example, because the two ends bind in *opposite* directions and that is what
+> makes a single value impossible. Grand Mission's hero at `clamp(2.9rem, 7vw, 6.6rem)` rendered
+> 46px at 390 and 101px at 1440 — a 2.2x viewport-proportional ramp, against the root's own 0.86x.
+> Set to the 1440-preserving `6.3rem`, the 1440 view is exact but a 768 tablet gets a 101px
+> headline, which measured turned a 3-line hero into 5 lines and pushed the offer box and proof
+> row below the fold. Set low enough for 768 and the 1440 hero loses a third of its size and stops
+> out-ranking the section headings.
 
 ### Stepping display type without `clamp()`
 
@@ -156,6 +164,23 @@ Two rules keep this honest:
   produces a step up at the breakpoint. Only the text group needs that tier, to stop body copy
   following the root down. Verify the seam directly: measure the rendered size at 479 and 480 and
   require the largest step to be ~0%.
+
+#### Choosing the step values — measure the ceiling, never estimate it
+
+Pick each step against a *measured* overflow ceiling, not a glyph-table estimate. The binding case is
+always the **single longest word** in a headline, because a grid item defaults to `min-width: auto`
+and refuses to shrink below it. Measure by setting the token live and reading the wrapper's
+`scrollWidth`:
+
+```js
+document.documentElement.style.setProperty('--d1', candidate + 'rem')
+shell.scrollWidth - shell.clientWidth   // 0 means it fits
+```
+
+> [!WARNING]
+> **`body { overflow-x: hidden }` — which most of our kits set — makes a document-level overflow**
+> **check report nothing while the text is silently clipped.** Measure the wrapper, not the document,
+> or the page will pass QA with a headline running off the side of a phone.
 
 ## Install
 

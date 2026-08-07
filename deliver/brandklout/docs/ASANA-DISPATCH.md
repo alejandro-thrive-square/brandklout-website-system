@@ -16,7 +16,7 @@ parallel agents can each take one client without colliding.
 
 | Client | Folder | Asana parent task | Pages / scope | Due | Folder status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Grand Mission Dentistry | [`grand-mission-dentistry/`](../grand-mission-dentistry/docs/project-overview.md) | `1217040406855578` | 3 landing pages | 2026-08-05 | **Created 2026-08-05** |
+| Grand Mission Dentistry | [`grand-mission-dentistry/`](../grand-mission-dentistry/docs/project-overview.md) | `1217040406855578` | 3 landing pages | 2026-08-05 | **Intake done 2026-08-05** — attachments, brand tokens, 48 assets; design next |
 | Arvada Dental Center & Implants | [`arvada-dental-center/`](../arvada-dental-center/docs/project-overview.md) | `1217040406855586` | 6 landing pages | 2026-08-05 | **Created 2026-08-05** |
 | Mason Park Dental | [`mason-park/`](../mason-park/docs/project-overview.md) | `1217040406855582` | 3 landing pages | 2026-08-05 | Scaffolded 2026-08-05 (was a loose HTML file) |
 | Dr. Esam Nahlah | [`dr-nahlah/`](../dr-nahlah/docs/project-overview.md) | `1216611404338509` | Research + dev assignment | 2026-08-05 | Pre-existing |
@@ -109,6 +109,7 @@ than per-client direction:
 - https://start.smartarchesdental.com/?step=start
 - https://novismilerogers.com/
 
+
 Grand Mission and Mason Park note *"Attached are the originals from the other Ad company. Use it as
 a reference point."* **Those attachments are now downloaded** (2026-08-06) — run
 [`asana-context.mjs`](../scripts/README.md#getting-the-real-brief--asana-contextmjs) and read
@@ -125,6 +126,14 @@ there are none.
 | Arvada | README + full LP + schema | Client site is `arvadadentalcenter.com`; phone, address, 4 named doctors, financing tiers |
 | Mason Park | 2 HTML originals | The loose `mpd-invisalign-lp.html` at the client root is byte-identical to the attachment — a vendor original, **not** our deliverable |
 | Dr. Nahlah, Stone | none | Confirmed empty |
+
+> [!TIP]
+> Before designing anything, also find the client's **own live site** — none of these Asana tasks
+> record it. Grand Mission's turned out to be a modern Webflow site whose `:root` CSS variables
+> are the authoritative brand palette and type, and whose pages carry current offers that
+> **contradict** the older attached landing pages. A web search on practice name + address found it
+> in one query.
+
 
 Recurring page archetypes across clients — build these once as a reusable pattern rather than five
 times from scratch:

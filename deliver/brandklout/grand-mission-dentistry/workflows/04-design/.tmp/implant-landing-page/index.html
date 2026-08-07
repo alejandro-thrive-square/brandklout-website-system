@@ -1,0 +1,907 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Dental Implants in Richmond, TX | Grand Mission Dentistry</title>
+    <meta
+      name="description"
+      content="Replace a missing tooth permanently with Dr. William Sung, DMD at Grand Mission Dentistry in Richmond, TX. Free consultation, most PPO insurance accepted, easy financing available."
+    />
+    <meta name="robots" content="noindex" />
+    <link rel="icon" href="data:," />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Montserrat:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="assets/kit.css" />
+    <link rel="stylesheet" href="styles.css" />
+
+    <!-- GSAP loads here; plugins are registered at the END of body. Registering
+         them in <head> leaves ScrollTrigger half-initialised and ScrollSmoother
+         dies silently — the page just feels flat. -->
+    <script src="assets/gsap/gsap.min.js"></script>
+    <script src="assets/gsap/ScrollTrigger.min.js"></script>
+    <script src="assets/gsap/ScrollToPlugin.min.js"></script>
+    <script src="assets/gsap/ScrollSmoother.min.js"></script>
+    <script src="assets/gsap/SplitText.min.js"></script>
+  </head>
+  <body>
+    <!-- ====================================================================
+         GRAND MISSION DENTISTRY — IMPLANT LANDING PAGE
+         Asana task 1217133289235653 (parent 1217040406855578)
+
+         EIGHT CHAPTERS, in an order that cannot be shuffled. Each one is a
+         scene the page plays, not a band it scrolls past:
+
+           00  Arrival        the offer, in motion
+           01  The Loss       PINNED — what a gap actually costs, written out
+                              word by word as you scroll
+           02  The Answer     PINNED — a scan line travels the implant and the
+                              six reasons light as it passes them
+           03  The Options    PINNED — the four things we place, travelling
+                              sideways under a fixed heading
+           04  The Candidacy  am I a candidate, and what has to happen first
+           05  The Specialist Dr. Sung, real reviews, real cases
+           06  The Terms      the money question and every objection under it
+           07  The Invitation the offer restated, next to the form
+
+         Asana's seven-section spec maps onto that arc intact: hero (00),
+         solution breakdown (01+02+03), eligibility and preliminary procedures
+         (04), insurance and financing matrix (06), doctor spotlight and
+         testimonials (05), FAQ (folded into 06, where the objection actually
+         lands), reviews (07).
+
+         Body copy is the client's own — from the vendor original
+         gmd-implant-lp.html attached to the parent task, and from
+         grandmissiondentistry.com. Execution is ours.
+
+         Every price and phone renders from the OFFER object in app.js.
+         ==================================================================== -->
+
+    <a class="sr-only" href="#quiz">Skip to the consultation form</a>
+
+    <!-- ============================== HEADER =========================== -->
+    <header class="header" id="header">
+      <div class="shell header__inner">
+        <a class="header__logo" href="#arrival" aria-label="Grand Mission Dentistry">
+          <img class="logo-light" src="assets/logo-light.webp" alt="Grand Mission Dentistry" />
+          <img class="logo-dark" src="assets/logo-dark.webp" alt="Grand Mission Dentistry" />
+        </a>
+
+        <!-- Continuity device: which beat of the journey you are currently in,
+             and how far through the arc that is. -->
+        <div class="header__chapter" id="chapterReadout" aria-hidden="true">
+          <b id="chNum">00</b><span id="chName">Arrival</span><i id="chBar"></i>
+        </div>
+
+        <div class="header__actions">
+          <a class="header__phone" href="#" data-tel-link>
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" aria-hidden="true">
+              <path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 4 5.1 1 1 0 0 1 5 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round" />
+            </svg>
+            <span class="header__phone-text">
+              <small>Call the practice</small>
+              <strong data-tel>(281) 747-5929</strong>
+            </span>
+          </a>
+          <a class="btn magnetic" href="#quiz"><span class="lbl-lg">Check if I'm a candidate</span><span class="lbl-sm">Check now</span></a>
+        </div>
+      </div>
+      <div class="header__progress" id="readProgress"></div>
+    </header>
+
+    <div id="smooth-wrapper">
+      <div id="smooth-content">
+        <!-- ==================================================================
+             CHAPTER 00 — ARRIVAL
+             ================================================================== -->
+        <section class="ch ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival">
+          <div class="arrival__media">
+            <img src="assets/implant-model.jpeg" alt="" aria-hidden="true" id="arrivalImg" />
+          </div>
+          <div class="arrival__aurora" aria-hidden="true"></div>
+          <div class="arrival__veil" id="arrivalVeil" aria-hidden="true"></div>
+
+          <div class="shell arrival__inner" id="arrivalInner">
+            <div class="arrival__copy">
+              <p class="chapter-tag"><i></i><b>00</b><em>Arrival</em></p>
+              <p class="label" data-rv>Richmond, TX · Dr. William Sung, DMD</p>
+              <h1 id="arrivalTitle">A missing tooth, <em>replaced for good.</em></h1>
+
+              <!-- Explainer verbatim from gmd-implant-lp.html. -->
+              <p class="arrival__sub" data-rv>
+                Dental implants are titanium cylinders that are surgically placed into the jawbone
+                where teeth are missing. Once in place, they allow your dentist to mount replacement
+                teeth onto them. Your new tooth, a crown, will look and feel similar to your real
+                teeth.
+              </p>
+
+              <div class="offer" data-rv data-count-scope>
+                <p class="offer__price">
+                  <span data-offer-count data-count="2999" data-prefix="$">$2,999</span>
+                </p>
+                <p class="offer__meta">
+                  <strong>Single-tooth implant, starting price</strong>
+                  Final cost depends on your scan, your bone, and your insurance. You get the exact
+                  number at your free consultation — before anything is booked.
+                </p>
+              </div>
+
+              <!-- The five offer bullets are the client's own, verbatim. Do not
+                   add claims that are not on this list. -->
+              <ul class="ticks" data-rv="stagger">
+                <li><i aria-hidden="true"></i>Free consultation</li>
+                <li><i aria-hidden="true"></i>Free dental exam &amp; X-ray worth $750</li>
+                <li><i aria-hidden="true"></i>Same-day dental implant</li>
+                <li><i aria-hidden="true"></i>Easy financing options available</li>
+                <li><i aria-hidden="true"></i>Most PPO insurance accepted</li>
+              </ul>
+
+              <div class="proof" data-rv="stagger">
+                <span class="proof__item">
+                  <span class="stars" aria-hidden="true">★★★★★</span>
+                  <strong>1,700+</strong>
+                  Google reviews
+                </span>
+                <span class="proof__item">
+                  <strong>2021–2024</strong>
+                  Nextdoor Neighborhood Favorite
+                </span>
+                <span class="proof__item">
+                  <strong>Healthgrades</strong>
+                  2023 Patient Safety Award
+                </span>
+              </div>
+            </div>
+
+            <!-- ------------------------- QUIZ ------------------------- -->
+            <div class="panel" id="quiz">
+              <div class="panel__head">
+                <h2>See if you're a candidate</h2>
+                <p>Four quick questions. Takes under a minute — no cost, no obligation.</p>
+              </div>
+              <div class="panel__progress" role="progressbar" aria-label="Form progress" aria-valuemin="0" aria-valuemax="100" aria-valuenow="20">
+                <div class="panel__bar" id="quizBar"></div>
+              </div>
+
+              <form class="panel__body" id="leadForm" novalidate>
+                <fieldset class="step is-active" data-step="1">
+                  <legend class="step__q">How many teeth are you missing?</legend>
+                  <div class="options">
+                    <label class="option"><input type="radio" name="missing_teeth" value="1" /><span>Just one</span></label>
+                    <label class="option"><input type="radio" name="missing_teeth" value="2-3" /><span>Two or three</span></label>
+                    <label class="option"><input type="radio" name="missing_teeth" value="4+" /><span>Four or more</span></label>
+                    <label class="option"><input type="radio" name="missing_teeth" value="failing" /><span>None yet — a tooth or an old implant is failing</span></label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="step" data-step="2">
+                  <legend class="step__q">How long has the tooth been gone?</legend>
+                  <div class="options">
+                    <label class="option"><input type="radio" name="time_since_loss" value="under-6-months" /><span>Less than 6 months</span></label>
+                    <label class="option"><input type="radio" name="time_since_loss" value="6-24-months" /><span>6 months to 2 years</span></label>
+                    <label class="option"><input type="radio" name="time_since_loss" value="2-years-plus" /><span>More than 2 years</span></label>
+                    <label class="option"><input type="radio" name="time_since_loss" value="not-sure" /><span>I'm not sure</span></label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="step" data-step="3">
+                  <legend class="step__q">When would you like to get this handled?</legend>
+                  <div class="options">
+                    <label class="option"><input type="radio" name="timeline" value="asap" /><span>As soon as possible</span></label>
+                    <label class="option"><input type="radio" name="timeline" value="3-months" /><span>Within the next three months</span></label>
+                    <label class="option"><input type="radio" name="timeline" value="researching" /><span>Still researching my options</span></label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="step" data-step="4">
+                  <legend class="step__q">How would you like to handle the cost?</legend>
+                  <div class="options">
+                    <label class="option"><input type="radio" name="payment_preference" value="ppo-insurance" /><span>I have PPO dental insurance</span></label>
+                    <label class="option"><input type="radio" name="payment_preference" value="financing" /><span>I'd like to hear about monthly financing</span></label>
+                    <label class="option"><input type="radio" name="payment_preference" value="hsa-fsa" /><span>HSA or FSA</span></label>
+                    <label class="option"><input type="radio" name="payment_preference" value="out-of-pocket" /><span>Paying out of pocket</span></label>
+                  </div>
+                </fieldset>
+
+                <fieldset class="step" data-step="5">
+                  <legend class="step__q">Where should Dr. Sung's team send your consultation details?</legend>
+                  <div class="field">
+                    <label for="f-name">Full name</label>
+                    <input type="text" id="f-name" name="full_name" autocomplete="name" required />
+                    <p class="field__error" data-error-for="f-name"></p>
+                  </div>
+                  <div class="field">
+                    <label for="f-email">Email</label>
+                    <input type="email" id="f-email" name="email" autocomplete="email" required />
+                    <p class="field__error" data-error-for="f-email"></p>
+                  </div>
+                  <div class="field">
+                    <label for="f-phone">Phone</label>
+                    <input type="tel" id="f-phone" name="phone" autocomplete="tel" required />
+                    <p class="field__error" data-error-for="f-phone"></p>
+                  </div>
+
+                  <!-- spam trap: real people never see this -->
+                  <div class="honeypot" aria-hidden="true">
+                    <label for="f-website">Company website</label>
+                    <input type="text" id="f-website" name="company_website" tabindex="-1" autocomplete="off" />
+                  </div>
+
+                  <label class="consent">
+                    <input type="checkbox" id="f-consent" name="consent" required />
+                    <span>
+                      I agree to the terms and conditions provided by Grand Mission Dentistry. By
+                      providing my phone number I agree to receive text messages from the practice.
+                      Message and data rates may apply.
+                    </span>
+                  </label>
+                  <p class="field__error" data-error-for="f-consent"></p>
+                </fieldset>
+
+                <div class="panel__nav">
+                  <button type="button" class="panel__back" id="quizBack" hidden>← Back</button>
+                  <button type="submit" class="btn btn--wide magnetic" id="quizNext"><span>Continue</span></button>
+                </div>
+                <p class="panel__foot">Free · No pressure · A real conversation about your options</p>
+              </form>
+
+              <div class="panel__success" id="quizSuccess" role="status">
+                <div class="success-mark" aria-hidden="true">
+                  <svg width="30" height="30" viewBox="0 0 24 24" fill="none">
+                    <path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" />
+                  </svg>
+                </div>
+                <h2>Your request is in</h2>
+                <p>
+                  A member of Dr. Sung's team will call you shortly to book your free consultation.
+                  If you'd rather not wait, call
+                  <a href="#" data-tel-link><strong data-tel>(281) 747-5929</strong></a> now.
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <a class="scroll-cue" href="#loss" aria-label="Begin">
+            <span></span>
+          </a>
+        </section>
+
+        <!-- ==================================================================
+             CHAPTER 01 — THE LOSS   (PINNED · scrubbed word by word)
+             The page stops and the sentence writes itself as you scroll, while
+             the bone under the gap narrows in step with it. The figures are the
+             client's own evidence, not decoration.
+             ================================================================== -->
+        <section class="ch ch--pin ch-loss" id="loss" data-chapter="1" data-chapter-name="The Loss" data-theme="dark">
+          <div class="ch__pin loss__pin" id="lossPin">
+            <div class="shell loss__grid">
+              <div class="loss__copy">
+                <p class="chapter-tag"><i></i><b>01</b><em>The Loss</em></p>
+                <p class="loss__big" id="lossBig">
+                  A gap is not just a gap. The moment a tooth comes out, the bone that held it has
+                  nothing left to do — and bone that has nothing to do disappears.
+                </p>
+                <p class="loss__after" id="lossAfter">
+                  That is why waiting is the expensive option. The longer the site is empty, the more
+                  likely it is that the jaw has to be rebuilt before an implant can go in at all.
+                </p>
+              </div>
+
+              <!-- The gauge is the scene: the ridge narrows against scroll, and
+                   the figure it lands on is the client's own. -->
+              <figure class="ridge" aria-labelledby="ridgeCap">
+                <div class="ridge__stack">
+                  <span class="ridge__ghost"></span>
+                  <span class="ridge__bar" id="ridgeBar" data-scrub-probe="ridge"></span>
+                </div>
+                <figcaption class="ridge__read" id="ridgeCap">
+                  <span class="ridge__num" id="lossCount" data-scrub-count="25" data-prefix="Up to " data-suffix="%" data-scrub-probe="lossCount">Up to 0%</span>
+                  of jawbone width can be lost within the first year after a tooth comes out.
+                </figcaption>
+              </figure>
+            </div>
+            <div class="ch__rail"><i id="lossRail"></i></div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CHAPTER 02 — THE ANSWER   (PINNED · scrubbed scan)
+             A scan line travels down the implant, and each of the six reasons
+             lights as the line reaches it. The two survival figures resolve at
+             the same time. Asana section 2, "Solution Breakdown".
+             ================================================================== -->
+        <section class="ch ch--pin ch-answer" id="answer" data-chapter="2" data-chapter-name="The Answer">
+          <div class="ch__pin answer__pin" id="answerPin">
+            <div class="shell answer__grid">
+              <figure class="scan" aria-hidden="true">
+                <div class="scan__plate">
+                  <img class="scan__img scan__img--flat" src="assets/implant-single.webp" alt="" />
+                  <img class="scan__img scan__img--lit" id="scanLit" src="assets/implant-single.webp" alt="" data-scrub-probe="scanLit" />
+                  <span class="scan__line" id="scanLine" data-scrub-probe="scanLine"></span>
+                </div>
+                <figcaption class="scan__figures">
+                  <span><b id="survivalNum" data-scrub-count="96.8" data-decimals="1" data-suffix="%" data-scrub-probe="survival">0.0%</b>survival at ten years</span>
+                  <span><b id="yearsNum" data-scrub-count="40" data-suffix=" yrs" data-scrub-probe="years">0 yrs</b>documented survival</span>
+                </figcaption>
+              </figure>
+
+              <div class="answer__copy">
+                <p class="chapter-tag"><i></i><b>02</b><em>The Answer</em></p>
+                <h2 class="answer__title">Why are dental implants the best solution?</h2>
+                <p class="answer__lede">
+                  Dental implants are often the best solution for tooth loss because they replace the
+                  root as well as the tooth — which is what keeps the jawbone underneath working.
+                </p>
+
+                <ol class="reasons" id="reasons">
+                  <li class="reason" data-reason>
+                    <b>Look natural</b>
+                    <span>The crown is matched to the colour, shape and size of the teeth around it. Nobody can tell which one it is.</span>
+                  </li>
+                  <li class="reason" data-reason>
+                    <b>Don't hurt</b>
+                    <span>The area is fully numbed, and sedation is available for every implant procedure we place.</span>
+                  </li>
+                  <li class="reason" data-reason>
+                    <b>Easy to take care of</b>
+                    <span>Brush it and floss it like a real tooth. No adhesives, no soaking, nothing to take out.</span>
+                  </li>
+                  <li class="reason" data-reason>
+                    <b>Keep your mouth healthy</b>
+                    <span>The implant stimulates the bone the way a root does, so the jaw doesn't shrink away under the gap.</span>
+                  </li>
+                  <li class="reason" data-reason>
+                    <b>Can last a lifetime</b>
+                    <span>Implants have been documented surviving nearly 40 years. Cared for properly, this is a once-only repair.</span>
+                  </li>
+                  <li class="reason" data-reason>
+                    <b>Leave your other teeth alone</b>
+                    <span>A bridge means filing down the healthy teeth on both sides of the gap. An implant leaves them alone.</span>
+                  </li>
+                </ol>
+              </div>
+            </div>
+            <div class="ch__rail"><i id="answerRail"></i></div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CHAPTER 03 — THE OPTIONS   (PINNED · horizontal journey)
+             ================================================================== -->
+        <section class="ch ch--pin ch-options" id="options" data-chapter="3" data-chapter-name="The Options" data-theme="paper">
+          <div class="ch__pin options__pin" id="optionsPin">
+            <div class="options__head shell">
+              <p class="chapter-tag"><i></i><b>03</b><em>The Options</em></p>
+              <h2 data-split>One tooth, several teeth, or a full arch</h2>
+              <p class="lede">
+                Implant dentistry is one of the most technically demanding procedures in all of
+                dentistry. What you need depends on what is left to work with — that is what the
+                consultation is for.
+              </p>
+            </div>
+            <div class="options__rail" id="optionsRail" data-scrub-probe="optionsRail">
+              <article class="opt">
+                <div class="figure figure--4x3"><img src="assets/implant-single.webp" alt="A single dental implant post placed in the upper jaw between natural teeth" /></div>
+                <span class="opt__n">01</span>
+                <h3>Single implant crown</h3>
+                <p>The most natural way to replace one missing tooth. A custom crown on your own implant, matched to the teeth beside it.</p>
+              </article>
+              <article class="opt">
+                <div class="figure figure--4x3"><img src="assets/implant-bridge.webp" alt="An implant-supported bridge replacing several teeth in a row" /></div>
+                <span class="opt__n">02</span>
+                <h3>Implant bridge</h3>
+                <p>Two implants anchor a bridge across several missing teeth in a row — without filing down the healthy teeth either side.</p>
+              </article>
+              <article class="opt">
+                <div class="figure figure--4x3"><img src="assets/implant-allonx.webp" alt="All-on-X full arch restoration supported by four to six implants" /></div>
+                <span class="opt__n">03</span>
+                <h3>All-on-X full arch</h3>
+                <p>Four to six strategically placed implants support a full arch of fixed, non-removable teeth.</p>
+              </article>
+              <article class="opt">
+                <div class="figure figure--4x3"><img src="assets/implant-failing.webp" alt="A failing dental implant being assessed for repair" /></div>
+                <span class="opt__n">04</span>
+                <h3>Failing implant rescue</h3>
+                <p>Pain, looseness, infection, or an implant that just doesn't look right — placed somewhere else. We can help.</p>
+              </article>
+            </div>
+            <div class="ch__rail ch__rail--shell"><i id="optionsBar"></i></div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CHAPTER 04 — THE CANDIDACY
+             Asana section 3: patient eligibility and preliminary procedures.
+             ================================================================== -->
+        <section class="ch ch-candidacy" id="candidacy" data-chapter="4" data-chapter-name="The Candidacy" data-theme="tint">
+          <div class="shell">
+            <div class="split">
+              <div class="split__media">
+                <div class="figure figure--4x3" data-wipe="up">
+                  <img src="assets/consult.webp" alt="Dr. William Sung reviewing a 3D dental scan with a patient at Grand Mission Dentistry" data-drift="6" />
+                </div>
+              </div>
+              <div>
+                <p class="chapter-tag"><i></i><b>04</b><em>The Candidacy</em></p>
+                <h2 data-split>Do I need dental implants?</h2>
+                <!-- Both paragraphs verbatim from gmd-implant-lp.html. -->
+                <div data-rv="stagger">
+                  <p class="lede" style="margin-top: 1rem">
+                    Are you missing one or more of your teeth? Regular brushing, flossing, and
+                    preventive checkups allow some people to maintain their natural smiles for a
+                    lifetime. However, sometimes our teeth just can't stand up to the everyday wear
+                    and tear we put on them.
+                  </p>
+                  <p class="lede" style="margin-top: 1rem">
+                    Tooth loss can be caused by oral trauma due to an accident, illness, stress, age,
+                    decay, and more. Sometimes it's just bad luck that causes someone to suffer the
+                    loss of a tooth. If you want to know more, Dr. Will Sung and his team are there
+                    to help at Grand Mission Dentistry, Richmond, TX.
+                  </p>
+                </div>
+                <ul class="checklist" data-rv="stagger" style="margin: 1.6rem 0">
+                  <li>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    You're missing one or more teeth, or one is about to come out
+                  </li>
+                  <li>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    You want something permanent rather than something that comes out at night
+                  </li>
+                  <li>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    You'd rather not file down the healthy teeth on either side of the gap
+                  </li>
+                  <li>
+                    <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                    You've been told elsewhere that you're not a candidate — get a free second opinion
+                  </li>
+                </ul>
+                <a class="btn magnetic" href="#quiz" data-rv><span>Check if I'm a candidate</span></a>
+              </div>
+            </div>
+
+            <div class="head" data-rv style="margin-top: clamp(3.5rem, 6vw, 5.5rem)">
+              <p class="label">Preliminary procedures</p>
+              <h2 data-split>Sometimes the site has to be prepared first</h2>
+              <p class="lede">
+                After your consultation, Dr. Sung may recommend one of these before the implant goes
+                in. It isn't a setback — it's what makes the implant last.
+              </p>
+            </div>
+            <div class="grid c4" data-rv="stagger">
+              <article class="card" data-cursor-card>
+                <span class="card__n">01</span>
+                <h3>Bone graft</h3>
+                <p>Rebuilds jawbone that has shrunk away since the tooth was lost, so the implant has something solid to anchor into.</p>
+              </article>
+              <article class="card" data-cursor-card>
+                <span class="card__n">02</span>
+                <h3>Socket preservation</h3>
+                <p>Done at the time of extraction. Fills and protects the socket so the bone holds its shape while it heals.</p>
+              </article>
+              <article class="card" data-cursor-card>
+                <span class="card__n">03</span>
+                <h3>Gum tissue regeneration</h3>
+                <p>Restores the gum around the site, which is what gives the finished crown a natural margin instead of a visible line.</p>
+              </article>
+              <article class="card" data-cursor-card>
+                <span class="card__n">04</span>
+                <h3>Ridge augmentation</h3>
+                <p>Widens or heightens a jaw ridge that has flattened, usually after a tooth has been missing for a long time.</p>
+              </article>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CHAPTER 05 — THE SPECIALIST
+             Asana section 5: doctor spotlight and patient testimonials, with
+             the real case gallery and the practice's full service list.
+             ================================================================== -->
+        <section class="ch ch-specialist" id="specialist" data-chapter="5" data-chapter-name="The Specialist" data-theme="paper">
+          <div class="shell">
+            <div class="doctor">
+              <div class="doctor__portrait">
+                <div class="figure figure--1x1" data-wipe="up">
+                  <img src="assets/dr-sung.jpeg" alt="Dr. William Sung, DMD of Grand Mission Dentistry" data-drift="4" />
+                </div>
+              </div>
+              <div>
+                <p class="chapter-tag"><i></i><b>05</b><em>The Specialist</em></p>
+                <h2 data-split>Dr. William Sung, DMD</h2>
+                <p class="doctor__role" data-rv>Restorative &amp; implant dentistry · Richmond, TX</p>
+                <!-- Bio verbatim from gmd-implant-lp.html. -->
+                <div data-rv="stagger">
+                  <p class="lede">
+                    Dr. William Sung is highly regarded in the field of restorative and implant
+                    dentistry, known for his commitment to patient-centered care and meticulous
+                    attention to detail. With extensive training in advanced procedures, Dr. Sung has
+                    helped countless patients in Richmond, TX, restore their smiles with dental
+                    implants.
+                  </p>
+                  <p class="lede" style="margin-top: 1rem">
+                    Trust in his expertise to guide your dental care journey with precision and
+                    compassion. You can also schedule virtual consultations with Dr. Sung. The
+                    practice speaks English, Spanish, Vietnamese, Korean and Arabic.
+                  </p>
+                </div>
+                <a class="btn magnetic" href="#quiz" data-rv style="margin-top: 1.4rem"><span>Book a consultation with Dr. Sung</span></a>
+              </div>
+            </div>
+
+            <div class="grid c2" data-rv="stagger" style="margin-top: clamp(2.5rem, 4vw, 3.5rem)">
+              <figure class="quote">
+                <span class="stars" aria-label="Five out of five stars">★★★★★</span>
+                <p>
+                  “This is an amazing dentist and their hospitality is outstanding. They are also
+                  financially understanding. The dental assistant Rida made the experience
+                  exceptionally great. She is great at her job and so is everyone at this dentistry.
+                  The dentist is also very understanding, kind, and thorough concerning exams. I
+                  would highly recommend anyone to come here.”
+                </p>
+                <figcaption>EM M<span>Google review</span></figcaption>
+              </figure>
+              <figure class="quote">
+                <span class="stars" aria-label="Five out of five stars">★★★★★</span>
+                <p>
+                  “Amazing dentistry! The entire staff here is fantastic. Due to past experiences I
+                  used to be pretty anxious about going to the dentist until I started coming here.
+                  The hygienists are great and gentle! Always have enjoyable conversations during my
+                  appointments. Definitely recommend if you're looking for a new dentistry office!”
+                </p>
+                <figcaption>Jason Kwan<span>Google review</span></figcaption>
+              </figure>
+            </div>
+
+            <div class="head head--center" data-rv style="margin-top: clamp(3.5rem, 6vw, 5.5rem)">
+              <p class="label label--center">Real patients</p>
+              <h2 data-split>Before, and after</h2>
+              <p class="lede">Actual Grand Mission Dentistry patients. Tap any case to see it full size.</p>
+            </div>
+            <div class="gallery" id="gallery">
+              <button class="gallery__item" data-lightbox="assets/case-1.jpeg" data-case>
+                <span class="gallery__badge">Case 01</span>
+                <img src="assets/case-1.jpeg" alt="Before and after treatment at Grand Mission Dentistry, case one" loading="lazy" />
+              </button>
+              <button class="gallery__item" data-lightbox="assets/case-2.jpeg" data-case>
+                <span class="gallery__badge">Case 02</span>
+                <img src="assets/case-2.jpeg" alt="Before and after treatment at Grand Mission Dentistry, case two" loading="lazy" />
+              </button>
+              <button class="gallery__item" data-lightbox="assets/case-3.jpeg" data-case>
+                <span class="gallery__badge">Case 03</span>
+                <img src="assets/case-3.jpeg" alt="Before and after treatment at Grand Mission Dentistry, case three" loading="lazy" />
+              </button>
+              <button class="gallery__item" data-lightbox="assets/case-4.jpeg" data-case>
+                <span class="gallery__badge">Case 04</span>
+                <img src="assets/case-4.jpeg" alt="Before and after treatment at Grand Mission Dentistry, case four" loading="lazy" />
+              </button>
+            </div>
+            <p class="disclaimer" data-rv>
+              Results vary from patient to patient. These are individual outcomes and depend on oral
+              health, bone, lifestyle and the specifics of treatment. Yours will be discussed at your
+              consultation.
+            </p>
+          </div>
+
+          <!-- The rest of what happens in the same building. Speed and
+               direction bend with scroll velocity, so the page feels physically
+               connected to the wheel. -->
+          <div class="marquee" style="margin-top: clamp(2.5rem, 5vw, 4rem)">
+            <div class="marquee__track" id="svcTrack">
+              <span class="marquee__item"><img src="assets/svc-cosmetic.png" alt="" aria-hidden="true" />Cosmetic Dentistry</span>
+              <span class="marquee__item"><img src="assets/svc-ortho.png" alt="" aria-hidden="true" />Orthodontics</span>
+              <span class="marquee__item"><img src="assets/svc-general.png" alt="" aria-hidden="true" />General Dentistry</span>
+              <span class="marquee__item"><img src="assets/svc-emergency.png" alt="" aria-hidden="true" />Emergency Dentist</span>
+              <span class="marquee__item"><img src="assets/svc-preventive.png" alt="" aria-hidden="true" />Preventive Dentistry</span>
+              <span class="marquee__item"><svg width="26" height="26" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3c3 0 5 2.2 5 5.3 0 3.2-1.2 4.4-1.6 7.4-.3 2.2-.8 5.3-2.2 5.3-1.2 0-1-2.4-1.2-4-.1-1.2-1.9-1.2-2 0-.2 1.6 0 4-1.2 4-1.4 0-1.9-3.1-2.2-5.3C6.2 12.7 5 11.5 5 8.3 5 5.2 7 3 10 3c.7 0 1.3.5 2 .5S11.3 3 12 3Z" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>Restorative Dentistry</span>
+            </div>
+          </div>
+          <p class="services__note" data-rv>Free consultation &amp; exam &amp; X-ray worth $750 available.</p>
+        </section>
+
+        <!-- ==================================================================
+             CHAPTER 06 — THE TERMS
+             Asana section 4 (insurance and financing matrix) with the FAQ
+             folded in, because every question in it is a version of the same
+             objection this chapter exists to answer.
+             ================================================================== -->
+        <section class="ch ch-terms" id="terms" data-chapter="6" data-chapter-name="The Terms">
+          <div class="shell">
+            <!-- Section copy verbatim from gmd-implant-lp.html. -->
+            <div class="head" data-rv>
+              <p class="chapter-tag"><i></i><b>06</b><em>The Terms</em></p>
+              <h2 data-split>Maximizing your dental insurance benefits</h2>
+              <p class="lede">
+                At Grand Mission Dentistry, explore our affordable implant cost options with easy
+                financing, ensuring you get the dental care you need without financial stress.
+                Regardless of what insurance plan you have, we're happy to provide you with quality
+                care and file claims on your behalf. We accept and process all insurances, with many
+                major carriers in-network.
+              </p>
+            </div>
+
+            <ul class="checklist" data-rv="stagger" style="max-width: 900px; margin-bottom: 2.2rem">
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Flexible terms, including 0% or low-interest financing
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Instant approval for immediate access to funds
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Coverage of needed or elective treatments
+              </li>
+              <li>
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none"><path d="m5 13 4 4L19 7" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+                Financing that can be used solely for your dental implants or alongside other treatments
+              </li>
+            </ul>
+
+            <div class="matrix-wrap" data-rv>
+              <table class="matrix">
+                <thead>
+                  <tr>
+                    <th scope="col">Route</th>
+                    <th scope="col">How it works</th>
+                    <th scope="col">Good to know</th>
+                    <th scope="col">Status</th>
+                  </tr>
+                </thead>
+                <tbody id="matrixBody">
+                  <tr>
+                    <th scope="row">PPO dental insurance</th>
+                    <td>We accept most major PPO plans, file the claim for you, and apply the benefit to your treatment.</td>
+                    <td>Many major carriers are in-network. Bring your card to the consultation and we'll check your benefit before you commit.</td>
+                    <td><span class="pill">Accepted</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">HSA &amp; FSA</th>
+                    <td>Pay directly from your health savings or flexible spending account.</td>
+                    <td>Worth checking your balance before year end — FSA funds usually don't roll over.</td>
+                    <td><span class="pill">Accepted</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Third-party financing</th>
+                    <td>Monthly payment plans through Cherry, Alphaeon, Lending Club and CareCredit — applied for in the practice, with instant approval for immediate access to funds.</td>
+                    <td>Flexible terms including 0% or low-interest financing. Can be used solely for your dental implants or alongside other treatments.</td>
+                    <td><span class="pill pill--blue">0% APR available</span></td>
+                  </tr>
+                  <tr>
+                    <th scope="row">Cash, check or card</th>
+                    <td>Pay in full at the time of treatment.</td>
+                    <td>Cash, check and all major credit cards accepted.</td>
+                    <td><span class="pill pill--brown">Always</span></td>
+                  </tr>
+                </tbody>
+              </table>
+            </div>
+
+            <div class="split rev" style="margin-top: clamp(2.5rem, 5vw, 4rem)">
+              <div class="split__media">
+                <div class="figure figure--4x3" data-wipe="left">
+                  <img src="assets/financing.jpeg" alt="A patient discussing insurance and financing options at Grand Mission Dentistry" data-drift="5" />
+                </div>
+              </div>
+              <div>
+                <h3 style="font-size: var(--h2); margin-bottom: 1rem" data-split>You'll know the number before you commit</h3>
+                <p class="lede" data-rv>
+                  The starting price for a single-tooth implant is
+                  <strong>$<span data-offer="implant-price-value">2,999</span></strong>. What you
+                  actually pay depends on your scan, whether the site needs preparing, the materials
+                  used, and what your plan covers. You get that figure in writing at the
+                  consultation — which is free, and comes with no obligation to book.
+                </p>
+                <a class="btn btn--ghost magnetic" href="#quiz" data-rv><span>Get my exact number</span></a>
+              </div>
+            </div>
+
+            <!-- FAQ lives here rather than in a band of its own: every question
+                 below is a version of the objection this chapter answers. -->
+            <div class="head head--center" data-rv style="margin-top: clamp(3.5rem, 6vw, 5.5rem)">
+              <p class="label label--center">Still deciding</p>
+              <h2 data-split>Questions we get asked most</h2>
+            </div>
+            <div class="faq" data-rv="stagger">
+              <div class="faq__item">
+                <button class="faq__q" aria-expanded="false">
+                  How do I prepare for my single-tooth dental implant treatment?
+                  <span class="faq__sign" aria-hidden="true"></span>
+                </button>
+                <div class="faq__a"><p>
+                  In some cases, patients may need preliminary procedures to prepare for a dental
+                  implant. After a consultation, Dr. Will Sung might recommend treatments like a bone
+                  graft, gum graft, or socket preservation to ensure your jaw and gums are ready for
+                  the implant.
+                </p></div>
+              </div>
+              <div class="faq__item">
+                <button class="faq__q" aria-expanded="false">
+                  How much does a single-tooth dental implant cost?
+                  <span class="faq__sign" aria-hidden="true"></span>
+                </button>
+                <div class="faq__a"><p>
+                  At Grand Mission Dentistry, a single-tooth dental implant starts at
+                  $<span data-offer="implant-price-value">2,999</span>. The cost may vary depending
+                  on individual needs, such as preliminary procedures, materials used, and insurance
+                  coverage. During your consultation with Dr. Will Sung, you'll receive an accurate
+                  cost estimate tailored to your specific case.
+                </p></div>
+              </div>
+              <div class="faq__item">
+                <button class="faq__q" aria-expanded="false">
+                  How does a single-tooth dental implant work?
+                  <span class="faq__sign" aria-hidden="true"></span>
+                </button>
+                <div class="faq__a"><p>
+                  A single-tooth dental implant involves a titanium post surgically placed in your
+                  jaw to act as an artificial tooth root. Once healed, the implant is topped with a
+                  custom-made dental crown, restoring the appearance and function of your natural
+                  tooth.
+                </p></div>
+              </div>
+              <div class="faq__item">
+                <button class="faq__q" aria-expanded="false">
+                  Is a single-tooth dental implant right for me?
+                  <span class="faq__sign" aria-hidden="true"></span>
+                </button>
+                <div class="faq__a"><p>
+                  Dr. Sung will evaluate your dental health and recommend the best solution for
+                  replacing your missing tooth. Single-tooth dental implants are ideal for patients
+                  seeking a permanent, natural-looking, and functional replacement for a lost tooth.
+                </p></div>
+              </div>
+              <div class="faq__item">
+                <button class="faq__q" aria-expanded="false">
+                  I was told somewhere else that I'm not a candidate. Now what?
+                  <span class="faq__sign" aria-hidden="true"></span>
+                </button>
+                <div class="faq__a"><p>
+                  Bring the plan you were given and take the free second opinion. There is no cost
+                  and no pressure — sometimes bone grafting or ridge augmentation makes an implant
+                  possible after all, and sometimes a different restoration is genuinely the better
+                  answer.
+                </p></div>
+              </div>
+              <div class="faq__item">
+                <button class="faq__q" aria-expanded="false">
+                  What if I already have an implant and something is wrong with it?
+                  <span class="faq__sign" aria-hidden="true"></span>
+                </button>
+                <div class="faq__a"><p>
+                  If you have pain, looseness, infection, or an implant that doesn't look right, the
+                  practice treats failing implants placed elsewhere. Get it looked at sooner rather
+                  than later — the bone around a failing implant doesn't wait.
+                </p></div>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- ==================================================================
+             CHAPTER 07 — THE INVITATION
+             Asana section 7 (reviews) and the offer restated at the point the
+             visitor is ready to act on it.
+             ================================================================== -->
+        <section class="ch ch-invitation" id="invitation" data-chapter="7" data-chapter-name="The Invitation" data-theme="dark">
+          <div class="invitation__glow" aria-hidden="true"></div>
+          <div class="shell">
+            <div class="head head--center" data-rv>
+              <p class="chapter-tag chapter-tag--center"><i></i><b>07</b><em>The Invitation</em></p>
+              <h2 data-split>Richmond has been reviewing us for years</h2>
+            </div>
+            <div class="badges" data-rv="stagger" style="margin-bottom: 2.4rem">
+              <span class="badge"><span class="stars" aria-hidden="true">★★★★★</span> <strong>1,700+</strong> Google reviews</span>
+              <span class="badge"><strong>Nextdoor</strong> Neighborhood Favorite 2021–2024</span>
+              <span class="badge"><strong>Healthgrades</strong> 2023 Patient Safety Award</span>
+              <span class="badge"><span class="stars" aria-hidden="true">★★★★★</span> <strong>Yelp</strong> five-star business</span>
+            </div>
+            <div class="grid c3" data-rv="stagger">
+              <figure class="quote">
+                <span class="stars" aria-label="Five out of five stars">★★★★★</span>
+                <p>“This is the best dental place I've been to since I moved to Texas. Customer service is superb, so kind, friendly, and welcoming.”</p>
+                <figcaption>Diane C.<span>Google review</span></figcaption>
+              </figure>
+              <figure class="quote">
+                <span class="stars" aria-label="Five out of five stars">★★★★★</span>
+                <p>“Dr. Van and Hygienist Karen were amazing today! I've got my plan to start a healthier mouth and I'm so excited!”</p>
+                <figcaption>Cedaro<span>Google review</span></figcaption>
+              </figure>
+              <figure class="quote">
+                <span class="stars" aria-label="Five out of five stars">★★★★★</span>
+                <p>“Best experience! Very up to date with equipment and the cleanest dental office I've ever been to.”</p>
+                <figcaption>Tiffany T.<span>Google review</span></figcaption>
+              </figure>
+            </div>
+
+            <div class="closing" id="closing">
+              <h2 data-split>Are you ready to smile?</h2>
+              <p class="lede" data-rv>
+                Schedule a complimentary consultation today. A look at the site, a clear
+                recommendation, and an exact price before you commit to anything. Single-tooth dental
+                implants start at $<span data-offer="implant-price-value">2,999</span>.
+              </p>
+              <div class="closing__actions" data-rv="stagger">
+                <a class="btn btn--light btn--lg magnetic" href="#quiz"><span>Check if I'm a candidate</span></a>
+                <a class="btn btn--ghost btn--lg magnetic" href="#" data-tel-link><span>Call <span data-tel>(281) 747-5929</span></span></a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- =========================== FOOTER ========================== -->
+        <footer class="footer">
+          <div class="shell">
+            <div class="footer__grid">
+              <div>
+                <img class="footer__logo" src="assets/logo-light.webp" alt="Grand Mission Dentistry" />
+                <p>8620 Grand Mission Blvd Ste E<br />Richmond, TX 77407</p>
+                <p style="margin-top: 0.8rem">
+                  <a href="#" data-tel-link data-tel>(281) 747-5929</a><br />
+                  <a href="https://maps.app.goo.gl/h8xXwxeF26pKio8n6" target="_blank" rel="noopener">Get directions →</a>
+                </p>
+              </div>
+              <div>
+                <h3>Office hours</h3>
+                <dl class="hours">
+                  <div><dt>Monday</dt><dd>9:00 am – 7:00 pm</dd></div>
+                  <div><dt>Tuesday</dt><dd>10:00 am – 8:00 pm</dd></div>
+                  <div><dt>Wednesday</dt><dd>10:00 am – 8:00 pm</dd></div>
+                  <div><dt>Thursday</dt><dd>8:00 am – 6:00 pm</dd></div>
+                  <div><dt>Friday</dt><dd>8:00 am – 6:00 pm</dd></div>
+                  <div><dt>Saturday</dt><dd>8:00 am – 3:00 pm</dd></div>
+                  <div><dt>Sunday</dt><dd>Closed</dd></div>
+                </dl>
+              </div>
+              <div>
+                <h3>Implant care in Richmond</h3>
+                <p>
+                  Single implant crowns, implant bridges, All-on-X full arch, failing implant repair,
+                  bone grafting, gum tissue regeneration, socket preservation and ridge augmentation.
+                </p>
+                <p style="margin-top: 0.8rem">Spoken here: English, Spanish, Vietnamese, Korean and Arabic.</p>
+                <a class="btn btn--light magnetic" href="#quiz" style="margin-top: 1.2rem"><span>Check if I'm a candidate</span></a>
+              </div>
+            </div>
+            <div class="footer__bottom">
+              <span>© <span id="year">2026</span> Grand Mission Dentistry of Richmond. All rights reserved.</span>
+              <span>Results vary by patient. This page is information, not a diagnosis.</span>
+            </div>
+          </div>
+        </footer>
+      </div>
+    </div>
+
+    <!-- ==================== STICKY MOBILE CALL BAR ==================== -->
+    <nav class="mobile-bar" id="mobileBar" aria-label="Quick actions">
+      <a href="#" data-tel-link>
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M5 4h4l2 5-2.5 1.5a11 11 0 0 0 5 5L15 13l5 2v4a1 1 0 0 1-1.1 1A16 16 0 0 1 4 5.1 1 1 0 0 1 5 4Z" stroke="currentColor" stroke-width="2" stroke-linejoin="round"/></svg>
+        Call now
+      </a>
+      <a href="#quiz">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3.5" y="5" width="17" height="15" rx="2" stroke="currentColor" stroke-width="2"/><path d="M8 3v4m8-4v4M3.5 10h17" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg>
+        Book now
+      </a>
+    </nav>
+
+    <div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Patient result">
+      <button class="lightbox__close" id="lightboxClose" aria-label="Close">×</button>
+      <img id="lightboxImg" src="" alt="" />
+    </div>
+
+    <script src="assets/wz.js"></script>
+    <script src="page.js"></script>
+    <script src="app.js"></script>
+    <script>
+      /* Registers plugins, creates the smoother, then flushes every queued
+         chapter so each ScrollTrigger measures the final smoothed layout. */
+      wzFlush();
+    </script>
+  </body>
+</html>

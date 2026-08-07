@@ -5,6 +5,11 @@
 # keep resource-urls.json instead.
 manage/browser-tools/playwright-browser/.tmp/style-capture-*/code/resources/
 
+# Headless-Chrome user-data dirs from verification harnesses. These land inside
+# .tmp/ and contain paths longer than Git can index on Windows.
+**/.chrome-profile/
+**/.chrome-dbg/
+
 # ===== Secrets =====
 .env
 .env.*
