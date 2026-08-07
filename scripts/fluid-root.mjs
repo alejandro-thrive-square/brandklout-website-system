@@ -22,14 +22,18 @@ import path from 'node:path'
 
 /**
  * The house scale. Each segment is [screenWidthPx, rootFontPx] at its two ends.
- * Segments are listed small -> large and must be contiguous on width.
- * A deliberate step between segments is allowed (see 479 below).
+ * Segments are listed small -> large and must be contiguous on width. A step between segments is
+ * representable but the house scale is deliberately continuous.
+ *
+ * The 479 -> 1440 segment is flat at 16px on purpose: 16px is the browser default, so an existing
+ * rem-based design renders pixel-identical across that entire range. Type shrinks only below 479
+ * and grows only above 1440.
  */
 const HOUSE_SCALE = {
   name: 'webzite-house-v1',
   segments: [
     { from: { w: 320, px: 12 }, to: { w: 479, px: 16 } },
-    { from: { w: 479, px: 14 }, to: { w: 1440, px: 16 } },
+    { from: { w: 479, px: 16 }, to: { w: 1440, px: 16 } },
     { from: { w: 1440, px: 16 }, to: { w: 1920, px: 18 } },
     { from: { w: 1920, px: 18 }, to: { w: 2400, px: 20 } },
   ],
