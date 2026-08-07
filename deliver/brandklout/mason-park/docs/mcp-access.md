@@ -44,9 +44,13 @@ hosting, CRM, or ad accounts.
 - **Webflow site**: **Mason Park Dental**, site id `6a60bdc0340e5f1784b4d553`, workspace
   `63b4b7393e89b78575e9a9bb`. Confirmed via `list_sites` 2026-08-07.
 - **Staging URL**: https://mason-park-dental.webflow.io (live, returns 200)
-- **Existing pages**: **1** — Home (`6a60bdc3340e5f1784b4d5e3`). No custom domain. The three
-  landing pages (`invisalign`, `new-patient-special`, `thank-you`) do **not** exist yet and must be
-  created with `create_page`.
+- **Pages**: **4 as of 2026-08-07.** Home (`6a60bdc3340e5f1784b4d5e3`, the pre-existing
+  placeholder, untouched) plus the three landing pages, **built and published to the Webflow
+  subdomain only**: `invisalign` (`6a75f467c7c9e1a0c133edd1`), `new-patient-special`
+  (`6a75f468bfddad669aaf8321`), `thank-you` (`6a75f468c490cc1bb6fa6a8c`). All three are
+  `noindex, nofollow`. **Still no custom domain, and none is to be added.** Element ids,
+  asset ids and the verification results are in
+  `workflows/07-webflow-build/.tmp/build-manifest.json`.
 - **Online booking**: `https://www.flexbook.me/masonpark/1` (FlexBook, linked from the client's own
   site). Public link only - no account, no credentials, nothing written to it.
 
@@ -84,8 +88,10 @@ both before any spend** to confirm they still route to the practice.
 - **Do not touch another Brandklout client's site.** The shared instance can reach all of them; this
   folder authorizes exactly one. A call carrying a sibling's site ID is out of bounds even though
   the grant permits it.
-- **Do not publish.** Local design approval comes first, then a Webflow build, and publishing is a
-  separate explicit go-ahead. A published page is live to real paid traffic.
+- **Do not publish to a custom domain.** Staging (`publishToWebflowSubdomain: true`,
+  `customDomains: []`) was authorised for the 2026-08-07 build and is where the pages live now.
+  Publishing anywhere a real visitor could land is a separate explicit go-ahead — a published
+  page is live to real paid traffic.
 - Do not create MCP server instances for this client on your own initiative.
 - Do not write to Asana. Comments and status changes notify real Brandklout staff.
 - Do not invent testimonials, reviews, patient stories, or statistics for this practice. Real
