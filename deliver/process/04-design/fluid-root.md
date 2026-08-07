@@ -100,6 +100,47 @@ Do not swap `clamp(3rem, 7vw, 5.2rem)` for an arbitrary `rem`. Pick the value th
 rendered size at 1440px** (root = 16px, so `rem = px / 16`), then verify the extremes at 390 and
 1920 still read correctly and adjust the *scale*, not the individual declaration.
 
+> [!WARNING]
+> **Removing a `clamp()` is not a no-op in the mid-range, even though the root is flat there.**
+> This is the opposite of the retrofit case above and it catches people out. A `clamp()` whose
+> middle term is `vw` was doing its own ramp *inside* 479–1440; a plain `rem` is **constant** across
+> that range. So the mid-range captures are byte-identical only for declarations that were already
+> bare `rem`. Every `clamp()` you remove changes 479–1440 by design.
+>
+> Worked example (Grand Mission, 2026-08-07): a hero at `clamp(2.9rem, 7vw, 6.6rem)` rendered 46px
+> at 390 and 101px at 1440 — a 2.2× viewport-proportional ramp. The root's own ramp is 0.86×. Set to
+> the 1440-preserving `6.3rem`, the 1440 view is exact but a 768 tablet gets a 101px headline, which
+> measured turned a 3-line hero into 5 lines and pushed the offer box and proof row below the fold.
+> Set low enough for 768, the 1440 hero loses a third of its size and stops out-ranking the section
+> headings.
+
+#### When the design's display type is viewport-proportional
+
+Body, labels and captions are near enough root-proportional that a single `rem` covers them. Display
+type authored at `5–7vw` is not, and no single `rem` can be both ends of its ramp. When that is the
+case, keep the plain-`rem` scale and add a **short px-media staircase on the display tokens only**:
+
+```css
+@media (max-width: 1199px) { :root { --d1: 4.4rem; --h2: 2.6rem; } }
+@media (max-width: 767px)  { :root { --d1: 3.2rem; --h2: 2.2rem; } }
+```
+
+This stays inside every rule above — no `clamp()`, no `px` font-size, no `rem` media query, no root
+override — and `--check` passes. Keep it to the two or three tokens that set the fold and the page
+rhythm; a staircase on twenty individual declarations means the display sizes should have been
+tokens in the first place. Anchor the top step so the **1440 reference view is exact**.
+
+Pick each step against a *measured* overflow ceiling, not a glyph-table estimate. The binding case is
+always the single longest word in a headline, because a grid item defaults to `min-width: auto` and
+refuses to shrink below it. Measure it by setting the token live and reading the wrapper's
+`scrollWidth`, and note that `body { overflow-x: hidden }` — which most of our kits set — means a
+document-level overflow check reports **nothing** while the text is silently clipped:
+
+```js
+document.documentElement.style.setProperty('--d1', candidate + 'rem')
+shell.scrollWidth - shell.clientWidth   // 0 means it fits
+```
+
 ## Install
 
 Preferred: emit with `--css` into the project's **shared stylesheet**, as the first rule, before any

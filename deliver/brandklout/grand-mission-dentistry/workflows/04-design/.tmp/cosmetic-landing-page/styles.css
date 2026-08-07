@@ -151,13 +151,13 @@
    its keep: the word that carries the offer. */
 .offer__price .script {
   font-family: var(--script);
-  font-size: clamp(3.2rem, 6vw, 4.6rem);
+  font-size: 4.6rem;
   line-height: 0.9;
   color: var(--blue-light);
   display: block;
 }
 .offer__meta {
-  font-size: 0.9rem;
+  font-size: 1.09rem;
   color: rgba(255, 255, 255, 0.78);
   line-height: 1.5;
   font-weight: 400;
@@ -165,7 +165,7 @@
 .offer__meta strong {
   display: block;
   color: #fff;
-  font-size: 0.98rem;
+  font-size: 1.18rem;
   font-weight: 700;
   margin-bottom: 0.15rem;
 }
@@ -181,7 +181,7 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  font-size: 0.97rem;
+  font-size: 1.17rem;
   color: rgba(255, 255, 255, 0.88);
   font-weight: 400;
 }
@@ -215,13 +215,13 @@
 .proof__item {
   display: flex;
   flex-direction: column;
-  font-size: 0.7rem;
+  font-size: 0.84rem;
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.66);
 }
 .proof__item strong {
-  font-size: 1.12rem;
+  font-size: 1.35rem;
   color: #fff;
   letter-spacing: -0.02em;
   text-transform: none;
@@ -294,7 +294,7 @@
   inset: 1rem 1rem -1rem -1rem;
 }
 .doc__body h3 {
-  font-size: clamp(1.5rem, 2.6vw, 2.2rem);
+  font-size: 2.2rem;
 }
 .doc__body p {
   color: var(--n-700);
@@ -302,7 +302,7 @@
   line-height: 1.8;
 }
 .doc__role {
-  font-size: 0.78rem;
+  font-size: 0.94rem;
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--brown);
@@ -341,14 +341,14 @@
   align-content: center;
 }
 .work__count {
-  font-size: 0.78rem;
+  font-size: 0.94rem;
   letter-spacing: 0.18em;
   font-weight: 700;
   color: var(--n-300);
   font-variant-numeric: tabular-nums;
 }
 .work__count b {
-  font-size: clamp(1.6rem, 3vw, 2.4rem);
+  font-size: 2.4rem;
   color: var(--blue);
   letter-spacing: -0.04em;
 }
@@ -365,7 +365,7 @@
   height: auto;
 }
 .work__card h2 {
-  font-size: clamp(1.8rem, 4vw, 3.2rem);
+  font-size: 3.2rem;
   max-width: 14ch;
 }
 .work__card p {
@@ -397,7 +397,7 @@
 .work__row {
   padding: clamp(0.7rem, 1.5vw, 1.05rem) 0 clamp(0.7rem, 1.5vw, 1.05rem) 1.4rem;
   border-bottom: 1px solid var(--n-200);
-  font-size: clamp(1rem, 1.7vw, 1.35rem);
+  font-size: 1.35rem;
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--n-300);
@@ -430,16 +430,16 @@
 }
 .offers__item h3 {
   color: #fff;
-  font-size: clamp(1.1rem, 1.7vw, 1.4rem);
+  font-size: 1.4rem;
   margin-bottom: 0.35rem;
 }
 .offers__item p {
   font-weight: 400;
-  font-size: 0.94rem;
+  font-size: 1.13rem;
 }
 .offers__fine {
   margin-top: 0.4rem;
-  font-size: 0.74rem;
+  font-size: 0.89rem;
   color: rgba(255, 255, 255, 0.55);
   line-height: 1.5;
 }
@@ -480,7 +480,7 @@
     border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
 }
 .pillar__n {
-  font-size: 0.72rem;
+  font-size: 0.87rem;
   letter-spacing: 0.2em;
   font-weight: 800;
   color: var(--n-300);
@@ -489,7 +489,7 @@
 .pillar p {
   color: var(--n-700);
   font-weight: 400;
-  font-size: 0.96rem;
+  font-size: 1.16rem;
 }
 .pillar.is-active {
   opacity: 1;

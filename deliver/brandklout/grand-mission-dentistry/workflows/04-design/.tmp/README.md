@@ -129,12 +129,47 @@ attribution possible. See the open question below.
 
 ---
 
+## Type scale — the fluid root
+
+These packages carry the house fluid root font-size
+([`deliver/process/04-design/fluid-root.md`](../../../../../process/04-design/fluid-root.md)). It is
+the **first rule of `_vendor/kit/kit.css`**, above the brand `:root`. There is no `clamp()` on any
+`font-size` anywhere in the build and no `px` font-size; `node scripts/fluid-root.mjs --check` on
+this directory exits 0.
+
+The root is flat 16px from 479 to 1440, so it only moves the design below 479 and above 1440. Two
+consequences shaped the scale, and both are design decisions rather than mechanical swaps:
+
+- **Text is anchored at 390, not 1440.** Body copy has to clear 16px on a phone, and at 390 the root
+  is 13.76px, so `--body` is `1.17rem`. That forces the desktop size from 15.5px to 18.7px — there is
+  no value that satisfies both, and the mobile floor wins. Every bare `rem` font-size in the build
+  moved by the same 1.206 factor, so the relationships inside the text tier are unchanged.
+- **Display type needs a staircase.** The hero was authored at `7vw` (46px at 390, 101px at 1440);
+  a plain `rem` is constant across 479–1440 and cannot be both. `--d1` and `--h2` therefore step at
+  1199 and 767 — px queries, tokens only, 1440 exact. The reasoning and the measured overflow
+  ceilings are in the comment block in `kit.css`.
+
+`_vendor/kit/kit.css` is the source of truth and is **manually copied** into each package. After
+editing it:
+
+```bash
+for p in implant-landing-page cosmetic-landing-page thank-you-landing-page; do
+  cp _vendor/kit/kit.css $p/assets/kit.css; cp _vendor/kit/wz.js $p/assets/wz.js
+done
+```
+
+Forget the re-sync and every gate reports the old behaviour, because the pages never load the file
+you edited.
+
+---
+
 ## Verification
 
 ```
 node verify.mjs               # all three pages, one process each
 node verify.mjs implant       # one package
 node qa-shots.mjs             # six breakpoints per page → ../../08-qa/.tmp/screenshots/
+node ../../../../../../scripts/fluid-root.mjs --check .   # fluid root compliance
 ```
 
 **146 checks, all passing.** Screenshots at 360 / 390 / 768 / 1024 / 1440 / 1920, no horizontal
@@ -154,6 +189,16 @@ ends.
 
 ### Traps that cost real time here
 
+- **`body { overflow-x: hidden }` hides horizontal overflow from every document-level check.**
+  `qa-shots.mjs` compares `documentElement.scrollWidth` against `innerWidth` and reported "no
+  overflow at any breakpoint" while a hero headline was pushing 142px past its column and being
+  silently clipped. Only a per-element `scrollWidth > clientWidth` sweep finds it. The related trap:
+  measuring the *grid item* is circular, because `min-width: auto` already stretched it to fit the
+  word — measure the `.shell`, which has an explicit width and cannot absorb the overflow.
+- **A long word, not the line, caps display type.** `min-width: auto` on a grid item refuses to
+  shrink below the widest single word, so the hero ceiling is set by "destination" (5.71em) in the
+  cosmetic h1 — 4.2rem at 320px, where the shell is only 290px. Measure the ceiling by setting the
+  token live and reading `shell.scrollWidth`; do not estimate it from glyph widths.
 - **CDP cannot serialise `-0`.** A pinned element sitting a sub-pixel above the viewport top rounds
   to `-0`, which arrives as `unserializableValue` with `value` undefined. Reading `.value` returned
   undefined and reported three working pins as broken.
