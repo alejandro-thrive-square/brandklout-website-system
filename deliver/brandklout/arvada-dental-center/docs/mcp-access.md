@@ -35,7 +35,10 @@ hosting, CRM, or ad accounts.
 
 ## Target Resources
 - **Asana parent task**: `1217040406855586` (workspace `1210572425689866`)
-- **Live site**: unknown - not recorded in Asana. Record here once found.
+- **Live site**: `https://arvadadentalcenter.com` - identified 2026-08-05 by public search, not
+  from Asana. Confirmed as the practice at 6695 Wadsworth Blvd, Arvada, CO 80003, matching the
+  Asana client name. **Read-only research only** - the site is on SiteGround behind an sgcaptcha
+  bot challenge; scraping it for brand and content is permitted, touching it is not.
 - **Staging / platform account**: none.
 
 ## Allowed Operations

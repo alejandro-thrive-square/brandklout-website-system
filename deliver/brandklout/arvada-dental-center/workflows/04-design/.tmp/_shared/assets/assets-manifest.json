@@ -1,0 +1,230 @@
+{
+  "note": "Client-owned imagery from arvadadentalcenter.com, captured off the network while the live pages loaded (the site's bot challenge blocks scripted fetches). Binaries are gitignored; this manifest is the committed record so they can be re-fetched with 01-content-intake/.tmp/fetch-assets.mjs.",
+  "asanaTaskGid": "1217040406855586",
+  "capturedFrom": [
+    "https://arvadadentalcenter.com/",
+    "https://arvadadentalcenter.com/dental-implants/",
+    "https://arvadadentalcenter.com/all-on-4-dental-implants/",
+    "https://arvadadentalcenter.com/veneers/",
+    "https://arvadadentalcenter.com/cosmetic-dentistry/",
+    "https://arvadadentalcenter.com/emergency-dentistry/",
+    "https://arvadadentalcenter.com/dentist-in-arvada-dentist-near-me-open-now/",
+    "https://arvadadentalcenter.com/about-us/",
+    "https://arvadadentalcenter.com/iv-sedation-dentistry/",
+    "https://arvadadentalcenter.com/before-and-afters/",
+    "https://arvadadentalcenter.com/locations/dentist-arvada/",
+    "https://arvadadentalcenter.com/meet-the-doctors/"
+  ],
+  "files": [
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2023/12/dental-implants-in-denver-arvada-dentist-1.png.webp",
+      "file": "dental-implants-in-denver-arvada-dentist-1.png.webp",
+      "bytes": 50210
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/home-hero3.jpg.webp",
+      "file": "home-hero3.jpg.webp",
+      "bytes": 43170
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/pattern-mountain-left.png.webp",
+      "file": "pattern-mountain-left.png.webp",
+      "bytes": 150552
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2026/03/mountain-img.webp",
+      "file": "mountain-img.webp",
+      "bytes": 364130
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2023/01/home-all-on-4-vertical.jpg.webp",
+      "file": "home-all-on-4-vertical.jpg.webp",
+      "bytes": 47522
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2023/01/home-crown-vertical.jpg.webp",
+      "file": "home-crown-vertical.jpg.webp",
+      "bytes": 73960
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2023/01/home-sedation-vertical.jpg.webp",
+      "file": "home-sedation-vertical.jpg.webp",
+      "bytes": 24366
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2023/01/home-card-3-vertical.jpg.webp",
+      "file": "home-card-3-vertical.jpg.webp",
+      "bytes": 43060
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/mountain.jpg.webp",
+      "file": "mountain.jpg.webp",
+      "bytes": 435800
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2020/03/mountain-pattern-W2.png.webp",
+      "file": "mountain-pattern-W2.png.webp",
+      "bytes": 231564
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2023/03/dr_bennett-square-close.jpg.webp",
+      "file": "dr_bennett-square-close.jpg.webp",
+      "bytes": 32528
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/mimic.jpg.webp",
+      "file": "mimic.jpg.webp",
+      "bytes": 38418
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/dent-impl-2000.jpg.webp",
+      "file": "dent-impl-2000.jpg.webp",
+      "bytes": 45838
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/recieving.jpg.webp",
+      "file": "recieving.jpg.webp",
+      "bytes": 102388
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/video_cover.jpg.webp",
+      "file": "video_cover.jpg.webp",
+      "bytes": 39688
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/dreams_reality.jpg.webp",
+      "file": "dreams_reality.jpg.webp",
+      "bytes": 133758
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/video_cover-1.jpg.webp",
+      "file": "video_cover-1.jpg.webp",
+      "bytes": 29242
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/dental-patient-undergoing-porcelain-veneers-procedure-3.jpg.webp",
+      "file": "dental-patient-undergoing-porcelain-veneers-procedure-3.jpg.webp",
+      "bytes": 34794
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/dental-veneers-graphic-4.jpg.webp",
+      "file": "dental-veneers-graphic-4.jpg.webp",
+      "bytes": 36398
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/troubled_smiles.jpg.webp",
+      "file": "troubled_smiles.jpg.webp",
+      "bytes": 72866
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2020/04/dental-patient-in-need-of-emergency-treatment.jpg",
+      "file": "dental-patient-in-need-of-emergency-treatment.jpg",
+      "bytes": 28900
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2020/03/pattern-marble.jpg",
+      "file": "pattern-marble.jpg",
+      "bytes": 17291
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/conditions-copy.jpg",
+      "file": "conditions-copy.jpg",
+      "bytes": 77712
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/pattern-mountain-left.png",
+      "file": "pattern-mountain-left.png",
+      "bytes": 101298
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/mountain.jpg",
+      "file": "mountain.jpg",
+      "bytes": 330418
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2020/03/mountain-pattern-W2.png",
+      "file": "mountain-pattern-W2.png",
+      "bytes": 192220
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2021/03/best-dental-imaplant-dentist-denver-dental-implants-arvada-dentist.png.webp",
+      "file": "best-dental-imaplant-dentist-denver-dental-implants-arvada-dentist.png.webp",
+      "bytes": 35258
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2020/03/mountain-pattern-W3.png.webp",
+      "file": "mountain-pattern-W3.png.webp",
+      "bytes": 257990
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/office1.jpg.webp",
+      "file": "office1.jpg.webp",
+      "bytes": 79942
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2025/03/video-1-3.png.webp",
+      "file": "video-1-3.png.webp",
+      "bytes": 81332
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2023/03/dr-suzanna-mcaninley-square-close.jpg.webp",
+      "file": "dr-suzanna-mcaninley-square-close.jpg.webp",
+      "bytes": 27248
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/09/CJ.jpg.webp",
+      "file": "CJ.jpg.webp",
+      "bytes": 24612
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2025/07/Arvada-Dental-Center-9.jpg.webp",
+      "file": "Arvada-Dental-Center-9.jpg.webp",
+      "bytes": 135598
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2024/01/Dental-Implants-in-Arvada-Dental-Implants-Denver.png.webp",
+      "file": "Dental-Implants-in-Arvada-Dental-Implants-Denver.png.webp",
+      "bytes": 80438
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/dr_bennett.jpg.webp",
+      "file": "dr_bennett.jpg.webp",
+      "bytes": 55022
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2020/03/pattern-marble.jpg.webp",
+      "file": "pattern-marble.jpg.webp",
+      "bytes": 10378
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/sedation_hero.jpg.webp",
+      "file": "sedation_hero.jpg.webp",
+      "bytes": 58066
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/dental-patient-taking-sedation-pill-1-3.jpg.webp",
+      "file": "dental-patient-taking-sedation-pill-1-3.jpg.webp",
+      "bytes": 10970
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/nitro.jpg.webp",
+      "file": "nitro.jpg.webp",
+      "bytes": 34988
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/video_cover-3.jpg.webp",
+      "file": "video_cover-3.jpg.webp",
+      "bytes": 40562
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2022/06/transformation.jpg.webp",
+      "file": "transformation.jpg.webp",
+      "bytes": 142496
+    },
+    {
+      "url": "https://arvadadentalcenter.com/wp-content/uploads/2024/12/dental-implants-denver-dentist-in-arvada-dental-implants-arvada-dentist-near-me-arvada-denver.png",
+      "file": "dental-implants-denver-dentist-in-arvada-dental-implants-arvada-dentist-near-me-arvada-denver.png",
+      "bytes": 889766
+    }
+  ]
+}

@@ -149,6 +149,11 @@ The thank-you page has an identical 4-section spec in both clients. The prior de
 work in [`livewell-dental/`](../livewell-dental/docs/project-overview.md) is the closest existing
 reference.
 
+All four archetypes were built on Arvada 2026-08-05, plus a shared nine-beat spine, a reusable
+`brand.css`/`brand.js`, bot-challenge scrapers, and a warning that the Greenspot NPS reference is
+Cloudflare-blocked. Reuse rather than rebuild —
+[`arvada-dental-center/docs/shared-learnings.md`](../arvada-dental-center/docs/shared-learnings.md).
+
 ## Parallel agent rules
 
 1. **One agent per client folder.** The folders are independent; the shared page archetypes are

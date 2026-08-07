@@ -4,6 +4,15 @@
 # Browser style-capture fetched resource mirrors are noisy third-party caches;
 # keep resource-urls.json instead.
 manage/browser-tools/playwright-browser/.tmp/style-capture-*/code/resources/
+# Rendered-DOM mirrors from content-intake captures are the same kind of noisy
+# third-party cache (~7.5MB for one client). The structured meta.json extracted
+# from each one is committed instead, and capture.mjs re-fetches the raw page.
+**/01-content-intake/.tmp/**/rendered.html
+# Throwaway Chrome profiles created by the headless QA harnesses. Tens of MB of
+# browser state per run, regenerated on every invocation.
+# Throwaway Chrome profiles for the driven QA harnesses. Each harness makes its
+# own so two runs cannot collide; the glob saves enumerating every new one.
+**/.chrome-*/
 
 # Headless-Chrome user-data dirs from verification harnesses. These land inside
 # .tmp/ and contain paths longer than Git can index on Windows.
