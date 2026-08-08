@@ -1,0 +1,552 @@
+{
+ "viewport": 1440,
+ "comparable": 40,
+ "diffs": [
+  {
+   "id": "header",
+   "prop": "height",
+   "design": "100.375px",
+   "live": "102.609px"
+  },
+  {
+   "id": "chapterReadout",
+   "prop": "width",
+   "design": "193.531px",
+   "live": "188.047px"
+  },
+  {
+   "id": "chName",
+   "prop": "width",
+   "design": "67.0781px",
+   "live": "63.9844px"
+  },
+  {
+   "id": "chBar",
+   "prop": "background-color",
+   "design": "rgba(255, 255, 255, 0.72)",
+   "live": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": "chBar",
+   "prop": "width",
+   "design": "84px",
+   "live": "81.5938px"
+  },
+  {
+   "id": "smooth-wrapper",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "smooth-wrapper",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "smooth-content",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "smooth-content",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "smooth-content",
+   "prop": "height",
+   "design": "8717.8px",
+   "live": "8885.91px"
+  },
+  {
+   "id": "top",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "top",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "top",
+   "prop": "height",
+   "design": "8325.66px",
+   "live": "8519.95px"
+  },
+  {
+   "id": "arrival",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "arrival",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "arrival",
+   "prop": "padding-bottom",
+   "design": "142.2px",
+   "live": "136px"
+  },
+  {
+   "id": "arrival",
+   "prop": "height",
+   "design": "892.625px",
+   "live": "961.328px"
+  },
+  {
+   "id": "arrivalImg",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "arrivalImg",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "arrivalImg",
+   "prop": "height",
+   "design": "892.625px",
+   "live": "961.328px"
+  },
+  {
+   "id": "arrivalVeil",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "arrivalVeil",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "arrivalVeil",
+   "prop": "height",
+   "design": "892.625px",
+   "live": "961.328px"
+  },
+  {
+   "id": "arrivalInner",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "arrivalInner",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "arrivalInner",
+   "prop": "height",
+   "design": "622.438px",
+   "live": "697.328px"
+  },
+  {
+   "id": "stamp",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "stamp",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "stampRipple",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "28.56px"
+  },
+  {
+   "id": "stampRing",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "28.56px"
+  },
+  {
+   "id": "stampPath",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "stampPath",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "arrivalTitle",
+   "prop": "font-family",
+   "design": "Montserrat, system-ui, -apple-system, \"Seg",
+   "live": "\"Montserrat Variablefont Wght\", Arial, san"
+  },
+  {
+   "id": "arrivalTitle",
+   "prop": "font-size",
+   "design": "58.3757px",
+   "live": "83px"
+  },
+  {
+   "id": "arrivalTitle",
+   "prop": "line-height",
+   "design": "59.5432px",
+   "live": "84.66px"
+  },
+  {
+   "id": "arrivalTitle",
+   "prop": "max-width",
+   "design": "719.702px",
+   "live": "1023.39px"
+  },
+  {
+   "id": "arrivalTitle",
+   "prop": "width",
+   "design": "663.625px",
+   "live": "815.156px"
+  },
+  {
+   "id": "arrivalTitle",
+   "prop": "height",
+   "design": "119.062px",
+   "live": "169.312px"
+  },
+  {
+   "id": "fast-track",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "fast-track",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "fast-track",
+   "prop": "padding-top",
+   "design": "71.1px",
+   "live": "68px"
+  },
+  {
+   "id": "fast-track",
+   "prop": "padding-bottom",
+   "design": "71.1px",
+   "live": "68px"
+  },
+  {
+   "id": "fast-track",
+   "prop": "height",
+   "design": "400.125px",
+   "live": "460.984px"
+  },
+  {
+   "id": "openStatus",
+   "prop": "font-size",
+   "design": "19.2374px",
+   "live": "21px"
+  },
+  {
+   "id": "openStatus",
+   "prop": "line-height",
+   "design": "32.3189px",
+   "live": "35.28px"
+  },
+  {
+   "id": "openStatus",
+   "prop": "height",
+   "design": "32.3125px",
+   "live": "35.2656px"
+  },
+  {
+   "id": "openStatusText",
+   "prop": "font-size",
+   "design": "19.2374px",
+   "live": "21px"
+  },
+  {
+   "id": "openStatusText",
+   "prop": "line-height",
+   "design": "32.3189px",
+   "live": "35.28px"
+  },
+  {
+   "id": "openStatusText",
+   "prop": "width",
+   "design": "165.578px",
+   "live": "180.812px"
+  },
+  {
+   "id": "openStatusText",
+   "prop": "height",
+   "design": "32.3125px",
+   "live": "35.2656px"
+  },
+  {
+   "id": "openNext",
+   "prop": "font-size",
+   "design": "14.4612px",
+   "live": "16px"
+  },
+  {
+   "id": "openNext",
+   "prop": "line-height",
+   "design": "24.2949px",
+   "live": "26.88px"
+  },
+  {
+   "id": "openNext",
+   "prop": "height",
+   "design": "72.8906px",
+   "live": "80.625px"
+  },
+  {
+   "id": "path",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "path",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "pathPin",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "pathPin",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "pathRail",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "pathRail",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "preparation",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "preparation",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "prepPin",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "prepPin",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "prepList",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "28.56px"
+  },
+  {
+   "id": "prepList",
+   "prop": "height",
+   "design": "519.297px",
+   "live": "568.906px"
+  },
+  {
+   "id": "prepBar",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "prepBar",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "team",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "team",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "team",
+   "prop": "padding-top",
+   "design": "120.87px",
+   "live": "96.56px"
+  },
+  {
+   "id": "team",
+   "prop": "padding-bottom",
+   "design": "120.87px",
+   "live": "96.56px"
+  },
+  {
+   "id": "team",
+   "prop": "height",
+   "design": "1569.91px",
+   "live": "1554.64px"
+  },
+  {
+   "id": "place",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "place",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "place",
+   "prop": "height",
+   "design": "1845px",
+   "live": "1924px"
+  },
+  {
+   "id": "placePin",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "placePin",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "placePin",
+   "prop": "height",
+   "design": "880.719px",
+   "live": "959.438px"
+  },
+  {
+   "id": "placeMarker",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "28.56px"
+  },
+  {
+   "id": "placeMarker",
+   "prop": "height",
+   "design": "172.844px",
+   "live": "183.891px"
+  },
+  {
+   "id": "placeDetails",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "28.56px"
+  },
+  {
+   "id": "placeDetails",
+   "prop": "height",
+   "design": "518.547px",
+   "live": "551.719px"
+  },
+  {
+   "id": "hoursList",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "28.56px"
+  },
+  {
+   "id": "hoursList",
+   "prop": "height",
+   "design": "256.578px",
+   "live": "273.969px"
+  },
+  {
+   "id": "placeMap",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "placeMap",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "practiceMap",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "practiceMap",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  },
+  {
+   "id": "practiceMap",
+   "prop": "height",
+   "design": "458px",
+   "live": "150px"
+  },
+  {
+   "id": "placeBar",
+   "prop": "font-size",
+   "design": "15.5226px",
+   "live": "17.46px"
+  },
+  {
+   "id": "placeBar",
+   "prop": "line-height",
+   "design": "26.078px",
+   "live": "29.3328px"
+  }
+ ]
+}

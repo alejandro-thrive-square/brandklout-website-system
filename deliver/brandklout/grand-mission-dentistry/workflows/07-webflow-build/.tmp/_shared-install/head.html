@@ -238,4 +238,13 @@ html:not(.wz-ready.wz-ready.wz-ready) .chapter-tag i{transform:none}
   70% { transform: scale(1.5); opacity: 0; }
   100% { transform: scale(1.5); opacity: 0; }
 }
+
+/* The chapter readout is display:none in its base rule and revealed by
+   @media (min-width:1080px) in kit.css. The runtime-states extraction pulls a
+   captured selector's BASE rule but not its min-width companions, so this block
+   re-asserted the none and never turned it back on — and because it is an inline
+   <style> in the head it outranks the converted stylesheet, which had the rule
+   right. The readout was therefore hidden on all three pages at every width.
+   Audited: this is the ONLY rule affected across the three pages. */
+@media (min-width:1080px){.header__chapter{display:flex}}
 </style>
