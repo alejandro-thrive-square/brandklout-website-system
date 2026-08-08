@@ -565,6 +565,23 @@ The payload shape is:
 
 ## CSS Variables Preflight
 
+> [!WARNING]
+> **Never open the design's main `<style>` block with `@import`.** The CSS parser reads
+> everything before the first `{` as one selector group, so an `@import url("...")` line
+> absorbs the whole `.page_x{ --token: ... }` block that follows it. `parse_rules` then
+> returns **zero** custom properties and every `var()` in the payload resolves to an
+> **empty value**: `background:`, `color:`, `padding-block:` with nothing after the colon.
+> The conversion succeeds, the node and style counts look right, and the page pastes
+> unstyled. Load fonts with a `<link rel="stylesheet">` in `<head>` instead.
+>
+> Preflight check, on the prepped source, before converting:
+> ```bash
+> python -c "import sys,io,re; sys.path.insert(0,'.'); import html_to_webflow as H; >   css='
+'.join(re.findall(r'<style[^>]*>(.*?)</style>', io.open(SRC,encoding='utf-8').read(), re.S)); >   print('vars:', len(H.parse_rules(css)[2]))"
+> ```
+> A design package with a token block must not report `vars: 0`. Found on the Livewell
+> quiz and thank-you pages, 2026-08-07.
+
 Before pasting components, extract source CSS custom properties from the approved
 design and import them into the target Webflow project through MCP.
 
@@ -947,6 +964,47 @@ from, and a copy is dropped into the page folder as `site.css`. Because every
 page bakes from the **same** CSS, shared components resolve to byte-identical
 records across pages — which removes the cross-page collisions that per-page
 `<style>` blocks caused.
+
+## Tag resets out-specify every flat class
+
+A design that carries both a tag reset and flat element classes has a silent bug:
+
+```css
+.page_x p{margin:0}            /* (0,1,1) - class + type */
+.qz-hero__lede{margin-top:26px}/* (0,1,0) - class only  */
+```
+
+The reset wins, so **every** `margin-top` on a paragraph class computes to `0`, and
+`max-width` + `margin-inline:auto` never centres. The same trap applies to
+`.page_x a{color:inherit}` (which produced a white-on-white CTA button) and to
+`.page_x h1,h2,h3{font-family:...}` (which overrode a heading class that deliberately
+wanted a different family and weight).
+
+**Carry margins, colours and typography on the flat classes and delete the tag reset.**
+That is the same standard `--page-prefix` already implies: a tag-derived base rule costs an
+auto-named companion class on conversion, so removing it is a win twice over. Sweep for it
+with: for each `.page_x <tag>{...}` reset, list its properties, then flag any single-class
+rule on that tag that declares the same property.
+
+Careful with shared atoms: if an atom relies on the reset for its zero margin, either move
+its elements to a tag with no UA margin (`<p class="lw-eyebrow">` became
+`<div class="lw-eyebrow">`) or the atom's CSS forks from the other payloads.
+
+## Native `<button>`, `<label>`, `<input>` and `<form>` have no Webflow equivalent
+
+They fall back to HtmlEmbeds and the element **loses every class style**. One quiz page
+converted 44 buttons and 6 labels into 50 separate embeds before this was caught.
+
+- Interactive triggers: `<div role="button" tabindex="0">` and wire Enter/Space by hand.
+  A native `<button>` gave that free; a div does not.
+- Form fields: wrap the whole field group in **one** `<form>` so it converts to a single
+  embed, and move that subtree's CSS into the section's `<style data-embed>` so the embed
+  renders styled. Its inner elements are not Webflow nodes, so their classes cannot exist as
+  Designer styles.
+
+Check the converter's own warning line after every run:
+`[html_to_webflow] embedded unsupported tags as HtmlEmbed: ...` — anything beyond the single
+intentional `form` means a section silently lost its styling.
 
 ## Tag-derived auto-names — `--page-prefix` (REQUIRED when pasting into a site you did not build)
 

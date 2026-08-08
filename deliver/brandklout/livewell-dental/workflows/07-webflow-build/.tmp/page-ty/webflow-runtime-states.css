@@ -1,0 +1,9 @@
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Lato:wght@400;700;900&display=swap");
+.lw-btn--ghost.lw-btn--ghost.lw-btn--ghost{border-color:currentColor;color:#0b2c41}
+.lw-btn--ghost.lw-btn--ghost.lw-btn--ghost:hover{background:#0b2c41;color:#fff;border-color:#0b2c41;transform:translateY(-2px)}
+.lw-btn--ghost-light.lw-btn--ghost-light.lw-btn--ghost-light{border-color:rgba(255,255,255,.5);color:#fff}
+.lw-btn--ghost-light.lw-btn--ghost-light.lw-btn--ghost-light:hover{background:#fff;color:#0b2c41;border-color:#fff;transform:translateY(-2px)}
+.lw-btn .lw-ar.lw-ar.lw-ar{display:inline-block}
+.ty-step.is--lit.is--lit.is--lit .ty-step__num{background:#0b2c41;color:#d3aa5a;transform:scale(1.06)}
+.ty-faq__item.is--open.is--open.is--open{background:#fff;border-color:#0b2c41}
+.ty-faq__item.is--open.is--open.is--open .ty-faq__sign{transform:rotate(45deg)}

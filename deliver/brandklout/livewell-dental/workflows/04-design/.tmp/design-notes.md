@@ -439,3 +439,144 @@ Payload: `../../07-webflow-build/.tmp/page-cosmetic/paste_01_page_cosmetic.html`
    know which is which.
 5. **"320+ five star reviews" and the $0 consultation** are the client's own claims. Confirm both
    are current before launch.
+
+---
+
+# Implant eligibility quiz + thank-you page — r1 design notes
+
+- **Packages**: `final-design/livewell-implant-quiz.html`, `final-design/livewell-thank-you.html`
+- **Previews**: `preview-quiz-1440.png` / `preview-quiz-390.png`,
+  `preview-ty-1440.png` / `preview-ty-390.png`
+- **Reference captures**: `smartarches/refs/quiz-1440.png`, `quiz-390.png`,
+  `ty-1440.png`, `ty-390.png`
+- **Reference quiz structure**: `smartarches/refs/quiz-steps.json` (all 11 steps, walked live)
+- **Behaviour probes**: `smartarches/behave-quiz.mjs`, `smartarches/behave2.mjs`
+- **Built**: 2026-08-07
+- **Status**: internal r1. Not sent to Brandklout, not pasted to Webflow.
+
+## What this is
+
+Clones of two Smart Arches Dental pages, rebuilt on the Livewell system:
+
+| Reference | Livewell page |
+| :--- | :--- |
+| `https://smartarchesdental.com/quiz/` | Dental implant eligibility quiz |
+| `https://start.smartarchesdental.com/thank-you` | Post-enquiry thank-you page |
+
+The reference quiz is a Gravity Forms multi-page form that loads each step over AJAX, so the
+questions are not in the page source. All eleven steps were walked live with a CDP driver and
+recorded to `smartarches/refs/quiz-steps.json`; the Livewell quiz is built from that, not from
+guesswork.
+
+## Brand fidelity
+
+Tokens were read **live from the Livewell Webflow project** through the `webflow-brandklout` MCP
+(site `69d03fdbe999e9907724a69d`), not lifted from compiled CSS this time. They match the values
+the earlier packages recorded:
+
+| Token | Value | Webflow variable |
+| :--- | :--- | :--- |
+| Navy | `#0b2c41` | `--color-scheme-1--green` |
+| Gold | `#d3aa5a` | `--color-scheme-1--golden` |
+| Teal | `#376b7b` | `--color-scheme-1--green-300` |
+| Bone | `#f6f3ee` | `--off-white-bg` |
+| Grey | `#949c94` | `--grey` |
+| Heading font | Marcellus | `--_typography---font-styles--heading` |
+| Body font | Lato | `--_typography---font-styles--body` |
+| Radii | 4 / 8 / 16 | `--_ui-styles---radius--*` |
+
+Shared atoms (`lw-shell`, `lw-sec`, `lw-eyebrow`, `lw-btn` and its modifiers) are byte-identical
+to the home, veneers and cosmetic packages so Webflow's paste reconciliation merges them by name.
+
+## Section maps
+
+**Quiz** (single root `.page_quiz`)
+
+| # | Root | What it is |
+| :-- | :--- | :--- |
+| 1 | `qz-bar` | Review + phone bar |
+| 2 | `qz-head` | Sticky header, logo + phone + CTA |
+| 3 | `section_qz-hero` | **Signature.** Dark split hero with the working eleven-step quiz card |
+| 4 | `section_qz-stories` | Draggable patient-story rail, click to play |
+| 5 | `section_qz-proof` | Dark band, drifting type backdrop, reviews, credential marquee |
+| 6 | `qz-foot` / 7 `qz-rail` | Footer, mobile CTA rail |
+
+**Thank you** (single root `.page_ty`)
+
+| # | Root | What it is |
+| :-- | :--- | :--- |
+| 1 | `ty-head` | Minimal header, logo + call pill |
+| 2 | `section_ty-hero` | Call-first hero: pulsing phone glyph, badge, big call CTA, reviews |
+| 3 | `section_ty-expect` | **Signature.** Three call steps on a scroll-scrubbed progress rail, next to four delay consequences, closing on a reassurance callout |
+| 4 | `section_ty-why` | Experience / Care / Cost |
+| 5 | `section_ty-faq` | Seven-item accordion |
+| 6 | `section_ty-cta` | Dark closing card with call, address and hours |
+| 7 | `ty-marks` / 8 `ty-foot` / 9 `ty-rail` | Credential strip, footer, mobile rail |
+
+## Deliberate deviations from the reference
+
+Smart Arches' own facts are **not** Livewell's, and none of them were transplanted. Their
+1,200+ reviews, 20,000+ cases, 99% success rate, board-certified-surgeons strip, six clinic
+locations and `$19,999 per arch / $274 a month` pricing are all absent. What replaced them:
+
+| Reference | This build | Why |
+| :--- | :--- | :--- |
+| `1,200+ 5-Star Google Reviews` | `320+ five star reviews` | Livewell's own claim, already used across the other packages |
+| `20,000+ patients treated, 99% success rate, board-certified surgeons` | Dr. Chris's five real credential marks | Those figures are Smart Arches', and Livewell has published nothing equivalent |
+| Q6 states a starting price per arch and a monthly figure | Question kept, no number | Livewell has published neither. Flagged in-page for Dr. Chris |
+| Q9 "Location to contact", six clinics | "What matters most to you as you decide?" | Livewell has one location, so the question has no analogue. Flagged |
+| Q10 first responder / teacher / veteran | Kept verbatim | On the reference it exists because those groups get a discount. Flagged: asking it with no offer behind it sets an expectation |
+| Q4 and Q5 name Smart Arches | Name Livewell Dental | |
+| Thank-you FAQ: procedure length, recovery time, surgical risk | Left out | Clinical, and Livewell has published nothing on them. Better absent than invented |
+| Thank-you FAQ: bone volume, implant lifespan | Added | Livewell's own published answers, from their implants landing package |
+| Video carousel of three patient films | Three real Livewell films | The Vimeo patient testimonial, Dr. Chris on implant care, the lab partnership |
+
+Client directives honoured: **no stock imagery** (every image and film is the client's own
+Webflow CDN asset), **no em dashes** in visible copy, **"Dr. Chris"** in running copy, hours as
+corrected in thread 24, address `9027 Silverbrook Rd Ste. F, Fairfax Station, VA 22039`.
+
+## Motion
+
+Dependency-free, IO-gated, `prefers-reduced-motion` aware. Verified with motion enabled and
+**zero JS errors** on both pages.
+
+Quiz: the eleven-step quiz itself (progress meter, back, per-step validation, multi-select on
+step 2, keyboard activation, result screen); a drifting and draggable story rail whose stages
+ship with **no `<video>` or `<iframe>` at all** and inject a player on click; a credential
+marquee; a drifting oversized type backdrop; staggered scroll reveals.
+
+Thank you: a scroll-scrubbed rail lighting the three call steps in order; a pulsing ring on the
+hero phone glyph; a single-open accordion; a credential marquee; staggered reveals.
+
+## Bugs this build surfaced in the existing packages
+
+Two of the defects found here are **not specific to these pages** and affect work already pasted
+to Webflow:
+
+1. **`.page_x p{margin:0}` and the `h1,h2,h3` reset out-specify every flat class.** The reset is
+   (0,1,1), a single class is (0,1,0), so every `margin-top` on a paragraph or heading class
+   computes to 0. The veneers and cosmetic packages both carry this reset.
+2. **The credential SVGs are white artwork.** `section_csm-marks` on the cosmetic landing page
+   puts them on `--bone`, so that marquee renders as an empty band on the live page.
+
+Both are one-line fixes. Full detail, plus six converter-level gotchas, in
+[QUIZ-AND-THANK-YOU-RUNBOOK.md](../../07-webflow-build/.tmp/QUIZ-AND-THANK-YOU-RUNBOOK.md).
+
+## Open questions for Brandklout / Dr. Chris
+
+1. **The payment-plan step has no price.** Supply a starting figure and a monthly figure if you
+   want them shown.
+2. **The swapped question 9.** Keep the "what matters most" qualifier, or drop the step and run
+   the quiz to ten?
+3. **Question 10** implies a first responder / teacher / senior / veteran programme. Does one
+   exist? If not, cut the step.
+4. **Clinical copy** needs sign-off: the four delay consequences, the three call steps, and the
+   `$1,900 to $2,800` single-implant range carried over from the implants landing package.
+5. **Neither page delivers a lead.** The quiz's submit shows a confirmation and nothing more.
+6. **Slugs.** A `thank-you-for` page already exists on the site. Replace it, or take a new slug?
+
+## Version Control
+
+Follows [SYSTEM_RULES.md - Section 4](../../../../../SYSTEM_RULES.md). The HTML packages and PNG
+previews are lightweight and committable. The packages reference the client's Webflow CDN URLs
+directly rather than carrying imagery.
