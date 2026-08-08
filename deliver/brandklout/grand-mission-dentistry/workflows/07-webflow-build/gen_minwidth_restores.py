@@ -74,6 +74,26 @@ def decls(text):
     return out
 
 
+def boost(sel):
+    """Raise a design selector's specificity above the Webflow combo it targets.
+
+    The design writes `.arrival__inner`; the conversion turns it into the combo
+    `.gm-box.shell.arrival__inner`, which is (0,3,0) and beats a plain (0,1,0)
+    restore no matter what order the stylesheets are in. Repeating the subject's
+    own class lifts it clear without changing WHAT it matches — the same trick
+    the reveal states use. Five repeats beats the longest chain these builds
+    produce (four classes).
+    """
+    parts = sel.strip().split()
+    last = parts[-1]
+    m = re.match(r"(\.[A-Za-z0-9_-]+)", last)
+    if m:
+        parts[-1] = last + m.group(1) * 4
+    elif last.startswith(":root"):
+        parts[-1] = last + ":root" * 4
+    return " ".join(parts)
+
+
 def base_value(base, sel, prop, fallback):
     """The value to go back to below the threshold.
 
@@ -142,7 +162,7 @@ def main(argv=None):
         out.append(f"@media (max-width: {int(n) - 1}.98px){{")
         for sel, props in by_threshold[n].items():
             body = "".join(f"{k}:{v};" for k, v in props.items())
-            out.append(f"  {sel}{{{body}}}")
+            out.append(f"  {boost(sel)}{{{body}}}")
         out.append("}")
     text = "\n".join(out) + "\n"
 

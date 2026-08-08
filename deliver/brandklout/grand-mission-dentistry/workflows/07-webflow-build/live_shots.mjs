@@ -41,6 +41,28 @@ await send("Page.navigate",{url:URL_},sessionId); await wait(10000);
 const ev=async(expr)=>{try{const r=await send("Runtime.evaluate",{expression:expr,returnByValue:true},sessionId);
   if(r.exceptionDetails){console.log("EVAL ERR:",r.exceptionDetails.text);return null;} return r.result.value;}
  catch(e){console.log("SEND ERR:",e.message);return null;}};
+/* REFUSE to write frames from an unstyled render. Headless Chrome on this
+   machine intermittently fails the stylesheet fetch, and the result is not
+   obviously broken in a thumbnail — it is a plausible-looking page with default
+   fonts that reads as a layout defect. That capture has been misdiagnosed twice.
+   An unstyled page reports the fixed header as `static`; a styled one does not.
+   The file size is NOT a usable signal — an unstyled page renders the hero image
+   full-bleed and comes out LARGER. */
+for (let attempt = 1; ; attempt++) {
+  const styled = await ev('(function(){var h=document.querySelector(".gm-header");'
+    + 'return !!h && getComputedStyle(h).position === "fixed";})()');
+  if (styled) break;
+  if (attempt >= 3) {
+    console.log("ABORT: stylesheet never applied after 3 loads — no frames written.");
+    console.log("       (the site is fine; re-run. curl the CSS bundle if you doubt it.)");
+    try { await send("Browser.close"); } catch {}
+    process.exit(3);
+  }
+  console.log(`  stylesheet not applied, reloading (${attempt}/3) …`);
+  await send("Page.navigate", {url: URL_}, sessionId);
+  await wait(10000);
+}
+
 const max = await ev("document.documentElement.scrollHeight - innerHeight");
 for(let i=0;i<N;i++){
   const y = Math.round(max * i/(N-1));
