@@ -105,7 +105,14 @@ async function snap(url, label) {
 }
 
 const design = await snap(`http://127.0.0.1:${PORT}/index.html`, "design");
-const live = await snap(LIVE_URL, "live  ");
+/* Cache-bust the live URL. Webflow's `publish_site` returns immediately and
+   compiles asynchronously, and the CDN will happily serve the PREVIOUS build
+   for minutes afterwards — which reads as a page that has lost its styling.
+   That produced a 151-diff "regression" on thank-you whose every symptom
+   (transparent backgrounds, zeroed padding, display block) was absent when the
+   same element was measured directly a minute later. */
+const bust = (u) => u + (u.includes("?") ? "&" : "?") + "pcb=" + process.pid + Date.now();
+const live = await snap(bust(LIVE_URL), "live  ");
 
 const ids = Object.keys(design).filter((k) => live[k]);
 console.log(`\ncomparable ids: ${ids.length}  (design-only: ` +
