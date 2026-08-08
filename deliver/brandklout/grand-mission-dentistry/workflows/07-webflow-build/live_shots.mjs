@@ -4,12 +4,16 @@
 import fs from "node:fs"; import os from "node:os"; import path from "node:path";
 import http from "node:http"; import { spawn } from "node:child_process";
 const URL_ = process.argv[2], OUT = process.argv[3] || ".", N = +(process.argv[4] || 8);
+/* Optional 5th arg: viewport width (default 1440). Mobile is roughly half of
+   paid dental traffic and these pages switch their whole pin architecture at
+   759px, so a desktop-only capture reviews half the build. */
+const VW = +(process.argv[5] || 1440), VH = VW < 700 ? 844 : 900;
 const PORT = 9700 + Math.floor(Math.random()*300);
 const profile = fs.mkdtempSync(path.join(os.tmpdir(),"cdp-shot-"));
 const wait=(ms)=>new Promise(r=>setTimeout(r,ms));
 const chrome=spawn("C:/Program Files/Google/Chrome/Application/chrome.exe",
  ["--headless=new","--disable-gpu","--hide-scrollbars",`--remote-debugging-port=${PORT}`,
-  "--remote-allow-origins=*","--window-size=1440,900","--force-device-scale-factor=1",
+  "--remote-allow-origins=*",`--window-size=${VW},${VH}`,"--force-device-scale-factor=1",
   "--no-first-run","--no-default-browser-check",`--user-data-dir=${profile}`,"about:blank"]);
 const getJSON=(p)=>new Promise((res,rej)=>{http.get({host:"127.0.0.1",port:PORT,path:p},(r)=>{
   let d="";r.on("data",c=>d+=c);r.on("end",()=>res(JSON.parse(d)));}).on("error",rej);});
@@ -28,6 +32,11 @@ const {sessionId}=await send("Target.attachToTarget",{targetId:pt.targetId,flatt
 await send("Page.enable",{},sessionId);
 await send("Runtime.enable",{},sessionId);
 await send("Emulation.setEmulatedMedia",{features:[{name:"prefers-reduced-motion",value:"no-preference"}]},sessionId);
+/* Device metrics, not --window-size: Chrome floors a window at roughly 500px on
+   Windows, so a requested 390 silently renders at ~500 and the phone layout is
+   never actually captured. */
+await send("Emulation.setDeviceMetricsOverride",
+  {width:VW,height:VH,deviceScaleFactor:1,mobile:VW<700},sessionId);
 await send("Page.navigate",{url:URL_},sessionId); await wait(10000);
 const ev=async(expr)=>{try{const r=await send("Runtime.evaluate",{expression:expr,returnByValue:true},sessionId);
   if(r.exceptionDetails){console.log("EVAL ERR:",r.exceptionDetails.text);return null;} return r.result.value;}

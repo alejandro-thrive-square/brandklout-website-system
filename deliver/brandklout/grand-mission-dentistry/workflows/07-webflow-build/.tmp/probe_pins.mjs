@@ -45,6 +45,13 @@ const { targetInfos } = await send('Target.getTargets');
 const pt = targetInfos.find((t) => t.type === 'page') || { targetId: (await send('Target.createTarget', { url: 'about:blank' })).targetId };
 const { sessionId } = await send('Target.attachToTarget', { targetId: pt.targetId, flatten: true });
 await send('Runtime.enable', {}, sessionId); await send('Page.enable', {}, sessionId);
+/* WIDTH=<px> forces a real viewport via device metrics. `--window-size` cannot
+   do this: Chrome floors a window at roughly 500px on Windows, so asking for
+   390 silently gives ~500 and a phone layout is never actually tested. */
+if (process.env.WIDTH) {
+  await send('Emulation.setDeviceMetricsOverride',
+    { width: +process.env.WIDTH, height: +(process.env.HEIGHT || 844), deviceScaleFactor: 1, mobile: true }, sessionId);
+}
 await send('Page.navigate', { url: URL_ }, sessionId); await wait(10000);
 const ev = async (fn) => {
   const r = await send('Runtime.evaluate', { expression: `(${fn.toString()})()`, returnByValue: true, awaitPromise: true }, sessionId);
