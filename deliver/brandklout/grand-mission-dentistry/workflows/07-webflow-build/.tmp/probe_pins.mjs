@@ -87,6 +87,14 @@ await wait(14000);
 /* Optional second argument: any expression to evaluate once the page has
    settled. Cheaper than writing a new CDP harness every time a single measured
    number would answer the question. */
+/* Optional 4th argument: scroll here (through ScrollSmoother) before measuring.
+   Anything lazy-loaded reads as absent at the top of the page — Webflow renders
+   `loading="lazy"` on bound images where the design had `eager`, so measuring a
+   below-the-fold image without scrolling to it says nothing. */
+if (process.argv[4]) {
+  await ev(new Function(`if (window.WZ && WZ.smoother) WZ.smoother.scrollTo(${+process.argv[4]}, false); else window.scrollTo(0, ${+process.argv[4]}); return null;`));
+  await wait(4000);
+}
 if (process.argv[3]) {
   const r = await send('Runtime.evaluate', { expression: process.argv[3], returnByValue: true }, sessionId);
   console.log('expr: ' + JSON.stringify(r.exceptionDetails ? { __err: r.exceptionDetails.text } : r.result.value));
