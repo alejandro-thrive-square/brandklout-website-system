@@ -1,0 +1,83 @@
+{
+  "source": "Webflow variable map",
+  "note": "After MCP import, fill variableId with the Webflow variable ID and cssName with variable.getCSSName(). style_tool variable binding uses variableId via variable_as_value.",
+  "variables": [
+    {
+      "sourceName": "--gold",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--gold",
+      "binding": "var(--gold)"
+    },
+    {
+      "sourceName": "--green",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--green",
+      "binding": "var(--green)"
+    },
+    {
+      "sourceName": "--green-dk",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--green-dk",
+      "binding": "var(--green-dk)"
+    },
+    {
+      "sourceName": "--ink",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--ink",
+      "binding": "var(--ink)"
+    },
+    {
+      "sourceName": "--line",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--line",
+      "binding": "var(--line)"
+    },
+    {
+      "sourceName": "--max",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--max",
+      "binding": "var(--max)"
+    },
+    {
+      "sourceName": "--muted",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--muted",
+      "binding": "var(--muted)"
+    },
+    {
+      "sourceName": "--paper",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--paper",
+      "binding": "var(--paper)"
+    },
+    {
+      "sourceName": "--radius",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--radius",
+      "binding": "var(--radius)"
+    },
+    {
+      "sourceName": "--sage",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--sage",
+      "binding": "var(--sage)"
+    },
+    {
+      "sourceName": "--soft",
+      "variableId": "",
+      "collectionId": "",
+      "cssName": "--soft",
+      "binding": "var(--soft)"
+    }
+  ]
+}

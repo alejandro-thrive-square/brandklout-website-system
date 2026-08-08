@@ -14,7 +14,8 @@ Webzite Agentic Workflow  (main, refs/heads/main)   <-- orchestration only
 ├── bk-arvada               worktree   -> deliver/brandklout/arvada-dental-center/
 ├── bk-mason-park           worktree   -> deliver/brandklout/mason-park/
 ├── bk-dr-nahlah            worktree   -> deliver/brandklout/dr-nahlah/
-└── bk-stone                worktree   -> deliver/brandklout/stone-dental-implant-center/
+├── bk-stone                worktree   -> deliver/brandklout/stone-dental-implant-center/
+└── bk-livewell             worktree   -> deliver/brandklout/livewell-dental/
 ```
 
 Repo id: `7b269532-4e7a-4ceb-baa4-707929ee41d3`
@@ -23,7 +24,7 @@ Repo id: `7b269532-4e7a-4ceb-baa4-707929ee41d3`
 
 The usual pattern here is several Orca tabs in a *single* worktree running different CLIs against
 the same task. That is the right shape when agents are racing the *same* problem. This is the
-opposite shape: five independent clients, each editing its own folder, all at once. Separate
+opposite shape: six independent clients, each editing its own folder, all at once. Separate
 worktrees mean agents cannot collide on each other's files, and each client's work lands on its own
 branch and can be reviewed and merged independently.
 
@@ -100,14 +101,19 @@ orca terminal send --terminal <handle> --text 'Run this and reply with only its 
 
 ```text
 orca worktree create --repo id:7b269532-4e7a-4ceb-baa4-707929ee41d3 \
-  --name bk-<client-slug> --no-parent --agent claude --prompt "<brief>" --json
+  --name bk-<client-slug> --no-parent --base-branch main --json
 ```
 
 `--no-parent` keeps each client independent rather than stacked on another client's branch.
+`--base-branch main` is intentional: this orchestration checkout may be ahead of `origin/main`, and
+the client must start from the exact local baseline that contains its committed starter files.
+Launch the team-profile client agent from the created terminal using the wrapper above; do not use
+`--agent claude` here because Orca cannot select the required per-worktree Claude profile.
 
-**Commit the client's starter docs to local `main` before creating the worktree, then verify the
-new worktree contains that commit.** Orca can branch from `origin/main`, which may lag local `main`;
-anything uncommitted or untracked in the orchestration checkout will not exist in the new checkout.
+**Commit the client's starter docs and routed lightweight workflow files to local `main` before
+creating the worktree, then verify the new worktree contains that commit.** Binary/media assets stay
+ignored and must be synced separately. Anything uncommitted or untracked in the orchestration
+checkout will not exist in the new checkout.
 
 ## Standing brief for every client agent
 
