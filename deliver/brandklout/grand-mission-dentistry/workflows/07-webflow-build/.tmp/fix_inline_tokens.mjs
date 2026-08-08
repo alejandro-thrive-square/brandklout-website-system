@@ -173,11 +173,32 @@ for (const p of plan) {
 for (const r of refused) console.log(`  REFUSED ${r}`);
 if (dry || !plan.length) { console.log(dry ? 'dry run — nothing written' : 'nothing to do'); process.exit(refused.length ? 1 : 0); }
 
+/* Which of the classes we are about to ask for actually EXIST as site styles?
+   `set_style` takes a LIST and appears to no-op the whole list if any name is
+   unknown — the rebuilt case badges came back carrying no class at all because
+   the list named `gallery__badge`, which the converter had folded into the
+   synthetic `cos-emb-5` and never created. The cards then had no width, the
+   pinned ribbon had nothing to travel, and the page failed one scrub check
+   while passing everything else. Ask first, and drop names that do not exist. */
+const asked = [...new Set(plan.flatMap((p) => p.missing
+  .flatMap((c) => (c.attrs.class ?? '').trim().split(/\s+/)).filter(Boolean)))];
+const real = new Set();
+for (let i = 0; i < asked.length; i += 10) {
+  const r = await call('data_style_tool', {
+    siteId: SITE, pageId,
+    context: `Checking which of these class names exist as styles on the site before applying them to rebuilt elements of the ${name} landing page. Read-only.`,
+    actions: [{ label: 'q', query_styles: { queries: asked.slice(i, i + 10).map((n2) => ({ label: n2, name_path: [n2], limit: 30 })) } }],
+  });
+  for (const block of r[0].result ?? []) for (const m of block.matches ?? []) real.add(m.name);
+}
+const dropped = asked.filter((c) => !real.has(c));
+if (dropped.length) console.log(`  (not site styles, will not be applied: ${dropped.join(', ')})`);
+
 let made = 0;
 for (const p of plan) {
   /* Prepend in REVERSE so the finished order matches the payload. */
   for (const c of [...p.missing].reverse()) {
-    const cls = (c.attrs.class ?? '').trim();
+    const cls = (c.attrs.class ?? '').trim().split(/\s+/).filter((n2) => n2 && real.has(n2)).join(' ');
     const txt = c.children.find((x) => x.tag === '#text')?.text.trim() ?? '';
     const res = await call('data_element_builder', {
       siteId: SITE, pageId,

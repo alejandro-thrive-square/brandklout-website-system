@@ -83,6 +83,15 @@ console.log(JSON.stringify(out, null, 1));
    formality. A matchMedia revert that double-kills its own context empties
    ScrollTrigger without raising anything. */
 await wait(14000);
+
+/* Optional second argument: any expression to evaluate once the page has
+   settled. Cheaper than writing a new CDP harness every time a single measured
+   number would answer the question. */
+if (process.argv[3]) {
+  const r = await send('Runtime.evaluate', { expression: process.argv[3], returnByValue: true }, sessionId);
+  console.log('expr: ' + JSON.stringify(r.exceptionDetails ? { __err: r.exceptionDetails.text } : r.result.value));
+}
+
 const later = await ev(() => {
   const all = window.ScrollTrigger ? window.ScrollTrigger.getAll() : [];
   return { triggers: all.length, pinned: all.filter((t) => !!t.pin).length,
