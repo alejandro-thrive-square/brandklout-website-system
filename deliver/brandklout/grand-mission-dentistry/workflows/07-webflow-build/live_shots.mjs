@@ -63,7 +63,21 @@ for (let attempt = 1; ; attempt++) {
   await wait(10000);
 }
 
-const max = await ev("document.documentElement.scrollHeight - innerHeight");
+/* Wait for the document to STOP GROWING before deciding how far to scroll.
+   Pin spacers are added as each pinned chapter initialises, and measuring
+   before that silently reports a page roughly half its real length — cosmetic
+   read 7,765 instead of 11,865, so every capture stopped mid-page and the
+   chapters below were never seen. ScrollTrigger.maxScroll is the authoritative
+   value under ScrollSmoother; scrollHeight over-reports. */
+let max = 0;
+for (let stable = 0, last = -1; stable < 3;) {
+  const now = await ev('(function(){return window.ScrollTrigger'
+    + ' ? Math.round(ScrollTrigger.maxScroll(window))'
+    + ' : document.documentElement.scrollHeight - innerHeight;})()');
+  stable = (now === last) ? stable + 1 : 0;
+  last = now; max = now;
+  await wait(700);
+}
 for(let i=0;i<N;i++){
   const y = Math.round(max * i/(N-1));
   await ev(`window.WZ&&WZ.smoother? WZ.smoother.scrollTop(${y}) : scrollTo(0,${y})`);
