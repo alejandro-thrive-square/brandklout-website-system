@@ -94,12 +94,37 @@ const PROBE = `(function(){
   return JSON.stringify(out);
 })()`;
 
+/* Prove the stylesheet applied before trusting a single measurement. Headless
+   Chrome here intermittently fails the CSS fetch, and an unstyled page does not
+   error — it produces a full set of plausible computed values that differ from
+   the design everywhere. That is not a small distortion: the same page measured
+   166 diffs on a failed load and 79 on the next run, and an earlier failed load
+   was nearly filed as a 151-diff regression. `.gm-header` is `position: fixed`
+   only when the stylesheet is in force. */
+const SENTINEL = `(function(){var h=document.querySelector(".gm-header");
+  return !!h && getComputedStyle(h).position === "fixed";})()`;
+
 async function snap(url, label) {
-  await send("Page.navigate", { url }, sessionId);
-  await wait(9000);
-  const r = await send("Runtime.evaluate",
-    { expression: PROBE, returnByValue: true }, sessionId);
-  const v = JSON.parse(r.result.value);
+  let v = null;
+  for (let attempt = 1; attempt <= 3; attempt++) {
+    await send("Page.navigate", { url }, sessionId);
+    await wait(9000);
+    const ok = await send("Runtime.evaluate", { expression: SENTINEL, returnByValue: true }, sessionId);
+    if (!ok.result.value) {
+      console.log(`${label}: stylesheet not applied, reloading (${attempt}/3) …`);
+      if (attempt === 3) {
+        console.error(`ABORT: ${label} never applied its stylesheet — no comparison made.`);
+        try { chrome.kill(); } catch {}
+        srv.close();
+        process.exit(3);
+      }
+      continue;
+    }
+    const r = await send("Runtime.evaluate",
+      { expression: PROBE, returnByValue: true }, sessionId);
+    v = JSON.parse(r.result.value);
+    break;
+  }
   console.log(`${label}: ${Object.keys(v).length} id-addressed elements`);
   return v;
 }

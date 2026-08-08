@@ -1,7 +1,13 @@
 {
  "viewport": 1440,
- "comparable": 58,
+ "comparable": 50,
  "diffs": [
+  {
+   "id": "header",
+   "prop": "height",
+   "design": "100.375px",
+   "live": "102.609px"
+  },
   {
    "id": "chapterReadout",
    "prop": "width",
@@ -16,6 +22,12 @@
   },
   {
    "id": "chBar",
+   "prop": "background-color",
+   "design": "rgba(255, 255, 255, 0.72)",
+   "live": "rgba(0, 0, 0, 0)"
+  },
+  {
+   "id": "chBar",
    "prop": "width",
    "design": "84px",
    "live": "81.5938px"
@@ -23,38 +35,44 @@
   {
    "id": "smooth-content",
    "prop": "height",
-   "design": "15357.6px",
-   "live": "15208.6px"
+   "design": "12870.5px",
+   "live": "12909.8px"
   },
   {
    "id": "top",
    "prop": "height",
-   "design": "14893.4px",
-   "live": "14748.5px"
+   "design": "12406.3px",
+   "live": "12454.2px"
   },
   {
    "id": "arrival",
    "prop": "height",
-   "design": "1177.88px",
-   "live": "1175.81px"
+   "design": "1223.25px",
+   "live": "1314.5px"
   },
   {
    "id": "arrivalImg",
    "prop": "height",
-   "design": "1177.88px",
-   "live": "1175.81px"
+   "design": "1223.25px",
+   "live": "1314.5px"
   },
   {
    "id": "arrivalVeil",
    "prop": "height",
-   "design": "1177.88px",
-   "live": "1175.81px"
+   "design": "1223.25px",
+   "live": "1314.5px"
   },
   {
    "id": "arrivalInner",
    "prop": "grid-template-columns",
    "design": "648.25px 574.875px",
    "live": "649.562px 576.031px"
+  },
+  {
+   "id": "arrivalInner",
+   "prop": "height",
+   "design": "999.25px",
+   "live": "1091.31px"
   },
   {
    "id": "arrivalTitle",
@@ -71,14 +89,14 @@
   {
    "id": "arrivalTitle",
    "prop": "height",
-   "design": "255.703px",
-   "live": "253.969px"
+   "design": "426.172px",
+   "live": "423.281px"
   },
   {
-   "id": "quiz",
+   "id": "book",
    "prop": "height",
-   "design": "544.562px",
-   "live": "675.125px"
+   "design": "751.703px",
+   "live": "887.094px"
   },
   {
    "id": "leadForm",
@@ -89,8 +107,8 @@
   {
    "id": "leadForm",
    "prop": "height",
-   "design": "450.734px",
-   "live": "457.609px"
+   "design": "661.875px",
+   "live": "671.906px"
   },
   {
    "id": "f-name",
@@ -99,10 +117,22 @@
    "live": "rgb(34, 34, 34)"
   },
   {
+   "id": "f-name",
+   "prop": "width",
+   "design": "523.688px",
+   "live": "473.656px"
+  },
+  {
    "id": "f-email",
    "prop": "color",
    "design": "rgb(0, 0, 0)",
    "live": "rgb(34, 34, 34)"
+  },
+  {
+   "id": "f-email",
+   "prop": "width",
+   "design": "523.688px",
+   "live": "473.656px"
   },
   {
    "id": "f-phone",
@@ -111,10 +141,28 @@
    "live": "rgb(34, 34, 34)"
   },
   {
+   "id": "f-phone",
+   "prop": "width",
+   "design": "523.688px",
+   "live": "473.656px"
+  },
+  {
+   "id": "f-msg",
+   "prop": "color",
+   "design": "rgb(0, 0, 0)",
+   "live": "rgb(34, 34, 34)"
+  },
+  {
+   "id": "f-msg",
+   "prop": "width",
+   "design": "523.688px",
+   "live": "473.656px"
+  },
+  {
    "id": "f-website",
    "prop": "font-family",
    "design": "Arial",
-   "live": "Montserrat, system-ui, -apple-system, \"Seg"
+   "live": "Montserrat, sans-serif"
   },
   {
    "id": "f-website",
@@ -129,10 +177,22 @@
    "live": "rgb(34, 34, 34)"
   },
   {
+   "id": "f-website",
+   "prop": "width",
+   "design": "177px",
+   "live": "196px"
+  },
+  {
+   "id": "f-website",
+   "prop": "height",
+   "design": "21px",
+   "live": "25px"
+  },
+  {
    "id": "f-consent",
    "prop": "font-family",
    "design": "Arial",
-   "live": "Montserrat, system-ui, -apple-system, \"Seg"
+   "live": "Montserrat, sans-serif"
   },
   {
    "id": "f-consent",
@@ -153,214 +213,268 @@
    "live": "0px"
   },
   {
-   "id": "quizNext",
+   "id": "formSubmit",
    "prop": "width",
    "design": "523.688px",
    "live": "473.656px"
   },
   {
-   "id": "lossBig",
+   "id": "hands",
+   "prop": "padding-top",
+   "design": "120.87px",
+   "live": "115.6px"
+  },
+  {
+   "id": "hands",
+   "prop": "padding-bottom",
+   "design": "120.87px",
+   "live": "115.6px"
+  },
+  {
+   "id": "hands",
+   "prop": "height",
+   "design": "1495.86px",
+   "live": "1490.95px"
+  },
+  {
+   "id": "work",
+   "prop": "height",
+   "design": "2576.52px",
+   "live": "2630.91px"
+  },
+  {
+   "id": "workNum",
+   "prop": "font-size",
+   "design": "31.8413px",
+   "live": "35.82px"
+  },
+  {
+   "id": "workNum",
+   "prop": "font-weight",
+   "design": "900",
+   "live": "700"
+  },
+  {
+   "id": "workNum",
+   "prop": "line-height",
+   "design": "53.4934px",
+   "live": "60.1776px"
+  },
+  {
+   "id": "workIcon",
+   "prop": "height",
+   "design": "68px",
+   "live": "0px"
+  },
+  {
+   "id": "workTitle",
+   "prop": "font-family",
+   "design": "Montserrat, system-ui, -apple-system, \"Seg",
+   "live": "\"Montserrat Variablefont Wght\", Arial, san"
+  },
+  {
+   "id": "workTitle",
+   "prop": "font-size",
+   "design": "42.455px",
+   "live": "46px"
+  },
+  {
+   "id": "workTitle",
+   "prop": "line-height",
+   "design": "43.3041px",
+   "live": "46.92px"
+  },
+  {
+   "id": "workTitle",
    "prop": "max-width",
-   "design": "676.013px",
-   "live": "674.04px"
+   "design": "407.096px",
+   "live": "441.14px"
   },
   {
-   "id": "lossBig",
+   "id": "workTitle",
    "prop": "width",
-   "design": "676px",
-   "live": "674.031px"
+   "design": "407.094px",
+   "live": "441.125px"
   },
   {
-   "id": "lossAfter",
+   "id": "workTitle",
+   "prop": "height",
+   "design": "86.5938px",
+   "live": "93.8125px"
+  },
+  {
+   "id": "workTag",
+   "prop": "font-size",
+   "design": "17.9107px",
+   "live": "20px"
+  },
+  {
+   "id": "workTag",
+   "prop": "line-height",
+   "design": "30.09px",
+   "live": "33.6px"
+  },
+  {
+   "id": "workTag",
    "prop": "max-width",
-   "design": "534.26px",
-   "live": "516.36px"
+   "design": "474.257px",
+   "live": "529.6px"
   },
   {
-   "id": "lossAfter",
+   "id": "workTag",
    "prop": "width",
-   "design": "534.25px",
-   "live": "516.359px"
+   "design": "428.219px",
+   "live": "478.188px"
   },
   {
-   "id": "lossAfter",
+   "id": "workTag",
    "prop": "height",
-   "design": "83.7656px",
-   "live": "81px"
+   "design": "30.0781px",
+   "live": "33.5938px"
   },
   {
-   "id": "ridgeCap",
-   "prop": "margin-top",
-   "design": "0px",
-   "live": "4px"
-  },
-  {
-   "id": "answer",
+   "id": "workMarker",
    "prop": "height",
-   "design": "2331px",
-   "live": "2312px"
+   "design": "64.8281px",
+   "live": "68.3438px"
   },
   {
-   "id": "answerPin",
+   "id": "workIndex",
    "prop": "height",
-   "design": "1124.88px",
-   "live": "1105.61px"
+   "design": "389.031px",
+   "live": "410.125px"
   },
   {
-   "id": "survivalNum",
-   "prop": "width",
-   "design": "182.516px",
-   "live": "179.516px"
+   "id": "standard",
+   "prop": "padding-top",
+   "design": "120.87px",
+   "live": "115.6px"
   },
   {
-   "id": "yearsNum",
-   "prop": "width",
-   "design": "184.109px",
-   "live": "181.078px"
+   "id": "standard",
+   "prop": "padding-bottom",
+   "design": "120.87px",
+   "live": "115.6px"
   },
   {
-   "id": "reasons",
+   "id": "standard",
    "prop": "height",
-   "design": "604.5px",
-   "live": "592.781px"
+   "design": "2630.39px",
+   "live": "2686.27px"
   },
   {
-   "id": "options",
+   "id": "pillarList",
    "prop": "height",
-   "design": "1965px",
-   "live": "1944px"
+   "design": "483.766px",
+   "live": "556.516px"
   },
   {
-   "id": "optionsPin",
+   "id": "proof",
    "prop": "height",
-   "design": "986.672px",
-   "live": "973.594px"
+   "design": "2930px",
+   "live": "2748px"
   },
   {
-   "id": "optionsRail",
+   "id": "proofPin",
+   "prop": "height",
+   "design": "840.25px",
+   "live": "827.344px"
+  },
+  {
+   "id": "ribbonRail",
    "prop": "padding-left",
    "design": "56.88px",
    "live": "54.4px"
   },
   {
-   "id": "optionsRail",
+   "id": "ribbonRail",
    "prop": "padding-right",
    "design": "56.88px",
    "live": "54.4px"
   },
   {
-   "id": "optionsRail",
+   "id": "ribbonRail",
    "prop": "width",
-   "design": "1877.75px",
-   "live": "1870.34px"
+   "design": "2990.48px",
+   "live": "2821.03px"
   },
   {
-   "id": "optionsRail",
+   "id": "ribbonRail",
    "prop": "height",
-   "design": "495.094px",
-   "live": "488.906px"
+   "design": "340px",
+   "live": "320px"
   },
   {
-   "id": "candidacy",
-   "prop": "padding-top",
-   "design": "120.87px",
-   "live": "96.56px"
-  },
-  {
-   "id": "candidacy",
-   "prop": "padding-bottom",
-   "design": "120.87px",
-   "live": "96.56px"
-  },
-  {
-   "id": "candidacy",
-   "prop": "height",
-   "design": "1711.75px",
-   "live": "1518.27px"
-  },
-  {
-   "id": "specialist",
-   "prop": "padding-top",
-   "design": "120.87px",
-   "live": "96.56px"
-  },
-  {
-   "id": "specialist",
-   "prop": "padding-bottom",
-   "design": "120.87px",
-   "live": "96.56px"
-  },
-  {
-   "id": "specialist",
-   "prop": "height",
-   "design": "1998.64px",
-   "live": "1940.58px"
-  },
-  {
-   "id": "svcTrack",
+   "id": "ribbonBar",
    "prop": "width",
-   "design": "2861.27px",
-   "live": "2748.05px"
+   "design": "1280px",
+   "live": "1166.23px"
   },
   {
-   "id": "terms",
+   "id": "voices",
    "prop": "padding-top",
    "design": "120.87px",
    "live": "115.6px"
   },
   {
-   "id": "terms",
+   "id": "voices",
    "prop": "padding-bottom",
    "design": "120.87px",
    "live": "115.6px"
   },
   {
-   "id": "terms",
+   "id": "voices",
    "prop": "height",
-   "design": "2614.61px",
-   "live": "2813.19px"
-  },
-  {
-   "id": "matrixBody",
-   "prop": "height",
-   "design": "420.641px",
-   "live": "402.422px"
+   "design": "958.203px",
+   "live": "988.625px"
   },
   {
    "id": "invitation",
    "prop": "padding-top",
    "design": "120.87px",
-   "live": "96.56px"
+   "live": "115.6px"
   },
   {
    "id": "invitation",
    "prop": "padding-bottom",
    "design": "120.87px",
-   "live": "96.56px"
+   "live": "115.6px"
   },
   {
    "id": "invitation",
    "prop": "height",
-   "design": "1245.56px",
-   "live": "1195.67px"
-  },
-  {
-   "id": "closing",
-   "prop": "margin-top",
-   "design": "85.32px",
-   "live": "81.6px"
-  },
-  {
-   "id": "closing",
-   "prop": "height",
-   "design": "249.719px",
-   "live": "242.969px"
+   "design": "592.109px",
+   "live": "594.984px"
   },
   {
    "id": "lightboxClose",
    "prop": "grid-template-columns",
    "design": "none",
    "live": "1fr"
+  },
+  {
+   "id": "lightboxClose",
+   "prop": "padding-top",
+   "design": "1px",
+   "live": "9px"
+  },
+  {
+   "id": "lightboxClose",
+   "prop": "padding-bottom",
+   "design": "1px",
+   "live": "9px"
+  },
+  {
+   "id": "lightboxClose",
+   "prop": "padding-left",
+   "design": "6px",
+   "live": "15px"
+  },
+  {
+   "id": "lightboxClose",
+   "prop": "padding-right",
+   "design": "6px",
+   "live": "15px"
   }
  ]
 }
