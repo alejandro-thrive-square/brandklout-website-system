@@ -74,8 +74,24 @@ each one can clear the gates before the next begins.
 | :--- | :--- | :--- |
 | 1 | `about` · `our-team` · `our-facility` | **Built 2026-08-10** |
 | 2 | `cosmetic-dentistry` · `teeth-whitening` · `crowns-and-bridges` · `oral-surgery` | **Built 2026-08-10** |
-| 3 | `emergency-dentistry` · `dental-conditions` · `implant-supported-dentures` · `dental-implant-faq` | Pending |
-| 4 | `patient-center` · `financing` · `doctor-referral` · `tysons-study-club` | Pending |
+| 3 | `emergency-dentistry` · `dental-conditions` · `implant-supported-dentures` · `dental-implant-faq` | **Built 2026-08-10** |
+| 4 | `patient-center` · `financing` · `doctor-referral` · ~~`tysons-study-club`~~ → `privacy-policy` | Pending |
+
+> [!WARNING]
+> **`/tysons-study-club/` is entirely Lorem Ipsum and is live on the client's site.**
+> Its two body paragraphs are placeholder Latin and one heading reads *"The [Practice
+> Name] Difference"*. The inventory counts it as an 856-word page; none of those words
+> are real. It is the only page on the 33-page site in that state.
+>
+> There is therefore nothing to rebuild from. The only attested fact about the club
+> anywhere in the scrape is one line on `/about/`: Dr. Nahlah is *"Founder of Tyson's
+> Study Club (dental Continuing Education platform)"*. Building a page off that would
+> mean inventing the rest, which is not on offer.
+>
+> **`privacy-policy` takes the fifteenth slot instead** — it has 1,114 words of real
+> content, it is needed at launch, and it was only excluded to keep the count at fifteen.
+> Raise the study club with the client as **(a)** an urgent defect on their live site and
+> **(b)** a page that needs source content before it can be built.
 
 **Deliberately excluded**, and why:
 
@@ -186,6 +202,41 @@ primitive, because one page needing one is not a primitive — and the `implant-
 hard-won rule from that page: the highlight tint is layered **over** the cell background
 via a gradient, never replacing it, or the table's hairline shows through and produces the
 olive wash (bug 12).
+
+### Batch 3 — treatments, and the rest of the implant group
+
+| Page | Source | What it carries |
+| :--- | :--- | :--- |
+| `emergency-dentistry.html` | `/emergency-dentistry/` | Eight reasons to call today, five situations and what to do before arriving |
+| `dental-conditions.html` | `/dental-conditions/` | Ten everyday complaints as an accordion |
+| `implant-supported-dentures.html` | `/implant-supported-dentures/` | Fixed vs. removable at 20% / 60% / 98%+ of natural function |
+| `dental-implant-faq.html` | `/dental-implant-faq/` | Twelve questions, and the site's second `FAQPage` graph |
+
+Four decisions in this batch worth keeping:
+
+1. **The 911 notice leads the emergency page; on the source it is buried.** The client's
+   page puts *"if you are bleeding uncontrollably… call 911"* near the bottom, under five
+   treatment write-ups and roughly 900 words. Someone with severe head trauma will not
+   read that far. It is now the first thing after the hero, styled as a notice rather
+   than as body copy. This is the only page on the site where the reader may be in a real
+   emergency while reading it.
+2. **The emergency page publishes the *new-patient* numbers, not the current-patient
+   ones.** The McLean current-patient number is still disputed (448-3312 vs. 493-1358, see
+   *Still open*), and an emergency page is the last place to print a number nobody has
+   confirmed.
+3. **The fixed-vs-removable comparison keeps its unflattering lines.** Implant-supported
+   dentures "may not look or feel natural"; traditional dentures are "low-cost". Both are
+   the client's own words, and a comparison that lists only the good points of the
+   expensive option is not a comparison — it is a price sheet.
+4. **`/dental-conditions/` was 2,118 words in one unbroken column** with no headings for
+   its ten conditions. It is now an accordion, because nobody reads 2,118 words to find
+   the paragraph about their own mouth. Three source typos are silently corrected: *"we
+   want to here from you"*, *"a dependably choice"*, and *"gum disease can become
+   uncurable"*.
+
+**Stephen is quoted but not photographed.** His words are attributed on the source site,
+which is what makes them usable; no portrait of him exists in the extraction, and
+captioning a stranger's face with his name is exactly the mistake bug 14 was raised for.
 
 ## Navigation — the coherence fix
 

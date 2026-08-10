@@ -68,6 +68,18 @@ const MAP = {
   "case-porcelain-1-after.jpg": "2025/02/porcelain-001-after.jpg",
   "case-makeover-1-before.jpg": "2025/02/makeover-001-b4.jpg",
   "case-makeover-1-after.jpg": "2025/02/makeover-001-after.jpg",
+  // batch 3 — emergency, conditions, fixed vs removable, implant FAQ
+  "emergency-patient.jpg": "2021/03/patient_interaction.jpg",
+  "emergency-sign.png": "2021/02/emergency-sign.png",
+  "conditions-patient.jpg": "2025/02/patient_hero5.jpg",
+  "dentures-model.png": "2021/02/dentures-model.png",
+  "dentures-implant-graphic.png": "2021/02/implant-supported-dentures-graphic.png",
+  "full-arch-graphic.png": "2021/02/full-arch-dental-implants.png",
+  "multi-implant-model.png": "2021/07/multiple-dental-implant-model.png",
+  "case-fullarch-3-before.jpg": "2025/02/case-3-all-on-4-implants-before.jpg",
+  "case-fullarch-3-after.jpg": "2025/02/case-3-all-on-4-implants-after.jpg",
+  "case-fullarch-4-before.jpg": "2025/02/case-4-all-on-4-implants-before.jpg",
+  "case-fullarch-4-after.jpg": "2025/02/case-4-all-on-4-implants-after.jpg",
   // treatment context
   "sedation-nitrous.png": "2021/02/dental-patient-under-nitrous-oxide-sedation.png",
   "sedation-oral.png": "2021/02/dental-patient-taking-oral-sedation.png",

@@ -1033,5 +1033,241 @@
         }
       ]
     }
+  },
+  "emergency-dentistry": {
+    "title": "Emergency Dentist in McLean, VA | Seen the Same Day",
+    "desc": "Toothache, abscess, knocked-out or broken tooth? Space is made in the schedule the same day wherever possible, with sedation available. McLean and Alexandria, Virginia.",
+    "ogTitle": "Emergency Dentistry | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "A dental emergency does not usually mean the emergency room. Call, and you will be seen with urgency.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Emergency dentistry",
+          "description": "Same-day emergency dental treatment in McLean, Virginia: root canals, lost fillings, abscesses, broken and knocked-out teeth.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What should I do with a knocked-out tooth?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you can, put the tooth back in its socket and hold it there until you are seen. If you cannot, place it in a small container of milk to preserve it. Do not scrub it clean. Replaced in the socket within the right window and held with a splint, the tooth may be saveable."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why will a toothache not go away?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pain that persists generally means infection, often inside the tooth. Sometimes a filling is the whole answer, but extreme sensitivity or sharp pain when you bite or chew can point to the tooth root, and those cases usually need root canal therapy before the pain can be relieved."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is a broken tooth an emergency?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Minor chips and cracks can wait for a normal appointment. A tooth that is broken or fractured after trauma cannot, because the damage may run past the outside surface into the tooth. You may need a filling, a crown or a root canal; the most severe cases need an emergency extraction."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is dry socket?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A dry socket occurs when the blood clot in an empty tooth socket is dislodged, exposing the underlying bone and nerves. It needs treating immediately to prevent infection, usually by cleaning the socket and packing the space with gauze."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "dental-conditions": {
+    "title": "Conditions We Treat | Gum Disease to Toothache | McLean, VA",
+    "desc": "Ten everyday dental complaints, what each usually turns out to be, and what is done about it: loose dentures, bleeding gums, cracked teeth, gummy smile, toothache and more.",
+    "ogTitle": "Conditions We Treat | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Bring the small thing in before it becomes the large one. Second opinions are free.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Conditions we treat",
+          "description": "Ten dental conditions treated at Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "implant-supported-dentures": {
+    "title": "Fixed Teeth vs. Removable | Implant Dentures | McLean, VA",
+    "desc": "Traditional dentures restore about 20% of natural function, implant-supported dentures about 60%, and a fixed full arch over 98%. All three compared honestly, drawbacks included.",
+    "ogTitle": "Fixed vs. Removable | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Dentures are not your only option. Three answers, differing by a factor of five in what they give back.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Fixed teeth versus removable dentures",
+          "description": "A comparison of traditional dentures, implant-supported dentures and fixed full-arch implants in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Implant-supported dentures",
+          "description": "A removable denture stabilized by two or more dental implants, restoring roughly 60% of natural function.",
+          "bodyLocation": "Jaw",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "dental-implant-faq": {
+    "title": "Dental Implant FAQ | 12 Common Questions | McLean, VA",
+    "desc": "What an implant is, whether surgery hurts, how long recovery takes, what it costs and how long implants last. Twelve questions answered before you book a consultation.",
+    "ogTitle": "Dental Implant FAQ | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Twelve questions patients actually ask, including the two about pain and money.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Dental implant FAQ",
+          "description": "Common questions about dental implant treatment in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is a dental implant?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Three parts: a titanium or ceramic post, an abutment, and a restoration. The post functions as a tooth root does, providing bone support and a stable foundation for a single crown, a bridge, a denture or a full-arch prosthesis."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why are dental implants called the gold standard?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They are the only permanent tooth replacement option and are designed to last decades. Because the post is surgically placed into the jawbone, the health and functional benefits are comparable to a natural tooth."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the success rate of dental implants?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Consistently over 95% since implants were introduced decades ago. That comes from the combination of surgical technology, high-quality materials, clinical experience and long-term maintenance."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who is a candidate for dental implants?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Many patients already are, and many of the rest qualify after preparatory treatment such as bone grafting or extractions. Candidacy is determined accurately only after a comprehensive consultation and evaluation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is dental implant surgery like?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Modern placement is efficient and precise. Often the procedure is completed in a few hours using patient-fitted surgical guides planned from the scan beforehand."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will dental implant surgery be painful?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The surgery is completed while you are under sedation. You will feel no pain and may sleep lightly through it. Most patients have no memory of the appointment or the procedure."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is recovery from dental implants like?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Rest for a few days afterwards. Patients generally report minor discomfort that over-the-counter medication handles, and most return to normal activity after about a week. A soft food diet is required for the next several months while the implants integrate with the jawbone."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does the dental implant process take?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Anywhere from a few months to over a year. If bone grafting is needed first that is a separate procedure with several months of healing. After placement, integration takes three or more months before the final restoration can be permanently attached."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I care for dental implants?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Like natural teeth, with no special maintenance. Brush twice a day and floss once. Depending on the restoration you may need a water flosser to clear debris from underneath it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I still need dental check-ups with implants?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Implant restorations cannot decay, but they can develop peri-implantitis, an infection of the gums around the implant caused by plaque and tartar buildup. Keep the hygiene routine and the six-month visits."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long do dental implants last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They are designed to last decades and have the potential to last the rest of your life. Surgical technology, clinical experience and your own habits all affect it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much do dental implants cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on how many teeth are missing and for how long, the materials used, and what additional procedures are needed first. The practice will help you apply for dental financing and will file insurance claims on your behalf."
+              }
+            }
+          ]
+        }
+      ]
+    }
   }
 }

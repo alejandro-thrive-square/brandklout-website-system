@@ -64,6 +64,11 @@ const PAGES = [
   { slug: "crowns-and-bridges", journey: 0, navKey: "COSMETIC" },
   // -- Treatments
   { slug: "oral-surgery", journey: 0, navKey: "IMPLANTS" },
+  { slug: "emergency-dentistry", journey: 0, navKey: "IMPLANTS" },
+  { slug: "dental-conditions", journey: 0, navKey: "IMPLANTS" },
+  // -- Dental Implants (the rest of that group)
+  { slug: "implant-supported-dentures", journey: 0, navKey: "IMPLANTS" },
+  { slug: "dental-implant-faq", journey: 0, navKey: "IMPLANTS" },
 ];
 
 /* Escape for an HTML text node or a double-quoted attribute. seo.json holds

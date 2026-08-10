@@ -38,6 +38,7 @@ const PAGES = process.env.ONLY ? process.env.ONLY.split(",") : [
   // teeth-whitening carries the only <table> on the site — the one page-local
   // CSS path in batch 2, and the one at real risk of overflowing a 360px view.
   "cosmetic-dentistry", "teeth-whitening", "crowns-and-bridges", "oral-surgery",
+  "emergency-dentistry", "dental-conditions", "implant-supported-dentures", "dental-implant-faq",
 ];
 // Shooting all 11 at 7 widths is 77 images nobody will open. These three cover the
 // three distinct CSS paths: the journey, the shared page kit, and the one page with

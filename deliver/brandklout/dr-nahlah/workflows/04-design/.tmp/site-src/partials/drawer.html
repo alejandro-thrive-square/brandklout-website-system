@@ -26,6 +26,7 @@
     .drawer.open .dr-col:nth-child(2) li a{transition-delay:.16s}
     .drawer.open .dr-col:nth-child(3) li a{transition-delay:.22s}
     .drawer.open .dr-col:nth-child(4) li a{transition-delay:.28s}
+    .drawer.open .dr-col:nth-child(5) li a{transition-delay:.34s}
     .dr-foot{width:100%;max-width:var(--maxw);margin:clamp(2rem,5vw,3.25rem) auto 0;
       padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);
       display:grid;gap:1.25rem;color:rgba(255,255,255,.72);font-size:.92rem}
@@ -34,7 +35,10 @@
     .dr-foot a{color:var(--gold-light)}
     .dr-foot a:hover{text-decoration:underline}
     @media(min-width:760px){ .dr-grid{grid-template-columns:repeat(2,1fr)} .dr-foot{grid-template-columns:repeat(3,1fr)} }
-    @media(min-width:1100px){ .dr-grid{grid-template-columns:repeat(4,1fr)} }
+    /* Five groups, three columns: 3 + 2 across two rows. Five side by side at
+       1100px leaves each column too narrow for "Emergency Dentistry" to sit on
+       one line, and a wrapped display-face link reads as two entries. */
+    @media(min-width:1100px){ .dr-grid{grid-template-columns:repeat(3,1fr)} }
   </style>
   <div class="dr-grid">
     <div class="dr-col">
@@ -42,9 +46,18 @@
       <ul>
         <li><a href="dental-implants.html">Dental Implants</a></li>
         <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-supported-dentures.html">Fixed vs. Removable</a></li>
         <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
-        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Treatments</h4>
+      <ul>
         <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="emergency-dentistry.html">Emergency Dentistry</a></li>
+        <li><a href="dental-conditions.html">Conditions We Treat</a></li>
       </ul>
     </div>
     <div class="dr-col">
