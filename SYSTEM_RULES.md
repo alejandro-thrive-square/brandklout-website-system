@@ -173,6 +173,21 @@ bash scripts/mirror-assets.sh --to-worktree   # reverse: main -> this worktree
 bash scripts/mirror-assets.sh --prune-dry-run # list orphans; never deletes
 ```
 
+**A new worktree starts with zero assets.** `git worktree add` checks out tracked files only, so a
+fresh worktree gets the markup and none of the images — designs open broken there exactly as they
+did in `main`. `scripts/hooks/post-checkout` seeds it automatically: on a *new* worktree only
+(previous HEAD is the null SHA), it infers the client folder from the branch name (`bk-` stripped,
+then progressively shorter prefixes, so `bk-mason-park-2` still resolves to `mason-park`) and copies
+that client's assets from `main`. It seeds one client rather than everything because `--all` means
+~771 MB of scrapes and reference libraries the branch will never open. If the branch name matches no
+client, the hook prints the exact command to run instead of guessing.
+
+The mirror covers **vendored libraries as well as media**. Designs load GSAP from
+`.tmp/_vendor/gsap/*.min.js`, which is ignored and is not a media extension; mirroring images but
+not those yields a page that renders and never moves — a worse failure than a broken image, because
+it still looks correct in a screenshot. Matching is path-anchored (`_vendor/`, `vendor/`) so
+`node_modules` cannot be swept in.
+
 This runs **automatically after every commit in every worktree** via `scripts/hooks/post-commit`,
 wired up by `git config core.hooksPath <main>/scripts/hooks` (set by `scripts/bootstrap.sh`, and
 required once per clone). Notes that matter:

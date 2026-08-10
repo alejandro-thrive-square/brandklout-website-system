@@ -43,6 +43,13 @@ set -euo pipefail
 
 ASSET_EXT_RE='\.(png|jpe?g|gif|webp|svg|ico|pdf|mp4|mov|zip|7z|psd|ai|eps|fig|sketch|woff2?|ttf|otf)$'
 
+# Vendored libraries are ignored too and are not media, so the extension list
+# alone misses them. Designs load GSAP from ../_vendor/gsap/*.min.js — mirroring
+# the images but not these produces a page that renders and does not move, which
+# is a worse failure than a visibly broken image because it looks fine in a
+# screenshot. Path-anchored so node_modules and build output cannot match.
+VENDOR_PATH_RE='(^|/)(_vendor|vendor)/'
+
 SCOPES=()
 ALL=false
 DRY_RUN=false
@@ -108,7 +115,7 @@ else                              SRC_ROOT="$HERE"; DST_ROOT="$MAIN"; LABEL="$(b
 list_ignored() {
   local root="$1"; shift
   ( cd "$root" && git ls-files --others --ignored --exclude-standard -- "$@" 2>/dev/null ) \
-    | grep -Ei "$ASSET_EXT_RE" || true
+    | grep -Ei "$ASSET_EXT_RE|$VENDOR_PATH_RE" || true
 }
 
 if [[ "$ALL" == true ]]; then FILES="$(list_ignored "$SRC_ROOT" .)"
