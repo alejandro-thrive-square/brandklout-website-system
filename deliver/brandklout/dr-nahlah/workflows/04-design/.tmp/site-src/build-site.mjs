@@ -69,6 +69,14 @@ const PAGES = [
   // -- Dental Implants (the rest of that group)
   { slug: "implant-supported-dentures", journey: 0, navKey: "IMPLANTS" },
   { slug: "dental-implant-faq", journey: 0, navKey: "IMPLANTS" },
+  // -- What To Expect / For Doctors / legal
+  { slug: "patient-center", journey: 0, navKey: "ABOUT" },
+  { slug: "financing", journey: 0, navKey: "ABOUT" },
+  { slug: "doctor-referral", journey: 0, navKey: "ABOUT" },
+  // `tysons-study-club` was the planned fifteenth page. Its source is entirely
+  // Lorem Ipsum on the client's live site, so there is nothing to rebuild from
+  // and privacy-policy took the slot. See SITE.md.
+  { slug: "privacy-policy", journey: 0, navKey: null },
 ];
 
 /* Escape for an HTML text node or a double-quoted attribute. seo.json holds

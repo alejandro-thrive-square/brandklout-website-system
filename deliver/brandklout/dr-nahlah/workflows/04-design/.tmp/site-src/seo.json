@@ -1269,5 +1269,93 @@
         }
       ]
     }
+  },
+  "patient-center": {
+    "title": "Your First Visit | What to Expect, Step by Step | McLean, VA",
+    "desc": "The first appointment in eight steps: welcome, the team, an office tour, consultation, digital X-rays, examination, hygiene cleaning and complimentary gifts. Sedation available.",
+    "ogTitle": "Your First Visit | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Eight steps, in order, so nothing on the day is a surprise and none of it is a sales pitch.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Your first visit",
+          "description": "What to expect at a first appointment with Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "financing": {
+    "title": "Insurance & Financing | Payment Options | McLean, VA",
+    "desc": "Cash, check, credit card, most dental PPO plans, and three financing partners including no-collateral loans up to $60,000 over terms to 96 months. No insurance needed to qualify.",
+    "ogTitle": "Insurance & Financing | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Cost should never be the reason you did not get treated. Five ways to pay and three financing partners.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Insurance and financing",
+          "description": "Payment, insurance and third-party dental financing options at Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "doctor-referral": {
+    "title": "For Referring Doctors | Prosthodontic & Implant Referrals | McLean, VA",
+    "desc": "Refer a patient for prosthodontic, implant or full-arch treatment. CBCT planning, computer-guided surgery and an in-house digital laboratory, all in one Tysons Corner facility.",
+    "ogTitle": "For Referring Doctors | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Diagnosis, surgery and prosthetics in one building, so a complex case does not fragment across three practices.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "For referring doctors",
+          "description": "Referral information for dentists referring patients to Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "privacy-policy": {
+    "title": "Privacy Policy | Dr. Nahlah Implants & Prosthodontics | McLean, VA",
+    "desc": "How this website collects, uses, shares and secures your personal information, including the use of cookies and the choices available to you.",
+    "ogTitle": "Privacy Policy | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "How this website collects, uses and secures your personal information.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Privacy policy",
+          "description": "The privacy statement governing data collection and usage on this website.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
   }
 }

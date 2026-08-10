@@ -80,6 +80,8 @@ const MAP = {
   "case-fullarch-3-after.jpg": "2025/02/case-3-all-on-4-implants-after.jpg",
   "case-fullarch-4-before.jpg": "2025/02/case-4-all-on-4-implants-before.jpg",
   "case-fullarch-4-after.jpg": "2025/02/case-4-all-on-4-implants-after.jpg",
+  // batch 4 — first visit, financing, referrals, legal
+  "tooth-model.png": "2019/11/tooth-model.png",
   // treatment context
   "sedation-nitrous.png": "2021/02/dental-patient-under-nitrous-oxide-sedation.png",
   "sedation-oral.png": "2021/02/dental-patient-taking-oral-sedation.png",

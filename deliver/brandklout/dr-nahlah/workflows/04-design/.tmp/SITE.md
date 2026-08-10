@@ -75,7 +75,7 @@ each one can clear the gates before the next begins.
 | 1 | `about` · `our-team` · `our-facility` | **Built 2026-08-10** |
 | 2 | `cosmetic-dentistry` · `teeth-whitening` · `crowns-and-bridges` · `oral-surgery` | **Built 2026-08-10** |
 | 3 | `emergency-dentistry` · `dental-conditions` · `implant-supported-dentures` · `dental-implant-faq` | **Built 2026-08-10** |
-| 4 | `patient-center` · `financing` · `doctor-referral` · ~~`tysons-study-club`~~ → `privacy-policy` | Pending |
+| 4 | `patient-center` · `financing` · `doctor-referral` · ~~`tysons-study-club`~~ → `privacy-policy` | **Built 2026-08-10** |
 
 > [!WARNING]
 > **`/tysons-study-club/` is entirely Lorem Ipsum and is live on the client's site.**
@@ -237,6 +237,42 @@ Four decisions in this batch worth keeping:
 **Stephen is quoted but not photographed.** His words are attributed on the source site,
 which is what makes them usable; no portrait of him exists in the extraction, and
 captioning a stranger's face with his name is exactly the mistake bug 14 was raised for.
+
+### Batch 4 — what to expect, for doctors, and the legal page
+
+| Page | Source | What it carries |
+| :--- | :--- | :--- |
+| `patient-center.html` | `/patient-center/` | The eight-step first visit, plus the affordability close |
+| `financing.html` | `/financing/` | Five payment forms and three financing partners with real terms |
+| `doctor-referral.html` | `/doctor-referral/` | The only page written for another dentist |
+| `privacy-policy.html` | `/privacy-policy/` | The client's own policy, carried over rather than rewritten |
+
+- **`patient-center`'s own `<h1>` is "First Visit"**, which is the better name for what
+  the page does. The nav label stays "Your First Visit" for the same reason.
+- **`financing` does not repeat one line of the source.** The source describes Proceed
+  Finance as being for *"patients with low credit scores"*. That is the client's framing
+  of a partner's product, it reads as a judgement about the reader, and it is not ours to
+  publish on their behalf. The terms themselves — no-collateral loans to $60,000 over up
+  to 96 months — say the useful part.
+- **`doctor-referral` had one real paragraph to work from.** The rest is built from facts
+  attested elsewhere in the scrape. It makes **no claim about patients being returned to
+  the referring practice**, because the source makes none, and inventing a referral policy
+  is not a copy decision.
+- **`privacy-policy`'s legal wording is carried over verbatim in substance.** Structure,
+  headings and typography are new; the clauses are not, and they are not ours to change.
+
+**Three things on the privacy policy the client and their counsel need to see:**
+
+1. **It is unbranded template text.** It calls itself *"This Practice"* throughout and
+   never names the business. Preserved rather than silently branded, because substituting
+   a legal entity's name into a policy is a legal edit, not a copy edit.
+2. **It publishes a fourth phone number** — `703-436-6843` — which appears **nowhere else
+   in the 78-page scrape**. McLean already has a live conflict between 448-3312 and
+   493-1358; this is a third McLean number again.
+3. **It predates current practice.** No HIPAA notice, no CCPA/GDPR language, no cookie
+   consent mechanism, no stated retention period, and SSL is the only named control. For
+   a healthcare practice collecting patient details through a web form, that needs a
+   review by someone qualified to give one. This build does not attempt one.
 
 ## Navigation — the coherence fix
 

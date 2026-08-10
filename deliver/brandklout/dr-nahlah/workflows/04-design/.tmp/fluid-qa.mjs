@@ -39,6 +39,8 @@ const PAGES = process.env.ONLY ? process.env.ONLY.split(",") : [
   // CSS path in batch 2, and the one at real risk of overflowing a 360px view.
   "cosmetic-dentistry", "teeth-whitening", "crowns-and-bridges", "oral-surgery",
   "emergency-dentistry", "dental-conditions", "implant-supported-dentures", "dental-implant-faq",
+  // privacy-policy carries the site's only single-column legal-prose layout.
+  "patient-center", "financing", "doctor-referral", "privacy-policy",
 ];
 // Shooting all 11 at 7 widths is 77 images nobody will open. These three cover the
 // three distinct CSS paths: the journey, the shared page kit, and the one page with
