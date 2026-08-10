@@ -154,6 +154,32 @@ Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (
 
 - **Retired VPS paths**: When a repo restructure makes an old VPS-only path obsolete, first migrate any assets that still belong in the system, then add the retired path to `scripts/deploy-cleanup.sh`. Deployment cleanup must stay allowlisted and explicit; do not use broad `git clean -fdx` cleanup because valid ignored media intentionally lives on the VPS.
 
+#### 4.2.0 Creating a client worktree (sparse)
+
+A full worktree checks out every client's work — 2,438 files / 94 MB — when one client needs about a
+quarter of it. Create client worktrees sparse instead:
+
+```bash
+bash scripts/new-client-worktree.sh mason-park              # 722 files instead of 2,438
+bash scripts/new-client-worktree.sh newclient --dry-run     # print the plan first
+```
+
+The cone is `deliver/process` + the pillar's `docs/` and `scripts/` + the client folder + `scripts`,
+`mcp-servers`, `.claude`. **Cone mode always materialises repo-root files**, so `CLAUDE.md`,
+`AGENTS.md`, `SYSTEM_RULES.md` and `deliver/DELIVER_SYSTEM_RULES.md` arrive without being listed —
+agents still get their directives. An unknown slug is treated as a **new** client under
+`deliver/brandklout/`, since the folder does not exist until the agent creates it.
+
+**Sparse narrows the working tree only — never commits.** The index still holds every path, so a
+commit made in a sparse worktree still contains all 461 giovanni-serrano files, all 445
+farewell-agency files, and everything else; merging one into `main` deletes nothing. This was
+verified directly, not inferred. Widen later with `git sparse-checkout add <path>`, or go full with
+`git sparse-checkout disable`.
+
+The script seeds assets explicitly rather than relying on the hook: `post-checkout` only seeds when
+the previous HEAD is the null SHA, and the sparse flow checks out in a *second* step
+(`--no-checkout` → `sparse-checkout set` → `checkout`), so that hook does not fire.
+
 #### 4.2.1 Worktree → main asset mirror (automatic)
 
 Excluding media from Git is load-bearing in three places, so the rule does not bend: it keeps merges
