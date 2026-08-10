@@ -105,7 +105,18 @@ const MEASURE = `(async () => {
   for (let y = 0; y < document.documentElement.scrollHeight; y += step) { scrollTo(0, y); await sleep(110); }
   scrollTo(0, 0); await sleep(1200);
 
-  const out = { total: document.documentElement.scrollHeight, sections: [], detail: {}, chips: [] };
+  // Measure the BODY, not documentElement.scrollHeight. Webflow's base
+  // stylesheet sets html{height:100%} and the design does not, which makes the
+  // two disagree by ~60px on the built pages — and that gap is a reporting
+  // artefact, not a rendering one: body, main, header, footer and the offer rail
+  // all measure identically, and the footer's bottom edge sits exactly at the
+  // viewport bottom at max scroll, so nothing is cut off. Reading scrollHeight
+  // reported new-patient-special as 60px short for a whole pass.
+  const out = {
+    total: Math.round(document.body.getBoundingClientRect().height),
+    docScrollHeight: document.documentElement.scrollHeight,
+    sections: [], detail: {}, chips: [],
+  };
   out.chips = [...document.querySelectorAll(".chip")].slice(0,4).map(c => {
     const w = c.querySelector(".w-embed");
     const s = c.querySelector("svg");
@@ -168,7 +179,8 @@ for (const page of PAGES) {
   await wait(4000);
   const S = await session(`${STAGING}/${page}`, ({ evaluate }) => evaluate(MEASURE));
 
-  console.log(`  total   design ${L.total}   staging ${S.total}   delta ${S.total - L.total}`);
+  console.log(`  body    design ${L.total}   staging ${S.total}   delta ${S.total - L.total}`);
+  console.log(`  (documentElement.scrollHeight: design ${L.docScrollHeight} / staging ${S.docScrollHeight} — skewed by Webflow's html{height:100%}, see the note in MEASURE)`);
   console.log("  --- chip anatomy ---");
   const dump = (tag, arr) => (arr || []).slice(0,2).forEach((c, i) => {
     console.log(`   ${tag} #${i} ${c.chipBox} wrapper=${c.wrapper}`);

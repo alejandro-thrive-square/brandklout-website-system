@@ -15,21 +15,36 @@ approved design**, which is what the client asked. Three new gates do:
 
 Reports land in `08-qa/.tmp/parity/`.
 
-## Where it ended up
+## Where it ended up — all three pages match
 
-`parity.mjs`: **staging matches the design on every fingerprint** — all three
-pages, text / images / icons, and **zero** computed-style differences across
-186, 163 and 80 comparable text elements.
+`parity.mjs`: **staging matches the design on every fingerprint.**
 
-| page | height design / staging | text | images | icons | style diffs |
+| page | body height design / staging | text | images | icons | style diffs |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | invisalign | 14082 / **14082** | 241/241 | 10/10 | 37/37 | **0** |
+| new-patient-special | 14149 / **14149** | 191/191 | 13/13 | 37/37 | **0** |
 | thank-you | 10496 / **10496** | 97/97 | 10/10 | 4/4 | **0** |
-| new-patient-special | 14149 / 14089 | 191/191 | 13/13 | 37/37 | **0** |
 
-Every nps *section* measures identically; the 60px sits between sections and is
-the one number still unexplained. Gates alongside: scrub-proof 60/60,
-staging-verify 21/21 x3.
+Every section measures identically on every page. Gates alongside: scrub-proof
+60/60, staging-verify 21/21 x3.
+
+### The last "defect" was the gate, not the page
+
+new-patient-special read as 60px short for a whole pass. It was not.
+`height-diff.mjs` was measuring `document.documentElement.scrollHeight`, and
+**Webflow's base stylesheet sets `html{height:100%}` where the design leaves it
+auto**, so on the built pages that number disagrees with the body by ~60px.
+
+What settled it was measuring the things that actually render: body 14147,
+main 13633, header 97, footer 513, offer rail 1180x70 — every one identical on
+both sides — and then scrolling to the bottom and checking the footer's edge,
+which sits exactly at the viewport bottom (`footerBottomVsViewport: 0`). Nothing
+is cut off and nothing is unreachable.
+
+`html{height:auto}` was tested as a fix and **not applied**: it moved html from
+1000 to 14087, still not the design's 14147, and changed no rendered box. A
+change with no measured benefit is not a fix. The gate now reports the body
+height and prints the scrollHeight beside it with a note.
 
 Nothing real remains in the element diff. What is left is the pale-cyan
 `cor-card` border, which is mid-tween and lands a shade apart between captures;

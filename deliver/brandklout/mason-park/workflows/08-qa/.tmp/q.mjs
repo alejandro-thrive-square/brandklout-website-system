@@ -18,20 +18,29 @@ await send("Page.enable",{},sessionId); await send("Runtime.enable",{},sessionId
 await send("Emulation.setDeviceMetricsOverride",{width:1440,height:1000,deviceScaleFactor:1,mobile:false},sessionId);
 const ev=e=>send("Runtime.evaluate",{expression:e,returnByValue:true,awaitPromise:true},sessionId)
   .then(r=>{if(r?.exceptionDetails)throw new Error("in-page: "+(r.exceptionDetails.exception?.description||r.exceptionDetails.text)); return r?.result?.value;});
-await send("Page.navigate",{url:"https://mason-park-dental.webflow.io/invisalign"},sessionId);
+await send("Page.navigate",{url:"https://mason-park-dental.webflow.io/new-patient-special"},sessionId);
 for(let i=0;i<150;i++){const st=await ev("document.documentElement?document.readyState:''").catch(()=>""); if(st==="interactive"||st==="complete")break; await wait(200);}
 await ev("new Promise(r=>setTimeout(r,9000))");
-console.log(await ev(`(function(){
-  var out=[];
-  var sups=document.querySelectorAll('sup');
-  for (var i=0;i<sups.length;i++){
-    var sp=sups[i]; var cs=getComputedStyle(sp);
-    if (cs.display==='inline') continue;
-    var chain=[]; for(var a=sp; a && a.tagName!=='BODY'; a=a.parentElement){
-      chain.push(a.tagName.toLowerCase()+'.'+(String(a.className&&a.className.baseVal!==undefined?a.className.baseVal:a.className||'').trim().split(/\s+/)[0]));
-      if(chain.length>=5) break; }
-    out.push({disp:cs.display, fs:cs.fontSize, text:(sp.parentElement?sp.parentElement.textContent:'').replace(/\s+/g,' ').trim().slice(0,60), chain:chain.join(' < ')});
-  }
-  return JSON.stringify(out,null,1);
+console.log(await ev(`(async function(){
+  var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms);});};
+  await sleep(2000);
+  window.scrollTo(0, document.documentElement.scrollHeight);
+  await sleep(1500);
+  var f=document.querySelector('footer');
+  var fr=f.getBoundingClientRect();
+  var de=document.documentElement, b=document.body;
+  var cs=getComputedStyle(de), bs=getComputedStyle(b);
+  return JSON.stringify({
+    scrollY: Math.round(window.scrollY),
+    maxScroll: Math.round(de.scrollHeight - window.innerHeight),
+    docScrollHeight: de.scrollHeight,
+    bodyRect: Math.round(b.getBoundingClientRect().height),
+    bodyOffsetHeight: b.offsetHeight,
+    htmlHeightCss: cs.height, htmlOverflow: cs.overflow + '/' + cs.overflowY,
+    bodyMargin: bs.marginTop + ' ' + bs.marginBottom,
+    bodyOverflow: bs.overflow + '/' + bs.overflowY + '/' + bs.overflowX,
+    footerBottomVsViewport: Math.round(fr.bottom - window.innerHeight),
+    footerFullyVisible: fr.bottom <= window.innerHeight + 1
+  }, null, 1);
 })()`));
 ws.close(); chrome.kill();
