@@ -27,7 +27,7 @@ const proc = spawn(CHROME, [`--remote-debugging-port=${DBG}`,
   '--user-data-dir=' + join(HERE, '.chrome-matched'), '--no-first-run', '--no-default-browser-check',
   '--allow-file-access-from-files', '--disable-backgrounding-occluded-windows',
   '--disable-renderer-backgrounding', '--disable-background-timer-throttling',
-  '--window-size=1440,900', '--window-position=-2400,0', 'about:blank'], { stdio: 'ignore' });
+  '--window-size='+(process.env.PW||1440)+',900', '--window-position=-2400,0', 'about:blank'], { stdio: 'ignore' });
 
 let wsUrl;
 for (let i = 0; i < 60; i++) {
@@ -45,7 +45,7 @@ const { sessionId } = await send('Target.attachToTarget', { targetId, flatten: t
 for (const d of ['Page', 'DOM', 'CSS']) await send(`${d}.enable`, {}, sessionId);
 await send('Emulation.setFocusEmulationEnabled', { enabled: true }, sessionId);
 await send('Page.bringToFront', {}, sessionId);
-await send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false }, sessionId);
+await send('Emulation.setDeviceMetricsOverride', { width: Number(process.env.PW||1440), height: 900, deviceScaleFactor: 1, mobile: false }, sessionId);
 await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] }, sessionId);
 await send('Page.navigate', { url }, sessionId);
 const ev = async (x) => (await send('Runtime.evaluate', { expression: x, returnByValue: true, awaitPromise: true }, sessionId)).result?.value;

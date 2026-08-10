@@ -4,7 +4,7 @@
   "body": "box-sizing:border-box",
   "media": null,
   "mapped": "*,*::before,*::after",
-  "n": 576
+  "n": 577
  },
  {
   "sel": "img,video,svg",
@@ -63,6 +63,38 @@
   "n": 2
  },
  {
+  "sel": "main .ch .stage, main .ch .pin",
+  "body": "padding-top:clamp(5.75rem,9vw,8.5rem)",
+  "media": null,
+  "mapped": ".vnr-ch .vnr-stage,.vnr-ch .vnr-pin",
+  "n": 3,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .stage",
+  "body": "align-content:safe center",
+  "media": null,
+  "mapped": ".vnr-ch .vnr-stage",
+  "n": 2,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .pin",
+  "body": "justify-content:safe center",
+  "media": null,
+  "mapped": ".vnr-ch .vnr-pin",
+  "n": 1,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .stage, main .ch .pin",
+  "body": "min-height:0;height:auto; align-content:start;justify-content:start; padding-top:clamp(3.5rem,9vw,5rem); padding-bottom:calc(4.6rem + env(safe-area-inset-bottom));",
+  "media": "@media(max-width:899px)",
+  "mapped": ".vnr-ch .vnr-stage,.vnr-ch .vnr-pin",
+  "n": 3,
+  "strippedMain": true
+ },
+ {
   "sel": ".compare th,.compare td",
   "body": "padding:clamp(.8rem,1.5vw,1.15rem);text-align:left; border-bottom:1px solid var(--line);vertical-align:top",
   "media": null,
@@ -109,7 +141,7 @@
   "body": "animation-duration:.001ms!important;animation-iteration-count:1!important; transition-duration:.001ms!important;scroll-behavior:auto!important",
   "media": "@media (prefers-reduced-motion: reduce)",
   "mapped": "*,*::before,*::after",
-  "n": 576
+  "n": 577
  },
  {
   "sel": "[data-rv],[data-anim=\"hide\"]",

@@ -4,7 +4,7 @@
   "body": "box-sizing:border-box",
   "media": null,
   "mapped": "*,*::before,*::after",
-  "n": 536
+  "n": 537
  },
  {
   "sel": "img,video,svg",
@@ -63,6 +63,38 @@
   "n": 2
  },
  {
+  "sel": "main .ch .stage, main .ch .pin",
+  "body": "padding-top:clamp(5.75rem,9vw,8.5rem)",
+  "media": null,
+  "mapped": ".emg-ch .emg-stage,.emg-ch .emg-pin",
+  "n": 3,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .stage",
+  "body": "align-content:safe center",
+  "media": null,
+  "mapped": ".emg-ch .emg-stage",
+  "n": 2,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .pin",
+  "body": "justify-content:safe center",
+  "media": null,
+  "mapped": ".emg-ch .emg-pin",
+  "n": 1,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .stage, main .ch .pin",
+  "body": "min-height:0;height:auto; align-content:start;justify-content:start; padding-top:clamp(3.5rem,9vw,5rem); padding-bottom:calc(4.6rem + env(safe-area-inset-bottom));",
+  "media": "@media(max-width:899px)",
+  "mapped": ".emg-ch .emg-stage,.emg-ch .emg-pin",
+  "n": 3,
+  "strippedMain": true
+ },
+ {
   "sel": "[data-theme=\"light\"] .card",
   "body": "background:var(--card);box-shadow:0 1px 3px rgba(20,24,33,.05)",
   "media": null,
@@ -95,7 +127,7 @@
   "body": "animation-duration:.001ms!important;animation-iteration-count:1!important; transition-duration:.001ms!important;scroll-behavior:auto!important",
   "media": "@media (prefers-reduced-motion: reduce)",
   "mapped": "*,*::before,*::after",
-  "n": 536
+  "n": 537
  },
  {
   "sel": "[data-rv],[data-anim=\"hide\"]",

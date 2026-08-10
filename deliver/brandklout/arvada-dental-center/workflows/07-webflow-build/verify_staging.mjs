@@ -166,6 +166,10 @@ const SNAP = (rootSel, props) => `(function(){
   function invisible(c){
     return c.tagName==='STYLE' || c.tagName==='SCRIPT';
   }
+  function isBrLine(c){
+    return c.classList && Array.prototype.some.call(c.classList, function(n){
+      return /(^|-)br-line$/.test(n); });
+  }
   function kidsOf(el){
     var out=[];
     Array.prototype.forEach.call(el.children, function(c){
@@ -177,6 +181,15 @@ const SNAP = (rootSel, props) => `(function(){
         return;
       }
       out.push(c);
+      /* The converter renders the design's <br> as a display:block span that
+         WRAPS the rest of the line (html_to_webflow.py _add_line_span), so
+         A<br><span>B</span> becomes A<span class=br-line><span>B</span></span>.
+         The line break is real — .<pfx>-br-line{display:block} is in the site
+         stylesheet — but the span that followed the <br> in the design is now
+         a CHILD rather than a sibling. Lift its children back up so the two
+         sides line up; otherwise every element after a <br> reports as missing
+         (15 rows on implants alone) for a page that renders correctly. */
+      if(isBrLine(c)) out.push.apply(out, kidsOf(c));
     });
     return out;
   }
@@ -253,6 +266,12 @@ for (const page of PAGES) {
       if (ea._tag !== eb._tag && !brLine) { diffs.push({ block: p.id, path, tagMismatch: `${ea._tag} vs ${eb._tag}` }); continue; }
       if (brLine) continue;
       compared++;
+      // An element that renders nothing on BOTH sides cannot look different.
+      // The last 8 differences were all `<input type="hidden">`: the client's
+      // stylesheet gives it a font-family the bare design page does not, on an
+      // element with a 0x0 box and display:none. `display` is itself compared
+      // below, so an element hidden on only ONE side still fails here.
+      if (ea.display === 'none' && eb.display === 'none') continue;
       for (const prop of PROPS) {
         if (ea[prop] === eb[prop]) continue;
         const na = parseFloat(ea[prop]), nb = parseFloat(eb[prop]);

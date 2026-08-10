@@ -55,6 +55,49 @@ const PAGES = {
 const INSTALL = process.argv.includes('--install');
 const only = process.argv.slice(2).filter((a) => !a.startsWith('--'));
 
+/**
+ * PART 0 — the house fluid root, on `html`.
+ *
+ * The packager rewrites every `rem` in the CSS to a multiple of `--wz-root`
+ * precisely so it does not have to touch the document root. That works for
+ * everything in a stylesheet — but journey.js writes `padding-block:
+ * clamp(3rem,6vw,5rem)` onto each pinned chapter AS AN INLINE STYLE at
+ * runtime, and a rem in an inline style resolves against `html` like any
+ * other. The design's html is the fluid root (13.77px at 390); Webflow's is a
+ * flat 16px. So the pinned chapters padded 48px instead of 41.31px on every
+ * page, at every width where the two roots disagree — invisible at 1440,
+ * where the fluid root happens to be 16.0015px.
+ *
+ * Installing the root here is safe in a way it would not be site-wide: this is
+ * PAGE custom code, and these six pages contain nothing but the pasted
+ * sections. The variables are renamed `--wzfr-*` so they cannot collide with
+ * the client's own design-system tokens if that ever stops being true.
+ *
+ * Generated from deliver/process/04-design/fluid-root.md (webzite-house-v1);
+ * scripts/fluid-root.mjs is the single source of truth for the curve.
+ */
+const FLUID_ROOT = `/* --- house fluid root (webzite-house-v1) --------------------------------
+   journey.js writes rem-based padding inline at runtime, and a rem in an
+   inline style resolves against html — so the page root has to match the
+   design's or every pinned chapter pads wrong below 479 and above 1440. */
+:root{
+  --wzfr-font-from:18; --wzfr-font-to:20;
+  --wzfr-vw-from:calc(1920 / 100); --wzfr-vw-to:calc(2400 / 100);
+  --wzfr-coefficient:calc((var(--wzfr-font-to) - var(--wzfr-font-from)) / (var(--wzfr-vw-to) - var(--wzfr-vw-from)));
+  --wzfr-base:calc((var(--wzfr-font-from) - var(--wzfr-vw-from) * var(--wzfr-coefficient)) / 16);
+}
+html{font-size:calc(var(--wzfr-base) * 1rem + var(--wzfr-coefficient) * 1vw)}
+@media screen and (max-width:1920px){:root{
+  --wzfr-font-from:16; --wzfr-font-to:18;
+  --wzfr-vw-from:calc(1440 / 100); --wzfr-vw-to:calc(1920 / 100)}}
+@media screen and (max-width:1440px){:root{
+  --wzfr-font-from:16; --wzfr-font-to:16;
+  --wzfr-vw-from:calc(479 / 100); --wzfr-vw-to:calc(1440 / 100)}}
+@media screen and (max-width:479px){:root{
+  --wzfr-font-from:12; --wzfr-font-to:16;
+  --wzfr-vw-from:calc(320 / 100); --wzfr-vw-to:calc(479 / 100)}}
+`;
+
 /** Does this selector part already carry a namespaced class/id? */
 const namespaced = (part, p) => part.includes(`.${p}-`) || part.includes(`#${p}-`);
 
@@ -63,12 +106,14 @@ const namespaced = (part, p) => part.includes(`.${p}-`) || part.includes(`#${p}-
  * page prefix is left alone — prefixing it again would change its specificity
  * relative to the chapter CSS that has to be able to override it.
  */
-function scope(sel, p) {
+function scope(sel, p, force) {
   const S = `[class*="${p}-"]`;
   return sel.split(',').map((raw) => {
     const part = raw.trim();
     if (!part) return null;
-    if (namespaced(part, p)) return part;
+    // strippedMain rules lost the `main` type selector journey.css used to
+    // outrank the chapter CSS; re-scoping restores the weight it gave up.
+    if (namespaced(part, p) && !force) return part;
     // `*` and `*::before` must also cover the scoping roots themselves.
     if (part === '*') return `${S},${S} *`;
     return `${S} ${part}`;
@@ -89,7 +134,7 @@ function partOne(page, prefix) {
   const rules = JSON.parse(readFileSync(f, 'utf8'));
   const plain = [], byMedia = new Map();
   for (const r of rules) {
-    const css = `${scope(r.mapped, prefix)}{${remToRoot(r.body)}}`;
+    const css = `${scope(r.mapped, prefix, r.strippedMain)}{${remToRoot(r.body)}}`;
     if (r.media) { if (!byMedia.has(r.media)) byMedia.set(r.media, []); byMedia.get(r.media).push(css); }
     else plain.push(css);
   }
@@ -105,8 +150,22 @@ function partTwo(prefix) {
    The client's site stylesheet styles bare tags the design never has to
    undo. Weight is (0,1,1): above a bare tag rule, below any chapter rule. */
 ${S} :where(ul,ol,li){margin:0;padding:0}
-${S} :where(blockquote,figure){margin:0;padding:0}
+/* border, not just margin/padding: the client's stylesheet gives every
+   blockquote a border-left, and under box-sizing:border-box that 2.63px comes
+   straight off the content width — enough to wrap one testimonial to a
+   seventh line at 768. Nothing else on the page showed it. */
+${S} :where(blockquote,figure){margin:0;padding:0;border:0}
 ${S} :where(label,fieldset,legend){margin:0;padding:0}
+/* Webflow's normalize ships sub,sup{font-size:75%;line-height:0;position:
+   relative;vertical-align:baseline} plus sup{top:-.5em}. The design is a bare
+   page and gets the UA defaults instead, so its superscripts are 12.67px on a
+   15.2px parent (font-size:smaller = 0.8333) with line-height inherited from
+   the paragraph's unitless 1.7. line-height:inherit is right, not a fixed
+   value: a unitless line-height inherits as the NUMBER, so the sup recomputes
+   it against its own smaller font-size. */
+${S} :where(sub,sup){font-size:smaller;line-height:inherit;position:static;top:auto;bottom:auto}
+${S} :where(sup){vertical-align:super}
+${S} :where(sub){vertical-align:sub}
 /* The design's unclassed headings sit at UA default sizes; the client's
    stylesheet forces h3 to 40px, which is 2.2x the design. */
 ${S} :where(h1){font-size:2em}
@@ -167,15 +226,47 @@ ${lines.join('\n')}
 `;
 }
 
+/**
+ * PART 4 — root-class collisions.
+ *
+ * The packager names a section's root class after the section id, and it also
+ * page-prefixes every kit class. When a section id equals a kit class name the
+ * two land on the same name and the section inherits styling meant for
+ * something else. dentist-near-me has `<section id="offer">`, the kit has an
+ * `.offer` OFFER CARD (gradient, border, radius, padding, display:grid), and
+ * both became `.dnm-offer` — so the section is painted as a card. That page
+ * has no `.offer` card element at all, so the rule should have been
+ * tree-shaken; the collision is what kept it alive.
+ *
+ * Overridden here on the SECTION only, at (0,1,1), restoring the values the
+ * design computes. The section's own `:scope` rules are (0,1,0) and would lose
+ * to this, so only the properties the card rule actually sets are listed —
+ * never a blanket reset.
+ *
+ * The real fix belongs in the packager: a section root class must not collide
+ * with a kit class name. Until then, new pages need checking for this.
+ */
+const COLLISIONS = {
+  'dentist-near-me': `section.dnm-offer{display:block;grid-template-columns:none;
+  padding:0;border-radius:0;border-width:0;border-color:rgb(59,70,87)}`,
+};
+
+function partFour(page) {
+  const css = COLLISIONS[page];
+  return css ? `\n/* --- root-class collisions ---------------------------------------------- */\n${css}\n` : '';
+}
+
 const pages = only.length ? only : Object.keys(PAGES);
 for (const page of pages) {
   const { prefix, id } = PAGES[page];
   const css = `/* Webzite — published-page corrections for ${page}.
    GENERATED by build_page_code.mjs. Regenerate rather than hand-editing:
    re-run .tmp/missing_rules.mjs and .tmp/inline_styles.mjs, then this script. */
+${FLUID_ROOT}
 ${partOne(page, prefix)}
 ${partTwo(prefix)}
-${partThree(page)}`;
+${partThree(page)}
+${partFour(page)}`;
   const file = join(OUT, `${page}.css`);
   writeFileSync(file, css);
   console.log(`${page.padEnd(17)} ${String(css.length).padStart(5)} bytes -> ${file}`);

@@ -91,6 +91,23 @@ const mapSel = (sel) => sel
   .replace(/\.([A-Za-z_][\w-]*)/g, `.${prefix}-$1`)
   .replace(/#([A-Za-z_][\w-]*)/g, `#${prefix}-$1`);
 
+/**
+ * The design wraps its chapters in <main>; the paste does not — the sections
+ * land in a plain wrapper div. So `main .ch .stage` matches nothing on the
+ * published page and is dropped as "not applicable", when in fact it is the
+ * rule that sets the below-900px chapter padding on every page. Offer a
+ * main-less variant as a fallback.
+ *
+ * journey.css uses the `main` type selector deliberately, to outrank the
+ * per-chapter rules without !important, so the stripped variant loses (0,0,1)
+ * and MUST be re-scoped when emitted — build_page_code.mjs honours
+ * strippedMain by forcing the [class*=] prefix back on, which returns (0,1,0)
+ * and keeps the rule above the chapter CSS it is meant to beat.
+ */
+const stripMain = (sel) => sel.split(',')
+  .map((p) => p.trim().replace(/^main\s+/, ''))
+  .join(',');
+
 const published = publishedProps();
 const rules = kitRules(kit).filter((r) => r.body && !/^(:root|html|body)/.test(r.sel));
 const candidates = rules
@@ -129,10 +146,20 @@ const ev = async (x) => (await send('Runtime.evaluate', { expression: x, returnB
 for (let i = 0; i < 90; i++) { if (await ev(`document.readyState==='complete'`) === true) break; await wait(200); }
 await wait(1200);
 
-const counts = await ev(`(function(){var S=${JSON.stringify(candidates.map((c) => c.mapped))};
+const probe = async (list) => ev(`(function(){var S=${JSON.stringify(list)};
   return S.map(function(s){ try { return document.querySelectorAll(s).length } catch(e){ return -1 } });})()`);
 
-const hits = candidates.map((c, i) => ({ ...c, n: counts[i] })).filter((c) => c.n > 0);
+const counts = await probe(candidates.map((c) => c.mapped));
+// Second chance for rules the design anchors on <main>, which the paste drops.
+const alt = candidates.map((c, i) => (counts[i] > 0 || !/(^|,)\s*main\s/.test(c.mapped)
+  ? null : stripMain(c.mapped)));
+const altCounts = await probe(alt.map((a) => a || 'head'));
+
+const hits = candidates.map((c, i) => {
+  if (counts[i] > 0) return { ...c, n: counts[i] };
+  if (alt[i] && altCounts[i] > 0) return { ...c, mapped: alt[i], n: altCounts[i], strippedMain: true };
+  return { ...c, n: 0 };
+}).filter((c) => c.n > 0);
 writeFileSync(join(HERE, `missing-${page}.json`), JSON.stringify(hits, null, 1));
 console.log(`kit rules ${rules.length}  absent from published ${candidates.length}  AND matching the page: ${hits.length}\n`);
 for (const h of hits) console.log(`  [${String(h.n).padStart(3)}] ${h.mapped.slice(0, 80)}${h.media ? '   ' + h.media : ''}\n        { ${h.body.slice(0, 110)} }`);

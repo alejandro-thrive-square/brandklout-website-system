@@ -24,7 +24,7 @@ const proc = spawn(CHROME, [`--remote-debugging-port=${DBG}`,
   '--user-data-dir=' + join(HERE, '.chrome-probe'), '--no-first-run', '--no-default-browser-check',
   '--allow-file-access-from-files', '--disable-backgrounding-occluded-windows',
   '--disable-renderer-backgrounding', '--disable-background-timer-throttling',
-  '--window-size=1440,900', '--window-position=-2400,0', 'about:blank'], { stdio: 'ignore' });
+  '--window-size='+(process.env.PW||1440)+',900', '--window-position=-2400,0', 'about:blank'], { stdio: 'ignore' });
 
 let wsUrl;
 for (let i = 0; i < 60; i++) {
@@ -40,9 +40,22 @@ const send = (me, p = {}, s) => { const i = ++id; ws.send(JSON.stringify({ id: i
 const { targetId } = await send('Target.createTarget', { url: 'about:blank' });
 const { sessionId } = await send('Target.attachToTarget', { targetId, flatten: true });
 await send('Page.enable', {}, sessionId);
+/**
+ * Block the same third parties verify_staging.mjs blocks. Without this a probe
+ * measures sienna-accessibility's rounded font sizes (15px where the design has
+ * 15.36px) while the harness measures the unrounded ones — so probe numbers and
+ * harness numbers disagree for reasons that have nothing to do with the page,
+ * and a chase for a phantom layout difference follows. Set PROBE_3P=1 to keep
+ * them, e.g. when investigating the widget itself.
+ */
+if (!process.env.PROBE_3P) {
+  await send('Network.enable', {}, sessionId);
+  await send('Network.setBlockedURLs', {
+    urls: ['*sienna-accessibility*', '*elfsight*', '*googletagmanager*'] }, sessionId);
+}
 await send('Emulation.setFocusEmulationEnabled', { enabled: true }, sessionId);
 await send('Page.bringToFront', {}, sessionId);
-await send('Emulation.setDeviceMetricsOverride', { width: 1440, height: 900, deviceScaleFactor: 1, mobile: false }, sessionId);
+await send('Emulation.setDeviceMetricsOverride', { width: Number(process.env.PW||1440), height: 900, deviceScaleFactor: 1, mobile: false }, sessionId);
 await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] }, sessionId);
 await send('Page.navigate', { url }, sessionId);
 const ev = async (x) => {
