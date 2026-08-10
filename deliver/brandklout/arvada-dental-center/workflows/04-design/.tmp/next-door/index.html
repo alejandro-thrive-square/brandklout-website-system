@@ -52,11 +52,11 @@
 <header class="nav" id="nav">
   <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
   <div class="wrap nav-in">
-    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
-      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
+    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center">
+      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" width="180" height="108">
     </a>
     <div class="nav-mid">
-      <p class="nav-chapter" aria-hidden="true"><b id="navChNum">00</b><i id="navChBar"></i><span id="navChName">Arrival</span></p>
+      <p class="nav-chapter" aria-hidden="true"><i id="navChBar"></i><span id="navChName">Arrival</span></p>
     </div>
     <div class="nav-right">
       <span class="status nav-status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
@@ -100,7 +100,7 @@
 
   <div class="wrap ch-in in">
     <div>
-      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Chapter 00 &middot; Arrival</span></div>
+      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Arrival</span></div>
       <h1 class="d1" data-anim="hide" id="arrTitle">The dentist your<br>neighbours already use.</h1>
       <p class="lede mt" data-anim="hide" id="arrLead">
         Arvada Dental Center has been on Wadsworth since 2003 — long enough that the people
@@ -212,7 +212,7 @@
 
   <div class="stage" id="yrPin">
     <div class="wrap">
-      <div class="chapter-tag"><i></i><span class="label">Chapter 01 &middot; Twenty-Two Years</span></div>
+      <div class="chapter-tag"><i></i><span class="label">Twenty-Two Years</span></div>
       <p class="yr-big" id="yrBig">2003</p>
       <div class="yr-rail" aria-hidden="true"><i id="yrRail"></i></div>
       <div class="yr-ends"><span>2003</span><span>Still on Wadsworth</span></div>
@@ -270,10 +270,7 @@
     }
 
     gsap.timeline({
-      scrollTrigger: {
-        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 3),
-        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
-      }
+      scrollTrigger: W.scene(pin, { run: 3, scrub: .3 })
     })
       .to(state, { v: 2025, ease: 'none', duration: 1, onUpdate: paint }, 0)
       .to(rail, { scaleX: 1, ease: 'none', duration: 1 }, 0);
@@ -302,7 +299,7 @@
 
   <div class="wrap pad lay">
     <div>
-      <div class="chapter-tag"><i></i><span class="label">Chapter 02 &middot; Of Your Neighbourhood</span></div>
+      <div class="chapter-tag"><i></i><span class="label">Of Your Neighbourhood</span></div>
       <p class="since" data-rv>22 years<br>on Wadsworth</p>
       <p class="lede mt" data-rv>Dr. Gregory Bennett moved to Arvada from Iowa in 2003, took over the practice
         from Dr. James Jack, and has been here ever since. That is long enough to have treated families across
@@ -312,7 +309,7 @@
     </div>
     <figure class="plate" id="hoodPlate" style="margin:0">
       <img id="hoodImg" src="../_shared/assets/dental-implants-denver-dentist-in-arvada-dental-implants-arvada-dentist-near-me-arvada-denver.png"
-           alt="The Arvada Dental Center &amp; Implants team" loading="lazy">
+           alt="The Arvada Dental Center team" loading="lazy">
     </figure>
   </div>
 
@@ -355,7 +352,7 @@
 
   <div class="stage" id="hhPin">
     <div class="wrap">
-      <div class="chapter-tag"><i></i><span class="label">Chapter 03 &middot; The Whole Household</span></div>
+      <div class="chapter-tag"><i></i><span class="label">The Whole Household</span></div>
       <h2 class="h2" id="hhTitle">One practice for everyone at your address</h2>
       <p class="lede mt-s">Family dentistry for every age, from a child's first checkup to a parent's implants —
         which means one place to remember, one set of records, and one team who knows your family.</p>
@@ -406,10 +403,7 @@
     }
 
     gsap.timeline({
-      scrollTrigger: {
-        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.6),
-        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
-      }
+      scrollTrigger: W.scene(pin, { run: 2.6, scrub: .3 })
     }).to(state, { p: 1, ease: 'none', duration: 1, onUpdate: paint }, 0);
   });
   </script>
@@ -447,7 +441,7 @@
 
   <div class="pin" id="vcPin">
     <div class="head">
-      <div class="chapter-tag"><i></i><span class="label">Chapter 04 &middot; The Voices</span></div>
+      <div class="chapter-tag"><i></i><span class="label">The Voices</span></div>
       <h2 class="h2">What your neighbours actually said.</h2>
       <p class="caption">Real Google reviews, published under their own names.</p>
     </div>
@@ -486,13 +480,19 @@
         track = document.getElementById('vcTrack'),
         bar = document.getElementById('vcBar');
 
-    if (W.reduced) {
-      pin.style.height = 'auto';
-      pin.style.paddingBlock = 'clamp(3rem,6vw,5rem)';
-      track.style.overflowX = 'auto';
-      track.style.width = '100%';
-      return;
-    }
+    /* No pin available — reduced motion, or a screen too narrow to hold one.
+
+
+       Either way the sideways travel has nothing driving it, so the track
+
+
+       becomes a swipeable rail and keeps its progress rule and its card
+
+
+       lighting. See WZ.rail in journey.js. */
+
+
+    if (W.reduced || !W.canPin) { W.rail(pin, track, bar, light); return; }
 
     function distance() { return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
 
@@ -539,7 +539,7 @@
 
   <div class="wrap pad lay">
     <div>
-      <div class="chapter-tag"><i></i><span class="label">Chapter 05 &middot; The Introduction</span></div>
+      <div class="chapter-tag"><i></i><span class="label">The Introduction</span></div>
       <h2 class="h2" id="inTitle">Start with $109</h2>
       <p class="lede mt-s" data-rv>Not a teaser rate that turns into a quote. A real first appointment with
         the diagnostics included, so you leave knowing where you stand.</p>
@@ -591,8 +591,8 @@
   </style>
 
   <div class="wrap pad">
-    <div class="chapter-tag"><i></i><span class="label">Chapter 06 &middot; The Invitation</span></div>
     <div class="wrap--narrow" style="padding-inline:0;margin-inline:auto">
+      <div class="chapter-tag"><i></i><span class="label">The Invitation</span></div>
       <h2 class="h2 mb-l" id="faqTitle">Neighbourly questions</h2>
       <div class="faq">
         <div class="faq__item">
@@ -647,7 +647,7 @@
   <div class="wrap">
     <div class="ftr__grid">
       <div>
-        <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
+        <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" loading="lazy">
         <p style="font-size:calc(.9rem*var(--s-tx))">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
@@ -666,7 +666,7 @@
     </div>
     <div class="ftr__legal" id="terms">
       <p><strong>$109 New Patient Special — terms.</strong> Includes comprehensive exam, digital X-rays and OralID oral cancer screening. Restrictions apply. New patients only. 18 and older. HMO and Medicaid plans are not accepted.</p>
-      <p>&copy; <span data-year>2026</span> Arvada Dental Center &amp; Implants. Draft landing page prepared by Webzite for Brandklout — Asana task 1217133289235650.</p>
+      <p>&copy; <span data-year>2026</span> Arvada Dental Center. Draft landing page prepared by Webzite for Brandklout — Asana task 1217133289235650.</p>
     </div>
   </div>
 </footer>

@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>All-on-X Full Arch Dental Implants in Arvada, CO | Arvada Dental Center &amp; Implants</title>
+<title>All-on-X Full Arch Dental Implants in Arvada, CO | Arvada Dental Center</title>
 <meta name="description" content="Full-arch All-on-X dental implants in Arvada, CO. A fixed set of teeth on four or more implants, often placed the same day, by Dr. Gregory Bennett.">
 <meta name="robots" content="noindex, nofollow">
 <!--
@@ -48,11 +48,11 @@
 <header class="nav" id="nav">
   <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
   <div class="wrap nav-in">
-    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
-      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
+    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center">
+      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" width="180" height="108">
     </a>
     <div class="nav-mid">
-      <p class="nav-chapter" aria-hidden="true"><b id="navChNum">00</b><i id="navChBar"></i><span id="navChName">Arrival</span></p>
+      <p class="nav-chapter" aria-hidden="true"><i id="navChBar"></i><span id="navChName">Arrival</span></p>
     </div>
     <div class="nav-right">
       <span class="status nav-status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
@@ -96,7 +96,7 @@
 
   <div class="wrap ch-in in">
     <div>
-      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Chapter 00 &middot; Arrival</span></div>
+      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Arrival</span></div>
       <h1 class="d1" data-anim="hide" id="arrTitle">Stop planning your life<br>around your dentures.</h1>
       <p class="lede mt" data-anim="hide" id="arrLead">
         A full arch of fixed teeth on four or more implants — secured to the jawbone, so they never
@@ -246,7 +246,7 @@
 
   <div class="stage" id="vdPin">
     <div class="wrap">
-      <div class="chapter-tag"><i></i><span class="label">Chapter 01 &middot; The Verdict</span></div>
+      <div class="chapter-tag"><i></i><span class="label">The Verdict</span></div>
       <p class="big" id="vdBig">You have probably been told dentures are the end of it. That is a verdict
         on the tools someone had, not on your mouth.</p>
 
@@ -277,29 +277,16 @@
     gsap.set(items, { opacity: 0, y: 38 });
     gsap.set(foot, { opacity: 0, y: 22 });
 
-    var sp = W.splitWords(big);
-    var words = (sp && sp.words && sp.words.length) ? sp.words : null;
-
     var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.6),
-        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
-      }
+      scrollTrigger: W.scene(pin, { run: 2.6, scrub: .3 })
     });
 
-    if (words) {
-      /* The closing clause is owned by the cyan tween. Two scrubbed tweens
-         writing colour on the same word over overlapping ranges overwrite each
-         other every frame and flicker — one word, one owner. */
-      var tail = words.slice(-9), body = words.slice(0, -9);
-      tl.to(body, { color: '#ffffff', stagger: .32, ease: 'none' }, 0)
-        .to(tail, { color: '#03c5ec', stagger: .26, ease: 'none' }, .4);
-    } else {
-      tl.from(big, { opacity: .2, ease: 'none' }, 0);
-    }
-
-    tl.to(items, { opacity: 1, y: 0, stagger: .13, ease: 'none' }, .55)
-      .to(foot, { opacity: 1, y: 0, ease: 'none' }, .95);
+    /* One left-to-right sweep, white into cyan. The checklist deals in from
+       the closing clause, and the CTA lands once the sentence has finished —
+       both tied to the length of this paragraph, not to a constant. */
+    var sweep = W.sweepWords(tl, big, { accent: '#03c5ec', tail: 9, step: .2 });
+    tl.to(items, { opacity: 1, y: 0, stagger: .13, ease: 'none' }, sweep.tail)
+      .to(foot, { opacity: 1, y: 0, ease: 'none' }, sweep.end);
   });
   </script>
 </section>
@@ -318,7 +305,7 @@
 
   <div class="wrap pad">
     <div class="head" data-rv>
-      <div class="chapter-tag"><i></i><span class="label">Chapter 02 &middot; The Comparison</span></div>
+      <div class="chapter-tag"><i></i><span class="label">The Comparison</span></div>
       <h2 class="h2" id="cmpTitle">What full-arch replacement actually compares against</h2>
       <p class="lede mt-s">Arvada Dental Center offers all three. This is the practice's own comparison,
         not a sales chart.</p>
@@ -344,7 +331,7 @@
         </tbody>
       </table>
     </div>
-    <p class="caption" data-rv>Source: Arvada Dental Center &amp; Implants, all-on-4-dental-implants page.</p>
+    <p class="caption" data-rv>Source: Arvada Dental Center, all-on-4-dental-implants page.</p>
 
     <div class="benefits">
       <p class="eyebrow" data-rv>What changes</p>
@@ -439,7 +426,7 @@
       </div>
 
       <div>
-        <div class="chapter-tag"><i></i><span class="label">Chapter 03 &middot; The Four</span></div>
+        <div class="chapter-tag"><i></i><span class="label">The Four</span></div>
         <h2 class="h2" id="fourTitle">Four implants. One fixed arch.</h2>
         <p class="four-count" id="fourCount">0</p>
         <p class="four-of">Implants placed</p>
@@ -494,10 +481,7 @@
     }
 
     var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 3.2),
-        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
-      }
+      scrollTrigger: W.scene(pin, { run: 3.2, scrub: .3 })
     });
 
     /* One post per segment. The counter is tweened rather than stepped by a
@@ -540,7 +524,7 @@
 
   <div class="pin" id="dayPin">
     <div class="head">
-      <div class="chapter-tag"><i></i><span class="label">Chapter 04 &middot; The Day</span></div>
+      <div class="chapter-tag"><i></i><span class="label">The Day</span></div>
       <h2 class="h2">Four steps to a fixed arch.</h2>
     </div>
     <div class="path-track" id="dayTrack">
@@ -575,13 +559,19 @@
         track = document.getElementById('dayTrack'),
         bar = document.getElementById('dayBar');
 
-    if (W.reduced) {
-      pin.style.height = 'auto';
-      pin.style.paddingBlock = 'clamp(3rem,6vw,5rem)';
-      track.style.overflowX = 'auto';
-      track.style.width = '100%';
-      return;
-    }
+    /* No pin available — reduced motion, or a screen too narrow to hold one.
+
+
+       Either way the sideways travel has nothing driving it, so the track
+
+
+       becomes a swipeable rail and keeps its progress rule and its card
+
+
+       lighting. See WZ.rail in journey.js. */
+
+
+    if (W.reduced || !W.canPin) { W.rail(pin, track, bar, light); return; }
 
     function distance() { return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
 
@@ -632,7 +622,7 @@
 
   <div class="wrap pad">
     <div class="in">
-      <div class="chapter-tag center"><i></i><span class="label">Chapter 05 &middot; The Investment</span></div>
+      <div class="chapter-tag center"><i></i><span class="label">The Investment</span></div>
       <h2 class="h2" id="invTitle">A published price, not a phone-call estimate</h2>
       <p class="lede center mt-s" data-rv>A fixed full upper or lower arch at Arvada Dental Center is</p>
       <!-- The figure does not count up. A number animating toward a published
@@ -684,10 +674,10 @@
     <div class="lay">
       <figure class="plate" id="prPlate" style="margin:0">
         <img id="prImg" src="../_shared/assets/video_cover-1.jpg.webp"
-             alt="Dr. Gregory Bennett at Arvada Dental Center &amp; Implants" loading="lazy">
+             alt="Dr. Gregory Bennett at Arvada Dental Center" loading="lazy">
       </figure>
       <div>
-        <div class="chapter-tag"><i></i><span class="label">Chapter 06 &middot; The Proof</span></div>
+        <div class="chapter-tag"><i></i><span class="label">The Proof</span></div>
         <h2 class="h2" id="prTitle">Every phase, one surgeon</h2>
         <p class="lede mt-s" data-rv>Dr. Gregory Bennett delivers and oversees every phase of a full-arch case
           himself — surgery, sedation, restoration and the lab portions of implantology. That is unusual, and
@@ -752,8 +742,8 @@
   </style>
 
   <div class="wrap pad">
-    <div class="chapter-tag"><i></i><span class="label">Chapter 07 &middot; The Invitation</span></div>
     <div class="wrap--narrow" style="padding-inline:0;margin-inline:auto">
+      <div class="chapter-tag"><i></i><span class="label">The Invitation</span></div>
       <h2 class="h2 mb-l" id="faqTitle">Full-arch, answered honestly</h2>
       <div class="faq">
         <div class="faq__item">
@@ -807,7 +797,7 @@
   <div class="wrap">
     <div class="ftr__grid">
       <div>
-        <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
+        <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" loading="lazy">
         <p style="font-size:calc(.9rem*var(--s-tx))">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
@@ -827,7 +817,7 @@
     <div class="ftr__legal" id="terms">
       <p><strong>Pricing.</strong> $18,795 refers to a fixed full upper or lower arch. The "more than $10,000 less than national chains" comparison is the practice's own published claim. Individual treatment is quoted in writing after examination and 3D imaging.</p>
       <p>Same-day placement is typical but not guaranteed; suitability depends on bone volume and general health. Nothing on this page is a guarantee of a specific clinical result.</p>
-      <p>&copy; <span data-year>2026</span> Arvada Dental Center &amp; Implants. Draft landing page prepared by Webzite for Brandklout — Asana task 1217162344633761.</p>
+      <p>&copy; <span data-year>2026</span> Arvada Dental Center. Draft landing page prepared by Webzite for Brandklout — Asana task 1217162344633761.</p>
     </div>
   </div>
 </footer>

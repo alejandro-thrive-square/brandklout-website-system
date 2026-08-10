@@ -3,7 +3,7 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Porcelain Veneers in Arvada, CO | Arvada Dental Center &amp; Implants</title>
+<title>Porcelain Veneers in Arvada, CO | Arvada Dental Center</title>
 <meta name="description" content="Porcelain veneers in Arvada, CO, designed by Dr. Gregory Bennett. Chips, gaps, irregular shape and discolouration, in as few as two visits.">
 <meta name="robots" content="noindex, nofollow">
 <!--
@@ -47,7 +47,7 @@
 {
   "@context": "https://schema.org",
   "@type": "Dentist",
-  "name": "Arvada Dental Center & Implants",
+  "name": "Arvada Dental Center",
   "url": "https://arvadadentalcenter.com/",
   "telephone": "+1-303-421-7611",
   "email": "info@arvadadentalcenter.com",
@@ -104,11 +104,11 @@
 <header class="nav" id="nav">
   <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
   <div class="wrap nav-in">
-    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
-      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
+    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center">
+      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" width="180" height="108">
     </a>
     <div class="nav-mid">
-      <p class="nav-chapter" aria-hidden="true"><b id="navChNum">00</b><i id="navChBar"></i><span id="navChName">Arrival</span></p>
+      <p class="nav-chapter" aria-hidden="true"><i id="navChBar"></i><span id="navChName">Arrival</span></p>
     </div>
     <div class="nav-right">
       <span class="status nav-status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
@@ -152,7 +152,7 @@
 
   <div class="wrap ch-in in">
     <div>
-      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Chapter 00 &middot; Arrival</span></div>
+      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Arrival</span></div>
       <h1 class="d1" data-anim="hide" id="arrTitle">A smile designed<br>around your face.</h1>
       <p class="lede mt" data-anim="hide" id="arrLead">
         Chips, gaps, irregular shape, stubborn discolouration — porcelain veneers cover the lot, in as
@@ -264,7 +264,7 @@
 
   <div class="stage" id="mirPin">
     <div class="wrap">
-      <div class="chapter-tag"><i></i><span class="label">Chapter 01 &middot; The Mirror</span></div>
+      <div class="chapter-tag"><i></i><span class="label">The Mirror</span></div>
       <p class="big" id="mirBig">Thin porcelain shells bonded to the front of your teeth. What they cover
         is narrow, and it is worth being precise about it.</p>
 
@@ -298,24 +298,15 @@
     if (W.reduced) return;
     gsap.set(cards, { opacity: 0, y: 44 });
 
-    var sp = W.splitWords(big);
-    var words = (sp && sp.words && sp.words.length) ? sp.words : null;
-
     var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.4),
-        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
-      }
+      scrollTrigger: W.scene(pin, { run: 2.4, scrub: .3 })
     });
 
-    if (words) {
-      var tail = words.slice(-8), body = words.slice(0, -8);
-      tl.to(body, { color: '#ffffff', stagger: .34, ease: 'none' }, 0)
-        .to(tail, { color: '#03c5ec', stagger: .28, ease: 'none' }, .4);
-    } else {
-      tl.from(big, { opacity: .2, ease: 'none' }, 0);
-    }
-    tl.to(cards, { opacity: 1, y: 0, stagger: .16, ease: 'none' }, .58);
+    /* One left-to-right sweep, white into cyan. The cards deal in from the
+       moment the sentence reaches its closing clause, so the two are tied to
+       the length of this paragraph rather than to a constant. */
+    var sweep = W.sweepWords(tl, big, { accent: '#03c5ec', tail: 8, step: .2 });
+    tl.to(cards, { opacity: 1, y: 0, stagger: .16, ease: 'none' }, sweep.tail);
   });
   </script>
 </section>
@@ -340,7 +331,7 @@
   <div class="wrap pad">
     <div class="lay">
       <div>
-        <div class="chapter-tag"><i></i><span class="label">Chapter 02 &middot; The Straight Answer</span></div>
+        <div class="chapter-tag"><i></i><span class="label">The Straight Answer</span></div>
         <h2 class="h2" id="honTitle">When veneers are the wrong choice</h2>
         <p class="lede mt-s" data-rv>A cosmetic dentist who only ever recommends the cosmetic treatment is not
           worth trusting with your face.</p>
@@ -447,7 +438,7 @@
       </div>
 
       <div>
-        <div class="chapter-tag"><i></i><span class="label">Chapter 03 &middot; The Design</span></div>
+        <div class="chapter-tag"><i></i><span class="label">The Design</span></div>
         <h2 class="h2" id="dsnTitle">Three decisions, made with you</h2>
         <p class="lede mt-s">The design is worked out against your facial features, skin tone and gum line
           rather than a catalogue shade. Shade, shape and proportion are decided with you — which is the
@@ -492,10 +483,7 @@
     gsap.set(steps, { opacity: .32 });
 
     var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 3),
-        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
-      }
+      scrollTrigger: W.scene(pin, { run: 3, scrub: .3 })
     });
 
     /* Phase 1 — shade */
@@ -543,7 +531,7 @@
 
   <div class="pin" id="mthPin">
     <div class="head">
-      <div class="chapter-tag"><i></i><span class="label">Chapter 04 &middot; The Method</span></div>
+      <div class="chapter-tag"><i></i><span class="label">The Method</span></div>
       <h2 class="h2">Two visits, one design.</h2>
     </div>
     <div class="path-track" id="mthTrack">
@@ -592,13 +580,19 @@
         track = document.getElementById('mthTrack'),
         bar = document.getElementById('mthBar');
 
-    if (W.reduced) {
-      pin.style.height = 'auto';
-      pin.style.paddingBlock = 'clamp(3rem,6vw,5rem)';
-      track.style.overflowX = 'auto';
-      track.style.width = '100%';
-      return;
-    }
+    /* No pin available — reduced motion, or a screen too narrow to hold one.
+
+
+       Either way the sideways travel has nothing driving it, so the track
+
+
+       becomes a swipeable rail and keeps its progress rule and its card
+
+
+       lighting. See WZ.rail in journey.js. */
+
+
+    if (W.reduced || !W.canPin) { W.rail(pin, track, bar, light); return; }
 
     function distance() { return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
 
@@ -653,7 +647,7 @@
 
   <div class="wrap pad">
     <div class="head" data-rv>
-      <div class="chapter-tag"><i></i><span class="label">Chapter 05 &middot; The Materials</span></div>
+      <div class="chapter-tag"><i></i><span class="label">The Materials</span></div>
       <h2 class="h2" id="matTitle">Not all veneers are the same thing</h2>
       <p class="lede mt-s">"Veneer" covers two quite different treatments. The difference shows up years
         later, which is exactly when it is hardest to undo.</p>
@@ -714,7 +708,7 @@
              alt="Dr. Gregory Bennett, DDS, cosmetic and implant dentist at Arvada Dental Center" loading="lazy">
       </figure>
       <div>
-        <div class="chapter-tag"><i></i><span class="label">Chapter 06 &middot; The Proof</span></div>
+        <div class="chapter-tag"><i></i><span class="label">The Proof</span></div>
         <h2 class="h2" id="prTitle">Dr. Gregory Bennett, DDS</h2>
         <p class="lede mt-s" data-rv>Cosmetic work is as much artistic as technical, and Dr. Bennett has spent
           nearly twenty years refining both. He has designed countless smiles at the practice, blending advanced
@@ -778,7 +772,7 @@
   </style>
 
   <div class="wrap pad">
-    <div class="chapter-tag"><i></i><span class="label">Chapter 07 &middot; The Invitation</span></div>
+    <div class="chapter-tag"><i></i><span class="label">The Invitation</span></div>
 
     <div class="lay">
       <!--
@@ -861,7 +855,7 @@
   <div class="wrap">
     <div class="ftr__grid">
       <div>
-        <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
+        <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" loading="lazy">
         <p style="font-size:calc(.9rem*var(--s-tx))">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
@@ -880,7 +874,7 @@
     </div>
     <div class="ftr__legal">
       <p>Veneer fees vary by the number of teeth treated and are quoted in writing after examination. Cosmetic outcomes vary by patient; nothing on this page is a guarantee of a specific result.</p>
-      <p>&copy; <span data-year>2026</span> Arvada Dental Center &amp; Implants. Draft landing page prepared by Webzite for Brandklout — Asana task 1217133289235649.</p>
+      <p>&copy; <span data-year>2026</span> Arvada Dental Center. Draft landing page prepared by Webzite for Brandklout — Asana task 1217133289235649.</p>
     </div>
   </div>
 </footer>

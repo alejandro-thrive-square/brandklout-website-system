@@ -42,10 +42,36 @@
   }
   html:not(.js-motion) [data-rv]{opacity:1}
 
-  /* An emergency page earns a louder call affordance than the rest of the set. */
-  .urgent{border-left:4px solid #ff6b5b;background:rgba(192,57,43,.14);
-    border-radius:12px;padding:1.1rem 1.3rem;font-size:calc(.94rem*var(--s-tx))}
-  .urgent strong{color:#fff}
+  /* The 911 note.
+
+     It was a tinted rounded rectangle with a 4px coloured left border — the
+     default "alert" shape every framework ships and every generated page
+     reaches for, which is exactly why it read as boilerplate rather than as
+     this practice speaking. It is now a printed safety notice: no fill, no
+     radius, ruled top and bottom, with the number itself set as the object on
+     the left instead of buried in the sentence. The seriousness comes from
+     the typography and the restraint, not from a red wash.
+
+     A grid, so the rule under the heading runs the full measure and the copy
+     hangs off the number the way it would on a printed card. */
+  .urgent{display:grid;grid-template-columns:auto 1fr;gap:0 clamp(1rem,2.4vw,1.75rem);
+    align-items:start;border-block:1px solid rgba(255,255,255,.16);
+    padding-block:clamp(1rem,2.2vw,1.4rem);font-size:calc(.9rem*var(--s-tx));
+    color:var(--fg-soft);max-width:62ch}
+  .urgent__num{grid-row:1/span 2;font-family:var(--f-display);font-weight:700;
+    font-size:calc(2.5rem*var(--s-h2));line-height:.9;color:#ff6b5b;
+    font-variant-numeric:tabular-nums;letter-spacing:-.01em;
+    padding-right:clamp(1rem,2.4vw,1.75rem);border-right:1px solid rgba(255,255,255,.16);
+    align-self:stretch;display:flex;align-items:center}
+  .urgent__head{font-family:var(--f-ui);font-size:calc(.7rem*var(--s-tx));letter-spacing:.2em;
+    text-transform:uppercase;font-weight:700;color:#ff8f82;margin-bottom:.5rem}
+  .urgent p{line-height:1.65}
+  .urgent strong{color:#fff;font-weight:600}
+  @media(max-width:560px){
+    .urgent{grid-template-columns:1fr;gap:.7rem}
+    .urgent__num{grid-row:auto;border-right:0;border-bottom:1px solid rgba(255,255,255,.16);
+      padding-right:0;padding-bottom:.5rem;font-size:calc(2rem*var(--s-h2))}
+  }
   .tel-big{font-family:var(--f-display);font-weight:700;line-height:1.05;
     font-size:calc(3.4rem*var(--s-h2));color:var(--amber);display:inline-block}
   .tel-big:hover{color:#fff}
@@ -63,11 +89,11 @@
 <header class="nav" id="nav">
   <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
   <div class="wrap nav-in">
-    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
-      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
+    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center">
+      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" width="180" height="108">
     </a>
     <div class="nav-mid">
-      <p class="nav-chapter" aria-hidden="true"><b id="navChNum">00</b><i id="navChBar"></i><span id="navChName">Arrival</span></p>
+      <p class="nav-chapter" aria-hidden="true"><i id="navChBar"></i><span id="navChName">Arrival</span></p>
     </div>
     <div class="nav-right">
       <span class="status nav-status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
@@ -111,7 +137,7 @@
   </div>
 
   <div class="wrap ch-in in">
-    <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Chapter 00 &middot; Arrival</span></div>
+    <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Arrival</span></div>
     <h1 class="d1" data-anim="hide" id="arrTitle">In pain right now?<br>Call us first.</h1>
     <p class="lede mt" data-anim="hide" id="arrLead" data-status-swap
        data-open-text="We're open right now. Call and we'll get you assessed today — whenever possible we make space in the schedule the same day."
@@ -132,10 +158,12 @@
     </div>
 
     <div class="urgent mt-l" role="note" data-anim="hide" id="arr911">
-      <strong>Is this a medical emergency?</strong> If you have neck or head pain, are bleeding
-      uncontrollably, feel dizzy, or have suffered severe trauma, call <strong>911</strong> or get to the
-      nearest medical facility. Medical personnel are best equipped for those symptoms — please do not wait
-      on a dental appointment.
+      <span class="urgent__num" aria-hidden="true">911</span>
+      <p class="urgent__head">If this is a medical emergency</p>
+      <p>Neck or head pain, uncontrolled bleeding, dizziness, or severe trauma need
+        <strong>911</strong> or the nearest medical facility, not a dental appointment. Medical
+        personnel are better equipped for those symptoms, and waiting on a dental slot costs you
+        time you may not have.</p>
     </div>
   </div>
 
@@ -191,7 +219,7 @@
 
   <div class="stage" id="nowPin">
     <div class="wrap">
-      <div class="chapter-tag"><i></i><span class="label">Chapter 01 &middot; Right Now</span></div>
+      <div class="chapter-tag"><i></i><span class="label">Right Now</span></div>
       <p class="big" id="nowBig">Dental problems get worse quickly and rarely settle on their own.
         Find what is happening to you.</p>
 
@@ -217,24 +245,14 @@
     if (W.reduced) return;
     gsap.set(cards, { opacity: 0, y: 36 });
 
-    var sp = W.splitWords(big);
-    var words = (sp && sp.words && sp.words.length) ? sp.words : null;
-
     var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.4),
-        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
-      }
+      scrollTrigger: W.scene(pin, { run: 2.4, scrub: .3 })
     });
 
-    if (words) {
-      var tail = words.slice(-5), body = words.slice(0, -5);
-      tl.to(body, { color: '#ffffff', stagger: .34, ease: 'none' }, 0)
-        .to(tail, { color: '#fb8e28', stagger: .3, ease: 'none' }, .42);
-    } else {
-      tl.from(big, { opacity: .2, ease: 'none' }, 0);
-    }
-    tl.to(cards, { opacity: 1, y: 0, stagger: .08, ease: 'none' }, .55);
+    /* One left-to-right sweep, white into amber. The symptom cards deal in
+       from the closing clause, tied to the length of this paragraph. */
+    var sweep = W.sweepWords(tl, big, { accent: '#fb8e28', tail: 5, step: .18 });
+    tl.to(cards, { opacity: 1, y: 0, stagger: .08, ease: 'none' }, sweep.tail);
   });
   </script>
 </section>
@@ -294,7 +312,7 @@
       </div>
 
       <div>
-        <div class="chapter-tag"><i></i><span class="label">Chapter 02 &middot; The First Minutes</span></div>
+        <div class="chapter-tag"><i></i><span class="label">The First Minutes</span></div>
         <h2 class="h2" id="clkTitle">A knocked-out tooth, in order</h2>
         <p class="lede mt-s">This is the one dental emergency where the clock genuinely matters. Four things,
           in this order, before anything else.</p>
@@ -343,10 +361,7 @@
     }
 
     gsap.timeline({
-      scrollTrigger: {
-        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.8),
-        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
-      }
+      scrollTrigger: W.scene(pin, { run: 2.8, scrub: .3 })
     }).to(state, { p: 1, ease: 'none', duration: 1, onUpdate: paint }, 0);
   });
   </script>
@@ -379,7 +394,7 @@
   <div class="wrap pad">
     <div class="lay">
       <div>
-        <div class="chapter-tag"><i></i><span class="label">Chapter 03 &middot; What We Can Do Today</span></div>
+        <div class="chapter-tag"><i></i><span class="label">What We Can Do Today</span></div>
         <h2 class="h2" id="todTitle">A trip to the ER is rarely the right answer</h2>
         <p class="lede mt-s" data-rv>These are all treated here, in one place, by the team you would see anyway.</p>
         <ul class="checks mt" id="todList" style="grid-template-columns:1fr">
@@ -471,7 +486,7 @@
 
   <div class="pin" id="arvPin">
     <div class="head">
-      <div class="chapter-tag"><i></i><span class="label">Chapter 04 &middot; When You Arrive</span></div>
+      <div class="chapter-tag"><i></i><span class="label">When You Arrive</span></div>
       <h2 class="h2">What actually happens next.</h2>
     </div>
     <div class="path-track" id="arvTrack">
@@ -509,13 +524,19 @@
         track = document.getElementById('arvTrack'),
         bar = document.getElementById('arvBar');
 
-    if (W.reduced) {
-      pin.style.height = 'auto';
-      pin.style.paddingBlock = 'clamp(3rem,6vw,5rem)';
-      track.style.overflowX = 'auto';
-      track.style.width = '100%';
-      return;
-    }
+    /* No pin available — reduced motion, or a screen too narrow to hold one.
+
+
+       Either way the sideways travel has nothing driving it, so the track
+
+
+       becomes a swipeable rail and keeps its progress rule and its card
+
+
+       lighting. See WZ.rail in journey.js. */
+
+
+    if (W.reduced || !W.canPin) { W.rail(pin, track, bar, light); return; }
 
     function distance() { return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
 
@@ -562,7 +583,7 @@
   </div>
 
   <div class="wrap pad">
-    <div class="chapter-tag"><i></i><span class="label">Chapter 05 &middot; The Proof</span></div>
+    <div class="chapter-tag"><i></i><span class="label">The Proof</span></div>
     <h2 class="h2 mb-l" id="prTitle">People who came in hurting</h2>
     <div class="grid g3" id="prReviews">
       <div class="review">
@@ -611,7 +632,7 @@
   </style>
 
   <div class="wrap pad" id="callback">
-    <div class="chapter-tag"><i></i><span class="label">Chapter 06 &middot; The Invitation</span></div>
+    <div class="chapter-tag"><i></i><span class="label">The Invitation</span></div>
 
     <div class="lay">
       <div>
@@ -712,7 +733,7 @@
   <div class="wrap">
     <div class="ftr__grid">
       <div>
-        <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
+        <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" loading="lazy">
         <p style="font-size:calc(.9rem*var(--s-tx))">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
@@ -730,8 +751,8 @@
       </div>
     </div>
     <div class="ftr__legal">
-      <p><strong>Not a 24-hour service.</strong> Arvada Dental Center &amp; Implants is open Monday to Friday, 8am to 5pm. Same-day emergency appointments are offered whenever possible and are not guaranteed. For medical emergencies call 911.</p>
-      <p>&copy; <span data-year>2026</span> Arvada Dental Center &amp; Implants. Draft landing page prepared by Webzite for Brandklout — Asana task 1217162344633758.</p>
+      <p><strong>Not a 24-hour service.</strong> Arvada Dental Center is open Monday to Friday, 8am to 5pm. Same-day emergency appointments are offered whenever possible and are not guaranteed. For medical emergencies call 911.</p>
+      <p>&copy; <span data-year>2026</span> Arvada Dental Center. Draft landing page prepared by Webzite for Brandklout — Asana task 1217162344633758.</p>
     </div>
   </div>
 </footer>
