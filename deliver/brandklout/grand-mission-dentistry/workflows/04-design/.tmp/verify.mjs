@@ -753,7 +753,7 @@ async function responsive(send, key, slug) {
        deliberately small and holding them to the prose floor would just mean
        deleting the typographic hierarchy to satisfy a check. Neither may drop
        to a size nobody can read. */
-    const MICRO = '.label, .chapter-tag, .disclaimer, .panel__foot, .offers__fine, .doctor__role, .doc__role, .now__langs, figcaption, .footer__bottom, .consent'
+    const MICRO = '.label, .gm-label, .chapter-tag, .disclaimer, .imp-disclaimer, .cos-disclaimer, .ty-disclaimer, .panel__foot, .offers__fine, .doctor__role, .doc__role, .now__langs, figcaption, .footer__bottom, .consent'
     const type = await evaluate(
       send,
       `(() => {
@@ -854,7 +854,7 @@ async function implantExtras(send, key) {
          document.querySelector('[name="missing_teeth"]').click();
          document.getElementById('quizNext').click();
          await new Promise(r => setTimeout(r, 400));
-         return document.querySelector('.step[data-step="2"]').classList.contains('is-active');
+         return document.querySelector('.gm-step[data-step="2"]').classList.contains('is-active');
        })()`
     )
   )

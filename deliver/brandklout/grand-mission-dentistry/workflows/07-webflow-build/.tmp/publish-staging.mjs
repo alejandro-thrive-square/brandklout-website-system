@@ -7,12 +7,16 @@
  * necessarily republishes all 303 pages to webflow.io, which is accepted for
  * staging and is precisely why the custom domains must stay untouched.
  */
-import { callTool } from './wfmcp.mjs';
-const r = await callTool('data_sites_tool', {
+/* Goes through mcp.mjs rather than callTool directly: publishing straight after
+   a batch of writes hits the rate limit, and this script used to report the 429
+   as its result and exit 0 — so a run would look published when nothing had
+   been. `call` retries transient failures and throws on everything else. */
+import { call } from './mcp.mjs';
+const r = await call('data_sites_tool', {
   context: 'Publishing the site to its Webflow staging subdomain only so the three rebuilt landing pages can be verified without touching the live customer domain.',
   actions: [{
     label: 'publish staging subdomain only',
     publish_site: { site_id: '698111847e9608eb30ee21c6', publishToWebflowSubdomain: true, customDomains: [] },
   }],
 });
-console.log(r.text.slice(0, 800));
+console.log(JSON.stringify(r).slice(0, 800));

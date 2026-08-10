@@ -290,6 +290,23 @@ async function load(send, resetNet, url) {
       : document.body.scrollHeight;
     const bootDeadline = Date.now() + 9000;
     while (!booted() && Date.now() < bootDeadline) await new Promise(r => setTimeout(r, 100));
+
+    /* booted() only means the BOOTSTRAP ran — \`window.WZ\` exists from the head
+       block, long before any chapter registers a scene. Waiting on layout
+       height alone therefore accepts a page that has built nothing at all: with
+       no pins created the document is not growing, so it reads as perfectly
+       settled. That is how this harness reported \`0 pinned\` on two pages a
+       direct probe measured at 3 pins each — the pages were right and the
+       settle was early. Wait for ScrollTrigger to actually hold something.
+       The deadline is generous because the boot waits on document.fonts.ready,
+       which resolves late and erratically when a webfont host is unreachable;
+       a page that genuinely has no triggers just pays the timeout once. */
+    const trigDeadline = Date.now() + 20000;
+    while (Date.now() < trigDeadline
+           && !(window.ScrollTrigger && ScrollTrigger.getAll().length)) {
+      await new Promise(r => setTimeout(r, 200));
+    }
+
     const deadline = Date.now() + 15000;
     let last = -1, stable = 0;
     while (Date.now() < deadline && stable < 2) {

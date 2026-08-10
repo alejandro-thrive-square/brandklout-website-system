@@ -35,14 +35,14 @@
 /* ==========================================================================
    CHAPTER 00 — ARRIVAL   (Asana section 1: immediate status banner)
    ========================================================================== */
-.ch-arrival {
+.ty-ch-arrival {
   position: relative;
   isolation: isolate;
   background: var(--blue-deep);
   color: #fff;
   overflow: hidden;
   text-align: center;
-  padding-top: clamp(7rem, 12vw, 10rem);
+  padding-top: clamp(7rem, 10vw, 8rem);
   padding-bottom: clamp(5rem, 10vw, 9rem);
 }
 .arrival__media {
@@ -97,27 +97,27 @@
 }
 .status h1 {
   color: #fff;
-  font-size: 4.4rem;
+  font-size: calc(4.4rem * var(--tx));
   max-width: 18ch;
 }
-.arrival__sub {
+.ty-arrival__sub {
   margin-inline: auto;
   max-width: 56ch;
   font-size: var(--body-lg);
   color: rgba(255, 255, 255, 0.82);
   font-weight: 400;
 }
-.ch-arrival .chapter-tag {
+.ty-ch-arrival .chapter-tag {
   color: var(--blue-light);
   margin-bottom: 0;
 }
 /* The eyebrow inherits --blue, which is a mid-blue chosen for white grounds.
    On the navy hero that is barely legible — the arrival chapter is the one
-   place .label sits on a dark ground without a data-theme to catch it. */
-.ch-arrival .label {
+   place .gm-label sits on a dark ground without a data-theme to catch it. */
+.ty-ch-arrival .gm-label {
   color: var(--blue-light);
 }
-.ch-arrival .chapter-tag em {
+.ty-ch-arrival .chapter-tag em {
   color: rgba(255, 255, 255, 0.62);
 }
 
@@ -162,7 +162,7 @@
   margin-top: 0.9rem;
   padding-top: 1.5rem;
   border-top: 1px solid rgba(255, 255, 255, 0.16);
-  font-size: 1.09rem;
+  font-size: calc(1.09rem * var(--tx));
   color: rgba(255, 255, 255, 0.82);
   font-weight: 400;
 }
@@ -172,7 +172,7 @@
   text-align: left;
 }
 .status__meta strong {
-  font-size: 0.8rem;
+  font-size: calc(0.8rem * var(--tx));
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--blue-light);
@@ -215,7 +215,7 @@
   gap: 0.9rem;
 }
 .call-box h2 {
-  font-size: 2.4rem;
+  font-size: calc(2.4rem * var(--tx));
 }
 .call-box__actions {
   display: flex;
@@ -231,7 +231,7 @@
   border: 1px solid var(--n-200);
 }
 .now h3 {
-  font-size: 0.87rem;
+  font-size: calc(0.87rem * var(--tx));
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--n-500);
@@ -242,7 +242,7 @@
   display: flex;
   align-items: center;
   gap: 0.6rem;
-  font-size: 1.45rem;
+  font-size: calc(1.45rem * var(--tx));
   font-weight: 800;
   letter-spacing: -0.03em;
   margin-bottom: 0.4rem;
@@ -283,13 +283,13 @@
   background: var(--brown);
 }
 .now__next {
-  font-size: 1.09rem;
+  font-size: calc(1.09rem * var(--tx));
   color: var(--n-700);
   font-weight: 400;
 }
 .now__langs {
   margin-top: 0.9rem;
-  font-size: 0.92rem;
+  font-size: calc(0.92rem * var(--tx));
   color: var(--n-500);
   font-weight: 400;
 }
@@ -363,7 +363,7 @@
   display: grid;
   place-items: center;
   font-weight: 800;
-  font-size: 1.39rem;
+  font-size: calc(1.39rem * var(--tx));
   background: var(--white);
   color: var(--n-300);
   border: 2px solid var(--n-200);
@@ -449,7 +449,7 @@
     border-color 0.5s var(--ease), box-shadow 0.5s var(--ease);
 }
 .prep__n {
-  font-size: 0.87rem;
+  font-size: calc(0.87rem * var(--tx));
   letter-spacing: 0.2em;
   font-weight: 800;
   color: var(--n-300);
@@ -458,7 +458,7 @@
 .prep__item p {
   color: var(--n-700);
   font-weight: 400;
-  font-size: 1.16rem;
+  font-size: calc(1.16rem * var(--tx));
 }
 .prep__item.is-active {
   opacity: 1;
@@ -482,7 +482,7 @@
 }
 .team__media figcaption {
   margin-top: 0.9rem;
-  font-size: 1.04rem;
+  font-size: calc(1.04rem * var(--tx));
   color: var(--n-500);
   text-align: center;
   font-weight: 400;
@@ -511,14 +511,22 @@
   align-content: center;
 }
 .place__panel h2 {
-  font-size: 2.4rem;
+  font-size: calc(2.4rem * var(--tx));
   max-width: 14ch;
+}
+/* The scrub marker is absolutely positioned against this box and rides on
+   its border-left. It cannot live INSIDE the <ol> (a non-list-item child of a
+   list is invalid HTML and the headless WHTML builder rejects the whole page
+   insert), so the wrapper below owns the positioning context and the outer
+   margin instead — same box, same geometry. */
+.place__list {
+  position: relative;
+  margin: 0.4rem 0 0;
 }
 .place__details {
   list-style: none;
-  margin: 0.4rem 0 0;
+  margin: 0;
   padding: 0;
-  position: relative;
   display: grid;
   gap: clamp(0.9rem, 2vw, 1.5rem);
   padding-left: 1.4rem;
@@ -550,7 +558,7 @@
   opacity: 1;
 }
 .detail h3 {
-  font-size: 0.89rem;
+  font-size: calc(0.89rem * var(--tx));
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--blue);
@@ -562,13 +570,13 @@
   color: var(--n-700);
   font-weight: 400;
 }
-.detail a:not(.more) {
+.detail a:not(.gm-more) {
   color: var(--blue-deep);
   font-weight: 600;
   border-bottom: 1px solid var(--n-200);
   transition: border-color 0.3s;
 }
-.detail a:not(.more):hover {
+.detail a:not(.gm-more):hover {
   border-color: var(--blue);
 }
 .hours--light div {
@@ -612,3 +620,7 @@
     height: 340px;
   }
 }
+
+/* Script embeds: layout-inert. In Webflow a script-only HtmlEmbed is a
+   visible div.w-embed — without this it occupies a grid/flex cell. */
+.wz-js { display: none; }

@@ -45,13 +45,13 @@
 /* ==========================================================================
    CHAPTER 00 — ARRIVAL
    ========================================================================== */
-.ch-arrival {
+.imp-ch-arrival {
   position: relative;
   isolation: isolate;
   background: var(--blue-deep);
   color: #fff;
   overflow: hidden;
-  padding-top: clamp(7rem, 12vw, 10rem);
+  padding-top: clamp(7rem, 10vw, 8rem);
   padding-bottom: clamp(3.5rem, 7vw, 6rem);
 }
 .arrival__media {
@@ -99,15 +99,15 @@
   opacity: 0;
   pointer-events: none;
 }
-.ch-arrival h1 {
+.imp-ch-arrival h1 {
   color: #fff;
   max-width: 15ch;
 }
-.ch-arrival h1 em {
+.imp-ch-arrival h1 em {
   font-style: normal;
   color: var(--blue-light);
 }
-.arrival__sub {
+.imp-arrival__sub {
   font-size: var(--body-lg);
   color: rgba(255, 255, 255, 0.82);
   font-weight: 400;
@@ -116,7 +116,21 @@
 .arrival__inner {
   display: grid;
   gap: clamp(2rem, 4vw, 4rem);
-  align-items: center;
+  /* start, not center — two things break when this column is centred.
+
+     The copy column is much taller than the panel (headline, lede, offer,
+     five ticks, proof row), so centring the panel against it pushes the form
+     to roughly half-way down the viewport: on a 1366x860 laptop the first
+     question sat at y=437 and the Continue button was below the fold. The
+     form IS the conversion event on a paid-traffic page and it should be
+     reachable without scrolling.
+
+     Worse, the quiz steps are different heights, so a centred panel MOVES
+     between steps — it slid 33px down between Q1 and Q3, under the cursor of
+     someone mid-click. That is the "form has a responsiveness problem" note
+     in review, and it is why the cosmetic page's single-step form felt fine:
+     nothing there changes height, so nothing re-centres. */
+  align-items: start;
 }
 @media (min-width: 1000px) {
   .arrival__inner {
@@ -128,17 +142,17 @@
   gap: 1.25rem;
   align-content: start;
 }
-.ch-arrival .chapter-tag {
+.imp-ch-arrival .chapter-tag {
   color: var(--blue-light);
   margin-bottom: 0;
 }
 /* The eyebrow inherits --blue, which is a mid-blue chosen for white grounds.
    On the navy hero that is barely legible — the arrival chapter is the one
-   place .label sits on a dark ground without a data-theme to catch it. */
-.ch-arrival .label {
+   place .gm-label sits on a dark ground without a data-theme to catch it. */
+.imp-ch-arrival .gm-label {
   color: var(--blue-light);
 }
-.ch-arrival .chapter-tag em {
+.imp-ch-arrival .chapter-tag em {
   color: rgba(255, 255, 255, 0.62);
 }
 
@@ -161,7 +175,7 @@
   }
 }
 .offer__price {
-  font-size: 3.9rem;
+  font-size: calc(3.9rem * var(--tx));
   font-weight: 800;
   line-height: 1;
   letter-spacing: -0.05em;
@@ -169,7 +183,7 @@
   font-variant-numeric: tabular-nums;
 }
 .offer__meta {
-  font-size: 1.09rem;
+  font-size: calc(1.09rem * var(--tx));
   color: rgba(255, 255, 255, 0.78);
   line-height: 1.5;
   font-weight: 400;
@@ -177,7 +191,7 @@
 .offer__meta strong {
   display: block;
   color: #fff;
-  font-size: 1.18rem;
+  font-size: calc(1.18rem * var(--tx));
   font-weight: 700;
   margin-bottom: 0.15rem;
 }
@@ -193,7 +207,7 @@
   display: flex;
   align-items: center;
   gap: 0.8rem;
-  font-size: 1.17rem;
+  font-size: calc(1.17rem * var(--tx));
   color: rgba(255, 255, 255, 0.88);
   font-weight: 400;
 }
@@ -228,13 +242,13 @@
 .proof__item {
   display: flex;
   flex-direction: column;
-  font-size: 0.84rem;
+  font-size: calc(0.84rem * var(--tx));
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: rgba(255, 255, 255, 0.66);
 }
 .proof__item strong {
-  font-size: 1.35rem;
+  font-size: calc(1.35rem * var(--tx));
   color: #fff;
   letter-spacing: -0.02em;
   text-transform: none;
@@ -274,13 +288,13 @@
 }
 
 /* ---------- quiz steps ---------- */
-.step {
+.gm-step {
   display: none;
   border: 0;
   margin: 0;
   padding: 0;
 }
-.step.is-active {
+.gm-step.is-active {
   display: block;
   animation: stepIn 0.42s var(--ease) both;
 }
@@ -289,7 +303,7 @@
   to { opacity: 1; transform: none; }
 }
 .step__q {
-  font-size: 1.27rem;
+  font-size: calc(1.27rem * var(--tx));
   font-weight: 700;
   color: var(--blue-deep);
   margin: 0 0 0.9rem;
@@ -304,7 +318,7 @@
   margin-top: 0.9rem;
 }
 .panel__back {
-  font-size: 1.03rem;
+  font-size: calc(1.03rem * var(--tx));
   font-weight: 600;
   color: var(--n-500);
   padding: 0.5rem 0.25rem;
@@ -334,7 +348,7 @@
   .loss__grid { grid-template-columns: 1.25fr 0.75fr; }
 }
 .loss__big {
-  font-size: 3.1rem;
+  font-size: calc(3.1rem * var(--tx));
   font-weight: 800;
   line-height: 1.16;
   letter-spacing: -0.035em;
@@ -387,14 +401,14 @@
   will-change: transform;
 }
 .ridge__read {
-  font-size: 1.11rem;
+  font-size: calc(1.11rem * var(--tx));
   color: rgba(255, 255, 255, 0.74);
   font-weight: 400;
   line-height: 1.55;
 }
 .ridge__num {
   display: block;
-  font-size: 3.1rem;
+  font-size: calc(3.1rem * var(--tx));
   font-weight: 800;
   letter-spacing: -0.045em;
   line-height: 1;
@@ -467,14 +481,14 @@
 .scan__figures span {
   display: flex;
   flex-direction: column;
-  font-size: 0.92rem;
+  font-size: calc(0.92rem * var(--tx));
   letter-spacing: 0.1em;
   text-transform: uppercase;
   color: var(--n-500);
   font-weight: 600;
 }
 .scan__figures b {
-  font-size: 2.3rem;
+  font-size: calc(2.3rem * var(--tx));
   font-weight: 800;
   letter-spacing: -0.04em;
   color: var(--blue-deep);
@@ -498,11 +512,9 @@
   margin: 0;
   padding: 0;
   display: grid;
-  counter-reset: reason;
   border-top: 1px solid var(--n-200);
 }
 .reason {
-  counter-increment: reason;
   display: grid;
   grid-template-columns: auto 1fr;
   gap: 0.3rem 1rem;
@@ -513,23 +525,23 @@
   opacity: 0.42;
   transition: opacity 0.45s var(--ease), border-color 0.45s var(--ease);
 }
-.reason::before {
-  content: "0" counter(reason);
+.reason__n {
+  font-style: normal;
   grid-row: span 2;
-  font-size: 0.89rem;
+  font-size: calc(0.89rem * var(--tx));
   letter-spacing: 0.14em;
   font-weight: 800;
   color: var(--n-300);
   transition: color 0.45s var(--ease);
 }
 .reason b {
-  font-size: 1.2rem;
+  font-size: calc(1.2rem * var(--tx));
   font-weight: 700;
   letter-spacing: -0.02em;
   color: var(--blue-deep);
 }
 .reason span {
-  font-size: 1.11rem;
+  font-size: calc(1.11rem * var(--tx));
   color: var(--n-700);
   font-weight: 400;
   line-height: 1.6;
@@ -538,7 +550,7 @@
   opacity: 1;
   border-color: var(--blue-light);
 }
-.reason.is-lit::before {
+.reason.is-lit .reason__n {
   color: var(--blue);
 }
 /* Nothing may be left dimmed, unlit or half-drawn when motion is off. The
@@ -556,7 +568,7 @@
   transform: scaleX(0.75);
 }
 @media (max-width: 720px) {
-  .reason span { font-size: 1.06rem; }
+  .reason span { font-size: calc(1.06rem * var(--tx)); }
 }
 
 /* ==========================================================================
@@ -601,21 +613,21 @@
   border-color: var(--blue-light);
   box-shadow: var(--shadow-md);
 }
-.opt .figure {
+.opt .gm-figure {
   border-radius: 0;
   margin-bottom: 1rem;
 }
-.opt .figure img {
+.opt .gm-figure img {
   filter: grayscale(0.55);
   transition: transform 0.8s var(--ease), filter 0.6s var(--ease);
 }
-.opt:hover .figure img,
-.opt.is-centre .figure img {
+.opt:hover .gm-figure img,
+.opt.is-centre .gm-figure img {
   filter: grayscale(0);
   transform: scale(1.05);
 }
 .opt__n {
-  font-size: 0.87rem;
+  font-size: calc(0.87rem * var(--tx));
   letter-spacing: 0.2em;
   font-weight: 700;
   color: var(--blue-light);
@@ -632,7 +644,7 @@
 .opt p {
   color: var(--n-700);
   font-weight: 400;
-  font-size: 1.13rem;
+  font-size: calc(1.13rem * var(--tx));
 }
 .ch__rail--shell {
   width: var(--shell);
@@ -654,7 +666,7 @@
     scroll-snap-align: start;
     width: min(84vw, 380px);
   }
-  .opt .figure img {
+  .opt .gm-figure img {
     filter: none;
   }
 }
@@ -682,7 +694,7 @@
   z-index: -1;
 }
 .doctor__role {
-  font-size: 0.94rem;
+  font-size: calc(0.94rem * var(--tx));
   letter-spacing: 0.16em;
   text-transform: uppercase;
   color: var(--brown);
@@ -692,7 +704,7 @@
 .services__note {
   text-align: center;
   margin-top: 1.4rem;
-  font-size: 1.09rem;
+  font-size: calc(1.09rem * var(--tx));
   font-weight: 600;
   color: var(--brown);
 }
@@ -711,7 +723,7 @@
   width: 100%;
   min-width: 720px;
   border-collapse: collapse;
-  font-size: 1.13rem;
+  font-size: calc(1.13rem * var(--tx));
 }
 .matrix th,
 .matrix td {
@@ -724,7 +736,7 @@
 .matrix thead th {
   background: var(--blue-deep);
   color: #fff;
-  font-size: 0.84rem;
+  font-size: calc(0.84rem * var(--tx));
   letter-spacing: 0.16em;
   text-transform: uppercase;
   font-weight: 700;
@@ -752,7 +764,7 @@
   display: inline-block;
   padding: 0.3rem 0.75rem;
   border-radius: var(--r-xl);
-  font-size: 0.87rem;
+  font-size: calc(0.87rem * var(--tx));
   font-weight: 700;
   letter-spacing: 0.04em;
   background: rgba(31, 122, 77, 0.1);
@@ -797,7 +809,7 @@
 .ch-invitation .quote figcaption span {
   color: rgba(255, 255, 255, 0.6);
 }
-.closing {
+.imp-closing {
   max-width: 780px;
   margin: clamp(3.5rem, 6vw, 5.5rem) auto 0;
   display: grid;
@@ -805,10 +817,10 @@
   justify-items: center;
   text-align: center;
 }
-.closing h2 {
+.imp-closing h2 {
   color: #fff;
 }
-.closing .lede {
+.imp-closing .lede {
   color: rgba(255, 255, 255, 0.85);
 }
 .closing__actions {
@@ -820,12 +832,16 @@
 }
 /* The chapter is dark, so a ghost button's default ink would paint it
    invisible against its own background. */
-.closing .btn--ghost {
+.imp-closing .btn--ghost {
   color: #fff;
 }
-.closing .btn--ghost::before {
+.imp-closing .btn--ghost::before {
   background: #fff;
 }
-.closing .btn--ghost:hover {
+.imp-closing .btn--ghost:hover {
   color: var(--blue-deep);
 }
+
+/* Script embeds: layout-inert. In Webflow a script-only HtmlEmbed is a
+   visible div.w-embed — without this it occupies a grid/flex cell. */
+.wz-js { display: none; }

@@ -25,6 +25,67 @@
     <script src="assets/gsap/ScrollToPlugin.min.js"></script>
     <script src="assets/gsap/ScrollSmoother.min.js"></script>
     <script src="assets/gsap/SplitText.min.js"></script>
+
+    <script>
+/* WZ bootstrap — HEAD ONLY. The section embeds call WZ.add mid-parse, so this
+   must be defined before the first section arrives; a footer-installed
+   bootstrap throws "WZ is not defined" per chapter. GSAP must already be
+   loaded above (the CDN tags), but `ok` is a lazy getter so a slow tag cannot
+   freeze it false. Registration stays in the FOOTER — registering
+   ScrollTrigger before document.body exists kills ScrollSmoother silently. */
+window.WZ = (function () {
+  var q = [], flushed = false;
+  var W = {
+    reduced: window.matchMedia('(prefers-reduced-motion: reduce)').matches,
+    fine: window.matchMedia('(hover:hover) and (pointer:fine)').matches,
+    smoother: null,
+    get ok() { return !!(window.gsap && window.ScrollTrigger); },
+    /* Masked per-line split; degrades to null when SplitText is absent. */
+    splitLines: function (el, build) {
+      if (!window.SplitText) return null;
+      try {
+        var o = { type: 'lines', mask: 'lines', linesClass: 'wz-line', autoSplit: true };
+        if (build) o.onSplit = function (self) { return build(self); };
+        return SplitText.create ? SplitText.create(el, o) : new SplitText(el, o);
+      } catch (e) { return null; }
+    },
+    splitWords: function (el) {
+      if (!window.SplitText) return null;
+      try {
+        var o = { type: 'words', wordsClass: 'wz-word' };
+        return SplitText.create ? SplitText.create(el, o) : new SplitText(el, o);
+      } catch (e) { return null; }
+    },
+    /* A scrubbed trigger with no tween never fires onUpdate; scrubbing a proxy
+       yields a real 0-1 signal. The cleanup deliberately does NOT kill the
+       tween or its trigger: a matchMedia context already owns and reverts
+       them, and a second revert strips the pin spacers while the triggers
+       keep stale start/end values — the page then measures thousands of px
+       shorter than ScrollTrigger believes. Only class/paint state is ours. */
+    scrub: function (config, paint) {
+      var proxy = { p: 0 };
+      gsap.to(proxy, { p: 1, ease: 'none', scrollTrigger: config, onUpdate: function () { paint(proxy.p); } });
+      return function () { paint(1); };
+    },
+    add: function (fn) { flushed ? W.run(fn) : q.push(fn); },
+    run: function (fn) { try { fn(W); } catch (e) { console.error('[WZ]', e); } },
+    flush: function () { flushed = true; q.forEach(function (fn) { W.run(fn); }); q.length = 0; },
+    onReady: function (fn) {
+      if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', fn);
+      else fn();
+    },
+    /* Resolved-state painter: runs only when the motion layer will not, so a
+       pinned scene ships lit instead of stranded at its "not yet" state.
+       Motion off must never mean content off. */
+    staticPaint: function (fn) {
+      W.onReady(function () {
+        if (W.reduced || !W.ok) { try { fn(); } catch (e) { console.error('[WZ]', e); } }
+      });
+    },
+  };
+  return W;
+})();
+    </script>
   </head>
   <body>
     <!-- ====================================================================
@@ -56,7 +117,7 @@
 
     <a class="sr-only" href="#book">Skip to the consultation form</a>
 
-    <header class="header" id="header">
+    <header class="gm-header" id="header">
       <div class="shell header__inner">
         <a class="header__logo" href="#arrival" aria-label="Grand Mission Dentistry">
           <img class="logo-light" src="assets/logo-light.webp" alt="Grand Mission Dentistry" />
@@ -85,10 +146,11 @@
 
     <div id="smooth-wrapper">
       <div id="smooth-content">
+<main id="top">
         <!-- ==================================================================
              CHAPTER 00 — ARRIVAL
              ================================================================== -->
-        <section class="ch ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival">
+        <section class="ch cos-ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival">
           <div class="arrival__media">
             <img src="assets/cosmetic-patient.jpeg" alt="" aria-hidden="true" id="arrivalImg" />
           </div>
@@ -98,10 +160,10 @@
           <div class="shell arrival__inner" id="arrivalInner">
             <div class="arrival__copy">
               <p class="chapter-tag"><i></i><b>00</b><em>Arrival</em></p>
-              <p class="label" data-rv>Cosmetic dentistry · Richmond, TX</p>
+              <p class="gm-label" data-rv>Cosmetic dentistry · Richmond, TX</p>
               <!-- Headline and subhead verbatim from gmd-cosmetic-lp.html. -->
               <h1 id="arrivalTitle">Your trusted destination for <em>cosmetic dentistry</em> in Richmond, TX</h1>
-              <p class="arrival__sub" data-rv>Advanced care and tailored solutions for a stunning smile.</p>
+              <p class="cos-arrival__sub" data-rv>Advanced care and tailored solutions for a stunning smile.</p>
 
               <div class="offer" data-rv>
                 <p class="offer__price"><span class="script">Free</span></p>
@@ -121,7 +183,7 @@
 
               <div class="proof" data-rv="stagger">
                 <span class="proof__item">
-                  <span class="stars" aria-hidden="true">★★★★★</span>
+                  <span class="gm-stars" aria-hidden="true">★★★★★</span>
                   <strong>1,700+</strong>
                   Google reviews
                 </span>
@@ -200,16 +262,174 @@
           </div>
 
           <a class="scroll-cue" href="#hands" aria-label="Begin"><span></span></a>
-        </section>
+        
+<script data-embed class="wz-js">
+/* CHAPTER 00 — ARRIVAL: entrance timeline + scrubbed departure. */
+WZ.add(function (W) {
+  var root = document.getElementById('arrival');
+  if (!root) return;
+
+  var tl = gsap.timeline({ delay: 0.12, defaults: { ease: 'power3.out' } });
+  var title = document.getElementById('arrivalTitle');
+  var split = W.splitLines(title);
+
+  if (split && split.lines && split.lines.length) {
+    gsap.set(split.lines, { yPercent: 115 });
+    tl.to(split.lines, { yPercent: 0, duration: 1.1, stagger: 0.09, ease: 'power4.out' }, 0);
+  } else {
+    tl.from(title, { opacity: 0, y: 40, duration: 1 }, 0);
+  }
+  tl.from(root.querySelector('.chapter-tag'), { opacity: 0, x: -22, duration: 0.85 }, 0.05)
+    .from('#arrivalImg', { opacity: 0, scale: 1.12, duration: 1.7 }, 0)
+    .from('#book', { opacity: 0, y: 40, duration: 1 }, 0.5);
+
+  /* Departure. */
+  gsap
+    .timeline({ scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: 0.5 } })
+    .to('#arrivalInner', { yPercent: -12, opacity: 0.2, ease: 'none' }, 0)
+    .to('#arrivalImg', { yPercent: 6, scale: 1.1, ease: 'none' }, 0)
+    .to('#arrivalVeil', { opacity: 0.75, ease: 'none' }, 0);
+});
+</script>
+
+<script data-embed class="wz-js">
+/* OFFER + LEAD LAYER — single source of truth for every price and phone
+   number on the page (Asana 1217072657902270). Behaviour, not motion: runs at
+   DOM-ready whatever GSAP or prefers-reduced-motion say, before the kit's
+   counters read data-count (the boot gate guarantees that order). */
+WZ.onReady(function () {
+  var OFFER = {
+    /* Live offers published on grandmissiondentistry.com (2026-08-05). */
+    newPatient: 189, /* exam, X-rays, cleaning, treatment plan */
+    invisalign: 3799, /* aligners, refinements, retainer, whitening */
+    /* The cosmetic campaign's own call-tracking number, as published on the
+       vendor original — distinct from the implant page's, which is the point
+       of tracking numbers. OPEN with Brandklout: if it belongs to the
+       outgoing ad company it may be disconnected at handover. Fallback is
+       the main line, (281) 789-8836 / +12817898836. */
+    phoneDisplay: '(281) 729-4615',
+    phoneDial: '+12817294615',
+  };
+  /* GHL lead destination — null until Brandklout hands over the endpoint. */
+  var LEAD_ENDPOINT = null;
+  var THANK_YOU_URL = null;
+
+  var text = {
+    'new-patient-value': OFFER.newPatient.toLocaleString('en-US'),
+    'invisalign-value': OFFER.invisalign.toLocaleString('en-US'),
+  };
+  Object.keys(text).forEach(function (key) {
+    document.querySelectorAll('[data-offer="' + key + '"]').forEach(function (el) {
+      el.textContent = text[key];
+    });
+  });
+
+  /* Counters get the number, not the string. */
+  var counters = { 'new-patient': OFFER.newPatient, invisalign: OFFER.invisalign };
+  Object.keys(counters).forEach(function (key) {
+    document.querySelectorAll('[data-offer-count="' + key + '"]').forEach(function (el) {
+      el.setAttribute('data-count', String(counters[key]));
+      el.textContent = counters[key].toLocaleString('en-US');
+    });
+  });
+
+  document.querySelectorAll('[data-tel]').forEach(function (el) {
+    el.textContent = OFFER.phoneDisplay;
+  });
+  document.querySelectorAll('[data-tel-link]').forEach(function (el) {
+    el.setAttribute('href', 'tel:' + OFFER.phoneDial);
+  });
+
+  /* ---------- lead form -------------------------------------------------- */
+  var panel = document.getElementById('book');
+  var form = document.getElementById('leadForm');
+  var submit = document.getElementById('formSubmit');
+  if (!panel || !form) return;
+
+  form.addEventListener('submit', function (event) {
+    event.preventDefault();
+    if (!validate()) return;
+
+    /* Honeypot: a bot fills every field it finds, a patient never sees it. */
+    if (form.company_website && form.company_website.value) return;
+
+    var data = {};
+    new FormData(form).forEach(function (value, key) { data[key] = value; });
+    data.page = 'cosmetic-landing-page';
+    data.asana_task_gid = '1217072657902270';
+
+    var finish = function () {
+      panel.classList.add('is-done');
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+      if (window.WZ && WZ.smoother) WZ.smoother.scrollTo(panel, true, 'center center');
+      else panel.scrollIntoView({ block: 'center' });
+    };
+
+    if (!LEAD_ENDPOINT) {
+      console.info('[lead] would POST to GHL:', data);
+      finish();
+      return;
+    }
+
+    submit.disabled = true;
+    submit.querySelector('span').textContent = 'Sending…';
+    fetch(LEAD_ENDPOINT, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify(data),
+    })
+      .then(function () {
+        if (THANK_YOU_URL) { window.location.href = THANK_YOU_URL; return; }
+        finish();
+      })
+      .catch(function () {
+        submit.disabled = false;
+        submit.querySelector('span').textContent = 'Request my consultation';
+        var slot = form.querySelector('[data-error-for="f-consent"]');
+        if (slot) slot.textContent = 'Something went wrong. Please call the practice instead.';
+      });
+  });
+
+  function validate() {
+    form.querySelectorAll('[aria-invalid]').forEach(function (el) {
+      el.removeAttribute('aria-invalid');
+    });
+    form.querySelectorAll('.field__error').forEach(function (el) { el.textContent = ''; });
+
+    var ok = true;
+    form.querySelectorAll('input[required]').forEach(function (input) {
+      var valid =
+        input.type === 'checkbox'
+          ? input.checked
+          : input.value.trim() !== '' && input.checkValidity();
+      if (!valid) {
+        ok = false;
+        input.setAttribute('aria-invalid', 'true');
+        var slot = form.querySelector('[data-error-for="' + input.id + '"]');
+        if (slot) {
+          slot.textContent =
+            input.type === 'checkbox'
+              ? 'Please agree to the terms so we can contact you.'
+              : input.value.trim() === ''
+              ? 'This one is required.'
+              : 'Please check this is correct.';
+        }
+      }
+    });
+    return ok;
+  }
+});
+</script>
+</section>
 
         <!-- ==================================================================
              CHAPTER 01 — THE HANDS
              Asana section 2: meet the cosmetic doctors. Both bios verbatim
              from gmd-cosmetic-lp.html.
              ================================================================== -->
-        <section class="ch ch-hands" id="hands" data-chapter="1" data-chapter-name="The Hands" data-theme="paper">
+        <section class="ch ch-hands" id="hands" data-recede data-chapter="1" data-chapter-name="The Hands" data-theme="paper">
           <div class="shell">
-            <div class="head head--center" data-rv>
+            <div class="cos-head head--center" data-rv>
               <p class="chapter-tag chapter-tag--center"><i></i><b>01</b><em>The Hands</em></p>
               <h2 data-split>Expert care you can trust</h2>
             </div>
@@ -217,7 +437,7 @@
             <div class="doctors">
               <article class="doc" data-doc>
                 <div class="doc__portrait">
-                  <div class="figure figure--1x1" data-wipe="up">
+                  <div class="gm-figure figure--1x1" data-wipe="up">
                     <img src="assets/dr-sung.jpeg" alt="Dr. William Sung, DMD" data-drift="4" />
                   </div>
                 </div>
@@ -237,7 +457,7 @@
 
               <article class="doc doc--rev" data-doc>
                 <div class="doc__portrait">
-                  <div class="figure figure--1x1" data-wipe="up">
+                  <div class="gm-figure figure--1x1" data-wipe="up">
                     <img src="assets/dr-van.jpeg" alt="Dr. Van Nguyen, DDS" data-drift="4" />
                   </div>
                 </div>
@@ -264,7 +484,25 @@
               <a class="btn magnetic" href="#book"><span>Schedule an appointment</span></a>
             </div>
           </div>
-        </section>
+        
+<script data-embed class="wz-js">
+/* CHAPTER 01 — THE HANDS: the two portraits counter-drift so the pair never
+   sits completely still. */
+WZ.add(function (W) {
+  gsap.utils.toArray('[data-doc]').forEach(function (doc, i) {
+    gsap.fromTo(
+      doc.querySelector('.doc__portrait'),
+      { yPercent: i % 2 ? 5 : -5 },
+      {
+        yPercent: i % 2 ? -5 : 5,
+        ease: 'none',
+        scrollTrigger: { trigger: doc, start: 'top bottom', end: 'bottom top', scrub: 0.7 },
+      }
+    );
+  });
+});
+</script>
+</section>
 
         <!-- ==================================================================
              CHAPTER 02 — THE WORK   (PINNED · scrubbed index)
@@ -286,15 +524,17 @@
                 </div>
               </div>
 
-              <ol class="work__index" id="workIndex">
+              <div class="work__list">
                 <span class="work__marker" id="workMarker" data-scrub-probe="workMarker" aria-hidden="true"></span>
+                <ol class="work__index" id="workIndex">
                 <li class="work__row" data-svc data-icon="assets/icon-1.svg" data-tag="Transform your smile with a touch of perfection.">Preventive Dentistry</li>
                 <li class="work__row" data-svc data-icon="assets/icon-2.svg" data-tag="Seamless solutions for a flawless smile.">Children's Dentistry</li>
                 <li class="work__row" data-svc data-icon="assets/icon-3.svg" data-tag="A crown fit for your beautiful smile.">Cosmetic Dentistry</li>
                 <li class="work__row" data-svc data-icon="assets/icon-4.svg" data-tag="Because every smile deserves to shine.">Smile Makeovers</li>
                 <li class="work__row" data-svc data-icon="assets/icon-5.svg" data-tag="Fillings that blend for a naturally beautiful smile.">Composite Fillings</li>
                 <li class="work__row" data-svc data-icon="assets/icon-6.svg" data-tag="Brighten your smile, light up your world.">Teeth Whitening</li>
-              </ol>
+                </ol>
+              </div>
             </div>
             <div class="ch__rail ch__rail--shell"><i id="workRail"></i></div>
           </div>
@@ -317,7 +557,70 @@
               <a class="btn btn--light magnetic" href="#book"><span>Schedule a consultation today</span></a>
             </div>
           </div>
-        </section>
+        
+<script data-embed class="wz-js">
+/* CHAPTER 02 — THE WORK (pinned, scrubbed index): a marker travels the
+   service index and the stage changes to whatever it has reached. */
+WZ.add(function (W) {
+  var pin = document.getElementById('workPin');
+  var rows = gsap.utils.toArray('[data-svc]');
+  var marker = document.getElementById('workMarker');
+  var card = document.getElementById('workCard');
+  var icon = document.getElementById('workIcon');
+  var title = document.getElementById('workTitle');
+  var tag = document.getElementById('workTag');
+  var num = document.getElementById('workNum');
+  var rail = document.getElementById('workRail');
+  var index = document.getElementById('workIndex');
+  if (!pin || !rows.length || !marker) return;
+
+  var current = -1;
+
+  var show = function (i) {
+    if (i === current) return;
+    current = i;
+    var row = rows[i];
+    /* The stage swaps rather than cross-fades: one element, one owner of
+       opacity, so nothing can be stranded half-visible. */
+    gsap.fromTo(
+      card,
+      { opacity: 0, y: 18 },
+      { opacity: 1, y: 0, duration: 0.45, ease: 'power3.out', overwrite: true }
+    );
+    icon.src = row.getAttribute('data-icon');
+    title.textContent = row.textContent.trim();
+    tag.textContent = row.getAttribute('data-tag');
+    num.textContent = String(i + 1).padStart(2, '0');
+    rows.forEach(function (r, j) { r.classList.toggle('is-on', j === i); });
+  };
+
+  var paint = function (p) {
+    /* The marker is the continuous readout: it travels the whole index in
+       step with scroll, independently of which row happens to be active. */
+    var span = index.clientHeight - marker.clientHeight;
+    gsap.set(marker, { y: span * p });
+    show(Math.min(rows.length - 1, Math.floor(p * rows.length * 0.999)));
+    if (rail) gsap.set(rail, { scaleX: p });
+  };
+
+  var mm = gsap.matchMedia();
+  mm.add('(min-width: 760px)', function () {
+    return W.scrub(
+      { trigger: pin, start: 'top top', end: '+=190%', pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true },
+      paint
+    );
+  });
+  mm.add('(max-width: 759px)', function () {
+    return W.scrub({ trigger: pin, start: 'top 78%', end: 'bottom 55%', scrub: 0.35 }, paint);
+  });
+});
+/* Without the pin the index cannot drive the stage, so the six services
+   become a plain list and the stage shows the first of them. */
+WZ.staticPaint(function () {
+  document.querySelectorAll('[data-svc]').forEach(function (r) { r.classList.add('is-on'); });
+});
+</script>
+</section>
 
         <!-- ==================================================================
              CHAPTER 03 — THE STANDARD   (PINNED · scrubbed pillars)
@@ -328,7 +631,7 @@
           <div class="shell">
             <div class="split">
               <div class="split__media">
-                <div class="figure figure--4x3" data-wipe="left">
+                <div class="gm-figure figure--4x3" data-wipe="left">
                   <img src="assets/office-tech.jpeg" alt="Treatment technology at Grand Mission Dentistry, Richmond, TX" data-drift="6" />
                 </div>
               </div>
@@ -354,7 +657,7 @@
           <div class="ch__pin pillars__pin" id="pillarsPin">
             <div class="shell pillars">
               <div class="pillars__head">
-                <p class="label">Why us</p>
+                <p class="gm-label">Why us</p>
                 <h2 data-split>Why choose Grand Mission Dentistry, Richmond, TX?</h2>
               </div>
               <div class="pillars__list" id="pillarList">
@@ -377,7 +680,39 @@
             </div>
             <div class="ch__rail ch__rail--shell"><i id="pillarBar" data-scrub-probe="pillarBar"></i></div>
           </div>
-        </section>
+        
+<script data-embed class="wz-js">
+/* CHAPTER 03 — THE STANDARD (pinned, scrubbed pillars). */
+WZ.add(function (W) {
+  var pin = document.getElementById('pillarsPin');
+  var pillars = gsap.utils.toArray('[data-pillar]');
+  var bar = document.getElementById('pillarBar');
+  if (!pin || !pillars.length) return;
+
+  var paint = function (p) {
+    if (bar) gsap.set(bar, { scaleX: p });
+    pillars.forEach(function (pl, i) {
+      pl.classList.toggle('is-active', p >= i / pillars.length + 0.03);
+    });
+  };
+
+  var mm = gsap.matchMedia();
+  mm.add('(min-width: 760px)', function () {
+    return W.scrub(
+      { trigger: pin, start: 'top top', end: '+=140%', pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true },
+      paint
+    );
+  });
+  mm.add('(max-width: 759px)', function () {
+    return W.scrub({ trigger: pin, start: 'top 80%', end: 'bottom 55%', scrub: 0.35 }, paint);
+  });
+});
+/* A dimmed pillar list would read as a page that failed to load. */
+WZ.staticPaint(function () {
+  document.querySelectorAll('[data-pillar]').forEach(function (p) { p.classList.add('is-active'); });
+});
+</script>
+</section>
 
         <!-- ==================================================================
              CHAPTER 04 — THE PROOF   (PINNED · horizontal patient ribbon)
@@ -403,45 +738,105 @@
             </div>
             <div class="proof__foot shell">
               <div class="ch__rail" style="width: 100%"><i id="ribbonBar"></i></div>
-              <p class="disclaimer">
+              <p class="cos-disclaimer">
                 Results vary from patient to patient. These are individual outcomes and depend on
                 oral health, lifestyle and the specifics of treatment. Yours will be discussed at
                 your consultation.
               </p>
             </div>
           </div>
-        </section>
+        
+<script data-embed class="wz-js">
+/* CHAPTER 04 — THE PROOF (pinned horizontal ribbon): eight real cases
+   travel sideways. */
+WZ.add(function (W) {
+  var pin = document.getElementById('proofPin');
+  var rail = document.getElementById('ribbonRail');
+  var bar = document.getElementById('ribbonBar');
+  if (!pin || !rail) return;
+
+  function distance() {
+    return Math.max(0, rail.scrollWidth - window.innerWidth + 40);
+  }
+
+  var mm = gsap.matchMedia();
+  mm.add('(min-width: 901px)', function () {
+    var cases = gsap.utils.toArray('.case');
+    gsap.to(rail, {
+      x: function () { return -distance(); },
+      ease: 'none',
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: function () { return '+=' + (distance() + window.innerHeight * 0.6); },
+        pin: true,
+        scrub: 0.3,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          gsap.set(bar, { scaleX: self.progress });
+          /* Whichever case is nearest the middle is the one being looked
+             at, so it is the one that comes up to full colour. */
+          var mid = window.innerWidth / 2;
+          var best = 0,
+            bestD = Infinity;
+          cases.forEach(function (c, i) {
+            var r = c.getBoundingClientRect();
+            var d = Math.abs(r.left + r.width / 2 - mid);
+            if (d < bestD) { bestD = d; best = i; }
+          });
+          cases.forEach(function (c, i) { c.classList.toggle('is-centre', i === best); });
+        },
+      },
+    });
+    /* No kill here — matchMedia already owns this tween and its pin;
+       reverting it twice strips the pin spacer out of the layout. */
+    return function () { gsap.set(bar, { scaleX: 1 }); };
+  });
+
+  mm.add('(max-width: 900px)', function () {
+    var onScroll = function () {
+      var max = rail.scrollWidth - rail.clientWidth;
+      gsap.set(bar, { scaleX: max > 0 ? rail.scrollLeft / max : 1 });
+    };
+    onScroll();
+    rail.addEventListener('scroll', onScroll, { passive: true });
+    return function () { rail.removeEventListener('scroll', onScroll); };
+  });
+});
+</script>
+</section>
 
         <!-- ==================================================================
              CHAPTER 05 — THE VOICES
              Asana section 7: reviews. All three verbatim from the original.
              ================================================================== -->
-        <section class="ch ch-voices" id="voices" data-chapter="5" data-chapter-name="The Voices" data-theme="paper">
+        <section class="ch ch-voices" id="voices" data-recede data-chapter="5" data-chapter-name="The Voices" data-theme="paper">
           <div class="shell">
-            <div class="head head--center" data-rv>
+            <div class="cos-head head--center" data-rv>
               <p class="chapter-tag chapter-tag--center"><i></i><b>05</b><em>The Voices</em></p>
               <h2 data-split>Rated highly by the Richmond, TX community</h2>
               <p class="lede">Here's what our happy patients say.</p>
             </div>
             <div class="badges" data-rv="stagger" style="margin-bottom: 2.4rem">
-              <span class="badge"><span class="stars" aria-hidden="true">★★★★★</span> <strong>1,700+</strong> Google reviews</span>
+              <span class="badge"><span class="gm-stars" aria-hidden="true">★★★★★</span> <strong>1,700+</strong> Google reviews</span>
               <span class="badge"><strong>Nextdoor</strong> Neighborhood Favorite 2021–2024</span>
               <span class="badge"><strong>Healthgrades</strong> 2023 Patient Safety Award</span>
-              <span class="badge"><span class="stars" aria-hidden="true">★★★★★</span> <strong>Yelp</strong> five-star business</span>
+              <span class="badge"><span class="gm-stars" aria-hidden="true">★★★★★</span> <strong>Yelp</strong> five-star business</span>
             </div>
-            <div class="grid c3" data-rv="stagger">
+            <div class="gm-grid c3" data-rv="stagger">
               <figure class="quote">
-                <span class="stars" aria-label="Five out of five stars">★★★★★</span>
+                <span class="gm-stars" aria-label="Five out of five stars">★★★★★</span>
                 <p>“This is the best dental place I've been to since I moved to Texas. Customer service is superb, so kind, friendly, and welcoming.”</p>
                 <figcaption>Diane C.<span>Google review</span></figcaption>
               </figure>
               <figure class="quote">
-                <span class="stars" aria-label="Five out of five stars">★★★★★</span>
+                <span class="gm-stars" aria-label="Five out of five stars">★★★★★</span>
                 <p>“Dr. Van and Hygienist Karen were amazing today! I've got my plan to start a healthier mouth and I'm so excited!”</p>
                 <figcaption>Cedaro<span>Google review</span></figcaption>
               </figure>
               <figure class="quote">
-                <span class="stars" aria-label="Five out of five stars">★★★★★</span>
+                <span class="gm-stars" aria-label="Five out of five stars">★★★★★</span>
                 <p>“Best experience! Very up to date with equipment and the cleanest dental office I've ever been to.”</p>
                 <figcaption>Tiffany T.<span>Google review</span></figcaption>
               </figure>
@@ -454,7 +849,7 @@
              ================================================================== -->
         <section class="ch ch-invitation" id="invitation" data-chapter="6" data-chapter-name="The Invitation" data-theme="dark">
           <div class="invitation__glow" aria-hidden="true"></div>
-          <div class="shell closing">
+          <div class="shell cos-closing">
             <p class="chapter-tag chapter-tag--center" data-rv><i></i><b>06</b><em>The Invitation</em></p>
             <h2 data-split>Ready for a confident, radiant smile?</h2>
             <p class="lede" data-rv>
@@ -467,9 +862,27 @@
               <a class="btn btn--ghost btn--lg magnetic" href="#" data-tel-link><span>Call <span data-tel>(281) 729-4615</span></span></a>
             </div>
           </div>
-        </section>
+        
+<script data-embed class="wz-js">
+/* CHAPTER 06 — THE INVITATION: the glow breathes with scroll. */
+WZ.add(function (W) {
+  gsap.fromTo(
+    '.invitation__glow',
+    { scale: 0.82, opacity: 0.45 },
+    {
+      scale: 1.18,
+      opacity: 1,
+      ease: 'none',
+      scrollTrigger: { trigger: '#invitation', start: 'top bottom', end: 'bottom bottom', scrub: 0.7 },
+    }
+  );
+});
+</script>
+</section>
 
-        <footer class="footer">
+        </main>
+
+        <footer class="gm-footer">
           <div class="shell">
             <div class="footer__grid">
               <div>
@@ -482,7 +895,7 @@
               </div>
               <div>
                 <h3>Office hours</h3>
-                <dl class="hours">
+                <dl class="cos-hours">
                   <div><dt>Monday</dt><dd>9:00 am – 7:00 pm</dd></div>
                   <div><dt>Tuesday</dt><dd>10:00 am – 8:00 pm</dd></div>
                   <div><dt>Wednesday</dt><dd>10:00 am – 8:00 pm</dd></div>
@@ -528,11 +941,334 @@
       <img id="lightboxImg" src="" alt="" />
     </div>
 
-    <script src="assets/wz.js"></script>
-    <script src="page.js"></script>
-    <script src="app.js"></script>
     <script>
-      wzFlush();
+/* WZ page runtime — FOOTER. Identical on all three Grand Mission pages; a
+   page-level second copy anywhere else is fatal (a duplicate
+   ScrollSmoother.create kills every trigger). Order: kit registers last so
+   section embeds (queued mid-parse) run first at flush; nothing here depends
+   on that order. */
+
+/* ---- KIT: page-generic, selector-driven, idempotent ---------------------- */
+WZ.add(function (W) {
+  /* reveals: [data-rv] / [data-rv="stagger"] — a nested [data-rv] is covered
+     by its parent's stagger; two `from` tweens on one node fight and can
+     strand it invisible. */
+  gsap.utils.toArray('[data-rv]').forEach(function (el) {
+    if (el.parentElement && el.parentElement.closest('[data-rv]')) return;
+    var mode = el.getAttribute('data-rv');
+    gsap.set(el, { opacity: 1 });
+    gsap.from(mode === 'stagger' ? el.children : el, {
+      opacity: 0, y: 34, duration: 0.95, ease: 'power3.out',
+      stagger: mode === 'stagger' ? 0.09 : 0,
+      scrollTrigger: { trigger: el, start: 'top 86%' },
+    });
+  });
+
+  /* masked line reveals: [data-split] */
+  gsap.utils.toArray('[data-split]').forEach(function (el) {
+    gsap.set(el, { opacity: 1 });
+    W.splitLines(el, function (self) {
+      return gsap.from(self.lines, {
+        yPercent: 112, duration: 1.05, stagger: 0.08, ease: 'power4.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' },
+      });
+    });
+  });
+
+  /* clip-path wipes: [data-wipe] — the mask animates, not the opacity */
+  gsap.utils.toArray('[data-wipe]').forEach(function (el) {
+    var dir = el.getAttribute('data-wipe') || 'up';
+    var from = dir === 'left' ? 'inset(0% 100% 0% 0%)'
+      : dir === 'right' ? 'inset(0% 0% 0% 100%)' : 'inset(100% 0% 0% 0%)';
+    gsap.fromTo(el, { clipPath: from }, {
+      clipPath: 'inset(0% 0% 0% 0%)', duration: 1.25, ease: 'power4.inOut',
+      scrollTrigger: { trigger: el, start: 'top 84%' },
+    });
+  });
+
+  /* parallax drift: [data-drift] — scale stays above 1 at both ends; a
+     scrubbed scale landing exactly on 1 flickers as it re-rasterises */
+  gsap.utils.toArray('[data-drift]').forEach(function (img) {
+    var amount = parseFloat(img.getAttribute('data-drift')) || 7;
+    gsap.fromTo(img, { yPercent: -amount, scale: 1.14 }, {
+      yPercent: amount, scale: 1.14, ease: 'none',
+      scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: 0.6 },
+    });
+  });
+
+  /* counters: [data-count] */
+  gsap.utils.toArray('[data-count]').forEach(function (el) {
+    var target = parseFloat(el.getAttribute('data-count')),
+      dec = parseInt(el.getAttribute('data-decimals') || '0', 10),
+      prefix = el.getAttribute('data-prefix') || '',
+      suffix = el.getAttribute('data-suffix') || '',
+      obj = { v: 0 };
+    gsap.to(obj, {
+      v: target, duration: 1.9, ease: 'power2.out',
+      scrollTrigger: { trigger: el.closest('[data-count-scope]') || el, start: 'top 88%' },
+      onUpdate: function () {
+        el.textContent = prefix + obj.v.toLocaleString('en-US',
+          { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suffix;
+      },
+    });
+  });
+
+  /* magnetic CTAs + cursor-aware sheen — pointer-fine only */
+  if (W.fine) {
+    document.querySelectorAll('.magnetic').forEach(function (el) {
+      var xTo = gsap.quickTo(el, 'x', { duration: 0.5, ease: 'power3' }),
+        yTo = gsap.quickTo(el, 'y', { duration: 0.5, ease: 'power3' });
+      el.addEventListener('pointermove', function (e) {
+        var r = el.getBoundingClientRect();
+        xTo((e.clientX - r.left - r.width / 2) * 0.22);
+        yTo((e.clientY - r.top - r.height / 2) * 0.4);
+      });
+      el.addEventListener('pointerleave', function () { xTo(0); yTo(0); });
+    });
+    document.querySelectorAll('[data-cursor-card]').forEach(function (card) {
+      card.addEventListener('pointermove', function (e) {
+        var r = card.getBoundingClientRect();
+        card.style.setProperty('--mx', ((e.clientX - r.left) / r.width) * 100 + '%');
+        card.style.setProperty('--my', ((e.clientY - r.top) / r.height) * 100 + '%');
+      });
+    });
+  }
+
+  /* marquee: [data-marquee] — track duplicated in markup, -50% loop */
+  gsap.utils.toArray('[data-marquee]').forEach(function (track) {
+    var tween = gsap.to(track, {
+      xPercent: -50, duration: parseFloat(track.getAttribute('data-marquee')) || 34,
+      ease: 'none', repeat: -1,
+    });
+    track.addEventListener('pointerenter', function () { tween.timeScale(0.25); });
+    track.addEventListener('pointerleave', function () { tween.timeScale(1); });
+  });
+
+  /* chapter departures: [data-recede] — the range starts late on purpose;
+     only the tail already leaving the viewport is dimmed */
+  gsap.utils.toArray('[data-recede]').forEach(function (sec) {
+    gsap.to(sec, {
+      opacity: 0.35, yPercent: -3, ease: 'none',
+      scrollTrigger: { trigger: sec, start: 'bottom 30%', end: 'bottom top', scrub: 0.5 },
+    });
+  });
+
+  /* reading progress on the header */
+  var bar = document.getElementById('readProgress');
+  if (bar) gsap.to(bar, { scaleX: 1, ease: 'none', scrollTrigger: { start: 0, end: 'max', scrub: 0.25 } });
+
+  /* chapter tags: the rule draws itself out from the number */
+  gsap.utils.toArray('.chapter-tag').forEach(function (tag) {
+    gsap.fromTo(tag.querySelector('i'), { scaleX: 0 }, {
+      scaleX: 1, duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: tag, start: 'top 92%' },
+    });
+  });
+
+  /* chapter readout: which beat of the journey you are in */
+  var chapters = gsap.utils.toArray('section[data-chapter]');
+  var num = document.getElementById('chNum'),
+    name = document.getElementById('chName'),
+    chBar = document.getElementById('chBar'),
+    readout = document.getElementById('chapterReadout');
+  if (chapters.length && readout) {
+    var last = chapters.length - 1;
+    chapters.forEach(function (sec) {
+      var i = parseInt(sec.getAttribute('data-chapter'), 10);
+      var label = sec.getAttribute('data-chapter-name');
+      var activate = function () {
+        if (num) num.textContent = String(i).padStart(2, '0');
+        if (name) name.textContent = label;
+        if (chBar) chBar.style.setProperty('--p', last ? (i / last).toFixed(3) : '1');
+      };
+      ScrollTrigger.create({ trigger: sec, start: 'top 55%', end: 'bottom 45%', onEnter: activate, onEnterBack: activate });
+    });
+    ScrollTrigger.create({
+      start: 220, end: 'max',
+      onToggle: function (self) { readout.classList.toggle('is-on', self.isActive); },
+    });
+  }
+});
+
+/* ---- content behaviours: work with or without GSAP ----------------------- */
+(function () {
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  WZ.onReady(function () {
+    /* animated accordion, one open at a time */
+    var items = Array.prototype.slice.call(document.querySelectorAll('.faq__item'));
+    items.forEach(function (item) {
+      var btn = item.querySelector('.faq__q');
+      var panel = item.querySelector('.faq__a');
+      if (!btn || !panel) return;
+      var open = function (state) {
+        item.classList.toggle('is-open', state);
+        btn.setAttribute('aria-expanded', String(state));
+        if (window.gsap && !reduced) {
+          gsap.to(panel, {
+            height: state ? 'auto' : 0, duration: 0.5, ease: 'power3.inOut',
+            onComplete: function () { if (window.ScrollTrigger) ScrollTrigger.refresh(); },
+          });
+        } else panel.style.height = state ? 'auto' : '0px';
+      };
+      panel.style.height = '0px';
+      panel.style.overflow = 'hidden';
+      btn.addEventListener('click', function () {
+        var willOpen = !item.classList.contains('is-open');
+        items.forEach(function (other) {
+          if (other !== item && other.classList.contains('is-open')) {
+            var op = other.querySelector('.faq__a');
+            other.classList.remove('is-open');
+            other.querySelector('.faq__q').setAttribute('aria-expanded', 'false');
+            if (window.gsap && !reduced) gsap.to(op, { height: 0, duration: 0.4, ease: 'power3.inOut' });
+            else op.style.height = '0px';
+          }
+        });
+        open(willOpen);
+      });
+    });
+
+    /* lightbox */
+    var box = document.getElementById('lightbox');
+    if (box) {
+      var img = document.getElementById('lightboxImg');
+      var close = document.getElementById('lightboxClose');
+      var lastTrig = null;
+      document.querySelectorAll('[data-lightbox]').forEach(function (trigger) {
+        trigger.addEventListener('click', function () {
+          lastTrig = trigger;
+          img.src = trigger.getAttribute('data-lightbox');
+          img.alt = (trigger.querySelector('img') || {}).alt || 'Patient result';
+          box.classList.add('is-open');
+          if (window.gsap && !reduced) gsap.fromTo(img, { scale: 0.92, opacity: 0 }, { scale: 1, opacity: 1, duration: 0.45, ease: 'power3.out' });
+          close.focus();
+        });
+      });
+      var hide = function () {
+        box.classList.remove('is-open');
+        img.src = '';
+        if (lastTrig) lastTrig.focus();
+      };
+      close.addEventListener('click', hide);
+      box.addEventListener('click', function (e) { if (e.target === box) hide(); });
+      document.addEventListener('keydown', function (e) {
+        if (e.key === 'Escape' && box.classList.contains('is-open')) hide();
+      });
+    }
+
+    /* header state + sticky mobile bar — window.scrollY stays authoritative
+       under ScrollSmoother; listening to ScrollTrigger keeps both honest */
+    var header = document.getElementById('header');
+    var mbar = document.getElementById('mobileBar');
+    var onScroll = function () {
+      var y = window.scrollY || document.documentElement.scrollTop;
+      if (header) header.classList.toggle('is-stuck', y > 10);
+      if (mbar) mbar.classList.toggle('is-visible', y > 380);
+    };
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    if (window.ScrollTrigger) ScrollTrigger.addEventListener('refresh', onScroll);
+
+    var year = document.getElementById('year');
+    if (year) year.textContent = new Date().getFullYear();
+  });
+})();
+
+/* ---- BOOT: register, smoother, flush ------------------------------------ */
+/* Waits for BOTH the DOM and the webfont. The DOM gate guarantees every
+   section's behaviour embed (registered mid-parse, DOM-ready-fired) runs
+   before the kit reads what it wrote — e.g. the offer counters' data-count.
+   The font gate is not cosmetic: SplitText autoSplit re-splits on font swap,
+   and if a pinned chapter is already built its heading lives inside a
+   pin-spacer at that moment — the next refresh throws mid-unwrap and the
+   page ends up thousands of px shorter than ScrollTrigger believes. The race
+   is against a timeout: a font that never arrives must not cost the page. */
+function wzFlush() {
+  var dom = new Promise(function (r) {
+    if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', function () { r(); });
+    else r();
+  });
+  var fonts = document.fonts && document.fonts.ready
+    ? Promise.race([document.fonts.ready, new Promise(function (r) { setTimeout(r, 1800); })])
+    : Promise.resolve();
+  Promise.all([dom, fonts]).then(wzBoot, wzBoot);
+}
+
+function wzStatic() {
+  /* No motion — GSAP missing or reduced motion asked for. Paint everything:
+     pre-staged "not yet" states must resolve, and figures must read final. */
+  document.documentElement.classList.add('wz-static');
+  document.querySelectorAll('[data-rv],[data-split],[data-wipe]').forEach(function (el) {
+    el.style.opacity = '1';
+    el.style.clipPath = 'none';
+  });
+  document.querySelectorAll('[data-count],[data-scrub-count]').forEach(wzPaintFinal);
+}
+
+function wzBoot() {
+  var W = window.WZ;
+  document.documentElement.classList.add('wz-ready');
+
+  if (!W || !W.ok) {
+    wzStatic();
+    return;
+  }
+
+  /* Register BEFORE the reduced-motion branch: anything probing
+     ScrollTrigger (even just maxScroll) needs wired internals, reduced or
+     not. Reduced motion still means no smoother, no triggers, no pins. */
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  if (window.ScrollSmoother) gsap.registerPlugin(ScrollSmoother);
+  if (window.SplitText) gsap.registerPlugin(SplitText);
+
+  if (W.reduced) {
+    wzStatic();
+    return;
+  }
+
+  document.body.classList.add('wz-motion');
+
+  if (window.ScrollSmoother) {
+    try {
+      W.smoother = ScrollSmoother.create({
+        wrapper: '#smooth-wrapper', content: '#smooth-content',
+        smooth: 1.05, effects: false, smoothTouch: false,
+        normalizeScroll: false, ignoreMobileResize: true,
+      });
+    } catch (e) { console.warn('ScrollSmoother unavailable', e); }
+  }
+
+  W.flush();
+
+  /* anchors route through the smoother, or pinned sections land wrong */
+  document.querySelectorAll('a[href^="#"]').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      var id = a.getAttribute('href');
+      if (!id || id.length < 2) return;
+      var t = document.querySelector(id);
+      if (!t) return;
+      e.preventDefault();
+      if (W.smoother) W.smoother.scrollTo(t, true, 'top 80px');
+      else gsap.to(window, { duration: 1, scrollTo: { y: t, offsetY: 80 }, ease: 'power2.inOut' });
+    });
+  });
+
+  /* late images change the height of everything below them */
+  window.addEventListener('load', function () {
+    requestAnimationFrame(function () {
+      try { ScrollTrigger.refresh(); } catch (e) { console.warn('ScrollTrigger refresh skipped', e); }
+    });
+  });
+}
+
+function wzPaintFinal(el) {
+  var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
+  var value = el.getAttribute('data-count') || el.getAttribute('data-scrub-count');
+  el.textContent = (el.getAttribute('data-prefix') || '') +
+    parseFloat(value).toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec }) +
+    (el.getAttribute('data-suffix') || '');
+}
+
+wzFlush();
     </script>
   </body>
 </html>

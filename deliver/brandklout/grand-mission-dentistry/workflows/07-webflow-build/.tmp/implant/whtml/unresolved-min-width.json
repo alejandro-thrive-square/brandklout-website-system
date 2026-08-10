@@ -1,0 +1,277 @@
+[
+ {
+  "style": "sr-only",
+  "breakpoint": "xxl",
+  "declarations": "font-size: 17.46px;"
+ },
+ {
+  "style": "gm-header",
+  "breakpoint": "xxl",
+  "declarations": "font-size: 17.46px;"
+ },
+ {
+  "style": "header__inner",
+  "breakpoint": "xxl",
+  "declarations": "padding-block: 21.6px;"
+ },
+ {
+  "style": "header__inner",
+  "breakpoint": "xl",
+  "declarations": "padding-block: 21.6px;"
+ },
+ {
+  "style": "header__inner",
+  "breakpoint": "large",
+  "declarations": "padding-block: 21.6px;"
+ },
+ {
+  "style": "logo-light",
+  "breakpoint": "xxl",
+  "declarations": "height: 40px;"
+ },
+ {
+  "style": "logo-light",
+  "breakpoint": "xl",
+  "declarations": "height: 40px;"
+ },
+ {
+  "style": "logo-light",
+  "breakpoint": "large",
+  "declarations": "height: 40px;"
+ },
+ {
+  "style": "logo-dark",
+  "breakpoint": "xxl",
+  "declarations": "height: 40px;"
+ },
+ {
+  "style": "logo-dark",
+  "breakpoint": "xl",
+  "declarations": "height: 40px;"
+ },
+ {
+  "style": "logo-dark",
+  "breakpoint": "large",
+  "declarations": "height: 40px;"
+ },
+ {
+  "style": "header__actions",
+  "breakpoint": "xxl",
+  "declarations": "grid-row-gap: 17.6px; grid-column-gap: 17.6px;"
+ },
+ {
+  "style": "header__actions",
+  "breakpoint": "xl",
+  "declarations": "grid-row-gap: 17.6px; grid-column-gap: 17.6px;"
+ },
+ {
+  "style": "header__actions",
+  "breakpoint": "large",
+  "declarations": "grid-row-gap: 17.6px; grid-column-gap: 17.6px;"
+ },
+ {
+  "style": "imp-div-2",
+  "breakpoint": "xxl",
+  "declarations": "font-size: 17.46px;"
+ },
+ {
+  "style": "ch",
+  "breakpoint": "xxl",
+  "declarations": "padding-block: 144px;"
+ },
+ {
+  "style": "ch",
+  "breakpoint": "xl",
+  "declarations": "padding-block: 122.4px;"
+ },
+ {
+  "style": "ch",
+  "breakpoint": "large",
+  "declarations": "padding-block: 115.6px;"
+ },
+ {
+  "style": "imp-ch-arrival",
+  "breakpoint": "xxl",
+  "declarations": "padding-top: 128px; padding-bottom: 96px;"
+ },
+ {
+  "style": "imp-ch-arrival",
+  "breakpoint": "xl",
+  "declarations": "padding-top: 128px; padding-bottom: 96px;"
+ },
+ {
+  "style": "imp-ch-arrival",
+  "breakpoint": "large",
+  "declarations": "padding-top: 128px; padding-bottom: 95.2px;"
+ },
+ {
+  "style": "ch__pin",
+  "breakpoint": "xxl",
+  "declarations": "grid-row-gap: 36px; grid-column-gap: 36px; padding-block: 80px;"
+ },
+ {
+  "style": "ch__pin",
+  "breakpoint": "xl",
+  "declarations": "grid-row-gap: 36px; grid-column-gap: 36px; padding-block: 80px;"
+ },
+ {
+  "style": "ch__pin",
+  "breakpoint": "large",
+  "declarations": "grid-row-gap: 35.36px; grid-column-gap: 35.36px; padding-block: 80px;"
+ },
+ {
+  "style": "loss__pin",
+  "breakpoint": "xxl",
+  "declarations": "grid-row-gap: 52px; grid-column-gap: 52px;"
+ },
+ {
+  "style": "loss__pin",
+  "breakpoint": "xl",
+  "declarations": "grid-row-gap: 52px; grid-column-gap: 52px;"
+ },
+ {
+  "style": "loss__pin",
+  "breakpoint": "large",
+  "declarations": "grid-row-gap: 52px; grid-column-gap: 52px;"
+ },
+ {
+  "style": "options__pin",
+  "breakpoint": "xxl",
+  "declarations": "grid-row-gap: 40px; grid-column-gap: 40px;"
+ },
+ {
+  "style": "options__pin",
+  "breakpoint": "xl",
+  "declarations": "grid-row-gap: 40px; grid-column-gap: 40px;"
+ },
+ {
+  "style": "options__pin",
+  "breakpoint": "large",
+  "declarations": "grid-row-gap: 40px; grid-column-gap: 40px;"
+ },
+ {
+  "style": "options__rail",
+  "breakpoint": "xxl",
+  "declarations": "grid-row-gap: 28px; grid-column-gap: 28px; padding-inline: 64px;"
+ },
+ {
+  "style": "options__rail",
+  "breakpoint": "xl",
+  "declarations": "grid-row-gap: 28px; grid-column-gap: 28px; padding-inline: 57.6px;"
+ },
+ {
+  "style": "options__rail",
+  "breakpoint": "large",
+  "declarations": "grid-row-gap: 27.2px; grid-column-gap: 27.2px; padding-inline: 54.4px;"
+ },
+ {
+  "style": "imp-div-4",
+  "breakpoint": "xxl",
+  "declarations": "margin-top: 88px;"
+ },
+ {
+  "style": "imp-div-4",
+  "breakpoint": "xl",
+  "declarations": "margin-top: 86.4px;"
+ },
+ {
+  "style": "imp-div-4",
+  "breakpoint": "large",
+  "declarations": "margin-top: 81.6px;"
+ },
+ {
+  "style": "imp-head",
+  "breakpoint": "xxl",
+  "declarations": "margin-bottom: 57.6px;"
+ },
+ {
+  "style": "imp-head",
+  "breakpoint": "xl",
+  "declarations": "margin-bottom: 57.6px;"
+ },
+ {
+  "style": "imp-head",
+  "breakpoint": "large",
+  "declarations": "margin-bottom: 54.4px;"
+ },
+ {
+  "style": "imp-div-5",
+  "breakpoint": "xxl",
+  "declarations": "margin-top: 56px;"
+ },
+ {
+  "style": "imp-div-5",
+  "breakpoint": "xl",
+  "declarations": "margin-top: 56px;"
+ },
+ {
+  "style": "imp-div-5",
+  "breakpoint": "large",
+  "declarations": "margin-top: 54.4px;"
+ },
+ {
+  "style": "marquee",
+  "breakpoint": "xxl",
+  "declarations": "margin-top: 64px;"
+ },
+ {
+  "style": "marquee",
+  "breakpoint": "xl",
+  "declarations": "margin-top: 64px;"
+ },
+ {
+  "style": "marquee",
+  "breakpoint": "large",
+  "declarations": "margin-top: 64px;"
+ },
+ {
+  "style": "imp-div-6",
+  "breakpoint": "xxl",
+  "declarations": "margin-top: 64px;"
+ },
+ {
+  "style": "imp-div-6",
+  "breakpoint": "xl",
+  "declarations": "margin-top: 64px;"
+ },
+ {
+  "style": "imp-div-6",
+  "breakpoint": "large",
+  "declarations": "margin-top: 64px;"
+ },
+ {
+  "style": "imp-h2-3",
+  "breakpoint": "xxl",
+  "declarations": "font-size: 52.39px;"
+ },
+ {
+  "style": "imp-h2-3",
+  "breakpoint": "xl",
+  "declarations": "font-size: 46.57px;"
+ },
+ {
+  "style": "imp-h2-3",
+  "breakpoint": "large",
+  "declarations": "font-size: 46.57px;"
+ },
+ {
+  "style": "imp-closing",
+  "breakpoint": "xxl",
+  "declarations": "margin-top: 88px;"
+ },
+ {
+  "style": "imp-closing",
+  "breakpoint": "xl",
+  "declarations": "margin-top: 86.4px;"
+ },
+ {
+  "style": "imp-closing",
+  "breakpoint": "large",
+  "declarations": "margin-top: 81.6px;"
+ },
+ {
+  "style": "lightbox",
+  "breakpoint": "xxl",
+  "declarations": "font-size: 17.46px;"
+ }
+]
