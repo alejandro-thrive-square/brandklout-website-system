@@ -57,6 +57,17 @@ const MAP = {
   "team-helia.jpg": "2022/01/thumb-helia.jpg",
   "team-hana.png": "2022/05/Hana.png",
   "team-basma.jpg": "2022/05/basma-profile3.jpg",
+  // batch 2 — cosmetic hub, whitening, crowns & bridges, oral surgery
+  "cosmetic-transformation.jpg": "2022/03/patient_heroo.jpg",
+  "whitening-graphic.png": "2019/11/teeth-whitening-graphic.png",
+  "crown-model.jpg": "2021/02/dental-crowns-model-2.jpg",
+  "bridge-model.jpg": "2021/02/dental-bridge-model-1.jpg",
+  "bridge-model-alt.png": "2019/11/dental-bridge-model.png",
+  "cost-calculating.png": "2021/02/calculating-cost-of-dental-implants.png",
+  "case-porcelain-1-before.jpg": "2025/02/porcelain-001-b4.jpg",
+  "case-porcelain-1-after.jpg": "2025/02/porcelain-001-after.jpg",
+  "case-makeover-1-before.jpg": "2025/02/makeover-001-b4.jpg",
+  "case-makeover-1-after.jpg": "2025/02/makeover-001-after.jpg",
   // treatment context
   "sedation-nitrous.png": "2021/02/dental-patient-under-nitrous-oxide-sedation.png",
   "sedation-oral.png": "2021/02/dental-patient-taking-oral-sedation.png",

@@ -73,7 +73,7 @@ each one can clear the gates before the next begins.
 | Batch | Pages | Status |
 | :--- | :--- | :--- |
 | 1 | `about` · `our-team` · `our-facility` | **Built 2026-08-10** |
-| 2 | `cosmetic-dentistry` · `teeth-whitening` · `crowns-and-bridges` · `oral-surgery` | Pending |
+| 2 | `cosmetic-dentistry` · `teeth-whitening` · `crowns-and-bridges` · `oral-surgery` | **Built 2026-08-10** |
 | 3 | `emergency-dentistry` · `dental-conditions` · `implant-supported-dentures` · `dental-implant-faq` | Pending |
 | 4 | `patient-center` · `financing` · `doctor-referral` · `tysons-study-club` | Pending |
 
@@ -146,6 +146,46 @@ Two build flags were raised by the source material:
    directory and every copy "went missing" while the script still exited 0. It
    now takes a **`DOWNLOADS`** environment override and exits 1 if the
    extraction is not where it is told to look.
+
+### Batch 2 — the aesthetics group, plus oral surgery
+
+| Page | Source | What it carries |
+| :--- | :--- | :--- |
+| `cosmetic-dentistry.html` | `/cosmetic-dentistry/` | The hub above veneers, whitening and crowns: six problems, five tools, the sequence |
+| `teeth-whitening.html` | `/teeth-whitening/` | Professional bleaching against strips and home remedies, as a table |
+| `crowns-and-bridges.html` | `/dental-crowns-and-bridges/` | Save the tooth before replacing it; the two benefit lists; what decides cost |
+| `oral-surgery.html` | `/oral-surgery/` | Extractions, bone grafting, implant placement, and the no-fear argument |
+
+**Three defects on the client's live pages, fixed here rather than carried over:**
+
+1. **An unedited CMS placeholder is live.** `/cosmetic-dentistry/` publishes a treatment
+   card headed literally *"This is the heading"*. The body copy under it is real and
+   describes **inlays and onlays**, so that is what the card is called in the rebuild.
+2. **The practice misspells its own name.** The same page's closing offer reads *"speak
+   directly with Dr. Naahlah"*. Corrected.
+3. **Two pages contradict each other about the laboratory.**
+   `/dental-crowns-and-bridges/` says bridges are hand-crafted "at our partner dental lab";
+   `/about/` says the digital lab is in the building, and the equipment inventory backs it.
+   Both cannot be current. The rebuild says in-house, because every other page and the
+   machine list agree — **but confirm with the client whether an outside partner lab still
+   handles bridge work.**
+
+**Three source assets deliberately unused**, each for a reason worth keeping:
+
+- `alluredental-hero-girl-1.png` — named for a different practice; provenance and
+  licensing unknown (project-overview.md, open question 9).
+- `2025/02/unnamed.jpeg` on `/oral-surgery/` — empty alt, meaningless filename, unknown
+  subject. It cannot be given honest alt text, so it is left out rather than guessed at.
+- The three procedure icons — dark line art on transparent. Dropping them on the cream
+  ground is a contrast gamble nobody has measured; the numbered cards carry the same
+  structure with none of the risk.
+
+`teeth-whitening` holds **the only `<table>` on the site**. The page kit has no table
+primitive, because one page needing one is not a primitive — and the `implant-cost`
+`.vs-us` tint is a different shape (two columns, us vs. them). The new table repeats one
+hard-won rule from that page: the highlight tint is layered **over** the cell background
+via a gradient, never replacing it, or the table's hairline shows through and produces the
+olive wash (bug 12).
 
 ## Navigation — the coherence fix
 

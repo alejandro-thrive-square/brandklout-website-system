@@ -20,6 +20,7 @@ const PAGES = (process.argv[3] || [
   // PAGES in site-src/build-site.mjs — a page missing here is a page whose
   // links, contrast and overflow nobody is checking.
   "about", "our-team", "our-facility",
+  "cosmetic-dentistry", "teeth-whitening", "crowns-and-bridges", "oral-surgery",
 ].join(",")).split(",");
 
 const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";

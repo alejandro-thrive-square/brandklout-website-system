@@ -35,6 +35,9 @@ const PAGES = process.env.ONLY ? process.env.ONLY.split(",") : [
   // <style> block (the portrait grid, the asymmetric tour grid), so they are
   // the two new pages with a CSS path the kit does not already cover.
   "about", "our-team", "our-facility",
+  // teeth-whitening carries the only <table> on the site — the one page-local
+  // CSS path in batch 2, and the one at real risk of overflowing a 360px view.
+  "cosmetic-dentistry", "teeth-whitening", "crowns-and-bridges", "oral-surgery",
 ];
 // Shooting all 11 at 7 widths is 77 images nobody will open. These three cover the
 // three distinct CSS paths: the journey, the shared page kit, and the one page with

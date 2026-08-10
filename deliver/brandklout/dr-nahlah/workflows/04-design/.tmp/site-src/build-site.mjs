@@ -58,6 +58,12 @@ const PAGES = [
   { slug: "about", journey: 0, navKey: "ABOUT" },
   { slug: "our-team", journey: 0, navKey: "ABOUT" },
   { slug: "our-facility", journey: 0, navKey: "ABOUT" },
+  // -- Aesthetics
+  { slug: "cosmetic-dentistry", journey: 0, navKey: "COSMETIC" },
+  { slug: "teeth-whitening", journey: 0, navKey: "COSMETIC" },
+  { slug: "crowns-and-bridges", journey: 0, navKey: "COSMETIC" },
+  // -- Treatments
+  { slug: "oral-surgery", journey: 0, navKey: "IMPLANTS" },
 ];
 
 /* Escape for an HTML text node or a double-quoted attribute. seo.json holds

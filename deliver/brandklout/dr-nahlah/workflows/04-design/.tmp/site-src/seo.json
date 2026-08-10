@@ -875,5 +875,163 @@
         }
       ]
     }
+  },
+  "cosmetic-dentistry": {
+    "title": "Cosmetic Dentistry | Veneers, Crowns & Whitening | McLean, VA",
+    "desc": "Five cosmetic treatments and the sequence they belong in, with a free Digital Smile Design preview before anything is prepared. McLean and Alexandria, Virginia.",
+    "ogTitle": "Cosmetic Dentistry | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Veneers, crowns, bridges, whitening and inlays. Which one you need is what the evaluation answers.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Cosmetic dentistry",
+          "description": "Personalized cosmetic dentistry in McLean, Virginia: veneers, crowns, bridges, whitening, and inlays and onlays.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Cosmetic dentistry",
+          "description": "Personalized cosmetic treatment combining veneers, crowns, bridges, whitening and inlays into a single sequenced plan.",
+          "bodyLocation": "Tooth",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "teeth-whitening": {
+    "title": "Teeth Whitening | A White Smile in One Visit | McLean, VA",
+    "desc": "Professional-grade in-office whitening that lifts internal stains as well as surface ones, in about an hour, with no abrasive step and the shade chosen with you.",
+    "ogTitle": "Teeth Whitening | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Strips and baking soda cost you enamel. Professional whitening does not.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Teeth whitening",
+          "description": "Professional in-office teeth whitening in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Professional teeth whitening",
+          "description": "In-office whitening with professional-grade bleaching agents that reach internal as well as surface stains.",
+          "bodyLocation": "Tooth",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "crowns-and-bridges": {
+    "title": "Dental Crowns & Bridges | Reinforce At-Risk Teeth | McLean, VA",
+    "desc": "A damaged tooth is not automatically a lost one. Porcelain and ceramic crowns and bridges, designed and milled in the practice’s own in-house digital laboratory.",
+    "ogTitle": "Crowns & Bridges | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "If the roots and interior are still healthy, the tooth is worth saving. It may just need a new exterior.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Dental crowns and bridges",
+          "description": "Porcelain and ceramic crowns and bridges in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Dental crown",
+          "description": "A fixed porcelain or ceramic cap that restores strength and appearance to a damaged tooth.",
+          "bodyLocation": "Tooth",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Dental bridge",
+          "description": "A fixed run of fused crowns replacing one or more missing teeth, anchored to adjacent teeth or to implants.",
+          "bodyLocation": "Tooth",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "oral-surgery": {
+    "title": "Oral Surgery | Extractions, Bone Grafting & Implants | McLean, VA",
+    "desc": "Extractions, bone grafting and CT-guided implant placement performed in-office by the specialist who also restores the tooth afterwards. Sedation available.",
+    "ogTitle": "Oral Surgery | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "The person who removes the tooth also plans what replaces it. That changes how it is removed.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Oral surgery",
+          "description": "In-office oral surgery in McLean, Virginia: tooth extraction, bone grafting and dental implant placement.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Tooth extraction",
+          "description": "Removal of a tooth without disturbing healthy bone or gum tissue, planned around what will replace it.",
+          "bodyLocation": "Jaw",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Bone grafting",
+          "description": "Replacement of lost jawbone using autologous or donor bone, allowed to integrate before an implant or denture is placed.",
+          "bodyLocation": "Jaw",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Dental implant surgery",
+          "description": "CT-guided placement of an implant post into the jawbone, with immediate loading of a temporary restoration for qualifying patients.",
+          "bodyLocation": "Jaw",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
   }
 }

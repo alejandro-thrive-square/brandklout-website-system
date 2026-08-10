@@ -1,0 +1,230 @@
+<!-- ==========================================================================
+     TEETH WHITENING — from drnahlah.com/teeth-whitening/. The source page's
+     whole argument is a comparison: professional bleaching against strips,
+     whitening toothpaste and home remedies. So the comparison IS the page,
+     built as a table rather than as three paragraphs of prose.
+
+     The five-item advantages list, the one-hour session, "multiple shades
+     lighter in one visit", the enamel-erosion and sensitivity warnings about
+     abrasive home methods, and the maintenance conditions are all verbatim in
+     substance. No claim here goes beyond what the source publishes — in
+     particular, no specific number of shades is promised, because the source
+     says "multiple" and does not commit to a figure.
+
+     The two before/after pairs are the practice's own whitening cases, already
+     in the extraction from the earlier build.
+     ========================================================================== -->
+<section class="pg-hero" id="hero">
+  <div class="ph-bg">
+    <img src="assets/pt-interaction-3.jpg" alt="A patient at the practice" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i>
+      <a href="cosmetic-dentistry.html">Cosmetic</a><i></i><span>Teeth Whitening</span></div>
+    <h1 data-split>A white smile in <em>one</em> visit.</h1>
+    <p class="ph-lead" data-rv>Professional-grade bleaching agents that soak into the enamel and lift internal stains, not just the ones on the surface. Roughly an hour, and most patients report no sensitivity at all.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Reserve a session</span></a>
+      <a class="btn btn-ghost magnetic" href="#compare"><span>Compare the options</span></a>
+    </div>
+    <div class="ph-meta" data-rv="stagger">
+      <div><b>~1 hour</b><span>In-office session</span></div>
+      <div><b>Internal stains</b><span>Not only surface</span></div>
+      <div><b>Your shade</b><span>Chosen, then monitored</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the problem ---------- -->
+<section class="pk alt" id="advantage">
+  <div class="wrap section pk-lede">
+    <div class="lc-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">The Advantage</span></div>
+      <h2 data-split>You have almost certainly tried this yourself.</h2>
+    </div>
+    <div class="lc-body">
+      <p data-rv>Strips from the pharmacy. Brightening toothpaste. Oil pulling, baking soda,
+        activated charcoal. Most people arrive having worked through several of them.</p>
+      <p data-rv>They are not nothing — most will lift a stained tooth slightly. The problem is that
+        the results are small, they take weeks or months to appear, and some of those methods are
+        <strong>abrasive</strong>. Used often enough, strips cause tooth and gum sensitivity and wear
+        the enamel down; baking soda and charcoal can erode it outright. Enamel does not grow back,
+        and a thinner tooth reads <em>more</em> yellow, not less, because the dentine beneath it
+        starts to show through.</p>
+      <p data-rv>That is the actual case for doing it professionally. It is not only faster — it is
+        the version that does not cost you enamel to get there.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- comparison ---------- -->
+<section class="pk light" id="compare">
+  <style>
+    /* A three-column comparison. The page kit has no table primitive because
+       this is the only page that needs one; the implant-cost page's `.vs-us`
+       tint is a different shape (two columns, us vs. them) and reusing it here
+       would have meant bending it out of purpose. */
+    .wt-table{width:100%;border-collapse:collapse;font-size:.94rem}
+    .wt-table th,.wt-table td{text-align:left;padding:clamp(.85rem,1.7vw,1.15rem) .9rem;
+      border-bottom:1px solid var(--line);vertical-align:top;color:var(--fg-body);font-weight:400}
+    .wt-table thead th{font-family:var(--f-body);font-size:.66rem;letter-spacing:.16em;
+      text-transform:uppercase;font-weight:600;color:var(--fg-soft);
+      border-bottom:1px solid var(--line-strong)}
+    .wt-table tbody th{font-weight:600;color:var(--fg);width:26%}
+    /* The practice's own column is tinted so the eye lands on it, layered OVER
+       the cell background rather than replacing it — replacing it is what let
+       the hairline show through and produced the olive wash on implant-cost. */
+    .wt-table .us{background:linear-gradient(rgba(171,158,106,.13),rgba(171,158,106,.13)),var(--bg-2);
+      color:var(--fg)}
+    .wt-table thead .us{color:var(--accent)}
+    .wt-wrap{overflow-x:auto;-webkit-overflow-scrolling:touch}
+    /* Below 720px the table is wider than the viewport, so it scrolls inside
+       its own box rather than pushing the page sideways. */
+    @media(max-width:719px){ .wt-table{min-width:34rem} }
+  </style>
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Comparison</span></div>
+      <h2 data-split>Three ways to whiten a tooth.</h2>
+    </div>
+    <div class="wt-wrap" data-rv>
+      <table class="wt-table">
+        <thead>
+          <tr>
+            <!-- Empty corner cell. The site has no screen-reader-only utility
+                 class, and inventing one for a single table is not worth a new
+                 site-wide primitive — an empty corner header on a table whose
+                 row headers are all scope="row" reads correctly as it is. -->
+            <th scope="col"></th>
+            <th scope="col">Over-the-counter strips</th>
+            <th scope="col">Home remedies</th>
+            <th scope="col" class="us">In-office, here</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">Time to a visible result</th>
+            <td>Weeks</td>
+            <td>Weeks to months, if at all</td>
+            <td class="us">One session, about an hour</td>
+          </tr>
+          <tr>
+            <th scope="row">Reaches internal stains</th>
+            <td>Surface, mostly</td>
+            <td>Surface only</td>
+            <td class="us">Yes &mdash; the agent soaks into the enamel</td>
+          </tr>
+          <tr>
+            <th scope="row">Effect on enamel</th>
+            <td>Wears it down with frequent use</td>
+            <td>Often abrasive; erosion is common</td>
+            <td class="us">No abrasive step</td>
+          </tr>
+          <tr>
+            <th scope="row">Sensitivity</th>
+            <td>Common, in teeth and gums</td>
+            <td>Common</td>
+            <td class="us">Most patients report none</td>
+          </tr>
+          <tr>
+            <th scope="row">Shade control</th>
+            <td>Whatever you get</td>
+            <td>Unpredictable</td>
+            <td class="us">Chosen with you, then monitored</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- cases ---------- -->
+<section class="pk" id="cases">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Real Cases</span></div>
+      <h2 data-split>Two whitening cases from this practice.</h2>
+    </div>
+    <div class="pk-ba-grid" data-rv="stagger">
+      <figure style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-whitening-1-before.jpg" alt="Before: stained natural teeth" loading="lazy">
+          <img class="after" src="assets/case-whitening-1-after.jpg" alt="After: professional whitening" loading="lazy">
+          <span class="ba-tag b">Before</span><span class="ba-tag a">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
+        </div>
+        <figcaption class="pk-ba-cap">In-office whitening &middot; case one</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-whitening-2-before.jpg" alt="Before: discolored teeth" loading="lazy">
+          <img class="after" src="assets/case-whitening-2-after.jpg" alt="After: professional whitening" loading="lazy">
+          <span class="ba-tag b">Before</span><span class="ba-tag a">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
+        </div>
+        <figcaption class="pk-ba-cap">In-office whitening &middot; case two</figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- advantages + keeping it ---------- -->
+<section class="pk alt" id="keeping">
+  <div class="wrap section pk-split rev">
+    <figure class="sp-fig" style="margin:0">
+      <img src="assets/whitening-procedure.jpg" alt="A whitening session in progress" data-drift loading="lazy">
+    </figure>
+    <div class="sp-copy">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Afterwards</span></div>
+      <h2 data-split>Keeping it is three habits, not a product.</h2>
+      <p data-rv>The result lasts a long time, and the conditions are unglamorous: keep up the
+        routine, keep the professional cleanings, and go easy on what stains. Coffee, tea, red wine
+        and tobacco are the usual culprits.</p>
+      <ul class="sp-list" data-rv="stagger">
+        <li><i></i>Quick treatment &mdash; generally about one hour</li>
+        <li><i></i>Immediate and dramatic results</li>
+        <li><i></i>Little to no tooth or gum sensitivity</li>
+        <li><i></i>No messy or abrasive products</li>
+        <li><i></i>A white shade customized to you</li>
+      </ul>
+      <p data-rv style="margin-top:.6rem">One sequencing note worth knowing before you book: if
+        veneers or crowns are anywhere in your plan, <strong>whiten first</strong>. Porcelain is
+        matched to the shade your natural teeth finish at, and it will not bleach later.</p>
+      <p data-rv><a class="pk-more" href="cosmetic-dentistry.html">The other four tools</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- next ---------- -->
+<section class="pk" id="next">
+  <div class="wrap section">
+    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
+    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
+      <a href="cosmetic-dentistry.html"><span class="nx-k">The hub</span>
+        <span class="nx-t">Cosmetic Dentistry</span>
+        <span class="nx-d">Five tools, and how to tell which one you need.</span></a>
+      <a href="veneers.html"><span class="nx-k">When whitening is not enough</span>
+        <span class="nx-t">Porcelain Veneers</span>
+        <span class="nx-d">For discoloration that bleaching will not shift.</span></a>
+      <a href="smile-gallery.html"><span class="nx-k">Evidence</span>
+        <span class="nx-t">Smile Gallery</span>
+        <span class="nx-d">Twenty-eight cases from this practice, before and after.</span></a>
+    </nav>
+  </div>
+</section>
+
+<!-- ---------- cta ---------- -->
+<section class="pk pk-cta" id="book">
+  <div class="wrap section cta-in">
+    <h2 data-split>Want brighter teeth?</h2>
+    <p data-rv>Reserve a whitening session at either office. It is about an hour, and you will
+      choose the shade before anything starts.</p>
+    <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Reserve your session</span></a>
+    <div class="cta-phones" data-rv>
+      <span>McLean &middot; <a href="tel:+15716199442">(571) 619-9442</a></span>
+      <span>Alexandria &middot; <a href="tel:+15714103430">(571) 410-3430</a></span>
+    </div>
+  </div>
+</section>
