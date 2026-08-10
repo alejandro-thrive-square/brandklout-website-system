@@ -2,7 +2,7 @@
 ========================================================================
 PAGE  invisalign
 ========================================================================
-  height   local 14082  staging 14670
+  height   local 14082  staging 14082
   h1       local ["A straighter smile, without anyone noticing."]
            live  ["A straighter smile, without anyone noticing."]
 
@@ -12,13 +12,12 @@ PAGE  invisalign
 
   ICONS    37 local / 37 staging
 
-  STYLES   186 comparable text elements, 1 differ
-       ~ "®" — fs: design=18px staging=15px; lh: design=28.875px staging=24.75px
+  STYLES   186 comparable text elements, 0 differ
 
 ========================================================================
 PAGE  new-patient-special
 ========================================================================
-  height   local 14149  staging 14347
+  height   local 14149  staging 14089
   h1       local ["Your first visit, properly done."]
            live  ["Your first visit, properly done."]
 
@@ -28,8 +27,7 @@ PAGE  new-patient-special
 
   ICONS    37 local / 37 staging
 
-  STYLES   163 comparable text elements, 1 differ
-       ~ "®" — fs: design=13px staging=15px; lh: design=20.625px staging=24.75px
+  STYLES   163 comparable text elements, 0 differ
 
 ========================================================================
 PAGE  thank-you
@@ -39,10 +37,6 @@ PAGE  thank-you
            live  ["Thank you — we have your request."]
 
   TEXT     97 runs local / 97 staging
-  !! 1 text runs in the design that are NOT on staging:
-       - Received Monday 8:14 AM
-  !! 1 text runs on staging that are NOT in the design:
-       + Received Monday 8:15 AM
 
   IMAGES   10 local / 10 staging
 
@@ -51,5 +45,5 @@ PAGE  thank-you
   STYLES   80 comparable text elements, 0 differ
 
 ========================================================================
-PARITY: 4 differences between the design and staging.
+PARITY: staging matches the design on every fingerprint.
 report → C:\Users\ACER\orca\workspaces\Webzite Agentic Workflow\bk-mason-park\deliver\brandklout\mason-park\workflows\08-qa\.tmp\parity\report.txt

@@ -52,25 +52,23 @@ sup{font-size:revert;line-height:revert;vertical-align:revert;position:revert;to
    NOTE this still cannot fix the marks that sit inside a <p>: a div is not
    phrasing content, so the parser has already CLOSED the paragraph before it,
    and no CSS can un-split a DOM the parser built. See FINDINGS.md. */
-/* The class is repeated THREE times for a reason. The converter copies the
-   svg's own class onto the wrapper, so the wrapper of a tick is
-   `<div class="tick w-embed">` — and the embed carries its own <style> in the
-   BODY containing `.chip .tick{display:inline-block}`, written for the svg.
-   That selector matches the wrapper too, ties `.w-embed:has(> svg)` on
-   specificity, and wins on source order because a body <style> comes after the
-   head. The first attempt at this rule therefore did nothing at all and the
-   chips stayed 91px. Out-ranking it is the whole trick. */
-.w-embed.w-embed.w-embed:has(> svg),
-.w-embed.w-embed.w-embed:has(> sup){display:contents}
-/* `display:contents` gets the wrapper out of the box tree but does NOT restore
-   the inline flow: the chips still measured 145x112 against the design's
-   165x43, with the tick and the mark each on their own line. Three separate
-   theories about why were wrong, so this value comes from applying candidate
-   rules to the live page and measuring (see chip-experiment.mjs). Laying the
-   chip out as a flex row reproduces the design: widths 165 and 213 land exactly,
-   height 41 against 43. The design says `inline-block` here; that is not a
-   contradiction, it is a compensation for a wrapper the design never had. */
-.chip{display:flex;align-items:center}
+/* FALLBACK ONLY. parity-unwrap.js removes the embed wrapper from the DOM, which
+   is the actual fix — CSS provably cannot do it. `display:contents` was applied
+   and confirmed in the computed style and the FAQ span still measured 222x95
+   against the design's 379x34; deleting the div gives 198x34 against 198x34.
+   These two rules only soften the damage when the script has not run, so they
+   switch off the moment it has. Do not "simplify" them by dropping the guard:
+   with the script running, .chip{display:flex} renders 41px where the design is
+   43px, because it compensates for a wrapper that is no longer there.
+   The class is repeated three times because the converter copies the svg's own
+   class onto the wrapper — a tick's wrapper is `<div class="tick w-embed">` —
+   and the embed's <style> sits in the BODY carrying `.chip .tick{display:
+   inline-block}`, written for the svg. It matches the wrapper too, ties on
+   specificity and wins on source order, so the single-class version of this
+   rule did nothing at all. */
+html:not(.mpd-unwrapped) .w-embed.w-embed.w-embed:has(> svg),
+html:not(.mpd-unwrapped) .w-embed.w-embed.w-embed:has(> sup){display:contents}
+html:not(.mpd-unwrapped) .chip{display:flex;align-items:center}
 .consent.consent{font-weight:400}
 
 /* 4a. The two custom properties still referenced by a surviving inline style.
@@ -80,8 +78,19 @@ sup{font-size:revert;line-height:revert;vertical-align:revert;position:revert;to
    still on it, which resolved to nothing and fell back to Inter. Defining just
    these two puts the serif back without reviving the whole token layer. The
    478px step matches the one in mpd.css. */
-:root{--display:"Fraunces",Georgia,"Times New Roman",serif;--t-body:1.125rem}
+:root{--display:"Fraunces",Georgia,"Times New Roman",serif;--t-body:1.125rem;--chapter-y:clamp(3.5rem,7vw,7rem)}
 @media (max-width:478px){:root{--t-body:1.31rem}}
+/* --chapter-y is not only a stylesheet reference: a chapter script assigns
+   `pin.style.paddingBlock = 'var(--chapter-y)'` at RUNTIME, and an undefined
+   token makes that inline style invalid. Defining it covers that case.
+   The rule below is separate and deliberately spells the clamp out rather than
+   using the token. The design's `.chapter-body{padding-block:var(--chapter-y)}`
+   was baked to fixed values per generated class, and two of the seven were
+   baked short — #proof and #invitation each measured exactly 43px under. A
+   literal cannot be knocked out by a token that fails to resolve, and restating
+   it is a no-op for the five that were already correct (verified: #provider is
+   unchanged at 1263). */
+.chapter-body.chapter-body.chapter-body{padding-block:clamp(3.5rem,7vw,7rem)}
 
 /* 4b. Scoped token remap. `.ledger` redefines --accent, so the ledger's active
    step is a deeper cyan than the page accent. The baked rule in the site head

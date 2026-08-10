@@ -3,89 +3,22 @@
 DEEP DIFF  invisalign
 ==============================================================================
   elements: 542 design / 549 staging
-  paired:   528   unpaired-in-design: 14
-  !! 14 design elements with no staging counterpart (first 15):
-       - <p> #arrival All-inclusive Invisalign treatment with Dr. William Sung, DM  [#arrLead]
-       - <sup> #arrival ®  [#arrLead]
-       - <div> #arrival (no text)  [#arrival]
-       - <p> #inclusion Many plans include benefits that apply to Invisalign , and o  [#incPin]
-       - <div> #inclusion (no text)  [#incPin]
-       - <div> #invitation (no text)  [#invFaq]
-       - <div> #invitation (no text)  [#invFaq]
-       - <div> #invitation (no text)  [#invFaq]
-       - <p> #invitation Limited-time Invisalign offer  [#invClose]
-       - <div> #invitation (no text)  [#invClose]
+  paired:   540   unpaired-in-design: 2
+  !! 2 design elements with no staging counterpart (first 15):
        - <p> 21830 Kingsland Blvd #104A Katy, TX 77450  [body]
        - <br> (no text)  [body]
-       - <div> (no text)  [body]
-       - <p> Offer terms: $1,000 off applies to all-inclusive Invisalign   [body]
-  [x3] display:  design=block   staging=flex
-         @ light/arrival <div> (no text)   [staging classes: rating]
-         @ light/invitation <div> (no text)   [staging classes: inv-div-2 btn-row]
-         @ -/- <div> (no text)   [staging classes: foot-base]
-  [x2] font size:  design=11.6667px   staging=15px
-         @ light/inclusion <sup> ®
-         @ -/- <sup> ®
-  [x2] display:  design=block   staging=grid
-         @ light/invitation <div.answer> (no text)   [staging classes: answer-wrap]
-         @ -/- <div.wrap> (no text)   [staging classes: foot-grid]
-  [x1] text colour:  design=rgb(82, 90, 100)   staging=rgb(90, 100, 114)
-         @ light/arrival <div.rating> (no text)   [staging classes: arr-cue]
-  [x1] font size:  design=18px   staging=11.52px
-         @ light/arrival <div.rating> (no text)   [staging classes: arr-cue]
-  [x1] line height:  design=29.7px   staging=19.008px
-         @ light/arrival <div.rating> (no text)   [staging classes: arr-cue]
-  [x1] text transform:  design=none   staging=uppercase
-         @ light/arrival <div.rating> (no text)   [staging classes: arr-cue]
-  [x1] letter spacing:  design=normal   staging=2.304px
-         @ light/arrival <div.rating> (no text)   [staging classes: arr-cue]
-  [x1] border colour:  design=rgba(0, 180, 216, 0.55)/rgba(0, 180, 216, 0.55)/rgba(0, 180, 216, 0.55)/rgba(0, 180, 216, 0.55)   staging=rgba(10, 183, 217, 0.506)/rgba(10, 183, 217, 0.506)/rgba(10, 183, 217, 0.506)/rgba(10, 183, 217, 0.506)
+  [x2] border colour:  design=rgba(190, 236, 245, 0.173)/rgba(190, 236, 245, 0.173)/rgba(190, 236, 245, 0.173)/rgba(190, 236, 245, 0.173)   staging=rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)
          @ dark/correction <article.cor-card> (no text)
-  [x1] border colour:  design=rgba(225, 246, 250, 0.157)/rgba(225, 246, 250, 0.157)/rgba(225, 246, 250, 0.157)/rgba(225, 246, 250, 0.157)   staging=rgba(180, 233, 244, 0.184)/rgba(180, 233, 244, 0.184)/rgba(180, 233, 244, 0.184)/rgba(180, 233, 244, 0.184)
          @ dark/correction <article.cor-card> (no text)
-  [x1] border colour:  design=rgba(253, 254, 255, 0.14)/rgba(253, 254, 255, 0.14)/rgba(253, 254, 255, 0.14)/rgba(253, 254, 255, 0.14)   staging=rgba(217, 244, 249, 0.157)/rgba(217, 244, 249, 0.157)/rgba(217, 244, 249, 0.157)/rgba(217, 244, 249, 0.157)
+  [x1] border colour:  design=rgba(155, 225, 240, 0.21)/rgba(155, 225, 240, 0.21)/rgba(155, 225, 240, 0.21)/rgba(155, 225, 240, 0.21)   staging=rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)
          @ dark/correction <article.cor-card> (no text)
-  [x1] border colour:  design=rgba(253, 255, 255, 0.14)/rgba(253, 255, 255, 0.14)/rgba(253, 255, 255, 0.14)/rgba(253, 255, 255, 0.14)   staging=rgba(222, 245, 250, 0.157)/rgba(222, 245, 250, 0.157)/rgba(222, 245, 250, 0.157)/rgba(222, 245, 250, 0.157)
-         @ dark/correction <article.cor-card> (no text)
-  [x1] line height:  design=19.25px   staging=24.75px
-         @ light/inclusion <sup> ®
-  [x1] text colour:  design=rgb(38, 41, 47)   staging=rgb(82, 90, 100)
-         @ light/invitation <sup> ®
-  [x1] font size:  design=9.6px   staging=15px
-         @ light/invitation <sup> ®
-  [x1] font weight:  design=700   staging=400
-         @ light/invitation <sup> ®
-  [x1] line height:  design=15.84px   staging=24.75px
-         @ light/invitation <sup> ®
-  [x1] text transform:  design=uppercase   staging=none
-         @ light/invitation <sup> ®
-  [x1] letter spacing:  design=2.0736px   staging=normal
-         @ light/invitation <sup> ®
-  [x1] display:  design=grid   staging=block
-         @ -/- <div.foot-grid> (no text)   [staging classes: inv-div-2]
-  [x1] text colour:  design=rgba(255, 255, 255, 0.72)   staging=rgba(255, 255, 255, 0.55)
-         @ -/- <div> (no text)   [staging classes: foot-base]
-  [x1] border colour:  design=rgba(255, 255, 255, 0.72)/rgba(255, 255, 255, 0.72)/rgba(255, 255, 255, 0.72)/rgba(255, 255, 255, 0.72)   staging=rgba(255, 255, 255, 0.12)/rgba(255, 255, 255, 0.55)/rgba(255, 255, 255, 0.55)/rgba(255, 255, 255, 0.55)
-         @ -/- <div> (no text)   [staging classes: foot-base]
-  [x1] border width:  design=0px/0px/0px/0px   staging=1px/0px/0px/0px
-         @ -/- <div> (no text)   [staging classes: foot-base]
-  [x1] font size:  design=18px   staging=14px
-         @ -/- <div> (no text)   [staging classes: foot-base]
-  [x1] line height:  design=29.7px   staging=23.1px
-         @ -/- <div> (no text)   [staging classes: foot-base]
-  [x1] text colour:  design=rgba(255, 255, 255, 0.45)   staging=rgba(255, 255, 255, 0.72)
-         @ -/- <sup> ®
-  [x1] line height:  design=18.6667px   staging=24.75px
-         @ -/- <sup> ®
 
 ==============================================================================
 DEEP DIFF  new-patient-special
 ==============================================================================
   elements: 470 design / 472 staging
-  paired:   466   unpaired-in-design: 4
-  !! 4 design elements with no staging counterpart (first 15):
-       - <p> #team KOR whitening with at-home trays, at the new-patient rate.  [#offerGrid]
-       - <article> #team (no text)  [#offerGrid]
+  paired:   468   unpaired-in-design: 2
+  !! 2 design elements with no staging counterpart (first 15):
        - <p> 21830 Kingsland Blvd #104A Katy, TX 77450  [body]
        - <br> (no text)  [body]
   [x1] display:  design=grid   staging=block
@@ -104,17 +37,14 @@ DEEP DIFF  new-patient-special
          @ light/arrival <div.arr-cue> (no text)   [staging classes: rating]
   [x1] letter spacing:  design=2.304px   staging=normal
          @ light/arrival <div.arr-cue> (no text)   [staging classes: rating]
-  [x1] font size:  design=12.5px   staging=15px
-         @ light/team <sup> ®
-  [x1] line height:  design=20.625px   staging=24.75px
-         @ light/team <sup> ®
 
 ==============================================================================
 DEEP DIFF  thank-you
 ==============================================================================
   elements: 230 design / 230 staging
-  paired:   226   unpaired-in-design: 4
-  !! 4 design elements with no staging counterpart (first 15):
+  paired:   225   unpaired-in-design: 5
+  !! 5 design elements with no staging counterpart (first 15):
+       - <p> #received Received Monday 9:44 AM  [#received]
        - <p> #find 21830 Kingsland Blvd #104A Katy, TX 77450  [#findPin]
        - <br> #find (no text)  [#findPin]
        - <p> 21830 Kingsland Blvd #104A Katy, TX 77450  [body]
