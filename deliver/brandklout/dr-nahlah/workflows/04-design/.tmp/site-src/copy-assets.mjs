@@ -8,7 +8,18 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const SRC = path.dirname(fileURLToPath(import.meta.url));
-const DL = path.resolve(SRC, "../../../03-graphic-resources/.tmp/downloads/wp-content/uploads");
+// 03-graphic-resources is 708MB and was left in the `main` checkout when 04-design
+// was split into the bk-dr-nahlah worktree, so the sibling path below resolves to
+// nothing there and every copy silently "goes missing". Point DOWNLOADS at the
+// uploads root in whichever checkout actually holds the extraction:
+//   DOWNLOADS=".../03-graphic-resources/.tmp/downloads/wp-content/uploads" node copy-assets.mjs
+const DL = process.env.DOWNLOADS
+  ? path.resolve(process.env.DOWNLOADS)
+  : path.resolve(SRC, "../../../03-graphic-resources/.tmp/downloads/wp-content/uploads");
+if (!fs.existsSync(DL)) {
+  console.error(`no extraction at ${DL}\nset DOWNLOADS to the uploads root that holds it.`);
+  process.exit(1);
+}
 const OUT = path.resolve(SRC, "..", "final-site", "assets");
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -34,6 +45,18 @@ const MAP = {
   "office-outside.jpg": "2022/03/office_outside.jpg",
   "office-hero.jpg": "2022/03/office_hero.jpg",
   "office-wide.jpeg": "2022/01/img-full-width-dental-office-1.jpeg",
+  "office-room.jpg": "2021/02/dental-office.jpg",
+  "tech-advanced.jpg": "2022/03/advanced_tech.jpg",
+  "tech-hero.jpg": "2022/03/advanced_tech_hero.jpg",
+  "dr-headshot.png": "2025/04/DGT_Dr_Nahlah_Headshot_White-Coat_V2.png",
+  // team portraits — each published on /our-team/ under that person's own name,
+  // which is what makes them safe to caption (see the photo-provenance rule).
+  "team-group.jpg": "2022/03/Untitled-9.jpg",
+  "team-venita.jpg": "2022/01/thumb-venita.jpg",
+  "team-junko.jpg": "2022/01/thumb-junko.jpg",
+  "team-helia.jpg": "2022/01/thumb-helia.jpg",
+  "team-hana.png": "2022/05/Hana.png",
+  "team-basma.jpg": "2022/05/basma-profile3.jpg",
   // treatment context
   "sedation-nitrous.png": "2021/02/dental-patient-under-nitrous-oxide-sedation.png",
   "sedation-oral.png": "2021/02/dental-patient-taking-oral-sedation.png",

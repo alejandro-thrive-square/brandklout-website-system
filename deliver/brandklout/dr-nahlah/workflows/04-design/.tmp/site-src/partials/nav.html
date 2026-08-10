@@ -75,11 +75,17 @@
       <img src="assets/logo.png" alt="Dr. Nahlah — Implants and Prosthodontics Specialists">
     </a>
     <nav class="nav-slot" aria-label="Primary">
+      <!-- The current-page highlight is baked in here at build time. In Webflow
+           the Navbar is ONE shared component, so it cannot be: the conversion
+           turns these five placeholders into a pathname -> href map in the
+           footer custom code. When a slug changes, that map has to change with
+           it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
+           there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
       <div class="nav-links">
         <a href="dental-implants.html"{{CUR_IMPLANTS}}>Implants</a>
         <a href="smile-makeover.html"{{CUR_COSMETIC}}>Cosmetic</a>
         <a href="smile-gallery.html"{{CUR_GALLERY}}>Smile Gallery</a>
-        <a href="about.html"{{CUR_ABOUT}}>The Specialist</a>
+        <a href="meet-dr-nahlah.html"{{CUR_ABOUT}}>The Specialist</a>
         <a href="contact.html"{{CUR_CONTACT}}>Contact</a>
       </div>
       {{CHAPTER_READOUT}}

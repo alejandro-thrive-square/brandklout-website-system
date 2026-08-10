@@ -33,7 +33,7 @@
     .ch-arrival .meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);
       padding-top:clamp(1rem,2.5vw,1.75rem);border-top:1px solid var(--line)}
     .ch-arrival .meta div{display:grid;gap:.15rem}
-    .ch-arrival .meta b{font-family:var(--f-display);font-size:clamp(1.25rem,2.2vw,1.9rem);font-weight:500}
+    .ch-arrival .meta b{font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));font-weight:500}
     .ch-arrival .meta span{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}
     .ch-arrival .cue{position:absolute;right:var(--gutter);bottom:clamp(1rem,3vw,2rem);z-index:5;
       display:flex;align-items:center;gap:.7rem;font-size:.66rem;letter-spacing:.2em;
@@ -65,7 +65,7 @@
 
   <div class="in">
     <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Chapter 00 &middot; Arrival</span></div>
-    <h1 data-anim="hide" id="heroTitle">A smile rebuilt by a <em>specialist</em>.</h1>
+    <h1 data-anim="hide" id="heroTitle">A smile rebuilt by a <em>specialist</em></h1>
     <p class="lead" data-anim="hide" id="heroLead">
       Not a general dentist with a weekend course. A board-certified prosthodontist who has
       spent a career rebuilding what other people gave up on.
@@ -168,8 +168,7 @@
       <div class="after" id="realityAfter">
         <p>Usually that is not a verdict on your mouth. It is a verdict on the tools available to
            whoever was looking at it.</p>
-        <p>Most implant failures are not surgical failures. They are planning failures — and planning
-           is the entire discipline a prosthodontist trains three extra years to do.</p>
+        <p>Most implant failures are not surgical failures. They are planning failures, and planning is the entire discipline a prosthodontist trains three extra years to do.</p>
       </div>
     </div>
   </div>
@@ -218,7 +217,7 @@
     .ch-difference .head{display:grid;gap:1.1rem;margin-bottom:clamp(2.5rem,5vw,4rem);max-width:34ch}
     .ch-difference .head h2{font-size:var(--h2)}
     .ch-difference .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.75rem,4vw,3rem)}
-    .ch-difference .stat b{display:block;font-family:var(--f-display);font-size:clamp(2.5rem,5.6vw,5rem);
+    .ch-difference .stat b{display:block;font-family:var(--f-display);font-size:calc(5rem * var(--t-disp));
       color:var(--accent-lg);line-height:1;font-weight:500;font-variant-numeric:tabular-nums}
     .ch-difference .stat span{display:block;margin-top:.6rem;font-size:.74rem;letter-spacing:.16em;
       text-transform:uppercase;color:var(--fg-soft)}
@@ -228,7 +227,7 @@
     .marquee{margin-top:clamp(3rem,6vw,5rem);overflow:hidden;border-block:1px solid rgba(138,126,78,.3);
       padding-block:clamp(.85rem,1.6vw,1.3rem)}
     .marquee .row{display:flex;width:max-content;will-change:transform}
-    .marquee .row span{font-family:var(--f-display);font-size:clamp(1rem,1.7vw,1.5rem);
+    .marquee .row span{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-mid));
       color:var(--fg-body);white-space:nowrap;padding-inline:clamp(.9rem,2vw,1.7rem)}
     .marquee .row b{color:var(--accent);font-size:.65rem;align-self:center}
 
@@ -251,7 +250,7 @@
       box-shadow:inset 2px 0 0 var(--gold-deep);color:var(--fg);font-weight:500}
     .vs-row .vs-mid{background:var(--bg);width:clamp(46px,6vw,86px);justify-content:center;padding-inline:0}
     .vs-mid i{display:block;width:7px;height:7px;border-radius:50%;background:var(--rule);opacity:.6}
-    .vs-head-row>span{font-family:var(--f-display);font-size:clamp(1rem,1.6vw,1.4rem);
+    .vs-head-row>span{font-family:var(--f-display);font-size:calc(1.4rem * var(--t-sm));
       letter-spacing:.01em;text-transform:none;padding-block:clamp(1rem,2vw,1.4rem)}
     .vs-head-row .vs-us{color:var(--black);
       background:linear-gradient(100deg,var(--gold-deep),var(--gold) 55%,var(--gold-light));font-weight:500}
@@ -280,12 +279,14 @@
       <h2>One of twelve recognised dental specialties.</h2>
     </div>
     <!-- All four figures are drawn from the practice's own published material:
-         in practice since 2003, 12 listed credentials, "5 out of 5 average"
-         per their testimonials page, 2 offices. No invented numbers. -->
+         in practice since 2003, 12 listed credentials, 2 offices. No invented
+         numbers. The rating was corrected to 4.9 by the client on 2026-08-10;
+         note the Google block further down this page still reads 5.0, which is
+         how the live site currently stands. -->
     <div class="stats" id="diffStats">
       <div class="stat"><b data-count="23" data-suffix="+">0</b><span>Years in Practice</span></div>
       <div class="stat"><b data-count="12">0</b><span>Board Credentials</span></div>
-      <div class="stat"><b data-count="5.0" data-decimals="1">0</b><span>Average Patient Rating</span></div>
+      <div class="stat"><b data-count="4.9" data-decimals="1">0</b><span>Average Patient Rating</span></div>
       <div class="stat"><b data-count="2">0</b><span>Virginia Locations</span></div>
     </div>
   </div>
@@ -303,7 +304,7 @@
         <span role="columnheader" class="vs-them">A General Practice</span>
       </div>
       <div class="vs-row" role="row">
-        <span role="cell" class="vs-us">Board-certified prosthodontist — three years of specialist training beyond dental school.</span>
+        <span role="cell" class="vs-us">Board-certified prosthodontist with three years of specialist training beyond dental school.</span>
         <span class="vs-mid" aria-hidden="true"><i></i></span>
         <span role="cell" class="vs-them">A weekend implant course, or a referral out.</span>
       </div>
@@ -313,12 +314,12 @@
         <span role="cell" class="vs-them">Handed between a surgeon, a dentist and an outside lab.</span>
       </div>
       <div class="vs-row" role="row">
-        <span role="cell" class="vs-us">The final smile is designed first — implants are placed to serve it.</span>
+        <span role="cell" class="vs-us">The final smile is designed first, then implants are placed to serve it.</span>
         <span class="vs-mid" aria-hidden="true"><i></i></span>
         <span role="cell" class="vs-them">Implants placed first, restoration figured out afterwards.</span>
       </div>
       <div class="vs-row" role="row">
-        <span role="cell" class="vs-us">Complex and failed cases accepted — including work other practices decline.</span>
+        <span role="cell" class="vs-us">Complex and failed cases accepted, including work other practices decline.</span>
         <span class="vs-mid" aria-hidden="true"><i></i></span>
         <span role="cell" class="vs-them">Straightforward cases only.</span>
       </div>
@@ -409,7 +410,7 @@
       filter:contrast(1.02) brightness(1.02) saturate(.98);z-index:1}
     .ch-specialist .sig{position:absolute;left:0;bottom:clamp(-1rem,-2vw,-1.5rem);z-index:2;
       background:var(--bg-3);padding:1rem 1.6rem 1rem 0;border-top:1px solid rgba(138,126,78,.45)}
-    .ch-specialist .sig b{display:block;font-family:var(--f-display);font-size:clamp(1.15rem,1.9vw,1.6rem);
+    .ch-specialist .sig b{display:block;font-family:var(--f-display);font-size:calc(1.6rem * var(--t-mid));
       font-weight:500}
     .ch-specialist .sig span{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
     .ch-specialist h2{font-size:var(--h2);max-width:16ch;margin-bottom:1.5rem}
@@ -448,14 +449,13 @@
       <h2 id="specTitle">The credentials behind the work.</h2>
       <div class="bio" id="specBio">
         <p>Dr. Nahlah has practised dentistry <strong>since 2003</strong>, moving to Northern Virginia
-           in 2013 to focus entirely on prosthodontics — esthetic dentistry, implant dentistry,
+           in 2013 to focus entirely on prosthodontics: esthetic dentistry, implant dentistry,
            full-mouth rehabilitation and smile makeovers.</p>
         <p>In 2013 the American Board of Prosthodontics awarded him <strong>Diplomate</strong> status,
            the most prestigious credential in the field. He holds hospital privileges at
            <strong>Inova Fairfax</strong>, the only Level 1 trauma hospital in Northern Virginia.</p>
         <p>He has published in national and international scientific journals, lectures on smile
-           design and dental implants, and teaches hands-on courses for other dentists — the kind
-           of work that tends to bring the difficult cases to his door.</p>
+           design and dental implants, and teaches hands-on courses for other dentists. That is the kind of work that tends to bring the difficult cases to his door.</p>
       </div>
 
       <div class="creds">
@@ -470,10 +470,14 @@
           <li><i></i>IV Sedation Certificate</li>
           <li><i></i>BLS &amp; ACLS Provider</li>
         </ul>
-        <!-- Chapter 02 counts twelve credentials; only eight are listed here.
-             Saying so, and linking to the full list, keeps the two numbers from
-             contradicting each other. -->
-        <a class="creds-more" href="about.html">Eight of twelve &mdash; see the full record</a>
+        <!-- Chapter 02's stat counts twelve credentials; only eight are listed
+             here. This link used to read "Eight of twelve — see the full record",
+             which is what stopped the two numbers contradicting each other. The
+             client relabelled it "Meet Dr. Nahlah" on 2026-08-10, so the
+             reconciliation is gone: the page now says 12 and shows 8 with
+             nothing explaining the gap. Mirrored here to match the live site;
+             worth raising with the client. -->
+        <a class="creds-more" href="meet-dr-nahlah.html">Meet Dr. Nahlah</a>
       </div>
     </div>
   </div>
@@ -660,7 +664,7 @@
       background:var(--card);position:relative;overflow:hidden}
     .ch-path .card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
       background:var(--rule);transform:scaleX(0);transform-origin:left}
-    .ch-path .card .no{font-family:var(--f-display);font-size:clamp(2.5rem,4.6vw,4rem);
+    .ch-path .card .no{font-family:var(--f-display);font-size:calc(4rem * var(--t-lg));
       color:var(--accent-lg);line-height:.9}
     .ch-path .card h3{font-size:var(--h3)}
     .ch-path .card p{color:var(--fg-body);font-weight:400;font-size:.95rem}
@@ -704,7 +708,7 @@
       <article class="card">
         <span class="no">04</span>
         <h3>Final Restoration</h3>
-        <p>Once healing is complete the definitive teeth go in — shaped, shaded and bite-balanced
+        <p>Once healing is complete the definitive teeth go in, shaped, shaded and bite-balanced
            by the same specialist who planned them.</p>
         <div class="shot"><img src="assets/case2-after.jpg" alt="" loading="lazy"></div>
       </article>
@@ -802,8 +806,7 @@
     <div class="head">
       <div class="chapter-tag"><i></i><span class="label">Chapter 06 &middot; The Standard</span></div>
       <h2>Everything under one roof.</h2>
-      <p>Planning, surgery, sedation and the lab that makes your teeth — all in the same
-         building, run by the same team. That is what removes the handoffs.</p>
+      <p>Planning, surgery, sedation and the lab that makes your teeth, all in the same building, run by the same team. That is what removes the handoffs.</p>
     </div>
 
     <div class="std-grid" id="stdGrid">
@@ -887,11 +890,11 @@
     .ch-proof .story{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
     .ch-proof .shot{position:relative;overflow:hidden;aspect-ratio:4/3;clip-path:inset(0 0 100% 0)}
     .ch-proof .shot img{width:100%;height:100%;object-fit:cover;will-change:transform}
-    .ch-proof blockquote{margin:0;font-family:var(--f-display);font-size:clamp(1.5rem,2.9vw,2.75rem);
+    .ch-proof blockquote{margin:0;font-family:var(--f-display);font-size:calc(2.61rem * var(--t-lg));
       line-height:1.24;letter-spacing:-.015em}
     .ch-proof cite{display:block;margin-top:1.5rem;font-style:normal;font-size:.76rem;
       letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
-    .ch-proof .qm{font-family:var(--f-display);font-size:clamp(3rem,8vw,6rem);color:var(--gold);
+    .ch-proof .qm{font-family:var(--f-display);font-size:calc(6rem * var(--t-disp));color:var(--gold);
       line-height:.6;display:block;margin-bottom:.5rem}
     @media(min-width:1024px){ .ch-proof .story{grid-template-columns:.95fr 1.05fr} }
 
@@ -904,7 +907,7 @@
     .rv-score{display:flex;align-items:center;gap:clamp(1rem,1.6vw,1.4rem)}
     /* Vector mark — the old raster lockup went soft and unreadable at this size. */
     .rv-score img{width:clamp(48px,5.6vw,72px);height:auto;flex:none}
-    .rv-score b{display:block;font-family:var(--f-display);font-size:clamp(1.3rem,2.2vw,1.9rem);
+    .rv-score b{display:block;font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));
       font-weight:500;display:flex;align-items:center;gap:.5rem}
     .rv-score>div>span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
       color:rgba(255,255,255,.58)}
@@ -943,7 +946,7 @@
     <div class="copy">
       <div>
         <h2 id="filmTitle">Experience, skill and dental artistry.</h2>
-        <p id="filmSub">Dr. Esam Nahlah, D.D.S., M.S. — Diplomate of the American Board of Prosthodontics,
+        <p id="filmSub">Dr. Esam Nahlah, D.D.S., M.S., Diplomate of the American Board of Prosthodontics,
            practising in Northern Virginia since 2013.</p>
       </div>
     </div>
@@ -968,8 +971,11 @@
          own site. The three quoted cards are the only attributed patient words
          that exist in the source material; the other three patients filmed a
          testimonial but published no pull-quote, so those cards say exactly
-         that instead of inventing one. The 5.0 figure is the practice's own
-         published average ("an average rating of 5 out of 5 stars").
+         that instead of inventing one. The 5.0 below is the practice's own
+         published Google average. Chapter 02's "Average Patient Rating" stat and
+         the Patient Stories page were both corrected to 4.9 by the client on
+         2026-08-10, but this block was left at 5.0 there, so it is left at 5.0
+         here too. Worth resolving with the client one way or the other.
          ================================================== -->
     <div class="reviews" id="reviews">
       <div class="rv-head">
@@ -1079,7 +1085,7 @@
     .ch-invitation .loc h3{font-size:var(--h3)}
     .ch-invitation .loc address{font-style:normal;color:rgba(255,255,255,.6);font-weight:300}
     .ch-invitation .row{display:grid;gap:.3rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1)}
-    .ch-invitation .row a{font-family:var(--f-display);font-size:clamp(1.1rem,1.8vw,1.5rem);
+    .ch-invitation .row a{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-sm));
       color:var(--gold);transition:opacity .3s}
     .ch-invitation .row a:hover{opacity:.7}
     .ch-invitation .row span{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
@@ -1114,8 +1120,7 @@
   <div class="cta section" data-theme="light">
     <div class="wrap">
       <h2 id="ctaTitle">Find out if you&rsquo;re a candidate.</h2>
-      <p>A consultation includes the 3D scan and a straight answer about what your case actually
-         needs — before you commit to anything.</p>
+      <p>A consultation includes the 3D scan and a straight answer about what your case actually needs, before you commit to anything.</p>
       <a class="btn btn-dark magnetic" href="https://flexbook.me/drnahlah"><span>Book Your Free Consult</span></a>
     </div>
   </div>

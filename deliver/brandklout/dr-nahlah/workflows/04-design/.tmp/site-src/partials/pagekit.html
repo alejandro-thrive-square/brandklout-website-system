@@ -29,7 +29,7 @@
 .pg-hero .ph-meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);margin-top:.5rem;
   padding-top:clamp(1rem,2.4vw,1.6rem);border-top:1px solid var(--line)}
 .pg-hero .ph-meta div{display:grid;gap:.15rem}
-.pg-hero .ph-meta b{font-family:var(--f-display);font-size:clamp(1.15rem,2vw,1.7rem);font-weight:500}
+.pg-hero .ph-meta b{font-family:var(--f-display);font-size:calc(1.7rem * var(--t-mid));font-weight:500}
 .pg-hero .ph-meta span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--fg-soft)}
 @media(max-width:719px){ .pg-hero .btn{flex:1 1 auto} }
@@ -74,9 +74,9 @@
 .pk-card:hover{border-color:rgba(138,126,78,.5);transform:translateY(-4px);
   box-shadow:0 14px 40px rgba(20,20,22,.07)}
 .pk[data-theme="dark"] .pk-card:hover{box-shadow:none;border-color:rgba(171,158,106,.55)}
-.pk-card .n{font-family:var(--f-display);font-size:clamp(1.6rem,2.6vw,2.4rem);color:var(--accent-lg);
+.pk-card .n{font-family:var(--f-display);font-size:calc(2.34rem * var(--t-mid));color:var(--accent-lg);
   line-height:1}
-.pk-card h3{font-size:clamp(1.1rem,1.5vw,1.4rem)}
+.pk-card h3{font-size:calc(1.35rem * var(--t-sm))}
 .pk-card p{color:var(--fg-body);font-weight:400;font-size:.94rem;line-height:1.75}
 /* Partner marks (CareCredit, Proceed Finance, LendingClub) are drawn for white
    stationery — dark green, navy and red on transparent. Dropped straight onto a
@@ -117,7 +117,7 @@
 .pk-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.5rem,3vw,2.5rem);
   padding-top:clamp(1.5rem,3vw,2.25rem);border-top:1px solid var(--line)}
 .pk-stats div{display:grid;gap:.3rem}
-.pk-stats b{font-family:var(--f-display);font-size:clamp(2rem,4.4vw,3.4rem);font-weight:500;
+.pk-stats b{font-family:var(--f-display);font-size:calc(3.4rem * var(--t-lg));font-weight:500;
   color:var(--accent-lg);line-height:1}
 .pk-stats span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
   color:var(--fg-soft)}
@@ -159,7 +159,7 @@
 /* ---------- pull quote ---------- */
 .pk-quote{max-width:24ch;font-family:var(--f-display);font-size:var(--h2);line-height:1.12;
   letter-spacing:-.02em}
-.pk-quote-mark{font-family:var(--f-display);font-size:clamp(2.5rem,6vw,4.5rem);color:var(--accent-lg);
+.pk-quote-mark{font-family:var(--f-display);font-size:calc(4.5rem * var(--t-lg));color:var(--accent-lg);
   line-height:.6;display:block;margin-bottom:.6rem}
 .pk-quote-by{margin-top:1.4rem;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
   color:var(--accent)}
@@ -170,7 +170,7 @@
 .pk-faq details:last-of-type{border-bottom:1px solid var(--line)}
 .pk-faq summary{list-style:none;cursor:pointer;padding-block:clamp(1rem,2vw,1.4rem);
   display:flex;align-items:flex-start;gap:1rem;font-family:var(--f-display);
-  font-size:clamp(1.05rem,1.7vw,1.35rem);font-weight:500;transition:color .3s}
+  font-size:calc(1.35rem * var(--t-sm));font-weight:500;transition:color .3s}
 .pk-faq summary::-webkit-details-marker{display:none}
 .pk-faq summary{color:var(--fg)}
 .pk-faq summary:hover{color:var(--accent-lg)}
@@ -189,7 +189,7 @@
 .pk-next a:hover{background:var(--bg-3)}
 .pk[data-theme="dark"] .pk-next a:hover{background:var(--ink-800)}
 .pk-next .nx-k{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
-.pk-next .nx-t{font-family:var(--f-display);font-size:clamp(1.15rem,1.8vw,1.5rem);font-weight:500}
+.pk-next .nx-t{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-sm));font-weight:500}
 .pk-next .nx-d{color:var(--fg-body);font-weight:400;font-size:.9rem}
 @media(min-width:760px){ .pk-next{grid-template-columns:repeat(3,1fr)} }
 
