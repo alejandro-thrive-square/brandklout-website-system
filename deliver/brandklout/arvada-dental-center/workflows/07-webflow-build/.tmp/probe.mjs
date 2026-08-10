@@ -56,7 +56,7 @@ if (!process.env.PROBE_3P) {
 await send('Emulation.setFocusEmulationEnabled', { enabled: true }, sessionId);
 await send('Page.bringToFront', {}, sessionId);
 await send('Emulation.setDeviceMetricsOverride', { width: Number(process.env.PW||1440), height: 900, deviceScaleFactor: 1, mobile: false }, sessionId);
-await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] }, sessionId);
+if (!process.env.PROBE_MOTION) await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] }, sessionId);
 await send('Page.navigate', { url }, sessionId);
 const ev = async (x) => {
   const r = await send('Runtime.evaluate', { expression: x, returnByValue: true, awaitPromise: true }, sessionId);
