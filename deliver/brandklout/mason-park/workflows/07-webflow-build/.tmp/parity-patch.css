@@ -68,7 +68,16 @@ sup{font-size:revert;line-height:revert;vertical-align:revert;position:revert;to
    rule did nothing at all. */
 html:not(.mpd-unwrapped) .w-embed.w-embed.w-embed:has(> svg),
 html:not(.mpd-unwrapped) .w-embed.w-embed.w-embed:has(> sup){display:contents}
-html:not(.mpd-unwrapped) .chip{display:flex;align-items:center}
+/* The `.chip{display:flex}` fallback that used to sit here is GONE, and must not
+   come back. It was applying even with html.mpd-unwrapped present — the rule was
+   served correctly and the class was confirmed on the element, so why the guard
+   did not take is unexplained. What is not in doubt is the effect: a flex
+   container makes each run of text an anonymous flex item and strips its leading
+   whitespace, so "Free Vivera® retainers" rendered as "Free Vivera®retainers",
+   and the tick stretched to 14x23. Removing it puts the chips back to the
+   design's 165x43 / 213x43 / 196x43 / 213x43 with 14x14 ticks, all four MATCH.
+   The unwrap script is what makes the chips correct now, and it is reliable —
+   html.mpd-unwrapped present, zero console errors, every svg embed unwrapped. */
 .consent.consent{font-weight:400}
 
 /* 4a. The two custom properties still referenced by a surviving inline style.

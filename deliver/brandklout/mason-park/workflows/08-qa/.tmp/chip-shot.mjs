@@ -41,16 +41,18 @@ async function session(url, fn) {
   };
   try { return await fn({evaluate, shot}); } finally { ws.close(); chrome.kill(); await wait(700); }
 }
+const SEL = process.env.MPD_SEL || ".chips";
+const PAGE = process.env.MPD_PAGE || "invisalign";
 const LOCATE = "(async () => {" +
   "await new Promise(r=>setTimeout(r,9000));" +
-  "var u=document.querySelector('.chips'); if(!u) return null;" +
+  "var u=document.querySelector(" + JSON.stringify(SEL) + "); if(!u) return null;" +
   "u.scrollIntoView({block:'center'}); await new Promise(r=>setTimeout(r,700));" +
   "var r=u.getBoundingClientRect();" +
   "return {x:Math.max(0,r.left-20), y:r.top+scrollY-20, w:Math.min(1400,r.width+40), h:r.height+40};" +
   "})()";
 for (const [label, url] of [
-  ["design", "file:///" + path.join(DESIGN, "invisalign", "index.html").split(path.sep).join("/").split(" ").join("%20")],
-  ["staging", "https://mason-park-dental.webflow.io/invisalign"],
+  ["design", "file:///" + path.join(DESIGN, PAGE, "index.html").split(path.sep).join("/").split(" ").join("%20")],
+  ["staging", "https://mason-park-dental.webflow.io/" + PAGE],
 ]) {
   const buf = await session(url, async ({ evaluate, shot }) => {
     const c = await evaluate(LOCATE);
@@ -58,6 +60,6 @@ for (const [label, url] of [
     console.log(label, "chips box", JSON.stringify(c));
     return shot({ x: c.x, y: c.y, width: c.w, height: c.h });
   });
-  if (buf) { fs.writeFileSync(path.join(OUT, `chips-${label}.png`), buf); console.log("wrote chips-" + label + ".png"); }
+  if (buf) { fs.writeFileSync(path.join(OUT, `shot-${PAGE}-${label}.png`), buf); console.log("wrote chips-" + label + ".png"); }
   await wait(2500);
 }

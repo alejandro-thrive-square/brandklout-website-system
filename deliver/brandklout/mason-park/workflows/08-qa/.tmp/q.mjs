@@ -18,29 +18,31 @@ await send("Page.enable",{},sessionId); await send("Runtime.enable",{},sessionId
 await send("Emulation.setDeviceMetricsOverride",{width:1440,height:1000,deviceScaleFactor:1,mobile:false},sessionId);
 const ev=e=>send("Runtime.evaluate",{expression:e,returnByValue:true,awaitPromise:true},sessionId)
   .then(r=>{if(r?.exceptionDetails)throw new Error("in-page: "+(r.exceptionDetails.exception?.description||r.exceptionDetails.text)); return r?.result?.value;});
-await send("Page.navigate",{url:"https://mason-park-dental.webflow.io/new-patient-special"},sessionId);
+await send("Page.navigate",{url:"https://mason-park-dental.webflow.io/invisalign"},sessionId);
 for(let i=0;i<150;i++){const st=await ev("document.documentElement?document.readyState:''").catch(()=>""); if(st==="interactive"||st==="complete")break; await wait(200);}
 await ev("new Promise(r=>setTimeout(r,9000))");
 console.log(await ev(`(async function(){
-  var sleep=function(ms){return new Promise(function(r){setTimeout(r,ms);});};
-  await sleep(2000);
-  window.scrollTo(0, document.documentElement.scrollHeight);
-  await sleep(1500);
-  var f=document.querySelector('footer');
-  var fr=f.getBoundingClientRect();
-  var de=document.documentElement, b=document.body;
-  var cs=getComputedStyle(de), bs=getComputedStyle(b);
-  return JSON.stringify({
-    scrollY: Math.round(window.scrollY),
-    maxScroll: Math.round(de.scrollHeight - window.innerHeight),
-    docScrollHeight: de.scrollHeight,
-    bodyRect: Math.round(b.getBoundingClientRect().height),
-    bodyOffsetHeight: b.offsetHeight,
-    htmlHeightCss: cs.height, htmlOverflow: cs.overflow + '/' + cs.overflowY,
-    bodyMargin: bs.marginTop + ' ' + bs.marginBottom,
-    bodyOverflow: bs.overflow + '/' + bs.overflowY + '/' + bs.overflowX,
-    footerBottomVsViewport: Math.round(fr.bottom - window.innerHeight),
-    footerFullyVisible: fr.bottom <= window.innerHeight + 1
-  }, null, 1);
+  await new Promise(function(r){setTimeout(r,9000);});
+  var chip=document.querySelector('.chip');
+  var svg=chip.querySelector('svg');
+  var out={svgOuter: svg.outerHTML.slice(0,120), svgClass: svg.getAttribute('class'), chipClass: chip.className};
+  var rules=[];
+  for (var i=0;i<document.styleSheets.length;i++){
+    var ss=document.styleSheets[i], r;
+    try { r=ss.cssRules; } catch(e){ continue; }
+    if(!r) continue;
+    for (var j=0;j<r.length;j++){
+      var t=r[j].selectorText;
+      if(!t) continue;
+      if (/(^|[^-\w])\.chip([^-\w]|$)/.test(t) || /svg/.test(t)) {
+        var matchesChip=false, matchesSvg=false;
+        try { matchesChip = chip.matches(t); } catch(e){}
+        try { matchesSvg = svg.matches(t); } catch(e){}
+        if (matchesChip || matchesSvg) rules.push((matchesChip?'CHIP ':'SVG  ')+t+' {'+r[j].style.cssText.slice(0,90)+'}');
+      }
+    }
+  }
+  out.matching=rules;
+  return JSON.stringify(out,null,1);
 })()`));
 ws.close(); chrome.kill();

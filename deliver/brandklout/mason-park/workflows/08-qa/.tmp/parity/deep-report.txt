@@ -7,45 +7,22 @@ DEEP DIFF  invisalign
   !! 2 design elements with no staging counterpart (first 15):
        - <p> 21830 Kingsland Blvd #104A Katy, TX 77450  [body]
        - <br> (no text)  [body]
-  [x2] border colour:  design=rgba(190, 236, 245, 0.173)/rgba(190, 236, 245, 0.173)/rgba(190, 236, 245, 0.173)/rgba(190, 236, 245, 0.173)   staging=rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)
+  [x4] display:  design=block   staging=flex
+         @ light/arrival <li.chip> Free consultation
+         @ light/arrival <li.chip> Free 3D & wellness scan
+         @ light/arrival <li.chip> Free Vivera retainers
+         @ light/arrival <li.chip> Free KOR whitening gel
+  [x4] display:  design=inline-block   staging=block
+         @ light/arrival <svg.tick> (no text)
+         @ light/arrival <svg.tick> (no text)
+         @ light/arrival <svg.tick> (no text)
+         @ light/arrival <svg.tick> (no text)
+  [x2] display:  design=inline   staging=block
+         @ light/arrival <sup> ®
+         @ light/arrival <sup> ®
+  [x1] display:  design=flex   staging=grid
+         @ light/arrival <div.price-block> (no text)
+  [x1] border colour:  design=rgba(1, 180, 216, 0.545)/rgba(1, 180, 216, 0.545)/rgba(1, 180, 216, 0.545)/rgba(1, 180, 216, 0.545)   staging=rgba(11, 183, 218, 0.518)/rgba(11, 183, 218, 0.518)/rgba(11, 183, 218, 0.518)/rgba(11, 183, 218, 0.518)
          @ dark/correction <article.cor-card> (no text)
+  [x1] border colour:  design=rgba(216, 243, 249, 0.165)/rgba(216, 243, 249, 0.165)/rgba(216, 243, 249, 0.165)/rgba(216, 243, 249, 0.165)   staging=rgba(204, 240, 247, 0.173)/rgba(204, 240, 247, 0.173)/rgba(204, 240, 247, 0.173)/rgba(204, 240, 247, 0.173)
          @ dark/correction <article.cor-card> (no text)
-  [x1] border colour:  design=rgba(155, 225, 240, 0.21)/rgba(155, 225, 240, 0.21)/rgba(155, 225, 240, 0.21)/rgba(155, 225, 240, 0.21)   staging=rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)/rgba(176, 232, 243, 0.184)
-         @ dark/correction <article.cor-card> (no text)
-
-==============================================================================
-DEEP DIFF  new-patient-special
-==============================================================================
-  elements: 470 design / 472 staging
-  paired:   468   unpaired-in-design: 2
-  !! 2 design elements with no staging counterpart (first 15):
-       - <p> 21830 Kingsland Blvd #104A Katy, TX 77450  [body]
-       - <br> (no text)  [body]
-  [x1] display:  design=grid   staging=block
-         @ light/arrival <div.wrap.arr-in> (no text)   [staging classes: arr-bg-after-nps]
-  [x1] display:  design=block   staging=grid
-         @ light/arrival <div> (no text)   [staging classes: nps-div-3 wrap arr-in]
-  [x1] display:  design=flex   staging=block
-         @ light/arrival <div.rating> (no text)   [staging classes: nps-div-2]
-  [x1] text colour:  design=rgb(90, 100, 114)   staging=rgb(82, 90, 100)
-         @ light/arrival <div.arr-cue> (no text)   [staging classes: rating]
-  [x1] font size:  design=11.52px   staging=18px
-         @ light/arrival <div.arr-cue> (no text)   [staging classes: rating]
-  [x1] line height:  design=19.008px   staging=29.7px
-         @ light/arrival <div.arr-cue> (no text)   [staging classes: rating]
-  [x1] text transform:  design=uppercase   staging=none
-         @ light/arrival <div.arr-cue> (no text)   [staging classes: rating]
-  [x1] letter spacing:  design=2.304px   staging=normal
-         @ light/arrival <div.arr-cue> (no text)   [staging classes: rating]
-
-==============================================================================
-DEEP DIFF  thank-you
-==============================================================================
-  elements: 230 design / 230 staging
-  paired:   225   unpaired-in-design: 5
-  !! 5 design elements with no staging counterpart (first 15):
-       - <p> #received Received Monday 9:44 AM  [#received]
-       - <p> #find 21830 Kingsland Blvd #104A Katy, TX 77450  [#findPin]
-       - <br> #find (no text)  [#findPin]
-       - <p> 21830 Kingsland Blvd #104A Katy, TX 77450  [body]
-       - <br> (no text)  [body]

@@ -1,35 +1,5 @@
 
 ========================================================================
-PAGE  invisalign
-========================================================================
-  height   local 14082  staging 14082
-  h1       local ["A straighter smile, without anyone noticing."]
-           live  ["A straighter smile, without anyone noticing."]
-
-  TEXT     241 runs local / 241 staging
-
-  IMAGES   10 local / 10 staging
-
-  ICONS    37 local / 37 staging
-
-  STYLES   186 comparable text elements, 0 differ
-
-========================================================================
-PAGE  new-patient-special
-========================================================================
-  height   local 14149  staging 14089
-  h1       local ["Your first visit, properly done."]
-           live  ["Your first visit, properly done."]
-
-  TEXT     191 runs local / 191 staging
-
-  IMAGES   13 local / 13 staging
-
-  ICONS    37 local / 37 staging
-
-  STYLES   163 comparable text elements, 0 differ
-
-========================================================================
 PAGE  thank-you
 ========================================================================
   height   local 10496  staging 10496
@@ -37,12 +7,24 @@ PAGE  thank-you
            live  ["Thank you — we have your request."]
 
   TEXT     97 runs local / 97 staging
+  !! 2 text runs in the design that are NOT on staging:
+       - Thank you — we have your
+       - request.
+  !! 2 text runs on staging that are NOT in the design:
+       + Thank you — we
+       + have your request.
 
   IMAGES   10 local / 10 staging
+  !! 5 staging <img> resolved to 0x0 (broken or never decoded):
+       x 6a75f6f4801acb199feea0b6_badge-kois.webp   near: Continuing education and accreditation
+       x 6a75f6f423da04c51f1ebf0c_badge-ssc.webp   near: Continuing education and accreditation
+       x 6a75f6f4cb4cbbb84091e7ba_badge-agd.webp   near: Continuing education and accreditation
+       x 6a75f6f323da04c51f1ebea5_badge-aapd.webp   near: Continuing education and accreditation
+       x 6a75f6f39d16ef209fb2de54_badge-abpd.webp   near: Continuing education and accreditation
 
   ICONS    4 local / 4 staging
 
-  STYLES   80 comparable text elements, 0 differ
+  STYLES   79 comparable text elements, 0 differ
 
 ========================================================================
-PARITY: staging matches the design on every fingerprint.
+PARITY: 9 differences between the design and staging.
