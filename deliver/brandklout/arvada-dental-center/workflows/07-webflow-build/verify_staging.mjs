@@ -255,7 +255,29 @@ for (const page of PAGES) {
     if (!a || a.__err) { diffs.push({ block: p.id, missing: `design ${p.design}` }); continue; }
     if (!b || b.__err) { diffs.push({ block: p.id, missing: `staging ${p.staging}` }); continue; }
     const w = await B.ev(WRAPPERS(p.staging));
-    if (Array.isArray(w) && w.length) wrappers.push({ block: p.id, offenders: w });
+    if (Array.isArray(w) && w.length) {
+      wrappers.push({ block: p.id, offenders: w });
+      // A wrapper that is a few px taller than its icon is inline box metrics
+      // inside a grid cell — benign, and the paired style comparison stays
+      // clean. A wrapper materially wider or taller than its child has BROKEN
+      // the line: next-door's offer price wrapped <sup>$</sup> in a block div
+      // inside a span, putting the dollar sign on its own line above the 109
+      // at the 5.2rem price size, and the style diff could not see it because
+      // the walk splices w-embed through. That must fail the gate.
+      // WIDTH is the discriminator, not height. A wrapper wider than its child
+      // is taking horizontal space the design does not have, which is what
+      // "broke the line" looks like — the offer-price wrapper measured dw 528.
+      // Height alone does not mean displacement: an inline-block wrapper's line
+      // box is sized by the PARENT's font metrics, so the repaired offer-price
+      // wrapper is legitimately ~32px taller than the 51px sup while the
+      // rendered geometry matches the design exactly (verified in supfix.mjs).
+      // Heights stay in the report as a warning; only width fails the gate.
+      for (const o of w) {
+        if (o.dw > 8) {
+          diffs.push({ block: p.id, wrapperBreaksLayout: `${o.tag} ${o.cls}`.trim(), dw: o.dw, dh: o.dh });
+        }
+      }
+    }
     for (const path of Object.keys(a)) {
       const ea = a[path], eb = b[path];
       if (!eb) { diffs.push({ block: p.id, path, missing: 'no counterpart', tag: ea._tag }); continue; }

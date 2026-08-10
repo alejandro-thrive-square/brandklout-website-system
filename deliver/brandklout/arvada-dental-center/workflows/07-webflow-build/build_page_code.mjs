@@ -192,6 +192,28 @@ ${S} :where(h4){font-size:1em}
    class rule at (0,2,0) and loses on source order, since chapter <style>
    blocks sit in <body> and this is in <head>. */
 div.w-embed[class*="${prefix}-"]{display:contents}
+
+/* A w-embed inside an INLINE parent is a block box in a line of text, and it
+   breaks that line. next-door's offer price is
+     <span class="offer__price"><sup>$</sup><span>109</span></span>
+   and the paste wrapped the <sup> in <div class="w-embed"> — so the dollar
+   sign rendered on its own line ABOVE the 109, at the 5.2rem price size. The
+   wrapper carries no page-prefixed class, so the rule above does not reach it.
+
+   Keyed on the PARENT being inline, which is what makes it safe: the wrappers
+   that must keep their box are the ones acting as grid items in .checks and
+   .rule-list rows, and their parent is an <li>. Giving those display:contents
+   promotes the svg to a grid item and collapses the 18px icon track.
+
+   inline-block, NOT contents and NOT inline. A <div> inside a <span> is
+   invalid HTML that the parser leaves in place, and Chrome keeps breaking the
+   line for it under both display:contents (no box at all) and display:inline —
+   every computed style matches the design and the number still lands on the
+   next line. Only an atomic inline box rejoins it. Measured against the design
+   by .tmp/supfix.mjs: inline-block reproduces the design's geometry exactly
+   (price 83px tall, sup at x=780, number at x=803); contents and inline both
+   leave the price 166px tall with the number at x=780. */
+:where(span,a,strong,em,b,i,sup,sub,label) > div.w-embed{display:inline-block}
 `;
 }
 
