@@ -83,8 +83,8 @@ MPD.add(function (M) {
       }
     });
 
-    tl.to(body, { color: '#1b2224', stagger: 0.5, ease: 'none' }, 0)
-      .to(tail, { color: '#a8875f', stagger: 0.5, ease: 'none' }, '>-0.2')
+    tl.to(body, { color: '#26292F', stagger: 0.5, ease: 'none' }, 0)
+      .to(tail, { color: '#00B4D8', stagger: 0.5, ease: 'none' }, '>-0.2')
       .from('#catchAfter p', { opacity: 0, y: 22, stagger: 0.4, ease: 'none' }, '>-0.4');
   });
 
@@ -104,8 +104,8 @@ MPD.add(function (M) {
       saving.textContent = '$328';
       gsap.set(rail, { scaleX: 1 });
       marks.forEach(function (m) {
-        m.style.background = '#7f9a8b';
-        m.style.borderColor = '#7f9a8b';
+        m.style.background = '#00B4D8';
+        m.style.borderColor = '#00B4D8';
         m.querySelector('path').style.strokeDashoffset = '0';
       });
       return;
@@ -141,7 +141,7 @@ MPD.add(function (M) {
     /* Each inclusion checks itself off across the same pinned distance. */
     marks.forEach(function (mark, i) {
       tl.to(mark, {
-        backgroundColor: '#7f9a8b', borderColor: '#7f9a8b', ease: 'none', duration: 0.32
+        backgroundColor: '#00B4D8', borderColor: '#00B4D8', ease: 'none', duration: 0.32
       }, i * 0.24)
         .to(mark.querySelector('path'), { strokeDashoffset: 0, ease: 'none', duration: 0.28 }, i * 0.24 + 0.08);
     });
@@ -160,9 +160,9 @@ MPD.add(function (M) {
 
     function litDot(dot, on) {
       gsap.to(dot, {
-        borderColor: on ? '#c3a98e' : 'rgba(255,255,255,.14)',
-        backgroundColor: on ? '#c3a98e' : 'rgba(0,0,0,0)',
-        color: on ? '#1b2224' : 'rgba(255,255,255,.6)',
+        borderColor: on ? '#8FDCEC' : 'rgba(255,255,255,.14)',
+        backgroundColor: on ? '#8FDCEC' : 'rgba(0,0,0,0)',
+        color: on ? '#26292F' : 'rgba(255,255,255,.6)',
         duration: 0.35, ease: 'none'
       });
     }

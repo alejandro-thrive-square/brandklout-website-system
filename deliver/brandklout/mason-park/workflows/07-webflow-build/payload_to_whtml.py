@@ -269,11 +269,14 @@ def parse_min_width_thresholds(paths):
 # every heading publishes at its 1440 size all the way down, ~29% too large at
 # 768. Rebuilt here from the token values, keyed by the base size each token
 # resolves to.  base -> {1439, 991, 767}
+# KEYED ON THE BASE SIZE, so it MUST be updated whenever the type scale moves —
+# a stale key silently emits no ladder at all and every heading publishes at its
+# desktop size from 768 down. Values below are the moodboard scale (2026-08-07).
 DISPLAY_TIER = {
-    "3.75rem": {"1439": "3.3rem", "991": "2.9rem", "767": "2.5rem"},    # --t-h1
-    "2.75rem": {"1439": "2.5rem", "991": "2.25rem", "767": "2.05rem"},  # --t-h2
-    "3.4rem":  {"1439": "2.95rem", "991": "2.55rem", "767": "2.05rem"}, # --t-statement
-    "5.5rem":  {"991": "4.8rem", "767": "4rem"},                        # --t-price
+    "3.25rem":  {"1439": "2.86rem", "991": "2.51rem", "767": "2.17rem"},  # --t-h1 52
+    "2.375rem": {"1439": "2.16rem", "991": "1.94rem", "767": "1.77rem"},  # --t-h2 38
+    "2.95rem":  {"1439": "2.56rem", "991": "2.21rem", "767": "1.78rem"},  # --t-statement
+    "4.75rem":  {"991": "4.15rem", "767": "3.45rem"},                     # --t-price
 }
 
 AUTO_INITIAL = {"top", "right", "bottom", "left", "width", "height",

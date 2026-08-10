@@ -1,0 +1,435 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>.skip-link{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #ffffff; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; text-decoration: none; position: absolute; left: -9999px; top: 0; z-index: 200; background: #26292F; padding-top: 0.75rem; padding-right: 1.25rem; padding-bottom: 0.75rem; padding-left: 1.25rem; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0.875rem; border-bottom-left-radius: 0;}
+.site-head{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #525A64; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; position: fixed; top: 0; right: 0; bottom: auto; left: 0; z-index: 90; background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: transparent; transition: background 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), border-color 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);}
+.head-progress{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: auto; left: 0; height: 2px; background: rgba(32, 36, 42, 0.08); overflow: hidden;}
+.ty-i{box-sizing: border-box; display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, #00B4D8, #8FDCEC);}
+.ty-div{box-sizing: border-box; display: flex; align-items: center; grid-row-gap: 1rem; grid-column-gap: 1rem; padding-block: 0.85rem; transition: padding 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);}
+.wrap{width: 100%; max-width: 73.75rem; margin-inline: auto; padding-inline: 40px;}
+.ty-div-2{box-sizing: border-box;}
+.ty-img{box-sizing: border-box; max-width: 100%; height: auto; display: block; width: 180px;}
+.chapter-readout{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 1.5rem; display: flex; align-items: baseline; grid-row-gap: 0.6rem; grid-column-gap: 0.6rem; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6472; min-width: 16ch;}
+.ty-b{box-sizing: border-box; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; color: #007E9B; font-variant-numeric: tabular-nums;}
+.head-actions{box-sizing: border-box; margin-left: auto; display: flex; align-items: center; grid-row-gap: 22.72px; grid-column-gap: 22.72px;}
+.head-phone{box-sizing: border-box; color: inherit; text-decoration: none; display: grid; align-content: center; line-height: 1.2; text-align: right; min-height: 44px; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.ty-span{box-sizing: border-box; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6472;}
+.ty-span-2{box-sizing: border-box; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; font-weight: 600; color: #26292F;}
+.sticky-bar{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #525A64; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: 85; display: none; grid-template-columns: 1fr 1.35fr; grid-row-gap: 0.6rem; grid-column-gap: 0.6rem; padding-top: 0.7rem; padding-right: 40px; padding-bottom: 11.2px; padding-left: 40px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top-style: solid; border-top-width: 1px; border-top-color: rgba(32, 36, 42, 0.12);}
+.ty-a{box-sizing: border-box; text-decoration: none; padding-inline: 0.75rem;}
+.btn{display: inline-flex; align-items: center; justify-content: center; grid-row-gap: 0.55rem; grid-column-gap: 0.55rem; padding-top: 0.95rem; padding-right: 1.6rem; padding-bottom: 0.95rem; padding-left: 1.6rem; border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.01em; line-height: 1; position: relative; overflow: hidden; isolation: isolate; border-top-style: solid; border-top-width: 1px; border-top-color: transparent; border-right-style: solid; border-right-width: 1px; border-right-color: transparent; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: transparent; border-left-style: solid; border-left-width: 1px; border-left-color: transparent; background: #26292F; color: #ffffff; min-height: 44px; transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1); will-change: transform;}
+.btn--sand{background: #00B4D8; color: #20242A;}
+.btn--ghost{background: transparent; border-color: rgba(32, 36, 42, 0.12); color: #26292F;}
+.ty-main{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #525A64; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;}
+.ty-section{box-sizing: border-box; color: rgba(255, 255, 255, 0.78);}
+.chapter{position: relative;}
+.ch-received{background: #26292F; text-align: center; position: relative; overflow: hidden; padding-top: 159.04px; padding-bottom: 88px;}
+.ty-div-3{box-sizing: border-box; position: relative; z-index: 2;}
+.wrap{width: 100%; max-width: 73.75rem; margin-inline: auto; padding-inline: 40px;}
+.status-mark{box-sizing: border-box; width: 72px; height: 72px; margin-top: 0; margin-right: auto; margin-bottom: 1.5rem; margin-left: auto; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; display: grid; place-items: center; background: rgba(127, 154, 139, 0.16); border-top-style: solid; border-top-width: 1px; border-top-color: rgba(127, 154, 139, 0.5); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(127, 154, 139, 0.5); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(127, 154, 139, 0.5); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(127, 154, 139, 0.5); color: #a8c6b5; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.ty-svg{box-sizing: border-box; max-width: 100%; height: auto; display: block;}
+.ty-p{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; justify-content: center;}
+.chapter-tag{display: flex; align-items: center; grid-row-gap: 0.85rem; grid-column-gap: 0.85rem; margin-bottom: 1.35rem; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: #007E9B;}
+.ty-i-2{box-sizing: border-box; flex-grow: 0; flex-shrink: 0; flex-basis: auto; display: block; width: 39.76px; height: 1px; background: #8FDCEC; transform-origin: left;}
+.ty-h1{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0.9rem; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; color: #ffffff; font-size: 3.25rem; max-width: 18ch; margin-inline: auto;}
+.ty-p-2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; margin-inline: auto;}
+.lead{font-size: 1.3125rem; color: #525A64; max-width: 56ch;}
+.ref-line{box-sizing: border-box; margin-top: 1.5rem; margin-right: 0; margin-bottom: 0; margin-left: 0; display: inline-block; padding-top: 0.5rem; padding-right: 1.1rem; padding-bottom: 0.5rem; padding-left: 1.1rem; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255, 255, 255, 0.14); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(255, 255, 255, 0.14); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(255, 255, 255, 0.14); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(255, 255, 255, 0.14); border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; font-size: 0.875rem; color: rgba(255, 255, 255, 0.6);}
+.chapter-after{box-sizing: border-box; position: absolute; top: -50%; right: -10%; bottom: auto; left: auto; width: 460px; height: 460px; pointer-events: none; background: radial-gradient(circle, rgba(0, 180, 216, 0.26), transparent 65%);}
+.ty-section-2{box-sizing: border-box; color: #525A64;}
+.chapter{position: relative;}
+.ch-fasttrack{background: #ffffff;}
+.wrap{width: 100%; max-width: 73.75rem; margin-inline: auto; padding-inline: 40px;}
+.chapter-body{padding-block: 79.52px;}
+.call-box{box-sizing: border-box; background: #E8F6FA; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 126, 155, 0.16); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(0, 126, 155, 0.16); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(0, 126, 155, 0.16); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(0, 126, 155, 0.16); border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; padding-top: 45.44px; padding-right: 45.44px; padding-bottom: 45.44px; padding-left: 45.44px; display: grid; grid-row-gap: 2.5rem; grid-column-gap: 2.5rem; align-items: center; text-align: left; position: relative; overflow: hidden; grid-auto-columns: 1fr; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: auto;}
+.ty-p-3{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;}
+.chapter-tag{display: flex; align-items: center; grid-row-gap: 0.85rem; grid-column-gap: 0.85rem; margin-bottom: 1.35rem; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: #007E9B;}
+.ty-i-3{box-sizing: border-box; flex-grow: 0; flex-shrink: 0; flex-basis: auto; display: block; width: 39.76px; height: 1px; background: #00B4D8; transform-origin: left;}
+.urgency{box-sizing: border-box; display: inline-block; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #20242A; background: #00B4D8; padding-top: 0.3rem; padding-right: 0.75rem; padding-bottom: 0.3rem; padding-left: 0.75rem; border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; margin-bottom: 0.9rem;}
+.ty-h2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; color: #26292F; font-size: 2.375rem;}
+.ty-p-4{box-sizing: border-box; margin-top: 0.75rem; margin-right: 0; margin-bottom: 0; margin-left: 0; max-width: 52ch;}
+.muted{color: #525A64;}
+.big-number{box-sizing: border-box; color: #26292F; text-decoration: none; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-size: 3rem; font-weight: 700; letter-spacing: -0.03em; line-height: 1; display: inline-block; margin-top: 0.35rem;}
+.open-state{box-sizing: border-box; margin-top: 0.85rem; margin-right: 0; margin-bottom: 0; margin-left: 0; display: flex; align-items: center; justify-content: flex-start; grid-row-gap: 0.5rem; grid-column-gap: 0.5rem; font-size: 0.875rem; color: #525A64;}
+.open-dot{box-sizing: border-box; width: 8px; height: 8px; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; background: #5A6472; flex-grow: 0; flex-shrink: 0; flex-basis: auto;}
+.ty-div-4{box-sizing: border-box; justify-content: center;}
+.btn-row{display: flex; flex-wrap: wrap; grid-row-gap: 0.75rem; grid-column-gap: 0.75rem;}
+.ty-a-2{box-sizing: border-box; text-decoration: none;}
+.btn{display: inline-flex; align-items: center; justify-content: center; grid-row-gap: 0.55rem; grid-column-gap: 0.55rem; padding-top: 0.95rem; padding-right: 1.6rem; padding-bottom: 0.95rem; padding-left: 1.6rem; border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.01em; line-height: 1; position: relative; overflow: hidden; isolation: isolate; border-top-style: solid; border-top-width: 1px; border-top-color: transparent; border-right-style: solid; border-right-width: 1px; border-right-color: transparent; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: transparent; border-left-style: solid; border-left-width: 1px; border-left-color: transparent; background: #26292F; color: #ffffff; min-height: 44px; transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1); will-change: transform;}
+.btn--lg{padding-top: 1.1rem; padding-right: 2rem; padding-bottom: 1.1rem; padding-left: 2rem; font-size: 1rem;}
+.btn--ghost{background: transparent; border-color: rgba(32, 36, 42, 0.12); color: #26292F;}
+.btn--lg{padding-top: 1.1rem; padding-right: 2rem; padding-bottom: 1.1rem; padding-left: 2rem; font-size: 1rem;}
+.ch-next{background: #F4F7F9;}
+.next-pin{box-sizing: border-box; min-height: 100svh; display: grid; align-content: center; padding-block: 79.52px; overflow: hidden; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.next-track{box-sizing: border-box; position: relative; margin-top: 45.44px;}
+.next-spine{box-sizing: border-box; position: absolute; left: 0; top: 11px; bottom: auto; width: auto; background: rgba(32, 36, 42, 0.12); border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; right: 0; height: 2px;}
+.ty-i-4{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: #00B4D8; border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; transform: scaleX(0); transform-origin: left;}
+.next-steps{box-sizing: border-box; display: grid; grid-row-gap: 34.08px; grid-column-gap: 34.08px; grid-auto-columns: 1fr; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto;}
+.next-step{box-sizing: border-box; display: grid; grid-row-gap: 1.25rem; grid-column-gap: 1.25rem; align-items: start; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.next-dot{box-sizing: border-box; width: 24px; height: 24px; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; flex-grow: 0; flex-shrink: 0; flex-basis: auto; border-top-style: solid; border-top-width: 2px; border-top-color: rgba(32, 36, 42, 0.12); border-right-style: solid; border-right-width: 2px; border-right-color: rgba(32, 36, 42, 0.12); border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: rgba(32, 36, 42, 0.12); border-left-style: solid; border-left-width: 2px; border-left-color: rgba(32, 36, 42, 0.12); background: #F4F7F9; display: grid; place-items: center; font-size: 0.72rem; font-weight: 700; font-family: "Fraunces", Georgia, "Times New Roman", serif; color: #5A6472; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.ty-h3{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0.4rem; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 500; line-height: 1.08; letter-spacing: -0.025em; color: #26292F; font-size: 1.625rem;}
+.ty-p-5{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #525A64; font-size: 0.9375rem; max-width: 52ch;}
+.fine-ty{box-sizing: border-box; margin-top: 44px; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 0.875rem; line-height: 1.6; color: #5A6472; text-align: center; max-width: 60ch; margin-inline: auto;}
+.ch-prep{background: #E8F6FA;}
+.prep-head{box-sizing: border-box; max-width: 58ch;}
+.ty-p-6{box-sizing: border-box; margin-top: 0.9rem; margin-right: 0; margin-bottom: 0; margin-left: 0;}
+.lead{font-size: 1.3125rem; color: #525A64; max-width: 56ch;}
+.prep-list{box-sizing: border-box; display: grid; grid-row-gap: 24px; grid-column-gap: 24px; margin-top: 44px; grid-auto-columns: 1fr; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto;}
+.prep-card{box-sizing: border-box; background: #ffffff; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 126, 155, 0.16); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(0, 126, 155, 0.16); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(0, 126, 155, 0.16); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(0, 126, 155, 0.16); border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; padding-top: 28px; padding-right: 28px; padding-bottom: 28px; padding-left: 28px; display: grid; grid-row-gap: 0.6rem; grid-column-gap: 0.6rem; align-content: start; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.prep-mark{box-sizing: border-box; display: flex; align-items: center; grid-row-gap: 0.7rem; grid-column-gap: 0.7rem; margin-bottom: 0.2rem;}
+.prep-tick{box-sizing: border-box; width: 34px; height: 34px; flex-grow: 0; flex-shrink: 0; flex-basis: auto; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; display: grid; place-items: center; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 126, 155, 0.16); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(0, 126, 155, 0.16); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(0, 126, 155, 0.16); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(0, 126, 155, 0.16); background: #E8F6FA; color: #007E9B; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.prep-n{box-sizing: border-box; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: #5A6472;}
+.ty-h3-2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 500; line-height: 1.08; letter-spacing: -0.025em; color: #26292F; font-size: 1.625rem;}
+.ty-p-7{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #525A64; font-size: 0.9375rem;}
+.prep-close{box-sizing: border-box; margin-top: 34.08px; margin-right: 0; margin-bottom: 0; margin-left: 0; text-align: center; font-size: 1.3125rem; color: #26292F; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-weight: 500;}
+.ch-team-ty{background: #26292F; overflow: hidden;}
+.head-block{max-width: 62ch;}
+.head-block--center{margin-inline: auto; text-align: center;}
+.ty-h2-2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; color: #ffffff; font-size: 2.375rem;}
+.ty-p-8{box-sizing: border-box; margin-top: 1rem; margin-right: 0; margin-bottom: 0; margin-left: 0; margin-inline: auto;}
+.lead{font-size: 1.3125rem; color: #525A64; max-width: 56ch;}
+.team{box-sizing: border-box; display: grid; grid-row-gap: 22.72px; grid-column-gap: 22.72px; margin-top: 45.44px; grid-auto-columns: 1fr; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto;}
+.ty-figure{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; display: grid; grid-row-gap: 0.85rem; grid-column-gap: 0.85rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.doc-photo{box-sizing: border-box; position: relative; overflow: hidden; border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; background: #E8F6FA; aspect-ratio: 4 / 5; clip-path: inset(0 0 100% 0);}
+.ty-img-2{box-sizing: border-box; max-width: 100%; height: 100%; display: block; position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; object-fit: cover; object-position: center top; will-change: transform;}
+.name-ty{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-weight: 600; color: #ffffff;}
+.role-ty{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 0.875rem; color: rgba(255, 255, 255, 0.6);}
+.accred-ty{box-sizing: border-box; margin-top: 56px;}
+.label-ty{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: #8FDCEC; text-align: center;}
+.accred-row-ty{box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; grid-row-gap: 44px; grid-column-gap: 44px; margin-top: 1rem;}
+.ty-img-3{box-sizing: border-box; max-width: 100%; height: 52px; display: block; width: auto; opacity: 0.85;}
+.ch-find{background: #ffffff;}
+.ty-div-5{box-sizing: border-box; display: grid; grid-row-gap: 45.44px; grid-column-gap: 45.44px; align-items: stretch; grid-auto-columns: 1fr; grid-template-columns: 0.9fr 1.1fr; grid-template-rows: auto;}
+.wrap{width: 100%; max-width: 73.75rem; margin-inline: auto; padding-inline: 40px;}
+.ty-div-6{box-sizing: border-box; margin-top: 1.5rem;}
+.card{background: #ffffff; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(32, 36, 42, 0.12); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(32, 36, 42, 0.12); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(32, 36, 42, 0.12); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(32, 36, 42, 0.12); border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; padding-top: 28px; padding-right: 28px; padding-bottom: 28px; padding-left: 28px;}
+.card--flat{box-shadow: none;}
+.ty-h3-3{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 500; line-height: 1.08; letter-spacing: -0.025em; color: #26292F; font-size: 1.125rem;}
+.ty-p-9{box-sizing: border-box; margin-top: 0.5rem; margin-right: 0; margin-bottom: 0; margin-left: 0;}
+.muted{color: #525A64;}
+.br-line{display: block;}
+.ty-p-10{box-sizing: border-box; margin-top: 0.85rem; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #007E9B;}
+.small{font-size: 0.875rem;}
+.ty-div-7{box-sizing: border-box; margin-top: 1.25rem;}
+.btn-row{display: flex; flex-wrap: wrap; grid-row-gap: 0.75rem; grid-column-gap: 0.75rem;}
+.ty-div-8{box-sizing: border-box; margin-top: 1rem;}
+.card{background: #ffffff; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(32, 36, 42, 0.12); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(32, 36, 42, 0.12); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(32, 36, 42, 0.12); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(32, 36, 42, 0.12); border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; padding-top: 28px; padding-right: 28px; padding-bottom: 28px; padding-left: 28px;}
+.card--flat{box-shadow: none;}
+.ty-ul{box-sizing: border-box; margin-top: 0.75rem; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; list-style: none; color: #525A64;}
+.hours-list{display: grid; grid-row-gap: 0.4rem; grid-column-gap: 0.4rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.small{font-size: 0.875rem;}
+.ty-li{box-sizing: border-box; display: flex; justify-content: space-between; grid-row-gap: 1rem; grid-column-gap: 1rem; padding-block: 0.35rem; border-top-left-radius: 6px; border-top-right-radius: 6px; border-bottom-right-radius: 6px; border-bottom-left-radius: 6px; padding-inline: 0.5rem; margin-inline: -0.5rem; margin-top: 0; margin-bottom: 0; padding-left: 0;}
+.closed{box-sizing: border-box; color: #5A6472;}
+.map-frame{box-sizing: border-box; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(32, 36, 42, 0.12); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(32, 36, 42, 0.12); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(32, 36, 42, 0.12); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(32, 36, 42, 0.12); border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; overflow: hidden; background: #E8F6FA; min-height: 320px; height: 100%; clip-path: inset(0 0 100% 0);}
+.ty-iframe{box-sizing: border-box; display: block; width: 100%; height: 100%; min-height: 340px; border-top-style: none; border-top-width: 0px; border-top-color: transparent; border-right-style: none; border-right-width: 0px; border-right-color: transparent; border-bottom-style: none; border-bottom-width: 0px; border-bottom-color: transparent; border-left-style: none; border-left-width: 0px; border-left-color: transparent;}
+.site-foot{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255, 255, 255, 0.72); font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; background: #26292F; padding-block: 56.8px;}
+.foot-grid{box-sizing: border-box; display: grid; grid-row-gap: 40px; grid-column-gap: 40px; grid-auto-columns: 1fr; grid-template-columns: 1.4fr 1fr 1fr 1fr; grid-template-rows: auto;}
+.ty-div-9{box-sizing: border-box; margin-bottom: 1rem;}
+.ty-img-4{box-sizing: border-box; max-width: 100%; height: auto; display: block; width: 180px; filter: brightness(0) invert(1); opacity: 0.92;}
+.small{font-size: 0.875rem;}
+.ty-h3-4{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0.75rem; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 700; line-height: 1.08; letter-spacing: 0.16em; color: #8FDCEC; font-size: 0.72rem; text-transform: uppercase;}
+.ty-a-3{box-sizing: border-box; color: #fff; text-decoration: none; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-size: 1.3125rem;}
+.ty-ul-2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; list-style: none;}
+.hours-list{display: grid; grid-row-gap: 0.4rem; grid-column-gap: 0.4rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.small{font-size: 0.875rem;}
+.ty-li-2{box-sizing: border-box; display: flex; justify-content: space-between; grid-row-gap: 1rem; grid-column-gap: 1rem; margin-top: 0; margin-bottom: 0; padding-left: 0;}
+.foot-base{box-sizing: border-box; margin-top: 45.44px; padding-top: 1.5rem; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255, 255, 255, 0.12); display: flex; flex-wrap: wrap; grid-row-gap: 0.75rem; grid-column-gap: 2rem; font-size: 0.875rem; color: rgba(255, 255, 255, 0.55);}</style>
+</head><body>
+<div class="page-wrapper"><a class="skip-link" href="#main">Skip to content</a><header class="site-head"><div class="head-progress" aria-hidden="true"><i class="ty-i" id="headProgress"></i></div><div class="ty-div wrap"><div class="ty-div-2 brand"><img class="ty-img" width="200" height="77" alt="Mason Park Dental of Katy" src="assets/logo.webp" loading="eager"></div><p class="chapter-readout" aria-hidden="true"><b class="ty-b" id="chapterNo">00</b><span class="ty-div-2" id="chapterName">Received</span></p><div class="head-actions"><a class="head-phone" data-phone="href" href="tel:+12817698878"><span class="ty-span" data-today-hours="">Katy, TX</span><span class="ty-span-2" data-phone-text="">(281) 769-8878</span></a></div></div></header><div class="sticky-bar"><a class="ty-a btn btn--sand" data-phone="href" href="tel:+12817698878">Call the practice</a> <a class="ty-a btn btn--ghost" target="_blank" rel="noopener" href="https://www.flexbook.me/masonpark/1">Schedule online</a></div><main class="ty-main" id="main"><section class="ty-section chapter ch-received" id="received" data-chapter="0" data-chapter-name="Received" data-theme="dark"><div class="ty-div-3 wrap"><div class="status-mark" aria-hidden="true" data-anim="hide"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.ch-received .status-mark path{stroke-dasharray:30;stroke-dashoffset:30}</style><svg fill="none" height="32" viewbox="0 0 24 24" width="32">
+<path d="M4 12.5l5 5L20 6.5" id="tickPath" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2"></path>
+</svg></div><p class="ty-p chapter-tag" data-anim="hide"><i class="ty-i-2"></i><span class="ty-div-2">Chapter 00 · Received</span></p><h1 class="ty-h1" id="recTitle" data-anim="hide">Thank you — we have your request.</h1><p class="ty-p-2 lead" id="recLead" data-anim="hide"> It has reached the front desk at Mason Park Dental of Katy, and a member of our team will call you to confirm your appointment time. </p><p class="ref-line" data-anim="hide" data-received-line="">Received just now</p></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    var root = document.getElementById('received');
+    var reveal = root.querySelectorAll('[data-anim="hide"]');
+    gsap.set(reveal, { visibility: 'visible' });
+
+    if (M.reduced) {
+      gsap.set(reveal, { opacity: 1, y: 0 });
+      gsap.set('#tickPath', { strokeDashoffset: 0 });
+      return;
+    }
+
+    var tl = gsap.timeline({ delay: 0.1 });
+
+    /* The mark lands first and the tick draws inside it — the page's single
+       job is to say "this worked", so that is the first thing that happens. */
+    tl.from(root.querySelector('.status-mark'), {
+      scale: 0.6, opacity: 0, duration: 0.75, ease: 'back.out(2)'
+    }, 0)
+      .fromTo('#tickPath', { strokeDashoffset: 30 },
+        { strokeDashoffset: 0, duration: 0.55, ease: 'power2.out' }, 0.35);
+
+    var split = M.splitOnce(document.getElementById('recTitle'));
+    if (split && split.lines && split.lines.length) {
+      gsap.set(split.lines, { yPercent: 110 });
+      tl.to(split.lines, { yPercent: 0, duration: 1, stagger: 0.09, ease: 'power4.out' }, 0.5);
+    } else {
+      tl.from('#recTitle', { opacity: 0, y: 32, duration: 0.9, ease: 'power3.out' }, 0.5);
+    }
+
+    tl.from(root.querySelector('.chapter-tag'), { opacity: 0, y: 14, duration: 0.7, ease: 'power3.out' }, 0.42)
+      .from('#recLead', { opacity: 0, y: 22, duration: 0.85, ease: 'power3.out' }, 0.85)
+      .from(root.querySelector('.ref-line'), { opacity: 0, y: 18, duration: 0.8, ease: 'power3.out' }, 1);
+
+    /* Departure — the arrival recedes rather than simply scrolling away. */
+    gsap.to(root.querySelector('.wrap'), {
+      yPercent: -14, opacity: 0.2, ease: 'none',
+      scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: 0.6 }
+    });
+  });
+  </script><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  /* Received timestamp — conversion layer, runs without GSAP. Guarded so the
+     section stays movable: it no-ops anywhere its hook is absent. */
+  (function () {
+    "use strict";
+    var ref = document.querySelector("[data-received-line]");
+    if (!ref) return;
+    ref.textContent =
+      "Received " +
+      new Date().toLocaleString("en-US", { weekday: "long", hour: "numeric", minute: "2-digit" });
+  })();
+  </script><div class="chapter-after"></div></section><section class="ty-section-2 chapter ch-fasttrack" id="fasttrack" data-chapter="1" data-chapter-name="The Fast Track" data-theme="light"><div class="ty-div-2 wrap chapter-body"><div class="call-box" id="callBox"><div class="ty-div-2"><p class="ty-p-3 chapter-tag"><i class="ty-i-3"></i><span class="ty-div-2">Chapter 01 · The Fast Track</span></p><span class="urgency">Want to be seen sooner?</span> <h2 class="ty-h2">Call now and we will book you on this call.</h2><p class="ty-p-4 muted"> Waiting for our callback is perfectly fine. But if you would rather have a time locked in right now — or something is hurting — calling is the fastest route to an appointment. </p><a class="big-number" data-phone="href" href="tel:+12817698878"><span class="ty-div-2" data-phone-text="">(281) 769-8878</span></a><p class="open-state"><span class="open-dot" data-open-dot="" aria-hidden="true"></span> <span class="ty-div-2" data-open-state="">Checking today's hours…</span></p></div><div class="ty-div-4 btn-row"><a class="ty-a-2 btn btn--lg magnetic" data-phone="href" href="tel:+12817698878"><span class="ty-div-3">Call the practice</span></a> <a class="ty-a-2 btn btn--ghost btn--lg" target="_blank" rel="noopener" href="https://www.flexbook.me/masonpark/1">Schedule online</a></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    if (M.reduced) return;
+    gsap.from('#callBox', {
+      opacity: 0, y: 40, duration: 1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#callBox', start: 'top 88%' }
+    });
+    gsap.from('#callBox > div > *', {
+      opacity: 0, y: 20, duration: 0.75, stagger: 0.08, ease: 'power3.out',
+      scrollTrigger: { trigger: '#callBox', start: 'top 82%' }
+    });
+  });
+  </script><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  /* Open/closed indicator — conversion layer, runs without GSAP.
+     CLIENT-SPECIFIC BLOCK: the HOURS table is the practice's own; Grand
+     Mission's hours differ. Guarded so the section stays movable. */
+  (function () {
+    "use strict";
+    var stateEl = document.querySelector("[data-open-state]");
+    var dotEl = document.querySelector("[data-open-dot]");
+    if (!stateEl && !dotEl) return;
+    var HOURS = [
+      null,                                  // Sunday
+      { open: [9, 0], close: [18, 0] },      // Monday
+      { open: [8, 0], close: [17, 0] },      // Tuesday
+      { open: [9, 0], close: [18, 0] },      // Wednesday
+      { open: [8, 0], close: [17, 0] },      // Thursday
+      null,                                  // Friday
+      null,                                  // Saturday
+    ];
+    var NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    function fmt(hm) {
+      var h = hm[0], m = hm[1];
+      var ap = h >= 12 ? "pm" : "am";
+      var hh = h % 12 || 12;
+      return hh + (m ? ":" + String(m).padStart(2, "0") : ":00") + " " + ap;
+    }
+    var now = new Date();
+    var today = HOURS[now.getDay()];
+    var mins = now.getHours() * 60 + now.getMinutes();
+    var isOpen =
+      !!today &&
+      mins >= today.open[0] * 60 + today.open[1] &&
+      mins < today.close[0] * 60 + today.close[1];
+    if (stateEl) {
+      if (isOpen) {
+        stateEl.textContent = "Open now until " + fmt(today.close);
+      } else if (today) {
+        stateEl.textContent =
+          mins < today.open[0] * 60
+            ? "Opens today at " + fmt(today.open)
+            : "Closed for today — opens tomorrow";
+      } else {
+        for (var i = 1; i <= 7; i++) {
+          var d = (now.getDay() + i) % 7;
+          if (HOURS[d]) {
+            stateEl.textContent =
+              "Closed today — opens " + (i === 1 ? "tomorrow" : NAMES[d]) + " at " + fmt(HOURS[d].open);
+            break;
+          }
+        }
+      }
+    }
+    if (dotEl && isOpen) dotEl.classList.add("is-open");
+  })();
+  </script></section><section class="ty-section-2 chapter ch-next" id="next" data-chapter="2" data-chapter-name="What Happens Next" data-theme="light"><div class="next-pin" id="nextPin"><div class="ty-div-2 wrap"><p class="ty-p-3 chapter-tag"><i class="ty-i-3"></i><span class="ty-div-2">Chapter 02 · What Happens Next</span></p><h2 class="ty-h2">The next three steps.</h2><div class="next-track"><div class="next-spine" aria-hidden="true"><i class="ty-i-4" id="nextSpine"></i></div><div class="next-steps" id="nextSteps"><div class="next-step"><span class="next-dot" aria-hidden="true">1</span><div class="ty-div-2"><h3 class="ty-h3">We call to confirm</h3><p class="ty-p-5">A member of the team will call during office hours to agree a time that suits you, and to answer anything you want to ask before you come in.</p></div></div><div class="next-step"><span class="next-dot" aria-hidden="true">2</span><div class="ty-div-2"><h3 class="ty-h3">We prepare for your visit</h3><p class="ty-p-5">We will check your insurance benefits in advance and send you anything you need to fill in, so your appointment is spent on your teeth rather than on paperwork.</p></div></div><div class="next-step"><span class="next-dot" aria-hidden="true">3</span><div class="ty-div-2"><h3 class="ty-h3">You come and see us</h3><p class="ty-p-5">Your exam, imaging and cleaning happen in one visit, and you leave with a written, itemised treatment plan. Nothing beyond that is started without your say-so.</p></div></div></div></div><p class="fine-ty"> If you do not hear from us within one business day, please call — we would rather answer twice than miss you. Note that we are closed Friday, Saturday and Sunday. </p></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    var pin = document.getElementById('nextPin');
+    var spine = document.getElementById('nextSpine');
+    var steps = gsap.utils.toArray('#nextSteps .next-step');
+    var horizontal = window.matchMedia('(min-width: 760px)').matches;
+
+    function litDot(dot, on) {
+      gsap.to(dot, {
+        borderColor: on ? '#00B4D8' : 'rgba(32, 36, 42, 0.12)',
+        backgroundColor: on ? '#00B4D8' : '#F4F7F9',
+        color: on ? '#ffffff' : '#5A6472',
+        duration: 0.35, ease: 'none'
+      });
+    }
+
+    if (M.reduced) {
+      gsap.set(spine, horizontal ? { scaleX: 1 } : { scaleY: 1 });
+      steps.forEach(function (s) { litDot(s.querySelector('.next-dot'), true); });
+      return;
+    }
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + Math.round(window.innerHeight * 1.7),
+        pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    tl.fromTo(spine,
+      horizontal ? { scaleX: 0 } : { scaleY: 0 },
+      horizontal ? { scaleX: 1, ease: 'none', duration: 3 } : { scaleY: 1, ease: 'none', duration: 3 }, 0);
+
+    steps.forEach(function (step, i) {
+      tl.fromTo(step.querySelector('div'), { opacity: 0.15, y: 18 },
+        { opacity: 1, y: 0, ease: 'none', duration: 0.7 }, i * 0.95);
+    });
+
+    /* Dots are painted from progress rather than tweened in place, so
+       scrolling back up un-lights them and the chapter can be re-read. */
+    tl.eventCallback('onUpdate', function () {
+      var p = tl.progress() * 3;
+      steps.forEach(function (step, i) {
+        litDot(step.querySelector('.next-dot'), p >= i * 0.95 + 0.2);
+      });
+    });
+
+    gsap.from('#next .chapter-tag, #next h2', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#next', start: 'top 70%' }
+    });
+  });
+  </script></section><section class="ty-section-2 chapter ch-prep" id="prepare" data-chapter="3" data-chapter-name="The Preparation" data-theme="light"><div class="next-pin" id="prepPin"><div class="ty-div-2 wrap"><div class="prep-head"><p class="ty-p-3 chapter-tag"><i class="ty-i-3"></i><span class="ty-div-2">Chapter 03 · The Preparation</span></p><h2 class="ty-h2">Before you come in.</h2><p class="ty-p-6 lead"> Nothing has to happen before we call — this is not a to-do list. But if these three are to hand, your first visit is spent on your teeth rather than on admin. </p></div><div class="prep-list" id="prepList"><article class="prep-card"><div class="prep-mark"><span class="prep-tick" aria-hidden="true"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.ch-prep .prep-tick path{stroke-dasharray:34;stroke-dashoffset:34}</style><svg fill="none" height="18" viewbox="0 0 24 24" width="18">
+<path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path>
+</svg></span> <span class="prep-n">01</span></div><h3 class="ty-h3-2">Your insurance card</h3><p class="ty-p-7">We check your benefits before you arrive, so what is covered — and what is not — is settled between us before anything is started.</p></article><article class="prep-card"><div class="prep-mark"><span class="prep-tick" aria-hidden="true"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.ch-prep .prep-tick path{stroke-dasharray:34;stroke-dashoffset:34}</style><svg fill="none" height="18" viewbox="0 0 24 24" width="18">
+<path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path>
+</svg></span> <span class="prep-n">02</span></div><h3 class="ty-h3-2">Any treatment plan you were given elsewhere</h3><p class="ty-p-7">Bring it with you. A second opinion here is free, and it is the quickest way to know whether the plan you were handed is the one you actually need.</p></article><article class="prep-card"><div class="prep-mark"><span class="prep-tick" aria-hidden="true"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.ch-prep .prep-tick path{stroke-dasharray:34;stroke-dashoffset:34}</style><svg fill="none" height="18" viewbox="0 0 24 24" width="18">
+<path d="M4 12.5l5 5L20 6.5" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path>
+</svg></span> <span class="prep-n">03</span></div><h3 class="ty-h3-2">The questions you have not asked yet</h3><p class="ty-p-7">Write them down while they are fresh. Nothing is started at your visit without your say-so, so the more you ask now, the less there is to decide in the chair.</p></article></div><p class="prep-close" id="prepClose">That is the whole list. The rest of it is ours to do.</p></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    var pin = document.getElementById('prepPin');
+    var cards = gsap.utils.toArray('#prepList .prep-card');
+    var ticks = gsap.utils.toArray('#prepList .prep-tick');
+    var paths = gsap.utils.toArray('#prepList .prep-tick path');
+    var close = document.getElementById('prepClose');
+
+    if (M.reduced) {
+      gsap.set(paths, { strokeDashoffset: 0 });
+      gsap.set(ticks, { borderColor: '#00B4D8', backgroundColor: '#E8F6FA' });
+      return;
+    }
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + Math.round(window.innerHeight * 1.6),
+        pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    /* Offsets are chosen so that at 25%, 50% and 75% of the pin exactly one
+       tick is mid-draw and the two either side are full or empty — the three
+       readings the scrub proof samples are then genuinely different values,
+       not three snapshots of the same finished state. */
+    cards.forEach(function (card, i) {
+      tl.fromTo(card,
+        { opacity: 0.14, y: 56, rotate: -1.2 },
+        { opacity: 1, y: 0, rotate: 0, ease: 'none', duration: 0.7 }, i * 1.0);
+    });
+
+    paths.forEach(function (path, i) {
+      tl.fromTo(path, { strokeDashoffset: 34 },
+        { strokeDashoffset: 0, ease: 'none', duration: 0.8 }, 0.4 + i * 0.9);
+      /* The ring warms as its own tick lands. On the same timeline as the
+         draw, so it reverses with the scroll instead of latching. */
+      tl.fromTo(ticks[i],
+        { borderColor: 'rgba(0, 126, 155, 0.16)', backgroundColor: '#E8F6FA' },
+        { borderColor: '#00B4D8', backgroundColor: '#ffffff', ease: 'none', duration: 0.8 },
+        0.4 + i * 0.9);
+    });
+
+    tl.fromTo(close, { opacity: 0.15, y: 16 },
+      { opacity: 1, y: 0, ease: 'none', duration: 0.5 }, 2.5);
+
+    gsap.from('#prepare .chapter-tag, #prepare h2, #prepare .lead', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#prepare', start: 'top 70%' }
+    });
+  });
+  </script></section><section class="ty-section chapter ch-team-ty" id="team" data-chapter="4" data-chapter-name="The Team" data-theme="dark"><div class="ty-div-2 wrap chapter-body"><div class="ty-div-2 head-block head-block--center"><p class="ty-p chapter-tag"><i class="ty-i-2"></i><span class="ty-div-2">Chapter 04 · The Team</span></p><h2 class="ty-h2-2">Who you will be seeing.</h2><p class="ty-p-8 lead"> Dr. Sung, Dr. Cho and Dr. Nguyen are committed to providing excellent dentistry in a comfortable environment. We welcome new patients of all ages. </p></div><div class="team" id="teamGrid"><figure class="ty-figure"><div class="doc-photo"><img class="ty-img-2" width="683" height="1024" alt="Dr. Dave Cho" src="assets/dr-cho.jpg" loading="lazy"></div><figcaption class="ty-div-2"><p class="name-ty">Dr. Dave Cho</p><p class="role-ty">General Dentist</p></figcaption></figure><figure class="ty-figure"><div class="doc-photo"><img class="ty-img-2" width="230" height="300" alt="Dr. William Sung, DMD" src="assets/dr-sung.webp" loading="lazy"></div><figcaption class="ty-div-2"><p class="name-ty">Dr. William Sung, DMD</p><p class="role-ty">General Dentist</p></figcaption></figure><figure class="ty-figure"><div class="doc-photo"><img class="ty-img-2" width="683" height="1024" alt="Dr. Tam Nguyen" src="assets/dr-nguyen.jpg" loading="lazy"></div><figcaption class="ty-div-2"><p class="name-ty">Dr. Tam Nguyen</p><p class="role-ty">Board Certified Pediatric Dentist</p></figcaption></figure></div><div class="accred-ty"><p class="label-ty">Continuing education and accreditation</p><div class="accred-row-ty" id="accredRow"><img class="ty-img-3" width="auto" height="auto" alt="Kois Center" src="assets/badge-kois.webp" loading="lazy"><img class="ty-img-3" width="auto" height="auto" alt="Seattle Study Club" src="assets/badge-ssc.webp" loading="lazy"><img class="ty-img-3" width="auto" height="auto" alt="Academy of General Dentistry" src="assets/badge-agd.webp" loading="lazy"><img class="ty-img-3" width="auto" height="auto" alt="American Academy of Pediatric Dentistry" src="assets/badge-aapd.webp" loading="lazy"><img class="ty-img-3" width="auto" height="auto" alt="American Board of Pediatric Dentistry" src="assets/badge-abpd.webp" loading="lazy"></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    if (M.reduced) { gsap.set('#teamGrid .doc-photo', { clipPath: 'inset(0 0 0% 0)' }); return; }
+
+    /* Each portrait plate wipes open in turn and the photo drifts against the
+       scroll. Scale never lands on exactly 1 — that is where the edges hit
+       sub-pixel boundaries and flicker. */
+    gsap.utils.toArray('#teamGrid figure').forEach(function (fig, i) {
+      gsap.to(fig.querySelector('.doc-photo'), {
+        clipPath: 'inset(0 0 0% 0)', duration: 1.1, delay: i * 0.11, ease: 'power4.inOut',
+        scrollTrigger: { trigger: '#teamGrid', start: 'top 82%' }
+      });
+      gsap.from(fig.querySelector('figcaption'), {
+        opacity: 0, y: 18, duration: 0.8, delay: 0.35 + i * 0.11, ease: 'power3.out',
+        scrollTrigger: { trigger: '#teamGrid', start: 'top 82%' }
+      });
+      gsap.fromTo(fig.querySelector('img'), { yPercent: -4, scale: 1.12 }, {
+        yPercent: 4, scale: 1.06, ease: 'none',
+        scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: 0.8 }
+      });
+    });
+
+    gsap.from('#team .head-block > *', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#team', start: 'top 72%' }
+    });
+    gsap.from('#accredRow img', {
+      opacity: 0, y: 16, duration: 0.7, stagger: 0.07, ease: 'power3.out',
+      scrollTrigger: { trigger: '#accredRow', start: 'top 90%' }
+    });
+  });
+  </script></section><section class="ty-section-2 chapter ch-find" id="find" data-chapter="5" data-chapter-name="Where To Find Us" data-theme="light"><div class="next-pin" id="findPin"><div class="ty-div-5 wrap find-grid"><div class="ty-div-2"><p class="ty-p-3 chapter-tag"><i class="ty-i-3"></i><span class="ty-div-2">Chapter 05 · Where To Find Us</span></p><h2 class="ty-h2">Where to find us.</h2><div class="ty-div-6 card card--flat"><h3 class="ty-h3-3">Mason Park Dental of Katy</h3><p class="ty-p-9 muted"> 21830 Kingsland Blvd #104A<span class="br-line">Katy, TX 77450 </span></p><p class="ty-p-10 small"> At the corner of Mason Rd and Kingsland Blvd, behind the Ranch 99 complex. </p><div class="ty-div-7 btn-row"><a class="ty-a-2 btn btn--ghost" target="_blank" rel="noopener" href="https://www.google.com/maps/place/21830+Kingsland+Blvd+%23104a,+Katy,+TX+77450/@29.775949,-95.7512199,17z">Get directions</a> <a class="ty-a-2 btn btn--ghost" data-phone="href" href="tel:+12817698878"> Call <span class="ty-div-3" data-phone-text="">(281) 769-8878</span></a></div></div><div class="ty-div-8 card card--flat"><h3 class="ty-h3-3">Office hours</h3><ul class="ty-ul hours-list small" id="findHours"><li class="ty-li" data-day="1"><span class="ty-div-2">Monday</span><span class="ty-div-2">9:00 am – 6:00 pm</span></li><li class="ty-li" data-day="2"><span class="ty-div-2">Tuesday</span><span class="ty-div-2">8:00 am – 5:00 pm</span></li><li class="ty-li" data-day="3"><span class="ty-div-2">Wednesday</span><span class="ty-div-2">9:00 am – 6:00 pm</span></li><li class="ty-li" data-day="4"><span class="ty-div-2">Thursday</span><span class="ty-div-2">8:00 am – 5:00 pm</span></li><li class="ty-li" data-day="5"><span class="ty-div-2">Friday</span><span class="closed">Closed</span></li><li class="ty-li" data-day="6"><span class="ty-div-2">Saturday</span><span class="closed">Closed</span></li><li class="ty-li" data-day="0"><span class="ty-div-2">Sunday</span><span class="closed">Closed</span></li></ul></div></div><div class="map-frame" id="mapFrame"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.ch-find .map-frame iframe{display:block;width:100%;height:100%;min-height:340px;border:0}</style><iframe loading="lazy" referrerpolicy="no-referrer-when-downgrade" src="https://maps.google.com/maps?q=21830%20Kingsland%20Blvd%20%23104A%2C%20Katy%2C%20TX%2077450&amp;t=&amp;z=16&amp;ie=UTF8&amp;hl=en&amp;gl=us&amp;iwloc=&amp;output=embed" title="Map showing Mason Park Dental of Katy at 21830 Kingsland Blvd #104A, Katy, TX 77450"></iframe></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    var pin = document.getElementById('findPin');
+    var rows = gsap.utils.toArray('#findHours li');
+
+    /* Today's row is highlighted regardless of motion — it is information,
+       not decoration. */
+    var today = new Date().getDay();
+    rows.forEach(function (li) {
+      li.classList.toggle('is-today', parseInt(li.getAttribute('data-day'), 10) === today);
+    });
+
+    if (M.reduced) { gsap.set('#mapFrame', { clipPath: 'inset(0 0 0% 0)' }); return; }
+
+    /* The chapter holds while the map un-crops and the week deals in. Both
+       run off one scrubbed timeline, so the halfway point of the pin is the
+       halfway point of the reveal. */
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + Math.round(window.innerHeight * 1.4),
+        pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    tl.fromTo('#mapFrame', { clipPath: 'inset(0 0 100% 0)' },
+      { clipPath: 'inset(0 0 0% 0)', ease: 'none', duration: 1.4 }, 0)
+      .fromTo(rows, { opacity: 0.25, x: -14 },
+        { opacity: 1, x: 0, ease: 'none', stagger: 0.18, duration: 0.4 }, 0.2);
+
+    gsap.from('#find .chapter-tag, #find h2', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#find', start: 'top 70%' }
+    });
+  });
+  </script></section></main><footer class="site-foot"><div class="ty-div-2 wrap"><div class="foot-grid"><div class="ty-div-2"><div class="ty-div-9 brand"><img class="ty-img-4" width="180" height="69" alt="Mason Park Dental of Katy" src="assets/logo.webp" loading="lazy"></div><p class="ty-p-3 small">We welcome new patients of all ages.</p></div><div class="ty-div-2"><h3 class="ty-h3-4">Visit</h3><p class="ty-p-3">21830 Kingsland Blvd #104A<span class="br-line">Katy, TX 77450</span></p></div><div class="ty-div-2"><h3 class="ty-h3-4">Call</h3><p class="ty-p-3"><a class="ty-a-3" data-phone="href" href="tel:+12817698878"><span class="ty-div-2" data-phone-text="">(281) 769-8878</span></a></p></div><div class="ty-div-2"><h3 class="ty-h3-4">Hours</h3><ul class="ty-ul-2 hours-list small"><li class="ty-li-2"><span class="ty-div-2">Mon</span><span class="ty-div-2">9am – 6pm</span></li><li class="ty-li-2"><span class="ty-div-2">Tue</span><span class="ty-div-2">8am – 5pm</span></li><li class="ty-li-2"><span class="ty-div-2">Wed</span><span class="ty-div-2">9am – 6pm</span></li><li class="ty-li-2"><span class="ty-div-2">Thu</span><span class="ty-div-2">8am – 5pm</span></li><li class="ty-li-2"><span class="ty-div-2">Fri – Sun</span><span class="closed">Closed</span></li></ul></div></div><div class="foot-base"><span class="ty-div-2">© 2026 Mason Park Dental of Katy. All rights reserved.</span></div></div></footer></div>
+</body></html>

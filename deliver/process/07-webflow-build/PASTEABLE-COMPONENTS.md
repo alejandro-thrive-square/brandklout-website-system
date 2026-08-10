@@ -155,6 +155,33 @@ the newest converter lives THERE, not in the Dr. Nahlah folder:
    `.wz-js{display:none}` in the page CSS so the wrapper can never occupy a
    grid/flex cell — and make the simulator render the `w-embed` wrapper too.
 
+## Lessons from the Mason Park build (2026-08-07)
+
+- **The queue namespace is per-project** (`WZ.add` on Dr. Nahlah, `MPD.add` on
+  Mason Park — same pattern); the extractor detects both.
+- **A theme-varying `var()` on a SHARED class forks the class.** The resolver
+  bakes `var()` per element, so `.lead{color:var(--fg-body)}` under
+  `[data-theme="dark"]` emits a second record under the same name — and
+  Webflow's merge-by-name keeps only one (`wf_tools qa` check 2 catches it).
+  Fix at the design source: concrete value on the shared class + an explicit
+  `[data-theme="dark"] .lead{...}` descendant override, which the converter
+  banks on the per-element content class. Same computed values either way.
+- **Token-ladder designs need a bake pass.** A design that steps type by
+  overriding `:root` tokens inside media queries loses the WHOLE ladder in
+  conversion (`var()` resolves once, at the base). Mason Park's
+  `bake_display_ladder.mjs` is the model: 991/767 rungs become real
+  medium/small variants, the 1439 rung and the <=478 reading tier are emitted
+  for the site head (selector lists with combo chains resolved, boosted one
+  class level so they win on specificity regardless of stylesheet order, the
+  1439 rung band-bounded with `min-width:992px` so it cannot override the real
+  breakpoint variants). It also strips the converter's re-hang of <=478 rules
+  onto tiny (<=479) — that re-hang IS the 479/480 root-seam bug.
+- **Section `data-chapter-name`/`data-theme` ride in `data.xattr`**, not
+  `data.attr` — the extractor reads both and records the theme per component.
+- **Structural gate**: `check_components.mjs` (1 root, closure complete,
+  embeds <10k, 0 relative refs incl. inside embed html, images CDN-bound,
+  paste pages round-trip) — run it on every extraction.
+
 ## Gates
 
 - `simulate_paste.mjs` on the payload before anyone pastes — a payload can

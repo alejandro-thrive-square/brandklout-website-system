@@ -1,4 +1,5 @@
 {
+  "headCode": true,
   "externalScripts": [
     "../_vendor/gsap/gsap.min.js",
     "../_vendor/gsap/ScrollTrigger.min.js",
@@ -8,20 +9,7 @@
     "../shared/mpd-flush.js"
   ],
   "inlineHandlers": [],
-  "querySelectors": [
-    "#incList .inc-mark",
-    ".arr-cue",
-    ".arr-cue i",
-    ".arr-in",
-    ".chapter-tag",
-    ".cor-bar",
-    ".no",
-    ".price-was",
-    ".rating",
-    "[data-anim=\"hide\"]",
-    "[data-count-to]",
-    "path"
-  ],
+  "querySelectors": [],
   "ids": [
     "accredRow",
     "arrBg",
@@ -118,13 +106,13 @@
     "foot-base",
     "foot-grid",
     "form-card",
+    "form-h2",
     "form-head",
     "form-msg",
     "form-trust",
     "g-mark",
     "grid",
     "grid--3",
-    "h2",
     "head-actions",
     "head-block",
     "head-block--center",

@@ -92,16 +92,38 @@ def wrap_single_root(payload, class_name: str = "page-wrapper"):
             referenced.add(c)
     root_ids = [nd["_id"] for nd in nodes if nd["_id"] not in referenced]
 
-    template = next((nd for nd in nodes if nd.get("type") == "Block"), None)
-    data = copy.deepcopy(template["data"]) if template else {"tag": "div"}
-    data.pop("text", None)
+    # Build the wrapper's data block from scratch. Deep-copying the first Block's
+    # data (the previous approach) dragged its `attr` along, so the wrapper
+    # inherited `id="nav"` from the header — two elements then shared that id,
+    # `document.getElementById('nav')` returned the unstyled wrapper, and the
+    # nav's `.solid` scroll state was toggled onto the wrong element (so the nav
+    # background never changed). Duplicate ids also break every other
+    # getElementById hook on the page.
+    data = htw.WebflowBuilder._common_data()
     data["tag"] = "div"
+
+    # `classes` holds style **IDs**, not names. Passing the literal name emitted
+    # a dangling reference: the Designer resolved it to nothing, so the wrapper
+    # arrived unstyled and `page-wrapper` never existed as a class.
+    classes = []
+    if class_name:
+        existing = next((s for s in p["styles"] if s.get("name") == class_name
+                         and not s.get("comb")), None)
+        if existing is None:
+            existing = {
+                "_id": htw.new_id(), "fake": False, "type": "class",
+                "name": class_name, "namespace": "", "comb": "",
+                "styleLess": "", "variants": {},
+                "children": [], "origin": None, "selector": None,
+            }
+            p["styles"].append(existing)
+        classes = [existing["_id"]]
 
     wrapper = {
         "_id": htw.new_id(),
         "type": "Block",
         "tag": "div",
-        "classes": [class_name] if class_name else [],
+        "classes": classes,
         "children": root_ids,
         "data": data,
     }

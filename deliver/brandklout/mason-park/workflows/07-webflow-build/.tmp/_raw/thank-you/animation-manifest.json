@@ -1,4 +1,5 @@
 {
+  "headCode": true,
   "externalScripts": [
     "../_vendor/gsap/gsap.min.js",
     "../_vendor/gsap/ScrollTrigger.min.js",
@@ -8,21 +9,7 @@
     "../shared/mpd-flush.js"
   ],
   "inlineHandlers": [],
-  "querySelectors": [
-    ".chapter-tag",
-    ".doc-photo",
-    ".next-dot",
-    ".ref-line",
-    ".status-mark",
-    ".wrap",
-    "[data-anim=\"hide\"]",
-    "[data-open-dot]",
-    "[data-open-state]",
-    "[data-received-line]",
-    "div",
-    "figcaption",
-    "img"
-  ],
+  "querySelectors": [],
   "ids": [
     "accredRow",
     "callBox",

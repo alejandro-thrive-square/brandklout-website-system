@@ -6,7 +6,7 @@
 <title>Thank you — we have your request | Mason Park Dental of Katy</title>
 <meta name="description" content="Your request has reached Mason Park Dental of Katy. Here is what happens next.">
 <meta name="robots" content="noindex, nofollow">
-<meta name="theme-color" content="#1b2224">
+<meta name="theme-color" content="#26292F">
 
 <!--
   Mason Park Dental — Thank-you page
@@ -49,7 +49,7 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,700&family=Outfit:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="../shared/mpd.css">
 
 <!-- ===== CONVERSION TRACKING SLOT — intentionally empty ===== -->
@@ -106,7 +106,7 @@
     .ch-received::after {
       content: ""; position: absolute; inset: -50% -10% auto auto;
       width: 460px; height: 460px; pointer-events: none;
-      background: radial-gradient(circle, rgba(195, 169, 142, 0.26), transparent 65%);
+      background: radial-gradient(circle, rgba(0, 180, 216, 0.26), transparent 65%);
     }
     .ch-received .wrap { position: relative; z-index: 2; }
     .ch-received .status-mark {
@@ -142,7 +142,7 @@
     <p class="ref-line" data-anim="hide" data-received-line>Received just now</p>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     var root = document.getElementById('received');
     var reveal = root.querySelectorAll('[data-anim="hide"]');
@@ -183,6 +183,18 @@
     });
   });
   </script>
+  <script data-embed>
+  /* Received timestamp — conversion layer, runs without GSAP. Guarded so the
+     section stays movable: it no-ops anywhere its hook is absent. */
+  (function () {
+    "use strict";
+    var ref = document.querySelector("[data-received-line]");
+    if (!ref) return;
+    ref.textContent =
+      "Received " +
+      new Date().toLocaleString("en-US", { weekday: "long", hour: "numeric", minute: "2-digit" });
+  })();
+  </script>
 </section>
 
 <!-- ==========================================================================
@@ -207,8 +219,8 @@
       .ch-fasttrack .call-box { grid-template-columns: minmax(0, 1fr) auto; text-align: left; gap: 2.5rem; }
     }
     .ch-fasttrack .urgency {
-      display: inline-block; font-family: var(--display); font-size: var(--t-eyebrow); font-weight: 700;
-      letter-spacing: 0.16em; text-transform: uppercase; color: var(--white);
+      display: inline-block; font-family: var(--body); font-size: var(--t-eyebrow); font-weight: 700;
+      letter-spacing: 0.16em; text-transform: uppercase; color: var(--on-accent);
       background: var(--sand-deep); padding: 0.3rem 0.75rem; border-radius: 999px; margin-bottom: 0.9rem;
     }
     .ch-fasttrack .big-number {
@@ -258,7 +270,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     if (M.reduced) return;
     gsap.from('#callBox', {
@@ -270,6 +282,60 @@
       scrollTrigger: { trigger: '#callBox', start: 'top 82%' }
     });
   });
+  </script>
+  <script data-embed>
+  /* Open/closed indicator — conversion layer, runs without GSAP.
+     CLIENT-SPECIFIC BLOCK: the HOURS table is the practice's own; Grand
+     Mission's hours differ. Guarded so the section stays movable. */
+  (function () {
+    "use strict";
+    var stateEl = document.querySelector("[data-open-state]");
+    var dotEl = document.querySelector("[data-open-dot]");
+    if (!stateEl && !dotEl) return;
+    var HOURS = [
+      null,                                  // Sunday
+      { open: [9, 0], close: [18, 0] },      // Monday
+      { open: [8, 0], close: [17, 0] },      // Tuesday
+      { open: [9, 0], close: [18, 0] },      // Wednesday
+      { open: [8, 0], close: [17, 0] },      // Thursday
+      null,                                  // Friday
+      null,                                  // Saturday
+    ];
+    var NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    function fmt(hm) {
+      var h = hm[0], m = hm[1];
+      var ap = h >= 12 ? "pm" : "am";
+      var hh = h % 12 || 12;
+      return hh + (m ? ":" + String(m).padStart(2, "0") : ":00") + " " + ap;
+    }
+    var now = new Date();
+    var today = HOURS[now.getDay()];
+    var mins = now.getHours() * 60 + now.getMinutes();
+    var isOpen =
+      !!today &&
+      mins >= today.open[0] * 60 + today.open[1] &&
+      mins < today.close[0] * 60 + today.close[1];
+    if (stateEl) {
+      if (isOpen) {
+        stateEl.textContent = "Open now until " + fmt(today.close);
+      } else if (today) {
+        stateEl.textContent =
+          mins < today.open[0] * 60
+            ? "Opens today at " + fmt(today.open)
+            : "Closed for today — opens tomorrow";
+      } else {
+        for (var i = 1; i <= 7; i++) {
+          var d = (now.getDay() + i) % 7;
+          if (HOURS[d]) {
+            stateEl.textContent =
+              "Closed today — opens " + (i === 1 ? "tomorrow" : NAMES[d]) + " at " + fmt(HOURS[d].open);
+            break;
+          }
+        }
+      }
+    }
+    if (dotEl && isOpen) dotEl.classList.add("is-open");
+  })();
   </script>
 </section>
 
@@ -355,7 +421,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     var pin = document.getElementById('nextPin');
     var spine = document.getElementById('nextSpine');
@@ -364,9 +430,9 @@
 
     function litDot(dot, on) {
       gsap.to(dot, {
-        borderColor: on ? '#a8875f' : '#dfe4e6',
-        backgroundColor: on ? '#a8875f' : '#fbf9f7',
-        color: on ? '#ffffff' : '#778386',
+        borderColor: on ? '#00B4D8' : 'rgba(32, 36, 42, 0.12)',
+        backgroundColor: on ? '#00B4D8' : '#F4F7F9',
+        color: on ? '#ffffff' : '#5A6472',
         duration: 0.35, ease: 'none'
       });
     }
@@ -529,7 +595,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     var pin = document.getElementById('prepPin');
     var cards = gsap.utils.toArray('#prepList .prep-card');
@@ -539,7 +605,7 @@
 
     if (M.reduced) {
       gsap.set(paths, { strokeDashoffset: 0 });
-      gsap.set(ticks, { borderColor: '#a8875f', backgroundColor: '#f4ece2' });
+      gsap.set(ticks, { borderColor: '#00B4D8', backgroundColor: '#E8F6FA' });
       return;
     }
 
@@ -568,8 +634,8 @@
       /* The ring warms as its own tick lands. On the same timeline as the
          draw, so it reverses with the scroll instead of latching. */
       tl.fromTo(ticks[i],
-        { borderColor: '#e6dccf', backgroundColor: '#f4ece2' },
-        { borderColor: '#a8875f', backgroundColor: '#ffffff', ease: 'none', duration: 0.8 },
+        { borderColor: 'rgba(0, 126, 155, 0.16)', backgroundColor: '#E8F6FA' },
+        { borderColor: '#00B4D8', backgroundColor: '#ffffff', ease: 'none', duration: 0.8 },
         0.4 + i * 0.9);
     });
 
@@ -661,7 +727,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     if (M.reduced) { gsap.set('#teamGrid .doc-photo', { clipPath: 'inset(0 0 0% 0)' }); return; }
 
@@ -775,7 +841,7 @@
     </div>
   </div>
 
-  <script>
+  <script data-embed>
   MPD.add(function (M) {
     var pin = document.getElementById('findPin');
     var rows = gsap.utils.toArray('#findHours li');
@@ -832,7 +898,7 @@
       </div>
       <div>
         <h3>Call</h3>
-        <p><a data-phone="href" href="tel:+12817698878" style="font-family:var(--display);font-size:1.25rem;color:#fff;">
+        <p><a data-phone="href" href="tel:+12817698878" style="font-family:var(--display);font-size:var(--t-lead);color:#fff;">
           <span data-phone-text>(281) 769-8878</span></a></p>
       </div>
       <div>
@@ -853,73 +919,6 @@
 </footer>
 
 <script src="../shared/mpd-flush.js"></script>
-<script>
-/* ==========================================================================
-   Page-local: the open/closed indicator and the received timestamp.
-   CLIENT-SPECIFIC BLOCK — the HOURS table below is the practice's own.
-   Kept out of the shared runtime because only this page has a live
-   open/closed readout, and Grand Mission's hours differ.
-   ========================================================================== */
-(function () {
-  "use strict";
-  var HOURS = [
-    null,                                  // Sunday
-    { open: [9, 0], close: [18, 0] },      // Monday
-    { open: [8, 0], close: [17, 0] },      // Tuesday
-    { open: [9, 0], close: [18, 0] },      // Wednesday
-    { open: [8, 0], close: [17, 0] },      // Thursday
-    null,                                  // Friday
-    null,                                  // Saturday
-  ];
-  var NAMES = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
 
-  function fmt(hm) {
-    var h = hm[0], m = hm[1];
-    var ap = h >= 12 ? "pm" : "am";
-    var hh = h % 12 || 12;
-    return hh + (m ? ":" + String(m).padStart(2, "0") : ":00") + " " + ap;
-  }
-
-  var now = new Date();
-  var today = HOURS[now.getDay()];
-  var mins = now.getHours() * 60 + now.getMinutes();
-  var isOpen =
-    !!today &&
-    mins >= today.open[0] * 60 + today.open[1] &&
-    mins < today.close[0] * 60 + today.close[1];
-
-  var stateEl = document.querySelector("[data-open-state]");
-  var dotEl = document.querySelector("[data-open-dot]");
-
-  if (stateEl) {
-    if (isOpen) {
-      stateEl.textContent = "Open now until " + fmt(today.close);
-    } else if (today) {
-      stateEl.textContent =
-        mins < today.open[0] * 60
-          ? "Opens today at " + fmt(today.open)
-          : "Closed for today — opens tomorrow";
-    } else {
-      // Find the next open day so the message is useful, not just "closed".
-      for (var i = 1; i <= 7; i++) {
-        var d = (now.getDay() + i) % 7;
-        if (HOURS[d]) {
-          stateEl.textContent =
-            "Closed today — opens " + (i === 1 ? "tomorrow" : NAMES[d]) + " at " + fmt(HOURS[d].open);
-          break;
-        }
-      }
-    }
-  }
-  if (dotEl && isOpen) dotEl.classList.add("is-open");
-
-  var ref = document.querySelector("[data-received-line]");
-  if (ref) {
-    ref.textContent =
-      "Received " +
-      now.toLocaleString("en-US", { weekday: "long", hour: "numeric", minute: "2-digit" });
-  }
-})();
-</script>
 </body>
 </html>

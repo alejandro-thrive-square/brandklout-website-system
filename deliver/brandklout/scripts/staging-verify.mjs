@@ -307,12 +307,25 @@ async function load(send, resetNet, url) {
       await new Promise(r => setTimeout(r, 200));
     }
 
-    const deadline = Date.now() + 15000;
+    /* The ramp is longer and bumpier than it looks. A Mason Park staging page
+       walks 804 -> 5625 -> 8387 -> 8488 -> 13200 -> 13238 -> 13223 -> 13270
+       over ~15s before it holds: late images and an embedded map iframe keep
+       re-laying it out. Two consequences, both of which produced FALSE
+       FAILURES on pages that are fine:
+         - a 15s deadline can expire mid-ramp, and
+         - exact equality never converges, because the tail wobbles by tens of
+           px, so the stability counter resets on every sample.
+       (No backticks in this comment: it lives inside a template literal.)
+       Hence a 30s deadline, a 4px tolerance and a longer quiet window. Waiting
+       too long only costs seconds; measuring too early invents defects — it is
+       what made the last pinned chapter on every page look like it never
+       scrubbed. */
+    const deadline = Date.now() + 30000;
     let last = -1, stable = 0;
-    while (Date.now() < deadline && stable < 2) {
+    while (Date.now() < deadline && stable < 4) {
       await new Promise(r => setTimeout(r, 500));
       let now; try { now = maxScroll(); } catch (e) { now = document.body.scrollHeight; }
-      stable = now === last ? stable + 1 : 0;
+      stable = Math.abs(now - last) <= 4 ? stable + 1 : 0;
       last = now;
     }
     if (window.ScrollTrigger) ScrollTrigger.update();
@@ -354,8 +367,17 @@ const SAMPLE = (id) => `(() => {
   const pin = document.getElementById(${JSON.stringify(id)});
   if (!pin) return null;
   const probes = [...pin.querySelectorAll('[data-scrub-probe]')];
-  const els = probes.length ? probes : [...pin.querySelectorAll('*')].slice(0, 40);
-  return els.map((el) => {
+  /* The cap used to be 40, which silently decided the verdict. The element that
+     actually animates is routinely past it: on Mason Park the scrubbed ledger
+     figure is descendant 49 of 70 (#incFigure) and 43 of 54 (#covFigure), so
+     the signature never changed and two perfectly good chapters were reported
+     as "only 1 distinct state". Sample the whole subtree unless it is huge, and
+     when it IS truncated say so rather than quietly reporting a pass/fail from
+     a partial view. */
+  const all = [...pin.querySelectorAll('*')];
+  const els = probes.length ? probes : all.slice(0, 400);
+  const truncated = !probes.length && all.length > 400;
+  return (truncated ? 'TRUNCATED@400/' + all.length + ' ;; ' : '') + els.map((el) => {
     const cs = getComputedStyle(el);
     return (el.getAttribute('data-scrub-probe') || el.tagName) + '=' +
       [cs.transform, cs.clipPath, cs.opacity, el.textContent.trim().slice(0, 40)].join('|');

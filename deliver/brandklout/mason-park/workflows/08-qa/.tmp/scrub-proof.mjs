@@ -247,6 +247,54 @@ async function open(evaluate, send, sessionId, page, { reduced } = {}) {
   // sample the page before its reduced-motion fallbacks have been applied and
   // report content as clipped when it is merely early.
   await wait(2800);
+  // Under reduced motion nothing is pinned ON PURPOSE, so requiring pins there
+  // would burn the whole cap on every reduced-motion session and log a false
+  // "never stopped changing".
+  await settle(evaluate, { expectPins: !reduced });
+}
+
+// `mpd-ready` fires while the DOCUMENT IS STILL GROWING. On the local package
+// that hardly matters; against staging it is the difference between a real
+// result and noise. The built pages take ~8s to reach readyState 'complete'
+// (late images and the map iframe), and ScrollTrigger measures whatever height
+// exists when it registers — so a gate that samples too early reads pin
+// start/end values computed against a SHORTER document. Those coordinates then
+// exceed the real maximum scroll, `window.scrollTo` silently clamps, and every
+// probe on a late chapter reports "not scrubbing" for a scene that is fine.
+// This is what produced the phantom "the thank-you map never un-crops", and the
+// 53/60-vs-57/60 flapping between identical runs.
+//
+// So: wait for the height to actually hold still, and for the pins to exist.
+// The ramp is long and not monotonic: a staging page walks 804 -> 5625 -> 8387
+// -> 8488 -> 13200 -> 13238 -> 13223 -> 13270 over ~15s before holding. So the
+// cap has to clear 15s, and the comparison needs a small tolerance or the ±70px
+// wobble on the way up resets the counter forever.
+async function settle(evaluate, { quietFor = 2000, cap = 30000, tolerance = 4, expectPins = true } = {}) {
+  const step = 400;
+  let last = -1, quiet = 0;
+  for (let waited = 0; waited < cap; waited += step) {
+    await wait(step);
+    const s = await evaluate(`(function(){
+      try {
+        return { h: Math.round(document.documentElement.scrollHeight),
+                 rs: document.readyState,
+                 pins: (window.ScrollTrigger ? ScrollTrigger.getAll() : [])
+                         .filter(function(x){ return x.pin; }).length };
+      } catch (e) { return null; }
+    })()`);
+    if (!s) { quiet = 0; continue; }
+    // Height unchanged and the pins have registered. Deliberately NOT gated on
+    // readyState 'complete' — see open() above: it blocks on Google Fonts and
+    // can hang indefinitely, which would burn the whole cap on every page.
+    if (Math.abs(s.h - last) <= tolerance && (!expectPins || s.pins > 0)) {
+      quiet += step;
+      if (quiet >= quietFor) return;
+    } else {
+      quiet = 0;
+    }
+    last = s.h;
+  }
+  console.log("      (settle: page never stopped changing — results may be noisy)");
 }
 
 // Drive the scroll through whatever is actually moving the page.

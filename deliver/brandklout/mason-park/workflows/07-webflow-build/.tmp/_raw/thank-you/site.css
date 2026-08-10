@@ -67,20 +67,26 @@ html {
 
 /* ---------- Tokens ---------- */
 :root {
-  /* Brand — read off the client's live site and photography. Unchanged. */
-  --ink: #1b2224;
-  --ink-soft: #2c3538;
-  --ink-deep: #121719;
-  --slate: #4e585b;
-  --mist: #778386;
-  --sand: #c3a98e;
-  --sand-deep: #a8875f;
-  --sand-ink: #8a6c46;      /* AA-safe sand for text on light grounds */
-  --sand-wash: #f4ece2;
-  --sage: #7f9a8b;
-  --paper: #fbf9f7;
-  --cloud: #eff2f3;
+  /* Brand — the moodboard published on the site's Home page by Brandklout,
+     "Bright Cyan, Charcoal & White". Names kept from the first pass so the
+     theme layer below is unchanged; only the values move. */
+  --ink: #26292F;           /* charcoal — the anchor */
+  --ink-soft: #2F343C;      /* lifted charcoal — RAISED panels on a dark ground.
+                               Derived, not a new hue: see the header note. */
+  --ink-deep: #1B1E23;      /* charcoal-deep */
+  --slate: #525A64;         /* body copy */
+  --mist: #5A6472;          /* slate — meta, captions, borders */
+  --sand: #8FDCEC;          /* light cyan — accent on dark grounds */
+  --sand-deep: #00B4D8;     /* bright cyan — the signal: CTAs, icons, rules */
+  --sand-ink: #007E9B;      /* deep cyan — the AA-safe cyan for text on light */
+  --sand-wash: #E8F6FA;     /* ice */
+  --paper: #F4F7F9;         /* page */
+  --cloud: #E8F6FA;         /* ice — image placeholders */
   --white: #ffffff;
+  /* Text that sits ON bright cyan. The moodboard is explicit: dark ink, never
+     white — white on #00B4D8 is ~2.5:1 and fails, which the current site does.
+     Ink on cyan reaches 6.3:1. */
+  --on-accent: #20242A;
 
   /* ------------------------------------------------------------------
      THEME LAYER.
@@ -99,16 +105,16 @@ html {
   --fg: var(--ink);
   --fg-body: var(--slate);
   --fg-soft: var(--mist);
-  --line: #dfe4e6;
-  --line-warm: #e6dccf;
+  --line: rgba(32, 36, 42, 0.12);
+  --line-warm: rgba(0, 126, 155, 0.16);
   --accent: var(--sand-ink);
   --accent-lg: var(--sand-deep);
   --rule: var(--sand-deep);
   --focus: var(--sand-deep);
 
   /* Type */
-  --display: "Outfit", "Segoe UI", system-ui, sans-serif;
-  --body: "DM Sans", "Segoe UI", system-ui, sans-serif;
+  --display: "Fraunces", Georgia, "Times New Roman", serif;
+  --body: "Inter", "Segoe UI", system-ui, sans-serif;
 
   /* ------------------------------------------------------------------
      TYPE SCALE — plain rem, no clamp(). The fluid root above already does
@@ -129,17 +135,17 @@ html {
 
   /* Reading sizes — raised below 479 only. See MOBILE READING SIZES. */
   --t-eyebrow: 0.72rem;     /* 11.5px */
-  --t-small: 0.875rem;      /* 14px — meta, captions, fine print */
+  --t-small: 0.875rem;      /* 14px — moodboard 'Small 14' */
   --t-ui: 0.9375rem;        /* 15px — buttons, card body, form controls */
-  --t-body: 1.0625rem;      /* 17px */
-  --t-lead: 1.25rem;        /* 20px */
-  --t-h3: 1.5rem;           /* 24px */
+  --t-body: 1.125rem;       /* 18px — moodboard 'Body 18' */
+  --t-lead: 1.3125rem;      /* 21px — holds its step above body */
+  --t-h3: 1.625rem;         /* 26px — moodboard 'H3 26' */
 
   /* Display sizes — stepped down below 1440. See DISPLAY STEPS. */
-  --t-h2: 2.75rem;          /* 44px */
-  --t-h1: 3.75rem;          /* 60px */
-  --t-statement: 3.4rem;    /* 54.4px */
-  --t-price: 5.5rem;        /* 88px */
+  --t-h2: 2.375rem;         /* 38px — moodboard 'H2 38' */
+  --t-h1: 3.25rem;          /* 52px — moodboard 'H1 52' */
+  --t-statement: 2.95rem;   /* 47.2px — h1 x 0.907, ratio preserved */
+  --t-price: 4.75rem;       /* 76px — h1 x 1.462, ratio preserved */
 
   /* Space */
   --gutter: clamp(1.25rem, 4vw, 2.5rem);
@@ -152,8 +158,8 @@ html {
 
   --radius: 0.875rem;
   --radius-lg: 1.375rem;
-  --shadow-card: 0 1px 2px rgba(27, 34, 36, 0.04), 0 12px 32px -18px rgba(27, 34, 36, 0.18);
-  --shadow-lift: 0 2px 4px rgba(27, 34, 36, 0.05), 0 22px 48px -20px rgba(27, 34, 36, 0.26);
+  --shadow-card: 0 1px 2px rgba(32, 36, 42, 0.04), 0 12px 32px -18px rgba(32, 36, 42, 0.18);
+  --shadow-lift: 0 2px 4px rgba(32, 36, 42, 0.05), 0 22px 48px -20px rgba(32, 36, 42, 0.26);
   --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
 
   /* Persistent journey UI reserves space at the bottom on mobile. */
@@ -181,28 +187,28 @@ html {
    ------------------------------------------------------------------ */
 @media (max-width: 1439px) {
   :root {
-    --t-h1: 3.3rem;         /* 52.8 (50.2) */
-    --t-h2: 2.5rem;         /* 40.0 (37.8) */
-    --t-statement: 2.95rem; /* 47.2 (44.2) */
+    --t-h1: 2.86rem;        /* 45.8 — h1 x 0.88, as before */
+    --t-h2: 2.16rem;        /* 34.6 — h2 x 0.909, as before */
+    --t-statement: 2.56rem; /* 41.0 — statement x 0.868, as before */
     /* --t-price stays 5.5rem: the old clamp was already capped at 88px
        from 1120 up, so there is nothing to step down here. */
   }
 }
 @media (max-width: 991px) {
   :root {
-    --t-h1: 2.9rem;         /* 46.4 (44.0) */
-    --t-h2: 2.25rem;        /* 36.0 (33.9) */
-    --t-statement: 2.55rem; /* 40.8 (37.6) */
-    --t-price: 4.8rem;      /* 76.8 (70.4) */
+    --t-h1: 2.51rem;        /* 40.2 — h1 x 0.773, as before */
+    --t-h2: 1.94rem;        /* 31.0 — h2 x 0.818, as before */
+    --t-statement: 2.21rem; /* 35.4 — statement x 0.75, as before */
+    --t-price: 4.15rem;     /* 66.4 — price x 0.873, as before */
   }
 }
 @media (max-width: 767px) {
   /* px shown at 390, where the root has fallen to 13.76. */
   :root {
-    --t-h1: 2.5rem;         /* 34.4 (35.0) */
-    --t-h2: 2.05rem;        /* 28.2 (28.3) */
-    --t-statement: 2.05rem; /* 28.2 (27.7) */
-    --t-price: 4rem;        /* 55.0 (51.5) */
+    --t-h1: 2.17rem;        /* 29.9 — h1 x 0.667, as before */
+    --t-h2: 1.77rem;        /* 24.4 — h2 x 0.745, as before */
+    --t-statement: 1.78rem; /* 24.5 — statement x 0.603, as before */
+    --t-price: 3.45rem;     /* 47.5 — price x 0.727, as before */
   }
 }
 
@@ -238,8 +244,8 @@ html {
     --t-eyebrow: 0.9rem;    /* 12.4 / 11.7 — micro-label floor is 11.5 */
     --t-small: 1.0625rem;   /* 14.6 / 13.8 — prose floor is 13.5 */
     --t-ui: 1.125rem;       /* 15.5 / 14.6 */
-    --t-body: 1.235rem;     /* 17.0 / 16.1 — body must clear 16px on a phone */
-    --t-lead: 1.4rem;       /* 19.3 / 18.2 — keeps its step above body */
+    --t-body: 1.31rem;      /* 18.0 / 17.0 — body must clear 16px on a phone */
+    --t-lead: 1.47rem;      /* 20.2 / 19.1 — keeps its step above body */
   }
 }
 
@@ -269,8 +275,8 @@ html {
   --fg: var(--ink);
   --fg-body: var(--slate);
   --fg-soft: var(--mist);
-  --line: #dfe4e6;
-  --line-warm: #e6dccf;
+  --line: rgba(32, 36, 42, 0.12);
+  --line-warm: rgba(0, 126, 155, 0.16);
   --accent: var(--sand-ink);
   --accent-lg: var(--sand-deep);
   --rule: var(--sand-deep);
@@ -314,12 +320,15 @@ button { background: none; border: 0; cursor: pointer; }
 
 h1, h2, h3 {
   font-family: var(--display);
+  font-optical-sizing: auto;
   font-weight: 600;
   line-height: 1.08;
   letter-spacing: -0.025em;
   color: var(--fg);
 }
 h1 { font-size: var(--t-h1); }
+/* Moodboard section 04: H3 is weight 500, H1/H2 600. */
+h3 { font-weight: 500; }
 h2 { font-size: var(--t-h2); }
 h3 { font-size: var(--t-h3); }
 
@@ -376,8 +385,13 @@ h3 { font-size: var(--t-h3); }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 700;
-  color: var(--accent);
+  /* Concrete on the shared class, themed via the descendant override below:
+     a theme-varying var() here would make the Webflow conversion emit two
+     different records under one class name, and Webflow's site-wide
+     merge-by-name keeps only one. Same computed values either way. */
+  color: #007E9B;
 }
+[data-theme="dark"] .chapter-tag { color: #8FDCEC; }
 .chapter-tag i {
   flex: none;
   display: block;
@@ -389,9 +403,10 @@ h3 { font-size: var(--t-h3); }
 
 .lead {
   font-size: var(--t-lead);
-  color: var(--fg-body);
+  color: #525A64; /* concrete for the shared record — see .chapter-tag note */
   max-width: 56ch;
 }
+[data-theme="dark"] .lead { color: rgba(255, 255, 255, 0.78); }
 .muted { color: var(--fg-body); }
 .small { font-size: var(--t-small); }
 .fine {
@@ -404,8 +419,9 @@ h3 { font-size: var(--t-h3); }
   letter-spacing: 0.18em;
   text-transform: uppercase;
   font-weight: 700;
-  color: var(--accent);
+  color: #007E9B; /* concrete for the shared record — see .chapter-tag note */
 }
+[data-theme="dark"] .label { color: #8FDCEC; }
 
 /* An inline <sup> inside a flex row becomes its own flex item and opens a gap
    mid-word. Anything that mixes flex with a registered-trademark mark must
@@ -432,7 +448,7 @@ h3 { font-size: var(--t-h3); }
   gap: 0.55rem;
   padding: 0.95rem 1.6rem;
   border-radius: 999px;
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: var(--t-ui);
   font-weight: 600;
   letter-spacing: 0.01em;
@@ -466,7 +482,7 @@ h3 { font-size: var(--t-h3); }
 .btn:hover { transform: translateY(-2px); box-shadow: var(--shadow-lift); }
 .btn:active { transform: translateY(0); }
 
-.btn--sand { background: var(--sand-deep); color: var(--white); }
+.btn--sand { background: var(--sand-deep); color: var(--on-accent); }
 .btn--ghost {
   background: transparent;
   border-color: var(--line);
@@ -505,7 +521,7 @@ h3 { font-size: var(--t-h3); }
 .site-head.is-solid {
   background: rgba(255, 255, 255, 0.95);
   border-bottom-color: var(--line);
-  box-shadow: 0 10px 30px -24px rgba(27, 34, 36, 0.5);
+  box-shadow: 0 10px 30px -24px rgba(32, 36, 42, 0.5);
 }
 .site-head .wrap {
   display: flex;
@@ -522,7 +538,7 @@ h3 { font-size: var(--t-h3); }
   position: absolute;
   inset: 0 0 auto 0;
   height: 2px;
-  background: rgba(27, 34, 36, 0.08);
+  background: rgba(32, 36, 42, 0.08);
   overflow: hidden;
 }
 .head-progress i {
@@ -550,7 +566,7 @@ h3 { font-size: var(--t-h3); }
   min-width: 16ch;
 }
 .chapter-readout b {
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: 0.9rem;
   font-weight: 600;
   color: var(--accent);
@@ -581,8 +597,8 @@ h3 { font-size: var(--t-h3); }
   color: var(--fg-soft);
 }
 .head-phone span:last-child {
-  font-family: var(--display);
-  font-size: 1.0625rem;
+  font-family: var(--body);
+  font-size: var(--t-body);
   font-weight: 600;
   color: var(--fg);
 }
@@ -609,10 +625,10 @@ h3 { font-size: var(--t-h3); }
   gap: clamp(0.75rem, 2vw, 1.5rem);
   padding: 0.7rem 0.7rem 0.7rem 1.5rem;
   border-radius: 999px;
-  background: rgba(27, 34, 36, 0.96);
+  background: rgba(32, 36, 42, 0.96);
   backdrop-filter: blur(14px);
   -webkit-backdrop-filter: blur(14px);
-  box-shadow: 0 24px 60px -28px rgba(27, 34, 36, 0.85);
+  box-shadow: 0 24px 60px -28px rgba(32, 36, 42, 0.85);
   color: var(--white);
   transition: transform 0.6s var(--ease), opacity 0.4s var(--ease);
   opacity: 0;
@@ -637,8 +653,8 @@ h3 { font-size: var(--t-h3); }
 }
 .offer-rail .rail-call {
   flex: none;
-  font-family: var(--display);
-  font-size: 1.0625rem;
+  font-family: var(--body);
+  font-size: var(--t-body);
   font-weight: 600;
   color: var(--white);
 }
@@ -697,13 +713,13 @@ h3 { font-size: var(--t-h3); }
 .price-meta { display: grid; gap: 0.35rem; }
 .price-save {
   display: inline-block;
-  font-family: var(--display);
+  font-family: var(--body);
   font-size: var(--t-eyebrow);
   font-weight: 700;
   letter-spacing: 0.1em;
   text-transform: uppercase;
-  color: var(--white);
-  background: var(--sage);
+  color: var(--on-accent);
+  background: var(--sand-deep);
   padding: 0.3rem 0.7rem;
   border-radius: 999px;
   justify-self: start;
@@ -739,7 +755,7 @@ h3 { font-size: var(--t-h3); }
               transform 0.35s var(--ease);
 }
 .chip:hover { border-color: var(--rule); color: var(--fg); transform: translateY(-2px); }
-.chip .tick { display: inline-block; vertical-align: -2px; margin-right: 0.4rem; color: var(--sage); }
+.chip .tick { display: inline-block; vertical-align: -2px; margin-right: 0.4rem; color: var(--sand-ink); }
 
 /* ---------- Check lists ---------- */
 .checks { display: grid; gap: 0.9rem; }
@@ -750,16 +766,16 @@ h3 { font-size: var(--t-h3); }
   align-items: start;
   color: var(--fg-body);
 }
-.checks li .tick { color: var(--sage); margin-top: 0.2rem; }
+.checks li .tick { color: var(--sand-ink); margin-top: 0.2rem; }
 .checks strong { color: var(--fg); font-weight: 600; }
 
 /* ---------- Rating ---------- */
 .rating { display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap; }
 .stars { display: inline-flex; gap: 2px; color: #e3b341; }
 .rating .score {
-  font-family: var(--display);
+  font-family: var(--body);
   font-weight: 700;
-  font-size: 1.0625rem;
+  font-size: var(--t-body);
   color: var(--fg);
 }
 .rating .src { font-size: var(--t-small); color: var(--fg-soft); }
@@ -772,13 +788,35 @@ h3 { font-size: var(--t-h3); }
   padding: clamp(1.25rem, 2.5vw, 1.75rem);
 }
 .card--warm { background: var(--bg-3); border-color: var(--line-warm); }
+
+/* The moodboard specifies Deep Cyan #007E9B as the accessible cyan for text on
+   light, and against white it is: 4.71:1. Against its own Ice ground it falls
+   to 4.26:1, which is under AA for the 11.5px bold labels this design puts
+   there. One step darker on the same hue clears it at 4.95:1. Scoped to the
+   Ice panels only, so Deep Cyan is untouched everywhere the moodboard actually
+   specified it. */
+.card--warm, .ledger, .call-box { --accent: #00738D; }
 .card--flat { box-shadow: none; }
 
 .grid { display: grid; gap: clamp(1rem, 2vw, 1.5rem); grid-template-columns: 1fr; }
-@media (min-width: 640px) { .grid { grid-template-columns: repeat(2, 1fr); } }
-@media (min-width: 980px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
+@media (min-width: 768px) { .grid { grid-template-columns: repeat(2, 1fr); } }
+/* .grid--3 states its own column count at EVERY width, rather than leaning on
+   .grid below 980. A combo beats its base class at equal specificity in every
+   media query, so a combo that only declares its widest value keeps that value
+   all the way down once the Webflow conversion bakes min-width rules to base —
+   which put three review cards side by side on a 478px phone.
+   Its middle tier is authored at the WEBFLOW-CANONICAL 768/992 widths, not the
+   640/980 the rest of this sheet uses. A three-tier ladder is the one shape the
+   converter cannot express off non-canonical widths: it bakes the widest rule to
+   base and resolves the rest per Webflow breakpoint, and a 640 middle tier falls
+   between `small` (<=767) and `medium` (<=991), so it is dropped and tablets
+   inherit the 1fr source base instead of two columns. Two-tier rules like .grid
+   are unaffected. Match the live site: medium 2col, small/tiny 1col. */
+.grid--3 { grid-template-columns: 1fr; }
+@media (min-width: 768px) { .grid--3 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 992px) { .grid--3 { grid-template-columns: repeat(3, 1fr); } }
 .grid--2 { grid-template-columns: 1fr; }
-@media (min-width: 640px) { .grid--2 { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 768px) { .grid--2 { grid-template-columns: repeat(2, 1fr); } }
 
 .tile {
   background: var(--card);
@@ -949,7 +987,7 @@ h3 { font-size: var(--t-h3); }
   box-shadow: var(--shadow-card);
 }
 .form-head { text-align: center; margin-bottom: 1.25rem; }
-.form-head .h2 { font-family: var(--display); font-size: 1.35rem; font-weight: 600; margin-block: 0.5rem 0.35rem; }
+.form-head .form-h2 { font-family: var(--display); font-size: 1.35rem; font-weight: 600; margin-block: 0.5rem 0.35rem; }
 
 .progress { display: flex; gap: 0.35rem; margin-bottom: 1.25rem; }
 .progress span {
@@ -1020,7 +1058,7 @@ h3 { font-size: var(--t-h3); }
    at 16px for exactly this reason. Must come after the rule above — same
    specificity. Bounded at 478 to match the reading tier it borrows from. */
 @media (max-width: 478px) { .field input { font-size: var(--t-body); } }
-.field input:focus { border-color: var(--sand-deep); outline: none; box-shadow: 0 0 0 3px rgba(168, 135, 95, 0.16); }
+.field input:focus { border-color: var(--sand-deep); outline: none; box-shadow: 0 0 0 3px rgba(0, 180, 216, 0.16); }
 .field input.invalid { border-color: #c0523f; }
 .field .err { font-size: var(--t-small); color: #c0523f; min-height: 1em; }
 
@@ -1072,7 +1110,7 @@ button[disabled]:hover { transform: none; box-shadow: none; }
   gap: clamp(1.75rem, 4vw, 2.5rem);
   grid-template-columns: 1fr;
 }
-@media (min-width: 640px) { .foot-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 768px) { .foot-grid { grid-template-columns: repeat(2, 1fr); } }
 @media (min-width: 980px) { .foot-grid { grid-template-columns: 1.4fr 1fr 1fr 1fr; } }
 .site-foot .brand img { filter: brightness(0) invert(1); opacity: 0.92; }
 .site-foot a:hover { color: var(--sand); }
