@@ -154,6 +154,40 @@ Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (
 
 - **Retired VPS paths**: When a repo restructure makes an old VPS-only path obsolete, first migrate any assets that still belong in the system, then add the retired path to `scripts/deploy-cleanup.sh`. Deployment cleanup must stay allowlisted and explicit; do not use broad `git clean -fdx` cleanup because valid ignored media intentionally lives on the VPS.
 
+#### 4.2.1 Worktree → main asset mirror (automatic)
+
+Excluding media from Git is load-bearing in three places, so the rule does not bend: it keeps merges
+clean, keeps the VPS `git pull` lean, and keeps the deploy's clean-tree gate
+(`test -z "$(git status --porcelain)"` in `.github/workflows/deploy-vps.yml`) passing — ignored files
+do not appear in `git status`, tracked ones would. **Un-ignoring assets would break the deploy.**
+
+The cost is that `git merge bk-<client>` brings the markup into `main` but not the images it
+references, so a design opened from `main` renders broken. Since every worktree lives on one machine
+and shares one `.git`, that gap is closed by a local copy — **not** by rclone, which is strictly the
+local↔VPS channel:
+
+```bash
+bash scripts/mirror-assets.sh                 # scopes derived from HEAD's paths
+bash scripts/mirror-assets.sh --all --dry-run # full sweep, preview only
+bash scripts/mirror-assets.sh --to-worktree   # reverse: main -> this worktree
+bash scripts/mirror-assets.sh --prune-dry-run # list orphans; never deletes
+```
+
+This runs **automatically after every commit in every worktree** via `scripts/hooks/post-commit`,
+wired up by `git config core.hooksPath <main>/scripts/hooks` (set by `scripts/bootstrap.sh`, and
+required once per clone). Notes that matter:
+
+- The hooks path is **absolute** by design. Worktrees share one config, but a *relative* hooksPath
+  resolves against each worktree's own root, so a `bk-*` worktree on a branch predating
+  `scripts/hooks/` would silently run no hook. For the same reason the hook resolves
+  `mirror-assets.sh` from the **main** worktree, never the calling one.
+- The mirror is **additive** — it never deletes in the destination. An asset deleted in a worktree
+  lingers in `main`; find those with `--prune-dry-run` and remove them by hand.
+- The hook always exits 0. `post-commit` cannot undo a commit anyway, and a failed asset copy must
+  never surface as an error that derails the agent mid-task.
+- Set `WEBZITE_SKIP_ASSET_MIRROR=1` for scripted bulk commits that would otherwise rescan the same
+  folders once per commit.
+
 ### 4.3 Branching Strategy
 - **`main`**: Production-ready state of the system. Protected — no direct pushes.
 - **`dev`**: Active development and integration branch.

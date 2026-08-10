@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+# Webzite post-commit hook — mirror ignored heavy assets into the main worktree.
+#
+# Installed to .git/hooks/post-commit, which is in the SHARED git common dir, so
+# this one file fires from every worktree including ones created later.
+#
+# Never fails a commit. post-commit runs after the commit object exists, so a
+# non-zero exit cannot undo it, but it CAN surface a scary error to the agent and
+# derail whatever it was doing. An asset copy is not worth that, so every path
+# here exits 0.
+#
+# Source of truth is scripts/mirror-assets.sh; this is only the trigger.
+
+# Resolve the script from the MAIN worktree, never from the calling one. This
+# hook is shared by every worktree, and a worktree can easily lack the file --
+# sitting on an older commit, or on a branch predating it. Looking it up locally
+# made the hook exit silently and do nothing, which is worse than failing loudly.
+MAIN="$(git worktree list --porcelain 2>/dev/null | awk '/^worktree /{print substr($0,10); exit}')"
+[[ -n "$MAIN" ]] || exit 0
+SCRIPT="$MAIN/scripts/mirror-assets.sh"
+
+if [[ ! -f "$SCRIPT" ]]; then
+  echo "post-commit: $SCRIPT missing — heavy assets NOT mirrored to main." >&2
+  exit 0
+fi
+
+# WEBZITE_SKIP_ASSET_MIRROR=1 for bulk/scripted commits that would otherwise
+# re-scan the same folders once per commit.
+[[ -n "${WEBZITE_SKIP_ASSET_MIRROR:-}" ]] && exit 0
+
+bash "$SCRIPT" --quiet || true
+exit 0
