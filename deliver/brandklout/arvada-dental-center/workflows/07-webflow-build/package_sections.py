@@ -389,6 +389,27 @@ def rem_to_root_var(css: str) -> str:
     return "\n".join(out)
 
 
+STATE_FRAGMENT = re.compile(
+    r"(\[data-(?:rail|active|open|wzsr|wz-chrome|quiz-[\w-]+)"
+    r"(?:[~|^$*]?=\s*['\"]?[^\]'\"]*['\"]?)?\]"
+    r"|\.(?:is|has)-[\w-]+"
+    r"|\.(?:solid|in)(?![\w-]))")
+
+
+def state_parts(compound: str) -> str:
+    """The runtime-state fragments `matchable` removes from a compound.
+
+    `matchable` strips them so tree-shaking can ask whether a rule could ever
+    apply. That answer must not leak into the structural decision: `.nav.solid`
+    matches the nav root only WHEN it is solid, and dropping the whole compound
+    as "an ancestor that is the root" discarded the condition — the nav's
+    chapter readout, which is meant to fade in once you scroll, was emitted
+    permanently visible on all six pages. Whatever was stripped comes back,
+    attached to :scope.
+    """
+    return "".join(m.group(0) for m in STATE_FRAGMENT.finditer(compound))
+
+
 def _is_root(compound: str, sec, soup) -> bool:
     """Does the section element itself match this single compound?"""
     probe = matchable(compound)
@@ -454,9 +475,12 @@ def scope_complex(sel: str, ren: dict[str, str], root_token: str, sec, soup) -> 
     if dropped_type:
         root = (sec.name or "div") + root
 
-    # Ancestors that ARE the section root.
+    # Ancestors that ARE the section root. Any runtime-state fragment on such
+    # a compound is a CONDITION, not structure, so it moves onto :scope rather
+    # than being dropped with the rest of the compound.
     lead = " "
     while len(toks) >= 3 and _is_root(toks[0], sec, soup):
+        root += state_parts(toks[0])
         lead = toks[1]
         toks = toks[2:]
 
@@ -762,6 +786,21 @@ def build(page: str, asset_base: str, report: list):
                 r"\.(fromTo|from|to|set)\(\s*(['\"])([#.][^'\"]*)\2",
                 lambda mm: f".{mm.group(1)}(__qa({mm.group(2)}{mm.group(3)}{mm.group(2)})",
                 inner)
+            # Class names in HTML the chapter BUILDS at runtime.
+            #
+            # Renaming only covered strings that look like selectors ('.x',
+            # '#y'). next-door's year timeline writes its own markup —
+            # `notes.innerHTML = '<p class="yr-note">' + ... ` — so those
+            # paragraphs arrived carrying the un-namespaced class, matched none
+            # of the section's scoped CSS, and rendered as unstyled body text.
+            # The fidelity diff is the only gate that saw it: nothing errors,
+            # nothing leaks, and the text is present and readable, just wrong.
+            inner = re.sub(
+                r'class=(\\?["\'])([^"\'<>]*)\1',
+                lambda mm: "class=" + mm.group(1) + " ".join(
+                    ren.get(c, c) for c in mm.group(2).split()) + mm.group(1),
+                inner)
+
             # Same for a ScrollTrigger `trigger:` given as a string.
             inner = re.sub(
                 r"(trigger:\s*)(['\"])([#.][^'\"]*)\2",

@@ -2,203 +2,43 @@
   {
     "page": "aox",
     "compared": 461,
-    "diffs": 1,
-    "byProp": {
-      "opacity": 1
-    },
-    "sample": [
-      {
-        "block": "nav",
-        "path": "/1/1/0",
-        "tag": "P",
-        "prop": "opacity",
-        "design": "0",
-        "packaged": "1"
-      }
-    ]
+    "diffs": 0,
+    "byProp": {},
+    "sample": []
   },
   {
     "page": "dentist-near-me",
     "compared": 363,
-    "diffs": 1,
-    "byProp": {
-      "opacity": 1
-    },
-    "sample": [
-      {
-        "block": "nav",
-        "path": "/1/1/0",
-        "tag": "P",
-        "prop": "opacity",
-        "design": "0",
-        "packaged": "1"
-      }
-    ]
+    "diffs": 0,
+    "byProp": {},
+    "sample": []
   },
   {
     "page": "emergency",
     "compared": 362,
-    "diffs": 1,
-    "byProp": {
-      "opacity": 1
-    },
-    "sample": [
-      {
-        "block": "nav",
-        "path": "/1/1/0",
-        "tag": "P",
-        "prop": "opacity",
-        "design": "0",
-        "packaged": "1"
-      }
-    ]
+    "diffs": 0,
+    "byProp": {},
+    "sample": []
   },
   {
     "page": "implants",
     "compared": 435,
-    "diffs": 1,
-    "byProp": {
-      "opacity": 1
-    },
-    "sample": [
-      {
-        "block": "nav",
-        "path": "/1/1/0",
-        "tag": "P",
-        "prop": "opacity",
-        "design": "0",
-        "packaged": "1"
-      }
-    ]
+    "diffs": 0,
+    "byProp": {},
+    "sample": []
   },
   {
     "page": "next-door",
     "compared": 313,
-    "diffs": 27,
-    "byProp": {
-      "opacity": 1,
-      "fontSize": 7,
-      "lineHeight": 7,
-      "color": 3,
-      "fontFamily": 3,
-      "fontWeight": 3,
-      "borderTopColor": 3
-    },
-    "sample": [
-      {
-        "block": "nav",
-        "path": "/1/1/0",
-        "tag": "P",
-        "prop": "opacity",
-        "design": "0",
-        "packaged": "1"
-      },
-      {
-        "block": "years",
-        "path": "/0/0/4/0",
-        "tag": "P",
-        "prop": "fontSize",
-        "design": "16.5615px",
-        "packaged": "15.2014px"
-      },
-      {
-        "block": "years",
-        "path": "/0/0/4/0",
-        "tag": "P",
-        "prop": "lineHeight",
-        "design": "28.1546px",
-        "packaged": "25.8424px"
-      },
-      {
-        "block": "years",
-        "path": "/0/0/4/0/0",
-        "tag": "B",
-        "prop": "color",
-        "design": "rgb(255, 255, 255)",
-        "packaged": "rgba(255, 255, 255, 0.76)"
-      },
-      {
-        "block": "years",
-        "path": "/0/0/4/0/0",
-        "tag": "B",
-        "prop": "fontSize",
-        "design": "16.5615px",
-        "packaged": "15.2014px"
-      },
-      {
-        "block": "years",
-        "path": "/0/0/4/0/0",
-        "tag": "B",
-        "prop": "fontFamily",
-        "design": "Cinzel, Georgia, serif",
-        "packaged": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif"
-      },
-      {
-        "block": "years",
-        "path": "/0/0/4/0/0",
-        "tag": "B",
-        "prop": "fontWeight",
-        "design": "600",
-        "packaged": "700"
-      },
-      {
-        "block": "years",
-        "path": "/0/0/4/0/0",
-        "tag": "B",
-        "prop": "lineHeight",
-        "design": "28.1546px",
-        "packaged": "25.8424px"
-      },
-      {
-        "block": "years",
-        "path": "/0/0/4/0/0",
-        "tag": "B",
-        "prop": "borderTopColor",
-        "design": "rgb(255, 255, 255)",
-        "packaged": "rgba(255, 255, 255, 0.76)"
-      },
-      {
-        "block": "years",
-        "path": "/0/0/4/1",
-        "tag": "P",
-        "prop": "fontSize",
-        "design": "16.5615px",
-        "packaged": "15.2014px"
-      },
-      {
-        "block": "years",
-        "path": "/0/0/4/1",
-        "tag": "P",
-        "prop": "lineHeight",
-        "design": "28.1546px",
-        "packaged": "25.8424px"
-      },
-      {
-        "block": "years",
-        "path": "/0/0/4/1/0",
-        "tag": "B",
-        "prop": "color",
-        "design": "rgb(255, 255, 255)",
-        "packaged": "rgba(255, 255, 255, 0.76)"
-      }
-    ]
+    "diffs": 0,
+    "byProp": {},
+    "sample": []
   },
   {
     "page": "veneers",
     "compared": 406,
-    "diffs": 1,
-    "byProp": {
-      "opacity": 1
-    },
-    "sample": [
-      {
-        "block": "nav",
-        "path": "/1/1/0",
-        "tag": "P",
-        "prop": "opacity",
-        "design": "0",
-        "packaged": "1"
-      }
-    ]
+    "diffs": 0,
+    "byProp": {},
+    "sample": []
   }
 ]

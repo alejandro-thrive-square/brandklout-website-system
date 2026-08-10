@@ -22,7 +22,7 @@
   scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
   scrollbar-width:none;padding-bottom:calc(.6 * var(--wz-root, 16px))}:scope [data-rail="on"]{width:auto;max-width:100%;overflow-x:auto;overscroll-behavior-x:contain;
   scroll-snap-type:x proximity;-webkit-overflow-scrolling:touch;
-  scrollbar-width:none;padding-bottom:calc(.6 * var(--wz-root, 16px))}:scope[data-rail="on"]::-webkit-scrollbar{display:none}:scope [data-rail="on"]::-webkit-scrollbar{display:none}:scope*{scroll-snap-align:start}:scope *{scroll-snap-align:start}:scope .card p{font-size:calc(calc(.94 * var(--wz-root, 16px))*var(--s-tx));color:var(--fg-body)}:scope .compare .is-best{background:rgba(3,197,236,.09);color:var(--fg);font-weight:600;
+  scrollbar-width:none;padding-bottom:calc(.6 * var(--wz-root, 16px))}:scope[data-rail="on"]::-webkit-scrollbar{display:none}:scope [data-rail="on"]::-webkit-scrollbar{display:none}:scope[data-rail="on"]*{scroll-snap-align:start}:scope[data-rail="on"] *{scroll-snap-align:start}:scope .card p{font-size:calc(calc(.94 * var(--wz-root, 16px))*var(--s-tx));color:var(--fg-body)}:scope .compare .is-best{background:rgba(3,197,236,.09);color:var(--fg);font-weight:600;
   box-shadow:inset 2px 0 0 var(--cyan)}:scope .compare thead .is-best{background:var(--cyan);color:var(--ink-950)}:scope .faq__a > div{overflow:hidden}:scope .faq__a p{padding-bottom:clamp(calc(1 * var(--wz-root, 16px)),2vw,calc(1.4 * var(--wz-root, 16px)));color:var(--fg-body);font-size:calc(calc(.95 * var(--wz-root, 16px))*var(--s-tx));
   max-width:70ch}:scope .quiz__progress i{display:block;height:100%;width:0;background:var(--cyan-deep);
   transition:width .5s var(--ease)}:scope.nxd-ch-years{background:var(--ink-950)}:scope .nxd-stage{min-height:100svh;display:grid;align-content:center;
@@ -553,7 +553,7 @@ var pin = __q('#nxd-yrPin'),
     if (W.reduced) {
       big.textContent = '2025';
       gsap.set(rail, { scaleX: 1 });
-      notes.innerHTML = NOTES.map(function (n) { return '<p class="yr-note">' + n + '</p>'; }).join('');
+      notes.innerHTML = NOTES.map(function (n) { return '<p class="nxd-yr-note">' + n + '</p>'; }).join('');
       return;
     }
 
@@ -563,7 +563,7 @@ var pin = __q('#nxd-yrPin'),
       var i = Math.max(0, Math.min(2, Math.floor((state.v - 2003) / 7.34)));
       if (i !== state.idx) {
         state.idx = i;
-        notes.innerHTML = '<p class="yr-note" data-note>' + NOTES[i] + '</p>';
+        notes.innerHTML = '<p class="nxd-yr-note" data-note>' + NOTES[i] + '</p>';
         gsap.from(notes.firstChild, { opacity: 0, y: 16, duration: .4, ease: 'power2.out' });
       }
     }

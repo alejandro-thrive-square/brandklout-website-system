@@ -1,6 +1,31 @@
 [
   {
     "page": "aox",
+    "section": "nav",
+    "root": "aox-sec-nav",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(0, 0, 0, 0)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1440
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "aox",
     "section": "arrival",
     "root": "aox-arrival",
     "ok": true,
@@ -11,17 +36,17 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "63.36px",
+      "headSize": "92.1684px",
       "width": 1425
     },
     "motion": {
       "triggers": 1,
       "pinned": 0,
-      "states": 9,
+      "states": 11,
       "stranded": []
     },
     "errors": []
@@ -37,8 +62,8 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": null,
@@ -64,18 +89,18 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 7,
       "pinned": 0,
-      "states": 3,
+      "states": 7,
       "stranded": []
     },
     "errors": []
@@ -92,11 +117,11 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -118,18 +143,18 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 9,
       "pinned": 1,
-      "states": 8,
+      "states": 6,
       "stranded": []
     },
     "errors": []
@@ -146,11 +171,11 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -172,12 +197,12 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(19, 25, 38)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -199,19 +224,94 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 3,
       "pinned": 0,
-      "states": 1,
+      "states": 5,
       "stranded": []
+    },
+    "errors": []
+  },
+  {
+    "page": "aox",
+    "section": "footer",
+    "root": "aox-footer",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1425
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "aox",
+    "section": "actionbar",
+    "root": "aox-sec-actionbar",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(10, 13, 20, 0.94)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 0
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "dentist-near-me",
+    "section": "nav",
+    "root": "dnm-sec-nav",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(0, 0, 0, 0)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1440
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
     },
     "errors": []
   },
@@ -227,17 +327,17 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "20.9px",
+      "headSize": "72.0066px",
       "width": 1425
     },
     "motion": {
       "triggers": 1,
       "pinned": 0,
-      "states": 10,
+      "states": 11,
       "stranded": []
     },
     "errors": []
@@ -253,8 +353,8 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": null,
@@ -280,12 +380,12 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -308,11 +408,11 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -334,18 +434,18 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 5,
       "pinned": 1,
-      "states": 7,
+      "states": 6,
       "stranded": []
     },
     "errors": []
@@ -361,12 +461,12 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(19, 25, 38)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -388,19 +488,94 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 3,
       "pinned": 0,
-      "states": 1,
+      "states": 5,
       "stranded": []
+    },
+    "errors": []
+  },
+  {
+    "page": "dentist-near-me",
+    "section": "footer",
+    "root": "dnm-footer",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1425
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "dentist-near-me",
+    "section": "actionbar",
+    "root": "dnm-sec-actionbar",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(10, 13, 20, 0.94)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 0
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "emergency",
+    "section": "nav",
+    "root": "emg-sec-nav",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(0, 0, 0, 0)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1440
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
     },
     "errors": []
   },
@@ -416,17 +591,17 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "63.36px",
+      "headSize": "92.1684px",
       "width": 1425
     },
     "motion": {
       "triggers": 1,
       "pinned": 0,
-      "states": 9,
+      "states": 11,
       "stranded": []
     },
     "errors": []
@@ -442,8 +617,8 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": null,
@@ -470,17 +645,17 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 2,
       "pinned": 1,
-      "states": 5,
+      "states": 3,
       "stranded": []
     },
     "errors": []
@@ -496,18 +671,18 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 8,
       "pinned": 0,
-      "states": 8,
+      "states": 7,
       "stranded": []
     },
     "errors": []
@@ -524,17 +699,17 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 9,
       "pinned": 1,
-      "states": 8,
+      "states": 6,
       "stranded": []
     },
     "errors": []
@@ -550,12 +725,12 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(19, 25, 38)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -577,19 +752,94 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 6,
       "pinned": 0,
-      "states": 5,
+      "states": 6,
       "stranded": []
+    },
+    "errors": []
+  },
+  {
+    "page": "emergency",
+    "section": "footer",
+    "root": "emg-footer",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1425
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "emergency",
+    "section": "actionbar",
+    "root": "emg-sec-actionbar",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(10, 13, 20, 0.94)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 0
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "implants",
+    "section": "nav",
+    "root": "imp-sec-nav",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(0, 0, 0, 0)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1440
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
     },
     "errors": []
   },
@@ -605,11 +855,11 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "63.36px",
+      "headSize": "92.1684px",
       "width": 1425
     },
     "motion": {
@@ -631,8 +881,8 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": null,
@@ -658,12 +908,12 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -686,11 +936,11 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -712,18 +962,18 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(19, 25, 38)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 6,
       "pinned": 0,
-      "states": 9,
+      "states": 11,
       "stranded": []
     },
     "errors": []
@@ -739,18 +989,18 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 9,
       "pinned": 1,
-      "states": 8,
+      "states": 6,
       "stranded": []
     },
     "errors": []
@@ -767,11 +1017,11 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -793,19 +1043,94 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 4,
       "pinned": 0,
-      "states": 5,
+      "states": 6,
       "stranded": []
+    },
+    "errors": []
+  },
+  {
+    "page": "implants",
+    "section": "footer",
+    "root": "imp-footer",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1425
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "implants",
+    "section": "actionbar",
+    "root": "imp-sec-actionbar",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(10, 13, 20, 0.94)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 0
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "next-door",
+    "section": "nav",
+    "root": "nxd-sec-nav",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(0, 0, 0, 0)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1440
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
     },
     "errors": []
   },
@@ -821,17 +1146,17 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "63.36px",
+      "headSize": "92.1684px",
       "width": 1425
     },
     "motion": {
       "triggers": 1,
       "pinned": 0,
-      "states": 9,
+      "states": 11,
       "stranded": []
     },
     "errors": []
@@ -847,8 +1172,8 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": null,
@@ -858,7 +1183,7 @@
     "motion": {
       "triggers": 1,
       "pinned": 1,
-      "states": 7,
+      "states": 6,
       "stranded": []
     },
     "errors": []
@@ -874,8 +1199,8 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": null,
@@ -902,17 +1227,17 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 2,
       "pinned": 1,
-      "states": 7,
+      "states": 6,
       "stranded": []
     },
     "errors": []
@@ -928,18 +1253,18 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 7,
       "pinned": 1,
-      "states": 8,
+      "states": 6,
       "stranded": []
     },
     "errors": []
@@ -956,11 +1281,11 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -982,19 +1307,94 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 3,
       "pinned": 0,
-      "states": 1,
+      "states": 5,
       "stranded": []
+    },
+    "errors": []
+  },
+  {
+    "page": "next-door",
+    "section": "footer",
+    "root": "nxd-footer",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1425
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "next-door",
+    "section": "actionbar",
+    "root": "nxd-sec-actionbar",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(10, 13, 20, 0.94)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 0
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "veneers",
+    "section": "nav",
+    "root": "vnr-sec-nav",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(0, 0, 0, 0)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1440
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
     },
     "errors": []
   },
@@ -1010,17 +1410,17 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "63.36px",
+      "headSize": "92.1684px",
       "width": 1425
     },
     "motion": {
       "triggers": 1,
       "pinned": 0,
-      "states": 9,
+      "states": 11,
       "stranded": []
     },
     "errors": []
@@ -1036,8 +1436,8 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": null,
@@ -1064,17 +1464,17 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 9,
       "pinned": 0,
-      "states": 10,
+      "states": 9,
       "stranded": []
     },
     "errors": []
@@ -1090,12 +1490,12 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -1118,17 +1518,17 @@
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
       "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 11,
       "pinned": 1,
-      "states": 9,
+      "states": 6,
       "stranded": []
     },
     "errors": []
@@ -1144,18 +1544,18 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 5,
       "pinned": 0,
-      "states": 1,
+      "states": 5,
       "stranded": []
     },
     "errors": []
@@ -1171,18 +1571,18 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(19, 25, 38)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
       "triggers": 6,
       "pinned": 0,
-      "states": 8,
+      "states": 9,
       "stranded": []
     },
     "errors": []
@@ -1198,12 +1598,12 @@
     "gsapTags": 3,
     "own": {
       "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
-      "rootBg": "rgb(14, 18, 25)",
-      "rootFontSize": "10.45px",
+      "rootBg": "rgb(246, 248, 250)",
+      "rootFontSize": "15.2014px",
       "box": "content-box",
       "tagDisplay": "flex",
       "headFont": "Cinzel, Georgia, serif",
-      "headSize": "31.68px",
+      "headSize": "46.0842px",
       "width": 1425
     },
     "motion": {
@@ -1211,6 +1611,56 @@
       "pinned": 0,
       "states": 5,
       "stranded": []
+    },
+    "errors": []
+  },
+  {
+    "page": "veneers",
+    "section": "footer",
+    "root": "vnr-footer",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgb(10, 13, 20)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 1425
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
+    },
+    "errors": []
+  },
+  {
+    "page": "veneers",
+    "section": "actionbar",
+    "root": "vnr-sec-actionbar",
+    "ok": true,
+    "leaks": [],
+    "armed": 2,
+    "dupes": 2,
+    "gsapTags": 3,
+    "own": {
+      "rootFont": "\"Open Sans\", \"Helvetica Neue\", Arial, sans-serif",
+      "rootBg": "rgba(10, 13, 20, 0.94)",
+      "rootFontSize": "15.2014px",
+      "box": "content-box",
+      "tagDisplay": null,
+      "headFont": null,
+      "headSize": null,
+      "width": 0
+    },
+    "motion": {
+      "triggers": 0,
+      "moved": null
     },
     "errors": []
   }
