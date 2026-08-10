@@ -28,21 +28,49 @@
    one rule centres every testimonial and team caption subtree. */
 figcaption{text-align:inherit;margin-top:0}
 blockquote{border-left:0;padding:0}
-/* The design carries no sup rule at all, so these are the browser's own
-   defaults, restated to beat Webflow's `sub,sup{font-size:75%;line-height:0}`.
-   line-height must be `inherit`, not `normal`: sup has no line-height of its own
-   and takes the paragraph's, so `normal` collapses the mark onto a different
-   baseline than the copy around it. */
-sup{font-size:smaller;line-height:inherit;vertical-align:super;position:static;top:auto}
-/* Every <sup> came through as a verbatim HtmlEmbed, and an embed is a DIV — a
-   block box in the middle of a sentence, so all 19 registered-trademark marks
-   on invisalign started their own line (the design has them inline) and the
-   page ran 552px tall. Collapsing the wrapper to inline puts the mark back in
-   the run of text. NOTE this cannot fix the cases where the embed sits inside a
-   <p>: a div is not phrasing content, so the parser has already CLOSED the
-   paragraph before it, and no CSS can un-split a DOM the parser built. Those
-   need the mark to stop being an embed at all — see FINDINGS.md. */
-.w-embed:has(> sup){display:inline}
+/* The design carries no sup rule at all, so the correct instruction is not
+   "set these values" but "undo Webflow's author rule and keep the browser
+   default" — which is what `revert` means. Restating the values by hand went
+   wrong twice: `line-height:normal` put the mark on its own baseline, and
+   `line-height:inherit` was worse still, because it copies the parent's
+   COMPUTED 23.1px whereas the design's unitless 1.65 is re-resolved against the
+   mark's own smaller font-size. That inflated every line box holding a mark and
+   pushed the offer chips from 43px to 112px. `revert` reproduces the design
+   exactly and cannot drift from it. */
+sup{font-size:revert;line-height:revert;vertical-align:revert;position:revert;top:revert}
+/* Every inline SVG and every <sup> came through as a verbatim HtmlEmbed, and an
+   embed is a DIV — a block box where the design has no box at all. 55 of the 56
+   embeds on invisalign wrap exactly one inline thing, and each one forces a
+   line break: the offer chips measured 91px against the design's 43px while the
+   tick inside them was a correct 14x14 on both sides. The box between them was
+   the whole difference.
+   `display:contents` removes that box rather than re-typing it, so the svg
+   becomes a layout child of .chip and the design's own
+   `.chip .tick{display:inline-block}` lands exactly as authored. Re-typing the
+   wrapper as `inline` instead leaves a box that still carries the wrapper's
+   margins and does not reproduce the design.
+   NOTE this still cannot fix the marks that sit inside a <p>: a div is not
+   phrasing content, so the parser has already CLOSED the paragraph before it,
+   and no CSS can un-split a DOM the parser built. See FINDINGS.md. */
+/* The class is repeated THREE times for a reason. The converter copies the
+   svg's own class onto the wrapper, so the wrapper of a tick is
+   `<div class="tick w-embed">` — and the embed carries its own <style> in the
+   BODY containing `.chip .tick{display:inline-block}`, written for the svg.
+   That selector matches the wrapper too, ties `.w-embed:has(> svg)` on
+   specificity, and wins on source order because a body <style> comes after the
+   head. The first attempt at this rule therefore did nothing at all and the
+   chips stayed 91px. Out-ranking it is the whole trick. */
+.w-embed.w-embed.w-embed:has(> svg),
+.w-embed.w-embed.w-embed:has(> sup){display:contents}
+/* `display:contents` gets the wrapper out of the box tree but does NOT restore
+   the inline flow: the chips still measured 145x112 against the design's
+   165x43, with the tick and the mark each on their own line. Three separate
+   theories about why were wrong, so this value comes from applying candidate
+   rules to the live page and measuring (see chip-experiment.mjs). Laying the
+   chip out as a flex row reproduces the design: widths 165 and 213 land exactly,
+   height 41 against 43. The design says `inline-block` here; that is not a
+   contradiction, it is a compensation for a wrapper the design never had. */
+.chip{display:flex;align-items:center}
 .consent.consent{font-weight:400}
 
 /* 4a. The two custom properties still referenced by a surviving inline style.

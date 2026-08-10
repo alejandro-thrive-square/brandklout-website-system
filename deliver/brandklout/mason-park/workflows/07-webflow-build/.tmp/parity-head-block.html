@@ -12,7 +12,10 @@
 [data-theme="dark"] .btn--ghost.btn--ghost.btn--ghost.btn--ghost{border-color:rgba(255,255,255,0.34);color:#ffffff}
 figcaption{text-align:inherit;margin-top:0}
 blockquote{border-left:0;padding:0}
-sup{font-size:smaller;line-height:inherit;vertical-align:super;position:static;top:auto}
+sup{font-size:revert;line-height:revert;vertical-align:revert;position:revert;top:revert}
+.w-embed.w-embed.w-embed:has(> svg),
+.w-embed.w-embed.w-embed:has(> sup){display:contents}
+.chip{display:flex;align-items:center}
 .consent.consent{font-weight:400}
 :root{--display:"Fraunces",Georgia,"Times New Roman",serif;--t-body:1.125rem}
 @media (max-width:478px){:root{--t-body:1.31rem}}
