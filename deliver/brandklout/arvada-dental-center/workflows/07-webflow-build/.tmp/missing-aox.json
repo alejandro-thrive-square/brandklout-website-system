@@ -1,0 +1,121 @@
+[
+ {
+  "sel": "*,*::before,*::after",
+  "body": "box-sizing:border-box",
+  "media": null,
+  "mapped": "*,*::before,*::after",
+  "n": 660
+ },
+ {
+  "sel": "img,video,svg",
+  "body": "max-width:100%;display:block",
+  "media": null,
+  "mapped": "img,video,svg",
+  "n": 25
+ },
+ {
+  "sel": "h1,h2,h3,h4",
+  "body": "margin:0;font-family:var(--f-display);font-weight:600;line-height:1.06; letter-spacing:.005em;color:var(--fg)",
+  "media": null,
+  "mapped": "h1,h2,h3,h4",
+  "n": 24
+ },
+ {
+  "sel": "h1,h2,h3,.since",
+  "body": "overflow-wrap:break-word",
+  "media": null,
+  "mapped": "h1,h2,h3,.aox-since",
+  "n": 24
+ },
+ {
+  "sel": ".wrap>*,.grid>*,.flow>*",
+  "body": "min-width:0",
+  "media": null,
+  "mapped": ".aox-wrap>*,.aox-grid>*,.aox-flow>*",
+  "n": 30
+ },
+ {
+  "sel": ".label,.eyebrow",
+  "body": "font-family:var(--f-ui);font-size:var(--label);letter-spacing:.2em; text-transform:uppercase;font-weight:700;color:var(--accent)",
+  "media": null,
+  "mapped": ".aox-label,.aox-eyebrow",
+  "n": 11
+ },
+ {
+  "sel": ".btn>span,.btn>svg",
+  "body": "position:relative;z-index:1",
+  "media": null,
+  "mapped": ".aox-btn>span,.aox-btn>svg",
+  "n": 11
+ },
+ {
+  "sel": ".btn-row>.btn",
+  "body": "flex:1 1 100%",
+  "media": "@media(max-width:560px)",
+  "mapped": ".aox-btn-row>.aox-btn",
+  "n": 7
+ },
+ {
+  "sel": ".actionbar .btn",
+  "body": "padding:.85rem .6rem;font-size:calc(.66rem*var(--s-tx));letter-spacing:.1em;min-height:46px; min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis",
+  "media": null,
+  "mapped": ".aox-actionbar .aox-btn",
+  "n": 2
+ },
+ {
+  "sel": "[data-theme=\"light\"] .card",
+  "body": "background:var(--card);box-shadow:0 1px 3px rgba(20,24,33,.05)",
+  "media": null,
+  "mapped": "[data-theme=\"light\"] .aox-card",
+  "n": 4
+ },
+ {
+  "sel": ".compare th,.compare td",
+  "body": "padding:clamp(.8rem,1.5vw,1.15rem);text-align:left; border-bottom:1px solid var(--line);vertical-align:top",
+  "media": null,
+  "mapped": ".aox-compare th,.aox-compare td",
+  "n": 24
+ },
+ {
+  "sel": ".faq__a>div",
+  "body": "overflow:hidden",
+  "media": null,
+  "mapped": ".aox-faq__a>div",
+  "n": 5
+ },
+ {
+  "sel": ".form-card .h3,.form-card h3",
+  "body": "color:var(--ink)",
+  "media": null,
+  "mapped": ".aox-form-card .aox-h3,.aox-form-card h3",
+  "n": 1
+ },
+ {
+  "sel": ".field input,.field select,.field textarea",
+  "body": "width:100%;font:inherit;font-size:calc(.95rem*var(--s-tx)); padding:.8rem .9rem;border:1px solid rgba(20,24,33,.2);border-radius:10px;background:#fff; color:var(--ink);min-height:46px",
+  "media": null,
+  "mapped": ".aox-field input,.aox-field select,.aox-field textarea",
+  "n": 3
+ },
+ {
+  "sel": ".ftr address",
+  "body": "font-style:normal;font-size:calc(.92rem*var(--s-tx));line-height:1.9",
+  "media": null,
+  "mapped": ".aox-ftr address",
+  "n": 2
+ },
+ {
+  "sel": "*,*::before,*::after",
+  "body": "animation-duration:.001ms!important;animation-iteration-count:1!important; transition-duration:.001ms!important;scroll-behavior:auto!important",
+  "media": "@media (prefers-reduced-motion: reduce)",
+  "mapped": "*,*::before,*::after",
+  "n": 660
+ },
+ {
+  "sel": "[data-rv],[data-anim=\"hide\"]",
+  "body": "opacity:1!important;visibility:visible!important; transform:none!important;clip-path:none!important",
+  "media": "@media (prefers-reduced-motion: reduce)",
+  "mapped": "[data-rv],[data-anim=\"hide\"]",
+  "n": 18
+ }
+]

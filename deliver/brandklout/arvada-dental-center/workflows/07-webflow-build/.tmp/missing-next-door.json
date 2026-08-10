@@ -1,0 +1,86 @@
+[
+ {
+  "sel": "*,*::before,*::after",
+  "body": "box-sizing:border-box",
+  "media": null,
+  "mapped": "*,*::before,*::after",
+  "n": 160
+ },
+ {
+  "sel": "img,video,svg",
+  "body": "max-width:100%;display:block",
+  "media": null,
+  "mapped": "img,video,svg",
+  "n": 5
+ },
+ {
+  "sel": "h1,h2,h3,h4",
+  "body": "margin:0;font-family:var(--f-display);font-weight:600;line-height:1.06; letter-spacing:.005em;color:var(--fg)",
+  "media": null,
+  "mapped": "h1,h2,h3,h4",
+  "n": 1
+ },
+ {
+  "sel": "h1,h2,h3,.since",
+  "body": "overflow-wrap:break-word",
+  "media": null,
+  "mapped": "h1,h2,h3,.nxd-since",
+  "n": 2
+ },
+ {
+  "sel": ".wrap>*,.grid>*,.flow>*",
+  "body": "min-width:0",
+  "media": null,
+  "mapped": ".nxd-wrap>*,.nxd-grid>*,.nxd-flow>*",
+  "n": 13
+ },
+ {
+  "sel": ".label,.eyebrow",
+  "body": "font-family:var(--f-ui);font-size:var(--label);letter-spacing:.2em; text-transform:uppercase;font-weight:700;color:var(--accent)",
+  "media": null,
+  "mapped": ".nxd-label,.nxd-eyebrow",
+  "n": 4
+ },
+ {
+  "sel": ".btn>span,.btn>svg",
+  "body": "position:relative;z-index:1",
+  "media": null,
+  "mapped": ".nxd-btn>span,.nxd-btn>svg",
+  "n": 4
+ },
+ {
+  "sel": ".btn-row>.btn",
+  "body": "flex:1 1 100%",
+  "media": "@media(max-width:560px)",
+  "mapped": ".nxd-btn-row>.nxd-btn",
+  "n": 2
+ },
+ {
+  "sel": ".form-card .h3,.form-card h3",
+  "body": "color:var(--ink)",
+  "media": null,
+  "mapped": ".nxd-form-card .nxd-h3,.nxd-form-card h3",
+  "n": 1
+ },
+ {
+  "sel": ".field input,.field select,.field textarea",
+  "body": "width:100%;font:inherit;font-size:calc(.95rem*var(--s-tx)); padding:.8rem .9rem;border:1px solid rgba(20,24,33,.2);border-radius:10px;background:#fff; color:var(--ink);min-height:46px",
+  "media": null,
+  "mapped": ".nxd-field input,.nxd-field select,.nxd-field textarea",
+  "n": 4
+ },
+ {
+  "sel": "*,*::before,*::after",
+  "body": "animation-duration:.001ms!important;animation-iteration-count:1!important; transition-duration:.001ms!important;scroll-behavior:auto!important",
+  "media": "@media (prefers-reduced-motion: reduce)",
+  "mapped": "*,*::before,*::after",
+  "n": 160
+ },
+ {
+  "sel": "[data-rv],[data-anim=\"hide\"]",
+  "body": "opacity:1!important;visibility:visible!important; transform:none!important;clip-path:none!important",
+  "media": "@media (prefers-reduced-motion: reduce)",
+  "mapped": "[data-rv],[data-anim=\"hide\"]",
+  "n": 9
+ }
+]
