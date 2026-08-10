@@ -19,83 +19,16 @@ DEEP DIFF  invisalign
        - <br> (no text)  [body]
        - <div> (no text)  [body]
        - <p> Offer terms: $1,000 off applies to all-inclusive Invisalign   [body]
-  [x24] text align:  design=start   staging=center
-         @ dark/proof <figcaption> (no text)   [staging classes: inv-figcaption]
-         @ dark/proof <span.who> Gabriel Sanchez
-         @ dark/proof <span.when> Google review
-         @ dark/proof <svg.g-mark> (no text)
-  [x8] display:  design=grid   staging=block
-         @ light/invitation <div.answer-wrap> (no text)
-         @ light/invitation <div.answer-wrap> (no text)
-         @ light/invitation <div.answer-wrap> (no text)
-         @ light/invitation <div.answer-wrap> (no text)
-  [x7] display:  design=block   staging=flex
+  [x3] display:  design=block   staging=flex
          @ light/arrival <div> (no text)   [staging classes: rating]
-         @ light/arrival <li.chip> Free consultation
-         @ light/arrival <li.chip> Free 3D & wellness scan
-         @ light/arrival <li.chip> Free Vivera retainers
-  [x7] text colour:  design=rgb(143, 220, 236)   staging=rgb(0, 126, 155)
-         @ dark/correction <p.chapter-tag> (no text)   [staging classes: inv-p chapter-tag]
-         @ dark/correction <i> (no text)   [staging classes: inv-i-5]
-         @ dark/correction <span> Chapter 02 · What It Corrects   [staging classes: inv-div-2]
-         @ dark/proof <p.chapter-tag> (no text)   [staging classes: inv-p-11 chapter-tag]
-  [x6] line height:  design=19.25px   staging=0px
-         @ light/arrival <sup> ®
-         @ light/arrival <sup> ®
+         @ light/invitation <div> (no text)   [staging classes: inv-div-2 btn-row]
+         @ -/- <div> (no text)   [staging classes: foot-base]
+  [x2] font size:  design=11.6667px   staging=15px
          @ light/inclusion <sup> ®
          @ -/- <sup> ®
-  [x5] font size:  design=11.6667px   staging=10.5px
-         @ light/arrival <sup> ®
-         @ light/arrival <sup> ®
-         @ -/- <sup> ®
-         @ -/- <sup> ®
-  [x5] font size:  design=15px   staging=13.5px
-         @ light/inclusion <sup> ®
-         @ light/inclusion <sup> ®
-         @ light/invitation <sup> ®
-         @ light/invitation <sup> ®
-  [x5] line height:  design=24.75px   staging=0px
-         @ light/inclusion <sup> ®
-         @ light/inclusion <sup> ®
-         @ light/invitation <sup> ®
-         @ light/invitation <sup> ®
-  [x4] background:  design=rgb(255, 255, 255)   staging=rgba(0, 0, 0, 0)
-         @ light/arrival <li.chip> Free consultation
-         @ light/arrival <li.chip> Free 3D & wellness scan
-         @ light/arrival <li.chip> Free Vivera retainers
-         @ light/arrival <li.chip> Free KOR whitening gel
-  [x4] font size:  design=15.3333px   staging=13.8px
-         @ light/invitation <sup> ®
-         @ light/invitation <sup> ®
-         @ light/invitation <sup> ®
-         @ light/invitation <sup> ®
-  [x4] line height:  design=25.3px   staging=0px
-         @ light/invitation <sup> ®
-         @ light/invitation <sup> ®
-         @ light/invitation <sup> ®
-         @ light/invitation <sup> ®
-  [x3] font weight:  design=400   staging=700
-         @ light/arrival <label.consent> (no text)
-         @ light/arrival <input> (no text)
-         @ light/arrival <span> I agree to be contacted about my consultation. By providing 
-  [x3] border colour:  design=rgba(255, 255, 255, 0.78)/rgba(255, 255, 255, 0.78)/rgba(255, 255, 255, 0.78)/rgba(255, 255, 255, 0.78)   staging=rgba(255, 255, 255, 0.78)/rgba(255, 255, 255, 0.78)/rgba(255, 255, 255, 0.78)/rgb(226, 226, 226)
-         @ dark/proof <blockquote> “Very friendly staff and were willing to help in every way!    [staging classes: inv-blockquote]
-         @ dark/proof <blockquote> “I've been coming to this dental office ever since childhood   [staging classes: inv-blockquote]
-         @ dark/proof <blockquote> “Jen is the best so personable and relatable. Makes the proc   [staging classes: inv-blockquote]
-  [x3] border width:  design=0px/0px/0px/0px   staging=0px/0px/0px/5px
-         @ dark/proof <blockquote> “Very friendly staff and were willing to help in every way!    [staging classes: inv-blockquote]
-         @ dark/proof <blockquote> “I've been coming to this dental office ever since childhood   [staging classes: inv-blockquote]
-         @ dark/proof <blockquote> “Jen is the best so personable and relatable. Makes the proc   [staging classes: inv-blockquote]
-  [x2] text colour:  design=rgb(255, 255, 255)   staging=rgb(82, 90, 100)
-         @ -/- <div.offer-rail> (no text)
-         @ -/- <span.rail-sep> (no text)
-  [x2] font size:  design=11.6667px   staging=13.5px
-         @ light/inclusion <sup> ®
-         @ -/- <sup> ®
-  [x1] background:  design=rgba(32, 36, 42, 0.96)   staging=rgba(0, 0, 0, 0)
-         @ -/- <div.offer-rail> (no text)
-  [x1] border radius:  design=999px   staging=0px
-         @ -/- <div.offer-rail> (no text)
+  [x2] display:  design=block   staging=grid
+         @ light/invitation <div.answer> (no text)   [staging classes: answer-wrap]
+         @ -/- <div.wrap> (no text)   [staging classes: foot-grid]
   [x1] text colour:  design=rgb(82, 90, 100)   staging=rgb(90, 100, 114)
          @ light/arrival <div.rating> (no text)   [staging classes: arr-cue]
   [x1] font size:  design=18px   staging=11.52px
@@ -106,36 +39,30 @@ DEEP DIFF  invisalign
          @ light/arrival <div.rating> (no text)   [staging classes: arr-cue]
   [x1] letter spacing:  design=normal   staging=2.304px
          @ light/arrival <div.rating> (no text)   [staging classes: arr-cue]
-  [x1] background:  design=rgb(0, 180, 216)   staging=rgba(32, 36, 42, 0.12)
-         @ light/arrival <span.on> (no text)
-  [x1] font family:  design=Fraunces   staging=Inter
-         @ light/arrival <p> When would you like to start?
-  [x1] text colour:  design=rgba(255, 255, 255, 0.78)   staging=rgb(82, 90, 100)
-         @ dark/correction <p.lead> These are the cases we treat most often. Keep scrolling to w   [staging classes: inv-p-5 lead]
-  [x1] border colour:  design=rgba(227, 247, 251, 0.157)/rgba(227, 247, 251, 0.157)/rgba(227, 247, 251, 0.157)/rgba(227, 247, 251, 0.157)   staging=rgba(243, 251, 253, 0.145)/rgba(243, 251, 253, 0.145)/rgba(243, 251, 253, 0.145)/rgba(243, 251, 253, 0.145)
+  [x1] border colour:  design=rgba(0, 180, 216, 0.55)/rgba(0, 180, 216, 0.55)/rgba(0, 180, 216, 0.55)/rgba(0, 180, 216, 0.55)   staging=rgba(10, 183, 217, 0.506)/rgba(10, 183, 217, 0.506)/rgba(10, 183, 217, 0.506)/rgba(10, 183, 217, 0.506)
          @ dark/correction <article.cor-card> (no text)
-  [x1] text colour:  design=rgb(0, 115, 141)   staging=rgb(0, 126, 155)
-         @ light/inclusion <span.on> Regular   [staging classes: inv-div-2 on]
-  [x1] font size:  design=12.5px   staging=11.25px
-         @ light/provider <sup> ®
-  [x1] line height:  design=20.625px   staging=0px
-         @ light/provider <sup> ®
+  [x1] border colour:  design=rgba(225, 246, 250, 0.157)/rgba(225, 246, 250, 0.157)/rgba(225, 246, 250, 0.157)/rgba(225, 246, 250, 0.157)   staging=rgba(180, 233, 244, 0.184)/rgba(180, 233, 244, 0.184)/rgba(180, 233, 244, 0.184)/rgba(180, 233, 244, 0.184)
+         @ dark/correction <article.cor-card> (no text)
+  [x1] border colour:  design=rgba(253, 254, 255, 0.14)/rgba(253, 254, 255, 0.14)/rgba(253, 254, 255, 0.14)/rgba(253, 254, 255, 0.14)   staging=rgba(217, 244, 249, 0.157)/rgba(217, 244, 249, 0.157)/rgba(217, 244, 249, 0.157)/rgba(217, 244, 249, 0.157)
+         @ dark/correction <article.cor-card> (no text)
+  [x1] border colour:  design=rgba(253, 255, 255, 0.14)/rgba(253, 255, 255, 0.14)/rgba(253, 255, 255, 0.14)/rgba(253, 255, 255, 0.14)   staging=rgba(222, 245, 250, 0.157)/rgba(222, 245, 250, 0.157)/rgba(222, 245, 250, 0.157)/rgba(222, 245, 250, 0.157)
+         @ dark/correction <article.cor-card> (no text)
+  [x1] line height:  design=19.25px   staging=24.75px
+         @ light/inclusion <sup> ®
   [x1] text colour:  design=rgb(38, 41, 47)   staging=rgb(82, 90, 100)
          @ light/invitation <sup> ®
-  [x1] font size:  design=9.6px   staging=13.5px
+  [x1] font size:  design=9.6px   staging=15px
          @ light/invitation <sup> ®
   [x1] font weight:  design=700   staging=400
          @ light/invitation <sup> ®
-  [x1] line height:  design=15.84px   staging=0px
+  [x1] line height:  design=15.84px   staging=24.75px
          @ light/invitation <sup> ®
   [x1] text transform:  design=uppercase   staging=none
          @ light/invitation <sup> ®
   [x1] letter spacing:  design=2.0736px   staging=normal
          @ light/invitation <sup> ®
-  [x1] border colour:  design=rgba(32, 36, 42, 0.45)/rgba(32, 36, 42, 0.45)/rgba(32, 36, 42, 0.45)/rgba(32, 36, 42, 0.45)   staging=rgba(32, 36, 42, 0.12)/rgba(32, 36, 42, 0.12)/rgba(32, 36, 42, 0.12)/rgba(32, 36, 42, 0.12)
-         @ light/invitation <a.btn.btn--ghost.btn--lg> Call   [staging classes: inv-a-6 btn btn--ghost btn--lg]
-  [x1] display:  design=block   staging=grid
-         @ -/- <div.wrap> (no text)   [staging classes: foot-grid]
+  [x1] display:  design=grid   staging=block
+         @ -/- <div.foot-grid> (no text)   [staging classes: inv-div-2]
   [x1] text colour:  design=rgba(255, 255, 255, 0.72)   staging=rgba(255, 255, 255, 0.55)
          @ -/- <div> (no text)   [staging classes: foot-base]
   [x1] border colour:  design=rgba(255, 255, 255, 0.72)/rgba(255, 255, 255, 0.72)/rgba(255, 255, 255, 0.72)/rgba(255, 255, 255, 0.72)   staging=rgba(255, 255, 255, 0.12)/rgba(255, 255, 255, 0.55)/rgba(255, 255, 255, 0.55)/rgba(255, 255, 255, 0.55)
@@ -148,7 +75,7 @@ DEEP DIFF  invisalign
          @ -/- <div> (no text)   [staging classes: foot-base]
   [x1] text colour:  design=rgba(255, 255, 255, 0.45)   staging=rgba(255, 255, 255, 0.72)
          @ -/- <sup> ®
-  [x1] line height:  design=18.6667px   staging=0px
+  [x1] line height:  design=18.6667px   staging=24.75px
          @ -/- <sup> ®
 
 ==============================================================================
@@ -161,45 +88,6 @@ DEEP DIFF  new-patient-special
        - <article> #team (no text)  [#offerGrid]
        - <p> 21830 Kingsland Blvd #104A Katy, TX 77450  [body]
        - <br> (no text)  [body]
-  [x33] text align:  design=start   staging=center
-         @ light/team <figcaption> (no text)   [staging classes: nps-div-2]
-         @ light/team <p.name> Dr. Dave Cho
-         @ light/team <p.role> General Dentist
-         @ light/team <figcaption> (no text)   [staging classes: nps-div-2]
-  [x19] background:  design=rgb(255, 255, 255)   staging=rgba(0, 0, 0, 0)
-         @ light/arrival <section.chapter.ch-arrival> (no text)   [staging classes: nps-section chapter ch-arrival]
-         @ light/arrival <li.chip> Comprehensive exam
-         @ light/arrival <li.chip> X-rays
-         @ light/arrival <li.chip> Cleaning
-  [x18] display:  design=block   staging=flex
-         @ light/arrival <li.chip> Comprehensive exam
-         @ light/arrival <li.chip> X-rays
-         @ light/arrival <li.chip> Cleaning
-         @ light/arrival <li.chip> Full treatment plan
-  [x7] text colour:  design=rgb(143, 220, 236)   staging=rgb(0, 126, 155)
-         @ dark/visit <p.chapter-tag> (no text)   [staging classes: nps-p chapter-tag]
-         @ dark/visit <i> (no text)   [staging classes: nps-i-6]
-         @ dark/visit <span> Chapter 03 · The Visit   [staging classes: nps-div-2]
-         @ dark/proof <p.chapter-tag> (no text)   [staging classes: nps-p-8 chapter-tag]
-  [x3] font weight:  design=400   staging=700
-         @ light/arrival <label.consent> (no text)
-         @ light/arrival <input> (no text)
-         @ light/arrival <span> I agree to be contacted about my appointment. By providing m
-  [x3] font size:  design=11.6667px   staging=10.5px
-         @ light/invitation <sup> ®
-         @ -/- <sup> ®
-         @ -/- <sup> ®
-  [x3] line height:  design=19.25px   staging=0px
-         @ light/invitation <sup> ®
-         @ -/- <sup> ®
-         @ -/- <sup> ®
-  [x2] text colour:  design=rgb(255, 255, 255)   staging=rgb(82, 90, 100)
-         @ -/- <div.offer-rail> (no text)
-         @ -/- <span.rail-sep> (no text)
-  [x1] background:  design=rgba(32, 36, 42, 0.96)   staging=rgba(0, 0, 0, 0)
-         @ -/- <div.offer-rail> (no text)
-  [x1] border radius:  design=999px   staging=0px
-         @ -/- <div.offer-rail> (no text)
   [x1] display:  design=grid   staging=block
          @ light/arrival <div.wrap.arr-in> (no text)   [staging classes: arr-bg-after-nps]
   [x1] display:  design=block   staging=grid
@@ -216,22 +104,10 @@ DEEP DIFF  new-patient-special
          @ light/arrival <div.arr-cue> (no text)   [staging classes: rating]
   [x1] letter spacing:  design=2.304px   staging=normal
          @ light/arrival <div.arr-cue> (no text)   [staging classes: rating]
-  [x1] font family:  design=Fraunces   staging=Inter
-         @ light/arrival <p> What brings you in?
-  [x1] font size:  design=12.5px   staging=13.5px
+  [x1] font size:  design=12.5px   staging=15px
          @ light/team <sup> ®
-  [x1] line height:  design=20.625px   staging=0px
+  [x1] line height:  design=20.625px   staging=24.75px
          @ light/team <sup> ®
-  [x1] font size:  design=21.6667px   staging=19.5px
-         @ light/team <sup> ®
-  [x1] line height:  design=23.4px   staging=0px
-         @ light/team <sup> ®
-  [x1] text colour:  design=rgb(38, 41, 47)   staging=rgb(0, 126, 155)
-         @ light/invitation <p.eyebrow> New patient special   [staging classes: nps-p-14 eyebrow]
-  [x1] border colour:  design=rgba(32, 36, 42, 0.45)/rgba(32, 36, 42, 0.45)/rgba(32, 36, 42, 0.45)/rgba(32, 36, 42, 0.45)   staging=rgba(32, 36, 42, 0.12)/rgba(32, 36, 42, 0.12)/rgba(32, 36, 42, 0.12)/rgba(32, 36, 42, 0.12)
-         @ light/invitation <a.btn.btn--ghost.btn--lg> Call   [staging classes: nps-a-6 btn btn--ghost btn--lg]
-  [x1] text colour:  design=rgba(255, 255, 255, 0.45)   staging=rgb(90, 100, 114)
-         @ -/- <p.fine> Offer terms: the $189 New Patient Special covers a comprehen   [staging classes: nps-p-6 fine]
 
 ==============================================================================
 DEEP DIFF  thank-you
@@ -243,16 +119,3 @@ DEEP DIFF  thank-you
        - <br> #find (no text)  [#findPin]
        - <p> 21830 Kingsland Blvd #104A Katy, TX 77450  [body]
        - <br> (no text)  [body]
-  [x9] text align:  design=start   staging=center
-         @ dark/team <figcaption> (no text)   [staging classes: ty-div-2]
-         @ dark/team <p.name> Dr. Dave Cho   [staging classes: name-ty]
-         @ dark/team <p.role> General Dentist   [staging classes: role-ty]
-         @ dark/team <figcaption> (no text)   [staging classes: ty-div-2]
-  [x6] text colour:  design=rgb(143, 220, 236)   staging=rgb(0, 126, 155)
-         @ dark/received <p.chapter-tag> (no text)   [staging classes: ty-p chapter-tag]
-         @ dark/received <i> (no text)   [staging classes: ty-i-2]
-         @ dark/received <span> Chapter 00 · Received   [staging classes: ty-div-2]
-         @ dark/team <p.chapter-tag> (no text)   [staging classes: ty-p chapter-tag]
-  [x2] text colour:  design=rgba(255, 255, 255, 0.78)   staging=rgb(82, 90, 100)
-         @ dark/received <p.lead> It has reached the front desk at Mason Park Dental of Katy,    [staging classes: ty-p-2 lead]
-         @ dark/team <p.lead> Dr. Sung, Dr. Cho and Dr. Nguyen are committed to providing    [staging classes: ty-p-8 lead]

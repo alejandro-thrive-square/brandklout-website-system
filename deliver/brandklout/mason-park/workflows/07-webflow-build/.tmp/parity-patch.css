@@ -1,0 +1,85 @@
+/* mpd-parity: rules the class model cannot hold — see 08-qa/.tmp/parity/FINDINGS.md */
+/* Every declaration below is copied from 04-design/.tmp/shared/mpd.css or a page's
+   own <style> block, with custom properties resolved to the concrete values in
+   that file's :root — the paste did not carry the properties across, so a var()
+   here would evaluate to nothing. Class names are repeated to out-rank the
+   generated page-prefixed combos (.inv-p.chapter-tag and friends); this block is
+   injected AFTER the Webflow stylesheet, so an equal-specificity rule also wins
+   on source order. */
+
+/* 1. Section themes. The design flips a block of custom properties per section;
+   the properties did not survive, so the grounds are re-asserted concretely.
+   :where() drops these to zero specificity on purpose — they are defaults that
+   any section's own class must still be able to override, which is exactly
+   their position in mpd.css. */
+:where([data-theme="light"]){background:#ffffff;color:#525A64}
+:where([data-theme="dark"]){background:#26292F;color:rgba(255,255,255,0.78)}
+
+/* 2. The dark-theme descendant overrides. Without these the two dark chapters
+   carry the LIGHT palette: #007E9B tags and #525A64 leads on near-black. */
+[data-theme="dark"] .chapter-tag,
+[data-theme="dark"] .chapter-tag *{color:#8FDCEC}
+[data-theme="dark"] .lead.lead{color:rgba(255,255,255,0.78)}
+[data-theme="dark"] .label.label{color:#8FDCEC}
+[data-theme="dark"] .btn--ghost.btn--ghost.btn--ghost.btn--ghost{border-color:rgba(255,255,255,0.34);color:#ffffff}
+
+/* 3. Webflow's own bare-tag defaults, which the design's reset would have beaten
+   locally. figcaption is the single largest source of drift on these pages —
+   one rule centres every testimonial and team caption subtree. */
+figcaption{text-align:inherit;margin-top:0}
+blockquote{border-left:0;padding:0}
+/* The design carries no sup rule at all, so these are the browser's own
+   defaults, restated to beat Webflow's `sub,sup{font-size:75%;line-height:0}`.
+   line-height must be `inherit`, not `normal`: sup has no line-height of its own
+   and takes the paragraph's, so `normal` collapses the mark onto a different
+   baseline than the copy around it. */
+sup{font-size:smaller;line-height:inherit;vertical-align:super;position:static;top:auto}
+/* Every <sup> came through as a verbatim HtmlEmbed, and an embed is a DIV — a
+   block box in the middle of a sentence, so all 19 registered-trademark marks
+   on invisalign started their own line (the design has them inline) and the
+   page ran 552px tall. Collapsing the wrapper to inline puts the mark back in
+   the run of text. NOTE this cannot fix the cases where the embed sits inside a
+   <p>: a div is not phrasing content, so the parser has already CLOSED the
+   paragraph before it, and no CSS can un-split a DOM the parser built. Those
+   need the mark to stop being an embed at all — see FINDINGS.md. */
+.w-embed:has(> sup){display:inline}
+.consent.consent{font-weight:400}
+
+/* 4a. The two custom properties still referenced by a surviving inline style.
+   The conversion baked the token layer out completely — the Webflow stylesheet
+   holds ZERO var() references — but the form's step legend came through inside
+   a verbatim embed with `font-family:var(--display);font-size:var(--t-body)`
+   still on it, which resolved to nothing and fell back to Inter. Defining just
+   these two puts the serif back without reviving the whole token layer. The
+   478px step matches the one in mpd.css. */
+:root{--display:"Fraunces",Georgia,"Times New Roman",serif;--t-body:1.125rem}
+@media (max-width:478px){:root{--t-body:1.31rem}}
+
+/* 4b. Scoped token remap. `.ledger` redefines --accent, so the ledger's active
+   step is a deeper cyan than the page accent. The baked rule in the site head
+   block carries the page value, so this has to out-rank it. */
+.ch-inclusion .ledger-steps span.on.on{color:#00738D}
+
+/* 5. Descendant rules with no class to live on. .faq .answer-wrap is FUNCTIONAL:
+   the accordion animates grid-template-rows, and the is-open half of the pair is
+   already installed above — without the base rule there is nothing to animate. */
+.faq .answer-wrap{display:grid;grid-template-rows:0fr;transition:grid-template-rows 0.45s cubic-bezier(0.22,0.61,0.36,1)}
+.faq .answer{overflow:hidden}
+.site-foot .fine.fine{color:rgba(255,255,255,0.45)}
+.progress span.on{background:#00B4D8}
+.ch-invitation .inv-close h2,
+.ch-invitation .inv-close .eyebrow.eyebrow{color:#26292F}
+.ch-invitation .inv-close .btn--ghost.btn--ghost{background:transparent;border-color:rgba(32,36,42,0.45);color:#26292F}
+
+/* 6. The sticky offer rail. Its class record kept only the font and colour and
+   lost every property that makes it a rail. `display` is deliberately NOT set
+   here — the record's main:flex / small:none / tiny:none ladder is correct, and
+   restating it would flatten the responsive behaviour. --gutter and --max are
+   resolved from mpd.css (clamp(1.25rem,4vw,2.5rem) and 73.75rem). */
+.offer-rail.offer-rail{position:fixed;left:50%;bottom:clamp(1rem,2.5vw,1.75rem);z-index:80;width:min(calc(100% - 2 * clamp(1.25rem,4vw,2.5rem)),73.75rem);transform:translate(-50%,calc(100% + 3rem));align-items:center;gap:clamp(0.75rem,2vw,1.5rem);padding:0.7rem 0.7rem 0.7rem 1.5rem;border-radius:999px;background:rgba(32,36,42,0.96);box-shadow:0 24px 60px -28px rgba(32,36,42,0.85);color:#ffffff;transition:transform 0.6s cubic-bezier(0.22,0.61,0.36,1),opacity 0.4s cubic-bezier(0.22,0.61,0.36,1);opacity:0}
+.offer-rail .rail-offer.rail-offer{flex:0 1 auto;min-width:0;color:rgba(255,255,255,0.88);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.offer-rail .rail-sep{flex:none;width:1px;height:24px;background:rgba(255,255,255,0.2)}
+.offer-rail .rail-call.rail-call{flex:none;font-weight:600;color:#ffffff}
+.offer-rail .rail-call.rail-call:hover{color:#8FDCEC}
+.offer-rail .btn{flex:none;margin-left:auto;white-space:nowrap}
+/* mpd-parity end */

@@ -378,17 +378,33 @@ for (const page of PAGES) {
       say(`       + ${n > 1 ? `(x${n}) ` : ""}vb=${ex?.vb} paths=${ex?.n} box=${ex?.box}  near: ${ex?.near}`);
     });
   }
-  // size / colour of the icons that DO match
-  const byGeo = new Map();
-  live.icons.forEach((x) => { if (!byGeo.has(x.geo)) byGeo.set(x.geo, x); });
+  // Size and colour of the icons that DO match. One geometry maps to MANY icons
+  // — the tick path is the same glyph in the chips, the check lists and the
+  // inclusion marks, at three different sizes — so keying a lookup on geometry
+  // alone matched every design tick against whichever staging tick came first
+  // and reported 24 phantom size differences. Compare the sorted set of boxes
+  // WITHIN each geometry instead, which is order-free and collision-free.
+  const group = (icons) => {
+    const m = new Map();
+    for (const x of icons) {
+      if (!m.has(x.geo)) m.set(x.geo, []);
+      m.get(x.geo).push(x);
+    }
+    return m;
+  };
+  const lg = group(local.icons), sg = group(live.icons);
   const iconStyle = [];
-  local.icons.forEach((x) => {
-    const m = byGeo.get(x.geo);
-    if (!m) return;
-    if (m.box !== x.box) iconStyle.push(`box design=${x.box} staging=${m.box}  near: ${x.near}`);
-    else if (m.stroke !== x.stroke || m.fill !== x.fill)
-      iconStyle.push(`colour design=${x.stroke}/${x.fill} staging=${m.stroke}/${m.fill}  near: ${x.near}`);
-  });
+  for (const [geo, les] of lg) {
+    const ses = sg.get(geo);
+    if (!ses || ses.length !== les.length) continue;   // count drift is reported above
+    const dims = (a) => a.map((x) => x.box).sort();
+    const cols = (a) => a.map((x) => `${x.stroke}/${x.fill}`).sort();
+    const ld = dims(les), sd = dims(ses), lc = cols(les), sc = cols(ses);
+    for (let i = 0; i < ld.length; i++) {
+      if (ld[i] !== sd[i]) iconStyle.push(`box design=${ld[i]} staging=${sd[i]}  near: ${les[i].near}`);
+      else if (lc[i] !== sc[i]) iconStyle.push(`colour design=${lc[i]} staging=${sc[i]}  near: ${les[i].near}`);
+    }
+  }
   if (iconStyle.length) {
     say(`  !! ${iconStyle.length} matched icons render differently:`);
     iconStyle.slice(0, 25).forEach((s) => say(`       ~ ${s}`));

@@ -2,86 +2,53 @@
 ========================================================================
 PAGE  invisalign
 ========================================================================
-  height   local 14082  staging 14634
+  height   local 14082  staging 14670
   h1       local ["A straighter smile, without anyone noticing."]
            live  ["A straighter smile, without anyone noticing."]
 
   TEXT     241 runs local / 241 staging
 
   IMAGES   10 local / 10 staging
-  !! assets in the design, absent on staging:
-       - (x2) logo   near: 00Arrival Open today 9:00 am – 6:00 pm(281) 767-8698 Book fr
-       - care-1   near: .ch-arrival { position: relative; overflow: hidden; padding-
-       - cherry   near: Payment plans In-office and third-party plans are available,
-       - dr-sung   near: Dr. William SungDMD
-       - badge-kois   near: Continuing education and accreditation
-       - badge-ssc   near: Continuing education and accreditation
-       - badge-agd   near: Continuing education and accreditation
-       - badge-aapd   near: Continuing education and accreditation
-       - badge-abpd   near: Continuing education and accreditation
-  !! assets on staging, absent from the design:
-       + (x2) 6a75f6f55de88305f0932586_logo   near: 00ArrivalOpen today 9:00 am – 6:00 pm(281) 767-8698 Book fre
-       + 6a75f6f46a20fa8ba8dababd_care-1   near: Chapter 00 · ArrivalA straighter smile, without anyone notic
-       + 6a75f6f46a20fa8ba8dabad3_cherry   near: Payment plansIn-office and third-party plans are available, 
-       + 6a75f6f59d16ef209fb2def2_dr-sung   near: Dr. William SungDMD
-       + 6a75f6f4801acb199feea0b6_badge-kois   near: Continuing education and accreditation
-       + 6a75f6f423da04c51f1ebf0c_badge-ssc   near: Continuing education and accreditation
-       + 6a75f6f4cb4cbbb84091e7ba_badge-agd   near: Continuing education and accreditation
-       + 6a75f6f323da04c51f1ebea5_badge-aapd   near: Continuing education and accreditation
-       + 6a75f6f39d16ef209fb2de54_badge-abpd   near: Continuing education and accreditation
-  !! <img> order differs (10 positions) — a swapped or shifted asset:
-       ~ #0 design=logo staging=6a75f6f55de88305f0932586_logo
-       ~ #1 design=care-1 staging=6a75f6f46a20fa8ba8dababd_care-1
-       ~ #2 design=cherry staging=6a75f6f46a20fa8ba8dabad3_cherry
-       ~ #3 design=dr-sung staging=6a75f6f59d16ef209fb2def2_dr-sung
-       ~ #4 design=badge-kois staging=6a75f6f4801acb199feea0b6_badge-kois
-       ~ #5 design=badge-ssc staging=6a75f6f423da04c51f1ebf0c_badge-ssc
-       ~ #6 design=badge-agd staging=6a75f6f4cb4cbbb84091e7ba_badge-agd
-       ~ #7 design=badge-aapd staging=6a75f6f323da04c51f1ebea5_badge-aapd
-       ~ #8 design=badge-abpd staging=6a75f6f39d16ef209fb2de54_badge-abpd
-       ~ #9 design=logo staging=6a75f6f55de88305f0932586_logo
 
   ICONS    37 local / 37 staging
-  !! 24 matched icons render differently:
-       ~ box design=12x12 staging=14x14  near: Free virtual or in-office consultation —
-       ~ box design=12x12 staging=14x14  near: Free 3D and wellness scan — digital scan
-       ~ box design=12x12 staging=14x14  near: Free set of Vivera® retainers — teeth sh
-       ~ box design=12x12 staging=14x14  near: Free KOR® teeth whitening gel — finish a
-       ~ box design=18x18 staging=16x16  near: 5.0 rated by our patients on Google
-       ~ box design=18x18 staging=16x16  near: 5.0 rated by our patients on Google
-       ~ box design=18x18 staging=16x16  near: 5.0 rated by our patients on Google
-       ~ box design=18x18 staging=16x16  near: 5.0 rated by our patients on Google
-       ~ box design=18x18 staging=16x16  near: 5.0 rated by our patients on Google
-       ~ box design=15x15 staging=16x16  near: “Very friendly staff and were willing to
-       ~ box design=15x15 staging=16x16  near: “Very friendly staff and were willing to
-       ~ box design=15x15 staging=16x16  near: “Very friendly staff and were willing to
-       ~ box design=15x15 staging=16x16  near: “Very friendly staff and were willing to
-       ~ box design=15x15 staging=16x16  near: “Very friendly staff and were willing to
-       ~ box design=15x15 staging=16x16  near: “I've been coming to this dental office 
-       ~ box design=15x15 staging=16x16  near: “I've been coming to this dental office 
-       ~ box design=15x15 staging=16x16  near: “I've been coming to this dental office 
-       ~ box design=15x15 staging=16x16  near: “I've been coming to this dental office 
-       ~ box design=15x15 staging=16x16  near: “I've been coming to this dental office 
-       ~ box design=15x15 staging=16x16  near: “Jen is the best so personable and relat
-       ~ box design=15x15 staging=16x16  near: “Jen is the best so personable and relat
-       ~ box design=15x15 staging=16x16  near: “Jen is the best so personable and relat
-       ~ box design=15x15 staging=16x16  near: “Jen is the best so personable and relat
-       ~ box design=15x15 staging=16x16  near: “Jen is the best so personable and relat
 
-  STYLES   186 comparable text elements, 13 differ
-       ~ "®" — fs: design=18px staging=14px; lh: design=28.875px staging=0px
-       ~ "Free consultation" — bg: design=rgb(255, 255, 255) staging=rgba(0, 0, 0, 0)
-       ~ "Free 3D & wellness scan" — bg: design=rgb(255, 255, 255) staging=rgba(0, 0, 0, 0)
-       ~ "Free Vivera retainers" — bg: design=rgb(255, 255, 255) staging=rgba(0, 0, 0, 0)
-       ~ "Free KOR whitening gel" — bg: design=rgb(255, 255, 255) staging=rgba(0, 0, 0, 0)
-       ~ "When would you like to start?" — ff: design=Fraunces staging=Inter
-       ~ "I agree to be contacted about my consult" — fw: design=400 staging=700
-       ~ "Chapter 02 · What It Corrects" — c: design=rgb(143, 220, 236) staging=rgb(0, 126, 155)
-       ~ "These are the cases we treat most often." — c: design=rgba(255, 255, 255, 0.78) staging=rgb(82, 90, 100)
-       ~ "Regular" — c: design=rgb(0, 115, 141) staging=rgb(0, 126, 155)
-       ~ "Chapter 05 · The Proof" — c: design=rgb(143, 220, 236) staging=rgb(0, 126, 155)
-       ~ "Continuing education and accreditation" — c: design=rgb(143, 220, 236) staging=rgb(0, 126, 155)
-       ~ "Offer terms: $1,000 off applies to all-i" — c: design=rgba(255, 255, 255, 0.45) staging=rgb(90, 100, 114)
+  STYLES   186 comparable text elements, 1 differ
+       ~ "®" — fs: design=18px staging=15px; lh: design=28.875px staging=24.75px
 
 ========================================================================
-PARITY: 65 differences between the design and staging.
+PAGE  new-patient-special
+========================================================================
+  height   local 14149  staging 14347
+  h1       local ["Your first visit, properly done."]
+           live  ["Your first visit, properly done."]
+
+  TEXT     191 runs local / 191 staging
+
+  IMAGES   13 local / 13 staging
+
+  ICONS    37 local / 37 staging
+
+  STYLES   163 comparable text elements, 1 differ
+       ~ "®" — fs: design=13px staging=15px; lh: design=20.625px staging=24.75px
+
+========================================================================
+PAGE  thank-you
+========================================================================
+  height   local 10496  staging 10496
+  h1       local ["Thank you — we have your request."]
+           live  ["Thank you — we have your request."]
+
+  TEXT     97 runs local / 97 staging
+  !! 1 text runs in the design that are NOT on staging:
+       - Received Monday 8:14 AM
+  !! 1 text runs on staging that are NOT in the design:
+       + Received Monday 8:15 AM
+
+  IMAGES   10 local / 10 staging
+
+  ICONS    4 local / 4 staging
+
+  STYLES   80 comparable text elements, 0 differ
+
+========================================================================
+PARITY: 4 differences between the design and staging.
