@@ -151,6 +151,38 @@ the newest converter lives THERE, not in the Dr. Nahlah folder:
    difference). Class every script embed (`wz-js`) and ship
    `.wz-js{display:none}` in the page CSS so the wrapper can never occupy a
    grid/flex cell — and make the simulator render the `w-embed` wrapper too.
+9. **Copy the client cannot EDIT — the defect no rendering gate can see
+   (2026-08-10).** Both build paths leave text runs with no element of their
+   own, and they render perfectly:
+   - `<li><i></i>Free consultation</li>` converts to a ListItem holding an
+     icon element plus a **loose string**. A string is not an element, so the
+     Navigator has nothing to select and the copy cannot be edited.
+   - Tags Webflow has no native element for — `dt`, `dd`, `b`, `figcaption`,
+     `small` — come through as `DOM` elements, which have **no text caret at
+     all**.
+
+   Both are invisible to parity, staging-verify and any screenshot: the page
+   looks and behaves exactly right. The client finds it in ten seconds.
+   **Audit for it explicitly** — any text String whose parent is a `DOM`
+   element, or which has element siblings, needs its own text element.
+   `make_lists_editable.mjs <page>` in the Grand Mission `.tmp` does the
+   repair: append a `TextBlock`, fill it, drop the loose String.
+
+   Four API facts that repair depends on, all measured — do not re-derive:
+   - **`set_text` reports success on a `Block` and changes nothing.** Write
+     copy with `data_element_settings_tool set_settings` key `text`.
+   - builder `type: 'TextBlock'` yields what the Designer calls a Text Block
+     (`Block[div]` + one String child); `set_style` at creation sticks.
+   - writing `text` onto a ListItem **replaces its children** — it would
+     delete the icon. Add a child and fill that instead.
+   - `BY_CUSTOM_TAG` always produces a `DOM` element, so it can never be the
+     fix; and a loose String node can be removed by id.
+
+   The wrapper is layout-neutral wherever the host is flex or grid, because a
+   run of text is ALREADY an anonymous flex/grid item there. Prove it rather
+   than assume it: in the browser, replace each wrapper with a text node and
+   re-measure (`probe_lists.mjs` / `inspect_tick.mjs`) — every box and the
+   document height must be unchanged.
 
 ## Gates
 
@@ -162,6 +194,16 @@ the newest converter lives THERE, not in the Dr. Nahlah folder:
 - After publish: `parity.mjs` (computed-style diff local vs live) and
   `staging-verify.mjs` (pins discovered from the live ScrollTrigger registry,
   3 distinct states at 25/50/75%, zero 404s/console errors).
+- **Editability**: every text run has an element of its own (trap 9). Nothing
+  else in this list can see it.
+
+**`parity.mjs` cannot answer "did MY edit move the layout".** Its numbers drift
+day to day for unrelated reasons — a page whose copy was never touched moved 10
+values against a three-day-old baseline, some by 160px (thank-you's open/closed
+banner is time-of-day dependent). Judge a change by an A/B on the SAME load:
+mutate the DOM back to the previous markup in the browser and re-measure. Use
+parity for the diff COUNT against the design, and keep an untouched page as a
+control when the count moves.
 
 ## Version Control
 

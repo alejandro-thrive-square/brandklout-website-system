@@ -36,24 +36,58 @@ import os from 'node:os';
 import path from 'node:path';
 import { pathToFileURL } from 'node:url';
 
-const CREDS = path.join(os.homedir(), '.claude-team', '.credentials.json');
+/* The grant is per-PROFILE, and which profile holds a live one depends on how
+   the session was started (`claude team` vs `claude personal`) and on which was
+   last re-authorized. Scan all of them and take the freshest — assuming the team
+   profile broke a run once the team copy had expired and the personal one had
+   been renewed. */
+const PROFILES = ['.claude-team', '.claude-personal', '.claude'];
 const KEY = 'webflow-brandklout|d3c3adf35e21c0dc';
 const URL_MCP = 'https://mcp.webflow.com/mcp';
 
 function readCreds() {
-  const all = JSON.parse(fs.readFileSync(CREDS, 'utf8'));
-  const entry = all.mcpOAuth?.[KEY];
-  if (!entry) throw new Error(`no grant at ${KEY} in ${CREDS}`);
-  return { all, entry };
+  const found = [];
+  for (const dir of PROFILES) {
+    const file = path.join(os.homedir(), dir, '.credentials.json');
+    if (!fs.existsSync(file)) continue;
+    let all;
+    try { all = JSON.parse(fs.readFileSync(file, 'utf8')); } catch { continue; }
+    const entry = all.mcpOAuth?.[KEY];
+    if (entry?.accessToken) found.push({ file, all, entry });
+  }
+  if (!found.length) {
+    throw new Error(`no grant at ${KEY} in any of ${PROFILES.join(', ')}`);
+  }
+  found.sort((a, b) => (b.entry.expiresAt ?? 0) - (a.entry.expiresAt ?? 0));
+  return found[0];
+}
+
+/* Webflow's stored discoveryState does not always carry a token endpoint, so
+   fall back to OAuth discovery rather than dying on a refresh. */
+async function discoverTokenEndpoint() {
+  const origin = new URL(URL_MCP).origin;
+  for (const u of [
+    `${origin}/.well-known/oauth-authorization-server`,
+    `${origin}/.well-known/openid-configuration`,
+  ]) {
+    try {
+      const r = await fetch(u);
+      if (!r.ok) continue;
+      const j = await r.json();
+      if (j.token_endpoint) return j.token_endpoint;
+    } catch { /* try the next one */ }
+  }
+  return null;
 }
 
 async function accessToken() {
-  const { all, entry } = readCreds();
+  const { file: CREDS, all, entry } = readCreds();
   if (entry.expiresAt && Date.now() < entry.expiresAt - 60_000) return entry.accessToken;
   if (!entry.refreshToken) throw new Error('access token expired and no refresh token present');
   const tokenUrl =
     entry.discoveryState?.authorizationServerMetadata?.token_endpoint ||
-    entry.discoveryState?.tokenEndpoint;
+    entry.discoveryState?.tokenEndpoint ||
+    (await discoverTokenEndpoint());
   if (!tokenUrl) throw new Error('no token endpoint in stored discoveryState');
   const r = await fetch(tokenUrl, {
     method: 'POST',
