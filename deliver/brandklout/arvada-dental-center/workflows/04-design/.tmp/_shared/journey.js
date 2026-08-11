@@ -80,7 +80,7 @@ window.WZ = (function () {
 
      It was two racing each other. Each chapter ran its own pair of tweens:
 
-       tl.to(body, { color:'#fff',    stagger:.32 }, 0)
+       tl.to(body, { color:'#403830',    stagger:.32 }, 0)
          .to(tail, { color:'#c8b282', stagger:.26 }, .4)
 
      The accent tween started at a fixed 0.4s regardless of how long the white
@@ -120,7 +120,7 @@ window.WZ = (function () {
     var body = words.slice(0, cut), tail = words.slice(cut);
     var tailAt = at + cut * step;
 
-    if (body.length) tl.to(body, { color: '#ffffff', stagger: step, duration: dur, ease: 'none' }, at);
+    if (body.length) tl.to(body, { color: '#403830', stagger: step, duration: dur, ease: 'none' }, at);
     if (tail.length) tl.to(tail, { color: accent, stagger: step, duration: dur, ease: 'none' }, tailAt);
 
     return { end: at + (words.length - 1) * step + dur, tail: tailAt };
