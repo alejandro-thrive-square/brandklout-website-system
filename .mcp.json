@@ -46,6 +46,10 @@
         "clientId": "1217205892702386",
         "callbackPort": 8080
       }
+    },
+    "relume": {
+      "type": "http",
+      "url": "https://relume-library-mcp.relume.io/mcp"
     }
   }
 }
