@@ -231,6 +231,23 @@ respected. Verify by driving the page (Chrome CDP or equivalent) and asserting b
 **Test in a focused tab.** Background tabs freeze transitions, IntersectionObserver, and timers,
 so a backgrounded check will report broken animation that is actually fine.
 
+**Colour that JS paints needs its own pass, with motion ON.** Any check that runs under
+`prefers-reduced-motion` — which is most of them, because it is the only state where a
+scroll-driven page renders complete — never executes the timelines, so it cannot see a colour a
+tween writes. On Arvada that hid a `sweepWords` call tweening its non-accent words to `#ffffff`
+on a cream ground: 15 of every 21 swept words animated to invisible, through a contrast pass
+and a full-page capture that both reported clean. Same exposure for any state a *click* reveals
+(selected quiz option, open FAQ) — those are tweened as rgba strings too.
+
+Scroll with motion on, collect console errors and exceptions, drive the controls, and read back
+the colour actually painted on the element. `workflows/08-qa/.tmp/runtime-colour.mjs` and
+`interact-colour.mjs` on the Arvada build are the reference implementations.
+
+One trap in writing those probes: **Webflow wraps every embed in a div carrying the same class**,
+so `querySelector('[class*="quiz__opt"]')` returns the wrapper, and a click on it never reaches
+the button. The probe then reports "nothing changed" and reads as a passing test. Qualify by
+tag — `button[class*="quiz__opt"]`.
+
 ### The static gate — `journey-audit.mjs`
 
 Run before claiming a page is done:
