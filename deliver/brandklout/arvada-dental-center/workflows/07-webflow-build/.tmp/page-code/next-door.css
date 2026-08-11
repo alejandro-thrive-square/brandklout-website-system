@@ -77,6 +77,29 @@ html{font-size:calc(var(--wzfr-base) * 1rem + var(--wzfr-coefficient) * 1vw)}
 [class*="nxd-"] :where(h3){font-size:1.17em}
 [class*="nxd-"] :where(h4){font-size:1em}
 
+/* --- skip link -----------------------------------------------------------
+   The design opens <body> with <a class="skip" href="#main">Skip to content</a>
+   — a WCAG 2.4.1 bypass block. It sits OUTSIDE every section, so the packager
+   never carried it, and neither did <main id="main"> (that id now lives on the
+   paste wrapper).
+
+   Targeted by DOM ID, not a class. set_style with a class name that does not
+   already exist as a Webflow style returns "partial_success" — it creates the
+   element and silently skips the styling — which left a plainly visible "Skip
+   to content" link at the top of all six pages. set_dom_id does work, and an
+   id is page-scoped so it needs no prefix.
+
+   Token values are HARD-CODED here, not var()s. --cyan/--ink-950/--f-ui are
+   declared on the SECTION roots, and this element is a child of the wrapper,
+   outside every section — the vars would not resolve and the link would render
+   unstyled the moment someone tabbed to it. */
+#skip{position:absolute;left:-9999px;top:0;z-index:400;
+  background:#03c5ec;color:#0A0D14;
+  padding:calc(.9 * var(--wz-root, 16px)) calc(1.4 * var(--wz-root, 16px));
+  font-family:'Montserrat','Helvetica Neue',Arial,sans-serif;font-weight:700;
+  text-decoration:none}
+#skip:focus{left:0}
+
 /* --- paste artifact ------------------------------------------------------
    Webflow copies an embedded element's class onto the w-embed wrapper it
    generates, so e.g. the quiz options paste as
