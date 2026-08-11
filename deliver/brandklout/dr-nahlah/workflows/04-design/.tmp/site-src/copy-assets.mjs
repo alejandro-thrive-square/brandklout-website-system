@@ -138,6 +138,61 @@ for (const [slug, token, n] of CASES) {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   THE FULL CONTENT SET.
+
+   The curated MAP above is the set of images the redesign chose. The brief is
+   now that the rebuild carries the same assets as drnahlah.com, so this pass
+   copies EVERY content image the 33 real pages reference — 225 of them — under
+   its own filename, and the curated names above continue to work on top.
+
+   What it deliberately skips:
+     - the 43 blog posts and 2 category archives (kind !== "page"), which belong
+       to the migration modules, not to the design package
+     - site chrome: anything appearing on more than half of the 78 scraped pages
+       is the logo or a footer mark, not page content
+     - WordPress size variants (`name-800x600.jpg`, `name-scaled.jpg`), which
+       `pick()` already folds back into their master
+
+   Set SCRAPE if the content extract is not in the sibling 01-content-intake.
+--------------------------------------------------------------------------- */
+const SCRAPE = path.resolve(
+  process.env.SCRAPE || path.join(SRC, "../../../01-content-intake/.tmp/current-site-scrape")
+);
+const strip = (f) => f.replace(/-\d+x\d+(?=\.\w+$)/, "").replace(/-scaled(?=\.\w+$)/, "");
+let bulk = 0, bulkSkipped = 0;
+if (fs.existsSync(path.join(SCRAPE, "data"))) {
+  const recs = fs.readdirSync(path.join(SCRAPE, "data"))
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => JSON.parse(fs.readFileSync(path.join(SCRAPE, "data", f), "utf8")));
+  const pageCount = recs.length;
+  const seenOn = new Map();
+  for (const r of recs)
+    for (const s of new Set((r.images || []).map((i) => i.src)))
+      seenOn.set(s, (seenOn.get(s) || 0) + 1);
+
+  // Two different upload months can hold the same basename, so a flat copy would
+  // silently overwrite one with the other. Disambiguate by prefixing the month.
+  const claimed = new Map();
+  for (const r of recs.filter((x) => x.kind === "page")) {
+    for (const img of r.images || []) {
+      if ((seenOn.get(img.src) || 0) > pageCount / 2) continue;      // chrome
+      const rel = decodeURIComponent(img.src).split("/wp-content/uploads/")[1];
+      if (!rel) continue;
+      const master = strip(rel);
+      let dest = path.basename(master);
+      const prior = claimed.get(dest);
+      if (prior && prior !== master) {
+        const m = master.split("/");
+        dest = `${m[0]}-${m[1]}-${path.basename(master)}`;           // 2021-02-name.jpg
+      }
+      claimed.set(dest, master);
+      if (MAP[dest]) continue;                                       // curated name wins
+      MAP[dest] = master;
+    }
+  }
+}
+
 // Marks that are not client photography and so are not in the extraction:
 // the practice logo and the Google mark that labels the review score. Kept in
 // site-src/assets/ so a clean rebuild does not silently drop them.
