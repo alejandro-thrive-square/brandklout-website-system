@@ -19,7 +19,7 @@
  * Writes .tmp/verify-staging/verify-staging.json. Exit 1 if anything differs.
  */
 import { spawn } from 'node:child_process';
-import { readFileSync, existsSync, mkdirSync, writeFileSync } from 'node:fs';
+import { readFileSync, existsSync, mkdirSync, writeFileSync, readdirSync, rmSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
@@ -58,8 +58,29 @@ const CHROME = ['C:/Program Files/Google/Chrome/Application/chrome.exe',
 // Never a fixed port: a previous run's Chrome that has not fully exited keeps it.
 const DBG = 9200 + (process.pid % 700);
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+/**
+ * PER-RUN PROFILE DIRECTORY, not a shared one.
+ *
+ * The port is already pid-derived, but the PROFILE was not: a Chrome from an
+ * earlier run that has not fully exited still holds a lock on
+ * `.tmp/.chrome-stg`, and the next launch dies instantly with the same
+ * "Chrome did not expose a debugging port" that a busy port produces. It
+ * failed twice in a row here while `netstat` showed no 92xx listener at all —
+ * which is the tell that it is the profile lock, not the port. Killing stale
+ * chrome.exe is not an option: some of them are the user's own browser.
+ */
+const PROFILE = join(HERE, '.tmp', `.chrome-stg-${process.pid}`);
+// Best-effort sweep of previous runs' profiles; a live one refuses and that is fine.
+try {
+  for (const d of readdirSync(join(HERE, '.tmp'))) {
+    if (d.startsWith('.chrome-stg-') && d !== `.chrome-stg-${process.pid}`) {
+      try { rmSync(join(HERE, '.tmp', d), { recursive: true, force: true }); } catch { /* in use */ }
+    }
+  }
+} catch { /* .tmp may not exist yet */ }
+
 const proc = spawn(CHROME, [
-  `--remote-debugging-port=${DBG}`, '--user-data-dir=' + join(HERE, '.tmp', '.chrome-stg'),
+  `--remote-debugging-port=${DBG}`, '--user-data-dir=' + PROFILE,
   '--no-first-run', '--no-default-browser-check', '--allow-file-access-from-files',
   '--disable-backgrounding-occluded-windows', '--disable-renderer-backgrounding',
   '--disable-background-timer-throttling',
@@ -113,12 +134,19 @@ async function open(url, block, css) {
   await send('Page.bringToFront', {}, sessionId);
   await send('Emulation.setDeviceMetricsOverride', { width: WIDTH, height: 900, deviceScaleFactor: 1, mobile: false }, sessionId);
   await send('Emulation.setEmulatedMedia', { features: [{ name: 'prefers-reduced-motion', value: 'reduce' }] }, sessionId);
+  /**
+   * The listener is returned so the caller can detach it. Left attached, one
+   * accumulates per page per side — 12 by the end of a six-page run, past
+   * Node's default limit of 10, at which point it warns about a leak and every
+   * CDP message is parsed twelve times over.
+   */
   const errors = [];
-  ws.addEventListener('message', (e) => {
+  const onMessage = (e) => {
     const m = JSON.parse(e.data);
     if (m.sessionId !== sessionId) return;
     if (m.method === 'Runtime.exceptionThrown') errors.push((m.params.exceptionDetails.exception?.description || m.params.exceptionDetails.text || '').split('\n')[0]);
-  });
+  };
+  ws.addEventListener('message', onMessage);
   await send('Page.navigate', { url }, sessionId);
   const ev = async (x) => {
     const r = await send('Runtime.evaluate', { expression: x, returnByValue: true, awaitPromise: true }, sessionId);
@@ -142,7 +170,7 @@ async function open(url, block, css) {
     for(var y=0;y<h;y+=Math.round(innerHeight*.8)){window.scrollTo(0,y);
       await new Promise(function(r){setTimeout(r,60)})}window.scrollTo(0,0);return 1})()`);
   await wait(1600);
-  return { ev, targetId, errors };
+  return { ev, targetId, errors, onMessage };
 }
 
 /**
@@ -312,7 +340,9 @@ for (const page of PAGES) {
       }
     }
   }
-  await send('Target.closeTarget', { targetId: A.targetId });
+  ws.removeEventListener("message", A.onMessage);
+  ws.removeEventListener("message", B.onMessage);
+  await send("Target.closeTarget", { targetId: A.targetId });
   await send('Target.closeTarget', { targetId: B.targetId });
 
   const byProp = {};
