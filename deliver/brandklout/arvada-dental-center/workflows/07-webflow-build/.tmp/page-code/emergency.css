@@ -22,7 +22,7 @@ html{font-size:calc(var(--wzfr-base) * 1rem + var(--wzfr-coefficient) * 1vw)}
   --wzfr-font-from:12; --wzfr-font-to:16;
   --wzfr-vw-from:calc(320 / 100); --wzfr-vw-to:calc(479 / 100)}}
 
-/* --- restored journey.css kit rules (19) --------------------- */
+/* --- restored journey.css kit rules (20) --------------------- */
 [class*="emg-"],[class*="emg-"] *,[class*="emg-"] *::before,[class*="emg-"] *::after{box-sizing:border-box}
 [class*="emg-"] img,[class*="emg-"] video,[class*="emg-"] svg{max-width:100%;display:block}
 [class*="emg-"] h1,[class*="emg-"] h2,[class*="emg-"] h3,[class*="emg-"] h4{margin:0;font-family:var(--f-display);font-weight:600;line-height:1.06; letter-spacing:.005em;color:var(--fg)}
@@ -35,6 +35,7 @@ html{font-size:calc(var(--wzfr-base) * 1rem + var(--wzfr-coefficient) * 1vw)}
 [class*="emg-"] .emg-ch .emg-stage{align-content:safe center}
 [class*="emg-"] .emg-ch .emg-pin{justify-content:safe center}
 [data-theme="light"] .emg-card{background:var(--card);box-shadow:0 1px 3px rgba(20,24,33,.05)}
+[class*="emg-"] .emg-faq__q[aria-expanded="true"]::after{transform:rotate(-135deg) translateY(-2px)}
 .emg-faq__a>div{overflow:hidden}
 .emg-field input,.emg-field select,.emg-field textarea{width:100%;font:inherit;font-size:calc(calc(.95 * var(--wz-root, 16px))*var(--s-tx)); padding:calc(.8 * var(--wz-root, 16px)) calc(.9 * var(--wz-root, 16px));border:1px solid rgba(20,24,33,.2);border-radius:10px;background:#fff; color:var(--ink);min-height:46px}
 .emg-ftr address{font-style:normal;font-size:calc(calc(.92 * var(--wz-root, 16px))*var(--s-tx));line-height:1.9}
@@ -140,6 +141,21 @@ html{font-size:calc(var(--wzfr-base) * 1rem + var(--wzfr-coefficient) * 1vw)}
    class rule at (0,2,0) and loses on source order, since chapter <style>
    blocks sit in <body> and this is in <head>. */
 div.w-embed[class*="emg-"]{display:contents}
+
+/* display:contents stops the wrapper generating a BOX. It does NOT stop it
+   generating PSEUDO-ELEMENTS — those still paint, as children of whatever the
+   wrapper's parent is. The FAQ chevron is
+     .faq__q::after{content:"";width:11px;border-right:1.6px;border-bottom:1.6px}
+   so a duplicated class on the wrapper drew a SECOND chevron per row: ten for
+   five questions, the extra one floating at the top-right of each <h3> and
+   dead to the click, because the handler is bound to the button. Users aimed
+   at the wrong arrow and the accordion appeared broken.
+
+   Suppressing both pseudos on the wrapper is safe: the wrapper is a Webflow
+   artifact, and every pseudo the design intends belongs to the real element
+   inside it. */
+div.w-embed[class*="emg-"]::before,
+div.w-embed[class*="emg-"]::after{content:none}
 
 /* A w-embed inside an INLINE parent is a block box in a line of text, and it
    breaks that line. next-door's offer price is

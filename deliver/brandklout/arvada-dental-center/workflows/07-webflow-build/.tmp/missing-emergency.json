@@ -4,7 +4,7 @@
   "body": "box-sizing:border-box",
   "media": null,
   "mapped": "*,*::before,*::after",
-  "n": 537
+  "n": 543
  },
  {
   "sel": "img,video,svg",
@@ -102,6 +102,14 @@
   "n": 3
  },
  {
+  "sel": ".faq__q[aria-expanded=\"true\"]::after",
+  "body": "transform:rotate(-135deg) translateY(-2px)",
+  "media": null,
+  "mapped": ".emg-faq__q[aria-expanded=\"true\"]::after",
+  "n": 12,
+  "stateKeyed": true
+ },
+ {
   "sel": ".faq__a>div",
   "body": "overflow:hidden",
   "media": null,
@@ -127,7 +135,7 @@
   "body": "animation-duration:.001ms!important;animation-iteration-count:1!important; transition-duration:.001ms!important;scroll-behavior:auto!important",
   "media": "@media (prefers-reduced-motion: reduce)",
   "mapped": "*,*::before,*::after",
-  "n": 537
+  "n": 543
  },
  {
   "sel": "[data-rv],[data-anim=\"hide\"]",

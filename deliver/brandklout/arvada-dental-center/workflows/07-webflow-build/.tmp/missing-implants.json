@@ -4,7 +4,7 @@
   "body": "box-sizing:border-box",
   "media": null,
   "mapped": "*,*::before,*::after",
-  "n": 633
+  "n": 639
  },
  {
   "sel": "img,video,svg",
@@ -95,6 +95,14 @@
   "strippedMain": true
  },
  {
+  "sel": ".faq__q[aria-expanded=\"true\"]::after",
+  "body": "transform:rotate(-135deg) translateY(-2px)",
+  "media": null,
+  "mapped": ".imp-faq__q[aria-expanded=\"true\"]::after",
+  "n": 10,
+  "stateKeyed": true
+ },
+ {
   "sel": ".faq__a>div",
   "body": "overflow:hidden",
   "media": null,
@@ -116,6 +124,14 @@
   "n": 3
  },
  {
+  "sel": ".quiz__opt[aria-pressed=\"true\"]",
+  "body": "border-color:var(--cyan-deep);background:rgba(3,197,236,.1)",
+  "media": null,
+  "mapped": ".imp-quiz__opt[aria-pressed=\"true\"]",
+  "n": 26,
+  "stateKeyed": true
+ },
+ {
   "sel": ".ftr address",
   "body": "font-style:normal;font-size:calc(.92rem*var(--s-tx));line-height:1.9",
   "media": null,
@@ -127,7 +143,7 @@
   "body": "animation-duration:.001ms!important;animation-iteration-count:1!important; transition-duration:.001ms!important;scroll-behavior:auto!important",
   "media": "@media (prefers-reduced-motion: reduce)",
   "mapped": "*,*::before,*::after",
-  "n": 633
+  "n": 639
  },
  {
   "sel": "[data-rv],[data-anim=\"hide\"]",

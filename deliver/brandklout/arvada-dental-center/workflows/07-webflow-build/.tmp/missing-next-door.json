@@ -4,14 +4,14 @@
   "body": "box-sizing:border-box",
   "media": null,
   "mapped": "*,*::before,*::after",
-  "n": 393
+  "n": 454
  },
  {
   "sel": "img,video,svg",
   "body": "max-width:100%;display:block",
   "media": null,
   "mapped": "img,video,svg",
-  "n": 16
+  "n": 18
  },
  {
   "sel": "h1,h2,h3,h4",
@@ -102,6 +102,14 @@
   "n": 1
  },
  {
+  "sel": ".faq__q[aria-expanded=\"true\"]::after",
+  "body": "transform:rotate(-135deg) translateY(-2px)",
+  "media": null,
+  "mapped": ".nxd-faq__q[aria-expanded=\"true\"]::after",
+  "n": 10,
+  "stateKeyed": true
+ },
+ {
   "sel": ".faq__a>div",
   "body": "overflow:hidden",
   "media": null,
@@ -134,7 +142,7 @@
   "body": "animation-duration:.001ms!important;animation-iteration-count:1!important; transition-duration:.001ms!important;scroll-behavior:auto!important",
   "media": "@media (prefers-reduced-motion: reduce)",
   "mapped": "*,*::before,*::after",
-  "n": 393
+  "n": 454
  },
  {
   "sel": "[data-rv],[data-anim=\"hide\"]",

@@ -134,7 +134,15 @@ function partOne(page, prefix) {
   const rules = JSON.parse(readFileSync(f, 'utf8'));
   const plain = [], byMedia = new Map();
   for (const r of rules) {
-    const css = `${scope(r.mapped, prefix, r.strippedMain)}{${remToRoot(r.body)}}`;
+    /**
+     * stateKeyed rules must be re-scoped too, for the same reason as
+     * strippedMain but a different arithmetic. `.imp-faq__q[aria-expanded=
+     * "true"]::after` is (0,2,1); the base `:scope .imp-faq__q::after` it has
+     * to override is ALSO (0,2,1), and the chapter <style> sits in <body>
+     * while this lands in <head> — so source order wins and the chevron never
+     * rotates. The [class*=] prefix takes it to (0,3,1).
+     */
+    const css = `${scope(r.mapped, prefix, r.strippedMain || r.stateKeyed)}{${remToRoot(r.body)}}`;
     if (r.media) { if (!byMedia.has(r.media)) byMedia.set(r.media, []); byMedia.get(r.media).push(css); }
     else plain.push(css);
   }
@@ -237,6 +245,21 @@ ${S} .form-ok{background:#eefaf5;border:1px solid #38d39f;border-radius:var(--ra
    class rule at (0,2,0) and loses on source order, since chapter <style>
    blocks sit in <body> and this is in <head>. */
 div.w-embed[class*="${prefix}-"]{display:contents}
+
+/* display:contents stops the wrapper generating a BOX. It does NOT stop it
+   generating PSEUDO-ELEMENTS — those still paint, as children of whatever the
+   wrapper's parent is. The FAQ chevron is
+     .faq__q::after{content:"";width:11px;border-right:1.6px;border-bottom:1.6px}
+   so a duplicated class on the wrapper drew a SECOND chevron per row: ten for
+   five questions, the extra one floating at the top-right of each <h3> and
+   dead to the click, because the handler is bound to the button. Users aimed
+   at the wrong arrow and the accordion appeared broken.
+
+   Suppressing both pseudos on the wrapper is safe: the wrapper is a Webflow
+   artifact, and every pseudo the design intends belongs to the real element
+   inside it. */
+div.w-embed[class*="${prefix}-"]::before,
+div.w-embed[class*="${prefix}-"]::after{content:none}
 
 /* A w-embed inside an INLINE parent is a block box in a line of text, and it
    breaks that line. next-door's offer price is

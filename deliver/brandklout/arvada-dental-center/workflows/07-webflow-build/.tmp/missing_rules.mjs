@@ -36,6 +36,15 @@ const stagingHtml = readFileSync(join(HERE, 'staging', `${slug}.html`), 'utf8');
 function publishedProps() {
   const map = new Map();
   for (const m of stagingHtml.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/g)) {
+    /**
+     * SKIP OUR OWN GENERATED BLOCK, or this becomes a feedback loop: the head
+     * code build_page_code.mjs installs is part of the published page, so on a
+     * re-run every rule it already restored looks "present" and is dropped
+     * from the next generation. Detected count went 19 -> 11 that way, and
+     * regenerating would have silently removed eight rules currently holding
+     * the pages correct.
+     */
+    if (m[1].includes('published-page corrections')) continue;
     const flat = m[1].replace(/\/\*[\s\S]*?\*\//g, '').replace(/@(scope|media|supports|layer)[^{]*\{/g, '');
     for (const r of flat.matchAll(/([^{}]+)\{([^{}]*)\}/g)) {
       const sel = r[1].trim().replace(/:scope\s*/g, '').replace(/\s+/g, ' ');
@@ -108,6 +117,33 @@ const stripMain = (sel) => sel.split(',')
   .map((p) => p.trim().replace(/^main\s+/, ''))
   .join(',');
 
+/**
+ * Strip RUNTIME STATE from a selector so its base can be probed.
+ *
+ * A rule keyed on a state that only exists after a user acts —
+ * [aria-expanded="true"], [aria-pressed="true"], .is-open, .solid — matches
+ * nothing in static markup, so the packager drops it and the page renders
+ * correctly at rest while giving no feedback on interaction. That is how the
+ * FAQ chevron stopped rotating: `.faq__q[aria-expanded="true"]::after` was
+ * tree-shaken because every button ships aria-expanded="false".
+ *
+ * The state is stripped only for the MATCH PROBE. What gets emitted is the
+ * original selector, state and all — the condition is the point of the rule.
+ */
+const STATE_BIT = /\[(?:aria-expanded|aria-pressed|data-active|data-open|data-rail|data-theme)(?:[~|^$*]?=[^\]]*)?\]|\.is-[A-Za-z][\w-]*|\.solid\b/g;
+/**
+ * Pseudo-ELEMENTS must come off too. querySelectorAll('.faq__q::after') is not
+ * an invalid-but-harmless probe — it throws, the count comes back as an error
+ * sentinel, and the rule is discarded. That is why the FAQ chevron rule
+ * (.faq__q[aria-expanded="true"]::after) survived the state fix and still went
+ * missing: the state was stripped correctly and the ::after killed the probe.
+ */
+const PSEUDO_EL = /::[a-z-]+(\([^)]*\))?/g;
+const stripState = (sel) => sel.split(',')
+  .map((p) => p.replace(STATE_BIT, '').replace(PSEUDO_EL, '').replace(/\s+/g, ' ').trim())
+  .filter(Boolean).join(',');
+const hasState = (sel) => { STATE_BIT.lastIndex = 0; return STATE_BIT.test(sel); };
+
 const published = publishedProps();
 const rules = kitRules(kit).filter((r) => r.body && !/^(:root|html|body)/.test(r.sel));
 const candidates = rules
@@ -155,9 +191,20 @@ const alt = candidates.map((c, i) => (counts[i] > 0 || !/(^|,)\s*main\s/.test(c.
   ? null : stripMain(c.mapped)));
 const altCounts = await probe(alt.map((a) => a || 'head'));
 
+/**
+ * Third chance: rules keyed on runtime state. Probe the selector with the
+ * state stripped; if the base element is on the page, keep the rule WITH its
+ * state intact. If the state never occurs the rule is simply inert, which
+ * costs nothing — whereas dropping it costs the interaction feedback.
+ */
+const st = candidates.map((c, i) => (counts[i] > 0 || (alt[i] && altCounts[i] > 0) || !hasState(c.mapped)
+  ? null : stripState(c.mapped)));
+const stCounts = await probe(st.map((s) => s || 'head'));
+
 const hits = candidates.map((c, i) => {
   if (counts[i] > 0) return { ...c, n: counts[i] };
   if (alt[i] && altCounts[i] > 0) return { ...c, mapped: alt[i], n: altCounts[i], strippedMain: true };
+  if (st[i] && stCounts[i] > 0) return { ...c, n: stCounts[i], stateKeyed: true };
   return { ...c, n: 0 };
 }).filter((c) => c.n > 0);
 writeFileSync(join(HERE, `missing-${page}.json`), JSON.stringify(hits, null, 1));
