@@ -81,7 +81,7 @@
        floor, and a vertical one so the nav and the ridge seam stay legible. */
     .ch-arrival .ch-media::after{content:"";position:absolute;inset:0;
       background:
-        radial-gradient(90% 70% at 78% 34%,rgba(3,197,236,.18),transparent 62%),
+        radial-gradient(90% 70% at 78% 34%,rgba(200,178,130,.18),transparent 62%),
         linear-gradient(100deg,rgba(253,248,239,.96) 0%,rgba(253,248,239,.9) 38%,rgba(253,248,239,.55) 68%,rgba(253,248,239,.3) 100%),
         linear-gradient(180deg,rgba(253,248,239,.9) 0%,rgba(253,248,239,.25) 30%,rgba(253,248,239,.86) 100%)}
     .ch-arrival .in{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;
@@ -259,7 +259,7 @@
     .ch-gap .big{font-family:var(--f-display);font-size:calc(3.9rem*var(--s-d1));
       line-height:1.16;max-width:20ch;font-weight:600}
     /* The unread state has to read as "not yet" and still be legible copy. */
-    .ch-gap .big .wz-word{color:rgba(255,255,255,.17)}
+    .ch-gap .big .wz-word{color:rgba(64,56,48,.22)}
     .ch-gap .cards{display:grid;gap:clamp(.8rem,1.6vw,1.3rem);margin-top:clamp(2rem,4vw,3.25rem);
       grid-template-columns:1fr}
     .gap-card{border:1px solid var(--line);border-radius:var(--radius-lg);
@@ -728,7 +728,7 @@
 
     function light(card, on) {
       gsap.to(card, {
-        borderColor: on ? 'rgba(2,153,182,.6)' : 'rgba(64,56,48,.14)',
+        borderColor: on ? 'rgba(154,130,80,.6)' : 'rgba(64,56,48,.14)',
         boxShadow: on ? '0 18px 44px rgba(64,56,48,.1)' : '0 0 0 rgba(0,0,0,0)',
         duration: .5
       });

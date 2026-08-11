@@ -85,7 +85,7 @@
     .ch-arrival .ch-media img{transform:scale(1.12)}
     .ch-arrival .ch-media::after{content:"";position:absolute;inset:0;
       background:
-        radial-gradient(88% 70% at 76% 32%,rgba(251,142,40,.16),transparent 60%),
+        radial-gradient(88% 70% at 76% 32%,rgba(211,170,90,.16),transparent 60%),
         linear-gradient(100deg,rgba(253,248,239,.96) 0%,rgba(253,248,239,.9) 40%,rgba(253,248,239,.54) 72%,rgba(253,248,239,.28) 100%),
         linear-gradient(180deg,rgba(253,248,239,.9) 0%,rgba(253,248,239,.25) 30%,rgba(253,248,239,.86) 100%)}
     .ch-arrival .in{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
@@ -199,14 +199,14 @@
       padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
     .ch-search .big{font-family:var(--f-display);font-size:calc(3.7rem*var(--s-d1));
       line-height:1.16;max-width:21ch;font-weight:600}
-    .ch-search .big .wz-word{color:rgba(255,255,255,.17)}
+    .ch-search .big .wz-word{color:rgba(64,56,48,.22)}
     .srch-grid{display:grid;gap:clamp(.8rem,1.6vw,1.3rem);margin-top:clamp(2rem,4vw,3.25rem);
       grid-template-columns:1fr}
     .srch-card{border:1px solid var(--line);border-radius:var(--radius-lg);
       padding:clamp(1.1rem,2vw,1.6rem);background:rgba(64,56,48,.04);display:grid;gap:.6rem}
     .srch-card h3{font-size:calc(1.02rem*var(--s-tx))}
     .srch-card p{font-size:calc(.9rem*var(--s-tx));color:var(--fg-body)}
-    .srch-card .card__icon{background:rgba(251,142,40,.14);color:var(--offer)}
+    .srch-card .card__icon{background:rgba(211,170,90,.14);color:var(--offer)}
     @media(min-width:700px){ .srch-grid{grid-template-columns:repeat(2,1fr)} }
     @media(min-width:1120px){ .srch-grid{grid-template-columns:repeat(4,1fr)} }
   </style>
@@ -587,7 +587,7 @@
     });
 
     function light(card, img, on) {
-      gsap.to(card, { borderColor: on ? 'rgba(2,153,182,.6)' : 'rgba(64,56,48,.14)',
+      gsap.to(card, { borderColor: on ? 'rgba(154,130,80,.6)' : 'rgba(64,56,48,.14)',
         boxShadow: on ? '0 18px 44px rgba(64,56,48,.1)' : '0 0 0 rgba(0,0,0,0)', duration: .5 });
       if (img) gsap.to(img, { filter: on ? 'grayscale(0)' : 'grayscale(1)', duration: .6 });
     }

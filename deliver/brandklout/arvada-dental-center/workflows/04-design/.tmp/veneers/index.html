@@ -132,7 +132,7 @@
     .ch-arrival .ch-media img{transform:scale(1.12)}
     .ch-arrival .ch-media::after{content:"";position:absolute;inset:0;
       background:
-        radial-gradient(80% 68% at 74% 30%,rgba(3,197,236,.16),transparent 60%),
+        radial-gradient(80% 68% at 74% 30%,rgba(200,178,130,.16),transparent 60%),
         linear-gradient(100deg,rgba(253,248,239,.96) 0%,rgba(253,248,239,.9) 40%,rgba(253,248,239,.52) 72%,rgba(253,248,239,.26) 100%),
         linear-gradient(180deg,rgba(253,248,239,.9) 0%,rgba(253,248,239,.25) 30%,rgba(253,248,239,.86) 100%)}
     .ch-arrival .in{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
@@ -251,7 +251,7 @@
       padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
     .ch-mirror .big{font-family:var(--f-display);font-size:calc(3.7rem*var(--s-d1));
       line-height:1.16;max-width:21ch;font-weight:600}
-    .ch-mirror .big .wz-word{color:rgba(255,255,255,.17)}
+    .ch-mirror .big .wz-word{color:rgba(64,56,48,.22)}
     .mir-grid{display:grid;gap:clamp(.8rem,1.6vw,1.3rem);margin-top:clamp(2rem,4vw,3.25rem);
       grid-template-columns:1fr}
     .mir-card{border:1px solid var(--line);border-radius:var(--radius-lg);
@@ -618,8 +618,8 @@
     });
 
     function light(card, on) {
-      gsap.to(card, { borderColor: on ? 'rgba(3,197,236,.55)' : 'rgba(64,56,48,.14)',
-        backgroundColor: on ? 'rgba(3,197,236,.07)' : 'rgba(255,255,255,.045)', duration: .5 });
+      gsap.to(card, { borderColor: on ? 'rgba(200,178,130,.55)' : 'rgba(64,56,48,.14)',
+        backgroundColor: on ? 'rgba(200,178,130,.07)' : 'rgba(255,255,255,.96)', duration: .5 });
     }
   });
   </script>
