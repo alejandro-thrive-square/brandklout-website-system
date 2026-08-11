@@ -86,18 +86,18 @@
     .ch-arrival .ch-media::after{content:"";position:absolute;inset:0;
       background:
         radial-gradient(88% 70% at 76% 32%,rgba(251,142,40,.16),transparent 60%),
-        linear-gradient(100deg,rgba(10,13,20,.96) 0%,rgba(10,13,20,.9) 40%,rgba(10,13,20,.54) 72%,rgba(10,13,20,.28) 100%),
-        linear-gradient(180deg,rgba(10,13,20,.9) 0%,rgba(10,13,20,.25) 30%,rgba(10,13,20,.86) 100%)}
+        linear-gradient(100deg,rgba(253,248,239,.96) 0%,rgba(253,248,239,.9) 40%,rgba(253,248,239,.54) 72%,rgba(253,248,239,.28) 100%),
+        linear-gradient(180deg,rgba(253,248,239,.9) 0%,rgba(253,248,239,.25) 30%,rgba(253,248,239,.86) 100%)}
     .ch-arrival .in{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
     .ch-arrival h1{font-size:calc(4.5rem*var(--s-d1));max-width:16ch}
-    .ch-arrival h1 .amt{font-family:var(--f-display);font-weight:700;color:var(--amber);display:block;
+    .ch-arrival h1 .amt{font-family:var(--f-display);font-weight:700;color:var(--offer);display:block;
       font-size:calc(7rem*var(--s-d2));line-height:.95}
     .ch-arrival .lede{max-width:52ch}
     .ch-arrival .trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;align-items:center;
       padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
     .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
       font-family:var(--f-ui);font-size:calc(.76rem*var(--s-tx));font-weight:600;color:var(--fg-soft)}
-    .ch-arrival .trust svg{width:16px;height:16px;color:var(--amber);flex:none}
+    .ch-arrival .trust svg{width:16px;height:16px;color:var(--offer);flex:none}
     @media(min-width:1000px){ .ch-arrival .in{grid-template-columns:1.1fr .9fr;gap:clamp(2.5rem,4vw,4.5rem)} }
   </style>
 
@@ -141,7 +141,7 @@
           <span class="field__err" aria-live="polite"></span>
         </div>
         <div class="field">
-          <label for="n-email">Email <span style="font-weight:400;color:#5C6B80">(optional)</span></label>
+          <label for="n-email">Email <span style="font-weight:400;color:#5f5f5d">(optional)</span></label>
           <input id="n-email" name="email" type="email" autocomplete="email">
           <span class="field__err" aria-live="polite"></span>
         </div>
@@ -194,7 +194,7 @@
      ========================================================================== -->
 <section class="ch ch-search" id="search" data-chapter="1" data-chapter-name="The Search">
   <style>
-    .ch-search{background:var(--ink-950)}
+    .ch-search{background:var(--paper-3)}
     .ch-search .stage{min-height:100svh;display:grid;align-content:center;
       padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
     .ch-search .big{font-family:var(--f-display);font-size:calc(3.7rem*var(--s-d1));
@@ -203,10 +203,10 @@
     .srch-grid{display:grid;gap:clamp(.8rem,1.6vw,1.3rem);margin-top:clamp(2rem,4vw,3.25rem);
       grid-template-columns:1fr}
     .srch-card{border:1px solid var(--line);border-radius:var(--radius-lg);
-      padding:clamp(1.1rem,2vw,1.6rem);background:rgba(255,255,255,.03);display:grid;gap:.6rem}
+      padding:clamp(1.1rem,2vw,1.6rem);background:rgba(64,56,48,.04);display:grid;gap:.6rem}
     .srch-card h3{font-size:calc(1.02rem*var(--s-tx))}
     .srch-card p{font-size:calc(.9rem*var(--s-tx));color:var(--fg-body)}
-    .srch-card .card__icon{background:rgba(251,142,40,.14);color:var(--amber)}
+    .srch-card .card__icon{background:rgba(251,142,40,.14);color:var(--offer)}
     @media(min-width:700px){ .srch-grid{grid-template-columns:repeat(2,1fr)} }
     @media(min-width:1120px){ .srch-grid{grid-template-columns:repeat(4,1fr)} }
   </style>
@@ -257,7 +257,7 @@
 
     /* One left-to-right sweep, white into amber. The cards deal in from the
        closing clause, tied to the length of this paragraph. */
-    var sweep = W.sweepWords(tl, big, { accent: '#fb8e28', tail: 5, step: .2 });
+    var sweep = W.sweepWords(tl, big, { accent: '#d3aa5a', tail: 5, step: .2 });
     tl.to(cards, { opacity: 1, y: 0, stagger: .16, ease: 'none' }, sweep.tail);
   });
   </script>
@@ -275,19 +275,19 @@
       padding-block:clamp(3rem,6vw,5rem);overflow:hidden}
     .ch-offer .lay{display:grid;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
     .ch-offer h2{font-size:var(--h2);max-width:15ch}
-    .rcpt{background:#fff;border:1px solid rgba(20,24,33,.12);border-radius:var(--radius-lg);
-      padding:clamp(1.3rem,2.6vw,2.2rem);box-shadow:0 24px 60px -30px rgba(20,24,33,.35);
+    .rcpt{background:#fff;border:1px solid rgba(64,56,48,.12);border-radius:var(--radius-lg);
+      padding:clamp(1.3rem,2.6vw,2.2rem);box-shadow:0 24px 60px -30px rgba(64,56,48,.35);
       display:grid;gap:0}
     .rcpt-head{font-family:var(--f-ui);font-size:calc(.66rem*var(--s-tx));letter-spacing:.2em;text-transform:uppercase;
       font-weight:700;color:var(--amber-ink);padding-bottom:.9rem;
-      border-bottom:1px dashed rgba(20,24,33,.18)}
+      border-bottom:1px dashed rgba(64,56,48,.18)}
     .rcpt-row{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:start;
-      padding-block:.9rem;border-bottom:1px dashed rgba(20,24,33,.14);font-size:calc(.95rem*var(--s-tx));color:#3B4657}
+      padding-block:.9rem;border-bottom:1px dashed rgba(64,56,48,.14);font-size:calc(.95rem*var(--s-tx));color:#4A4038}
     .rcpt-row svg{width:20px;height:20px;color:var(--amber-deep);flex:none;margin-top:.15rem}
     .rcpt-tot{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
       padding-top:1.1rem;flex-wrap:wrap}
     .rcpt-tot span{font-family:var(--f-ui);font-size:calc(.7rem*var(--s-tx));letter-spacing:.18em;text-transform:uppercase;
-      font-weight:700;color:#5C6B80}
+      font-weight:700;color:#5f5f5d}
     .rcpt-tot b{font-family:var(--f-display);font-weight:700;line-height:1;color:var(--amber-deep);
       font-size:calc(4.2rem*var(--s-h2));font-variant-numeric:tabular-nums}
     .rcpt-terms{font-size:calc(.76rem*var(--s-tx));color:#7a6244;line-height:1.6;margin-top:.9rem}
@@ -378,18 +378,18 @@
      ========================================================================== -->
 <section class="ch ch-near" id="near" data-chapter="3" data-chapter-name="Six Minutes Away">
   <style>
-    .ch-near{background:var(--ink-900);overflow:hidden}
+    .ch-near{background:var(--paper);overflow:hidden}
     .ch-near .lay{display:grid;gap:clamp(2rem,5vw,4.5rem);align-items:center;grid-template-columns:1fr}
     .ch-near h2{font-size:var(--h2);max-width:14ch}
     .ch-near .plate{position:relative;overflow:hidden;border-radius:var(--radius-lg);aspect-ratio:16/11;
-      background:var(--ink-800);clip-path:inset(0 0 100% 0)}
+      background:var(--paper-2);clip-path:inset(0 0 100% 0)}
     .ch-near .plate img{width:100%;height:100%;object-fit:cover}
     .svc{margin-top:clamp(2.5rem,5vw,4rem)}
     .svc ul{display:grid;gap:.5rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));
       list-style:none;margin:0;padding:0}
     .svc li{display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center;font-size:calc(.92rem*var(--s-tx));
       color:var(--fg-body)}
-    .svc svg{width:17px;height:17px;color:var(--cyan);flex:none}
+    .svc svg{width:17px;height:17px;color:var(--accent);flex:none}
     @media(min-width:900px){ .ch-near .lay{grid-template-columns:1fr 1fr} }
   </style>
 
@@ -587,8 +587,8 @@
     });
 
     function light(card, img, on) {
-      gsap.to(card, { borderColor: on ? 'rgba(2,153,182,.6)' : 'rgba(20,24,33,.14)',
-        boxShadow: on ? '0 18px 44px rgba(20,24,33,.1)' : '0 0 0 rgba(0,0,0,0)', duration: .5 });
+      gsap.to(card, { borderColor: on ? 'rgba(2,153,182,.6)' : 'rgba(64,56,48,.14)',
+        boxShadow: on ? '0 18px 44px rgba(64,56,48,.1)' : '0 0 0 rgba(0,0,0,0)', duration: .5 });
       if (img) gsap.to(img, { filter: on ? 'grayscale(0)' : 'grayscale(1)', duration: .6 });
     }
   });
@@ -600,7 +600,7 @@
      ========================================================================== -->
 <section class="ch ch-proof" id="proof" data-chapter="5" data-chapter-name="The Proof">
   <style>
-    .ch-proof{background:var(--ink-850);overflow:hidden}
+    .ch-proof{background:var(--paper-3);overflow:hidden}
     .ch-proof h2{font-size:var(--h2);max-width:18ch}
   </style>
 
@@ -646,12 +646,12 @@
   <style>
     .ch-invite{background:var(--bg)}
     .ch-invite h2{font-size:var(--h2);max-width:18ch}
-    .ch-invite .close{background:var(--ink-950);color:#fff;border-radius:var(--radius-lg);
+    .ch-invite .close{background:var(--paper-3);color:var(--fg);border-radius:var(--radius-lg);
       padding:clamp(2rem,5vw,4rem);text-align:center;display:grid;gap:1rem;justify-items:center;
       margin-top:clamp(2.5rem,5vw,4.5rem)}
-    .ch-invite .close h2{color:#fff;max-width:20ch;margin-inline:auto}
-    .ch-invite .close p{color:rgba(255,255,255,.72);max-width:46ch}
-    .ch-invite .close .addr{font-size:calc(.85rem*var(--s-tx));color:rgba(255,255,255,.5)}
+    .ch-invite .close h2{color:var(--fg);max-width:20ch;margin-inline:auto}
+    .ch-invite .close p{color:rgba(64,56,48,.90);max-width:46ch}
+    .ch-invite .close .addr{font-size:calc(.85rem*var(--s-tx));color:rgba(64,56,48,.76)}
   </style>
 
   <div class="wrap pad">

@@ -81,8 +81,8 @@
     .ch-arrival .ch-media::after{content:"";position:absolute;inset:0;
       background:
         radial-gradient(88% 70% at 74% 30%,rgba(3,197,236,.16),transparent 60%),
-        linear-gradient(100deg,rgba(10,13,20,.96) 0%,rgba(10,13,20,.9) 40%,rgba(10,13,20,.54) 72%,rgba(10,13,20,.28) 100%),
-        linear-gradient(180deg,rgba(10,13,20,.9) 0%,rgba(10,13,20,.25) 30%,rgba(10,13,20,.86) 100%)}
+        linear-gradient(100deg,rgba(253,248,239,.96) 0%,rgba(253,248,239,.9) 40%,rgba(253,248,239,.54) 72%,rgba(253,248,239,.28) 100%),
+        linear-gradient(180deg,rgba(253,248,239,.9) 0%,rgba(253,248,239,.25) 30%,rgba(253,248,239,.86) 100%)}
     .ch-arrival .in{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
     .ch-arrival h1{font-size:var(--d1);max-width:14ch}
     .ch-arrival .lede{max-width:52ch}
@@ -90,7 +90,7 @@
       padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
     .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
       font-family:var(--f-ui);font-size:calc(.76rem*var(--s-tx));font-weight:600;color:var(--fg-soft)}
-    .ch-arrival .trust svg{width:16px;height:16px;color:var(--cyan);flex:none}
+    .ch-arrival .trust svg{width:16px;height:16px;color:var(--accent);flex:none}
     @media(min-width:1000px){ .ch-arrival .in{grid-template-columns:1.1fr .9fr;gap:clamp(2.5rem,4vw,4.5rem)} }
   </style>
 
@@ -135,7 +135,7 @@
           <span class="field__err" aria-live="polite"></span>
         </div>
         <div class="field">
-          <label for="d-email">Email <span style="font-weight:400;color:#5C6B80">(optional)</span></label>
+          <label for="d-email">Email <span style="font-weight:400;color:#5f5f5d">(optional)</span></label>
           <input id="d-email" name="email" type="email" autocomplete="email">
           <span class="field__err" aria-live="polite"></span>
         </div>
@@ -189,23 +189,23 @@
      ========================================================================== -->
 <section class="ch ch-years" id="years" data-chapter="1" data-chapter-name="Twenty-Two Years">
   <style>
-    .ch-years{background:var(--ink-950)}
+    .ch-years{background:var(--paper-3)}
     .ch-years .stage{min-height:100svh;display:grid;align-content:center;
       padding-block:clamp(3rem,6vw,5rem);overflow:hidden}
-    .yr-big{font-family:var(--f-display);font-weight:700;line-height:.9;color:#fff;
+    .yr-big{font-family:var(--f-display);font-weight:700;line-height:.9;color:var(--fg);
       font-size:calc(14rem*var(--s-d1));font-variant-numeric:tabular-nums;letter-spacing:-.01em}
-    .yr-rail{position:relative;height:2px;background:rgba(255,255,255,.12);
+    .yr-rail{position:relative;height:2px;background:rgba(64,56,48,.14);
       margin-block:clamp(1.4rem,3vw,2.4rem)}
     .yr-rail i{position:absolute;inset:0;background:var(--cyan);transform:scaleX(0);transform-origin:left}
     .yr-ends{display:flex;justify-content:space-between;font-family:var(--f-ui);font-size:calc(.66rem*var(--s-tx));
       letter-spacing:.2em;text-transform:uppercase;color:var(--fg-soft)}
     .yr-notes{margin-top:clamp(1.4rem,3vw,2.4rem);min-height:7.5em;max-width:56ch}
     .yr-note{font-size:var(--body-lg);color:var(--fg-body)}
-    .yr-note b{color:#fff;font-family:var(--f-display);font-weight:600}
+    .yr-note b{color:var(--fg);font-family:var(--f-display);font-weight:600}
     .yr-stats{display:grid;gap:1.2rem;margin-top:clamp(1.8rem,3.5vw,2.8rem);
       grid-template-columns:repeat(auto-fit,minmax(min(100%,150px),1fr))}
     .yr-stat b{display:block;font-family:var(--f-display);font-weight:700;line-height:1;
-      color:var(--cyan);font-size:calc(3rem*var(--s-h2))}
+      color:var(--accent);font-size:calc(3rem*var(--s-h2))}
     .yr-stat span{display:block;margin-top:.45rem;font-family:var(--f-ui);font-size:calc(.68rem*var(--s-tx));
       letter-spacing:.16em;text-transform:uppercase;color:var(--fg-soft)}
   </style>
@@ -330,12 +330,12 @@
      ========================================================================== -->
 <section class="ch ch-house" id="household" data-chapter="3" data-chapter-name="The Whole Household">
   <style>
-    .ch-house{background:var(--ink-900)}
+    .ch-house{background:var(--paper)}
     .ch-house .stage{min-height:100svh;display:grid;align-content:center;
       padding-block:clamp(3rem,6vw,5rem);overflow:hidden}
     .ch-house h2{font-size:var(--h2);max-width:16ch}
     .hh-rail{position:relative;margin-top:clamp(1.6rem,3vw,2.4rem)}
-    .hh-rail .line{height:2px;background:rgba(255,255,255,.12);position:relative}
+    .hh-rail .line{height:2px;background:rgba(64,56,48,.14);position:relative}
     .hh-rail .line i{position:absolute;inset:0;background:var(--cyan);transform:scaleX(0);
       transform-origin:left}
     .hh-rail .dot{position:absolute;top:-7px;left:0;width:16px;height:16px;border-radius:50%;
@@ -347,7 +347,7 @@
       padding-block:clamp(.75rem,1.5vw,1.05rem);border-top:1px solid var(--line);opacity:.3;
       font-size:calc(.98rem*var(--s-tx));color:var(--fg-body)}
     .hh-row:last-child{border-bottom:1px solid var(--line)}
-    .hh-row svg{width:19px;height:19px;color:var(--cyan);flex:none}
+    .hh-row svg{width:19px;height:19px;color:var(--accent);flex:none}
   </style>
 
   <div class="stage" id="hhPin">
@@ -515,8 +515,8 @@
     });
 
     function light(card, on) {
-      gsap.to(card, { borderColor: on ? 'rgba(2,153,182,.6)' : 'rgba(20,24,33,.14)',
-        boxShadow: on ? '0 18px 44px rgba(20,24,33,.1)' : '0 0 0 rgba(0,0,0,0)', duration: .5 });
+      gsap.to(card, { borderColor: on ? 'rgba(2,153,182,.6)' : 'rgba(64,56,48,.14)',
+        boxShadow: on ? '0 18px 44px rgba(64,56,48,.1)' : '0 0 0 rgba(0,0,0,0)', duration: .5 });
     }
   });
   </script>
@@ -527,7 +527,7 @@
      ========================================================================== -->
 <section class="ch ch-intro" id="introduction" data-chapter="5" data-chapter-name="The Introduction">
   <style>
-    .ch-intro{background:var(--ink-900);overflow:hidden}
+    .ch-intro{background:var(--paper);overflow:hidden}
     .ch-intro .lay{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
     .ch-intro h2{font-size:var(--h2);max-width:14ch}
     @media(min-width:900px){ .ch-intro .lay{grid-template-columns:1fr 1fr} }
@@ -582,12 +582,12 @@
   <style>
     .ch-invite{background:var(--bg)}
     .ch-invite h2{font-size:var(--h2);max-width:18ch}
-    .ch-invite .close{background:var(--ink-950);color:#fff;border-radius:var(--radius-lg);
+    .ch-invite .close{background:var(--paper-3);color:var(--fg);border-radius:var(--radius-lg);
       padding:clamp(2rem,5vw,4rem);text-align:center;display:grid;gap:1rem;justify-items:center;
       margin-top:clamp(2.5rem,5vw,4.5rem)}
-    .ch-invite .close h2{color:#fff;max-width:20ch;margin-inline:auto}
-    .ch-invite .close p{color:rgba(255,255,255,.72);max-width:48ch}
-    .ch-invite .close .addr{font-size:calc(.85rem*var(--s-tx));color:rgba(255,255,255,.5)}
+    .ch-invite .close h2{color:var(--fg);max-width:20ch;margin-inline:auto}
+    .ch-invite .close p{color:rgba(64,56,48,.90);max-width:48ch}
+    .ch-invite .close .addr{font-size:calc(.85rem*var(--s-tx));color:rgba(64,56,48,.76)}
   </style>
 
   <div class="wrap pad">

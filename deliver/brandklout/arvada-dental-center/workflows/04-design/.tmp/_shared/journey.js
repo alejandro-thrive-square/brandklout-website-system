@@ -81,7 +81,7 @@ window.WZ = (function () {
      It was two racing each other. Each chapter ran its own pair of tweens:
 
        tl.to(body, { color:'#fff',    stagger:.32 }, 0)
-         .to(tail, { color:'#03c5ec', stagger:.26 }, .4)
+         .to(tail, { color:'#c8b282', stagger:.26 }, .4)
 
      The accent tween started at a fixed 0.4s regardless of how long the white
      sweep took, so on a 23-word paragraph the last word was already accent by
@@ -100,7 +100,7 @@ window.WZ = (function () {
      its own sentence took to read. */
   function sweepWords(tl, el, vars) {
     vars = vars || {};
-    var accent = vars.accent || '#03c5ec';
+    var accent = vars.accent || '#c8b282';
     var tailN = vars.tail == null ? 5 : vars.tail;
     var step = vars.step || .3;
     var dur = vars.duration || step * 2.4;
