@@ -76,6 +76,28 @@ html{font-size:calc(var(--wzfr-base) * 1rem + var(--wzfr-coefficient) * 1vw)}
 [class*="imp-"] :where(h3){font-size:1.17em}
 [class*="imp-"] :where(h4){font-size:1em}
 
+/* --- runtime-created classes ---------------------------------------------
+   The packager keeps a rule only if its selector matches something in the
+   STATIC markup, so a class no element carries until JavaScript creates it
+   looks unused and is dropped. .form-ok is the green box the design shows
+   after a successful submission:
+       done.className = 'form-ok'; form.replaceWith(done);
+   Nothing carries that class at package time, the rule was tree-shaken from
+   all six pages, and the confirmation rendered as unstyled plain text — at the
+   exact moment a lead converts.
+
+   Targeted BARE, not prefixed: the script assigns the unprefixed name, so a
+   prefixed selector would never match. The [class*=] ancestor is what keeps it
+   off the rest of the site.
+
+   (.is-done is dropped on the four pages with no quiz container, and that is
+   correct — every rule using it is .quiz.is-done ..., which cannot apply
+   without a quiz.) */
+[class*="imp-"] .form-ok{background:#eefaf5;border:1px solid #38d39f;border-radius:var(--radius);
+  padding:calc(1.1 * var(--wz-root, 16px)) calc(1.2 * var(--wz-root, 16px));
+  color:#14603f;font-weight:600;
+  font-size:calc(calc(.95 * var(--wz-root, 16px))*var(--s-tx))}
+
 /* --- skip link -----------------------------------------------------------
    The design opens <body> with <a class="skip" href="#main">Skip to content</a>
    — a WCAG 2.4.1 bypass block. It sits OUTSIDE every section, so the packager
