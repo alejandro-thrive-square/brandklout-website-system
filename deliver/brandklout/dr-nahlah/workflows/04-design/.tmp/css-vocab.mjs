@@ -54,27 +54,37 @@ const needsAncestor = new Map();  // class -> array of alternative ancestor-clas
 const unqualified = new Set();    // class with at least one first-position rule
 const usage = [];                 // { page, cls, ancestors:Set }
 
-/* One pass per page, carrying a real ancestor stack, because the two questions
-   this gate asks are both about ancestry: which component owns a <style> block,
-   and does a class sit under the container its rule requires. Attributing a
-   block to "the nearest <section> that started before it" is not the same
-   thing — the footer partial is emitted after the last section on the page, so
-   that reading hands the site footer's rules to whatever chapter happened to
-   come last, and then reports the one footer as two conflicting components. */
+/* The CSS is one bundle now, assembled from site-src/css/*.css with a banner
+   per source file, so "which component owns this rule" is answered by the
+   banners rather than by guessing from the markup around a <style> block. */
+{
+  const bundlePath = path.join(SITE, "assets", "site.css");
+  if (!fs.existsSync(bundlePath)) {
+    console.error(`no ${bundlePath} — run build-site.mjs first`);
+    process.exit(1);
+  }
+  const bundle = fs.readFileSync(bundlePath, "utf8");
+  const parts = bundle.split(/\/\* ===== css\/([\w.-]+) ===== \*\//);
+  // parts[0] is whatever preceded the first banner; then name, body, name, body…
+  for (let i = 1; i < parts.length; i += 2) {
+    const owner = parts[i].replace(/^\d+-/, "").replace(/\.css$/, "");
+    collectCss(parts[i + 1], owner);
+  }
+}
+
+/* One pass per page for the markup, carrying a real ancestor stack, because the
+   question the third rule asks is about ancestry: does a class sit under the
+   container its rule requires. */
 for (const file of pages) {
   const html = fs.readFileSync(path.join(SITE, file), "utf8");
   const stack = [];
-  const ownerNow = () => {
-    for (let i = stack.length - 1; i >= 0; i--) {
-      if (stack[i].classes.length) return stack[i].classes[0];
-    }
-    return "(shell)";
-  };
 
   const TOKEN = /<style[^>]*>([\s\S]*?)<\/style>|<script[^>]*>[\s\S]*?<\/script>|<!--[\s\S]*?-->|<(\/?)([a-zA-Z][\w-]*)([^>]*?)(\/?)>/g;
   for (const t of html.matchAll(TOKEN)) {
     if (t[1] === undefined && t[3] === undefined) continue;   // script or comment
-    if (t[1] !== undefined) { collectCss(t[1], ownerNow()); continue; }
+    // A page body should carry no CSS of its own any more; if one reappears,
+    // attribute it to the page so a collision still gets reported.
+    if (t[1] !== undefined) { collectCss(t[1], `(inline in ${file})`); continue; }
     const [, , closing, tag, attrs, selfClose] = t;
     const name = tag.toLowerCase();
     if (closing) {
@@ -130,7 +140,7 @@ const fails = [];
 // A. one name, one meaning
 for (const [cls, owners] of declaredBy) {
   if (owners.size > 1) {
-    fails.push(`A  .${cls} is defined by ${owners.size} different components (${[...owners].join(", ")}) — in Webflow that is one class with ${owners.size} conflicting definitions`);
+    fails.push(`A  .${cls} is defined in ${owners.size} different stylesheets (${[...owners].join(", ")}) — in Webflow that is one class with ${owners.size} conflicting definitions`);
   }
 }
 

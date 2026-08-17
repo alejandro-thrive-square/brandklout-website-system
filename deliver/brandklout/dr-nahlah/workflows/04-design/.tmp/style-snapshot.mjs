@@ -32,25 +32,41 @@ if (process.argv[2] === "--diff") {
       console.log(`ELEMENT COUNT ${page}: ${A.length} -> ${B.length}`);
       diffs++;
     }
-    const n = Math.min(A.length, B.length);
-    for (let i = 0; i < n; i++) {
-      checked++;
-      const [ka, va] = [A[i][0], A[i][1]];
-      const [kb, vb] = [B[i][0], B[i][1]];
-      if (ka !== kb) {
-        byPage[page] = byPage[page] || [];
-        if (byPage[page].length < Number(process.env.DIFF_CAP||6)) byPage[page].push(`  #${i} identity ${ka} -> ${kb}`);
-        diffs++;
-        continue;
+    /* Align by identity, not by position. Adding or removing one element shifts
+       every later index, which turns a one-element change into thousands of
+       bogus "differences" and buries the real ones. Grouping by the element's
+       tag/id/class signature and comparing the nth occurrence of each signature
+       survives insertions and deletions, and reports them as what they are. */
+    const group = (rows) => {
+      const m = new Map();
+      for (const [k, v] of rows) {
+        if (!m.has(k)) m.set(k, []);
+        m.get(k).push(v);
       }
-      for (const p of Object.keys(va)) {
-        if (va[p] !== vb[p]) {
-          byPage[page] = byPage[page] || [];
-          if (byPage[page].length < Number(process.env.DIFF_CAP||6)) byPage[page].push(`  ${ka}  ${p}: ${va[p]} -> ${vb[p]}`);
-          diffs++;
+      return m;
+    };
+    const ga = group(A), gb = group(B);
+    const cap = Number(process.env.DIFF_CAP || 6);
+    const note = (line) => {
+      byPage[page] = byPage[page] || [];
+      if (byPage[page].length < cap) byPage[page].push(line);
+    };
+    for (const [k, va] of ga) {
+      const vb = gb.get(k);
+      if (!vb) { note(`  GONE  ${k} x${va.length}`); diffs += va.length; continue; }
+      if (va.length !== vb.length) {
+        note(`  COUNT ${k}: ${va.length} -> ${vb.length}`);
+        diffs++;
+      }
+      const n = Math.min(va.length, vb.length);
+      for (let i = 0; i < n; i++) {
+        checked++;
+        for (const p of Object.keys(va[i])) {
+          if (va[i][p] !== vb[i][p]) { note(`  ${k}  ${p}: ${va[i][p]} -> ${vb[i][p]}`); diffs++; }
         }
       }
     }
+    for (const [k, vb] of gb) if (!ga.has(k)) { note(`  NEW   ${k} x${vb.length}`); diffs += vb.length; }
   }
   for (const [page, lines] of Object.entries(byPage)) {
     console.log(`\n${page}`);
@@ -143,6 +159,12 @@ const snapshot = {};
 for (const page of PAGES) {
   await send("Page.navigate", { url: `${base}/${page}.html` }, sessionId);
   await wait(3200);
+  /* Wait for the webfonts before measuring. Every text width on the page is a
+     different number in Raleway than in the Arial fallback, so a snapshot taken
+     mid-swap disagrees with itself by ~2.5% on nav links and reads as a design
+     change when nothing changed but the timing. */
+  await evalJs(`document.fonts && document.fonts.ready ? document.fonts.ready.then(()=>1) : 1`);
+  await wait(400);
   // Walk the whole document so a moved element shows up as an identity change.
   const rows = await evalJs(`(function(){
     var props = ${JSON.stringify(PROPS)};

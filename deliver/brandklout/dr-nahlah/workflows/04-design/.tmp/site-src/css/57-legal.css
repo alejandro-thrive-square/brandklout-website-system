@@ -1,0 +1,11 @@
+/* Legal prose is read differently from marketing prose: in sequence, and
+   often looking for one clause. So it drops the two-column sticky lede and
+   runs as a single measured column with the clause headings hung off it.
+   No reveal animation on the body either — a legal statement that fades in
+   as you scroll is a legal statement somebody will screenshot mid-fade. */
+.lg-body{max-width:76ch;display:grid;gap:clamp(1.6rem,3vw,2.4rem)}
+.lg-body section{display:grid;gap:.9rem}
+.lg-body h2{font-size:calc(1.6rem * var(--t-sm));max-width:none}
+.lg-body p{color:var(--fg-body);font-weight:400;line-height:1.85}
+.lg-body a{color:var(--accent);border-bottom:1px solid rgba(138,126,78,.5)}
+.lg-intro{border-left:3px solid var(--rule);padding-left:clamp(1rem,2.4vw,1.6rem)}

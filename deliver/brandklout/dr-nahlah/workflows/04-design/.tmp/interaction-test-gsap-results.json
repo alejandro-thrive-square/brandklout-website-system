@@ -35,14 +35,19 @@
     "detail": ""
   },
   {
-    "name": "every section carries its own <script>",
+    "name": "no page-level <style> or <script> left in the body",
     "pass": true,
-    "detail": "9 section scripts"
+    "detail": "0 style, 0 inline script"
   },
   {
-    "name": "every section carries its own <style>",
+    "name": "every chapter on the page activated its own module",
     "pass": true,
-    "detail": ""
+    "detail": "ch-arrival,ch-difference,ch-invitation,ch-path,ch-proof,ch-reality,ch-specialist,ch-standard,ch-transformation"
+  },
+  {
+    "name": "modules for sections that are NOT on this page stayed inert",
+    "pass": true,
+    "detail": "10 registered, 9 active"
   },
   {
     "name": "hero headline split into lines",
@@ -160,9 +165,9 @@
     "detail": ""
   },
   {
-    "name": "new sections carry their own <style> and <script>",
+    "name": "the later chapters register modules too, not just the early ones",
     "pass": true,
-    "detail": ""
+    "detail": "ch-arrival,ch-difference,ch-invitation,ch-path,ch-proof,ch-reality,ch-specialist,ch-standard,ch-transformation"
   },
   {
     "name": "comparison table renders 6 rows",

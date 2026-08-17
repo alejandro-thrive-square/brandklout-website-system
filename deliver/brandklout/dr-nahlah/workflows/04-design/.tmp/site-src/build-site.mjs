@@ -1,9 +1,23 @@
-// Assembles every page in the site from one shell + one body file per page.
+// Assembles every page in the site, plus the two bundles every page loads.
 //
-// The shell (head tokens, nav, drawer, footer, GSAP flush) lives in partials/ so
-// the eleven pages cannot drift apart. Each pages/<slug>.body.html holds only
-// <section> elements, each still carrying its own <style> and <script> — the
-// self-contained paste units the Webflow build needs.
+// Three kinds of source, and the split is deliberate:
+//
+//   partials/     the shell — head, nav, drawer, footer — so no page can drift
+//   pages/*.body.html   MARKUP ONLY. No <style>, no <script>.
+//   css/*.css     one file per component, concatenated in filename order into
+//                 assets/site.css. Filename order IS cascade order.
+//   js/*.js       the runtime (00), the kit behaviour (20) and the boot
+//                 sequence (90-91)
+//   sections/*.js one file per section, each registering itself with
+//                 WZ.section(name, fn) and running only if that section is on
+//                 the page
+//
+// The point of the two bundles: a section is now just markup. Move a
+// `<section>` from one page to another and its styling and behaviour follow it,
+// because every page already carries the whole vocabulary and each module
+// guards on its own selector. The old build inlined a <style> and a <script>
+// beside every section, so moving one meant moving three things and the rules
+// were re-emitted into all 26 pages.
 //
 // Usage: node build-site.mjs
 import fs from "node:fs";
@@ -23,8 +37,47 @@ const head = read("partials/head.html");
 const nav = read("partials/nav.html");
 const drawer = read("partials/drawer.html");
 const footer = read("partials/footer.html");
-const flush = read("partials/flush.html");
 const pagekit = read("partials/pagekit.html");
+
+/* ---------------------------------------------------------------------------
+   The two bundles.
+
+   Concatenated in filename order, with a banner per file so the assembled
+   output can still be read and a rule traced back to the component that owns
+   it. Order is load-bearing in both:
+
+   - site.css   cascade order. 00 root, 01 tokens, 02 base, 10-12 chrome,
+                20 kit, 30-38 chapters, 50-59 single-page overrides.
+   - site.js    the runtime has to define WZ before any section registers, and
+                the boot sequence has to run after all of them, because it is
+                what creates ScrollSmoother and then flushes the queue.
+   --------------------------------------------------------------------------- */
+function bundle(dirs, ext) {
+  const parts = [];
+  for (const dir of dirs) {
+    const abs = path.join(SRC, dir);
+    if (!fs.existsSync(abs)) continue;
+    for (const f of fs.readdirSync(abs).filter((n) => n.endsWith(ext)).sort()) {
+      parts.push(`/* ===== ${dir}/${f} ===== */\n` + fs.readFileSync(path.join(abs, f), "utf8").replace(/\s*$/, "") + "\n");
+    }
+  }
+  return parts.join("\n");
+}
+
+const ASSETS = path.join(OUT, "assets");
+fs.mkdirSync(ASSETS, { recursive: true });
+
+const siteCss = bundle(["css"], ".css");
+// sections/ sits between the runtime and the boot sequence: 00-runtime defines
+// WZ.section, the section modules call it, and 90-boot flushes what they queued.
+const runtimeJs = bundle(["js"], ".js");
+const sectionJs = bundle(["sections"], ".js");
+const boot = runtimeJs.indexOf("/* ===== js/90-boot.js ===== */");
+if (boot === -1) throw new Error("js/90-boot.js missing — nothing would flush the section queue");
+const siteJs = runtimeJs.slice(0, boot) + sectionJs + "\n" + runtimeJs.slice(boot);
+
+fs.writeFileSync(path.join(ASSETS, "site.css"), siteCss);
+fs.writeFileSync(path.join(ASSETS, "site.js"), siteJs);
 
 const CHAPTER_READOUT = `<div class="nav-chapter" aria-hidden="true">
         <span>Chapter</span><b id="navCh">00</b><i id="navBar"></i><span id="navName">Arrival</span>
@@ -146,7 +199,11 @@ ${footer}
 </div><!-- /#smooth-content -->
 </div><!-- /#smooth-wrapper -->
 
-${flush}
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
 </body>
 </html>
 `;

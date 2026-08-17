@@ -188,6 +188,28 @@ for (const page of PAGES) {
     await evalJs(`!!(document.getElementById('nav') && document.getElementById('drawer')
       && document.querySelector('footer.foot') && document.getElementById('smooth-wrapper'))`));
 
+  /* The architecture claim, checked rather than asserted in a comment: styling
+     and behaviour are site-wide, and each section's module runs exactly when
+     that section's markup is present. That is what makes a section something
+     you can move between pages by moving only the markup. */
+  check(page, "no CSS or JS inlined into the page",
+    await evalJs(`document.querySelectorAll('style').length === 0
+      && document.querySelectorAll('script:not([src]):not([type="application/ld+json"])').length === 0`),
+    await evalJs(`document.querySelectorAll('style').length + ' style, '
+      + document.querySelectorAll('script:not([src]):not([type="application/ld+json"])').length + ' inline script'`));
+
+  const modules = await evalJs(`(function(){
+    if (!window.WZ || !WZ.modules) return 'no registry';
+    var wrong = WZ.modules.filter(function(m){
+      var present = !!document.querySelector(m.selector);
+      var ran = WZ.active.indexOf(m.name) > -1;
+      return present !== ran;
+    }).map(function(m){ return m.name; });
+    return wrong.length ? wrong.join(',') : 'ok:' + WZ.active.length + '/' + WZ.modules.length;
+  })()`);
+  check(page, "every section module ran iff its section is on the page",
+    String(modules).startsWith("ok:"), modules);
+
   check(page, "exactly one h1",
     (await evalJs(`document.querySelectorAll('h1').length`)) === 1,
     (await evalJs(`document.querySelectorAll('h1').length`)) + " found");

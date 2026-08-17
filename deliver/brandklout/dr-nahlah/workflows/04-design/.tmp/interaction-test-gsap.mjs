@@ -111,15 +111,41 @@ check("GSAP loaded", await evalJs(`!!window.gsap`), await evalJs(`window.gsap &&
 check("ScrollTrigger registered", await evalJs(`!!window.ScrollTrigger`));
 check("SplitText available", await evalJs(`!!window.SplitText`));
 check("ScrollSmoother active", await evalJs(`!!(window.WZ && WZ.smoother)`));
+/* Await fonts.ready rather than trusting the fixed settle above: site.css is
+   now a separate request, which pushes the font swap past the old deadline on a
+   cold cache and made this read false while the page was in fact fine. */
+await evalJs(`document.fonts && document.fonts.ready ? document.fonts.ready.then(()=>1) : 1`);
 check("fonts loaded (Playfair Display)", await evalJs(`document.fonts.check("16px 'Playfair Display'")`));
 check("fonts loaded (Raleway)", await evalJs(`document.fonts.check("16px 'Raleway'")`));
 check("no section script threw", (await evalJs(`window.__wzErrors|| 0`)) === 0 || true);
 
-check("every section carries its own <script>",
-  await evalJs(`[...document.querySelectorAll('section[data-chapter]')].every(s=>s.querySelector('script'))`),
-  await evalJs(`document.querySelectorAll('section[data-chapter] > script, section[data-chapter] script').length + ' section scripts'`));
-check("every section carries its own <style>",
-  await evalJs(`[...document.querySelectorAll('section[data-chapter]')].every(s=>s.querySelector('style'))`));
+/* The architecture changed: CSS is one stylesheet and each section's behaviour
+   is a module in assets/site.js that registers itself and runs only if its
+   markup is on the page. So the question is no longer "does this section carry
+   a <script>" but "did this section's module see it and activate". */
+check("no page-level <style> or <script> left in the body",
+  await evalJs(`document.querySelectorAll('body style').length === 0
+    && document.querySelectorAll('body script:not([src])').length === 0`),
+  await evalJs(`document.querySelectorAll('body style').length + ' style, '
+    + document.querySelectorAll('body script:not([src])').length + ' inline script'`));
+check("every chapter on the page activated its own module",
+  await evalJs(`(function(){
+    if (!window.WZ || !WZ.active) return false;
+    // classList[0], not a regex on className: inside a template literal \s is
+    // not an escape sequence, so /\s+/ reaches the page as /s+/ and splits the
+    // class name on the letter s.
+    var ids = [...document.querySelectorAll('section[data-chapter]')].map(function(s){
+      return s.classList[0];
+    });
+    return ids.every(function(n){ return WZ.active.indexOf(n) > -1; });
+  })()`),
+  await evalJs(`window.WZ && WZ.active ? WZ.active.join(',') : 'no registry'`));
+check("modules for sections that are NOT on this page stayed inert",
+  await evalJs(`(function(){
+    if (!window.WZ) return false;
+    return WZ.registered.length > WZ.active.length;
+  })()`),
+  await evalJs(`window.WZ ? WZ.registered.length + ' registered, ' + WZ.active.length + ' active' : '-'`));
 
 check("hero headline split into lines",
   await evalJs(`document.querySelectorAll('#heroTitle .wz-line').length > 0`),
@@ -239,9 +265,10 @@ check("9 chapters present",
 check("chapter numbers are sequential 0-8",
   await evalJs(`[...document.querySelectorAll('section[data-chapter]')]
     .map(s=>+s.dataset.chapter).join(',') === '0,1,2,3,4,5,6,7,8'`));
-check("new sections carry their own <style> and <script>",
-  await evalJs(`['specialist','standard'].every(function(id){var s=document.getElementById(id);
-    return s && s.querySelector('style') && s.querySelector('script')})`));
+check("the later chapters register modules too, not just the early ones",
+  await evalJs(`window.WZ && ['ch-specialist','ch-standard'].every(function(n){
+    return WZ.active.indexOf(n) > -1; })`),
+  await evalJs(`window.WZ ? WZ.active.join(',') : '-'`));
 
 // Us vs. other clinics
 const vsY = await evalJs(`(function(){var e=document.getElementById('versus');

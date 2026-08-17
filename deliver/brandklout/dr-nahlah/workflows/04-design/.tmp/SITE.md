@@ -4,35 +4,99 @@ The home journey was a single verified page. This turns it into a site: one home
 page plus interior pages, all assembled from one shell so they cannot drift
 apart.
 
-**Currently 14 pages.** Eleven of them are live in Webflow; three were added on
-2026-08-10 and are local only — see [Build-out to 26 pages](#build-out-to-26-pages).
+**Currently 26 pages.** Eleven of them are live in Webflow; the rest are local
+only — see [Build-out to 26 pages](#build-out-to-26-pages).
 
 Package: [`final-site/`](./final-site/) · Source: [`site-src/`](./site-src/)
 
 Build: `node site-src/build-site.mjs` (assets: `node site-src/copy-assets.mjs`,
 gallery grid: `node site-src/gen-gallery.mjs`).
 
-## Why a builder instead of eleven HTML files
+## Why a builder instead of 26 HTML files
 
-Eleven hand-maintained pages means eleven navs, eleven footers and eleven copies
-of the token layer. The second time someone edits the nav, they diverge. So:
+26 hand-maintained pages means 26 navs, 26 footers and 26 copies of the token
+layer. The second time someone edits the nav, they diverge. So:
 
 ```
 site-src/
-  partials/head.html      tokens, reset, shared primitives, GSAP tags
+  partials/head.html      <head>: SEO slot, fonts, the stylesheet link, GSAP tags
   partials/nav.html       site nav + reading progress + chapter readout slot
   partials/drawer.html    full site index, opens at every breakpoint
-  partials/pagekit.html   the interior-page section vocabulary (one style+script)
+  partials/pagekit.html   the interior-page section vocabulary — MARKUP ONLY
   partials/footer.html    site footer
-  partials/flush.html     ScrollSmoother creation, queue flush, nav state, drawer
   pages/<slug>.body.html  ONLY the <section> elements for that page
-  build-site.mjs          assembles final-site/<slug>.html
+  css/*.css               one file per component -> assets/site.css
+  js/*.js                 the runtime (00), kit behaviour (20), boot (90-91)
+  sections/*.js           one file per section, self-guarding
+  vendor/gsap/            the GSAP build the pages load, committed
+  build-site.mjs          assembles the pages and both bundles
 ```
 
-Each output page is still fully self-contained — the Webflow build story does not
-change. `pages/home.body.html` keeps its nine per-chapter `<style>`/`<script>`
-blocks; the interior pages share `pagekit.html`, which becomes one site-wide
-embed rather than ten copies of the same CSS.
+## One stylesheet, and JS that belongs to the section
+
+The first build inlined a `<style>` and a `<script>` beside every section. That
+made each section a self-contained paste unit, which was the right call while the
+target was "lift one chapter into Webflow". It stopped being the right call once
+there were 26 pages, and it is what produced the duplicate and forked classes in
+the Webflow build.
+
+Two things changed.
+
+**The CSS is one file.** `site-src/css/*.css` is concatenated in filename order
+into `assets/site.css`, and filename order *is* cascade order:
+
+| | |
+| :--- | :--- |
+| `00-fluid-root` | the generated fluid root font-size |
+| `01-tokens` | palette, theme layer, type steps |
+| `02-base` | reset and the shared primitives |
+| `10`–`12` | chrome: nav, drawer, footer |
+| `20-pagekit` | the shared interior-page section vocabulary |
+| `30`–`38` | the nine bespoke home chapters |
+| `50`–`59` | rules only one page needs |
+
+Every page loads the same file. A rule exists once instead of being re-emitted
+into 26 pages, and a section can move between pages without its CSS having to
+move with it.
+
+**The JS belongs to the section.** Each section's behaviour is one file in
+`site-src/sections/`, and it registers itself rather than running:
+
+```js
+WZ.section('ch-arrival', function (W) { … });          // guards on .ch-arrival
+WZ.section('gallery-filter', '#gaGrid', function (W) { … });   // explicit guard
+WZ.dom('gallery-filter', '#gaGrid', function () { … });        // runs immediately
+```
+
+`WZ.section` queues; the boot sequence creates ScrollSmoother and then flushes,
+so every ScrollTrigger measures the final smoothed layout. `WZ.dom` runs
+immediately, and exists because the queue is only flushed once GSAP is up — a
+click handler that has to work with GSAP absent cannot be queued.
+
+Pass a selector when the section's own class is not specific enough to guard on.
+The gallery filter needs one because its section carries the generic `.pk` class
+that every interior page uses.
+
+The registry is exposed as `WZ.modules` / `WZ.active`, which is what lets the
+gates check the property instead of trusting it.
+
+### Proved, not asserted
+
+`swap-proof.mjs` lifts a section out of one *built* page, drops it into a
+different built page that has never carried it, and compares. Two moves, chosen
+for the two different failure modes:
+
+| Move | Result |
+| :--- | :--- |
+| home chapter 06 → `privacy-policy` | 33/33 elements, **330 computed values identical**, `ch-standard` module activated |
+| the `cases` before/after block, `veneers` → `privacy-policy` | 41/41 elements, **410 computed values identical** |
+
+With the control that matters: on `privacy-policy` *without* the section, no
+module activates at all. Without that, "the module ran" would read the same if
+every module ran on every page.
+
+`site-test.mjs` then holds the line on all 26 pages: no CSS or JS inlined into
+any page, and every module ran **iff** its section is present.
 
 ## The eleven pages
 
@@ -405,9 +469,13 @@ re-attempted.
 
 ## The page kit
 
-One `<style>` + one `<script>` covering: hero, breadcrumb, sticky-lede prose,
-card grids, image/copy splits, stat counters, before/after sliders, pull quotes,
-FAQ accordion, next-steps links and the closing CTA band.
+`css/20-pagekit.css` + `js/20-pagekit.js` covering: hero, breadcrumb, sticky-lede
+prose, card grids, image/copy splits, stat counters, before/after sliders, pull
+quotes, FAQ accordion, next-steps links and the closing CTA band.
+`partials/pagekit.html` is now markup only.
+
+The kit behaviour is not a section module — it runs unguarded, because it selects
+by attribute and every kit section on every page depends on it.
 
 Motion is attribute-driven, so page bodies stay semantic:
 
@@ -582,21 +650,86 @@ No prices are quoted anywhere, because the source site quotes none.
 All imagery is the client's own, from the 911-file extraction. No stock was
 bought for this rebuild.
 
+## One class name means one thing
+
+The build used to keep 84 class names apart with a descendant selector rooted at
+the section — `.ch-path .head`, `.ch-standard .head`, `.ch-transformation .head`,
+`.ch-difference .head` — while the markup carried plain `class="head"`. That
+reads fine as a static page and is exactly what produced the duplicate and
+renamed classes in the Webflow build: the Designer has no descendant scoping in
+its class panel, so four `.head` rules arrive as one name with four conflicting
+definitions and it forks them into `head`, `head-2`, `head-3`.
+
+`.film`, `.pin`, `.shot`, `.row`, `.a`, `.b`, `.grid`, `.after` and `.rev` had
+the same problem. `rev` alone meant "reversed split" on fourteen pages and
+"reversed story row" on a fifteenth.
+
+The rules now:
+
+- **A component's parts carry the component's prefix.** `ar-`, `re-`, `df-`,
+  `doc-`, `tf-`, `pa-`, `std-`, `pf-`, `iv-`, `foot-`, `ct-`, `pk-`. The footer
+  moved off `ft-` because `our-facility` already owned that prefix for its
+  facility tour.
+- **States are `is-*`** and are global on purpose: `is-open`, `is-solid`,
+  `is-menu-open`, `is-locked`, `is-on`.
+- **Deliberate globals stay bare** and are listed in `css-vocab.mjs`: `wrap`,
+  `section`, `label`, `btn` and its variants, `chapter-tag`, `brandmark`,
+  `magnetic`.
+- **A part may not be scoped to a container it does not always have.**
+  `.pk-card a.more` styled nothing on five uses that were not an `<a>` inside a
+  card — three `<span>` status labels and two FAQ links that carried a
+  hand-written inline style to compensate. It is now `.pk-readon`, standalone,
+  with a `.pk-readon-block` combo replacing those inline styles.
+
+**Selectors were deliberately not flattened.** Dropping the container from
+`.pk-ba .ba-tag` also drops the specificity it was carrying; measured across
+every page it moved 153 computed values — the comparison table, the hero and the
+whitening table all shifted. A component's own container is legitimate scope,
+and it travels with the section.
+
 ## Verification
 
 ```bash
-python -m http.server 8902 --directory .tmp/final-site
-node .tmp/interaction-test-gsap.mjs http://127.0.0.1:8902/index.html   # 63/63
-node .tmp/site-test.mjs http://127.0.0.1:8902                          # 137/137
+node .tmp/serve.mjs final-site 8903          # NOT python -m http.server, see below
+
+node .tmp/site-test.mjs http://127.0.0.1:8903                          # 450/450
+node .tmp/interaction-test-gsap.mjs http://127.0.0.1:8903/index.html   #  64/64
+node .tmp/css-vocab.mjs                                                # vocabulary
+node .tmp/swap-proof.mjs http://127.0.0.1:8903                         #   6/6
+node .tmp/style-snapshot.mjs http://127.0.0.1:8903 before.json         # see below
 node .tmp/capture-slices.mjs <url> <outDir> [w] [h] [step]             # screenshots
 node .tmp/hero-contrast.mjs 1640 934                                   # ink over the hero film
 ```
 
-`site-test.mjs` covers all eleven pages: shell present, one `h1`, unique
+`site-test.mjs` covers all 26 pages: shell present, one `h1`, unique
 title/description, **every internal link and in-page anchor resolves**, no broken
-images, every revealed block ends visible, sliders respond, no overflow at 1440
-or 390, no console errors, and a **WCAG AA contrast audit** of every text node
-whose background can be resolved.
+images, every revealed block ends visible, sliders respond, the **drawer opens
+and closes**, no CSS or JS inlined into the page, every section module ran iff
+its section is present, no overflow at 1440 or 390, no console errors, and a
+**WCAG AA contrast audit** of every text node whose background can be resolved.
+
+`css-vocab.mjs` enforces the three rules above against the built output: one name
+one meaning, no class on an element that nothing styles, and no part scoped to a
+container it does not always have.
+
+`style-snapshot.mjs` records every computed style on every page and diffs two
+runs. It is what makes a CSS refactor safe to attempt: the functional gates prove
+the site still *works*, and only this proves it still *looks the same*. It was
+what rejected the selector flattening, and what confirmed that moving 68 KB of
+CSS out of 25 inline blocks into one stylesheet changed nothing — **8488
+elements, 0 differences**.
+
+Two things it has to do or it lies:
+
+- **emulate reduced motion**, so the page settles deterministically and GSAP is
+  not mid-tween;
+- **await `document.fonts.ready`**, because every text width is a different
+  number in Raleway than in the Arial fallback, and a snapshot taken mid-swap
+  disagrees with itself by ~2.5% on the nav links.
+
+It also aligns by element identity rather than by index. Removing one element
+shifts every later index, which turned a one-element change into 5515 bogus
+differences and buried the real ones.
 
 ### Four harness traps worth keeping
 

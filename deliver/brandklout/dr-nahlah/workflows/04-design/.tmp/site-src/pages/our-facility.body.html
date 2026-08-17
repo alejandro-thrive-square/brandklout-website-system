@@ -64,28 +64,6 @@
 
 <!-- ---------- the tour ---------- -->
 <section class="pk" id="tour">
-  <style>
-    /* An asymmetric four-photograph tour. The grid is deliberately uneven — a
-       2x2 of identical tiles reads as a stock gallery, and there are only four
-       real photographs of this building, so each one has to carry weight. */
-    .ft-grid{display:grid;grid-template-columns:1fr;gap:clamp(.75rem,1.6vw,1.25rem)}
-    .ft-fig{margin:0;position:relative;overflow:hidden;background:var(--mist);aspect-ratio:4/3}
-    .ft-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
-      filter:grayscale(.12) contrast(1.02);will-change:transform}
-    .ft-cap{position:absolute;left:0;right:0;bottom:0;z-index:2;padding:1.4rem 1.15rem .95rem;
-      font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;font-weight:600;color:#fff;
-      /* White type on a photograph is a caption treatment, not a dark theme —
-         it keeps its own scrim rather than flipping the section's tokens. */
-      background:linear-gradient(180deg,rgba(11,11,12,0),rgba(11,11,12,.72))}
-    @media(min-width:760px){
-      .ft-grid{grid-template-columns:repeat(6,1fr);grid-auto-rows:minmax(0,auto)}
-      .ft-fig{aspect-ratio:auto}
-      .ft-a{grid-column:span 4;aspect-ratio:16/10}
-      .ft-b{grid-column:span 2;aspect-ratio:4/5}
-      .ft-c{grid-column:span 2;aspect-ratio:4/5}
-      .ft-d{grid-column:span 4;aspect-ratio:16/10}
-    }
-  </style>
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">The Tour</span></div>

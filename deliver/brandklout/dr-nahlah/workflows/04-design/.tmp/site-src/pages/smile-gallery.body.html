@@ -19,28 +19,6 @@
 </section>
 
 <section class="pk" id="gallery">
-  <style>
-    .ga-filters{display:flex;flex-wrap:wrap;gap:.5rem;margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
-    /* LIGHT-THEME FILTERS. These were dark-theme whites until 2026-08-11, when
-       regenerating the gallery reverted the light inversion (SITE.md bug 21)
-       and dropped every inactive filter button to 1.04:1. The generator is the
-       source of truth for this page, so a hand-fix to the generated body file
-       survives exactly until the next run — fix it HERE.
-       White on --gold-deep is 4.06:1, under AA, so the active chip takes
-       --gold-ink. */
-    .ga-filters button{border:1px solid var(--line-strong);padding:.6rem 1.15rem;
-      font-size:var(--label);letter-spacing:.14em;text-transform:uppercase;font-weight:600;
-      color:var(--fg-soft);transition:background .35s,color .35s,border-color .35s}
-    .ga-filters button:hover{border-color:var(--rule);color:var(--fg)}
-    .ga-filters button[aria-pressed="true"]{background:var(--gold-ink);border-color:var(--gold-ink);
-      color:#fff}
-    .ga-filters button b{font-weight:600;opacity:.78;margin-left:.45rem}
-    .ga-grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.75rem)}
-    @media(min-width:700px){ .ga-grid{grid-template-columns:repeat(2,1fr)} }
-    @media(min-width:1100px){ .ga-grid{grid-template-columns:repeat(3,1fr)} }
-    .ga-item[hidden]{display:none}
-    .ga-empty{color:var(--fg-soft);font-weight:400}
-  </style>
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">Before &amp; After</span></div>
@@ -600,27 +578,6 @@
     </div>
   </div>
 
-  <script>
-  /* Filtering is plain DOM work — it must keep working with GSAP absent. */
-  (function () {
-    var bar = document.getElementById('gaFilters'),
-        grid = document.getElementById('gaGrid');
-    if (!bar || !grid) return;
-    bar.addEventListener('click', function (e) {
-      var btn = e.target.closest('button[data-cat]');
-      if (!btn) return;
-      var cat = btn.getAttribute('data-cat');
-      bar.querySelectorAll('button').forEach(function (b) {
-        b.setAttribute('aria-pressed', String(b === btn));
-      });
-      grid.querySelectorAll('.ga-item').forEach(function (item) {
-        item.hidden = !(cat === 'all' || item.getAttribute('data-cat') === cat);
-      });
-      /* Pinned/scrubbed triggers elsewhere on the page measured the old height. */
-      if (window.ScrollTrigger) ScrollTrigger.refresh();
-    });
-  })();
-  </script>
 </section>
 
 <section class="pk pk-alt" id="note">
