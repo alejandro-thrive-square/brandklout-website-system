@@ -26,58 +26,58 @@
 </section>
 
 <!-- ---------- offices ---------- -->
-<section class="pk alt" id="offices">
+<section class="pk pk-alt" id="offices">
   <style>
-    .of-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line)}
-    .of{background:var(--card);padding:clamp(1.6rem,3vw,2.6rem);display:grid;gap:1.3rem;
+    .ct-office-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line)}
+    .ct-office{background:var(--card);padding:clamp(1.6rem,3vw,2.6rem);display:grid;gap:1.3rem;
       align-content:start}
-    .of h3{font-size:calc(2rem * var(--t-mid))}
-    .of address{font-style:normal;color:var(--fg-body);font-weight:400;line-height:1.8}
-    .of .of-line{display:grid;gap:.25rem;padding-top:1rem;border-top:1px solid var(--line)}
-    .of .of-line span{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+    .ct-office h3{font-size:calc(2rem * var(--t-mid))}
+    .ct-office address{font-style:normal;color:var(--fg-body);font-weight:400;line-height:1.8}
+    .ct-office .ct-office-line{display:grid;gap:.25rem;padding-top:1rem;border-top:1px solid var(--line)}
+    .ct-office .ct-office-line span{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
       color:var(--fg-soft)}
-    .of .of-line a{font-family:var(--f-display);font-size:calc(1.7rem * var(--t-mid));
+    .ct-office .ct-office-line a{font-family:var(--f-display);font-size:calc(1.7rem * var(--t-mid));
       color:var(--accent);transition:color .3s}
-    .of .of-line a:hover{color:var(--fg)}
-    .of .of-flag{font-size:.72rem;color:var(--fg-soft);font-weight:400;line-height:1.55;
+    .ct-office .ct-office-line a:hover{color:var(--fg)}
+    .ct-office .ct-office-flag{font-size:.72rem;color:var(--fg-soft);font-weight:400;line-height:1.55;
       border-left:2px solid var(--rule);padding-left:.75rem}
-    .of .of-dirs{margin-top:.4rem}
-    @media(min-width:860px){ .of-grid{grid-template-columns:repeat(2,1fr)} }
+    .ct-office .ct-office-dirs{margin-top:.4rem}
+    @media(min-width:860px){ .ct-office-grid{grid-template-columns:repeat(2,1fr)} }
   </style>
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">Locations</span></div>
       <h2 data-split>Where to go.</h2>
     </div>
-    <div class="of-grid" data-rv="stagger">
-      <article class="of">
+    <div class="ct-office-grid" data-rv="stagger">
+      <article class="ct-office">
         <h3>Tysons Corner &middot; McLean</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           7901 Jones Branch Drive, Suite 220<br>
           McLean, VA 22102</address>
-        <div class="of-line"><span>New patients</span>
+        <div class="ct-office-line"><span>New patients</span>
           <a href="tel:+15716199442">(571) 619-9442</a></div>
-        <div class="of-line"><span>Current patients</span>
+        <div class="ct-office-line"><span>Current patients</span>
           <a href="tel:+17034483312">(703) 448-3312</a></div>
         <!-- FLAG: /contact/ publishes (703) 493-1358 for this line; the footer and
              /dr-esam-nahlah/ publish (703) 448-3312. Still unconfirmed by the client.
-             The visible .of-flag note that used to sit here was removed on 2026-08-10
+             The visible .ct-office-flag note that used to sit here was removed on 2026-08-10
              because it shipped to the live site; the question stays open in the
              runbook, not on the page. -->
-        <a class="pk-more of-dirs"
+        <a class="pk-more ct-office-dirs"
            href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
            target="_blank" rel="noopener">Directions</a>
       </article>
-      <article class="of">
+      <article class="ct-office">
         <h3>Alexandria</h3>
         <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
           2855 Duke Street<br>
           Alexandria, VA 22314</address>
-        <div class="of-line"><span>New patients</span>
+        <div class="ct-office-line"><span>New patients</span>
           <a href="tel:+15714103430">(571) 410-3430</a></div>
-        <div class="of-line"><span>Current patients</span>
+        <div class="ct-office-line"><span>Current patients</span>
           <a href="tel:+17039405410">(703) 940-5410</a></div>
-        <a class="pk-more of-dirs"
+        <a class="pk-more ct-office-dirs"
            href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
            target="_blank" rel="noopener">Directions</a>
       </article>
@@ -95,23 +95,23 @@
 <!-- ---------- request form ---------- -->
 <section class="pk" id="book">
   <style>
-    .fm{display:grid;gap:1.1rem;max-width:64ch}
-    .fm .row{display:grid;gap:1.1rem}
-    @media(min-width:620px){ .fm .row.two{grid-template-columns:1fr 1fr} }
-    .fm label{display:grid;gap:.45rem;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+    .ct-form{display:grid;gap:1.1rem;max-width:64ch}
+    .ct-form .ct-form-row{display:grid;gap:1.1rem}
+    @media(min-width:620px){ .ct-form .ct-form-row.ct-form-row-2{grid-template-columns:1fr 1fr} }
+    .ct-form label{display:grid;gap:.45rem;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
       font-weight:600;color:var(--fg-soft)}
-    .fm input,.fm select,.fm textarea{font:inherit;font-size:1rem;font-weight:400;color:var(--fg);
+    .ct-form input,.ct-form select,.ct-form textarea{font:inherit;font-size:1rem;font-weight:400;color:var(--fg);
       background:var(--card);border:1px solid var(--line-strong);padding:.95rem 1.1rem;
       border-radius:0;transition:border-color .3s ease}
-    .fm input:focus,.fm select:focus,.fm textarea:focus{border-color:var(--rule);outline:none}
-    .fm select{appearance:none;
+    .ct-form input:focus,.ct-form select:focus,.ct-form textarea:focus{border-color:var(--rule);outline:none}
+    .ct-form select{appearance:none;
       background-image:linear-gradient(45deg,transparent 50%,var(--rule) 50%),
                        linear-gradient(135deg,var(--rule) 50%,transparent 50%);
       background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%;
       background-size:6px 6px,6px 6px;background-repeat:no-repeat}
-    .fm .req{color:var(--accent)}
-    .fm .note{font-size:.82rem;color:var(--fg-soft);font-weight:400;line-height:1.7}
-    .fm button{justify-self:start;margin-top:.4rem}
+    .ct-form .ct-req{color:var(--accent)}
+    .ct-form .ct-note{font-size:.82rem;color:var(--fg-soft);font-weight:400;line-height:1.7}
+    .ct-form button{justify-self:start;margin-top:.4rem}
   </style>
   <div class="wrap section pk-lede">
     <div class="lc-head">
@@ -124,17 +124,17 @@
     <!-- BUILD NOTE: no action/method here on purpose. Wire to the practice's
          booking system at Webflow build time — three different Flexbook URLs are
          in use on the current site and which one survives is still open. -->
-    <form class="fm" data-rv="stagger" novalidate>
-      <div class="row two">
-        <label>First name <span class="req">*</span>
+    <form class="ct-form" data-rv="stagger" novalidate>
+      <div class="ct-form-row ct-form-row-2">
+        <label>First name <span class="ct-req">*</span>
           <input type="text" name="first" autocomplete="given-name" required></label>
-        <label>Last name <span class="req">*</span>
+        <label>Last name <span class="ct-req">*</span>
           <input type="text" name="last" autocomplete="family-name" required></label>
       </div>
-      <div class="row two">
-        <label>Email <span class="req">*</span>
+      <div class="ct-form-row ct-form-row-2">
+        <label>Email <span class="ct-req">*</span>
           <input type="email" name="email" autocomplete="email" required></label>
-        <label>Phone <span class="req">*</span>
+        <label>Phone <span class="ct-req">*</span>
           <input type="tel" name="phone" autocomplete="tel" required></label>
       </div>
       <label>Which office suits you?
@@ -143,7 +143,7 @@
           <option>Alexandria</option>
           <option>Either, whichever is sooner</option>
         </select></label>
-      <label>Reason for consultation <span class="req">*</span>
+      <label>Reason for consultation <span class="ct-req">*</span>
         <select name="reason" required>
           <option value="">Select a reason</option>
           <option>Dental implants</option>
@@ -159,7 +159,7 @@
         <textarea name="message" rows="4"
           placeholder="Existing treatment plan, another quote, anxiety about the chair &mdash; all useful."></textarea></label>
       <button class="btn btn-primary magnetic" type="submit"><span>Request consultation</span></button>
-      <p class="note">Prefer to speak to someone? Call
+      <p class="ct-note">Prefer to speak to someone? Call
         <a href="tel:+15716199442" style="color:var(--accent)">(571) 619-9442</a> for McLean or
         <a href="tel:+15714103430" style="color:var(--accent)">(571) 410-3430</a> for Alexandria.
         If anxiety is what has kept you away, say so when you call. It changes how the
@@ -169,7 +169,7 @@
 </section>
 
 <!-- ---------- the offices ---------- -->
-<section class="pk light" id="visiting">
+<section class="pk pk-light" id="visiting">
   <div class="wrap section pk-split">
     <figure class="sp-fig" style="margin:0">
       <img src="assets/office-outside.jpg" alt="The practice building exterior" data-drift loading="lazy">
@@ -190,7 +190,7 @@
 </section>
 
 <!-- ---------- next ---------- -->
-<section class="pk alt" id="next">
+<section class="pk pk-alt" id="next">
   <div class="wrap section">
     <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
     <nav class="pk-next" data-rv="stagger" aria-label="Related pages">

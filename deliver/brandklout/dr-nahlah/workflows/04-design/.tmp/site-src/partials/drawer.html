@@ -6,7 +6,7 @@
       clip-path:circle(0% at calc(100% - 42px) 42px);transition:clip-path .8s cubic-bezier(.22,1,.36,1);
       display:flex;flex-direction:column;justify-content:center;overflow-y:auto;
       padding:clamp(5.5rem,10vw,7rem) var(--gutter) clamp(2rem,5vw,3rem)}
-    .drawer.open{clip-path:circle(150% at calc(100% - 42px) 42px)}
+    .drawer.is-open{clip-path:circle(150% at calc(100% - 42px) 42px)}
     .dr-grid{width:100%;max-width:var(--maxw);margin-inline:auto;display:grid;gap:clamp(1.75rem,4vw,3.5rem)}
     .dr-col h4{font-family:var(--f-body);font-size:var(--label);letter-spacing:.2em;text-transform:uppercase;
       color:var(--gold);font-weight:600;margin:0 0 1rem}
@@ -20,13 +20,13 @@
       color:rgba(255,255,255,.9);
       transform:translateY(110%);transition:transform .7s cubic-bezier(.22,1,.36,1),color .3s ease}
     .dr-col li a:hover{color:var(--gold-light)}
-    .drawer.open .dr-col li a{transform:translateY(0)}
+    .drawer.is-open .dr-col li a{transform:translateY(0)}
     /* Stagger by column so the panel deals itself out rather than snapping in. */
-    .drawer.open .dr-col:nth-child(1) li a{transition-delay:.10s}
-    .drawer.open .dr-col:nth-child(2) li a{transition-delay:.16s}
-    .drawer.open .dr-col:nth-child(3) li a{transition-delay:.22s}
-    .drawer.open .dr-col:nth-child(4) li a{transition-delay:.28s}
-    .drawer.open .dr-col:nth-child(5) li a{transition-delay:.34s}
+    .drawer.is-open .dr-col:nth-child(1) li a{transition-delay:.10s}
+    .drawer.is-open .dr-col:nth-child(2) li a{transition-delay:.16s}
+    .drawer.is-open .dr-col:nth-child(3) li a{transition-delay:.22s}
+    .drawer.is-open .dr-col:nth-child(4) li a{transition-delay:.28s}
+    .drawer.is-open .dr-col:nth-child(5) li a{transition-delay:.34s}
     .dr-foot{width:100%;max-width:var(--maxw);margin:clamp(2rem,5vw,3.25rem) auto 0;
       padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);
       display:grid;gap:1.25rem;color:rgba(255,255,255,.72);font-size:.92rem}

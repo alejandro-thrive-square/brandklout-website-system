@@ -5,8 +5,8 @@
   <style>
     .ch-arrival{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;
       padding-bottom:clamp(2.5rem,7vw,5.5rem);padding-top:clamp(7rem,14vw,9rem)}
-    .ch-arrival .bg{position:absolute;inset:0;z-index:0}
-    .ch-arrival .bg::before{content:"";position:absolute;inset:0;z-index:2;
+    .ch-arrival .ar-bg{position:absolute;inset:0;z-index:0}
+    .ch-arrival .ar-bg::before{content:"";position:absolute;inset:0;z-index:2;
       background:
         radial-gradient(110% 80% at 76% 40%,rgba(171,158,106,.20),transparent 62%),
         /* Heaviest over the copy column, clearing to the right so the footage
@@ -17,70 +17,70 @@
         linear-gradient(180deg,rgba(250,248,243,.88) 0%,rgba(250,248,243,.12) 24%,
                         rgba(250,248,243,.08) 58%,rgba(250,248,243,.82) 100%)}
     .ch-arrival{background:var(--bg)}
-    .ch-arrival .veil{position:absolute;inset:0;z-index:3;background:var(--bg);opacity:0;pointer-events:none}
-    .ch-arrival .film{position:absolute;inset:-2px;width:calc(100% + 4px);height:calc(100% + 4px);
+    .ch-arrival .ar-veil{position:absolute;inset:0;z-index:3;background:var(--bg);opacity:0;pointer-events:none}
+    .ch-arrival .ar-film{position:absolute;inset:-2px;width:calc(100% + 4px);height:calc(100% + 4px);
       object-fit:cover;z-index:0;will-change:transform;backface-visibility:hidden;
       filter:saturate(.92) brightness(1.06) contrast(.97)}
-    .ch-arrival .glow{position:absolute;right:6%;bottom:0;width:min(46vw,620px);height:min(46vw,620px);
+    .ch-arrival .ar-glow{position:absolute;right:6%;bottom:0;width:min(46vw,620px);height:min(46vw,620px);
       background:radial-gradient(circle,rgba(171,158,106,.34),transparent 68%);filter:blur(30px);z-index:1}
-    .ch-arrival .in{position:relative;z-index:4;width:100%;max-width:var(--maxw);margin-inline:auto;
+    .ch-arrival .ar-in{position:relative;z-index:4;width:100%;max-width:var(--maxw);margin-inline:auto;
       padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
       display:grid;gap:clamp(1.5rem,3vw,2.5rem)}
     .ch-arrival h1{font-size:var(--d1);max-width:15ch}
     .ch-arrival h1 em{font-style:italic;color:var(--accent-lg)}
-    .ch-arrival .lead{max-width:46ch;color:var(--fg-body);font-size:var(--body-lg);font-weight:400}
-    .ch-arrival .actions{display:flex;flex-wrap:wrap;gap:.85rem}
-    .ch-arrival .meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);
+    .ch-arrival .ar-lead{max-width:46ch;color:var(--fg-body);font-size:var(--body-lg);font-weight:400}
+    .ch-arrival .ar-actions{display:flex;flex-wrap:wrap;gap:.85rem}
+    .ch-arrival .ar-meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);
       padding-top:clamp(1rem,2.5vw,1.75rem);border-top:1px solid var(--line)}
-    .ch-arrival .meta div{display:grid;gap:.15rem}
-    .ch-arrival .meta b{font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));font-weight:500}
-    .ch-arrival .meta span{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}
-    .ch-arrival .cue{position:absolute;right:var(--gutter);bottom:clamp(1rem,3vw,2rem);z-index:5;
+    .ch-arrival .ar-meta div{display:grid;gap:.15rem}
+    .ch-arrival .ar-meta b{font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));font-weight:500}
+    .ch-arrival .ar-meta span{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}
+    .ch-arrival .ar-cue{position:absolute;right:var(--gutter);bottom:clamp(1rem,3vw,2rem);z-index:5;
       display:flex;align-items:center;gap:.7rem;font-size:.66rem;letter-spacing:.2em;
       text-transform:uppercase;color:var(--fg-soft)}
-    .ch-arrival .cue i{display:block;width:1px;height:44px;background:linear-gradient(180deg,var(--gold-deep),transparent)}
+    .ch-arrival .ar-cue i{display:block;width:1px;height:44px;background:linear-gradient(180deg,var(--gold-deep),transparent)}
     @media(max-width:719px){
       .ch-arrival{align-items:center;min-height:94svh}
       /* There is no side column left to hide behind at 390px — the copy runs
          the full width — so the footage sits further back under a flat veil
          rather than being cleared to one side. */
-      .ch-arrival .bg::after{content:"";position:absolute;inset:0;z-index:2;
+      .ch-arrival .ar-bg::after{content:"";position:absolute;inset:0;z-index:2;
         background:linear-gradient(180deg,rgba(250,248,243,.9) 0%,rgba(250,248,243,.82) 46%,
                    rgba(250,248,243,.92) 100%)}
-      .ch-arrival .glow{right:-10%;width:min(70vw,340px);height:min(70vw,340px)}
+      .ch-arrival .ar-glow{right:-10%;width:min(70vw,340px);height:min(70vw,340px)}
       .ch-arrival .btn{flex:1 1 auto}
-      .ch-arrival .cue{display:none}
+      .ch-arrival .ar-cue{display:none}
     }
   </style>
 
-  <div class="bg">
+  <div class="ar-bg">
     <!-- The practice's own b-roll. Poster frame is drawn from the video itself,
          so the hero is never empty while 8.8MB is still arriving. -->
-    <video class="film" id="heroFilm" src="assets/hero.mp4" poster="assets/hero-poster.jpg"
+    <video class="ar-film" id="heroFilm" src="assets/hero.mp4" poster="assets/hero-poster.jpg"
            muted loop playsinline preload="metadata"
            aria-label="Dr. Nahlah walking through the practice with a colleague"></video>
-    <div class="glow"></div>
+    <div class="ar-glow"></div>
   </div>
-  <div class="veil" id="heroVeil"></div>
+  <div class="ar-veil" id="heroVeil"></div>
 
-  <div class="in">
+  <div class="ar-in">
     <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Chapter 00 &middot; Arrival</span></div>
     <h1 data-anim="hide" id="heroTitle">A smile rebuilt by a <em>specialist</em></h1>
-    <p class="lead" data-anim="hide" id="heroLead">
+    <p class="ar-lead" data-anim="hide" id="heroLead">
       Not a general dentist with a weekend course. A board-certified prosthodontist who has
       spent a career rebuilding what other people gave up on.
     </p>
-    <div class="actions" data-anim="hide">
+    <div class="ar-actions" data-anim="hide">
       <a class="btn btn-primary magnetic" href="#invitation"><span>Book a Free Consult</span></a>
       <a class="btn btn-ghost magnetic" href="#transformation"><span>See the Transformation</span></a>
     </div>
-    <div class="meta" data-anim="hide">
+    <div class="ar-meta" data-anim="hide">
       <div><b>D.D.S., M.S.</b><span>Diplomate, Am. Board of Prosthodontics</span></div>
       <div><b>Since 2003</b><span>In Practice</span></div>
       <div><b>2 Offices</b><span>McLean &amp; Alexandria</span></div>
     </div>
   </div>
-  <div class="cue" data-anim="hide"><span>Begin</span><i></i></div>
+  <div class="ar-cue" data-anim="hide"><span>Begin</span><i></i></div>
 
   <script>
   WZ.add(function(W){
@@ -114,19 +114,19 @@
     }
     tl.from(root.querySelector('.chapter-tag'),{opacity:0,x:-24,duration:.9,ease:'power3.out'},.05)
       .from('#heroLead',       {opacity:0,y:26,duration:.9,ease:'power3.out'},.55)
-      .from(root.querySelector('.actions'),{opacity:0,y:26,duration:.9,ease:'power3.out'},.68)
-      .from(root.querySelectorAll('.meta div'),{opacity:0,y:22,duration:.8,stagger:.08,ease:'power3.out'},.78)
-      .from(root.querySelector('.cue'),{opacity:0,duration:.8},.9)
+      .from(root.querySelector('.ar-actions'),{opacity:0,y:26,duration:.9,ease:'power3.out'},.68)
+      .from(root.querySelectorAll('.ar-meta div'),{opacity:0,y:22,duration:.8,stagger:.08,ease:'power3.out'},.78)
+      .from(root.querySelector('.ar-cue'),{opacity:0,duration:.8},.9)
       .from('#heroFilm',{opacity:0,scale:1.09,duration:1.7,ease:'power3.out'},0);
 
     /* Departure — the chapter recedes as you leave it. */
     gsap.timeline({scrollTrigger:{trigger:root,start:'top top',end:'bottom top',scrub:.6}})
-      .to(root.querySelector('.in'),{yPercent:-16,opacity:.15,ease:'none'},0)
+      .to(root.querySelector('.ar-in'),{yPercent:-16,opacity:.15,ease:'none'},0)
       .to('#heroFilm',{yPercent:5,scale:1.1,ease:'none'},0)
       .to('#heroVeil',{opacity:.55,ease:'none'},0);
 
     /* Scroll cue nudges until the visitor moves. */
-    gsap.to(root.querySelector('.cue i'),{scaleY:.3,transformOrigin:'top',duration:1.1,
+    gsap.to(root.querySelector('.ar-cue i'),{scaleY:.3,transformOrigin:'top',duration:1.1,
       repeat:-1,yoyo:true,ease:'power1.inOut'});
   });
   </script>
@@ -138,34 +138,34 @@
 <section class="ch-reality" id="reality" data-chapter="1" data-chapter-name="The Reality">
   <style>
     .ch-reality{position:relative;background:var(--bg)}
-    .ch-reality .stage{min-height:100svh;display:grid;align-content:center;
+    .ch-reality .re-stage{min-height:100svh;display:grid;align-content:center;
       padding-block:clamp(4rem,10vw,8rem);position:relative;z-index:2}
-    .ch-reality .big{font-family:var(--f-display);font-size:var(--d2);line-height:1.14;
+    .ch-reality .re-big{font-family:var(--f-display);font-size:var(--d2);line-height:1.14;
       letter-spacing:-.02em;max-width:22ch}
-    .ch-reality .big{color:var(--fg)}
+    .ch-reality .re-big{color:var(--fg)}
     /* The unread state has to be faint enough to read as "not yet" and dark
        enough to still be legible copy on cream. */
-    .ch-reality .big .wz-word{color:rgba(20,20,22,.2)}
-    .ch-reality .after{margin-top:clamp(2rem,4vw,3.25rem);display:grid;gap:1.25rem;max-width:52ch}
-    .ch-reality .after p{color:var(--fg-body);font-weight:400;line-height:1.8}
-    .ch-reality .frame{position:absolute;right:0;top:50%;transform:translateY(-50%);
+    .ch-reality .re-big .wz-word{color:rgba(20,20,22,.2)}
+    .ch-reality .re-after{margin-top:clamp(2rem,4vw,3.25rem);display:grid;gap:1.25rem;max-width:52ch}
+    .ch-reality .re-after p{color:var(--fg-body);font-weight:400;line-height:1.8}
+    .ch-reality .re-frame{position:absolute;right:0;top:50%;transform:translateY(-50%);
       width:min(38vw,520px);aspect-ratio:4/5;overflow:hidden;z-index:1;opacity:.5}
-    .ch-reality .frame img{filter:grayscale(1) contrast(.95) brightness(1.08)}
-    .ch-reality .frame img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1)}
-    .ch-reality .frame::after{content:"";position:absolute;inset:0;
+    .ch-reality .re-frame img{filter:grayscale(1) contrast(.95) brightness(1.08)}
+    .ch-reality .re-frame img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1)}
+    .ch-reality .re-frame::after{content:"";position:absolute;inset:0;
       background:linear-gradient(90deg,var(--bg),rgba(250,248,243,.35) 60%,transparent)}
-    @media(max-width:900px){ .ch-reality .frame{display:none} }
+    @media(max-width:900px){ .ch-reality .re-frame{display:none} }
   </style>
 
-  <div class="frame"><img id="realityImg" src="assets/case2-before.jpg" alt="" loading="lazy"></div>
-  <div class="wrap stage">
-    <div class="pad">
+  <div class="re-frame"><img id="realityImg" src="assets/case2-before.jpg" alt="" loading="lazy"></div>
+  <div class="wrap re-stage">
+    <div>
       <div class="chapter-tag"><i></i><span class="label">Chapter 01 &middot; The Reality</span></div>
-      <p class="big" id="realityBig">
+      <p class="re-big" id="realityBig">
         You have probably been told this is complicated. That it will take years, cost a fortune,
         or simply cannot be done.
       </p>
-      <div class="after" id="realityAfter">
+      <div class="re-after" id="realityAfter">
         <p>Usually that is not a verdict on your mouth. It is a verdict on the tools available to
            whoever was looking at it.</p>
         <p>Most implant failures are not surgical failures. They are planning failures, and planning is the entire discipline a prosthodontist trains three extra years to do.</p>
@@ -214,25 +214,25 @@
 <section class="ch-difference" id="difference" data-chapter="2" data-chapter-name="The Difference">
   <style>
     .ch-difference{background:var(--bg-2);border-block:1px solid var(--line-2);position:relative}
-    .ch-difference .head{display:grid;gap:1.1rem;margin-bottom:clamp(2.5rem,5vw,4rem);max-width:34ch}
-    .ch-difference .head h2{font-size:var(--h2)}
-    .ch-difference .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.75rem,4vw,3rem)}
-    .ch-difference .stat b{display:block;font-family:var(--f-display);font-size:calc(5rem * var(--t-disp));
+    .ch-difference .df-head{display:grid;gap:1.1rem;margin-bottom:clamp(2.5rem,5vw,4rem);max-width:34ch}
+    .ch-difference .df-head h2{font-size:var(--h2)}
+    .ch-difference .df-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.75rem,4vw,3rem)}
+    .ch-difference .df-stat b{display:block;font-family:var(--f-display);font-size:calc(5rem * var(--t-disp));
       color:var(--accent-lg);line-height:1;font-weight:500;font-variant-numeric:tabular-nums}
-    .ch-difference .stat span{display:block;margin-top:.6rem;font-size:.74rem;letter-spacing:.16em;
+    .ch-difference .df-stat span{display:block;margin-top:.6rem;font-size:.74rem;letter-spacing:.16em;
       text-transform:uppercase;color:var(--fg-soft)}
-    .ch-difference .stat{position:relative;padding-top:1.25rem}
-    .ch-difference .stat::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+    .ch-difference .df-stat{position:relative;padding-top:1.25rem}
+    .ch-difference .df-stat::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
       background:var(--line);transform:scaleX(0);transform-origin:left}
-    .marquee{margin-top:clamp(3rem,6vw,5rem);overflow:hidden;border-block:1px solid rgba(138,126,78,.3);
+    .df-marquee{margin-top:clamp(3rem,6vw,5rem);overflow:hidden;border-block:1px solid rgba(138,126,78,.3);
       padding-block:clamp(.85rem,1.6vw,1.3rem)}
-    .marquee .row{display:flex;width:max-content;will-change:transform}
-    .marquee .row span{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-mid));
+    .df-marquee .df-row{display:flex;width:max-content;will-change:transform}
+    .df-marquee .df-row span{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-mid));
       color:var(--fg-body);white-space:nowrap;padding-inline:clamp(.9rem,2vw,1.7rem)}
-    .marquee .row b{color:var(--accent);font-size:.65rem;align-self:center}
+    .df-marquee .df-row b{color:var(--accent);font-size:.65rem;align-self:center}
 
     /* --- us vs. them --- */
-    .versus{padding-block:clamp(3.5rem,7vw,6.5rem)}
+    .df-versus{padding-block:clamp(3.5rem,7vw,6.5rem)}
     .vs-head{margin-bottom:clamp(1.75rem,3.5vw,2.75rem);max-width:40ch}
     .vs-head h3{font-size:var(--h2)}
     .vs-head p{margin-top:.9rem;color:var(--fg-body);font-weight:400}
@@ -270,11 +270,11 @@
       .vs-row:not(.vs-head-row) .vs-us::before{content:"Here";color:var(--accent)}
       .vs-row:not(.vs-head-row) .vs-them::before{content:"Elsewhere";color:var(--fg-soft)}
     }
-    @media(min-width:720px){ .ch-difference .stats{grid-template-columns:repeat(4,1fr)} }
+    @media(min-width:720px){ .ch-difference .df-stats{grid-template-columns:repeat(4,1fr)} }
   </style>
 
   <div class="wrap section">
-    <div class="head">
+    <div class="df-head">
       <div class="chapter-tag"><i></i><span class="label">Chapter 02 &middot; The Difference</span></div>
       <h2>One of twelve recognised dental specialties.</h2>
     </div>
@@ -283,16 +283,16 @@
          numbers. The rating was corrected to 4.9 by the client on 2026-08-10;
          note the Google block further down this page still reads 5.0, which is
          how the live site currently stands. -->
-    <div class="stats" id="diffStats">
-      <div class="stat"><b data-count="23" data-suffix="+">0</b><span>Years in Practice</span></div>
-      <div class="stat"><b data-count="12">0</b><span>Board Credentials</span></div>
-      <div class="stat"><b data-count="4.9" data-decimals="1">0</b><span>Average Patient Rating</span></div>
-      <div class="stat"><b data-count="2">0</b><span>Virginia Locations</span></div>
+    <div class="df-stats" id="diffStats">
+      <div class="df-stat"><b data-count="23" data-suffix="+">0</b><span>Years in Practice</span></div>
+      <div class="df-stat"><b data-count="12">0</b><span>Board Credentials</span></div>
+      <div class="df-stat"><b data-count="4.9" data-decimals="1">0</b><span>Average Patient Rating</span></div>
+      <div class="df-stat"><b data-count="2">0</b><span>Virginia Locations</span></div>
     </div>
   </div>
 
   <!-- ---------- Us vs. other clinics ---------- -->
-  <div class="wrap versus" id="versus">
+  <div class="wrap df-versus" id="versus">
     <div class="vs-head">
       <h3>Why patients travel for this.</h3>
       <p>Most implant cases pass through three or four sets of hands. Here, they don&rsquo;t.</p>
@@ -331,8 +331,8 @@
     </div>
   </div>
 
-  <div class="marquee" aria-hidden="true">
-    <div class="row" id="mqRow">
+  <div class="df-marquee" aria-hidden="true">
+    <div class="df-row" id="mqRow">
       <span>Board-Certified Prosthodontist</span><b>◆</b>
       <span>Fellow, American College of Prosthodontists</span><b>◆</b>
       <span>All-on-4 Full-Arch Restoration</span><b>◆</b>
@@ -361,7 +361,7 @@
 
     if(W.reduced) return;
 
-    gsap.fromTo(root.querySelectorAll('.stat'),
+    gsap.fromTo(root.querySelectorAll('.df-stat'),
       {opacity:0,y:26},
       {opacity:1,y:0,duration:.9,stagger:.1,ease:'power3.out',
        scrollTrigger:{trigger:'#diffStats',start:'top 85%'}});
@@ -399,55 +399,55 @@
 <section class="ch-specialist" id="specialist" data-chapter="3" data-chapter-name="The Specialist">
   <style>
     .ch-specialist{background:var(--bg-3);position:relative;overflow:hidden}
-    .ch-specialist .grid{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vw,5rem);align-items:start}
-    .ch-specialist .portrait{position:relative}
-    .ch-specialist .portrait .plate{position:relative;overflow:hidden;aspect-ratio:4/5;
+    .ch-specialist .doc-grid{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vw,5rem);align-items:start}
+    .ch-specialist .doc-portrait{position:relative}
+    .ch-specialist .doc-portrait .doc-plate{position:relative;overflow:hidden;aspect-ratio:4/5;
       background:linear-gradient(160deg,#fff,var(--mist))}
-    .ch-specialist .portrait .plate::after{content:"";position:absolute;inset:0;
+    .ch-specialist .doc-portrait .doc-plate::after{content:"";position:absolute;inset:0;
       background:radial-gradient(80% 60% at 50% 30%,rgba(171,158,106,.24),transparent 70%)}
-    .ch-specialist .portrait img{position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+    .ch-specialist .doc-portrait img{position:absolute;left:50%;bottom:0;transform:translateX(-50%);
       height:104%;width:auto;max-width:none;object-fit:contain;
       filter:contrast(1.02) brightness(1.02) saturate(.98);z-index:1}
-    .ch-specialist .sig{position:absolute;left:0;bottom:clamp(-1rem,-2vw,-1.5rem);z-index:2;
+    .ch-specialist .doc-sig{position:absolute;left:0;bottom:clamp(-1rem,-2vw,-1.5rem);z-index:2;
       background:var(--bg-3);padding:1rem 1.6rem 1rem 0;border-top:1px solid rgba(138,126,78,.45)}
-    .ch-specialist .sig b{display:block;font-family:var(--f-display);font-size:calc(1.6rem * var(--t-mid));
+    .ch-specialist .doc-sig b{display:block;font-family:var(--f-display);font-size:calc(1.6rem * var(--t-mid));
       font-weight:500}
-    .ch-specialist .sig span{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .ch-specialist .doc-sig span{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
     .ch-specialist h2{font-size:var(--h2);max-width:16ch;margin-bottom:1.5rem}
-    .ch-specialist .bio{display:grid;gap:1.15rem;max-width:56ch}
-    .ch-specialist .bio p{color:var(--fg-body);font-weight:400;line-height:1.85}
-    .ch-specialist .bio strong{color:var(--fg);font-weight:600}
-    .creds{margin-top:clamp(2rem,4vw,3rem)}
-    .creds h4{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+    .ch-specialist .doc-bio{display:grid;gap:1.15rem;max-width:56ch}
+    .ch-specialist .doc-bio p{color:var(--fg-body);font-weight:400;line-height:1.85}
+    .ch-specialist .doc-bio strong{color:var(--fg);font-weight:600}
+    .doc-creds{margin-top:clamp(2rem,4vw,3rem)}
+    .doc-creds h4{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
       font-family:var(--f-body);font-weight:600;margin-bottom:1.1rem}
-    .creds ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
-    .creds li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:baseline;
+    .doc-creds ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
+    .doc-creds li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:baseline;
       padding-block:.7rem;border-top:1px solid var(--line);
       font-size:.93rem;font-weight:400;color:var(--fg-body)}
-    .creds li:last-child{border-bottom:1px solid var(--line)}
-    .creds li i{width:5px;height:5px;border-radius:50%;background:var(--rule);display:block;
+    .doc-creds li:last-child{border-bottom:1px solid var(--line)}
+    .doc-creds li i{width:5px;height:5px;border-radius:50%;background:var(--rule);display:block;
       transform:translateY(-2px)}
-    .creds-more{display:inline-flex;align-items:center;gap:.55rem;margin-top:1.15rem;
+    .doc-creds-more{display:inline-flex;align-items:center;gap:.55rem;margin-top:1.15rem;
       font-size:var(--label);letter-spacing:.16em;text-transform:uppercase;font-weight:600;
       color:var(--accent);border-bottom:1px solid rgba(138,126,78,.5);padding-bottom:.35rem;
       transition:color .35s,border-color .35s}
-    .creds-more::after{content:"\2192";transition:transform .4s cubic-bezier(.22,1,.36,1)}
-    .creds-more:hover{color:var(--fg);border-color:var(--fg)}
-    .creds-more:hover::after{transform:translateX(5px)}
-    @media(min-width:900px){ .ch-specialist .grid{grid-template-columns:.82fr 1.18fr} }
+    .doc-creds-more::after{content:"\2192";transition:transform .4s cubic-bezier(.22,1,.36,1)}
+    .doc-creds-more:hover{color:var(--fg);border-color:var(--fg)}
+    .doc-creds-more:hover::after{transform:translateX(5px)}
+    @media(min-width:900px){ .ch-specialist .doc-grid{grid-template-columns:.82fr 1.18fr} }
   </style>
 
-  <div class="wrap section grid">
-    <div class="portrait">
-      <div class="plate"><img id="specPortrait" src="assets/dr-nahlah.png"
+  <div class="wrap section doc-grid">
+    <div class="doc-portrait">
+      <div class="doc-plate"><img id="specPortrait" src="assets/dr-nahlah.png"
            alt="Dr. Esam Nahlah, D.D.S., M.S., board-certified prosthodontist" loading="lazy"></div>
-      <div class="sig"><b>Dr. Esam Nahlah</b><span>D.D.S., M.S.</span></div>
+      <div class="doc-sig"><b>Dr. Esam Nahlah</b><span>D.D.S., M.S.</span></div>
     </div>
 
     <div>
       <div class="chapter-tag"><i></i><span class="label">Chapter 03 &middot; The Specialist</span></div>
       <h2 id="specTitle">The credentials behind the work.</h2>
-      <div class="bio" id="specBio">
+      <div class="doc-bio" id="specBio">
         <p>Dr. Nahlah has practised dentistry <strong>since 2003</strong>, moving to Northern Virginia
            in 2013 to focus entirely on prosthodontics: esthetic dentistry, implant dentistry,
            full-mouth rehabilitation and smile makeovers.</p>
@@ -458,7 +458,7 @@
            design and dental implants, and teaches hands-on courses for other dentists. That is the kind of work that tends to bring the difficult cases to his door.</p>
       </div>
 
-      <div class="creds">
+      <div class="doc-creds">
         <h4>Credentials &amp; Certifications</h4>
         <ul id="credList">
           <li><i></i>Diplomate, American Board of Prosthodontics</li>
@@ -477,7 +477,7 @@
              reconciliation is gone: the page now says 12 and shows 8 with
              nothing explaining the gap. Mirrored here to match the live site;
              worth raising with the client. -->
-        <a class="creds-more" href="meet-dr-nahlah.html">Meet Dr. Nahlah</a>
+        <a class="doc-creds-more" href="meet-dr-nahlah.html">Meet Dr. Nahlah</a>
       </div>
     </div>
   </div>
@@ -510,70 +510,70 @@
 <section class="ch-transformation" id="transformation" data-chapter="4" data-chapter-name="Transformation" data-theme="light">
   <style>
     .ch-transformation{background:var(--bg-2);color:var(--fg-body)}
-    .ch-transformation .pin{min-height:100svh;display:grid;align-content:center;
+    .ch-transformation .tf-pin{min-height:100svh;display:grid;align-content:center;
       padding-block:clamp(3rem,7vw,5rem);overflow:hidden}
-    .ch-transformation .head{display:grid;gap:.9rem;margin-bottom:clamp(1.5rem,3vw,2.25rem)}
+    .ch-transformation .tf-head{display:grid;gap:.9rem;margin-bottom:clamp(1.5rem,3vw,2.25rem)}
 
     .ch-transformation h2{font-size:var(--h2);max-width:16ch}
-    .cmp{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--mist);
+    .tf-cmp{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--mist);
       max-height:58svh;margin-inline:auto;width:100%}
-    .cmp .slide{position:absolute;inset:0;opacity:0}
-    .cmp .slide.on{opacity:1}
-    .cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-    .cmp .aft{clip-path:inset(0 0 0 var(--pos,0%))}
-    .cmp .handle{position:absolute;top:0;bottom:0;left:var(--pos,0%);width:2px;background:var(--gold);
+    .tf-cmp .tf-slide{position:absolute;inset:0;opacity:0}
+    .tf-cmp .tf-slide.is-on{opacity:1}
+    .tf-cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .tf-cmp .tf-aft{clip-path:inset(0 0 0 var(--pos,0%))}
+    .tf-cmp .tf-handle{position:absolute;top:0;bottom:0;left:var(--pos,0%);width:2px;background:var(--gold);
       transform:translateX(-1px);z-index:3;opacity:0}
-    .cmp .handle::before{content:"";position:absolute;top:50%;left:50%;
+    .tf-cmp .tf-handle::before{content:"";position:absolute;top:50%;left:50%;
       width:clamp(44px,4.4vw,58px);height:clamp(44px,4.4vw,58px);transform:translate(-50%,-50%);
       border-radius:50%;background:var(--gold);box-shadow:0 6px 30px rgba(0,0,0,.3)}
-    .cmp .tag{position:absolute;top:1rem;padding:.4rem .85rem;font-size:.62rem;letter-spacing:.18em;
+    .tf-cmp .tf-tag{position:absolute;top:1rem;padding:.4rem .85rem;font-size:.62rem;letter-spacing:.18em;
       text-transform:uppercase;font-weight:700;z-index:4}
-    .cmp .tag.b{left:1rem;background:rgba(11,11,12,.72);color:#fff}
-    .cmp .tag.a{right:1rem;background:var(--gold-ink);color:#fff}
+    .tf-cmp .tf-tag.tf-b{left:1rem;background:rgba(11,11,12,.72);color:#fff}
+    .tf-cmp .tf-tag.tf-a{right:1rem;background:var(--gold-ink);color:#fff}
     .ch-transformation .tf-foot{margin-top:1rem;display:flex;align-items:center;justify-content:space-between;
       flex-wrap:wrap;gap:.6rem 1.5rem;font-size:.82rem;color:var(--fg-body)}
     .tf-more{margin-right:auto;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
       font-weight:600;color:var(--accent);border-bottom:1px solid rgba(102,92,51,.55);
       padding-bottom:.2rem;transition:color .35s,border-color .35s}
     .tf-more:hover{color:var(--fg);border-color:var(--fg)}
-    .ch-transformation .dots{display:flex;gap:.45rem;align-items:center}
-    .ch-transformation .dots i{display:block;width:26px;height:2px;background:var(--line)}
-    .ch-transformation .dots i.on{background:var(--accent-lg)}
+    .ch-transformation .tf-dots{display:flex;gap:.45rem;align-items:center}
+    .ch-transformation .tf-dots i{display:block;width:26px;height:2px;background:var(--line)}
+    .ch-transformation .tf-dots i.is-on{background:var(--accent-lg)}
     @media(max-width:719px){
-      .cmp{aspect-ratio:4/3;max-height:none}
-      .cmp .tag{font-size:.54rem;padding:.3rem .55rem}
+      .tf-cmp{aspect-ratio:4/3;max-height:none}
+      .tf-cmp .tf-tag{font-size:.54rem;padding:.3rem .55rem}
     }
   </style>
 
-  <div class="pin" id="tPin">
+  <div class="tf-pin" id="tPin">
     <div class="wrap">
-      <div class="head">
+      <div class="tf-head">
         <div class="chapter-tag"><i></i><span class="label">Chapter 04 &middot; The Transformation</span></div>
         <h2>Keep scrolling. Watch it change.</h2>
       </div>
 
-      <div class="cmp" id="cmp">
-        <div class="slide on" data-slide="0">
+      <div class="tf-cmp" id="cmp">
+        <div class="tf-slide is-on" data-slide="0">
           <img src="assets/case1-before.jpg" alt="Patient smile before veneers and implant restoration">
-          <img class="aft" src="assets/case1-after.jpg" alt="The same smile after treatment">
+          <img class="tf-aft" src="assets/case1-after.jpg" alt="The same smile after treatment">
         </div>
-        <div class="slide" data-slide="1">
+        <div class="tf-slide" data-slide="1">
           <img src="assets/case2-before.jpg" alt="Patient smile before double-arch All-on-4">
-          <img class="aft" src="assets/case2-after.jpg" alt="The same smile after double-arch All-on-4">
+          <img class="tf-aft" src="assets/case2-after.jpg" alt="The same smile after double-arch All-on-4">
         </div>
-        <div class="slide" data-slide="2">
+        <div class="tf-slide" data-slide="2">
           <img src="assets/case3-before.jpg" alt="Patient smile before single-arch All-on-4">
-          <img class="aft" src="assets/case3-after.jpg" alt="The same smile after single-arch All-on-4">
+          <img class="tf-aft" src="assets/case3-after.jpg" alt="The same smile after single-arch All-on-4">
         </div>
-        <span class="tag b">Before</span>
-        <span class="tag a">After</span>
-        <div class="handle" id="tHandle"></div>
+        <span class="tf-tag tf-b">Before</span>
+        <span class="tf-tag tf-a">After</span>
+        <div class="tf-handle" id="tHandle"></div>
       </div>
 
       <div class="tf-foot">
         <span id="tCaption">Porcelain veneers with implant restoration &middot; upper and lower arch</span>
         <a class="tf-more" href="smile-gallery.html">See every case &rarr;</a>
-        <span class="dots" id="tDots"><i class="on"></i><i></i><i></i></span>
+        <span class="tf-dots" id="tDots"><i class="is-on"></i><i></i><i></i></span>
       </div>
     </div>
   </div>
@@ -585,7 +585,7 @@
         cmp   = document.getElementById('cmp'),
         cap   = document.getElementById('tCaption'),
         dots  = document.getElementById('tDots').children,
-        slides= cmp.querySelectorAll('.slide'),
+        slides= cmp.querySelectorAll('.tf-slide'),
         handle= document.getElementById('tHandle');
 
     var CAPTIONS = [
@@ -595,8 +595,8 @@
     ];
 
     function show(i){
-      for(var s=0;s<slides.length;s++) slides[s].classList.toggle('on', s===i);
-      for(var d=0;d<dots.length;d++) dots[d].classList.toggle('on', d===i);
+      for(var s=0;s<slides.length;s++) slides[s].classList.toggle('is-on', s===i);
+      for(var d=0;d<dots.length;d++) dots[d].classList.toggle('is-on', d===i);
       cap.innerHTML = CAPTIONS[i];
     }
     function setPos(p){ cmp.style.setProperty('--pos', p + '%'); }
@@ -640,7 +640,7 @@
       if(state.idx !== seg){ state.idx = seg; show(seg); }
     });
 
-    gsap.from(root.querySelectorAll('.head > *'),{opacity:0,y:24,duration:.9,stagger:.1,
+    gsap.from(root.querySelectorAll('.tf-head > *'),{opacity:0,y:24,duration:.9,stagger:.1,
       ease:'power3.out',scrollTrigger:{trigger:root,start:'top 70%'}});
   });
   </script>
@@ -652,68 +652,68 @@
 <section class="ch-path" id="path" data-chapter="5" data-chapter-name="The Path">
   <style>
     .ch-path{background:var(--bg);position:relative;overflow:hidden}
-    .ch-path .pin{height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative}
-    .ch-path .head{padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
+    .ch-path .pa-pin{height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative}
+    .ch-path .pa-head{padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
       max-width:var(--maxw);margin-inline:auto;width:100%;margin-bottom:clamp(1.5rem,3vw,2.5rem)}
     .ch-path h2{font-size:var(--h2);max-width:16ch}
-    .ch-path .track{display:flex;gap:clamp(1rem,2.4vw,2rem);
+    .ch-path .pa-track{display:flex;gap:clamp(1rem,2.4vw,2rem);
       padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
       width:max-content;align-items:stretch}
-    .ch-path .card{width:clamp(258px,29vw,430px);flex:none;border:1px solid var(--line);
+    .ch-path .pa-card{width:clamp(258px,29vw,430px);flex:none;border:1px solid var(--line);
       padding:clamp(1.4rem,2.4vw,2.25rem);display:flex;flex-direction:column;gap:.9rem;
       background:var(--card);position:relative;overflow:hidden}
-    .ch-path .card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+    .ch-path .pa-card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
       background:var(--rule);transform:scaleX(0);transform-origin:left}
-    .ch-path .card .no{font-family:var(--f-display);font-size:calc(4rem * var(--t-lg));
+    .ch-path .pa-card .pa-no{font-family:var(--f-display);font-size:calc(4rem * var(--t-lg));
       color:var(--accent-lg);line-height:.9}
-    .ch-path .card h3{font-size:var(--h3)}
-    .ch-path .card p{color:var(--fg-body);font-weight:400;font-size:.95rem}
-    .ch-path .card .shot{margin-top:auto;aspect-ratio:16/10;overflow:hidden}
-    .ch-path .card .shot img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);
+    .ch-path .pa-card h3{font-size:var(--h3)}
+    .ch-path .pa-card p{color:var(--fg-body);font-weight:400;font-size:.95rem}
+    .ch-path .pa-card .pa-shot{margin-top:auto;aspect-ratio:16/10;overflow:hidden}
+    .ch-path .pa-card .pa-shot img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);
       transition:filter .6s,transform .8s}
-    .ch-path .card:hover .shot img{filter:grayscale(0);transform:scale(1.05)}
-    .ch-path .bar{position:absolute;left:calc(var(--gutter) + var(--rail));right:var(--gutter);
+    .ch-path .pa-card:hover .pa-shot img{filter:grayscale(0);transform:scale(1.05)}
+    .ch-path .pa-bar{position:absolute;left:calc(var(--gutter) + var(--rail));right:var(--gutter);
       bottom:clamp(1.5rem,4vw,3rem);height:1px;background:var(--line)}
-    .ch-path .bar i{position:absolute;inset:0;background:var(--rule);transform:scaleX(0);transform-origin:left}
-    @media(max-width:719px){ .ch-path .card{width:78vw} }
+    .ch-path .pa-bar i{position:absolute;inset:0;background:var(--rule);transform:scaleX(0);transform-origin:left}
+    @media(max-width:719px){ .ch-path .pa-card{width:78vw} }
   </style>
 
-  <div class="pin" id="pathPin">
-    <div class="head">
+  <div class="pa-pin" id="pathPin">
+    <div class="pa-head">
       <div class="chapter-tag"><i></i><span class="label">Chapter 05 &middot; The Path</span></div>
       <h2>Four visits, not four years.</h2>
     </div>
-    <div class="track" id="pathTrack">
-      <article class="card">
-        <span class="no">01</span>
+    <div class="pa-track" id="pathTrack">
+      <article class="pa-card">
+        <span class="pa-no">01</span>
         <h3>Consultation &amp; 3D Scan</h3>
         <p>A cone-beam scan shows the bone we actually have to work with. You leave knowing
            whether you are a candidate, what it costs, and how long it takes.</p>
-        <div class="shot"><img src="assets/consult.jpg" alt="" loading="lazy"></div>
+        <div class="pa-shot"><img src="assets/consult.jpg" alt="" loading="lazy"></div>
       </article>
-      <article class="card">
-        <span class="no">02</span>
+      <article class="pa-card">
+        <span class="pa-no">02</span>
         <h3>Digital Smile Design</h3>
         <p>The final teeth are designed before a single implant is placed. You approve the
            result in advance rather than hoping for it.</p>
-        <div class="shot"><img src="assets/case1-after.jpg" alt="" loading="lazy"></div>
+        <div class="pa-shot"><img src="assets/case1-after.jpg" alt="" loading="lazy"></div>
       </article>
-      <article class="card">
-        <span class="no">03</span>
+      <article class="pa-card">
+        <span class="pa-no">03</span>
         <h3>Guided Placement</h3>
         <p>Implants are placed through a surgical guide built from your scan, under sedation
            if you want it. Many patients leave the same day with fixed teeth.</p>
-        <div class="shot"><img src="assets/office.jpg" alt="" loading="lazy"></div>
+        <div class="pa-shot"><img src="assets/office.jpg" alt="" loading="lazy"></div>
       </article>
-      <article class="card">
-        <span class="no">04</span>
+      <article class="pa-card">
+        <span class="pa-no">04</span>
         <h3>Final Restoration</h3>
         <p>Once healing is complete the definitive teeth go in, shaped, shaded and bite-balanced
            by the same specialist who planned them.</p>
-        <div class="shot"><img src="assets/case2-after.jpg" alt="" loading="lazy"></div>
+        <div class="pa-shot"><img src="assets/case2-after.jpg" alt="" loading="lazy"></div>
       </article>
     </div>
-    <div class="bar"><i id="pathBar"></i></div>
+    <div class="pa-bar"><i id="pathBar"></i></div>
   </div>
 
   <script>
@@ -750,7 +750,7 @@
     });
 
     /* Each card lights its underline as it reaches centre stage. */
-    gsap.utils.toArray('#pathTrack .card').forEach(function(card){
+    gsap.utils.toArray('#pathTrack .pa-card').forEach(function(card){
       gsap.to(card,{'--x':1,duration:.1});
       ScrollTrigger.create({
         trigger: card,
@@ -758,13 +758,13 @@
         start: 'left 72%',
         end: 'right 28%',
         onEnter:      function(){ gsap.to(card,{borderColor:'rgba(138,126,78,.55)',duration:.5});
-                                  gsap.to(card.querySelector('.shot img'),{filter:'grayscale(0)',duration:.6}); },
+                                  gsap.to(card.querySelector('.pa-shot img'),{filter:'grayscale(0)',duration:.6}); },
         onLeave:      function(){ gsap.to(card,{borderColor:'rgba(20,20,22,.13)',duration:.5}); },
         onEnterBack:  function(){ gsap.to(card,{borderColor:'rgba(138,126,78,.55)',duration:.5}); },
         onLeaveBack:  function(){ gsap.to(card,{borderColor:'rgba(20,20,22,.13)',duration:.5});
-                                  gsap.to(card.querySelector('.shot img'),{filter:'grayscale(1)',duration:.6}); }
+                                  gsap.to(card.querySelector('.pa-shot img'),{filter:'grayscale(1)',duration:.6}); }
       });
-      gsap.fromTo(card.querySelector('.no'),{opacity:.35},{opacity:1,duration:.4,
+      gsap.fromTo(card.querySelector('.pa-no'),{opacity:.35},{opacity:1,duration:.4,
         scrollTrigger:{trigger:card,containerAnimation:tween,start:'left 78%',toggleActions:'play none none reverse'}});
     });
   });
@@ -777,68 +777,68 @@
 <section class="ch-standard" id="standard" data-chapter="6" data-chapter-name="The Standard">
   <style>
     .ch-standard{background:var(--bg-2);position:relative}
-    .ch-standard .head{display:grid;gap:1rem;max-width:44ch;margin-bottom:clamp(2.25rem,4.5vw,3.5rem)}
-    .ch-standard .head h2{font-size:var(--h2)}
-    .ch-standard .head p{color:var(--fg-body);font-weight:400}
+    .ch-standard .std-head{display:grid;gap:1rem;max-width:44ch;margin-bottom:clamp(2.25rem,4.5vw,3.5rem)}
+    .ch-standard .std-head h2{font-size:var(--h2)}
+    .ch-standard .std-head p{color:var(--fg-body);font-weight:400}
     .std-grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem)}
-    .std{position:relative;overflow:hidden;min-height:clamp(260px,30vw,400px);display:flex;
+    .std-card{position:relative;overflow:hidden;min-height:clamp(260px,30vw,400px);display:flex;
       align-items:flex-end;padding:clamp(1.4rem,2.4vw,2.25rem);isolation:isolate}
-    .std img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+    .std-card img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
       transform:scale(1.08);transition:transform 1s cubic-bezier(.22,1,.36,1)}
     /* The top of this gradient used to be almost clear, which put a gold label
        straight onto whatever the photo happened to be — unreadable over the
        bright practice interior. Both ends now carry a real scrim. */
-    .std::before{content:"";position:absolute;inset:0;z-index:-1;
+    .std-card::before{content:"";position:absolute;inset:0;z-index:-1;
       background:linear-gradient(180deg,rgba(11,11,12,.72) 0%,rgba(11,11,12,.34) 30%,
                  rgba(11,11,12,.52) 58%,rgba(11,11,12,.94) 100%)}
-    .std:hover img{transform:scale(1)}
-    .std .cap{display:grid;gap:.5rem}
-    .std .cap b{font-family:var(--f-display);font-size:var(--h3);font-weight:500;color:#fff}
-    .std .cap span{color:rgba(255,255,255,.78);font-weight:300;font-size:.92rem;max-width:36ch}
-    .std .tagline{position:absolute;top:clamp(1.1rem,2vw,1.6rem);left:clamp(1.4rem,2.4vw,2.25rem);
+    .std-card:hover img{transform:scale(1)}
+    .std-card .std-cap{display:grid;gap:.5rem}
+    .std-card .std-cap b{font-family:var(--f-display);font-size:var(--h3);font-weight:500;color:#fff}
+    .std-card .std-cap span{color:rgba(255,255,255,.78);font-weight:300;font-size:.92rem;max-width:36ch}
+    .std-card .std-tagline{position:absolute;top:clamp(1.1rem,2vw,1.6rem);left:clamp(1.4rem,2.4vw,2.25rem);
       font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
       color:var(--gold-light);text-shadow:0 1px 10px rgba(11,11,12,.85)}
-    .std.wide{grid-column:1 / -1;min-height:clamp(300px,36vw,480px)}
+    .std-card.std-wide{grid-column:1 / -1;min-height:clamp(300px,36vw,480px)}
     @media(min-width:820px){ .std-grid{grid-template-columns:repeat(3,1fr)} }
   </style>
 
   <div class="wrap section">
-    <div class="head">
+    <div class="std-head">
       <div class="chapter-tag"><i></i><span class="label">Chapter 06 &middot; The Standard</span></div>
       <h2>Everything under one roof.</h2>
       <p>Planning, surgery, sedation and the lab that makes your teeth, all in the same building, run by the same team. That is what removes the handoffs.</p>
     </div>
 
     <div class="std-grid" id="stdGrid">
-      <article class="std wide">
+      <article class="std-card std-wide">
         <img src="assets/lab.jpg" alt="The in-house dental laboratory bench with a surgical microscope" loading="lazy">
-        <span class="tagline">In-House Laboratory</span>
-        <div class="cap">
+        <span class="std-tagline">In-House Laboratory</span>
+        <div class="std-cap">
           <b>Your teeth are made here.</b>
           <span>An on-site lab means shade, shape and fit are adjusted in minutes rather than
                 posted to a third party and waited on for weeks.</span>
         </div>
       </article>
-      <article class="std">
+      <article class="std-card">
         <img src="assets/xray.png" alt="3D dental imaging used for implant planning" loading="lazy">
-        <span class="tagline">3D Imaging</span>
-        <div class="cap">
+        <span class="std-tagline">3D Imaging</span>
+        <div class="std-cap">
           <b>Planned in three dimensions.</b>
           <span>Cone-beam scans map bone before anything is placed.</span>
         </div>
       </article>
-      <article class="std">
+      <article class="std-card">
         <img src="assets/sedation.jpg" alt="A patient comfortably sedated during treatment" loading="lazy">
-        <span class="tagline">IV Sedation</span>
-        <div class="cap">
+        <span class="std-tagline">IV Sedation</span>
+        <div class="std-cap">
           <b>Through it in one sitting.</b>
           <span>IV-sedation certified, so long appointments pass in what feels like minutes.</span>
         </div>
       </article>
-      <article class="std">
+      <article class="std-card">
         <img src="assets/interior.jpg" alt="The practice interior in McLean, Virginia" loading="lazy">
-        <span class="tagline">The Practice</span>
-        <div class="cap">
+        <span class="std-tagline">The Practice</span>
+        <div class="std-cap">
           <b>Built for long visits.</b>
           <span>Two Northern Virginia offices designed around full-day treatment.</span>
         </div>
@@ -850,11 +850,11 @@
   WZ.add(function(W){
     if(W.reduced) return;
 
-    gsap.from('#standard .head > *',{opacity:0,y:26,duration:.9,stagger:.12,ease:'power3.out',
-      scrollTrigger:{trigger:'#standard .head',start:'top 82%'}});
+    gsap.from('#standard .std-head > *',{opacity:0,y:26,duration:.9,stagger:.12,ease:'power3.out',
+      scrollTrigger:{trigger:'#standard .std-head',start:'top 82%'}});
 
     /* Panels rise and un-mask; each image also drifts against the scroll. */
-    gsap.utils.toArray('#stdGrid .std').forEach(function(card,i){
+    gsap.utils.toArray('#stdGrid .std-card').forEach(function(card,i){
       gsap.fromTo(card,
         {opacity:0,y:44,clipPath:'inset(12% 0 0 0)'},
         {opacity:1,y:0,clipPath:'inset(0% 0 0 0)',duration:1.05,ease:'power3.out',delay:i*.07,
@@ -872,34 +872,34 @@
 <section class="ch-proof" id="proof" data-chapter="7" data-chapter-name="The Proof" data-theme="dark">
   <style>
     .ch-proof{background:var(--ink-900)}
-    .ch-proof .film{position:relative;height:clamp(340px,64vw,720px);overflow:hidden}
+    .ch-proof .pf-film{position:relative;height:clamp(340px,64vw,720px);overflow:hidden}
     /* Bled 2px past every edge and never scrubbed back to 1:1, so the scaled
        video always overhangs its clip — otherwise sub-pixel rounding under
        ScrollSmoother makes the top and bottom edges flicker while scrolling. */
-    .ch-proof .film video{position:absolute;inset:-2px;width:calc(100% + 4px);
+    .ch-proof .pf-film video{position:absolute;inset:-2px;width:calc(100% + 4px);
       height:calc(100% + 4px);object-fit:cover;will-change:transform;
       backface-visibility:hidden;transform:translateZ(0)}
-    .ch-proof .film::after{content:"";position:absolute;inset:-2px;
+    .ch-proof .pf-film::after{content:"";position:absolute;inset:-2px;
       background:radial-gradient(80% 70% at 50% 50%,rgba(11,11,12,.6),rgba(11,11,12,.86) 78%),
                  linear-gradient(180deg,rgba(11,11,12,.6),rgba(11,11,12,.88))}
-    .ch-proof .film .copy{position:absolute;inset:0;z-index:2;display:grid;place-items:center;
+    .ch-proof .pf-film .pf-copy{position:absolute;inset:0;z-index:2;display:grid;place-items:center;
       text-align:center;padding:var(--gutter)}
-    .ch-proof .film h2{font-size:var(--d2);max-width:16ch;margin-inline:auto}
-    .ch-proof .film p{margin-top:1.1rem;color:rgba(255,255,255,.72);max-width:44ch;
+    .ch-proof .pf-film h2{font-size:var(--d2);max-width:16ch;margin-inline:auto}
+    .ch-proof .pf-film p{margin-top:1.1rem;color:rgba(255,255,255,.72);max-width:44ch;
       margin-inline:auto;font-weight:300}
-    .ch-proof .story{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
-    .ch-proof .shot{position:relative;overflow:hidden;aspect-ratio:4/3;clip-path:inset(0 0 100% 0)}
-    .ch-proof .shot img{width:100%;height:100%;object-fit:cover;will-change:transform}
+    .ch-proof .pf-story{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+    .ch-proof .pf-shot{position:relative;overflow:hidden;aspect-ratio:4/3;clip-path:inset(0 0 100% 0)}
+    .ch-proof .pf-shot img{width:100%;height:100%;object-fit:cover;will-change:transform}
     .ch-proof blockquote{margin:0;font-family:var(--f-display);font-size:calc(2.61rem * var(--t-lg));
       line-height:1.24;letter-spacing:-.015em}
     .ch-proof cite{display:block;margin-top:1.5rem;font-style:normal;font-size:.76rem;
       letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
-    .ch-proof .qm{font-family:var(--f-display);font-size:calc(6rem * var(--t-disp));color:var(--gold);
+    .ch-proof .pf-qm{font-family:var(--f-display);font-size:calc(6rem * var(--t-disp));color:var(--gold);
       line-height:.6;display:block;margin-bottom:.5rem}
-    @media(min-width:1024px){ .ch-proof .story{grid-template-columns:.95fr 1.05fr} }
+    @media(min-width:1024px){ .ch-proof .pf-story{grid-template-columns:.95fr 1.05fr} }
 
     /* --- google reviews --- */
-    .reviews{margin-top:clamp(3.5rem,7vw,6rem)}
+    .pf-reviews{margin-top:clamp(3.5rem,7vw,6rem)}
     .rv-head{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;
       align-items:flex-end;margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
     .rv-head h3{font-size:var(--h2);max-width:16ch}
@@ -913,20 +913,20 @@
       color:rgba(255,255,255,.58)}
     .rv-stars{color:var(--gold);letter-spacing:.12em;font-style:normal;font-size:.9em}
     .rv-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,.09)}
-    .rv{background:var(--black);padding:clamp(1.35rem,2.2vw,1.9rem);display:grid;gap:.9rem;
+    .rv-card{background:var(--black);padding:clamp(1.35rem,2.2vw,1.9rem);display:grid;gap:.9rem;
       align-content:start;transition:background .4s ease}
-    .rv:hover{background:var(--ink-800)}
-    .rv p{color:rgba(255,255,255,.78);font-weight:300;font-size:.94rem;line-height:1.75}
+    .rv-card:hover{background:var(--ink-800)}
+    .rv-card p{color:rgba(255,255,255,.78);font-weight:300;font-size:.94rem;line-height:1.75}
     .rv-film p{color:rgba(255,255,255,.62)}
     .rv-play{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;
       border:1px solid var(--gold);margin-right:.55rem;vertical-align:-5px}
     .rv-play::after{content:"";border-left:6px solid var(--gold);border-block:4px solid transparent;
       margin-left:2px}
-    .rv:hover .rv-play{background:var(--gold)}
-    .rv:hover .rv-play::after{border-left-color:var(--black)}
-    .rv footer{display:flex;align-items:center;gap:.7rem;font-size:.85rem;color:#fff;
+    .rv-card:hover .rv-play{background:var(--gold)}
+    .rv-card:hover .rv-play::after{border-left-color:var(--black)}
+    .rv-card footer{display:flex;align-items:center;gap:.7rem;font-size:.85rem;color:#fff;
       padding-top:.9rem;border-top:1px solid rgba(255,255,255,.09)}
-    .rv footer i{margin-left:auto;font-style:normal;font-size:.66rem;letter-spacing:.14em;
+    .rv-card footer i{margin-left:auto;font-style:normal;font-size:.66rem;letter-spacing:.14em;
       text-transform:uppercase;color:rgba(255,255,255,.58)}
     .rv-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none;
       background:linear-gradient(140deg,var(--gold-deep),var(--gold));color:var(--black);
@@ -940,10 +940,10 @@
     @media(min-width:1080px){ .rv-grid{grid-template-columns:repeat(3,1fr)} }
   </style>
 
-  <div class="film" id="proofFilm">
+  <div class="pf-film" id="proofFilm">
     <video id="film" src="assets/broll.mp4" muted loop playsinline preload="metadata"
            aria-label="Inside the practice"></video>
-    <div class="copy">
+    <div class="pf-copy">
       <div>
         <h2 id="filmTitle">Experience, skill and dental artistry.</h2>
         <p id="filmSub">Dr. Esam Nahlah, D.D.S., M.S., Diplomate of the American Board of Prosthodontics,
@@ -954,13 +954,13 @@
 
   <div class="wrap section">
     <div class="chapter-tag"><i></i><span class="label">Chapter 07 &middot; The Proof</span></div>
-    <div class="story">
-      <div class="shot" id="storyShot">
+    <div class="pf-story">
+      <div class="pf-shot" id="storyShot">
         <img id="storyImg" src="assets/patient-story.jpg"
              alt="A patient holding a framed photograph of her smile before treatment" loading="lazy">
       </div>
       <div id="storyCopy">
-        <span class="qm">&ldquo;</span>
+        <span class="pf-qm">&ldquo;</span>
         <blockquote>My smile held me back. That&rsquo;s behind me now.</blockquote>
         <cite>Melanie &middot; Full-Arch Implant Patient</cite>
       </div>
@@ -977,7 +977,7 @@
          2026-08-10, but this block was left at 5.0 there, so it is left at 5.0
          here too. Worth resolving with the client one way or the other.
          ================================================== -->
-    <div class="reviews" id="reviews">
+    <div class="pf-reviews" id="reviews">
       <div class="rv-head">
         <div>
           <h3>What patients say afterwards.</h3>
@@ -993,24 +993,24 @@
       </div>
 
       <div class="rv-grid" id="rvGrid">
-        <a class="rv" href="patient-stories.html#melanie"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+        <a class="rv-card" href="patient-stories.html#melanie"><span class="rv-stars" aria-hidden="true">★★★★★</span>
           <p>&ldquo;My smile held me back. That&rsquo;s behind me due to my dental implants.&rdquo;</p>
           <footer><span class="rv-av">M</span>Melanie<i>Filmed story</i></footer></a>
-        <a class="rv" href="patient-stories.html#yolanda"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+        <a class="rv-card" href="patient-stories.html#yolanda"><span class="rv-stars" aria-hidden="true">★★★★★</span>
           <p>&ldquo;I haven&rsquo;t stopped smiling since I got my dental implants!&rdquo;</p>
           <footer><span class="rv-av">Y</span>Yolanda<i>Filmed story</i></footer></a>
-        <a class="rv" href="patient-stories.html#stephen"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+        <a class="rv-card" href="patient-stories.html#stephen"><span class="rv-stars" aria-hidden="true">★★★★★</span>
           <p>&ldquo;Dental implants completely changed my life.&rdquo;</p>
           <footer><span class="rv-av">S</span>Stephen<i>Filmed story</i></footer></a>
-        <a class="rv rv-film" href="patient-stories.html#donita"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+        <a class="rv-card rv-film" href="patient-stories.html#donita"><span class="rv-stars" aria-hidden="true">★★★★★</span>
           <p><span class="rv-play" aria-hidden="true"></span>Donita filmed her story at the practice.
              Watch it in her own words.</p>
           <footer><span class="rv-av">D</span>Donita<i>Filmed story</i></footer></a>
-        <a class="rv rv-film" href="patient-stories.html#barbara"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+        <a class="rv-card rv-film" href="patient-stories.html#barbara"><span class="rv-stars" aria-hidden="true">★★★★★</span>
           <p><span class="rv-play" aria-hidden="true"></span>Barbara filmed her story at the practice.
              Watch it in her own words.</p>
           <footer><span class="rv-av">B</span>Barbara<i>Filmed story</i></footer></a>
-        <a class="rv rv-film" href="patient-stories.html#couple"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+        <a class="rv-card rv-film" href="patient-stories.html#couple"><span class="rv-stars" aria-hidden="true">★★★★★</span>
           <p><span class="rv-play" aria-hidden="true"></span>A couple treated together filmed their
              story. Watch it in their own words.</p>
           <footer><span class="rv-av">&amp;</span>A couple<i>Filmed story</i></footer></a>
@@ -1056,7 +1056,7 @@
     /* Reviews: header, then cards deal in on a slight diagonal. */
     gsap.from('#reviews .rv-head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
       scrollTrigger:{trigger:'#reviews',start:'top 80%'}});
-    gsap.from('#rvGrid .rv',{opacity:0,y:34,duration:.8,stagger:{each:.08,from:'start'},
+    gsap.from('#rvGrid .rv-card',{opacity:0,y:34,duration:.8,stagger:{each:.08,from:'start'},
       ease:'power3.out',scrollTrigger:{trigger:'#rvGrid',start:'top 85%'}});
 
     /* Aggregate score counts up like the other stats. */
@@ -1078,46 +1078,46 @@
   <style>
     .ch-invitation{background:var(--black)}
     .ch-invitation h2{font-size:var(--h2);max-width:16ch;margin-top:1rem}
-    .ch-invitation .locs{display:grid;grid-template-columns:1fr;gap:1px;
+    .ch-invitation .iv-locs{display:grid;grid-template-columns:1fr;gap:1px;
       background:rgba(255,255,255,.1);margin-top:clamp(2rem,4vw,3rem)}
-    .ch-invitation .loc{background:var(--black);padding:clamp(1.75rem,3.2vw,3rem);
+    .ch-invitation .iv-loc{background:var(--black);padding:clamp(1.75rem,3.2vw,3rem);
       display:grid;gap:1rem;align-content:start}
-    .ch-invitation .loc h3{font-size:var(--h3)}
-    .ch-invitation .loc address{font-style:normal;color:rgba(255,255,255,.6);font-weight:300}
-    .ch-invitation .row{display:grid;gap:.3rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1)}
-    .ch-invitation .row a{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-sm));
+    .ch-invitation .iv-loc h3{font-size:var(--h3)}
+    .ch-invitation .iv-loc address{font-style:normal;color:rgba(255,255,255,.6);font-weight:300}
+    .ch-invitation .iv-row{display:grid;gap:.3rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1)}
+    .ch-invitation .iv-row a{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-sm));
       color:var(--gold);transition:opacity .3s}
-    .ch-invitation .row a:hover{opacity:.7}
-    .ch-invitation .row span{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+    .ch-invitation .iv-row a:hover{opacity:.7}
+    .ch-invitation .iv-row span{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
       color:rgba(255,255,255,.58)}
-    .cta{background:linear-gradient(120deg,var(--gold-deep),var(--gold) 48%,var(--gold-light));
+    .iv-cta{background:linear-gradient(120deg,var(--gold-deep),var(--gold) 48%,var(--gold-light));
       color:var(--black);text-align:center;margin-top:clamp(3rem,7vw,6rem)}
-    .cta h2{font-size:var(--d2);max-width:18ch;margin-inline:auto;color:var(--black)}
-    .cta p{margin-top:1.1rem;max-width:46ch;margin-inline:auto;color:rgba(11,11,12,.72)}
-    .cta .btn{margin-top:2rem}
-    @media(min-width:720px){ .ch-invitation .locs{grid-template-columns:repeat(2,1fr)} }
+    .iv-cta h2{font-size:var(--d2);max-width:18ch;margin-inline:auto;color:var(--black)}
+    .iv-cta p{margin-top:1.1rem;max-width:46ch;margin-inline:auto;color:rgba(11,11,12,.72)}
+    .iv-cta .btn{margin-top:2rem}
+    @media(min-width:720px){ .ch-invitation .iv-locs{grid-template-columns:repeat(2,1fr)} }
   </style>
 
   <div class="wrap section">
     <div class="chapter-tag"><i></i><span class="label">Chapter 08 &middot; The Invitation</span></div>
     <h2>Close to home, either way.</h2>
-    <div class="locs" id="locs">
-      <div class="loc">
+    <div class="iv-locs" id="locs">
+      <div class="iv-loc">
         <h3>Tysons Corner &middot; McLean</h3>
         <address>7901 Jones Branch Dr., Suite 220<br>McLean, VA 22102</address>
-        <div class="row"><span>New Patients</span><a href="tel:+15716199442">(571) 619-9442</a></div>
-        <div class="row"><span>Current Patients</span><a href="tel:+17034483312">(703) 448-3312</a></div>
+        <div class="iv-row"><span>New Patients</span><a href="tel:+15716199442">(571) 619-9442</a></div>
+        <div class="iv-row"><span>Current Patients</span><a href="tel:+17034483312">(703) 448-3312</a></div>
       </div>
-      <div class="loc">
+      <div class="iv-loc">
         <h3>Alexandria</h3>
         <address>2855 Duke St.<br>Alexandria, VA 22314</address>
-        <div class="row"><span>New Patients</span><a href="tel:+15714103430">(571) 410-3430</a></div>
-        <div class="row"><span>Current Patients</span><a href="tel:+17039405410">(703) 940-5410</a></div>
+        <div class="iv-row"><span>New Patients</span><a href="tel:+15714103430">(571) 410-3430</a></div>
+        <div class="iv-row"><span>Current Patients</span><a href="tel:+17039405410">(703) 940-5410</a></div>
       </div>
     </div>
   </div>
 
-  <div class="cta section" data-theme="light">
+  <div class="iv-cta section" data-theme="light">
     <div class="wrap">
       <h2 id="ctaTitle">Find out if you&rsquo;re a candidate.</h2>
       <p>A consultation includes the 3D scan and a straight answer about what your case actually needs, before you commit to anything.</p>
@@ -1128,7 +1128,7 @@
   <script>
   WZ.add(function(W){
     if(W.reduced) return;
-    gsap.from('#locs .loc',{opacity:0,y:34,duration:1,stagger:.14,ease:'power3.out',
+    gsap.from('#locs .iv-loc',{opacity:0,y:34,duration:1,stagger:.14,ease:'power3.out',
       scrollTrigger:{trigger:'#locs',start:'top 82%'}});
     W.splitLines(document.getElementById('ctaTitle'), function(self){
       return gsap.from(self.lines,{yPercent:110,duration:1,stagger:.09,ease:'power4.out',
