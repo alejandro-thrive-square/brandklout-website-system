@@ -47,6 +47,33 @@ These are hard rules, not preferences. Violating them produces redirect loops or
 7. **Check `/sitemap.xml` and `/robots.txt` on the new site in the same pass.** Webflow's
    auto-sitemap is off by default; redirects without a sitemap still leave Google blind.
 
+8. **A shipped redirect map expires every time the site gains a page.** A rule sends an old URL
+   somewhere because that URL had no page. Build the page later and the rule does not become
+   redundant — it becomes a bug, and a silent one: the URL keeps returning 200, so nothing looks
+   broken, but it serves a *different* page and the new one is unreachable at its own address.
+   Nobody notices, because everybody tests by clicking links on the new site rather than by typing
+   the old URL.
+
+   So the map is derived from the page set, never remembered. Re-run the reconciler whenever the
+   build gains pages, and before every launch:
+
+   ```bash
+   node .tmp/reconcile.mjs            # report
+   node .tmp/reconcile.mjs --write    # emit the reconciled CSV
+   ```
+
+   It reads the *built* site rather than a list in a comment, and reports three classes:
+   **remove** (the old URL is a real page again — drop the rule), **re-point** (the URL is still
+   gone but the content moved to a differently-named page), and **dead target** (the rule sends
+   traffic to a page the build does not have).
+
+   Found on Dr. Nahlah, 2026-08-17, all of it live at the time: 14 rules to remove and 4 to
+   re-point out of 129. Two of the 14 were `/privacy-policy` and `/terms-conditions`, both
+   redirecting to the home page — a healthcare practice publishing no reachable privacy policy.
+   Verified against production, not inferred: `/video-gallery`, `/blog` and `/terms-conditions`
+   each returned **200 serving a different page**, while an invented URL returned 404, which is
+   what tells you the rules are installed and firing rather than absent.
+
 ## Reference Implementation
 
 `deliver/brandklout/dr-nahlah/workflows/14-migration-seo-redirects/build_redirects.py` —
@@ -68,9 +95,25 @@ unchanged or covered. Copy it and replace the tables.
 
 ## Run for Dr. Nahlah (2026-08-17)
 - Executor: `build_redirects.py` in this folder. Run `python build_redirects.py`.
-- Output: `.tmp/drnahlah-301-redirects.csv` (129 rules, upload this) + `.tmp/drnahlah-301-redirects-audit.csv`.
+- Output: `.tmp/drnahlah-301-redirects.csv` (129 rules) + `.tmp/drnahlah-301-redirects-audit.csv`.
 - Coverage: 78/78 live-at-migration URLs — 8 unchanged slugs, 70 redirected.
 - Full write-up, mapping rationale and open items: [`docs/seo-redirect-plan.md`](../../docs/seo-redirect-plan.md).
+
+### Reconciled the same day against the 28-page design build
+The 129 rules were written against the **eleven-page** site. The design build in
+`04-design/.tmp` has since grown to 28 pages, so 14 of those rules had quietly become
+wrong — see rule 8 above.
+
+- **Upload `.tmp/drnahlah-301-redirects.reconciled.csv` (115 rules), not the 129-rule file**,
+  once the 28-page build ships. Until then the 129-rule map still matches what is live.
+- Removed 14: `/about`, `/cosmetic-dentistry`, `/dental-conditions`, `/dental-implant-faq`,
+  `/doctor-referral`, `/emergency-dentistry`, `/financing`, `/implant-supported-dentures`,
+  `/oral-surgery`, `/our-team`, `/patient-center`, `/privacy-policy`, `/teeth-whitening`,
+  `/terms-conditions`.
+- Re-pointed 4: `/our-dental-facility` → `/our-facility`, `/dental-crowns-and-bridges` →
+  `/crowns-and-bridges`, and both survey thank-you URLs → `/thank-you`.
+- Regenerate with `node .tmp/reconcile.mjs --write`; the rename table it cannot infer lives in
+  `RENAMED` at the top of that file.
 
 ## Version Control
 - All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../../../SYSTEM_RULES.md).
