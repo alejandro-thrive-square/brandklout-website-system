@@ -202,6 +202,24 @@ if (fs.existsSync(OWN)) {
   for (const f of fs.readdirSync(OWN)) { fs.copyFileSync(path.join(OWN, f), path.join(OUT, f)); own++; }
 }
 
+// GSAP is vendored rather than pulled from the CDN so the package runs offline
+// and headless verification is deterministic. It lives in site-src/vendor/ and is
+// COMMITTED — final-site/assets/ is gitignored, so a vendor copy that only ever
+// existed there leaves a fresh clone unable to run its own gates. That is exactly
+// what happened to this worktree: every page reported "no console errors" as a
+// 404 storm because the libraries were never in the tree.
+const VENDOR = path.join(SRC, "vendor");
+let vend = 0;
+if (fs.existsSync(VENDOR)) {
+  for (const lib of fs.readdirSync(VENDOR)) {
+    const from = path.join(VENDOR, lib);
+    if (!fs.statSync(from).isDirectory()) continue;
+    const to = path.join(OUT, lib);
+    fs.mkdirSync(to, { recursive: true });
+    for (const f of fs.readdirSync(from)) { fs.copyFileSync(path.join(from, f), path.join(to, f)); vend++; }
+  }
+}
+
 let ok = 0; const missing = [];
 for (const [dest, rel] of Object.entries(MAP)) {
   const src = pick(rel) || path.join(DL, rel);
@@ -209,5 +227,5 @@ for (const [dest, rel] of Object.entries(MAP)) {
   fs.copyFileSync(src, path.join(OUT, dest));
   ok++;
 }
-console.log(`copied ${ok} assets (+${own} from site-src/assets) -> ${path.relative(process.cwd(), OUT)}`);
+console.log(`copied ${ok} assets (+${own} from site-src/assets, +${vend} vendored) -> ${path.relative(process.cwd(), OUT)}`);
 if (missing.length) console.log("MISSING:\n  " + missing.join("\n  "));
