@@ -4,17 +4,17 @@ The home journey was a single verified page. This turns it into a site: one home
 page plus interior pages, all assembled from one shell so they cannot drift
 apart.
 
-**Currently 26 pages.** Eleven of them are live in Webflow; the rest are local
-only — see [Build-out to 26 pages](#build-out-to-26-pages).
+**Currently 28 pages.** Eleven of them are live in Webflow; the rest are local
+only — see [Build-out to 28 pages](#build-out-to-28-pages).
 
 Package: [`final-site/`](./final-site/) · Source: [`site-src/`](./site-src/)
 
 Build: `node site-src/build-site.mjs` (assets: `node site-src/copy-assets.mjs`,
 gallery grid: `node site-src/gen-gallery.mjs`).
 
-## Why a builder instead of 26 HTML files
+## Why a builder instead of 28 HTML files
 
-26 hand-maintained pages means 26 navs, 26 footers and 26 copies of the token
+28 hand-maintained pages means 28 navs, 28 footers and 28 copies of the token
 layer. The second time someone edits the nav, they diverge. So:
 
 ```
@@ -56,7 +56,7 @@ into `assets/site.css`, and filename order *is* cascade order:
 | `50`–`59` | rules only one page needs |
 
 Every page loads the same file. A rule exists once instead of being re-emitted
-into 26 pages, and a section can move between pages without its CSS having to
+into every page, and a section can move between pages without its CSS having to
 move with it.
 
 **The JS belongs to the section.** Each section's behaviour is one file in
@@ -95,7 +95,7 @@ With the control that matters: on `privacy-policy` *without* the section, no
 module activates at all. Without that, "the module ran" would read the same if
 every module ran on every page.
 
-`site-test.mjs` then holds the line on all 26 pages: no CSS or JS inlined into
+`site-test.mjs` then holds the line on all 28 pages: no CSS or JS inlined into
 any page, and every module ran **iff** its section is present.
 
 ## The eleven pages
@@ -114,7 +114,7 @@ any page, and every module ran **iff** its section is present.
 | `meet-dr-nahlah.html` | All twelve credentials, the Tysons Study Club, UCSF |
 | `contact.html` | Two offices, hours, directions, consultation request form |
 
-## Build-out to 26 pages
+## Build-out to 28 pages
 
 The eleven-page package covers the implant and cosmetic funnel and nothing else.
 The site it replaces has **33 pages**, and its own primary navigation — captured
@@ -131,8 +131,9 @@ scraped page carries the nav in its body text — organises them into six groups
 | For Doctors | Referral Form |
 
 **That table is the build-out spec.** Fifteen pages restore the groups the
-eleven-page package dropped, taking the site to 26. They ship in four batches so
-each one can clear the gates before the next begins.
+eleven-page package dropped, taking the site to 26; a fifth batch added the legal
+pair's second half and the form's destination, taking it to 28. They ship in
+batches so each one can clear the gates before the next begins.
 
 | Batch | Pages | Status |
 | :--- | :--- | :--- |
@@ -140,6 +141,7 @@ each one can clear the gates before the next begins.
 | 2 | `cosmetic-dentistry` · `teeth-whitening` · `crowns-and-bridges` · `oral-surgery` | **Built 2026-08-10** |
 | 3 | `emergency-dentistry` · `dental-conditions` · `implant-supported-dentures` · `dental-implant-faq` | **Built 2026-08-10** |
 | 4 | `patient-center` · `financing` · `doctor-referral` · ~~`tysons-study-club`~~ → `privacy-policy` | **Built 2026-08-10** |
+| 5 | `terms-conditions` · `thank-you` | **Built 2026-08-17** |
 
 > [!WARNING]
 > **`/tysons-study-club/` is entirely Lorem Ipsum and is live on the client's site.**
@@ -157,16 +159,35 @@ each one can clear the gates before the next begins.
 > Raise the study club with the client as **(a)** an urgent defect on their live site and
 > **(b)** a page that needs source content before it can be built.
 
-**Deliberately excluded**, and why:
+### Batch 5 — the legal pair and the form's destination (2026-08-17)
 
-- `/video-gallery/` — 142 YouTube embeds. Films are not hot-linked from a
-  prototype (see *Still open*); wire it at Webflow build time or not at all.
-- `/blog/` and its 43 posts — CMS work, and it belongs to modules `12`–`14`
-  with the redirect map, not to the design package.
-- `/privacy-policy/`, `/terms-conditions/` — cheap, and needed before launch.
-  They are out only because the brief said fifteen; swap two in on request.
-- `/free-event/`, `/veneer-survey-thank-you/`, `/implant-survey-thank-you/` —
-  campaign and utility pages tied to funnels nobody has confirmed still run.
+| Page | Why |
+| :--- | :--- |
+| `terms-conditions` | The other half of the legal pair. 1,705 words of real content, needed at launch. |
+| `thank-you` | The destination the consultation form has never had. Replaces **both** old survey thank-you pages, which are the same 978 words under two slugs. `noindex`. |
+
+**Still deliberately excluded**, and why — this is now the complete list:
+
+- `/tysons-study-club/` — entirely Lorem Ipsum on the live site. Nothing to
+  rebuild from. See the warning above.
+- `/blog/` and its 43 posts — CMS work, belonging to modules `12`–`14`, and the
+  shipped redirect map already sends `/blog` and every post to `/dental-implants`.
+- `/video-gallery/` — **the pairing is no longer recoverable.** The extraction
+  captured 14 YouTube IDs used on that page
+  (`03-graphic-resources/.tmp/video-embeds.csv`) and the scrape captured the 13
+  published titles, but nothing records which ID goes with which title, and the
+  source page is gone: `drnahlah.com/video-gallery` now serves the new site.
+  Guessing the pairing would caption the client's own films with the wrong
+  names, which is the same rule that governs patient photography here. The live
+  site already redirects the URL to `/patient-stories`, which is a shipped
+  decision and not one to reverse unasked. Build it when the client supplies the
+  title-to-video mapping.
+- `/free-event/` — a one-off event page for *Saturday, July 16 at 10:00 a.m.*,
+  with a registration form for a date that has passed. It is a campaign artefact,
+  not a page. Rebuild it if the practice runs the event again.
+
+`/veneer-survey-thank-you/` and `/implant-survey-thank-you/` are no longer
+excluded — both now redirect to the single `thank-you` page.
 
 ### Rules the build-out follows
 
@@ -692,7 +713,7 @@ and it travels with the section.
 ```bash
 node .tmp/serve.mjs final-site 8903          # NOT python -m http.server, see below
 
-node .tmp/site-test.mjs http://127.0.0.1:8903                          # 450/450
+node .tmp/site-test.mjs http://127.0.0.1:8903                          # 484/484
 node .tmp/interaction-test-gsap.mjs http://127.0.0.1:8903/index.html   #  64/64
 node .tmp/css-vocab.mjs                                                # vocabulary
 node .tmp/swap-proof.mjs http://127.0.0.1:8903                         #   6/6
@@ -701,7 +722,7 @@ node .tmp/capture-slices.mjs <url> <outDir> [w] [h] [step]             # screens
 node .tmp/hero-contrast.mjs 1640 934                                   # ink over the hero film
 ```
 
-`site-test.mjs` covers all 26 pages: shell present, one `h1`, unique
+`site-test.mjs` covers all 28 pages: shell present, one `h1`, unique
 title/description, **every internal link and in-page anchor resolves**, no broken
 images, every revealed block ends visible, sliders respond, the **drawer opens
 and closes**, no CSS or JS inlined into the page, every section module ran iff
