@@ -1,0 +1,81 @@
+{
+ "tier478": {
+  "eyebrow": {
+   "value": "0.9rem",
+   "selectors": [
+    ".label-ty",
+    ".next-dot",
+    ".prep-n",
+    ".ty-h3-4",
+    ".ty-p-3.chapter-tag",
+    ".ty-p.chapter-tag",
+    ".ty-span",
+    ".urgency"
+   ]
+  },
+  "small": {
+   "value": "1.0625rem",
+   "selectors": [
+    ".fine-ty",
+    ".foot-base",
+    ".open-state",
+    ".ref-line",
+    ".role-ty",
+    ".ty-p-10.small",
+    ".ty-p-3.small",
+    ".ty-ul-2.hours-list.small",
+    ".ty-ul.hours-list.small"
+   ]
+  },
+  "ui": {
+   "value": "1.125rem",
+   "selectors": [
+    ".ty-a-2.btn",
+    ".ty-a.btn",
+    ".ty-p-5",
+    ".ty-p-7"
+   ]
+  },
+  "body": {
+   "value": "1.31rem",
+   "selectors": [
+    ".site-foot",
+    ".site-head",
+    ".skip-link",
+    ".sticky-bar",
+    ".ty-h3-3",
+    ".ty-main",
+    ".ty-span-2"
+   ]
+  },
+  "lead": {
+   "value": "1.47rem",
+   "selectors": [
+    ".prep-close",
+    ".ty-a-3",
+    ".ty-p-2.lead",
+    ".ty-p-6.lead",
+    ".ty-p-8.lead"
+   ]
+  }
+ },
+ "rung1439": {
+  "h1": {
+   "value": "2.86rem",
+   "selectors": [
+    ".ty-h1"
+   ]
+  },
+  "h2": {
+   "value": "2.16rem",
+   "selectors": [
+    ".ty-h2",
+    ".ty-h2-2"
+   ]
+  },
+  "statement": {
+   "value": "2.56rem",
+   "selectors": []
+  }
+ }
+}

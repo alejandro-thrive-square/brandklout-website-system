@@ -14,7 +14,7 @@ Client delivery (partner agency).
 ## Active MCP Servers
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-brandklout` | Webflow reads and writes for **every** Brandklout client site. One instance, one grant, covering the single workspace Brandklout owns. | **Registered 2026-08-07, awaiting OAuth.** Authenticate on the **team** profile. |
+| `webflow-brandklout` | Webflow reads and writes for **every** Brandklout client site. One instance, one grant, covering the single workspace Brandklout owns. | **LIVE — authenticated on the `team` profile 2026-08-07.** `list_sites` returns 9 sites, all in workspace `63b4b7393e89b78575e9a9bb`. |
 | `asana-brandklout` | Read Brandklout's Asana workspace: tasks, projects, assignees, due dates, comments. Used to pick up delegated work and to report progress back. | **Registered 2026-08-05, BLOCKED** - Claude Code's OAuth token exchange fails against Asana V2 (`The client_id and client_secret must authorize the app`). Credentials themselves are proven good. See [setup.md](../../../mcp-servers/asana/setup.md). |
 
 ### Why one Webflow instance, not one per client
@@ -43,25 +43,47 @@ session restart per client, forever. See
 The authoritative map from client folder to Webflow site. Fill in each ID from `list_sites` at
 first contact; an unconfirmed ID is not authorization to write.
 
+All IDs below were read from `list_sites` on 2026-08-07 against the live `webflow-brandklout` grant.
+
 | Client folder | Webflow site | Site ID | Status |
 | :--- | :--- | :--- | :--- |
-| `livewell-dental/` | Livewell Dental | `69d03fdbe999e9907724a69d` | Read from published HTML 2026-07-27 — **confirm via `list_sites` before any write** |
-| `dr-nahlah/` | Dr. Nahlah | `6a6b84cc7fe55ddeabc0b314` | Confirmed 2026-07-30. Recorded workspace `63b4b7393e89b78575e9a9bb` — **verify this is Brandklout's workspace** (see caveat below) |
-| `grand-mission-dentistry/` | unknown | — | Not yet identified |
-| `arvada-dental-center/` | unknown (`arvadadentalcenter.com`) | — | Not yet identified |
-| `mason-park/` | unknown | — | Not yet identified |
-| `stone-dental-implant-center/` | unknown | — | Scope itself unconfirmed with Brandklout |
+| `livewell-dental/` | Livewell Dental | `69d03fdbe999e9907724a69d` | **Confirmed 2026-08-07** via `list_sites`. Domains `livewelldentalva.com`, `www.livewelldentalva.com` |
+| `dr-nahlah/` | Dr. Nahlah | `6a6b84cc7fe55ddeabc0b314` | **Confirmed 2026-08-07.** Workspace question resolved — it is in Brandklout's workspace, not Webzite's. No custom domain |
+| `grand-mission-dentistry/` | Grand Mission Dentistry | `698111847e9608eb30ee21c6` | **Confirmed 2026-08-07.** Domains `grandmissiondentistry.com`, `www.` — a large live site, 303 pages |
+| `arvada-dental-center/` | Arvada Dental Center | `693c51e685b19f0d0c149cab` | **Confirmed 2026-08-07 by the user** as the site to edit. Domains `arvadadentalimplants.com`, `www.` See the copies warning below |
+| `mason-park/` | Mason Park Dental | `6a60bdc0340e5f1784b4d553` | **Confirmed 2026-08-07.** Effectively empty — **1 page** (Home). No custom domain |
+| `stone-dental-implant-center/` | — | — | **NOT PRESENT in the site list.** See below |
 
 > [!CAUTION]
-> **The single-workspace premise is not yet verified against the platform.** It rests on the
-> partnership's account structure, not on a `list_sites` call — no Webflow instance has ever held a
-> token on this machine. Dr. Nahlah in particular has a workspace ID recorded from a build site
-> that may sit in Webzite's own workspace rather than Brandklout's.
+> **Arvada has five sites in this workspace and only one of them is the deliverable.** The other
+> four are copies and must not be edited:
 >
-> The OAuth screen settles it. If a client's site is **absent** from the site list when
-> authenticating this instance, that site is in a different workspace: leave it out, and give that
-> one client back its own dedicated instance rather than widening this grant. Update this file with
-> what the site list actually showed.
+> | Site | ID | Verdict |
+> | :--- | :--- | :--- |
+> | Arvada Dental Center | `693c51e685b19f0d0c149cab` | **THE ONE TO EDIT** — user-confirmed 2026-08-07 |
+> | Arvada Dental Center - Blue | `6957a3881484e0be00a9b0b2` | copy, do not touch |
+> | Arvada Cosmetic Dental Implants | `69bc29b491a12ccd5a2d47fa` | copy, do not touch |
+> | Arvada Dental Implants Center | `69c6a0f225e31703647d23cd` | copy, do not touch |
+> | Arvada Implants | `69f2fe636ca87b3f22fa54c1` | copy, do not touch |
+>
+> Name similarity is not identification. The deliverable is the only Arvada site carrying the
+> `arvadadentalimplants.com` custom domain — match on the site ID, never on the display name.
+
+> [!IMPORTANT]
+> **Stone Dental Implant Center has no site in this workspace.** `list_sites` returned 9 sites and
+> none of them is Stone's. This is consistent with its scope never having been confirmed — there is
+> nothing built yet. It is **read-only by definition**: there is no site ID to act on. When Brandklout
+> confirms the engagement they must create the site in this workspace and the grant must be
+> re-authorized (ticking every existing client plus Stone), then record the ID here.
+
+### Workspace premise — RESOLVED 2026-08-07
+
+The single-workspace premise is now **verified against the platform**, not inferred. All 9 sites
+returned by `list_sites` carry `workspaceId: 63b4b7393e89b78575e9a9bb`, including Dr. Nahlah — the
+specific doubt, whose workspace ID had been recorded from a build site and was suspected of being
+Webzite's own. It is not; it is Brandklout's, and the same one every other client sits in. One
+instance covering one workspace is therefore the correct model, and Dr. Nahlah does **not** need a
+dedicated instance.
 
 ### Onboarding a new Brandklout client
 

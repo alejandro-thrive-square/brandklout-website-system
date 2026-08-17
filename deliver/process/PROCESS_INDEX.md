@@ -23,6 +23,15 @@ Each numbered module mirrors the standard workflow structure defined in [SYSTEM_
 7. When Deliver owns design creation or redesign, seed `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/design-system/` from the handoff's `selected_design_system_reference`.
 8. Fill in the `.py` executor and `TRIGGER_PROMPT.txt` for that engagement when automation is needed. Note: module `07-webflow-build` is an exception — its executor (`07-webflow-build.py`, a config-driven orchestrator) and the full HTML→Webflow converter toolchain ship populated in the process source and are cloned as-is into client workflows; per-project setup is done through `webflow-build.config.json`.
 9. Update the cloned `.md` files to reflect offer-specific adaptations, skipped phases, or client-specific deviations.
+10. Record the source commit as `process_baseline_commit` in the client `docs/project-overview.md`.
+11. Before each later phase, refresh the clean client branch from local `main`, compare the current
+    canonical module with the copied instance, apply relevant upstream corrections while preserving
+    client deviations, and update `process_baseline_commit`.
+
+> [!IMPORTANT]
+> A copied workflow is a versioned snapshot. It does not update when `deliver/process/` changes,
+> and an Orca worktree does not receive local `main` changes until they are committed and merged.
+> Never rely on untracked files in another worktree as workflow inputs.
 
 ## Offer-to-Delivery Matrix
 
@@ -85,7 +94,9 @@ Non-sequential tools that delivery phases call as needed. They live flat inside 
 > `gen_*.py` clipboard helpers, `verify.mjs`, regression `tests/`, and the
 > `html-to-webflow-clipboard.md` method directive) plus a config-driven
 > executor (`07-webflow-build.py`). It is cloned whole into client workflows;
-> per-project values live in `webflow-build.config.json`. See
+> per-project values live in `webflow-build.config.json`. The current build
+> standard is [PASTEABLE-COMPONENTS.md](./07-webflow-build/PASTEABLE-COMPONENTS.md); refresh older
+> client copies before execution because their trigger prompts and toolchains may predate it. See
 > [07-webflow-build.md](./07-webflow-build/07-webflow-build.md).
 
 ## Non-Copy Resources

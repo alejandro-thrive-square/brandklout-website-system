@@ -94,11 +94,101 @@ Because 479–1440 is flat, the six-breakpoint QA effectively reduces to **360, 
 type-scale purposes. The mid-range captures should be byte-identical to the pre-install ones — if
 they are not, something else in the cascade is fighting the root.
 
+That last sentence holds for installing the *snippet*. It does **not** survive removing a `clamp()`
+type scale in the same pass: a `clamp()` with a live `vw` term was scaling across 479–1440 and a
+bare `rem` does not, so the mid-range legitimately changes. See the warning under *Replacing an
+existing `clamp()` type scale* — if you are doing both at once, expect to justify the mid-range, not
+assert it is untouched.
+
 ### Replacing an existing `clamp()` type scale
 
 Do not swap `clamp(3rem, 7vw, 5.2rem)` for an arbitrary `rem`. Pick the value that **preserves the
 rendered size at 1440px** (root = 16px, so `rem = px / 16`), then verify the extremes at 390 and
 1920 still read correctly and adjust the *scale*, not the individual declaration.
+
+> [!WARNING]
+> **Preserving 1440 is not enough on its own, and the mid-range is where it bites.** The root is
+> flat from 479 to 1440, so a plain `rem` does not scale anywhere in that range — but the `clamp()`
+> you are removing *did*, through its `vw` term. `clamp(2.4rem, 6.4vw, 6.4rem)` rendered **49px at
+> 768** and 92px at 1440; the 1440-preserving `5.76rem` renders **92px at both**. The headline
+> nearly doubles on a tablet and bursts the layout. This is not a rounding error and no amount of
+> checking 390 and 1920 will reveal it.
+>
+> A `clamp()` is only safely replaced by a bare `rem` when its `vw` term was **inactive** across
+> 479–1440 — i.e. it was pinned to its `min` or `max` throughout. Body copy and small labels usually
+> qualify (`clamp(.95rem, 1vw, 1.04rem)` is 15.2px at every width up to 1520). Display type
+> essentially never does.
+>
+> A second worked example, because the two ends bind in *opposite* directions and that is what
+> makes a single value impossible. Grand Mission's hero at `clamp(2.9rem, 7vw, 6.6rem)` rendered
+> 46px at 390 and 101px at 1440 — a 2.2x viewport-proportional ramp, against the root's own 0.86x.
+> Set to the 1440-preserving `6.3rem`, the 1440 view is exact but a 768 tablet gets a 101px
+> headline, which measured turned a 3-line hero into 5 lines and pushed the offer box and proof
+> row below the fold. Set low enough for 768 and the 1440 hero loses a third of its size and stops
+> out-ranking the section headings.
+
+### Stepping display type without `clamp()`
+
+Where the `vw` term *was* doing work, the replacement is a plain `rem` **times a multiplier that the
+`px` media queries step**. Multipliers, not per-element declarations — the whole scale moves
+together and the responsive curve lives in one readable block:
+
+```css
+:root{ --s-d1:1; --s-d2:1; --s-h2:1; --s-h3:1; --s-tx:1 }   /* base: exact at 1440 */
+@media screen and (max-width:1200px){ :root{ --s-d1:.7111; --s-d2:.7111; --s-h2:.7111 } }
+@media screen and (max-width:768px) { :root{ --s-d1:.5333; --s-d2:.5333; --s-h2:.5729 } }
+@media screen and (max-width:400px) { :root{ --s-d1:.4889; --s-h2:.6723; --s-tx:1.235 } }
+
+--d1: calc(5.76rem * var(--s-d1));           /* 92.16px at 1440, 49px at 768 */
+.hero-figure{ font-size: calc(14rem * var(--s-d1)) }
+```
+
+Solve each band against a **reference width where the old rendering is known**, so the captured
+breakpoints land on the values they already had: multiplier = `old_px(ref) / (base_rem × root(ref))`.
+Declare only what changes from the band above — custom properties cascade, so the rest carries.
+
+Two rules keep this honest:
+
+- **The multipliers for display type fall as the screen narrows; the one for text rises.** Below
+  479 the root ramps down to 12px, so text has to grow in `rem` terms merely to hold its pixel size,
+  and grow further still to clear the 16px body-copy floor. Any plain `rem` that is body copy needs
+  that text multiplier too, or it silently drops to 13px on a phone.
+- **This is not a licence to reintroduce per-element media queries.** Four or five multipliers cover
+  a whole design. If you find yourself writing a media query for one heading, the tier is missing.
+- **On a build destined for Webflow, step at the Designer's own breakpoints** — `1279 / 991 / 767 /
+  478` — rather than round numbers like the `1200 / 768 / 400` above. The scale then maps 1:1 onto
+  the breakpoints someone will later edit in the Designer, instead of falling between them where no
+  Webflow control can reach it. Dr. Nahlah uses five groups on exactly these.
+- **Do not put a `<=478` tier on display type.** Below 479 the root is already shrinking, which *is*
+  the reduction display type wants; a tier there fires at 478, where the root has not yet moved, and
+  produces a step up at the breakpoint. Only the text group needs that tier, to stop body copy
+  following the root down. Verify the seam directly: measure the rendered size at 479 and 480 and
+  require the largest step to be ~0%.
+- **Override tokens, not elements.** Custom properties resolve at use time, so a `:root` override
+  inside a media query works from anywhere in the file. An *element* override does not — the base
+  rule further down has equal specificity and wins on order. Where an element genuinely needs its
+  own override (a form input held at 16px for the iOS zoom guard, say), put it **immediately after
+  the rule it must beat**, not up with the tokens.
+- **Anchor the mobile values at 360, not 390.** 390 is the width everyone quotes, but 360 is
+  narrower and is what the QA pass captures. Sizing against 390 leaves body copy at ~15.4px on a
+  360 phone.
+
+#### Choosing the step values — measure the ceiling, never estimate it
+
+Pick each step against a *measured* overflow ceiling, not a glyph-table estimate. The binding case is
+always the **single longest word** in a headline, because a grid item defaults to `min-width: auto`
+and refuses to shrink below it. Measure by setting the token live and reading the wrapper's
+`scrollWidth`:
+
+```js
+document.documentElement.style.setProperty('--d1', candidate + 'rem')
+shell.scrollWidth - shell.clientWidth   // 0 means it fits
+```
+
+> [!WARNING]
+> **`body { overflow-x: hidden }` — which most of our kits set — makes a document-level overflow**
+> **check report nothing while the text is silently clipped.** Measure the wrapper, not the document,
+> or the page will pass QA with a headline running off the side of a phone.
 
 ## Install
 
@@ -126,6 +216,57 @@ font-size, and `rem`-based media queries.
 The static gate cannot see rendering. Also confirm during responsive QA that computed
 `document.documentElement` font-size matches `--verify` at each captured breakpoint, and that the
 479/480 boundary looks deliberate.
+
+Two runtime checks are worth copying rather than re-deriving. Reference implementations:
+`deliver/brandklout/mason-park/workflows/08-qa/.tmp/root-proof.mjs` and `pin-fit.mjs`.
+
+- **Root proof.** Read the computed root at each breakpoint and compare it to `rootPxAt()` imported
+  from `scripts/fluid-root.mjs`, so the table and the browser can never drift apart. Assert the
+  page actually loaded *first*: `about:blank` reports a perfectly plausible **16px root** and will
+  pass every root assertion you write. Probe a real element and fail on `null`.
+- **Pin fit.** A scene that is `100svh` tall always reports `scrollHeight === clientHeight`, so that
+  comparison proves nothing. Measure the bounding boxes of its visible descendants against the
+  scene's own box, at 1920 and 2400, where its contents are 12.5% and 25% larger.
+
+## The phone floor will oversize your desktop. Plan for `--tx` up front.
+
+The house scale is flat 16px from 479 to 1440 and drops to 13.76px at 390. So a token sized to
+clear a 16px legibility floor on a phone — `--body: 1.17rem` — renders **18.7px on every desktop**,
+about 20% larger than a design approved at 1440. Sizing the token for the desktop instead puts
+body copy at 14.7px on a phone. **No single rem value satisfies both ends, and the root cannot
+rescue it**: the curve is continuous by design, so any shape that gives 16px at 390 gives ~16px at
+1440 too.
+
+Grand Mission shipped the phone-anchored version and the client's first note was *"I have to zoom
+out the page in order to fit"*. Every chapter ran a screen and a half tall.
+
+The fix is one multiplier, declared with the tokens:
+
+```css
+:root { --tx: 1; }                                  /* phone: the floor binds  */
+@media (min-width: 1024px) { :root { --tx: 0.8292; } }   /* desktop: 1/1.206   */
+
+--body: calc(1.17rem * var(--tx));
+.offer__price { font-size: calc(3.9rem * var(--tx)); }
+```
+
+Author every font-size at its **phone** value and wrap it. Why a multiplier rather than bucketing
+the sizes onto semantic tokens: bucketing changes the relationships between sizes as well as the
+sizes, so it is a redesign wearing a refactor's clothes. `--tx` moves the whole tier as one unit
+and leaves every relationship exactly as drawn — and retuning desktop type afterwards is one
+number, not another sweep.
+
+Two things to get right:
+
+- **Apply it to the display tokens too.** If `--d1` scales and `--body` does not (or vice versa)
+  the hierarchy shears at the breakpoint.
+- **A display staircase that already exists must be restated inside the `--tx` band.** Grand
+  Mission had a `max-width: 1199px` step at `4.4rem`; once `--tx` started at 1024, the 1024–1199
+  band inherited both and fell to 58px against 84px at 1200. It needed
+  `@media (min-width: 1024px) and (max-width: 1199px)`, ordered *after* the block it overrides.
+
+`fluid-root.mjs --check` passes with `--tx` in place — the generated root snippet is untouched and
+the multiplier sits below it in the token block.
 
 ## Version Control
 

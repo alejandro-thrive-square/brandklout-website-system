@@ -1,0 +1,107 @@
+{
+ "tier478": {
+  "eyebrow": {
+   "value": "0.9rem",
+   "selectors": [
+    ".arr-cue",
+    ".inv-div-7",
+    ".inv-h3-4",
+    ".inv-p-11.chapter-tag",
+    ".inv-p-12.label",
+    ".inv-p-16.eyebrow",
+    ".inv-p.chapter-tag",
+    ".inv-p.eyebrow",
+    ".inv-p.label",
+    ".inv-span",
+    ".inv-span-4",
+    ".ledger-state",
+    ".price-save"
+   ]
+  },
+  "small": {
+   "value": "1.0625rem",
+   "selectors": [
+    ".chip",
+    ".cor-foot",
+    ".foot-base",
+    ".inv-figcaption",
+    ".inv-p-18.small",
+    ".inv-p-3.fine",
+    ".inv-p-8.fine",
+    ".inv-p-9",
+    ".inv-p.small",
+    ".inv-span-5.small",
+    ".inv-ul.hours-list.small",
+    ".src",
+    ".when"
+   ]
+  },
+  "ui": {
+   "value": "1.125rem",
+   "selectors": [
+    ".inv-a-2.btn",
+    ".inv-a-3.btn",
+    ".inv-a-4.btn",
+    ".inv-a-5.btn",
+    ".inv-a-6.btn",
+    ".inv-a.btn",
+    ".inv-blockquote",
+    ".inv-li",
+    ".inv-li-2",
+    ".inv-p-14",
+    ".inv-p-6",
+    ".price-was",
+    ".rail-offer"
+   ]
+  },
+  "body": {
+   "value": "1.31rem",
+   "selectors": [
+    ".inv-h3-2",
+    ".inv-main",
+    ".inv-span-2",
+    ".offer-rail",
+    ".rail-call",
+    ".score",
+    ".site-foot",
+    ".site-head",
+    ".skip-link",
+    ".sticky-bar"
+   ]
+  },
+  "lead": {
+   "value": "1.47rem",
+   "selectors": [
+    ".inv-a-8",
+    ".inv-p-13.lead",
+    ".inv-p-2.lead",
+    ".inv-p-5.lead",
+    ".inv-p-7.lead"
+   ]
+  }
+ },
+ "rung1439": {
+  "h1": {
+   "value": "2.86rem",
+   "selectors": [
+    ".inv-h1"
+   ]
+  },
+  "h2": {
+   "value": "2.16rem",
+   "selectors": [
+    ".inv-h2",
+    ".inv-h2-2",
+    ".inv-h2-3",
+    ".inv-h2-4",
+    ".inv-h2-5"
+   ]
+  },
+  "statement": {
+   "value": "2.56rem",
+   "selectors": [
+    ".hes-statement"
+   ]
+  }
+ }
+}

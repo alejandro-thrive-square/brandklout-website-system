@@ -9,7 +9,8 @@ Client delivery.
 ## Active MCP Servers
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-brandklout` | Site inspection, audit reads, section paste support, component conversion, CMS work, staging publish after confirmation. Shared instance covering all Brandklout clients. | **Registered 2026-08-07, awaiting OAuth** on the `team` profile. |
+| `webflow-brandklout` | Site inspection, audit reads, section paste support, component conversion, CMS work, staging publish after confirmation. Shared instance covering all Brandklout clients. | **LIVE — authenticated on the `team` profile 2026-08-07.** |
+| `webflow-clientfirst` | Local Client-First conversion helper. Reads files, holds no credentials, and makes no network calls. | Always available. |
 
 The dedicated `webflow-livewell-dental` instance was retired unauthenticated on 2026-08-07. All
 Brandklout clients live in one workspace Brandklout owns, so a per-client instance authorized
@@ -24,12 +25,12 @@ against that same workspace and isolated nothing — see
 > `webflow-webzite`, `webflow-clifton-exteriors`, or any other agency's instance here.
 
 ## Target Resources
-- **Workspace**: TBD (Brandklout or client-owned) - record after first `list_sites`
+- **Workspace**: Brandklout, ID `63b4b7393e89b78575e9a9bb` (confirmed 2026-08-07)
 - **Site Name**: Livewell Dental
 - **Live URL**: https://www.livewelldentalva.com
 - **Staging URL**: https://livewelldentalva.webflow.io
-- **Target Site ID**: `69d03fdbe999e9907724a69d` (read from `data-wf-site` in published HTML
-  2026-07-27; **confirm via `list_sites` before any mutating action**).
+- **Target Site ID**: `69d03fdbe999e9907724a69d` (confirmed 2026-08-07 through `list_sites`;
+  domains `livewelldentalva.com` and `www.livewelldentalva.com`).
 
 ## Allowed Operations
 - Read and inspect the Livewell Dental Webflow site structure, styles, pages, assets,

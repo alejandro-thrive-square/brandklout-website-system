@@ -1,0 +1,625 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..600;1,9..144,300..500&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{--font-from:18;--font-to:20;--vw-from:calc(1920 / 100);--vw-to:calc(2400 / 100);--coefficient:calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from)));--base:calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16)}
+html{font-size:calc(var(--base) * 1rem + var(--coefficient) * 1vw)}
+@media screen and (max-width:1920px){:root{--font-from:16;--font-to:18;--vw-from:calc(1440 / 100);--vw-to:calc(1920 / 100)}}
+@media screen and (max-width:1440px){:root{--font-from:16;--font-to:16;--vw-from:calc(479 / 100);--vw-to:calc(1440 / 100)}}
+@media screen and (max-width:479px){:root{--font-from:12;--font-to:16;--vw-from:calc(320 / 100);--vw-to:calc(479 / 100)}}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;overflow-x:clip;font-size:1.125rem;line-height:1.65}
+body.is-locked{overflow:hidden}
+@media (max-width:859px){body{padding-bottom:var(--bar-h)}}
+@media (max-width:478px){body{font-size:1.31rem}
+.arr-cue.arr-cue,.inv-div-7.inv-div-7,.inv-h3-4.inv-h3-4,.inv-p-11.chapter-tag.chapter-tag,.inv-p-12.label.label,.inv-p-16.eyebrow.eyebrow,.inv-p.chapter-tag.chapter-tag,.inv-p.eyebrow.eyebrow,.inv-p.label.label,.inv-span.inv-span,.inv-span-4.inv-span-4,.label-ty.label-ty,.ledger-state.ledger-state,.next-dot.next-dot,.nps-h3-4.nps-h3-4,.nps-p-11.label.label,.nps-p-14.eyebrow.eyebrow,.nps-p-8.chapter-tag.chapter-tag,.nps-p.chapter-tag.chapter-tag,.nps-p.eyebrow.eyebrow,.nps-p.label.label,.nps-span.nps-span,.prep-n.prep-n,.price-save.price-save,.ty-h3-4.ty-h3-4,.ty-p-3.chapter-tag.chapter-tag,.ty-p.chapter-tag.chapter-tag,.ty-span.ty-span,.urgency.urgency,.vis-dot.vis-dot{font-size:0.9rem}
+.chip.chip,.cor-foot.cor-foot,.fine-ty.fine-ty,.foot-base.foot-base,.inv-figcaption.inv-figcaption,.inv-p-18.small.small,.inv-p-3.fine.fine,.inv-p-8.fine.fine,.inv-p-9.inv-p-9,.inv-p.small.small,.inv-span-5.small.small,.inv-ul.hours-list.small.small,.nps-div-2.small.small,.nps-figcaption.nps-figcaption,.nps-p-13.fine.fine,.nps-p-16.small.small,.nps-p-3.fine.fine,.nps-p-5.fine.fine,.nps-p-6.fine.fine,.nps-p.small.small,.nps-span-4.small.small,.nps-ul-3.hours-list.small.small,.open-state.open-state,.ref-line.ref-line,.role.role,.role-ty.role-ty,.src.src,.ty-p-10.small.small,.ty-p-3.small.small,.ty-ul-2.hours-list.small.small,.ty-ul.hours-list.small.small,.when.when{font-size:1.0625rem}
+.inv-a-2.btn.btn,.inv-a-3.btn.btn,.inv-a-4.btn.btn,.inv-a-5.btn.btn,.inv-a-6.btn.btn,.inv-a.btn.btn,.inv-blockquote.inv-blockquote,.inv-li.inv-li,.inv-li-2.inv-li-2,.inv-p-14.inv-p-14,.inv-p-6.inv-p-6,.nps-a-2.btn.btn,.nps-a-3.btn.btn,.nps-a-4.btn.btn,.nps-a-5.btn.btn,.nps-a-6.btn.btn,.nps-a.btn.btn,.nps-blockquote.nps-blockquote,.nps-p-10.nps-p-10,.nps-p-7.nps-p-7,.price-was.price-was,.rail-offer.rail-offer,.ty-a-2.btn.btn,.ty-a.btn.btn,.ty-p-5.ty-p-5,.ty-p-7.ty-p-7{font-size:1.125rem}
+.inv-h3-2.inv-h3-2,.inv-main.inv-main,.inv-span-2.inv-span-2,.nps-main.nps-main,.nps-span-2.nps-span-2,.offer-rail.offer-rail,.rail-call.rail-call,.score.score,.site-foot.site-foot,.site-head.site-head,.skip-link.skip-link,.sticky-bar.sticky-bar,.ty-h3-3.ty-h3-3,.ty-main.ty-main,.ty-span-2.ty-span-2{font-size:1.31rem}
+.inv-a-8.inv-a-8,.inv-p-13.lead.lead,.inv-p-2.lead.lead,.inv-p-5.lead.lead,.inv-p-7.lead.lead,.nps-a-8.nps-a-8,.nps-p-2.lead.lead,.nps-p-5.lead.lead,.nps-p-9.lead.lead,.prep-close.prep-close,.ty-a-3.ty-a-3,.ty-p-2.lead.lead,.ty-p-6.lead.lead,.ty-p-8.lead.lead{font-size:1.47rem}
+.btn--lg.btn--lg.btn--lg{font-size:1.2rem}
+.form-card .field input{font-size:1.31rem}}
+@media (min-width:992px) and (max-width:1439px){.inv-h1.inv-h1,.nps-h1.nps-h1,.ty-h1.ty-h1{font-size:2.86rem}
+.inv-h2.inv-h2,.inv-h2-2.inv-h2-2,.inv-h2-3.inv-h2-3,.inv-h2-4.inv-h2-4,.inv-h2-5.inv-h2-5,.nps-h2.nps-h2,.nps-h2-2.nps-h2-2,.nps-h2-3.nps-h2-3,.nps-h2-4.nps-h2-4,.nps-h3-2.nps-h3-2,.ty-h2.ty-h2,.ty-h2-2.ty-h2-2{font-size:2.16rem}
+.catch-statement.catch-statement,.hes-statement.hes-statement{font-size:2.56rem}}
+.mpd-armed [data-anim="hide"]{visibility:hidden}
+.mpd-ready [data-anim="hide"]{visibility:visible}
+.mpd-line{will-change:transform}
+.site-head.is-solid.is-solid{background:rgba(255,255,255,.95);border-bottom-color:rgba(32,36,42,0.12);box-shadow:0 10px 30px -24px rgba(32,36,42,0.5)}
+.site-head.is-solid .wrap{padding-block:.6rem}
+.offer-rail.is-up.is-up{transform:translate(-50%,0);opacity:1}
+.faq details.is-open .answer-wrap{grid-template-rows:1fr}
+.btn .btn-before{background:radial-gradient(140px circle at var(--mx, 50%) var(--my, 50%),rgba(255,255,255,0.22),transparent 62%)}
+.price-was .price-was-after{transform:scaleX(var(--strike, 1))}
+.step .step-before{transform:scaleX(var(--fill, 0))}
+.ch-inclusion .ledger-steps span.on{color:#007E9B;font-weight:700}
+.ch-hesitation .hes-statement .mpd-word.mpd-word.mpd-word{color:rgba(32, 36, 42, 0.19)}
+.ch-catch .catch-statement .mpd-word.mpd-word.mpd-word{color:rgba(32, 36, 42, 0.19)}
+.ch-fasttrack .open-dot.is-open.is-open.is-open{background:#3f9e63;box-shadow:0 0 0 3px rgba(63, 158, 99, 0.18)}
+.ch-find .hours-list li.is-today.is-today.is-today{background:#E8F6FA;color:#26292F;font-weight:600}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;transition-duration:.001ms!important;scroll-behavior:auto!important}[data-anim="hide"]{visibility:visible!important}.offer-rail{opacity:1;transform:translate(-50%,0)}.head-progress i{transform:scaleX(0)}}
+</style>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/gsap.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollTrigger.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/ScrollToPlugin.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/SplitText.min.js"></script>
+<script>window.MPD=function(){"use strict";var e=[],t=!1,n={PUBLIC_PHONE:"(281) 769-8878",PUBLIC_PHONE_E164:"+12817698878",TRACKING:{invisalign:{display:"(281) 767-8698",e164:"+12817678698"},"new-patient-special":{display:"(281) 688-1610",e164:"+12816881610"},"thank-you":null},WEBHOOK_URL:"{{GHL_INBOUND_WEBHOOK_URL}}",THANK_YOU_URL:"../thank-you/index.html",BOOKING_URL:"https://www.flexbook.me/masonpark/1",MAP_URL:"https://www.google.com/maps/place/21830+Kingsland+Blvd+%23104a,+Katy,+TX+77450/@29.775949,-95.7512199,17z",reduced:!(!window.matchMedia||!window.matchMedia("(prefers-reduced-motion: reduce)").matches),ok:!(!window.gsap||!window.ScrollTrigger),pageKey:function(){return document.body&&document.body.getAttribute("data-page-key")||""},sourceKey:function(){var e=new URLSearchParams(window.location.search).get("src");return e&&Object.prototype.hasOwnProperty.call(n.TRACKING,e)?e:""},tracking:function(){var e=n.TRACKING[n.pageKey()];return e||(n.TRACKING[n.sourceKey()]||null)},phone:function(){var e=n.tracking();return e?e.display:n.PUBLIC_PHONE},phoneE164:function(){var e=n.tracking();return e?e.e164:n.PUBLIC_PHONE_E164},splitLines:function(e,t){if(!e||!window.SplitText)return null;try{var n={type:"lines",mask:"lines",linesClass:"mpd-line",autoSplit:!0};return t&&(n.onSplit=function(e){return t(e)}),SplitText.create?SplitText.create(e,n):new SplitText(e,n)}catch(t){try{return new SplitText(e,{type:"lines",linesClass:"mpd-line"})}catch(e){return null}}},splitOnce:function(e){if(!e||!window.SplitText)return null;try{var t={type:"lines",mask:"lines",linesClass:"mpd-line",autoSplit:!1};return SplitText.create?SplitText.create(e,t):new SplitText(e,t)}catch(e){return null}},splitWords:function(e){if(!e||!window.SplitText)return null;try{var t={type:"words",wordsClass:"mpd-word"};return SplitText.create?SplitText.create(e,t):new SplitText(e,t)}catch(e){return null}},run:function(e){try{e(n)}catch(e){window.console&&console.error&&console.error("[MPD chapter]",e)}},add:function(r){t?n.run(r):e.push(r)},flushQueue:function(){t=!0,e.forEach(n.run),e.length=0}};return n.ok&&!n.reduced&&(document.documentElement.classList.add("mpd-armed"),window.setTimeout(function(){t||document.documentElement.classList.remove("mpd-armed")},3e3)),n}();
+window.MPD.THANK_YOU_URL="/thank-you";</script>
+<style>.skip-link{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #ffffff; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; text-decoration: none; position: absolute; left: -9999px; top: 0; z-index: 200; background: #26292F; padding-top: 0.75rem; padding-right: 1.25rem; padding-bottom: 0.75rem; padding-left: 1.25rem; border-top-left-radius: 0; border-top-right-radius: 0; border-bottom-right-radius: 0.875rem; border-bottom-left-radius: 0;}
+.site-head{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #525A64; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; position: fixed; top: 0; right: 0; bottom: auto; left: 0; z-index: 90; background: rgba(255, 255, 255, 0.86); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: transparent; transition: background 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), border-color 0.45s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);}
+.head-progress{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: auto; left: 0; height: 2px; background: rgba(32, 36, 42, 0.08); overflow: hidden;}
+.nps-i{box-sizing: border-box; display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg, #00B4D8, #8FDCEC);}
+.nps-div{box-sizing: border-box; display: flex; align-items: center; grid-row-gap: 1rem; grid-column-gap: 1rem; padding-block: 0.85rem; transition: padding 0.45s cubic-bezier(0.22, 0.61, 0.36, 1);}
+.wrap{width: 100%; max-width: 73.75rem; margin-inline: auto; padding-inline: 40px;}
+.nps-div-2{box-sizing: border-box;}
+.nps-img{box-sizing: border-box; max-width: 100%; height: auto; display: block; width: 180px;}
+.chapter-readout{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 1.5rem; display: flex; align-items: baseline; grid-row-gap: 0.6rem; grid-column-gap: 0.6rem; font-size: 0.75rem; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6472; min-width: 16ch;}
+.nps-b{box-sizing: border-box; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.9rem; font-weight: 600; color: #007E9B; font-variant-numeric: tabular-nums;}
+.head-actions{box-sizing: border-box; margin-left: auto; display: flex; align-items: center; grid-row-gap: 22.72px; grid-column-gap: 22.72px;}
+.head-phone{box-sizing: border-box; color: inherit; text-decoration: none; display: grid; align-content: center; line-height: 1.2; text-align: right; min-height: 44px; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nps-span{box-sizing: border-box; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; color: #5A6472;}
+.nps-span-2{box-sizing: border-box; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; font-weight: 600; color: #26292F;}
+.nps-a{box-sizing: border-box; text-decoration: none;}
+.btn{display: inline-flex; align-items: center; justify-content: center; grid-row-gap: 0.55rem; grid-column-gap: 0.55rem; padding-top: 0.95rem; padding-right: 1.6rem; padding-bottom: 0.95rem; padding-left: 1.6rem; border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.01em; line-height: 1; position: relative; overflow: hidden; isolation: isolate; border-top-style: solid; border-top-width: 1px; border-top-color: transparent; border-right-style: solid; border-right-width: 1px; border-right-color: transparent; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: transparent; border-left-style: solid; border-left-width: 1px; border-left-color: transparent; background: #26292F; color: #ffffff; min-height: 44px; transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1); will-change: transform;}
+.nps-span-3{box-sizing: border-box; position: relative; z-index: 2;}
+.offer-rail{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #525A64; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; display: flex;}
+.rail-offer{box-sizing: border-box; flex-grow: 0; flex-shrink: 1; flex-basis: auto; min-width: 0; font-size: 0.9375rem; color: rgba(255, 255, 255, 0.88); overflow: hidden; text-overflow: ellipsis; white-space: nowrap;}
+.rail-sep{box-sizing: border-box; flex-grow: 0; flex-shrink: 0; flex-basis: auto; width: 1px; height: 24px; background: rgba(255, 255, 255, 0.2);}
+.rail-call{box-sizing: border-box; color: #ffffff; text-decoration: none; flex-grow: 0; flex-shrink: 0; flex-basis: auto; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; font-weight: 600;}
+.nps-a-2{box-sizing: border-box; text-decoration: none; flex-grow: 0; flex-shrink: 0; flex-basis: auto; margin-left: auto; white-space: nowrap;}
+.btn{display: inline-flex; align-items: center; justify-content: center; grid-row-gap: 0.55rem; grid-column-gap: 0.55rem; padding-top: 0.95rem; padding-right: 1.6rem; padding-bottom: 0.95rem; padding-left: 1.6rem; border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.01em; line-height: 1; position: relative; overflow: hidden; isolation: isolate; border-top-style: solid; border-top-width: 1px; border-top-color: transparent; border-right-style: solid; border-right-width: 1px; border-right-color: transparent; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: transparent; border-left-style: solid; border-left-width: 1px; border-left-color: transparent; background: #26292F; color: #ffffff; min-height: 44px; transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1); will-change: transform;}
+.btn--sand{background: #00B4D8; color: #20242A;}
+.sticky-bar{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #525A64; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; position: fixed; top: auto; right: 0; bottom: 0; left: 0; z-index: 85; display: none; grid-template-columns: 1fr 1.35fr; grid-row-gap: 0.6rem; grid-column-gap: 0.6rem; padding-top: 0.7rem; padding-right: 40px; padding-bottom: 11.2px; padding-left: 40px; background: rgba(255, 255, 255, 0.94); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-top-style: solid; border-top-width: 1px; border-top-color: rgba(32, 36, 42, 0.12);}
+.nps-a-3{box-sizing: border-box; text-decoration: none; padding-inline: 0.75rem;}
+.btn{display: inline-flex; align-items: center; justify-content: center; grid-row-gap: 0.55rem; grid-column-gap: 0.55rem; padding-top: 0.95rem; padding-right: 1.6rem; padding-bottom: 0.95rem; padding-left: 1.6rem; border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.01em; line-height: 1; position: relative; overflow: hidden; isolation: isolate; border-top-style: solid; border-top-width: 1px; border-top-color: transparent; border-right-style: solid; border-right-width: 1px; border-right-color: transparent; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: transparent; border-left-style: solid; border-left-width: 1px; border-left-color: transparent; background: #26292F; color: #ffffff; min-height: 44px; transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1); will-change: transform;}
+.btn--ghost{background: transparent; border-color: rgba(32, 36, 42, 0.12); color: #26292F;}
+.btn--sand{background: #00B4D8; color: #20242A;}
+.nps-main{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #525A64; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility;}
+.nps-section{box-sizing: border-box; background: #ffffff; color: #525A64;}
+.chapter{position: relative;}
+.ch-arrival{position: relative; overflow: hidden; padding-top: 136px;}
+.arr-bg{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;}
+.nps-img-2{box-sizing: border-box; max-width: 100%; height: 100%; display: block; position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; object-fit: cover; will-change: transform;}
+.arr-bg-after-nps{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: radial-gradient(90% 70% at 76% 28%, rgba(0, 180, 216, 0.26), transparent 62%),
+        linear-gradient(104deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.95) 46%, rgba(255,255,255,.6) 82%),
+        linear-gradient(180deg, rgba(255,255,255,.9) 0%, rgba(255,255,255,.3) 30%, rgba(255,255,255,.96) 100%);}
+.nps-div-3{box-sizing: border-box; position: relative; z-index: 2; display: grid; grid-row-gap: 56px; grid-column-gap: 56px; padding-block: 56.8px 68.16px; align-items: start; grid-auto-columns: 1fr; grid-template-columns: 1.15fr 0.85fr; grid-template-rows: auto;}
+.wrap{width: 100%; max-width: 73.75rem; margin-inline: auto; padding-inline: 40px;}
+.nps-p{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0;}
+.chapter-tag{display: flex; align-items: center; grid-row-gap: 0.85rem; grid-column-gap: 0.85rem; margin-bottom: 1.35rem; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: #007E9B;}
+.nps-i-2{box-sizing: border-box; flex-grow: 0; flex-shrink: 0; flex-basis: auto; display: block; width: 39.76px; height: 1px; background: #00B4D8; transform-origin: left;}
+.nps-h1{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; color: #26292F; font-size: 3.25rem; max-width: 14ch;}
+.nps-em{box-sizing: border-box; font-style: normal; color: #00B4D8;}
+.nps-p-2{box-sizing: border-box; margin-top: 1.1rem; margin-right: 0; margin-bottom: 0; margin-left: 0;}
+.lead{font-size: 1.3125rem; color: #525A64; max-width: 56ch;}
+.price-block{box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: baseline; grid-row-gap: 0.75rem; grid-column-gap: 1.5rem; margin-top: 32px;}
+.price-now{box-sizing: border-box; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-size: 4.75rem; font-weight: 700; line-height: 0.9; letter-spacing: -0.04em; color: #26292F; font-variant-numeric: tabular-nums;}
+.price-meta{box-sizing: border-box; display: grid; grid-row-gap: 0.35rem; grid-column-gap: 0.35rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.price-save{box-sizing: border-box; display: inline-block; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.72rem; font-weight: 700; letter-spacing: 0.1em; text-transform: uppercase; color: #20242A; background: #00B4D8; padding-top: 0.3rem; padding-right: 0.7rem; padding-bottom: 0.3rem; padding-left: 0.7rem; border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; justify-self: start;}
+.price-was{box-sizing: border-box; position: relative; display: inline-block; color: #5A6472; font-size: 0.9375rem;}
+.price-was-after{box-sizing: border-box; position: absolute; left: 0; right: 0; top: 52%; height: 1.5px; background: currentColor; transform: scaleX(1); transform-origin: left;}
+.nps-p-3{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; flex-grow: 1; flex-shrink: 1; flex-basis: 220px; max-width: 32ch;}
+.fine{font-size: 0.875rem; line-height: 1.6; color: #5A6472;}
+.nps-ul{box-sizing: border-box; margin-top: 1.5rem; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; list-style: none;}
+.chips-nps{display: flex; flex-wrap: wrap; grid-row-gap: 0.5rem; grid-column-gap: 0.5rem;}
+.chip{box-sizing: border-box; display: inline-block; padding-top: 0.5rem; padding-right: 0.9rem; padding-bottom: 0.5rem; padding-left: 0.9rem; border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(32, 36, 42, 0.12); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(32, 36, 42, 0.12); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(32, 36, 42, 0.12); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(32, 36, 42, 0.12); background: #ffffff; font-size: 0.875rem; color: #525A64; transition: border-color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1),
+              transform 0.35s cubic-bezier(0.22, 0.61, 0.36, 1); margin-top: 0; margin-bottom: 0;}
+.tick{box-sizing: border-box; max-width: 100%; height: auto; display: inline-block; vertical-align: -2px; margin-right: 0.4rem; color: #007E9B;}
+.rating{box-sizing: border-box; display: flex; align-items: center; grid-row-gap: 0.6rem; grid-column-gap: 0.6rem; flex-wrap: wrap; margin-top: 1.75rem;}
+.stars{box-sizing: border-box; display: inline-flex; grid-row-gap: 2px; grid-column-gap: 2px; color: #e3b341;}
+.nps-svg{box-sizing: border-box; max-width: 100%; height: auto; display: block;}
+.score{box-sizing: border-box; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-weight: 700; font-size: 1.125rem; color: #26292F;}
+.src{box-sizing: border-box; font-size: 0.875rem; color: #5A6472;}
+.arr-cue{box-sizing: border-box; display: flex; align-items: center; grid-row-gap: 0.7rem; grid-column-gap: 0.7rem; margin-top: 34.08px; font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase; color: #5A6472;}
+.nps-i-3{box-sizing: border-box; display: block; width: 1px; height: 38px; background: linear-gradient(180deg, #00B4D8, transparent);}
+.form-card{box-sizing: border-box; background: #ffffff; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(32, 36, 42, 0.12); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(32, 36, 42, 0.12); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(32, 36, 42, 0.12); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(32, 36, 42, 0.12); border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; padding-top: 32px; padding-right: 32px; padding-bottom: 32px; padding-left: 32px; box-shadow: 0 1px 2px rgba(32, 36, 42, 0.04), 0 12px 32px -18px rgba(32, 36, 42, 0.18);}
+.form-head{box-sizing: border-box; text-align: center; margin-bottom: 1.25rem;}
+.eyebrow{display: inline-block; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: #007E9B;}
+.form-h2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; color: #26292F; font-size: 1.35rem; margin-block: 0.5rem 0.35rem;}
+.small{font-size: 0.875rem;}
+.muted{color: #525A64;}
+.nps-section-2{box-sizing: border-box; color: #525A64;}
+.chapter{position: relative;}
+.ch-catch{background: #F4F7F9;}
+.catch-pin{box-sizing: border-box; min-height: 100svh; display: grid; align-content: center; padding-block: 90.88px; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.wrap{width: 100%; max-width: 73.75rem; margin-inline: auto; padding-inline: 40px;}
+.catch-statement{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-size: 2.95rem; font-weight: 600; line-height: 1.16; letter-spacing: -0.03em; max-width: 20ch; color: #26292F;}
+.catch-after{box-sizing: border-box; margin-top: 45.44px; display: grid; grid-row-gap: 1rem; grid-column-gap: 1rem; max-width: 54ch; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nps-p-4{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #525A64; line-height: 1.85;}
+.catch-meter{box-sizing: border-box; margin-top: 34.08px; height: 1px; background: rgba(32, 36, 42, 0.12); position: relative; max-width: 320px;}
+.nps-i-4{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: #00B4D8; transform: scaleX(0); transform-origin: left;}
+.ch-covers{background: #ffffff;}
+.cov-pin{box-sizing: border-box; min-height: 100svh; display: grid; align-content: center; padding-block: 79.52px; overflow: hidden; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nps-div-4{box-sizing: border-box; display: grid; grid-row-gap: 45.44px; grid-column-gap: 45.44px; align-items: center; grid-auto-columns: 1fr; grid-template-columns: 1fr 1fr; grid-template-rows: auto;}
+.wrap{width: 100%; max-width: 73.75rem; margin-inline: auto; padding-inline: 40px;}
+.nps-h2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; color: #26292F; font-size: 2.375rem;}
+.nps-p-5{box-sizing: border-box; margin-top: 1rem; margin-right: 0; margin-bottom: 0; margin-left: 0;}
+.lead{font-size: 1.3125rem; color: #525A64; max-width: 56ch;}
+.cov-list{box-sizing: border-box; display: grid; grid-row-gap: 0; grid-column-gap: 0; margin-top: 0.5rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nps-div-5{box-sizing: border-box; display: grid; grid-row-gap: 0.9rem; grid-column-gap: 0.9rem; align-items: start; padding-block: 16px; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(32, 36, 42, 0.12); color: #525A64; grid-auto-columns: 1fr; grid-template-columns: auto 1fr; grid-template-rows: auto;}
+.cov-mark{box-sizing: border-box; width: 22px; height: 22px; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; flex-grow: 0; flex-shrink: 0; flex-basis: auto; border-top-style: solid; border-top-width: 1.5px; border-top-color: rgba(32, 36, 42, 0.12); border-right-style: solid; border-right-width: 1.5px; border-right-color: rgba(32, 36, 42, 0.12); border-bottom-style: solid; border-bottom-width: 1.5px; border-bottom-color: rgba(32, 36, 42, 0.12); border-left-style: solid; border-left-width: 1.5px; border-left-color: rgba(32, 36, 42, 0.12); display: grid; place-items: center; margin-top: 0.15rem; color: #ffffff; background: transparent; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nps-svg-2{box-sizing: border-box; max-width: 100%; height: 12px; display: block; width: 12px;}
+.nps-strong{box-sizing: border-box; color: #26292F; font-weight: 600;}
+.nps-div-6{box-sizing: border-box; display: grid; grid-row-gap: 0.9rem; grid-column-gap: 0.9rem; align-items: start; padding-block: 16px; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(32, 36, 42, 0.12); color: #525A64; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(32, 36, 42, 0.12); grid-auto-columns: 1fr; grid-template-columns: auto 1fr; grid-template-rows: auto;}
+.ledger{box-sizing: border-box; background: #E8F6FA; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 126, 155, 0.16); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(0, 126, 155, 0.16); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(0, 126, 155, 0.16); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(0, 126, 155, 0.16); border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; padding-top: 34.08px; padding-right: 34.08px; padding-bottom: 34.08px; padding-left: 34.08px;}
+.label{font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: #007E9B;}
+.ledger-figure{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-size: 5.25rem; font-weight: 700; line-height: 0.9; letter-spacing: -0.04em; color: #26292F; font-variant-numeric: tabular-nums;}
+.ledger-state{box-sizing: border-box; margin-top: 0.75rem; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 0.72rem; letter-spacing: 0.14em; text-transform: uppercase; font-weight: 700; color: #00738D; min-height: 1.2em;}
+.ledger-rail{box-sizing: border-box; margin-top: 28px; height: 2px; background: rgba(32,36,42,.1); position: relative; border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px;}
+.nps-i-5{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; background: linear-gradient(90deg, #00B4D8, #8FDCEC); transform: scaleX(0); transform-origin: left;}
+.ledger-saving{box-sizing: border-box; margin-top: 1.25rem; padding-top: 1.25rem; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(0, 126, 155, 0.16); display: flex; justify-content: space-between; align-items: baseline; grid-row-gap: 1rem; grid-column-gap: 1rem;}
+.small{font-size: 0.875rem;}
+.muted{color: #525A64;}
+.nps-b-2{box-sizing: border-box; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-size: 1.5rem; font-weight: 700; color: #007E9B; font-variant-numeric: tabular-nums;}
+.nps-p-6{box-sizing: border-box; margin-top: 1.25rem; margin-right: 0; margin-bottom: 0; margin-left: 0;}
+.fine{font-size: 0.875rem; line-height: 1.6; color: #5A6472;}
+.nps-div-7{box-sizing: border-box; margin-top: 1.5rem;}
+.btn-row{display: flex; flex-wrap: wrap; grid-row-gap: 0.75rem; grid-column-gap: 0.75rem;}
+.nps-a-4{box-sizing: border-box; text-decoration: none;}
+.btn{display: inline-flex; align-items: center; justify-content: center; grid-row-gap: 0.55rem; grid-column-gap: 0.55rem; padding-top: 0.95rem; padding-right: 1.6rem; padding-bottom: 0.95rem; padding-left: 1.6rem; border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.01em; line-height: 1; position: relative; overflow: hidden; isolation: isolate; border-top-style: solid; border-top-width: 1px; border-top-color: transparent; border-right-style: solid; border-right-width: 1px; border-right-color: transparent; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: transparent; border-left-style: solid; border-left-width: 1px; border-left-color: transparent; background: #26292F; color: #ffffff; min-height: 44px; transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1); will-change: transform;}
+.btn--sand{background: #00B4D8; color: #20242A;}
+.btn--lg{padding-top: 1.1rem; padding-right: 2rem; padding-bottom: 1.1rem; padding-left: 2rem; font-size: 1rem;}
+.nps-section-3{box-sizing: border-box; color: rgba(255, 255, 255, 0.78);}
+.chapter{position: relative;}
+.ch-visit{background: #26292F;}
+.nps-i-6{box-sizing: border-box; flex-grow: 0; flex-shrink: 0; flex-basis: auto; display: block; width: 39.76px; height: 1px; background: #8FDCEC; transform-origin: left;}
+.nps-h2-2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; color: #ffffff; font-size: 2.375rem;}
+.vis-track{box-sizing: border-box; position: relative; margin-top: 45.44px;}
+.vis-spine{box-sizing: border-box; position: absolute; left: 0; top: 11px; bottom: auto; width: auto; background: rgba(255, 255, 255, 0.14); border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; right: 0; height: 2px;}
+.nps-i-7{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: #8FDCEC; border-top-left-radius: 2px; border-top-right-radius: 2px; border-bottom-right-radius: 2px; border-bottom-left-radius: 2px; transform: scaleX(0); transform-origin: left;}
+.vis-steps{box-sizing: border-box; display: grid; grid-row-gap: 34.08px; grid-column-gap: 34.08px; grid-auto-columns: 1fr; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto;}
+.vis-step{box-sizing: border-box; display: grid; grid-row-gap: 1.25rem; grid-column-gap: 1.25rem; align-items: start; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.vis-dot{box-sizing: border-box; width: 24px; height: 24px; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; flex-grow: 0; flex-shrink: 0; flex-basis: auto; border-top-style: solid; border-top-width: 2px; border-top-color: rgba(255, 255, 255, 0.14); border-right-style: solid; border-right-width: 2px; border-right-color: rgba(255, 255, 255, 0.14); border-bottom-style: solid; border-bottom-width: 2px; border-bottom-color: rgba(255, 255, 255, 0.14); border-left-style: solid; border-left-width: 2px; border-left-color: rgba(255, 255, 255, 0.14); background: #26292F; display: grid; place-items: center; font-size: 0.72rem; font-weight: 700; font-family: "Fraunces", Georgia, "Times New Roman", serif; color: rgba(255, 255, 255, 0.6); transition: none; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nps-h3{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0.4rem; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 500; line-height: 1.08; letter-spacing: -0.025em; color: #ffffff; font-size: 1.625rem;}
+.nps-p-7{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255, 255, 255, 0.78); font-size: 0.9375rem; max-width: 52ch;}
+.ch-team{background: #F4F7F9; overflow: hidden;}
+.chapter-body{padding-block: 79.52px;}
+.head-block{max-width: 62ch;}
+.head-block--center{margin-inline: auto; text-align: center;}
+.nps-p-8{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; justify-content: center;}
+.chapter-tag{display: flex; align-items: center; grid-row-gap: 0.85rem; grid-column-gap: 0.85rem; margin-bottom: 1.35rem; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: #007E9B;}
+.nps-p-9{box-sizing: border-box; margin-top: 1rem; margin-right: 0; margin-bottom: 0; margin-left: 0; margin-inline: auto;}
+.lead{font-size: 1.3125rem; color: #525A64; max-width: 56ch;}
+.team{box-sizing: border-box; display: grid; grid-row-gap: 22.72px; grid-column-gap: 22.72px; margin-top: 45.44px; grid-auto-columns: 1fr; grid-template-columns: 1fr 1fr 1fr; grid-template-rows: auto;}
+.nps-figure{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; display: grid; grid-row-gap: 0.85rem; grid-column-gap: 0.85rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.doc-photo{box-sizing: border-box; position: relative; overflow: hidden; border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; background: #E8F6FA; aspect-ratio: 4 / 5; clip-path: inset(0 0 100% 0);}
+.nps-img-3{box-sizing: border-box; max-width: 100%; height: 100%; display: block; position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; object-fit: cover; object-position: center top; will-change: transform;}
+.name{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-weight: 600; color: #26292F;}
+.role{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-size: 0.875rem; color: #5A6472;}
+.offers{box-sizing: border-box; margin-top: 68.16px;}
+.offers-head{box-sizing: border-box; display: flex; flex-wrap: wrap; grid-row-gap: 0.75rem; grid-column-gap: 1.5rem; align-items: baseline;}
+.nps-h3-2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 500; line-height: 1.08; letter-spacing: -0.025em; color: #26292F; font-size: 2.375rem;}
+.muted{color: #525A64;}
+.nps-div-8{box-sizing: border-box; margin-top: 34.08px;}
+.grid{display: grid; grid-row-gap: 22.72px; grid-column-gap: 22.72px; grid-auto-columns: 1fr; grid-template-columns: 1fr 1fr; grid-template-rows: auto;}
+.tile{box-sizing: border-box; background: #ffffff; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(32, 36, 42, 0.12); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(32, 36, 42, 0.12); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(32, 36, 42, 0.12); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(32, 36, 42, 0.12); border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; padding-top: 28px; padding-right: 28px; padding-bottom: 28px; padding-left: 28px; display: grid; grid-row-gap: 0.6rem; grid-column-gap: 0.6rem; align-content: start; transition: border-color 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1); grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.num{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #00B4D8; font-size: 1.75rem; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-weight: 700; line-height: 1;}
+.nps-h3-3{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 500; line-height: 1.08; letter-spacing: -0.025em; color: #26292F; font-size: 1.625rem;}
+.nps-p-10{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: #525A64; font-size: 0.9375rem;}
+.ch-proof{background: #26292F;}
+.head-block{max-width: 62ch;}
+.head-block--center{margin-inline: auto; text-align: center;}
+.proof-score{box-sizing: border-box; display: flex; align-items: center; justify-content: center; grid-row-gap: 0.75rem; grid-column-gap: 0.75rem; margin-top: 1.1rem;}
+.nps-b-3{box-sizing: border-box; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-size: 2.25rem; font-weight: 700; color: #ffffff; font-variant-numeric: tabular-nums;}
+.nps-span-4{box-sizing: border-box; color: rgba(255, 255, 255, 0.6);}
+.small{font-size: 0.875rem;}
+.nps-div-9{box-sizing: border-box; margin-top: 45.44px;}
+.grid{display: grid; grid-row-gap: 22.72px; grid-column-gap: 22.72px; grid-auto-columns: 1fr; grid-template-columns: 1fr 1fr; grid-template-rows: auto;}
+.grid--3{grid-template-columns: 1fr 1fr 1fr;}
+.review{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; background: #2F343C; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255, 255, 255, 0.14); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(255, 255, 255, 0.14); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(255, 255, 255, 0.14); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(255, 255, 255, 0.14); border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; padding-top: 28px; padding-right: 28px; padding-bottom: 28px; padding-left: 28px; display: grid; grid-row-gap: 0.9rem; grid-column-gap: 0.9rem; align-content: start; transition: border-color 0.45s cubic-bezier(0.22, 0.61, 0.36, 1), transform 0.5s cubic-bezier(0.22, 0.61, 0.36, 1),
+              box-shadow 0.5s cubic-bezier(0.22, 0.61, 0.36, 1); grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nps-blockquote{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255, 255, 255, 0.78); font-size: 0.9375rem; line-height: 1.7;}
+.nps-figcaption{box-sizing: border-box; display: flex; align-items: center; grid-row-gap: 0.6rem; grid-column-gap: 0.6rem; padding-top: 0.85rem; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255, 255, 255, 0.14); font-size: 0.875rem;}
+.who{box-sizing: border-box; font-weight: 600; color: #ffffff;}
+.when{box-sizing: border-box; color: rgba(255, 255, 255, 0.6); font-size: 0.875rem;}
+.g-mark{box-sizing: border-box; max-width: 100%; height: 16px; display: block; width: 16px; margin-left: auto; flex-grow: 0; flex-shrink: 0; flex-basis: auto;}
+.accred{box-sizing: border-box; margin-top: 68.16px; padding-top: 45.44px; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255, 255, 255, 0.14);}
+.nps-p-11{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; text-align: center;}
+.label{font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: #007E9B;}
+.accred-row{box-sizing: border-box; display: flex; flex-wrap: wrap; align-items: center; justify-content: center; grid-row-gap: 45.44px; grid-column-gap: 45.44px; margin-top: 1.5rem;}
+.nps-img-4{box-sizing: border-box; max-width: 100%; height: 52px; display: block; width: auto; opacity: 0.85;}
+.ch-invitation{background: #ffffff; overflow: hidden;}
+.split{display: grid; grid-row-gap: 45.44px; grid-column-gap: 45.44px; align-items: center; grid-auto-columns: 1fr; grid-template-columns: 1fr 1fr; grid-template-rows: auto;}
+.nps-div-10{box-sizing: border-box; clip-path: inset(0 0 100% 0); aspect-ratio: 4/3;}
+.split-media{position: relative; overflow: hidden; border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; background: #E8F6FA;}
+.nps-img-5{box-sizing: border-box; max-width: 100%; height: 100%; display: block; width: 100%; object-fit: cover; will-change: transform;}
+.card{background: #ffffff; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(32, 36, 42, 0.12); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(32, 36, 42, 0.12); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(32, 36, 42, 0.12); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(32, 36, 42, 0.12); border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; padding-top: 28px; padding-right: 28px; padding-bottom: 28px; padding-left: 28px;}
+.card--warm{background: #E8F6FA; border-color: rgba(0, 126, 155, 0.16);}
+.nps-img-6{box-sizing: border-box; max-width: 100%; height: auto; display: block; margin-bottom: 0.85rem;}
+.nps-p-12{box-sizing: border-box; margin-top: 0.5rem; margin-right: 0; margin-bottom: 0; margin-left: 0;}
+.muted{color: #525A64;}
+.fine{font-size: 0.875rem; line-height: 1.6; color: #5A6472;}
+.inv-services{box-sizing: border-box; margin-top: 68.16px;}
+.nps-h2-3{box-sizing: border-box; margin-top: 0.6rem; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; color: #26292F; font-size: 2.375rem;}
+.nps-ul-2{box-sizing: border-box; margin-top: 44px; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; list-style: none; justify-content: center; max-width: 820px; margin-inline: auto;}
+.chips-nps{display: flex; flex-wrap: wrap; grid-row-gap: 0.5rem; grid-column-gap: 0.5rem;}
+.nps-p-13{box-sizing: border-box; margin-top: 1.5rem; margin-right: 0; margin-bottom: 0; margin-left: 0; text-align: center; max-width: 62ch; margin-inline: auto;}
+.fine{font-size: 0.875rem; line-height: 1.6; color: #5A6472;}
+.inv-close{box-sizing: border-box; margin-top: 68.16px; background: linear-gradient(118deg, #00B4D8, #8FDCEC 55%, #CDEFF7); border-top-left-radius: 1.375rem; border-top-right-radius: 1.375rem; border-bottom-right-radius: 1.375rem; border-bottom-left-radius: 1.375rem; padding-top: 56px; padding-right: 56px; padding-bottom: 56px; padding-left: 56px; display: grid; grid-row-gap: 1.75rem; grid-column-gap: 1.75rem; align-items: center; overflow: hidden; position: relative; grid-auto-columns: 1fr; grid-template-columns: 1.3fr auto; grid-template-rows: auto;}
+.nps-p-14{box-sizing: border-box; margin-top: 0.75rem; margin-right: 0; margin-bottom: 0; margin-left: 0; max-width: 46ch;}
+.eyebrow{display: inline-block; font-size: 0.72rem; letter-spacing: 0.18em; text-transform: uppercase; font-weight: 700; color: #007E9B;}
+.nps-h2-4{box-sizing: border-box; margin-top: 0.75rem; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 600; line-height: 1.08; letter-spacing: -0.025em; color: #26292F; font-size: 2.375rem;}
+.nps-p-15{box-sizing: border-box; margin-top: 0.75rem; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(32, 36, 42, 0.78); max-width: 46ch;}
+.btn-row{display: flex; flex-wrap: wrap; grid-row-gap: 0.75rem; grid-column-gap: 0.75rem;}
+.nps-a-5{box-sizing: border-box; text-decoration: none; border-color: transparent;}
+.btn{display: inline-flex; align-items: center; justify-content: center; grid-row-gap: 0.55rem; grid-column-gap: 0.55rem; padding-top: 0.95rem; padding-right: 1.6rem; padding-bottom: 0.95rem; padding-left: 1.6rem; border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.01em; line-height: 1; position: relative; overflow: hidden; isolation: isolate; border-top-style: solid; border-top-width: 1px; border-top-color: transparent; border-right-style: solid; border-right-width: 1px; border-right-color: transparent; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: transparent; border-left-style: solid; border-left-width: 1px; border-left-color: transparent; background: #26292F; color: #ffffff; min-height: 44px; transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1); will-change: transform;}
+.btn--lg{padding-top: 1.1rem; padding-right: 2rem; padding-bottom: 1.1rem; padding-left: 2rem; font-size: 1rem;}
+.nps-a-6{box-sizing: border-box; color: #26292F; text-decoration: none; border-color: rgba(32,36,42,.45);}
+.btn{display: inline-flex; align-items: center; justify-content: center; grid-row-gap: 0.55rem; grid-column-gap: 0.55rem; padding-top: 0.95rem; padding-right: 1.6rem; padding-bottom: 0.95rem; padding-left: 1.6rem; border-top-left-radius: 999px; border-top-right-radius: 999px; border-bottom-right-radius: 999px; border-bottom-left-radius: 999px; font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 0.9375rem; font-weight: 600; letter-spacing: 0.01em; line-height: 1; position: relative; overflow: hidden; isolation: isolate; border-top-style: solid; border-top-width: 1px; border-top-color: transparent; border-right-style: solid; border-right-width: 1px; border-right-color: transparent; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: transparent; border-left-style: solid; border-left-width: 1px; border-left-color: transparent; background: #26292F; color: #ffffff; min-height: 44px; transition: transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1); will-change: transform;}
+.btn--ghost{background: transparent; border-color: rgba(32, 36, 42, 0.12); color: #26292F;}
+.btn--lg{padding-top: 1.1rem; padding-right: 2rem; padding-bottom: 1.1rem; padding-left: 2rem; font-size: 1rem;}
+.site-foot{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255, 255, 255, 0.72); font-family: "Inter", "Segoe UI", system-ui, sans-serif; font-size: 1.125rem; line-height: 1.65; -webkit-font-smoothing: antialiased; text-rendering: optimizeLegibility; background: #26292F; padding-block: 56.8px;}
+.foot-grid{box-sizing: border-box; display: grid; grid-row-gap: 40px; grid-column-gap: 40px; grid-auto-columns: 1fr; grid-template-columns: 1.4fr 1fr 1fr 1fr; grid-template-rows: auto;}
+.nps-div-11{box-sizing: border-box; margin-bottom: 1rem;}
+.nps-img-7{box-sizing: border-box; max-width: 100%; height: auto; display: block; width: 180px; filter: brightness(0) invert(1); opacity: 0.92;}
+.nps-h3-4{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0.75rem; margin-left: 0; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-optical-sizing: auto; font-weight: 700; line-height: 1.08; letter-spacing: 0.16em; color: #8FDCEC; font-size: 0.72rem; text-transform: uppercase;}
+.br-line{display: block;}
+.nps-p-16{box-sizing: border-box; margin-top: 0.75rem; margin-right: 0; margin-bottom: 0; margin-left: 0;}
+.nps-a-7{box-sizing: border-box; color: inherit; text-decoration: underline; text-underline-offset: 3px;}
+.nps-a-8{box-sizing: border-box; color: #fff; text-decoration: none; font-family: "Fraunces", Georgia, "Times New Roman", serif; font-size: 1.3125rem;}
+.small{font-size: 0.875rem;}
+.nps-ul-3{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; list-style: none;}
+.hours-list{display: grid; grid-row-gap: 0.4rem; grid-column-gap: 0.4rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.small{font-size: 0.875rem;}
+.nps-li{box-sizing: border-box; display: flex; justify-content: space-between; grid-row-gap: 1rem; grid-column-gap: 1rem; margin-top: 0; margin-bottom: 0; padding-left: 0;}
+.closed{box-sizing: border-box; color: #5A6472;}
+.foot-base{box-sizing: border-box; margin-top: 45.44px; padding-top: 1.5rem; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255, 255, 255, 0.12); display: flex; flex-wrap: wrap; grid-row-gap: 0.75rem; grid-column-gap: 2rem; font-size: 0.875rem; color: rgba(255, 255, 255, 0.55);}</style>
+</head><body>
+<div class="page-wrapper"><a class="skip-link" href="#main">Skip to content</a><header class="site-head"><div class="head-progress" aria-hidden="true"><i class="nps-i" id="headProgress"></i></div><div class="nps-div wrap"><div class="nps-div-2 brand"><img class="nps-img" width="200" height="77" alt="Mason Park Dental of Katy" src="assets/logo.webp" loading="eager"></div><p class="chapter-readout" aria-hidden="true"><b class="nps-b" id="chapterNo">00</b><span class="nps-div-2" id="chapterName">Arrival</span></p><div class="head-actions"><a class="head-phone" data-phone="href" href="tel:+12817698878"><span class="nps-span" data-today-hours="">Katy, TX</span><span class="nps-span-2" data-phone-text="">(281) 769-8878</span></a> <a class="nps-a btn magnetic" href="#book"><span class="nps-span-3">Claim $189 special</span></a></div></div></header><div class="offer-rail"><span class="rail-offer">$189 New Patient Special — exam, x-rays, cleaning and full treatment plan.</span> <span class="rail-sep" aria-hidden="true"></span> <a class="rail-call" data-phone="href" href="tel:+12817698878"><span class="nps-div-2" data-phone-text="">(281) 769-8878</span></a> <a class="nps-a-2 btn btn--sand" href="#book"><span class="nps-span-3">Claim now</span></a></div><div class="sticky-bar"><a class="nps-a-3 btn btn--ghost" data-phone="href" href="tel:+12817698878">Call</a> <a class="nps-a-3 btn btn--sand" href="#book">Claim $189 special</a></div><main class="nps-main" id="main"><section class="nps-section chapter ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival" data-theme="light"><div class="arr-bg" aria-hidden="true"><img class="nps-img-2" width="1024" height="683" src="assets/interior.jpg" loading="eager" id="arrBg"><div class="arr-bg-after-nps"></div></div><div class="nps-div-3 wrap arr-in"><div class="nps-div-2"><p class="nps-p chapter-tag" data-anim="hide"><i class="nps-i-2"></i><span class="nps-div-2">Chapter 00 · Arrival</span></p><h1 class="nps-h1" id="arrTitle" data-anim="hide">Your first visit, <em class="nps-em">properly done.</em></h1><p class="nps-p-2 lead" id="arrLead" data-anim="hide"> A comprehensive exam, x-rays, a cleaning and a full treatment plan — everything needed to know exactly where your teeth stand, in a single appointment. </p><div class="price-block" id="arrPrice" data-anim="hide"><div class="price-now" data-count-to="189">$189</div><div class="price-meta"><span class="price-save">Save $328</span> <span class="price-was">Regular $517<div class="price-was-after"></div></span></div><p class="nps-p-3 fine"> New patients of Mason Park Dental of Katy. Any further treatment is quoted for your approval before anything is started. </p></div><ul class="nps-ul chips-nps" id="arrChips" data-anim="hide"><li class="chip"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.chip .tick{display:inline-block;vertical-align:-2px;margin-right:0.4rem;color:#007E9B}</style><svg aria-hidden="true" class="tick" fill="none" height="14" viewbox="0 0 16 16" width="14"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>Comprehensive exam</li><li class="chip"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.chip .tick{display:inline-block;vertical-align:-2px;margin-right:0.4rem;color:#007E9B}</style><svg aria-hidden="true" class="tick" fill="none" height="14" viewbox="0 0 16 16" width="14"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>X-rays</li><li class="chip"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.chip .tick{display:inline-block;vertical-align:-2px;margin-right:0.4rem;color:#007E9B}</style><svg aria-hidden="true" class="tick" fill="none" height="14" viewbox="0 0 16 16" width="14"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>Cleaning</li><li class="chip"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.chip .tick{display:inline-block;vertical-align:-2px;margin-right:0.4rem;color:#007E9B}</style><svg aria-hidden="true" class="tick" fill="none" height="14" viewbox="0 0 16 16" width="14"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"></path></svg>Full treatment plan</li></ul><div class="rating" data-anim="hide"><span class="stars" aria-hidden="true"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg fill="currentColor" height="16" viewbox="0 0 20 20" width="16"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg fill="currentColor" height="16" viewbox="0 0 20 20" width="16"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg fill="currentColor" height="16" viewbox="0 0 20 20" width="16"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg fill="currentColor" height="16" viewbox="0 0 20 20" width="16"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg fill="currentColor" height="16" viewbox="0 0 20 20" width="16"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg></span> <span class="score">5.0</span> <span class="src">rated by our patients on Google</span></div><div class="arr-cue" data-anim="hide"><span class="nps-div-2">Begin</span><i class="nps-i-3"></i></div></div><div class="form-card" id="book" data-anim="hide"><div class="form-head"><p class="nps-p eyebrow">Claim the special</p><h2 class="form-h2">Book your first visit</h2><p class="nps-p small muted">Two quick steps. We will confirm your time by phone.</p></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}p{margin:0}button{font:inherit;color:inherit}input{font:inherit;color:inherit}button{background:none;border:0;cursor:pointer}.btn{display:inline-flex;align-items:center;justify-content:center;gap:0.55rem;padding:0.95rem 1.6rem;border-radius:999px;font-family:"Inter", "Segoe UI", system-ui, sans-serif;font-size:0.9375rem;font-weight:600;letter-spacing:0.01em;line-height:1;position:relative;overflow:hidden;isolation:isolate;border:1px solid transparent;background:#26292F;color:#ffffff;min-height:44px;transition:transform 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.4s cubic-bezier(0.22, 0.61, 0.36, 1), color 0.35s cubic-bezier(0.22, 0.61, 0.36, 1);will-change:transform}.btn:hover::before{opacity:1}.btn:hover{transform:translateY(-2px);box-shadow:0 2px 4px rgba(32, 36, 42, 0.05), 0 22px 48px -20px rgba(32, 36, 42, 0.26)}.btn:active{transform:translateY(0)}.btn--sand{background:#00B4D8;color:#20242A}.btn--ghost{background:transparent;border-color:rgba(32, 36, 42, 0.12);color:#26292F}.btn--ghost:hover{border-color:#00B4D8}.btn--lg{padding:1.1rem 2rem;font-size:1rem}.btn--block{width:100%}.progress{display:flex;gap:0.35rem;margin-bottom:1.25rem}.progress span{flex:1;height:3px;border-radius:999px;background:rgba(32, 36, 42, 0.12);transition:background 0.4s cubic-bezier(0.22, 0.61, 0.36, 1)}.progress span.on{background:#00B4D8}.step-panel{display:none}.step-panel.active{display:block}.choices{display:grid;gap:0.5rem}.choice{display:flex;align-items:center;gap:0.7rem;width:100%;text-align:left;padding:0.85rem 1rem;border:1px solid rgba(32, 36, 42, 0.12);border-radius:0.875rem;background:#ffffff;font-size:0.9375rem;min-height:44px;transition:border-color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), background 0.3s cubic-bezier(0.22, 0.61, 0.36, 1)}.choice:hover{border-color:#00B4D8}.choice .mark{flex:none;width:18px;height:18px;border-radius:50%;border:1.5px solid rgba(32, 36, 42, 0.12);position:relative;transition:border-color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1)}.field{display:grid;gap:0.35rem;margin-bottom:0.9rem}.field label{font-size:0.875rem;font-weight:600;color:#26292F}.field input{padding:0.85rem 1rem;border:1px solid rgba(32, 36, 42, 0.12);border-radius:0.875rem;background:#ffffff;transition:border-color 0.3s cubic-bezier(0.22, 0.61, 0.36, 1), box-shadow 0.3s cubic-bezier(0.22, 0.61, 0.36, 1);font-size:1rem;min-height:44px}.field input:focus{border-color:#00B4D8;outline:none;box-shadow:0 0 0 3px rgba(0, 180, 216, 0.16)}.field .err{font-size:0.875rem;color:#c0523f;min-height:1em}.consent{display:grid;grid-template-columns:auto 1fr;gap:0.65rem;align-items:start;margin-block:0.9rem 1.1rem;font-size:0.875rem;color:#525A64;line-height:1.55}.consent input{margin-top:0.2rem;width:18px;height:18px;accent-color:#00B4D8}.form-msg{margin-top:0.85rem;font-size:0.875rem;text-align:center}.form-trust{margin-top:1rem;text-align:center;font-size:0.875rem;color:#5A6472;display:flex;align-items:center;justify-content:center;gap:0.4rem}.hp-field{position:absolute;left:-9999px}button[disabled]{opacity:0.5;cursor:not-allowed}button[disabled]:hover{transform:none;box-shadow:none}@media (max-width: 479px){.btn--lg{font-size:1.2rem}.field input{font-size:1.125rem}}</style><form data-asana-gid="1217162605683021" data-lead-form="" data-offer="$189 New Patient Special" novalidate="">
+<div aria-hidden="true" class="progress"><span class="on"></span><span></span></div>
+<div class="step-panel active">
+<p style="font-family:var(--display);font-weight:600;font-size:var(--t-body);margin-bottom:0.9rem;">
+            What brings you in?
+          </p>
+<div class="choices">
+<button aria-pressed="false" class="choice" data-value="Check-up and cleaning" type="button">
+<span aria-hidden="true" class="mark"></span>A check-up and cleaning
+            </button>
+<button aria-pressed="false" class="choice" data-value="Something is bothering me" type="button">
+<span aria-hidden="true" class="mark"></span>Something is bothering me
+            </button>
+<button aria-pressed="false" class="choice" data-value="Second opinion" type="button">
+<span aria-hidden="true" class="mark"></span>A second opinion on a treatment plan
+            </button>
+<button aria-pressed="false" class="choice" data-value="Appointment for my child" type="button">
+<span aria-hidden="true" class="mark"></span>An appointment for my child
+            </button>
+</div>
+</div>
+<div class="step-panel">
+<div class="field">
+<label for="np-name">Full name</label>
+<input autocomplete="name" data-required="" id="np-name" name="full_name" type="text"/>
+<span class="err" role="alert"></span>
+</div>
+<div class="field">
+<label for="np-phone">Phone</label>
+<input autocomplete="tel" data-required="" id="np-phone" name="phone" placeholder="(281) 555-0100" type="tel"/>
+<span class="err" role="alert"></span>
+</div>
+<div class="field">
+<label for="np-email">Email</label>
+<input autocomplete="email" data-required="" id="np-email" name="email" type="email"/>
+<span class="err" role="alert"></span>
+</div>
+<input aria-hidden="true" autocomplete="off" class="hp-field" name="company_website" tabindex="-1" type="text"/>
+<label class="consent">
+<input name="consent" type="checkbox"/>
+<span>I agree to be contacted about my appointment. By providing my phone number I agree
+              to receive text messages from Mason Park Dental of Katy.</span>
+</label>
+<button class="btn btn--sand btn--block btn--lg" disabled="" type="submit">Claim my $189 visit</button>
+<button class="btn btn--ghost btn--block" data-back="" style="margin-top:0.6rem;" type="button">Back</button>
+<p aria-live="polite" class="form-msg" role="status"></p>
+</div>
+<p class="form-trust">
+<svg aria-hidden="true" fill="none" height="13" viewbox="0 0 16 16" width="13"><path d="M8 1.5l5 2v4c0 3-2.1 5.6-5 7-2.9-1.4-5-4-5-7v-4z" stroke="currentColor" stroke-linejoin="round" stroke-width="1.4"></path></svg>
+          Your details stay with the practice.
+        </p>
+</form></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    var root = document.getElementById('arrival');
+    var reveal = root.querySelectorAll('[data-anim="hide"]');
+    gsap.set(reveal, { visibility: 'visible' });
+
+    if (M.reduced) { gsap.set(reveal, { opacity: 1, y: 0 }); return; }
+
+    var tl = gsap.timeline({ delay: 0.12 });
+    var split = M.splitOnce(document.getElementById('arrTitle'));
+    if (split && split.lines && split.lines.length) {
+      gsap.set(split.lines, { yPercent: 110 });
+      tl.to(split.lines, { yPercent: 0, duration: 1.05, stagger: 0.09, ease: 'power4.out' }, 0);
+    } else {
+      tl.from('#arrTitle', { opacity: 0, y: 40, duration: 1, ease: 'power3.out' }, 0);
+    }
+    tl.from(root.querySelector('.chapter-tag'), { opacity: 0, x: -22, duration: 0.85, ease: 'power3.out' }, 0.04)
+      .from('#arrLead',  { opacity: 0, y: 24, duration: 0.85, ease: 'power3.out' }, 0.5)
+      .from('#arrPrice', { opacity: 0, y: 24, duration: 0.85, ease: 'power3.out' }, 0.62)
+      .from('#arrChips .chip', { opacity: 0, y: 18, duration: 0.7, stagger: 0.06, ease: 'power3.out' }, 0.74)
+      .from(root.querySelector('.rating'), { opacity: 0, y: 18, duration: 0.7, ease: 'power3.out' }, 0.86)
+      .from('#book', { opacity: 0, y: 40, duration: 1.1, ease: 'power3.out' }, 0.3)
+      .from('#arrBg', { opacity: 0, scale: 1.12, duration: 1.7, ease: 'power3.out' }, 0)
+      .from(root.querySelector('.arr-cue'), { opacity: 0, duration: 0.7 }, 1);
+
+    var priceEl = root.querySelector('[data-count-to]');
+    if (priceEl) {
+      var target = parseInt(priceEl.getAttribute('data-count-to'), 10);
+      var o = { v: 0 };
+      tl.to(o, {
+        v: target, duration: 1.3, ease: 'power2.out',
+        onUpdate: function () { priceEl.textContent = '$' + Math.round(o.v).toLocaleString('en-US'); },
+        onComplete: function () { priceEl.textContent = '$' + target.toLocaleString('en-US'); }
+      }, 0.62);
+    }
+
+    gsap.fromTo(root.querySelector('.price-was'), { '--strike': 0 }, {
+      '--strike': 1, duration: 0.7, ease: 'power2.inOut', delay: 1.5
+    });
+
+    /* Departure — the chapter recedes as you leave it. */
+    gsap.timeline({ scrollTrigger: { trigger: root, start: 'top top', end: 'bottom top', scrub: 0.6 } })
+      .to(root.querySelector('.arr-in'), { yPercent: -12, opacity: 0.2, ease: 'none' }, 0)
+      .to('#arrBg', { yPercent: 8, scale: 1.08, ease: 'none' }, 0);
+
+    gsap.to(root.querySelector('.arr-cue i'), {
+      scaleY: 0.3, transformOrigin: 'top', duration: 1.1, repeat: -1, yoyo: true, ease: 'power1.inOut'
+    });
+  });
+  </script></section><section class="nps-section-2 chapter ch-catch" id="catch" data-chapter="1" data-chapter-name="The Catch" data-theme="light"><div class="catch-pin" id="catchPin"><div class="nps-div-2 wrap"><p class="nps-p chapter-tag"><i class="nps-i-2"></i><span class="nps-div-2">Chapter 01 · The Catch</span></p><p class="catch-statement" id="catchStatement"> Plenty of practices advertise a cheap first visit, then charge separately for the x-rays that make it useful. </p><div class="catch-after" id="catchAfter"><p class="nps-p-4">This is the whole appointment, in one price. The exam, the imaging, the cleaning and a written plan — not a loss-leader that turns into a quote at the desk.</p><p class="nps-p-4">You leave knowing exactly where your teeth stand and exactly what anything further would cost, before a single thing is started.</p></div><div class="catch-meter" aria-hidden="true"><i class="nps-i-4" id="catchMeter"></i></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    var pin = document.getElementById('catchPin');
+    var statement = document.getElementById('catchStatement');
+    var meter = document.getElementById('catchMeter');
+
+    if (M.reduced) return;   // the copy is already fully legible in the markup
+
+    var sp = M.splitWords(statement);
+    if (!sp || !sp.words || !sp.words.length) return;
+
+    /* One word, one owner: the closing clause is tinted by its own tween, so
+       no word is written by two scrubbed tweens over overlapping ranges. */
+    var tail = sp.words.slice(-5);
+    var body = sp.words.slice(0, -5);
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + Math.round(window.innerHeight * 1.9),
+        pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) { gsap.set(meter, { scaleX: self.progress }); }
+      }
+    });
+
+    tl.to(body, { color: '#26292F', stagger: 0.5, ease: 'none' }, 0)
+      .to(tail, { color: '#00B4D8', stagger: 0.5, ease: 'none' }, '>-0.2')
+      .from('#catchAfter p', { opacity: 0, y: 22, stagger: 0.4, ease: 'none' }, '>-0.4');
+  });
+  </script></section><section class="nps-section-2 chapter ch-covers" id="covers" data-chapter="2" data-chapter-name="What It Covers" data-theme="light"><div class="cov-pin" id="covPin"><div class="nps-div-4 wrap cov-grid"><div class="nps-div-2"><p class="nps-p chapter-tag"><i class="nps-i-2"></i><span class="nps-div-2">Chapter 02 · What It Covers</span></p><h2 class="nps-h2">A full picture, not a quick look.</h2><p class="nps-p-5 lead"> Everything below is included in the one fee. Keep scrolling and watch it come off. </p><div class="cov-list" id="covList"><div class="nps-div-5 cov-item"><span class="cov-mark" aria-hidden="true"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.ch-covers .cov-mark svg{width:12px;height:12px}.ch-covers .cov-mark path{stroke-dasharray:20;stroke-dashoffset:20}</style><svg fill="none" viewbox="0 0 16 16"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path></svg></span> <span class="nps-div-2"><strong class="nps-strong">Comprehensive exam</strong> — a full assessment of teeth, gums and bite, including an oral cancer screening.</span></div><div class="nps-div-5 cov-item"><span class="cov-mark" aria-hidden="true"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.ch-covers .cov-mark svg{width:12px;height:12px}.ch-covers .cov-mark path{stroke-dasharray:20;stroke-dashoffset:20}</style><svg fill="none" viewbox="0 0 16 16"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path></svg></span> <span class="nps-div-2"><strong class="nps-strong">X-rays</strong> — digital, so you see what we see, with a fraction of the radiation of film.</span></div><div class="nps-div-5 cov-item"><span class="cov-mark" aria-hidden="true"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.ch-covers .cov-mark svg{width:12px;height:12px}.ch-covers .cov-mark path{stroke-dasharray:20;stroke-dashoffset:20}</style><svg fill="none" viewbox="0 0 16 16"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path></svg></span> <span class="nps-div-2"><strong class="nps-strong">Cleaning</strong> — a professional clean to finish the visit.</span></div><div class="nps-div-6 cov-item"><span class="cov-mark" aria-hidden="true"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.ch-covers .cov-mark svg{width:12px;height:12px}.ch-covers .cov-mark path{stroke-dasharray:20;stroke-dashoffset:20}</style><svg fill="none" viewbox="0 0 16 16"><path d="M2.5 8.5l3.5 3.5 7.5-8" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2.4"></path></svg></span> <span class="nps-div-2"><strong class="nps-strong">Full treatment plan</strong> — written, itemised and priced, so nothing arrives as a surprise later.</span></div></div></div><div class="nps-div-2"><div class="ledger"><p class="nps-p label">Your first visit</p><p class="ledger-figure" id="covFigure">$517</p><p class="ledger-state" id="covState">Regular value</p><div class="ledger-rail" aria-hidden="true"><i class="nps-i-5" id="covRail"></i></div><div class="ledger-saving"><span class="nps-div-2 small muted">You save</span> <b class="nps-b-2" id="covSaving">$0</b></div><p class="nps-p-6 fine"> Available to new patients of Mason Park Dental of Katy. Additional services, where clinically required, are quoted for your approval before treatment begins. </p></div><div class="nps-div-7 btn-row"><a class="nps-a-4 btn btn--sand btn--lg magnetic" href="#book"><span class="nps-span-3">Claim the $189 special</span></a></div></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    var pin = document.getElementById('covPin');
+    var figure = document.getElementById('covFigure');
+    var state = document.getElementById('covState');
+    var saving = document.getElementById('covSaving');
+    var rail = document.getElementById('covRail');
+    var marks = document.querySelectorAll('#covList .cov-mark');
+
+    function money(v) { return '$' + Math.round(v).toLocaleString('en-US'); }
+
+    if (M.reduced) {
+      figure.textContent = '$189';
+      state.textContent = 'New patient special';
+      saving.textContent = '$328';
+      gsap.set(rail, { scaleX: 1 });
+      marks.forEach(function (m) {
+        m.style.background = '#00B4D8';
+        m.style.borderColor = '#00B4D8';
+        m.querySelector('path').style.strokeDashoffset = '0';
+      });
+      return;
+    }
+
+    /* The fee is interpolated continuously between the two published figures,
+       so 25%, 50% and 75% of the pin are three genuinely different states —
+       roughly $435, $353 and $271 — rather than a snap between $517 and $189. */
+    var o = { v: 517 };
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + Math.round(window.innerHeight * 2.1),
+        pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true,
+        onUpdate: function (self) {
+          gsap.set(rail, { scaleX: self.progress });
+          var label = self.progress >= 0.98 ? 'New patient special' : 'Regular value';
+          if (state.textContent !== label) state.textContent = label;
+        }
+      }
+    });
+
+    tl.to(o, {
+      v: 189, ease: 'none', duration: 1,
+      onUpdate: function () {
+        figure.textContent = money(o.v);
+        saving.textContent = money(517 - o.v);
+      },
+      onComplete: function () { figure.textContent = '$189'; saving.textContent = '$328'; }
+    }, 0);
+
+    /* Each inclusion checks itself off across the same pinned distance. */
+    marks.forEach(function (mark, i) {
+      tl.to(mark, {
+        backgroundColor: '#00B4D8', borderColor: '#00B4D8', ease: 'none', duration: 0.32
+      }, i * 0.24)
+        .to(mark.querySelector('path'), { strokeDashoffset: 0, ease: 'none', duration: 0.28 }, i * 0.24 + 0.08);
+    });
+
+    gsap.from('#covers .chapter-tag, #covers h2, #covers .lead', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#covers', start: 'top 70%' }
+    });
+  });
+  </script></section><section class="nps-section-3 chapter ch-visit" id="visit" data-chapter="3" data-chapter-name="The Visit" data-theme="dark"><div class="cov-pin" id="visPin"><div class="nps-div-2 wrap"><p class="nps-p chapter-tag"><i class="nps-i-6"></i><span class="nps-div-2">Chapter 03 · The Visit</span></p><h2 class="nps-h2-2">What actually happens on the day.</h2><div class="vis-track"><div class="vis-spine" aria-hidden="true"><i class="nps-i-7" id="visSpine"></i></div><div class="vis-steps" id="visSteps"><div class="vis-step"><span class="vis-dot" aria-hidden="true">1</span><div class="nps-div-2"><h3 class="nps-h3">We look properly</h3><p class="nps-p-7">A comprehensive exam and digital x-rays, using cone beam imaging and an intra-oral camera so you can see what we are describing.</p></div></div><div class="vis-step"><span class="vis-dot" aria-hidden="true">2</span><div class="nps-div-2"><h3 class="nps-h3">We explain what we found</h3><p class="nps-p-7">Your oral health needs, goals and priorities are the focus of your customised treatment plan — written down, itemised and priced.</p></div></div><div class="vis-step"><span class="vis-dot" aria-hidden="true">3</span><div class="nps-div-2"><h3 class="nps-h3">You decide what happens next</h3><p class="nps-p-7">Nothing beyond the cleaning is started on the day. You leave with the plan and the costs, and choose in your own time.</p></div></div></div></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    var pin = document.getElementById('visPin');
+    var spine = document.getElementById('visSpine');
+    var steps = gsap.utils.toArray('#visSteps .vis-step');
+    var horizontal = window.matchMedia('(min-width: 760px)').matches;
+
+    function litDot(dot, on) {
+      gsap.to(dot, {
+        borderColor: on ? '#8FDCEC' : 'rgba(255,255,255,.14)',
+        backgroundColor: on ? '#8FDCEC' : 'rgba(0,0,0,0)',
+        color: on ? '#26292F' : 'rgba(255,255,255,.6)',
+        duration: 0.35, ease: 'none'
+      });
+    }
+
+    if (M.reduced) {
+      gsap.set(spine, horizontal ? { scaleX: 1 } : { scaleY: 1 });
+      steps.forEach(function (s) { litDot(s.querySelector('.vis-dot'), true); });
+      return;
+    }
+
+    var tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + Math.round(window.innerHeight * 1.7),
+        pin: true, scrub: 0.3, anticipatePin: 1, invalidateOnRefresh: true
+      }
+    });
+
+    /* The spine draws across the whole pinned distance; each step arrives and
+       lights its dot at its own point along that draw. Because everything
+       hangs off one scrubbed timeline, halfway through the pin is genuinely
+       halfway through the story. */
+    tl.fromTo(spine,
+      horizontal ? { scaleX: 0 } : { scaleY: 0 },
+      horizontal ? { scaleX: 1, ease: 'none', duration: 3 } : { scaleY: 1, ease: 'none', duration: 3 }, 0);
+
+    steps.forEach(function (step, i) {
+      tl.fromTo(step.querySelector('div'), { opacity: 0.15, y: 18 },
+        { opacity: 1, y: 0, ease: 'none', duration: 0.7 }, i * 0.95)
+        .add(function () { litDot(step.querySelector('.vis-dot'), true); }, i * 0.95 + 0.2)
+        .add(function () { litDot(step.querySelector('.vis-dot'), false); }, i * 0.95 + 0.19);
+    });
+
+    /* Reverse scrolling must un-light the dots it passes back over, or the
+       chapter cannot be re-read on the way up. */
+    tl.eventCallback('onUpdate', function () {
+      var p = tl.progress() * 3;
+      steps.forEach(function (step, i) {
+        litDot(step.querySelector('.vis-dot'), p >= i * 0.95 + 0.2);
+      });
+    });
+
+    gsap.from('#visit .chapter-tag, #visit h2', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#visit', start: 'top 70%' }
+    });
+  });
+  </script></section><section class="nps-section-2 chapter ch-team" id="team" data-chapter="4" data-chapter-name="The Team" data-theme="light"><div class="nps-div-2 wrap chapter-body"><div class="nps-div-2 head-block head-block--center"><p class="nps-p-8 chapter-tag"><i class="nps-i-2"></i><span class="nps-div-2">Chapter 04 · The Team</span></p><h2 class="nps-h2">Who you will be seeing.</h2><p class="nps-p-9 lead"> Dr. Sung, Dr. Cho and Dr. Nguyen are committed to providing excellent dentistry in a comfortable environment. We welcome new patients of all ages. </p></div><div class="team" id="teamGrid"><figure class="nps-figure"><div class="doc-photo"><img class="nps-img-3" width="683" height="1024" alt="Dr. Dave Cho" src="assets/dr-cho.jpg" loading="lazy"></div><figcaption class="nps-div-2"><p class="name">Dr. Dave Cho</p><p class="role">General Dentist</p></figcaption></figure><figure class="nps-figure"><div class="doc-photo"><img class="nps-img-3" width="230" height="300" alt="Dr. William Sung, DMD" src="assets/dr-sung.webp" loading="lazy"></div><figcaption class="nps-div-2"><p class="name">Dr. William Sung, DMD</p><p class="role">General Dentist</p></figcaption></figure><figure class="nps-figure"><div class="doc-photo"><img class="nps-img-3" width="683" height="1024" alt="Dr. Tam Nguyen" src="assets/dr-nguyen.jpg" loading="lazy"></div><figcaption class="nps-div-2"><p class="name">Dr. Tam Nguyen</p><p class="role">Board Certified Pediatric Dentist</p></figcaption></figure></div><div class="offers"><div class="offers-head"><h3 class="nps-h3-2">Other new-patient offers</h3><p class="nps-p muted">Mention these when you book and we will apply them to your visit.</p></div><div class="nps-div-8 grid" id="offerGrid"><article class="tile"><p class="num">$129</p><h3 class="nps-h3-3">New patient exam for children</h3><p class="nps-p-10">For children under 13, seen by Dr. Tam Nguyen, our board certified pediatric dentist.</p></article><article class="tile"><p class="num">$350</p><h3 class="nps-h3-3">New patient whitening</h3><p class="nps-p-10">KOR<style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><sup>®</sup> whitening with at-home trays, at the new-patient rate.</p></article><article class="tile"><p class="num">Free</p><h3 class="nps-h3-3">Second opinion</h3><p class="nps-p-10">Confused about a treatment plan, or unsure about an opinion you have been given? See a doctor you can trust, at no cost.</p></article><article class="tile"><p class="num">Free</p><h3 class="nps-h3-3">Invisalign<style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><sup>®</sup> consultation</h3><p class="nps-p-10">Complimentary clear-aligner consultation, with $1,000 off treatment currently available.</p></article></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    if (M.reduced) { gsap.set('#teamGrid .doc-photo', { clipPath: 'inset(0 0 0% 0)' }); return; }
+
+    /* Each portrait plate wipes open in turn, and the photo inside drifts
+       against the scroll. Scale never lands on exactly 1 — that is where the
+       edges hit sub-pixel boundaries and flicker. */
+    gsap.utils.toArray('#teamGrid figure').forEach(function (fig, i) {
+      gsap.to(fig.querySelector('.doc-photo'), {
+        clipPath: 'inset(0 0 0% 0)', duration: 1.1, delay: i * 0.11, ease: 'power4.inOut',
+        scrollTrigger: { trigger: '#teamGrid', start: 'top 82%' }
+      });
+      gsap.from(fig.querySelector('figcaption'), {
+        opacity: 0, y: 18, duration: 0.8, delay: 0.35 + i * 0.11, ease: 'power3.out',
+        scrollTrigger: { trigger: '#teamGrid', start: 'top 82%' }
+      });
+      gsap.fromTo(fig.querySelector('img'), { yPercent: -4, scale: 1.12 }, {
+        yPercent: 4, scale: 1.06, ease: 'none',
+        scrollTrigger: { trigger: fig, start: 'top bottom', end: 'bottom top', scrub: 0.8 }
+      });
+    });
+
+    gsap.from('#team .head-block > *', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#team', start: 'top 72%' }
+    });
+    gsap.from('#offerGrid .tile', {
+      opacity: 0, y: 30, duration: 0.8, stagger: 0.08, ease: 'power3.out',
+      scrollTrigger: { trigger: '#offerGrid', start: 'top 86%' }
+    });
+
+    /* Departure. */
+    gsap.to('#team .chapter-body', {
+      yPercent: -4, opacity: 0.6, ease: 'none',
+      scrollTrigger: { trigger: '#team', start: 'bottom 80%', end: 'bottom top', scrub: 0.6 }
+    });
+  });
+  </script></section><section class="nps-section-3 chapter ch-proof" id="proof" data-chapter="5" data-chapter-name="The Proof" data-theme="dark"><div class="nps-div-2 wrap chapter-body"><div class="nps-div-2 proof-head head-block head-block--center"><p class="nps-p-8 chapter-tag"><i class="nps-i-6"></i><span class="nps-div-2">Chapter 05 · The Proof</span></p><h2 class="nps-h2-2">What our patients say afterwards.</h2><div class="proof-score"><span class="stars" aria-hidden="true"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg fill="currentColor" height="18" viewbox="0 0 20 20" width="18"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg fill="currentColor" height="18" viewbox="0 0 20 20" width="18"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg fill="currentColor" height="18" viewbox="0 0 20 20" width="18"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg fill="currentColor" height="18" viewbox="0 0 20 20" width="18"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg fill="currentColor" height="18" viewbox="0 0 20 20" width="18"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg></span> <b class="nps-b-3" id="proofScore">5.0</b> <span class="nps-span-4 small">rated by our patients on Google</span></div></div><div class="nps-div-9 grid grid--3" id="proofGrid"><figure class="review"><span class="stars" aria-label="5 out of 5 stars"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg></span><blockquote class="nps-blockquote">“Very friendly staff and were willing to help in every way! Felt more comfortable here than at any other dentist office in the past, highly recommend!”</blockquote><figcaption class="nps-figcaption"><span class="who">Gabriel Sanchez</span> <span class="when">Google review</span><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.review .g-mark{width:16px;height:16px;margin-left:auto;flex:none}</style><svg aria-hidden="true" class="g-mark" viewbox="0 0 24 24"><path d="M23 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.2a5.3 5.3 0 0 1-2.3 3.5v2.9h3.7c2.2-2 3.4-5 3.4-8.6z" fill="#4285F4"></path><path d="M12 23.5c3.1 0 5.7-1 7.6-2.8l-3.7-2.9c-1 .7-2.3 1.1-3.9 1.1-3 0-5.5-2-6.4-4.7H1.8v3a11.5 11.5 0 0 0 10.2 6.3z" fill="#34A853"></path><path d="M5.6 14.2a6.9 6.9 0 0 1 0-4.4v-3H1.8a11.5 11.5 0 0 0 0 10.4z" fill="#FBBC05"></path><path d="M12 5.1c1.7 0 3.2.6 4.4 1.7l3.3-3.3A11.5 11.5 0 0 0 1.8 6.8l3.8 3a6.9 6.9 0 0 1 6.4-4.7z" fill="#EA4335"></path></svg></figcaption></figure><figure class="review"><span class="stars" aria-label="5 out of 5 stars"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg></span><blockquote class="nps-blockquote">“This is the best Children's Dentist office I have ever been to.”</blockquote><figcaption class="nps-figcaption"><span class="who">Amber Choate</span> <span class="when">Google review</span><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.review .g-mark{width:16px;height:16px;margin-left:auto;flex:none}</style><svg aria-hidden="true" class="g-mark" viewbox="0 0 24 24"><path d="M23 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.2a5.3 5.3 0 0 1-2.3 3.5v2.9h3.7c2.2-2 3.4-5 3.4-8.6z" fill="#4285F4"></path><path d="M12 23.5c3.1 0 5.7-1 7.6-2.8l-3.7-2.9c-1 .7-2.3 1.1-3.9 1.1-3 0-5.5-2-6.4-4.7H1.8v3a11.5 11.5 0 0 0 10.2 6.3z" fill="#34A853"></path><path d="M5.6 14.2a6.9 6.9 0 0 1 0-4.4v-3H1.8a11.5 11.5 0 0 0 0 10.4z" fill="#FBBC05"></path><path d="M12 5.1c1.7 0 3.2.6 4.4 1.7l3.3-3.3A11.5 11.5 0 0 0 1.8 6.8l3.8 3a6.9 6.9 0 0 1 6.4-4.7z" fill="#EA4335"></path></svg></figcaption></figure><figure class="review"><span class="stars" aria-label="5 out of 5 stars"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}</style><svg aria-hidden="true" fill="currentColor" height="15" viewbox="0 0 20 20" width="15"><path d="M10 1l2.6 5.3 5.9.9-4.2 4.1 1 5.8L10 14.4 4.7 17.1l1-5.8L1.5 7.2l5.9-.9z"></path></svg></span><blockquote class="nps-blockquote">“Lola did a great job in my scheduled cleaning today. She is very friendly and makes me feel comfortable during my procedure.”</blockquote><figcaption class="nps-figcaption"><span class="who">rizi nepomuceno</span> <span class="when">Google review</span><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}svg{max-width:100%;height:auto;display:block}.review .g-mark{width:16px;height:16px;margin-left:auto;flex:none}</style><svg aria-hidden="true" class="g-mark" viewbox="0 0 24 24"><path d="M23 12.3c0-.8-.1-1.6-.2-2.3H12v4.5h6.2a5.3 5.3 0 0 1-2.3 3.5v2.9h3.7c2.2-2 3.4-5 3.4-8.6z" fill="#4285F4"></path><path d="M12 23.5c3.1 0 5.7-1 7.6-2.8l-3.7-2.9c-1 .7-2.3 1.1-3.9 1.1-3 0-5.5-2-6.4-4.7H1.8v3a11.5 11.5 0 0 0 10.2 6.3z" fill="#34A853"></path><path d="M5.6 14.2a6.9 6.9 0 0 1 0-4.4v-3H1.8a11.5 11.5 0 0 0 0 10.4z" fill="#FBBC05"></path><path d="M12 5.1c1.7 0 3.2.6 4.4 1.7l3.3-3.3A11.5 11.5 0 0 0 1.8 6.8l3.8 3a6.9 6.9 0 0 1 6.4-4.7z" fill="#EA4335"></path></svg></figcaption></figure></div><div class="accred"><p class="nps-p-11 label">Continuing education and accreditation</p><div class="accred-row" id="accredRow"><img class="nps-img-4" width="auto" height="auto" alt="Kois Center" src="assets/badge-kois.webp" loading="lazy"><img class="nps-img-4" width="auto" height="auto" alt="Seattle Study Club" src="assets/badge-ssc.webp" loading="lazy"><img class="nps-img-4" width="auto" height="auto" alt="Academy of General Dentistry" src="assets/badge-agd.webp" loading="lazy"><img class="nps-img-4" width="auto" height="auto" alt="American Academy of Pediatric Dentistry" src="assets/badge-aapd.webp" loading="lazy"><img class="nps-img-4" width="auto" height="auto" alt="American Board of Pediatric Dentistry" src="assets/badge-abpd.webp" loading="lazy"></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    var score = document.getElementById('proofScore');
+    if (M.reduced) { score.textContent = '5.0'; return; }
+
+    gsap.from('#proof .proof-head > *', {
+      opacity: 0, y: 24, duration: 0.9, stagger: 0.1, ease: 'power3.out',
+      scrollTrigger: { trigger: '#proof', start: 'top 74%' }
+    });
+    gsap.from('#proofGrid .review', {
+      opacity: 0, y: 34, duration: 0.8, stagger: 0.09, ease: 'power3.out',
+      scrollTrigger: { trigger: '#proofGrid', start: 'top 85%' }
+    });
+    gsap.from('#accredRow img', {
+      opacity: 0, y: 20, duration: 0.7, stagger: 0.07, ease: 'power3.out',
+      scrollTrigger: { trigger: '#accredRow', start: 'top 90%' }
+    });
+
+    var o = { v: 0 };
+    gsap.to(o, {
+      v: 5, duration: 1.5, ease: 'power2.out',
+      onUpdate: function () { score.textContent = o.v.toFixed(1); },
+      scrollTrigger: { trigger: '#proof', start: 'top 70%' }
+    });
+  });
+  </script></section><section class="nps-section-2 chapter ch-invitation" id="invitation" data-chapter="6" data-chapter-name="The Invitation" data-theme="light"><div class="nps-div-2 wrap chapter-body"><p class="nps-p chapter-tag"><i class="nps-i-2"></i><span class="nps-div-2">Chapter 06 · The Invitation</span></p><div class="nps-div-2 split inv-pay"><div class="nps-div-10 split-media inv-fig" id="invFig"><img class="nps-img-5" width="1536" height="658" alt="The treatment area at Mason Park Dental of Katy" src="assets/office.webp" loading="lazy" id="invFigImg"></div><div class="nps-div-2"><h2 class="nps-h2" id="invPayTitle">Insurance-friendly, with a plan for everyone else.</h2><p class="nps-p-5 lead"> We are an insurance-friendly office with financing options, and our team will help verify what your plan covers before you commit to treatment. </p><div class="nps-div-7 card card--warm"><img class="nps-img-6" width="110" height="28" alt="Cherry" src="assets/cherry.svg" loading="lazy"><h3 class="nps-h3-3">0% APR, no hard credit check</h3><p class="nps-p-12 muted"> Buy now, pay monthly. Let your money go further and take better control of your finances when you pay in instalments with Cherry financing. </p></div><p class="nps-p-5 fine"> A dental savings plan is also available for patients without insurance. Ask the front desk when you book. </p></div></div><div class="inv-services"><div class="nps-div-2 head-block head-block--center"><p class="nps-p eyebrow">Comprehensive care</p><h2 class="nps-h2-3">One practice for the whole family.</h2><p class="nps-p-9 lead"> For your convenience we provide a wide range of dental solutions in our local Katy location, for patients of all ages. </p></div><ul class="nps-ul-2 chips-nps" id="invChips"><li class="chip">Preventative dentistry</li><li class="chip">Cosmetic dentistry</li><li class="chip">Restorative dentistry</li><li class="chip">Pediatric dental care</li><li class="chip">Dental implants</li><li class="chip">Invisalign<style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><sup>®</sup></li><li class="chip">Root canal therapy</li><li class="chip">Oral surgery &amp; extractions</li><li class="chip">Emergency dentistry</li><li class="chip">Sedation dentistry</li><li class="chip">Laser dentistry</li><li class="chip">TMJ / TMD</li><li class="chip">Dentures &amp; bridges</li><li class="chip">Oral cancer screening</li></ul><p class="nps-p-13 fine"> Our technology includes cone beam imaging, digital x-rays, an intra-oral camera and a soft tissue laser. Flexible scheduling and same-day emergency care are available. </p></div><div class="inv-close" id="invClose"><div class="nps-div-2"><p class="nps-p-14 eyebrow">New patient special</p><h2 class="nps-h2-4" id="invCloseTitle">$189 for the visit that tells you everything.</h2><p class="nps-p-15">Exam, x-rays, cleaning and a full written treatment plan — a saving of $328. We welcome new patients of all ages.</p></div><div class="nps-div-2 btn-row"><a class="nps-a-5 btn btn--lg magnetic" href="#book"><span class="nps-span-3">Claim the special</span></a> <a class="nps-a-6 btn btn--ghost btn--lg" data-phone="href" href="tel:+12817698878"> Call <span class="nps-span-3" data-phone-text="">(281) 769-8878</span></a></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  MPD.add(function (M) {
+    if (M.reduced) { gsap.set('#invFig', { clipPath: 'inset(0 0 0% 0)' }); return; }
+
+    gsap.to('#invFig', {
+      clipPath: 'inset(0 0 0% 0)', duration: 1.2, ease: 'power4.inOut',
+      scrollTrigger: { trigger: '#invFig', start: 'top 84%' }
+    });
+    gsap.fromTo('#invFigImg', { yPercent: -5, scale: 1.14 }, {
+      yPercent: 5, scale: 1.08, ease: 'none',
+      scrollTrigger: { trigger: '#invFig', start: 'top bottom', end: 'bottom top', scrub: 0.8 }
+    });
+
+    M.splitLines(document.getElementById('invPayTitle'), function (self) {
+      return gsap.from(self.lines, {
+        yPercent: 110, duration: 1, stagger: 0.09, ease: 'power4.out',
+        scrollTrigger: { trigger: '#invPayTitle', start: 'top 86%' }
+      });
+    });
+
+    gsap.from('#invChips .chip', {
+      opacity: 0, y: 16, duration: 0.55, stagger: 0.035, ease: 'power2.out',
+      scrollTrigger: { trigger: '#invChips', start: 'top 88%' }
+    });
+
+    M.splitLines(document.getElementById('invCloseTitle'), function (self) {
+      return gsap.from(self.lines, {
+        yPercent: 110, duration: 1, stagger: 0.09, ease: 'power4.out',
+        scrollTrigger: { trigger: '#invClose', start: 'top 82%' }
+      });
+    });
+    gsap.from('#invClose .btn-row', {
+      opacity: 0, y: 24, duration: 0.9, ease: 'power3.out',
+      scrollTrigger: { trigger: '#invClose', start: 'top 78%' }
+    });
+  });
+  </script></section></main><footer class="site-foot"><div class="nps-div-2 wrap"><div class="foot-grid"><div class="nps-div-2"><div class="nps-div-11 brand"><img class="nps-img-7" width="180" height="69" alt="Mason Park Dental of Katy" src="assets/logo.webp" loading="lazy"></div><p class="nps-p small">We are located at the corner of Mason Rd and Kingsland Blvd, behind the Ranch 99 complex.</p></div><div class="nps-div-2"><h3 class="nps-h3-4">Visit</h3><p class="nps-p">21830 Kingsland Blvd #104A<span class="br-line">Katy, TX 77450</span></p><p class="nps-p-16"><a class="nps-a-7" target="_blank" rel="noopener" href="https://www.google.com/maps/place/21830+Kingsland+Blvd+%23104a,+Katy,+TX+77450/@29.775949,-95.7512199,17z">Get directions</a></p></div><div class="nps-div-2"><h3 class="nps-h3-4">Call</h3><p class="nps-p"><a class="nps-a-8" data-phone="href" href="tel:+12817698878"><span class="nps-div-2" data-phone-text="">(281) 769-8878</span></a></p><p class="nps-p-16 small"><a class="nps-a-7" target="_blank" rel="noopener" href="https://www.flexbook.me/masonpark/1">Schedule online</a></p></div><div class="nps-div-2"><h3 class="nps-h3-4">Hours</h3><ul class="nps-ul-3 hours-list small"><li class="nps-li"><span class="nps-div-2">Monday</span><span class="nps-div-2">9am – 6pm</span></li><li class="nps-li"><span class="nps-div-2">Tuesday</span><span class="nps-div-2">8am – 5pm</span></li><li class="nps-li"><span class="nps-div-2">Wednesday</span><span class="nps-div-2">9am – 6pm</span></li><li class="nps-li"><span class="nps-div-2">Thursday</span><span class="nps-div-2">8am – 5pm</span></li><li class="nps-li"><span class="nps-div-2">Fri – Sun</span><span class="closed">Closed</span></li></ul></div></div><div class="foot-base"><span class="nps-div-2">© 2026 Mason Park Dental of Katy. All rights reserved.</span> <span class="nps-div-2">KOR<style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><sup>®</sup> is a registered trademark of Evolve Dental Technologies, Inc. Invisalign<style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><sup>®</sup> is a registered trademark of Align Technology, Inc.</span></div><p class="nps-p-6 fine"> Offer terms: the $189 New Patient Special covers a comprehensive exam, x-rays, a cleaning and a full treatment plan, a saving of $328 against a regular value of $517. Available to new patients of Mason Park Dental of Katy. The $129 children's exam applies to children under 13. Additional services, where clinically required, are quoted for your approval before treatment begins. </p></div></footer></div>
+<script>!function(){"use strict";var e=window.MPD;if(e){var t,n,o=[{day:"Sunday",open:null},{day:"Monday",open:"9:00 am",close:"6:00 pm"},{day:"Tuesday",open:"8:00 am",close:"5:00 pm"},{day:"Wednesday",open:"9:00 am",close:"6:00 pm"},{day:"Thursday",open:"8:00 am",close:"5:00 pm"},{day:"Friday",open:null},{day:"Saturday",open:null}];if(t=e.phone(),n="tel:"+e.phoneE164(),document.querySelectorAll("a[data-phone]").forEach(function(e){e.setAttribute("href",n)}),document.querySelectorAll("[data-phone-text]").forEach(function(e){e.textContent=t}),function(){var e=document.querySelector("[data-today-hours]");if(e){var t=o[(new Date).getDay()];e.textContent=t.open?"Open today "+t.open+" – "+t.close:"Closed today"}}(),document.querySelectorAll(".faq details").forEach(function(t){var n=t.querySelector(".answer"),o=t.querySelector("summary");if(n&&o){if(!n.parentElement.classList.contains("answer-wrap")){var r=document.createElement("div");r.className="answer-wrap",n.parentNode.insertBefore(r,n),r.appendChild(n)}o.addEventListener("click",function(n){n.preventDefault(),t.open?(t.classList.remove("is-open"),window.setTimeout(function(){t.open=!1,e.refreshSoon&&e.refreshSoon()},e.reduced?0:420)):(t.open=!0,requestAnimationFrame(function(){requestAnimationFrame(function(){t.classList.add("is-open"),e.refreshSoon&&e.refreshSoon()})}))})}}),document.querySelectorAll("form[data-lead-form]").forEach(function(t){var n=/^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/,o=Array.prototype.slice.call(t.querySelectorAll(".step-panel")),r=Array.prototype.slice.call(t.querySelectorAll(".progress span")),i=t.querySelector('[type="submit"]'),c=t.querySelector(".form-msg"),l=t.querySelector('[name="consent"]'),s=t.querySelector(".hp-field"),u=Array.prototype.slice.call(t.querySelectorAll("[data-required]")),d={},m="",f=0;function p(t){f=t,o.forEach(function(e,n){e.classList.toggle("active",n===t)}),r.forEach(function(e,n){e.classList.toggle("on",n<=t)});var n=o[t]&&o[t].querySelector("input, button, textarea");n&&t>0&&n.focus({preventScroll:!0}),e.refreshSoon&&e.refreshSoon()}function g(e){var t=(e.value||"").trim();return"email"===e.type?n.test(t):"tel"===e.type?10===a(t).length:t.length>=2}function h(e){var t=e.parentElement.querySelector(".err"),n=g(e);d[e.name]&&!n?(e.classList.add("invalid"),e.setAttribute("aria-invalid","true"),t&&(t.textContent=function(e){return"email"===e.type?"Please enter a valid email address":"tel"===e.type?"Please enter a 10-digit phone number":"Please enter your full name"}(e))):(e.classList.remove("invalid"),e.removeAttribute("aria-invalid"),t&&(t.textContent=""))}function y(){return u.every(g)&&(!l||l.checked)}function v(){i&&(i.disabled=!y())}t.querySelectorAll(".choice").forEach(function(e){e.addEventListener("click",function(){t.querySelectorAll(".choice").forEach(function(t){t.setAttribute("aria-pressed",String(t===e))}),m=e.getAttribute("data-value")||e.textContent.trim(),o.length>1&&window.setTimeout(function(){p(1)},180),v()})}),t.querySelectorAll("[data-back]").forEach(function(e){e.addEventListener("click",function(){p(Math.max(0,f-1))})}),u.forEach(function(e){e.addEventListener("input",function(){var t,n;"tel"===e.type&&(e.value=(t=e.value,(n=a(t)).length>6?"("+n.slice(0,3)+") "+n.slice(3,6)+"-"+n.slice(6):n.length>3?"("+n.slice(0,3)+") "+n.slice(3):n.length>0?"("+n:"")),d[e.name]=!0,h(e),v()}),e.addEventListener("blur",function(){d[e.name]=!0,h(e)})}),l&&l.addEventListener("change",v),t.addEventListener("submit",function(n){if(n.preventDefault(),!s||!s.value)if(y()){var o=i?i.textContent:"";i&&(i.disabled=!0,i.textContent="Sending…"),c&&(c.className="form-msg",c.textContent="");var r,l,f=Object.assign({full_name:(t.elements.full_name||{}).value||"",email:(t.elements.email||{}).value||"",phone:"+1"+a((t.elements.phone||{}).value),intent:m,consent:!0,lp_offer:t.getAttribute("data-offer")||"",lp_asana_gid:t.getAttribute("data-asana-gid")||"",lp_page:e.pageKey(),lp_tracking_phone:e.phone(),lp_url:window.location.href,lp_submitted_at:(new Date).toISOString()},(r=new URLSearchParams(window.location.search),l={},["utm_source","utm_medium","utm_campaign","utm_term","utm_content","gclid","fbclid","campaign_id","adgroup_name","keyword"].forEach(function(e){r.get(e)&&(l[e]=r.get(e))}),l));if(/^\{\{.*\}\}$/.test(e.WEBHOOK_URL))return c&&(c.className="form-msg bad",c.textContent="Form endpoint not yet connected. Please call "+e.phone()+" to book."),i&&(i.disabled=!1,i.textContent=o),void t.dispatchEvent(new CustomEvent("mpd:lead",{detail:f}));fetch(e.WEBHOOK_URL,{method:"POST",headers:{"Content-Type":"application/json"},body:JSON.stringify(f)}).then(function(t){if(!t.ok)throw new Error("bad status "+t.status);var n=e.pageKey();window.location.href=e.THANK_YOU_URL+(n?"?src="+encodeURIComponent(n):"")}).catch(function(){c&&(c.className="form-msg bad",c.textContent="Something went wrong. Please call us at "+e.phone()+"."),i&&(i.disabled=!1,i.textContent=o)})}else u.forEach(function(e){d[e.name]=!0,h(e)})}),p(0),v()}),i(),window.addEventListener("resize",i,{passive:!0}),!e.ok)return document.documentElement.classList.remove("mpd-armed"),void e.flushQueue();gsap.registerPlugin(ScrollTrigger,ScrollToPlugin),window.SplitText&&gsap.registerPlugin(SplitText),document.documentElement.classList.add("mpd-ready");var r=document.fonts&&document.fonts.ready?document.fonts.ready:Promise.resolve();Promise.race([r,new Promise(function(e){window.setTimeout(e,1800)})]).then(function(){e.flushQueue();var t=document.getElementById("headProgress");t&&!e.reduced&&gsap.to(t,{scaleX:1,ease:"none",scrollTrigger:{start:0,end:"max",scrub:.25}});var n=document.getElementById("chapterNo"),o=document.getElementById("chapterName");gsap.utils.toArray("section[data-chapter]").forEach(function(e){var t=parseInt(e.getAttribute("data-chapter"),10),r=e.getAttribute("data-chapter-name")||"";function a(){n&&(n.textContent=String(t).padStart(2,"0")),o&&(o.textContent=r)}ScrollTrigger.create({trigger:e,start:"top 60%",end:"bottom 40%",onEnter:a,onEnterBack:a})});var r=document.querySelector(".site-head");r&&ScrollTrigger.create({start:40,end:"max",onToggle:function(e){r.classList.toggle("is-solid",e.isActive)}});(function(){var t=document.querySelector(".offer-rail");if(t){var n=document.querySelector("[data-chapter='0']");n?e.reduced?t.classList.add("is-up"):ScrollTrigger.create({trigger:n,start:"bottom 85%",end:"max",onToggle:function(e){t.classList.toggle("is-up",e.isActive)}}):t.classList.add("is-up")}})(),document.querySelectorAll('a[href^="#"]').forEach(function(t){t.addEventListener("click",function(n){var o=t.getAttribute("href");if(o&&!(o.length<2)){var r=document.querySelector(o);if(r){n.preventDefault(),window.ScrollToPlugin?gsap.to(window,{duration:e.reduced?0:.9,scrollTo:{y:r,offsetY:90,autoKill:!0},ease:"power2.inOut"}):r.scrollIntoView({behavior:e.reduced?"auto":"smooth",block:"start"});var a=r.querySelector("input, button.choice");a&&window.setTimeout(function(){a.focus({preventScroll:!0})},e.reduced?0:700)}}})}),!e.reduced&&window.matchMedia("(hover:hover) and (pointer:fine)").matches&&document.querySelectorAll(".magnetic").forEach(function(e){var t=gsap.quickTo(e,"x",{duration:.5,ease:"power3"}),n=gsap.quickTo(e,"y",{duration:.5,ease:"power3"});e.addEventListener("pointermove",function(o){var r=e.getBoundingClientRect();t(.2*(o.clientX-r.left-r.width/2)),n(.34*(o.clientY-r.top-r.height/2))}),e.addEventListener("pointerleave",function(){t(0),n(0)})});e.reduced||document.addEventListener("pointermove",function(e){var t=e.target.closest&&e.target.closest(".btn");if(t){var n=t.getBoundingClientRect();t.style.setProperty("--mx",(e.clientX-n.left)/n.width*100+"%"),t.style.setProperty("--my",(e.clientY-n.top)/n.height*100+"%")}},{passive:!0});var a=!1;e.refreshSoon=function(){a||(a=!0,window.setTimeout(function(){a=!1;try{ScrollTrigger.refresh()}catch(e){window.console&&console.warn&&console.warn("ScrollTrigger.refresh",e)}},220))},window.addEventListener("load",i)})}function a(e){return(e||"").replace(/\D/g,"").slice(0,10)}function i(){var e=document.querySelector(".sticky-bar");if(e){var t="none"===window.getComputedStyle(e).display?0:e.offsetHeight;document.documentElement.style.setProperty("--bar-h",t+"px")}}}();</script>
+</body></html>

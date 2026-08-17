@@ -16,11 +16,11 @@ parallel agents can each take one client without colliding.
 
 | Client | Folder | Asana parent task | Pages / scope | Due | Folder status |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| Grand Mission Dentistry | [`grand-mission-dentistry/`](../grand-mission-dentistry/docs/project-overview.md) | `1217040406855578` | 3 landing pages | 2026-08-05 | **Created 2026-08-05** |
-| Arvada Dental Center & Implants | [`arvada-dental-center/`](../arvada-dental-center/docs/project-overview.md) | `1217040406855586` | 6 landing pages | 2026-08-05 | **Created 2026-08-05** |
-| Mason Park Dental | [`mason-park/`](../mason-park/docs/project-overview.md) | `1217040406855582` | 3 landing pages | 2026-08-05 | Scaffolded 2026-08-05 (was a loose HTML file) |
-| Dr. Esam Nahlah | [`dr-nahlah/`](../dr-nahlah/docs/project-overview.md) | `1216611404338509` | Research + dev assignment | 2026-08-05 | Pre-existing |
-| Stone Dental Implant Center | [`stone-dental-implant-center/`](../stone-dental-implant-center/docs/project-overview.md) | — | 2 full websites | none | **Created 2026-08-05** |
+| Grand Mission Dentistry | [`grand-mission-dentistry/`](../grand-mission-dentistry/docs/project-overview.md) | `1217040406855578` | 3 landing pages | 2026-08-05 | Three local journeys and staging build complete; pasteable-component migration in progress |
+| Arvada Dental Center & Implants | [`arvada-dental-center/`](../arvada-dental-center/docs/project-overview.md) | `1217040406855586` | 6 landing pages | 2026-08-05 | Six local journeys complete; Webflow build not dispatched |
+| Mason Park Dental | [`mason-park/`](../mason-park/docs/project-overview.md) | `1217040406855582` | 3 landing pages | 2026-08-05 | Three local/staging journeys re-themed; pasteable-component migration in progress |
+| Dr. Esam Nahlah | [`dr-nahlah/`](../dr-nahlah/docs/project-overview.md) | `1216611404338509` | Research + dev assignment | 2026-08-05 | Reference implementation active in dedicated client worktree; local artifact migration incomplete |
+| Stone Dental Implant Center | [`stone-dental-implant-center/`](../stone-dental-implant-center/docs/project-overview.md) | — | 2 full websites | none | Scope only; no build dispatched |
 
 Not in Asana but present in the repo: `livewell-dental/` (no assigned tasks in this pull).
 
@@ -35,7 +35,8 @@ Confirmed 2026-08-05. Pages ship to **Webflow**. GoHighLevel appears only as a *
 structure references, not the platform.
 
 Delivery sequence: **design and build locally first → review → then Webflow.** No Webflow paste
-happens until a page is approved locally, and no client here has a Webflow grant yet.
+happens until a page is approved locally. Use the shared Brandklout grant only against the exact
+site ID recorded in the client's access file.
 
 ## Commercial terms — no pricing on this batch
 
@@ -93,13 +94,19 @@ Each page ships as a self-contained coded HTML/CSS/JS package, the same pattern 
 [`livewell-dental`](../livewell-dental/docs/project-overview.md). **State the full path of what you
 built** when reporting back, so it can be opened and reviewed without hunting.
 
-Webflow build (`07-webflow-build`) comes after local approval, and needs a per-client Webflow grant
-that does not exist yet.
+Webflow build (`07-webflow-build`) comes after local approval. Brandklout uses one shared
+`webflow-brandklout` OAuth grant because the partner owns the workspace; isolation is enforced by
+the exact client site ID in `docs/mcp-access.md`, not by the MCP server name. The current build
+standard is pasteable section components, followed by surgical MCP edits and staging verification.
 
 ## Orchestration
 
 Client work runs in **one Orca worktree per client**; this main checkout stays the orchestration
 layer and does not do client work. See [ORCHESTRATION.md](./ORCHESTRATION.md).
+
+Copied client workflows and client worktrees are versioned snapshots, not live mirrors of
+`deliver/process/` or local `main`. Refresh only at clean task boundaries, record the baseline, and
+run one bounded acceptance transition per session as defined in the orchestration directive.
 
 ## Shared context across all landing-page clients
 
@@ -108,6 +115,7 @@ than per-client direction:
 
 - https://start.smartarchesdental.com/?step=start
 - https://novismilerogers.com/
+
 
 Grand Mission and Mason Park note *"Attached are the originals from the other Ad company. Use it as
 a reference point."* **Those attachments are now downloaded** (2026-08-06) — run
@@ -126,6 +134,14 @@ there are none.
 | Mason Park | 2 HTML originals | The loose `mpd-invisalign-lp.html` at the client root is byte-identical to the attachment — a vendor original, **not** our deliverable |
 | Dr. Nahlah, Stone | none | Confirmed empty |
 
+> [!TIP]
+> Before designing anything, also find the client's **own live site** — none of these Asana tasks
+> record it. Grand Mission's turned out to be a modern Webflow site whose `:root` CSS variables
+> are the authoritative brand palette and type, and whose pages carry current offers that
+> **contradict** the older attached landing pages. A web search on practice name + address found it
+> in one query.
+
+
 Recurring page archetypes across clients — build these once as a reusable pattern rather than five
 times from scratch:
 
@@ -140,13 +156,27 @@ The thank-you page has an identical 4-section spec in both clients. The prior de
 work in [`livewell-dental/`](../livewell-dental/docs/project-overview.md) is the closest existing
 reference.
 
+All four archetypes were built on Arvada 2026-08-05, plus a shared nine-beat spine, a reusable
+`brand.css`/`brand.js`, bot-challenge scrapers, and a warning that the Greenspot NPS reference is
+Cloudflare-blocked. Reuse rather than rebuild —
+[`arvada-dental-center/docs/shared-learnings.md`](../arvada-dental-center/docs/shared-learnings.md).
+- **Thank-you archetype is BUILT** at `mason-park/workflows/04-design/.tmp/thank-you/` (2026-08-05,
+  rebuilt as a 4-chapter journey 2026-08-06). Client-specific values are isolated to one constants
+  block — Grand Mission should clone, not rebuild.
+- **Before adding a manual `ScrollTrigger.refresh()`, read the bug note in
+  `mason-park/workflows/04-design/.tmp/README.md`** — racing SplitText's post-font re-split reverts
+  every pin on the page, silently, and makes later chapters unreachable by scrolling.
+- **Heads-up on the GHL preview reference** (`sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC`):
+  it is a *Grand Mission* page. Its award, insurance carriers, review count and hours are theirs — do
+  not copy them into another client.
+
 ## Parallel agent rules
 
 1. **One agent per client folder.** The folders are independent; the shared page archetypes are
    not — if you invent a new archetype pattern, note it here so others reuse it.
 2. Read the client's `docs/project-overview.md` and `docs/mcp-access.md` before acting.
-3. No client here has a platform grant yet. Do not authenticate or mutate any client platform
-   without an `mcp-access.md` that names the target and an explicit go-ahead.
+3. The shared Brandklout grant can reach sibling sites. Do not mutate any client platform without
+   an `mcp-access.md` that names the exact target site ID and an explicit go-ahead for the action.
 4. Record the source Asana task GID in every artifact you produce.
 5. Do not write to Asana. Comments and status changes notify real Brandklout staff and require
    explicit confirmation; the scripts are read-only by design.
@@ -154,3 +184,8 @@ reference.
 ## Version Control
 
 Documentation only. Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md).
+
+## Infrastructure
+
+- **Workstation orchestration**: Windows 10/11 with Orca
+- **Deployment host**: Hostinger VPS, Ubuntu 24.04 LTS

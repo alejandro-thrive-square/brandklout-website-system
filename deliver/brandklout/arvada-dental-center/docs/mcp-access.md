@@ -10,7 +10,7 @@ Client delivery (via the Brandklout partnership).
 
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-brandklout` | Webflow access for every Brandklout client, this one included. Shared instance — **the site ID under Target Resources is the boundary, not the tool prefix**. | **Registered 2026-08-07, awaiting OAuth.** Authenticated once on the **team** profile, covering all Brandklout clients at once. |
+| `webflow-brandklout` | Webflow access for every Brandklout client, this one included. Shared instance — **the site ID under Target Resources is the boundary, not the tool prefix**. | **LIVE — authenticated on the `team` profile 2026-08-07.** One grant, all Brandklout clients. |
 | `webflow-clientfirst` | Local Client-First conversion helper. Reads files, holds no credentials, makes no network calls. | Always available. |
 
 Partnership-level Asana access is covered by
@@ -25,9 +25,22 @@ hosting, CRM, or ad accounts.
 > Target Resources below and pass it explicitly. Never act on a site the tool defaulted to, listed
 > first, or that merely came up in conversation.
 >
-> **This client has no confirmed site ID yet, so it is read-only.** Discovery via `list_sites` is
-> fine; writing is not, until the ID is confirmed and recorded here and in the
-> [client site registry](../../docs/mcp-access.md#client-site-registry).
+> **Site ID confirmed 2026-08-07: `693c51e685b19f0d0c149cab` ("Arvada Dental Center").** Writes to
+> that site are in scope.
+>
+> [!CAUTION]
+> **This workspace holds FIVE Arvada sites and four of them are copies.** The deliverable is the
+> only one carrying the `arvadadentalimplants.com` custom domain, and the user confirmed it
+> explicitly on 2026-08-07. Match on the site ID, never on the display name — "Arvada Dental
+> Implants Center" and "Arvada Cosmetic Dental Implants" are decoys:
+>
+> | Site | ID | Verdict |
+> | :--- | :--- | :--- |
+> | Arvada Dental Center | `693c51e685b19f0d0c149cab` | **THE ONE TO EDIT** |
+> | Arvada Dental Center - Blue | `6957a3881484e0be00a9b0b2` | copy — do not touch |
+> | Arvada Cosmetic Dental Implants | `69bc29b491a12ccd5a2d47fa` | copy — do not touch |
+> | Arvada Dental Implants Center | `69c6a0f225e31703647d23cd` | copy — do not touch |
+> | Arvada Implants | `69f2fe636ca87b3f22fa54c1` | copy — do not touch |
 
 > [!NOTE]
 > Build platform is **resolved: Webflow** (see [ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md)).
@@ -35,8 +48,15 @@ hosting, CRM, or ad accounts.
 
 ## Target Resources
 - **Asana parent task**: `1217040406855586` (workspace `1210572425689866`)
-- **Live site**: unknown - not recorded in Asana. Record here once found.
-- **Staging / platform account**: none.
+- **Live site**: `https://arvadadentalcenter.com` - identified 2026-08-05 by public search, not
+  from Asana. Confirmed as the practice at 6695 Wadsworth Blvd, Arvada, CO 80003, matching the
+  Asana client name. **Read-only research only** - the site is on SiteGround behind an sgcaptcha
+  bot challenge; scraping it for brand and content is permitted, touching it is not.
+- **Webflow site**: **Arvada Dental Center**, site id `693c51e685b19f0d0c149cab`, workspace
+  `63b4b7393e89b78575e9a9bb`. Confirmed via `list_sites` and **user-confirmed as the site to edit**
+  on 2026-08-07. Custom domains `arvadadentalimplants.com` / `www.` — note this is a *different*
+  domain from the research site above, which is the practice's older SiteGround site.
+- **Staging URL**: https://arvadadentalcenter.webflow.io
 
 ## Allowed Operations
 - Read this client's Asana tasks through the read-only partnership scripts.

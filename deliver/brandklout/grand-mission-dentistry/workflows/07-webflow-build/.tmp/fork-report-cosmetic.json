@@ -1,0 +1,385 @@
+{
+ "pairs": [
+  {
+   "twin": "arrival__aurora-1-2",
+   "canon": "arrival__aurora"
+  },
+  {
+   "twin": "arrival__media-1-2",
+   "canon": "arrival__media"
+  },
+  {
+   "twin": "arrival__media-after-1-2",
+   "canon": "arrival__media-after"
+  },
+  {
+   "twin": "arrival__veil-1-2",
+   "canon": "arrival__veil"
+  },
+  {
+   "twin": "badge-1",
+   "canon": "badge"
+  },
+  {
+   "twin": "btn-before-1-2",
+   "canon": "btn-before"
+  },
+  {
+   "twin": "btn-before-2-1-2",
+   "canon": "btn-before-2"
+  },
+  {
+   "twin": "btn-before-3-1",
+   "canon": "btn-before-3"
+  },
+  {
+   "twin": "footer__bottom-1-2",
+   "canon": "footer__bottom"
+  },
+  {
+   "twin": "footer__grid-1-2",
+   "canon": "footer__grid"
+  },
+  {
+   "twin": "gm-footer-1-2",
+   "canon": "gm-footer"
+  },
+  {
+   "twin": "gm-header-1-2",
+   "canon": "gm-header"
+  },
+  {
+   "twin": "gm-label-before-1-2",
+   "canon": "gm-label-before"
+  },
+  {
+   "twin": "gm-stars-1",
+   "canon": "gm-stars"
+  },
+  {
+   "twin": "header__actions-1-2",
+   "canon": "header__actions"
+  },
+  {
+   "twin": "header__chapter-1-2",
+   "canon": "header__chapter"
+  },
+  {
+   "twin": "header__logo-1-2",
+   "canon": "header__logo"
+  },
+  {
+   "twin": "header__phone-1-2",
+   "canon": "header__phone"
+  },
+  {
+   "twin": "header__progress-1-2",
+   "canon": "header__progress"
+  },
+  {
+   "twin": "invitation__glow-1",
+   "canon": "invitation__glow"
+  },
+  {
+   "twin": "lightbox-1",
+   "canon": "lightbox"
+  },
+  {
+   "twin": "logo-dark-1-2",
+   "canon": "logo-dark"
+  },
+  {
+   "twin": "logo-light-1-2",
+   "canon": "logo-light"
+  },
+  {
+   "twin": "mobile-bar-1-2",
+   "canon": "mobile-bar"
+  },
+  {
+   "twin": "offer__meta-1",
+   "canon": "offer__meta"
+  },
+  {
+   "twin": "offer-1",
+   "canon": "offer"
+  },
+  {
+   "twin": "panel-1",
+   "canon": "panel"
+  },
+  {
+   "twin": "proof__item-1",
+   "canon": "proof__item"
+  },
+  {
+   "twin": "proof-1",
+   "canon": "proof"
+  },
+  {
+   "twin": "scroll-cue-1",
+   "canon": "scroll-cue"
+  },
+  {
+   "twin": "sr-only-1",
+   "canon": "sr-only"
+  },
+  {
+   "twin": "success-mark-1",
+   "canon": "success-mark"
+  },
+  {
+   "twin": "ticks-1",
+   "canon": "ticks"
+  }
+ ],
+ "identical": 10,
+ "differing": [
+  {
+   "twin": "arrival__aurora-1-2",
+   "canon": "arrival__aurora",
+   "why": [
+    "main|background-image: twin=radial-gradient(44% 40%at 62% 88%,rgba(111,72,133,0.28),transparent 72%) canon=(unset)",
+    "main|background-color: twin=(unset) canon=radial-gradient(40% 38% at 20% 28%,rgba(4,102,156,0.55),transparent 68%),radial-gradient(34% 40% at 84% 16%,rgba(171,214,255,0.22),transparent 70%),radial-gradient(44% 40% at 62% 88%,rgba(111,72,133,0.28),transparent 72%)"
+   ]
+  },
+  {
+   "twin": "arrival__media-after-1-2",
+   "canon": "arrival__media-after",
+   "why": [
+    "main|background-image: twin=radial-gradient(70% 60%at 82% 20%,rgba(4,102,156,0.5),transparent 70%) canon=(unset)",
+    "main|background-color: twin=(unset) canon=linear-gradient(104deg,rgba(0,34,65,0.97) 0%,rgba(0,34,65,0.9) 46%,rgba(0,34,65,0.55) 100%),radial-gradient(70% 60% at 82% 20%,rgba(4,102,156,0.5),transparent 70%)"
+   ]
+  },
+  {
+   "twin": "badge-1",
+   "canon": "badge",
+   "why": [
+    "main|font-size: twin=15.37px canon=13.67px",
+    "xxl|font-size: twin=(unset) canon=15.37px"
+   ]
+  },
+  {
+   "twin": "footer__bottom-1-2",
+   "canon": "footer__bottom",
+   "why": [
+    "main|font-size: twin=14.03px canon=12.47px",
+    "xxl|font-size: twin=(unset) canon=14.03px"
+   ]
+  },
+  {
+   "twin": "footer__grid-1-2",
+   "canon": "footer__grid",
+   "why": [
+    "main|grid-column-gap: twin=54.4px canon=45.44px",
+    "main|grid-row-gap: twin=54.4px canon=45.44px",
+    "large|grid-column-gap: twin=(unset) canon=54.4px",
+    "large|grid-row-gap: twin=(unset) canon=54.4px",
+    "xl|grid-column-gap: twin=(unset) canon=56px",
+    "xl|grid-row-gap: twin=(unset) canon=56px",
+    "xxl|grid-column-gap: twin=(unset) canon=56px",
+    "xxl|grid-row-gap: twin=(unset) canon=56px"
+   ]
+  },
+  {
+   "twin": "gm-footer-1-2",
+   "canon": "gm-footer",
+   "why": [
+    "main|font-size: twin=16.57px canon=14.73px",
+    "main|padding-block-start: twin=72px canon=(unset)",
+    "main|padding-block-end: twin=2rem canon=(unset)",
+    "medium|padding-block-start: twin=52.8px canon=(unset)",
+    "medium|padding-block-end: twin=2rem canon=(unset)",
+    "small|padding-block-start: twin=48px canon=(unset)",
+    "small|padding-block-end: twin=2rem canon=(unset)",
+    "tiny|padding-block-start: twin=48px canon=(unset)",
+    "tiny|padding-block-end: twin=2rem canon=(unset)",
+    "main|padding-block: twin=(unset) canon=68.16px 2rem",
+    "medium|padding-block: twin=(unset) canon=52.8px 2rem",
+    "small|padding-block: twin=(unset) canon=48px 2rem",
+    "tiny|padding-block: twin=(unset) canon=48px 2rem",
+    "large|padding-block: twin=(unset) canon=72px 2rem",
+    "xl|padding-block: twin=(unset) canon=72px 2rem",
+    "xxl|font-size: twin=(unset) canon=16.57px",
+    "xxl|padding-block: twin=(unset) canon=72px 2rem"
+   ]
+  },
+  {
+   "twin": "gm-header-1-2",
+   "canon": "gm-header",
+   "why": [
+    "main|font-family: twin=montserrat canon=montserrat,system-ui,-apple-system,segoe ui,arial,sans-serif",
+    "main|font-size: twin=17.46px canon=15.52px",
+    "xxl|font-size: twin=(unset) canon=17.46px"
+   ]
+  },
+  {
+   "twin": "gm-label-before-1-2",
+   "canon": "gm-label-before",
+   "why": [
+    "main|width: twin=40px canon=34.08px",
+    "main|background-color: twin=(unset) canon=currentcolor",
+    "large|width: twin=(unset) canon=40px",
+    "xl|width: twin=(unset) canon=40px",
+    "xxl|width: twin=(unset) canon=40px"
+   ]
+  },
+  {
+   "twin": "gm-stars-1",
+   "canon": "gm-stars",
+   "why": [
+    "main|font-size: twin=17.16px canon=15.26px",
+    "xxl|font-size: twin=(unset) canon=17.16px"
+   ]
+  },
+  {
+   "twin": "header__actions-1-2",
+   "canon": "header__actions",
+   "why": [
+    "main|grid-column-gap: twin=17.6px canon=15.9px",
+    "main|grid-row-gap: twin=17.6px canon=15.9px",
+    "large|grid-column-gap: twin=(unset) canon=17.6px",
+    "large|grid-row-gap: twin=(unset) canon=17.6px",
+    "xl|grid-column-gap: twin=(unset) canon=17.6px",
+    "xl|grid-row-gap: twin=(unset) canon=17.6px",
+    "xxl|grid-column-gap: twin=(unset) canon=17.6px",
+    "xxl|grid-row-gap: twin=(unset) canon=17.6px"
+   ]
+  },
+  {
+   "twin": "header__chapter-1-2",
+   "canon": "header__chapter",
+   "why": [
+    "main|font-size: twin=13.13px canon=(unset)",
+    "xxl|font-size: twin=(unset) canon=13.13px"
+   ]
+  },
+  {
+   "twin": "header__progress-1-2",
+   "canon": "header__progress",
+   "why": [
+    "main|background-image: twin=linear-gradient(90deg,#04669c,#abd6ff) canon=(unset)",
+    "main|background-color: twin=(unset) canon=linear-gradient(90deg,#04669c,#abd6ff)"
+   ]
+  },
+  {
+   "twin": "invitation__glow-1",
+   "canon": "invitation__glow",
+   "why": [
+    "main|background-image: twin=radial-gradient(50% 50%at 50% 50%,rgba(4,102,156,0.8),transparent 70%) canon=(unset)",
+    "main|background-color: twin=(unset) canon=radial-gradient(50% 50% at 50% 50%,rgba(4,102,156,0.8),transparent 70%)"
+   ]
+  },
+  {
+   "twin": "lightbox-1",
+   "canon": "lightbox",
+   "why": [
+    "main|justify-items: twin=center canon=(unset)",
+    "main|align-items: twin=center canon=(unset)",
+    "main|font-family: twin=montserrat canon=montserrat,system-ui,-apple-system,segoe ui,arial,sans-serif",
+    "main|font-size: twin=17.46px canon=15.52px",
+    "main|place-items: twin=(unset) canon=center",
+    "xxl|font-size: twin=(unset) canon=17.46px"
+   ]
+  },
+  {
+   "twin": "logo-dark-1-2",
+   "canon": "logo-dark",
+   "why": [
+    "main|height: twin=40px canon=38.62px",
+    "large|height: twin=(unset) canon=40px",
+    "xl|height: twin=(unset) canon=40px",
+    "xxl|height: twin=(unset) canon=40px"
+   ]
+  },
+  {
+   "twin": "logo-light-1-2",
+   "canon": "logo-light",
+   "why": [
+    "main|height: twin=40px canon=38.62px",
+    "large|height: twin=(unset) canon=40px",
+    "xl|height: twin=(unset) canon=40px",
+    "xxl|height: twin=(unset) canon=40px"
+   ]
+  },
+  {
+   "twin": "mobile-bar-1-2",
+   "canon": "mobile-bar",
+   "why": [
+    "main|box-shadow: twin=0-10px 30px rgba(0,34,65,0.25) canon=0 -10px 30px rgba(0,34,65,0.25)",
+    "main|font-family: twin=montserrat canon=montserrat,system-ui,-apple-system,segoe ui,arial,sans-serif",
+    "main|font-size: twin=17.46px canon=15.52px",
+    "xxl|font-size: twin=(unset) canon=17.46px"
+   ]
+  },
+  {
+   "twin": "offer__meta-1",
+   "canon": "offer__meta",
+   "why": [
+    "main|font-size: twin=16.27px canon=14.46px",
+    "xxl|font-size: twin=(unset) canon=16.27px"
+   ]
+  },
+  {
+   "twin": "offer-1",
+   "canon": "offer",
+   "why": [
+    "main|padding-top: twin=24px canon=22.72px",
+    "main|padding-right: twin=28px canon=24.99px",
+    "main|padding-bottom: twin=24px canon=22.72px",
+    "main|padding-left: twin=28px canon=24.99px",
+    "tiny|grid-template-rows: twin=auto canon=(unset)",
+    "large|padding-top: twin=(unset) canon=24px",
+    "large|padding-right: twin=(unset) canon=28px",
+    "large|padding-bottom: twin=(unset) canon=24px",
+    "large|padding-left: twin=(unset) canon=28px",
+    "xl|padding-top: twin=(unset) canon=24px",
+    "xl|padding-right: twin=(unset) canon=28px",
+    "xl|padding-bottom: twin=(unset) canon=24px",
+    "xl|padding-left: twin=(unset) canon=28px",
+    "xxl|padding-top: twin=(unset) canon=24px",
+    "xxl|padding-right: twin=(unset) canon=28px",
+    "xxl|padding-bottom: twin=(unset) canon=24px",
+    "xxl|padding-left: twin=(unset) canon=28px"
+   ]
+  },
+  {
+   "twin": "panel-1",
+   "canon": "panel",
+   "why": [
+    "main|overflow-x: twin=hidden canon=(unset)",
+    "main|overflow-y: twin=hidden canon=(unset)",
+    "main|overflow: twin=(unset) canon=hidden"
+   ]
+  },
+  {
+   "twin": "proof__item-1",
+   "canon": "proof__item",
+   "why": [
+    "main|font-size: twin=12.54px canon=11.14px",
+    "xxl|font-size: twin=(unset) canon=12.54px"
+   ]
+  },
+  {
+   "twin": "sr-only-1",
+   "canon": "sr-only",
+   "why": [
+    "main|font-family: twin=montserrat canon=montserrat,system-ui,-apple-system,segoe ui,arial,sans-serif",
+    "main|font-size: twin=17.46px canon=15.52px",
+    "main|overflow-x: twin=hidden canon=(unset)",
+    "main|overflow-y: twin=hidden canon=(unset)",
+    "main|overflow: twin=(unset) canon=hidden",
+    "xxl|font-size: twin=(unset) canon=17.46px"
+   ]
+  },
+  {
+   "twin": "success-mark-1",
+   "canon": "success-mark",
+   "why": [
+    "main|justify-items: twin=center canon=(unset)",
+    "main|align-items: twin=center canon=(unset)",
+    "main|place-items: twin=(unset) canon=center"
+   ]
+  }
+ ]
+}

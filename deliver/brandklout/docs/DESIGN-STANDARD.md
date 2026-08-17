@@ -184,6 +184,18 @@ vendor originals; the *execution* is ours.
 - A fixed header's `z-index` can trap its own close button under an open drawer.
 - Fixed side rails need a real layout gutter plus a scrim, and inversion over light sections.
 
+## Brand Authority and Canary Gate
+
+Before designing, inventory every Brandklout/client source that can define identity or structure:
+Asana attachments, downloaded reference sites, current production/staging pages, Figma, and Webflow
+embeds. Read the embedded content before calling a page empty. Record which source controls brand,
+structure, content, and interaction; unresolved conflicts stop the batch.
+
+For a multi-page assignment, finish one representative canary page first. Review its 390 and 1440
+renderings and drive its signature interaction before copying the system across the other pages.
+Freeze the approved token set, shell, type scale, and interaction runtime for that batch. A static
+gate score cannot approve visual direction, brand fidelity, typography scale, or composition.
+
 ## Verification — interaction, not screenshots
 
 A screenshot cannot tell you whether a reveal fired, a counter ran, or reduced-motion is
@@ -268,16 +280,17 @@ Paid dental traffic is mostly mobile, so 360 and 390 matter more than 1920.
 
 A page is not done when the sections exist. It is done when **all** of these hold:
 
-1. **6–8 named chapters** in a fixed narrative order — no `band-*` / `section--<colour>` sections left
-2. **At least 3 chapters where scroll drives the content**, pinned and scrubbed — not triggered
-3. Chapters both arrive and depart; continuity devices present (progress, chapter tags, theme shifts)
-4. Hero motion, interaction states on every interactive element, and a signature moment
-5. `prefers-reduced-motion` disables motion without hiding content
-6. Behaviour verified by driving the page on a **focused** tab — not by screenshots
-7. Screenshots captured at all six breakpoints and **reviewed**, with responsive issues fixed
-8. Zero horizontal overflow at 360 and 390
-9. Offer, phone and form reachable at every scroll depth on mobile
-10. **Fluid root installed and clean** — `node scripts/fluid-root.mjs --check <package>` exits 0
+1. Brand/source authority recorded and the canary direction approved before batch multiplication
+2. **6–8 named chapters** in a fixed narrative order — no `band-*` / `section--<colour>` sections left
+3. **At least 3 chapters where scroll drives the content**, pinned and scrubbed — not triggered
+4. Chapters both arrive and depart; continuity devices present (progress, chapter tags, theme shifts)
+5. Hero motion, interaction states on every interactive element, and a signature moment
+6. `prefers-reduced-motion` disables motion without hiding content
+7. Behaviour verified by driving the page on a **focused** tab — not by screenshots
+8. Screenshots captured at all six breakpoints and **reviewed**, with responsive issues fixed
+9. Zero horizontal overflow at 360 and 390
+10. Offer, phone and form reachable at every scroll depth on mobile
+11. **Fluid root installed and clean** — `node scripts/fluid-root.mjs --check <package>` exits 0
 
 The one-sentence test: **would a visitor describe this as a place they went, or a page they read?**
 If it reads as a stack of cards with animation on it, it fails — rebuild the architecture, keep the

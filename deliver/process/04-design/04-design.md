@@ -31,6 +31,18 @@ This module uses the selected design-system package initialized during `00-clien
 - Project overview with audience, brand, positioning from `deliver/[client-name]/docs/project-overview.md`.
 - Sales strategy handoff, audience notes, positioning direction, and the initialized selected design-system package from `deliver/[client-name]/workflows/00-client-delivery-initialization/.tmp/design-system/`.
 
+### Brand-Authority Preflight
+
+Before choosing tokens or composing pages, inspect every client- or partner-owned source that can
+carry design direction: handoff files, brand guidelines, moodboards, the current public site,
+Webflow page/component embeds, Figma files, and approved reference URLs. Do not classify a source
+as empty from its Webflow style count or page shell; read embeds and linked assets first.
+
+Write `.tmp/reference-inventory.md` with each source, what it controls (structure, identity,
+content, or interaction), whether its assets were downloaded into the active worktree, conflicts,
+and the selected authority. If brand identity or reference priority is unresolved, stop before the
+batch build and request the decision.
+
 ## Execution Steps
 All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.tmp/`.
 
@@ -44,12 +56,20 @@ All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.t
 6. **Output**: `.tmp/style-direction.md`, `.tmp/design-tokens.json`
 
 ### Phase 2A: Claude Design Path
-7. Compose self-contained HTML/CSS/JS prototypes for each approved page template.
-8. Create a prototype manifest listing page composition, sections, and animations.
-9. Export the first-draft HTML/CSS/JS package into `.tmp/final-design/`.
-10. Convert the HTML package into a Figma file through the approved HTML-to-Figma workflow.
-11. Publish the first-draft design package to Vercel for client review.
-12. **Output**: `.tmp/prototypes/*.html`, `.tmp/prototype-manifest.json`, `.tmp/final-design/`, `.tmp/figma-conversion-log.json`, `.tmp/vercel-preview-url.txt`
+7. Build one representative **canary page** (or the shared shell plus its most complex section)
+   before multiplying the system across the remaining pages.
+8. Verify the canary at mobile and desktop against the selected authority: typography, palette,
+   density, responsive geometry, interaction, reduced motion, and console state. Record the result
+   in `.tmp/canary-review.md` and obtain internal/user approval of the direction.
+9. Freeze the approved tokens, shared shell, component vocabulary, and interaction runtime for this
+   batch. Later pages may vary in composition and content, but must not silently choose a new system.
+10. Compose self-contained HTML/CSS/JS prototypes for the remaining approved page templates.
+11. Create a prototype manifest listing page composition, sections, animations, and the canary
+    baseline commit/artifact.
+12. Export the first-draft HTML/CSS/JS package into `.tmp/final-design/`.
+13. Convert the HTML package into a Figma file through the approved HTML-to-Figma workflow.
+14. Publish the first-draft design package to Vercel for client review.
+15. **Output**: `.tmp/prototypes/*.html`, `.tmp/prototype-manifest.json`, `.tmp/final-design/`, `.tmp/figma-conversion-log.json`, `.tmp/vercel-preview-url.txt`, `.tmp/canary-review.md`
 
 ### Phase 2B: Figma From Scratch Path
 7. Create first-draft Figma designs directly from the tokens, wireframes, and graphic resources.
@@ -58,12 +78,14 @@ All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.t
 10. **Output**: Figma file/link plus `.tmp/figma-conversion-log.json` and `.tmp/vercel-preview-url.txt`
 
 ### Phase 3: Review Handoff
-13. Document component specifications, CMS bindings, and responsive behavior.
-14. Capture screenshots across breakpoints and run a token-consistency audit.
-15. Gate the package on the fluid root: `node scripts/fluid-root.mjs --check <package>` must exit 0.
-16. Send the Figma link and Vercel review URL to the client for first-round feedback.
-17. Record the selected design path and move approved corrections into `05-design-revisions`.
-18. **Output**: `.tmp/component-spec.json`, `.tmp/screenshots/`, `.tmp/token-violations.json`, `deliver/[client-name]/docs/design-draft-review.md`
+16. Document component specifications, CMS bindings, and responsive behavior.
+17. Capture screenshots at 360, 390, 768, 1024, 1440, and 1920; review them visually and assert
+    zero horizontal overflow at 360 and 390.
+18. Run interaction checks in a focused browser tab, computed-style/token consistency checks, and
+    the fluid-root gate: `node scripts/fluid-root.mjs --check <package>` must exit 0.
+19. Send the Figma link and Vercel review URL to the client for first-round feedback.
+20. Record the selected design path and move approved corrections into `05-design-revisions`.
+21. **Output**: `.tmp/component-spec.json`, `.tmp/screenshots/`, `.tmp/token-violations.json`, `deliver/[client-name]/docs/design-draft-review.md`
 
 ## Offer-Specific Adaptations
 - **Development from Scratch**: Required after approved wireframes and graphic resources. Produces the first draft, Figma output, and required Vercel review URL before `05-design-revisions`.
@@ -80,6 +102,8 @@ All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.t
 ## Output Artifacts
 - `deliver/[client-name]/workflows/04-design/.tmp/style-direction.md`
 - `deliver/[client-name]/workflows/04-design/.tmp/design-tokens.json`
+- `deliver/[client-name]/workflows/04-design/.tmp/reference-inventory.md`
+- `deliver/[client-name]/workflows/04-design/.tmp/canary-review.md`
 - `deliver/[client-name]/workflows/04-design/.tmp/prototypes/*.html`
 - `deliver/[client-name]/workflows/04-design/.tmp/prototype-manifest.json`
 - `deliver/[client-name]/workflows/04-design/.tmp/final-design/`

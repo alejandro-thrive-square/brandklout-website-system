@@ -1,0 +1,7 @@
+@import url("https://fonts.googleapis.com/css2?family=Marcellus&family=Lato:wght@400;700;900&display=swap");
+.qz-opt.is--picked.is--picked.is--picked{border-color:#0b2c41;background:#f6f3ee}
+.qz-opt.is--picked.is--picked.is--picked .qz-opt__box{background:#0b2c41;border-color:#0b2c41}
+.qz-opt.is--picked.is--picked.is--picked .qz-opt__tick{opacity:1}
+.qz-err.qz-err.qz-err.is--visible.is--visible.is--visible{display:block}
+.qz-done.qz-done.qz-done.is--visible.is--visible.is--visible{display:block}
+.qz-stories__viewport.is--dragging.is--dragging.is--dragging{cursor:grabbing}

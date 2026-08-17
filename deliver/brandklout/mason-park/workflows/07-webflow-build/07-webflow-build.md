@@ -1,0 +1,335 @@
+# Workflow: 07 - Webflow Build
+
+## Client-Facing Overview
+We build the approved design in Webflow with clean structure, responsive behavior, CMS setup, custom code, and the integrations needed for the website to work properly.
+
+> [!IMPORTANT]
+> **Integrity Rule**: Any change to the Python executor, the converter toolchain, or technical logic of this workflow must be documented here and in [html-to-webflow-clipboard.md](./html-to-webflow-clipboard.md) immediately.
+
+> [!NOTE]
+> This is the **canonical template**. It is cloned into
+> `deliver/[client-name]/workflows/07-webflow-build/` per engagement. Fill in
+> `webflow-build.config.json`, replace `[client-name]`/`<DEPLOYED_SITE_URL>`
+> placeholders, and record deviations in a `## Project Notes` section. The
+> converter + diagnostics scripts ship inside this folder so each project is
+> self-contained.
+
+> [!NOTE]
+> Planned evolution: [TEMPLATE_LIBRARY_PLAN.md](./TEMPLATE_LIBRARY_PLAN.md) — Relume-based template library (one shared class system, 20–30 variable-themed templates) feeding the pasteable-components converter.
+> Scheduled fresh-session loop: [WEBFLOW_BUILD_LOOP.md](./WEBFLOW_BUILD_LOOP.md) — the hourly one-page Webflow build loop.
+
+## Operational Purpose
+Reproduce the approved final design source in Webflow with CMS-first structure, token consistency, responsive coverage, and staging readiness. Valid approved sources include revised Claude Design HTML/CSS/JS packages and Figma designs.
+
+## Inputs From Sales / Previous Phase
+- Approved final design package from `05-design-revisions` (fall back to `04-design/.tmp/final-design/` if no revisions exist).
+- Final copy, metadata, alt text, and SEO decisions from `06-content-seo`.
+- Required Webflow workspace access, integrations, CMS requirements, and tracking scripts.
+- Approved scope and constraints from the Sales handoff.
+- For Figma-to-Webflow: build plan from `11-figma-review-build-planning`.
+- For migrations: migration plan from `12-migration-audit-plan`, content migration report from `13-content-export-import`, and SEO/redirect plan from `14-migration-seo-redirects`.
+- For improvements: scoped implementation plan from `15-improvement-intake-audit`.
+
+## Execution Steps
+1. Create or open the Webflow project and scaffold CMS Collections.
+2. Build the global style system before page components.
+3. Build each page/template from the approved design and content.
+4. Publish to staging and prepare a build manifest for QA.
+
+## Offer-Specific Adaptations
+- **Development from Scratch**: Build the approved full-site design source and CMS model after `01` through `06` are approved.
+- **Figma to Webflow**: Build from the approved `11` build plan.
+- **Migration to Webflow**: Build or rebuild the Webflow CMS architecture and pages using the outputs of `12`, `13`, and `14`.
+- **Webflow Improvements & Updates**: Implement only the approved change list from `15`.
+
+## Technical Setup
+- **Executor status**: The `07-webflow-build.py` executor is a **config-driven orchestrator** that reads `webflow-build.config.json` and drives the converter (`html_to_webflow.py`) + diagnostics (`wf_tools.py`). It wraps the directives below; the converter is the engine.
+- **Primary operating model — Clipboard Copy-Paste build**: Claude runs `html_to_webflow.py` to convert the approved HTML/CSS into Webflow's clipboard payload (`@webflow/XscpData`), emits a browser copy page, and pastes each section straight into the Designer. A cascade resolver bakes descendant/compound/state CSS into flat Webflow classes, resolves `:root` design tokens, materializes `::before`/`::after`, and applies the Webflow-specific CSS translation rules (gap→grid-gap, grid track defaults + ordering, `inset` expansion, etc.). This is faster and higher-fidelity than per-element MCP calls for full pages. **Full method + translation rules + Build→Paste→Verify protocol:** [html-to-webflow-clipboard.md](./html-to-webflow-clipboard.md).
+- **Going-forward standard**: author designs (`04`/`05`) in **Client-First flat classes** (one semantic class per styled element, no descendant selectors) so the converter stays a clean 1:1 map and the Webflow project has tidy class names for handoff.
+- **Self-contained section packaging (required)**: author and package HTML, CSS, and JS **per section**. Every pasteable component must carry, inside its section root, two Webflow Embed (HtmlEmbed) elements — one `<style>` embed holding all CSS the section needs beyond the shared class system, and one `<script>` embed holding all JS the section needs (omit the JS embed only if the section has no behavior). A pasted section must render and behave correctly on **any page with zero page-settings changes** (no per-page head/footer custom code), so sections can be moved freely between pages. Keep only true site-wide concerns (fonts, resets, design tokens) in global custom code; everything section-specific rides inside the section. Scope embedded CSS/JS to the section's root class and guard scripts against double-initialization (the same section may appear on multiple pages or twice in the Designer).
+- **Fallback A — MCP Build Protocol**: the HTML Decomposition Pipeline below (native `element_builder` build). Use when CMS bindings/native Designer editing must be authored programmatically rather than pasted.
+- **Fallback B**: manual developer build in Webflow Designer, referencing the Vercel preview side-by-side.
+- **Available integrations**: Webflow MCP (`element_builder`, `style_tool`, `variable_tool`, `data_cms_tool`, `component_builder`, `whtml_builder`, `data_assets_tool`, `data_scripts_tool`, `de_page_tool`) — used by Fallback A, for CMS setup, and for post-paste variable binding.
+
+### Toolchain (ships with this folder)
+
+| File | Role |
+|:---|:---|
+| [html_to_webflow.py](html_to_webflow.py) | Core converter — HTML+CSS → Webflow clipboard JSON (`--split` / `--copy-page`). |
+| [html_to_webflow_wholepage.py](html_to_webflow_wholepage.py) | Experimental whole-page (single-paste) variant; imports the core engine. |
+| [wf_tools.py](wf_tools.py) | Diagnostics multitool (`qa`, `collisions`, `inspect`, `expect`, `audit-diff`, `compare`). |
+| [build_vocab.py](build_vocab.py) | Multi-page shared-class vocabulary (`--sources <json>`). |
+| [gen_install_pages.py](gen_install_pages.py) / [gen_code_helpers.py](gen_code_helpers.py) | Clipboard-helper pages for head/footer custom code. |
+| [verify.mjs](verify.mjs) | Token-light Playwright design-vs-staging diff. |
+| [html-to-webflow-clipboard.md](html-to-webflow-clipboard.md) | Full method directive (the load-bearing knowledge). |
+| [07-webflow-build.py](07-webflow-build.py) | Config-driven orchestrator (`webflow-build.config.json`). |
+| [tests/](tests) | Converter regression tests (`python -m unittest discover -s tests`). |
+| [style_diff.py](style_diff.py) | Diff two generated `styles.css` files → the per-property `update_style` actions that turn the first into the second. |
+| [mkactions.py](mkactions.py) | Turn a `style_diff.py` diff into ready-to-send `update_style` action batches. |
+
+## Re-theming a site that is already built
+
+A re-theme changes VALUES, not structure, so it goes through `update_style` property by
+property rather than through a rebuild — the whole job is ~300 rules against ~200KB of markup,
+and `data_whtml_builder`'s `css` parameter **creates** styles, it does not update them
+(probed directly: re-sending a definition for an existing class left the original untouched
+and minted a stray combo).
+
+```
+style_diff.py --old <git show <pre-theme>:…/styles.css> --new …/styles.css --out retheme-diff.json
+mkactions.py  --diff retheme-diff.json --out <batchDir>
+push_styles.mjs   <batchDir> <pageId>     # in .tmp/ — drives the MCP directly
+verify_styles.mjs --repair <dir>          # reads every style back off the SITE
+push_styles.mjs   <repairDir> <pageId>    # only what is actually missing
+```
+
+**The style pass is the smaller half.** These carry colour and type too, and none of them is
+reachable by a style update — each one shipped the old palette on a build that had verified
+313/313 rules clean:
+
+1. **The page footer JS animates concrete hex values** (`gsap.to(el,{color:'#26292F'})`,
+   `m.style.background='#00B4D8'`). Rebuild it with `build_page_footers.mjs`. The mapping is
+   not a global hex substitution — the same old hex maps to different new ones in different
+   places — so rebuild from the re-themed source, never patch the minified bundle.
+2. **Any HtmlEmbed carrying its own `<style>`.** The lead form does. Nothing in the Designer
+   model can see inside it. `push_embeds.mjs`. Note the payload's inline styles still contain
+   `var(--display)` / `var(--t-body)`: `:root` never reaches Webflow, so those must be
+   resolved to concrete values on the way in or the form loses its typeface entirely.
+3. **The site head and the page heads** — the fluid root, the reading tier, the 1439 display
+   rung, and the runtime-state rules Webflow classes cannot express. Read what the site
+   actually serves and patch that (`dump_custom_code.mjs` → `build_head_blocks.mjs` →
+   `push_custom_code.mjs`); the `_js/` artifacts are what a build *intended* and they drift.
+
+**Finish by reading the PUBLISHED stylesheet**, not the API. Fetch each page and its `.css`
+and grep for the old palette and the old font names. That is what found the form embed after
+every other gate was green.
+
+### API behaviour that will otherwise cost a round trip each
+
+- **Webflow stores CSS shorthands as LONGHANDS**, and `update_style` merges by property NAME.
+  `background: X` lands ALONGSIDE the stored `background-color`, so the style then holds both
+  colours. Send `background-color` / `background-image` / the four `border-*-color`.
+  `style_diff.py::expand_shorthands` does this.
+- **`font-family` stores ONE family, not a stack.** Send `Inter`.
+- **`"Too Many Requests"` and `"[Conflict] … style block store" are reported PER ACTION**,
+  inside an otherwise successful call. A script that checks only the HTTP status reports a
+  clean run over a half-applied re-theme. `[Conflict]` in particular is what you get for a
+  no-op update on an already-correct global style — so treat the site read-back, not the
+  push, as the gate.
+- **A class named after a bare HTML tag is silently dropped at build time.** A payload class
+  `h2` produced an element with no style at all on two pages. Give it a real name.
+- **`get_*_freeform_code` returns an ARRAY when `location` is omitted and an OBJECT when it is
+  given.** Reading `result[0].content` off the object reports every block as empty.
+- The direct MCP client memoises its access token for the life of the process, so a long run
+  outlives its own token and everything after it fails `HTTP 401 invalid_token` — which looks
+  exactly like a revoked grant. `wfmcp.mjs` re-handshakes once on 401.
+
+### Config-driven orchestrator
+
+Fill in `webflow-build.config.json` once per project:
+
+```json
+{
+  "asset_base": "https://[client-name].vercel.app",
+  "css": "../04-design/.tmp/final-design/site.css",
+  "design_dir": "../05-design-revisions/.tmp/final-design",
+  "var_map_seed": ".tmp/webflow-variable-map.json",
+  "pages": {
+    "index": "../05-design-revisions/.tmp/final-design/index.html",
+    "about": "../05-design-revisions/.tmp/final-design/about.html"
+  }
+}
+```
+
+Then:
+
+```bash
+python 07-webflow-build.py init-config     # scaffold the config + .tmp/
+python 07-webflow-build.py build-page <page>
+python 07-webflow-build.py vocab            # multi-page shared-class system
+python 07-webflow-build.py qa <page>
+```
+
+Raw converter access (always available):
+
+```bash
+python html_to_webflow.py --html "../05-design-revisions/.tmp/final-design/[page].html" \
+  --css ../04-design/.tmp/final-design/site.css \
+  --asset-base "<DEPLOYED_SITE_URL>" \
+  --var-map .tmp/[page]/webflow-variable-map.json \
+  --page-prefix [slug] \
+  --split .tmp/[page]
+python wf_tools.py qa .tmp/[page]
+```
+
+> [!IMPORTANT]
+> **`--page-prefix` is required when pasting into a site you did not build**
+> (added 2026-07-28). Without it the payload can carry classes named literally
+> `p`, `div`, `span`, `a`, `h3` — and Webflow merges classes by NAME site-wide,
+> so those either collide with the client's own classes or litter their project.
+> The flag namespaces tag-derived auto-names only (`p` → `vnr-p`); source class
+> names and JS hook tokens are untouched. The converter engine always supported
+> this; only the CLI flag was missing, so any payload generated before that date
+> should be re-checked. Full detail and the verification snippet:
+> [html-to-webflow-clipboard.md](./html-to-webflow-clipboard.md) §Tag-derived auto-names.
+
+---
+
+## MCP Build Protocol — HTML Decomposition Pipeline
+
+> **Why this protocol exists**: The Webflow MCP's `whtml_builder` creates HtmlEmbed blocks (code embeds), which look correct visually but are opaque — no CMS bindings, no Designer editing, no responsive breakpoint controls. Native Webflow elements via `element_builder` are the correct path. This protocol defines how Claude decomposes an approved HTML prototype into native Webflow elements. Use only when the clipboard paste model is unsuitable.
+
+### Phase 1: Site Setup & Token Extraction
+
+1. Call `webflow_guide_tool` for current best practices.
+2. Call `data_sites_tool` to list sites → confirm or create the target Webflow project.
+3. Read the approved HTML from `05-design-revisions/.tmp/final-design/` (or `04-design/.tmp/final-design/` if no revisions exist).
+4. Extract CSS custom properties from the `:root {}` block.
+5. Call `variable_tool` to create Webflow variable collections:
+   - **Colors**: every `--color-name` token (and opacity variants).
+   - **Typography**: `--display`, `--body`, `--mono` font-family tokens.
+   - **Spacing/sizing**: any token-based spacing values found in the prototype.
+6. Save `07-webflow-build/.tmp/token-map.json` mapping CSS variable names → Webflow variable IDs.
+
+### Phase 2: Style System Creation
+
+1. Identify CSS class patterns from the HTML.
+2. For each class, call `style_tool` to create a Webflow style with:
+   - **Desktop** properties (the base CSS declarations).
+   - **Tablet** overrides (from `@media (max-width: 1024px)` or similar).
+   - **Mobile Landscape** overrides (from `@media (max-width: 768px)`).
+   - **Mobile Portrait** overrides (from `@media (max-width: 480px)`).
+3. Create combo classes for variants.
+4. Reference Webflow variables (from Phase 1) in style values wherever the HTML used `var(--token)`.
+5. Save `07-webflow-build/.tmp/style-map.json` mapping CSS class names → Webflow style names/IDs.
+
+### Phase 3: Asset Upload
+
+1. Extract all image/media references from the HTML (`<img src>`, `background-image` URLs, inline SVGs).
+2. Upload raster images (PNG, JPG, WebP) via `data_assets_tool`.
+3. For inline SVGs, decide per case: simple icons/logos → upload as SVG asset; complex decorative SVGs → keep as `whtml_builder` embed.
+4. Save `07-webflow-build/.tmp/asset-map.json` mapping original paths → Webflow asset IDs.
+
+### Phase 4: Page Structure Build
+
+For each page in the approved design:
+
+1. Call `de_page_tool` to create or navigate to the page.
+2. Decompose the HTML into a Webflow element tree using this mapping:
+
+   | HTML | Webflow `element_builder` type | Notes |
+   |:---|:---|:---|
+   | `<nav>` | DivBlock | Apply `position: fixed` via style |
+   | `<section>` | Section | Webflow top-level section container |
+   | `<div>` | DivBlock | General container |
+   | `<h1>`–`<h6>` | Heading + `set_heading_level` | Match the heading level |
+   | `<p>` | Paragraph | |
+   | `<span>`, `<em>`, `<strong>` | DOM + `set_dom_config` | Inline text elements |
+   | `<a>` (text link) | TextLink + `set_link` | |
+   | `<a>` (wrapping block) | LinkBlock + `set_link` | |
+   | `<button>` | Button | |
+   | `<img>` | Image + `set_image_asset` | Reference asset IDs from Phase 3 |
+   | `<form>` | Form + FormTextInput/FormButton/etc. | |
+   | `<ul>/<ol>` | DivBlock with child DivBlocks | Webflow uses div-based list patterns |
+   | `<video>` | Video | |
+
+3. Build top-down, section by section: navbar → hero → each content section → footer.
+4. For each element, set: `set_style`, `set_text`, `set_link`, `set_image_asset`, `set_heading_level`.
+5. Build children recursively using the `children` array in `element_schema`.
+6. After each major section, call `element_snapshot_tool` to visually verify the build.
+
+### Phase 5: CMS & Dynamic Content
+
+1. Identify repeating content patterns in the HTML (portfolio items, service cards, testimonials, team members).
+2. Call `data_cms_tool` to create a Collection for each pattern, with fields matching the content shape.
+3. Populate Collection items with the content extracted from the HTML.
+4. Replace the static elements with `CMSCollection` list/item elements, binding fields via `settings.binding`.
+
+### Phase 6: Embeds & Custom Code (whtml_builder — targeted use only)
+
+Use `whtml_builder` ONLY for elements that cannot be native Webflow elements:
+- **Keyframe animations**, **Pseudo-element decorations**, **Complex inline SVG**, **Third-party embeds**.
+
+Register site-level scripts via `data_scripts_tool` for Google Fonts, analytics/tracking, and custom JS.
+
+### Tool Decision Guide
+
+| Pattern | Tool | Reason |
+|:---|:---|:---|
+| Section layouts, containers, grids | `element_builder` | Must be native for CMS/responsive |
+| Headings, paragraphs, buttons, links | `element_builder` | Must be editable in Designer |
+| Images | `element_builder` + `data_assets_tool` | Must be manageable assets |
+| Navigation | `element_builder` | Must support Webflow interactions |
+| Forms | `element_builder` (Form type) | Must use Webflow form handling |
+| Marquee/scroll animations | `whtml_builder` | CSS keyframes, decorative only |
+| Complex inline SVGs | `whtml_builder` | Cannot represent as native element |
+| Grid-line background patterns | `whtml_builder` | CSS pseudo-element decoration |
+| Gradient decorative bars | `whtml_builder` | `::before`/`::after` pseudo-elements |
+| CMS-bound repeating content | `element_builder` + `data_cms_tool` | Dynamic content binding required |
+
+## Project Notes — Mason Park pasteable-components build (2026-08-07)
+
+The headless WHTML element build (everything under `.tmp/<page>/`, `_js/`,
+`_installed/`) is **superseded** by pasteable section components
+(`deliver/process/07-webflow-build/PASTEABLE-COMPONENTS.md` is the spec).
+The user pastes manually via the Claude Chrome extension; agents patch
+content over the MCP afterwards. Do not touch the live pages headlessly.
+
+Pipeline (rerun end-to-end after any design change; all steps deterministic):
+
+```bash
+# raws (no avoid) -> vocabulary
+python html_to_webflow_wholepage.py --html ../04-design/.tmp/<page>/index.html \
+  --css ../04-design/.tmp/shared/mpd.css --wrap --page-prefix <inv|nps|ty> \
+  --out .tmp/_raw/<page>
+python build_vocab.py --sources .tmp/build-sources.json
+# finals with vocab + avoid chain (inv first; nps avoids inv; ty avoids both,
+# --avoid-suffix nps|ty — matches the live class names label-ty/fine-ty)
+python html_to_webflow_wholepage.py ... --vocab .tmp/style-vocabulary.json \
+  [--avoid <prior dirs> --avoid-suffix <sfx>] --out .tmp/pc/<page>
+node resolve_wholepage.mjs .tmp/pc/<page>/paste_00_full-page.html .tmp/pc/<page>/resolved
+node rebind_assets.mjs .tmp/pc/<page>/resolved.json .tmp/asset-uploads.json .tmp/pc/<page>/final.json
+node fix_variant_fns.mjs .tmp/pc/*/final.json          # fluid fns left in variants
+node bake_display_ladder.mjs .tmp/pc/*/final.json      # token ladders + head-tier.json
+node gen_install_blocks.mjs                            # site head/footer (<10k each)
+python make_paste_page.py --payload .tmp/pc/<page>/final.json --out .tmp/pc/<page>/PASTE-full-page.html
+python wf_tools.py qa .tmp/pc/<page> [--against <prior dirs>]
+EMIT_SHELL=1 node extract_section_components.mjs .tmp/pc/<page> <page> .tmp/components
+python make_paste_page.py per component; node gen_component_docs.mjs
+node check_components.mjs .tmp/components
+node simulate_paste.mjs .tmp/pc/<page>/final.json .tmp/pc/<page> ../04-design/.tmp/shared/img
+```
+
+Key artifacts: `.tmp/components/<page>/PASTE-QUEUE.md` (the paste protocol,
+prerequisites and cleanup list), `.tmp/pc/install-head.html` /
+`install-footer.html` (site-level shared layer), `.tmp/pc/<page>/PASTE-full-page.html`
+(one-paste alternative). `.tmp/asset-uploads.json` is synthesized from
+`.tmp/asset-ids.json` — all 13 images are already in the site library.
+
+Local simulate_paste.mjs is adapted to this runtime (MPD namespace, no
+ScrollSmoother, `.site-head.is-solid`, `.offer-rail.is-up`, 0.86-glass header
+rest state); the Dr. Nahlah copy is the generic original.
+
+## Output Artifacts
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/paste_*.html` — generated section paste components
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/webflow-custom-code.js` + `animation-manifest.json` — page JS and hook manifest
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/webflow-runtime-states.css` — runtime-state CSS for the head
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/webflow-variable-{import,map}.json` and `webflow-style-variable-bindings.json` — variable artifacts
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/site.css` — copy of source CSS
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/build-manifest.json` — full build log with element IDs, page IDs, CMS collection IDs (MCP path)
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/_installed/` — every custom-code block and embed **exactly as installed**, read back off the site to confirm. This is the record to patch against; `_js/` is only what a build intended
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/<page>/whtml/retheme-diff.json` — every rule and property a re-theme must change
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/visual-diff/` — staging vs preview comparison screenshots
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/cms-import.json`
+- `deliver/[client-name]/workflows/07-webflow-build/.tmp/change-manifest.json` (improvements only)
+
+## Version Control
+- All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../SYSTEM_RULES.md).
+- **`.tmp/` folder**: Commit lightweight artifacts that support review, replay, handoff, or agent continuity. Binary/media assets remain gitignored and synced to the VPS.
+- **Branch naming**: `deliver/[client-name]-webflow-build-<change>` once cloned into a client folder.
+- **Commit discipline**: Atomic commits with descriptive messages. One logical change per commit.
+- **Toolchain**: The converter and diagnostics scripts are committed as part of this template so cloned client workflows are self-contained. Keep them in sync with this folder when the canonical tooling evolves.
+
+## Infrastructure
+- **Hosting**: Hostinger VPS
+- **OS**: Ubuntu 24.04 LTS

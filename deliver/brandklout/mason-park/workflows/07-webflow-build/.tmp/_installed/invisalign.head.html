@@ -1,0 +1,20 @@
+<meta name="robots" content="noindex, nofollow">
+<style>
+/* Runtime state this page's JS toggles, plus the two pseudo-element bars it
+   drives through custom properties. Ancestor-scoped, so not expressible as
+   Webflow classes. */
+.ch-hesitation .hes-statement .mpd-word{color:rgba(32, 36, 42, 0.19)}
+.ch-inclusion .ledger-steps span.on{color:#007E9B;font-weight:700}
+.price-was .price-was-after{transform:scaleX(var(--strike,1))}
+.step .step-before{transform:scaleX(var(--fill,0))}
+/* The form rides in an HtmlEmbed carrying its own CSS, which sits later in the
+   document than the site head block and would otherwise win the sub-479 input
+   size at equal specificity. Below 479 the root has ramped to 13.76px at 390,
+   so 1.0625rem computes to 14.6 and iOS zooms the page on focus. Outranked here
+   with the same value the design's --t-body carries in that tier. */
+@media (max-width:478px){.form-card .field input{font-size:1.31rem}}
+/* Display type steps down at 1439 in the design. Webflow has no max-width
+   breakpoint between 992 and 1920, so this rung of the ladder lives here; the
+   991 and 767 rungs are real breakpoint overrides on the classes. */
+@media (max-width:1439px){.inv-h1{font-size:2.86rem}.hes-statement{font-size:2.56rem}.inv-h2{font-size:2.16rem}.inv-h2-2{font-size:2.16rem}.inv-h2-3{font-size:2.16rem}.inv-h2-4{font-size:2.16rem}}
+</style>

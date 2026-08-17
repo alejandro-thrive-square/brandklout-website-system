@@ -154,6 +154,81 @@ Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (
 
 - **Retired VPS paths**: When a repo restructure makes an old VPS-only path obsolete, first migrate any assets that still belong in the system, then add the retired path to `scripts/deploy-cleanup.sh`. Deployment cleanup must stay allowlisted and explicit; do not use broad `git clean -fdx` cleanup because valid ignored media intentionally lives on the VPS.
 
+#### 4.2.0 Creating a client worktree (sparse)
+
+A full worktree checks out every client's work — 2,438 files / 94 MB — when one client needs about a
+quarter of it. Create client worktrees sparse instead:
+
+```bash
+bash scripts/new-client-worktree.sh mason-park              # 722 files instead of 2,438
+bash scripts/new-client-worktree.sh newclient --dry-run     # print the plan first
+```
+
+The cone is `deliver/process` + the pillar's `docs/` and `scripts/` + the client folder + `scripts`,
+`mcp-servers`, `.claude`. **Cone mode always materialises repo-root files**, so `CLAUDE.md`,
+`AGENTS.md`, `SYSTEM_RULES.md` and `deliver/DELIVER_SYSTEM_RULES.md` arrive without being listed —
+agents still get their directives. An unknown slug is treated as a **new** client under
+`deliver/brandklout/`, since the folder does not exist until the agent creates it.
+
+**Sparse narrows the working tree only — never commits.** The index still holds every path, so a
+commit made in a sparse worktree still contains all 461 giovanni-serrano files, all 445
+farewell-agency files, and everything else; merging one into `main` deletes nothing. This was
+verified directly, not inferred. Widen later with `git sparse-checkout add <path>`, or go full with
+`git sparse-checkout disable`.
+
+The script seeds assets explicitly rather than relying on the hook: `post-checkout` only seeds when
+the previous HEAD is the null SHA, and the sparse flow checks out in a *second* step
+(`--no-checkout` → `sparse-checkout set` → `checkout`), so that hook does not fire.
+
+#### 4.2.1 Worktree → main asset mirror (automatic)
+
+Excluding media from Git is load-bearing in three places, so the rule does not bend: it keeps merges
+clean, keeps the VPS `git pull` lean, and keeps the deploy's clean-tree gate
+(`test -z "$(git status --porcelain)"` in `.github/workflows/deploy-vps.yml`) passing — ignored files
+do not appear in `git status`, tracked ones would. **Un-ignoring assets would break the deploy.**
+
+The cost is that `git merge bk-<client>` brings the markup into `main` but not the images it
+references, so a design opened from `main` renders broken. Since every worktree lives on one machine
+and shares one `.git`, that gap is closed by a local copy — **not** by rclone, which is strictly the
+local↔VPS channel:
+
+```bash
+bash scripts/mirror-assets.sh                 # scopes derived from HEAD's paths
+bash scripts/mirror-assets.sh --all --dry-run # full sweep, preview only
+bash scripts/mirror-assets.sh --to-worktree   # reverse: main -> this worktree
+bash scripts/mirror-assets.sh --prune-dry-run # list orphans; never deletes
+```
+
+**A new worktree starts with zero assets.** `git worktree add` checks out tracked files only, so a
+fresh worktree gets the markup and none of the images — designs open broken there exactly as they
+did in `main`. `scripts/hooks/post-checkout` seeds it automatically: on a *new* worktree only
+(previous HEAD is the null SHA), it infers the client folder from the branch name (`bk-` stripped,
+then progressively shorter prefixes, so `bk-mason-park-2` still resolves to `mason-park`) and copies
+that client's assets from `main`. It seeds one client rather than everything because `--all` means
+~771 MB of scrapes and reference libraries the branch will never open. If the branch name matches no
+client, the hook prints the exact command to run instead of guessing.
+
+The mirror covers **vendored libraries as well as media**. Designs load GSAP from
+`.tmp/_vendor/gsap/*.min.js`, which is ignored and is not a media extension; mirroring images but
+not those yields a page that renders and never moves — a worse failure than a broken image, because
+it still looks correct in a screenshot. Matching is path-anchored (`_vendor/`, `vendor/`) so
+`node_modules` cannot be swept in.
+
+This runs **automatically after every commit in every worktree** via `scripts/hooks/post-commit`,
+wired up by `git config core.hooksPath <main>/scripts/hooks` (set by `scripts/bootstrap.sh`, and
+required once per clone). Notes that matter:
+
+- The hooks path is **absolute** by design. Worktrees share one config, but a *relative* hooksPath
+  resolves against each worktree's own root, so a `bk-*` worktree on a branch predating
+  `scripts/hooks/` would silently run no hook. For the same reason the hook resolves
+  `mirror-assets.sh` from the **main** worktree, never the calling one.
+- The mirror is **additive** — it never deletes in the destination. An asset deleted in a worktree
+  lingers in `main`; find those with `--prune-dry-run` and remove them by hand.
+- The hook always exits 0. `post-commit` cannot undo a commit anyway, and a failed asset copy must
+  never surface as an error that derails the agent mid-task.
+- Set `WEBZITE_SKIP_ASSET_MIRROR=1` for scripted bulk commits that would otherwise rescan the same
+  folders once per commit.
+
 ### 4.3 Branching Strategy
 - **`main`**: Production-ready state of the system. Protected — no direct pushes.
 - **`dev`**: Active development and integration branch.

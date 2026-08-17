@@ -74,6 +74,20 @@ function audit(dir) {
   return { m, checks, pass: checks.every(([, ok]) => ok) };
 }
 
+/**
+ * Deliverable pages live in SUBDIRECTORIES of the package `.tmp`; an `index.html` sitting at the
+ * package root is the drafts index — a card listing linking to those pages for client review.
+ * Judging it against the journey standard produced a permanent phantom FAIL (0 chapters, 0 pins)
+ * that understated the real pass rate.
+ *
+ * `noindex` is NOT the discriminator, though it looks like one: every page here is an unpublished
+ * draft and carries `noindex, nofollow`, so testing for it skips the entire campaign.
+ *
+ * The root is reported under "Not judged" rather than dropped silently, so a client that ever does
+ * ship a single page at the package root is visible instead of quietly unaudited.
+ */
+const skipped = [];
+
 function discover() {
   const out = [];
   for (const [wt, client] of CLIENTS) {
@@ -83,7 +97,7 @@ function discover() {
       const d = join(root, e);
       if (statSync(d).isDirectory() && existsSync(join(d, 'index.html'))) out.push([client, e, d]);
     }
-    if (existsSync(join(root, 'index.html'))) out.push([client, '(root)', root]);
+    if (existsSync(join(root, 'index.html'))) skipped.push(`${client}/index.html (package-root drafts index)`);
   }
   return out;
 }
@@ -121,6 +135,7 @@ for (const [client, page, dir] of targets) {
 
 console.log(
   `\n${targets.length - failed}/${targets.length} pages pass the static journey gate.` +
+  (skipped.length ? `\nNot judged: ${skipped.join('; ')}.` : '') +
   (failed ? '\nA FAIL here is architectural — it cannot be fixed by adding animation.' : '') +
   '\nStill required regardless: the scrub proof (different intermediate state at 25/50/75%)' +
   '\nand six-breakpoint screenshots, both on a focused tab.'

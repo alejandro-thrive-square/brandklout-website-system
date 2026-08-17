@@ -10,7 +10,7 @@ Client delivery (via the Brandklout partnership).
 
 | MCP Server | Purpose | Status |
 |:---|:---|:---|
-| `webflow-brandklout` | Webflow access for every Brandklout client, this one included. Shared instance — **the site ID under Target Resources is the boundary, not the tool prefix**. | **Registered 2026-08-07, awaiting OAuth.** Authenticated once on the **team** profile, covering all Brandklout clients at once. |
+| `webflow-brandklout` | Webflow access for every Brandklout client, this one included. Shared instance — **the site ID under Target Resources is the boundary, not the tool prefix**. | **LIVE — authenticated on the `team` profile 2026-08-07.** One grant, all Brandklout clients. |
 | `webflow-clientfirst` | Local Client-First conversion helper. Reads files, holds no credentials, makes no network calls. | Always available. |
 
 Partnership-level Asana access is covered by
@@ -25,18 +25,57 @@ hosting, CRM, or ad accounts.
 > Target Resources below and pass it explicitly. Never act on a site the tool defaulted to, listed
 > first, or that merely came up in conversation.
 >
-> **This client has no confirmed site ID yet, so it is read-only.** Discovery via `list_sites` is
-> fine; writing is not, until the ID is confirmed and recorded here and in the
-> [client site registry](../../docs/mcp-access.md#client-site-registry).
+> **Site ID confirmed 2026-08-07 via `list_sites`: `6a60bdc0340e5f1784b4d553`.** Writes to that
+> site are now in scope. The site is effectively **empty — one page (Home)** and has no custom
+> domain, so it is the lowest-risk of the Brandklout sites to build into.
 
 > [!NOTE]
-> Build platform is **resolved: Webflow** (see [ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md)).
-> GoHighLevel appears only as a lead destination, not as the page builder.
+> Build platform is **resolved: Webflow**, confirmed 2026-08-05 (see
+> [ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md)). GoHighLevel appears only as a lead
+> destination, not as the page builder. The three landing pages are built and reviewed locally
+> first, and no Webflow instance should be authenticated for this client until Brandklout grants
+> access to a specific site.
 
 ## Target Resources
 - **Asana parent task**: `1217040406855582` (workspace `1210572425689866`)
-- **Live site**: unknown - not recorded in Asana. Record here once found.
-- **Staging / platform account**: none.
+- **Live site**: **https://bestdentistinkatytx.com/** — found 2026-08-05.
+  `masonparkdental.com` 302-redirects to it. Public, read-only research only. **This is not the
+  Webflow site below** — it is the client's existing site on another platform.
+- **Webflow site**: **Mason Park Dental**, site id `6a60bdc0340e5f1784b4d553`, workspace
+  `63b4b7393e89b78575e9a9bb`. Confirmed via `list_sites` 2026-08-07.
+- **Staging URL**: https://mason-park-dental.webflow.io (live, returns 200)
+- **Pages**: **4 as of 2026-08-07.** Home (`6a60bdc3340e5f1784b4d5e3`, the pre-existing
+  placeholder, untouched) plus the three landing pages, **built and published to the Webflow
+  subdomain only**: `invisalign` (`6a75f467c7c9e1a0c133edd1`), `new-patient-special`
+  (`6a75f468bfddad669aaf8321`), `thank-you` (`6a75f468c490cc1bb6fa6a8c`). All three are
+  `noindex, nofollow`. **Still no custom domain, and none is to be added.** Element ids,
+  asset ids and the verification results are in
+  `workflows/07-webflow-build/.tmp/build-manifest.json`.
+- **Online booking**: `https://www.flexbook.me/masonpark/1` (FlexBook, linked from the client's own
+  site). Public link only - no account, no credentials, nothing written to it.
+
+> [!NOTE]
+> The live site sits behind a SiteGround bot wall (`/.well-known/sgcaptcha/`). Plain fetchers get a
+> `202` challenge page; a real browser passes. Capture with
+> `workflows/01-content-intake/.tmp/capture.mjs`, one page at a time - parallel requests from one IP
+> re-trip the wall. This is a scraping obstacle, not an access control, and nothing here
+> authenticates to anything.
+
+## Systems belonging to the PREVIOUS ad company - do not touch or reuse
+
+Found hard-coded in the inherited `mpd-invisalign-lp.html`. These are third-party assets, not the
+practice's, and carrying them into new work would leak the practice's traffic to another vendor:
+
+| Asset | Value |
+| :--- | :--- |
+| Google Tag Manager container | `GTM-KWL239K7` |
+| StatCounter project | `12978118` |
+| GHL sub-account (image CDN) | `GWgJnGNYokMRdIAB4fm2` |
+| Call-tracking number - Invisalign page | `(281) 767-8698` - unverified owner |
+| Call-tracking number - New Patient page | `(281) 688-1610` - unverified owner |
+
+The two tracking numbers are per-page, not per-client. They are in use on the built pages; **dial
+both before any spend** to confirm they still route to the practice.
 
 ## Allowed Operations
 - Read this client's Asana tasks through the read-only partnership scripts.
@@ -49,8 +88,10 @@ hosting, CRM, or ad accounts.
 - **Do not touch another Brandklout client's site.** The shared instance can reach all of them; this
   folder authorizes exactly one. A call carrying a sibling's site ID is out of bounds even though
   the grant permits it.
-- **Do not publish.** Local design approval comes first, then a Webflow build, and publishing is a
-  separate explicit go-ahead. A published page is live to real paid traffic.
+- **Do not publish to a custom domain.** Staging (`publishToWebflowSubdomain: true`,
+  `customDomains: []`) was authorised for the 2026-08-07 build and is where the pages live now.
+  Publishing anywhere a real visitor could land is a separate explicit go-ahead — a published
+  page is live to real paid traffic.
 - Do not create MCP server instances for this client on your own initiative.
 - Do not write to Asana. Comments and status changes notify real Brandklout staff.
 - Do not invent testimonials, reviews, patient stories, or statistics for this practice. Real

@@ -150,6 +150,20 @@ else
   restore_media
 fi
 
+# ── Git hooks ─────────────────────────────────────────────────────────────────
+# core.hooksPath is set to an ABSOLUTE path on purpose. Worktrees share one
+# config, but a relative hooksPath resolves against each worktree's own root, so
+# a `bk-*` worktree on a branch predating scripts/hooks/ would silently run no
+# hook at all. Pointing every worktree at the main checkout's tracked hooks dir
+# means the post-commit asset mirror fires everywhere, and edits to the hook take
+# effect immediately without reinstalling.
+if [[ -z "$DRY_RUN" ]]; then
+  echo ""
+  echo "--- Installing git hooks ---"
+  git config core.hooksPath "$(git rev-parse --show-toplevel)/scripts/hooks"
+  echo "core.hooksPath -> $(git config --get core.hooksPath)"
+fi
+
 # ── Summary ───────────────────────────────────────────────────────────────────
 echo "=== Bootstrap complete ${DRY_RUN:+(dry run — no files transferred)} ==="
 echo ""

@@ -18,6 +18,7 @@ MCP server definitions are centralized, but MCP usage is controlled by the activ
 | Webflow | HTTP (remote) | Project | Agency, Client, Workflow | [webflow/setup.md](./webflow/setup.md) | CMS management, site audits, collection item CRUD, SEO, publishing |
 | Figma | HTTP (remote) | User/Global | Global, Agency, Client, Workflow | [figma/setup.md](./figma/setup.md) | Design file generation, design inspection, and conversion from HTML/CSS prototypes |
 | Asana | HTTP (remote) | Project | Client | [asana/setup.md](./asana/setup.md) | Reading a partner's/client's project-management workspace: tasks, projects, assignees, comments — used to pick up delegated work. **Blocked in Claude Code** (token-exchange bug); accessed via direct-token scripts. |
+| Relume | HTTP (remote) | Project | Global, Agency | [relume/setup.md](./relume/setup.md) | Reading the Relume component library as a source of page/section structure. Read-only, no client account involved. Registered 2026-08-10 as `relume`, **awaiting OAuth** (scope `relume:components`). |
 
 ## Server Instances (One Per Principal)
 
