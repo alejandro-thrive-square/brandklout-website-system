@@ -198,6 +198,18 @@
 @media(min-width:760px){ .pk-next{grid-template-columns:repeat(3,1fr)} }
 
 /* ---------- closing CTA band ---------- */
+/* A labelled phone pair that reads on any ground. Distinct from .cta-phones,
+   which is centred and painted for the gold CTA band specifically — that one
+   hard-codes --black because it sits on gold, so it cannot simply be reused on
+   a cream section. This one paints from theme tokens and aligns left. */
+.pk-phones{display:flex;flex-wrap:wrap;gap:.9rem 2.5rem;margin-top:.4rem;
+  padding-top:clamp(.9rem,2vw,1.3rem);border-top:1px solid var(--line)}
+.pk-phones div{display:grid;gap:.2rem}
+.pk-phones span{font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--fg-soft)}
+.pk-phones a{font-family:var(--f-display);font-size:calc(1.55rem * var(--t-mid));
+  color:var(--accent);transition:color .3s}
+.pk-phones a:hover{color:var(--fg)}
+
 .pk-cta{position:relative;overflow:hidden;
   background:linear-gradient(115deg,var(--gold-deep),var(--gold) 48%,var(--gold-light));
   color:var(--black);text-align:center}

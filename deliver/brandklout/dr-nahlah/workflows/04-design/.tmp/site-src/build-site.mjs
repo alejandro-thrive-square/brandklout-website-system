@@ -130,6 +130,10 @@ const PAGES = [
   // Lorem Ipsum on the client's live site, so there is nothing to rebuild from
   // and privacy-policy took the slot. See SITE.md.
   { slug: "privacy-policy", journey: 0, navKey: null },
+  { slug: "terms-conditions", journey: 0, navKey: null },
+  // The destination for the consultation request. Replaces the old site's two
+  // identical survey thank-you pages; noindex, so it never surfaces in search.
+  { slug: "thank-you", journey: 0, navKey: null },
 ];
 
 /* Escape for an HTML text node or a double-quoted attribute. seo.json holds
@@ -146,13 +150,19 @@ function seoBlock(slug) {
   const lines = [
     `<title>${esc(m.title)}</title>`,
     `<meta name="description" content="${esc(m.desc)}">`,
+  ];
+  // Only emitted when a page asks for it. A confirmation page has nothing to
+  // rank for, and indexing one puts a result in front of searchers telling them
+  // their form was submitted when it was not.
+  if (m.robots) lines.push(`<meta name="robots" content="${esc(m.robots)}">`);
+  lines.push(...[
     `<meta property="og:title" content="${esc(m.ogTitle)}">`,
     `<meta property="og:description" content="${esc(m.ogDesc)}">`,
     `<meta property="og:type" content="website">`,
     `<meta name="twitter:card" content="summary_large_image">`,
     `<meta name="twitter:title" content="${esc(m.ogTitle)}">`,
     `<meta name="twitter:description" content="${esc(m.ogDesc)}">`,
-  ];
+  ]);
   if (m.jsonLd) {
     lines.push(`<script type="application/ld+json">\n${JSON.stringify(m.jsonLd, null, 2)}\n</script>`);
   }

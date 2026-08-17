@@ -1357,5 +1357,34 @@
         }
       ]
     }
+  },
+  "terms-conditions": {
+    "title": "Terms & Conditions | Dr. Nahlah Implants & Prosthodontics | McLean, VA",
+    "desc": "The terms, conditions and notices governing your use of this website, including third-party links, permitted use and the liability disclaimer.",
+    "ogTitle": "Terms & Conditions | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "The terms governing your use of this website.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Terms and conditions",
+          "description": "The terms, conditions and notices governing use of this website.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "thank-you": {
+    "title": "Thank You | Dr. Nahlah Implants & Prosthodontics | McLean, VA",
+    "desc": "Your consultation request has reached the practice. Here is what happens next, and how to reach us directly if it cannot wait.",
+    "ogTitle": "Request received | Dr. Nahlah",
+    "ogDesc": "What happens next after a consultation request.",
+    "robots": "noindex, follow"
   }
 }

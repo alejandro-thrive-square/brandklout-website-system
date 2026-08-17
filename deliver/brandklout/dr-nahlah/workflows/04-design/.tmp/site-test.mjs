@@ -22,7 +22,7 @@ const PAGES = (process.argv[3] || [
   "about", "our-team", "our-facility",
   "cosmetic-dentistry", "teeth-whitening", "crowns-and-bridges", "oral-surgery",
   "emergency-dentistry", "dental-conditions", "implant-supported-dentures", "dental-implant-faq",
-  "patient-center", "financing", "doctor-referral", "privacy-policy",
+  "patient-center", "financing", "doctor-referral", "privacy-policy", "terms-conditions", "thank-you",
 ].join(",")).split(",");
 
 const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
