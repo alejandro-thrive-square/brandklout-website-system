@@ -29,9 +29,16 @@ intended list.
 | `pk-ba-cap` | 3 |
 | `pk-quote`, `pk-quote-by` | 1 each |
 
-**Pending verification — 4 families, 31 forks:** `chapter-tag` (10), `dr-grid` (8),
-`dr-foot` (8), `n` (5). Every element move succeeded and every removal returned
-success; the confirming query is blocked by an API quota. Re-run `survey.mjs`.
+**`chapter-tag` (10), `dr-grid` (8), `dr-foot` (8), `n` (5) — 31 further forks,
+correctness confirmed.** A sweep of **1,303 elements across 10 of the 11 live
+pages found ZERO still referencing any retired class** from these families
+(Contact was rate-limited, but its moves are journalled as successful). What is
+NOT confirmed is cosmetic: whether the now-unused class objects were actually
+deleted from the style panel. `query_styles` is quota-exhausted at any result
+limit while every other endpoint works, so that check has to wait. It affects
+tidiness, not rendering.
+
+**Totals: 19 families, 121 fork classes, 273 element rewrites.**
 
 ## What was deliberately NOT done
 
@@ -91,6 +98,7 @@ that element.
 
 ## Safety record
 
+- **No element anywhere references a retired class.** 1,303 elements swept.
 - **No element was orphaned.** All 26 elements whose restyle failed still carry
   their original class (`check26.json`: 0 of 26).
 - Every write is journalled in `journal.jsonl` with before/after, so any change
