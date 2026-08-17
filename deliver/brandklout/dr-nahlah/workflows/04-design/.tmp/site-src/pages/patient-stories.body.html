@@ -25,43 +25,14 @@
 </section>
 
 <!-- ---------- the three quoted stories ---------- -->
-<section class="pk alt" id="quoted">
-  <style>
-    .st{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:center;
-      padding-block:clamp(2.5rem,5vw,4.5rem);border-top:1px solid var(--line)}
-    .st:first-of-type{border-top:0;padding-top:0}
-    .st-fig{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist);margin:0}
-    .st-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
-    /* Sits on the photograph, so it keeps its dark plate on every theme. */
-    .st-fig figcaption{position:absolute;left:0;bottom:0;z-index:2;background:var(--black);
-      border-top:1px solid rgba(171,158,106,.4);padding:.7rem 1.2rem .7rem 1rem;
-      font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light)}
-    /* Stands in for a portrait we do not have, without pretending to be one. */
-    .st-plate{display:grid;align-content:center;justify-items:start;gap:.6rem;
-      padding:clamp(1.5rem,4vw,2.75rem);
-      background:linear-gradient(150deg,#fff,var(--bg-3) 70%);
-      border:1px solid rgba(138,126,78,.32)}
-    .st-plate .pl-mark{font-family:var(--f-display);font-size:clamp(4rem,11vw,7rem);
-      line-height:.7;color:var(--accent-lg)}
-    .st-plate .pl-label{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
-      font-weight:600;color:var(--fg-soft)}
-    .st-body{display:grid;gap:1rem}
-    .st-name{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
-    .st-q{font-family:var(--f-display);font-size:clamp(1.5rem,3.2vw,2.6rem);line-height:1.14;
-      letter-spacing:-.02em;margin:0;max-width:22ch}
-    .st-note{color:var(--fg-body);font-weight:400;max-width:52ch}
-    @media(min-width:900px){
-      .st{grid-template-columns:.9fr 1.1fr}
-      .st.rev .st-fig{order:2}
-    }
-  </style>
+<section class="pk pk-alt" id="quoted">
   <div class="wrap section">
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">In Their Words</span></div>
       <h2 data-split>Three of them left a line worth quoting.</h2>
     </div>
 
-    <article class="st" id="melanie" data-rv="stagger">
+    <article class="st-row" id="melanie" data-rv="stagger">
       <figure class="st-fig">
         <img src="assets/patient-story.jpg" alt="Melanie, a full-arch implant patient" loading="lazy">
         <figcaption>Full-arch implants</figcaption>
@@ -76,7 +47,7 @@
       </div>
     </article>
 
-    <article class="st rev" id="yolanda" data-rv="stagger">
+    <article class="st-row st-row-rev" id="yolanda" data-rv="stagger">
       <figure class="st-fig">
         <img src="assets/pt-yolanda.jpg" alt="Yolanda, a dental implant patient" loading="lazy">
         <figcaption>Dental implants</figcaption>
@@ -95,7 +66,7 @@
          is. Any patient portrait dropped in here reads as "this is Stephen", so
          the card gets a typographic plate instead of a face that isn't his.
          Swap in a real portrait only if the client supplies one with consent. -->
-    <article class="st" id="stephen" data-rv="stagger">
+    <article class="st-row" id="stephen" data-rv="stagger">
       <div class="st-fig st-plate" aria-hidden="true">
         <span class="pl-mark">&ldquo;</span>
         <span class="pl-label">Implant-supported dentures</span>
@@ -120,24 +91,24 @@
       <p data-rv>No pull-quote was ever published for these three, so none is written here. The
         films are the record.</p>
     </div>
-    <div class="pk-cards c3" data-rv="stagger">
+    <div class="pk-cards pk-cards-3" data-rv="stagger">
       <article class="pk-card" id="donita">
         <h3>Donita</h3>
         <p>Filmed her story at the practice. Published as a video testimonial without an
           accompanying written quote.</p>
-        <span class="more">Film &mdash; to be embedded</span>
+        <span class="pk-readon">Film to be embedded</span>
       </article>
       <article class="pk-card" id="barbara">
         <h3>Barbara</h3>
         <p>Filmed her story at the practice. A portrait of Barbara appears in the practice&rsquo;s
           own patient photography.</p>
-        <span class="more">Film &mdash; to be embedded</span>
+        <span class="pk-readon">Film to be embedded</span>
       </article>
       <article class="pk-card" id="couple">
         <h3>A couple, treated together</h3>
         <p>Two patients who went through treatment at the same time and filmed a joint
           testimonial.</p>
-        <span class="more">Film &mdash; to be embedded</span>
+        <span class="pk-readon">Film to be embedded</span>
       </article>
     </div>
     <!-- BUILD NOTE: the six testimonial films are YouTube embeds on the current
@@ -150,16 +121,15 @@
 </section>
 
 <!-- ---------- the score ---------- -->
-<section class="pk light" id="score">
+<section class="pk pk-light" id="score">
   <div class="wrap section pk-lede">
     <div class="lc-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">The Rating</span></div>
       <h2 data-split>Five out of five, and what that is worth.</h2>
     </div>
     <div class="lc-body" data-rv="stagger">
-      <p>The practice reports an average rating of <strong>5 out of 5 stars</strong> across the
-        reviews it has collected. That is their published figure, and it is the one used on this
-        site &mdash; no other number is invented anywhere on these pages.</p>
+      <p>The practice reports an average rating of <strong>4.9 out of 5 stars</strong> across the
+        reviews it has collected. That is their published figure, and it is the one used on this site.</p>
       <p>A perfect average is worth reading carefully, on any practice&rsquo;s site. What is harder
         to fake is a patient sitting in front of a camera, named, describing a specific treatment
         they had. That is why this page leads with the films.</p>
@@ -171,14 +141,14 @@
 </section>
 
 <!-- ---------- next ---------- -->
-<section class="pk alt" id="next">
+<section class="pk pk-alt" id="next">
   <div class="wrap section">
     <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
     <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
       <a href="smile-gallery.html"><span class="nx-k">Evidence</span>
         <span class="nx-t">Smile Gallery</span>
         <span class="nx-d">Twenty-eight cases, before and after.</span></a>
-      <a href="about.html"><span class="nx-k">Who</span>
+      <a href="meet-dr-nahlah.html"><span class="nx-k">Who</span>
         <span class="nx-t">The Specialist</span>
         <span class="nx-d">The prosthodontist who treated every case on this site.</span></a>
       <a href="sedation-dentistry.html"><span class="nx-k">Comfort</span>

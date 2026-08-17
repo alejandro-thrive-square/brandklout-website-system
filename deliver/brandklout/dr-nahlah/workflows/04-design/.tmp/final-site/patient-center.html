@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
+     by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
+     Designer carries. Do not hand-edit the output; edit seo.json. -->
+<title>Your First Visit | What to Expect, Step by Step | McLean, VA</title>
+<meta name="description" content="The first appointment in eight steps: welcome, the team, an office tour, consultation, digital X-rays, examination, hygiene cleaning and complimentary gifts. Sedation available.">
+<meta property="og:title" content="Your First Visit | Dr. Nahlah, McLean &amp; Alexandria">
+<meta property="og:description" content="Eight steps, in order, so nothing on the day is a surprise and none of it is a sales pitch.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Your First Visit | Dr. Nahlah, McLean &amp; Alexandria">
+<meta name="twitter:description" content="Eight steps, in order, so nothing on the day is a surprise and none of it is a sales pitch.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Your first visit",
+      "description": "What to expect at a first appointment with Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
+      "isPartOf": {
+        "@id": "/#website"
+      },
+      "about": {
+        "@id": "/#practice"
+      }
+    }
+  ]
+}
+</script>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
+     from site-src/css/*.css in filename order, which IS the cascade order:
+
+       00  fluid root font-size  generated; deliver/process/04-design/fluid-root.md
+       01  design tokens         palette, theme layer, type steps
+       02  base                  reset and the shared primitives
+       10-12  chrome             nav, drawer, footer
+       20  page kit              the shared interior-page section vocabulary
+       30-38  home chapters      the nine bespoke chapters of the journey
+       50-59  page overrides     rules only one page needs
+
+     Every page loads the same file, so moving a section from one page to another
+     means moving the markup and nothing else. It also means the rules exist once
+     rather than being re-emitted into all 26 pages.
+     ========================================================================== -->
+<link rel="stylesheet" href="assets/site.css">
+
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead.
+     The runtime itself is NOT here: it lives in assets/site.js at the end of
+     <body>, because ScrollTrigger has to be registered after document.body
+     exists or ScrollSmoother dies on getScrollFunc. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+</head>
+
+<body>
+
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<header class="nav" id="nav" data-journey="0">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap no-rail nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+      <img src="assets/logo.png" alt="Dr. Nahlah — Implants and Prosthodontics Specialists">
+    </a>
+    <nav class="nav-slot" aria-label="Primary">
+      <!-- The current-page highlight is baked in here at build time. In Webflow
+           the Navbar is ONE shared component, so it cannot be: the conversion
+           turns these five placeholders into a pathname -> href map in the
+           footer custom code. When a slug changes, that map has to change with
+           it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
+           there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
+      <div class="nav-links">
+        <a href="dental-implants.html">Implants</a>
+        <a href="smile-makeover.html">Cosmetic</a>
+        <a href="smile-gallery.html">Smile Gallery</a>
+        <a href="meet-dr-nahlah.html" aria-current="page">The Specialist</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
+      <span class="nav-close" aria-hidden="true">Close</span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full site index. Opens at every breakpoint, so it is the site's real
+     navigation rather than a mobile-only fallback. -->
+<div class="drawer" id="drawer" aria-hidden="true" data-theme="dark">
+  <div class="dr-grid">
+    <div class="dr-col">
+      <h4>Implant Dentistry</h4>
+      <ul>
+        <li><a href="dental-implants.html">Dental Implants</a></li>
+        <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-supported-dentures.html">Fixed vs. Removable</a></li>
+        <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+        <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="emergency-dentistry.html">Emergency Dentistry</a></li>
+        <li><a href="dental-conditions.html">Conditions We Treat</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Aesthetics</h4>
+      <ul>
+        <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
+        <li><a href="smile-makeover.html">Smile Makeover</a></li>
+        <li><a href="veneers.html">Porcelain Veneers</a></li>
+        <li><a href="crowns-and-bridges.html">Crowns &amp; Bridges</a></li>
+        <li><a href="teeth-whitening.html">Teeth Whitening</a></li>
+        <li><a href="smile-gallery.html">Smile Gallery</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Who We Are</h4>
+      <ul>
+        <li><a href="about.html">Why Choose Us</a></li>
+        <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+        <li><a href="our-team.html">Meet the Team</a></li>
+        <li><a href="our-facility.html">Our Facility</a></li>
+        <li><a href="patient-stories.html">Patient Stories</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>What To Expect</h4>
+      <ul>
+        <li><a href="patient-center.html">Your First Visit</a></li>
+        <li><a href="financing.html">Insurance &amp; Financing</a></li>
+        <li><a href="contact.html">Contact &amp; Locations</a></li>
+        <li><a href="doctor-referral.html">For Referring Doctors</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dr-foot">
+    <div><b>Tysons Corner &middot; McLean</b>
+      New patients <a href="tel:+15716199442">(571) 619-9442</a><br>
+      Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
+    <div><b>Alexandria</b>
+      New patients <a href="tel:+15714103430">(571) 410-3430</a><br>
+      Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
+    <div><b>Hours</b>
+      Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
+      Fri 8:00am &ndash; 2:00pm &middot; Sat &amp; Sun closed</div>
+  </div>
+</div>
+
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     PATIENT CENTER — from drnahlah.com/patient-center/, whose own <h1> is
+     "First Visit". That is the better name for what the page does, and the
+     rebuild is built around the eight-step first visit rather than around the
+     vaguer "patient center" label the nav gives it.
+
+     All eight steps, the laser technology, the sedation offer, the insurance
+     partnerships and the complimentary gifts are verbatim in substance.
+
+     The "Why Is An In-House Dental Lab So Important?" video is not hot-linked
+     — wire it at Webflow build time. Its subject is covered in prose on
+     our-facility.html and our-team.html instead.
+     ========================================================================== -->
+<section class="pg-hero" id="hero">
+  <div class="ph-bg">
+    <img src="assets/pt-interaction.jpg" alt="A patient being welcomed at the practice" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Your First Visit</span></div>
+    <h1 data-split>You will love how we treat you <em>here</em>.</h1>
+    <p class="ph-lead" data-rv>Eight steps, in order, so you know exactly what the first appointment is before you arrive. Nothing on this list is a surprise, and nothing on it is a sales pitch.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Reserve an appointment</span></a>
+      <a class="btn btn-ghost magnetic" href="#visit"><span>What to expect</span></a>
+    </div>
+    <div class="ph-meta" data-rv="stagger">
+      <div><b>8 steps</b><span>Your first visit</span></div>
+      <div><b>Sedation</b><span>If you need it</span></div>
+      <div><b>Most PPOs</b><span>Insurance accepted</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- welcome ---------- -->
+<section class="pk pk-alt" id="welcome">
+  <div class="wrap section pk-lede">
+    <div class="lc-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Welcome</span></div>
+      <h2 data-split>Visiting a dental office is not most people's priority.</h2>
+    </div>
+    <div class="lc-body">
+      <p data-rv>The practice starts from that assumption rather than from the opposite one. What
+        it can control is that the visit itself is comfortable, personalized, and short on the
+        things that make people put it off.</p>
+      <p data-rv>That means seasoned dental professionals, <strong>minimally invasive laser
+        technology</strong>, and a deliberately calm atmosphere &mdash; and for patients who deal
+        with real dental anxiety, <strong>sedation offered as needed</strong> rather than treated as
+        an unusual request.</p>
+      <p data-rv>It also means the money conversation is not left until you are already committed.
+        The practice partners with multiple leading insurance providers because oral health that
+        only some people can afford is not much of an offer.</p>
+      <p data-rv><a class="pk-more" href="financing.html">Insurance and financing</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the eight steps ---------- -->
+<section class="pk pk-light" id="visit">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Your First Visit</span></div>
+      <h2 data-split>Eight steps, in this order.</h2>
+      <p>If you are coming in for an emergency this sequence changes &mdash; you will be treated
+        first and processed afterwards.</p>
+    </div>
+    <div class="pk-cards pk-cards-4" data-rv="stagger">
+      <article class="pk-card">
+        <span class="pk-card-n">01</span>
+        <h3>A warm welcome</h3>
+        <p>Somebody is there the moment you step inside. The front office staff build close
+          relationships with patients on purpose; it is the first thing the practice is trying to be
+          good at.</p>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">02</span>
+        <h3>Meet the team</h3>
+        <p>You are introduced to the people who will look after you on every visit. It is perfectly
+          fine not to remember their names. They make a point of remembering yours.</p>
+        <a class="pk-readon" href="our-team.html">Meet the team</a>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">03</span>
+        <h3>An office tour</h3>
+        <p>Where the exam rooms are, where the restrooms are, where the exits are. Knowing the way
+          out is a small thing that matters a great deal to anxious patients.</p>
+        <a class="pk-readon" href="our-facility.html">See the facility</a>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">04</span>
+        <h3>Consultation</h3>
+        <p>A personal conversation with the dentist. This is the moment to say what you like and
+          dislike about your smile, and to raise whatever you have been living with.</p>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">05</span>
+        <h3>Digital X-rays</h3>
+        <p>An in-depth view of the structures under the surface. The high-resolution images are what
+          make small cracks, cavities and early problems visible before they announce themselves.</p>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">06</span>
+        <h3>Examination</h3>
+        <p>A detailed examination of tissues, gums, bone and teeth by Dr. Nahlah, checking for decay,
+          disease and infection &mdash; and including an <strong>oral cancer screening</strong>.</p>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">07</span>
+        <h3>Hygiene cleaning</h3>
+        <p>Plaque and tartar removed, every tooth flossed individually, then polished. This is also
+          where you meet the hygienist you will be seeing every six months.</p>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">08</span>
+        <h3>You leave with gifts</h3>
+        <p>Floss or floss-ups, toothpaste and a new toothbrush, every time &mdash; so the routine
+          carries on at home rather than restarting at the next appointment.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- affordability ---------- -->
+<section class="pk" id="affordable">
+  <div class="wrap section pk-split pk-split-rev">
+    <figure class="sp-fig" style="margin:0">
+      <img src="assets/financing-card.jpg" alt="A patient paying for treatment" data-drift loading="lazy">
+    </figure>
+    <div class="sp-copy">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Affordability</span></div>
+      <h2 data-split>Healthy smiles for life, at a price that survives contact with a budget.</h2>
+      <p data-rv>Many dental insurance plans are accepted, and the practice will help you get the
+        most out of the benefits you already have &mdash; which is frequently more than people
+        realize they are entitled to.</p>
+      <p data-rv>If you have no dental insurance at all, that is a different conversation rather
+        than the end of one. The practice partners with third-party financing companies offering
+        low monthly payment plans for the costlier procedures.</p>
+      <p data-rv><a class="pk-more" href="financing.html">All payment options</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- next ---------- -->
+<section class="pk pk-alt" id="next">
+  <div class="wrap section">
+    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
+    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
+      <a href="financing.html"><span class="nx-k">Paying for it</span>
+        <span class="nx-t">Insurance &amp; Financing</span>
+        <span class="nx-d">Five payment forms and three financing partners.</span></a>
+      <a href="our-facility.html"><span class="nx-k">Where you are going</span>
+        <span class="nx-t">Our Facility</span>
+        <span class="nx-d">The tour, before you take the tour.</span></a>
+      <a href="sedation-dentistry.html"><span class="nx-k">If you are anxious</span>
+        <span class="nx-t">Sedation Dentistry</span>
+        <span class="nx-d">Nitrous, oral and IV, and who is credentialed to give them.</span></a>
+    </nav>
+  </div>
+</section>
+
+<!-- ---------- cta ---------- -->
+<section class="pk pk-cta" id="book">
+  <div class="wrap section cta-in">
+    <h2 data-split>You are welcome here.</h2>
+    <p data-rv>Schedule your new patient appointment. Now that you know all eight steps, there is
+      nothing left on the day to be surprised by.</p>
+    <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Reserve your appointment</span></a>
+    <div class="cta-phones" data-rv>
+      <span>McLean &middot; <a href="tel:+15716199442">(571) 619-9442</a></span>
+      <span>Alexandria &middot; <a href="tel:+15714103430">(571) 410-3430</a></span>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="foot" data-theme="dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo.png" alt="Dr. Nahlah">
+        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+          smiles that other practices call too complex.</p>
+      </div>
+      <div>
+        <h4>Treatments</h4>
+        <ul>
+          <li><a href="dental-implants.html">Dental Implants</a></li>
+          <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+          <li><a href="smile-makeover.html">Smile Makeover</a></li>
+          <li><a href="veneers.html">Porcelain Veneers</a></li>
+          <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="smile-gallery.html">Smile Gallery</a></li>
+          <li><a href="patient-stories.html">Patient Stories</a></li>
+          <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+          <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+          <li><a href="contact.html">Contact &amp; Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul class="foot-facts">
+          <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
+          <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
+          <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
+        </ul>
+        <ul style="margin-top:1.1rem">
+          <li><a href="tel:+15716199442">McLean &middot; (571) 619-9442</a></li>
+          <li><a href="tel:+15714103430">Alexandria &middot; (571) 410-3430</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+      <span>McLean &middot; Alexandria, Virginia</span>
+      <!-- The legal links belong in the base row, not in the drawer's site map:
+           they are what people go looking for in a footer by habit. -->
+      <span><a href="privacy-policy.html">Privacy Policy</a></span>
+      <span><a href="terms-conditions.html">Terms &amp; Conditions</a></span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
+</body>
+</html>

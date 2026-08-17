@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
+     by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
+     Designer carries. Do not hand-edit the output; edit seo.json. -->
+<title>All-on-4 Full Arch Dental Implants | McLean &amp; Alexandria</title>
+<meta name="description" content="Four implants, a fixed provisional arch the same day, and a definitive zirconia bridge. Planned and placed by a board-certified prosthodontist.">
+<meta property="og:title" content="All-on-4 Full Arch Implants | Dr. Nahlah">
+<meta property="og:description" content="A fixed arch on four implants, placed in a single visit under sedation.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="All-on-4 Full Arch Implants | Dr. Nahlah">
+<meta name="twitter:description" content="A fixed arch on four implants, placed in a single visit under sedation.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalWebPage",
+      "name": "All-on-4 full arch dental implants",
+      "description": "Four implants, a fixed provisional arch the same day, and a definitive zirconia bridge.",
+      "isPartOf": {
+        "@id": "/#website"
+      },
+      "about": {
+        "@id": "/#practice"
+      }
+    },
+    {
+      "@type": "MedicalProcedure",
+      "name": "All-on-4 full arch dental implants",
+      "description": "Four implants, a fixed provisional arch the same day, and a definitive zirconia bridge.",
+      "bodyLocation": "Jaw",
+      "performerType": "Board-certified prosthodontist",
+      "provider": {
+        "@id": "/#practice"
+      }
+    },
+    {
+      "@type": "FAQPage",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "Will I leave surgery without teeth?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "No. In most cases you leave the same visit wearing a fixed PMMA provisional prosthesis, which stays in place while the implants integrate."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Can All-on-4 do both jaws?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes: upper, lower, or both. Cases are described here as single arch or double arch for exactly that reason."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What if I have bone loss?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "All-on-4 is often the answer because of bone loss: the rear implants are angled to reach denser bone. Some cases still need grafting first, which the cone-beam scan determines at the consultation."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What sedation is available?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Nitrous oxide, oral sedation and IV sedation. Oral and IV are administered by a medical anaesthesiologist and need transport arranged both ways."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How long until it is finished?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Three to four months from surgery to the final zirconia prosthesis, then a further two to four months for complete healing around it."
+          }
+        }
+      ]
+    }
+  ]
+}
+</script>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
+     from site-src/css/*.css in filename order, which IS the cascade order:
+
+       00  fluid root font-size  generated; deliver/process/04-design/fluid-root.md
+       01  design tokens         palette, theme layer, type steps
+       02  base                  reset and the shared primitives
+       10-12  chrome             nav, drawer, footer
+       20  page kit              the shared interior-page section vocabulary
+       30-38  home chapters      the nine bespoke chapters of the journey
+       50-59  page overrides     rules only one page needs
+
+     Every page loads the same file, so moving a section from one page to another
+     means moving the markup and nothing else. It also means the rules exist once
+     rather than being re-emitted into all 26 pages.
+     ========================================================================== -->
+<link rel="stylesheet" href="assets/site.css">
+
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead.
+     The runtime itself is NOT here: it lives in assets/site.js at the end of
+     <body>, because ScrollTrigger has to be registered after document.body
+     exists or ScrollSmoother dies on getScrollFunc. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+</head>
+
+<body>
+
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<header class="nav" id="nav" data-journey="0">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap no-rail nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+      <img src="assets/logo.png" alt="Dr. Nahlah — Implants and Prosthodontics Specialists">
+    </a>
+    <nav class="nav-slot" aria-label="Primary">
+      <!-- The current-page highlight is baked in here at build time. In Webflow
+           the Navbar is ONE shared component, so it cannot be: the conversion
+           turns these five placeholders into a pathname -> href map in the
+           footer custom code. When a slug changes, that map has to change with
+           it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
+           there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
+      <div class="nav-links">
+        <a href="dental-implants.html" aria-current="page">Implants</a>
+        <a href="smile-makeover.html">Cosmetic</a>
+        <a href="smile-gallery.html">Smile Gallery</a>
+        <a href="meet-dr-nahlah.html">The Specialist</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
+      <span class="nav-close" aria-hidden="true">Close</span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full site index. Opens at every breakpoint, so it is the site's real
+     navigation rather than a mobile-only fallback. -->
+<div class="drawer" id="drawer" aria-hidden="true" data-theme="dark">
+  <div class="dr-grid">
+    <div class="dr-col">
+      <h4>Implant Dentistry</h4>
+      <ul>
+        <li><a href="dental-implants.html">Dental Implants</a></li>
+        <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-supported-dentures.html">Fixed vs. Removable</a></li>
+        <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+        <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="emergency-dentistry.html">Emergency Dentistry</a></li>
+        <li><a href="dental-conditions.html">Conditions We Treat</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Aesthetics</h4>
+      <ul>
+        <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
+        <li><a href="smile-makeover.html">Smile Makeover</a></li>
+        <li><a href="veneers.html">Porcelain Veneers</a></li>
+        <li><a href="crowns-and-bridges.html">Crowns &amp; Bridges</a></li>
+        <li><a href="teeth-whitening.html">Teeth Whitening</a></li>
+        <li><a href="smile-gallery.html">Smile Gallery</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Who We Are</h4>
+      <ul>
+        <li><a href="about.html">Why Choose Us</a></li>
+        <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+        <li><a href="our-team.html">Meet the Team</a></li>
+        <li><a href="our-facility.html">Our Facility</a></li>
+        <li><a href="patient-stories.html">Patient Stories</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>What To Expect</h4>
+      <ul>
+        <li><a href="patient-center.html">Your First Visit</a></li>
+        <li><a href="financing.html">Insurance &amp; Financing</a></li>
+        <li><a href="contact.html">Contact &amp; Locations</a></li>
+        <li><a href="doctor-referral.html">For Referring Doctors</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dr-foot">
+    <div><b>Tysons Corner &middot; McLean</b>
+      New patients <a href="tel:+15716199442">(571) 619-9442</a><br>
+      Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
+    <div><b>Alexandria</b>
+      New patients <a href="tel:+15714103430">(571) 410-3430</a><br>
+      Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
+    <div><b>Hours</b>
+      Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
+      Fri 8:00am &ndash; 2:00pm &middot; Sat &amp; Sun closed</div>
+  </div>
+</div>
+
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     ALL-ON-4 — full-arch. Rewritten from drnahlah.com/all-on-4/ and
+     /all-on-four-your-questions/. Facts kept verbatim in substance: four posts
+     per arch, PMMA provisional the same day, 3-4 months to the zirconia final,
+     a further 2-4 months to complete healing, warranty with Precare, free
+     second opinions, nitrous / oral / IV sedation.
+     ========================================================================== -->
+<section class="pg-hero" id="hero">
+  <div class="ph-bg">
+    <img src="assets/pt-hero-1.jpg" alt="Yolanda, a full-arch implant patient of the practice" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i>
+      <a href="dental-implants.html">Implants</a><i></i><span>All-on-4</span></div>
+    <h1 data-split>A whole arch. <em>Four</em> implants. One day.</h1>
+    <p class="ph-lead" data-rv>Where a single implant carries one tooth, All-on-4 carries an entire
+      upper or lower arch on four titanium posts. Most patients walk out of surgery with a fixed
+      provisional set of teeth already in place.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a consultation</span></a>
+      <a class="btn btn-ghost magnetic" href="#cases"><span>See the arches</span></a>
+    </div>
+    <div class="ph-meta" data-rv="stagger">
+      <div><b>4 posts</b><span>Per arch, upper or lower</span></div>
+      <div><b>Same day</b><span>PMMA provisional teeth</span></div>
+      <div><b>3&ndash;4 mo</b><span>To the zirconia final</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the argument ---------- -->
+<section class="pk pk-alt" id="why">
+  <div class="wrap section pk-lede">
+    <div class="lc-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Why Four</span></div>
+      <h2 data-split>Angled posts reach the bone you still have.</h2>
+    </div>
+    <div class="lc-body" data-rv="stagger">
+      <p>A failing arch usually comes with bone loss, and the traditional answer was to graft for a
+        year before anyone could place anything. All-on-4 works the other way round: the two rear
+        implants are <strong>angled forward</strong> into the denser bone at the front of the jaw,
+        so four posts can carry a full arch without rebuilding the back of the mouth first.</p>
+      <p>That is why it is more cost-effective than replacing every tooth with its own implant, and
+        why patients with a failing dentition or severe bone loss are often still candidates.</p>
+      <p>It is also why placement angle matters so much. Each post has to land at an exact angle,
+        depth and position, or the arch above it will never load evenly. Surgical planning is done
+        digitally from the cone-beam scan and delivered through a computer-generated
+        <strong>surgical guide</strong>.</p>
+      <a class="pk-more" href="dental-implants.html">How implants work generally</a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the four steps ---------- -->
+<section class="pk pk-light" id="steps">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">The Sequence</span></div>
+      <h2 data-split>Four visits, and one of them is the day it changes.</h2>
+    </div>
+    <div class="pk-cards pk-cards-4" data-rv="stagger">
+      <article class="pk-card">
+        <span class="pk-card-n">01</span>
+        <h3>Consultation &amp; cone-beam scan</h3>
+        <p>A full-mouth examination and a 3D scan establish whether there is enough bone. You see
+          real before-and-after cases, and pricing, insurance and financing are discussed then, not later.</p>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">02</span>
+        <h3>Transformation day</h3>
+        <p>The four posts go in, in a single visit, under nitrous, oral or IV sedation. You leave
+          the same day wearing a fixed PMMA provisional arch, not a removable denture.</p>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">03</span>
+        <h3>Healing &amp; follow-ups</h3>
+        <p>Three to four months while the posts fuse with the jaw, with review appointments along
+          the way to check integration and adjust the provisional.</p>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">04</span>
+        <h3>The zirconia final</h3>
+        <p>The definitive prosthesis is fitted. A further two to four months completes healing
+          around it. After that it is brushed and flossed like teeth.</p>
+      </article>
+    </div>
+    <div class="pk-stats" data-rv="stagger" style="margin-top:clamp(2.5rem,5vw,4rem)">
+      <div><b data-count="4">4</b><span>Implants per arch</span></div>
+      <div><b data-count="1" data-suffix=" visit">1 visit</b><span>Surgical placement</span></div>
+      <div><b data-count="0">0</b><span>Nights without teeth</span></div>
+      <div><b data-count="6" data-suffix=" mo">6 mo</b><span>Precare cleanings, for warranty</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- vs dentures ---------- -->
+<section class="pk" id="vs">
+  <div class="wrap section pk-split pk-split-rev">
+    <figure class="sp-fig" style="margin:0">
+      <img src="assets/pt-interaction-5.jpg" alt="Consultation at the practice in McLean" data-drift loading="lazy">
+    </figure>
+    <div class="sp-copy">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Against A Denture</span></div>
+      <h2 data-split>Nothing comes out at night.</h2>
+      <p data-rv>A conventional denture rests on gum tissue, moves against it, and needs taking out.
+        A full arch on implants is screwed down. The difference shows up in comfort first and in
+        bone second.</p>
+      <ul class="sp-list" data-rv="stagger">
+        <li><i></i>Far less prone to slipping or moving over time</li>
+        <li><i></i>Less friction on the gums, so less pain, inflammation and infection risk</li>
+        <li><i></i>Supports jaw and facial bone structure instead of accelerating its loss</li>
+        <li><i></i>Easier hygiene: brushed and flossed like natural teeth</li>
+        <li><i></i>Lower long-term cost: less relining, repair and replacement</li>
+      </ul>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- cases ---------- -->
+<section class="pk pk-alt" id="cases">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Real Arches</span></div>
+      <h2 data-split>Drag the line across a real case.</h2>
+      <p data-rv>Every pair below is a patient of this practice. Single arch means one jaw was
+        restored; double means both.</p>
+    </div>
+    <div class="pk-ba-grid pk-ba-grid-3" data-rv="stagger">
+      <figure style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-ao4-double-1-before.jpg" alt="Before: both arches failing" loading="lazy">
+          <img class="ba-img-after" src="assets/case-ao4-double-1-after.jpg" alt="After: both arches restored on implants" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower on implants</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-ao4-double-9-before.jpg" alt="Before: failing upper and lower dentition" loading="lazy">
+          <img class="ba-img-after" src="assets/case-ao4-double-9-after.jpg" alt="After: fixed full-arch restoration" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; fixed zirconia prosthesis</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-ao4-single-2-before.jpg" alt="Before: failing upper arch" loading="lazy">
+          <img class="ba-img-after" src="assets/case-ao4-single-2-after.jpg" alt="After: upper arch restored on four implants" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
+        </div>
+        <figcaption class="pk-ba-cap">Single arch &middot; upper restored on four implants</figcaption>
+      </figure>
+    </div>
+    <p style="margin-top:clamp(1.5rem,3vw,2.25rem)" data-rv>
+      <a class="pk-more" href="smile-gallery.html">All sixteen full-arch cases</a></p>
+  </div>
+</section>
+
+<!-- ---------- quote ---------- -->
+<section class="pk" id="quote">
+  <div class="wrap section pk-split">
+    <figure class="sp-fig" style="margin:0">
+      <img src="assets/patient-story.jpg" alt="Melanie holding a photograph of her smile before treatment" data-drift loading="lazy">
+    </figure>
+    <div class="sp-copy" data-rv="stagger">
+      <span class="pk-quote-mark" aria-hidden="true">&ldquo;</span>
+      <blockquote class="pk-quote" style="margin:0">My smile held me back. That&rsquo;s behind me
+        due to my dental implants.</blockquote>
+      <div class="pk-quote-by">Melanie &middot; full-arch implant patient</div>
+      <p><a class="pk-more" href="patient-stories.html">Watch her tell it</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- guarantees ---------- -->
+<section class="pk pk-alt" id="assurances">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">What Is Included</span></div>
+      <h2 data-split>The commitments that come with it.</h2>
+    </div>
+    <div class="pk-cards pk-cards-3" data-rv="stagger">
+      <article class="pk-card">
+        <h3>Immediate load</h3>
+        <p>A fully functional PMMA provisional arch is fitted the same day the implants are placed.
+          You do not go home without teeth.</p>
+      </article>
+      <article class="pk-card">
+        <h3>Warranty with Precare</h3>
+        <p>All-on-4 carries a warranty conditional on Precare: general cleanings every six months,
+          the same interval any set of teeth needs.</p>
+      </article>
+      <article class="pk-card">
+        <h3>Free second opinion</h3>
+        <p>If another practice has quoted you for implant surgery, a second opinion here costs
+          nothing. Bring the plan and the scan.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- faq ---------- -->
+<section class="pk" id="faq">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Questions</span></div>
+      <h2 data-split>Before you book.</h2>
+    </div>
+    <div class="pk-faq" data-rv="stagger">
+      <details>
+        <summary>Will I leave surgery without teeth?</summary>
+        <div class="fa-body">No. In most cases you leave the same visit wearing a fixed PMMA
+          provisional prosthesis, which stays in place while the implants integrate.</div>
+      </details>
+      <details>
+        <summary>Can All-on-4 do both jaws?</summary>
+        <div class="fa-body">Yes: upper, lower, or both. Cases are described here as single arch or
+          double arch for exactly that reason.</div>
+      </details>
+      <details>
+        <summary>What if I have bone loss?</summary>
+        <div class="fa-body">All-on-4 is often the answer <em>because</em> of bone loss: the rear
+          implants are angled to reach denser bone. Some cases still need grafting first, which the
+          cone-beam scan determines at the consultation.</div>
+      </details>
+      <details>
+        <summary>What sedation is available?</summary>
+        <div class="fa-body">Nitrous oxide, oral sedation and IV sedation. Oral and IV are
+          administered by a medical anaesthesiologist and need transport arranged both ways.
+          <a class="pk-readon pk-readon-block" href="sedation-dentistry.html">
+            Sedation options &rarr;</a></div>
+      </details>
+      <details>
+        <summary>How long until it is finished?</summary>
+        <div class="fa-body">Three to four months from surgery to the final zirconia prosthesis, then
+          a further two to four months for complete healing around it.</div>
+      </details>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- next ---------- -->
+<section class="pk pk-alt" id="next">
+  <div class="wrap section">
+    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
+    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
+      <a href="implant-cost.html"><span class="nx-k">Money</span>
+        <span class="nx-t">Cost &amp; Financing</span>
+        <span class="nx-d">What drives the number, and the three lenders the practice works with.</span></a>
+      <a href="smile-gallery.html"><span class="nx-k">Evidence</span>
+        <span class="nx-t">Smile Gallery</span>
+        <span class="nx-d">Twenty-eight cases, before and after, from this practice.</span></a>
+      <a href="meet-dr-nahlah.html"><span class="nx-k">Who</span>
+        <span class="nx-t">The Specialist</span>
+        <span class="nx-d">Twelve credentials, and why a prosthodontist plans this differently.</span></a>
+    </nav>
+  </div>
+</section>
+
+<!-- ---------- cta ---------- -->
+<section class="pk pk-cta" id="book">
+  <div class="wrap section cta-in">
+    <h2 data-split>See whether four will do it.</h2>
+    <p data-rv>The consultation includes the cone-beam scan and a straight answer on candidacy,
+      cost and timeline.</p>
+    <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Book your consult</span></a>
+    <div class="cta-phones" data-rv>
+      <span>McLean &middot; <a href="tel:+15716199442">(571) 619-9442</a></span>
+      <span>Alexandria &middot; <a href="tel:+15714103430">(571) 410-3430</a></span>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="foot" data-theme="dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo.png" alt="Dr. Nahlah">
+        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+          smiles that other practices call too complex.</p>
+      </div>
+      <div>
+        <h4>Treatments</h4>
+        <ul>
+          <li><a href="dental-implants.html">Dental Implants</a></li>
+          <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+          <li><a href="smile-makeover.html">Smile Makeover</a></li>
+          <li><a href="veneers.html">Porcelain Veneers</a></li>
+          <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="smile-gallery.html">Smile Gallery</a></li>
+          <li><a href="patient-stories.html">Patient Stories</a></li>
+          <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+          <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+          <li><a href="contact.html">Contact &amp; Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul class="foot-facts">
+          <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
+          <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
+          <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
+        </ul>
+        <ul style="margin-top:1.1rem">
+          <li><a href="tel:+15716199442">McLean &middot; (571) 619-9442</a></li>
+          <li><a href="tel:+15714103430">Alexandria &middot; (571) 410-3430</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+      <span>McLean &middot; Alexandria, Virginia</span>
+      <!-- The legal links belong in the base row, not in the drawer's site map:
+           they are what people go looking for in a footer by habit. -->
+      <span><a href="privacy-policy.html">Privacy Policy</a></span>
+      <span><a href="terms-conditions.html">Terms &amp; Conditions</a></span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
+</body>
+</html>

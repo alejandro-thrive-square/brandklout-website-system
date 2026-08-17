@@ -1,60 +1,54 @@
 <!-- Full site index. Opens at every breakpoint, so it is the site's real
      navigation rather than a mobile-only fallback. -->
 <div class="drawer" id="drawer" aria-hidden="true" data-theme="dark">
-  <style>
-    .drawer{position:fixed;inset:0;z-index:125;background:var(--ink-900);
-      clip-path:circle(0% at calc(100% - 42px) 42px);transition:clip-path .8s cubic-bezier(.22,1,.36,1);
-      display:flex;flex-direction:column;justify-content:center;overflow-y:auto;
-      padding:clamp(5.5rem,10vw,7rem) var(--gutter) clamp(2rem,5vw,3rem)}
-    .drawer.open{clip-path:circle(150% at calc(100% - 42px) 42px)}
-    .dr-grid{width:100%;max-width:var(--maxw);margin-inline:auto;display:grid;gap:clamp(1.75rem,4vw,3.5rem)}
-    .dr-col h4{font-family:var(--f-body);font-size:var(--label);letter-spacing:.2em;text-transform:uppercase;
-      color:var(--gold);font-weight:600;margin:0 0 1rem}
-    .drawer ul{list-style:none;margin:0;padding:0}
-    .dr-col li{overflow:hidden}
-    .dr-col li a{display:block;font-family:var(--f-display);
-      font-size:clamp(1.35rem,2.6vw,2.1rem);line-height:1.22;padding-block:.14em;
-      color:rgba(255,255,255,.9);
-      transform:translateY(110%);transition:transform .7s cubic-bezier(.22,1,.36,1),color .3s ease}
-    .dr-col li a:hover{color:var(--gold-light)}
-    .drawer.open .dr-col li a{transform:translateY(0)}
-    /* Stagger by column so the panel deals itself out rather than snapping in. */
-    .drawer.open .dr-col:nth-child(1) li a{transition-delay:.10s}
-    .drawer.open .dr-col:nth-child(2) li a{transition-delay:.16s}
-    .drawer.open .dr-col:nth-child(3) li a{transition-delay:.22s}
-    .dr-foot{width:100%;max-width:var(--maxw);margin:clamp(2rem,5vw,3.25rem) auto 0;
-      padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);
-      display:grid;gap:1.25rem;color:rgba(255,255,255,.72);font-size:.92rem}
-    .dr-foot b{display:block;font-family:var(--f-body);font-size:var(--label);letter-spacing:.18em;
-      text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.3rem}
-    .dr-foot a{color:var(--gold-light)}
-    .dr-foot a:hover{text-decoration:underline}
-    @media(min-width:760px){ .dr-grid{grid-template-columns:repeat(3,1fr)} .dr-foot{grid-template-columns:repeat(3,1fr)} }
-  </style>
   <div class="dr-grid">
     <div class="dr-col">
       <h4>Implant Dentistry</h4>
       <ul>
         <li><a href="dental-implants.html">Dental Implants</a></li>
         <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-supported-dentures.html">Fixed vs. Removable</a></li>
         <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+        <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Treatments</h4>
+      <ul>
         <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="emergency-dentistry.html">Emergency Dentistry</a></li>
+        <li><a href="dental-conditions.html">Conditions We Treat</a></li>
       </ul>
     </div>
     <div class="dr-col">
       <h4>Aesthetics</h4>
       <ul>
+        <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
         <li><a href="smile-makeover.html">Smile Makeover</a></li>
         <li><a href="veneers.html">Porcelain Veneers</a></li>
+        <li><a href="crowns-and-bridges.html">Crowns &amp; Bridges</a></li>
+        <li><a href="teeth-whitening.html">Teeth Whitening</a></li>
         <li><a href="smile-gallery.html">Smile Gallery</a></li>
       </ul>
     </div>
     <div class="dr-col">
-      <h4>The Practice</h4>
+      <h4>Who We Are</h4>
       <ul>
-        <li><a href="about.html">Dr. Esam Nahlah</a></li>
+        <li><a href="about.html">Why Choose Us</a></li>
+        <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+        <li><a href="our-team.html">Meet the Team</a></li>
+        <li><a href="our-facility.html">Our Facility</a></li>
         <li><a href="patient-stories.html">Patient Stories</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>What To Expect</h4>
+      <ul>
+        <li><a href="patient-center.html">Your First Visit</a></li>
+        <li><a href="financing.html">Insurance &amp; Financing</a></li>
         <li><a href="contact.html">Contact &amp; Locations</a></li>
+        <li><a href="doctor-referral.html">For Referring Doctors</a></li>
         <li><a href="index.html">Home</a></li>
       </ul>
     </div>

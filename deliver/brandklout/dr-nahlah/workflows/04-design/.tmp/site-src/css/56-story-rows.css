@@ -1,0 +1,27 @@
+.st-row{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:center;
+  padding-block:clamp(2.5rem,5vw,4.5rem);border-top:1px solid var(--line)}
+.st-row:first-of-type{border-top:0;padding-top:0}
+.st-fig{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist);margin:0}
+.st-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+/* Sits on the photograph, so it keeps its dark plate on every theme. */
+.st-fig figcaption{position:absolute;left:0;bottom:0;z-index:2;background:var(--black);
+  border-top:1px solid rgba(171,158,106,.4);padding:.7rem 1.2rem .7rem 1rem;
+  font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold-light)}
+/* Stands in for a portrait we do not have, without pretending to be one. */
+.st-plate{display:grid;align-content:center;justify-items:start;gap:.6rem;
+  padding:clamp(1.5rem,4vw,2.75rem);
+  background:linear-gradient(150deg,#fff,var(--bg-3) 70%);
+  border:1px solid rgba(138,126,78,.32)}
+.st-plate .pl-mark{font-family:var(--f-display);font-size:calc(7rem * var(--t-disp));
+  line-height:.7;color:var(--accent-lg)}
+.st-plate .pl-label{font-size:.66rem;letter-spacing:.2em;text-transform:uppercase;
+  font-weight:600;color:var(--fg-soft)}
+.st-body{display:grid;gap:1rem}
+.st-name{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.st-q{font-family:var(--f-display);font-size:calc(2.6rem * var(--t-lg));line-height:1.14;
+  letter-spacing:-.02em;margin:0;max-width:22ch}
+.st-note{color:var(--fg-body);font-weight:400;max-width:52ch}
+@media(min-width:900px){
+  .st-row{grid-template-columns:.9fr 1.1fr}
+  .st-row.st-row-rev .st-fig{order:2}
+}

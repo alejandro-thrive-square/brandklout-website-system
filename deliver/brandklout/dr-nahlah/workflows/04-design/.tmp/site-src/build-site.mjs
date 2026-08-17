@@ -1,9 +1,23 @@
-// Assembles every page in the site from one shell + one body file per page.
+// Assembles every page in the site, plus the two bundles every page loads.
 //
-// The shell (head tokens, nav, drawer, footer, GSAP flush) lives in partials/ so
-// the eleven pages cannot drift apart. Each pages/<slug>.body.html holds only
-// <section> elements, each still carrying its own <style> and <script> — the
-// self-contained paste units the Webflow build needs.
+// Three kinds of source, and the split is deliberate:
+//
+//   partials/     the shell — head, nav, drawer, footer — so no page can drift
+//   pages/*.body.html   MARKUP ONLY. No <style>, no <script>.
+//   css/*.css     one file per component, concatenated in filename order into
+//                 assets/site.css. Filename order IS cascade order.
+//   js/*.js       the runtime (00), the kit behaviour (20) and the boot
+//                 sequence (90-91)
+//   sections/*.js one file per section, each registering itself with
+//                 WZ.section(name, fn) and running only if that section is on
+//                 the page
+//
+// The point of the two bundles: a section is now just markup. Move a
+// `<section>` from one page to another and its styling and behaviour follow it,
+// because every page already carries the whole vocabulary and each module
+// guards on its own selector. The old build inlined a <style> and a <script>
+// beside every section, so moving one meant moving three things and the rules
+// were re-emitted into all 26 pages.
 //
 // Usage: node build-site.mjs
 import fs from "node:fs";
@@ -14,12 +28,56 @@ const SRC = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.resolve(SRC, "..", "final-site");
 const read = (p) => fs.readFileSync(path.join(SRC, p), "utf8");
 
+// SEO, Open Graph and JSON-LD live in data, not in this table. They mirror what
+// the Webflow Designer carries for each page, so the two stay in step: when the
+// site changes there, re-sync seo.json rather than editing the head partial.
+const seo = JSON.parse(read("seo.json"));
+
 const head = read("partials/head.html");
 const nav = read("partials/nav.html");
 const drawer = read("partials/drawer.html");
 const footer = read("partials/footer.html");
-const flush = read("partials/flush.html");
 const pagekit = read("partials/pagekit.html");
+
+/* ---------------------------------------------------------------------------
+   The two bundles.
+
+   Concatenated in filename order, with a banner per file so the assembled
+   output can still be read and a rule traced back to the component that owns
+   it. Order is load-bearing in both:
+
+   - site.css   cascade order. 00 root, 01 tokens, 02 base, 10-12 chrome,
+                20 kit, 30-38 chapters, 50-59 single-page overrides.
+   - site.js    the runtime has to define WZ before any section registers, and
+                the boot sequence has to run after all of them, because it is
+                what creates ScrollSmoother and then flushes the queue.
+   --------------------------------------------------------------------------- */
+function bundle(dirs, ext) {
+  const parts = [];
+  for (const dir of dirs) {
+    const abs = path.join(SRC, dir);
+    if (!fs.existsSync(abs)) continue;
+    for (const f of fs.readdirSync(abs).filter((n) => n.endsWith(ext)).sort()) {
+      parts.push(`/* ===== ${dir}/${f} ===== */\n` + fs.readFileSync(path.join(abs, f), "utf8").replace(/\s*$/, "") + "\n");
+    }
+  }
+  return parts.join("\n");
+}
+
+const ASSETS = path.join(OUT, "assets");
+fs.mkdirSync(ASSETS, { recursive: true });
+
+const siteCss = bundle(["css"], ".css");
+// sections/ sits between the runtime and the boot sequence: 00-runtime defines
+// WZ.section, the section modules call it, and 90-boot flushes what they queued.
+const runtimeJs = bundle(["js"], ".js");
+const sectionJs = bundle(["sections"], ".js");
+const boot = runtimeJs.indexOf("/* ===== js/90-boot.js ===== */");
+if (boot === -1) throw new Error("js/90-boot.js missing — nothing would flush the section queue");
+const siteJs = runtimeJs.slice(0, boot) + sectionJs + "\n" + runtimeJs.slice(boot);
+
+fs.writeFileSync(path.join(ASSETS, "site.css"), siteCss);
+fs.writeFileSync(path.join(ASSETS, "site.js"), siteJs);
 
 const CHAPTER_READOUT = `<div class="nav-chapter" aria-hidden="true">
         <span>Chapter</span><b id="navCh">00</b><i id="navBar"></i><span id="navName">Arrival</span>
@@ -29,40 +87,87 @@ const CHAPTER_READOUT = `<div class="nav-chapter" aria-hidden="true">
 const NAVKEYS = ["IMPLANTS", "COSMETIC", "GALLERY", "ABOUT", "CONTACT"];
 
 const PAGES = [
-  { slug: "index", body: "home", journey: 1, navKey: null,
-    title: "Dr. Nahlah — Implant &amp; Prosthodontic Specialists | McLean &amp; Alexandria, VA",
-    desc: "Board-certified prosthodontist Dr. Esam Nahlah rebuilds smiles with dental implants, All-on-4 and full-mouth reconstruction in McLean and Alexandria, Virginia." },
-  { slug: "dental-implants", journey: 0, navKey: "IMPLANTS",
-    title: "Dental Implants in McLean &amp; Alexandria, VA | Dr. Nahlah",
-    desc: "Single implants to full-arch reconstruction, planned and placed by a board-certified prosthodontist. Surgery and final teeth under one roof in Northern Virginia." },
-  { slug: "all-on-4", journey: 0, navKey: "IMPLANTS",
-    title: "All-on-4 Full-Arch Dental Implants | McLean &amp; Alexandria, VA",
-    desc: "A fixed full arch on four implants — planned digitally, placed under sedation, often with teeth the same day. All-on-4 with Dr. Esam Nahlah, prosthodontist." },
-  { slug: "implant-cost", journey: 0, navKey: "IMPLANTS",
-    title: "What Dental Implants Cost &amp; How to Finance Them | Dr. Nahlah",
-    desc: "What drives the cost of a dental implant, why quotes differ so widely, and the financing options available at Dr. Nahlah Implants &amp; Prosthodontics Specialists." },
-  { slug: "sedation-dentistry", journey: 0, navKey: "IMPLANTS",
-    title: "Sedation Dentistry &amp; IV Sedation | McLean &amp; Alexandria, VA",
-    desc: "IV-sedation certified with hospital privileges at Inova Fairfax. Long implant appointments pass in what feels like minutes." },
-  { slug: "smile-makeover", journey: 0, navKey: "COSMETIC",
-    title: "Smile Makeover in McLean, VA | Dr. Nahlah Prosthodontics",
-    desc: "A smile designed before anything is prepared — veneers, crowns and implants combined into one plan by a board-certified prosthodontist." },
-  { slug: "veneers", journey: 0, navKey: "COSMETIC",
-    title: "Porcelain Veneers in McLean &amp; Alexandria, VA | Dr. Nahlah",
-    desc: "Hand-layered porcelain veneers designed to the face first. Shape, shade and bite planned by the specialist who places them." },
-  { slug: "smile-gallery", journey: 0, navKey: "GALLERY",
-    title: "Smile Gallery — Before &amp; After | Dr. Nahlah, McLean VA",
-    desc: "Real cases treated at Dr. Nahlah Implants &amp; Prosthodontics Specialists — full-arch implants, veneers and whitening, before and after." },
-  { slug: "patient-stories", journey: 0, navKey: "GALLERY",
-    title: "Patient Stories &amp; Testimonials | Dr. Nahlah, McLean VA",
-    desc: "Patients of Dr. Esam Nahlah tell the story best — filmed testimonials from full-arch implant and smile makeover patients in Northern Virginia." },
-  { slug: "about", journey: 0, navKey: "ABOUT",
-    title: "Meet Dr. Esam Nahlah, D.D.S., M.S. — Board-Certified Prosthodontist",
-    desc: "Diplomate of the American Board of Prosthodontics, hospital privileges at Inova Fairfax, founder of the Tysons Study Club. Meet the specialist." },
-  { slug: "contact", journey: 0, navKey: "CONTACT",
-    title: "Contact &amp; Locations — McLean and Alexandria, VA | Dr. Nahlah",
-    desc: "Two Northern Virginia offices. Tysons Corner in McLean and Old Town Alexandria. Phone numbers, hours, directions and consultation booking." },
+  { slug: "index", body: "home", journey: 1, navKey: null },
+  { slug: "dental-implants", journey: 0, navKey: "IMPLANTS" },
+  { slug: "all-on-4", journey: 0, navKey: "IMPLANTS" },
+  { slug: "implant-cost", journey: 0, navKey: "IMPLANTS" },
+  { slug: "sedation-dentistry", journey: 0, navKey: "IMPLANTS" },
+  { slug: "smile-makeover", journey: 0, navKey: "COSMETIC" },
+  { slug: "veneers", journey: 0, navKey: "COSMETIC" },
+  { slug: "smile-gallery", journey: 0, navKey: "GALLERY" },
+  { slug: "patient-stories", journey: 0, navKey: "GALLERY" },
+  // Renamed from `about` on 2026-08-10 to match Webflow, where the page moved to
+  // /meet-dr-nahlah. That freed the /about slug for the separate office-overview
+  // page the client asked for — built out below.
+  { slug: "meet-dr-nahlah", journey: 0, navKey: "ABOUT" },
+  { slug: "contact", journey: 0, navKey: "CONTACT" },
+
+  // ---- Build-out from the old site's own IA (2026-08-10). The 33-page
+  // WordPress site's primary nav is captured verbatim in the scrape, and these
+  // pages restore the groups it had that the eleven-page package dropped.
+  // NOTE: these do NOT exist in Webflow yet, so webflow-parity.mjs deliberately
+  // still gates on the original eleven only.
+  // -- Who We Are
+  { slug: "about", journey: 0, navKey: "ABOUT" },
+  { slug: "our-team", journey: 0, navKey: "ABOUT" },
+  { slug: "our-facility", journey: 0, navKey: "ABOUT" },
+  // -- Aesthetics
+  { slug: "cosmetic-dentistry", journey: 0, navKey: "COSMETIC" },
+  { slug: "teeth-whitening", journey: 0, navKey: "COSMETIC" },
+  { slug: "crowns-and-bridges", journey: 0, navKey: "COSMETIC" },
+  // -- Treatments
+  { slug: "oral-surgery", journey: 0, navKey: "IMPLANTS" },
+  { slug: "emergency-dentistry", journey: 0, navKey: "IMPLANTS" },
+  { slug: "dental-conditions", journey: 0, navKey: "IMPLANTS" },
+  // -- Dental Implants (the rest of that group)
+  { slug: "implant-supported-dentures", journey: 0, navKey: "IMPLANTS" },
+  { slug: "dental-implant-faq", journey: 0, navKey: "IMPLANTS" },
+  // -- What To Expect / For Doctors / legal
+  { slug: "patient-center", journey: 0, navKey: "ABOUT" },
+  { slug: "financing", journey: 0, navKey: "ABOUT" },
+  { slug: "doctor-referral", journey: 0, navKey: "ABOUT" },
+  // `tysons-study-club` was the planned fifteenth page. Its source is entirely
+  // Lorem Ipsum on the client's live site, so there is nothing to rebuild from
+  // and privacy-policy took the slot. See SITE.md.
+  { slug: "privacy-policy", journey: 0, navKey: null },
+  { slug: "terms-conditions", journey: 0, navKey: null },
+  // The destination for the consultation request. Replaces the old site's two
+  // identical survey thank-you pages; noindex, so it never surfaces in search.
+  { slug: "thank-you", journey: 0, navKey: null },
 ];
+
+/* Escape for an HTML text node or a double-quoted attribute. seo.json holds
+   plain text, so every entity in the output is produced exactly once, here. */
+const esc = (s) =>
+  String(s).replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+
+/* The head metadata for one page: title, description, Open Graph, Twitter card
+   and JSON-LD, in the same order and with the same fields the published Webflow
+   page carries. */
+function seoBlock(slug) {
+  const m = seo[slug];
+  if (!m) throw new Error(`seo.json has no entry for "${slug}"`);
+  const lines = [
+    `<title>${esc(m.title)}</title>`,
+    `<meta name="description" content="${esc(m.desc)}">`,
+  ];
+  // Only emitted when a page asks for it. A confirmation page has nothing to
+  // rank for, and indexing one puts a result in front of searchers telling them
+  // their form was submitted when it was not.
+  if (m.robots) lines.push(`<meta name="robots" content="${esc(m.robots)}">`);
+  lines.push(...[
+    `<meta property="og:title" content="${esc(m.ogTitle)}">`,
+    `<meta property="og:description" content="${esc(m.ogDesc)}">`,
+    `<meta property="og:type" content="website">`,
+    `<meta name="twitter:card" content="summary_large_image">`,
+    `<meta name="twitter:title" content="${esc(m.ogTitle)}">`,
+    `<meta name="twitter:description" content="${esc(m.ogDesc)}">`,
+  ]);
+  if (m.jsonLd) {
+    lines.push(`<script type="application/ld+json">\n${JSON.stringify(m.jsonLd, null, 2)}\n</script>`);
+  }
+  return lines.join("\n");
+}
 
 fs.mkdirSync(OUT, { recursive: true });
 let built = 0;
@@ -81,9 +186,7 @@ for (const p of PAGES) {
     navHtml = navHtml.replace(`{{CUR_${k}}}`, p.navKey === k ? ' aria-current="page"' : "");
   }
 
-  const headHtml = head
-    .replace(/<title>[\s\S]*?<\/title>/, `<title>${p.title}</title>`)
-    .replace(/(<meta name="description" content=")[\s\S]*?(">)/, `$1${p.desc}$2`);
+  const headHtml = head.replace("{{HEAD_SEO}}", seoBlock(p.slug));
 
   const out = `${headHtml}
 <body>
@@ -106,7 +209,11 @@ ${footer}
 </div><!-- /#smooth-content -->
 </div><!-- /#smooth-wrapper -->
 
-${flush}
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
 </body>
 </html>
 `;

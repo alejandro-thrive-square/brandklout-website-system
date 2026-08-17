@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
+     by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
+     Designer carries. Do not hand-edit the output; edit seo.json. -->
+<title>Oral Surgery | Extractions, Bone Grafting &amp; Implants | McLean, VA</title>
+<meta name="description" content="Extractions, bone grafting and CT-guided implant placement performed in-office by the specialist who also restores the tooth afterwards. Sedation available.">
+<meta property="og:title" content="Oral Surgery | Dr. Nahlah, McLean &amp; Alexandria">
+<meta property="og:description" content="The person who removes the tooth also plans what replaces it. That changes how it is removed.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Oral Surgery | Dr. Nahlah, McLean &amp; Alexandria">
+<meta name="twitter:description" content="The person who removes the tooth also plans what replaces it. That changes how it is removed.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalWebPage",
+      "name": "Oral surgery",
+      "description": "In-office oral surgery in McLean, Virginia: tooth extraction, bone grafting and dental implant placement.",
+      "isPartOf": {
+        "@id": "/#website"
+      },
+      "about": {
+        "@id": "/#practice"
+      }
+    },
+    {
+      "@type": "MedicalProcedure",
+      "name": "Tooth extraction",
+      "description": "Removal of a tooth without disturbing healthy bone or gum tissue, planned around what will replace it.",
+      "bodyLocation": "Jaw",
+      "performerType": "Board-certified prosthodontist",
+      "provider": {
+        "@id": "/#practice"
+      }
+    },
+    {
+      "@type": "MedicalProcedure",
+      "name": "Bone grafting",
+      "description": "Replacement of lost jawbone using autologous or donor bone, allowed to integrate before an implant or denture is placed.",
+      "bodyLocation": "Jaw",
+      "performerType": "Board-certified prosthodontist",
+      "provider": {
+        "@id": "/#practice"
+      }
+    },
+    {
+      "@type": "MedicalProcedure",
+      "name": "Dental implant surgery",
+      "description": "CT-guided placement of an implant post into the jawbone, with immediate loading of a temporary restoration for qualifying patients.",
+      "bodyLocation": "Jaw",
+      "performerType": "Board-certified prosthodontist",
+      "provider": {
+        "@id": "/#practice"
+      }
+    }
+  ]
+}
+</script>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
+     from site-src/css/*.css in filename order, which IS the cascade order:
+
+       00  fluid root font-size  generated; deliver/process/04-design/fluid-root.md
+       01  design tokens         palette, theme layer, type steps
+       02  base                  reset and the shared primitives
+       10-12  chrome             nav, drawer, footer
+       20  page kit              the shared interior-page section vocabulary
+       30-38  home chapters      the nine bespoke chapters of the journey
+       50-59  page overrides     rules only one page needs
+
+     Every page loads the same file, so moving a section from one page to another
+     means moving the markup and nothing else. It also means the rules exist once
+     rather than being re-emitted into all 26 pages.
+     ========================================================================== -->
+<link rel="stylesheet" href="assets/site.css">
+
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead.
+     The runtime itself is NOT here: it lives in assets/site.js at the end of
+     <body>, because ScrollTrigger has to be registered after document.body
+     exists or ScrollSmoother dies on getScrollFunc. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+</head>
+
+<body>
+
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<header class="nav" id="nav" data-journey="0">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap no-rail nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+      <img src="assets/logo.png" alt="Dr. Nahlah — Implants and Prosthodontics Specialists">
+    </a>
+    <nav class="nav-slot" aria-label="Primary">
+      <!-- The current-page highlight is baked in here at build time. In Webflow
+           the Navbar is ONE shared component, so it cannot be: the conversion
+           turns these five placeholders into a pathname -> href map in the
+           footer custom code. When a slug changes, that map has to change with
+           it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
+           there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
+      <div class="nav-links">
+        <a href="dental-implants.html" aria-current="page">Implants</a>
+        <a href="smile-makeover.html">Cosmetic</a>
+        <a href="smile-gallery.html">Smile Gallery</a>
+        <a href="meet-dr-nahlah.html">The Specialist</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
+      <span class="nav-close" aria-hidden="true">Close</span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full site index. Opens at every breakpoint, so it is the site's real
+     navigation rather than a mobile-only fallback. -->
+<div class="drawer" id="drawer" aria-hidden="true" data-theme="dark">
+  <div class="dr-grid">
+    <div class="dr-col">
+      <h4>Implant Dentistry</h4>
+      <ul>
+        <li><a href="dental-implants.html">Dental Implants</a></li>
+        <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-supported-dentures.html">Fixed vs. Removable</a></li>
+        <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+        <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="emergency-dentistry.html">Emergency Dentistry</a></li>
+        <li><a href="dental-conditions.html">Conditions We Treat</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Aesthetics</h4>
+      <ul>
+        <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
+        <li><a href="smile-makeover.html">Smile Makeover</a></li>
+        <li><a href="veneers.html">Porcelain Veneers</a></li>
+        <li><a href="crowns-and-bridges.html">Crowns &amp; Bridges</a></li>
+        <li><a href="teeth-whitening.html">Teeth Whitening</a></li>
+        <li><a href="smile-gallery.html">Smile Gallery</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Who We Are</h4>
+      <ul>
+        <li><a href="about.html">Why Choose Us</a></li>
+        <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+        <li><a href="our-team.html">Meet the Team</a></li>
+        <li><a href="our-facility.html">Our Facility</a></li>
+        <li><a href="patient-stories.html">Patient Stories</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>What To Expect</h4>
+      <ul>
+        <li><a href="patient-center.html">Your First Visit</a></li>
+        <li><a href="financing.html">Insurance &amp; Financing</a></li>
+        <li><a href="contact.html">Contact &amp; Locations</a></li>
+        <li><a href="doctor-referral.html">For Referring Doctors</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dr-foot">
+    <div><b>Tysons Corner &middot; McLean</b>
+      New patients <a href="tel:+15716199442">(571) 619-9442</a><br>
+      Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
+    <div><b>Alexandria</b>
+      New patients <a href="tel:+15714103430">(571) 410-3430</a><br>
+      Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
+    <div><b>Hours</b>
+      Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
+      Fri 8:00am &ndash; 2:00pm &middot; Sat &amp; Sun closed</div>
+  </div>
+</div>
+
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     ORAL SURGERY — from drnahlah.com/oral-surgery/.
+
+     The three procedures (extractions, bone grafting, implant surgery), the
+     "no fear surgery" argument, the three parts of an implant, CT-guided
+     placement and immediate load "for qualifying patients" are all verbatim in
+     substance.
+
+     TWO SOURCE ASSETS DELIBERATELY NOT USED:
+     - The "Dr. Nahlah Discusses Bone Grafting" video. Films are not hot-linked
+       from a prototype; wire it at Webflow build time (see SITE.md, Still open).
+     - `2025/02/unnamed.jpeg`, which is on the source page with an empty alt and
+       a filename that says nothing. Its subject is unknown, so it cannot be
+       given honest alt text and is left out rather than captioned as a guess.
+
+     The three procedure icons in the extraction are also unused: they are
+     dark line art on transparent, and dropping them onto the cream ground is a
+     contrast gamble nobody has measured. The numbered cards the rest of the
+     site uses carry the same structure with none of that risk.
+     ========================================================================== -->
+<section class="pg-hero" id="hero">
+  <div class="ph-bg">
+    <img src="assets/pt-interaction.jpg" alt="A patient at the practice" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Oral Surgery</span></div>
+    <h1 data-split>Comprehensive care does not stop at <em>surgery</em>.</h1>
+    <p class="ph-lead" data-rv>Extractions, bone grafting and implant placement, done in this building by the specialist who will also restore the tooth afterwards.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a consultation</span></a>
+      <a class="btn btn-ghost magnetic" href="#procedures"><span>The procedures</span></a>
+    </div>
+    <div class="ph-meta" data-rv="stagger">
+      <div><b>In-office</b><span>Not referred out</span></div>
+      <div><b>CT-guided</b><span>Planned before placed</span></div>
+      <div><b>Sedation</b><span>Nitrous, oral or IV</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- lede ---------- -->
+<section class="pk pk-alt" id="one-place">
+  <div class="wrap section pk-lede">
+    <div class="lc-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Why Here</span></div>
+      <h2 data-split>The person who removes it also replaces it.</h2>
+    </div>
+    <div class="lc-body">
+      <p data-rv>In most practices these two halves belong to different people. A general dentist
+        refers the extraction out to a surgeon; months later somebody else works out what goes back
+        in the space. Between them sits a handover, and the handover is where the plan gets lost.</p>
+      <p data-rv>Here it is one practice and one plan. The extraction is performed knowing exactly
+        what is going into the site afterwards, which changes how it is performed &mdash; how much
+        bone is preserved, whether a graft goes in at the same visit, where the implant will need to
+        sit eighteen weeks later.</p>
+      <p data-rv>That is the whole argument for <strong>comprehensive care</strong>, and it is not an
+        abstract one. It is the difference between a socket that is ready for an implant and one that
+        has to be rebuilt first.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- procedures ---------- -->
+<section class="pk pk-light" id="procedures">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Procedures</span></div>
+      <h2 data-split>Three procedures, in the comfort of the office.</h2>
+      <p>Each is done here, with advanced technology used to keep it minimally invasive, efficient
+        and predictable.</p>
+    </div>
+    <div class="pk-cards pk-cards-3" data-rv="stagger">
+      <article class="pk-card">
+        <span class="pk-card-n">01</span>
+        <h3>Tooth extraction</h3>
+        <p>The most common oral surgery there is, and generally simple enough to complete in the
+          chair. The tooth is eased out without disturbing healthy bone or gum tissue &mdash; which
+          matters enormously if anything is going back in the space later. Wisdom tooth removal is
+          the more complex form and can take a few hours.</p>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">02</span>
+        <h3>Bone grafting</h3>
+        <p>Replacing lost bone in the jaw. Bone loss after a missing tooth is ongoing rather than
+          one-off, and it has to be treated before a denture or an implant has anything to hold on
+          to. Bone from you or from a donor source is placed at the site, sutured, and left a few
+          months to integrate with the jaw.</p>
+      </article>
+      <article class="pk-card">
+        <span class="pk-card-n">03</span>
+        <h3>Implant surgery</h3>
+        <p>Three parts: the post, the abutment and the restoration. The post is placed into the
+          jawbone to anchor a new tooth or a full set. CT-guided placement makes it precise, and
+          for qualifying patients a temporary restoration can be loaded immediately.</p>
+        <a class="pk-readon" href="dental-implants.html">Implants in full</a>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- no fear ---------- -->
+<section class="pk" id="comfort">
+  <div class="wrap section pk-split pk-split-rev">
+    <figure class="sp-fig" style="margin:0">
+      <img src="assets/sedation-patient.jpg" alt="A sedated patient during treatment" data-drift loading="lazy">
+    </figure>
+    <div class="sp-copy">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Comfort</span></div>
+      <h2 data-split>Being nervous about this is normal.</h2>
+      <p data-rv>Nobody looks forward to oral surgery, and the practice does not pretend otherwise.
+        What it does instead is remove the reasons the fear is usually justified.</p>
+      <ul class="sp-list" data-rv="stagger">
+        <li><i></i>Techniques kept as minimally invasive as the case allows</li>
+        <li><i></i>Planned on a 3D scan first, so less is done by feel</li>
+        <li><i></i>Nitrous, oral or IV sedation, whichever suits you</li>
+        <li><i></i>A private suite, with the door closed</li>
+      </ul>
+      <p data-rv style="margin-top:.6rem">Sedation is worth raising early rather than on the day.
+        IV sedation in particular has to be arranged, and it is the option that makes the difference
+        for people who have been putting a procedure off for years.</p>
+      <p data-rv><a class="pk-more" href="sedation-dentistry.html">The three sedation options</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- next ---------- -->
+<section class="pk pk-alt" id="next">
+  <div class="wrap section">
+    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
+    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
+      <a href="dental-implants.html"><span class="nx-k">What goes back in</span>
+        <span class="nx-t">Dental Implants</span>
+        <span class="nx-d">Anatomy, the four options, and how a case actually runs.</span></a>
+      <a href="sedation-dentistry.html"><span class="nx-k">Comfort</span>
+        <span class="nx-t">Sedation Dentistry</span>
+        <span class="nx-d">Nitrous, oral and IV, and why it is a credential here.</span></a>
+      <a href="our-facility.html"><span class="nx-k">Where</span>
+        <span class="nx-t">Our Facility</span>
+        <span class="nx-d">Six surgical suites, the CBCT scanner and the in-house lab.</span></a>
+    </nav>
+  </div>
+</section>
+
+<!-- ---------- cta ---------- -->
+<section class="pk pk-cta" id="book">
+  <div class="wrap section cta-in">
+    <h2 data-split>Receive the care you need.</h2>
+    <p data-rv>Book a consultation and get the whole sequence explained before any of it starts
+      &mdash; including what happens after the surgery, which is the part that usually goes
+      unmentioned.</p>
+    <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Book a consultation</span></a>
+    <div class="cta-phones" data-rv>
+      <span>McLean &middot; <a href="tel:+15716199442">(571) 619-9442</a></span>
+      <span>Alexandria &middot; <a href="tel:+15714103430">(571) 410-3430</a></span>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="foot" data-theme="dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo.png" alt="Dr. Nahlah">
+        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+          smiles that other practices call too complex.</p>
+      </div>
+      <div>
+        <h4>Treatments</h4>
+        <ul>
+          <li><a href="dental-implants.html">Dental Implants</a></li>
+          <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+          <li><a href="smile-makeover.html">Smile Makeover</a></li>
+          <li><a href="veneers.html">Porcelain Veneers</a></li>
+          <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="smile-gallery.html">Smile Gallery</a></li>
+          <li><a href="patient-stories.html">Patient Stories</a></li>
+          <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+          <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+          <li><a href="contact.html">Contact &amp; Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul class="foot-facts">
+          <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
+          <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
+          <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
+        </ul>
+        <ul style="margin-top:1.1rem">
+          <li><a href="tel:+15716199442">McLean &middot; (571) 619-9442</a></li>
+          <li><a href="tel:+15714103430">Alexandria &middot; (571) 410-3430</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+      <span>McLean &middot; Alexandria, Virginia</span>
+      <!-- The legal links belong in the base row, not in the drawer's site map:
+           they are what people go looking for in a footer by habit. -->
+      <span><a href="privacy-policy.html">Privacy Policy</a></span>
+      <span><a href="terms-conditions.html">Terms &amp; Conditions</a></span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
+</body>
+</html>

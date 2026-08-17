@@ -1,0 +1,886 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
+     by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
+     Designer carries. Do not hand-edit the output; edit seo.json. -->
+<title>Smile Gallery | Before &amp; After Cases | Dr. Nahlah</title>
+<meta name="description" content="Before-and-after clinical photographs of implant, All-on-4 and veneer cases treated at Dr. Nahlah's Northern Virginia practice.">
+<meta property="og:title" content="Smile Gallery | Before &amp; After | Dr. Nahlah">
+<meta property="og:description" content="Every pair was treated at this practice. Drag the line across any of them.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Smile Gallery | Before &amp; After | Dr. Nahlah">
+<meta name="twitter:description" content="Every pair was treated at this practice. Drag the line across any of them.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "ImageGallery",
+      "name": "Smile Gallery",
+      "description": "Before-and-after clinical photographs of cases treated at this practice.",
+      "isPartOf": {
+        "@id": "/#website"
+      },
+      "about": {
+        "@id": "/#practice"
+      }
+    }
+  ]
+}
+</script>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
+     from site-src/css/*.css in filename order, which IS the cascade order:
+
+       00  fluid root font-size  generated; deliver/process/04-design/fluid-root.md
+       01  design tokens         palette, theme layer, type steps
+       02  base                  reset and the shared primitives
+       10-12  chrome             nav, drawer, footer
+       20  page kit              the shared interior-page section vocabulary
+       30-38  home chapters      the nine bespoke chapters of the journey
+       50-59  page overrides     rules only one page needs
+
+     Every page loads the same file, so moving a section from one page to another
+     means moving the markup and nothing else. It also means the rules exist once
+     rather than being re-emitted into all 26 pages.
+     ========================================================================== -->
+<link rel="stylesheet" href="assets/site.css">
+
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead.
+     The runtime itself is NOT here: it lives in assets/site.js at the end of
+     <body>, because ScrollTrigger has to be registered after document.body
+     exists or ScrollSmoother dies on getScrollFunc. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+</head>
+
+<body>
+
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<header class="nav" id="nav" data-journey="0">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap no-rail nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+      <img src="assets/logo.png" alt="Dr. Nahlah — Implants and Prosthodontics Specialists">
+    </a>
+    <nav class="nav-slot" aria-label="Primary">
+      <!-- The current-page highlight is baked in here at build time. In Webflow
+           the Navbar is ONE shared component, so it cannot be: the conversion
+           turns these five placeholders into a pathname -> href map in the
+           footer custom code. When a slug changes, that map has to change with
+           it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
+           there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
+      <div class="nav-links">
+        <a href="dental-implants.html">Implants</a>
+        <a href="smile-makeover.html">Cosmetic</a>
+        <a href="smile-gallery.html" aria-current="page">Smile Gallery</a>
+        <a href="meet-dr-nahlah.html">The Specialist</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
+      <span class="nav-close" aria-hidden="true">Close</span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full site index. Opens at every breakpoint, so it is the site's real
+     navigation rather than a mobile-only fallback. -->
+<div class="drawer" id="drawer" aria-hidden="true" data-theme="dark">
+  <div class="dr-grid">
+    <div class="dr-col">
+      <h4>Implant Dentistry</h4>
+      <ul>
+        <li><a href="dental-implants.html">Dental Implants</a></li>
+        <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-supported-dentures.html">Fixed vs. Removable</a></li>
+        <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+        <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="emergency-dentistry.html">Emergency Dentistry</a></li>
+        <li><a href="dental-conditions.html">Conditions We Treat</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Aesthetics</h4>
+      <ul>
+        <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
+        <li><a href="smile-makeover.html">Smile Makeover</a></li>
+        <li><a href="veneers.html">Porcelain Veneers</a></li>
+        <li><a href="crowns-and-bridges.html">Crowns &amp; Bridges</a></li>
+        <li><a href="teeth-whitening.html">Teeth Whitening</a></li>
+        <li><a href="smile-gallery.html">Smile Gallery</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Who We Are</h4>
+      <ul>
+        <li><a href="about.html">Why Choose Us</a></li>
+        <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+        <li><a href="our-team.html">Meet the Team</a></li>
+        <li><a href="our-facility.html">Our Facility</a></li>
+        <li><a href="patient-stories.html">Patient Stories</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>What To Expect</h4>
+      <ul>
+        <li><a href="patient-center.html">Your First Visit</a></li>
+        <li><a href="financing.html">Insurance &amp; Financing</a></li>
+        <li><a href="contact.html">Contact &amp; Locations</a></li>
+        <li><a href="doctor-referral.html">For Referring Doctors</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dr-foot">
+    <div><b>Tysons Corner &middot; McLean</b>
+      New patients <a href="tel:+15716199442">(571) 619-9442</a><br>
+      Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
+    <div><b>Alexandria</b>
+      New patients <a href="tel:+15714103430">(571) 410-3430</a><br>
+      Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
+    <div><b>Hours</b>
+      Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
+      Fri 8:00am &ndash; 2:00pm &middot; Sat &amp; Sun closed</div>
+  </div>
+</div>
+
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     SMILE GALLERY — GENERATED by site-src/gen-gallery.mjs from the case pairs
+     present in final-site/assets. Re-run that script rather than editing the
+     grid by hand. 54 pairs, all photographed at this practice.
+     ========================================================================== -->
+<section class="pg-hero" id="hero" style="min-height:clamp(440px,58svh,620px)">
+  <div class="ph-bg">
+    <img src="assets/pt-hero-4.jpg" alt="A patient of the practice after treatment" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Smile Gallery</span></div>
+    <h1 data-split>54 cases. <em>No</em> stock photography.</h1>
+    <p class="ph-lead" data-rv>Every pair below was treated at this practice. Drag the line across any of them, or use the keyboard arrows once a case has focus.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Ask about your case</span></a>
+      <a class="btn btn-ghost magnetic" href="patient-stories.html"><span>Hear from patients</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="pk" id="gallery">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Before &amp; After</span></div>
+      <h2 data-split>Sorted by what was actually done.</h2>
+    </div>
+
+    <div class="ga-filters" id="gaFilters" role="group" aria-label="Filter cases by treatment">
+      <button type="button" data-cat="all" aria-pressed="true">All cases<b>54</b></button>
+      <button type="button" data-cat="full-arch" aria-pressed="false">Full arch<b>28</b></button>
+      <button type="button" data-cat="veneers" aria-pressed="false">Veneers<b>13</b></button>
+      <button type="button" data-cat="makeover" aria-pressed="false">Smile makeover<b>8</b></button>
+      <button type="button" data-cat="combined" aria-pressed="false">Veneers + implants<b>3</b></button>
+      <button type="button" data-cat="whitening" aria-pressed="false">Whitening<b>2</b></button>
+    </div>
+
+    <div class="ga-grid" id="gaGrid">
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/1.1-.jpg" alt="Before: all-on-4 case 1" loading="lazy">
+          <img class="ba-img-after" src="assets/1.2.jpg" alt="After: all-on-4 case 1" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for all-on-4 case 1">
+        </div>
+        <figcaption class="pk-ba-cap">All-on-4 &middot; a full arch on four implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/2.1.jpg" alt="Before: all-on-4 case 2" loading="lazy">
+          <img class="ba-img-after" src="assets/2.2.jpg" alt="After: all-on-4 case 2" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for all-on-4 case 2">
+        </div>
+        <figcaption class="pk-ba-cap">All-on-4 &middot; a full arch on four implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/3.1.jpg" alt="Before: all-on-4 case 3" loading="lazy">
+          <img class="ba-img-after" src="assets/3.2.jpg" alt="After: all-on-4 case 3" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for all-on-4 case 3">
+        </div>
+        <figcaption class="pk-ba-cap">All-on-4 &middot; a full arch on four implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/2-before-1024x564-1.jpeg" alt="Before: full mouth reconstruction case 4" loading="lazy">
+          <img class="ba-img-after" src="assets/2-after-1024x573-1.jpeg" alt="After: full mouth reconstruction case 4" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for full mouth reconstruction case 4">
+        </div>
+        <figcaption class="pk-ba-cap">Full-mouth reconstruction</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/4.2.jpg" alt="Before: all-on-4 case 5" loading="lazy">
+          <img class="ba-img-after" src="assets/4.1.jpg" alt="After: all-on-4 case 5" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for all-on-4 case 5">
+        </div>
+        <figcaption class="pk-ba-cap">All-on-4 &middot; a full arch on four implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/5.1.jpg" alt="Before: all-on-4 case 6" loading="lazy">
+          <img class="ba-img-after" src="assets/5.2.jpg" alt="After: all-on-4 case 6" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for all-on-4 case 6">
+        </div>
+        <figcaption class="pk-ba-cap">All-on-4 &middot; a full arch on four implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/6.2.jpg" alt="Before: all-on-4 case 7" loading="lazy">
+          <img class="ba-img-after" src="assets/6.1.jpg" alt="After: all-on-4 case 7" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for all-on-4 case 7">
+        </div>
+        <figcaption class="pk-ba-cap">All-on-4 &middot; a full arch on four implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/3-before.jpg" alt="Before: full mouth reconstruction case 8" loading="lazy">
+          <img class="ba-img-after" src="assets/3-after.jpg" alt="After: full mouth reconstruction case 8" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for full mouth reconstruction case 8">
+        </div>
+        <figcaption class="pk-ba-cap">Full-mouth reconstruction</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/7.2.jpg" alt="Before: all-on-4 case 9" loading="lazy">
+          <img class="ba-img-after" src="assets/7.1.jpg" alt="After: all-on-4 case 9" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for all-on-4 case 9">
+        </div>
+        <figcaption class="pk-ba-cap">All-on-4 &middot; a full arch on four implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/8.1.jpg" alt="Before: all-on-4 case 10" loading="lazy">
+          <img class="ba-img-after" src="assets/8.2.jpg" alt="After: all-on-4 case 10" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for all-on-4 case 10">
+        </div>
+        <figcaption class="pk-ba-cap">All-on-4 &middot; a full arch on four implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/11.1.jpg" alt="Before: all-on-4 case 11" loading="lazy">
+          <img class="ba-img-after" src="assets/11.2.jpg" alt="After: all-on-4 case 11" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for all-on-4 case 11">
+        </div>
+        <figcaption class="pk-ba-cap">All-on-4 &middot; a full arch on four implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/9-b4.jpg" alt="Before: full mouth reconstruction case 12" loading="lazy">
+          <img class="ba-img-after" src="assets/9-after.jpg" alt="After: full mouth reconstruction case 12" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for full mouth reconstruction case 12">
+        </div>
+        <figcaption class="pk-ba-cap">Full-mouth reconstruction</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/porcelain-001-b4.jpg" alt="Before: porcelain veneers case 13" loading="lazy">
+          <img class="ba-img-after" src="assets/porcelain-001-after.jpg" alt="After: porcelain veneers case 13" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 13">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/porcelain-002-b4.jpg" alt="Before: porcelain veneers case 14" loading="lazy">
+          <img class="ba-img-after" src="assets/porcelain-002-after.jpg" alt="After: porcelain veneers case 14" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 14">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/porcelain-005-b4.jpg" alt="Before: porcelain veneers case 15" loading="lazy">
+          <img class="ba-img-after" src="assets/porcelain-005-after.jpg" alt="After: porcelain veneers case 15" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 15">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="makeover" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/makeover-002-b4.jpg" alt="Before: smile makeover case 16" loading="lazy">
+          <img class="ba-img-after" src="assets/makeover-002-after.jpg" alt="After: smile makeover case 16" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for smile makeover case 16">
+        </div>
+        <figcaption class="pk-ba-cap">Complete smile makeover</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/porcelain-003-b4.jpg" alt="Before: porcelain veneers case 17" loading="lazy">
+          <img class="ba-img-after" src="assets/porcelain-003-after.jpg" alt="After: porcelain veneers case 17" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 17">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/porcelain-004-b4.jpg" alt="Before: porcelain veneers case 18" loading="lazy">
+          <img class="ba-img-after" src="assets/porcelain-004-after.jpg" alt="After: porcelain veneers case 18" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 18">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/porcelain-006-b4.jpg" alt="Before: porcelain veneers case 19" loading="lazy">
+          <img class="ba-img-after" src="assets/porcelain-006-after.jpg" alt="After: porcelain veneers case 19" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 19">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="makeover" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/makeover-001-b4.jpg" alt="Before: smile makeover case 20" loading="lazy">
+          <img class="ba-img-after" src="assets/makeover-001-after.jpg" alt="After: smile makeover case 20" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for smile makeover case 20">
+        </div>
+        <figcaption class="pk-ba-cap">Complete smile makeover</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/14-Double-AO4-before.jpg" alt="Before: double arch case 21" loading="lazy">
+          <img class="ba-img-after" src="assets/14-Double-AO4-after.jpg" alt="After: double arch case 21" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 21">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/13-Double-AO4-before.jpg" alt="Before: double arch case 22" loading="lazy">
+          <img class="ba-img-after" src="assets/13-Double-AO4-after.jpg" alt="After: double arch case 22" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 22">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/12-Double-AO4-before.jpg" alt="Before: double arch case 23" loading="lazy">
+          <img class="ba-img-after" src="assets/12-Double-AO4-after.jpg" alt="After: double arch case 23" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 23">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/11-Double-AO4-Before.jpg" alt="Before: double arch case 24" loading="lazy">
+          <img class="ba-img-after" src="assets/11-Double-AO4-after.jpg" alt="After: double arch case 24" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 24">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/10-Double-AO4-before.jpg" alt="Before: double arch case 25" loading="lazy">
+          <img class="ba-img-after" src="assets/10-Double-AO4-after.jpg" alt="After: double arch case 25" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 25">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/9-Double-AO4-before.jpg" alt="Before: double arch case 26" loading="lazy">
+          <img class="ba-img-after" src="assets/9-Double-AO4-after.jpg" alt="After: double arch case 26" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 26">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/8-Double-AO4-before.jpg" alt="Before: double arch case 27" loading="lazy">
+          <img class="ba-img-after" src="assets/8-Double-AO4-after.jpg" alt="After: double arch case 27" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 27">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/7-Double-AO4-before.jpg" alt="Before: double arch case 28" loading="lazy">
+          <img class="ba-img-after" src="assets/7-Double-AO4-after.jpg" alt="After: double arch case 28" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 28">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/5-Double-AO4-before.jpg" alt="Before: double arch case 29" loading="lazy">
+          <img class="ba-img-after" src="assets/5-Double-AO4-after.jpg" alt="After: double arch case 29" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 29">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/4-double-AO4-before.jpg" alt="Before: double arch case 30" loading="lazy">
+          <img class="ba-img-after" src="assets/4-Double-AO4-after.jpg" alt="After: double arch case 30" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 30">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/3-Double-AO4-before.jpg" alt="Before: double arch case 31" loading="lazy">
+          <img class="ba-img-after" src="assets/3-Double-AO4-after.jpg" alt="After: double arch case 31" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 31">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/2-double-AO4-before.jpg" alt="Before: double arch case 32" loading="lazy">
+          <img class="ba-img-after" src="assets/2-Double-AO4-After.jpg" alt="After: double arch case 32" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 32">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/1-Double-AO4-before.jpg" alt="Before: double arch case 33" loading="lazy">
+          <img class="ba-img-after" src="assets/1-Double-AO4-After.jpg" alt="After: double arch case 33" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 33">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/1-Veneers-before.jpg" alt="Before: porcelain veneers case 34" loading="lazy">
+          <img class="ba-img-after" src="assets/1-Veneers-after.jpg" alt="After: porcelain veneers case 34" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 34">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/2-Veneers-before.jpg" alt="Before: porcelain veneers case 35" loading="lazy">
+          <img class="ba-img-after" src="assets/2-Veneers-after.jpg" alt="After: porcelain veneers case 35" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 35">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/3-Veneers-before.jpg" alt="Before: porcelain veneers case 36" loading="lazy">
+          <img class="ba-img-after" src="assets/3-Veneers-after.jpg" alt="After: porcelain veneers case 36" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 36">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/4-Veneers-before.jpg" alt="Before: porcelain veneers case 37" loading="lazy">
+          <img class="ba-img-after" src="assets/4-Veneers-after.jpg" alt="After: porcelain veneers case 37" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 37">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/5-Veneers-before.jpg" alt="Before: porcelain veneers case 38" loading="lazy">
+          <img class="ba-img-after" src="assets/5-Veneers-after.jpg" alt="After: porcelain veneers case 38" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 38">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/6-veneers-before.jpg" alt="Before: porcelain veneers case 39" loading="lazy">
+          <img class="ba-img-after" src="assets/6-Veneers-after.jpg" alt="After: porcelain veneers case 39" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 39">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="veneers" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/7-Veneers-before.jpg" alt="Before: porcelain veneers case 40" loading="lazy">
+          <img class="ba-img-after" src="assets/7-Veneers-after.jpg" alt="After: porcelain veneers case 40" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for porcelain veneers case 40">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/1-Single-AO4-before.jpg" alt="Before: single arch case 41" loading="lazy">
+          <img class="ba-img-after" src="assets/1-Single-AO4-After.jpg" alt="After: single arch case 41" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for single arch case 41">
+        </div>
+        <figcaption class="pk-ba-cap">Single arch &middot; one jaw restored on four implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="combined" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/1-Veneers-and-Implants-before.jpg" alt="Before: veneers + implants case 42" loading="lazy">
+          <img class="ba-img-after" src="assets/1-Veneers-and-Implants-after.jpg" alt="After: veneers + implants case 42" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for veneers + implants case 42">
+        </div>
+        <figcaption class="pk-ba-cap">Veneers combined with implant restoration</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/2-Single-AO4-before.jpg" alt="Before: single arch case 43" loading="lazy">
+          <img class="ba-img-after" src="assets/2-Single-AO4-After.jpg" alt="After: single arch case 43" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for single arch case 43">
+        </div>
+        <figcaption class="pk-ba-cap">Single arch &middot; one jaw restored on four implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="combined" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/2-Veneers-and-Implants-before.jpg" alt="Before: veneers + implants case 44" loading="lazy">
+          <img class="ba-img-after" src="assets/2-Veneers-and-Implants-after.jpg" alt="After: veneers + implants case 44" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for veneers + implants case 44">
+        </div>
+        <figcaption class="pk-ba-cap">Veneers combined with implant restoration</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="combined" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/3-Veneers-and-Implants-before.jpg" alt="Before: veneers + implants case 45" loading="lazy">
+          <img class="ba-img-after" src="assets/3-Veneers-and-Implants-after.jpg" alt="After: veneers + implants case 45" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for veneers + implants case 45">
+        </div>
+        <figcaption class="pk-ba-cap">Veneers combined with implant restoration</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="full-arch" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/6-Double-AO4-before.jpg" alt="Before: double arch case 46" loading="lazy">
+          <img class="ba-img-after" src="assets/6-Double-AO4-after.jpg" alt="After: double arch case 46" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for double arch case 46">
+        </div>
+        <figcaption class="pk-ba-cap">Double arch &middot; upper and lower rebuilt on implants</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="makeover" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/1-1.jpeg" alt="Before: smile makeover case 47" loading="lazy">
+          <img class="ba-img-after" src="assets/1-3-1024x684-1.jpeg" alt="After: smile makeover case 47" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for smile makeover case 47">
+        </div>
+        <figcaption class="pk-ba-cap">Complete smile makeover</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="makeover" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/2-1-1024x684-1.jpeg" alt="Before: smile makeover case 48" loading="lazy">
+          <img class="ba-img-after" src="assets/2-3-1024x684-1.jpeg" alt="After: smile makeover case 48" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for smile makeover case 48">
+        </div>
+        <figcaption class="pk-ba-cap">Complete smile makeover</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="makeover" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/3-1-1024x684-1.jpeg" alt="Before: smile makeover case 49" loading="lazy">
+          <img class="ba-img-after" src="assets/3-3-1024x684-1.jpeg" alt="After: smile makeover case 49" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for smile makeover case 49">
+        </div>
+        <figcaption class="pk-ba-cap">Complete smile makeover</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="makeover" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/4-1-1024x684-1.jpeg" alt="Before: smile makeover case 50" loading="lazy">
+          <img class="ba-img-after" src="assets/4-3-1024x684-1.jpeg" alt="After: smile makeover case 50" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for smile makeover case 50">
+        </div>
+        <figcaption class="pk-ba-cap">Complete smile makeover</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="makeover" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/Jennifer-Before-Fix-1.jpeg" alt="Before: smile makeover case 51" loading="lazy">
+          <img class="ba-img-after" src="assets/Jennifer-After-Fix-1.jpeg" alt="After: smile makeover case 51" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for smile makeover case 51">
+        </div>
+        <figcaption class="pk-ba-cap">Complete smile makeover</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="makeover" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/Michael-Before-1.jpeg" alt="Before: smile makeover case 52" loading="lazy">
+          <img class="ba-img-after" src="assets/Michael-After.Fix_.jpg" alt="After: smile makeover case 52" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for smile makeover case 52">
+        </div>
+        <figcaption class="pk-ba-cap">Complete smile makeover</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="whitening" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-whitening-1-before.jpg" alt="Before: whitening case 1" loading="lazy">
+          <img class="ba-img-after" src="assets/case-whitening-1-after.jpg" alt="After: whitening case 1" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for whitening case 1">
+        </div>
+        <figcaption class="pk-ba-cap">Professional whitening &middot; in-office</figcaption>
+      </figure>
+      <figure class="ga-item" data-cat="whitening" style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-whitening-2-before.jpg" alt="Before: whitening case 2" loading="lazy">
+          <img class="ba-img-after" src="assets/case-whitening-2-after.jpg" alt="After: whitening case 2" loading="lazy">
+          <span class="ba-tag ba-tag-before">Before</span><span class="ba-tag ba-tag-after">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph for whitening case 2">
+        </div>
+        <figcaption class="pk-ba-cap">Professional whitening &middot; in-office</figcaption>
+      </figure>
+    </div>
+  </div>
+
+</section>
+
+<section class="pk pk-alt" id="note">
+  <div class="wrap section pk-lede">
+    <div class="lc-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Reading The Photographs</span></div>
+      <h2 data-split>What a before-and-after can and cannot tell you.</h2>
+    </div>
+    <div class="lc-body" data-rv="stagger">
+      <p>Clinical photographs are taken close, lit hard and shot at the same angle each time, which
+        is why they look nothing like a portrait. That consistency is the point: it is what makes two images of the same mouth comparable.</p>
+      <p>What they cannot show is <strong>how the case was planned</strong>: how much bone there was
+        to work with, whether teeth had to come out first, how the bite was balanced, how long it
+        took. Two identical-looking afters can sit on completely different treatment plans.</p>
+      <p>So use these for what they are good for: seeing that work of this kind is done here,
+        routinely, on cases other practices call too complex. Then bring your own mouth in and have
+        it scanned.</p>
+      <a class="pk-more" href="contact.html#book">Book a consultation</a>
+    </div>
+  </div>
+</section>
+
+<section class="pk" id="next">
+  <div class="wrap section">
+    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
+    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
+      <a href="all-on-4.html"><span class="nx-k">Full arch</span>
+        <span class="nx-t">All-on-4</span>
+        <span class="nx-d">The treatment behind most of the cases above.</span></a>
+      <a href="veneers.html"><span class="nx-k">Cosmetic</span>
+        <span class="nx-t">Porcelain Veneers</span>
+        <span class="nx-d">Two appointments, under a millimetre of enamel.</span></a>
+      <a href="patient-stories.html"><span class="nx-k">In their words</span>
+        <span class="nx-t">Patient Stories</span>
+        <span class="nx-d">Six patients filmed at the practice.</span></a>
+    </nav>
+  </div>
+</section>
+
+<section class="pk pk-cta" id="book">
+  <div class="wrap section cta-in">
+    <h2 data-split>Is your case in here?</h2>
+    <p data-rv>Bring it in. The consultation includes a 3D scan and a straight answer about what
+      your case actually needs.</p>
+    <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Book your consult</span></a>
+    <div class="cta-phones" data-rv>
+      <span>McLean &middot; <a href="tel:+15716199442">(571) 619-9442</a></span>
+      <span>Alexandria &middot; <a href="tel:+15714103430">(571) 410-3430</a></span>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="foot" data-theme="dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo.png" alt="Dr. Nahlah">
+        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+          smiles that other practices call too complex.</p>
+      </div>
+      <div>
+        <h4>Treatments</h4>
+        <ul>
+          <li><a href="dental-implants.html">Dental Implants</a></li>
+          <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+          <li><a href="smile-makeover.html">Smile Makeover</a></li>
+          <li><a href="veneers.html">Porcelain Veneers</a></li>
+          <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="smile-gallery.html">Smile Gallery</a></li>
+          <li><a href="patient-stories.html">Patient Stories</a></li>
+          <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+          <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+          <li><a href="contact.html">Contact &amp; Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul class="foot-facts">
+          <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
+          <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
+          <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
+        </ul>
+        <ul style="margin-top:1.1rem">
+          <li><a href="tel:+15716199442">McLean &middot; (571) 619-9442</a></li>
+          <li><a href="tel:+15714103430">Alexandria &middot; (571) 410-3430</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+      <span>McLean &middot; Alexandria, Virginia</span>
+      <!-- The legal links belong in the base row, not in the drawer's site map:
+           they are what people go looking for in a footer by habit. -->
+      <span><a href="privacy-policy.html">Privacy Policy</a></span>
+      <span><a href="terms-conditions.html">Terms &amp; Conditions</a></span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
+</body>
+</html>

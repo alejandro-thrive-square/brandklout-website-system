@@ -1,0 +1,17 @@
+.ct-form{display:grid;gap:1.1rem;max-width:64ch}
+.ct-form .ct-form-row{display:grid;gap:1.1rem}
+@media(min-width:620px){ .ct-form .ct-form-row.ct-form-row-2{grid-template-columns:1fr 1fr} }
+.ct-form label{display:grid;gap:.45rem;font-size:.66rem;letter-spacing:.18em;text-transform:uppercase;
+  font-weight:600;color:var(--fg-soft)}
+.ct-form input,.ct-form select,.ct-form textarea{font:inherit;font-size:1rem;font-weight:400;color:var(--fg);
+  background:var(--card);border:1px solid var(--line-strong);padding:.95rem 1.1rem;
+  border-radius:0;transition:border-color .3s ease}
+.ct-form input:focus,.ct-form select:focus,.ct-form textarea:focus{border-color:var(--rule);outline:none}
+.ct-form select{appearance:none;
+  background-image:linear-gradient(45deg,transparent 50%,var(--rule) 50%),
+                   linear-gradient(135deg,var(--rule) 50%,transparent 50%);
+  background-position:calc(100% - 20px) 55%,calc(100% - 14px) 55%;
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+.ct-form .ct-req{color:var(--accent)}
+.ct-form .ct-note{font-size:.82rem;color:var(--fg-soft);font-weight:400;line-height:1.7}
+.ct-form button{justify-self:start;margin-top:.4rem}

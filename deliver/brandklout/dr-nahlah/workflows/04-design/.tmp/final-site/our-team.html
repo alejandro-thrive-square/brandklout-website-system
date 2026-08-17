@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
+     by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
+     Designer carries. Do not hand-edit the output; edit seo.json. -->
+<title>Meet the Team | Dr. Nahlah Implants &amp; Prosthodontics | McLean, VA</title>
+<meta name="description" content="The five people behind the treatment: office manager, digital lab designer, treatment coordinator, dental assistant and hygienist, across both Virginia offices.">
+<meta property="og:title" content="Meet the Team | Dr. Nahlah, McLean &amp; Alexandria">
+<meta property="og:description" content="One coordinator holds your case end to end, and the lab designer works down the hall.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Meet the Team | Dr. Nahlah, McLean &amp; Alexandria">
+<meta name="twitter:description" content="One coordinator holds your case end to end, and the lab designer works down the hall.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "AboutPage",
+      "name": "Meet the team",
+      "description": "The staff of Dr. Nahlah Implants and Prosthodontics Specialists in McLean and Alexandria, Virginia.",
+      "isPartOf": {
+        "@id": "/#website"
+      },
+      "about": {
+        "@id": "/#practice"
+      }
+    }
+  ]
+}
+</script>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
+     from site-src/css/*.css in filename order, which IS the cascade order:
+
+       00  fluid root font-size  generated; deliver/process/04-design/fluid-root.md
+       01  design tokens         palette, theme layer, type steps
+       02  base                  reset and the shared primitives
+       10-12  chrome             nav, drawer, footer
+       20  page kit              the shared interior-page section vocabulary
+       30-38  home chapters      the nine bespoke chapters of the journey
+       50-59  page overrides     rules only one page needs
+
+     Every page loads the same file, so moving a section from one page to another
+     means moving the markup and nothing else. It also means the rules exist once
+     rather than being re-emitted into all 26 pages.
+     ========================================================================== -->
+<link rel="stylesheet" href="assets/site.css">
+
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead.
+     The runtime itself is NOT here: it lives in assets/site.js at the end of
+     <body>, because ScrollTrigger has to be registered after document.body
+     exists or ScrollSmoother dies on getScrollFunc. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+</head>
+
+<body>
+
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<header class="nav" id="nav" data-journey="0">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap no-rail nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+      <img src="assets/logo.png" alt="Dr. Nahlah — Implants and Prosthodontics Specialists">
+    </a>
+    <nav class="nav-slot" aria-label="Primary">
+      <!-- The current-page highlight is baked in here at build time. In Webflow
+           the Navbar is ONE shared component, so it cannot be: the conversion
+           turns these five placeholders into a pathname -> href map in the
+           footer custom code. When a slug changes, that map has to change with
+           it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
+           there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
+      <div class="nav-links">
+        <a href="dental-implants.html">Implants</a>
+        <a href="smile-makeover.html">Cosmetic</a>
+        <a href="smile-gallery.html">Smile Gallery</a>
+        <a href="meet-dr-nahlah.html" aria-current="page">The Specialist</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
+      <span class="nav-close" aria-hidden="true">Close</span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full site index. Opens at every breakpoint, so it is the site's real
+     navigation rather than a mobile-only fallback. -->
+<div class="drawer" id="drawer" aria-hidden="true" data-theme="dark">
+  <div class="dr-grid">
+    <div class="dr-col">
+      <h4>Implant Dentistry</h4>
+      <ul>
+        <li><a href="dental-implants.html">Dental Implants</a></li>
+        <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-supported-dentures.html">Fixed vs. Removable</a></li>
+        <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+        <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="emergency-dentistry.html">Emergency Dentistry</a></li>
+        <li><a href="dental-conditions.html">Conditions We Treat</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Aesthetics</h4>
+      <ul>
+        <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
+        <li><a href="smile-makeover.html">Smile Makeover</a></li>
+        <li><a href="veneers.html">Porcelain Veneers</a></li>
+        <li><a href="crowns-and-bridges.html">Crowns &amp; Bridges</a></li>
+        <li><a href="teeth-whitening.html">Teeth Whitening</a></li>
+        <li><a href="smile-gallery.html">Smile Gallery</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Who We Are</h4>
+      <ul>
+        <li><a href="about.html">Why Choose Us</a></li>
+        <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+        <li><a href="our-team.html">Meet the Team</a></li>
+        <li><a href="our-facility.html">Our Facility</a></li>
+        <li><a href="patient-stories.html">Patient Stories</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>What To Expect</h4>
+      <ul>
+        <li><a href="patient-center.html">Your First Visit</a></li>
+        <li><a href="financing.html">Insurance &amp; Financing</a></li>
+        <li><a href="contact.html">Contact &amp; Locations</a></li>
+        <li><a href="doctor-referral.html">For Referring Doctors</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dr-foot">
+    <div><b>Tysons Corner &middot; McLean</b>
+      New patients <a href="tel:+15716199442">(571) 619-9442</a><br>
+      Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
+    <div><b>Alexandria</b>
+      New patients <a href="tel:+15714103430">(571) 410-3430</a><br>
+      Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
+    <div><b>Hours</b>
+      Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
+      Fri 8:00am &ndash; 2:00pm &middot; Sat &amp; Sun closed</div>
+  </div>
+</div>
+
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     MEET THE TEAM — from drnahlah.com/our-team/. Five named staff, each with a
+     portrait the source site publishes under their own name.
+
+     CONTENT-HONESTY NOTE. The source page gives a name and a job title and
+     nothing else — no bios exist. So the copy under each portrait describes
+     THE ROLE at this practice, never the person: nothing here claims a fact
+     about Venita, Junko, Helia, Hana or Basma that the source did not publish.
+     If the client supplies real bios, they replace these paragraphs wholesale.
+
+     BUILD FLAG. The source page's markup carries a sixth job title,
+     "Receptionist", with no name and no photograph attached — an <h4> orphaned
+     under Basma's card. It is not rendered here rather than guessed at. Ask
+     the client whether that is a sixth team member or a second hat Basma wears.
+     ========================================================================== -->
+<section class="pg-hero" id="hero">
+  <div class="ph-bg">
+    <img src="assets/team-group.jpg" alt="The Dr. Nahlah team" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i>
+      <a href="about.html">Why Choose Us</a><i></i><span>Meet the Team</span></div>
+    <h1 data-split>The five people you will <em>actually</em> deal with.</h1>
+    <p class="ph-lead" data-rv>Dr. Nahlah does the surgery. Everything around it — the scheduling, the insurance, the scanning, the lab work, the cleanings — belongs to the people on this page.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a consultation</span></a>
+      <a class="btn btn-ghost magnetic" href="#team"><span>Meet the team</span></a>
+    </div>
+    <div class="ph-meta" data-rv="stagger">
+      <div><b>In-house lab</b><span>A designer on staff</span></div>
+      <div><b>One coordinator</b><span>Not a call center</span></div>
+      <div><b>2 offices</b><span>McLean and Alexandria</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- lede ---------- -->
+<section class="pk pk-alt" id="why">
+  <div class="wrap section pk-lede">
+    <div class="lc-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Why It Matters</span></div>
+      <h2 data-split>A small team is the point, not a limitation.</h2>
+    </div>
+    <div class="lc-body">
+      <p data-rv>Full-mouth work runs for months. Over that time you will speak to the practice far
+        more often than you sit in the chair — about dates, about insurance, about the thing that felt
+        odd on Tuesday. Whether that is pleasant is decided almost entirely by whether the same person
+        answers each time.</p>
+      <p data-rv>Here they do. <strong>One treatment coordinator</strong> holds your case from the
+        first estimate to the last visit. <strong>One office manager</strong> runs both offices.
+        And because the digital lab is in the building, the person designing your prosthesis is
+        somebody you can be introduced to rather than a workshop in another state.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the team ---------- -->
+<section class="pk" id="team">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">The Team</span></div>
+      <h2 data-split>Meet the team.</h2>
+      <p>Names and roles as the practice publishes them.</p>
+    </div>
+    <div class="tm-grid" data-rv="stagger">
+      <figure class="tm-card">
+        <div class="tm-shot"><img src="assets/team-venita.jpg" alt="Venita, office manager" loading="lazy"></div>
+        <figcaption class="tm-body">
+          <span class="tm-name">Venita</span>
+          <span class="tm-role">Office Manager</span>
+          <p>Runs both offices. Scheduling, records and the practical end of getting two locations to
+            behave like one — which is who you reach when something needs to move.</p>
+        </figcaption>
+      </figure>
+      <figure class="tm-card">
+        <div class="tm-shot"><img src="assets/team-junko.jpg" alt="Junko, digital lab designer" loading="lazy"></div>
+        <figcaption class="tm-body">
+          <span class="tm-name">Junko</span>
+          <span class="tm-role">Digital Lab Designer</span>
+          <p>Designs the prosthesis itself in the in-house lab, from the intraoral scan through to the
+            milled or printed result. Most practices post this work out; here it is a desk down the hall.</p>
+        </figcaption>
+      </figure>
+      <figure class="tm-card">
+        <div class="tm-shot"><img src="assets/team-helia.jpg" alt="Helia, treatment coordinator" loading="lazy"></div>
+        <figcaption class="tm-body">
+          <span class="tm-name">Helia</span>
+          <span class="tm-role">Treatment Coordinator</span>
+          <p>Holds your case end to end: the written estimate, the insurance pre-authorization, the
+            financing application and the order the appointments happen in.</p>
+        </figcaption>
+      </figure>
+      <figure class="tm-card">
+        <div class="tm-shot"><img src="assets/team-hana.png" alt="Hana, dental assistant" loading="lazy"></div>
+        <figcaption class="tm-body">
+          <span class="tm-name">Hana</span>
+          <span class="tm-role">Dental Assistant</span>
+          <p>Beside Dr. Nahlah for the surgical appointments, and the person who prepares the room,
+            the scanner and you before any of it starts.</p>
+        </figcaption>
+      </figure>
+      <figure class="tm-card">
+        <div class="tm-shot"><img src="assets/team-basma.jpg" alt="Basma, dental hygienist" loading="lazy"></div>
+        <figcaption class="tm-body">
+          <span class="tm-name">Basma</span>
+          <span class="tm-role">Dental Hygienist</span>
+          <p>Cleanings and the six-month maintenance that decides how long implant work lasts. The
+            appointment that is easy to skip and should not be.</p>
+        </figcaption>
+      </figure>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the lab ---------- -->
+<section class="pk pk-light" id="lab">
+  <div class="wrap section pk-split pk-split-rev">
+    <figure class="sp-fig" style="margin:0">
+      <img src="assets/tech-advanced.jpg" alt="The practice's in-house digital laboratory" data-drift loading="lazy">
+    </figure>
+    <div class="sp-copy">
+      <div class="chapter-tag" data-rv><i></i><span class="label">In-House</span></div>
+      <h2 data-split>The lab is a room here, not a shipping address.</h2>
+      <p data-rv>A dental laboratory is normally a separate business in a separate city. Impressions
+        go out, weeks pass, a box comes back, and if the fit is wrong the whole cycle repeats.</p>
+      <p data-rv>This practice keeps the lab in the building, with a designer on staff. In practice
+        that changes three things:</p>
+      <ul class="sp-list" data-rv="stagger">
+        <li><i></i>Fewer appointments, because adjustments happen while you are still in the chair</li>
+        <li><i></i>Shorter waits, because nothing is in transit</li>
+        <li><i></i>A shade and shape agreed with the person who will cut them, not described on a form</li>
+      </ul>
+      <p data-rv style="margin-top:.6rem">
+        <a class="pk-more" href="our-facility.html">Inside the facility</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- next ---------- -->
+<section class="pk" id="next">
+  <div class="wrap section">
+    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
+    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
+      <a href="meet-dr-nahlah.html"><span class="nx-k">The specialist</span>
+        <span class="nx-t">Dr. Esam Nahlah</span>
+        <span class="nx-d">Board certification, fellowship and twelve credentials.</span></a>
+      <a href="our-facility.html"><span class="nx-k">The building</span>
+        <span class="nx-t">Our Facility</span>
+        <span class="nx-d">Six surgical suites, the digital lab and the scanners.</span></a>
+      <a href="about.html"><span class="nx-k">The practice</span>
+        <span class="nx-t">Why Choose Us</span>
+        <span class="nx-d">Free second opinions, same-day emergencies, a five-year warranty.</span></a>
+    </nav>
+  </div>
+</section>
+
+<!-- ---------- cta ---------- -->
+<section class="pk pk-cta" id="book">
+  <div class="wrap section cta-in">
+    <h2 data-split>Get on the path to better dental health.</h2>
+    <p data-rv>Request a consultation and you will be given a time with Dr. Nahlah, not a sales
+      appointment with a coordinator.</p>
+    <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Request a consultation</span></a>
+    <div class="cta-phones" data-rv>
+      <span>McLean &middot; <a href="tel:+15716199442">(571) 619-9442</a></span>
+      <span>Alexandria &middot; <a href="tel:+15714103430">(571) 410-3430</a></span>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="foot" data-theme="dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo.png" alt="Dr. Nahlah">
+        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+          smiles that other practices call too complex.</p>
+      </div>
+      <div>
+        <h4>Treatments</h4>
+        <ul>
+          <li><a href="dental-implants.html">Dental Implants</a></li>
+          <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+          <li><a href="smile-makeover.html">Smile Makeover</a></li>
+          <li><a href="veneers.html">Porcelain Veneers</a></li>
+          <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="smile-gallery.html">Smile Gallery</a></li>
+          <li><a href="patient-stories.html">Patient Stories</a></li>
+          <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+          <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+          <li><a href="contact.html">Contact &amp; Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul class="foot-facts">
+          <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
+          <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
+          <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
+        </ul>
+        <ul style="margin-top:1.1rem">
+          <li><a href="tel:+15716199442">McLean &middot; (571) 619-9442</a></li>
+          <li><a href="tel:+15714103430">Alexandria &middot; (571) 410-3430</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+      <span>McLean &middot; Alexandria, Virginia</span>
+      <!-- The legal links belong in the base row, not in the drawer's site map:
+           they are what people go looking for in a footer by habit. -->
+      <span><a href="privacy-policy.html">Privacy Policy</a></span>
+      <span><a href="terms-conditions.html">Terms &amp; Conditions</a></span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
+</body>
+</html>

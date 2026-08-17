@@ -8,7 +8,18 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const SRC = path.dirname(fileURLToPath(import.meta.url));
-const DL = path.resolve(SRC, "../../../03-graphic-resources/.tmp/downloads/wp-content/uploads");
+// 03-graphic-resources is 708MB and was left in the `main` checkout when 04-design
+// was split into the bk-dr-nahlah worktree, so the sibling path below resolves to
+// nothing there and every copy silently "goes missing". Point DOWNLOADS at the
+// uploads root in whichever checkout actually holds the extraction:
+//   DOWNLOADS=".../03-graphic-resources/.tmp/downloads/wp-content/uploads" node copy-assets.mjs
+const DL = process.env.DOWNLOADS
+  ? path.resolve(process.env.DOWNLOADS)
+  : path.resolve(SRC, "../../../03-graphic-resources/.tmp/downloads/wp-content/uploads");
+if (!fs.existsSync(DL)) {
+  console.error(`no extraction at ${DL}\nset DOWNLOADS to the uploads root that holds it.`);
+  process.exit(1);
+}
 const OUT = path.resolve(SRC, "..", "final-site", "assets");
 fs.mkdirSync(OUT, { recursive: true });
 
@@ -34,6 +45,43 @@ const MAP = {
   "office-outside.jpg": "2022/03/office_outside.jpg",
   "office-hero.jpg": "2022/03/office_hero.jpg",
   "office-wide.jpeg": "2022/01/img-full-width-dental-office-1.jpeg",
+  "office-room.jpg": "2021/02/dental-office.jpg",
+  "tech-advanced.jpg": "2022/03/advanced_tech.jpg",
+  "tech-hero.jpg": "2022/03/advanced_tech_hero.jpg",
+  "dr-headshot.png": "2025/04/DGT_Dr_Nahlah_Headshot_White-Coat_V2.png",
+  // team portraits — each published on /our-team/ under that person's own name,
+  // which is what makes them safe to caption (see the photo-provenance rule).
+  "team-group.jpg": "2022/03/Untitled-9.jpg",
+  "team-venita.jpg": "2022/01/thumb-venita.jpg",
+  "team-junko.jpg": "2022/01/thumb-junko.jpg",
+  "team-helia.jpg": "2022/01/thumb-helia.jpg",
+  "team-hana.png": "2022/05/Hana.png",
+  "team-basma.jpg": "2022/05/basma-profile3.jpg",
+  // batch 2 — cosmetic hub, whitening, crowns & bridges, oral surgery
+  "cosmetic-transformation.jpg": "2022/03/patient_heroo.jpg",
+  "whitening-graphic.png": "2019/11/teeth-whitening-graphic.png",
+  "crown-model.jpg": "2021/02/dental-crowns-model-2.jpg",
+  "bridge-model.jpg": "2021/02/dental-bridge-model-1.jpg",
+  "bridge-model-alt.png": "2019/11/dental-bridge-model.png",
+  "cost-calculating.png": "2021/02/calculating-cost-of-dental-implants.png",
+  "case-porcelain-1-before.jpg": "2025/02/porcelain-001-b4.jpg",
+  "case-porcelain-1-after.jpg": "2025/02/porcelain-001-after.jpg",
+  "case-makeover-1-before.jpg": "2025/02/makeover-001-b4.jpg",
+  "case-makeover-1-after.jpg": "2025/02/makeover-001-after.jpg",
+  // batch 3 — emergency, conditions, fixed vs removable, implant FAQ
+  "emergency-patient.jpg": "2021/03/patient_interaction.jpg",
+  "emergency-sign.png": "2021/02/emergency-sign.png",
+  "conditions-patient.jpg": "2025/02/patient_hero5.jpg",
+  "dentures-model.png": "2021/02/dentures-model.png",
+  "dentures-implant-graphic.png": "2021/02/implant-supported-dentures-graphic.png",
+  "full-arch-graphic.png": "2021/02/full-arch-dental-implants.png",
+  "multi-implant-model.png": "2021/07/multiple-dental-implant-model.png",
+  "case-fullarch-3-before.jpg": "2025/02/case-3-all-on-4-implants-before.jpg",
+  "case-fullarch-3-after.jpg": "2025/02/case-3-all-on-4-implants-after.jpg",
+  "case-fullarch-4-before.jpg": "2025/02/case-4-all-on-4-implants-before.jpg",
+  "case-fullarch-4-after.jpg": "2025/02/case-4-all-on-4-implants-after.jpg",
+  // batch 4 — first visit, financing, referrals, legal
+  "tooth-model.png": "2019/11/tooth-model.png",
   // treatment context
   "sedation-nitrous.png": "2021/02/dental-patient-under-nitrous-oxide-sedation.png",
   "sedation-oral.png": "2021/02/dental-patient-taking-oral-sedation.png",
@@ -90,6 +138,61 @@ for (const [slug, token, n] of CASES) {
   }
 }
 
+/* ---------------------------------------------------------------------------
+   THE FULL CONTENT SET.
+
+   The curated MAP above is the set of images the redesign chose. The brief is
+   now that the rebuild carries the same assets as drnahlah.com, so this pass
+   copies EVERY content image the 33 real pages reference — 225 of them — under
+   its own filename, and the curated names above continue to work on top.
+
+   What it deliberately skips:
+     - the 43 blog posts and 2 category archives (kind !== "page"), which belong
+       to the migration modules, not to the design package
+     - site chrome: anything appearing on more than half of the 78 scraped pages
+       is the logo or a footer mark, not page content
+     - WordPress size variants (`name-800x600.jpg`, `name-scaled.jpg`), which
+       `pick()` already folds back into their master
+
+   Set SCRAPE if the content extract is not in the sibling 01-content-intake.
+--------------------------------------------------------------------------- */
+const SCRAPE = path.resolve(
+  process.env.SCRAPE || path.join(SRC, "../../../01-content-intake/.tmp/current-site-scrape")
+);
+const strip = (f) => f.replace(/-\d+x\d+(?=\.\w+$)/, "").replace(/-scaled(?=\.\w+$)/, "");
+let bulk = 0, bulkSkipped = 0;
+if (fs.existsSync(path.join(SCRAPE, "data"))) {
+  const recs = fs.readdirSync(path.join(SCRAPE, "data"))
+    .filter((f) => f.endsWith(".json"))
+    .map((f) => JSON.parse(fs.readFileSync(path.join(SCRAPE, "data", f), "utf8")));
+  const pageCount = recs.length;
+  const seenOn = new Map();
+  for (const r of recs)
+    for (const s of new Set((r.images || []).map((i) => i.src)))
+      seenOn.set(s, (seenOn.get(s) || 0) + 1);
+
+  // Two different upload months can hold the same basename, so a flat copy would
+  // silently overwrite one with the other. Disambiguate by prefixing the month.
+  const claimed = new Map();
+  for (const r of recs.filter((x) => x.kind === "page")) {
+    for (const img of r.images || []) {
+      if ((seenOn.get(img.src) || 0) > pageCount / 2) continue;      // chrome
+      const rel = decodeURIComponent(img.src).split("/wp-content/uploads/")[1];
+      if (!rel) continue;
+      const master = strip(rel);
+      let dest = path.basename(master);
+      const prior = claimed.get(dest);
+      if (prior && prior !== master) {
+        const m = master.split("/");
+        dest = `${m[0]}-${m[1]}-${path.basename(master)}`;           // 2021-02-name.jpg
+      }
+      claimed.set(dest, master);
+      if (MAP[dest]) continue;                                       // curated name wins
+      MAP[dest] = master;
+    }
+  }
+}
+
 // Marks that are not client photography and so are not in the extraction:
 // the practice logo and the Google mark that labels the review score. Kept in
 // site-src/assets/ so a clean rebuild does not silently drop them.
@@ -99,6 +202,24 @@ if (fs.existsSync(OWN)) {
   for (const f of fs.readdirSync(OWN)) { fs.copyFileSync(path.join(OWN, f), path.join(OUT, f)); own++; }
 }
 
+// GSAP is vendored rather than pulled from the CDN so the package runs offline
+// and headless verification is deterministic. It lives in site-src/vendor/ and is
+// COMMITTED — final-site/assets/ is gitignored, so a vendor copy that only ever
+// existed there leaves a fresh clone unable to run its own gates. That is exactly
+// what happened to this worktree: every page reported "no console errors" as a
+// 404 storm because the libraries were never in the tree.
+const VENDOR = path.join(SRC, "vendor");
+let vend = 0;
+if (fs.existsSync(VENDOR)) {
+  for (const lib of fs.readdirSync(VENDOR)) {
+    const from = path.join(VENDOR, lib);
+    if (!fs.statSync(from).isDirectory()) continue;
+    const to = path.join(OUT, lib);
+    fs.mkdirSync(to, { recursive: true });
+    for (const f of fs.readdirSync(from)) { fs.copyFileSync(path.join(from, f), path.join(to, f)); vend++; }
+  }
+}
+
 let ok = 0; const missing = [];
 for (const [dest, rel] of Object.entries(MAP)) {
   const src = pick(rel) || path.join(DL, rel);
@@ -106,5 +227,5 @@ for (const [dest, rel] of Object.entries(MAP)) {
   fs.copyFileSync(src, path.join(OUT, dest));
   ok++;
 }
-console.log(`copied ${ok} assets (+${own} from site-src/assets) -> ${path.relative(process.cwd(), OUT)}`);
+console.log(`copied ${ok} assets (+${own} from site-src/assets, +${vend} vendored) -> ${path.relative(process.cwd(), OUT)}`);
 if (missing.length) console.log("MISSING:\n  " + missing.join("\n  "));

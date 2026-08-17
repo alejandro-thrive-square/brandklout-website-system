@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
+     by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
+     Designer carries. Do not hand-edit the output; edit seo.json. -->
+<title>Privacy Policy | Dr. Nahlah Implants &amp; Prosthodontics | McLean, VA</title>
+<meta name="description" content="How this website collects, uses, shares and secures your personal information, including the use of cookies and the choices available to you.">
+<meta property="og:title" content="Privacy Policy | Dr. Nahlah, McLean &amp; Alexandria">
+<meta property="og:description" content="How this website collects, uses and secures your personal information.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Privacy Policy | Dr. Nahlah, McLean &amp; Alexandria">
+<meta name="twitter:description" content="How this website collects, uses and secures your personal information.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Privacy policy",
+      "description": "The privacy statement governing data collection and usage on this website.",
+      "isPartOf": {
+        "@id": "/#website"
+      },
+      "about": {
+        "@id": "/#practice"
+      }
+    }
+  ]
+}
+</script>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
+     from site-src/css/*.css in filename order, which IS the cascade order:
+
+       00  fluid root font-size  generated; deliver/process/04-design/fluid-root.md
+       01  design tokens         palette, theme layer, type steps
+       02  base                  reset and the shared primitives
+       10-12  chrome             nav, drawer, footer
+       20  page kit              the shared interior-page section vocabulary
+       30-38  home chapters      the nine bespoke chapters of the journey
+       50-59  page overrides     rules only one page needs
+
+     Every page loads the same file, so moving a section from one page to another
+     means moving the markup and nothing else. It also means the rules exist once
+     rather than being re-emitted into all 26 pages.
+     ========================================================================== -->
+<link rel="stylesheet" href="assets/site.css">
+
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead.
+     The runtime itself is NOT here: it lives in assets/site.js at the end of
+     <body>, because ScrollTrigger has to be registered after document.body
+     exists or ScrollSmoother dies on getScrollFunc. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+</head>
+
+<body>
+
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<header class="nav" id="nav" data-journey="0">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap no-rail nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+      <img src="assets/logo.png" alt="Dr. Nahlah — Implants and Prosthodontics Specialists">
+    </a>
+    <nav class="nav-slot" aria-label="Primary">
+      <!-- The current-page highlight is baked in here at build time. In Webflow
+           the Navbar is ONE shared component, so it cannot be: the conversion
+           turns these five placeholders into a pathname -> href map in the
+           footer custom code. When a slug changes, that map has to change with
+           it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
+           there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
+      <div class="nav-links">
+        <a href="dental-implants.html">Implants</a>
+        <a href="smile-makeover.html">Cosmetic</a>
+        <a href="smile-gallery.html">Smile Gallery</a>
+        <a href="meet-dr-nahlah.html">The Specialist</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
+      <span class="nav-close" aria-hidden="true">Close</span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full site index. Opens at every breakpoint, so it is the site's real
+     navigation rather than a mobile-only fallback. -->
+<div class="drawer" id="drawer" aria-hidden="true" data-theme="dark">
+  <div class="dr-grid">
+    <div class="dr-col">
+      <h4>Implant Dentistry</h4>
+      <ul>
+        <li><a href="dental-implants.html">Dental Implants</a></li>
+        <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-supported-dentures.html">Fixed vs. Removable</a></li>
+        <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+        <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="emergency-dentistry.html">Emergency Dentistry</a></li>
+        <li><a href="dental-conditions.html">Conditions We Treat</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Aesthetics</h4>
+      <ul>
+        <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
+        <li><a href="smile-makeover.html">Smile Makeover</a></li>
+        <li><a href="veneers.html">Porcelain Veneers</a></li>
+        <li><a href="crowns-and-bridges.html">Crowns &amp; Bridges</a></li>
+        <li><a href="teeth-whitening.html">Teeth Whitening</a></li>
+        <li><a href="smile-gallery.html">Smile Gallery</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Who We Are</h4>
+      <ul>
+        <li><a href="about.html">Why Choose Us</a></li>
+        <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+        <li><a href="our-team.html">Meet the Team</a></li>
+        <li><a href="our-facility.html">Our Facility</a></li>
+        <li><a href="patient-stories.html">Patient Stories</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>What To Expect</h4>
+      <ul>
+        <li><a href="patient-center.html">Your First Visit</a></li>
+        <li><a href="financing.html">Insurance &amp; Financing</a></li>
+        <li><a href="contact.html">Contact &amp; Locations</a></li>
+        <li><a href="doctor-referral.html">For Referring Doctors</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dr-foot">
+    <div><b>Tysons Corner &middot; McLean</b>
+      New patients <a href="tel:+15716199442">(571) 619-9442</a><br>
+      Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
+    <div><b>Alexandria</b>
+      New patients <a href="tel:+15714103430">(571) 410-3430</a><br>
+      Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
+    <div><b>Hours</b>
+      Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
+      Fri 8:00am &ndash; 2:00pm &middot; Sat &amp; Sun closed</div>
+  </div>
+</div>
+
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     PRIVACY POLICY — from drnahlah.com/privacy-policy/.
+
+     This page took the fifteenth build-out slot from `tysons-study-club`, whose
+     source is entirely Lorem Ipsum (see SITE.md). It is needed at launch and it
+     has 1,114 words of real content.
+
+     THE LEGAL WORDING IS CARRIED OVER, NOT REWRITTEN. Every clause below says
+     what the client's published policy says. Structure, headings and typography
+     are new; the substance is not, and it is not ours to change. Three things
+     the client and their counsel need to look at:
+
+     1. IT IS UNBRANDED TEMPLATE TEXT. The policy refers to itself as "This
+        Practice" throughout and never names Dr. Nahlah Implants and
+        Prosthodontics Specialists. That is preserved verbatim here rather than
+        silently branded, because substituting a legal entity's name into a
+        policy is a legal edit, not a copy edit.
+     2. IT PUBLISHES A FOURTH PHONE NUMBER. The contact clause gives
+        703-436-6843, which appears NOWHERE else in the 78-page scrape. The site
+        already has a live conflict between 448-3312 and 493-1358 for McLean;
+        this is a third McLean number again. Confirm before launch.
+     3. IT PREDATES CURRENT PRACTICE. There is no HIPAA notice, no CCPA/GDPR
+        language, no cookie consent mechanism and no stated retention period,
+        and the only security control named is SSL. For a healthcare practice
+        collecting patient details through a web form, that is worth a review by
+        someone qualified to give one. This build does not attempt that review.
+     ========================================================================== -->
+<section class="pg-hero" id="hero">
+  <div class="ph-bg">
+    <img src="assets/office-wide.jpeg" alt="The practice's treatment floor" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Privacy Policy</span></div>
+    <h1 data-split>Privacy <em>statement</em>.</h1>
+    <p class="ph-lead" data-rv>This Statement of Privacy applies to our Practice's website and governs data collection and usage. By using this website, you consent to the data practices described in this statement.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-ghost magnetic" href="#collection"><span>Read the statement</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- statement ---------- -->
+<section class="pk pk-alt" id="collection">
+  <div class="wrap section">
+    <div class="lg-body">
+      <p class="lg-intro" data-rv>We are committed to protecting your privacy and developing
+        technology that gives you the most powerful and safe online experience.</p>
+
+      <section>
+        <h2>Collection of your personal information</h2>
+        <p>This Practice collects personally identifiable information, such as your e-mail address,
+          name, home or work address or telephone number. This Practice also collects anonymous
+          demographic information, which is not unique to you, such as your ZIP code, age, gender,
+          preferences, interests and favorites.</p>
+        <p>There is also information about your computer hardware and software that is automatically
+          collected by this website. This information can include your IP address, browser type,
+          domain names, access times and referring website addresses. It is used for the operation
+          of the service, to maintain quality of the service, and to provide general statistics
+          regarding use of this website.</p>
+        <p>Please keep in mind that if you directly disclose personally identifiable information or
+          personally sensitive data through public message boards, this information may be collected
+          and used by others.</p>
+        <p>This Practice encourages you to review the privacy statements of websites you choose to
+          link to from this website, so that you can understand how those websites collect, use and
+          share your information. This Practice is not responsible for the privacy statements or
+          other content on any other website.</p>
+      </section>
+
+      <section>
+        <h2>Use of your personal information</h2>
+        <p>This Practice collects and uses your personal information to operate the website and
+          deliver the services you have requested. This Practice also uses your personally
+          identifiable information to inform you of other products or services available from this
+          Practice and its affiliates. This Practice may also contact you via surveys to conduct
+          research about your opinion of current services, or of potential new services that may be
+          offered.</p>
+        <p>This Practice does not sell, rent or lease its customer lists to third parties. This
+          Practice may share data with trusted partners to help us perform statistical analysis,
+          send you email or postal mail, provide customer support, or arrange for deliveries. All
+          such third parties are prohibited from using your personal information except to provide
+          these services, and they are required to maintain the confidentiality of your
+          information.</p>
+        <p>This Practice does not use or disclose sensitive personal information, such as race,
+          religion, or political affiliations, without your explicit consent.</p>
+        <p>This Practice will disclose your personal information, without notice, only if required
+          to do so by law.</p>
+      </section>
+
+      <section>
+        <h2>Use of cookies</h2>
+        <p>This website uses cookies to help this Practice personalize your online experience. A
+          cookie is a text file that is placed on your hard disk by a web page server. Cookies
+          cannot be used to run programs or deliver viruses to your computer. Cookies are uniquely
+          assigned to you, and can only be read by a web server in the domain that issued the cookie
+          to you.</p>
+      </section>
+
+      <section>
+        <h2>Security of your personal information</h2>
+        <p>This Practice secures your personal information from unauthorized access, use or
+          disclosure. This Practice secures the personally identifiable information you provide on
+          computer servers in a controlled, secure environment, protected from unauthorized access,
+          use or disclosure. When personal information such as a credit card number is transmitted
+          to other websites, it is protected through the use of encryption, such as the Secure
+          Socket Layer (SSL) protocol.</p>
+      </section>
+
+      <section>
+        <h2>Changes to this statement</h2>
+        <p>This Practice will occasionally update this Statement of Privacy to reflect company and
+          customer feedback. We encourage you to periodically review this Statement to be informed
+          of how this Practice is protecting your information.</p>
+      </section>
+
+      <section>
+        <h2>Contact information</h2>
+        <p>Please contact us by phone at <a href="tel:+17034366843">703-436-6843</a>, or by mail at
+          7901 Jones Branch Dr., Suite 220, McLean, VA 22102.</p>
+        <!-- BUILD FLAG: 703-436-6843 appears nowhere else in the 78-page scrape,
+             and McLean already has a live conflict between 448-3312 and
+             493-1358. Confirm this number before launch. -->
+      </section>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- next ---------- -->
+<section class="pk" id="next">
+  <div class="wrap section">
+    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
+    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
+      <a href="contact.html"><span class="nx-k">Get in touch</span>
+        <span class="nx-t">Contact &amp; Locations</span>
+        <span class="nx-d">Both offices, hours, parking and directions.</span></a>
+      <a href="patient-center.html"><span class="nx-k">Before you come</span>
+        <span class="nx-t">Your First Visit</span>
+        <span class="nx-d">Eight steps, so nothing on the day is a surprise.</span></a>
+      <a href="about.html"><span class="nx-k">The practice</span>
+        <span class="nx-t">Why Choose Us</span>
+        <span class="nx-d">Twenty years, 7,000+ implants, free second opinions.</span></a>
+    </nav>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="foot" data-theme="dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo.png" alt="Dr. Nahlah">
+        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+          smiles that other practices call too complex.</p>
+      </div>
+      <div>
+        <h4>Treatments</h4>
+        <ul>
+          <li><a href="dental-implants.html">Dental Implants</a></li>
+          <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+          <li><a href="smile-makeover.html">Smile Makeover</a></li>
+          <li><a href="veneers.html">Porcelain Veneers</a></li>
+          <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="smile-gallery.html">Smile Gallery</a></li>
+          <li><a href="patient-stories.html">Patient Stories</a></li>
+          <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+          <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+          <li><a href="contact.html">Contact &amp; Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul class="foot-facts">
+          <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
+          <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
+          <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
+        </ul>
+        <ul style="margin-top:1.1rem">
+          <li><a href="tel:+15716199442">McLean &middot; (571) 619-9442</a></li>
+          <li><a href="tel:+15714103430">Alexandria &middot; (571) 410-3430</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+      <span>McLean &middot; Alexandria, Virginia</span>
+      <!-- The legal links belong in the base row, not in the drawer's site map:
+           they are what people go looking for in a footer by habit. -->
+      <span><a href="privacy-policy.html">Privacy Policy</a></span>
+      <span><a href="terms-conditions.html">Terms &amp; Conditions</a></span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
+</body>
+</html>
