@@ -145,14 +145,29 @@ text and the arrow on separate lines, each underlined. Cause, in order:
 **Fixed**: `.pk-more` is now `display:inline-flex`, `margin-right:auto`,
 `transition:color .35s, border-color .35s`. Needs a republish to appear.
 
-**Root cause still present.** Five anchors sit inside a `<p>` and so still split:
-all-on-4 (/smile-gallery, /patient-stories), contact (/implant-cost),
-dental-implants (/smile-gallery, /patient-stories). `inline-flex` makes them
-render correctly, but the arrow remains a separate anchor. Neither element can be
-retagged through the API — the arrow is a Block (`span` is rejected: "Valid tags:
-div, header, footer, nav, main, ...") and the wrapper is a Paragraph. The real
-fix is to move the Link out of the paragraph, which changes DOM structure and was
-not done unprompted.
+**Root cause FIXED via `move_element`.** Retagging is a dead end — the arrow is a
+Block (`span` rejected: *"Valid tags: div, header, footer, nav, main, ..."*) and
+the wrapper is a Paragraph, whose tag is fixed. But the element does not have to
+be retagged, it can be **moved**. For each of the five, the Link was moved to sit
+directly after its paragraph and the emptied paragraph deleted; where the
+paragraph carried `data-rv`, that attribute was copied onto the link first so the
+scroll reveal survives.
+
+| Page | Link |
+| :--- | :--- |
+| All-on-4 | `/smile-gallery` (kept `data-rv`), `/patient-stories` |
+| Dental Implants | `/smile-gallery` (kept `data-rv`), `/patient-stories` |
+| Contact | `/implant-cost` (kept `data-rv`) |
+
+Verified: on all three pages every `pk-more` link now has a Block parent
+(`lc-body`, `sp-copy`, `di-div wrap sec-pad`, `of`), none has a Paragraph parent.
+The anchor is no longer split, so the arrow is a real flex child of the link.
+
+**Driver note.** `wfmcp.mjs` could not refresh its token at this point — the
+personal-profile grant's `discoveryState` has no `token_endpoint`, so once the
+access token expired the script was dead. The session's own MCP connection
+refreshes itself and kept working. For long jobs, prefer the session MCP, or
+give the driver a fallback token endpoint.
 
 ## Still held back
 
