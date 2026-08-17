@@ -1,0 +1,71 @@
+{
+  "_note": "All variable collections of Kit Foundation V1 (siteId 6a7a804cfed7e6e46272c6b0), via data_variable_tool. Every collection has a single mode ('base'/'Base mode'). Variable ids are the stable handles used by style properties (variable_as_value) and are shared across Relume kits (relume-variable--*).",
+  "collections": [
+    {
+      "id": "collection-0220e3ad-eb86-03ea-3026-8a5979301dd2",
+      "name": "Primitives",
+      "modes": [{ "id": "base", "name": "Base mode" }],
+      "variables": [
+        { "id": "relume-variable--neutral-white", "name": "Colors/White", "type": "Color", "cssName": "--_primitives---colors--white", "value": "#fff" },
+        { "id": "relume-variable--neutral-shade-1", "name": "Colors/Neutral Lightest", "type": "Color", "cssName": "--_primitives---colors--neutral-lightest", "value": "#eee" },
+        { "id": "relume-variable--neutral-shade-2", "name": "Colors/Neutral Lighter", "type": "Color", "cssName": "--_primitives---colors--neutral-lighter", "value": "#ccc" },
+        { "id": "relume-variable--neutral-shade-3", "name": "Colors/Neutral Light", "type": "Color", "cssName": "--_primitives---colors--neutral-light", "value": "#aaa" },
+        { "id": "relume-variable--neutral-shade-4", "name": "Colors/Neutral", "type": "Color", "cssName": "--_primitives---colors--neutral", "value": "#666" },
+        { "id": "relume-variable--neutral-shade-5", "name": "Colors/Neutral Dark", "type": "Color", "cssName": "--_primitives---colors--neutral-dark", "value": "#444" },
+        { "id": "relume-variable--neutral-shade-6", "name": "Colors/Neutral Darker", "type": "Color", "cssName": "--_primitives---colors--neutral-darker", "value": "#222" },
+        { "id": "relume-variable--neutral-shade-7", "name": "Colors/Neutral Darkest", "type": "Color", "cssName": "--_primitives---colors--neutral-darkest", "value": "black" },
+        { "id": "relume-variable--transparent", "name": "Opacity/Transparent", "type": "Color", "cssName": "--_primitives---opacity--transparent", "value": "transparent" },
+        { "id": "relume-variable--neutral-white-5", "name": "Opacity/White 5", "type": "Color", "cssName": "--_primitives---opacity--white-5", "value": "hsla(0,0%,100%,0.05)" },
+        { "id": "relume-variable--neutral-white-10", "name": "Opacity/White 10", "type": "Color", "cssName": "--_primitives---opacity--white-10", "value": "hsla(0,0%,100%,0.10)" },
+        { "id": "relume-variable--neutral-white-15", "name": "Opacity/White 15", "type": "Color", "cssName": "--_primitives---opacity--white-15", "value": "hsla(0,0%,100%,0.15)" },
+        { "id": "relume-variable--neutral-white-20", "name": "Opacity/White 20", "type": "Color", "cssName": "--_primitives---opacity--white-20", "value": "hsla(0,0%,100%,0.20)" },
+        { "id": "relume-variable--neutral-white-30", "name": "Opacity/White 30", "type": "Color", "cssName": "--_primitives---opacity--white-30", "value": "hsla(0,0%,100%,0.30)" },
+        { "id": "relume-variable--neutral-white-40", "name": "Opacity/White 40", "type": "Color", "cssName": "--_primitives---opacity--white-40", "value": "hsla(0,0%,100%,0.40)" },
+        { "id": "relume-variable--neutral-white-50", "name": "Opacity/White 50", "type": "Color", "cssName": "--_primitives---opacity--white-50", "value": "hsla(0,0%,100%,0.50)" },
+        { "id": "relume-variable--neutral-white-60", "name": "Opacity/White 60", "type": "Color", "cssName": "--_primitives---opacity--white-60", "value": "hsla(0,0%,100%,0.60)" },
+        { "id": "relume-variable--neutral-shade-7-5", "name": "Opacity/Neutral Darkest 5", "type": "Color", "cssName": "--_primitives---opacity--neutral-darkest-5", "value": "hsla(0,0%,0%,0.05)" },
+        { "id": "relume-variable--neutral-shade-7-10", "name": "Opacity/Neutral Darkest 10", "type": "Color", "cssName": "--_primitives---opacity--neutral-darkest-10", "value": "hsla(0,0%,0%,0.10)" },
+        { "id": "relume-variable--neutral-shade-7-15", "name": "Opacity/Neutral Darkest 15", "type": "Color", "cssName": "--_primitives---opacity--neutral-darkest-15", "value": "hsla(0,0%,0%,0.15)" },
+        { "id": "relume-variable--neutral-shade-7-20", "name": "Opacity/Neutral Darkest 20", "type": "Color", "cssName": "--_primitives---opacity--neutral-darkest-20", "value": "hsla(0,0%,0%,0.20)" },
+        { "id": "relume-variable--neutral-shade-7-30", "name": "Opacity/Neutral Darkest 30", "type": "Color", "cssName": "--_primitives---opacity--neutral-darkest-30", "value": "hsla(0,0%,0%,0.30)" },
+        { "id": "relume-variable--neutral-shade-7-40", "name": "Opacity/Neutral Darkest 40", "type": "Color", "cssName": "--_primitives---opacity--neutral-darkest-40", "value": "hsla(0,0%,0%,0.40)" },
+        { "id": "relume-variable--neutral-shade-7-50", "name": "Opacity/Neutral Darkest 50", "type": "Color", "cssName": "--_primitives---opacity--neutral-darkest-50", "value": "hsla(0,0%,0%,0.50)" },
+        { "id": "relume-variable--neutral-shade-7-60", "name": "Opacity/Neutral Darkest 60", "type": "Color", "cssName": "--_primitives---opacity--neutral-darkest-60", "value": "hsla(0,0%,0%,0.60)" }
+      ]
+    },
+    {
+      "id": "collection-139f4ef2-8521-8181-4a7f-fc90894e2d6f",
+      "name": "Color Schemes",
+      "modes": [{ "id": "base", "name": "Base mode" }],
+      "variables": [
+        { "id": "relume-variable--color-scheme-1-text", "name": "Color Scheme 1/Text", "type": "Color", "cssName": "--color-scheme-1--text", "value": { "aliasOf": "relume-variable--neutral-shade-7" } },
+        { "id": "relume-variable--color-scheme-1-background", "name": "Color Scheme 1/Background", "type": "Color", "cssName": "--color-scheme-1--background", "value": { "aliasOf": "relume-variable--neutral-white" } },
+        { "id": "relume-variable--color-scheme-1-foreground", "name": "Color Scheme 1/Foreground", "type": "Color", "cssName": "--color-scheme-1--foreground", "value": { "aliasOf": "relume-variable--neutral-shade-1" } },
+        { "id": "relume-variable--color-scheme-1-border", "name": "Color Scheme 1/Border", "type": "Color", "cssName": "--color-scheme-1--border", "value": { "aliasOf": "relume-variable--neutral-shade-7" } },
+        { "id": "relume-variable--color-scheme-1-accent", "name": "Color Scheme 1/Accent", "type": "Color", "cssName": "--color-scheme-1--accent", "value": { "aliasOf": "relume-variable--neutral-shade-7" } }
+      ],
+      "_note": "Only Scheme 1 exists as variables in the stock kit. Schemes 2-10 are activated by the color-schemes HtmlEmbed (see kit-components.json), which remaps --color-scheme-1--* custom properties inside .color-scheme-N wrappers."
+    },
+    {
+      "id": "collection-3c6a4911-12c4-e415-7fe0-514cefa2d46d",
+      "name": "Typography",
+      "modes": [{ "id": "base", "name": "Base mode" }],
+      "variables": [
+        { "id": "relume-variable--font-style-heading", "name": "Font Styles/Heading", "type": "FontFamily", "cssName": "--_typography---font-styles--heading", "value": "system-ui" },
+        { "id": "relume-variable--font-style-body", "name": "Font Styles/Body", "type": "FontFamily", "cssName": "--_typography---font-styles--body", "value": "system-ui" }
+      ]
+    },
+    {
+      "id": "collection-08964abb-b13c-a798-071a-663d82b7f0a6",
+      "name": "UI Styles",
+      "modes": [{ "id": "base", "name": "Base mode" }],
+      "variables": [
+        { "id": "relume-variable--radius-large", "name": "Radius/Large", "type": "Size", "cssName": "--_ui-styles---radius--large", "value": "0px" },
+        { "id": "relume-variable--radius-medium", "name": "Radius/Medium", "type": "Size", "cssName": "--_ui-styles---radius--medium", "value": "0px" },
+        { "id": "relume-variable--radius-small", "name": "Radius/Small", "type": "Size", "cssName": "--_ui-styles---radius--small", "value": "0px" },
+        { "id": "relume-variable--border-width", "name": "Stroke/Border Width", "type": "Size", "cssName": "--_ui-styles---stroke--border-width", "value": "1px" },
+        { "id": "relume-variable--divider-width", "name": "Stroke/Divider Width", "type": "Size", "cssName": "--_ui-styles---stroke--divider-width", "value": "1px" }
+      ]
+    }
+  ]
+}

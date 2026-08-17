@@ -1,0 +1,20 @@
+{
+ "audited": "2026-08-17",
+ "siteId": "6a60bdc0340e5f1784b4d553",
+ "collections": [
+  {
+   "id": "collection-b608ba40-3013-3bab-56b8-e002dcb7980d",
+   "name": "Base collection",
+   "modes": [
+    {
+     "id": "base",
+     "name": "Base mode"
+    }
+   ]
+  }
+ ],
+ "variables": {
+  "collection-b608ba40-3013-3bab-56b8-e002dcb7980d": []
+ },
+ "note": "get_variables with include_all_modes returned an empty array — the only collection is the default empty Base collection. No design tokens exist as Webflow variables on this site."
+}
