@@ -66,3 +66,12 @@ desktop.ini
 # ===== Logs =====
 *.log
 logs/
+
+# ===== Throwaway browser profiles =====
+# Headless verification spawns Chrome with --user-data-dir. A profile left behind
+# in a workflow's .tmp/ is thousands of tiny files, several of them with paths too
+# long for Windows git to stat — which turns every `git status` and every commit
+# into a multi-minute walk over files nobody wants tracked.
+.chrome-bisect/
+.chrome-profile/
+chrome-profile-*/
