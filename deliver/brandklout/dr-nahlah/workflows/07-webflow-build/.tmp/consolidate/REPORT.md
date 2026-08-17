@@ -85,12 +85,41 @@ pages. Select the element, remove the numbered class, apply the canonical:
 | Veneers | 1 hero | `pg-hero 5`→`pg-hero` |
 | Smile Makeover | 1 hero | `pg-hero 4`→`pg-hero` |
 
-## Held back pending a decision
+## `pk-more` — MERGED 2026-08-17
 
-**`pk-more`** (5 forks) and **`pk-more-7`** (1). The user edited `pk-more-7/8/9`
-to `display:flex` + `margin-right:auto`, so they no longer match `pk-more`.
-Collapsing the family means choosing which definition wins — adopting the new one
-also changes the pages still on `inline-flex`. Not guessed.
+Nine variants collapsed into one class named `pk-more`, on 20 elements across 11
+pages plus the BookNow component. No numbered variant remains.
+
+**The merged definition keeps both contexts correct**, rather than picking a
+winner:
+
+| | kept | why |
+| :--- | :--- | :--- |
+| `margin-right: auto` | from the user's edit | does the package-card alignment they were fixing; inert on an inline-level box, so the footer link is unaffected |
+| `display: inline-flex` | the original | package links are flex ITEMS and flex items are blockified, so `flex` and `inline-flex` render identically there — but the footer "Directions" link is block-level, where `inline-flex` hugs its text and `flex` would stretch the underline across the card |
+| `transition: color .35s, border-color .35s` | restored | every variant still has a `:hover` colour change, so losing it made hover snap instantly. Collateral damage from the Designer edit, not intent |
+
+`flex-flow: row` and `justify-content: flex-start` from `pk-more-8` were dropped —
+both are the CSS defaults for a flex row.
+
+### Mechanics — three things worth knowing
+
+1. **The canonical name was unusable.** `pk-more` resolved to three style objects
+   (global + two combos), so `set_style` returned *"One or more styles not found:
+   pk-more"* and `update_style` returned *"[Conflict] The operation could not be
+   applied to the style block store"*. Everything was consolidated onto the
+   unambiguous `pk-more 7`, then the name was freed and the class renamed back.
+2. **`set_style` cannot create a combo chain that does not exist.** Moving an
+   element to `["contact-a-9","pk-more 7","of-dirs"]` failed until
+   `create_style` had built `contact-a-9 > pk-more 7` and
+   `contact-a-9 > pk-more 7 > of-dirs`. The error names every class in the chain,
+   which is misleading — the classes existed, the chain did not.
+3. **Renaming a global does NOT rename its combo objects.** After renaming
+   `pk-more 7` -> `pk-more`, the footer links were still on combos named
+   `pk-more 7`. They had to be recreated under the canonical name, the elements
+   moved again, and the leftovers deleted.
+
+## Still held back
 
 **`fa-body`** (4 forks). One of its four elements on Implant Cost cannot be
 captured — every query for it returns 429 — so retiring `fa-body-2` could strip
