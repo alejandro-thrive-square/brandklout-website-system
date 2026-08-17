@@ -348,7 +348,7 @@ check("burger visible on mobile",
 
 await evalJs(`document.getElementById('burger').click()`);
 await wait(900);
-check("drawer opens", await evalJs(`document.getElementById('drawer').classList.contains('open')`));
+check("drawer opens", await evalJs(`document.getElementById('drawer').classList.contains('is-open')`));
 // Assert against the smoother directly — a `!smoother ||` guard would pass vacuously
 // if ScrollSmoother silently failed to construct.
 check("smoother paused while drawer open",
@@ -362,7 +362,7 @@ check("drawer holds real page links, not just chapter anchors",
 await evalJs(`document.dispatchEvent(new KeyboardEvent('keydown',{key:'Escape'}))`);
 await wait(900);
 check("drawer closes on Escape",
-  await evalJs(`!document.getElementById('drawer').classList.contains('open')`));
+  await evalJs(`!document.getElementById('drawer').classList.contains('is-open')`));
 check("smoother resumed after close",
   await evalJs(`!!(window.WZ && WZ.smoother) && WZ.smoother.paused() === false`));
 

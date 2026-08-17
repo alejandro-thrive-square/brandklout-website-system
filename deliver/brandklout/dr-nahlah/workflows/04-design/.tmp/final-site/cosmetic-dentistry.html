@@ -1236,7 +1236,7 @@ WZ.add(function (W) {
   });
 
   ScrollTrigger.create({start:40,end:99999,
-    onToggle:function(self){ nav.classList.toggle('solid', self.isActive); }});
+    onToggle:function(self){ nav.classList.toggle('is-solid', self.isActive); }});
 
   /* --- anchors routed through the smoother so pinned sections land right --- */
   document.querySelectorAll('a[href^="#"]').forEach(function(a){
@@ -1267,16 +1267,16 @@ WZ.add(function (W) {
   /* --- mobile drawer --- */
   var burger = document.getElementById('burger'), drawer = document.getElementById('drawer');
   function closeDrawer(){
-    burger.classList.remove('open'); drawer.classList.remove('open');
-    document.getElementById('nav').classList.remove('menu-open');
+    burger.classList.remove('is-open'); drawer.classList.remove('is-open');
+    document.getElementById('nav').classList.remove('is-menu-open');
     burger.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true');
     document.body.classList.remove('is-locked');
     if(W.smoother) W.smoother.paused(false);
   }
   burger.addEventListener('click',function(){
-    var open = drawer.classList.toggle('open');
-    burger.classList.toggle('open',open);
-    document.getElementById('nav').classList.toggle('menu-open',open);
+    var open = drawer.classList.toggle('is-open');
+    burger.classList.toggle('is-open',open);
+    document.getElementById('nav').classList.toggle('is-menu-open',open);
     burger.setAttribute('aria-expanded',String(open));
     drawer.setAttribute('aria-hidden',String(!open));
     burger.setAttribute('aria-label', open?'Close menu':'Open menu');
@@ -1287,7 +1287,7 @@ WZ.add(function (W) {
     a.addEventListener('click',function(){ closeDrawer(); });
   });
   document.addEventListener('keydown',function(e){
-    if(e.key==='Escape' && drawer.classList.contains('open')) closeDrawer();
+    if(e.key==='Escape' && drawer.classList.contains('is-open')) closeDrawer();
   });
 
   /* Pinned sections measure wrong if fonts or images land late. */

@@ -319,6 +319,52 @@ for (const page of PAGES) {
   check(page, "no horizontal overflow @390", mOverflow <= 391, "scrollWidth=" + mOverflow);
   check(page, "menu button reachable on mobile",
     await evalJs(`getComputedStyle(document.getElementById('burger')).display !== 'none'`));
+
+  /* The drawer is the site index, so a dead burger is a dead sitemap on every
+     page at once. Asserting the class name is not enough — the state classes the
+     script toggles and the ones the stylesheet reads are written in two different
+     files, and when they drifted apart the drawer stopped opening while every
+     other check on this page stayed green. So: click it, and look at whether the
+     panel actually arrived on screen. */
+  /* Hit-test a real link rather than reading the panel's box. The drawer is
+     `position:fixed; inset:0` at all times and hides itself with a clip-path,
+     so its bounding rect, visibility and opacity are identical open and shut —
+     a check on those passes against a drawer that never opened. Asking who owns
+     the pixel covers clip-path, opacity, visibility, z-index and transform in
+     one measurement, and it is the same question the user's finger asks. */
+  await evalJs(`document.getElementById('burger').click()`);
+  await wait(700);
+  const drawerOpen = await evalJs(`(function(){
+    var d = document.getElementById('drawer');
+    if (!d) return 'no drawer';
+    // elementFromPoint only answers for coordinates inside the viewport, and at
+    // 390px most of the drawer's index is below the fold — so pick the first
+    // link whose centre is actually on screen rather than the first link.
+    // The header deliberately rides ABOVE the open drawer so its close button
+    // stays reachable, so anything under that strip is legitimately covered.
+    var navEl = document.getElementById('nav');
+    var navBottom = navEl ? navEl.getBoundingClientRect().bottom : 0;
+    var links = d.querySelectorAll('a');
+    for (var i = 0; i < links.length; i++) {
+      var r = links[i].getBoundingClientRect();
+      var x = r.left + r.width / 2, y = r.top + r.height / 2;
+      if (!r.width || !r.height) continue;
+      if (y < navBottom + 2) continue;
+      if (x < 0 || y < 0 || x > innerWidth || y > innerHeight) continue;
+      var hit = document.elementFromPoint(x, y);
+      return (hit && d.contains(hit)) ? 'open' : 'covered by ' +
+        (hit ? hit.tagName.toLowerCase() + '.' + (hit.className || '') : 'nothing');
+    }
+    return 'no drawer link is on screen';
+  })()`);
+  check(page, "menu button opens the drawer", drawerOpen === "open", drawerOpen);
+  check(page, "burger reports its state to assistive tech",
+    (await evalJs(`document.getElementById('burger').getAttribute('aria-expanded')`)) === "true");
+
+  await evalJs(`document.getElementById('burger').click()`);
+  await wait(600);
+  check(page, "drawer closes again",
+    (await evalJs(`document.getElementById('burger').getAttribute('aria-expanded')`)) === "false");
 }
 
 console.log(`\n${pass}/${pass + failures.length} checks passed`);
