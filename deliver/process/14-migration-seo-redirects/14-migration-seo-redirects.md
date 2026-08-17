@@ -21,6 +21,39 @@ Protect migration SEO equity through URL inventory, redirect mapping, metadata p
 4. Prepare sitemap and Google Search Console launch tasks.
 5. Define redirect validation checks for QA, launch, and post-launch monitoring.
 
+## Redirect Mapping Rules (Webflow)
+
+These are hard rules, not preferences. Violating them produces redirect loops or dead rows.
+
+1. **Three inventory sources, never one.**
+   - The `01-content-intake` scrape captures only what was live *at scrape time*.
+   - **Wayback CDX** (`http://web.archive.org/cdx/search/cdx?url=<domain>*&fl=original&collapse=urlkey&filter=statuscode:200`)
+     surfaces earlier site generations whose inbound links still exist and whose old-platform
+     redirect chains die with the migration. On Dr. Nahlah this found **29 URLs the scrape missed**.
+   - `data_pages_tool.list_pages` on the target site is the only legal source of destinations.
+2. **Never emit trailing slashes.** Webflow 301s `/foo/` → `/foo` itself, *before* redirect
+   matching. Slash variants are dead rows. Verify once per site with
+   `curl -s -o /dev/null -w "%{http_code} %{redirect_url}" https://<host>/<page>/`.
+3. **Never emit self-redirects.** A slug that survived the rebuild must be absent from the CSV —
+   `/veneers → /veneers` is a loop. Keep it in the mapping table (it documents that the slug
+   survived) and filter it at write time.
+4. **Validate every destination against `list_pages`.** The generator must fail loudly when a
+   rule points at a path that is not a live page. Typo'd destinations become mass 404s.
+5. **Make wildcards order-independent.** Webflow's `(.*)` / `%1` matching is order-sensitive in
+   ways that are hard to predict. Point overlapping wildcards (`/blog/(.*)` and `/blog/page/(.*)`)
+   at the *same* destination so ordering cannot matter, or avoid the overlap entirely.
+6. **Check the apex vs `www` host before testing.** Testing against the apex returns 301s for
+   everything (apex → www) and hides real 404s. Test against the canonical host.
+7. **Check `/sitemap.xml` and `/robots.txt` on the new site in the same pass.** Webflow's
+   auto-sitemap is off by default; redirects without a sitemap still leave Google blind.
+
+## Reference Implementation
+
+`deliver/brandklout/dr-nahlah/workflows/14-migration-seo-redirects/build_redirects.py` —
+explicit per-URL mapping tables (pages / posts / legacy / WP structure), a validation pass that
+enforces rules 2–4 above, and a coverage report that asserts every scraped URL is either
+unchanged or covered. Copy it and replace the tables.
+
 ## Technical Setup
 - **Executor status**: Placeholder.
 - **Future automation**: Crawl URLs, compare source/target slugs, generate redirect CSVs, validate metadata, and run post-launch redirect checks.
