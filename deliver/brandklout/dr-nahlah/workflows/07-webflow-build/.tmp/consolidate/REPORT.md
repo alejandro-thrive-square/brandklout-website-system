@@ -119,6 +119,41 @@ both are the CSS defaults for a flex row.
    `pk-more 7`. They had to be recreated under the canonical name, the elements
    moved again, and the leftovers deleted.
 
+### Regression on staging, and the fix
+
+After publishing, the "Watch her tell it" link on /all-on-4 rendered with the
+text and the arrow on separate lines, each underlined. Cause, in order:
+
+1. **The merged definition never persisted.** The write reported success and was
+   journalled `ok`, but the published CSS still showed `display:flex` and no
+   `transition` — i.e. `pk-more-7`'s pre-merge definition, carried over under the
+   new name. The most likely mechanism is the **rename**: renaming the style
+   appears to have reverted the property edit made earlier in the same run.
+   Re-applying `display` and `transition` AFTER the rename stuck immediately.
+   **Write the definition last, after any rename, and verify from the published
+   CSS rather than trusting the success response.**
+2. **So the merge spread `display:flex` site-wide.** That value came from the
+   user's own edit to `pk-more-7/8/9`; the merge was supposed to replace it with
+   `inline-flex` and instead propagated it to all 28 instances.
+3. **Why `flex` breaks the link.** The markup is
+   `<p><a class="pk-more">text<div class="pk-more-after">arrow</div></a></p>`.
+   A `<div>` is not permitted inside a `<p>`, so the HTML parser closes the
+   paragraph and **splits the anchor in two**. With `inline-flex` the two halves
+   sit side by side and read as one link; with `flex` both become block-level and
+   stack, each carrying the `border-bottom` — the reported symptom.
+
+**Fixed**: `.pk-more` is now `display:inline-flex`, `margin-right:auto`,
+`transition:color .35s, border-color .35s`. Needs a republish to appear.
+
+**Root cause still present.** Five anchors sit inside a `<p>` and so still split:
+all-on-4 (/smile-gallery, /patient-stories), contact (/implant-cost),
+dental-implants (/smile-gallery, /patient-stories). `inline-flex` makes them
+render correctly, but the arrow remains a separate anchor. Neither element can be
+retagged through the API — the arrow is a Block (`span` is rejected: "Valid tags:
+div, header, footer, nav, main, ...") and the wrapper is a Paragraph. The real
+fix is to move the Link out of the paragraph, which changes DOM structure and was
+not done unprompted.
+
 ## Still held back
 
 **`fa-body`** (4 forks). One of its four elements on Implant Cost cannot be
