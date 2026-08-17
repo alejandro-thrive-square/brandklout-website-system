@@ -133,3 +133,23 @@ echo is not proof.
   image slots (doctor portrait, process photo). Flags: invisalign footer has Privacy Policy/Terms links
   the shared LP Footer cannot render without editing the twin; nps v2 dropped the journey eyebrow this
   page keeps. See reports/invisalign-v2.md.
+- 2026-08-17: Phase 3 close-out DONE — QA fixes 6-10 applied + STAGING-ONLY republish + re-verify (see
+  08-qa/.tmp/v2-verify/VERIFY-REPORT.md). #7 portrait: Action-7 shows a team member not Dr Sung AND the
+  nps twin showed Dr Cho under Dr Sung copy — uploaded the practice's own 1920x2560 original
+  (asset 6a835bfc77d0c7b6e1171c32) to both LPs, inv team strip restored to the reference arrangement.
+  #8 LP Footer gained a legal-links row behind boolean prop 26c8e87c ("Show Legal Links", default false,
+  true on inv only) — nps footer verified BYTE-IDENTICAL; Terms of Service ships as text not a link
+  because the reference's own href was "#" and no Terms doc exists. #9 journey eyebrow added to nps.
+  #10 lp_tour_image had NO aspect-ratio at all — added base 1.011 + combos is-tall 0.605 / is-short
+  1.614 (the reference's own ratios): column spread 133px -> 5px, section 1125 -> 1105 on both LPs.
+  #6 placeholders BLOCKED and proven so: 4 write routes rejected ("placeholder" not applicable /
+  reserved attribute name / set_attributes internal error / element doesn't support text) and the
+  settings enumeration exposes only domId, visibility, name, required, type, attributes — Designer edit
+  needed on the LP Hero Form Card (fixes all 4 pages at once). Assertions: widest box @390 = 390 with 0
+  offenders on all four FAQ pages (was 546/517/557/521) and 390 clipped on both consultation pages;
+  consultation h1 white at 6.68:1 (was 1.86:1); zero missing text runs and 0 bad hrefs across all six
+  pages. NEW TRAP: the overflow assertion must use documentElement.clientWidth AND intersect each box
+  with its overflow-x ancestors — a raw box walk re-reports the intentionally-clipped
+  consult_proof_watermark as a 2138px offender. NEW TRAP: publishing invalidates the CDN, so the first
+  capture after a publish reports images at 0x0/complete:false and collapses section heights (invisalign
+  journey read 726px short) — warm the image URLs and re-capture.

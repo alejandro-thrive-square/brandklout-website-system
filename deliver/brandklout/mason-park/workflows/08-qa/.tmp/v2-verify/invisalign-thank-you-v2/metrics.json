@@ -1,0 +1,194 @@
+{
+  "bodyHeight": {
+    "390": 4738,
+    "768": 5059,
+    "1440": 4547
+  },
+  "overflow": {
+    "390": {
+      "scrollWidth": 390,
+      "bodyScrollWidth": 390,
+      "innerWidth": 390,
+      "clientWidth": 390,
+      "widestRight": 390,
+      "widestEl": {
+        "tag": "div",
+        "cls": "page-wrapper",
+        "left": 0,
+        "right": 390
+      },
+      "offenders": []
+    },
+    "768": {
+      "scrollWidth": 768,
+      "bodyScrollWidth": 768,
+      "innerWidth": 768,
+      "clientWidth": 768,
+      "widestRight": 768,
+      "widestEl": {
+        "tag": "div",
+        "cls": "page-wrapper",
+        "left": 0,
+        "right": 768
+      },
+      "offenders": []
+    },
+    "1440": {
+      "scrollWidth": 1440,
+      "bodyScrollWidth": 1440,
+      "innerWidth": 1440,
+      "clientWidth": 1440,
+      "widestRight": 1440,
+      "widestEl": {
+        "tag": "div",
+        "cls": "page-wrapper",
+        "left": 0,
+        "right": 1440
+      },
+      "offenders": []
+    }
+  },
+  "sectionsAt1440": [
+    {
+      "id": null,
+      "class": "section_confirm_hero",
+      "offsetTop": 84,
+      "height": 686,
+      "heading": "Let's Talk About Your New Smile"
+    },
+    {
+      "id": null,
+      "class": "section_confirm_expect",
+      "offsetTop": 770,
+      "height": 1011,
+      "heading": "We Are Dedicated To Getting You Your New Smile"
+    },
+    {
+      "id": null,
+      "class": "section_confirm_why",
+      "offsetTop": 1781,
+      "height": 664,
+      "heading": "Why Mason Park Dental?"
+    },
+    {
+      "id": null,
+      "class": "section_confirm_faq",
+      "offsetTop": 2445,
+      "height": 940,
+      "heading": "Any Questions Before You Call?"
+    },
+    {
+      "id": null,
+      "class": "section_confirm_cta",
+      "offsetTop": 3385,
+      "height": 832,
+      "heading": "Ready to take the next step?"
+    }
+  ],
+  "sectionsByWidth": {
+    "390": [
+      {
+        "class": "section_confirm_hero",
+        "height": 529,
+        "heading": "Let's Talk About Your New Smile"
+      },
+      {
+        "class": "section_confirm_expect",
+        "height": 1211,
+        "heading": "We Are Dedicated To Getting You Your New Smile"
+      },
+      {
+        "class": "section_confirm_why",
+        "height": 1007,
+        "heading": "Why Mason Park Dental?"
+      },
+      {
+        "class": "section_confirm_faq",
+        "height": 873,
+        "heading": "Any Questions Before You Call?"
+      },
+      {
+        "class": "section_confirm_cta",
+        "height": 761,
+        "heading": "Ready to take the next step?"
+      }
+    ],
+    "768": [
+      {
+        "class": "section_confirm_hero",
+        "height": 597,
+        "heading": "Let's Talk About Your New Smile"
+      },
+      {
+        "class": "section_confirm_expect",
+        "height": 1114,
+        "heading": "We Are Dedicated To Getting You Your New Smile"
+      },
+      {
+        "class": "section_confirm_why",
+        "height": 1107,
+        "heading": "Why Mason Park Dental?"
+      },
+      {
+        "class": "section_confirm_faq",
+        "height": 895,
+        "heading": "Any Questions Before You Call?"
+      },
+      {
+        "class": "section_confirm_cta",
+        "height": 947,
+        "heading": "Ready to take the next step?"
+      }
+    ],
+    "1440": [
+      {
+        "class": "section_confirm_hero",
+        "height": 686,
+        "heading": "Let's Talk About Your New Smile"
+      },
+      {
+        "class": "section_confirm_expect",
+        "height": 1011,
+        "heading": "We Are Dedicated To Getting You Your New Smile"
+      },
+      {
+        "class": "section_confirm_why",
+        "height": 664,
+        "heading": "Why Mason Park Dental?"
+      },
+      {
+        "class": "section_confirm_faq",
+        "height": 940,
+        "heading": "Any Questions Before You Call?"
+      },
+      {
+        "class": "section_confirm_cta",
+        "height": 832,
+        "heading": "Ready to take the next step?"
+      }
+    ]
+  },
+  "headingContrast": {
+    "390": {
+      "text": "Let's Talk About Your New Smile",
+      "color": "rgb(46, 54, 52)",
+      "bg": "rgb(255, 255, 255)",
+      "bgFrom": "body.",
+      "contrast": 12.4
+    },
+    "768": {
+      "text": "Let's Talk About Your New Smile",
+      "color": "rgb(46, 54, 52)",
+      "bg": "rgb(255, 255, 255)",
+      "bgFrom": "body.",
+      "contrast": 12.4
+    },
+    "1440": {
+      "text": "Let's Talk About Your New Smile",
+      "color": "rgb(46, 54, 52)",
+      "bg": "rgb(255, 255, 255)",
+      "bgFrom": "body.",
+      "contrast": 12.4
+    }
+  }
+}

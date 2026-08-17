@@ -103,6 +103,59 @@ to the wrong practice). v2 pages may NOT contain HtmlEmbeds or custom code. Ther
 - Style tool requires top-level siteId + pageId.
 - Do NOT publish the site. Publishing is a Phase 3 gate run by the orchestrator.
 
+## The legacy-page edits — UNRESOLVED, and DO NOT REVERT without the user
+
+The 2026-08-17 publish shipped changes to the legacy pages that no agent logged. Attribution was
+chased twice and landed in different places; this is the settled account of the evidence.
+
+**Extent (measured offline, `v2-reference/<slug>/page.html` vs `v2-legacy-after/<slug>/page.html`
+— the pre- and post-publish states).** Only THREE pages differ in markup at all:
+`/invisalign` (+1087 bytes), `/new-patient-special` (−42), `/new-patient-special-consultation`
+(+10). `/invisalign-consultation` and BOTH thank-you pages are **byte-identical**. So R1 (the
+missing `.imp-section-label` eyebrows) and R2 (the run-together address) are **CSS-only** — the
+markup never moved — and they ride on the shared stylesheet, whose hash changed from
+`dd596814c` to `0e3a1b8bc` with this build's styles.
+
+**The markup deltas, verbatim:**
+- em dashes deleted mid-sentence ("himself — without" → "himself without", "Katy — modern" →
+  "Katy modern", "personally — from" → "personally from", "tray — that" → "tray that"), and in one
+  place mangled to "----" ("PLACEHOLDER ---- this section needs")
+- `<p class="landing-p1">` → `<p>` (class dropped)
+- `code-embed-9` → `google-reviews` (a style RENAME, so it shows on both LPs)
+- `<strong>Dental Crowns</strong><br/>` → `Dental Crowns<br/>`
+- combos ADDED: `imp-section-label black`, `imp-section-label center white`,
+  `landing-section-label version-2`
+- `/invisalign` only: the two empty `story-vert w-video w-embed` divs filled with real `<img>`s
+  (`dr-cho.jpg`, `Action-13-scaled.jpg`) plus a new `imp-hero-copy block` div
+- `w-node-…` ids regenerated (`f6d5577a…` → `efb9cd70…`) — cosmetic, not content
+
+**Why "a build agent did it" is NOT a safe conclusion.** That was inferred from the two filled
+assets matching the NPS v2 agent's own choices. Against it:
+1. `/new-patient-special` already read `lastUpdated 2026-08-17T12:39:43Z` on the FIRST
+   `list_pages` call of this session — **before any build agent existed** (the first started
+   13:28 UTC). Something outside this session was editing legacy pages today.
+2. The two assets are the obvious ones for those two slots; a *mistargeted* write would not land
+   neatly inside the only two empty media divs on the page.
+3. Renaming a class to something meaningful, adding `black`/`white`/`version-2` colour combos,
+   and dropping a `landing-p1` class are **coherent design work**, not the shape of accidental
+   damage. Only the em-dash loss looks like damage (and this project has a documented UTF-8
+   corruption gotcha).
+
+**Therefore: do not revert any of it.** Reverting would destroy what is plausibly the user's or a
+teammate's deliberate Designer session. It is the user's call, and it is queued for them.
+
+**Rules this adds anyway, binding on every future agent** (the ambiguity is itself the lesson —
+concurrent human Designer work and agent writes on one site are indistinguishable after the fact):
+1. **Pass the target page id to every single element/style call and re-read it from your own
+   notes each time.** Never carry a "current page" in your head across a long run.
+2. **Before any write, assert the page id is your v2 page.** If a call needs the ORIGINAL page,
+   it is a READ. There is no legitimate write to an original page in this task.
+3. **"Originals untouched" is a claim that must be MEASURED, not asserted** — and measured on
+   the originals' own content (text/classes/elements they already had), not by searching for
+   your new classes.
+4. Reading an original page to source an asset id or copy is fine. Writing what you learned back
+   into it is not.
+
 ## Definition of done per page
 
 - v2 page exists ("<Original Title> v2", slug "<original-slug>-v2", draft:true), full section
