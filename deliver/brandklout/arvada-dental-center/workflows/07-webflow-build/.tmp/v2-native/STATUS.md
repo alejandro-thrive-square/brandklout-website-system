@@ -110,3 +110,30 @@ then its children appended into it, recursing where a child is itself too big.
 and legitimately share FAQ answers; the string is present in dentist-near-me's own local source, so
 this is the leak heuristic being over-sensitive between two near-identical pages, not a mixup. The
 substantive checks (own strings present, class inventory, images) pass on all six.
+
+## NEXT TASK — 14 spacing differences after the section rebuild
+
+`node verify-spacing.mjs implants 1440,767` was clean before the four sections were added and now
+reports 14. The pages render correctly by eye (all five new sections captured in `shots-new/`,
+every image loading), so these are drift, not breakage — but two of them matter on mobile.
+
+```
+.camp_container.camp_proof_grid  padding-left/right   local 16px  live 0px   @767
+.camp_footer_col                 row/column-gap       local 0px   live 16px
+.camp_header                     padding-bottom       local 0px   live 10px
+.camp_button_chev                padding-bottom       local 0px   live 4.2px  (9 elements)
+```
+
+**The proof-grid one is the known combo trap, again.** `camp_proof_grid` shares its element with
+`camp_container`, so the container's gutter has to survive; it did before the rebuild and does not
+now. The fix that worked for the hero was to set the padding on the COMBO
+(`.camp_container.camp_hero_grid`), because a class that owns combos takes the write on the combo
+rather than the base — see PLAN.md. Do the same for `camp_proof_grid`, and check
+`camp_announce_inner`, `camp_header_inner` and `camp_cta_inner` while there.
+
+The other three look like Webflow defaults now reaching elements the chunked insert created
+differently (a gap on a flex column, padding on a Section). Confirm by reading the style back
+before changing anything — several "differences" in this build turned out to be the gate, not the
+page.
+
+Then: publish to the subdomain, re-run `verify-spacing.mjs` and `verify-v2.mjs`.
