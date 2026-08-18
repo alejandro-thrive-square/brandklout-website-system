@@ -84,9 +84,23 @@ export function call(tool, args, { tries = 6, base = 5000 } = {}) {
     catch (e) { last = e; if (!TRANSIENT.test(e.message)) throw e; continue; }
     const parsed = lines(out);
     const errs = parsed.filter((p) => p.error || p.result?.status === "error");
-    const msgs = errs.map((e) => e.error?.message || e.result?.message || "").join("\n");
+    // set_settings reports ACTION-level success while individual OPERATIONS fail — the truth
+    // is in result[].data[].applied_keys / .error. One bad key discards its whole operation,
+    // so a batch carrying the reserved attribute name "placeholder" wrote nothing at all and
+    // still answered "Applied 1 operation(s)". Three form fields kept Webflow's default names
+    // through two runs because of it.
+    const opErrs = [];
+    for (const p of parsed) {
+      for (const r of [].concat(p.result || [])) {
+        for (const d of [].concat(r?.data || [])) {
+          if (d && typeof d === "object" && d.error) opErrs.push(`${p.label}: ${d.error}`);
+        }
+      }
+    }
+    const msgs = errs.map((e) => e.error?.message || e.result?.message || "")
+      .concat(opErrs).join("\n");
     if (!TRANSIENT.test(msgs)) {
-      if (errs.length) throw new Error(msgs.slice(0, 1500));
+      if (errs.length || opErrs.length) throw new Error(msgs.slice(0, 1500));
       return parsed;
     }
     last = new Error(msgs);

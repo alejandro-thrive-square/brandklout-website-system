@@ -291,7 +291,7 @@
                "tag": "a",
                "cls": "button-3 white nav w-inline-block",
                "box": [
-                162,
+                167,
                 37
                ],
                "layout": "flex",
@@ -304,8 +304,8 @@
                 {
                  "tag": "div",
                  "box": [
-                  80,
-                  20
+                  85,
+                  21
                  ],
                  "text": "Book Online"
                 },
@@ -373,7 +373,7 @@
    "cls": "imp-hero",
    "box": [
     1440,
-    792
+    804
    ],
    "kids": [
     {
@@ -381,7 +381,7 @@
      "cls": "imp-div imp-wrap imp-hero-grid",
      "box": [
       1280,
-      612
+      624
      ],
      "layout": "grid",
      "cols": "606.984px 505.828px",
@@ -392,7 +392,7 @@
        "cls": "imp-hero-copy",
        "box": [
         607,
-        612
+        624
        ],
        "kids": [
         {
@@ -400,7 +400,7 @@
          "cls": "imp-section-label",
          "box": [
           607,
-          20
+          21
          ],
          "text": "— Cosmetic Dentistry · Richmond, TX"
         },
@@ -408,8 +408,8 @@
          "tag": "span",
          "cls": "imp-rating-badge",
          "box": [
-          401,
-          40
+          414,
+          41
          ],
          "layout": "flex",
          "dir": "row",
@@ -422,8 +422,8 @@
            "tag": "span",
            "cls": "imp-stars",
            "box": [
-            64,
-            22
+            66,
+            23
            ],
            "text": "★★★★★"
           }
@@ -442,8 +442,8 @@
          "tag": "p",
          "cls": "imp-paragraph-hero",
          "box": [
-          563,
-          200
+          583,
+          207
          ],
          "text": "Natural-looking cosmetic dentistry designed around your face, your bite, and your goals. Every case is personally planned by Dr. William Sung, DMD, so you can see your result on screen and approve it before a single tooth is touched. One doctor. One personalized plan. Nothing rushed. ‍"
         },
@@ -452,7 +452,7 @@
          "cls": "imp-p-7",
          "box": [
           607,
-          76
+          78
          ],
          "kids": [
           {
@@ -460,7 +460,7 @@
            "cls": "imp-li",
            "box": [
             607,
-            25
+            26
            ],
            "layout": "flex",
            "dir": "row",
@@ -489,7 +489,7 @@
            "cls": "imp-li",
            "box": [
             607,
-            25
+            26
            ],
            "layout": "flex",
            "dir": "row",
@@ -518,7 +518,7 @@
            "cls": "imp-li",
            "box": [
             607,
-            25
+            26
            ],
            "layout": "flex",
            "dir": "row",
@@ -618,7 +618,7 @@
        "cls": "imp-form-card w-node-_7e0d08e5-c048-8280-ce3e-6fd1bffd0086-5f17d119",
        "box": [
         506,
-        149
+        152
        ],
        "pos": "sticky",
        "kids": [
@@ -627,7 +627,7 @@
          "cls": "imp-hero-form",
          "box": [
           444,
-          37
+          38
          ],
          "text": "Start Your Smile Consultation"
         },
@@ -636,7 +636,7 @@
          "cls": "imp-p",
          "box": [
           444,
-          50
+          52
          ],
          "text": "Tell us what you would like to change about your smile. Our team will personally reach out to help you schedule."
         },
@@ -676,7 +676,7 @@
    "cls": "imp-journey",
    "box": [
     1440,
-    2057
+    2343
    ],
    "kids": [
     {
@@ -684,7 +684,7 @@
      "cls": "imp-div imp-wrap",
      "box": [
       1280,
-      1897
+      2183
      ],
      "kids": [
       {
@@ -692,7 +692,7 @@
        "cls": "imp-journey-intro",
        "box": [
         760,
-        208
+        214
        ],
        "layout": "flex",
        "dir": "column",
@@ -703,8 +703,8 @@
          "tag": "span",
          "cls": "imp-section-label",
          "box": [
-          346,
-          20
+          364,
+          21
          ],
          "text": "One Patient's Real Smile Transformation"
         },
@@ -712,8 +712,8 @@
          "tag": "h2",
          "cls": "heading-style-h2",
          "box": [
-          543,
-          102
+          550,
+          104
          ],
          "text": "From Hiding Your Smile ‍To Showing It Off"
         },
@@ -722,7 +722,7 @@
          "cls": "imp-paragraph",
          "box": [
           760,
-          76
+          78
          ],
          "text": "This is a real Grand Mission patient who came to us self-conscious about years of staining, chips, and mismatched old dental work. Drag the slider to see what became possible with a smile designed around their face."
         }
@@ -797,8 +797,8 @@
                  "tag": "span",
                  "cls": "csm-div csm-ba__tag csm-ba__tag--before",
                  "box": [
-                  77,
-                  29
+                  79,
+                  30
                  ],
                  "pos": "absolute",
                  "text": "Before"
@@ -807,8 +807,8 @@
                  "tag": "span",
                  "cls": "csm-div csm-ba__tag csm-ba__tag--after",
                  "box": [
-                  66,
-                  29
+                  68,
+                  30
                  ],
                  "pos": "absolute",
                  "text": "After"
@@ -886,7 +886,7 @@
        "cls": "imp-journey-cols",
        "box": [
         1048,
-        429
+        435
        ],
        "layout": "grid",
        "cols": "511.156px 511.172px",
@@ -897,7 +897,7 @@
          "cls": "imp-a-2 imp-jcol imp-jcol-before dark",
          "box": [
           511,
-          429
+          435
          ],
          "kids": [
           {
@@ -914,7 +914,7 @@
            "cls": "imp-ul",
            "box": [
             453,
-            284
+            289
            ],
            "kids": [
             {
@@ -922,10 +922,10 @@
              "cls": "imp-li-2",
              "box": [
               453,
-              52
+              53
              ],
              "layout": "grid",
-             "cols": "12.2656px 427.297px",
+             "cols": "12.6875px 426.875px",
              "gap": "13.6px",
              "text": "Avoiding photos and video calls for years",
              "kids": [
@@ -933,8 +933,8 @@
                "tag": "span",
                "cls": "imp-span-4 imp-mark",
                "box": [
-                12,
-                25
+                13,
+                26
                ],
                "pos": "relative",
                "text": "✕"
@@ -946,10 +946,10 @@
              "cls": "imp-li-2",
              "box": [
               453,
-              52
+              53
              ],
              "layout": "grid",
-             "cols": "12.2656px 427.297px",
+             "cols": "12.6875px 426.875px",
              "gap": "13.6px",
              "text": "Covering your mouth when you laugh",
              "kids": [
@@ -957,8 +957,8 @@
                "tag": "span",
                "cls": "imp-span-4 imp-mark",
                "box": [
-                12,
-                25
+                13,
+                26
                ],
                "pos": "relative",
                "text": "✕"
@@ -970,10 +970,10 @@
              "cls": "imp-li-2",
              "box": [
               453,
-              77
+              79
              ],
              "layout": "grid",
-             "cols": "12.2656px 427.297px",
+             "cols": "12.6875px 426.875px",
              "gap": "13.6px",
              "text": "A shade you never loved, no matter how much you whitened",
              "kids": [
@@ -981,8 +981,8 @@
                "tag": "span",
                "cls": "imp-span-4 imp-mark",
                "box": [
-                12,
-                25
+                13,
+                26
                ],
                "pos": "relative",
                "text": "✕"
@@ -994,10 +994,10 @@
              "cls": "imp-li-2",
              "box": [
               453,
-              52
+              53
              ],
              "layout": "grid",
-             "cols": "12.2656px 427.297px",
+             "cols": "12.6875px 426.875px",
              "gap": "13.6px",
              "text": "Old bonding or crowns that never quite matched",
              "kids": [
@@ -1005,8 +1005,8 @@
                "tag": "span",
                "cls": "imp-span-4 imp-mark",
                "box": [
-                12,
-                25
+                13,
+                26
                ],
                "pos": "relative",
                "text": "✕"
@@ -1018,10 +1018,10 @@
              "cls": "imp-li-2",
              "box": [
               453,
-              52
+              53
              ],
              "layout": "grid",
-             "cols": "12.2656px 427.297px",
+             "cols": "12.6875px 426.875px",
              "gap": "13.6px",
              "text": "Told a quick fix was all you needed",
              "kids": [
@@ -1029,8 +1029,8 @@
                "tag": "span",
                "cls": "imp-span-4 imp-mark",
                "box": [
-                12,
-                25
+                13,
+                26
                ],
                "pos": "relative",
                "text": "✕"
@@ -1046,7 +1046,7 @@
          "cls": "imp-a-2 imp-jcol imp-jcol-after",
          "box": [
           511,
-          429
+          435
          ],
          "kids": [
           {
@@ -1063,7 +1063,7 @@
            "cls": "imp-ul",
            "box": [
             451,
-            259
+            263
            ],
            "kids": [
             {
@@ -1071,10 +1071,10 @@
              "cls": "imp-li-2",
              "box": [
               451,
-              52
+              53
              ],
              "layout": "grid",
-             "cols": "8.89062px 428.688px",
+             "cols": "9.6875px 427.891px",
              "gap": "13.6px",
              "text": "Smiling first in every photo",
              "kids": [
@@ -1082,8 +1082,8 @@
                "tag": "span",
                "cls": "imp-span-5 imp-mark",
                "box": [
-                9,
-                17
+                10,
+                18
                ],
                "text": "✓"
               }
@@ -1094,10 +1094,10 @@
              "cls": "imp-li-2",
              "box": [
               451,
-              52
+              53
              ],
              "layout": "grid",
-             "cols": "8.89062px 428.688px",
+             "cols": "9.6875px 427.891px",
              "gap": "13.6px",
              "text": "A shade and shape that finally feels like you",
              "kids": [
@@ -1105,8 +1105,8 @@
                "tag": "span",
                "cls": "imp-span-5 imp-mark",
                "box": [
-                9,
-                17
+                10,
+                18
                ],
                "text": "✓"
               }
@@ -1117,10 +1117,10 @@
              "cls": "imp-li-2",
              "box": [
               451,
-              52
+              53
              ],
              "layout": "grid",
-             "cols": "8.89062px 428.688px",
+             "cols": "9.6875px 427.891px",
              "gap": "13.6px",
              "text": "Confident up close, on video calls, in real life",
              "kids": [
@@ -1128,8 +1128,8 @@
                "tag": "span",
                "cls": "imp-span-5 imp-mark",
                "box": [
-                9,
-                17
+                10,
+                18
                ],
                "text": "✓"
               }
@@ -1140,10 +1140,10 @@
              "cls": "imp-li-2",
              "box": [
               451,
-              52
+              53
              ],
              "layout": "grid",
-             "cols": "8.89062px 428.688px",
+             "cols": "9.6875px 427.891px",
              "gap": "13.6px",
              "text": "A smile designed around your face, not a formula",
              "kids": [
@@ -1151,8 +1151,8 @@
                "tag": "span",
                "cls": "imp-span-5 imp-mark",
                "box": [
-                9,
-                17
+                10,
+                18
                ],
                "text": "✓"
               }
@@ -1163,10 +1163,10 @@
              "cls": "imp-li-2",
              "box": [
               451,
-              52
+              53
              ],
              "layout": "grid",
-             "cols": "8.89062px 428.688px",
+             "cols": "9.6875px 427.891px",
              "gap": "13.6px",
              "text": "A plan built around your goals, never rushed",
              "kids": [
@@ -1174,8 +1174,8 @@
                "tag": "span",
                "cls": "imp-span-5 imp-mark",
                "box": [
-                9,
-                17
+                10,
+                18
                ],
                "text": "✓"
               }
@@ -1192,7 +1192,7 @@
        "cls": "imp-chapters",
        "box": [
         1165,
-        402
+        676
        ],
        "layout": "grid",
        "cols": "276.203px 276.203px 276.203px 276.203px",
@@ -1203,7 +1203,7 @@
          "cls": "imp-chapter",
          "box": [
           276,
-          402
+          676
          ],
          "layout": "flex",
          "dir": "column",
@@ -1215,7 +1215,7 @@
            "cls": "imp-img-2",
            "box": [
             274,
-            0
+            274
            ],
            "asset": "6a55a6164444e60eaaddf65c",
            "alt": "Dr. Sung listening to a patient at the first cosmetic consultation"
@@ -1237,13 +1237,13 @@
              "cls": "imp-cnum",
              "box": [
               234,
-              20
+              21
              ],
              "kids": [
               {
                "tag": "strong",
                "box": [
-                190,
+                203,
                 15
                ],
                "text": "01 · The Turning Point"
@@ -1255,7 +1255,7 @@
              "cls": "imp-h3-5",
              "box": [
               234,
-              77
+              79
              ],
              "text": "“I stopped smiling with my mouth open in photos.”"
             },
@@ -1264,7 +1264,7 @@
              "cls": "imp-p-4",
              "box": [
               234,
-              151
+              182
              ],
              "text": "It starts small. The hand that comes up in pictures, choosing the tighter-lipped smile. Then one day you realize you've been editing yourself out of your own photos."
             }
@@ -1277,7 +1277,7 @@
          "cls": "imp-chapter",
          "box": [
           276,
-          402
+          676
          ],
          "layout": "flex",
          "dir": "column",
@@ -1289,7 +1289,7 @@
            "cls": "imp-img-2",
            "box": [
             274,
-            0
+            274
            ],
            "asset": "6a7ba11078332ffd74d27062",
            "alt": "Virtual smile design and digital treatment planning at Grand Mission Dentistry"
@@ -1311,13 +1311,13 @@
              "cls": "imp-cnum",
              "box": [
               234,
-              20
+              21
              ],
              "kids": [
               {
                "tag": "strong",
                "box": [
-                128,
+                136,
                 15
                ],
                "text": "02 · The Design"
@@ -1329,7 +1329,7 @@
              "cls": "imp-h3-5",
              "box": [
               234,
-              77
+              79
              ],
              "text": "“For the first time, I could see the result before we started.”"
             },
@@ -1338,7 +1338,7 @@
              "cls": "imp-p-4",
              "box": [
               234,
-              176
+              182
              ],
              "text": "Photos, a full evaluation of your teeth and bite, and virtual smile design that maps how your teeth, lips, and face work together — so your plan is built around your features, not a catalog."
             }
@@ -1351,7 +1351,7 @@
          "cls": "imp-chapter",
          "box": [
           276,
-          402
+          676
          ],
          "layout": "flex",
          "dir": "column",
@@ -1363,7 +1363,7 @@
            "cls": "imp-img-2",
            "box": [
             274,
-            0
+            274
            ],
            "asset": "69cedd868565237dc3845e04",
            "alt": "Calm, modern treatment room at Grand Mission Dentistry"
@@ -1385,13 +1385,13 @@
              "cls": "imp-cnum",
              "box": [
               234,
-              20
+              21
              ],
              "kids": [
               {
                "tag": "strong",
                "box": [
-                141,
+                150,
                 15
                ],
                "text": "03 · The Preview"
@@ -1403,7 +1403,7 @@
              "cls": "imp-h3-5",
              "box": [
               234,
-              77
+              79
              ],
              "text": "“I wore my new smile before anything was permanent.”"
             },
@@ -1412,7 +1412,7 @@
              "cls": "imp-p-4",
              "box": [
               234,
-              202
+              209
              ],
              "text": "You approve the digital design before any preparation begins, and temporaries let you live with the new shape and proportions in real lighting while your porcelain is crafted. If something needs adjusting, it happens now."
             }
@@ -1425,7 +1425,7 @@
          "cls": "imp-chapter",
          "box": [
           276,
-          402
+          676
          ],
          "layout": "flex",
          "dir": "column",
@@ -1437,7 +1437,7 @@
            "cls": "imp-img-2",
            "box": [
             274,
-            0
+            274
            ],
            "asset": "69c43b90dc47ecc85cadfd7d",
            "alt": "Patient's finished smile after cosmetic treatment at Grand Mission Dentistry"
@@ -1459,13 +1459,13 @@
              "cls": "imp-cnum",
              "box": [
               234,
-              20
+              21
              ],
              "kids": [
               {
                "tag": "strong",
                "box": [
-                131,
+                139,
                 15
                ],
                "text": "04 · The Reveal"
@@ -1477,7 +1477,7 @@
              "cls": "imp-h3-5",
              "box": [
               234,
-              77
+              79
              ],
              "text": "“It looks like my smile — just the version I always wanted.”"
             },
@@ -1486,7 +1486,7 @@
              "cls": "imp-p-4",
              "box": [
               234,
-              176
+              182
              ],
              "text": "Custom porcelain, shaded and checked under natural lighting to match your natural teeth. Dr. Sung's standard is a result that enhances your smile without announcing that you had work done."
             }
@@ -1539,7 +1539,7 @@
    "cls": "imp-story",
    "box": [
     1440,
-    1858
+    1865
    ],
    "kids": [
     {
@@ -1547,7 +1547,7 @@
      "cls": "imp-div imp-wrap",
      "box": [
       1280,
-      1698
+      1705
      ],
      "kids": [
       {
@@ -1555,7 +1555,7 @@
        "cls": "imp-section-label",
        "box": [
         1165,
-        20
+        21
        ],
        "text": "— the grand mission difference"
       },
@@ -1564,7 +1564,7 @@
        "cls": "imp-h2",
        "box": [
         1165,
-        101
+        102
        ],
        "text": "Why Patients Drive Past ‍Other Cosmetic Dentists"
       },
@@ -1573,7 +1573,7 @@
        "cls": "imp-grid-4",
        "box": [
         1165,
-        304
+        307
        ],
        "layout": "grid",
        "cols": "274.703px 274.703px 274.703px 274.703px",
@@ -1584,7 +1584,7 @@
          "cls": "imp-card",
          "box": [
           275,
-          304
+          307
          ],
          "kids": [
           {
@@ -1601,7 +1601,7 @@
            "cls": "imp-p-5",
            "box": [
             221,
-            176
+            205
            ],
            "text": "Your smile is planned around your lips, facial proportions, skin tone, and the way your teeth show when you speak — proportions and shapes built from your features, not a template."
           }
@@ -1612,7 +1612,7 @@
          "cls": "imp-card",
          "box": [
           275,
-          304
+          307
          ],
          "kids": [
           {
@@ -1629,7 +1629,7 @@
            "cls": "imp-p-5",
            "box": [
             221,
-            126
+            154
            ],
            "text": "Your bite, jaw function, tooth health, and gums are evaluated first. Beautiful work should feel comfortable and hold up over time."
           }
@@ -1640,7 +1640,7 @@
          "cls": "imp-card",
          "box": [
           275,
-          304
+          307
          ],
          "kids": [
           {
@@ -1657,7 +1657,7 @@
            "cls": "imp-p-5",
            "box": [
             221,
-            176
+            179
            ],
            "text": "Dr. Sung evaluates, designs, explains your options, and places the final result. Whitening, veneers, bonding, Invisalign, smile makeovers — no referral out, no second office."
           }
@@ -1668,7 +1668,7 @@
          "cls": "imp-card",
          "box": [
           275,
-          304
+          307
          ],
          "kids": [
           {
@@ -1685,7 +1685,7 @@
            "cls": "imp-p-5",
            "box": [
             221,
-            202
+            205
            ],
            "text": "Whitening, bonding, alignment, and no-prep or minimal-prep options are considered before more involved treatment. When veneers are the answer, enamel removal is typically under a millimeter."
           }
@@ -2017,7 +2017,7 @@
    "cls": "imp-specialist",
    "box": [
     1440,
-    1149
+    1351
    ],
    "kids": [
     {
@@ -2025,7 +2025,7 @@
      "cls": "imp-div imp-wrap",
      "box": [
       1280,
-      989
+      1191
      ],
      "kids": [
       {
@@ -2033,7 +2033,7 @@
        "cls": "imp-doc-grid",
        "box": [
         1165,
-        945
+        960
        ],
        "layout": "grid",
        "cols": "606.984px 505.828px",
@@ -2044,7 +2044,7 @@
          "cls": "stcky-video-block",
          "box": [
           607,
-          945
+          960
          ],
          "pos": "relative",
          "kids": [
@@ -2096,7 +2096,7 @@
          "cls": "imp-hero-copy",
          "box": [
           506,
-          945
+          960
          ],
          "kids": [
           {
@@ -2104,7 +2104,7 @@
            "cls": "imp-section-label",
            "box": [
             506,
-            20
+            21
            ],
            "text": "— Your cosmetic dentist"
           },
@@ -2113,7 +2113,7 @@
            "cls": "imp-h2",
            "box": [
             506,
-            152
+            154
            ],
            "text": "The Dentist Richmond Trusts With Its Smiles"
           },
@@ -2122,7 +2122,7 @@
            "cls": "imp-paragraph",
            "box": [
             506,
-            171
+            177
            ],
            "text": "Dr. William Sung, DMD doesn't just improve how your teeth look — he changes how confidently you show up in every part of your life. He averages close to 100 hours of continuing education a year, over eight times what Texas requires, and personally plans every cosmetic case from the first photos through final placement."
           },
@@ -2131,7 +2131,7 @@
            "cls": "imp-creds",
            "box": [
             506,
-            439
+            445
            ],
            "layout": "grid",
            "cols": "505.828px",
@@ -2142,7 +2142,7 @@
              "cls": "imp-li-3",
              "box": [
               506,
-              86
+              87
              ],
              "layout": "grid",
              "cols": "22px 470.234px",
@@ -2166,7 +2166,7 @@
                "cls": "imp-hero-copy",
                "box": [
                 470,
-                58
+                59
                ],
                "text": "- one of the most respected dental programs in the country",
                "kids": [
@@ -2188,7 +2188,7 @@
              "cls": "imp-li-3",
              "box": [
               506,
-              114
+              116
              ],
              "layout": "grid",
              "cols": "22px 470.234px",
@@ -2212,7 +2212,7 @@
                "cls": "imp-hero-copy",
                "box": [
                 470,
-                87
+                89
                ],
                "text": "- a designation held by roughly 7% of general dentists in Texas",
                "kids": [
@@ -2234,7 +2234,7 @@
              "cls": "imp-li-3",
              "box": [
               506,
-              86
+              87
              ],
              "layout": "grid",
              "cols": "22px 470.234px",
@@ -2258,7 +2258,7 @@
                "cls": "imp-hero-copy",
                "box": [
                 470,
-                58
+                59
                ],
                "text": "- over eight times the annual requirement for Texas dentists",
                "kids": [
@@ -2280,7 +2280,7 @@
              "cls": "imp-li-3",
              "box": [
               506,
-              114
+              116
              ],
              "layout": "grid",
              "cols": "22px 470.234px",
@@ -2304,7 +2304,7 @@
                "cls": "imp-hero-copy",
                "box": [
                 470,
-                87
+                89
                ],
                "text": "- preview your result before treatment, starting from photos you can upload at home",
                "kids": [
@@ -2341,7 +2341,7 @@
        "cls": "imp-teach-strip",
        "box": [
         1165,
-        0
+        187
        ],
        "layout": "grid",
        "cols": "280.703px 280.703px 280.703px 280.703px",
@@ -2351,8 +2351,8 @@
          "tag": "img",
          "cls": "imp-img-5",
          "box": [
-          0,
-          0
+          281,
+          187
          ],
          "asset": "69c1acb071052002b3f002b8",
          "alt": "Dental care at Grand Mission Dentistry in Richmond, TX"
@@ -2361,8 +2361,8 @@
          "tag": "img",
          "cls": "imp-img-5",
          "box": [
-          0,
-          0
+          281,
+          187
          ],
          "asset": "69b90bffc512b7b2be5c427e",
          "alt": "Continuing education and clinical training"
@@ -2371,8 +2371,8 @@
          "tag": "img",
          "cls": "imp-img-5",
          "box": [
-          0,
-          0
+          281,
+          187
          ],
          "asset": "69b8d43e91ae4ae9da6e1ea2",
          "alt": "Advanced dental training"
@@ -2381,8 +2381,8 @@
          "tag": "img",
          "cls": "imp-img-5",
          "box": [
-          0,
-          0
+          281,
+          187
          ],
          "asset": "69c5deb41c723e2f90759d87",
          "alt": "Clinical course in advanced dentistry"
@@ -2399,7 +2399,7 @@
    "cls": "imp-options",
    "box": [
     1440,
-    1131
+    1135
    ],
    "kids": [
     {
@@ -2407,7 +2407,7 @@
      "cls": "imp-div imp-wrap",
      "box": [
       1280,
-      971
+      975
      ],
      "kids": [
       {
@@ -2415,7 +2415,7 @@
        "cls": "imp-section-label",
        "box": [
         1165,
-        20
+        21
        ],
        "text": "— your comprehensive options"
       },
@@ -2432,8 +2432,8 @@
        "tag": "p",
        "cls": "imp-paragraph",
        "box": [
-        794,
-        50
+        822,
+        52
        ],
        "text": "Your consultation determines which path fits your teeth, bite, goals, timeline, and budget. Here's the landscape before you walk in."
       },
@@ -2467,7 +2467,7 @@
            "tag": "img",
            "cls": "service_item-img",
            "box": [
-            0,
+            318,
             240
            ],
            "asset": "6a7ba11078332ffd74d27005",
@@ -2791,7 +2791,7 @@
            "tag": "img",
            "cls": "service_item-img",
            "box": [
-            0,
+            318,
             240
            ],
            "asset": "6a7ba11078332ffd74d26ff6",
@@ -3116,7 +3116,7 @@
            "tag": "img",
            "cls": "service_item-img",
            "box": [
-            0,
+            318,
             240
            ],
            "asset": "6a7ba11078332ffd74d26fe7",
@@ -3433,7 +3433,7 @@
    "cls": "section-12",
    "box": [
     1440,
-    1265
+    1280
    ],
    "kids": [
     {
@@ -3441,7 +3441,7 @@
      "cls": "imp-div imp-wrap",
      "box": [
       1280,
-      1105
+      1120
      ],
      "kids": [
       {
@@ -3449,7 +3449,7 @@
        "cls": "imp-doc-grid",
        "box": [
         1165,
-        1105
+        1120
        ],
        "layout": "grid",
        "cols": "606.984px 505.828px",
@@ -3460,7 +3460,7 @@
          "cls": "imp-hero-copy",
          "box": [
           607,
-          1105
+          1120
          ],
          "kids": [
           {
@@ -3468,7 +3468,7 @@
            "cls": "imp-section-label",
            "box": [
             607,
-            20
+            21
            ],
            "text": "— How it works"
           },
@@ -3477,7 +3477,7 @@
            "cls": "imp-h2",
            "box": [
             607,
-            152
+            154
            ],
            "text": "Your Dental Work Shouldn't Look & Feel Like Dental Work"
           },
@@ -3486,15 +3486,15 @@
            "cls": "imp-paragraph center",
            "box": [
             607,
-            200
+            207
            ],
            "text": "Beautiful cosmetic dentistry is more than choosing a lighter shade. Grand Mission considers tooth shape, texture, translucency, facial balance, gum health, and bite — before permanent treatment begins. You approve your design first. Nothing permanent happens until you do.",
            "kids": [
             {
              "tag": "strong",
              "box": [
-              261,
-              20
+              270,
+              21
              ],
              "text": "then shows you the direction"
             }
@@ -3505,7 +3505,7 @@
            "cls": "imp-grid-3",
            "box": [
             607,
-            678
+            682
            ],
            "layout": "grid",
            "cols": "606.984px",
@@ -3516,7 +3516,7 @@
              "cls": "imp-card",
              "box": [
               607,
-              178
+              179
              ],
              "kids": [
               {
@@ -3533,7 +3533,7 @@
                "cls": "imp-p-5",
                "box": [
                 553,
-                76
+                77
                ],
                "text": "A full evaluation of your smile, bite, and goals, plus a digital simulation of your potential result — so you see where this is going before anything begins. You can even start by uploading photos from home."
               }
@@ -3544,7 +3544,7 @@
              "cls": "imp-card",
              "box": [
               607,
-              203
+              205
              ],
              "kids": [
               {
@@ -3561,7 +3561,7 @@
                "cls": "imp-p-5",
                "box": [
                 553,
-                101
+                103
                ],
                "text": "Whether it's whitening, minimal-prep veneers, or a full makeover, Dr. Sung removes only what's necessary — typically less than a millimeter of enamel. Temporaries let you live with the new shape while your porcelain is made."
               }
@@ -3572,7 +3572,7 @@
              "cls": "imp-card",
              "box": [
               607,
-              178
+              179
              ],
              "kids": [
               {
@@ -3589,7 +3589,7 @@
                "cls": "imp-p-5",
                "box": [
                 553,
-                76
+                77
                ],
                "text": "Custom porcelain or refined bonding, tried in and checked under natural lighting against your approved design, then permanently bonded. What you approved is what you get."
               }
@@ -3619,7 +3619,7 @@
          "cls": "stcky-video-block",
          "box": [
           506,
-          1105
+          1120
          ],
          "pos": "relative",
          "kids": [
@@ -3678,7 +3678,7 @@
    "cls": "imp-gallery",
    "box": [
     1440,
-    1414
+    1418
    ],
    "kids": [
     {
@@ -3686,7 +3686,7 @@
      "cls": "imp-div imp-wrap",
      "box": [
       1280,
-      1254
+      1258
      ],
      "kids": [
       {
@@ -3694,7 +3694,7 @@
        "cls": "imp-section-label",
        "box": [
         1165,
-        20
+        21
        ],
        "text": "— Smile gallery"
       },
@@ -3711,8 +3711,8 @@
        "tag": "p",
        "cls": "imp-paragraph",
        "box": [
-        794,
-        50
+        822,
+        52
        ],
        "text": "Every smile below started with a conversation, a full examination, and a plan built around that specific patient. No shortcuts. No assumptions."
       },
@@ -3804,7 +3804,7 @@
    "cls": "imp-space-2",
    "box": [
     1440,
-    816
+    931
    ],
    "layout": "flex",
    "dir": "row",
@@ -3816,16 +3816,16 @@
      "tag": "div",
      "cls": "imp-div imp-wrap",
      "box": [
-      1137,
-      656
+      1280,
+      771
      ],
      "kids": [
       {
        "tag": "span",
        "cls": "imp-section-label",
        "box": [
-        1022,
-        20
+        1165,
+        21
        ],
        "text": "— your experience"
       },
@@ -3833,7 +3833,7 @@
        "tag": "h2",
        "cls": "imp-h2",
        "box": [
-        1022,
+        1165,
         51
        ],
        "text": "A Space Designed For Your Comfort"
@@ -3842,8 +3842,8 @@
        "tag": "p",
        "cls": "imp-paragraph",
        "box": [
-        794,
-        76
+        822,
+        78
        ],
        "text": "From the moment you walk in, Grand Mission feels different. Calm, modern, and built with patients in mind — because your experience starts before you sit in the chair. Our team speaks English, Spanish, Vietnamese, Korean, and Arabic."
       },
@@ -3859,19 +3859,19 @@
        "tag": "div",
        "cls": "imp-office-grid",
        "box": [
-        1022,
-        456
+        1165,
+        566
        ],
        "layout": "grid",
-       "cols": "330px 330px 330px",
+       "cols": "377.594px 377.609px 377.594px",
        "gap": "16px",
        "kids": [
         {
          "tag": "img",
          "cls": "imp-img-6",
          "box": [
-          330,
-          456
+          378,
+          566
          ],
          "asset": "6983621a6f563c98ced0d30b",
          "alt": "Grand Mission Dentistry reception and lounge area"
@@ -3880,8 +3880,8 @@
          "tag": "img",
          "cls": "imp-img-7",
          "box": [
-          330,
-          220
+          378,
+          330
          ],
          "asset": "6983621a2bf53635124ebeae",
          "alt": "Modern dental operatory at Grand Mission Dentistry"
@@ -3890,8 +3890,8 @@
          "tag": "img",
          "cls": "imp-img-7",
          "box": [
-          330,
-          220
+          378,
+          330
          ],
          "asset": "6983621a4590302353d5823f",
          "alt": "Grand Mission Dentistry office interior"
@@ -3900,7 +3900,7 @@
          "tag": "img",
          "cls": "imp-img-7",
          "box": [
-          330,
+          378,
           220
          ],
          "asset": "6983621a7c9fec7749a70d75",
@@ -3910,7 +3910,7 @@
          "tag": "img",
          "cls": "imp-img-7",
          "box": [
-          330,
+          378,
           220
          ],
          "asset": "69ce11e66783608994a84cc9",
@@ -3928,7 +3928,7 @@
    "cls": "imp-faq",
    "box": [
     1440,
-    1215
+    2069
    ],
    "kids": [
     {
@@ -3936,7 +3936,7 @@
      "cls": "imp-div imp-wrap imp-faq-wrap",
      "box": [
       840,
-      1055
+      1909
      ],
      "layout": "flex",
      "dir": "column",
@@ -3948,7 +3948,7 @@
        "cls": "imp-section-label center",
        "box": [
         725,
-        20
+        21
        ],
        "text": "before you book"
       },
@@ -3957,7 +3957,7 @@
        "cls": "imp-h2 center",
        "box": [
         725,
-        101
+        102
        ],
        "layout": "flex",
        "dir": "column",
@@ -3970,14 +3970,14 @@
        "cls": "container-1281 w-container",
        "box": [
         725,
-        922
+        1774
        ],
        "kids": [
         {
          "tag": "div",
          "box": [
           725,
-          862
+          1714
          ],
          "kids": [
           {
@@ -3985,7 +3985,7 @@
            "cls": "accordion-item",
            "box": [
             725,
-            106
+            220
            ],
            "kids": [
             {
@@ -4025,7 +4025,7 @@
              "cls": "accordion-item-content",
              "box": [
               635,
-              0
+              114
              ],
              "kids": [
               {
@@ -4033,7 +4033,7 @@
                "cls": "imp-paragraph",
                "box": [
                 635,
-                101
+                104
                ],
                "text": "Cosmetic dentistry can address stains, chips, worn or uneven edges, small gaps, tooth shape, asymmetry, old dental work, and the overall balance of your smile. Your plan may include whitening, bonding, veneers, crowns, gum recontouring, Invisalign, or a thoughtful combination."
               }
@@ -4046,7 +4046,7 @@
            "cls": "accordion-item",
            "box": [
             725,
-            106
+            246
            ],
            "kids": [
             {
@@ -4086,7 +4086,7 @@
              "cls": "accordion-item-content",
              "box": [
               635,
-              0
+              140
              ],
              "kids": [
               {
@@ -4094,7 +4094,7 @@
                "cls": "imp-paragraph",
                "box": [
                 635,
-                126
+                130
                ],
                "text": "Bonding is often a conservative choice for smaller chips, gaps, or shape changes, and can usually be completed in a single visit. Veneers are typically considered when several teeth need a more comprehensive change in color, shape, size, or symmetry, and they last considerably longer. Dr. Sung will explain the tradeoffs after evaluating your teeth, bite, and goals."
               }
@@ -4107,7 +4107,7 @@
            "cls": "accordion-item",
            "box": [
             725,
-            106
+            220
            ],
            "kids": [
             {
@@ -4147,7 +4147,7 @@
              "cls": "accordion-item-content",
              "box": [
               635,
-              0
+              114
              ],
              "kids": [
               {
@@ -4155,7 +4155,7 @@
                "cls": "imp-paragraph",
                "box": [
                 635,
-                101
+                104
                ],
                "text": "That is the goal. Your design is based on your facial proportions, lips, natural tooth characteristics, and preferred level of brightness. Porcelain is chosen for the way it mimics the translucency of natural enamel, and shade is matched under natural lighting — so the result looks like it belongs to you, not like a generic set of teeth."
               }
@@ -4168,7 +4168,7 @@
            "cls": "accordion-item",
            "box": [
             725,
-            106
+            220
            ],
            "kids": [
             {
@@ -4208,7 +4208,7 @@
              "cls": "accordion-item-content",
              "box": [
               635,
-              0
+              114
              ],
              "kids": [
               {
@@ -4216,7 +4216,7 @@
                "cls": "imp-paragraph",
                "box": [
                 635,
-                101
+                104
                ],
                "text": "Yes. Virtual smile design lets you see your potential result before treatment begins — you can even start by uploading photos from home. You approve the design before any tooth preparation, and temporaries let you experience the shape and proportions while your final restorations are crafted."
               }
@@ -4229,7 +4229,7 @@
            "cls": "accordion-item",
            "box": [
             725,
-            106
+            220
            ],
            "kids": [
             {
@@ -4269,7 +4269,7 @@
              "cls": "accordion-item-content",
              "box": [
               635,
-              0
+              114
              ],
              "kids": [
               {
@@ -4277,7 +4277,7 @@
                "cls": "imp-paragraph",
                "box": [
                 635,
-                101
+                104
                ],
                "text": "It depends on your starting point. Bonding and whitening can often be completed quickly, porcelain veneers typically take two visits, and a comprehensive makeover involving alignment or restorative work may take several. You will receive a clear sequence and timeline before deciding to begin."
               }
@@ -4290,7 +4290,7 @@
            "cls": "accordion-item",
            "box": [
             725,
-            106
+            246
            ],
            "kids": [
             {
@@ -4330,7 +4330,7 @@
              "cls": "accordion-item-content",
              "box": [
               635,
-              0
+              140
              ],
              "kids": [
               {
@@ -4338,7 +4338,7 @@
                "cls": "imp-paragraph",
                "box": [
                 635,
-                126
+                130
                ],
                "text": "It depends on the number of teeth involved, the procedures selected, and the materials used. Porcelain veneers generally range from $900 to $2,000 per tooth, so a six-veneer makeover typically falls between $5,400 and $12,000. After your evaluation you will get a clear written estimate before you decide, and financing through Cherry, including 0% APR options, is available."
               }
@@ -4351,7 +4351,7 @@
            "cls": "accordion-item",
            "box": [
             725,
-            106
+            220
            ],
            "kids": [
             {
@@ -4391,7 +4391,7 @@
              "cls": "accordion-item-content",
              "box": [
               635,
-              0
+              114
              ],
              "kids": [
               {
@@ -4399,7 +4399,7 @@
                "cls": "imp-paragraph",
                "box": [
                 635,
-                101
+                104
                ],
                "text": "Procedures done purely for appearance are generally not covered. When treatment also restores a damaged or unhealthy tooth, insurance may cover part of the cost. Our team verifies your benefits and walks you through your options so you know your out-of-pocket cost before you commit to anything."
               }
@@ -4421,7 +4421,7 @@
    "cls": "imp-final",
    "box": [
     1440,
-    1197
+    1200
    ],
    "pos": "relative",
    "kids": [
@@ -4430,7 +4430,7 @@
      "cls": "imp-div imp-wrap",
      "box": [
       1280,
-      1037
+      1040
      ],
      "kids": [
       {
@@ -4438,7 +4438,7 @@
        "cls": "imp-section-label center",
        "box": [
         1165,
-        20
+        21
        ],
        "text": "Limited Consultation Availability"
       },
@@ -4454,8 +4454,8 @@
        "tag": "p",
        "cls": "imp-paragraph cta",
        "box": [
-        794,
-        50
+        822,
+        52
        ],
        "text": "The right time to feel good about your smile is always sooner than you think. Find out exactly what's possible with a consultation and a digital smile preview."
       },
@@ -4544,7 +4544,7 @@
    "cls": "ty-foot",
    "box": [
     1440,
-    268
+    270
    ],
    "kids": [
     {
@@ -4552,7 +4552,7 @@
      "cls": "ty-div lw-shell foot",
      "box": [
       1240,
-      192
+      194
      ],
      "layout": "flex",
      "dir": "column",
@@ -4563,15 +4563,15 @@
        "tag": "div",
        "cls": "ty-foot__row",
        "box": [
-        382,
-        119
+        396,
+        121
        ],
        "kids": [
         {
          "tag": "p",
          "cls": "ty-foot__legal-3",
          "box": [
-          382,
+          396,
           62
          ],
          "text": "Grand Mission Dentistry, Dr. William Sung DMD",
@@ -4609,16 +4609,16 @@
          "tag": "div",
          "cls": "imp-hero-copy",
          "box": [
-          382,
-          57
+          396,
+          59
          ],
          "kids": [
           {
            "tag": "span",
            "cls": "imp-footer-line",
            "box": [
-            382,
-            29
+            396,
+            30
            ],
            "text": "·",
            "kids": [
@@ -4626,8 +4626,8 @@
              "tag": "a",
              "cls": "imp-a-6",
              "box": [
-              116,
-              20
+              120,
+              21
              ],
              "href": "/privacy-policy",
              "text": "Privacy Policy"
@@ -4636,8 +4636,8 @@
              "tag": "a",
              "cls": "imp-a-6",
              "box": [
-              139,
-              20
+              144,
+              21
              ],
              "href": "/terms-of-service",
              "text": "Terms of Service"
@@ -4648,8 +4648,8 @@
            "tag": "span",
            "cls": "imp-footer-line",
            "box": [
-            382,
-            29
+            396,
+            30
            ],
            "text": "© 2026 Grand Mission Dentistry of Richmond"
           }

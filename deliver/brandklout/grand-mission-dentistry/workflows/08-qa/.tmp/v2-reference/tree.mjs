@@ -73,6 +73,29 @@ const EXTRACT = `(() => {
   return { width: window.innerWidth, sections: top.map((s, i) => ({ i, ...node(s, 0) })) };
 })()`;
 
+// Lazy images report 0x0 (or a collapsed height) until they are scrolled to, and a rebuild
+// that bakes those numbers ships a 46px-tall banner. Walk the whole page first, wait for
+// every <img> to report complete, then return to the top before measuring.
+const settleImages = async (ev) => {
+  await ev(`(async () => {
+    const step = Math.round(window.innerHeight * 0.8);
+    for (let y = 0; y < document.body.scrollHeight; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 120));
+    }
+    window.scrollTo(0, document.body.scrollHeight);
+    await new Promise((r) => setTimeout(r, 600));
+    for (let i = 0; i < 60; i++) {
+      const imgs = [...document.images];
+      if (imgs.every((im) => im.complete)) break;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+    window.scrollTo(0, 0);
+    await new Promise((r) => setTimeout(r, 500));
+    return [...document.images].filter((im) => !im.complete).length;
+  })()`);
+};
+
 const PORT = 9840 + Math.floor(Math.random() * 60);
 const profile = fs.mkdtempSync(path.join(os.tmpdir(), "cdp-tree-"));
 const chrome = spawn(CHROME, ["--headless=new", "--hide-scrollbars", "--force-prefers-reduced-motion",
@@ -111,7 +134,8 @@ const ev = (e) => send("Runtime.evaluate",
   { expression: e, returnByValue: true, awaitPromise: true }, sessionId).then((r) => r?.result?.value);
 await send("Page.navigate", { url: `${BASE}/${SLUG}?t=${WIDTH}` }, sessionId);
 for (let k = 0; k < 300; k++) { if (await ev("document.readyState==='complete'")) break; await wait(100); }
-await wait(2500);
+await wait(1500);
+await settleImages(ev);
 // Sentinel: an unstyled load yields a plausible-looking tree with the wrong layout everywhere.
 const sentinel = await ev("getComputedStyle(document.querySelector('.header, header')).position");
 if (!/fixed|sticky|absolute|relative/.test(sentinel || "")) throw new Error(`unstyled load (header position ${sentinel})`);

@@ -28,7 +28,10 @@ const WIDTHS = [1920, 1440, 1280, 1100, 991, 767, 478];
 // The default filter keys off the converter's own prefixes. A few sections (the header, the
 // "how it works" band, the FAQ accordion chrome) carry generic class names instead, so they
 // are measured by a second pass: MATCH=<regex> OUT=<file> node measure.mjs <slug>
-const MATCH = process.env.MATCH || "(^|\s)(imp|csm|ty|landing|qz|lw)-";
+// NB the double backslash: in a JS string "\s" collapses to a literal "s", which turned this
+// into (^|s)... and silently dropped every element whose matching prefix was not the first
+// class on the attribute (the hero CTA, `vnr-a lw-btn lw-btn--gold`, was the one that showed it).
+const MATCH = process.env.MATCH || "(^|\\s)(imp|csm|ty|landing|qz|lw)-";
 const OUTNAME = process.env.OUT || "styles.json";
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
@@ -63,6 +66,29 @@ const EXTRACT = `(() => {
   const sentinel = hdr ? getComputedStyle(hdr).position : 'no-header';
   return { sentinel, distinct: n, styles: out };
 })()`;
+
+// Lazy images report 0x0 (or a collapsed height) until they are scrolled to, and a rebuild
+// that bakes those numbers ships a 46px-tall banner. Walk the whole page first, wait for
+// every <img> to report complete, then return to the top before measuring.
+const settleImages = async (ev) => {
+  await ev(`(async () => {
+    const step = Math.round(window.innerHeight * 0.8);
+    for (let y = 0; y < document.body.scrollHeight; y += step) {
+      window.scrollTo(0, y);
+      await new Promise((r) => setTimeout(r, 120));
+    }
+    window.scrollTo(0, document.body.scrollHeight);
+    await new Promise((r) => setTimeout(r, 600));
+    for (let i = 0; i < 60; i++) {
+      const imgs = [...document.images];
+      if (imgs.every((im) => im.complete)) break;
+      await new Promise((r) => setTimeout(r, 250));
+    }
+    window.scrollTo(0, 0);
+    await new Promise((r) => setTimeout(r, 500));
+    return [...document.images].filter((im) => !im.complete).length;
+  })()`);
+};
 
 async function session(fn, width) {
   const PORT = 9750 + Math.floor(Math.random() * 90);
@@ -124,7 +150,8 @@ for (const slug of PAGES) {
           if (await ev("document.readyState==='complete'")) break;
           await wait(100);
         }
-        await wait(1500);
+        await wait(1200);
+        await settleImages(ev);
         return await ev(EXTRACT);
       }, width);
       if (r && /sticky|fixed|absolute|relative/.test(r.sentinel)) res = r;

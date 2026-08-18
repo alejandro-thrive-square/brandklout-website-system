@@ -262,12 +262,29 @@ const same = (a, b) => JSON.stringify(a) === JSON.stringify(b);
 const missing = [];
 const STYLES = [];
 
+/** An image's measured `height` is the USED value of `height: auto` — it follows the width and
+ *  differs at every breakpoint. Baking those pixels gives a layout that is right at exactly
+ *  seven widths and wrong between them, so a media class carries a RATIO instead: the design's
+ *  own aspect-ratio when it declares one, otherwise the ratio of the measured box. */
+function asRatio(entry, base) {
+  const declared = entry.byWidth[1100]?.css["aspect-ratio"];
+  const r = entry.byWidth[1100]?.rect;
+  delete base.height;
+  delete base.width;
+  if (!declared && r && r.w > 0 && r.h > 0) base["aspect-ratio"] = `${(r.w / r.h).toFixed(4)}`;
+  base.width = "100%";
+  base.height = "auto";
+  return base;
+}
+
 for (const m of MAP) {
   const entry = styles[m.from];
   if (!entry) { missing.push(`${m.n} <- ${m.from}`); continue; }
   let props = m.only ? m.only : P[m.role];
   if (m.drop) props = props.filter((p) => !m.drop.includes(p));
-  const base = { ...pick(entry, props, 1100), ...(m.add || {}) };
+  let base = pick(entry, props, 1100);
+  if (m.role === "media" && !m.only) base = asRatio(entry, base);
+  base = { ...base, ...(m.add || {}) };
   const bp = {};
   for (const w of ORDER) {
     if (w === 1100) continue;
@@ -275,6 +292,8 @@ for (const m of MAP) {
     const delta = {};
     for (const [k, val] of Object.entries(v)) {
       if (m.add && k in m.add) continue;          // authored value wins at every breakpoint
+      // a media class is ratio-driven; its per-breakpoint used heights/widths are noise
+      if (m.role === "media" && !m.only && (k === "height" || k === "width")) continue;
       if (!same(val, base[k])) delta[k] = val;
     }
     if (Object.keys(delta).length) bp[BP[w]] = delta;

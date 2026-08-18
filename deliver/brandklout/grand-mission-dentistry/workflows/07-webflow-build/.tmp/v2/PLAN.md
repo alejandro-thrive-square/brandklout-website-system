@@ -121,6 +121,32 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: Phase 2 — the MEASUREMENT was wrong in three ways and all three are fixed. This
+  cost a run but every one of them would have shipped as a visible defect:
+  1. **Lazy images were measured before they loaded.** The chapter banner came back 46px tall
+     (real: 236px) and the doctor photo strip came back 0x0 (real: 281x187). `measure.mjs` and
+     `tree.mjs` now walk the whole page, wait for every `<img>` to report `complete`, and
+     return to the top before measuring.
+  2. **The parameterised class filter had a regex-escaping bug.** In a JS string `"\s"`
+     collapses to a literal `s`, so `(^|\s)` became `(^|s)` and every element whose matching
+     prefix was not the FIRST class on the attribute was silently dropped — the hero CTA
+     (`vnr-a lw-btn lw-btn--gold`) was the one that showed it. The filter now defaults to
+     matching every class (190 chains instead of 110), which also recovered the header, the
+     "how it works" band, the FAQ chrome and the whole options section (`service_item*`).
+  3. **Images were carrying baked pixel heights.** A measured `height` on an image is the USED
+     value of `height: auto` — it differs at every width, so seven breakpoints of pixels give a
+     layout that is right at exactly seven widths and wrong between them. A `media` class is
+     now RATIO-driven: the design's own `aspect-ratio` where it declares one, otherwise the
+     ratio of the measured box, plus `width: 100%`.
+
+  `update-styles.mjs` applies changed definitions to classes that already exist. Two API facts
+  shape it: **re-asserting a value the style already holds answers "[Conflict] … style block
+  store" and aborts the whole call**, and **there is no way to READ a class's stored
+  properties** (`query_styles` ignores its filter and returns every style as metadata only). So
+  a conflict is treated as "already correct", not an error: the class is tried as one batch and
+  falls back to one property per call. Clearing a property needs an EMPTY string — `"auto"` is
+  rejected and there is no `remove_properties` action in this MCP build. 8 image classes updated.
+
 - 2026-08-18: Phase 2 STARTED — cosmetic-v2 shell, header and hero are built and their classes
   read back correct (`section_lp_hero` / `lp_container` / `lp_hero_grid` / `lp_hero_content` /
   `lp_form_card`, and `section_lp_header` / `lp_header_bar` / `lp_header_inner`). Section
@@ -136,18 +162,22 @@ the four of its six pages that also had no local design file. The capture set in
      ("Text Field can only be placed in a Form"), so a form is built empty and then ADJUSTED.
   2. On `data_element_tool`, `remove_element` / `set_style` / `set_text` / `set_attributes`
      take **`id`**, while `query_elements` takes **`element_id`**. Same tool, different key.
-  3. Form input settings keys are `name` / `required` / `type` / `attributes` / `domId`, and
-     **the placeholder IS reachable** through `attributes`
-     (`{name_static: "placeholder", value_static: "..."}`) — the older "placeholders are
-     unreachable" note is wrong.
-  4. Unknown action names and argument shapes are cheapest to discover by sending a bogus
+  3. Form input settings keys are `name` / `required` / `type` / `attributes` / `domId`.
+     **`placeholder` is a RESERVED attribute name** and is rejected — it cannot be set through
+     the API at all. (An earlier note in this file claimed the opposite; it was wrong.)
+  4. **`set_settings` reports ACTION-level success while individual OPERATIONS fail.** The
+     truth is in `result[].data[].applied_keys` / `.error`. One bad key discards its WHOLE
+     operation — a batch carrying the reserved `placeholder` attribute wrote nothing at all and
+     still answered `"Applied 1 operation(s)"`. That is why three form fields kept Webflow's
+     default names through two runs. `lib.mjs`'s `call()` now inspects those per-operation
+     results and throws.
+  5. Unknown action names and argument shapes are cheapest to discover by sending a bogus
      action or key and reading the Zod union error.
 
-  **OPEN, first thing to settle next run:** the hero form's `name`/`type` writes on the three
-  inputs did not land (they still read Webflow's defaults `Name` / `Email` / `Field`) while the
-  FormForm's `name` + `redirect` did. The run ended in a **429 storm** on `/v2/pages`, so the
-  likeliest cause is a rate-limited write reported as success. Re-run the settings pass with
-  pacing and read each input back individually before believing it.
+  Hero form now reads back correct: First name/text, Phone/tel, Email/email, all required,
+  submit "Request My Consultation", form name + redirect to the v2 thank-you page. Because the
+  placeholder is unreachable, the fields need visible labels rather than placeholder text —
+  queued as the first build step of the next section pass.
 
 - 2026-08-18: Phase 1 DONE — the `lp_` class system exists on the site. `measure.mjs` renders
   each live reference page at 1920/1440/1280/1100/991/767/478 and dumps the computed styles of

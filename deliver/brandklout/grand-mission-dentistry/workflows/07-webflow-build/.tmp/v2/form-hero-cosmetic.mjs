@@ -95,13 +95,14 @@ const ops = [
   { element_id: { component: PAGE, element: button.id.element },
     settings: [{ key: "buttonText", ...text("Request My Consultation") }] },
 ];
+// ONE action carrying every operation. Sending one action PER ELEMENT applies only the
+// first and reports success for the rest — that is how the field names silently stayed at
+// Webflow's defaults ("Name", "Email", "Field") while the FormForm's name and redirect,
+// which happened to be action 0, landed fine.
 call("data_element_settings_tool", {
   context: "Write the hero form's identity, redirect, field names, types and placeholders.",
   siteId: SITE, pageId: PAGE,
-  actions: ops.map((o, i) => ({
-    label: "s" + i,
-    set_settings: { operations: [{ element_id: o.element_id, settings: o.settings }] },
-  })),
+  actions: [{ label: "settings", set_settings: { operations: ops } }],
 });
 console.log("settings written for", ops.length, "elements");
 
