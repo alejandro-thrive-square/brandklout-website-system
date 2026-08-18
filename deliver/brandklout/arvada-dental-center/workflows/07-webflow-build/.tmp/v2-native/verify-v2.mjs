@@ -74,7 +74,17 @@ for (const topic of topics) {
   const local = fs.readFileSync(path.join(V2, topic, 'body.html'), 'utf8');
   const res = await fetch(`${STAGING}/${slug}`);
   const live = await res.text();
-  const liveText = norm(live.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' '));
+  /**
+   * Visible text is not only text nodes. Webflow publishes a form's submit
+   * button as `<input type="submit" value="Request my free consultation">`, so
+   * a comparison that only reads text content calls the label missing on every
+   * consult page while it is present and correct. Attribute-borne copy —
+   * `value`, `placeholder`, `alt` — is folded in before comparing.
+   */
+  const attrText = [...live.matchAll(/\b(?:value|placeholder|alt)="([^"]*)"/g)].map((m) => m[1]).join(' ');
+  const liveText = norm(
+    live.replace(/<script[\s\S]*?<\/script>/g, '').replace(/<style[\s\S]*?<\/style>/g, '').replace(/<[^>]+>/g, ' ')
+    + ' ' + attrText);
 
   const problems = [];
 

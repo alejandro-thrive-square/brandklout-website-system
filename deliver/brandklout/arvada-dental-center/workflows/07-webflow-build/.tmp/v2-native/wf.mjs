@@ -61,7 +61,24 @@ export function call(tool, actions, opts = {}) {
     args.pageId = opts.page || '';
   }
 
-  let out = raw(tool, args);
+  /**
+   * Retry on 429 with backoff.
+   *
+   * `GET /v2/assets` rate-limits hard, and once it does, tools that look
+   * unrelated fail too — `get_all_elements` and `query_elements` both read
+   * assets server-side. Without this, a long build run dies partway and leaves
+   * a page half-written, which is far worse than waiting.
+   */
+  const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+  let out = '';
+  for (let attempt = 0; attempt < 6; attempt++) {
+    out = raw(tool, args);
+    if (!/\b429\b|rate.?limit/i.test(out)) break;
+    const wait = 15000 * 2 ** attempt;           // 15s, 30s, 60s, 2m, 4m
+    console.log(`  [wf] ${tool} rate-limited; waiting ${Math.round(wait / 1000)}s (attempt ${attempt + 1}/6)`);
+    sleep(wait);
+  }
+
   // wfmcp prints housekeeping lines (token refresh) alongside the JSON payload.
   out = out.split(/\r?\n/).filter((l) => !l.startsWith('[wfmcp]')).join('\n').trim();
 

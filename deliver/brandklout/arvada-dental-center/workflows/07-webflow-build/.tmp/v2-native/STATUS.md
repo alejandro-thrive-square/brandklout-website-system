@@ -1,46 +1,61 @@
-# v2 rebuild — status at the consult/thank-you milestone
+# v2 rebuild — ALL 18 PAGES BUILT, PUBLISHED AND VERIFIED
 
-**All 18 v2 pages now exist in Webflow and are built.** Page ids: `v2-pages.json`.
+`node verify-v2.mjs` → **18/18 pass** against staging.
 
-## Page types
+Every page is native Webflow elements with client-first `camp_` classes. **No HtmlEmbed, no Custom
+Code element, no page or site custom code anywhere in this build.**
 
-| kind | pages | template | content |
-|---|---|---|---|
-| ads landing | 6 | `_shared/page-template.tokens.html` | `content/<topic>.json` |
-| consult | 6 | `_shared/consult-template.tokens.html` | `content/<topic>.consult.json` |
-| thank-you | 6 | `_shared/thankyou-template.tokens.html` | `content/<topic>.ty.json` |
+| kind | pages | elements | classes | template | content |
+|---|---|---|---|---|---|
+| ads landing | 6 | 469 | 126/126 | `_shared/page-template.tokens.html` | `content/<topic>.json` |
+| consult | 6 | 226 | 79/79 | `_shared/consult-template.tokens.html` | `content/<topic>.consult.json` |
+| thank-you | 6 | 187 | 66/66 | `_shared/thankyou-template.tokens.html` | `content/<topic>.ty.json` |
 
-All three share `content/_base.json` (the practice-wide facts) and the one `camp_` class
-vocabulary: `camp.css` (109 base + 18 combos) plus `camp-convert.css` (27 more for the form and
-the two new page shapes).
+Page ids: `v2-pages.json`. Staging: `https://arvadadentalcenter.webflow.io/<slug>-v2`.
 
-The consult and thank-you content is **generated** by `make-convert-content.mjs` from one compact
-spec per topic — these pages say almost the same thing on every topic, and hand-copying twelve
-files invites exactly the drift `_base.json` exists to prevent. Edit the spec, not the JSON.
+## What the gate checks
 
-## The consult form is a real Webflow form
+`verify-v2.mjs` compares each **published** page against its own
+`04-design/.tmp/v2/<page>/body.html`: every design string present verbatim (text nodes *and*
+`value`/`placeholder`/`alt` attributes), the full class inventory, image count, the video element
+on ads pages, no leftover `{{token}}`, and no copy exclusive to another topic.
 
-`data_whtml_builder` turns `<form>` / `<input>` / `<textarea>` / `<button>` into
-`FormWrapper > FormForm > FormTextInput / FormTextarea / FormButton`, and adds
-`FormSuccessMessage` and `FormErrorMessage` itself. Submissions therefore go to **Webflow's own
-form handling** — no custom code, no external endpoint.
+Class layer gates separately: `verify-classes.mjs` → camp.css 130 selectors / 783 declarations and
+camp-convert.css 26 / 253, all present at every breakpoint.
 
-That also closes an open problem from the previous build: its form was not a Webflow form at all,
-it `preventDefault()`ed and pushed to `window.__arvadaLeads`, so **no lead ever left the page**.
+## Two things still need a human in the Designer
 
-**A `FormSelect`'s `<option>` list is unreachable from the Data API.** No `options` setting is
-exposed, the options simply do not travel, and the control ships empty while the build reports
-`success` — it shipped that way on all six consult pages before this was caught. Replaced with
-radio inputs, which arrive as `FormBlockLabel > FormRadioInput + Span` and keep their text.
+Both are Webflow API limitations, not build defects, and both are one-off:
 
-## Remaining to finish this milestone
+1. **The YouTube URL on the six ads pages.** The native `YouTubeVideo` element is created and in
+   place, but its `video` setting is unreachable over the Data API — `static_text`, `static_video`,
+   `static_json` and `static_link` are all refused with *"Invalid value for setting video: expected
+   video"*. Paste `https://www.youtube.com/watch?v=GefKg1nID9w` into each.
+2. **Form field placeholders read "Example text"** on the six consult pages. A `FormTextInput`
+   exposes no `placeholder` setting, and setting it through `attributes` is refused as a reserved
+   name. Every field has a real visible label above it, so the form is usable as it stands.
 
-1. Rebuild the consult pages for **aox, veneers, emergency, dentist-near-me, next-door** with the
-   radio markup (implants is already rebuilt). `node build-page.mjs <id> <body.html> --clear`,
-   ids in `v2-pages.json` under `<topic>.consult`.
-2. Publish to the subdomain only, then `node verify-v2.mjs` — it covers all 18 pages.
-3. Screenshot a consult and a thank-you page at 1440 and 767 to check them by eye.
+## Open questions for the user
 
-**Pace the API.** `GET /v2/assets` rate-limits hard, and once limited even `get_all_elements`
-fails because it reads assets server-side. The asset URL cache (`asset-urls.json`) removes the
-per-page lookups, but long unbroken runs still trip it. Build two or three pages at a time.
+1. **Call tracking assigns a number per page** — emergency renders `(983) 955-0387`, implants
+   `(983) 900-6463`, against a source of `(303) 421-7611`. The script is working as designed, but
+   it has never seen these `-v2` slugs; confirm the pool maps them to the right campaigns.
+2. **Relume utility values vs the client's design.** `padding-section-large` is 112px against the
+   design's 104px, `heading-style-h1` 56px against 74px. The build keeps the **design's** values in
+   `camp_` classes and takes client-first for structure, naming and reuse. Snapping to the style
+   guide instead is a visible change and therefore the user's call.
+3. **The old pages are untouched.** Nothing has been published to `arvadadentalimplants.com`;
+   every publish in this build was `publishToWebflowSubdomain:true, customDomains:[]`.
+
+## Rebuilding any page
+
+```
+node render-page.mjs <topic> [ads|consult|ty]     # local source from template + content
+node build-page.mjs <pageId> <body.html> --clear  # markup only; classes resolve by name
+node fix-form-button.mjs <topic>                  # consult pages only — submit label
+node verify-v2.mjs [page …]
+```
+
+`wf.mjs` now backs off and retries on 429. `GET /v2/assets` rate-limits hard, and once it does even
+`get_all_elements` fails because it reads assets server-side — that is what interrupted earlier
+runs mid-build.
