@@ -121,6 +121,26 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: **BOTH CONSULTATION PAGES ARE BUILT**, and the `confirm_` family (**57 classes,
+  zero collisions**) is on the site ready for the two thank-you pages. Class totals: 114 `lp_`
+  + 23 hand-authored + 32 `consult_` + 57 `confirm_` = **226**.
+
+  cosmetic-consultation-v2 is complete (copy synced, form wired, 4 poster links, 0 Video
+  elements). dental-implants-consultation-v2 has everything except its poster swap.
+
+  **The thank-you pages carry the heaviest leakage of the six — the entire contact card is
+  another practice's.** `build-thankyou.mjs` must substitute, not copy:
+  phone `(703) 844-2975` -> `(281) 789-8836` / `tel:+12817898836` (appears 3x incl. two
+  buttons and a fact link); address `9027 Silverbrook Rd Ste. F, Fairfax Station, VA 22039`
+  + its maps href -> `8620 Grand Mission Blvd Ste E, Richmond, TX 77407` + the cid link;
+  hours `Mon & Tue 8-5 / Wed & Thu 8-4 / Fri 8-1` -> `Mon 9-7 · Tue-Wed 10-8 · Thu-Fri 8-6 ·
+  Sat 8-3`; `Dr. Chris, a Kois Center graduate…` -> Dr. William Sung's own credentials;
+  `our Fairfax Station practice` -> `our Richmond practice`; `Why Grand Mission **Dental**?`
+  -> `Dentistry`; `320+ five star reviews` -> `1,800+`.
+  **And the COSMETIC thank-you page's whole FAQ is implant copy** (including "$1,900 to
+  $2,800" pricing) — it must be replaced with the cosmetic FAQ, which is available in the
+  cosmetic landing page's own reference tree (section 9, 7 items).
+
 - 2026-08-18: **cosmetic-consultation-v2 is BUILT** (7 section roots, copy synced, form wired,
   videos sourced) and the `consult_` family — **32 classes, zero collisions** — is on the site.
   `gen-styles.mjs` now takes `FAMILY=` and `OUT=` so each page family generates into its own

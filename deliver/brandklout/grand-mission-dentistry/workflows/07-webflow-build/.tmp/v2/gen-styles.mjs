@@ -272,6 +272,74 @@ export const MAP = [
   { fam: "consult", n: "consult_proof_em", from: "em.qz-em", role: "text", drop: ["max-width"] },
   { fam: "consult", n: "consult_badge_stars", from: "span.qz-proof__badge-stars", role: "text" },
   { fam: "consult", n: "consult_badge_text", from: "span.qz-proof__badge-txt", role: "text" },
+  // ============================ confirm_ family ============================
+  // The two thank-you pages. They reuse the landing pages' header and footer; everything
+  // between is their own. This page carries the heaviest cross-client leakage of the six —
+  // the whole contact card is another practice's — so build-thankyou.mjs substitutes rather
+  // than copies (see its SUBSTITUTIONS block).
+  { fam: "confirm", n: "section_confirm_hero", from: "section.section_ty-hero", role: "section" },
+  { fam: "confirm", n: "confirm_hero_glow", from: "div.ty-hero__glow", role: "box" },
+  { fam: "confirm", n: "confirm_hero_inner", from: "div.ty-hero__in", role: "box" },
+  { fam: "confirm", n: "confirm_badge", from: "span.ty-hero__badge", role: "box" },
+  { fam: "confirm", n: "confirm_badge_dot", from: "span.ty-hero__badge-dot", role: "box" },
+  { fam: "confirm", n: "confirm_h1", from: "h1.ty-hero__h1", role: "text", drop: ["max-width"] },
+  { fam: "confirm", n: "confirm_lede", from: "p.ty-hero__lede", role: "text" },
+  { fam: "confirm", n: "confirm_cta_col", from: "div.ty-hero__cta", role: "flex" },
+  { fam: "confirm", n: "confirm_call_btn", from: "a.ty-head__logo.lw-btn.lw-btn--gold.ty-hero__call", role: "box", add: {"text-decoration":"none"} },
+  { fam: "confirm", n: "confirm_proof", from: "p.ty-hero__proof", role: "flex" },
+  { fam: "confirm", n: "confirm_stars", from: "span.ty-hero__stars", role: "text" },
+  { fam: "confirm", n: "confirm_micro", from: "p.ty-hero__micro", role: "text" },
+
+  { fam: "confirm", n: "section_confirm_expect", from: "section.ty-div.section_ty-expect.lw-sec", role: "section" },
+  { fam: "confirm", n: "confirm_head", from: "div.ty-expect__head", role: "box" },
+  { fam: "confirm", n: "confirm_h2", from: "h2.ty-h2", role: "text", drop: ["max-width"] },
+  { fam: "confirm", n: "confirm_head_lede", from: "p.ty-expect__lede", role: "text" },
+  { fam: "confirm", n: "confirm_expect_grid", from: "div.ty-expect__grid", role: "grid" },
+  { fam: "confirm", n: "confirm_label", from: "p.ty-expect__label", role: "text" },
+  { fam: "confirm", n: "confirm_steps", from: "div.ty-steps", role: "box" },
+  { fam: "confirm", n: "confirm_step", from: "div.ty-div.ty-step", role: "box" },
+  { fam: "confirm", n: "confirm_step_num", from: "span.ty-div.ty-step__num", role: "box" },
+  { fam: "confirm", n: "confirm_step_h3", from: "h3.ty-step__h3", role: "text", drop: ["max-width"] },
+  { fam: "confirm", n: "confirm_step_p", from: "p.ty-step__p", role: "text" },
+  { fam: "confirm", n: "confirm_risks_label", from: "p.ty-risks__label", role: "flex" },
+  { fam: "confirm", n: "confirm_risks_list", from: "div.ty-risks__list", role: "grid" },
+  { fam: "confirm", n: "confirm_risk", from: "div.ty-risk", role: "flex" },
+  { fam: "confirm", n: "confirm_risk_mark", from: "span.ty-risk__mark", role: "box" },
+  { fam: "confirm", n: "confirm_risk_p", from: "p.ty-risk__p", role: "text" },
+  { fam: "confirm", n: "confirm_reassure", from: "div.ty-reassure", role: "box" },
+  { fam: "confirm", n: "confirm_reassure_strong", from: "span.ty-reassure__strong", role: "text" },
+
+  { fam: "confirm", n: "section_confirm_why", from: "section.ty-div.section_ty-why.lw-sec", role: "section" },
+  { fam: "confirm", n: "confirm_why_grid", from: "div.ty-why__grid", role: "grid" },
+  { fam: "confirm", n: "confirm_why_card", from: "div.ty-why__card", role: "box" },
+  { fam: "confirm", n: "confirm_why_icon", from: "span.ty-why__icon", role: "box" },
+  { fam: "confirm", n: "confirm_why_h3", from: "h3.ty-why__h3", role: "text", drop: ["max-width"] },
+  { fam: "confirm", n: "confirm_why_p", from: "p.ty-why__p", role: "text" },
+
+  { fam: "confirm", n: "section_confirm_faq", from: "section.ty-div.section_ty-faq.lw-sec", role: "section" },
+  { fam: "confirm", n: "confirm_faq_list", from: "div.ty-faq__list", role: "grid" },
+  { fam: "confirm", n: "confirm_faq_item", from: "div.ty-div.ty-faq__item", role: "box" },
+  // Webflow's own .w-dropdown-toggle sets white-space:nowrap, and this row is a summary in v2;
+  // an unwrappable question clipped off a 390px viewport on the Mason Park build.
+  { fam: "confirm", n: "confirm_faq_trigger", from: "div.ty-faq__trigger", role: "flex", add: {"white-space":"normal","list-style-type":"none","cursor":"pointer"} },
+  { fam: "confirm", n: "confirm_faq_sign", from: "span.ty-div.ty-faq__sign", role: "box" },
+  { fam: "confirm", n: "confirm_faq_panel", from: "div.ty-faq__panel", role: "box" },
+  { fam: "confirm", n: "confirm_faq_a", from: "p.ty-faq__a", role: "text" },
+
+  { fam: "confirm", n: "section_confirm_cta", from: "section.section_ty-cta", role: "section" },
+  { fam: "confirm", n: "confirm_cta_card", from: "div.ty-cta__card", role: "box" },
+  { fam: "confirm", n: "confirm_cta_glow", from: "div.ty-cta__glow", role: "box" },
+  { fam: "confirm", n: "confirm_cta_inner", from: "div.ty-cta__in", role: "box" },
+  { fam: "confirm", n: "confirm_cta_h2", from: "h2.ty-cta__h2", role: "text", drop: ["max-width"] },
+  { fam: "confirm", n: "confirm_cta_p", from: "p.ty-cta__p", role: "text" },
+  { fam: "confirm", n: "confirm_cta_call", from: "a.ty-head__logo.lw-btn.ty-cta__call", role: "box", add: {"text-decoration":"none"} },
+  { fam: "confirm", n: "confirm_cta_proof", from: "p.ty-cta__proof", role: "flex" },
+  { fam: "confirm", n: "confirm_cta_stars", from: "span.ty-cta__stars", role: "text" },
+  { fam: "confirm", n: "confirm_cta_micro", from: "p.ty-cta__micro", role: "text" },
+  { fam: "confirm", n: "confirm_cta_facts", from: "div.ty-cta__facts", role: "grid" },
+  { fam: "confirm", n: "confirm_fact_label", from: "p.ty-cta__fact-label", role: "text" },
+  { fam: "confirm", n: "confirm_fact_copy", from: "p.ty-cta__fact-copy", role: "text" },
+  { fam: "confirm", n: "confirm_fact_link", from: "a.ty-cta__fact-link", role: "text", add: {"text-decoration":"none"} },
 ];
 
 // ---------------------------------------------------------------------------------
