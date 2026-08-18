@@ -125,6 +125,9 @@ and **767**.
       real class layer in P4.
       **`Dental Implants v2` page created: `6a83e962d17d0bfe618c49f7`, slug
       `dental-implants-ads-landing-v2`, body element `6a83e962d17d0bfe618c49fd`. Body is empty.**
+- [x] **P4 Class layer — DONE and gated.** `04-design/.tmp/v2/_shared/camp.css` is the single
+      source; **109 base classes + 18 combos, 128 selectors, 781 declarations, all verified present
+      on the site at every breakpoint** (`node verify-classes.mjs`). Page body is empty again.
 - [ ] **P1 Reference spec** — screenshots + section-by-section spec from the client reference.
 - [x] **P2 Mason Park pattern** — read and adopted; see "Naming and structure" below.
 - [ ] **P3 Local v2 source** — author the three Dental Implants pages locally in the reference's
@@ -136,6 +139,63 @@ and **767**.
 - [ ] **P6 Verify on staging** — publish to the **Webflow subdomain only**
       (`publishToWebflowSubdomain:true`, `customDomains:[]`) and diff against local.
 - [ ] **P7 Replicate** — the other 5 topics × 3 pages, same structure, content swapped.
+
+## The class layer, and the four traps found building it
+
+`camp.css` → `build-classes.mjs` → `sync-combos.mjs` → `verify-classes.mjs`. Run them in that
+order; all three are idempotent and the last one is the gate.
+
+**The whole stylesheet goes up in one call.** `data_whtml_builder` creates a Webflow style for
+**every rule in the `css` field, not only the ones the markup uses** (measured: three rules, one
+element, three classes created). So the class layer is one action attached to a throwaway div,
+which is then removed. 17KB of CSS, 109 classes, one round trip.
+
+### 1. A combo name can only attach to ONE base class per build
+
+`.camp_button.is-navy` was created; `.camp_section.is-navy` was not. Same for `is-on-dark`
+(`camp_text-link` won, `camp_h2` and `camp_text` lost) and `is-center` (`camp_text` won,
+`camp_heading` lost). First in source order wins, the rest vanish **with a `success` status and no
+warning** — the element then renders with only its base class, which usually looks *almost* right.
+
+`data_style_tool create_style` with `parent_style_names` has no such collision. `sync-combos.mjs`
+reconciles all of them and re-verifies. 18/18.
+
+### 2. A bare `0` before a negative length is silently corrupted
+
+`box-shadow: 0 -8px 25px rgba(...)` is stored as `0-8px 25px rgba(...)` — the separating space is
+eaten, the value is invalid CSS, and the shadow simply never paints. Proved by bisecting:
+
+| written | stored |
+|---|---|
+| `0 8px 25px …` | `0 8px 25px …` ✓ |
+| `0 -8px 25px …` | `0-8px 25px …` ✗ |
+| `0px -8px 25px …` | `0px -8px 25px …` ✓ |
+| `top:-40px`, `margin-top:-12px` | fine — single-value props are unaffected |
+
+**Write `0px`, never a bare `0`, in any multi-value property.** `lint-css.mjs` now fails the build
+on it.
+
+### 3. `missing_font` is a false alarm for the site's own fonts
+
+The class-layer build returned `partial_success` with *"Font 'area extended' could not be installed
+or is unavailable"* for both brand fonts — and then stored `font-family: area extended` correctly
+anyway. The warning means "I could not *install* this from Webflow's font library", not "I dropped
+your declaration". **Read the style back rather than trusting the status**; that is the same lesson
+as the `partial_success` skip-link incident in the old build.
+
+Webflow does keep only the **first** family and drops the fallback stack (`Arial, sans-serif` →
+`Arial`).
+
+### 4. Webflow does not store what you wrote — it expands and normalises
+
+The verifier compares after the same expansion, or it reports dozens of phantom failures:
+`overflow` → `overflow-x`/`-y`; `border-radius` → four corners; `border` → 12 props;
+`margin`/`padding` → four sides; `gap` → `grid-row-gap` + `grid-column-gap`; and any
+`grid-template-columns` silently gains `grid-template-rows: auto`.
+
+Re-sending a value a style already holds is **not** a harmless no-op — the multiplayer server
+answers `[Conflict] The operation could not be applied to the style block store`, which reads like
+a failure when nothing is wrong. `sync-combos.mjs` diffs before writing.
 
 ## Naming and structure — copied from Mason Park
 
