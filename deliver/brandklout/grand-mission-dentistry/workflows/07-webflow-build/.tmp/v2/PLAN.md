@@ -121,6 +121,29 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: **cosmetic-consultation-v2 is BUILT** (7 section roots, copy synced, form wired,
+  videos sourced) and the `consult_` family — **32 classes, zero collisions** — is on the site.
+  `gen-styles.mjs` now takes `FAMILY=` and `OUT=` so each page family generates into its own
+  definition file and regenerating one cannot clobber another; `push-styles.mjs` takes `DONE=`
+  and `update-styles.mjs` takes `PUSHED=` to match.
+
+  The consultation pages REUSE the landing pages' header, footer, video row, button and form
+  classes; only the hero, form card, stories intro and closing proof band are new.
+
+  **`build-consult.mjs` takes a FUNNEL argument** because this page carries most of the
+  cross-client leakage and several strings must be CHOSEN per funnel rather than copied. All
+  five substitutions are declared in one `SUBSTITUTIONS` block and echoed by the build:
+  card title "Start Your **Implant** Consultation" on the cosmetic funnel -> the funnel's own
+  treatment; portrait alt "Dr. Chris Kim, Livewell Dental" -> Dr. William Sung; "…a real
+  **Livewell Dental** patient." -> Grand Mission Dentistry; "why others chose **livewell
+  dental**" -> Grand Mission Dentistry; and the decorative watermark's words per funnel.
+
+  **RATE LIMIT: `/v2/assets` 429s hard after any run that touches assets**, and
+  `data_element_builder` hits it for every Image element — so it blocks BUILDS, not just
+  uploads. It cost three separate stalls today. Everything is resumable
+  (`built/<slug>.json`); dental-implants-consultation-v2 stopped after its `shell` and the
+  cosmetic consultation's poster swap is still pending.
+
 - 2026-08-18: **BOTH LANDING PAGES ARE COMPLETE.** dental-implants-v2's seven video posters
   are placed and live; the page reads correctly end to end at 1440.
 

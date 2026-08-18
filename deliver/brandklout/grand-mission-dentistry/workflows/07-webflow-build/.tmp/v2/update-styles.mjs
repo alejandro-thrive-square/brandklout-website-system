@@ -28,8 +28,8 @@ import { call, SITE, page } from "./lib.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PAGE = page("cosmetic-v2").page;
-const NOW = JSON.parse(fs.readFileSync(path.join(HERE, "styles-def.generated.json"), "utf8")).STYLES;
-const PUSHED_FILE = path.join(HERE, "styles-def.pushed.json");
+const NOW = JSON.parse(fs.readFileSync(path.join(HERE, (process.env.OUT || "styles-def.generated.json")), "utf8")).STYLES;
+const PUSHED_FILE = path.join(HERE, (process.env.PUSHED || "styles-def.pushed.json"));
 const PUSHED = JSON.parse(fs.readFileSync(
   fs.existsSync(PUSHED_FILE) ? PUSHED_FILE : path.join(HERE, "styles-def.prescroll.json"), "utf8")).STYLES;
 

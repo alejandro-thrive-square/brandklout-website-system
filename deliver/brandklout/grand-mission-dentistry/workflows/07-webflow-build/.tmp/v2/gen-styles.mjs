@@ -18,6 +18,10 @@ import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const REF = path.join(HERE, "..", "..", "..", "08-qa", ".tmp", "v2-reference");
 const SLUG = process.argv[2] || "cosmetic";
+// Each page family is generated from its own reference into its own file, so regenerating
+// one family cannot clobber another's definitions.
+const FAMILY = process.env.FAMILY || "lp";
+const OUTFILE = process.env.OUT || "styles-def.generated.json";
 
 const BP = { 1920: "xxl", 1440: "xl", 1280: "large", 1100: "main", 991: "medium", 767: "small", 478: "tiny" };
 // 1920 is measured but NOT emitted — see NON_MONOTONIC note in the header comment.
@@ -228,9 +232,49 @@ export const MAP = [
   { n: "lp_footer_line", from: "span.imp-footer-line", role: "text" },
   { n: "lp_footer_link", from: "a.imp-a-6", role: "text", add: { "text-decoration": "none" } },
   { n: "lp_footer_disc", from: "p.ty-foot__disc", role: "text" },
+  // ============================ consult_ family ============================
+  // The two consultation pages. They REUSE the header, footer, video row and button classes
+  // the landing pages already have; only the hero, the form card, the stories intro and the
+  // closing proof band are new.
+  { fam: "consult", n: "section_consult_hero", from: "section.section_qz-hero", role: "section" },
+  { fam: "consult", n: "consult_hero_grid", from: "div.qz-hero__grid", role: "grid" },
+  { fam: "consult", n: "consult_hero_content", from: "div.landing-hero-grid-left", role: "box" },
+  { fam: "consult", n: "consult_eyebrow", from: "span.landing-section-label", role: "text", drop: ["max-width"] },
+  { fam: "consult", n: "is-centered", parents: ["consult_eyebrow"], from: "span.landing-section-label.center", role: "text", only: ["text-align", "display", "justify-content"] },
+  { fam: "consult", n: "consult_rating", from: "span.landing-rating-badge", role: "box" },
+  { fam: "consult", n: "consult_h1", from: "h1.landing-hero-h1", role: "text", drop: ["max-width"] },
+  { fam: "consult", n: "consult_lead", from: "p.landing-p1", role: "text" },
+  { fam: "consult", n: "consult_chips", from: "div.qz-hero__chips", role: "flex" },
+  { fam: "consult", n: "consult_chip", from: "span.landing-hero-chip", role: "box" },
+  { fam: "consult", n: "consult_chip_dot", from: "span.qz-hero__dot", role: "box" },
+  { fam: "consult", n: "consult_aside", from: "div.qz-hero__aside", role: "flex" },
+  { fam: "consult", n: "consult_aside_img", from: "img.qz-hero__aside-img", role: "media" },
+  { fam: "consult", n: "consult_aside_text", from: "p.landing-p3.white", role: "text" },
+  { fam: "consult", n: "consult_card", from: "div.qz-card", role: "box" },
+  { fam: "consult", n: "consult_card_head", from: "div.qz-card__head", role: "box" },
+  { fam: "consult", n: "consult_card_title", from: "p.landing-hero-form-h2", role: "text", drop: ["max-width"] },
+  { fam: "consult", n: "consult_meter", from: "div.qz-card__meter", role: "box" },
+  { fam: "consult", n: "consult_meter_fill", from: "div.qz-card__meter-fill", role: "box" },
+
+  { fam: "consult", n: "section_consult_stories", from: "section.qz-div.section_qz-stories.lw-sec", role: "section" },
+  { fam: "consult", n: "consult_stories_intro", from: "div.imp-consult-stories", role: "flex" },
+  { fam: "consult", n: "consult_h2", from: "h2.landing-h2", role: "text", drop: ["max-width"] },
+  { fam: "consult", n: "consult_h2_accent", from: "span.landing-h2.accent", role: "text", drop: ["max-width", "margin-bottom"] },
+  { fam: "consult", n: "consult_stories_lead", from: "p.landing-p2.short", role: "text" },
+  { fam: "consult", n: "consult_stories_foot", from: "p.qz-stories__foot", role: "text" },
+
+  { fam: "consult", n: "section_consult_proof", from: "section.qz-div.section_qz-proof.lw-sec", role: "section" },
+  // a decorative word-rail that runs far wider than the page; every ancestor clips it, so its
+  // own width is intended and must not be read as overflow
+  { fam: "consult", n: "consult_proof_watermark", from: "div.qz-proof__drift", role: "text", drop: ["max-width"] },
+  { fam: "consult", n: "consult_proof_inner", from: "div.qz-proof__in", role: "box" },
+  { fam: "consult", n: "consult_proof_h2", from: "h2.qz-proof__h2", role: "text", drop: ["max-width"] },
+  { fam: "consult", n: "consult_proof_em", from: "em.qz-em", role: "text", drop: ["max-width"] },
+  { fam: "consult", n: "consult_badge_stars", from: "span.qz-proof__badge-stars", role: "text" },
+  { fam: "consult", n: "consult_badge_text", from: "span.qz-proof__badge-txt", role: "text" },
 ];
 
-// --------------------------------------------------------------------------------
+// ---------------------------------------------------------------------------------
 const styles = JSON.parse(fs.readFileSync(path.join(REF, SLUG, "styles.json"), "utf8"));
 
 /** Measured track lists are pixel widths; a rebuild needs the RATIO. Equal tracks become
@@ -301,7 +345,7 @@ function asRatio(entry, base) {
   return base;
 }
 
-for (const m of MAP) {
+for (const m of MAP.filter((x) => (x.fam || "lp") === FAMILY)) {
   const entry = styles[m.from];
   if (!entry) { missing.push(`${m.n} <- ${m.from}`); continue; }
   let props = m.only ? m.only : P[m.role];
@@ -329,7 +373,7 @@ for (const m of MAP) {
   STYLES.push({ n: m.n, ...(m.parents ? { parents: m.parents } : {}), p: base, ...(Object.keys(bp).length ? { bp } : {}) });
 }
 
-fs.writeFileSync(path.join(HERE, "styles-def.generated.json"),
+fs.writeFileSync(path.join(HERE, OUTFILE),
   JSON.stringify({ ref: SLUG, generatedFrom: "measured computed styles", V, STYLES }, null, 1));
-console.log(`generated ${STYLES.length} styles from ${SLUG}`);
+console.log(`generated ${STYLES.length} ${FAMILY} styles from ${SLUG} -> ${OUTFILE}`);
 if (missing.length) console.log(`MISSING source chain (${missing.length}):\n  ` + missing.join("\n  "));

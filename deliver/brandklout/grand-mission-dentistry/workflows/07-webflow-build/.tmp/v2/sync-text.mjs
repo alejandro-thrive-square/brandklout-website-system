@@ -29,10 +29,14 @@ const P = page(SLUG);
 if (SLUG === "cosmetic-v2") {
   for (const f of ["build-cosmetic.mjs", "build-cosmetic-2.mjs", "build-cosmetic-3.mjs"]) await import("./" + f);
 } else {
-  const [ref, consult] = process.argv.slice(3).filter((a) => !a.startsWith("--"));
-  if (!ref) throw new Error("usage: node sync-text.mjs <v2-slug> <ref-slug> <consult-path> [--dry]");
-  process.argv[2] = ref; process.argv[3] = SLUG; process.argv[4] = consult;
-  await import("./build-lp.mjs");
+  const [ref, third] = process.argv.slice(3).filter((a) => !a.startsWith("--"));
+  if (!ref) throw new Error("usage: node sync-text.mjs <v2-slug> <ref-slug> <consult-path|funnel> [--dry]");
+  process.argv[2] = ref; process.argv[3] = SLUG; process.argv[4] = third;
+  // consultation and thank-you pages have their own builders
+  const builder = /-consultation-v2$/.test(SLUG) ? "./build-consult.mjs"
+    : /-thank-you-v2$/.test(SLUG) ? "./build-thankyou.mjs"
+    : "./build-lp.mjs";
+  await import(builder);
 }
 const built = JSON.parse(fs.readFileSync(path.join(HERE, "built", `${SLUG}.json`), "utf8"));
 
