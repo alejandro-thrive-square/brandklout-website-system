@@ -1,0 +1,290 @@
+MCP error -32602: Input validation error: Invalid arguments for tool data_style_tool: [
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "siteId"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_type",
+    "expected": "string",
+    "received": "undefined",
+    "path": [
+      "pageId"
+    ],
+    "message": "Required"
+  },
+  {
+    "code": "invalid_union",
+    "unionErrors": [
+      {
+        "issues": [
+          {
+            "code": "invalid_type",
+            "expected": "object",
+            "received": "undefined",
+            "path": [
+              "actions",
+              0,
+              "create_style"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "unrecognized_keys",
+            "keys": [
+              "get_styles"
+            ],
+            "path": [
+              "actions",
+              0
+            ],
+            "message": "Unrecognized key(s) in object: 'get_styles'"
+          }
+        ],
+        "name": "ZodError"
+      },
+      {
+        "issues": [
+          {
+            "code": "invalid_type",
+            "expected": "object",
+            "received": "undefined",
+            "path": [
+              "actions",
+              0,
+              "get_style_variable_modes"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "unrecognized_keys",
+            "keys": [
+              "get_styles"
+            ],
+            "path": [
+              "actions",
+              0
+            ],
+            "message": "Unrecognized key(s) in object: 'get_styles'"
+          }
+        ],
+        "name": "ZodError"
+      },
+      {
+        "issues": [
+          {
+            "expected": "'all' | 'filtered'",
+            "received": "undefined",
+            "code": "invalid_type",
+            "path": [
+              "actions",
+              0,
+              "get_styles",
+              "query"
+            ],
+            "message": "Required"
+          }
+        ],
+        "name": "ZodError"
+      },
+      {
+        "issues": [
+          {
+            "code": "invalid_type",
+            "expected": "object",
+            "received": "undefined",
+            "path": [
+              "actions",
+              0,
+              "query_styles"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "unrecognized_keys",
+            "keys": [
+              "get_styles"
+            ],
+            "path": [
+              "actions",
+              0
+            ],
+            "message": "Unrecognized key(s) in object: 'get_styles'"
+          }
+        ],
+        "name": "ZodError"
+      },
+      {
+        "issues": [
+          {
+            "code": "invalid_type",
+            "expected": "object",
+            "received": "undefined",
+            "path": [
+              "actions",
+              0,
+              "remove_all_style_variable_modes"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "unrecognized_keys",
+            "keys": [
+              "get_styles"
+            ],
+            "path": [
+              "actions",
+              0
+            ],
+            "message": "Unrecognized key(s) in object: 'get_styles'"
+          }
+        ],
+        "name": "ZodError"
+      },
+      {
+        "issues": [
+          {
+            "code": "invalid_type",
+            "expected": "object",
+            "received": "undefined",
+            "path": [
+              "actions",
+              0,
+              "remove_style"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "unrecognized_keys",
+            "keys": [
+              "get_styles"
+            ],
+            "path": [
+              "actions",
+              0
+            ],
+            "message": "Unrecognized key(s) in object: 'get_styles'"
+          }
+        ],
+        "name": "ZodError"
+      },
+      {
+        "issues": [
+          {
+            "code": "invalid_type",
+            "expected": "object",
+            "received": "undefined",
+            "path": [
+              "actions",
+              0,
+              "remove_style_variable_mode"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "unrecognized_keys",
+            "keys": [
+              "get_styles"
+            ],
+            "path": [
+              "actions",
+              0
+            ],
+            "message": "Unrecognized key(s) in object: 'get_styles'"
+          }
+        ],
+        "name": "ZodError"
+      },
+      {
+        "issues": [
+          {
+            "code": "invalid_type",
+            "expected": "object",
+            "received": "undefined",
+            "path": [
+              "actions",
+              0,
+              "rename_style"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "unrecognized_keys",
+            "keys": [
+              "get_styles"
+            ],
+            "path": [
+              "actions",
+              0
+            ],
+            "message": "Unrecognized key(s) in object: 'get_styles'"
+          }
+        ],
+        "name": "ZodError"
+      },
+      {
+        "issues": [
+          {
+            "code": "invalid_type",
+            "expected": "object",
+            "received": "undefined",
+            "path": [
+              "actions",
+              0,
+              "set_style_variable_mode"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "unrecognized_keys",
+            "keys": [
+              "get_styles"
+            ],
+            "path": [
+              "actions",
+              0
+            ],
+            "message": "Unrecognized key(s) in object: 'get_styles'"
+          }
+        ],
+        "name": "ZodError"
+      },
+      {
+        "issues": [
+          {
+            "code": "invalid_type",
+            "expected": "object",
+            "received": "undefined",
+            "path": [
+              "actions",
+              0,
+              "update_style"
+            ],
+            "message": "Required"
+          },
+          {
+            "code": "unrecognized_keys",
+            "keys": [
+              "get_styles"
+            ],
+            "path": [
+              "actions",
+              0
+            ],
+            "message": "Unrecognized key(s) in object: 'get_styles'"
+          }
+        ],
+        "name": "ZodError"
+      }
+    ],
+    "path": [
+      "actions",
+      0
+    ],
+    "message": "Invalid input"
+  }
+]

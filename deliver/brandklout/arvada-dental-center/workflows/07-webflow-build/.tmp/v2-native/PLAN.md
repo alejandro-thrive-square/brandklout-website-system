@@ -126,8 +126,7 @@ and **767**.
       **`Dental Implants v2` page created: `6a83e962d17d0bfe618c49f7`, slug
       `dental-implants-ads-landing-v2`, body element `6a83e962d17d0bfe618c49fd`. Body is empty.**
 - [ ] **P1 Reference spec** — screenshots + section-by-section spec from the client reference.
-- [ ] **P2 Mason Park pattern** — read `new-patient-special` / `-consultation` / `-thank-you`
-      structure; that site is the house example of client-first done right.
+- [x] **P2 Mason Park pattern** — read and adopted; see "Naming and structure" below.
 - [ ] **P3 Local v2 source** — author the three Dental Implants pages locally in the reference's
       language, carrying existing copy/offers/numbers unchanged. This is the "local version" the
       Webflow build is graded against.
@@ -137,6 +136,47 @@ and **767**.
 - [ ] **P6 Verify on staging** — publish to the **Webflow subdomain only**
       (`publishToWebflowSubdomain:true`, `customDomains:[]`) and diff against local.
 - [ ] **P7 Replicate** — the other 5 topics × 3 pages, same structure, content swapped.
+
+## Naming and structure — copied from Mason Park
+
+`mason-park-dental.webflow.io/new-patient-special` is the house example the user named. Read via
+`outline.mjs` → `mp-new-patient-special.outline.txt` (603 nodes, 110 classes). The shape:
+
+```
+Body
+  .page-wrapper
+    ComponentInstance          ← nav
+    ComponentInstance
+    main.main-wrapper
+      section.section_lp_hero
+        .padding-global
+          .container-large
+            .padding-vertical.padding-xlarge
+              .lp_hero_grid
+                .margin-bottom.margin-xsmall > p.lp_eyebrow
+                .margin-bottom.margin-small  > .lp_hero_badge
+                …
+                .button-group > a.button + a.button.is-secondary
+```
+
+Two rules do all the work:
+
+1. **Spacing is never a bespoke property.** Every gap is a Relume utility wrapper —
+   `margin-bottom margin-small`, `margin-top margin-medium`, `padding-section-large`,
+   `padding-global`, `container-large`. Mason Park uses `margin-*` 63 times and defines no custom
+   margins at all.
+2. **Bespoke classes only where the design is genuinely bespoke** — `lp_hero_grid`, `lp_check-item`,
+   `lp_price-card_row`. Everything typographic reuses `heading-style-h2`, `text-weight-bold`,
+   `text-color-white`, `text-align-center`; every button is `button` + an `is-*` combo.
+
+**Prefix for this build: `camp_`** (campaign), matching Mason Park's `lp_`. Sections are
+`section_camp_<beat>`. So the reference's `campaign-hero_grid` becomes `camp_hero_grid`, its
+`campaign-faq_item` becomes `camp_faq_item`, and its `is-*` modifiers carry over unchanged as combo
+classes. One shared `camp_` vocabulary serves all 18 pages — that is what makes the later pages
+markup-only inserts.
+
+> The probe created six `campaign-*` classes; they have been removed again so the site vocabulary
+> stays clean until the real `camp_` layer is authored in P4.
 
 ## Hard rules for this build
 
