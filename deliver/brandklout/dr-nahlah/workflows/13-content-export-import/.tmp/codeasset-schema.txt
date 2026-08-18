@@ -1,0 +1,20 @@
+### site_write_code_asset
+Create or replace a runtime script/style file in site.files and attach normalized site.runtime config. Use `type:"script"` for behavior such as theme toggles, menus, tabs, analytics hooks, and DOM-ready interactions; use `type:"style"` for global user stylesheets that should load as files. `path` is a safe site-relative path such as src/scripts/theme-toggle.js or src/styles/theme.css. `runtime` is optional and merges with existing/default config. For module scripts that import npm packages, use bare package imports in `content` and declare them in `dependencies` (package name → semver/range) so they are added to the site dependency manifest; do not use npm CDN URLs for npm packages.
+
+Requires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.
+props: {"path": {"minLength": 1, "type": "string"}, "type": {"anyOf": [{"const": "script", "type": "string"}, {"const": "style", "type": "string"}]}, "content": {"type": "string"}, "runtime": {"type": "object", "patternProperties": {"^(.*)$": {}}}, "dependencies": {"description": "Runtime npm dependencies required by a module script. Keys are package names, values are semver versions/ranges. Only valid when type is \"script\".", "type": "object", "patternProperties": {"^(.*)$": {"minLength": 1, "type": "string"}}}}
+required: ['path', 'type', 'content']
+
+### site_patch_code_asset
+Patch an existing script or stylesheet by exact text replacement. Requires the latest `expectedHash` from site_read_code_asset/site_list_code_assets to prevent stale edits. Each replacement must match exactly; if oldText occurs multiple times, either make oldText more specific or set replaceAll:true.
+
+Requires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.
+props: {"fileId": {"minLength": 1, "type": "string"}, "path": {"minLength": 1, "type": "string"}, "expectedHash": {"minLength": 1, "type": "string"}, "replacements": {"minItems": 1, "type": "array", "items": {"type": "object", "required": ["oldText", "newText"], "properties": {"oldText": {"minLength": 1, "type": "string"}, "newText": {"type": "string"}, "replaceAll": {"type": "boolean"}}}}}
+required: ['expectedHash', 'replacements']
+
+### site_inspect_code_runtime
+Inspect which runtime scripts and user stylesheets apply to the current page/template, or to a supplied page/template document ref. Returns each asset path, enabled state, scope applicability, priority, and script placement/timing. Use after site_write_code_asset to confirm a script/style is targeted correctly.
+
+Requires the Instatic Site editor to be open in a browser, signed in as the connector owner; this tool edits that live workspace and cannot run headlessly.
+props: {"document": {"anyOf": [{"type": "object", "required": ["type", "id"], "properties": {"type": {"const": "page", "type": "string"}, "id": {"minLength": 1, "type": "string"}}}, {"type": "object", "required": ["type", "id"], "properties": {"type": {"const": "template", "type": "string"}, "id": {"minLength": 1, "type": "string"}}}, {"type": "object", "required": ["type", "id"], "properties": {"type": {"const": "visualComponent", "type": "string"}, "id": {"minLength": 1, "type": "string"}}}]}}
+required: None

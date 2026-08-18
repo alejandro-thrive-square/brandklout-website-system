@@ -29,10 +29,14 @@
 .ch-invitation .iv-shot{display:block;width:100%;height:100%;object-fit:cover;
   aspect-ratio:4/3;border:1px solid rgba(255,255,255,.1)}
 @media(min-width:720px){
-  .ch-invitation .iv-gallery{grid-template-columns:repeat(4,1fr)}
+  .ch-invitation .iv-gallery{grid-template-columns:repeat(2,1fr)}
   .ch-invitation .iv-shot-wide{grid-column:1 / -1;aspect-ratio:21/9}
 }
+/* THREE columns, not four. Five frames with the first spanning two fills a
+   3-col grid exactly - wide + one on the top row, three beneath - whereas a
+   4-col grid runs 3 + 2 and leaves half the last row empty, which reads as a
+   missing photograph rather than a considered stop. */
 @media(min-width:1080px){
-  .ch-invitation .iv-gallery{grid-template-columns:repeat(4,1fr)}
+  .ch-invitation .iv-gallery{grid-template-columns:repeat(3,1fr)}
   .ch-invitation .iv-shot-wide{grid-column:span 2;aspect-ratio:auto}
 }

@@ -48,5 +48,10 @@
    before the frame loads, which is what stops the pinned chapter jumping. */
 .ch-proof .pf-embed{position:relative;padding-top:56.25%;overflow:hidden}
 .ch-proof .pf-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.rv-embed{margin-top:clamp(1.5rem,3vw,2.25rem);min-height:320px}
-.rv-embed iframe{display:block;width:100%;border:0}
+.rv-embed{margin-top:clamp(1.5rem,3vw,2.25rem)}
+/* The vendor's review-widget.js resizes the frame to its content by postMessage.
+   When that message does not arrive the iframe sits at its intrinsic 150px and
+   shows a sliver of nothing, which is what it did on Instatic. A real fallback
+   height means the widget is readable whether or not the resizer fires; the
+   resizer still overrides it when it does. */
+.rv-embed iframe{display:block;width:100%;border:0;min-height:520px}

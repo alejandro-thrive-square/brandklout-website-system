@@ -1,0 +1,87 @@
+<section class="ch-proof" id="proof" data-chapter="7" data-chapter-name="The Proof" data-theme="dark">
+
+  <div class="pf-film" id="proofFilm">
+    <video id="film" src="assets/broll.mp4" muted loop playsinline preload="metadata"
+           aria-label="Inside the practice"></video>
+    <div class="pf-copy">
+      <div>
+        <h2 id="filmTitle">Experience, skill and dental artistry.</h2>
+        <p id="filmSub">Dr. Esam Nahlah, D.D.S., M.S., Diplomate of the American Board of Prosthodontics,
+           practising in Northern Virginia since 2013.</p>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap section">
+    <div class="chapter-tag"><i></i><span class="label">Chapter 07 &middot; The Proof</span></div>
+    <div class="pf-story">
+      <div class="pf-shot" id="storyShot">
+        <img id="storyImg" src="assets/patient-story.jpg"
+             alt="A patient holding a framed photograph of her smile before treatment" loading="lazy">
+      </div>
+      <div id="storyCopy">
+        <span class="pf-qm">&ldquo;</span>
+        <blockquote>My smile held me back. That&rsquo;s behind me now.</blockquote>
+        <cite>Melanie &middot; Full-Arch Implant Patient</cite>
+      </div>
+    </div>
+
+    <!-- ================= Patient stories =================
+         Every name, quote and film below is taken verbatim from the practice's
+         own site. The three quoted cards are the only attributed patient words
+         that exist in the source material; the other three patients filmed a
+         testimonial but published no pull-quote, so those cards say exactly
+         that instead of inventing one. The 5.0 below is the practice's own
+         published Google average. Chapter 02's "Average Patient Rating" stat and
+         the Patient Stories page were both corrected to 4.9 by the client on
+         2026-08-10, but this block was left at 5.0 there, so it is left at 5.0
+         here too. Worth resolving with the client one way or the other.
+         ================================================== -->
+    <div class="pf-reviews" id="reviews">
+      <div class="rv-head">
+        <div>
+          <h3>What patients say afterwards.</h3>
+          <p class="rv-sub">Six patients sat down on camera. Their words, not ours.</p>
+        </div>
+        <div class="rv-score">
+          <img src="assets/google.svg" alt="Google" width="48" height="48" loading="lazy">
+          <div>
+            <b><span id="rvScore">5.0</span> <i class="rv-stars" aria-hidden="true">★★★★★</i></b>
+            <span>Google reviews &middot; both offices</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="rv-grid" id="rvGrid">
+        <a class="rv-card" href="patient-stories.html#melanie"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+          <p>&ldquo;My smile held me back. That&rsquo;s behind me due to my dental implants.&rdquo;</p>
+          <footer><span class="rv-av">M</span>Melanie<i>Filmed story</i></footer></a>
+        <a class="rv-card" href="patient-stories.html#yolanda"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+          <p>&ldquo;I haven&rsquo;t stopped smiling since I got my dental implants!&rdquo;</p>
+          <footer><span class="rv-av">Y</span>Yolanda<i>Filmed story</i></footer></a>
+        <a class="rv-card" href="patient-stories.html#stephen"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+          <p>&ldquo;Dental implants completely changed my life.&rdquo;</p>
+          <footer><span class="rv-av">S</span>Stephen<i>Filmed story</i></footer></a>
+        <a class="rv-card rv-film" href="patient-stories.html#donita"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+          <p><span class="rv-play" aria-hidden="true"></span>Donita filmed her story at the practice.
+             Watch it in her own words.</p>
+          <footer><span class="rv-av">D</span>Donita<i>Filmed story</i></footer></a>
+        <a class="rv-card rv-film" href="patient-stories.html#barbara"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+          <p><span class="rv-play" aria-hidden="true"></span>Barbara filmed her story at the practice.
+             Watch it in her own words.</p>
+          <footer><span class="rv-av">B</span>Barbara<i>Filmed story</i></footer></a>
+        <a class="rv-card rv-film" href="patient-stories.html#couple"><span class="rv-stars" aria-hidden="true">★★★★★</span>
+          <p><span class="rv-play" aria-hidden="true"></span>A couple treated together filmed their
+             story. Watch it in their own words.</p>
+          <footer><span class="rv-av">&amp;</span>A couple<i>Filmed story</i></footer></a>
+      </div>
+
+      <a class="rv-more" href="patient-stories.html">See every patient story <i></i></a>
+    </div>
+  </div>
+
+</section>
+
+<!-- ==========================================================================
+     CHAPTER 08 — THE INVITATION  (locations + CTA)
+     ========================================================================== -->
