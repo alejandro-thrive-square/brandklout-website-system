@@ -13,8 +13,13 @@ import { fileURLToPath } from "node:url";
 import { call, SITE, page } from "./lib.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DEF = JSON.parse(fs.readFileSync(path.join(HERE, "styles-def.generated.json"), "utf8"));
-const DONE_FILE = path.join(HERE, "styles-pushed.json");
+// node push-styles.mjs                -> the generated lp_ family
+// node push-styles.mjs manual         -> styles-def.manual.mjs (the hand-authored addendum)
+const WHICH = process.argv[2] || "generated";
+const DEF = WHICH === "manual"
+  ? { STYLES: (await import("./styles-def.manual.mjs")).STYLES }
+  : JSON.parse(fs.readFileSync(path.join(HERE, "styles-def.generated.json"), "utf8"));
+const DONE_FILE = path.join(HERE, `styles-pushed${WHICH === "manual" ? "-manual" : ""}.json`);
 const done = fs.existsSync(DONE_FILE) ? JSON.parse(fs.readFileSync(DONE_FILE, "utf8")) : {};
 
 // Style writes need a page context; use a v2 page so nothing can be aimed at an original.

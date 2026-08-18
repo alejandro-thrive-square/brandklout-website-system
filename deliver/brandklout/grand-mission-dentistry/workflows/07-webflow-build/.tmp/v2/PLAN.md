@@ -121,6 +121,34 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: Phase 2 STARTED — cosmetic-v2 shell, header and hero are built and their classes
+  read back correct (`section_lp_hero` / `lp_container` / `lp_hero_grid` / `lp_hero_content` /
+  `lp_form_card`, and `section_lp_header` / `lp_header_bar` / `lp_header_inner`). Section
+  elements report as `type: "Block"` with `settings.tag: "section"` — that is a real `<section>`,
+  not a div. 19 hand-authored classes were added on top of the 99 generated ones
+  (`styles-def.manual.mjs`): the header stack, the "how it works" section, the FAQ accordion
+  chrome and the hero form fields. Ids in `built/cosmetic-v2.json`.
+
+  **API facts learned this session, each one a failed call first:**
+  1. `type: "Form"` does NOT create an empty wrapper — it creates a COMPLETE Webflow form
+     (FormWrapper > FormForm with two LABELLED text inputs and a submit button, plus the
+     success and error messages). A Text Field cannot be a child of the wrapper
+     ("Text Field can only be placed in a Form"), so a form is built empty and then ADJUSTED.
+  2. On `data_element_tool`, `remove_element` / `set_style` / `set_text` / `set_attributes`
+     take **`id`**, while `query_elements` takes **`element_id`**. Same tool, different key.
+  3. Form input settings keys are `name` / `required` / `type` / `attributes` / `domId`, and
+     **the placeholder IS reachable** through `attributes`
+     (`{name_static: "placeholder", value_static: "..."}`) — the older "placeholders are
+     unreachable" note is wrong.
+  4. Unknown action names and argument shapes are cheapest to discover by sending a bogus
+     action or key and reading the Zod union error.
+
+  **OPEN, first thing to settle next run:** the hero form's `name`/`type` writes on the three
+  inputs did not land (they still read Webflow's defaults `Name` / `Email` / `Field`) while the
+  FormForm's `name` + `redirect` did. The run ended in a **429 storm** on `/v2/pages`, so the
+  likeliest cause is a rate-limited write reported as success. Re-run the settings pass with
+  pacing and read each input back individually before believing it.
+
 - 2026-08-18: Phase 1 DONE — the `lp_` class system exists on the site. `measure.mjs` renders
   each live reference page at 1920/1440/1280/1100/991/767/478 and dumps the computed styles of
   every legacy class chain (`v2-reference/<slug>/styles.json`, 110 chains on the landing pages,

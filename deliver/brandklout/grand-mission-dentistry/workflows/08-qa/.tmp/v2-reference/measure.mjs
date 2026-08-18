@@ -25,6 +25,11 @@ const ALL = ["cosmetic", "cosmetic-consultation", "cosmetic-thank-you",
   "dental-implants", "dental-implants-consultation", "dental-implants-thank-you"];
 const PAGES = process.argv.length > 2 ? process.argv.slice(2) : ALL;
 const WIDTHS = [1920, 1440, 1280, 1100, 991, 767, 478];
+// The default filter keys off the converter's own prefixes. A few sections (the header, the
+// "how it works" band, the FAQ accordion chrome) carry generic class names instead, so they
+// are measured by a second pass: MATCH=<regex> OUT=<file> node measure.mjs <slug>
+const MATCH = process.env.MATCH || "(^|\s)(imp|csm|ty|landing|qz|lw)-";
+const OUTNAME = process.env.OUT || "styles.json";
 const wait = (ms) => new Promise((r) => setTimeout(r, ms));
 const log = (...a) => console.log(new Date().toISOString().slice(11, 19), ...a);
 
@@ -44,7 +49,7 @@ const EXTRACT = `(() => {
   for (const el of document.querySelectorAll('body *')) {
     const cls = (el.getAttribute('class') || '').trim();
     if (!cls) continue;
-    if (!/(^|\\s)(imp|csm|ty|landing|qz|lw)-/.test(cls)) continue;
+    if (!new RegExp(${JSON.stringify(MATCH)}).test(cls)) continue;
     const key = el.tagName.toLowerCase() + '.' + cls.split(/\\s+/).join('.');
     if (out[key]) { out[key].count++; continue; }
     const cs = getComputedStyle(el);
@@ -132,7 +137,7 @@ for (const slug of PAGES) {
     log(`${slug} @${width}: ${res.distinct} distinct chains (sentinel ${res.sentinel})`);
     await wait(6000);
   }
-  fs.writeFileSync(path.join(OUT, slug, "styles.json"), JSON.stringify(acc, null, 1));
-  log(`${slug}: styles.json ${Object.keys(acc).length} chains`);
+  fs.writeFileSync(path.join(OUT, slug, OUTNAME), JSON.stringify(acc, null, 1));
+  log(`${slug}: ${OUTNAME} ${Object.keys(acc).length} chains`);
   await wait(20000);
 }
