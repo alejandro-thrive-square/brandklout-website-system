@@ -176,7 +176,12 @@ check("counters reach final values",
   // 4.9, not 5.0: the rating in this block was corrected to the figure the
   // practice's Google listing actually carries. The Google card further down
   // the page still shows 5.0, which is what the live site publishes.
-  counters.join("|") === "23+|12|4.9|2", counters.join(" · "));
+  //
+  // The credential counter (12) and the location counter (2) were replaced on
+  // 2026-08-18 with the client's own volume figures. The credential count had
+  // been contradicting the eight credentials Chapter 03 lists; locations are
+  // already carried by the hero meta and the contact page.
+  counters.join("|") === "23+|18,000+|15,000+|4.9", counters.join(" · "));
 check("marquee row duplicated for seamless loop",
   await evalJs(`document.getElementById('mqRow').children.length >= 20`),
   await evalJs(`document.getElementById('mqRow').children.length + ' nodes'`));
@@ -274,8 +279,12 @@ check("the later chapters register modules too, not just the early ones",
 const vsY = await evalJs(`(function(){var e=document.getElementById('versus');
   return Math.round((window.WZ&&WZ.smoother)?WZ.smoother.offset(e,'top center'):e.getBoundingClientRect().top+window.pageYOffset)})()`);
 await scrollTo(vsY, 1600);
-check("comparison table renders 6 rows",
-  (await evalJs(`document.querySelectorAll('#versus .vs-row').length`)) === 6,
+// Header row plus eight claims. Three were added on 2026-08-18 for the
+// differentiators the client asked the site to lean on (thin arch, a digital
+// lab in both offices, computer-guided placement) and the Inova Fairfax
+// hospital privileges were struck from the sedation row at the same time.
+check("comparison table renders 9 rows",
+  (await evalJs(`document.querySelectorAll('#versus .vs-row').length`)) === 9,
   await evalJs(`document.querySelectorAll('#versus .vs-row').length + ' rows'`));
 check("comparison rows revealed",
   await evalJs(`[...document.querySelectorAll('#versus .vs-row')]

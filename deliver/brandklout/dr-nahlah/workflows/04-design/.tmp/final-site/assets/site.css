@@ -373,8 +373,8 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .pg-hero .ph-meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);margin-top:.5rem;
   padding-top:clamp(1rem,2.4vw,1.6rem);border-top:1px solid var(--line)}
 .pg-hero .ph-meta div{display:grid;gap:.15rem}
-.pg-hero .ph-meta b{font-family:var(--f-display);font-size:calc(1.7rem * var(--t-mid));font-weight:500}
-.pg-hero .ph-meta span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+.pg-hero .ph-meta b{display:block;font-family:var(--f-display);font-size:calc(1.7rem * var(--t-mid));font-weight:500}
+.pg-hero .ph-meta span{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--fg-soft)}
 @media(max-width:719px){ .pg-hero .btn{flex:1 1 auto} }
 
@@ -610,8 +610,8 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .ch-arrival .ar-meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);
   padding-top:clamp(1rem,2.5vw,1.75rem);border-top:1px solid var(--line)}
 .ch-arrival .ar-meta div{display:grid;gap:.15rem}
-.ch-arrival .ar-meta b{font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));font-weight:500}
-.ch-arrival .ar-meta span{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}
+.ch-arrival .ar-meta b{display:block;font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));font-weight:500}
+.ch-arrival .ar-meta span{display:block;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}
 .ch-arrival .ar-cue{position:absolute;right:var(--gutter);bottom:clamp(1rem,3vw,2rem);z-index:5;
   display:flex;align-items:center;gap:.7rem;font-size:.66rem;letter-spacing:.2em;
   text-transform:uppercase;color:var(--fg-soft)}
@@ -927,6 +927,65 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .iv-cta p{margin-top:1.1rem;max-width:46ch;margin-inline:auto;color:rgba(11,11,12,.72)}
 .iv-cta .btn{margin-top:2rem}
 @media(min-width:720px){ .ch-invitation .iv-locs{grid-template-columns:repeat(2,1fr)} }
+
+/* ===== css/40-thin-arch.css ===== */
+/* =============================================================================
+   THIN ARCH — the FP1 / FP2 / FP3 explainer.
+
+   A shared component, not a chapter: it renders inside Chapter 06 on the home
+   page and again as its own section on all-on-4. It therefore paints from the
+   theme tokens only and never assumes the ground it sits on, so moving the
+   markup between pages carries the design with it (the rule the css-vocab and
+   swap-proof gates enforce).
+
+   FP1 is the only card given gold. That is the point the client asked the site
+   to make — the arch is planned as thin as the case will carry — and it is made
+   with emphasis rather than by disparaging FP3, which is the correct answer
+   where bone loss is advanced.
+   ============================================================================= */
+/* .ta-inset is the variant that renders inside another chapter (home page,
+   Chapter 06), where the block continues the chapter and needs a rule to
+   separate it. As its own band on all-on-4 the section break already does
+   that job. Kept as a modifier rather than a descendant of .ch-standard so
+   that no class is defined in two stylesheets. */
+.ta-inset{border-top:1px solid var(--line)}
+.ta .ta-head{display:grid;gap:1rem;max-width:52ch;margin-bottom:clamp(2rem,4vw,3rem)}
+.ta .ta-title{font-size:var(--h2);font-family:var(--f-display);font-weight:500}
+.ta .ta-head p{color:var(--fg-body);font-weight:400}
+
+.ta-grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem)}
+@media(min-width:820px){ .ta-grid{grid-template-columns:repeat(3,1fr)} }
+
+.ta-card{background:var(--card);border:1px solid var(--line);border-top:3px solid var(--line-strong);
+  padding:clamp(1.5rem,2.6vw,2.25rem);display:grid;gap:.85rem;align-content:start}
+.ta-card.ta-fp1{border-top-color:var(--rule);background:var(--bg-3)}
+.ta-card.ta-fp2{border-top-color:var(--line)}
+.ta-card.ta-fp3{border-top-color:var(--line-strong)}
+
+.ta-key{font-family:var(--f-display);font-size:calc(2.1rem * var(--t-mid));font-weight:500;
+  line-height:1;color:var(--fg-faint)}
+.ta-card.ta-fp1 .ta-key{color:var(--accent-lg)}
+
+.ta-card h3{font-family:var(--f-display);font-size:calc(1.35rem * var(--t-sm));font-weight:500;
+  color:var(--fg)}
+
+.ta-list{list-style:none;margin:0;padding:0;display:grid;gap:.6rem}
+.ta-list li{position:relative;padding-left:1.4rem;color:var(--fg-body);font-weight:300;
+  font-size:.95rem;line-height:1.55}
+.ta-list li::before{content:"";position:absolute;left:0;top:.55em;width:.5rem;height:.5rem;
+  border-radius:50%;background:var(--line-strong)}
+.ta-card.ta-fp1 .ta-list li::before{background:var(--rule)}
+
+/* The client's own diagram. Boxed rather than bled, because it arrives with its
+   own blue/orange/red key that is not the brand palette and should read as a
+   quoted reference figure rather than as site furniture. */
+.ta-fig{margin:clamp(1.75rem,3.5vw,2.75rem) 0 0;padding:clamp(1rem,2vw,1.75rem);
+  background:var(--bg);border:1px solid var(--line)}
+.ta-fig img{display:block;width:100%;height:auto}
+.ta-fig figcaption{margin-top:1rem;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--fg-soft)}
+
+.ta-note{margin-top:clamp(1.5rem,3vw,2.25rem);max-width:62ch;color:var(--fg-body);font-weight:300}
 
 /* ===== css/50-contact-offices.css ===== */
 .ct-office-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line)}

@@ -28,8 +28,8 @@
 .ch-arrival .ar-meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);
   padding-top:clamp(1rem,2.5vw,1.75rem);border-top:1px solid var(--line)}
 .ch-arrival .ar-meta div{display:grid;gap:.15rem}
-.ch-arrival .ar-meta b{font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));font-weight:500}
-.ch-arrival .ar-meta span{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}
+.ch-arrival .ar-meta b{display:block;font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));font-weight:500}
+.ch-arrival .ar-meta span{display:block;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}
 .ch-arrival .ar-cue{position:absolute;right:var(--gutter);bottom:clamp(1rem,3vw,2rem);z-index:5;
   display:flex;align-items:center;gap:.7rem;font-size:.66rem;letter-spacing:.2em;
   text-transform:uppercase;color:var(--fg-soft)}

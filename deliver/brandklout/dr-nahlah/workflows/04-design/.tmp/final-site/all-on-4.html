@@ -133,7 +133,7 @@
   <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
   <div class="wrap no-rail nav-in">
     <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
-      <img src="assets/logo.png" alt="Dr. Nahlah — Implants and Prosthodontics Specialists">
+      <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
     </a>
     <nav class="nav-slot" aria-label="Primary">
       <!-- The current-page highlight is baked in here at build time. In Webflow
@@ -248,6 +248,11 @@
      per arch, PMMA provisional the same day, 3-4 months to the zirconia final,
      a further 2-4 months to complete healing, warranty with Precare, free
      second opinions, nitrous / oral / IV sedation.
+
+     The thin-arch section is one of the four differentiators the client asked
+     the site to lean on (2026-08-18). Its markup and its `.ta` styling are the
+     same component the home page's Chapter 06 carries, so the two stay in step
+     without either page owning the rules.
      ========================================================================== -->
 <section class="pg-hero" id="hero">
   <div class="ph-bg">
@@ -268,6 +273,7 @@
       <div><b>4 posts</b><span>Per arch, upper or lower</span></div>
       <div><b>Same day</b><span>PMMA provisional teeth</span></div>
       <div><b>3&ndash;4 mo</b><span>To the zirconia final</span></div>
+      <div><b>FP1 first</b><span>Planned as thin as the bone allows</span></div>
     </div>
   </div>
 </section>
@@ -292,6 +298,61 @@
         <strong>surgical guide</strong>.</p>
       <a class="pk-more" href="dental-implants.html">How implants work generally</a>
     </div>
+  </div>
+</section>
+
+<!-- ---------- the thin arch ---------- -->
+<section class="pk ta" id="thin-arch">
+  <div class="wrap section">
+    <div class="ta-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Thin Arch</span></div>
+      <h2 class="ta-title" data-split>FP1, FP2, FP3, and why we plan for the first.</h2>
+      <p data-rv>Two practices can both quote you &ldquo;All-on-4&rdquo; and hand back very different
+         teeth. Every full-arch prosthesis is one of three types, and what separates them is how much
+         of it is teeth and how much is pink acrylic standing in for gum and bone. Most practices fit
+         one kind. Here the arch is planned as thin as the case will carry.</p>
+    </div>
+
+    <div class="ta-grid" data-rv="stagger">
+      <article class="ta-card ta-fp1">
+        <span class="ta-key">FP1</span>
+        <h3>Replaces teeth only</h3>
+        <ul class="ta-list">
+          <li>Natural crown-and-bridge look</li>
+          <li>No added pink, no extra bulk</li>
+          <li>Typically on more natural gum architecture</li>
+        </ul>
+      </article>
+      <article class="ta-card ta-fp2">
+        <span class="ta-key">FP2</span>
+        <h3>Longer teeth, minimal pink</h3>
+        <ul class="ta-list">
+          <li>Longer teeth, minimal pink acrylic</li>
+          <li>The pink that is added still follows the natural gum contour</li>
+          <li>Rarely indicated, and often not ideal</li>
+        </ul>
+      </article>
+      <article class="ta-card ta-fp3">
+        <span class="ta-key">FP3</span>
+        <h3>Replaces teeth, gums and bone</h3>
+        <ul class="ta-list">
+          <li>Thick pink acrylic stands in for gum and bone</li>
+          <li>Thicker, stronger prosthesis</li>
+          <li>Typically best where there is bone loss, and a lower hygiene risk</li>
+        </ul>
+      </article>
+    </div>
+
+    <figure class="ta-fig" data-rv>
+      <img src="assets/fp1-fp3-comparison.png" loading="lazy"
+           alt="FP1, FP2 and FP3 full-arch prostheses side by side. FP1 replaces the teeth only, with no pink acrylic. FP2 has longer teeth and minimal pink. FP3 replaces teeth, gums and bone with thick pink acrylic.">
+      <figcaption>The same arch, three ways. The pink is the difference.</figcaption>
+    </figure>
+
+    <p class="ta-note" data-rv>A thin arch is not always possible. Where bone loss is advanced, FP3
+       is both the honest answer and the stronger one, and it is easier to keep clean. What is worth
+       asking of anyone quoting you is which of the three they are planning, and why.
+       <a class="pk-more" href="contact.html#book">Ask at your consultation</a></p>
   </div>
 </section>
 

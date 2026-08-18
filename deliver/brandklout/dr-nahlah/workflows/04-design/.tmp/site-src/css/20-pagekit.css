@@ -20,8 +20,8 @@
 .pg-hero .ph-meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);margin-top:.5rem;
   padding-top:clamp(1rem,2.4vw,1.6rem);border-top:1px solid var(--line)}
 .pg-hero .ph-meta div{display:grid;gap:.15rem}
-.pg-hero .ph-meta b{font-family:var(--f-display);font-size:calc(1.7rem * var(--t-mid));font-weight:500}
-.pg-hero .ph-meta span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+.pg-hero .ph-meta b{display:block;font-family:var(--f-display);font-size:calc(1.7rem * var(--t-mid));font-weight:500}
+.pg-hero .ph-meta span{display:block;font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
   color:var(--fg-soft)}
 @media(max-width:719px){ .pg-hero .btn{flex:1 1 auto} }
 
