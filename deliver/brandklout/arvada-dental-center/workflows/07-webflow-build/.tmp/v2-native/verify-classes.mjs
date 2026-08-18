@@ -18,7 +18,7 @@ import { fileURLToPath } from 'node:url';
 import { call, SITES } from './wf.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const CSS_FILE = path.resolve(HERE, '../../../04-design/.tmp/v2/_shared/camp.css');
+const CSS_FILE = path.resolve(HERE, process.argv.find(a => a.endsWith('.css')) || '../../../04-design/.tmp/v2/_shared/camp.css');
 const PAGE = '6a83e962d17d0bfe618c49f7';
 const VERBOSE = process.argv.includes('--verbose');
 
@@ -136,8 +136,12 @@ const queries = selectors.map((sel) => {
     name_path: parts,
     include_properties: true,
     include_breakpoints: ['main', 'medium', 'small', 'tiny'],
-    include_base_pseudos: ['hover'],
-    limit: 5,
+    include_base_pseudos: ['hover', 'focus'],
+    // name_path is a SUBSTRING match, so a short name like camp_form also
+    // matches camp_form-card, camp_form_input and ten others. With a low limit
+    // the exact selector falls outside the page of results and the style reads
+    // as MISSING when it is present.
+    limit: 60,
   };
 });
 

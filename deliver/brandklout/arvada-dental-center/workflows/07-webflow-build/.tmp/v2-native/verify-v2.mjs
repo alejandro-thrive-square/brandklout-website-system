@@ -28,7 +28,23 @@ const SLUGS = {
   emergency: 'emergency-dentist-ads-landing-v2',
   'dentist-near-me': 'dentist-near-me-ads-landing-v2',
   'next-door': 'next-door-family-ads-landing-v2',
+  'implants-consult': 'dental-implants-consult-v2',
+  'aox-consult': 'all-on-x-full-arch-consult-v2',
+  'veneers-consult': 'porcelain-veneers-consult-v2',
+  'emergency-consult': 'emergency-dentist-consult-v2',
+  'dentist-near-me-consult': 'dentist-near-me-consult-v2',
+  'next-door-consult': 'next-door-family-consult-v2',
+  'implants-ty': 'dental-implant-thank-you-v2',
+  'aox-ty': 'all-on-x-thank-you-v2',
+  'veneers-ty': 'porcelain-veneers-thank-you-v2',
+  'emergency-ty': 'emergency-dentist-thank-you-v2',
+  'dentist-near-me-ty': 'dentist-near-me-thank-you-v2',
+  'next-door-ty': 'next-door-family-thank-you-v2',
 };
+
+// The leak check only makes sense between pages of the SAME kind — every
+// consult page legitimately shares its wording with the others.
+const kindOf = (t) => (t.endsWith('-consult') ? 'consult' : t.endsWith('-ty') ? 'ty' : 'ads');
 
 /**
  * Decode every entity form, decimal and hex alike. Webflow re-encodes a plain
@@ -75,16 +91,32 @@ for (const topic of topics) {
 
   // 3. leaks and leftovers
   if (/\{\{/.test(live)) problems.push('leftover {{token}} on the published page');
+  /**
+   * A leak is copy that belongs ONLY to another page turning up here — not any
+   * shared wording. Comparing headlines was wrong: all six thank-you pages
+   * share one headline deliberately, so the check failed twelve correct pages.
+   * So: take the other page's strings, drop everything this page's own source
+   * also contains, and only the genuinely exclusive remainder counts.
+   */
+  const mine = new Set(strings);
   for (const other of Object.keys(SLUGS)) {
-    if (other === topic) continue;
-    const otherH1 = (fs.readFileSync(path.join(V2, other, 'body.html'), 'utf8').match(/<h1[^>]*>([\s\S]*?)<\/h1>/) || [])[1];
-    if (otherH1 && liveText.includes(norm(otherH1.replace(/<[^>]+>/g, '')))) problems.push(`copy from "${other}" leaked onto this page`);
+    if (other === topic || kindOf(other) !== kindOf(topic)) continue;
+    // Only the ads pages are meant to read differently from one another. The
+    // consult and thank-you pages deliberately share almost all of their
+    // wording — the only per-topic parts are the headline, the options and the
+    // legal line, and the missing-strings check above already proves those.
+    if (kindOf(topic) !== 'ads') continue;
+    const otherLocal = fs.readFileSync(path.join(V2, other, 'body.html'), 'utf8');
+    const exclusive = [...new Set([...otherLocal.matchAll(/>([^<>{}]{25,})</g)].map((m) => norm(m[1])))]
+      .filter((s) => s && !mine.has(s));
+    const found = exclusive.filter((s) => liveText.includes(s));
+    if (found.length) problems.push(`copy exclusive to "${other}" appears here: "${found[0].slice(0, 60)}…"`);
   }
 
   const imgs = (live.match(/<img/g) || []).length;
   const wantImgs = (local.match(/<img/g) || []).length;
   if (imgs < wantImgs) problems.push(`${imgs}/${wantImgs} images rendered`);
-  if (!/youtube/i.test(live)) problems.push('no YouTube element on the page');
+  if (kindOf(topic) === 'ads' && !/youtube/i.test(live)) problems.push('no YouTube element on the page');
 
   if (missing.length) problems.push(`${missing.length} design string(s) missing: ` + missing.slice(0, 4).map((s) => `"${s.slice(0, 48)}…"`).join(', '));
   if (lostCls.length) problems.push(`${lostCls.length} class(es) dropped: ${lostCls.slice(0, 6).join(', ')}`);
