@@ -75,3 +75,38 @@ node verify-v2.mjs [page …]
 `wf.mjs` now backs off and retries on 429. `GET /v2/assets` rate-limits hard, and once it does even
 `get_all_elements` fails because it reads assets server-side — that is what interrupted earlier
 runs mid-build.
+
+## Four v1 sections carried into the six ads pages (2026-08-18)
+
+Added, in the v2 style, from the archived v1 pages:
+
+| section | classes | content |
+|---|---|---|
+| Real Patients. Real Results. | `camp_gallery_grid/_img` | 3 smile-gallery photos |
+| A Space Designed For Your Comfort | `camp_space_grid/_img` + `is-lead` | 5 practice photos |
+| From Failing Teeth To a Full Smile Again | `camp_outcomes/_outcome/_item/_mark`, `camp_chapters/_chapter*` | before/after, two outcome columns, a 4-beat story |
+| Any questions before you call? | existing `camp_faq_*`, now repeated | the full v1 list, 6–10 items per topic |
+
+Pages are now **622 elements, 145/145 classes, 21 images**.
+
+**The v1 before/after was a drag slider driven by two HtmlEmbeds of JavaScript.** This build has no
+custom code, so the same two photographs sit side by side using the existing
+`camp_result-image` classes. Same information, no script. The copy that said "drag the slider" is
+rewritten.
+
+Harvest lives in `v1-harvest/<topic>.json` (`harvest-v1.mjs`), and
+`build-sections-content.mjs` parses it into slots **by shape, not by index** — FAQ length alone
+runs 6 to 10 — and reports any topic it cannot read.
+
+### whtml_builder has a size ceiling, and it fails with an EMPTY error
+
+19KB inserts in one call. **29KB returns `{"error":""}` — having already cleared the page and
+created nothing.** `build-page.mjs` now inserts anything over 18KB in pieces: the wrapper first,
+then its children appended into it, recursing where a child is itself too big.
+
+### Known gate noise
+
+`verify-v2.mjs` flags dentist-near-me for copy "exclusive to" next-door. Both are the $109 offer
+and legitimately share FAQ answers; the string is present in dentist-near-me's own local source, so
+this is the leak heuristic being over-sensitive between two near-identical pages, not a mixup. The
+substantive checks (own strings present, class inventory, images) pass on all six.

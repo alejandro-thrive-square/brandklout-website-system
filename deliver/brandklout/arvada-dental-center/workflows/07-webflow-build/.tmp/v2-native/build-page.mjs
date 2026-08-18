@@ -85,18 +85,57 @@ let html = fs.readFileSync(htmlFile, 'utf8').trim();
   console.log(`resolved ${swapped}/${ids.size} image src(s) to their asset hostedUrl`);
 }
 
-console.log(`inserting ${html.length} bytes of markup…`);
+/**
+ * data_whtml_builder has an undocumented size ceiling. A 19KB page inserts in
+ * one call; 29KB comes back `{"error":""}` — an EMPTY error, having cleared the
+ * page and created nothing. So a large page is inserted in pieces: the wrapper
+ * first, then its children appended into it, recursing wherever a child is
+ * itself too big.
+ */
+const LIMIT = 18000;
 
-const res = call('data_whtml_builder', [{
-  build_label: 'page',
-  parent_element_id: body.id,
-  creation_position: 'append',
-  html,
-  return_element_info: true,
-}], o);
+/** Split a fragment into [openTag, children[], closeTag], or null if atomic. */
+function split(frag) {
+  const m = frag.match(/^\s*<([a-zA-Z][\w-]*)\b([^>]*)>([\s\S]*)<\/\1>\s*$/);
+  if (!m) return null;
+  const [, tag, attrs, inner] = m;
+  const kids = [];
+  let depth = 0, start = 0;
+  for (const t of inner.matchAll(/<(\/?)([a-zA-Z][\w-]*)\b[^>]*?(\/?)>/g)) {
+    const [whole, slash, name, selfClose] = t;
+    if (VOID.has(name.toLowerCase()) || selfClose) { if (depth === 0) { kids.push(inner.slice(start, t.index + whole.length)); start = t.index + whole.length; } continue; }
+    if (!slash) { if (depth === 0) start = Math.min(start, t.index); depth++; }
+    else { depth--; if (depth === 0) { kids.push(inner.slice(start, t.index + whole.length)); start = t.index + whole.length; } }
+  }
+  const tail = inner.slice(start);
+  if (tail.trim()) kids.push(tail);
+  return kids.length > 1 || (kids.length === 1 && kids[0].length < inner.length)
+    ? { open: `<${tag}${attrs}></${tag}>`, kids: kids.filter((k) => k.trim()) }
+    : null;
+}
+const VOID = new Set(['img', 'br', 'hr', 'input', 'meta', 'link', 'source']);
 
-const r = (Array.isArray(res) ? res[0] : res)?.[0] || res;
-console.log('status: ' + JSON.stringify(r).slice(0, 1200));
+function insert(fragment, parentId, label) {
+  if (fragment.length <= LIMIT) {
+    const res = call('data_whtml_builder',
+      [{ build_label: label, parent_element_id: parentId, creation_position: 'append', html: fragment, return_element_info: true }], o);
+    // The response is either one object or an array of them, one per action.
+    const first = Array.isArray(res) ? res[0] : res;
+    const r = Array.isArray(first) ? first[0] : first;
+    if (!r?.data?.id) { console.log(`  FAILED ${label} (${fragment.length}B): ${JSON.stringify(r).slice(0, 200)}`); return null; }
+    return r.data.id;
+  }
+  const parts = split(fragment);
+  if (!parts) { console.log(`  ${label} is ${fragment.length}B and cannot be split further`); return null; }
+  const shellId = insert(parts.open, parentId, label + ':shell');
+  if (!shellId) return null;
+  parts.kids.forEach((k, i) => insert(k, shellId, `${label}.${i}`));
+  return shellId;
+}
+
+console.log(`inserting ${html.length} bytes of markup${html.length > LIMIT ? ' (chunked)' : ''}…`);
+const rootId = insert(html.trim(), body.id, 'page');
+console.log('root: ' + (rootId ? JSON.stringify(rootId) : 'FAILED'));
 
 /* -------------------------------------------------------------- verify ---- */
 

@@ -37,7 +37,31 @@ const base = fs.existsSync(basePath) ? JSON.parse(fs.readFileSync(basePath, 'utf
 const topicContent = JSON.parse(fs.readFileSync(path.join(V2, 'content', `${topic}${SUFFIX}.json`), 'utf8'));
 const content = { ...base, ...topicContent };
 
-const needed = [...new Set([...tpl.matchAll(/\{\{([^}]+)\}\}/g)].map((m) => m[1]))];
+/**
+ * Repeatable blocks: `{{#faq}} … {{.q}} … {{/faq}}` renders once per item of
+ * the array at `content.faq`, with `{{.field}}` reading that item.
+ *
+ * Needed because the carried-over sections are not fixed length — the v1 FAQ
+ * runs 6 items on emergency and 10 on all-on-x — and a fixed-slot template
+ * would silently truncate the difference.
+ */
+let expanded = tpl;
+for (const m of tpl.matchAll(/\{\{#([\w-]+)\}\}([\s\S]*?)\{\{\/\1\}\}/g)) {
+  const [whole, name, inner] = m;
+  const rows = content[name];
+  if (!Array.isArray(rows)) {
+    console.log(`template repeats "${name}" but content has no array for it`);
+    process.exit(1);
+  }
+  const out = rows.map((row) =>
+    inner.replace(/\{\{\.([\w-]+)\}\}/g, (_, f) => {
+      if (!(f in row)) { console.log(`repeat "${name}": item is missing "${f}"`); process.exit(1); }
+      return String(row[f]);
+    })).join('');
+  expanded = expanded.split(whole).join(out);
+}
+
+const needed = [...new Set([...expanded.matchAll(/\{\{([^}#/.][^}]*)\}\}/g)].map((m) => m[1]))];
 
 const missing = needed.filter((k) => !(k in content));
 
@@ -45,7 +69,8 @@ const missing = needed.filter((k) => !(k in content));
 // fill is silently left to the base. An unused key in `_base.json` is expected:
 // the consult and thank-you templates are leaner than the ads-landing one and
 // use only part of the shared set.
-const extra = Object.keys(topicContent).filter((k) => !k.startsWith('_') && !needed.includes(k));
+const repeats = new Set([...tpl.matchAll(/\{\{#([\w-]+)\}\}/g)].map((m) => m[1]));
+const extra = Object.keys(topicContent).filter((k) => !k.startsWith('_') && !needed.includes(k) && !repeats.has(k));
 
 if (missing.length) {
   console.log(`${missing.length} slot(s) have no content in ${topic}.json:`);
@@ -57,9 +82,9 @@ if (extra.length) {
 }
 if (missing.length || extra.length) process.exit(1);
 
-let html = tpl;
+let html = expanded;
 for (const [k, v] of Object.entries(content)) {
-  if (k.startsWith('_')) continue;
+  if (k.startsWith('_') || Array.isArray(v)) continue;
   html = html.split(`{{${k}}}`).join(String(v));
 }
 
@@ -79,6 +104,7 @@ const page = `<!DOCTYPE html>
 <title>${content['_title'] || topic}</title>
 <link rel="stylesheet" href="../_shared/camp.css">
 <link rel="stylesheet" href="../_shared/camp-convert.css">
+<link rel="stylesheet" href="../_shared/camp-sections.css">
 <style>
 /* The site's real fonts, served from Webflow's CDN. Without them the local page
    falls back to system metrics, text wraps differently, and anything sized by
