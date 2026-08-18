@@ -354,10 +354,10 @@
   </div>
   <div class="dr-foot">
     <div><b>Tysons Corner &middot; McLean</b>
-      New patients <a href="tel:+15716199442">(571) 619-9442</a><br>
+      New patients <a href="tel:+15717029900">(571) 702-9900</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
     <div><b>Alexandria</b>
-      New patients <a href="tel:+15714103430">(571) 410-3430</a><br>
+      New patients <a href="tel:+15712537790">(571) 253-7790</a><br>
       Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
     <div><b>Hours</b>
       Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
@@ -458,14 +458,14 @@
   <!-- ---------- Us vs. other clinics ---------- -->
   <div class="wrap df-versus" id="versus">
     <div class="vs-head">
-      <h3>Why patients travel for this.</h3>
+      <h3>Why patients travel to see Dr. Nahlah.</h3>
       <p>Most implant cases pass through three or four sets of hands. Here, they don&rsquo;t.</p>
     </div>
     <div class="vs-table" role="table" aria-label="Dr. Nahlah compared with a typical general practice">
       <div class="vs-row vs-head-row" role="row">
-        <span role="columnheader" class="vs-us">Dr. Nahlah</span>
+        <span role="columnheader" class="vs-us">Here</span>
         <span role="columnheader" class="vs-mid" aria-hidden="true">vs</span>
-        <span role="columnheader" class="vs-them">A General Practice</span>
+        <span role="columnheader" class="vs-them">Elsewhere</span>
       </div>
       <div class="vs-row" role="row">
         <span role="cell" class="vs-us">Board-certified prosthodontist with three years of specialist training beyond dental school.</span>
@@ -797,8 +797,15 @@
     <div class="chapter-tag"><i></i><span class="label">Chapter 07 &middot; The Proof</span></div>
     <div class="pf-story">
       <div class="pf-shot" id="storyShot">
-        <img id="storyImg" src="assets/patient-story.jpg"
-             alt="A patient holding a framed photograph of her smile before treatment" loading="lazy">
+        <!-- Melanie's filmed story, the same YouTube embed the client put on the
+             Webflow build. Kept 16:9 by the padding box so the shot does not
+             jump while the iframe loads. -->
+        <div class="pf-embed">
+          <iframe src="https://www.youtube.com/embed/HiNtywrb4Yg" loading="lazy"
+                  title="Melanie tells her full-arch implant story"
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+                  referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
       </div>
       <div id="storyCopy">
         <span class="pf-qm">&ldquo;</span>
@@ -827,37 +834,23 @@
         <div class="rv-score">
           <img src="assets/google.svg" alt="Google" width="48" height="48" loading="lazy">
           <div>
-            <b><span id="rvScore">5.0</span> <i class="rv-stars" aria-hidden="true">★★★★★</i></b>
+            <b><span id="rvScore">4.9</span> <i class="rv-stars" aria-hidden="true">★★★★★</i></b>
             <span>Google reviews &middot; both offices</span>
           </div>
         </div>
       </div>
 
-      <div class="rv-grid" id="rvGrid">
-        <a class="rv-card" href="patient-stories.html#melanie"><span class="rv-stars" aria-hidden="true">★★★★★</span>
-          <p>&ldquo;My smile held me back. That&rsquo;s behind me due to my dental implants.&rdquo;</p>
-          <footer><span class="rv-av">M</span>Melanie<i>Filmed story</i></footer></a>
-        <a class="rv-card" href="patient-stories.html#yolanda"><span class="rv-stars" aria-hidden="true">★★★★★</span>
-          <p>&ldquo;I haven&rsquo;t stopped smiling since I got my dental implants!&rdquo;</p>
-          <footer><span class="rv-av">Y</span>Yolanda<i>Filmed story</i></footer></a>
-        <a class="rv-card" href="patient-stories.html#stephen"><span class="rv-stars" aria-hidden="true">★★★★★</span>
-          <p>&ldquo;Dental implants completely changed my life.&rdquo;</p>
-          <footer><span class="rv-av">S</span>Stephen<i>Filmed story</i></footer></a>
-        <a class="rv-card rv-film" href="patient-stories.html#donita"><span class="rv-stars" aria-hidden="true">★★★★★</span>
-          <p><span class="rv-play" aria-hidden="true"></span>Donita filmed her story at the practice.
-             Watch it in her own words.</p>
-          <footer><span class="rv-av">D</span>Donita<i>Filmed story</i></footer></a>
-        <a class="rv-card rv-film" href="patient-stories.html#barbara"><span class="rv-stars" aria-hidden="true">★★★★★</span>
-          <p><span class="rv-play" aria-hidden="true"></span>Barbara filmed her story at the practice.
-             Watch it in her own words.</p>
-          <footer><span class="rv-av">B</span>Barbara<i>Filmed story</i></footer></a>
-        <a class="rv-card rv-film" href="patient-stories.html#couple"><span class="rv-stars" aria-hidden="true">★★★★★</span>
-          <p><span class="rv-play" aria-hidden="true"></span>A couple treated together filmed their
-             story. Watch it in their own words.</p>
-          <footer><span class="rv-av">&amp;</span>A couple<i>Filmed story</i></footer></a>
+      <!-- The practice's live review feed, replacing the six hand-built
+           cards. It is a third-party iframe (LeadConnector / ReputationHub) and
+           cannot be styled from this package, so it will not match the card
+           design around it; that is the client's call, made in the Webflow
+           build. The script tag is what sizes the frame to its content. -->
+      <div class="rv-embed">
+        <script type="text/javascript" src="https://reputationhub.site/reputation/assets/review-widget.js"></script>
+        <iframe class="lc_reviews_widget" title="Patient reviews"
+                src="https://reputationhub.site/reputation/widgets/review_widget/xJDu1mFoW5jFYTNqmuk7?widgetId=6a7340db2bbe7819cc3536f4"
+                frameborder="0" scrolling="no" style="min-width:100%;width:100%"></iframe>
       </div>
-
-      <a class="rv-more" href="patient-stories.html">See every patient story <i></i></a>
     </div>
   </div>
 
@@ -870,19 +863,40 @@
 
   <div class="wrap section">
     <div class="chapter-tag"><i></i><span class="label">Chapter 08 &middot; The Invitation</span></div>
-    <h2>Close to home, either way.</h2>
+    <h2>A Space Designed For Your Comfort.</h2>
+
+    <!-- Five photographs of the two practices, added by the client on the
+         Webflow build. The first is given the wide cell; the rest fill the row.
+         Alt text describes what is actually in each frame - the Webflow version
+         ships all five with alt="", which tells a screen reader nothing. -->
+    <div class="iv-gallery" data-rv="stagger">
+      <img class="iv-shot iv-shot-wide" src="assets/practice-space-1.avif" loading="lazy"
+           alt="The reception desk, with the Dr. Nahlah wordmark above a marble counter and cream and gold waiting chairs">
+      <img class="iv-shot" src="assets/practice-space-2.avif" loading="lazy"
+           alt="A consultation room with a round table, two upholstered chairs and a monitor">
+      <img class="iv-shot" src="assets/practice-space-3.avif" loading="lazy"
+           alt="The corridor between treatment rooms, lined with gold arch detailing">
+      <img class="iv-shot" src="assets/practice-space-4.avif" loading="lazy"
+           alt="A treatment room with the dental chair, overhead light and chairside monitor">
+      <img class="iv-shot" src="assets/practice-space-5.avif" loading="lazy"
+           alt="The preparation corridor, with instrument cabinetry along one wall">
+    </div>
     <div class="iv-locs" id="locs">
       <div class="iv-loc">
         <h3>Tysons Corner &middot; McLean</h3>
         <address>7901 Jones Branch Dr., Suite 220<br>McLean, VA 22102</address>
-        <div class="iv-row"><span>New Patients</span><a href="tel:+15716199442">(571) 619-9442</a></div>
+        <div class="iv-row"><span>New Patients</span><a href="tel:+15717029900">(571) 702-9900</a></div>
         <div class="iv-row"><span>Current Patients</span><a href="tel:+17034483312">(703) 448-3312</a></div>
+        <a class="pk-more" href="https://maps.google.com/?q=7901+Jones+Branch+Dr+Suite+220+McLean+VA+22102"
+           target="_blank" rel="noopener">Directions</a>
       </div>
       <div class="iv-loc">
         <h3>Alexandria</h3>
         <address>2855 Duke St.<br>Alexandria, VA 22314</address>
-        <div class="iv-row"><span>New Patients</span><a href="tel:+15714103430">(571) 410-3430</a></div>
+        <div class="iv-row"><span>New Patients</span><a href="tel:+15712537790">(571) 253-7790</a></div>
         <div class="iv-row"><span>Current Patients</span><a href="tel:+17039405410">(703) 940-5410</a></div>
+        <a class="pk-more" href="https://maps.google.com/?q=2855+Duke+St+Alexandria+VA+22314"
+           target="_blank" rel="noopener">Directions</a>
       </div>
     </div>
   </div>
@@ -935,8 +949,8 @@
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
         <ul style="margin-top:1.1rem">
-          <li><a href="tel:+15716199442">McLean &middot; (571) 619-9442</a></li>
-          <li><a href="tel:+15714103430">Alexandria &middot; (571) 410-3430</a></li>
+          <li><a href="tel:+15717029900">McLean &middot; (571) 702-9900</a></li>
+          <li><a href="tel:+15712537790">Alexandria &middot; (571) 253-7790</a></li>
         </ul>
       </div>
     </div>

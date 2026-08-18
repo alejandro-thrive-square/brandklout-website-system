@@ -401,16 +401,25 @@ WZ.section("ch-proof", function (W) {
   /* Reviews: header, then cards deal in on a slight diagonal. */
   gsap.from('#reviews .rv-head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
     scrollTrigger:{trigger:'#reviews',start:'top 80%'}});
-  gsap.from('#rvGrid .rv-card',{opacity:0,y:34,duration:.8,stagger:{each:.08,from:'start'},
-    ease:'power3.out',scrollTrigger:{trigger:'#rvGrid',start:'top 85%'}});
+  /* The six hand-built cards were replaced by the practice's review widget on
+     2026-08-18, so the card stagger that used to live here has nothing to
+     animate and is gone with them. The embed arrives in its own iframe and
+     brings its own entrance. */
 
-  /* Aggregate score counts up like the other stats. */
+  /* Aggregate score counts up like the other stats. The target is READ FROM THE
+     MARKUP rather than written here as well. It was hardcoded to 5.0, so when
+     the client corrected the rating the counter silently animated the new number
+     straight back to the old one and the page showed 5.0 whatever the HTML
+     said. One number, one home. */
   var sc = document.getElementById('rvScore');
   if(sc){
-    var o = {v:0};
-    gsap.to(o,{v:5.0,duration:1.6,ease:'power2.out',
-      onUpdate:function(){ sc.textContent = o.v.toFixed(1); },
-      scrollTrigger:{trigger:'#reviews',start:'top 78%'}});
+    var target = parseFloat(sc.textContent);
+    if(!isNaN(target)){
+      var o = {v:0};
+      gsap.to(o,{v:target,duration:1.6,ease:'power2.out',
+        onUpdate:function(){ sc.textContent = o.v.toFixed(1); },
+        scrollTrigger:{trigger:'#reviews',start:'top 78%'}});
+    }
   }
 });
 

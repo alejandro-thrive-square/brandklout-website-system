@@ -39,6 +39,14 @@ const STATE = /^is-[a-z0-9-]+$/;
 /* Written by the GSAP runtime, not authored in the page. */
 const RUNTIME = new Set(["wz-line", "wz-word", "wz-ready", "wz-kit"]);
 
+// Classes owned by a third party, not by this package. They carry no rule here
+// on purpose: the vendor's own script selects on them, and styling them from
+// our stylesheet would be reaching inside somebody else's widget.
+//   lc_reviews_widget - LeadConnector / ReputationHub review embed, added to the
+//   home page's Chapter 07 on 2026-08-18. review-widget.js finds the iframe by
+//   this class to size it to its content; drop it and the frame never resizes.
+const VENDOR = new Set(["lc_reviews_widget"]);
+
 const VOID = new Set(["area", "base", "br", "col", "embed", "hr", "img", "input",
   "link", "meta", "param", "source", "track", "wbr"]);
 
@@ -147,7 +155,7 @@ for (const [cls, owners] of declaredBy) {
 // B. no dead classes
 const seenDead = new Set();
 for (const u of usage) {
-  if (declaredBy.has(u.cls) || GLOBAL.has(u.cls) || RUNTIME.has(u.cls) || STATE.test(u.cls)) continue;
+  if (declaredBy.has(u.cls) || GLOBAL.has(u.cls) || RUNTIME.has(u.cls) || VENDOR.has(u.cls) || STATE.test(u.cls)) continue;
   if (seenDead.has(u.cls)) continue;
   seenDead.add(u.cls);
   fails.push(`B  .${u.cls} is on elements (first seen in ${u.page}) but no rule and no known hook uses it`);

@@ -318,35 +318,31 @@ check("lab photo loaded",
     return i.complete && i.naturalWidth>0})()`));
 
 // Reviews
-const rvY = await evalJs(`(function(){var e=document.getElementById('rvGrid');
+//
+// The six hand-built cards were replaced on 2026-08-18 by the practice's own
+// review widget (LeadConnector / ReputationHub), which the client added on the
+// Webflow build. The content now arrives from a third party inside a
+// cross-origin iframe, so the assertions this block used to make - six cards,
+// every patient name attested in the source site, one story link per card -
+// have nothing left to read and are gone with the markup. Deleting a check is
+// only honest when the thing it guarded is genuinely gone; what remains
+// checkable from here is that the embed is present, that it points at THIS
+// practice's widget and not a stray copy, and that the score above it is right.
+const rvY = await evalJs(`(function(){var e=document.getElementById('reviews');
   return Math.round((window.WZ&&WZ.smoother)?WZ.smoother.offset(e,'top center'):e.getBoundingClientRect().top+window.pageYOffset)})()`);
 await scrollTo(rvY, 2200);
-check("reviews grid renders 6 cards",
-  (await evalJs(`document.querySelectorAll('#rvGrid .rv-card').length`)) === 6);
-check("review cards revealed",
-  await evalJs(`[...document.querySelectorAll('#rvGrid .rv-card')]
-    .every(r=>parseFloat(getComputedStyle(r).opacity) > .9)`));
+check("review embed present",
+  (await evalJs(`document.querySelectorAll('.rv-embed iframe.lc_reviews_widget').length`)) === 1);
+check("embed points at this practice's widget",
+  await evalJs(`(document.querySelector('.rv-embed iframe')||{}).src
+    ? document.querySelector('.rv-embed iframe').src.indexOf('xJDu1mFoW5jFYTNqmuk7') > -1 : false`),
+  await evalJs(`(document.querySelector('.rv-embed iframe')||{src:'none'}).src.slice(0,72)`));
 check("aggregate score counted up",
-  (await evalJs(`document.getElementById('rvScore').textContent`)) === "5.0",
+  (await evalJs(`document.getElementById('rvScore').textContent`)) === "4.9",
   await evalJs(`document.getElementById('rvScore').textContent`));
-// The grid used to ship generic filler behind a data-placeholder flag. It now
-// carries the practice's own patients, so the assertion inverts: no filler text
-// may survive, and every name must be one the source site actually published.
-check("no placeholder copy left in the reviews grid",
+check("no placeholder copy left in the reviews block",
   await evalJs(`!/[Pp]laceholder|[Ll]orem/.test(document.getElementById('reviews').textContent)
     && !document.getElementById('reviews').dataset.placeholder`));
-check("patient names are all attested in the source site",
-  await evalJs(`(function(){
-    var attested = ['Melanie','Yolanda','Stephen','Donita','Barbara','A couple'];
-    return [...document.querySelectorAll('#rvGrid footer')].every(function(f){
-      var name = f.textContent.replace(/Filmed story/,'').trim().slice(1).trim();
-      return attested.indexOf(name) > -1;
-    });
-  })()`),
-  await evalJs(`[...document.querySelectorAll('#rvGrid footer')]
-    .map(f=>f.textContent.replace(/Filmed story/,'').trim().slice(1).trim()).join(', ')`));
-check("every patient card links to its story",
-  await evalJs(`document.querySelectorAll('#rvGrid a.rv-card[href^="patient-stories.html#"]').length === 6`));
 
 // integrity
 await scrollTo(total, 1200);

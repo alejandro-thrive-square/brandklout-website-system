@@ -163,10 +163,10 @@
   </div>
   <div class="dr-foot">
     <div><b>Tysons Corner &middot; McLean</b>
-      New patients <a href="tel:+15716199442">(571) 619-9442</a><br>
+      New patients <a href="tel:+15717029900">(571) 702-9900</a><br>
       Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
     <div><b>Alexandria</b>
-      New patients <a href="tel:+15714103430">(571) 410-3430</a><br>
+      New patients <a href="tel:+15712537790">(571) 253-7790</a><br>
       Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
     <div><b>Hours</b>
       Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
@@ -223,7 +223,7 @@
 
     <article class="st-row" id="melanie" data-rv="stagger">
       <figure class="st-fig">
-        <img src="assets/patient-story.jpg" alt="Melanie, a full-arch implant patient" loading="lazy">
+        <div class="st-film"><iframe src="https://www.youtube.com/embed/HiNtywrb4Yg" loading="lazy" title="Melanie tells her full-arch implant story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <figcaption>Full-arch implants</figcaption>
       </figure>
       <div class="st-body">
@@ -238,7 +238,7 @@
 
     <article class="st-row st-row-rev" id="yolanda" data-rv="stagger">
       <figure class="st-fig">
-        <img src="assets/pt-yolanda.jpg" alt="Yolanda, a dental implant patient" loading="lazy">
+        <div class="st-film"><iframe src="https://www.youtube.com/embed/Vp6hSfd3oLI" loading="lazy" title="Yolanda tells her dental implant story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <figcaption>Dental implants</figcaption>
       </figure>
       <div class="st-body">
@@ -251,15 +251,14 @@
       </div>
     </article>
 
-    <!-- Stephen's quote is attributed on the source site; no photograph of him
-         is. Any patient portrait dropped in here reads as "this is Stephen", so
-         the card gets a typographic plate instead of a face that isn't his.
-         Swap in a real portrait only if the client supplies one with consent. -->
+    <!-- Stephen had a typographic plate here because no photograph of him is
+         published and any patient portrait dropped in would read as "this is
+         Stephen". His own film is published, so it takes the slot instead. -->
     <article class="st-row" id="stephen" data-rv="stagger">
-      <div class="st-fig st-plate" aria-hidden="true">
-        <span class="pl-mark">&ldquo;</span>
-        <span class="pl-label">Implant-supported dentures</span>
-      </div>
+      <figure class="st-fig">
+        <div class="st-film"><iframe src="https://www.youtube.com/embed/oveSqavqCIQ" loading="lazy" title="Stephen tells his implant story" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
+        <figcaption>Implant-supported dentures</figcaption>
+      </figure>
       <div class="st-body">
         <span class="st-name">Stephen</span>
         <blockquote class="st-q">&ldquo;Dental implants completely changed my life.&rdquo;</blockquote>
@@ -278,32 +277,36 @@
       <div class="chapter-tag" data-rv><i></i><span class="label">Filmed</span></div>
       <h2 data-split>Three more told it on film only.</h2>
       <p data-rv>No pull-quote was ever published for these three, so none is written here. The
-        films are the record.</p>
+        films are the record, and they are below.</p>
     </div>
     <div class="pk-cards pk-cards-3" data-rv="stagger">
       <article class="pk-card" id="donita">
         <h3>Donita</h3>
+        <div class="st-film-card"><iframe src="https://www.youtube.com/embed/R_cKCMsVr8o" loading="lazy" title="Donita's testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <p>Filmed her story at the practice. Published as a video testimonial without an
           accompanying written quote.</p>
-        <span class="pk-readon">Film to be embedded</span>
       </article>
       <article class="pk-card" id="barbara">
         <h3>Barbara</h3>
+        <div class="st-film-card"><iframe src="https://www.youtube.com/embed/yTCwgaq4zqw" loading="lazy" title="Barbara's testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <p>Filmed her story at the practice. A portrait of Barbara appears in the practice&rsquo;s
           own patient photography.</p>
-        <span class="pk-readon">Film to be embedded</span>
       </article>
       <article class="pk-card" id="couple">
         <h3>A couple, treated together</h3>
+        <div class="st-film-card"><iframe src="https://www.youtube.com/embed/bn3vdCgDTrc" loading="lazy" title="A joint patient testimonial" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe></div>
         <p>Two patients who went through treatment at the same time and filmed a joint
-          testimonial.</p>
-        <span class="pk-readon">Film to be embedded</span>
+          testimonial. This is the one film whose pairing is inferred rather than
+          confirmed &mdash; worth checking with the practice before it goes to the client.</p>
       </article>
     </div>
-    <!-- BUILD NOTE: the six testimonial films are YouTube embeds on the current
-         site (ids captured in 03-graphic-resources/.tmp/video-embeds.csv). They
-         are deliberately not hot-linked from a design prototype; wire them at
-         Webflow build time, or self-host if the client owns the masters. -->
+    <!-- The six films are wired, 2026-08-18. Five pairings are confirmed by the
+         YouTube title matching the patient's published quote or naming her
+         outright; the couple's is inferred by elimination and is flagged on the
+         card itself. Ids and the derivation are in
+         03-graphic-resources/.tmp/video-embeds.csv and in the commit message.
+         They are hot-linked to YouTube, as the practice's own site does;
+         self-host only if the client turns out to own the masters. -->
     <p style="margin-top:clamp(1.5rem,3vw,2.25rem)" data-rv>
       <a class="pk-more" href="contact.html#book">Ask to speak to a patient</a></p>
   </div>
@@ -355,8 +358,8 @@
       actually needs.</p>
     <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Book your consult</span></a>
     <div class="cta-phones" data-rv>
-      <span>McLean &middot; <a href="tel:+15716199442">(571) 619-9442</a></span>
-      <span>Alexandria &middot; <a href="tel:+15714103430">(571) 410-3430</a></span>
+      <span>McLean &middot; <a href="tel:+15717029900">(571) 702-9900</a></span>
+      <span>Alexandria &middot; <a href="tel:+15712537790">(571) 253-7790</a></span>
     </div>
   </div>
 </section>
@@ -400,8 +403,8 @@
           <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
         </ul>
         <ul style="margin-top:1.1rem">
-          <li><a href="tel:+15716199442">McLean &middot; (571) 619-9442</a></li>
-          <li><a href="tel:+15714103430">Alexandria &middot; (571) 410-3430</a></li>
+          <li><a href="tel:+15717029900">McLean &middot; (571) 702-9900</a></li>
+          <li><a href="tel:+15712537790">Alexandria &middot; (571) 253-7790</a></li>
         </ul>
       </div>
     </div>

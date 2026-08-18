@@ -18,3 +18,21 @@
 .iv-cta p{margin-top:1.1rem;max-width:46ch;margin-inline:auto;color:rgba(11,11,12,.72)}
 .iv-cta .btn{margin-top:2rem}
 @media(min-width:720px){ .ch-invitation .iv-locs{grid-template-columns:repeat(2,1fr)} }
+
+/* --- the practice, photographed (added 2026-08-18 from the client's Webflow build) ---
+   One wide cell then a row of four. The wide cell is what stops five landscape
+   frames reading as a contact sheet; it gives the eye somewhere to land first.
+   Sits on the dark ground of this chapter, so the frames carry a hairline rather
+   than a shadow. */
+.ch-invitation .iv-gallery{display:grid;grid-template-columns:1fr;gap:clamp(.5rem,1vw,.75rem);
+  margin-top:clamp(2rem,4vw,3rem)}
+.ch-invitation .iv-shot{display:block;width:100%;height:100%;object-fit:cover;
+  aspect-ratio:4/3;border:1px solid rgba(255,255,255,.1)}
+@media(min-width:720px){
+  .ch-invitation .iv-gallery{grid-template-columns:repeat(4,1fr)}
+  .ch-invitation .iv-shot-wide{grid-column:1 / -1;aspect-ratio:21/9}
+}
+@media(min-width:1080px){
+  .ch-invitation .iv-gallery{grid-template-columns:repeat(4,1fr)}
+  .ch-invitation .iv-shot-wide{grid-column:span 2;aspect-ratio:auto}
+}

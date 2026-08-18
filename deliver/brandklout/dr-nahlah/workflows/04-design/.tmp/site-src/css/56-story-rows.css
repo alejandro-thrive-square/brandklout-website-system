@@ -25,3 +25,14 @@
   .st-row{grid-template-columns:.9fr 1.1fr}
   .st-row.st-row-rev .st-fig{order:2}
 }
+
+/* --- testimonial films (added 2026-08-18) ---
+   The films take the slot the patient photograph used to hold, so they inherit
+   .st-fig's 4/3 box and its caption. A YouTube frame is 16/9, so it is centred
+   in that box rather than stretched: letterboxing a face is worse than a little
+   ground showing. Inside a .pk-card there is no .st-fig, so the film sets its
+   own 16/9 box there. */
+.st-fig .st-film{position:absolute;inset:0;display:grid;place-items:center;background:var(--black)}
+.st-fig .st-film iframe{width:100%;aspect-ratio:16/9;height:auto;border:0;display:block}
+.st-film-card{position:relative;aspect-ratio:16/9;margin:.35rem 0 .9rem}
+.st-film-card iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}

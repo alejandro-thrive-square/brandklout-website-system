@@ -879,32 +879,17 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .rv-score>div>span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
   color:rgba(255,255,255,.58)}
 .rv-stars{color:var(--gold);letter-spacing:.12em;font-style:normal;font-size:.9em}
-.rv-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,.09)}
-.rv-card{background:var(--black);padding:clamp(1.35rem,2.2vw,1.9rem);display:grid;gap:.9rem;
-  align-content:start;transition:background .4s ease}
-.rv-card:hover{background:var(--ink-800)}
-.rv-card p{color:rgba(255,255,255,.78);font-weight:300;font-size:.94rem;line-height:1.75}
-.rv-film p{color:rgba(255,255,255,.62)}
-.rv-play{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;
-  border:1px solid var(--gold);margin-right:.55rem;vertical-align:-5px}
-.rv-play::after{content:"";border-left:6px solid var(--gold);border-block:4px solid transparent;
-  margin-left:2px}
-.rv-card:hover .rv-play{background:var(--gold)}
-.rv-card:hover .rv-play::after{border-left-color:var(--black)}
-.rv-card footer{display:flex;align-items:center;gap:.7rem;font-size:.85rem;color:#fff;
-  padding-top:.9rem;border-top:1px solid rgba(255,255,255,.09)}
-.rv-card footer i{margin-left:auto;font-style:normal;font-size:.66rem;letter-spacing:.14em;
-  text-transform:uppercase;color:rgba(255,255,255,.58)}
-.rv-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none;
-  background:linear-gradient(140deg,var(--gold-deep),var(--gold));color:var(--black);
-  font-weight:700;font-size:.8rem}
-.rv-more{display:inline-flex;align-items:center;gap:.6rem;margin-top:clamp(1.5rem,3vw,2.25rem);
-  font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--gold)}
-.rv-more i{display:block;width:18px;height:1px;background:var(--gold);
-  transition:width .45s cubic-bezier(.22,1,.36,1)}
-.rv-more:hover i{width:38px}
-@media(min-width:700px){ .rv-grid{grid-template-columns:repeat(2,1fr)} }
-@media(min-width:1080px){ .rv-grid{grid-template-columns:repeat(3,1fr)} }
+
+/* --- embeds (added 2026-08-18 from the client's Webflow build) ---
+   The story shot is now a filmed testimonial and the review grid is now the
+   practice's own review widget. Both are third-party iframes: their internals
+   cannot be styled from here, so all this does is reserve the right box and
+   keep the surrounding rhythm. The 16:9 padding box holds the shot's height
+   before the frame loads, which is what stops the pinned chapter jumping. */
+.ch-proof .pf-embed{position:relative;padding-top:56.25%;overflow:hidden}
+.ch-proof .pf-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.rv-embed{margin-top:clamp(1.5rem,3vw,2.25rem);min-height:320px}
+.rv-embed iframe{display:block;width:100%;border:0}
 
 /* ===== css/38-ch-invitation.css ===== */
 .ch-invitation{background:var(--black)}
@@ -927,6 +912,24 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .iv-cta p{margin-top:1.1rem;max-width:46ch;margin-inline:auto;color:rgba(11,11,12,.72)}
 .iv-cta .btn{margin-top:2rem}
 @media(min-width:720px){ .ch-invitation .iv-locs{grid-template-columns:repeat(2,1fr)} }
+
+/* --- the practice, photographed (added 2026-08-18 from the client's Webflow build) ---
+   One wide cell then a row of four. The wide cell is what stops five landscape
+   frames reading as a contact sheet; it gives the eye somewhere to land first.
+   Sits on the dark ground of this chapter, so the frames carry a hairline rather
+   than a shadow. */
+.ch-invitation .iv-gallery{display:grid;grid-template-columns:1fr;gap:clamp(.5rem,1vw,.75rem);
+  margin-top:clamp(2rem,4vw,3rem)}
+.ch-invitation .iv-shot{display:block;width:100%;height:100%;object-fit:cover;
+  aspect-ratio:4/3;border:1px solid rgba(255,255,255,.1)}
+@media(min-width:720px){
+  .ch-invitation .iv-gallery{grid-template-columns:repeat(4,1fr)}
+  .ch-invitation .iv-shot-wide{grid-column:1 / -1;aspect-ratio:21/9}
+}
+@media(min-width:1080px){
+  .ch-invitation .iv-gallery{grid-template-columns:repeat(4,1fr)}
+  .ch-invitation .iv-shot-wide{grid-column:span 2;aspect-ratio:auto}
+}
 
 /* ===== css/40-thin-arch.css ===== */
 /* =============================================================================
@@ -1122,6 +1125,17 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
   .st-row{grid-template-columns:.9fr 1.1fr}
   .st-row.st-row-rev .st-fig{order:2}
 }
+
+/* --- testimonial films (added 2026-08-18) ---
+   The films take the slot the patient photograph used to hold, so they inherit
+   .st-fig's 4/3 box and its caption. A YouTube frame is 16/9, so it is centred
+   in that box rather than stretched: letterboxing a face is worse than a little
+   ground showing. Inside a .pk-card there is no .st-fig, so the film sets its
+   own 16/9 box there. */
+.st-fig .st-film{position:absolute;inset:0;display:grid;place-items:center;background:var(--black)}
+.st-fig .st-film iframe{width:100%;aspect-ratio:16/9;height:auto;border:0;display:block}
+.st-film-card{position:relative;aspect-ratio:16/9;margin:.35rem 0 .9rem}
+.st-film-card iframe{position:absolute;inset:0;width:100%;height:100%;border:0;display:block}
 
 /* ===== css/57-legal.css ===== */
 /* Legal prose is read differently from marketing prose: in sequence, and
