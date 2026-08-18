@@ -121,6 +121,26 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: **The video problem is solved without custom code, and the LP build is now
+  generic across both landing pages.**
+
+  A native Webflow `Video` cannot be made to render through this API (see the previous entry),
+  and the reference's own visible videos are HtmlEmbed iframes, which this build may not use —
+  its seven `Video` elements are all `visibility:false`. So each video is now a POSTER IMAGE
+  linking to the YouTube watch URL: `upload-posters.mjs` fetches each film's frame from
+  `img.youtube.com/vi/<id>/maxresdefault.jpg` (falling back to `hqdefault`, and rejecting the
+  tiny "unavailable" placeholder by byte size), uploads it as a site asset, and
+  `video-posters.mjs` reads each Video's stored `{src}`, builds
+  `LinkBlock.lp_video_link > Image.lp_video_poster + span.lp_video_play` in its place, and
+  deletes it. 7 posters uploaded (`poster-map.json`), 7 links placed, 0 Video elements left.
+
+  **`headings(slug)` makes the split headlines generic.** The reference marks the coloured half
+  of a headline with the class `accent`, and it can come SECOND ("Your Dental Work" +
+  "Shouldn't Look & Feel Like Dental Work") or FIRST ("The Dentist" + "Richmond Trusts With Its
+  Smiles"). The tree collapses a heading to one string, so the helper parses page.html instead
+  and returns `{level, head, accent, accentFirst}` per h1/h2 in document order. Verified on both
+  pages — the implant build needs no hand-written splits.
+
 - 2026-08-18: **ALL TWELVE cosmetic-v2 sections are built and the page is live on staging**
   (`/ads-landing-pages/cosmetic-v2`, draft:false, staging publish only). 12 sections, 121 lp_
   classes in use, 25 images, 7 FAQ rows as native `details`/`summary`, 1 native form, zero

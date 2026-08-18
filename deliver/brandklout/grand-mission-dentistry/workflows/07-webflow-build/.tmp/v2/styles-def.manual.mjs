@@ -145,5 +145,29 @@ export const STYLES = [
   { n: "is-mid", parents: ["lp_office_img"], p: { "aspect-ratio": "1.145" } },
   { n: "is-short", parents: ["lp_office_img"], p: { "aspect-ratio": "1.718" } },
 
+  // ---- video posters --------------------------------------------------------------
+  // A native Webflow Video element publishes an EMPTY w-video div when its source is set
+  // through the API (Webflow only builds the embed when the Designer fetches oEmbed), and an
+  // HtmlEmbed iframe — which is how the reference does it — is custom code. So each video is
+  // a poster image linking to the watch URL.
+  {
+    n: "lp_video_link",
+    p: {
+      display: "block", position: "relative", width: "100%", "text-decoration": "none",
+      "background-color": { v: V.lpNavy }, overflow: "hidden", ...radius("10px"),
+    },
+  },
+  { n: "lp_video_poster", p: { width: "100%", height: "auto", "aspect-ratio": "1.7778", "object-fit": "cover", display: "block" } },
+  {
+    n: "lp_video_play",
+    p: {
+      position: "absolute", top: "50%", left: "50%", display: "flex",
+      "align-items": "center", "justify-content": "center",
+      width: "64px", height: "64px", "margin-top": "-32px", "margin-left": "-32px",
+      "background-color": "rgba(11,44,65,0.78)", color: { v: V.white },
+      "font-size": "24px", "line-height": "64px", "text-align": "center", ...radius("50%"),
+    },
+  },
+
   { n: "lp_form_note", p: { "font-size": "11px", "line-height": "16px", color: { v: V.n4 }, "margin-top": "8px" } },
 ];

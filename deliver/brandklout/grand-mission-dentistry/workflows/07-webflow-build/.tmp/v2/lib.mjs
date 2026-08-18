@@ -74,6 +74,28 @@ export function all(node, fn = () => true) {
   return out;
 }
 
+/** Where a reference headline splits into a plain half and a coloured half. The tree collapses
+ *  a heading to one string, so this reads the saved page.html: the reference marks the coloured
+ *  run with the class `accent`, and it can come SECOND ("Your Dental Work " + "Shouldn't Look…")
+ *  or FIRST ("The Dentist" + " Richmond Trusts With Its Smiles"). Returns one entry per h1/h2 in
+ *  document order: { level, head, accent, accentFirst }. */
+export function headings(slug) {
+  const html = fs.readFileSync(path.join(REF, slug.replace(/-v2$/, ""), "page.html"), "utf8");
+  const strip = (x) => x.replace(/<br\s*\/?>/g, " ").replace(/<[^>]+>/g, "")
+    .replace(/&#x27;/g, "'").replace(/&amp;/g, "&").replace(/&quot;/g, '"')
+    .replace(/\u200d/g, "").replace(/\s+/g, " ").trim();
+  const out = [];
+  for (const m of html.matchAll(/<h([12])[^>]*>([\s\S]*?)<\/h[12]>/g)) {
+    const inner = m[2];
+    const acc = inner.match(/<(?:span|a)[^>]*class="[^"]*\baccent\b[^"]*"[^>]*>([\s\S]*?)<\/(?:span|a)>/);
+    if (!acc) { out.push({ level: +m[1], head: strip(inner), accent: "", accentFirst: false }); continue; }
+    const accentFirst = inner.indexOf(acc[0]) < 4;
+    const rest = strip(inner.replace(acc[0], ""));
+    out.push({ level: +m[1], head: rest, accent: strip(acc[1]), accentFirst });
+  }
+  return out;
+}
+
 /** The reference computed styles for a page, keyed by legacy class chain. */
 export const refStyles = (slug) =>
   JSON.parse(fs.readFileSync(path.join(REF, slug.replace(/-v2$/, ""), "styles.json"), "utf8"));
