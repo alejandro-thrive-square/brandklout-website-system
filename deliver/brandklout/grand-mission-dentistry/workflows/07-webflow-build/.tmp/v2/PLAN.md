@@ -121,6 +121,32 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: Phase 2 — **six of the twelve cosmetic-v2 sections are built**: shell, header,
+  hero, journey, difference, specialist, options. All read back with their `lp_` classes, and
+  the five embedded videos carry their YouTube sources. 134 classes now exist
+  (114 generated + 20 hand-authored).
+
+  **Content is sourced from `tree-1440.json`, not `outline.json`.** The outline is extracted
+  from the saved `page.html` with no CSS or JS, so anything the live page reorders or injects
+  comes out wrong — the Swiper-driven options cards lost a spec label there, and the specialist
+  credentials paired against the wrong strings (the `<strong>` lead-in renders first but sits
+  LAST in the DOM). `lib.mjs` gained `tree()` / `byClass()` / `all()` for this.
+
+  **THE VIDEO TRAP, and it is not guessable.** `data_element_builder` offers both `Video` and
+  `YouTubeVideo`; the obvious one is wrong. A **`YouTubeVideo` element's `video` setting cannot
+  be written** — every value shape answers `Invalid value for setting "video": expected video`
+  — while the identical write on a plain **`Video`** succeeds, and the reference pages use
+  `Video` too. The builder has NO setter for the source at creation either (`set_video`,
+  `set_youtube_video` and friends are accepted and silently ignored, like every unknown key).
+  So: build `Video`, then write `{src, title}` with `data_element_settings_tool` key `video`
+  + `static_video`. `videos.mjs` does the swap and the write, and reads every one back.
+
+  Divergences logged so far: the before/after slider renders at a fixed 50% split (the drag is
+  JS), so the "Drag to compare" hint became a static caption; the options row is a plain
+  responsive grid rather than Swiper; the hero card holds a real native form where the
+  reference has an empty LeadConnector embed; and the form fields carry visible labels because
+  `placeholder` is unreachable.
+
 - 2026-08-18: Phase 2 — the MEASUREMENT was wrong in three ways and all three are fixed. This
   cost a run but every one of them would have shipped as a visible defect:
   1. **Lazy images were measured before they loaded.** The chapter banner came back 46px tall

@@ -47,6 +47,33 @@ export const assetByName = (name) => {
 /** The reference outline for a page — the build's content source. */
 export const outline = (slug) =>
   JSON.parse(fs.readFileSync(path.join(REF, slug.replace(/-v2$/, ""), "outline.json"), "utf8"));
+/** The reference STRUCTURE + copy for a page: tree-<width>.json from tree.mjs. Prefer this
+ *  over outline() as a content source — outline.json is extracted from the saved page.html
+ *  with no CSS or JS, so anything the live page reorders or injects (the Swiper-driven
+ *  options cards, for one) comes out in a different order or missing entirely. The tree is
+ *  read off the rendered page, so what it says is what the reference actually shows. */
+export const tree = (slug, width = 1440) =>
+  JSON.parse(fs.readFileSync(path.join(REF, slug.replace(/-v2$/, ""), `tree-${width}.json`), "utf8"));
+
+/** Every descendant of `node` (inclusive) carrying `cls` in its class list. */
+export function byClass(node, cls) {
+  const out = [];
+  const walk = (n) => {
+    if ((n.cls || "").split(/\s+/).includes(cls)) out.push(n);
+    (n.kids || []).forEach(walk);
+  };
+  walk(node);
+  return out;
+}
+
+/** Every descendant of `node` (inclusive), depth-first, optionally filtered. */
+export function all(node, fn = () => true) {
+  const out = [];
+  const walk = (n) => { if (fn(n)) out.push(n); (n.kids || []).forEach(walk); };
+  walk(node);
+  return out;
+}
+
 /** The reference computed styles for a page, keyed by legacy class chain. */
 export const refStyles = (slug) =>
   JSON.parse(fs.readFileSync(path.join(REF, slug.replace(/-v2$/, ""), "styles.json"), "utf8"));
@@ -134,7 +161,12 @@ export const linkPhone = (style, ...k) =>
   el("LinkBlock", style, { set_link: { link_type: "phone", link: PHONE } }, ...k);
 export const dom = (tag, style, extra = {}, ...k) =>
   el("DOM", style, { set_dom_config: { dom_tag: tag }, ...extra }, ...k);
-export const youtube = (style, url) => el("YouTubeVideo", style, { set_youtube_video: { url } });
+/** An embedded video. Use `Video`, NOT `YouTubeVideo`: a YouTubeVideo element's `video`
+ *  setting cannot be written (every value shape answers `Invalid value for setting "video":
+ *  expected video`) while the same write on a plain Video succeeds, and the reference pages
+ *  use Video too. The builder has no setter for the source at creation either, so videos.mjs
+ *  writes {src, title} afterwards. */
+export const video = (style) => el("Video", style);
 
 // ---------- resumable section builder ----------
 /** Build `sections` onto a v2 page, one root per entry, skipping anything already recorded in

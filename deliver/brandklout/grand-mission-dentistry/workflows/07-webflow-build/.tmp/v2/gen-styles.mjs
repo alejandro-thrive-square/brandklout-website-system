@@ -162,9 +162,12 @@ export const MAP = [
 
   // ---- specialist --------------------------------------------------------------
   { n: "lp_doctor_grid", from: "div.imp-doc-grid", role: "grid" },
+  { n: "lp_doctor_col", from: "div.stcky-video-block", role: "box" },
+  { n: "lp_doctor_sticky", from: "div.sticky-video", role: "box", add: { position: "sticky", top: "90px" } },
   { n: "lp_doctor_media", from: "div.imp-doc-img", role: "media" },
   { n: "lp_cred_list", from: "ul.imp-creds", role: "flex", add: { "list-style-type": "none", "padding-left": "0px" } },
   { n: "lp_cred_item", from: "li.imp-li-3", role: "text", drop: ["max-width"] },
+  { n: "lp_cred_text", from: "span.imp-hero-copy", role: "text" },
   { n: "lp_cred_strong", from: "strong.imp-hero-copy", role: "text" },
   { n: "lp_quote", from: "blockquote.imp-blockquote", role: "box" },
   { n: "lp_photo_strip", from: "div.imp-teach-strip", role: "grid" },
@@ -172,9 +175,24 @@ export const MAP = [
 
   // ---- options -----------------------------------------------------------------
   { n: "lp_grid_3", from: "div.imp-grid-3", role: "grid" },
+  // The reference runs the three treatment cards through Swiper. v2 uses a plain grid: same
+  // layout at every width the reference actually shows, and no custom code.
+  { n: "lp_options_grid", from: "div.swiper-wrapper-3.is-services", role: "grid",
+    add: { display: "grid", "grid-template-columns": "repeat(3, 1fr)" },
+    bpAdd: { medium: { "grid-template-columns": "repeat(2, 1fr)" }, small: { "grid-template-columns": "1fr" } } },
+  { n: "lp_option_card", from: "div.service_item", role: "box",
+    add: { display: "flex", "flex-direction": "column", gap: "16px" } },
+  { n: "lp_option_img", from: "img.service_item-img", role: "media" },
+  { n: "lp_option_body", from: "div.service_item-content-wrap", role: "flex" },
+  { n: "lp_option_head", from: "div.service_item-content", role: "flex" },
+  { n: "lp_option_h", from: "h3.services_card-heading", role: "text", drop: ["max-width"] },
   { n: "lp_option_desc", from: "div.imp-serv-desc", role: "text" },
-  { n: "lp_spec_row", from: "div.imp-feature", role: "flex" },
-  { n: "lp_spec_value", from: "strong.imp-feature", role: "text" },
+  { n: "lp_option_specs", from: "div.service_item-details", role: "flex" },
+  { n: "lp_spec_row", from: "div.service_item-detail", role: "flex" },
+  { n: "lp_spec_label", from: "div.imp-feature", role: "text", drop: ["max-width"] },
+  { n: "lp_spec_value", from: "div.service_item-details-value", role: "text", drop: ["max-width"] },
+  { n: "lp_spec_divider", from: "div.divider-2", role: "box" },
+  { n: "lp_option_note", from: "div.service_item-details-desc", role: "text" },
 
   // ---- process -----------------------------------------------------------------
   { n: "lp_step_num", from: "span.imp-stepnum", role: "box" },
@@ -196,9 +214,11 @@ export const MAP = [
     add: { "white-space": "normal", "min-width": "0px" } },
 
   // ---- closing + footer --------------------------------------------------------------
+  { n: "lp_closing_media", from: "div.div-block-41", role: "box" },
   { n: "lp_closing_lead", from: "p.imp-paragraph.cta", role: "text" },
   { n: "lp_closing_note", from: "p.imp-alt", role: "text" },
   { n: "lp_closing_link", from: "a.imp-a-5", role: "text", add: { "text-decoration": "none" } },
+  { n: "lp_footer_inner", from: "div.ty-div.lw-shell.foot", role: "flex" },
   { n: "lp_footer_row", from: "div.ty-foot__row", role: "flex" },
   { n: "lp_footer_legal", from: "p.ty-foot__legal-3", role: "text" },
   { n: "lp_footer_line", from: "span.imp-footer-line", role: "text" },
@@ -298,6 +318,10 @@ for (const m of MAP) {
     }
     if (Object.keys(delta).length) bp[BP[w]] = delta;
   }
+  // Authored breakpoint values, for the few places where v2 deliberately departs from the
+  // reference — e.g. the options row, which the reference drives with Swiper and v2 rebuilds
+  // as a plain grid that has to be told how to collapse.
+  for (const [b, props] of Object.entries(m.bpAdd || {})) bp[b] = { ...(bp[b] || {}), ...props };
   STYLES.push({ n: m.n, ...(m.parents ? { parents: m.parents } : {}), p: base, ...(Object.keys(bp).length ? { bp } : {}) });
 }
 

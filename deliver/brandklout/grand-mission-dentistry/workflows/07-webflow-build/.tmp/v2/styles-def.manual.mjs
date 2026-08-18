@@ -133,5 +133,11 @@ export const STYLES = [
       ...border("0px", { v: V.navy }),
     },
   },
+  // The Life Before / Life After column headings. The reference styles them with the kit's
+  // heading-style-h3 plus a colour helper; v2 gives them one class and an is-light combo so
+  // the dark column does not depend on a tag style's inherited colour.
+  { n: "lp_jcol_h", p: { "font-size": "24px", "font-weight": "700", "line-height": "36px", "margin-bottom": "12px", color: { v: V.lpNavy } } },
+  { n: "is-light", parents: ["lp_jcol_h"], p: { color: { v: V.white } } },
+
   { n: "lp_form_note", p: { "font-size": "11px", "line-height": "16px", color: { v: V.n4 }, "margin-top": "8px" } },
 ];
