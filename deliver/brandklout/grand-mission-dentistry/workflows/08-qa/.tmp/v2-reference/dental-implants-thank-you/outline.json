@@ -1,0 +1,486 @@
+{
+ "count": 7,
+ "sections": [
+  {
+   "i": 0,
+   "tag": "section",
+   "cls": "header section-2",
+   "domId": null,
+   "items": [
+    {
+     "k": "a",
+     "t": "",
+     "href": "/",
+     "cls": "header-logo-wrapper hide-tablet w-inline-block"
+    },
+    {
+     "k": "img",
+     "asset": "69812a11425065e0beea0877",
+     "src": "69812a11425065e0beea0877_grand_mission-logo%20(1).webp",
+     "alt": "",
+     "w": null,
+     "h": null
+    },
+    {
+     "k": "a",
+     "t": "(281) 789-8836",
+     "href": "tel:+12817898836",
+     "cls": "button nav w-inline-block"
+    },
+    {
+     "k": "t",
+     "tag": "div",
+     "t": "(281) 789-8836"
+    },
+    {
+     "k": "a",
+     "t": "Referring Doctors",
+     "href": "/refer-a-patient",
+     "cls": "button nav w-inline-block"
+    },
+    {
+     "k": "t",
+     "tag": "div",
+     "t": "Referring Doctors"
+    },
+    {
+     "k": "a",
+     "t": "Book Online",
+     "href": "https://www.flexbook.me/gmdent/1",
+     "cls": "button-3 white nav w-inline-block"
+    },
+    {
+     "k": "t",
+     "tag": "div",
+     "t": "Book Online"
+    }
+   ]
+  },
+  {
+   "i": 1,
+   "tag": "section",
+   "cls": "section_ty-hero",
+   "domId": null,
+   "items": [
+    {
+     "k": "img",
+     "asset": "698680daabddcb610e194249",
+     "src": "698680daabddcb610e194249_Dr.%20William%20Sung%20DMD.webp",
+     "alt": "Dr. Chris Kim, Livewell Dental",
+     "w": null,
+     "h": null
+    },
+    {
+     "k": "h",
+     "lvl": 1,
+     "t": "Let's Talk About Your New Smile",
+     "html": "Let's talk about <span class=\"ty-hero__h1 accent\" data-asw-org-font-size=\"40\" style=\"font-size: 40px;\">your new smile</span>"
+    },
+    {
+     "k": "p",
+     "t": "Give us a call and a member of the Grand Mission team will walk you through your options and get your complimentary consultation with Dr. William on the calendar.",
+     "html": "Give us a call and a member of the Grand Mission team will walk you through your options and get your complimentary consultation with Dr. William on the calendar."
+    },
+    {
+     "k": "a",
+     "t": "CALL (703) 844-2975",
+     "href": "tel:(703)844-2975",
+     "cls": "ty-head__logo lw-btn lw-btn--gold ty-hero__call"
+    },
+    {
+     "k": "p",
+     "t": "★★★★★ 320+ five star reviews",
+     "html": "<span class=\"ty-hero__stars\" data-asw-org-font-size=\"20\" style=\"font-size: 20px;\">★★★★★</span>320+ five star reviews"
+    },
+    {
+     "k": "p",
+     "t": "A quick two minute call to talk through your options.",
+     "html": "A quick two minute call to talk through your options."
+    }
+   ]
+  },
+  {
+   "i": 2,
+   "tag": "section",
+   "cls": "ty-div section_ty-expect lw-sec",
+   "domId": null,
+   "items": [
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "WHAT HAPPENS NEXT"
+    },
+    {
+     "k": "h",
+     "lvl": 2,
+     "t": "We are dedicated to ‍getting you your new smile",
+     "html": "We are dedicated to<br>‍<span class=\"ty-h2 accent\" data-asw-org-font-size=\"38\" style=\"font-size: 38px;\">getting you your new smile</span>"
+    },
+    {
+     "k": "p",
+     "t": "Here is what to expect on the call, and why acting now matters.",
+     "html": "Here is what to expect on the call, and why acting now matters."
+    },
+    {
+     "k": "p",
+     "t": "ON YOUR CALL, WE WILL GO OVER",
+     "html": "On your call, we will go over"
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "1"
+    },
+    {
+     "k": "h",
+     "lvl": 3,
+     "t": "Your treatment options",
+     "html": "Your treatment options"
+    },
+    {
+     "k": "p",
+     "t": "We take down your situation and Dr. William reviews which path fits, from a single implant through to a full arch.",
+     "html": "We take down your situation and Dr. William reviews which path fits, from a single implant through to a full arch."
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "2"
+    },
+    {
+     "k": "h",
+     "lvl": 3,
+     "t": "Your payment options",
+     "html": "Your payment options"
+    },
+    {
+     "k": "p",
+     "t": "What insurance is likely to cover, what it does not, and the financing options available, explained plainly before you commit to anything.",
+     "html": "What insurance is likely to cover, what it does not, and the financing options available, explained plainly before you commit to anything."
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "3"
+    },
+    {
+     "k": "h",
+     "lvl": 3,
+     "t": "Your complimentary consultation",
+     "html": "Your complimentary consultation"
+    },
+    {
+     "k": "p",
+     "t": "A no cost assessment with a 3D scan at our Fairfax Station practice, so you can see exactly what is possible in your case.",
+     "html": "A no cost assessment with a 3D scan at our Fairfax Station practice, so you can see exactly what is possible in your case."
+    },
+    {
+     "k": "p",
+     "t": "⚠ WHAT CAN HAPPEN IF TREATMENT IS DELAYED",
+     "html": "<strong><span class=\"ty-div\" data-asw-org-font-size=\"16\" style=\"font-size: 16px;\">⚠</span></strong>What can happen if treatment is delayed"
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "✓"
+    },
+    {
+     "k": "p",
+     "t": "Bone loss in the jaw, which can narrow the implant options open to you later",
+     "html": "Bone loss in the jaw, which can narrow the implant options open to you later"
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "✓"
+    },
+    {
+     "k": "p",
+     "t": "Neighbouring teeth shifting, leading to bite issues and more complex treatment",
+     "html": "Neighbouring teeth shifting, leading to bite issues and more complex treatment"
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "✓"
+    },
+    {
+     "k": "p",
+     "t": "A higher risk of gum disease or infection over time",
+     "html": "A higher risk of gum disease or infection over time"
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "✓"
+    },
+    {
+     "k": "p",
+     "t": "More extensive, and more costly, procedures further down the line",
+     "html": "More extensive, and more costly, procedures further down the line"
+    },
+    {
+     "k": "p",
+     "t": "No cost, no obligation. We walk you through everything on the call. There is no pressure to decide.",
+     "html": "<span class=\"ty-reassure__strong\" data-asw-org-font-size=\"17\" style=\"font-size: 17px;\">No cost, no obligation.</span> We walk you through everything on the call. There is no pressure to decide."
+    }
+   ]
+  },
+  {
+   "i": 3,
+   "tag": "section",
+   "cls": "ty-div section_ty-why lw-sec",
+   "domId": null,
+   "items": [
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "WHY PEOPLE CHOSE US"
+    },
+    {
+     "k": "h",
+     "lvl": 2,
+     "t": "Why Grand Mission Dental?",
+     "html": "Why <span data-asw-org-font-size=\"38\" style=\"font-size: 38px;\">Grand Mission Dental</span>?"
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "☆"
+    },
+    {
+     "k": "h",
+     "lvl": 3,
+     "t": "Experience",
+     "html": "Experience"
+    },
+    {
+     "k": "p",
+     "t": "Dr. Chris, a Kois Center graduate and Fellow of the International Congress of Oral Implantology, teaches implant surgery and manages your case from start to finish.",
+     "html": "Dr. Chris, a Kois Center graduate and Fellow of the International Congress of Oral Implantology, teaches implant surgery and manages your case from start to finish."
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "♡"
+    },
+    {
+     "k": "h",
+     "lvl": 3,
+     "t": "Personalized Care",
+     "html": "Personalized Care"
+    },
+    {
+     "k": "p",
+     "t": "3D guided planning with CBCT imaging, sedation options for anxious patients, and a lab partnership that means the finished teeth are designed with the same hands that placed the implants.",
+     "html": "3D guided planning with CBCT imaging, sedation options for anxious patients, and a lab partnership that means the finished teeth are designed with the same hands that placed the implants."
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "$"
+    },
+    {
+     "k": "h",
+     "lvl": 3,
+     "t": "Clear Costs",
+     "html": "Clear Costs"
+    },
+    {
+     "k": "p",
+     "t": "New teeth are a significant investment. We verify your benefits, quote any grafting or extractions upfront, and put your out of pocket figure in front of you before you commit to anything.",
+     "html": "New teeth are a significant investment. We verify your benefits, quote any grafting or extractions upfront, and put your out of pocket figure in front of you before you commit to anything."
+    }
+   ]
+  },
+  {
+   "i": 4,
+   "tag": "section",
+   "cls": "ty-div section_ty-faq lw-sec",
+   "domId": null,
+   "items": [
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "BEFORE YOU CALL"
+    },
+    {
+     "k": "h",
+     "lvl": 2,
+     "t": "Any questions before you call?",
+     "html": "Any questions <span class=\"ty-h2 accent\" data-asw-org-font-size=\"38\" style=\"font-size: 38px;\">before you call</span>?"
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "+"
+    },
+    {
+     "k": "p",
+     "t": "The procedure is done under local anaesthetic and sedation options are available, so you should not feel it. Some soreness and swelling during early healing is normal and manageable. Most patients tell us it was far easier than they expected.",
+     "html": "The procedure is done under local anaesthetic and sedation options are available, so you should not feel it. Some soreness and swelling during early healing is normal and manageable. Most patients tell us it was far easier than they expected."
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "+"
+    },
+    {
+     "k": "p",
+     "t": "Sometimes, yes. Depending on your bone quality and overall health, a temporary tooth can be placed the same day as your implant. Your 3D scan at the consultation is what tells us whether you qualify.",
+     "html": "Sometimes, yes. Depending on your bone quality and overall health, a temporary tooth can be placed the same day as your implant. Your 3D scan at the consultation is what tells us whether you qualify."
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "+"
+    },
+    {
+     "k": "p",
+     "t": "Do not rule yourself out. Bone grafting, sinus lifts and alternative implant approaches make treatment possible for many patients who were told no elsewhere. A CBCT scan shows exactly what is possible in your case.",
+     "html": "Do not rule yourself out. Bone grafting, sinus lifts and alternative implant approaches make treatment possible for many patients who were told no elsewhere. A CBCT scan shows exactly what is possible in your case."
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "+"
+    },
+    {
+     "k": "p",
+     "t": "The implant post is designed as a lifetime replacement root. With healthy gums, daily care and regular checkups, implants can last decades. The crown on top may need maintenance over time, like any tooth.",
+     "html": "The implant post is designed as a lifetime replacement root. With healthy gums, daily care and regular checkups, implants can last decades. The crown on top may need maintenance over time, like any tooth."
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "+"
+    },
+    {
+     "k": "p",
+     "t": "At your consultation, once the 3D scan shows what your case actually needs. A complete single implant, meaning post, abutment and crown, typically runs $1,900 to $2,800 at Grand Mission Dental. Bone grafting or extractions, if needed, are quoted upfront.",
+     "html": "At your consultation, once the 3D scan shows what your case actually needs. A complete single implant, meaning post, abutment and crown, typically runs $1,900 to $2,800 at Grand Mission Dental. Bone grafting or extractions, if needed, are quoted upfront."
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "+"
+    },
+    {
+     "k": "p",
+     "t": "Insurance often covers part of the treatment, such as the crown or an extraction. Our team verifies your benefits before treatment and walks you through the financing options, so you know your exact out of pocket cost before you commit to anything.",
+     "html": "Insurance often covers part of the treatment, such as the crown or an extraction. Our team verifies your benefits before treatment and walks you through the financing options, so you know your exact out of pocket cost before you commit to anything."
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "+"
+    },
+    {
+     "k": "p",
+     "t": "We handle it at the consultation. Once your treatment plan is set, our team runs the application with you and brings back the monthly options it returns. Nothing is agreed until you have seen the numbers in writing.",
+     "html": "We handle it at the consultation. Once your treatment plan is set, our team runs the application with you and brings back the monthly options it returns. Nothing is agreed until you have seen the numbers in writing."
+    }
+   ]
+  },
+  {
+   "i": 5,
+   "tag": "section",
+   "cls": "section_ty-cta",
+   "domId": null,
+   "items": [
+    {
+     "k": "h",
+     "lvl": 2,
+     "t": "Ready to take the next step?",
+     "html": "Ready to take <span class=\"ty-cta__h2 accent\" data-asw-org-font-size=\"40\" style=\"font-size: 40px;\">the next step</span>?"
+    },
+    {
+     "k": "p",
+     "t": "Talk to the Grand Mission team and get your complimentary consultation with Dr. Chris scheduled today.",
+     "html": "Talk to the Grand Mission team and get your complimentary consultation with Dr. Chris scheduled today."
+    },
+    {
+     "k": "a",
+     "t": "CALL (703) 844-2975",
+     "href": "tel:(703)844-2975",
+     "cls": "ty-head__logo lw-btn ty-cta__call"
+    },
+    {
+     "k": "p",
+     "t": "★★★★★ 320+ five star reviews",
+     "html": "<span class=\"ty-cta__stars\" data-asw-org-font-size=\"13\" style=\"font-size: 13px;\">★★★★★</span>320+ five star reviews"
+    },
+    {
+     "k": "p",
+     "t": "We will walk through your options in about two minutes.",
+     "html": "We will walk through your options in about two minutes."
+    },
+    {
+     "k": "p",
+     "t": "CALL",
+     "html": "Call"
+    },
+    {
+     "k": "p",
+     "t": "(703) 844-2975",
+     "html": "<a href=\"tel:(703)844-2975\" class=\"ty-cta__fact-link\" data-asw-org-font-size=\"14\" style=\"font-size: 14px;\">(703) 844-2975</a>"
+    },
+    {
+     "k": "p",
+     "t": "VISIT",
+     "html": "Visit"
+    },
+    {
+     "k": "p",
+     "t": "9027 Silverbrook Rd Ste. FFairfax Station, VA 22039",
+     "html": "<a rel=\"noopener\" target=\"_blank\" href=\"https://maps.google.com/?q=9027+Silverbrook+Rd+Ste+F+Fairfax+Station+VA+22039\" class=\"ty-cta__fact-link\" data-asw-org-font-size=\"17\" style=\"font-size: 17px;\">9027 Silverbrook Rd Ste. F<span data-asw-org-font-size=\"17\" style=\"font-size: 17px;\">Fairfax Station, VA 22039</span></a>"
+    },
+    {
+     "k": "p",
+     "t": "HOURS",
+     "html": "Hours"
+    },
+    {
+     "k": "p",
+     "t": "Mon & Tue: 8am to 5pm ‍Wed & Thu: 8am to 4pm ‍Fri: 8am to 1pm",
+     "html": "Mon &amp; Tue: 8am to 5pm<br>‍<span data-asw-org-font-size=\"17\" style=\"font-size: 17px;\">Wed &amp; Thu: 8am to 4pm<br>‍</span><span data-asw-org-font-size=\"17\" style=\"font-size: 17px;\">Fri: 8am to 1pm</span>"
+    }
+   ]
+  },
+  {
+   "i": 6,
+   "tag": "footer",
+   "cls": "ty-foot",
+   "domId": null,
+   "items": [
+    {
+     "k": "p",
+     "t": "Grand Mission Dentistry, Dr. William Sung DMD 8620 Grand Mission Blvd Ste E, Richmond, TX 77407.",
+     "html": "Grand Mission Dentistry, Dr. William Sung DMD<br><a href=\"https://maps.app.goo.gl/EeX5CMrv2yQfDC8i6\" target=\"_blank\" data-asw-org-font-size=\"13\" style=\"font-size: 13px;\"><span class=\"text-span-22\" data-asw-org-font-size=\"13\" style=\"font-size: 13px;\"><strong>8620 Grand Mission Blvd Ste E,<br>Richmond, TX 77407</strong></span></a><span class=\"text-span-22\" data-asw-org-font-size=\"13\" style=\"font-size: 13px;\">.</span>"
+    },
+    {
+     "k": "a",
+     "t": "Privacy Policy",
+     "href": "/privacy-policy",
+     "cls": "imp-a-6"
+    },
+    {
+     "k": "a",
+     "t": "Terms of Service",
+     "href": "/terms-of-service",
+     "cls": "imp-a-6"
+    },
+    {
+     "k": "t",
+     "tag": "span",
+     "t": "© 2026 Grand Mission Dentistry of Richmond"
+    },
+    {
+     "k": "p",
+     "t": "Individual results vary based on each patient's oral health, anatomy and treatment plan. Nothing on this page is a diagnosis or a promise of a specific outcome. Candidacy for cosmetic treatment is determined at a clinical examination with Dr. Sung. Pricing shown is a typical range and is confirmed in writing after your evaluation. A member of our team confirms full details when scheduling.",
+     "html": "Individual results vary based on each patient's oral health, anatomy and treatment plan. Nothing on this page is a diagnosis or a promise of a specific outcome. Candidacy for cosmetic treatment is determined at a clinical examination with Dr. Sung. Pricing shown is a typical range and is confirmed in writing after your evaluation. A member of our team confirms full details when scheduling."
+    }
+   ]
+  }
+ ]
+}
