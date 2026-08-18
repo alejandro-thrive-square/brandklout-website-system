@@ -235,6 +235,20 @@ template leaves a `.camp_video_slot` marker and the builder creates the element 
 video"*. Same family as the Text Field placeholder gap. The element is created and native; **the
 URL has to be pasted once in the Designer** (`https://www.youtube.com/watch?v=GefKg1nID9w`).
 
+### Bind images at BUILD time by using the asset's own hostedUrl
+
+**This is the fix; everything in the next section is why you should not need it.**
+
+`data_whtml_builder` binds an `<img>` to a real Webflow asset when — and only when — the `src` is
+the asset's **`hostedUrl`** (the `s3.amazonaws.com/webflow-prod-assets/…` one from `get_asset`).
+Given the `cdn.prod.website-files.com` URL the design carries, it answers *"does not exist in asset
+library"* and inserts an unmanaged image.
+
+With the src rewritten the whole page comes back
+`status: success` — *"7 image(s) linked to existing assets in the library"*, zero warnings — and
+no post-pass is needed at all. `build-page.mjs` does the rewrite itself (asset id from the filename
+prefix → `get_asset` → `hostedUrl`), so the design file keeps its readable CDN URLs.
+
 ### `set_image_asset` TOGGLES — never write a bound image twice
 
 whtml_builder will not attach an asset from an `<img src>` (*"does not exist in asset library"*) —
@@ -264,8 +278,19 @@ converges. `GET /v2/assets` also 429s under a loop — that is a rate limit, not
 - The image pairing is checked two ways before any write: the (own class, parent class) sequence
   must match the design element-for-element, and where the alt says before/after the bound file's
   name must agree. An off-by-one here puts the surgeon's portrait in the hero.
-- **A screenshot probe must scroll first.** Judging images without scrolling reported 4 of 7
-  "broken" that were all HTTP 200 — they simply had not lazy-loaded yet.
+- **`captureBeyondViewport` does not load lazy images, and scrolling first does not fix it.**
+  The full-page capture renders the whole document in one pass, so every below-the-fold `<img>`
+  paints as an empty box and the probe calls it broken. It reported 6 of 7 broken at 1440 and 0 of
+  7 at 767 — same page, same URLs, all HTTP 200. A **viewport-sized capture** after a real wait
+  shows the truth: the three images above the fold are `complete` with real `naturalWidth`, the
+  rest are simply not loaded yet, which is correct browser behaviour.
+  So: use the tall capture to judge **layout**, and a viewport capture to judge **images**. Never
+  report a lazy image as broken.
+- **A probe that returns nothing is a failure, not a pass.** `shoot.mjs` marks the width
+  unverified rather than recording a clean result.
+- **`get_settings` reads are unreliable right after a write.** The builder reported all 7 images
+  linked with `status: success`, while `get_settings` said 2 — and the published page proves the
+  images resolve. Prefer the builder's own result and the published page over an immediate read.
 - **A probe that returns nothing is a failure, not a pass.** `shoot.mjs` marks the width
   unverified rather than recording a clean result.
 
@@ -309,6 +334,20 @@ markup-only inserts.
 
 > The probe created six `campaign-*` classes; they have been removed again so the site vocabulary
 > stays clean until the real `camp_` layer is authored in P4.
+
+## Open questions for the user
+
+1. **Call tracking rewrites the phone numbers.** The design says `(303) 421-7611`; the published
+   v2 page renders `(983) 955-0387` in the announce bar, the header and the hero CTA. That is a
+   site-wide call-tracking script swapping numbers at runtime, not a build error — but the tracking
+   pool needs to be correct for these new pages, and each campaign historically had its own number.
+2. **Relume utility values do not match the client's approved design.** `padding-section-large` is
+   7rem/112px against the design's 104px; `heading-style-h1` is 3.5rem/56px against the design's
+   74px; `padding-global` is 5% against a fixed 24px gutter. The build keeps the **design's**
+   values in `camp_` classes and takes client-first for structure, naming and reuse. If the pages
+   should instead snap to the existing style guide, that is a different (and visible) decision.
+3. **The `YouTubeVideo` URL needs one Designer paste** — the setting is unreachable over the API.
+4. The `sienna-accessibility` widget is present on the v2 pages too (it is site-wide).
 
 ## Hard rules for this build
 

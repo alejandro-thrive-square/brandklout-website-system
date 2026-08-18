@@ -33,7 +33,47 @@ if (kids.length) {
 
 /* ------------------------------------------------------------- insert ----- */
 
-const html = fs.readFileSync(htmlFile, 'utf8').trim();
+let html = fs.readFileSync(htmlFile, 'utf8').trim();
+
+/* --------------------------------------------- resolve images to assets --- */
+/**
+ * The builder binds an <img> to a real Webflow asset ONLY when the src is the
+ * asset's own `hostedUrl` (the s3.amazonaws.com one). Given the CDN URL the
+ * design carries it answers "does not exist in asset library", inserts an
+ * unmanaged image, and the asset has to be attached afterwards with
+ * set_image_asset — which toggles, is eventually consistent, and cost this
+ * build three passes that each made it worse.
+ *
+ * Rewriting the src here removes that whole class of failure: the asset is
+ * bound at build time, `status: success`, no warning. The design file keeps the
+ * readable CDN URLs.
+ *
+ * The asset id needs no lookup — Webflow prefixes every filename with it.
+ */
+{
+  const ids = new Map();
+  for (const m of html.matchAll(/<img\b[^>]*\bsrc="([^"]+)"/g)) {
+    const file = decodeURIComponent(m[1].split('/').pop() || '');
+    const id = (file.match(/^([0-9a-f]{24})_/) || [])[1];
+    if (id) ids.set(m[1], id);
+  }
+  const unique = [...new Set(ids.values())];
+  const hosted = new Map();
+  for (const id of unique) {
+    const r = call('data_assets_tool', [{ label: 'a', get_asset: { asset_id: id } }], o);
+    const url = r?.result?.hostedUrl;
+    if (url) hosted.set(id, url);
+    else console.log(`  could not resolve asset ${id} (rate limit? re-run) — that image will be unmanaged`);
+  }
+  let swapped = 0;
+  for (const [src, id] of ids) {
+    if (!hosted.has(id)) continue;
+    html = html.split(`"${src}"`).join(`"${hosted.get(id)}"`);
+    swapped++;
+  }
+  console.log(`resolved ${swapped}/${ids.size} image src(s) to their asset hostedUrl`);
+}
+
 console.log(`inserting ${html.length} bytes of markup…`);
 
 const res = call('data_whtml_builder', [{
