@@ -21,7 +21,16 @@ const topic = process.argv[2];
 if (!topic) { console.log('usage: render-page.mjs <topic>'); process.exit(1); }
 
 const tpl = fs.readFileSync(path.join(V2, '_shared', 'page-template.tokens.html'), 'utf8');
-const content = JSON.parse(fs.readFileSync(path.join(V2, 'content', `${topic}.json`), 'utf8'));
+
+// `_base.json` holds the practice-wide facts every page repeats — header, proof
+// bar, Dr Bennett, footer, image assets, the real reviews. A topic file carries
+// only what differs, and overrides the base where it needs to. Keeping the
+// shared facts in one place is also what stops six pages drifting apart on a
+// credential or a phone number.
+const basePath = path.join(V2, 'content', '_base.json');
+const base = fs.existsSync(basePath) ? JSON.parse(fs.readFileSync(basePath, 'utf8')) : {};
+const topicContent = JSON.parse(fs.readFileSync(path.join(V2, 'content', `${topic}.json`), 'utf8'));
+const content = { ...base, ...topicContent };
 
 const needed = [...new Set([...tpl.matchAll(/\{\{([^}]+)\}\}/g)].map((m) => m[1]))];
 const provided = Object.keys(content).filter((k) => !k.startsWith('_'));

@@ -10,6 +10,8 @@
  *   node build-page.mjs <pageId> <html-file> [--clear]
  */
 import fs from 'node:fs';
+import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { call, SITES } from './wf.mjs';
 
 const [pageId, htmlFile] = process.argv.slice(2);
@@ -57,14 +59,23 @@ let html = fs.readFileSync(htmlFile, 'utf8').trim();
     const id = (file.match(/^([0-9a-f]{24})_/) || [])[1];
     if (id) ids.set(m[1], id);
   }
+  // Cache the id -> hostedUrl map on disk. `GET /v2/assets` 429s quickly, and
+  // the 18 pages share the same handful of images — re-asking per page is what
+  // burned the rate limit and silently left three images unmanaged.
+  const CACHE = path.join(path.dirname(fileURLToPath(import.meta.url)), 'asset-urls.json');
+  const cache = fs.existsSync(CACHE) ? JSON.parse(fs.readFileSync(CACHE, 'utf8')) : {};
+
   const unique = [...new Set(ids.values())];
-  const hosted = new Map();
+  const hosted = new Map(Object.entries(cache));
+  let fetched = 0;
   for (const id of unique) {
+    if (hosted.has(id)) continue;
     const r = call('data_assets_tool', [{ label: 'a', get_asset: { asset_id: id } }], o);
     const url = r?.result?.hostedUrl;
-    if (url) hosted.set(id, url);
+    if (url) { hosted.set(id, url); cache[id] = url; fetched++; }
     else console.log(`  could not resolve asset ${id} (rate limit? re-run) — that image will be unmanaged`);
   }
+  if (fetched) fs.writeFileSync(CACHE, JSON.stringify(cache, null, 1));
   let swapped = 0;
   for (const [src, id] of ids) {
     if (!hosted.has(id)) continue;

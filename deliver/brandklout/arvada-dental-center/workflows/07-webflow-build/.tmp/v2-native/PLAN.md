@@ -157,7 +157,15 @@ and **767**.
 - [ ] **P5 Build implants v2** — 3 pages via `data_whtml_builder`.
 - [ ] **P6 Verify on staging** — publish to the **Webflow subdomain only**
       (`publishToWebflowSubdomain:true`, `customDomains:[]`) and diff against local.
-- [ ] **P7 Replicate** — the other 5 topics × 3 pages, same structure, content swapped.
+- [x] **P7a All six ADS-LANDING pages built, published and verified — 6/6 pass.**
+      `node verify-v2.mjs` compares each published page against its own
+      `04-design/.tmp/v2/<topic>/body.html`: every design string verbatim, all 126 classes
+      present, 7 images, the video element, no leftover tokens and no copy leaked between topics.
+      Page ids in `v2-pages.json`.
+- [ ] **P7b The 12 consult + thank-you pages.** The client reference only covers an ads landing
+      page, so these two layouts still need designing — from the Mason Park equivalents
+      (`new-patient-special-consultation` / `new-patient-thank-you`) unless the user supplies
+      references.
 
 ## The class layer, and the four traps found building it
 
