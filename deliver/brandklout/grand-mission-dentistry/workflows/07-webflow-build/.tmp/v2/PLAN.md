@@ -121,6 +121,33 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: **ALL SIX PAGES PASS THE MOBILE GATE AND CARRY NO PLACEHOLDER COPY.**
+
+  `overflow.mjs` at a TRUE 390px viewport: widest visible content = **390 on all six**, zero
+  offenders. That is the check that produced four blocking failures on Mason Park; putting
+  `white-space: normal` on both FAQ trigger classes up front is what avoided it. The probe
+  intersects every box with its own `overflow-x` ancestors, so the consultation pages'
+  deliberately clipped watermark rail (~5,600px inside an `overflow:hidden` section) is not
+  re-reported as a defect — and it never trusts `scrollWidth`, which is vacuous here because
+  the site head sets `body { overflow-x: clip }`.
+
+  **A SECOND Webflow placeholder, found only by looking at the render.** A Heading built from
+  child elements keeps the string "Heading" — already known — but a **PARAGRAPH built the same
+  way keeps a LOREM IPSUM paragraph**, and two of them shipped visibly on the thank-you hero
+  and its reassurance bar. `fix-defaults.mjs` now scans Paragraph and Blockquote as well as
+  Heading, and matches the lorem opener. 7 nodes per thank-you page, 1 per consultation page,
+  2 on the cosmetic LP.
+
+  **`headings()` was dropping anything after the accent run.** "Any questions <accent>before
+  you call</accent>?" came out as "Any questions ? before you call". It now returns a `tail`,
+  and the builders FOLD it into the accent span rather than adding an element — an extra span
+  changes the section's run count and sends `sync-text` down its fallback path.
+
+  **The `box` role drops explicit pixel widths.** Its "fills the parent" guard cannot tell a
+  36px token chip from a full-width box, so every small round element (step numbers, why-card
+  icons, badge dot, risk marks, the FAQ sign, the doctor avatar) stretched to full width. Sizes
+  restored explicitly.
+
 - 2026-08-18: **ALL SIX v2 PAGES ARE BUILT AND LIVE ON STAGING.** Verified on the served HTML:
 
   | page | sections | images | empty video | em dashes | Webflow defaults | leakage |

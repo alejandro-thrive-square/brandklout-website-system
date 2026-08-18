@@ -88,10 +88,18 @@ export function headings(slug) {
   for (const m of html.matchAll(/<h([12])[^>]*>([\s\S]*?)<\/h[12]>/g)) {
     const inner = m[2];
     const acc = inner.match(/<(?:span|a)[^>]*class="[^"]*\baccent\b[^"]*"[^>]*>([\s\S]*?)<\/(?:span|a)>/);
-    if (!acc) { out.push({ level: +m[1], head: strip(inner), accent: "", accentFirst: false }); continue; }
-    const accentFirst = inner.indexOf(acc[0]) < 4;
-    const rest = strip(inner.replace(acc[0], ""));
-    out.push({ level: +m[1], head: rest, accent: strip(acc[1]), accentFirst });
+    if (!acc) { out.push({ level: +m[1], head: strip(inner), accent: "", tail: "", accentFirst: false }); continue; }
+    const at = inner.indexOf(acc[0]);
+    const accentFirst = at < 4;
+    // anything after the accent run is a TAIL — two headings here end "…?" past the accent,
+    // and folding it into the head reads as "Any questions ? before you call"
+    out.push({
+      level: +m[1],
+      head: strip(inner.slice(0, at)),
+      accent: strip(acc[1]),
+      tail: strip(inner.slice(at + acc[0].length)),
+      accentFirst,
+    });
   }
   return out;
 }

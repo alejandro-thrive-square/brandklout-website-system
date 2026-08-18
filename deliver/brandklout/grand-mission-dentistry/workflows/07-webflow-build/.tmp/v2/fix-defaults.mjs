@@ -28,13 +28,19 @@ const read = () => walk(call("data_element_tool", {
 let nodes = read();
 
 // ---- 1. the stray "Heading" text node on every multi-child heading ----------------
+/** Webflow's placeholder copy. A Heading built from child elements keeps "Heading"; a
+ *  PARAGRAPH built the same way keeps a lorem ipsum paragraph, which shipped visibly on the
+ *  thank-you hero and its reassurance bar. */
+const isDefault = (t = "") => /^(Heading|Text|Paragraph|Block)$/.test(t.trim())
+  || /^Lorem ipsum dolor sit amet/.test(t.trim());
+
 const strays = [];
 for (const n of nodes) {
-  if (n.type !== "Heading" || !(n.children || []).length) continue;
+  if (!/^(Heading|Paragraph|Blockquote)$/.test(n.type) || !(n.children || []).length) continue;
   const kids = n.children;
   if (kids.length < 2) continue;                       // a plain heading owns its String
   for (const k of kids) {
-    if (k.type === "String" && /^(Heading|Text|Paragraph|Block)$/.test((k.textContent || "").trim())) {
+    if (k.type === "String" && isDefault(k.textContent)) {
       strays.push(k.id.element);
     }
   }
@@ -88,7 +94,7 @@ call("data_element_settings_tool", {
 
 // ---- read back ---------------------------------------------------------------------
 nodes = read();
-const left = nodes.filter((n) => n.type === "String" && /^(Heading|Text|Paragraph|Block)$/.test((n.textContent || "").trim())
+const left = nodes.filter((n) => n.type === "String" && isDefault(n.textContent)
   && (nodes.find((p) => (p.children || []).some((c) => c.id.element === n.id.element))?.children.length ?? 0) > 1);
 console.log(left.length ? `STILL ${left.length} stray default node(s)` : "headings clean");
 for (const n of nodes.filter((x) => x.type === "FormTextInput")) {

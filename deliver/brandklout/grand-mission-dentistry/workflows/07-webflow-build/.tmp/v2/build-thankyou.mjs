@@ -68,7 +68,7 @@ const heading = (i, cls, level = 2) => {
       ? [dom("span", "consult_h2_accent", { set_text: { text: accent + " " } }),
          dom("span", null, { set_text: { text: head } })]
       : [dom("span", null, { set_text: { text: head + " " } }),
-         dom("span", "consult_h2_accent", { set_text: { text: accent } })])
+         dom("span", "consult_h2_accent", { set_text: { text: accent + (h.tail || "") } })])
     : [dom("span", null, { set_text: { text: head } })];
   return el("Heading", cls, { set_heading_level: { heading_level: level } }, ...kids);
 };
