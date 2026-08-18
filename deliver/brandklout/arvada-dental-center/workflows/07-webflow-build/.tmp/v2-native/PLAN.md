@@ -128,6 +128,14 @@ and **767**.
 - [x] **P4 Class layer — DONE and gated.** `04-design/.tmp/v2/_shared/camp.css` is the single
       source; **109 base classes + 18 combos, 128 selectors, 781 declarations, all verified present
       on the site at every breakpoint** (`node verify-classes.mjs`). Page body is empty again.
+- [x] **P5 First page BUILT and on staging.** `Emergency Dentist v2`
+      (`6a83f5128cf531bbb68af94a`, `/emergency-dentist-ads-landing-v2`) — 469 native elements,
+      **126/126 classes applied, each on the right number of elements**. Live at
+      `https://arvadadentalcenter.webflow.io/emergency-dentist-ads-landing-v2`.
+      Screenshots + probe in `shots-em-v2/`. **Zero horizontal overflow at 1440/991/767/479**, and
+      the h1 ramp measures 74 / 53 / 48 / 42 px — exactly the authored steps.
+      Remaining on this page: 2 of 7 images still to bind (see the toggle note), and the YouTube
+      URL (see below).
 - [ ] **P1 Reference spec** — screenshots + section-by-section spec from the client reference.
 - [x] **P2 Mason Park pattern** — read and adopted; see "Naming and structure" below.
 - [ ] **P3 Local v2 source** — author the three Dental Implants pages locally in the reference's
@@ -196,6 +204,70 @@ The verifier compares after the same expansion, or it reports dozens of phantom 
 Re-sending a value a style already holds is **not** a harmless no-op — the multiplayer server
 answers `[Conflict] The operation could not be applied to the style block store`, which reads like
 a failure when nothing is wrong. `sync-combos.mjs` diffs before writing.
+
+## Building the markup — what the first page taught
+
+`make-template.mjs` (reference → `page-template.html`) → `check-html.mjs` → `build-page.mjs` →
+`map-assets.mjs` → `shoot.mjs`.
+
+**The build sends NO css.** Every camp_ class already exists, and the builder applies an existing
+class by name. 19KB of markup, one action, 469 elements.
+
+### One base class per element — and a class that owns combos can never be secondary
+
+`class="camp_container camp_split"` silently lost `camp_split` on all six sections, taking the main
+layout grid of half the page with it. Two globals on one element is *usually* fine
+(`camp_container camp_announce_inner` works), but **`camp_split` owns combos**
+(`is-result`/`is-provider`/`is-video`/`is-faq`), and a class that owns combos cannot also ride as a
+secondary class on another base.
+
+Fixed by splitting the concerns, which is the client-first shape anyway:
+`.camp_container > .camp_split.is-result`. After that: **126/126 classes applied**.
+
+### `<iframe>` is dropped without a word
+
+Webflow has no iframe element, so the video simply vanished — no warning, an empty card. The native
+answer is the **`YouTubeVideo`** element type (not an embed, so it stays inside the rules). The
+template leaves a `.camp_video_slot` marker and the builder creates the element into it.
+
+**Its `video` setting is unreachable from the Data API**: `static_text`, `static_video`,
+`static_json` and `static_link` are all refused with *"Invalid value for setting video: expected
+video"*. Same family as the Text Field placeholder gap. The element is created and native; **the
+URL has to be pasted once in the Designer** (`https://www.youtube.com/watch?v=GefKg1nID9w`).
+
+### `set_image_asset` TOGGLES — never write a bound image twice
+
+whtml_builder will not attach an asset from an `<img src>` (*"does not exist in asset library"*) —
+it matches by URL, and the CDN URL on an `<img>` never equals the `s3.amazonaws.com` URL
+`list_assets` reports. No search is needed though: **Webflow prefixes every filename with the asset
+id**, so `…/693fa144…f7_arvada-dentist-1.png.webp` *is* asset `693fa144…f7`.
+
+The dangerous part is the write:
+
+- **It is eventually consistent.** Reading the element straight back says `assetId: unset` even
+  when the write was fine.
+- **Writing an already-bound image UNBINDS it.**
+
+Together those make the obvious write-then-verify-then-retry loop destructive: it read "unset",
+wrote again, and drove the page from 6/7 bound down to 5/7 to 4/7 while reporting 1/7. The old
+build's note that "re-running the script is safe and idempotent" is **wrong for this tool**.
+
+So `map-assets.mjs` writes only images whose current `assetId` is not already the wanted one, at
+most once per run, and verification is a **separate `--check` run in a fresh process**. Each run
+converges. `GET /v2/assets` also 429s under a loop — that is a rate limit, not a missing asset.
+
+### Verify with signals that actually exist
+
+- `get_attributes` returns `[]` for an Image. `assetId` and `altText` are **settings**, read with
+  `data_element_settings_tool` `get_settings` `type:"all_raw_settings"`. An alt check built on
+  `get_attributes` passes vacuously and proves nothing — this file had one until it was caught.
+- The image pairing is checked two ways before any write: the (own class, parent class) sequence
+  must match the design element-for-element, and where the alt says before/after the bound file's
+  name must agree. An off-by-one here puts the surgeon's portrait in the hero.
+- **A screenshot probe must scroll first.** Judging images without scrolling reported 4 of 7
+  "broken" that were all HTTP 200 — they simply had not lazy-loaded yet.
+- **A probe that returns nothing is a failure, not a pass.** `shoot.mjs` marks the width
+  unverified rather than recording a clean result.
 
 ## Naming and structure — copied from Mason Park
 

@@ -1,0 +1,584 @@
+Body
+  Block<div> .camp_page
+    Section<section> .camp_announce
+      Block<div> .camp_container.camp_announce_inner
+        Block<div>
+          Span .camp_announce_lead
+            "Urgent dental visits"
+          Span .camp_announce_note
+            "· Monday–Friday appointments"
+        Link .camp_announce_link
+          "(303) 421-7611"
+    Section<section> .camp_header
+      Block<div> .camp_container.camp_header_inner
+        Link .camp_header_brand
+          Image .camp_header_logo
+        Block<div> .camp_header_actions
+          Span .camp_header_status
+            Span .camp_header_status-icon
+              "◷"
+            "Open weekdays · See hours below"
+          Link .camp_header_phone
+            Span .camp_header_phone-icon
+              "☎"
+            "(303) 421-7611"
+          Link .camp_button.is-light.is-small.camp_header_cta
+            "Request urgent visit"
+            Span .camp_button_chev
+              "›"
+    Block<main> .main-wrapper
+      Section<section> .camp_hero
+        Block<div> .camp_hero_ring
+        Block<div> .camp_container.camp_hero_grid
+          Block<div>
+            Block<div> .camp_eyebrow
+              "EMERGENCY DENTIST IN ARVADA"
+            Heading<h1> .camp_h1
+              "In pain? Call first. We’ll find the earliest visit."
+            Paragraph .camp_hero_lead
+              "Toothache, swelling, a broken tooth, lost crown, or dental injury shou…"
+            Block<div> .camp_button-row
+              Link .camp_button
+                "Call (303) 421-7611"
+                Span .camp_button_chev
+                  "›"
+              Link .camp_button.is-outline
+                "Request an urgent visit"
+                Span .camp_button_chev
+                  "›"
+            Block<div> .camp_hero_microproof
+              "Emergency guidance · Digital imaging · Comprehensive care"
+            Block<div> .camp_urgent-note
+              Span .camp_urgent-note_title
+                "Call 911 or go to an ER"
+              "for trouble breathing or swallowing, uncontrolled bleeding, serious fa…"
+          Block<div> .camp_hero_visual
+            Block<div> .camp_hero_promise
+              "No-pressure guidance. Understand your options before you decide."
+            Block<div> .camp_hero_media
+              Image .camp_hero_img
+            Block<div> .camp_hero_badge
+              Block<div> .camp_hero_badge-title
+                "Urgent dental visits"
+              Block<div> .camp_hero_badge-sub
+                "Scheduled by need and availability"
+      Section<section> .camp_proof
+        Block<div> .camp_container.camp_proof_grid
+          Block<div> .camp_proof_item
+            Block<div> .camp_proof_year
+              "4.9"
+            Block<div>
+              Block<div> .camp_proof_title
+                "Healthgrades rating"
+              Block<div> .camp_proof_sub
+                "16 public reviews"
+          Block<div> .camp_proof_item
+            Block<div> .camp_proof_year
+              "24+"
+            Block<div>
+              Block<div> .camp_proof_title
+                "Years in dentistry"
+              Block<div> .camp_proof_sub
+                "University of Iowa · 2001"
+          Block<div> .camp_proof_item
+            Block<div> .camp_proof_year
+              "5280"
+            Block<div>
+              Block<div> .camp_proof_title
+                "Top Dentist"
+              Block<div> .camp_proof_sub
+                "Recognized by 5280 Magazine"
+          Block<div> .camp_proof_item
+            Block<div> .camp_proof_year
+              "IV"
+            Block<div>
+              Block<div> .camp_proof_title
+                "Sedation certified"
+              Block<div> .camp_proof_sub
+                "Moderate IV sedation"
+      Section<section> .camp_section
+        Block<div> .camp_container
+          Block<div>
+            Block<div> .camp_eyebrow
+              "WHAT YOUR FIRST STEP INCLUDES"
+            Heading<h2> .camp_h2
+              "Tell us what hurts. We’ll help you act quickly."
+            Paragraph .camp_text
+              "When you call, the team assesses urgency, gives immediate guidance, an…"
+            Block<div> .camp_action-offset
+              Link .camp_button.is-navy
+                "Request an urgent visit"
+                Span .camp_button_chev
+                  "›"
+          Block<div> .camp_offer-card
+            Block<div> .camp_offer-card_top
+              Block<div> .camp_offer-card_kicker
+                "START HERE"
+              Block<div> .camp_offer-card_price
+                "What your visit may include"
+            Block<div> .camp_check-list
+              Block<div> .camp_check-item
+                Span .camp_check-icon
+                  "✓"
+                Span
+                  "Urgent visit based on availability"
+              Block<div> .camp_check-item
+                Span .camp_check-icon
+                  "✓"
+                Span
+                  "Focused emergency evaluation"
+              Block<div> .camp_check-item
+                Span .camp_check-icon
+                  "✓"
+                Span
+                  "Targeted digital X-rays when needed"
+              Block<div> .camp_check-item
+                Span .camp_check-icon
+                  "✓"
+                Span
+                  "Relief-focused treatment options"
+              Block<div> .camp_check-item
+                Span .camp_check-icon
+                  "✓"
+                Span
+                  "Clear treatment or follow-up plan"
+            Block<div> .camp_fine-print
+              "An online request is not a confirmed appointment until the office spea…"
+      Section<section> .camp_section.is-navy
+        Block<div> .camp_container
+          Block<div> .camp_story_media
+            Image .camp_story_img
+            Block<div> .camp_story_caption
+              "ARVADA, CO · ONE FAMILIAR TEAM"
+          Block<div>
+            Block<div> .camp_eyebrow
+              "RELIEF STARTS WITH ONE CALL"
+            Heading<h2> .camp_h2.is-on-dark
+              "You do not need to diagnose the problem before asking for help."
+            Paragraph .camp_text.is-on-dark
+              "Severe pain and swelling make it hard to think. Arvada Dental Center c…"
+            Block<div> .camp_action-offset
+              Link .camp_text-link.is-on-dark
+                "Take the first step"
+                Span .camp_text-link_chev
+                  "›"
+      Section<section> .camp_section
+        Block<div> .camp_container
+          Block<div> .camp_heading
+            Block<div> .camp_eyebrow
+              "WHY ARVADA DENTAL CENTER"
+            Heading<h2> .camp_h2
+              "More confidence in the care—and the people providing it."
+          Block<div> .camp_benefits_grid
+            Block<article> .camp_benefit
+              Block<div> .camp_benefit_number
+                "01"
+              Heading<h3> .camp_h3
+                "Prompt guidance"
+              Paragraph .camp_benefit_text
+                "Call first so the team can understand your symptoms, assess urgency, a…"
+            Block<article> .camp_benefit
+              Block<div> .camp_benefit_number
+                "02"
+              Heading<h3> .camp_h3
+                "Advanced diagnostics"
+              Paragraph .camp_benefit_text
+                "3D CBCT imaging and digital scanning help the team evaluate complex pr…"
+            Block<article> .camp_benefit
+              Block<div> .camp_benefit_number
+                "03"
+              Heading<h3> .camp_h3
+                "Comfort options"
+              Paragraph .camp_benefit_text
+                "Dr. Bennett is certified in moderate IV sedation, with comfort options…"
+            Block<article> .camp_benefit
+              Block<div> .camp_benefit_number
+                "04"
+              Heading<h3> .camp_h3
+                "Care under one roof"
+              Paragraph .camp_benefit_text
+                "Restorative care, oral surgery, crowns, implants, and an in-house lab …"
+      Section<section> .camp_section.is-sand
+        Block<div> .camp_container
+          Block<div>
+            Block<div> .camp_eyebrow
+              "PROOF YOU CAN SEE"
+            Heading<h2> .camp_h2
+              "Urgent care can protect both comfort and confidence."
+            Paragraph .camp_text
+              "This clinical case is from Arvada Dental Center’s official patient gal…"
+            Paragraph .camp_authenticity
+              "Images shown are from Arvada Dental Center’s official patient gallery.…"
+          Block<div>
+            Block<div> .camp_result-image
+              Block<div> .camp_result-panel
+                Image .camp_result-panel_img
+                Span .camp_result-label
+                  "Before"
+              Block<div> .camp_result-panel
+                Image .camp_result-panel_img
+                Span .camp_result-label
+                  "After"
+            Block<div> .camp_authenticity
+              "Arvada Dental Center restorative case · Individual results vary."
+      Section<section> .camp_section
+        Block<div> .camp_container
+          Block<div> .camp_heading.is-center
+            Block<div> .camp_eyebrow
+              "YOUR PATH, MAPPED CLEARLY"
+            Heading<h2> .camp_h2
+              "Know what comes next before you begin."
+          Block<div> .camp_journey_grid
+            Block<article> .camp_journey_step
+              Block<div> .camp_journey_num
+                "01"
+              Heading<h3> .camp_h3
+                "Call now"
+              Paragraph .camp_journey_text
+                "Describe the pain, injury, swelling, or bleeding. The team will offer …"
+            Block<article> .camp_journey_step
+              Block<div> .camp_journey_num
+                "02"
+              Heading<h3> .camp_h3
+                "Focused assessment"
+              Paragraph .camp_journey_text
+                "A targeted exam and digital images, when needed, help identify the cau…"
+            Block<article> .camp_journey_step
+              Block<div> .camp_journey_num
+                "03"
+              Heading<h3> .camp_h3
+                "Comfort first"
+              Paragraph .camp_journey_text
+                "The team discusses immediate relief and infection risk, with sedation …"
+            Block<article> .camp_journey_step
+              Block<div> .camp_journey_num
+                "04"
+              Heading<h3> .camp_h3
+                "A clear plan"
+              Paragraph .camp_journey_text
+                "You review recommended treatment, expected timing, and estimated costs…"
+      Section<section> .camp_section
+        Block<div> .camp_container
+          Block<div> .camp_provider_photo
+            Image .camp_provider_img
+            Block<div> .camp_provider_caption
+              Block<div> .camp_provider_caption-name
+                "Dr. Gregory Bennett, DDS"
+              Block<div> .camp_provider_caption-role
+                "Implant, restorative, and surgical dentistry"
+          Block<div>
+            Block<div> .camp_eyebrow
+              "MEET DR. GREGORY BENNETT"
+            Heading<h2> .camp_h2
+              "Calm expertise matters most when you are hurting."
+            Paragraph .camp_text
+              "Dr. Bennett’s advanced training, comprehensive treatment experience, a…"
+            Paragraph .camp_text
+              "A University of Iowa dental graduate, Dr. Bennett has practiced dentis…"
+            Block<div> .camp_credential-list
+              Block<div> .camp_credential-text
+                Span .camp_credential_check
+                  "✓"
+                "24+ years of experience"
+              Block<div> .camp_credential-text
+                Span .camp_credential_check
+                  "✓"
+                "Moderate IV sedation certified"
+              Block<div> .camp_credential-text
+                Span .camp_credential_check
+                  "✓"
+                "Advanced surgical training"
+              Block<div> .camp_credential-text
+                Span .camp_credential_check
+                  "✓"
+                "In-house lab and 3D imaging"
+            Block<div> .camp_button-row
+              Link .camp_button.is-navy
+                "Request an urgent visit"
+                Span .camp_button_chev
+                  "›"
+              Link .camp_text-link
+                "Call Dr. Bennett’s team"
+                Span .camp_text-link_chev
+                  "›"
+      Section<section> .camp_section.is-blue
+        Block<div> .camp_container
+          Block<div>
+            Block<div> .camp_eyebrow
+              "PATIENT STORY"
+            Heading<h2> .camp_h2.is-on-dark
+              "Real reassurance from someone who sat in the chair."
+            Paragraph .camp_text.is-on-dark
+              "See how a patient describes the care received for dental pain and infe…"
+            Block<div> .camp_video_meta
+              "Arvada Dental Center patient story · Practice video"
+          Block<div> .camp_video_card
+      Section<section> .camp_section.is-mist
+        Block<div> .camp_container
+          Block<div> .camp_heading.is-center
+            Block<div> .camp_eyebrow
+              "PATIENT-BACKED TRUST"
+            Heading<h2> .camp_h2
+              "Why Arvada patients continue choosing Dr. Bennett’s team."
+            Paragraph .camp_text
+              "These summaries are based on patient stories published by Arvada Denta…"
+          Block<div> .camp_reviews_grid
+            Block<article> .camp_review
+              Block<div> .camp_review_stars
+                "★★★★★"
+              Paragraph .camp_review_quote
+                "One patient story follows the change from dental pain and infection to…"
+              Block<div> .camp_review_name
+                "Patient story"
+              Block<div> .camp_review_meta
+                "Pain and infection · Practice video"
+            Block<article> .camp_review
+              Block<div> .camp_review_stars
+                "★★★★★"
+              Paragraph .camp_review_quote
+                "Wick shares how comprehensive implant care helped him return to eating…"
+              Block<div> .camp_review_name
+                "Wick"
+              Block<div> .camp_review_meta
+                "Function and confidence · Practice video"
+            Block<article> .camp_review
+              Block<div> .camp_review_stars
+                "★★★★★"
+              Paragraph .camp_review_quote
+                "John’s story highlights a life-changing smile transformation supported…"
+              Block<div> .camp_review_name
+                "John"
+              Block<div> .camp_review_meta
+                "Smile transformation · Practice video"
+          Block<div> .camp_center
+            Link .camp_text-link
+              "Watch more patient stories"
+              Span .camp_text-link_chev
+                "›"
+      Section<section> .camp_section
+        Block<div> .camp_container
+          Block<div>
+            Block<div> .camp_eyebrow
+              "CLEAR ANSWERS"
+            Heading<h2> .camp_h2
+              "Questions worth asking before you decide."
+            Paragraph .camp_text
+              "Still unsure? A conversation with the team can help you understand wha…"
+            Block<div> .camp_action-offset
+              Link .camp_button
+                "Ask us at (303) 421-7611"
+                Span .camp_button_chev
+                  "›"
+          Block<div> .camp_faq_list
+            DOM<details> .camp_faq_item
+              DOM<summary> .camp_faq_toggle
+                "What counts as a dental emergency?"
+                Span .camp_faq_plus
+                  "+"
+              Block<div> .camp_faq_answer
+                "Severe or persistent tooth pain, facial or jaw swelling, a knocked-out…"
+            DOM<details> .camp_faq_item
+              DOM<summary> .camp_faq_toggle
+                "What should I do with a knocked-out tooth?"
+                Span .camp_faq_plus
+                  "+"
+              Block<div> .camp_faq_answer
+                "Pick it up by the crown, not the root. Rinse it gently without scrubbi…"
+            DOM<details> .camp_faq_item
+              DOM<summary> .camp_faq_toggle
+                "Can you see me today?"
+                Span .camp_faq_plus
+                  "+"
+              Block<div> .camp_faq_answer
+                "Urgent visits are scheduled according to clinical need and availabilit…"
+            DOM<details> .camp_faq_item
+              DOM<summary> .camp_faq_toggle
+                "Can I get sedation for emergency treatment?"
+                Span .camp_faq_plus
+                  "+"
+              Block<div> .camp_faq_answer
+                "Sedation options are available for appropriate patients and procedures…"
+      Section<section> .camp_cta
+        Block<div> .camp_container.camp_cta_inner
+          Block<div> .camp_cta_text
+            Block<div> .camp_eyebrow
+              "YOUR NEXT STEP CAN BE SIMPLE"
+            Heading<h2> .camp_h2.is-on-dark
+              "Do not wait in pain. Let’s help you get seen."
+            Paragraph .camp_text.is-on-dark
+              "Call now for the fastest guidance and earliest appropriate opening bas…"
+          Block<div> .camp_button-row
+            Link .camp_button
+              "Call (303) 421-7611"
+              Span .camp_button_chev
+                "›"
+            Link .camp_button.is-outline
+              "Request an urgent visit"
+              Span .camp_button_chev
+                "›"
+    Section<section> .camp_footer
+      Block<div> .camp_container
+        Block<div> .camp_footer_grid
+          Block<div> .camp_footer_col
+            Image .camp_footer_logo
+            Paragraph .camp_footer_text
+              "World-class dental care with small-town appeal for Arvada and nearby c…"
+          Block<div> .camp_footer_col
+            Block<div> .camp_footer_heading
+              "Contact"
+            Link .camp_footer_link
+              "(303) 421-7611"
+            Link .camp_footer_link
+              "6695 Wadsworth Blvd"
+              
+              "Arvada, CO 80003"
+          Block<div> .camp_footer_col
+            Block<div> .camp_footer_heading
+              "Office hours"
+            Block<div> .camp_footer_text
+              "Monday–Friday"
+              
+              "8:00 AM–5:00 PM"
+              
+              "Saturday–Sunday closed"
+          Block<div> .camp_footer_col
+            Block<div> .camp_footer_heading
+              "Ready?"
+            Link .camp_button.is-light.is-small
+              "Request visit"
+              Span .camp_button_chev
+                "›"
+        Block<div> .camp_footer_bottom
+          Span
+            "© 2026 Arvada Dental Center"
+            "&"
+            "Implants"
+          Span
+            "Urgent visits depend on availability. Individual results vary."
+    Block<div> .camp_mobile-bar
+      Link .camp_mobile-bar_link.is-call
+        "Call now"
+      Link .camp_mobile-bar_link
+        "Request visit"
+
+=== 120 distinct classes ===
+camp_action-offset (3)
+camp_announce (1)
+camp_announce_inner (1)
+camp_announce_lead (1)
+camp_announce_link (1)
+camp_announce_note (1)
+camp_authenticity (2)
+camp_benefit (4)
+camp_benefit_number (4)
+camp_benefit_text (4)
+camp_benefits_grid (1)
+camp_button (9)
+camp_button_chev (9)
+camp_button-row (3)
+camp_center (1)
+camp_check-icon (5)
+camp_check-item (5)
+camp_check-list (1)
+camp_container (15)
+camp_credential_check (4)
+camp_credential-list (1)
+camp_credential-text (4)
+camp_cta (1)
+camp_cta_inner (1)
+camp_cta_text (1)
+camp_eyebrow (11)
+camp_faq_answer (4)
+camp_faq_item (4)
+camp_faq_list (1)
+camp_faq_plus (4)
+camp_faq_toggle (4)
+camp_fine-print (1)
+camp_footer (1)
+camp_footer_bottom (1)
+camp_footer_col (4)
+camp_footer_grid (1)
+camp_footer_heading (3)
+camp_footer_link (2)
+camp_footer_logo (1)
+camp_footer_text (2)
+camp_h1 (1)
+camp_h2 (10)
+camp_h3 (8)
+camp_header (1)
+camp_header_actions (1)
+camp_header_brand (1)
+camp_header_cta (1)
+camp_header_inner (1)
+camp_header_logo (1)
+camp_header_phone (1)
+camp_header_phone-icon (1)
+camp_header_status (1)
+camp_header_status-icon (1)
+camp_heading (3)
+camp_hero (1)
+camp_hero_badge (1)
+camp_hero_badge-sub (1)
+camp_hero_badge-title (1)
+camp_hero_grid (1)
+camp_hero_img (1)
+camp_hero_lead (1)
+camp_hero_media (1)
+camp_hero_microproof (1)
+camp_hero_promise (1)
+camp_hero_ring (1)
+camp_hero_visual (1)
+camp_journey_grid (1)
+camp_journey_num (4)
+camp_journey_step (4)
+camp_journey_text (4)
+camp_mobile-bar (1)
+camp_mobile-bar_link (2)
+camp_offer-card (1)
+camp_offer-card_kicker (1)
+camp_offer-card_price (1)
+camp_offer-card_top (1)
+camp_page (1)
+camp_proof (1)
+camp_proof_grid (1)
+camp_proof_item (4)
+camp_proof_sub (4)
+camp_proof_title (4)
+camp_proof_year (4)
+camp_provider_caption (1)
+camp_provider_caption-name (1)
+camp_provider_caption-role (1)
+camp_provider_img (1)
+camp_provider_photo (1)
+camp_result-image (1)
+camp_result-label (2)
+camp_result-panel (2)
+camp_result-panel_img (2)
+camp_review (3)
+camp_review_meta (3)
+camp_review_name (3)
+camp_review_quote (3)
+camp_review_stars (3)
+camp_reviews_grid (1)
+camp_section (9)
+camp_story_caption (1)
+camp_story_img (1)
+camp_story_media (1)
+camp_text (9)
+camp_text-link (3)
+camp_text-link_chev (3)
+camp_urgent-note (1)
+camp_urgent-note_title (1)
+camp_video_card (1)
+camp_video_meta (1)
+is-blue (1)
+is-call (1)
+is-center (2)
+is-light (2)
+is-mist (1)
+is-navy (3)
+is-on-dark (7)
+is-outline (2)
+is-sand (1)
+is-small (2)
+main-wrapper (1)

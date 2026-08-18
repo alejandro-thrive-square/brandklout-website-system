@@ -187,6 +187,12 @@
   padding-right: 22px;
 }
 
+/* The header's own CTA is the only small button that shrinks further on
+   phones — kept as its own class so `is-small` stays generic. */
+.camp_header_cta {
+  flex: none;
+}
+
 /* was .campaign-button:after — the chevron is a real element now */
 .camp_button_chev {
   font-size: 19px;
@@ -294,6 +300,13 @@
 .camp_center {
   margin-top: 35px;
   text-align: center;
+}
+
+/* The reference carried this as an inline style="margin-top:28px" on the three
+   in-section action rows. Inline styles do not survive into Webflow as anything
+   editable, so it is a class. */
+.camp_action-offset {
+  margin-top: 28px;
 }
 
 /* ----------------------------------------------------------------- hero --- */
@@ -765,8 +778,9 @@
   box-shadow: 0 25px 65px rgba(0, 0, 0, 0.2);
 }
 
-/* was .campaign-video_card iframe */
-.camp_video_frame {
+/* The reference used an <iframe>; Webflow has no iframe element, so the slot
+   holds a native YouTubeVideo element instead. */
+.camp_video_slot {
   display: block;
   width: 100%;
   height: 100%;
@@ -1001,7 +1015,7 @@
   .camp_header_brand { width: 170px; }
   .camp_header_logo { width: 160px; }
   .camp_header_phone { display: none; }
-  .camp_button.is-small { padding-left: 14px; padding-right: 14px; font-size: 9px; }
+  .camp_header_cta { padding-left: 14px; padding-right: 14px; font-size: 9px; }
 
   .camp_hero_grid { min-height: 0px; padding: 65px 0px 75px; }
   .camp_h1 { font-size: 48px; }
