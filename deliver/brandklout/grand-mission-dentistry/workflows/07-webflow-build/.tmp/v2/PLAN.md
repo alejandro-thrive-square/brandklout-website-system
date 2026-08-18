@@ -121,6 +121,30 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: **cosmetic-v2 measures correct against the reference.** A direct geometry probe
+  on the live page (after walking it so every lazy image loads) returns the reference's own
+  numbers: gallery images **562x469**, office tiles **378x566 / 378x330 / 378x220**, photo strip
+  and chapter banners to ratio. The page is 12 sections, 32 images, 7 poster links, 1 native
+  form, 7 native `details` FAQ rows, zero HtmlEmbeds, zero em dashes, zero leakage strings.
+
+  **A whole class of defect came from ONE generator gap: the `box` role copied `display` but
+  not `flex-direction`.** Any reference box that happened to be flex silently became a ROW —
+  the journey intro, the chapter cards, the chapter bodies and the video cards all rendered
+  side-by-side. Fixed at the source (the `box` and `container` roles now carry
+  flex-direction/wrap/align/justify/gap), which moved 25 classes at once. Webflow's minifier
+  emits these as `flex-flow`, so grep for that, not `flex-direction`, when checking published CSS.
+
+  **Clearing a property with an empty string does NOT remove it — it writes the literal
+  `@raw<||>` into the stylesheet.** (An earlier note here said the empty string was the removal
+  idiom; it is not.) Write the property's real initial value instead — `aspect-ratio: auto`,
+  `height: auto`.
+
+  **Two capture traps, both of which read as missing content.** `capture.mjs` walks the page so
+  lazy images start loading, but returned before they finished decoding; WALK now waits for
+  `img.complete` on every image. Even then, images with very large originals (up to 3744x5616)
+  can still be mid-decode — `complete: false` with correct geometry is a capture artifact, NOT
+  a broken image. Measure the boxes before believing a screenshot.
+
 - 2026-08-18: **The video problem is solved without custom code, and the LP build is now
   generic across both landing pages.**
 

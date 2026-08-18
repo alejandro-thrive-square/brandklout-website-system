@@ -48,14 +48,18 @@ const COLOR_VAR = {
 // Property sets, by the ROLE a class plays.
 const P = {
   section: ["padding-top", "padding-bottom", "background-color", "color"],
-  container: ["width", "max-width", "padding-left", "padding-right", "margin-top", "margin-bottom"],
+  container: ["display", "flex-direction", "align-items", "gap", "width", "max-width",
+    "padding-left", "padding-right", "margin-top", "margin-bottom"],
   grid: ["display", "grid-template-columns", "gap", "align-items", "justify-content", "max-width",
     "margin-top", "margin-bottom"],
   flex: ["display", "flex-direction", "flex-wrap", "align-items", "justify-content", "gap",
     "margin-top", "margin-bottom"],
   text: ["font-size", "font-weight", "line-height", "letter-spacing", "text-transform",
     "text-align", "color", "max-width", "margin-bottom", "margin-top", "display"],
-  box: ["display", "padding-top", "padding-right", "padding-bottom", "padding-left",
+  // display alone is not enough: a box that happens to be flex loses its direction and
+  // silently becomes a ROW. Four sections rendered side-by-side because of it.
+  box: ["display", "flex-direction", "flex-wrap", "align-items", "justify-content", "gap",
+    "padding-top", "padding-right", "padding-bottom", "padding-left",
     "background-color", "color", "border-radius", "border-top-width", "border-top-color",
     "border-left-width", "border-left-color", "box-shadow", "margin-bottom", "margin-top",
     "max-width", "min-height", "text-align", "overflow"],

@@ -102,6 +102,7 @@ async function session(fn, { width, height }) {
     send("Emulation.setDeviceMetricsOverride",
       { width: w, height: h, deviceScaleFactor: dsf, mobile: w <= 430 }, sessionId);
   const capture = async () => {
+
     const { data } = await send("Page.captureScreenshot",
       { format: "png", captureBeyondViewport: true }, sessionId);
     return Buffer.from(data, "base64");
@@ -141,7 +142,12 @@ const WALK = `(async () => {
   for (let y = 0; y < max(); y += step) { scrollTo(0, y); await new Promise(r => setTimeout(r, 120)); }
   scrollTo(0, max()); await new Promise(r => setTimeout(r, 600));
   scrollTo(0, 0); await new Promise(r => setTimeout(r, 400));
-  return true;
+  // the walk only STARTS the lazy loads; without this the tall sections screenshot white
+  for (let i = 0; i < 80; i++) {
+    if ([...document.images].every(im => im.complete)) break;
+    await new Promise(r => setTimeout(r, 250));
+  }
+  return [...document.images].filter(im => !im.complete).length;
 })()`;
 
 async function settle(evaluate) {
