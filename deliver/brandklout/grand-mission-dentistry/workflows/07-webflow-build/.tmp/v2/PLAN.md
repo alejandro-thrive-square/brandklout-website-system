@@ -121,6 +121,29 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: Phase 1 DONE — the `lp_` class system exists on the site. `measure.mjs` renders
+  each live reference page at 1920/1440/1280/1100/991/767/478 and dumps the computed styles of
+  every legacy class chain (`v2-reference/<slug>/styles.json`, 110 chains on the landing pages,
+  sentinel-guarded). `gen-styles.mjs` carries a hand-authored NAME MAP (legacy chain -> the
+  client-first class that replaces it, plus the property set that class owns) and reads the
+  VALUES straight out of those measurements — so nothing is transcribed by hand. `push-styles.mjs`
+  created all **99** classes (89 globals + 10 `is-*` combos), read back present on the site,
+  zero name collisions against the 1,712 existing globals. Six `brand/lp-*` Primitives tokens
+  carry the palette; every colour in the generated definitions binds to a variable.
+
+  Breakpoint mapping: 1100 -> **main** (covers 992-1279) · 1280 -> large · 1440 -> xl ·
+  991 -> medium · 767 -> small · 478 -> tiny.
+
+  **1920 is measured but deliberately NOT emitted.** The reference's own type multiplier
+  misfires there — `.imp-h2` computes 46px at 1440 and **21px** at 1920 — so xl carries every
+  width from 1440 up rather than reproducing that.
+
+  Three measurement artifacts the generator now corrects, each of which would have shipped as a
+  defect: `margin-left/right: auto` computes as a PX number on a centred box (320px at 1920), so
+  horizontal margins are never copied; only the top/left border edges were sampled, so a border
+  is expanded to all four sides with an explicit `style: solid`; and an authored `add` value now
+  wins at every breakpoint instead of being overridden by the measurement at that width.
+
 - 2026-08-18: Phase 0 started. Six target pages identified and confirmed by SEO metadata;
   established there is no local HTML package for them (see above); site audit done
   (`raw/gm-styles-all.jsonl`, `raw/gm-variables.jsonl`, `raw/gm-components.jsonl`,
