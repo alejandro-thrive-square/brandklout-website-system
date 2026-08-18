@@ -332,7 +332,12 @@
 .camp_hero_grid {
   display: grid;
   height: 891px;
-  padding: 65px 0px 60px;
+  /* padding-top/bottom only: this class shares its element with
+     .camp_container, and the padding SHORTHAND would reset the container's
+     24px horizontal gutter to 0 — leaving this block 24px wider than every
+     section below it. */
+  padding-top: 65px;
+  padding-bottom: 60px;
   grid-template-columns: 1fr 1fr;
   grid-column-gap: 72px;
   grid-row-gap: 72px;
@@ -1017,7 +1022,7 @@
   .camp_header_phone { display: none; }
   .camp_header_cta { padding-left: 14px; padding-right: 14px; font-size: 9px; }
 
-  .camp_hero_grid { min-height: 0px; padding: 65px 0px 75px; }
+  .camp_hero_grid { min-height: 0px; padding-top: 65px; padding-bottom: 75px; }
   .camp_h1 { font-size: 48px; }
   .camp_h2 { font-size: 38px; }
   .camp_hero_lead { font-size: 16px; }
@@ -1044,7 +1049,7 @@
   .camp_provider_photo { height: 540px; }
   .camp_credential-list { grid-template-columns: 1fr; }
 
-  .camp_cta_inner { flex-direction: column; align-items: flex-start; justify-content: center; padding: 74px 0px; }
+  .camp_cta_inner { flex-direction: column; align-items: flex-start; justify-content: center; padding-top: 74px; padding-bottom: 74px; }
 
   .camp_footer_grid { grid-template-columns: 1fr; grid-column-gap: 26px; grid-row-gap: 26px; }
   .camp_footer_bottom { flex-direction: column; grid-row-gap: 7px; }

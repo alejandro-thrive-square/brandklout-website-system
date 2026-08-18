@@ -1,4 +1,4 @@
-# v2 rebuild — ALL 18 PAGES BUILT, PUBLISHED AND VERIFIED
+# v2 rebuild — LIVE SLUGS TAKEN OVER, 18/18 VERIFIED
 
 `node verify-v2.mjs` → **18/18 pass** against staging.
 
@@ -11,7 +11,23 @@ Code element, no page or site custom code anywhere in this build.**
 | consult | 6 | 226 | 79/79 | `_shared/consult-template.tokens.html` | `content/<topic>.consult.json` |
 | thank-you | 6 | 187 | 66/66 | `_shared/thankyou-template.tokens.html` | `content/<topic>.ty.json` |
 
-Page ids: `v2-pages.json`. Staging: `https://arvadadentalcenter.webflow.io/<slug>-v2`.
+Page ids: `v2-pages.json`. Staging: `https://arvadadentalcenter.webflow.io/<original-slug>`.
+
+## The v2 pages now own the original slugs
+
+`promote-v2.mjs` moved all 18 onto the live ad URLs, so no campaign needs repointing.
+Each old page was renamed `<slug>-v1-archived`, retitled `… (v1 archived)`, and set `draft: true`
+(which stops it publishing). **This MCP has no `delete_page` action at all**, so archiving is the
+only route — and it is the safer one, being fully reversible. Actually deleting them is a Designer
+action if wanted.
+
+Re-run `node promote-v2.mjs --dry` any time; it is idempotent and reports what it would do.
+
+## Spacing is gated too
+
+`node verify-spacing.mjs <page> [widths]` compares COMPUTED margin/padding/gap between the local
+source and the published page, element for element. Currently clean on all three page types at
+1440 and 767.
 
 ## What the gate checks
 

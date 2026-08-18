@@ -26,7 +26,12 @@
 
 .camp_consult_grid {
   display: grid;
-  padding: 72px 0px 84px;
+  /* padding-top/bottom only: this class shares its element with
+     .camp_container, and the padding SHORTHAND would reset the container's
+     24px horizontal gutter to 0 — leaving this block 24px wider than every
+     section below it. */
+  padding-top: 72px;
+  padding-bottom: 84px;
   grid-template-columns: 1fr 0.92fr;
   grid-column-gap: 72px;
   grid-row-gap: 72px;

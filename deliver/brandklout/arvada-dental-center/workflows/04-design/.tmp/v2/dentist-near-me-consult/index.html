@@ -5,6 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>dentist-near-me</title>
 <link rel="stylesheet" href="../_shared/camp.css">
+<link rel="stylesheet" href="../_shared/camp-convert.css">
+<style>
+/* The site's real fonts, served from Webflow's CDN. Without them the local page
+   falls back to system metrics, text wraps differently, and anything sized by
+   content (a flex margin-top:auto, a card height) lands somewhere else than it
+   does live. That makes the local preview quietly untrue, which is worse than
+   it looking obviously unstyled.
+   NB: no backticks in this block, it lives inside a template literal. */
+@font-face { font-family: 'area extended'; font-weight: 400; font-display: swap;
+  src: url('https://cdn.prod.website-files.com/693c51e685b19f0d0c149cab/6945a86084c7b599f2812b0c_fonnts.com-Area_Extended_Regular.otf') format('opentype'); }
+@font-face { font-family: 'area extended'; font-weight: 700; font-display: swap;
+  src: url('https://cdn.prod.website-files.com/693c51e685b19f0d0c149cab/6945a86085ce62cb49dbc5fb_fonnts.com-Area_Extended_Bold.otf') format('opentype'); }
+@font-face { font-family: 'Centurygothic'; font-weight: 400; font-display: swap;
+  src: url('https://cdn.prod.website-files.com/693c51e685b19f0d0c149cab/693c51e685b19f0d0c149d2f_centurygothic.ttf') format('truetype'); }
+@font-face { font-family: 'Centurygothic'; font-weight: 700; font-display: swap;
+  src: url('https://cdn.prod.website-files.com/693c51e685b19f0d0c149cab/693c51e685b19f0d0c149d30_centurygothic_bold.ttf') format('truetype'); }
+body { font-family: Centurygothic, Tahoma, sans-serif; font-size: 16px; line-height: 1.65; color: #222222; background-color: #ffffff; }
+
+/* Webflow's own normalize, only the parts that change geometry. Without these
+   the local page renders content-box with an 8px body margin while the Webflow
+   page is border-box with none — so every padded element is wider locally by
+   its own padding, and a local-vs-live spacing comparison is meaningless.
+   This lives in the local page shell, NOT in camp.css: bare-tag selectors
+   merge site-wide in Webflow and the linter rightly refuses them. */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; vertical-align: middle; display: inline-block; }
+h1, h2, h3, p, figure, blockquote { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; margin: 0; }
+</style>
 </head>
 <body>
 <div class="camp_page">
@@ -20,7 +51,7 @@
           <div>
             <div class="camp_eyebrow">CLAIM THE $109 NEW PATIENT SPECIAL</div>
             <h1 class="camp_h1">Claim your $109 first visit.</h1>
-            <p class="camp_consult_lead">Tell us how to reach you and the team will call back to book it — a comprehensive exam, digital X-rays, an OralID oral cancer screening and a treatment plan talked through with one of the doctors.</p>
+            <p class="camp_consult_lead">Tell us how to reach you and the team will call back to book it: a comprehensive exam, digital X-rays, an OralID oral cancer screening and a treatment plan talked through with one of the doctors.</p>
             <div class="camp_hero_microproof">Exam · Digital X-rays · OralID screening · Treatment plan</div>
             <div class="camp_urgent-note"><span class="camp_urgent-note_title">No lecture, whatever the gap</span>however long it has been, the practice is judgment-free and education-based. You get told what is going on; what happens next is your call.</div>
             <div class="camp_consult_aside">

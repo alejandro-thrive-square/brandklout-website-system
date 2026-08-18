@@ -5,6 +5,37 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>next-door</title>
 <link rel="stylesheet" href="../_shared/camp.css">
+<link rel="stylesheet" href="../_shared/camp-convert.css">
+<style>
+/* The site's real fonts, served from Webflow's CDN. Without them the local page
+   falls back to system metrics, text wraps differently, and anything sized by
+   content (a flex margin-top:auto, a card height) lands somewhere else than it
+   does live. That makes the local preview quietly untrue, which is worse than
+   it looking obviously unstyled.
+   NB: no backticks in this block, it lives inside a template literal. */
+@font-face { font-family: 'area extended'; font-weight: 400; font-display: swap;
+  src: url('https://cdn.prod.website-files.com/693c51e685b19f0d0c149cab/6945a86084c7b599f2812b0c_fonnts.com-Area_Extended_Regular.otf') format('opentype'); }
+@font-face { font-family: 'area extended'; font-weight: 700; font-display: swap;
+  src: url('https://cdn.prod.website-files.com/693c51e685b19f0d0c149cab/6945a86085ce62cb49dbc5fb_fonnts.com-Area_Extended_Bold.otf') format('opentype'); }
+@font-face { font-family: 'Centurygothic'; font-weight: 400; font-display: swap;
+  src: url('https://cdn.prod.website-files.com/693c51e685b19f0d0c149cab/693c51e685b19f0d0c149d2f_centurygothic.ttf') format('truetype'); }
+@font-face { font-family: 'Centurygothic'; font-weight: 700; font-display: swap;
+  src: url('https://cdn.prod.website-files.com/693c51e685b19f0d0c149cab/693c51e685b19f0d0c149d30_centurygothic_bold.ttf') format('truetype'); }
+body { font-family: Centurygothic, Tahoma, sans-serif; font-size: 16px; line-height: 1.65; color: #222222; background-color: #ffffff; }
+
+/* Webflow's own normalize, only the parts that change geometry. Without these
+   the local page renders content-box with an 8px body margin while the Webflow
+   page is border-box with none — so every padded element is wider locally by
+   its own padding, and a local-vs-live spacing comparison is meaningless.
+   This lives in the local page shell, NOT in camp.css: bare-tag selectors
+   merge site-wide in Webflow and the linter rightly refuses them. */
+*, *::before, *::after { box-sizing: border-box; }
+body { margin: 0; }
+img { max-width: 100%; vertical-align: middle; display: inline-block; }
+h1, h2, h3, p, figure, blockquote { margin: 0; }
+a { color: inherit; text-decoration: none; }
+button, input, select, textarea { font: inherit; color: inherit; margin: 0; }
+</style>
 </head>
 <body>
 <div class="camp_page">
@@ -18,7 +49,7 @@
         <div class="camp_ty_inner">
           <div class="camp_ty_mark">✓</div>
           <div class="camp_eyebrow">REQUEST RECEIVED</div>
-          <h1 class="camp_h2">Thank you — your request is with the team.</h1>
+          <h1 class="camp_h2">Thank you. Your request is with the team.</h1>
           <p class="camp_ty_lead">Someone from Arvada Dental Center will call you back Monday to Friday, 8am to 5pm to arrange your $109 first visit. If you would rather not wait, the phone is faster.</p>
           <div class="camp_ty_actions">
             <a class="camp_button" href="tel:+13034217611">Call (303) 421-7611<span class="camp_button_chev">›</span></a>
@@ -38,7 +69,7 @@
       <div class="camp_journey_grid">
         <article class="camp_journey_step"><div class="camp_journey_num">01</div><h3 class="camp_h3">We call you back</h3><p class="camp_journey_text">A member of the team calls Monday to Friday, 8am to 5pm to confirm a time that works and answer anything you want to ask first.</p></article>
         <article class="camp_journey_step"><div class="camp_journey_num">02</div><h3 class="camp_h3">Your $109 first visit</h3><p class="camp_journey_text">You see Dr. Bennett or one of the doctors at 6695 Wadsworth Blvd. Bring anything relevant about your medical history and any insurance details.</p></article>
-        <article class="camp_journey_step"><div class="camp_journey_num">03</div><h3 class="camp_h3">A plan, in writing</h3><p class="camp_journey_text">You are told what is going on, what the options are, and what each would cost — before anything is scheduled.</p></article>
+        <article class="camp_journey_step"><div class="camp_journey_num">03</div><h3 class="camp_h3">A plan, in writing</h3><p class="camp_journey_text">You are told what is going on, what the options are, and what each would cost, before anything is scheduled.</p></article>
         <article class="camp_journey_step"><div class="camp_journey_num">04</div><h3 class="camp_h3">You decide</h3><p class="camp_journey_text">Nothing is booked unless you want it booked. Monthly payment plans are available if you would rather spread the cost.</p></article>
       </div>
     </div></section>
