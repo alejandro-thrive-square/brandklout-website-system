@@ -136,6 +136,17 @@ and **767**.
       the h1 ramp measures 74 / 53 / 48 / 42 px — exactly the authored steps.
       Remaining on this page: 2 of 7 images still to bind (see the toggle note), and the YouTube
       URL (see below).
+- [x] **P6 Content model + second page.** The template is split into structure and content:
+      `page-template.tokens.html` (205 `{{slot}}` markers) + `content/<topic>.json`.
+      `extract-content.mjs` produced it and proves the split is **byte-for-byte lossless** on a
+      round trip. `render-page.mjs <topic>` fills it and refuses to emit an unfilled slot.
+      **`Dental Implants v2` is BUILT and on staging** (`6a83e962d17d0bfe618c49f7`,
+      `/dental-implants-ads-landing-v2`) — 469 elements, 126/126 classes, 7 images linked,
+      zero leftover tokens, no copy leaked from emergency. Hero verified by eye at 1440.
+      Implants copy carries the real facts forward from the previous build: the published
+      **$18,795** fixed-arch figure and its comparison claim, Dr Bennett's credentials,
+      "in Arvada since 2003", and the three real Google reviews (Willcox / Hoffner / Brancucci).
+      Nothing clinical invented, no outcome promised.
 - [ ] **P1 Reference spec** — screenshots + section-by-section spec from the client reference.
 - [x] **P2 Mason Park pattern** — read and adopted; see "Naming and structure" below.
 - [ ] **P3 Local v2 source** — author the three Dental Implants pages locally in the reference's
@@ -337,10 +348,11 @@ markup-only inserts.
 
 ## Open questions for the user
 
-1. **Call tracking rewrites the phone numbers.** The design says `(303) 421-7611`; the published
-   v2 page renders `(983) 955-0387` in the announce bar, the header and the hero CTA. That is a
-   site-wide call-tracking script swapping numbers at runtime, not a build error — but the tracking
-   pool needs to be correct for these new pages, and each campaign historically had its own number.
+1. **Call tracking rewrites the phone numbers, per page.** The source says `(303) 421-7611`;
+   emergency v2 renders `(983) 955-0387` and implants v2 renders `(983) 900-6463`. So the
+   site-wide script is assigning a distinct tracking number per page, which is the correct
+   behaviour — but someone should confirm the pool covers the new `-v2` slugs and points at the
+   right campaign, since the v2 pages are new URLs the tracking config has never seen.
 2. **Relume utility values do not match the client's approved design.** `padding-section-large` is
    7rem/112px against the design's 104px; `heading-style-h1` is 3.5rem/56px against the design's
    74px; `padding-global` is 5% against a fixed 24px gutter. The build keeps the **design's**
