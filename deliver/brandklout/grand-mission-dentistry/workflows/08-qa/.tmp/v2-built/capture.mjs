@@ -24,7 +24,7 @@ import { fileURLToPath } from "node:url";
 const OUT = path.dirname(fileURLToPath(import.meta.url));
 const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const BASE = "https://grandmissiondentistry.webflow.io/ads-landing-pages";
-const ALL = ["cosmetic-v2"];
+const ALL = ["cosmetic-v2","dental-implants-v2"];
 const PAGES = process.argv.length > 2 ? process.argv.slice(2) : ALL;
 const WIDTHS = [1440, 768, 390];
 const GAP_MS = 70_000; // between pages, not widths

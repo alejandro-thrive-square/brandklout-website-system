@@ -1,20 +1,17 @@
 [
   {
-    "slug": "cosmetic-v2",
-    "ok": false,
-    "issues": [
-      "readyState never completed at 1440"
-    ],
+    "slug": "dental-implants-v2",
+    "ok": true,
+    "issues": [],
     "bodyHeight": {
-      "390": 20878,
-      "768": 16205,
-      "1440": 15054
+      "390": 20260,
+      "768": 15840,
+      "1440": 14897
     },
     "sections": 12,
-    "texts": 212,
+    "texts": 213,
     "images": 32,
     "formFields": 4,
-    "title": "Cosmetic Dentist in Richmond, TX | Grand Mission Dentistry",
-    "retried": true
+    "title": "Dental Implants in Richmond, TX | Grand Mission Dentistry"
   }
 ]

@@ -22,6 +22,17 @@ const BOOK_ONLINE = "https://www.flexbook.me/gmdent/1";
 const REFERRING = "/refer-a-patient";
 const MAPS = "https://maps.app.goo.gl/EeX5CMrv2yQfDC8i6";
 
+/** Copy the reference itself gets wrong. The implant landing page's hero eyebrow reads
+ *  "Cosmetic Dentistry" — the wrong funnel — which INDEX.md logs as a content defect to
+ *  correct rather than reproduce. Applied to every string the build writes. */
+const CORRECTIONS = [
+  ["— Cosmetic Dentistry", "Dental Implants · Richmond, TX"],
+  ["Cosmetic Dentistry", "Dental Implants · Richmond, TX"],
+];
+const fix = (t) => (REF === "dental-implants" && typeof t === "string")
+  ? CORRECTIONS.reduce((acc, [from, to]) => (acc.trim() === from ? to : acc), t)
+  : t;
+
 const T = tree(REF);
 const H = headings(REF);
 const sec = (i) => T.sections[i];
@@ -67,7 +78,7 @@ const hero = section("section_lp_hero",
   div("lp_container",
     div("lp_hero_grid",
       div("lp_hero_content",
-        dom("span", "lp_eyebrow", { set_text: { text: first(HE, "imp-section-label").text } }),
+        dom("span", "lp_eyebrow", { set_text: { text: fix(first(HE, "imp-section-label").text) } }),
         div("lp_rating_badge",
           dom("span", "lp_rating_stars", { set_text: { text: "★★★★★" } }),
           txt(null, (first(HE, "imp-rating-badge")?.text || "Five-Star Rated on Google, Yelp & Nextdoor"))),

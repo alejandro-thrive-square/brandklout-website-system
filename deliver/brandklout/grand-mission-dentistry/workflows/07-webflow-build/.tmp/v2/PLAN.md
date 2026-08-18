@@ -121,6 +121,19 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: **BOTH LANDING PAGES ARE COMPLETE.** dental-implants-v2's seven video posters
+  are placed and live; the page reads correctly end to end at 1440.
+
+  Two defects found by eye on the implant page, both fixed:
+  1. **The journey rows rendered white on white in the light column.** `lp_jitem` was generated
+     from `li.imp-li-2`, and **measure keeps the FIRST element carrying a class** — that one
+     sits in the DARK column, so its white text was baked onto every row. The rows now inherit
+     `color` from their column (`lp_jcol` navy / `.is-dark` white). This is the general hazard
+     of one-record-per-class measurement: a class used in two contexts takes the first one's.
+  2. **The implant hero eyebrow read "Cosmetic Dentistry"** — the reference's own error, logged
+     in INDEX.md. Corrected to "Dental Implants · Richmond, TX", and the substitution is wired
+     into `build-lp.mjs` (`CORRECTIONS`) so a rebuild cannot reintroduce it.
+
 - 2026-08-18: **dental-implants-v2 is BUILT and live on staging, and it created ZERO new
   classes.** 12 sections, 27 images, 7 native `details` FAQ rows, 1 native form, 123 `lp_`
   classes, 0 em dashes, 0 stray Webflow defaults, 0 leakage strings, correct split h1.
