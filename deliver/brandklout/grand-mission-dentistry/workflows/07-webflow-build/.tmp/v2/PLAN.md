@@ -121,6 +121,46 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: **ALL TWELVE cosmetic-v2 sections are built and the page is live on staging**
+  (`/ads-landing-pages/cosmetic-v2`, draft:false, staging publish only). 12 sections, 121 lp_
+  classes in use, 25 images, 7 FAQ rows as native `details`/`summary`, 1 native form, zero
+  HtmlEmbeds, zero em dashes, zero cross-client leakage strings.
+
+  **THE VISUAL GATE FOUND WHAT NOTHING ELSE DID.** Every structural check passed while the page
+  rendered wrong:
+  1. **`set_text` SILENTLY NO-OPS ON A TextBlock at creation.** 35 runs shipped Webflow's
+     default "This is some text inside of a div block." — every header link, every CTA label,
+     every tick row, every video caption — and the build reported success on all of them.
+  2. **The journey rows had their tick glyph and their sentence swapped**, because `texts()`
+     returns [item, mark] there (the text is on the `<li>`, the glyph on its child span) and
+     [mark, tail, lead] in the credentials list (the `<li>` is empty). Read by ROLE, not
+     position.
+  3. **The before/after images escaped their stage**: they are `position: absolute` and
+     `lp_compare_stage` had no positioning context, so they resolved against the page and
+     rendered full-bleed above the hero, leaving an empty navy box behind.
+  4. Six classes generated from a `text` role lost their layout: the tick rows and credential
+     rows are flex/grid in the reference, the accent half of a split headline carries its own
+     leading padding, and the journey intro collapsed inside a centred flex column.
+
+  `sync-text.mjs` is the durable answer to (1) and (2): it walks the build schema and the live
+  subtree in the same depth-first order and writes every run that differs, so it repairs
+  no-opped copy AND copy that went to the wrong element, and it is idempotent. Sections whose
+  live tree carries runs the schema never asked for (a Form brings its own labels and
+  success/error messages) fall back to matching only the nodes still holding the default
+  string. 45 runs corrected; a re-run now reports 0.
+
+  **OPEN — the native Video element cannot be made to render through this API.** `Video`
+  accepts `{src, title}` (a `YouTubeVideo` does not accept anything at all) and reads back
+  correctly, but the published markup is an EMPTY `<div class="w-video w-embed"></div>`:
+  Webflow only generates the embed when the Designer fetches oEmbed for the URL. Seven video
+  slots on this page render as blank boxes. The fix that stays inside "no custom code" is a
+  poster image linking to the YouTube watch URL — the thumbnails need uploading as site assets
+  first. Queued as the next step.
+
+  Also open: one form field still shows `placeholder="Example Text"`. `placeholder` is a
+  reserved attribute name for `set_attributes` AND `remove_attribute` refuses it, so this is a
+  Designer-only fix. The three fields carry visible labels, so the form is usable meanwhile.
+
 - 2026-08-18: Phase 2 — **six of the twelve cosmetic-v2 sections are built**: shell, header,
   hero, journey, difference, specialist, options. All read back with their `lp_` classes, and
   the five embedded videos carry their YouTube sources. 134 classes now exist

@@ -135,11 +135,36 @@ export function call(tool, args, { tries = 6, base = 5000 } = {}) {
   throw last;
 }
 
+/** Strip em dashes from copy (user instruction, 2026-08-18). An em dash is doing one of three
+ *  jobs in this reference and each wants different punctuation, so this is not a blind delete:
+ *   - a decorative dash opening an eyebrow ("— Smile gallery")        -> removed outright
+ *   - a dash joining two INDEPENDENT clauses ("look — he changes")    -> semicolon
+ *   - a dash before a trailing dependent clause                       -> comma (the default)
+ *  A few read best with no punctuation at all and are listed explicitly.
+ *  En dashes are left alone: they carry numeric ranges here (Mon 9–7, 1–8, $900–$2,000).
+ */
+const DASH_EXCEPTIONS = [
+  ["teeth look — he changes", "teeth look; he changes"],
+  ["treatment begins — you can even", "treatment begins; you can even"],
+  ["and bite — before permanent", "and bite before permanent"],
+  ["Patient story — in their own words", "Patient story in their own words"],
+];
+export function deDash(text) {
+  if (typeof text !== "string" || !text.includes("—")) return text;
+  let t = text;
+  for (const [from, to] of DASH_EXCEPTIONS) t = t.split(from).join(to);
+  t = t.replace(/^\s*—\s*/, "");           // decorative opener
+  t = t.replace(/\s*—\s*/g, ", ");         // everything else joins with a comma
+  return t.replace(/\s+([,.;])/g, "$1").replace(/\s{2,}/g, " ").trim();
+}
+
 // ---------- element schema DSL ----------
 export const el = (type, style, extra = {}, ...children) => ({
   type,
   ...(style ? { set_style: { style_names: Array.isArray(style) ? style : [style] } } : {}),
   ...extra,
+  // every copy string in the build passes through here, so the em-dash rule is applied once
+  ...(extra.set_text ? { set_text: { ...extra.set_text, text: deDash(extra.set_text.text) } } : {}),
   ...(children.length ? { children: children.filter(Boolean) } : {}),
 });
 export const div = (style, ...k) => el("DivBlock", style, {}, ...k);
@@ -147,9 +172,10 @@ export const section = (style, ...k) => el("Section", style, {}, ...k);
 export const par = (style, text) => el("Paragraph", style, { set_text: { text } });
 export const h = (lvl, style, text) =>
   el("Heading", style, { set_heading_level: { heading_level: lvl }, set_text: { text } });
-/** TextBlock's set_text SILENTLY NO-OPS at creation — copy is written afterwards by
- *  fix-texts.mjs via element_settings key "text". The text is kept here so the fixer can
- *  zip schema order against the live depth-first order. */
+/** TextBlock's set_text SILENTLY NO-OPS at creation: the element ships with Webflow's default
+ *  string "This is some text inside of a div block." and the build reports success. The text is
+ *  kept in the schema so fix-texts.mjs can recover it and write it afterwards, zipping schema
+ *  order against the page's own depth-first order. */
 export const txt = (style, text) => el("TextBlock", style, { set_text: { text } });
 export const img = (style, assetId, alt) =>
   el("Image", style, { set_image_asset: { image_asset_id: asset(assetId), ...(alt ? { alt_text: alt } : {}) } });
@@ -171,7 +197,16 @@ export const video = (style) => el("Video", style);
 // ---------- resumable section builder ----------
 /** Build `sections` onto a v2 page, one root per entry, skipping anything already recorded in
  *  `<logName>`. Each entry: { label, tree, parentLabel? }. Returns the label -> element id map. */
+/** Every section schema a build script hands to buildSections, in order. When
+ *  SCHEMA_ONLY is set the API is not touched at all — the trees are just collected here, so
+ *  fix-texts.mjs can import a build script purely to recover what copy it INTENDED to write. */
+export const SCHEMAS = [];
+
 export function buildSections(slug, sections, logName) {
+  if (process.env.SCHEMA_ONLY) {
+    for (const s of sections) SCHEMAS.push({ slug, label: s.label, tree: s.tree });
+    return {};
+  }
   const p = page(slug);
   const LOG = path.join(HERE, "built", logName);
   fs.mkdirSync(path.dirname(LOG), { recursive: true });

@@ -61,12 +61,13 @@ const journey = section("section_lp_journey",
         return div(dark ? ["lp_jcol", "is-dark"] : "lp_jcol",
           el("Heading", dark ? ["lp_jcol_h", "is-light"] : "lp_jcol_h",
             { set_heading_level: { heading_level: 3 }, set_text: { text: byClass(col, "heading-style-h3")[0].text } }),
-          dom("ul", "lp_jlist", {}, ...byClass(col, "imp-li-2").map((li) => {
-            const [mark, ...rest] = texts(li);
-            return dom("li", "lp_jitem", {},
-              dom("span", dark ? "lp_jmark" : ["lp_jmark", "is-positive"], { set_text: { text: mark } }),
-              txt(null, rest.join(" ")));
-          })));
+          // The row's own text is on the <li> and the tick glyph on its child span, so
+          // texts() yields [item, mark] here — the reverse of the credentials list, where the
+          // <li> is empty and the span comes first. Read by role, not by position.
+          dom("ul", "lp_jlist", {}, ...byClass(col, "imp-li-2").map((li) => dom("li", "lp_jitem", {},
+            dom("span", dark ? "lp_jmark" : ["lp_jmark", "is-positive"],
+              { set_text: { text: dark ? "✕" : "✓" } }),
+            txt(null, li.text || texts(li)[0])))));
       })),
     div("lp_chapters", ...jChapters.map((c) =>
       div("lp_chapter",

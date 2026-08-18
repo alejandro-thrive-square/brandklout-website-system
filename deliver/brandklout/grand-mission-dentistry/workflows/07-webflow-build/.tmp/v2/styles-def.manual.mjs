@@ -139,5 +139,11 @@ export const STYLES = [
   { n: "lp_jcol_h", p: { "font-size": "24px", "font-weight": "700", "line-height": "36px", "margin-bottom": "12px", color: { v: V.lpNavy } } },
   { n: "is-light", parents: ["lp_jcol_h"], p: { color: { v: V.white } } },
 
+  // The office collage runs three different image ratios (0.668 / 1.145 / 1.718). The
+  // generator can only derive one per class, so the two shorter tiles get explicit combos —
+  // this is the "ragged masonry" the Mason Park QA flagged when the ratios were left to guess.
+  { n: "is-mid", parents: ["lp_office_img"], p: { "aspect-ratio": "1.145" } },
+  { n: "is-short", parents: ["lp_office_img"], p: { "aspect-ratio": "1.718" } },
+
   { n: "lp_form_note", p: { "font-size": "11px", "line-height": "16px", color: { v: V.n4 }, "margin-top": "8px" } },
 ];
