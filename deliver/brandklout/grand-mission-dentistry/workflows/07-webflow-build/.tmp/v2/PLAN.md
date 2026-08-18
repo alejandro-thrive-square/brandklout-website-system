@@ -121,6 +121,29 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: **ALL SIX v2 PAGES ARE BUILT AND LIVE ON STAGING.** Verified on the served HTML:
+
+  | page | sections | images | empty video | em dashes | Webflow defaults | leakage |
+  | :--- | ---: | ---: | ---: | ---: | ---: | :--- |
+  | cosmetic-v2 | 12 | 32 | 0 | 0 | 0 | none |
+  | dental-implants-v2 | 12 | 32 | 0 | 0 | 0 | none |
+  | cosmetic-consultation-v2 | 5 | 8 | 0 | 0 | 0 | none |
+  | dental-implants-consultation-v2 | 5 | 8 | 0 | 0 | 0 | none |
+  | cosmetic-thank-you-v2 | 7 | 4 | 0 | 0 | 0 | none |
+  | dental-implants-thank-you-v2 | 7 | 4 | 0 | 0 | 0 | none |
+
+  The leakage scan covers livewell / Livewell / Fairfax / Silverbrook / Chris Kim / Dr. Chris /
+  (703) 844-2975 / "Grand Mission Dental?" — **zero hits on any page**.
+
+  `build-thankyou.mjs` carries the corrections as data, not as edits: a `SUBSTITUTIONS` block
+  for the values (phone, review count, badge, heading, the Experience card's credentials, the
+  address, the hours) plus a `fix()` pass that rewrites any copy taken from the reference. The
+  **cosmetic thank-you page takes its FAQ from the cosmetic LANDING page**, because the
+  reference's is implant copy with implant pricing; the builder reports which source it used.
+
+  Still to do: visual pass on the four new pages at 1440 and 390, and the legacy regression
+  gate (re-capture the six ORIGINALS and diff them against `v2-reference/`).
+
 - 2026-08-18: **BOTH CONSULTATION PAGES ARE BUILT**, and the `confirm_` family (**57 classes,
   zero collisions**) is on the site ready for the two thank-you pages. Class totals: 114 `lp_`
   + 23 hand-authored + 32 `consult_` + 57 `confirm_` = **226**.
