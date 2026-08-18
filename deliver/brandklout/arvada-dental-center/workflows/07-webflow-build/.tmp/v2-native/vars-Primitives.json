@@ -1,0 +1,262 @@
+{
+ "label": "v",
+ "action": "get_variables",
+ "result": [
+  {
+   "id": "relume-variable--neutral-white",
+   "name": "Colors/White",
+   "type": "Color",
+   "cssName": "--_primitives---colors--white",
+   "value": "#fff",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-1",
+   "name": "Colors/Neutral Lightest",
+   "type": "Color",
+   "cssName": "--_primitives---colors--neutral-lightest",
+   "value": "#eee",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-2",
+   "name": "Colors/Neutral Lighter",
+   "type": "Color",
+   "cssName": "--_primitives---colors--neutral-lighter",
+   "value": "#ccc",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-3",
+   "name": "Colors/Neutral Light",
+   "type": "Color",
+   "cssName": "--_primitives---colors--neutral-light",
+   "value": "#aaa",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-4",
+   "name": "Colors/Neutral",
+   "type": "Color",
+   "cssName": "--_primitives---colors--neutral",
+   "value": "#666",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-5",
+   "name": "Colors/Neutral Dark",
+   "type": "Color",
+   "cssName": "--_primitives---colors--neutral-dark",
+   "value": "#444",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-6",
+   "name": "Colors/Neutral Darker",
+   "type": "Color",
+   "cssName": "--_primitives---colors--neutral-darker",
+   "value": "#222",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-7",
+   "name": "Colors/Neutral Darkest",
+   "type": "Color",
+   "cssName": "--_primitives---colors--neutral-darkest",
+   "value": "black",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--transparent",
+   "name": "Opacity/Transparent",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--transparent",
+   "value": "transparent",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-white-5",
+   "name": "Opacity/White 5",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--white-5",
+   "value": "hsla(0, 0.00%, 100.00%, 0.05)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-white-10",
+   "name": "Opacity/White 10",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--white-10",
+   "value": "hsla(0, 0.00%, 100.00%, 0.10)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-white-15",
+   "name": "Opacity/White 15",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--white-15",
+   "value": "hsla(0, 0.00%, 100.00%, 0.15)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-white-20",
+   "name": "Opacity/White 20",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--white-20",
+   "value": "hsla(0, 0.00%, 100.00%, 0.20)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-white-30",
+   "name": "Opacity/White 30",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--white-30",
+   "value": "hsla(0, 0.00%, 100.00%, 0.30)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-white-40",
+   "name": "Opacity/White 40",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--white-40",
+   "value": "hsla(0, 0.00%, 100.00%, 0.40)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-white-50",
+   "name": "Opacity/White 50",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--white-50",
+   "value": "hsla(0, 0.00%, 100.00%, 0.50)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-white-60",
+   "name": "Opacity/White 60",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--white-60",
+   "value": "hsla(0, 0.00%, 100.00%, 0.60)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-7-5",
+   "name": "Opacity/Neutral Darkest 5",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--neutral-darkest-5",
+   "value": "hsla(0, 0.00%, 0.00%, 0.05)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-7-10",
+   "name": "Opacity/Neutral Darkest 10",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--neutral-darkest-10",
+   "value": "hsla(0, 0.00%, 0.00%, 0.10)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-7-15",
+   "name": "Opacity/Neutral Darkest 15",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--neutral-darkest-15",
+   "value": "hsla(0, 0.00%, 0.00%, 0.15)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-7-20",
+   "name": "Opacity/Neutral Darkest 20",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--neutral-darkest-20",
+   "value": "hsla(0, 0.00%, 0.00%, 0.20)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-7-30",
+   "name": "Opacity/Neutral Darkest 30",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--neutral-darkest-30",
+   "value": "hsla(0, 0.00%, 0.00%, 0.30)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-7-40",
+   "name": "Opacity/Neutral Darkest 40",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--neutral-darkest-40",
+   "value": "hsla(0, 0.00%, 0.00%, 0.40)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-7-50",
+   "name": "Opacity/Neutral Darkest 50",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--neutral-darkest-50",
+   "value": "hsla(0, 0.00%, 0.00%, 0.50)",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--neutral-shade-7-60",
+   "name": "Opacity/Neutral Darkest 60",
+   "type": "Color",
+   "cssName": "--_primitives---opacity--neutral-darkest-60",
+   "value": "hsla(0, 0.00%, 0.00%, 0.60)",
+   "modeValues": []
+  },
+  {
+   "id": "variable-78da6909-408d-cc25-1658-2a1c99061c8b",
+   "name": "brand/light",
+   "type": "Color",
+   "cssName": "--_primitives---brand--light",
+   "value": "#fcfcfc",
+   "modeValues": []
+  },
+  {
+   "id": "variable-0d6deade-46b8-3c60-cdab-5dddc296d8eb",
+   "name": "brand/silver 700",
+   "type": "Color",
+   "cssName": "--_primitives---brand--silver-700",
+   "value": "#8e8d8d",
+   "modeValues": []
+  },
+  {
+   "id": "variable-45699325-3755-4277-cdab-268a35ea5fb5",
+   "name": "brand/silver 500",
+   "type": "Color",
+   "cssName": "--_primitives---brand--silver-500",
+   "value": "#b3b6b5",
+   "modeValues": []
+  },
+  {
+   "id": "variable-34c4d170-3b4c-2b35-833b-3e8d95b4962e",
+   "name": "brand/brown 800",
+   "type": "Color",
+   "cssName": "--_primitives---brand--brown-800",
+   "value": "#403830",
+   "modeValues": []
+  },
+  {
+   "id": "variable-2d33d461-6540-146a-5aa1-005ca2f0dd4b",
+   "name": "brand/brown 500",
+   "type": "Color",
+   "cssName": "--_primitives---brand--brown-500",
+   "value": "#8c6946",
+   "modeValues": []
+  },
+  {
+   "id": "variable-082430ef-54c6-da46-1df1-6f43416b97f8",
+   "name": "brand/silver 900",
+   "type": "Color",
+   "cssName": "--_primitives---brand--silver-900",
+   "value": "hsla(60, 1.01%, 36.96%, 1.00)",
+   "modeValues": []
+  },
+  {
+   "id": "variable-29fd33ec-47db-0109-63ad-f034a5cdf1e7",
+   "name": "brand/gold",
+   "type": "Color",
+   "cssName": "--_primitives---brand--gold",
+   "value": "#c8b282",
+   "modeValues": []
+  }
+ ]
+}
