@@ -23,9 +23,16 @@ const DRY = process.argv.includes("--dry");
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const P = page(SLUG);
 
-// importing a build script only collects its schemas — SCHEMA_ONLY keeps it off the API
-for (const f of ["build-cosmetic.mjs", "build-cosmetic-2.mjs", "build-cosmetic-3.mjs"]) {
-  await import("./" + f);
+// importing a build script only collects its schemas — SCHEMA_ONLY keeps it off the API.
+// cosmetic-v2 was built by the three build-cosmetic scripts before build-lp.mjs existed;
+// every other page comes from build-lp.mjs, which needs its ref/slug/consult arguments.
+if (SLUG === "cosmetic-v2") {
+  for (const f of ["build-cosmetic.mjs", "build-cosmetic-2.mjs", "build-cosmetic-3.mjs"]) await import("./" + f);
+} else {
+  const [ref, consult] = process.argv.slice(3).filter((a) => !a.startsWith("--"));
+  if (!ref) throw new Error("usage: node sync-text.mjs <v2-slug> <ref-slug> <consult-path> [--dry]");
+  process.argv[2] = ref; process.argv[3] = SLUG; process.argv[4] = consult;
+  await import("./build-lp.mjs");
 }
 const built = JSON.parse(fs.readFileSync(path.join(HERE, "built", `${SLUG}.json`), "utf8"));
 

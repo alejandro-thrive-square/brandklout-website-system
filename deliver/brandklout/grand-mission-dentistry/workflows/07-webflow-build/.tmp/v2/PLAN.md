@@ -121,6 +121,29 @@ the four of its six pages that also had no local design file. The capture set in
 
 ## State log
 
+- 2026-08-18: **dental-implants-v2 is BUILT and live on staging, and it created ZERO new
+  classes.** 12 sections, 27 images, 7 native `details` FAQ rows, 1 native form, 123 `lp_`
+  classes, 0 em dashes, 0 stray Webflow defaults, 0 leakage strings, correct split h1.
+
+  The three cosmetic build scripts were replaced by one generic **`build-lp.mjs`**:
+
+      node build-lp.mjs <ref-slug> <v2-slug> <consult-path>
+
+  Everything page-specific comes out of the reference — copy, asset ids and nesting from
+  `tree-1440.json`, and the split headlines from `headings()`. The two LPs are exact structural
+  twins (identical selector counts in every section), which a dry run confirms before any write:
+  14 sections, 128 classes, **0 not already created**, 0 em dashes.
+
+  `sync-text.mjs`, `fix-defaults.mjs` and the new generic `form-hero.mjs` finish any page.
+  Order matters: **fix-defaults BEFORE sync-text**. A Heading built from child elements keeps
+  Webflow's default "Heading" string, which makes the section's live run count one higher than
+  the schema's and sends sync-text down its fallback path. 13 stray nodes on this page.
+  35 copy runs corrected; a re-run reports 0.
+
+  **REMAINING on this page: 5 of the 7 video posters.** `/v2/assets` has been returning 429
+  since the poster uploads — `data_element_builder` hits it to resolve an image asset id — and
+  it did not clear within the session. `video-posters.mjs` is resumable: re-run it.
+
 - 2026-08-18: **cosmetic-v2 measures correct against the reference.** A direct geometry probe
   on the live page (after walking it so every lazy image loads) returns the reference's own
   numbers: gallery images **562x469**, office tiles **378x566 / 378x330 / 378x220**, photo strip
