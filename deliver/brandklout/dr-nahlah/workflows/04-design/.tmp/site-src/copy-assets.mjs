@@ -71,6 +71,14 @@ const MAP = {
   // batch 3 — emergency, conditions, fixed vs removable, implant FAQ
   "emergency-patient.jpg": "2021/03/patient_interaction.jpg",
   "emergency-sign.png": "2021/02/emergency-sign.png",
+  // A REAL radiograph photograph. The practice's own `2021/02/dental-xray.png`
+  // (copied by the bulk step as `xray.png`) is a 2000x1000 palette PNG whose
+  // opaque fraction is 0.00 - entirely transparent. It loads, so every
+  // "no broken images" check passes; it draws nothing, so it shipped as an empty
+  // box in eight cards until 2026-08-19. Curated under a short name here because
+  // the source path is 265 chars and blows Windows MAX_PATH from some tools.
+  // See `image-substance.py`, which now gates this class of defect.
+  "xray-consult.jpg": "2024/06/Doctor-showing-patient-X-ray-picture-and-educational-model-of-dental-implant-in-clinic-closeup-.jpg",
   "conditions-patient.jpg": "2025/02/patient_hero5.jpg",
   "dentures-model.png": "2021/02/dentures-model.png",
   "dentures-implant-graphic.png": "2021/02/implant-supported-dentures-graphic.png",

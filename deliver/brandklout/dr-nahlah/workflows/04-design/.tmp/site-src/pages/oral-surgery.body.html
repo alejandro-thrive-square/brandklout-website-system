@@ -6,6 +6,11 @@
      placement and immediate load "for qualifying patients" are all verbatim in
      substance.
 
+     2026-08-19 media pass: the three-paragraph "why here" lede became one
+     paragraph over a mosaic of the practice's own surgical photography, the
+     procedure cards lead with a picture, and a band replaces the closing
+     paragraph of the comfort section. No clinical claim was cut.
+
      TWO SOURCE ASSETS DELIBERATELY NOT USED:
      - The "Dr. Nahlah Discusses Bone Grafting" video. Films are not hot-linked
        from a prototype; wire it at Webflow build time (see SITE.md, Still open).
@@ -13,10 +18,16 @@
        a filename that says nothing. Its subject is unknown, so it cannot be
        given honest alt text and is left out rather than captioned as a guess.
 
-     The three procedure icons in the extraction are also unused: they are
+     The three procedure icons in the extraction are still unused: they are
      dark line art on transparent, and dropping them onto the cream ground is a
-     contrast gamble nobody has measured. The numbered cards the rest of the
-     site uses carry the same structure with none of that risk.
+     contrast gamble nobody has measured. The card figures use photographs.
+
+     NOT USED EITHER: `assets/xray.png` (from 2021/02/dental-xray.png). It is a
+     2000x1000 palette PNG whose opaque fraction is 0.00, i.e. entirely
+     transparent. It loads, so every "no broken images" check passes; it draws
+     nothing, so it rendered as an empty box. Replaced sitewide on 2026-08-19 by
+     `xray-consult.jpg`, a real photograph. `image-substance.py` now checks for
+     this class of defect.
      ========================================================================== -->
 <section class="pg-hero" id="hero">
   <div class="ph-bg">
@@ -25,7 +36,8 @@
   <div class="wrap ph-in">
     <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Oral Surgery</span></div>
     <h1 data-split>Comprehensive care does not stop at <em>surgery</em>.</h1>
-    <p class="ph-lead" data-rv>Extractions, bone grafting and implant placement, done in this building by the specialist who will also restore the tooth afterwards.</p>
+    <p class="ph-lead" data-rv>Extractions, bone grafting and implant placement, done in this
+      building by the specialist who will also restore the tooth afterwards.</p>
     <div class="ph-actions" data-rv>
       <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a consultation</span></a>
       <a class="btn btn-ghost magnetic" href="#procedures"><span>The procedures</span></a>
@@ -40,22 +52,30 @@
 
 <!-- ---------- lede ---------- -->
 <section class="pk pk-alt" id="one-place">
-  <div class="wrap section pk-lede">
-    <div class="lc-head">
+  <div class="wrap section">
+    <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">Why Here</span></div>
       <h2 data-split>The person who removes it also replaces it.</h2>
+      <p>Elsewhere the extraction goes to a surgeon and the replacement to somebody else. Between
+        them sits a handover, and the handover is where the plan gets lost.</p>
     </div>
-    <div class="lc-body">
-      <p data-rv>In most practices these two halves belong to different people. A general dentist
-        refers the extraction out to a surgeon; months later somebody else works out what goes back
-        in the space. Between them sits a handover, and the handover is where the plan gets lost.</p>
-      <p data-rv>Here it is one practice and one plan. The extraction is performed knowing exactly
-        what is going into the site afterwards, which changes how it is performed: how much
-        bone is preserved, whether a graft goes in at the same visit, where the implant will need to
-        sit eighteen weeks later.</p>
-      <p data-rv>That is the whole argument for <strong>comprehensive care</strong>, and it is not an
-        abstract one. It is the difference between a socket that is ready for an implant and one that
-        has to be rebuilt first.</p>
+    <div class="mz mz-4" data-rv="stagger">
+      <figure class="mz-fig">
+        <img src="assets/tech-hero.jpg" alt="The scanning suite at the practice" loading="lazy">
+        <figcaption class="mz-cap">Scanned first</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/xray-consult.jpg" alt="A clinician showing a patient their X-ray beside an implant model" loading="lazy">
+        <figcaption class="mz-cap">Planned on the bone</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/office-room.jpg" alt="A private surgical suite at the practice" loading="lazy">
+        <figcaption class="mz-cap">A private suite</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/lab.jpg" alt="The in-house digital laboratory" loading="lazy">
+        <figcaption class="mz-cap">Restored in-house</figcaption>
+      </figure>
     </div>
   </div>
 </section>
@@ -66,32 +86,36 @@
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">Procedures</span></div>
       <h2 data-split>Three procedures, in the comfort of the office.</h2>
-      <p>Each is done here, with advanced technology used to keep it minimally invasive, efficient
-        and predictable.</p>
+      <p>Each one done here, kept minimally invasive by the technology used to plan it.</p>
     </div>
     <div class="pk-cards pk-cards-3" data-rv="stagger">
       <article class="pk-card">
-        <span class="pk-card-n">01</span>
+        <div class="pk-card-fig">
+          <img src="assets/Closeup-of-unrecognizable-dentist-pointing-at-tooth-model-while-explaining-dental-implant-surgery-to-patient-in-clinic.jpg" alt="A tooth model used to explain an extraction" loading="lazy">
+          <span class="pk-card-figcap">01 &middot; Extraction</span>
+        </div>
         <h3>Tooth extraction</h3>
-        <p>The most common oral surgery there is, and generally simple enough to complete in the
-          chair. The tooth is eased out without disturbing healthy bone or gum tissue, which
-          matters enormously if anything is going back in the space later. Wisdom tooth removal is
-          the more complex form and can take a few hours.</p>
+        <p>The tooth is eased out without disturbing healthy bone or gum, which matters enormously if
+          anything is going back in the space later. Wisdom teeth are the more complex form.</p>
       </article>
       <article class="pk-card">
-        <span class="pk-card-n">02</span>
+        <div class="pk-card-fig">
+          <img src="assets/full-mouth-dental-implants-model.jpg" alt="A jaw model showing implant sites in the bone" loading="lazy">
+          <span class="pk-card-figcap">02 &middot; Grafting</span>
+        </div>
         <h3>Bone grafting</h3>
-        <p>Replacing lost bone in the jaw. Bone loss after a missing tooth is ongoing rather than
-          one-off, and it has to be treated before a denture or an implant has anything to hold on
-          to. Bone from you or from a donor source is placed at the site, sutured, and left a few
-          months to integrate with the jaw.</p>
+        <p>Bone loss after a missing tooth is ongoing, not one-off, and has to be treated before an
+          implant has anything to hold on to. Placed, sutured, and left a few months to
+          integrate.</p>
       </article>
       <article class="pk-card">
-        <span class="pk-card-n">03</span>
+        <div class="pk-card-fig">
+          <img src="assets/Dentist-holding-a-dental-implant-in-his-hands-.jpg" alt="An implant post before placement" loading="lazy">
+          <span class="pk-card-figcap">03 &middot; Placement</span>
+        </div>
         <h3>Implant surgery</h3>
-        <p>Three parts: the post, the abutment and the restoration. The post is placed into the
-          jawbone to anchor a new tooth or a full set. CT-guided placement makes it precise, and
-          for qualifying patients a temporary restoration can be loaded immediately.</p>
+        <p>The post is placed into the jawbone to anchor a new tooth or a full set. CT-guided
+          placement makes it precise, and qualifying patients leave with a temporary the same day.</p>
         <a class="pk-readon" href="dental-implants.html">Implants in full</a>
       </article>
     </div>
@@ -107,19 +131,27 @@
     <div class="sp-copy">
       <div class="chapter-tag" data-rv><i></i><span class="label">Comfort</span></div>
       <h2 data-split>Being nervous about this is normal.</h2>
-      <p data-rv>Nobody looks forward to oral surgery, and the practice does not pretend otherwise.
-        What it does instead is remove the reasons the fear is usually justified.</p>
+      <p data-rv>The practice does not pretend otherwise. What it does is remove the reasons the fear
+        is usually justified.</p>
       <ul class="sp-list" data-rv="stagger">
         <li><i></i>Techniques kept as minimally invasive as the case allows</li>
         <li><i></i>Planned on a 3D scan first, so less is done by feel</li>
         <li><i></i>Nitrous, oral or IV sedation, whichever suits you</li>
         <li><i></i>A private suite, with the door closed</li>
       </ul>
-      <p data-rv style="margin-top:.6rem">Sedation is worth raising early rather than on the day.
-        IV sedation in particular has to be arranged, and it is the option that makes the difference
-        for people who have been putting a procedure off for years.</p>
       <p data-rv><a class="pk-more" href="sedation-dentistry.html">The three sedation options</a></p>
     </div>
+  </div>
+</section>
+
+<!-- ---------- band ---------- -->
+<section class="mband" id="band">
+  <figure class="mband-fig">
+    <img src="assets/office-wide.jpeg" alt="The surgical floor at the practice" data-drift loading="lazy">
+  </figure>
+  <div class="mband-in" data-rv>
+    <span class="mband-kicker">Raise it early</span>
+    <p class="mband-line">IV sedation has to be arranged. It is worth asking for at the consultation, not on the day.</p>
   </div>
 </section>
 
@@ -130,7 +162,7 @@
     <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
       <a href="dental-implants.html"><span class="nx-k">What goes back in</span>
         <span class="nx-t">Dental Implants</span>
-        <span class="nx-d">Anatomy, the four options, and how a case actually runs.</span></a>
+        <span class="nx-d">Anatomy, the four options, and how a case runs.</span></a>
       <a href="sedation-dentistry.html"><span class="nx-k">Comfort</span>
         <span class="nx-t">Sedation Dentistry</span>
         <span class="nx-d">Nitrous, oral and IV, and why it is a credential here.</span></a>
@@ -145,9 +177,8 @@
 <section class="pk pk-cta" id="book">
   <div class="wrap section cta-in">
     <h2 data-split>Receive the care you need.</h2>
-    <p data-rv>Book a consultation and get the whole sequence explained before any of it starts,
-      including what happens after the surgery, which is the part that usually goes
-      unmentioned.</p>
+    <p data-rv>Get the whole sequence explained before any of it starts, including what happens
+      afterwards.</p>
     <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Book a consultation</span></a>
     <div class="cta-phones" data-rv>
       <span>McLean &middot; <a href="tel:+15717029900">(571) 702-9900</a></span>

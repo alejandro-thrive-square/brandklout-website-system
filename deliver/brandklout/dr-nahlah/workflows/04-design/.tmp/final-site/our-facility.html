@@ -215,7 +215,7 @@
     <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i>
       <a href="about.html">Why Choose Us</a><i></i><span>Our Facility</span></div>
     <h1 data-split>Six surgical suites and a <em>lab</em> down the hall.</h1>
-    <p class="ph-lead" data-rv>A purpose-built prosthodontic facility in Tysons Corner, where the scanning, the surgery, the design and the fabrication all happen under one roof.</p>
+    <p class="ph-lead" data-rv>Scanning, surgery, design and fabrication, all under one roof in Tysons Corner.</p>
     <div class="ph-actions" data-rv>
       <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a visit</span></a>
       <a class="btn btn-ghost magnetic" href="#technology"><span>See the technology</span></a>
@@ -228,26 +228,43 @@
   </div>
 </section>
 
-<!-- ---------- welcome ---------- -->
+<!-- ---------- welcome ----------
+     Cut from four paragraphs to one on 2026-08-19 and given the five practice
+     photographs that had only ever been used on the home page. They are now
+     kept in site-src/assets/ as well, because they come from the Webflow build
+     rather than the extraction and a clean rebuild was silently dropping them. -->
 <section class="pk pk-alt" id="welcome">
-  <div class="wrap section pk-lede">
-    <div class="lc-head">
+  <div class="wrap section">
+    <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">Welcome</span></div>
       <h2 data-split>You are welcome here.</h2>
+      <p>The building is arranged on the assumption that you might be one of the many adults who put
+        dental treatment off out of anxiety, and will not say so at the desk.</p>
     </div>
-    <div class="lc-body">
-      <p data-rv>A great many adults put off dental treatment out of anxiety, and almost none of
-        them will say so at the desk. So the building is arranged on the assumption that you might
-        be one of them.</p>
-      <p data-rv>The waiting area is quiet and daylit rather than clinical. Treatment happens in a
-        <strong>private suite</strong> with the door closed, not a row of open bays. And the whole
-        first appointment is a conversation and a scan. Nothing is done to you on the day you
-        arrive to find out what your options are.</p>
-      <p data-rv>If that is still not enough, it does not have to be white-knuckled. Nitrous, oral
-        and IV sedation are all offered here, and the practice holds the credential to administer
-        them.</p>
-      <p data-rv><a class="pk-more" href="sedation-dentistry.html">Sedation options</a></p>
+    <div class="mz mz-3" data-rv="stagger">
+      <figure class="mz-fig mz-wide">
+        <img src="assets/practice-space-1.avif" alt="The waiting area at the practice" loading="lazy">
+        <figcaption class="mz-cap"><b>Quiet and daylit</b>Not a clinical waiting room</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/practice-space-2.avif" alt="A private treatment suite" loading="lazy">
+        <figcaption class="mz-cap">Door closed, not a bay</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/practice-space-3.avif" alt="Inside the practice" loading="lazy">
+        <figcaption class="mz-cap">A conversation and a scan</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/practice-space-4.avif" alt="Inside the practice" loading="lazy">
+        <figcaption class="mz-cap">Second floor, parking under</figcaption>
+      </figure>
+      <figure class="mz-fig">
+        <img src="assets/practice-space-5.avif" alt="Inside the practice" loading="lazy">
+        <figcaption class="mz-cap">Nitrous, oral and IV sedation</figcaption>
+      </figure>
     </div>
+    <p style="margin-top:clamp(1.5rem,3vw,2.25rem)" data-rv>
+      <a class="pk-more" href="sedation-dentistry.html">Sedation options</a></p>
   </div>
 </section>
 
@@ -286,45 +303,56 @@
     <div class="pk-head">
       <div class="chapter-tag" data-rv><i></i><span class="label">Technology</span></div>
       <h2 data-split>Six machines, and what each one saves you.</h2>
-      <p>Equipment is only worth listing if it changes the appointment. Here is what each of these
-        actually does to your visit.</p>
+      <p>Equipment is only worth listing if it changes the appointment.</p>
     </div>
     <div class="pk-cards pk-cards-3" data-rv="stagger">
       <article class="pk-card">
-        <span class="pk-card-n">01</span>
+        <div class="pk-card-fig">
+          <img src="assets/xray-consult.jpg" alt="A clinician showing a patient their X-ray beside an implant model" loading="lazy">
+          <span class="pk-card-figcap">01</span>
+        </div>
         <h3>CBCT scanner</h3>
-        <p>Cone-beam computed tomography images the jaw in three dimensions, so bone volume and nerve
-          position are measured before surgery rather than found during it.</p>
+        <p>Images the jaw in three dimensions, so bone volume and nerve position are measured before surgery rather than found during it.</p>
       </article>
       <article class="pk-card">
-        <span class="pk-card-n">02</span>
+        <div class="pk-card-fig">
+          <img src="assets/tech-advanced.jpg" alt="Digital impression scanning at the practice" loading="lazy">
+          <span class="pk-card-figcap">02</span>
+        </div>
         <h3>Intraoral scanner</h3>
-        <p>Digital impressions. No tray, no putty, no gagging, and an accuracy a physical
-          impression cannot reach, which is the real reason for it.</p>
+        <p>Digital impressions. No tray, no putty, no gagging, and an accuracy a physical impression cannot reach.</p>
       </article>
       <article class="pk-card">
-        <span class="pk-card-n">03</span>
-        <h3>Computer-guided implant surgery</h3>
-        <p>Every implant position is planned on the scan and placed through a printed guide, at the
-          planned angle and depth. Smaller incisions, less bone disturbed, and a shorter recovery.</p>
+        <div class="pk-card-fig">
+          <img src="assets/Closeup-of-unrecognizable-dentist-pointing-at-tooth-model-while-explaining-dental-implant-surgery-to-patient-in-clinic.jpg" alt="Planning an implant position on the model" loading="lazy">
+          <span class="pk-card-figcap">03</span>
+        </div>
+        <h3>Guided implant surgery</h3>
+        <p>Every implant is planned on the scan and placed through a printed guide, at the planned angle and depth. Smaller incisions, shorter recovery.</p>
       </article>
       <article class="pk-card">
-        <span class="pk-card-n">04</span>
+        <div class="pk-card-fig">
+          <img src="assets/lab.jpg" alt="The in-house digital laboratory" loading="lazy">
+          <span class="pk-card-figcap">04</span>
+        </div>
         <h3>In-house digital lab</h3>
-        <p>Both practices have one. Prostheses are designed on site by a lab designer on staff, so a
-          shade or a shape can be argued about in person instead of described on a form.</p>
+        <p>Both practices have one. A shade or a shape can be argued about in person instead of described on a form.</p>
       </article>
       <article class="pk-card">
-        <span class="pk-card-n">05</span>
+        <div class="pk-card-fig">
+          <img src="assets/tech-hero.jpg" alt="The milling machine in the practice lab" loading="lazy">
+          <span class="pk-card-figcap">05</span>
+        </div>
         <h3>Milling machine</h3>
-        <p>The design is cut here. Nothing is posted to another state and waited on, which is what
-          removes weeks from a full-arch case.</p>
+        <p>The design is cut here. Nothing is posted to another state and waited on, which is what removes weeks from a full-arch case.</p>
       </article>
       <article class="pk-card">
-        <span class="pk-card-n">06</span>
+        <div class="pk-card-fig">
+          <img src="assets/crown-model.jpg" alt="A finished zirconia restoration" loading="lazy">
+          <span class="pk-card-figcap">06</span>
+        </div>
         <h3>Zirconia &amp; porcelain oven</h3>
-        <p>Final fabrication and firing happen in the building, so a remake is days rather than the
-          better part of a month.</p>
+        <p>Final fabrication and firing happen in the building, so a remake is days rather than the better part of a month.</p>
       </article>
     </div>
   </div>
@@ -342,9 +370,8 @@
       <p data-rv>Any one of these machines can be rented time on. What is unusual is holding the
         entire chain, from scan and plan through surgery, design, milling, firing and fit, inside a single
         practice, under one person's responsibility.</p>
-      <p data-rv>It matters most when something needs changing. A prosthesis that seats a fraction
-        proud is a same-week fix here and a six-week round trip almost anywhere else. Over a case
-        that runs four to six months, that difference is the case.</p>
+      <p data-rv>A prosthesis that seats a fraction proud is a same-week fix here and a six-week round
+        trip almost anywhere else.</p>
       <ul class="sp-list" data-rv="stagger">
         <li><i></i>Fewer appointments across the whole treatment</li>
         <li><i></i>Days, not weeks, when a remake is needed</li>
@@ -378,8 +405,7 @@
 <section class="pk pk-cta" id="book">
   <div class="wrap section cta-in">
     <h2 data-split>Come and see it.</h2>
-    <p data-rv>Schedule a new-patient appointment and walk the building. The first visit is a
-      conversation and a scan, nothing more.</p>
+    <p data-rv>The first visit is a conversation and a scan, nothing more.</p>
     <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Schedule a visit</span></a>
     <div class="cta-phones" data-rv>
       <span>McLean &middot; <a href="tel:+15717029900">(571) 702-9900</a></span>

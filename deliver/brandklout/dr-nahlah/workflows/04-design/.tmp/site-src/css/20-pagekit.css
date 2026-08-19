@@ -92,6 +92,31 @@
    carrying this as a hand-written inline style; an inline style does not survive
    the trip into Webflow, a combo class does. */
 .pk-readon-block{display:inline-block;margin-top:.6rem}
+
+/* ---------- card figure ----------
+   A card that leads with a photograph instead of a numeral. The kit already had
+   two ways to fill a card (a number or a brandmark) and neither of them was an
+   image, so every card had to carry its whole meaning as prose. This is the part
+   that lets a card show the thing it is describing and say less about it.
+
+   It sits flush to the card's own padding by pulling the padding back out on
+   three sides, so the picture reaches the card edge and the copy stays inset.
+   The aspect ratio is fixed so a row of cards keeps one baseline no matter what
+   the source images are. */
+.pk-card .pk-card-fig{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist);
+  margin:calc(-1 * clamp(1.4rem,2.4vw,2.1rem)) calc(-1 * clamp(1.4rem,2.4vw,2.1rem)) .35rem}
+.pk-card .pk-card-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.pk-card:hover .pk-card-fig img{transform:scale(1.045)}
+/* A card whose picture is a diagram or a product render, not a photograph:
+   contain it on the card ground rather than cropping the subject out of it. */
+.pk-card .pk-card-fig.pk-card-fig-pad{background:var(--bg-3)}
+.pk-card .pk-card-fig.pk-card-fig-pad img{object-fit:contain;padding:clamp(.9rem,1.8vw,1.4rem)}
+/* A caption strip over the foot of the picture, for the cards that replace a
+   sentence of prose with a labelled photograph. */
+.pk-card .pk-card-figcap{position:absolute;left:0;right:0;bottom:0;z-index:1;
+  padding:.55rem clamp(1.4rem,2.4vw,2.1rem);background:linear-gradient(transparent,var(--scrim));
+  color:#fff;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600}
 @media(min-width:720px){ .pk-cards.pk-cards-2{grid-template-columns:repeat(2,1fr)}
   .pk-cards.pk-cards-3{grid-template-columns:repeat(2,1fr)}
   .pk-cards.pk-cards-4{grid-template-columns:repeat(2,1fr)} }
