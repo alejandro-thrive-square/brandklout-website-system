@@ -198,7 +198,15 @@ export async function callTool(name, args) {
  * guarded by `expectedHash`: if the dropped call actually landed, the hash has
  * moved and the retry fails loudly instead of applying twice.
  */
-const BRIDGE_DOWN = /runs in the Instatic (Site editor|Content workspace)|AI chat stream ended before tool result/i;
+/* Three transients, all arriving as a 200 with a plain sentence:
+   - the Site editor bridge not being attached,
+   - the Content workspace bridge not being attached,
+   - the proxy dropping the response mid-call,
+   - and the store refusing a write while the editor is still syncing, which
+     says so in as many words and states that NOTHING was created.
+   The last one is the safest of the four to retry and was the one still
+   missing: it failed whole pages mid-run on a 33-page push. */
+const BRIDGE_DOWN = /runs in the Instatic (Site editor|Content workspace)|AI chat stream ended before tool result|refused before it reached the store/i;
 export async function callJson(name, args, { tries = 6, waitMs = 1500 } = {}) {
   let last;
   for (let i = 0; i < tries; i++) {

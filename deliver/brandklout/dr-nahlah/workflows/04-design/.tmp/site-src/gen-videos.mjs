@@ -26,14 +26,21 @@ const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, 
 
 const [lead, ...rest] = videos;
 
-const facade = (v) => `        <button class="vl-card" type="button" data-yt="${v.id}"
+/* A DIV with role="button", not a <button>.
+   Instatic maps <button> and <a> onto modules that own their text, so the whole
+   child structure is flattened into a single string on import: all thirteen
+   cards arrived as a bare title with the thumbnail, the play badge and the
+   title element gone. A container keeps its children. Keyboard support is
+   restored explicitly in sections/video-library.js, so this is the same control
+   to a screen reader and to the keyboard, just one the importer will not eat. */
+const facade = (v) => `        <div class="vl-card" role="button" tabindex="0" data-yt="${v.id}"
                 aria-label="Play: ${esc(v.title)}">
           <span class="vl-shot">
             <img src="${v.thumb}" alt="" loading="lazy" width="480" height="360"${v.zoom !== 1 ? ` style="--vl-zoom:${v.zoom}"` : ""}>
             <span class="vl-play" aria-hidden="true"></span>
           </span>
           <span class="vl-title">${esc(v.title)}</span>
-        </button>`;
+        </div>`;
 
 const page = `<!-- ==========================================================================
      VIDEO LIBRARY — the fourteen films the practice publishes on its own

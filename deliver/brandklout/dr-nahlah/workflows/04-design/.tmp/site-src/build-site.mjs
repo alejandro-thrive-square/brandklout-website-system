@@ -138,6 +138,10 @@ const PAGES = [
   // The old site's /video-gallery/, rebuilt and renamed. Fourteen films that
   // were only ever reachable from a page headed with another practice's name.
   { slug: "video-library", journey: 0, navKey: null },
+  // The pre-split slugs, kept alive as choosers rather than deleted: they are
+  // what inbound links point at, and Instatic has no redirect tool.
+  { slug: "privacy-policy", journey: 0, navKey: null },
+  { slug: "terms-conditions", journey: 0, navKey: null },
   { slug: "privacy-policy-maclean", journey: 0, navKey: null },
   { slug: "privacy-policy-alexandria", journey: 0, navKey: null },
   { slug: "terms-of-service-maclean", journey: 0, navKey: null },

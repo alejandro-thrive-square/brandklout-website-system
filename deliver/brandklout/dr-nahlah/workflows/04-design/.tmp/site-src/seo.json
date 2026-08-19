@@ -1452,5 +1452,49 @@
     }
    ]
   }
+ },
+ "privacy-policy": {
+  "title": "Privacy Policy | Dr. Nahlah Implants & Prosthodontics | McLean & Alexandria",
+  "desc": "The practice trades as two separate entities, so each office has its own privacy policy. Choose the document that governs the office you are treated at.",
+  "ogTitle": "Privacy Policy | Dr. Nahlah",
+  "ogDesc": "Two offices, two entities, two documents.",
+  "jsonLd": {
+   "@context": "https://schema.org",
+   "@graph": [
+    {
+     "@type": "WebPage",
+     "name": "Privacy Policy",
+     "description": "Chooser for the per-entity privacy policy documents.",
+     "isPartOf": {
+      "@id": "/#website"
+     },
+     "about": {
+      "@id": "/#practice"
+     }
+    }
+   ]
+  }
+ },
+ "terms-conditions": {
+  "title": "Terms of Service | Dr. Nahlah Implants & Prosthodontics | McLean & Alexandria",
+  "desc": "The practice trades as two separate entities, so each office has its own terms of service. Choose the document that governs the office you are treated at.",
+  "ogTitle": "Terms of Service | Dr. Nahlah",
+  "ogDesc": "Two offices, two entities, two documents.",
+  "jsonLd": {
+   "@context": "https://schema.org",
+   "@graph": [
+    {
+     "@type": "WebPage",
+     "name": "Terms of Service",
+     "description": "Chooser for the per-entity terms of service documents.",
+     "isPartOf": {
+      "@id": "/#website"
+     },
+     "about": {
+      "@id": "/#practice"
+     }
+    }
+   ]
+  }
  }
 }

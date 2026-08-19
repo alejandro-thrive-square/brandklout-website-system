@@ -89,9 +89,20 @@ for (const file of targets) {
     const covered = blocks.join('').length;
     if (covered / html.length < 0.95) throw new Error(`block split covers only ${(100 * covered / html.length).toFixed(1)}%`);
 
-    const docs = await callJson('site_list_documents', {});
-    const doc = (docs.documents || []).find((d) => d.slug === slug);
-    if (!doc) throw new Error('page does not exist on Instatic (create it first)');
+    let docs = await callJson('site_list_documents', {});
+    let doc = (docs.documents || []).find((d) => d.slug === slug);
+    if (!doc) {
+      // Create it rather than refusing. Five pages were added to the local
+      // package on 2026-08-19 (four per-entity legal documents and the video
+      // library) and "create it first" just meant every run skipped them.
+      const raw = fs.readFileSync(path.resolve(SITE, file), 'utf8');
+      const title = (/<title>([^<]+)<\/title>/.exec(raw) || [, slug])[1].trim();
+      await callWrite('site_add_page', { title, slug });
+      docs = await callJson('site_list_documents', {});
+      doc = (docs.documents || []).find((d) => d.slug === slug);
+      if (!doc) throw new Error('page still absent after site_add_page');
+      process.stdout.write('(created) ');
+    }
 
     process.stdout.write(`${slug}: ${blocks.length} blocks, ${html.length} chars … `);
     await callWrite('site_replace_node_html', { nodeId: doc.rootNodeId, html: blocks[0] });

@@ -18,6 +18,18 @@ WZ.dom("vl-grid", function () {
   var grid = document.querySelector('.vl-grid');
   if (!grid) return;
 
+  /* role="button" is a promise to behave like one, so Enter and Space have to
+     be wired by hand. A <button> would give this for free, but Instatic's
+     importer flattens a button's children and the card would lose its
+     thumbnail; see gen-videos.mjs. */
+  grid.addEventListener('keydown', function (e) {
+    if (e.key !== 'Enter' && e.key !== ' ' && e.key !== 'Spacebar') return;
+    var card = e.target.closest && e.target.closest('.vl-card');
+    if (!card || !grid.contains(card) || !card.getAttribute('data-yt')) return;
+    e.preventDefault();
+    card.click();
+  });
+
   grid.addEventListener('click', function (e) {
     var card = e.target.closest('.vl-card');
     if (!card || !grid.contains(card)) return;
@@ -37,9 +49,9 @@ WZ.dom("vl-grid", function () {
     f.setAttribute('allowfullscreen', '');
     frame.appendChild(f);
 
-    /* The <button> becomes a plain container: a button that now holds a video
-       player is no longer a button, and leaving it as one strands a screen
-       reader on a control that does nothing. */
+    /* Once it holds a player the card is no longer a control, so the button
+       role, the tab stop and the label all come off. Leaving them strands a
+       screen reader on something that announces as a button and does nothing. */
     var open = document.createElement('div');
     open.className = 'vl-card';
     open.appendChild(frame);
