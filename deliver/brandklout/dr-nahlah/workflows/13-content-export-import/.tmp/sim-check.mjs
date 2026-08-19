@@ -50,7 +50,11 @@ await page("index.html", [
   ["chapter 07 reads light", "getComputedStyle(document.getElementById('proof')).backgroundColor", "rgb(250, 248, 243)"],
   ["chapter 08 reads light", "getComputedStyle(document.getElementById('invitation')).backgroundColor", "rgb(250, 248, 243)"],
   ["location cards are white", "getComputedStyle(document.querySelector('.iv-loc')).backgroundColor", "rgb(255, 255, 255)"],
-  ["reviews frame removed when blocked", "document.querySelectorAll('.rv-embed iframe').length", v=>v===0||v===1],
+  ["review wall renders 6 cards", "document.querySelectorAll('#reviews .rv-wall .rv-card').length", 6],
+  ["review cards are styled, not raw text", "getComputedStyle(document.querySelector('.rv-card')).backgroundColor", "rgb(255, 255, 255)"],
+  ["review wall is a grid at desktop", "getComputedStyle(document.querySelector('.rv-wall')).gridTemplateColumns.split(' ').length", 3],
+  ["no third-party frame in the reviews block", "document.querySelectorAll('#reviews iframe').length", 0],
+  ["headline score is the client's 4.9", "document.getElementById('rvScore').textContent.trim()", "4.9"],
   ["FP figure loaded", "(()=>{const i=[...document.images].find(x=>/fp1-fp3/.test(x.src)); return i?i.naturalWidth+'x'+i.naturalHeight:'missing';})()", "2000x387"],
   ["every image decoded", "[...document.images].filter(i=>i.complete&&i.naturalWidth===0).length", 0],
 ]);

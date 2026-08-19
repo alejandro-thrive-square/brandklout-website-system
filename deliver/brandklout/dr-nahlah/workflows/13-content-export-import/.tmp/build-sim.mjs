@@ -6,6 +6,14 @@ import fs from 'node:fs'; import path from 'node:path';
 const HERE = import.meta.dirname;
 const SITE = path.resolve(HERE, '../../04-design/.tmp/final-site');
 const OUT = path.join(HERE, '.instatic-sim');
+// Keep the simulator's stylesheet and runtime in step with the build. Copying
+// them once and forgetting is how a stale sheet made the review wall look
+// unstyled when it was fine: the sim must always serve what was pushed.
+fs.mkdirSync(path.join(OUT, 'assets'), { recursive: true });
+for (const f of ['site.css', 'site.js']) {
+  fs.copyFileSync(path.join(SITE, 'assets', f), path.join(OUT, 'assets', f));
+}
+
 const head = fs.readFileSync(path.join(SITE, 'index.html'), 'utf8');
 const fonts = head.match(/<link[^>]*fonts\.googleapis[^>]*>/)[0];
 for (const slug of process.argv.slice(2)) {
