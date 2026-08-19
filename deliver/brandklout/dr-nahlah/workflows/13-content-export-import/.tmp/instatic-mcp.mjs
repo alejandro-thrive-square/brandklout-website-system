@@ -198,7 +198,7 @@ export async function callTool(name, args) {
  * guarded by `expectedHash`: if the dropped call actually landed, the hash has
  * moved and the retry fails loudly instead of applying twice.
  */
-const BRIDGE_DOWN = /runs in the Instatic Site editor|AI chat stream ended before tool result/i;
+const BRIDGE_DOWN = /runs in the Instatic (Site editor|Content workspace)|AI chat stream ended before tool result/i;
 export async function callJson(name, args, { tries = 6, waitMs = 1500 } = {}) {
   let last;
   for (let i = 0; i < tries; i++) {
