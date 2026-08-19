@@ -1382,3 +1382,60 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 
 @media(min-width:700px){ .vl-grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1080px){ .vl-grid{grid-template-columns:repeat(3,1fr)} }
+
+/* ===== css/62-blog.css ===== */
+/* ---------- blog: index cards and the post template ----------
+   These classes are used by Instatic only. The 43 posts live in that platform's
+   `posts` collection, so the index is a CMS loop and the post body is rendered
+   into a template outlet, neither of which the static local build can produce.
+   The STYLING still belongs here, because site.css is the one stylesheet both
+   platforms load: putting it in Instatic's own Selectors panel instead is how
+   the class system forked in the first place. */
+
+/* --- index --- */
+/* The loop element carries this class directly. Wrapping a loop in a grid puts
+   every iteration inside ONE cell, which renders as a single narrow column with
+   the rest of the row empty. */
+.bl-grid{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);
+  margin-top:clamp(2rem,4vw,3rem)}
+.bl-card{background:var(--card);padding:clamp(1.5rem,2.6vw,2.25rem);display:grid;gap:.85rem;
+  align-content:start;transition:background .4s cubic-bezier(.22,1,.36,1)}
+.bl-card:hover{background:var(--bg-3)}
+.bl-when{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint)}
+.bl-card h2{font-family:var(--f-display);font-size:calc(1.35rem * var(--t-sm));font-weight:500;
+  line-height:1.28;margin:0}
+.bl-card h2 a{color:var(--fg)}
+.bl-card h2 a:hover{color:var(--accent)}
+.bl-card p{color:var(--fg-body);font-weight:300;font-size:.94rem;line-height:1.7;margin:0}
+.bl-more{display:inline-flex;align-items:center;gap:.6rem;margin-top:.2rem;font-size:.72rem;
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+/* The rule is a pseudo-element, not an <i>. Inside a CMS loop an empty inline
+   element renders in the Instatic canvas as an "Empty container" chip on every
+   iteration, so 43 cards grew 43 pieces of editor furniture. Nothing to drop
+   here means nothing to render. */
+.bl-more::after{content:"";display:block;width:18px;height:1px;background:var(--rule);
+  transition:width .4s cubic-bezier(.22,1,.36,1)}
+.bl-card:hover .bl-more::after{width:38px}
+@media(min-width:700px){ .bl-grid{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:1080px){ .bl-grid{grid-template-columns:repeat(3,1fr)} }
+
+/* --- a single post ---
+   One column, measured for reading. The body arrives from the CMS as plain
+   h2/h3/p/ul, so it is styled by element rather than by class: nothing in the
+   entry markup carries one, and it is not ours to rewrite per post. */
+.bl-post{max-width:74ch;margin-inline:auto}
+.bl-post .bl-when{display:block;margin-bottom:1rem}
+.bl-post h1{font-size:var(--h1);max-width:20ch;margin-bottom:clamp(1.5rem,3vw,2.25rem)}
+.bl-body{color:var(--fg-body);font-weight:300}
+.bl-body > * + *{margin-top:1.15rem}
+.bl-body h2{font-family:var(--f-display);font-size:calc(1.6rem * var(--t-sm));font-weight:500;
+  color:var(--fg);line-height:1.3;margin-top:clamp(2rem,3.6vw,2.75rem)}
+.bl-body h3{font-family:var(--f-display);font-size:calc(1.22rem * var(--t-sm));font-weight:500;
+  color:var(--fg);margin-top:clamp(1.6rem,2.8vw,2.25rem)}
+.bl-body p{line-height:1.85}
+.bl-body ul{display:grid;gap:.6rem;padding-left:1.1rem;list-style:disc}
+.bl-body li{line-height:1.75}
+.bl-body a{color:var(--accent);text-decoration:underline;text-underline-offset:.18em}
+.bl-foot{margin-top:clamp(2.5rem,5vw,4rem);padding-top:clamp(1.5rem,3vw,2.25rem);
+  border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem;
+  justify-content:space-between;align-items:center}

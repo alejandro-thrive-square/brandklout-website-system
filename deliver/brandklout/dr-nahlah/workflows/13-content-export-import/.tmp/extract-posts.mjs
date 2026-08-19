@@ -101,7 +101,26 @@ for (const r of posts) {
     (r.headings || []).map((h) => h.text).find((t) => t && !/book now|share this post/i.test(t)) ||
     r.slug);
 
-  const body = html.join('\n');
+  // The heading and the original date go INSIDE the body, not in the template.
+  //
+  // Instatic strips {currentEntry.*} tokens outside a loop: inserted into a
+  // postTypes template they vanish and the <h1> renders empty, and setting the
+  // text prop afterwards returns {"ok":true} and stores nothing. The entry body
+  // is the only thing that reaches an entry route intact.
+  //
+  // It is also the more honest home for the date. `publishedAt` on these
+  // documents is the moment they were loaded into the CMS, not when the practice
+  // published them, so every 2022 post would otherwise read 2026.
+  const stamp = date
+    ? new Date(date + 'T00:00:00Z').toLocaleDateString('en-GB',
+        { day: 'numeric', month: 'long', year: 'numeric', timeZone: 'UTC' })
+    : null;
+  const heading = `<h1>${esc(title.trim())}</h1>` +
+    (stamp ? `\n<p class="bl-when">${stamp}</p>` : '');
+  // `heading`, NOT `head`. `head` is the raw markdown before the share widget,
+  // i.e. the whole nav dump; prefixing it put "Skip to content" and forty menu
+  // links at the top of all 43 bodies.
+  const body = heading + '\n' + html.join('\n');
   const words = body.replace(/<[^>]+>/g, ' ').split(/\s+/).filter(Boolean).length;
   if (words < 300) problems.push(`${r.slug}: only ${words} words after trimming, check the boundaries`);
 
