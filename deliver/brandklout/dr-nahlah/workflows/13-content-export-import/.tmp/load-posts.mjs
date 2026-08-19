@@ -46,7 +46,11 @@ for (const p of posts.slice(0, LIMIT === Infinity ? posts.length : LIMIT)) {
   const back = await callJson('content_get_document', { tableId: 'posts', documentId: id });
   const f = back.document?.fields || back.fields || {};
   if (String(f.body || '') !== p.body) {
-    // one repair attempt: rewrite the field, then re-read
+    // The document MUST be active before a field write; the tool refuses
+    // otherwise, and create-then-fill only works because create leaves the new
+    // document active. On a REWRITE of an existing post nothing has made it
+    // active, so this is not optional.
+    await callWrite('content_set_active_document', { documentId: id });
     await callWrite('content_set_document_fields', { documentId: id, fields: { body: p.body } });
     const again = await callJson('content_get_document', { tableId: 'posts', documentId: id });
     const f2 = again.document?.fields || again.fields || {};
