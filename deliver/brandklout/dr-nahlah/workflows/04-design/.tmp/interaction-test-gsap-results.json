@@ -67,7 +67,7 @@
   {
     "name": "page has real scroll height",
     "pass": true,
-    "detail": "16261px"
+    "detail": "18882px"
   },
   {
     "name": "chapter 01 words brighten with scroll",
@@ -77,17 +77,17 @@
   {
     "name": "counters reach final values",
     "pass": true,
-    "detail": "23+ · 12 · 4.9 · 2"
+    "detail": "23+ · 18,000+ · 15,000+ · 4.9"
   },
   {
     "name": "marquee row duplicated for seamless loop",
     "pass": true,
-    "detail": "20 nodes"
+    "detail": "28 nodes"
   },
   {
     "name": "transformation chapter is pinned",
     "pass": true,
-    "detail": "pin starts at 4871"
+    "detail": "pin starts at 5138"
   },
   {
     "name": "pin holds for a real scroll distance",
@@ -112,7 +112,7 @@
   {
     "name": "path chapter is pinned",
     "pass": true,
-    "detail": "{\"s\":8668,\"e\":9690}"
+    "detail": "{\"s\":8935,\"e\":9957}"
   },
   {
     "name": "track scrolls horizontally while pinned",
@@ -170,9 +170,9 @@
     "detail": "ch-arrival,ch-difference,ch-invitation,ch-path,ch-proof,ch-reality,ch-specialist,ch-standard,ch-transformation"
   },
   {
-    "name": "comparison table renders 6 rows",
+    "name": "comparison table renders 9 rows",
     "pass": true,
-    "detail": "6 rows"
+    "detail": "9 rows"
   },
   {
     "name": "comparison rows revealed",
@@ -210,32 +210,22 @@
     "detail": ""
   },
   {
-    "name": "reviews grid renders 6 cards",
+    "name": "review embed present",
     "pass": true,
     "detail": ""
   },
   {
-    "name": "review cards revealed",
+    "name": "embed points at this practice's widget",
     "pass": true,
-    "detail": ""
+    "detail": "https://reputationhub.site/reputation/widgets/review_widget/xJDu1mFoW5jF"
   },
   {
     "name": "aggregate score counted up",
     "pass": true,
-    "detail": "5.0"
+    "detail": "4.9"
   },
   {
-    "name": "no placeholder copy left in the reviews grid",
-    "pass": true,
-    "detail": ""
-  },
-  {
-    "name": "patient names are all attested in the source site",
-    "pass": true,
-    "detail": "Melanie, Yolanda, Stephen, Donita, Barbara, A couple"
-  },
-  {
-    "name": "every patient card links to its story",
+    "name": "no placeholder copy left in the reviews block",
     "pass": true,
     "detail": ""
   },
