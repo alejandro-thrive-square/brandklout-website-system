@@ -1,114 +1,114 @@
 [
  {
-  "slug": "all-on-4",
+  "slug": "smile-makeover",
   "ok": true,
   "want": {
-   "cls": 175,
-   "img": 24,
-   "sec": 12
+   "cls": 134,
+   "img": 23,
+   "sec": 7
   },
   "got": {
-   "cls": 175,
-   "img": 24,
-   "sec": 12
+   "cls": 134,
+   "img": 23,
+   "sec": 7
   }
  },
  {
-  "slug": "dental-implants",
+  "slug": "teeth-whitening",
   "ok": true,
   "want": {
-   "cls": 155,
-   "img": 22,
-   "sec": 10
-  },
-  "got": {
-   "cls": 155,
-   "img": 22,
-   "sec": 10
-  }
- },
- {
-  "slug": "implant-cost",
-  "ok": true,
-  "want": {
-   "cls": 114,
-   "img": 13,
-   "sec": 8
-  },
-  "got": {
-   "cls": 114,
-   "img": 13,
-   "sec": 8
-  }
- },
- {
-  "slug": "implant-supported-dentures",
-  "ok": true,
-  "want": {
-   "cls": 131,
-   "img": 16,
-   "sec": 9
-  },
-  "got": {
-   "cls": 131,
-   "img": 16,
-   "sec": 9
-  }
- },
- {
-  "slug": "index",
-  "ok": true,
-  "want": {
-   "cls": 221,
-   "img": 25,
-   "sec": 9
-  },
-  "got": {
-   "cls": 221,
-   "img": 25,
-   "sec": 9
-  }
- },
- {
-  "slug": "oral-surgery",
-  "ok": true,
-  "want": {
-   "cls": 93,
+   "cls": 103,
    "img": 12,
    "sec": 7
   },
   "got": {
-   "cls": 93,
+   "cls": 103,
    "img": 12,
    "sec": 7
   }
  },
  {
-  "slug": "our-facility",
+  "slug": "terms-conditions",
   "ok": true,
   "want": {
-   "cls": 113,
-   "img": 19,
-   "sec": 7
+   "cls": 42,
+   "img": 3,
+   "sec": 2
   },
   "got": {
-   "cls": 113,
-   "img": 19,
-   "sec": 7
+   "cls": 42,
+   "img": 3,
+   "sec": 2
   }
  },
  {
-  "slug": "patient-center",
+  "slug": "terms-of-service-alexandria",
   "ok": true,
   "want": {
-   "cls": 104,
-   "img": 16,
-   "sec": 6
+   "cls": 35,
+   "img": 3,
+   "sec": 28
   },
   "got": {
-   "cls": 104,
+   "cls": 35,
+   "img": 3,
+   "sec": 28
+  }
+ },
+ {
+  "slug": "terms-of-service-maclean",
+  "ok": true,
+  "want": {
+   "cls": 35,
+   "img": 3,
+   "sec": 28
+  },
+  "got": {
+   "cls": 35,
+   "img": 3,
+   "sec": 28
+  }
+ },
+ {
+  "slug": "thank-you",
+  "ok": true,
+  "want": {
+   "cls": 75,
+   "img": 8,
+   "sec": 5
+  },
+  "got": {
+   "cls": 75,
+   "img": 8,
+   "sec": 5
+  }
+ },
+ {
+  "slug": "veneers",
+  "ok": true,
+  "want": {
+   "cls": 115,
+   "img": 15,
+   "sec": 8
+  },
+  "got": {
+   "cls": 115,
+   "img": 15,
+   "sec": 8
+  }
+ },
+ {
+  "slug": "video-library",
+  "ok": true,
+  "want": {
+   "cls": 99,
    "img": 16,
-   "sec": 6
+   "sec": 3
+  },
+  "got": {
+   "cls": 99,
+   "img": 16,
+   "sec": 3
   }
  }
 ]

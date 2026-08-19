@@ -47,7 +47,7 @@
   {
     "name": "modules for sections that are NOT on this page stayed inert",
     "pass": true,
-    "detail": "10 registered, 9 active"
+    "detail": "11 registered, 9 active"
   },
   {
     "name": "hero headline split into lines",
@@ -67,7 +67,7 @@
   {
     "name": "page has real scroll height",
     "pass": true,
-    "detail": "18882px"
+    "detail": "18764px"
   },
   {
     "name": "chapter 01 words brighten with scroll",
@@ -147,7 +147,7 @@
   {
     "name": "nav progress bar fills with scroll",
     "pass": true,
-    "detail": "81%"
+    "detail": "80%"
   },
   {
     "name": "nav chapter readout updates",
@@ -210,14 +210,24 @@
     "detail": ""
   },
   {
-    "name": "review embed present",
+    "name": "review wall renders its cards",
+    "pass": true,
+    "detail": 6
+  },
+  {
+    "name": "every card carries a rating, a quote and an author",
     "pass": true,
     "detail": ""
   },
   {
-    "name": "embed points at this practice's widget",
+    "name": "the cards are visible, not left at their reveal start",
     "pass": true,
-    "detail": "https://reputationhub.site/reputation/widgets/review_widget/xJDu1mFoW5jF"
+    "detail": ""
+  },
+  {
+    "name": "the reviews block falls back to its own cards when the vendor is unreachable",
+    "pass": true,
+    "detail": 0
   },
   {
     "name": "aggregate score counted up",
