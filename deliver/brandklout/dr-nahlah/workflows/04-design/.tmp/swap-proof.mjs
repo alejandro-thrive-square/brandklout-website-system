@@ -28,8 +28,8 @@ const base = (process.argv[2] || "http://127.0.0.1:8903").replace(/\/$/, "");
    - a kit section has no module of its own and depends entirely on the shared
      kit behaviour, so it tests that the shared layer is really shared. */
 const MOVES = [
-  { from: "index.html", section: "standard", into: "privacy-policy.html", module: "ch-standard" },
-  { from: "veneers.html", section: "cases", into: "privacy-policy.html", module: null },
+  { from: "index.html", section: "standard", into: "privacy-policy-maclean.html", module: "ch-standard" },
+  { from: "veneers.html", section: "cases", into: "privacy-policy-maclean.html", module: null },
 ];
 
 function lift(html, id) {

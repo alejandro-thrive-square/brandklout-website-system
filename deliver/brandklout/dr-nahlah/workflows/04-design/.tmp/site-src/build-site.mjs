@@ -129,8 +129,19 @@ const PAGES = [
   // `tysons-study-club` was the planned fifteenth page. Its source is entirely
   // Lorem Ipsum on the client's live site, so there is nothing to rebuild from
   // and privacy-policy took the slot. See SITE.md.
-  { slug: "privacy-policy", journey: 0, navKey: null },
-  { slug: "terms-conditions", journey: 0, navKey: null },
+  // The client's counsel rewrote both documents on the Webflow build (effective
+  // 18 Aug 2026) and they are PER ENTITY: McLean trades as Esam Abou Nahlah,
+  // DDS, MS, PLLC and Alexandria as Implants And Prosthodontics Specialists,
+  // PLLC. Four pages, therefore, not two. The old WordPress terms-conditions
+  // and privacy-policy are superseded and retired; both slugs need a 301 to
+  // their McLean replacement. Bodies are written by gen-legal.mjs.
+  // The old site's /video-gallery/, rebuilt and renamed. Fourteen films that
+  // were only ever reachable from a page headed with another practice's name.
+  { slug: "video-library", journey: 0, navKey: null },
+  { slug: "privacy-policy-maclean", journey: 0, navKey: null },
+  { slug: "privacy-policy-alexandria", journey: 0, navKey: null },
+  { slug: "terms-of-service-maclean", journey: 0, navKey: null },
+  { slug: "terms-of-service-alexandria", journey: 0, navKey: null },
   // The destination for the consultation request. Replaces the old site's two
   // identical survey thank-you pages; noindex, so it never surfaces in search.
   { slug: "thank-you", journey: 0, navKey: null },

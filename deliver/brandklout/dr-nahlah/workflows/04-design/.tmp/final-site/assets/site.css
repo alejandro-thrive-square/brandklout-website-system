@@ -1324,3 +1324,49 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .mband .mband-kicker{display:block;color:var(--gold-light);font-family:var(--f-body);
   font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
   margin-bottom:.6rem}
+
+/* ===== css/61-video-library.css ===== */
+/* ---------- video library ----------
+   One real embed at the top, then a grid of click-to-play facades. The facade
+   is a <button>, not a link with a fake role: it does something on this page
+   rather than going anywhere, so the element and the behaviour agree and
+   keyboard support comes free. */
+.vl-lead{margin:0}
+.vl-frame{position:relative;padding-top:56.25%;overflow:hidden;background:var(--bg-3);
+  border:1px solid var(--line)}
+.vl-frame iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
+.vl-lead figcaption{margin-top:1rem;font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--fg-soft)}
+
+.vl-grid{display:grid;grid-template-columns:1fr;gap:clamp(1.25rem,2.4vw,2rem)}
+.vl-card{display:grid;gap:.9rem;padding:0;border:0;background:none;text-align:left;
+  cursor:pointer;color:inherit;font:inherit;align-content:start}
+.vl-shot{position:relative;display:block;overflow:hidden;aspect-ratio:16/9;
+  background:var(--bg-3);border:1px solid var(--line)}
+/* hqdefault is 480x360 (4:3) with the 16:9 frame letterboxed inside it, so the
+   bars are exactly 45px top and bottom. `object-fit:cover` into a 16:9 box
+   crops precisely that much and nothing more, which is why there is no scale
+   here: an earlier 1.34 zoom "to hide the bars" was cropping a third of every
+   thumbnail and cutting the titles YouTube bakes into them. */
+/* transform-origin, not object-position: the crop is a scale, and a scale about
+   the centre of a PORTRAIT frame lands on the chin. Anchoring near the top of
+   the frame keeps the speaker's face in the cell, which is the entire point of
+   a thumbnail. Only the zoomed cards carry --vl-zoom, so the 16:9 ones are
+   untouched by this. */
+.vl-shot img{width:100%;height:100%;object-fit:cover;transform:scale(var(--vl-zoom,1));
+  transform-origin:center 26%;
+  transition:transform .6s cubic-bezier(.22,1,.36,1)}
+.vl-card:hover .vl-shot img{transform:scale(calc(var(--vl-zoom,1) * 1.04))}
+.vl-play{position:absolute;left:50%;top:50%;translate:-50% -50%;width:56px;height:56px;
+  border-radius:50%;display:grid;place-items:center;background:rgba(11,11,12,.62);
+  backdrop-filter:blur(2px);transition:background .35s,scale .35s}
+.vl-play::after{content:"";border-left:14px solid #fff;border-block:9px solid transparent;
+  margin-left:4px}
+.vl-card:hover .vl-play{background:var(--gold-deep);scale:1.06}
+.vl-card:focus-visible .vl-play{background:var(--gold-deep);scale:1.06}
+.vl-title{font-family:var(--f-display);font-size:calc(1.16rem * var(--t-sm));font-weight:500;
+  line-height:1.3;color:var(--fg)}
+.vl-note{margin-top:clamp(2rem,4vw,3rem);max-width:62ch;color:var(--fg-body);font-weight:300}
+
+@media(min-width:700px){ .vl-grid{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:1080px){ .vl-grid{grid-template-columns:repeat(3,1fr)} }

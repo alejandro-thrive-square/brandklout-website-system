@@ -13,17 +13,21 @@ import path from "node:path";
 import http from "node:http";
 
 const base = (process.argv[2] || "http://127.0.0.1:8902").replace(/\/$/, "");
-const PAGES = (process.argv[3] || [
-  "index", "dental-implants", "all-on-4", "implant-cost", "sedation-dentistry",
-  "smile-makeover", "veneers", "smile-gallery", "patient-stories", "meet-dr-nahlah", "contact",
-  // 2026-08-10 build-out from the old site's IA. Keep this list in step with
-  // PAGES in site-src/build-site.mjs — a page missing here is a page whose
-  // links, contrast and overflow nobody is checking.
-  "about", "our-team", "our-facility",
-  "cosmetic-dentistry", "teeth-whitening", "crowns-and-bridges", "oral-surgery",
-  "emergency-dentistry", "dental-conditions", "implant-supported-dentures", "dental-implant-faq",
-  "patient-center", "financing", "doctor-referral", "privacy-policy", "terms-conditions", "thank-you",
-].join(",")).split(",");
+// The page list is DERIVED from site-src/build-site.mjs, not restated here.
+// It used to be a hand-kept copy with a comment asking the next person to keep
+// it in step, and on 2026-08-19 it drifted: two retired legal pages were still
+// in the list and five new ones were not. The run then fetched a 404, whose
+// document has no #burger, and the harness threw `Uncaught` instead of failing
+// a named check. One source, and a page cannot quietly stop being tested.
+const PAGES = (process.argv[3] || (() => {
+  const src = fs.readFileSync(
+    path.resolve(import.meta.dirname, "site-src", "build-site.mjs"), "utf8");
+  const block = /const PAGES = \[([\s\S]*?)\];/.exec(src);
+  if (!block) throw new Error("could not find PAGES in build-site.mjs");
+  const slugs = [...block[1].matchAll(/slug:\s*"([^"]+)"/g)].map((m) => m[1]);
+  if (slugs.length < 20) throw new Error(`only ${slugs.length} slugs parsed from build-site.mjs`);
+  return slugs.join(",");
+})()).split(",");
 
 const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
 const PORT = 9100 + Math.floor(Math.random() * 250);

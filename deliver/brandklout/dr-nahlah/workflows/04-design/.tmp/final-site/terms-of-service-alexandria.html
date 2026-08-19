@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<!-- Title, description, Open Graph, Twitter card and JSON-LD are injected here
+     by build-site.mjs from site-src/seo.json, which mirrors what the Webflow
+     Designer carries. Do not hand-edit the output; edit seo.json. -->
+<title>Terms of Service | Alexandria Office | Dr. Nahlah Implants &amp; Prosthodontics</title>
+<meta name="description" content="The terms governing use of this website, appointment requests, SMS messaging and online services for the Alexandria office at 2855 Duke St.">
+<meta property="og:title" content="Terms of Service | Dr. Nahlah, Alexandria">
+<meta property="og:description" content="The terms governing this website and our online services for the Alexandria office.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Terms of Service | Dr. Nahlah, Alexandria">
+<meta name="twitter:description" content="The terms governing this website and our online services for the Alexandria office.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "WebPage",
+      "name": "Terms of Service, Alexandria office",
+      "description": "Terms of Service for the Alexandria office of Dr. Nahlah Implants and Prosthodontics Specialists.",
+      "isPartOf": {
+        "@id": "/#website"
+      },
+      "about": {
+        "@id": "/#practice"
+      }
+    }
+  ]
+}
+</script>
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     THE STYLESHEET. One file for the whole site, assembled by build-site.mjs
+     from site-src/css/*.css in filename order, which IS the cascade order:
+
+       00  fluid root font-size  generated; deliver/process/04-design/fluid-root.md
+       01  design tokens         palette, theme layer, type steps
+       02  base                  reset and the shared primitives
+       10-12  chrome             nav, drawer, footer
+       20  page kit              the shared interior-page section vocabulary
+       30-38  home chapters      the nine bespoke chapters of the journey
+       50-59  page overrides     rules only one page needs
+
+     Every page loads the same file, so moving a section from one page to another
+     means moving the markup and nothing else. It also means the rules exist once
+     rather than being re-emitted into all 26 pages.
+     ========================================================================== -->
+<link rel="stylesheet" href="assets/site.css">
+
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead.
+     The runtime itself is NOT here: it lives in assets/site.js at the end of
+     <body>, because ScrollTrigger has to be registered after document.body
+     exists or ScrollSmoother dies on getScrollFunc. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+</head>
+
+<body>
+
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<header class="nav" id="nav" data-journey="0">
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap no-rail nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+      <img src="assets/logo.png" alt="Dr. Nahlah, Implants and Prosthodontics Specialists">
+    </a>
+    <nav class="nav-slot" aria-label="Primary">
+      <!-- The current-page highlight is baked in here at build time. In Webflow
+           the Navbar is ONE shared component, so it cannot be: the conversion
+           turns these five placeholders into a pathname -> href map in the
+           footer custom code. When a slug changes, that map has to change with
+           it — the /about -> /meet-dr-nahlah rename on 2026-08-10 was missed
+           there and needed a patch script (`wzNavCurrentPatch`) to cover it. -->
+      <div class="nav-links">
+        <a href="dental-implants.html">Implants</a>
+        <a href="smile-makeover.html">Cosmetic</a>
+        <a href="smile-gallery.html">Smile Gallery</a>
+        <a href="meet-dr-nahlah.html">The Specialist</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
+      <span class="nav-close" aria-hidden="true">Close</span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full site index. Opens at every breakpoint, so it is the site's real
+     navigation rather than a mobile-only fallback. -->
+<div class="drawer" id="drawer" aria-hidden="true" data-theme="dark">
+  <div class="dr-grid">
+    <div class="dr-col">
+      <h4>Implant Dentistry</h4>
+      <ul>
+        <li><a href="dental-implants.html">Dental Implants</a></li>
+        <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-supported-dentures.html">Fixed vs. Removable</a></li>
+        <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+        <li><a href="dental-implant-faq.html">Implant FAQ</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Treatments</h4>
+      <ul>
+        <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        <li><a href="oral-surgery.html">Oral Surgery</a></li>
+        <li><a href="emergency-dentistry.html">Emergency Dentistry</a></li>
+        <li><a href="dental-conditions.html">Conditions We Treat</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Aesthetics</h4>
+      <ul>
+        <li><a href="cosmetic-dentistry.html">Cosmetic Dentistry</a></li>
+        <li><a href="smile-makeover.html">Smile Makeover</a></li>
+        <li><a href="veneers.html">Porcelain Veneers</a></li>
+        <li><a href="crowns-and-bridges.html">Crowns &amp; Bridges</a></li>
+        <li><a href="teeth-whitening.html">Teeth Whitening</a></li>
+        <li><a href="smile-gallery.html">Smile Gallery</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Who We Are</h4>
+      <ul>
+        <li><a href="about.html">Why Choose Us</a></li>
+        <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+        <li><a href="our-team.html">Meet the Team</a></li>
+        <li><a href="our-facility.html">Our Facility</a></li>
+        <li><a href="patient-stories.html">Patient Stories</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>What To Expect</h4>
+      <ul>
+        <li><a href="patient-center.html">Your First Visit</a></li>
+        <li><a href="financing.html">Insurance &amp; Financing</a></li>
+        <li><a href="contact.html">Contact &amp; Locations</a></li>
+        <li><a href="doctor-referral.html">For Referring Doctors</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dr-foot">
+    <div><b>Tysons Corner &middot; McLean</b>
+      New patients <a href="tel:+15717029900">(571) 702-9900</a><br>
+      Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
+    <div><b>Alexandria</b>
+      New patients <a href="tel:+15712537790">(571) 253-7790</a><br>
+      Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
+    <div><b>Hours</b>
+      Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
+      Fri 8:00am &ndash; 2:00pm &middot; Sat &amp; Sun closed</div>
+  </div>
+</div>
+
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+
+
+<!-- ==========================================================================
+     TERMS OF SERVICE, ALEXANDRIA OFFICE.
+
+     GENERATED by gen-legal.mjs from the client's updated Webflow build
+     (/terms-of-service-alexandria), effective 18 August 2026. Do not hand-edit: re-run the
+     generator against a fresh fetch instead.
+
+     The two offices are SEPARATE LEGAL ENTITIES, which is why this document has
+     an Alexandria counterpart rather than one shared page. The wording is the
+     client's and is carried over verbatim; only structure and typography are
+     ours. The Webflow source marks headings as bold paragraphs, so they are
+     promoted to <h2> here, which is a semantics fix and not a copy change.
+     ========================================================================== -->
+<section class="pg-hero" id="hero">
+  <div class="ph-bg">
+    <img src="assets/office-wide.jpeg" alt="The practice's treatment floor" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Terms of Service, Alexandria</span></div>
+    <h1 data-split>Terms of <em>service</em>.</h1>
+    <p class="ph-lead" data-rv>These Terms of Service (“Terms”) govern your use of the website operated by Implants And Prosthodontics Specialists, PLLC DBA Dr. Nahlah Implants &amp; Prosthodontics Specialists (“Dr. Nahlah Implants &amp; Prosthodontics Specialists” “we,” “us,” or “our”), located at https://www.drnahlah.com/ (the “Site”), as well as our text messaging program.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-ghost magnetic" href="#document"><span>Read the terms of service</span></a>
+    </div>
+  </div>
+</section>
+
+<section class="pk pk-alt" id="document">
+  <div class="wrap section">
+    <div class="lg-body">
+      <p class="lg-intro" data-rv>Effective Date: August 18, 2026. This document governs the
+        Alexandria office. The McLean office is operated by a separate entity and has
+        <a href="terms-of-service-maclean.html">its own terms of service</a>.</p>
+
+      <p>By accessing or using this Site, submitting information through our forms, scheduling appointments, opting in to receive text messages from us, or communicating with us electronically, you agree to these Terms. If you do not agree, please do not use the Site or our online services.</p>
+      <p>We may update these Terms from time to time. Updates will be posted on this page with a revised “Effective Date.” Your continued use of the Site or our SMS program after changes are posted means you accept the updated Terms.</p>
+
+      <section>
+        <h2>1. Eligibility and Use of the Website</h2>
+        <p>You must be at least 18 years old, or have the involvement of a parent or legal guardian, to use this Site, request an appointment, submit information through our forms, or opt in to receive text messages from us.</p>
+        <p>You agree to use the Site only for lawful purposes and in a way that does not interfere with its operation, security, or accessibility for others.</p>      </section>
+
+      <section>
+        <h2>2. Informational Purpose; No Dentist-Patient Relationship</h2>
+        <p>The Site provides general information about our practice, dental services, treatment options, educational content, and patient resources.</p>
+        <p>All content on the Site is provided for general informational and educational purposes only. It is not a substitute for an in-person examination, diagnosis, or treatment plan from a licensed dental professional.</p>
+        <p>Use of the Site does not create a dentist-patient relationship. A relationship is formed only when you are accepted as a patient by our office and receive care from our clinical team.</p>
+        <p>If you believe you are experiencing a dental or medical emergency, contact our office directly or call 911 or your local emergency number. Do not rely on website forms, text messages, or email for urgent care.</p>      </section>
+
+      <section>
+        <h2>3. Appointment Requests and Scheduling</h2>
+        <p>Through the Site, you may submit a contact form, request an appointment, use an external scheduling tool, or otherwise communicate with our office.</p>
+        <p>Submitting a request does not guarantee an appointment. Appointments are confirmed only after our office or scheduling provider verifies availability and contacts you.</p>
+        <p>You agree to provide accurate, current, and complete information when using our forms or scheduling tools. We reserve the right to modify, reschedule, or decline appointment requests based on provider availability, scheduling conflicts, emergencies, incomplete information, or other reasonable considerations.</p>      </section>
+
+      <section>
+        <h2>4. Sensitive Information and Electronic Communications</h2>
+        <p>Our website forms, text messaging program, and general electronic communications are intended for routine inquiries and appointment-related requests. Please do not submit sensitive medical, dental, insurance, or financial information through general website forms, text messages, or unencrypted email. For matters involving protected health information, please call our office or use a secure channel we direct you to.</p>
+        <p>Information you provide as a patient in connection with dental care is governed by our separate Notice of Privacy Practices under HIPAA, available at our office and upon request.</p>      </section>
+
+      <section>
+        <h2>5. Phone, Email, and SMS Communications</h2>
+        <p>By providing your contact information through the Site, scheduling an appointment, or otherwise communicating with our office, you consent to receive non-marketing communications from Esam Nahlah Dentistry related to your inquiry, appointment, or treatment by phone, voicemail, email, and (where you have provided a mobile number) SMS/text message.</p>
+        <p>These communications may include appointment confirmations and reminders, treatment-related follow-ups, office updates, and responses to your inquiries.</p>      </section>
+
+      <section>
+        <h2>SMS / Text Messaging Program (A2P 10DLC).</h2>
+        <p>Esam Nahlah Dentistry operates a text messaging program through a third-party messaging platform. Messages are sent on our behalf using an Application-to-Person (A2P) 10DLC service. By opting in, you agree to the following terms:</p>
+        <p>Esam Nahlah Dentistry operates a text messaging program through a third-party messaging platform. Messages are sent on our behalf using an Application-to-Person (A2P) 10DLC service. By opting in, you agree to the following terms:</p>      </section>
+
+      <section>
+        <h2>How you opt in.</h2>
+        <p>You may opt in to receive text messages from Esam Nahlah Dentistry by:</p>
+        <p>• Checking the SMS consent checkbox on a form on our website (such as the contact, appointment request, or new patient form) and submitting your mobile number</p>
+        <p>• Affirmatively agreeing in writing or electronically to receive text messages from us</p>
+        <p>Consent is not a condition of purchase or of receiving dental care. By checking the SMS consent box and submitting your mobile number, you agree to receive recurring automated and conversational text messages from Esam Nahlah Dentistry at the mobile number you provided.</p>      </section>
+
+      <section>
+        <h2>Types of messages.</h2>
+        <p>Messages you may receive include:</p>
+        <p>• Appointment messages: reminders, confirmations, rescheduling notices, and follow-up care instructions</p>
+        <p>• Conversational messages: two-way replies from our team in response to your questions or to coordinate your visit</p>
+        <p>• Promotional and marketing messages: special offers, seasonal promotions, new services, and practice updates</p>      </section>
+
+      <section>
+        <h2>Program details.</h2>
+        <p>• Message frequency varies based on your appointments and interactions with us.</p>
+        <p>• Message and data rates may apply, depending on your mobile carrier and plan. Esam Nahlah Dentistry does not charge a fee for the text messages themselves.</p>
+        <p>• You may opt out at any time by replying STOP to any message you receive. After you reply STOP, we will send one final message confirming your unsubscribe.</p>
+        <p>• For help, reply HELP to any message, or contact our office at (281) 789-8836 or info@grandmissiondentistry.com.</p>
+        <p>• Supported carriers include AT&amp;T, Verizon Wireless, T-Mobile, Sprint, U.S. Cellular, Boost Mobile, MetroPCS, Cricket Wireless, and others. Mobile carriers are not liable for delayed or undelivered messages.</p>      </section>
+
+      <section>
+        <h2>Mobile information and privacy.</h2>
+        <p>No mobile information will be shared with third parties or affiliates for marketing or promotional purposes. Information sharing related to text messaging is limited to subcontractors who help us operate the SMS program (such as our messaging platform provider and telecommunications carriers) and only as needed to deliver messages to you. We do not sell your phone number or SMS opt-in data.</p>
+        <p>Electronic communications, including email and text messages, are not always fully secure and may be intercepted in transit. Please consider this before sharing sensitive information through these channels.</p>
+        <p>Additional information about how we handle your SMS data is available in our Privacy Policy.</p>      </section>
+
+      <section>
+        <h2>6. Third-Party Tools and Embedded Services</h2>
+        <p>Certain features on the Site and in our messaging program are provided through third-party services, which may include:</p>
+        <p>• External appointment scheduling tools</p>
+        <p>• SMS messaging platform (Go High Level and its underlying telecommunications providers) used to operate our text messaging program</p>
+        <p>• Financing and payment tools (such as Cherry)</p>
+        <p>• Embedded maps (such as Google Maps)</p>
+        <p>• Analytics and performance tools</p>
+        <p>• Embedded videos and review widgets</p>
+        <p>• The AI Smile Preview tool</p>
+        <p>• Other integrated website features</p>
+        <p>These services operate under their own terms of use and privacy policies. We are not responsible for the availability, accuracy, content, security, or practices of any third-party platform. Your use of any such tool is at your own discretion and subject to the third party’s own terms.</p>      </section>
+
+      <section>
+        <h2>7. Financing and Payment Tools</h2>
+        <p>If the Site provides access to financing, payment, or prequalification tools through third-party providers such as Cherry, those services are offered by independent third parties, not directly by Esam Nahlah Dentistry.</p>
+        <p>We do not control financing approvals, application outcomes, credit requirements, payment terms, lending terms, or promotional offers. Questions about financing decisions, account terms, or payments should be directed to the applicable third-party provider.</p>      </section>
+
+      <section>
+        <h2>8. AI Smile Preview and Photo Submissions</h2>
+        <p>If you use our AI Smile Preview tool or submit photos through a virtual consultation form, you represent that you have the right to share the images submitted. Photos submitted for virtual consultation purposes are used to provide a preliminary, non-diagnostic preview only and do not substitute for an in-person evaluation. Treatment recommendations require a complete clinical examination.</p>      </section>
+
+      <section>
+        <h2>9. Your Responsibilities</h2>
+        <p>By using the Site, opting in to our SMS program, or communicating with our office, you agree to:</p>
+        <p>• Provide truthful, accurate, and complete information, including a mobile number that you own or are authorized to use for SMS opt-in.</p>
+        <p>• Use the Site, its tools, and our SMS program only for legitimate personal or patient-related purposes.</p>
+        <p>• Refrain from submitting false, misleading, or unauthorized requests, including opting in any phone number that does not belong to you or that you are not authorized to enroll.</p>
+        <p>• Refrain from attempting to disrupt, damage, disable, reverse engineer, or gain unauthorized access to the Site, its systems, our messaging platform, or any connected services.</p>
+        <p>• Notify us promptly if your contact information changes and you wish to continue receiving appointment-related communications.</p>      </section>
+
+      <section>
+        <h2>10. Intellectual Property</h2>
+        <p>All content on this Site, including text, graphics, logos, icons, photographs, videos, page layouts, design elements, and written content, is owned by or licensed to Esam Nahlah Dentistry and is protected by applicable intellectual property laws.</p>
+        <p>You may not copy, reproduce, republish, distribute, modify, display, transmit, or otherwise use any content from the Site without our prior written permission, except for limited personal, non-commercial use such as printing a page for your own reference.</p>      </section>
+
+      <section>
+        <h2>11. Third-Party Links</h2>
+        <p>The Site may contain links to external websites for your convenience. These links do not imply endorsement or control by Esam Nahlah Dentistry. We are not responsible for the content, functionality, accuracy, or privacy practices of any third-party site. Please review their terms and privacy policies before using them.</p>      </section>
+
+      <section>
+        <h2>12. Medical and Dental Disclaimer</h2>
+        <p>Content on the Site is not medical or dental advice and should not be relied on as a substitute for professional care. Always consult a licensed dental professional for diagnosis, treatment recommendations, and care specific to your individual needs.</p>      </section>
+
+      <section>
+        <h2>13. Disclaimer of Warranties</h2>
+        <p>The Site, our SMS program, and their content are provided “as is” and “as available,” without warranties of any kind, either express or implied, including warranties of merchantability, fitness for a particular purpose, accuracy, or non-infringement.</p>
+        <p>While we work to keep the Site accurate and functional, we do not guarantee that the Site or our SMS program will always be available, that content or messages will be current, complete, error-free, or delivered without interruption, or that third-party tools and integrations will function without issue.</p>
+        <p>Use of the Site and our SMS program is at your own risk.</p>      </section>
+
+      <section>
+        <h2>14. Limitation of Liability</h2>
+        <p>To the fullest extent permitted by law, Esam Nahlah Dentistry, its owners, employees, and affiliates shall not be liable for any direct, indirect, incidental, consequential, special, or punitive damages arising out of or related to your use of (or inability to use) the Site or our SMS program, errors or omissions in Site content, delays or failures in communication (including undelivered or delayed text messages), technical issues or service interruptions, unauthorized access to transmitted information, or your use of third-party services linked through or embedded on the Site.</p>
+        <p>This section does not limit liability that cannot be limited under applicable law.</p>      </section>
+
+      <section>
+        <h2>15. Indemnification</h2>
+        <p>You agree to defend, indemnify, and hold harmless Esam Nahlah Dentistry and its owners, employees, and affiliates from any claims, damages, losses, liabilities, and expenses (including reasonable attorneys’ fees) arising out of or related to your violation of these Terms, your misuse of the Site or our SMS program (including opting in any phone number you do not own or are not authorized to enroll), or your violation of any law or the rights of a third party.</p>      </section>
+
+      <section>
+        <h2>16. Governing Law and Venue</h2>
+        <p>These Terms are governed by and construed in accordance with the laws of the State of Texas, without regard to its conflict-of-laws principles. You agree that any dispute arising out of or relating to these Terms or your use of the Site shall be brought exclusively in the state or federal courts located in Fort Bend County, Texas, and you consent to the personal jurisdiction of those courts.</p>      </section>
+
+      <section>
+        <h2>17. Severability; No Waiver; Entire Agreement</h2>
+        <p>If any provision of these Terms is found to be unenforceable, the remaining provisions will continue in full force and effect. Our failure to enforce any provision is not a waiver of that provision or any other.</p>
+        <p>These Terms, together with our Privacy Policy and Cookie Policy, constitute the entire agreement between you and Esam Nahlah Dentistry regarding your use of the Site and our SMS program and supersede any prior agreements relating to that subject.</p>      </section>
+
+      <section>
+        <h2>18. Privacy and Cookies</h2>
+        <p>Your use of the Site and our SMS program is also subject to our Privacy Policy and Cookie Policy, which describe how we collect, use, and manage information collected through the Site and our messaging program.</p>      </section>
+
+      <section>
+        <h2>19. Changes to These Terms</h2>
+        <p>We may revise these Terms at any time by posting an updated version on this page. Updates take effect as of the “Effective Date” shown above. We encourage you to review this page periodically.</p>      </section>
+
+      <section>
+        <h2>20. Contact Us</h2>
+        <p>If you have questions about these Terms of Service or our SMS program, please contact:</p>      </section>
+
+      <section>
+        <h2>Esam Nahlah Dentistry</h2>
+        <p>2855 Duke St,</p>
+        <p>Alexandria, VA 22314</p>
+        <p>Phone: (571) 253-7790</p>
+        <p>Website: https://www.drnahlah.com/</p>      </section>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="foot" data-theme="dark">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <img src="assets/logo.png" alt="Dr. Nahlah">
+        <p class="foot-blurb">Implant dentistry and prosthodontics for Northern Virginia, rebuilding
+          smiles that other practices call too complex.</p>
+      </div>
+      <div>
+        <h4>Treatments</h4>
+        <ul>
+          <li><a href="dental-implants.html">Dental Implants</a></li>
+          <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+          <li><a href="smile-makeover.html">Smile Makeover</a></li>
+          <li><a href="veneers.html">Porcelain Veneers</a></li>
+          <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="smile-gallery.html">Smile Gallery</a></li>
+          <li><a href="patient-stories.html">Patient Stories</a></li>
+          <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+          <li><a href="meet-dr-nahlah.html">Dr. Esam Nahlah</a></li>
+          <li><a href="contact.html">Contact &amp; Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul class="foot-facts">
+          <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
+          <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
+          <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
+        </ul>
+        <ul style="margin-top:1.1rem">
+          <li><a href="tel:+15717029900">McLean &middot; (571) 702-9900</a></li>
+          <li><a href="tel:+15712537790">Alexandria &middot; (571) 253-7790</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-base">
+      <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+      <span>McLean &middot; Alexandria, Virginia</span>
+      <!-- The legal links belong in the base row, not in the drawer's site map:
+           they are what people go looking for in a footer by habit. -->
+      <span><a href="privacy-policy-maclean.html">Privacy Policy</a></span>
+      <span><a href="terms-of-service-maclean.html">Terms of Service</a></span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<!-- The runtime, every section module and the boot sequence, in one file. At the
+     end of <body> because ScrollTrigger must be registered after document.body
+     exists, and because each section module guards on a selector — it has to be
+     able to see the markup to decide whether to run. -->
+<script src="assets/site.js"></script>
+</body>
+</html>
