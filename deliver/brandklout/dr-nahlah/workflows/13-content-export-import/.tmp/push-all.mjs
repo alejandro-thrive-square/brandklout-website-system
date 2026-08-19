@@ -23,7 +23,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { callJson } from './instatic-mcp.mjs';
+import { callJson, callWrite } from './instatic-mcp.mjs';
 import { transform, SITE } from './to-instatic.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -94,9 +94,9 @@ for (const file of targets) {
     if (!doc) throw new Error('page does not exist on Instatic (create it first)');
 
     process.stdout.write(`${slug}: ${blocks.length} blocks, ${html.length} chars … `);
-    await callJson('site_replace_node_html', { nodeId: doc.rootNodeId, html: blocks[0] });
+    await callWrite('site_replace_node_html', { nodeId: doc.rootNodeId, html: blocks[0] });
     for (let i = 1; i < blocks.length; i++) {
-      await callJson('site_insert_html', { parentId: doc.rootNodeId, html: blocks[i], index: i });
+      await callWrite('site_insert_html', { parentId: doc.rootNodeId, html: blocks[i], index: i });
     }
 
     const back = await readWhole(doc.document);

@@ -14,7 +14,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { callJson } from './instatic-mcp.mjs';
+import { callJson, callWrite } from './instatic-mcp.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SITE = path.resolve(HERE, '../../04-design/.tmp/final-site');
@@ -71,7 +71,7 @@ for (const d of pages) {
       return m && m[1] === v.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/"/g, '&quot;') || (m && m[1] === v);
     });
     if (ok) { same++; continue; }
-    await callJson('site_update_node_props', { nodeId: img.uid, patch: { htmlAttributes: attrs } });
+    await callWrite('site_update_node_props', { nodeId: img.uid, patch: { htmlAttributes: attrs } });
     n++; patched++;
   }
   console.log(`  ${slug.padEnd(28)} ${n}/${uids.length} images rewritten`);

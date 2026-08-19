@@ -908,21 +908,40 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
   color:var(--fg-soft)}
 .rv-stars{color:var(--accent);letter-spacing:.12em;font-style:normal;font-size:.9em}
 
-/* --- embeds (added 2026-08-18 from the client's Webflow build) ---
-   The story shot is now a filmed testimonial and the review grid is now the
-   practice's own review widget. Both are third-party iframes: their internals
-   cannot be styled from here, so all this does is reserve the right box and
-   keep the surrounding rhythm. The 16:9 padding box holds the shot's height
-   before the frame loads, which is what stops the pinned chapter jumping. */
+/* --- the story embed ---
+   The story shot is a filmed testimonial on YouTube. Its internals cannot be
+   styled from here, so all this does is reserve the right box and keep the
+   surrounding rhythm. The 16:9 padding box holds the shot's height before the
+   frame loads, which is what stops the pinned chapter jumping. */
 .ch-proof .pf-embed{position:relative;padding-top:56.25%;overflow:hidden}
 .ch-proof .pf-embed iframe{position:absolute;inset:0;width:100%;height:100%;border:0}
-.rv-embed{margin-top:clamp(1.5rem,3vw,2.25rem)}
-/* The vendor's review-widget.js resizes the frame to its content by postMessage.
-   When that message does not arrive the iframe sits at its intrinsic 150px and
-   shows a sliver of nothing, which is what it did on Instatic. A real fallback
-   height means the widget is readable whether or not the resizer fires; the
-   resizer still overrides it when it does. */
-.rv-embed iframe{display:block;width:100%;border:0;min-height:520px}
+
+/* --- the review wall ---
+   Written by gen-reviews.mjs from the practice's own review feed. This replaced
+   the ReputationHub iframe on 2026-08-19: Instatic lifts CSP frame-src only for
+   YouTube, so that embed could never render there, and inside a frame the
+   reviews counted for the vendor's domain rather than this one. Cards are a
+   1px-gap grid over the rule colour, the same construction as .iv-locs. */
+.rv-wall{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);
+  margin-top:clamp(1.5rem,3vw,2.25rem)}
+.rv-card{background:var(--card);padding:clamp(1.35rem,2.2vw,1.9rem);
+  display:grid;gap:.9rem;align-content:start}
+.rv-meta{display:flex;align-items:baseline;justify-content:space-between;gap:1rem}
+.rv-when{font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;color:var(--fg-faint)}
+.rv-card p{color:var(--fg-body);font-weight:300;font-size:.94rem;line-height:1.75;margin:0}
+.rv-card footer{display:flex;align-items:center;gap:.7rem;font-size:.85rem;color:var(--fg);
+  padding-top:.9rem;border-top:1px solid var(--line-2)}
+.rv-card footer i{margin-left:auto;font-style:normal;font-size:.66rem;letter-spacing:.14em;
+  text-transform:uppercase;color:var(--fg-faint)}
+.rv-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none;
+  background:var(--gold-wash);color:var(--accent);font-size:.8rem;font-weight:600}
+.rv-more{display:inline-flex;align-items:center;gap:.6rem;margin-top:clamp(1.5rem,3vw,2.25rem);
+  font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.rv-more i{display:block;width:18px;height:1px;background:var(--rule);
+  transition:width .4s cubic-bezier(.22,1,.36,1)}
+.rv-more:hover i{width:38px}
+@media(min-width:700px){ .rv-wall{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:1080px){ .rv-wall{grid-template-columns:repeat(3,1fr)} }
 
 /* ===== css/38-ch-invitation.css ===== */
 /* Chapter 08 reads on the light ground (client direction, 2026-08-19). The

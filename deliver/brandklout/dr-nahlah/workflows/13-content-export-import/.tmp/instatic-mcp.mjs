@@ -188,7 +188,17 @@ export async function callTool(name, args) {
  *
  * Returns the parsed JSON payload, so callers do not each re-implement it.
  */
-const BRIDGE_DOWN = /runs in the Instatic Site editor/i;
+/**
+ * Transient bridge failures, worth retrying. Both arrive as a 200 with a plain
+ * sentence, indistinguishable from a real refusal except by their text.
+ *
+ * "AI chat stream ended before tool result arrived" is the proxy dropping the
+ * response, not the server rejecting the call. Retrying a WRITE after it is
+ * safe HERE because every write this driver makes is either idempotent or
+ * guarded by `expectedHash`: if the dropped call actually landed, the hash has
+ * moved and the retry fails loudly instead of applying twice.
+ */
+const BRIDGE_DOWN = /runs in the Instatic Site editor|AI chat stream ended before tool result/i;
 export async function callJson(name, args, { tries = 6, waitMs = 1500 } = {}) {
   let last;
   for (let i = 0; i < tries; i++) {
@@ -206,6 +216,29 @@ export async function callJson(name, args, { tries = 6, waitMs = 1500 } = {}) {
     try { return JSON.parse(text); } catch { return { text }; }
   }
   throw last || new Error(`${name}: exhausted retries`);
+}
+
+/**
+ * Like callJson, but for WRITE tools, where a non-JSON response is always a
+ * failure and never prose worth keeping.
+ *
+ * These tools report refusals as a plain sentence with a 200 and no error flag:
+ *   "Replacement for src/styles/site.css is ambiguous: 2 matches. Use a larger
+ *    oldText span or set replaceAll:true."
+ * `callJson` hands that back as `{ text }`, which reads exactly like success to
+ * a caller that only checks for a thrown error. That is how a stylesheet ended
+ * up on the server twice on 2026-08-19: 40 clearing patches in a row were all
+ * refused, all "succeeded", and the loop ran to its attempt limit.
+ *
+ * A successful write always returns JSON (`{ok:true}` or the asset record), so
+ * "did not parse as JSON" is a sound failure test.
+ */
+export async function callWrite(name, args, opts) {
+  const res = await callJson(name, args, opts);
+  if (res && typeof res.text === 'string') {
+    throw new Error(`${name} refused: ${res.text.slice(0, 300)}`);
+  }
+  return res;
 }
 
 export async function listTools() {

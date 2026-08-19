@@ -24,7 +24,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { callJson } from './instatic-mcp.mjs';
+import { callJson, callWrite } from './instatic-mcp.mjs';
 import { transform } from './to-instatic.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
@@ -94,21 +94,21 @@ if (doc) {
   rootNodeId = doc.rootNodeId;
   console.log(`replacing existing page /${slug} (root ${rootNodeId})`);
   // Clear by replacing the root's children with the first block, then append.
-  await callJson('site_replace_node_html', { nodeId: rootNodeId, html: blocks[0] });
+  await callWrite('site_replace_node_html', { nodeId: rootNodeId, html: blocks[0] });
   console.log(`   0 replaced (${blocks[0].length})`);
   for (let i = 1; i < blocks.length; i++) {
-    await callJson('site_insert_html', { parentId: rootNodeId, html: blocks[i], index: i });
+    await callWrite('site_insert_html', { parentId: rootNodeId, html: blocks[i], index: i });
     console.log(`   ${i} inserted (${blocks[i].length})`);
   }
 } else {
   const title = titleOf(file);
   console.log(`creating page /${slug} — "${title}"`);
-  const added = await callJson('site_add_page', { title, slug });
+  const added = await callWrite('site_add_page', { title, slug });
   rootNodeId = added.rootNodeId || added.page?.rootNodeId;
   if (!rootNodeId) throw new Error(`no rootNodeId from site_add_page: ${JSON.stringify(added).slice(0, 300)}`);
   console.log(`   pageId=${added.pageId || added.page?.id} root=${rootNodeId}`);
   for (let i = 0; i < blocks.length; i++) {
-    await callJson('site_insert_html', { parentId: rootNodeId, html: blocks[i], index: i });
+    await callWrite('site_insert_html', { parentId: rootNodeId, html: blocks[i], index: i });
     console.log(`   ${i} inserted (${blocks[i].length})`);
   }
 }

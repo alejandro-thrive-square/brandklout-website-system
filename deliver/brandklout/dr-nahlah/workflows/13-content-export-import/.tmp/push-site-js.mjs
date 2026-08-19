@@ -28,7 +28,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { callJson } from './instatic-mcp.mjs';
+import { callJson, callWrite } from './instatic-mcp.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const JS = path.resolve(HERE, '../../04-design/.tmp/final-site/assets/site.js');
@@ -57,7 +57,7 @@ if (!argv.includes('--dry')) {
   const list = await callJson('site_list_code_assets', {});
   if (!(list.assets || []).some((a) => a.path === PATH)) {
     console.log('creating tiny, with runtime attached');
-    await callJson('site_write_code_asset', {
+    await callWrite('site_write_code_asset', {
       path: PATH, type: 'script', content: BANNER + SENTINEL + '\n',
       runtime: {
         enabled: true, runInCanvas: true, format: 'classic',
@@ -87,20 +87,32 @@ if (!argv.includes('--dry')) {
   console.log(`runtime ok: ${rt.format}/${rt.placement}/${rt.timing} scope=${rt.scope.type}`);
 
   // ---- 2. reset then fill in chunks ---------------------------------------
-  let { content, hash } = await readAll(PATH);
-  if (!content.includes(SENTINEL)) throw new Error('sentinel missing');
-  if (content !== BANNER + SENTINEL + '\n') {
-    await callJson('site_patch_code_asset', {
-      path: PATH, expectedHash: hash,
-      replacements: [{ oldText: content, newText: BANNER + SENTINEL + '\n' }],
+  //
+  // THE RESET MUST BE VERIFIED, NOT ASSUMED. `site_patch_code_asset` silently
+  // drops a large `oldText`: replacing the whole file with the sentinel in one
+  // call reported success on an 82KB stylesheet, changed nothing, and the fill
+  // then appended a SECOND copy before the sentinel. Clear in small slices and
+  // refuse to fill until the file reads back clean.
+  const EMPTY = BANNER + SENTINEL + '\n';
+  let hash;
+  for (let attempt = 0; ; attempt++) {
+    if (attempt > 400) throw new Error('could not clear ' + PATH + ', do NOT fill, inspect by hand');
+    const cur = await readAll(PATH);
+    if (!cur.content.includes(SENTINEL)) throw new Error('sentinel missing');
+    if (cur.content === EMPTY) { hash = cur.hash; break; }
+    const body = cur.content.slice(BANNER.length, cur.content.length - (SENTINEL + '\n').length);
+    const oldText = body ? body.slice(0, Math.min(4000, body.length)) : cur.content;
+    await callWrite('site_patch_code_asset', {
+      path: PATH, expectedHash: cur.hash,
+      replacements: [{ oldText, newText: body ? '' : EMPTY, replaceAll: !!body }],
     });
-    ({ hash } = await readAll(PATH));
   }
+  console.log('reset to sentinel, verified');
   const chunks = [];
   for (let i = 0; i < js.length; i += CHUNK) chunks.push(js.slice(i, i + CHUNK));
   console.log(`filling in ${chunks.length} chunks`);
   for (let i = 0; i < chunks.length; i++) {
-    await callJson('site_patch_code_asset', {
+    await callWrite('site_patch_code_asset', {
       path: PATH, expectedHash: hash,
       replacements: [{ oldText: SENTINEL, newText: chunks[i] + SENTINEL }],
     });
@@ -134,7 +146,7 @@ if (argv.includes('--dry')) {
 let done = 0; const failed = [];
 for (const a of perPage) {
   try {
-    await callJson('site_write_code_asset', { path: a.path, type: 'script',
+    await callWrite('site_write_code_asset', { path: a.path, type: 'script',
       content: NOTE('superseded by src/scripts/site.js, and written for the pre-2026-08-17 markup vocabulary this page no longer uses') });
     done++;
     if (done % 20 === 0) console.log(`  ${done}/${perPage.length}`);
@@ -142,7 +154,7 @@ for (const a of perPage) {
 }
 for (const a of debris) {
   try {
-    await callJson('site_write_code_asset', { path: a.path, type: 'script',
+    await callWrite('site_write_code_asset', { path: a.path, type: 'script',
       content: NOTE('leftover diagnostic probe from an earlier session') });
     done++;
   } catch (e) { failed.push([a.path, e.message]); }

@@ -36,7 +36,7 @@
 import fs from 'node:fs';
 import path from 'node:path';
 import { fileURLToPath } from 'node:url';
-import { callJson } from './instatic-mcp.mjs';
+import { callJson, callWrite } from './instatic-mcp.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CSS = path.resolve(HERE, '../../04-design/.tmp/final-site/assets/site.css');
@@ -75,7 +75,7 @@ if (argv.includes('--verify')) {
 const list = await callJson('site_list_code_assets', {});
 if (!(list.assets || []).some((a) => a.path === PATH)) {
   console.log('creating tiny, with runtime attached');
-  await callJson('site_write_code_asset', {
+  await callWrite('site_write_code_asset', {
     path: PATH, type: 'style', content: BANNER + SENTINEL + '\n',
     runtime: { enabled: true, scope: { type: 'all-pages' }, priority: 50 },
   });
@@ -89,23 +89,47 @@ if (asset.runtime?.scope?.type !== 'all-pages' || asset.runtime?.enabled !== tru
 console.log(`runtime ok: scope=all-pages priority=${asset.runtime.priority} (100 is normalized, see header)`);
 
 // ---- 2. reset to the sentinel so re-runs replace rather than append --------
-let { content, hash } = await readAll();
-if (!content.includes(SENTINEL)) throw new Error('sentinel missing — inspect the file by hand');
-if (content !== BANNER + SENTINEL + '\n') {
-  console.log(`clearing ${content.length} chars of previous content`);
-  await callJson('site_patch_code_asset', {
-    path: PATH, expectedHash: hash,
-    replacements: [{ oldText: content, newText: BANNER + SENTINEL + '\n' }],
-  });
-  ({ hash } = await readAll());
+//
+// THIS MUST BE VERIFIED, NOT ASSUMED. `site_patch_code_asset` silently drops a
+// large `oldText`: on 2026-08-19 a one-shot "replace the whole 82KB file with
+// the sentinel" reported success, changed nothing, and the fill then appended a
+// SECOND copy of the stylesheet before the sentinel — 163,878 chars, one banner,
+// one sentinel, every rule twice. The same call had worked at 81KB that morning,
+// so the threshold is not fixed and cannot be designed around. Clear in small
+// slices instead, and refuse to fill unless the file reads back clean.
+const EMPTY = BANNER + SENTINEL + '\n';
+async function resetToSentinel() {
+  for (let attempt = 0; attempt < 400; attempt++) {
+    const { content, hash } = await readAll();
+    if (!content.includes(SENTINEL)) throw new Error('sentinel missing — inspect the file by hand');
+    if (content === EMPTY) return hash;
+    const body = content.slice(BANNER.length, content.length - (SENTINEL + '\n').length);
+    if (!body) {
+      // banner or trailing newline differs; rewrite the whole (small) remainder
+      await callWrite('site_patch_code_asset', {
+        path: PATH, expectedHash: hash,
+        replacements: [{ oldText: content, newText: EMPTY }],
+      });
+      continue;
+    }
+    const slice = body.slice(0, Math.min(4000, body.length));
+    await callWrite('site_patch_code_asset', {
+      path: PATH, expectedHash: hash,
+      replacements: [{ oldText: slice, newText: '', replaceAll: true }],
+    });
+    if (attempt % 5 === 0) console.log(`  clearing... ${content.length} chars left`);
+  }
+  throw new Error('could not clear the asset back to its sentinel — do NOT fill, inspect by hand');
 }
+let hash = await resetToSentinel();
+console.log('reset to sentinel, verified');
 
 // ---- 3. fill ---------------------------------------------------------------
 const chunks = [];
 for (let i = 0; i < css.length; i += CHUNK) chunks.push(css.slice(i, i + CHUNK));
 console.log(`filling in ${chunks.length} chunks of <=${CHUNK}`);
 for (let i = 0; i < chunks.length; i++) {
-  await callJson('site_patch_code_asset', {
+  await callWrite('site_patch_code_asset', {
     path: PATH, expectedHash: hash,
     replacements: [{ oldText: SENTINEL, newText: chunks[i] + SENTINEL }],
   });

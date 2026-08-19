@@ -11,7 +11,7 @@
  * Anything not on KEEP is emptied AND disabled AND unscoped.
  */
 import fs from 'node:fs';
-import { callJson } from './instatic-mcp.mjs';
+import { callJson, callWrite } from './instatic-mcp.mjs';
 
 const KEEP = new Set(['src/scripts/gsap-head-i.js', 'src/scripts/site.js']);
 const keepPath = (p) =>
@@ -39,7 +39,7 @@ let ok = 0, skip = 0, fail = 0;
 for (const [i, a] of dead.entries()) {
   if (a.runtime && a.runtime.enabled === false) { skip++; continue; }
   try {
-    await callJson('site_write_code_asset', {
+    await callWrite('site_write_code_asset', {
       path: a.path, type: 'script', content: NOTE(why(a.path)),
       runtime: { enabled: false, runInCanvas: false, scope: { type: 'pages', pageIds: [] } },
     });
