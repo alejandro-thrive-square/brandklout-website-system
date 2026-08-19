@@ -108,6 +108,19 @@ WZ.add(function (W) {
   /* Before/after sliders work with or without GSAP — they are content, not motion. */
   document.querySelectorAll('.pk-ba').forEach(function (ba) {
     var range = ba.querySelector('input[type=range]');
+    /* Instatic maps every <input> onto its own form-control module, which only
+       knows type="text": the three comparison sliders arrive as text boxes
+       showing "50", with the aria-label dropped. Coerce the one input this
+       component owns back to a range before wiring it, so the slider works on
+       any host that rewrites input types. No-op where it arrived intact. */
+    if (!range) {
+      var alt = ba.querySelector('input');
+      if (alt && alt.getAttribute('max') === '100') {
+        alt.type = 'range';
+        if (!alt.getAttribute('aria-label')) alt.setAttribute('aria-label', 'Reveal the after photograph');
+        range = alt;
+      }
+    }
     if (!range) return;
     var paint = function () { ba.style.setProperty('--pos', range.value + '%'); };
     range.addEventListener('input', paint);
@@ -187,7 +200,13 @@ WZ.add(function (W) {
 WZ.section("ch-arrival", function (W) {
   var root = document.getElementById('arrival');
   var reveal = root.querySelectorAll('[data-anim="hide"]');
-  var film = document.getElementById('heroFilm');
+  /* Resolved by CLASS with an id fallback, and every use guarded. Instatic's
+     HTML importer maps <video> onto its own Video module, which has no
+     htmlAttributes escape hatch, so the `id` is dropped on import: the film
+     came through fine but `getElementById` returned null and the first
+     onEnter threw, taking the rest of the chapter's ScrollTriggers with it.
+     A class is data the importer keeps, so this survives the trip. */
+  var film = root.querySelector('.ar-film') || document.getElementById('heroFilm');
   gsap.set(reveal,{visibility:'visible'});
 
   /* Reduced motion keeps the poster frame — a looping background film is
@@ -198,10 +217,10 @@ WZ.section("ch-arrival", function (W) {
      battery burned on a video nobody is looking at. */
   ScrollTrigger.create({
     trigger:root, start:'top bottom', end:'bottom top',
-    onEnter:    function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
-    onEnterBack:function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
-    onLeave:    function(){ film.pause(); },
-    onLeaveBack:function(){ film.pause(); }
+    onEnter:    function(){ if(!film) return; var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+    onEnterBack:function(){ if(!film) return; var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+    onLeave:    function(){ if(film) film.pause(); },
+    onLeaveBack:function(){ if(film) film.pause(); }
   });
 
   /* Entrance — headline splits into masked lines and rises. */
@@ -218,12 +237,12 @@ WZ.section("ch-arrival", function (W) {
     .from(root.querySelector('.ar-actions'),{opacity:0,y:26,duration:.9,ease:'power3.out'},.68)
     .from(root.querySelectorAll('.ar-meta div'),{opacity:0,y:22,duration:.8,stagger:.08,ease:'power3.out'},.78)
     .from(root.querySelector('.ar-cue'),{opacity:0,duration:.8},.9)
-    .from('#heroFilm',{opacity:0,scale:1.09,duration:1.7,ease:'power3.out'},0);
+    .from(film||'#heroFilm',{opacity:0,scale:1.09,duration:1.7,ease:'power3.out'},0);
 
   /* Departure — the chapter recedes as you leave it. */
   gsap.timeline({scrollTrigger:{trigger:root,start:'top top',end:'bottom top',scrub:.6}})
     .to(root.querySelector('.ar-in'),{yPercent:-16,opacity:.15,ease:'none'},0)
-    .to('#heroFilm',{yPercent:5,scale:1.1,ease:'none'},0)
+    .to(film||'#heroFilm',{yPercent:5,scale:1.1,ease:'none'},0)
     .to('#heroVeil',{opacity:.55,ease:'none'},0);
 
   /* Scroll cue nudges until the visitor moves. */
@@ -367,20 +386,26 @@ WZ.section("ch-path", function (W) {
    this file can travel with the markup between pages without being edited.
    ============================================================================= */
 WZ.section("ch-proof", function (W) {
-  var film = document.getElementById('film');
+  /* Resolved by CLASS with an id fallback, and every use guarded. Instatic's
+     HTML importer maps <video> onto its own Video module, which has no
+     htmlAttributes escape hatch, so the `id` is dropped on import: the film
+     came through fine but `getElementById` returned null and the first
+     onEnter threw, taking the rest of the chapter's ScrollTriggers with it.
+     A class is data the importer keeps, so this survives the trip. */
+  var film = document.querySelector('.pf-film video') || document.getElementById('film');
 
   /* Play only while on screen — saves battery and avoids background decode. */
   ScrollTrigger.create({
     trigger:'#proofFilm', start:'top 90%', end:'bottom 10%',
-    onEnter:    function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
-    onEnterBack:function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
-    onLeave:    function(){ film.pause(); },
-    onLeaveBack:function(){ film.pause(); }
+    onEnter:    function(){ if(!film) return; var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+    onEnterBack:function(){ if(!film) return; var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+    onLeave:    function(){ if(film) film.pause(); },
+    onLeaveBack:function(){ if(film) film.pause(); }
   });
 
   if(W.reduced){ gsap.set('#storyShot',{clipPath:'inset(0 0 0% 0)'}); return; }
 
-  gsap.fromTo(film,{scale:1.18},{scale:1.04,ease:'none',
+  if(film) gsap.fromTo(film,{scale:1.18},{scale:1.04,ease:'none',
     scrollTrigger:{trigger:'#proofFilm',start:'top bottom',end:'bottom top',scrub:.8}});
 
   W.splitLines(document.getElementById('filmTitle'), function(self){
@@ -405,6 +430,44 @@ WZ.section("ch-proof", function (W) {
      2026-08-18, so the card stagger that used to live here has nothing to
      animate and is gone with them. The embed arrives in its own iframe and
      brings its own entrance. */
+
+  /* --- rehydrate the review embed on hosts that strip iframes ---
+     Instatic's HTML importer has an allowlist for <iframe>: the YouTube frame
+     above comes through untouched, but the ReputationHub widget is rewritten
+     into a <div> that keeps every attribute, `src` included, and renders
+     nothing. Rather than hand-authoring the frame a second time in Instatic's
+     idiom, the element is rebuilt from the attributes the importer preserved,
+     and the vendor's resizer is re-added because the local <script> tag does
+     not survive the same trip. A no-op wherever the iframe arrived intact. */
+  (function(){
+    var box = document.querySelector('.rv-embed');
+    if(!box || box.querySelector('iframe')) return;
+    var stub = box.querySelector('[src]');
+    if(!stub) return;
+    var f = document.createElement('iframe');
+    f.className = stub.className || 'lc_reviews_widget';
+    f.title = stub.getAttribute('title') || 'Patient reviews';
+    f.src = stub.getAttribute('src');
+    f.setAttribute('frameborder','0');
+    f.setAttribute('scrolling','no');
+    f.style.cssText = 'min-width:100%;width:100%';
+    stub.replaceWith(f);
+    var SRC = 'https://reputationhub.site/reputation/assets/review-widget.js';
+    if(!document.querySelector('script[src="' + SRC + '"]')){
+      var sc = document.createElement('script'); sc.src = SRC; sc.async = true;
+      document.body.appendChild(sc);
+    }
+    /* Instatic's Content-Security-Policy does not list reputationhub.site in
+       frame-src, so on that host the frame is blocked and would leave a 520px
+       empty well where the reviews should be. If nothing has reported a height
+       within 8s, take the frame back out: a collapsed box is honest, an empty
+       one looks broken. Add the host to the CSP and this stops firing. */
+    setTimeout(function(){
+      if(!f.isConnected) return;
+      if(f.getAttribute('height') || f.style.height) return;
+      f.remove();
+    }, 8000);
+  })();
 
   /* Aggregate score counts up like the other stats. The target is READ FROM THE
      MARKUP rather than written here as well. It was hardcoded to 5.0, so when
@@ -710,6 +773,39 @@ WZ.dom('gallery-filter', '#gaGrid', function () {
       el.addEventListener('pointerleave',function(){ xTo(0); yTo(0); });
     });
   }
+
+  /* --- re-hydrate what HTML importers strip ---
+     Instatic's importer drops elements it considers empty and unwraps the only
+     child of anything it maps onto a Button or Link module. Two live casualties:
+     the burger's two <span> bars (so the menu button rendered as a blank 44px
+     square on every page) and the <span> inside every .btn (which carries
+     `position:relative;z-index:1`, i.e. the label's guarantee of sitting above
+     the hover fill). Both are structure the CSS needs and neither survives a
+     round trip, so they are rebuilt here rather than hand-patched per platform.
+     A no-op wherever the markup arrived intact. */
+  document.querySelectorAll('.burger').forEach(function(b){
+    if(b.querySelector('span')) return;
+    b.appendChild(document.createElement('span'));
+    b.appendChild(document.createElement('span'));
+  });
+  document.querySelectorAll('.btn').forEach(function(b){
+    if(b.querySelector('span') || !b.firstChild) return;
+    var t = b.textContent.trim();
+    if(!t) return;
+    var sp = document.createElement('span'); sp.textContent = t;
+    b.textContent = ''; b.appendChild(sp);
+  });
+  /* The filter chips read "All cases 54"; the count is a <b> so it can sit back
+     at 78% opacity. Buttons are flattened to plain text on import, so the
+     trailing digits are split back out here. */
+  document.querySelectorAll('.ga-filters button').forEach(function(btn){
+    if(btn.querySelector('b')) return;
+    var m = /^(.*?)(\d+)$/.exec(btn.textContent.trim());
+    if(!m) return;
+    btn.textContent = m[1].trim();
+    var b = document.createElement('b'); b.textContent = m[2];
+    btn.appendChild(b);
+  });
 
   /* --- mobile drawer --- */
   var burger = document.getElementById('burger'), drawer = document.getElementById('drawer');

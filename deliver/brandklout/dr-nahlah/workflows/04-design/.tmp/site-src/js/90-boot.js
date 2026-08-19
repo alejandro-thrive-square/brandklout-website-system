@@ -99,6 +99,39 @@
     });
   }
 
+  /* --- re-hydrate what HTML importers strip ---
+     Instatic's importer drops elements it considers empty and unwraps the only
+     child of anything it maps onto a Button or Link module. Two live casualties:
+     the burger's two <span> bars (so the menu button rendered as a blank 44px
+     square on every page) and the <span> inside every .btn (which carries
+     `position:relative;z-index:1`, i.e. the label's guarantee of sitting above
+     the hover fill). Both are structure the CSS needs and neither survives a
+     round trip, so they are rebuilt here rather than hand-patched per platform.
+     A no-op wherever the markup arrived intact. */
+  document.querySelectorAll('.burger').forEach(function(b){
+    if(b.querySelector('span')) return;
+    b.appendChild(document.createElement('span'));
+    b.appendChild(document.createElement('span'));
+  });
+  document.querySelectorAll('.btn').forEach(function(b){
+    if(b.querySelector('span') || !b.firstChild) return;
+    var t = b.textContent.trim();
+    if(!t) return;
+    var sp = document.createElement('span'); sp.textContent = t;
+    b.textContent = ''; b.appendChild(sp);
+  });
+  /* The filter chips read "All cases 54"; the count is a <b> so it can sit back
+     at 78% opacity. Buttons are flattened to plain text on import, so the
+     trailing digits are split back out here. */
+  document.querySelectorAll('.ga-filters button').forEach(function(btn){
+    if(btn.querySelector('b')) return;
+    var m = /^(.*?)(\d+)$/.exec(btn.textContent.trim());
+    if(!m) return;
+    btn.textContent = m[1].trim();
+    var b = document.createElement('b'); b.textContent = m[2];
+    btn.appendChild(b);
+  });
+
   /* --- mobile drawer --- */
   var burger = document.getElementById('burger'), drawer = document.getElementById('drawer');
   function closeDrawer(){

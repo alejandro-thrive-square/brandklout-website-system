@@ -5,6 +5,19 @@ WZ.add(function (W) {
   /* Before/after sliders work with or without GSAP — they are content, not motion. */
   document.querySelectorAll('.pk-ba').forEach(function (ba) {
     var range = ba.querySelector('input[type=range]');
+    /* Instatic maps every <input> onto its own form-control module, which only
+       knows type="text": the three comparison sliders arrive as text boxes
+       showing "50", with the aria-label dropped. Coerce the one input this
+       component owns back to a range before wiring it, so the slider works on
+       any host that rewrites input types. No-op where it arrived intact. */
+    if (!range) {
+      var alt = ba.querySelector('input');
+      if (alt && alt.getAttribute('max') === '100') {
+        alt.type = 'range';
+        if (!alt.getAttribute('aria-label')) alt.setAttribute('aria-label', 'Reveal the after photograph');
+        range = alt;
+      }
+    }
     if (!range) return;
     var paint = function () { ba.style.setProperty('--pos', range.value + '%'); };
     range.addEventListener('input', paint);

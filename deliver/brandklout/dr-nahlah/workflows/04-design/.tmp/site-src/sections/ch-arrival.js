@@ -6,7 +6,13 @@
 WZ.section("ch-arrival", function (W) {
   var root = document.getElementById('arrival');
   var reveal = root.querySelectorAll('[data-anim="hide"]');
-  var film = document.getElementById('heroFilm');
+  /* Resolved by CLASS with an id fallback, and every use guarded. Instatic's
+     HTML importer maps <video> onto its own Video module, which has no
+     htmlAttributes escape hatch, so the `id` is dropped on import: the film
+     came through fine but `getElementById` returned null and the first
+     onEnter threw, taking the rest of the chapter's ScrollTriggers with it.
+     A class is data the importer keeps, so this survives the trip. */
+  var film = root.querySelector('.ar-film') || document.getElementById('heroFilm');
   gsap.set(reveal,{visibility:'visible'});
 
   /* Reduced motion keeps the poster frame — a looping background film is
@@ -17,10 +23,10 @@ WZ.section("ch-arrival", function (W) {
      battery burned on a video nobody is looking at. */
   ScrollTrigger.create({
     trigger:root, start:'top bottom', end:'bottom top',
-    onEnter:    function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
-    onEnterBack:function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
-    onLeave:    function(){ film.pause(); },
-    onLeaveBack:function(){ film.pause(); }
+    onEnter:    function(){ if(!film) return; var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+    onEnterBack:function(){ if(!film) return; var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+    onLeave:    function(){ if(film) film.pause(); },
+    onLeaveBack:function(){ if(film) film.pause(); }
   });
 
   /* Entrance — headline splits into masked lines and rises. */
@@ -37,12 +43,12 @@ WZ.section("ch-arrival", function (W) {
     .from(root.querySelector('.ar-actions'),{opacity:0,y:26,duration:.9,ease:'power3.out'},.68)
     .from(root.querySelectorAll('.ar-meta div'),{opacity:0,y:22,duration:.8,stagger:.08,ease:'power3.out'},.78)
     .from(root.querySelector('.ar-cue'),{opacity:0,duration:.8},.9)
-    .from('#heroFilm',{opacity:0,scale:1.09,duration:1.7,ease:'power3.out'},0);
+    .from(film||'#heroFilm',{opacity:0,scale:1.09,duration:1.7,ease:'power3.out'},0);
 
   /* Departure — the chapter recedes as you leave it. */
   gsap.timeline({scrollTrigger:{trigger:root,start:'top top',end:'bottom top',scrub:.6}})
     .to(root.querySelector('.ar-in'),{yPercent:-16,opacity:.15,ease:'none'},0)
-    .to('#heroFilm',{yPercent:5,scale:1.1,ease:'none'},0)
+    .to(film||'#heroFilm',{yPercent:5,scale:1.1,ease:'none'},0)
     .to('#heroVeil',{opacity:.55,ease:'none'},0);
 
   /* Scroll cue nudges until the visitor moves. */

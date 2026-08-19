@@ -1,4 +1,7 @@
-.ch-proof{background:var(--ink-900)}
+/* Chapter 07 reads on the light ground (client direction, 2026-08-19). Only
+   the film block stays dark, and it carries its own data-theme="dark" so the
+   copy over the scrim keeps inverting. */
+.ch-proof{background:var(--bg)}
 .ch-proof .pf-film{position:relative;height:clamp(340px,64vw,720px);overflow:hidden}
 /* Bled 2px past every edge and never scrubbed back to 1:1, so the scaled
    video always overhangs its clip — otherwise sub-pixel rounding under
@@ -20,8 +23,8 @@
 .ch-proof blockquote{margin:0;font-family:var(--f-display);font-size:calc(2.61rem * var(--t-lg));
   line-height:1.24;letter-spacing:-.015em}
 .ch-proof cite{display:block;margin-top:1.5rem;font-style:normal;font-size:.76rem;
-  letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
-.ch-proof .pf-qm{font-family:var(--f-display);font-size:calc(6rem * var(--t-disp));color:var(--gold);
+  letter-spacing:.16em;text-transform:uppercase;color:var(--accent)}
+.ch-proof .pf-qm{font-family:var(--f-display);font-size:calc(6rem * var(--t-disp));color:var(--accent-lg);
   line-height:.6;display:block;margin-bottom:.5rem}
 @media(min-width:1024px){ .ch-proof .pf-story{grid-template-columns:.95fr 1.05fr} }
 
@@ -30,15 +33,15 @@
 .rv-head{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;
   align-items:flex-end;margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
 .rv-head h3{font-size:var(--h2);max-width:16ch}
-.rv-sub{margin-top:.7rem;color:rgba(255,255,255,.5);font-weight:300;font-size:.94rem}
+.rv-sub{margin-top:.7rem;color:var(--fg-soft);font-weight:300;font-size:.94rem}
 .rv-score{display:flex;align-items:center;gap:clamp(1rem,1.6vw,1.4rem)}
 /* Vector mark — the old raster lockup went soft and unreadable at this size. */
 .rv-score img{width:clamp(48px,5.6vw,72px);height:auto;flex:none}
 .rv-score b{display:block;font-family:var(--f-display);font-size:calc(1.9rem * var(--t-mid));
   font-weight:500;display:flex;align-items:center;gap:.5rem}
 .rv-score>div>span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
-  color:rgba(255,255,255,.58)}
-.rv-stars{color:var(--gold);letter-spacing:.12em;font-style:normal;font-size:.9em}
+  color:var(--fg-soft)}
+.rv-stars{color:var(--accent);letter-spacing:.12em;font-style:normal;font-size:.9em}
 
 /* --- embeds (added 2026-08-18 from the client's Webflow build) ---
    The story shot is now a filmed testimonial and the review grid is now the
