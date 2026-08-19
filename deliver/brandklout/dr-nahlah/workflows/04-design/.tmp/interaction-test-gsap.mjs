@@ -62,6 +62,17 @@ await send("Page.enable", {}, sessionId);
 await send("Runtime.enable", {}, sessionId);
 await send("Log.enable", {}, sessionId).catch(() => {});
 
+// The review block upgrades itself to the vendor's live feed wherever the host
+// allows a third-party frame, so leaving reputationhub reachable makes this
+// harness race a third party: whichever won decided whether the page held six
+// cards or one iframe, and the run came back 62/64 then 64/64 then 64/64 on the
+// same build. Block it, and this gate always tests the page's OWN content, which
+// is also the content every visitor gets before the upgrade lands and the only
+// content a crawler sees. The upgrade itself has its own two-way test in
+// probe-rv-live.mjs, which asserts BOTH the allowed and the blocked outcome.
+await send("Network.enable", {}, sessionId);
+await send("Network.setBlockedURLs", { urls: ["*reputationhub.site*"] }, sessionId);
+
 const consoleErrors = [];
 const transportErrors = [];
 ws.addEventListener("message", async (ev) => {
@@ -340,7 +351,7 @@ check("every card carries a rating, a quote and an author",
 check("the cards are visible, not left at their reveal start",
   await evalJs(`[...document.querySelectorAll('#reviews .rv-card')]
     .every(c => parseFloat(getComputedStyle(c).opacity) > 0.9)`));
-check("no third-party frame in the reviews block",
+check("the reviews block falls back to its own cards when the vendor is unreachable",
   (await evalJs(`document.querySelectorAll('#reviews iframe').length`)) === 0,
   await evalJs(`document.querySelectorAll('#reviews iframe').length`));
 check("aggregate score counted up",

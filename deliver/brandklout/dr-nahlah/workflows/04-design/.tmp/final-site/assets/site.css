@@ -943,6 +943,18 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 @media(min-width:700px){ .rv-wall{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1080px){ .rv-wall{grid-template-columns:repeat(3,1fr)} }
 
+/* The live feed, when the host allows a third-party frame. While it is being
+   probed it must be laid out at FULL WIDTH, just not seen: the widget measures
+   its own container and postMessages that height back, so probing inside a
+   [hidden] element made it report 1px and the frame then sat at the CSS
+   min-height with a scrollbar. Zero max-height keeps it out of the flow while
+   the width stays real. */
+.pf-reviews{position:relative}
+.rv-live{margin-top:clamp(1.5rem,3vw,2.25rem)}
+.rv-live[data-probing]{position:absolute;left:0;right:0;max-height:0;overflow:hidden;
+  opacity:0;pointer-events:none;margin-top:0}
+.rv-live iframe{display:block;width:100%;border:0;min-height:520px}
+
 /* ===== css/38-ch-invitation.css ===== */
 /* Chapter 08 reads on the light ground (client direction, 2026-08-19). The
    gold CTA band at the foot is unchanged and still closes the page. */

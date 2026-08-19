@@ -44,10 +44,73 @@ WZ.section("ch-proof", function (W) {
   /* Reviews: header, then cards deal in on a slight diagonal. */
   gsap.from('#reviews .rv-head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
     scrollTrigger:{trigger:'#reviews',start:'top 80%'}});
-  /* The review wall is generated markup again as of 2026-08-19 (the vendor
-     iframe cannot render under Instatic's CSP), so it gets the kit's own
-     stagger back. [data-rv="stagger"] on .rv-wall drives it; nothing needed
+  /* The review wall is generated markup as of 2026-08-19, so it gets the kit's
+     own stagger back. [data-rv="stagger"] on .rv-wall drives it; nothing needed
      here beyond letting that rule find it. */
+
+  /* --- upgrade the cards to the LIVE feed, where the host permits it ---
+     The client wants reviews that update the moment a patient leaves one, and
+     the vendor's script + iframe do exactly that. They cannot run everywhere:
+     Instatic assembles each page's CSP from module contributions, and
+     base/video is the only module in its codebase that declares any, so
+     frame-src ever only names YouTube and both the frame and the vendor script
+     are refused there. Rather than pick one platform and lose on the other,
+     the generated cards ship as the content and this quietly swaps in the live
+     widget wherever it actually loads.
+
+     Success is judged on the vendor's own postMessage, not on the iframe's
+     load event: a blocked frame still fires load (about:blank), so trusting
+     that would leave an empty well exactly where the reviews should be. If no
+     height arrives, everything added here is removed and the cards stay. */
+  (function () {
+    var slot = document.querySelector('.rv-live');
+    var wall = document.querySelector('.rv-wall');
+    if (!slot || !slot.dataset.widget) return;
+
+    var widgetId = (slot.dataset.widget.match(/[?&]widgetId=([^&]+)/) || [])[1];
+    var settled = false;
+
+    var f = document.createElement('iframe');
+    f.className = 'lc_reviews_widget';
+    f.title = 'Patient reviews';
+    f.src = slot.dataset.widget;
+    f.setAttribute('frameborder', '0');
+    f.setAttribute('scrolling', 'no');
+    f.style.cssText = 'min-width:100%;width:100%';
+    slot.appendChild(f);
+
+    function accept() {
+      if (settled) return;
+      settled = true;
+      slot.removeAttribute('data-probing');
+      if (wall) wall.hidden = true;      /* keep it in the DOM: it is the copy
+                                            a crawler without JS will read. */
+    }
+    function reject() {
+      if (settled) return;
+      settled = true;
+      slot.remove();
+    }
+
+    window.addEventListener('message', function (e) {
+      if (!/reputationhub\.site$/.test(new URL(e.origin).hostname)) return;
+      var name = e.data && e.data[0], data = e.data && e.data[1];
+      if (name !== 'lc.setHeight') return;
+      if (widgetId && data && data.widgetId && data.widgetId !== widgetId) return;
+      accept();
+    });
+
+    var sc = document.createElement('script');
+    sc.src = 'https://reputationhub.site/reputation/assets/review-widget.js';
+    sc.async = true;
+    sc.onerror = reject;
+    document.body.appendChild(sc);
+
+    /* The widget renders server-side and reports within a second or two on a
+       normal connection. Eight is generous, and the cost of being wrong is
+       only that the visitor keeps the static cards. */
+    setTimeout(reject, 8000);
+  })();
 
   /* Aggregate score counts up like the other stats. The target is READ FROM THE
      MARKUP rather than written here as well. It was hardcoded to 5.0, so when

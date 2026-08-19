@@ -893,6 +893,15 @@
         </article>
       </div>
       <a class="rv-more" href="patient-stories.html">Read the patient stories <i></i></a>
+
+      <!-- The practice's LIVE review feed. It replaces the cards above wherever
+           the host allows a third-party frame, which is local and Webflow, and
+           is removed without trace where it does not, which is Instatic: that
+           platform builds its CSP from module contributions and base/video is
+           the only module in its codebase that declares any, so frame-src ever
+           only lists YouTube. Cards first, upgrade second, so there is no state
+           in which this section is empty. Wired in ch-proof.js. -->
+      <div class="rv-live" data-widget="https://reputationhub.site/reputation/widgets/review_widget/xJDu1mFoW5jFYTNqmuk7?widgetId=6a7340db2bbe7819cc3536f4" data-probing></div>
       <!-- REVIEWS:END -->
     </div>
   </div>
