@@ -6,7 +6,7 @@
 | **Agency** | Brandklout (white-label partner; Webzite delivers, Brandklout owns the relationship) |
 | **Source** | Asana — `BK Implementation - Legacy Dental Pasadena` (`1212641204749217`) |
 | **Asana parent task** | `1217611213174386` — [Legacy Landing Page Development (Invisalign)](https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217611213174386) |
-| **Scope** | 3 pages: Invisalign landing page, consultation page, thank-you page |
+| **Scope** | 3 pages in one funnel: Invisalign landing page → consultation page → thank-you page. See [page-flow.md](./page-flow.md) |
 | **Due** | 2026-08-20 (all three), Final Signoff 2026-08-21 |
 | **Started** | 2026-08-20 (client folder scaffolded from Asana dispatch) |
 | **Live site** | https://legacydentalpasadena.com/ — **already Webflow**, site `68e12d861f12c7f04a762a8e` |
@@ -119,15 +119,15 @@ channel**. That is the strongest available signal for how the new page should be
 
 ## Open questions — close these before `04-design` ships
 
-1. **Is the new landing page a replacement for `/invisalign-offer-pasadena`, or a second page for
-   the post-LSA channel?** Blocking on the slug, on whether a redirect is needed, and on whether the
-   existing page gets retired. The task says "create", which reads as additive, but the practice
-   already has an Invisalign offer LP and may simply want it rebuilt. **Ask Brandklout.**
+1. ~~Is the new landing page a replacement for `/invisalign-offer-pasadena`?~~ **Closed
+   2026-08-20: it is a NEW page alongside.** `/invisalign-offer-pasadena` stays live and untouched.
+   The three new slugs are still to be chosen, and the site already ranks a wide Invisalign tree —
+   see below.
 2. **Which channel replaces LSA?** Google Search Ads, Performance Max, and Meta each imply different
    above-the-fold treatment and a different DNI setup. The existing draft is Meta-specific.
-3. **What is the "Consult" page?** Read most naturally as a dedicated free-consultation booking page
-   — the Jarvis scheduler plus qualification copy — sitting between the LP and the thank-you page.
-   Confirm it is not instead a consultation *offer* page for a different service.
+3. ~~What is the "Consult" page?~~ **Closed 2026-08-20.** It is its own page: the form plus a few
+   testimonial videos, and little else. The full three-page funnel is specified in
+   [page-flow.md](./page-flow.md).
 4. **Is the $3,379 offer still current?** It is on the live page today, but it is described as
    limited-time and the whole campaign is being re-pointed. Confirm before printing it.
 5. **Form destination.** Gauge Hill owns form creation, but the LP must contain the form. Webflow
