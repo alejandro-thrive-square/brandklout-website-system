@@ -1,48 +1,37 @@
 #!/usr/bin/env node
 /**
  * swap-blog-dynamic.mjs — turn the two pushed blog pages into their dynamic
- * Instatic forms. Run AFTER push-all.mjs, every time either page is pushed.
+ * Instatic forms, after push-page/push-all has put the local build up.
  *
- * `posts` and `post` are ordinary pages in the local build now (see
- * site-src/gen-blog.mjs), which is what lets them share the nav, drawer, footer
- * and gates with everything else. A push therefore ships their STATIC form:
+ * The local build owns the DESIGN of both pages (site-src/gen-blog.mjs); this
+ * owns only the two things a static build cannot express:
  *
- *   posts   a .bl-grid holding 43 hand-written .bl-card articles
- *   post    a .bl-body holding one real article
+ *   /posts   the static `.bl-grid` of 43 cards  ->  <instatic-loop> over the
+ *            posts collection, so a new entry appears without a rebuild.
+ *   post     the contents of `.bl-body`         ->  <instatic-outlet>, and the
+ *            page registered as the postTypes template.
  *
- * This restores the two platform mechanisms on top:
+ * WHY THIS REPLACED build-blog-index.mjs / build-post-template.mjs
+ * ---------------------------------------------------------------
+ * Those built both pages from scratch by copying the shell out of thank-you.
+ * That is what left the blog stranded when the Journal link went into the nav:
+ * every other page picks the shell up from a partial and rebuilds, these two
+ * carried a snapshot of someone else's page. Now they are ordinary pages in the
+ * build and this only performs the swap.
  *
- *   posts   the grid becomes an <instatic-loop> over the posts collection
- *   post    the .bl-body becomes an <instatic-outlet>, and the page is
- *           re-registered as the postTypes template
+ * The loop's CHILD is the card markup, verbatim from the pushed page, with the
+ * three text nodes swapped for {currentEntry.*} tokens. Keeping it identical is
+ * what makes the static and dynamic versions render the same.
  *
- * THE LOOP MUST CARRY THE GRID CLASS. Wrapping a loop inside a grid puts every
- * iteration into ONE cell, so `.bl-grid` goes on the <instatic-loop> itself and
- * the static div it replaces is removed rather than filled. That is why this
- * replaces the grid's PARENT's children instead of the grid's own.
- *
- * The cards keep no date, deliberately: `publishedAt` is the import date, so
- * every card would read 2026 for a post written in 2022, and the collection's
- * fields are builtIn-only. The true date lives in each article body.
- *
- *   node swap-blog-dynamic.mjs           # both pages
- *   node swap-blog-dynamic.mjs --check   # report the current state, change nothing
+ *   node swap-blog-dynamic.mjs            # both
+ *   node swap-blog-dynamic.mjs posts      # just the index
+ *   node swap-blog-dynamic.mjs post       # just the template
  */
 import { callJson, callWrite } from './instatic-mcp.mjs';
 
-const CHECK = process.argv.includes('--check');
+const only = process.argv[2];
 
-const LOOP = `<instatic-loop class="bl-grid" data-source-id="data.rows" data-table-id="posts" data-order-by="publishedAt" data-direction="desc" data-limit="60">
-  <article class="bl-card">
-    <h2><a href="{currentEntry.permalink}">{currentEntry.title}</a></h2>
-    <p>{currentEntry.seoDescription}</p>
-    <a class="bl-more" href="{currentEntry.permalink}">Read the article</a>
-  </article>
-</instatic-loop>`;
-
-const OUTLET = `<instatic-outlet data-tag="div"></instatic-outlet>`;
-
-/** Read a document whole; site_read_document paginates. */
+/** Read a document in full; site_read_document paginates. */
 async function readDoc(doc) {
   let html = '', part = 1;
   for (;;) {
@@ -54,83 +43,75 @@ async function readDoc(doc) {
   }
 }
 
-const uidOf = (tag) => (/uid="([^"]+)"/.exec(tag) || [])[1];
-
-/**
- * The uid of the element that CONTAINS the one matching `re`.
- * Walks back through the preceding open tags counting depth, which is enough
- * for this markup and avoids pulling in a parser for two known shapes.
- */
-function parentUid(html, re) {
+/** uid of the first element whose start tag matches `re`. */
+function uidOf(html, re) {
   const m = re.exec(html);
   if (!m) return null;
-  const before = html.slice(0, m.index);
-  const tags = [...before.matchAll(/<(\/?)([a-zA-Z][\w-]*)\b[^>]*?(\/?)>/g)];
-  let depth = 0;
-  for (let i = tags.length - 1; i >= 0; i--) {
-    const [whole, close, name, selfClose] = tags[i];
-    if (selfClose === '/' || /^(img|br|input|meta|link|hr|source|wbr|col|area)$/i.test(name)) continue;
-    if (close) { depth++; continue; }
-    if (depth === 0) return uidOf(whole);
-    depth--;
-  }
-  return null;
+  const u = /uid="([^"]+)"/.exec(m[0]);
+  return u ? u[1] : null;
 }
 
 const docs = await callJson('site_list_documents', {});
 const find = (slug) => (docs.documents || []).find((d) => d.slug === slug);
 
-// ---- 1. the index: static grid -> CMS loop --------------------------------
-{
+/* ---- /posts: the grid becomes a loop ------------------------------------ */
+if (!only || only === 'posts') {
   const d = find('posts');
-  if (!d) throw new Error('no `posts` document — push it first');
+  if (!d) throw new Error('no /posts document — push it first');
   const html = await readDoc(d.document);
-  const cards = (html.match(/class="bl-card"/g) || []).length;
-  const hasLoop = /instatic:\s*loop|<instatic-loop/.test(html);
-  console.log(`posts: ${cards} static cards, loop ${hasLoop ? 'present' : 'ABSENT'}`);
 
-  if (!CHECK && !hasLoop) {
-    const holder = parentUid(html, /<div\b[^>]*class="bl-grid"[^>]*>/);
-    if (!holder) throw new Error('could not locate the .bl-grid container');
-    await callWrite('site_replace_node_html', { nodeId: holder, html: LOOP });
+  if (/<instatic-loop|instatic: loop/.test(html)) {
+    console.log('posts: already dynamic, nothing to swap');
+  } else {
+    // Replace the CHILDREN of the grid's parent, which is the one call that
+    // swaps a whole subtree without needing to delete and re-index siblings.
+    const gridParent = uidOf(html, /<div\b[^>]*class="wrap section"[^>]*>(?=[\s\S]{0,400}?class="bl-grid")/);
+    if (!gridParent) throw new Error('could not locate the grid container on /posts');
+
+    const loop = `<instatic-loop class="bl-grid" data-source-id="data.rows" data-table-id="posts" data-order-by="publishedAt" data-direction="desc" data-limit="60">
+  <article class="bl-card" data-rv>
+    <h2><a href="{currentEntry.permalink}">{currentEntry.title}</a></h2>
+    <p>{currentEntry.seoDescription}</p>
+    <a class="bl-more" href="{currentEntry.permalink}">Read the article</a>
+  </article>
+</instatic-loop>`;
+
+    await callWrite('site_replace_node_html', { nodeId: gridParent, html: loop });
+
     const back = await readDoc(d.document);
-    const loop = /<!--\s*instatic: loop "([^"]+)"/.exec(back);
-    // A loop serialises as a COMMENT in the static read and its children are not
-    // in that output, so "0 cards" here is the expected result of success.
-    console.log('  -> loop node:', loop ? loop[1] : 'NOT STORED',
-      '| static cards left:', (back.match(/class="bl-card"/g) || []).length);
+    // A loop serialises as a COMMENT in the static read; its children and their
+    // {currentEntry.*} tokens are NOT in that output, so a token count here says
+    // nothing. The canvas is what resolves it.
+    const m = /<!--\s*instatic: loop "([^"]+)"/.exec(back);
+    console.log(`posts: loop ${m ? 'stored (' + m[1] + ')' : 'NOT STORED — inspect'}`);
+    console.log(`posts: static cards remaining ${(back.match(/class="bl-card"/g) || []).length} (want 0)`);
   }
 }
 
-// ---- 2. the article layout: real body -> content outlet -------------------
-{
+/* ---- post: the body becomes the outlet, and the page becomes the template */
+if (!only || only === 'post') {
   const d = find('post');
-  if (!d) throw new Error('no `post` document — push it first');
+  if (!d) throw new Error('no post document — push it first');
   const html = await readDoc(d.document);
-  const hasOutlet = /instatic-content-region|<instatic-outlet/.test(html);
-  console.log(`post: outlet ${hasOutlet ? 'present' : 'ABSENT'}`);
 
-  if (!CHECK && !hasOutlet) {
-    const body = /<div\b[^>]*class="bl-body"[^>]*>/.exec(html);
-    if (!body) throw new Error('could not locate .bl-body');
-    // Replace the CHILDREN of .bl-body, keeping the element and its data-rv.
-    await callWrite('site_replace_node_html', { nodeId: uidOf(body[0]), html: OUTLET });
-    const back = await readDoc(d.document);
-    console.log('  -> outlet:', /instatic-content-region|<instatic-outlet/.test(back) ? 'ok' : 'MISSING');
-  }
-
-  // Registration lives on the page record, not the nodes, so a body push should
-  // not disturb it — but it costs one call to be certain, and an unregistered
-  // template silently stops rendering every entry.
-  if (!CHECK) {
-    const set = await callWrite('site_set_page_template', {
-      pageId: d.document.id,
-      target: { kind: 'postTypes', tableSlugs: ['posts'] },
+  if (/instatic-content-region|instatic-outlet/.test(html)) {
+    console.log('post: already has its outlet');
+  } else {
+    const body = uidOf(html, /<div\b[^>]*class="bl-body"[^>]*>/);
+    if (!body) throw new Error('could not locate .bl-body on the post page');
+    await callWrite('site_replace_node_html', {
+      nodeId: body,
+      html: '<instatic-outlet data-tag="div"></instatic-outlet>',
     });
-    console.log('  -> template registered:', JSON.stringify(set).slice(0, 120));
+    const back = await readDoc(d.document);
+    console.log(`post: outlet ${/instatic-content-region|instatic-outlet/.test(back) ? 'in place' : 'MISSING — inspect'}`);
   }
-}
 
-const after = await callJson('site_list_documents', {});
-const tpl = (after.templates || []).find((t) => t.target === 'postTypes');
-console.log('postTypes template:', tpl ? `${tpl.title} (${tpl.id})` : 'NONE');
+  // Re-registering is idempotent and cheap, and a push that recreated the page
+  // would have dropped the registration silently.
+  const set = await callWrite('site_set_page_template', {
+    pageId: d.document.id,
+    target: { kind: 'postTypes', tableSlugs: ['posts'] },
+  });
+  console.log('post: template target ->', JSON.stringify(set).slice(0, 160));
+}

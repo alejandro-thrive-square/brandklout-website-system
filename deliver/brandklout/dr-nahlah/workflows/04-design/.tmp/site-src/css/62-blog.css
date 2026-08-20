@@ -39,7 +39,13 @@
    entry markup carries one, and it is not ours to rewrite per post. */
 .bl-post{max-width:74ch;margin-inline:auto}
 .bl-post .bl-when{display:block;margin-bottom:1rem}
-.bl-post h1{font-size:var(--h1);max-width:20ch;margin-bottom:clamp(1.5rem,3vw,2.25rem)}
+/* --h1 is not a token in this system and never has been, so this declaration
+   was invalid and the headline fell back to the inherited body size: every one
+   of the 43 published articles rendered its title SMALLER than its own h2s.
+   Sized off the same ramp the article's h2 uses, one step up, because the
+   headline sits in the 74ch reading column and not in a page hero. */
+.bl-post h1{font-family:var(--f-display);font-size:calc(2.6rem * var(--t-sm));font-weight:500;
+  line-height:1.14;max-width:20ch;margin-bottom:clamp(1.5rem,3vw,2.25rem)}
 .bl-body{color:var(--fg-body);font-weight:300}
 .bl-body > * + *{margin-top:1.15rem}
 .bl-body h2{font-family:var(--f-display);font-size:calc(1.6rem * var(--t-sm));font-weight:500;

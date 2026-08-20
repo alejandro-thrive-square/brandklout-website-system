@@ -29,6 +29,10 @@ await S('Page.enable'); await S('Runtime.enable');
 /* --mobile drives the phone layout, which is the ONLY width where the drawer,
    the burger and the touch behaviour of the sliders exist at all. A desktop-only
    sweep cannot see any of them. */
+const wArg = process.argv.indexOf('--width');
+if (wArg > -1) {
+  await S('Emulation.setDeviceMetricsOverride', { width: Number(process.argv[wArg + 1]), height: 900, deviceScaleFactor: 1, mobile: false });
+}
 if (process.argv.includes('--mobile')) {
   await S('Emulation.setDeviceMetricsOverride', {
     width: 390, height: 844, deviceScaleFactor: 3, mobile: true,
@@ -38,7 +42,13 @@ if (process.argv.includes('--mobile')) {
 const ev = async (x) => (await S('Runtime.evaluate', { expression: x, returnByValue: true, awaitPromise: true })).result.value;
 await S('Page.navigate', { url: URL_ });
 await wait(4500);
-await ev('(async()=>{const H=document.documentElement.scrollHeight;for(let y=0;y<H;y+=700){window.scrollTo(0,y);await new Promise(r=>setTimeout(r,45));}window.scrollTo(0,0);await new Promise(r=>setTimeout(r,700));})()');
+/* Same settled sweep as audit-site.mjs. A fast pass outruns ScrollSmoother by
+   ~1.2s, so the last screenful never fires its triggers and the probe reports
+   elements stranded at opacity 0 that are fine. */
+await ev('(async()=>{const H=document.documentElement.scrollHeight;'
+  + 'for(let y=0;y<H;y+=500){window.scrollTo(0,y);await new Promise(r=>setTimeout(r,110));}'
+  + 'window.scrollTo(0,H);await new Promise(r=>setTimeout(r,2600));'
+  + 'window.scrollTo(0,0);await new Promise(r=>setTimeout(r,900));})()');
 await wait(1200);
 console.log(JSON.stringify(await ev(EXPR), null, 1));
 sock.close(); chrome.kill();

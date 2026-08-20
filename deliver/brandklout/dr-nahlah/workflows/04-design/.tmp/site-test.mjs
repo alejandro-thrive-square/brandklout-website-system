@@ -102,7 +102,21 @@ function check(page, name, ok, detail) {
   ok ? pass++ : failures.push(line);
 }
 
-const existing = new Set(PAGES.map((p) => p + ".html"));
+/* The 43 article URLs are real on every host that serves this site, but they are
+   not files in final-site: the articles live in the Instatic posts collection and
+   are rendered through the `post` template. Checking them against the folder
+   would report 43 broken links on a page where nothing is broken, so they are
+   validated against the archive itself, which is the stronger test — a card
+   pointing at a slug that is not in posts.json IS a dead link. */
+const POSTS_JSON = new URL('../../13-content-export-import/.tmp/posts.json', import.meta.url);
+const POST_SLUGS = (() => {
+  try {
+    const j = JSON.parse(fs.readFileSync(POSTS_JSON, 'utf8'));
+    return (Array.isArray(j) ? j : j.posts || []).map((x) => 'posts/' + x.slug + '.html');
+  } catch { return []; }
+})();
+const existing = new Set([...PAGES.map((p) => p + ".html"), ...POST_SLUGS]);
+console.log(`link targets: ${PAGES.length} built pages + ${POST_SLUGS.length} CMS article routes`);
 
 // Contrast auditing, run inside the page. Walks up for the first opaque
 // background; anything sitting over a photo is reported separately rather than

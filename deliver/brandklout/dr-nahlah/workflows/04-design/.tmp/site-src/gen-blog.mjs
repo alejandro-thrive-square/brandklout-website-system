@@ -49,7 +49,7 @@ const esc = (s) => String(s)
   .replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
 /** One card, shaped exactly like the loop's child so the swap is 1:1. */
-const card = (p) => `      <article class="bl-card">
+const card = (p) => `      <article class="bl-card" data-rv>
         <h2><a href="posts/${p.slug}.html">${esc(p.title)}</a></h2>
         <p>${esc(p.seoDescription || '')}</p>
         <a class="bl-more" href="posts/${p.slug}.html">Read the article</a>
@@ -83,7 +83,12 @@ const index = `<!-- ============================================================
 <!-- ---------- the archive ---------- -->
 <section class="pk pk-alt" id="articles">
   <div class="wrap section">
-    <div class="bl-grid" data-rv="stagger">
+    <!-- The reveal is per CARD, not a stagger on the grid. A stagger over 43
+         children runs for ~3.9s from a single trigger at the top of the list,
+         so the last cards animate long after they are on screen; and the loop
+         that replaces this grid on Instatic copies its CHILD markup, so a
+         per-card attribute is the only one that survives the swap. -->
+    <div class="bl-grid">
 ${posts.map(card).join('\n')}
     </div>
   </div>
