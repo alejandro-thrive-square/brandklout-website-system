@@ -1496,5 +1496,28 @@
     }
    ]
   }
+ },
+ "posts": {
+  "title": "Journal | Implants, Prosthodontics and Smile Design | Dr. Nahlah",
+  "desc": "Articles on dental implants, All-on-4, full-mouth reconstruction and cosmetic dentistry, written by the practice in McLean and Alexandria, Virginia.",
+  "ogTitle": "Journal | Dr. Nahlah Implants and Prosthodontics Specialists",
+  "ogDesc": "Articles on implants, prosthodontics and smile design from a board-certified prosthodontist in Northern Virginia.",
+  "jsonLd": {
+   "@context": "https://schema.org",
+   "@type": "Blog",
+   "name": "Journal | Dr. Nahlah Implants and Prosthodontics Specialists",
+   "description": "Articles on implants, prosthodontics and smile design from a board-certified prosthodontist in Northern Virginia.",
+   "url": "/posts",
+   "publisher": {
+    "@id": "/#practice"
+   }
+  }
+ },
+ "post": {
+  "title": "Article | Dr. Nahlah Implants and Prosthodontics Specialists",
+  "desc": "An article from the practice archive on implants, full-arch restoration, cost and aftercare.",
+  "ogTitle": "Article | Dr. Nahlah Implants and Prosthodontics Specialists",
+  "ogDesc": "An article from the practice archive.",
+  "robots": "noindex, follow"
  }
 }

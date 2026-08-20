@@ -84,7 +84,7 @@ const CHAPTER_READOUT = `<div class="nav-chapter" aria-hidden="true">
       </div>`;
 
 // nav-links key -> which page is "current"
-const NAVKEYS = ["IMPLANTS", "COSMETIC", "GALLERY", "ABOUT", "CONTACT"];
+const NAVKEYS = ["IMPLANTS", "COSMETIC", "GALLERY", "ABOUT", "CONTACT", "JOURNAL"];
 
 const PAGES = [
   { slug: "index", body: "home", journey: 1, navKey: null },
@@ -101,6 +101,14 @@ const PAGES = [
   // page the client asked for — built out below.
   { slug: "meet-dr-nahlah", journey: 0, navKey: "ABOUT" },
   { slug: "contact", journey: 0, navKey: "CONTACT" },
+  // The blog index. 43 migrated WordPress posts live under /posts/<slug>; the
+  // slug here has to stay "posts" because that is what all 43 of them and the
+  // 117 redirect rules already point at.
+  { slug: "posts", journey: 0, navKey: "JOURNAL" },
+  // The article layout. On Instatic this page IS the postTypes template: its
+  // .bl-body is swapped for an <instatic-outlet> by build-post-template.mjs.
+  // Locally it renders one real article so the design is gated like any page.
+  { slug: "post", journey: 0, navKey: "JOURNAL" },
 
   // ---- Build-out from the old site's own IA (2026-08-10). The 33-page
   // WordPress site's primary nav is captured verbatim in the scrape, and these

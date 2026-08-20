@@ -38,12 +38,20 @@ const LOCAL = flag('local');                 // local build serves index.html, n
 const OUT = path.join(HERE, arg('out', 'audit-out'));
 fs.mkdirSync(OUT, { recursive: true });
 
-const PAGES = ('index dental-implants all-on-4 implant-cost sedation-dentistry smile-makeover ' +
-  'veneers smile-gallery patient-stories meet-dr-nahlah contact about our-team our-facility ' +
-  'cosmetic-dentistry teeth-whitening crowns-and-bridges oral-surgery emergency-dentistry ' +
-  'dental-conditions implant-supported-dentures dental-implant-faq patient-center financing ' +
-  'doctor-referral video-library privacy-policy terms-conditions privacy-policy-maclean ' +
-  'privacy-policy-alexandria terms-of-service-maclean terms-of-service-alexandria thank-you').split(/\s+/);
+/* The page list is DERIVED, never typed twice. A hardcoded copy is how a gate
+   quietly stops covering the pages that were added after it was written --
+   which is exactly what happened when the blog arrived. `post` is excluded on
+   purpose: it is registered as the postTypes template, so Instatic serves 404
+   at /post and every entry renders through it instead. */
+const PAGES = (() => {
+  const spec = fs.readFileSync(path.resolve(HERE, '../../04-design/.tmp/site-src/build-site.mjs'), 'utf8');
+  const block = /const PAGES\s*=\s*\[([\s\S]*?)\n\];/.exec(spec);
+  if (!block) throw new Error('could not read the page list out of build-site.mjs');
+  const TEMPLATES = new Set(['post']);
+  return [...block[1].matchAll(/\{\s*slug:\s*"([^"]+)"/g)]
+    .map((m) => m[1])
+    .filter((slug) => !TEMPLATES.has(slug));
+})();
 
 const POSTS = (() => {
   const p = path.resolve(HERE, '../../13-content-export-import/.tmp/posts.json');
@@ -61,7 +69,6 @@ function urlFor(kind, slug) {
 
 let TARGETS = [
   ...PAGES.map((s) => ({ kind: 'page', slug: s, url: urlFor('page', s) })),
-  ...(LOCAL ? [] : [{ kind: 'index', slug: 'posts', url: BASE + '/posts' }]),
   ...POSTS.map((s) => ({ kind: 'post', slug: s, url: urlFor('post', s) })),
 ];
 const only = arg('only');

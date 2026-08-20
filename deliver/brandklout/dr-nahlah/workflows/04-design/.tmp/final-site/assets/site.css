@@ -231,7 +231,14 @@ p{margin:0}
 
 /* One slot, shared by the site links and — on the journey page — the chapter
    readout, so the nav row is the same shape on every page. */
-.nav-slot{display:none;position:relative;align-items:center;min-height:1.4em}
+/* flex-shrink:0 is what lets a sixth link exist. `.nav-in` is a space-between
+   flex row, so the slot is shrinkable by default: at 1150px and below it was
+   being squeezed under its content width and each LABEL wrapped inside itself
+   ("Smile Gallery" over two lines), which reads as a broken nav even though
+   there were still ~150px of free room in the row. The links keep their
+   intrinsic width now, and nowrap stops a label ever breaking mid-phrase. */
+.nav-slot{display:none;position:relative;align-items:center;min-height:1.4em;flex-shrink:0}
+.nav-links a{white-space:nowrap}
 .nav-links{display:flex;align-items:center;gap:clamp(1.1rem,2.2vw,2.2rem);
   font-size:var(--label);letter-spacing:.14em;text-transform:uppercase;font-weight:600;
   transition:opacity .45s ease}

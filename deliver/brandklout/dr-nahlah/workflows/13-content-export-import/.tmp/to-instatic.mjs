@@ -33,11 +33,21 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 export const SITE = path.resolve(HERE, '../../04-design/.tmp/final-site');
 const MAP = JSON.parse(fs.readFileSync(path.join(HERE, 'instatic-media-map.json'), 'utf8'));
 
-/** `index.html` -> `/`, `veneers.html#faq` -> `/veneers#faq`. */
+/**
+ * `index.html` -> `/`, `veneers.html#faq` -> `/veneers#faq`,
+ * `posts/<slug>.html` -> `/posts/<slug>`.
+ *
+ * The one nested case is the blog. The local build writes article links as
+ * `posts/<slug>.html`, and a flat-filename pattern silently leaves those alone,
+ * which would ship 43 dead links on the index. The CMS loop replaces that grid
+ * on Instatic, so they are a fallback rather than the primary path -- but a
+ * fallback that 404s is worse than none.
+ */
 export function route(href) {
-  const m = /^([A-Za-z0-9._-]+)\.html(#.*)?$/.exec(href);
+  const m = /^(?:(posts)\/)?([A-Za-z0-9._-]+)\.html(#.*)?$/.exec(href);
   if (!m) return null;
-  const [, slug, hash = ''] = m;
+  const [, dir, slug, hash = ''] = m;
+  if (dir) return `/${dir}/${slug}${hash}`;
   return (slug === 'index' ? '/' : `/${slug}`) + hash;
 }
 
