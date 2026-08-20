@@ -8,6 +8,7 @@ manage/browser-tools/playwright-browser/.tmp/style-capture-*/code/resources/
 # third-party cache (~7.5MB for one client). The structured meta.json extracted
 # from each one is committed instead, and capture.mjs re-fetches the raw page.
 **/01-content-intake/.tmp/**/rendered.html
+**/01-content-intake/.tmp/**/*.rendered.html
 # Throwaway Chrome profiles created by the headless QA harnesses. Tens of MB of
 # browser state per run, regenerated on every invocation.
 # Throwaway Chrome profiles for the driven QA harnesses. Each harness makes its
@@ -32,6 +33,7 @@ manage/browser-tools/playwright-browser/.tmp/style-capture-*/code/resources/
 *.jpeg
 *.gif
 *.webp
+*.avif
 *.svg
 *.ico
 *.pdf

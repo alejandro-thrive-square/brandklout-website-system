@@ -60,24 +60,45 @@ Mason Park's, section by section — the template to follow:
 | Short reassurance | One claim, e.g. "One Dentist, Start To Finish" |
 | Footer | Rating, NAP, service areas, and the **full offer-terms disclaimer** |
 
-**Legacy has real testimonial videos, so this page gets video, not just quote cards.** The
-`Home videos` CMS collection (`68e3cdad8b3d712f2e9e9684`) holds **3 published items**, each with a
-Vimeo id, a WebP poster, an attributed quote and a service label:
+**Legacy has real testimonial videos, so this page gets video, not just quote cards.** Corrected
+2026-08-20 by `01-content-intake`: there are **six** Invisalign videos, not one. The `Home videos`
+CMS collection (`68e3cdad8b3d712f2e9e9684`) holds 3 published items, of which only one is
+Invisalign; the other five Invisalign videos are hard-coded into the existing offer LP and are not
+in the CMS at all.
 
-| Slug | Vimeo id | Subject | Patient |
-| :--- | :--- | :--- | :--- |
-| `testimonial-video-2` | `1129777153` | **Invisalign success story** | Seham A. |
-| `testimonial-video-1` | `1129778550` | Emergency dental care | Paul |
-| `testimonial-video-3` | `1129779416` | Full mouth transformation | Linda K. |
+| Vimeo id | Subject | Attribution | Orientation | Source |
+| :--- | :--- | :--- | :--- | :--- |
+| `1129777153` | Invisalign success story | Seham A., quote in CMS | landscape | CMS `testimonial-video-2` |
+| `1183600276` | Invisalign process explainer | none | landscape | offer LP |
+| `1193010876` | Invisalign testimonial | none | **portrait** | offer LP |
+| `1195848251` | Testimonial | none | **portrait** | offer LP |
+| `1196557291` | Invisalign confidence story | none | **portrait** | offer LP |
+| `1196557292` | Invisalign + implants, "Rocio" | none | **portrait** | offer LP |
+| `1129778550` | Emergency dental care | Paul, quote in CMS | landscape | CMS, **off topic** |
+| `1129779416` | Full mouth transformation | Linda K., quote in CMS | landscape | CMS, **off topic** |
 
-Lead with the Invisalign one. These are real patients — read the collection, never retype the
-quotes, and do not invent a fourth.
+Lead with Seham A., the only Invisalign video that comes with a written, attributed quote. **Five of
+the six are portrait**, so the treatment is a vertical-video wall, not a 16:9 grid. These are real
+patients: read the collection, never retype the quotes, do not invent a caption for the five that
+have none, and do not invent a seventh video. Full inventory in
+[`../workflows/01-content-intake/.tmp/video-inventory.json`](../workflows/01-content-intake/.tmp/video-inventory.json).
+
+**Reviews come from the practice's own Elfsight widget, never from retyped quotes.** Widget
+`33f2eb26-ad12-4f8c-a68d-92dd234c5f4b` is named "Legacy Dental Invisalign Marketing Ad" and is
+already filtered to 5-star, 20 items. Google shows **5.0 across 486 reviews** as of 2026-08-20.
+Reserve a real slot for the embed; do not hard-code a review count that moves.
 
 The doctor beside the form is **Dr. Sean Sunyoto, DDS**.
 
 > [!IMPORTANT]
 > **The form itself is Gauge Hill's task** (`Form creation and redirect to thank you page`,
 > `1217658612249899`). Build the card, the layout and the seam; do not decide the endpoint.
+
+The form pattern here is already established and it is **per paid channel**. The existing offer LP
+embeds LeadConnector form `GWW0nyfomRxi8uIYLZex`, named **"Legacy Dental Pasadena Meta Ads"**; the
+Invisalign service page embeds `SZUMNyrV7SQYc8odMkv5`, named "Contact Us". Both belong to Legacy.
+Expect Gauge Hill to create a third form named for whichever channel replaces LSA, and size the slot
+for a LeadConnector iframe (the existing one runs `min-height: 800px`).
 
 > [!WARNING]
 > **Mason Park's consult pages embed the wrong client's form, and both of them do it.**
@@ -101,7 +122,10 @@ describes its *purpose*, not permission to ship a bare confirmation line. It sti
 happens next, what to bring, and where to find us.
 
 Mason Park's thank-you page currently carries **no tracking tags at all** — no GTM, no `gtag`, no
-`fbq`. That is consistent with the split of work here:
+`fbq`. Legacy is the opposite case: GTM container `GTM-TTLFRPH2` and Meta Pixel `1284882733596471`
+already fire on every page of this site, so a new page inherits both the moment it exists. "Connect
+tracking" here means adding a conversion trigger inside containers that are already installed. That
+does not change the split of work:
 
 > [!IMPORTANT]
 > **Do not install tracking.** `Connect tracking` (`1217658322593903`) and
@@ -111,12 +135,11 @@ Mason Park's thank-you page currently carries **no tracking tags at all** — no
 
 ## What still needs answering
 
-- **The slug set.** Confirmed 2026-08-20: the landing page is a **new page alongside**
-  `/invisalign-offer-pasadena`, which stays live and untouched. The three slugs themselves are
-  still open, and the site already ranks a wide Invisalign tree — see
-  [project-overview.md](./project-overview.md#existing-invisalign-footprint-on-the-site--read-before-choosing-a-slug).
-- **Which channel replaces LSA**, since it shapes the above-the-fold treatment.
-- **Whether the $3,379 offer is still current.**
+Four questions, with the evidence and the recommended answers, live in
+[`../workflows/01-content-intake/.tmp/open-questions.md`](../workflows/01-content-intake/.tmp/open-questions.md).
+In short: the **slug set** (the only one that blocks anything, and it blocks `07` rather than `04`),
+**which channel replaces LSA**, **whether the $3,379 offer is still current**, and **whether patient
+first names may caption the before-and-afters**.
 
 ## Version Control
 

@@ -95,6 +95,13 @@ offer mechanics**, which no amount of research would otherwise produce.
 > true` (`1217658322593896`, Gauge Hill) and use whichever figure Brandklout verifies. The same
 > applies to "500+ Invisalign Cases Completed".
 >
+> **Resolved by evidence 2026-08-20, though the decision is still Gauge Hill's.** Google shows
+> **5.0 stars across 486 reviews** for place `ChIJwzHEaifDwoARnQXBX95TD5s`, read from the practice's
+> own Business profile through the Elfsight widget this very page runs. "480+" is right and slightly
+> conservative; "150+" is stale. The recommendation is to print no fixed number at all and let the
+> live widget speak, because the count keeps moving. Captured with 31 real reviews in
+> [`google-reviews.json`](../workflows/01-content-intake/.tmp/reviews/google-reviews.json).
+>
 > Also: the existing page's CTA reads **"BOOK FREE CONSULATION"** — a live typo, twice. Do not carry
 > it across.
 
@@ -119,6 +126,13 @@ channel**. That is the strongest available signal for how the new page should be
 
 ## Open questions — close these before `04-design` ships
 
+> [!NOTE]
+> Superseded 2026-08-20 by
+> [`open-questions.md`](../workflows/01-content-intake/.tmp/open-questions.md), which carries the
+> current state, the evidence, and a recommended answer for each. Questions 1 and 3 below are
+> closed; 5 is answered in part (the practice already runs LeadConnector forms named per channel).
+> The list below is kept for the reasoning that produced it.
+
 1. ~~Is the new landing page a replacement for `/invisalign-offer-pasadena`?~~ **Closed
    2026-08-20: it is a NEW page alongside.** `/invisalign-offer-pasadena` stays live and untouched.
    The three new slugs are still to be chosen, and the site already ranks a wide Invisalign tree —
@@ -142,7 +156,7 @@ Copied from `deliver/process/` at scaffold time. Route: `01` → `04` → `07` �
 | Phase | Status | Notes |
 | :--- | :--- | :--- |
 | `00-client-delivery-initialization` | **Done** | This doc + `mcp-access.md`; folder scaffolded; site ID confirmed |
-| `01-content-intake` | **Next** | Asana context pulled; existing offer LP captured. Still to do: scrape the practice's own photography, reviews and before/after assets. Download assets, do not just list URLs |
+| `01-content-intake` | **Done** 2026-08-20 | 167 media files downloaded (41 MB), 9 videos inventoried, 31 real Google reviews captured, brand tokens read, forms and tracking identified. See [`content-intake-summary.md`](../workflows/01-content-intake/.tmp/content-intake-summary.md) and [`open-questions.md`](../workflows/01-content-intake/.tmp/open-questions.md) |
 | `04-design` | Pending | Awwwards-grade, motion-led per [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md), benchmarked against Dr. Nahlah. Three chaptered journeys, not a stack of cards |
 | `07-webflow-build` | Pending | Site already exists with a Client-First style guide (`68e12d871f12c7f04a762ae7`, draft). Build natively onto the site's existing class system rather than forking a new one |
 | `08-qa` | Pending | Gate the **served** page under CDP at desktop and 390×844, not screenshots |

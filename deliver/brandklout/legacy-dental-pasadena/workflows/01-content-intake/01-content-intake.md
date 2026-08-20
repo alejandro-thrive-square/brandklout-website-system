@@ -28,8 +28,21 @@ Send, receive, and normalize the post-signing website-content questionnaire for 
 - **AI Site with Claude, Vercel & Airtable**: Required unless the signed handoff already includes an approved content package sufficient for Claude wireframing.
 
 ## Technical Setup
-- **Executor status**: Placeholder.
-- **Future automation**: Generate/send questionnaires, parse returned documents, extract structured content blocks, and flag missing answers.
+- **Executor status**: `01-content-intake.py` remains a placeholder. Three Node executors were written for this client on 2026-08-20 and are reusable for any intake that starts from an existing live site:
+
+| Script | Does | Run as |
+| :--- | :--- | :--- |
+| `extract_assets.mjs` | Pulls every asset reference out of captured HTML: `img src`, **`srcset`**, `<source>`, `video src`/`poster`, `url()` in inline and block CSS, icon `<link>`s, `og:image`, escaped URLs inside Webflow JSON attributes, and embeds found in `href`/`data-*` as well as `iframe src` | `node extract_assets.mjs <html-dir> <out.json>` |
+| `download_assets.mjs` | Downloads the media. Groups Webflow's responsive families (`-p-500`, `-p-800`, original) and keeps the **largest** of each, recording the whole family so the build regenerates smaller sizes instead of upscaling. Emits `asset-catalogue.json` | `node download_assets.mjs <out-dir> <assets.json...>` |
+| `capture_rendered.mjs` | Drives the live page under CDP, scrolls it so lazy widgets boot, and keeps both the rendered DOM and the **JSON those widgets fetched**. This is how third-party content that is absent from the static HTML gets captured | `node capture_rendered.mjs <url> <out-dir> [settleMs]` |
+
+### Traps this phase proved
+
+- **A URL list is not the deliverable.** Download the files. `<img src>` alone misses `srcset`, CSS backgrounds, posters and video.
+- **Third-party review, booking and form widgets render nothing into the static HTML.** The reviews on this client's pages exist only after Elfsight boots. `capture_rendered.mjs` gets them, and its network capture yields the authoritative rating and count straight from the source, which settles copy arguments with data instead of a guess.
+- **Filter tracking pixels out of the asset catalogue.** A Meta Pixel `noscript` beacon is an `<img>` and downloads as a 0-byte extensionless file.
+- **`*.avif` was missing from the repo's media gitignore rules** and was added on 2026-08-20. Check that any new format the site serves is actually covered before committing.
+
 - **Likely integrations**: Google Docs/Drive, OpenAI/Anthropic, ClickUp.
 
 ## Output Artifacts
