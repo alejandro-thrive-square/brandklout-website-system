@@ -210,3 +210,45 @@ the site's asset library** and is the exact frame Gauge sent captioned "She is t
 
 Artifacts here are lightweight and committed. Follows the root-level rules in
 [SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md).
+
+---
+
+## NEW FINDING (2026-08-20, second pass) — the pages contradict themselves on the Google rating
+
+**Not fixed. Needs a decision, because it changes the headline social proof on all six pages.**
+
+While visually checking the consultation pages I had only measured programmatically, the Elfsight
+review widget (app `32926aff-7df5-4c6d-8f35-d4d3f5f46b4b`, embedded on `/new-patient-special`,
+`/invisalign` and `/new-patient-special-consultation`) renders:
+
+> **Overall Rating 4.9 ★★★★★ (1,037)**
+
+The reviews it lists are unmistakably **Mason Park's own** — they name "Dr Cho", "Jenn"/"Jen" and
+"Gen"/Genevieve, and every reviewer carries a Google badge. So the widget is legitimate, not the
+Livewell contamination the session-4 runbook worried about.
+
+That means **the practice's real Google aggregate is 4.9 across 1,037 reviews**, and the pages say
+something different directly above it:
+
+| Claim on the pages | Where | Reality per the practice's own widget |
+| :--- | :--- | :--- |
+| "Rated 5.0 by our patients on Google" | hero badge + credential list, 2x per LP | 4.9 |
+| stat "5.0 / Google patient rating" | stat band, all LPs + consultation | 4.9 |
+
+**The 2026-08-19 audit's conclusion that "the 5.0 rating is real" was wrong.** It reasoned from
+`data-rating="5.0"` on the Trustindex review cards, but that attribute is **the individual
+reviewer's star rating**, not the practice average. Every one of those cards is a 5-star review, so
+the attribute is 5.0 on all of them regardless of the aggregate.
+
+It also resolves the other half of that audit: it concluded "no aggregate count can be claimed" and
+stripped the invented "320+ five-star reviews" x16. **A real count does exist and is 1,037** — far
+stronger than the number that was invented.
+
+### Recommendation
+
+Replace "Rated 5.0 by our patients on Google" with **"Rated 4.9 by 1,037 patients on Google"** and
+the stat with **"4.9 / rating from 1,037 Google reviews"**. It is sourced, internally consistent
+with the widget sitting on the same page, and a 1,037-review count is a much better proof point
+than a bare 5.0. Roughly 10 string edits plus the stat band component.
+
+Left unchanged pending sign-off, since 5.0 -> 4.9 is a marketing call, not a typo.
