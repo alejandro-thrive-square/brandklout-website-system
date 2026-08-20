@@ -8,6 +8,25 @@
 .nav.is-solid{background:rgba(250,248,243,.9);backdrop-filter:blur(14px);border-bottom-color:rgba(138,126,78,.26)}
 .nav-in{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
   padding-block:clamp(.85rem,1.6vw,1.35rem)}
+/* The logo NEVER shrinks. `.nav-in` is capped at --maxw so the header lines up
+   with the content column, but above that width the column stops growing while
+   the fluid root keeps scaling (16px at 1440, 26px at 3840), so the nav's own
+   type and gaps outgrow their row. With `.nav-slot` set to flex-shrink:0, the
+   logo absorbed the entire deficit: 190px at 1920, 105px at 2560, and 0 at
+   3840, where the practice's own wordmark had vanished from the header.
+   (The img also carries max-width:100% from the base reset, so once the anchor
+   collapsed the image went with it.)
+   Fixed together with the max-width below: the logo holds 190px and the row
+   grows to hold it, so the header stays symmetrical from 1440 to 5120. */
+.nav-logo{flex-shrink:0}
+/* ...and the row grows to hold it. Everything in this row except the logo is
+   sized in rem: measured across 1440-3840 the links and the CTA come to a
+   steady ~58rem, and the two gaps plus the row gutters add ~12rem more, so what
+   the nav needs is about 72rem plus the logo. Below
+   --maxw that is smaller than the column and this resolves to the column, so
+   nothing changes at ordinary widths; above it the header widens just enough to
+   stay symmetrical instead of spilling its CTA out to one side. */
+.nav .nav-in{max-width:max(var(--maxw), calc(72rem + 200px))}
 .nav-logo img{width:clamp(132px,13vw,190px)}
 
 /* One slot, shared by the site links and — on the journey page — the chapter

@@ -129,6 +129,15 @@ for (const w of WIDTHS) {
       { width: w, height: w < 768 ? 844 : 900, deviceScaleFactor: 1, mobile: w < 768 }, sessionId);
     await send("Page.navigate", { url: `${base}/${page}.html` }, sessionId);
     await wait(w < 768 ? 2600 : 2200);
+    /* A fixed sleep is a bet on parse time, and the bet loses as pages grow: the
+       moment all-on-4 crossed ~34KB this harness started evaluating before the
+       body existed and died with "Cannot read properties of null (reading
+       'scrollHeight')" -- which reads like a site defect and is not one.
+       Wait for the body, then continue. */
+    for (let i = 0; i < 60; i++) {
+      if (await evalJs(`!!document.body`)) break;
+      await wait(250);
+    }
 
     // Scroll the whole page: a pinned horizontal track or a lazy row can only
     // widen the document once it has actually been scrolled into view.
