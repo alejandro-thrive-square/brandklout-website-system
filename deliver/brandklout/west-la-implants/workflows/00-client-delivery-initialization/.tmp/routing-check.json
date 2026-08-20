@@ -1,0 +1,43 @@
+{
+  "generated_at": "2026-08-20",
+  "source": "deliver/process/OFFER_ROUTING.md",
+  "process_baseline_commit": "8d65269",
+  "client_id": "west-la-implants",
+  "client_name": "West LA Implants",
+  "partner": "Brandklout",
+  "selected_offer": "Development from Scratch",
+  "canonical_offer_file": "sales/process/01-define-offers/offers/offer-development-from-scratch.md",
+  "handoff_file": null,
+  "routing_valid": true,
+  "default_path": ["00", "01", "02", "03", "04", "05", "06", "07", "08", "09", "10"],
+  "optional_phases": ["16"],
+  "skipped_phases": ["11", "12", "13", "15", "17"],
+  "conditional_phases": [
+    {
+      "module": "14-migration-seo-redirects",
+      "condition": "The new site replaces westlaimplants.com at the same domain",
+      "reason": "88 existing indexed URLs (42 pages + 46 posts) hold rankings and backlinks; a domain cutover without a redirect map loses them.",
+      "action": "Copy the module in before 09-launch once the domain plan is confirmed."
+    }
+  ],
+  "existing_site": {
+    "url": "https://westlaimplants.com/",
+    "platform": "WordPress",
+    "seo_plugin": "Rank Math",
+    "indexed_pages": 42,
+    "indexed_posts": 46,
+    "inventory_artifact": "workflows/01-content-intake/.tmp/existing-site-urls.txt"
+  },
+  "missing_required_handoff_fields": [
+    "approved_scope",
+    "timeline",
+    "pages_or_templates",
+    "content_status",
+    "assets_status",
+    "platform_access_needed",
+    "launch_or_delivery_expectation",
+    "selected_design_system_reference",
+    "open_questions"
+  ],
+  "notes": "No Sales handoff package exists: this client arrived directly through the Brandklout partnership and is not in the 2026-08-05 Asana pull. Routing was validated against the offer named by the user ('full from scratch site'). pages_or_templates is unknown, so the pages x 2 days timeline cannot be computed. Do not dispatch 01-content-intake until the page count and the domain plan are confirmed."
+}

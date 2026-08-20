@@ -22,7 +22,12 @@ parallel agents can each take one client without colliding.
 | Dr. Esam Nahlah | [`dr-nahlah/`](../dr-nahlah/docs/project-overview.md) | `1216611404338509` | Research + dev assignment | 2026-08-05 | Reference implementation active in dedicated client worktree; local artifact migration incomplete |
 | Stone Dental Implant Center | [`stone-dental-implant-center/`](../stone-dental-implant-center/docs/project-overview.md) | — | 2 full websites | none | Scope only; no build dispatched |
 
-Not in Asana but present in the repo: `livewell-dental/` (no assigned tasks in this pull).
+Not in Asana but present in the repo:
+- `livewell-dental/` (no assigned tasks in this pull).
+- [`west-la-implants/`](../west-la-implants/docs/project-overview.md) — added 2026-08-20, direct from
+  Brandklout. **Full site build from scratch** for https://westlaimplants.com/ (existing WordPress,
+  42 pages + 46 posts). No Asana task exists; ask Brandklout to create one so a GID can be recorded
+  in artifacts. Worktree `bk-west-la-implants`.
 
 Ignored: `Task 1` `1217163732661467`, `Task 2` `1217163732661469`, `Task 3` `1217163732661471` — all
 have the note "This is a placeholder task created for you". No client, no scope. Confirm with

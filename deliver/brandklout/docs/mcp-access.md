@@ -53,6 +53,7 @@ All IDs below were read from `list_sites` on 2026-08-07 against the live `webflo
 | `arvada-dental-center/` | Arvada Dental Center | `693c51e685b19f0d0c149cab` | **Confirmed 2026-08-07 by the user** as the site to edit. Domains `arvadadentalimplants.com`, `www.` See the copies warning below |
 | `mason-park/` | Mason Park Dental | `6a60bdc0340e5f1784b4d553` | **Confirmed 2026-08-07.** Effectively empty — **1 page** (Home). No custom domain |
 | `stone-dental-implant-center/` | — | — | **NOT PRESENT in the site list.** See below |
+| `west-la-implants/` | — | — | **No site yet.** Client added 2026-08-20; nothing built. Read-only until a site is created in this workspace and its ID is recorded here |
 
 > [!CAUTION]
 > **Arvada has five sites in this workspace and only one of them is the deliverable.** The other
