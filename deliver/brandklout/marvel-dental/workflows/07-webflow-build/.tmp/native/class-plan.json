@@ -1,0 +1,364 @@
+{
+ "update": [
+  {
+   "sel": ".camp_proof_grid",
+   "name": "camp_proof_grid",
+   "parents": [
+    "camp_container"
+   ],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "border-left-width",
+     "property_value": "1px"
+    },
+    {
+     "property_name": "border-left-style",
+     "property_value": "solid"
+    },
+    {
+     "property_name": "border-left-color",
+     "property_value": "#dce7ec"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_benefits_grid",
+   "name": "camp_benefits_grid",
+   "parents": [],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "border-top-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-right-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-bottom-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-left-color",
+     "property_value": "#dce7ec"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_journey_grid",
+   "name": "camp_journey_grid",
+   "parents": [],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "border-top-color",
+     "property_value": "#dce7ec"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_button",
+   "name": "camp_button",
+   "parents": [],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "border-top-left-radius",
+     "property_value": "999px"
+    },
+    {
+     "property_name": "border-top-right-radius",
+     "property_value": "999px"
+    },
+    {
+     "property_name": "border-bottom-left-radius",
+     "property_value": "999px"
+    },
+    {
+     "property_name": "border-bottom-right-radius",
+     "property_value": "999px"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_button:hover",
+   "name": "camp_button",
+   "parents": [],
+   "bp": "main",
+   "pseudo": "hover",
+   "write": [
+    {
+     "property_name": "background-color",
+     "property_value": "#00618a"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_hero_ring",
+   "name": "camp_hero_ring",
+   "parents": [],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "border-top-color",
+     "property_value": "rgba(142, 208, 230, 0.30)"
+    },
+    {
+     "property_name": "border-right-color",
+     "property_value": "rgba(142, 208, 230, 0.30)"
+    },
+    {
+     "property_name": "border-bottom-color",
+     "property_value": "rgba(142, 208, 230, 0.30)"
+    },
+    {
+     "property_name": "border-left-color",
+     "property_value": "rgba(142, 208, 230, 0.30)"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_offer-card",
+   "name": "camp_offer-card",
+   "parents": [],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "border-top-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-right-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-bottom-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-left-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-top-left-radius",
+     "property_value": "16px"
+    },
+    {
+     "property_name": "border-top-right-radius",
+     "property_value": "16px"
+    },
+    {
+     "property_name": "border-bottom-left-radius",
+     "property_value": "16px"
+    },
+    {
+     "property_name": "border-bottom-right-radius",
+     "property_value": "16px"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_credential-text",
+   "name": "camp_credential-text",
+   "parents": [],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "border-top-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-right-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-bottom-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-left-color",
+     "property_value": "#dce7ec"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_video_card",
+   "name": "camp_video_card",
+   "parents": [],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "overflow-x",
+     "property_value": "hidden"
+    },
+    {
+     "property_name": "overflow-y",
+     "property_value": "hidden"
+    },
+    {
+     "property_name": "border-top-left-radius",
+     "property_value": "16px"
+    },
+    {
+     "property_name": "border-top-right-radius",
+     "property_value": "16px"
+    },
+    {
+     "property_name": "border-bottom-left-radius",
+     "property_value": "16px"
+    },
+    {
+     "property_name": "border-bottom-right-radius",
+     "property_value": "16px"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_faq_list",
+   "name": "camp_faq_list",
+   "parents": [],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "border-top-color",
+     "property_value": "#dce7ec"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_form-card",
+   "name": "camp_form-card",
+   "parents": [],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "border-top-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-right-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-bottom-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-left-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-top-left-radius",
+     "property_value": "16px"
+    },
+    {
+     "property_name": "border-top-right-radius",
+     "property_value": "16px"
+    },
+    {
+     "property_name": "border-bottom-left-radius",
+     "property_value": "16px"
+    },
+    {
+     "property_name": "border-bottom-right-radius",
+     "property_value": "16px"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_form_input:focus",
+   "name": "camp_form_input",
+   "parents": [],
+   "bp": "main",
+   "pseudo": "focus",
+   "write": [
+    {
+     "property_name": "border-color",
+     "property_value": "#00769d"
+    },
+    {
+     "property_name": "background-color",
+     "property_value": "#ffffff"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_form_button:hover",
+   "name": "camp_form_button",
+   "parents": [],
+   "bp": "main",
+   "pseudo": "hover",
+   "write": [
+    {
+     "property_name": "background-color",
+     "property_value": "#00618a"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_chapters",
+   "name": "camp_chapters",
+   "parents": [],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "border-top-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-right-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-bottom-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-left-color",
+     "property_value": "#dce7ec"
+    }
+   ]
+  },
+  {
+   "sel": ".camp_outcome",
+   "name": "camp_outcome",
+   "parents": [],
+   "bp": "main",
+   "pseudo": null,
+   "write": [
+    {
+     "property_name": "border-top-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-right-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-bottom-color",
+     "property_value": "#dce7ec"
+    },
+    {
+     "property_name": "border-left-color",
+     "property_value": "#dce7ec"
+    }
+   ]
+  }
+ ],
+ "createCombo": [],
+ "newGlobal": [],
+ "deferPseudo": []
+}

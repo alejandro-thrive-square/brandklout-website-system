@@ -3,7 +3,7 @@
  * verify-v2.mjs — gate every built v2 page against its own local source.
  *
  * The criterion for this job is "the Webflow page equals the local version",
- * so this compares the PUBLISHED page against `04-design/.tmp/v2/<topic>/body.html`
+ * so this compares the PUBLISHED page against `04-design/.tmp/v1/<topic>/body.html`
  * on the things that actually go wrong:
  *
  *   - every heading, eyebrow, button label and FAQ question present, verbatim
@@ -19,27 +19,12 @@ import path from 'node:path';
 import { fileURLToPath } from 'node:url';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const V2 = path.resolve(HERE, '../../../04-design/.tmp/v2');
-const STAGING = 'https://arvadadentalcenter.webflow.io';
+const V2 = path.resolve(HERE, '../../../04-design/.tmp/v1');
+const STAGING = 'https://marvel-dental-main.webflow.io';
 const SLUGS = {
-  implants: 'dental-implants-ads-landing',
-  aox: 'all-on-x-ads-landing',
-  veneers: 'porcelain-veneers-ads-landing',
-  emergency: 'emergency-dentist-ads-landing',
-  'dentist-near-me': 'dentist-near-me-ads-landing',
-  'next-door': 'next-door-family-ads-landing',
-  'implants-consult': 'dental-implants-consult',
-  'aox-consult': 'all-on-x-full-arch-consult',
-  'veneers-consult': 'porcelain-veneers-consult',
-  'emergency-consult': 'emergency-dentist-consult',
-  'dentist-near-me-consult': 'dentist-near-me-consult',
-  'next-door-consult': 'next-door-family-consult',
-  'implants-ty': 'dental-implant-thank-you',
-  'aox-ty': 'all-on-x-thank-you',
-  'veneers-ty': 'porcelain-veneers-thank-you',
-  'emergency-ty': 'emergency-dentist-thank-you',
-  'dentist-near-me-ty': 'dentist-near-me-thank-you',
-  'next-door-ty': 'next-door-family-thank-you',
+  emergency: 'ads-landing-pages/emergency-dentist',
+  'emergency-consult': 'ads-landing-pages/emergency-dentist-consult',
+  'emergency-ty': 'ads-landing-pages/emergency-dentist-thank-you',
 };
 
 // The leak check only makes sense between pages of the SAME kind — every
@@ -126,7 +111,9 @@ for (const topic of topics) {
   const imgs = (live.match(/<img/g) || []).length;
   const wantImgs = (local.match(/<img/g) || []).length;
   if (imgs < wantImgs) problems.push(`${imgs}/${wantImgs} images rendered`);
-  if (kindOf(topic) === 'ads' && !/youtube/i.test(live)) problems.push('no YouTube element on the page');
+  // Marvel's patient films are on Vimeo and ship as a poster that links out —
+  // the native video element's URL setting is unreachable over the Data API.
+  if (kindOf(topic) === 'ads' && !/vimeo\.com\/\d+/i.test(live)) problems.push('no patient-film link on the page');
 
   if (missing.length) problems.push(`${missing.length} design string(s) missing: ` + missing.slice(0, 4).map((s) => `"${s.slice(0, 48)}…"`).join(', '));
   if (lostCls.length) problems.push(`${lostCls.length} class(es) dropped: ${lostCls.slice(0, 6).join(', ')}`);

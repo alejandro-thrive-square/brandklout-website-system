@@ -18,7 +18,7 @@ const [pageId, htmlFile] = process.argv.slice(2);
 const CLEAR = process.argv.includes('--clear');
 if (!pageId || !htmlFile) { console.log('usage: build-page.mjs <pageId> <html-file> [--clear]'); process.exit(1); }
 
-const o = { site: SITES.arvada, page: pageId };
+const o = { site: SITES.marvel, page: pageId };
 
 /* ------------------------------------------------------- empty the page --- */
 

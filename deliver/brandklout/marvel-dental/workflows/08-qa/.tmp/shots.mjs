@@ -14,10 +14,17 @@ import { mkdirSync, writeFileSync, existsSync } from 'node:fs';
 import { join, resolve } from 'node:path';
 import { fileURLToPath, pathToFileURL } from 'node:url';
 
+// --live drives the PUBLISHED staging pages instead of the local render. A local
+// preview cannot prove what Webflow actually serves.
+const LIVE = process.argv.includes('--live');
+const STAGING = 'https://marvel-dental-main.webflow.io/ads-landing-pages/';
+const LIVE_SLUG = { emergency: 'emergency-dentist', 'emergency-consult': 'emergency-dentist-consult', 'emergency-ty': 'emergency-dentist-thank-you' };
+
 const HERE = fileURLToPath(new URL('.', import.meta.url));
 const DESIGN = resolve(HERE, '../../04-design/.tmp/v1');
 const OUT = join(HERE, 'shots');
-const PAGES = process.argv.slice(2).length ? process.argv.slice(2) : ['emergency', 'emergency-consult', 'emergency-ty'];
+const ARGS = process.argv.slice(2).filter((a) => !a.startsWith('--'));
+const PAGES = ARGS.length ? ARGS : ['emergency', 'emergency-consult', 'emergency-ty'];
 const WIDTHS = [1440, 390];
 
 mkdirSync(OUT, { recursive: true });
@@ -42,7 +49,7 @@ ws.onmessage = (ev) => { const m = JSON.parse(ev.data); if (m.id && pending.has(
 const send = (method, params = {}, sessionId) => { const i = ++id; ws.send(JSON.stringify({ id: i, method, params, sessionId })); return new Promise((res, rej) => pending.set(i, { res, rej })); };
 
 for (const page of PAGES) {
-  const url = pathToFileURL(join(DESIGN, page, 'index.html')).href;
+  const url = LIVE ? STAGING + LIVE_SLUG[page] : pathToFileURL(join(DESIGN, page, 'index.html')).href;
   for (const width of WIDTHS) {
     const { targetId } = await send('Target.createTarget', { url: 'about:blank' });
     const { sessionId } = await send('Target.attachToTarget', { targetId, flatten: true });
@@ -60,7 +67,7 @@ for (const page of PAGES) {
     await wait(900);
     const over = await ev(`({ scrollW: document.documentElement.scrollWidth, inner: window.innerWidth, h: document.documentElement.scrollHeight })`);
     const shot = await send('Page.captureScreenshot', { format: 'png', captureBeyondViewport: true }, sessionId);
-    writeFileSync(join(OUT, `${page}-${width}.png`), Buffer.from(shot.data, 'base64'));
+    writeFileSync(join(OUT, `${page}${LIVE ? '-live' : ''}-${width}.png`), Buffer.from(shot.data, 'base64'));
     const bleeds = over && over.scrollW > over.inner + 1;
     console.log(`${page} @${width}  ${over ? over.h + 'px tall' : '?'}  ${bleeds ? 'HORIZONTAL OVERFLOW ' + over.scrollW + ' > ' + over.inner : 'no sideways scroll'}`);
     await send('Target.closeTarget', { targetId });

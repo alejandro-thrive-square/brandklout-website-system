@@ -17,9 +17,13 @@ const DESIGN = resolve(HERE, '../../04-design/.tmp/v1');
 const OUT = join(HERE, 'shots');
 mkdirSync(OUT, { recursive: true });
 
-const page = process.argv[2] || 'emergency';
-const width = Number(process.argv[3] || 1440);
-const ys = process.argv.slice(4).map(Number);
+const LIVE = process.argv.includes('--live');
+const STAGING = 'https://marvel-dental-main.webflow.io/ads-landing-pages/';
+const LIVE_SLUG = { emergency: 'emergency-dentist', 'emergency-consult': 'emergency-dentist-consult', 'emergency-ty': 'emergency-dentist-thank-you' };
+const ARGV = process.argv.slice(2).filter((a) => !a.startsWith('--'));
+const page = ARGV[0] || 'emergency';
+const width = Number(ARGV[1] || 1440);
+const ys = ARGV.slice(2).map(Number);
 const YS = ys.length ? ys : [0, 900, 1800, 2700];
 
 const CHROME = ['C:/Program Files/Google/Chrome/Application/chrome.exe',
@@ -46,7 +50,7 @@ const { sessionId } = await send('Target.attachToTarget', { targetId, flatten: t
 await send('Runtime.enable', {}, sessionId);
 await send('Page.enable', {}, sessionId);
 await send('Emulation.setDeviceMetricsOverride', { width, height: 900, deviceScaleFactor: 1, mobile: width <= 430 }, sessionId);
-await send('Page.navigate', { url: pathToFileURL(join(DESIGN, page, 'index.html')).href }, sessionId);
+await send('Page.navigate', { url: LIVE ? STAGING + LIVE_SLUG[page] : pathToFileURL(join(DESIGN, page, 'index.html')).href }, sessionId);
 await wait(2000);
 const ev = async (expression) => {
   const r = await send('Runtime.evaluate', { expression, returnByValue: true, awaitPromise: true }, sessionId);
@@ -58,7 +62,7 @@ for (const y of YS) {
   await ev(`window.scrollTo(0, ${y}); 1`);
   await wait(500);
   const shot = await send('Page.captureScreenshot', { format: 'png' }, sessionId);
-  writeFileSync(join(OUT, `${page}-${width}-y${y}.png`), Buffer.from(shot.data, 'base64'));
+  writeFileSync(join(OUT, `${page}${LIVE ? '-live' : ''}-${width}-y${y}.png`), Buffer.from(shot.data, 'base64'));
   console.log('slice', page, width, y);
 }
 ws.close(); proc.kill();

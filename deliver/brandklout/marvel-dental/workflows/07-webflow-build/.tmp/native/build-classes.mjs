@@ -17,7 +17,7 @@ import { execFileSync } from 'node:child_process';
 import { call, SITES } from './wf.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const CSS_FILE = path.resolve(HERE, '../../../04-design/.tmp/v2/_shared/camp.css');
+const CSS_FILE = path.resolve(HERE, '../../../04-design/.tmp/v1/_shared/camp.css');
 const PAGE = '6a83e962d17d0bfe618c49f7';                       // Dental Implants v2
 const BODY = { component: PAGE, element: '6a83e962d17d0bfe618c49fd' };
 
@@ -38,14 +38,14 @@ const res = call('data_whtml_builder', [{
   html: '<div class="camp_classlayer-seed"></div>',
   css,
   return_element_info: true,
-}], { site: SITES.arvada, page: PAGE });
+}], { site: SITES.marvel, page: PAGE });
 
 const first = Array.isArray(res) ? res[0] : res?.[0] || res;
 console.log('status:', JSON.stringify(first).slice(0, 900));
 
 // Verify against the site, not against the response.
 const q = call('data_style_tool', [{ label: 'q', query_styles: { queries: [{ label: 'camp', name_path: ['camp_'], limit: 200 }] } }],
-  { site: SITES.arvada, page: PAGE });
+  { site: SITES.marvel, page: PAGE });
 const made = new Set((q.result?.[0]?.matches || []).map((m) => m.name));
 const missing = wanted.filter((n) => n.startsWith('camp_') && !made.has(n));
 

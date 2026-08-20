@@ -62,6 +62,7 @@
   background-color: #00394d;
   color: #ffffff;
   font-size: 12px;
+  display: block;
 }
 
 .camp_announce_inner {
@@ -81,11 +82,12 @@
 }
 
 .camp_announce_link {
-  color: #00769d;
-  font-family: Noto Serif;
+  color: #8ed0e6;
+  font-family: Karla;
   font-size: 11px;
   font-weight: 700;
   letter-spacing: 0.04em;
+  text-decoration: none;
 }
 
 /* --------------------------------------------------------------- header --- */
@@ -105,6 +107,7 @@
 
 .camp_header_brand {
   width: 245px;
+  text-decoration: none;
 }
 
 .camp_header_logo {
@@ -136,6 +139,8 @@
   font-family: Karla;
   font-size: 14px;
   font-weight: 700;
+  color: #ffffff;
+  text-decoration: none;
 }
 
 /* was .campaign-header_phone:before */
@@ -166,6 +171,7 @@
   padding-bottom: 15px;
   padding-left: 30px;
   padding-right: 30px;
+  text-decoration: none;
 }
 
 .camp_button:hover {
@@ -223,6 +229,7 @@
   font-size: 13px;
   font-weight: 600;
   letter-spacing: 0.04em;
+  text-decoration: none;
 }
 
 .camp_text-link.is-on-dark {
@@ -462,6 +469,12 @@
   grid-template-columns: 1fr 1fr 1fr 1fr;
   grid-column-gap: 1px;
   grid-row-gap: 1px;
+}
+
+/* the gutter lives on the combo, because that is what Webflow resolves */
+.camp_container.camp_proof_grid {
+  padding-left: 24px;
+  padding-right: 24px;
 }
 
 .camp_proof_item {
@@ -817,6 +830,7 @@
   height: 100%;
   min-height: 420px;
   border: 0px solid #000000;
+  text-decoration: none;
 }
 
 .camp_video_poster {
@@ -981,6 +995,7 @@
 .camp_footer_link {
   color: #d3e2e9;
   font-size: 11px;
+  text-decoration: none;
 }
 
 .camp_footer_heading {
@@ -1025,6 +1040,7 @@
   font-size: 10px;
   font-weight: 600;
   text-transform: uppercase;
+  text-decoration: none;
 }
 
 .camp_mobile-bar_link.is-call {
@@ -1112,7 +1128,7 @@
     left: 0px;
     right: 0px;
     bottom: 0px;
-    z-index: 100;
+    z-index: 99999;
     height: 58px;
     grid-template-columns: 1fr 1fr;
     /* `0px`, not a bare `0`: Webflow eats the space before a negative length

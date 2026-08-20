@@ -44,13 +44,37 @@ It fails loudly on an unfilled slot.
 QA: `node workflows/08-qa/.tmp/shots.mjs` (full pages at 1440 and 390, with a horizontal-overflow
 assertion) and `slices.mjs <page> <width> <y…>` for 1:1 detail.
 
-### What is deliberately NOT done
+### What is on the site now
 
-- **Nothing has been installed on the Webflow site.** No classes pushed, no markup inserted, no
-  page settings changed. The style layer is authored to cover these three pages only, and stays
-  local until the design is signed off.
-- No publish. When it happens it is subdomain-only: the site carries the live
-  `marveldentaldds.com`.
+All three pages are **built and published to the Webflow subdomain**:
+`https://marvel-dental-main.webflow.io/ads-landing-pages/…`. Nothing has gone to
+`marveldentaldds.com` — every publish was `publishToWebflowSubdomain: true, customDomains: []`.
+
+- **Class layer**: 1224 declarations match the stylesheet, 0 pending
+  (`node diff-classes.mjs`). The cloned layer carried Arvada's values, so it was *updated*, not
+  created: `apply-classes.mjs` handles the five shapes that each fail silently otherwise.
+- **Pages**: 630 / 174 / 185 elements, 147 / 72 / 66 classes, 22 / 3 / 3 images, all bound to real
+  Marvel assets.
+- **Gate**: `node verify-v2.mjs` → **3/3 pass** against the served pages, and
+  `node ../../08-qa/.tmp/mobile-bar-check.mjs` proves the sticky call bar is reachable at 390.
+
+Three things only the SERVED page could reveal, all fixed:
+
+1. **Webflow serves no global anchor reset on this site.** A bare `<a>` renders browser-blue and
+   underlined, so the header phone number shipped as a 1996 hyperlink. Every link class now states
+   its own colour and `text-decoration`.
+2. **`display: none` on `.camp_announce`**, inherited from the clone. A value diff cannot see it:
+   the stylesheet never mentioned `display`, so there was nothing to compare. `extras.mjs` reports
+   this class of leftover.
+3. **The site's Google-review badge covered the mobile call bar.** The bar now sits at z-index
+   99999 and the hit test passes on both halves.
+
+### Still to do
+
+- Swap `REPLACE_WITH_MARVEL_FORM_ID` in the consultation page's HtmlEmbed for the real
+  LeadConnector form id (five places in one embed).
+- Three real review quotes, if the client can supply them.
+- Publish to `marveldentaldds.com` — **not done, and the user's call.**
 
 ### Decisions taken with the user
 
