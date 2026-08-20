@@ -897,7 +897,13 @@ WZ.dom("vl-grid", function () {
   });
 
   /* --- mobile drawer --- */
+  /* Both halves have to be present. The Instatic post template shipped with a
+     .burger and no #drawer, so `drawer.querySelectorAll` threw on all 43 blog
+     posts -- taking the Escape handler and both ScrollTrigger.refresh() calls
+     below it down with it, on top of a menu button that did nothing. Skip the
+     block instead, and leave the rest of boot to run. */
   var burger = document.getElementById('burger'), drawer = document.getElementById('drawer');
+  if (!burger || !drawer) { if (burger) burger.hidden = true; return finishBoot(); }
   function closeDrawer(){
     burger.classList.remove('is-open'); drawer.classList.remove('is-open');
     document.getElementById('nav').classList.remove('is-menu-open');
@@ -922,9 +928,14 @@ WZ.dom("vl-grid", function () {
     if(e.key==='Escape' && drawer.classList.contains('is-open')) closeDrawer();
   });
 
-  /* Pinned sections measure wrong if fonts or images land late. */
-  if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ ScrollTrigger.refresh(); });
-  window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+  finishBoot();
+
+  /* Pinned sections measure wrong if fonts or images land late. This is a
+     declaration, so it is hoisted and reachable from the early return above. */
+  function finishBoot(){
+    if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ ScrollTrigger.refresh(); });
+    window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+  }
 })();
 
 /* ===== js/91-descender-rescue.js ===== */
