@@ -125,6 +125,15 @@ await S('Page.enable'); await S('Runtime.enable'); await S('Network.enable'); aw
 if (flag('mobile')) {
   await S('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 3, mobile: true });
   await S('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+} else if (arg('width')) {
+  /* --width 3840 for the client's 4K monitor. Above --maxw the page stops
+     growing and starts CENTRING, and anything that was only gutter-indented
+     drifts away from the centred column. On the home page the Path chapter's
+     heading, card track and progress rule ended up at three different left
+     edges, ~1140px apart, which no 1440px sweep can see. */
+  await S('Emulation.setDeviceMetricsOverride', {
+    width: Number(arg('width')), height: Number(arg('height', '1200')), deviceScaleFactor: 1, mobile: false,
+  });
 }
 const ev = async (expression) => (await S('Runtime.evaluate',
   { expression, returnByValue: true, awaitPromise: true })).result.value;
@@ -254,6 +263,25 @@ const PROBE = String.raw`(() => {
     smoother: !!(window.ScrollSmoother && ScrollSmoother.get && ScrollSmoother.get()),
     revealsStuck: q('[data-rv]').filter(function (el) { return parseFloat(getComputedStyle(el).opacity) < 0.05; }).length,
 
+    /* Every band that lays out more than one full-width child should start those
+       children on ONE left edge. Reported as the sections where they disagree. */
+    misaligned: (function () {
+      const bad = [];
+      q('section, main > div').forEach(function (sec) {
+        const kids = Array.from(sec.querySelectorAll(':scope > .wrap, :scope > * > .wrap, :scope [class*="-track"], :scope [class*="-head"], :scope [class*="-bar"]'));
+        const edges = kids.map(function (k) {
+          const r = k.getBoundingClientRect();
+          if (r.width < 40) return null;                 // decorative slivers
+          return Math.round(r.left + parseFloat(getComputedStyle(k).paddingLeft || 0));
+        }).filter(function (v) { return v !== null; });
+        const distinct = Array.from(new Set(edges));
+        if (distinct.length > 1 && Math.max.apply(null, distinct) - Math.min.apply(null, distinct) > 4) {
+          bad.push((sec.id || String(sec.className).slice(0, 24)) + ':' + distinct.join('/'));
+        }
+      });
+      return bad;
+    })(),
+
     overflowX: Math.max(0, de.scrollWidth - de.clientWidth),
     docHeight: de.scrollHeight,
     links: q('a[href]').map(function (a) { return a.getAttribute('href'); }),
@@ -328,6 +356,7 @@ async function audit(t) {
       !probe.description && 'no-description',
       probe.revealsStuck && 'stuck:' + probe.revealsStuck,
       probe.emDash && 'emdash:' + probe.emDash,
+      (probe.misaligned || []).length && 'misaligned:' + probe.misaligned.join(' '),
       probe.drawerUnreachable > 0 && 'drawer-unreachable:' + probe.drawerUnreachable + '/' + probe.drawerLinks,
       probe.burger && !probe.drawer && 'no-drawer'
     ].filter(Boolean);

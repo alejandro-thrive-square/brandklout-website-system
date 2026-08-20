@@ -16,7 +16,17 @@ const tg=(await gj('/json/list')).find(t=>t.type==='page');
 const {sessionId}=await send('Target.attachToTarget',{targetId:tg.id,flatten:true});
 const S=(m,p={})=>send(m,p,sessionId);
 await S('Page.enable'); await S('Runtime.enable');
-if (THEME) await S('Emulation.setEmulatedMedia',{features:[{name:'prefers-color-scheme',value:THEME}]});
+const feats = [];
+if (THEME) feats.push({ name: 'prefers-color-scheme', value: THEME });
+/* Reduced motion turns the pinned chapters into ordinary static sections, which
+   is the only way a full-page capture can photograph them at all: a pin works
+   by pulling its content out of flow behind a spacer, so captureBeyondViewport
+   renders the spacer and the chapter comes out blank. The LAYOUT is the same in
+   both branches, so this is a fair check of alignment (not of the scrub). */
+if (process.argv.includes('--reduced')) feats.push({ name: 'prefers-reduced-motion', value: 'reduce' });
+if (feats.length) await S('Emulation.setEmulatedMedia', { features: feats });
+const wI = process.argv.indexOf('--width');
+if (wI > -1) await S('Emulation.setDeviceMetricsOverride',{width:Number(process.argv[wI+1]),height:Number(process.argv[wI+2]||1200),deviceScaleFactor:1,mobile:false});
 await S('Page.navigate',{url:URL_}); await wait(3500);
 await S('Runtime.evaluate',{expression:'document.fonts.ready',awaitPromise:true});
 await wait(600);
