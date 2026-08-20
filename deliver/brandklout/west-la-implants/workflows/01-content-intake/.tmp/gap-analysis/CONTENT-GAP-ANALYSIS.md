@@ -25,9 +25,14 @@ Wilshire Oral Surgery wins the comparison on every axis that matters:
 - **Comparable footprint.** 79 indexed URLs against the client's 91, so differences read as
   strategy rather than as one site simply being bigger.
 
-Two candidates were dropped for having no machine-readable sitemap at all
-(`westlosangelesperio.com`, `brentwooddentalcare.net`); `ladentist.com` and
-`implantcenterlosangeles.com` are the same operator in mid-Wilshire, not West LA.
+`westlosangelesperio.com` leads with periodontics (87 homepage mentions against 36 for
+implants) and `brentwooddentalcare.net` is a general and cosmetic practice, so both were
+dropped on specialty mismatch. `ladentist.com` and `implantcenterlosangeles.com` are the same
+operator at the same suite in mid-Wilshire, not West LA. `santamonicaoms.com` was the
+runner-up: right specialty, wrong catchment.
+
+The full screen, its criteria and the per-candidate evidence are in
+[`COMPETITOR-SELECTION.md`](./COMPETITOR-SELECTION.md) and `competitor-screen.csv`.
 
 ## Headline numbers
 
