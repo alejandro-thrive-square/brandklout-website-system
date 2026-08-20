@@ -291,8 +291,13 @@
       </div>
       <a class="pk-readon pk-readon-block" href="emergency-dentistry.html">Emergency care &rarr;</a>
     </div>
-    <figure class="sp-fig" data-drift>
-      <img src="assets/office-hero.jpg" alt="The reception and waiting area" loading="lazy">
+    <!-- data-drift belongs on the IMG, not on the figure. The drift scales its
+         target 1.12; on the img, which is absolutely positioned inside this
+         overflow:hidden figure, that is clipped. On the FIGURE it scales the
+         clipping container itself, and at 390px the 21px of extra width either
+         side beat the 17px gutter and put 4px of horizontal scroll on the page. -->
+    <figure class="sp-fig">
+      <img src="assets/office-hero.jpg" alt="The reception and waiting area" data-drift loading="lazy">
     </figure>
   </div>
 </section>
