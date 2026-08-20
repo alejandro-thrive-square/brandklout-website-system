@@ -54,6 +54,7 @@ All IDs below were read from `list_sites` on 2026-08-07 against the live `webflo
 | `mason-park/` | Mason Park Dental | `6a60bdc0340e5f1784b4d553` | **Confirmed 2026-08-07.** Effectively empty — **1 page** (Home). No custom domain |
 | `stone-dental-implant-center/` | — | — | **NOT PRESENT in the site list.** See below |
 | `west-la-implants/` | — | — | **No site yet.** Client added 2026-08-20; nothing built. Read-only until a site is created in this workspace and its ID is recorded here |
+| `legacy-dental-pasadena/` | Legacy Dental Pasadena - Cosmetic & Implant Dentistry | `68e12d861f12c7f04a762a8e` | **Confirmed 2026-08-20** via `get_site`. Short name `legacy-dental`. **78 pages, live production site** serving `legacydentalpasadena.com`. **Also carries `caldentalpasadena.com` + `www.` — a second brand. Publish staging-only until that is explained.** See the warning below |
 
 > [!CAUTION]
 > **Arvada has five sites in this workspace and only one of them is the deliverable.** The other
@@ -69,6 +70,19 @@ All IDs below were read from `list_sites` on 2026-08-07 against the live `webflo
 >
 > Name similarity is not identification. The deliverable is the only Arvada site carrying the
 > `arvadadentalimplants.com` custom domain — match on the site ID, never on the display name.
+
+> [!CAUTION]
+> **Legacy Dental Pasadena is the first Brandklout site where the deliverable and a live practice
+> website are the same Webflow site.** 78 pages, four CMS collections, real patients booking through
+> `schedule.jarvisanalytics.com`. Every other Brandklout build so far has been either an empty site
+> or a page set nobody was linking to yet. Add pages; never mutate an existing page, a shared class,
+> or a CMS item.
+>
+> **It also carries a second brand's domains.** `customDomains` lists `legacydentalpasadena.com`
+> and `www.`, *plus* `caldentalpasadena.com` and `www.`. A full-site publish that does not restrict
+> `customDomains` therefore publishes to a brand that is not this client. Until someone establishes
+> what `caldentalpasadena.com` is and who owns it, publish only with
+> `publishToWebflowSubdomain: true` and `customDomains: []`.
 
 > [!IMPORTANT]
 > **Stone Dental Implant Center has no site in this workspace.** `list_sites` returned 9 sites and

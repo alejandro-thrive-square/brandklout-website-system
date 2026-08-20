@@ -16,7 +16,8 @@ Webzite Agentic Workflow  (main, refs/heads/main)   <-- orchestration only
 ├── bk-dr-nahlah            worktree   -> deliver/brandklout/dr-nahlah/
 ├── bk-stone                worktree   -> deliver/brandklout/stone-dental-implant-center/
 ├── bk-livewell             worktree   -> deliver/brandklout/livewell-dental/
-└── bk-west-la-implants     worktree   -> deliver/brandklout/west-la-implants/
+├── bk-west-la-implants     worktree   -> deliver/brandklout/west-la-implants/
+└── bk-legacy-dental        worktree   -> deliver/brandklout/legacy-dental-pasadena/
 ```
 
 Repo id: `7b269532-4e7a-4ceb-baa4-707929ee41d3`

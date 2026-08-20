@@ -41,6 +41,7 @@ export const CLIENT_TASKS = {
   'mason-park': ['1217040406855582'],
   'dr-nahlah': ['1216611404338509'],
   'stone-dental-implant-center': ['1217160668112180', '1217160668112175'],
+  'legacy-dental-pasadena': ['1217611213174386'],
 }
 
 const TASK_FIELDS = [
