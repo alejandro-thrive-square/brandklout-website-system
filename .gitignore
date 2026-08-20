@@ -45,6 +45,19 @@ manage/browser-tools/playwright-browser/.tmp/style-capture-*/code/resources/
 *.eps
 *.fig
 *.sketch
+# Webfonts pulled down by site scrapes are binaries too, and a single WordPress
+# theme drags in ~290 of them (Font Awesome, Elementor icon fonts, Google Fonts
+# subsets). None are licensed brand typefaces; the catalogue records them instead.
+*.woff
+*.woff2
+*.ttf
+*.otf
+*.eot
+
+# Raw server-rendered HTML saved by scrape_site.py --save-html. 19 MB for one
+# 91-page site, and re-fetchable. The per-page .md extracts and .json records
+# next to it are the committed artifact.
+**/.tmp/**/html/
 
 # ===== Python =====
 __pycache__/
