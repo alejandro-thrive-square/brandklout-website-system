@@ -67,9 +67,12 @@ function urlFor(kind, slug) {
   return slug === 'index' ? BASE + '/' : BASE + '/' + slug;
 }
 
+/* The 43 articles live in the Instatic posts collection and render through the
+   `post` template; there are no local files for them. Including them in a
+   --local sweep produced 43 phantom 404s around the real results. */
 let TARGETS = [
   ...PAGES.map((s) => ({ kind: 'page', slug: s, url: urlFor('page', s) })),
-  ...POSTS.map((s) => ({ kind: 'post', slug: s, url: urlFor('post', s) })),
+  ...(LOCAL ? [] : POSTS.map((s) => ({ kind: 'post', slug: s, url: urlFor('post', s) }))),
 ];
 const only = arg('only');
 if (only) { const want = new Set(only.split(',')); TARGETS = TARGETS.filter((t) => want.has(t.slug)); }
