@@ -1,0 +1,1130 @@
+/* ============================================================================
+   camp.css — the shared campaign class layer for the Marvel Dental emergency
+   funnel (landing -> consultation -> thank you).
+
+   ONE stylesheet serves all three pages, and it is the single source for the
+   Webflow class layer: `07-webflow-build/.tmp/native/build-classes.mjs` feeds
+   this file to `data_whtml_builder`, which turns each rule into a real,
+   Designer-editable Webflow class.
+
+   It is therefore written in the WEBFLOW-SAFE DIALECT, and every restriction
+   below is one the builder enforces by rejecting the call outright:
+
+     - no pseudo-ELEMENTS  (::before/::after -> a real child span with a class)
+     - no descendant / child / sibling selectors  (a context colour becomes an
+       `is-*` combo on the element itself)
+     - no structural pseudo-classes (:first-child, :nth-child) -> index combos,
+       or a layout that does not need them
+     - no CSS functions — clamp/min/max/calc are stored verbatim and then read
+       as `0` in the style panel, so every value is concrete
+     - media queries only at Webflow's canonical widths, spelled exactly:
+       screen and (max-width: 991px | 767px | 479px)
+     - font families must be the names Webflow has installed: `Noto Serif`,
+       `Karla` — both already on marveldentaldds.com
+
+   STRUCTURE is inherited from Arvada Dental Center's v2 campaign layer (branch
+   `bk-arvada`), which is proven through 18 built pages. The LOOK is Marvel's,
+   applied by `theme.mjs` from values measured off the published site with
+   `01-content-intake/.tmp/brand-probe.mjs` — see `docs/brand.md`. Re-run
+   `node theme.mjs --check` after any edit here.
+
+   Palette:
+     teal   #00769d  brand primary, every accent on a light ground
+     teal-  #00618a  hover / secondary accent
+     deep   #00394d  dark ground: hero, CTA, footer, is-navy — and dark headings
+     pale   #8ed0e6  the accent that survives on the dark ground
+     tint   #f0f9fd  pale blue band (is-sand)      mist  #f1f2f2  grey band
+     ink    #222222  body copy                     muted #5c5c5c  secondary copy
+     line   #dce7ec  hairlines and card borders    white #ffffff
+   ============================================================================ */
+
+/* ---------------------------------------------------------------- layout --- */
+
+/* min(1180px, 100% - 48px) rewritten so the CONTENT box is identical:
+   max-width carries the gutters, padding gives them back. */
+.camp_container {
+  width: 100%;
+  max-width: 1228px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 24px;
+  padding-right: 24px;
+}
+
+.camp_page {
+  overflow: hidden;
+}
+
+/* ------------------------------------------------------------- announce --- */
+
+.camp_announce {
+  height: 36px;
+  background-color: #00394d;
+  color: #ffffff;
+  font-size: 12px;
+}
+
+.camp_announce_inner {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.camp_announce_lead {
+  font-weight: 700;
+}
+
+.camp_announce_note {
+  margin-left: 5px;
+  opacity: 0.72;
+}
+
+.camp_announce_link {
+  color: #00769d;
+  font-family: Noto Serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+/* --------------------------------------------------------------- header --- */
+
+.camp_header {
+  height: 77px;
+  background-color: rgba(0, 57, 77, 0.97);
+  color: #ffffff;
+}
+
+.camp_header_inner {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.camp_header_brand {
+  width: 245px;
+}
+
+.camp_header_logo {
+  width: 220px;
+  height: 56px;
+  object-fit: contain;
+  filter: brightness(0) invert(1);
+  opacity: 0.96;
+}
+
+.camp_header_actions {
+  display: flex;
+  align-items: center;
+  grid-column-gap: 27px;
+}
+
+.camp_header_status {
+  color: #eaf5fa;
+  font-size: 12px;
+}
+
+/* was .campaign-header_status:before — now a real span */
+.camp_header_status-icon {
+  margin-right: 8px;
+  color: #00769d;
+}
+
+.camp_header_phone {
+  font-family: Karla;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+/* was .campaign-header_phone:before */
+.camp_header_phone-icon {
+  margin-right: 9px;
+  font-family: Arial, sans-serif;
+  color: #00769d;
+}
+
+/* -------------------------------------------------------------- buttons --- */
+
+.camp_button {
+  display: inline-flex;
+  min-height: 54px;
+  align-items: center;
+  justify-content: center;
+  grid-column-gap: 18px;
+  border: 1px solid transparent;
+  background-color: #00769d;
+  color: #ffffff;
+  font-family: Karla;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  border-radius: 999px;
+  padding-top: 15px;
+  padding-bottom: 15px;
+  padding-left: 30px;
+  padding-right: 30px;
+}
+
+.camp_button:hover {
+  background-color: #00618a;
+}
+
+.camp_button.is-light {
+  background-color: #ffffff;
+  color: #00394d;
+}
+
+.camp_button.is-outline {
+  border-color: rgba(255, 255, 255, 0.65);
+  background-color: transparent;
+  color: #ffffff;
+}
+
+.camp_button.is-navy {
+  background-color: #00394d;
+  color: #ffffff;
+}
+
+.camp_button.is-small {
+  min-height: 48px;
+  padding-left: 22px;
+  padding-right: 22px;
+}
+
+/* The header's own CTA is the only small button that shrinks further on
+   phones — kept as its own class so `is-small` stays generic. */
+.camp_header_cta {
+  flex: none;
+}
+
+/* was .campaign-button:after — the chevron is a real element now */
+.camp_button_chev {
+  font-size: 19px;
+  line-height: 1;
+}
+
+.camp_button-row {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  grid-column-gap: 14px;
+  grid-row-gap: 14px;
+}
+
+.camp_text-link {
+  display: inline-flex;
+  align-items: center;
+  grid-column-gap: 10px;
+  padding-bottom: 4px;
+  border-bottom: 1px solid #00769d;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+}
+
+.camp_text-link.is-on-dark {
+  color: #ffffff;
+}
+
+/* was .campaign-text-link:after */
+.camp_text-link_chev {
+  font-size: 18px;
+}
+
+/* ----------------------------------------------------------- typography --- */
+
+.camp_eyebrow {
+  margin-bottom: 24px;
+  color: #00769d;
+  font-family: Karla;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.camp_eyebrow.is-on-dark {
+  color: #8ed0e6;
+}
+
+/* clamp(52px, 5.35vw, 74px) resolved to steps */
+.camp_h1 {
+  max-width: 640px;
+  margin: 0px;
+  color: #ffffff;
+  font-family: Noto Serif;
+  font-size: 69px;
+  line-height: 1.1;
+  letter-spacing: normal;
+  font-weight: 500;
+}
+
+/* clamp(38px, 4vw, 56px) resolved to steps */
+.camp_h2 {
+  margin: 0px;
+  color: #222222;
+  font-family: Noto Serif;
+  font-size: 40px;
+  line-height: 1.3;
+  letter-spacing: normal;
+  font-weight: 500;
+}
+
+.camp_h2.is-on-dark {
+  color: #ffffff;
+}
+
+.camp_h3 {
+  margin: 0px;
+  color: #00394d;
+  font-family: Noto Serif;
+  font-size: 22px;
+  line-height: 1.35;
+  font-weight: 500;
+}
+
+.camp_text {
+  max-width: 650px;
+  margin: 22px 0px 0px;
+  color: #5c5c5c;
+}
+
+.camp_text.is-on-dark {
+  color: #ffffff;
+}
+
+.camp_text.is-center {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.camp_heading {
+  max-width: 780px;
+  margin-bottom: 54px;
+}
+
+.camp_heading.is-center {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
+}
+
+.camp_center {
+  margin-top: 35px;
+  text-align: center;
+}
+
+/* The reference carried this as an inline style="margin-top:28px" on the three
+   in-section action rows. Inline styles do not survive into Webflow as anything
+   editable, so it is a class. */
+.camp_action-offset {
+  margin-top: 28px;
+}
+
+/* ----------------------------------------------------------------- hero --- */
+
+.camp_hero {
+  position: relative;
+  min-height: 891px;
+  background-color: #00394d;
+  background-image: radial-gradient(circle at 88% 80%, rgba(142, 208, 230, 0.20), transparent 36%), linear-gradient(112deg, #00394d 0%, #005c7c 55%, #00394d 115%);
+  color: #ffffff;
+}
+
+.camp_hero_ring {
+  position: absolute;
+  right: -120px;
+  bottom: -300px;
+  width: 640px;
+  height: 640px;
+  border: 1px solid rgba(142, 208, 230, 0.30);
+  border-radius: 50%;
+}
+
+.camp_hero_grid {
+  display: grid;
+  height: 891px;
+  /* padding-top/bottom only: this class shares its element with
+     .camp_container, and the padding SHORTHAND would reset the container's
+     24px horizontal gutter to 0 — leaving this block 24px wider than every
+     section below it. */
+  padding-top: 65px;
+  padding-bottom: 60px;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 72px;
+  grid-row-gap: 72px;
+  align-items: center;
+}
+
+.camp_hero_lead {
+  max-width: 590px;
+  margin: 29px 0px 28px;
+  color: #e8f4fa;
+  font-size: 18px;
+  line-height: 1.85;
+}
+
+.camp_hero_microproof {
+  margin-top: 24px;
+  color: #d3e2e9;
+  font-size: 12px;
+}
+
+.camp_urgent-note {
+  max-width: 555px;
+  margin-top: 25px;
+  padding: 15px 18px;
+  border-left: 3px solid #00769d;
+  background-color: rgba(0, 0, 0, 0.17);
+  color: #cfe4ec;
+  font-size: 12px;
+  border-left-color: #00769d;
+}
+
+/* was .campaign-urgent-note strong */
+.camp_urgent-note_title {
+  display: block;
+  color: #ffffff;
+  font-weight: 700;
+}
+
+.camp_hero_visual {
+  position: relative;
+}
+
+.camp_hero_media {
+  height: 610px;
+  overflow: hidden;
+  box-shadow: 0 24px 65px rgba(0, 0, 0, 0.22);
+}
+
+.camp_hero_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 44% 50%;
+}
+
+.camp_hero_badge {
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  bottom: 17px;
+  padding: 19px 22px;
+  background-color: rgba(255, 255, 255, 0.95);
+  color: #00394d;
+}
+
+.camp_hero_badge-title {
+  font-family: Noto Serif;
+  font-size: 15px;
+  font-weight: 700;
+}
+
+.camp_hero_badge-sub {
+  margin-top: 3px;
+  color: #5c5c5c;
+  font-size: 12px;
+}
+
+.camp_hero_promise {
+  position: absolute;
+  top: -25px;
+  right: -24px;
+  width: 245px;
+  padding: 18px;
+  background-color: #00394d;
+  color: #ffffff;
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+/* ---------------------------------------------------------------- proof --- */
+/* The reference drew separators with :first-child / border-right. A 1px grid
+   gap over a line-coloured grid does the same at any column count and needs
+   no structural pseudo-class. */
+
+.camp_proof {
+  height: 113px;
+  background-color: #ffffff;
+  border-bottom: 1px solid #dce7ec;
+}
+
+.camp_proof_grid {
+  display: grid;
+  height: 100%;
+  border-left: 1px solid #dce7ec;
+  border-right: 1px solid #dce7ec;
+  background-color: #dce7ec;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 1px;
+  grid-row-gap: 1px;
+}
+
+.camp_proof_item {
+  display: flex;
+  padding: 18px 26px;
+  align-items: center;
+  grid-column-gap: 17px;
+  background-color: #ffffff;
+}
+
+.camp_proof_year {
+  color: #00394d;
+  font-family: Noto Serif;
+  font-size: 26px;
+  font-weight: 700;
+}
+
+.camp_proof_title {
+  color: #00394d;
+  font-family: Noto Serif;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.camp_proof_sub {
+  margin-top: 3px;
+  color: #5c5c5c;
+  font-size: 10px;
+}
+
+/* -------------------------------------------------------------- section --- */
+
+.camp_section {
+  padding: 112px 0px;
+  background-color: #ffffff;
+  padding-top: 112px;
+  padding-bottom: 112px;
+}
+
+.camp_section.is-navy {
+  background-color: #00394d;
+  color: #ffffff;
+}
+
+.camp_section.is-sand {
+  background-color: #f0f9fd;
+}
+
+.camp_section.is-blue {
+  background-color: #00769d;
+  color: #ffffff;
+}
+
+.camp_section.is-mist {
+  background-color: #f1f2f2;
+}
+
+.camp_split {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 100px;
+  grid-row-gap: 100px;
+  align-items: center;
+}
+
+.camp_split.is-result {
+  grid-template-columns: 0.82fr 1.18fr;
+}
+
+.camp_split.is-provider {
+  grid-template-columns: 0.78fr 1.22fr;
+}
+
+.camp_split.is-video {
+  grid-template-columns: 0.72fr 1.28fr;
+}
+
+.camp_split.is-faq {
+  grid-template-columns: 0.8fr 1.2fr;
+}
+
+/* ----------------------------------------------------------- offer card --- */
+
+.camp_offer-card {
+  border: 1px solid #dce7ec;
+  background-color: #f0f9fd;
+  box-shadow: 0 26px 70px rgba(0, 57, 77, 0.12);
+  border-radius: 16px;
+}
+
+.camp_offer-card_top {
+  padding: 27px 31px;
+  background-color: #00394d;
+  color: #ffffff;
+}
+
+.camp_offer-card_kicker {
+  color: #00769d;
+  font-family: Noto Serif;
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+}
+
+.camp_offer-card_price {
+  margin-top: 7px;
+  font-family: Noto Serif;
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.camp_check-list {
+  padding: 22px 31px 14px;
+}
+
+.camp_check-item {
+  display: flex;
+  padding: 11px 0px;
+  grid-column-gap: 12px;
+  border-bottom: 1px solid #dce7ec;
+  color: #00394d;
+  font-size: 13px;
+}
+
+.camp_check-icon {
+  color: #00769d;
+  font-weight: 700;
+}
+
+.camp_fine-print {
+  padding: 15px 31px 27px;
+  color: #6b7b82;
+  font-size: 10px;
+}
+
+/* ---------------------------------------------------------------- story --- */
+
+.camp_story_media {
+  position: relative;
+  height: 485px;
+}
+
+.camp_story_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camp_story_caption {
+  position: absolute;
+  left: 20px;
+  right: 20px;
+  bottom: 20px;
+  padding: 15px 18px;
+  background-color: rgba(255, 255, 255, 0.92);
+  color: #00394d;
+  font-size: 11px;
+}
+
+/* ------------------------------------------------------------- benefits --- */
+
+.camp_benefits_grid {
+  display: grid;
+  border: 1px solid #dce7ec;
+  background-color: #dce7ec;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 1px;
+  grid-row-gap: 1px;
+}
+
+.camp_benefit {
+  min-height: 330px;
+  padding: 31px 28px;
+  background-color: #ffffff;
+}
+
+.camp_benefit_number {
+  margin-bottom: 74px;
+  color: #00769d;
+  font-family: Noto Serif;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.camp_benefit_text {
+  margin-top: 14px;
+  color: #6b7b82;
+  font-size: 13px;
+}
+
+/* --------------------------------------------------------------- result --- */
+
+.camp_result-image {
+  display: grid;
+  padding: 9px;
+  background-color: #ffffff;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 8px;
+  grid-row-gap: 8px;
+  box-shadow: 0 18px 55px rgba(0, 57, 77, 0.15);
+}
+
+.camp_result-panel {
+  position: relative;
+  height: 430px;
+  overflow: hidden;
+}
+
+/* was .campaign-result-panel img */
+.camp_result-panel_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camp_result-label {
+  position: absolute;
+  left: 12px;
+  bottom: 12px;
+  padding: 7px 10px;
+  background-color: #00394d;
+  color: #ffffff;
+  font-family: Noto Serif;
+  font-size: 9px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+}
+
+.camp_authenticity {
+  margin-top: 18px;
+  color: #6b7b82;
+  font-size: 10px;
+}
+
+/* -------------------------------------------------------------- journey --- */
+
+.camp_journey_grid {
+  display: grid;
+  border-top: 1px solid #dce7ec;
+  border-bottom: 1px solid #dce7ec;
+  background-color: #dce7ec;
+  grid-template-columns: 1fr 1fr 1fr 1fr;
+  grid-column-gap: 1px;
+  grid-row-gap: 1px;
+}
+
+.camp_journey_step {
+  min-height: 276px;
+  padding: 29px 27px;
+  background-color: #ffffff;
+}
+
+.camp_journey_num {
+  display: grid;
+  width: 45px;
+  height: 45px;
+  margin-bottom: 42px;
+  justify-items: center;
+  align-items: center;
+  border-radius: 50%;
+  background-color: #00394d;
+  color: #ffffff;
+  font-family: Noto Serif;
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.camp_journey_text {
+  margin-top: 13px;
+  color: #6b7b82;
+  font-size: 13px;
+}
+
+/* ------------------------------------------------------------- provider --- */
+
+.camp_provider_photo {
+  position: relative;
+  height: 650px;
+  overflow: hidden;
+}
+
+.camp_provider_img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+}
+
+.camp_provider_caption {
+  position: absolute;
+  left: 17px;
+  right: 17px;
+  bottom: 17px;
+  padding: 17px 19px;
+  background-color: rgba(255, 255, 255, 0.94);
+}
+
+.camp_provider_caption-name {
+  color: #00394d;
+  font-family: Noto Serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.camp_provider_caption-role {
+  color: #5c5c5c;
+  font-size: 11px;
+}
+
+.camp_credential-list {
+  display: grid;
+  margin: 28px 0px 33px;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+}
+
+.camp_credential-text {
+  padding: 11px 12px;
+  border: 1px solid #dce7ec;
+  color: #00394d;
+  font-size: 11px;
+}
+
+/* was .campaign-credential-text:before */
+.camp_credential_check {
+  margin-right: 8px;
+  color: #00769d;
+  font-weight: 700;
+}
+
+/* ---------------------------------------------------------------- video --- */
+
+.camp_video_card {
+  position: relative;
+  min-height: 420px;
+  overflow: hidden;
+  border-radius: 16px;
+  background-color: #00394d;
+  box-shadow: 0 25px 65px rgba(0, 57, 77, 0.22);
+}
+
+/* The reference used an <iframe>; Webflow has no iframe element, so the slot
+   holds a native YouTubeVideo element instead. */
+/* Marvel's patient films live on Vimeo, and a native Webflow video element
+   cannot be pointed at a URL over the Data API. A poster that LINKS to the
+   film needs no unreachable setting, loads faster, and still opens the video. */
+.camp_video_slot {
+  position: relative;
+  display: block;
+  width: 100%;
+  height: 100%;
+  min-height: 420px;
+  border: 0px solid #000000;
+}
+
+.camp_video_poster {
+  display: block;
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+}
+
+.camp_video_play {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 72px;
+  height: 72px;
+  margin-top: -36px;
+  margin-left: -36px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 999px;
+  background-color: #ffffff;
+  color: #00769d;
+  font-size: 22px;
+  box-shadow: 0px 10px 30px rgba(0, 57, 77, 0.35);
+}
+
+.camp_video_meta {
+  margin-top: 13px;
+  color: #e8f4fa;
+  font-size: 11px;
+}
+
+/* -------------------------------------------------------------- reviews --- */
+
+.camp_reviews_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-column-gap: 19px;
+  grid-row-gap: 19px;
+}
+
+.camp_review {
+  display: flex;
+  min-height: 323px;
+  padding: 30px;
+  flex-direction: column;
+  border: 1px solid #d3e2e9;
+  background-color: #ffffff;
+}
+
+.camp_review_stars {
+  color: #f2b203;
+  letter-spacing: 0.12em;
+}
+
+.camp_review_quote {
+  margin: 28px 0px;
+  color: #3f5058;
+  font-size: 14px;
+  line-height: 1.75;
+}
+
+.camp_review_name {
+  margin-top: auto;
+  color: #00394d;
+  font-family: Noto Serif;
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.camp_review_meta {
+  margin-top: 4px;
+  color: #6b7b82;
+  font-size: 10px;
+}
+
+/* ------------------------------------------------------------------ faq --- */
+
+.camp_faq_list {
+  border-top: 1px solid #dce7ec;
+}
+
+.camp_faq_item {
+  border-bottom: 1px solid #dce7ec;
+}
+
+.camp_faq_toggle {
+  display: flex;
+  padding: 22px 0px;
+  justify-content: space-between;
+  grid-column-gap: 20px;
+  list-style: none;
+  cursor: pointer;
+  color: #00394d;
+  font-family: Noto Serif;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.camp_faq_plus {
+  color: #00769d;
+  font-family: Karla;
+  font-size: 21px;
+  font-weight: 400;
+}
+
+.camp_faq_answer {
+  padding: 0px 42px 24px 0px;
+  color: #6b7b82;
+  font-size: 13px;
+}
+
+/* ------------------------------------------------------------------ cta --- */
+
+.camp_cta {
+  min-height: 501px;
+  background-color: #00394d;
+  background-image: radial-gradient(circle at 85% 30%, rgba(142, 208, 230, 0.18), transparent 35%);
+  color: #ffffff;
+}
+
+.camp_cta_inner {
+  display: flex;
+  min-height: 501px;
+  align-items: center;
+  justify-content: space-between;
+  grid-column-gap: 75px;
+}
+
+.camp_cta_text {
+  max-width: 760px;
+}
+
+/* --------------------------------------------------------------- footer --- */
+
+.camp_footer {
+  min-height: 288px;
+  padding: 50px 0px 22px;
+  background-color: #00394d;
+  color: #ffffff;
+}
+
+.camp_footer_grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr 1fr 0.8fr;
+  grid-column-gap: 40px;
+  grid-row-gap: 40px;
+}
+
+.camp_footer_logo {
+  width: 205px;
+  filter: brightness(0) invert(1);
+  opacity: 0.88;
+}
+
+.camp_footer_text {
+  color: #d3e2e9;
+  font-size: 11px;
+}
+
+.camp_footer_link {
+  color: #d3e2e9;
+  font-size: 11px;
+}
+
+.camp_footer_heading {
+  margin-bottom: 12px;
+  color: #8ed0e6;
+  font-family: Noto Serif;
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.12em;
+}
+
+.camp_footer_col {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.camp_footer_bottom {
+  display: flex;
+  margin-top: 38px;
+  padding-top: 17px;
+  justify-content: space-between;
+  border-top: 1px solid rgba(255, 255, 255, 0.15);
+  color: #9bb0b9;
+  font-size: 9px;
+}
+
+/* ----------------------------------------------------------- mobile bar --- */
+/* Hidden until `small`; the sticky call/book bar for phones. */
+
+.camp_mobile-bar {
+  display: none;
+}
+
+.camp_mobile-bar_link {
+  display: grid;
+  justify-items: center;
+  align-items: center;
+  background-color: #00769d;
+  color: #ffffff;
+  font-family: Karla;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.camp_mobile-bar_link.is-call {
+  background-color: #00394d;
+  color: #ffffff;
+}
+
+/* =========================================================== 991 and down === */
+
+@media screen and (max-width: 991px) {
+  .camp_header_status { display: none; }
+
+  .camp_hero { min-height: auto; }
+  .camp_hero_grid { height: auto; grid-template-columns: 1fr; grid-column-gap: 55px; grid-row-gap: 55px; }
+  .camp_hero_visual { max-width: 680px; }
+  .camp_h1 { font-size: 52px; }
+  .camp_h2 { font-size: 34px; }
+
+  .camp_proof { height: auto; }
+  .camp_proof_grid { grid-template-columns: 1fr 1fr; }
+  .camp_proof_item { min-height: 100px; }
+
+  .camp_split { grid-template-columns: 1fr; grid-column-gap: 50px; grid-row-gap: 50px; }
+  .camp_split.is-result { grid-template-columns: 1fr; }
+  .camp_split.is-provider { grid-template-columns: 1fr; }
+  .camp_split.is-video { grid-template-columns: 1fr; }
+  .camp_split.is-faq { grid-template-columns: 1fr; }
+
+  .camp_benefits_grid { grid-template-columns: 1fr 1fr; }
+  .camp_journey_grid { grid-template-columns: 1fr 1fr; }
+  .camp_reviews_grid { grid-template-columns: 1fr; }
+  .camp_footer_grid { grid-template-columns: 1fr 1fr; }
+}
+
+/* =========================================================== 767 and down === */
+
+@media screen and (max-width: 767px) {
+  .camp_container { padding-left: 16px; padding-right: 16px; }
+  .camp_page { padding-bottom: 58px; }
+
+  .camp_announce_inner { justify-content: center; grid-column-gap: 10px; column-gap: 10px; }
+  .camp_announce_note { display: none; }
+
+  .camp_header { height: 70px; }
+  .camp_header_brand { width: 170px; }
+  .camp_header_logo { width: 160px; }
+  .camp_header_phone { display: none; }
+  .camp_header_cta { padding-left: 14px; padding-right: 14px; font-size: 9px; }
+
+  .camp_hero_grid { min-height: 0px; padding-top: 65px; padding-bottom: 75px; }
+  .camp_h1 { font-size: 44px; }
+  .camp_h2 { font-size: 30px; }
+  .camp_hero_lead { font-size: 16px; }
+  .camp_hero_media { height: 430px; }
+  .camp_hero_promise { position: relative; top: auto; right: auto; width: auto; margin-bottom: 12px; }
+
+  .camp_button-row { flex-direction: column; align-items: stretch; }
+  .camp_button { width: 100%; }
+
+  .camp_proof_item { padding: 15px 12px; grid-column-gap: 10px; }
+  .camp_proof_year { font-size: 20px; }
+  .camp_proof_title { font-size: 9px; }
+
+  .camp_section { padding: 74px 0px; }
+
+  .camp_benefits_grid { grid-template-columns: 1fr; }
+  .camp_journey_grid { grid-template-columns: 1fr; }
+  .camp_benefit { min-height: 245px; }
+  .camp_journey_step { min-height: 245px; }
+  .camp_benefit_number { margin-bottom: 45px; }
+
+  .camp_result-image { grid-template-columns: 1fr; }
+  .camp_result-panel { height: 320px; }
+  .camp_provider_photo { height: 540px; }
+  .camp_credential-list { grid-template-columns: 1fr; }
+
+  .camp_cta_inner { flex-direction: column; align-items: flex-start; justify-content: center; padding-top: 74px; padding-bottom: 74px; }
+
+  .camp_footer_grid { grid-template-columns: 1fr; grid-column-gap: 26px; grid-row-gap: 26px; }
+  .camp_footer_bottom { flex-direction: column; grid-row-gap: 7px; }
+
+  .camp_mobile-bar {
+    display: grid;
+    position: fixed;
+    left: 0px;
+    right: 0px;
+    bottom: 0px;
+    z-index: 100;
+    height: 58px;
+    grid-template-columns: 1fr 1fr;
+    /* `0px`, not a bare `0`: Webflow eats the space before a negative length
+       that follows an unitless zero, storing `0-8px` — invalid, shadow gone. */
+    box-shadow: 0px -8px 25px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* =========================================================== 479 and down === */
+
+@media screen and (max-width: 479px) {
+  .camp_h1 { font-size: 36px; }
+  .camp_h2 { font-size: 27px; }
+  .camp_proof_grid { grid-template-columns: 1fr; }
+}

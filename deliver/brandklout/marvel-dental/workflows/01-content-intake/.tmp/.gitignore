@@ -1,0 +1,6 @@
+# The raw scrape is ~700KB of Webflow-generated markup. The .txt extracts and
+# the brand probe output are the parts worth keeping.
+client-site/*.html
+client-site/site.css
+brand/*.png
+.chrome-*/
