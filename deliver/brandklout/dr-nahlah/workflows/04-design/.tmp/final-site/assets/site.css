@@ -289,7 +289,14 @@ p{margin:0}
 /* ===== css/11-drawer.css ===== */
 .drawer{position:fixed;inset:0;z-index:125;background:var(--ink-900);
   clip-path:circle(0% at calc(100% - 42px) 42px);transition:clip-path .8s cubic-bezier(.22,1,.36,1);
-  display:flex;flex-direction:column;justify-content:center;overflow-y:auto;
+  /* `safe center`, not `center`. A column flex box that centres its content
+     and then overflows pushes the overflow off the TOP, where scrollTop cannot
+     reach it: at 390x844 the drawer content is 946px tall, sat at -166px, and
+     the first NINE links were unreachable on every page of the site. `safe`
+     falls back to start-alignment the moment the content does not fit, and a
+     browser that does not know the keyword drops the declaration and starts
+     from the top too, which is the same correct behaviour. */
+  display:flex;flex-direction:column;justify-content:safe center;overflow-y:auto;
   padding:clamp(5.5rem,10vw,7rem) var(--gutter) clamp(2rem,5vw,3rem)}
 .drawer.is-open{clip-path:circle(150% at calc(100% - 42px) 42px)}
 .dr-grid{width:100%;max-width:var(--maxw);margin-inline:auto;display:grid;gap:clamp(1.75rem,4vw,3.5rem)}

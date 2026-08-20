@@ -111,6 +111,14 @@ const tg = (await gj('/json/list')).find((t) => t.type === 'page');
 const { sessionId } = await send('Target.attachToTarget', { targetId: tg.id, flatten: true });
 const S = (m, p = {}) => send(m, p, sessionId);
 await S('Page.enable'); await S('Runtime.enable'); await S('Network.enable'); await S('Log.enable');
+/* --mobile is not a nicety. The drawer, the burger and the touch behaviour of
+   the sliders exist ONLY at phone widths, so a desktop-only sweep cannot see
+   them at all -- which is how a drawer with nine unreachable links survived
+   every check this project owns. */
+if (flag('mobile')) {
+  await S('Emulation.setDeviceMetricsOverride', { width: 390, height: 844, deviceScaleFactor: 3, mobile: true });
+  await S('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+}
 const ev = async (expression) => (await S('Runtime.evaluate',
   { expression, returnByValue: true, awaitPromise: true })).result.value;
 
@@ -251,6 +259,31 @@ const PROBE = String.raw`(() => {
   };
 })()`;
 
+const DRAWER_PROBE = String.raw`(async () => {
+  const b = document.getElementById('burger'), d = document.getElementById('drawer');
+  if (!b || !d) return { drawer: !!d, burger: !!b, drawerLinks: 0, drawerUnreachable: -1 };
+  const hidden = getComputedStyle(b).display === 'none';   // desktop: no burger, nothing to test
+  if (hidden) return { drawer: true, burger: true, drawerHidden: true, drawerLinks: d.querySelectorAll('a').length, drawerUnreachable: 0 };
+  b.click();
+  await new Promise((r) => setTimeout(r, 1200));
+  const links = Array.from(d.querySelectorAll('a'));
+  const out = {
+    drawer: true, burger: true,
+    drawerOpen: d.classList.contains('is-open'),
+    drawerLinks: links.length,
+    /* Measured at scrollTop 0, which the open() leaves it at. Anything BELOW
+       the fold is reachable by scrolling; anything above the top edge is not,
+       because scrollTop cannot go negative. */
+    drawerScrollTop: d.scrollTop,
+    drawerUnreachable: links.filter((a) => a.getBoundingClientRect().top < 0).length,
+    drawerClip: getComputedStyle(d).clipPath,
+    bodyLocked: document.body.classList.contains('is-locked')
+  };
+  b.click();
+  await new Promise((r) => setTimeout(r, 400));
+  return out;
+})()`;
+
 async function audit(t) {
   bucket = { jsErrors: [], consoleErrors: [], consoleWarnings: [], logErrors: [], badResponses: [], netFailed: [], status: null, finalUrl: null };
   try {
@@ -269,6 +302,11 @@ async function audit(t) {
     await wait(1200);
     const probe = await ev(PROBE);
     if (!probe) throw new Error('probe returned nothing');
+    /* Open the menu and check every link is actually reachable. A column flex
+       box that centres and overflows puts its first rows above scrollTop 0,
+       where nothing can get to them, and the drawer still reports itself open. */
+    const drawer = await ev(DRAWER_PROBE);
+    Object.assign(probe, drawer);
     const rec = Object.assign({}, t, bucket, probe, { ok: true });
     fs.writeFileSync(path.join(OUT, t.slug + '.json'), JSON.stringify(rec, null, 1));
     const bad = [
@@ -282,7 +320,9 @@ async function audit(t) {
       !probe.jsonld.length && 'no-jsonld',
       !probe.description && 'no-description',
       probe.revealsStuck && 'stuck:' + probe.revealsStuck,
-      probe.emDash && 'emdash:' + probe.emDash
+      probe.emDash && 'emdash:' + probe.emDash,
+      probe.drawerUnreachable > 0 && 'drawer-unreachable:' + probe.drawerUnreachable + '/' + probe.drawerLinks,
+      probe.burger && !probe.drawer && 'no-drawer'
     ].filter(Boolean);
     console.log((bad.length ? 'WARN' : ' ok ') + '  ' + t.slug.padEnd(46) + ' ' + (bucket.status === null ? '?' : bucket.status) + '  ' + bad.join(' '));
   } catch (e) {

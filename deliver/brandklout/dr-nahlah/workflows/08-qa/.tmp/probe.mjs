@@ -26,6 +26,15 @@ const tg = (await gj('/json/list')).find((t) => t.type === 'page');
 const { sessionId } = await send('Target.attachToTarget', { targetId: tg.id, flatten: true });
 const S = (m, p = {}) => send(m, p, sessionId);
 await S('Page.enable'); await S('Runtime.enable');
+/* --mobile drives the phone layout, which is the ONLY width where the drawer,
+   the burger and the touch behaviour of the sliders exist at all. A desktop-only
+   sweep cannot see any of them. */
+if (process.argv.includes('--mobile')) {
+  await S('Emulation.setDeviceMetricsOverride', {
+    width: 390, height: 844, deviceScaleFactor: 3, mobile: true,
+  });
+  await S('Emulation.setTouchEmulationEnabled', { enabled: true, maxTouchPoints: 5 });
+}
 const ev = async (x) => (await S('Runtime.evaluate', { expression: x, returnByValue: true, awaitPromise: true })).result.value;
 await S('Page.navigate', { url: URL_ });
 await wait(4500);
