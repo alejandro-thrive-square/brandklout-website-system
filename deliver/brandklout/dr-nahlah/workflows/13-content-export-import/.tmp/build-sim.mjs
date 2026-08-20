@@ -20,6 +20,21 @@ for (const f of ['site.css', 'site.js']) {
 // before/after slider on the live site while sim-check reported 28/28.
 fs.copyFileSync(path.join(HERE, 'src-runtime-states.css'), path.join(OUT, 'assets', 'runtime-states.css'));
 
+/** Local path for an uploaded filename, or null.
+    Instatic re-encodes .avif on upload, so five practice photographs are
+    practice-space-N.jpg there and practice-space-N.avif here. Matching on the
+    name alone leaves them undecoded and "every image decoded" fails on a page
+    that is fine. */
+function resolveAsset(name) {
+  const dir = path.join(OUT, 'assets');
+  if (fs.existsSync(path.join(dir, name))) return 'assets/' + name;
+  const stem = name.replace(/\.[^.]+$/, '');
+  for (const ext of ['.avif', '.webp', '.png', '.jpg', '.jpeg']) {
+    if (fs.existsSync(path.join(dir, stem + ext))) return 'assets/' + stem + ext;
+  }
+  return null;
+}
+
 const head = fs.readFileSync(path.join(SITE, 'index.html'), 'utf8');
 const fonts = head.match(/<link[^>]*fonts\.googleapis[^>]*>/)[0];
 for (const slug of process.argv.slice(2)) {
@@ -31,7 +46,7 @@ for (const slug of process.argv.slice(2)) {
   const body = j.html
     .replace(/\suid="[^"]*"/g, '')
     .replace(/\/uploads\/[A-Za-z0-9_-]{21}-([^"' )]+)/g, (m, name) =>
-      fs.existsSync(path.join(OUT, 'assets', name)) ? 'assets/' + name : m);
+      resolveAsset(name) || m);
   fs.writeFileSync(path.join(OUT, slug + '.html'),
 `<!doctype html><html lang="en"><head><meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
