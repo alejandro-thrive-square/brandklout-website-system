@@ -1007,10 +1007,16 @@
   letter-spacing: 0.12em;
 }
 
+/* The 16px gap is what the site actually serves — it arrived with the Arvada
+   clone and was never declared here, so `diff-classes.mjs` reported the class
+   clean while the platform spaced the column. Declared now so the diff can see
+   it, and so the column's spacing is a decision rather than a leftover. */
 .camp_footer_col {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
+  grid-column-gap: 16px;
+  grid-row-gap: 16px;
 }
 
 .camp_footer_bottom {

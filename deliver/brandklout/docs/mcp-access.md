@@ -55,6 +55,7 @@ All IDs below were read from `list_sites` on 2026-08-07 against the live `webflo
 | `stone-dental-implant-center/` | — | — | **NOT PRESENT in the site list.** See below |
 | `west-la-implants/` | — | — | **No site yet.** Client added 2026-08-20; nothing built. Read-only until a site is created in this workspace and its ID is recorded here |
 | `legacy-dental-pasadena/` | Legacy Dental Pasadena - Cosmetic & Implant Dentistry | `68e12d861f12c7f04a762a8e` | **Confirmed 2026-08-20** via `get_site`. Short name `legacy-dental`. **78 pages, live production site** serving `legacydentalpasadena.com`. **Also carries `caldentalpasadena.com` + `www.` — a second brand. Publish staging-only until that is explained.** See the warning below |
+| `marvel-dental/` | Marvel Dental Main | `69aedbc6b0c7e78051fd6a2c` | **Confirmed 2026-08-21** via `get_site`. Short name `marvel-dental-main`. **77 pages, live production site** serving `marveldentaldds.com` + `www.`. Four other sites in the workspace carry the Marvel name and are old iterations — match on the ID. See the warning below |
 
 > [!CAUTION]
 > **Arvada has five sites in this workspace and only one of them is the deliverable.** The other
@@ -83,6 +84,15 @@ All IDs below were read from `list_sites` on 2026-08-07 against the live `webflo
 > `customDomains` therefore publishes to a brand that is not this client. Until someone establishes
 > what `caldentalpasadena.com` is and who owns it, publish only with
 > `publishToWebflowSubdomain: true` and `customDomains: []`.
+
+> [!CAUTION]
+> **Marvel Dental has five sites in this workspace and only one of them is the deliverable.** The
+> other four (`Marvel Dental`, `Marvel Dental v2`, `Marvel Dental v3`, `Copy of Marvel Dental v2`)
+> sit in the scratch and archive folders and are old design iterations. The deliverable is the only
+> Marvel site carrying the `marveldentaldds.com` custom domain. Its three-page emergency funnel
+> under `/ads-landing-pages/` **serves on that custom domain**, so publish with
+> `publishToWebflowSubdomain: true` and `customDomains: []` to gate a change; publishing to the
+> live domain is the user's call.
 
 > [!IMPORTANT]
 > **Stone Dental Implant Center has no site in this workspace.** `list_sites` returned 9 sites and
