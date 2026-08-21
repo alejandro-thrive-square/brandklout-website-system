@@ -1,0 +1,48 @@
+{
+  "id": "webzite.embed-origins",
+  "name": "Embed Origins",
+  "version": "1.0.0",
+  "apiVersion": 1,
+  "description": "Allow third-party embeds (booking widgets, review widgets, forms) by adding operator-approved origins to the published page's Content-Security-Policy.",
+  "permissions": ["cms.hooks"],
+  "resources": [],
+  "adminPages": [],
+  "settings": [
+    {
+      "id": "frameOrigins",
+      "type": "textarea",
+      "label": "Allowed iframe origins (frame-src)",
+      "description": "One origin per line, scheme included, e.g. https://reputationhub.site. Each is added to frame-src on every published page. Leave empty to change nothing.",
+      "placeholder": "https://reputationhub.site",
+      "rows": 4,
+      "default": ""
+    },
+    {
+      "id": "scriptOrigins",
+      "type": "textarea",
+      "label": "Allowed script origins (script-src)",
+      "description": "One origin per line. Only needed for widgets that inject their own <script src>. Every origin here can run arbitrary JavaScript on the site, so add only origins you trust.",
+      "placeholder": "https://link.msgsndr.com",
+      "rows": 4,
+      "default": ""
+    },
+    {
+      "id": "connectOrigins",
+      "type": "textarea",
+      "label": "Allowed fetch/XHR origins (connect-src)",
+      "description": "One origin per line. Needed when a widget's script calls an API. Usually the same host as the script origin.",
+      "placeholder": "https://services.leadconnectorhq.com",
+      "rows": 4,
+      "default": ""
+    }
+  ],
+  "entrypoints": {
+    "server": "server/index.js"
+  },
+  "author": {
+    "name": "Webzite Studio",
+    "url": "https://webzite.studio"
+  },
+  "license": "MIT",
+  "keywords": ["csp", "embed", "iframe", "widget"]
+}

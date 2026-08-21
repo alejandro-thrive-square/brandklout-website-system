@@ -188,6 +188,40 @@ export async function api(method, path, body) {
   return request(method, path, body)
 }
 
+/**
+ * Multipart POST, for the endpoints that take a file rather than JSON — today
+ * only plugin package install (`/admin/api/cms/plugins/package`).
+ *
+ * Kept beside `request` so the cookie, the mandatory `Origin` and the
+ * step-up dance stay in ONE place; the only difference is that `FormData` sets
+ * its own `content-type` (with the multipart boundary), so we must not.
+ */
+export async function requestForm(path, form, { retryStepUp = true } = {}) {
+  let cookie = cachedCookie()
+  if (!cookie) { await login(); cookie = cachedCookie() }
+  const res = await fetch(`${BASE}${path}`, {
+    method: 'POST',
+    headers: { origin: BASE, cookie },
+    body: form,
+  })
+  const text = await res.text()
+  if (res.status === 401 && text.includes('step_up_required') && retryStepUp) {
+    await stepUp()
+    return requestForm(path, form, { retryStepUp: false })
+  }
+  let parsed
+  try { parsed = text ? JSON.parse(text) : null } catch {
+    throw new Error(`POST ${path} -> ${res.status}, non-JSON body: ${text.slice(0, 200)}`)
+  }
+  if (!res.ok) {
+    const err = new Error(`POST ${path} -> ${res.status}: ${JSON.stringify(parsed).slice(0, 600)}`)
+    err.status = res.status
+    err.payload = parsed
+    throw err
+  }
+  return parsed
+}
+
 /** The draft shell plus the seq to quote back on save. */
 export async function getSite() {
   return request('GET', '/admin/api/cms/site')
