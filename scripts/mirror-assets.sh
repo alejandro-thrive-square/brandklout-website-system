@@ -25,6 +25,17 @@ set -euo pipefail
 # the destination is ever deleted. An asset deleted in a worktree therefore
 # lingers in main — see --prune-dry-run to list those rather than act on them.
 #
+# Cost
+# ----
+# Every worktree's post-commit fires this, so it must be cheap and must not
+# stack. Two guards enforce that, and both are load-bearing on Windows where a
+# process creation also allocates a console:
+#   * one run at a time, via a lock in the shared git common dir
+#     (WEBZITE_MIRROR_LOCK_WAIT seconds to wait, default 20;
+#      WEBZITE_MIRROR_LOCK_STALE_MIN minutes before a lock is junk, default 30)
+#   * the copy path batches with xargs -- never reintroduce a per-file stat/cp
+#     loop, see SYSTEM_RULES.md section 4.2.1
+#
 # Usage:
 #   bash scripts/mirror-assets.sh [--scope <path>]... [--all] [--dry-run]
 #                                 [--to-worktree] [--quiet] [--prune-dry-run]
@@ -118,6 +129,60 @@ list_ignored() {
     | grep -Ei "$ASSET_EXT_RE|$VENDOR_PATH_RE" || true
 }
 
+# --- one run at a time -----------------------------------------------------
+# post-commit fires this from EVERY worktree, and the scan is the expensive
+# half. Without a lock, commits landing minutes apart in two worktrees left two
+# multi-thousand-file scans running side by side; each one spawns Windows
+# processes faster than the console subsystem can retire them, so the machine
+# flashed terminal windows and pegged a core for as long as they overlapped.
+#
+# One run at a time is enough. The mirror is additive and idempotent, so
+# whatever a skipped run would have copied is picked up by the next commit or by
+# a manual sweep — the message below says how.
+#
+# Read-only modes cannot collide with anything, so they never take the lock.
+cleanup() {
+  [[ -n "${TMP:-}" ]] && rm -rf "$TMP" 2>/dev/null
+  [[ "${LOCK_HELD:-false}" == true ]] && rm -rf "$LOCK_DIR" 2>/dev/null
+  return 0
+}
+trap cleanup EXIT
+
+LOCK_HELD=false
+if [[ "$DRY_RUN" == false && "$PRUNE_DRY" == false ]]; then
+  # The common dir is shared by every worktree, so one lock covers them all.
+  GIT_COMMON="$(git rev-parse --git-common-dir)"
+  case "$GIT_COMMON" in
+    /*|[A-Za-z]:[/\]*) ;;
+    *) GIT_COMMON="$(cd "$GIT_COMMON" && pwd -P)" ;;
+  esac
+  LOCK_DIR="$GIT_COMMON/webzite-mirror-assets.lock"
+  LOCK_WAIT="${WEBZITE_MIRROR_LOCK_WAIT:-20}"      # seconds to wait for a turn
+  LOCK_STALE_MIN="${WEBZITE_MIRROR_LOCK_STALE_MIN:-30}"  # after this, junk
+
+  waited=0
+  while ! mkdir "$LOCK_DIR" 2>/dev/null; do
+    # A killed run leaves the directory behind. Treat an old one as junk rather
+    # than blocking every future commit on a process that no longer exists.
+    if [[ -n "$(find "$LOCK_DIR" -maxdepth 0 -mmin "+$LOCK_STALE_MIN" 2>/dev/null)" ]]; then
+      echo "mirror-assets: clearing a stale lock (>${LOCK_STALE_MIN}m old)." >&2
+      rm -rf "$LOCK_DIR" 2>/dev/null || true
+      continue
+    fi
+    if (( waited >= LOCK_WAIT )); then
+      HINT=""
+      for s in ${SCOPES[@]+"${SCOPES[@]}"}; do HINT="$HINT --scope \"$s\""; done
+      [[ "$ALL" == true ]] && HINT=" --all"
+      echo "mirror-assets: another run holds the lock — skipped, nothing copied." >&2
+      echo "  Re-run when it finishes:  bash \"$0\"$HINT" >&2
+      exit 0
+    fi
+    sleep 1; waited=$((waited + 1))
+  done
+  LOCK_HELD=true
+  echo "$$" > "$LOCK_DIR/pid" 2>/dev/null || true
+fi
+
 if [[ "$ALL" == true ]]; then FILES="$(list_ignored "$SRC_ROOT" .)"
 else                          FILES="$(list_ignored "$SRC_ROOT" "${SCOPES[@]}")"; fi
 
@@ -132,26 +197,75 @@ if [[ "$PRUNE_DRY" == true ]]; then
   exit 0
 fi
 
-copied=0; skipped=0; failed=0
-while IFS= read -r f; do
-  [[ -z "$f" ]] && continue
-  src="$SRC_ROOT/$f"; dst="$DST_ROOT/$f"
-  [[ -f "$src" ]] || continue
+# --- copy engine -----------------------------------------------------------
+# One process per BATCH of files, never one per file. The loop this replaced
+# shelled out five times per file (two stats, dirname, mkdir, cp); at ~4,000
+# files that is ~20,000 Windows process creations for a commit that usually
+# copies nothing, and on Windows each one gets a console allocated — which is
+# both the CPU spike and the terminal windows flashing across the screen.
+#
+# stat and cp each accept many paths per invocation and xargs packs them up to
+# the command-line limit, so the same work is now a handful of processes. The
+# skip rule is unchanged: same size at the destination means already mirrored.
+TMP="$(mktemp -d)"
+printf '%s\n' "$FILES" | grep . > "$TMP/list" || true
+total=$(grep -c . "$TMP/list" || true)
 
-  # Skip when the destination already holds the same bytes. Size is a cheap
-  # proxy; assets are written once and not edited in place.
-  if [[ -f "$dst" ]] && [[ "$(stat -c%s "$src" 2>/dev/null)" == "$(stat -c%s "$dst" 2>/dev/null)" ]]; then
-    skipped=$((skipped+1)); continue
+if [[ "$total" -eq 0 ]]; then
+  say "mirror-assets [$LABEL]: nothing to do (no ignored assets in scope)."
+  exit 0
+fi
+
+# "<size> <relative path>" for every readable file, in 1-3 stat calls. A path
+# absent from the map does not exist there: for the source that means a stale
+# listing (skip it, as the old -f test did), for the destination it means copy.
+sizes_for() {
+  ( cd "$1" && xargs -d '\n' -r stat -c '%s %n' 2>/dev/null ) || true
+}
+
+sizes_for "$SRC_ROOT" < "$TMP/list" > "$TMP/src"
+sizes_for "$DST_ROOT" < "$TMP/list" > "$TMP/dst"
+
+: > "$TMP/tocopy"
+awk '
+  function relpath(s) { return substr(s, index(s, " ") + 1) }
+  NR == FNR { dst[relpath($0)] = $1; next }
+  {
+    p = relpath($0)
+    if (p in dst && dst[p] == $1) { skipped++ } else { print p > TOCOPY }
+  }
+  END { print skipped + 0 }
+' TOCOPY="$TMP/tocopy" "$TMP/dst" "$TMP/src" > "$TMP/skipcount"
+skipped=$(cat "$TMP/skipcount")
+to_copy=$(grep -c . "$TMP/tocopy" || true)
+
+if [[ "$DRY_RUN" == true ]]; then
+  sed 's|^|  WOULD COPY: |' "$TMP/tocopy"
+  copied=$to_copy; failed=0
+else
+  # --parents rebuilds the directory tree at the destination, so no per-file
+  # mkdir; -t keeps the destination out of the packed argument list.
+  ( cd "$SRC_ROOT" && xargs -d '\n' -r -a "$TMP/tocopy" \
+      cp -p --parents -t "$DST_ROOT" ) 2> "$TMP/cp.err" || true
+
+  # Verify by re-reading sizes rather than trusting a batched exit code: with
+  # many files per cp invocation, one failure would otherwise condemn the batch.
+  sizes_for "$DST_ROOT" < "$TMP/tocopy" > "$TMP/dst2"
+  : > "$TMP/copied"
+  awk '
+    function relpath(s) { return substr(s, index(s, " ") + 1) }
+    NR == FNR { src[relpath($0)] = $1; next }
+    { p = relpath($0); if (p in src && src[p] == $1) print p > OK }
+  ' OK="$TMP/copied" "$TMP/src" "$TMP/dst2"
+
+  copied=$(grep -c . "$TMP/copied" || true)
+  failed=$((to_copy - copied))
+  if [[ "$failed" -gt 0 ]]; then
+    awk 'NR==FNR { ok[$0]; next } !($0 in ok) { print "mirror-assets: FAILED " $0 }' \
+      "$TMP/copied" "$TMP/tocopy" >&2
+    head -n 3 "$TMP/cp.err" >&2 || true
   fi
-
-  if [[ "$DRY_RUN" == true ]]; then
-    echo "  WOULD COPY: $f"; copied=$((copied+1)); continue
-  fi
-
-  mkdir -p "$(dirname "$dst")"
-  if cp -p "$src" "$dst" 2>/dev/null; then copied=$((copied+1))
-  else echo "mirror-assets: FAILED $f" >&2; failed=$((failed+1)); fi
-done <<< "$FILES"
+fi
 
 # NB: these flags hold the strings "true"/"false", never the empty string, so
 # ${DRY_RUN:+...} would expand on every run. Compare explicitly.

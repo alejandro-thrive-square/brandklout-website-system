@@ -229,6 +229,23 @@ required once per clone). Notes that matter:
   never surface as an error that derails the agent mid-task.
 - Set `WEBZITE_SKIP_ASSET_MIRROR=1` for scripted bulk commits that would otherwise rescan the same
   folders once per commit.
+- **One run at a time, enforced by a lock.** The scan is the expensive half and every worktree's
+  `post-commit` fires it, so commits landing minutes apart in two worktrees used to leave two
+  multi-thousand-file scans running side by side. A second run waits `WEBZITE_MIRROR_LOCK_WAIT`
+  seconds (default 20) for the lock at `<git-common-dir>/webzite-mirror-assets.lock`, then skips and
+  prints the command to re-run by hand. A lock older than `WEBZITE_MIRROR_LOCK_STALE_MIN` minutes
+  (default 30) is treated as junk from a killed run and cleared. Read-only modes (`--dry-run`,
+  `--prune-dry-run`) never take the lock.
+- **The copy loop batches; never make it per-file again.** On Windows every external command is a
+  process creation that Git Bash gives a console, so the original loop — two `stat`s, `dirname`,
+  `mkdir` and `cp` per file — cost ~20,000 process spawns for a 4,000-file scope, which pegged a
+  core for 20+ minutes and flashed terminal windows across the screen for a commit that usually
+  copies nothing. `stat` and `cp` both accept many paths per call and `xargs` packs them to the
+  command-line limit, so the same scope is now a handful of processes: **3.2 s where the old loop
+  had not finished 911 files in 120 s.** The skip rule is unchanged (same size at the destination
+  means already mirrored) and `cp --parents` replaces the per-file `mkdir`.
+- Success is **verified by re-reading destination sizes**, not by `cp`'s exit code: one failure in a
+  batched invocation would otherwise condemn every file that shared it.
 
 ### 4.3 Branching Strategy
 - **`main`**: Production-ready state of the system. Protected — no direct pushes.
