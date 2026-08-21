@@ -95,11 +95,57 @@ Once the code asset is off, `rule.order` and condition order are the only tiebre
 - **Publishing ships the whole draft**, including anyone else's in-progress work. No script here publishes; it is always a separate, announced step.
 - **The volume fills silently.** At ~90% full, writes fail with no error. Check `railway metrics` or `df -h /app/storage` before any large operation.
 
+## The Railway volume, and pruning it
+
+Instatic self-hosts on Railway (project `Brandklout`, service `Dr Nahlah`, volume
+`/app/storage`, 879 MB). It writes a full `site_snapshots` row **and a complete copy of
+every runtime asset** on every publish, and **never garbage-collects them**. There is no
+retention setting anywhere in the image.
+
+**A publish costs ~15 MB across the site.** That is the number to plan around: roughly 40
+publishes fills the volume from empty, and a heavy debugging session does 20 in an
+afternoon. Near full, writes fail **silently** - no 5xx, no error in `railway logs` - so
+the symptom is never "disk full", it is "my asset did not save" or "the big payload did
+not land".
+
+    node prune-versions.mjs                  # report volume + what a prune would free
+    node prune-versions.mjs --keep 3         # dry run
+    node prune-versions.mjs --keep 3 --apply # delete, compact, swap, restart
+
+`--apply` is destructive and restarts the service. Page **content is never touched** -
+every row keeps its active version, and the script aborts before swapping if any
+published row would lose it. What is lost is the ability to roll back to an older
+publish from the platform UI.
+
+### Four traps, all of them found the hard way on 2026-08-21
+
+1. **`VACUUM` cannot run in place on a nearly-full volume.** It writes the rebuilt pages
+   through the WAL, which sits *beside* the database on that same volume, so it dies with
+   `SQLITE_FULL` after inflating the WAL by ~50 MB. `SQLITE_TMPDIR` does not help - it
+   governs temp *tables*, not the WAL. Use `VACUUM INTO` a path on the container overlay
+   (`/tmp`, 1.8 TB free) and swap the file in.
+2. **`rm cms.db` frees nothing while the server is running.** The process holds the inode
+   open, so the blocks are not returned until it exits. Deleting the old database to make
+   room for the new one therefore *fails*, and leaves you with a partially written
+   database and no original. **Copy to a new name first**, verify it, and only then
+   `rm` + `mv` + restart. The restart is what actually reclaims the disk.
+3. **`/tmp` is the container overlay, and a restart wipes it.** Anything staged there -
+   including a backup - is gone the moment you redeploy. Get a valid database onto the
+   *volume* before restarting anything.
+4. **Delete in batches with `PRAGMA wal_checkpoint(TRUNCATE)` between them.** One large
+   `DELETE` grows the WAL faster than it frees pages, filling the disk while emptying it.
+
+Related: `published_runtime_assets.public_path` is **version-scoped**
+(`/_instatic/assets/<versionId>/...`), so deleting an old version can never orphan an
+asset a current page references. Verify it anyway - compare active-version asset counts
+either side of the prune.
+
 ## Output Artifacts
 - `.tmp/parity-<label>.json` — computed-style snapshots (28 pages, ~557k values, deterministic across runs)
 - `.tmp/shell.before.<seq>.json` / `.tmp/shell.after.<seq>.json` — shell state either side of a write
 - `.tmp/conv-out.json` — converted rules, conditions and warnings
 - `.tmp/site.css.published` / `.tmp/site.css.draft-before` — repair evidence
+- `prune-versions.mjs` + `prune-versions.container.ts` — volume reclamation (see above)
 
 ## Version Control
 Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). Scripts and `.md` are committed; `.tmp/` snapshots are lightweight and may be committed when useful. `.tmp/.session` holds a live session cookie and must never be committed.
