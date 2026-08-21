@@ -21,17 +21,10 @@
   "GSAP target  not found. https://gsap.com"
  ],
  "logErrors": [
-  "security: Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-JjJVpPcuFN6Z7GOg4PkiVfiyklUS+vTDCbASsgWy7ik='\". Note that 'script-src-elem' was not e",
-  "security: Loading the script 'https://reputationhub.site/reputation/assets/review-widget.js' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-JjJVpPcuFN6Z7GOg4PkiVfiyklUS+vTDCbASsgWy7ik='\". Note that 'script-src-elem' was not explicitly set, so 'script-src' is use",
-  "security: Framing 'https://reputationhub.site/' violates the following Content Security Policy directive: \"frame-src https://www.youtube-nocookie.com https://www.youtube.com\". The request has been blocked.\n",
-  "network: Failed to load resource: the server responded with a status of 404 ()"
+  "security: Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-JjJVpPcuFN6Z7GOg4PkiVfiyklUS+vTDCbASsgWy7ik='\". Note that 'script-src-elem' was not e"
  ],
- "badResponses": [
-  "404 https://encorercm.com/favicon.ico"
- ],
+ "badResponses": [],
  "netFailed": [
-  " Script",
-  "net::ERR_BLOCKED_BY_CSP Document",
   " Script"
  ],
  "status": 200,
@@ -40,9 +33,9 @@
  "titleLen": 57,
  "description": "Board-certified prosthodontist Dr. Esam Nahlah rebuilds complex and failed cases. Implants, All-on-4 and full-mouth work in McLean and Alexandria, Virginia.",
  "descriptionLen": 156,
- "canonical": null,
- "ogTitle": null,
- "ogImage": null,
+ "canonical": "https://encorercm.com/",
+ "ogTitle": "Dr. Nahlah Implants and Prosthodontics Specialists",
+ "ogImage": "https://encorercm.com/uploads/nSf9Qt9Ba-KPPTwhbpJnb-case2-before.jpg",
  "lang": "en",
  "h1": [
   "A smile rebuilt by a specialist"
@@ -52,35 +45,18 @@
  "jsonld": [
   "Dentist,MedicalBusiness+Person+WebSite+WebPage"
  ],
- "words": 1738,
+ "words": 1741,
  "imgTotal": 25,
  "imgBroken": [],
- "imgNoAlt": [
-  "https://encorercm.com/uploads/V1ex_8TusqaQntDvRqdSX-logo-w320.webp",
-  "https://encorercm.com/uploads/nSf9Qt9Ba-KPPTwhbpJnb-case2-before-w640.webp",
-  "https://encorercm.com/uploads/3TStFVfzcPUbzOZ_nJqk1-dr-nahlah-w640.webp",
-  "https://encorercm.com/uploads/w61YOeebj7qkb44AtN65r-case1-before-w1600.webp",
-  "https://encorercm.com/uploads/0FnSWTy4Do67fbnbLpdxT-case1-after-w1600.webp",
-  "https://encorercm.com/uploads/nSf9Qt9Ba-KPPTwhbpJnb-case2-before-w1600.webp",
-  "https://encorercm.com/uploads/jVQvLkvJFprg_MHnotwRV-case2-after-w1600.webp",
-  "https://encorercm.com/uploads/5Q8FI670RIZpry_TXIbMF-case3-before-w1600.webp",
-  "https://encorercm.com/uploads/VFozWHVlO5yh64pecW_K4-case3-after-w1600.webp",
-  "https://encorercm.com/uploads/-4VxB8jUsXuKo7NbAy3V9-consult-w640.webp",
-  "https://encorercm.com/uploads/0FnSWTy4Do67fbnbLpdxT-case1-after-w640.webp",
-  "https://encorercm.com/uploads/tGVCqp-yEC4NRh5yVsM-l-office-w640.webp",
-  "https://encorercm.com/uploads/jVQvLkvJFprg_MHnotwRV-case2-after-w640.webp",
-  "https://encorercm.com/uploads/Kyq8mJbQJb9LPzeqcho88-lab-w1600.webp",
-  "https://encorercm.com/uploads/N3OobIU3i-6PA8SeuRX78-veneers-procedure-w640.webp",
-  "https://encorercm.com/uploads/991LexO9uFTin-ATA0-CG-case-ao4-double-1-after-w640.webp",
-  "https://encorercm.com/uploads/V1ex_8TusqaQntDvRqdSX-logo-w320.webp"
- ],
+ "imgNoAlt": [],
+ "imgAltDecorative": 0,
  "imgLowRes": [],
  "ba": [],
  "baCount": 0,
  "videos": [
   {
    "cls": "ar-film",
-   "poster": false,
+   "poster": true,
    "playing": true,
    "src": "xCmOoUcLD2QGVlsVDmjhf-hero.mp4"
   },
@@ -92,27 +68,30 @@
   }
  ],
  "iframes": [
-  "https://www.youtube.com/embed/HiNtywrb4Yg"
+  "https://www.youtube.com/embed/HiNtywrb4Yg",
+  "https://reputationhub.site/reputation/widgets/review_widget/xJDu1mFoW5jFYTNqmuk7?widgetId=6a7340db2bbe7819cc3536f4"
  ],
  "forms": 0,
  "formActions": [],
  "burgerBars": 2,
  "btnSpans": 3,
  "btnCount": 3,
- "navLinks": 7,
- "footerLinks": 14,
+ "navLinks": 8,
+ "footerLinks": 15,
  "gsap": true,
  "scrollTriggers": 67,
  "smoother": true,
  "revealsStuck": 0,
+ "misaligned": [],
  "overflowX": 0,
- "docHeight": 18475,
+ "docHeight": 19351,
  "links": [
   "/",
   "/dental-implants",
   "/smile-makeover",
   "/smile-gallery",
   "/meet-dr-nahlah",
+  "/posts",
   "/contact",
   "/contact#book",
   "/dental-implants",
@@ -135,6 +114,7 @@
   "/our-team",
   "/our-facility",
   "/patient-stories",
+  "/posts",
   "/patient-center",
   "/financing",
   "/contact",
@@ -166,6 +146,7 @@
   "/patient-stories",
   "/implant-cost",
   "/meet-dr-nahlah",
+  "/posts",
   "/contact",
   "tel:+15717029900",
   "tel:+15712537790",
@@ -189,5 +170,13 @@
  "loremIpsum": false,
  "placeholders": 0,
  "emptyText": 0,
+ "drawer": true,
+ "burger": true,
+ "drawerOpen": true,
+ "drawerLinks": 30,
+ "drawerScrollTop": 0,
+ "drawerUnreachable": 0,
+ "drawerClip": "circle(150% at calc(100% - 42px) 42px)",
+ "bodyLocked": true,
  "ok": true
 }
