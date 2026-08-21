@@ -30,11 +30,21 @@ const enc = encodeLossyDeclarations(css)
 css = enc.css
 console.error(`encoded ${enc.encoded} declarations the parser would drop`)
 
-const bps = [
-  { id: 'mobile', width: 375, mediaQuery: '(max-width: 375px)' },
-  { id: 'tablet', width: 768, mediaQuery: '(max-width: 768px)' },
-  { id: 'desktop', width: 1440, mediaQuery: '(max-width: 1440px)' },
-]
+// NO breakpoint folding.
+//
+// `matchMediaQueryToViewport` folds an @media that matches a site breakpoint
+// into `contextStyles[breakpointId]`, and `classCss.ts` emits ALL custom
+// conditions before ANY viewport context. A folded block therefore lands at the
+// end of the cascade permanently, where nothing narrower can override it —
+// regardless of where it sat in the source.
+//
+// On this site `@media screen and (max-width: 1440px)` folded into `desktop`
+// and outranked `@media screen and (max-width: 479px)`, so the fluid root
+// font-size took the desktop tokens at 390px and 9% of every computed value on
+// mobile shifted. Passing no breakpoints keeps every @media as a custom
+// condition, in one array whose order the migration controls.
+const bps: Array<{ id: string; width: number; mediaQuery: string }> = []
+
 const out: any = cssToStyleRules(css, { breakpoints: bps })
 writeFileSync('/app/conv-out.json', JSON.stringify({ rules: out.rules, conditions: out.conditions, warnings: out.warnings }))
 const byKind: Record<string, number> = {}

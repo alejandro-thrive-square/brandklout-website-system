@@ -35,6 +35,17 @@ const BASE = (process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 
 /**
+ * The viewport every capture is taken at. Set with `WIDTH=390 HEIGHT=844` to
+ * gate the mobile layout — the two are separate snapshots and must be compared
+ * separately, because a media query that changes at one width says nothing
+ * about the other.
+ */
+const VIEWPORT = {
+  width: Number(process.env.WIDTH || 1440),
+  height: Number(process.env.HEIGHT || 900),
+}
+
+/**
  * The properties worth watching. Deliberately not `getComputedStyle`'s full
  * ~340 longhands: most are inherited defaults that never move, and capturing
  * them makes each page snapshot ~8 MB and the diff unreadable. These are the
@@ -115,6 +126,16 @@ async function browser() {
   await S('Runtime.enable')
   // CSS-only capture: no GSAP writing inline transforms mid-scroll.
   await S('Emulation.setScriptExecutionDisabled', { value: true })
+  // `--window-size` sizes the WINDOW, not the viewport, and headless does not
+  // reliably give you the one from the other — an early version of this gate
+  // ran at some unknown narrow width, so every number it produced described a
+  // layout nobody looks at. Pin the viewport explicitly and assert it.
+  await S('Emulation.setDeviceMetricsOverride', {
+    width: VIEWPORT.width,
+    height: VIEWPORT.height,
+    deviceScaleFactor: 1,
+    mobile: false,
+  })
 
   return {
     S,
@@ -165,7 +186,7 @@ mkdirSync(TMP, { recursive: true })
 if (cmd === 'snapshot') {
   if (!a) throw new Error('usage: css-parity.mjs snapshot <label>')
   const slugs = await pageSlugs()
-  console.log(`capturing ${slugs.length} pages from ${BASE} (scripts disabled)`)
+  console.log(`capturing ${slugs.length} pages from ${BASE} at ${VIEWPORT.width}x${VIEWPORT.height} (scripts disabled)`)
   const br = await browser()
   const snapshot = {}
   try {
@@ -179,12 +200,12 @@ if (cmd === 'snapshot') {
   } finally {
     br.close()
   }
-  const file = join(TMP, `parity-${a}.json`)
+  const file = join(TMP, `parity-${a}-${VIEWPORT.width}.json`)
   writeFileSync(file, JSON.stringify(snapshot), 'utf8')
   console.log(`\nwrote ${file}`)
 } else if (cmd === 'diff') {
   const load = (label) => {
-    const f = join(TMP, `parity-${label}.json`)
+    const f = join(TMP, `parity-${label}-${VIEWPORT.width}.json`)
     if (!existsSync(f)) throw new Error(`no snapshot "${label}" — run: css-parity.mjs snapshot ${label}`)
     return JSON.parse(readFileSync(f, 'utf8'))
   }

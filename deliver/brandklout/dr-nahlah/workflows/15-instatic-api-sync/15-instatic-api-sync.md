@@ -71,13 +71,29 @@ node css-parity.mjs diff before after      # must report 0
 
 ## Gotchas
 
+Every one of these shipped a regression before the parity gate caught it. None announced itself.
+
 - **CSRF, not permissions.** Every state-changing request is checked against `PUBLIC_ORIGIN`. A missing or foreign `Origin` header returns 403 "invalid origin", which reads exactly like a capability problem. The client always sends the canonical origin.
-- **`@media(min-width:720px)` with no space converts to NOTHING, silently.** Browsers accept the space-less prelude; happy-dom's CSS parser does not, and `cssToStyleRules` returns zero rules and zero warnings for the whole block. 52 of this site's 64 media blocks are that form. Preludes are normalised before conversion — never remove that step.
-- **Condition ids are the prelude text verbatim.** `media:(max-width: 679px)` and `media:(max-width:679px)` are two different conditions. Normalise spacing to match the site's existing `site.conditions` or you mint whitespace-only duplicates.
-- **`:root` and `html` have 52 duplicate copies each** in the registry, left over from the per-page import. Merging must target the highest-`order` copy — the one winning the cascade today. Collapsing the duplicates is a separate job.
+- **Publishing needs step-up auth.** `POST /publish` answers `401 {"error":"step_up_required"}` until the password is re-entered, and the step-up **rotates the session token** — miss the new cookie and every later request 401s.
+- **`@media(min-width:720px)` with no space converts to NOTHING, silently.** Browsers accept the space-less prelude; happy-dom does not, and `cssToStyleRules` returns zero rules and zero warnings for the whole block. 52 of this site's 64 media blocks are that form.
+- **happy-dom drops declarations whose values it cannot evaluate** — `padding: clamp(...)`, `margin-top: clamp(...)`, `width: min(...)`, `height: 100svh`. Instatic's substitution encoder covers only `var()`/`env()`. Widen it, and trigger it by **probing the real parser** (`length === 0` after `replaceSync`), not by listing function names: the list version still missed `100svh`.
+- **A converter class rule's `name` is not its selector.** 144 of 286 carry a descendant selector with a binding name from the last class token (`.ch-difference .df-stat b` is named `df-stat`). **Match by selector, never by name** — matching by name put the number's display type on its container.
+- **Never create new rules as `kind: 'class'`.** A class rule survives publish only if its id is in some `node.classIds`; a rule you just invented is referenced by nothing and is deleted on the next publish. Create ambient.
+
+### Cascade order — three separate traps
+
+Once the code asset is off, `rule.order` and condition order are the only tiebreakers, and none of them come out of the converter correctly.
+
+- **Rank rules by their last BASE-context occurrence.** `cssToStyleRules` keeps the FIRST occurrence's order for a selector defined twice. `.ta-card h3` (runtime-states, then site.css) landed before `.pk h3` and the card headings went 21.6px -> 27.36px.
+- **A redefinition inside `@media` must not move the base rule.** Ranking by "last seen anywhere" pushed `.vs-row > span` past `.vs-head-row > span` because of a breakpoint override, and the comparison table's header row lost its display type.
+- **Custom conditions emit in `site.conditions` ARRAY order** — only viewport breakpoints get `classCss.ts`'s max-desc/min-asc sort, and per-rule `contextStyles` key order is ignored. `.bl-grid`'s 1080px block emitted before its 700px one and the blog grid fell from three columns to two, doubling the page height. Sort the array the way the platform sorts breakpoints, then **assert no rule needs the opposite order** (comparing only contexts that set an overlapping property, or the `:root` token blocks raise false alarms).
+
+### The parity gate itself
+
+- **`--window-size` is not the viewport.** Headless does not reliably derive one from the other; the first version of this gate ran at some unknown narrow width, so it reported 26 differences while the desktop layout had **1,290**. Pin it with `Emulation.setDeviceMetricsOverride` and assert `innerWidth` before capturing. Gate desktop and mobile as separate snapshots.
+- **Verify against a fresh read, never the object you sent**, and against the served URL, never the registry read-back.
 - **Publishing ships the whole draft**, including anyone else's in-progress work. No script here publishes; it is always a separate, announced step.
-- **The volume fills silently.** At ~90% full, writes fail with no error (`railway metrics`, or `df -h /app/storage`). Check before any large operation. Instatic never prunes published versions.
-- **Verify against a fresh read, never the object you sent.** Every write path here re-reads and compares.
+- **The volume fills silently.** At ~90% full, writes fail with no error. Check `railway metrics` or `df -h /app/storage` before any large operation.
 
 ## Output Artifacts
 - `.tmp/parity-<label>.json` — computed-style snapshots (28 pages, ~557k values, deterministic across runs)

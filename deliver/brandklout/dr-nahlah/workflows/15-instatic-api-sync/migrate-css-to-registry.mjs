@@ -51,6 +51,7 @@ import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
 import { randomBytes } from 'node:crypto'
 import { getSite, getPages, saveShell } from './insta-api.mjs'
+import { readCascadeOrder, normaliseMedia } from './cascade-order.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const TMP = join(HERE, '.tmp')
@@ -196,34 +197,135 @@ if (wantMerge) {
   // ── Cascade order ──────────────────────────────────────────────────────
   //
   // Until now the code asset won everything simply by being last in the link
-  // order. Once it is switched off, the only thing left deciding ties is
-  // `rule.order` within the registry — and a merged rule kept whatever order
-  // its registry copy happened to have, which is NOT its position in the
-  // stylesheet.
+  // order. Once it is switched off, ties are decided by `rule.order` and by the
+  // key order of `contextStyles` — neither of which the converter sets to the
+  // stylesheet's own order. Recover both from the source. See cascade-order.mjs
+  // for the two failures this fixes (`.ta-card h3` and `.ga-grid`).
+  const cascade = readCascadeOrder(readFileSync(join(TMP, 'source.css'), 'utf8'))
+  const bpQuery = new Map((shell.breakpoints ?? []).map((b) => [b.id, b.mediaQuery]))
+  const preludeOf = (contextId) =>
+    contextId.startsWith('media:') ? contextId.slice('media:'.length) : (bpQuery.get(contextId) ?? '')
+
+  /** Re-insert a rule's context keys in the order the stylesheet declares them. */
+  function orderContexts(rule) {
+    const entries = Object.entries(rule.contextStyles ?? {})
+    if (entries.length < 2) return 0
+    const sel = normaliseSelector(rule.selector)
+    const rank = (id) => cascade.context.get(`${sel}|${normaliseMedia(preludeOf(id))}`) ?? -1
+    const sorted = [...entries].sort((a, b) => rank(a[0]) - rank(b[0]))
+    const changed = sorted.some(([id], i) => id !== entries[i][0])
+    if (!changed) return 0
+    rule.contextStyles = Object.fromEntries(sorted)
+    return 1
+  }
+
+  // Drop stale VIEWPORT-context overrides on rules the stylesheet defines.
   //
-  // That flips real pairs. `.pk-more { display: inline-flex }` and
-  // `.pk-readon-block { display: inline-block }` have equal specificity and
-  // sit on the same element; source order decided it, registry order reversed
-  // it, and the read-more links went from inline-flex to inline-block.
+  // `classCss.ts` emits every breakpoint context AFTER every custom condition,
+  // so a breakpoint entry always wins regardless of source order. `:root` still
+  // carried a `desktop` entry from the original per-page import holding the
+  // fluid font tokens; it re-applied `(max-width: 1440px)` after the authored
+  // 479px block and made every mobile font size ~16% too large.
   //
-  // So: every rule the stylesheet defines is re-ordered into ITS source
-  // position, after every rule the stylesheet does not mention. That
-  // reproduces the old "style.css first, then userStyles in file order"
-  // cascade exactly.
+  // A breakpoint context is kept only if the stylesheet actually declares an
+  // override for this selector at that breakpoint's own media query. Anything
+  // else is import residue that the code asset used to mask.
+  let staleContexts = 0
+  for (const id of convertedIds) {
+    const rule = rules[id]
+    if (!rule?.contextStyles) continue
+    const sel = normaliseSelector(rule.selector)
+    for (const ctxId of Object.keys(rule.contextStyles)) {
+      if (!bpQuery.has(ctxId)) continue
+      const declared = cascade.context.has(`${sel}|${normaliseMedia(bpQuery.get(ctxId))}`)
+      if (!declared) {
+        delete rule.contextStyles[ctxId]
+        staleContexts++
+      }
+    }
+  }
+  console.log(`stale breakpoint contexts dropped      ${staleContexts}`)
+
+  const splitSeats = new Map()
   const untouched = Object.values(rules).filter((r) => !convertedIds.has(r.id))
   const orderBase = Math.max(0, ...untouched.map((r) => r.order ?? 0)) + 1
-  let reordered = 0
-  conv.rules.forEach((incoming, index) => {
-    const rule = index2rule.get(index)
-    if (!rule) return
-    const next = orderBase + index
-    if (rule.order !== next) {
-      rule.order = next
-      reordered++
+  // Split out @media overrides that the stylesheet INTERLEAVES.
+  //
+  // Instatic emits a rule as one block: base, then every context override. The
+  // source does not always agree —
+  //
+  //   .vs-row > span      { … }                                   (base, early)
+  //   .vs-head-row > span { … }                                   (must beat it)
+  //   @media(max-width:719px){ .vs-row > span { font-size:.9rem } } (must beat THAT)
+  //
+  // Keeping the override on the early rule lets `.vs-head-row > span` win at
+  // mobile and the comparison table header takes the wrong size. Bumping the
+  // whole rule later instead breaks the desktop case. The only shape that holds
+  // both is a SEPARATE rule carrying just that override, seated at the
+  // override's own source position.
+  //
+  // Only genuinely interleaved contexts are split — one whose source rank has
+  // another converted rule's base sitting between it and its own base. Anything
+  // else stays a context override, where the breakpoint UI can still edit it.
+  const convertedRules = () => [...convertedIds].map((id) => rules[id]).filter(Boolean)
+  const baseRanks = convertedRules()
+    .map((r) => cascade.rule.get(normaliseSelector(r.selector)))
+    .filter((v) => v !== undefined)
+    .sort((a, b) => a - b)
+  const hasBaseBetween = (lo, hi) => baseRanks.some((v) => v > lo && v < hi)
+  let split = 0
+  for (const rule of convertedRules()) {
+    const sel = normaliseSelector(rule.selector)
+    const base = cascade.rule.get(sel)
+    if (base === undefined) continue
+    for (const ctxId of Object.keys(rule.contextStyles ?? {})) {
+      const rc = cascade.context.get(`${sel}|${normaliseMedia(preludeOf(ctxId))}`)
+      if (rc === undefined || rc <= base) continue
+      if (!hasBaseBetween(base, rc)) continue
+      const bag = rule.contextStyles[ctxId]
+      delete rule.contextStyles[ctxId]
+      const clone = {
+        id: nanoid(),
+        name: rule.selector,
+        kind: 'ambient',
+        selector: rule.selector,
+        order: 0, // set below, from rc
+        styles: {},
+        contextStyles: { [ctxId]: bag },
+        createdAt: Date.now(),
+        updatedAt: Date.now(),
+      }
+      rules[clone.id] = clone
+      convertedIds.add(clone.id)
+      splitSeats.set(clone.id, rc)
+      split++
     }
-  })
-  console.log(`rules re-ordered into stylesheet order  ${reordered} (base ${orderBase})`)
+  }
+  if (split) console.log(`interleaved @media overrides split out  ${split}`)
 
+  // Rank by LAST source position; rules the source never names keep the tail.
+  const ranked = [...convertedIds]
+    .map((id) => rules[id])
+    .filter(Boolean)
+    .sort((a, b) => {
+      const ra = splitSeats.get(a.id) ?? cascade.rule.get(normaliseSelector(a.selector)) ?? Number.MAX_SAFE_INTEGER
+      const rb = splitSeats.get(b.id) ?? cascade.rule.get(normaliseSelector(b.selector)) ?? Number.MAX_SAFE_INTEGER
+      return ra - rb
+    })
+  let unranked = 0
+  ranked.forEach((rule, i) => {
+    if (!cascade.rule.has(normaliseSelector(rule.selector))) unranked++
+    rule.order = orderBase + i
+  })
+
+  let ctxFixed = 0
+  for (const rule of ranked) ctxFixed += orderContexts(rule)
+  console.log(`rules re-seated in stylesheet order    ${ranked.length} (base ${orderBase}, ${unranked} not found in source)`)
+  console.log(`rules whose @media order was corrected ${ctxFixed}`)
+
+  // Register BEFORE sorting: a condition appended afterwards keeps the tail of
+  // the array, which is the end of the cascade. That is how `screen and
+  // (max-width: 1440px)` ended up after the 479px block again.
   // Register any @media / @supports context the converter introduced.
   const conditions = shell.conditions ?? (shell.conditions = [])
   const haveCondition = new Set(conditions.map((c) => c.id))
@@ -233,6 +335,69 @@ if (wantMerge) {
     haveCondition.add(cond.id)
     stats.conditionsAdded++
   }
+
+
+  // `classCss.ts` emits custom conditions in **`site.conditions` array order**
+  // (only viewport breakpoints get its max-desc/min-asc sort). So the array is
+  // the cascade for every @media block that is not a site breakpoint, and it
+  // has to be the stylesheet's order or `.bl-grid`'s 1080px block emits before
+  // its 700px one and the blog grid drops from three columns to two.
+  // Ordering by each condition's last position in the source looks right and is
+  // not: a condition appears against many rules, so one global position cannot
+  // honour them all — `.ga-grid` needs 700 before 1100 while an earlier 1100
+  // block pushes it the other way. Use the SAME rule the platform applies to
+  // viewport breakpoints (`compareViewportContextCascade` in classCss.ts):
+  // max-width descending, then min-width ascending. Non-width conditions
+  // (`prefers-reduced-motion`) keep their order and sit last, where they
+  // override rather than get overridden. The conflict check below is what
+  // proves this order actually satisfies every rule in the sheet.
+  // A media TYPE prefix must not hide the width. `screen and (max-width: 479px)`
+  // and `(max-width: 479px)` are the same rung of the cascade, but a pattern
+  // anchored at `(` puts every `screen and …` prelude in the unsorted bucket —
+  // which is how the fluid-root 479px block ended up emitting BEFORE the 1440px
+  // one and every mobile font size came out ~16% too large.
+  const WIDTH_RE = /^\(?\s*(max|min)-width\s*:\s*(\d+(?:\.\d+)?)\s*px\s*\)?$/i
+  const stripMediaType = (q) => q.replace(/^\s*(?:only\s+)?(?:screen|all|print)\s+and\s+/i, '').trim()
+  const conditionRank = (c) => {
+    const m = stripMediaType(normaliseMedia(preludeOf(c.id))).match(WIDTH_RE)
+    if (!m) return [2, 0]
+    return m[1].toLowerCase() === 'max' ? [0, -Number(m[2])] : [1, Number(m[2])]
+  }
+  const beforeOrder = (shell.conditions ?? []).map((c) => c.id)
+  shell.conditions = [...(shell.conditions ?? [])]
+    .map((c, i) => ({ c, i, r: conditionRank(c) }))
+    .sort((a, b) => a.r[0] - b.r[0] || a.r[1] - b.r[1] || a.i - b.i)
+    .map((x) => x.c)
+  const movedConditions = shell.conditions.filter((c, i) => c.id !== beforeOrder[i]).length
+  console.log(`conditions re-ordered                  ${movedConditions} of ${shell.conditions.length}`)
+
+  // A single global array cannot satisfy two rules that need opposite orders.
+  // Say so rather than shipping a silent conflict.
+  const conditionPos = new Map(shell.conditions.map((c, i) => [c.id, i]))
+  let conflicts = 0
+  for (const rule of ranked) {
+    const ids = Object.keys(rule.contextStyles ?? {}).filter((id) => conditionPos.has(id))
+    const sel = normaliseSelector(rule.selector)
+    for (let i = 0; i < ids.length; i++) {
+      for (let j = i + 1; j < ids.length; j++) {
+        const [x, y] = [ids[i], ids[j]]
+        const sx = cascade.context.get(`${sel}|${normaliseMedia(preludeOf(x))}`)
+        const sy = cascade.context.get(`${sel}|${normaliseMedia(preludeOf(y))}`)
+        if (sx === undefined || sy === undefined) continue
+        // Two contexts only contend if they set the same property. The fluid
+        // `screen and (max-width: …)` blocks write `--font-*` while the token
+        // blocks write `--t-*`; whichever emits first, the result is identical.
+        const bagX = rule.contextStyles[x] ?? {}
+        const bagY = rule.contextStyles[y] ?? {}
+        if (!Object.keys(bagX).some((k) => k in bagY)) continue
+        if ((sx - sy) * (conditionPos.get(x) - conditionPos.get(y)) < 0) {
+          conflicts++
+          console.warn(`  ! ${sel} wants ${preludeOf(x)} and ${preludeOf(y)} in the opposite order`)
+        }
+      }
+    }
+  }
+  if (conflicts) console.warn(`  ${conflicts} rule/condition order conflicts — a global array cannot express these`)
 
   console.log(`empty rules filled     ${stats.filled}`)
   console.log(`live rules merged      ${stats.merged}`)
