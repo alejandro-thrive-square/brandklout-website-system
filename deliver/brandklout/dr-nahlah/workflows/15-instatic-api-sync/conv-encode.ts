@@ -38,6 +38,19 @@ function splitDeclarations(body: string): string[] {
   return out
 }
 
+/** Count top-level (comma-separated) layers in a CSS list value. */
+function countLayers(value: string): number {
+  let depth = 0, n = 1, quote = ''
+  for (const ch of value) {
+    if (quote) { if (ch === quote) quote = ''; continue }
+    if (ch === '"' || ch === "'") { quote = ch; continue }
+    if (ch === '(' || ch === '[') depth++
+    else if (ch === ')' || ch === ']') depth--
+    else if (ch === ',' && depth === 0) n++
+  }
+  return n
+}
+
 /**
  * Does happy-dom keep this declaration at all?
  *
@@ -46,6 +59,20 @@ function splitDeclarations(body: string): string[] {
  * the parser also rejects the modern viewport units. So ask it directly:
  * set the declaration on a real sheet and see whether anything survives.
  * `length === 0` means the declaration was dropped and must be encoded.
+ *
+ * A surviving declaration is not necessarily an INTACT one. happy-dom's
+ * `background` SHORTHAND parser understands a single layer, so
+ * `background: radial(), linear(), linear()` comes back as the LAST layer plus
+ * a row of `initial` longhands — `length > 0`, so the probe above passes it,
+ * and two gradients are gone with no warning. That flattened the hero scrim on
+ * 27 pages: the lost `linear-gradient(100deg,...)` was the horizontal cream
+ * floor under the copy column, so the H1 ended up on bare photograph. The
+ * `background-image` LONGHAND parses layers correctly, which is why
+ * `.ct-form select`'s two-layer arrow survived the same run.
+ *
+ * So also assert no LAYERS were lost: if the input has N top-level layers and
+ * no longhand the parser produced carries N, the value was flattened and must
+ * be encoded verbatim. Single-layer values are untouched by this check.
  *
  * This deliberately leaves declarations the parser DOES understand alone, so
  * `padding: 1rem` still expands to four longhands and stays editable in the
@@ -63,6 +90,16 @@ function survivesParse(prop: string, value: string): boolean {
     sheet.replaceSync(`x{${prop}:${value}}`)
     const rule = sheet.cssRules[0]
     ok = Boolean(rule && rule.style && rule.style.length > 0)
+    if (ok) {
+      const want = countLayers(value)
+      if (want > 1) {
+        let best = 0
+        for (let i = 0; i < rule.style.length; i++) {
+          best = Math.max(best, countLayers(rule.style.getPropertyValue(rule.style[i]) ?? ''))
+        }
+        if (best < want) ok = false
+      }
+    }
   } catch {
     ok = false
   }

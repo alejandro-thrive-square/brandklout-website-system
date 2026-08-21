@@ -76,6 +76,7 @@ Every one of these shipped a regression before the parity gate caught it. None a
 - **CSRF, not permissions.** Every state-changing request is checked against `PUBLIC_ORIGIN`. A missing or foreign `Origin` header returns 403 "invalid origin", which reads exactly like a capability problem. The client always sends the canonical origin.
 - **Publishing needs step-up auth.** `POST /publish` answers `401 {"error":"step_up_required"}` until the password is re-entered, and the step-up **rotates the session token** — miss the new cookie and every later request 401s.
 - **`@media(min-width:720px)` with no space converts to NOTHING, silently.** Browsers accept the space-less prelude; happy-dom does not, and `cssToStyleRules` returns zero rules and zero warnings for the whole block. 52 of this site's 64 media blocks are that form.
+- **A surviving declaration is not an intact one: multi-layer `background` is flattened to its LAST layer.** happy-dom's `background` SHORTHAND parser handles one layer, so `background: radial(), linear(), linear()` returns the last gradient plus a row of `initial` longhands. That is `length > 0`, so the "did the parser drop it?" probe passes it and two layers vanish with no warning. The `background-image` LONGHAND parses layers correctly — which is why `.ct-form select`'s two-layer arrow survived the same run that gutted the hero. **The probe now also asserts no layers were lost** (`conv-encode.ts`): if the input has N top-level layers and no longhand the parser produced carries N, the declaration is encoded verbatim. Verified against real happy-dom on the container across `background`, `background-image`, `font-family`, `transition` and `box-shadow`, with no false positives.
 - **happy-dom drops declarations whose values it cannot evaluate** — `padding: clamp(...)`, `margin-top: clamp(...)`, `width: min(...)`, `height: 100svh`. Instatic's substitution encoder covers only `var()`/`env()`. Widen it, and trigger it by **probing the real parser** (`length === 0` after `replaceSync`), not by listing function names: the list version still missed `100svh`.
 - **A converter class rule's `name` is not its selector.** 144 of 286 carry a descendant selector with a binding name from the last class token (`.ch-difference .df-stat b` is named `df-stat`). **Match by selector, never by name** — matching by name put the number's display type on its container.
 - **Never create new rules as `kind: 'class'`.** A class rule survives publish only if its id is in some `node.classIds`; a rule you just invented is referenced by nothing and is deleted on the next publish. Create ambient.
@@ -90,6 +91,7 @@ Once the code asset is off, `rule.order` and condition order are the only tiebre
 
 ### The parity gate itself
 
+- **`getComputedStyle(el)` cannot see `::before` / `::after`, and this design keeps its scrims there.** The gate reported **0 differences on 557,670 values** while two overlay gradients were flattened, because it never sampled a pseudo-element. It now walks `[null, '::before', '::after']` and skips pseudos whose `content` is `none` (recording them would add two empty bags per element and swamp the diff). Coverage went 557,670 -> 592,834 values. A parity gate is only as good as the surfaces it samples: **if a defect is invisible to the gate, a green gate is not evidence.**
 - **`--window-size` is not the viewport.** Headless does not reliably derive one from the other; the first version of this gate ran at some unknown narrow width, so it reported 26 differences while the desktop layout had **1,290**. Pin it with `Emulation.setDeviceMetricsOverride` and assert `innerWidth` before capturing. Gate desktop and mobile as separate snapshots.
 - **Verify against a fresh read, never the object you sent**, and against the served URL, never the registry read-back.
 - **Publishing ships the whole draft**, including anyone else's in-progress work. No script here publishes; it is always a separate, announced step.
@@ -140,12 +142,37 @@ Related: `published_runtime_assets.public_path` is **version-scoped**
 asset a current page references. Verify it anyway - compare active-version asset counts
 either side of the prune.
 
+## Repairing flattened multi-layer backgrounds
+
+```bash
+node repair-multilayer-backgrounds.mjs           # report
+node repair-multilayer-backgrounds.mjs --apply   # write the draft
+```
+
+Reads the **local build** as the source of truth, finds every multi-layer
+`background`/`background-image` in it, and repairs any registry rule carrying
+fewer layers. It is re-runnable and reports `nothing to do` when clean, so it
+doubles as a check. It writes the draft only; publish is a separate step.
+
+Two rules on this site were hit, both `::after` overlays:
+
+| rule | was | now |
+|---|---|---|
+| `.pg-hero .ph-bg::after` | 1 layer | 3 layers |
+| `.ch-proof .pf-film::after` | 1 layer | 2 layers |
+
+The hero one was the visible defect. The lost `linear-gradient(100deg,...)` is
+the horizontal cream scrim that puts a floor under the copy column, so on all
+27 interior pages the H1 was sitting on bare photograph.
+
 ## Output Artifacts
 - `.tmp/parity-<label>.json` — computed-style snapshots (28 pages, ~557k values, deterministic across runs)
 - `.tmp/shell.before.<seq>.json` / `.tmp/shell.after.<seq>.json` — shell state either side of a write
 - `.tmp/conv-out.json` — converted rules, conditions and warnings
 - `.tmp/site.css.published` / `.tmp/site.css.draft-before` — repair evidence
 - `prune-versions.mjs` + `prune-versions.container.ts` — volume reclamation (see above)
+- `repair-multilayer-backgrounds.mjs` — restores gradient layers the shorthand parser flattened
+- `.tmp/parity-pseudo-before-1440.json` / `.tmp/parity-pseudo-after-1440.json` — the 28-difference proof that only the two `::after` overlays moved
 
 ## Version Control
 Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). Scripts and `.md` are committed; `.tmp/` snapshots are lightweight and may be committed when useful. `.tmp/.session` holds a live session cookie and must never be committed.
