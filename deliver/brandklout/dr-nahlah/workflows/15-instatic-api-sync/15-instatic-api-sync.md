@@ -165,8 +165,33 @@ The hero one was the visible defect. The lost `linear-gradient(100deg,...)` is
 the horizontal cream scrim that puts a floor under the copy column, so on all
 27 interior pages the H1 was sitting on bare photograph.
 
+## Pushing a code asset (`site.js` and friends)
+
+```bash
+node push-script-asset.mjs src/scripts/site.js ../04-design/.tmp/final-site/assets/site.js
+node push-script-asset.mjs src/scripts/site.js ../04-design/.tmp/final-site/assets/site.js --apply
+node insta-api.mjs publish
+```
+
+Code assets are just `files[]` entries in the site shell with their `content`
+inline, and `PUT /site-document` is atomic with an optimistic `seq` check, so the
+whole file goes in **one** write and a concurrent edit is rejected rather than
+interleaved.
+
+Prefer this over `13-content-export-import/.tmp/push-site-js.mjs`, which drives the
+MCP bridge (needs the editor open in a browser) and writes in ~10 KB chunks. That
+chunked path is what silently truncated the draft `site.css` once, losing its
+opening 13.7 KB.
+
+The banner and the `/*__wz_end__*/` sentinel are carried over from whatever is
+already on the asset rather than assumed — the sentinel is how a truncated write is
+detected later, so a push that dropped it would disarm that check. The script reads
+the asset back after writing and refuses to report success unless it is byte-exact,
+because **this platform reports some write failures as prose with a 200**.
+
 ## Output Artifacts
 - `.tmp/parity-<label>.json` — computed-style snapshots (28 pages, ~557k values, deterministic across runs)
+- `push-script-asset.mjs` — headless single-write replacement of one code asset's content
 - `.tmp/shell.before.<seq>.json` / `.tmp/shell.after.<seq>.json` — shell state either side of a write
 - `.tmp/conv-out.json` — converted rules, conditions and warnings
 - `.tmp/site.css.published` / `.tmp/site.css.draft-before` — repair evidence

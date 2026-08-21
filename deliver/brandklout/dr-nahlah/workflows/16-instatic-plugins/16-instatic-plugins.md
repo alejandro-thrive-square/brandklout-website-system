@@ -60,6 +60,36 @@ Lives in `15-instatic-api-sync/`. It injects the real LeadConnector snippet into
 | `--frame` only | `BLOCKED` | **loads**, cross-origin document |
 | `--frame --script` | `LOADED` | **loads**, and **zero CSP violation events** |
 
+## LIVE on Dr. Nahlah, 2026-08-22 — on `frame-src` alone
+
+The Google review widget is now the real vendor widget on `encorercm.com`, and **`script-src` was never granted**.
+
+That is worth stating plainly because the obvious reading of the table above is that a working widget costs both directives. It does not. The vendor's parent script has exactly one job — resize the iframe from the `lc.setHeight` message the frame posts — and **the frame posts that message whether or not the script is there**:
+
+```bash
+node probe-widget-postmessage.mjs
+#   messages received  2
+#     {"id":"iframe-ready"}
+#     ["lc.setHeight",{"height":1968,"widgetId":"6a73…"}]
+#   RESULT  the widget self-reports … `frame-src` alone is sufficient
+```
+
+The probe serves a bare page from localhost with no CSP and no vendor script, so it answers the question off the client's site entirely. `site.js` now applies that height itself and **does not inject the vendor script** (`04-design/.tmp/site-src/sections/ch-proof.js`).
+
+**Always run this probe before granting a script origin.** The difference is not cosmetic: `script-src https://vendor` lets that origin run arbitrary JavaScript against the document, its storage and its cookies. A cross-origin iframe can do none of that. Many widgets ship a parent script that is pure convenience, and a five-minute probe is what tells you which kind you have.
+
+The trap that made this non-obvious: `site.js` wired `sc.onerror = reject`, so with `frame-src` widened and `script-src` not, the blocked script tore the *working* widget back down. The low-risk half of the allowlist looked useless when it was only the client code that insisted on the script.
+
+Gates on the published site, all green at 1440 **and** 390:
+
+```bash
+node ../04-design/.tmp/probe-rv-live.mjs https://encorercm.com/                     # upgrades
+node ../04-design/.tmp/probe-rv-live.mjs https://encorercm.com/ --viewport=390,844  # upgrades, reflows
+node ../04-design/.tmp/probe-rv-live.mjs https://encorercm.com/ --block             # falls back to cards
+```
+
+The two viewports report different heights (884 px and 2156 px), which is the postMessage sizing doing its job rather than a fixed number baked in.
+
 ## Gotchas
 
 - **`Compress-Archive` writes BACKSLASH entry names on Windows.** The host looks up `server/index.js` by its manifest path, so a backslashed entry installs a plugin whose entrypoint can never be found — and it surfaces later as a plugin parked in `error`, not as a bad zip. `pack-plugin.mjs` writes the zip by hand for this reason.
@@ -68,7 +98,8 @@ Lives in `15-instatic-api-sync/`. It injects the real LeadConnector snippet into
 - **`GET .../settings` returns `{ schema: [...], settings: {...} }`** — the values are an OBJECT keyed by setting id, not the schema array. Iterating `settings` as an array throws `object is not iterable`.
 - **Origins are validated, not escaped.** A pasted `https://x.com; default-src *` is *rejected* by `ORIGIN_RE`, not sanitised, so a bad line can never inject a directive. Covered by `test-embed-origins.mjs`.
 - **`'none'` is replaced, never appended to.** `frame-src 'none' https://x` is invalid CSP and would block everything; the plugin drops `'none'` when it adds a real source, matching the host's own `addCspSources`.
-- **Adding a `script-src` origin lets that origin run arbitrary JavaScript on the site.** It is a real security decision, not a formality — `frame-src` alone is the low-risk half, because a cross-origin iframe cannot touch the parent document. Grant the script origin only when the widget genuinely needs it.
+- **Adding a `script-src` origin lets that origin run arbitrary JavaScript on the site.** It is a real security decision, not a formality — `frame-src` alone is the low-risk half, because a cross-origin iframe cannot touch the parent document. Grant the script origin only when the widget genuinely needs it, and prove that it does with `probe-widget-postmessage.mjs` first: on Dr. Nahlah the answer was no.
+- **`Network.setBlockedURLs` cannot block a cross-origin iframe.** It is scoped to the CDP session it is sent on, and the widget frame is out-of-process with its own target, so a "blocked" run in `probe-rv-live.mjs` was quietly loading the widget and passing for the wrong reason. Block at the browser instead: `--host-resolver-rules=MAP vendor.example 127.0.0.1:1`. The old form only ever worked because the thing being blocked was a script the MAIN frame requested.
 
 ## Security posture
 
@@ -90,7 +121,7 @@ Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTR
 
 ## Technical Setup
 
-- **Executor status**: Working. Installed and verified live on `encorercm.com` (Dr. Nahlah) on 2026-08-22, then returned to the locked-down default.
+- **Executor status**: Working. Installed and verified live on `encorercm.com` (Dr. Nahlah) on 2026-08-22. Current allowlist: `frameOrigins = https://reputationhub.site`, script and connect **empty** — the Google review widget runs on `frame-src` alone.
 - **Credentials**: reuses `15-instatic-api-sync/insta-api.mjs` and the repo-root `.env`.
 - **Endpoints**: `POST /admin/api/cms/plugins/inspect-package`, `POST /admin/api/cms/plugins/package`, `GET|PUT /admin/api/cms/plugins/:id/settings`.
 
@@ -100,6 +131,7 @@ Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTR
 - `install-plugin.mjs` — inspect + install with an explicit permission grant
 - `set-origins.mjs` — read / set / clear the allowlist
 - `test-embed-origins.mjs` — offline unit tests for the filter
+- `probe-widget-postmessage.mjs` — does a widget self-report its height, or does it really need the vendor's parent script? Run this BEFORE granting any `script-src` origin.
 - `.tmp/embed-origins.zip` — the built package
 
 ## Version Control
