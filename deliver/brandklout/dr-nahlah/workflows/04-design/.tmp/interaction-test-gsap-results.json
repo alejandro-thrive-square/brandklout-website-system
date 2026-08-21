@@ -67,7 +67,7 @@
   {
     "name": "page has real scroll height",
     "pass": true,
-    "detail": "18764px"
+    "detail": "18794px"
   },
   {
     "name": "chapter 01 words brighten with scroll",
@@ -282,7 +282,7 @@
   {
     "name": "drawer holds real page links, not just chapter anchors",
     "pass": true,
-    "detail": "25 page links"
+    "detail": "26 page links"
   },
   {
     "name": "drawer closes on Escape",

@@ -1,0 +1,3937 @@
+{
+  "source": "Generated paste payload styleLess var() references",
+  "note": "Use Webflow MCP style_tool after paste. Designer variable mapping requires properties[].variable_as_value = variable_id.",
+  "styleTool": {
+    "actions": []
+  },
+  "bindings": [
+    {
+      "section": "01_nav",
+      "className": "implant-cost-header",
+      "sourceStyleId": "6d823682-da20-40be-a1c8-fb867bba0420",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "implant-cost-header",
+      "sourceStyleId": "6d823682-da20-40be-a1c8-fb867bba0420",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-body)",
+      "cssNames": [
+        "--f-body"
+      ],
+      "sourceNames": [
+        "--f-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-body",
+        "cssName": "--f-body"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "implant-cost-header",
+      "sourceStyleId": "6d823682-da20-40be-a1c8-fb867bba0420",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "nav-progress",
+      "sourceStyleId": "49bd273d-5733-4456-a0e8-a5282e65c6ec",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--line-2)",
+      "cssNames": [
+        "--line-2"
+      ],
+      "sourceNames": [
+        "--line-2"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-progress",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line-2",
+        "cssName": "--line-2"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "implant-cost-i",
+      "sourceStyleId": "ddfbf427-aa16-42ca-bb03-ee0a962ced38",
+      "variant": "base",
+      "property": "background",
+      "value": "linear-gradient(90deg,var(--gold-deep),var(--gold) 55%,var(--gold-light))",
+      "cssNames": [
+        "--gold-deep",
+        "--gold",
+        "--gold-light"
+      ],
+      "sourceNames": [
+        "--gold-deep",
+        "--gold",
+        "--gold-light"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "01_nav",
+      "className": "wrap",
+      "sourceStyleId": "4643164e-15e2-4abc-962a-1202e1c25105",
+      "variant": "base",
+      "property": "max-width",
+      "value": "var(--maxw)",
+      "cssNames": [
+        "--maxw"
+      ],
+      "sourceNames": [
+        "--maxw"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "max-width",
+          "variable_as_value": ""
+        },
+        "sourceName": "--maxw",
+        "cssName": "--maxw"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "wrap",
+      "sourceStyleId": "4643164e-15e2-4abc-962a-1202e1c25105",
+      "variant": "base",
+      "property": "padding-right",
+      "value": "var(--gutter)",
+      "cssNames": [
+        "--gutter"
+      ],
+      "sourceNames": [
+        "--gutter"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "padding-right",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gutter",
+        "cssName": "--gutter"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "wrap",
+      "sourceStyleId": "4643164e-15e2-4abc-962a-1202e1c25105",
+      "variant": "base",
+      "property": "padding-left",
+      "value": "calc(var(--gutter) + var(--rail))",
+      "cssNames": [
+        "--gutter",
+        "--rail"
+      ],
+      "sourceNames": [
+        "--gutter",
+        "--rail"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "01_nav",
+      "className": "no-rail",
+      "sourceStyleId": "c312fecb-b047-43a4-9e97-555f757a7945",
+      "variant": "base",
+      "property": "padding-left",
+      "value": "var(--gutter)",
+      "cssNames": [
+        "--gutter"
+      ],
+      "sourceNames": [
+        "--gutter"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "no-rail",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "padding-left",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gutter",
+        "cssName": "--gutter"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "nav-links",
+      "sourceStyleId": "8c218549-ede4-463c-9ec3-c8d6a2fead0a",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--label)",
+      "cssNames": [
+        "--label"
+      ],
+      "sourceNames": [
+        "--label"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-links",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--label",
+        "cssName": "--label"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "implant-cost-a",
+      "sourceStyleId": "7aab384e-8a3a-4f4e-b1e7-2bb7f22b857d",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--accent)",
+      "cssNames": [
+        "--accent"
+      ],
+      "sourceNames": [
+        "--accent"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--accent",
+        "cssName": "--accent"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "implant-cost-a",
+      "sourceStyleId": "7aab384e-8a3a-4f4e-b1e7-2bb7f22b857d",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "a-after",
+      "sourceStyleId": "c2e5377a-6dcd-49ef-9712-f58316111ea5",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--rule)",
+      "cssNames": [
+        "--rule"
+      ],
+      "sourceNames": [
+        "--rule"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "a-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--rule",
+        "cssName": "--rule"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "implant-cost-a-2",
+      "sourceStyleId": "a94f2bbb-976e-44ad-8e1c-92296c8ddc7b",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-soft)",
+      "cssNames": [
+        "--fg-soft"
+      ],
+      "sourceNames": [
+        "--fg-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-soft",
+        "cssName": "--fg-soft"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "implant-cost-a-2",
+      "sourceStyleId": "a94f2bbb-976e-44ad-8e1c-92296c8ddc7b",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a-2",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "a-after-2",
+      "sourceStyleId": "5171f9a6-38a2-4ab4-ae05-fb504a6b530c",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--rule)",
+      "cssNames": [
+        "--rule"
+      ],
+      "sourceNames": [
+        "--rule"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "a-after-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--rule",
+        "cssName": "--rule"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "nav-cta",
+      "sourceStyleId": "3850970d-fb51-4992-915d-b1fcee7b7cdb",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--rule)",
+      "cssNames": [
+        "--rule"
+      ],
+      "sourceNames": [
+        "--rule"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--rule",
+        "cssName": "--rule"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "nav-cta",
+      "sourceStyleId": "3850970d-fb51-4992-915d-b1fcee7b7cdb",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--rule)",
+      "cssNames": [
+        "--rule"
+      ],
+      "sourceNames": [
+        "--rule"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--rule",
+        "cssName": "--rule"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "nav-cta",
+      "sourceStyleId": "3850970d-fb51-4992-915d-b1fcee7b7cdb",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--rule)",
+      "cssNames": [
+        "--rule"
+      ],
+      "sourceNames": [
+        "--rule"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--rule",
+        "cssName": "--rule"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "nav-cta",
+      "sourceStyleId": "3850970d-fb51-4992-915d-b1fcee7b7cdb",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--rule)",
+      "cssNames": [
+        "--rule"
+      ],
+      "sourceNames": [
+        "--rule"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--rule",
+        "cssName": "--rule"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "nav-cta",
+      "sourceStyleId": "3850970d-fb51-4992-915d-b1fcee7b7cdb",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "nav-cta",
+      "sourceStyleId": "3850970d-fb51-4992-915d-b1fcee7b7cdb",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--label)",
+      "cssNames": [
+        "--label"
+      ],
+      "sourceNames": [
+        "--label"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--label",
+        "cssName": "--label"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "nav-cta",
+      "sourceStyleId": "3850970d-fb51-4992-915d-b1fcee7b7cdb",
+      "variant": "main_hover",
+      "property": "background",
+      "value": "var(--gold-deep)",
+      "cssNames": [
+        "--gold-deep"
+      ],
+      "sourceNames": [
+        "--gold-deep"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-cta",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold-deep",
+        "cssName": "--gold-deep"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "nav-cta",
+      "sourceStyleId": "3850970d-fb51-4992-915d-b1fcee7b7cdb",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--white)",
+      "cssNames": [
+        "--white"
+      ],
+      "sourceNames": [
+        "--white"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-cta",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--white",
+        "cssName": "--white"
+      }
+    },
+    {
+      "section": "01_nav",
+      "className": "nav-close",
+      "sourceStyleId": "f2bced41-3ecc-43ea-9d70-5e1d642cd61e",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--label)",
+      "cssNames": [
+        "--label"
+      ],
+      "sourceNames": [
+        "--label"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nav-close",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--label",
+        "cssName": "--label"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-header",
+      "sourceStyleId": "6d823682-da20-40be-a1c8-fb867bba0420",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-header",
+      "sourceStyleId": "6d823682-da20-40be-a1c8-fb867bba0420",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-body)",
+      "cssNames": [
+        "--f-body"
+      ],
+      "sourceNames": [
+        "--f-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-body",
+        "cssName": "--f-body"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-header",
+      "sourceStyleId": "6d823682-da20-40be-a1c8-fb867bba0420",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-header",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "drawer",
+      "sourceStyleId": "8e411a7c-89c2-4889-981e-633975c9e51a",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--ink-900)",
+      "cssNames": [
+        "--ink-900"
+      ],
+      "sourceNames": [
+        "--ink-900"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "drawer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-900",
+        "cssName": "--ink-900"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "drawer",
+      "sourceStyleId": "8e411a7c-89c2-4889-981e-633975c9e51a",
+      "variant": "base",
+      "property": "padding-right",
+      "value": "var(--gutter)",
+      "cssNames": [
+        "--gutter"
+      ],
+      "sourceNames": [
+        "--gutter"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "drawer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "padding-right",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gutter",
+        "cssName": "--gutter"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "drawer",
+      "sourceStyleId": "8e411a7c-89c2-4889-981e-633975c9e51a",
+      "variant": "base",
+      "property": "padding-left",
+      "value": "var(--gutter)",
+      "cssNames": [
+        "--gutter"
+      ],
+      "sourceNames": [
+        "--gutter"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "drawer",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "padding-left",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gutter",
+        "cssName": "--gutter"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "dr-grid",
+      "sourceStyleId": "ba28b349-06e4-4870-a02f-ea0a044537de",
+      "variant": "base",
+      "property": "max-width",
+      "value": "var(--maxw)",
+      "cssNames": [
+        "--maxw"
+      ],
+      "sourceNames": [
+        "--maxw"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "dr-grid",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "max-width",
+          "variable_as_value": ""
+        },
+        "sourceName": "--maxw",
+        "cssName": "--maxw"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-h4",
+      "sourceStyleId": "3ae75707-0bf1-4247-8f3a-1e29301f2ffe",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-body)",
+      "cssNames": [
+        "--f-body"
+      ],
+      "sourceNames": [
+        "--f-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h4",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-body",
+        "cssName": "--f-body"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-h4",
+      "sourceStyleId": "3ae75707-0bf1-4247-8f3a-1e29301f2ffe",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h4",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-h4",
+      "sourceStyleId": "3ae75707-0bf1-4247-8f3a-1e29301f2ffe",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--label)",
+      "cssNames": [
+        "--label"
+      ],
+      "sourceNames": [
+        "--label"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h4",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--label",
+        "cssName": "--label"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-a-4",
+      "sourceStyleId": "24af31d9-0f69-43b1-95f9-a672ad3129dc",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-display)",
+      "cssNames": [
+        "--f-display"
+      ],
+      "sourceNames": [
+        "--f-display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a-4",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-display",
+        "cssName": "--f-display"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-a-4",
+      "sourceStyleId": "24af31d9-0f69-43b1-95f9-a672ad3129dc",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--gold-light)",
+      "cssNames": [
+        "--gold-light"
+      ],
+      "sourceNames": [
+        "--gold-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a-4",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold-light",
+        "cssName": "--gold-light"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "dr-foot",
+      "sourceStyleId": "ca6108ae-609e-47da-b1a1-ed06dde985e7",
+      "variant": "base",
+      "property": "max-width",
+      "value": "var(--maxw)",
+      "cssNames": [
+        "--maxw"
+      ],
+      "sourceNames": [
+        "--maxw"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "dr-foot",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "max-width",
+          "variable_as_value": ""
+        },
+        "sourceName": "--maxw",
+        "cssName": "--maxw"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-b",
+      "sourceStyleId": "d205ffa8-c792-49a8-91fd-1a1b9006b447",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-body)",
+      "cssNames": [
+        "--f-body"
+      ],
+      "sourceNames": [
+        "--f-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-b",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-body",
+        "cssName": "--f-body"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-b",
+      "sourceStyleId": "d205ffa8-c792-49a8-91fd-1a1b9006b447",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--label)",
+      "cssNames": [
+        "--label"
+      ],
+      "sourceNames": [
+        "--label"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-b",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--label",
+        "cssName": "--label"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-b",
+      "sourceStyleId": "d205ffa8-c792-49a8-91fd-1a1b9006b447",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-b",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "02_drawer",
+      "className": "implant-cost-a-5",
+      "sourceStyleId": "42fc8566-7c41-4ad3-938c-8a114ac29ad0",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--gold-light)",
+      "cssNames": [
+        "--gold-light"
+      ],
+      "sourceNames": [
+        "--gold-light"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a-5",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold-light",
+        "cssName": "--gold-light"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "wrap",
+      "sourceStyleId": "4643164e-15e2-4abc-962a-1202e1c25105",
+      "variant": "base",
+      "property": "max-width",
+      "value": "var(--maxw)",
+      "cssNames": [
+        "--maxw"
+      ],
+      "sourceNames": [
+        "--maxw"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "max-width",
+          "variable_as_value": ""
+        },
+        "sourceName": "--maxw",
+        "cssName": "--maxw"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "wrap",
+      "sourceStyleId": "4643164e-15e2-4abc-962a-1202e1c25105",
+      "variant": "base",
+      "property": "padding-right",
+      "value": "var(--gutter)",
+      "cssNames": [
+        "--gutter"
+      ],
+      "sourceNames": [
+        "--gutter"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "padding-right",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gutter",
+        "cssName": "--gutter"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "wrap",
+      "sourceStyleId": "4643164e-15e2-4abc-962a-1202e1c25105",
+      "variant": "base",
+      "property": "padding-left",
+      "value": "calc(var(--gutter) + var(--rail))",
+      "cssNames": [
+        "--gutter",
+        "--rail"
+      ],
+      "sourceNames": [
+        "--gutter",
+        "--rail"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-div-2",
+      "sourceStyleId": "2ab2702d-017d-4775-aef0-76fed0ccaf0a",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-div-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-div-2",
+      "sourceStyleId": "2ab2702d-017d-4775-aef0-76fed0ccaf0a",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-body)",
+      "cssNames": [
+        "--f-body"
+      ],
+      "sourceNames": [
+        "--f-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-div-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-body",
+        "cssName": "--f-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-div-2",
+      "sourceStyleId": "2ab2702d-017d-4775-aef0-76fed0ccaf0a",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--body)",
+      "cssNames": [
+        "--body"
+      ],
+      "sourceNames": [
+        "--body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-div-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body",
+        "cssName": "--body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pg-hero",
+      "sourceStyleId": "b4842de1-aa70-44bc-8dfc-4924f20e7b9a",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--bg)",
+      "cssNames": [
+        "--bg"
+      ],
+      "sourceNames": [
+        "--bg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pg-hero",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bg",
+        "cssName": "--bg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "wrap",
+      "sourceStyleId": "4c48a8cf-4421-478a-bd3f-46cd1c0cac13",
+      "variant": "base",
+      "property": "max-width",
+      "value": "var(--maxw)",
+      "cssNames": [
+        "--maxw"
+      ],
+      "sourceNames": [
+        "--maxw"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "max-width",
+          "variable_as_value": ""
+        },
+        "sourceName": "--maxw",
+        "cssName": "--maxw"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "wrap",
+      "sourceStyleId": "4c48a8cf-4421-478a-bd3f-46cd1c0cac13",
+      "variant": "base",
+      "property": "padding-right",
+      "value": "var(--gutter)",
+      "cssNames": [
+        "--gutter"
+      ],
+      "sourceNames": [
+        "--gutter"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "padding-right",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gutter",
+        "cssName": "--gutter"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "wrap",
+      "sourceStyleId": "4c48a8cf-4421-478a-bd3f-46cd1c0cac13",
+      "variant": "base",
+      "property": "padding-left",
+      "value": "calc(var(--gutter) + var(--rail))",
+      "cssNames": [
+        "--gutter",
+        "--rail"
+      ],
+      "sourceNames": [
+        "--gutter",
+        "--rail"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-crumb",
+      "sourceStyleId": "4e230784-54ed-42e8-ac16-ffc4f0c9680b",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-soft)",
+      "cssNames": [
+        "--fg-soft"
+      ],
+      "sourceNames": [
+        "--fg-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-crumb",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-soft",
+        "cssName": "--fg-soft"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-a-6",
+      "sourceStyleId": "ef60d8b4-8e30-4dc3-9662-66e14a46e930",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--accent)",
+      "cssNames": [
+        "--accent"
+      ],
+      "sourceNames": [
+        "--accent"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a-6",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--accent",
+        "cssName": "--accent"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-i-2",
+      "sourceStyleId": "537e03d7-3b60-484f-83f3-021604c735a8",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--line-strong)",
+      "cssNames": [
+        "--line-strong"
+      ],
+      "sourceNames": [
+        "--line-strong"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-i-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line-strong",
+        "cssName": "--line-strong"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h1",
+      "sourceStyleId": "881470b9-ab63-481c-8805-fb4395c6d127",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-display)",
+      "cssNames": [
+        "--f-display"
+      ],
+      "sourceNames": [
+        "--f-display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h1",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-display",
+        "cssName": "--f-display"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h1",
+      "sourceStyleId": "881470b9-ab63-481c-8805-fb4395c6d127",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h1",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h1",
+      "sourceStyleId": "881470b9-ab63-481c-8805-fb4395c6d127",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--d2)",
+      "cssNames": [
+        "--d2"
+      ],
+      "sourceNames": [
+        "--d2"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h1",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--d2",
+        "cssName": "--d2"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-em",
+      "sourceStyleId": "fa81eadc-b36d-41e2-b661-01d0c1826e21",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--accent-lg)",
+      "cssNames": [
+        "--accent-lg"
+      ],
+      "sourceNames": [
+        "--accent-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-em",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--accent-lg",
+        "cssName": "--accent-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ph-lead",
+      "sourceStyleId": "6b70458d-2d32-4a14-ae35-ae7f4d4b5197",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ph-lead",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ph-lead",
+      "sourceStyleId": "6b70458d-2d32-4a14-ae35-ae7f4d4b5197",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--body-lg)",
+      "cssNames": [
+        "--body-lg"
+      ],
+      "sourceNames": [
+        "--body-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ph-lead",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body-lg",
+        "cssName": "--body-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn",
+      "sourceStyleId": "1e55873c-4b9a-4477-bce0-51ffe573fd6c",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--label)",
+      "cssNames": [
+        "--label"
+      ],
+      "sourceNames": [
+        "--label"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--label",
+        "cssName": "--label"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn",
+      "sourceStyleId": "1e55873c-4b9a-4477-bce0-51ffe573fd6c",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--bg)",
+      "cssNames": [
+        "--bg"
+      ],
+      "sourceNames": [
+        "--bg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bg",
+        "cssName": "--bg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-primary",
+      "sourceStyleId": "43d209c4-e53b-4c3d-b5be-bc962d57558e",
+      "variant": "base",
+      "property": "background",
+      "value": "linear-gradient(100deg,var(--gold-deep),var(--gold) 45%,var(--gold-light))",
+      "cssNames": [
+        "--gold-deep",
+        "--gold",
+        "--gold-light"
+      ],
+      "sourceNames": [
+        "--gold-deep",
+        "--gold",
+        "--gold-light"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-primary",
+      "sourceStyleId": "43d209c4-e53b-4c3d-b5be-bc962d57558e",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--black)",
+      "cssNames": [
+        "--black"
+      ],
+      "sourceNames": [
+        "--black"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn-primary",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--black",
+        "cssName": "--black"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-after",
+      "sourceStyleId": "e2e9400f-ff1e-412e-812f-71f107751935",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-ghost",
+      "sourceStyleId": "0730ada2-16bd-4b95-8772-d4e2bcf420e8",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line-strong)",
+      "cssNames": [
+        "--line-strong"
+      ],
+      "sourceNames": [
+        "--line-strong"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn-ghost",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line-strong",
+        "cssName": "--line-strong"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-ghost",
+      "sourceStyleId": "0730ada2-16bd-4b95-8772-d4e2bcf420e8",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--line-strong)",
+      "cssNames": [
+        "--line-strong"
+      ],
+      "sourceNames": [
+        "--line-strong"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn-ghost",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line-strong",
+        "cssName": "--line-strong"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-ghost",
+      "sourceStyleId": "0730ada2-16bd-4b95-8772-d4e2bcf420e8",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--line-strong)",
+      "cssNames": [
+        "--line-strong"
+      ],
+      "sourceNames": [
+        "--line-strong"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn-ghost",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line-strong",
+        "cssName": "--line-strong"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-ghost",
+      "sourceStyleId": "0730ada2-16bd-4b95-8772-d4e2bcf420e8",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--line-strong)",
+      "cssNames": [
+        "--line-strong"
+      ],
+      "sourceNames": [
+        "--line-strong"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn-ghost",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line-strong",
+        "cssName": "--line-strong"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-ghost",
+      "sourceStyleId": "0730ada2-16bd-4b95-8772-d4e2bcf420e8",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn-ghost",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "ph-meta",
+      "sourceStyleId": "4811b5d7-43ee-47b8-91fe-f03b61327bd6",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "ph-meta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-b-2",
+      "sourceStyleId": "9119c5e1-b941-44da-afc1-eb87d7805398",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-display)",
+      "cssNames": [
+        "--f-display"
+      ],
+      "sourceNames": [
+        "--f-display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-b-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-display",
+        "cssName": "--f-display"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-span-2",
+      "sourceStyleId": "5f101ccd-b23b-41fa-bd57-a1ded22cf416",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-soft)",
+      "cssNames": [
+        "--fg-soft"
+      ],
+      "sourceNames": [
+        "--fg-soft"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-span-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-soft",
+        "cssName": "--fg-soft"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk",
+      "sourceStyleId": "7b264933-e331-46bc-8747-eb81413ec636",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--bg)",
+      "cssNames": [
+        "--bg"
+      ],
+      "sourceNames": [
+        "--bg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bg",
+        "cssName": "--bg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk",
+      "sourceStyleId": "7b264933-e331-46bc-8747-eb81413ec636",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "alt",
+      "sourceStyleId": "9e989ad9-b217-4a85-9550-8139f73538a0",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--bg-2)",
+      "cssNames": [
+        "--bg-2"
+      ],
+      "sourceNames": [
+        "--bg-2"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "alt",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bg-2",
+        "cssName": "--bg-2"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "sec-pad",
+      "sourceStyleId": "57db0645-7a02-451a-9f4e-b734116648c8",
+      "variant": "base",
+      "property": "padding-block",
+      "value": "var(--section)",
+      "cssNames": [
+        "--section"
+      ],
+      "sourceNames": [
+        "--section"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "sec-pad",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "padding-block",
+          "variable_as_value": ""
+        },
+        "sourceName": "--section",
+        "cssName": "--section"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-i-3",
+      "sourceStyleId": "07bd9178-0a26-474f-a2a6-d8eadd1fa34b",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--rule)",
+      "cssNames": [
+        "--rule"
+      ],
+      "sourceNames": [
+        "--rule"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-i-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--rule",
+        "cssName": "--rule"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "eyebrow",
+      "sourceStyleId": "2106f176-3f0b-43ea-85d8-458bcbbd3bee",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--label)",
+      "cssNames": [
+        "--label"
+      ],
+      "sourceNames": [
+        "--label"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--label",
+        "cssName": "--label"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "eyebrow",
+      "sourceStyleId": "2106f176-3f0b-43ea-85d8-458bcbbd3bee",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--accent)",
+      "cssNames": [
+        "--accent"
+      ],
+      "sourceNames": [
+        "--accent"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--accent",
+        "cssName": "--accent"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "eyebrow",
+      "sourceStyleId": "2106f176-3f0b-43ea-85d8-458bcbbd3bee",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-body)",
+      "cssNames": [
+        "--f-body"
+      ],
+      "sourceNames": [
+        "--f-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "eyebrow",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-body",
+        "cssName": "--f-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h2",
+      "sourceStyleId": "67346fe2-969b-499f-9f41-2d1b90dd7fc2",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-display)",
+      "cssNames": [
+        "--f-display"
+      ],
+      "sourceNames": [
+        "--f-display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-display",
+        "cssName": "--f-display"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h2",
+      "sourceStyleId": "67346fe2-969b-499f-9f41-2d1b90dd7fc2",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h2",
+      "sourceStyleId": "67346fe2-969b-499f-9f41-2d1b90dd7fc2",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--h2)",
+      "cssNames": [
+        "--h2"
+      ],
+      "sourceNames": [
+        "--h2"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--h2",
+        "cssName": "--h2"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-p",
+      "sourceStyleId": "f4085676-da30-4886-8043-248ed7cf4dc4",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-p",
+      "sourceStyleId": "f4085676-da30-4886-8043-248ed7cf4dc4",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--body-lg)",
+      "cssNames": [
+        "--body-lg"
+      ],
+      "sourceNames": [
+        "--body-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-p",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--body-lg",
+        "cssName": "--body-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-card",
+      "sourceStyleId": "1a0df3c8-149f-492d-b478-6800df391b1c",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--card)",
+      "cssNames": [
+        "--card"
+      ],
+      "sourceNames": [
+        "--card"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--card",
+        "cssName": "--card"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-card",
+      "sourceStyleId": "1a0df3c8-149f-492d-b478-6800df391b1c",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-card",
+      "sourceStyleId": "1a0df3c8-149f-492d-b478-6800df391b1c",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-card",
+      "sourceStyleId": "1a0df3c8-149f-492d-b478-6800df391b1c",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-card",
+      "sourceStyleId": "1a0df3c8-149f-492d-b478-6800df391b1c",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-card",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "n",
+      "sourceStyleId": "62980a6e-31c0-41b9-9880-46e731a9b7e3",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-display)",
+      "cssNames": [
+        "--f-display"
+      ],
+      "sourceNames": [
+        "--f-display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "n",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-display",
+        "cssName": "--f-display"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "n",
+      "sourceStyleId": "62980a6e-31c0-41b9-9880-46e731a9b7e3",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--accent-lg)",
+      "cssNames": [
+        "--accent-lg"
+      ],
+      "sourceNames": [
+        "--accent-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "n",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--accent-lg",
+        "cssName": "--accent-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h3",
+      "sourceStyleId": "18eacdcc-be1b-4d85-9fe1-6ba8bb6f07f7",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-display)",
+      "cssNames": [
+        "--f-display"
+      ],
+      "sourceNames": [
+        "--f-display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-display",
+        "cssName": "--f-display"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h3",
+      "sourceStyleId": "18eacdcc-be1b-4d85-9fe1-6ba8bb6f07f7",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-p-2",
+      "sourceStyleId": "ba810800-69de-43d6-8f11-0cd7aaf998fc",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-p-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "more",
+      "sourceStyleId": "66bf196a-bfd3-4831-ade4-0805108fb7f0",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--accent)",
+      "cssNames": [
+        "--accent"
+      ],
+      "sourceNames": [
+        "--accent"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "more",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--accent",
+        "cssName": "--accent"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "light",
+      "sourceStyleId": "a4df7637-df27-465a-923a-501a1c24eb7b",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--bg-3)",
+      "cssNames": [
+        "--bg-3"
+      ],
+      "sourceNames": [
+        "--bg-3"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "light",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bg-3",
+        "cssName": "--bg-3"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-p-3",
+      "sourceStyleId": "11bfed35-93d2-425b-9163-8cf169e280d2",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-p-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-strong",
+      "sourceStyleId": "34bec2fd-50f4-466d-9b21-38ddfab47dc9",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-strong",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-more",
+      "sourceStyleId": "1d977539-8263-4fb0-87bc-6fff4e751d2d",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--accent)",
+      "cssNames": [
+        "--accent"
+      ],
+      "sourceNames": [
+        "--accent"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-more",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--accent",
+        "cssName": "--accent"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-more",
+      "sourceStyleId": "1d977539-8263-4fb0-87bc-6fff4e751d2d",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--label)",
+      "cssNames": [
+        "--label"
+      ],
+      "sourceNames": [
+        "--label"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-more",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--label",
+        "cssName": "--label"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-more",
+      "sourceStyleId": "1d977539-8263-4fb0-87bc-6fff4e751d2d",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-more",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-more",
+      "sourceStyleId": "1d977539-8263-4fb0-87bc-6fff4e751d2d",
+      "variant": "main_hover",
+      "property": "border-color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-more",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "border-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "sp-fig",
+      "sourceStyleId": "1e113ca0-170d-44f1-b663-0a7b4bb25bf6",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--mist)",
+      "cssNames": [
+        "--mist"
+      ],
+      "sourceNames": [
+        "--mist"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "sp-fig",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--mist",
+        "cssName": "--mist"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-li-2",
+      "sourceStyleId": "ed574fe2-0202-48cb-89b8-84e66165696f",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-li-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-li-2",
+      "sourceStyleId": "ed574fe2-0202-48cb-89b8-84e66165696f",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-li-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-i-4",
+      "sourceStyleId": "6b034eb4-6db2-4f5e-accf-3f01312dc87d",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--rule)",
+      "cssNames": [
+        "--rule"
+      ],
+      "sourceNames": [
+        "--rule"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-i-4",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--rule",
+        "cssName": "--rule"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-li-3",
+      "sourceStyleId": "31d2f160-bf0e-4641-9050-131faba38566",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-li-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-li-3",
+      "sourceStyleId": "31d2f160-bf0e-4641-9050-131faba38566",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-li-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-li-3",
+      "sourceStyleId": "31d2f160-bf0e-4641-9050-131faba38566",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-li-3",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "brandmark",
+      "sourceStyleId": "676eb7a7-ba36-4a97-8f92-99444d6d26c9",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line-2)",
+      "cssNames": [
+        "--line-2"
+      ],
+      "sourceNames": [
+        "--line-2"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "brandmark",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line-2",
+        "cssName": "--line-2"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "brandmark",
+      "sourceStyleId": "676eb7a7-ba36-4a97-8f92-99444d6d26c9",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--line-2)",
+      "cssNames": [
+        "--line-2"
+      ],
+      "sourceNames": [
+        "--line-2"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "brandmark",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line-2",
+        "cssName": "--line-2"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "brandmark",
+      "sourceStyleId": "676eb7a7-ba36-4a97-8f92-99444d6d26c9",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--line-2)",
+      "cssNames": [
+        "--line-2"
+      ],
+      "sourceNames": [
+        "--line-2"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "brandmark",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line-2",
+        "cssName": "--line-2"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "brandmark",
+      "sourceStyleId": "676eb7a7-ba36-4a97-8f92-99444d6d26c9",
+      "variant": "base",
+      "property": "border-left-color",
+      "value": "var(--line-2)",
+      "cssNames": [
+        "--line-2"
+      ],
+      "sourceNames": [
+        "--line-2"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "brandmark",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-left-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line-2",
+        "cssName": "--line-2"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-details",
+      "sourceStyleId": "4c465ac0-f308-428d-9eed-27803fa4e3c7",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-details",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-summary",
+      "sourceStyleId": "008a0883-7c11-4c22-9fc1-c6c1120e2965",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-display)",
+      "cssNames": [
+        "--f-display"
+      ],
+      "sourceNames": [
+        "--f-display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-summary",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-display",
+        "cssName": "--f-display"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-summary",
+      "sourceStyleId": "008a0883-7c11-4c22-9fc1-c6c1120e2965",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-summary",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-summary",
+      "sourceStyleId": "008a0883-7c11-4c22-9fc1-c6c1120e2965",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--accent-lg)",
+      "cssNames": [
+        "--accent-lg"
+      ],
+      "sourceNames": [
+        "--accent-lg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-summary",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--accent-lg",
+        "cssName": "--accent-lg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "summary-after",
+      "sourceStyleId": "4f788566-ce32-4300-aa25-b81117f441e3",
+      "variant": "base",
+      "property": "border-right-color",
+      "value": "var(--rule)",
+      "cssNames": [
+        "--rule"
+      ],
+      "sourceNames": [
+        "--rule"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "summary-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-right-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--rule",
+        "cssName": "--rule"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "summary-after",
+      "sourceStyleId": "4f788566-ce32-4300-aa25-b81117f441e3",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--rule)",
+      "cssNames": [
+        "--rule"
+      ],
+      "sourceNames": [
+        "--rule"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "summary-after",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--rule",
+        "cssName": "--rule"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "fa-body",
+      "sourceStyleId": "bf8242ee-3ee4-4d9a-b6f8-33ca3935f99c",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "fa-body",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-details-2",
+      "sourceStyleId": "3516c87e-60c5-42eb-a80f-a57cb49990ac",
+      "variant": "base",
+      "property": "border-top-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-details-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-top-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-details-2",
+      "sourceStyleId": "3516c87e-60c5-42eb-a80f-a57cb49990ac",
+      "variant": "base",
+      "property": "border-bottom-color",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-details-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "border-bottom-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-next",
+      "sourceStyleId": "ebba0793-cd01-41ea-81ad-c76e5251253e",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--line)",
+      "cssNames": [
+        "--line"
+      ],
+      "sourceNames": [
+        "--line"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-next",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--line",
+        "cssName": "--line"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-a-8",
+      "sourceStyleId": "32630861-63e0-4484-83f1-9d945ac690c7",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--bg-2)",
+      "cssNames": [
+        "--bg-2"
+      ],
+      "sourceNames": [
+        "--bg-2"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a-8",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bg-2",
+        "cssName": "--bg-2"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-a-8",
+      "sourceStyleId": "32630861-63e0-4484-83f1-9d945ac690c7",
+      "variant": "main_hover",
+      "property": "background",
+      "value": "var(--bg-3)",
+      "cssNames": [
+        "--bg-3"
+      ],
+      "sourceNames": [
+        "--bg-3"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a-8",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bg-3",
+        "cssName": "--bg-3"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "nx-k",
+      "sourceStyleId": "9dff868b-5244-4f51-a18a-a32d2988edcc",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--accent)",
+      "cssNames": [
+        "--accent"
+      ],
+      "sourceNames": [
+        "--accent"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nx-k",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--accent",
+        "cssName": "--accent"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "nx-t",
+      "sourceStyleId": "71de6862-1790-4c3b-8d4b-504a98e7e54c",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-display)",
+      "cssNames": [
+        "--f-display"
+      ],
+      "sourceNames": [
+        "--f-display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nx-t",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-display",
+        "cssName": "--f-display"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "nx-d",
+      "sourceStyleId": "03a88087-fd95-47c1-bd17-611557e9f001",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "nx-d",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-cta",
+      "sourceStyleId": "f9806806-254e-46d7-af32-a5bdf3252590",
+      "variant": "base",
+      "property": "background",
+      "value": "linear-gradient(115deg,var(--gold-deep),var(--gold) 48%,var(--gold-light))",
+      "cssNames": [
+        "--gold-deep",
+        "--gold",
+        "--gold-light"
+      ],
+      "sourceNames": [
+        "--gold-deep",
+        "--gold",
+        "--gold-light"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "pk-cta",
+      "sourceStyleId": "f9806806-254e-46d7-af32-a5bdf3252590",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--black)",
+      "cssNames": [
+        "--black"
+      ],
+      "sourceNames": [
+        "--black"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "pk-cta",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--black",
+        "cssName": "--black"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "wrap",
+      "sourceStyleId": "aa08da9c-72bb-4f02-8f2a-d2d4d42792ce",
+      "variant": "base",
+      "property": "max-width",
+      "value": "var(--maxw)",
+      "cssNames": [
+        "--maxw"
+      ],
+      "sourceNames": [
+        "--maxw"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "max-width",
+          "variable_as_value": ""
+        },
+        "sourceName": "--maxw",
+        "cssName": "--maxw"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "wrap",
+      "sourceStyleId": "aa08da9c-72bb-4f02-8f2a-d2d4d42792ce",
+      "variant": "base",
+      "property": "padding-right",
+      "value": "var(--gutter)",
+      "cssNames": [
+        "--gutter"
+      ],
+      "sourceNames": [
+        "--gutter"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "wrap",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "padding-right",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gutter",
+        "cssName": "--gutter"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "wrap",
+      "sourceStyleId": "aa08da9c-72bb-4f02-8f2a-d2d4d42792ce",
+      "variant": "base",
+      "property": "padding-left",
+      "value": "calc(var(--gutter) + var(--rail))",
+      "cssNames": [
+        "--gutter",
+        "--rail"
+      ],
+      "sourceNames": [
+        "--gutter",
+        "--rail"
+      ],
+      "status": "unsupported_compound_value",
+      "mcp": null
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "sec-pad",
+      "sourceStyleId": "1c438a8f-7c91-403a-8573-071af653f3ce",
+      "variant": "base",
+      "property": "padding-block",
+      "value": "var(--section)",
+      "cssNames": [
+        "--section"
+      ],
+      "sourceNames": [
+        "--section"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "sec-pad",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "padding-block",
+          "variable_as_value": ""
+        },
+        "sourceName": "--section",
+        "cssName": "--section"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h2-2",
+      "sourceStyleId": "a61b2911-7d13-4606-8868-227e65bc54be",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-display)",
+      "cssNames": [
+        "--f-display"
+      ],
+      "sourceNames": [
+        "--f-display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h2-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-display",
+        "cssName": "--f-display"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h2-2",
+      "sourceStyleId": "a61b2911-7d13-4606-8868-227e65bc54be",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h2-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h2-2",
+      "sourceStyleId": "a61b2911-7d13-4606-8868-227e65bc54be",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--d2)",
+      "cssNames": [
+        "--d2"
+      ],
+      "sourceNames": [
+        "--d2"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h2-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--d2",
+        "cssName": "--d2"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn",
+      "sourceStyleId": "098830b2-b492-464f-ad03-614cd2d74d7f",
+      "variant": "base",
+      "property": "font-size",
+      "value": "var(--label)",
+      "cssNames": [
+        "--label"
+      ],
+      "sourceNames": [
+        "--label"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-size",
+          "variable_as_value": ""
+        },
+        "sourceName": "--label",
+        "cssName": "--label"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn",
+      "sourceStyleId": "098830b2-b492-464f-ad03-614cd2d74d7f",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--bg)",
+      "cssNames": [
+        "--bg"
+      ],
+      "sourceNames": [
+        "--bg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bg",
+        "cssName": "--bg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-dark",
+      "sourceStyleId": "8bdb4292-9b23-4d4a-9dab-66e23e17b796",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--fg)",
+      "cssNames": [
+        "--fg"
+      ],
+      "sourceNames": [
+        "--fg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn-dark",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg",
+        "cssName": "--fg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-dark",
+      "sourceStyleId": "8bdb4292-9b23-4d4a-9dab-66e23e17b796",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--bg)",
+      "cssNames": [
+        "--bg"
+      ],
+      "sourceNames": [
+        "--bg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn-dark",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bg",
+        "cssName": "--bg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-dark",
+      "sourceStyleId": "8bdb4292-9b23-4d4a-9dab-66e23e17b796",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--bg)",
+      "cssNames": [
+        "--bg"
+      ],
+      "sourceNames": [
+        "--bg"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn-dark",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--bg",
+        "cssName": "--bg"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "btn-after-2",
+      "sourceStyleId": "a3be7d10-9b06-4d9f-95f4-d6b891d12b85",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--ink-700)",
+      "cssNames": [
+        "--ink-700"
+      ],
+      "sourceNames": [
+        "--ink-700"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "btn-after-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--ink-700",
+        "cssName": "--ink-700"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-a-10",
+      "sourceStyleId": "9b53cc3d-20c0-4d5d-bca5-0a526850f3e8",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--black)",
+      "cssNames": [
+        "--black"
+      ],
+      "sourceNames": [
+        "--black"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a-10",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--black",
+        "cssName": "--black"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-a-10",
+      "sourceStyleId": "9b53cc3d-20c0-4d5d-bca5-0a526850f3e8",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-display)",
+      "cssNames": [
+        "--f-display"
+      ],
+      "sourceNames": [
+        "--f-display"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a-10",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-display",
+        "cssName": "--f-display"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "foot",
+      "sourceStyleId": "0398afec-00b6-406d-b534-d277f11c26a3",
+      "variant": "base",
+      "property": "background",
+      "value": "var(--black)",
+      "cssNames": [
+        "--black"
+      ],
+      "sourceNames": [
+        "--black"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "foot",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "background-color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--black",
+        "cssName": "--black"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "foot",
+      "sourceStyleId": "0398afec-00b6-406d-b534-d277f11c26a3",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--fg-body)",
+      "cssNames": [
+        "--fg-body"
+      ],
+      "sourceNames": [
+        "--fg-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "foot",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--fg-body",
+        "cssName": "--fg-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h4-2",
+      "sourceStyleId": "520e0f44-4a09-4617-a950-956d75977e93",
+      "variant": "base",
+      "property": "font-family",
+      "value": "var(--f-body)",
+      "cssNames": [
+        "--f-body"
+      ],
+      "sourceNames": [
+        "--f-body"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h4-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "font-family",
+          "variable_as_value": ""
+        },
+        "sourceName": "--f-body",
+        "cssName": "--f-body"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-h4-2",
+      "sourceStyleId": "520e0f44-4a09-4617-a950-956d75977e93",
+      "variant": "base",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-h4-2",
+        "breakpoint_id": "main",
+        "pseudo": "noPseudo",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    },
+    {
+      "section": "03_smooth-wrapper",
+      "className": "implant-cost-a-11",
+      "sourceStyleId": "f0c8c0d7-154b-423c-be2e-e8dc2aacb9ee",
+      "variant": "main_hover",
+      "property": "color",
+      "value": "var(--gold)",
+      "cssNames": [
+        "--gold"
+      ],
+      "sourceNames": [
+        "--gold"
+      ],
+      "status": "missing_variable_id",
+      "mcp": {
+        "style_name": "implant-cost-a-11",
+        "breakpoint_id": "main",
+        "pseudo": "hover",
+        "property": {
+          "property_name": "color",
+          "variable_as_value": ""
+        },
+        "sourceName": "--gold",
+        "cssName": "--gold"
+      }
+    }
+  ]
+}

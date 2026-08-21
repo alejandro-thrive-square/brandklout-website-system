@@ -1,0 +1,557 @@
+<!doctype html><html><head><meta charset="utf-8">
+<style>.nahlah-header{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; background: #0B0B0C; color: #fff; font-family: 'Raleway','Helvetica Neue',Arial,sans-serif; font-size: 15.6px; line-height: 1.65; -webkit-font-smoothing: antialiased;}
+.site-nav{position: fixed; top: 0; left: 0; right: 0; z-index: 120; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: transparent; transition: background .4s ease,border-color .4s ease;}
+.nav-progress{box-sizing: border-box; position: absolute; top: 0; left: 0; right: 0; height: 2px; background: rgba(255,255,255,.10); overflow: hidden;}
+.nahlah-i{box-sizing: border-box; display: block; height: 100%; width: 100%; transform: scaleX(0); transform-origin: left; background: linear-gradient(90deg,#8A7E4E,#AB9E6A 55%,#D4CDB2);}
+.nahlah-div{box-sizing: border-box;}
+.wrap{width: 100%; max-width: 1560px; margin-inline: auto; padding-right: 45.44px; padding-left: 45.44px;}
+.no-rail{padding-left: 45.44px;}
+.nav-in{display: flex; align-items: center; justify-content: space-between; grid-row-gap: 1.5rem; grid-column-gap: 1.5rem; padding-block: 18.18px;}
+.nav-logo{box-sizing: border-box; color: inherit; text-decoration: none;}
+.nahlah-img{box-sizing: border-box; max-width: 100%; display: block; width: 147.68px;}
+.nav-mid{display: flex; align-items: center; grid-row-gap: .8rem; grid-column-gap: .8rem; font-size: 10.88px; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.5);}
+.nahlah-b{box-sizing: border-box; color: #AB9E6A; font-weight: 600; font-variant-numeric: tabular-nums;}
+.nahlah-i-2{box-sizing: border-box; display: block; width: 56px; height: 1px; background: rgba(255,255,255,.2); position: relative;}
+.nav-cta{box-sizing: border-box; color: inherit; text-decoration: none; border-top-style: solid; border-top-width: 1px; border-top-color: #AB9E6A; border-right-style: solid; border-right-width: 1px; border-right-color: #AB9E6A; border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: #AB9E6A; border-left-style: solid; border-left-width: 1px; border-left-color: #AB9E6A; padding-top: .7rem; padding-right: 1.4rem; padding-bottom: .7rem; padding-left: 1.4rem; font-size: 10.88px; letter-spacing: .14em; text-transform: uppercase; font-weight: 600; white-space: nowrap; transition: background .4s,color .4s;}
+.nahlah-button{box-sizing: border-box; font: inherit; color: inherit; background: none; border-top-style: none; border-top-width: 0px; border-top-color: transparent; border-right-style: none; border-right-width: 0px; border-right-color: transparent; border-bottom-style: none; border-bottom-width: 0px; border-bottom-color: transparent; border-left-style: none; border-left-width: 0px; border-left-color: transparent; cursor: pointer;}
+.burger{display: none; width: 44px; height: 44px; position: relative; z-index: 130;}
+.drawer{position: fixed; top: 0; right: 0; bottom: 0; left: 0; z-index: 125; background: #141416; clip-path: circle(0% at calc(100% - 42px) 42px); transition: clip-path .8s cubic-bezier(.22,1,.36,1); display: flex; flex-direction: column; justify-content: center; padding-top: 45.44px; padding-right: 45.44px; padding-bottom: 45.44px; padding-left: 45.44px;}
+.nahlah-ul{box-sizing: border-box; list-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0;}
+.nahlah-li{box-sizing: border-box; overflow: hidden; margin-top: 0; margin-bottom: 0; padding-left: 0;}
+.nahlah-a{box-sizing: border-box; color: inherit; text-decoration: none; display: block; font-family: 'Playfair Display','Times New Roman',serif; font-size: 48px; padding-block: .24em; transform: translateY(110%); transition: transform .7s cubic-bezier(.22,1,.36,1);}
+.nahlah-small{box-sizing: border-box; font-family: 'Raleway','Helvetica Neue',Arial,sans-serif; font-size: .6rem; letter-spacing: .2em; color: #AB9E6A; display: block; margin-bottom: -.35em;}
+.drawer-foot{box-sizing: border-box; margin-top: 2rem; display: grid; grid-row-gap: .4rem; grid-column-gap: .4rem; color: #D4CDB2; font-size: .88rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-div-2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; background: #0B0B0C; color: #fff; font-family: 'Raleway','Helvetica Neue',Arial,sans-serif; font-size: 15.6px; line-height: 1.65; -webkit-font-smoothing: antialiased; overflow: hidden;}
+.ch-arrival{box-sizing: border-box; position: relative; min-height: 100svh; display: flex; align-items: flex-end; overflow: hidden; padding-bottom: 79.52px; padding-top: 144px;}
+.bg{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 0;}
+.glow{box-sizing: border-box; position: absolute; right: 6%; bottom: 0; width: 522.56px; height: 522.56px; background: radial-gradient(circle,rgba(171,158,106,.30),transparent 68%); filter: blur(30px); z-index: 1;}
+.nahlah-img-2{box-sizing: border-box; max-width: 100%; display: block; position: absolute; right: -4%; bottom: 0; height: min(92vh,940px); width: auto; object-fit: contain; filter: contrast(1.06) brightness(1.12) saturate(.94); will-change: transform;}
+.veil{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 3; background: #0B0B0C; opacity: 0; pointer-events: none;}
+.in{box-sizing: border-box; position: relative; z-index: 4; width: 100%; max-width: 1560px; margin-inline: auto; padding-right: 45.44px; padding-left: 45.44px; display: grid; grid-row-gap: 34.08px; grid-column-gap: 34.08px; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.chapter-tag{box-sizing: border-box; display: flex; align-items: center; grid-row-gap: .85rem; grid-column-gap: .85rem; margin-bottom: 1.4rem;}
+.nahlah-i-3{box-sizing: border-box; width: 39.76px; height: 1px; background: #AB9E6A; flex-grow: 0; flex-shrink: 0; flex-basis: auto;}
+.eyebrow{font-size: 10.88px; letter-spacing: .18em; text-transform: uppercase; font-weight: 600; color: #AB9E6A; font-family: 'Raleway','Helvetica Neue',Arial,sans-serif;}
+.nahlah-h1{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: 'Playfair Display','Times New Roman',serif; font-weight: 500; line-height: 1.02; letter-spacing: -.02em; font-size: 84.06px; max-width: 15ch;}
+.nahlah-em{box-sizing: border-box; font-style: italic; color: #AB9E6A;}
+.lead{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; max-width: 46ch; color: rgba(255,255,255,.76); font-size: 16.8px; font-weight: 300;}
+.actions{box-sizing: border-box; display: flex; flex-wrap: wrap; grid-row-gap: .85rem; grid-column-gap: .85rem;}
+.nahlah-a-2{box-sizing: border-box; text-decoration: none;}
+.btn{display: inline-flex; align-items: center; justify-content: center; grid-row-gap: .6rem; grid-column-gap: .6rem; padding-top: 1.05rem; padding-right: 2rem; padding-bottom: 1.05rem; padding-left: 2rem; font-size: 10.88px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; position: relative; overflow: hidden; transition: color .45s cubic-bezier(.22,1,.36,1); will-change: transform;}
+.btn-primary{background: linear-gradient(100deg,#8A7E4E,#AB9E6A 45%,#D4CDB2); color: #0B0B0C;}
+.nahlah-span{box-sizing: border-box; position: relative; z-index: 1;}
+.btn-after{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: #fff; transform: translateY(101%); transition: transform .55s cubic-bezier(.22,1,.36,1); z-index: 0;}
+.btn{display: inline-flex; align-items: center; justify-content: center; grid-row-gap: .6rem; grid-column-gap: .6rem; padding-top: 1.05rem; padding-right: 2rem; padding-bottom: 1.05rem; padding-left: 2rem; font-size: 10.88px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; position: relative; overflow: hidden; transition: color .45s cubic-bezier(.22,1,.36,1); will-change: transform;}
+.btn-ghost{border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255,255,255,.3); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(255,255,255,.3); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(255,255,255,.3); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(255,255,255,.3);}
+.meta{box-sizing: border-box; display: flex; flex-wrap: wrap; grid-row-gap: 34.08px; grid-column-gap: 34.08px; padding-top: 28px; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255,255,255,.12);}
+.nahlah-div-3{box-sizing: border-box; display: grid; grid-row-gap: .15rem; grid-column-gap: .15rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-b-2{box-sizing: border-box; font-family: 'Playfair Display','Times New Roman',serif; font-size: 24.99px; font-weight: 500;}
+.nahlah-span-2{box-sizing: border-box; font-size: .74rem; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.5);}
+.cue{box-sizing: border-box; position: absolute; right: 45.44px; bottom: 32px; z-index: 5; display: flex; align-items: center; grid-row-gap: .7rem; grid-column-gap: .7rem; font-size: .66rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.42);}
+.nahlah-i-4{box-sizing: border-box; display: block; width: 1px; height: 44px; background: linear-gradient(180deg,#AB9E6A,transparent);}
+.ch-reality{position: relative; background: #0B0B0C;}
+.frame{box-sizing: border-box; position: absolute; right: 0; top: 50%; transform: translateY(-50%); width: 431.68px; aspect-ratio: 4/5; overflow: hidden; z-index: 1; opacity: .5;}
+.nahlah-img-3{box-sizing: border-box; max-width: 100%; display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1) contrast(1.1);}
+.nahlah-div-4{box-sizing: border-box; min-height: 100svh; display: grid; align-content: center; padding-block: 113.6px; position: relative; z-index: 2; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.wrap{width: 100%; max-width: 1560px; margin-inline: auto; padding-right: 45.44px; padding-left: 45.44px;}
+.nahlah-p{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: 'Playfair Display','Times New Roman',serif; font-size: 59.07px; line-height: 1.14; letter-spacing: -.02em; max-width: 22ch;}
+.after{box-sizing: border-box; margin-top: 45.44px; display: grid; grid-row-gap: 1.25rem; grid-column-gap: 1.25rem; max-width: 52ch; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-p-2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255,255,255,.58); font-weight: 300; line-height: 1.8;}
+.ch-difference{box-sizing: border-box; background: #141416; border-block: 1px solid rgba(255,255,255,.07); position: relative;}
+.sec-pad{padding-block: 102.24px;}
+.nahlah-div-5{box-sizing: border-box; display: grid; grid-row-gap: 1.1rem; grid-column-gap: 1.1rem; margin-bottom: 56.8px; max-width: 34ch; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-h2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: 'Playfair Display','Times New Roman',serif; font-weight: 500; line-height: 1.02; letter-spacing: -.02em; font-size: 40.9px;}
+.stats{box-sizing: border-box; display: grid; grid-row-gap: 45.44px; grid-column-gap: 45.44px; grid-auto-columns: 1fr; grid-template-columns: 1fr 1fr; grid-template-rows: auto;}
+.stat{box-sizing: border-box; position: relative; padding-top: 1.25rem;}
+.nahlah-b-3{box-sizing: border-box; display: block; font-family: 'Playfair Display','Times New Roman',serif; font-size: 63.62px; color: #AB9E6A; line-height: 1; font-weight: 500; font-variant-numeric: tabular-nums;}
+.nahlah-span-3{box-sizing: border-box; display: block; margin-top: .6rem; font-size: .74rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.55);}
+.versus{padding-block: 79.52px;}
+.vs-head{box-sizing: border-box; margin-bottom: 39.76px; max-width: 40ch;}
+.nahlah-p-3{box-sizing: border-box; margin-top: .9rem; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255,255,255,.55); font-weight: 300;}
+.vs-table{box-sizing: border-box; display: grid; grid-row-gap: 1px; grid-column-gap: 1px; background: rgba(255,255,255,.09); grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.vs-row{display: grid; grid-row-gap: 1px; grid-column-gap: 1px; background: rgba(255,255,255,.09); grid-auto-columns: 1fr; grid-template-columns: 1fr auto 1fr; grid-template-rows: auto;}
+.nahlah-span-4{box-sizing: border-box; padding-top: 22.72px; padding-right: 22.72px; padding-bottom: 22.72px; padding-left: 22.72px; background: linear-gradient(100deg,#8A7E4E,#AB9E6A 55%,#D4CDB2); font-size: 18.18px; font-weight: 500; color: #0B0B0C; display: flex; align-items: center; font-family: 'Playfair Display','Times New Roman',serif; letter-spacing: .01em; text-transform: none; padding-block: 22.4px;}
+.nahlah-span-5{box-sizing: border-box; padding-top: 22.72px; padding-right: 22.72px; padding-bottom: 22.72px; padding-left: 22.72px; background: #0B0B0C; font-size: .7rem; font-weight: 300; color: rgba(255,255,255,.35); display: flex; align-items: center; font-family: 'Raleway','Helvetica Neue',Arial,sans-serif; letter-spacing: .2em; text-transform: uppercase; padding-block: 22.4px; width: 68.16px; justify-content: center; padding-inline: 0;}
+.nahlah-span-6{box-sizing: border-box; padding-top: 22.72px; padding-right: 22.72px; padding-bottom: 22.72px; padding-left: 22.72px; background: #141416; font-size: 18.18px; font-weight: 300; color: rgba(255,255,255,.8); display: flex; align-items: center; font-family: 'Playfair Display','Times New Roman',serif; letter-spacing: .01em; text-transform: none; padding-block: 22.4px;}
+.nahlah-span-7{box-sizing: border-box; padding-top: 22.72px; padding-right: 22.72px; padding-bottom: 22.72px; padding-left: 22.72px; background: linear-gradient(100deg,rgba(138,126,78,.34),rgba(171,158,106,.14)); font-size: .95rem; font-weight: 400; color: #fff; display: flex; align-items: center;}
+.nahlah-span-8{box-sizing: border-box; padding-top: 22.72px; padding-right: 22.72px; padding-bottom: 22.72px; padding-left: 22.72px; background: #0B0B0C; font-size: .95rem; font-weight: 300; color: rgba(255,255,255,.62); display: flex; align-items: center; width: 68.16px; justify-content: center; padding-inline: 0;}
+.nahlah-i-5{box-sizing: border-box; display: block; width: 7px; height: 7px; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; background: #AB9E6A; opacity: .55;}
+.nahlah-span-9{box-sizing: border-box; padding-top: 22.72px; padding-right: 22.72px; padding-bottom: 22.72px; padding-left: 22.72px; background: #141416; font-size: .95rem; font-weight: 300; color: rgba(255,255,255,.62); display: flex; align-items: center;}
+.marquee{box-sizing: border-box; margin-top: 68.16px; overflow: hidden; border-block: 1px solid rgba(171,158,106,.22); padding-block: 18.18px;}
+.nahlah-div-6{box-sizing: border-box; display: flex; width: max-content; will-change: transform;}
+.nahlah-span-10{box-sizing: border-box; font-family: 'Playfair Display','Times New Roman',serif; font-size: 19.31px; color: rgba(255,255,255,.7); white-space: nowrap; padding-inline: 22.72px;}
+.nahlah-b-4{box-sizing: border-box; color: #AB9E6A; font-size: .65rem; align-self: center;}
+.ch-specialist{box-sizing: border-box; background: #0B0B0C; position: relative; overflow: hidden;}
+.nahlah-div-7{box-sizing: border-box; display: grid; grid-row-gap: 56.8px; grid-column-gap: 56.8px; align-items: start; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.wrap{width: 100%; max-width: 1560px; margin-inline: auto; padding-right: 45.44px; padding-left: 45.44px;}
+.sec-pad{padding-block: 102.24px;}
+.nahlah-div-8{box-sizing: border-box; position: relative;}
+.plate{box-sizing: border-box; position: relative; overflow: hidden; aspect-ratio: 4/5; background: linear-gradient(160deg,#1C1C1F,#0B0B0C);}
+.nahlah-img-4{box-sizing: border-box; max-width: none; display: block; position: absolute; left: 50%; bottom: 0; transform: translateX(-50%); height: 104%; width: auto; object-fit: contain; filter: contrast(1.05) brightness(1.08) saturate(.95); z-index: 1;}
+.sig{box-sizing: border-box; position: absolute; left: 0; bottom: -24px; z-index: 2; background: #0B0B0C; padding-top: 1rem; padding-right: 1.4rem; padding-bottom: 1rem; padding-left: 0;}
+.nahlah-b-5{box-sizing: border-box; display: block; font-family: 'Playfair Display','Times New Roman',serif; font-size: 21.58px; font-weight: 500;}
+.nahlah-span-11{box-sizing: border-box; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; color: #AB9E6A;}
+.nahlah-h2-2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 1.5rem; margin-left: 0; font-family: 'Playfair Display','Times New Roman',serif; font-weight: 500; line-height: 1.02; letter-spacing: -.02em; font-size: 40.9px; max-width: 16ch;}
+.bio{box-sizing: border-box; display: grid; grid-row-gap: 1.15rem; grid-column-gap: 1.15rem; max-width: 56ch; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-p-4{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255,255,255,.62); font-weight: 300; line-height: 1.85;}
+.nahlah-strong{box-sizing: border-box; color: #fff; font-weight: 500;}
+.creds{box-sizing: border-box; margin-top: 45.44px;}
+.nahlah-h4{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 1.1rem; margin-left: 0; font-family: 'Raleway','Helvetica Neue',Arial,sans-serif; font-weight: 600; line-height: 1.02; letter-spacing: .2em; font-size: .7rem; text-transform: uppercase; color: #AB9E6A;}
+.nahlah-ul-2{box-sizing: border-box; list-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; display: grid; grid-row-gap: 0; grid-column-gap: 0; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-li-2{box-sizing: border-box; display: grid; grid-row-gap: .85rem; grid-column-gap: .85rem; align-items: baseline; padding-block: .7rem; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255,255,255,.09); font-size: .93rem; font-weight: 300; color: rgba(255,255,255,.7); margin-top: 0; margin-bottom: 0; padding-left: 0; grid-auto-columns: 1fr; grid-template-columns: auto 1fr; grid-template-rows: auto;}
+.nahlah-i-6{box-sizing: border-box; width: 5px; height: 5px; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; background: #AB9E6A; display: block; transform: translateY(-2px);}
+.nahlah-li-3{box-sizing: border-box; display: grid; grid-row-gap: .85rem; grid-column-gap: .85rem; align-items: baseline; padding-block: .7rem; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255,255,255,.09); font-size: .93rem; font-weight: 300; color: rgba(255,255,255,.7); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(255,255,255,.09); margin-top: 0; margin-bottom: 0; padding-left: 0; grid-auto-columns: 1fr; grid-template-columns: auto 1fr; grid-template-rows: auto;}
+.ch-transformation{background: #FAF8F3; color: #0B0B0C;}
+.nahlah-div-9{box-sizing: border-box; min-height: 100svh; display: grid; align-content: center; padding-block: 79.52px; overflow: hidden; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-div-10{box-sizing: border-box; display: grid; grid-row-gap: .9rem; grid-column-gap: .9rem; margin-bottom: 34.08px; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-h2-3{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: 'Playfair Display','Times New Roman',serif; font-weight: 500; line-height: 1.02; letter-spacing: -.02em; font-size: 40.9px; max-width: 16ch;}
+.cmp{position: relative; aspect-ratio: 16/9; overflow: hidden; background: #F0EDE6; max-height: 58svh; margin-inline: auto; width: 100%;}
+.nahlah-img-5{box-sizing: border-box; max-width: 100%; display: block; position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: cover;}
+.nahlah-span-12{box-sizing: border-box; position: absolute; top: 1rem; padding-top: .4rem; padding-right: .85rem; padding-bottom: .4rem; padding-left: .85rem; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; z-index: 4; left: 1rem; background: rgba(11,11,12,.72); color: #fff;}
+.nahlah-span-13{box-sizing: border-box; position: absolute; top: 1rem; padding-top: .4rem; padding-right: .85rem; padding-bottom: .4rem; padding-left: .85rem; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 700; z-index: 4; right: 1rem; background: #AB9E6A; color: #0B0B0C;}
+.nahlah-div-11{box-sizing: border-box; margin-top: 1rem; display: flex; justify-content: space-between; flex-wrap: wrap; grid-row-gap: .6rem; grid-column-gap: .6rem; font-size: .82rem; color: #6B6B72;}
+.foot{background: #0B0B0C; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255,255,255,.1); padding-block: 68.16px 34.08px;}
+.nahlah-span-14{box-sizing: border-box; display: flex; grid-row-gap: .45rem; grid-column-gap: .45rem; align-items: center;}
+.nahlah-i-7{box-sizing: border-box; display: block; width: 26px; height: 2px; background: rgba(11,11,12,.16);}
+.nahlah-div-12{box-sizing: border-box; height: 100svh; display: flex; flex-direction: column; justify-content: center; position: relative;}
+.nahlah-div-13{box-sizing: border-box; padding-right: 45.44px; padding-left: 45.44px; max-width: 1560px; margin-inline: auto; width: 100%; margin-bottom: 34.08px;}
+.track{box-sizing: border-box; display: flex; grid-row-gap: 27.26px; grid-column-gap: 27.26px; padding-right: 45.44px; padding-left: 45.44px; width: max-content; align-items: stretch;}
+.card{box-sizing: border-box; width: 329.44px; flex-grow: 0; flex-shrink: 0; flex-basis: auto; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255,255,255,.13); border-right-style: solid; border-right-width: 1px; border-right-color: rgba(255,255,255,.13); border-bottom-style: solid; border-bottom-width: 1px; border-bottom-color: rgba(255,255,255,.13); border-left-style: solid; border-left-width: 1px; border-left-color: rgba(255,255,255,.13); padding-top: 27.26px; padding-right: 27.26px; padding-bottom: 27.26px; padding-left: 27.26px; display: flex; flex-direction: column; grid-row-gap: .9rem; grid-column-gap: .9rem; background: #141416; position: relative; overflow: hidden;}
+.no{box-sizing: border-box; font-family: 'Playfair Display','Times New Roman',serif; font-size: 52.26px; color: #AB9E6A; line-height: .9;}
+.nahlah-h3{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: 'Playfair Display','Times New Roman',serif; font-weight: 500; line-height: 1.02; letter-spacing: -.02em; font-size: 21.6px;}
+.nahlah-p-5{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255,255,255,.58); font-weight: 300; font-size: .95rem;}
+.nahlah-div-14{box-sizing: border-box; margin-top: auto; aspect-ratio: 16/10; overflow: hidden;}
+.nahlah-img-6{box-sizing: border-box; max-width: 100%; display: block; width: 100%; height: 100%; object-fit: cover; filter: grayscale(1); transition: filter .6s,transform .8s;}
+.bar{box-sizing: border-box; position: absolute; left: 45.44px; right: 45.44px; bottom: 45.44px; height: 1px; background: rgba(255,255,255,.14);}
+.nahlah-i-8{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: #AB9E6A; transform: scaleX(0); transform-origin: left;}
+.ch-standard{box-sizing: border-box; background: #141416; position: relative;}
+.nahlah-div-15{box-sizing: border-box; display: grid; grid-row-gap: 1rem; grid-column-gap: 1rem; max-width: 44ch; margin-bottom: 51.12px; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-p-6{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255,255,255,.58); font-weight: 300;}
+.std-grid{box-sizing: border-box; display: grid; grid-row-gap: 20.45px; grid-column-gap: 20.45px; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.std{position: relative; overflow: hidden; min-height: 340.8px; display: flex; align-items: flex-end; padding-top: 27.26px; padding-right: 27.26px; padding-bottom: 27.26px; padding-left: 27.26px; isolation: isolate;}
+.wide{grid-column: 1 / -1; min-height: 408.96px;}
+.nahlah-img-7{box-sizing: border-box; max-width: 100%; display: block; position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: cover; z-index: -2; transform: scale(1.08); transition: transform 1s cubic-bezier(.22,1,.36,1);}
+.tagline{box-sizing: border-box; position: absolute; top: 22.72px; left: 27.26px; font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; font-weight: 600; color: #AB9E6A;}
+.cap{box-sizing: border-box; display: grid; grid-row-gap: .5rem; grid-column-gap: .5rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-b-6{box-sizing: border-box; font-family: 'Playfair Display','Times New Roman',serif; font-size: 21.6px; font-weight: 500;}
+.nahlah-span-15{box-sizing: border-box; color: rgba(255,255,255,.66); font-weight: 300; font-size: .92rem; max-width: 36ch;}
+.ch-proof{box-sizing: border-box; background: #141416;}
+.film{box-sizing: border-box; position: relative; height: 720px; overflow: hidden;}
+.nahlah-video{box-sizing: border-box; max-width: 100%; display: block; position: absolute; top: 0; right: 0; bottom: 0; left: 0; width: 100%; height: 100%; object-fit: cover; will-change: transform;}
+.copy{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; z-index: 2; display: grid; place-items: center; text-align: center; padding-top: 45.44px; padding-right: 45.44px; padding-bottom: 45.44px; padding-left: 45.44px; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-h2-4{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: 'Playfair Display','Times New Roman',serif; font-weight: 500; line-height: 1.02; letter-spacing: -.02em; font-size: 59.07px; max-width: 16ch; margin-inline: auto;}
+.nahlah-p-7{box-sizing: border-box; margin-top: 1.1rem; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255,255,255,.72); max-width: 44ch; margin-inline: auto; font-weight: 300;}
+.story{box-sizing: border-box; display: grid; grid-row-gap: 56.8px; grid-column-gap: 56.8px; align-items: center; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-div-16{box-sizing: border-box; position: relative; overflow: hidden; aspect-ratio: 4/3; clip-path: inset(0 0 100% 0);}
+.nahlah-img-8{box-sizing: border-box; max-width: 100%; display: block; width: 100%; height: 100%; object-fit: cover; will-change: transform;}
+.qm{box-sizing: border-box; font-family: 'Playfair Display','Times New Roman',serif; font-size: 90.88px; color: #AB9E6A; line-height: .6; display: block; margin-bottom: .5rem;}
+.nahlah-blockquote{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: 'Playfair Display','Times New Roman',serif; font-size: 32.94px; line-height: 1.24; letter-spacing: -.015em;}
+.nahlah-cite{box-sizing: border-box; display: block; margin-top: 1.5rem; font-style: normal; font-size: .76rem; letter-spacing: .16em; text-transform: uppercase; color: #AB9E6A;}
+.reviews{box-sizing: border-box; margin-top: 79.52px;}
+.rv-head{box-sizing: border-box; display: flex; flex-wrap: wrap; grid-row-gap: 1.5rem; grid-column-gap: 1.5rem; justify-content: space-between; align-items: flex-end; margin-bottom: 39.76px;}
+.rv-sub{box-sizing: border-box; margin-top: .7rem; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255,255,255,.5); font-weight: 300; font-size: .94rem;}
+.rv-score{box-sizing: border-box; display: flex; align-items: center; grid-row-gap: .9rem; grid-column-gap: .9rem;}
+.nahlah-img-9{box-sizing: border-box; max-width: 100%; display: block; width: 38.62px; height: auto;}
+.nahlah-b-7{box-sizing: border-box; display: flex; font-family: 'Playfair Display','Times New Roman',serif; font-size: 24.99px; font-weight: 500; align-items: center; grid-row-gap: .5rem; grid-column-gap: .5rem;}
+.rv-stars{box-sizing: border-box; color: #AB9E6A; letter-spacing: .12em; font-style: normal; font-size: .9em;}
+.nahlah-span-16{box-sizing: border-box; font-size: .7rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.42);}
+.rv-grid{box-sizing: border-box; display: grid; grid-row-gap: 1px; grid-column-gap: 1px; background: rgba(255,255,255,.09); grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.rv{box-sizing: border-box; background: #0B0B0C; padding-top: 24.99px; padding-right: 24.99px; padding-bottom: 24.99px; padding-left: 24.99px; display: grid; grid-row-gap: .9rem; grid-column-gap: .9rem; align-content: start; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-p-8{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255,255,255,.66); font-weight: 300; font-size: .94rem; line-height: 1.75;}
+.nahlah-footer{box-sizing: border-box; display: flex; align-items: center; grid-row-gap: .7rem; grid-column-gap: .7rem; font-size: .85rem; color: #fff; padding-top: .9rem; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255,255,255,.09);}
+.rv-av{box-sizing: border-box; width: 30px; height: 30px; border-top-left-radius: 50%; border-top-right-radius: 50%; border-bottom-right-radius: 50%; border-bottom-left-radius: 50%; display: grid; place-items: center; flex-grow: 0; flex-shrink: 0; flex-basis: auto; background: linear-gradient(140deg,#8A7E4E,#AB9E6A); color: #0B0B0C; font-weight: 700; font-size: .8rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-i-9{box-sizing: border-box; margin-left: auto; font-style: normal; font-size: .66rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.34);}
+.rv-more{box-sizing: border-box; color: #AB9E6A; text-decoration: none; display: inline-flex; align-items: center; grid-row-gap: .6rem; grid-column-gap: .6rem; margin-top: 34.08px; font-size: .68rem; letter-spacing: .18em; text-transform: uppercase; font-weight: 600;}
+.nahlah-i-10{box-sizing: border-box; display: block; width: 18px; height: 1px; background: #AB9E6A; transition: width .45s cubic-bezier(.22,1,.36,1);}
+.ch-invitation{box-sizing: border-box; background: #0B0B0C;}
+.nahlah-h2-5{box-sizing: border-box; margin-top: 1rem; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: 'Playfair Display','Times New Roman',serif; font-weight: 500; line-height: 1.02; letter-spacing: -.02em; font-size: 40.9px; max-width: 16ch;}
+.locs{box-sizing: border-box; display: grid; grid-row-gap: 1px; grid-column-gap: 1px; background: rgba(255,255,255,.1); margin-top: 45.44px; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.loc{box-sizing: border-box; background: #0B0B0C; padding-top: 36.35px; padding-right: 36.35px; padding-bottom: 36.35px; padding-left: 36.35px; display: grid; grid-row-gap: 1rem; grid-column-gap: 1rem; align-content: start; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-address{box-sizing: border-box; font-style: normal; color: rgba(255,255,255,.6); font-weight: 300;}
+.nahlah-div-17{box-sizing: border-box; display: grid; grid-row-gap: .3rem; grid-column-gap: .3rem; padding-top: 1rem; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255,255,255,.1); grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-span-17{box-sizing: border-box; font-size: .7rem; letter-spacing: .16em; text-transform: uppercase; color: rgba(255,255,255,.42);}
+.nahlah-a-3{box-sizing: border-box; color: #AB9E6A; text-decoration: none; font-family: 'Playfair Display','Times New Roman',serif; font-size: 20.45px; transition: opacity .3s;}
+.cta{background: linear-gradient(120deg,#8A7E4E,#AB9E6A 48%,#D4CDB2); color: #0B0B0C; text-align: center; margin-top: 79.52px;}
+.sec-pad{padding-block: 102.24px;}
+.nahlah-h2-6{box-sizing: border-box; margin-top: 1rem; margin-right: 0; margin-bottom: 0; margin-left: 0; font-family: 'Playfair Display','Times New Roman',serif; font-weight: 500; line-height: 1.02; letter-spacing: -.02em; font-size: 59.07px; max-width: 18ch; margin-inline: auto; color: #0B0B0C;}
+.nahlah-p-9{box-sizing: border-box; margin-top: 1.1rem; margin-right: 0; margin-bottom: 0; margin-left: 0; max-width: 46ch; margin-inline: auto; color: rgba(11,11,12,.72);}
+.nahlah-a-4{box-sizing: border-box; text-decoration: none; margin-top: 2rem;}
+.btn{display: inline-flex; align-items: center; justify-content: center; grid-row-gap: .6rem; grid-column-gap: .6rem; padding-top: 1.05rem; padding-right: 2rem; padding-bottom: 1.05rem; padding-left: 2rem; font-size: 10.88px; letter-spacing: .16em; text-transform: uppercase; font-weight: 600; position: relative; overflow: hidden; transition: color .45s cubic-bezier(.22,1,.36,1); will-change: transform;}
+.btn-dark{background: #0B0B0C; color: #fff;}
+.btn-after-2{box-sizing: border-box; position: absolute; top: 0; right: 0; bottom: 0; left: 0; background: #2A2A2E; transform: translateY(101%); transition: transform .55s cubic-bezier(.22,1,.36,1); z-index: 0;}
+.foot{background: #0B0B0C; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255,255,255,.1); padding-block: 68.16px 34.08px;}
+.nahlah-div-18{box-sizing: border-box; display: grid; grid-row-gap: 45.44px; grid-column-gap: 45.44px; grid-auto-columns: 1fr; grid-template-columns: 1.6fr 1fr 1fr 1.2fr; grid-template-rows: auto;}
+.nahlah-img-10{box-sizing: border-box; max-width: 100%; display: block; width: 190px; margin-bottom: 1.25rem;}
+.blurb{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; color: rgba(255,255,255,.5); font-weight: 300; max-width: 34ch; font-size: .92rem;}
+.nahlah-h4-2{box-sizing: border-box; margin-top: 0; margin-right: 0; margin-bottom: 1rem; margin-left: 0; font-family: 'Raleway','Helvetica Neue',Arial,sans-serif; font-weight: 600; line-height: 1.02; letter-spacing: .18em; font-size: .72rem; text-transform: uppercase; color: #AB9E6A;}
+.nahlah-ul-3{box-sizing: border-box; list-style: none; margin-top: 0; margin-right: 0; margin-bottom: 0; margin-left: 0; padding-top: 0; padding-right: 0; padding-bottom: 0; padding-left: 0; display: grid; grid-row-gap: .55rem; grid-column-gap: .55rem; grid-auto-columns: 1fr; grid-template-columns: 1fr; grid-template-rows: auto;}
+.nahlah-li-4{box-sizing: border-box; margin-top: 0; margin-bottom: 0; padding-left: 0;}
+.nahlah-a-5{box-sizing: border-box; color: rgba(255,255,255,.62); text-decoration: none; font-size: .92rem; font-weight: 300; transition: color .3s;}
+.base{box-sizing: border-box; margin-top: 56.8px; padding-top: 1.5rem; border-top-style: solid; border-top-width: 1px; border-top-color: rgba(255,255,255,.1); display: flex; flex-wrap: wrap; grid-row-gap: 1rem; grid-column-gap: 1rem; justify-content: space-between; font-size: .78rem; color: rgba(255,255,255,.4);}</style>
+</head><body>
+<div class="page-wrapper"><header class="nahlah-header site-nav" id="nav"><div class="nav-progress"><i class="nahlah-i" id="navProgress"></i></div><div class="nahlah-div wrap no-rail nav-in"><a class="nav-logo"><img class="nahlah-img" width="auto" height="auto" alt="Dr. Nahlah — Implants and Prosthodontics Specialists" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1cc8ece7c5e6df72a8_logo.png" loading="eager"></a> <div class="nahlah-div nav-mid"><span class="nahlah-div">Chapter</span><b class="nahlah-b" id="navCh">00</b><i class="nahlah-i-2" id="navBar"></i><span class="nahlah-div" id="navName">Arrival</span></div><a class="nav-cta">Book a Consult</a><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}.burger{display:block;width:44px;height:44px;position:relative;z-index:130}.burger span{position:absolute;left:10px;width:24px;height:1.5px;background:#fff;transition:transform .45s cubic-bezier(.22,1,.36,1)}.burger span:nth-child(1){top:18px}.burger span:nth-child(2){top:25px}.burger{display:none}@media (max-width: 991px){.burger{display:block}}@media (max-width: 767px){.burger{display:block}}@media (max-width: 479px){.burger{display:block}}</style><button aria-controls="drawer" aria-expanded="false" aria-label="Open menu" class="burger" id="burger">
+<span></span><span></span>
+</button></div></header><div class="nahlah-header drawer" id="drawer"><ul class="nahlah-ul"><li class="nahlah-li"><a class="nahlah-a"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.drawer li a small{font-family:'Raleway','Helvetica Neue',Arial,sans-serif;font-size:.6rem;letter-spacing:.2em;color:#AB9E6A;display:block;margin-bottom:-.35em}</style><small>01</small>The Reality</a></li><li class="nahlah-li"><a class="nahlah-a"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.drawer li a small{font-family:'Raleway','Helvetica Neue',Arial,sans-serif;font-size:.6rem;letter-spacing:.2em;color:#AB9E6A;display:block;margin-bottom:-.35em}</style><small>02</small>The Difference</a></li><li class="nahlah-li"><a class="nahlah-a"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.drawer li a small{font-family:'Raleway','Helvetica Neue',Arial,sans-serif;font-size:.6rem;letter-spacing:.2em;color:#AB9E6A;display:block;margin-bottom:-.35em}</style><small>03</small>The Specialist</a></li><li class="nahlah-li"><a class="nahlah-a"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.drawer li a small{font-family:'Raleway','Helvetica Neue',Arial,sans-serif;font-size:.6rem;letter-spacing:.2em;color:#AB9E6A;display:block;margin-bottom:-.35em}</style><small>04</small>Transformation</a></li><li class="nahlah-li"><a class="nahlah-a"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.drawer li a small{font-family:'Raleway','Helvetica Neue',Arial,sans-serif;font-size:.6rem;letter-spacing:.2em;color:#AB9E6A;display:block;margin-bottom:-.35em}</style><small>05</small>The Path</a></li><li class="nahlah-li"><a class="nahlah-a"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.drawer li a small{font-family:'Raleway','Helvetica Neue',Arial,sans-serif;font-size:.6rem;letter-spacing:.2em;color:#AB9E6A;display:block;margin-bottom:-.35em}</style><small>06</small>The Standard</a></li><li class="nahlah-li"><a class="nahlah-a"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.drawer li a small{font-family:'Raleway','Helvetica Neue',Arial,sans-serif;font-size:.6rem;letter-spacing:.2em;color:#AB9E6A;display:block;margin-bottom:-.35em}</style><small>07</small>The Proof</a></li><li class="nahlah-li"><a class="nahlah-a"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.drawer li a small{font-family:'Raleway','Helvetica Neue',Arial,sans-serif;font-size:.6rem;letter-spacing:.2em;color:#AB9E6A;display:block;margin-bottom:-.35em}</style><small>08</small>Book a Consult</a></li></ul><div class="drawer-foot"><span class="nahlah-div">McLean · (571) 619-9442</span> <span class="nahlah-div">Alexandria · (571) 410-3430</span></div></div><div class="nahlah-div-2" id="smooth-wrapper"><div class="nahlah-div" id="smooth-content"><main class="nahlah-div" id="top"><section class="ch-arrival" id="arrival"><div class="bg"><div class="glow"></div><img class="nahlah-img-2 portrait" width="auto" height="auto" alt="Dr. Esam Nahlah, board-certified prosthodontist" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1cd9fc42e70c3b4307_dr-nahlah.png" loading="eager" id="portrait"></div><div class="veil" id="heroVeil"></div><div class="in"><div class="chapter-tag"><i class="nahlah-i-3"></i><span class="nahlah-div eyebrow">Chapter 00 · Arrival</span></div><h1 class="nahlah-h1" id="heroTitle">A smile rebuilt by a <em class="nahlah-em">specialist</em>.</h1><p class="lead" id="heroLead"> Not a general dentist with a weekend course. A board-certified prosthodontist who has spent a career rebuilding what other people gave up on. </p><div class="actions"><a class="nahlah-a-2 btn btn-primary magnetic"><span class="nahlah-span">Book a Free Consult</span><div class="btn-after"></div></a> <a class="nav-logo btn btn-ghost magnetic"><span class="nahlah-span">See the Transformation</span><div class="btn-after"></div></a></div><div class="meta"><div class="nahlah-div-3"><b class="nahlah-b-2">D.D.S., M.S.</b><span class="nahlah-span-2">Diplomate, Am. Board of Prosthodontics</span></div><div class="nahlah-div-3"><b class="nahlah-b-2">Since 2003</b><span class="nahlah-span-2">In Practice</span></div><div class="nahlah-div-3"><b class="nahlah-b-2">2 Offices</b><span class="nahlah-span-2">McLean &amp; Alexandria</span></div></div></div><div class="cue"><span class="nahlah-div">Begin</span><i class="nahlah-i-4"></i></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  WZ.add(function(W){
+    var root = document.getElementById('arrival');
+    var reveal = root.querySelectorAll('[data-anim="hide"]');
+    gsap.set(reveal,{visibility:'visible'});
+
+    if(W.reduced){ gsap.set(reveal,{opacity:1,y:0}); return; }
+
+    /* Entrance — headline splits into masked lines and rises. */
+    var tl = gsap.timeline({delay:.15});
+    var split = W.splitLines(document.getElementById('heroTitle'));
+    if(split && split.lines && split.lines.length){
+      gsap.set(split.lines,{yPercent:110});
+      tl.to(split.lines,{yPercent:0,duration:1.15,stagger:.09,ease:'power4.out'},0);
+    }else{
+      tl.from('#heroTitle',{opacity:0,y:40,duration:1,ease:'power3.out'},0);
+    }
+    tl.from(root.querySelector('.chapter-tag'),{opacity:0,x:-24,duration:.9,ease:'power3.out'},.05)
+      .from('#heroLead',       {opacity:0,y:26,duration:.9,ease:'power3.out'},.55)
+      .from(root.querySelector('.actions'),{opacity:0,y:26,duration:.9,ease:'power3.out'},.68)
+      .from(root.querySelectorAll('.meta div'),{opacity:0,y:22,duration:.8,stagger:.08,ease:'power3.out'},.78)
+      .from(root.querySelector('.cue'),{opacity:0,duration:.8},.9)
+      .from('#portrait',{opacity:0,scale:1.08,xPercent:4,duration:1.6,ease:'power3.out'},0);
+
+    /* Departure — the chapter recedes as you leave it. */
+    gsap.timeline({scrollTrigger:{trigger:root,start:'top top',end:'bottom top',scrub:.6}})
+      .to(root.querySelector('.in'),{yPercent:-16,opacity:.15,ease:'none'},0)
+      .to('#portrait',{yPercent:10,scale:1.07,ease:'none'},0)
+      .to('#heroVeil',{opacity:.55,ease:'none'},0);
+
+    /* Scroll cue nudges until the visitor moves. */
+    gsap.to(root.querySelector('.cue i'),{scaleY:.3,transformOrigin:'top',duration:1.1,
+      repeat:-1,yoyo:true,ease:'power1.inOut'});
+  });
+  </script><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><style data-embed="">.ch-arrival .bg::before{content:"";position:absolute;inset:0;z-index:2;
+      background:
+        radial-gradient(110% 80% at 74% 42%,rgba(171,158,106,.18),transparent 60%),
+        linear-gradient(100deg,rgba(11,11,12,.95) 0%,rgba(11,11,12,.82) 40%,
+                        rgba(11,11,12,.26) 68%,rgba(11,11,12,.48) 100%),
+        linear-gradient(180deg,rgba(11,11,12,.45) 0%,rgba(11,11,12,0) 26%,rgba(11,11,12,.88) 100%)}
+@media(max-width:719px){
+      .ch-arrival{align-items:center;min-height:94svh}
+      .ch-arrival .portrait{right:-22%;height:min(66vh,560px);opacity:.55}
+      .ch-arrival .btn{flex:1 1 auto}
+      .ch-arrival .cue{display:none}
+    }</style></section><section class="nahlah-div ch-reality" id="reality"><div class="frame"><img class="nahlah-img-3" width="auto" height="auto" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1b56476599b22c583c_case2-before.jpg" loading="lazy" id="realityImg"></div><div class="nahlah-div-4 wrap stage"><div class="nahlah-div"><div class="chapter-tag"><i class="nahlah-i-3"></i><span class="nahlah-div eyebrow">Chapter 01 · The Reality</span></div><p class="nahlah-p big" id="realityBig"> You have probably been told this is complicated. That it will take years, cost a fortune, or simply cannot be done. </p><div class="after" id="realityAfter"><p class="nahlah-p-2">Usually that is not a verdict on your mouth. It is a verdict on the tools available to whoever was looking at it.</p><p class="nahlah-p-2">Most implant failures are not surgical failures. They are planning failures — and planning is the entire discipline a prosthodontist trains three extra years to do.</p></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  WZ.add(function(W){
+    var root = document.getElementById('reality');
+    var big  = document.getElementById('realityBig');
+
+    if(W.reduced) return;
+
+    /* Words brighten one by one, tied to scroll position. */
+    var sp = W.splitWords(big);
+    if(sp && sp.words && sp.words.length){
+      gsap.to(sp.words,{
+        color:'#ffffff', stagger:.4, ease:'none',
+        scrollTrigger:{trigger:root,start:'top 62%',end:'center 42%',scrub:.5}
+      });
+      /* Final clause lands in gold. */
+      var tail = sp.words.slice(-7);
+      gsap.to(tail,{color:'#AB9E6A',ease:'none',
+        scrollTrigger:{trigger:root,start:'center 55%',end:'bottom 60%',scrub:.5}});
+    }
+
+    gsap.from('#realityAfter p',{opacity:0,y:28,duration:.9,stagger:.14,ease:'power3.out',
+      scrollTrigger:{trigger:'#realityAfter',start:'top 82%'}});
+
+    /* Case photo drifts and un-crops as the chapter passes. */
+    gsap.fromTo('#realityImg',{yPercent:-8,scale:1.14},{yPercent:8,scale:1,ease:'none',
+      scrollTrigger:{trigger:root,start:'top bottom',end:'bottom top',scrub:.8}});
+  });
+  </script><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><style data-embed="">.ch-reality .frame::after{content:"";position:absolute;inset:0;
+      background:linear-gradient(90deg,var(--black),transparent 60%)}
+@media(max-width:900px){ .ch-reality .frame{display:none} }</style></section><section class="ch-difference" id="difference"><div class="nahlah-div wrap sec-pad"><div class="nahlah-div-5 head"><div class="chapter-tag"><i class="nahlah-i-3"></i><span class="nahlah-div eyebrow">Chapter 02 · The Difference</span></div><h2 class="nahlah-h2">One of twelve recognised dental specialties.</h2></div><div class="stats" id="diffStats"><div class="stat"><b class="nahlah-b-3">0</b><span class="nahlah-span-3">Years in Practice</span></div><div class="stat"><b class="nahlah-b-3">0</b><span class="nahlah-span-3">Board Credentials</span></div><div class="stat"><b class="nahlah-b-3">0</b><span class="nahlah-span-3">Average Patient Rating</span></div><div class="stat"><b class="nahlah-b-3">0</b><span class="nahlah-span-3">Virginia Locations</span></div></div></div><div class="nahlah-div wrap versus" id="versus"><div class="vs-head"><h3 class="nahlah-h2">Why patients travel for this.</h3><p class="nahlah-p-3">Most implant cases pass through three or four sets of hands. Here, they don’t.</p></div><div class="vs-table"><div class="nahlah-div vs-row vs-head-row"><span class="nahlah-span-4 vs-us">Dr. Nahlah</span> <span class="nahlah-span-5 vs-mid">vs</span> <span class="nahlah-span-6 vs-them">A General Practice</span></div><div class="nahlah-div vs-row"><span class="nahlah-span-7 vs-us">Board-certified prosthodontist — three years of specialist training beyond dental school.</span> <span class="nahlah-span-8 vs-mid"><i class="nahlah-i-5"></i></span> <span class="nahlah-span-9 vs-them">A weekend implant course, or a referral out.</span></div><div class="nahlah-div vs-row"><span class="nahlah-span-7 vs-us">Surgery and final teeth planned and placed by the same specialist.</span> <span class="nahlah-span-8 vs-mid"><i class="nahlah-i-5"></i></span> <span class="nahlah-span-9 vs-them">Handed between a surgeon, a dentist and an outside lab.</span></div><div class="nahlah-div vs-row"><span class="nahlah-span-7 vs-us">The final smile is designed first — implants are placed to serve it.</span> <span class="nahlah-span-8 vs-mid"><i class="nahlah-i-5"></i></span> <span class="nahlah-span-9 vs-them">Implants placed first, restoration figured out afterwards.</span></div><div class="nahlah-div vs-row"><span class="nahlah-span-7 vs-us">Complex and failed cases accepted — including work other practices decline.</span> <span class="nahlah-span-8 vs-mid"><i class="nahlah-i-5"></i></span> <span class="nahlah-span-9 vs-them">Straightforward cases only.</span></div><div class="nahlah-div vs-row"><span class="nahlah-span-7 vs-us">IV sedation certified, with hospital privileges at Inova Fairfax.</span> <span class="nahlah-span-8 vs-mid"><i class="nahlah-i-5"></i></span> <span class="nahlah-span-9 vs-them">Local anaesthetic, or a referral for sedation.</span></div></div></div><div class="marquee"><div class="nahlah-div-6 row" id="mqRow"><span class="nahlah-span-10">Board-Certified Prosthodontist</span><b class="nahlah-b-4">◆</b> <span class="nahlah-span-10">Fellow, American College of Prosthodontists</span><b class="nahlah-b-4">◆</b> <span class="nahlah-span-10">All-on-4 Full-Arch Restoration</span><b class="nahlah-b-4">◆</b> <span class="nahlah-span-10">Surgery &amp; Restoration Under One Roof</span><b class="nahlah-b-4">◆</b> <span class="nahlah-span-10">Sedation Available</span><b class="nahlah-b-4">◆</b></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  WZ.add(function(W){
+    var root = document.getElementById('difference');
+
+    /* Counters */
+    root.querySelectorAll('[data-count]').forEach(function(el){
+      var target = parseFloat(el.getAttribute('data-count')),
+          dec    = parseInt(el.getAttribute('data-decimals')||'0',10),
+          suf    = el.getAttribute('data-suffix')||'';
+      function paint(v){
+        el.textContent = (dec ? v.toFixed(dec) : Math.floor(v).toLocaleString('en-US')) + suf;
+      }
+      if(W.reduced){ paint(target); return; }
+      var o = {v:0};
+      gsap.to(o,{v:target,duration:1.9,ease:'power2.out',onUpdate:function(){ paint(o.v); },
+        scrollTrigger:{trigger:el,start:'top 88%'}});
+    });
+
+    if(W.reduced) return;
+
+    gsap.fromTo(root.querySelectorAll('.stat'),
+      {opacity:0,y:26},
+      {opacity:1,y:0,duration:.9,stagger:.1,ease:'power3.out',
+       scrollTrigger:{trigger:'#diffStats',start:'top 85%'}});
+
+    /* Marquee: loops continuously, and scroll velocity bends its speed and
+       direction — the page feels physically connected to the wheel. */
+    var row = document.getElementById('mqRow');
+    row.innerHTML += row.innerHTML;                       // seamless loop needs a duplicate
+    var half = row.scrollWidth / 2;
+    var loop = gsap.to(row,{x:-half,duration:26,ease:'none',repeat:-1,
+      modifiers:{x:function(x){ return (parseFloat(x) % half) + 'px'; }}});
+
+    var vt = gsap.quickTo(loop,'timeScale',{duration:.5,ease:'power2'});
+    ScrollTrigger.create({
+      onUpdate:function(self){
+        var v = self.getVelocity()/380;
+        vt(gsap.utils.clamp(-7, 7, v === 0 ? 1 : (v < 0 ? Math.min(-1,v) : Math.max(1,v))));
+      }
+    });
+    /* Settle back to a gentle drift when scrolling stops. */
+    ScrollTrigger.addEventListener('scrollEnd', function(){ vt(1); });
+
+    /* Comparison table: header first, then rows deal in from the left. */
+    gsap.from('#versus .vs-head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
+      scrollTrigger:{trigger:'#versus',start:'top 78%'}});
+    gsap.from('#versus .vs-row',{opacity:0,x:-34,duration:.85,stagger:.1,ease:'power3.out',
+      scrollTrigger:{trigger:'#versus .vs-table',start:'top 82%'}});
+  });
+  </script><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><style data-embed="">.ch-difference .stat::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+      background:rgba(255,255,255,.14);transform:scaleX(0);transform-origin:left}
+@media(max-width:719px){
+      .vs-row{grid-template-columns:1fr}
+      .vs-row .vs-mid{display:none}
+      .vs-row>span{font-size:.9rem}
+      .vs-row .vs-them{opacity:.75}
+      .vs-head-row .vs-them{padding-top:1rem}
+    }
+@media(min-width:720px){ .ch-difference .stats{grid-template-columns:repeat(4,1fr)} }</style></section><section class="ch-specialist" id="specialist"><div class="nahlah-div-7 wrap sec-pad grid"><div class="nahlah-div-8 portrait"><div class="plate"><img class="nahlah-img-4" width="auto" height="auto" alt="Dr. Esam Nahlah, D.D.S., M.S., board-certified prosthodontist" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1cd9fc42e70c3b4307_dr-nahlah.png" loading="lazy" id="specPortrait"></div><div class="sig"><b class="nahlah-b-5">Dr. Esam Nahlah</b><span class="nahlah-span-11">D.D.S., M.S.</span></div></div><div class="nahlah-div"><div class="chapter-tag"><i class="nahlah-i-3"></i><span class="nahlah-div eyebrow">Chapter 03 · The Specialist</span></div><h2 class="nahlah-h2-2" id="specTitle">The credentials behind the work.</h2><div class="bio" id="specBio"><p class="nahlah-p-4">Dr. Nahlah has practised dentistry <strong class="nahlah-strong">since 2003</strong>, moving to Northern Virginia in 2013 to focus entirely on prosthodontics — esthetic dentistry, implant dentistry, full-mouth rehabilitation and smile makeovers.</p><p class="nahlah-p-4">In 2013 the American Board of Prosthodontics awarded him <strong class="nahlah-strong">Diplomate</strong> status, the most prestigious credential in the field. He holds hospital privileges at <strong class="nahlah-strong">Inova Fairfax</strong>, the only Level 1 trauma hospital in Northern Virginia.</p><p class="nahlah-p-4">He has published in national and international scientific journals, lectures on smile design and dental implants, and teaches hands-on courses for other dentists — the kind of work that tends to bring the difficult cases to his door.</p></div><div class="creds"><h4 class="nahlah-h4">Credentials &amp; Certifications</h4><ul class="nahlah-ul-2" id="credList"><li class="nahlah-li-2"><i class="nahlah-i-6"></i>Diplomate, American Board of Prosthodontics</li><li class="nahlah-li-2"><i class="nahlah-i-6"></i>Certificate in Prosthodontics</li><li class="nahlah-li-2"><i class="nahlah-i-6"></i>M.S., Master of Science in Oral Biology</li><li class="nahlah-li-2"><i class="nahlah-i-6"></i>Hospital Privileges, Inova Fairfax Hospital</li><li class="nahlah-li-2"><i class="nahlah-i-6"></i>Fellow, International Congress of Oral Implantologists</li><li class="nahlah-li-2"><i class="nahlah-i-6"></i>Associate Fellow, American Academy of Implant Dentistry</li><li class="nahlah-li-2"><i class="nahlah-i-6"></i>IV Sedation Certificate</li><li class="nahlah-li-3"><i class="nahlah-i-6"></i>BLS &amp; ACLS Provider</li></ul></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  WZ.add(function(W){
+    if(W.reduced) return;
+
+    var t = W.splitLines(document.getElementById('specTitle'));
+    if(t && t.lines){
+      gsap.from(t.lines,{yPercent:110,duration:1,stagger:.09,ease:'power4.out',
+        scrollTrigger:{trigger:'#specTitle',start:'top 84%'}});
+    }
+    gsap.from('#specBio p',{opacity:0,y:26,duration:.9,stagger:.13,ease:'power3.out',
+      scrollTrigger:{trigger:'#specBio',start:'top 82%'}});
+
+    /* Credentials deal in one line at a time — the length of the list is the point. */
+    gsap.from('#credList li',{opacity:0,x:-22,duration:.6,stagger:.07,ease:'power2.out',
+      scrollTrigger:{trigger:'#credList',start:'top 85%'}});
+
+    /* Portrait rises slightly out of its plate as the chapter passes. */
+    gsap.fromTo('#specPortrait',{yPercent:6},{yPercent:-4,ease:'none',
+      scrollTrigger:{trigger:'#specialist',start:'top bottom',end:'bottom top',scrub:.8}});
+  });
+  </script><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><style data-embed="">.ch-specialist .portrait .plate::after{content:"";position:absolute;inset:0;
+      background:radial-gradient(80% 60% at 50% 30%,rgba(171,158,106,.20),transparent 70%)}
+@media(min-width:900px){ .ch-specialist .grid{grid-template-columns:.82fr 1.18fr} }</style></section><section class="nahlah-div ch-transformation" id="transformation"><div class="nahlah-div-9 pin" id="tPin"><div class="nahlah-div wrap"><div class="nahlah-div-10 head"><div class="chapter-tag"><i class="nahlah-i-3"></i><span class="nahlah-div eyebrow">Chapter 04 · The Transformation</span></div><h2 class="nahlah-h2-3">Keep scrolling. Watch it change.</h2></div><div class="nahlah-div cmp" id="cmp"><div class="nahlah-div slide on"><img class="nahlah-img-5" width="auto" height="auto" alt="Patient smile before veneers and implant restoration" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1b10f4d2bdf828e887_case1-before.jpg" loading="eager"><img class="nahlah-img-5 aft" width="auto" height="auto" alt="The same smile after treatment" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1bf26987584de901cf_case1-after.jpg" loading="eager"></div><div class="nahlah-div slide"><img class="nahlah-img-5" width="auto" height="auto" alt="Patient smile before double-arch All-on-4" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1b56476599b22c583c_case2-before.jpg" loading="eager"><img class="nahlah-img-5 aft" width="auto" height="auto" alt="The same smile after double-arch All-on-4" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1bc8ece7c5e6df7194_case2-after.jpg" loading="eager"></div><div class="nahlah-div slide"><img class="nahlah-img-5" width="auto" height="auto" alt="Patient smile before single-arch All-on-4" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1c065f40d88fed0d24_case3-before.jpg" loading="eager"><img class="nahlah-img-5 aft" width="auto" height="auto" alt="The same smile after single-arch All-on-4" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1c56476599b22c5895_case3-after.jpg" loading="eager"></div><span class="nahlah-span-12 cmp-tag tag-before">Before</span> <span class="nahlah-span-13 cmp-tag tag-after">After</span><div class="nahlah-div handle" id="tHandle"></div></div><div class="nahlah-div-11 foot"><span class="nahlah-div" id="tCaption">Porcelain veneers with implant restoration · upper and lower arch</span> <span class="nahlah-span-14 dots" id="tDots"><i class="nahlah-i-7 on"></i><i class="nahlah-i-7"></i><i class="nahlah-i-7"></i></span></div></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  WZ.add(function(W){
+    var root  = document.getElementById('transformation'),
+        pin   = document.getElementById('tPin'),
+        cmp   = document.getElementById('cmp'),
+        cap   = document.getElementById('tCaption'),
+        dots  = document.getElementById('tDots').children,
+        slides= cmp.querySelectorAll('.slide'),
+        handle= document.getElementById('tHandle');
+
+    var CAPTIONS = [
+      'Porcelain veneers with implant restoration · upper and lower arch',
+      'Double-arch All-on-4 · full fixed teeth on four implants per arch',
+      'Single-arch All-on-4 · upper arch restored on four implants'
+    ];
+
+    function show(i){
+      for(var s=0;s<slides.length;s++) slides[s].classList.toggle('on', s===i);
+      for(var d=0;d<dots.length;d++) dots[d].classList.toggle('on', d===i);
+      cap.innerHTML = CAPTIONS[i];
+    }
+    function setPos(p){ cmp.style.setProperty('--pos', p + '%'); }
+
+    if(W.reduced){
+      /* Show the finished result rather than an un-wiped "before". */
+      setPos(0); show(0);
+      cmp.style.setProperty('--pos','0%');
+      return;
+    }
+
+    setPos(100); // start fully on "before"; scrubbing wipes toward "after"
+    gsap.set(handle,{opacity:1});
+
+    /* Pin the chapter and drive three wipes from one scroll distance.
+       Each case gets a wipe, then hands over to the next. */
+    var state = {p:100, idx:0};
+    var tl = gsap.timeline({
+      scrollTrigger:{
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + (window.innerHeight * 3.2),
+        pin: true,
+        scrub: .7,
+        anticipatePin: 1,
+        invalidateOnRefresh: true
+      }
+    });
+
+    for(var i=0;i<3;i++){
+      (function(idx){
+        tl.call(function(){ if(state.idx!==idx){ state.idx=idx; show(idx); } }, null, tl.duration())
+          .fromTo(state,{p:100},{p:0,duration:1,ease:'none',
+            onUpdate:function(){ setPos(state.p); }})
+          .to({},{duration:.22});   // a beat to read the result before moving on
+      })(i);
+    }
+    /* Reverse scrolling needs the slide index restored too. */
+    tl.eventCallback('onUpdate', function(){
+      var seg = Math.min(2, Math.floor(tl.progress() * 3));
+      if(state.idx !== seg){ state.idx = seg; show(seg); }
+    });
+
+    gsap.from(root.querySelectorAll('.head > *'),{opacity:0,y:24,duration:.9,stagger:.1,
+      ease:'power3.out',scrollTrigger:{trigger:root,start:'top 70%'}});
+  });
+  </script><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><style data-embed="">.cmp .handle::before{content:"";position:absolute;top:50%;left:50%;
+      width:clamp(44px,4.4vw,58px);height:clamp(44px,4.4vw,58px);transform:translate(-50%,-50%);
+      border-radius:50%;background:var(--gold);box-shadow:0 6px 30px rgba(0,0,0,.3)}
+@media(max-width:719px){
+      .cmp{aspect-ratio:4/3;max-height:none}
+      .cmp .cmp-tag{font-size:.54rem;padding:.3rem .55rem}
+    }</style></section><section class="ch-specialist" id="path"><div class="nahlah-div-12 pin" id="pathPin"><div class="nahlah-div-13 head"><div class="chapter-tag"><i class="nahlah-i-3"></i><span class="nahlah-div eyebrow">Chapter 05 · The Path</span></div><h2 class="nahlah-h2-3">Four visits, not four years.</h2></div><div class="track" id="pathTrack"><article class="card"><span class="no">01</span><h3 class="nahlah-h3">Consultation &amp; 3D Scan</h3><p class="nahlah-p-5">A cone-beam scan shows the bone we actually have to work with. You leave knowing whether you are a candidate, what it costs, and how long it takes.</p><div class="nahlah-div-14 shot"><img class="nahlah-img-6" width="auto" height="auto" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1c56476599b22c58ab_consult.jpg" loading="lazy"></div></article><article class="card"><span class="no">02</span><h3 class="nahlah-h3">Digital Smile Design</h3><p class="nahlah-p-5">The final teeth are designed before a single implant is placed. You approve the result in advance rather than hoping for it.</p><div class="nahlah-div-14 shot"><img class="nahlah-img-6" width="auto" height="auto" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1bf26987584de901cf_case1-after.jpg" loading="lazy"></div></article><article class="card"><span class="no">03</span><h3 class="nahlah-h3">Guided Placement</h3><p class="nahlah-p-5">Implants are placed through a surgical guide built from your scan, under sedation if you want it. Many patients leave the same day with fixed teeth.</p><div class="nahlah-div-14 shot"><img class="nahlah-img-6" width="auto" height="auto" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1df26987584de902c3_office.jpg" loading="lazy"></div></article><article class="card"><span class="no">04</span><h3 class="nahlah-h3">Final Restoration</h3><p class="nahlah-p-5">Once healing is complete the definitive teeth go in — shaped, shaded and bite-balanced by the same specialist who planned them.</p><div class="nahlah-div-14 shot"><img class="nahlah-img-6" width="auto" height="auto" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1bc8ece7c5e6df7194_case2-after.jpg" loading="lazy"></div></article></div><div class="bar"><i class="nahlah-i-8" id="pathBar"></i></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  WZ.add(function(W){
+    var pin   = document.getElementById('pathPin'),
+        track = document.getElementById('pathTrack'),
+        bar   = document.getElementById('pathBar');
+
+    if(W.reduced){
+      /* Fall back to a normal horizontal scroll region. */
+      pin.style.height = 'auto';
+      track.style.overflowX = 'auto';
+      track.style.width = '100%';
+      return;
+    }
+
+    /* Horizontal travel = track width beyond the viewport. Recomputed on
+       refresh so it stays correct across resize and font loading. */
+    function distance(){ return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
+
+    var tween = gsap.to(track,{
+      x: function(){ return -distance(); },
+      ease:'none',
+      scrollTrigger:{
+        trigger: pin,
+        start:'top top',
+        end: function(){ return '+=' + (distance() + window.innerHeight*0.6); },
+        pin: true,
+        scrub: .6,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: function(self){ gsap.set(bar,{scaleX:self.progress}); }
+      }
+    });
+
+    /* Each card lights its underline as it reaches centre stage. */
+    gsap.utils.toArray('#pathTrack .card').forEach(function(card){
+      gsap.to(card,{'--x':1,duration:.1});
+      ScrollTrigger.create({
+        trigger: card,
+        containerAnimation: tween,
+        start: 'left 72%',
+        end: 'right 28%',
+        onEnter:      function(){ gsap.to(card,{borderColor:'rgba(171,158,106,.5)',duration:.5});
+                                  gsap.to(card.querySelector('.shot img'),{filter:'grayscale(0)',duration:.6}); },
+        onLeave:      function(){ gsap.to(card,{borderColor:'rgba(255,255,255,.13)',duration:.5}); },
+        onEnterBack:  function(){ gsap.to(card,{borderColor:'rgba(171,158,106,.5)',duration:.5}); },
+        onLeaveBack:  function(){ gsap.to(card,{borderColor:'rgba(255,255,255,.13)',duration:.5});
+                                  gsap.to(card.querySelector('.shot img'),{filter:'grayscale(1)',duration:.6}); }
+      });
+      gsap.fromTo(card.querySelector('.no'),{opacity:.35},{opacity:1,duration:.4,
+        scrollTrigger:{trigger:card,containerAnimation:tween,start:'left 78%',toggleActions:'play none none reverse'}});
+    });
+  });
+  </script><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><style data-embed="">.ch-path .card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+      background:var(--gold);transform:scaleX(0);transform-origin:left}
+@media(max-width:719px){ .ch-path .card{width:78vw} }</style></section><section class="ch-standard" id="standard"><div class="nahlah-div wrap sec-pad"><div class="nahlah-div-15 head"><div class="chapter-tag"><i class="nahlah-i-3"></i><span class="nahlah-div eyebrow">Chapter 06 · The Standard</span></div><h2 class="nahlah-h2">Everything under one roof.</h2><p class="nahlah-p-6">Planning, surgery, sedation and the lab that makes your teeth — all in the same building, run by the same team. That is what removes the handoffs.</p></div><div class="std-grid" id="stdGrid"><article class="nahlah-div std wide"><img class="nahlah-img-7" width="auto" height="auto" alt="The in-house dental laboratory bench with a surgical microscope" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1c7ec86ab83cab0709_lab.jpg" loading="lazy"><span class="tagline">In-House Laboratory</span><div class="cap"><b class="nahlah-b-6">Your teeth are made here.</b> <span class="nahlah-span-15">An on-site lab means shade, shape and fit are adjusted in minutes rather than posted to a third party and waited on for weeks.</span></div></article><article class="nahlah-div std"><img class="nahlah-img-7" width="auto" height="auto" alt="3D dental imaging used for implant planning" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1dacc3302c14f10b13_xray.png" loading="lazy"><span class="tagline">3D Imaging</span><div class="cap"><b class="nahlah-b-6">Planned in three dimensions.</b> <span class="nahlah-span-15">Cone-beam scans map bone before anything is placed.</span></div></article><article class="nahlah-div std"><img class="nahlah-img-7" width="auto" height="auto" alt="A patient comfortably sedated during treatment" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1dd23f2f05c676e7b2_sedation.jpg" loading="lazy"><span class="tagline">IV Sedation</span><div class="cap"><b class="nahlah-b-6">Through it in one sitting.</b> <span class="nahlah-span-15">IV-sedation certified, so long appointments pass in what feels like minutes.</span></div></article><article class="nahlah-div std"><img class="nahlah-img-7" width="auto" height="auto" alt="The practice interior in McLean, Virginia" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1ce99ab374a2467eb9_interior.jpg" loading="lazy"><span class="tagline">The Practice</span><div class="cap"><b class="nahlah-b-6">Built for long visits.</b> <span class="nahlah-span-15">Two Northern Virginia offices designed around full-day treatment.</span></div></article></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  WZ.add(function(W){
+    if(W.reduced) return;
+
+    gsap.from('#standard .head > *',{opacity:0,y:26,duration:.9,stagger:.12,ease:'power3.out',
+      scrollTrigger:{trigger:'#standard .head',start:'top 82%'}});
+
+    /* Panels rise and un-mask; each image also drifts against the scroll. */
+    gsap.utils.toArray('#stdGrid .std').forEach(function(card,i){
+      gsap.fromTo(card,
+        {opacity:0,y:44,clipPath:'inset(12% 0 0 0)'},
+        {opacity:1,y:0,clipPath:'inset(0% 0 0 0)',duration:1.05,ease:'power3.out',delay:i*.07,
+         scrollTrigger:{trigger:card,start:'top 88%'}});
+      gsap.fromTo(card.querySelector('img'),{yPercent:-5},{yPercent:5,ease:'none',
+        scrollTrigger:{trigger:card,start:'top bottom',end:'bottom top',scrub:.8}});
+    });
+  });
+  </script><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><style data-embed="">.std::before{content:"";position:absolute;inset:0;z-index:-1;
+      background:linear-gradient(180deg,rgba(11,11,12,.10) 0%,rgba(11,11,12,.38) 42%,rgba(11,11,12,.90) 100%)}
+@media(min-width:820px){ .std-grid{grid-template-columns:repeat(3,1fr)} }</style></section><section class="ch-proof" id="proof"><div class="film" id="proofFilm"><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}video{max-width:100%;display:block}.ch-proof .film video{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;will-change:transform}</style><video aria-label="Inside the practice" id="film" loop="" muted="" playsinline="" preload="metadata" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbcced9fc42e70c3c1c8f_broll.mp4"></video><div class="copy"><div class="nahlah-div"><h2 class="nahlah-h2-4" id="filmTitle">Experience, skill and dental artistry.</h2><p class="nahlah-p-7" id="filmSub">Dr. Esam Nahlah, D.D.S., M.S. — Diplomate of the American Board of Prosthodontics, practising in Northern Virginia since 2013.</p></div></div></div><div class="nahlah-div wrap sec-pad"><div class="chapter-tag"><i class="nahlah-i-3"></i><span class="nahlah-div eyebrow">Chapter 07 · The Proof</span></div><div class="story"><div class="nahlah-div-16 shot" id="storyShot"><img class="nahlah-img-8" width="auto" height="auto" alt="A patient holding a framed photograph of her smile before treatment" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1d56476599b22c5a3f_patient-story.jpg" loading="lazy" id="storyImg"></div><div class="nahlah-div" id="storyCopy"><span class="qm">“</span><blockquote class="nahlah-blockquote">My smile held me back. That’s behind me now.</blockquote><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.ch-proof cite{display:block;margin-top:1.5rem;font-style:normal;font-size:.76rem;letter-spacing:.16em;text-transform:uppercase;color:#AB9E6A}</style><cite>Melanie · Full-Arch Implant Patient</cite></div></div><div class="reviews" id="reviews"><div class="rv-head"><div class="nahlah-div"><h3 class="nahlah-h2-3">What patients say afterwards.</h3><p class="rv-sub">Verified reviews from the practice’s Google Business Profile.</p></div><div class="rv-score"><img class="nahlah-img-9" width="auto" height="auto" alt="Google" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1cbb915227a0567900_google.png" loading="lazy"><div class="nahlah-div"><b class="nahlah-b-7"><span class="nahlah-div" id="rvScore">5.0</span> <i class="rv-stars">★★★★★</i></b> <span class="nahlah-span-16">Average across both offices</span></div></div></div><div class="rv-grid" id="rvGrid"><article class="rv"><span class="rv-stars">★★★★★</span><p class="nahlah-p-8">Placeholder review copy pending the live Google feed. This block is sized for a three-to-four line review so the layout holds at real length.</p><footer class="nahlah-footer"><span class="rv-av">A</span>Patient A<i class="nahlah-i-9">Google review</i></footer></article><article class="rv"><span class="rv-stars">★★★★★</span><p class="nahlah-p-8">Placeholder review copy pending the live Google feed. Replace with exported review text or a live Business Profile integration.</p><footer class="nahlah-footer"><span class="rv-av">B</span>Patient B<i class="nahlah-i-9">Google review</i></footer></article><article class="rv"><span class="rv-stars">★★★★★</span><p class="nahlah-p-8">Placeholder review copy pending the live Google feed. Sized to match a typical implant-patient review of three to four lines.</p><footer class="nahlah-footer"><span class="rv-av">C</span>Patient C<i class="nahlah-i-9">Google review</i></footer></article><article class="rv"><span class="rv-stars">★★★★★</span><p class="nahlah-p-8">Placeholder review copy pending the live Google feed. This block is sized for a three-to-four line review so the layout holds at real length.</p><footer class="nahlah-footer"><span class="rv-av">D</span>Patient D<i class="nahlah-i-9">Google review</i></footer></article><article class="rv"><span class="rv-stars">★★★★★</span><p class="nahlah-p-8">Placeholder review copy pending the live Google feed. Replace with exported review text or a live Business Profile integration.</p><footer class="nahlah-footer"><span class="rv-av">E</span>Patient E<i class="nahlah-i-9">Google review</i></footer></article><article class="rv"><span class="rv-stars">★★★★★</span><p class="nahlah-p-8">Placeholder review copy pending the live Google feed. Sized to match a typical implant-patient review of three to four lines.</p><footer class="nahlah-footer"><span class="rv-av">F</span>Patient F<i class="nahlah-i-9">Google review</i></footer></article></div><a class="rv-more">Read all reviews <i class="nahlah-i-10"></i></a></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  WZ.add(function(W){
+    var film = document.getElementById('film');
+
+    /* Play only while on screen — saves battery and avoids background decode. */
+    ScrollTrigger.create({
+      trigger:'#proofFilm', start:'top 90%', end:'bottom 10%',
+      onEnter:    function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+      onEnterBack:function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+      onLeave:    function(){ film.pause(); },
+      onLeaveBack:function(){ film.pause(); }
+    });
+
+    if(W.reduced){ gsap.set('#storyShot',{clipPath:'inset(0 0 0% 0)'}); return; }
+
+    gsap.fromTo(film,{scale:1.16},{scale:1,ease:'none',
+      scrollTrigger:{trigger:'#proofFilm',start:'top bottom',end:'bottom top',scrub:.8}});
+
+    var ft = W.splitLines(document.getElementById('filmTitle'));
+    if(ft && ft.lines){
+      gsap.from(ft.lines,{yPercent:110,duration:1,stagger:.09,ease:'power4.out',
+        scrollTrigger:{trigger:'#proofFilm',start:'top 55%'}});
+    }
+    gsap.from('#filmSub',{opacity:0,y:20,duration:.9,ease:'power3.out',
+      scrollTrigger:{trigger:'#proofFilm',start:'top 50%'}});
+
+    /* Image wipes open from the bottom, photo counter-drifts inside it. */
+    gsap.to('#storyShot',{clipPath:'inset(0 0 0% 0)',duration:1.3,ease:'power4.inOut',
+      scrollTrigger:{trigger:'#storyShot',start:'top 82%'}});
+    gsap.fromTo('#storyImg',{scale:1.24,yPercent:-6},{scale:1.06,yPercent:6,ease:'none',
+      scrollTrigger:{trigger:'#storyShot',start:'top bottom',end:'bottom top',scrub:.8}});
+    gsap.from('#storyCopy > *',{opacity:0,y:26,duration:.9,stagger:.12,ease:'power3.out',
+      scrollTrigger:{trigger:'#storyCopy',start:'top 80%'}});
+
+    /* Reviews: header, then cards deal in on a slight diagonal. */
+    gsap.from('#reviews .rv-head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
+      scrollTrigger:{trigger:'#reviews',start:'top 80%'}});
+    gsap.from('#rvGrid .rv',{opacity:0,y:34,duration:.8,stagger:{each:.08,from:'start'},
+      ease:'power3.out',scrollTrigger:{trigger:'#rvGrid',start:'top 85%'}});
+
+    /* Aggregate score counts up like the other stats. */
+    var sc = document.getElementById('rvScore');
+    if(sc){
+      var o = {v:0};
+      gsap.to(o,{v:5.0,duration:1.6,ease:'power2.out',
+        onUpdate:function(){ sc.textContent = o.v.toFixed(1); },
+        scrollTrigger:{trigger:'#reviews',start:'top 78%'}});
+    }
+  });
+  </script><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><style data-embed="">.ch-proof .film::after{content:"";position:absolute;inset:0;
+      background:radial-gradient(80% 70% at 50% 50%,rgba(11,11,12,.6),rgba(11,11,12,.86) 78%),
+                 linear-gradient(180deg,rgba(11,11,12,.6),rgba(11,11,12,.88))}
+@media(min-width:1024px){ .ch-proof .story{grid-template-columns:.95fr 1.05fr} }
+@media(min-width:700px){ .rv-grid{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:1080px){ .rv-grid{grid-template-columns:repeat(3,1fr)} }</style></section><section class="ch-invitation" id="invitation"><div class="nahlah-div wrap sec-pad"><div class="chapter-tag"><i class="nahlah-i-3"></i><span class="nahlah-div eyebrow">Chapter 08 · The Invitation</span></div><h2 class="nahlah-h2-5">Close to home, either way.</h2><div class="locs" id="locs"><div class="loc"><h3 class="nahlah-h3">Tysons Corner · McLean</h3><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.ch-invitation .loc address{font-style:normal;color:rgba(255,255,255,.6);font-weight:300}</style><address>7901 Jones Branch Dr., Suite 220<br/>McLean, VA 22102</address><div class="nahlah-div-17 row"><span class="nahlah-span-17">New Patients</span><a class="nahlah-a-3">(571) 619-9442</a></div><div class="nahlah-div-17 row"><span class="nahlah-span-17">Current Patients</span><a class="nahlah-a-3">(703) 448-3312</a></div></div><div class="loc"><h3 class="nahlah-h3">Alexandria</h3><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}.ch-invitation .loc address{font-style:normal;color:rgba(255,255,255,.6);font-weight:300}</style><address>2855 Duke St.<br/>Alexandria, VA 22314</address><div class="nahlah-div-17 row"><span class="nahlah-span-17">New Patients</span><a class="nahlah-a-3">(571) 410-3430</a></div><div class="nahlah-div-17 row"><span class="nahlah-span-17">Current Patients</span><a class="nahlah-a-3">(703) 940-5410</a></div></div></div></div><div class="nahlah-div cta sec-pad"><div class="nahlah-div wrap"><h2 class="nahlah-h2-6" id="ctaTitle">Find out if you’re a candidate.</h2><p class="nahlah-p-9">A consultation includes the 3D scan and a straight answer about what your case actually needs — before you commit to anything.</p><a class="nahlah-a-4 btn btn-dark magnetic"><span class="nahlah-span">Book Your Free Consult</span><div class="btn-after-2"></div></a></div></div><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><script data-embed="">
+  WZ.add(function(W){
+    if(W.reduced) return;
+    gsap.from('#locs .loc',{opacity:0,y:34,duration:1,stagger:.14,ease:'power3.out',
+      scrollTrigger:{trigger:'#locs',start:'top 82%'}});
+    var ct = W.splitLines(document.getElementById('ctaTitle'));
+    if(ct && ct.lines){
+      gsap.from(ct.lines,{yPercent:110,duration:1,stagger:.09,ease:'power4.out',
+        scrollTrigger:{trigger:'#ctaTitle',start:'top 85%'}});
+    }
+  });
+  </script><style>*{box-sizing:border-box}*::before{box-sizing:border-box}*::after{box-sizing:border-box}</style><style data-embed="">@media(min-width:720px){ .ch-invitation .locs{grid-template-columns:repeat(2,1fr)} }</style></section></main><footer class="nahlah-div foot"><div class="nahlah-div wrap"><div class="nahlah-div-18 grid"><div class="nahlah-div"><img class="nahlah-img-10" width="auto" height="auto" alt="Dr. Nahlah" src="https://cdn.prod.website-files.com/6a6b84cc7fe55ddeabc0b314/6a6bbb1cc8ece7c5e6df72a8_logo.png" loading="eager"><p class="blurb">Implant dentistry and prosthodontics for Northern Virginia — rebuilding smiles that other practices call too complex.</p></div><div class="nahlah-div"><h4 class="nahlah-h4-2">Treatments</h4><ul class="nahlah-ul-3"><li class="nahlah-li-4"><a class="nahlah-a-5">Dental Implants</a></li><li class="nahlah-li-4"><a class="nahlah-a-5">All-on-4</a></li><li class="nahlah-li-4"><a class="nahlah-a-5">Smile Makeover</a></li><li class="nahlah-li-4"><a class="nahlah-a-5">Full-Mouth Reconstruction</a></li></ul></div><div class="nahlah-div"><h4 class="nahlah-h4-2">The Journey</h4><ul class="nahlah-ul-3"><li class="nahlah-li-4"><a class="nahlah-a-5">01 The Reality</a></li><li class="nahlah-li-4"><a class="nahlah-a-5">02 The Difference</a></li><li class="nahlah-li-4"><a class="nahlah-a-5">03 Transformation</a></li><li class="nahlah-li-4"><a class="nahlah-a-5">04 The Path</a></li></ul></div><div class="nahlah-div"><h4 class="nahlah-h4-2">Hours</h4><ul class="nahlah-ul-3"><li class="nahlah-li-4"><a class="nahlah-a-5">Mon–Thu 8:00am – 5:00pm</a></li><li class="nahlah-li-4"><a class="nahlah-a-5">Friday 8:00am – 2:00pm</a></li><li class="nahlah-li-4"><a class="nahlah-a-5">Sat &amp; Sun Closed</a></li></ul></div></div><div class="base"><span class="nahlah-div">© 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span> <span class="nahlah-div">McLean · Alexandria, Virginia</span></div></div></footer></div></div></div>
+</body></html>
