@@ -41,9 +41,32 @@ try {
 
   const state = readState(cwd);
 
+  // ---- Re-entrancy -----------------------------------------------------------
+  //
+  // Rotation is a one-way door: once a session has handed off it is being replaced,
+  // and every later Stop of THAT session must be silent.
+  //
+  // This used to be a single test that also required `tokens < CONTEXT_WARN`, which
+  // is exactly backwards - a session that just rotated is by definition ABOVE the
+  // threshold, so it fell straight through, found the tree clean and the runbook
+  // fresh, and rotated again on its next turn. Every pass spawned another
+  // session-rotate.mjs racing for the same terminal. On 2026-08-21 that put `/exit`,
+  // the launch command and the kickoff prompt into the NEW session's prompt box as
+  // literal text; its opening message was `/exit/exit` plus the prompt three times.
+  //
+  // Keyed on session id, so a genuinely new session in this worktree is still
+  // governed normally rather than being muted by its predecessor's handoff.
+  if (state.rotatedSessionId && state.rotatedSessionId === input.session_id) quiet();
+
+  const rotating = state.rotatedAt && Date.now() - state.rotatedAt < 5 * 60 * 1000;
+  // No session id in the payload - fall back to a time-boxed hard mute. A missed
+  // handoff costs one manual restart; a rotation loop corrupts the session it just
+  // created.
+  if (rotating && !state.rotatedSessionId) quiet();
+
   // A rotation just happened and this is the new session's first turn. Do not
   // immediately re-evaluate against the old session's numbers.
-  if (state.rotatedAt && Date.now() - state.rotatedAt < 5 * 60 * 1000 && tokens < CONTEXT_WARN) quiet();
+  if (rotating && tokens < CONTEXT_WARN) quiet();
 
   if (tokens < CONTEXT_WARN) quiet();
 
@@ -107,7 +130,15 @@ try {
 
   // ---- Clean and current: rotate ---------------------------------------------
   refreshRunbook(cwd, tokens);
-  writeState(cwd, { rotatedAt: Date.now(), lastTokens: tokens, warnedAt: 0 });
+  // `rotatedSessionId` is what makes the handoff one-way: see the re-entrancy note
+  // at the top. It must be written BEFORE the spawn, so that even a rotation that
+  // completes instantly cannot race a second Stop past this point.
+  writeState(cwd, {
+    rotatedAt: Date.now(),
+    rotatedSessionId: input.session_id ?? null,
+    lastTokens: tokens,
+    warnedAt: 0,
+  });
 
   // Detached, because this process must exit for the turn to complete - and the
   // rotation's first act is to close the very session running this hook.

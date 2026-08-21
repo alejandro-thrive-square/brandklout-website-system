@@ -78,6 +78,7 @@ desktop.ini
 # a session did is its commits; the runbook is only the handoff between sessions.
 .claude/RUNBOOK.md
 .claude/session-state.json
+.claude/rotate.lock
 
 # ===== Logs =====
 *.log
