@@ -129,7 +129,14 @@ const PATCHES = [
   ['.camp_text-link', { 'font-family': 'Montserrat', 'font-size': '13px', 'font-weight': '600', 'letter-spacing': '0.04em' }],
   ['.camp_mobile-bar_link', { 'background-color': AMBER, color: INK, 'font-family': 'Montserrat', 'font-weight': '600' }],
   ['.camp_footer_heading', { color: SKIN }],
-  ['.camp_hero_promise', { 'background-color': OLIVE_DEEP, color: CREAM }],
+  /* The price chip is the single most important number on the page and it was
+     cream on deep olive, sitting on an olive hero: technically legible, visually
+     invisible. Amber is the brand's one warm accent and this is what it is for. */
+  ['.camp_hero_promise', { 'background-color': AMBER, color: INK }],
+  /* Both card kickers inherited the accent-on-LIGHT olive and then got placed on
+     a deep-olive card top: #585b2f on #3f411f measures 1.46:1. Skin is 7.8:1. */
+  ['.camp_offer-card_kicker', { color: SKIN }],
+  ['.camp_form-card_kicker', { color: SKIN }],
   ['.camp_review_stars', { color: AMBER }],
   ['.camp_offer-card', { 'border-radius': '16px' }],   // --radius--large
   ['.camp_form-card', { 'border-radius': '16px' }],
