@@ -58,8 +58,30 @@ const CODE_ASSETS = ['src/styles/runtime-states.css', 'src/styles/site.css']
 
 const nanoid = () => randomBytes(12).toString('base64url')
 
-/** Registry lookup key: class rules are addressed by name, ambient by selector. */
-const keyOf = (rule) => (rule.kind === 'class' ? `class:${rule.name}` : `ambient:${rule.selector}`)
+/**
+ * Registry lookup key. **The selector, always — never the name.**
+ *
+ * A class-kind rule's `name` is a binding label, not its target. The converter
+ * emits `kind: 'class'` for any selector whose subject carries a class, keeping
+ * the full selector and setting `name` to the bound class token: 144 of the 286
+ * class rules it produced here have a selector that is not `.<name>`, including
+ *
+ *     name 'df-stat'  selector '.ch-difference .df-stat b'
+ *     name 'dr-col'   selector '.drawer.open .dr-col li a'
+ *     name 'b'        selector '.cmp .tag.b'
+ *
+ * Keying on the name merges the `<b>` element's declarations onto the container
+ * rule and drops the ancestor scoping. That is exactly what went wrong on the
+ * first run: the homepage stat blocks took the big gold display type meant for
+ * the number inside them. Two rules are the same rule iff they target the same
+ * selector.
+ */
+const normaliseSelector = (selector) =>
+  (selector ?? '')
+    .replace(/\s*([>+~,])\s*/g, '$1')
+    .replace(/\s+/g, ' ')
+    .trim()
+const keyOf = (rule) => `sel:${normaliseSelector(rule.selector)}`
 
 /**
  * Merge one converted rule's declarations onto an existing registry rule.
@@ -129,18 +151,32 @@ if (wantMerge) {
   let nextOrder = Math.max(0, ...Object.values(rules).map((r) => r.order ?? 0)) + 1
 
   const stats = { filled: 0, merged: 0, created: 0, conditionsAdded: 0 }
-  for (const incoming of conv.rules) {
+  // Which registry rule each converted rule ended up as, by source position —
+  // the cascade re-order below needs both facts.
+  const index2rule = new Map()
+  const convertedIds = new Set()
+  conv.rules.forEach((incoming, sourceIndex) => {
     const existing = index.get(keyOf(incoming))
+    index2rule.set(sourceIndex, existing ?? null)
+    if (existing) convertedIds.add(existing.id)
     if (existing) {
       const wasEmpty = Object.keys(existing.styles ?? {}).length === 0
         && Object.keys(existing.contextStyles ?? {}).length === 0
       mergeInto(existing, incoming)
       wasEmpty ? stats.filled++ : stats.merged++
     } else {
+      // New rules are created AMBIENT regardless of what the converter called
+      // them. A class-kind rule survives publish only if its id appears in some
+      // `node.classIds` (`styleRuleTreeShake.ts`), and a rule we just invented
+      // is referenced by nothing — so creating it as class-kind would have it
+      // silently deleted on the next publish. Ambient rules attach by selector
+      // matching, emit identical CSS, and stay out of `knownClassNames`, which
+      // also keeps junk binding names like `b`, `a` and `grid` from
+      // disqualifying every other selector that mentions them.
       const created = {
         id: nanoid(),
-        name: incoming.name,
-        kind: incoming.kind,
+        name: incoming.selector,
+        kind: 'ambient',
         selector: incoming.selector,
         order: nextOrder++,
         styles: incoming.styles ?? {},
@@ -151,9 +187,42 @@ if (wantMerge) {
       }
       rules[created.id] = created
       index.set(keyOf(created), created)
+      index2rule.set(sourceIndex, created)
+      convertedIds.add(created.id)
       stats.created++
     }
-  }
+  })
+
+  // ── Cascade order ──────────────────────────────────────────────────────
+  //
+  // Until now the code asset won everything simply by being last in the link
+  // order. Once it is switched off, the only thing left deciding ties is
+  // `rule.order` within the registry — and a merged rule kept whatever order
+  // its registry copy happened to have, which is NOT its position in the
+  // stylesheet.
+  //
+  // That flips real pairs. `.pk-more { display: inline-flex }` and
+  // `.pk-readon-block { display: inline-block }` have equal specificity and
+  // sit on the same element; source order decided it, registry order reversed
+  // it, and the read-more links went from inline-flex to inline-block.
+  //
+  // So: every rule the stylesheet defines is re-ordered into ITS source
+  // position, after every rule the stylesheet does not mention. That
+  // reproduces the old "style.css first, then userStyles in file order"
+  // cascade exactly.
+  const untouched = Object.values(rules).filter((r) => !convertedIds.has(r.id))
+  const orderBase = Math.max(0, ...untouched.map((r) => r.order ?? 0)) + 1
+  let reordered = 0
+  conv.rules.forEach((incoming, index) => {
+    const rule = index2rule.get(index)
+    if (!rule) return
+    const next = orderBase + index
+    if (rule.order !== next) {
+      rule.order = next
+      reordered++
+    }
+  })
+  console.log(`rules re-ordered into stylesheet order  ${reordered} (base ${orderBase})`)
 
   // Register any @media / @supports context the converter introduced.
   const conditions = shell.conditions ?? (shell.conditions = [])
@@ -176,12 +245,23 @@ if (wantMerge) {
 if (wantCutover) {
   // Which class rules does any node actually reference? Needed before we can
   // safely demote the rest; a wrong answer here deletes CSS at publish.
-  const { pages } = await getPages()
+  // `GET /pages` answers `{ rows }` — data rows, not page trees. The tree is
+  // `row.cells.body.nodes`. Reading `res.pages` returns undefined and yields a
+  // confident "0 class ids referenced", which would demote every class rule in
+  // the registry. Assert a plausible count rather than trusting the traversal.
+  const { rows } = await getPages()
   const assigned = new Set()
-  for (const page of pages ?? []) {
-    for (const node of Object.values(page.nodes ?? {})) {
+  for (const row of rows ?? []) {
+    const body = typeof row.cells?.body === 'string' ? JSON.parse(row.cells.body) : row.cells?.body
+    for (const node of Object.values(body?.nodes ?? {})) {
       for (const id of node.classIds ?? []) assigned.add(id)
     }
+  }
+  if (assigned.size === 0) {
+    console.error('refusing to continue: no class ids found across any page.')
+    console.error('That is a traversal bug, not a site with no classes — demoting on this')
+    console.error('basis would rewrite every class rule in the registry.')
+    process.exit(1)
   }
   for (const vc of shell.visualComponents ?? []) {
     for (const id of vc.classIds ?? []) assigned.add(id)

@@ -109,11 +109,39 @@ export async function login() {
 }
 
 /**
+ * Open a step-up window. Sensitive operations — publishing among them — answer
+ * `401 {"error":"step_up_required"}` until the password has been re-entered
+ * within `stepUpWindowMinutes`.
+ *
+ * This ROTATES the session token (`rotateSessionToken` in the handler), so the
+ * response's cookie replaces the cached one. Miss that and every subsequent
+ * request 401s with a cookie that no longer exists.
+ */
+export async function stepUp() {
+  const password = process.env.INSTATIC_PASSWORD
+  if (!password) throw new Error('INSTATIC_PASSWORD is not set — cannot open a step-up window')
+  const res = await fetch(`${BASE}/admin/api/cms/auth/step-up`, {
+    method: 'POST',
+    headers: { 'content-type': 'application/json', origin: BASE, cookie: cachedCookie() ?? '' },
+    body: JSON.stringify({ password }),
+  })
+  const body = await res.json().catch(() => ({}))
+  if (!res.ok) throw new Error(`step-up failed ${res.status}: ${JSON.stringify(body)}`)
+
+  const setCookie = res.headers.getSetCookie?.() ?? [res.headers.get('set-cookie')].filter(Boolean)
+  const rotated = setCookie.map((c) => c.split(';')[0]).find((c) => c.startsWith(`${COOKIE_NAME}=`))
+  if (!rotated) throw new Error('step-up succeeded but returned no rotated session cookie')
+  cacheCookie(rotated)
+  return body.stepUpExpiresAt
+}
+
+/**
  * One authenticated request, with a single transparent re-login when the
  * cached cookie has gone stale (idle timeout is 30 days, but "log out all
- * sessions" or a container restart can invalidate it sooner).
+ * sessions" or a container restart can invalidate it sooner), and a single
+ * transparent step-up when the operation demands a fresh password.
  */
-async function request(method, path, body, { retryAuth = true } = {}) {
+async function request(method, path, body, { retryAuth = true, retryStepUp = true } = {}) {
   const headers = { origin: BASE, cookie: cachedCookie() ?? '' }
   if (body !== undefined) headers['content-type'] = 'application/json'
   if (!headers.cookie) {
@@ -127,12 +155,17 @@ async function request(method, path, body, { retryAuth = true } = {}) {
     body: body === undefined ? undefined : JSON.stringify(body),
   })
 
+  const text = await res.text()
+
+  if (res.status === 401 && text.includes('step_up_required') && retryStepUp) {
+    await stepUp()
+    return request(method, path, body, { retryAuth, retryStepUp: false })
+  }
   if (res.status === 401 && retryAuth) {
     await login()
-    return request(method, path, body, { retryAuth: false })
+    return request(method, path, body, { retryAuth: false, retryStepUp })
   }
 
-  const text = await res.text()
   let parsed
   try {
     parsed = text ? JSON.parse(text) : null

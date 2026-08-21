@@ -49,7 +49,12 @@ async function publishedCopy(path) {
   const bodyStart = start + banner.length + 1
   const next = bundle.slice(bodyStart).search(/^\/\* src\/[^*]+ \*\/$/m)
   const body = next < 0 ? bundle.slice(bodyStart) : bundle.slice(bodyStart, bodyStart + next)
-  return { href, content: body.replace(/\s+$/, '') }
+  // Do NOT trim. The stored file keeps its trailing newline (confirmed against
+  // the published site_snapshot: 93,589 chars, of which the last is `\n`), and
+  // trimming leaves the restored draft a strict prefix of the real thing —
+  // harmless in CSS, but it means "restored" is not the same as "identical",
+  // and the whole point of this script is that the two can be compared.
+  return { href, content: body }
 }
 
 /**
@@ -88,11 +93,19 @@ if (current === restored) {
   console.log('\nalready in sync — nothing to do')
   process.exit(0)
 }
-if (!looksTruncated(current)) {
-  console.error('\nrefusing to overwrite: the draft does not show the truncation signature.')
-  console.error('Someone may have edited it legitimately. Inspect .tmp/site.css.draft-before first.')
+// Two shapes of "the draft lost content and nothing else": the head-loss this
+// script was written for (file starts mid-declaration), and a pure tail loss
+// (the draft is a strict prefix of the published copy). Anything else means the
+// draft holds content the published copy does not, i.e. a real edit — refuse.
+const headLoss = looksTruncated(current)
+const tailLoss = restored.startsWith(current)
+if (!headLoss && !tailLoss) {
+  console.error('\nrefusing to overwrite: the draft is neither truncated nor a prefix of the')
+  console.error('published copy, so it holds content that would be lost. Inspect')
+  console.error('.tmp/site.css.draft-before first.')
   process.exit(1)
 }
+console.log(`repair shape         ${headLoss ? 'head loss' : 'tail loss (draft is a prefix)'}`)
 if (!apply) {
   console.log(`\nwould restore ${restored.length - current.length} chars. Re-run with --apply.`)
   process.exit(0)

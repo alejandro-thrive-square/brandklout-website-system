@@ -1,0 +1,108 @@
+[
+ {
+  "id": "fhsdJcQzRSiC4VE7dFkp9",
+  "kind": "ambient",
+  "selector": "h1, h2, h3, h4",
+  "publishedStyles": {
+   "marginTop": "0px",
+   "marginRight": "0px",
+   "marginBottom": "0px",
+   "marginLeft": "0px",
+   "fontFamily": "var(--f-display)",
+   "fontWeight": "500",
+   "lineHeight": "1.02",
+   "letterSpacing": "-0.02em",
+   "color": "var(--fg)"
+  },
+  "draftStyles": {
+   "marginTop": "0px",
+   "marginRight": "0px",
+   "marginBottom": "0px",
+   "marginLeft": "0px",
+   "fontFamily": "var(--f-display)",
+   "fontWeight": "500",
+   "lineHeight": "1.02",
+   "letterSpacing": "-0.02em",
+   "color": "var(--fg)"
+  },
+  "publishedContext": {},
+  "draftContext": {}
+ },
+ {
+  "id": "K-ZQdXR7EGEfTH5WswR7X",
+  "kind": "class",
+  "selector": ".wrap",
+  "publishedStyles": {
+   "width": "100%",
+   "maxWidth": "var(--maxw)",
+   "marginInlineStart": "auto",
+   "marginInlineEnd": "auto",
+   "paddingRight": "var(--gutter)",
+   "paddingLeft": "calc(var(--gutter) + var(--rail))",
+   "backgroundColor": ""
+  },
+  "draftStyles": {
+   "maxWidth": "",
+   "marginInlineStart": "auto",
+   "marginInlineEnd": "auto",
+   "paddingRight": "var(--gutter)",
+   "paddingLeft": "calc(var(--gutter) + var(--rail))",
+   "backgroundColor": ""
+  },
+  "publishedContext": {},
+  "draftContext": {}
+ },
+ {
+  "id": "zm4dvgVYe7-2obVlX7ay5",
+  "kind": "ambient",
+  "selector": ".pk h2",
+  "publishedStyles": {
+   "fontSize": "var(--h2)",
+   "maxWidth": "18ch"
+  },
+  "draftStyles": {
+   "fontSize": "var(--h2)"
+  },
+  "publishedContext": {},
+  "draftContext": {}
+ },
+ {
+  "id": "CmuUEMw-lLTZfZXExdQej",
+  "kind": "class",
+  "selector": ".pk-cta .cta-in",
+  "publishedStyles": {
+   "display": "grid",
+   "rowGap": "1.25rem",
+   "columnGap": "1.25rem",
+   "justifyItems": "center",
+   "maxWidth": "90ch",
+   "marginInlineStart": "auto",
+   "marginInlineEnd": "auto"
+  },
+  "draftStyles": {
+   "display": "flex",
+   "rowGap": "1.25rem",
+   "columnGap": "1.25rem",
+   "justifyItems": "center",
+   "marginInlineStart": "auto",
+   "marginInlineEnd": "auto",
+   "flexDirection": "column"
+  },
+  "publishedContext": {},
+  "draftContext": {}
+ },
+ {
+  "id": "S45Vjs1ILuJmVP5t6iwWE",
+  "kind": "ambient",
+  "selector": ".pk-cta h2",
+  "publishedStyles": {
+   "fontSize": "var(--d2)",
+   "maxWidth": "15ch"
+  },
+  "draftStyles": {
+   "fontSize": "var(--d2)"
+  },
+  "publishedContext": {},
+  "draftContext": {}
+ }
+]

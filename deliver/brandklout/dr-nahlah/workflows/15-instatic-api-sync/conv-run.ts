@@ -1,4 +1,5 @@
 import './conv-preload.ts'
+import { encodeLossyDeclarations } from './conv-encode.ts'
 import { readFileSync, writeFileSync } from 'node:fs'
 import { gunzipSync } from 'node:zlib'
 const { cssToStyleRules } = await import('@core/siteImport')
@@ -19,6 +20,15 @@ css = css.replace(/@(media|supports|container)\s*(\([^{]*)/g, (_m, at, prelude) 
   return `@${at} ${tidy}`
 })
 console.error(`normalised ${normalised} at-rule preludes`)
+
+// happy-dom drops length-typed declarations whose value is a CSS math
+// function — `padding: clamp(...)`, `margin-top: clamp(...)`, `width: min(...)`
+// all vanish with no warning. Instatic's own substitution encoder covers only
+// var()/env(), so widen it to the math functions using the same marker; their
+// `decodeSubstitutionProperty` restores ours for free.
+const enc = encodeLossyDeclarations(css)
+css = enc.css
+console.error(`encoded ${enc.encoded} declarations the parser would drop`)
 
 const bps = [
   { id: 'mobile', width: 375, mediaQuery: '(max-width: 375px)' },
