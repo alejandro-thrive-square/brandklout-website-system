@@ -19,7 +19,7 @@ import { call, SITES } from './wf.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SHARED = path.resolve(HERE, '../../../04-design/.tmp/v1/_shared');
-const PAGE = '6a875326a493a891fd87d30a';                       // Emergency Dentist
+const PAGE = '6a87d0257abd46ca13a18ae3';                       // Invisalign Pasadena Campaign LP
 const BP = { base: 'main', 991: 'medium', 767: 'small', 479: 'tiny' };
 
 /* ---------------------------------------------------------- parse local --- */
@@ -46,13 +46,40 @@ const readRules = (css, bp) => {
   }
 };
 
+/**
+ * Strip every @media block, keeping everything around them.
+ *
+ * This used to be `css.replace(/@media[\s\S]*$/, '')`, which truncates the file
+ * at the FIRST media query and throws away the rest. Any rule authored after the
+ * existing breakpoint blocks — which is where anything appended to the sheet
+ * naturally lands — was invisible to the main pass, so its base declarations were
+ * never created on the site. Five classes reached a built page with no style at
+ * all before this was found, and the failure is silent at every step: the lint
+ * passes, the plan looks reasonable, the build reports success, and the page
+ * simply renders wrong.
+ */
+function stripMedia(css) {
+  let out = '', i = 0;
+  while (i < css.length) {
+    const at = css.indexOf('@media', i);
+    if (at === -1) { out += css.slice(i); break; }
+    out += css.slice(i, at);
+    const open = css.indexOf('{', at);
+    if (open === -1) break;
+    let depth = 1, j = open + 1;
+    while (j < css.length && depth) { if (css[j] === '{') depth++; else if (css[j] === '}') depth--; j++; }
+    i = j;
+  }
+  return out;
+}
+
 for (const file of ['camp.css', 'camp-convert.css', 'camp-sections.css']) {
   let css = fs.readFileSync(path.join(SHARED, file), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
   // pull the media blocks out first, then read what is left as the base
   for (const m of css.matchAll(/@media screen and \(max-width: (\d+)px\) \{([\s\S]*?)\n\}/g)) {
     readRules(m[2], BP[m[1]] || m[1]);
   }
-  readRules(css.replace(/@media[\s\S]*$/, ''), 'main');
+  readRules(stripMedia(css), 'main');
 }
 
 /* ----------------------------------------------------------- read site --- */
@@ -84,14 +111,28 @@ const EXPAND = {
   padding: ['padding-top', 'padding-right', 'padding-bottom', 'padding-left'],
   margin: ['margin-top', 'margin-right', 'margin-bottom', 'margin-left'],
 };
-const norm = (v) => String(v).toLowerCase().replace(/\s*,\s*/g, ',').replace(/\s+/g, ' ').trim();
+/* Webflow keeps only the FIRST font family and drops the fallback stack, so
+   `Arial, sans-serif` is stored as `Arial`. Compare the first family only, or
+   every stack in the sheet reads as a difference that can never be resolved. */
+const norm = (v, prop) => {
+  let s = String(v).toLowerCase().replace(/\s*,\s*/g, ',').replace(/\s+/g, ' ').trim();
+  if (prop === 'font-family') s = s.split(',')[0].replace(/^['"]|['"]$/g, '');
+  return s;
+};
 const expand = (props) => {
   const out = {};
   for (const [k, v] of Object.entries(props)) {
     if (EXPAND[k]) {
       const [t, r = t, b = t, l = r] = v.split(/\s+/);
       EXPAND[k].forEach((p, i) => { out[p] = [t, r, b, l][i]; });
-    } else if (k === 'border' || k === 'border-top' || k === 'border-left') {
+    } else if (k === 'border' || k === 'border-top' || k === 'border-right' || k === 'border-bottom' || k === 'border-left') {
+      /* All FOUR sides, not just top and left. The original map knew `border`,
+         `border-top` and `border-left`, so every `border-bottom` and
+         `border-right` in the sheet came back as "unset" for ever — six phantom
+         differences on a layer that was already correct. A comparator that
+         reports work still to do invites someone to re-send values the style
+         already holds, which is answered with "[Conflict] … style block store"
+         and looks like a real failure. */
       const [w, style, ...c] = v.split(/\s+/);
       const side = k === 'border' ? ['top', 'right', 'bottom', 'left'] : [k.split('-')[1]];
       for (const sd of side) {
@@ -130,7 +171,7 @@ for (const [sel, byBp] of local) {
     for (const [prop, value] of Object.entries(want)) {
       const cur = have[prop];
       if (cur === undefined) diffs.push({ prop, from: null, to: value });
-      else if (norm(cur) !== norm(value)) diffs.push({ prop, from: cur, to: value });
+      else if (norm(cur, prop) !== norm(value, prop)) diffs.push({ prop, from: cur, to: value });
       else report.same++;
     }
     if (diffs.length) report.changed.push({ selector: sel, name: s.name, combo: s.isComboClass, bp, diffs });
@@ -140,7 +181,11 @@ for (const [sel, byBp] of local) {
 fs.writeFileSync(path.join(HERE, 'class-diff.json'), JSON.stringify({ report, siteSelectors: [...site.keys()] }, null, 1));
 
 const declarations = report.changed.reduce((n, c) => n + c.diffs.length, 0);
-console.log(`\n${report.missing.length} class(es) not on the site yet`);
+/* `query_styles` does not return pseudo states, so a `:hover` selector lands in
+   this list for ever, even when the write succeeded. Verify those by reading the
+   style back with the `pseudo` argument, not by trusting this count. */
+console.log(`\n${report.missing.length} class(es) not on the site yet` +
+  ' (a `:hover` here is expected — pseudo states are invisible to query_styles)');
 if (report.missing.length) console.log('  ' + report.missing.join('\n  '));
 console.log(`${report.changed.length} rule(s) differ, ${declarations} declaration(s) to write, ${report.same} already correct`);
 for (const c of report.changed.slice(0, 12)) {

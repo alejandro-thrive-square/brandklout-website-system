@@ -31,7 +31,7 @@ import { call, SITES } from './wf.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SHARED = path.resolve(HERE, '../../../04-design/.tmp/v1/_shared');
-const PAGE = '6a875326a493a891fd87d30a';                       // Emergency Dentist
+const PAGE = '6a87d0257abd46ca13a18ae3';                       // Invisalign Pasadena Campaign LP
 const SEED_PARENT = null;                                      // resolved below
 const DRY = process.argv.includes('--dry');
 const BP = { 991: 'medium', 767: 'small', 479: 'tiny' };
@@ -56,10 +56,37 @@ const readRules = (css, bp) => {
     }
   }
 };
+/**
+ * Strip every @media block, keeping everything around them.
+ *
+ * This used to be `css.replace(/@media[\s\S]*$/, '')`, which truncates the file
+ * at the FIRST media query and throws away the rest. Any rule authored after the
+ * existing breakpoint blocks — which is where anything appended to the sheet
+ * naturally lands — was invisible to the main pass, so its base declarations were
+ * never created on the site. Five classes reached a built page with no style at
+ * all before this was found, and the failure is silent at every step: the lint
+ * passes, the plan looks reasonable, the build reports success, and the page
+ * simply renders wrong.
+ */
+function stripMedia(css) {
+  let out = '', i = 0;
+  while (i < css.length) {
+    const at = css.indexOf('@media', i);
+    if (at === -1) { out += css.slice(i); break; }
+    out += css.slice(i, at);
+    const open = css.indexOf('{', at);
+    if (open === -1) break;
+    let depth = 1, j = open + 1;
+    while (j < css.length && depth) { if (css[j] === '{') depth++; else if (css[j] === '}') depth--; j++; }
+    i = j;
+  }
+  return out;
+}
+
 for (const file of ['camp.css', 'camp-convert.css', 'camp-sections.css']) {
   const css = fs.readFileSync(path.join(SHARED, file), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
   for (const m of css.matchAll(/@media screen and \(max-width: (\d+)px\) \{([\s\S]*?)\n\}/g)) readRules(m[2], BP[m[1]]);
-  readRules(css.replace(/@media[\s\S]*$/, ''), 'main');
+  readRules(stripMedia(css), 'main');
 }
 
 /* ------------------------------------------------------------ read the site --- */
@@ -82,14 +109,28 @@ const EXPAND = {
   padding: ['padding-top', 'padding-right', 'padding-bottom', 'padding-left'],
   margin: ['margin-top', 'margin-right', 'margin-bottom', 'margin-left'],
 };
-const norm = (v) => String(v).toLowerCase().replace(/\s*,\s*/g, ',').replace(/\s+/g, ' ').trim();
+/* Webflow keeps only the FIRST font family and drops the fallback stack, so
+   `Arial, sans-serif` is stored as `Arial`. Compare the first family only, or
+   every stack in the sheet reads as a difference that can never be resolved. */
+const norm = (v, prop) => {
+  let s = String(v).toLowerCase().replace(/\s*,\s*/g, ',').replace(/\s+/g, ' ').trim();
+  if (prop === 'font-family') s = s.split(',')[0].replace(/^['"]|['"]$/g, '');
+  return s;
+};
 const expand = (props) => {
   const out = {};
   for (const [k, v] of Object.entries(props)) {
     if (EXPAND[k]) {
       const [t, r = t, b = t, l = r] = v.split(/\s+/);
       EXPAND[k].forEach((p, i) => { out[p] = [t, r, b, l][i]; });
-    } else if (k === 'border' || k === 'border-top' || k === 'border-left') {
+    } else if (k === 'border' || k === 'border-top' || k === 'border-right' || k === 'border-bottom' || k === 'border-left') {
+      /* All FOUR sides, not just top and left. The original map knew `border`,
+         `border-top` and `border-left`, so every `border-bottom` and
+         `border-right` in the sheet came back as "unset" for ever — six phantom
+         differences on a layer that was already correct. A comparator that
+         reports work still to do invites someone to re-send values the style
+         already holds, which is answered with "[Conflict] … style block store"
+         and looks like a real failure. */
       const [w, style, ...c] = v.split(/\s+/);
       const side = k === 'border' ? ['top', 'right', 'bottom', 'left'] : [k.split('-')[1]];
       for (const sd of side) {
@@ -141,7 +182,7 @@ for (const [sel, byBp] of local) {
     const write = [];
     for (const [prop, value] of Object.entries(want)) {
       const cur = have[prop];
-      if (cur === undefined || norm(cur) !== norm(value)) write.push({ property_name: prop, property_value: value });
+      if (cur === undefined || norm(cur, prop) !== norm(value, prop)) write.push({ property_name: prop, property_value: value });
     }
     if (write.length) plan.update.push({ sel, name, parents: parentNames, bp, pseudo, write });
   }
@@ -188,11 +229,19 @@ if (plan.newGlobal.length) {
   }], { site: SITES.legacy, page: PAGE });
   console.log('new globals:', JSON.stringify(res).slice(0, 300));
 
-  // remove the seed element again
-  const after = call('data_element_tool', [{ label: 'find', query_elements: { queries: [{ label: 'seed', element_filter: { style: 'camp_classlayer-seed' }, limit: 5 }] } }], { site: SITES.legacy, page: PAGE });
-  for (const m of after?.result?.[0]?.data?.[0]?.matches || []) {
-    call('data_element_tool', [{ label: 'rm', remove_element: { id: m.id } }], { site: SITES.legacy, page: PAGE });
-    console.log('  seed element removed');
+  /* Remove the seed element again — BY THE ID THE BUILDER JUST RETURNED, not by
+     querying for its class. The class layer rule says a class survives only if
+     the site already has it or the fragment's own CSS defines it, and
+     `camp_classlayer-seed` is defined nowhere. So the seed arrives with NO
+     class at all, a query by class finds nothing, and the cleanup reports
+     success while leaving a stray div on the page. It did exactly that once. */
+  const first = Array.isArray(res) ? res[0] : res;
+  const seedId = (Array.isArray(first) ? first[0] : first)?.data?.id;
+  if (seedId) {
+    const rm = call('data_element_tool', [{ label: 'rm', remove_element: { id: seedId } }], { site: SITES.legacy, page: PAGE });
+    console.log('  seed element removed: ' + JSON.stringify(rm).slice(0, 120));
+  } else {
+    console.log('  COULD NOT FIND THE SEED ELEMENT ID — check the page body for a stray div');
   }
 }
 

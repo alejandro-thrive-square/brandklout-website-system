@@ -115,14 +115,21 @@ function split(frag) {
 }
 const VOID = new Set(['img', 'br', 'hr', 'input', 'meta', 'link', 'source']);
 
-function insert(fragment, parentId, label) {
+function insert(fragment, parentId, label, attempt = 0) {
   if (fragment.length <= LIMIT) {
     const res = call('data_whtml_builder',
       [{ build_label: label, parent_element_id: parentId, creation_position: 'append', html: fragment, return_element_info: true }], o);
     // The response is either one object or an array of them, one per action.
     const first = Array.isArray(res) ? res[0] : res;
     const r = Array.isArray(first) ? first[0] : first;
-    if (!r?.data?.id) { console.log(`  FAILED ${label} (${fragment.length}B): ${JSON.stringify(r).slice(0, 200)}`); return null; }
+    if (!r?.data?.id) {
+      /* An EMPTY error — `{"error":""}` — is the builder's response failing to
+         parse, and it does NOT reliably mean the insert failed: one footer came
+         back like this having been created correctly. So retry once and let the
+         class census below be the judge, rather than trusting either answer. */
+      console.log(`  ${attempt ? 'FAILED' : 'retrying'} ${label} (${fragment.length}B): ${JSON.stringify(r).slice(0, 160)}`);
+      return attempt ? null : insert(fragment, parentId, label, attempt + 1);
+    }
     return r.data.id;
   }
   const parts = split(fragment);
@@ -157,4 +164,14 @@ console.log(`\n${nodes} elements on the page; ${used.size}/${wantClasses.size} d
 if (dropped.length) console.log('CLASSES DROPPED ENTIRELY: ' + dropped.join(', '));
 if (short.length) console.log('APPLIED FEWER TIMES THAN THE MARKUP ASKS:\n  ' +
   short.map(([c, n]) => `${c}: want ${n}, got ${used.get(c)}`).join('\n  '));
-if (!dropped.length && !short.length) console.log('every class in the markup landed on the right number of elements.');
+if (!dropped.length && !short.length) {
+  console.log('every class in the markup landed on the right number of elements.');
+} else {
+  /* EXIT NONZERO. A chunked insert can lose a whole fragment while every
+     individual call reports success, and this census is the only thing that
+     notices — the mobile call bar went missing from a 511-element page exactly
+     this way, and the build still exited 0. A partial page that exits clean is
+     worse than one that fails loudly. */
+  console.log('\nTHE PAGE IS INCOMPLETE. Re-run with --clear, or insert the missing fragment.');
+  process.exit(1);
+}

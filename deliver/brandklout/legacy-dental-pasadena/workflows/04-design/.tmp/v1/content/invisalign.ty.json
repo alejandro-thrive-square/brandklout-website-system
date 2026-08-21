@@ -1,12 +1,9 @@
 {
-  "_title": "Thank you — your Invisalign consultation request | Legacy Dental Pasadena",
+  "_title": "Thank you: your Invisalign consultation request | Legacy Dental Pasadena",
   "_note": "The conversion destination. It exists so a conversion has somewhere to fire, and it earns its place by answering the question the visitor now actually has, which is 'what happens next'. Nothing here asks them to convert again: the only actions are calling the practice and finding it.",
-
   "_tracking-note": "TRACKING IS NOT INSTALLED BY US, AND MUST NOT BE. GTM container GTM-TTLFRPH2 and Meta Pixel 1284882733596471 already fire site-wide on every page of legacydentalpasadena.com, so this page inherits both the moment it exists. 'Connect tracking' means adding a conversion trigger INSIDE those existing containers, which is Gauge Hill's Asana subtask 1217658322593910. Adding a second container here would double-count every conversion.",
-
   "ty.announce-lead": "Request received",
   "ty.announce-note": "The practice will be in touch",
-
   "ty.eyebrow": "REQUEST RECEIVED",
   "ty.h1": "Thank you. The practice has your request",
   "ty.lead": "Someone from Legacy Dental Pasadena will call to confirm your appointment, usually the same working day. If you sent this outside office hours, expect the call the next morning.",
@@ -14,7 +11,6 @@
   "ty.button2.href": "https://maps.google.com/?q=1213+N.+Lake+Ave+%231,+Pasadena,+CA+91104",
   "ty.button2": "Get directions",
   "ty.meta": "1213 N. Lake Ave #1, Pasadena, CA 91104 · Monday to Friday, 8 AM to 5 PM",
-
   "ty.next-eyebrow": "WHAT HAPPENS NEXT",
   "ty.next-h2": "Four things, and the first one is ours",
   "ty.next-text": "The consultation takes about an hour. Nothing is decided at it, and there is nothing to pay.",
@@ -26,14 +22,11 @@
   "ty.step3-text": "The scan builds a preview of where your teeth would finish. You see it, and the plan behind it, before deciding anything.",
   "ty.step4-title": "You decide, or you do not",
   "ty.step4-text": "If you want to go ahead, a $100 refundable deposit reserves the $3,379 price while your aligners are made. If you would rather not, that is the end of it.",
-
   "ty.provider-caption": "Dr. Sean Sunyoto, DDS · Legacy Dental Pasadena",
   "ty.provider-eyebrow": "WHO YOU WILL SEE",
   "ty.provider-h2": "Dr. Sean Sunyoto will be the one treating you",
   "ty.provider-text": "He plans every Invisalign case at the practice himself and reviews each set of aligners with the patient. Legacy Dental Pasadena is a 2026 Invisalign Diamond Provider, Align Technology's top tier.",
   "ty.provider-link": "Call the practice on (626) 584-1800",
-
   "ty.reviews-h2": "Patients on the practice you have just booked with",
-
   "ty.legal": "Consultations are free and carry no obligation. Individual results vary."
 }

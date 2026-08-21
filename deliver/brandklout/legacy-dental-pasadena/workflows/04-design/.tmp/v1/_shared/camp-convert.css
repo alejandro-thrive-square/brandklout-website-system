@@ -109,87 +109,6 @@
   line-height: 1.2;
 }
 
-.camp_form {
-  display: grid;
-  padding: 26px 30px 30px;
-  grid-column-gap: 14px;
-  grid-row-gap: 14px;
-  grid-template-columns: 1fr;
-}
-
-.camp_form_row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  grid-column-gap: 14px;
-  grid-row-gap: 14px;
-}
-
-.camp_form_label {
-  display: block;
-  margin-bottom: 6px;
-  color: #3f411f;
-  font-size: 11px;
-  font-weight: 700;
-  letter-spacing: 0.06em;
-  text-transform: uppercase;
-}
-
-.camp_form_input {
-  width: 100%;
-  min-height: 52px;
-  margin-bottom: 0px;
-  padding: 12px 14px;
-  border: 1px solid #e2d8c6;
-  background-color: #fdf8ee;
-  color: #3f411f;
-  font-size: 15px;
-}
-
-.camp_form_input:focus {
-  border-color: #585b2f;
-  background-color: #ffffff;
-}
-
-.camp_form_select {
-  width: 100%;
-  min-height: 52px;
-  margin-bottom: 0px;
-  padding: 12px 14px;
-  border: 1px solid #e2d8c6;
-  background-color: #fdf8ee;
-  color: #3f411f;
-  font-size: 15px;
-}
-
-.camp_form_textarea {
-  width: 100%;
-  min-height: 104px;
-  margin-bottom: 0px;
-  padding: 12px 14px;
-  border: 1px solid #e2d8c6;
-  background-color: #fdf8ee;
-  color: #3f411f;
-  font-size: 15px;
-}
-
-.camp_form_button {
-  width: 100%;
-  min-height: 56px;
-  padding: 14px 24px;
-  border: 1px solid transparent;
-  background-color: #585b2f;
-  color: #3f411f;
-  font-family: Cardo;
-  font-size: 12px;
-  font-weight: 700;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
-}
-
-.camp_form_button:hover {
-  background-color: #43461f;
-}
-
 /* The card gives its body no padding of its own — the embed it was built for
    filled the card edge to edge. The seam block and this note are ordinary flow
    content, so they need the inset the embed did not, or the note lands flush on
@@ -252,57 +171,22 @@
   font-size: 12px;
 }
 
-
-/* A FormSelect's <option> list is unreachable from the Data API — the options
-   simply do not travel and the control ships empty. Radio inputs are real
-   elements with real text, so the choices survive and stay editable. */
-
-.camp_form_options {
-  display: grid;
-  grid-column-gap: 10px;
-  grid-row-gap: 10px;
-  grid-template-columns: 1fr 1fr;
-}
-
-.camp_form_option {
-  display: flex;
-  padding: 12px 13px;
-  align-items: center;
-  grid-column-gap: 10px;
-  margin-bottom: 0px;
-  border: 1px solid #e2d8c6;
-  background-color: #fdf8ee;
-  cursor: pointer;
-}
-
-.camp_form_option-text {
-  color: #3f411f;
-  font-size: 13px;
-}
-
 /* =========================================================== 991 and down === */
 
 @media screen and (max-width: 991px) {
   .camp_consult_grid { grid-template-columns: 1fr; grid-column-gap: 48px; grid-row-gap: 48px; padding-top: 56px; padding-bottom: 64px; }
+
   .camp_ty { padding-top: 76px; padding-bottom: 84px; }
 }
 
 /* =========================================================== 767 and down === */
 
 @media screen and (max-width: 767px) {
-  .camp_form_row { grid-template-columns: 1fr; }
-  .camp_form_options { grid-template-columns: 1fr; }
-  .camp_form { padding-left: 20px; padding-right: 20px; }
   .camp_form-card_top { padding-left: 20px; padding-right: 20px; }
-  .camp_consult_lead { font-size: 16px; }
-  .camp_ty_lead { font-size: 16px; }
-  .camp_ty_actions { flex-direction: column; align-items: stretch; }
-}
 
-/* The GHL form renders inside its own iframe and reports its height back through
-   LeadConnector's form.js. The min-height is what the card looks like before that
-   message arrives — without it the card collapses and the page jumps on load. */
-.camp_form-embed {
-  width: 100%;
-  min-height: 620px;
+  .camp_consult_lead { font-size: 16px; }
+
+  .camp_ty_lead { font-size: 16px; }
+
+  .camp_ty_actions { flex-direction: column; align-items: stretch; }
 }

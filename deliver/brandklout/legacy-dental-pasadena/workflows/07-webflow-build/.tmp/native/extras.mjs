@@ -14,7 +14,7 @@ import { call, SITES } from './wf.mjs';
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SHARED = path.resolve(HERE, '../../../04-design/.tmp/v1/_shared');
-const PAGE = '6a875326a493a891fd87d30a';
+const PAGE = '6a87d0257abd46ca13a18ae3';   // Invisalign Pasadena Campaign LP
 const BP = { 991: 'medium', 767: 'small', 479: 'tiny' };
 const ORDER = ['main', 'medium', 'small', 'tiny'];
 
@@ -27,10 +27,37 @@ const read = (css, bp) => {
       for (const d of m[2].split(';')) { const i = d.indexOf(':'); if (i > 0) put(sel, bp, d.slice(0, i).trim()); }
     }
 };
+/**
+ * Strip every @media block, keeping everything around them.
+ *
+ * This used to be `css.replace(/@media[\s\S]*$/, '')`, which truncates the file
+ * at the FIRST media query and throws away the rest. Any rule authored after the
+ * existing breakpoint blocks — which is where anything appended to the sheet
+ * naturally lands — was invisible to the main pass, so its base declarations were
+ * never created on the site. Five classes reached a built page with no style at
+ * all before this was found, and the failure is silent at every step: the lint
+ * passes, the plan looks reasonable, the build reports success, and the page
+ * simply renders wrong.
+ */
+function stripMedia(css) {
+  let out = '', i = 0;
+  while (i < css.length) {
+    const at = css.indexOf('@media', i);
+    if (at === -1) { out += css.slice(i); break; }
+    out += css.slice(i, at);
+    const open = css.indexOf('{', at);
+    if (open === -1) break;
+    let depth = 1, j = open + 1;
+    while (j < css.length && depth) { if (css[j] === '{') depth++; else if (css[j] === '}') depth--; j++; }
+    i = j;
+  }
+  return out;
+}
+
 for (const f of ['camp.css', 'camp-convert.css', 'camp-sections.css']) {
   const css = fs.readFileSync(path.join(SHARED, f), 'utf8').replace(/\/\*[\s\S]*?\*\//g, '');
   for (const m of css.matchAll(/@media screen and \(max-width: (\d+)px\) \{([\s\S]*?)\n\}/g)) read(m[2], BP[m[1]]);
-  read(css.replace(/@media[\s\S]*$/, ''), 'main');
+  read(stripMedia(css), 'main');
 }
 
 // a shorthand in the source stands in for the longhands Webflow stores
