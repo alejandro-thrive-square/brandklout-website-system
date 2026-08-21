@@ -213,6 +213,8 @@ Blocking is deliberate. A soft reminder at the threshold is ignored precisely wh
 
 `SessionStart` then injects the runbook into the new session automatically, so the rotation needs no human in the loop.
 
+**Only the head of the runbook is injected**, capped at 40,000 characters and cut at a section boundary. Sections are written newest-first, so the cap keeps the live state and drops the history; a marker tells the new session the rest is in the file. Without it the rule quietly defeats itself — this repo's own runbook reached 177 KB, about **45k tokens injected into every session start**, a quarter of the budget the rule exists to protect.
+
 ### Safety properties
 
 - **Never rotates a dirty tree.** Uncommitted work is the one thing a handoff cannot carry, so the guard blocks and demands a commit instead.
@@ -220,6 +222,18 @@ Blocking is deliberate. A soft reminder at the threshold is ignored precisely wh
 - **Never wedges a session.** Every internal failure exits 0 silently; a broken guard is worse than no guard.
 - **Rotation is a no-op if Orca is unavailable.** The runbook is already written, so the worst case is a manual restart, never lost work.
 - **Relaunches on the same profile.** `session-rotate.mjs` reads `CLAUDE_CONFIG_DIR` so a client worktree comes back on `team`, not `personal` — otherwise the new session would silently hold different MCP grants.
+- **Rotates a session at most once.** The handoff records the `session_id` it fired for; every later `Stop` from that session is silent.
+- **One rotation at a time.** `session-rotate.mjs` takes an exclusive `.claude/rotate.lock` before it touches the terminal. A second spawn exits without sending anything.
+- **Never types into a live TUI.** After `/exit` the terminal is read back until Claude is gone **and** a shell prompt is positively recognised. If neither can be established within 30 seconds it aborts rather than typing.
+
+#### What these last three are for (2026-08-21)
+
+They are not hypothetical. The guard suppressed a repeat rotation only while the session was *below* the warn threshold — which a session that has just rotated never is — so it rotated again on every subsequent `Stop`. Each pass spawned another `session-rotate.mjs` racing the first for the same terminal, and each of those typed three payloads blind on a fixed sleep. The new session's opening message was literally `/exit/exit` followed by the kickoff prompt three times, and the same thing happened in a second worktree.
+
+Two lessons worth keeping beyond this bug:
+
+- **An automation that drives a TUI must read it back.** A fixed `sleep` is an assumption, not a synchronisation. Checking for Claude's status footer is not enough either: a session on the `--resume` picker shows a modal with no footer at all, so a footer-only test reads it as a shell. Require a positive shell match, so the unknown case aborts.
+- **The kickoff prompt is gone.** `session-resume.mjs` already delivers the runbook at `SessionStart`; sending it again as terminal input was pure duplication, and it was the most visible symptom of the bug. Set `WEBZITE_ROTATE_KICKOFF=1` to restore it, which is only useful where project hooks have not been approved.
 
 ### Files
 
@@ -229,8 +243,11 @@ Blocking is deliberate. A soft reminder at the threshold is ignored precisely wh
 | `scripts/session-guard.mjs` | `Stop` hook — the ladder above |
 | `scripts/session-resume.mjs` | `SessionStart` hook — injects the runbook |
 | `scripts/session-rotate.mjs` | Closes and relaunches the Orca terminal |
+| `scripts/session-rotation.test.mjs` | Regression tests — `node scripts/session-rotation.test.mjs` |
 
-Thresholds are overridable for tuning without editing code: `WEBZITE_CONTEXT_LIMIT`, `WEBZITE_CONTEXT_WARN`.
+The tests are offline and side-effect free: they run against a throwaway git repo in the OS temp dir, which is also what makes them safe on a live machine (no Orca terminal can ever match a temp path, so the guard's spawn is a guaranteed no-op). Run them after touching any of the four scripts.
+
+Overridable without editing code: `WEBZITE_CONTEXT_LIMIT`, `WEBZITE_CONTEXT_WARN`, `WEBZITE_RUNBOOK_MAX_CHARS`, `WEBZITE_ROTATE_KICKOFF`.
 
 Context size is read from the transcript's recorded usage — `input + cache_creation + cache_read + output` of the **last** non-sidechain assistant message. The cache fields are the bulk of it, so counting `input_tokens` alone under-reports by roughly 100×. It reads the last message rather than the peak, because a compact genuinely shrinks the window and a peak-based measure would leave a compacted session permanently above the threshold.
 

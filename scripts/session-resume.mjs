@@ -15,14 +15,42 @@ import { readHookInput, runbookPath, readState, CONTEXT_LIMIT } from './session-
 
 const quiet = () => process.exit(0);
 
+/**
+ * Runbooks grow. This one reached **177 KB / 2,552 lines** - roughly 45,000 tokens
+ * injected into every single session start in this worktree, which is a quarter of
+ * the 200k budget the rule exists to protect and flatly contradicts its own premise
+ * that "a handoff costs a few thousand tokens once".
+ *
+ * Sections are written newest-first, so the head is the live state and the tail is
+ * history. Inject the head, cut at a section boundary so a section is never halved,
+ * and tell the session where the rest is - it can read the file when it needs the
+ * archaeology, which is far cheaper than paying for it unconditionally.
+ */
+const MAX_CHARS = (() => {
+  const n = Number.parseInt(process.env.WEBZITE_RUNBOOK_MAX_CHARS ?? '', 10);
+  return Number.isFinite(n) && n > 0 ? n : 40_000;
+})();
+
+function clamp(text) {
+  if (text.length <= MAX_CHARS) return text;
+  const head = text.slice(0, MAX_CHARS);
+  const cut = head.lastIndexOf('\n## ');
+  const kept = cut > MAX_CHARS / 2 ? head.slice(0, cut) : head;
+  const dropped = text.length - kept.length;
+  return `${kept}\n\n<!-- TRUNCATED: ${dropped.toLocaleString('en-US')} more characters of older ` +
+    `sections follow in .claude/RUNBOOK.md. Sections are newest-first, so everything above is the ` +
+    `live state. Read the file directly if you need the history. -->`;
+}
+
 try {
   const input = readHookInput();
   const cwd = input.cwd || process.cwd();
   const p = runbookPath(cwd);
   if (!existsSync(p)) quiet();
 
-  const body = readFileSync(p, 'utf8').trim();
-  if (!body || body.length < 40) quiet();
+  const full = readFileSync(p, 'utf8').trim();
+  if (!full || full.length < 40) quiet();
+  const body = clamp(full);
 
   const state = readState(cwd);
   const rotated = state.rotatedAt && Date.now() - state.rotatedAt < 30 * 60 * 1000;
