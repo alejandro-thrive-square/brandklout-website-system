@@ -1,0 +1,44 @@
+/* ==========================================================================
+   CH 04 — THE PRACTICE
+   Trust, built from what the practice actually owns: Dr. Sunyoto, the Diamond
+   Provider standing, and photographs of its own machines. Every image here is
+   Legacy's; none of it is stock.
+   ========================================================================== */
+.ch-practice { background: var(--bg) }
+
+.pr__lead { display: grid; gap: 2.5rem var(--gutter); grid-template-columns: 1fr 1fr; align-items: center }
+.pr__portrait { position: relative; border-radius: var(--r-lg); overflow: hidden; aspect-ratio: 4 / 5; max-width: 32rem }
+.pr__portrait img { width: 100%; height: 100%; object-fit: cover; will-change: transform }
+.pr__portrait figcaption {
+  position: absolute; inset: auto 0 0; padding: 5rem 1.5rem 1.5rem;
+  background: linear-gradient(180deg, transparent, rgba(36,38,15,.9)); color: var(--cream);
+}
+.pr__portrait figcaption b { display: block; font-family: var(--serif); font-size: var(--h3); font-weight: 400 }
+.pr__portrait figcaption span { font-size: var(--label); letter-spacing: var(--track-wide);
+  text-transform: uppercase; color: rgba(253,248,238,.72) }
+
+.pr__claims { display: grid; gap: 1.1rem; margin-top: 1.75rem }
+.pr__claims li { display: flex; gap: .85rem; list-style: none; font-size: var(--body-lg); color: var(--fg-body) }
+.pr__claims svg { flex: 0 0 auto; width: 1.2rem; height: 1.2rem; margin-top: .35rem; color: var(--accent) }
+
+/* The room. A drifting three-up of the practice's own equipment photography;
+   each panel parallaxes at its own rate against the scroll. */
+.pr__room { display: grid; gap: 1.25rem; grid-template-columns: repeat(3, 1fr); margin-top: var(--section) }
+.pr__panel { position: relative; overflow: hidden; border-radius: var(--r-lg); aspect-ratio: 3 / 4 }
+.pr__panel img { width: 100%; height: 112%; object-fit: cover; will-change: transform }
+.pr__panel figcaption {
+  position: absolute; inset: auto 0 0; padding: 3.5rem 1.25rem 1.1rem;
+  background: linear-gradient(180deg, transparent, rgba(36,38,15,.86));
+  color: var(--cream); font-size: var(--label); letter-spacing: .05em;
+}
+
+@media (max-width: 991px) {
+  .pr__lead { grid-template-columns: 1fr }
+  .pr__portrait { max-width: 26rem }
+  .pr__room { grid-template-columns: 1fr 1fr }
+  .pr__panel:last-child { grid-column: span 2; aspect-ratio: 16 / 9 }
+}
+@media (max-width: 478px) {
+  .pr__room { grid-template-columns: 1fr }
+  .pr__panel:last-child { grid-column: auto; aspect-ratio: 3 / 4 }
+}

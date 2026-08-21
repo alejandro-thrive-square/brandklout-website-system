@@ -1,0 +1,94 @@
+/* ==========================================================================
+   CH 03 — THE EVIDENCE          PINNED + SCRUBBED. The signature moment.
+
+   The practice's before-and-after photographs are single square files with the
+   BEFORE stacked directly above the AFTER, split at the midpoint. That shape
+   decides the mechanic: rather than crossfading two files that do not exist,
+   the chapter pins and raises a divider from the bottom edge to the top, so
+   the after is uncovered as you scroll. The reveal is the client's own
+   photograph, untouched, and the divider position is literally scroll
+   progress.
+
+   The stage is deliberately 2:1 and the img box is exactly square, so
+   object-fit:fill introduces no distortion: it is a square image in a square
+   box, offset by one stage height.
+
+   No patient names appear here: not in a caption, not in alt text, not in a
+   file name. Settled with the client on 2026-08-20.
+   ========================================================================== */
+.ch-evidence { background: var(--olive-dark) }
+.ev-pin { min-height: 100svh; display: grid; align-content: center; padding-block: 4rem }
+
+.ev__grid { display: grid; gap: 2.5rem var(--gutter); grid-template-columns: .8fr 1.2fr; align-items: center }
+
+/* The stage is 2:1 because each HALF of the source file is 2:1. The square
+   file is two stacked 2048x1024 photographs, so a square stage would have to
+   squeeze or crop one of them. At 2:1 the image is laid in at exactly twice
+   the stage height and each half fills the stage undistorted. */
+.ev__stage {
+  position: relative; width: 100%; max-width: 44rem; margin-inline: auto;
+  aspect-ratio: 2 / 1; border-radius: var(--r-lg); overflow: hidden;
+  background: var(--olive-deep); border: 1px solid rgba(253,248,238,.18);
+}
+.ev__case { position: absolute; inset: 0; opacity: 0; transition: opacity .45s var(--ease-out) }
+.ev__case.is-on { opacity: 1 }
+
+/* The same file, twice, offset by one stage height. The BEFORE layer shows its
+   top half; the AFTER layer shows its bottom half and is clipped to a band that
+   grows from the bottom up. --rev runs 0 to 1 and is written by the scrub, so
+   at 0.5 the divider is genuinely halfway rather than snapped to an end state. */
+.ev__shot { position: absolute; inset: 0; overflow: hidden }
+.ev__shot img { position: absolute; left: 0; width: 100%; height: 200%; object-fit: fill }
+.ev__shot--before img { top: 0 }
+.ev__shot--after  img { top: -100% }
+.ev__shot--after { clip-path: inset(calc((1 - var(--rev, 0)) * 100%) 0 0 0) }
+
+.ev__divider {
+  position: absolute; left: 0; right: 0; z-index: 3;
+  top: calc((1 - var(--rev, 0)) * 100%);
+  height: 2px; background: var(--sand); box-shadow: 0 0 1.5rem rgba(36,38,15,.6);
+}
+.ev__divider::after {
+  content: ''; position: absolute; left: 50%; top: 50%; width: 2.75rem; height: 2.75rem;
+  transform: translate(-50%, -50%); border-radius: 50%;
+  border: 2px solid var(--sand); background: rgba(36,38,15,.5);
+  -webkit-backdrop-filter: blur(4px); backdrop-filter: blur(4px);
+}
+.ev__tag {
+  position: absolute; z-index: 4; padding: .35rem .75rem; border-radius: var(--r-lg);
+  font-size: var(--label); letter-spacing: var(--track-wide); text-transform: uppercase;
+  background: rgba(36,38,15,.72); color: var(--cream);
+}
+.ev__tag--b { inset: 1rem auto auto 1rem }
+.ev__tag--a { inset: auto 1rem 1rem auto; background: var(--amber); color: var(--olive-dark) }
+
+.ev__copy { color: var(--cream) }
+.ev__copy h2 { color: var(--cream) }
+.ev__copy p { color: rgba(253,248,238,.78); max-width: 42ch; font-size: var(--body-lg) }
+.ev__counter {
+  display: flex; align-items: baseline; gap: .5rem; margin-top: 2rem;
+  font-family: var(--serif); color: var(--sand);
+}
+.ev__counter b { font-size: var(--h2); font-weight: 400; font-variant-numeric: tabular-nums }
+.ev__counter span { font-size: var(--label); letter-spacing: var(--track-wide);
+  text-transform: uppercase; color: rgba(253,248,238,.6); font-family: var(--sans) }
+
+.ev__dots { display: flex; gap: .55rem; margin-top: 1.5rem }
+.ev__dots i {
+  display: block; width: 2.25rem; height: 2px; background: rgba(253,248,238,.28);
+  transition: background .4s var(--ease-out);
+}
+.ev__dots i.is-on { background: var(--sand) }
+
+.ev__note {
+  margin-top: 1.75rem; font-size: var(--label); color: rgba(253,248,238,.5); max-width: 40ch;
+}
+
+@media (max-width: 991px) {
+  .ev__grid { grid-template-columns: 1fr; gap: 1.75rem }
+  .ev__stage { max-width: 100% }
+  .ev__copy { text-align: left }
+}
+/* A 2:1 stage is short on a phone, so the pinned scene gives the photograph
+   more of the viewport by dropping the copy above it rather than beside it. */
+@media (max-width: 478px) { .ev__counter { margin-top: 1.25rem } .ev__note { margin-top: 1rem } }

@@ -1,0 +1,29 @@
+/* ==========================================================================
+   CH 06 — THE PROOF
+   Six Invisalign films the practice already published, and its own live Google
+   reviews widget. Nothing on this page is written by us and presented as a
+   patient's words.
+   ========================================================================== */
+.ch-proof { background: var(--olive-dark) }
+.ch-proof h2, .ch-proof .ch-tag b { color: var(--cream) }
+.ch-proof p { color: rgba(253, 248, 238, .76) }
+
+.pf__split { display: grid; gap: 3.5rem var(--gutter); grid-template-columns: 1fr; }
+
+.pf__quote {
+  display: grid; gap: 1.25rem; padding: 2rem; margin-bottom: 3rem;
+  border-left: 2px solid var(--sand); background: rgba(253, 248, 238, .05);
+  border-radius: 0 var(--r-lg) var(--r-lg) 0; max-width: 52rem;
+}
+.pf__quote blockquote { font-family: var(--serif); font-size: var(--h3); line-height: 1.35; color: var(--cream) }
+.pf__quote figcaption { font-size: var(--label); letter-spacing: var(--track-wide);
+  text-transform: uppercase; color: rgba(253, 248, 238, .64) }
+
+.pf__reviews { margin-top: var(--section) }
+.pf__reviews .reviews-slot__fallback { border-color: rgba(253, 248, 238, .28); color: rgba(253, 248, 238, .7) }
+
+.pf__ratingline {
+  display: flex; flex-wrap: wrap; align-items: center; gap: 1rem 2rem;
+  margin-bottom: 2rem; color: rgba(253, 248, 238, .8);
+}
+.pf__ratingline .rating { color: var(--cream) }

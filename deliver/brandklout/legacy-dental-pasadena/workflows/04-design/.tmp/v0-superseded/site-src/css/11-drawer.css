@@ -1,0 +1,35 @@
+/* ==========================================================================
+   DRAWER — the mobile menu. Deliberately thin: these are paid landing pages,
+   so the menu offers the funnel and the practice's own key pages, not a full
+   site map that leaks the visitor back out.
+   ========================================================================== */
+.drawer {
+  position: fixed; inset: 0; z-index: 55;
+  display: grid; align-content: center; gap: var(--s-3, 1.4rem);
+  padding: 6rem var(--gutter) 3rem;
+  background: var(--olive-dark); color: var(--cream);
+  clip-path: inset(0 0 100% 0);
+  transition: clip-path .65s var(--ease-io);
+  visibility: hidden;
+}
+.drawer.is-open { clip-path: inset(0 0 0 0); visibility: visible }
+
+.drawer a {
+  display: block; font-family: var(--serif); font-size: var(--h3); line-height: 1.25;
+  padding-block: .5rem; border-bottom: 1px solid rgba(253, 248, 238, .14);
+  opacity: 0; transform: translateY(1rem);
+  transition: opacity .5s var(--ease-out), transform .5s var(--ease-out), color .3s;
+}
+.drawer.is-open a { opacity: 1; transform: none }
+.drawer.is-open a:nth-child(1) { transition-delay: .12s }
+.drawer.is-open a:nth-child(2) { transition-delay: .18s }
+.drawer.is-open a:nth-child(3) { transition-delay: .24s }
+.drawer.is-open a:nth-child(4) { transition-delay: .3s }
+.drawer a:hover { color: var(--sand) }
+
+.drawer__tel {
+  margin-top: 1.5rem; font-size: var(--body-lg); font-weight: 600;
+  color: var(--sand); font-family: var(--sans);
+}
+.drawer__meta { font-size: var(--label); letter-spacing: var(--track-wide);
+  text-transform: uppercase; color: rgba(253, 248, 238, .55) }
