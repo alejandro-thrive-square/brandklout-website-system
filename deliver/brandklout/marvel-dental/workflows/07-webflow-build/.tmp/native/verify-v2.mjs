@@ -13,6 +13,16 @@
  *   - images present, and the native video element rendered
  *
  *   node verify-v2.mjs [topic …]
+ *
+ * PREMISE RETIRED, 2026-08-21. The client edited these pages in the Designer on
+ * 2026-08-21 (the form moved into the landing hero, the hero image and video
+ * slots went, an Elfsight widget replaced the review cards) and the local build
+ * is deliberately no longer kept in step — it is the record of what we
+ * delivered. So this reports 0/3, and that is the correct answer, not a
+ * regression: it is measuring a difference that is now intended. Read its
+ * output as a DIFF of local against live, never as a pass/fail gate, and do not
+ * loosen its expectations to make it green. If the local build is ever re-synced
+ * from the published HTML, this becomes a gate again unchanged.
  */
 import fs from 'node:fs';
 import path from 'node:path';

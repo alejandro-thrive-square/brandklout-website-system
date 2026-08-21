@@ -93,13 +93,22 @@ the button is `358x55` at 14px on all three at 390.
 > GHL form embed had been replaced with the real one. Read the published HTML before assuming local
 > is live, and never re-render a whole page over live edits.
 
+### The local build is now a historical record
+
+Decided with the user 2026-08-21. The three pages were edited in the Designer on 2026-08-21 at
+18:46Z and published at 18:57Z, by someone other than this build: on the landing page the GHL form
+moved into the hero inside a sticky card, the hero image and the video slots went, and on all three
+pages the hand-written review cards were replaced by an Elfsight Google Reviews widget. Same page
+ids, so these are edits to our pages.
+
+`04-design/.tmp/v1/` therefore records **what we delivered**, not what the site serves.
+`verify-v2.mjs` compares the two and reports **0/3**; that is the honest answer and the script is
+left as it is, with its premise retired rather than its expectations quietly loosened. Anything
+further on these pages is edited **surgically, element by element** — a whole-page re-render would
+revert the client's work.
+
 ### Still to do
 
-- **Office hours contradict the client's own site.** The funnel says *Monday to Friday, 9:00 AM to
-  5:00 PM · Saturday 9:00 AM to 2:00 PM*. `marveldentaldds.com`, [brand.md](./brand.md) and the
-  local content all say *Tuesday to Friday, 9:00 AM to 5:00 PM · Saturday 8:00 AM to 4:00 PM*.
-  Wrong hours on a live paid emergency page. **Needs the client's answer**, then one of the two
-  has to change.
 - **A duplicate Elfsight Google Reviews widget ships site-wide.** `elfsight-app-dd6f5ce5-…` sits in
   Site Settings → Custom Code → Footer, on all 77 pages, and duplicates the in-page widget on the
   consultation page (`5b4f0a1d`). Every page therefore loads Elfsight's `platform.js` twice.
@@ -114,6 +123,8 @@ the button is `358x55` at 14px on all three at 390.
 | :--- | :--- |
 | Campaign phone | (973) 264-0928, the existing tracking line |
 | Hook | Same-day relief, no discount offer |
+| Office hours | **Left as published**, 2026-08-21. The funnel says *Monday to Friday 9:00 AM to 5:00 PM · Saturday 9:00 AM to 2:00 PM*; `marveldentaldds.com`, [brand.md](./brand.md) and the local content say *Tuesday to Friday 9:00 AM to 5:00 PM · Saturday 8:00 AM to 4:00 PM*. The discrepancy is known and accepted, not an oversight. Worth putting to the client eventually — one of the two is wrong |
+| Publishing | Footer fix published to `marveldentaldds.com` + `www.` on 2026-08-21 at the user's instruction, and verified on the served pages |
 | Lead capture | LeadConnector (GHL) embed, form `jCl4STYpcyNUkavVj58F` ("Marvel Dental Google Ads"), read off the served page 2026-08-21 and now in `_base.json` |
 
 ## Version Control
