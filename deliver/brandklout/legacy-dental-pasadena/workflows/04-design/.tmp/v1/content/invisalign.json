@@ -26,7 +26,7 @@
   "section5.span3": "Personalised treatment plan",
   "section5.span4": "All office visits and adjustments",
   "section5.span5": "One set of retainers",
-  "section5.fine-print": "New patients only, limited-time promotional pricing. A $100 deposit reserves the price and is fully refundable, credited to your first appointment. Payment plans are available, including a 0% option over 24 months. Credit cards carry a 3% surcharge; debit, HSA and FSA do not. Where you have orthodontic cover, we file on your behalf and reimbursement typically runs $1,000 to $3,000, paid to you.",
+  "section5.fine-print": "New patients only, limited-time promotional pricing. A $100 deposit reserves the price. It is credited toward the payment due at your data collection appointment, or refunded in full if you decide not to proceed. Payment plans are available, including 0% interest over 24 months on a financed total of $3,979. Credit cards carry a 3% surcharge; debit, HSA and FSA do not. Where your plan covers Invisalign, reimbursement typically runs $1,000 to $3,000, paid either to you or directly to the office depending on your provider.",
   "section-navy6.story-caption": "The practice on North Lake Avenue, Pasadena",
   "section-navy6.eyebrow": "WHY TREATMENT HERE COSTS LESS",
   "section-navy6.h2": "Because almost none of it is sent out",
@@ -77,7 +77,7 @@
   "section9.journey-text2": "An iTero scan builds a 3D model of your teeth, with no putty impressions. You see a preview of the finished result before you commit to anything.",
   "section9.journey-num3": "03",
   "section9.h33": "Reserve the price",
-  "section9.journey-text3": "A $100 deposit locks the promotional pricing while your aligners are made. It is fully refundable and it comes off your first appointment.",
+  "section9.journey-text3": "A $100 deposit locks the promotional pricing while your aligners are made. It is credited toward the payment due at your data collection appointment, or refunded in full if you decide not to go ahead.",
   "section9.journey-num4": "04",
   "section9.h34": "Start treatment",
   "section9.journey-text4": "Your aligner series arrives and you change trays on schedule. Most courses run 6 to 18 months, and you leave with a set of retainers.",
@@ -154,5 +154,7 @@
   "cta14.button.href": "/new-invisalign-consultation",
   "cta14.button2": "Book your free consultation",
   "cta14.button3.href": "tel:+16265841800",
-  "cta14.button4": "Call (626) 584-1800"
+  "cta14.button4": "Call (626) 584-1800",
+  "_offer-source": "PROVENANCE FOR EVERY OFFER MECHANIC, so this never has to be re-litigated. Source is the practice's OWN page https://legacydentalpasadena.com/invisalign-offer-pasadena (captured 2026-08-20 to 01-content-intake/.tmp/existing/invisalign-offer-pasadena.html). That page carries <meta content=\"noindex\" name=\"robots\"> and is absent from sitemap.xml, so it does NOT appear in site search, Google, Meta or Yelp. It is their existing unlisted ad landing page. Verbatim: $100 deposit = 'We will collect a $100 fully refundable deposit to lock in the limited time lowest discount.' | credited = 'That deposit will be credited towards full payment due for the Data Collection appointment or fully refunded if you do not proceed.' | 3% surcharge and the debit/HSA/FSA exemption = 'There is a 3% surcharge on credit cards. With no surcharge on debit cards, HSA, or FSA cards.' | 0% for 24 months = '$3979 - ~166/month, 0% interest for 24 months' (note the 0% plan sits on the $3,979 financed total, NOT on $3,379). | insurance = 'If your plan does include Invisalign, reimbursement typically ranges from $1,000 to $3,000. Depending on your provider, payments may be sent to you or directly to the dental office.'",
+  "_correction-2026-08-21": "Three PARAPHRASES drifted from that source and were corrected after Gauge Hill queried the numbers. The numbers themselves were all correct; the wording around them was not. (1) 'credited to your first appointment' overstated it: the source names the Data Collection appointment, and the free consultation comes before it. (2) 'we file on your behalf' was UNSUPPORTED, the source says nothing about who files. (3) 'paid to you' contradicted the source, which says payment 'may be sent to you or directly to the dental office'. Also tightened the 0% plan to name its $3,979 financed total, since sitting inside a $3,379 card it could be read as applying to $3,379."
 }
