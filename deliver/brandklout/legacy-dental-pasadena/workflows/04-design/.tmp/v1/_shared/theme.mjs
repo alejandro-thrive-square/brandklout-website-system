@@ -70,7 +70,7 @@ const COLORS = {
   '#d3e2e9': '#ded2bd',
   '#cfe4ec': '#e8e2d4', // body text on dark
   // greys
-  '#6b7b82': '#767a63', // sub-heading grey -> warm grey
+  '#6b7b82': '#63674f', // sub-heading grey -> warm grey, dark enough for 10px on the mist band
   '#5c5c5c': '#54574a',
   '#9bb0b9': '#a9ac97',
 };
@@ -137,7 +137,8 @@ const PATCHES = [
      a deep-olive card top: #585b2f on #3f411f measures 1.46:1. Skin is 7.8:1. */
   ['.camp_offer-card_kicker', { color: SKIN }],
   ['.camp_form-card_kicker', { color: SKIN }],
-  ['.camp_review_stars', { color: AMBER }],
+  ['.camp_review_stars', { color: OLIVE }],
+  ['.camp_ty_mark', { color: AMBER }],
   ['.camp_offer-card', { 'border-radius': '16px' }],   // --radius--large
   ['.camp_form-card', { 'border-radius': '16px' }],
   ['.camp_urgent-note', { 'border-left-color': AMBER }],

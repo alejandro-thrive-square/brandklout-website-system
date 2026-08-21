@@ -28,8 +28,13 @@
               <div class="camp_form-card_kicker">{{consult.form-kicker}}</div>
               <div class="camp_form-card_title">{{consult.form-title}}</div>
             </div>
-            <!-- The lead capture is Brandklout's LeadConnector (GHL) form, not a Webflow form. The CRM has to own the lead, so it ships as ONE HtmlEmbed whose whole body is {{consult.form-embed}}. The form id lives in _base.json, set in one place, so it can never be another client's form by accident. -->
-            <div class="camp_form-embed">{{consult.form-embed}}</div>
+            <!-- THE FORM SEAM. Not ours to install: the lead-capture form is a
+                 Gauge Hill Asana subtask (1217658322593910), and this practice runs
+                 one LeadConnector form per paid channel, so which form belongs here
+                 depends on an answer we do not have yet. The slot below is a real
+                 element at the form's real height: dropping the embed in later
+                 moves nothing else on the page. See camp-sections.css. -->
+            <div class="camp_form-slot"><span class="camp_form-slot_title">{{consult.slot-title}}</span>{{consult.slot-note}}</div>
             <p class="camp_form_note">{{consult.form-note}}</p>
           </div>
         </div>
@@ -42,6 +47,19 @@
       <div class="camp_proof_item"><div class="camp_proof_year">{{proof4.proof-year3}}</div><div><div class="camp_proof_title">{{proof4.proof-title3}}</div><div class="camp_proof_sub">{{proof4.proof-sub3}}</div></div></div>
       <div class="camp_proof_item"><div class="camp_proof_year">{{proof4.proof-year4}}</div><div><div class="camp_proof_title">{{proof4.proof-title4}}</div><div class="camp_proof_sub">{{proof4.proof-sub4}}</div></div></div>
     </div></div></section>
+
+    <!-- The films. The user's brief for this page is "the form plus the
+         testimonial videos and little else", so this is the only content beat
+         between the form and the proof: four of the practice's own portrait
+         Invisalign patient films, each a poster that opens the film. -->
+    <section class="camp_section"><div class="camp_container">
+      <div class="camp_heading is-center">
+        <div class="camp_eyebrow">{{films.eyebrow}}</div>
+        <h2 class="camp_h2">{{films.h2}}</h2>
+        <p class="camp_text is-center">{{films.text}}</p>
+      </div>
+      <div class="camp_vwall_grid">{{#films-list}}<a class="camp_vwall_item" href="{{.href}}" target="_blank" rel="noopener"><img class="camp_vwall_poster" src="{{.poster}}" alt="{{.alt}}"><span class="camp_vwall_play">▶</span><span class="camp_vwall_meta">{{.meta}}</span></a>{{/films-list}}</div>
+    </div></section>
 
     <section class="camp_section is-mist"><div class="camp_container">
       <div class="camp_heading is-center">

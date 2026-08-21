@@ -615,7 +615,7 @@
 
 .camp_fine-print {
   padding: 15px 31px 27px;
-  color: #767a63;
+  color: #63674f;
   font-size: 10px;
 }
 
@@ -670,7 +670,7 @@
 
 .camp_benefit_text {
   margin-top: 14px;
-  color: #767a63;
+  color: #63674f;
   font-size: 13px;
 }
 
@@ -714,7 +714,7 @@
 
 .camp_authenticity {
   margin-top: 18px;
-  color: #767a63;
+  color: #63674f;
   font-size: 10px;
 }
 
@@ -753,7 +753,7 @@
 
 .camp_journey_text {
   margin-top: 13px;
-  color: #767a63;
+  color: #63674f;
   font-size: 13px;
 }
 
@@ -891,7 +891,7 @@
 }
 
 .camp_review_stars {
-  color: #f99b1b;
+  color: #585b2f;
   letter-spacing: 0.12em;
 }
 
@@ -912,7 +912,7 @@
 
 .camp_review_meta {
   margin-top: 4px;
-  color: #767a63;
+  color: #63674f;
   font-size: 10px;
 }
 
@@ -948,7 +948,7 @@
 
 .camp_faq_answer {
   padding: 0px 42px 24px 0px;
-  color: #767a63;
+  color: #63674f;
   font-size: 13px;
 }
 
@@ -989,8 +989,15 @@
   grid-row-gap: 40px;
 }
 
+/* The header logo is given an explicit box; this one was not, so it sized to
+   the file's own aspect and its wordmark sat directly on the paragraph below.
+   A fixed box with `contain` keeps the lockup intact at any file aspect. */
 .camp_footer_logo {
   width: 205px;
+  height: 62px;
+  margin-bottom: 20px;
+  object-fit: contain;
+  object-position: 0% 50%;
   filter: brightness(0) invert(1);
   opacity: 0.88;
 }

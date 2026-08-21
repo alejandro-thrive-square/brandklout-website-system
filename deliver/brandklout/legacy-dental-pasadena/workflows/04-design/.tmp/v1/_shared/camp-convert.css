@@ -190,8 +190,13 @@
   background-color: #43461f;
 }
 
+/* The card gives its body no padding of its own — the embed it was built for
+   filled the card edge to edge. The seam block and this note are ordinary flow
+   content, so they need the inset the embed did not, or the note lands flush on
+   the card's rounded bottom border and reads as an overflow bug. */
 .camp_form_note {
-  color: #767a63;
+  padding: 0px 22px 22px;
+  color: #63674f;
   font-size: 10px;
   line-height: 1.55;
 }
@@ -219,7 +224,7 @@
   align-items: center;
   border-radius: 50%;
   background-color: #3f411f;
-  color: #585b2f;
+  color: #f99b1b;
   font-size: 34px;
   line-height: 1;
 }
@@ -243,7 +248,7 @@
 
 .camp_ty_meta {
   margin-top: 30px;
-  color: #767a63;
+  color: #63674f;
   font-size: 12px;
 }
 
