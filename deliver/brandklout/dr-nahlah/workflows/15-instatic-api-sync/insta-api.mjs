@@ -183,6 +183,11 @@ async function request(method, path, body, { retryAuth = true, retryStepUp = tru
   return parsed
 }
 
+/** Escape hatch for endpoints without a named helper (fonts, media, plugins). */
+export async function api(method, path, body) {
+  return request(method, path, body)
+}
+
 /** The draft shell plus the seq to quote back on save. */
 export async function getSite() {
   return request('GET', '/admin/api/cms/site')
