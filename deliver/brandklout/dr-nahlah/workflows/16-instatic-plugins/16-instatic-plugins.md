@@ -1,5 +1,14 @@
 # Workflow: 16 - Instatic Plugins
 
+> [!IMPORTANT]
+> **Promoted to the canonical process.** The reusable copy of this toolkit now lives at
+> [`deliver/process/18-instatic-embeds/`](../../../../process/18-instatic-embeds/18-instatic-embeds.md)
+> and is where a NEW client build should start. This folder is the versioned instance it was
+> built in (`DELIVER_SYSTEM_RULES.md` §3.2): it keeps the Dr. Nahlah gates, evidence and
+> settings. Fixes made here must be promoted there deliberately — the copies do not cascade.
+> Note the numbering differs: this client folder used `15`/`16` locally, which collide with
+> the canonical `15-improvement-intake-audit` and `16-vercel-deployment`.
+
 ## Client-Facing Overview
 Third-party widgets (booking forms, review widgets, CRM embeds) can be switched on per site through an installable plugin, instead of being impossible or requiring a modified platform build. A developer places them **by hand** from the editor — insert the **Embed** block, paste the URL or the vendor's snippet, publish — with no script and no agent involved.
 

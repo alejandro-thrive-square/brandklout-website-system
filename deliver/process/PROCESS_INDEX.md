@@ -2,7 +2,7 @@
 
 This folder contains the canonical post-contract delivery template library for the Deliver microsystem. Sales owns offer definition, proposal sending, discovery meeting, contract onboarding, and the Deliver handoff package. Deliver starts after signing, then uses the handoff package's normalized `selected_offer` value to initialize a client folder and choose the correct delivery path.
 
-Each numbered module mirrors the standard workflow structure defined in [SYSTEM_RULES.md Section 2.1](../../SYSTEM_RULES.md): `.md` directive, `.py` executor, `TRIGGER_PROMPT.txt`, and a `.tmp/` artifact folder. Module `00` defines client-folder initialization. Modules `01` through `17` are reusable delivery execution templates; [OFFER_ROUTING.md](./OFFER_ROUTING.md) determines which execution modules are copied for each Sales offer.
+Each numbered module mirrors the standard workflow structure defined in [SYSTEM_RULES.md Section 2.1](../../SYSTEM_RULES.md): `.md` directive, `.py` executor, `TRIGGER_PROMPT.txt`, and a `.tmp/` artifact folder. Module `00` defines client-folder initialization. Modules `01` through `18` are reusable delivery execution templates; [OFFER_ROUTING.md](./OFFER_ROUTING.md) determines which execution modules are copied for each Sales offer.
 
 > [!IMPORTANT]
 > **Integrity Rule**: When a phase's or supporting workflow's logic, naming, output schema, or offer routing changes, update the relevant `.md`, this index, and [OFFER_ROUTING.md](./OFFER_ROUTING.md) (when routing is affected) in the same commit.
