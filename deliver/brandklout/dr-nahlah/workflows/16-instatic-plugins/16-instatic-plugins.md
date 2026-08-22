@@ -138,6 +138,14 @@ The two viewports report different heights (884 px and 2156 px), which is the po
 - **A publish bakes EVERY page, so any draft that has drifted from what is live ships with it.** Publishing to verify the Embed block republished all 35 pages, and the home page lost its six `.rv-card` fallback — present in the published HTML, absent from the draft. Nothing about the plugin caused it; the publish only revealed it. `15-instatic-api-sync/restore-review-wall.mjs` put it back, and the home audit is byte-identical to its committed baseline again (`words: 1741`). **Before publishing this site for any reason, check the pages you are not touching**, and re-run the audit against the committed `08-qa/.tmp/audit-out/` records afterwards.
 - **The unnamed script that fails on every page is Cloudflare's.** The 73-URL audit reports `netFailed: [" Script"]` site-wide and it had never been identified. Driving a page with a `securitypolicyviolation` listener names it: `script-src-elem https://static.cloudflareinsights.com/beacon.min.js/…`. The CDN injects its analytics beacon into every response and the page CSP refuses it. Pre-existing, unrelated to embeds, and harmless — but a gate that asserts "zero CSP violations" on this site will fail on someone else's beacon, so assert on the directives you care about.
 - **`changedPages` takes FLAT `Page` objects** (`src/core/page-tree/page.ts`: `id`, `slug`, `title`, `nodes`, `rootNodeId` at the top level), NOT the CMS row shape with `cells` that `GET /admin/api/cms/pages` returns. Send the row shape and the validator rejects `site.pages[0].slug: Expected string` — a path the payload appears to contain — one field per round trip.
+### Gotchas from gating the editor UI
+
+- **The deployed admin does not have `toolbar-add-module-btn`.** `ModulePickerDropdown.tsx` in the v0.0.16 source renders it, and a gate written from the zip waits for a button that never appears and reports "the editor never loaded" on a fully loaded editor. The live inserter opens from the canvas notch (`canvas-notch-add-btn`) or from *Insert module* in the Layers panel (`dom-tree-insert-module`). **Read the running DOM, not the source tree** — dump `[data-testid]` off the live page and pick from that.
+- **A freshly inserted Embed renders `.wz-embed-note`, not `[data-wz-embed]`.** It has no URL and no snippet yet, so `preview()` returns the placeholder — which is the correct render, and its instruction copy is what the person actually reads. A gate that looks only for the frame wrapper fails against a working product.
+- **The canvas iframe body carries `[data-plugin-canvas-module]`, not `[data-node-id]`.** Filtering canvases on `[data-node-id]` skips all three breakpoint frames silently and reports zero blocks placed.
+- **The notch button mounts before the editor has hydrated.** An insert fired into that window lands on the canvas but never *selects*, so the Properties Panel never opens and the gate reads a working block as a broken one. Wait for `dom-panel-ready`, then settle, before clicking — and poll for `property-control-source` rather than sleeping a fixed 3.5s, which caught the canvases on one run and neither on the next.
+- **Backticks inside a JS comment inside a CDP template literal terminate the literal.** `SyntaxError: missing ) after argument list` at the `Runtime.evaluate` call, pointing at a line that looks fine. Keep in-template comments backtick-free.
+
 - **Class names are not in the page.** Nodes carry `classIds`; the names live in `shell.styleRules`. Grepping a page's JSON for `rv-card` finds nothing whether or not the cards are there, which is exactly how a "the draft never had them" conclusion gets reached. Resolve ids through the shell before concluding anything.
 
 ## Security posture
@@ -152,7 +160,19 @@ The two viewports report different heights (884 px and 2156 px), which is the po
 ```bash
 node test-embed-origins.mjs     # 11 assertions on the CSP filter — no network, no platform
 node test-embed-module.mjs      # 44 assertions on the Embed block — no network, no platform
+
+node verify-embed-module.mjs --place    # the PUBLISHED page: render, runtime, CSP
+node verify-embed-module.mjs --check
+node verify-embed-module.mjs --cleanup
+
+node verify-embed-editor.mjs --place    # the ADMIN EDITOR: can a person find and place it?
+node verify-embed-editor.mjs --check
+node verify-embed-editor.mjs --cleanup
 ```
+
+**The two `verify-*` gates cover different code paths, and for a long time only one of them was gated.** `verify-embed-module.mjs` writes nodes straight into the site document over the API and drives the published page, so it proves the publish path — `moduleAdapter` plus the QuickJS sandbox, server side. It cannot prove the thing the handoff actually promises: that a developer or a marketer is *offered* the block at all. That is `editorPluginLoader.ts`, running in the BROWSER, dynamically importing `/uploads/plugins/<id>/<version>/modules/index.js` and registering what it default-exports into the inserter.
+
+**That editor path fails silently by design.** `editorPluginLoader` pushes a `failed` entry and moves on, so a module pack that 404s, that is not valid ESM in a browser, or whose `modules.register` grant was dropped, leaves a plugin card still reading `active` and an inserter with no Embed in it — while the published page keeps working and tells you nothing. `verify-embed-editor.mjs --check` drives the real admin under CDP and asserts 11 things, from "the browser fetched the module pack and got 200" through "Embed is offered in the inserter" to "the Properties Panel exposes every control the block declares". **It publishes nothing** — the editor reads the draft, so the temp page never needs to be baked, which keeps the whole gate off the publish path that cost the home page its review wall.
 
 `test-embed-module.mjs` writes every case that matters TWICE — once with raw props (the canvas) and once with props escaped the way `escapeProps()` escapes them (the publisher) — and asserts the two agree. It also covers the scheme guard (`javascript:`, `data:`, control-character smuggling), single-escaping of text props, the snippet round trip, the three height modes, and that an unconfigured block publishes a comment rather than an empty box.
 
@@ -175,7 +195,8 @@ Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTR
 - `set-origins.mjs` — read / set / clear the allowlist
 - `test-embed-origins.mjs` — offline unit tests for the filter
 - `test-embed-module.mjs` — offline unit tests for the Embed block, publisher and canvas paths both
-- `verify-embed-module.mjs` — end-to-end gate: places a temporary page, publishes, drives it under CDP, removes it
+- `verify-embed-module.mjs` — end-to-end gate on the PUBLISHED page: places a temporary page, publishes, drives it under CDP, removes it
+- `verify-embed-editor.mjs` — end-to-end gate on the ADMIN EDITOR: temp draft page, drives the real inserter and Properties Panel under CDP, deletes the page. No publish at any point
 - `probe-widget-postmessage.mjs` — does a widget self-report its height, or does it really need the vendor's parent script? Run this BEFORE granting any `script-src` origin.
 - `.tmp/embed-origins.zip` — the built package
 
