@@ -147,7 +147,7 @@ v1.2.0 derives the policy from the page instead of asking for it in advance. At 
 
 **The trust model is the one the author already exercised** — an editor pasted this, on this page. It is per-page, so a widget on `/contact` widens nothing on `/veneers`, and it is narrower than the platform it imitates: Webflow serves no CSP at all.
 
-**What still does not work:** an inline event handler (`onclick="…"`) written on a tag inside a pasted snippet. That needs `'unsafe-hashes'`, which is a broader grant than it looks. The workaround is in the guide: move the handler into the snippet's own `<script>`.
+**What does not work IN STRICT MODE:** an inline event handler (`onclick="…"`) written on a tag inside a pasted snippet. Hashing a script block does not cover a handler attribute — that needs `'unsafe-hashes'`. Workaround under strict: move the handler into the snippet's own `<script>`. Compatible mode (v1.3.0, the default) grants `'unsafe-inline'` with no hashes present, so handlers run there.
 
 ### Gate: `verify-embed-scripts.mjs`
 
