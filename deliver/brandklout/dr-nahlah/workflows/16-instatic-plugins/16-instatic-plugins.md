@@ -1,7 +1,7 @@
 # Workflow: 16 - Instatic Plugins
 
 ## Client-Facing Overview
-Third-party widgets (booking forms, review widgets, CRM embeds) can be switched on per site through an installable plugin, instead of being impossible or requiring a modified platform build.
+Third-party widgets (booking forms, review widgets, CRM embeds) can be switched on per site through an installable plugin, instead of being impossible or requiring a modified platform build. A developer places them **by hand** from the editor — insert the **Embed** block, paste the URL or the vendor's snippet, publish — with no script and no agent involved.
 
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the scripts or technical logic of this workflow must be documented here immediately.
@@ -32,6 +32,38 @@ Three facts, each verified against the v0.0.16 source and then against the live 
 | `script-src` | **Yes**, arbitrary origins | this plugin. (`frontend.assets` alone only ever grants `'self'`, because plugin scripts are served same-origin from `/uploads/plugins/...`) |
 | `connect-src` | Yes | this plugin, or `networkAllowedHosts` via `frontend.assets` |
 | `img-src` / `media-src` | Yes | media storage adapter `cspOrigins`, or this plugin |
+
+## The manual workflow (no agent required)
+
+The plugin ships two halves, and they are separate on purpose:
+
+| Half | What it is | Who touches it |
+|---|---|---|
+| `entrypoints.modules` | the **Embed** block in the canvas module library | anyone editing a page |
+| `entrypoints.server` | the origin allowlist that widens the published CSP | an operator, deliberately, in plugin settings |
+
+A developer maintaining the site does this and nothing else:
+
+1. **Insert** → module library → **Embed** (category *Media*).
+2. In the Properties Panel pick **Source**:
+   - **URL** — paste the vendor's iframe URL. Height *auto* (the widget reports its own), *fixed*, or an *aspect ratio*. Title, lazy-load, fullscreen and an `allow` attribute are there too.
+   - **HTML snippet** — paste the vendor's markup verbatim, for anything the URL form cannot express.
+3. If the origin is new: **Plugins → Embed Origins → settings**, add it to *Allowed iframe origins*, save.
+4. **Publish**. The CSP filter runs at publish time, so a new origin reaches the site on the next publish and not before.
+
+### Why the block cannot grant its own origin
+
+`moduleAdapter.ts` drops a plugin module's `cspSources`, so a module has no way to widen CSP even if it wanted to — the allowlist has to be typed by a person. That platform limitation lines up with how this should work anyway: placing an embed is content, trusting an origin is a security decision, and the second one should never be a side effect of the first.
+
+### Two traps this module had to design around
+
+**`escapeProps()` runs before `render()` on the publish path.** It dispatches on the declared control type (`src/core/publisher/escapeProps.ts`): `url`/`image`/`media` props are scheme-checked and passed through raw, and **everything else is HTML-escaped** — and the plugin control vocabulary has no `richtext` or `svg` type to escape into. A pasted snippet therefore arrives at `render()` as `&lt;iframe …&gt;` and would publish as visible literal text. The module decodes entities and re-escapes exactly once (`norm()`), which is idempotent and so gives the same output on both paths. The **canvas** calls `preview() ?? render()` with RAW props, so the module can never assume it has been escaped, or that it has not.
+
+**The editor canvas mounts module HTML with `dangerouslySetInnerHTML`,** which never executes `<script>`. A script-driven widget looks empty in the editor and is fine once published — so snippet mode's `preview()` says so on the canvas instead of leaving someone to conclude the block is broken. Frames themselves DO render in the canvas: the admin CSP (`server/securityHeaders.ts`) sets only `frame-ancestors`, `base-uri` and `object-src`, never `frame-src`.
+
+### What a raw snippet can and cannot do
+
+Snippet mode emits the markup verbatim, and the published CSP decides what runs: `script-src 'self' '<importmap-sha>'` with no `'unsafe-inline'`, so a pasted inline `<script>` and any `onclick=` handler are refused by the browser. A vendor's `<script src>` runs only if an operator has put that origin in *Allowed script origins*. Anyone who can edit a page here can already ship a site-wide code asset, so this widens no authority that did not exist.
 
 ## Execution Steps
 
@@ -101,19 +133,30 @@ The two viewports report different heights (884 px and 2156 px), which is the po
 - **Adding a `script-src` origin lets that origin run arbitrary JavaScript on the site.** It is a real security decision, not a formality — `frame-src` alone is the low-risk half, because a cross-origin iframe cannot touch the parent document. Grant the script origin only when the widget genuinely needs it, and prove that it does with `probe-widget-postmessage.mjs` first: on Dr. Nahlah the answer was no.
 - **`Network.setBlockedURLs` cannot block a cross-origin iframe.** It is scoped to the CDP session it is sent on, and the widget frame is out-of-process with its own target, so a "blocked" run in `probe-rv-live.mjs` was quietly loading the widget and passing for the wrong reason. Block at the browser instead: `--host-resolver-rules=MAP vendor.example 127.0.0.1:1`. The old form only ever worked because the thing being blocked was a script the MAIN frame requested.
 
+### Gotchas from building the Embed block
+
+- **A publish bakes EVERY page, so any draft that has drifted from what is live ships with it.** Publishing to verify the Embed block republished all 35 pages, and the home page lost its six `.rv-card` fallback — present in the published HTML, absent from the draft. Nothing about the plugin caused it; the publish only revealed it. `15-instatic-api-sync/restore-review-wall.mjs` put it back, and the home audit is byte-identical to its committed baseline again (`words: 1741`). **Before publishing this site for any reason, check the pages you are not touching**, and re-run the audit against the committed `08-qa/.tmp/audit-out/` records afterwards.
+- **The unnamed script that fails on every page is Cloudflare's.** The 73-URL audit reports `netFailed: [" Script"]` site-wide and it had never been identified. Driving a page with a `securitypolicyviolation` listener names it: `script-src-elem https://static.cloudflareinsights.com/beacon.min.js/…`. The CDN injects its analytics beacon into every response and the page CSP refuses it. Pre-existing, unrelated to embeds, and harmless — but a gate that asserts "zero CSP violations" on this site will fail on someone else's beacon, so assert on the directives you care about.
+- **`changedPages` takes FLAT `Page` objects** (`src/core/page-tree/page.ts`: `id`, `slug`, `title`, `nodes`, `rootNodeId` at the top level), NOT the CMS row shape with `cells` that `GET /admin/api/cms/pages` returns. Send the row shape and the validator rejects `site.pages[0].slug: Expected string` — a path the payload appears to contain — one field per round trip.
+- **Class names are not in the page.** Nodes carry `classIds`; the names live in `shell.styleRules`. Grepping a page's JSON for `rv-card` finds nothing whether or not the cards are there, which is exactly how a "the draft never had them" conclusion gets reached. Resolve ids through the shell before concluding anything.
+
 ## Security posture
 
 - With empty settings the filter returns the page **byte-for-byte unchanged** — installing the plugin alone changes nothing.
-- The plugin holds exactly one permission, `cms.hooks`. `install-plugin.mjs` grants from an explicit `GRANT` list and **refuses** any package asking for more, so a future version that quietly widens its request cannot be installed by re-running the script.
+- The plugin holds three permissions as of v1.1.0: `cms.hooks` (the CSP filter), `modules.register` (the Embed block) and `frontend.assets` (authority for the module's auto-height runtime, served same-origin from `/_instatic/module-js/webzite.embed-origins.embed.js` — it grants no third-party origin anything). `install-plugin.mjs` grants from an explicit `GRANT` list and **refuses** any package asking for more, so a future version that quietly widens its request cannot be installed by re-running the script.
+- The Embed block **cannot** widen CSP: `moduleAdapter.ts` drops plugin `cspSources`, so every origin is still typed by a person into settings.
 - Every widening is per-site, operator-typed, and reversible with `--clear` plus a publish.
 
 ## Testing
 
 ```bash
-node test-embed-origins.mjs     # 11 assertions, no network, no platform
+node test-embed-origins.mjs     # 11 assertions on the CSP filter — no network, no platform
+node test-embed-module.mjs      # 44 assertions on the Embed block — no network, no platform
 ```
 
-Covers passthrough, `'none'` replacement, preservation of every other directive, importmap-sha survival, dedupe, trailing-slash stripping, directive-injection rejection, absent-directive creation, idempotence, body integrity, and the no-meta-tag case.
+`test-embed-module.mjs` writes every case that matters TWICE — once with raw props (the canvas) and once with props escaped the way `escapeProps()` escapes them (the publisher) — and asserts the two agree. It also covers the scheme guard (`javascript:`, `data:`, control-character smuggling), single-escaping of text props, the snippet round trip, the three height modes, and that an unconfigured block publishes a comment rather than an empty box.
+
+`test-embed-origins.mjs` covers passthrough, `'none'` replacement, preservation of every other directive, importmap-sha survival, dedupe, trailing-slash stripping, directive-injection rejection, absent-directive creation, idempotence, body integrity, and the no-meta-tag case.
 
 ## Upstreaming
 
@@ -121,16 +164,18 @@ Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTR
 
 ## Technical Setup
 
-- **Executor status**: Working. Installed and verified live on `encorercm.com` (Dr. Nahlah) on 2026-08-22. Current allowlist: `frameOrigins = https://reputationhub.site`, script and connect **empty** — the Google review widget runs on `frame-src` alone.
+- **Executor status**: Working. v1.1.0 installed and verified live on `encorercm.com` (Dr. Nahlah) on 2026-08-22, plugin `active`, all three permissions granted. Current allowlist: `frameOrigins = https://reputationhub.site`, script and connect **empty** — the Google review widget runs on `frame-src` alone. The Embed block gated end to end at 1440 and 390: URL mode grew from a 240px start to 861px / 2116px on the widget's own postMessage, snippet mode survived the publish boundary as an element at its fixed height, no frame refused by CSP.
 - **Credentials**: reuses `15-instatic-api-sync/insta-api.mjs` and the repo-root `.env`.
 - **Endpoints**: `POST /admin/api/cms/plugins/inspect-package`, `POST /admin/api/cms/plugins/package`, `GET|PUT /admin/api/cms/plugins/:id/settings`.
 
 ## Output Artifacts
-- `embed-origins/` — the plugin source (`plugin.json` + `server/index.js`)
+- `embed-origins/` — the plugin source (`plugin.json`, `server/index.js` for the CSP filter, `modules/index.js` for the Embed block)
 - `pack-plugin.mjs` — deterministic zip builder (forward-slashed entries, fixed timestamps)
 - `install-plugin.mjs` — inspect + install with an explicit permission grant
 - `set-origins.mjs` — read / set / clear the allowlist
 - `test-embed-origins.mjs` — offline unit tests for the filter
+- `test-embed-module.mjs` — offline unit tests for the Embed block, publisher and canvas paths both
+- `verify-embed-module.mjs` — end-to-end gate: places a temporary page, publishes, drives it under CDP, removes it
 - `probe-widget-postmessage.mjs` — does a widget self-report its height, or does it really need the vendor's parent script? Run this BEFORE granting any `script-src` origin.
 - `.tmp/embed-origins.zip` — the built package
 

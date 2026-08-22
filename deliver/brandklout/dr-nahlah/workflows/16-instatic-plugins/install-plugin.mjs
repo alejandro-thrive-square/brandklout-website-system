@@ -27,7 +27,18 @@ if (!zipPath || !existsSync(zipPath)) {
 
 // What this operator is willing to grant. Anything the manifest asks for that
 // is not on this list is reported and the install is refused.
-const GRANT = ['cms.hooks']
+//
+//   cms.hooks        the `publish.html` filter that rewrites the CSP meta tag.
+//   modules.register the Embed block in the canvas module library. Rated `high`
+//                    by the host because a module renders HTML into every page
+//                    that uses it — here that HTML is the embed itself.
+//   frontend.assets  authority for module render() `js`, dropped without it
+//                    (`moduleAdapter.ts`). Used for ONE thing: the auto-height
+//                    listener, served same-origin from
+//                    `/_instatic/module-js/webzite.embed-origins.embed.js`.
+//                    It grants no third-party origin anything — those are still
+//                    typed into plugin settings, one at a time.
+const GRANT = ['cms.hooks', 'modules.register', 'frontend.assets']
 
 const bytes = readFileSync(zipPath)
 const asForm = () => {

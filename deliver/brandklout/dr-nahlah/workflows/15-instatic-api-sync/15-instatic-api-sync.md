@@ -97,6 +97,23 @@ Once the code asset is off, `rule.order` and condition order are the only tiebre
 - **Publishing ships the whole draft**, including anyone else's in-progress work. No script here publishes; it is always a separate, announced step.
 - **The volume fills silently.** At ~90% full, writes fail with no error. Check `railway metrics` or `df -h /app/storage` before any large operation.
 
+## Draft and published can diverge, and a publish bakes the difference
+
+`POST /admin/api/cms/publish` republishes **every** page, not the one you edited. So the moment a draft page drifts from what is live, the next publish for any unrelated reason ships that drift.
+
+It happened on 2026-08-22. Publishing to verify a plugin baked all 35 pages, and the home page lost the six `.rv-card` review-fallback cards — they were in the published HTML, they were not in the draft. Three records agreed the published page really had them: `13-content-export-import/.tmp/home-readback.html` (2026-08-19, a readback of the platform page), `.tmp/.instatic2/index.json` (2026-08-20), and the committed `08-qa/.tmp/audit-out/index.json` (`words: 1741`, against `1385` after). `restore-review-wall.mjs` rebuilt them from the local build and the audit is byte-identical to its baseline again.
+
+**So: before publishing this site for any reason, and again afterwards**
+
+```bash
+node ../08-qa/.tmp/audit-site.mjs --base https://encorercm.com --only index
+git diff ../08-qa/.tmp/audit-out/          # the committed records are the baseline
+```
+
+A whole-site run is ~20 minutes; a single page is under a minute and catches this class of thing on the page most likely to hold hand-built markup.
+
+**Class names are NOT in a page.** Nodes carry `classIds` and the names live in `shell.styleRules`, so grepping a page's JSON for `rv-card` finds nothing whether the cards are there or not — resolve ids through the shell first. And `changedPages` takes FLAT `Page` objects (`id`, `slug`, `title`, `nodes`, `rootNodeId` at the top level), never the `cells`-shaped rows `GET /admin/api/cms/pages` returns.
+
 ## The Railway volume, and pruning it
 
 Instatic self-hosts on Railway (project `Brandklout`, service `Dr Nahlah`, volume
@@ -197,6 +214,7 @@ because **this platform reports some write failures as prose with a 200**.
 - `.tmp/site.css.published` / `.tmp/site.css.draft-before` — repair evidence
 - `prune-versions.mjs` + `prune-versions.container.ts` — volume reclamation (see above)
 - `repair-multilayer-backgrounds.mjs` — restores gradient layers the shorthand parser flattened
+- `restore-review-wall.mjs` — rebuilds the home page's six review cards from the local build (dry run by default; never publishes)
 - `.tmp/parity-pseudo-before-1440.json` / `.tmp/parity-pseudo-after-1440.json` — the 28-difference proof that only the two `::after` overlays moved
 
 ## Version Control

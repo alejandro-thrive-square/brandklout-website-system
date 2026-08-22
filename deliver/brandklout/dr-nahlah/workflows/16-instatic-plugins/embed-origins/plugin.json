@@ -1,10 +1,10 @@
 {
   "id": "webzite.embed-origins",
   "name": "Embed Origins",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "apiVersion": 1,
-  "description": "Allow third-party embeds (booking widgets, review widgets, forms) by adding operator-approved origins to the published page's Content-Security-Policy.",
-  "permissions": ["cms.hooks"],
+  "description": "Add third-party embeds by hand: an Embed block for the canvas, plus the operator-approved origins that let the published page's Content-Security-Policy load them.",
+  "permissions": ["cms.hooks", "modules.register", "frontend.assets"],
   "resources": [],
   "adminPages": [],
   "settings": [
@@ -37,7 +37,8 @@
     }
   ],
   "entrypoints": {
-    "server": "server/index.js"
+    "server": "server/index.js",
+    "modules": "modules/index.js"
   },
   "author": {
     "name": "Webzite Studio",
