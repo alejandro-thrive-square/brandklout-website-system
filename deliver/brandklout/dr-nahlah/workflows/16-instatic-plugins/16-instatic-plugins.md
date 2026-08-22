@@ -28,10 +28,10 @@ Three facts, each verified against the v0.0.16 source and then against the live 
 
 | Directive | Reachable by a plugin? | How |
 |---|---|---|
-| `frame-src` | **Yes** | this plugin's `publish.html` filter |
-| `script-src` | **Yes**, arbitrary origins | this plugin. (`frontend.assets` alone only ever grants `'self'`, because plugin scripts are served same-origin from `/uploads/plugins/...`) |
-| `connect-src` | Yes | this plugin, or `networkAllowedHosts` via `frontend.assets` |
-| `img-src` / `media-src` | Yes | media storage adapter `cspOrigins`, or this plugin |
+| `frame-src` | **Yes** | derived per page from the iframes it contains, or typed in settings |
+| `script-src` | **Yes**, origins AND `'sha256-'` hashes | derived per page from the scripts it contains, or typed in settings. (`frontend.assets` alone only ever grants `'self'`, because plugin scripts are served same-origin from `/uploads/plugins/...`) |
+| `connect-src` / `style-src` / `font-src` | Yes | granted alongside each trusted script origin, so a widget can call, style and font itself |
+| `img-src` / `media-src` | Yes | already `'self' data: https:` on this site; otherwise media storage adapter `cspOrigins`, or this plugin |
 
 ## Handing the capability over
 
@@ -126,6 +126,42 @@ node ../04-design/.tmp/probe-rv-live.mjs https://encorercm.com/ --block         
 
 The two viewports report different heights (884 px and 2156 px), which is the postMessage sizing doing its job rather than a fixed number baked in.
 
+## v1.2.0 — a pasted script RUNS, without anyone typing an origin
+
+The block shipped in v1.1.0 placed iframes properly and emitted a pasted snippet verbatim, and then the published page's CSP refused half of what people paste: an inline `<script>` has no `'unsafe-inline'` to run under, and an external one needed an operator to add its origin under settings first. "Paste the vendor's snippet and publish" was true on Webflow and not here.
+
+v1.2.0 derives the policy from the page instead of asking for it in advance. At publish time the filter reads the finished HTML and grants that page exactly what it turned out to contain:
+
+| Found in the published page | Granted, on that page only |
+|---|---|
+| `<iframe src>` on another origin | `frame-src <origin>` |
+| `<script src>` on another origin | `script-src <origin>` |
+| an inline `<script>` | `script-src 'sha256-<hash of its bytes>'` |
+| (for each trusted SCRIPT origin) | `connect-src`, `style-src`, `font-src` |
+
+`autoTrust` (default ON) is the switch. Off, the plugin behaves exactly as v1.1.0 did.
+
+**Inline scripts are trusted by HASH, never by `'unsafe-inline'`.** The filter carries a pure-JS SHA-256 (no `crypto` in the QuickJS sandbox) whose output is checked against `node:crypto` in the tests. A hash covers the exact bytes an editor pasted; `'unsafe-inline'` would cover every inline script on every page forever, including one that arrives by a route nobody intended.
+
+**A script origin gets `connect-src`, `style-src` and `font-src` too.** A widget's script that can load but cannot call its API, style itself or load its font is the shape of "it loaded and then did nothing", which is indistinguishable from broken. A FRAME origin gets none of them: the framed document has its own policy and cannot reach into ours.
+
+**The trust model is the one the author already exercised** — an editor pasted this, on this page. It is per-page, so a widget on `/contact` widens nothing on `/veneers`, and it is narrower than the platform it imitates: Webflow serves no CSP at all.
+
+**What still does not work:** an inline event handler (`onclick="…"`) written on a tag inside a pasted snippet. That needs `'unsafe-hashes'`, which is a broader grant than it looks. The workaround is in the guide: move the handler into the snippet's own `<script>`.
+
+### Gate: `verify-embed-scripts.mjs`
+
+```bash
+node verify-embed-scripts.mjs --place                        # temp page + publish
+node verify-embed-scripts.mjs --check                        # 12/12
+node verify-embed-scripts.mjs --check --viewport=390,844     # 12/12
+node verify-embed-scripts.mjs --cleanup                      # deleted, 404 confirmed
+```
+
+It pastes what a marketer would paste — the vendor's iframe, the vendor's script and an inline script — and asserts EXECUTION, because a script CSP refused is still in the DOM and still looks fine. The inline half writes into a div and sets a global. The external half is `reputationhub.site/reputation/assets/review-widget.js`, whose behaviour is observable from outside: on `lc.setHeight` it sets the iframe's `height` ATTRIBUTE and a `transition` style, and nothing else on the page does that.
+
+**This gate earned its keep immediately.** Creating `font-src` for the vendor silently REVOKED the site's own webfonts: an absent directive falls back to `default-src 'self'`, so writing `font-src https://vendor` replaced that fallback with a list the site's own fonts were not on. The browser reports it per font file as a `font-src` violation, which reads like a font problem. `widen()` now seeds a created directive from `default-src` first, and both the unit tests and this gate check it.
+
 ## Gotchas
 
 - **`Compress-Archive` writes BACKSLASH entry names on Windows.** The host looks up `server/index.js` by its manifest path, so a backslashed entry installs a plugin whose entrypoint can never be found — and it surfaces later as a plugin parked in `error`, not as a bad zip. `pack-plugin.mjs` writes the zip by hand for this reason.
@@ -188,7 +224,7 @@ Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTR
 
 ## Technical Setup
 
-- **Executor status**: Working. v1.1.0 installed and verified live on `encorercm.com` (Dr. Nahlah) on 2026-08-22, plugin `active`, all three permissions granted. Current allowlist: `frameOrigins = https://reputationhub.site`, script and connect **empty** — the Google review widget runs on `frame-src` alone. The Embed block gated end to end at 1440 and 390: URL mode grew from a 240px start to 861px / 2116px on the widget's own postMessage, snippet mode survived the publish boundary as an element at its fixed height, no frame refused by CSP.
+- **Executor status**: Working. v1.2.0 installed and verified live on `encorercm.com` (Dr. Nahlah) on 2026-08-22, plugin `active`, all three permissions granted. Current allowlist: `frameOrigins = https://reputationhub.site`, script and connect **empty** — the Google review widget runs on `frame-src` alone. The Embed block gated end to end at 1440 and 390: URL mode grew from a 240px start to 861px / 2116px on the widget's own postMessage, snippet mode survived the publish boundary as an element at its fixed height, no frame refused by CSP.
 - **Credentials**: reuses `15-instatic-api-sync/insta-api.mjs` and the repo-root `.env`.
 - **Endpoints**: `POST /admin/api/cms/plugins/inspect-package`, `POST /admin/api/cms/plugins/package`, `GET|PUT /admin/api/cms/plugins/:id/settings`.
 
@@ -199,6 +235,7 @@ Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTR
 - `set-origins.mjs` — read / set / clear the allowlist
 - `test-embed-origins.mjs` — offline unit tests for the filter
 - `test-embed-module.mjs` — offline unit tests for the Embed block, publisher and canvas paths both
+- `verify-embed-scripts.mjs` — end-to-end gate: does a pasted script actually RUN on the published page?
 - `verify-embed-module.mjs` — end-to-end gate on the PUBLISHED page: places a temporary page, publishes, drives it under CDP, removes it
 - `verify-embed-editor.mjs` — end-to-end gate on the ADMIN EDITOR: temp draft page, drives the real inserter and Properties Panel under CDP, deletes the page. No publish at any point
 - `probe-widget-postmessage.mjs` — does a widget self-report its height, or does it really need the vendor's parent script? Run this BEFORE granting any `script-src` origin.

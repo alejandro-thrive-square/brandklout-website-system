@@ -7,6 +7,7 @@
  * this cannot prove is that the host actually calls it, which is what
  * `verify-live.mjs` checks against the served page after install.
  */
+import { createHash } from 'node:crypto'
 import { activate } from './embed-origins/server/index.js'
 
 // The policy encorercm.com serves today.
@@ -86,11 +87,15 @@ check('a directive-injection payload is dropped, not escaped',
   !evil.includes('javascript:'),
   `frame-src => "${evilFrame}"`)
 
-// 7. absent directive is created (an absent frame-src falls back to default-src)
+// 7. absent directive is created — and inherits, rather than silently revoking
+// what default-src was granting. It reads `frame-src 'self' https://c.com`: the
+// origin is added, and same-origin framing keeps working because default-src
+// allowed it before this directive existed.
 const noFrame = "default-src 'self'; script-src 'self';"
 const created = cspOf(run({ frameOrigins: 'https://c.com' }, page(noFrame)))
 check('an absent frame-src is created rather than left to default-src',
-  /frame-src https:\/\/c\.com/.test(created), created)
+  /frame-src[^;]*https:\/\/c\.com/.test(created) && /frame-src[^;]*'self'/.test(created),
+  created)
 
 // 8. re-running the filter is stable
 const once = run({ frameOrigins: 'https://a.com' }, src)
@@ -105,6 +110,140 @@ check('the document body is untouched',
 const bare = '<!DOCTYPE html><html><head></head><body>x</body></html>'
 check('a page with no CSP meta is returned unchanged',
   run({ frameOrigins: 'https://a.com' }, bare) === bare)
+
+
+// ---------------------------------------------------------------------------
+// autoTrust — the policy derived from the page itself (v1.2.0).
+//
+// This is the half that makes a pasted embed behave the way it does on Webflow.
+// Every assertion here is about what the page CONTAINS, so the runs below pass
+// empty settings: nobody typed anything.
+// ---------------------------------------------------------------------------
+
+const sha = (body) => "'sha256-" + createHash('sha256').update(body, 'utf8').digest('base64') + "'"
+
+const pageWith = (bodyHtml, csp = LIVE_CSP, head = '') =>
+  '<!DOCTYPE html>\n<html lang="en">\n<head>\n  <meta charset="UTF-8">\n' +
+  '  <meta http-equiv="Content-Security-Policy" content="' + csp + '">\n' + head +
+  '  <title>x</title>\n</head>\n<body>\n' + bodyHtml + '\n</body>\n</html>'
+
+console.log('\nEmbed Origins — autoTrust, derived from the page\n')
+
+// 1. An inline script is trusted by HASH, never by 'unsafe-inline'.
+const inline = 'window.__vendor = 1;\n  init({ id: "abc" });'
+const inlineCsp = cspOf(run({}, pageWith('<div class="wz-embed"><script>' + inline + '</script></div>')))
+check('an inline script is hashed into script-src', inlineCsp.includes(sha(inline)), inlineCsp)
+check('the hash has the shape a browser will check', /'sha256-[A-Za-z0-9+/]{43}='/.test(inlineCsp), inlineCsp)
+check("'unsafe-inline' is never introduced", !/script-src[^;]*'unsafe-inline'/.test(inlineCsp), inlineCsp)
+check("the host's own importmap hash survives",
+  inlineCsp.includes("'sha256-JjJVpPcuFN6Z7GOg4PkiVfiyklUS+vTDCbASsgWy7ik='"), inlineCsp)
+
+// 2. Byte-for-byte identity where there is nothing to trust.
+const plain = pageWith('<p>hi</p>')
+check('a page with no embed is byte-identical', run({}, plain) === plain)
+const dataOnly = pageWith('<script type="application/ld+json">{"@type":"Dentist"}</script>')
+check('ld+json is data, not script — not hashed, page unchanged', run({}, dataOnly) === dataOnly)
+
+// 3. External scripts and frames are read off the page.
+const vendor =
+  '<div class="wz-embed"><iframe src="https://api.leadconnectorhq.com/widget/form/x"></iframe>' +
+  '<script src="https://link.msgsndr.com/js/form_embed.js"></script></div>'
+const vendorCsp = cspOf(run({}, pageWith(vendor)))
+check('an embedded frame origin reaches frame-src',
+  /frame-src[^;]*https:\/\/api\.leadconnectorhq\.com/.test(vendorCsp), vendorCsp)
+check('an embedded script origin reaches script-src',
+  /script-src[^;]*https:\/\/link\.msgsndr\.com/.test(vendorCsp), vendorCsp)
+check('a script origin also gets connect-src, style-src and font-src',
+  /connect-src[^;]*https:\/\/link\.msgsndr\.com/.test(vendorCsp) &&
+  /style-src[^;]*https:\/\/link\.msgsndr\.com/.test(vendorCsp) &&
+  /font-src[^;]*https:\/\/link\.msgsndr\.com/.test(vendorCsp), vendorCsp)
+check('a FRAME origin gets none of those — it cannot reach into this document',
+  !/connect-src[^;]*leadconnectorhq/.test(vendorCsp) &&
+  !/style-src[^;]*leadconnectorhq/.test(vendorCsp), vendorCsp)
+check("frame-src 'none' is still replaced rather than appended to",
+  !/frame-src[^;]*'none'/.test(vendorCsp), vendorCsp)
+
+// 4. Same-origin and relative URLs are already covered by 'self'.
+const sameCsp = cspOf(run({}, pageWith(
+  '<iframe src="/local/thing"></iframe><script src="/_instatic/assets/app.js"></script>' +
+  '<iframe src="https://encorercm.com/other"></iframe>',
+  LIVE_CSP,
+  '  <link rel="canonical" href="https://encorercm.com/veneers">\n')))
+check('relative URLs add nothing', !/frame-src[^;]*local/.test(sameCsp), sameCsp)
+check("the page's own origin is skipped, read from the canonical link",
+  !sameCsp.includes('https://encorercm.com'), sameCsp)
+
+// 5. Protocol-relative resolves to https, and duplicates collapse.
+const dupCsp = cspOf(run({}, pageWith(
+  '<script src="//cdn.example.com/a.js"></script><script src="https://cdn.example.com/b.js"></script>')))
+/* Dedupe is PER DIRECTIVE: one origin legitimately appears in script-src,
+   style-src, connect-src and font-src, so counting it across the whole policy
+   measures nothing. Count inside script-src, where both tags landed. */
+const dupScriptSrc = (dupCsp.match(/script-src[^;]*/) || [''])[0]
+check('protocol-relative is read as https, and the two tags collapse to one source',
+  (dupScriptSrc.match(/https:\/\/cdn\.example\.com/g) || []).length === 1, dupScriptSrc)
+
+// 6. The toggle really is a toggle — off is v1.1.0 behaviour exactly.
+const offPage = pageWith(vendor)
+check('autoTrust off leaves a page full of embeds byte-identical',
+  run({ autoTrust: false }, offPage) === offPage)
+check('autoTrust off still honours the typed boxes',
+  /frame-src[^;]*https:\/\/reputationhub\.site/.test(
+    cspOf(run({ autoTrust: false, frameOrigins: 'https://reputationhub.site' }, offPage))))
+
+// 7. Two pages, two policies — a grant does not leak sideways.
+const cspA = cspOf(run({}, pageWith('<script src="https://a.example/x.js"></script>')))
+const cspB = cspOf(run({}, pageWith('<script src="https://b.example/y.js"></script>')))
+check('a widget on one page does not widen another page',
+  cspA.includes('https://a.example') && !cspA.includes('https://b.example') &&
+  cspB.includes('https://b.example') && !cspB.includes('https://a.example'))
+
+// 8. Idempotence: republishing the same page must not restack sources.
+const derivedOnce = run({}, pageWith(vendor))
+check('running the filter twice changes nothing the second time',
+  run({}, derivedOnce) === derivedOnce)
+
+// 9. A pasted URL cannot forge a directive.
+const nastyCsp = cspOf(run({}, pageWith('<iframe src="https://x.com; default-src *"></iframe>')))
+check('a pasted URL cannot inject a directive', !/default-src \*/.test(nastyCsp), nastyCsp)
+
+
+// ---------------------------------------------------------------------------
+// A created directive must not revoke what default-src was granting.
+//
+// Found by the live gate, not by these tests: adding a vendor to `font-src` on a
+// page that had no `font-src` produced `font-src https://vendor`, and the SITE'S
+// OWN webfonts — previously allowed by `default-src 'self'` — were refused. The
+// browser reports it as a font-src violation per file, which reads like a font
+// problem rather than a CSP one.
+// ---------------------------------------------------------------------------
+
+const createdCsp = cspOf(run({}, pageWith(
+  '<script src="https://cdn.example.com/w.js"></script>')))
+const dirOf = (name) => (createdCsp.match(new RegExp(name + '[^;]*')) || [''])[0]
+
+for (const created of ['font-src', 'connect-src']) {
+  check(`${created} is created WITH 'self' inherited from default-src`,
+    dirOf(created).includes("'self'") && dirOf(created).includes('https://cdn.example.com'),
+    dirOf(created))
+}
+check('style-src, which already existed, keeps its own sources',
+  dirOf('style-src').includes("'self'") && dirOf('style-src').includes("'unsafe-inline'") &&
+  dirOf('style-src').includes('https://cdn.example.com'), dirOf('style-src'))
+check('a created frame-src also inherits rather than revoking same-origin framing',
+  (() => {
+    const c = cspOf(run({}, pageWith('<iframe src="https://v.example/x"></iframe>',
+      "default-src 'self'; script-src 'self';")))
+    const fs = (c.match(/frame-src[^;]*/) || [''])[0]
+    return fs.includes("'self'") && fs.includes('https://v.example')
+  })())
+check("a default-src of 'none' is not copied into the new directive",
+  (() => {
+    const c = cspOf(run({}, pageWith('<iframe src="https://v.example/x"></iframe>',
+      "default-src 'none'; script-src 'self';")))
+    const fs = (c.match(/frame-src[^;]*/) || [''])[0]
+    return !fs.includes("'none'") && fs.includes('https://v.example')
+  })())
 
 console.log(`\n${pass} passed, ${fail} failed\n`)
 process.exit(fail ? 1 : 0)
