@@ -71,10 +71,13 @@ desktop.ini
 *.swo
 
 # Session rotation working state (SYSTEM_RULES.md section 5).
-# Deliberately untracked: every worktree writes the same two paths, so tracking them
-# would guarantee a merge conflict on every client branch. The durable record of what
-# a session did is its commits; the runbook is only the handoff between sessions.
+# Deliberately untracked: every worktree writes the same path, so tracking it would
+# guarantee a merge conflict on every client branch. The durable record of what a
+# session did is its commits; the runbook is only the handoff between sessions.
 .claude/RUNBOOK.md
+
+# Leftovers from the session-rotation hooks removed on 2026-08-22 (SYSTEM_RULES.md
+# section 5). Kept ignored so old worktrees do not surface them as new files.
 .claude/session-state.json
 .claude/rotate.lock
 

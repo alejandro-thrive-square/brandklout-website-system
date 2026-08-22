@@ -267,82 +267,29 @@ The system has **two workspaces that can both change repo state**: the local mac
 - **Concurrency**: do not run `vps-commit-push.sh` on the VPS and `sync.sh` on local at the same time. If a push is rejected because the other side pushed first, simply re-run the safe command.
 - **Hermes**: when committing inside this repo, Hermes must use `scripts/vps-commit-push.sh` (which pulls before pushing) and must never force-push or rewrite shared history.
 
-## 5. Session Rotation — hand off at 200k tokens
+## 5. Runbooks — the per-worktree handoff note
 
-**A session that reaches 200,000 tokens of context does not continue. It hands off to a fresh session through a runbook.** This applies to every agent in this system, in every worktree.
+**Every worktree keeps `.claude/RUNBOOK.md`: what this worktree is for, what is done, what is next, and what cost time.** Update it after each task you complete, and read it when you pick a worktree up. Nothing enforces it — see below.
 
-### Why a handoff and not a resume
+Untracked by design (see `.gitignore`): every worktree writes the same path, so tracking it would guarantee a merge conflict on every client branch. The durable record of what a session did is its **commits**; the runbook is only the bridge between sessions.
 
-Context is paid for on **every** turn, not once. A 200k-token session spends 200k on its next reply, and on the one after that, no matter how small the actual question is. Resuming such a session inherits that cost permanently; compacting it keeps a lossy summary of the whole history whether or not it is still relevant.
+Write it for a reader with **no memory of your session**. **Gotchas** is the most valuable section: failed approaches, environment quirks and false leads are exactly what a fresh session would otherwise pay to rediscover. Be concrete — paths, commands, SHAs, not summaries.
 
-A runbook costs a few thousand tokens, once. Measured on this repo: a full handoff was **~1.6k tokens** against a **200k** resume. The ratio, not the absolute number, is the reason for the rule.
+### The automation behind this was removed on 2026-08-22
 
-The trade is real and worth stating: a fresh session genuinely forgets things the runbook does not record. That is why the runbook is mandatory and why **Gotchas** is its most important section — failed approaches and environment quirks are exactly what a new session would otherwise pay to rediscover.
+There used to be a rule here: a session that reached 200,000 tokens handed off to a fresh one automatically. Four scripts implemented it — `session-lib.mjs`, `session-guard.mjs` (a `Stop` hook), `session-resume.mjs` (a `SessionStart` hook) and `session-rotate.mjs` — registered in a project-level `.claude/settings.json`. All of it is deleted. `git log -- scripts/session-rotate.mjs` has the history if it is ever wanted back.
 
-### The runbook
+The economics that motivated it were real and still are: context is paid for on **every** turn, so a 200k session spends 200k on its next reply no matter how small the question. A handoff measured ~1.6k tokens against a 200k resume.
 
-`.claude/RUNBOOK.md` at the worktree root. Untracked by design (see `.gitignore`): every worktree writes the same path, so tracking it would guarantee a merge conflict on every client branch. The durable record of what a session did is its **commits**; the runbook is only the bridge between sessions.
+What killed it was that **an automation which drives a terminal has to be right every single time, and this one had no way to be.**
 
-Two halves:
+- It relaunched by driving the Orca terminal it believed the session was in — chosen as "the first live terminal whose worktree matches". The house pattern is several Orca tabs in **one** worktree, one per CLI or model, so that choice was a coin toss. When it lost, it typed `/exit` and a `claude …` launch line into a **different agent's live session**: that tab got a second Claude started inside it, and the session that actually hit the threshold was never replaced at all. Both halves of what the machine appeared to be doing — terminals launching in parallel, and no new session ever appearing — came from that one line.
+- It recorded the handoff **before** attempting it, and every later `Stop` of that session was then silent. So a rotation that aborted (no terminal it could identify, Orca not answering) muted the guard for the rest of the session's life with nothing running behind it. "Disabled" and "broken" looked identical from outside.
+- Switching it off was done by raising the thresholds to `100000000` in a gitignored `.claude/settings.local.json`, per worktree. By 2026-08-22 five worktrees had that override and four did not, so half the machine silently obeyed a rule the other half had never heard of.
 
-| Half | Owner | Content |
-| :--- | :--- | :--- |
-| `AUTO:BEGIN`…`AUTO:END` | `session-guard.mjs` | Branch, HEAD, recent commits, uncommitted files, context size. Regenerated on every write, so it cannot drift. |
-| Everything below | **The agent** | Objective, Done (with SHAs), In progress, Next, Gotchas, Open questions. |
+Every one of those was fixable, and all three were in fact fixed before the removal — addressing the terminal by `ORCA_TERMINAL_HANDLE` instead of by position, creating the successor with `orca terminal create --command` instead of typing into a shell, and reporting failed handoffs instead of swallowing them. The removal was still the right call: the rule saved tokens and cost attention, the thresholds were already off in most of the tree, and a background process that can type into a live agent session is a bad trade for a saving you can also get by starting a new session yourself.
 
-**Update the runbook after each completed task**, not only at the threshold. A runbook written under duress at 200k is written by an agent with no room left to write it well.
-
-### How it is enforced
-
-Two hooks, registered in the project's `.claude/settings.json`. They **merge with** the user-level hooks in `~/.claude/settings.json`, which belong to Orca — never move these there.
-
-| Threshold | Behaviour |
-| :--- | :--- |
-| < 150k | Silent. |
-| ≥ 150k | `Stop` hook nudges the agent to keep the runbook current. Non-blocking; at most one nudge per 20 minutes. |
-| ≥ 200k | `Stop` hook **blocks the stop** (`decision: "block"`) until the tree is committed and the runbook is current. Then it rotates the terminal into a fresh session. |
-
-Blocking is deliberate. A soft reminder at the threshold is ignored precisely when it matters, because the agent is mid-task and its next action always looks more urgent than writing a handoff. Making the handoff the only exit is what turns the rule into a guarantee.
-
-`SessionStart` then injects the runbook into the new session automatically, so the rotation needs no human in the loop.
-
-**Only the head of the runbook is injected**, capped at 40,000 characters and cut at a section boundary. Sections are written newest-first, so the cap keeps the live state and drops the history; a marker tells the new session the rest is in the file. Without it the rule quietly defeats itself — this repo's own runbook reached 177 KB, about **45k tokens injected into every session start**, a quarter of the budget the rule exists to protect.
-
-### Safety properties
-
-- **Never rotates a dirty tree.** Uncommitted work is the one thing a handoff cannot carry, so the guard blocks and demands a commit instead.
-- **Never rotates on a stale runbook.** Older than 45 minutes counts as stale.
-- **Never wedges a session.** Every internal failure exits 0 silently; a broken guard is worse than no guard.
-- **Rotation is a no-op if Orca is unavailable.** The runbook is already written, so the worst case is a manual restart, never lost work.
-- **Relaunches on the same profile.** `session-rotate.mjs` reads `CLAUDE_CONFIG_DIR` so a client worktree comes back on `team`, not `personal` — otherwise the new session would silently hold different MCP grants.
-- **Rotates a session at most once.** The handoff records the `session_id` it fired for; every later `Stop` from that session is silent.
-- **One rotation at a time.** `session-rotate.mjs` takes an exclusive `.claude/rotate.lock` before it touches the terminal. A second spawn exits without sending anything.
-- **Never types into a live TUI.** After `/exit` the terminal is read back until Claude is gone **and** a shell prompt is positively recognised. If neither can be established within 30 seconds it aborts rather than typing.
-
-#### What these last three are for (2026-08-21)
-
-They are not hypothetical. The guard suppressed a repeat rotation only while the session was *below* the warn threshold — which a session that has just rotated never is — so it rotated again on every subsequent `Stop`. Each pass spawned another `session-rotate.mjs` racing the first for the same terminal, and each of those typed three payloads blind on a fixed sleep. The new session's opening message was literally `/exit/exit` followed by the kickoff prompt three times, and the same thing happened in a second worktree.
-
-Two lessons worth keeping beyond this bug:
-
-- **An automation that drives a TUI must read it back.** A fixed `sleep` is an assumption, not a synchronisation. Checking for Claude's status footer is not enough either: a session on the `--resume` picker shows a modal with no footer at all, so a footer-only test reads it as a shell. Require a positive shell match, so the unknown case aborts.
-- **The kickoff prompt is gone.** `session-resume.mjs` already delivers the runbook at `SessionStart`; sending it again as terminal input was pure duplication, and it was the most visible symptom of the bug. Set `WEBZITE_ROTATE_KICKOFF=1` to restore it, which is only useful where project hooks have not been approved.
-
-### Files
-
-| Path | Role |
-| :--- | :--- |
-| `scripts/session-lib.mjs` | Token measurement, git state, runbook template |
-| `scripts/session-guard.mjs` | `Stop` hook — the ladder above |
-| `scripts/session-resume.mjs` | `SessionStart` hook — injects the runbook |
-| `scripts/session-rotate.mjs` | Closes and relaunches the Orca terminal |
-| `scripts/session-rotation.test.mjs` | Regression tests — `node scripts/session-rotation.test.mjs` |
-
-The tests are offline and side-effect free: they run against a throwaway git repo in the OS temp dir, which is also what makes them safe on a live machine (no Orca terminal can ever match a temp path, so the guard's spawn is a guaranteed no-op). Run them after touching any of the four scripts.
-
-Overridable without editing code: `WEBZITE_CONTEXT_LIMIT`, `WEBZITE_CONTEXT_WARN`, `WEBZITE_RUNBOOK_MAX_CHARS`, `WEBZITE_ROTATE_KICKOFF`.
-
-Context size is read from the transcript's recorded usage — `input + cache_creation + cache_read + output` of the **last** non-sidechain assistant message. The cache fields are the bulk of it, so counting `input_tokens` alone under-reports by roughly 100×. It reads the last message rather than the peak, because a compact genuinely shrinks the window and a peak-based measure would leave a compacted session permanently above the threshold.
+**If you want a fresh session, start one.** `claude team --permission-mode bypassPermissions` (client work) or `claude personal …` (orchestration) in a new terminal in that worktree — see [reference: Claude account profiles](./mcp-servers/MCP_INDEX.md). Write the runbook first; that part was never the problem.
 
 ## 6. Key Directives
 - **Agent Hermes & Two-Workspace Sync**: [HERMES.md](./HERMES.md) — how Telegram-driven VPS work and local work stay in sync via `scripts/sync.sh`.

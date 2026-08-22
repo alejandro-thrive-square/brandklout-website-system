@@ -9,11 +9,11 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 > This file must stay identical to [AGENTS.md](./AGENTS.md), [CLAUDE.md](./CLAUDE.md), and [GEMINI.md](./GEMINI.md). These filenames exist separately because different agent runtimes auto-load different entry-point names.
 
 > [!IMPORTANT]
-> **Session Rotation**: a session that reaches **200,000 tokens** of context hands off to a fresh one rather than being resumed or compacted. Keep `.claude/RUNBOOK.md` updated **after each task you complete** — it is what the next session inherits, and at the threshold you will be blocked from stopping until it is current and the tree is committed. See [SYSTEM_RULES.md §5](./SYSTEM_RULES.md).
+> **Runbooks**: keep `.claude/RUNBOOK.md` updated **after each task you complete**, and read it when you start work in a worktree. Nothing enforces this any more — the automatic session-rotation hooks were removed on 2026-08-22 (see [SYSTEM_RULES.md §5](./SYSTEM_RULES.md)), so the runbook is now a convention you follow, not a gate you hit.
 
 ## Quick Links
 - **Master Rules**: [SYSTEM_RULES.md](./SYSTEM_RULES.md)
-- **Session Rotation & Runbooks**: [SYSTEM_RULES.md §5](./SYSTEM_RULES.md) - the 200k handoff rule, enforced by `scripts/session-guard.mjs`
+- **Runbooks**: [SYSTEM_RULES.md §5](./SYSTEM_RULES.md) - the per-worktree handoff note, and why the automation behind it was removed
 - **New Computer Install**: [INSTALL.md](./INSTALL.md)
 - **VPS Deployment**: [DEPLOYMENT.md](./DEPLOYMENT.md)
 - **Agent Hermes & Two-Workspace Sync**: [HERMES.md](./HERMES.md) - resume work from anywhere (phone via Hermes or local) with `bash scripts/sync.sh`
@@ -34,7 +34,7 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 4. **Token Optimization**: Filter your context to the specific workflow folder you are executing.
 5. **MCP Management**: MCP servers are shared infrastructure in `mcp-servers/`. Register new servers with `claude mcp add --scope project`. Before using any MCP, read the nearest `mcp-access.md` and the referenced profile in `mcp-servers/profiles/`. See [MCP Index](./mcp-servers/MCP_INDEX.md) and [MCP Access Model](./mcp-servers/ACCESS_MODEL.md).
 6. **Directive Improvement Loop**: At task completion, update the related directive `.md` files used to learn or execute the process whenever the task reveals a missing step, changed requirement, new decision, corrected assumption, or reusable process improvement.
-7. **Runbook Loop**: Also at task completion, update `.claude/RUNBOOK.md` in the current worktree — Done (with the commit SHA), Next, and especially **Gotchas**. Write it for a reader with no memory of your session. This is a separate obligation from the directive loop above: directives capture reusable process, the runbook captures the live state of *this* worktree.
+7. **Runbook Loop**: Also at task completion, update `.claude/RUNBOOK.md` in the current worktree — Done (with the commit SHA), Next, and especially **Gotchas**. Write it for a reader with no memory of your session, and read it yourself when you pick a worktree up; it is no longer injected for you. This is a separate obligation from the directive loop above: directives capture reusable process, the runbook captures the live state of *this* worktree.
 8. **Version Control**: This system is managed via a GitHub repository. Follow the version control rules in [SYSTEM_RULES.md - Section 4](./SYSTEM_RULES.md). Commit lightweight `.tmp/` workflow artifacts when useful, but never commit `.env` files, secrets, or binary/media assets. All new `.md` files must include a Version Control section.
 
 ## Version Control
