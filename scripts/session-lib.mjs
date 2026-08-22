@@ -25,8 +25,22 @@ export const CONTEXT_WARN = envInt('WEBZITE_CONTEXT_WARN', 150_000);
 /** A runbook older than this many turns is stale and must be refreshed before handoff. */
 export const RUNBOOK_MAX_AGE_MS = 45 * 60 * 1000;
 
-export const runbookPath = (cwd) => join(cwd, '.claude', 'RUNBOOK.md');
-export const statePath = (cwd) => join(cwd, '.claude', 'session-state.json');
+/**
+ * The runbook belongs to the WORKTREE, not to whatever directory the shell was
+ * left in. Hooks are handed `input.cwd`, and a session whose last command ran in
+ * a deep `.tmp/` folder used to make the guard look there, find nothing, and
+ * write a fresh template into `<that folder>/.claude/RUNBOOK.md` while the real
+ * runbook sat untouched at the root. Resolve the root once, and every caller
+ * downstream is correct by construction.
+ */
+const rootCache = new Map();
+export function worktreeRoot(cwd) {
+  if (!rootCache.has(cwd)) rootCache.set(cwd, git(cwd, ['rev-parse', '--show-toplevel']) || cwd);
+  return rootCache.get(cwd);
+}
+
+export const runbookPath = (cwd) => join(worktreeRoot(cwd), '.claude', 'RUNBOOK.md');
+export const statePath = (cwd) => join(worktreeRoot(cwd), '.claude', 'session-state.json');
 
 /** Read the hook payload from stdin. Hooks are always fed JSON; be forgiving anyway. */
 export function readHookInput() {

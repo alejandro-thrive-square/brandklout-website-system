@@ -14,7 +14,7 @@
  */
 
 import { execFileSync } from 'node:child_process'
-import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync } from 'node:fs'
+import { mkdtempSync, mkdirSync, writeFileSync, readFileSync, rmSync, existsSync } from 'node:fs'
 import { tmpdir } from 'node:os'
 import { join, dirname } from 'node:path'
 import { fileURLToPath } from 'node:url'
@@ -95,13 +95,13 @@ writeFileSync(transcript, JSON.stringify({
   message: { usage: { input_tokens: 1000, cache_read_input_tokens: 233_000, output_tokens: 154 } },
 }) + '\n')
 
-const payload = (sessionId) => JSON.stringify({
-  cwd: wt, transcript_path: transcript, session_id: sessionId,
+const payload = (sessionId, cwd = wt) => JSON.stringify({
+  cwd, transcript_path: transcript, session_id: sessionId,
 })
 
-const runHook = (script, sessionId) =>
+const runHook = (script, sessionId, cwd = wt) =>
   execFileSync(process.execPath, [join(HERE, script)], {
-    input: payload(sessionId), encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'],
+    input: payload(sessionId, cwd), encoding: 'utf8', stdio: ['pipe', 'pipe', 'ignore'],
   })
 
 try {
@@ -145,6 +145,39 @@ try {
   check('the oldest sections are dropped', !injected.includes('## Section 399'))
   check('no section is cut in half',
     !/\n## [^\n]*$/.test(injected.split('<!-- TRUNCATED')[0].trimEnd()))
+
+  // -- 4. the runbook is found from ANY directory -----------------------------
+  //
+  // Hooks are handed whatever directory the shell was last left in. Three times,
+  // a session whose last command ran in a deep `.tmp/` folder made the guard look
+  // THERE, find no runbook, announce "No runbook existed. I have written it from
+  // the template", and drop a fresh stub in that folder -- while the real runbook
+  // sat untouched at the worktree root. session-rotate matches an Orca terminal on
+  // that same path, so it missed the terminal too and typed blind.
+  const deep = join(wt, 'deliver', 'client', 'workflows', '08-qa', '.tmp')
+  mkdirSync(deep, { recursive: true })
+  const live = '# Runbook\n\n## Alpha\nthe real live state, at the root\n'
+  writeFileSync(join(wt, '.claude', 'RUNBOOK.md'), live)
+
+  const fromDeep = runHook('session-guard.mjs', 'SESS-DEEP', deep)
+  check('a hook fired from a subdirectory still rotates', /Session rotating/.test(fromDeep),
+    fromDeep.slice(0, 160))
+  check('it writes no stray runbook beside the shell',
+    !existsSync(join(deep, '.claude', 'RUNBOOK.md')))
+
+  const rootBook = readFileSync(join(wt, '.claude', 'RUNBOOK.md'), 'utf8')
+  check('it refreshes the runbook at the ROOT, narrative intact',
+    rootBook.includes('the real live state, at the root') && rootBook.includes('AUTO:BEGIN'))
+  check('the auto block names the worktree root, not the shell directory',
+    /- \*\*Worktree\*\*: `[^`]+`/.test(rootBook) && !rootBook.includes('08-qa'))
+  check('the state file stays at the root too',
+    JSON.parse(readFileSync(join(wt, '.claude', 'session-state.json'), 'utf8'))
+      .rotatedSessionId === 'SESS-DEEP' && !existsSync(join(deep, '.claude', 'session-state.json')))
+
+  const deepInjected = JSON.parse(runHook('session-resume.mjs', 'SESS-DEEP2', deep))
+    .hookSpecificOutput.additionalContext
+  check('SessionStart from a subdirectory injects the ROOT runbook',
+    deepInjected.includes('the real live state, at the root'))
 
   const small = '# Runbook\n\n## Alpha\nshort enough to pass through untouched\n'
   writeFileSync(join(wt, '.claude', 'RUNBOOK.md'), small)

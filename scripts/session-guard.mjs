@@ -27,7 +27,7 @@ import { join } from 'node:path';
 import {
   CONTEXT_LIMIT, CONTEXT_WARN, RUNBOOK_MAX_AGE_MS,
   readHookInput, contextTokens, isDirty, readState, writeState,
-  runbookAgeMs, runbookPath, refreshRunbook, TEMPLATE,
+  runbookAgeMs, runbookPath, refreshRunbook, TEMPLATE, worktreeRoot,
 } from './session-lib.mjs';
 
 const emit = (o) => { process.stdout.write(JSON.stringify(o)); process.exit(0); };
@@ -35,7 +35,10 @@ const quiet = () => process.exit(0);
 
 try {
   const input = readHookInput();
-  const cwd = input.cwd || process.cwd();
+  // The hook is handed wherever the shell happens to be sitting. Everything below
+  // -- the runbook, the state file, the git summary, and the worktree that
+  // session-rotate.mjs has to match a terminal against -- belongs to the ROOT.
+  const cwd = worktreeRoot(input.cwd || process.cwd());
   const tokens = contextTokens(input.transcript_path);
   if (!tokens) quiet();
 

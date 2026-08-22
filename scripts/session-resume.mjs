@@ -11,7 +11,7 @@
  */
 
 import { readFileSync, existsSync } from 'node:fs';
-import { readHookInput, runbookPath, readState, CONTEXT_LIMIT } from './session-lib.mjs';
+import { readHookInput, runbookPath, readState, CONTEXT_LIMIT, worktreeRoot } from './session-lib.mjs';
 
 const quiet = () => process.exit(0);
 
@@ -44,7 +44,7 @@ function clamp(text) {
 
 try {
   const input = readHookInput();
-  const cwd = input.cwd || process.cwd();
+  const cwd = worktreeRoot(input.cwd || process.cwd());
   const p = runbookPath(cwd);
   if (!existsSync(p)) quiet();
 
