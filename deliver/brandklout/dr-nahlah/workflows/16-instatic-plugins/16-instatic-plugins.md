@@ -162,6 +162,36 @@ It pastes what a marketer would paste — the vendor's iframe, the vendor's scri
 
 **This gate earned its keep immediately.** Creating `font-src` for the vendor silently REVOKED the site's own webfonts: an absent directive falls back to `default-src 'self'`, so writing `font-src https://vendor` replaced that fallback with a list the site's own fonts were not on. The browser reports it per font file as a `font-src` violation, which reads like a font problem. `widen()` now seeds a created directive from `default-src` first, and both the unit tests and this gate check it.
 
+## v1.3.0 — compatible mode, so ANY integration works on paste
+
+v1.2.0 derived the policy from the page's markup. That covers what the markup says and cannot cover what a vendor's JavaScript does once it runs — which is where real integrations live. The live proof arrived within a day: an Elfsight reviews widget pasted onto the home page loaded its script from `elfsightcdn.com` and then called `core.service.elfsight.com`, an address that appears nowhere in the page. The call was refused, the widget rendered at 0px, and the only evidence was one line in a console nobody reads.
+
+There is no way to predict those hosts. So `embedPolicy: compatible` (the default) stops trying:
+
+> **A page that CONTAINS an Embed block may load anything over https.** A page with no Embed block on it is left byte-for-byte alone.
+
+| Directive | On a page with an embed |
+|---|---|
+| `script-src` | `'self' https: 'unsafe-inline' 'unsafe-eval'` |
+| `frame-src` | `'self' https:` |
+| `connect-src` | `'self' https: wss:` |
+| `style-src` | `'self' https: 'unsafe-inline'` |
+| `font-src` | `'self' https: data:` |
+| `img-src` / `media-src` | `'self' https: data: blob:` |
+| `default-src` | untouched |
+
+**The hashes are dropped on purpose, and this is the part to understand.** A browser that sees ANY hash in `script-src` ignores `'unsafe-inline'` entirely. A mode whose job is "a pasted snippet works" therefore cannot keep them: the host's importmap runs under `'unsafe-inline'` like everything else, and inline `onclick=` handlers — which strict mode can never run — start working. `'unsafe-eval'` is granted for the same reason: enough widget bundles use `new Function` that omitting it reintroduces exactly the silent half-failure this mode exists to end.
+
+**What is kept back:** it is per PAGE, so a site whose embeds live on two pages has 33 pages still under the original policy; and `default-src` is untouched, so anything not named above still falls back to `'self'`.
+
+`embedPolicy: strict` returns to v1.2.0 (derive from the page, hashes for inline scripts), and `autoTrust: false` under it returns to v1.1.0 (only what an operator typed).
+
+### Choosing between them
+
+Strict is the better policy and compatible is the one that matches what agencies actually do. Pick strict for a site whose embeds are known and few — one review widget, one booking form — and add origins as they come up. Pick compatible for a site where a client will paste whatever their marketing stack hands them; that was the explicit ask here, in the client's words: *"I just want to have the ability to embed the iframe without any problem or blocking."*
+
+Say the trade out loud when handing it over: on the pages that carry an embed, the site's protection against a *maliciously injected* script is `default-src` and nothing more. The protection against a *pasted* one was always the person pasting.
+
 ## Gotchas
 
 - **`Compress-Archive` writes BACKSLASH entry names on Windows.** The host looks up `server/index.js` by its manifest path, so a backslashed entry installs a plugin whose entrypoint can never be found — and it surfaces later as a plugin parked in `error`, not as a bad zip. `pack-plugin.mjs` writes the zip by hand for this reason.
@@ -224,7 +254,7 @@ Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTR
 
 ## Technical Setup
 
-- **Executor status**: Working. v1.2.0 installed and verified live on `encorercm.com` (Dr. Nahlah) on 2026-08-22, plugin `active`, all three permissions granted. Current allowlist: `frameOrigins = https://reputationhub.site`, script and connect **empty** — the Google review widget runs on `frame-src` alone. The Embed block gated end to end at 1440 and 390: URL mode grew from a 240px start to 861px / 2116px on the widget's own postMessage, snippet mode survived the publish boundary as an element at its fixed height, no frame refused by CSP.
+- **Executor status**: Working. v1.3.0 installed and verified live on `encorercm.com` (Dr. Nahlah) on 2026-08-22, plugin `active`, all three permissions granted. Current allowlist: `frameOrigins = https://reputationhub.site`, script and connect **empty** — the Google review widget runs on `frame-src` alone. The Embed block gated end to end at 1440 and 390: URL mode grew from a 240px start to 861px / 2116px on the widget's own postMessage, snippet mode survived the publish boundary as an element at its fixed height, no frame refused by CSP.
 - **Credentials**: reuses `15-instatic-api-sync/insta-api.mjs` and the repo-root `.env`.
 - **Endpoints**: `POST /admin/api/cms/plugins/inspect-package`, `POST /admin/api/cms/plugins/package`, `GET|PUT /admin/api/cms/plugins/:id/settings`.
 

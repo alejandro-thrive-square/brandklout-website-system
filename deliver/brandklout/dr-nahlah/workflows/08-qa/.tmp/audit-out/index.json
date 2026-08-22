@@ -21,11 +21,13 @@
   "GSAP target  not found. https://gsap.com"
  ],
  "logErrors": [
-  "security: Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-JjJVpPcuFN6Z7GOg4PkiVfiyklUS+vTDCbASsgWy7ik='\". Note that 'script-src-elem' was not e"
+  "security: Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-JjJVpPcuFN6Z7GOg4PkiVfiyklUS+vTDCbASsgWy7ik=' https://reputationhub.site https://elfs",
+  "security: Connecting to 'https://core.service.elfsight.com/p/boot/?page=https%3A%2F%2Fencorercm.com%2F&w=5b4f0a1d-1329-4668-b2c8-2054900227c5' violates the following Content Security Policy directive: \"connect-src 'self' https://reputationhub.site https://elfsightcdn.com\". The action has been blocke"
  ],
  "badResponses": [],
  "netFailed": [
-  " Script"
+  " Script",
+  " XHR"
  ],
  "status": 200,
  "finalUrl": "https://encorercm.com/",
@@ -45,7 +47,7 @@
  "jsonld": [
   "Dentist,MedicalBusiness+Person+WebSite+WebPage"
  ],
- "words": 1741,
+ "words": 1385,
  "imgTotal": 25,
  "imgBroken": [],
  "imgNoAlt": [],
@@ -79,12 +81,12 @@
  "navLinks": 8,
  "footerLinks": 15,
  "gsap": true,
- "scrollTriggers": 67,
+ "scrollTriggers": 66,
  "smoother": true,
  "revealsStuck": 0,
  "misaligned": [],
  "overflowX": 0,
- "docHeight": 19351,
+ "docHeight": 18629,
  "links": [
   "/",
   "/dental-implants",

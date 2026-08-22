@@ -353,11 +353,11 @@
         <p><strong>Place the Embed block.</strong> Insert it, paste the vendor's URL or snippet, choose how tall it should be, publish. What you pasted is what that page is allowed to load — and only that page.</p>
       </div>
       <div class="track track--operator">
-        <span class="who">Operator, rarely</span>
-        <p><strong>Nothing, normally.</strong> The boxes under Plugins → Embed Origins still exist for the unusual case of a widget that calls an API on a different address than it loaded from, and there is a switch to turn the automatic behaviour off entirely.</p>
+        <span class="who">Operator, once per site</span>
+        <p><strong>Decide how open the pages with embeds are.</strong> This site is set to <em>Compatible</em>: a page that carries an embed may load whatever that widget needs. Switching it to <em>Strict</em> tightens that, at the cost of some widgets needing an address added by hand.</p>
       </div>
     </div>
-    <p>Worth knowing what it is <em>not</em> doing: it is not opening the site up. Each page ends up with a list of precisely the addresses that page uses, plus a fingerprint of each script you pasted. A widget on the contact page grants nothing to any other page, and a script that arrives later by some route nobody intended still does not run.</p>
+    <p>Worth knowing the shape of it: only the pages that actually carry an embed are opened up, and only to load things over https. Every other page on the site keeps the original locked-down policy, untouched. A widget on the contact page changes nothing about the home page.</p>
   </section>
 
   <section>
@@ -441,8 +441,8 @@
       <dt>The widget is blank on the live page</dt>
       <dd>First check you published after adding it — the page a visitor sees is the last published one. If it is published and still blank, open the browser console on that page: a refusal names the exact address that was turned away, which is often not the company's marketing domain. Paste that address into <strong>Allowed iframe origins</strong> under Plugins → Embed Origins and publish again.</dd>
 
-      <dt>The widget loads but its own calls fail</dt>
-      <dd>A few widgets fetch data from a different address than the one they loaded from, which is the one case the automatic behaviour cannot read off the page. The console names it; add it under <strong>Allowed fetch/XHR origins</strong> and publish.</dd>
+      <dt>The widget loads but shows nothing</dt>
+      <dd>Check the browser console on the live page. If nothing was refused, the widget is loading fine and the emptiness is the vendor's — most often an app configured for a different website or account. If something <em>was</em> refused, tell whoever maintains the site: the page should be allowing it.</dd>
 
       <dt>The widget appears, but it is the wrong height</dt>
       <dd>Some widgets do not report their own size. Switch Height from Auto to Fixed and set a number, or to Aspect ratio if it should keep a shape.</dd>
@@ -457,7 +457,7 @@
     <div class="note-block note-block--warn">
       <span class="label">A script is not a frame</span>
       <p>A widget inside a frame is sealed off: it cannot touch the page around it, its cookies, or anything a visitor types elsewhere. A script you paste is not — it runs as part of the page, with the same reach as the site's own code. That is true on any platform, Webflow included, and it is the reason to paste snippets from companies you actually deal with rather than ones you found.</p>
-      <p>The difference here is scope. A script you paste is trusted on <em>that page</em>, by its exact fingerprint or its address, and nowhere else. The <strong>Allowed script origins</strong> box in the settings is the blunt version of the same thing: it trusts a company on <em>every</em> page of the site, forever, which is worth a conversation rather than a quick edit.</p>
+      <p>The difference here is scope. A page with an embed on it accepts scripts; a page without one does not, and most of this site does not. So the question to ask before pasting is the only one that was ever load-bearing: <em>do we actually deal with this company?</em> A snippet from the client's own booking system is not the same as one found in a forum.</p>
       <p>Worth knowing before anyone asks for it: plenty of vendors send a script that is pure convenience. The live review widget on this site never loads its vendor's script at all — the site sizes the frame itself — and it works perfectly.</p>
     </div>
     <div class="note-block note-block--op">
@@ -480,7 +480,7 @@
   </section>
 
   <footer>
-    <p>Plugin <code>webzite.embed-origins</code> v1.2.0 · active on encorercm.com · pages are allowed what they contain; site-wide approvals: <code>https://reputationhub.site</code> (frames only)</p>
+    <p>Plugin <code>webzite.embed-origins</code> v1.3.0 · active on encorercm.com · mode: <code>Compatible</code> — pages carrying an embed may load over https; every other page unchanged</p>
     <p>Engineering detail, gates and traps: <code>deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins/16-instatic-plugins.md</code></p>
   </footer>
 

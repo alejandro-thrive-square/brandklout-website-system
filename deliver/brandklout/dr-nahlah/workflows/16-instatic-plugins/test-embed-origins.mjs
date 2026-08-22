@@ -245,5 +245,74 @@ check("a default-src of 'none' is not copied into the new directive",
     return !fs.includes("'none'") && fs.includes('https://v.example')
   })())
 
+
+// ---------------------------------------------------------------------------
+// Compatible mode (v1.3.0) — the default.
+//
+// The reason it exists: a vendor's API host lives inside the vendor's
+// JavaScript, never in the markup, so no amount of reading the page can find
+// it. Elfsight loads from elfsightcdn.com and then calls
+// core.service.elfsight.com; on the live site that call was refused and the
+// widget rendered at 0px with one line in a console nobody reads.
+// ---------------------------------------------------------------------------
+
+const EMBEDDED = '<div class="wz-embed" data-wz-embed="auto">' +
+  '<script src="https://elfsightcdn.com/platform.js" async></script>' +
+  '<div class="elfsight-app-5b4f0a1d"></div></div>'
+
+const compatCsp = cspOf(run({}, pageWith(EMBEDDED)))
+const dir = (name) => (compatCsp.match(new RegExp(name + '[^;]*')) || [''])[0]
+
+console.log('\nEmbed Origins — compatible mode\n')
+
+check('compatible is the default (no setting stored)', /https:/.test(dir('script-src')), compatCsp)
+check('a widget may fetch any https host, which is the whole point',
+  dir('connect-src').includes('https:'), dir('connect-src'))
+check('websockets too — plenty of chat and booking widgets use them',
+  dir('connect-src').includes('wss:'), dir('connect-src'))
+for (const d of ['script-src', 'frame-src', 'style-src', 'font-src', 'img-src', 'media-src']) {
+  check(`${d} allows https`, dir(d).includes('https:'), dir(d))
+}
+check("script-src takes 'unsafe-inline' AND drops every hash — a browser ignores " +
+      "'unsafe-inline' when any hash is present, so keeping one would refuse pasted inline scripts",
+  dir('script-src').includes("'unsafe-inline'") && !dir('script-src').includes('sha256-'),
+  dir('script-src'))
+check("'unsafe-eval' is granted, because widget bundles use new Function",
+  dir('script-src').includes("'unsafe-eval'"), dir('script-src'))
+check("'self' survives in every directive it touches",
+  ['script-src', 'frame-src', 'connect-src', 'style-src', 'font-src', 'img-src', 'media-src']
+    .every((d) => dir(d).includes("'self'")), compatCsp)
+check('default-src is left alone', /default-src 'self'/.test(compatCsp), compatCsp)
+
+// The containment that makes this acceptable: it is per PAGE.
+const noEmbed = pageWith('<p>an ordinary page</p><script type="application/ld+json">{}</script>')
+check('a page with NO embed is byte-identical — the site stays locked down',
+  run({}, noEmbed) === noEmbed)
+const strictish = cspOf(run({}, pageWith('<iframe src="https://v.example/x"></iframe>')))
+check('an iframe alone is not an Embed block, so it takes the derived path, not https:',
+  !/script-src[^;]*https:(?!\/)/.test(strictish) && /frame-src[^;]*v\.example/.test(strictish),
+  strictish)
+
+// Strict mode is the escape hatch, and it must really be the old behaviour.
+check('strict mode falls back to deriving from the page',
+  (() => {
+    const c = cspOf(run({ embedPolicy: 'strict' }, pageWith(EMBEDDED)))
+    return c.includes('https://elfsightcdn.com') && !/script-src[^;]*'unsafe-inline'/.test(c) &&
+      c.includes("'sha256-JjJVpPcuFN6Z7GOg4PkiVfiyklUS+vTDCbASsgWy7ik='")
+  })())
+check('strict mode with autoTrust off is the original v1.1.0 behaviour',
+  run({ embedPolicy: 'strict', autoTrust: false }, pageWith(EMBEDDED)) === pageWith(EMBEDDED))
+
+// Typed boxes still work in compatible mode (an http staging host, say).
+check('a typed origin still applies in compatible mode',
+  cspOf(run({ frameOrigins: 'http://staging.local:3000' }, pageWith(EMBEDDED)))
+    .includes('http://staging.local:3000'))
+
+check('compatible mode is idempotent across republishes',
+  (() => {
+    const first = run({}, pageWith(EMBEDDED))
+    return run({}, first) === first
+  })())
+
 console.log(`\n${pass} passed, ${fail} failed\n`)
 process.exit(fail ? 1 : 0)

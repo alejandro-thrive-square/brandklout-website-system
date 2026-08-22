@@ -391,6 +391,90 @@ function selfOriginOf(html) {
   return link ? originOf(attr(link[0], 'href')) : ''
 }
 
+/* ---------------------------------------------------------------------------
+ * Compatible mode.
+ *
+ * Deriving the policy from the page covers what the MARKUP says. It cannot
+ * cover what a vendor's JavaScript does once it runs, and that is where real
+ * integrations live: Elfsight's script arrives from `elfsightcdn.com` and then
+ * fetches its configuration from `core.service.elfsight.com`, an address that
+ * appears nowhere in the page. Every widget of that shape loads, does nothing,
+ * and reports one refusal in a console no marketer is reading.
+ *
+ * There is no way to predict those hosts, so compatible mode stops trying: a
+ * page that CONTAINS an embed may load anything over https. That is the policy
+ * Webflow ships (which is to say: no policy at all), reached deliberately and
+ * with two things kept back.
+ *
+ *   - It is PER PAGE. A page with no Embed block on it keeps the strict policy
+ *     byte for byte. On this site that is most of them.
+ *   - `default-src` is untouched, so anything not named here still falls back to
+ *     `'self'`.
+ *
+ * What it does give up, and it should be said plainly: on those pages, script
+ * hashes stop being the gate. A hash and `'unsafe-inline'` cannot coexist —
+ * a browser that sees any hash in `script-src` IGNORES `'unsafe-inline'`
+ * entirely — so a mode whose job is "a pasted snippet works" has to drop the
+ * hashes and take `'unsafe-inline'`, which also covers the `onclick=` handlers
+ * that strict mode cannot run. `'unsafe-eval'` is here for the same reason:
+ * enough widget bundles use `new Function` that leaving it out reintroduces
+ * exactly the silent half-failure this mode exists to end.
+ *
+ * Strict mode remains one setting away and gives up none of it.
+ * ------------------------------------------------------------------------ */
+
+var EMBED_MARKER = /<[a-z]+[^>]*\bdata-wz-embed\b/i
+
+/** Directives a pasted widget can need, and what "anything over https" means
+ *  for each. `data:`/`blob:` ride along where a widget legitimately builds its
+ *  own assets in the browser (icon fonts, object URLs for media). */
+var COMPATIBLE = [
+  ['script-src', ["'self'", 'https:', "'unsafe-inline'", "'unsafe-eval'"]],
+  ['frame-src', ["'self'", 'https:']],
+  ['connect-src', ["'self'", 'https:', 'wss:']],
+  ['style-src', ["'self'", 'https:', "'unsafe-inline'"]],
+  ['font-src', ["'self'", 'https:', 'data:']],
+  ['img-src', ["'self'", 'https:', 'data:', 'blob:']],
+  ['media-src', ["'self'", 'https:', 'data:', 'blob:']],
+]
+
+function applyCompatible(csp) {
+  var changed = false
+  for (var i = 0; i < COMPATIBLE.length; i++) {
+    var name = COMPATIBLE[i][0]
+    var want = COMPATIBLE[i][1]
+    var current = csp.map[name]
+    var next = []
+    var seen = {}
+    for (var j = 0; j < want.length; j++) {
+      if (seen[want[j]]) continue
+      seen[want[j]] = true
+      next.push(want[j])
+    }
+    if (current) {
+      for (var k = 0; k < current.length; k++) {
+        var source = current[k]
+        if (source === "'none'") continue
+        /* Hashes are dropped ON PURPOSE: leaving one in makes the browser
+           ignore `'unsafe-inline'`, and a pasted inline script would still be
+           refused — the exact failure this mode exists to remove. The host's
+           own importmap then runs under `'unsafe-inline'` like everything
+           else. */
+        if (source.indexOf("'sha256-") === 0 || source.indexOf("'sha384-") === 0 ||
+            source.indexOf("'sha512-") === 0) continue
+        if (seen[source]) continue
+        seen[source] = true
+        next.push(source)
+      }
+    } else {
+      csp.order.push(name)
+    }
+    if (!current || current.join(' ') !== next.join(' ')) changed = true
+    csp.map[name] = next
+  }
+  return changed
+}
+
 export function activate(api) {
   api.cms.hooks.filter('publish.html', function (html) {
     if (typeof html !== 'string' || html.length === 0) return html
@@ -398,11 +482,40 @@ export function activate(api) {
     var frame = parseOrigins(api.cms.settings.get('frameOrigins'))
     var script = parseOrigins(api.cms.settings.get('scriptOrigins'))
     var connect = parseOrigins(api.cms.settings.get('connectOrigins'))
+    // Default is compatible: the setting exists because embeds were silently
+    // half-failing, so an install that has never been configured gets the
+    // behaviour that made them work.
+    var compatible = api.cms.settings.get('embedPolicy') !== 'strict'
+    var hasEmbed = EMBED_MARKER.test(html)
     // Default ON: a plugin installed before this setting existed has no stored
     // value, and the point of the setting is the behaviour it enables.
     var auto = api.cms.settings.get('autoTrust') !== false
 
     var hashes = []
+    /* Compatible mode only engages where there is something to be compatible
+       WITH. A page with no Embed block is left exactly as the publisher wrote
+       it, which on this site is most of them. */
+    if (compatible && hasEmbed) {
+      var cspC = null
+      var matchC = CSP_META_RE.exec(html)
+      if (!matchC) {
+        api.plugin.log('embed-origins: no CSP meta tag on this page, left as-is')
+        return html
+      }
+      cspC = parseCsp(matchC[2])
+      var changedC = applyCompatible(cspC)
+      // The typed boxes still apply: an operator may have listed an origin that
+      // is not https (a staging host on http, say).
+      if (widen(cspC, 'frame-src', frame)) changedC = true
+      if (widen(cspC, 'script-src', script)) changedC = true
+      if (widen(cspC, 'connect-src', connect)) changedC = true
+      if (!changedC) return html
+      return (
+        html.slice(0, matchC.index) + matchC[1] + serializeCsp(cspC) + matchC[3] +
+        html.slice(matchC.index + matchC[0].length)
+      )
+    }
+
     if (auto) {
       var found = derivePageSources(html, selfOriginOf(html))
       frame = frame.concat(found.frames)
