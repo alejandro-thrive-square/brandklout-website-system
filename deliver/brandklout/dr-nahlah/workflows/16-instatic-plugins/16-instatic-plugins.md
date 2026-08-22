@@ -33,6 +33,10 @@ Three facts, each verified against the v0.0.16 source and then against the live 
 | `connect-src` | Yes | this plugin, or `networkAllowedHosts` via `frontend.assets` |
 | `img-src` / `media-src` | Yes | media storage adapter `cspOrigins`, or this plugin |
 
+## Handing the capability over
+
+`handoff/embed-block-guide.html` is the non-engineer version of the section below: what to click, every field on the block, what each thing you might see actually means, and the one decision that is not an editor's to make. Published at <https://claude.ai/code/artifact/45d0a779-2eb6-4508-a3c5-56d9f6bd8f07>. Give a marketer that; give a developer this file.
+
 ## The manual workflow (no agent required)
 
 The plugin ships two halves, and they are separate on purpose:
