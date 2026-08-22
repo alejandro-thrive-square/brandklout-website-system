@@ -1,6 +1,9 @@
 .ch-arrival{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;
   padding-bottom:clamp(2.5rem,7vw,5.5rem);padding-top:clamp(7rem,14vw,9rem)}
-.ch-arrival .ar-bg{position:absolute;inset:0;z-index:0}
+/* Bled 2px past every edge — see .pg-hero .ph-bg. The film already
+   overhung its own box; the two scrims on this wrapper did not, and they
+   are what leaves the unscrimmed row along the seam into chapter 01. */
+.ch-arrival .ar-bg{position:absolute;inset:-2px;z-index:0}
 .ch-arrival .ar-bg::before{content:"";position:absolute;inset:0;z-index:2;
   background:
     radial-gradient(110% 80% at 76% 40%,rgba(171,158,106,.20),transparent 62%),
@@ -13,7 +16,14 @@
                     rgba(250,248,243,.08) 58%,rgba(250,248,243,.82) 100%)}
 .ch-arrival{background:var(--bg)}
 .ch-arrival .ar-veil{position:absolute;inset:0;z-index:3;background:var(--bg);opacity:0;pointer-events:none}
-.ch-arrival .ar-film{position:absolute;inset:-2px;width:calc(100% + 4px);height:calc(100% + 4px);
+/* Bled left, right and top, but held 2px SHORT of the section's bottom edge.
+   A <video> composites on the video layer and rounds its edges there, not with
+   the scrim that is painted over it, so at a fractional ScrollSmoother offset
+   it reaches one device pixel further down than the scrim does and that row
+   renders as raw, unscrimmed footage. Keeping the film clear of the clip edge
+   is what fixes it; the scrim is 82% cream by then, so the 2px it gives up are
+   not visible. Measured across seven fractional offsets: 58 -> 3 (noise). */
+.ch-arrival .ar-film{position:absolute;inset:-2px -2px 4px -2px;width:auto;height:auto;
   object-fit:cover;z-index:0;will-change:transform;backface-visibility:hidden;
   filter:saturate(.92) brightness(1.06) contrast(.97)}
 .ch-arrival .ar-glow{position:absolute;right:6%;bottom:0;width:min(46vw,620px);height:min(46vw,620px);

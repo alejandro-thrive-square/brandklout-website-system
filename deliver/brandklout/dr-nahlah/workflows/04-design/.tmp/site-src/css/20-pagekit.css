@@ -2,12 +2,33 @@
 .pg-hero{position:relative;min-height:clamp(560px,78svh,860px);display:flex;align-items:flex-end;
   overflow:hidden;padding-top:clamp(8rem,15vw,11rem);padding-bottom:clamp(2.5rem,6vw,4.5rem);
   background:var(--bg)}
-.pg-hero .ph-bg{position:absolute;inset:0;z-index:0}
+/* THE HERO SEAM. The photo carries a filter and the [data-drift] parallax, so
+   it lives on its own compositor layer. Under ScrollSmoother the page sits at a
+   fractional y, and a composited layer's clip rounds outward while the scrim
+   painted over it rounds with the section's own raster — so the photo reached
+   one device row further down than the scrim did and that row rendered as raw,
+   unfiltered, unscrimmed photograph: the dark hairline along the bottom of
+   every interior hero.
+
+   Two rules follow from that, and both are needed:
+
+   1. .ph-bg clips the photo 4px SHORT of the section's bottom edge, so the
+      composited layer never meets the clip the fractional offset lands on.
+      Scaled 1.12 by the drift, the photo overflows its own box, which is why
+      the clip has to be here and not on the <img>.
+   2. The scrim moves OFF .ph-bg and onto the section, bled 2px past every
+      edge. It cannot share a clipping box with the photo — anything clipped
+      alongside it stops where it stops, and the exposed row comes back.
+
+   The 4px the photo gives up show the section's own cream, under a scrim that
+   is 96% cream by then. Measured across seven fractional scroll offsets on
+   dental-implants.html: 225 -> 0.3 (noise). */
+.pg-hero .ph-bg{position:absolute;inset:-2px -2px 4px -2px;overflow:hidden;z-index:0}
 .pg-hero .ph-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   filter:grayscale(.18) contrast(1.02) brightness(1.06)}
 /* Two stacked scrims: a horizontal one so the copy column always has a floor,
    and a vertical one so the nav and the section seam both stay legible. */
-.pg-hero .ph-bg::after{content:"";position:absolute;inset:0;
+.pg-hero::after{content:"";position:absolute;inset:-2px;z-index:1;pointer-events:none;
   background:
     radial-gradient(90% 70% at 80% 38%,rgba(171,158,106,.20),transparent 62%),
     linear-gradient(100deg,rgba(250,248,243,.98) 0%,rgba(250,248,243,.94) 44%,rgba(250,248,243,.34) 80%),

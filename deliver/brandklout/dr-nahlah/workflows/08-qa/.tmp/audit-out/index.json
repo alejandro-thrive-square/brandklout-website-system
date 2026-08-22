@@ -20,15 +20,9 @@
   "GSAP target  not found. https://gsap.com",
   "GSAP target  not found. https://gsap.com"
  ],
- "logErrors": [
-  "security: Loading the script 'https://static.cloudflareinsights.com/beacon.min.js/v4513226cdae34746b4dedf0b4dfa099e1781791509496' violates the following Content Security Policy directive: \"script-src 'self' 'sha256-JjJVpPcuFN6Z7GOg4PkiVfiyklUS+vTDCbASsgWy7ik=' https://reputationhub.site https://elfs",
-  "security: Connecting to 'https://core.service.elfsight.com/p/boot/?page=https%3A%2F%2Fencorercm.com%2F&w=5b4f0a1d-1329-4668-b2c8-2054900227c5' violates the following Content Security Policy directive: \"connect-src 'self' https://reputationhub.site https://elfsightcdn.com\". The action has been blocke"
- ],
+ "logErrors": [],
  "badResponses": [],
- "netFailed": [
-  " Script",
-  " XHR"
- ],
+ "netFailed": [],
  "status": 200,
  "finalUrl": "https://encorercm.com/",
  "title": "Dental Implants & Prosthodontics | McLean & Alexandria VA",
@@ -86,7 +80,7 @@
  "revealsStuck": 0,
  "misaligned": [],
  "overflowX": 0,
- "docHeight": 18629,
+ "docHeight": 18314,
  "links": [
   "/",
   "/dental-implants",

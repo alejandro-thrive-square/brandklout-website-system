@@ -9,6 +9,16 @@
    Polled rather than hooked to the tween: SplitText autoSplit rebuilds the
    masks on every resize, and the rebuilt ones come back clipped.
 
+   TWO class names, deliberately. SplitText builds each mask by cloning the
+   line and suffixing every class it carries with `-mask`, so the mask's name
+   is whatever `linesClass` is plus `-mask`. The live Webflow build splits with
+   `wz-mask-line` and gets `wz-mask-line-mask`; this package's runtime splits
+   with `wz-line` (js/00-runtime.js) and gets `wz-line-mask`. This swept only
+   for the Webflow name, so on every page built from this package it matched
+   nothing and never ran — which is why the descenders were still clipped
+   after the fix was written. Matching both is what stops the two vocabularies
+   drifting apart again.
+
    Kept as its own block so it converts to a single Webflow footer script; it
    is registered there as `wzDescenderRescue`.
    ========================================================================== */
@@ -24,11 +34,11 @@
     return 0;
   }
   function sweep() {
-    var masks = document.getElementsByClassName('wz-mask-line-mask');
+    var masks = document.querySelectorAll('.wz-line-mask,.wz-mask-line-mask');
     for (var i = 0; i < masks.length; i++) {
       var line = masks[i].firstElementChild;
       if (!line) continue;
-      masks[i].style.overflow = Math.abs(ty(line)) < EPS ? 'visible' : 'hidden';
+      masks[i].style.overflow = Math.abs(ty(line)) < EPS ? 'visible' : 'clip';
     }
   }
   sweep();

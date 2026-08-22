@@ -67,7 +67,7 @@
   {
     "name": "page has real scroll height",
     "pass": true,
-    "detail": "18794px"
+    "detail": "19691px"
   },
   {
     "name": "chapter 01 words brighten with scroll",
@@ -226,8 +226,8 @@
   },
   {
     "name": "the reviews block falls back to its own cards when the vendor is unreachable",
-    "pass": true,
-    "detail": 0
+    "pass": false,
+    "detail": 1
   },
   {
     "name": "aggregate score counted up",
@@ -241,8 +241,8 @@
   },
   {
     "name": "no broken images",
-    "pass": true,
-    "detail": "all loaded"
+    "pass": false,
+    "detail": "assets/practice-space-1.avif?retry=1, assets/practice-space-2.avif?retry=1, assets/practice-space-3.avif?retry=1, assets/practice-space-4.avif?retry=1, assets/practice-space-5.avif?retry=1"
   },
   {
     "name": "no horizontal overflow @1440",
