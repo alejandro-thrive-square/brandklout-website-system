@@ -35,44 +35,44 @@
   {
    "id": "smooth-content",
    "prop": "height",
-   "design": "12870.5px",
-   "live": "12909.8px"
+   "design": "12876.1px",
+   "live": "12827.4px"
   },
   {
    "id": "top",
    "prop": "height",
-   "design": "12406.3px",
-   "live": "12454.2px"
+   "design": "12411.9px",
+   "live": "12371.9px"
   },
   {
    "id": "arrival",
    "prop": "height",
    "design": "1223.25px",
-   "live": "1314.5px"
+   "live": "1228.12px"
   },
   {
    "id": "arrivalImg",
    "prop": "height",
    "design": "1223.25px",
-   "live": "1314.5px"
+   "live": "1228.12px"
   },
   {
    "id": "arrivalVeil",
    "prop": "height",
    "design": "1223.25px",
-   "live": "1314.5px"
+   "live": "1228.12px"
   },
   {
    "id": "arrivalInner",
    "prop": "grid-template-columns",
-   "design": "648.25px 574.875px",
+   "design": "648.203px 574.828px",
    "live": "649.562px 576.031px"
   },
   {
    "id": "arrivalInner",
    "prop": "height",
    "design": "999.25px",
-   "live": "1091.31px"
+   "live": "1004.94px"
   },
   {
    "id": "arrivalTitle",
@@ -101,7 +101,7 @@
   {
    "id": "leadForm",
    "prop": "width",
-   "design": "574.875px",
+   "design": "574.828px",
    "live": "524.844px"
   },
   {
@@ -119,7 +119,7 @@
   {
    "id": "f-name",
    "prop": "width",
-   "design": "523.688px",
+   "design": "523.641px",
    "live": "473.656px"
   },
   {
@@ -131,7 +131,7 @@
   {
    "id": "f-email",
    "prop": "width",
-   "design": "523.688px",
+   "design": "523.641px",
    "live": "473.656px"
   },
   {
@@ -143,7 +143,7 @@
   {
    "id": "f-phone",
    "prop": "width",
-   "design": "523.688px",
+   "design": "523.641px",
    "live": "473.656px"
   },
   {
@@ -155,7 +155,7 @@
   {
    "id": "f-msg",
    "prop": "width",
-   "design": "523.688px",
+   "design": "523.641px",
    "live": "473.656px"
   },
   {
@@ -215,32 +215,32 @@
   {
    "id": "formSubmit",
    "prop": "width",
-   "design": "523.688px",
+   "design": "523.641px",
    "live": "473.656px"
   },
   {
    "id": "hands",
    "prop": "padding-top",
-   "design": "120.87px",
+   "design": "121.04px",
    "live": "115.6px"
   },
   {
    "id": "hands",
    "prop": "padding-bottom",
-   "design": "120.87px",
+   "design": "121.04px",
    "live": "115.6px"
   },
   {
    "id": "hands",
    "prop": "height",
-   "design": "1495.86px",
+   "design": "1496.38px",
    "live": "1490.95px"
   },
   {
    "id": "work",
    "prop": "height",
-   "design": "2576.52px",
-   "live": "2630.91px"
+   "design": "2578.52px",
+   "live": "2633.91px"
   },
   {
    "id": "workNum",
@@ -347,20 +347,20 @@
   {
    "id": "standard",
    "prop": "padding-top",
-   "design": "120.87px",
+   "design": "121.04px",
    "live": "115.6px"
   },
   {
    "id": "standard",
    "prop": "padding-bottom",
-   "design": "120.87px",
+   "design": "121.04px",
    "live": "115.6px"
   },
   {
    "id": "standard",
    "prop": "height",
-   "design": "2630.39px",
-   "live": "2686.27px"
+   "design": "2632.69px",
+   "live": "2688.27px"
   },
   {
    "id": "pillarList",
@@ -372,7 +372,7 @@
    "id": "proof",
    "prop": "height",
    "design": "2930px",
-   "live": "2748px"
+   "live": "2747px"
   },
   {
    "id": "proofPin",
@@ -383,19 +383,19 @@
   {
    "id": "ribbonRail",
    "prop": "padding-left",
-   "design": "56.88px",
+   "design": "56.96px",
    "live": "54.4px"
   },
   {
    "id": "ribbonRail",
    "prop": "padding-right",
-   "design": "56.88px",
+   "design": "56.96px",
    "live": "54.4px"
   },
   {
    "id": "ribbonRail",
    "prop": "width",
-   "design": "2990.48px",
+   "design": "2990.64px",
    "live": "2821.03px"
   },
   {
@@ -408,42 +408,42 @@
    "id": "ribbonBar",
    "prop": "width",
    "design": "1280px",
-   "live": "1166.23px"
+   "live": "1166.08px"
   },
   {
    "id": "voices",
    "prop": "padding-top",
-   "design": "120.87px",
+   "design": "121.04px",
    "live": "115.6px"
   },
   {
    "id": "voices",
    "prop": "padding-bottom",
-   "design": "120.87px",
+   "design": "121.04px",
    "live": "115.6px"
   },
   {
    "id": "voices",
    "prop": "height",
-   "design": "958.203px",
+   "design": "958.625px",
    "live": "988.625px"
   },
   {
    "id": "invitation",
    "prop": "padding-top",
-   "design": "120.87px",
+   "design": "121.04px",
    "live": "115.6px"
   },
   {
    "id": "invitation",
    "prop": "padding-bottom",
-   "design": "120.87px",
+   "design": "121.04px",
    "live": "115.6px"
   },
   {
    "id": "invitation",
    "prop": "height",
-   "design": "592.109px",
+   "design": "592.453px",
    "live": "594.984px"
   },
   {
