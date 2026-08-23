@@ -1,0 +1,131 @@
+/* ==========================================================================
+   NAV — fixed, outside #smooth-wrapper so ScrollSmoother never transforms it.
+   Carries the two continuity devices: whole-page reading progress along its
+   top edge, and the chapter readout that names where you are.
+   ========================================================================== */
+.nav {
+  position: fixed; inset: 0 0 auto; z-index: 60;
+  display: flex; align-items: center; gap: var(--gutter);
+  padding: .85rem var(--gutter);
+  color: var(--cream);
+  transition: background .5s var(--ease-out), color .5s var(--ease-out),
+              border-color .5s var(--ease-out), padding .5s var(--ease-out);
+  border-bottom: 1px solid transparent;
+}
+.nav.is-solid {
+  background: rgba(36, 38, 15, .9);
+  -webkit-backdrop-filter: saturate(150%) blur(14px);
+  backdrop-filter: saturate(150%) blur(14px);
+  border-bottom-color: rgba(253, 248, 238, .12);
+  padding-block: .6rem;
+}
+
+/* Reading progress. A 2px rule along the top edge, scaled from 0 to 1 across
+   the whole document. It is the page's answer to "how much is left". */
+.nav__progress {
+  position: absolute; inset: 0 0 auto; height: 2px;
+  background: var(--amber); transform: scaleX(0); transform-origin: 0 50%;
+}
+
+/* ==========================================================================
+   TOUCH TARGETS ARE SIZED IN px, DELIBERATELY.
+
+   The house rule bans px for FONT-SIZE, because the fluid root already scales
+   type and a px size would fight it. A tap target is the opposite kind of
+   measurement: 44px is a physical claim about a fingertip, and it does not get
+   smaller because the viewport did. The fluid root drops to 12px at 320, so
+   anything sized purely in rem shrinks below the threshold exactly where it
+   matters most, on the smallest phones.
+
+   Measured under CDP at 390: the brand link was 129x29, the phone link 14x14
+   (its label is hidden at this width, leaving only the icon) and the burger
+   38x38. All three are now floored.
+   ========================================================================== */
+.nav__brand { display: flex; align-items: center; gap: .7rem; flex: 0 0 auto; min-height: 44px }
+.nav__brand img { width: 2.1rem; height: 2.1rem; border-radius: 50% }
+.nav__brand b {
+  font-family: var(--serif); font-size: 1.05rem; font-weight: 400;
+  letter-spacing: .01em; color: inherit; white-space: nowrap;
+}
+.nav__brand span { display: block; font-size: var(--label); letter-spacing: var(--track-wide);
+  text-transform: uppercase; opacity: .6 }
+
+/* The chapter readout. Only journey pages get it; build-site.mjs injects it. */
+.nav__chapter {
+  display: flex; align-items: center; gap: .6rem; margin-inline: auto;
+  font-size: var(--label); letter-spacing: var(--track-wide); text-transform: uppercase;
+  opacity: .82;
+}
+.nav__chapter b { font-family: var(--serif); font-size: 1.5em; font-weight: 400; opacity: 1 }
+.nav__chapter i {
+  display: block; width: 3.5rem; height: 1px; background: rgba(253, 248, 238, .28);
+  position: relative;
+}
+.nav__chapter i::after {
+  content: ''; position: absolute; inset: 0 auto 0 0; width: 100%;
+  background: var(--sand); transform: scaleX(var(--p, 0)); transform-origin: 0 50%;
+  transition: transform .55s var(--ease-out);
+}
+
+.nav__actions { display: flex; align-items: center; gap: .9rem; margin-left: auto; flex: 0 0 auto }
+
+/* THE PHONE NUMBER LIVES IN ITS OWN ELEMENT ON PURPOSE.
+   Dynamic Number Insertion is Gauge Hill's task (Asana 1217658322593910). His
+   script needs one stable, addressable node per page whose text and href it can
+   rewrite. `data-dni` marks it; nothing here reads that attribute, and no
+   call-tracking number is inserted by us. */
+.nav__tel {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  font-weight: 600; font-size: var(--body); white-space: nowrap;
+  min-height: 44px; min-width: 44px;
+}
+.nav__tel svg { width: 1rem; height: 1rem; flex: 0 0 auto }
+.nav .btn { min-height: max(2.6rem, 44px); padding: .55rem 1.3rem; font-size: var(--label);
+  letter-spacing: var(--track-wide); text-transform: uppercase; border-radius: var(--r-lg) }
+.nav .btn--amber { color: var(--olive-dark) }
+
+.burger {
+  display: none; width: 44px; height: 44px; position: relative;
+  border: 1px solid rgba(253, 248, 238, .3); border-radius: var(--r-lg);
+}
+.burger span {
+  position: absolute; left: 50%; width: 1.15rem; height: 1.5px; background: currentColor;
+  transform: translateX(-50%); transition: transform .4s var(--ease-out), opacity .3s;
+}
+.burger span:nth-child(1) { top: 19px }
+.burger span:nth-child(2) { top: 25px }
+.burger.is-open span:nth-child(1) { top: 22px; transform: translateX(-50%) rotate(45deg) }
+.burger.is-open span:nth-child(2) { top: 22px; transform: translateX(-50%) rotate(-45deg) }
+
+@media (max-width: 991px) {
+  .nav__chapter { display: none }
+  .nav__brand span { display: none }
+}
+@media (max-width: 767px) {
+  .burger { display: block }
+  .nav__tel span { display: none }
+  .nav .btn { display: none }
+}
+
+/* ==========================================================================
+   STICKY MOBILE CALL BAR.
+   Paid dental traffic is mostly mobile and the standard is explicit: the
+   offer, the phone and the form stay reachable at every scroll depth. It sits
+   above the safe-area inset so it never lands under the home indicator, and
+   the page reserves space for it so it cannot cover a form submit.
+   ========================================================================== */
+.callbar {
+  position: fixed; inset: auto 0 0; z-index: 70;
+  display: none; gap: .6rem; padding: .6rem var(--gutter);
+  padding-bottom: calc(.6rem + env(safe-area-inset-bottom, 0px));
+  background: rgba(36, 38, 15, .96);
+  -webkit-backdrop-filter: blur(14px); backdrop-filter: blur(14px);
+  border-top: 1px solid rgba(253, 248, 238, .14);
+  transform: translateY(110%); transition: transform .5s var(--ease-out);
+}
+.callbar.is-on { transform: translateY(0) }
+.callbar .btn { flex: 1; min-height: max(3rem, 44px); padding-inline: .75rem; font-size: var(--body) }
+@media (max-width: 767px) {
+  .callbar { display: flex }
+  body { padding-bottom: 4.5rem }
+}

@@ -1,0 +1,81 @@
+{
+  "_comment": [
+    "Head metadata for the three funnel pages. This file is the source that 07 mirrors into Webflow",
+    "page settings, so the local package and the Designer never drift.",
+    "",
+    "ALL THREE PAGES ARE noindex. That is deliberate and it is how the practice already treats its",
+    "existing paid landing page: /invisalign-offer-pasadena returns 200 and is absent from",
+    "sitemap.xml. The site already ranks six Invisalign URLs (a service page, five geo pages) plus a",
+    "blog post, and a new page competing with them would take traffic the practice already owns.",
+    "Excluding these three from the index is what actually prevents that; the slug only prevents",
+    "confusion.",
+    "",
+    "The thank-you page would additionally be a bad search result on its own terms: it tells the",
+    "reader their form was submitted, which is false for anyone arriving from Google.",
+    "",
+    "JSON-LD is on the landing page only, and it describes the practice, not the offer. An Offer or",
+    "Product schema would need a price validity window and an availability claim that nobody has",
+    "confirmed yet: whether the $3,379 promotion is still current is an open question with the",
+    "client. aggregateRating is deliberately absent for the same reason the pages print no review",
+    "count: it was 486 on 2026-08-20 and it moves, and what to publish is Gauge Hill's copy task."
+  ],
+
+  "invisalign": {
+    "title": "Invisalign in Pasadena, $3,379 All-Inclusive | Legacy Dental Pasadena",
+    "desc": "All-inclusive Invisalign from a 2026 Invisalign Diamond Provider in Pasadena. $3,379 covering every visit, refinement and retainer, with four ways to pay. Free consultation.",
+    "robots": "noindex, follow",
+    "ogTitle": "Invisalign in Pasadena, $3,379 all-inclusive",
+    "ogDesc": "Every visit, refinement and retainer included. See a 3D preview of your result before you begin. Free consultation with Dr. Sean Sunyoto, DDS.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Dentist",
+      "name": "Legacy Dental Pasadena",
+      "url": "https://legacydentalpasadena.com/",
+      "telephone": "+1-626-584-1800",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "1213 N. Lake Ave #1",
+        "addressLocality": "Pasadena",
+        "addressRegion": "CA",
+        "postalCode": "91104",
+        "addressCountry": "US"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+          "opens": "08:00",
+          "closes": "17:00"
+        }
+      ],
+      "areaServed": [
+        "Pasadena", "South Pasadena", "Arcadia", "Altadena", "San Marino",
+        "La Cañada Flintridge", "Monrovia"
+      ],
+      "employee": {
+        "@type": "Dentist",
+        "name": "Dr. Sean Sunyoto, DDS"
+      },
+      "availableService": {
+        "@type": "MedicalTherapy",
+        "name": "Invisalign clear aligner treatment"
+      }
+    }
+  },
+
+  "invisalign-consultation": {
+    "title": "Book a Free Invisalign Consultation | Legacy Dental Pasadena",
+    "desc": "Request your free Invisalign consultation in Pasadena. See the 3D preview of your result and get the price in writing, with no charge and no commitment.",
+    "robots": "noindex, follow",
+    "ogTitle": "Book your free Invisalign consultation",
+    "ogDesc": "One visit. We look at your teeth, show you the 3D preview, and give you the price in writing."
+  },
+
+  "invisalign-thank-you": {
+    "title": "Request Received | Legacy Dental Pasadena",
+    "desc": "Your Invisalign consultation request has been received. Here is what happens next, what to bring, and where to find the practice.",
+    "robots": "noindex, nofollow",
+    "ogTitle": "Request received",
+    "ogDesc": "Your consultation request is with the front desk at Legacy Dental Pasadena."
+  }
+}

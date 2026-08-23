@@ -1,0 +1,47 @@
+{
+  "_title": "Book your free Invisalign consultation | Legacy Dental Pasadena",
+  "_note": "The consultation page. The brief is narrow and deliberate: the form, the testimonial films, and little else. What is NOT here is the point — no offer ladder, no FAQ, no second CTA to another page. The only outbound destinations are the form slot, the phone number and the four films, and the films open in a new tab so they do not cost the visit. The form itself is a documented seam, not an install; see camp-sections.css and the comment in consult-template.tokens.html.",
+  "consult.eyebrow": "FREE CONSULTATION · PASADENA",
+  "consult.h1": "Book your free Invisalign consultation",
+  "consult.lead": "Tell us when suits you and the practice will confirm your appointment. The consultation includes an exam and a 3D scan, ends with you seeing a preview of the finished result, and costs nothing whether or not you go ahead.",
+  "consult.microproof": "5.0 on Google · 2026 Invisalign Diamond Provider · New patients only",
+  "consult.note-title": "Nothing is decided at this appointment.",
+  "consult.note": "You will see what treatment would involve, how long it would take and what it would cost. If Invisalign is not the right answer for your case, Dr. Sunyoto will tell you that instead.",
+  "consult.form-kicker": "REQUEST AN APPOINTMENT",
+  "consult.form-title": "Free consultation, no obligation",
+  "consult.slot-title": "Booking form",
+  "consult.slot-note": "The campaign booking form is added here by Gauge Hill, together with the conversion tracking and the call-tracking number. Until it is in place, call the practice on (626) 584-1800 to book, Monday to Friday between 8 AM and 5 PM.",
+  "consult.form-note": "Your details go to Legacy Dental Pasadena and are used to arrange your appointment. The consultation is free and carries no obligation to start treatment.",
+  "films.eyebrow": "PATIENT FILMS",
+  "films.h2": "Patients of the practice, in their own words",
+  "films.text": "Four short films recorded at Legacy Dental Pasadena. Each one opens in a new tab, so you will not lose your place here.",
+  "films-list": [
+    {
+      "href": "https://vimeo.com/1193010876",
+      "poster": "https://s3.amazonaws.com/webflow-prod-assets/68e12d861f12c7f04a762a8e/6a87cba8e90f983b3495a6a4_Legacy%20Dental%20Pasadena%20Invisalign%20patient%20film%201193010876%20poster.jpg",
+      "alt": "A Legacy Dental Pasadena patient talking about their Invisalign treatment",
+      "meta": "Patient film · 2:00"
+    },
+    {
+      "href": "https://vimeo.com/1195848251",
+      "poster": "https://s3.amazonaws.com/webflow-prod-assets/68e12d861f12c7f04a762a8e/6a87cbb12e99c7f19b1cb5d4_Legacy%20Dental%20Pasadena%20Invisalign%20patient%20film%201195848251%20poster.jpg",
+      "alt": "A Legacy Dental Pasadena patient talking about their Invisalign treatment",
+      "meta": "Patient film · 2:20"
+    },
+    {
+      "href": "https://vimeo.com/1196557291",
+      "poster": "https://s3.amazonaws.com/webflow-prod-assets/68e12d861f12c7f04a762a8e/6a87cbbbc7c915b2ad6a71f4_Legacy%20Dental%20Pasadena%20Invisalign%20patient%20film%201196557291%20poster.jpg",
+      "alt": "A Legacy Dental Pasadena patient talking about their Invisalign treatment",
+      "meta": "Patient film · 1:41"
+    },
+    {
+      "href": "https://vimeo.com/1196557292",
+      "poster": "https://s3.amazonaws.com/webflow-prod-assets/68e12d861f12c7f04a762a8e/6a87cbc41248ed240f3c6e53_Legacy%20Dental%20Pasadena%20Invisalign%20patient%20film%201196557292%20poster.jpg",
+      "alt": "A Legacy Dental Pasadena patient talking about their Invisalign treatment",
+      "meta": "Patient film · 0:46"
+    }
+  ],
+  "consult.reviews-h2": "What patients say about the practice",
+  "consult.mobile-cta": "Book now",
+  "consult.legal": "Consultations are free and carry no obligation. Individual results vary."
+}
