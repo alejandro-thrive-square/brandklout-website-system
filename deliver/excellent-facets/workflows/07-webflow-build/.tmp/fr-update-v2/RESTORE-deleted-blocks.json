@@ -1,0 +1,75 @@
+{
+  "_readme": "State captured immediately before irreversible remove_element calls, so any deleted block can be rebuilt. Component id for both Synthetic instances: 48e9b8f0-13ce-91e6-c716-a04cc9a7521d ('Section / Synthetic Fr'). To restore: insert_component_instance at the recorded position, then set the prop values below.",
+  "capturedOn": "2026-08-01",
+  "deletions": [
+    {
+      "page": "Fancy Color Melee",
+      "pageId": "6853f8d1eda9bf0d27621337",
+      "what": "Section / Synthetic Fr component instance",
+      "elementId": "9c10ad27-0421-8b6a-32ec-6730c13a7ed6",
+      "position": "inside page_main, after the trusted_wrap section, before Section / Logos",
+      "reason": "Checklist Part 2 - remove the shared 100% Synthetic Free block from Fancy Color Melee and Certified",
+      "props": {
+        "7a9b3f31-d896-93df-ce4e-943e84519843": {"name": "Show", "value": "hide"},
+        "3986e145-2c43-929e-d45b-f9b1a62fbcd7": {"name": "Ratio", "value": ""},
+        "b6fe148b-82d8-fe94-9db1-15d39a7e87e5": {"name": "Synth Heading", "value": "100% Synthetic Free, Zero Tolerance Technology"},
+        "6dbb0945-0515-37ea-aab5-9fe3c817438e": {"name": "Paragraph", "value": "Nos clients nous font confiance pour s'assurer que notre filière reste exempte à 100 % de diamants fabriqués en laboratoire. Pour ce faire, nous investissons dans les technologies les plus récentes afin de détecter les diamants synthétiques et traités artificiellement. À leur arrivée, tous les diamants des cargaisons entrantes sont soumis à un contrôle exclusif réalisé en interne à l'aide des machines suivantes :"},
+        "90a9ff8a-ce70-9958-ce07-e3884a32fff9": {"name": "Caption", "value": "Nous appliquons une politique de tolérance zéro à l'égard des pierres synthétiques et n'autorisons aucune pierre synthétique dans nos infrastructures. Par ailleurs, nous n'avons pas d'intérêts commerciaux ni d'entités liées qui vendent des diamants synthétiques."},
+        "c7427b4c-502f-2422-71e6-2f9a1cd39f06": {"name": "1", "value": "AMS2, machine automatisée de détection de mêlé par De Beers"},
+        "ac96a597-32bf-c144-4921-73183527c530": {"name": "2", "value": "DiamondSure™ par De Beers"},
+        "5035f4fa-a7f7-afa8-f949-04ae107feb75": {"name": "3", "value": "DiamondCheck™ par GIA"},
+        "99c86f10-1eaf-b7d3-1afa-62d284c5a687": {"name": "4", "value": "iD100™ par GIA"},
+        "ffb8c3db-48d1-330f-3751-7ef39a1ece70": {"name": "5", "value": "DiaTrue CXL2 par OGI Systems"},
+        "f835e385-30ee-c1c5-587e-24be2ed7c4e1": {"name": "Flutting", "value": "Nous fournissons des services de tri et d'ensachage méticuleux afin de garantir que nos clients n'achètent pas de diamètres non désirés ou de diamants supplémentaires."},
+        "0dd94cb0-e82a-818c-2cef-98842f9318e0": {"name": "Icon-Fr", "value": ""},
+        "8500618a-b921-a36f-a38a-9538d6414cab": {"name": "Icon", "value": "hide"}
+      }
+    },
+    {
+      "page": "Fancy Color Certified",
+      "pageId": "6853fec4cd4f68b14fca3916",
+      "what": "Section / Synthetic Fr component instance",
+      "elementId": "fa1fafc1-be2f-1c86-4a05-68f78834f589",
+      "position": "inside page_main, after the diamonds_provenance block, before Section / Logos (fa1fafc1-...-f58e)",
+      "reason": "Checklist Part 2 - remove the shared 100% Synthetic Free block from Fancy Color Melee and Certified",
+      "props": {
+        "7a9b3f31-d896-93df-ce4e-943e84519843": {"name": "Show", "value": "hide"},
+        "3986e145-2c43-929e-d45b-f9b1a62fbcd7": {"name": "Ratio", "value": ""},
+        "b6fe148b-82d8-fe94-9db1-15d39a7e87e5": {"name": "Synth Heading", "value": "100% Synthetic Free, Zero Tolerance Technology"},
+        "6dbb0945-0515-37ea-aab5-9fe3c817438e": {"name": "Paragraph", "value": "Nos clients nous font confiance pour s'assurer que notre filière reste exempte à 100 % de diamants fabriqués en laboratoire. Pour ce faire, nous investissons dans les technologies les plus récentes afin de détecter les diamants synthétiques et traités artificiellement. À leur arrivée, tous les diamants des cargaisons entrantes sont soumis à un contrôle exclusif réalisé en interne à l'aide des machines suivantes :"},
+        "90a9ff8a-ce70-9958-ce07-e3884a32fff9": {"name": "Caption", "value": "Nous appliquons une politique de tolérance zéro à l'égard des pierres synthétiques et n'autorisons aucune pierre synthétique dans nos infrastructures. Par ailleurs, nous n'avons pas d'intérêts commerciaux ni d'entités liées qui vendent des diamants synthétiques."},
+        "c7427b4c-502f-2422-71e6-2f9a1cd39f06": {"name": "1", "value": "AMS2, machine automatisée de détection de mêlé par De Beers"},
+        "ac96a597-32bf-c144-4921-73183527c530": {"name": "2", "value": "DiamondSure™ par De Beers"},
+        "5035f4fa-a7f7-afa8-f949-04ae107feb75": {"name": "3", "value": "DiamondCheck™ par GIA"},
+        "99c86f10-1eaf-b7d3-1afa-62d284c5a687": {"name": "4", "value": "iD100™ par GIA"},
+        "ffb8c3db-48d1-330f-3751-7ef39a1ece70": {"name": "5", "value": "DiaTrue CXL2 par OGI Systems"},
+        "f835e385-30ee-c1c5-587e-24be2ed7c4e1": {"name": "Flutting", "value": "Nous fournissons des services de tri et d'ensachage méticuleux afin de garantir que nos clients n'achètent pas de diamètres non désirés ou de diamants supplémentaires."},
+        "0dd94cb0-e82a-818c-2cef-98842f9318e0": {"name": "Icon-Fr", "value": ""},
+        "8500618a-b921-a36f-a38a-9538d6414cab": {"name": "Icon", "value": "hide"}
+      }
+    },
+    {
+      "page": "Fancy Color Melee",
+      "pageId": "6853f8d1eda9bf0d27621337",
+      "what": "trusted_wrap Section holding the duplicated quality paragraph",
+      "elementId": "b7f914c6-84ec-360d-43be-7d2c123ffaaa",
+      "reason": "Checklist Part 2 - the quality paragraph is repeated on this page, leave a single instance",
+      "structure": {
+        "Section.trusted_wrap[data-theme=dark]": "b7f914c6-84ec-360d-43be-7d2c123ffaaa",
+        "Block.trusted_container.u-container": "db79f88f-a04f-7853-a717-a80e72c03a93",
+        "Block.trusted_grid.u-grid-column-2": "4c46745c-861b-8288-2cff-ed7a4e39540b",
+        "Block.trusted_content(heading side)": "0c48101c-5888-06ff-6922-97154df27dc6",
+        "Heading.trusted_heading.u-text-h1 > Strong": "ee1feb06-5013-33b1-efe9-d74683703c89 / 41d4d2c3-9167-6751-a270-892ab911c0d0",
+        "heading text": "Note qualité",
+        "Block.trusted_content(body side)": "018a27b6-7705-79ff-dfca-00ba9f0283c0",
+        "Paragraph.trusted_text.u-text-main": "e9599efc-6fba-c0ce-781a-2d61937709be",
+        "paragraph text": "Chaque lot est trié selon des spécifications strictes de taille et d'harmonie colorimétrique, chaque pierre étant inspectée individuellement et calibrée par incréments de 0,05 mm. Toutes les pierres font l'objet d'un contrôle rigoureux garantissant qu'elles sont 100 % naturelles et sans synthétique, et sont préparées par un calibrage et une constitution des lots méticuleux, sans diamètres non souhaités ni pierres excédentaires achetées.",
+        "Block.trusted_visual.u-visual-wrap": "b07a76e0-fd04-a961-1997-67d75c469b03",
+        "ComponentInstance Global / Visual": "f84d03b8-31f3-ccb9-8dac-24a185f31e83",
+        "Global / Visual componentId": "41f9978c-8579-b33c-818f-9f6f86574abb",
+        "Global / Visual Image File prop": "874ac2c4-b5d7-edc8-57d2-cbc0843a0ee2 = 68422ef16b1a8eb97f3ee06c"
+      },
+      "IMPORTANT_note_for_client": "On the PUBLISHED site this same trusted_wrap section holds different, richer content: heading 'Notre Engagement Qualité' with three bullets ('Tri strict sous microscope, calibrage rigoureux' / 'Origine tracée via iTraceiT' / 'Aucune pierre synthétique, politique tolérance zéro assurée par 5 machines de détection') and a closing line 'Pour les maisons souhaitant rehausser chaque millimètre de création avec des couleurs naturelles, notre mêlé fancy est une référence mondiale.'. The canvas version appears to have been overwritten with a copy of the hero quality paragraph. The client may prefer restoring the published content instead of deleting this section."
+    }
+  ]
+}

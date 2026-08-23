@@ -1,0 +1,45 @@
+{
+  "generated_at": "2026-05-06",
+  "clients": [
+    {
+      "client_id": "company-1",
+      "destination": "deliver/company-1/workflows/",
+      "copied_modules": [
+        "09-figma-review-build-planning",
+        "05-webflow-build",
+        "06-qa",
+        "07-launch",
+        "08-handoff-support"
+      ],
+      "removed_legacy": [
+        "scrape-seo-rewrite-webflow"
+      ],
+      "preserved_internal_files": [".md", ".py", "TRIGGER_PROMPT.txt", ".tmp/"],
+      "client_specific_edits": []
+    },
+    {
+      "client_id": "company-2",
+      "destination": "deliver/company-2/workflows/",
+      "copied_modules": [
+        "10-migration-audit-plan",
+        "11-content-export-import",
+        "12-migration-seo-redirects",
+        "05-webflow-build",
+        "06-qa",
+        "07-launch",
+        "08-handoff-support"
+      ],
+      "removed_legacy": [
+        "scrape-seo-rewrite-webflow"
+      ],
+      "preserved_internal_files": [".md", ".py", "TRIGGER_PROMPT.txt", ".tmp/"],
+      "client_specific_edits": [
+        {
+          "file": "deliver/company-2/workflows/10-migration-audit-plan/10-migration-audit-plan.md",
+          "section_added": "Client-Specific Scope (company-2)",
+          "reason": "Documents source_platform=WordPress, redesign_scope=none, handoff pointer, and WordPress inventory checklist."
+        }
+      ]
+    }
+  ]
+}

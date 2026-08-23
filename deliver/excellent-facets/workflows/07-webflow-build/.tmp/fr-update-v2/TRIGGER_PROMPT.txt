@@ -1,0 +1,37 @@
+Execute the Excellent Facets French page update (FR Update v2) against the live Webflow site.
+
+START BY READING, IN THIS ORDER:
+1. deliver/excellent-facets/workflows/07-webflow-build/.tmp/fr-update-v2/EXECUTION_PLAN.md
+   - self-contained; contains the hard rules, five traps found during reconnaissance, and the order of work
+2. deliver/excellent-facets/workflows/07-webflow-build/.tmp/fr-update-v2/resolved-elements.json
+   - element IDs already resolved; do not re-derive them
+3. deliver/excellent-facets/docs/Checklist_FR_actualizaciones_ES.md
+   - the client change list and the single source of truth for every piece of text
+4. deliver/excellent-facets/docs/mcp-access.md
+   - MCP permissions and confirmation requirements
+
+MCP: webflow-excellent-facets (already authenticated). Site ID 667ba12b8def17ce19a9419b.
+Call webflow_guide_tool once before other Webflow tools.
+
+SCOPE: 80 checklist text items + 7 deletions + 4 display bugs, across the 14 /fr pages.
+Because desktop and mobile are separate DOM subtrees, expect roughly 112 actual element edits.
+
+NON-NEGOTIABLE:
+- Do NOT publish. Draft edits only. Publishing needs explicit client approval.
+- Paste text byte-exact from the checklist, including what look like typos. They are already
+  queued for the client in 15-improvement-intake-audit/.tmp/fr-typo-queries.md. Correct nothing silently.
+- French pages only. Do not touch English pages.
+- The site does NOT use Webflow Localization. Never use data_localization_tool.
+- Do not use designer_tool / the Designer bridge. Data API only.
+
+FIRST ACTION: ask the user whether to work on a Webflow page branch or directly on the canvas.
+Data API edits hit the shared canvas immediately, so if the client publishes for an unrelated
+reason mid-job, partial work goes live. The site reports canBranch: true. Branching is
+recommended. Do not make the first mutation until this is answered.
+
+THEN: finish Phase 1 mapping for the pages listed under "pagesNotYetMapped" in resolved-elements.json
+(Cut-To-Measure returned a 502 and needs a retry), build fr-update-v2-manifest.json, and work through
+the plan's steps 2 to 4. Log applied changes per page in the same folder.
+
+Blocked items - do not attempt until the client replies: Sustainability Part 2 (Gender Equality 05),
+and any change to the Contact form field key.

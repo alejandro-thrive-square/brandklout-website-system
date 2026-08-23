@@ -45,6 +45,14 @@ manage/browser-tools/playwright-browser/.tmp/style-capture-*/code/resources/
 *.eps
 *.fig
 *.sketch
+# Web fonts. Scraped-site mirrors pull in whole Elementor/FontAwesome families —
+# 275 files and 8.9MB from one capture — and they are third-party vendor assets,
+# not client deliverables. Same rule as the images above: VPS is the source of truth.
+*.ttf
+*.otf
+*.woff
+*.woff2
+*.eot
 
 # ===== Python =====
 __pycache__/

@@ -1,0 +1,775 @@
+**Sitio web en francés — Actualizaciones de texto**
+
+Lista de tareas (checklist) para el equipo web · a partir de la revisión de Nathan · Julio de 2026
+
+# **Cómo usar este documento**
+
+Estas son actualizaciones ÚNICAMENTE de las páginas en francés (las URLs /fr/...). Las páginas en inglés no se ven afectadas salvo que se indique lo contrario.
+
+IMPORTANTE: el texto en francés (actual y nuevo) NO se traduce ni se vuelve a teclear. Copia y pega el «NUEVO TEXTO» exactamente como está escrito, con todos los acentos, espacios y signos de puntuación.
+
+**Cada tarea incluye:**
+
+•  «Para localizarlo (versión en inglés)»: el texto de la versión inglesa de la web, para ayudarte a encontrar el bloque en la página.
+
+•  «TEXTO ACTUAL (francés)»: el texto en francés que está ahora mismo en la página.
+
+•  «NUEVO TEXTO (francés)»: el texto en francés que debe reemplazarlo.
+
+**Resumen:**
+
+•  Parte 1 — Reemplazos de texto, página por página.
+
+•  Parte 2 — Bloques a eliminar.
+
+•  Parte 3 — Problemas de visualización y maquetación en la web publicada.
+
+# **Parte 1 — Reemplazos de texto**
+
+##   **Home**   *excellentfacets.com/fr/home*  
+
+☐  **Home · \#1 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Labels: Customer First · Integrity · RIGOROUS QUALITY CONTROL*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Étiquettes : Le Client avant tout · Intégrité · CONTRÔLE QUALITÉ RIGOUREUX
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Étiquettes : SENS DU SERVICE  · Intégrité · RIGUEUR
+
+☐  **Home · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): In 1998, we set the benchmark for supplying the great jewellery and watch maisons. It remains unmatched today.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  En 1998, nous avons établi la référence de l'approvisionnement des grandes maisons de joaillerie et d'horlogerie. Elle demeure inégalée aujourd'hui.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  En 1998, nous sommes devenus la référence en matière d'approvisionnement diamants des grandes maisons de joaillerie et d'horlogerie. Une référence inégalée à ce jour..
+
+☐  **Home · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Our pursuit of rare diamonds is guided by uncompromising ethics. We are committed to traceable sourcing to the mine of origin, carbon neutrality and socially responsible manufacturing.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Notre recherche de diamants rares est guidée par une éthique irréprochable. Nous nous engageons à assurer la traçabilité des sources d'approvisionnement avec la mine d'origine, la neutralité carbone et la fabrication socialement responsable.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Notre recherche de diamants rares est guidée par une éthique irréprochable. Nous nous engageons à assurer la traçabilité de nos sources d'approvisionnement avec la mine d'origine, une neutralité carbone ainsi qu'une  fabrication socialement responsable.
+
+☐  **Home · \#4 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Inventory immediately available in Paris, Geneva and New York, with an in-house cutting atelier in Jaipur...*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  atelier de taille en propre à Jaipur
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  propre atelier de taille à Jaipur
+
+*↳ Nota de Nathan: actualizar a: «propre atelier de taille à Jaipur».*
+
+##   **Our Story**   *excellentfacets.com/fr/about*  
+
+☐  **Our Story · \#1 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): A passion for the diamond drives 28 years of excellence. Over the years, we have earned a place as a preferred supplier to the most prestigious jewellery and watch maisons in the world. With…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Une passion du diamant anime 28 années d'excellence. Au fil des ans, nous avons gagné une place de fournisseur privilégié des maisons de joaillerie et d'horlogerie les plus prestigieuses au monde. Avec des bureaux détenant du stock à Paris, Genève et New York, et un atelier de polissage en propre à Jaipur, en Inde, nous associons une direction proche de nos maisons clientes à une maîtrise complète de notre fabrication, prêts à servir notre clientèle internationale.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Notre passion du diamant anime 28 années d'excellence. Au fil des ans, nous avons gagné une place de fournisseur privilégié des maisons de joaillerie et d'horlogerie les plus prestigieuses au monde. Avec des bureaux à Paris, Genève et New York, ainsi que notre propre atelier de polissage à Jaipur, nous avons la volonté d'être au plus proche de nos clients, tout en assurant la maîtrise complète de notre fabrication, prêts à servir notre clientèle internationale.
+
+☐  **Our Story · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): As an industry leader, we offer our partners a carefully curated selection of finely cut natural melee diamonds, from 0.60 mm to 3.80 mm. Beyond melee, we specialise in colour diamonds and e…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  En tant que leader du secteur, nous proposons à nos partenaires une sélection soignée de diamants mêlés naturels finement taillés, de 0,60 mm à 3,80 mm. Au-delà du mêlé, nous sommes spécialisés dans les diamants de couleur et les pierres d'exception, dont un large stock de diamants roses issus de la célèbre mine Argyle d'Australie.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  En tant que leader du secteur, nous proposons à nos partenaires une sélection soignée de diamants mêlés naturels finement taillés, de 0,60 mm à 3,80 mm. Au-delà du mêlé, nous sommes spécialisés dans les diamants de couleur et les pierres d'exception, dont un large stock de diamants roses issus de la célèbre mine d'Argyle en Australie, aujourd'hui épuisée.
+
+☐  **Our Story · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Deepak arrives in the United States and joins a De Beers sightholder as a trainee. Over the following 10 years, he builds his portfolio of accounts by selling diamonds of VVS to I2 clarity a…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Deepak arrive aux États-Unis et rejoint un sightholder de De Beers en tant que stagiaire. Au cours des 10 années suivantes, il développe son portefeuille de comptes en vendant des diamants de pureté VVS à I2 et de couleur D à Z à de nombreux détaillants, fabricants de bijoux et grossistes en diamants parmi les 50 premiers en Amérique du Nord.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Deepak arrive aux États-Unis et rejoint un sightholder de De Beers en tant que stagiaire. Au cours des 10 années suivantes, il développe son portefeuille clients en vendant des diamants de pureté VVS à I2 et de couleur D à Z à de nombreux détaillants, fabricants de bijoux et grossistes diamantaires, figurant parmi les 50 premiers en Amérique du Nord.
+
+☐  **Our Story · \#4 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Deepak establishes his first recurring high-quality melee diamond business (0.18 carats and under) with the largest maisons in North America. He realises this business is perfectly suited to…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Deepak établit sa première activité récurrente de diamants mêlés de haute qualité (0,18 carats et moins) avec les plus grandes maisons en Amérique du Nord. Il réalise que cette activité est parfaitement adaptée à ses forces en raison de l'attention aux détails et de la précision requises dans le classement des diamants.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Deepak établit sa première activité de diamants mêlés de haute qualité (0,18 carats et moins) avec les plus grandes maisons en Amérique du Nord. Il réalise que cette activité correspond parfaitement à ses qualités : la gradation des diamants exige rigueur et précision, deux de ses points forts.
+
+☐  **Our Story · \#5 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Deepak founds his own company, Excellent Facets, with a single objective: to sell high-quality melee diamonds to the most quality-conscious maisons. He sees the potential of long-term relati…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Deepak crée sa propre entreprise, Excellent Facets, avec un seul objectif : vendre des diamants mêlés de haute qualité aux maisons les plus exigeantes en matière de qualité. Il voit le potentiel des relations à long terme et de la satisfaction des clients et estime qu'une entreprise indépendante serait la meilleure structure pour s'aligner sur les besoins des clients et ses forces personnelles à long terme.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Deepak crée sa propre entreprise, Excellent Facets, avec pour seul objectif : vendre des diamants pavage de grande qualité, aux maisons les plus exigeantes. Convaincu de l'importance des relations durables et de la satisfaction client, il estime qu'une structure indépendante est la mieux à même de concilier les besoins de ses clients et ses propres atouts.
+
+☐  **Our Story · \#6 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): We began manufacturing our own melee diamonds, rather than simply buying polished diamonds on the market, in order to ensure compliance with local labour laws and to promote a better working…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nous avons commencé à fabriquer nos propres diamants mêlés, plutôt que de simplement acheter des diamants polis sur le marché, afin d'assurer le respect des lois locales sur le travail et de promouvoir un meilleur environnement de travail. Cela a été accompli en ouvrant notre propre usine de taille et de polissage de diamants en Thaïlande, que nous avons ensuite fermée, ainsi qu'en travaillant avec des sous-traitants de fabrication.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Plutôt que d'acheter notre mêlée déjà polie sur le marché, nous avons choisi d'acheter le brut et de le tailler nous-mêmes, afin de garantir le respect des législations locales du travail ainsi que de meilleures conditions pour nos équipes. Cela a été accompli en ouvrant notre propre usine de taille et de polissage de diamants  en Thailande, ainsi qu'en travaillant avec des sous-traitants de premiers choix.
+
+☐  **Our Story · \#7 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): We became a Rio Tinto Select Diamantaire and received our first rough allocation from its Diavik mine in Canada, which we sought out in order to have a mine-to-market supply chain. This roug…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nous sommes devenus un Diamantaire Sélectionné de Rio Tinto et avons reçu notre première allocation de brut de sa mine de Diavik au Canada, que nous avons recherchée afin d'avoir une chaîne d'approvisionnement de la mine au marché. Ce brut produisait des diamants polis de 0,30 à 2,00 carats. Nous l'utilisions pour tailler des pierres de formes personnalisées pour nos clients. Nous avons travaillé en tant que Diamantaire Sélectionné jusqu'en 2009, moment où le projet de formes personnalisées a été achevé. Nous avons initialement poli le brut de Rio Tinto dans notre usine de Bangkok. Après la fermeture de l'usine, nous avons déplacé la fabrication dans une usine auditée par une tierce partie et socialement conforme dans la province de Qingdao, en Chine.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Devenus « Select Diamantaire » de Rio Tinto, nous avons reçu notre première attribution de brut provenant la mine de Diavik, au Canada — un gisement nous ayant permis de maîtriser toute notre chaîne d'approvisionnement, de la mine au marché. Les bruts une fois taillées produisaient des pierres de 0,30 à 2,00 carats, nous permettant de réaliser des tailles complexes et personnalisées pour nos clients. Nous avons occupé ce statut jusqu'en 2009, date d'achèvement du projet. Le brut était d'abord poli dans notre usine à Bangkok.  Après sa fermeture, la production a été transférée dans une usine, auditée par un tiers et conforme aux standards sociaux, à Qingdao en Chine.
+
+☐  **Our Story · \#8 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): As part of our commitment to precision, we were early adopters of Sarine technologies for measuring the table, depth, facet angles and girdle thickness of each melee diamond. This optimised…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Dans le cadre de notre engagement envers la précision, nous avons été des premiers à adopter les technologies Sarine pour la mesure de la table, de la profondeur, des angles des facettes et de l'épaisseur de la ceinture de chaque diamant mêlé. Cela a optimisé la brillance de chaque pierre. Nous continuons à évaluer et à mettre en œuvre de nouvelles technologies pour optimiser les résultats polis, ainsi que pour garantir que chaque diamant entrant dans notre inventaire est 100 % naturel.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  La technologie au service de l'excellence. Par souci de précision, nous avons adopté très tôt les technologies Sarine, permettant de mesurer sur chaque pierre, la table, la profondeur, les angles de facettes ainsi que l'épaisseur du rondiste, pour une brillance des plus optimales. Nous continuons d'évaluer et de déployer de nouvelles technologies, afin d'optimiser la taille et de garantir l'origine 100 % naturelle de chaque diamant de notre inventaire.
+
+☐  **Our Story · \#9 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): As a Rio Tinto Diamonds client, we had the opportunity to buy pink diamonds directly from the Argyle mine in Australia through auctions. We were impressed by the mine's incredible provenance…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  En tant que client de Rio Tinto Diamonds, nous avons eu l'opportunité d'acheter directement des diamants roses de la mine d'Argyle en Australie par le biais de ventes aux enchères. Nous avons été impressionnés par la provenance incroyable de la mine et la beauté de ses trésors. Cela a marqué notre entrée dans le commerce des diamants de couleur fantaisie. À partir de là, nous nous sommes étendus à d'autres pierres rares et importantes, tant en couleur fantaisie qu'en blanc. Aujourd'hui, nous avons un grand inventaire de diamants roses d'Argyle, ainsi que d'autres diamants de couleur fantaisie importants.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Client de Rio Tinto Diamonds, nous avons pu acheter en direct, aux enchères, des diamants roses de la mine d'Argyle, en Australie. La provenance exceptionnelle de cette mine et la beauté de ses pierres ont marqué notre entrée dans les diamants de couleur fantaisie. Nous avons depuis étendu notre offre à d'autres pierres rares et importantes, et proposons aujourd'hui un large stock de roses d'Argyle et de diamants de couleur fantaisie d'exception.
+
+☐  **Our Story · \#10 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): We purchased two of the most important diamonds in North American history. One was the Diavik Foxfire, the largest white diamond ever mined in North America, weighing more than 187 carats. T…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nous avons acheté deux des diamants les plus importants de l'histoire de l'Amérique du Nord. L'un était le Diavik Foxfire, le plus grand diamant blanc jamais extrait en Amérique du Nord, pesant plus de 187 carats. L'autre était le Radiant North, qui était le plus grand diamant de couleur fantaisie jamais extrait en Amérique du Nord à l'époque. Le Diavik Foxfire a été exposé au Smithsonian Institute de Washington, DC pendant trois mois, où il a été placé à côté du célèbre diamant Hope.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nous avons acquis deux des plus importants diamants de l'histoire de l'Amérique du Nord. Le premier, le Diavik Foxfire, est le plus grand diamant blanc jamais extrait sur le continent, avec plus de 187 carats. Le second, le Radiant North, était alors le plus grand diamant de couleur fantaisie jamais extrait en Amérique du Nord. Le Diavik Foxfire a été exposé trois mois durant à la Smithsonian Institution de Washington, aux côtés du célèbre diamant Hope.
+
+☐  **Our Story · \#11 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Amay Sheth, Deepak's son, closed the software company he had founded to join the family business. Amay had always been enthusiastic about Deepak's vision of a mine-to-market supply chain and…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Amay Sheth, le fils de Deepak, a fermé la société de logiciels qu'il avait fondée pour rejoindre l'entreprise familiale. Amay a toujours été enthousiaste à propos de la vision de Deepak d'une chaîne d'approvisionnement de la mine au marché et a estimé que le moment était venu de la mettre en œuvre plus rigoureusement avec la traçabilité. Il est également passionné par la durabilité et l'une de ses premières initiatives a été d'auditer les émissions existantes d'Excellent Facets et d'investir dans des projets d'énergie renouvelable pour compenser ces émissions, rendant l'entreprise neutre en carbone pour 2023\.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Amay Sheth, fils de Deepak, a quitté l'entreprise de logiciels qu'il avait fondée pour rejoindre la société familiale. Séduit de longue date par la vision de son père d'une chaîne maîtrisée de la mine au marché, il a entrepris de la déployer plus rigoureusement via la traçabilité. Sensible aux enjeux de durabilité, il a lancé un audit des émissions de l'entreprise et investi dans des énergies renouvelables pour les compenser, atteignant la neutralité carbone dès 2023\.
+
+☐  **Our Story · \#12 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Excellent Facets sets up a Swiss company and builds a local team serving watch maisons, adding traceable, cut-to-measure baguettes to its established expertise in finely calibrated round bri…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Excellent Facets crée une société suisse et constitue une équipe locale au service des maisons horlogères, ajoutant des baguettes traçables taillées sur mesure à son expertise établie du mêlé rond brillant finement calibré. Le bureau de Genève apporte du stock et un interlocuteur dédié au plus près de nos clients suisses.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Excellent Facets ouvre une société suisse et constitue une équipe locale dédiée aux maisons horlogères. À son expertise reconnue du pavage rond s'ajoute désormais des baguettes traçables taillées sur mesure. Avec le bureau de Genève, stock et interlocuteur dédié sont désormais au plus proche de nos clients suisses.
+
+☐  **Our Story · \#13 — REEMPLAZAR (texto reelaborado)**
+
+*(Sin referencia en inglés — localizar por el texto francés actual de abajo)*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Amay s'installe à Paris pour ouvrir le deuxième siège d'Excellent Facets, au 10 Place Vendôme, rapprochant le stock des maisons pour une livraison le jour même. Il constitue une équipe locale francophone pour accompagner les relations existantes et nouvelles avec les maisons, renforçant la présence de l'entreprise au cœur du marché européen du luxe.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Amay s'installe à Paris pour ouvrir le deuxième siège d'Excellent Facets, au 10 place Vendôme : le stock se rapproche des maisons, avec une livraison possible le jour même. Il y constitue une équipe locale francophone pour accompagner les maisons partenaires, historiques comme nouvelles, renforçant l'ancrage de l'entreprise au cœur du marché européen du luxe.
+
+☐  **Our Story · \#14 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Excellent Facets opens a technology atelier in Jaipur, India, specialising in finely calibrated fancy shapes under 0.75 carat, cut-to-measure, custom cuts and round brilliants. It is one of…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Excellent Facets ouvre un atelier technologique à Jaipur, en Inde, spécialisé dans les formes fantaisie finement calibrées de moins de 0,75 carat, la taille sur mesure, les tailles personnalisées et les ronds brillants. C'est l'un des rares producteurs à maîtriser entièrement ces catégories en interne, offrant aux maisons la confidentialité et la discrétion qu'exigent leurs projets les plus sensibles.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Excellent Facets ouvre un atelier à Jaipur, en Inde, spécialisé dans les tailles fantaisie minutieusement calibrées, de moins de 0,75 carat, et dédié aux tailles sur plans (TSP). Rare producteur à tout maîtriser en interne, l'entreprise assure aux maisons la confidentialité qu'exigent leurs projets les plus sensibles.
+
+☐  **Our Story · \#15 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Tagline: THESE VALUES ARE OUR TEAM'S BEST FRIENDS.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Slogan : CES VALEURS SONT LES MEILLEURES AMIES DE NOTRE ÉQUIPE.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Slogan :CES VALEURS GUIDENT NOTRE EQUIPE AU QUOTIDIEN.
+
+☐  **Our Story · \#16 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Integrity is earned, and we will never stop working to achieve it. 26 years in this sector have been made possible by promises kept. It is simple: we do what we say we will do.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  L'intégrité se mérite, et nous ne cesserons jamais de travailler pour l'atteindre. 26 ans dans ce secteur ont été rendus possibles grâce aux promesses tenues. C'est simple, nous faisons ce que nous disons que nous allons faire.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  L'intégrité se mérite, et nous ne cesserons jamais d'œuvrer pour la mériter. Vingt-six ans dans ce métier, rendus possibles par des promesses tenues. C'est simple, nos actes suivent nos paroles.
+
+☐  **Our Story · \#17 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Our aim is to make our clients' lives simpler. We start from their needs and work backwards to ensure their experience is the best possible.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Notre objectif est de simplifier la vie de nos clients. Nous partons de leurs besoins et travaillons en sens inverse pour garantir que leur expérience soit la meilleure possible.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Notre objectif : simplifier la vie de nos clients. Nous écoutons vos besoins, auxquels nous adaptons chaque étape afin de vous garantir la meilleure expérience possible.
+
+☐  **Our Story · \#18 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): No stone leaves our facility without rigorous quality control. Ever. We have earned our near-zero rejection rate.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Aucune pierre ne quitte notre installation sans un contrôle qualité rigoureux. Jamais. Nous avons mérité notre taux de rejet presque nul.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Aucune pierre ne quitte nos ateliers sans un contrôle qualité rigoureux. Jamais. C'est ce qui nous vaut un taux de rejet quasi nul
+
+☐  **Our Story · \#19 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): We understand that you have priorities to meet, deadlines to keep and orders to fulfil. Work with us to never slow down and always guarantee quality. You can count on our unfailing delivery…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nous comprenons que vous avez des priorités à respecter, des délais à tenir et des commandes à honorer. Travaillez avec nous pour ne jamais ralentir et toujours garantir la qualité. Vous pouvez compter sur nos délais de livraison infaillibles et notre taux de rejet presque nul. Faites-le rapidement et faites-le de manière constante.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Vous avez des priorités, des délais et des commandes à honorer. Avec nous, vous gardez le rythme et la qualité reste inchangée : délais de livraison irréprochables, taux de rejet quasi nul. Rapidement, et sans jamais dévier.
+
+☐  **Our Story · \#20 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): The finer the detail, the finer the diamond*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Plus le détail est fin, plus le diamant est fin
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  La précision, condition de l'éclat :
+
+☐  **Our Story · \#21 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): When it comes to rare diamonds, the details make perfection. During our cutting process, we use precise angles within strict ranges to guarantee the optimal optical qualities of each stone.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  En ce qui concerne les diamants rares, les détails font la perfection. Lors de notre processus de taille, nous utilisons des angles précis dans des plages strictes pour garantir les qualités optiques optimales de chaque pierre.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Chez Excellent facets, la perfection est une affaire de détails. Angles, proportions, symétrie : tout est pensé et calculé pour que la lumière se répartisse idéalement dans la pierre afin d'en révèler tout son éclat.
+
+☐  **Our Story · \#22 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): At Excellent Facets, we recognise that sustainability is non-negotiable. Our commitment to sustainability influences every aspect of our business.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Chez Excellent Facets, nous reconnaissons que la durabilité n'est pas négociable. Notre engagement en faveur du développement durable influe sur tous les aspects de notre activité.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Chez Excellent Facets, la durabilité n'est pas négociable. Notre engagement en la matière influe chaque aspect de notre activité
+
+☐  **Our Story · \#23 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): We are proud to be certified carbon neutral since 2023, with 2024 certified and 2025 in progress.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nous sommes fiers d'être certifiés neutres en carbone depuis 2023, avec 2024 certifié et 2025 en cours.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nous sommes fiers d'être certifiés neutres en carbone depuis 2023 : l'exercice 2024 est certifié à son tour, et 2025 est en cours de certification.
+
+☐  **Our Story · \#24 — ELIMINAR este párrafo**
+
+*Para localizarlo (versión en inglés): Our responsible sourcing practices ensure transparency, with all diamonds accompanied by their disclosed mine of origin and uploaded to iTraceiT, a tamper-proof traceability platform based o…*
+
+**TEXTO A ELIMINAR (francés):**  Nos pratiques d'approvisionnement responsables garantissent la transparence, avec tous les diamants étant accompagnés de leur mine d'origine divulguée et téléchargée sur iTraceiT, une plate-forme de traçabilité infalsifiable basée sur la technologie blockchain.
+
+*↳ Eliminar este párrafo por completo.*
+
+☐  **Our Story · \#25 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): In addition, our India-based manufacturing site undergoes regular social compliance audits.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  De plus, notre site de fabrication basé en Inde fait l'objet d'audits réguliers en matière de conformité sociale.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nos pratiques d'approvisionnement responsable garantissent une transparence totale : chaque diamant est accompagné de sa mine d'origine, déclarée et enregistrée sur iTraceiT, plateforme de traçabilité infalsifiable fondée sur la blockchain.
+
+☐  **Our Story · \#26 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): As pioneers of ethical practices, we were among the first companies in North America to obtain Responsible Jewelry Council certification. We are also active members of the Watch & Jewelry In…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  En tant que pionniers des pratiques éthiques, nous avons été parmi les premières entreprises d'Amérique du Nord à obtenir la certification du Responsible Jewelry Council. De plus, nous participons activement en tant que membres de la Watch & Jewelry Initiative 2030, qui s'engage à façonner l'avenir de notre industrie par le biais de pratiques durables.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Notre site de fabrication en Inde fait par ailleurs l'objet d'audits réguliers de conformité sociale. Pionniers des pratiques éthiques, nous avons figuré parmi les premières entreprises d'Amérique du Nord certifiées par le Responsible Jewellery Council. Nous sommes également membres actifs de la Watch & Jewellery Initiative 2030, qui œuvre à bâtir l'avenir de notre industrie par des pratiques durables.
+
+##   **Our Diamonds (overview)**   *excellentfacets.com/fr/diamonds*  
+
+☐  **Our Diamonds (overview) · \#1 — REEMPLAZAR (texto reelaborado)**
+
+*(Sin referencia en inglés — localizar por el texto francés actual de abajo)*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Ronds et brillants, les diamants de mêlé blanc subliment une pierre centrale et apportent un éclat discret à toute monture. Sur un anneau, un halo ou un pavé serré, ces pierres finement taillées offrent une lumière précise et régulière jusque dans les moindres détails d'une création.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Ronds et brillants, les diamants de mêlée blanc rehaussent une pierre centrale et illuminent discrètement chaque monture. En anneau, halo ou en pavé serré, la finesse de leur taille met en valeur chaque détail de vos créations.
+
+☐  **Our Diamonds (overview) · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Cut to uniform dimensions, calibrated fancy shapes bring controlled geometry and perfect continuity to contemporary jewellery. Whether a channel setting or a band, each stone is matched to i…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Taillées à dimensions uniformes, les tailles fantaisie calibrées apportent une géométrie maîtrisée et une continuité parfaite à la joaillerie contemporaine. Qu'il s'agisse d'un serti rail ou d'un anneau, chaque pierre est assortie à sa voisine pour une harmonie absolue et un alignement exact.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Taillées à dimensions uniformes, les tailles fantaisie calibrées apportent une géométrie maîtrisée et une parfaite continuité à la joaillerie contemporaine. Serti rail ou anneau, chaque pierre s'accorde à sa voisine pour une harmonie absolue et un alignement exact.
+
+☐  **Our Diamonds (overview) · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Cut to your exact specifications, cut-to-measure diamonds go beyond standard sizes to serve the most demanding creations. Every angle and every curve of the setting receives a perfect fit, t…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Taillés selon vos spécifications exactes, les diamants sur mesure dépassent les tailles standard pour servir les créations les plus exigeantes. Chaque angle et chaque courbe de la monture reçoit un ajustement parfait, au millimètre près.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Taillés selon vos spécifications exactes, nos diamants sur mesure dépassent le cadre des formats standard, afin de répondre aux créations les plus exigeantes : chaque angle de la pierre épouse les courbures de la monture, avec une précision millimétrée.
+
+☐  **Our Diamonds (overview) · \#4 — REEMPLAZAR (texto reelaborado)**
+
+*(Sin referencia en inglés — localizar por el texto francés actual de abajo)*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Les diamants de taille huit-huit possèdent un caractère intemporel, avec huit facettes sur la couronne et huit sur la culasse et un éclat net et contrasté. Leur clarté et leur simplicité raffinée en font le choix naturel des lunettes de montre et du micro-pavé le plus fin.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Le diamant taillé en huit-huit dispose d'un caractère intemporel : huit facettes en couronne, huit en culasse, un éclat net et contrasté. Sa sobriété raffinée en fait le choix idéal des lunettes de montre et des micro-pavés les plus délicats.
+
+☐  **Our Diamonds (overview) · \#5 — REEMPLAZAR (texto reelaborado)**
+
+*(Sin referencia en inglés — localizar por el texto francés actual de abajo)*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Minutieusement triés par teinte, nos diamants de couleur mêlés apportent un caractère maîtrisé aux créations sur mesure. Déclinés sur un spectre régulier, ils permettent dégradés mesurés, halos affirmés et pavés richement composés.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Soigneusement triés par teinte, nos diamants de couleurs pavage subliment les créations les plus osées. ils permettent des dégradés progressifs, des halos affirmés ainsi que des pavés richement composés.
+
+☐  **Our Diamonds (overview) · \#6 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Our certified colour diamonds represent the highest degree of natural colour rarity. Independently graded to verify origin and saturation, each stone stands as a singular, assertive centrepi…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nos diamants de couleur certifiés représentent le plus haut degré de rareté de la couleur naturelle. Gradés indépendamment pour vérifier origine et saturation, chaque pierre s'impose comme une pièce maîtresse singulière et affirmée.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nos diamants de couleurs certifiés incarnent la rareté: Des couleurs et saturations parmi les plus recherchée, chaque pierre s'impose comme une pièce maitresse, singulière et affirmée.
+
+##   **Round Mêlée**   *excellentfacets.com/fr/white-melee-diamonds*  
+
+☐  **Round Mêlée · \#1 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Serving the most quality-demanding jewellery and watch maisons, Excellent Facets specialises in white, natural, finely cut round brilliant diamonds, in a size range from 500 to 5 stones per…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Au service des maisons de joaillerie et d'horlogerie les plus exigeantes en matière de qualité, Excellent Facets est spécialisée dans les diamants ronds brillants blancs, naturels et finement taillés, dans une gamme de tailles allant de 500 à 5 pierres par carat (0,60 mm à 3,80 mm). Grâce à un contrôle qualité strict, chaque diamant est gradé individuellement sous un microscope spécialisé, le Sortoscope Nossigem.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Au service des maisons de joaillerie et d'horlogerie les plus exigeantes, Excellent Facets est spécialisée dans le pavage de diamants rond brillants blanc, naturels et finement taillés, dans une gamme de tailles allant de 500 à 5 pierres par carat (0,60 mm à 3,80 mm). Grâce à un contrôle qualité strict, chaque diamant est gradé individuellement sous un microscope spécialisé, le Sortoscope Nossigem.
+
+☐  **Round Mêlée · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Our inventory is separated in 0.05 mm increments to meet the rigorous needs of our demanding clients, measured on the Lexus Helium scanner and re-checked with a millimetre gauge to guarantee…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Notre inventaire est séparé par incréments de 0,05 mm pour répondre aux besoins rigoureux de nos clients exigeants, mesuré sur le scanner Lexus Helium et revérifié au calibre millimétré afin de garantir l'exactitude du diamètre. Nous personnalisons notre gradation pour dépasser les attentes de nos clients et pouvons fournir des assortiments plus sélectifs selon les besoins.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Notre stock est trié par incréments de 0,05 mm pour répondre aux exigences les plus strictes : chaque pierre est mesurée sur le scanner Helium Lexus, puis revérifiée au calibre millimétré pour garantir l'exactitude du diamètre. Nous adaptons notre gradation aux attentes spécifiques de chaque client et pouvons fournir des assortiments plus sélectifs sur demande.
+
+☐  **Round Mêlée · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Excellent Facets Quality Standards (band)*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Les Normes Qualité d'Excellent Facets (bandeau)
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Les Normes Qualité d'Excellent Facets (bandeau) Notre inventaire de mêlé blanc répond aux normes suivantes
+
+☐  **Round Mêlée · \#4 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Through meticulous calibration and kitting, each lot is prepared to the maison's exact specifications. Diamonds are matched and organised according to the atelier's requirements, often group…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Grâce à un calibrage et une constitution des lots méticuleux, chaque lot est préparé selon les spécifications exactes de la maison. Les diamants sont assortis et organisés selon les exigences de l'atelier, souvent regroupés par pièce, de sorte que chaque assortiment arrive prêt à sertir, sans nouveau tri à l'établi, ni diamètres non souhaités ou pierres excédentaires achetées.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Grâce à un calibrage et une constitution des lots méticuleux, chaque lot est préparé selon les spécifications exactes de la maison. Les diamants sont assortis et organisés selon les exigences de l'atelier : Chaque assortiment arrive prêt à être serti, sans pierre excédentaire ni besoin de retrier le lot.
+
+☐  **Round Mêlée · \#5 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): The mine of origin must be declared; accepted mines are located in countries such as Botswana, Canada, South Africa, Namibia, Australia and Lesotho. Recorded on iTraceiT, an independent bloc…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  La mine d'origine doit être déclarée ; les mines acceptées sont situées dans des pays tels que le Botswana, le Canada, l'Afrique du Sud, la Namibie, l'Australie et le Lesotho. Enregistrée sur iTraceiT, une solution de traçabilité indépendante fondée sur la blockchain.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  La mine d'origine doit être déclarée. Les mines acceptées se situent dans des pays tels que le Botswana, le Canada, l'Afrique du Sud, la Namibie, l'Australie et le Lesotho. Chaque origine est enregistrée sur iTraceiT, une solution de traçabilité indépendante fondée sur la blockchain.
+
+##   **Calibrated Fancy Shapes**   *excellentfacets.com/fr/calibrated-fancy-shapes*  
+
+☐  **Calibrated Fancy Shapes · \#1 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): On certain creations, technical precision is the condition of beauty. When each stone must fit exactly into the next, with no gap or break, and the eye must perceive only a single continuous…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Sur certaines créations, la précision technique est la condition de la beauté. Lorsque chaque pierre doit s'inscrire exactement dans la suivante, sans interstice ni rupture, et que l'œil ne doit percevoir qu'une seule composition continue, Excellent Facets produit une gamme complète de tailles fantaisie calibrées, pensée pour les maisons les plus exigeantes. Paires assorties, agencements calibrés, tolérances aussi fines que \+0,00 mm / \-0,02 mm : la régularité dimensionnelle est tenue d'un bout à l'autre de la monture, pour une lecture visuelle sans rupture, où aucune pierre ne se distingue de ses voisines.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Sur certaines créations, la précision technique conditionne la beauté. Chaque pierre doit s'ajuster à sa voisine, afin de ne former qu'une seule et même composition. Excellent facets répond avec une gamme de tailles fantaisie calibrées, pensée pour les maisons les plus exigeantes. Matching pair, harmonisation, layout … avec des tolérances dimensionnelles tenues à \+0,00 / \-0,02 mm.
+
+☐  **Calibrated Fancy Shapes · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Because production is carried out in our own atelier, we meet both long-term commitments on recurring programmes and short lead times on urgent requests. Every fancy shape is produced with f…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Parce que la production est réalisée dans notre propre atelier, nous tenons à la fois les engagements de long terme sur les programmes récurrents et les délais courts sur les demandes urgentes. Chaque forme fantaisie est produite avec une traçabilité complète, et avec la régularité qui permet à une maison de bâtir une collection dans la durée.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Maîtrisant la production dans notre propre atelier, nous honorons aussi bien les engagements long terme des programmes récurrents, que les délais plus serrés des commandes urgentes. Chaque forme fantaisie est produite avec une traçabilité complète et une régularité qui permet à une maison d'inscrire ses collections dans la durée.
+
+☐  **Calibrated Fancy Shapes · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): The mine of origin must be declared; accepted mines are located in countries such as Botswana, Canada, South Africa, Namibia, Australia and Lesotho. Recorded on iTraceiT, an independent bloc…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  La mine d'origine doit être déclarée ; les mines acceptées sont situées dans des pays tels que le Botswana, le Canada, l'Afrique du Sud, la Namibie, l'Australie et le Lesotho. Enregistrée sur iTraceiT, une solution de traçabilité indépendante fondée sur la blockchain.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  La mine d'origine doit être déclarée. Les mines acceptées se situent dans des pays tels que le Botswana, le Canada, l'Afrique du Sud, la Namibie, l'Australie et le Lesotho. Chaque origine est enregistrée sur iTraceiT, une solution de traçabilité indépendante fondée sur la blockchain.
+
+##   **Cut-To-Measure**   *excellentfacets.com/fr/cut-to-measure-fancy-shape-diamonds*  
+
+☐  **Cut-To-Measure · \#1 — REEMPLAZAR (texto reelaborado)**
+
+*(Sin referencia en inglés — localizar por el texto francés actual de abajo)*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Quand l'imagination du créateur précède la pierre. Pour ces projets, Excellent Facets taille chaque pierre selon les spécifications exactes de la maison, à partir de vos fichiers CAO ou de vos dessins techniques, avec des tolérances aussi fines que \+0,00 mm / \-0,02 mm. La pierre finie s'inscrit ainsi parfaitement dans les montures les plus complexes, qu'il s'agisse d'un pavé, d'un cadran de montre ou d'une pièce de haute joaillerie.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Quand l'imagination du créateur précède la pierre. Sur ces projets, Excellent Facets taille chaque pierre d'après vos fichiers CAO ou vos dessins techniques, selon vos spécifications exactes et des tolérances tenues à \+0,00 / \-0,02 mm. La pierre finie épouse ainsi les montures les plus complexes, du pavé au cadran de montre jusqu'à la pièce de haute joaillerie.
+
+☐  **Cut-To-Measure · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Because each cut is recorded digitally, the same stone can be reordered years later and reproduced identically, from the first prototype to series production.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Parce que chaque taille est enregistrée numériquement, une même pierre peut être commandée à nouveau des années plus tard et reproduite à l'identique, du premier prototype à la production en série.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Parce que chaque taille est enregistrée numériquement, une même pierre peut être recommandée des années plus tard et reproduite à l'identique, du prototype à la production en série.
+
+☐  **Cut-To-Measure · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Starting from a maison's brief or sketches, our team can propose and collaboratively refine optimised diamond cuts, working on their proportions and the way they capture light before product…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  À partir du cahier des charges ou des croquis d'une maison, notre équipe peut proposer et affiner en collaboration des tailles de diamant optimisées, en travaillant leurs proportions et leur manière de capter la lumière avant même le début de la production.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  À partir du cahier des charges ou de croquis, notre équipe conçoit et affine des tailles de diamant optimisées, en travaillant leurs proportions et leur brillance , grâce à des logiciels 3D performants.
+
+☐  **Cut-To-Measure · \#4 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): A signature can become a stone. We start from each maison's own motifs and translate a symbol into a diamond cut designed to capture and return light brilliantly, its proportions and facets…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Une signature peut devenir une pierre. Nous partons des motifs propres à chaque maison et traduisons un symbole en une taille de diamant pensée pour capter et restituer la lumière avec éclat, ses proportions et ses facettes façonnées pour révéler la plus pure des brillances.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Une signature peut devenir une pierre. À partir des motifs propres à chaque maison, nous traduisons un symbole en une taille de diamant conçue avec des proportions et des facettes façonnées pour en révéler toute la brillance.
+
+☐  **Cut-To-Measure · \#5 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): All designs remain secure and are cut in our Jaipur atelier, currently undergoing Responsible Jewellery Council certification. Controlled access, anonymised and coded client identities, and…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Tous les dessins restent sécurisés et sont taillés dans notre atelier de Jaipur, actuellement en cours de certification Responsible Jewellery Council. Un accès contrôlé, des identités clients anonymisées et codées, et une documentation rigoureuse protègent chaque projet. Chaque pierre est inspectée au microscope et vérifiée sur le scanner Lexus Helium, et contrôlée à l'aide de cinq technologies internes pour garantir notre promesse 100 % naturel, sans synthétique.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Tous les dessins demeurent confidentiels et sont taillés dans notre atelier de Jaipur, Accès contrôlé, identités clients anonymisées et codées, documentation rigoureuse : chaque projet est protégé de bout en bout. Chaque pierre est inspectée au microscope, puis mesurée au scanner Helium Lexus. Enfin, nous disposons de cinq technologies internes pour contrôler la naturalité des pierres, et garantir notre promesse : 100 % naturel, sans diamant synthétique.
+
+*↳ Ver también Parte 2: eliminar la frase de certificación RJC (Nathan ya la ha quitado en el texto francés de arriba).*
+
+☐  **Cut-To-Measure · \#6 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): • Cut Tolerances: As strict as \+0.00 mm / \-0.02 mm.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  •  Tolérances de Taille : Aussi strictes que \+0,00 mm / \-0,02 mm.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  •  Tolérances Dimensionnelle : Aussi strictes que \+0,00 mm / \-0,02 mm.
+
+##   **Single-Cut (8/8)**   *excellentfacets.com/fr/single-cut-diamonds*  
+
+☐  **Single-Cut (8/8) · \#1 — AÑADIR este texto nuevo**
+
+*Para localizarlo (versión en inglés): Bloque compartido "100% Synthetic Free" \+ "Our Affiliations" — ver página 13\.*
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Les Normes Qualité d'Excellent Facets: Taille Conforme: Dimensions, taille de table et orientation des facettes. Tolérances de Taille: Aussi strictes que \+0,00 mm / \-0,02 mm. Précision Vérifiée: Dimensions vérifiées sur le scanner Lexus Helium. Sécurité IP: Accès contrôlé aux dessins, identités des clients anonymisées et codées.
+
+☐  **Single-Cut (8/8) · \#2 — REEMPLAZAR (texto reelaborado)**
+
+*(Sin referencia en inglés — localizar por el texto francés actual de abajo)*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  La taille huit-huit est l'une des plus anciennes de l'artisanat diamantaire, et demeure l'une des plus discrètement belles. Ses huit facettes sur la couronne et huit sur la culasse restituent la lumière en éclats nets et maîtrisés, loin du scintillement plus foisonnant d'une taille brillant moderne. Cette retenue est précisément ce qui lui vaut sa place en haute horlogerie : sur un cadran pavé, chaque pierre conserve son propre éclat sans jamais se fondre dans ses voisines.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  La taille huit-huit compte parmi les plus anciennes tailles de l'art diamantaire, et demeure de nos jours l'une des plus élégantes. Façonnés de 8 facettes en couronnes et 8 facettes en culasse, elle apporte un éclat net, loin de la brillance des tailles modernes. Cette sobriété est très appréciée en horlogerie, notamment sur un cadran pavé ou chaque pierre conserve son propre éclat.
+
+☐  **Single-Cut (8/8) · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): We cut these stones traceably, below 1.80 mm, each recorded in the iTraceiT system with its mine of origin, so that a cut rich with several centuries of history comes with a fully modern rec…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nous taillons ces pierres de manière traçable, en dessous de 1,80 mm, chacune enregistrée dans le système iTraceiT avec sa mine d'origine, afin qu'une taille riche de plusieurs siècles d'histoire s'accompagne d'un enregistrement pleinement moderne de sa provenance.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nous taillons ces pierres de façon traçable, ainsi en dessous de 1,80 mm, chacune de ces pierres est consigné dans iTraceiT avec sa mine d'origine : une taille vieille de plusieurs siècles s'accompagne ainsi d'un suivi de provenance résolument moderne.
+
+##   **Fancy Color Melee**   *excellentfacets.com/fr/fancy-color-melee-diamonds*  
+
+☐  **Fancy Color Melee · \#1 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Our fancy colour melee collection covers the full range of intensities: Fancy, Intense, Vivid and Deep, in pink and yellow, from 0.60 mm to 2.50 mm. It is the raw material of the most ambiti…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Notre collection de diamants de couleur mêlés couvre l'ensemble des intensités : Fancy, Intense, Vivid et Deep, en rose et en jaune, de 0,60 mm à 2,50 mm. C'est la matière première des pièces uniques et des programmes de haute joaillerie les plus ambitieux des maisons que nous servons.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Notre collection de diamants de couleur mêlée englobe les intensités les plus rares : Fancy, Intense, Vivid et Deep. Déclinés du rose au jaune, avec des dimensions allant de 0,60 mm à 2,50 mm. C'est la matière première des pièces uniques et des programmes de haute joaillerie les plus ambitieux des maisons que nous accompagnons.
+
+☐  **Fancy Color Melee · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Alongside these signature colours, we compose more confidential selections of rare hues: blue, blue-grey, chocolate brown, yellowish orange, olive green, cognac, and many others. We keep onl…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  À côté de ces couleurs phares, nous composons des sélections plus confidentielles de teintes rares : bleu, bleu gris, brun chocolat, orange jaunâtre, vert olive, cognac, et bien d'autres. Nous ne gardons que les pierres dont la couleur s'impose d'elle-même, celles que l'on remarque avant tout le reste.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Au-delà de ces couleurs phares, nous réunissons des sélections plus confidentielles de teintes rares : bleu, bleu gris, brun chocolat, jaune oranger, vert olive, cognac … parmi d'autres. Nous ne retenons que les pierres dont la couleur s'impose au premier regard.
+
+☐  **Fancy Color Melee · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Each lot is sorted to strict specifications of cut and colour harmony, with each stone inspected individually and calibrated in 0.05 mm increments. All stones undergo rigorous inspection gua…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Chaque lot est trié selon des spécifications strictes de taille et d'harmonie colorimétrique, chaque pierre étant inspectée individuellement et calibrée par incréments de 0,05 mm. Toutes les pierres font l'objet d'un contrôle rigoureux garantissant qu'elles sont 100 % naturelles et sans synthétique, et sont préparées par un calibrage et une constitution des lots méticuleux, sans diamètres non souhaités ni pierres excédentaires achetées.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Chaque lot est trié selon des critères stricts de taille et d'harmonie colorimétrique, chaque pierre étant inspectée individuellement et calibrée par incréments de 0,05 mm. Toutes font l'objet d'un contrôle rigoureux garantissant à 100% la naturalité des pierres, Aucun diamant synthétique ne se glisse dans nos lots.
+
+##   **Fancy Color Certified**   *excellentfacets.com/fr/fancy-color-certified-diamonds*  
+
+☐  **Fancy Color Certified · \#1 — AÑADIR este texto nuevo**
+
+*Para localizarlo (versión en inglés): Bloque compartido "100% Synthetic Free" \+ "Our Affiliations" — ver página 13\.*
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Notre qualité   ¶   Chaque lot est trié selon des spécifications strictes de taille et d'harmonie colorimétrique, chaque pierre étant inspectée individuellement et calibrée par incréments de 0,05 mm. Toutes les pierres font l'objet d'un contrôle rigoureux garantissant qu'elles sont 100 % naturelles et sans synthétique, et sont préparées par un calibrage et une constitution des lots méticuleux, sans diamètres non souhaités ni pierres excédentaires achetées.
+
+☐  **Fancy Color Certified · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Our certified colour diamond collection brings together some of the most extraordinary natural diamonds in the world, individually selected for their rarity, provenance and striking beauty.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Notre collection de diamants de couleur certifiés réunit certains des diamants naturels les plus extraordinaires au monde, sélectionnés individuellement pour leur rareté, leur provenance et leur beauté saisissante. Nous proposons plus de 120 diamants roses certifiés Argyle et GIA, de 0,15 à 1,01 carat, dans de rares teintes Fancy Vivid Pink et de très hautes puretés (VVS), issus pour l'essentiel de la légendaire mine Argyle d'Australie, aujourd'hui fermée.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Notre collection de diamants de couleur certifiés compte parmi les plus extraordinaires diamants naturels au monde. Sélectionnés exclusivement pour leur rareté, leur provenance et leur beauté. Plus de 120 diamants roses certifiés Argyle et GIA, de 0,15 à 1,01 carat, dont certains gradés Fancy Vivid Pink / VVS, et provenant pour la grande majorité de la mine d'Argyle, en Australie, fermée depuis 2020\.
+
+☐  **Fancy Color Certified · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Beyond pink diamonds, we offer a varied range of colour diamonds. Notable stones have included a 3-carat Fancy Vivid Blue, a 7-carat Fancy Intense Pink and a rare 2-carat Fancy Reddish-Orang…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Au-delà des diamants roses, nous proposons un éventail varié de diamants de couleur. Des pierres notables ont inclus un Fancy Vivid Blue de 3 carats, un Fancy Intense Pink de 7 carats et un rare Fancy Reddish-Orange de 2 carats en taille ronde brillant, le genre de pierre qu'un collectionneur peut attendre des années.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Au-delà des diamants roses, nous proposons un large éventail de diamants de couleur. Parmi les pierres marquantes passées entre nos mains : un Fancy Vivid Blue de 3 carats, un Fancy Intense Pink de 7 carats, ou encore un rare Fancy Reddish Orange de 2 carats taille brillante. Des pierres qu'un collectionneur ne rencontre une fois dans sa vie.
+
+☐  **Fancy Color Certified · \#4 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): • Priority selection from legendary mines such as the Argyle mine in Australia, now closed.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  •  Sélection prioritaire dans des mines légendaires telles que la mine Argyle d'Australie, aujourd'hui fermée.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  •  Un accès privilégié aux mines les plus réputées, à commencer par Argyle, en Australie, aujourd'hui fermée.
+
+☐  **Fancy Color Certified · \#5 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): • Every stone is checked to guarantee our 100% natural, synthetic-free promise.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  •  Chaque pierre est contrôlée pour garantir notre promesse 100 % naturel, sans synthétique.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  •  Chaque pierre est contrôlée pour garantir notre promesse : 100 % naturel, sans diamant synthétique.
+
+☐  **Fancy Color Certified · \#6 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): • Expertly cut to balance colour saturation, brilliance and shape.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  •  Expertement taillés pour équilibrer saturation de couleur, brillance et forme.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  •  Une taille maîtrisée, offrant un équilibre à la pierre, entre saturation, brillance et forme.
+
+☐  **Fancy Color Certified · \#7 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): • Secure viewings can be arranged on request.*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  •  Des présentations sécurisées peuvent être organisées sur demande.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  •  Nous organisons des présentations sécurisées sur demande.
+
+☐  **Fancy Color Certified · \#8 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): We specialise in exceptional certified colour diamonds of remarkable provenance. Over the years, some of the rarest stones in the trade have been entrusted to us, including the Diavik Foxfir…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nous sommes spécialisés dans les diamants de couleur certifiés d'exception et de provenance remarquable. Au fil des années, certaines des pierres les plus rares du commerce nous ont été confiées, parmi lesquelles le Diavik Foxfire, le plus grand diamant brut de qualité gemme jamais découvert en Amérique du Nord à l'époque, que nous avons exposé sous sa forme brute de 187,7 carats à la Smithsonian Institution, aux côtés du diamant Hope.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nous sommes spécialisés dans les diamants de couleur certifiés d'exception, à la provenance remarquable. Nous avons acquis certaines des pierres les plus rares du marché au fil des années, dont le Diavik Foxfire, alors le plus grand diamant brut de qualité gemme découvert en Amérique du Nord. Nous l'avons exposé sous sa forme brute de 187,7 carats, au « Smithsonian Institution », aux côtés du diamant Hope.
+
+##   **Sustainability**   *excellentfacets.com/fr/sustainability*  
+
+☐  **Sustainability · \#1 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Our operational practices use advanced technologies, such as in-house machines for testing synthetic diamonds and iTraceiT, a blockchain-based traceability solution. This improves the qualit…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nos pratiques opérationnelles utilisent des technologies avancées, telles que des machines internes pour tester les diamants synthétiques et iTraceiT, une solution de traçabilité basée sur la blockchain. Cela améliore la qualité et l'intégrité de nos processus d'approvisionnement.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nous nous appuyons sur des technologies avancées, telles que des équipements internes de détection de diamants synthétiques. Ainsi que, iTraceiT, une solution de traçabilité fondée sur la blockchain. Elles garantissent la qualité et l'intégrité de notre chaîne d'approvisionnement.
+
+☐  **Sustainability · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): We are committed to equality and diversity, with 100% of the staff in our New York office identifying as under-represented minorities. Our equal-opportunity employer policy underlines our de…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nous nous engageons pour l'égalité et la diversité, avec 100 % du personnel de notre bureau de New York s'identifiant comme des minorités sous-représentées. Notre politique d'employeur offrant l'égalité des chances souligne notre dévouement à la justice sociale et à l'équité sur le lieu de travail.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nous nous engageons pour l'égalité et la diversité, avec 100 % du personnel de notre bureau de New York s'identifiant comme des minorités sous-représentées. Notre politique d'égalité des chances témoigne de notre engagement en faveur de la justice sociale et de l'équité au travail.
+
+☐  **Sustainability · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): We prioritise suppliers and subcontractors who offer above-market wages and good working conditions, even where this means higher costs. This is particularly crucial with vendors in India. I…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nous priorisons les fournisseurs et les sous-traitants qui offrent des salaires supérieurs au marché et de bonnes conditions de travail, même si cela implique des coûts plus élevés. Cela est particulièrement crucial avec les vendeurs en Inde. De plus, nous soutenons des organisations telles que Diamonds Do Good et la Share & Care Foundation, qui autonomisent les individus dans les communautés économiquement défavorisées et renforcent l'industrie du diamant naturel.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nous privilégions les fournisseurs et sous-traitants qui versent des salaires supérieurs au marché et offrent de bonnes conditions de travail, même lorsque cela représente un coût plus élevé. Ce critère est déterminant pour nos partenaires en Inde. Nous soutenons par ailleurs des organisations comme Diamonds Do Good et la Share & Care Foundation, qui accompagnent les populations de communautés défavorisées et contribuent à renforcer la filière du diamant naturel
+
+☐  **Sustainability · \#4 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): 15\. Life on Land (heading)*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  15\. Vie Terrestre
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  15\. Vie sur terre
+
+☐  **Sustainability · \#5 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Our green growth initiative encourages tree planting to sequester carbon dioxide and strengthen biodiversity. We offset Scope 2 emissions with Terrapass Green-e certified renewable energy ce…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Notre initiative de croissance verte encourage la plantation d'arbres pour séquestrer le dioxyde de carbone et renforcer la biodiversité. Nous compensons les émissions de portée 2 avec les certificats d'énergie renouvelable certifiés Green e de Terrapass, soutenant les projets locaux de reforestation et d'énergie renouvelable. Nous fournissons également des appareils et des options distinctes pour notre personnel végétarien et végétalien.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Notre initiative de croissance verte encourage la plantation d'arbres, pour capter le dioxyde de carbone et renforcer la biodiversité. Nous compensons nos émissions de scope 2 par des certificats d'énergie renouvelable Green-e de Terrapass, qui financent des projets locaux de reforestation et d'énergie renouvelable. Nous mettons également à disposition de notre personnel végétarien et végétalien des menus dédiés.
+
+##   **Responsible Sourcing**   *excellentfacets.com/fr/responsible-sourcing*  
+
+☐  **Responsible Sourcing · \#1 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): We favour the shortest possible supply chain. First, direct purchasing at mining-company tenders. We are approved clients of Okavango Diamond Company, De Beers Auctions, Rio Tinto, Petra, Ge…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nous privilégions la chaîne d'approvisionnement la plus courte possible. En premier lieu, l'achat direct lors des tenders des sociétés minières. Nous sommes clients agréés d'Okavango Diamond Company, De Beers Auctions, Rio Tinto, Petra, Gem Diamonds, Lucara, Mountain Province, KAO et Burgundy, avec une inscription distincte aux tenders Bonas à Anvers. Lorsque l'achat direct lors d'un tender minier n'est pas possible, nous achetons auprès des sightholders DTC de De Beers ou de partenaires disposant d'un approvisionnement en brut dédié issu d'une société minière. À défaut, nous nous approvisionnons auprès de sociétés de fabrication certifiées RJC, en privilégiant toujours la chaîne la plus courte.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nous privilégions la chaîne d'approvisionnement la plus courte possible. En premier lieu, l'achat direct lors des tenders des sociétés minières. Nous sommes clients agréés d'Okavango Diamond Company, De Beers Auctions, Rio Tinto, Petra, Gem Diamonds, Lucara, Mountain Province, KAO et Burgundy, avec une inscription distincte aux tenders Bonas à Anvers. Lorsque l'achat direct lors d'un tender minier n'est pas possible, nous nous approvisionnons auprès de sightholders De Beers ou de partenaires en lien direct avec une société minière. À défaut, nous faisons appel à des manufactures certifiés RJC, en privilégiant toujours la chaîne la plus courte.
+
+☐  **Responsible Sourcing · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Purchase of polished (heading)*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Achat de poli
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Achat de Diamant taillé
+
+☐  **Responsible Sourcing · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Polished diamonds are exclusively sourced from De Beers DTC sightholders or trusted RJC-certified manufacturers, audited to maison standards, with mine-of-origin details shared with our clie…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Les diamants polis sont exclusivement sourcés auprès des sightholders DTC de De Beers ou de fabricants de confiance certifiés RJC, audités selon les normes des maisons, avec les détails de la mine d'origine partagés avec nos clients.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nos diamants taillés proviennent exclusivement de sightholders DTC De Beers ou de fabricants de confiance certifiés RJC, audités selon les normes des maisons. L'origine minière de chaque pierre est communiquée à nos clients.
+
+##   **Socially Compliant Manufacturing**   *excellentfacets.com/fr/socially-compliant-manufacturing*  
+
+☐  **Socially Compliant Manufacturing · \#1 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Every Excellent Facets diamond is cut and polished in India, across two ateliers with complementary roles. In Jaipur, an atelier we own and operate ourselves, we concentrate fancy shapes, cu…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Chaque diamant Excellent Facets est taillé et poli en Inde, dans deux ateliers aux vocations complémentaires. À Jaipur, atelier que nous détenons et exploitons en propre, nous concentrons les tailles fantaisie, la taille sur mesure, les commandes spéciales et les ronds brillants des projets où la confidentialité est aussi déterminante que la précision. Le mêlé rond brillant dont les volumes excèdent la capacité de Jaipur est taillé à grande échelle à Visakhapatnam, dans l'Andhra Pradesh.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Chaque diamant chez Excellent Facets est taillé et poli en Inde, dans deux ateliers aux vocations complémentaires. Au sein de notre propre atelier à Jaipur, nous concentrons les projets de tailles fantaisie, taille sur mesure, ainsi que les commandes spéciales. La confidentialité compte autant que la précision. Concernant les commandes de pavage rond, dont les volumes excèdent la capacité de Jaipur, elles seront taillées à grande échelle à Visakhapatnam, dans l'Andhra Pradesh.
+
+☐  **Socially Compliant Manufacturing · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Jaipur is our own atelier, designed and built for Excellent Facets and wholly owned: it is there, and nowhere else, that our most sensitive work is carried out. We cut fancy shapes, cut-to-m…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Jaipur est notre atelier en propre, conçu et construit pour Excellent Facets et détenu en pleine propriété : c'est là, et nulle part ailleurs, que s'effectue notre travail le plus sensible. Nous y taillons les formes fantaisie, les pierres taillées sur mesure, les commandes spéciales et les ronds brillants à la taille uniforme, sous un toit que nous maîtrisons de bout en bout, sans qu'aucun intervenant extérieur n'ait accès aux créations d'une maison. C'est un atelier dédié, conçu sur mesure, aux processus pensés pour la confidentialité, doté d'une précision technologique de pointe et d'un accès aux dessins strictement contrôlé, avec des identités clients anonymisées et codées. Il est actuellement en cours de certification Responsible Jewellery Council.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Notre atelier à Jaipur appartient pleinement à Excellent Facets, il a été conçu pour réaliser les projets les plus méticuleux. Taille fantaisie, TSP, commandes spéciales, ronds brillants uniforme : Toutes nos pierres sont taillées sous un toit que nous maîtrisons de bout en bout et sans qu'aucun intervenant extérieur ne puisse avoir accès aux plans sensibles des maisons. L'atelier a été pensé pour la confidentialité : procédés dédiés, technologies de haute précision, accès aux dessins strictement contrôlé, identités clients anonymisées et codées.
+
+##   **100% Synthetic Free**   *excellentfacets.com/fr/synthetic-free*  
+
+☐  **100% Synthetic Free · \#1 — AÑADIR este texto nuevo**
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  100% Diamants naturels, tolérance zéro pierres synthétiques
+
+☐  **100% Synthetic Free · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Our clients trust us to ensure that our pipeline remains 100% free of lab-grown diamonds. To do this, we invest in the latest technologies to detect synthetic and artificially treated diamon…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nos clients nous font confiance pour s'assurer que notre filière reste exempte à 100 % de diamants fabriqués en laboratoire. Pour ce faire, nous investissons dans les technologies les plus récentes afin de détecter les diamants synthétiques et traités artificiellement. À leur arrivée, tous les diamants des cargaisons entrantes sont soumis à un contrôle exclusif réalisé en interne à l'aide des machines suivantes :
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nos clients nous font confiance pour garantir une filière totalement exempte de diamants de synthèse. Nous investissons à cette fin dans les technologies les plus récentes de détection des diamants synthétiques et traités. À réception, chaque lot entrant est intégralement contrôlé en interne, à l'aide des équipements suivants :
+
+☐  **100% Synthetic Free · \#3 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): We apply a zero-tolerance policy towards synthetic stones and allow no synthetic stone into our facilities. Furthermore, we have no commercial interests or related entities that sell synthet…*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Nous appliquons une politique de tolérance zéro à l'égard des pierres synthétiques et n'autorisons aucune pierre synthétique dans nos infrastructures. Par ailleurs, nous n'avons pas d'intérêts commerciaux ni d'entités liées qui vendent des diamants synthétiques.
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Nous appliquons une politique de tolérance zéro à l'égard des pierres synthétiques et n'autorisons aucune pierre de synthèse dans nos infrastructures. Nous n'avons par ailleurs aucun intérêt commercial ni aucune entité liée dans le diamant de synthèse.
+
+☐  **100% Synthetic Free · \#4 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): 100% Synthetic Free, Zero-Tolerance Technology (the block heading)*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  100% Sans Produits Synthétiques, Technologie Zéro Tolérance
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  100% Diamants naturels, tolérance zéro pierres synthétiques
+
+*↳ Nota de Nathan: el título antiguo es incorrecto; el nuevo es la frase correcta. Este título también aparece en el bloque compartido de otras páginas: actualizar TODAS las instancias.*
+
+##   **Contact**   *excellentfacets.com/fr/contact*  
+
+☐  **Contact · \#1 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): the contact form field currently labelled TONE / TONALITE*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  TONALITE
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Message
+
+*↳ Nota de Nathan: reemplazar aquí por «message». Nathan lo marcó tanto en la etiqueta inglesa como en la francesa.*
+
+☐  **Contact · \#2 — REEMPLAZAR el texto**
+
+*Para localizarlo (versión en inglés): Leave a message with the tone: (the line above the form)*
+
+**TEXTO ACTUAL (francés) — NO traducir:**  Laissez un message à la tonalité :
+
+**NUEVO TEXTO (francés) — pegar EXACTAMENTE:**  Contactez-nous
+
+*↳ Nota de Nathan: reemplazar por «contactez-nous»; «tonalité» no es correcto en francés aquí.*
+
+# **Parte 2 — Bloques a eliminar**
+
+##   **Home**   *excellentfacets.com/fr/home*  
+
+☐  **Home — ELIMINAR**
+
+En el párrafo «Notre Entreprise», eliminar esta frase inicial:
+
+**TEXTO A ELIMINAR (francés):**  Vingt-huit années au service du diamant, et de ceux qui l'élèvent au rang d'œuvre.
+
+*↳ Nota de Nathan: eliminar.*
+
+##   **Fancy Color Melee y Fancy Color Certified**   */fr/fancy-color-melee-diamonds · /fr/fancy-color-certified-diamonds*  
+
+☐  **Fancy Color Melee y Fancy Color Certified — ELIMINAR**
+
+Eliminar el bloque compartido «100% Synthetic Free» ÚNICAMENTE de estas dos páginas. Se mantiene en el resto de páginas.
+
+*↳ Nota de Nathan: se elimina en las páginas Fancy Color Melee y Certified (según Amay y Nathan).*
+
+##   **Cut-To-Measure**   *excellentfacets.com/fr/cut-to-measure-fancy-shape-diamonds*  
+
+☐  **Cut-To-Measure — ELIMINAR**
+
+Eliminar la frase de certificación RJC del párrafo de producción confidencial (Nathan ya la quitó en el texto francés de la Parte 1). Además: la tira de especificaciones «Les Normes Qualité d'Excellent Facets» está repetida — dejar UNA sola instancia.
+
+*↳ Nota de Nathan: conviene eliminar esta frase, el taller obtendrá pronto la certificación RJC. La tira de normas es una repetición de lo que se menciona más abajo.*
+
+##   **Round Mêlée**   *excellentfacets.com/fr/white-melee-diamonds*  
+
+☐  **Round Mêlée — ELIMINAR**
+
+El párrafo «Calibrage & Constitution des Lots» duplica el texto de «Tri & Ensachage». Eliminar uno o diferenciarlos.
+
+*↳ Nota de Nathan: muestra lo mismo que el de «Tri & Ensachage». Eliminar o actualizar.*
+
+##   **Fancy Color Melee**   *excellentfacets.com/fr/fancy-color-melee-diamonds*  
+
+☐  **Fancy Color Melee — ELIMINAR**
+
+El párrafo de calidad está repetido en esta página. Dejar UNA sola instancia.
+
+*↳ Nota de Nathan: también es una repetición de frases anteriores.*
+
+##   **Socially Compliant Manufacturing**   *excellentfacets.com/fr/socially-compliant-manufacturing*  
+
+☐  **Socially Compliant Manufacturing — ELIMINAR**
+
+En el párrafo de Visakhapatnam, eliminar la palabra suelta «généreux».
+
+*↳ Nota de Nathan: eliminar «généreux».*
+
+##   **Sustainability**   *excellentfacets.com/fr/sustainability*  
+
+☐  **Sustainability — ELIMINAR**
+
+En la entrada Gender Equality (05), Nathan pidió eliminar una frase, pero la marca no quedó asociada a ninguna en concreto. DEJAR esta pendiente hasta que Excellent Facets confirme qué frase.
+
+*↳ Pendiente de confirmación — no tocar todavía.*
+
+# **Parte 3 — Problemas de visualización y maquetación**
+
+*Nathan detectó estos problemas al ver las páginas francesas publicadas en ordenador. Son errores de maquetación/build, no cambios de texto.*
+
+##   **Our Story**   *excellentfacets.com/fr/about*  
+
+☐  La ventana emergente de la línea de tiempo de 1984 muestra la biografía de Nathalie Bonvin en lugar de la entrada de 1984\. (Nathan: «This one is showing Nathalie info instead of the info below.»)
+
+##   **Sustainability — numeración de los objetivos de la ONU**   *excellentfacets.com/fr/sustainability*  
+
+☐  Los objetivos 07 y 08 muestran el mismo texto. (Nathan: «On the computer, there is the same text in 07 and 08.»)
+
+☐  El objetivo 11 y el objetivo 12 muestran un texto idéntico. (Nathan: «This is the same text that 11, repetition.»)
+
+☐  El párrafo «Clean & Affordable Energy» no aparece en la página. (Nathan: «This part is absent, we dont see it.»)
+
+*Nota: el documento original recibido termina en la Parte 3\. Las Partes 4 a 7 mencionadas en el índice (imágenes, pendientes, pregunta abierta, cambio de terminología) no venían incluidas.*
