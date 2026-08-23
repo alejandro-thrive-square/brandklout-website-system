@@ -104,3 +104,26 @@ chrome-profile-*/
 
 # Orca per-worktree briefs and review notes — deliberately local, never committed (959b916)
 .orca-*.md
+
+# Dr. Nahlah source material — kept on disk in the bk-dr-nahlah worktree for
+# context, never committed: scraped WordPress assets and client-supplied media.
+# 03-graphic-resources/.tmp/downloads also breaks `git add` outright on Windows
+# ("Filename too long") on the Elementor google-fonts woff2 names.
+deliver/brandklout/dr-nahlah/workflows/03-graphic-resources/.tmp/downloads/
+deliver/brandklout/dr-nahlah/workflows/01-content-intake/.tmp/current-site-scrape/
+deliver/brandklout/dr-nahlah/workflows/00-client-delivery-initialization/.tmp/client-handoff/
+deliver/brandklout/dr-nahlah/workflows/00-client-delivery-initialization/.tmp/design-system/
+
+# Windows reserved device names, created by stray `> nul` redirects. Git cannot
+# open them ("No such file or directory") and `git add -A` dies on the whole run.
+nul
+[Cc][Oo][Nn]
+[Pp][Rr][Nn]
+[Aa][Uu][Xx]
+
+# Cached admin session cookies. `insta-api.mjs` writes one next to itself on
+# first login; it is a live credential for a client's CMS. The Dr. Nahlah copy
+# was protected by a local .tmp/.gitignore, which only helps the folder that
+# happens to have one - this covers every copy of the toolkit, including the
+# shared module in deliver/process/.
+**/.tmp/.session

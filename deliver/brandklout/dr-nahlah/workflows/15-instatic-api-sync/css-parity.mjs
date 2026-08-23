@@ -157,12 +157,23 @@ const CAPTURE = (props) => `(() => {
     return parts.join('>');
   };
   const out = {};
+  // Pseudo-elements are sampled too. This whole design puts its scrims,
+  // vignettes and rules in ::before/::after, and a bare getComputedStyle(el)
+  // cannot see any of them — which is exactly how two gutted overlay
+  // gradients passed a 557,670-value snapshot at 0 differences.
+  const PSEUDO = [null, '::before', '::after'];
   for (const el of document.querySelectorAll('body, body *')) {
     if (el.closest('script, style, noscript')) continue;
-    const cs = getComputedStyle(el);
-    const bag = {};
-    for (const p of props) bag[p] = cs.getPropertyValue(p);
-    out[path(el)] = bag;
+    for (const pseudo of PSEUDO) {
+      const cs = getComputedStyle(el, pseudo);
+      // A pseudo-element with no content is not generated; recording it
+      // would add two empty bags per element and swamp the diff.
+      if (pseudo && (cs.content === 'none' || cs.content === '')) continue;
+      const bag = {};
+      for (const p of props) bag[p] = cs.getPropertyValue(p);
+      if (pseudo) bag['content'] = cs.content;
+      out[path(el) + (pseudo || '')] = bag;
+    }
   }
   return out;
 })()`

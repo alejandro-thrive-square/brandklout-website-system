@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Smile Makeover in McLean, VA | Dr. Nahlah Prosthodontics</title>
+<meta name="description" content="A smile designed before anything is prepared — veneers, crowns and implants combined into one plan by a board-certified prosthodontist.">
+<link rel="icon" href="data:,">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Raleway:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- ==========================================================================
+     GLOBAL LAYER ONLY — tokens, reset, shared primitives.
+     Every section below carries its own <style> and <script>, so a section can
+     be lifted into Webflow as one self-contained embed.
+     ========================================================================== -->
+<style>
+:root{
+  --gold:#AB9E6A; --gold-light:#D4CDB2; --gold-deep:#8A7E4E; --gold-wash:#F5F2E9;
+  /* --gold-deep is only 3.7:1 on the cream ground — fine for display sizes,
+     short of AA for the small uppercase labels. --gold-ink is the same hue
+     taken dark enough to clear 4.5:1 on --warm and on white. */
+  --gold-ink:#665C33;
+  --black:#0B0B0C; --ink-900:#141416; --ink-800:#1C1C1F; --ink-700:#2A2A2E; --ink-500:#6B6B72;
+  --white:#fff; --warm:#FAF8F3; --mist:#F0EDE6;
+
+  /* ------------------------------------------------------------------
+     THEME LAYER.
+     The site is light: warm cream is the ground, ink is the text, and the
+     two dark chapters (the film and the invitation) plus the footer and the
+     drawer opt in with data-theme="dark". Every section below paints from
+     these six names only — never a raw hex or a raw rgba(255,255,255,x) —
+     so a section can be flipped by changing the scope it sits in, not by
+     rewriting its rules.
+       --bg      the ground                --fg       headings, strong text
+       --bg-2    the alternate band        --fg-body  body copy
+       --bg-3    the accent band           --fg-soft  meta, captions, labels
+       --card    raised panel              --line     hairlines and borders
+     Gold splits three ways because brand gold is only 2.4:1 on cream:
+       --accent      text-sized gold (labels, links)  — clears AA
+       --accent-lg   display-sized gold (numerals, quote marks)
+       --rule        gold hairlines and dots (non-text)
+     ------------------------------------------------------------------ */
+  --bg:#FAF8F3; --bg-2:#FFFFFF; --bg-3:#F5F2E9; --card:#FFFFFF;
+  --fg:#141416; --fg-body:#3A3A40; --fg-soft:#55555C; --fg-faint:#6E6E76;
+  --line:rgba(20,20,22,.13); --line-2:rgba(20,20,22,.07); --line-strong:rgba(20,20,22,.3);
+  --accent:var(--gold-ink); --accent-lg:var(--gold-deep); --rule:var(--gold-deep);
+  --focus:var(--gold-deep);
+  /* Scrim over photography, so text on an image reads on either theme. */
+  --scrim:rgba(11,11,12,.62);
+  --f-display:'Playfair Display','Times New Roman',serif;
+  --f-body:'Raleway','Helvetica Neue',Arial,sans-serif;
+  --d1:clamp(2.75rem,7.4vw,8.25rem);
+  --d2:clamp(2.25rem,5.2vw,5.5rem);
+  --h2:clamp(1.9rem,3.6vw,3.75rem);
+  --h3:clamp(1.35rem,1.9vw,2rem);
+  --body-lg:clamp(1.05rem,1.25vw,1.25rem);
+  --body:clamp(.975rem,1.05vw,1.0625rem);
+  --label:clamp(.68rem,.78vw,.78rem);
+  --gutter:clamp(1.25rem,4vw,4.5rem);
+  --section:clamp(4.5rem,9vw,9.5rem);
+  --maxw:1560px;
+  /* Was a gutter for the left chapter rail; the rail was removed in favour of a
+     progress bar on the nav, so content is full-width again. Kept as a token so
+     section rules that reference it stay valid. */
+  --rail:0px;
+}
+/* The dark chapters. Scoped, not global, so nesting works: a light card inside
+   a dark band only has to carry data-theme="light" to come back. */
+[data-theme="dark"]{
+  --bg:#0B0B0C; --bg-2:#141416; --bg-3:#1C1C1F; --card:#141416;
+  --fg:#FFFFFF; --fg-body:rgba(255,255,255,.78); --fg-soft:rgba(255,255,255,.62);
+  --fg-faint:rgba(255,255,255,.5);
+  --line:rgba(255,255,255,.12); --line-2:rgba(255,255,255,.07); --line-strong:rgba(255,255,255,.3);
+  --accent:var(--gold); --accent-lg:var(--gold); --rule:var(--gold);
+  --focus:var(--gold-light);
+  background:var(--bg);color:var(--fg-body);
+}
+[data-theme="light"]{
+  --bg:#FAF8F3; --bg-2:#FFFFFF; --bg-3:#F5F2E9; --card:#FFFFFF;
+  --fg:#141416; --fg-body:#3A3A40; --fg-soft:#55555C; --fg-faint:#6E6E76;
+  --line:rgba(20,20,22,.13); --line-2:rgba(20,20,22,.07); --line-strong:rgba(20,20,22,.3);
+  --accent:var(--gold-ink); --accent-lg:var(--gold-deep); --rule:var(--gold-deep);
+  --focus:var(--gold-deep);
+  background:var(--bg);color:var(--fg-body);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--fg-body);
+  font-family:var(--f-body);font-size:var(--body);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body.is-locked{overflow:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:500;line-height:1.02;
+  letter-spacing:-.02em;color:var(--fg)}
+p{margin:0}
+::selection{background:var(--gold);color:var(--black)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+
+/* Content clears the fixed rail rather than sliding under it. */
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;
+  padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail))}
+.wrap.no-rail{padding-left:var(--gutter)}
+.section{padding-block:var(--section)}
+.label{font-size:var(--label);letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--accent);font-family:var(--f-body)}
+.chapter-tag{display:flex;align-items:center;gap:.85rem;margin-bottom:1.4rem}
+.chapter-tag i{width:clamp(24px,3.5vw,48px);height:1px;background:var(--rule);flex:none}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:1.05rem 2rem;
+  font-size:var(--label);letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  position:relative;overflow:hidden;transition:color .45s cubic-bezier(.22,1,.36,1);will-change:transform}
+.btn>span{position:relative;z-index:1}
+/* The hover fill is the theme's ink, and the label flips to the theme's ground,
+   so one rule reads correctly on cream and on black. */
+.btn::after{content:"";position:absolute;inset:0;background:var(--fg);transform:translateY(101%);
+  transition:transform .55s cubic-bezier(.22,1,.36,1);z-index:0}
+.btn:hover::after{transform:translateY(0)}
+.btn:hover{color:var(--bg)}
+.btn-primary{background:linear-gradient(100deg,var(--gold-deep),var(--gold) 45%,var(--gold-light));color:var(--black)}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--fg)}
+.btn-dark{background:var(--fg);color:var(--bg)}
+.btn-dark::after{background:var(--ink-700)}
+.btn-dark:hover{color:var(--bg)}
+
+/* ScrollSmoother scaffolding — fixed UI lives OUTSIDE the wrapper */
+#smooth-wrapper{overflow:hidden}
+
+/* Pre-paint guard: hide split targets until GSAP has set their state so we
+   never flash unsplit text. .wz-ready is set by the bootstrap. */
+[data-anim="hide"]{visibility:hidden}
+.wz-ready [data-anim="hide"]{visibility:visible}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important}
+  [data-anim="hide"]{visibility:visible!important}
+}
+</style>
+
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+
+<script>
+/* ==========================================================================
+   BOOTSTRAP (the only shared script)
+   Section scripts push their setup into WZ.add(). We create ScrollSmoother
+   first, then flush the queue, so every ScrollTrigger measures against the
+   final smoothed layout. Without this ordering, triggers registered mid-parse
+   measure a half-built page.
+   ========================================================================== */
+window.WZ = (function(){
+  var q = [], flushed = false;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ok = !!(window.gsap && window.ScrollTrigger);
+
+  /* NOTE: plugins are deliberately NOT registered here. This script runs inside
+     <head>, where document.body does not exist yet — registering ScrollTrigger
+     that early leaves its internals half-initialised, and ScrollSmoother then
+     dies on `getScrollFunc` with "Cannot read properties of undefined". The
+     flush block at the end of <body> does the registration instead. */
+
+  /* Split into masked lines, with graceful degradation if SplitText is absent. */
+  /* Pass `build` when the lines carry a tween: it runs on the first split and
+     again on every re-split, and whatever it returns is killed before the next
+     one so tweens never point at dead nodes. Omit it for one-shot entrances —
+     the lines still re-flow, they just do not re-animate. */
+  function splitLines(el, build){
+    if(!window.SplitText) return null;
+    try{
+      var opts = {type:'lines', mask:'lines', linesClass:'wz-line', autoSplit:true};
+      if(build) opts.onSplit = function(self){ return build(self); };
+      return (SplitText.create ? SplitText.create(el,opts) : new SplitText(el,opts));
+    }catch(e){
+      try{ return new SplitText(el,{type:'lines',linesClass:'wz-line'}); }catch(e2){ return null; }
+    }
+  }
+  function splitWords(el){
+    if(!window.SplitText) return null;
+    try{
+      var opts = {type:'words', wordsClass:'wz-word'};
+      return (SplitText.create ? SplitText.create(el,opts) : new SplitText(el,opts));
+    }catch(e){ return null; }
+  }
+
+  return {
+    reduced: reduced,
+    ok: ok,
+    smoother: null,
+    splitLines: splitLines,
+    splitWords: splitWords,
+    add: function(fn){ flushed ? this.run(fn) : q.push(fn); },
+    run: function(fn){ try{ fn(this); }catch(e){ console.error('[WZ section]', e); } },
+    flush: function(){
+      flushed = true;
+      var self = this;
+      q.forEach(function(fn){ self.run(fn); });
+      q.length = 0;
+    }
+  };
+})();
+</script>
+</head>
+<body>
+
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<header class="nav" id="nav" data-journey="0">
+  <style>
+    .nav{position:fixed;top:0;left:0;right:0;z-index:120;border-bottom:1px solid transparent;
+      transition:background .4s ease,border-color .4s ease}
+    /* Reading progress, pinned to the very top edge above the nav row. */
+    .nav-progress{position:absolute;top:0;left:0;right:0;height:2px;
+      background:var(--line-2);overflow:hidden}
+    .nav-progress i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;
+      background:linear-gradient(90deg,var(--gold-deep),var(--gold) 55%,var(--gold-light))}
+    .nav.solid{background:rgba(250,248,243,.9);backdrop-filter:blur(14px);border-bottom-color:rgba(138,126,78,.26)}
+    .nav-in{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+      padding-block:clamp(.85rem,1.6vw,1.35rem)}
+    .nav-logo img{width:clamp(132px,13vw,190px)}
+
+    /* One slot, shared by the site links and — on the journey page — the chapter
+       readout, so the nav row is the same shape on every page. */
+    .nav-slot{display:none;position:relative;align-items:center;min-height:1.4em}
+    .nav-links{display:flex;align-items:center;gap:clamp(1.1rem,2.2vw,2.2rem);
+      font-size:var(--label);letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+      transition:opacity .45s ease}
+    .nav-links a{color:var(--fg-soft);position:relative;padding-block:.4rem;
+      transition:color .35s ease}
+    .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+      background:var(--rule);transform:scaleX(0);transform-origin:right;
+      transition:transform .45s cubic-bezier(.22,1,.36,1)}
+    .nav-links a:hover{color:var(--fg)}
+    .nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+    .nav-links a[aria-current="page"]{color:var(--accent)}
+    .nav-links a[aria-current="page"]::after{transform:scaleX(1)}
+
+    .nav-chapter{position:absolute;left:0;top:50%;transform:translateY(-50%);
+      display:flex;align-items:center;gap:.8rem;font-size:var(--label);letter-spacing:.16em;
+      text-transform:uppercase;color:var(--fg-soft);opacity:0;pointer-events:none;
+      transition:opacity .45s ease;white-space:nowrap}
+    .nav-chapter b{color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums}
+    .nav-chapter i{display:block;width:56px;height:1px;background:var(--line);position:relative}
+    .nav-chapter i::after{content:"";position:absolute;inset:0;background:var(--rule);
+      transform:scaleX(var(--p,0));transform-origin:left;transition:transform .5s ease}
+    .nav[data-journey="1"].solid .nav-links{opacity:0;pointer-events:none}
+    .nav[data-journey="1"].solid .nav-chapter{opacity:1}
+
+    .nav-right{display:flex;align-items:center;gap:clamp(.5rem,1.4vw,1.1rem)}
+    .nav-cta{border:1px solid var(--rule);color:var(--fg);padding:.7rem 1.4rem;font-size:var(--label);
+      letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap;
+      transition:background .4s,color .4s}
+    .nav-cta:hover{background:var(--gold-deep);color:var(--white)}
+    /* The menu button stays at every breakpoint — the drawer is the full site
+       index, not a mobile fallback, so the sitemap is one tap from any page. */
+    .burger{display:block;width:44px;height:44px;position:relative;z-index:130;flex:none}
+    .burger span{position:absolute;left:10px;width:24px;height:1.5px;background:var(--fg);
+      transition:transform .45s cubic-bezier(.22,1,.36,1)}
+    .burger span:nth-child(1){top:18px}
+    .burger span:nth-child(2){top:25px}
+    .burger.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+    .burger.open span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
+    /* While the drawer is open the whole header rides above it, otherwise the
+       panel covers the button that closes it. Everything but the X steps back. */
+    .nav.menu-open{z-index:130;background:transparent;backdrop-filter:none;
+      border-bottom-color:transparent}
+    .nav-slot{transition:opacity .35s ease}
+    .nav.menu-open .nav-slot,.nav.menu-open .nav-cta,.nav.menu-open .nav-progress{
+      opacity:0;pointer-events:none}
+    .nav-close{opacity:0;pointer-events:none;font-size:var(--label);letter-spacing:.14em;
+      text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.62);
+      transition:opacity .35s ease .12s;white-space:nowrap}
+    .nav.menu-open .nav-close{opacity:1}
+    /* The panel it sits on is dark whatever the page behind it is doing. */
+    .nav.menu-open .burger span{background:#fff}
+    @media(min-width:1080px){ .nav-slot{display:flex} }
+    @media(max-width:679px){ .nav .nav-cta{display:none} }
+  </style>
+  <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
+  <div class="wrap no-rail nav-in">
+    <a class="nav-logo" href="index.html" aria-label="Dr. Nahlah home">
+      <img src="assets/logo.png" alt="Dr. Nahlah — Implants and Prosthodontics Specialists">
+    </a>
+    <nav class="nav-slot" aria-label="Primary">
+      <div class="nav-links">
+        <a href="dental-implants.html">Implants</a>
+        <a href="smile-makeover.html" aria-current="page">Cosmetic</a>
+        <a href="smile-gallery.html">Smile Gallery</a>
+        <a href="about.html">The Specialist</a>
+        <a href="contact.html">Contact</a>
+      </div>
+      
+    </nav>
+    <div class="nav-right">
+      <a class="nav-cta" href="contact.html#book">Book a Consult</a>
+      <span class="nav-close" aria-hidden="true">Close</span>
+      <button class="burger" id="burger" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+        <span></span><span></span>
+      </button>
+    </div>
+  </div>
+</header>
+
+<!-- Full site index. Opens at every breakpoint, so it is the site's real
+     navigation rather than a mobile-only fallback. -->
+<div class="drawer" id="drawer" aria-hidden="true" data-theme="dark">
+  <style>
+    .drawer{position:fixed;inset:0;z-index:125;background:var(--ink-900);
+      clip-path:circle(0% at calc(100% - 42px) 42px);transition:clip-path .8s cubic-bezier(.22,1,.36,1);
+      display:flex;flex-direction:column;justify-content:center;overflow-y:auto;
+      padding:clamp(5.5rem,10vw,7rem) var(--gutter) clamp(2rem,5vw,3rem)}
+    .drawer.open{clip-path:circle(150% at calc(100% - 42px) 42px)}
+    .dr-grid{width:100%;max-width:var(--maxw);margin-inline:auto;display:grid;gap:clamp(1.75rem,4vw,3.5rem)}
+    .dr-col h4{font-family:var(--f-body);font-size:var(--label);letter-spacing:.2em;text-transform:uppercase;
+      color:var(--gold);font-weight:600;margin:0 0 1rem}
+    .drawer ul{list-style:none;margin:0;padding:0}
+    .dr-col li{overflow:hidden}
+    .dr-col li a{display:block;font-family:var(--f-display);
+      font-size:clamp(1.35rem,2.6vw,2.1rem);line-height:1.22;padding-block:.14em;
+      color:rgba(255,255,255,.9);
+      transform:translateY(110%);transition:transform .7s cubic-bezier(.22,1,.36,1),color .3s ease}
+    .dr-col li a:hover{color:var(--gold-light)}
+    .drawer.open .dr-col li a{transform:translateY(0)}
+    /* Stagger by column so the panel deals itself out rather than snapping in. */
+    .drawer.open .dr-col:nth-child(1) li a{transition-delay:.10s}
+    .drawer.open .dr-col:nth-child(2) li a{transition-delay:.16s}
+    .drawer.open .dr-col:nth-child(3) li a{transition-delay:.22s}
+    .dr-foot{width:100%;max-width:var(--maxw);margin:clamp(2rem,5vw,3.25rem) auto 0;
+      padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);
+      display:grid;gap:1.25rem;color:rgba(255,255,255,.72);font-size:.92rem}
+    .dr-foot b{display:block;font-family:var(--f-body);font-size:var(--label);letter-spacing:.18em;
+      text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.3rem}
+    .dr-foot a{color:var(--gold-light)}
+    .dr-foot a:hover{text-decoration:underline}
+    @media(min-width:760px){ .dr-grid{grid-template-columns:repeat(3,1fr)} .dr-foot{grid-template-columns:repeat(3,1fr)} }
+  </style>
+  <div class="dr-grid">
+    <div class="dr-col">
+      <h4>Implant Dentistry</h4>
+      <ul>
+        <li><a href="dental-implants.html">Dental Implants</a></li>
+        <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+        <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+        <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>Aesthetics</h4>
+      <ul>
+        <li><a href="smile-makeover.html">Smile Makeover</a></li>
+        <li><a href="veneers.html">Porcelain Veneers</a></li>
+        <li><a href="smile-gallery.html">Smile Gallery</a></li>
+      </ul>
+    </div>
+    <div class="dr-col">
+      <h4>The Practice</h4>
+      <ul>
+        <li><a href="about.html">Dr. Esam Nahlah</a></li>
+        <li><a href="patient-stories.html">Patient Stories</a></li>
+        <li><a href="contact.html">Contact &amp; Locations</a></li>
+        <li><a href="index.html">Home</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="dr-foot">
+    <div><b>Tysons Corner &middot; McLean</b>
+      New patients <a href="tel:+15716199442">(571) 619-9442</a><br>
+      Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
+    <div><b>Alexandria</b>
+      New patients <a href="tel:+15714103430">(571) 410-3430</a><br>
+      Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
+    <div><b>Hours</b>
+      Mon&ndash;Thu 8:00am &ndash; 5:00pm<br>
+      Fri 8:00am &ndash; 2:00pm &middot; Sat &amp; Sun closed</div>
+  </div>
+</div>
+
+
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     PAGE KIT — the shared section vocabulary for every page except the home
+     journey. One <style> + one <script>, injected once per page, so the ten
+     interior pages cannot drift apart the way ten hand-built pages would.
+     In the Webflow build this becomes a single site-wide embed; the home
+     journey keeps its per-chapter embeds because each chapter is bespoke.
+     ========================================================================== -->
+<div class="pagekit" hidden aria-hidden="true"></div>
+<style>
+/* ---------- hero ---------- */
+.pg-hero{position:relative;min-height:clamp(560px,78svh,860px);display:flex;align-items:flex-end;
+  overflow:hidden;padding-top:clamp(8rem,15vw,11rem);padding-bottom:clamp(2.5rem,6vw,4.5rem);
+  background:var(--bg)}
+.pg-hero .ph-bg{position:absolute;inset:0;z-index:0}
+.pg-hero .ph-bg img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  filter:grayscale(.18) contrast(1.02) brightness(1.06)}
+/* Two stacked scrims: a horizontal one so the copy column always has a floor,
+   and a vertical one so the nav and the section seam both stay legible. */
+.pg-hero .ph-bg::after{content:"";position:absolute;inset:0;
+  background:
+    radial-gradient(90% 70% at 80% 38%,rgba(171,158,106,.20),transparent 62%),
+    linear-gradient(100deg,rgba(250,248,243,.98) 0%,rgba(250,248,243,.94) 44%,rgba(250,248,243,.34) 80%),
+    linear-gradient(180deg,rgba(250,248,243,.86) 0%,rgba(250,248,243,.22) 34%,rgba(250,248,243,.96) 100%)}
+.pg-hero .ph-in{position:relative;z-index:2;width:100%;display:grid;gap:clamp(1.25rem,2.6vw,2rem)}
+.pg-hero h1{font-size:var(--d2);max-width:17ch}
+.pg-hero h1 em{font-style:italic;color:var(--accent-lg)}
+.pg-hero .ph-lead{max-width:52ch;color:var(--fg-body);font-size:var(--body-lg);font-weight:400}
+.pg-hero .ph-actions{display:flex;flex-wrap:wrap;gap:.85rem}
+.pg-hero .ph-meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);margin-top:.5rem;
+  padding-top:clamp(1rem,2.4vw,1.6rem);border-top:1px solid var(--line)}
+.pg-hero .ph-meta div{display:grid;gap:.15rem}
+.pg-hero .ph-meta b{font-family:var(--f-display);font-size:clamp(1.15rem,2vw,1.7rem);font-weight:500}
+.pg-hero .ph-meta span{font-size:.72rem;letter-spacing:.12em;text-transform:uppercase;
+  color:var(--fg-soft)}
+@media(max-width:719px){ .pg-hero .btn{flex:1 1 auto} }
+
+/* ---------- crumb ---------- */
+.pk-crumb{display:flex;align-items:center;gap:.6rem;font-size:.68rem;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;color:var(--fg-soft)}
+.pk-crumb a{color:var(--accent)}
+.pk-crumb a:hover{text-decoration:underline}
+.pk-crumb i{width:16px;height:1px;background:var(--line-strong);display:block}
+
+/* ---------- generic section ---------- */
+/* Three light grounds in rotation give the page rhythm without a dark band:
+   cream is the default, .alt lifts to white, .light drops to the gold wash.
+   .pk[data-theme="dark"] is the deliberate exception, used twice on the site. */
+.pk{background:var(--bg);color:var(--fg-body)}
+.pk.alt{background:var(--bg-2)}
+.pk.light{background:var(--bg-3)}
+.pk h2{font-size:var(--h2);max-width:18ch}
+.pk h3{font-size:var(--h3)}
+.pk-head{display:grid;gap:1.1rem;max-width:52ch;margin-bottom:clamp(2rem,4.5vw,3.5rem)}
+.pk-head p{color:var(--fg-body);font-weight:400;font-size:var(--body-lg)}
+
+/* ---------- lede: sticky heading + prose ---------- */
+.pk-lede{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:start}
+.pk-lede .lc-head{position:relative}
+.pk-lede .lc-body{display:grid;gap:1.15rem;max-width:64ch}
+.pk-lede .lc-body p{color:var(--fg-body);font-weight:400;line-height:1.85}
+.pk-lede .lc-body strong{color:var(--fg);font-weight:600}
+@media(min-width:960px){
+  .pk-lede{grid-template-columns:.85fr 1.15fr}
+  .pk-lede .lc-head{position:sticky;top:clamp(6rem,10vw,8rem)}
+}
+
+/* ---------- numbered / icon cards ---------- */
+.pk-cards{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem)}
+.pk-card{background:var(--card);border:1px solid var(--line);
+  padding:clamp(1.4rem,2.4vw,2.1rem);display:grid;gap:.75rem;align-content:start;
+  transition:border-color .45s ease,transform .5s cubic-bezier(.22,1,.36,1),box-shadow .5s ease}
+/* On the white band a white card would vanish, so it takes the cream instead. */
+.pk.alt .pk-card{background:var(--bg)}
+.pk-card:hover{border-color:rgba(138,126,78,.5);transform:translateY(-4px);
+  box-shadow:0 14px 40px rgba(20,20,22,.07)}
+.pk[data-theme="dark"] .pk-card:hover{box-shadow:none;border-color:rgba(171,158,106,.55)}
+.pk-card .n{font-family:var(--f-display);font-size:clamp(1.6rem,2.6vw,2.4rem);color:var(--accent-lg);
+  line-height:1}
+.pk-card h3{font-size:clamp(1.1rem,1.5vw,1.4rem)}
+.pk-card p{color:var(--fg-body);font-weight:400;font-size:.94rem;line-height:1.75}
+/* Partner marks (CareCredit, Proceed Finance, LendingClub) are drawn for white
+   stationery — dark green, navy and red on transparent. Dropped straight onto a
+   near-black card they all but vanish. Give them the white ground they were
+   designed for rather than recolouring someone else's logo. */
+/* A hairline keeps the plate legible when the card itself is white. */
+.pk-card .brandmark{background:#fff;border:1px solid var(--line-2);border-radius:3px;padding:.7rem .9rem;
+  justify-self:start;display:inline-flex;align-items:center;margin-bottom:.2rem}
+.pk-card .brandmark img{height:26px;width:auto;object-fit:contain;display:block}
+.pk-card a.more{margin-top:.35rem;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:var(--accent)}
+@media(min-width:720px){ .pk-cards.c2{grid-template-columns:repeat(2,1fr)}
+  .pk-cards.c3{grid-template-columns:repeat(2,1fr)}
+  .pk-cards.c4{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:1040px){ .pk-cards.c3{grid-template-columns:repeat(3,1fr)}
+  .pk-cards.c4{grid-template-columns:repeat(4,1fr)} }
+
+/* ---------- split: image + copy ---------- */
+.pk-split{display:grid;gap:clamp(1.75rem,4vw,4rem);align-items:center}
+.pk-split .sp-fig{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist)}
+.pk-split .sp-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  will-change:transform}
+.pk-split .sp-copy{display:grid;gap:1.1rem;max-width:56ch}
+.pk-split .sp-copy p{color:var(--fg-body);font-weight:400;line-height:1.85}
+.sp-list{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:0}
+.sp-list li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:baseline;
+  padding-block:.72rem;border-top:1px solid var(--line);font-weight:400;font-size:.94rem;
+  color:var(--fg-body)}
+.sp-list li:last-child{border-bottom:1px solid var(--line)}
+.sp-list i{width:5px;height:5px;border-radius:50%;background:var(--rule);display:block;
+  transform:translateY(-2px)}
+@media(min-width:900px){
+  .pk-split{grid-template-columns:1fr 1fr}
+  .pk-split.rev .sp-fig{order:2}
+}
+
+/* ---------- stat row ---------- */
+.pk-stats{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.5rem,3vw,2.5rem);
+  padding-top:clamp(1.5rem,3vw,2.25rem);border-top:1px solid var(--line)}
+.pk-stats div{display:grid;gap:.3rem}
+.pk-stats b{font-family:var(--f-display);font-size:clamp(2rem,4.4vw,3.4rem);font-weight:500;
+  color:var(--accent-lg);line-height:1}
+.pk-stats span{font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft)}
+
+/* ---------- inline "more" link ---------- */
+.pk-more{display:inline-flex;align-items:center;gap:.55rem;
+  font-size:var(--label);letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  color:var(--accent);border-bottom:1px solid rgba(138,126,78,.5);padding-bottom:.35rem;
+  transition:color .35s,border-color .35s}
+.pk-more::after{content:"\2192";transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.pk-more:hover{color:var(--fg);border-color:var(--fg)}
+.pk-more:hover::after{transform:translateX(5px)}
+@media(min-width:820px){ .pk-stats{grid-template-columns:repeat(4,1fr)} }
+
+/* ---------- before / after pair ---------- */
+.pk-ba-grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,2vw,1.75rem)}
+@media(min-width:700px){ .pk-ba-grid{grid-template-columns:repeat(2,1fr)} }
+@media(min-width:1100px){ .pk-ba-grid.g3{grid-template-columns:repeat(3,1fr)} }
+.pk-ba{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist);
+  --pos:50%;isolation:isolate}
+.pk-ba img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+.pk-ba img.after{clip-path:inset(0 0 0 var(--pos))}
+.pk-ba .ba-line{position:absolute;top:0;bottom:0;left:var(--pos);width:2px;background:var(--gold-deep);
+  transform:translateX(-1px);z-index:3;pointer-events:none}
+.pk-ba .ba-line::before{content:"";position:absolute;top:50%;left:50%;width:40px;height:40px;
+  transform:translate(-50%,-50%);border-radius:50%;background:var(--gold-deep);
+  box-shadow:0 6px 24px rgba(0,0,0,.32)}
+.pk-ba .ba-tag{position:absolute;top:.7rem;z-index:4;padding:.32rem .7rem;font-size:.58rem;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:700}
+.pk-ba .ba-tag.b{left:.7rem;background:rgba(11,11,12,.78);color:#fff}
+.pk-ba .ba-tag.a{right:.7rem;background:var(--gold-ink);color:#fff}
+/* A range input, not a mouse-only drag handle: this stays operable from the
+   keyboard and reads as a slider to assistive tech. */
+.pk-ba input[type=range]{position:absolute;inset:0;width:100%;height:100%;z-index:5;margin:0;
+  opacity:0;cursor:ew-resize}
+.pk-ba:focus-within{outline:2px solid var(--gold-light);outline-offset:3px}
+.pk-ba-cap{margin-top:.7rem;font-size:.8rem;color:var(--fg-soft);font-weight:400}
+
+/* ---------- pull quote ---------- */
+.pk-quote{max-width:24ch;font-family:var(--f-display);font-size:var(--h2);line-height:1.12;
+  letter-spacing:-.02em}
+.pk-quote-mark{font-family:var(--f-display);font-size:clamp(2.5rem,6vw,4.5rem);color:var(--accent-lg);
+  line-height:.6;display:block;margin-bottom:.6rem}
+.pk-quote-by{margin-top:1.4rem;font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;
+  color:var(--accent)}
+
+/* ---------- faq ---------- */
+.pk-faq{display:grid;gap:0;max-width:80ch}
+.pk-faq details{border-top:1px solid var(--line)}
+.pk-faq details:last-of-type{border-bottom:1px solid var(--line)}
+.pk-faq summary{list-style:none;cursor:pointer;padding-block:clamp(1rem,2vw,1.4rem);
+  display:flex;align-items:flex-start;gap:1rem;font-family:var(--f-display);
+  font-size:clamp(1.05rem,1.7vw,1.35rem);font-weight:500;transition:color .3s}
+.pk-faq summary::-webkit-details-marker{display:none}
+.pk-faq summary{color:var(--fg)}
+.pk-faq summary:hover{color:var(--accent-lg)}
+.pk-faq summary::after{content:"";flex:none;margin-left:auto;width:12px;height:12px;
+  border-right:1.5px solid var(--rule);border-bottom:1.5px solid var(--rule);
+  transform:rotate(45deg) translateY(-2px);transition:transform .4s cubic-bezier(.22,1,.36,1)}
+.pk-faq details[open] summary::after{transform:rotate(-135deg) translateY(-2px)}
+.pk-faq .fa-body{padding-bottom:clamp(1.1rem,2.2vw,1.6rem);color:var(--fg-body);
+  font-weight:400;line-height:1.85;max-width:68ch}
+
+/* ---------- next-steps cross links ---------- */
+.pk-next{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line)}
+.pk-next a{background:var(--bg);padding:clamp(1.4rem,2.6vw,2.1rem);display:grid;gap:.5rem;
+  transition:background .4s ease}
+.pk.alt .pk-next a{background:var(--bg-2)}
+.pk-next a:hover{background:var(--bg-3)}
+.pk[data-theme="dark"] .pk-next a:hover{background:var(--ink-800)}
+.pk-next .nx-k{font-size:.64rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.pk-next .nx-t{font-family:var(--f-display);font-size:clamp(1.15rem,1.8vw,1.5rem);font-weight:500}
+.pk-next .nx-d{color:var(--fg-body);font-weight:400;font-size:.9rem}
+@media(min-width:760px){ .pk-next{grid-template-columns:repeat(3,1fr)} }
+
+/* ---------- closing CTA band ---------- */
+.pk-cta{position:relative;overflow:hidden;
+  background:linear-gradient(115deg,var(--gold-deep),var(--gold) 48%,var(--gold-light));
+  color:var(--black);text-align:center}
+.pk-cta .cta-in{display:grid;gap:1.25rem;justify-items:center;max-width:60ch;margin-inline:auto}
+.pk-cta h2{font-size:var(--d2);max-width:15ch}
+.pk-cta p{color:rgba(11,11,12,.78);font-weight:400;max-width:46ch}
+.pk-cta .cta-phones{display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:center;
+  margin-top:.5rem;font-size:.8rem;letter-spacing:.06em;color:rgba(11,11,12,.72)}
+.pk-cta .cta-phones a{font-family:var(--f-display);font-size:1.15rem;color:var(--black);
+  border-bottom:1px solid rgba(11,11,12,.3)}
+
+/* Pre-reveal state. Applied only once the kit's script confirms GSAP is live,
+   so a scripting failure leaves a fully readable page rather than a blank one. */
+.wz-kit [data-rv]{opacity:0}
+@media(prefers-reduced-motion:reduce){ .wz-kit [data-rv]{opacity:1} }
+</style>
+
+<script>
+WZ.add(function (W) {
+  var kit = document.body;
+  if (!W.reduced) kit.classList.add('wz-kit');
+
+  /* Before/after sliders work with or without GSAP — they are content, not motion. */
+  document.querySelectorAll('.pk-ba').forEach(function (ba) {
+    var range = ba.querySelector('input[type=range]');
+    if (!range) return;
+    var paint = function () { ba.style.setProperty('--pos', range.value + '%'); };
+    range.addEventListener('input', paint);
+    paint();
+  });
+
+  if (W.reduced) return;
+
+  /* One reveal rule for the whole kit: anything tagged data-rv rises into place
+     when it crosses 86% of the viewport. data-rv="stagger" walks its children. */
+  gsap.utils.toArray('[data-rv]').forEach(function (el) {
+    // A nested data-rv is animated twice — once as its parent's stagger child
+    // and once in its own right — and the two `from` tweens fight over opacity,
+    // which can strand it invisible. The outer reveal already covers it.
+    if (el.parentElement && el.parentElement.closest('[data-rv]')) return;
+    var mode = el.getAttribute('data-rv');
+    var targets = mode === 'stagger' ? el.children : el;
+    gsap.set(el, { opacity: 1 });
+    gsap.from(targets, {
+      opacity: 0, y: 30, duration: .95, ease: 'power3.out',
+      stagger: mode === 'stagger' ? .09 : 0,
+      scrollTrigger: { trigger: el, start: 'top 86%' }
+    });
+  });
+
+  /* Masked line reveal for anything asking for it. */
+  gsap.utils.toArray('[data-split]').forEach(function (el) {
+    W.splitLines(el, function (self) {
+      return gsap.from(self.lines, {
+        yPercent: 108, duration: 1.05, stagger: .08, ease: 'power4.out',
+        scrollTrigger: { trigger: el, start: 'top 88%' }
+      });
+    });
+  });
+
+  /* Photos drift against the scroll so a static page still feels alive. */
+  gsap.utils.toArray('[data-drift]').forEach(function (img) {
+    gsap.fromTo(img, { yPercent: -6, scale: 1.12 }, {
+      yPercent: 6, scale: 1.12, ease: 'none',
+      scrollTrigger: { trigger: img.parentElement, start: 'top bottom', end: 'bottom top', scrub: .8 }
+    });
+  });
+
+  /* Counters. Reduced motion prints the final value immediately (above). */
+  gsap.utils.toArray('.pk-stats [data-count]').forEach(function (el) {
+    var target = parseFloat(el.getAttribute('data-count')),
+        dec = parseInt(el.getAttribute('data-decimals') || '0', 10),
+        suffix = el.getAttribute('data-suffix') || '',
+        obj = { v: 0 };
+    gsap.to(obj, {
+      v: target, duration: 1.9, ease: 'power2.out',
+      scrollTrigger: { trigger: el, start: 'top 90%' },
+      onUpdate: function () {
+        el.textContent = obj.v.toLocaleString('en-US',
+          { minimumFractionDigits: dec, maximumFractionDigits: dec }) + suffix;
+      }
+    });
+  });
+});
+/* Reduced motion never runs the counter tween, so paint the finals up front. */
+(function () {
+  if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  document.querySelectorAll('.pk-stats [data-count]').forEach(function (el) {
+    var dec = parseInt(el.getAttribute('data-decimals') || '0', 10);
+    el.textContent = parseFloat(el.getAttribute('data-count'))
+      .toLocaleString('en-US', { minimumFractionDigits: dec, maximumFractionDigits: dec })
+      + (el.getAttribute('data-suffix') || '');
+  });
+})();
+</script>
+
+<!-- ==========================================================================
+     SMILE MAKEOVER — the cosmetic hub. From drnahlah.com/smile-makeover/.
+     The five modalities, the consultation flow and the free Digital Smile
+     Design offer are all from that page. Note the source page's own CTA block
+     still carries unreplaced placeholders ("[Dr Name]", "[State]") — one of the
+     nine defects logged in the current-site inventory.
+     ========================================================================== -->
+<section class="pg-hero" id="hero">
+  <div class="ph-bg">
+    <img src="assets/smile-makeover-patient.png" alt="A smile makeover patient of the practice" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><span>Smile Makeover</span></div>
+    <h1 data-split>The smile is designed <em>before</em> anything is touched.</h1>
+    <p class="ph-lead" data-rv>A makeover is not a list of procedures. It is one design — shape,
+      shade, lip line, gum symmetry, facial proportion — decided first, and then whichever
+      treatments are needed to build it.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-primary magnetic" href="contact.html#book"><span>Book a smile evaluation</span></a>
+      <a class="btn btn-ghost magnetic" href="smile-gallery.html"><span>See the results</span></a>
+    </div>
+    <div class="ph-meta" data-rv="stagger">
+      <div><b>Free</b><span>Digital Smile Design preview</span></div>
+      <div><b>5 tools</b><span>Crowns, bridges, veneers, whitening, implants</span></div>
+      <div><b>One plan</b><span>Designed by one specialist</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the argument ---------- -->
+<section class="pk alt" id="approach">
+  <div class="wrap section pk-lede">
+    <div class="lc-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">The Approach</span></div>
+      <h2 data-split>Prosthodontics is the specialty that does exactly this.</h2>
+    </div>
+    <div class="lc-body" data-rv="stagger">
+      <p>Most cosmetic dentistry is sold procedure by procedure: veneers here, a crown there,
+        whitening to finish. The result is a smile assembled out of separate decisions, and it
+        usually looks like one.</p>
+      <p>A prosthodontist is trained for three additional years in precisely the opposite habit —
+        <strong>designing the finished result first</strong>, then working backwards to what has to
+        happen to produce it. Which teeth get veneered, which get crowned, whether anything needs
+        replacing at the root, and in what order.</p>
+      <p>The consultation is a full oral examination with imaging, and a conversation about what you
+        actually want your smile to look like. Out of that comes a plan built around
+        <strong>your facial aesthetics, lip and gum line symmetry</strong>, and the shape of your
+        own face — not a catalogue shade.</p>
+      <a class="pk-more" href="about.html">Meet the specialist</a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- the five tools ---------- -->
+<section class="pk" id="tools">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">The Tools</span></div>
+      <h2 data-split>Five ways to get there. Most plans use two or three.</h2>
+    </div>
+    <div class="pk-cards c3" data-rv="stagger">
+      <article class="pk-card">
+        <span class="n">01</span>
+        <h3>Porcelain veneers</h3>
+        <p>Thin layers of custom porcelain bonded over enamel. The right answer for chips, cracks,
+          gaps and deep discolouration in the teeth that show when you smile.
+          <a class="more" href="veneers.html">Veneers in detail &rarr;</a></p>
+      </article>
+      <article class="pk-card">
+        <span class="n">02</span>
+        <h3>Dental crowns</h3>
+        <p>Custom caps that slip over and bond to a natural tooth. Where a tooth is too damaged or
+          too stained for a veneer to sit on, a crown rebuilds the whole visible surface.</p>
+      </article>
+      <article class="pk-card">
+        <span class="n">03</span>
+        <h3>Dental bridges</h3>
+        <p>A run of crowns spanning adjacent teeth. State-of-the-art zirconia fixed bridges replace
+          teeth lost or badly decayed, and behave like the natural ones beside them.</p>
+      </article>
+      <article class="pk-card">
+        <span class="n">04</span>
+        <h3>Professional whitening</h3>
+        <p>In-office whitening, often finished in a single visit. Usually the last step, once the
+          shade of everything else in the plan has been settled.</p>
+      </article>
+      <article class="pk-card">
+        <span class="n">05</span>
+        <h3>Dental implants</h3>
+        <p>Where teeth are missing rather than damaged, the design has to start at the root. Implants
+          carry the new teeth instead of the gum.
+          <a class="more" href="dental-implants.html">Implants in detail &rarr;</a></p>
+      </article>
+      <article class="pk-card">
+        <span class="n">&mdash;</span>
+        <h3>Digital Smile Design</h3>
+        <p>A free preview of the finished smile, generated from your own photographs and scans,
+          before a single tooth is prepared. You approve the result in advance.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- process ---------- -->
+<section class="pk light" id="process">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">The Sequence</span></div>
+      <h2 data-split>How a makeover actually runs.</h2>
+    </div>
+    <div class="pk-cards c4" data-rv="stagger">
+      <article class="pk-card">
+        <span class="n">01</span>
+        <h3>Smile evaluation</h3>
+        <p>A short evaluation establishes candidacy, produces a free Digital Smile Design preview,
+          and puts pricing and options on the table — with time to speak to Dr. Nahlah directly.</p>
+      </article>
+      <article class="pk-card">
+        <span class="n">02</span>
+        <h3>Full examination &amp; imaging</h3>
+        <p>A complete oral examination with any scans needed, to find out what is achievable and
+          what has to be treated before anything cosmetic begins.</p>
+      </article>
+      <article class="pk-card">
+        <span class="n">03</span>
+        <h3>The design</h3>
+        <p>Shape, shade, proportion, lip line and gum symmetry are settled as one design. You
+          approve it before preparation starts.</p>
+      </article>
+      <article class="pk-card">
+        <span class="n">04</span>
+        <h3>Build it</h3>
+        <p>The treatments in the plan, in the order the design requires, with the in-house
+          laboratory adjusting shade and fit in minutes rather than by post.</p>
+      </article>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- cases ---------- -->
+<section class="pk" id="cases">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Real Cases</span></div>
+      <h2 data-split>Drag the line.</h2>
+    </div>
+    <div class="pk-ba-grid g3" data-rv="stagger">
+      <figure style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-veneers-2-before.jpg" alt="Before: worn and discoloured smile zone" loading="lazy">
+          <img class="after" src="assets/case-veneers-2-after.jpg" alt="After: porcelain veneers" loading="lazy">
+          <span class="ba-tag b">Before</span><span class="ba-tag a">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
+        </div>
+        <figcaption class="pk-ba-cap">Porcelain veneers across the smile zone</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-veneers-implants-2-before.jpg" alt="Before: damaged and missing teeth" loading="lazy">
+          <img class="after" src="assets/case-veneers-implants-2-after.jpg" alt="After: veneers combined with implants" loading="lazy">
+          <span class="ba-tag b">Before</span><span class="ba-tag a">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
+        </div>
+        <figcaption class="pk-ba-cap">Veneers combined with implant restoration</figcaption>
+      </figure>
+      <figure style="margin:0">
+        <div class="pk-ba">
+          <img src="assets/case-whitening-1-before.jpg" alt="Before: discoloured teeth" loading="lazy">
+          <img class="after" src="assets/case-whitening-1-after.jpg" alt="After: professional whitening" loading="lazy">
+          <span class="ba-tag b">Before</span><span class="ba-tag a">After</span>
+          <div class="ba-line"></div>
+          <input type="range" min="0" max="100" value="50" aria-label="Reveal the after photograph">
+        </div>
+        <figcaption class="pk-ba-cap">Professional whitening, single visit</figcaption>
+      </figure>
+    </div>
+    <p style="margin-top:clamp(1.5rem,3vw,2.25rem)" data-rv>
+      <a class="pk-more" href="smile-gallery.html">The full gallery</a></p>
+  </div>
+</section>
+
+<!-- ---------- next ---------- -->
+<section class="pk alt" id="next">
+  <div class="wrap section">
+    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
+    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
+      <a href="veneers.html"><span class="nx-k">Cosmetic</span>
+        <span class="nx-t">Porcelain Veneers</span>
+        <span class="nx-d">Two appointments, under a millimetre of enamel, hand-designed.</span></a>
+      <a href="dental-implants.html"><span class="nx-k">Structural</span>
+        <span class="nx-t">Dental Implants</span>
+        <span class="nx-d">When the design has to start below the gum line.</span></a>
+      <a href="implant-cost.html"><span class="nx-k">Money</span>
+        <span class="nx-t">Cost &amp; Financing</span>
+        <span class="nx-d">Payment options so a plan is not decided by a number alone.</span></a>
+    </nav>
+  </div>
+</section>
+
+<!-- ---------- cta ---------- -->
+<section class="pk pk-cta" id="book">
+  <div class="wrap section cta-in">
+    <h2 data-split>See it before you commit to it.</h2>
+    <p data-rv>The smile evaluation tells you whether you are a candidate, shows you a free Digital
+      Smile Design of the result, and puts pricing on the table.</p>
+    <a class="btn btn-dark magnetic" href="contact.html#book" data-rv><span>Book your evaluation</span></a>
+    <div class="cta-phones" data-rv>
+      <span>McLean &middot; <a href="tel:+15716199442">(571) 619-9442</a></span>
+      <span>Alexandria &middot; <a href="tel:+15714103430">(571) 410-3430</a></span>
+    </div>
+  </div>
+</section>
+
+
+</main>
+
+<footer class="foot" data-theme="dark">
+  <style>
+    /* Every selector here is anchored to `footer.foot`, not the bare class.
+       A chapter on the home page also carries a `.foot` caption row, and the
+       unanchored `.foot{background:var(--black)}` rule was painting a black
+       plate behind it — inside a cream-coloured section, under dark text. */
+    footer.foot{background:var(--black);border-top:1px solid rgba(255,255,255,.1);
+      padding-block:clamp(3rem,6vw,5rem) clamp(1.5rem,3vw,2.5rem)}
+    footer.foot .grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem)}
+    footer.foot img{width:190px;margin-bottom:1.25rem}
+    footer.foot h4{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+      font-family:var(--f-body);font-weight:600;margin-bottom:1rem}
+    footer.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+    footer.foot a{color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300;transition:color .3s}
+    footer.foot a:hover{color:var(--gold)}
+    footer.foot .blurb{color:rgba(255,255,255,.62);font-weight:300;max-width:34ch;font-size:.92rem}
+    /* Hours are facts, not navigation — they were anchor links before, which
+       gave keyboard users four tab stops that went nowhere useful. */
+    footer.foot .facts{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;
+      color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300}
+    footer.foot .facts b{color:rgba(255,255,255,.9);font-weight:500}
+    footer.foot .base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
+      border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:1rem;
+      justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.55)}
+    @media(min-width:720px){ footer.foot .grid{grid-template-columns:1.6fr 1fr 1fr 1.2fr} }
+  </style>
+  <div class="wrap">
+    <div class="grid">
+      <div>
+        <img src="assets/logo.png" alt="Dr. Nahlah">
+        <p class="blurb">Implant dentistry and prosthodontics for Northern Virginia — rebuilding
+          smiles that other practices call too complex.</p>
+      </div>
+      <div>
+        <h4>Treatments</h4>
+        <ul>
+          <li><a href="dental-implants.html">Dental Implants</a></li>
+          <li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+          <li><a href="smile-makeover.html">Smile Makeover</a></li>
+          <li><a href="veneers.html">Porcelain Veneers</a></li>
+          <li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Patients</h4>
+        <ul>
+          <li><a href="smile-gallery.html">Smile Gallery</a></li>
+          <li><a href="patient-stories.html">Patient Stories</a></li>
+          <li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+          <li><a href="about.html">Dr. Esam Nahlah</a></li>
+          <li><a href="contact.html">Contact &amp; Locations</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>Hours</h4>
+        <ul class="facts">
+          <li><b>Mon&ndash;Thu</b> &nbsp;8:00am &ndash; 5:00pm</li>
+          <li><b>Friday</b> &nbsp;8:00am &ndash; 2:00pm</li>
+          <li><b>Sat &amp; Sun</b> &nbsp;Closed</li>
+        </ul>
+        <ul style="margin-top:1.1rem">
+          <li><a href="tel:+15716199442">McLean &middot; (571) 619-9442</a></li>
+          <li><a href="tel:+15714103430">Alexandria &middot; (571) 410-3430</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="base">
+      <span>&copy; 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+      <span>McLean &middot; Alexandria, Virginia</span>
+    </div>
+  </div>
+</footer>
+
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+
+<script>
+/* ==========================================================================
+   FLUSH — smoother first, then every section's queued setup, then refresh.
+   ========================================================================== */
+(function(){
+  var W = window.WZ;
+  document.documentElement.classList.add('wz-ready');
+
+  if(!W || !W.ok){
+    /* GSAP missing: reveal everything so the page is still readable. */
+    document.querySelectorAll('[data-anim="hide"]').forEach(function(el){ el.style.visibility='visible'; });
+    return;
+  }
+
+  /* Register here, not in <head> — body must exist before ScrollTrigger inits. */
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  if(window.ScrollSmoother) gsap.registerPlugin(ScrollSmoother);
+  if(window.SplitText)      gsap.registerPlugin(SplitText);
+  if(window.Observer)       gsap.registerPlugin(Observer);
+
+  if(!W.reduced && window.ScrollSmoother){
+    try{
+      W.smoother = ScrollSmoother.create({
+        wrapper:'#smooth-wrapper', content:'#smooth-content',
+        /* THE DIAL FOR "how smooth does the page feel". Higher = longer glide
+           after the wheel stops, which is the effect itself:
+             .8 -> the page eases for ~750ms
+            1.2 -> ~1050ms  (here)
+            1.4 -> ~2400ms, which starts to feel like the page is arguing
+           This is only half the story. Every scrubbed trigger adds a SECOND
+           lag on top, and it is that one — not this one — that reads as
+           broken: at smooth 1.05 with scrub .7 the pinned chapters trailed
+           the page by ~1.4s. With the pins at scrub .3 they now trail it by
+           roughly 0ms, so the glide can be generous without the animation
+           appearing to lag behind the scroll. Raise this, not the scrubs. */
+        smooth: 1.2, effects: false, smoothTouch: false,
+        /* normalizeScroll is deliberately OFF. It was tried: it makes no
+           measurable difference to the pinned scrubs (257ms vs 273ms to
+           settle) and it swallows touchmove, so on a phone a before/after
+           slider jumps to the tap point instead of following the finger.
+           Handing those elements back with `ignore` fixes the drag and
+           then traps the page: a vertical swipe starting on a slider
+           scrolls 0px instead of 535px. Not worth it. */
+        normalizeScroll: false, ignoreMobileResize: true
+      });
+    }catch(e){ console.warn('ScrollSmoother unavailable', e); }
+  }
+
+  W.flush();
+
+  /* --- nav state: reading progress + chapter readout (global UI) --- */
+  var navCh  = document.getElementById('navCh'),
+      navNm  = document.getElementById('navName'),
+      navBar = document.getElementById('navBar'),
+      navPr  = document.getElementById('navProgress'),
+      nav    = document.getElementById('nav');
+
+  /* Whole-page reading progress along the top edge of the nav. */
+  gsap.to(navPr,{scaleX:1,ease:'none',
+    scrollTrigger:{start:0,end:'max',scrub:.25}});
+
+  gsap.utils.toArray('section[data-chapter]').forEach(function(sec){
+    var i = parseInt(sec.getAttribute('data-chapter'),10),
+        name = sec.getAttribute('data-chapter-name');
+    function activate(){
+      if(navCh) navCh.textContent = String(i).padStart(2,'0');
+      if(navNm) navNm.textContent = name;
+      if(navBar) navBar.style.setProperty('--p', (i/8).toFixed(3));
+    }
+    ScrollTrigger.create({trigger:sec,start:'top 55%',end:'bottom 45%',
+      onEnter:activate,onEnterBack:activate});
+  });
+
+  ScrollTrigger.create({start:40,end:99999,
+    onToggle:function(self){ nav.classList.toggle('solid', self.isActive); }});
+
+  /* --- anchors routed through the smoother so pinned sections land right --- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if(id.length < 2) return;
+      var t = document.querySelector(id);
+      if(!t) return;
+      e.preventDefault();
+      if(W.smoother) W.smoother.scrollTo(t, true, 'top top');
+      else gsap.to(window,{duration: W.reduced?0:1, scrollTo:{y:t,autoKill:true},ease:'power2.inOut'});
+    });
+  });
+
+  /* --- magnetic buttons, pointer-fine only --- */
+  if(!W.reduced && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    document.querySelectorAll('.magnetic').forEach(function(el){
+      var xTo = gsap.quickTo(el,'x',{duration:.5,ease:'power3'}),
+          yTo = gsap.quickTo(el,'y',{duration:.5,ease:'power3'});
+      el.addEventListener('pointermove',function(e){
+        var r = el.getBoundingClientRect();
+        xTo((e.clientX-r.left-r.width/2)*.22); yTo((e.clientY-r.top-r.height/2)*.38);
+      });
+      el.addEventListener('pointerleave',function(){ xTo(0); yTo(0); });
+    });
+  }
+
+  /* --- mobile drawer --- */
+  var burger = document.getElementById('burger'), drawer = document.getElementById('drawer');
+  function closeDrawer(){
+    burger.classList.remove('open'); drawer.classList.remove('open');
+    document.getElementById('nav').classList.remove('menu-open');
+    burger.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true');
+    document.body.classList.remove('is-locked');
+    if(W.smoother) W.smoother.paused(false);
+  }
+  burger.addEventListener('click',function(){
+    var open = drawer.classList.toggle('open');
+    burger.classList.toggle('open',open);
+    document.getElementById('nav').classList.toggle('menu-open',open);
+    burger.setAttribute('aria-expanded',String(open));
+    drawer.setAttribute('aria-hidden',String(!open));
+    burger.setAttribute('aria-label', open?'Close menu':'Open menu');
+    document.body.classList.toggle('is-locked',open);
+    if(W.smoother) W.smoother.paused(open);
+  });
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){ closeDrawer(); });
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape' && drawer.classList.contains('open')) closeDrawer();
+  });
+
+  /* Pinned sections measure wrong if fonts or images land late. */
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ ScrollTrigger.refresh(); });
+  window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+})();
+</script>
+</body>
+</html>

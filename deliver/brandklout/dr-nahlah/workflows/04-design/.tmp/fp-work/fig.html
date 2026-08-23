@@ -1,0 +1,24 @@
+<!doctype html><html><head><meta charset="utf-8">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
+<style>
+  html,body{margin:0;background:transparent}
+  .fig{width:2000px;display:grid;grid-template-columns:repeat(3,1fr);
+       align-items:end;gap:0;padding:40px 0 18px;box-sizing:border-box;background:transparent}
+  .col{position:relative;display:flex;flex-direction:column;align-items:center;
+       justify-content:flex-end;padding:0 46px;box-sizing:border-box}
+  .col + .col::before{content:"";position:absolute;left:0;top:6%;bottom:4%;
+       width:1px;background:rgba(138,126,78,.28)}
+  .shot{display:flex;align-items:flex-end;justify-content:center;width:100%}
+  .shot img{width:100%;height:auto;display:block;
+       filter:drop-shadow(0 16px 24px rgba(20,20,22,.15))}
+  .key{font-family:'Playfair Display',serif;font-weight:500;font-size:50px;
+       color:#8A7E4E;line-height:1;margin-top:48px;letter-spacing:.01em}
+  .rule{width:34px;height:1px;background:#8A7E4E;opacity:.45;margin-top:20px}
+</style></head><body>
+<div class="fig">
+  <div class="col"><div class="shot"><img src="fp1-trim.png"></div><div class="key">FP1</div></div>
+  <div class="col"><div class="shot"><img src="fp2-trim.png"></div><div class="key">FP2</div></div>
+  <div class="col"><div class="shot"><img src="fp3-trim.png"></div><div class="key">FP3</div></div>
+</div></body></html>

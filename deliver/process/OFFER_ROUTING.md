@@ -75,6 +75,7 @@ AI Claude/Vercel/Airtable site handoffs must also include:
 | `15-improvement-intake-audit` | Not used | Not used | Not used | Required | Not used |
 | `16-vercel-deployment` | Optional for extra static deployments beyond required design review URLs | Optional for CLI-managed previews | Optional for CLI-managed previews | Optional for CLI-managed review URLs or static delivery | Required for preview/production deployment path |
 | `17-ai-site-build-airtable` | Not used | Not used | Not used | Not used | Required |
+| `18-instatic-embeds` | Optional when the site is built on Instatic and needs third-party widgets | Optional, Instatic only | Optional, Instatic only | Optional, Instatic only | Optional, Instatic only |
 
 ## 4. Offer Paths
 

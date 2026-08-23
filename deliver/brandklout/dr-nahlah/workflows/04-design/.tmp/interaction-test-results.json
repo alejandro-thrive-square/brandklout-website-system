@@ -1,0 +1,157 @@
+[
+  {
+    "name": "fonts loaded (Playfair Display)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "fonts loaded (Raleway)",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "preloader released",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "body scroll unlocked",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "hero headline masks revealed",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "hero portrait loaded",
+    "pass": true,
+    "detail": "1200px wide"
+  },
+  {
+    "name": "ticker duplicated for seamless loop",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "stat counters ran to final values",
+    "pass": true,
+    "detail": "25+ · 10,000+ · 4.9 · 2"
+  },
+  {
+    "name": "statement words brighten on scroll",
+    "pass": true,
+    "detail": "15/21 lit"
+  },
+  {
+    "name": "compare slider responds to keyboard",
+    "pass": true,
+    "detail": "50% -> 70%"
+  },
+  {
+    "name": "compare slider exposes aria-valuenow",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "compare slider responds to drag",
+    "pass": true,
+    "detail": "-> 21.999999262867387%"
+  },
+  {
+    "name": "case tab swaps imagery",
+    "pass": true,
+    "detail": "assets/case2-before.jpg"
+  },
+  {
+    "name": "case tab swaps caption",
+    "pass": true,
+    "detail": "Double-arch All-on-4 · full fixed teeth on fou"
+  },
+  {
+    "name": "swapped case image actually loads",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "b-roll video has data and is playing",
+    "pass": true,
+    "detail": "readyState=3"
+  },
+  {
+    "name": "every reveal fires after a full scroll",
+    "pass": true,
+    "detail": "37/37"
+  },
+  {
+    "name": "every masked heading fires",
+    "pass": true,
+    "detail": "4/4"
+  },
+  {
+    "name": "no broken images",
+    "pass": true,
+    "detail": "all loaded"
+  },
+  {
+    "name": "no horizontal overflow @1440",
+    "pass": true,
+    "detail": "scrollWidth=1440"
+  },
+  {
+    "name": "no horizontal overflow @390",
+    "pass": true,
+    "detail": "scrollWidth=390 vs 390"
+  },
+  {
+    "name": "burger visible on mobile",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "desktop nav hidden on mobile",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "drawer opens",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "drawer sets aria-expanded",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "drawer links visible",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "drawer closes on link tap",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "body unlocked after drawer close",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "compare slider sized on mobile",
+    "pass": true,
+    "detail": "350x263"
+  },
+  {
+    "name": "reduced motion: preloader skipped",
+    "pass": true,
+    "detail": ""
+  },
+  {
+    "name": "reduced motion: content visible without scroll",
+    "pass": true,
+    "detail": ""
+  }
+]

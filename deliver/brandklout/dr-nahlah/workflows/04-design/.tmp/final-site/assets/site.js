@@ -471,18 +471,26 @@ WZ.section("ch-proof", function (W) {
 
   /* --- upgrade the cards to the LIVE feed, where the host permits it ---
      The client wants reviews that update the moment a patient leaves one, and
-     the vendor's script + iframe do exactly that. They cannot run everywhere:
-     Instatic assembles each page's CSP from module contributions, and
-     base/video is the only module in its codebase that declares any, so
-     frame-src ever only names YouTube and both the frame and the vendor script
-     are refused there. Rather than pick one platform and lose on the other,
-     the generated cards ship as the content and this quietly swaps in the live
-     widget wherever it actually loads.
+     the vendor's iframe does exactly that. It cannot run everywhere: Instatic
+     publishes behind `frame-src 'none'` unless an operator widens it (see
+     workflows/16-instatic-plugins). Rather than pick one platform and lose on
+     the other, the generated cards ship as the content and this quietly swaps
+     in the live widget wherever it actually loads.
 
      Success is judged on the vendor's own postMessage, not on the iframe's
      load event: a blocked frame still fires load (about:blank), so trusting
      that would leave an empty well exactly where the reviews should be. If no
-     height arrives, everything added here is removed and the cards stay. */
+     height arrives, everything added here is removed and the cards stay.
+
+     THE VENDOR'S PARENT SCRIPT IS DELIBERATELY NOT LOADED. Its only job is to
+     size the iframe from `lc.setHeight`, and we already receive that message
+     ourselves — probe-widget-postmessage.mjs confirms the frame reports
+     `{height: 1968}` with no parent script present at all. Loading it would
+     mean granting `script-src https://reputationhub.site`, which lets that
+     origin run arbitrary JavaScript against this document and its storage; a
+     cross-origin iframe can do neither. So the widget is live on `frame-src`
+     alone, and the script origin is never granted. Do not "fix" this by
+     re-adding the script tag. */
   (function () {
     var slot = document.querySelector('.rv-live');
     var wall = document.querySelector('.rv-wall');
@@ -514,18 +522,20 @@ WZ.section("ch-proof", function (W) {
     }
 
     window.addEventListener('message', function (e) {
-      if (!/reputationhub\.site$/.test(new URL(e.origin).hostname)) return;
+      /* Parse first: a malformed origin on some unrelated message must not throw
+         out of the listener and take the later, real one with it. */
+      var host;
+      try { host = new URL(e.origin).hostname } catch (_) { return }
+      if (!/reputationhub\.site$/.test(host)) return;
       var name = e.data && e.data[0], data = e.data && e.data[1];
       if (name !== 'lc.setHeight') return;
       if (widgetId && data && data.widgetId && data.widgetId !== widgetId) return;
+      /* The frame keeps reporting as its content reflows, so height is applied on
+         every message, not only the one that settles the swap. */
+      var h = data && parseInt(data.height, 10);
+      if (h > 0) f.style.height = h + 'px';
       accept();
     });
-
-    var sc = document.createElement('script');
-    sc.src = 'https://reputationhub.site/reputation/assets/review-widget.js';
-    sc.async = true;
-    sc.onerror = reject;
-    document.body.appendChild(sc);
 
     /* The widget renders server-side and reports within a second or two on a
        normal connection. Eight is generous, and the cost of being wrong is
@@ -989,6 +999,16 @@ WZ.dom("vl-grid", function () {
    Polled rather than hooked to the tween: SplitText autoSplit rebuilds the
    masks on every resize, and the rebuilt ones come back clipped.
 
+   TWO class names, deliberately. SplitText builds each mask by cloning the
+   line and suffixing every class it carries with `-mask`, so the mask's name
+   is whatever `linesClass` is plus `-mask`. The live Webflow build splits with
+   `wz-mask-line` and gets `wz-mask-line-mask`; this package's runtime splits
+   with `wz-line` (js/00-runtime.js) and gets `wz-line-mask`. This swept only
+   for the Webflow name, so on every page built from this package it matched
+   nothing and never ran — which is why the descenders were still clipped
+   after the fix was written. Matching both is what stops the two vocabularies
+   drifting apart again.
+
    Kept as its own block so it converts to a single Webflow footer script; it
    is registered there as `wzDescenderRescue`.
    ========================================================================== */
@@ -1004,11 +1024,11 @@ WZ.dom("vl-grid", function () {
     return 0;
   }
   function sweep() {
-    var masks = document.getElementsByClassName('wz-mask-line-mask');
+    var masks = document.querySelectorAll('.wz-line-mask,.wz-mask-line-mask');
     for (var i = 0; i < masks.length; i++) {
       var line = masks[i].firstElementChild;
       if (!line) continue;
-      masks[i].style.overflow = Math.abs(ty(line)) < EPS ? 'visible' : 'hidden';
+      masks[i].style.overflow = Math.abs(ty(line)) < EPS ? 'visible' : 'clip';
     }
   }
   sweep();

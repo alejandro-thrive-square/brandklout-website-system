@@ -1,0 +1,32 @@
+{
+  "url": "http://127.0.0.1:8902/contact.html",
+  "viewport": "1440x900",
+  "maxScroll": 3660,
+  "step": 765,
+  "shots": [
+    {
+      "name": "s00.jpg",
+      "y": 0
+    },
+    {
+      "name": "s01.jpg",
+      "y": 765
+    },
+    {
+      "name": "s02.jpg",
+      "y": 1530
+    },
+    {
+      "name": "s03.jpg",
+      "y": 2295
+    },
+    {
+      "name": "s04.jpg",
+      "y": 3060
+    },
+    {
+      "name": "s05.jpg",
+      "y": 3660
+    }
+  ]
+}

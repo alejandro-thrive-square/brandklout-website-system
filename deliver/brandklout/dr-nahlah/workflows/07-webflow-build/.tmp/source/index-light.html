@@ -1,0 +1,1690 @@
+<!DOCTYPE html>
+
+<html lang="en">
+<head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1" name="viewport"/>
+<title>Dr. Nahlah — Implant &amp; Prosthodontic Specialists | McLean &amp; Alexandria, VA</title>
+<meta content="Board-certified prosthodontist Dr. Esam Nahlah rebuilds smiles with dental implants, All-on-4 and full-mouth reconstruction in McLean and Alexandria, Virginia." name="description"/>
+<link href="data:," rel="icon"/>
+<link href="https://fonts.googleapis.com" rel="preconnect"/>
+<link crossorigin="" href="https://fonts.gstatic.com" rel="preconnect"/>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&amp;family=Raleway:wght@300;400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<!-- ==========================================================================
+     GLOBAL LAYER ONLY — tokens, reset, shared primitives.
+     Every section below carries its own <style> and <script>, so a section can
+     be lifted into Webflow as one self-contained embed.
+     ========================================================================== -->
+<style>
+:root{
+  --gold:#AB9E6A; --gold-light:#D4CDB2; --gold-deep:#8A7E4E; --gold-wash:#F5F2E9;
+  /* --gold-deep is only 3.7:1 on the cream ground — fine for display sizes,
+     short of AA for the small uppercase labels. --gold-ink is the same hue
+     taken dark enough to clear 4.5:1 on --warm and on white. */
+  --gold-ink:#665C33;
+  --black:#0B0B0C; --ink-900:#141416; --ink-800:#1C1C1F; --ink-700:#2A2A2E; --ink-500:#6B6B72;
+  --white:#fff; --warm:#FAF8F3; --mist:#F0EDE6;
+
+  /* ------------------------------------------------------------------
+     THEME LAYER.
+     The site is light: warm cream is the ground, ink is the text, and the
+     two dark chapters (the film and the invitation) plus the footer and the
+     drawer opt in with data-theme="dark". Every section below paints from
+     these six names only — never a raw hex or a raw rgba(255,255,255,x) —
+     so a section can be flipped by changing the scope it sits in, not by
+     rewriting its rules.
+       --bg      the ground                --fg       headings, strong text
+       --bg-2    the alternate band        --fg-body  body copy
+       --bg-3    the accent band           --fg-soft  meta, captions, labels
+       --card    raised panel              --line     hairlines and borders
+     Gold splits three ways because brand gold is only 2.4:1 on cream:
+       --accent      text-sized gold (labels, links)  — clears AA
+       --accent-lg   display-sized gold (numerals, quote marks)
+       --rule        gold hairlines and dots (non-text)
+     ------------------------------------------------------------------ */
+  --bg:#FAF8F3; --bg-2:#FFFFFF; --bg-3:#F5F2E9; --card:#FFFFFF;
+  --fg:#141416; --fg-body:#3A3A40; --fg-soft:#55555C; --fg-faint:#6E6E76;
+  --line:rgba(20,20,22,.13); --line-2:rgba(20,20,22,.07); --line-strong:rgba(20,20,22,.3);
+  --accent:var(--gold-ink); --accent-lg:var(--gold-deep); --rule:var(--gold-deep);
+  --focus:var(--gold-deep);
+  /* Scrim over photography, so text on an image reads on either theme. */
+  --scrim:rgba(11,11,12,.62);
+  --f-display:'Playfair Display','Times New Roman',serif;
+  --f-body:'Raleway','Helvetica Neue',Arial,sans-serif;
+  --d1:clamp(2.75rem,7.4vw,8.25rem);
+  --d2:clamp(2.25rem,5.2vw,5.5rem);
+  --h2:clamp(1.9rem,3.6vw,3.75rem);
+  --h3:clamp(1.35rem,1.9vw,2rem);
+  --body-lg:clamp(1.05rem,1.25vw,1.25rem);
+  --body:clamp(.975rem,1.05vw,1.0625rem);
+  --label:clamp(.68rem,.78vw,.78rem);
+  --gutter:clamp(1.25rem,4vw,4.5rem);
+  --section:clamp(4.5rem,9vw,9.5rem);
+  --maxw:1560px;
+  /* Was a gutter for the left chapter rail; the rail was removed in favour of a
+     progress bar on the nav, so content is full-width again. Kept as a token so
+     section rules that reference it stay valid. */
+  --rail:0px;
+}
+/* The dark chapters. Scoped, not global, so nesting works: a light card inside
+   a dark band only has to carry data-theme="light" to come back. */
+[data-theme="dark"]{
+  --bg:#0B0B0C; --bg-2:#141416; --bg-3:#1C1C1F; --card:#141416;
+  --fg:#FFFFFF; --fg-body:rgba(255,255,255,.78); --fg-soft:rgba(255,255,255,.62);
+  --fg-faint:rgba(255,255,255,.5);
+  --line:rgba(255,255,255,.12); --line-2:rgba(255,255,255,.07); --line-strong:rgba(255,255,255,.3);
+  --accent:var(--gold); --accent-lg:var(--gold); --rule:var(--gold);
+  --focus:var(--gold-light);
+  background:var(--bg);color:var(--fg-body);
+}
+[data-theme="light"]{
+  --bg:#FAF8F3; --bg-2:#FFFFFF; --bg-3:#F5F2E9; --card:#FFFFFF;
+  --fg:#141416; --fg-body:#3A3A40; --fg-soft:#55555C; --fg-faint:#6E6E76;
+  --line:rgba(20,20,22,.13); --line-2:rgba(20,20,22,.07); --line-strong:rgba(20,20,22,.3);
+  --accent:var(--gold-ink); --accent-lg:var(--gold-deep); --rule:var(--gold-deep);
+  --focus:var(--gold-deep);
+  background:var(--bg);color:var(--fg-body);
+}
+*,*::before,*::after{box-sizing:border-box}
+html{-webkit-text-size-adjust:100%}
+body{
+  margin:0;background:var(--bg);color:var(--fg-body);
+  font-family:var(--f-body);font-size:var(--body);line-height:1.65;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden;
+}
+body.is-locked{overflow:hidden}
+img,video{max-width:100%;display:block}
+a{color:inherit;text-decoration:none}
+button{font:inherit;color:inherit;background:none;border:0;cursor:pointer}
+h1,h2,h3,h4{margin:0;font-family:var(--f-display);font-weight:500;line-height:1.02;
+  letter-spacing:-.02em;color:var(--fg)}
+p{margin:0}
+::selection{background:var(--gold);color:var(--black)}
+:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+
+/* Content clears the fixed rail rather than sliding under it. */
+.wrap{width:100%;max-width:var(--maxw);margin-inline:auto;
+  padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail))}
+.wrap.no-rail{padding-left:var(--gutter)}
+.sec-pad{padding-block:var(--section)}
+.eyebrow{font-size:var(--label);letter-spacing:.18em;text-transform:uppercase;font-weight:600;
+  color:var(--accent);font-family:var(--f-body)}
+.chapter-tag{display:flex;align-items:center;gap:.85rem;margin-bottom:1.4rem}
+.chapter-tag i{width:clamp(24px,3.5vw,48px);height:1px;background:var(--rule);flex:none}
+
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:.6rem;padding:1.05rem 2rem;
+  font-size:var(--label);letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  position:relative;overflow:hidden;transition:color .45s cubic-bezier(.22,1,.36,1);will-change:transform}
+.btn>span{position:relative;z-index:1}
+/* The hover fill is the theme's ink, and the label flips to the theme's ground,
+   so one rule reads correctly on cream and on black. */
+.btn::after{content:"";position:absolute;inset:0;background:var(--fg);transform:translateY(101%);
+  transition:transform .55s cubic-bezier(.22,1,.36,1);z-index:0}
+.btn:hover::after{transform:translateY(0)}
+.btn:hover{color:var(--bg)}
+.btn-primary{background:linear-gradient(100deg,var(--gold-deep),var(--gold) 45%,var(--gold-light));color:var(--black)}
+.btn-ghost{border:1px solid var(--line-strong);color:var(--fg)}
+.btn-dark{background:var(--fg);color:var(--bg)}
+.btn-dark::after{background:var(--ink-700)}
+.btn-dark:hover{color:var(--bg)}
+
+/* ScrollSmoother scaffolding — fixed UI lives OUTSIDE the wrapper */
+#smooth-wrapper{overflow:hidden}
+
+/* Pre-paint guard: hide split targets until GSAP has set their state so we
+   never flash unsplit text. .wz-ready is set by the bootstrap. */
+[data-anim="hide"]{visibility:hidden}
+.wz-ready [data-anim="hide"]{visibility:visible}
+
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation-duration:.001ms!important;animation-iteration-count:1!important;
+    transition-duration:.001ms!important}
+  [data-anim="hide"]{visibility:visible!important}
+}
+</style>
+<!-- GSAP 3.15 — vendored locally so the package runs offline and headless
+     verification is deterministic. Webflow build should load the same files
+     from the GSAP CDN via Page Settings instead. -->
+<script src="assets/gsap/gsap.min.js"></script>
+<script src="assets/gsap/ScrollTrigger.min.js"></script>
+<script src="assets/gsap/ScrollToPlugin.min.js"></script>
+<script src="assets/gsap/ScrollSmoother.min.js"></script>
+<script src="assets/gsap/SplitText.min.js"></script>
+<script src="assets/gsap/Observer.min.js"></script>
+<script>
+/* ==========================================================================
+   BOOTSTRAP (the only shared script)
+   Section scripts push their setup into WZ.add(). We create ScrollSmoother
+   first, then flush the queue, so every ScrollTrigger measures against the
+   final smoothed layout. Without this ordering, triggers registered mid-parse
+   measure a half-built page.
+   ========================================================================== */
+window.WZ = (function(){
+  var q = [], flushed = false;
+  var reduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  var ok = !!(window.gsap && window.ScrollTrigger);
+
+  /* NOTE: plugins are deliberately NOT registered here. This script runs inside
+     <head>, where document.body does not exist yet — registering ScrollTrigger
+     that early leaves its internals half-initialised, and ScrollSmoother then
+     dies on `getScrollFunc` with "Cannot read properties of undefined". The
+     flush block at the end of <body> does the registration instead. */
+
+  /* Split into masked lines, with graceful degradation if SplitText is absent. */
+  /* Pass `build` when the lines carry a tween: it runs on the first split and
+     again on every re-split, and whatever it returns is killed before the next
+     one so tweens never point at dead nodes. Omit it for one-shot entrances —
+     the lines still re-flow, they just do not re-animate. */
+  function splitLines(el, build){
+    if(!window.SplitText) return null;
+    try{
+      var opts = {type:'lines', mask:'lines', linesClass:'wz-line', autoSplit:true};
+      if(build) opts.onSplit = function(self){ return build(self); };
+      return (SplitText.create ? SplitText.create(el,opts) : new SplitText(el,opts));
+    }catch(e){
+      try{ return new SplitText(el,{type:'lines',linesClass:'wz-line'}); }catch(e2){ return null; }
+    }
+  }
+  function splitWords(el){
+    if(!window.SplitText) return null;
+    try{
+      var opts = {type:'words', wordsClass:'wz-word'};
+      return (SplitText.create ? SplitText.create(el,opts) : new SplitText(el,opts));
+    }catch(e){ return null; }
+  }
+
+  return {
+    reduced: reduced,
+    ok: ok,
+    smoother: null,
+    splitLines: splitLines,
+    splitWords: splitWords,
+    add: function(fn){ flushed ? this.run(fn) : q.push(fn); },
+    run: function(fn){ try{ fn(this); }catch(e){ console.error('[WZ section]', e); } },
+    flush: function(){
+      flushed = true;
+      var self = this;
+      q.forEach(function(fn){ self.run(fn); });
+      q.length = 0;
+    }
+  };
+})();
+</script>
+</head>
+<body>
+<!-- ==========================================================================
+     FIXED UI — outside #smooth-wrapper so ScrollSmoother never transforms it
+     ========================================================================== -->
+<header class="site-nav" data-journey="1" id="nav">
+<style>
+    .site-nav{position:fixed;top:0;left:0;right:0;z-index:120;border-bottom:1px solid transparent;
+      transition:background .4s ease,border-color .4s ease}
+    /* Reading progress, pinned to the very top edge above the nav row. */
+    .nav-progress{position:absolute;top:0;left:0;right:0;height:2px;
+      background:var(--line-2);overflow:hidden}
+    .nav-progress i{display:block;height:100%;width:100%;transform:scaleX(0);transform-origin:left;
+      background:linear-gradient(90deg,var(--gold-deep),var(--gold) 55%,var(--gold-light))}
+    .site-nav.solid{background:rgba(250,248,243,.9);backdrop-filter:blur(14px);border-bottom-color:rgba(138,126,78,.26)}
+    .nav-in{display:flex;align-items:center;justify-content:space-between;gap:1.5rem;
+      padding-block:clamp(.85rem,1.6vw,1.35rem)}
+    .nav-logo img{width:clamp(132px,13vw,190px)}
+
+    /* One slot, shared by the site links and — on the journey page — the chapter
+       readout, so the nav row is the same shape on every page. */
+    .nav-slot{display:none;position:relative;align-items:center;min-height:1.4em}
+    .nav-links{display:flex;align-items:center;gap:clamp(1.1rem,2.2vw,2.2rem);
+      font-size:var(--label);letter-spacing:.14em;text-transform:uppercase;font-weight:600;
+      transition:opacity .45s ease}
+    .nav-links a{color:var(--fg-soft);position:relative;padding-block:.4rem;
+      transition:color .35s ease}
+    .nav-links a::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;
+      background:var(--rule);transform:scaleX(0);transform-origin:right;
+      transition:transform .45s cubic-bezier(.22,1,.36,1)}
+    .nav-links a:hover{color:var(--fg)}
+    .nav-links a:hover::after{transform:scaleX(1);transform-origin:left}
+    .nav-links a[aria-current="page"]{color:var(--accent)}
+    .nav-links a[aria-current="page"]::after{transform:scaleX(1)}
+
+    .nav-chapter{position:absolute;left:0;top:50%;transform:translateY(-50%);
+      display:flex;align-items:center;gap:.8rem;font-size:var(--label);letter-spacing:.16em;
+      text-transform:uppercase;color:var(--fg-soft);opacity:0;pointer-events:none;
+      transition:opacity .45s ease;white-space:nowrap}
+    .nav-chapter b{color:var(--accent);font-weight:600;font-variant-numeric:tabular-nums}
+    .nav-chapter i{display:block;width:56px;height:1px;background:var(--line);position:relative}
+    .nav-chapter i::after{content:"";position:absolute;inset:0;background:var(--rule);
+      transform:scaleX(var(--p,0));transform-origin:left;transition:transform .5s ease}
+    .site-nav[data-journey="1"].solid .nav-links{opacity:0;pointer-events:none}
+    .site-nav[data-journey="1"].solid .nav-chapter{opacity:1}
+
+    .nav-right{display:flex;align-items:center;gap:clamp(.5rem,1.4vw,1.1rem)}
+    .nav-cta{border:1px solid var(--rule);color:var(--fg);padding:.7rem 1.4rem;font-size:var(--label);
+      letter-spacing:.14em;text-transform:uppercase;font-weight:600;white-space:nowrap;
+      transition:background .4s,color .4s}
+    .nav-cta:hover{background:var(--gold-deep);color:var(--white)}
+    /* The menu button stays at every breakpoint — the drawer is the full site
+       index, not a mobile fallback, so the sitemap is one tap from any page. */
+    .burger{display:block;width:44px;height:44px;position:relative;z-index:130;flex:none}
+    .burger span{position:absolute;left:10px;width:24px;height:1.5px;background:var(--fg);
+      transition:transform .45s cubic-bezier(.22,1,.36,1)}
+    .burger span:nth-child(1){top:18px}
+    .burger span:nth-child(2){top:25px}
+    .burger.open span:nth-child(1){transform:translateY(3.5px) rotate(45deg)}
+    .burger.open span:nth-child(2){transform:translateY(-3.5px) rotate(-45deg)}
+    /* While the drawer is open the whole header rides above it, otherwise the
+       panel covers the button that closes it. Everything but the X steps back. */
+    .site-nav.menu-open{z-index:130;background:transparent;backdrop-filter:none;
+      border-bottom-color:transparent}
+    .nav-slot{transition:opacity .35s ease}
+    .site-nav.menu-open .nav-slot,.site-nav.menu-open .nav-cta,.site-nav.menu-open .nav-progress{
+      opacity:0;pointer-events:none}
+    .nav-close{opacity:0;pointer-events:none;font-size:var(--label);letter-spacing:.14em;
+      text-transform:uppercase;font-weight:600;color:rgba(255,255,255,.62);
+      transition:opacity .35s ease .12s;white-space:nowrap}
+    .site-nav.menu-open .nav-close{opacity:1}
+    /* The panel it sits on is dark whatever the page behind it is doing. */
+    .site-nav.menu-open .burger span{background:#fff}
+    @media(min-width:1080px){ .nav-slot{display:flex} }
+    @media(max-width:679px){ .site-nav .nav-cta{display:none} }
+  </style>
+<div aria-hidden="true" class="nav-progress"><i id="navProgress"></i></div>
+<div class="wrap no-rail nav-in">
+<a aria-label="Dr. Nahlah home" class="nav-logo" href="index.html">
+<img alt="Dr. Nahlah — Implants and Prosthodontics Specialists" src="assets/logo.png"/>
+</a>
+<nav aria-label="Primary" class="nav-slot">
+<div class="nav-links">
+<a href="dental-implants.html">Implants</a>
+<a href="smile-makeover.html">Cosmetic</a>
+<a href="smile-gallery.html">Smile Gallery</a>
+<a href="about.html">The Specialist</a>
+<a href="contact.html">Contact</a>
+</div>
+<div aria-hidden="true" class="nav-chapter">
+<span>Chapter</span><b id="navCh">00</b><i id="navBar"></i><span id="navName">Arrival</span>
+</div>
+</nav>
+<div class="nav-right">
+<a class="nav-cta" href="contact.html#book">Book a Consult</a>
+<span aria-hidden="true" class="nav-close">Close</span>
+<button aria-controls="drawer" aria-expanded="false" aria-label="Open menu" class="burger" id="burger">
+<span></span><span></span>
+</button>
+</div>
+</div>
+</header>
+<!-- Full site index. Opens at every breakpoint, so it is the site's real
+     navigation rather than a mobile-only fallback. -->
+<div aria-hidden="true" class="drawer" data-theme="dark" id="drawer">
+<style>
+    .drawer{position:fixed;inset:0;z-index:125;background:var(--ink-900);
+      clip-path:circle(0% at calc(100% - 42px) 42px);transition:clip-path .8s cubic-bezier(.22,1,.36,1);
+      display:flex;flex-direction:column;justify-content:center;overflow-y:auto;
+      padding:clamp(5.5rem,10vw,7rem) var(--gutter) clamp(2rem,5vw,3rem)}
+    .drawer.open{clip-path:circle(150% at calc(100% - 42px) 42px)}
+    .dr-grid{width:100%;max-width:var(--maxw);margin-inline:auto;display:grid;gap:clamp(1.75rem,4vw,3.5rem)}
+    .dr-col h4{font-family:var(--f-body);font-size:var(--label);letter-spacing:.2em;text-transform:uppercase;
+      color:var(--gold);font-weight:600;margin:0 0 1rem}
+    .drawer ul{list-style:none;margin:0;padding:0}
+    .dr-col li{overflow:hidden}
+    .dr-col li a{display:block;font-family:var(--f-display);
+      font-size:clamp(1.35rem,2.6vw,2.1rem);line-height:1.22;padding-block:.14em;
+      color:rgba(255,255,255,.9);
+      transform:translateY(110%);transition:transform .7s cubic-bezier(.22,1,.36,1),color .3s ease}
+    .dr-col li a:hover{color:var(--gold-light)}
+    .drawer.open .dr-col li a{transform:translateY(0)}
+    /* Stagger by column so the panel deals itself out rather than snapping in. */
+    .drawer.open .dr-col:nth-child(1) li a{transition-delay:.10s}
+    .drawer.open .dr-col:nth-child(2) li a{transition-delay:.16s}
+    .drawer.open .dr-col:nth-child(3) li a{transition-delay:.22s}
+    .dr-foot{width:100%;max-width:var(--maxw);margin:clamp(2rem,5vw,3.25rem) auto 0;
+      padding-top:1.5rem;border-top:1px solid rgba(255,255,255,.12);
+      display:grid;gap:1.25rem;color:rgba(255,255,255,.72);font-size:.92rem}
+    .dr-foot b{display:block;font-family:var(--f-body);font-size:var(--label);letter-spacing:.18em;
+      text-transform:uppercase;color:var(--gold);font-weight:600;margin-bottom:.3rem}
+    .dr-foot a{color:var(--gold-light)}
+    .dr-foot a:hover{text-decoration:underline}
+    @media(min-width:760px){ .dr-grid{grid-template-columns:repeat(3,1fr)} .dr-foot{grid-template-columns:repeat(3,1fr)} }
+  </style>
+<div class="dr-grid">
+<div class="dr-col">
+<h4>Implant Dentistry</h4>
+<ul>
+<li><a href="dental-implants.html">Dental Implants</a></li>
+<li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+<li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+<li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+</ul>
+</div>
+<div class="dr-col">
+<h4>Aesthetics</h4>
+<ul>
+<li><a href="smile-makeover.html">Smile Makeover</a></li>
+<li><a href="veneers.html">Porcelain Veneers</a></li>
+<li><a href="smile-gallery.html">Smile Gallery</a></li>
+</ul>
+</div>
+<div class="dr-col">
+<h4>The Practice</h4>
+<ul>
+<li><a href="about.html">Dr. Esam Nahlah</a></li>
+<li><a href="patient-stories.html">Patient Stories</a></li>
+<li><a href="contact.html">Contact &amp; Locations</a></li>
+<li><a href="index.html">Home</a></li>
+</ul>
+</div>
+</div>
+<div class="dr-foot">
+<div><b>Tysons Corner · McLean</b>
+      New patients <a href="tel:+15716199442">(571) 619-9442</a><br/>
+      Current patients <a href="tel:+17034483312">(703) 448-3312</a></div>
+<div><b>Alexandria</b>
+      New patients <a href="tel:+15714103430">(571) 410-3430</a><br/>
+      Current patients <a href="tel:+17039405410">(703) 940-5410</a></div>
+<div><b>Hours</b>
+      Mon–Thu 8:00am – 5:00pm<br/>
+      Fri 8:00am – 2:00pm · Sat &amp; Sun closed</div>
+</div>
+</div>
+<div id="smooth-wrapper">
+<div id="smooth-content">
+<main id="top">
+<!-- ==========================================================================
+     CHAPTER 00 — ARRIVAL
+     ========================================================================== -->
+<section class="ch-arrival" data-chapter="0" data-chapter-name="Arrival" id="arrival">
+<style>
+    .ch-arrival{position:relative;min-height:100svh;display:flex;align-items:flex-end;overflow:hidden;
+      padding-bottom:clamp(2.5rem,7vw,5.5rem);padding-top:clamp(7rem,14vw,9rem)}
+    .ch-arrival .bg{position:absolute;inset:0;z-index:0}
+    .ch-arrival .bg::before{content:"";position:absolute;inset:0;z-index:2;
+      background:
+        radial-gradient(110% 80% at 76% 40%,rgba(171,158,106,.20),transparent 62%),
+        /* Heaviest over the copy column, clearing to the right so the footage
+           is actually visible; it is a moving image, not a texture. */
+        linear-gradient(100deg,rgba(250,248,243,.96) 0%,rgba(250,248,243,.9) 34%,
+                        rgba(250,248,243,.52) 60%,rgba(250,248,243,.16) 100%),
+        /* Top strip carries the nav, bottom strip carries the seam into ch01. */
+        linear-gradient(180deg,rgba(250,248,243,.88) 0%,rgba(250,248,243,.12) 24%,
+                        rgba(250,248,243,.08) 58%,rgba(250,248,243,.82) 100%)}
+    .ch-arrival{background:var(--bg)}
+    .ch-arrival .veil{position:absolute;inset:0;z-index:3;background:var(--bg);opacity:0;pointer-events:none}
+    .ch-arrival .film{position:absolute;inset:-2px;width:calc(100% + 4px);height:calc(100% + 4px);
+      object-fit:cover;z-index:0;will-change:transform;backface-visibility:hidden;
+      filter:saturate(.92) brightness(1.06) contrast(.97)}
+    .ch-arrival .glow{position:absolute;right:6%;bottom:0;width:min(46vw,620px);height:min(46vw,620px);
+      background:radial-gradient(circle,rgba(171,158,106,.34),transparent 68%);filter:blur(30px);z-index:1}
+    .ch-arrival .in{position:relative;z-index:4;width:100%;max-width:var(--maxw);margin-inline:auto;
+      padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
+      display:grid;gap:clamp(1.5rem,3vw,2.5rem)}
+    .ch-arrival h1{font-size:var(--d1);max-width:15ch}
+    .ch-arrival h1 em{font-style:italic;color:var(--accent-lg)}
+    .ch-arrival .lead{max-width:46ch;color:var(--fg-body);font-size:var(--body-lg);font-weight:400}
+    .ch-arrival .actions{display:flex;flex-wrap:wrap;gap:.85rem}
+    .ch-arrival .meta{display:flex;flex-wrap:wrap;gap:clamp(1rem,3vw,2.75rem);
+      padding-top:clamp(1rem,2.5vw,1.75rem);border-top:1px solid var(--line)}
+    .ch-arrival .meta div{display:grid;gap:.15rem}
+    .ch-arrival .meta b{font-family:var(--f-display);font-size:clamp(1.25rem,2.2vw,1.9rem);font-weight:500}
+    .ch-arrival .meta span{font-size:.74rem;letter-spacing:.12em;text-transform:uppercase;color:var(--fg-soft)}
+    .ch-arrival .cue{position:absolute;right:var(--gutter);bottom:clamp(1rem,3vw,2rem);z-index:5;
+      display:flex;align-items:center;gap:.7rem;font-size:.66rem;letter-spacing:.2em;
+      text-transform:uppercase;color:var(--fg-soft)}
+    .ch-arrival .cue i{display:block;width:1px;height:44px;background:linear-gradient(180deg,var(--gold-deep),transparent)}
+    @media(max-width:719px){
+      .ch-arrival{align-items:center;min-height:94svh}
+      /* There is no side column left to hide behind at 390px — the copy runs
+         the full width — so the footage sits further back under a flat veil
+         rather than being cleared to one side. */
+      .ch-arrival .bg::after{content:"";position:absolute;inset:0;z-index:2;
+        background:linear-gradient(180deg,rgba(250,248,243,.9) 0%,rgba(250,248,243,.82) 46%,
+                   rgba(250,248,243,.92) 100%)}
+      .ch-arrival .glow{right:-10%;width:min(70vw,340px);height:min(70vw,340px)}
+      .ch-arrival .btn{flex:1 1 auto}
+      .ch-arrival .cue{display:none}
+    }
+  </style>
+<div class="bg">
+<!-- The practice's own b-roll. Poster frame is drawn from the video itself,
+         so the hero is never empty while 8.8MB is still arriving. -->
+<video aria-label="Dr. Nahlah walking through the practice with a colleague" class="film" id="heroFilm" loop="" muted="" playsinline="" poster="assets/hero-poster.jpg" preload="metadata" src="assets/hero.mp4"></video>
+<div class="glow"></div>
+</div>
+<div class="veil" id="heroVeil"></div>
+<div class="in">
+<div class="chapter-tag" data-anim="hide"><i></i><span class="eyebrow">Chapter 00 · Arrival</span></div>
+<h1 data-anim="hide" id="heroTitle">A smile rebuilt by a <em>specialist</em>.</h1>
+<p class="lead" data-anim="hide" id="heroLead">
+      Not a general dentist with a weekend course. A board-certified prosthodontist who has
+      spent a career rebuilding what other people gave up on.
+    </p>
+<div class="actions" data-anim="hide">
+<a class="btn btn-primary magnetic" href="#invitation"><span>Book a Free Consult</span></a>
+<a class="btn btn-ghost magnetic" href="#transformation"><span>See the Transformation</span></a>
+</div>
+<div class="meta" data-anim="hide">
+<div><b>D.D.S., M.S.</b><span>Diplomate, Am. Board of Prosthodontics</span></div>
+<div><b>Since 2003</b><span>In Practice</span></div>
+<div><b>2 Offices</b><span>McLean &amp; Alexandria</span></div>
+</div>
+</div>
+<div class="cue" data-anim="hide"><span>Begin</span><i></i></div>
+<script data-embed="">
+  WZ.add(function(W){
+    var root = document.getElementById('arrival');
+    var reveal = root.querySelectorAll('[data-anim="hide"]');
+    var film = document.getElementById('heroFilm');
+    gsap.set(reveal,{visibility:'visible'});
+
+    /* Reduced motion keeps the poster frame — a looping background film is
+       exactly the kind of motion that setting asks us to stop. */
+    if(W.reduced){ gsap.set(reveal,{opacity:1,y:0}); return; }
+
+    /* Plays only while the chapter is on screen: no background decode, and no
+       battery burned on a video nobody is looking at. */
+    ScrollTrigger.create({
+      trigger:root, start:'top bottom', end:'bottom top',
+      onEnter:    function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+      onEnterBack:function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+      onLeave:    function(){ film.pause(); },
+      onLeaveBack:function(){ film.pause(); }
+    });
+
+    /* Entrance — headline splits into masked lines and rises. */
+    var tl = gsap.timeline({delay:.15});
+    var split = W.splitLines(document.getElementById('heroTitle'));
+    if(split && split.lines && split.lines.length){
+      gsap.set(split.lines,{yPercent:110});
+      tl.to(split.lines,{yPercent:0,duration:1.15,stagger:.09,ease:'power4.out'},0);
+    }else{
+      tl.from('#heroTitle',{opacity:0,y:40,duration:1,ease:'power3.out'},0);
+    }
+    tl.from(root.querySelector('.chapter-tag'),{opacity:0,x:-24,duration:.9,ease:'power3.out'},.05)
+      .from('#heroLead',       {opacity:0,y:26,duration:.9,ease:'power3.out'},.55)
+      .from(root.querySelector('.actions'),{opacity:0,y:26,duration:.9,ease:'power3.out'},.68)
+      .from(root.querySelectorAll('.meta div'),{opacity:0,y:22,duration:.8,stagger:.08,ease:'power3.out'},.78)
+      .from(root.querySelector('.cue'),{opacity:0,duration:.8},.9)
+      .from('#heroFilm',{opacity:0,scale:1.09,duration:1.7,ease:'power3.out'},0);
+
+    /* Departure — the chapter recedes as you leave it. */
+    gsap.timeline({scrollTrigger:{trigger:root,start:'top top',end:'bottom top',scrub:.6}})
+      .to(root.querySelector('.in'),{yPercent:-16,opacity:.15,ease:'none'},0)
+      .to('#heroFilm',{yPercent:5,scale:1.1,ease:'none'},0)
+      .to('#heroVeil',{opacity:.55,ease:'none'},0);
+
+    /* Scroll cue nudges until the visitor moves. */
+    gsap.to(root.querySelector('.cue i'),{scaleY:.3,transformOrigin:'top',duration:1.1,
+      repeat:-1,yoyo:true,ease:'power1.inOut'});
+  });
+  </script>
+</section>
+<!-- ==========================================================================
+     CHAPTER 01 — THE REALITY  (pinned statement, scrubbed word by word)
+     ========================================================================== -->
+<section class="ch-reality" data-chapter="1" data-chapter-name="The Reality" id="reality">
+<style>
+    .ch-reality{position:relative;background:var(--bg)}
+    .ch-reality .stage{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(4rem,10vw,8rem);position:relative;z-index:2}
+    .ch-reality .big{font-family:var(--f-display);font-size:var(--d2);line-height:1.14;
+      letter-spacing:-.02em;max-width:22ch}
+    .ch-reality .big{color:var(--fg)}
+    /* The unread state has to be faint enough to read as "not yet" and dark
+       enough to still be legible copy on cream. */
+    .ch-reality .big .wz-word{color:rgba(20,20,22,.2)}
+    .ch-reality .after{margin-top:clamp(2rem,4vw,3.25rem);display:grid;gap:1.25rem;max-width:52ch}
+    .ch-reality .after p{color:var(--fg-body);font-weight:400;line-height:1.8}
+    .ch-reality .frame{position:absolute;right:0;top:50%;transform:translateY(-50%);
+      width:min(38vw,520px);aspect-ratio:4/5;overflow:hidden;z-index:1;opacity:.5}
+    .ch-reality .frame img{filter:grayscale(1) contrast(.95) brightness(1.08)}
+    .ch-reality .frame img{width:100%;height:100%;object-fit:cover;filter:grayscale(1) contrast(1.1)}
+    .ch-reality .frame::after{content:"";position:absolute;inset:0;
+      background:linear-gradient(90deg,var(--bg),rgba(250,248,243,.35) 60%,transparent)}
+    @media(max-width:900px){ .ch-reality .frame{display:none} }
+  </style>
+<div class="frame"><img alt="" id="realityImg" loading="lazy" src="assets/case2-before.jpg"/></div>
+<div class="wrap stage">
+<div class="pad">
+<div class="chapter-tag"><i></i><span class="eyebrow">Chapter 01 · The Reality</span></div>
+<p class="big" id="realityBig">
+        You have probably been told this is complicated. That it will take years, cost a fortune,
+        or simply cannot be done.
+      </p>
+<div class="after" id="realityAfter">
+<p>Usually that is not a verdict on your mouth. It is a verdict on the tools available to
+           whoever was looking at it.</p>
+<p>Most implant failures are not surgical failures. They are planning failures — and planning
+           is the entire discipline a prosthodontist trains three extra years to do.</p>
+</div>
+</div>
+</div>
+<script data-embed="">
+  WZ.add(function(W){
+    var root = document.getElementById('reality');
+    var big  = document.getElementById('realityBig');
+
+    if(W.reduced) return;
+
+    /* Words brighten one by one, tied to scroll position. */
+    var sp = W.splitWords(big);
+    if(sp && sp.words && sp.words.length){
+      /* The final clause is excluded here and owned by the gold tween below.
+         Two scrubbed tweens writing the same property on the same element,
+         over overlapping scroll ranges, flicker — they overwrite each other
+         every frame. One word, one owner. */
+      var tail = sp.words.slice(-7);
+      var body = sp.words.slice(0, -7);
+      gsap.to(body,{
+        color:'#141416', stagger:.4, ease:'none',
+        scrollTrigger:{trigger:root,start:'top 62%',end:'center 42%',scrub:.5}
+      });
+      gsap.to(tail,{color:'#8A7E4E',ease:'none',stagger:.3,
+        scrollTrigger:{trigger:root,start:'center 52%',end:'bottom 62%',scrub:.5}});
+    }
+
+    gsap.from('#realityAfter p',{opacity:0,y:28,duration:.9,stagger:.14,ease:'power3.out',
+      scrollTrigger:{trigger:'#realityAfter',start:'top 82%'}});
+
+    /* Case photo drifts and un-crops as the chapter passes. */
+    /* Scale stays above 1 + drift so the photo always overfills its frame. */
+    gsap.fromTo('#realityImg',{yPercent:-6,scale:1.2},{yPercent:6,scale:1.14,ease:'none',
+      scrollTrigger:{trigger:root,start:'top bottom',end:'bottom top',scrub:.8}});
+  });
+  </script>
+</section>
+<!-- ==========================================================================
+     CHAPTER 02 — THE DIFFERENCE  (counters + velocity-reactive marquee)
+     ========================================================================== -->
+<section class="ch-difference" data-chapter="2" data-chapter-name="The Difference" id="difference">
+<style>
+    .ch-difference{background:var(--bg-2);border-block:1px solid var(--line-2);position:relative}
+    .ch-difference .head{display:grid;gap:1.1rem;margin-bottom:clamp(2.5rem,5vw,4rem);max-width:34ch}
+    .ch-difference .head h2{font-size:var(--h2)}
+    .ch-difference .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(1.75rem,4vw,3rem)}
+    .ch-difference .stat b{display:block;font-family:var(--f-display);font-size:clamp(2.5rem,5.6vw,5rem);
+      color:var(--accent-lg);line-height:1;font-weight:500;font-variant-numeric:tabular-nums}
+    .ch-difference .stat span{display:block;margin-top:.6rem;font-size:.74rem;letter-spacing:.16em;
+      text-transform:uppercase;color:var(--fg-soft)}
+    .ch-difference .stat{position:relative;padding-top:1.25rem}
+    .ch-difference .stat::before{content:"";position:absolute;top:0;left:0;right:0;height:1px;
+      background:var(--line);transform:scaleX(0);transform-origin:left}
+    .marquee{margin-top:clamp(3rem,6vw,5rem);overflow:hidden;border-block:1px solid rgba(138,126,78,.3);
+      padding-block:clamp(.85rem,1.6vw,1.3rem)}
+    .marquee .row{display:flex;width:max-content;will-change:transform}
+    .marquee .row span{font-family:var(--f-display);font-size:clamp(1rem,1.7vw,1.5rem);
+      color:var(--fg-body);white-space:nowrap;padding-inline:clamp(.9rem,2vw,1.7rem)}
+    .marquee .row b{color:var(--accent);font-size:.65rem;align-self:center}
+
+    /* --- us vs. them --- */
+    .versus{padding-block:clamp(3.5rem,7vw,6.5rem)}
+    .vs-head{margin-bottom:clamp(1.75rem,3.5vw,2.75rem);max-width:40ch}
+    .vs-head h3{font-size:var(--h2)}
+    .vs-head p{margin-top:.9rem;color:var(--fg-body);font-weight:400}
+    .vs-table{display:grid;gap:1px;background:var(--line)}
+    .vs-row{display:grid;grid-template-columns:1fr auto 1fr;gap:1px;background:var(--line)}
+    .vs-row>span{padding:clamp(1rem,2vw,1.5rem) clamp(1rem,2vw,1.75rem);background:var(--bg-2);
+      font-size:.95rem;font-weight:400;color:var(--fg-body);display:flex;align-items:center}
+    /* Was a left-to-right gold gradient, which read as a muddy olive wash that
+       stopped dead at the "vs" column. A flat tint plus a gold rule says
+       "this side is ours" without dragging the text contrast down. */
+    /* The tint has to be layered OVER the opaque cell, not instead of it — a
+       bare rgba() here replaced --ink-900 and let the table's hairline grey
+       show through, which is the washed-out olive the first review caught. */
+    .vs-row .vs-us{background:linear-gradient(rgba(171,158,106,.15),rgba(171,158,106,.15)) var(--bg-2);
+      box-shadow:inset 2px 0 0 var(--gold-deep);color:var(--fg);font-weight:500}
+    .vs-row .vs-mid{background:var(--bg);width:clamp(46px,6vw,86px);justify-content:center;padding-inline:0}
+    .vs-mid i{display:block;width:7px;height:7px;border-radius:50%;background:var(--rule);opacity:.6}
+    .vs-head-row>span{font-family:var(--f-display);font-size:clamp(1rem,1.6vw,1.4rem);
+      letter-spacing:.01em;text-transform:none;padding-block:clamp(1rem,2vw,1.4rem)}
+    .vs-head-row .vs-us{color:var(--black);
+      background:linear-gradient(100deg,var(--gold-deep),var(--gold) 55%,var(--gold-light));font-weight:500}
+    .vs-head-row .vs-them{color:var(--fg)}
+    .vs-head-row .vs-mid{font-family:var(--f-body);font-size:.7rem;letter-spacing:.2em;
+      text-transform:uppercase;color:var(--fg-soft)}
+    @media(max-width:719px){
+      .vs-row{grid-template-columns:1fr}
+      .vs-row .vs-mid{display:none}
+      .vs-row>span{font-size:.9rem;display:block}
+      .vs-row .vs-them{color:var(--fg-soft)}
+      .vs-head-row .vs-them{padding-top:1rem}
+      /* Stacked, the two halves lose the "vs" column that told you which side
+         you were reading. Label them instead of relying on position. */
+      .vs-row:not(.vs-head-row)>span::before{display:block;margin-bottom:.4rem;
+        font-size:.58rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600}
+      .vs-row:not(.vs-head-row) .vs-us::before{content:"Here";color:var(--accent)}
+      .vs-row:not(.vs-head-row) .vs-them::before{content:"Elsewhere";color:var(--fg-soft)}
+    }
+    @media(min-width:720px){ .ch-difference .stats{grid-template-columns:repeat(4,1fr)} }
+  </style>
+<div class="wrap sec-pad">
+<div class="head">
+<div class="chapter-tag"><i></i><span class="eyebrow">Chapter 02 · The Difference</span></div>
+<h2>One of twelve recognised dental specialties.</h2>
+</div>
+<!-- All four figures are drawn from the practice's own published material:
+         in practice since 2003, 12 listed credentials, "5 out of 5 average"
+         per their testimonials page, 2 offices. No invented numbers. -->
+<div class="stats" id="diffStats">
+<div class="stat"><b data-count="23" data-suffix="+">0</b><span>Years in Practice</span></div>
+<div class="stat"><b data-count="12">0</b><span>Board Credentials</span></div>
+<div class="stat"><b data-count="5.0" data-decimals="1">0</b><span>Average Patient Rating</span></div>
+<div class="stat"><b data-count="2">0</b><span>Virginia Locations</span></div>
+</div>
+</div>
+<!-- ---------- Us vs. other clinics ---------- -->
+<div class="wrap versus" id="versus">
+<div class="vs-head">
+<h3>Why patients travel for this.</h3>
+<p>Most implant cases pass through three or four sets of hands. Here, they don’t.</p>
+</div>
+<div aria-label="Dr. Nahlah compared with a typical general practice" class="vs-table" role="table">
+<div class="vs-row vs-head-row" role="row">
+<span class="vs-us" role="columnheader">Dr. Nahlah</span>
+<span aria-hidden="true" class="vs-mid" role="columnheader">vs</span>
+<span class="vs-them" role="columnheader">A General Practice</span>
+</div>
+<div class="vs-row" role="row">
+<span class="vs-us" role="cell">Board-certified prosthodontist — three years of specialist training beyond dental school.</span>
+<span aria-hidden="true" class="vs-mid"><i></i></span>
+<span class="vs-them" role="cell">A weekend implant course, or a referral out.</span>
+</div>
+<div class="vs-row" role="row">
+<span class="vs-us" role="cell">Surgery and final teeth planned and placed by the same specialist.</span>
+<span aria-hidden="true" class="vs-mid"><i></i></span>
+<span class="vs-them" role="cell">Handed between a surgeon, a dentist and an outside lab.</span>
+</div>
+<div class="vs-row" role="row">
+<span class="vs-us" role="cell">The final smile is designed first — implants are placed to serve it.</span>
+<span aria-hidden="true" class="vs-mid"><i></i></span>
+<span class="vs-them" role="cell">Implants placed first, restoration figured out afterwards.</span>
+</div>
+<div class="vs-row" role="row">
+<span class="vs-us" role="cell">Complex and failed cases accepted — including work other practices decline.</span>
+<span aria-hidden="true" class="vs-mid"><i></i></span>
+<span class="vs-them" role="cell">Straightforward cases only.</span>
+</div>
+<div class="vs-row" role="row">
+<span class="vs-us" role="cell">IV sedation certified, with hospital privileges at Inova Fairfax.</span>
+<span aria-hidden="true" class="vs-mid"><i></i></span>
+<span class="vs-them" role="cell">Local anaesthetic, or a referral for sedation.</span>
+</div>
+</div>
+</div>
+<div aria-hidden="true" class="marquee">
+<div class="row" id="mqRow">
+<span>Board-Certified Prosthodontist</span><b>◆</b>
+<span>Fellow, American College of Prosthodontists</span><b>◆</b>
+<span>All-on-4 Full-Arch Restoration</span><b>◆</b>
+<span>Surgery &amp; Restoration Under One Roof</span><b>◆</b>
+<span>Sedation Available</span><b>◆</b>
+</div>
+</div>
+<script data-embed="">
+  WZ.add(function(W){
+    var root = document.getElementById('difference');
+
+    /* Counters */
+    root.querySelectorAll('[data-count]').forEach(function(el){
+      var target = parseFloat(el.getAttribute('data-count')),
+          dec    = parseInt(el.getAttribute('data-decimals')||'0',10),
+          suf    = el.getAttribute('data-suffix')||'';
+      function paint(v){
+        el.textContent = (dec ? v.toFixed(dec) : Math.floor(v).toLocaleString('en-US')) + suf;
+      }
+      if(W.reduced){ paint(target); return; }
+      var o = {v:0};
+      gsap.to(o,{v:target,duration:1.9,ease:'power2.out',onUpdate:function(){ paint(o.v); },
+        scrollTrigger:{trigger:el,start:'top 88%'}});
+    });
+
+    if(W.reduced) return;
+
+    gsap.fromTo(root.querySelectorAll('.stat'),
+      {opacity:0,y:26},
+      {opacity:1,y:0,duration:.9,stagger:.1,ease:'power3.out',
+       scrollTrigger:{trigger:'#diffStats',start:'top 85%'}});
+
+    /* Marquee: loops continuously, and scroll velocity bends its speed and
+       direction — the page feels physically connected to the wheel. */
+    var row = document.getElementById('mqRow');
+    row.innerHTML += row.innerHTML;                       // seamless loop needs a duplicate
+    var half = row.scrollWidth / 2;
+    var loop = gsap.to(row,{x:-half,duration:26,ease:'none',repeat:-1,
+      modifiers:{x:function(x){ return (parseFloat(x) % half) + 'px'; }}});
+
+    var vt = gsap.quickTo(loop,'timeScale',{duration:.5,ease:'power2'});
+    ScrollTrigger.create({
+      onUpdate:function(self){
+        var v = self.getVelocity()/380;
+        vt(gsap.utils.clamp(-7, 7, v === 0 ? 1 : (v < 0 ? Math.min(-1,v) : Math.max(1,v))));
+      }
+    });
+    /* Settle back to a gentle drift when scrolling stops. */
+    ScrollTrigger.addEventListener('scrollEnd', function(){ vt(1); });
+
+    /* Comparison table: header first, then rows deal in from the left. */
+    gsap.from('#versus .vs-head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
+      scrollTrigger:{trigger:'#versus',start:'top 78%'}});
+    gsap.from('#versus .vs-row',{opacity:0,x:-34,duration:.85,stagger:.1,ease:'power3.out',
+      scrollTrigger:{trigger:'#versus .vs-table',start:'top 82%'}});
+  });
+  </script>
+</section>
+<!-- ==========================================================================
+     CHAPTER 03 — THE SPECIALIST  (doctor bio + verified credentials)
+     ========================================================================== -->
+<section class="ch-specialist" data-chapter="3" data-chapter-name="The Specialist" id="specialist">
+<style>
+    .ch-specialist{background:var(--bg-3);position:relative;overflow:hidden}
+    .ch-specialist .grid{display:grid;grid-template-columns:1fr;gap:clamp(2.5rem,5vw,5rem);align-items:start}
+    .ch-specialist .portrait{position:relative}
+    .ch-specialist .portrait .plate{position:relative;overflow:hidden;aspect-ratio:4/5;
+      background:linear-gradient(160deg,#fff,var(--mist))}
+    .ch-specialist .portrait .plate::after{content:"";position:absolute;inset:0;
+      background:radial-gradient(80% 60% at 50% 30%,rgba(171,158,106,.24),transparent 70%)}
+    .ch-specialist .portrait img{position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+      height:104%;width:auto;max-width:none;object-fit:contain;
+      filter:contrast(1.02) brightness(1.02) saturate(.98);z-index:1}
+    .ch-specialist .sig{position:absolute;left:0;bottom:clamp(-1rem,-2vw,-1.5rem);z-index:2;
+      background:var(--bg-3);padding:1rem 1.6rem 1rem 0;border-top:1px solid rgba(138,126,78,.45)}
+    .ch-specialist .sig b{display:block;font-family:var(--f-display);font-size:clamp(1.15rem,1.9vw,1.6rem);
+      font-weight:500}
+    .ch-specialist .sig span{font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;color:var(--accent)}
+    .ch-specialist h2{font-size:var(--h2);max-width:16ch;margin-bottom:1.5rem}
+    .ch-specialist .bio{display:grid;gap:1.15rem;max-width:56ch}
+    .ch-specialist .bio p{color:var(--fg-body);font-weight:400;line-height:1.85}
+    .ch-specialist .bio strong{color:var(--fg);font-weight:600}
+    .creds{margin-top:clamp(2rem,4vw,3rem)}
+    .creds h4{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--accent);
+      font-family:var(--f-body);font-weight:600;margin-bottom:1.1rem}
+    .creds ul{list-style:none;margin:0;padding:0;display:grid;gap:0}
+    .creds li{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:baseline;
+      padding-block:.7rem;border-top:1px solid var(--line);
+      font-size:.93rem;font-weight:400;color:var(--fg-body)}
+    .creds li:last-child{border-bottom:1px solid var(--line)}
+    .creds li i{width:5px;height:5px;border-radius:50%;background:var(--rule);display:block;
+      transform:translateY(-2px)}
+    .creds-more{display:inline-flex;align-items:center;gap:.55rem;margin-top:1.15rem;
+      font-size:var(--label);letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+      color:var(--accent);border-bottom:1px solid rgba(138,126,78,.5);padding-bottom:.35rem;
+      transition:color .35s,border-color .35s}
+    .creds-more::after{content:"\2192";transition:transform .4s cubic-bezier(.22,1,.36,1)}
+    .creds-more:hover{color:var(--fg);border-color:var(--fg)}
+    .creds-more:hover::after{transform:translateX(5px)}
+    @media(min-width:900px){ .ch-specialist .grid{grid-template-columns:.82fr 1.18fr} }
+  </style>
+<div class="wrap sec-pad grid">
+<div class="portrait">
+<div class="plate"><img alt="Dr. Esam Nahlah, D.D.S., M.S., board-certified prosthodontist" id="specPortrait" loading="lazy" src="assets/dr-nahlah.png"/></div>
+<div class="sig"><b>Dr. Esam Nahlah</b><span>D.D.S., M.S.</span></div>
+</div>
+<div>
+<div class="chapter-tag"><i></i><span class="eyebrow">Chapter 03 · The Specialist</span></div>
+<h2 id="specTitle">The credentials behind the work.</h2>
+<div class="bio" id="specBio">
+<p>Dr. Nahlah has practised dentistry <strong>since 2003</strong>, moving to Northern Virginia
+           in 2013 to focus entirely on prosthodontics — esthetic dentistry, implant dentistry,
+           full-mouth rehabilitation and smile makeovers.</p>
+<p>In 2013 the American Board of Prosthodontics awarded him <strong>Diplomate</strong> status,
+           the most prestigious credential in the field. He holds hospital privileges at
+           <strong>Inova Fairfax</strong>, the only Level 1 trauma hospital in Northern Virginia.</p>
+<p>He has published in national and international scientific journals, lectures on smile
+           design and dental implants, and teaches hands-on courses for other dentists — the kind
+           of work that tends to bring the difficult cases to his door.</p>
+</div>
+<div class="creds">
+<h4>Credentials &amp; Certifications</h4>
+<ul id="credList">
+<li><i></i>Diplomate, American Board of Prosthodontics</li>
+<li><i></i>Certificate in Prosthodontics</li>
+<li><i></i>M.S., Master of Science in Oral Biology</li>
+<li><i></i>Hospital Privileges, Inova Fairfax Hospital</li>
+<li><i></i>Fellow, International Congress of Oral Implantologists</li>
+<li><i></i>Associate Fellow, American Academy of Implant Dentistry</li>
+<li><i></i>IV Sedation Certificate</li>
+<li><i></i>BLS &amp; ACLS Provider</li>
+</ul>
+<!-- Chapter 02 counts twelve credentials; only eight are listed here.
+             Saying so, and linking to the full list, keeps the two numbers from
+             contradicting each other. -->
+<a class="creds-more" href="about.html">Eight of twelve — see the full record</a>
+</div>
+</div>
+</div>
+<script data-embed="">
+  WZ.add(function(W){
+    if(W.reduced) return;
+
+    W.splitLines(document.getElementById('specTitle'), function(self){
+      return gsap.from(self.lines,{yPercent:110,duration:1,stagger:.09,ease:'power4.out',
+        scrollTrigger:{trigger:'#specTitle',start:'top 84%'}});
+    });
+    gsap.from('#specBio p',{opacity:0,y:26,duration:.9,stagger:.13,ease:'power3.out',
+      scrollTrigger:{trigger:'#specBio',start:'top 82%'}});
+
+    /* Credentials deal in one line at a time — the length of the list is the point. */
+    gsap.from('#credList li',{opacity:0,x:-22,duration:.6,stagger:.07,ease:'power2.out',
+      scrollTrigger:{trigger:'#credList',start:'top 85%'}});
+
+    /* Portrait rises slightly out of its plate as the chapter passes. */
+    gsap.fromTo('#specPortrait',{xPercent:-50,yPercent:6},{xPercent:-50,yPercent:-4,ease:'none',
+      scrollTrigger:{trigger:'#specialist',start:'top bottom',end:'bottom top',scrub:.8}});
+  });
+  </script>
+</section>
+<!-- ==========================================================================
+     CHAPTER 04 — THE TRANSFORMATION  (pinned, scroll-scrubbed before/after)
+     ========================================================================== -->
+<section class="ch-transformation" data-chapter="4" data-chapter-name="Transformation" data-theme="light" id="transformation">
+<style>
+    .ch-transformation{background:var(--bg-2);color:var(--fg-body)}
+    .ch-transformation .pin{min-height:100svh;display:grid;align-content:center;
+      padding-block:clamp(3rem,7vw,5rem);overflow:hidden}
+    .ch-transformation .head{display:grid;gap:.9rem;margin-bottom:clamp(1.5rem,3vw,2.25rem)}
+
+    .ch-transformation h2{font-size:var(--h2);max-width:16ch}
+    .cmp{position:relative;aspect-ratio:16/9;overflow:hidden;background:var(--mist);
+      max-height:58svh;margin-inline:auto;width:100%}
+    .cmp .slide{position:absolute;inset:0;opacity:0}
+    .cmp .slide.on{opacity:1}
+    .cmp img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+    .cmp .aft{clip-path:inset(0 0 0 var(--pos,0%))}
+    .cmp .handle{position:absolute;top:0;bottom:0;left:var(--pos,0%);width:2px;background:var(--gold);
+      transform:translateX(-1px);z-index:3;opacity:0}
+    .cmp .handle::before{content:"";position:absolute;top:50%;left:50%;
+      width:clamp(44px,4.4vw,58px);height:clamp(44px,4.4vw,58px);transform:translate(-50%,-50%);
+      border-radius:50%;background:var(--gold);box-shadow:0 6px 30px rgba(0,0,0,.3)}
+    .cmp .ba-tag{position:absolute;top:1rem;padding:.4rem .85rem;font-size:.62rem;letter-spacing:.18em;
+      text-transform:uppercase;font-weight:700;z-index:4}
+    .cmp .ba-tag.ba-b{left:1rem;background:rgba(11,11,12,.72);color:#fff}
+    .cmp .ba-tag.ba-a{right:1rem;background:var(--gold-ink);color:#fff}
+    .ch-transformation .tf-foot{margin-top:1rem;display:flex;align-items:center;justify-content:space-between;
+      flex-wrap:wrap;gap:.6rem 1.5rem;font-size:.82rem;color:var(--fg-body)}
+    .tf-more{margin-right:auto;font-size:.68rem;letter-spacing:.16em;text-transform:uppercase;
+      font-weight:600;color:var(--accent);border-bottom:1px solid rgba(102,92,51,.55);
+      padding-bottom:.2rem;transition:color .35s,border-color .35s}
+    .tf-more:hover{color:var(--fg);border-color:var(--fg)}
+    .ch-transformation .dots{display:flex;gap:.45rem;align-items:center}
+    .ch-transformation .dots i{display:block;width:26px;height:2px;background:var(--line)}
+    .ch-transformation .dots i.on{background:var(--accent-lg)}
+    @media(max-width:719px){
+      .cmp{aspect-ratio:4/3;max-height:none}
+      .cmp .ba-tag{font-size:.54rem;padding:.3rem .55rem}
+    }
+  </style>
+<div class="pin" id="tPin">
+<div class="wrap">
+<div class="head">
+<div class="chapter-tag"><i></i><span class="eyebrow">Chapter 04 · The Transformation</span></div>
+<h2>Keep scrolling. Watch it change.</h2>
+</div>
+<div class="cmp" id="cmp">
+<div class="slide on" data-slide="0">
+<img alt="Patient smile before veneers and implant restoration" src="assets/case1-before.jpg"/>
+<img alt="The same smile after treatment" class="aft" src="assets/case1-after.jpg"/>
+</div>
+<div class="slide" data-slide="1">
+<img alt="Patient smile before double-arch All-on-4" src="assets/case2-before.jpg"/>
+<img alt="The same smile after double-arch All-on-4" class="aft" src="assets/case2-after.jpg"/>
+</div>
+<div class="slide" data-slide="2">
+<img alt="Patient smile before single-arch All-on-4" src="assets/case3-before.jpg"/>
+<img alt="The same smile after single-arch All-on-4" class="aft" src="assets/case3-after.jpg"/>
+</div>
+<span class="ba-tag ba-b">Before</span>
+<span class="ba-tag ba-a">After</span>
+<div class="handle" id="tHandle"></div>
+</div>
+<div class="tf-foot">
+<span id="tCaption">Porcelain veneers with implant restoration · upper and lower arch</span>
+<a class="tf-more" href="smile-gallery.html">See every case →</a>
+<span class="dots" id="tDots"><i class="on"></i><i></i><i></i></span>
+</div>
+</div>
+</div>
+<script data-embed="">
+  WZ.add(function(W){
+    var root  = document.getElementById('transformation'),
+        pin   = document.getElementById('tPin'),
+        cmp   = document.getElementById('cmp'),
+        cap   = document.getElementById('tCaption'),
+        dots  = document.getElementById('tDots').children,
+        slides= cmp.querySelectorAll('.slide'),
+        handle= document.getElementById('tHandle');
+
+    var CAPTIONS = [
+      'Porcelain veneers with implant restoration · upper and lower arch',
+      'Double-arch All-on-4 · full fixed teeth on four implants per arch',
+      'Single-arch All-on-4 · upper arch restored on four implants'
+    ];
+
+    function show(i){
+      for(var s=0;s<slides.length;s++) slides[s].classList.toggle('on', s===i);
+      for(var d=0;d<dots.length;d++) dots[d].classList.toggle('on', d===i);
+      cap.innerHTML = CAPTIONS[i];
+    }
+    function setPos(p){ cmp.style.setProperty('--pos', p + '%'); }
+
+    if(W.reduced){
+      /* Show the finished result rather than an un-wiped "before". */
+      setPos(0); show(0);
+      cmp.style.setProperty('--pos','0%');
+      return;
+    }
+
+    setPos(100); // start fully on "before"; scrubbing wipes toward "after"
+    gsap.set(handle,{opacity:1});
+
+    /* Pin the chapter and drive three wipes from one scroll distance.
+       Each case gets a wipe, then hands over to the next. */
+    var state = {p:100, idx:0};
+    var tl = gsap.timeline({
+      scrollTrigger:{
+        trigger: pin,
+        start: 'top top',
+        end: '+=' + (window.innerHeight * 3.2),
+        pin: true,
+        scrub: .3,
+        anticipatePin: 1,
+        invalidateOnRefresh: true
+      }
+    });
+
+    for(var i=0;i<3;i++){
+      (function(idx){
+        tl.call(function(){ if(state.idx!==idx){ state.idx=idx; show(idx); } }, null, tl.duration())
+          .fromTo(state,{p:100},{p:0,duration:1,ease:'none',
+            onUpdate:function(){ setPos(state.p); }})
+          .to({},{duration:.22});   // a beat to read the result before moving on
+      })(i);
+    }
+    /* Reverse scrolling needs the slide index restored too. */
+    tl.eventCallback('onUpdate', function(){
+      var seg = Math.min(2, Math.floor(tl.progress() * 3));
+      if(state.idx !== seg){ state.idx = seg; show(seg); }
+    });
+
+    gsap.from(root.querySelectorAll('.head > *'),{opacity:0,y:24,duration:.9,stagger:.1,
+      ease:'power3.out',scrollTrigger:{trigger:root,start:'top 70%'}});
+  });
+  </script>
+</section>
+<!-- ==========================================================================
+     CHAPTER 05 — THE PATH  (pinned horizontal journey)
+     ========================================================================== -->
+<section class="ch-path" data-chapter="5" data-chapter-name="The Path" id="path">
+<style>
+    .ch-path{background:var(--bg);position:relative;overflow:hidden}
+    .ch-path .pin{height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative}
+    .ch-path .head{padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
+      max-width:var(--maxw);margin-inline:auto;width:100%;margin-bottom:clamp(1.5rem,3vw,2.5rem)}
+    .ch-path h2{font-size:var(--h2);max-width:16ch}
+    .ch-path .track{display:flex;gap:clamp(1rem,2.4vw,2rem);
+      padding-right:var(--gutter);padding-left:calc(var(--gutter) + var(--rail));
+      width:max-content;align-items:stretch}
+    .ch-path .card{width:clamp(258px,29vw,430px);flex:none;border:1px solid var(--line);
+      padding:clamp(1.4rem,2.4vw,2.25rem);display:flex;flex-direction:column;gap:.9rem;
+      background:var(--card);position:relative;overflow:hidden}
+    .ch-path .card::after{content:"";position:absolute;left:0;right:0;bottom:0;height:2px;
+      background:var(--rule);transform:scaleX(0);transform-origin:left}
+    .ch-path .card .no{font-family:var(--f-display);font-size:clamp(2.5rem,4.6vw,4rem);
+      color:var(--accent-lg);line-height:.9}
+    .ch-path .card h3{font-size:var(--h3)}
+    .ch-path .card p{color:var(--fg-body);font-weight:400;font-size:.95rem}
+    .ch-path .card .shot{margin-top:auto;aspect-ratio:16/10;overflow:hidden}
+    .ch-path .card .shot img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);
+      transition:filter .6s,transform .8s}
+    .ch-path .card:hover .shot img{filter:grayscale(0);transform:scale(1.05)}
+    .ch-path .bar{position:absolute;left:calc(var(--gutter) + var(--rail));right:var(--gutter);
+      bottom:clamp(1.5rem,4vw,3rem);height:1px;background:var(--line)}
+    .ch-path .bar i{position:absolute;inset:0;background:var(--rule);transform:scaleX(0);transform-origin:left}
+    @media(max-width:719px){ .ch-path .card{width:78vw} }
+  </style>
+<div class="pin" id="pathPin">
+<div class="head">
+<div class="chapter-tag"><i></i><span class="eyebrow">Chapter 05 · The Path</span></div>
+<h2>Four visits, not four years.</h2>
+</div>
+<div class="track" id="pathTrack">
+<article class="card">
+<span class="no">01</span>
+<h3>Consultation &amp; 3D Scan</h3>
+<p>A cone-beam scan shows the bone we actually have to work with. You leave knowing
+           whether you are a candidate, what it costs, and how long it takes.</p>
+<div class="shot"><img alt="" loading="lazy" src="assets/consult.jpg"/></div>
+</article>
+<article class="card">
+<span class="no">02</span>
+<h3>Digital Smile Design</h3>
+<p>The final teeth are designed before a single implant is placed. You approve the
+           result in advance rather than hoping for it.</p>
+<div class="shot"><img alt="" loading="lazy" src="assets/case1-after.jpg"/></div>
+</article>
+<article class="card">
+<span class="no">03</span>
+<h3>Guided Placement</h3>
+<p>Implants are placed through a surgical guide built from your scan, under sedation
+           if you want it. Many patients leave the same day with fixed teeth.</p>
+<div class="shot"><img alt="" loading="lazy" src="assets/office.jpg"/></div>
+</article>
+<article class="card">
+<span class="no">04</span>
+<h3>Final Restoration</h3>
+<p>Once healing is complete the definitive teeth go in — shaped, shaded and bite-balanced
+           by the same specialist who planned them.</p>
+<div class="shot"><img alt="" loading="lazy" src="assets/case2-after.jpg"/></div>
+</article>
+</div>
+<div class="bar"><i id="pathBar"></i></div>
+</div>
+<script data-embed="">
+  WZ.add(function(W){
+    var pin   = document.getElementById('pathPin'),
+        track = document.getElementById('pathTrack'),
+        bar   = document.getElementById('pathBar');
+
+    if(W.reduced){
+      /* Fall back to a normal horizontal scroll region. */
+      pin.style.height = 'auto';
+      track.style.overflowX = 'auto';
+      track.style.width = '100%';
+      return;
+    }
+
+    /* Horizontal travel = track width beyond the viewport. Recomputed on
+       refresh so it stays correct across resize and font loading. */
+    function distance(){ return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
+
+    var tween = gsap.to(track,{
+      x: function(){ return -distance(); },
+      ease:'none',
+      scrollTrigger:{
+        trigger: pin,
+        start:'top top',
+        end: function(){ return '+=' + (distance() + window.innerHeight*0.6); },
+        pin: true,
+        scrub: .3,
+        anticipatePin: 1,
+        invalidateOnRefresh: true,
+        onUpdate: function(self){ gsap.set(bar,{scaleX:self.progress}); }
+      }
+    });
+
+    /* Each card lights its underline as it reaches centre stage. */
+    gsap.utils.toArray('#pathTrack .card').forEach(function(card){
+      gsap.to(card,{'--x':1,duration:.1});
+      ScrollTrigger.create({
+        trigger: card,
+        containerAnimation: tween,
+        start: 'left 72%',
+        end: 'right 28%',
+        onEnter:      function(){ gsap.to(card,{borderColor:'rgba(138,126,78,.55)',duration:.5});
+                                  gsap.to(card.querySelector('.shot img'),{filter:'grayscale(0)',duration:.6}); },
+        onLeave:      function(){ gsap.to(card,{borderColor:'rgba(20,20,22,.13)',duration:.5}); },
+        onEnterBack:  function(){ gsap.to(card,{borderColor:'rgba(138,126,78,.55)',duration:.5}); },
+        onLeaveBack:  function(){ gsap.to(card,{borderColor:'rgba(20,20,22,.13)',duration:.5});
+                                  gsap.to(card.querySelector('.shot img'),{filter:'grayscale(1)',duration:.6}); }
+      });
+      gsap.fromTo(card.querySelector('.no'),{opacity:.35},{opacity:1,duration:.4,
+        scrollTrigger:{trigger:card,containerAnimation:tween,start:'left 78%',toggleActions:'play none none reverse'}});
+    });
+  });
+  </script>
+</section>
+<!-- ==========================================================================
+     CHAPTER 06 — THE STANDARD  (technology + in-house lab)
+     ========================================================================== -->
+<section class="ch-standard" data-chapter="6" data-chapter-name="The Standard" id="standard">
+<style>
+    .ch-standard{background:var(--bg-2);position:relative}
+    .ch-standard .head{display:grid;gap:1rem;max-width:44ch;margin-bottom:clamp(2.25rem,4.5vw,3.5rem)}
+    .ch-standard .head h2{font-size:var(--h2)}
+    .ch-standard .head p{color:var(--fg-body);font-weight:400}
+    .std-grid{display:grid;grid-template-columns:1fr;gap:clamp(1rem,1.8vw,1.5rem)}
+    .std{position:relative;overflow:hidden;min-height:clamp(260px,30vw,400px);display:flex;
+      align-items:flex-end;padding:clamp(1.4rem,2.4vw,2.25rem);isolation:isolate}
+    .std img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:-2;
+      transform:scale(1.08);transition:transform 1s cubic-bezier(.22,1,.36,1)}
+    /* The top of this gradient used to be almost clear, which put a gold label
+       straight onto whatever the photo happened to be — unreadable over the
+       bright practice interior. Both ends now carry a real scrim. */
+    .std::before{content:"";position:absolute;inset:0;z-index:-1;
+      background:linear-gradient(180deg,rgba(11,11,12,.72) 0%,rgba(11,11,12,.34) 30%,
+                 rgba(11,11,12,.52) 58%,rgba(11,11,12,.94) 100%)}
+    .std:hover img{transform:scale(1)}
+    .std .cap{display:grid;gap:.5rem}
+    .std .cap b{font-family:var(--f-display);font-size:var(--h3);font-weight:500;color:#fff}
+    .std .cap span{color:rgba(255,255,255,.78);font-weight:300;font-size:.92rem;max-width:36ch}
+    .std .tagline{position:absolute;top:clamp(1.1rem,2vw,1.6rem);left:clamp(1.4rem,2.4vw,2.25rem);
+      font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;font-weight:600;
+      color:var(--gold-light);text-shadow:0 1px 10px rgba(11,11,12,.85)}
+    .std.wide{grid-column:1 / -1;min-height:clamp(300px,36vw,480px)}
+    @media(min-width:820px){ .std-grid{grid-template-columns:repeat(3,1fr)} }
+  </style>
+<div class="wrap sec-pad">
+<div class="head">
+<div class="chapter-tag"><i></i><span class="eyebrow">Chapter 06 · The Standard</span></div>
+<h2>Everything under one roof.</h2>
+<p>Planning, surgery, sedation and the lab that makes your teeth — all in the same
+         building, run by the same team. That is what removes the handoffs.</p>
+</div>
+<div class="std-grid" id="stdGrid">
+<article class="std wide">
+<img alt="The in-house dental laboratory bench with a surgical microscope" loading="lazy" src="assets/lab.jpg"/>
+<span class="tagline">In-House Laboratory</span>
+<div class="cap">
+<b>Your teeth are made here.</b>
+<span>An on-site lab means shade, shape and fit are adjusted in minutes rather than
+                posted to a third party and waited on for weeks.</span>
+</div>
+</article>
+<article class="std">
+<img alt="3D dental imaging used for implant planning" loading="lazy" src="assets/xray.png"/>
+<span class="tagline">3D Imaging</span>
+<div class="cap">
+<b>Planned in three dimensions.</b>
+<span>Cone-beam scans map bone before anything is placed.</span>
+</div>
+</article>
+<article class="std">
+<img alt="A patient comfortably sedated during treatment" loading="lazy" src="assets/sedation.jpg"/>
+<span class="tagline">IV Sedation</span>
+<div class="cap">
+<b>Through it in one sitting.</b>
+<span>IV-sedation certified, so long appointments pass in what feels like minutes.</span>
+</div>
+</article>
+<article class="std">
+<img alt="The practice interior in McLean, Virginia" loading="lazy" src="assets/interior.jpg"/>
+<span class="tagline">The Practice</span>
+<div class="cap">
+<b>Built for long visits.</b>
+<span>Two Northern Virginia offices designed around full-day treatment.</span>
+</div>
+</article>
+</div>
+</div>
+<script data-embed="">
+  WZ.add(function(W){
+    if(W.reduced) return;
+
+    gsap.from('#standard .head > *',{opacity:0,y:26,duration:.9,stagger:.12,ease:'power3.out',
+      scrollTrigger:{trigger:'#standard .head',start:'top 82%'}});
+
+    /* Panels rise and un-mask; each image also drifts against the scroll. */
+    gsap.utils.toArray('#stdGrid .std').forEach(function(card,i){
+      gsap.fromTo(card,
+        {opacity:0,y:44,clipPath:'inset(12% 0 0 0)'},
+        {opacity:1,y:0,clipPath:'inset(0% 0 0 0)',duration:1.05,ease:'power3.out',delay:i*.07,
+         scrollTrigger:{trigger:card,start:'top 88%'}});
+      gsap.fromTo(card.querySelector('img'),{yPercent:-5},{yPercent:5,ease:'none',
+        scrollTrigger:{trigger:card,start:'top bottom',end:'bottom top',scrub:.8}});
+    });
+  });
+  </script>
+</section>
+<!-- ==========================================================================
+     CHAPTER 07 — THE PROOF  (film, reviews, story)
+     ========================================================================== -->
+<section class="ch-proof" data-chapter="7" data-chapter-name="The Proof" data-theme="dark" id="proof">
+<style>
+    .ch-proof{background:var(--ink-900)}
+    .ch-proof .film{position:relative;height:clamp(340px,64vw,720px);overflow:hidden}
+    /* Bled 2px past every edge and never scrubbed back to 1:1, so the scaled
+       video always overhangs its clip — otherwise sub-pixel rounding under
+       ScrollSmoother makes the top and bottom edges flicker while scrolling. */
+    .ch-proof .film video{position:absolute;inset:-2px;width:calc(100% + 4px);
+      height:calc(100% + 4px);object-fit:cover;will-change:transform;
+      backface-visibility:hidden;transform:translateZ(0)}
+    .ch-proof .film::after{content:"";position:absolute;inset:-2px;
+      background:radial-gradient(80% 70% at 50% 50%,rgba(11,11,12,.6),rgba(11,11,12,.86) 78%),
+                 linear-gradient(180deg,rgba(11,11,12,.6),rgba(11,11,12,.88))}
+    .ch-proof .film .copy{position:absolute;inset:0;z-index:2;display:grid;place-items:center;
+      text-align:center;padding:var(--gutter)}
+    .ch-proof .film h2{font-size:var(--d2);max-width:16ch;margin-inline:auto}
+    .ch-proof .film p{margin-top:1.1rem;color:rgba(255,255,255,.72);max-width:44ch;
+      margin-inline:auto;font-weight:300}
+    .ch-proof .story{display:grid;grid-template-columns:1fr;gap:clamp(2rem,5vw,4.5rem);align-items:center}
+    .ch-proof .shot{position:relative;overflow:hidden;aspect-ratio:4/3;clip-path:inset(0 0 100% 0)}
+    .ch-proof .shot img{width:100%;height:100%;object-fit:cover;will-change:transform}
+    .ch-proof blockquote{margin:0;font-family:var(--f-display);font-size:clamp(1.5rem,2.9vw,2.75rem);
+      line-height:1.24;letter-spacing:-.015em}
+    .ch-proof cite{display:block;margin-top:1.5rem;font-style:normal;font-size:.76rem;
+      letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+    .ch-proof .qm{font-family:var(--f-display);font-size:clamp(3rem,8vw,6rem);color:var(--gold);
+      line-height:.6;display:block;margin-bottom:.5rem}
+    @media(min-width:1024px){ .ch-proof .story{grid-template-columns:.95fr 1.05fr} }
+
+    /* --- google reviews --- */
+    .reviews{margin-top:clamp(3.5rem,7vw,6rem)}
+    .rv-head{display:flex;flex-wrap:wrap;gap:1.5rem;justify-content:space-between;
+      align-items:flex-end;margin-bottom:clamp(1.75rem,3.5vw,2.75rem)}
+    .rv-head h3{font-size:var(--h2);max-width:16ch}
+    .rv-sub{margin-top:.7rem;color:rgba(255,255,255,.5);font-weight:300;font-size:.94rem}
+    .rv-score{display:flex;align-items:center;gap:clamp(1rem,1.6vw,1.4rem)}
+    /* Vector mark — the old raster lockup went soft and unreadable at this size. */
+    .rv-score img{width:clamp(48px,5.6vw,72px);height:auto;flex:none}
+    .rv-score b{display:block;font-family:var(--f-display);font-size:clamp(1.3rem,2.2vw,1.9rem);
+      font-weight:500;display:flex;align-items:center;gap:.5rem}
+    .rv-score>div>span{font-size:.7rem;letter-spacing:.14em;text-transform:uppercase;
+      color:rgba(255,255,255,.58)}
+    .rv-stars{color:var(--gold);letter-spacing:.12em;font-style:normal;font-size:.9em}
+    .rv-grid{display:grid;grid-template-columns:1fr;gap:1px;background:rgba(255,255,255,.09)}
+    .rv{background:var(--black);padding:clamp(1.35rem,2.2vw,1.9rem);display:grid;gap:.9rem;
+      align-content:start;transition:background .4s ease}
+    .rv:hover{background:var(--ink-800)}
+    .rv p{color:rgba(255,255,255,.78);font-weight:300;font-size:.94rem;line-height:1.75}
+    .rv-film p{color:rgba(255,255,255,.62)}
+    .rv-play{display:inline-grid;place-items:center;width:22px;height:22px;border-radius:50%;
+      border:1px solid var(--gold);margin-right:.55rem;vertical-align:-5px}
+    .rv-play::after{content:"";border-left:6px solid var(--gold);border-block:4px solid transparent;
+      margin-left:2px}
+    .rv:hover .rv-play{background:var(--gold)}
+    .rv:hover .rv-play::after{border-left-color:var(--black)}
+    .rv footer{display:flex;align-items:center;gap:.7rem;font-size:.85rem;color:#fff;
+      padding-top:.9rem;border-top:1px solid rgba(255,255,255,.09)}
+    .rv footer i{margin-left:auto;font-style:normal;font-size:.66rem;letter-spacing:.14em;
+      text-transform:uppercase;color:rgba(255,255,255,.58)}
+    .rv-av{width:30px;height:30px;border-radius:50%;display:grid;place-items:center;flex:none;
+      background:linear-gradient(140deg,var(--gold-deep),var(--gold));color:var(--black);
+      font-weight:700;font-size:.8rem}
+    .rv-more{display:inline-flex;align-items:center;gap:.6rem;margin-top:clamp(1.5rem,3vw,2.25rem);
+      font-size:.68rem;letter-spacing:.18em;text-transform:uppercase;font-weight:600;color:var(--gold)}
+    .rv-more i{display:block;width:18px;height:1px;background:var(--gold);
+      transition:width .45s cubic-bezier(.22,1,.36,1)}
+    .rv-more:hover i{width:38px}
+    @media(min-width:700px){ .rv-grid{grid-template-columns:repeat(2,1fr)} }
+    @media(min-width:1080px){ .rv-grid{grid-template-columns:repeat(3,1fr)} }
+  </style>
+<div class="film" id="proofFilm">
+<video aria-label="Inside the practice" id="film" loop="" muted="" playsinline="" preload="metadata" src="assets/broll.mp4"></video>
+<div class="copy">
+<div>
+<h2 id="filmTitle">Experience, skill and dental artistry.</h2>
+<p id="filmSub">Dr. Esam Nahlah, D.D.S., M.S. — Diplomate of the American Board of Prosthodontics,
+           practising in Northern Virginia since 2013.</p>
+</div>
+</div>
+</div>
+<div class="wrap sec-pad">
+<div class="chapter-tag"><i></i><span class="eyebrow">Chapter 07 · The Proof</span></div>
+<div class="story">
+<div class="shot" id="storyShot">
+<img alt="A patient holding a framed photograph of her smile before treatment" id="storyImg" loading="lazy" src="assets/patient-story.jpg"/>
+</div>
+<div id="storyCopy">
+<span class="qm">“</span>
+<blockquote>My smile held me back. That’s behind me now.</blockquote>
+<cite>Melanie · Full-Arch Implant Patient</cite>
+</div>
+</div>
+<!-- ================= Patient stories =================
+         Every name, quote and film below is taken verbatim from the practice's
+         own site. The three quoted cards are the only attributed patient words
+         that exist in the source material; the other three patients filmed a
+         testimonial but published no pull-quote, so those cards say exactly
+         that instead of inventing one. The 5.0 figure is the practice's own
+         published average ("an average rating of 5 out of 5 stars").
+         ================================================== -->
+<div class="reviews" id="reviews">
+<div class="rv-head">
+<div>
+<h3>What patients say afterwards.</h3>
+<p class="rv-sub">Six patients sat down on camera. Their words, not ours.</p>
+</div>
+<div class="rv-score">
+<img alt="Google" height="48" loading="lazy" src="assets/google.svg" width="48"/>
+<div>
+<b><span id="rvScore">5.0</span> <i aria-hidden="true" class="rv-stars">★★★★★</i></b>
+<span>Google reviews · both offices</span>
+</div>
+</div>
+</div>
+<div class="rv-grid" id="rvGrid">
+<a class="rv" href="patient-stories.html#melanie"><span aria-hidden="true" class="rv-stars">★★★★★</span>
+<p>“My smile held me back. That’s behind me due to my dental implants.”</p>
+<footer><span class="rv-av">M</span>Melanie<i>Filmed story</i></footer></a>
+<a class="rv" href="patient-stories.html#yolanda"><span aria-hidden="true" class="rv-stars">★★★★★</span>
+<p>“I haven’t stopped smiling since I got my dental implants!”</p>
+<footer><span class="rv-av">Y</span>Yolanda<i>Filmed story</i></footer></a>
+<a class="rv" href="patient-stories.html#stephen"><span aria-hidden="true" class="rv-stars">★★★★★</span>
+<p>“Dental implants completely changed my life.”</p>
+<footer><span class="rv-av">S</span>Stephen<i>Filmed story</i></footer></a>
+<a class="rv rv-film" href="patient-stories.html#donita"><span aria-hidden="true" class="rv-stars">★★★★★</span>
+<p><span aria-hidden="true" class="rv-play"></span>Donita filmed her story at the practice.
+             Watch it in her own words.</p>
+<footer><span class="rv-av">D</span>Donita<i>Filmed story</i></footer></a>
+<a class="rv rv-film" href="patient-stories.html#barbara"><span aria-hidden="true" class="rv-stars">★★★★★</span>
+<p><span aria-hidden="true" class="rv-play"></span>Barbara filmed her story at the practice.
+             Watch it in her own words.</p>
+<footer><span class="rv-av">B</span>Barbara<i>Filmed story</i></footer></a>
+<a class="rv rv-film" href="patient-stories.html#couple"><span aria-hidden="true" class="rv-stars">★★★★★</span>
+<p><span aria-hidden="true" class="rv-play"></span>A couple treated together filmed their
+             story. Watch it in their own words.</p>
+<footer><span class="rv-av">&amp;</span>A couple<i>Filmed story</i></footer></a>
+</div>
+<a class="rv-more" href="patient-stories.html">See every patient story <i></i></a>
+</div>
+</div>
+<script data-embed="">
+  WZ.add(function(W){
+    var film = document.getElementById('film');
+
+    /* Play only while on screen — saves battery and avoids background decode. */
+    ScrollTrigger.create({
+      trigger:'#proofFilm', start:'top 90%', end:'bottom 10%',
+      onEnter:    function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+      onEnterBack:function(){ var p=film.play(); if(p&&p.catch) p.catch(function(){}); },
+      onLeave:    function(){ film.pause(); },
+      onLeaveBack:function(){ film.pause(); }
+    });
+
+    if(W.reduced){ gsap.set('#storyShot',{clipPath:'inset(0 0 0% 0)'}); return; }
+
+    gsap.fromTo(film,{scale:1.18},{scale:1.04,ease:'none',
+      scrollTrigger:{trigger:'#proofFilm',start:'top bottom',end:'bottom top',scrub:.8}});
+
+    W.splitLines(document.getElementById('filmTitle'), function(self){
+      return gsap.from(self.lines,{yPercent:110,duration:1,stagger:.09,ease:'power4.out',
+        scrollTrigger:{trigger:'#proofFilm',start:'top 55%'}});
+    });
+    gsap.from('#filmSub',{opacity:0,y:20,duration:.9,ease:'power3.out',
+      scrollTrigger:{trigger:'#proofFilm',start:'top 50%'}});
+
+    /* Image wipes open from the bottom, photo counter-drifts inside it. */
+    gsap.to('#storyShot',{clipPath:'inset(0 0 0% 0)',duration:1.3,ease:'power4.inOut',
+      scrollTrigger:{trigger:'#storyShot',start:'top 82%'}});
+    gsap.fromTo('#storyImg',{scale:1.24,yPercent:-6},{scale:1.06,yPercent:6,ease:'none',
+      scrollTrigger:{trigger:'#storyShot',start:'top bottom',end:'bottom top',scrub:.8}});
+    gsap.from('#storyCopy > *',{opacity:0,y:26,duration:.9,stagger:.12,ease:'power3.out',
+      scrollTrigger:{trigger:'#storyCopy',start:'top 80%'}});
+
+    /* Reviews: header, then cards deal in on a slight diagonal. */
+    gsap.from('#reviews .rv-head > *',{opacity:0,y:24,duration:.9,stagger:.12,ease:'power3.out',
+      scrollTrigger:{trigger:'#reviews',start:'top 80%'}});
+    gsap.from('#rvGrid .rv',{opacity:0,y:34,duration:.8,stagger:{each:.08,from:'start'},
+      ease:'power3.out',scrollTrigger:{trigger:'#rvGrid',start:'top 85%'}});
+
+    /* Aggregate score counts up like the other stats. */
+    var sc = document.getElementById('rvScore');
+    if(sc){
+      var o = {v:0};
+      gsap.to(o,{v:5.0,duration:1.6,ease:'power2.out',
+        onUpdate:function(){ sc.textContent = o.v.toFixed(1); },
+        scrollTrigger:{trigger:'#reviews',start:'top 78%'}});
+    }
+  });
+  </script>
+</section>
+<!-- ==========================================================================
+     CHAPTER 08 — THE INVITATION  (locations + CTA)
+     ========================================================================== -->
+<section class="ch-invitation" data-chapter="8" data-chapter-name="Invitation" data-theme="dark" id="invitation">
+<style>
+    .ch-invitation{background:var(--black)}
+    .ch-invitation h2{font-size:var(--h2);max-width:16ch;margin-top:1rem}
+    .ch-invitation .locs{display:grid;grid-template-columns:1fr;gap:1px;
+      background:rgba(255,255,255,.1);margin-top:clamp(2rem,4vw,3rem)}
+    .ch-invitation .loc{background:var(--black);padding:clamp(1.75rem,3.2vw,3rem);
+      display:grid;gap:1rem;align-content:start}
+    .ch-invitation .loc h3{font-size:var(--h3)}
+    .ch-invitation .loc address{font-style:normal;color:rgba(255,255,255,.6);font-weight:300}
+    .ch-invitation .row{display:grid;gap:.3rem;padding-top:1rem;border-top:1px solid rgba(255,255,255,.1)}
+    .ch-invitation .row a{font-family:var(--f-display);font-size:clamp(1.1rem,1.8vw,1.5rem);
+      color:var(--gold);transition:opacity .3s}
+    .ch-invitation .row a:hover{opacity:.7}
+    .ch-invitation .row span{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
+      color:rgba(255,255,255,.58)}
+    .cta{background:linear-gradient(120deg,var(--gold-deep),var(--gold) 48%,var(--gold-light));
+      color:var(--black);text-align:center;margin-top:clamp(3rem,7vw,6rem)}
+    .cta h2{font-size:var(--d2);max-width:18ch;margin-inline:auto;color:var(--black)}
+    .cta p{margin-top:1.1rem;max-width:46ch;margin-inline:auto;color:rgba(11,11,12,.72)}
+    .cta .btn{margin-top:2rem}
+    @media(min-width:720px){ .ch-invitation .locs{grid-template-columns:repeat(2,1fr)} }
+  </style>
+<div class="wrap sec-pad">
+<div class="chapter-tag"><i></i><span class="eyebrow">Chapter 08 · The Invitation</span></div>
+<h2>Close to home, either way.</h2>
+<div class="locs" id="locs">
+<div class="loc">
+<h3>Tysons Corner · McLean</h3>
+<address>7901 Jones Branch Dr., Suite 220<br/>McLean, VA 22102</address>
+<div class="row"><span>New Patients</span><a href="tel:+15716199442">(571) 619-9442</a></div>
+<div class="row"><span>Current Patients</span><a href="tel:+17034483312">(703) 448-3312</a></div>
+</div>
+<div class="loc">
+<h3>Alexandria</h3>
+<address>2855 Duke St.<br/>Alexandria, VA 22314</address>
+<div class="row"><span>New Patients</span><a href="tel:+15714103430">(571) 410-3430</a></div>
+<div class="row"><span>Current Patients</span><a href="tel:+17039405410">(703) 940-5410</a></div>
+</div>
+</div>
+</div>
+<div class="cta sec-pad" data-theme="light">
+<div class="wrap">
+<h2 id="ctaTitle">Find out if you’re a candidate.</h2>
+<p>A consultation includes the 3D scan and a straight answer about what your case actually
+         needs — before you commit to anything.</p>
+<a class="btn btn-dark magnetic" href="https://flexbook.me/drnahlah"><span>Book Your Free Consult</span></a>
+</div>
+</div>
+<script data-embed="">
+  WZ.add(function(W){
+    if(W.reduced) return;
+    gsap.from('#locs .loc',{opacity:0,y:34,duration:1,stagger:.14,ease:'power3.out',
+      scrollTrigger:{trigger:'#locs',start:'top 82%'}});
+    W.splitLines(document.getElementById('ctaTitle'), function(self){
+      return gsap.from(self.lines,{yPercent:110,duration:1,stagger:.09,ease:'power4.out',
+        scrollTrigger:{trigger:'#ctaTitle',start:'top 85%'}});
+    });
+  });
+  </script>
+</section>
+</main>
+<footer class="foot" data-theme="dark">
+<style>
+    /* Every selector here is anchored to `footer.foot`, not the bare class.
+       A chapter on the home page also carries a `.foot` caption row, and the
+       unanchored `.foot{background:var(--black)}` rule was painting a black
+       plate behind it — inside a cream-coloured section, under dark text. */
+    footer.foot{background:var(--black);border-top:1px solid rgba(255,255,255,.1);
+      padding-block:clamp(3rem,6vw,5rem) clamp(1.5rem,3vw,2.5rem)}
+    footer.foot .grid{display:grid;grid-template-columns:1fr;gap:clamp(2rem,4vw,3rem)}
+    footer.foot img{width:190px;margin-bottom:1.25rem}
+    footer.foot h4{font-size:.72rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);
+      font-family:var(--f-body);font-weight:600;margin-bottom:1rem}
+    footer.foot ul{list-style:none;margin:0;padding:0;display:grid;gap:.55rem}
+    footer.foot a{color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300;transition:color .3s}
+    footer.foot a:hover{color:var(--gold)}
+    footer.foot .blurb{color:rgba(255,255,255,.62);font-weight:300;max-width:34ch;font-size:.92rem}
+    /* Hours are facts, not navigation — they were anchor links before, which
+       gave keyboard users four tab stops that went nowhere useful. */
+    footer.foot .facts{list-style:none;margin:0;padding:0;display:grid;gap:.55rem;
+      color:rgba(255,255,255,.72);font-size:.92rem;font-weight:300}
+    footer.foot .facts b{color:rgba(255,255,255,.9);font-weight:500}
+    footer.foot .base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
+      border-top:1px solid rgba(255,255,255,.1);display:flex;flex-wrap:wrap;gap:1rem;
+      justify-content:space-between;font-size:.78rem;color:rgba(255,255,255,.55)}
+    @media(min-width:720px){ footer.foot .grid{grid-template-columns:1.6fr 1fr 1fr 1.2fr} }
+  </style>
+<div class="wrap">
+<div class="grid">
+<div>
+<img alt="Dr. Nahlah" src="assets/logo.png"/>
+<p class="blurb">Implant dentistry and prosthodontics for Northern Virginia — rebuilding
+          smiles that other practices call too complex.</p>
+</div>
+<div>
+<h4>Treatments</h4>
+<ul>
+<li><a href="dental-implants.html">Dental Implants</a></li>
+<li><a href="all-on-4.html">All-on-4 Full-Arch</a></li>
+<li><a href="smile-makeover.html">Smile Makeover</a></li>
+<li><a href="veneers.html">Porcelain Veneers</a></li>
+<li><a href="sedation-dentistry.html">Sedation Dentistry</a></li>
+</ul>
+</div>
+<div>
+<h4>Patients</h4>
+<ul>
+<li><a href="smile-gallery.html">Smile Gallery</a></li>
+<li><a href="patient-stories.html">Patient Stories</a></li>
+<li><a href="implant-cost.html">Cost &amp; Financing</a></li>
+<li><a href="about.html">Dr. Esam Nahlah</a></li>
+<li><a href="contact.html">Contact &amp; Locations</a></li>
+</ul>
+</div>
+<div>
+<h4>Hours</h4>
+<ul class="facts">
+<li><b>Mon–Thu</b>  8:00am – 5:00pm</li>
+<li><b>Friday</b>  8:00am – 2:00pm</li>
+<li><b>Sat &amp; Sun</b>  Closed</li>
+</ul>
+<ul style="margin-top:1.1rem">
+<li><a href="tel:+15716199442">McLean · (571) 619-9442</a></li>
+<li><a href="tel:+15714103430">Alexandria · (571) 410-3430</a></li>
+</ul>
+</div>
+</div>
+<div class="base">
+<span>© 2026 Dr. Nahlah Implants &amp; Prosthodontics Specialists.</span>
+<span>McLean · Alexandria, Virginia</span>
+</div>
+</div>
+</footer>
+</div><!-- /#smooth-content -->
+</div><!-- /#smooth-wrapper -->
+<script>
+/* ==========================================================================
+   FLUSH — smoother first, then every section's queued setup, then refresh.
+   ========================================================================== */
+(function(){
+  var W = window.WZ;
+  document.documentElement.classList.add('wz-ready');
+
+  if(!W || !W.ok){
+    /* GSAP missing: reveal everything so the page is still readable. */
+    document.querySelectorAll('[data-anim="hide"]').forEach(function(el){ el.style.visibility='visible'; });
+    return;
+  }
+
+  /* Register here, not in <head> — body must exist before ScrollTrigger inits. */
+  gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
+  if(window.ScrollSmoother) gsap.registerPlugin(ScrollSmoother);
+  if(window.SplitText)      gsap.registerPlugin(SplitText);
+  if(window.Observer)       gsap.registerPlugin(Observer);
+
+  if(!W.reduced && window.ScrollSmoother){
+    try{
+      W.smoother = ScrollSmoother.create({
+        wrapper:'#smooth-wrapper', content:'#smooth-content',
+        /* THE DIAL FOR "how smooth does the page feel". Higher = longer glide
+           after the wheel stops, which is the effect itself:
+             .8 -> the page eases for ~750ms
+            1.2 -> ~1050ms  (here)
+            1.4 -> ~2400ms, which starts to feel like the page is arguing
+           This is only half the story. Every scrubbed trigger adds a SECOND
+           lag on top, and it is that one — not this one — that reads as
+           broken: at smooth 1.05 with scrub .7 the pinned chapters trailed
+           the page by ~1.4s. With the pins at scrub .3 they now trail it by
+           roughly 0ms, so the glide can be generous without the animation
+           appearing to lag behind the scroll. Raise this, not the scrubs. */
+        smooth: 1.2, effects: false, smoothTouch: false,
+        /* normalizeScroll is deliberately OFF. It was tried: it makes no
+           measurable difference to the pinned scrubs (257ms vs 273ms to
+           settle) and it swallows touchmove, so on a phone a before/after
+           slider jumps to the tap point instead of following the finger.
+           Handing those elements back with `ignore` fixes the drag and
+           then traps the page: a vertical swipe starting on a slider
+           scrolls 0px instead of 535px. Not worth it. */
+        normalizeScroll: false, ignoreMobileResize: true
+      });
+    }catch(e){ console.warn('ScrollSmoother unavailable', e); }
+  }
+
+  W.flush();
+
+  /* --- nav state: reading progress + chapter readout (global UI) --- */
+  var navCh  = document.getElementById('navCh'),
+      navNm  = document.getElementById('navName'),
+      navBar = document.getElementById('navBar'),
+      navPr  = document.getElementById('navProgress'),
+      nav    = document.getElementById('nav');
+
+  /* Whole-page reading progress along the top edge of the nav. */
+  gsap.to(navPr,{scaleX:1,ease:'none',
+    scrollTrigger:{start:0,end:'max',scrub:.25}});
+
+  gsap.utils.toArray('section[data-chapter]').forEach(function(sec){
+    var i = parseInt(sec.getAttribute('data-chapter'),10),
+        name = sec.getAttribute('data-chapter-name');
+    function activate(){
+      if(navCh) navCh.textContent = String(i).padStart(2,'0');
+      if(navNm) navNm.textContent = name;
+      if(navBar) navBar.style.setProperty('--p', (i/8).toFixed(3));
+    }
+    ScrollTrigger.create({trigger:sec,start:'top 55%',end:'bottom 45%',
+      onEnter:activate,onEnterBack:activate});
+  });
+
+  ScrollTrigger.create({start:40,end:99999,
+    onToggle:function(self){ nav.classList.toggle('solid', self.isActive); }});
+
+  /* --- anchors routed through the smoother so pinned sections land right --- */
+  document.querySelectorAll('a[href^="#"]').forEach(function(a){
+    a.addEventListener('click', function(e){
+      var id = a.getAttribute('href');
+      if(id.length < 2) return;
+      var t = document.querySelector(id);
+      if(!t) return;
+      e.preventDefault();
+      if(W.smoother) W.smoother.scrollTo(t, true, 'top top');
+      else gsap.to(window,{duration: W.reduced?0:1, scrollTo:{y:t,autoKill:true},ease:'power2.inOut'});
+    });
+  });
+
+  /* --- magnetic buttons, pointer-fine only --- */
+  if(!W.reduced && window.matchMedia('(hover:hover) and (pointer:fine)').matches){
+    document.querySelectorAll('.magnetic').forEach(function(el){
+      var xTo = gsap.quickTo(el,'x',{duration:.5,ease:'power3'}),
+          yTo = gsap.quickTo(el,'y',{duration:.5,ease:'power3'});
+      el.addEventListener('pointermove',function(e){
+        var r = el.getBoundingClientRect();
+        xTo((e.clientX-r.left-r.width/2)*.22); yTo((e.clientY-r.top-r.height/2)*.38);
+      });
+      el.addEventListener('pointerleave',function(){ xTo(0); yTo(0); });
+    });
+  }
+
+  /* --- mobile drawer --- */
+  var burger = document.getElementById('burger'), drawer = document.getElementById('drawer');
+  function closeDrawer(){
+    burger.classList.remove('open'); drawer.classList.remove('open');
+    document.getElementById('nav').classList.remove('menu-open');
+    burger.setAttribute('aria-expanded','false'); drawer.setAttribute('aria-hidden','true');
+    document.body.classList.remove('is-locked');
+    if(W.smoother) W.smoother.paused(false);
+  }
+  burger.addEventListener('click',function(){
+    var open = drawer.classList.toggle('open');
+    burger.classList.toggle('open',open);
+    document.getElementById('nav').classList.toggle('menu-open',open);
+    burger.setAttribute('aria-expanded',String(open));
+    drawer.setAttribute('aria-hidden',String(!open));
+    burger.setAttribute('aria-label', open?'Close menu':'Open menu');
+    document.body.classList.toggle('is-locked',open);
+    if(W.smoother) W.smoother.paused(open);
+  });
+  drawer.querySelectorAll('a').forEach(function(a){
+    a.addEventListener('click',function(){ closeDrawer(); });
+  });
+  document.addEventListener('keydown',function(e){
+    if(e.key==='Escape' && drawer.classList.contains('open')) closeDrawer();
+  });
+
+  /* Pinned sections measure wrong if fonts or images land late. */
+  if(document.fonts && document.fonts.ready) document.fonts.ready.then(function(){ ScrollTrigger.refresh(); });
+  window.addEventListener('load', function(){ ScrollTrigger.refresh(); });
+})();
+</script>
+</body>
+</html>

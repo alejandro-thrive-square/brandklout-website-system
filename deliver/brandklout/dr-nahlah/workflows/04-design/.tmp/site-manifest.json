@@ -1,0 +1,136 @@
+{
+  "version": "v3-site",
+  "package": "final-site/",
+  "source": "site-src/",
+  "supersedes": {
+    "v2": "final-design-gsap/index.html",
+    "note": "v2 was a single verified page. v3 keeps that page's nine chapters verbatim in structure and rebuilds it from a shared shell, then adds ten interior pages."
+  },
+  "build": {
+    "assets": "node site-src/copy-assets.mjs",
+    "gallery": "node site-src/gen-gallery.mjs",
+    "pages": "node site-src/build-site.mjs"
+  },
+  "pages": [
+    {
+      "slug": "index",
+      "role": "Nine-chapter journey",
+      "kit": false
+    },
+    {
+      "slug": "dental-implants",
+      "role": "Implant hub",
+      "kit": true
+    },
+    {
+      "slug": "all-on-4",
+      "role": "Full-arch",
+      "kit": true
+    },
+    {
+      "slug": "implant-cost",
+      "role": "Cost & financing",
+      "kit": true
+    },
+    {
+      "slug": "sedation-dentistry",
+      "role": "Sedation",
+      "kit": true
+    },
+    {
+      "slug": "smile-makeover",
+      "role": "Cosmetic hub",
+      "kit": true
+    },
+    {
+      "slug": "veneers",
+      "role": "Porcelain veneers",
+      "kit": true
+    },
+    {
+      "slug": "smile-gallery",
+      "role": "28 before/after pairs, generated",
+      "kit": true
+    },
+    {
+      "slug": "patient-stories",
+      "role": "Six filmed patients",
+      "kit": true
+    },
+    {
+      "slug": "about",
+      "role": "All twelve credentials",
+      "kit": true
+    },
+    {
+      "slug": "contact",
+      "role": "Two offices + request form",
+      "kit": true
+    }
+  ],
+  "shell": {
+    "partials": [
+      "head",
+      "nav",
+      "drawer",
+      "pagekit",
+      "footer",
+      "flush"
+    ],
+    "navigation": "Logo, five primary links, Book a Consult, menu button at every breakpoint. Drawer is the full site index. On the home page only, the links cross-fade out and the chapter readout fades in once the nav goes solid \u2014 pure CSS via .nav[data-journey='1'].solid.",
+    "pagekitAttributes": {
+      "data-rv": "reveal at 86% viewport",
+      "data-rv=stagger": "reveal, walking children",
+      "data-split": "masked line reveal (SplitText)",
+      "data-drift": "photo drifts against scroll",
+      "data-count": "counter; prints final value under reduced motion"
+    }
+  },
+  "verification": {
+    "home": {
+      "script": "interaction-test-gsap.mjs",
+      "checks": 63,
+      "passed": 63
+    },
+    "site": {
+      "script": "site-test.mjs",
+      "checks": 137,
+      "passed": 137,
+      "log": "review/site-test.log"
+    },
+    "screenshots": "capture-slices.mjs \u2014 scroll-slice driver; captureBeyondViewport is invalid under ScrollSmoother",
+    "contrastAudit": "site-test.mjs scores every text node whose background resolves to an opaque colour; nodes over imagery are counted and reported as unscorable rather than guessed at",
+    "mobileReview": "All eleven pages captured at 390x844 and reviewed; review/m-*/ and review/m2-*, m3-* for re-checks"
+  },
+  "bugsFixed": [
+    "footer .foot painted a black plate inside the light transformation chapter (1.3:1 caption) \u2014 footer CSS anchored to footer.foot, chapter row renamed .tf-foot",
+    "gold labels on light sections failed AA \u2014 added --gold-ink #665C33",
+    "technology-card labels sat on a .10 scrim over raw photography",
+    "seven low-alpha UI text values at 3.0-4.1:1 raised to .58 white",
+    "comparison table's gold gradient read as a muddy olive wash with a hard edge",
+    "stacked comparison rows lost their us/them meaning on mobile \u2014 now labelled Here/Elsewhere",
+    "mobile hero portrait sat behind the lead copy and both buttons",
+    "'12 board credentials' contradicted the eight listed \u2014 now 'Eight of twelve' linking to about.html",
+    "footer hours were anchor links to nowhere",
+    "nested data-rv animated a node twice and could strand it invisible",
+    ".sp-list was scoped to .pk-split so the same list rendered unstyled inside .pk-lede",
+    "vs-us tint replaced the opaque cell background instead of layering over it",
+    "partner logos (CareCredit/Proceed/LendingClub) are drawn for white grounds and vanished on dark cards \u2014 now on a white .brandmark plate",
+    "Stephen's story card paired a named patient with an unattributed patient portrait; replaced with a typographic plate rather than a face that is not his",
+    "about-page award alt text claimed Dr. Nahlah was in a photograph that shows only a symbolic trophy",
+    "All-on-4 hero photo is attested as Yolanda in the source alt text; she is now named rather than called 'a patient'",
+    "gallery hero was a blurred mouth close-up that read as abstract texture under the scrim"
+  ],
+  "contentIntegrity": {
+    "reviewsGrid": "The six invented placeholder reviews are gone. Replaced with the six real filmed patients; the three published pull-quotes are traced to the source page that carries each.",
+    "prices": "None quoted anywhere \u2014 the source site quotes none.",
+    "imagery": "All client-owned, from the 911-file extraction. No stock purchased.",
+    "photoProvenance": "A photograph may sit beside a named patient only if the source alt text or asset manifest identifies them. Only Yolanda and the framed-photo portrait the home page attributes to Melanie qualify; every other patient image is unattributed and is never captioned as a specific person."
+  },
+  "openItems": [
+    "Testimonial films are YouTube embeds on the live site; wire at Webflow build time",
+    "Contact form has no action \u2014 three Flexbook URLs in use, unresolved",
+    "McLean current-patient phone published as two different numbers; 448-3312 used, flagged in markup via data-build-flag",
+    "Brand naming unresolved: 'Dental Group of Tysons' vs 'Dr. Nahlah Implants and Prosthodontics Specialists'"
+  ]
+}

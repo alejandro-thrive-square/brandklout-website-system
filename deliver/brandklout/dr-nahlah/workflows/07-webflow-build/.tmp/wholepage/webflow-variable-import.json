@@ -1,0 +1,105 @@
+{
+  "source": ":root CSS custom properties",
+  "variables": [
+    {
+      "name": "--black",
+      "value": "#0B0B0C"
+    },
+    {
+      "name": "--body",
+      "value": "clamp(.975rem,1.05vw,1.0625rem)"
+    },
+    {
+      "name": "--body-lg",
+      "value": "clamp(1.05rem,1.25vw,1.25rem)"
+    },
+    {
+      "name": "--d1",
+      "value": "clamp(2.75rem,7.4vw,8.25rem)"
+    },
+    {
+      "name": "--d2",
+      "value": "clamp(2.25rem,5.2vw,5.5rem)"
+    },
+    {
+      "name": "--f-body",
+      "value": "'Raleway','Helvetica Neue',Arial,sans-serif"
+    },
+    {
+      "name": "--f-display",
+      "value": "'Playfair Display','Times New Roman',serif"
+    },
+    {
+      "name": "--gold",
+      "value": "#AB9E6A"
+    },
+    {
+      "name": "--gold-deep",
+      "value": "#8A7E4E"
+    },
+    {
+      "name": "--gold-light",
+      "value": "#D4CDB2"
+    },
+    {
+      "name": "--gold-wash",
+      "value": "#F5F2E9"
+    },
+    {
+      "name": "--gutter",
+      "value": "clamp(1.25rem,4vw,4.5rem)"
+    },
+    {
+      "name": "--h2",
+      "value": "clamp(1.9rem,3.6vw,3.75rem)"
+    },
+    {
+      "name": "--h3",
+      "value": "clamp(1.35rem,1.9vw,2rem)"
+    },
+    {
+      "name": "--ink-500",
+      "value": "#6B6B72"
+    },
+    {
+      "name": "--ink-700",
+      "value": "#2A2A2E"
+    },
+    {
+      "name": "--ink-800",
+      "value": "#1C1C1F"
+    },
+    {
+      "name": "--ink-900",
+      "value": "#141416"
+    },
+    {
+      "name": "--label",
+      "value": "clamp(.68rem,.78vw,.78rem)"
+    },
+    {
+      "name": "--maxw",
+      "value": "1560px"
+    },
+    {
+      "name": "--mist",
+      "value": "#F0EDE6"
+    },
+    {
+      "name": "--rail",
+      "value": "0px"
+    },
+    {
+      "name": "--section",
+      "value": "clamp(4.5rem,9vw,9.5rem)"
+    },
+    {
+      "name": "--warm",
+      "value": "#FAF8F3"
+    },
+    {
+      "name": "--white",
+      "value": "#fff"
+    }
+  ]
+}

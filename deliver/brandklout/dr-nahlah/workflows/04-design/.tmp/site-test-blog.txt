@@ -1,0 +1,113 @@
+link targets: 35 built pages + 43 CMS article routes
+PASS  [index] page loaded with the shared shell
+PASS  [index] no CSS or JS inlined into the page  — 0 style, 0 inline script
+PASS  [index] every section module ran iff its section is on the page  — ok:9/11
+PASS  [index] exactly one h1  — 1 found
+PASS  [index] unique page title + meta description  — Dental Implants & Prosthodontics | McLean & Alexandr
+PASS  [index] every internal link resolves to a real page  — 28 distinct targets
+PASS  [index] in-page anchors all have targets
+PASS  [index] no broken images
+PASS  [index] every revealed block ends up visible
+PASS  [index] no horizontal overflow @1440  — scrollWidth=1440
+PASS  [index] text contrast meets WCAG AA  — 297 nodes scored, 26 over imagery (unscorable)
+PASS  [index] no console errors
+PASS  [index] no horizontal overflow @390  — scrollWidth=390
+PASS  [index] menu button reachable on mobile
+PASS  [index] menu button opens the drawer  — open
+PASS  [index] burger reports its state to assistive tech
+PASS  [index] drawer closes again
+PASS  [dental-implants] page loaded with the shared shell
+PASS  [dental-implants] no CSS or JS inlined into the page  — 0 style, 0 inline script
+PASS  [dental-implants] every section module ran iff its section is on the page  — ok:0/11
+PASS  [dental-implants] exactly one h1  — 1 found
+PASS  [dental-implants] unique page title + meta description  — Dental Implants | Board-Certified Prosthodontist | V
+PASS  [dental-implants] every internal link resolves to a real page  — 28 distinct targets
+PASS  [dental-implants] in-page anchors all have targets
+PASS  [dental-implants] no broken images
+PASS  [dental-implants] every revealed block ends up visible
+PASS  [dental-implants] 3 before/after sliders respond  — 18% -> 82%
+PASS  [dental-implants] no horizontal overflow @1440  — scrollWidth=1440
+PASS  [dental-implants] text contrast meets WCAG AA  — 183 nodes scored, 26 over imagery (unscorable)
+PASS  [dental-implants] no console errors
+PASS  [dental-implants] no horizontal overflow @390  — scrollWidth=390
+PASS  [dental-implants] menu button reachable on mobile
+PASS  [dental-implants] menu button opens the drawer  — open
+PASS  [dental-implants] burger reports its state to assistive tech
+PASS  [dental-implants] drawer closes again
+PASS  [all-on-4] page loaded with the shared shell
+PASS  [all-on-4] no CSS or JS inlined into the page  — 0 style, 0 inline script
+PASS  [all-on-4] every section module ran iff its section is on the page  — ok:0/11
+PASS  [all-on-4] exactly one h1  — 1 found
+PASS  [all-on-4] unique page title + meta description  — All-on-4 Full Arch Dental Implants | McLean & Alexan
+PASS  [all-on-4] every internal link resolves to a real page  — 28 distinct targets
+PASS  [all-on-4] in-page anchors all have targets
+PASS  [all-on-4] no broken images
+PASS  [all-on-4] every revealed block ends up visible
+PASS  [all-on-4] 3 before/after sliders respond  — 18% -> 82%
+PASS  [all-on-4] no horizontal overflow @1440  — scrollWidth=1440
+PASS  [all-on-4] text contrast meets WCAG AA  — 203 nodes scored, 24 over imagery (unscorable)
+PASS  [all-on-4] no console errors
+PASS  [all-on-4] no horizontal overflow @390  — scrollWidth=390
+PASS  [all-on-4] menu button reachable on mobile
+PASS  [all-on-4] menu button opens the drawer  — open
+PASS  [all-on-4] burger reports its state to assistive tech
+PASS  [all-on-4] drawer closes again
+PASS  [implant-cost] page loaded with the shared shell
+PASS  [implant-cost] no CSS or JS inlined into the page  — 0 style, 0 inline script
+PASS  [implant-cost] every section module ran iff its section is on the page  — ok:0/11
+PASS  [implant-cost] exactly one h1  — 1 found
+PASS  [implant-cost] unique page title + meta description  — Dental Implant Cost in Northern Virginia | Dr. Nahla
+PASS  [implant-cost] every internal link resolves to a real page  — 28 distinct targets
+PASS  [implant-cost] in-page anchors all have targets
+PASS  [implant-cost] no broken images
+PASS  [implant-cost] every revealed block ends up visible
+PASS  [implant-cost] no horizontal overflow @1440  — scrollWidth=1440
+PASS  [implant-cost] text contrast meets WCAG AA  — 163 nodes scored, 15 over imagery (unscorable)
+PASS  [implant-cost] no console errors
+PASS  [implant-cost] no horizontal overflow @390  — scrollWidth=390
+PASS  [implant-cost] menu button reachable on mobile
+PASS  [implant-cost] menu button opens the drawer  — open
+PASS  [implant-cost] burger reports its state to assistive tech
+PASS  [implant-cost] drawer closes again
+PASS  [sedation-dentistry] page loaded with the shared shell
+PASS  [sedation-dentistry] no CSS or JS inlined into the page  — 0 style, 0 inline script
+PASS  [sedation-dentistry] every section module ran iff its section is on the page  — ok:0/11
+PASS  [sedation-dentistry] exactly one h1  — 1 found
+PASS  [sedation-dentistry] unique page title + meta description  — Sedation Dentistry | Nitrous, Oral & IV | McLean, VA
+PASS  [sedation-dentistry] every internal link resolves to a real page  — 28 distinct targets
+PASS  [sedation-dentistry] in-page anchors all have targets
+PASS  [sedation-dentistry] no broken images
+PASS  [sedation-dentistry] every revealed block ends up visible
+PASS  [sedation-dentistry] no horizontal overflow @1440  — scrollWidth=1440
+PASS  [sedation-dentistry] text contrast meets WCAG AA  — 141 nodes scored, 12 over imagery (unscorable)
+PASS  [sedation-dentistry] no console errors
+PASS  [sedation-dentistry] no horizontal overflow @390  — scrollWidth=390
+PASS  [sedation-dentistry] menu button reachable on mobile
+PASS  [sedation-dentistry] menu button opens the drawer  — open
+PASS  [sedation-dentistry] burger reports its state to assistive tech
+PASS  [sedation-dentistry] drawer closes again
+PASS  [smile-makeover] page loaded with the shared shell
+PASS  [smile-makeover] no CSS or JS inlined into the page  — 0 style, 0 inline script
+PASS  [smile-makeover] every section module ran iff its section is on the page  — ok:0/11
+PASS  [smile-makeover] exactly one h1  — 1 found
+PASS  [smile-makeover] unique page title + meta description  — Smile Makeover | Digital Smile Design | McLean, Virg
+PASS  [smile-makeover] every internal link resolves to a real page  — 28 distinct targets
+PASS  [smile-makeover] in-page anchors all have targets
+PASS  [smile-makeover] no broken images
+PASS  [smile-makeover] every revealed block ends up visible
+PASS  [smile-makeover] 3 before/after sliders respond  — 18% -> 82%
+PASS  [smile-makeover] no horizontal overflow @1440  — scrollWidth=1440
+PASS  [smile-makeover] text contrast meets WCAG AA  — 145 nodes scored, 26 over imagery (unscorable)
+PASS  [smile-makeover] no console errors
+PASS  [smile-makeover] no horizontal overflow @390  — scrollWidth=390
+PASS  [smile-makeover] menu button reachable on mobile
+PASS  [smile-makeover] menu button opens the drawer  — open
+PASS  [smile-makeover] burger reports its state to assistive tech
+PASS  [smile-makeover] drawer closes again
+PASS  [veneers] page loaded with the shared shell
+PASS  [veneers] no CSS or JS inlined into the page  — 0 style, 0 inline script
+PASS  [veneers] every section module ran iff its section is on the page  — ok:0/11
+PASS  [veneers] exactly one h1  — 1 found
+PASS  [veneers] unique page title + meta description  — Porcelain Veneers | Digital Smile Design | McLean, V
+PASS  [veneers] every internal link resolves to a real page  — 28 distinct targets
+PASS  [veneers] in-page anchors all have targets

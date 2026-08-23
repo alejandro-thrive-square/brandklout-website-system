@@ -1,0 +1,37 @@
+[instatic-mcp] https://encorercm.com/_instatic/mcp via C:\Users\ACER\.claude-personal\.credentials.json
+about: 3 blocks, 15373 chars … OK  img=13 sec=7 cls=101
+all-on-4: 3 blocks, 24919 chars … OK  img=24 sec=12 cls=175
+contact: 3 blocks, 14632 chars … OK  img=8 sec=5 cls=92
+cosmetic-dentistry: 3 blocks, 16267 chars … OK  img=15 sec=7 cls=111
+crowns-and-bridges: 3 blocks, 13984 chars … OK  img=10 sec=7 cls=87
+dental-conditions: 3 blocks, 15593 chars … OK  img=9 sec=7 cls=97
+dental-implant-faq: 3 blocks, 15708 chars … OK  img=7 sec=8 cls=99
+dental-implants: 3 blocks, 22876 chars … OK  img=22 sec=10 cls=155
+doctor-referral: 3 blocks, 14578 chars … OK  img=12 sec=7 cls=101
+emergency-dentistry: 3 blocks, 14749 chars … OK  img=9 sec=7 cls=87
+financing: 3 blocks, 14471 chars … OK  img=12 sec=7 cls=91
+implant-cost: 3 blocks, 17680 chars … OK  img=13 sec=8 cls=114
+implant-supported-dentures: 3 blocks, 19296 chars … OK  img=16 sec=9 cls=131
+index: 3 blocks, 33928 chars … OK  img=25 sec=9 cls=252
+meet-dr-nahlah: 3 blocks, 16007 chars … OK  img=9 sec=8 cls=110
+oral-surgery: 3 blocks, 13901 chars … OK  img=12 sec=7 cls=93
+our-facility: 3 blocks, 16388 chars … OK  img=19 sec=7 cls=113
+our-team: 3 blocks, 13915 chars … OK  img=12 sec=6 cls=101
+patient-center: 3 blocks, 15272 chars … OK  img=16 sec=6 cls=104
+patient-stories: 3 blocks, 15362 chars … OK  img=8 sec=7 cls=111
+(created) privacy-policy-alexandria: 3 blocks, 21027 chars … OK  img=3 sec=30 cls=35
+(created) privacy-policy-maclean: 3 blocks, 20769 chars … OK  img=3 sec=29 cls=35
+sedation-dentistry: 3 blocks, 14270 chars … OK  img=8 sec=8 cls=94
+smile-gallery: 3 blocks, 52133 chars … OK  img=111 sec=5 cls=441
+smile-makeover: 3 blocks, 18216 chars … OK  img=23 sec=7 cls=134
+teeth-whitening: 3 blocks, 15155 chars … OK  img=12 sec=7 cls=103
+(created) terms-of-service-alexandria: 3 blocks, 23330 chars … OK  img=3 sec=28 cls=35
+(created) terms-of-service-maclean: 3 blocks, 23382 chars … OK  img=3 sec=28 cls=35
+thank-you: 3 blocks, 11420 chars … OK  img=8 sec=5 cls=75
+veneers: 3 blocks, 16420 chars … OK  img=15 sec=8 cls=115
+(created) video-library: 3 blocks, 14554 chars … FAIL shape mismatch want {"cls":99,"img":16,"sec":3} got {"cls":60,"img":3,"sec":3}
+
+30/31 pages pushed and verified
+FAILED:
+   video-library: shape mismatch want {"cls":99,"img":16,"sec":3} got {"cls":60,"img":3,"sec":3}
+Draft only. Nothing published.

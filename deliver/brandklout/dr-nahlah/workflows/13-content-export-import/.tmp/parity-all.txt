@@ -1,0 +1,1825 @@
+
+===== about  local=785 instatic=775 similarity=0.9769 diffs=20
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-hero-4.jpg alt=A patient in the practice's care data-drift=>
+    + <img src=pt-hero-4.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[337:338] instatic[329:330]
+    - <img src=consult-discussion.jpg alt=A second opinion being given at the prac>
+    + <img src=consult-discussion.jpg alt=>
+  [replace] local[343:344] instatic[335:336]
+    - <img src=emergency-patient.jpg alt=An emergency patient being seen the same>
+    + <img src=emergency-patient.jpg alt=>
+  [replace] local[349:350] instatic[341:342]
+    - <img src=practice-space-2.avif alt=A treatment suite at the practice>
+    + <img src=practice-space-2.jpg alt=>
+  [replace] local[355:356] instatic[347:348]
+    - <img src=lab.jpg alt=The in-house digital laboratory>
+    + <img src=lab.jpg alt=>
+  [replace] local[371:372] instatic[363:364]
+    - <img src=dr-headshot.png alt=Dr. Esam Nahlah, board-certified prostho data-drift=>
+    + <img src=dr-headshot.png alt= data-drift=>
+  [replace] local[447:448] instatic[439:440]
+    - <img src=pt-interaction-3.jpg alt=A treatment plan being reviewed>
+    + <img src=pt-interaction-3.jpg alt=>
+  [replace] local[461:462] instatic[453:454]
+    - <img src=dental-emergency-sign.jpg alt=Emergency dental care at the practice>
+    + <img src=dental-emergency-sign.jpg alt=>
+  [replace] local[478:479] instatic[470:471]
+    - <img src=case-veneers-5-after.jpg alt=A completed cosmetic case>
+    + <img src=case-veneers-5-after.jpg alt=>
+  [replace] local[492:493] instatic[484:485]
+    - <img src=tech-hero.jpg alt=Scanning and design at the practice>
+    + <img src=tech-hero.jpg alt=>
+  [replace] local[547:548] instatic[539:540]
+    - <img src=dr-and-yolanda.jpg alt=Dr. Nahlah with Yolanda, a full-arch pat data-drift=>
+    + <img src=dr-and-yolanda.jpg alt= data-drift=>
+  [delete] local[631:632] instatic[623:623]
+    - <span>
+  [delete] local[633:634] instatic[624:624]
+    - </span>
+  [replace] local[656:657] instatic[646:647]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== all-on-4  local=1087 instatic=1077 similarity=0.9732 diffs=28
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-hero-1.jpg alt=Yolanda, a full-arch implant patient of  data-drift=>
+    + <img src=pt-hero-1.jpg alt= data-drift=>
+  [delete] local[281:282] instatic[277:277]
+    - <span>
+  [delete] local[283:284] instatic[278:278]
+    - </span>
+  [delete] local[286:287] instatic[280:280]
+    - <span>
+  [delete] local[288:289] instatic[281:281]
+    - </span>
+  [replace] local[350:351] instatic[342:343]
+    - <img src=allon4.png alt=Four implants carrying a full arch>
+    + <img src=allon4.png alt=>
+  [replace] local[359:360] instatic[351:352]
+    - <img src=xray-consult.jpg alt=A clinician showing a patient their X-ra>
+    + <img src=xray-consult.jpg alt=>
+  [replace] local[368:369] instatic[360:361]
+    - <img src=case-ao4-double-1-before.jpg alt=A failing arch before treatment>
+    + <img src=case-ao4-double-1-before.jpg alt=>
+  [replace] local[374:375] instatic[366:367]
+    - <img src=case-ao4-double-1-after.jpg alt=The same patient after full-arch restora>
+    + <img src=case-ao4-double-1-after.jpg alt=>
+  [replace] local[469:470] instatic[461:462]
+    - <img src=fp1-fp3-comparison.png alt=FP1, FP2 and FP3 full-arch prostheses si>
+    + <img src=fp1-fp3-comparison.png alt=>
+  [replace] local[499:500] instatic[491:492]
+    - <img src=tech-hero.jpg alt=A cone-beam scan at the practice>
+    + <img src=tech-hero.jpg alt=>
+  [replace] local[513:514] instatic[505:506]
+    - <img src=sedation-patient.jpg alt=Full-arch surgery under sedation>
+    + <img src=sedation-patient.jpg alt=>
+  [replace] local[527:528] instatic[519:520]
+    - <img src=consult.jpg alt=A review appointment at the practice>
+    + <img src=consult.jpg alt=>
+  [replace] local[541:542] instatic[533:534]
+    - <img src=case-ao4-single-2-after.jpg alt=A finished zirconia full arch>
+    + <img src=case-ao4-single-2-after.jpg alt=>
+  [replace] local[592:593] instatic[584:585]
+    - <img src=case-ao4-double-9-after.jpg alt=A completed double-arch restoration data-drift=>
+    + <img src=case-ao4-double-9-after.jpg alt= data-drift=>
+  [replace] local[606:607] instatic[598:599]
+    - <img src=pt-interaction-5.jpg alt=Consultation at the practice in McLean data-drift=>
+    + <img src=pt-interaction-5.jpg alt= data-drift=>
+  [replace] local[672:674] instatic[664:666]
+    - <img src=case-ao4-double-1-before.jpg alt=Before: both arches failing>
+    - <img .ba-img-after src=case-ao4-double-1-after.jpg alt=After: both arches restored on implants>
+    + <img src=case-ao4-double-1-before.jpg alt=>
+    + <img .ba-img-after src=case-ao4-double-1-after.jpg alt=>
+  [replace] local[690:692] instatic[682:684]
+    - <img src=case-ao4-double-9-before.jpg alt=Before: failing upper and lower dentitio>
+    - <img .ba-img-after src=case-ao4-double-9-after.jpg alt=After: fixed full-arch restoration>
+    + <img src=case-ao4-double-9-before.jpg alt=>
+    + <img .ba-img-after src=case-ao4-double-9-after.jpg alt=>
+  [replace] local[708:710] instatic[700:702]
+    - <img src=case-ao4-single-2-before.jpg alt=Before: failing upper arch>
+    - <img .ba-img-after src=case-ao4-single-2-after.jpg alt=After: upper arch restored on four impla>
+    + <img src=case-ao4-single-2-before.jpg alt=>
+    + <img .ba-img-after src=case-ao4-single-2-after.jpg alt=>
+  [replace] local[735:736] instatic[727:728]
+    - <img src=patient-story.jpg alt=Melanie holding a photograph of her smil data-drift=>
+    + <img src=patient-story.jpg alt= data-drift=>
+  [replace] local[772:773] instatic[764:765]
+    - <img src=case-ao4-double-1-after.jpg alt=A provisional arch fitted the same day>
+    + <img src=case-ao4-double-1-after.jpg alt=>
+  [replace] local[786:787] instatic[778:779]
+    - <img src=consult.jpg alt=A six-month review at the practice>
+    + <img src=consult.jpg alt=>
+  [replace] local[800:801] instatic[792:793]
+    - <img src=consult-discussion.jpg alt=A second opinion at the practice>
+    + <img src=consult-discussion.jpg alt=>
+  [delete] local[933:934] instatic[925:925]
+    - <span>
+  [delete] local[935:936] instatic[926:926]
+    - </span>
+  [replace] local[958:959] instatic[948:949]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== contact  local=780 instatic=770 similarity=0.9832 diffs=15
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=office-hero.jpg alt=The practice reception in Northern Virgi data-drift=>
+    + <img src=office-hero.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[368:369] instatic[360:361]
+    - <img src=office-outside.jpg alt=The McLean practice at 7901 Jones Branch>
+    + <img src=office-outside.jpg alt=>
+  [replace] local[374:375] instatic[366:367]
+    - <img src=practice-space-1.avif alt=The reception area>
+    + <img src=practice-space-1.jpg alt=>
+  [replace] local[380:381] instatic[372:373]
+    - <img src=practice-space-4.avif alt=A treatment suite>
+    + <img src=practice-space-4.jpg alt=>
+  [replace] local[386:387] instatic[378:379]
+    - <img src=lab.jpg alt=The in-house digital laboratory>
+    + <img src=lab.jpg alt=>
+  [delete] local[533:534] instatic[525:525]
+    - <span>
+  [delete] local[535:536] instatic[526:526]
+    - </span>
+  [replace] local[554:555] instatic[544:545]
+    - <img src=office-outside.jpg alt=The practice building exterior data-drift=>
+    + <img src=office-outside.jpg alt= data-drift=>
+  [replace] local[651:652] instatic[641:642]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== cosmetic-dentistry  local=803 instatic=793 similarity=0.9749 diffs=20
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=cosmetic-transformation.jpg alt=A cosmetic dentistry patient after treat data-drift=>
+    + <img src=cosmetic-transformation.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[317:318] instatic[309:310]
+    - <img src=smile-makeover-patient.png alt=A completed cosmetic case data-drift=>
+    + <img src=smile-makeover-patient.png alt= data-drift=>
+  [replace] local[396:397] instatic[388:389]
+    - <img src=case-veneers-1-after.jpg alt=A completed porcelain veneer case>
+    + <img src=case-veneers-1-after.jpg alt=>
+  [replace] local[413:414] instatic[405:406]
+    - <img src=crown-model.jpg alt=A porcelain crown>
+    + <img src=crown-model.jpg alt=>
+  [replace] local[430:431] instatic[422:423]
+    - <img src=bridge-model.jpg alt=A fixed dental bridge>
+    + <img src=bridge-model.jpg alt=>
+  [replace] local[444:445] instatic[436:437]
+    - <img src=case-whitening-2-after.jpg alt=A completed whitening case>
+    + <img src=case-whitening-2-after.jpg alt=>
+  [replace] local[461:462] instatic[453:454]
+    - <img src=dental-crowns-model-2.jpg alt=An inlay restoration on a molar>
+    + <img src=dental-crowns-model-2.jpg alt=>
+  [replace] local[475:476] instatic[467:468]
+    - <img src=consult-discussion.jpg alt=A candidacy discussion at the practice>
+    + <img src=consult-discussion.jpg alt=>
+  [replace] local[507:509] instatic[499:501]
+    - <img src=case-porcelain-1-before.jpg alt=Before: worn and discolored front teeth>
+    - <img .ba-img-after src=case-porcelain-1-after.jpg alt=After: porcelain restoration>
+    + <img src=case-porcelain-1-before.jpg alt=>
+    + <img .ba-img-after src=case-porcelain-1-after.jpg alt=>
+  [replace] local[525:527] instatic[517:519]
+    - <img src=case-makeover-1-before.jpg alt=Before: an uneven and gapped smile>
+    - <img .ba-img-after src=case-makeover-1-after.jpg alt=After: a completed smile makeover>
+    + <img src=case-makeover-1-before.jpg alt=>
+    + <img .ba-img-after src=case-makeover-1-after.jpg alt=>
+  [replace] local[552:553] instatic[544:545]
+    - <img src=consult-discussion.jpg alt=Discussing a treatment plan at the pract data-drift=>
+    + <img src=consult-discussion.jpg alt= data-drift=>
+  [delete] local[649:650] instatic[641:641]
+    - <span>
+  [delete] local[651:652] instatic[642:642]
+    - </span>
+  [replace] local[674:675] instatic[664:665]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== crowns-and-bridges  local=736 instatic=726 similarity=0.9795 diffs=17
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-interaction-5.jpg alt=A patient at the practice data-drift=>
+    + <img src=pt-interaction-5.jpg alt= data-drift=>
+  [delete] local[281:282] instatic[277:277]
+    - <span>
+  [delete] local[283:284] instatic[278:278]
+    - </span>
+  [delete] local[286:287] instatic[280:280]
+    - <span>
+  [delete] local[288:289] instatic[281:281]
+    - </span>
+  [replace] local[342:343] instatic[334:335]
+    - <img src=crown-model.jpg alt=A dental crown>
+    + <img src=crown-model.jpg alt=>
+  [replace] local[351:352] instatic[343:344]
+    - <img src=bridge-model.jpg alt=A dental bridge>
+    + <img src=bridge-model.jpg alt=>
+  [replace] local[360:361] instatic[352:353]
+    - <img src=dental-crowns-model-2.jpg alt=Crowns matched to the neighbouring teeth>
+    + <img src=dental-crowns-model-2.jpg alt=>
+  [replace] local[366:367] instatic[358:359]
+    - <img src=lab.jpg alt=The in-house digital laboratory>
+    + <img src=lab.jpg alt=>
+  [replace] local[377:378] instatic[369:370]
+    - <img src=crown-model.jpg alt=A dental crown model data-drift=>
+    + <img src=crown-model.jpg alt= data-drift=>
+  [replace] local[429:430] instatic[421:422]
+    - <img src=bridge-model.jpg alt=A dental bridge model data-drift=>
+    + <img src=bridge-model.jpg alt= data-drift=>
+  [replace] local[490:491] instatic[482:483]
+    - <img src=cost-calculating.png alt=Working out the cost of treatment data-drift=>
+    + <img src=cost-calculating.png alt= data-drift=>
+  [delete] local[582:583] instatic[574:574]
+    - <span>
+  [delete] local[584:585] instatic[575:575]
+    - </span>
+  [replace] local[607:608] instatic[597:598]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== dental-conditions  local=737 instatic=727 similarity=0.9809 diffs=16
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=conditions-patient.jpg alt=A patient at the practice data-drift=>
+    + <img src=conditions-patient.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[333:334] instatic[325:326]
+    - <img src=tech-advanced.jpg alt=Digital scanning at the practice>
+    + <img src=tech-advanced.jpg alt=>
+  [replace] local[339:340] instatic[331:332]
+    - <img src=consult-discussion.jpg alt=A treatment discussion at the practice>
+    + <img src=consult-discussion.jpg alt=>
+  [replace] local[345:346] instatic[337:338]
+    - <img src=tooth-model.png alt=A tooth model used to explain treatment>
+    + <img src=tooth-model.png alt=>
+  [replace] local[351:352] instatic[343:344]
+    - <img src=dr-with-patient.jpg alt=Dr. Nahlah with a patient>
+    + <img src=dr-with-patient.jpg alt=>
+  [replace] local[481:482] instatic[473:474]
+    - <img src=pt-interaction.jpg alt=A consultation at the practice data-drift=>
+    + <img src=pt-interaction.jpg alt= data-drift=>
+  [replace] local[495:496] instatic[487:488]
+    - <img src=pt-yolanda.jpg alt=Yolanda, a full-arch patient of the prac data-drift=>
+    + <img src=pt-yolanda.jpg alt= data-drift=>
+  [delete] local[583:584] instatic[575:575]
+    - <span>
+  [delete] local[585:586] instatic[576:576]
+    - </span>
+  [replace] local[608:609] instatic[598:599]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== dental-implant-faq  local=755 instatic=745 similarity=0.9840 diffs=14
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-hero-2.jpg alt=A patient at the practice data-drift=>
+    + <img src=pt-hero-2.jpg alt= data-drift=>
+  [delete] local[281:282] instatic[277:277]
+    - <span>
+  [delete] local[283:284] instatic[278:278]
+    - </span>
+  [delete] local[286:287] instatic[280:280]
+    - <span>
+  [delete] local[288:289] instatic[281:281]
+    - </span>
+  [replace] local[338:339] instatic[330:331]
+    - <img src=dental-implant-model-3.png alt=A titanium implant post placed in the ja>
+    + <img src=dental-implant-model-3.png alt=>
+  [replace] local[347:348] instatic[339:340]
+    - <img src=dental-implant-crown-model.jpg alt=An abutment and crown on an implant post>
+    + <img src=dental-implant-crown-model.jpg alt=>
+  [replace] local[356:357] instatic[348:349]
+    - <img src=multi-implant-model.png alt=A multi-implant restoration model>
+    + <img src=multi-implant-model.png alt=>
+  [replace] local[480:481] instatic[472:473]
+    - <img src=Dentist-holding-a-dental-implant-in-his-hands-.jpg alt=An implant post held before placement data-drift=>
+    + <img src=Dentist-holding-a-dental-implant-in-his-hands-.jpg alt= data-drift=>
+  [delete] local[601:602] instatic[593:593]
+    - <span>
+  [delete] local[603:604] instatic[594:594]
+    - </span>
+  [replace] local[626:627] instatic[616:617]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== dental-implants  local=991 instatic=981 similarity=0.9726 diffs=26
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-interaction.jpg alt=Dr. Nahlah reviewing an implant plan wit data-drift=>
+    + <img src=pt-interaction.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[333:334] instatic[325:326]
+    - <img src=dental-implant-model-3.png alt=A titanium implant post in the jawbone>
+    + <img src=dental-implant-model-3.png alt=>
+  [replace] local[342:343] instatic[334:335]
+    - <img src=dental-implant-crown-model.jpg alt=An abutment joining post to crown>
+    + <img src=dental-implant-crown-model.jpg alt=>
+  [replace] local[351:352] instatic[343:344]
+    - <img src=multiple-dental-implant-model.png alt=A restoration seated on implants>
+    + <img src=multiple-dental-implant-model.png alt=>
+  [replace] local[392:393] instatic[384:385]
+    - <img src=dental-implant-crown-model.jpg alt=A single implant and crown>
+    + <img src=dental-implant-crown-model.jpg alt=>
+  [replace] local[406:407] instatic[398:399]
+    - <img src=multi-implant-model.png alt=An implant-supported bridge>
+    + <img src=multi-implant-model.png alt=>
+  [replace] local[420:421] instatic[412:413]
+    - <img src=implant-supported-denture.png alt=A denture clipped onto implants>
+    + <img src=implant-supported-denture.png alt=>
+  [replace] local[437:438] instatic[429:430]
+    - <img src=full-arch-dental-implants.png alt=A fixed full arch on implants>
+    + <img src=full-arch-dental-implants.png alt=>
+  [replace] local[475:476] instatic[467:468]
+    - <img src=tech-hero.jpg alt=A cone-beam scan at the practice>
+    + <img src=tech-hero.jpg alt=>
+  [replace] local[489:490] instatic[481:482]
+    - <img src=sedation-patient.jpg alt=Implant surgery under sedation>
+    + <img src=sedation-patient.jpg alt=>
+  [replace] local[503:504] instatic[495:496]
+    - <img src=xray-consult.jpg alt=A clinician showing a patient their X-ra>
+    + <img src=xray-consult.jpg alt=>
+  [replace] local[517:518] instatic[509:510]
+    - <img src=case-ao4-double-3-after.jpg alt=A completed full-arch restoration>
+    + <img src=case-ao4-double-3-after.jpg alt=>
+  [replace] local[569:570] instatic[561:562]
+    - <img src=pt-hero-2.jpg alt=A patient of the practice after implant  data-drift=>
+    + <img src=pt-hero-2.jpg alt= data-drift=>
+  [replace] local[632:634] instatic[624:626]
+    - <img src=1-before.jpg alt=Before: veneers and implant restoration >
+    - <img .ba-img-after src=1-after.jpg alt=After: veneers and implant restoration c>
+    + <img src=case-veneers-implants-1-before.jpg alt=>
+    + <img .ba-img-after src=case-veneers-implants-1-after.jpg alt=>
+  [replace] local[650:652] instatic[642:644]
+    - <img src=case-ao4-single-1-before.jpg alt=Before: single-arch implant restoration>
+    - <img .ba-img-after src=case-ao4-single-1-after.jpg alt=After: single-arch implant restoration>
+    + <img src=case-ao4-single-1-before.jpg alt=>
+    + <img .ba-img-after src=case-ao4-single-1-after.jpg alt=>
+  [replace] local[668:670] instatic[660:662]
+    - <img src=case-ao4-double-3-before.jpg alt=Before: full-mouth implant reconstructio>
+    - <img .ba-img-after src=case-ao4-double-3-after.jpg alt=After: full-mouth implant reconstruction>
+    + <img src=case-ao4-double-3-before.jpg alt=>
+    + <img .ba-img-after src=case-ao4-double-3-after.jpg alt=>
+  [replace] local[695:696] instatic[687:688]
+    - <img src=pt-yolanda.jpg alt=Yolanda, a patient of the practice data-drift=>
+    + <img src=pt-yolanda.jpg alt= data-drift=>
+  [delete] local[837:838] instatic[829:829]
+    - <span>
+  [delete] local[839:840] instatic[830:830]
+    - </span>
+  [replace] local[862:863] instatic[852:853]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== doctor-referral  local=742 instatic=732 similarity=0.9769 diffs=19
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=dr-with-patient.jpg alt=Dr. Nahlah treating a patient data-drift=>
+    + <img src=dr-with-patient.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[333:334] instatic[325:326]
+    - <img src=office-outside.jpg alt=The entrance to the McLean practice>
+    + <img src=office-outside.jpg alt=>
+  [replace] local[339:340] instatic[331:332]
+    - <img src=consult-discussion.jpg alt=A first consultation at the practice>
+    + <img src=consult-discussion.jpg alt=>
+  [replace] local[345:346] instatic[337:338]
+    - <img src=sedation-patient.jpg alt=A patient under sedation at the practice>
+    + <img src=sedation-patient.jpg alt=>
+  [replace] local[351:352] instatic[343:344]
+    - <img src=pt-interaction-3.jpg alt=A treatment plan being explained>
+    + <img src=pt-interaction-3.jpg alt=>
+  [replace] local[379:380] instatic[371:372]
+    - <img src=tech-hero.jpg alt=CBCT and intraoral scanning at the pract>
+    + <img src=tech-hero.jpg alt=>
+  [replace] local[393:394] instatic[385:386]
+    - <img src=office-room.jpg alt=One of the six surgical suites>
+    + <img src=office-room.jpg alt=>
+  [replace] local[410:411] instatic[402:403]
+    - <img src=lab.jpg alt=The in-house digital laboratory>
+    + <img src=lab.jpg alt=>
+  [replace] local[427:428] instatic[419:420]
+    - <img src=case-ao4-double-1-after.jpg alt=A completed full-arch case>
+    + <img src=case-ao4-double-1-after.jpg alt=>
+  [replace] local[448:449] instatic[440:441]
+    - <img src=tech-hero.jpg alt=Digital treatment planning at the practi data-drift=>
+    + <img src=tech-hero.jpg alt= data-drift=>
+  [delete] local[588:589] instatic[580:580]
+    - <span>
+  [delete] local[590:591] instatic[581:581]
+    - </span>
+  [replace] local[613:614] instatic[603:604]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== emergency-dentistry  local=751 instatic=741 similarity=0.9812 diffs=16
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-hero-4.jpg alt=A patient being seen at the practice data-drift=>
+    + <img src=pt-hero-4.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[349:350] instatic[341:342]
+    - <img src=dental-emergency-sign.jpg alt=Emergency dental care signage>
+    + <img src=dental-emergency-sign.jpg alt=>
+  [replace] local[355:356] instatic[347:348]
+    - <img src=tech-advanced.jpg alt=Diagnostic imaging at the practice>
+    + <img src=tech-advanced.jpg alt=>
+  [replace] local[361:362] instatic[353:354]
+    - <img src=sedation-patient.jpg alt=A patient sedated for emergency treatmen>
+    + <img src=sedation-patient.jpg alt=>
+  [replace] local[367:368] instatic[359:360]
+    - <img src=office-room.jpg alt=A treatment suite at the practice>
+    + <img src=office-room.jpg alt=>
+  [replace] local[378:379] instatic[370:371]
+    - <img src=emergency-patient.jpg alt=A patient being treated at the practice data-drift=>
+    + <img src=emergency-patient.jpg alt= data-drift=>
+  [replace] local[513:514] instatic[505:506]
+    - <img src=tech-advanced.jpg alt=Diagnostic technology at the practice data-drift=>
+    + <img src=tech-advanced.jpg alt= data-drift=>
+  [delete] local[597:598] instatic[589:589]
+    - <span>
+  [delete] local[599:600] instatic[590:590]
+    - </span>
+  [replace] local[622:623] instatic[612:613]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== financing  local=746 instatic=736 similarity=0.9771 diffs=19
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-interaction-5.jpg alt=A patient discussing treatment at the pr data-drift=>
+    + <img src=pt-interaction-5.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[337:338] instatic[329:330]
+    - <img src=financing-card.jpg alt=Paying for treatment at the practice>
+    + <img src=financing-card.jpg alt=>
+  [replace] local[343:344] instatic[335:336]
+    - <img src=consult-discussion.jpg alt=Reviewing an estimate at the practice>
+    + <img src=consult-discussion.jpg alt=>
+  [replace] local[349:350] instatic[341:342]
+    - <img src=cost-calculating.png alt=Working out the cost of treatment>
+    + <img src=cost-calculating.png alt=>
+  [replace] local[355:356] instatic[347:348]
+    - <img src=pt-interaction-3.jpg alt=A patient with the financial coordinator>
+    + <img src=pt-interaction-3.jpg alt=>
+  [replace] local[366:367] instatic[358:359]
+    - <img src=financing-card.jpg alt=A patient paying for dental treatment data-drift=>
+    + <img src=financing-card.jpg alt= data-drift=>
+  [replace] local[432:433] instatic[424:425]
+    - <img src=logo-carecredit.png alt=CareCredit>
+    + <img src=logo-carecredit.png alt=>
+  [replace] local[452:453] instatic[444:445]
+    - <img src=logo-proceed.png alt=Proceed Finance>
+    + <img src=logo-proceed.png alt=>
+  [replace] local[480:481] instatic[472:473]
+    - <img src=logo-lendingclub.png alt=LendingClub>
+    + <img src=logo-lendingclub.png alt=>
+  [replace] local[509:510] instatic[501:502]
+    - <img src=consult-discussion.jpg alt=Discussing treatment costs at the practi data-drift=>
+    + <img src=consult-discussion.jpg alt= data-drift=>
+  [delete] local[592:593] instatic[584:584]
+    - <span>
+  [delete] local[594:595] instatic[585:585]
+    - </span>
+  [replace] local[617:618] instatic[607:608]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== implant-cost  local=843 instatic=833 similarity=0.9785 diffs=20
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=financing-card.jpg alt=A patient arranging payment at the pract data-drift=>
+    + <img src=financing-card.jpg alt= data-drift=>
+  [delete] local[281:282] instatic[277:277]
+    - <span>
+  [delete] local[283:284] instatic[278:278]
+    - </span>
+  [delete] local[286:287] instatic[280:280]
+    - <span>
+  [delete] local[288:289] instatic[281:281]
+    - </span>
+  [replace] local[339:340] instatic[331:332]
+    - <img src=multiple-dental-implant-model.png alt=A multi-implant restoration>
+    + <img src=multiple-dental-implant-model.png alt=>
+  [replace] local[353:354] instatic[345:346]
+    - <img src=xray-consult.jpg alt=A clinician showing a patient their X-ra>
+    + <img src=xray-consult.jpg alt=>
+  [replace] local[367:368] instatic[359:360]
+    - <img src=Dentist-holding-a-dental-implant-in-his-hands-.jpg alt=An implant post before placement>
+    + <img src=Dentist-holding-a-dental-implant-in-his-hands-.jpg alt=>
+  [replace] local[381:382] instatic[373:374]
+    - <img src=crown-model.jpg alt=A zirconia restoration>
+    + <img src=crown-model.jpg alt=>
+  [replace] local[395:396] instatic[387:388]
+    - <img src=lab.jpg alt=The in-house digital laboratory>
+    + <img src=lab.jpg alt=>
+  [replace] local[409:410] instatic[401:402]
+    - <img src=consult-discussion.jpg alt=A second opinion at the practice>
+    + <img src=consult-discussion.jpg alt=>
+  [replace] local[469:470] instatic[461:462]
+    - <img src=consult-discussion.jpg alt=Discussing a treatment plan and its cost data-drift=>
+    + <img src=consult-discussion.jpg alt= data-drift=>
+  [replace] local[535:536] instatic[527:528]
+    - <img src=logo-carecredit.png alt=CareCredit>
+    + <img src=logo-carecredit.png alt=>
+  [replace] local[549:550] instatic[541:542]
+    - <img src=logo-proceed.png alt=Proceed Finance>
+    + <img src=logo-proceed.png alt=>
+  [replace] local[571:572] instatic[563:564]
+    - <img src=logo-lendingclub.png alt=LendingClub>
+    + <img src=logo-lendingclub.png alt=>
+  [delete] local[689:690] instatic[681:681]
+    - <span>
+  [delete] local[691:692] instatic[682:682]
+    - </span>
+  [replace] local[714:715] instatic[704:705]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== implant-supported-dentures  local=976 instatic=966 similarity=0.9784 diffs=21
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-yolanda-transformation.jpg alt=Yolanda, a full-arch patient of the prac data-drift=>
+    + <img src=pt-yolanda-transformation.jpg alt= data-drift=>
+  [delete] local[281:282] instatic[277:277]
+    - <span>
+  [delete] local[283:284] instatic[278:278]
+    - </span>
+  [delete] local[286:287] instatic[280:280]
+    - <span>
+  [delete] local[288:289] instatic[281:281]
+    - </span>
+  [replace] local[346:347] instatic[338:339]
+    - <img src=dentures-model.png alt=A traditional acrylic denture>
+    + <img src=dentures-model.png alt=>
+  [replace] local[355:356] instatic[347:348]
+    - <img src=implant-supported-denture.png alt=A denture stabilised on implants>
+    + <img src=implant-supported-denture.png alt=>
+  [replace] local[364:365] instatic[356:357]
+    - <img src=full-arch-dental-implants.png alt=A fixed full arch on implants>
+    + <img src=full-arch-dental-implants.png alt=>
+  [replace] local[580:581] instatic[572:573]
+    - <img src=dr-and-yolanda.jpg alt=Dr. Nahlah with Yolanda after her full-a data-drift=>
+    + <img src=dr-and-yolanda.jpg alt= data-drift=>
+  [replace] local[620:622] instatic[612:614]
+    - <img src=case-fullarch-3-before.jpg alt=Before: failing and missing teeth>
+    - <img .ba-img-after src=case-fullarch-3-after.jpg alt=After: a fixed full arch on implants>
+    + <img src=case-fullarch-3-before.jpg alt=>
+    + <img .ba-img-after src=case-fullarch-3-after.jpg alt=>
+  [replace] local[638:640] instatic[630:632]
+    - <img src=case-fullarch-4-before.jpg alt=Before: a failing dentition>
+    - <img .ba-img-after src=case-fullarch-4-after.jpg alt=After: a fixed full arch on implants>
+    + <img src=case-fullarch-4-before.jpg alt=>
+    + <img .ba-img-after src=case-fullarch-4-after.jpg alt=>
+  [replace] local[679:680] instatic[671:672]
+    - <img src=consult-discussion.jpg alt=A consultation at the practice>
+    + <img src=consult-discussion.jpg alt=>
+  [replace] local[693:694] instatic[685:686]
+    - <img src=xray-consult.jpg alt=A clinician showing a patient their X-ra>
+    + <img src=xray-consult.jpg alt=>
+  [replace] local[710:711] instatic[702:703]
+    - <img src=sedation-patient.jpg alt=Surgery under sedation at the practice>
+    + <img src=sedation-patient.jpg alt=>
+  [replace] local[724:725] instatic[716:717]
+    - <img src=case-fullarch-4-after.jpg alt=A completed fixed full arch>
+    + <img src=case-fullarch-4-after.jpg alt=>
+  [replace] local[742:743] instatic[734:735]
+    - <img src=cost-calculating.png alt=Working out the cost of treatment data-drift=>
+    + <img src=cost-calculating.png alt= data-drift=>
+  [delete] local[822:823] instatic[814:814]
+    - <span>
+  [delete] local[824:825] instatic[815:815]
+    - </span>
+  [replace] local[847:848] instatic[837:838]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== index  local=1295 instatic=1285 similarity=0.9775 diffs=23
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[49:53] instatic[49:49]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[264:265] instatic[260:261]
+    - <video .ar-film id=heroFilm>
+    + <video .ar-film>
+  [delete] local[290:291] instatic[286:286]
+    - <span>
+  [delete] local[292:293] instatic[287:287]
+    - </span>
+  [delete] local[295:296] instatic[289:289]
+    - <span>
+  [delete] local[297:298] instatic[290:290]
+    - </span>
+  [replace] local[581:582] instatic[573:574]
+    - <img src=dr-nahlah.png alt=Dr. Esam Nahlah, D.D.S., M.S., board-cer id=specPortrait>
+    + <img src=dr-nahlah.png alt= id=specPortrait>
+  [replace] local[707:709] instatic[699:701]
+    - <img src=case1-before.jpg alt=Patient smile before veneers and implant>
+    - <img .tf-aft src=case1-after.jpg alt=The same smile after treatment>
+    + <img src=case1-before.jpg alt=>
+    + <img .tf-aft src=case1-after.jpg alt=>
+  [replace] local[711:713] instatic[703:705]
+    - <img src=case2-before.jpg alt=Patient smile before double-arch All-on->
+    - <img .tf-aft src=case2-after.jpg alt=The same smile after double-arch All-on->
+    + <img src=case2-before.jpg alt=>
+    + <img .tf-aft src=case2-after.jpg alt=>
+  [replace] local[715:717] instatic[707:709]
+    - <img src=case3-before.jpg alt=Patient smile before single-arch All-on->
+    - <img .tf-aft src=case3-after.jpg alt=The same smile after single-arch All-on->
+    + <img src=case3-before.jpg alt=>
+    + <img .tf-aft src=case3-after.jpg alt=>
+  [replace] local[843:844] instatic[835:836]
+    - <img src=lab.jpg alt=The in-house dental laboratory bench wit>
+    + <img src=lab.jpg alt=>
+  [replace] local[857:858] instatic[849:850]
+    - <img src=xray-consult.jpg alt=A clinician showing a patient their X-ra>
+    + <img src=xray-consult.jpg alt=>
+  [replace] local[871:872] instatic[863:864]
+    - <img src=veneers-procedure.png alt=A minimally invasive veneer preparation >
+    + <img src=veneers-procedure.png alt=>
+  [replace] local[885:886] instatic[877:878]
+    - <img src=case-ao4-double-1-after.jpg alt=A finished full-arch case treated at the>
+    + <img src=case-ao4-double-1-after.jpg alt=>
+  [replace] local[976:977] instatic[968:969]
+    - <img src=fp1-fp3-comparison.png alt=FP1, FP2 and FP3 full-arch prostheses si>
+    + <img src=fp1-fp3-comparison.png alt=>
+  [replace] local[991:992] instatic[983:984]
+    - <video id=film>
+    + <video>
+  [replace] local[1042:1043] instatic[1034:1035]
+    - <img src=google.svg alt=Google>
+    + <img src=google.svg alt=>
+  [replace] local[1059:1061] instatic[1051:1053]
+    - <iframe .lc_reviews_widget>
+    - </iframe>
+    + <div .lc_reviews_widget>
+    + </div>
+  [replace] local[1078:1083] instatic[1070:1075]
+    - <img .iv-shot iv-shot-wide src=practice-space-1.avif alt=The reception desk, with the Dr. Nahlah >
+    - <img .iv-shot src=practice-space-2.avif alt=A consultation room with a round table, >
+    - <img .iv-shot src=practice-space-3.avif alt=The corridor between treatment rooms, li>
+    - <img .iv-shot src=practice-space-4.avif alt=A treatment room with the dental chair, >
+    - <img .iv-shot src=practice-space-5.avif alt=The preparation corridor, with instrumen>
+    + <img .iv-shot iv-shot-wide src=practice-space-1.jpg alt=>
+    + <img .iv-shot src=practice-space-2.jpg alt=>
+    + <img .iv-shot src=practice-space-3.jpg alt=>
+    + <img .iv-shot src=practice-space-4.jpg alt=>
+    + <img .iv-shot src=practice-space-5.jpg alt=>
+  [delete] local[1154:1155] instatic[1146:1146]
+    - <span>
+  [delete] local[1156:1157] instatic[1147:1147]
+    - </span>
+  [replace] local[1166:1167] instatic[1156:1157]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== meet-dr-nahlah  local=842 instatic=832 similarity=0.9833 diffs=16
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=dr-with-patient.jpg alt=Dr. Esam Nahlah with a patient data-drift=>
+    + <img src=dr-with-patient.jpg alt= data-drift=>
+  [delete] local[275:276] instatic[271:271]
+    - <span>
+  [delete] local[277:278] instatic[272:272]
+    - </span>
+  [delete] local[280:281] instatic[274:274]
+    - <span>
+  [delete] local[282:283] instatic[275:275]
+    - </span>
+  [replace] local[344:345] instatic[336:337]
+    - <img src=dr-headshot.png alt=Dr. Esam Nahlah, board-certified prostho>
+    + <img src=dr-headshot.png alt=>
+  [replace] local[353:354] instatic[345:346]
+    - <img src=dr-with-patient.jpg alt=Dr. Nahlah with a patient>
+    + <img src=dr-with-patient.jpg alt=>
+  [replace] local[362:363] instatic[354:355]
+    - <img src=arch_implants.jpg alt=A restored full arch>
+    + <img src=arch_implants.jpg alt=>
+  [replace] local[371:372] instatic[363:364]
+    - <img src=dr-award.jpg alt=The practice illustration for its award >
+    + <img src=dr-award.jpg alt=>
+  [replace] local[501:502] instatic[493:494]
+    - <img src=dr-award.jpg alt=A trophy, the practice's illustration fo data-drift=>
+    + <img src=dr-award.jpg alt= data-drift=>
+  [replace] local[608:609] instatic[600:601]
+    - <img src=dr-team.jpg alt=Dr. Nahlah with the practice team data-drift=>
+    + <img src=dr-team.jpg alt= data-drift=>
+  [delete] local[688:689] instatic[680:680]
+    - <span>
+  [delete] local[690:691] instatic[681:681]
+    - </span>
+  [replace] local[713:714] instatic[703:704]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== oral-surgery  local=694 instatic=684 similarity=0.9753 diffs=19
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-interaction.jpg alt=A patient at the practice data-drift=>
+    + <img src=pt-interaction.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[333:334] instatic[325:326]
+    - <img src=tech-hero.jpg alt=The scanning suite at the practice>
+    + <img src=tech-hero.jpg alt=>
+  [replace] local[339:340] instatic[331:332]
+    - <img src=xray-consult.jpg alt=A clinician showing a patient their X-ra>
+    + <img src=xray-consult.jpg alt=>
+  [replace] local[345:346] instatic[337:338]
+    - <img src=office-room.jpg alt=A private surgical suite at the practice>
+    + <img src=office-room.jpg alt=>
+  [replace] local[351:352] instatic[343:344]
+    - <img src=lab.jpg alt=The in-house digital laboratory>
+    + <img src=lab.jpg alt=>
+  [replace] local[379:380] instatic[371:372]
+    - <img src=Closeup-of-unrecognizable-dentist-pointing-at-tooth-model-while-explaining-dental-implant-surgery-to-patient-in-clinic.jpg alt=A tooth model used to explain an e
+    + <img src=Closeup-of-unrecognizable-dentist-pointing-at-tooth-model-while-explaining-dental-implant-surgery-to-patient-in-clinic.jpg alt=>
+  [replace] local[393:394] instatic[385:386]
+    - <img src=full-mouth-dental-implants-model.jpg alt=A jaw model showing implant sites in the>
+    + <img src=full-mouth-dental-implants-model.jpg alt=>
+  [replace] local[407:408] instatic[399:400]
+    - <img src=Dentist-holding-a-dental-implant-in-his-hands-.jpg alt=An implant post before placement>
+    + <img src=Dentist-holding-a-dental-implant-in-his-hands-.jpg alt=>
+  [replace] local[428:429] instatic[420:421]
+    - <img src=sedation-patient.jpg alt=A sedated patient during treatment data-drift=>
+    + <img src=sedation-patient.jpg alt= data-drift=>
+  [replace] local[476:477] instatic[468:469]
+    - <img src=office-wide.jpeg alt=The surgical floor at the practice data-drift=>
+    + <img src=office-wide.jpg alt= data-drift=>
+  [delete] local[540:541] instatic[532:532]
+    - <span>
+  [delete] local[542:543] instatic[533:533]
+    - </span>
+  [replace] local[565:566] instatic[555:556]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== our-facility  local=782 instatic=772 similarity=0.9691 diffs=26
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=office-hero.jpg alt=Inside the McLean practice data-drift=>
+    + <img src=office-hero.jpg alt= data-drift=>
+  [delete] local[281:282] instatic[277:277]
+    - <span>
+  [delete] local[283:284] instatic[278:278]
+    - </span>
+  [delete] local[286:287] instatic[280:280]
+    - <span>
+  [delete] local[288:289] instatic[281:281]
+    - </span>
+  [replace] local[338:339] instatic[330:331]
+    - <img src=practice-space-1.avif alt=The waiting area at the practice>
+    + <img src=practice-space-1.jpg alt=>
+  [replace] local[347:348] instatic[339:340]
+    - <img src=practice-space-2.avif alt=A private treatment suite>
+    + <img src=practice-space-2.jpg alt=>
+  [replace] local[353:354] instatic[345:346]
+    - <img src=practice-space-3.avif alt=Inside the practice>
+    + <img src=practice-space-3.jpg alt=>
+  [replace] local[359:360] instatic[351:352]
+    - <img src=practice-space-4.avif alt=Inside the practice>
+    + <img src=practice-space-4.jpg alt=>
+  [replace] local[365:366] instatic[357:358]
+    - <img src=practice-space-5.avif alt=Inside the practice>
+    + <img src=practice-space-5.jpg alt=>
+  [replace] local[397:398] instatic[389:390]
+    - <img src=office-wide.jpeg alt=The practice's treatment floor data-drift=>
+    + <img src=office-wide.jpg alt= data-drift=>
+  [replace] local[403:404] instatic[395:396]
+    - <img src=office-outside.jpg alt=The building at 7901 Jones Branch Drive, data-drift=>
+    + <img src=office-outside.jpg alt= data-drift=>
+  [replace] local[409:410] instatic[401:402]
+    - <img src=office-room.jpg alt=A private treatment suite data-drift=>
+    + <img src=office-room.jpg alt= data-drift=>
+  [replace] local[415:416] instatic[407:408]
+    - <img src=office-hero.jpg alt=The reception and waiting area data-drift=>
+    + <img src=office-hero.jpg alt= data-drift=>
+  [replace] local[443:444] instatic[435:436]
+    - <img src=xray-consult.jpg alt=A clinician showing a patient their X-ra>
+    + <img src=xray-consult.jpg alt=>
+  [replace] local[457:458] instatic[449:450]
+    - <img src=tech-advanced.jpg alt=Digital impression scanning at the pract>
+    + <img src=tech-advanced.jpg alt=>
+  [replace] local[471:472] instatic[463:464]
+    - <img src=Closeup-of-unrecognizable-dentist-pointing-at-tooth-model-while-explaining-dental-implant-surgery-to-patient-in-clinic.jpg alt=Planning an implant position on th
+    + <img src=Closeup-of-unrecognizable-dentist-pointing-at-tooth-model-while-explaining-dental-implant-surgery-to-patient-in-clinic.jpg alt=>
+  [replace] local[485:486] instatic[477:478]
+    - <img src=lab.jpg alt=The in-house digital laboratory>
+    + <img src=lab.jpg alt=>
+  [replace] local[499:500] instatic[491:492]
+    - <img src=tech-hero.jpg alt=The milling machine in the practice lab>
+    + <img src=tech-hero.jpg alt=>
+  [replace] local[513:514] instatic[505:506]
+    - <img src=crown-model.jpg alt=A finished zirconia restoration>
+    + <img src=crown-model.jpg alt=>
+  [replace] local[531:532] instatic[523:524]
+    - <img src=tech-hero.jpg alt=Digital treatment planning at the practi data-drift=>
+    + <img src=tech-hero.jpg alt= data-drift=>
+  [delete] local[628:629] instatic[620:620]
+    - <span>
+  [delete] local[630:631] instatic[621:621]
+    - </span>
+  [replace] local[653:654] instatic[643:644]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== our-team  local=718 instatic=708 similarity=0.9762 diffs=19
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=team-group.jpg alt=The Dr. Nahlah team data-drift=>
+    + <img src=team-group.jpg alt= data-drift=>
+  [delete] local[281:282] instatic[277:277]
+    - <span>
+  [delete] local[283:284] instatic[278:278]
+    - </span>
+  [delete] local[286:287] instatic[280:280]
+    - <span>
+  [delete] local[288:289] instatic[281:281]
+    - </span>
+  [replace] local[346:347] instatic[338:339]
+    - <img src=practice-space-3.avif alt=The front office at the practice>
+    + <img src=practice-space-3.jpg alt=>
+  [replace] local[352:353] instatic[344:345]
+    - <img src=lab.jpg alt=The in-house digital laboratory>
+    + <img src=lab.jpg alt=>
+  [replace] local[358:359] instatic[350:351]
+    - <img src=dr-team.jpg alt=Dr. Nahlah with the team>
+    + <img src=dr-team.jpg alt=>
+  [replace] local[386:387] instatic[378:379]
+    - <img src=team-venita.jpg alt=Venita, office manager>
+    + <img src=team-venita.jpg alt=>
+  [replace] local[402:403] instatic[394:395]
+    - <img src=team-junko.jpg alt=Junko, digital lab designer>
+    + <img src=team-junko.jpg alt=>
+  [replace] local[418:419] instatic[410:411]
+    - <img src=team-helia.jpg alt=Helia, treatment coordinator>
+    + <img src=team-helia.jpg alt=>
+  [replace] local[434:435] instatic[426:427]
+    - <img src=team-hana.png alt=Hana, dental assistant>
+    + <img src=team-hana.png alt=>
+  [replace] local[450:451] instatic[442:443]
+    - <img src=team-basma.jpg alt=Basma, dental hygienist>
+    + <img src=team-basma.jpg alt=>
+  [replace] local[470:471] instatic[462:463]
+    - <img src=tech-advanced.jpg alt=The practice's in-house digital laborato data-drift=>
+    + <img src=tech-advanced.jpg alt= data-drift=>
+  [delete] local[564:565] instatic[556:556]
+    - <span>
+  [delete] local[566:567] instatic[557:557]
+    - </span>
+  [replace] local[589:590] instatic[579:580]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== patient-center  local=752 instatic=742 similarity=0.9719 diffs=23
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-interaction.jpg alt=A patient being welcomed at the practice data-drift=>
+    + <img src=pt-interaction.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[341:342] instatic[333:334]
+    - <img src=office-outside.jpg alt=The entrance to the McLean practice>
+    + <img src=office-outside.jpg alt=>
+  [replace] local[347:348] instatic[339:340]
+    - <img src=interior.jpg alt=The reception area at the practice>
+    + <img src=interior.jpg alt=>
+  [replace] local[353:354] instatic[345:346]
+    - <img src=tech-advanced.jpg alt=Laser and scanning technology at the pra>
+    + <img src=tech-advanced.jpg alt=>
+  [replace] local[359:360] instatic[351:352]
+    - <img src=financing-card.jpg alt=Discussing payment options at the practi>
+    + <img src=financing-card.jpg alt=>
+  [replace] local[392:393] instatic[384:385]
+    - <img src=pt-interaction.jpg alt=A patient being welcomed at reception>
+    + <img src=pt-interaction.jpg alt=>
+  [replace] local[406:407] instatic[398:399]
+    - <img src=team-group.jpg alt=The team at the practice>
+    + <img src=team-group.jpg alt=>
+  [replace] local[423:424] instatic[415:416]
+    - <img src=office-room.jpg alt=A treatment room at the practice>
+    + <img src=office-room.jpg alt=>
+  [replace] local[440:441] instatic[432:433]
+    - <img src=consult-discussion.jpg alt=A consultation with Dr. Nahlah>
+    + <img src=consult-discussion.jpg alt=>
+  [replace] local[454:455] instatic[446:447]
+    - <img src=xray-consult.jpg alt=A clinician showing a patient their X-ra>
+    + <img src=xray-consult.jpg alt=>
+  [replace] local[468:469] instatic[460:461]
+    - <img src=dr-with-patient.jpg alt=Dr. Nahlah examining a patient>
+    + <img src=dr-with-patient.jpg alt=>
+  [replace] local[486:487] instatic[478:479]
+    - <img src=pt-interaction-5.jpg alt=A hygiene appointment at the practice>
+    + <img src=pt-interaction-5.jpg alt=>
+  [replace] local[500:501] instatic[492:493]
+    - <img src=comprehensive_care.jpg alt=Aftercare at the practice>
+    + <img src=comprehensive_care.jpg alt=>
+  [replace] local[518:519] instatic[510:511]
+    - <img src=financing-card.jpg alt=A patient paying for treatment data-drift=>
+    + <img src=financing-card.jpg alt= data-drift=>
+  [delete] local[598:599] instatic[590:590]
+    - <span>
+  [delete] local[600:601] instatic[591:591]
+    - </span>
+  [replace] local[623:624] instatic[613:614]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== patient-stories  local=715 instatic=705 similarity=0.9817 diffs=15
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=patient-story.jpg alt=Melanie holding a photograph of her smil data-drift=>
+    + <img src=patient-story.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[443:444] instatic[435:436]
+    - <img src=pt-yolanda-transformation.jpg alt=Yolanda after her implant treatment data-drift=>
+    + <img src=pt-yolanda-transformation.jpg alt= data-drift=>
+  [replace] local[477:478] instatic[469:470]
+    - <img src=pt-hero-1.jpg alt=A patient of the practice>
+    + <img src=pt-hero-1.jpg alt=>
+  [replace] local[483:484] instatic[475:476]
+    - <img src=pt-hero-3.jpg alt=A patient of the practice>
+    + <img src=pt-hero-3.jpg alt=>
+  [replace] local[489:490] instatic[481:482]
+    - <img src=pt-interaction-3.jpg alt=A consultation at the practice>
+    + <img src=pt-interaction-3.jpg alt=>
+  [replace] local[495:496] instatic[487:488]
+    - <img src=pt-hero-4.jpg alt=A patient of the practice>
+    + <img src=pt-hero-4.jpg alt=>
+  [delete] local[561:562] instatic[553:553]
+    - <span>
+  [delete] local[563:564] instatic[554:554]
+    - </span>
+  [replace] local[586:587] instatic[576:577]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== privacy-policy  local=553 instatic=547 similarity=0.9873 diffs=7
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=office-wide.jpeg alt=The practice's treatment floor data-drift=>
+    + <img src=office-wide.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [replace] local[364:365] instatic[358:359]
+    - <img src=office-wide.jpeg alt=The practice in McLean data-drift=>
+    + <img src=office-wide.jpg alt= data-drift=>
+  [replace] local[424:425] instatic[418:419]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== sedation-dentistry  local=738 instatic=728 similarity=0.9823 diffs=15
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=sedation-patient.jpg alt=A patient resting comfortably under seda data-drift=>
+    + <img src=sedation-patient.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[386:387] instatic[378:379]
+    - <img src=sedation-nitrous.png alt=Nitrous oxide sedation in use during tre>
+    + <img src=sedation-nitrous.png alt=>
+  [replace] local[400:401] instatic[392:393]
+    - <img src=sedation-oral.png alt=Oral sedation taken before an appointmen>
+    + <img src=sedation-oral.png alt=>
+  [replace] local[414:415] instatic[406:407]
+    - <img src=sedation-dentistry-patient.jpg alt=A patient under IV sedation during a lon>
+    + <img src=sedation-dentistry-patient.jpg alt=>
+  [replace] local[431:432] instatic[423:424]
+    - <img src=sedation.jpg alt=A sedation case under way at the practic data-drift=>
+    + <img src=sedation.jpg alt= data-drift=>
+  [replace] local[445:446] instatic[437:438]
+    - <img src=dr-with-patient.jpg alt=Dr. Nahlah with a patient before treatme data-drift=>
+    + <img src=dr-with-patient.jpg alt= data-drift=>
+  [delete] local[584:585] instatic[576:576]
+    - <span>
+  [delete] local[586:587] instatic[577:577]
+    - </span>
+  [replace] local[609:610] instatic[599:600]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== smile-gallery  local=1557 instatic=1529 similarity=0.9151 diffs=70
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-hero-4.jpg alt=A patient of the practice after treatmen data-drift=>
+    + <img src=pt-hero-4.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[304:308] instatic[296:297]
+    - #All cases
+    - <b>
+    - #54
+    - </b>
+    + #All cases54
+  [replace] local[310:314] instatic[299:300]
+    - #Full arch
+    - <b>
+    - #28
+    - </b>
+    + #Full arch28
+  [replace] local[316:320] instatic[302:303]
+    - #Veneers
+    - <b>
+    - #13
+    - </b>
+    + #Veneers13
+  [replace] local[322:326] instatic[305:306]
+    - #Smile makeover
+    - <b>
+    - #8
+    - </b>
+    + #Smile makeover8
+  [replace] local[328:332] instatic[308:309]
+    - #Veneers + implants
+    - <b>
+    - #3
+    - </b>
+    + #Veneers + implants3
+  [replace] local[334:338] instatic[311:312]
+    - #Whitening
+    - <b>
+    - #2
+    - </b>
+    + #Whitening2
+  [replace] local[343:345] instatic[317:319]
+    - <img src=1.1-.jpg alt=Before: all-on-4 case 1>
+    - <img .ba-img-after src=1.2.jpg alt=After: all-on-4 case 1>
+    + <img src=1_1-.jpg alt=>
+    + <img .ba-img-after src=1_2.jpg alt=>
+  [replace] local[361:363] instatic[335:337]
+    - <img src=2.1.jpg alt=Before: all-on-4 case 2>
+    - <img .ba-img-after src=2.2.jpg alt=After: all-on-4 case 2>
+    + <img src=2_1.jpg alt=>
+    + <img .ba-img-after src=2_2.jpg alt=>
+  [replace] local[379:381] instatic[353:355]
+    - <img src=3.1.jpg alt=Before: all-on-4 case 3>
+    - <img .ba-img-after src=3.2.jpg alt=After: all-on-4 case 3>
+    + <img src=3_1.jpg alt=>
+    + <img .ba-img-after src=3_2.jpg alt=>
+  [replace] local[397:399] instatic[371:373]
+    - <img src=2-before-1024x564-1.jpeg alt=Before: full mouth reconstruction case 4>
+    - <img .ba-img-after src=2-after-1024x573-1.jpeg alt=After: full mouth reconstruction case 4>
+    + <img src=2-before-1024x564-1.jpg alt=>
+    + <img .ba-img-after src=2-after-1024x573-1.jpg alt=>
+  [replace] local[415:417] instatic[389:391]
+    - <img src=4.2.jpg alt=Before: all-on-4 case 5>
+    - <img .ba-img-after src=4.1.jpg alt=After: all-on-4 case 5>
+    + <img src=4_2.jpg alt=>
+    + <img .ba-img-after src=4_1.jpg alt=>
+  [replace] local[433:435] instatic[407:409]
+    - <img src=5.1.jpg alt=Before: all-on-4 case 6>
+    - <img .ba-img-after src=5.2.jpg alt=After: all-on-4 case 6>
+    + <img src=5_1.jpg alt=>
+    + <img .ba-img-after src=5_2.jpg alt=>
+  [replace] local[451:453] instatic[425:427]
+    - <img src=6.2.jpg alt=Before: all-on-4 case 7>
+    - <img .ba-img-after src=6.1.jpg alt=After: all-on-4 case 7>
+    + <img src=6_2.jpg alt=>
+    + <img .ba-img-after src=6_1.jpg alt=>
+  [replace] local[469:471] instatic[443:445]
+    - <img src=3-before.jpg alt=Before: full mouth reconstruction case 8>
+    - <img .ba-img-after src=3-after.jpg alt=After: full mouth reconstruction case 8>
+    + <img src=3-before.jpg alt=>
+    + <img .ba-img-after src=3-after.jpg alt=>
+  [replace] local[487:489] instatic[461:463]
+    - <img src=7.2.jpg alt=Before: all-on-4 case 9>
+    - <img .ba-img-after src=7.1.jpg alt=After: all-on-4 case 9>
+    + <img src=7_2.jpg alt=>
+    + <img .ba-img-after src=7_1.jpg alt=>
+  [replace] local[505:507] instatic[479:481]
+    - <img src=8.1.jpg alt=Before: all-on-4 case 10>
+    - <img .ba-img-after src=8.2.jpg alt=After: all-on-4 case 10>
+    + <img src=8_1.jpg alt=>
+    + <img .ba-img-after src=8_2.jpg alt=>
+  [replace] local[523:525] instatic[497:499]
+    - <img src=11.1.jpg alt=Before: all-on-4 case 11>
+    - <img .ba-img-after src=11.2.jpg alt=After: all-on-4 case 11>
+    + <img src=11_1.jpg alt=>
+    + <img .ba-img-after src=11_2.jpg alt=>
+  [replace] local[541:543] instatic[515:517]
+    - <img src=9-b4.jpg alt=Before: full mouth reconstruction case 1>
+    - <img .ba-img-after src=9-after.jpg alt=After: full mouth reconstruction case 12>
+    + <img src=9-b4.jpg alt=>
+    + <img .ba-img-after src=9-after.jpg alt=>
+  [replace] local[559:561] instatic[533:535]
+    - <img src=porcelain-001-b4.jpg alt=Before: porcelain veneers case 13>
+    - <img .ba-img-after src=porcelain-001-after.jpg alt=After: porcelain veneers case 13>
+    + <img src=porcelain-001-b4.jpg alt=>
+    + <img .ba-img-after src=porcelain-001-after.jpg alt=>
+  [replace] local[577:579] instatic[551:553]
+    - <img src=porcelain-002-b4.jpg alt=Before: porcelain veneers case 14>
+    - <img .ba-img-after src=porcelain-002-after.jpg alt=After: porcelain veneers case 14>
+    + <img src=porcelain-002-b4.jpg alt=>
+    + <img .ba-img-after src=porcelain-002-after.jpg alt=>
+  [replace] local[595:597] instatic[569:571]
+    - <img src=porcelain-005-b4.jpg alt=Before: porcelain veneers case 15>
+    - <img .ba-img-after src=porcelain-005-after.jpg alt=After: porcelain veneers case 15>
+    + <img src=porcelain-005-b4.jpg alt=>
+    + <img .ba-img-after src=porcelain-005-after.jpg alt=>
+  [replace] local[613:615] instatic[587:589]
+    - <img src=makeover-002-b4.jpg alt=Before: smile makeover case 16>
+    - <img .ba-img-after src=makeover-002-after.jpg alt=After: smile makeover case 16>
+    + <img src=makeover-002-b4.jpg alt=>
+    + <img .ba-img-after src=makeover-002-after.jpg alt=>
+  [replace] local[631:633] instatic[605:607]
+    - <img src=porcelain-003-b4.jpg alt=Before: porcelain veneers case 17>
+    - <img .ba-img-after src=porcelain-003-after.jpg alt=After: porcelain veneers case 17>
+    + <img src=porcelain-003-b4.jpg alt=>
+    + <img .ba-img-after src=porcelain-003-after.jpg alt=>
+  [replace] local[649:651] instatic[623:625]
+    - <img src=porcelain-004-b4.jpg alt=Before: porcelain veneers case 18>
+    - <img .ba-img-after src=porcelain-004-after.jpg alt=After: porcelain veneers case 18>
+    + <img src=porcelain-004-b4.jpg alt=>
+    + <img .ba-img-after src=porcelain-004-after.jpg alt=>
+  [replace] local[667:669] instatic[641:643]
+    - <img src=porcelain-006-b4.jpg alt=Before: porcelain veneers case 19>
+    - <img .ba-img-after src=porcelain-006-after.jpg alt=After: porcelain veneers case 19>
+    + <img src=porcelain-006-b4.jpg alt=>
+    + <img .ba-img-after src=porcelain-006-after.jpg alt=>
+  [replace] local[685:687] instatic[659:661]
+    - <img src=makeover-001-b4.jpg alt=Before: smile makeover case 20>
+    - <img .ba-img-after src=makeover-001-after.jpg alt=After: smile makeover case 20>
+    + <img src=makeover-001-b4.jpg alt=>
+    + <img .ba-img-after src=makeover-001-after.jpg alt=>
+  [replace] local[703:705] instatic[677:679]
+    - <img src=14-Double-AO4-before.jpg alt=Before: double arch case 21>
+    - <img .ba-img-after src=14-Double-AO4-after.jpg alt=After: double arch case 21>
+    + <img src=14-Double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=14-Double-AO4-after.jpg alt=>
+  [replace] local[721:723] instatic[695:697]
+    - <img src=13-Double-AO4-before.jpg alt=Before: double arch case 22>
+    - <img .ba-img-after src=13-Double-AO4-after.jpg alt=After: double arch case 22>
+    + <img src=13-Double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=13-Double-AO4-after.jpg alt=>
+  [replace] local[739:741] instatic[713:715]
+    - <img src=12-Double-AO4-before.jpg alt=Before: double arch case 23>
+    - <img .ba-img-after src=12-Double-AO4-after.jpg alt=After: double arch case 23>
+    + <img src=12-Double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=12-Double-AO4-after.jpg alt=>
+  [replace] local[757:759] instatic[731:733]
+    - <img src=11-Double-AO4-Before.jpg alt=Before: double arch case 24>
+    - <img .ba-img-after src=11-Double-AO4-after.jpg alt=After: double arch case 24>
+    + <img src=11-Double-AO4-Before.jpg alt=>
+    + <img .ba-img-after src=11-Double-AO4-after.jpg alt=>
+  [replace] local[775:777] instatic[749:751]
+    - <img src=10-Double-AO4-before.jpg alt=Before: double arch case 25>
+    - <img .ba-img-after src=10-Double-AO4-after.jpg alt=After: double arch case 25>
+    + <img src=10-Double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=10-Double-AO4-after.jpg alt=>
+  [replace] local[793:795] instatic[767:769]
+    - <img src=9-Double-AO4-before.jpg alt=Before: double arch case 26>
+    - <img .ba-img-after src=9-Double-AO4-after.jpg alt=After: double arch case 26>
+    + <img src=9-Double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=9-Double-AO4-after.jpg alt=>
+  [replace] local[811:813] instatic[785:787]
+    - <img src=8-Double-AO4-before.jpg alt=Before: double arch case 27>
+    - <img .ba-img-after src=8-Double-AO4-after.jpg alt=After: double arch case 27>
+    + <img src=8-Double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=8-Double-AO4-after.jpg alt=>
+  [replace] local[829:831] instatic[803:805]
+    - <img src=7-Double-AO4-before.jpg alt=Before: double arch case 28>
+    - <img .ba-img-after src=7-Double-AO4-after.jpg alt=After: double arch case 28>
+    + <img src=7-Double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=7-Double-AO4-after.jpg alt=>
+  [replace] local[847:849] instatic[821:823]
+    - <img src=5-Double-AO4-before.jpg alt=Before: double arch case 29>
+    - <img .ba-img-after src=5-Double-AO4-after.jpg alt=After: double arch case 29>
+    + <img src=5-Double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=5-Double-AO4-after.jpg alt=>
+  [replace] local[865:867] instatic[839:841]
+    - <img src=4-double-AO4-before.jpg alt=Before: double arch case 30>
+    - <img .ba-img-after src=4-Double-AO4-after.jpg alt=After: double arch case 30>
+    + <img src=4-double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=4-Double-AO4-after.jpg alt=>
+  [replace] local[883:885] instatic[857:859]
+    - <img src=3-Double-AO4-before.jpg alt=Before: double arch case 31>
+    - <img .ba-img-after src=3-Double-AO4-after.jpg alt=After: double arch case 31>
+    + <img src=3-Double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=3-Double-AO4-after.jpg alt=>
+  [replace] local[901:903] instatic[875:877]
+    - <img src=2-double-AO4-before.jpg alt=Before: double arch case 32>
+    - <img .ba-img-after src=2-Double-AO4-After.jpg alt=After: double arch case 32>
+    + <img src=2-double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=2-Double-AO4-After.jpg alt=>
+  [replace] local[919:921] instatic[893:895]
+    - <img src=1-Double-AO4-before.jpg alt=Before: double arch case 33>
+    - <img .ba-img-after src=1-Double-AO4-After.jpg alt=After: double arch case 33>
+    + <img src=1-Double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=1-Double-AO4-After.jpg alt=>
+  [replace] local[937:939] instatic[911:913]
+    - <img src=1-Veneers-before.jpg alt=Before: porcelain veneers case 34>
+    - <img .ba-img-after src=1-Veneers-after.jpg alt=After: porcelain veneers case 34>
+    + <img src=1-Veneers-before.jpg alt=>
+    + <img .ba-img-after src=1-Veneers-after.jpg alt=>
+  [replace] local[955:957] instatic[929:931]
+    - <img src=2-Veneers-before.jpg alt=Before: porcelain veneers case 35>
+    - <img .ba-img-after src=2-Veneers-after.jpg alt=After: porcelain veneers case 35>
+    + <img src=2-Veneers-before.jpg alt=>
+    + <img .ba-img-after src=2-Veneers-after.jpg alt=>
+  [replace] local[973:975] instatic[947:949]
+    - <img src=3-Veneers-before.jpg alt=Before: porcelain veneers case 36>
+    - <img .ba-img-after src=3-Veneers-after.jpg alt=After: porcelain veneers case 36>
+    + <img src=3-Veneers-before.jpg alt=>
+    + <img .ba-img-after src=3-Veneers-after.jpg alt=>
+  [replace] local[991:993] instatic[965:967]
+    - <img src=4-Veneers-before.jpg alt=Before: porcelain veneers case 37>
+    - <img .ba-img-after src=4-Veneers-after.jpg alt=After: porcelain veneers case 37>
+    + <img src=4-Veneers-before.jpg alt=>
+    + <img .ba-img-after src=4-Veneers-after.jpg alt=>
+  [replace] local[1009:1011] instatic[983:985]
+    - <img src=5-Veneers-before.jpg alt=Before: porcelain veneers case 38>
+    - <img .ba-img-after src=5-Veneers-after.jpg alt=After: porcelain veneers case 38>
+    + <img src=5-Veneers-before.jpg alt=>
+    + <img .ba-img-after src=5-Veneers-after.jpg alt=>
+  [replace] local[1027:1029] instatic[1001:1003]
+    - <img src=6-veneers-before.jpg alt=Before: porcelain veneers case 39>
+    - <img .ba-img-after src=6-Veneers-after.jpg alt=After: porcelain veneers case 39>
+    + <img src=6-veneers-before.jpg alt=>
+    + <img .ba-img-after src=6-Veneers-after.jpg alt=>
+  [replace] local[1045:1047] instatic[1019:1021]
+    - <img src=7-Veneers-before.jpg alt=Before: porcelain veneers case 40>
+    - <img .ba-img-after src=7-Veneers-after.jpg alt=After: porcelain veneers case 40>
+    + <img src=7-Veneers-before.jpg alt=>
+    + <img .ba-img-after src=7-Veneers-after.jpg alt=>
+  [replace] local[1063:1065] instatic[1037:1039]
+    - <img src=1-Single-AO4-before.jpg alt=Before: single arch case 41>
+    - <img .ba-img-after src=1-Single-AO4-After.jpg alt=After: single arch case 41>
+    + <img src=1-Single-AO4-before.jpg alt=>
+    + <img .ba-img-after src=1-Single-AO4-After.jpg alt=>
+  [replace] local[1081:1083] instatic[1055:1057]
+    - <img src=1-Veneers-and-Implants-before.jpg alt=Before: veneers + implants case 42>
+    - <img .ba-img-after src=1-Veneers-and-Implants-after.jpg alt=After: veneers + implants case 42>
+    + <img src=1-Veneers-and-Implants-before.jpg alt=>
+    + <img .ba-img-after src=1-Veneers-and-Implants-after.jpg alt=>
+  [replace] local[1099:1101] instatic[1073:1075]
+    - <img src=2-Single-AO4-before.jpg alt=Before: single arch case 43>
+    - <img .ba-img-after src=2-Single-AO4-After.jpg alt=After: single arch case 43>
+    + <img src=2-Single-AO4-before.jpg alt=>
+    + <img .ba-img-after src=2-Single-AO4-After.jpg alt=>
+  [replace] local[1117:1119] instatic[1091:1093]
+    - <img src=2-Veneers-and-Implants-before.jpg alt=Before: veneers + implants case 44>
+    - <img .ba-img-after src=2-Veneers-and-Implants-after.jpg alt=After: veneers + implants case 44>
+    + <img src=2-Veneers-and-Implants-before.jpg alt=>
+    + <img .ba-img-after src=2-Veneers-and-Implants-after.jpg alt=>
+  [replace] local[1135:1137] instatic[1109:1111]
+    - <img src=3-Veneers-and-Implants-before.jpg alt=Before: veneers + implants case 45>
+    - <img .ba-img-after src=3-Veneers-and-Implants-after.jpg alt=After: veneers + implants case 45>
+    + <img src=3-Veneers-and-Implants-before.jpg alt=>
+    + <img .ba-img-after src=3-Veneers-and-Implants-after.jpg alt=>
+  [replace] local[1153:1155] instatic[1127:1129]
+    - <img src=6-Double-AO4-before.jpg alt=Before: double arch case 46>
+    - <img .ba-img-after src=6-Double-AO4-after.jpg alt=After: double arch case 46>
+    + <img src=6-Double-AO4-before.jpg alt=>
+    + <img .ba-img-after src=6-Double-AO4-after.jpg alt=>
+  [replace] local[1171:1173] instatic[1145:1147]
+    - <img src=1-1.jpeg alt=Before: smile makeover case 47>
+    - <img .ba-img-after src=1-3-1024x684-1.jpeg alt=After: smile makeover case 47>
+    + <img src=1-1.jpg alt=>
+    + <img .ba-img-after src=1-3-1024x684-1.jpg alt=>
+  [replace] local[1189:1191] instatic[1163:1165]
+    - <img src=2-1-1024x684-1.jpeg alt=Before: smile makeover case 48>
+    - <img .ba-img-after src=2-3-1024x684-1.jpeg alt=After: smile makeover case 48>
+    + <img src=2-1-1024x684-1.jpg alt=>
+    + <img .ba-img-after src=2-3-1024x684-1.jpg alt=>
+  [replace] local[1207:1209] instatic[1181:1183]
+    - <img src=3-1-1024x684-1.jpeg alt=Before: smile makeover case 49>
+    - <img .ba-img-after src=3-3-1024x684-1.jpeg alt=After: smile makeover case 49>
+    + <img src=3-1-1024x684-1.jpg alt=>
+    + <img .ba-img-after src=3-3-1024x684-1.jpg alt=>
+  [replace] local[1225:1227] instatic[1199:1201]
+    - <img src=4-1-1024x684-1.jpeg alt=Before: smile makeover case 50>
+    - <img .ba-img-after src=4-3-1024x684-1.jpeg alt=After: smile makeover case 50>
+    + <img src=4-1-1024x684-1.jpg alt=>
+    + <img .ba-img-after src=4-3-1024x684-1.jpg alt=>
+  [replace] local[1243:1245] instatic[1217:1219]
+    - <img src=Jennifer-Before-Fix-1.jpeg alt=Before: smile makeover case 51>
+    - <img .ba-img-after src=Jennifer-After-Fix-1.jpeg alt=After: smile makeover case 51>
+    + <img src=Jennifer-Before-Fix-1.jpg alt=>
+    + <img .ba-img-after src=Jennifer-After-Fix-1.jpg alt=>
+  [replace] local[1261:1263] instatic[1235:1237]
+    - <img src=Michael-Before-1.jpeg alt=Before: smile makeover case 52>
+    - <img .ba-img-after src=Michael-After.Fix_.jpg alt=After: smile makeover case 52>
+    + <img src=Michael-Before-1.jpg alt=>
+    + <img .ba-img-after src=Michael-After_Fix_.jpg alt=>
+  [replace] local[1279:1281] instatic[1253:1255]
+    - <img src=case-whitening-1-before.jpg alt=Before: whitening case 1>
+    - <img .ba-img-after src=case-whitening-1-after.jpg alt=After: whitening case 1>
+    + <img src=case-whitening-1-before.jpg alt=>
+    + <img .ba-img-after src=case-whitening-1-after.jpg alt=>
+  [replace] local[1297:1299] instatic[1271:1273]
+    - <img src=case-whitening-2-before.jpg alt=Before: whitening case 2>
+    - <img .ba-img-after src=case-whitening-2-after.jpg alt=After: whitening case 2>
+    + <img src=case-whitening-2-before.jpg alt=>
+    + <img .ba-img-after src=case-whitening-2-after.jpg alt=>
+  [delete] local[1403:1404] instatic[1377:1377]
+    - <span>
+  [delete] local[1405:1406] instatic[1378:1378]
+    - </span>
+  [replace] local[1428:1429] instatic[1400:1401]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== smile-makeover  local=834 instatic=824 similarity=0.9662 diffs=27
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=smile-makeover-patient.png alt=A smile makeover patient of the practice data-drift=>
+    + <img src=smile-makeover-patient.png alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [delete] local[281:282] instatic[275:275]
+    - <span>
+  [delete] local[283:284] instatic[276:276]
+    - </span>
+  [replace] local[337:338] instatic[329:330]
+    - <img src=case-makeover-1-before.jpg alt=A smile before treatment>
+    + <img src=case-makeover-1-before.jpg alt=>
+  [replace] local[343:344] instatic[335:336]
+    - <img src=smile_makeover.png alt=A Digital Smile Design preview>
+    + <img src=smile_makeover.png alt=>
+  [replace] local[349:350] instatic[341:342]
+    - <img src=lab.jpg alt=The in-house digital laboratory>
+    + <img src=lab.jpg alt=>
+  [replace] local[355:356] instatic[347:348]
+    - <img src=case-makeover-1-after.jpg alt=The same smile after treatment>
+    + <img src=case-makeover-1-after.jpg alt=>
+  [replace] local[385:386] instatic[377:378]
+    - <img src=case-veneers-3-after.jpg alt=A completed veneer case>
+    + <img src=case-veneers-3-after.jpg alt=>
+  [replace] local[402:403] instatic[394:395]
+    - <img src=crown-model.jpg alt=A porcelain crown>
+    + <img src=crown-model.jpg alt=>
+  [replace] local[416:417] instatic[408:409]
+    - <img src=bridge-model.jpg alt=A zirconia fixed bridge>
+    + <img src=bridge-model.jpg alt=>
+  [replace] local[430:431] instatic[422:423]
+    - <img src=case-whitening-2-after.jpg alt=A completed whitening case>
+    + <img src=case-whitening-2-after.jpg alt=>
+  [replace] local[444:445] instatic[436:437]
+    - <img src=dental-implant-model-3.png alt=An implant post in the jaw>
+    + <img src=dental-implant-model-3.png alt=>
+  [replace] local[461:462] instatic[453:454]
+    - <img src=luxury_smile.jpg alt=A designed smile>
+    + <img src=luxury_smile.jpg alt=>
+  [replace] local[493:494] instatic[485:486]
+    - <img src=consult-discussion.jpg alt=A smile evaluation at the practice>
+    + <img src=consult-discussion.jpg alt=>
+  [replace] local[507:508] instatic[499:500]
+    - <img src=tech-advanced.jpg alt=Imaging at the practice>
+    + <img src=tech-advanced.jpg alt=>
+  [replace] local[521:522] instatic[513:514]
+    - <img src=tech-hero.jpg alt=Digital smile design at the practice>
+    + <img src=tech-hero.jpg alt=>
+  [replace] local[535:536] instatic[527:528]
+    - <img src=lab.jpg alt=The in-house laboratory>
+    + <img src=lab.jpg alt=>
+  [replace] local[567:569] instatic[559:561]
+    - <img src=case-veneers-2-before.jpg alt=Before: worn and discoloured smile zone>
+    - <img .ba-img-after src=case-veneers-2-after.jpg alt=After: porcelain veneers>
+    + <img src=case-veneers-2-before.jpg alt=>
+    + <img .ba-img-after src=case-veneers-2-after.jpg alt=>
+  [replace] local[585:587] instatic[577:579]
+    - <img src=2-before.jpg alt=Before: damaged and missing teeth>
+    - <img .ba-img-after src=2-after.jpg alt=After: veneers combined with implants>
+    + <img src=case-veneers-implants-2-before.jpg alt=>
+    + <img .ba-img-after src=case-veneers-implants-2-after.jpg alt=>
+  [replace] local[603:605] instatic[595:597]
+    - <img src=case-whitening-1-before.jpg alt=Before: discoloured teeth>
+    - <img .ba-img-after src=case-whitening-1-after.jpg alt=After: professional whitening>
+    + <img src=case-whitening-1-before.jpg alt=>
+    + <img .ba-img-after src=case-whitening-1-after.jpg alt=>
+  [delete] local[680:681] instatic[672:672]
+    - <span>
+  [delete] local[682:683] instatic[673:673]
+    - </span>
+  [replace] local[705:706] instatic[695:696]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== teeth-whitening  local=801 instatic=791 similarity=0.9786 diffs=17
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=pt-interaction-3.jpg alt=A patient at the practice data-drift=>
+    + <img src=pt-interaction-3.jpg alt= data-drift=>
+  [delete] local[281:282] instatic[277:277]
+    - <span>
+  [delete] local[283:284] instatic[278:278]
+    - </span>
+  [delete] local[286:287] instatic[280:280]
+    - <span>
+  [delete] local[288:289] instatic[281:281]
+    - </span>
+  [replace] local[346:347] instatic[338:339]
+    - <img src=case-whitening-1-before.jpg alt=Stained natural teeth before whitening>
+    + <img src=case-whitening-1-before.jpg alt=>
+  [replace] local[352:353] instatic[344:345]
+    - <img src=whitening-graphic.png alt=How a professional bleaching agent reach>
+    + <img src=whitening-graphic.png alt=>
+  [replace] local[358:359] instatic[350:351]
+    - <img src=whitening-procedure.jpg alt=An in-office whitening session>
+    + <img src=whitening-procedure.jpg alt=>
+  [replace] local[364:365] instatic[356:357]
+    - <img src=case-whitening-1-after.jpg alt=The same teeth after professional whiten>
+    + <img src=case-whitening-1-after.jpg alt=>
+  [replace] local[496:498] instatic[488:490]
+    - <img src=case-whitening-1-before.jpg alt=Before: stained natural teeth>
+    - <img .ba-img-after src=case-whitening-1-after.jpg alt=After: professional whitening>
+    + <img src=case-whitening-1-before.jpg alt=>
+    + <img .ba-img-after src=case-whitening-1-after.jpg alt=>
+  [replace] local[514:516] instatic[506:508]
+    - <img src=case-whitening-2-before.jpg alt=Before: discolored teeth>
+    - <img .ba-img-after src=case-whitening-2-after.jpg alt=After: professional whitening>
+    + <img src=case-whitening-2-before.jpg alt=>
+    + <img .ba-img-after src=case-whitening-2-after.jpg alt=>
+  [replace] local[536:537] instatic[528:529]
+    - <img src=whitening-procedure.jpg alt=A whitening session in progress data-drift=>
+    + <img src=whitening-procedure.jpg alt= data-drift=>
+  [delete] local[647:648] instatic[639:639]
+    - <span>
+  [delete] local[649:650] instatic[640:640]
+    - </span>
+  [replace] local[672:673] instatic[662:663]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== terms-conditions  local=610 instatic=604 similarity=0.9885 diffs=7
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=office-wide.jpeg alt=The practice's treatment floor data-drift=>
+    + <img src=office-wide.jpg alt= data-drift=>
+  [delete] local[276:277] instatic[272:272]
+    - <span>
+  [delete] local[278:279] instatic[273:273]
+    - </span>
+  [replace] local[418:419] instatic[412:413]
+    - <img src=office-wide.jpeg alt=The practice in McLean data-drift=>
+    + <img src=office-wide.jpg alt= data-drift=>
+  [replace] local[481:482] instatic[475:476]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== thank-you  local=608 instatic=604 similarity=0.9835 diffs=9
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=interior.jpg alt=The practice interior in McLean, Virgini data-drift=>
+    + <img src=interior.jpg alt= data-drift=>
+  [replace] local[362:363] instatic[358:359]
+    - <img src=pt-interaction.jpg alt=The front office at the practice>
+    + <img src=pt-interaction.jpg alt=>
+  [replace] local[368:369] instatic[364:365]
+    - <img src=tech-hero.jpg alt=The cone-beam scanner at the practice>
+    + <img src=tech-hero.jpg alt=>
+  [replace] local[374:375] instatic[370:371]
+    - <img src=consult-discussion.jpg alt=A consultation at the practice>
+    + <img src=consult-discussion.jpg alt=>
+  [replace] local[380:381] instatic[376:377]
+    - <img src=practice-space-1.avif alt=The waiting area at the practice>
+    + <img src=practice-space-1.jpg alt=>
+  [replace] local[423:424] instatic[419:420]
+    - <img src=office-hero.jpg alt=The reception and waiting area>
+    + <img src=office-hero.jpg alt=>
+  [replace] local[479:480] instatic[475:476]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>
+
+===== veneers  local=796 instatic=786 similarity=0.9747 diffs=19
+  [replace] local[7:8] instatic[7:8]
+    - <img src=logo.png alt=Dr. Nahlah, Implants and Prosthodontics >
+    + <img src=logo.png alt=>
+  [delete] local[36:40] instatic[36:36]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[251:252] instatic[247:248]
+    - <img src=veneers-procedure.png alt=Porcelain veneer treatment in progress data-drift=>
+    + <img src=veneers-procedure.png alt= data-drift=>
+  [delete] local[281:282] instatic[277:277]
+    - <span>
+  [delete] local[283:284] instatic[278:278]
+    - </span>
+  [delete] local[286:287] instatic[280:280]
+    - <span>
+  [delete] local[288:289] instatic[281:281]
+    - </span>
+  [replace] local[322:323] instatic[314:315]
+    - <img src=case-veneers-5-after.jpg alt=A completed porcelain veneer case data-drift=>
+    + <img src=case-veneers-5-after.jpg alt= data-drift=>
+  [replace] local[392:393] instatic[384:385]
+    - <img src=consult-discussion.jpg alt=A smile evaluation at the practice>
+    + <img src=consult-discussion.jpg alt=>
+  [replace] local[406:407] instatic[398:399]
+    - <img src=veneers-procedure.png alt=Veneer preparation in progress>
+    + <img src=veneers-procedure.png alt=>
+  [replace] local[420:421] instatic[412:413]
+    - <img src=lab.jpg alt=The in-house digital laboratory>
+    + <img src=lab.jpg alt=>
+  [replace] local[434:435] instatic[426:427]
+    - <img src=case-veneers-5-after.jpg alt=A bonded porcelain veneer case>
+    + <img src=case-veneers-5-after.jpg alt=>
+  [replace] local[466:468] instatic[458:460]
+    - <img src=case-veneers-1-before.jpg alt=Before: chipped and worn front teeth>
+    - <img .ba-img-after src=case-veneers-1-after.jpg alt=After: porcelain veneers>
+    + <img src=case-veneers-1-before.jpg alt=>
+    + <img .ba-img-after src=case-veneers-1-after.jpg alt=>
+  [replace] local[484:486] instatic[476:478]
+    - <img src=case-veneers-3-before.jpg alt=Before: discoloured and uneven teeth>
+    - <img .ba-img-after src=case-veneers-3-after.jpg alt=After: porcelain veneers>
+    + <img src=case-veneers-3-before.jpg alt=>
+    + <img .ba-img-after src=case-veneers-3-after.jpg alt=>
+  [replace] local[502:504] instatic[494:496]
+    - <img src=case-veneers-7-before.jpg alt=Before: gapped and worn teeth>
+    - <img .ba-img-after src=case-veneers-7-after.jpg alt=After: porcelain veneers>
+    + <img src=case-veneers-7-before.jpg alt=>
+    + <img .ba-img-after src=case-veneers-7-after.jpg alt=>
+  [replace] local[528:529] instatic[520:521]
+    - <img src=case-veneers-7-after.jpg alt=A finished porcelain veneer case data-drift=>
+    + <img src=case-veneers-7-after.jpg alt= data-drift=>
+  [delete] local[642:643] instatic[634:634]
+    - <span>
+  [delete] local[644:645] instatic[635:635]
+    - </span>
+  [replace] local[667:668] instatic[657:658]
+    - <img src=logo.png alt=Dr. Nahlah>
+    + <img src=logo.png alt=>

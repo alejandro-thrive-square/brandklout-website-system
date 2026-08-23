@@ -1,0 +1,36 @@
+
+===== index  local=1430 instatic=1420 similarity=0.9916 diffs=10
+  [delete] local[49:53] instatic[49:49]
+    - <span>
+    - </span>
+    - <span>
+    - </span>
+  [replace] local[264:265] instatic[260:261]
+    - <video .ar-film id=heroFilm>
+    + <video .ar-film>
+  [delete] local[290:291] instatic[286:286]
+    - <span>
+  [delete] local[292:293] instatic[287:287]
+    - </span>
+  [delete] local[295:296] instatic[289:289]
+    - <span>
+  [delete] local[297:298] instatic[290:290]
+    - </span>
+  [replace] local[991:992] instatic[983:984]
+    - <video id=film>
+    + <video>
+  [replace] local[1213:1218] instatic[1205:1210]
+    - <img .iv-shot iv-shot-wide src=practice-space-1.avif alt=The reception desk, with the Dr. Nahlah >
+    - <img .iv-shot src=practice-space-2.avif alt=A consultation room with a round table, >
+    - <img .iv-shot src=practice-space-3.avif alt=The corridor between treatment rooms, li>
+    - <img .iv-shot src=practice-space-4.avif alt=A treatment room with the dental chair, >
+    - <img .iv-shot src=practice-space-5.avif alt=The preparation corridor, with instrumen>
+    + <img .iv-shot iv-shot-wide src=practice-space-1.jpg alt=The reception desk, with the Dr. Nahlah >
+    + <img .iv-shot src=practice-space-2.jpg alt=A consultation room with a round table, >
+    + <img .iv-shot src=practice-space-3.jpg alt=The corridor between treatment rooms, li>
+    + <img .iv-shot src=practice-space-4.jpg alt=A treatment room with the dental chair, >
+    + <img .iv-shot src=practice-space-5.jpg alt=The preparation corridor, with instrumen>
+  [delete] local[1289:1290] instatic[1281:1281]
+    - <span>
+  [delete] local[1291:1292] instatic[1282:1282]
+    - </span>
