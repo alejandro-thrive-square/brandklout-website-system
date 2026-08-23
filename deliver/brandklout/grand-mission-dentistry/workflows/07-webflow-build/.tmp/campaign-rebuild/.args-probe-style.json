@@ -1,0 +1,15 @@
+{"context":"Probe which CSS properties the style API persists before authoring the campaign class system.","siteId":"698111847e9608eb30ee21c6","pageId":"6a8299c9e8c592d788e327ca","actions":[
+{"label":"mk","create_style":{"name":"campaign-probe-x1","properties":[
+{"property_name":"aspect-ratio","property_value":"1.2"},
+{"property_name":"object-fit","property_value":"cover"},
+{"property_name":"backdrop-filter","property_value":"blur(14px)"},
+{"property_name":"background-image","property_value":"radial-gradient(circle at 80% 10%, rgba(171,214,255,.2), transparent 32%), linear-gradient(135deg, #002241 0%, #023b61 58%, #04669c 100%)"},
+{"property_name":"letter-spacing","property_value":"-0.035em"},
+{"property_name":"box-shadow","property_value":"0 24px 70px rgba(0,34,65,0.14)"},
+{"property_name":"gap","property_value":"0.55rem 0.85rem"},
+{"property_name":"min-height","property_value":"52px"},
+{"property_name":"object-position","property_value":"center top"},
+{"property_name":"text-decoration-thickness","property_value":"1px"}
+]}},
+{"label":"rd","query_styles":{"queries":[{"label":"probe","name_path":["campaign-probe-x1"],"include_properties":true,"limit":1}]}}
+]}
