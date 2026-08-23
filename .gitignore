@@ -45,14 +45,21 @@ manage/browser-tools/playwright-browser/.tmp/style-capture-*/code/resources/
 *.eps
 *.fig
 *.sketch
-# Web fonts. Scraped-site mirrors pull in whole Elementor/FontAwesome families —
-# 275 files and 8.9MB from one capture — and they are third-party vendor assets,
-# not client deliverables. Same rule as the images above: VPS is the source of truth.
+# Web fonts. Scraped-site mirrors pull in whole Elementor/FontAwesome families
+# and Google Fonts subsets — ~290 files from a single WordPress theme, 8.9MB from
+# one capture. None are licensed brand typefaces and none are client deliverables;
+# the asset catalogue records them instead. Same rule as the images above: the VPS
+# is the source of truth.
 *.ttf
 *.otf
 *.woff
 *.woff2
 *.eot
+
+# Raw server-rendered HTML saved by scrape_site.py --save-html. 19 MB for one
+# 91-page site, and re-fetchable. The per-page .md extracts and .json records
+# next to it are the committed artifact.
+**/.tmp/**/html/
 
 # ===== Python =====
 __pycache__/
