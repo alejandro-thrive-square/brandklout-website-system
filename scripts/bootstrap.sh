@@ -17,7 +17,7 @@ set -euo pipefail
 #   --dry-run        Preview what would be downloaded; transfer nothing.
 #   --brand-only     Only restore manage/brand-assets/.
 #   --media-only     Only restore heavy .tmp/ media under deliver/.
-#   --client <name>  Restrict media restore to deliver/<name>/ (e.g. giovanni-serrano).
+#   --client <name>  Restrict media restore to deliver/<name>/ (e.g. dr-nahlah).
 #                    Default: all deliver/ clients.
 #   --no-ssh-check   Skip the VPS connectivity probe.
 #

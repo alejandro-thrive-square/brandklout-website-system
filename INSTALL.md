@@ -200,7 +200,7 @@ You can restrict the restore when needed:
 
 ```bash
 bash scripts/bootstrap.sh --brand-only
-bash scripts/bootstrap.sh --media-only --client giovanni-serrano
+bash scripts/bootstrap.sh --media-only --client dr-nahlah
 ```
 
 The bootstrap helper uses safe `rclone copy` operations from VPS to local. It never deletes local files and never writes to the VPS.
@@ -220,7 +220,7 @@ rclone copy vps:/root/webzite-agentic-workflow/manage/brand-assets ./manage/bran
 Restore heavy workflow media as needed for the active client or workflow. Example:
 
 ```powershell
-rclone copy vps:/root/webzite-agentic-workflow/deliver/giovanni-serrano/workflows ./deliver/giovanni-serrano/workflows --include "**/.tmp/**" --progress
+rclone copy vps:/root/webzite-agentic-workflow/deliver/brandklout/dr-nahlah/workflows ./deliver/brandklout/dr-nahlah/workflows --include "**/.tmp/**" --progress
 ```
 
 Prefer targeted `rclone copy` operations when setting up a new computer. Use full sync carefully because local empty folders can overwrite remote data if the command direction is wrong.

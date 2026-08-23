@@ -172,8 +172,8 @@ agents still get their directives. An unknown slug is treated as a **new** clien
 `deliver/brandklout/`, since the folder does not exist until the agent creates it.
 
 **Sparse narrows the working tree only — never commits.** The index still holds every path, so a
-commit made in a sparse worktree still contains all 461 giovanni-serrano files, all 445
-farewell-agency files, and everything else; merging one into `main` deletes nothing. This was
+commit made in a sparse worktree still contains all 1,997 dr-nahlah files, all 1,817
+other Brandklout client files, and everything else; merging one into `main` deletes nothing. This was
 verified directly, not inferred. Widen later with `git sparse-checkout add <path>`, or go full with
 `git sparse-checkout disable`.
 

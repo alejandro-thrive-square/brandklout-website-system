@@ -7,11 +7,11 @@ Connects Claude Code to Webflow's APIs for CMS management, site audits, collecti
 Webflow is registered as **one server instance per principal** (see [ACCESS_MODEL.md — Server Instances](../ACCESS_MODEL.md#server-instances-one-per-principal)). All instances share the same URL; each holds its own OAuth grant scoped to that principal's sites:
 
 ```bash
-# Agency-owned sites
-claude mcp add --transport http webflow-webzite https://mcp.webflow.com/mcp -s project
+# The Brandklout partner workspace — one grant covering every Brandklout client
+claude mcp add --transport http webflow-brandklout https://mcp.webflow.com/mcp -s project
 
-# One per client, when the client owns their own Webflow account
-# (slug matches the deliver/ folder name)
+# One per client, when a client owns their own Webflow account
+# (slug matches the deliver/brandklout/ folder name)
 claude mcp add --transport http webflow-<client-name> https://mcp.webflow.com/mcp -s project
 
 # One per white-label partner, when the partner owns one workspace holding all its clients

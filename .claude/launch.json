@@ -2,28 +2,22 @@
   "version": "0.0.1",
   "configurations": [
     {
-      "name": "final-design",
+      "name": "dr-nahlah final-design",
       "runtimeExecutable": "npx",
-      "runtimeArgs": ["serve", "deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final-design", "-l", "3456"],
+      "runtimeArgs": ["serve", "deliver/brandklout/dr-nahlah/workflows/04-design/.tmp/final-design", "-l", "3456"],
       "port": 3456
     },
     {
-      "name": "final-revisions",
+      "name": "dr-nahlah final-site",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "3457", "--directory", "deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final revisions"],
+      "runtimeArgs": ["-m", "http.server", "3457", "--directory", "deliver/brandklout/dr-nahlah/workflows/04-design/.tmp/final-site"],
       "port": 3457
     },
     {
-      "name": "heart-construction",
+      "name": "livewell final-design",
       "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "4321", "--directory", "deliver/charly-agency/heart-construction/workflows/04-design/.tmp/final-design"],
+      "runtimeArgs": ["-m", "http.server", "4321", "--directory", "deliver/brandklout/livewell-dental/workflows/04-design/.tmp/final-design"],
       "port": 4321
-    },
-    {
-      "name": "heart-construction-v2",
-      "runtimeExecutable": "python",
-      "runtimeArgs": ["-m", "http.server", "4322", "--directory", "deliver/charly-agency/heart-construction/workflows/04-design/.tmp/final-design-v2"],
-      "port": 4322
     }
   ]
 }

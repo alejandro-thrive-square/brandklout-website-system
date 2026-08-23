@@ -25,7 +25,7 @@ profile before calling any MCP tool in this folder.
 > The consequence: the tool prefix is now identical for every Brandklout client, so it can no
 > longer tell you which site you are acting on. **Site `6a6b84cc7fe55ddeabc0b314` is the only
 > one this folder authorizes** — pass it explicitly, and never act on a site the tool
-> defaulted to or listed first. Never use `webflow` or `webflow-webzite` here.
+> defaulted to or listed first. Never use the deprecated `webflow` instance, or any instance belonging to another workspace.
 
 ## Target Resources
 

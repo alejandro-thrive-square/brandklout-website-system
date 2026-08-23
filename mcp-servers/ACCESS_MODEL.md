@@ -18,7 +18,7 @@ For platform MCPs that authenticate via OAuth grants (Webflow, and any future pl
 
 A **principal** is the account boundary a grant should cover — and it is defined by **whoever owns the platform account**, not by whoever the invoice is addressed to. In practice that is one of three things: Webzite Studio itself, one direct client engagement, or one **white-label partner agency** whose clients all live inside a single account the partner owns.
 
-**Why:** the MCP client stores the OAuth grant keyed by *server name*. A single shared server therefore forces a choice between one grant that spans every client's sites (over-broad access) or re-authenticating on every client switch (which silently wipes the previous client's grant). Named instances give each principal a persistent, least-privilege grant — and the tool prefix (`mcp__webflow-clifton-exteriors__...`) makes it self-evident which account an agent is acting on.
+**Why:** the MCP client stores the OAuth grant keyed by *server name*. A single shared server therefore forces a choice between one grant that spans every client's sites (over-broad access) or re-authenticating on every client switch (which silently wipes the previous client's grant). Named instances give each principal a persistent, least-privilege grant — and the tool prefix (`mcp__webflow-brandklout__...`) makes it self-evident which account an agent is acting on.
 
 **Naming convention:** `<platform>-<principal-slug>`, where the principal slug matches the folder name under `deliver/` (or `webzite` for agency-owned properties). For a partner agency the slug is the **partner** folder (`brandklout`), not the client subfolder beneath it.
 
@@ -52,7 +52,7 @@ This is a weaker guarantee than a scoped grant, and it should be recorded as suc
 
 1. Authenticate only the instance for the principal you are actively working on; leave other instances unauthenticated.
 2. When completing the OAuth authorization screen, select **only** the sites belonging to that instance's principal.
-3. Before any mutation, verify the tool prefix matches the client folder you are working in (e.g., work under `deliver/farewell-agency/clifton-exteriors/` must use `webflow-clifton-exteriors` tools). Under a partner instance the prefix is the same for every client, so verify the **site ID** against the folder's `mcp-access.md` instead.
+3. Before any mutation, verify the tool prefix matches the client folder you are working in. Every client in this repository sits under the **one** partner instance `webflow-brandklout`, so the prefix is identical for all of them and tells you nothing about which site you are on. Verify the **site ID** against the folder's `mcp-access.md` instead, on every call.
 4. Each machine/account holds its own runtime grants; instance definitions in `.mcp.json` are shared and safe to commit (they contain no secrets).
 
 **Adding a client instance:**

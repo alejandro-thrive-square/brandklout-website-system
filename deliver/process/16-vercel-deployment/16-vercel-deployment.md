@@ -17,13 +17,13 @@ Use one Vercel project per client/product when the deployment needs a stable rev
 The default Webzite operating model is **GitHub for source history and Vercel CLI for deployment**. Agents should commit/push the static client folder to GitHub for auditability, then deploy the specific folder with Vercel CLI. Do not require Git-connected Vercel projects for every client/product unless the project explicitly needs Vercel automatic deployments from Git.
 
 Recommended naming:
-- **Client slug**: `giovanni-serrano`
+- **Client slug**: `dr-nahlah`
 - **Product/site slug**: `final-design`, `invest`, `scale`, `client-preview`, or another clear product name.
 - **Vercel project name**: `webzite-[client-slug]-[product-slug]`
 - **Subdomain**: `[client-slug]-[product-slug].[agency-domain]` or `[product-slug].[client-domain]`
 
 Examples:
-- `webzite-giovanni-serrano-final-design`
+- `brandklout-dr-nahlah-final-design`
 - `giovanni-final.webzitestudio.com`
 - `preview.giovannidomain.com`
 
@@ -139,8 +139,8 @@ vercel --cwd deliver/[client-name]/workflows/[workflow-name]/.tmp/[deployment-fo
 For Giovanni Serrano's current final design:
 
 ```powershell
-vercel --cwd deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final-design
-vercel --cwd deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final-design --prod
+vercel --cwd deliver/brandklout/dr-nahlah/workflows/04-design/.tmp/final-design
+vercel --cwd deliver/brandklout/dr-nahlah/workflows/04-design/.tmp/final-design --prod
 ```
 
 ## Git-Connected Setup
@@ -152,7 +152,7 @@ When using the GitHub repository from the Vercel dashboard:
 2. Set **Root Directory** to the client/product output folder, for example:
 
 ```text
-deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final-design
+deliver/brandklout/dr-nahlah/workflows/04-design/.tmp/final-design
 ```
 
 3. Use **Framework Preset**: `Other`.
@@ -179,10 +179,10 @@ Store a lightweight JSON manifest when a deployment is created:
 
 ```json
 {
-  "client_slug": "giovanni-serrano",
+  "client_slug": "dr-nahlah",
   "product_slug": "final-design",
-  "deployment_root": "deliver/giovanni-serrano/workflows/05-design-revisions/.tmp/final-design",
-  "vercel_project": "webzite-giovanni-serrano-final-design",
+  "deployment_root": "deliver/brandklout/dr-nahlah/workflows/04-design/.tmp/final-design",
+  "vercel_project": "brandklout-dr-nahlah-final-design",
   "environment": "preview",
   "deployment_url": "",
   "custom_domain": "",

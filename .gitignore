@@ -84,6 +84,10 @@ desktop.ini
 .vscode/
 .idea/
 .claude/settings.local.json
+
+# Obsidian's open-tab / pane state. Per-machine UI churn, and it kept a stale
+# pointer to a Webzite agency file alive inside this Brandklout-only repo.
+.obsidian/workspace.json
 *.swp
 *.swo
 

@@ -173,8 +173,8 @@ Git does not remove ignored or untracked directories during `git pull`. When the
 
 Current retired paths:
 
-- `deliver/giovanni-serrano/assets`
-- `deliver/giovanni-serrano/workflows/03-design`
+- `deliver/brandklout/dr-nahlah/assets`
+- `deliver/brandklout/dr-nahlah/workflows/03-graphic-resources`
 - `deliver/company-1`
 - `deliver/company-2`
 

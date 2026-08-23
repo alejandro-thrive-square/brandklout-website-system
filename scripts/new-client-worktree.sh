@@ -8,7 +8,7 @@ set -euo pipefail
 # a single client needs about a quarter. Sparse cone mode cuts that to ~635
 # files / 20 MB while leaving commits completely intact — sparse-checkout only
 # narrows the WORKING TREE. The index still holds every path, so a commit made
-# here still contains all 461 giovanni-serrano files, all 445 farewell-agency
+# here still contains all 1,997 dr-nahlah files, all 445 brandklout
 # files, and everything else. Verified, not assumed. Nothing is deleted by
 # committing or merging from a sparse worktree.
 #

@@ -21,8 +21,8 @@ against that same workspace and isolated nothing — see
 > **The site ID is the boundary now, not the tool prefix.** Every Brandklout client shares the
 > `mcp__webflow-brandklout__*` prefix, so it cannot tell you which client you are acting on. This
 > folder authorizes **only** the Livewell Dental site recorded below — pass its ID explicitly on
-> every call, and never act on a site the tool defaulted to or listed first. Do not use `webflow`,
-> `webflow-webzite`, `webflow-clifton-exteriors`, or any other agency's instance here.
+> every call, and never act on a site the tool defaulted to or listed first. Do not use the deprecated
+> `webflow` instance, or any instance belonging to another workspace.
 
 ## Target Resources
 - **Workspace**: Brandklout, ID `63b4b7393e89b78575e9a9bb` (confirmed 2026-08-07)

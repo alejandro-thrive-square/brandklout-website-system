@@ -4,10 +4,6 @@ set -euo pipefail
 # Retired VPS-only paths that Git cannot remove because they may contain ignored files.
 # Add entries only after their contents are migrated or intentionally discarded.
 retired_paths=(
-  "deliver/giovanni-serrano/assets"
-  "deliver/giovanni-serrano/workflows/03-design"
-  "deliver/company-1"
-  "deliver/company-2"
 )
 
 repo_root="$(git rev-parse --show-toplevel)"
