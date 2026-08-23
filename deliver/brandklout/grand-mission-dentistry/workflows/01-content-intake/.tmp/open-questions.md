@@ -60,7 +60,7 @@ Cosmetic subtasks on 2026-08-04 — which is why those two carry explicit sectio
 do not. Source: `asana-context/CONTEXT.md`.
 
 ### 9. Pricing/timeline basis
-3 pages, but per [PRICING_TIMELINE_RULES.md](../../../../../../sales/PRICING_TIMELINE_RULES.md) the rate
+3 pages, but per PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository) the rate
 depends on whether these are new designs or rebuilds of the attached originals. The attachments are
 now in hand, so the call can be made — but it is Brandklout's commercial call, not ours.
 

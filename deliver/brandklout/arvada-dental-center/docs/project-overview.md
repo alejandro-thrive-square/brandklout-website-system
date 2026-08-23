@@ -114,7 +114,7 @@ templates. See
 
 > [!NOTE]
 > **Commercial terms are out of scope for this folder.** Brandklout is a partner engagement, not a
-> per-page client, so [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md) does
+> per-page client, so PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository) does
 > **not** apply to anything under `deliver/brandklout/`. Page count and scope matter here only for
 > sequencing and capacity — never for cost. Do not compute or record a rate, quote or cost in this
 > folder.

@@ -57,7 +57,7 @@ questions below.
 
 > [!IMPORTANT]
 > Brandklout is a **partner engagement**, not a per-page client.
-> [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md) does **not** apply to
+> PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository) does **not** apply to
 > anything under `deliver/brandklout/`. Do not compute or record a price, rate, quote, or cost in
 > this folder.
 

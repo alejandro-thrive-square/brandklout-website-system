@@ -13,7 +13,7 @@
 | Selected offer | Development from Scratch (chosen as the fullest default path for testing) |
 | Status | Initialized 2026-07-28 |
 | Handoff source | Synthetic — see `workflows/00-client-delivery-initialization/.tmp/client-handoff/deliver-handoff-workflow-test.md` |
-| Timeline | N/A — `pages_or_templates` is TBD; formula is `pages × 2 days` per [PRICING_TIMELINE_RULES.md](../../../sales/PRICING_TIMELINE_RULES.md) |
+| Timeline | N/A — `pages_or_templates` is TBD; formula is `pages × 2 days` per PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository) |
 
 ## Approved Scope
 Internal validation of the Deliver microsystem: instantiate a client workspace from

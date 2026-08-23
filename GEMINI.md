@@ -3,6 +3,13 @@
 Welcome, agent. You are operating within the **Webzite Agentic Workflow** system. To perform your tasks effectively, you must adhere to the core architectural rules and pillar-specific directives.
 
 > [!IMPORTANT]
+> **This repository is the Brandklout delivery system, and nothing else.** It carries the Deliver
+> pillar — the root rules, `mcp-servers/`, `scripts/`, `deliver/process/` and every Brandklout
+> client — split out of `webzite-agentic-workflow` so the two stop mixing. Webzite's own clients
+> and the Sales, Manage and Growth pillars stay in that repository; do not add them back here, and
+> do not put non-Brandklout client work in this one.
+
+> [!IMPORTANT]
 > **Documentation Integrity Rule**: Any update to the system's logic or structure requires an immediate update to the relevant `.md` files.
 
 > [!IMPORTANT]
@@ -18,10 +25,8 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 - **VPS Deployment**: [DEPLOYMENT.md](./DEPLOYMENT.md)
 - **Agent Hermes & Two-Workspace Sync**: [HERMES.md](./HERMES.md) - resume work from anywhere (phone via Hermes or local) with `bash scripts/sync.sh`
 - **Orca Agent IDE (Windows workstation & orchestration)**: [ORCA.md](./ORCA.md) - run multiple agents (Claude/Codex/Cursor/GLM) side by side in isolated git worktrees; replaces the WezTerm Agent Hub and the removed `@dispatch` layer
-- **Pricing & Timeline Rules**: [PRICING_TIMELINE_RULES.md](./sales/PRICING_TIMELINE_RULES.md) - per-page rates and durations (single source of truth)
-- **Sales Pillar**: [sales/SALES_SYSTEM_RULES.md](./sales/SALES_SYSTEM_RULES.md)
-- **Manage Pillar**: [manage/MANAGE_SYSTEM_RULES.md](./manage/MANAGE_SYSTEM_RULES.md)
-- **Growth Pillar**: [growth/GROWTH_SYSTEM_RULES.md](./growth/GROWTH_SYSTEM_RULES.md)
+- **Sales, Manage and Growth pillars**: not in this repository. This repo is the Deliver pillar scoped to Brandklout; the other three live in `webzite-agentic-workflow`.
+- **Pricing & Timeline Rules**: not in this repository, and they do **not** apply here. Brandklout is a partner engagement, not a per-page client — never compute or record a price, rate, quote or cost anywhere under `deliver/brandklout/`.
 - **Deliver Pillar**: [deliver/DELIVER_SYSTEM_RULES.md](./deliver/DELIVER_SYSTEM_RULES.md)
 - **MCP Index**: [mcp-servers/MCP_INDEX.md](./mcp-servers/MCP_INDEX.md) - all MCP servers used across the project
 - **MCP Access Model**: [mcp-servers/ACCESS_MODEL.md](./mcp-servers/ACCESS_MODEL.md) - folder-based MCP permissions and profiles

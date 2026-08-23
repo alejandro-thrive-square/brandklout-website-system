@@ -28,13 +28,7 @@ A principal is the party that **owns the platform account**. For a direct client
 
 | Instance Name | Principal | Access Level | Grant Scope | Access File |
 | :--- | :--- | :--- | :--- | :--- |
-| `webflow-webzite` | Webzite Studio | `agency` | Webzite-owned sites only | [agency-site profile](./profiles/agency-site.md) |
-| `webflow-clifton-exteriors` | Clifton Exteriors (via Farewell Agency) | `client` | `clifton-exteriors-lutum.webflow.io` | [mcp-access.md](../deliver/farewell-agency/clifton-exteriors/docs/mcp-access.md) |
-| `webflow-giovanni-serrano` | Giovanni Serrano | `client` | Giovanni Serrano site only | [mcp-access.md](../deliver/giovanni-serrano/docs/mcp-access.md) |
-| `webflow-horizon` | Horizon Building Corp (via Farewell Agency) | `client` | Horizon sites only (`6a1f7d0be8345316ba21999c`) | [mcp-access.md](../deliver/farewell-agency/horizon/docs/mcp-access.md) |
-| `webflow-excellent-facets` | Excellent Facets | `client` | Excellent Facets site only (`excellentfacets.com`) | [mcp-access.md](../deliver/excellent-facets/docs/mcp-access.md) |
 | `webflow-brandklout` | Brandklout (white-label partner) — **all** its clients | `client` | Every Brandklout client site Webzite is engaged on, in the single workspace Brandklout owns: Livewell Dental, Dr. Nahlah, Grand Mission Dentistry, Arvada Dental Center, Mason Park Dental, Stone Dental Implant Center. Registered 2026-08-07, **awaiting OAuth**. Per-client isolation is not available — the boundary is the **site ID**, per client `mcp-access.md`. | [partner registry](../deliver/brandklout/docs/mcp-access.md) |
-| `webflow-dealer-websites` | Dealer Websites | `client` | Dealer Websites site only (site ID TBD — confirm via `list_sites`) | [mcp-access.md](../deliver/dealer-websites/docs/mcp-access.md) |
 | `webflow-clientfirst` | Local tool server (no principal) | n/a | No network. Reads repo files, writes `mcp-servers/webflow-clientfirst/.tmp/` | [setup.md](./webflow-clientfirst/setup.md) |
 | `webflow` | **Legacy — deprecated** | — | Whatever the last OAuth covered (currently returns 401) | Remove after active work migrates to per-principal instances |
 | `asana-brandklout` | Brandklout (white-label partner) | `client` | Workspace `1210572425689866` (the only one the grant can see) — registered 2026-08-05 (client ID `1217205892702386`, callback port 8080). **Cannot authenticate: Claude Code token-exchange bug.** Working access is via [scripts](../deliver/brandklout/scripts/README.md). | [mcp-access.md](../deliver/brandklout/docs/mcp-access.md) |

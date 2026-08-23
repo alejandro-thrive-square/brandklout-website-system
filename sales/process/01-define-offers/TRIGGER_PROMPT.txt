@@ -1,7 +1,0 @@
-Use the Sales workflow `process/01-define-offers` when choosing, reviewing, or updating the service offer behind a proposal.
-
-Steps:
-1. Read `01-define-offers.md` and the relevant canonical offer file in `sales/process/01-define-offers/offers/`.
-2. Match the lead request to the best offer.
-3. Capture offer fit, assumptions, exclusions, pricing model, timeline, and client requirements.
-4. Save lead-specific notes in `.tmp/`; do not alter offer files unless the offer itself is changing.

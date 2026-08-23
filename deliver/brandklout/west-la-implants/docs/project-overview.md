@@ -58,7 +58,7 @@ The full URL list is captured in
 
 ## Timeline
 
-Per [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md), `Development from
+Per PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository), `Development from
 Scratch` runs at **`pages × 2 days`** (1 design day + 1 dev day per page).
 
 **Cannot be computed yet** — `pages_or_templates` is unknown. For calibration only: a 12-page build

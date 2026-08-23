@@ -1,7 +1,0 @@
-Use the Sales workflow `process/02-send-proposal` after an offer has been selected and the next step is to write or send a proposal.
-
-Steps:
-1. Read `02-send-proposal.md`.
-2. Pull offer fit notes from `01-define-offers` and context from the lead source.
-3. Draft a personalized proposal with scope, value, timeline, assumptions, and next step.
-4. Track the proposal status and move interested leads to `03-discovery-meeting`.

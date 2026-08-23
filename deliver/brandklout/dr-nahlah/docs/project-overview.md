@@ -60,7 +60,7 @@ be dropped. If confirmed as **Development from Scratch** with no SEO obligation,
 ## Timeline
 
 Not yet computable. Per
-[PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md), full-build
+PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository), full-build
 offers run at **pages × 2 days**. The page count for the *new* site is not decided —
 the current site has 33 pages + 43 posts, and the reference template runs 77 URLs.
 Page count is the single biggest open scope variable and must be fixed before a

@@ -1,9 +1,0 @@
-{
-  "asset_base": "https://[client-name].vercel.app",
-  "css": "../04-design/.tmp/final-design/site.css",
-  "design_dir": "../05-design-revisions/.tmp/final-design",
-  "var_map_seed": ".tmp/webflow-variable-map.json",
-  "pages": {
-    "index": "../05-design-revisions/.tmp/final-design/index.html"
-  }
-}

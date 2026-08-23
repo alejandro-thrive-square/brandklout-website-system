@@ -1,7 +1,0 @@
-Use the Sales workflow `scrape-page-to-markdown` when I send a public page URL and ask for its Markdown content.
-
-Steps:
-1. Run `python sales/process/scrape-page-to-markdown/scrape-page-to-markdown.py "<URL>" --stdout`.
-2. Read the generated Markdown artifact in `sales/process/scrape-page-to-markdown/.tmp/`.
-3. Return the Markdown content or a concise summary, depending on my request.
-4. If the page is blocked, non-HTML, or JavaScript-rendered, tell me clearly and recommend a browser-based scrape.

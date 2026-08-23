@@ -45,7 +45,7 @@ site ID recorded in the client's access file.
 
 ## Commercial terms — no pricing on this batch
 
-Brandklout is a **partner engagement**, not a per-page client. [PRICING_TIMELINE_RULES.md](../../../sales/PRICING_TIMELINE_RULES.md)
+Brandklout is a **partner engagement**, not a per-page client. PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository)
 does **not** apply to any client under `deliver/brandklout/`, and no agent should compute a price,
 a per-page rate, or a quote for this work.
 

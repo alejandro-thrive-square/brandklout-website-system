@@ -6,7 +6,7 @@ This document is the canonical bridge between signed Sales offers and Deliver ex
 > **Integrity Rule**: Any change to Sales offer names, Deliver phase names, handoff fields, or routing rules must be reflected in this file and in `deliver/process/PROCESS_INDEX.md` immediately.
 
 > [!IMPORTANT]
-> **Pricing & duration**: All per-page rates and execution durations referenced below come from [PRICING_TIMELINE_RULES.md](../../sales/PRICING_TIMELINE_RULES.md). Do not declare different numbers in client workflows.
+> **Pricing & duration**: All per-page rates and execution durations referenced below come from PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository). Do not declare different numbers in client workflows.
 
 ## 1. Routing Keys
 

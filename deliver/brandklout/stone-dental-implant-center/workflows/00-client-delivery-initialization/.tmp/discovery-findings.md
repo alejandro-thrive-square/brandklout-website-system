@@ -112,7 +112,7 @@ tells us pillar 1 is the template for pillars 2 and 3.
 
 > [!NOTE]
 > Brandklout is a **partner engagement**, not a per-page client.
-> [PRICING_TIMELINE_RULES.md](../../../../../sales/PRICING_TIMELINE_RULES.md) does not apply to
+> PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository) does not apply to
 > anything under `deliver/brandklout/`. Page counts below exist to drive **sequencing and capacity
 > only**. No cost, rate, or quote belongs in this folder.
 

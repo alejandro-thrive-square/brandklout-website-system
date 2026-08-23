@@ -8,10 +8,10 @@ The workflow has two executors:
 - `playwright-style-capture.py` - design-reference capture that records video, extracts dense frames, and saves rendered code artifacts for combined visual/code style analysis.
 
 **Consumers:**
-- **Sales** — [scrape-page-to-markdown](../../../sales/process/scrape-page-to-markdown/scrape-page-to-markdown.md) falls back to this tool when a JavaScript-rendered page returns sparse text via urllib.
+- **Sales** — `scrape-page-to-markdown` (in the `webzite-agentic-workflow` repository) falls back to this tool when a JavaScript-rendered page returns sparse text via urllib.
 - **Deliver / QA** — [06-qa](../../../deliver/process/06-qa/06-qa.md) uses it for responsive screenshots and smoke-testing staging URLs.
 - **Deliver / Launch** — [07-launch](../../../deliver/process/07-launch/07-launch.md) uses it for post-publish smoke tests.
-- **Growth** — [form-scrape-redesign](../../../growth/form-scrape-redesign-vercel-email/form-scrape-redesign-vercel-email.md) uses it as a JS-capable scraper.
+- **Growth** — `form-scrape-redesign-vercel-email` (in the `webzite-agentic-workflow` repository) uses it as a JS-capable scraper.
 
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the Python executor or technical logic of this workflow must be documented here immediately.

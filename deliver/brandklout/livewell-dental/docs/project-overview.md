@@ -49,7 +49,7 @@ scoped design and Webflow improvements.
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).
 
 ## Timeline
-Not yet computable. Per [PRICING_TIMELINE_RULES.md](../../../../sales/PRICING_TIMELINE_RULES.md),
+Not yet computable. Per PRICING_TIMELINE_RULES.md (in the `webzite-agentic-workflow` repository),
 redesigned pages cost `pages x 2 days` and dev-only rebuilds `pages x 1 day`; other
 improvement work is ad-hoc/hourly. The page count comes out of the audit.
 

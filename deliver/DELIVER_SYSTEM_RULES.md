@@ -88,7 +88,7 @@ them.
 
 ### 4.1 Delivery Throughput
 - **1 page = 1 design day + 1 dev day.** Project schedules in ClickUp must reflect `pages × 2 days` of execution capacity (or `pages × 1 day` for dev-only engagements).
-- Canonical rule: [PRICING_TIMELINE_RULES.md](../sales/PRICING_TIMELINE_RULES.md). Do not declare different per-page durations in client workflows.
+- Canonical rule: PRICING_TIMELINE_RULES.md in the `webzite-agentic-workflow` repository. It does **not** apply to `deliver/brandklout/`, which is a partner engagement rather than a per-page client. Do not declare different per-page durations in client workflows.
 - Any client project with negotiated different timing (rush delivery, parallel teams, paused weeks) must be flagged in the Sales handoff package and noted in `project-overview.md`.
 
 ## 5. Active Workflows
