@@ -20,14 +20,19 @@ being able to read this client's Asana tasks confers no permission to touch thei
 hosting, CRM, or ad accounts.
 
 > [!IMPORTANT]
-> The build platform is **unconfirmed** - it may be Webflow or GoHighLevel. See
-> [ASANA-DISPATCH.md](../../docs/ASANA-DISPATCH.md). Registering a Webflow instance before that is
-> settled would create a grant nobody needs. Resolve the platform question first.
+> The build platform is **Webflow** - confirmed 2026-08-05 by `x-wf-region: us-east-1` on the live
+> implant-center site. That still does **not** authorize registering a server instance. We have no
+> credentials, no workspace invite, and no confirmation that the two new brands belong in the same
+> Webflow workspace. Ask first; see question 6 in
+> [scoping-questions.md](../workflows/00-client-delivery-initialization/.tmp/scoping-questions.md).
 
 ## Target Resources
 - **Asana parent task**: no parent task - two standalone tasks (workspace `1210572425689866`)
-- **Live site**: unknown - not recorded in Asana. Record here once found.
-- **Staging / platform account**: none.
+- **Live site**: `https://www.stonedentalimplantcenter.com` - Webflow, Cloudflare in front.
+  Found 2026-08-05 by public research; it was not recorded in Asana.
+- **Related domains**: `stonesurgicalarts.com` (301s to the above; all deep links 404),
+  `shop.stonesurgicalarts.com` (NXDOMAIN). No domain is known yet for Stone Med Spa.
+- **Staging / platform account**: none. We hold no credentials for any of the above.
 
 ## Allowed Operations
 - Read this client's Asana tasks through the read-only partnership scripts.
@@ -41,6 +46,9 @@ hosting, CRM, or ad accounts.
 - Do not write to Asana. Comments and status changes notify real Brandklout staff.
 - Do not invent testimonials, reviews, patient stories, or statistics for this practice. Real
   content only, sourced from the client's own material.
+- Do not republish **patient before/after photography** recovered from the Wayback archive. 33 such
+  cases existed on the old Surgical Arts site. Reuse requires the client confirming current written
+  photo releases - this is a consent and HIPAA matter, not a sourcing convenience.
 - Do not store API keys, tokens, passwords, or session exports in this repository.
 
 ## Confirmation Requirements
