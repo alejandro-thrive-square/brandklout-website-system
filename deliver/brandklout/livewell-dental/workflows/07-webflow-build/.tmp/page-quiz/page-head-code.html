@@ -1,0 +1,52 @@
+<style>
+/* JS-applied states the Designer cannot express (generated) */
+.qz-opt.is--picked.is--picked.is--picked{border-color:#0b2c41;background:#f6f3ee}
+.qz-opt.is--picked.is--picked.is--picked .qz-opt__box{background:#0b2c41;border-color:#0b2c41}
+.qz-opt.is--picked.is--picked.is--picked .qz-opt__tick{opacity:1}
+.qz-err.qz-err.qz-err.is--visible.is--visible.is--visible{display:block}
+.qz-done.qz-done.qz-done.is--visible.is--visible.is--visible{display:block}
+.qz-stories__viewport.is--dragging.is--dragging.is--dragging{cursor:grabbing}
+
+/* runtime CSS from the design package's <style data-embed> */
+.page_quiz [data-qz-reveal]{opacity:0;transform:translateY(26px);
+  transition:opacity .8s cubic-bezier(.22,1,.36,1),transform .8s cubic-bezier(.22,1,.36,1)}
+.page_quiz [data-qz-reveal].in{opacity:1;transform:none}
+.page_quiz .qz-step.is--in{animation:qzIn .42s cubic-bezier(.22,1,.36,1) both}
+@keyframes qzIn{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+.page_quiz .qz-story__frame{position:absolute;inset:0;width:100%;height:100%;border:0;
+  background:#000;object-fit:cover}
+.page_quiz .qz-story__stage.is--playing .qz-story__play,
+.page_quiz .qz-story__stage.is--playing .qz-story__scrim,
+.page_quiz .qz-story__stage.is--playing .qz-story__cap,
+.page_quiz .qz-story__stage.is--playing .qz-story__poster{opacity:0;pointer-events:none}
+@media screen and (max-width:767px){
+  .page_quiz .qz-fields{grid-template-columns:1fr}
+}
+/* Contact-step styling lives here because that step converts to a single
+   HtmlEmbed: its inner elements are not Webflow nodes, so their classes
+   cannot exist as Designer styles. */
+.page_quiz .qz-fields{margin-top:22px;display:grid;grid-template-columns:1fr 1fr;gap:12px}
+.page_quiz .qz-field{display:flex;flex-direction:column;gap:6px}
+.page_quiz .qz-field__label{font-size:11.5px;font-weight:900;letter-spacing:.13em;text-transform:uppercase;
+  color:var(--ink-40)}
+.page_quiz .qz-field__input{width:100%;padding:13px 14px;border:1px solid var(--line);border-radius:var(--r-md);
+  font-family:var(--f-body);font-size:15px;color:var(--ink);background:#fff;
+  transition:border-color .24s,box-shadow .24s}
+.page_quiz .qz-field__input:focus{outline:none;border-color:var(--teal);box-shadow:0 0 0 3px rgba(55,107,123,.14)}
+.page_quiz .qz-consent{grid-column:1 / -1;display:flex;align-items:flex-start;gap:11px;margin-top:4px;
+  font-size:12px;line-height:1.5;color:var(--ink-60);cursor:pointer}
+.page_quiz .qz-consent__box{width:18px;height:18px;border-radius:var(--r-sm);border:1.5px solid var(--taupe);
+  flex:none;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:10px;
+  color:#fff;transition:background .22s,border-color .22s}
+.page_quiz .qz-consent__tick{opacity:0;transition:opacity .22s}
+.page_quiz .qz-consent.is--picked .qz-consent__box{background:var(--navy);border-color:var(--navy)}
+.page_quiz .qz-consent.is--picked .qz-consent__tick{opacity:1}
+.page_quiz .qz-consent__link{color:inherit;border-bottom:1px solid currentColor}
+.page_quiz .qz-field__input.is--bad{border-color:#c05a4d;box-shadow:0 0 0 3px rgba(192,90,77,.14)}
+@media (prefers-reduced-motion:reduce){
+  .page_quiz [data-qz-reveal]{opacity:1!important;transform:none!important;transition:none!important}
+  .page_quiz .qz-step.is--in{animation:none!important}
+  .page_quiz .qz-opt:hover,.page_quiz .lw-btn:hover,.page_quiz .qz-story__play:hover{transform:none!important}
+  .page_quiz .qz-story:hover .qz-story__poster{transform:none!important}
+}
+</style>
