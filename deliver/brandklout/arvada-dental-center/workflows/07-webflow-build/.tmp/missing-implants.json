@@ -1,0 +1,155 @@
+[
+ {
+  "sel": "*,*::before,*::after",
+  "body": "box-sizing:border-box",
+  "media": null,
+  "mapped": "*,*::before,*::after",
+  "n": 639
+ },
+ {
+  "sel": "img,video,svg",
+  "body": "max-width:100%;display:block",
+  "media": null,
+  "mapped": "img,video,svg",
+  "n": 22
+ },
+ {
+  "sel": "h1,h2,h3,h4",
+  "body": "margin:0;font-family:var(--f-display);font-weight:600;line-height:1.06; letter-spacing:.005em;color:var(--fg)",
+  "media": null,
+  "mapped": "h1,h2,h3,h4",
+  "n": 31
+ },
+ {
+  "sel": "h1,h2,h3,.since",
+  "body": "overflow-wrap:break-word",
+  "media": null,
+  "mapped": "h1,h2,h3,.imp-since",
+  "n": 31
+ },
+ {
+  "sel": ".wrap>*,.grid>*,.flow>*",
+  "body": "min-width:0",
+  "media": null,
+  "mapped": ".imp-wrap>*,.imp-grid>*,.imp-flow>*",
+  "n": 30
+ },
+ {
+  "sel": ".label,.eyebrow",
+  "body": "font-family:var(--f-ui);font-size:var(--label);letter-spacing:.2em; text-transform:uppercase;font-weight:700;color:var(--accent)",
+  "media": null,
+  "mapped": ".imp-label,.imp-eyebrow",
+  "n": 11
+ },
+ {
+  "sel": ".btn>span,.btn>svg",
+  "body": "position:relative;z-index:1",
+  "media": null,
+  "mapped": ".imp-btn>span,.imp-btn>svg",
+  "n": 10
+ },
+ {
+  "sel": ".btn-row>.btn",
+  "body": "flex:1 1 100%",
+  "media": "@media(max-width:560px)",
+  "mapped": ".imp-btn-row>.imp-btn",
+  "n": 5
+ },
+ {
+  "sel": ".actionbar .btn",
+  "body": "padding:.85rem .6rem;font-size:calc(.66rem*var(--s-tx));letter-spacing:.1em;min-height:46px; min-width:0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis",
+  "media": null,
+  "mapped": ".imp-actionbar .imp-btn",
+  "n": 2
+ },
+ {
+  "sel": "main .ch .stage, main .ch .pin",
+  "body": "padding-top:clamp(5.75rem,9vw,8.5rem)",
+  "media": null,
+  "mapped": ".imp-ch .imp-stage,.imp-ch .imp-pin",
+  "n": 3,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .stage",
+  "body": "align-content:safe center",
+  "media": null,
+  "mapped": ".imp-ch .imp-stage",
+  "n": 2,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .pin",
+  "body": "justify-content:safe center",
+  "media": null,
+  "mapped": ".imp-ch .imp-pin",
+  "n": 1,
+  "strippedMain": true
+ },
+ {
+  "sel": "main .ch .stage, main .ch .pin",
+  "body": "min-height:0;height:auto; align-content:start;justify-content:start; padding-top:clamp(3.5rem,9vw,5rem); padding-bottom:calc(4.6rem + env(safe-area-inset-bottom));",
+  "media": "@media(max-width:899px)",
+  "mapped": ".imp-ch .imp-stage,.imp-ch .imp-pin",
+  "n": 3,
+  "strippedMain": true
+ },
+ {
+  "sel": ".faq__q[aria-expanded=\"true\"]::after",
+  "body": "transform:rotate(-135deg) translateY(-2px)",
+  "media": null,
+  "mapped": ".imp-faq__q[aria-expanded=\"true\"]::after",
+  "n": 10,
+  "stateKeyed": true
+ },
+ {
+  "sel": ".faq__a>div",
+  "body": "overflow:hidden",
+  "media": null,
+  "mapped": ".imp-faq__a>div",
+  "n": 5
+ },
+ {
+  "sel": ".form-card .h3,.form-card h3",
+  "body": "color:var(--ink)",
+  "media": null,
+  "mapped": ".imp-form-card .imp-h3,.imp-form-card h3",
+  "n": 1
+ },
+ {
+  "sel": ".field input,.field select,.field textarea",
+  "body": "width:100%;font:inherit;font-size:calc(.95rem*var(--s-tx)); padding:.8rem .9rem;border:1px solid rgba(20,24,33,.2);border-radius:10px;background:#fff; color:var(--ink);min-height:46px",
+  "media": null,
+  "mapped": ".imp-field input,.imp-field select,.imp-field textarea",
+  "n": 3
+ },
+ {
+  "sel": ".quiz__opt[aria-pressed=\"true\"]",
+  "body": "border-color:var(--cyan-deep);background:rgba(3,197,236,.1)",
+  "media": null,
+  "mapped": ".imp-quiz__opt[aria-pressed=\"true\"]",
+  "n": 26,
+  "stateKeyed": true
+ },
+ {
+  "sel": ".ftr address",
+  "body": "font-style:normal;font-size:calc(.92rem*var(--s-tx));line-height:1.9",
+  "media": null,
+  "mapped": ".imp-ftr address",
+  "n": 2
+ },
+ {
+  "sel": "*,*::before,*::after",
+  "body": "animation-duration:.001ms!important;animation-iteration-count:1!important; transition-duration:.001ms!important;scroll-behavior:auto!important",
+  "media": "@media (prefers-reduced-motion: reduce)",
+  "mapped": "*,*::before,*::after",
+  "n": 639
+ },
+ {
+  "sel": "[data-rv],[data-anim=\"hide\"]",
+  "body": "opacity:1!important;visibility:visible!important; transform:none!important;clip-path:none!important",
+  "media": "@media (prefers-reduced-motion: reduce)",
+  "mapped": "[data-rv],[data-anim=\"hide\"]",
+  "n": 16
+ }
+]

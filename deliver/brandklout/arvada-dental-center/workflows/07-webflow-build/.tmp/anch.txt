@@ -1,0 +1,72 @@
+##### implants (14 links)
+   NO TARGET   ""  #main
+   SET        "Free consultation"  #consult -> #imp-consult
+   SET        "Find out if you're a candida"  #consult -> #imp-consult
+   …429, waiting
+   …429, waiting
+   SET        "*"  #terms -> #imp-terms
+   SET        "Get my written quote"  #consult -> #imp-consult
+   SET        "Book my free consultation"  #consult -> #imp-consult
+   …429, waiting
+   …429, waiting
+   SET        "Free consult"  #consult -> #imp-consult
+##### aox (15 links)
+   NO TARGET   ""  #main
+   SET        "Free consultation"  #consult -> #aox-consult
+   …429, waiting
+   …429, waiting
+   SET        "Check my candidacy"  #consult -> #aox-consult
+   SET        "*"  #terms -> #aox-terms
+   SET        "Get my written quote"  #consult -> #aox-consult
+   SET        "Talk to Dr. Bennett's team"  #consult -> #aox-consult
+   SET        "Book my free consultation"  #consult -> #aox-consult
+   …429, waiting
+   …429, waiting
+   SET        "Free consult"  #consult -> #aox-consult
+##### veneers (12 links)
+   NO TARGET   ""  #main
+   …429, waiting
+   …429, waiting
+   SET        "Smile evaluation"  #evaluation -> #vnr-evaluation
+   SET        "Book my smile evaluation"  #evaluation -> #vnr-evaluation
+   …429, waiting
+   …429, waiting
+   SET        "Book my smile evaluation"  #evaluation -> #vnr-evaluation
+   SET        "Book evaluation"  #evaluation -> #vnr-evaluation
+##### emergency (13 links)
+   NO TARGET   ""  #main
+   …429, waiting
+   …429, waiting
+   SET        "Request a call back"  #callback -> #emg-callback
+   …429, waiting
+   …429, waiting
+   SET        "Call me back"  #callback -> #emg-callback
+   …429, waiting
+   …429, waiting
+##### dentist-near-me (13 links)
+   NO TARGET   ""  #main
+   SET        "Claim $109 offer"  #book -> #dnm-book
+   SET        "Claim the $109 special"  #book -> #dnm-book
+   …429, waiting
+   …429, waiting
+   SET        "Claim the $109 special"  #book -> #dnm-book
+   SET        "$109 visit"  #book -> #dnm-book
+   …429, waiting
+   …429, waiting
+##### next-door (13 links)
+   NO TARGET   ""  #main
+   SET        "Claim $109 offer"  #book -> #nxd-book
+   SET        "Claim the $109 special"  #book -> #nxd-book
+   …429, waiting
+   …429, waiting
+   SET        "Claim the $109 special"  #book -> #nxd-book
+   SET        "$109 visit"  #book -> #nxd-book
+
+27 anchors repointed
+6 with no target at all:
+  implants: "" -> #main (no such element)
+  aox: "" -> #main (no such element)
+  veneers: "" -> #main (no such element)
+  emergency: "" -> #main (no such element)
+  dentist-near-me: "" -> #main (no such element)
+  next-door: "" -> #main (no such element)

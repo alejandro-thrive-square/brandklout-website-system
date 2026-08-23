@@ -1,0 +1,62 @@
+{
+  "note": "Upload each of these to the Webflow site, then re-run build_payloads.py --asset-base <cdn-url>, or remap after paste with the MCP asset tools.",
+  "assets": {
+    "conditions-copy.jpg": [
+      "emergency/today"
+    ],
+    "dental-implants-denver-dentist-in-arvada-dental-implants-arvada-dentist-near-me-arvada-denver.png": [
+      "dentist-near-me/practice",
+      "next-door/hood"
+    ],
+    "dental-implants-in-denver-arvada-dentist-1.png.webp": [
+      "aox/footer",
+      "aox/nav",
+      "dentist-near-me/footer",
+      "dentist-near-me/nav",
+      "emergency/footer",
+      "emergency/nav",
+      "implants/footer",
+      "implants/nav",
+      "next-door/footer",
+      "next-door/nav",
+      "veneers/footer",
+      "veneers/nav"
+    ],
+    "dental-patient-in-need-of-emergency-treatment.jpg": [
+      "emergency/arrival"
+    ],
+    "dental-veneers-graphic-4.jpg.webp": [
+      "veneers/honest"
+    ],
+    "dr-suzanna-mcaninley-square-close.jpg.webp": [
+      "dentist-near-me/practice"
+    ],
+    "dr_bennett-square-close.jpg.webp": [
+      "dentist-near-me/practice",
+      "implants/surgeon",
+      "veneers/proof"
+    ],
+    "dreams_reality.jpg.webp": [
+      "aox/arrival"
+    ],
+    "home-card-3-vertical.jpg.webp": [
+      "veneers/arrival"
+    ],
+    "mimic.jpg.webp": [
+      "implants/arrival"
+    ],
+    "mountain-img.webp": [
+      "next-door/arrival"
+    ],
+    "office1.jpg.webp": [
+      "dentist-near-me/arrival",
+      "dentist-near-me/practice"
+    ],
+    "video-1-3.png.webp": [
+      "dentist-near-me/near"
+    ],
+    "video_cover-1.jpg.webp": [
+      "aox/proof"
+    ]
+  }
+}

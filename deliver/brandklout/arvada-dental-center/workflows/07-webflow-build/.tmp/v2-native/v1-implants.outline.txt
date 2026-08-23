@@ -1,0 +1,901 @@
+Body
+  Block<div>
+    Section<section> .Header.Section 2.header
+      NavbarWrapper .Navbar
+        NavbarContainer<div> .Container.full width
+          Block<div> .Nav wrap
+            Block<div> .Div Block 11
+              Block<div> .wrapper-nav-top.show-right
+                Block<div> .wrapper-topnav-links
+                  Block<div> .wrapper-icons
+                    Link .button.nav.adress
+                      Image .icon-embed-xxsmall
+                      Block<div> .phone-number.no-wrap
+                        "6695 Wadsworth Blvd, Arvada, CO 80003"
+                Block<div> .wrapper-nav-item.logo
+                  Link .header-logo-wrapper.hide-tablet
+                    Image .logo-header.hide-tablet
+                Block<div> .wrapper-nav-item
+                  Link .button.nav
+                    HtmlEmbed .icon-embed-xsmall
+                    Block<div> .phone-number.no-wrap
+                      "(720) 419-3699"
+    Section<section> .imp-hero
+      Block<div> .imp-div.imp-wrap.imp-hero-grid
+        Block<div> .imp-hero-copy.hero
+          Span .imp-section-label
+            "— Dental Implants in Arvada, CO"
+          Span .imp-rating-badge 4
+            Span .imp-stars
+              "★★★★★"
+            "1,300+ Five-Star Reviews · Google, Yelp, and Healthgrades"
+          Heading<h1> .heading-style-h2.is-white
+            Span .Text Span 23
+              "Life-Changing Dental Implants."
+            Span .imp-header-1.accent
+              "Done Right the First Time."
+          Paragraph .imp-paragraph-hero
+            "Dental implants planned, placed, and restored entirely in-house by Dr.…"
+            
+            
+            "One doctor. One personalized plan. Nothing rushed."
+            
+            "‍"
+            
+          List<ul> .imp-p-7
+            ListItem .imp-li
+              Span .imp-check
+                "✓"
+              "Get a personalized dental implant consultation with no pressure"
+            ListItem .imp-li
+              Span .imp-check
+                "✓"
+              "Sedation available - gentle, comfortable visits"
+            ListItem .imp-li
+              Span .imp-check
+                "✓"
+              "Same-day temporary teeth possible for qualifying cases"
+            ListItem .imp-li
+              Span .imp-check
+                "✓"
+              "As low as $229 per month"
+          Block<div> .imp-hero-ctas
+            ComponentInstance
+          Paragraph .imp-hero-note
+            "Serving Arvada, Westminster, Wheat Ridge, Golden, Broomfield"
+            "&"
+            "Denver"
+          Block<div> .imp-hero-media
+            Video
+            Span .imp-media-caption
+              "▶ Dr. Bennett on implant care · 60 sec"
+        Block<div> .imp-form-card
+          Paragraph .imp-hero-form
+            "Start Your Implant Consultation"
+          Paragraph .imp-p
+            "Tell us a little about your situation and our team will reach out to s…"
+          HtmlEmbed
+          Block<div> .imp-hero-copy
+            Heading<h3> .imp-h3
+              "Request Your Implant Consultation"
+            Paragraph .imp-p
+              "Tell us a little about your situation and our team will reach out to s…"
+            HtmlEmbed .imp-hero-copy
+          Block<div> .imp-thanks
+            Heading<h3> .imp-h3-2
+              "Request Received ✓"
+            Paragraph .imp-p
+              "Our team will call you shortly to schedule your consultation. Want to …"
+            Paragraph .imp-p-2
+              Link .imp-a-3.imp-btn.imp-btn-primary
+                "Call (720) 419-3699"
+      HtmlEmbed .imp-hero-copy
+      HtmlEmbed .imp-hero-copy
+    Block<div> .imp-trust
+      Block<div> .imp-div-2.imp-wrap
+        Block<div> .imp-trust-item
+          Strong .imp-strong
+            "1,300+"
+          "Five-Star Patient Reviews"
+        Block<div> .imp-trust-item
+          Strong .imp-strong
+            "24+ Years"
+          "Clincial Experience"
+        Block<div> .imp-trust-item
+          Strong .imp-strong
+            "IV Sedation"
+          "Certified, Monitored Care"
+        Block<div> .imp-trust-item
+          Strong .imp-strong
+            "5280"
+          "Top Dentist Honoree"
+        Block<div> .imp-trust-item
+          Strong .imp-strong
+            "One Team"
+          "Start-to Finish Implant Care"
+    Section<section> .imp-price-band
+      Block<div> .imp-div.imp-wrap.imp-price-grid
+        Block<div> .imp-price-tag
+          Span .imp-stamp
+            "Honest Pricing"
+          Span .imp-hero-copy.imp-eyebrow
+            "Single Dental Implant"
+          Paragraph .imp-big-price
+            "$1,900–$2,800"
+            Span .imp-price-unit
+              "/ tooth"
+          Paragraph .imp-incl
+            "Includes the implant post, abutment,"
+            Strong .imp-hero-copy
+              "and custom crown"
+            "— the complete tooth, not just the screw."
+        Block<div> .imp-hero-copy
+          Span .imp-hero-copy.imp-eyebrow
+            "Why We Publish Our Fees"
+          Heading<h2> .imp-h2
+            "No Mystery Quotes."
+            Span .br-line
+              "No Surprise Add-Ons."
+          Paragraph .imp-hero-copy.imp-sub
+            "Most implant offices make you sit through a consultation before they'l…"
+            
+            
+            "Across the Denver metro, a complete single implant commonly runs"
+            Span .imp-strike
+              "[VERIFY COMPARISON]"
+            ". Your exact fee depends on your case — bone grafting or extractions, …"
+    Section<section> .imp-journey
+      Block<div> .imp-div.imp-wrap
+        Block<div> .imp-journey-intro
+          Span .imp-section-label
+            "One Patient's Real Journey"
+          Heading<h2> .heading-style-h4.is-dark
+            Span
+              "From Failing Teeth"
+              
+            Span .imp-h2.accent
+              "To a Full Smile Again"
+          Paragraph .imp-paragraph
+            "This is a real Arvada Dental patient. He came to us with several missi…"
+        Block<div> .imp-ba-wrap
+          Block<div> .imp-ba
+            Block<section>
+              Block<div> .csm-hero__media
+                Block<div> .csm-ba
+                  Block<div> .csm-ba__stage.ratio
+                    Image .csm-img 2.csm-ba__img.csm-ba__img--before.rotate
+                    Block .csm-div.csm-ba__tag.csm-ba__tag--before
+                      "Before"
+                    Block .csm-div.csm-ba__tag.csm-ba__tag--after
+                      "After"
+                    Block<div> .csm-ba__handle
+                  Block<div> .csm-ba__foot
+                    Block .csm-ba__foot-strong
+                      "Real Arvada Dental patient"
+              HtmlEmbed .csm-div
+              HtmlEmbed .csm-div
+          Paragraph .imp-ba-hint
+            "← Drag to compare →"
+        Block<div> .imp-journey-cols
+          Block<div> .imp-a-2.imp-jcol.imp-jcol-before.Dark
+            Heading<h3> .imp-h3-3
+              "Life Before"
+            List<ul> .imp-ul
+              ListItem .imp-li-2
+                Span .imp-span-4.imp-mark
+                  "✕"
+                "Avoiding certain foods for years"
+              ListItem .imp-li-2
+                Span .imp-span-4.imp-mark
+                  "✕"
+                "Embarrassed to smile in photos"
+              ListItem .imp-li-2
+                Span .imp-span-4.imp-mark
+                  "✕"
+                "Multiple failing restorations"
+              ListItem .imp-li-2
+                Span .imp-span-4.imp-mark
+                  "✕"
+                "Chronic pain nobody could explain"
+              ListItem .imp-li-2
+                Span .imp-span-4.imp-mark
+                  "✕"
+                "Told it couldn't be fixed"
+          Block<div> .imp-a-2.imp-jcol.imp-jcol-after
+            Heading<h3> .imp-h3-4
+              "Life After"
+            List<ul> .imp-ul
+              ListItem .imp-li-2
+                Span .imp-span-5.imp-mark
+                  "✓"
+                "Eating freely without a second thought"
+              ListItem .imp-li-2
+                Span .imp-span-5.imp-mark
+                  "✓"
+                "Smiling without hesitation"
+              ListItem .imp-li-2
+                Span .imp-span-5.imp-mark
+                  "✓"
+                "Full arch restored and stable"
+              ListItem .imp-li-2
+                Span .imp-span-5.imp-mark
+                  "✓"
+                "Rebuilt from the foundation up"
+              ListItem .imp-li-2
+                Span .imp-span-5.imp-mark
+                  "✓"
+                "Pain gone, function fully restored"
+        Block<div> .imp-chapters
+          Block<div> .imp-chapter
+            Image .imp-img-2
+            Block<div> .imp-cbody
+              Span .imp-cnum
+                Strong
+                  "01 · The Breaking Point"
+              Heading<h3> .imp-h3-5
+                ""I stopped ordering what I actually wanted.""
+              Paragraph .imp-p-4
+                "It starts small - chewing on one side, skipping the steak, covering yo…"
+          Block<div> .imp-chapter
+            Image .imp-img-2
+            Block<div> .imp-cbody
+              Span .imp-cnum
+                Strong
+                  "02 · The plan"
+              Heading<h3> .imp-h3-5
+                ""For the first time, someone showed me why.""
+              Paragraph .imp-p-4
+                "3D imaging, a full photo protocol, and a case presentation where you s…"
+          Block<div> .imp-chapter
+            Image .imp-img-2
+            Block<div> .imp-cbody
+              Span .imp-cnum
+                Strong
+                  "03 · Surgery Day"
+              Heading<h3> .imp-h3-5
+                ""It was easier than getting a filling.""
+              Paragraph .imp-p-4
+                "Guided placement, sedation if you would like it, and growth-factor the…"
+          Block<div> .imp-chapter
+            Image .imp-img-2
+            Block<div> .imp-cbody
+              Span .imp-cnum
+                Strong
+                  "04 · The Reveal"
+              Heading<h3> .imp-h3-5
+                ""I forgot which tooth was the implant.""
+              Paragraph .imp-p-4
+                "A custom porcelain tooth so natural it disappears into your smile. Bit…"
+        Block<div> .imp-journey-cta
+          Block<div> .button-group.is-center
+            Block<div>
+              ComponentInstance
+      HtmlEmbed
+    Section<section> .imp-story
+      Block<div> .imp-div.imp-wrap
+        Span .imp-section-label
+          "— the Arvada difference"
+        Heading<h2> .heading-style-h4
+          Span .imp-h2
+            "Why Patients Drive Past"
+            
+            "‍"
+          Span .imp-h2.accent
+            "Other Implant Offices"
+        Block<div> .imp-grid-4
+          Block<div> .imp-card
+            Heading<h3> .imp-h3-6
+              "One doctor, start to finish"
+            Paragraph .imp-p-5
+              "The doctor who plans your case places your implant and fits your final…"
+          Block<div> .imp-card
+            Heading<h3> .imp-h3-6
+              "Planned before day one"
+            Paragraph .imp-p-5
+              "Your final tooth is digitally designed before surgery begins. CBCT 3D …"
+          Block<div> .imp-card
+            Heading<h3> .imp-h3-6
+              "Comfort at every stage"
+            Paragraph .imp-p-5
+              "Sedation options, gentle technique, and PRF growth-factor therapy to s…"
+          Block<div> .imp-card
+            Heading<h3> .imp-h3-6
+              "Built to last decades"
+            Paragraph .imp-p-5
+              "Premium implant systems with biocompatible surfaces - because what goe…"
+        Block<div>
+          Block<div> .imp-videos-grid
+            Block<div> .imp-vid-outer
+              Block<div> .Div Block 39
+                Video .story-hor
+              Block<div> .imp-vid-title
+                Span .imp-stars
+                  "★★★★★"
+                "Patient story — in their own words"
+          Block<div> .imp-videos-grid.vert
+            Block<div> .imp-vid-outer
+              Block<div> .imp-vid-card.vert
+                Video .story-hor
+              Block<div> .imp-vid-title
+                Span .imp-stars
+                  "★★★★★"
+                "Patient story — Wick"
+            Block<div> .imp-vid-outer
+              Block<div> .imp-vid-card.vert
+                Video .story-hor
+              Block<div> .imp-vid-title
+                Span .imp-stars
+                  "★★★★★"
+                "Patient story — Anna"
+            Block<div> .imp-vid-outer
+              Block<div> .imp-vid-card.vert
+                Video .story-hor
+              Block<div> .imp-vid-title
+                Span .imp-stars
+                  "★★★★★"
+                "Patient story — Brittany"
+        Block<div> .margin-top.margin-medium
+          HtmlEmbed .testimonials-embed
+        Block<div> .margin-top.margin-medium
+          Block<div> .button-group.is-center
+            Block<div>
+              ComponentInstance
+    Section<section> .imp-specialist
+      Block<div> .imp-div.imp-wrap
+        Block<div> .imp-doc-grid
+          Block<div> .imp-doc-img
+            Video .story-vert
+          Block<div> .imp-hero-copy
+            Span .imp-section-label
+              "— Your implant dentist"
+            Heading<h2> .heading-style-h4
+              Link .imp-h2.accent
+                "The Dentist"
+              Span .imp-h2
+                "Who Places And Restores Your Implant"
+            Paragraph
+              "Dr. Gregory Bennett has practiced implant dentistry since 2001 and han…"
+            List<ul> .imp-creds
+              ListItem .imp-li-3
+                Span .imp-check
+                  "✓"
+                Span .imp-hero-copy.list
+                  Strong .imp-hero-copy
+                    "University of Iowa DDS"
+                    ","
+                    "2001"
+                  "in practice since 2001, and on Wadsworth in Arvada since 2003"
+              ListItem .imp-li-3
+                Span .imp-check
+                  "✓"
+                Span .imp-hero-copy.list
+                  Strong .imp-hero-copy
+                    "Moderate IV Sedation Certified"
+                  "implant surgery completed comfortably under sedation, in-house"
+              ListItem .imp-li-3
+                Span .imp-check
+                  "✓"
+                Span .imp-hero-copy.list
+                  Strong .imp-hero-copy
+                    "5280 Magazine Top Dentist"
+                  "recognized among the Denver area's leading dentists"
+              ListItem .imp-li-3
+                Span .imp-check
+                  "✓"
+                Span .imp-hero-copy.list
+                  Strong .imp-hero-copy
+                    "Single implants to full arch, in-house"
+                  "including All-on-X, zygomatic implants, and implant-supported dentures"
+            Blockquote .imp-blockquote
+              ""Most dentists tell you what you need. I'd rather help you understand …"
+        Block<div> .imp-teach-strip
+          Image .imp-img-5
+          Image .imp-img-5
+          Image .imp-img-5
+          Image .imp-img-5
+    Section<section> .imp-options
+      Block<div> .imp-div.imp-wrap
+        Span .imp-section-label
+          "— your comprehensive options"
+        Heading<h2> .heading-style-h4
+          "From One Tooth"
+          Span .imp-h2.accent
+            "To a Full Smile"
+        Paragraph .imp-paragraph
+          "Your consultation determines which path fits your bone, bite, timeline…"
+        Block<div> .swiper-wrapper 3.is-services
+          Block<div> .swiper-slide 3.is-services
+            Block<div> .service_item
+              Block<div> .service_item-media
+                Image .service_item-img
+              Block<div> .service_item-content-wrap
+                Block<div> .service_item-content
+                  Heading<h3> .services_card-heading
+                    "Single Dental Implants"
+                  Block<div> .imp-serv-desc
+                    "A single dental implant replaces one missing tooth without using the n…"
+                Block<div> .service_item-details
+                  Block<div> .service_item-detail
+                    Block<div> .imp-feature
+                      "Implants"
+                      
+                    Block<div> .service_item-details-value
+                      "1"
+                  Block<div> .divider 2
+                  Block<div> .service_item-detail
+                    Block<div>
+                      Strong .imp-feature
+                        "Treatment time"
+                      
+                    Block<div> .service_item-details-value
+                      Strong
+                        "3-6 months"
+                      
+                  Block<div> .divider 2
+                  Block<div> .service_item-detail
+                    Block<div>
+                      Strong .imp-feature
+                        "Ideal if you want"
+                      
+                    Block<div> .service_item-details-value
+                      Strong
+                        "Permanent single tooth"
+                      
+                  Block<div> .divider 2
+                  Block<div> .service_item-detail
+                    Block<div>
+                      Strong .imp-feature
+                        "Investment"
+                      
+                    Block<div> .service_item-details-value
+                      Strong
+                        "$"
+                      
+                  Block<div> .service_item-detail
+                    Block<div>
+                      
+                    Block<div> .service_item-details-desc
+                      "A few things affect where you fall in that range: the type of implant …"
+                      
+          Block<div> .swiper-slide 3.is-services
+            Block<div> .service_item
+              Block<div> .service_item-media
+                Image .service_item-img
+              Block<div> .service_item-content-wrap
+                Block<div> .service_item-content
+                  Heading<h3> .services_card-heading
+                    "Implant Bridges"
+                    
+                  Block<div> .imp-serv-desc
+                    "An implant bridge replaces multiple missing teeth by anchoring a custo…"
+                    
+                Block<div> .service_item-details
+                  Block<div> .service_item-detail
+                    Block<div> .imp-feature
+                      "Implants per arch"
+                    Block<div> .service_item-details-value
+                      "2-4"
+                  Block<div> .divider 2
+                  Block<div> .service_item-detail
+                    Block<div>
+                      Strong .imp-feature
+                        "Treatment time"
+                    Block<div> .service_item-details-value
+                      Strong
+                        "3-6 months"
+                      
+                  Block<div> .divider 2
+                  Block<div> .service_item-detail
+                    Block<div> .imp-feature
+                      Strong .imp-feature
+                        "Ideal if you want"
+                    Block<div> .service_item-details-value
+                      Strong
+                        "Stable multi-tooth solution"
+                      
+                  Block<div> .divider 2
+                  Block<div> .service_item-detail
+                    Block<div>
+                      Strong .imp-feature
+                        "Investment"
+                      
+                    Block<div> .service_item-details-value
+                      Strong
+                        "$$"
+                      
+                  Block<div> .service_item-detail
+                    Block<div>
+                      
+                    Block<div> .service_item-details-desc
+                      "Pricing depends on the number of implants and pontics involved, the ma…"
+                      
+          Block<div> .swiper-slide 3.is-services
+            Block<div> .service_item
+              Block<div> .service_item-media
+                Image .service_item-img
+              Block<div> .service_item-content-wrap
+                Block<div> .service_item-content
+                  Heading<h3> .services_card-heading
+                    "Full-Arch Dental Implants"
+                  Block<div> .imp-serv-desc
+                    "Four to six implants, placed in one procedure, supporting a complete s…"
+                Block<div> .service_item-details
+                  Block<div> .service_item-details
+                    Block<div> .service_item-detail
+                      Block<div> .imp-feature
+                        "Implants per arch"
+                      Block<div> .service_item-details-value
+                        "4-6"
+                    Block<div> .divider 2
+                    Block<div> .service_item-detail
+                      Block<div>
+                        Strong .imp-feature
+                          "Treatment time"
+                      Block<div> .service_item-details-value
+                        "Often same-day teeth"
+                    Block<div> .divider 2
+                    Block<div> .service_item-detail
+                      Block<div> .imp-feature
+                        Strong .imp-feature
+                          "Ideal if you want"
+                      Block<div> .service_item-details-value
+                        "Fixed, non-removable arch"
+                    Block<div> .divider 2
+                    Block<div> .service_item-detail
+                      Block<div>
+                        Strong .imp-feature
+                          "Investment"
+                        
+                      Block<div> .service_item-details-value
+                        Strong
+                          "$$$"
+                        
+                    Block<div> .service_item-detail
+                      Block<div>
+                        
+                      Block<div> .service_item-details-desc
+                        "The price shifts based on how many implants are placed, the type of pr…"
+                        
+          Block<div> .swiper-slide 3.is-services
+            Block<div> .service_item
+              Block<div> .service_item-media
+                Image .service_item-img
+              Block<div> .service_item-content-wrap
+                Block<div> .service_item-content
+                  Heading<h3> .services_card-heading
+                    "Full-Arch Dental Implants"
+                  Block<div>
+                    "Four to six implants, placed in one procedure, supporting a complete s…"
+                Block<div> .service_item-details
+                  Block<div> .service_item-detail
+                    Block<div>
+                      "Implants per arch"
+                    Block<div> .service_item-details-value
+                      "4-6"
+                  Block<div> .divider 2
+                  Block<div> .service_item-detail
+                    Block<div>
+                      "Fixed teeth"
+                    Block<div> .service_item-details-value
+                      "Same day"
+    Section<section> .Section 12
+      Block<div> .imp-div.imp-wrap
+        Block<div> .imp-doc-grid
+          Block<div> .imp-hero-copy
+            Span .imp-section-label
+              "— How it works"
+            Heading<h2> .heading-style-h4
+              "Your Dental Work"
+              Span .imp-h2.accent
+                "Shouldn't Look & Feel Like Dental Work"
+            Paragraph .imp-paragraph
+              "Two dedicated visits. Complete records. A clear diagnosis - because la…"
+            Block<div> .imp-grid-3
+              Block<div> .imp-card
+                Heading<h3> .imp-h3-6
+                  Span .imp-stepnum
+                    "1"
+                  "Consultation"
+                  "&"
+                  "3D scan"
+                Paragraph .imp-p-5
+                  "A full evaluation of your bone, bite, and goals with CBCT imaging plus…"
+              Block<div> .imp-card
+                Heading<h3> .imp-h3-6
+                  Span .imp-stepnum
+                    "2"
+                  "Guided placement"
+                Paragraph .imp-p-5
+                  "Your implant is placed using a digital surgical guide, with sedation a…"
+              Block<div> .imp-card
+                Heading<h3> .imp-h3-6
+                  Span .imp-stepnum
+                    "3"
+                  "Your final tooth"
+                Paragraph .imp-p-5
+                  "Once healed, your custom porcelain crown is fitted designed before day…"
+              Block<div> .button-group
+                Block<div>
+                  ComponentInstance
+          Block<div> .imp-doc-img
+            Video .story-vert
+    Section<section> .imp-gallery
+      Block<div> .imp-div.imp-wrap
+        Span .imp-section-label
+          "— Smile gallery"
+        Heading<h2> .heading-style-h4
+          "Real Patients."
+          Span .imp-h2.accent
+            "Real Results."
+        Paragraph .imp-paragraph
+          "Every smile below started with a conversation, a full examination, and…"
+        Block<div> .imp-gallery-grid.three
+          Image .imp-img-3
+          Image .imp-img-3
+          Image .imp-img-3
+        Block<div> .imp-journey-cta
+          Block<div> .button-group.is-center
+            Block<div>
+              ComponentInstance
+    Section<section> .imp-space 2
+      Block<div> .imp-div.imp-wrap
+        Span .imp-section-label
+          "— your experience"
+        Heading<h2> .heading-style-h4
+          "A Space Designed"
+          Span .imp-h2.accent
+            "For Your Comfort"
+        Paragraph .imp-paragraph.ar
+          "From the moment you walk in, Arvada Dental feels different. Calm, mode…"
+        Paragraph .imp-hero-copy.imp-sub
+        Block<div> .imp-office-grid
+          Image .imp-img-6
+          Image .imp-img-7
+          Image .imp-img-7
+          Image .imp-img-7
+          Image .imp-img-7
+    Block<section> .ty-div.section_ty-faq.lw-sec
+      Block<div> .ty-expect__head
+        Span .imp-section-label.center
+          "before you call"
+        Heading<h2> .ty-h2
+          "Any questions"
+          Span .ty-h2.accent
+            "before you call"
+          "?"
+      Block<div> .ty-faq__list
+        Block<div> .Accordion Wrapper
+          ComponentInstance
+          ComponentInstance
+          ComponentInstance
+          ComponentInstance
+          ComponentInstance
+          ComponentInstance
+          ComponentInstance
+    Section<section> .imp-final
+      Block<div> .imp-div.imp-wrap
+        Span .imp-section-label
+          "Limited Consultation Availability"
+        Heading<h2> .heading-style-h4
+          Span .imp-h2.white
+            "Stop Working Around"
+          Span .imp-h2.accent
+            "A Missing Tooth"
+        Paragraph .imp-paragraph.cta
+          "Every month you wait, the bone under the gap keeps shrinking , which c…"
+        Block<div> .Div Block 41
+          Video .Video 5
+          Block<div> .button-group.is-center
+            Block<div>
+              ComponentInstance
+        Paragraph .imp-alt
+          "Prefer to talk? Call"
+          Link .imp-a-5
+            "(720) 419-3699"
+          
+          "Mon–Fri 8–5"
+    Block<footer> .ty-foot
+      Block<div> .ty-div.lw-shell.foot
+        Paragraph .ty-foot__legal
+          "Arvada Dental, Dr. Gregory Bennett"
+          
+          Span .Text Span 24
+            "6695 Wadsworth Blvd, Arvada, CO 80003"
+        Paragraph .ty-foot__disc.lv
+          "Individual results vary based on each patient's oral health, anatomy a…"
+
+=== 194 distinct classes ===
+accent (10)
+Accordion Wrapper (1)
+adress (1)
+ar (1)
+br-line (1)
+button (2)
+button-group (5)
+center (1)
+Container (1)
+csm-ba (1)
+csm-ba__foot (1)
+csm-ba__foot-strong (1)
+csm-ba__handle (1)
+csm-ba__img (1)
+csm-ba__img--before (1)
+csm-ba__stage (1)
+csm-ba__tag (2)
+csm-ba__tag--after (1)
+csm-ba__tag--before (1)
+csm-div (4)
+csm-hero__media (1)
+csm-img 2 (1)
+cta (1)
+Dark (1)
+Div Block 11 (1)
+Div Block 39 (1)
+Div Block 41 (1)
+divider 2 (10)
+foot (1)
+full width (1)
+header (1)
+Header (1)
+header-logo-wrapper (1)
+heading-style-h2 (1)
+heading-style-h4 (8)
+hero (1)
+hide-tablet (2)
+icon-embed-xsmall (1)
+icon-embed-xxsmall (1)
+imp-a-2 (2)
+imp-a-3 (1)
+imp-a-5 (1)
+imp-alt (1)
+imp-ba (1)
+imp-ba-hint (1)
+imp-ba-wrap (1)
+imp-big-price (1)
+imp-blockquote (1)
+imp-btn (1)
+imp-btn-primary (1)
+imp-card (7)
+imp-cbody (4)
+imp-chapter (4)
+imp-chapters (1)
+imp-check (8)
+imp-cnum (4)
+imp-creds (1)
+imp-div (10)
+imp-div-2 (1)
+imp-doc-grid (2)
+imp-doc-img (2)
+imp-eyebrow (2)
+imp-feature (14)
+imp-final (1)
+imp-form-card (1)
+imp-gallery (1)
+imp-gallery-grid (1)
+imp-grid-3 (1)
+imp-grid-4 (1)
+imp-h2 (12)
+imp-h3 (1)
+imp-h3-2 (1)
+imp-h3-3 (1)
+imp-h3-4 (1)
+imp-h3-5 (4)
+imp-h3-6 (7)
+imp-header-1 (1)
+imp-hero (1)
+imp-hero-copy (21)
+imp-hero-ctas (1)
+imp-hero-form (1)
+imp-hero-grid (1)
+imp-hero-media (1)
+imp-hero-note (1)
+imp-img-2 (4)
+imp-img-3 (3)
+imp-img-5 (4)
+imp-img-6 (1)
+imp-img-7 (4)
+imp-incl (1)
+imp-jcol (2)
+imp-jcol-after (1)
+imp-jcol-before (1)
+imp-journey (1)
+imp-journey-cols (1)
+imp-journey-cta (2)
+imp-journey-intro (1)
+imp-li (4)
+imp-li-2 (10)
+imp-li-3 (4)
+imp-mark (10)
+imp-media-caption (1)
+imp-office-grid (1)
+imp-options (1)
+imp-p (3)
+imp-p-2 (1)
+imp-p-4 (4)
+imp-p-5 (7)
+imp-p-7 (1)
+imp-paragraph (6)
+imp-paragraph-hero (1)
+imp-price-band (1)
+imp-price-grid (1)
+imp-price-tag (1)
+imp-price-unit (1)
+imp-rating-badge 4 (1)
+imp-section-label (10)
+imp-serv-desc (3)
+imp-space 2 (1)
+imp-span-4 (5)
+imp-span-5 (5)
+imp-specialist (1)
+imp-stamp (1)
+imp-stars (5)
+imp-stepnum (3)
+imp-story (1)
+imp-strike (1)
+imp-strong (5)
+imp-sub (2)
+imp-teach-strip (1)
+imp-thanks (1)
+imp-trust (1)
+imp-trust-item (5)
+imp-ul (2)
+imp-vid-card (3)
+imp-vid-outer (4)
+imp-vid-title (4)
+imp-videos-grid (2)
+imp-wrap (11)
+is-center (4)
+is-dark (1)
+is-services (5)
+is-white (1)
+list (4)
+logo (1)
+logo-header (1)
+lv (1)
+lw-sec (1)
+lw-shell (1)
+margin-medium (2)
+margin-top (2)
+nav (2)
+Nav wrap (1)
+Navbar (1)
+no-wrap (2)
+phone-number (2)
+ratio (1)
+rotate (1)
+Section 12 (1)
+Section 2 (1)
+section_ty-faq (1)
+service_item (4)
+service_item-content (4)
+service_item-content-wrap (4)
+service_item-detail (17)
+service_item-details (5)
+service_item-details-desc (3)
+service_item-details-value (14)
+service_item-img (4)
+service_item-media (4)
+services_card-heading (4)
+show-right (1)
+story-hor (4)
+story-vert (2)
+swiper-slide 3 (4)
+swiper-wrapper 3 (1)
+testimonials-embed (1)
+Text Span 23 (1)
+Text Span 24 (1)
+three (1)
+ty-div (2)
+ty-expect__head (1)
+ty-faq__list (1)
+ty-foot (1)
+ty-foot__disc (1)
+ty-foot__legal (1)
+ty-h2 (2)
+vert (4)
+Video 5 (1)
+white (1)
+wrapper-icons (1)
+wrapper-nav-item (2)
+wrapper-nav-top (1)
+wrapper-topnav-links (1)

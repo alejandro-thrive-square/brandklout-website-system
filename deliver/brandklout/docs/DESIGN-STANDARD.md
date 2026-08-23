@@ -167,6 +167,35 @@ or The Invitation where the objection actually lands, not as its own band.
 9. **`prefers-reduced-motion` honoured throughout.** Non-negotiable, medical audience.
 10. **Mobile is designed, not degraded.** Most paid dental traffic is mobile; motion must survive.
 
+## Brand palette — sample the token layer, not a stray rule
+
+Take the palette from the client's **published stylesheet token block**, not from whichever colours
+happen to appear in it. Fetch `https://cdn.prod.website-files.com/<siteId>/css/<shortName>.webflow.shared.*.css`
+and read the `:root` primitives — Webflow writes the real design tokens there under names like
+`--_primitives---brand--gold`. Confirm the pick by frequency across the whole file: the brand
+colour is the one used dozens of times, and the page ground is whatever `body{background-color:…}`
+resolves to.
+
+The Arvada build got this wrong and all six landing pages had to be re-themed after the client saw
+them. The source comment said the palette was "sampled from the practice's own stylesheet", and
+`#03c5ec` genuinely *was* in that stylesheet — on three leftover template classes
+(`.button.round.bleu`, `.button.nav.white`). The actual brand, `--_primitives---brand--gold`
+`#c8b282`, appeared 51 times and was missed. A cyan-on-near-black journey shipped for a
+champagne-gold-on-cream practice.
+
+Two rules fall out of that:
+
+- **Frequency beats presence.** A colour existing in the CSS proves nothing. Rank by use count and
+  cross-check against the `:root` primitives before committing.
+- **Match the client's light/dark polarity.** Arvada's body is `#fdf8ef` and 57 of its 69 section
+  scheme classes are the light one. A dark journey was off-brand regardless of accent colour.
+
+When a palette does have to be swapped later, note that gold-family accents **cannot carry text on
+a light ground** — `#c8b282` on `#fdf8ef` is 1.96:1. Keep the bright tone for fills, rules and
+icons, and darken it for anything with a glyph in it (`#6e5c34` gives 6.0:1). Gate the result with
+a computed-contrast pass over every text node, not screenshots: light text left on a newly-light
+ground still renders, it is just invisible.
+
 ## Conversion is still the job
 
 Motion serves the offer, never buries it. The phone number, the offer, and the form stay
@@ -213,6 +242,23 @@ respected. Verify by driving the page (Chrome CDP or equivalent) and asserting b
 
 **Test in a focused tab.** Background tabs freeze transitions, IntersectionObserver, and timers,
 so a backgrounded check will report broken animation that is actually fine.
+
+**Colour that JS paints needs its own pass, with motion ON.** Any check that runs under
+`prefers-reduced-motion` — which is most of them, because it is the only state where a
+scroll-driven page renders complete — never executes the timelines, so it cannot see a colour a
+tween writes. On Arvada that hid a `sweepWords` call tweening its non-accent words to `#ffffff`
+on a cream ground: 15 of every 21 swept words animated to invisible, through a contrast pass
+and a full-page capture that both reported clean. Same exposure for any state a *click* reveals
+(selected quiz option, open FAQ) — those are tweened as rgba strings too.
+
+Scroll with motion on, collect console errors and exceptions, drive the controls, and read back
+the colour actually painted on the element. `workflows/08-qa/.tmp/runtime-colour.mjs` and
+`interact-colour.mjs` on the Arvada build are the reference implementations.
+
+One trap in writing those probes: **Webflow wraps every embed in a div carrying the same class**,
+so `querySelector('[class*="quiz__opt"]')` returns the wrapper, and a click on it never reaches
+the button. The probe then reports "nothing changed" and reads as a passing test. Qualify by
+tag — `button[class*="quiz__opt"]`.
 
 ### The static gate — `journey-audit.mjs`
 

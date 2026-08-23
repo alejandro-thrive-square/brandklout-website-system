@@ -57,11 +57,11 @@
 <header class="nav" id="nav">
   <div class="nav-progress" aria-hidden="true"><i id="navProgress"></i></div>
   <div class="wrap nav-in">
-    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center &amp; Implants">
-      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" width="180" height="108">
+    <a class="nav-logo" href="#main" aria-label="Arvada Dental Center">
+      <img src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" width="180" height="108">
     </a>
     <div class="nav-mid">
-      <p class="nav-chapter" aria-hidden="true"><b id="navChNum">00</b><i id="navChBar"></i><span id="navChName">Arrival</span></p>
+      <p class="nav-chapter" aria-hidden="true"><i id="navChBar"></i><span id="navChName">Arrival</span></p>
     </div>
     <div class="nav-right">
       <span class="status nav-status" data-status><span class="status__dot"></span><span data-status-text>Checking hours…</span></span>
@@ -85,19 +85,19 @@
     .ch-arrival .ch-media img{transform:scale(1.12)}
     .ch-arrival .ch-media::after{content:"";position:absolute;inset:0;
       background:
-        radial-gradient(88% 70% at 76% 32%,rgba(251,142,40,.16),transparent 60%),
-        linear-gradient(100deg,rgba(10,13,20,.96) 0%,rgba(10,13,20,.9) 40%,rgba(10,13,20,.54) 72%,rgba(10,13,20,.28) 100%),
-        linear-gradient(180deg,rgba(10,13,20,.9) 0%,rgba(10,13,20,.25) 30%,rgba(10,13,20,.86) 100%)}
+        radial-gradient(88% 70% at 76% 32%,rgba(211,170,90,.16),transparent 60%),
+        linear-gradient(100deg,rgba(253,248,239,.96) 0%,rgba(253,248,239,.9) 40%,rgba(253,248,239,.54) 72%,rgba(253,248,239,.28) 100%),
+        linear-gradient(180deg,rgba(253,248,239,.9) 0%,rgba(253,248,239,.25) 30%,rgba(253,248,239,.86) 100%)}
     .ch-arrival .in{display:grid;gap:clamp(2rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
     .ch-arrival h1{font-size:calc(4.5rem*var(--s-d1));max-width:16ch}
-    .ch-arrival h1 .amt{font-family:var(--f-display);font-weight:700;color:var(--amber);display:block;
+    .ch-arrival h1 .amt{font-family:var(--f-display);font-weight:700;color:var(--offer);display:block;
       font-size:calc(7rem*var(--s-d2));line-height:.95}
     .ch-arrival .lede{max-width:52ch}
     .ch-arrival .trust{display:flex;flex-wrap:wrap;gap:.7rem 1.6rem;align-items:center;
       padding-top:clamp(1rem,2.2vw,1.5rem);border-top:1px solid var(--line)}
     .ch-arrival .trust span{display:inline-flex;align-items:center;gap:.5rem;
       font-family:var(--f-ui);font-size:calc(.76rem*var(--s-tx));font-weight:600;color:var(--fg-soft)}
-    .ch-arrival .trust svg{width:16px;height:16px;color:var(--amber);flex:none}
+    .ch-arrival .trust svg{width:16px;height:16px;color:var(--offer);flex:none}
     @media(min-width:1000px){ .ch-arrival .in{grid-template-columns:1.1fr .9fr;gap:clamp(2.5rem,4vw,4.5rem)} }
   </style>
 
@@ -107,7 +107,7 @@
 
   <div class="wrap ch-in in">
     <div>
-      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Chapter 00 &middot; Arrival</span></div>
+      <div class="chapter-tag" data-anim="hide"><i></i><span class="label">Arrival</span></div>
       <h1 data-anim="hide" id="arrTitle"><span class="amt">$109</span>new patient visit at your local Arvada dentist.</h1>
       <p class="lede mt" data-anim="hide" id="arrLead">
         Comprehensive exam, digital X-rays and an OralID oral cancer screening — with a personalised,
@@ -141,7 +141,7 @@
           <span class="field__err" aria-live="polite"></span>
         </div>
         <div class="field">
-          <label for="n-email">Email <span style="font-weight:400;color:#5C6B80">(optional)</span></label>
+          <label for="n-email">Email <span style="font-weight:400;color:#5f5f5d">(optional)</span></label>
           <input id="n-email" name="email" type="email" autocomplete="email">
           <span class="field__err" aria-live="polite"></span>
         </div>
@@ -194,26 +194,26 @@
      ========================================================================== -->
 <section class="ch ch-search" id="search" data-chapter="1" data-chapter-name="The Search">
   <style>
-    .ch-search{background:var(--ink-950)}
+    .ch-search{background:var(--paper-3)}
     .ch-search .stage{min-height:100svh;display:grid;align-content:center;
       padding-block:clamp(3rem,7vw,6rem);overflow:hidden}
     .ch-search .big{font-family:var(--f-display);font-size:calc(3.7rem*var(--s-d1));
       line-height:1.16;max-width:21ch;font-weight:600}
-    .ch-search .big .wz-word{color:rgba(255,255,255,.17)}
+    .ch-search .big .wz-word{color:rgba(64,56,48,.22)}
     .srch-grid{display:grid;gap:clamp(.8rem,1.6vw,1.3rem);margin-top:clamp(2rem,4vw,3.25rem);
       grid-template-columns:1fr}
     .srch-card{border:1px solid var(--line);border-radius:var(--radius-lg);
-      padding:clamp(1.1rem,2vw,1.6rem);background:rgba(255,255,255,.03);display:grid;gap:.6rem}
+      padding:clamp(1.1rem,2vw,1.6rem);background:rgba(64,56,48,.04);display:grid;gap:.6rem}
     .srch-card h3{font-size:calc(1.02rem*var(--s-tx))}
     .srch-card p{font-size:calc(.9rem*var(--s-tx));color:var(--fg-body)}
-    .srch-card .card__icon{background:rgba(251,142,40,.14);color:var(--amber)}
+    .srch-card .card__icon{background:rgba(211,170,90,.14);color:var(--offer)}
     @media(min-width:700px){ .srch-grid{grid-template-columns:repeat(2,1fr)} }
     @media(min-width:1120px){ .srch-grid{grid-template-columns:repeat(4,1fr)} }
   </style>
 
   <div class="stage" id="srchPin">
     <div class="wrap">
-      <div class="chapter-tag"><i></i><span class="label">Chapter 01 &middot; The Search</span></div>
+      <div class="chapter-tag"><i></i><span class="label">The Search</span></div>
       <p class="big" id="srchBig">You searched for a dentist near you and got a list. Choosing from it
         shouldn't be a gamble.</p>
 
@@ -251,24 +251,14 @@
     if (W.reduced) return;
     gsap.set(cards, { opacity: 0, y: 44 });
 
-    var sp = W.splitWords(big);
-    var words = (sp && sp.words && sp.words.length) ? sp.words : null;
-
     var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.4),
-        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true
-      }
+      scrollTrigger: W.scene(pin, { run: 2.4, scrub: .3 })
     });
 
-    if (words) {
-      var tail = words.slice(-5), body = words.slice(0, -5);
-      tl.to(body, { color: '#ffffff', stagger: .36, ease: 'none' }, 0)
-        .to(tail, { color: '#fb8e28', stagger: .3, ease: 'none' }, .42);
-    } else {
-      tl.from(big, { opacity: .2, ease: 'none' }, 0);
-    }
-    tl.to(cards, { opacity: 1, y: 0, stagger: .16, ease: 'none' }, .58);
+    /* One left-to-right sweep, white into amber. The cards deal in from the
+       closing clause, tied to the length of this paragraph. */
+    var sweep = W.sweepWords(tl, big, { accent: '#d3aa5a', tail: 5, step: .2 });
+    tl.to(cards, { opacity: 1, y: 0, stagger: .16, ease: 'none' }, sweep.tail);
   });
   </script>
 </section>
@@ -285,19 +275,19 @@
       padding-block:clamp(3rem,6vw,5rem);overflow:hidden}
     .ch-offer .lay{display:grid;gap:clamp(1.5rem,4vw,3.5rem);align-items:center;grid-template-columns:1fr}
     .ch-offer h2{font-size:var(--h2);max-width:15ch}
-    .rcpt{background:#fff;border:1px solid rgba(20,24,33,.12);border-radius:var(--radius-lg);
-      padding:clamp(1.3rem,2.6vw,2.2rem);box-shadow:0 24px 60px -30px rgba(20,24,33,.35);
+    .rcpt{background:#fff;border:1px solid rgba(64,56,48,.12);border-radius:var(--radius-lg);
+      padding:clamp(1.3rem,2.6vw,2.2rem);box-shadow:0 24px 60px -30px rgba(64,56,48,.35);
       display:grid;gap:0}
     .rcpt-head{font-family:var(--f-ui);font-size:calc(.66rem*var(--s-tx));letter-spacing:.2em;text-transform:uppercase;
       font-weight:700;color:var(--amber-ink);padding-bottom:.9rem;
-      border-bottom:1px dashed rgba(20,24,33,.18)}
+      border-bottom:1px dashed rgba(64,56,48,.18)}
     .rcpt-row{display:grid;grid-template-columns:auto 1fr;gap:.85rem;align-items:start;
-      padding-block:.9rem;border-bottom:1px dashed rgba(20,24,33,.14);font-size:calc(.95rem*var(--s-tx));color:#3B4657}
+      padding-block:.9rem;border-bottom:1px dashed rgba(64,56,48,.14);font-size:calc(.95rem*var(--s-tx));color:#4A4038}
     .rcpt-row svg{width:20px;height:20px;color:var(--amber-deep);flex:none;margin-top:.15rem}
     .rcpt-tot{display:flex;align-items:baseline;justify-content:space-between;gap:1rem;
       padding-top:1.1rem;flex-wrap:wrap}
     .rcpt-tot span{font-family:var(--f-ui);font-size:calc(.7rem*var(--s-tx));letter-spacing:.18em;text-transform:uppercase;
-      font-weight:700;color:#5C6B80}
+      font-weight:700;color:#5f5f5d}
     .rcpt-tot b{font-family:var(--f-display);font-weight:700;line-height:1;color:var(--amber-deep);
       font-size:calc(4.2rem*var(--s-h2));font-variant-numeric:tabular-nums}
     .rcpt-terms{font-size:calc(.76rem*var(--s-tx));color:#7a6244;line-height:1.6;margin-top:.9rem}
@@ -307,7 +297,7 @@
   <div class="stage" id="offPin">
     <div class="wrap lay">
       <div>
-        <div class="chapter-tag"><i></i><span class="label">Chapter 02 &middot; The Offer</span></div>
+        <div class="chapter-tag"><i></i><span class="label">The Offer</span></div>
         <h2 class="h2" id="offTitle">A first visit that actually tells you something</h2>
         <p class="lede mt-s">Most "new patient" offers buy you a rushed look and a quote. This one includes
           the diagnostics — digital imaging and an OralID screening — so the plan you leave with is based on
@@ -365,13 +355,12 @@
     }
 
     var tl = gsap.timeline({
-      scrollTrigger: {
-        trigger: pin, start: 'top top', end: '+=' + Math.round(window.innerHeight * 2.8),
-        pin: true, scrub: .3, anticipatePin: 1, invalidateOnRefresh: true,
+      scrollTrigger: W.scene(pin, {
+        run: 2.8,
         // Reversing the scroll has to put it back to pending, or the price
         // would appear before its line items on the way back up.
         onUpdate: function (self) { settle(self.progress > 0.82); }
-      }
+      })
     });
 
     rows.forEach(function (row, i) {
@@ -389,25 +378,25 @@
      ========================================================================== -->
 <section class="ch ch-near" id="near" data-chapter="3" data-chapter-name="Six Minutes Away">
   <style>
-    .ch-near{background:var(--ink-900);overflow:hidden}
+    .ch-near{background:var(--paper);overflow:hidden}
     .ch-near .lay{display:grid;gap:clamp(2rem,5vw,4.5rem);align-items:center;grid-template-columns:1fr}
     .ch-near h2{font-size:var(--h2);max-width:14ch}
     .ch-near .plate{position:relative;overflow:hidden;border-radius:var(--radius-lg);aspect-ratio:16/11;
-      background:var(--ink-800);clip-path:inset(0 0 100% 0)}
+      background:var(--paper-2);clip-path:inset(0 0 100% 0)}
     .ch-near .plate img{width:100%;height:100%;object-fit:cover}
     .svc{margin-top:clamp(2.5rem,5vw,4rem)}
     .svc ul{display:grid;gap:.5rem;grid-template-columns:repeat(auto-fit,minmax(min(100%,210px),1fr));
       list-style:none;margin:0;padding:0}
     .svc li{display:grid;grid-template-columns:auto 1fr;gap:.6rem;align-items:center;font-size:calc(.92rem*var(--s-tx));
       color:var(--fg-body)}
-    .svc svg{width:17px;height:17px;color:var(--cyan);flex:none}
+    .svc svg{width:17px;height:17px;color:var(--accent);flex:none}
     @media(min-width:900px){ .ch-near .lay{grid-template-columns:1fr 1fr} }
   </style>
 
   <div class="wrap pad">
     <div class="lay">
       <div>
-        <div class="chapter-tag"><i></i><span class="label">Chapter 03 &middot; Six Minutes Away</span></div>
+        <div class="chapter-tag"><i></i><span class="label">Six Minutes Away</span></div>
         <h2 class="h2" id="nearTitle">6695 Wadsworth Blvd</h2>
         <p class="lede mt-s" data-rv>On Wadsworth between 64th and 68th, with parking at the door. If you
           searched "dentist near me" from anywhere in north-west Denver, you are probably closer than you think.</p>
@@ -425,7 +414,7 @@
       </div>
       <figure class="plate" id="nearPlate" style="margin:0">
         <img id="nearImg" src="../_shared/assets/video-1-3.png.webp"
-             alt="The Arvada Dental Center &amp; Implants building on Wadsworth Boulevard" loading="lazy">
+             alt="The Arvada Dental Center building on Wadsworth Boulevard" loading="lazy">
       </figure>
     </div>
 
@@ -470,31 +459,61 @@
 <section class="ch ch-practice" id="practice" data-chapter="4" data-chapter-name="The Practice" data-theme="light">
   <style>
     .ch-practice{background:var(--bg);overflow:hidden}
-    .ch-practice .pin{height:100svh;display:flex;flex-direction:column;justify-content:center;position:relative}
-    .ch-practice .head{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter);
-      margin-bottom:clamp(1.2rem,2.6vw,2.2rem)}
+    /* A pinned chapter is exactly one viewport tall and can never grow, so
+       every row in it has to be told what to do when the viewport is short.
+       As a centred flex column it was not: the card sized itself from its own
+       square photo and its own copy, and at 1920x950 — a 1080 screen once the
+       browser's own chrome is taken off — the last 20px of card sat under the
+       progress bar. 1366x768 and 1280x720 were worse. It only looked right at
+       a viewport height nobody actually has.
+
+       Three explicit rows now: head, track, bar. The track takes what is left
+       (1fr, min-height:0 so it may shrink below its content) and the photo
+       inside each card absorbs the difference. Nothing is clipped at any
+       height because nothing is sized from content any more. */
+    /* `main .ch .pin{justify-content:safe center}` in journey.css was written
+       for a flex column, where it means "centre vertically". On a grid it
+       means "centre the COLUMN track", which would shrink these rows to their
+       content. One explicit full-width column, restated here. */
+    .ch-practice .pin{height:100svh;position:relative;
+      display:grid;grid-template-rows:auto minmax(0,1fr) auto;
+      grid-template-columns:minmax(0,1fr);justify-content:stretch;
+      row-gap:clamp(1rem,2.2vw,1.8rem);
+      padding-bottom:clamp(1.2rem,3.5vw,2.6rem)}
+    .ch-practice .head{width:100%;max-width:var(--maxw);margin-inline:auto;padding-inline:var(--gutter)}
     .ch-practice h2{font-size:var(--h2);max-width:16ch}
     .path-track{display:flex;gap:clamp(.9rem,2.2vw,1.8rem);padding-inline:var(--gutter);
-      width:max-content;align-items:stretch}
+      width:max-content;align-items:stretch;min-height:0}
     .path-card{width:clamp(240px,25vw,360px);flex:none;border:1px solid var(--line);
       border-radius:var(--radius-lg);padding:clamp(1.1rem,2vw,1.6rem);background:var(--card);
-      display:flex;flex-direction:column;gap:.7rem;transition:border-color .5s ease,box-shadow .5s ease}
-    .path-card .shot{aspect-ratio:1;overflow:hidden;border-radius:14px;background:var(--paper-3)}
+      display:flex;flex-direction:column;gap:.7rem;min-height:0;
+      transition:border-color .5s ease,box-shadow .5s ease}
+    /* The photo is the only elastic part of the card: it takes the room the
+       copy does not need, down to a floor where it is still a photograph and
+       not a stripe. Square is the preference, not a requirement. */
+    .path-card .shot{flex:1 1 auto;min-height:96px;aspect-ratio:1;overflow:hidden;
+      border-radius:14px;background:var(--paper-3)}
     .path-card .shot img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);
       transition:filter .7s var(--ease),transform .9s var(--ease)}
     .path-card:hover .shot img{filter:grayscale(0);transform:scale(1.05)}
-    .path-card h3{font-size:calc(1.08rem*var(--s-tx))}
-    .path-card p{font-size:calc(.9rem*var(--s-tx));color:var(--fg-body)}
-    .ch-practice .bar{position:absolute;left:var(--gutter);right:var(--gutter);
-      bottom:clamp(1.2rem,3.5vw,2.6rem);height:2px;background:var(--line)}
+    .path-card h3{font-size:calc(1.08rem*var(--s-tx));flex:none}
+    .path-card p{font-size:calc(.9rem*var(--s-tx));color:var(--fg-body);flex:none}
+    .ch-practice .bar{position:relative;margin-inline:var(--gutter);
+      height:2px;background:var(--line);align-self:end}
     .ch-practice .bar i{position:absolute;inset:0;background:var(--cyan-deep);transform:scaleX(0);
       transform-origin:left}
+    /* Short viewports: the copy is what goes, not the photo. Below 620px of
+       height there is no room for a four-line paragraph AND a picture. */
+    @media(max-height:620px){
+      .path-card p{display:none}
+      .path-card .shot{min-height:80px}
+    }
     @media(max-width:700px){ .path-card{width:72vw} }
   </style>
 
   <div class="pin" id="pracPin">
     <div class="head">
-      <div class="chapter-tag"><i></i><span class="label">Chapter 04 &middot; The Practice</span></div>
+      <div class="chapter-tag"><i></i><span class="label">The Practice</span></div>
       <h2 class="h2">Who you'll actually see.</h2>
     </div>
     <div class="path-track" id="pracTrack">
@@ -511,13 +530,13 @@
           are comfortable throughout.</p>
       </article>
       <article class="path-card">
-        <div class="shot"><img src="../_shared/assets/dental-implants-denver-dentist-in-arvada-dental-implants-arvada-dentist-near-me-arvada-denver.png" alt="The Arvada Dental Center &amp; Implants team" loading="lazy"></div>
+        <div class="shot"><img src="../_shared/assets/dental-implants-denver-dentist-in-arvada-dental-implants-arvada-dentist-near-me-arvada-denver.png" alt="The Arvada Dental Center team" loading="lazy"></div>
         <h3>…and the rest of the team</h3>
         <p>Dr. John McShane and Dr. Meghan Holub complete the clinical team, alongside the hygienists patients
           keep naming by name.</p>
       </article>
       <article class="path-card">
-        <div class="shot"><img src="../_shared/assets/office1.jpg.webp" alt="Inside Arvada Dental Center &amp; Implants" loading="lazy"></div>
+        <div class="shot"><img src="../_shared/assets/office1.jpg.webp" alt="Inside Arvada Dental Center" loading="lazy"></div>
         <h3>One roof, start to finish</h3>
         <p>Cleanings through to implants happen in this building, so you are not referred across town the
           moment something needs doing.</p>
@@ -532,13 +551,19 @@
         track = document.getElementById('pracTrack'),
         bar = document.getElementById('pracBar');
 
-    if (W.reduced) {
-      pin.style.height = 'auto';
-      pin.style.paddingBlock = 'clamp(3rem,6vw,5rem)';
-      track.style.overflowX = 'auto';
-      track.style.width = '100%';
-      return;
-    }
+    /* No pin available — reduced motion, or a screen too narrow to hold one.
+
+
+       Either way the sideways travel has nothing driving it, so the track
+
+
+       becomes a swipeable rail and keeps its progress rule and its card
+
+
+       lighting. See WZ.rail in journey.js. */
+
+
+    if (W.reduced || !W.canPin) { W.rail(pin, track, bar, light); return; }
 
     function distance() { return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
 
@@ -562,8 +587,8 @@
     });
 
     function light(card, img, on) {
-      gsap.to(card, { borderColor: on ? 'rgba(2,153,182,.6)' : 'rgba(20,24,33,.14)',
-        boxShadow: on ? '0 18px 44px rgba(20,24,33,.1)' : '0 0 0 rgba(0,0,0,0)', duration: .5 });
+      gsap.to(card, { borderColor: on ? 'rgba(154,130,80,.6)' : 'rgba(64,56,48,.14)',
+        boxShadow: on ? '0 18px 44px rgba(64,56,48,.1)' : '0 0 0 rgba(0,0,0,0)', duration: .5 });
       if (img) gsap.to(img, { filter: on ? 'grayscale(0)' : 'grayscale(1)', duration: .6 });
     }
   });
@@ -575,7 +600,7 @@
      ========================================================================== -->
 <section class="ch ch-proof" id="proof" data-chapter="5" data-chapter-name="The Proof">
   <style>
-    .ch-proof{background:var(--ink-850);overflow:hidden}
+    .ch-proof{background:var(--paper-3);overflow:hidden}
     .ch-proof h2{font-size:var(--h2);max-width:18ch}
   </style>
 
@@ -584,7 +609,7 @@
   </div>
 
   <div class="wrap pad">
-    <div class="chapter-tag"><i></i><span class="label">Chapter 05 &middot; The Proof</span></div>
+    <div class="chapter-tag"><i></i><span class="label">The Proof</span></div>
     <h2 class="h2 mb-l" id="prTitle">In our patients' own words</h2>
     <div class="grid g3" id="prReviews">
       <div class="review">
@@ -621,17 +646,17 @@
   <style>
     .ch-invite{background:var(--bg)}
     .ch-invite h2{font-size:var(--h2);max-width:18ch}
-    .ch-invite .close{background:var(--ink-950);color:#fff;border-radius:var(--radius-lg);
+    .ch-invite .close{background:var(--paper-3);color:var(--fg);border-radius:var(--radius-lg);
       padding:clamp(2rem,5vw,4rem);text-align:center;display:grid;gap:1rem;justify-items:center;
       margin-top:clamp(2.5rem,5vw,4.5rem)}
-    .ch-invite .close h2{color:#fff;max-width:20ch;margin-inline:auto}
-    .ch-invite .close p{color:rgba(255,255,255,.72);max-width:46ch}
-    .ch-invite .close .addr{font-size:calc(.85rem*var(--s-tx));color:rgba(255,255,255,.5)}
+    .ch-invite .close h2{color:var(--fg);max-width:20ch;margin-inline:auto}
+    .ch-invite .close p{color:rgba(64,56,48,.90);max-width:46ch}
+    .ch-invite .close .addr{font-size:calc(.85rem*var(--s-tx));color:rgba(64,56,48,.76)}
   </style>
 
   <div class="wrap pad">
-    <div class="chapter-tag"><i></i><span class="label">Chapter 06 &middot; The Invitation</span></div>
     <div class="wrap--narrow" style="padding-inline:0;margin-inline:auto">
+      <div class="chapter-tag"><i></i><span class="label">The Invitation</span></div>
       <h2 class="h2 mb-l" id="faqTitle">Before you book</h2>
       <div class="faq">
         <div class="faq__item">
@@ -685,7 +710,7 @@
   <div class="wrap">
     <div class="ftr__grid">
       <div>
-        <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center &amp; Implants" loading="lazy">
+        <img class="ftr__logo" src="../_shared/assets/dental-implants-in-denver-arvada-dentist-1.png.webp" alt="Arvada Dental Center" loading="lazy">
         <p style="font-size:calc(.9rem*var(--s-tx))">World-class dental care with small-town appeal, in Arvada since 2003.</p>
       </div>
       <div>
@@ -704,7 +729,7 @@
     </div>
     <div class="ftr__legal" id="terms">
       <p><strong>$109 New Patient Special — terms.</strong> Includes comprehensive exam, digital X-rays and OralID oral cancer screening. Restrictions apply. New patients only. 18 and older. HMO and Medicaid plans are not accepted.</p>
-      <p>&copy; <span data-year>2026</span> Arvada Dental Center &amp; Implants. Draft landing page prepared by Webzite for Brandklout — Asana task 1217162344633759.</p>
+      <p>&copy; <span data-year>2026</span> Arvada Dental Center. Draft landing page prepared by Webzite for Brandklout — Asana task 1217162344633759.</p>
     </div>
   </div>
 </footer>

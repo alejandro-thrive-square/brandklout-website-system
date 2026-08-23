@@ -1,0 +1,54 @@
+{
+ "label": "v",
+ "action": "get_variables",
+ "result": [
+  {
+   "id": "relume-variable--color-scheme-1-text",
+   "name": "Color Scheme 1/Text",
+   "type": "Color",
+   "cssName": "--color-scheme-1--text",
+   "value": {
+    "id": "relume-variable--neutral-shade-7"
+   },
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--color-scheme-1-background",
+   "name": "Color Scheme 1/Background",
+   "type": "Color",
+   "cssName": "--color-scheme-1--background",
+   "value": "#fdf8ef",
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--color-scheme-1-foreground",
+   "name": "Color Scheme 1/Foreground",
+   "type": "Color",
+   "cssName": "--color-scheme-1--foreground",
+   "value": {
+    "id": "relume-variable--neutral-shade-1"
+   },
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--color-scheme-1-border",
+   "name": "Color Scheme 1/Border",
+   "type": "Color",
+   "cssName": "--color-scheme-1--border",
+   "value": {
+    "id": "relume-variable--neutral-shade-7"
+   },
+   "modeValues": []
+  },
+  {
+   "id": "relume-variable--color-scheme-1-accent",
+   "name": "Color Scheme 1/Accent",
+   "type": "Color",
+   "cssName": "--color-scheme-1--accent",
+   "value": {
+    "id": "relume-variable--neutral-shade-7"
+   },
+   "modeValues": []
+  }
+ ]
+}

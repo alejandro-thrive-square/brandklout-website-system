@@ -1,0 +1,7 @@
+# Regenerable caches, not artifacts. staging/ is re-fetched by the verify
+# scripts and site-assets.json is re-listed from the Webflow API on every
+# remap-assets.mjs run; both are megabytes and neither is a source of truth.
+staging/
+site-assets.json
+.chrome-*/
+sweep-*.txt
