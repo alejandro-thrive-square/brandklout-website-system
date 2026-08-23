@@ -1,0 +1,16 @@
+##### implants: 14 links, 3 non-button candidates
+   …no data, waiting
+   …no data, waiting
+   …no data, waiting
+   …no data, waiting
+   …no data, waiting
+   …no data, waiting
+file:///C:/Users/ACER/orca/workspaces/Webzite%20Agentic%20Workflow/bk-arvada/deliver/brandklout/arvada-dental-center/workflows/07-webflow-build/.tmp/fixlinks2.mjs:57
+  throw new Error(`no usable response from ${tool}`);
+        ^
+
+Error: no usable response from data_element_tool
+    at call (file:///C:/Users/ACER/orca/workspaces/Webzite%20Agentic%20Workflow/bk-arvada/deliver/brandklout/arvada-dental-center/workflows/07-webflow-build/.tmp/fixlinks2.mjs:57:9)
+    at async file:///C:/Users/ACER/orca/workspaces/Webzite%20Agentic%20Workflow/bk-arvada/deliver/brandklout/arvada-dental-center/workflows/07-webflow-build/.tmp/fixlinks2.mjs:101:20
+
+Node.js v24.19.0

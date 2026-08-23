@@ -1,0 +1,31 @@
+implants          elements  431  diffs    2  paddingTop:1 paddingBottom:1
+    path/0 DIV paddingTop: 41.3095px  ->  48px
+    path/0 DIV paddingBottom: 41.3095px  ->  48px
+    !! 7 w-embed wrapper(s) changing layout: surgeon {"tag":"svg","cls":"[object SVGAnimatedString]","display":"block","padding":"0px","dw":0,"dh":3}
+aox               elements  453  diffs    2  paddingTop:1 paddingBottom:1
+    day/0 DIV paddingTop: 41.3095px  ->  48px
+    day/0 DIV paddingBottom: 41.3095px  ->  48px
+    !! 10 w-embed wrapper(s) changing layout: verdict {"tag":"svg","cls":"[object SVGAnimatedString]","display":"block","padding":"0px","dw":0,"dh":3}
+veneers           elements  400  diffs    2  paddingTop:1 paddingBottom:1
+    method/0 DIV paddingTop: 41.3095px  ->  48px
+    method/0 DIV paddingBottom: 41.3095px  ->  48px
+    !! 7 w-embed wrapper(s) changing layout: proof {"tag":"svg","cls":"[object SVGAnimatedString]","display":"block","padding":"0px","dw":0,"dh":3}
+emergency         elements  358  diffs    2  paddingTop:1 paddingBottom:1
+    arrive/0 DIV paddingTop: 41.3095px  ->  48px
+    arrive/0 DIV paddingBottom: 41.3095px  ->  48px
+    !! 8 w-embed wrapper(s) changing layout: today {"tag":"svg","cls":"[object SVGAnimatedString]","display":"block","padding":"0px","dw":0,"dh":3}
+(node:41308) MaxListenersExceededWarning: Possible EventTarget memory leak detected. 11 message listeners added to WebSocket. MaxListeners is 10. Use events.setMaxListeners() to increase limit
+(Use `node --trace-warnings ...` to show where the warning was created)
+dentist-near-me   elements  360  diffs    2  paddingTop:1 paddingBottom:1
+    practice/0 DIV paddingTop: 41.3095px  ->  48px
+    practice/0 DIV paddingBottom: 41.3095px  ->  48px
+    !! 4 w-embed wrapper(s) changing layout: offer {"tag":"svg","cls":"[object SVGAnimatedString]","display":"block","padding":"0px","dw":0,"dh":2}
+next-door         elements  311  diffs    2  paddingTop:1 paddingBottom:1
+    voices/0 DIV paddingTop: 41.3095px  ->  48px
+    voices/0 DIV paddingBottom: 41.3095px  ->  48px
+    !! 5 w-embed wrapper(s) changing layout: introduction {"tag":"SUP","cls":"","display":"block","padding":"0px","dw":289,"dh":18}
+
+================================================================
+width             : 390
+elements compared : 2313
+style differences : 12
