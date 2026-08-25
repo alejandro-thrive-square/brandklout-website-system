@@ -113,6 +113,15 @@ and should decide: re-license and copy the images to Mason Park, replace them, o
 
 One further hotlink, `i.ytimg.com`, is a YouTube thumbnail on the same two pages and is benign.
 
+**Scope check.** A scan of all 252 crawled pages finds *six* referencing `grandmissiondentistry.com`
+— the four above plus `/ph-and-acidity-of-food-beverages/` and `/toothpaste-rda-table/`. Those last
+two carried the image as page decoration outside the content flow, so it did not survive into the
+rebuild: the built site hotlinks from four pages, not six. The entanglement is wider than images,
+though — the crawl also picked up Grand Mission-hosted CSS and JS for two shared WordPress plugins
+(a before/after comparison slider and a Google-reviews widget), served through Mason Park's own
+cache paths. None of that is used by the static build, but it is evidence that the two sites were
+sharing assets in more than one direction.
+
 ## Pages that had to be authored rather than copied
 
 | Page | Why |
