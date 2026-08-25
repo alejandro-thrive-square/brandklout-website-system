@@ -20,8 +20,10 @@ an **emergency rebuild of the whole main site as static HTML**, to be hosted on 
 supersedes the paid-landing-page work below as the active priority; the three landing pages are
 unaffected and stay where they are.
 
-**The main site is rebuilt: 72 pages, 0 blockers, 0 errors, 0 warnings from its own QA gate.**
-Blog posts (~180) are deliberately out of scope for this pass.
+**The main site is rebuilt: 71 pages + 404, on Client-First with a reusable component
+library, and exports cleanly for Instatic import.** Four gates pass: content audit, layout at
+three widths, page weight, and the export's own validation. Blog posts (~180) are deliberately
+out of scope for this pass.
 
 See [`workflows/09-static-rebuild/README.md`](../workflows/09-static-rebuild/README.md) — how to
 build it, what was authored rather than copied, and the open items for the client. Three of those
