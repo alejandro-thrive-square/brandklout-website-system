@@ -92,6 +92,9 @@ const evaluate = async (expr) =>
 // so one overflowing table does not produce forty findings.
 const PROBE = `(() => {
   const vw = document.documentElement.clientWidth;
+  const ready = document.readyState === "complete"
+    && getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() === "#00bde0"
+    && [...document.images].every((i) => i.complete);
   const over = [];
   for (const el of document.querySelectorAll("body *")) {
     const r = el.getBoundingClientRect();
@@ -110,6 +113,7 @@ const PROBE = `(() => {
   const seen = new Set();
   const worst = over.filter((o) => !seen.has(o.sel) && seen.add(o.sel)).slice(0, 4);
   return {
+    ready,
     vw,
     scrollWidth: document.documentElement.scrollWidth,
     overflow: worst,
@@ -126,17 +130,17 @@ for (const width of WIDTHS) {
     // Measuring before the stylesheet applies reports the raw HTML width
     // attributes and produces spectacular false positives, so wait for the
     // document to finish AND for a value only site.css can have produced.
-    await evaluate(`(async()=>{
-      for (let i = 0; i < 60; i++) {
-        const styled = getComputedStyle(document.body).fontFamily.includes("DM Sans")
-          || getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() === "#00bde0";
-        if (document.readyState === "complete" && styled) break;
-        await new Promise(r => setTimeout(r, 50));
-      }
-      await new Promise(r => requestAnimationFrame(r));
-    })()`);
-    const r = await evaluate(PROBE);
+    // Re-probe until the probe itself reports a fully loaded, styled document.
+    // A separate "is it ready" call is not enough: the previous page is still
+    // live for a moment after Page.navigate and answers "yes" on its behalf.
+    let r = null;
+    for (let attempt = 0; attempt < 40; attempt++) {
+      r = await evaluate(PROBE);
+      if (r?.ready) break;
+      await wait(75);
+    }
     if (!r) continue;
+    if (!r.ready) { problems.push({ width, route, msg: "page never finished loading" }); continue; }
     if (r.scrollWidth > r.vw + 1) {
       problems.push({ width, route, msg: `page scrolls horizontally (${r.scrollWidth}px in ${r.vw}px)` +
         (r.overflow.length ? ` - widest: ${r.overflow.map((o) => `${o.sel} @${o.left}..${o.right}`).join(", ")}` : "") });

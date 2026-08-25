@@ -63,7 +63,7 @@ copy is lifted out of the extracted JSON, and layout follows the screenshots.
 browser, and Chrome additionally runs with `--disable-javascript`. `audit.mjs` re-checks the built
 output for every known malware IOC on each run.
 
-## Three things found in the old site that were NOT carried over
+## Four things found in the old site that were wrong
 
 **1. Fabricated awards.** Every Elementor page carried a hidden ThemeREX demo block listing four
 awards the practice has not won — "Top Dental Clinic 2019", "Dental Business Annual Award 2020",
@@ -76,7 +76,13 @@ ipsum plus the theme's own before/after stock photos, presented as this practice
 rebuilt page says plainly that the gallery is being restocked and links to the treatment pages
 instead. **It needs real, consented patient photography before it means anything.**
 
-**3. Two contradictory sets of office hours.** The footer and homepage say Mon 9–6, Tue 8–5,
+**3. Every FAQ question on the site.** Elementor keeps a toggle's question in an
+`<a class="elementor-toggle-title">` - neither a heading nor a button - so the first pass of the
+extractor walked straight past them and kept only the answers. 79 questions across five pages,
+including both FAQ pages in the main menu, were silently missing. Recovered, and they now render as
+`<details>` accordions that work with JavaScript off.
+
+**4. Two contradictory sets of office hours.** The footer and homepage say Mon 9–6, Tue 8–5,
 Wed 9–6, Thu 8–5, Fri/Sat/Sun closed. The three doctor pages say Mon 9–7, Tue 7–5, Wed 8–6,
 Thu 7–5, **Fri 7–5**. The rebuild uses the footer/homepage set throughout. **The practice needs to
 confirm which is right** — this is the third time this has come up (see Open Question 9 in
@@ -93,6 +99,9 @@ confirm which is right** — this is the third time this has come up (see Open Q
 | `/before-after/` | 100% theme demo content (see above) |
 | `/contacts/` | rebuilt as a real contact layout around the practice's own copy |
 | `/our-services/` | the live page was an icon carousel that listed no services in text |
+| `/our-doctors/` | three portraits at their natural sizes (464x696 beside 230x300) with the bios below in a different order |
+| `/patient-resources/` | one paragraph, a bullet list that linked nowhere, three orphan icon captions |
+| `/special-offers/` | carries the practice's real prices; the generic renderer buried them in running text |
 | `/thank-you/` | one line of copy on the live site |
 
 `/pricing/` is **not** rebuilt: it was the theme's demo "Silver / Gold / Platinum Pack" tiers with

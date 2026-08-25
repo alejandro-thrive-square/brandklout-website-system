@@ -495,6 +495,50 @@ ${bookBlock(h)}`;
 }
 
 // ===========================================================================
+// Meet our doctors - the long-form bios. The live page stacked three portraits
+// at their natural sizes (464x696 next to 230x300) with a name under each, then
+// the bios below in a different order again. Here each doctor gets one block:
+// portrait, role, bio, and the personal note the practice wrote for them.
+// ===========================================================================
+function ourDoctors(d, h) {
+  const { esc, asset } = h;
+  const PERSONAL = /^When (not in the office|he'?s not in the office|she'?s not in the office)/i;
+
+  // Sections 3-5 each hold one doctor. Which doctor is named by the H2.
+  const doctors = [3, 4, 5].map((n) => {
+    const items = inSection(d, n);
+    const name = items.find((b) => b.type === "heading" && b.level === 2)?.text || "";
+    const role = items.find((b) => b.type === "heading" && b.level > 2)?.text || "";
+    const all = items.filter((b) => b.type === "para").map((b) => b.text);
+    const match = DOCTORS.find(([, dn]) => dn.toLowerCase() === name.toLowerCase().trim());
+    return {
+      name: name.trim(),
+      role: (role || match?.[2] || "").replace(/​/g, "").trim(),
+      portrait: match?.[0] || items.find((b) => b.type === "image")?.src,
+      href: match?.[3],
+      bio: all.filter((t) => !PERSONAL.test(t)),
+      personal: all.find((t) => PERSONAL.test(t)),
+    };
+  }).filter((x) => x.name);
+
+  return `${pageHero(h, "Meet Our Doctors", "The three dentists who look after Katy families at Mason Park Dental.")}
+${doctors.map((doc, i) => `
+<section class="section${i % 2 === 1 ? " section--paper" : ""}">
+  <div class="shell split${i % 2 === 1 ? " split--flip" : ""}">
+    ${doc.portrait ? `<div><img src="${esc(asset(doc.portrait))}" alt="${esc(doc.name)}" loading="lazy"></div>` : "<div></div>"}
+    <div>
+      ${doc.role ? `<p class="eyebrow">${esc(doc.role)}</p>` : ""}
+      <h2>${esc(doc.name)}</h2>
+      ${doc.bio.map((p) => `<p>${esc(p)}</p>`).join("\n      ")}
+      ${doc.personal ? `<p class="notice">${esc(doc.personal)}</p>` : ""}
+      ${doc.href ? `<p><a class="btn btn--ghost" href="${esc(doc.href)}">Full profile</a></p>` : ""}
+    </div>
+  </div>
+</section>`).join("")}
+${bookBlock(h)}`;
+}
+
+// ===========================================================================
 // Contacts
 // ===========================================================================
 function contacts(d, h) {
@@ -860,6 +904,7 @@ export const BESPOKE = {
   "thank-you": thankYou,
   "special-offers": specialOffers,
   "patient-resources": patientResources,
+  "our-doctors": ourDoctors,
   "privacy-policy": privacyPolicy,
 };
 
