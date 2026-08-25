@@ -2,10 +2,15 @@
 //
 //   node weigh.mjs [--top 12]
 //
-// A phone does not fetch the `src` - it picks from `srcset`. So this reports two
-// numbers per page: what a wide desktop pulls, and what a 390px phone at DPR 2
-// pulls (~780px of image). The second is the one that matters in a waiting room,
-// and neither is visible in `du -sh dist`: a 28MB folder can serve a 150KB page.
+// Two things make a naive byte count wrong here, and both flatter or damn the
+// wrong pages:
+//   1. A phone does not fetch the `src` - it picks from `srcset`. So every page
+//      is measured twice: what a wide desktop pulls, and what a 390px phone at
+//      DPR 2 pulls (~780px of image).
+//   2. Images below the fold are loading="lazy" and are NOT fetched on load. A
+//      44-image product grid costs almost nothing until you scroll.
+// So the headline number is ON LOAD (eager images only) and the second is the
+// full scroll. Neither is `du -sh dist`: a 28MB folder can serve a 60KB page.
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -22,7 +27,9 @@ const size = (f) => fs.statSync(f).size;
 const kb = (b) => (b / 1024).toFixed(0) + " KB";
 const mb = (b) => (b / 1048576).toFixed(2) + " MB";
 
-// Which file each <img> resolves to at desktop and at phone width.
+// Which file each <img> resolves to at desktop and at phone width, and whether
+// the browser fetches it before the visitor scrolls.
+const isEager = (tag) => !/loading="lazy"/.test(tag);
 const pick = (tag) => {
   const src = (tag.match(/src="(\/[^"]+)"/) || [])[1];
   const srcset = (tag.match(/srcset="([^"]+)"/) || [])[1];
@@ -45,11 +52,12 @@ const rows = [];
 for (const p of pages) {
   const html = fs.readFileSync(p, "utf8");
   const tags = html.match(/<img[^>]*>/g) || [];
-  const desktopSet = new Set(), phoneSet = new Set();
+  const desktopSet = new Set(), phoneSet = new Set(), eagerSet = new Set();
   for (const t of tags) {
     const { desktop, phone } = pick(t);
     if (desktop?.startsWith("/")) desktopSet.add(desktop);
     if (phone?.startsWith("/")) phoneSet.add(phone);
+    if (phone?.startsWith("/") && isEager(t)) eagerSet.add(phone);
   }
   const weigh = (set) => {
     let bytes = size(p), worst = null;
@@ -62,29 +70,35 @@ for (const p of pages) {
     }
     return { bytes, worst };
   };
-  const d = weigh(desktopSet), ph = weigh(phoneSet);
+  const d = weigh(desktopSet), ph = weigh(phoneSet), eg = weigh(eagerSet);
   const route = "/" + path.relative(DIST, path.dirname(p)).split(path.sep).join("/");
   rows.push({
     route: route === "/." ? "/" : route + "/",
-    bytes: d.bytes, phoneBytes: ph.bytes, images: desktopSet.size, heaviest: d.worst,
+    bytes: d.bytes, phoneBytes: ph.bytes, onLoadBytes: eg.bytes,
+    images: desktopSet.size, eagerImages: eagerSet.size, heaviest: d.worst,
   });
 }
 
-rows.sort((a, b) => b.bytes - a.bytes);
-console.log("Heaviest pages - desktop / phone (HTML + the images it actually fetches):");
+rows.sort((a, b) => b.onLoadBytes - a.onLoadBytes);
+console.log("Heaviest pages, by what a PHONE fetches ON LOAD (lazy images excluded):");
+console.log("  on load  / full scroll /  desktop   imgs (eager)  route");
 for (const r of rows.slice(0, TOP)) {
-  const saved = r.bytes > 0 ? Math.round((1 - r.phoneBytes / r.bytes) * 100) : 0;
-  console.log(`  ${mb(r.bytes).padStart(8)} / ${mb(r.phoneBytes).padStart(8)}  ${String(saved).padStart(3)}% lighter  ${String(r.images).padStart(3)} img  ${r.route}`);
+  console.log(`  ${mb(r.onLoadBytes).padStart(8)} / ${mb(r.phoneBytes).padStart(8)} / ${mb(r.bytes).padStart(8)}   ${String(r.images).padStart(3)} (${r.eagerImages})  ${r.route}`);
   if (r.heaviest && r.heaviest[1] > 300 * 1024) {
     console.log(`             heaviest single file on desktop: ${kb(r.heaviest[1])}  ${r.heaviest[0]}`);
   }
 }
 
-const total = rows.reduce((a, r) => a + r.bytes, 0);
-const totalPhone = rows.reduce((a, r) => a + r.phoneBytes, 0);
-const median = rows[Math.floor(rows.length / 2)];
-console.log(`\n  median page ${kb(median.bytes)} desktop / ${kb(median.phoneBytes)} phone`);
-console.log(`  mean ${kb(total / rows.length)} desktop / ${kb(totalPhone / rows.length)} phone`);
+// Each median is taken over its own column. Reading one row's other value as
+// "the median full scroll" is how you end up reporting 842 KB against a 162 KB
+// mean and believing it.
+const medianOf = (k) => {
+  const v = rows.map((r) => r[k]).sort((a, b) => a - b);
+  return v[Math.floor(v.length / 2)];
+};
+const mean = (k) => rows.reduce((a, r) => a + r[k], 0) / rows.length;
+console.log(`\n  median page ${kb(medianOf("onLoadBytes"))} on load / ${kb(medianOf("phoneBytes"))} full scroll`);
+console.log(`  mean ${kb(mean("onLoadBytes"))} on load / ${kb(mean("phoneBytes"))} full scroll / ${kb(mean("bytes"))} desktop`);
 console.log(`  dist ${mb(all.reduce((a, f) => a + size(f), 0))} on disk (every derivative, not per visit)`);
 
 // Files worth attention wherever they are used.

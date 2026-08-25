@@ -35,7 +35,7 @@ practice's photography, which the repo rules keep out of git.
 | Third-party code | none, except Google Fonts, the practice's Google Maps pin and its own booking/form embeds |
 | JavaScript | one 2KB file for the mobile menu and lazy map. The site is fully usable with JS off |
 | Out of scope | ~180 blog posts, `/category/*`, the blog index |
-| Page weight | median **146 KB** desktop, **92 KB** on a phone; homepage 0.92 MB / 0.78 MB |
+| Page weight | median **50 KB** on load, 102 KB full scroll; homepage 0.15 MB on load |
 | Gates | `audit.mjs` 0 blockers 0 errors, `responsive.mjs` 71 pages x 3 widths 0 problems |
 
 ## How it works
