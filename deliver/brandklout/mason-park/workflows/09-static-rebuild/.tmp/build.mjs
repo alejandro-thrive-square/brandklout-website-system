@@ -158,11 +158,11 @@ const responsive = (url) => {
 
 // One <img> tag with the whole responsive set. `sizes` is the CSS width the
 // image will occupy - get it wrong and the browser picks a needlessly big file.
-const img = (url, alt, { sizes = "(max-width: 999px) 100vw, 700px", cls = "", eager = false, w, h } = {}) => {
+const img = (url, alt, { sizes = "(max-width: 999px) 100vw, 700px", cls = "", eager = false, decorative = false, w, h } = {}) => {
   const r = responsive(url);
   if (!r.src) return "";
   return `<img src="${esc(r.src)}"${r.srcset ? ` srcset="${esc(r.srcset)}" sizes="${esc(sizes)}"` : ""}` +
-    `${cls ? ` class="${esc(cls)}"` : ""} alt="${esc(alt || "")}"` +
+    `${cls ? ` class="${esc(cls)}"` : ""} alt="${esc(alt || "")}"${decorative ? ' aria-hidden="true"' : ""}` +
     `${w ? ` width="${w}"` : ""}${h ? ` height="${h}"` : ""}` +
     `${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
 };
@@ -230,6 +230,22 @@ const rewrite = (html) => {
   out = out.replace(/<p>\s*(?:Learn|Read|Find out|Discover|Click|See)\b[^<>]{0,90}<\/p>/gi, "");
   out = out.replace(/<table/gi, '<div class="overflow-scroll-x"><table').replace(/<\/table>/gi, "</table></div>");
   return out;
+};
+
+// Heading levels in the imported markup jump around - h2 straight to h5 is
+// common - because they were chosen for size, not structure. A screen reader
+// navigates by that outline, so close the gaps: each heading may be at most one
+// level deeper than the one before it, and never an h1 (the page title owns
+// that). Headings do not nest, so non-greedy pairing is safe.
+const normaliseHeadings = (html) => {
+  let prev = 1;   // the page <h1> lives in the hero, above this markup
+  return String(html ?? "").replace(
+    /<h([1-6])([^>]*)>([\s\S]*?)<\/h\1>/gi,
+    (whole, lvl, attrs, inner) => {
+      const target = Math.max(2, Math.min(Number(lvl), prev + 1));
+      prev = target;
+      return `<h${target}${attrs}>${inner}</h${target}>`;
+    });
 };
 
 // Page bodies from WordPress often open a section with their own <h1>, which
@@ -350,7 +366,7 @@ const titleOf = (d) => {
 const labelFor = (slug) => titleOf(read(slug));
 
 const P = makePresentation({
-  esc, img, link, rewrite, demoteH1, fixRunOn, softenCaps, stripBoilerplate,
+  esc, img, link, rewrite, demoteH1, normaliseHeadings, fixRunOn, softenCaps, stripBoilerplate,
   titleOf, labelFor, routeOf, NAV, FOOTER_LINKS, PRACTICE, SERVICE_SLUGS,
   NAV_LABELS, SITE_URL,
 });
@@ -364,7 +380,7 @@ fs.mkdirSync(DIST, { recursive: true });
 // it rather than writing markup. `breadcrumbs` is kept as an alias so existing
 // templates keep working while they are ported.
 const helpers = {
-  esc, asset, img, responsive, link, rewrite, demoteH1, stripBoilerplate,
+  esc, asset, img, responsive, link, rewrite, demoteH1, normaliseHeadings, stripBoilerplate,
   titleOf, softenCaps, fixRunOn, routeOf, read, labelFor,
   PRACTICE, SITE_URL, C, sidebarCta, renderEmbed,
   breadcrumbs: C.breadcrumb,

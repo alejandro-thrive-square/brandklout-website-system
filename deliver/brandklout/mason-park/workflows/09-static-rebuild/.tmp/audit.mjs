@@ -10,6 +10,7 @@
 //   5. missing <title> / meta description, and duplicates of either
 //   6. pages nothing links to
 //   7. any surviving reference to the compromised WordPress host or the malware
+//   8. accessibility: alt text, heading order, link and control names
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -86,6 +87,50 @@ for (const file of pages) {
     if (!descs.has(desc)) descs.set(desc, []);
     descs.get(desc).push(route);
   }
+
+  // ------------------------------------------------------------ accessibility
+  // A dental practice's site is a place people book healthcare. These are the
+  // faults that actually stop a screen-reader user completing that.
+  for (const tag of html.match(/<img[^>]*>/g) || []) {
+    const alt = tag.match(/\salt="([^"]*)"/);
+    const decorative = /aria-hidden="true"/.test(tag);
+    if (!alt) flag("ERROR", route, `<img> with no alt attribute: ${(tag.match(/src="([^"]+)"/) || [, "?"])[1].slice(-60)}`);
+    else if (!alt[1].trim() && !decorative) {
+      flag("WARN", route, `<img> with empty alt and no aria-hidden: ${(tag.match(/src="([^"]+)"/) || [, "?"])[1].slice(-60)}`);
+    }
+  }
+
+  // Heading order: skipping a level (h2 straight to h4) breaks the outline a
+  // screen reader navigates by.
+  const levels = [...html.matchAll(/<h([1-6])[^>]*>/g)].map((m) => Number(m[1]));
+  let prev = 0;
+  for (const lv of levels) {
+    if (prev && lv > prev + 1) { flag("WARN", route, `heading order skips h${prev} -> h${lv}`); break; }
+    prev = lv;
+  }
+
+  // A link or control with no text and no label is unreachable by name.
+  for (const m of html.matchAll(/<a\b([^>]*)>([\s\S]*?)<\/a>/g)) {
+    const [, attrs, inner] = m;
+    const text = inner.replace(/<[^>]+>/g, "").trim();
+    const labelled = /aria-label="[^"]+"/.test(attrs) || /aria-labelledby="/.test(attrs);
+    const hasImgAlt = /<img[^>]+alt="[^"]+"/.test(inner);
+    if (!text && !labelled && !hasImgAlt) {
+      flag("ERROR", route, `link with no accessible name: ${(attrs.match(/href="([^"]+)"/) || [, "?"])[1].slice(0, 60)}`);
+    }
+  }
+  for (const m of html.matchAll(/<button\b([^>]*)>([\s\S]*?)<\/button>/g)) {
+    const [, attrs, inner] = m;
+    const text = inner.replace(/<[^>]+>/g, "").trim();
+    if (!text && !/aria-label="[^"]+"/.test(attrs) && !/aria-hidden="true"/.test(attrs)) {
+      flag("ERROR", route, "button with no accessible name");
+    }
+  }
+  // An iframe with no title is an unlabelled region.
+  for (const tag of html.match(/<iframe[^>]*>/g) || []) {
+    if (!/\stitle="[^"]+"/.test(tag)) flag("WARN", route, "<iframe> with no title");
+  }
+  if (!/<html[^>]+lang="/.test(html)) flag("ERROR", route, "<html> has no lang attribute");
 
   for (const m of html.matchAll(/class="([^"]+)"/g)) {
     for (const cls of m[1].trim().split(/\s+/)) {

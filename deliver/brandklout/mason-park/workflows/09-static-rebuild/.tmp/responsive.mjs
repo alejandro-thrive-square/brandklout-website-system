@@ -92,7 +92,11 @@ const evaluate = async (expr) =>
 // so one overflowing table does not produce forty findings.
 const PROBE = `(() => {
   const vw = document.documentElement.clientWidth;
-  const ready = document.readyState === "complete"
+  // NOT readyState === "complete": that also waits on the Google Fonts request,
+  // which in a headless run can stall past any sane budget and made a different
+  // page "never finish loading" on every run. Layout is settled once the DOM is
+  // parsed, our stylesheet has applied and the eager images have their boxes.
+  const ready = document.readyState !== "loading"
     && getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() === "#00bde0"
     // Only images the page actually intends to load now. Lazy ones below the
     // fold never complete without scrolling, so requiring them here would hang
@@ -137,7 +141,7 @@ for (const width of WIDTHS) {
     // A separate "is it ready" call is not enough: the previous page is still
     // live for a moment after Page.navigate and answers "yes" on its behalf.
     let r = null;
-    for (let attempt = 0; attempt < 40; attempt++) {
+    for (let attempt = 0; attempt < 80; attempt++) {
       r = await evaluate(PROBE);
       if (r?.ready) break;
       await wait(75);

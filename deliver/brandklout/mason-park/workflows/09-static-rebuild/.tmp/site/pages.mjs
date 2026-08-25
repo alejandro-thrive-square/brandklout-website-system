@@ -249,8 +249,9 @@ function ourServices(d, h) {
 
   return [
     openPage(h, "Our Services", "Family, cosmetic, restorative and pediatric dentistry, all under one roof in Katy, Texas."),
-    C.section({ name: "service-tiles", inner:
-      C.grid(4, SERVICE_TILES.map(([icon, label, href]) => C.serviceCard({ icon: iconSrc(icon), label, href }))) }),
+    C.section({ name: "service-tiles", inner: `
+      ${C.sectionHeading({ title: "What we treat", centered: true })}
+      ${C.grid(4, SERVICE_TILES.map(([icon, label, href]) => C.serviceCard({ icon: iconSrc(icon), label, href })))}` }),
     C.section({ name: "service-index", bg: "paper", inner: `
       ${C.sectionHeading({ title: "Every service, A to Z", text: "Each treatment has its own page explaining what it is, who it suits and what to expect." })}
       ${C.grid(3, [
@@ -337,7 +338,9 @@ function ourTeam(d, h) {
 
   return [
     openPage(h, "Meet Our Team", "The dentists and the support team who look after Katy families every day."),
-    C.section({ name: "team", inner: C.grid(3, cards) }),
+    C.section({ name: "team", inner: `
+      ${C.sectionHeading({ title: "Our dentists", centered: true })}
+      ${C.grid(3, cards)}` }),
     C.section({ name: "behind-the-chair", bg: "paper", container: "medium", inner: `
       ${C.heading("Behind the chair")}
       ${C.spacer("small")}
@@ -400,7 +403,7 @@ function contacts(d, h) {
 
   return [
     openPage(h, "Contact Mason Park Dental of Katy", d.description || ""),
-    C.section({ name: "contact", inner: C.split(
+    C.section({ name: "contact", inner: C.sectionHeading({ title: "How to reach us" }) + C.split(
       `${body.map((p) => C.paragraph(p.text)).join(C.spacer("small"))}
        ${C.spacer("medium")}
        ${C.notice(`<p>${h.esc(LOCATION_NOTE)}</p>`)}`,
@@ -459,6 +462,7 @@ function financing(d, h) {
   return [
     openPage(h, "Financing and Insurance", "Ways to pay for treatment at Mason Park Dental of Katy."),
     C.section({ name: "options", inner: `
+      ${C.sectionHeading({ title: "Ways to pay" })}
       ${C.grid(3, [
         C.card({ title: "Insurance", text: "We process a variety of insurance plans and offer multiple payment options. Bring your card to your first visit and we will check your benefits with you before treatment starts." }),
         C.card({ title: "Cherry patient financing", text: "Cherry offers monthly payment plans with 0% APR options and no hard credit check, so a larger treatment plan can be spread out. Ask the front desk to start an application." }),
@@ -485,6 +489,7 @@ function virtualConsultation(d, h) {
   return [
     openPage(h, "Virtual Consultation", "Skip taking time off work for an in-office consult. Get a free virtual consult in three easy steps."),
     C.section({ name: "steps", inner: `
+      ${C.sectionHeading({ title: "How it works" })}
       ${C.stepList(steps)}
       ${copy.length ? C.spacer("xlarge") + copy.map((p) => C.paragraph(p.text)).join(C.spacer("small")) : ""}` }),
     C.section({ name: "consult-form", bg: "paper", inner: `

@@ -39,7 +39,7 @@ const FOOTER_MENU = [
 
 export function makePresentation(ctx) {
   const {
-    esc, img, link, rewrite, demoteH1, fixRunOn, softenCaps, stripBoilerplate,
+    esc, img, link, rewrite, demoteH1, normaliseHeadings, fixRunOn, softenCaps, stripBoilerplate,
     titleOf, labelFor, routeOf, NAV, FOOTER_LINKS, PRACTICE, SERVICE_SLUGS,
     NAV_LABELS, SITE_URL,
   } = ctx;
@@ -147,7 +147,7 @@ ${C.badgeStrip(ACCREDITATIONS)}
 
   const sidebarCta = (extra = "") => `<aside>
   <div class="sidebar_component">
-    <h3 class="heading-style-h4">Book a visit</h3>
+    <h2 class="heading-style-h4">Book a visit</h2>
     <p class="text-size-small">New and existing patients welcome. Call the practice or request a time online.</p>
     ${C.button({ label: "Request an appointment", href: BOOKING, external: true })}
     <p><a class="phone-link_component" href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a></p>
@@ -159,7 +159,7 @@ ${C.badgeStrip(ACCREDITATIONS)}
     const pool = SERVICE_SLUGS.filter((s) => s !== current && NAV_LABELS.has(routeOf(s)));
     const start = Math.max(0, pool.indexOf(current));
     const items = [...pool.slice(start), ...pool.slice(0, start)].slice(0, 8);
-    return `<h3 class="heading-style-h4">More services</h3>
+    return `<h2 class="heading-style-h4">More services</h2>
     <ul class="sidebar_list">${items.map((s) => `<li><a href="${routeOf(s)}">${esc(labelFor(s))}</a></li>`).join("")}</ul>
     <p><a href="/our-services/">All services</a></p>`;
   };
@@ -181,7 +181,7 @@ ${C.badgeStrip(ACCREDITATIONS)}
 ${C.breadcrumb(trail)}
 ${C.section({ name: "article", padding: "small", inner: `
   <div class="article_layout">
-    <article>${(() => { const body = fixRunOn(demoteH1(rewrite(d.html)));
+    <article>${(() => { const body = normaliseHeadings(fixRunOn(demoteH1(rewrite(d.html))));
       return C.richText(body, { wide: body.includes("<table") }); })()}</article>
     ${sidebarCta(isService ? relatedServices(d.slug) : "")}
   </div>` })}`;
@@ -254,11 +254,11 @@ ${C.section({ name: "article", padding: "small", inner: `
     const body = banded
       ? chunks.map((c, i) => C.section({
           name: "content", bg: i % 2 === 1 ? "paper" : "",
-          inner: C.richText(c.html, { wide: c.html.includes("<table") }),
+          inner: C.richText(normaliseHeadings(c.html), { wide: c.html.includes("<table") }),
         })).join("\n")
       : (() => {
           const all = chunks.map((c) => c.html).join("");
-          return C.section({ name: "content", inner: C.richText(all, { wide: all.includes("<table") }) });
+          return C.section({ name: "content", inner: C.richText(normaliseHeadings(all), { wide: all.includes("<table") }) });
         })();
 
     const hero = heroImage

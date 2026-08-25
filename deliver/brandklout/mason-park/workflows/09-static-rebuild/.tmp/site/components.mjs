@@ -121,7 +121,7 @@ export function makeComponents(h) {
   const serviceCard = ({ icon, label, href }) => {
     const to = link(href) || href;
     return `<a class="card_component is-link" href="${esc(to)}">
-    ${img(icon, "", { sizes: "54px", cls: "service-card_icon" })}
+    ${img(icon, "", { sizes: "54px", cls: "service-card_icon", decorative: true })}
     <h3 class="heading-style-h4">${esc(label)}</h3>
   </a>`;
   };
