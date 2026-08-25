@@ -150,7 +150,7 @@ ${C.badgeStrip(ACCREDITATIONS)}
     <h3 class="heading-style-h4">Book a visit</h3>
     <p class="text-size-small">New and existing patients welcome. Call the practice or request a time online.</p>
     ${C.button({ label: "Request an appointment", href: BOOKING, external: true })}
-    <p><a class="navbar_phone" href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a></p>
+    <p><a class="phone-link_component" href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a></p>
     ${extra}
   </div>
 </aside>`;

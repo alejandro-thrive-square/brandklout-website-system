@@ -259,8 +259,11 @@ button { font: inherit; }
 .navbar_item.has-dropdown > .navbar_link::after { content: "\203A"; display: inline-block; margin-left: .35rem; transform: rotate(90deg); font-size: .9em; }
 .navbar_dropdown-list .navbar_item.has-dropdown > .navbar_link::after { transform: none; float: right; }
 .navbar_actions { display: flex; align-items: center; gap: 1rem; flex: 0 0 auto; }
-.navbar_phone { font-family: var(--font-display); font-weight: 700; color: var(--ink); text-decoration: none; font-size: .95rem; }
-.navbar_phone:hover { color: var(--accent); }
+.navbar_phone, .phone-link_component {
+  font-family: var(--font-display); font-weight: 700; color: var(--ink);
+  text-decoration: none; font-size: .95rem;
+}
+.navbar_phone:hover, .phone-link_component:hover { color: var(--accent); }
 .navbar_toggle { display: none; background: none; border: 0; padding: .5rem; cursor: pointer; color: var(--ink); }
 .navbar_toggle svg { width: 26px; height: 26px; }
 .navbar_scrim { display: none; }
