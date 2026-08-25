@@ -119,6 +119,21 @@ var blocksOf = function (root) {
       // Elementor top-level sections are the page's real seams — number them so
       // the rebuild can keep the original section order and grouping.
       if (c.classList && c.classList.contains("elementor-top-section")) section++;
+      // Elementor toggle/accordion: the QUESTION lives in an <a class="…-title">,
+      // which the generic walk below would skip entirely (it is not a button and
+      // not a heading). Without this branch every FAQ page loses its questions
+      // and keeps only a wall of answers.
+      if (c.classList && (c.classList.contains("elementor-toggle-item") || c.classList.contains("elementor-accordion-item"))) {
+        var qEl = c.querySelector(".elementor-toggle-title, .elementor-accordion-title, .elementor-tab-title");
+        var aEl = c.querySelector(".elementor-tab-content");
+        var q = clean(qEl && qEl.textContent).replace(/^\d+\.\s*/, "");
+        if (q) {
+          var holder = document.createElement("div");
+          if (aEl) holder.appendChild(aEl.cloneNode(true));
+          push({ type: "faq", question: q, html: tidy(holder), text: q });
+        }
+        continue;
+      }
       if (/^H[1-6]$/.test(tag)) {
         var t = clean(c.textContent);
         if (t) push({ type: "heading", level: Number(tag[1]), text: t });

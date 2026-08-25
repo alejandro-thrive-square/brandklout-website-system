@@ -372,3 +372,24 @@ hr { border: 0; border-top: 1px solid var(--line-soft); margin: 2.5rem 0; }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
 }
+
+/* Offer cards: the price is the headline, so it leads the card rather than
+   sitting inside the body copy where it reads as ordinary text. */
+.offer {
+  background: #fff; border: 1px solid var(--line-soft); border-radius: var(--radius);
+  padding: 1.75rem; height: 100%; display: flex; flex-direction: column;
+}
+.offer__price {
+  font-family: var(--font-display); font-size: clamp(2rem, 1.4rem + 2vw, 2.75rem);
+  font-weight: 700; color: var(--accent-dk); line-height: 1; margin: 0 0 .5rem;
+  letter-spacing: -.03em;
+}
+.offer h3 { font-size: 1.15rem; margin-bottom: .75rem; }
+.offer p:last-child { margin-bottom: 0; }
+.offer p { font-size: .97rem; }
+
+/* An FAQ list inside prose: give the group an edge so it reads as one control,
+   and let the questions sit wider than the 74ch measure of running text. */
+.prose .faq { margin-inline: 0; }
+.prose .faq:first-of-type { border-top: 1px solid var(--line-soft); margin-top: 1.5rem; }
+.prose > h2 + .faq, .prose > h3 + .faq { margin-top: 1rem; }

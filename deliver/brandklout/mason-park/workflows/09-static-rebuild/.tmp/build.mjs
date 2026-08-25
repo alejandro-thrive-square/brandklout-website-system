@@ -477,12 +477,21 @@ ${breadcrumbs(trail)}
 const renderBlocks = (d, route) => {
   const title = titleOf(d);
   const blocks = stripBoilerplate(d.blocks || []).filter((b) => !(b.type === "heading" && b.level === 1 && b.text === title));
-  let out = "";
-  let open = false;
+
+  // Elementor sections are layout seams, not content seams. On a page with only
+  // a few of them, banding them alternately reads as deliberate design. On a
+  // long one - an FAQ list, the dental dictionary - it turns into a zebra of
+  // three-line stripes, so those render as one continuous column instead and
+  // let the headings carry the rhythm.
+  const sectionCount = new Set(blocks.map((b) => b.section)).size;
+  const banded = sectionCount <= 3;
+
+  let out = banded ? "" : `<section class="section"><div class="shell"><div class="prose">`;
+  let open = !banded;
   let lastSection = null;
   for (const b of blocks) {
-    if (b.section !== lastSection) {
-      if (open) out += "</div></section>\n";
+    if (banded && b.section !== lastSection) {
+      if (open) out += "</div></div></section>\n";
       out += `<section class="section${(b.section % 2 === 0) ? " section--paper" : ""}"><div class="shell"><div class="prose">`;
       open = true;
       lastSection = b.section;
@@ -495,6 +504,9 @@ const renderBlocks = (d, route) => {
       case "image":   out += `<img src="${esc(asset(b.src))}" alt="${esc(b.alt)}" loading="lazy" decoding="async">`; break;
       case "cta":     { const to = link(b.href); if (to) out += `<p><a class="btn" href="${esc(to)}"${/^https?:/.test(to) ? ' target="_blank" rel="noopener"' : ""}>${esc(b.text)}</a></p>`; break; }
       case "table":   out += rewrite(b.html); break;
+      // Recovered Elementor toggle/accordion item. <details> keeps it usable
+      // with no JavaScript at all, and open-by-default is wrong for a long list.
+      case "faq":     out += `<details class="faq"><summary>${esc(b.question)}</summary><div class="faq__body">${rewrite(b.html)}</div></details>`; break;
       case "embed":   out += renderEmbed(b.src); break;
       default: break;
     }

@@ -641,6 +641,112 @@ function thankYou(d, h) {
 }
 
 // ===========================================================================
+// Special offers - the page that carries the practice's actual prices, so every
+// figure here is lifted verbatim from the live page rather than restated. The
+// short headline for each offer and its longer explanation live in two separate
+// Elementor sections upstream; they are paired back up by price.
+// ===========================================================================
+function specialOffers(d, h) {
+  const { esc, renderEmbed } = h;
+  const intro = paras(d, 3)[0];
+  const blocks4 = inSection(d, 4);
+  // The long explanation of each offer sits in an Elementor toggle, so it now
+  // arrives as a `faq` block rather than a bare paragraph. Read both.
+  const stripTags = (x) => String(x || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
+  const faqs = (d.blocks || []).filter((b) => b.type === "faq");
+  const details = [...paras(d, 5).map((p) => p.text), ...faqs.map((f) => stripTags(f.html))];
+
+  // Pair "$189 NEW PATIENT SPECIAL" with the paragraph in s5 that quotes $189.
+  const newPatient = [];
+  for (let i = 0; i < blocks4.length; i++) {
+    const b = blocks4[i];
+    if (b.type !== "heading") continue;
+    const price = (b.text.match(/\$[\d,]+/) || [])[0] || "";
+    const label = b.text.replace(/^\$[\d,]+\s*/, "");
+    const short = blocks4[i + 1]?.type === "para" ? blocks4[i + 1].text : "";
+    const detail = price ? details.find((t) => t.includes(price) && t !== short) : "";
+    newPatient.push({ price, label, short, detail });
+  }
+
+  // The two treatment offers and the free second opinion, each its own section.
+  const treatment = [6, 7].flatMap((n) => {
+    const items = inSection(d, n);
+    const out = [];
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type !== "heading") continue;
+      const body = [];
+      for (let j = i + 1; j < items.length && items[j].type === "para"; j++) body.push(items[j].text);
+      out.push({ title: items[i].text, body });
+    }
+    return out;
+  });
+
+  const card = (o) => `
+      <div class="offer">
+        ${o.price ? `<p class="offer__price">${esc(o.price)}</p>` : ""}
+        <h3>${esc(softenLabel(o.label))}</h3>
+        ${o.short ? `<p><strong>${esc(o.short)}</strong></p>` : ""}
+        ${o.detail ? `<p>${esc(o.detail)}</p>` : ""}
+      </div>`;
+
+  return `${pageHero(h, "Special Offers", d.description || "")}
+<section class="section">
+  <div class="shell">
+    ${intro ? `<div class="section__head"><p>${esc(intro.text.replace(/\.(?=[A-Z])/, ". "))}</p></div>` : ""}
+    <h2>New patient offers</h2>
+    <div class="grid grid--3" style="margin-top:1.75rem">${newPatient.map(card).join("")}</div>
+  </div>
+</section>
+<section class="section section--paper">
+  <div class="shell">
+    <h2>Treatment offers</h2>
+    <div class="grid grid--3" style="margin-top:1.75rem">
+      ${treatment.map((t) => {
+        // "INVISALIGN SPECIAL OFFER: $1000 OFF" -> pill "$1000 off", title without it
+        const off = (t.title.match(/\$[\d,]+\s*OFF/i) || [])[0];
+        const title = softenLabel(t.title.replace(/[:,]?\s*\$[\d,]+\s*OFF/i, "").replace(/[:\s]+$/, ""));
+        return `
+      <div class="offer">
+        ${off ? `<p class="offer__price">${esc(off.replace(/OFF/i, "off"))}</p>` : ""}
+        <h3>${esc(title)}</h3>
+        ${t.body.map((p) => `<p>${esc(p)}</p>`).join("")}
+      </div>`;
+      }).join("")}
+      <div class="offer">
+        <h3>Free Invisalign consultation</h3>
+        <p>${esc(details.find((t) => /complimentary Invisalign consultation/i.test(t)) || "")}</p>
+      </div>
+    </div>
+    <div class="notice" style="margin-top:2rem">
+      <p>Offers are for new patients unless stated otherwise, cannot be combined with insurance,
+      and do not apply in cases of periodontal disease. Ask the front desk which offer applies to
+      your treatment plan before you book.</p>
+    </div>
+  </div>
+</section>
+<section class="section">
+  <div class="shell split">
+    <div>
+      <h2>Claim an offer</h2>
+      <p>Mention the offer when you book, or send us a message and the front desk will apply it.</p>
+      <p><a class="btn" href="${BOOK}" target="_blank" rel="noopener">Schedule online</a>
+         <a class="btn btn--ghost" href="${h.PRACTICE.phoneHref}">Call ${esc(h.PRACTICE.phone)}</a></p>
+      <p class="card__meta">${esc(LOCATION_NOTE)}</p>
+    </div>
+    <div>${renderEmbed(FORMS.offers)}</div>
+  </div>
+</section>`;
+}
+
+// Offer headings are shouted upstream; sentence-case them but keep the prices
+// and the trademarked product names intact.
+const softenLabel = (s) =>
+  s.replace(/[\w®$,]+/g, (w) =>
+    /^\$|^(TX|FAQ|AI|DMD)$/.test(w) ? w :
+    /^INVISALIGN$/i.test(w) ? "Invisalign" :
+    w[0] + w.slice(1).toLowerCase());
+
+// ===========================================================================
 // Privacy policy - 403 on the live site, and it is linked from the footer of
 // every page. This is a factual notice about how the REBUILT static site
 // behaves. It is NOT a substitute for the practice's HIPAA notice of privacy
@@ -688,6 +794,7 @@ export const BESPOKE = {
   "virtual-consultation": virtualConsultation,
   "before-after": beforeAfter,
   "thank-you": thankYou,
+  "special-offers": specialOffers,
   "privacy-policy": privacyPolicy,
 };
 
