@@ -145,11 +145,24 @@ var blocksOf = function (root) {
         continue;
       }
       if (tag === "UL" || tag === "OL") {
+        // An <li> that contains a nested list must not absorb it: textContent
+        // would jam every descendant together into one unreadable item.
+        // Take the li's OWN text, then flatten the nested items after it.
         var items = [];
-        for (var li = 0; li < c.children.length; li++) {
-          var v = clean(c.children[li].textContent);
-          if (v) items.push(v);
-        }
+        var collect = function (list) {
+          for (var li = 0; li < list.children.length; li++) {
+            var item = list.children[li];
+            if (item.tagName !== "LI") continue;
+            var nested = item.querySelectorAll(":scope > ul, :scope > ol");
+            var own = item.cloneNode(true);
+            var strip = own.querySelectorAll("ul, ol");
+            for (var s = 0; s < strip.length; s++) strip[s].remove();
+            var v = clean(own.textContent);
+            if (v) items.push(v);
+            for (var n = 0; n < nested.length; n++) collect(nested[n]);
+          }
+        };
+        collect(c);
         if (items.length) push({ type: "list", ordered: tag === "OL", items: items });
         continue;
       }

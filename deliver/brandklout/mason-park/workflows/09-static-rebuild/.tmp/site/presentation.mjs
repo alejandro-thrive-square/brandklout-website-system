@@ -240,6 +240,17 @@ ${C.section({ name: "article", padding: "small", inner: `
     }
     flush();
 
+    // A chunk holding nothing but an eyebrow renders as a band of empty colour.
+    // Fold it forward into the chunk that it introduces.
+    const isEyebrowOnly = (html) => /^\s*<p class="text-style-eyebrow">[^<]*<\/p>\s*$/.test(html);
+    for (let i = chunks.length - 2; i >= 0; i--) {
+      if (isEyebrowOnly(chunks[i].html)) {
+        chunks[i + 1].html = chunks[i].html + chunks[i + 1].html;
+        chunks.splice(i, 1);
+      }
+    }
+    if (chunks.length && isEyebrowOnly(chunks[chunks.length - 1].html)) chunks.pop();
+
     const body = banded
       ? chunks.map((c, i) => C.section({
           name: "content", bg: i % 2 === 1 ? "paper" : "",

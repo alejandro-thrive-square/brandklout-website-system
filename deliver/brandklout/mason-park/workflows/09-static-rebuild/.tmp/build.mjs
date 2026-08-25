@@ -37,7 +37,10 @@ const DEFAULT_DESC = (title) =>
 // Elementor flattened some lists into a single paragraph, leaving sentences run
 // together with no space after the full stop. Requiring two lowercase letters
 // before the stop keeps initials ("U.S.") and decimals intact.
-const fixRunOn = (s) => String(s ?? "").replace(/([a-z]{2})\.(?=[A-Z])/g, "$1. ");
+const fixRunOn = (s) => String(s ?? "")
+  .replace(/([a-z]{2})\.(?=[A-Z])/g, "$1. ")
+  // a stray letter in their own copy on /town-resource/
+  .replace(/\bBMason Park\b/g, "Mason Park");
 
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const read = (slug) => {
