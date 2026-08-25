@@ -96,8 +96,8 @@ function home(d, h) {
   return `
 <section class="hero section--tight">
   <div class="shell hero__media">
-    <img src="${esc(asset(hero?.src || "/wp-content/uploads/2023/11/g7-1024x683.jpg"))}"
-         alt="The team at Mason Park Dental of Katy" fetchpriority="high" width="1024" height="683">
+    ${h.img(hero?.src || "/wp-content/uploads/2023/11/g7-1024x683.jpg", "The team at Mason Park Dental of Katy",
+      { sizes: "(max-width: 1264px) 100vw, 1200px", eager: true, w: 1024, h: 683 })}
   </div>
 </section>
 
@@ -110,7 +110,7 @@ function home(d, h) {
       <p><a class="btn" href="/our-services/">Learn more</a>
          <a class="btn btn--ghost" href="${BOOK}" target="_blank" rel="noopener">Schedule online</a></p>
     </div>
-    ${introImg ? `<div><img src="${esc(asset(introImg.src))}" alt="A patient in consultation at Mason Park Dental of Katy" loading="lazy"></div>` : ""}
+    ${introImg ? `<div>${h.img(introImg.src, "A patient in consultation at Mason Park Dental of Katy", { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : ""}
   </div>
 </section>
 
@@ -145,7 +145,7 @@ function home(d, h) {
       ${doctorsParas.map((p) => `<p>${esc(p.text)}</p>`).join("\n      ")}
       <p><a class="btn" href="/our-team/">Meet our team</a></p>
     </div>
-    ${doctorsImg ? `<div><img src="${esc(asset(doctorsImg.src))}" alt="Two of the dentists at Mason Park Dental of Katy" loading="lazy"></div>` : ""}
+    ${doctorsImg ? `<div>${h.img(doctorsImg.src, "Two of the dentists at Mason Park Dental of Katy", { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : ""}
   </div>
 </section>
 
@@ -173,7 +173,7 @@ function home(d, h) {
       <p><a class="btn" href="/financing/">See financing options</a></p>
       <p class="card__meta">Applications are handled by Cherry. Ask the front desk which account your application should go through.</p>
     </div>
-    ${cherryArt ? `<div><img src="${esc(asset(cherryArt.src))}" alt="Two patients reviewing financing options on a tablet" style="box-shadow:none" loading="lazy"></div>` : ""}
+    ${cherryArt ? `<div style="box-shadow:none">${h.img(cherryArt.src, "Two patients reviewing financing options on a tablet", { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : ""}
   </div>
 </section>
 
@@ -186,7 +186,7 @@ function home(d, h) {
     <div class="grid grid--3">
       ${DOCTORS.map(([src, name, role, href]) => `
       <a class="doctor card--link" href="${esc(link(href) || href)}">
-        <img src="${esc(asset(src))}" alt="${esc(name)}" loading="lazy">
+        ${h.img(src, name, { sizes: "(max-width: 899px) 100vw, 360px" })}
         <h3>${esc(name)}</h3>
         <p>${esc(role)}</p>
       </a>`).join("")}
@@ -196,7 +196,7 @@ function home(d, h) {
 
 <section class="section section--paper">
   <div class="shell split split--flip">
-    ${flexImg ? `<div><img src="${esc(asset(flexImg.src))}" alt="A team member taking a call at the practice" loading="lazy"></div>` : ""}
+    ${flexImg ? `<div>${h.img(flexImg.src, "A team member taking a call at the practice", { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : ""}
     <div>
       <p class="eyebrow">Dentist in Katy, TX</p>
       <h2>${esc(heads(d, 13)[0] || "Flexible Scheduling and Emergency Care")}</h2>
@@ -376,7 +376,7 @@ function aboutUs(d, h) {
 ${bios.map((b, i) => `
 <section class="section${i % 2 === 0 ? " section--paper" : ""}">
   <div class="shell split${i % 2 === 1 ? " split--flip" : ""}">
-    ${b.img ? `<div><img src="${esc(asset(b.img.src))}" alt="${esc(b.name)}" loading="lazy"></div>` : "<div></div>"}
+    ${b.img ? `<div>${h.img(b.img.src, b.name, { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : "<div></div>"}
     <div>
       <p class="eyebrow">${esc(b.tagline)}</p>
       <h2>${esc(b.name)}</h2>
@@ -403,7 +403,7 @@ function ourTeam(d, h) {
       || (bio?.html || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 260);
     return `
       <a class="doctor card--link" href="${esc(href)}">
-        <img src="${esc(asset(src))}" alt="${esc(name)}" loading="lazy">
+        ${h.img(src, name, { sizes: "(max-width: 899px) 100vw, 360px" })}
         <h3>${esc(name)}</h3>
         <p>${esc(role)}</p>
         ${first ? `<p style="margin-top:.75rem;font-size:.95rem">${esc(first.slice(0, 190))}${first.length > 190 ? "…" : ""}</p>` : ""}
@@ -525,7 +525,7 @@ function ourDoctors(d, h) {
 ${doctors.map((doc, i) => `
 <section class="section${i % 2 === 1 ? " section--paper" : ""}">
   <div class="shell split${i % 2 === 1 ? " split--flip" : ""}">
-    ${doc.portrait ? `<div><img src="${esc(asset(doc.portrait))}" alt="${esc(doc.name)}" loading="lazy"></div>` : "<div></div>"}
+    ${doc.portrait ? `<div>${h.img(doc.portrait, doc.name, { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : "<div></div>"}
     <div>
       ${doc.role ? `<p class="eyebrow">${esc(doc.role)}</p>` : ""}
       <h2>${esc(doc.name)}</h2>

@@ -93,6 +93,76 @@ const assetFile = (webPath) => {
   return abs;
 };
 
+// ------------------------------------------------------------ responsive images
+// WordPress already generated derivatives beside every upload (g7-768x512.jpg
+// next to g7.jpg), and the crawl downloaded them. Serving one fixed size means a
+// phone pulls a 1536px photo to paint it 390px wide, so build a srcset from
+// whatever sizes exist. Only files whose width is in the filename are used -
+// the width is then known without decoding the image.
+const WIDTH_RE = /^(.*)-(\d{2,4})x(\d{2,4})(\.(?:jpe?g|png|webp))$/i;
+const MAX_SRCSET_WIDTH = 1600;   // beyond this is retina-on-desktop territory
+
+const stemOf = (base) => {
+  const m = base.match(WIDTH_RE);
+  if (m) return { stem: m[1], ext: m[4] };
+  const e = base.match(/^(.*?)(-scaled)?(\.\w+)$/);
+  return e ? { stem: e[1], ext: e[3] } : null;
+};
+
+const derivativeCache = new Map();
+const derivativesOf = (file) => {
+  if (derivativeCache.has(file)) return derivativeCache.get(file);
+  const dir = path.dirname(file);
+  const parts = stemOf(path.basename(file));
+  let out = [];
+  if (parts && fs.existsSync(dir)) {
+    // Matched with plain string slicing rather than a built regexp: these stems
+    // contain dots, dashes and parentheses, and escaping them into a RegExp is
+    // needless risk when the shape is this fixed (`<stem>-<w>x<h><ext>`).
+    const prefix = parts.stem + "-";
+    const ext = parts.ext.toLowerCase();
+    out = fs.readdirSync(dir)
+      .map((f) => {
+        if (!f.startsWith(prefix) || !f.toLowerCase().endsWith(ext)) return null;
+        const mid = f.slice(prefix.length, f.length - ext.length);
+        const m = /^(\d{2,4})x(\d{2,4})$/.exec(mid);
+        return m ? { file: path.join(dir, f), w: Number(m[1]) } : null;
+      })
+      .filter(Boolean)
+      .filter((d) => d.w <= MAX_SRCSET_WIDTH)
+      .sort((a, b) => a.w - b.w);
+  }
+  derivativeCache.set(file, out);
+  return out;
+};
+
+// Returns { src, srcset } for a wp-content URL, registering every file it names.
+const responsive = (url) => {
+  const src = asset(url);
+  if (typeof src !== "string" || !src.startsWith("/assets/")) return { src, srcset: "" };
+  const file = assetFile(String(url).replace(/^https?:/, "").replace(/^\/\/bestdentistinkatytx\.com/, ""));
+  if (!file) return { src, srcset: "" };
+  const sizes = derivativesOf(file);
+  if (sizes.length < 2) return { src, srcset: "" };
+  const srcset = sizes.map((d) => {
+    const web = "/assets/" + path.relative(ASSET_SRC, d.file).split(path.sep).join("/").replace(/^wp-content\//, "");
+    wantedAssets.add(JSON.stringify([d.file, web]));
+    return `${web} ${d.w}w`;
+  }).join(", ");
+  return { src, srcset };
+};
+
+// One <img> tag with the whole responsive set. `sizes` is the CSS width the
+// image will occupy - get it wrong and the browser picks a needlessly big file.
+const img = (url, alt, { sizes = "(max-width: 999px) 100vw, 700px", cls = "", eager = false, w, h } = {}) => {
+  const r = responsive(url);
+  if (!r.src) return "";
+  return `<img src="${esc(r.src)}"${r.srcset ? ` srcset="${esc(r.srcset)}" sizes="${esc(sizes)}"` : ""}` +
+    `${cls ? ` class="${esc(cls)}"` : ""} alt="${esc(alt || "")}"` +
+    `${w ? ` width="${w}"` : ""}${h ? ` height="${h}"` : ""}` +
+    `${eager ? ' fetchpriority="high"' : ' loading="lazy"'} decoding="async">`;
+};
+
 // wp-content URL -> site-relative asset URL, and remember it for copying.
 const asset = (url) => {
   if (!url) return "";
@@ -139,9 +209,11 @@ const rewrite = (html) => {
   if (!html) return "";
   let out = html;
   out = out.replace(/<img([^>]*?)src="([^"]*)"([^>]*)>/gi, (m, a, src, b) => {
-    const u = asset(src);
-    const attrs = (a + b).replace(/\sloading="[^"]*"/gi, "");
-    return `<img${attrs} src="${esc(u)}" loading="lazy" decoding="async">`;
+    const r = responsive(src);
+    const attrs = (a + b).replace(/\sloading="[^"]*"/gi, "").replace(/\ssrcset="[^"]*"/gi, "");
+    return `<img${attrs} src="${esc(r.src)}"` +
+      `${r.srcset ? ` srcset="${esc(r.srcset)}" sizes="(max-width: 999px) 100vw, 700px"` : ""}` +
+      ` loading="lazy" decoding="async">`;
   });
   out = out.replace(/<a([^>]*?)href="([^"]*)"([^>]*)>([\s\S]*?)<\/a>/gi, (m, a, href, b, text) => {
     const to = link(href);
@@ -478,7 +550,7 @@ const renderArticle = (d, route) => {
 
   const hero = d.featured?.src
     ? `<section class="hero hero--image">
-    <img src="${esc(asset(d.featured.src))}" alt="${esc(d.featured.alt || title)}" width="${d.featured.w || ""}" height="${d.featured.h || ""}">
+    ${img(d.featured.src, d.featured.alt || title, { sizes: "100vw", eager: true, w: d.featured.w, h: d.featured.h })}
     <div class="hero__caption"><div class="shell">${isService ? '<p class="eyebrow">Katy, TX</p>' : ""}<h1>${esc(title)}</h1></div></div>
   </section>`
     : `<section class="hero hero--page"><div class="shell">${isService ? '<p class="eyebrow">Katy, TX</p>' : ""}<h1>${esc(title)}</h1>${d.description ? `<p>${esc(d.description)}</p>` : ""}</div></section>`;
@@ -544,7 +616,7 @@ const renderBlocks = (d, route) => {
       }
       case "para":    out += fixRunOn(rewrite(b.html)) || `<p>${esc(fixRunOn(b.text))}</p>`; break;
       case "list":    out += `<${b.ordered ? "ol" : "ul"}>${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</${b.ordered ? "ol" : "ul"}>`; break;
-      case "image":   out += `<img src="${esc(asset(b.src))}" alt="${esc(b.alt)}" loading="lazy" decoding="async">`; break;
+      case "image":   out += img(b.src, b.alt, { sizes: "(max-width: 999px) 100vw, 700px", w: b.w, h: b.h }); break;
       case "cta":     { const to = link(b.href); if (to) out += `<p><a class="btn" href="${esc(to)}"${/^https?:/.test(to) ? ' target="_blank" rel="noopener"' : ""}>${esc(b.text)}</a></p>`; break; }
       case "table":   out += rewrite(b.html); break;
       // Recovered Elementor toggle/accordion item. <details> keeps it usable
@@ -557,7 +629,7 @@ const renderBlocks = (d, route) => {
   if (open) out += "</div></div></section>";
   const hero = heroImage
     ? `<section class="hero hero--image">
-    <img src="${esc(asset(heroImage.src))}" alt="${esc(heroImage.alt || title)}" width="${heroImage.w || ""}" height="${heroImage.h || ""}">
+    ${img(heroImage.src, heroImage.alt || title, { sizes: "100vw", eager: true, w: heroImage.w, h: heroImage.h })}
     <div class="hero__caption"><div class="shell"><p class="eyebrow">${esc(PRACTICE.city)}, ${esc(PRACTICE.region)}</p><h1>${esc(title)}</h1></div></div>
   </section>`
     : `<section class="hero hero--page"><div class="shell"><p class="eyebrow">${esc(PRACTICE.city)}, ${esc(PRACTICE.region)}</p><h1>${esc(title)}</h1>${d.description ? `<p>${esc(d.description)}</p>` : ""}</div></section>`;
@@ -570,7 +642,7 @@ ${out}`;
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
 
-const helpers = { esc, asset, link, rewrite, demoteH1, stripBoilerplate, titleOf, softenCaps, fixRunOn, routeOf, read, labelFor, PRACTICE, breadcrumbs, sidebarCta, renderEmbed, SITE_URL };
+const helpers = { esc, asset, img, responsive, link, rewrite, demoteH1, stripBoilerplate, titleOf, softenCaps, fixRunOn, routeOf, read, labelFor, PRACTICE, breadcrumbs, sidebarCta, renderEmbed, SITE_URL };
 const written = [];
 
 const skipped = [];

@@ -17,6 +17,7 @@ node extract.mjs      # crawl snapshots -> content/*.json   (only needed if the 
 node build.mjs        # content + templates -> dist/
 node audit.mjs        # content QA gate; exits non-zero on any blocker or error
 node responsive.mjs   # layout gate; every page at 390 / 768 / 1440px
+node weigh.mjs        # per-page download weight, desktop vs phone
 node shot.mjs .       # screenshot the built pages (add --mobile for 390px)
 node serve.mjs        # browse it at http://localhost:4300/, exactly as a host would serve it
 ```
@@ -33,7 +34,8 @@ practice's photography, which the repo rules keep out of git.
 | Third-party code | none, except Google Fonts, the practice's Google Maps pin and its own booking/form embeds |
 | JavaScript | one 2KB file for the mobile menu and lazy map. The site is fully usable with JS off |
 | Out of scope | ~180 blog posts, `/category/*`, the blog index |
-| Gates | `audit.mjs` 0/0/0 and `responsive.mjs` 71 pages x 3 widths, 0 problems |
+| Page weight | median **146 KB** desktop, **92 KB** on a phone; homepage 0.92 MB / 0.78 MB |
+| Gates | `audit.mjs` 0 blockers 0 errors, `responsive.mjs` 71 pages x 3 widths 0 problems |
 
 ## How it works
 
@@ -49,6 +51,7 @@ practice's photography, which the repo rules keep out of git.
 ├── build.mjs            content + templates -> dist/
 ├── audit.mjs            static QA gate over dist/ (content, links, images, meta)
 ├── responsive.mjs       layout gate - horizontal overflow at 3 widths, all pages
+├── weigh.mjs            what a visitor downloads per page, desktop vs phone
 ├── serve.mjs            local preview on :4300, served the way a host serves it
 ├── shot.mjs             serve dist/ and capture it, sliced for review
 └── slice.mjs            slice a pre-takedown screenshot for side-by-side comparison
@@ -57,6 +60,13 @@ practice's photography, which the repo rules keep out of git.
 Source of truth is `01-content-intake/.tmp/site-scrape/` (252 rendered pages + 2,534 assets) and
 `01-content-intake/.tmp/site-screenshots/desktop/` (252 full-page captures). Nothing was retyped:
 copy is lifted out of the extracted JSON, and layout follows the screenshots.
+
+**Responsive images**: WordPress had already generated derivatives beside every upload
+(`g7-768x512.jpg` next to `g7.jpg`) and the crawl downloaded them, so the build emits a `srcset`
+from whatever sizes exist rather than shipping one size to everyone. A phone no longer pulls a
+1536px photo to paint it 390px wide: the homepage went from 1.64 MB to **0.78 MB on a phone**, and
+the median page to 92 KB. `dist/` is larger on disk as a result (28 MB, every derivative) — that is
+not what any single visitor downloads.
 
 **Safety**: `extract.mjs` never executes the compromised markup. Every `<script>`, `<iframe src>`,
 `<img src>` and stylesheet is stripped from a throwaway sanitised copy *before* it reaches the
