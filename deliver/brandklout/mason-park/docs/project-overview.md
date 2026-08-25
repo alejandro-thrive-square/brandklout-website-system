@@ -13,6 +13,27 @@
 
 ## Status
 
+### 2026-08-25 — SCOPE CHANGED: full static rebuild of the main site
+
+The client's WordPress install is compromised and SiteGround is taking it down, so the job is now
+an **emergency rebuild of the whole main site as static HTML**, to be hosted on **Instatic**. That
+supersedes the paid-landing-page work below as the active priority; the three landing pages are
+unaffected and stay where they are.
+
+**The main site is rebuilt: 72 pages, 0 blockers, 0 errors, 0 warnings from its own QA gate.**
+Blog posts (~180) are deliberately out of scope for this pass.
+
+See [`workflows/09-static-rebuild/README.md`](../workflows/09-static-rebuild/README.md) — how to
+build it, what was authored rather than copied, and the open items for the client. Three of those
+matter beyond this rebuild:
+
+- the old site published **four awards the practice has not won** (ThemeREX demo content, CSS-hidden
+  but present in the HTML on every Elementor page);
+- the smile gallery was **theme stock photography** presented as the practice's own results;
+- the site publishes **two contradictory sets of office hours** (see Open Question 9, still open).
+
+### 2026-08-06 — the three landing pages
+
 **All three pages were rebuilt as journeys on 2026-08-06 and are awaiting review.** The client
 rejected the first round as *"a plain card website design"* rather than *"an interactive journey"*.
 That was an architecture problem, not a polish problem: the pages were a vertical stack of coloured
@@ -190,6 +211,7 @@ angles, then design original work. See
 | `04-design` | **Rebuilding** | Journey architecture — see [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md). |
 | `07-webflow-build` | **Blocked** | Needs local approval and a Webflow grant. |
 | `08-qa` | **Required after every change** | Scrub proof + responsive screenshots. |
+| `09-static-rebuild` | **Built, awaiting review** | Whole main site as static HTML for Instatic. `node audit.mjs` is its gate. |
 
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).
 

@@ -1,0 +1,8 @@
+# Generated. `node build.mjs` reproduces it in seconds, and it carries ~14MB of
+# the practice's photography - the repo rules forbid committing binary/media.
+dist/
+
+# Verification screenshots of the rebuild, and slices of the pre-takedown
+# captures. Both are regenerated on demand by shot.mjs / slice.mjs.
+shots/
+slices/
