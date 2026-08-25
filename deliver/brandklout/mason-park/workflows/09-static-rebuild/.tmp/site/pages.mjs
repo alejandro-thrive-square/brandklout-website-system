@@ -431,6 +431,70 @@ ${bookBlock(h)}`;
 }
 
 // ===========================================================================
+// Patient resources - a main-menu page whose live version was one paragraph,
+// a bullet list with no links, and three orphan icon captions. The bullets name
+// four things the practice does; this pairs each with the paragraph that
+// explains it and, where one exists, the page it points at.
+// ===========================================================================
+function patientResources(d, h) {
+  const { esc } = h;
+  const body = paras(d, 4);
+  const intro = body[0];
+  const bullets = inSection(d, 4).find((b) => b.type === "list")?.items || [];
+  const explain = body.slice(1);
+  // One link per bullet, matched to what the bullet is actually about. The
+  // "giving back" bullet describes the practice's Parks Youth Ranch initiative,
+  // which has no page of its own, so it points at the practice story instead.
+  const targets = ["/appointment/", "/about-us/", "/financing/", "/our-services/"];
+  const linkLabels = ["Request an appointment", "About our practice", "Financing and insurance", "See all services"];
+
+  const RESOURCES = [
+    ["Dental Savings Plan", "/dental-savings-plan/", "Reduced rates on routine care for patients without insurance."],
+    ["Product Recommendations", "/product-recommendations/", "The brushes, pastes and rinses the hygienists actually recommend."],
+    ["Toothpaste RDA Table", "/toothpaste-rda-table/", "How abrasive your toothpaste is, by brand."],
+    ["Toothpaste Chart", "/toothpaste-chart/", "A fuller comparison across common toothpastes."],
+    ["PH and Acidity of Food &amp; Beverages", "/ph-and-acidity-of-food-beverages/", "Which everyday drinks put enamel most at risk."],
+    ["Dental Library", "/dental-library/", "Plain-language explanations of common procedures."],
+    ["Dental Dictionary", "/dental-dictionary/", "What the terms on your treatment plan mean."],
+    ["Frequently Asked Questions", "/faq-page/", "The questions the front desk hears most."],
+    ["Town Resources", "/town-resource/", "Local information for Katy families."],
+  ];
+
+  return `${pageHero(h, "Patient Resources", d.description || "")}
+<section class="section">
+  <div class="shell">
+    <div class="section__head">
+      <p class="eyebrow">Dentist Katy, TX</p>
+      <h2>${esc(heads(d, 3).find((t) => t.startsWith("Patient")) || "Patient-Centric Care at Mason Park Dental of Katy")}</h2>
+      ${intro ? `<p>${esc(intro.text)}</p>` : ""}
+    </div>
+    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))">
+      ${bullets.map((b, i) => `
+      <div class="card">
+        <h3>${esc(b)}</h3>
+        ${explain[i] ? `<p>${esc(explain[i].text)}</p>` : ""}
+        <p><a href="${esc(targets[i] || "/contacts/")}">${esc(linkLabels[i] || "Find out more")}</a></p>
+      </div>`).join("")}
+    </div>
+  </div>
+</section>
+<section class="section section--paper">
+  <div class="shell">
+    <div class="section__head"><h2>Resources and reference</h2>
+    <p>Everything the practice publishes for patients, in one place.</p></div>
+    <div class="grid grid--3">
+      ${RESOURCES.map(([label, href, blurb]) => `
+      <a class="card card--link" href="${href}">
+        <h3>${label}</h3>
+        <p>${esc(blurb)}</p>
+      </a>`).join("")}
+    </div>
+  </div>
+</section>
+${bookBlock(h)}`;
+}
+
+// ===========================================================================
 // Contacts
 // ===========================================================================
 function contacts(d, h) {
@@ -795,6 +859,7 @@ export const BESPOKE = {
   "before-after": beforeAfter,
   "thank-you": thankYou,
   "special-offers": specialOffers,
+  "patient-resources": patientResources,
   "privacy-policy": privacyPolicy,
 };
 

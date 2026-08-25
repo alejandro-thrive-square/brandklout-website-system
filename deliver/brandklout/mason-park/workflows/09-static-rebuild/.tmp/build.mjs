@@ -193,14 +193,15 @@ const stripBoilerplate = (blocks = []) => {
       || (texts.some((t) => /^contact us$/i.test(t.trim())) && texts.some((t) => /^Dentist Katy$/i.test(t.trim())));
     const isTeaser = texts.some((t) => TEASER_MARKERS.some((re) => re.test(t.trim())));
     const onlyBadges = items.length > 2 && items.every((b) => b.type === "image" && ACCREDITATION_RE.test(b.src || ""));
-    const isCrumb = texts.length === 1 && /^home\s*[-–]\s*/i.test(texts[0]);
-    if (isDemo || isChrome || isTeaser || onlyBadges || isCrumb) bad.add(section);
+    // NB: a breadcrumb heading is dropped block-by-block below, NOT by killing
+    // its section - that section also holds the page header image.
+    if (isDemo || isChrome || isTeaser || onlyBadges) bad.add(section);
   }
   return blocks.filter((b) => {
     if (bad.has(b.section)) return false;
     if (b.type === "cta" && /^play$/i.test(b.text || "")) return false;      // demo video button
     if (b.type === "image" && ACCREDITATION_RE.test(b.src || "")) return false;
-    if (b.type === "heading" && /^home\s*[-–]\s*/i.test(b.text || "")) return false;
+    if (b.type === "heading" && /^home\s*[-–>»|]\s*/i.test(b.text || "")) return false;
     return true;
   });
 };
@@ -476,7 +477,21 @@ ${breadcrumbs(trail)}
 // in document order. Not a pixel match, but every word and image survives.
 const renderBlocks = (d, route) => {
   const title = titleOf(d);
-  const blocks = stripBoilerplate(d.blocks || []).filter((b) => !(b.type === "heading" && b.level === 1 && b.text === title));
+  const norm = (t) => String(t || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
+  let blocks = stripBoilerplate(d.blocks || [])
+    // The body repeats the page title as its own heading on most of these pages.
+    .filter((b) => !(b.type === "heading" && norm(b.text) === norm(title)));
+
+  // These pages open with a full-width header image that the theme showed under
+  // the title. Left inline it reads as a random stock photo mid-article, so it
+  // is promoted to the page hero - which is what it was.
+  const firstSection = blocks.length ? blocks[0].section : null;
+  const firstBlocks = blocks.filter((b) => b.section === firstSection);
+  let heroImage = null;
+  if (firstBlocks.length === 1 && firstBlocks[0].type === "image") {
+    heroImage = firstBlocks[0];
+    blocks = blocks.filter((b) => b !== heroImage);
+  }
 
   // Elementor sections are layout seams, not content seams. On a page with only
   // a few of them, banding them alternately reads as deliberate design. On a
@@ -498,7 +513,15 @@ const renderBlocks = (d, route) => {
     }
     switch (b.type) {
       // never a second <h1>: the template already emitted the page title
-      case "heading": { const lv = Math.min(Math.max(b.level, 2), 6); out += `<h${lv}>${esc(softenCaps(b.text))}</h${lv}>`; break; }
+      case "heading": {
+        // "Dentist Katy, TX" and friends are styled as an eyebrow upstream, not
+        // as a section heading; rendering them as <h4> leaves a stray line.
+        if (/^dentist\s+(in\s+)?katy(,?\s*(tx|texas))?$/i.test(b.text.trim())) {
+          out += `<p class="eyebrow">${esc(b.text)}</p>`; break;
+        }
+        const lv = Math.min(Math.max(b.level, 2), 6);
+        out += `<h${lv}>${esc(softenCaps(b.text))}</h${lv}>`; break;
+      }
       case "para":    out += rewrite(b.html) || `<p>${esc(b.text)}</p>`; break;
       case "list":    out += `<${b.ordered ? "ol" : "ul"}>${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</${b.ordered ? "ol" : "ul"}>`; break;
       case "image":   out += `<img src="${esc(asset(b.src))}" alt="${esc(b.alt)}" loading="lazy" decoding="async">`; break;
@@ -512,7 +535,13 @@ const renderBlocks = (d, route) => {
     }
   }
   if (open) out += "</div></div></section>";
-  return `<section class="hero hero--page"><div class="shell"><p class="eyebrow">${esc(PRACTICE.city)}, ${esc(PRACTICE.region)}</p><h1>${esc(title)}</h1>${d.description ? `<p>${esc(d.description)}</p>` : ""}</div></section>
+  const hero = heroImage
+    ? `<section class="hero hero--image">
+    <img src="${esc(asset(heroImage.src))}" alt="${esc(heroImage.alt || title)}" width="${heroImage.w || ""}" height="${heroImage.h || ""}">
+    <div class="hero__caption"><div class="shell"><p class="eyebrow">${esc(PRACTICE.city)}, ${esc(PRACTICE.region)}</p><h1>${esc(title)}</h1></div></div>
+  </section>`
+    : `<section class="hero hero--page"><div class="shell"><p class="eyebrow">${esc(PRACTICE.city)}, ${esc(PRACTICE.region)}</p><h1>${esc(title)}</h1>${d.description ? `<p>${esc(d.description)}</p>` : ""}</div></section>`;
+  return `${hero}
 ${breadcrumbs([{ label: "Home", href: "/" }, { label: title }])}
 ${out}`;
 };
