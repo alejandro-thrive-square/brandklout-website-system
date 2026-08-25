@@ -15,7 +15,8 @@ to re-infect. The output is a flat folder ready to host on **Instatic**.
 cd deliver/brandklout/mason-park/workflows/09-static-rebuild/.tmp
 node extract.mjs      # crawl snapshots -> content/*.json   (only needed if the crawl changes)
 node build.mjs        # content + templates -> dist/
-node audit.mjs        # QA gate; exits non-zero on any blocker or error
+node audit.mjs        # content QA gate; exits non-zero on any blocker or error
+node responsive.mjs   # layout gate; every page at 390 / 768 / 1440px
 node shot.mjs .       # screenshot the built pages (add --mobile for 390px)
 node serve.mjs        # browse it at http://localhost:4300/, exactly as a host would serve it
 ```
@@ -32,6 +33,7 @@ practice's photography, which the repo rules keep out of git.
 | Third-party code | none, except Google Fonts, the practice's Google Maps pin and its own booking/form embeds |
 | JavaScript | one 2KB file for the mobile menu and lazy map. The site is fully usable with JS off |
 | Out of scope | ~180 blog posts, `/category/*`, the blog index |
+| Gates | `audit.mjs` 0/0/0 and `responsive.mjs` 71 pages x 3 widths, 0 problems |
 
 ## How it works
 
@@ -45,7 +47,9 @@ practice's photography, which the repo rules keep out of git.
 ├── theme/site.js        mobile menu + deferred map
 ├── site/pages.mjs       hand-authored templates for the Elementor-built pages
 ├── build.mjs            content + templates -> dist/
-├── audit.mjs            static QA gate over dist/
+├── audit.mjs            static QA gate over dist/ (content, links, images, meta)
+├── responsive.mjs       layout gate - horizontal overflow at 3 widths, all pages
+├── serve.mjs            local preview on :4300, served the way a host serves it
 ├── shot.mjs             serve dist/ and capture it, sliced for review
 └── slice.mjs            slice a pre-takedown screenshot for side-by-side comparison
 ```
