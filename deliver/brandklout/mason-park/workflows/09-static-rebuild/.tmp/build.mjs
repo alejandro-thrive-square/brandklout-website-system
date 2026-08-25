@@ -33,6 +33,11 @@ const DEFAULT_DESC = (title) =>
   `${title} at Mason Park Dental of Katy - family, cosmetic and pediatric dentistry at 21830 Kingsland Blvd #104A, Katy, TX. Call (281) 769-8878.`;
 
 // ---------------------------------------------------------------- utilities
+// Elementor flattened some lists into a single paragraph, leaving sentences run
+// together with no space after the full stop. Requiring two lowercase letters
+// before the stop keeps initials ("U.S.") and decimals intact.
+const fixRunOn = (s) => String(s ?? "").replace(/([a-z]{2})\.(?=[A-Z])/g, "$1. ");
+
 const esc = (s) => String(s ?? "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
 const read = (slug) => {
   const f = path.join(CONTENT, slug + ".json");
@@ -65,6 +70,9 @@ const ALIASES = new Map([
 
 const wantedAssets = new Set();
 const droppedLinks = new Map();   // href -> count, for the build report
+// Images the pages load from a domain that is not the practice's. The crawl did
+// not download these, so they cannot be localised from what we have.
+const externalImages = new Map();  // host -> Set(url)
 
 // Choose the best on-disk file for a wp-content URL. `-scaled` originals run to
 // 2560px and 9MB; prefer the 1536px derivative when WordPress made one.
@@ -89,7 +97,16 @@ const assetFile = (webPath) => {
 const asset = (url) => {
   if (!url) return "";
   let u = String(url).trim().replace(/^https?:/, "").replace(/^\/\/bestdentistinkatytx\.com/, "");
-  if (!u.startsWith("/wp-content/")) return url;      // already local or external
+  if (!u.startsWith("/wp-content/")) {
+    // Record anything still pointing at another host so it cannot be shipped
+    // unnoticed - see the cross-site images note in the README.
+    const m = String(url).match(/^(?:https?:)?\/\/([^/]+)/);
+    if (m) {
+      if (!externalImages.has(m[1])) externalImages.set(m[1], new Set());
+      externalImages.get(m[1]).add(String(url));
+    }
+    return url;
+  }
   const file = assetFile(u);
   if (!file) { droppedLinks.set("MISSING ASSET " + u, (droppedLinks.get("MISSING ASSET " + u) || 0) + 1); return url; }
   const out = "/assets/" + path.relative(ASSET_SRC, file).split(path.sep).join("/").replace(/^wp-content\//, "");
@@ -377,6 +394,9 @@ const renderEmbed = (src = "") => {
   if (/leadconnectorhq\.com\/widget\/form/.test(src)) {
     return `<div class="embed"><iframe data-src="${esc(src)}" title="Request an appointment" loading="lazy" style="min-height:640px"></iframe></div>`;
   }
+  if (/(form\.)?123formbuilder\.com/.test(src)) {
+    return `<div class="embed"><iframe data-src="${esc(src)}" title="Send us your details" loading="lazy" style="min-height:720px"></iframe></div>`;
+  }
   return "";
 };
 
@@ -467,7 +487,7 @@ const renderArticle = (d, route) => {
 ${breadcrumbs(trail)}
 <div class="section section--tight">
   <div class="shell article-layout">
-    <article class="prose">${demoteH1(rewrite(d.html))}</article>
+    <article class="prose">${fixRunOn(demoteH1(rewrite(d.html)))}</article>
     ${sidebarCta(isService ? relatedServices(d.slug) : "")}
   </div>
 </div>`;
@@ -522,7 +542,7 @@ const renderBlocks = (d, route) => {
         const lv = Math.min(Math.max(b.level, 2), 6);
         out += `<h${lv}>${esc(softenCaps(b.text))}</h${lv}>`; break;
       }
-      case "para":    out += rewrite(b.html) || `<p>${esc(b.text)}</p>`; break;
+      case "para":    out += fixRunOn(rewrite(b.html)) || `<p>${esc(fixRunOn(b.text))}</p>`; break;
       case "list":    out += `<${b.ordered ? "ol" : "ul"}>${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</${b.ordered ? "ol" : "ul"}>`; break;
       case "image":   out += `<img src="${esc(asset(b.src))}" alt="${esc(b.alt)}" loading="lazy" decoding="async">`; break;
       case "cta":     { const to = link(b.href); if (to) out += `<p><a class="btn" href="${esc(to)}"${/^https?:/.test(to) ? ' target="_blank" rel="noopener"' : ""}>${esc(b.text)}</a></p>`; break; }
@@ -550,7 +570,7 @@ ${out}`;
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
 
-const helpers = { esc, asset, link, rewrite, demoteH1, stripBoilerplate, titleOf, softenCaps, routeOf, read, labelFor, PRACTICE, breadcrumbs, sidebarCta, renderEmbed, SITE_URL };
+const helpers = { esc, asset, link, rewrite, demoteH1, stripBoilerplate, titleOf, softenCaps, fixRunOn, routeOf, read, labelFor, PRACTICE, breadcrumbs, sidebarCta, renderEmbed, SITE_URL };
 const written = [];
 
 const skipped = [];
@@ -561,7 +581,10 @@ for (const slug of ALL) {
   if (!d) continue;
   const route = routeOf(slug);
   let body;
-  if (BESPOKE[slug]) body = BESPOKE[slug](d, helpers);
+  // Hand-authored pages quote the same upstream copy, so they need the same
+  // run-on repair. Safe over whole markup: the rule needs two lowercase letters
+  // before the stop and a capital after, which no path, class or URL here has.
+  if (BESPOKE[slug]) body = fixRunOn(BESPOKE[slug](d, helpers));
   else if (d.kind === "service" || d.kind === "article") body = renderArticle(d, route);
   else body = renderBlocks(d, route);
 
@@ -620,6 +643,9 @@ const report = {
   assetsCopied: copied,
   assetMB: +(bytes / 1048576).toFixed(1),
   skipped,
+  externalImages: [...externalImages.entries()]
+    .map(([host, urls]) => ({ host, count: urls.size, sample: [...urls].slice(0, 3) }))
+    .sort((a, b) => b.count - a.count),
   droppedLinks: [...droppedLinks.entries()].sort((a, b) => b[1] - a[1]).map(([href, n]) => ({ href, n })),
 };
 fs.writeFileSync(path.join(HERE, "build-report.json"), JSON.stringify(report, null, 1));
@@ -628,3 +654,6 @@ console.log(`${written.length} pages -> dist/`);
 console.log("  templates:", JSON.stringify(report.byTemplate));
 console.log(`  assets: ${copied} files, ${report.assetMB} MB`);
 console.log(`  out-of-scope links unwrapped: ${report.droppedLinks.length} distinct (see build-report.json)`);
+for (const e of report.externalImages) {
+  console.log(`  ! ${e.count} image(s) still served from ${e.host} - not ours, not in the crawl`);
+}

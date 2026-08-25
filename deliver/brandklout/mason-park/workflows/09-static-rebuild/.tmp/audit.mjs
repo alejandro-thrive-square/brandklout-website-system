@@ -81,7 +81,13 @@ for (const file of pages) {
 
   for (const m of html.matchAll(/<img[^>]+src="([^"]+)"/gi)) {
     const src = m[1];
-    if (!src.startsWith("/")) continue;
+    if (!src.startsWith("/")) {
+      // Hotlinked from someone else's server: breaks when they change it, and on
+      // this site it is the SIBLING PRACTICE's domain. See README, open items.
+      const host = (src.match(/^(?:https?:)?\/\/([^/]+)/) || [])[1];
+      if (host) flag("WARN", route, `image hotlinked from ${host}: ${src.slice(0, 90)}`);
+      continue;
+    }
     if (!onDisk.has(src)) flag("ERROR", route, `image not on disk: ${src}`);
   }
   for (const m of html.matchAll(/<(?:a|link)[^>]+href="([^"]+)"/gi)) {

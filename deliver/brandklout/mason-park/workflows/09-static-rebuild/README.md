@@ -88,6 +88,31 @@ Thu 7–5, **Fri 7–5**. The rebuild uses the footer/homepage set throughout. *
 confirm which is right** — this is the third time this has come up (see Open Question 9 in
 `docs/project-overview.md`).
 
+## Cross-site images — needs a decision from Brandklout
+
+**Four pages load 16 images directly from `grandmissiondentistry.com`** — the sibling practice's
+web server, a separate Brandklout client with its own worktree (`bk-grand-mission`):
+
+| Page | Images |
+| :--- | :--- |
+| `/dental-implant-costs/` and `/dental-implant-costs-esp/` | 7 each, including the implant price tiles ($17,499 / $9,499 / $2,999) and an `AdobeStock_` licensed image |
+| `/services/what-is-tmj/` | 3, all `AdobeStock_` |
+| `/services/silver-diamine-fluoride/` | 3 |
+
+They are **hotlinks**, not copies: the WordPress site never held these files and neither does the
+crawl, so there is nothing local to fall back on. Consequences:
+
+- The pages break the moment Grand Mission moves, renames or takes down those files.
+- Mason Park's site is serving another practice's bandwidth and, in the `AdobeStock_` cases,
+  imagery licensed to that other practice.
+
+**They have been left exactly as they are** — removing them would gut a page selling implants, and
+choosing what to do with another client's assets is not a call to make silently. `audit.mjs` now
+raises a WARN for every one of them, so they cannot ship unnoticed. Brandklout owns both clients
+and should decide: re-license and copy the images to Mason Park, replace them, or drop the pages.
+
+One further hotlink, `i.ytimg.com`, is a YouTube thumbnail on the same two pages and is benign.
+
 ## Pages that had to be authored rather than copied
 
 | Page | Why |
