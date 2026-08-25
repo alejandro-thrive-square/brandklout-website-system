@@ -122,6 +122,9 @@ export const PRACTICE = {
   name: "Mason Park Dental of Katy",
   phone: "(281) 769-8878",
   phoneHref: "tel:+12817698878",
+  // From the practice's own Terms of Service, section 20. The live theme
+  // published "info@website.com" - a placeholder that is not restored here.
+  email: "office@masonparkdental.com",
   street: "21830 Kingsland Blvd #104A",
   city: "Katy",
   region: "TX",

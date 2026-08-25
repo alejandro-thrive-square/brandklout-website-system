@@ -191,6 +191,36 @@ though — the crawl also picked up Grand Mission-hosted CSS and JS for two shar
 cache paths. None of that is used by the static build, but it is evidence that the two sites were
 sharing assets in more than one direction.
 
+## The Terms of Service point at two documents that do not exist
+
+`/terms-of-service/` is the one piece of the old site that is unambiguously
+good: 2,000 words, dated 16 July 2026, naming Mason Park Dental of Katy PLLC,
+covering A2P 10DLC SMS consent, financing tools and virtual-consultation photo
+submissions. It is real, recent and specific to this practice.
+
+It also says, in section 18:
+
+> Your use of the Site and our SMS program is also subject to our **Privacy
+> Policy and Cookie Policy**, which describe how we collect, use, and manage
+> information collected through the Site and our messaging program.
+
+**Neither document is published.** `/privacy-policy/` returned 403 to the
+crawler, and there is no Cookie Policy page anywhere on the site. So a binding
+document that visitors accept by using the site, submitting a form or opting
+into SMS incorporates two policies nobody can read.
+
+This rebuild ships an interim `/privacy-policy/` describing what the *website*
+does, clearly marked for review and explicit that it is not the practice's HIPAA
+Notice of Privacy Practices. **That is a stopgap, not the fix.** The practice
+needs to publish its real Privacy Policy and a Cookie Policy, or amend section
+18 to stop referencing them.
+
+Section 20 of the same document also gave up the practice's real email address,
+`office@masonparkdental.com` — which appeared nowhere else on the site. The live
+theme published `info@website.com`, a placeholder, which did not survive the
+rebuild. The real address is now in the footer of every page and on the contact
+page.
+
 ## Pages that had to be authored rather than copied
 
 | Page | Why |

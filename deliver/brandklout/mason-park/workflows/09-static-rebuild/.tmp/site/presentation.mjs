@@ -122,6 +122,7 @@ ${C.badgeStrip(ACCREDITATIONS)}
         <ul class="footer_list">
           <li><a href="${esc(PRACTICE.maps)}" target="_blank" rel="noopener">${esc(PRACTICE.street)}<br>${esc(PRACTICE.city)}, ${esc(PRACTICE.region)} ${esc(PRACTICE.postal)}</a></li>
           <li><a href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a></li>
+          <li><a href="mailto:${esc(PRACTICE.email)}">${esc(PRACTICE.email)}</a></li>
           <li><a href="${esc(PRACTICE.facebook)}" target="_blank" rel="noopener">Facebook</a></li>
         </ul>
       </div>

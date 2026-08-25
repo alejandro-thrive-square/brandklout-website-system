@@ -409,7 +409,7 @@ function contacts(d, h) {
        ${C.notice(`<p>${h.esc(LOCATION_NOTE)}</p>`)}`,
       C.grid(1, [
         C.card({ title: "Visit us", html: `<p><a href="${h.esc(h.PRACTICE.maps)}" target="_blank" rel="noopener">${h.esc(h.PRACTICE.street)}<br>${h.esc(h.PRACTICE.city)}, ${h.esc(h.PRACTICE.region)} ${h.esc(h.PRACTICE.postal)}</a></p>` }),
-        C.card({ title: "Call us", html: `<p><a class="phone-link_component" href="${h.PRACTICE.phoneHref}">${h.esc(h.PRACTICE.phone)}</a></p>${C.button({ label: "Schedule online", href: BOOK, external: true })}` }),
+        C.card({ title: "Call or email us", html: `<p><a class="phone-link_component" href="${h.PRACTICE.phoneHref}">${h.esc(h.PRACTICE.phone)}</a></p><p><a href="mailto:${h.esc(h.PRACTICE.email)}">${h.esc(h.PRACTICE.email)}</a></p>${C.button({ label: "Schedule online", href: BOOK, external: true })}` }),
         C.card({ title: "Office hours", html: C.hoursList(h.HOURS) }),
       ]),
       { textWide: true },
