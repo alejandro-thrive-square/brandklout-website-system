@@ -17,6 +17,7 @@ node extract.mjs      # crawl snapshots -> content/*.json   (only needed if the 
 node build.mjs        # content + templates -> dist/
 node audit.mjs        # QA gate; exits non-zero on any blocker or error
 node shot.mjs .       # screenshot the built pages (add --mobile for 390px)
+node serve.mjs        # browse it at http://localhost:4300/, exactly as a host would serve it
 ```
 
 `dist/` is the deployable site. It is gitignored — it is generated, and it carries ~14MB of the
