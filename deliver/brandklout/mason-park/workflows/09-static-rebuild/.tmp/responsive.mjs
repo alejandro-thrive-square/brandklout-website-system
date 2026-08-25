@@ -94,7 +94,10 @@ const PROBE = `(() => {
   const vw = document.documentElement.clientWidth;
   const ready = document.readyState === "complete"
     && getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() === "#00bde0"
-    && [...document.images].every((i) => i.complete);
+    // Only images the page actually intends to load now. Lazy ones below the
+    // fold never complete without scrolling, so requiring them here would hang
+    // the probe on every long page and report the whole site as never loading.
+    && [...document.images].filter((i) => i.loading !== "lazy").every((i) => i.complete);
   const over = [];
   for (const el of document.querySelectorAll("body *")) {
     const r = el.getBoundingClientRect();
