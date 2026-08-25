@@ -109,8 +109,11 @@ const manifestPages = [];
 for (const file of pages) {
   const html = fs.readFileSync(file, "utf8");
   const rel = path.relative(DIST, path.dirname(file)).split(path.sep).join("/");
-  const localRoute = rel === "." ? "/" : "/" + rel + "/";
-  const slug = rel === "." ? "home" : rel;
+  // path.relative(dir, dir) is "" on Windows and "." elsewhere - the homepage
+  // fell through a bare "." check and shipped an empty slug and a ".json" file.
+  const isHome = rel === "." || rel === "";
+  const localRoute = isHome ? "/" : "/" + rel + "/";
+  const slug = isHome ? "home" : rel;
   const title = (html.match(/<title>([\s\S]*?)<\/title>/i) || [, ""])[1].trim();
   const description = (html.match(/<meta name="description" content="([^"]*)"/i) || [, ""])[1].trim();
 
@@ -184,6 +187,28 @@ absent — it was theme demo content.
 `;
 fs.writeFileSync(path.join(OUT, "IMPORT.md"), readme);
 
+// ------------------------------------------------------------------ validate
+// Instatic wants a body, a usable slug and a title for every page. Checking that
+// here is what stops a malformed export reaching the import, where the failure
+// would look like Instatic's fault rather than ours.
+const problems = [];
+for (const page of manifestPages) {
+  const d = JSON.parse(fs.readFileSync(path.join(OUT, page.file), "utf8"));
+  const bad = [];
+  if (/<script/i.test(d.html)) bad.push("carries a <script>");
+  if (/<link/i.test(d.html)) bad.push("carries a <link>");
+  if (/<\/?(html|head|body)\b/i.test(d.html)) bad.push("carries a document shell");
+  if (/href="\/[^"]*\/"/.test(d.html)) bad.push("has a trailing-slash internal href");
+  if (!d.html.trim()) bad.push("empty body");
+  if (!d.title) bad.push("no title");
+  if (!d.slug || !d.slug.startsWith("/")) bad.push(`bad slug ${JSON.stringify(d.slug)}`);
+  if (d.slug !== "/" && d.slug.endsWith("/")) bad.push("slug has a trailing slash");
+  if (bad.length) problems.push(`${page.file}: ${bad.join(", ")}`);
+}
+const slugs = manifestPages.map((p2) => p2.slug);
+const dupes = slugs.filter((sl, i) => slugs.indexOf(sl) !== i);
+for (const sl of new Set(dupes)) problems.push(`duplicate slug ${sl} - site_add_page would auto-unique it to -2`);
+
 console.log(`${manifestPages.length} pages -> instatic/pages/`);
 console.log(`  media to upload: ${media.length} files, ${(media.reduce((a, m) => a + m.bytes, 0) / 1048576).toFixed(1)} MB`);
 console.log(`  code assets: site.css, site.js`);
@@ -191,3 +216,9 @@ if (unmapped.size) {
   console.log(`  ! ${unmapped.size} media path(s) NOT mapped to /uploads - upload first, then re-run with --media`);
   if (!mediaArg) console.log(`    (no --media map given, so this is expected on the first pass)`);
 }
+if (problems.length) {
+  console.log(`\n${problems.length} page(s) would be rejected on import:`);
+  for (const pr of problems) console.log("  ! " + pr);
+  process.exit(1);
+}
+console.log("  every page validates: body only, usable slug, title present");

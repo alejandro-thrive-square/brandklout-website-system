@@ -71,9 +71,9 @@ for (const p of pages) {
     return { bytes, worst };
   };
   const d = weigh(desktopSet), ph = weigh(phoneSet), eg = weigh(eagerSet);
-  const route = "/" + path.relative(DIST, path.dirname(p)).split(path.sep).join("/");
+  const relDir = path.relative(DIST, path.dirname(p)).split(path.sep).join("/");
   rows.push({
-    route: route === "/." ? "/" : route + "/",
+    route: (relDir === "" || relDir === ".") ? "/" : "/" + relDir + "/",
     bytes: d.bytes, phoneBytes: ph.bytes, onLoadBytes: eg.bytes,
     images: desktopSet.size, eagerImages: eagerSet.size, heaviest: d.worst,
   });
