@@ -10,7 +10,18 @@
 > the canonical `15-improvement-intake-audit` and `16-vercel-deployment`.
 
 ## Client-Facing Overview
-Third-party widgets (booking forms, review widgets, CRM embeds) can be switched on per site through an installable plugin, instead of being impossible or requiring a modified platform build. A developer places them **by hand** from the editor — insert the **Embed** block, paste the URL or the vendor's snippet, publish — with no script and no agent involved.
+Capabilities the stock platform does not offer are added as **installable plugins**, never as a modified platform build. Two are in service:
+
+- **Embed Origins** — third-party widgets (booking forms, review widgets, CRM embeds) can be switched on per site. A developer places them **by hand** from the editor: insert the **Embed** block, paste the URL or the vendor's snippet, publish.
+- **Link Editor** — the link address on any button or link can be edited, including internal pages, on-page anchors and phone numbers, not only full `https://` addresses.
+
+> [!IMPORTANT]
+> **Plugins are the standing answer here; patching the image is not.** A patch to
+> `corebunch/instatic` has to be rebuilt and re-applied on every upstream release. That
+> maintenance debt is the reason the Link Editor exists as a plugin even though a working
+> three-file patch was already written ([workflow 17](../17-instatic-platform-patch/17-instatic-platform-patch.md), kept as
+> reference and **not** deployed). Reach for a plugin first; treat a platform patch as a last
+> resort that needs a deliberate decision.
 
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the scripts or technical logic of this workflow must be documented here immediately.
@@ -257,6 +268,134 @@ node verify-embed-editor.mjs --cleanup
 
 `test-embed-origins.mjs` covers passthrough, `'none'` replacement, preservation of every other directive, importmap-sha survival, dedupe, trailing-slash stripping, directive-injection rejection, absent-directive creation, idempotence, body integrity, and the no-meta-tag case.
 
+---
+
+# Plugin 2: Link Editor (`webzite.link-editor` v1.0.0)
+
+Full detail in [`link-editor/README.md`](./link-editor/README.md). The short version, and
+the part that generalises beyond this one plugin:
+
+## The problem
+
+The platform's own "Link URL" field cannot express most of this site's links. `UrlControl.tsx`
+commits only on a valid value — `if (valid) onChange(propKey, v)` — and `isValidUrl()` accepts
+absolute `https:` / `http:` / `mailto:` **only**.
+
+The input is controlled from the store and the store is written only on a valid value, so every
+keystroke that leaves the value invalid is discarded and the field re-renders from the unchanged
+value. Backspacing `#invitation` passes through `#invitatio`, `#invitati`, … — each schemeless,
+each rejected, each snapped back. The empty string that *would* be accepted is unreachable, so
+the field can be neither edited **nor cleared**. It reads as broken, not restricted. That is what
+the client reported: **2,362 of 2,510** link/button nodes on this site.
+
+## The editor-plugin surface — the finding that made this possible
+
+An earlier pass concluded "a plugin cannot fix this" after testing only `modules.register`, and
+went to a platform patch. That rejection was correct **for what it tested** and wrong as a
+conclusion. The plugin API has a whole second surface:
+
+| Permission | Grants | Risk |
+|---|---|---|
+| `editor.code` | plugin JS in the admin window, **unsandboxed**, full admin privileges | `dangerous` |
+| `editor.store.read` | `api.editor.store.read()` → the entire `EditorStore` | medium |
+| `editor.store.write` | `api.editor.store.transaction(mutate)` → a mutable draft of the whole store | high |
+| `editor.panels` | a React panel in the editor's left rail | medium |
+| `editor.toolbar` / `editor.commands` / `editor.canvas` | toolbar buttons, ⌘K commands, canvas overlays | medium–high |
+
+All of it is really implemented in 0.0.16 — `editorPluginLoader.ts` loads the entrypoint,
+`runtime.ts:489-508` wires `read` / `transaction` behind `assertPluginPermission` — not merely
+typed. **Check this surface before ever proposing a platform patch to editor behaviour.**
+
+## How the plugin works
+
+Registers a **Link URL** panel; reads the selection via `useEditorStore`; writes via
+`api.editor.store.read().updateNodeProps(nodeId, { href })`. Nothing about `UrlControl` changes.
+
+Two decisions worth carrying to any future editor plugin:
+
+1. **Keep the draft in local React state.** This IS the fix. Deriving the input value from the
+   store is exactly what makes the platform's field snap back. Let the field be typed freely and
+   decline to *commit* an unsafe value instead of refusing to let it be *typed*.
+2. **Write through the store ACTION, not `store.transaction`.** The editor store is
+   `zustand-mutative`; `transaction(fn)` runs `setState((state) => fn(state))`, so `state` is a
+   **Mutative draft** and calling `state.updateNodeProps(...)` on it re-enters `set()` from
+   inside a producer. `store.read()` returns `getState()` — the real store, real actions, and
+   the same `updateNodeProps` the platform's property panel calls, so undo coalescing and dirty
+   tracking come along for free.
+
+## No build step
+
+Hand-written ESM, like the Embed block. Bare specifiers (`react`, `@instatic/host-hooks`,
+`@instatic/host-ui`) resolve through the host import map in `index.html`, which re-exports the
+host's live instances from `globalThis.__instatic`. `createElement` is used directly — JSX would
+need a compiler. **`@core/*` is NOT importable**; anything needed from core must be transcribed,
+which is why the safety gate has a drift test.
+
+## Gotchas
+
+- **Page refs must be allowed explicitly.** `urlScheme('cms:page:x')` returns `cms:`, so
+  `isSafeUrl` refuses it. Gating on `isSafeUrl` alone leaves a page-ref link uneditable in
+  *precisely* the way the platform's field is — every intermediate keystroke keeps the prefix.
+  Caught by the verify gate, not by inspection.
+- **Allowing them is a feature.** The native Page picker only *preserves* an existing fragment
+  (`makePageRef(pageId, ref?.fragment)`) and cannot type one, so `cms:page:<id>#book` is
+  unreachable from stock UI and reachable here.
+- **`Input` from `@instatic/host-ui` is NOT the design-system Input.** It is `PluginInput`, a
+  narrowed wrapper whose whole contract is `PluginUiInputProps`. Two traps, both of which cost a
+  live debugging round: **`onChange` is handed the STRING, not the event** (a handler written as
+  `(e) => e.target.value` throws on every keystroke and the field silently refuses input), and
+  **anything outside the contract is dropped** — `id`, `fieldSize`, `autoComplete`, `spellCheck`
+  all do nothing, and the wrapper assigns its own `id` from `useId()`. Use its `label` and
+  `description` props; it renders them in a host `FormField`.
+- **Debounce the write; do not commit per keystroke.** Every *prefix* of what is typed gets
+  written, and every prefix of a dangerous value is itself safe: `javascript:alert(1)` walks
+  through `j`, `ja`, … `javascript` — all schemeless, all committed — and only the colon stops
+  it. The live node was left holding `javascript` while the panel said "Not saved". 400 ms plus
+  an immediate commit on blur. Applies to ANY editor plugin writing from a text field.
+- **Do not write a literal `[\u0000-\u0020]` range into the source.** Doing so puts a real NUL
+  byte in the file: `grep` then reports "binary file matches" and editors mangle it on save. The
+  verify gate asserts the source is free of raw control characters.
+- **Only `editor.panels` exists — there is no right-hand inspector extension point.** The field
+  lives in the left rail, not beside the platform's own Link URL control.
+- **Reload the editor tab after installing.** Plugins activate at admin boot;
+  `useInstalledEditorPlugins` re-runs only on `CMS_PLUGINS_CHANGED_EVENT`.
+- **`install-plugin.mjs` now keys its grants by plugin id.** A flat list would have silently
+  handed the second plugin the first one's permissions; an unknown id is refused outright.
+
+## LIVE on Dr. Nahlah, 2026-08-24 — v1.0.2, verified in the editor
+
+Installed on `encorercm.com`, plugin `active`, `lastError: null`, all four permissions granted.
+Driven under CDP against the real editor, on the home page's `Book a Free Consult` CTA:
+
+| Typed | Result |
+|---|---|
+| `…#book` appended to a `cms:page:` ref | committed — a fragment on a page ref, which the Page picker cannot author |
+| `tel:+15717029900` | committed |
+| `#book` | committed; canvas re-rendered `<button>` → `<a href="#book">` in all three frames |
+| `javascript:alert(1)` | refused, field marked invalid, warning shown, **node untouched after 1.2 s** |
+| selecting a `base.container` | "has no link address" empty state |
+
+The node was restored to its original `cms:page:5eKjtlsP8RzgQ-CM7rh2c` and the draft re-read
+over the API to confirm it: **MATCH, and no test residue anywhere in the 37 page trees.** The
+draft was already at `seq 67` with unpublished work; nothing was published.
+
+Both v1.0.0 and v1.0.1 failed this run — see the two gotchas above. The bugs were only visible
+against the live editor; the offline gates passed throughout, which is why they now assert both.
+
+## Gate: `verify-link-editor.mjs`
+
+```bash
+node verify-link-editor.mjs        # 53 assertions, ~1s
+```
+
+Lifts the safety functions out of the real plugin file by source slice, then re-reads the host's
+`src/core/html-sanitize/index.ts` and fails if `SAFE_URL_SCHEMES`, `isSafeUrl` or `urlScheme`
+have drifted from what the copy was transcribed against. A hand-copied security check rots
+silently; this turns an upstream change into a test failure. Override the checkout with
+`--host=<path>` (default `C:\ifork\Instatic-main`).
+
+---
+
 ## Upstreaming
 
 Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTRIBUTING.md inviting contributions. This plugin needs no upstream change to work, but the cleanest long-term fix is for `moduleAdapter.ts` to forward `cspSources` from plugin modules, which would let an Embed module declare its own origin exactly as `base.video` does. Worth filing with the evidence above; nothing here depends on it landing.
@@ -269,6 +408,9 @@ Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTR
 
 ## Output Artifacts
 - `embed-origins/` — the plugin source (`plugin.json`, `server/index.js` for the CSP filter, `modules/index.js` for the Embed block)
+- `link-editor/` — the Link Editor plugin source (`plugin.json`, `editor/index.js`, `README.md`)
+- `verify-link-editor.mjs` — offline gate for the Link Editor: safety-gate behaviour plus a drift test against the host's `html-sanitize`
+- `.tmp/link-editor.zip` — the built package
 - `pack-plugin.mjs` — deterministic zip builder (forward-slashed entries, fixed timestamps)
 - `install-plugin.mjs` — inspect + install with an explicit permission grant
 - `set-origins.mjs` — read / set / clear the allowlist

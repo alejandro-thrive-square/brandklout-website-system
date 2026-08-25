@@ -25,31 +25,65 @@ if (!zipPath || !existsSync(zipPath)) {
   process.exit(2)
 }
 
-// What this operator is willing to grant. Anything the manifest asks for that
-// is not on this list is reported and the install is refused.
+// What this operator is willing to grant, PER PLUGIN. Anything a manifest asks
+// for that is not on its list is reported and the install is refused; a plugin
+// id with no entry here cannot be installed by this script at all.
 //
-//   cms.hooks        the `publish.html` filter that rewrites the CSP meta tag.
-//   modules.register the Embed block in the canvas module library. Rated `high`
-//                    by the host because a module renders HTML into every page
-//                    that uses it — here that HTML is the embed itself.
-//   frontend.assets  authority for module render() `js`, dropped without it
-//                    (`moduleAdapter.ts`). Used for ONE thing: the auto-height
-//                    listener, served same-origin from
-//                    `/_instatic/module-js/webzite.embed-origins.embed.js`.
-//                    It grants no third-party origin anything — those are still
-//                    typed into plugin settings, one at a time.
-const GRANT = ['cms.hooks', 'modules.register', 'frontend.assets']
+// Keyed by id rather than kept as one flat list so that adding a second plugin
+// cannot silently widen what the first one gets.
+const GRANTS = {
+  // ---- Embed Origins ------------------------------------------------------
+  //   cms.hooks        the `publish.html` filter that rewrites the CSP meta tag.
+  //   modules.register the Embed block in the canvas module library. Rated `high`
+  //                    by the host because a module renders HTML into every page
+  //                    that uses it — here that HTML is the embed itself.
+  //   frontend.assets  authority for module render() `js`, dropped without it
+  //                    (`moduleAdapter.ts`). Used for ONE thing: the auto-height
+  //                    listener, served same-origin from
+  //                    `/_instatic/module-js/webzite.embed-origins.embed.js`.
+  //                    It grants no third-party origin anything — those are still
+  //                    typed into plugin settings, one at a time.
+  'webzite.embed-origins': ['cms.hooks', 'modules.register', 'frontend.assets'],
+
+  // ---- Link Editor --------------------------------------------------------
+  //   editor.code       REQUIRED by the host for any `entrypoints.editor`
+  //                     (`parsePluginManifest` refuses the manifest without it).
+  //                     Rated `dangerous`: the entrypoint is unsandboxed code in
+  //                     the admin window. This is our own hand-written module —
+  //                     two files, no build step, no third-party dependency, no
+  //                     network access of its own.
+  //   editor.panels     mounts the "Link URL" panel in the editor rail.
+  //   editor.store.read reads the selected node so the panel can show its
+  //                     current address.
+  //   editor.store.write the plugin mutates editor state. Note the write goes
+  //                     through `store.read().updateNodeProps(...)` — the same
+  //                     action the platform's own property panel calls — rather
+  //                     than `store.transaction`, which hands out a Mutative
+  //                     draft that a store action must not be re-entered on.
+  //                     The permission is requested anyway because the plugin
+  //                     genuinely writes, and the consent screen should say so.
+  'webzite.link-editor': ['editor.code', 'editor.panels', 'editor.store.read', 'editor.store.write'],
+}
 
 const bytes = readFileSync(zipPath)
-const asForm = () => {
+const asForm = (grant) => {
   const form = new FormData()
   form.append('file', new Blob([bytes], { type: 'application/zip' }), basename(zipPath))
-  form.append('grantedPermissions', JSON.stringify(GRANT))
+  form.append('grantedPermissions', JSON.stringify(grant))
   return form
 }
 
-const inspected = await requestForm('/admin/api/cms/plugins/inspect-package', asForm())
+// Inspect with NO grants — the call only reads the manifest, and sending a
+// grant list before we know which plugin this is would defeat the per-id table.
+const inspected = await requestForm('/admin/api/cms/plugins/inspect-package', asForm([]))
 const m = inspected.manifest ?? inspected.plugin ?? inspected
+
+const GRANT = GRANTS[m.id]
+if (!GRANT) {
+  console.error(`\nREFUSED — no grant list for plugin id "${m.id}".`)
+  console.error('Add one to GRANTS in this script, deliberately, after reviewing the plugin.')
+  process.exit(1)
+}
 console.log(`\n${m.name ?? '(unnamed)'}  ${m.id}  v${m.version}`)
 console.log(`  ${m.description ?? ''}`)
 console.log(`\n  requests : ${(m.permissions ?? []).join(', ') || '(none)'}`)
@@ -67,5 +101,5 @@ if (!apply) {
   process.exit(0)
 }
 
-const res = await requestForm('/admin/api/cms/plugins/package', asForm())
+const res = await requestForm('/admin/api/cms/plugins/package', asForm(GRANT))
 console.log(`\n${JSON.stringify(res, null, 2).slice(0, 1200)}`)
