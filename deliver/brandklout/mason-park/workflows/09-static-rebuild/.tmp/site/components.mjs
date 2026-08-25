@@ -57,7 +57,9 @@ export function makeComponents(h) {
     return rendered.length ? `<div class="button-group">${rendered.join("")}</div>` : "";
   };
 
-  const richText = (html) => (html ? `<div class="text-rich-text">${html}</div>` : "");
+  // `wide` drops the reading measure - use it for table-led content.
+  const richText = (html, { wide = false } = {}) =>
+    html ? `<div class="${cx("text-rich-text", wide && "is-wide")}">${html}</div>` : "";
 
   const notice = (html) => (html ? `<div class="notice_component">${html}</div>` : "");
 

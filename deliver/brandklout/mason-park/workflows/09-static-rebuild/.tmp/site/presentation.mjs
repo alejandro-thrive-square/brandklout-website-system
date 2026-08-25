@@ -181,7 +181,8 @@ ${C.badgeStrip(ACCREDITATIONS)}
 ${C.breadcrumb(trail)}
 ${C.section({ name: "article", padding: "small", inner: `
   <div class="article_layout">
-    <article>${C.richText(fixRunOn(demoteH1(rewrite(d.html))))}</article>
+    <article>${(() => { const body = fixRunOn(demoteH1(rewrite(d.html)));
+      return C.richText(body, { wide: body.includes("<table") }); })()}</article>
     ${sidebarCta(isService ? relatedServices(d.slug) : "")}
   </div>` })}`;
   };
@@ -241,9 +242,13 @@ ${C.section({ name: "article", padding: "small", inner: `
 
     const body = banded
       ? chunks.map((c, i) => C.section({
-          name: "content", bg: i % 2 === 1 ? "paper" : "", inner: C.richText(c.html),
+          name: "content", bg: i % 2 === 1 ? "paper" : "",
+          inner: C.richText(c.html, { wide: c.html.includes("<table") }),
         })).join("\n")
-      : C.section({ name: "content", inner: C.richText(chunks.map((c) => c.html).join("")) });
+      : (() => {
+          const all = chunks.map((c) => c.html).join("");
+          return C.section({ name: "content", inner: C.richText(all, { wide: all.includes("<table") }) });
+        })();
 
     const hero = heroImage
       ? C.heroOverlay({ src: heroImage.src, alt: heroImage.alt || title, eyebrow: `${PRACTICE.city}, ${PRACTICE.region}`, title, w: heroImage.w, h: heroImage.h })
