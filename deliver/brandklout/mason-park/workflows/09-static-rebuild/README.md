@@ -18,6 +18,7 @@ node build.mjs        # content + templates -> dist/
 node audit.mjs        # content QA gate; exits non-zero on any blocker or error
 node responsive.mjs   # layout gate; every page at 390 / 768 / 1440px
 node weigh.mjs        # per-page download weight, desktop vs phone
+node to-instatic.mjs  # body-only pages + code assets + media manifest -> instatic/
 node shot.mjs .       # screenshot the built pages (add --mobile for 390px)
 node serve.mjs        # browse it at http://localhost:4300/, exactly as a host would serve it
 ```
@@ -45,7 +46,9 @@ practice's photography, which the repo rules keep out of git.
 ├── extract.mjs          drives headless Chrome over the saved crawl snapshots
 ├── extract-in-page.js   runs inside that page and emits structured blocks
 ├── content/<slug>.json  the extracted content, one file per page
-├── theme/site.css       the design system (tokens sampled from the live site)
+├── theme/site.css        Client-First style guide + component CSS
+├── site/components.mjs   the reusable component library; nothing else writes markup
+├── site/presentation.mjs page chrome + the two generic renderers, composed from it
 ├── theme/site.js        mobile menu + deferred map
 ├── site/pages.mjs       hand-authored templates for the Elementor-built pages
 ├── build.mjs            content + templates -> dist/
@@ -97,6 +100,62 @@ Wed 9–6, Thu 8–5, Fri/Sat/Sun closed. The three doctor pages say Mon 9–7, 
 Thu 7–5, **Fri 7–5**. The rebuild uses the footer/homepage set throughout. **The practice needs to
 confirm which is right** — this is the third time this has come up (see Open Question 9 in
 `docs/project-overview.md`).
+
+## How it is built
+
+**Layout comes from the screenshots**, not from the old site's markup. The 252 pre-takedown
+captures in `01-content-intake/.tmp/site-screenshots/desktop/` are the design reference. The old
+Elementor markup is not, because it was page-builder soup wrapped around theme demo content.
+
+**Copy comes verbatim from the extraction.** Nothing retypes a sentence, a price or a credential -
+those are the practice's published words, and a transcription step is exactly where a wrong digit
+gets into a price or a doctor's qualification.
+
+**Structure is Client-First**, following the house mapping in
+`dr-nahlah/workflows/07-webflow-build/.tmp/CF-MAPPING.md`. Two layers, and the split is the point:
+
+| Layer | Naming | Examples |
+| :--- | :--- | :--- |
+| Style guide | hyphenated utilities, shared everywhere | `padding-global`, `container-large`, `heading-style-h2`, `button` |
+| Components | Client-First underscore, one CSS block each | `doctor-card_image`, `offer-card_price`, `navbar_dropdown-list` |
+
+Nothing is styled by a bare tag name except the document defaults - a bare-tag rule collides
+site-wide the moment the markup is pasted into a builder, which is the failure the Client-First
+validator flags.
+
+Pages compose `site/components.mjs`; no template writes a card, a section shell or a button by
+hand. `audit.mjs` enforces it: **any class in the markup that the stylesheet does not define is a
+build error**. That check exists because moving the vocabulary to Client-First left the page
+templates naming classes that no longer existed, and every one of those pages rendered completely
+unstyled, with no error anywhere.
+
+## Instatic import
+
+`node to-instatic.mjs` writes `instatic/` - gitignored, because it is generated:
+
+| Path | What it is |
+| :--- | :--- |
+| `pages/*.json` | `{ slug, title, description, html }`; `html` is a **body**, not a document |
+| `site.css`, `site.js` | the two **site-wide code assets** |
+| `media-manifest.json` | every image to upload, with its size |
+| `IMPORT.md` | the run order |
+
+The local build and the Instatic site are the same markup with three differences, and only three:
+
+1. **Routes.** `/services/invisalign/` becomes `/services/invisalign`.
+2. **Media.** Instatic assigns an id at upload and renames files on the way in (`.jpeg` to `.jpg`,
+   dots to underscores), so paths **cannot be predicted**. Upload first, harvest the map, then
+   re-run `node to-instatic.mjs --media <map>.json`. With no map every path is reported unmapped,
+   which is a visible failure rather than a silently broken image.
+3. **Scripts and styles.** Dropped from the page body; they go in as code assets instead.
+
+**Two things that will bite.** The import cannot run headlessly - Instatic's MCP edits a live
+workspace, so the Site editor has to be open in a browser, signed in as the connector owner. And
+never call `site_add_page` twice for the same page: slugs auto-unique, so a repeat gives you
+`about-2` rather than an overwrite.
+
+There is no Instatic MCP configured for Mason Park yet; `.mcp.json` carries only
+`instatic-dr-nahlah`.
 
 ## Cross-site images — needs a decision from Brandklout
 

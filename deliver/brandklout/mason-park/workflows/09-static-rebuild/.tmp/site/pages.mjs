@@ -1,9 +1,16 @@
-// Hand-authored templates for the pages WordPress built in Elementor, where a
-// generic block replay would lose the layout. Every string of copy is pulled
-// out of the extracted content (content/<slug>.json) rather than retyped, so
-// the words stay exactly the practice's own; only the arrangement is authored
-// here, following the pre-takedown screenshots in
-// ../../01-content-intake/.tmp/site-screenshots/desktop/.
+// Hand-authored page templates.
+//
+// LAYOUT comes from the pre-takedown screenshots in
+// ../../01-content-intake/.tmp/site-screenshots/desktop/ — not from the old
+// site's markup, which was Elementor soup wrapped around theme demo content.
+//
+// COPY comes verbatim out of content/<slug>.json. Nothing here retypes a
+// sentence, a price or a credential: those are the practice's published words
+// and a transcription step is exactly where a wrong digit would get in.
+//
+// STRUCTURE is composed from site/components.mjs. No template writes a card, a
+// section shell or a button by hand — if one looks wrong everywhere, it is one
+// fix in the library.
 
 import { NAV, SERVICE_SLUGS as SERVICE_SLUGS_REF } from "../pages.config.mjs";
 
@@ -12,225 +19,23 @@ const inSection = (d, n) => (d.blocks || []).filter((b) => b.section === n);
 const heads = (d, n) => inSection(d, n).filter((b) => b.type === "heading").map((b) => b.text);
 const paras = (d, n) => inSection(d, n).filter((b) => b.type === "para");
 const imgs = (d, n) => inSection(d, n).filter((b) => b.type === "image");
-const ctas = (d, n) => inSection(d, n).filter((b) => b.type === "cta");
 const embeds = (d, n) => inSection(d, n).filter((b) => b.type === "embed");
-// A paragraph anywhere on the page whose text starts with `start`.
-const paraLike = (d, start) =>
-  (d.blocks || []).find((b) => b.type === "para" && b.text.toLowerCase().startsWith(start.toLowerCase()));
+const faqs = (d) => (d.blocks || []).filter((b) => b.type === "faq");
+const stripTags = (x) => String(x || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
 
 const BOOK = "https://www.flexbook.me/masonpark/1";
 
 // Two typos the live theme baked into the virtual-consult steps: a missing space
-// and a stray zero-width space. Fixed here rather than left in the rebuild; the
-// wording itself is untouched.
-const fixTypos = (s) =>
-  s.replace(/​/g, "").replace(/\bSomePhotos\b/, "Some Photos").trim();
+// and a stray zero-width space. Fixed here; the wording itself is untouched.
+const fixTypos = (s) => s.replace(/​/g, "").replace(/\bSomePhotos\b/, "Some Photos").trim();
 
-// The twelve service tiles the homepage carousel cycles through, in the order
-// the live markup lists them. The icon files are the practice's own.
-const SERVICE_TILES = [
-  ["s4",  "Cosmetic Dentistry",    "/services/cosmetic-dentistry/"],
-  ["s3",  "Sedation Dentistry",    "/services/sedation-dentistry/"],
-  ["s2",  "Advanced Technology",   "/technology/"],
-  ["s1",  "Comprehensive Care",    "/services/comprehensive-care/"],
-  ["s12", "Invisalign",            "/services/invisalign/"],
-  ["s11", "Pediatric Dental Care", "/services/pediatric-dental-care/"],
-  ["s10", "Dentures",              "/services/dentures/"],
-  ["s9",  "Oral Surgery",          "/services/oral-surgery/"],
-  ["s8",  "Extractions",           "/services/extractions/"],
-  ["s7",  "Root Canal Therapy",    "/services/root-canal-therapy/"],
-  ["s6",  "Preventative Dentistry","/services/preventative-dentistry/"],
-  ["s5",  "Dental Implants",       "/services/dental-implant-placement/"],
-];
-
-// Role lines under the three portraits. They sit in a theme subtitle element
-// that the extractor folds away, so they are transcribed from the homepage
-// screenshot (site-screenshots/desktop/home.png, "MEET THE DENTAL TEAM").
-const DOCTORS = [
-  ["/wp-content/uploads/2023/11/HS-7-scaled.jpg", "Dr. Dave Cho",   "General Dentist",                    "/team/dr-cho/"],
-  ["/wp-content/uploads/2020/04/DrWilliamSung-230x300-1.webp", "Dr. William Sung", "General Dentist",     "/team/dr-sung/"],
-  ["/wp-content/uploads/2023/11/HS-8-scaled.jpg", "Dr. Tam Nguyen", "Board Certified Pediatric Dentist",  "/team/tam-nguyen/"],
-];
-
-// ===========================================================================
-// Home
-// ===========================================================================
-function home(d, h) {
-  const { esc, asset, link } = h;
-  const hero = imgs(d, 2)[0];
-  const introImg = imgs(d, 5)[0];
-  const introHead = heads(d, 5).find((t) => t.startsWith("Experience")) || "Experience Exceptional Dentistry at Mason Park Dental of Katy";
-  const introParas = paras(d, 5).filter((p) => p.text !== "Dentist in Katy, TX");
-  const servicesParas = paras(d, 7);
-  const doctorsParas = paras(d, 8);
-  const doctorsImg = imgs(d, 8)[0];
-  const vcParas = paras(d, 10);
-  const vcSteps = heads(d, 10).filter((t) => t !== "GET A FREE VIRTUAL DENTAL CONSULT");
-  const cherryLogo = imgs(d, 11)[0];
-  const cherryArt = imgs(d, 11)[1];
-  const cherryPara = paras(d, 11)[0];
-  const cherryCta = ctas(d, 11)[0];
-  const flexPara = paras(d, 13)[0];
-  const flexImg = imgs(d, 13)[0];
-  const map = embeds(d, 19)[0];
-
-  // Reviews: the extractor keeps quote and attribution as consecutive blocks.
-  const reviewBlocks = inSection(d, 15);
-  const reviews = [];
-  for (let i = 0; i < reviewBlocks.length; i++) {
-    if (reviewBlocks[i].type !== "para") continue;
-    const next = reviewBlocks[i + 1];
-    reviews.push({
-      quote: reviewBlocks[i].text.replace(/^[“"]|[”"]$/g, ""),
-      who: next && next.type === "heading" ? next.text.replace(/^-\s*/, "") : "",
-    });
-  }
-  // The live page repeats one review twice with different trailing punctuation,
-  // so dedupe on a normalised prefix and drop any quote with no attribution.
-  const seen = new Set();
-  const key = (q) => q.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 60);
-  const uniqueReviews = reviews
-    .filter((r) => r.who && !seen.has(key(r.quote)) && seen.add(key(r.quote)))
-    .slice(0, 6);
-
-  return `
-<section class="hero section--tight">
-  <div class="shell hero__media">
-    ${h.img(hero?.src || "/wp-content/uploads/2023/11/g7-1024x683.jpg", "The team at Mason Park Dental of Katy",
-      { sizes: "(max-width: 1264px) 100vw, 1200px", eager: true, w: 1024, h: 683 })}
-  </div>
-</section>
-
-<section class="section">
-  <div class="shell split split--wide-text">
-    <div>
-      <p class="eyebrow">Dentist in Katy, TX</p>
-      <h1>${esc(introHead)}</h1>
-      ${introParas.map((p) => `<p>${esc(p.text)}</p>`).join("\n      ")}
-      <p><a class="btn" href="/our-services/">Learn more</a>
-         <a class="btn btn--ghost" href="${BOOK}" target="_blank" rel="noopener">Schedule online</a></p>
-    </div>
-    ${introImg ? `<div>${h.img(introImg.src, "A patient in consultation at Mason Park Dental of Katy", { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : ""}
-  </div>
-</section>
-
-<section class="section section--paper">
-  <div class="shell">
-    <div class="section__head section__head--center">
-      <p class="eyebrow">What we do</p>
-      <h2>Dentistry for every stage of life</h2>
-    </div>
-    <div class="grid grid--4">
-      ${SERVICE_TILES.map(([icon, label, href]) => `
-      <a class="card card--link" href="${esc(link(href) || href)}">
-        <img class="card__icon" src="${esc(asset("/wp-content/uploads/2021/12/" + icon + ".png"))}" alt="" aria-hidden="true" loading="lazy">
-        <h4>${esc(label)}</h4>
-      </a>`).join("")}
-    </div>
-    <div class="split split--wide-text" style="margin-top:clamp(2.5rem,5vw,4rem)">
-      <div>${servicesParas.map((p) => `<p>${esc(p.text)}</p>`).join("\n        ")}</div>
-      <div style="text-align:center">
-        <p><a class="btn btn--sage" href="${BOOK}" target="_blank" rel="noopener">Request an appointment</a></p>
-        <p class="card__meta">Or call <a href="tel:+12817698878">(281) 769-8878</a></p>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section">
-  <div class="shell split">
-    <div>
-      <p class="eyebrow">Dentist in Katy, TX</p>
-      <h2>${esc(heads(d, 8)[0] || "Meet Our Esteemed Dentists")}</h2>
-      ${doctorsParas.map((p) => `<p>${esc(p.text)}</p>`).join("\n      ")}
-      <p><a class="btn" href="/our-team/">Meet our team</a></p>
-    </div>
-    ${doctorsImg ? `<div>${h.img(doctorsImg.src, "Two of the dentists at Mason Park Dental of Katy", { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : ""}
-  </div>
-</section>
-
-<section class="section section--ink">
-  <div class="shell">
-    <div class="split">
-      <div>
-        <h2>${esc(heads(d, 10)[0] || "Get a free virtual dental consult")}</h2>
-        ${vcParas.map((p) => `<p>${esc(p.text)}</p>`).join("\n        ")}
-        <p><a class="btn" href="/virtual-consultation/">Virtual consultation</a></p>
-      </div>
-      <div class="grid steps">
-        ${vcSteps.map((s) => `<div class="card"><h4>${esc(fixTypos(s))}</h4></div>`).join("\n        ")}
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section section--paper">
-  <div class="shell split">
-    <div>
-      ${cherryLogo ? `<img src="${esc(asset(cherryLogo.src))}" alt="Cherry" width="200" style="box-shadow:none;margin-bottom:1.25rem" loading="lazy">` : ""}
-      <h2>${esc(heads(d, 11)[0] || "Cherry Dental Financing: 0% APR with no hard credit check")}</h2>
-      ${cherryPara ? `<p>${esc(cherryPara.text)}</p>` : ""}
-      <p><a class="btn" href="/financing/">See financing options</a></p>
-      <p class="card__meta">Applications are handled by Cherry. Ask the front desk which account your application should go through.</p>
-    </div>
-    ${cherryArt ? `<div style="box-shadow:none">${h.img(cherryArt.src, "Two patients reviewing financing options on a tablet", { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : ""}
-  </div>
-</section>
-
-<section class="section">
-  <div class="shell">
-    <div class="section__head section__head--center">
-      <p class="eyebrow">Dentist in Katy, TX</p>
-      <h2>Meet the dental team</h2>
-    </div>
-    <div class="grid grid--3">
-      ${DOCTORS.map(([src, name, role, href]) => `
-      <a class="doctor card--link" href="${esc(link(href) || href)}">
-        ${h.img(src, name, { sizes: "(max-width: 899px) 100vw, 360px" })}
-        <h3>${esc(name)}</h3>
-        <p>${esc(role)}</p>
-      </a>`).join("")}
-    </div>
-  </div>
-</section>
-
-<section class="section section--paper">
-  <div class="shell split split--flip">
-    ${flexImg ? `<div>${h.img(flexImg.src, "A team member taking a call at the practice", { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : ""}
-    <div>
-      <p class="eyebrow">Dentist in Katy, TX</p>
-      <h2>${esc(heads(d, 13)[0] || "Flexible Scheduling and Emergency Care")}</h2>
-      ${flexPara ? `<p>${esc(flexPara.text)}</p>` : ""}
-      <p><a class="btn" href="${BOOK}" target="_blank" rel="noopener">Request an appointment</a>
-         <a class="btn btn--ghost" href="/services/emergency-dentist/">Dental emergency?</a></p>
-    </div>
-  </div>
-</section>
-
-<section class="section section--ink">
-  <div class="shell">
-    <div class="section__head section__head--center">
-      <p class="eyebrow">Reviews</p>
-      <h2>What people are saying</h2>
-    </div>
-    <div class="quotes">
-      ${uniqueReviews.map((r) => `
-      <div class="quote">
-        <p class="stars" aria-label="Five out of five stars">&#9733;&#9733;&#9733;&#9733;&#9733;</p>
-        <blockquote>${esc(r.quote)}</blockquote>
-        <cite>${esc(r.who)}</cite>
-      </div>`).join("")}
-    </div>
-  </div>
-</section>
-
-<section class="section section--tight">
-  <div class="shell">
-    <div class="section__head section__head--center"><h2>Find us in Katy</h2></div>
-    ${map ? `<div class="embed"><iframe data-src="${esc(map.src)}" title="Map to Mason Park Dental of Katy" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>` : ""}
-  </div>
-</section>`;
-}
+// Offer and service headings are shouted upstream. Sentence-case them, but keep
+// prices and trademarked product names intact.
+const softenLabel = (s) =>
+  s.replace(/[\w®$,]+/g, (w) =>
+    /^\$|^(TX|FAQ|AI|DMD)$/.test(w) ? w
+      : /^INVISALIGN$/i.test(w) ? "Invisalign"
+      : w[0] + w.slice(1).toLowerCase());
 
 // The practice's own embedded forms, harvested from the live pages.
 const FORMS = {
@@ -240,122 +45,248 @@ const FORMS = {
 };
 const MAP_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.0585305167815!2d-95.75121988455305!3d29.775949038160515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86412740e7dd5def%3A0xfa1ab8c6e696e133!2sMason%20Park%20Dental%20-%20Katy%20Dentist!5e0!3m2!1sen!2sus!4v1638807674675!5m2!1sen!2sus";
 const LOCATION_NOTE = "We are located at the corner of Mason Rd and Kingsland Blvd, behind the Ranch 99 complex.";
-const OFFICE_HOURS = [
-  ["Monday", "9am - 6pm"], ["Tuesday", "8am - 5pm"], ["Wednesday", "9am - 6pm"],
-  ["Thursday", "8am - 5pm"], ["Friday", "Closed"], ["Saturday", "Closed"], ["Sunday", "Closed"],
+
+// The twelve service tiles the homepage carousel cycles through, in the order
+// the live markup lists them. The icons are the practice's own files.
+const SERVICE_TILES = [
+  ["s4", "Cosmetic Dentistry", "/services/cosmetic-dentistry/"],
+  ["s3", "Sedation Dentistry", "/services/sedation-dentistry/"],
+  ["s2", "Advanced Technology", "/technology/"],
+  ["s1", "Comprehensive Care", "/services/comprehensive-care/"],
+  ["s12", "Invisalign", "/services/invisalign/"],
+  ["s11", "Pediatric Dental Care", "/services/pediatric-dental-care/"],
+  ["s10", "Dentures", "/services/dentures/"],
+  ["s9", "Oral Surgery", "/services/oral-surgery/"],
+  ["s8", "Extractions", "/services/extractions/"],
+  ["s7", "Root Canal Therapy", "/services/root-canal-therapy/"],
+  ["s6", "Preventative Dentistry", "/services/preventative-dentistry/"],
+  ["s5", "Dental Implants", "/services/dental-implant-placement/"],
+];
+const iconSrc = (icon) => "/wp-content/uploads/2021/12/" + icon + ".png";
+
+// Role lines under the three portraits. They sit in a theme subtitle element the
+// extractor folds away, so they come from the homepage screenshot
+// (site-screenshots/desktop/home.png, "MEET THE DENTAL TEAM").
+const DOCTORS = [
+  ["/wp-content/uploads/2023/11/HS-7-scaled.jpg", "Dr. Dave Cho", "General Dentist", "/team/dr-cho/"],
+  ["/wp-content/uploads/2020/04/DrWilliamSung-230x300-1.webp", "Dr. William Sung", "General Dentist", "/team/dr-sung/"],
+  ["/wp-content/uploads/2023/11/HS-8-scaled.jpg", "Dr. Tam Nguyen", "Board Certified Pediatric Dentist", "/team/tam-nguyen/"],
 ];
 
-const pageHero = (h, title, sub, eyebrow = "Katy, TX") => `
-<section class="hero hero--page">
-  <div class="shell">
-    <p class="eyebrow">${h.esc(eyebrow)}</p>
-    <h1>${h.esc(title)}</h1>
-    ${sub ? `<p>${h.esc(sub)}</p>` : ""}
-  </div>
-</section>
-${h.breadcrumbs([{ label: "Home", href: "/" }, { label: title }])}`;
+// ------------------------------------------------------------ shared blocks
+/** Standard page opening: plain hero + breadcrumb. */
+const openPage = (h, title, sub, eyebrow = "Katy, TX") =>
+  h.C.heroPlain({ eyebrow, title, text: sub }) + "\n" +
+  h.C.breadcrumb([{ label: "Home", href: "/" }, { label: title }]);
 
-const bookBlock = (h) => `
-<section class="section section--paper">
-  <div class="shell split">
-    <div>
-      <h2>Book your visit</h2>
-      <p>New and existing patients are welcome. Book online at any hour, or call the practice during office hours and we will find you a time.</p>
-      <p><a class="btn" href="${BOOK}" target="_blank" rel="noopener">Schedule online</a>
-         <a class="btn btn--ghost" href="${h.PRACTICE.phoneHref}">Call ${h.esc(h.PRACTICE.phone)}</a></p>
-      <p class="card__meta">${h.esc(LOCATION_NOTE)}</p>
-    </div>
-    <div class="card">
-      <h3>Office hours</h3>
-      <ul style="list-style:none;padding:0;margin:0">
-        ${OFFICE_HOURS.map(([d, t]) => `<li style="display:flex;justify-content:space-between;gap:1rem"><span>${d}</span><strong>${t}</strong></li>`).join("")}
-      </ul>
-    </div>
-  </div>
-</section>`;
+/** The booking block that closes most pages. */
+const bookingSection = (h) => {
+  const C = h.C;
+  return C.section({ name: "booking", bg: "paper", inner: C.split(
+    `${C.heading("Book your visit")}
+     ${C.spacer("small")}
+     ${C.paragraph("New and existing patients are welcome. Book online at any hour, or call the practice during office hours and we will find you a time.")}
+     ${C.spacer("small")}
+     ${C.buttonGroup([
+        { label: "Schedule online", href: BOOK, external: true },
+        { label: `Call ${h.PRACTICE.phone}`, href: h.PRACTICE.phoneHref, variant: "ghost" },
+      ])}
+     ${C.spacer("small")}
+     <p class="card_meta">${h.esc(LOCATION_NOTE)}</p>`,
+    `<div class="card_component">
+       ${C.heading("Office hours", { level: 3, style: 4 })}
+       ${C.hoursList(h.HOURS)}
+     </div>`,
+  ) });
+};
 
 // ===========================================================================
-// Services index - the live page is a bare icon carousel, so this lists every
-// service page the site actually has, grouped the way the main menu groups them.
+// Home
+// ===========================================================================
+function home(d, h) {
+  const C = h.C;
+  const hero = imgs(d, 2)[0];
+  const introImg = imgs(d, 5)[0];
+  const introHead = heads(d, 5).find((t) => t.startsWith("Experience"))
+    || "Experience Exceptional Dentistry at Mason Park Dental of Katy";
+  const introParas = paras(d, 5).filter((p) => p.text !== "Dentist in Katy, TX");
+  const servicesParas = paras(d, 7);
+  const doctorsParas = paras(d, 8);
+  const doctorsImg = imgs(d, 8)[0];
+  const vcParas = paras(d, 10);
+  const vcSteps = heads(d, 10).filter((t) => t !== "GET A FREE VIRTUAL DENTAL CONSULT").map(fixTypos);
+  const cherryLogo = imgs(d, 11)[0];
+  const cherryArt = imgs(d, 11)[1];
+  const cherryPara = paras(d, 11)[0];
+  const flexPara = paras(d, 13)[0];
+  const flexImg = imgs(d, 13)[0];
+  const map = embeds(d, 19)[0];
+
+  // Reviews: quote and attribution arrive as consecutive blocks. The live page
+  // repeats one twice with different trailing punctuation, so dedupe on a
+  // normalised prefix and drop any quote with no attribution.
+  const rb = inSection(d, 15);
+  const seen = new Set();
+  const key = (q) => q.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 60);
+  const reviews = [];
+  for (let i = 0; i < rb.length; i++) {
+    if (rb[i].type !== "para") continue;
+    const next = rb[i + 1];
+    const quote = rb[i].text.replace(/^[“"]|[”"]$/g, "");
+    const author = next && next.type === "heading" ? next.text.replace(/^-\s*/, "") : "";
+    if (author && !seen.has(key(quote))) { seen.add(key(quote)); reviews.push({ quote, author }); }
+  }
+
+  return [
+    C.heroMedia({ src: hero?.src || "/wp-content/uploads/2023/11/g7-1024x683.jpg", alt: "The team at Mason Park Dental of Katy", w: 1024, h: 683 }),
+
+    C.section({ name: "intro", inner: C.split(
+      `${C.eyebrow("Dentist in Katy, TX")}
+       ${C.heading(introHead, { level: 1 })}
+       ${C.spacer("small")}
+       ${introParas.map((p) => C.paragraph(p.text)).join(C.spacer("xsmall"))}
+       ${C.spacer("small")}
+       ${C.buttonGroup([
+          { label: "Learn more", href: "/our-services/" },
+          { label: "Schedule online", href: BOOK, variant: "ghost", external: true },
+        ])}`,
+      introImg ? h.img(introImg.src, "A patient in consultation at Mason Park Dental of Katy", { sizes: "(max-width: 899px) 100vw, 560px" }) : "",
+      { textWide: true },
+    ) }),
+
+    C.section({ name: "services", bg: "paper", inner: `
+      ${C.sectionHeading({ eyebrow: "What we do", title: "Dentistry for every stage of life", centered: true })}
+      ${C.grid(4, SERVICE_TILES.map(([icon, label, href]) => C.serviceCard({ icon: iconSrc(icon), label, href })))}
+      ${C.spacer("xlarge")}
+      ${C.split(
+        servicesParas.map((p) => C.paragraph(p.text)).join(C.spacer("xsmall")),
+        `<div class="text-align-center">
+           ${C.button({ label: "Request an appointment", href: BOOK, variant: "secondary", external: true })}
+           ${C.spacer("small")}
+           <p class="card_meta">Or call <a href="${h.PRACTICE.phoneHref}">${h.esc(h.PRACTICE.phone)}</a></p>
+         </div>`,
+        { textWide: true },
+      )}` }),
+
+    C.section({ name: "doctors-intro", inner: C.split(
+      `${C.eyebrow("Dentist in Katy, TX")}
+       ${C.heading(heads(d, 8)[0] || "Meet Our Esteemed Dentists")}
+       ${C.spacer("small")}
+       ${doctorsParas.map((p) => C.paragraph(p.text)).join(C.spacer("xsmall"))}
+       ${C.spacer("small")}
+       ${C.button({ label: "Meet our team", href: "/our-team/" })}`,
+      doctorsImg ? h.img(doctorsImg.src, "Two of the dentists at Mason Park Dental of Katy", { sizes: "(max-width: 899px) 100vw, 560px" }) : "",
+    ) }),
+
+    C.section({ name: "virtual-consult", bg: "ink", inner: C.split(
+      `${C.heading(heads(d, 10)[0] || "Get a free virtual dental consult")}
+       ${C.spacer("small")}
+       ${vcParas.map((p) => C.paragraph(p.text)).join(C.spacer("xsmall"))}
+       ${C.spacer("small")}
+       ${C.button({ label: "Virtual consultation", href: "/virtual-consultation/" })}`,
+      C.stepList(vcSteps),
+    ) }),
+
+    C.section({ name: "financing", bg: "paper", inner: C.split(
+      `${cherryLogo ? h.img(cherryLogo.src, "Cherry", { sizes: "200px" }) : ""}
+       ${C.spacer("small")}
+       ${C.heading(heads(d, 11)[0] || "Cherry Dental Financing: 0% APR with no hard credit check")}
+       ${C.spacer("small")}
+       ${cherryPara ? C.paragraph(cherryPara.text) : ""}
+       ${C.spacer("small")}
+       ${C.button({ label: "See financing options", href: "/financing/" })}
+       ${C.spacer("small")}
+       <p class="card_meta">Applications are handled by Cherry. Ask the front desk which account your application should go through.</p>`,
+      cherryArt ? h.img(cherryArt.src, "Two patients reviewing financing options on a tablet", { sizes: "(max-width: 899px) 100vw, 560px" }) : "",
+    ) }),
+
+    C.section({ name: "doctors", inner: `
+      ${C.sectionHeading({ eyebrow: "Dentist in Katy, TX", title: "Meet the dental team", centered: true })}
+      ${C.grid(3, DOCTORS.map(([image, name, role, href]) => C.doctorCard({ image, name, role, href })))}` }),
+
+    C.section({ name: "scheduling", bg: "paper", inner: C.split(
+      flexImg ? h.img(flexImg.src, "A team member taking a call at the practice", { sizes: "(max-width: 899px) 100vw, 560px" }) : "",
+      `${C.eyebrow("Dentist in Katy, TX")}
+       ${C.heading(heads(d, 13)[0] || "Flexible Scheduling and Emergency Care")}
+       ${C.spacer("small")}
+       ${flexPara ? C.paragraph(flexPara.text) : ""}
+       ${C.spacer("small")}
+       ${C.buttonGroup([
+          { label: "Request an appointment", href: BOOK, external: true },
+          { label: "Dental emergency?", href: "/services/emergency-dentist/", variant: "ghost" },
+        ])}`,
+    ) }),
+
+    C.section({ name: "reviews", bg: "ink", inner: `
+      ${C.sectionHeading({ eyebrow: "Reviews", title: "What people are saying", centered: true })}
+      ${C.reviewList(reviews.slice(0, 6))}` }),
+
+    C.section({ name: "map", padding: "small", inner: `
+      ${C.sectionHeading({ title: "Find us in Katy", centered: true })}
+      ${map ? h.renderEmbed(map.src) : ""}` }),
+  ].join("\n");
+}
+
+// ===========================================================================
+// Our services — the live page was an icon carousel that named no service in
+// text, so this lists every treatment page the site actually has.
 // ===========================================================================
 function ourServices(d, h) {
-  const { esc, link, labelFor } = h;
-  const groups = [
-    ["Preventative dentistry", "/services/preventative-dentistry/"],
-    ["Cosmetic dentistry", "/services/cosmetic-dentistry/"],
-    ["Restorative dentistry", "/services/restorative-dentistry/"],
-    ["Hygiene and periodontics", "/services/hygiene-and-periodontics/"],
-    ["Invisalign", "/services/invisalign/"],
-    ["Oral surgery", "/services/oral-surgery/"],
-  ];
-  // Pull the group children straight out of the menu definition so this page and
-  // the header can never drift apart.
-  const menuServices = (NAV.find((i) => i.label === "Services")?.children || []);
-  // Some service pages exist but were never in the menu; surface them here so
-  // nothing on the site is unreachable.
+  const C = h.C;
+  const menuServices = NAV.find((i) => i.label === "Services")?.children || [];
   const inMenu = new Set();
   (function collect(items) {
     for (const it of items) { inMenu.add(it.href); if (it.children) collect(it.children); }
   })(menuServices);
   const unlisted = SERVICE_SLUGS_REF.filter((sl) => !inMenu.has(h.routeOf(sl)));
-  return `${pageHero(h, "Our Services", "Family, cosmetic, restorative and pediatric dentistry, all under one roof in Katy, Texas.")}
-<section class="section">
-  <div class="shell">
-    <div class="grid grid--4">
-      ${SERVICE_TILES.map(([icon, label, href]) => `
-      <a class="card card--link" href="${esc(link(href) || href)}">
-        <img class="card__icon" src="${esc(h.asset("/wp-content/uploads/2021/12/" + icon + ".png"))}" alt="" aria-hidden="true" loading="lazy">
-        <h4>${esc(label)}</h4>
-      </a>`).join("")}
-    </div>
-  </div>
-</section>
-<section class="section section--paper">
-  <div class="shell">
-    <div class="section__head"><h2>Every service, A to Z</h2>
-    <p>Each treatment has its own page explaining what it is, who it suits and what to expect.</p></div>
-    <div class="grid grid--3">
-      ${menuServices.map((g) => `
-      <div class="card">
-        <h3><a href="${esc(g.href)}" style="text-decoration:none">${esc(g.label)}</a></h3>
-        ${g.children?.length ? `<ul style="margin-top:.75rem">${g.children.map((c) => `<li><a href="${esc(c.href)}">${esc(c.label)}</a></li>`).join("")}</ul>` : ""}
-      </div>`).join("")}
-      ${unlisted.length ? `
-      <div class="card">
-        <h3>Also offered</h3>
-        <p class="card__meta">Treatment pages the old menu never linked to.</p>
-        <ul style="margin-top:.75rem">${unlisted.map((s) => `<li><a href="${esc(h.routeOf(s))}">${esc(h.labelFor(s))}</a></li>`).join("")}</ul>
-      </div>` : ""}
-      <div class="card">
-        <h3>Technology</h3>
-        <ul style="margin-top:.75rem">
-          <li><a href="/technology/">Our technology</a></li>
-          <li><a href="/technology-ai/">Technology / AI</a></li>
-          <li><a href="/pearl-ai/">Pearl AI</a></li>
-          <li><a href="/ceramillmotion3/">Ceramill Motion 3</a></li>
-        </ul>
-      </div>
-      <div class="card">
-        <h3>Costs and offers</h3>
-        <ul style="margin-top:.75rem">
-          <li><a href="/dental-implant-costs/">Dental implant costs</a></li>
-          <li><a href="/dental-implant-costs-esp/">Costos de implantes dentales (Espa&ntilde;ol)</a></li>
-          <li><a href="/special-offers/">Special offers</a></li>
-          <li><a href="/financing/">Financing and insurance</a></li>
-        </ul>
-      </div>
-    </div>
-  </div>
-</section>
-${bookBlock(h)}`;
+
+  const groupCard = (g) => C.card({
+    title: g.label, href: g.href,
+    html: g.children?.length
+      ? `<ul class="sidebar_list">${g.children.map((c) => `<li>${h.esc(c.label)}</li>`).join("")}</ul>`
+      : "",
+  });
+
+  return [
+    openPage(h, "Our Services", "Family, cosmetic, restorative and pediatric dentistry, all under one roof in Katy, Texas."),
+    C.section({ name: "service-tiles", inner:
+      C.grid(4, SERVICE_TILES.map(([icon, label, href]) => C.serviceCard({ icon: iconSrc(icon), label, href }))) }),
+    C.section({ name: "service-index", bg: "paper", inner: `
+      ${C.sectionHeading({ title: "Every service, A to Z", text: "Each treatment has its own page explaining what it is, who it suits and what to expect." })}
+      ${C.grid(3, [
+        ...menuServices.map(groupCard),
+        unlisted.length ? C.card({
+          title: "Also offered",
+          html: `<p class="card_meta">Treatment pages the old menu never linked to.</p>
+                 <ul class="sidebar_list">${unlisted.map((s) => `<li><a href="${h.routeOf(s)}">${h.esc(h.labelFor(s))}</a></li>`).join("")}</ul>`,
+        }) : "",
+        C.card({
+          title: "Technology",
+          html: `<ul class="sidebar_list">
+            <li><a href="/technology/">Our technology</a></li>
+            <li><a href="/technology-ai/">Technology / AI</a></li>
+            <li><a href="/pearl-ai/">Pearl AI</a></li>
+            <li><a href="/ceramillmotion3/">Ceramill Motion 3</a></li></ul>`,
+        }),
+        C.card({
+          title: "Costs and offers",
+          html: `<ul class="sidebar_list">
+            <li><a href="/dental-implant-costs/">Dental implant costs</a></li>
+            <li><a href="/dental-implant-costs-esp/">Costos de implantes dentales (Espa&ntilde;ol)</a></li>
+            <li><a href="/special-offers/">Special offers</a></li>
+            <li><a href="/financing/">Financing and insurance</a></li></ul>`,
+        }),
+      ])}` }),
+    bookingSection(h),
+  ].join("\n");
 }
 
 // ===========================================================================
-// About us - keeps the practice intro and the three real doctor bios, and drops
-// the theme's demo award table and lorem sections that sat below them.
+// About us — the practice intro and three real bios. The theme's demo award
+// table and lorem sections that sat below them are dropped.
 // ===========================================================================
 function aboutUs(d, h) {
-  const { esc, asset } = h;
+  const C = h.C;
   const intro = paras(d, 3);
   const bios = [4, 5, 6].map((n) => ({
     name: heads(d, n).find((t) => /^Dr\./i.test(t)) || "",
@@ -366,87 +297,366 @@ function aboutUs(d, h) {
       : /Cho/i.test(heads(d, n).join(" ")) ? "/team/dr-cho/" : "/team/dr-sung/",
   })).filter((b) => b.name);
 
-  return `${pageHero(h, "About Us", heads(d, 3).find((t) => t.startsWith("Meet")) || "")}
-<section class="section">
-  <div class="shell shell--narrow prose">
-    ${intro.map((p) => `<p>${esc(p.text)}</p>`).join("\n    ")}
-    <p><a class="btn" href="${BOOK}" target="_blank" rel="noopener">Request an appointment</a></p>
-  </div>
-</section>
-${bios.map((b, i) => `
-<section class="section${i % 2 === 0 ? " section--paper" : ""}">
-  <div class="shell split${i % 2 === 1 ? " split--flip" : ""}">
-    ${b.img ? `<div>${h.img(b.img.src, b.name, { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : "<div></div>"}
-    <div>
-      <p class="eyebrow">${esc(b.tagline)}</p>
-      <h2>${esc(b.name)}</h2>
-      <p>${esc(b.body)}</p>
-      <p><a class="btn btn--ghost" href="${esc(b.href)}">Full profile</a></p>
-    </div>
-  </div>
-</section>`).join("")}
-${bookBlock(h)}`;
+  return [
+    openPage(h, "About Us", heads(d, 3).find((t) => t.startsWith("Meet")) || ""),
+    C.section({ name: "intro", container: "medium", inner: `
+      ${intro.map((p) => C.paragraph(p.text, { size: "medium" })).join(C.spacer("small"))}
+      ${C.spacer("medium")}
+      ${C.button({ label: "Request an appointment", href: BOOK, external: true })}` }),
+    ...bios.map((b, i) => C.section({
+      name: "doctor-bio", bg: i % 2 === 0 ? "paper" : "",
+      inner: C.split(
+        b.img ? h.img(b.img.src, b.name, { sizes: "(max-width: 899px) 100vw, 560px" }) : "",
+        `${C.eyebrow(b.tagline)}
+         ${C.heading(b.name)}
+         ${C.spacer("small")}
+         ${C.paragraph(b.body)}
+         ${C.spacer("small")}
+         ${C.button({ label: "Full profile", href: b.href, variant: "ghost" })}`,
+        { flipped: i % 2 === 1 },
+      ),
+    })),
+    bookingSection(h),
+  ].join("\n");
 }
 
 // ===========================================================================
-// Our team - 403 on the live site, and it is in the main menu. Rebuilt from the
-// three doctor profiles the site does publish.
+// Meet our team — 403 on the live site, and it is in the main menu.
 // ===========================================================================
 function ourTeam(d, h) {
-  const { esc, asset, read, stripBoilerplate } = h;
-  const cards = DOCTORS.map(([src, name, role, href]) => {
-    const slug = href.replace(/^\/team\/|\/$/g, "");
-    const bio = read("team-" + slug);
+  const C = h.C;
+  const cards = DOCTORS.map(([image, name, role, href]) => {
+    const bio = h.read("team-" + href.replace(/^\/team\/|\/$/g, ""));
     // Dr. Nguyen's page opens with a lorem ipsum block the practice never
     // noticed, so the same boilerplate filter the page templates use runs here.
-    const first = stripBoilerplate(bio?.blocks || []).find((b) => b.type === "para")?.text
-      || (bio?.html || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().slice(0, 260);
-    return `
-      <a class="doctor card--link" href="${esc(href)}">
-        ${h.img(src, name, { sizes: "(max-width: 899px) 100vw, 360px" })}
-        <h3>${esc(name)}</h3>
-        <p>${esc(role)}</p>
-        ${first ? `<p style="margin-top:.75rem;font-size:.95rem">${esc(first.slice(0, 190))}${first.length > 190 ? "…" : ""}</p>` : ""}
-      </a>`;
-  }).join("");
+    const first = h.stripBoilerplate(bio?.blocks || []).find((b) => b.type === "para")?.text
+      || stripTags(bio?.html).slice(0, 260);
+    const blurb = first ? first.slice(0, 190) + (first.length > 190 ? "…" : "") : "";
+    return C.doctorCard({ image, name, role, href, blurb });
+  });
 
-  return `${pageHero(h, "Meet Our Team", "The dentists and the support team who look after Katy families every day.")}
-<section class="section">
-  <div class="shell">
-    <div class="grid grid--3">${cards}</div>
-  </div>
-</section>
-<section class="section section--paper">
-  <div class="shell shell--narrow prose">
-    <h2>Behind the chair</h2>
-    <p>Alongside the dentists, Mason Park Dental of Katy is run by a full team of hygienists, dental
-    assistants and front-office staff. They are the people who greet you, handle your insurance and
-    keep your appointments running to time.</p>
-    <div class="notice"><p><strong>Staff profiles to add:</strong> the practice's hygienists and
-    front-office team are named repeatedly in patient reviews but have no profiles on the old site.
-    Send us names, roles and photos and they will be added here.</p></div>
-  </div>
-</section>
-${bookBlock(h)}`;
+  return [
+    openPage(h, "Meet Our Team", "The dentists and the support team who look after Katy families every day."),
+    C.section({ name: "team", inner: C.grid(3, cards) }),
+    C.section({ name: "behind-the-chair", bg: "paper", container: "medium", inner: `
+      ${C.heading("Behind the chair")}
+      ${C.spacer("small")}
+      ${C.paragraph("Alongside the dentists, Mason Park Dental of Katy is run by a full team of hygienists, dental assistants and front-office staff. They are the people who greet you, handle your insurance and keep your appointments running to time.")}
+      ${C.spacer("medium")}
+      ${C.notice("<p><strong>Staff profiles to add:</strong> the practice's hygienists and front-office team are named repeatedly in patient reviews but have no profiles on the old site. Send us names, roles and photos and they will be added here.</p>")}` }),
+    bookingSection(h),
+  ].join("\n");
 }
 
 // ===========================================================================
-// Patient resources - a main-menu page whose live version was one paragraph,
-// a bullet list with no links, and three orphan icon captions. The bullets name
-// four things the practice does; this pairs each with the paragraph that
-// explains it and, where one exists, the page it points at.
+// Meet our doctors — the long-form bios. The live page stacked three portraits
+// at their natural sizes with the bios below in a different order again.
+// ===========================================================================
+function ourDoctors(d, h) {
+  const C = h.C;
+  const PERSONAL = /^When (not in the office|he'?s not in the office|she'?s not in the office)/i;
+
+  const doctors = [3, 4, 5].map((n) => {
+    const items = inSection(d, n);
+    const name = (items.find((b) => b.type === "heading" && b.level === 2)?.text || "").trim();
+    const role = items.find((b) => b.type === "heading" && b.level > 2)?.text || "";
+    const all = items.filter((b) => b.type === "para").map((b) => b.text);
+    const match = DOCTORS.find(([, dn]) => dn.toLowerCase() === name.toLowerCase());
+    return {
+      name,
+      role: (role || match?.[2] || "").replace(/​/g, "").trim(),
+      portrait: match?.[0] || items.find((b) => b.type === "image")?.src,
+      href: match?.[3],
+      bio: all.filter((t) => !PERSONAL.test(t)),
+      personal: all.find((t) => PERSONAL.test(t)),
+    };
+  }).filter((x) => x.name);
+
+  return [
+    openPage(h, "Meet Our Doctors", "The three dentists who look after Katy families at Mason Park Dental."),
+    ...doctors.map((doc, i) => C.section({
+      name: "doctor", bg: i % 2 === 1 ? "paper" : "",
+      inner: C.split(
+        doc.portrait ? h.img(doc.portrait, doc.name, { sizes: "(max-width: 899px) 100vw, 560px" }) : "",
+        `${C.eyebrow(doc.role)}
+         ${C.heading(doc.name)}
+         ${C.spacer("small")}
+         ${doc.bio.map((p) => C.paragraph(p)).join(C.spacer("xsmall"))}
+         ${doc.personal ? C.spacer("medium") + C.notice(`<p>${h.esc(doc.personal)}</p>`) : ""}
+         ${doc.href ? C.spacer("small") + C.button({ label: "Full profile", href: doc.href, variant: "ghost" }) : ""}`,
+        { flipped: i % 2 === 1 },
+      ),
+    })),
+    bookingSection(h),
+  ].join("\n");
+}
+
+// ===========================================================================
+// Contacts
+// ===========================================================================
+function contacts(d, h) {
+  const C = h.C;
+  const body = paras(d, 2).filter((p) => !/^(Visit Us|Call Us|Connect Online)/i.test(p.text));
+
+  return [
+    openPage(h, "Contact Mason Park Dental of Katy", d.description || ""),
+    C.section({ name: "contact", inner: C.split(
+      `${body.map((p) => C.paragraph(p.text)).join(C.spacer("small"))}
+       ${C.spacer("medium")}
+       ${C.notice(`<p>${h.esc(LOCATION_NOTE)}</p>`)}`,
+      C.grid(1, [
+        C.card({ title: "Visit us", html: `<p><a href="${h.esc(h.PRACTICE.maps)}" target="_blank" rel="noopener">${h.esc(h.PRACTICE.street)}<br>${h.esc(h.PRACTICE.city)}, ${h.esc(h.PRACTICE.region)} ${h.esc(h.PRACTICE.postal)}</a></p>` }),
+        C.card({ title: "Call us", html: `<p><a class="navbar_phone" href="${h.PRACTICE.phoneHref}">${h.esc(h.PRACTICE.phone)}</a></p>${C.button({ label: "Schedule online", href: BOOK, external: true })}` }),
+        C.card({ title: "Office hours", html: C.hoursList(h.HOURS) }),
+      ]),
+      { textWide: true },
+    ) }),
+    C.section({ name: "contact-form", bg: "paper", inner: `
+      ${C.sectionHeading({ title: "Request an appointment", text: "Send us a message and the front desk will come back to you.", centered: true })}
+      ${h.renderEmbed(FORMS.appointment)}` }),
+    C.section({ name: "map", padding: "small", inner: h.renderEmbed(MAP_EMBED) }),
+  ].join("\n");
+}
+
+// ===========================================================================
+// Appointment — the live page was a bare, non-functional calendar widget.
+// ===========================================================================
+function appointment(d, h) {
+  const C = h.C;
+  return [
+    openPage(h, "Request an Appointment", "Book online, send us a request, or call the front desk. New patients of all ages are welcome."),
+    C.section({ name: "booking", inner: C.split(
+      `${C.heading("Book online")}
+       ${C.spacer("small")}
+       ${C.paragraph("Our online book shows live availability and takes about a minute.")}
+       ${C.spacer("small")}
+       ${C.button({ label: "Open the online book", href: BOOK, external: true })}
+       ${C.spacer("large")}
+       ${C.heading("Prefer to call?", { level: 3 })}
+       ${C.spacer("xsmall")}
+       <p><a class="navbar_phone" href="${h.PRACTICE.phoneHref}">${h.esc(h.PRACTICE.phone)}</a></p>
+       ${C.spacer("small")}
+       <p class="card_meta">${h.esc(LOCATION_NOTE)}</p>`,
+      `<div class="card_component">
+         ${C.heading("Office hours", { level: 3, style: 4 })}
+         ${C.hoursList(h.HOURS)}
+         ${C.spacer("small")}
+         <p class="card_meta">In pain today? Call us — we keep time aside for <a href="/services/emergency-dentist/">dental emergencies</a>.</p>
+       </div>`,
+    ) }),
+    C.section({ name: "appointment-form", bg: "paper", inner: `
+      ${C.sectionHeading({ title: "Send an appointment request", centered: true })}
+      ${h.renderEmbed(FORMS.appointment)}` }),
+  ].join("\n");
+}
+
+// ===========================================================================
+// Financing — the live page rendered EMPTY, header straight into footer. Built
+// from the practice's own statements elsewhere on its site.
+// ===========================================================================
+function financing(d, h) {
+  const C = h.C;
+  return [
+    openPage(h, "Financing and Insurance", "Ways to pay for treatment at Mason Park Dental of Katy."),
+    C.section({ name: "options", inner: `
+      ${C.grid(3, [
+        C.card({ title: "Insurance", text: "We process a variety of insurance plans and offer multiple payment options. Bring your card to your first visit and we will check your benefits with you before treatment starts." }),
+        C.card({ title: "Cherry patient financing", text: "Cherry offers monthly payment plans with 0% APR options and no hard credit check, so a larger treatment plan can be spread out. Ask the front desk to start an application." }),
+        C.card({ title: "Dental savings plan", text: "No insurance? The practice runs its own savings plan covering routine care at a reduced rate.", html: '<p><a href="/dental-savings-plan/">See the savings plan</a></p>' }),
+      ])}
+      ${C.spacer("large")}
+      ${C.notice('<p><strong>Second opinions are free.</strong> If you are unsure about a treatment plan from another practice, bring it in — see <a href="/special-offers/">special offers</a>.</p>')}` }),
+    C.section({ name: "cost", bg: "paper", container: "medium", inner: `
+      ${C.heading("Questions about cost")}
+      ${C.spacer("small")}
+      <p class="text-size-regular">Every treatment plan is quoted before work begins. If you would like an estimate first, call the practice on <a href="${h.PRACTICE.phoneHref}">${h.esc(h.PRACTICE.phone)}</a> and ask for a written treatment plan.</p>
+      ${C.spacer("medium")}
+      ${C.button({ label: "Request an appointment", href: BOOK, external: true })}` }),
+  ].join("\n");
+}
+
+// ===========================================================================
+// Virtual consultation
+// ===========================================================================
+function virtualConsultation(d, h) {
+  const C = h.C;
+  const steps = ["Snap some photos of your smile", "Write a quick message about your smile", "Get a video response from the doctor"];
+  const copy = paras(d, 4);
+  return [
+    openPage(h, "Virtual Consultation", "Skip taking time off work for an in-office consult. Get a free virtual consult in three easy steps."),
+    C.section({ name: "steps", inner: `
+      ${C.stepList(steps)}
+      ${copy.length ? C.spacer("xlarge") + copy.map((p) => C.paragraph(p.text)).join(C.spacer("small")) : ""}` }),
+    C.section({ name: "consult-form", bg: "paper", inner: `
+      ${C.sectionHeading({ title: "Start your virtual consult", centered: true })}
+      ${h.renderEmbed(FORMS.virtual)}` }),
+  ].join("\n");
+}
+
+// ===========================================================================
+// Smile gallery — the live /before-after/ was 100% ThemeREX demo content: lorem
+// ipsum plus the theme's own stock before/after photos. Publishing stock photos
+// as this practice's results would be a misrepresentation.
+// ===========================================================================
+function beforeAfter(d, h) {
+  const C = h.C;
+  return [
+    openPage(h, "Smile Gallery", "Real cases from Mason Park Dental of Katy."),
+    C.section({ name: "gallery", container: "medium", inner: `
+      ${C.notice("<p><strong>This gallery is being rebuilt with the practice's own cases.</strong> The previous page carried the website theme's stock demo photos, which were never Mason Park patients. They have been removed rather than reused.</p>")}
+      ${C.spacer("medium")}
+      ${C.paragraph("Cosmetic and restorative results are best judged case by case. Until the gallery is restocked with consented patient photography, the treatment pages describe what each procedure changes and how long it takes:")}
+      ${C.spacer("small")}
+      ${C.linkList([
+        { href: "/services/cosmetic-dentistry/", label: "Cosmetic dentistry" },
+        { href: "/services/invisalign/", label: "Invisalign clear aligners" },
+        { href: "/services/dental-implant-restorations/", label: "Dental implant restorations" },
+        { href: "/services/dental-crowns/", label: "Dental crowns" },
+        { href: "/services/bonding/", label: "Bonding" },
+      ])}
+      ${C.spacer("medium")}
+      ${C.button({ label: "Ask about your own case", href: BOOK, external: true })}` }),
+  ].join("\n");
+}
+
+// ===========================================================================
+// Thank you
+// ===========================================================================
+function thankYou(d, h) {
+  const C = h.C;
+  return [
+    C.section({ name: "thanks", container: "medium", inner: `
+      <div class="text-align-center">
+        ${C.eyebrow("Katy, TX")}
+        ${C.heading("Thank you!", { level: 1 })}
+        ${C.spacer("small")}
+        ${C.paragraph("Your request has reached the front desk. Someone from Mason Park Dental of Katy will be in touch during office hours to confirm your appointment.", { size: "medium" })}
+        ${C.spacer("medium")}
+        <div class="button-group" style="justify-content:center">
+          ${C.button({ label: `Call ${h.PRACTICE.phone}`, href: h.PRACTICE.phoneHref })}
+          ${C.button({ label: "Back to the homepage", href: "/", variant: "ghost" })}
+        </div>
+      </div>` }),
+    C.section({ name: "next", bg: "paper", inner: `
+      ${C.sectionHeading({ title: "While you wait", centered: true })}
+      ${C.grid(3, [
+        C.card({ title: "Patient resources", text: "Forms, insurance and payment options.", href: "/patient-resources/" }),
+        C.card({ title: "Special offers", text: "Current new-patient and treatment offers.", href: "/special-offers/" }),
+        C.card({ title: "Our services", text: "What we treat, explained.", href: "/our-services/" }),
+      ])}` }),
+  ].join("\n");
+}
+
+// ===========================================================================
+// Privacy policy — 403 on the live site, and linked from every page's footer.
+// This describes the REBUILT website. It is not the practice's HIPAA notice,
+// and it says so.
+// ===========================================================================
+function privacyPolicy(d, h) {
+  const C = h.C;
+  return [
+    openPage(h, "Privacy Policy", "How this website handles your information."),
+    C.section({ name: "privacy", container: "medium", inner: C.richText(`
+      <div class="notice_component"><p><strong>For review.</strong> This notice describes the website only. The practice's HIPAA Notice of Privacy Practices, which covers your dental records, is a separate document and should be reviewed and published by the practice.</p></div>
+      <h2>What this site collects</h2>
+      <p>These pages are static. They set no cookies of their own, run no analytics and build no profile of you.</p>
+      <h2>Forms and booking</h2>
+      <p>Appointment requests and virtual-consultation forms on this site are hosted by third-party providers on behalf of the practice. What you type into them is sent to Mason Park Dental of Katy and handled under that provider's own terms. Online booking opens the practice's scheduling provider in a new tab.</p>
+      <h2>Embedded content</h2>
+      <p>The map on our contact pages is served by Google Maps, which may set its own cookies once it loads. It is only loaded when you scroll to it.</p>
+      <h2>Contact</h2>
+      <p>Questions about your information, or a request to have it removed, can go to the practice directly on <a href="${h.PRACTICE.phoneHref}">${h.esc(h.PRACTICE.phone)}</a> or at ${h.esc(h.PRACTICE.street)}, ${h.esc(h.PRACTICE.city)}, ${h.esc(h.PRACTICE.region)} ${h.esc(h.PRACTICE.postal)}.</p>
+    `) }),
+  ].join("\n");
+}
+
+// ===========================================================================
+// Special offers — the page that carries the practice's actual prices, so every
+// figure is lifted verbatim rather than restated.
+// ===========================================================================
+function specialOffers(d, h) {
+  const C = h.C;
+  const intro = paras(d, 3)[0];
+  const blocks4 = inSection(d, 4);
+  // The long explanation of each offer sits in an Elementor toggle, so it
+  // arrives as a `faq` block rather than a bare paragraph. Read both.
+  const details = [...paras(d, 5).map((p) => p.text), ...faqs(d).map((f) => stripTags(f.html))];
+
+  const newPatient = [];
+  for (let i = 0; i < blocks4.length; i++) {
+    const b = blocks4[i];
+    if (b.type !== "heading") continue;
+    const price = (b.text.match(/\$[\d,]+/) || [])[0] || "";
+    const short = blocks4[i + 1]?.type === "para" ? blocks4[i + 1].text : "";
+    newPatient.push({
+      price,
+      title: softenLabel(b.text.replace(/^\$[\d,]+\s*/, "")),
+      body: [short, price ? details.find((t) => t.includes(price) && t !== short) : ""],
+    });
+  }
+
+  const treatment = [6, 7].flatMap((n) => {
+    const items = inSection(d, n);
+    const out = [];
+    for (let i = 0; i < items.length; i++) {
+      if (items[i].type !== "heading") continue;
+      const body = [];
+      for (let j = i + 1; j < items.length && items[j].type === "para"; j++) body.push(items[j].text);
+      // "INVISALIGN SPECIAL OFFER: $1000 OFF" -> pill "$1000 off", title without it
+      const off = (items[i].text.match(/\$[\d,]+\s*OFF/i) || [])[0];
+      out.push({
+        price: off ? off.replace(/OFF/i, "off") : "",
+        title: softenLabel(items[i].text.replace(/[:,]?\s*\$[\d,]+\s*OFF/i, "").replace(/[:\s]+$/, "")),
+        body,
+      });
+    }
+    return out;
+  });
+
+  return [
+    openPage(h, "Special Offers", d.description || ""),
+    C.section({ name: "new-patient-offers", inner: `
+      ${intro ? C.sectionHeading({ title: "New patient offers", text: intro.text }) : C.sectionHeading({ title: "New patient offers" })}
+      ${C.grid(3, newPatient.map(C.offerCard))}` }),
+    C.section({ name: "treatment-offers", bg: "paper", inner: `
+      ${C.sectionHeading({ title: "Treatment offers" })}
+      ${C.grid(3, [
+        ...treatment.map(C.offerCard),
+        C.offerCard({ title: "Free Invisalign consultation", body: [details.find((t) => /complimentary Invisalign consultation/i.test(t)) || ""] }),
+      ])}
+      ${C.spacer("large")}
+      ${C.notice("<p>Offers are for new patients unless stated otherwise, cannot be combined with insurance, and do not apply in cases of periodontal disease. Ask the front desk which offer applies to your treatment plan before you book.</p>")}` }),
+    C.section({ name: "claim", inner: C.split(
+      `${C.heading("Claim an offer")}
+       ${C.spacer("small")}
+       ${C.paragraph("Mention the offer when you book, or send us a message and the front desk will apply it.")}
+       ${C.spacer("small")}
+       ${C.buttonGroup([
+          { label: "Schedule online", href: BOOK, external: true },
+          { label: `Call ${h.PRACTICE.phone}`, href: h.PRACTICE.phoneHref, variant: "ghost" },
+        ])}
+       ${C.spacer("small")}
+       <p class="card_meta">${h.esc(LOCATION_NOTE)}</p>`,
+      h.renderEmbed(FORMS.offers),
+    ) }),
+  ].join("\n");
+}
+
+// ===========================================================================
+// Patient resources — a main-menu page whose live version was one paragraph, a
+// bullet list with no links, and three orphan icon captions.
 // ===========================================================================
 function patientResources(d, h) {
-  const { esc } = h;
+  const C = h.C;
   const body = paras(d, 4);
   const intro = body[0];
   const bullets = inSection(d, 4).find((b) => b.type === "list")?.items || [];
   const explain = body.slice(1);
-  // One link per bullet, matched to what the bullet is actually about. The
-  // "giving back" bullet describes the practice's Parks Youth Ranch initiative,
-  // which has no page of its own, so it points at the practice story instead.
+  // One link per bullet, matched to what the bullet is about. The "giving back"
+  // bullet describes the Parks Youth Ranch initiative, which has no page of its
+  // own, so it points at the practice story instead.
   const targets = ["/appointment/", "/about-us/", "/financing/", "/our-services/"];
-  const linkLabels = ["Request an appointment", "About our practice", "Financing and insurance", "See all services"];
+  const labels = ["Request an appointment", "About our practice", "Financing and insurance", "See all services"];
 
   const RESOURCES = [
     ["Dental Savings Plan", "/dental-savings-plan/", "Reduced rates on routine care for patients without insurance."],
@@ -460,460 +670,50 @@ function patientResources(d, h) {
     ["Town Resources", "/town-resource/", "Local information for Katy families."],
   ];
 
-  return `${pageHero(h, "Patient Resources", d.description || "")}
-<section class="section">
-  <div class="shell">
-    <div class="section__head">
-      <p class="eyebrow">Dentist Katy, TX</p>
-      <h2>${esc(heads(d, 3).find((t) => t.startsWith("Patient")) || "Patient-Centric Care at Mason Park Dental of Katy")}</h2>
-      ${intro ? `<p>${esc(intro.text)}</p>` : ""}
-    </div>
-    <div class="grid" style="grid-template-columns:repeat(auto-fit,minmax(min(100%,340px),1fr))">
-      ${bullets.map((b, i) => `
-      <div class="card">
-        <h3>${esc(b)}</h3>
-        ${explain[i] ? `<p>${esc(explain[i].text)}</p>` : ""}
-        <p><a href="${esc(targets[i] || "/contacts/")}">${esc(linkLabels[i] || "Find out more")}</a></p>
-      </div>`).join("")}
-    </div>
-  </div>
-</section>
-<section class="section section--paper">
-  <div class="shell">
-    <div class="section__head"><h2>Resources and reference</h2>
-    <p>Everything the practice publishes for patients, in one place.</p></div>
-    <div class="grid grid--3">
-      ${RESOURCES.map(([label, href, blurb]) => `
-      <a class="card card--link" href="${href}">
-        <h3>${label}</h3>
-        <p>${esc(blurb)}</p>
-      </a>`).join("")}
-    </div>
-  </div>
-</section>
-${bookBlock(h)}`;
+  return [
+    openPage(h, "Patient Resources", d.description || ""),
+    C.section({ name: "resources-intro", inner: `
+      ${C.sectionHeading({
+        eyebrow: "Dentist Katy, TX",
+        title: heads(d, 3).find((t) => t.startsWith("Patient")) || "Patient-Centric Care at Mason Park Dental of Katy",
+        text: intro?.text,
+      })}
+      ${C.grid(2, bullets.map((b, i) => C.card({
+        title: b,
+        text: explain[i]?.text,
+        html: `<p><a href="${targets[i] || "/contacts/"}">${labels[i] || "Find out more"}</a></p>`,
+      })))}` }),
+    C.section({ name: "reference", bg: "paper", inner: `
+      ${C.sectionHeading({ title: "Resources and reference", text: "Everything the practice publishes for patients, in one place." })}
+      ${C.grid(3, RESOURCES.map(([label, href, blurb]) => C.card({ title: label, text: blurb, href })))}` }),
+    bookingSection(h),
+  ].join("\n");
 }
 
 // ===========================================================================
-// Meet our doctors - the long-form bios. The live page stacked three portraits
-// at their natural sizes (464x696 next to 230x300) with a name under each, then
-// the bios below in a different order again. Here each doctor gets one block:
-// portrait, role, bio, and the personal note the practice wrote for them.
-// ===========================================================================
-function ourDoctors(d, h) {
-  const { esc, asset } = h;
-  const PERSONAL = /^When (not in the office|he'?s not in the office|she'?s not in the office)/i;
-
-  // Sections 3-5 each hold one doctor. Which doctor is named by the H2.
-  const doctors = [3, 4, 5].map((n) => {
-    const items = inSection(d, n);
-    const name = items.find((b) => b.type === "heading" && b.level === 2)?.text || "";
-    const role = items.find((b) => b.type === "heading" && b.level > 2)?.text || "";
-    const all = items.filter((b) => b.type === "para").map((b) => b.text);
-    const match = DOCTORS.find(([, dn]) => dn.toLowerCase() === name.toLowerCase().trim());
-    return {
-      name: name.trim(),
-      role: (role || match?.[2] || "").replace(/​/g, "").trim(),
-      portrait: match?.[0] || items.find((b) => b.type === "image")?.src,
-      href: match?.[3],
-      bio: all.filter((t) => !PERSONAL.test(t)),
-      personal: all.find((t) => PERSONAL.test(t)),
-    };
-  }).filter((x) => x.name);
-
-  return `${pageHero(h, "Meet Our Doctors", "The three dentists who look after Katy families at Mason Park Dental.")}
-${doctors.map((doc, i) => `
-<section class="section${i % 2 === 1 ? " section--paper" : ""}">
-  <div class="shell split${i % 2 === 1 ? " split--flip" : ""}">
-    ${doc.portrait ? `<div>${h.img(doc.portrait, doc.name, { sizes: "(max-width: 899px) 100vw, 560px" })}</div>` : "<div></div>"}
-    <div>
-      ${doc.role ? `<p class="eyebrow">${esc(doc.role)}</p>` : ""}
-      <h2>${esc(doc.name)}</h2>
-      ${doc.bio.map((p) => `<p>${esc(p)}</p>`).join("\n      ")}
-      ${doc.personal ? `<p class="notice">${esc(doc.personal)}</p>` : ""}
-      ${doc.href ? `<p><a class="btn btn--ghost" href="${esc(doc.href)}">Full profile</a></p>` : ""}
-    </div>
-  </div>
-</section>`).join("")}
-${bookBlock(h)}`;
-}
-
-// ===========================================================================
-// Contacts
-// ===========================================================================
-function contacts(d, h) {
-  const { esc, PRACTICE, renderEmbed } = h;
-  const body = paras(d, 2).filter((p) => !/^(Visit Us|Call Us|Connect Online)/i.test(p.text));
-  return `${pageHero(h, "Contact Mason Park Dental of Katy", d.description || "")}
-<section class="section">
-  <div class="shell">
-    <div class="split split--wide-text">
-      <div class="prose">
-        ${body.map((p) => `<p>${esc(p.text)}</p>`).join("\n        ")}
-        <p class="notice">${esc(LOCATION_NOTE)}</p>
-      </div>
-      <div class="grid">
-        <div class="card">
-          <h3>Visit us</h3>
-          <p><a href="${esc(PRACTICE.maps)}" target="_blank" rel="noopener">${esc(PRACTICE.street)}<br>${esc(PRACTICE.city)}, ${esc(PRACTICE.region)} ${esc(PRACTICE.postal)}</a></p>
-        </div>
-        <div class="card">
-          <h3>Call us</h3>
-          <p><a class="masthead__phone" href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a></p>
-          <p><a class="btn" href="${BOOK}" target="_blank" rel="noopener">Schedule online</a></p>
-        </div>
-        <div class="card">
-          <h3>Office hours</h3>
-          <ul style="list-style:none;padding:0;margin:0">
-            ${OFFICE_HOURS.map(([day, t]) => `<li style="display:flex;justify-content:space-between;gap:1rem"><span>${day}</span><strong>${t}</strong></li>`).join("")}
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-<section class="section section--paper">
-  <div class="shell">
-    <div class="section__head section__head--center"><h2>Request an appointment</h2>
-    <p>Send us a message and the front desk will come back to you.</p></div>
-    ${renderEmbed(FORMS.appointment)}
-  </div>
-</section>
-<section class="section section--tight">
-  <div class="shell">${renderEmbed(MAP_EMBED)}</div>
-</section>`;
-}
-
-// ===========================================================================
-// Appointment - the live page was a bare, non-functional calendar widget.
-// ===========================================================================
-function appointment(d, h) {
-  const { renderEmbed, esc, PRACTICE } = h;
-  return `${pageHero(h, "Request an Appointment", "Book online, send us a request, or call the front desk. New patients of all ages are welcome.")}
-<section class="section">
-  <div class="shell split">
-    <div>
-      <h2>Book online</h2>
-      <p>Our online book shows live availability and takes about a minute.</p>
-      <p><a class="btn" href="${BOOK}" target="_blank" rel="noopener">Open the online book</a></p>
-      <h2 style="margin-top:2.5rem">Prefer to call?</h2>
-      <p><a class="masthead__phone" href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a></p>
-      <p class="card__meta">${esc(LOCATION_NOTE)}</p>
-    </div>
-    <div class="card">
-      <h3>Office hours</h3>
-      <ul style="list-style:none;padding:0;margin:0">
-        ${OFFICE_HOURS.map(([day, t]) => `<li style="display:flex;justify-content:space-between;gap:1rem"><span>${day}</span><strong>${t}</strong></li>`).join("")}
-      </ul>
-      <p style="margin-top:1.25rem" class="card__meta">In pain today? Call us - we keep time aside for
-      <a href="/services/emergency-dentist/">dental emergencies</a>.</p>
-    </div>
-  </div>
-</section>
-<section class="section section--paper">
-  <div class="shell">
-    <div class="section__head section__head--center"><h2>Send an appointment request</h2></div>
-    ${renderEmbed(FORMS.appointment)}
-  </div>
-</section>`;
-}
-
-// ===========================================================================
-// Financing - the live page rendered EMPTY (header straight into footer). Built
-// here from the practice's own statements elsewhere on its site.
-// ===========================================================================
-function financing(d, h) {
-  const { esc, PRACTICE } = h;
-  return `${pageHero(h, "Financing and Insurance", "Ways to pay for treatment at Mason Park Dental of Katy.")}
-<section class="section">
-  <div class="shell">
-    <div class="grid grid--3">
-      <div class="card">
-        <h3>Insurance</h3>
-        <p>We process a variety of insurance plans and offer multiple payment options. Bring your
-        card to your first visit and we will check your benefits with you before treatment starts.</p>
-      </div>
-      <div class="card">
-        <h3>Cherry patient financing</h3>
-        <p>Cherry offers monthly payment plans with 0% APR options and no hard credit check, so a
-        larger treatment plan can be spread out. Ask the front desk to start an application.</p>
-      </div>
-      <div class="card">
-        <h3>Dental savings plan</h3>
-        <p>No insurance? The practice runs its own savings plan covering routine care at a reduced
-        rate.</p>
-        <p><a href="/dental-savings-plan/">See the savings plan</a></p>
-      </div>
-    </div>
-    <div class="notice" style="margin-top:2rem">
-      <p><strong>Second opinions are free.</strong> If you are unsure about a treatment plan from
-      another practice, bring it in - see <a href="/special-offers/">special offers</a>.</p>
-    </div>
-  </div>
-</section>
-<section class="section section--paper">
-  <div class="shell shell--narrow prose">
-    <h2>Questions about cost</h2>
-    <p>Every treatment plan is quoted before work begins. If you would like an estimate first, call
-    the practice on <a href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a> and ask for a written
-    treatment plan.</p>
-    <p><a class="btn" href="${BOOK}" target="_blank" rel="noopener">Request an appointment</a></p>
-  </div>
-</section>`;
-}
-
-// ===========================================================================
-// Virtual consultation
-// ===========================================================================
-function virtualConsultation(d, h) {
-  const { esc, renderEmbed } = h;
-  const steps = [
-    "Snap some photos of your smile",
-    "Write a quick message about your smile",
-    "Get a video response from the doctor",
-  ];
-  const copy = paras(d, 4);
-  return `${pageHero(h, "Virtual Consultation", "Skip taking time off work for an in-office consult. Get a free virtual consult in three easy steps.")}
-<section class="section">
-  <div class="shell">
-    <div class="grid grid--3 steps">
-      ${steps.map((s) => `<div class="card"><h4>${esc(s)}</h4></div>`).join("")}
-    </div>
-    ${copy.length ? `<div class="prose" style="margin-top:clamp(2rem,4vw,3rem)">${copy.map((p) => `<p>${esc(p.text)}</p>`).join("")}</div>` : ""}
-  </div>
-</section>
-<section class="section section--paper">
-  <div class="shell">
-    <div class="section__head section__head--center"><h2>Start your virtual consult</h2></div>
-    ${renderEmbed(FORMS.virtual) || `<p style="text-align:center"><a class="btn" href="/contacts/">Contact the practice</a></p>`}
-  </div>
-</section>`;
-}
-
-// ===========================================================================
-// Smile gallery - the live /before-after/ page is 100% ThemeREX demo content
-// (lorem ipsum plus the theme's own stock before/after photos). Publishing stock
-// photos as this practice's results would be a misrepresentation, so the page
-// ships honest and empty, with a note for the practice.
-// ===========================================================================
-function beforeAfter(d, h) {
-  return `${pageHero(h, "Smile Gallery", "Real cases from Mason Park Dental of Katy.")}
-<section class="section">
-  <div class="shell shell--narrow prose">
-    <div class="notice">
-      <p><strong>This gallery is being rebuilt with the practice's own cases.</strong> The previous
-      page carried the website theme's stock demo photos, which were never Mason Park patients. They
-      have been removed rather than reused.</p>
-    </div>
-    <p>Cosmetic and restorative results are best judged case by case. Until the gallery is restocked
-    with consented patient photography, the treatment pages describe what each procedure changes and
-    how long it takes:</p>
-    <ul>
-      <li><a href="/services/cosmetic-dentistry/">Cosmetic dentistry</a></li>
-      <li><a href="/services/invisalign/">Invisalign clear aligners</a></li>
-      <li><a href="/services/dental-implant-restorations/">Dental implant restorations</a></li>
-      <li><a href="/services/dental-crowns/">Dental crowns</a></li>
-      <li><a href="/services/bonding/">Bonding</a></li>
-    </ul>
-    <p><a class="btn" href="${BOOK}" target="_blank" rel="noopener">Ask about your own case</a></p>
-  </div>
-</section>`;
-}
-
-// ===========================================================================
-// Thank you
-// ===========================================================================
-function thankYou(d, h) {
-  const { esc, PRACTICE } = h;
-  return `
-<section class="section">
-  <div class="shell shell--narrow" style="text-align:center">
-    <p class="eyebrow">Katy, TX</p>
-    <h1>Thank you!</h1>
-    <p>Your request has reached the front desk. Someone from Mason Park Dental of Katy will be in
-    touch during office hours to confirm your appointment.</p>
-    <p><a class="btn" href="${PRACTICE.phoneHref}">Call ${esc(PRACTICE.phone)}</a>
-       <a class="btn btn--ghost" href="/">Back to the homepage</a></p>
-  </div>
-</section>
-<section class="section section--paper">
-  <div class="shell">
-    <div class="section__head section__head--center"><h2>While you wait</h2></div>
-    <div class="grid grid--3">
-      <a class="card card--link" href="/patient-resources/"><h3>Patient resources</h3><p>Forms, insurance and payment options.</p></a>
-      <a class="card card--link" href="/special-offers/"><h3>Special offers</h3><p>Current new-patient and treatment offers.</p></a>
-      <a class="card card--link" href="/our-services/"><h3>Our services</h3><p>What we treat, explained.</p></a>
-    </div>
-  </div>
-</section>`;
-}
-
-// ===========================================================================
-// Special offers - the page that carries the practice's actual prices, so every
-// figure here is lifted verbatim from the live page rather than restated. The
-// short headline for each offer and its longer explanation live in two separate
-// Elementor sections upstream; they are paired back up by price.
-// ===========================================================================
-function specialOffers(d, h) {
-  const { esc, renderEmbed } = h;
-  const intro = paras(d, 3)[0];
-  const blocks4 = inSection(d, 4);
-  // The long explanation of each offer sits in an Elementor toggle, so it now
-  // arrives as a `faq` block rather than a bare paragraph. Read both.
-  const stripTags = (x) => String(x || "").replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();
-  const faqs = (d.blocks || []).filter((b) => b.type === "faq");
-  const details = [...paras(d, 5).map((p) => p.text), ...faqs.map((f) => stripTags(f.html))];
-
-  // Pair "$189 NEW PATIENT SPECIAL" with the paragraph in s5 that quotes $189.
-  const newPatient = [];
-  for (let i = 0; i < blocks4.length; i++) {
-    const b = blocks4[i];
-    if (b.type !== "heading") continue;
-    const price = (b.text.match(/\$[\d,]+/) || [])[0] || "";
-    const label = b.text.replace(/^\$[\d,]+\s*/, "");
-    const short = blocks4[i + 1]?.type === "para" ? blocks4[i + 1].text : "";
-    const detail = price ? details.find((t) => t.includes(price) && t !== short) : "";
-    newPatient.push({ price, label, short, detail });
-  }
-
-  // The two treatment offers and the free second opinion, each its own section.
-  const treatment = [6, 7].flatMap((n) => {
-    const items = inSection(d, n);
-    const out = [];
-    for (let i = 0; i < items.length; i++) {
-      if (items[i].type !== "heading") continue;
-      const body = [];
-      for (let j = i + 1; j < items.length && items[j].type === "para"; j++) body.push(items[j].text);
-      out.push({ title: items[i].text, body });
-    }
-    return out;
-  });
-
-  const card = (o) => `
-      <div class="offer">
-        ${o.price ? `<p class="offer__price">${esc(o.price)}</p>` : ""}
-        <h3>${esc(softenLabel(o.label))}</h3>
-        ${o.short ? `<p><strong>${esc(o.short)}</strong></p>` : ""}
-        ${o.detail ? `<p>${esc(o.detail)}</p>` : ""}
-      </div>`;
-
-  return `${pageHero(h, "Special Offers", d.description || "")}
-<section class="section">
-  <div class="shell">
-    ${intro ? `<div class="section__head"><p>${esc(intro.text.replace(/\.(?=[A-Z])/, ". "))}</p></div>` : ""}
-    <h2>New patient offers</h2>
-    <div class="grid grid--3" style="margin-top:1.75rem">${newPatient.map(card).join("")}</div>
-  </div>
-</section>
-<section class="section section--paper">
-  <div class="shell">
-    <h2>Treatment offers</h2>
-    <div class="grid grid--3" style="margin-top:1.75rem">
-      ${treatment.map((t) => {
-        // "INVISALIGN SPECIAL OFFER: $1000 OFF" -> pill "$1000 off", title without it
-        const off = (t.title.match(/\$[\d,]+\s*OFF/i) || [])[0];
-        const title = softenLabel(t.title.replace(/[:,]?\s*\$[\d,]+\s*OFF/i, "").replace(/[:\s]+$/, ""));
-        return `
-      <div class="offer">
-        ${off ? `<p class="offer__price">${esc(off.replace(/OFF/i, "off"))}</p>` : ""}
-        <h3>${esc(title)}</h3>
-        ${t.body.map((p) => `<p>${esc(p)}</p>`).join("")}
-      </div>`;
-      }).join("")}
-      <div class="offer">
-        <h3>Free Invisalign consultation</h3>
-        <p>${esc(details.find((t) => /complimentary Invisalign consultation/i.test(t)) || "")}</p>
-      </div>
-    </div>
-    <div class="notice" style="margin-top:2rem">
-      <p>Offers are for new patients unless stated otherwise, cannot be combined with insurance,
-      and do not apply in cases of periodontal disease. Ask the front desk which offer applies to
-      your treatment plan before you book.</p>
-    </div>
-  </div>
-</section>
-<section class="section">
-  <div class="shell split">
-    <div>
-      <h2>Claim an offer</h2>
-      <p>Mention the offer when you book, or send us a message and the front desk will apply it.</p>
-      <p><a class="btn" href="${BOOK}" target="_blank" rel="noopener">Schedule online</a>
-         <a class="btn btn--ghost" href="${h.PRACTICE.phoneHref}">Call ${esc(h.PRACTICE.phone)}</a></p>
-      <p class="card__meta">${esc(LOCATION_NOTE)}</p>
-    </div>
-    <div>${renderEmbed(FORMS.offers)}</div>
-  </div>
-</section>`;
-}
-
-// Offer headings are shouted upstream; sentence-case them but keep the prices
-// and the trademarked product names intact.
-const softenLabel = (s) =>
-  s.replace(/[\w®$,]+/g, (w) =>
-    /^\$|^(TX|FAQ|AI|DMD)$/.test(w) ? w :
-    /^INVISALIGN$/i.test(w) ? "Invisalign" :
-    w[0] + w.slice(1).toLowerCase());
-
-// ===========================================================================
-// Privacy policy - 403 on the live site, and it is linked from the footer of
-// every page. This is a factual notice about how the REBUILT static site
-// behaves. It is NOT a substitute for the practice's HIPAA notice of privacy
-// practices, and says so.
-// ===========================================================================
-function privacyPolicy(d, h) {
-  const { esc, PRACTICE } = h;
-  return `${pageHero(h, "Privacy Policy", "How this website handles your information.")}
-<section class="section">
-  <div class="shell shell--narrow prose">
-    <div class="notice"><p><strong>For review.</strong> This notice describes the website only. The
-    practice's HIPAA Notice of Privacy Practices, which covers your dental records, is a separate
-    document and should be reviewed and published by the practice.</p></div>
-
-    <h2>What this site collects</h2>
-    <p>These pages are static. They set no cookies of their own, run no analytics and build no
-    profile of you.</p>
-
-    <h2>Forms and booking</h2>
-    <p>Appointment requests and virtual-consultation forms on this site are hosted by third-party
-    providers on behalf of the practice. What you type into them is sent to Mason Park Dental of
-    Katy and handled under that provider's own terms. Online booking opens the practice's scheduling
-    provider in a new tab.</p>
-
-    <h2>Embedded content</h2>
-    <p>The map on our contact pages is served by Google Maps, which may set its own cookies once it
-    loads. It is only loaded when you scroll to it.</p>
-
-    <h2>Contact</h2>
-    <p>Questions about your information, or a request to have it removed, can go to the practice
-    directly on <a href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a> or at
-    ${esc(PRACTICE.street)}, ${esc(PRACTICE.city)}, ${esc(PRACTICE.region)} ${esc(PRACTICE.postal)}.</p>
-  </div>
-</section>`;
-}
-
 export const BESPOKE = {
   home,
   "our-services": ourServices,
   "about-us": aboutUs,
   "our-team": ourTeam,
+  "our-doctors": ourDoctors,
   contacts,
   appointment,
   financing,
   "virtual-consultation": virtualConsultation,
   "before-after": beforeAfter,
   "thank-you": thankYou,
+  "privacy-policy": privacyPolicy,
   "special-offers": specialOffers,
   "patient-resources": patientResources,
-  "our-doctors": ourDoctors,
-  "privacy-policy": privacyPolicy,
 };
 
 // Pages that exist on the live site but carry nothing but theme demo content.
-// They are not in the menu and are not rebuilt.
+// Not in any menu, and not rebuilt.
 export const SKIP = new Set(["pricing", "sample", "shop"]);
 
-// Titles and descriptions for pages the WordPress site could not supply them for
-// - the two that returned 403 to the crawler, and the ones this rebuild authors.
+// Titles and descriptions for pages WordPress could not supply them for — the
+// two that returned 403 to the crawler, and the ones this rebuild authors.
 export const META = {
   "our-team": {
     title: "Meet Our Team | Mason Park Dental of Katy",

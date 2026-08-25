@@ -15,6 +15,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { NAV, FOOTER_LINKS, PRACTICE, SERVICE_SLUGS, TEAM_SLUGS } from "./pages.config.mjs";
 import { BESPOKE, SKIP, META } from "./site/pages.mjs";
+import { makePresentation } from "./site/presentation.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CONTENT = path.join(HERE, "content");
@@ -224,7 +225,7 @@ const rewrite = (html) => {
   // A paragraph whose whole content was one out-of-scope link is left as a
   // dangling "Learn More About ..." line once the link is unwrapped, so drop it.
   out = out.replace(/<p>\s*(?:Learn|Read|Find out|Discover|Click|See)\b[^<>]{0,90}<\/p>/gi, "");
-  out = out.replace(/<table/gi, '<div class="table-scroll"><table').replace(/<\/table>/gi, "</table></div>");
+  out = out.replace(/<table/gi, '<div class="overflow-scroll-x"><table').replace(/<\/table>/gi, "</table></div>");
   return out;
 };
 
@@ -295,198 +296,12 @@ const stripBoilerplate = (blocks = []) => {
   });
 };
 
-// ------------------------------------------------------------------ chrome
-// Menu entries pointing at something this build does not produce (the blog) are
-// dropped rather than rendered as a link into a 404.
-const navHtml = (items, depth = 0) => {
-  const rendered = items.map((it) => {
-    const to = link(it.href);
-    const kids = it.children?.length ? navHtml(it.children, depth + 1) : "";
-    if (!to) return kids ? `<li>${kids}</li>` : "";
-    return `<li${kids ? ' class="has-sub"' : ""}><a href="${esc(to)}">${esc(it.label)}</a>${kids}</li>`;
-  }).filter(Boolean).join("");
-  return rendered ? `<ul>${rendered}</ul>` : "";
-};
-
-const LOGO = "/wp-content/uploads/2023/08/Dentist-Katy-TX-Logo-2.webp";
-
-const header = () => `
-<a class="visually-hidden" href="#main">Skip to content</a>
-<div class="topbar">
-  <span>Dentist Katy | ${esc(PRACTICE.street)} | ${esc(PRACTICE.city)}, ${esc(PRACTICE.region)} ${esc(PRACTICE.postal)} | </span>
-  <a href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a>
-</div>
-<header class="masthead">
-  <div class="shell masthead__inner">
-    <a class="brand" href="/" aria-label="${esc(PRACTICE.name)} home">
-      <img src="${esc(asset(LOGO))}" width="406" height="156" alt="${esc(PRACTICE.name)}">
-    </a>
-    <nav class="mainnav" id="mainnav" aria-label="Main">${navHtml(NAV)}</nav>
-    <div class="masthead__cta">
-      <a class="masthead__phone" href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a>
-      <a class="btn btn--slate" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Schedule Online</a>
-    </div>
-    <button class="navtoggle" type="button" aria-expanded="false" aria-controls="mainnav" aria-label="Menu">
-      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
-    </button>
-  </div>
-</header>
-<button class="navscrim" type="button" tabindex="-1" aria-hidden="true"></button>`;
-
-const HOURS = [
-  ["Monday", "9am - 6pm"], ["Tuesday", "8am - 5pm"], ["Wednesday", "9am - 6pm"],
-  ["Thursday", "8am - 5pm"], ["Friday, Saturday &amp; Sunday", "Closed"],
-];
-
-const ACCREDITATIONS = [
-  ["/wp-content/uploads/2023/08/aapd.webp", "American Academy of Pediatric Dentistry"],
-  ["/wp-content/uploads/2023/08/abpd-1.webp", "American Board of Pediatric Dentistry - Board Certified"],
-  ["/wp-content/uploads/2023/08/agd-1.webp", "Academy of General Dentistry"],
-  ["/wp-content/uploads/2023/08/kois-1.webp", "Kois Center"],
-  ["/wp-content/uploads/2023/08/ssc-1.webp", "Seattle Study Club"],
-];
-
-const footer = () => `
-<section class="infoband">
-  <div class="shell grid grid--2">
-    <div>
-      <h2>Contact Us</h2>
-      <p>Dentist Katy</p>
-      <p>${esc(PRACTICE.street)},<br>${esc(PRACTICE.city)}, ${esc(PRACTICE.region)} ${esc(PRACTICE.postal)}</p>
-      <p><a href="${PRACTICE.phoneHref}">Call: ${esc(PRACTICE.phone)}</a></p>
-    </div>
-    <div>
-      <h2>Office Hours</h2>
-      ${HOURS.map(([d, t]) => `<p>${d}: ${t}</p>`).join("\n      ")}
-    </div>
-  </div>
-</section>
-<section class="section--slate">
-  <div class="badges">
-    ${ACCREDITATIONS.map(([src, alt]) => `<div><img src="${esc(asset(src))}" alt="${esc(alt)}" loading="lazy"></div>`).join("\n    ")}
-  </div>
-</section>
-<footer class="sitefoot">
-  <div class="shell">
-    <div class="sitefoot__grid">
-      <div class="sitefoot__brand">
-        <img src="${esc(asset(LOGO))}" width="406" height="156" alt="${esc(PRACTICE.name)}" loading="lazy">
-        <p>Comprehensive family, cosmetic and restorative dentistry in Katy, Texas.</p>
-      </div>
-      <div>
-        <h3>Useful Links</h3>
-        <ul>${FOOTER_LINKS.map((l) => { const to = link(l.href); return to ? `<li><a href="${esc(to)}">${esc(l.label)}</a></li>` : ""; }).join("")}</ul>
-      </div>
-      <div>
-        <h3>Menu</h3>
-        <ul>
-          <li><a href="/">Home</a></li>
-          <li><a href="/our-services/">Services</a></li>
-          <li><a href="/about-us/">About Us</a></li>
-          <li><a href="/special-offers/">Special Offers</a></li>
-          <li><a href="/contacts/">Contacts</a></li>
-        </ul>
-      </div>
-      <div>
-        <h3>Contact Us</h3>
-        <ul>
-          <li><a href="${esc(PRACTICE.maps)}" target="_blank" rel="noopener">${esc(PRACTICE.street)}<br>${esc(PRACTICE.city)}, ${esc(PRACTICE.region)} ${esc(PRACTICE.postal)}</a></li>
-          <li><a href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a></li>
-          <li><a href="${esc(PRACTICE.facebook)}" target="_blank" rel="noopener">Facebook</a></li>
-        </ul>
-      </div>
-    </div>
-    <div class="sitefoot__legal">
-      &copy; ${new Date().getFullYear()} ${esc(PRACTICE.name)} | <a href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a>
-      | ${esc(PRACTICE.street)}, ${esc(PRACTICE.city)}, ${esc(PRACTICE.region)} ${esc(PRACTICE.postal)}
-      | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-service/">Terms of Service</a>
-    </div>
-  </div>
-</footer>
-<a class="callbar" href="${PRACTICE.phoneHref}">Call ${esc(PRACTICE.phone)}</a>`;
-
-const jsonLd = (page, route) => JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "Dentist",
-  name: PRACTICE.name,
-  url: SITE_URL + route,
-  telephone: PRACTICE.phone,
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: PRACTICE.street, addressLocality: PRACTICE.city,
-    addressRegion: "Texas", postalCode: PRACTICE.postal, addressCountry: "US",
-  },
-  openingHoursSpecification: [
-    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Monday", "Wednesday"], opens: "09:00", closes: "18:00" },
-    { "@type": "OpeningHoursSpecification", dayOfWeek: ["Tuesday", "Thursday"], opens: "08:00", closes: "17:00" },
-  ],
-  sameAs: [PRACTICE.facebook],
-});
-
-const layout = ({ title, description, route, body, ogImage }) => `<!doctype html>
-<html lang="en">
-<head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>${esc(title)}</title>
-<meta name="description" content="${esc(description || "")}">
-<link rel="canonical" href="${esc(SITE_URL + route)}">
-<meta property="og:type" content="website">
-<meta property="og:title" content="${esc(title)}">
-<meta property="og:description" content="${esc(description || "")}">
-<meta property="og:url" content="${esc(SITE_URL + route)}">
-${ogImage ? `<meta property="og:image" content="${esc(SITE_URL + ogImage)}">` : ""}
-<meta name="theme-color" content="#00bde0">
-<link rel="icon" href="/assets/uploads/2023/08/Dentist-Katy-TX-Logo-2.webp">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="/assets/site.css">
-<script type="application/ld+json">${jsonLd(null, route)}</script>
-</head>
-<body>
-${header()}
-<main id="main">
-${body}
-</main>
-${footer()}
-<script src="/assets/site.js" defer></script>
-</body>
-</html>
-`;
-
-// -------------------------------------------------------------- renderers
-// Only two third-party embeds survive the rebuild: the practice's Google Maps
-// pin and its live GoHighLevel appointment form. Everything else the compromised
-// WordPress install was loading (chat widget, review widget, the injected
-// overlay) is deliberately dropped.
-const renderEmbed = (src = "") => {
-  if (/google\.com\/maps/.test(src)) {
-    return `<div class="embed"><iframe data-src="${esc(src)}" title="Map to ${esc(PRACTICE.name)}" loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe></div>`;
-  }
-  if (/leadconnectorhq\.com\/widget\/form/.test(src)) {
-    return `<div class="embed"><iframe data-src="${esc(src)}" title="Request an appointment" loading="lazy" style="min-height:640px"></iframe></div>`;
-  }
-  if (/(form\.)?123formbuilder\.com/.test(src)) {
-    return `<div class="embed"><iframe data-src="${esc(src)}" title="Send us your details" loading="lazy" style="min-height:720px"></iframe></div>`;
-  }
-  return "";
-};
-
-const breadcrumbs = (trail) =>
-  `<div class="shell"><nav class="breadcrumbs" aria-label="Breadcrumb">` +
-  trail.map((t) => (t.href ? `<span><a href="${esc(t.href)}">${esc(t.label)}</a></span>` : `<span>${esc(t.label)}</span>`)).join("") +
-  `</nav></div>`;
-
-const sidebarCta = (extra = "") => `
-<aside>
-  <div class="aside-cta">
-    <h3>Book a visit</h3>
-    <p>New and existing patients welcome. Call the practice or request a time online.</p>
-    <p><a class="btn" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Request an appointment</a></p>
-    <p><a class="masthead__phone" href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a></p>
-    ${extra}
-  </div>
-</aside>`;
+// ============================================================================
+// PRESENTATION
+// All markup lives in site/presentation.mjs, composed from site/components.mjs.
+// build.mjs stays responsible for data - routes, assets, links, the demo
+// stripper - and writes no tags of its own.
+// ============================================================================
 
 // Menu labels, so the sidebar reads in the practice's own wording and sentence
 // case rather than the raw page titles (some of which are shouted in caps).
@@ -531,118 +346,27 @@ const titleOf = (d) => {
 };
 const labelFor = (slug) => titleOf(read(slug));
 
-const relatedServices = (current) => {
-  const pool = SERVICE_SLUGS.filter((s) => s !== current && NAV_LABELS.has(routeOf(s)));
-  const start = Math.max(0, pool.indexOf(current));
-  const items = [...pool.slice(start), ...pool.slice(0, start)].slice(0, 8)
-    .map((s) => `<li><a href="${routeOf(s)}">${esc(labelFor(s))}</a></li>`).join("");
-  return `<h3 style="margin-top:1.75rem">More services</h3><ul>${items}</ul>
-    <p style="margin-top:1rem"><a href="/our-services/">All services</a></p>`;
-};
-
-// A WordPress content page: featured image hero, then the article body.
-const renderArticle = (d, route) => {
-  const title = titleOf(d);
-  const isService = SERVICE_SLUGS.includes(d.slug);
-  const trail = [{ label: "Home", href: "/" }];
-  if (isService) trail.push({ label: "Services", href: "/our-services/" });
-  trail.push({ label: title });
-
-  const hero = d.featured?.src
-    ? `<section class="hero hero--image">
-    ${img(d.featured.src, d.featured.alt || title, { sizes: "100vw", eager: true, w: d.featured.w, h: d.featured.h })}
-    <div class="hero__caption"><div class="shell">${isService ? '<p class="eyebrow">Katy, TX</p>' : ""}<h1>${esc(title)}</h1></div></div>
-  </section>`
-    : `<section class="hero hero--page"><div class="shell">${isService ? '<p class="eyebrow">Katy, TX</p>' : ""}<h1>${esc(title)}</h1>${d.description ? `<p>${esc(d.description)}</p>` : ""}</div></section>`;
-
-  return `${hero}
-${breadcrumbs(trail)}
-<div class="section section--tight">
-  <div class="shell article-layout">
-    <article class="prose">${fixRunOn(demoteH1(rewrite(d.html)))}</article>
-    ${sidebarCta(isService ? relatedServices(d.slug) : "")}
-  </div>
-</div>`;
-};
-
-// An Elementor page with no hand-written template: replay the extracted blocks
-// in document order. Not a pixel match, but every word and image survives.
-const renderBlocks = (d, route) => {
-  const title = titleOf(d);
-  const norm = (t) => String(t || "").trim().toLowerCase().replace(/[^a-z0-9]+/g, " ").trim();
-  let blocks = stripBoilerplate(d.blocks || [])
-    // The body repeats the page title as its own heading on most of these pages.
-    .filter((b) => !(b.type === "heading" && norm(b.text) === norm(title)));
-
-  // These pages open with a full-width header image that the theme showed under
-  // the title. Left inline it reads as a random stock photo mid-article, so it
-  // is promoted to the page hero - which is what it was.
-  const firstSection = blocks.length ? blocks[0].section : null;
-  const firstBlocks = blocks.filter((b) => b.section === firstSection);
-  let heroImage = null;
-  if (firstBlocks.length === 1 && firstBlocks[0].type === "image") {
-    heroImage = firstBlocks[0];
-    blocks = blocks.filter((b) => b !== heroImage);
-  }
-
-  // Elementor sections are layout seams, not content seams. On a page with only
-  // a few of them, banding them alternately reads as deliberate design. On a
-  // long one - an FAQ list, the dental dictionary - it turns into a zebra of
-  // three-line stripes, so those render as one continuous column instead and
-  // let the headings carry the rhythm.
-  const sectionCount = new Set(blocks.map((b) => b.section)).size;
-  const banded = sectionCount <= 3;
-
-  let out = banded ? "" : `<section class="section"><div class="shell"><div class="prose">`;
-  let open = !banded;
-  let lastSection = null;
-  for (const b of blocks) {
-    if (banded && b.section !== lastSection) {
-      if (open) out += "</div></div></section>\n";
-      out += `<section class="section${(b.section % 2 === 0) ? " section--paper" : ""}"><div class="shell"><div class="prose">`;
-      open = true;
-      lastSection = b.section;
-    }
-    switch (b.type) {
-      // never a second <h1>: the template already emitted the page title
-      case "heading": {
-        // "Dentist Katy, TX" and friends are styled as an eyebrow upstream, not
-        // as a section heading; rendering them as <h4> leaves a stray line.
-        if (/^dentist\s+(in\s+)?katy(,?\s*(tx|texas))?$/i.test(b.text.trim())) {
-          out += `<p class="eyebrow">${esc(b.text)}</p>`; break;
-        }
-        const lv = Math.min(Math.max(b.level, 2), 6);
-        out += `<h${lv}>${esc(softenCaps(b.text))}</h${lv}>`; break;
-      }
-      case "para":    out += fixRunOn(rewrite(b.html)) || `<p>${esc(fixRunOn(b.text))}</p>`; break;
-      case "list":    out += `<${b.ordered ? "ol" : "ul"}>${b.items.map((i) => `<li>${esc(i)}</li>`).join("")}</${b.ordered ? "ol" : "ul"}>`; break;
-      case "image":   out += img(b.src, b.alt, { sizes: "(max-width: 999px) 100vw, 700px", w: b.w, h: b.h }); break;
-      case "cta":     { const to = link(b.href); if (to) out += `<p><a class="btn" href="${esc(to)}"${/^https?:/.test(to) ? ' target="_blank" rel="noopener"' : ""}>${esc(b.text)}</a></p>`; break; }
-      case "table":   out += rewrite(b.html); break;
-      // Recovered Elementor toggle/accordion item. <details> keeps it usable
-      // with no JavaScript at all, and open-by-default is wrong for a long list.
-      case "faq":     out += `<details class="faq"><summary>${esc(b.question)}</summary><div class="faq__body">${rewrite(b.html)}</div></details>`; break;
-      case "embed":   out += renderEmbed(b.src); break;
-      default: break;
-    }
-  }
-  if (open) out += "</div></div></section>";
-  const hero = heroImage
-    ? `<section class="hero hero--image">
-    ${img(heroImage.src, heroImage.alt || title, { sizes: "100vw", eager: true, w: heroImage.w, h: heroImage.h })}
-    <div class="hero__caption"><div class="shell"><p class="eyebrow">${esc(PRACTICE.city)}, ${esc(PRACTICE.region)}</p><h1>${esc(title)}</h1></div></div>
-  </section>`
-    : `<section class="hero hero--page"><div class="shell"><p class="eyebrow">${esc(PRACTICE.city)}, ${esc(PRACTICE.region)}</p><h1>${esc(title)}</h1>${d.description ? `<p>${esc(d.description)}</p>` : ""}</div></section>`;
-  return `${hero}
-${breadcrumbs([{ label: "Home", href: "/" }, { label: title }])}
-${out}`;
-};
+const P = makePresentation({
+  esc, img, link, rewrite, demoteH1, fixRunOn, softenCaps, stripBoilerplate,
+  titleOf, labelFor, routeOf, NAV, FOOTER_LINKS, PRACTICE, SERVICE_SLUGS,
+  NAV_LABELS, SITE_URL,
+});
+const { C, renderArticle, renderBlocks, renderEmbed, sidebarCta, pageBody, layout } = P;
 
 // ------------------------------------------------------------------- build
 fs.rmSync(DIST, { recursive: true, force: true });
 fs.mkdirSync(DIST, { recursive: true });
 
-const helpers = { esc, asset, img, responsive, link, rewrite, demoteH1, stripBoilerplate, titleOf, softenCaps, fixRunOn, routeOf, read, labelFor, PRACTICE, breadcrumbs, sidebarCta, renderEmbed, SITE_URL };
+// What a page template may use. `C` is the component library; templates compose
+// it rather than writing markup. `breadcrumbs` is kept as an alias so existing
+// templates keep working while they are ported.
+const helpers = {
+  esc, asset, img, responsive, link, rewrite, demoteH1, stripBoilerplate,
+  titleOf, softenCaps, fixRunOn, routeOf, read, labelFor,
+  PRACTICE, SITE_URL, C, sidebarCta, renderEmbed,
+  breadcrumbs: C.breadcrumb,
+  HOURS: P.HOURS, BOOKING: P.BOOKING,
+};
 const written = [];
 
 const skipped = [];
@@ -679,11 +403,18 @@ fs.writeFileSync(path.join(DIST, "404.html"), layout({
   title: "Page not found | " + PRACTICE.name,
   description: "That page could not be found.",
   route: "/404.html",
-  body: `<section class="section"><div class="shell shell--narrow" style="text-align:center">
-  <p class="eyebrow">404</p><h1>We could not find that page</h1>
-  <p>The page may have moved during our site rebuild. Try the menu above, or call the practice and we will point you to it.</p>
-  <p><a class="btn" href="/">Back to the homepage</a> <a class="btn btn--ghost" href="${PRACTICE.phoneHref}">Call ${esc(PRACTICE.phone)}</a></p>
-</div></section>`,
+  body: C.section({ name: "not-found", container: "medium", inner: `
+    <div class="text-align-center">
+      ${C.eyebrow("404")}
+      ${C.heading("We could not find that page", { level: 1 })}
+      ${C.spacer("small")}
+      ${C.paragraph("The page may have moved during our site rebuild. Try the menu above, or call the practice and we will point you to it.", { size: "medium" })}
+      ${C.spacer("medium")}
+      <div class="button-group" style="justify-content:center">
+        ${C.button({ label: "Back to the homepage", href: "/" })}
+        ${C.button({ label: `Call ${PRACTICE.phone}`, href: PRACTICE.phoneHref, variant: "ghost" })}
+      </div>
+    </div>` }),
 }));
 
 // theme + assets

@@ -43,6 +43,17 @@ const MALWARE = [
 ];
 
 const EXPECTED_THIN = new Set(["/404.html", "/thank-you/"]);
+
+// Every class the stylesheet actually defines. A class in the markup that is not
+// in here is styled by nothing - which is how a whole page can render unstyled
+// with no error anywhere, exactly what happened when the vocabulary moved to
+// Client-First and the page templates still named the old classes.
+const cssText = fs.readFileSync(path.join(DIST, "assets", "site.css"), "utf8")
+  .replace(/\/\*[\s\S]*?\*\//g, "");
+const definedClasses = new Set([...cssText.matchAll(/\.([a-zA-Z][\w-]*)/g)].map((m) => m[1]));
+// Utility prefixes generated per page (spacer sizes etc.) are all literal, so
+// nothing has to be allow-listed; anything missing is a genuine orphan.
+const unknownClasses = new Map();
 const titles = new Map();
 const descs = new Map();
 const linkedTo = new Set(["/"]);
@@ -76,6 +87,17 @@ for (const file of pages) {
     descs.get(desc).push(route);
   }
 
+  for (const m of html.matchAll(/class="([^"]+)"/g)) {
+    for (const cls of m[1].trim().split(/\s+/)) {
+      if (!cls || definedClasses.has(cls)) continue;
+      // Client-First names every section (section_hero, section_footer) purely
+      // so it can be found in the builder. Those carry no styles by design.
+      if (cls.startsWith("section_")) continue;
+      if (!unknownClasses.has(cls)) unknownClasses.set(cls, new Set());
+      unknownClasses.get(cls).add(route);
+    }
+  }
+
   const words = text.trim().split(/\s+/).filter(Boolean).length;
   if (words < 60 && !EXPECTED_THIN.has(route)) flag("WARN", route, `thin page: ${words} words of body copy`);
 
@@ -107,6 +129,10 @@ const EXPECTED_ORPHANS = new Set(["/", "/404.html", "/thank-you/"]);
 for (const route of known) {
   if (EXPECTED_ORPHANS.has(route)) continue;
   if (!linkedTo.has(route)) flag("WARN", route, "orphan: nothing on the site links here");
+}
+
+for (const [cls, routes] of unknownClasses) {
+  flag("ERROR", [...routes][0], `class "${cls}" is styled by nothing (${routes.size} page(s))`);
 }
 
 const order = { BLOCKER: 0, ERROR: 1, WARN: 2 };
