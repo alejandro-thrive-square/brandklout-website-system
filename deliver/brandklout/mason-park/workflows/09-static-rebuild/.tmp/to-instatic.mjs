@@ -38,6 +38,12 @@ const argv = process.argv.slice(2);
 const mediaArg = argv.includes("--media") ? argv[argv.indexOf("--media") + 1] : null;
 const MEDIA = mediaArg && fs.existsSync(mediaArg) ? JSON.parse(fs.readFileSync(mediaArg, "utf8")) : {};
 
+// --lean drops the srcset candidates and ships one file per image. 370 of the
+// 497 uploads exist only to fill a srcset, so this is 497 files/27.3 MB down to
+// 127/13.3 MB - the difference between a long upload and a short one when the
+// site has to be back today. The cost is that phones fetch the full-size image.
+const LEAN = argv.includes("--lean");
+
 if (!fs.existsSync(DIST)) {
   console.error("dist/ does not exist - run `node build.mjs` first.");
   process.exit(1);
@@ -56,8 +62,13 @@ export const route = (href) => {
 
 /** `/assets/uploads/x/y.jpg` -> `/uploads/<id>-y.jpg`, or null if not uploaded. */
 const unmapped = new Set();
+/** Every local asset some page actually points at, which under --lean is a
+ *  smaller set than what is on disk. Recorded before the map is consulted so it
+ *  holds local paths either way. */
+const referenced = new Set();
 export const upload = (src) => {
   if (!src.startsWith("/assets/")) return src;
+  referenced.add(src);
   const name = src.replace(/^\/assets\//, "");
   const hit = MEDIA[name]
     || MEDIA[path.basename(name)]
@@ -82,10 +93,19 @@ const transform = (html) => {
   if (open === -1 || close === -1) throw new Error("no <body>");
   out = out.slice(open + "<body>".length, close);
 
-  // 1. routes
-  out = out.replace(/\bhref="(\/[^"]*)"/g, (_, href) => `href="${route(href)}"`);
+  // 1. routes - except an href into /assets/, which is a file to download, not a
+  //    page. The brochure on /dental-savings-plan was going out as
+  //    href="/assets/.../broucher.pdf" and 404ing, because only /uploads/<id>-…
+  //    exists once Instatic has the file.
+  out = out.replace(/\bhref="(\/[^"]*)"/g, (_, href) =>
+    `href="${href.startsWith("/assets/") ? upload(href) : route(href)}"`);
 
-  // 2. media - src, and every candidate inside srcset
+  // 2. media - src, and every candidate inside srcset.
+  // Under --lean the srcset and its sizes hint go first, so the candidates are
+  // never handed to upload() and drop out of the manifest on their own.
+  if (LEAN) {
+    out = out.replace(/\s(?:srcset|data-srcset|sizes)="[^"]*"/g, "");
+  }
   out = out.replace(/\bsrc="(\/assets\/[^"]+)"/g, (_, s) => `src="${upload(s)}"`);
   out = out.replace(/\bdata-src="(\/assets\/[^"]+)"/g, (_, s) => `data-src="${upload(s)}"`);
   out = out.replace(/\bsrcset="([^"]+)"/g, (_, set) => {
@@ -157,6 +177,9 @@ const media = walk(DIST)
     const web = "/" + path.relative(DIST, f).split(path.sep).join("/");
     return { local: web, name: web.replace(/^\/assets\//, ""), bytes: fs.statSync(f).size };
   })
+  // Uploading a file no page points at costs time now and volume space on every
+  // later publish, since a publish snapshots every runtime asset.
+  .filter((m) => referenced.has(m.local))
   .sort((a, b) => a.name.localeCompare(b.name));
 
 fs.writeFileSync(path.join(OUT, "media-manifest.json"), JSON.stringify({
@@ -189,10 +212,24 @@ built before the upload will point at \`/assets/...\` and render broken.
 2. **Harvest the map** — a JSON of \`{ "<local name>": "/uploads/<id>-<name>" }\`.
 3. **Re-run this script with the map**: \`node to-instatic.mjs --media <map>.json\`.
    It reports anything still unmapped instead of shipping a broken path.
+   Pass \`--lean\` in **both** runs if you used it in the first, or the pages
+   come back out with srcset candidates that were never uploaded.
 4. **Add the two code assets** (\`site.css\`, \`site.js\`) site-wide.
 5. **Create each page** with \`site_add_page\` (title, slug), then insert its
    \`html\` with \`site_insert_html\`, passing the returned **\`rootNodeId\`** as
    \`parentId\` — a \`pageId\` is not a node id.
+
+## \`--lean\` — when the upload is what stands between you and live
+
+\`node to-instatic.mjs --lean\` drops every \`srcset\`/\`sizes\` hint and ships one
+file per image: **127 files / 13.3 MB instead of 497 / 27.3 MB**. 370 of those
+uploads exist only to fill a srcset.
+
+Worth it twice over on a self-hosted instance: a publish snapshots *every*
+runtime asset into the volume and nothing is ever collected, so the asset
+footprint is paid again on each publish, not once. The cost is that phones
+fetch the full-size image — roughly double the mean page weight, from a very
+low base. Re-run without the flag later to restore responsive images.
 
 ## Two things that will bite
 
