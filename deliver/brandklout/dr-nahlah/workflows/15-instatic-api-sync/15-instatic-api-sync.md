@@ -89,6 +89,49 @@ Once the code asset is off, `rule.order` and condition order are the only tiebre
 - **A redefinition inside `@media` must not move the base rule.** Ranking by "last seen anywhere" pushed `.vs-row > span` past `.vs-head-row > span` because of a breakpoint override, and the comparison table's header row lost its display type.
 - **Custom conditions emit in `site.conditions` ARRAY order** — only viewport breakpoints get `classCss.ts`'s max-desc/min-asc sort, and per-rule `contextStyles` key order is ignored. `.bl-grid`'s 1080px block emitted before its 700px one and the blog grid fell from three columns to two, doubling the page height. Sort the array the way the platform sorts breakpoints, then **assert no rule needs the opposite order** (comparing only contexts that set an overlapping property, or the `:root` token blocks raise false alarms).
 
+### Pushing registry rules FROM the design package  `push-post-layout.mjs`
+
+A push script that carries its own table of sixty rules is a second copy of the
+stylesheet, and a second copy is how the two platforms forked the first time.
+`push-post-layout.mjs` PARSES the rules out of `04-design/.tmp/site-src/css/
+62-blog.css` instead and upserts them by selector. Three things make that safe,
+and all three were learned by getting them wrong:
+
+- **Parse it yourself.** happy-dom (and therefore Instatic's own converter) drops
+  `clamp()`, `min()` and `100svh` outright and flattens a multi-layer
+  `background` to its last layer. A twenty-line parser that splits on `;` and
+  `:` at paren-depth 0 and keeps every value VERBATIM is not a downgrade from
+  the platform converter — for this job it is strictly better.
+- **Upsert in place.** Same id, same `order`, same `kind`. Creating a fresh rule
+  for a selector that already has one puts a duplicate later in the cascade and
+  changes which declaration wins.
+- **A selector can already exist TWICE.** `.bl-rel-grid` is an empty class-kind
+  rule (the name a node references) AND an ambient rule that paints. "First
+  match by selector" wrote one and verified the other. Take the one with the
+  highest `order` — the one the cascade actually lands on — for both.
+
+And the corollary of the tree-shake rules above: a class the CSS only ever uses
+in a COMPOUND selector (`bl-ph` appears as `.pg-hero.bl-ph`, never bare) yields
+no class-kind rule, so a node has nothing to reference and emits no class at
+all. Create an empty class rule to carry the name.
+
+### `position: sticky` cannot work while ScrollSmoother is on
+
+ScrollSmoother wraps the page in `#smooth-wrapper{position:fixed;overflow:hidden}`
+and translates `#smooth-content`. A sticky element's nearest scrolling ancestor
+is then a box that never scrolls, so it never sticks — measured on
+`/sedation-dentistry`, where 400px of scroll moved the "sticky"
+`.pk-lede .lc-head` by the full 400px. That rule has been inert on the live site
+for as long as the smoother has been on.
+
+Use `ScrollTrigger.create({pin: true, pinSpacing: false})`. Two consequences:
+
+- GSAP wraps the pinned element in a `.pin-spacer`, and inside a grid THAT
+  becomes the grid item. Place it explicitly (`.bl-post > .pin-spacer{grid-column:1}`)
+  rather than trusting auto-placement to pick the cell the element vacated.
+- Do not pin anything taller than the window; it holds its own foot off screen
+  for the length of the pin. Guard on `el.offsetHeight > innerHeight - top`.
+
 ### The parity gate itself
 
 - **`getComputedStyle(el)` cannot see `::before` / `::after`, and this design keeps its scrims there.** The gate reported **0 differences on 557,670 values** while two overlay gradients were flattened, because it never sampled a pseudo-element. It now walks `[null, '::before', '::after']` and skips pseudos whose `content` is `none` (recording them would add two empty bags per element and swamp the diff). Coverage went 557,670 -> 592,834 values. A parity gate is only as good as the surfaces it samples: **if a defect is invisible to the gate, a green gate is not evidence.**
