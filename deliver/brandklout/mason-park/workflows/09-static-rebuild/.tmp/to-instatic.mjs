@@ -116,8 +116,21 @@ const transform = (html) => {
     return `srcset="${rebuilt}"`;
   });
 
+  // Anything still pointing into /assets/ after the map was applied is a file
+  // Instatic would not take - today that is the brochure, because the upload
+  // pipeline rejects application/pdf on purpose. Shipping the link anyway gives
+  // a visitor a 404, so unwrap it and keep the words.
+  if (mediaArg) {
+    out = out.replace(/<a\b[^>]*\bhref="\/assets\/[^"]*"[^>]*>([\s\S]*?)<\/a>/gi, (whole, inner) => {
+      unwrappedAssetLinks.push(whole.match(/href="([^"]*)"/)?.[1] ?? "?");
+      return inner;
+    });
+  }
+
   return out.replace(/\n{3,}/g, "\n\n").trim();
 };
+
+const unwrappedAssetLinks = [];
 
 // Titles and meta descriptions come out of the markup still escaped. Instatic
 // stores them as text, so they have to be decoded on the way out or the page
@@ -282,3 +295,7 @@ if (problems.length) {
   process.exit(1);
 }
 console.log("  every page validates: body only, usable slug, title present");
+if (unwrappedAssetLinks.length) {
+  console.log(`  ! ${unwrappedAssetLinks.length} link(s) to a file Instatic would not accept were unwrapped to plain text:`);
+  for (const u of [...new Set(unwrappedAssetLinks)]) console.log(`      ${u}`);
+}
