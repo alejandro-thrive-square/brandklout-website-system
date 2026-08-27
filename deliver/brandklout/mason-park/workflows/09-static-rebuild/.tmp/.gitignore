@@ -11,3 +11,8 @@ slices/
 # page JSON duplicates dist/ HTML. IMPORT.md's content lives in the README.
 instatic/
 weight-report.json
+
+# The converted node graphs, ~15MB, produced by shipping instatic/pages into the
+# container and running container-convert.ts there. Reproducible in two commands
+# (ship-payload.mjs then fetch-nodes.mjs) and far past "lightweight artifact".
+converted-pages.json

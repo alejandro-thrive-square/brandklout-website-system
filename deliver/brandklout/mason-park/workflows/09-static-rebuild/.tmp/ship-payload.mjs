@@ -1,0 +1,82 @@
+/**
+ * Push the exported pages into the Instatic container as one gzipped+base64
+ * file, in chunks.
+ *
+ *   node ship-payload.mjs
+ *
+ * `railway ssh` takes its payload on the command line and fails SILENTLY past
+ * roughly 10 KB, so the transfer is chunked and then verified by comparing a
+ * sha256 computed on both sides. Without that check a truncated payload looks
+ * exactly like a successful one until the converter produces nonsense.
+ */
+import fs from "node:fs";
+import path from "node:path";
+import zlib from "node:zlib";
+import crypto from "node:crypto";
+import { execFileSync } from "node:child_process";
+import { fileURLToPath } from "node:url";
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const PROJECT = "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc";
+const ENVIRONMENT = "f2bfcbee-c7c9-48be-b404-cc43937d30a2";
+const SERVICE = "8a9bb8d3-ed09-418d-9a67-b5c8bf0f19fb";
+const CHUNK = 7000;
+
+// Go through bash, not cmd.exe: `railway` on PATH is a .cmd shim and cmd.exe
+// mangles the single-quoted payload ("El sistema no puede encontrar la ruta").
+const shq = (s) => `'${String(s).replace(/'/g, `'\\''`)}'`;
+// `railway ssh` intermittently dies with "Failed to fetch: error decoding
+// response body" - a transport hiccup, and the command may well have run. So
+// every chunk is written to its OWN numbered file rather than appended: a
+// retry then overwrites instead of duplicating, and the parts are concatenated
+// in order at the end.
+const sshOnce = (cmd) => execFileSync(
+  "bash",
+  ["-c", `railway ssh -p ${PROJECT} -e ${ENVIRONMENT} -s ${SERVICE} ${shq(cmd)}`],
+  { encoding: "utf8", maxBuffer: 64 * 1024 * 1024 },
+);
+const sleep = (ms) => Atomics.wait(new Int32Array(new SharedArrayBuffer(4)), 0, 0, ms);
+const ssh = (cmd, tries = 5) => {
+  let last;
+  for (let i = 1; i <= tries; i++) {
+    try { return sshOnce(cmd); } catch (e) {
+      last = e;
+      if (i < tries) sleep(1000 * i);
+    }
+  }
+  throw last;
+};
+
+const pagesDir = path.join(HERE, "instatic", "pages");
+const pages = fs.readdirSync(pagesDir)
+  .map((f) => JSON.parse(fs.readFileSync(path.join(pagesDir, f), "utf8")))
+  .map(({ slug, title, description, html }) => ({ slug, title, description, html }));
+
+const payload = Buffer.from(JSON.stringify(pages));
+const b64 = zlib.gzipSync(payload, { level: 9 }).toString("base64");
+const sha = crypto.createHash("sha256").update(b64).digest("hex");
+
+console.log(`${pages.length} pages -> ${(payload.length / 1024).toFixed(0)} KB raw, ${(b64.length / 1024).toFixed(0)} KB base64`);
+const chunks = [];
+for (let i = 0; i < b64.length; i += CHUNK) chunks.push(b64.slice(i, i + CHUNK));
+console.log(`${chunks.length} chunks of <=${CHUNK} bytes`);
+
+ssh("rm -rf /tmp/mpparts /tmp/payload.b64 && mkdir -p /tmp/mpparts");
+for (let i = 0; i < chunks.length; i++) {
+  // printf '%s' avoids echo's newline, which would corrupt the base64 stream.
+  // Zero-padded so the concatenating glob stays in order past part 9.
+  const n = String(i).padStart(4, "0");
+  ssh(`printf '%s' '${chunks[i]}' > /tmp/mpparts/${n}`);
+  if ((i + 1) % 10 === 0 || i === chunks.length - 1) console.log(`  ${i + 1}/${chunks.length}`);
+}
+ssh("cat /tmp/mpparts/* > /tmp/payload.b64");
+
+const remote = ssh("sha256sum /tmp/payload.b64 | cut -d' ' -f1").trim().split(/\s+/).pop();
+const size = ssh("wc -c < /tmp/payload.b64").trim().split(/\s+/).pop();
+console.log(`local  sha ${sha}`);
+console.log(`remote sha ${remote}  (${size} bytes, expected ${b64.length})`);
+if (remote !== sha) {
+  console.error("MISMATCH - the payload did not arrive intact. Do not run the converter.");
+  process.exit(1);
+}
+console.log("payload verified intact");
