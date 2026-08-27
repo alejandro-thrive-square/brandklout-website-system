@@ -99,6 +99,27 @@ const transform = (html) => {
   return out.replace(/\n{3,}/g, "\n\n").trim();
 };
 
+// Titles and meta descriptions come out of the markup still escaped. Instatic
+// stores them as text, so they have to be decoded on the way out or the page
+// title reads "Technology &amp; AI" in the browser tab.
+const NAMED = {
+  amp: "&", lt: "<", gt: ">", quot: '"', apos: "'", nbsp: " ",
+  ndash: "–", mdash: "—", hellip: "…",
+  lsquo: "‘", rsquo: "’", ldquo: "“", rdquo: "”",
+};
+const decodeEntities = (s) =>
+  s.replace(/&(#x?[0-9a-fA-F]+|[a-zA-Z][a-zA-Z0-9]*);/g, (whole, body) => {
+    if (body[0] === "#") {
+      const code = body[1] === "x" || body[1] === "X"
+        ? parseInt(body.slice(2), 16)
+        : parseInt(body.slice(1), 10);
+      return Number.isFinite(code) && code > 0 ? String.fromCodePoint(code) : whole;
+    }
+    // &amp; has to resolve last so "&amp;lt;" stays literal rather than becoming "<".
+    const hit = NAMED[body.toLowerCase()];
+    return hit === undefined ? whole : hit;
+  });
+
 // ------------------------------------------------------------------- run
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, "pages"), { recursive: true });
@@ -114,8 +135,10 @@ for (const file of pages) {
   const isHome = rel === "." || rel === "";
   const localRoute = isHome ? "/" : "/" + rel + "/";
   const slug = isHome ? "home" : rel;
-  const title = (html.match(/<title>([\s\S]*?)<\/title>/i) || [, ""])[1].trim();
-  const description = (html.match(/<meta name="description" content="([^"]*)"/i) || [, ""])[1].trim();
+  // These two are plain-text fields in Instatic, not markup, so the entities that
+  // are correct inside <title> would render literally as "&amp;" in the tab.
+  const title = decodeEntities((html.match(/<title>([\s\S]*?)<\/title>/i) || [, ""])[1].trim());
+  const description = decodeEntities((html.match(/<meta name="description" content="([^"]*)"/i) || [, ""])[1].trim());
 
   const body = transform(html);
   fs.writeFileSync(path.join(OUT, "pages", slug.replace(/\//g, "__") + ".json"),
