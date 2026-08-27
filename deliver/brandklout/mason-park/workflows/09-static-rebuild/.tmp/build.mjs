@@ -26,7 +26,12 @@ const argv = process.argv.slice(2);
 const NO_ASSETS = argv.includes("--no-assets");
 const ONLY = argv.includes("--only") ? argv[argv.indexOf("--only") + 1] : null;
 
-const SITE_URL = "https://bestdentistinkatytx.com";
+// Canonical URLs, the sitemap and robots.txt all hang off this. It stays the
+// real domain even while the site is served from a temporary host: that keeps
+// the temp URL out of the index and means DNS cutover needs no rebuild. Only
+// override it if the temp URL is meant to be indexed on its own.
+//   SITE_URL=https://mason-park.up.railway.app node build.mjs
+const SITE_URL = (process.env.SITE_URL || "https://bestdentistinkatytx.com").replace(/\/+$/, "");
 const BUILT = new Date().toISOString().slice(0, 10);
 
 // Fallback meta description for pages the WordPress site never gave one.
