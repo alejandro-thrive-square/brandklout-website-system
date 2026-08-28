@@ -1,14 +1,19 @@
 // Mason Park Dental - static rebuild. Everything here is progressive
 // enhancement: the site is fully readable and navigable with JS off.
+//
+// The selectors below MUST match site/presentation.mjs. They drifted once
+// already: this file still looked for `.mainnav` / `.navtoggle` after the markup
+// moved to Client-First names, so the mobile menu button did nothing on every
+// page and nothing reported it. If you rename a chrome class, change it here.
 (function () {
   "use strict";
 
   var body = document.body;
 
   // ------------------------------------------------------------ mobile nav
-  var toggle = document.querySelector(".navtoggle");
-  var scrim = document.querySelector(".navscrim");
-  var nav = document.querySelector(".mainnav");
+  var toggle = document.querySelector(".navbar_toggle");
+  var scrim = document.querySelector(".navbar_scrim");
+  var nav = document.querySelector(".navbar_menu");
 
   function closeNav() {
     body.classList.remove("nav-open");
@@ -31,13 +36,13 @@
   // normally, so only intercept below the breakpoint.
   var narrow = window.matchMedia("(max-width: 1150px)");
   if (nav) {
-    nav.querySelectorAll(".has-sub > a").forEach(function (a) {
+    Array.prototype.forEach.call(nav.querySelectorAll(".has-dropdown > .navbar_link"), function (a) {
       a.addEventListener("click", function (e) {
         if (!narrow.matches) return;
         var li = a.parentElement;
-        if (!li.classList.contains("open")) {
+        if (!li.classList.contains("is-open")) {
           e.preventDefault();
-          li.classList.add("open");
+          li.classList.add("is-open");
         }
       });
     });
@@ -46,7 +51,7 @@
   // -------------------------------------------------- current-page marking
   var here = location.pathname.replace(/index\.html$/, "");
   if (!here.endsWith("/")) here += "/";
-  document.querySelectorAll(".mainnav a[href]").forEach(function (a) {
+  Array.prototype.forEach.call(document.querySelectorAll(".navbar_menu a[href]"), function (a) {
     var href = a.getAttribute("href");
     if (!href || href.charAt(0) !== "/") return;
     if (href === here) {
@@ -54,7 +59,7 @@
       var p = a.closest("ul");
       while (p && p !== nav) {
         var owner = p.parentElement;
-        if (owner && owner.tagName === "LI") owner.classList.add("open");
+        if (owner && owner.tagName === "LI") owner.classList.add("is-open");
         p = owner ? owner.closest("ul") : null;
       }
     }
@@ -75,9 +80,9 @@
           if (en.isIntersecting) { load(en.target); io.unobserve(en.target); }
         });
       }, { rootMargin: "300px" });
-      lazyFrames.forEach(function (f) { io.observe(f); });
+      Array.prototype.forEach.call(lazyFrames, function (f) { io.observe(f); });
     } else {
-      lazyFrames.forEach(load);
+      Array.prototype.forEach.call(lazyFrames, load);
     }
   }
 })();

@@ -21,20 +21,35 @@ export const HOURS = [
   ["Thursday", "8am - 5pm"], ["Friday", "Closed"], ["Saturday", "Closed"], ["Sunday", "Closed"],
 ];
 
+// The short form the Figma utility bar carries, verbatim from the comps.
+export const HOURS_SHORT = "Mon &amp; Wed 9-6 &middot; Tue &amp; Thu 8-5";
+
 export const ACCREDITATIONS = [
-  ["/wp-content/uploads/2023/08/aapd.webp", "American Academy of Pediatric Dentistry"],
-  ["/wp-content/uploads/2023/08/abpd-1.webp", "American Board of Pediatric Dentistry - Board Certified"],
-  ["/wp-content/uploads/2023/08/agd-1.webp", "Academy of General Dentistry"],
   ["/wp-content/uploads/2023/08/kois-1.webp", "Kois Center"],
   ["/wp-content/uploads/2023/08/ssc-1.webp", "Seattle Study Club"],
+  ["/wp-content/uploads/2023/08/aapd.webp", "American Academy of Pediatric Dentistry"],
+  ["/wp-content/uploads/2023/08/agd-1.webp", "Academy of General Dentistry"],
+  ["/wp-content/uploads/2023/08/abpd-1.webp", "American Board of Pediatric Dentistry - Board Certified"],
 ];
 
-const FOOTER_MENU = [
-  { label: "Home", href: "/" },
-  { label: "Services", href: "/our-services/" },
-  { label: "About Us", href: "/about-us/" },
-  { label: "Special Offers", href: "/special-offers/" },
-  { label: "Contacts", href: "/contacts/" },
+// The footer columns the Figma specifies: CARE / PATIENTS / HOURS beside the
+// brand block. The old footer ran "Useful Links" and "Menu" side by side, which
+// repeated four of the same destinations twice.
+const FOOTER_CARE = [
+  { label: "Cosmetic dentistry", href: "/services/cosmetic-dentistry/" },
+  { label: "Children's dentistry", href: "/services/pediatric-dental-care/" },
+  { label: "Invisalign", href: "/services/invisalign/" },
+  { label: "Dental implants", href: "/services/dental-implant-placement/" },
+  { label: "Emergency dentist", href: "/services/emergency-dentist/" },
+  { label: "All services", href: "/our-services/" },
+];
+const FOOTER_PATIENTS = [
+  { label: "New patients", href: "/patient-resources/" },
+  { label: "Financing", href: "/financing/" },
+  { label: "Dental savings plan", href: "/dental-savings-plan/" },
+  { label: "Special offers", href: "/special-offers/" },
+  { label: "Virtual consultation", href: "/virtual-consultation/" },
+  { label: "FAQs", href: "/faq-page/" },
 ];
 
 export function makePresentation(ctx) {
@@ -63,62 +78,49 @@ export function makePresentation(ctx) {
       : `<ul class="navbar_dropdown-list">${rendered}</ul>`;
   };
 
+  // The utility bar carries the three facts a visitor looks for before anything
+  // else — where, when, and what number to ring. Figma runs it full width above
+  // the header; kept, at one line.
   const chromeHeader = () => `<a class="visually-hidden" href="#main">Skip to content</a>
 <div class="topbar_component">
-  <span>Dentist Katy | ${esc(PRACTICE.street)} | ${esc(PRACTICE.city)}, ${esc(PRACTICE.region)} ${esc(PRACTICE.postal)} | </span>
-  <a href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a>
+  <span><a href="${esc(PRACTICE.maps)}" target="_blank" rel="noopener">${esc(PRACTICE.street)}, ${esc(PRACTICE.city)} ${esc(PRACTICE.region)}</a></span>
+  <span class="topbar_note">${HOURS_SHORT} &middot; Fri&ndash;Sun closed</span>
+  <span><a href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a></span>
 </div>
 <header class="navbar_component">
-  <div class="padding-global"><div class="container-large">
+  <div class="padding-global"><div class="container-xlarge">
     <div class="navbar_container">
       <a class="navbar_logo-link" href="/" aria-label="${esc(PRACTICE.name)} home">
-        ${img(LOGO, PRACTICE.name, { sizes: "185px", cls: "navbar_logo", eager: true, w: 406, h: 156 })}
+        ${img(LOGO, PRACTICE.name, { sizes: "192px", cls: "navbar_logo", eager: true, w: 406, h: 156 })}
       </a>
       <nav class="navbar_menu" id="navbar-menu" aria-label="Main">${navList(NAV, true)}</nav>
       <div class="navbar_actions">
         <a class="navbar_phone" href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a>
-        ${C.button({ label: "Schedule Online", href: BOOKING, variant: "slate", external: true })}
+        ${C.button({ label: "Book", href: BOOKING, external: true })}
       </div>
       <button class="navbar_toggle" type="button" aria-expanded="false" aria-controls="navbar-menu" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M3 6h18M3 12h18M3 18h18"/></svg>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></svg>
       </button>
     </div>
   </div></div>
 </header>
 <button class="navbar_scrim" type="button" tabindex="-1" aria-hidden="true"></button>`;
 
+  const footerList = (items) => `<ul class="footer_list">${items
+    .map((l) => { const to = link(l.href); return to ? `<li><a href="${esc(to)}">${esc(l.label)}</a></li>` : ""; })
+    .join("")}</ul>`;
+
+  // The credential strip is NOT part of the footer. The comps put it high on the
+  // homepage, where it answers "is this practice any good" while the hero is
+  // still on screen; on inner pages it rides above the closing CTA (see
+  // `pageCta`). Rendering it in the chrome would have put it below every
+  // conversion point on the site.
   const chromeFooter = () => `
-${C.section({ name: "contact-band", bg: "tan", padding: "medium", inner: `
-  <div class="info-band_component layout-grid is-2col">
-    <div>
-      <h2 class="info-band_title">Contact Us</h2>
-      <p>Dentist Katy</p>
-      <p>${esc(PRACTICE.street)},<br>${esc(PRACTICE.city)}, ${esc(PRACTICE.region)} ${esc(PRACTICE.postal)}</p>
-      <p><a href="${PRACTICE.phoneHref}">Call: ${esc(PRACTICE.phone)}</a></p>
-    </div>
-    <div>
-      <h2 class="info-band_title">Office Hours</h2>
-      ${HOURS.map(([d, t]) => `<p>${d}: ${t}</p>`).join("")}
-    </div>
-  </div>` })}
-${C.badgeStrip(ACCREDITATIONS)}
 <footer class="footer_component section_footer">
-  <div class="padding-global"><div class="container-large"><div class="padding-section-large">
+  <div class="padding-global"><div class="container-xlarge"><div class="padding-section-large">
     <div class="footer_grid">
       <div>
-        ${img(LOGO, PRACTICE.name, { sizes: "165px", cls: "footer_logo", w: 406, h: 156 })}
-        <p class="text-size-small">Comprehensive family, cosmetic and restorative dentistry in Katy, Texas.</p>
-      </div>
-      <div>
-        <h3 class="footer_heading">Useful Links</h3>
-        <ul class="footer_list">${FOOTER_LINKS.map((l) => { const to = link(l.href); return to ? `<li><a href="${esc(to)}">${esc(l.label)}</a></li>` : ""; }).join("")}</ul>
-      </div>
-      <div>
-        <h3 class="footer_heading">Menu</h3>
-        <ul class="footer_list">${FOOTER_MENU.map((l) => `<li><a href="${esc(link(l.href) || l.href)}">${esc(l.label)}</a></li>`).join("")}</ul>
-      </div>
-      <div>
-        <h3 class="footer_heading">Contact Us</h3>
+        ${img(LOGO, PRACTICE.name, { sizes: "176px", cls: "footer_logo", w: 406, h: 156 })}
         <ul class="footer_list">
           <li><a href="${esc(PRACTICE.maps)}" target="_blank" rel="noopener">${esc(PRACTICE.street)}<br>${esc(PRACTICE.city)}, ${esc(PRACTICE.region)} ${esc(PRACTICE.postal)}</a></li>
           <li><a href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a></li>
@@ -126,11 +128,26 @@ ${C.badgeStrip(ACCREDITATIONS)}
           <li><a href="${esc(PRACTICE.facebook)}" target="_blank" rel="noopener">Facebook</a></li>
         </ul>
       </div>
+      <div>
+        <h3 class="footer_heading">Care</h3>
+        ${footerList(FOOTER_CARE)}
+      </div>
+      <div>
+        <h3 class="footer_heading">Patients</h3>
+        ${footerList(FOOTER_PATIENTS)}
+      </div>
+      <div>
+        <h3 class="footer_heading">Hours</h3>
+        ${C.hoursList(HOURS)}
+      </div>
     </div>
     <div class="footer_legal">
-      &copy; ${new Date().getFullYear()} ${esc(PRACTICE.name)} | <a href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a>
-      | ${esc(PRACTICE.street)}, ${esc(PRACTICE.city)}, ${esc(PRACTICE.region)} ${esc(PRACTICE.postal)}
-      | <a href="/privacy-policy/">Privacy Policy</a> | <a href="/terms-of-service/">Terms of Service</a>
+      &copy; ${new Date().getFullYear()} ${esc(PRACTICE.name)}
+      | <a href="/privacy-policy/">Privacy</a>
+      | <a href="/terms-of-service/">Terms</a>
+      | <a href="/cookie-policy/">Cookies</a>
+      | <a href="/sitemap/">Sitemap</a>
+      | ${FOOTER_LINKS.filter((l) => link(l.href)).slice(0, 3).map((l) => `<a href="${esc(link(l.href))}">${esc(l.label)}</a>`).join(" | ")}
     </div>
   </div></div></div>
 </footer>
@@ -165,6 +182,24 @@ ${C.badgeStrip(ACCREDITATIONS)}
     <p><a href="/our-services/">All services</a></p>`;
   };
 
+  /** The closing block every inner page ends on, so no page dead-ends. */
+  const pageCta = () => C.badgeStrip(ACCREDITATIONS) + "\n" + C.section({ name: "cta", bg: "paper", padding: "large", inner: C.split(
+    `${C.eyebrow("Book a visit")}
+     ${C.heading("One practice for the whole family")}
+     ${C.spacer("small")}
+     ${C.paragraph("Cosmetic and restorative care for adults, gentle first visits for kids, under one roof on Kingsland Boulevard.", { size: "medium" })}
+     ${C.spacer("medium")}
+     ${C.buttonGroup([
+        { label: "Schedule online", href: BOOKING, external: true },
+        { label: `Call ${PRACTICE.phone}`, href: PRACTICE.phoneHref, variant: "ghost" },
+      ])}`,
+    `<div class="card_component">
+       <h2 class="heading-style-h4">Office hours</h2>
+       ${C.hoursList(HOURS)}
+     </div>`,
+    { textWide: true },
+  ) });
+
   // ------------------------------------------------------------- renderers
   /** A WordPress content page: header photo, then the article body and sidebar. */
   const renderArticle = (d) => {
@@ -180,12 +215,13 @@ ${C.badgeStrip(ACCREDITATIONS)}
 
     return `${hero}
 ${C.breadcrumb(trail)}
-${C.section({ name: "article", padding: "small", inner: `
+${C.section({ name: "article", padding: "large", inner: `
   <div class="article_layout">
     <article>${(() => { const body = normaliseHeadings(fixRunOn(demoteH1(rewrite(d.html))));
       return C.richText(body, { wide: body.includes("<table") }); })()}</article>
     ${sidebarCta(isService ? relatedServices(d.slug) : "")}
-  </div>` })}`;
+  </div>` })}
+${pageCta()}`;
   };
 
   /** An Elementor page with no hand-written template: replay the blocks. */
@@ -268,7 +304,8 @@ ${C.section({ name: "article", padding: "small", inner: `
 
     return `${hero}
 ${C.breadcrumb([{ label: "Home", href: "/" }, { label: title }])}
-${body}`;
+${body}
+${pageCta()}`;
   };
 
   // ---------------------------------------------------------------- layout
@@ -313,7 +350,7 @@ ${chromeFooter()}
 <meta property="og:description" content="${esc(description || "")}">
 <meta property="og:url" content="${esc(SITE_URL + route)}">
 ${ogImage ? `<meta property="og:image" content="${esc(SITE_URL + ogImage)}">` : ""}
-<meta name="theme-color" content="#00bde0">
+<meta name="theme-color" content="#8c6349">
 <link rel="icon" href="/assets/uploads/2023/08/Dentist-Katy-TX-Logo-2.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -328,7 +365,7 @@ ${pageBody(body)}
 `;
 
   return {
-    C, chromeHeader, chromeFooter, renderEmbed, sidebarCta, relatedServices,
+    C, chromeHeader, chromeFooter, renderEmbed, sidebarCta, relatedServices, pageCta,
     renderArticle, renderBlocks, pageBody, layout, HOURS, ACCREDITATIONS, BOOKING, LOGO,
   };
 }

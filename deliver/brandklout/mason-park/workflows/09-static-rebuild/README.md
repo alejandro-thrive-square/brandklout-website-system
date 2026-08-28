@@ -1,5 +1,16 @@
 # 09 — Static rebuild of bestdentistinkatytx.com
 
+> [!IMPORTANT]
+> **The design changed on 2026-08-28.** The site is now built on the client-approved Figma system
+> (Newsreader / Nunito Sans / Karla, the warm `#8C6349` palette) with a rebuilt layout, replacing
+> the WordPress-screenshot design described further down. Read
+> [REDESIGN-2026-08-28.md](./REDESIGN-2026-08-28.md) first — it records every colour and type size
+> verbatim from the Figma handoff, the nine layout changes made on top of it, and the four things
+> in the comps that were deliberately **not** shipped (an unverified founding year, a static star
+> rating, four questions with no answers, and a five-item nav that does not reach 71 pages).
+> Everything below still describes how the build *works*; only the design it emits has moved.
+
+
 **Status: the main site is rebuilt and passing its own QA gate. 72 pages, 0 blockers, 0 errors,
 0 warnings.** Blog posts are deliberately out of scope.
 

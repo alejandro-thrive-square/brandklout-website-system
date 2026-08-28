@@ -5,6 +5,13 @@
  *   node import-pages.mjs                 # everything left
  *   node import-pages.mjs --publish       # publish after saving
  *
+ *   --pages <file>   read a different converted set (default converted-pages.json)
+ *   --overwrite      REPLACE rows that already carry content, instead of skipping
+ *
+ * `--overwrite` exists for revisions of pages that are already live — the
+ * 2026-08-28 legal revision is the first. It is opt-in because the default
+ * skip is what makes a batched first import safe to re-run.
+ *
  * Saves go through PUT /admin/api/cms/site-document in `incremental` mode, so a
  * row nobody mentions is left alone and this can run in batches.
  *
@@ -22,6 +29,10 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const argv = process.argv.slice(2);
 const ONLY = argv.includes("--only") ? argv[argv.indexOf("--only") + 1] : null;
 const PUBLISH = argv.includes("--publish");
+const OVERWRITE = argv.includes("--overwrite");
+const PAGES = argv.includes("--pages")
+  ? path.resolve(HERE, argv[argv.indexOf("--pages") + 1])
+  : path.join(HERE, "converted-pages.json");
 
 const CORE = [
   "/", "/about-us", "/our-services", "/our-doctors", "/contacts",
@@ -35,7 +46,7 @@ const newId = () => Array.from(crypto.randomBytes(21), (b) => ALPHABET[b & 63]).
 /** `/` -> `index`; `/services/invisalign` -> `services/invisalign`. */
 const toSlug = (s) => (s === "/" ? "index" : s.replace(/^\/+/, ""));
 
-const all = JSON.parse(fs.readFileSync(path.join(HERE, "converted-pages.json"), "utf8"));
+const all = JSON.parse(fs.readFileSync(PAGES, "utf8"));
 const existing = (await getPages()).rows ?? [];
 const bySlug = new Map(existing.map((r) => [r.slug, r]));
 console.log(`${all.length} converted, ${existing.length} already in the CMS`);
@@ -50,7 +61,10 @@ const todo = wanted.filter((p) => {
   const row = bySlug.get(toSlug(p.slug));
   if (!row) return true;
   const nodes = row.cells?.body?.nodes ?? {};
-  return Object.keys(nodes).length <= 1; // just the empty base.body
+  if (Object.keys(nodes).length <= 1) return true; // just the empty base.body
+  if (!OVERWRITE) return false;
+  console.log(`  overwriting ${p.slug} (${Object.keys(nodes).length} nodes -> ${Object.keys(p.body.nodes).length})`);
+  return true;
 });
 console.log(`writing ${todo.length} page(s)${ONLY ? ` (--only ${ONLY})` : ""}`);
 if (!todo.length && !PUBLISH) { console.log("nothing to do"); process.exit(0); }

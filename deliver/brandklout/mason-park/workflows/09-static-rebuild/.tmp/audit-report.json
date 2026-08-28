@@ -1,9 +1,19 @@
 {
- "pages": 72,
+ "pages": 73,
  "counts": {
-  "WARN": 45
+  "WARN": 47
  },
  "problems": [
+  {
+   "level": "WARN",
+   "route": "/404.html",
+   "msg": "heading order skips h1 -> h3"
+  },
+  {
+   "level": "WARN",
+   "route": "/before-after/",
+   "msg": "heading order skips h1 -> h3"
+  },
   {
    "level": "WARN",
    "route": "/dental-implant-costs-esp/",

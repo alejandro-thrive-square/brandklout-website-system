@@ -61,7 +61,14 @@ const routeOf = (slug) => {
   return "/" + slug + "/";
 };
 
-const ALL = fs.readdirSync(CONTENT).filter((f) => f.endsWith(".json") && f !== "_index.json").map((f) => f.slice(0, -5));
+// Every page the crawl produced content for, PLUS any hand-authored page that
+// has no upstream counterpart at all (/cookie-policy/ is new to this site).
+// Deliberately not read off CORE_SLUGS: that list is the crawl manifest, and
+// extract.mjs reports anything in it with no scrape as a missing page.
+const ALL = [...new Set([
+  ...fs.readdirSync(CONTENT).filter((f) => f.endsWith(".json") && f !== "_index.json").map((f) => f.slice(0, -5)),
+  ...Object.keys(BESPOKE),
+])];
 const ROUTES = new Map(ALL.map((s) => [routeOf(s), s]));
 // The live nav points at a couple of URLs the crawl stored under a different
 // slug; map them so the header never links into a 404.
@@ -389,7 +396,7 @@ const helpers = {
   titleOf, softenCaps, fixRunOn, routeOf, read, labelFor,
   PRACTICE, SITE_URL, C, sidebarCta, renderEmbed,
   breadcrumbs: C.breadcrumb,
-  HOURS: P.HOURS, BOOKING: P.BOOKING,
+  HOURS: P.HOURS, BOOKING: P.BOOKING, ACCREDITATIONS: P.ACCREDITATIONS,
 };
 const written = [];
 
@@ -397,7 +404,10 @@ const skipped = [];
 for (const slug of ALL) {
   if (ONLY && !slug.includes(ONLY)) continue;
   if (SKIP.has(slug)) { skipped.push(slug); continue; }
-  const d = read(slug);
+  // A hand-authored page need not have a crawled counterpart: /cookie-policy/
+  // is new, and the crawler only ever got a 403 for /privacy-policy/. Anything
+  // NOT hand-authored still needs its content file, so a silent gap stays loud.
+  const d = read(slug) || (BESPOKE[slug] ? { slug, blocks: [] } : null);
   if (!d) continue;
   const route = routeOf(slug);
   let body;

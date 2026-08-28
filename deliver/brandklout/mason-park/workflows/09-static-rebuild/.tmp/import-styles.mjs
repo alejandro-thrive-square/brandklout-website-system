@@ -1,7 +1,12 @@
 /**
  * Give the imported pages their styling back.
  *
- *   node import-styles.mjs [--publish]
+ *   node import-styles.mjs [--publish] [--pages <converted-pages.json>]
+ *
+ * `--pages` points the class harvest at a different converted set. Used by the
+ * legal revision, which converts four pages into legal-live/ and still needs
+ * their class names registered - the registration is additive, so a partial set
+ * adds what is missing and leaves every existing rule alone.
  *
  * The converter kept our class names as `node.classIds`, but Instatic only
  * emits a class attribute for a class it has a rule for - so the live pages
@@ -24,9 +29,13 @@ const newFileId = () => Array.from(crypto.randomBytes(21), (b) => ALPHABET[b & 6
 import { api, getSite, publish as doPublish, publishStatus, BASE } from "./insta.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const PUBLISH = process.argv.includes("--publish");
+const argv = process.argv.slice(2);
+const PUBLISH = argv.includes("--publish");
+const PAGES = argv.includes("--pages")
+  ? path.resolve(HERE, argv[argv.indexOf("--pages") + 1])
+  : path.join(HERE, "converted-pages.json");
 
-const pages = JSON.parse(fs.readFileSync(path.join(HERE, "converted-pages.json"), "utf8"));
+const pages = JSON.parse(fs.readFileSync(PAGES, "utf8"));
 const classNames = new Set();
 for (const p of pages) {
   for (const n of Object.values(p.body.nodes)) for (const c of n.classIds ?? []) classNames.add(c);

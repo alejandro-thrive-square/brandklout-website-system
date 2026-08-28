@@ -13,6 +13,7 @@
 // fix in the library.
 
 import { NAV, SERVICE_SLUGS as SERVICE_SLUGS_REF } from "../pages.config.mjs";
+import { LEGAL_PAGES } from "./legal.mjs";
 
 // ------------------------------------------------------------ block helpers
 const inSection = (d, n) => (d.blocks || []).filter((b) => b.section === n);
@@ -39,38 +40,63 @@ const softenLabel = (s) =>
 
 // The practice's own embedded forms, harvested from the live pages.
 const FORMS = {
-  appointment: "https://api.leadconnectorhq.com/widget/form/9tzFcq7rgDGIvq5wJfWL",  // /contacts/
+  // The practice's own "Contact form" in Brandklout's GoHighLevel, supplied by
+  // the client on 2026-08-28. It replaces the form the crawler harvested off
+  // the old WordPress /contacts/ page (9tzFcq7rgDGIvq5wJfWL, still used by
+  // /appointment/), which belongs to the previous agency's GHL location — leads
+  // from it do not reach this pipeline.
+  contact: "https://api.leadconnectorhq.com/widget/form/JuzM9SxuJMPDMwfO6cgj",
+  appointment: "https://api.leadconnectorhq.com/widget/form/9tzFcq7rgDGIvq5wJfWL",  // /appointment/
   virtual: "https://form.123formbuilder.com/js-form-username-6049703.html",          // /virtual-consultation/
   offers: "https://form.123formbuilder.com/js-form-username-6127475.html",           // /special-offers/
 };
 const MAP_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.0585305167815!2d-95.75121988455305!3d29.775949038160515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86412740e7dd5def%3A0xfa1ab8c6e696e133!2sMason%20Park%20Dental%20-%20Katy%20Dentist!5e0!3m2!1sen!2sus!4v1638807674675!5m2!1sen!2sus";
 const LOCATION_NOTE = "We are located at the corner of Mason Rd and Kingsland Blvd, behind the Ranch 99 complex.";
 
-// The twelve service tiles the homepage carousel cycles through, in the order
-// the live markup lists them. The icons are the practice's own files.
-const SERVICE_TILES = [
-  ["s4", "Cosmetic Dentistry", "/services/cosmetic-dentistry/"],
-  ["s3", "Sedation Dentistry", "/services/sedation-dentistry/"],
-  ["s2", "Advanced Technology", "/technology/"],
-  ["s1", "Comprehensive Care", "/services/comprehensive-care/"],
-  ["s12", "Invisalign", "/services/invisalign/"],
-  ["s11", "Pediatric Dental Care", "/services/pediatric-dental-care/"],
-  ["s10", "Dentures", "/services/dentures/"],
-  ["s9", "Oral Surgery", "/services/oral-surgery/"],
-  ["s8", "Extractions", "/services/extractions/"],
-  ["s7", "Root Canal Therapy", "/services/root-canal-therapy/"],
-  ["s6", "Preventative Dentistry", "/services/preventative-dentistry/"],
-  ["s5", "Dental Implants", "/services/dental-implant-placement/"],
+// The service index, grouped. The live homepage cycled twelve identical icon
+// tiles through a carousel and the Figma comps replaced that with fourteen
+// identical bordered tiles in one 4-column grid — both rank nothing, so a
+// visitor has to read every label to find the one they came for. These are the
+// same fourteen treatments, in three groups a person can scan.
+//
+// [icon, label, one-line description, href]. Icon names resolve in
+// site/icons.mjs; descriptions come from the Figma comps where the comps have
+// them and are written in the same register where they do not.
+const SERVICE_GROUPS = [
+  ["Everyday care", [
+    ["brush", "Preventative Dentistry", "Cleanings, exams, sealants and the appointments that keep the rest away.", "/services/preventative-dentistry/"],
+    ["care", "Comprehensive Care", "Full-spectrum dental services under one roof for the whole family.", "/services/comprehensive-care/"],
+    ["child", "Pediatric Dental Care", "Gentle, kid-friendly exams and cleanings in a familiar space.", "/services/pediatric-dental-care/"],
+    ["emergency", "Emergency Dentist", "Same-day help when something breaks, aches or comes loose.", "/services/emergency-dentist/"],
+  ]],
+  ["Cosmetic and orthodontic", [
+    ["sparkle", "Cosmetic Dentistry", "Veneers, bonding and smile makeovers tailored to your goals.", "/services/cosmetic-dentistry/"],
+    ["tooth", "Veneers", "Shade and shape previewed before anything is prepared.", "/services/porcelain-dental-veneers/"],
+    ["aligner", "Invisalign", "Clear aligners planned digitally, checked in person, no metal.", "/services/invisalign/"],
+    ["scan", "Advanced Technology", "Digital imaging, 3D scans and laser treatment for precision care.", "/technology/"],
+  ]],
+  ["Restorative and surgical", [
+    ["implant", "Dental Implants", "Permanent titanium posts topped with crowns for missing teeth.", "/services/dental-implant-placement/"],
+    ["dentures", "Dentures", "Custom-fitted full and partial dentures for natural comfort and fit.", "/services/dentures/"],
+    ["rootcanal", "Root Canal Therapy", "Saving a tooth that is infected rather than taking it out.", "/services/root-canal-therapy/"],
+    ["surgery", "Oral Surgery", "Expert surgical care for complex extractions and jaw concerns.", "/services/oral-surgery/"],
+    ["extraction", "Extractions", "Straightforward and surgical removals, wisdom teeth included.", "/services/extractions/"],
+    ["sedation", "Sedation Dentistry", "Relaxed, anxiety-free visits with safe sedation options.", "/services/sedation-dentistry/"],
+  ]],
 ];
-const iconSrc = (icon) => "/wp-content/uploads/2021/12/" + icon + ".png";
+const SERVICE_TILES = SERVICE_GROUPS.flatMap(([, items]) => items);
 
 // Role lines under the three portraits. They sit in a theme subtitle element the
 // extractor folds away, so they come from the homepage screenshot
-// (site-screenshots/desktop/home.png, "MEET THE DENTAL TEAM").
+// (site-screenshots/desktop/home.png, "MEET THE DENTAL TEAM"). The blurbs are
+// condensed from each dentist's own bio page — nothing here is invented.
 const DOCTORS = [
-  ["/wp-content/uploads/2023/11/HS-7-scaled.jpg", "Dr. Dave Cho", "General Dentist", "/team/dr-cho/"],
-  ["/wp-content/uploads/2020/04/DrWilliamSung-230x300-1.webp", "Dr. William Sung", "General Dentist", "/team/dr-sung/"],
-  ["/wp-content/uploads/2023/11/HS-8-scaled.jpg", "Dr. Tam Nguyen", "Board Certified Pediatric Dentist", "/team/tam-nguyen/"],
+  ["/wp-content/uploads/2023/11/HS-8-scaled.jpg", "Dr. Tam Nguyen", "Board Certified Pediatric Dentist", "/team/tam-nguyen/",
+    "Dental degree and pediatric residency at Boston University. She treats children from six months old, and patients with special needs."],
+  ["/wp-content/uploads/2023/11/HS-7-scaled.jpg", "Dr. Dave Cho", "General Dentist", "/team/dr-cho/",
+    "Experienced in oral sedation, endodontics, oral surgery, implant placement and cosmetic dentistry, with a manner that puts patients at ease."],
+  ["/wp-content/uploads/2020/04/DrWilliamSung-230x300-1.webp", "Dr. William Sung", "General Dentist", "/team/dr-sung/",
+    "Fellow of the Academy of General Dentistry — a distinction held by 7% of general dentists in Texas — and around 100 hours of continuing education a year."],
 ];
 
 // ------------------------------------------------------------ shared blocks
@@ -79,10 +105,10 @@ const openPage = (h, title, sub, eyebrow = "Katy, TX") =>
   h.C.heroPlain({ eyebrow, title, text: sub }) + "\n" +
   h.C.breadcrumb([{ label: "Home", href: "/" }, { label: title }]);
 
-/** The booking block that closes most pages. */
+/** The booking block that closes most pages, over the credential strip. */
 const bookingSection = (h) => {
   const C = h.C;
-  return C.section({ name: "booking", bg: "paper", inner: C.split(
+  return C.badgeStrip(h.ACCREDITATIONS) + "\n" + C.section({ name: "booking", bg: "paper", inner: C.split(
     `${C.heading("Book your visit")}
      ${C.spacer("small")}
      ${C.paragraph("New and existing patients are welcome. Book online at any hour, or call the practice during office hours and we will find you a time.")}
@@ -103,24 +129,32 @@ const bookingSection = (h) => {
 // ===========================================================================
 // Home
 // ===========================================================================
+// Section order follows the Figma "Handoff — Page Overview": hero, credentials,
+// value props, services, retention, doctors, reviews, virtual consult, FAQ,
+// financing, scheduling, footer. What differs from the comps is the *shape* of
+// each one — see the notes in site/components.mjs and theme/site.css. The comps
+// stack thirteen full-width bands of equal weight; here the page alternates
+// between wide, full-bleed moments and quiet measured ones, so scrolling it
+// feels like moving through a place rather than past a list.
 function home(d, h) {
   const C = h.C;
   const hero = imgs(d, 2)[0];
-  const introImg = imgs(d, 5)[0];
   const introHead = heads(d, 5).find((t) => t.startsWith("Experience"))
     || "Experience Exceptional Dentistry at Mason Park Dental of Katy";
   const introParas = paras(d, 5).filter((p) => p.text !== "Dentist in Katy, TX");
   const servicesParas = paras(d, 7);
   const doctorsParas = paras(d, 8);
-  const doctorsImg = imgs(d, 8)[0];
   const vcParas = paras(d, 10);
-  const vcSteps = heads(d, 10).filter((t) => t !== "GET A FREE VIRTUAL DENTAL CONSULT").map(fixTypos);
+  // The live theme shouted the consult heading and title-cased its three steps.
+  // Sentence case restores them; the wording itself is untouched.
+  const sentence = (s) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
+  const vcSteps = heads(d, 10)
+    .filter((t) => t !== "GET A FREE VIRTUAL DENTAL CONSULT")
+    .map((t) => sentence(fixTypos(t)));
   const cherryLogo = imgs(d, 11)[0];
-  const cherryArt = imgs(d, 11)[1];
   const cherryPara = paras(d, 11)[0];
   const flexPara = paras(d, 13)[0];
   const flexImg = imgs(d, 13)[0];
-  const map = embeds(d, 19)[0];
 
   // Reviews: quote and attribution arrive as consecutive blocks. The live page
   // repeats one twice with different trailing punctuation, so dedupe on a
@@ -132,99 +166,146 @@ function home(d, h) {
   for (let i = 0; i < rb.length; i++) {
     if (rb[i].type !== "para") continue;
     const next = rb[i + 1];
-    const quote = rb[i].text.replace(/^[“"]|[”"]$/g, "");
+    // Quotes arrive with the theme's own smart quotes still attached, sometimes
+    // with a space in front of the closing one. Strip both ends completely.
+    const quote = rb[i].text.trim().replace(/^[“”"'\s]+/, "").replace(/[“”"'\s]+$/, "");
     const author = next && next.type === "heading" ? next.text.replace(/^-\s*/, "") : "";
     if (author && !seen.has(key(quote))) { seen.add(key(quote)); reviews.push({ quote, author }); }
   }
 
-  return [
-    C.heroMedia({ src: hero?.src || "/wp-content/uploads/2023/11/g7-1024x683.jpg", alt: "The team at Mason Park Dental of Katy", w: 1024, h: 683 }),
+  // The four homepage questions. The comps name four questions but carry no
+  // answers, so these are four the practice has already answered in its own
+  // words on /faq-page/ — the Figma's four are logged for the client to answer.
+  const faqSource = h.read("faq-page");
+  const wanted = [
+    "do you accept new patients",
+    "what do i need to bring to my first dental appointment",
+    "how often should i visit the dentist",
+    "what services does a general dentist offer",
+  ];
+  const norm = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9 ]/g, "").trim();
+  const homeFaqs = wanted
+    .map((w) => (faqSource?.blocks || []).find((b) => b.type === "faq" && norm(b.question) === w))
+    .filter(Boolean)
+    .map((b) => ({ question: b.question, html: h.rewrite(b.html) }));
 
-    C.section({ name: "intro", inner: C.split(
-      `${C.eyebrow("Dentist in Katy, TX")}
-       ${C.heading(introHead, { level: 1 })}
-       ${C.spacer("small")}
-       ${introParas.map((p) => C.paragraph(p.text)).join(C.spacer("xsmall"))}
-       ${C.spacer("small")}
-       ${C.buttonGroup([
-          { label: "Learn more", href: "/our-services/" },
-          { label: "Schedule online", href: BOOK, variant: "ghost", external: true },
-        ])}`,
-      introImg ? h.img(introImg.src, "A patient in consultation at Mason Park Dental of Katy", { sizes: "(max-width: 899px) 100vw, 560px" }) : "",
-      { textWide: true },
-    ) }),
+  return [
+    C.heroSplit({
+      eyebrow: "Katy, Texas",
+      title: "One practice for the whole family",
+      lede: "Cosmetic and restorative care for adults, gentle first visits for kids, under one roof on Kingsland Boulevard.",
+      actions: C.buttonGroup([
+        { label: "Schedule online", href: BOOK, external: true },
+        { label: "Meet our doctors", href: "/our-doctors/", variant: "secondary" },
+      ]),
+      image: hero?.src || "/wp-content/uploads/2023/11/g7-1024x683.jpg",
+      alt: "The team at Mason Park Dental of Katy",
+      w: hero?.w || 1024, h: hero?.h || 683,
+      plate: { value: "Mon–Thu", label: "Appointments" },
+      facts: [
+        ["Adults and kids", "Care under one roof"],
+        ["Board certified", "Pediatric dentistry"],
+        ["0% APR", "Financing available"],
+      ],
+    }),
+
+    C.badgeStrip(h.ACCREDITATIONS),
+
+    C.section({ name: "intro", inner: `
+      ${C.sectionHeading({ eyebrow: "Two practices, one address", title: introHead })}
+      <div class="max-width-large">${introParas.map((p) => C.paragraph(p.text, { size: "medium" })).join(C.spacer("small"))}</div>
+      ${C.spacer("xlarge")}
+      ${C.grid(2, [
+        C.propCard({
+          image: "/wp-content/uploads/2023/08/AdobeStock_118631127-scaled.jpeg",
+          alt: "A patient being treated in one of the practice's operatories",
+          tag: "For adults", title: "Cosmetic and restorative",
+          text: "Veneers, implants, Invisalign and the everyday work that keeps a smile lasting — planned with you before anything is prepared.",
+          linkLabel: "Adult services", href: "/our-services/",
+        }),
+        C.propCard({
+          image: "/wp-content/uploads/2023/08/AdobeStock_398040894-scaled.jpeg",
+          alt: "A child at a check-up with a pediatric dentist",
+          tag: "For kids", kids: true, title: "The dentist they ask to go back to",
+          text: "Board certified pediatric care from the first tooth through the teenage years, from a dentist who trained specifically for it.",
+          linkLabel: "Children's dentistry", href: "/services/pediatric-dental-care/",
+        }),
+      ])}` }),
 
     C.section({ name: "services", bg: "paper", inner: `
-      ${C.sectionHeading({ eyebrow: "What we do", title: "Dentistry for every stage of life", centered: true })}
-      ${C.grid(4, SERVICE_TILES.map(([icon, label, href]) => C.serviceCard({ icon: iconSrc(icon), label, href })))}
+      ${C.sectionHeading({ eyebrow: "What we do", title: "Care for every age, in one building" })}
+      ${SERVICE_GROUPS.map(([label, items]) => C.svcGroup({
+        label,
+        cols: items.length > 4 ? 3 : 4,
+        items: items.map(([icon, name, text, href]) => ({ icon, label: name, text, href })),
+      })).join("")}
       ${C.spacer("xlarge")}
       ${C.split(
         servicesParas.map((p) => C.paragraph(p.text)).join(C.spacer("xsmall")),
-        `<div class="text-align-center">
-           ${C.button({ label: "Request an appointment", href: BOOK, variant: "secondary", external: true })}
-           ${C.spacer("small")}
-           <p class="card_meta">Or call <a href="${h.PRACTICE.phoneHref}">${h.esc(h.PRACTICE.phone)}</a></p>
-         </div>`,
+        `${C.buttonGroup([
+           { label: "Request an appointment", href: BOOK, external: true },
+           { label: "All services", href: "/our-services/", variant: "secondary" },
+         ])}
+         ${C.spacer("small")}
+         <p class="card_meta">Or call <a href="${h.PRACTICE.phoneHref}">${h.esc(h.PRACTICE.phone)}</a></p>`,
         { textWide: true },
       )}` }),
 
-    C.section({ name: "doctors-intro", inner: C.split(
-      `${C.eyebrow("Dentist in Katy, TX")}
-       ${C.heading(heads(d, 8)[0] || "Meet Our Esteemed Dentists")}
-       ${C.spacer("small")}
-       ${doctorsParas.map((p) => C.paragraph(p.text)).join(C.spacer("xsmall"))}
-       ${C.spacer("small")}
-       ${C.button({ label: "Meet our team", href: "/our-team/" })}`,
-      doctorsImg ? h.img(doctorsImg.src, "Two of the dentists at Mason Park Dental of Katy", { sizes: "(max-width: 899px) 100vw, 560px" }) : "",
-    ) }),
+    C.section({ name: "retention", bg: "slate", padding: "medium", inner: C.quoteBand({
+      eyebrow: "Why families stay",
+      title: "You'll see the same faces next time",
+      text: "Low turnover is not a marketing line — it is why your child's hygienist remembers the trick that worked last time, and why your crown matches the shade we recorded three years ago.",
+    }) }),
+
+    C.section({ name: "doctors", inner: `
+      ${C.sectionHeading({ eyebrow: "Who you'll see", title: heads(d, 8)[0] || "Meet the doctors",
+        text: doctorsParas[0]?.text })}
+      ${C.grid(3, DOCTORS.map(([image, name, role, href, blurb]) => C.doctorCard({ image, name, role, href, blurb })))}
+      ${C.spacer("large")}
+      ${C.linkArrow({ label: "Read the full profiles", href: "/our-doctors/" })}` }),
+
+    C.section({ name: "reviews", bg: "paper", inner: `
+      ${C.sectionHeading({ eyebrow: "From Katy families", title: "What patients say" })}
+      ${C.reviewList(reviews.slice(0, 6))}` }),
 
     C.section({ name: "virtual-consult", bg: "ink", inner: C.split(
-      `${C.heading(heads(d, 10)[0] || "Get a free virtual dental consult")}
+      `${C.eyebrow("Before you take time off work")}
+       ${C.heading("Get a free virtual consult in three steps")}
        ${C.spacer("small")}
        ${vcParas.map((p) => C.paragraph(p.text)).join(C.spacer("xsmall"))}
-       ${C.spacer("small")}
-       ${C.button({ label: "Virtual consultation", href: "/virtual-consultation/" })}`,
+       ${C.spacer("medium")}
+       ${C.button({ label: "Start a virtual consult", href: "/virtual-consultation/" })}`,
       C.stepList(vcSteps),
     ) }),
 
-    C.section({ name: "financing", bg: "paper", inner: C.split(
-      `${cherryLogo ? h.img(cherryLogo.src, "Cherry", { sizes: "200px" }) : ""}
-       ${C.spacer("small")}
-       ${C.heading(heads(d, 11)[0] || "Cherry Dental Financing: 0% APR with no hard credit check")}
-       ${C.spacer("small")}
-       ${cherryPara ? C.paragraph(cherryPara.text) : ""}
-       ${C.spacer("small")}
-       ${C.button({ label: "See financing options", href: "/financing/" })}
-       ${C.spacer("small")}
-       <p class="card_meta">Applications are handled by Cherry. Ask the front desk which account your application should go through.</p>`,
-      cherryArt ? h.img(cherryArt.src, "Two patients reviewing financing options on a tablet", { sizes: "(max-width: 899px) 100vw, 560px" }) : "",
-    ) }),
+    homeFaqs.length ? C.section({ name: "faq", inner: C.faqLayout({
+      eyebrow: "Before you come in",
+      title: "Questions we get every week",
+      aside: C.spacer("medium") + C.linkArrow({ label: "All questions", href: "/faq-page/" }),
+      items: homeFaqs,
+    }) }) : "",
 
-    C.section({ name: "doctors", inner: `
-      ${C.sectionHeading({ eyebrow: "Dentist in Katy, TX", title: "Meet the dental team", centered: true })}
-      ${C.grid(3, DOCTORS.map(([image, name, role, href]) => C.doctorCard({ image, name, role, href })))}` }),
+    C.section({ name: "financing", bg: "paper", padding: "large", inner: C.financePanel({
+      eyebrow: "Paying for it",
+      title: "Pay monthly at 0% APR, with no hard credit check",
+      text: cherryPara?.text,
+      actions: C.spacer("xsmall") + C.button({ label: "See financing options", href: "/financing/" }),
+      logo: cherryLogo?.src, logoAlt: "Cherry",
+      note: "Applications are handled by Cherry. Ask the front desk which account your application should go through.",
+    }) }),
 
-    C.section({ name: "scheduling", bg: "paper", inner: C.split(
-      flexImg ? h.img(flexImg.src, "A team member taking a call at the practice", { sizes: "(max-width: 899px) 100vw, 560px" }) : "",
-      `${C.eyebrow("Dentist in Katy, TX")}
-       ${C.heading(heads(d, 13)[0] || "Flexible Scheduling and Emergency Care")}
-       ${C.spacer("small")}
-       ${flexPara ? C.paragraph(flexPara.text) : ""}
-       ${C.spacer("small")}
-       ${C.buttonGroup([
-          { label: "Request an appointment", href: BOOK, external: true },
-          { label: "Dental emergency?", href: "/services/emergency-dentist/", variant: "ghost" },
-        ])}`,
-    ) }),
-
-    C.section({ name: "reviews", bg: "ink", inner: `
-      ${C.sectionHeading({ eyebrow: "Reviews", title: "What people are saying", centered: true })}
-      ${C.reviewList(reviews.slice(0, 6))}` }),
-
-    C.section({ name: "map", padding: "small", inner: `
-      ${C.sectionHeading({ title: "Find us in Katy", centered: true })}
-      ${map ? h.renderEmbed(map.src) : ""}` }),
-  ].join("\n");
+    C.ctaSplit({
+      eyebrow: "Book a visit",
+      title: heads(d, 13)[0] || "Flexible Scheduling and Emergency Care",
+      text: flexPara?.text,
+      actions: C.buttonGroup([
+        { label: "Request an appointment", href: BOOK, external: true },
+        { label: "Dental emergency?", href: "/services/emergency-dentist/", variant: "secondary" },
+      ]),
+      image: flexImg?.src, alt: "A team member taking a call at the practice",
+      w: flexImg?.w, h: flexImg?.h,
+    }),
+  ].filter(Boolean).join("\n");
 }
 
 // ===========================================================================
@@ -250,8 +331,12 @@ function ourServices(d, h) {
   return [
     openPage(h, "Our Services", "Family, cosmetic, restorative and pediatric dentistry, all under one roof in Katy, Texas."),
     C.section({ name: "service-tiles", inner: `
-      ${C.sectionHeading({ title: "What we treat", centered: true })}
-      ${C.grid(4, SERVICE_TILES.map(([icon, label, href]) => C.serviceCard({ icon: iconSrc(icon), label, href })))}` }),
+      ${C.sectionHeading({ eyebrow: "What we do", title: "Care for every age, in one building" })}
+      ${SERVICE_GROUPS.map(([label, items]) => C.svcGroup({
+        label,
+        cols: items.length > 4 ? 3 : 4,
+        items: items.map(([icon, name, text, href]) => ({ icon, label: name, text, href })),
+      })).join("")}` }),
     C.section({ name: "service-index", bg: "paper", inner: `
       ${C.sectionHeading({ title: "Every service, A to Z", text: "Each treatment has its own page explaining what it is, who it suits and what to expect." })}
       ${C.grid(3, [
@@ -416,7 +501,7 @@ function contacts(d, h) {
     ) }),
     C.section({ name: "contact-form", bg: "paper", inner: `
       ${C.sectionHeading({ title: "Request an appointment", text: "Send us a message and the front desk will come back to you.", centered: true })}
-      ${h.renderEmbed(FORMS.appointment)}` }),
+      ${h.renderEmbed(FORMS.contact)}` }),
     C.section({ name: "map", padding: "small", inner: h.renderEmbed(MAP_EMBED) }),
   ].join("\n");
 }
@@ -553,26 +638,26 @@ function thankYou(d, h) {
 }
 
 // ===========================================================================
-// Privacy policy — 403 on the live site, and linked from every page's footer.
-// This describes the REBUILT website. It is not the practice's HIPAA notice,
-// and it says so.
+// Legal — Privacy Policy, Terms of Service and Cookie Policy.
+//
+// All three render from the SAME template because they are the same shape: a
+// plain hero, a breadcrumb, and one column of rich text. The copy itself lives
+// in site/legal.mjs, which is also what the live-site publisher reads, so the
+// two designs can never end up saying different things about the practice.
+//
+// The old Privacy Policy that stood here was a five-paragraph placeholder about
+// the rebuilt website; the old Terms came through the crawler and silently lost
+// three of its bullet lists, leaving "which may include:" with nothing after
+// it. Both are replaced. See site/legal.mjs for what changed and why.
 // ===========================================================================
-function privacyPolicy(d, h) {
-  const C = h.C;
-  return [
-    openPage(h, "Privacy Policy", "How this website handles your information."),
-    C.section({ name: "privacy", container: "medium", inner: C.richText(`
-      <div class="notice_component"><p><strong>For review.</strong> This notice describes the website only. The practice's HIPAA Notice of Privacy Practices, which covers your dental records, is a separate document and should be reviewed and published by the practice.</p></div>
-      <h2>What this site collects</h2>
-      <p>These pages are static. They set no cookies of their own, run no analytics and build no profile of you.</p>
-      <h2>Forms and booking</h2>
-      <p>Appointment requests and virtual-consultation forms on this site are hosted by third-party providers on behalf of the practice. What you type into them is sent to Mason Park Dental of Katy and handled under that provider's own terms. Online booking opens the practice's scheduling provider in a new tab.</p>
-      <h2>Embedded content</h2>
-      <p>The map on our contact pages is served by Google Maps, which may set its own cookies once it loads. It is only loaded when you scroll to it.</p>
-      <h2>Contact</h2>
-      <p>Questions about your information, or a request to have it removed, can go to the practice directly on <a href="${h.PRACTICE.phoneHref}">${h.esc(h.PRACTICE.phone)}</a> or at ${h.esc(h.PRACTICE.street)}, ${h.esc(h.PRACTICE.city)}, ${h.esc(h.PRACTICE.region)} ${h.esc(h.PRACTICE.postal)}.</p>
-    `) }),
-  ].join("\n");
+function legalPage(slug) {
+  return (d, h) => {
+    const doc = LEGAL_PAGES[slug];
+    return [
+      openPage(h, doc.heading, doc.sub),
+      h.C.section({ name: "legal", container: "medium", inner: h.C.richText(doc.body()) }),
+    ].join("\n");
+  };
 }
 
 // ===========================================================================
@@ -708,7 +793,9 @@ export const BESPOKE = {
   "virtual-consultation": virtualConsultation,
   "before-after": beforeAfter,
   "thank-you": thankYou,
-  "privacy-policy": privacyPolicy,
+  "privacy-policy": legalPage("privacy-policy"),
+  "terms-of-service": legalPage("terms-of-service"),
+  "cookie-policy": legalPage("cookie-policy"),
   "special-offers": specialOffers,
   "patient-resources": patientResources,
 };
@@ -724,10 +811,11 @@ export const META = {
     title: "Meet Our Team | Mason Park Dental of Katy",
     description: "Meet the dentists and team at Mason Park Dental of Katy - Dr. Dave Cho, Dr. William Sung and Dr. Tam Nguyen, DMD, board certified pediatric dentist.",
   },
-  "privacy-policy": {
-    title: "Privacy Policy | Mason Park Dental of Katy",
-    description: "How the Mason Park Dental of Katy website handles your information.",
-  },
+  // The three legal documents carry their own title and description next to
+  // the copy they describe, so a wording change cannot leave the meta behind.
+  "privacy-policy": LEGAL_PAGES["privacy-policy"],
+  "terms-of-service": LEGAL_PAGES["terms-of-service"],
+  "cookie-policy": LEGAL_PAGES["cookie-policy"],
   appointment: {
     title: "Request an Appointment | Mason Park Dental of Katy",
     description: "Book online, send an appointment request or call (281) 769-8878. New patients of all ages welcome in Katy, TX.",

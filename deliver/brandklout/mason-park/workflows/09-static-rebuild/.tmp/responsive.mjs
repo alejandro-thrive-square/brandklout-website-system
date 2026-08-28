@@ -97,7 +97,11 @@ const PROBE = `(() => {
   // page "never finish loading" on every run. Layout is settled once the DOM is
   // parsed, our stylesheet has applied and the eager images have their boxes.
   const ready = document.readyState !== "loading"
-    && getComputedStyle(document.documentElement).getPropertyValue("--accent").trim() === "#00bde0"
+    // NOTE: this sentinel is a literal token value from theme/site.css. If the
+    // stylesheet's variables are renamed, change it here TOO — the v2 retheme
+    // dropped --accent and every page then reported "never finished loading",
+    // which reads exactly like a site-wide layout failure and is not one.
+    && getComputedStyle(document.documentElement).getPropertyValue("--brand").trim() === "#8c6349"
     // Only images the page actually intends to load now. Lazy ones below the
     // fold never complete without scrolling, so requiring them here would hang
     // the probe on every long page and report the whole site as never loading.
