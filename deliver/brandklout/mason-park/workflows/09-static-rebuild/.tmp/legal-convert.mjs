@@ -2,10 +2,10 @@
  * Convert the four pages of the legal revision to Instatic node graphs, inside
  * the container.
  *
- *   node legal-convert.mjs
+ *   node legal-convert.mjs [--dir <name>]      # default: legal-live
  *
- * Input : legal-live/pages/*.json   (from legal-live.mjs)
- * Output: legal-live/converted-pages.json
+ * Input : <dir>/pages/*.json                (from legal-live.mjs / home-map-live.mjs)
+ * Output: <dir>/converted-pages.json
  *
  * Derived from 10-lp-instatic/.tmp/ship-convert-fetch.mjs by changing only the
  * paths - the container temp files carry `legal-` names so a run here can never
@@ -39,16 +39,21 @@ import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const NINE = HERE;
 
+// Which set of pages to convert. Each live patch gets its own directory so a
+// half-finished run can never be picked up by the next one.
+const argv = process.argv.slice(2);
+const DIR = argv.includes("--dir") ? argv[argv.indexOf("--dir") + 1] : "legal-live";
+
 const PROJECT = "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc";
 const ENVIRONMENT = "f2bfcbee-c7c9-48be-b404-cc43937d30a2";
 const SERVICE = "8a9bb8d3-ed09-418d-9a67-b5c8bf0f19fb";
 const CHUNK = 7000;
 const PART = 200000;
 
-const PAYLOAD = "/tmp/legal-payload.b64";
-const NODES = "/tmp/legal-nodes.b64";
-const PARTS = "/tmp/legalparts";
-const SCRIPT = "/app/mp-legal-convert.ts";
+const PAYLOAD = `/tmp/${DIR}-payload.b64`;
+const NODES = `/tmp/${DIR}-nodes.b64`;
+const PARTS = `/tmp/${DIR}parts`;
+const SCRIPT = `/app/mp-${DIR}-convert.ts`;
 
 // Go through bash, not cmd.exe: `railway` on PATH is a .cmd shim and cmd.exe
 // mangles the single-quoted payload.
@@ -93,8 +98,8 @@ function shipB64(b64, remotePath, label) {
 
 // ------------------------------------------------------------ 1. the pages
 
-const pages = fs.readdirSync(path.join(HERE, "legal-live", "pages"))
-  .map((f) => JSON.parse(fs.readFileSync(path.join(HERE, "legal-live", "pages", f), "utf8")))
+const pages = fs.readdirSync(path.join(HERE, DIR, "pages"))
+  .map((f) => JSON.parse(fs.readFileSync(path.join(HERE, DIR, "pages", f), "utf8")))
   .map(({ slug, title, description, html }) => ({ slug, title, description, html }));
 const raw = Buffer.from(JSON.stringify(pages));
 console.log(`${pages.length} pages, ${(raw.length / 1024).toFixed(0)} KB raw`);
@@ -144,7 +149,7 @@ if (localSha !== remoteSha) {
 }
 
 const converted = JSON.parse(zlib.gunzipSync(Buffer.from(got, "base64")).toString("utf8"));
-fs.writeFileSync(path.join(HERE, "legal-live", "converted-pages.json"), JSON.stringify(converted, null, 2));
+fs.writeFileSync(path.join(HERE, DIR, "converted-pages.json"), JSON.stringify(converted, null, 2));
 console.log(`\nconverted-pages.json: ${converted.length} pages, `
   + `${converted.reduce((a, p) => a + p.nodeCount, 0)} nodes total`);
 for (const p of converted) {

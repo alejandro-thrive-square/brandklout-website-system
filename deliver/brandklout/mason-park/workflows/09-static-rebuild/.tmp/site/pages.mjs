@@ -305,6 +305,29 @@ function home(d, h) {
       image: flexImg?.src, alt: "A team member taking a call at the practice",
       w: flexImg?.w, h: flexImg?.h,
     }),
+
+    // "Find us in Katy" — the map that sat between the reviews and the footer's
+    // contact band on the previous build. The redesign dropped it, so shipping
+    // the redesign would have taken the homepage map away; restored here.
+    //
+    // The street address is set in TEXT above the frame on purpose. A map pin
+    // is not readable by a screen reader, the frame is lazy and may never load
+    // on a slow connection, and the address is the thing a visitor copies into
+    // their own phone. The frame is the illustration, not the content.
+    C.section({ name: "map", padding: "small", inner: `
+      ${C.sectionHeading({
+        eyebrow: "Find us",
+        title: "Find us in Katy",
+        text: `${h.PRACTICE.street}, ${h.PRACTICE.city}, ${h.PRACTICE.region} ${h.PRACTICE.postal}`,
+        centered: true,
+      })}
+      ${h.renderEmbed(MAP_EMBED)}
+      ${C.spacer("small")}
+      <div class="text-align-center">
+        ${C.paragraph(LOCATION_NOTE)}
+        ${C.spacer("xsmall")}
+        ${C.button({ label: "Get directions", href: h.PRACTICE.maps, variant: "ghost", external: true })}
+      </div>` }),
   ].filter(Boolean).join("\n");
 }
 
