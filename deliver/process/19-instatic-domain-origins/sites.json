@@ -1,9 +1,12 @@
 {
   "_comment": [
     "The canonical admin URL per Instatic site — the single answer to 'what link do I send?'.",
-    "`adminUrl` is the origin a person should work from; `check-origins.mjs` appends its www/apex",
-    "twin automatically, so list only what that would not derive: the platform host, staging, an",
-    "old domain people still have bookmarked.",
+    "`adminUrl` is the origin a person should work from TODAY; `check-origins.mjs` appends its",
+    "www/apex twin automatically, so list only what that would not derive: the client's own",
+    "domain when it differs from the Instatic origin, the platform host, staging, an old domain",
+    "people still have bookmarked.",
+    "List a host even when it is currently broken — a host nobody checks is a host nobody fixes,",
+    "and the checker's job is to keep saying so until it is clean.",
     "This file is the claim; `node check-origins.mjs --all` is the proof. Re-run it after any",
     "domain change and fix whichever of the two is wrong.",
     "No secrets here. Credentials live in the per-worktree .env and never in this repo."
@@ -12,8 +15,8 @@
     {
       "client": "dr-nahlah",
       "adminUrl": "https://encorercm.com",
-      "alternates": [],
-      "note": "Custom domain live. PUBLIC_ORIGIN is set explicitly on the host: apex and www both pass."
+      "alternates": ["https://www.drnahlah.com", "https://drnahlah.com"],
+      "note": "The Instatic origin is encorercm.com and PUBLIC_ORIGIN is set for it (apex + www both pass). The CLIENT-facing domain is drnahlah.com, which 301s to www.drnahlah.com and serves the admin — but is NOT in PUBLIC_ORIGIN, so it is a trap: log in fine, cannot save. Until that is fixed, send encorercm.com/admin."
     },
     {
       "client": "mason-park",
