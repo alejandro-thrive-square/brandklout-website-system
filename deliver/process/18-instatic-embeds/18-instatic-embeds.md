@@ -116,11 +116,11 @@ Worth naming, because mixing them up sends people to the wrong file:
 
 | | What it is | Where it is set | What it gates |
 |---|---|---|---|
-| `PUBLIC_ORIGIN` | the site's canonical public origin(s) | env var on the **Instatic host** (Railway) | **the admin** — CSRF on every state-changing request. [`19-instatic-domain-origins`](../19-instatic-domain-origins/19-instatic-domain-origins.md) |
+| `PUBLIC_ORIGIN` | the site's canonical public origin(s) | env var on the **Instatic host** (Railway) | **the admin** — CSRF on every state-changing request. [`20-instatic-domain-origins`](../20-instatic-domain-origins/20-instatic-domain-origins.md) |
 | `INSTATIC_BASE_URL` | which site this toolkit talks to | per-worktree `.env` in this repo | which admin **our scripts** hit |
 | frame / script / connect origins | vendor hosts an embed may load | **this plugin's** settings, in the admin UI | the **published page's** CSP |
 
-Changing one never affects the others. `INSTATIC_BASE_URL` must be an origin that passes the `PUBLIC_ORIGIN` gate, or every script here starts failing with 403s that read like permissions problems.
+Changing one never affects the others. `INSTATIC_BASE_URL` must be an origin that passes the `PUBLIC_ORIGIN` gate, or every script here starts failing with 403s that read like permissions problems — which is why the platform host must stay in `PUBLIC_ORIGIN` even after a client domain is added. Both live sites were repaired on 2026-08-28; see [`20-instatic-domain-origins`](../20-instatic-domain-origins/20-instatic-domain-origins.md).
 
 ## Gotchas
 
