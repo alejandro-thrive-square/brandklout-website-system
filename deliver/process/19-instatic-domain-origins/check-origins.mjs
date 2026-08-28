@@ -137,6 +137,7 @@ async function reachable(origin) {
  * is not itself an allowed origin -- which is exactly the Mason Park failure.
  */
 async function originAccepted(host, origin) {
+  const host_ = host
   try {
     return await withTimeout(async (signal) => {
       const res = await fetch(`${host}${PROBE_PATH}`, {
@@ -148,9 +149,19 @@ async function originAccepted(host, origin) {
       const body = await res.text().catch(() => '')
       if (res.status === 403 && /invalid origin/i.test(body)) return { verdict: 'rejected', status: 403 }
       if (res.status === 401) return { verdict: 'accepted', status: 401 }
+      /* A redirect is not a failure and not a pass: this host hands people on
+         to another one, and it is THAT host whose origin the browser will send.
+         Very common shape -- an apex that 301s to www. Report where it goes so
+         the reader fixes the host that actually matters. */
+      if (res.status >= 300 && res.status < 400) {
+        const to = res.headers.get('location')
+        let host = null
+        try { host = to ? normalizeOrigin(new URL(to, host_).toString()) : null } catch { host = null }
+        return { verdict: 'redirect', status: res.status, redirectsTo: host || to || 'unknown' }
+      }
       /* Anything else is not a clean answer -- report it rather than guessing.
          A 404 means this build has no plugin routes and PROBE_PATH needs
-         changing; a 3xx means something sits in front of the app. */
+         changing. */
       return { verdict: 'unknown', status: res.status, body: body.slice(0, 120) }
     })
   } catch (e) {
@@ -185,11 +196,13 @@ function report(results) {
       const mark =
         !row.servesAdmin ? 'no admin ' :
         row.verdict === 'accepted' ? 'OK       ' :
-        row.verdict === 'rejected' ? 'TRAP     ' : '???      '
+        row.verdict === 'rejected' ? 'TRAP     ' :
+        row.verdict === 'redirect' ? 'redirect ' : '???      '
       const why =
         !row.servesAdmin ? `does not serve /admin/login (${row.reachError || 'http ' + row.status})` :
         row.verdict === 'accepted' ? 'serves the admin AND is an allowed origin' :
         row.verdict === 'rejected' ? 'serves the admin but is REJECTED as a foreign origin — saving will 403' :
+        row.verdict === 'redirect' ? `${row.status} -> ${row.redirectsTo} — people end up there, so that is the host that must be allowed` :
         `unexpected ${row.status} ${row.body || row.error || ''}`
       console.log(`  ${mark} ${row.origin.padEnd(42)} ${why}`)
     }
@@ -210,6 +223,14 @@ function report(results) {
       console.log('    Fix on the Instatic host (Railway) — set PUBLIC_ORIGIN to a comma-separated')
       console.log('    list containing EVERY host people use, canonical one first:')
       console.log(`      PUBLIC_ORIGIN=${canonicalFirst([...r.usable, ...r.traps]).join(',')}`)
+      /* This tool only sees the hosts it was given. Anything already in
+         PUBLIC_ORIGIN that was not passed in -- the platform host most of all --
+         is invisible here, and pasting this line as-is would DROP it and break
+         INSTATIC_BASE_URL for the 18-instatic-embeds toolkit. Say so every
+         time; a suggestion that silently deletes config is worse than none. */
+      console.log('    MERGE this with the existing value — do not paste over it. Any host')
+      console.log('    already listed (especially the <app>.up.railway.app platform host) must')
+      console.log('    stay, or INSTATIC_BASE_URL and the 18-instatic-embeds toolkit break.')
       console.log('    Then redeploy and re-run this check.')
     }
   }
