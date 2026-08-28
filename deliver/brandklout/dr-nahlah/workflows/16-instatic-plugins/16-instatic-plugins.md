@@ -512,10 +512,32 @@ gated: **`verify-seo-plugins.mjs` — 1511 assertions over all 79 published URLs
 all green.** Every URL now carries a unique canonical, its own meta description,
 a full Open Graph and Twitter card, and a JSON-LD graph that parses.
 
+### The two blocks that needed a decision, not a generator
+
+`push-aeo-content.mjs` writes them through the plugin's own `POST /entry` route:
+
+- **FAQPage on `/dental-implant-faq`**, built by reading that page's twelve
+  `<details><summary>` pairs out of the PUBLISHED HTML. Google's guidance is that
+  FAQ markup must mirror visible content, so the script refuses to write if fewer
+  than four pairs are found — a page restructure becomes a failure, not silently
+  stale markup.
+- **MedicalWebPage on 11 treatment pages**, each `about` a named
+  `MedicalProcedure`, `specialty: Prosthodontics`, `audience: Patient`. The list is
+  curated, not matched by prefix: `/dental-conditions` describes conditions and
+  `/financing` is not a procedure, and a prefix rule would sweep both in.
+
+**What was deliberately not done, and it matters more than what was.** The bulk
+API can put an FAQPage on all 43 articles in one call — title as the question,
+meta description as the answer. It would be thin markup mirroring nothing visible
+on the page, which is the pattern Google names as a reason to distrust a site's
+structured data. Same for `aggregateRating`: the copy says 4.9 out of 5, and a
+rating in schema has to be backed by reviews the page displays and a real count.
+The capability exists; using it either way would be a mistake.
 ## Output Artifacts
 - `open-graph/` — the Open Graph plugin (`plugin.json`, `server/index.js`, `admin/index.js`, `README.md`)
 - `aeo-schema/` — the AEO Schema plugin (`plugin.json`, `server/index.js`, `admin/index.js`, `README.md`)
 - `configure-seo-plugins.mjs` — the Dr Nahlah values for both, idempotent, dry-run by default
+- `push-aeo-content.mjs` — the FAQPage and MedicalWebPage blocks, written through the plugin's own API
 - `test-open-graph.mjs` — 64 offline assertions, `--live` runs the filter over the real published pages
 - `test-aeo-schema.mjs` — 83 offline assertions, every emitted graph parsed back out of its script tag
 - `verify-seo-plugins.mjs` — the LIVE gate over every published URL; uniqueness of canonical / `og:url` is the check that matters

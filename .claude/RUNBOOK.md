@@ -187,6 +187,32 @@ Verified in the admin UI under CDP: both nav items mount, both lists load all 80
 pages, and the AEO bulk preview returned a real interpolated plan for 43
 articles with no console errors.
 
+### Schema that was written, and schema that was deliberately refused
+
+`push-aeo-content.mjs` adds the two block kinds no generator can produce,
+through the plugin's own `POST /entry` route:
+
+- **FAQPage on `/dental-implant-faq`** — the twelve real `<details><summary>`
+  pairs, read out of the PUBLISHED page. Google requires FAQ markup to mirror
+  visible content, so the script refuses if fewer than four pairs are found: a
+  page restructure becomes a failure rather than stale markup.
+- **MedicalWebPage on 11 treatment pages**, each `about` a named
+  `MedicalProcedure` (Surgical for the implant / denture / surgery pages,
+  Noninvasive for the rest), `specialty: Prosthodontics`. Curated, not matched
+  by prefix — `/dental-conditions` is conditions and `/financing` is not a
+  procedure.
+
+**Refused on purpose, and this is the part worth keeping:** the bulk API can put
+an FAQPage on all 43 articles in one call, article title as the question and meta
+description as the answer. That is thin markup mirroring nothing visible on the
+page — the pattern Google names as a reason to distrust a site's structured data.
+Same for `aggregateRating`. The capability is there; using it that way would be a
+mistake, and a future session should not read the empty coverage number as a gap
+to fill.
+
+Live after the second publish: `/dental-implant-faq` carries Dentist, WebPage,
+BreadcrumbList, FAQPage(12); `/all-on-4` carries Dentist, WebPage,
+BreadcrumbList, MedicalWebPage. `verify-seo-plugins.mjs` re-run: 1511/1511.
 ### Still open on the board
 
 - **#21 / #22 / #23** are in *doing* with stale comments; the work has been live
