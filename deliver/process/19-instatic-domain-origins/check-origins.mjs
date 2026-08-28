@@ -6,11 +6,15 @@
  *   node check-origins.mjs --all                    every site in sites.json
  *   node check-origins.mjs --all --json             machine-readable
  *
- * Answers one question: **from which hosts can a person actually SAVE in the
- * Instatic admin?** Handing someone a host that fails this check gives them an
- * admin they can log into, click around in, and then hit
- * `403 Forbidden: invalid origin` on the first save — which reads like a
- * permissions problem, is not, and has cost us real time.
+ * Answers one question: **from which hosts can a person actually USE the
+ * Instatic admin?** Handing someone a host that fails this check gives them a
+ * login page that renders perfectly and then refuses the login itself with
+ * `403 Forbidden: invalid origin` — which reads like a permissions or password
+ * problem, is neither, and has cost us real time.
+ *
+ * Confirmed in a browser 2026-08-28 on www.drnahlah.com and
+ * www.masonparkdental.com: the login POST is rejected, so nobody gets in at
+ * all. The check is gated on state-changing requests, and logging in is one.
  *
  * ## It needs no credentials, on purpose
  *
@@ -58,7 +62,14 @@ const REGISTRY = join(HERE, 'sites.json')
 
 /* A state-changing admin route that does nothing at all without a session and
    without a file, so an unauthenticated probe is inert. It is only ever used to
-   find out WHICH gate rejects first. */
+   find out WHICH gate rejects first.
+
+   NOT `/admin/api/cms/login`, even though that is the request a person actually
+   hits first and would read more directly. On an ALLOWED origin a probe there
+   reaches authentication and counts as a FAILED LOGIN -- and five failures lock
+   the account. A checker anyone is encouraged to run repeatedly must never be
+   able to lock a client out of their own site. `inspect-package` answers the
+   same question and cannot. */
 const PROBE_PATH = '/admin/api/cms/plugins/inspect-package'
 const TIMEOUT_MS = 25000
 
@@ -181,8 +192,8 @@ async function checkSite({ client, adminUrl, alternates = [] }) {
   }
   const usable = rows.filter((r) => r.servesAdmin && r.verdict === 'accepted').map((r) => r.origin)
   /* The trap this whole script exists for: a host that happily serves the login
-     page but is not an allowed origin. A person WILL log in there and WILL then
-     fail to save. */
+     PAGE but is not an allowed origin, so the login POST itself is refused. The
+     address looks right, the form renders, and nobody gets in. */
   const traps = rows.filter((r) => r.servesAdmin && r.verdict === 'rejected').map((r) => r.origin)
   return { client, adminUrl, rows, usable, traps }
 }
@@ -201,7 +212,7 @@ function report(results) {
       const why =
         !row.servesAdmin ? `does not serve /admin/login (${row.reachError || 'http ' + row.status})` :
         row.verdict === 'accepted' ? 'serves the admin AND is an allowed origin' :
-        row.verdict === 'rejected' ? 'serves the admin but is REJECTED as a foreign origin — saving will 403' :
+        row.verdict === 'rejected' ? 'serves the login page but REFUSES THE LOGIN — 403 invalid origin' :
         row.verdict === 'redirect' ? `${row.status} -> ${row.redirectsTo} — people end up there, so that is the host that must be allowed` :
         `unexpected ${row.status} ${row.body || row.error || ''}`
       console.log(`  ${mark} ${row.origin.padEnd(42)} ${why}`)
@@ -219,7 +230,7 @@ function report(results) {
     if (r.traps.length) {
       problems++
       console.log(`\n  ⚠ ${r.traps.length} trap host(s): ${r.traps.join(', ')}`)
-      console.log('    Someone given one of these can log in and then cannot save.')
+      console.log('    Someone given one of these cannot log in at all: the login POST is refused.')
       console.log('    Fix on the Instatic host (Railway) — set PUBLIC_ORIGIN to a comma-separated')
       console.log('    list containing EVERY host people use, canonical one first:')
       console.log(`      PUBLIC_ORIGIN=${canonicalFirst([...r.usable, ...r.traps]).join(',')}`)
