@@ -1,0 +1,46 @@
+{
+  "verifiedAt": "2026-08-27T23:43:36.890Z",
+  "ok": true,
+  "checks": [
+    {
+      "name": "no executable files",
+      "ok": true,
+      "detail": "779 files scanned"
+    },
+    {
+      "name": "no unexpected archives",
+      "ok": true,
+      "detail": "only our own .tar.gz transfers"
+    },
+    {
+      "name": "no injection markers",
+      "ok": true,
+      "detail": "40 pages clean"
+    },
+    {
+      "name": "no external <script>",
+      "ok": true,
+      "detail": "40 pages"
+    },
+    {
+      "name": "no external <iframe>",
+      "ok": true,
+      "detail": "40 pages"
+    },
+    {
+      "name": "no absolute URLs",
+      "ok": true,
+      "detail": "40 pages fully root-relative"
+    },
+    {
+      "name": "content recovered",
+      "ok": true,
+      "detail": "content.xml 12.7MB, db.sql.gz 21.9MB"
+    },
+    {
+      "name": "recovered/ is not tracked by git",
+      "ok": true,
+      "detail": "db dump and WXR stay local"
+    }
+  ]
+}

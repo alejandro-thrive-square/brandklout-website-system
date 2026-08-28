@@ -24,6 +24,12 @@ manage/browser-tools/playwright-browser/.tmp/style-capture-*/code/resources/
 .env
 .env.*
 !.env.example
+# SSH private keys and anything else handed to us by a host. Never committed.
+.secrets/
+*.pem
+id_ed25519*
+id_rsa*
+!*.pub
 
 # ===== Binary / Media Assets =====
 # Heavy binary/media assets are stored on VPS (source of truth), synced via rclone SFTP.
@@ -140,3 +146,17 @@ nul
 # happens to have one - this covers every copy of the toolkit, including the
 # shared module in deliver/process/.
 **/.tmp/.session
+
+# Recovered client data: DB dumps carry credentials and patient-adjacent PII,
+# and WXR/media are heavy. Kept local, never committed.
+**/recovered/
+
+# Rendered-DOM mirrors from the site-recovery capture: HTML lifted off a
+# compromised WordPress install, and regenerable with `node 08-shoot.mjs`. The
+# per-page meta.json and the rendered.txt next to them ARE committed - same rule
+# already applied to 01-content-intake above.
+**/01-site-recovery/.tmp/pages/**/rendered.html
+
+# Raw PHP error logs copied off client servers. Multi-MB, full of paths and
+# usernames from a compromised host, and of no value in the repo.
+php_errorlog

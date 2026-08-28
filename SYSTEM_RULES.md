@@ -157,6 +157,23 @@ Heavy binary and media assets are **never** stored in Git. The **Hostinger VPS (
 
 #### 4.2.0 Creating a client worktree (sparse)
 
+**One worktree per SITE, not per client.** A client with two brands on two domains gets two
+worktrees. Mason Park was run the other way — `mason-park/` and `mason-park-kids/` shared
+`bk-mason-park` deliberately, so one agent could hold both — and it failed in a specific,
+repeatable way: the two builds were near-identical in shape (same theme, same practice, same
+doctors) and differed in every detail that decides an action (domain, host, database, page set,
+which findings are real where, which one is live), so sessions attributed one site's facts to the
+other. Split on 2026-08-28. The cost of a second worktree is a checkout; the cost of sharing one
+is silently wrong work on a live site.
+
+When splitting an existing site out of a shared worktree, four things do not come along with a
+`git worktree add` and must be handled by hand: the site's untracked working-tree files (move
+them), `.env` (copy it — see the credential rule in section 3), any `.secrets/` key that belongs
+to that site (**move** it, and say so in both runbooks), and the **`.gitignore` rules the shared
+branch had added but `main` never got** — a new branch off `main` can be missing the very rules
+that keep private keys and recovered client data out of a commit. Check `git status` against the
+new `.gitignore` before the first commit, not after.
+
 A full worktree checks out every client's work — 2,438 files / 94 MB — when one client needs about a
 quarter of it. Create client worktrees sparse instead:
 

@@ -23,6 +23,17 @@ parallel agents can each take one client without colliding.
 | Stone Dental Implant Center | [`stone-dental-implant-center/`](../stone-dental-implant-center/docs/project-overview.md) | — | 2 full websites | none | Scope only; no build dispatched |
 
 Not in Asana but present in the repo:
+- [`mason-park-kids/`](../mason-park-kids/docs/project-overview.md) — added 2026-08-27. **The same
+  client as `mason-park/`**, second brand: the pediatric practice at
+  https://pediatricdentistkatytx.com. Separate domain, WordPress install, SiteGround account and
+  database, so it gets its own folder — but it is one client for billing and relationship. No
+  Asana task exists; ask Brandklout to create one. Content recovered 2026-08-27; **the WordPress
+  install is actively compromised**, see
+  [`security-incident-2026-08-27.md`](../mason-park-kids/docs/security-incident-2026-08-27.md).
+  Worktree `bk-mason-park-kids` — **its own since 2026-08-28**, split off `bk-mason-park`, which
+  the two shared until then. One client can still need two worktrees: these two sites are
+  near-identical in shape and differ in every detail that matters, and sessions holding both kept
+  attributing one site's facts to the other. One worktree per *site*, not per client.
 - `livewell-dental/` (no assigned tasks in this pull).
 - [`west-la-implants/`](../west-la-implants/docs/project-overview.md) — added 2026-08-20, direct from
   Brandklout. **Full site build from scratch** for https://westlaimplants.com/ (existing WordPress,
