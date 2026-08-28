@@ -7,7 +7,7 @@ After QA is approved, we connect the domain, confirm hosting and SSL, publish th
 > **Integrity Rule**: Any change to the Python executor or technical logic of this workflow must be documented here immediately.
 
 ## Operational Purpose
-Move the QA-approved staging build to production with DNS, SSL, publishing, rollback awareness, and post-publish verification. The publishing target is Webflow for Webflow routes, Vercel for the AI Claude/Vercel/Airtable route, and Instatic for sites delivered on that platform — Instatic adds a mandatory origin step, see [`19-instatic-domain-origins`](../19-instatic-domain-origins/19-instatic-domain-origins.md).
+Move the QA-approved staging build to production with DNS, SSL, publishing, rollback awareness, and post-publish verification. The publishing target is Webflow for Webflow routes, Vercel for the AI Claude/Vercel/Airtable route, and Instatic for sites delivered on that platform — Instatic adds a mandatory origin step, see [`20-instatic-domain-origins`](../20-instatic-domain-origins/20-instatic-domain-origins.md).
 For improvement work, this module is used only when `15-improvement-intake-audit` defines publishing, DNS, or a production release as in scope.
 
 ## Inputs From Sales / Previous Phase
@@ -20,7 +20,7 @@ For improvement work, this module is used only when `15-improvement-intake-audit
 2. Update DNS records and connect the custom domain in the selected hosting platform.
 
 > [!IMPORTANT]
-> **On an Instatic site, connecting the domain is only half of step 2.** The admin rejects any state-changing request whose `Origin` is not in the host's `PUBLIC_ORIGIN` — and logging in is one — so a domain moved without that env var produces a login page at the new address that renders fine and then refuses the login with 403 `invalid origin`, which reads like a permissions or password problem and is neither. Run [`19-instatic-domain-origins`](../19-instatic-domain-origins/19-instatic-domain-origins.md) as part of this step, and do not send anyone an admin link until `node check-origins.mjs --all` is clean.
+> **On an Instatic site, connecting the domain is only half of step 2.** The admin rejects any state-changing request whose `Origin` is not in the host's `PUBLIC_ORIGIN` — and logging in is one — so a domain moved without that env var produces a login page at the new address that renders fine and then refuses the login with 403 `invalid origin`, which reads like a permissions or password problem and is neither. Run [`20-instatic-domain-origins`](../20-instatic-domain-origins/20-instatic-domain-origins.md) as part of this step. Setting the variable is not enough on its own — it is read once at boot, so the service must redeploy and you must confirm a new deployment actually appeared. Do not send anyone an admin link until `node check-origins.mjs --all` is clean against the **running** server.
 3. Publish or promote the approved build to production.
 4. Smoke test priority pages, sitemap, robots.txt, forms, and primary CTAs.
 
