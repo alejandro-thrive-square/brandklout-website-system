@@ -11,7 +11,7 @@ order rather than remembered in the wrong one.
 
 `check` sends no credentials and changes nothing, so it is safe for anyone to
 run at any time. It exits non-zero while any site has a TRAP host - a host that
-serves a working-looking admin which cannot save.
+serves a normal-looking login page and then refuses the login itself.
 """
 
 from __future__ import annotations

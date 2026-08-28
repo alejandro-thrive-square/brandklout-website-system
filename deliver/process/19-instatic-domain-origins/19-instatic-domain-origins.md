@@ -10,13 +10,13 @@ When a client's real domain goes live, their team should reach the site editor a
 
 Instatic's admin refuses any state-changing request whose `Origin` header is not on a configured list. Get the domain cutover half-right — DNS moved, `PUBLIC_ORIGIN` not updated — and you produce the worst possible failure shape:
 
-**The admin at the new domain looks completely fine.** It serves the login page, it accepts the password, it renders the site, the editor opens. Then the first save returns `403 Forbidden: invalid origin`, which reads exactly like a permissions problem and is not. Nothing in the UI says "you are at the wrong address".
+**The login page at the new domain looks completely fine.** It renders, it takes an email and a password — and then the login itself is refused with `403 Forbidden: invalid origin`. Nobody gets in at all. The message reads exactly like a permissions or password problem and is neither, and nothing in the UI says "you are at the wrong address".
 
 That has already happened here, and the cost is not the 403 — it is the hour someone spends looking at user permissions, then at the plugin, then at the session, before anyone thinks about the hostname in the address bar.
 
 So this module exists to answer one question, out loud, before a link is ever sent:
 
-> **From which addresses can a person actually SAVE in this site's admin?**
+> **From which addresses can a person actually LOG IN TO and use this site's admin?**
 
 ## The one command
 
@@ -34,12 +34,12 @@ Output is the answer, not a diagnosis to interpret:
 ```
 mason-park — https://mason-park.up.railway.app
   OK        https://mason-park.up.railway.app          serves the admin AND is an allowed origin
-  TRAP      https://www.masonparkdental.com            serves the admin but is REJECTED as a foreign origin — saving will 403
+  TRAP      https://www.masonparkdental.com            serves the login page but REFUSES THE LOGIN — 403 invalid origin
 
   GIVE THIS LINK:  https://mason-park.up.railway.app/admin
 ```
 
-**`TRAP` is the line that matters.** It means that host serves a working-looking admin that cannot save. Those are the hosts that get pasted into Slack by accident.
+**`TRAP` is the line that matters.** It means that host serves a perfectly normal-looking login page and then refuses the login. Those are the hosts that get pasted into Slack by accident.
 
 ## Why it needs no credentials
 
@@ -96,11 +96,11 @@ Both live Instatic sites have step 3 of the cutover undone, and in both cases th
 
 | Client | Send this today | Client domain | Status |
 |---|---|---|---|
-| Dr. Nahlah | `https://encorercm.com/admin` | `drnahlah.com` | `encorercm.com` + `www` pass. `drnahlah.com` **301s to `www.drnahlah.com`**, which serves the admin and is **rejected** — a live trap. |
-| Mason Park | `https://mason-park.up.railway.app/admin` | `masonparkdental.com` | `PUBLIC_ORIGIN` never set; falls back to `RAILWAY_PUBLIC_DOMAIN`. `www.masonparkdental.com` serves the admin and is **rejected** — a live trap. Apex does not resolve. |
+| Dr. Nahlah | `https://encorercm.com/admin` | `drnahlah.com` | `encorercm.com` + `www` pass. `drnahlah.com` **301s to `www.drnahlah.com`**, which serves the login page and **refuses the login** — a live trap. |
+| Mason Park | `https://mason-park.up.railway.app/admin` | `masonparkdental.com` | `PUBLIC_ORIGIN` never set; falls back to `RAILWAY_PUBLIC_DOMAIN`. `www.masonparkdental.com` serves the login page and **refuses the login** — a live trap. Apex does not resolve. |
 
 > [!WARNING]
-> **Do not send `drnahlah.com/admin` or `masonparkdental.com/admin` to anyone.** Both let a person log in and then fail on the first save. These are precisely the addresses a client or teammate would guess, which is why they are the ones that get sent by mistake.
+> **Do not send `drnahlah.com/admin` or `masonparkdental.com/admin` to anyone.** Confirmed in a browser on 2026-08-28: both refuse the login with `403 Forbidden: invalid origin`. These are precisely the addresses a client or teammate would guess, which is why they are the ones that get sent by mistake.
 
 Neither is fixable from this repository — `PUBLIC_ORIGIN` lives on the Instatic service in Railway. The two values to set, each **merged into** whatever is already there rather than pasted over:
 
@@ -119,7 +119,7 @@ Redeploy, then re-run the checker until it exits 0. Once Dr. Nahlah's is clean, 
 
 ## Gotchas
 
-- **A trap host is indistinguishable from a working one until someone saves.** Login, navigation, and reading all work fine; only state-changing requests are checked. So "I can log in" is never evidence the link is right.
+- **A trap host is indistinguishable from a working one until someone submits the login form.** The gate applies to state-changing requests, and **logging in is one of them** — so the failure lands at the login POST, not later. Everything up to pressing the button looks right. That is fail-fast and therefore the good case: no half-saved state, no silent data loss. It just does not look like an origin problem to the person hitting it.
 - **`www` is not implied.** See the warning above. Half the traps in this system will be a missing `www` entry.
 - **An env change without a redeploy does nothing.** The list is read once at boot.
 - **Scripts do not reproduce the bug.** Anything sending no `Origin` header — curl, our own toolkit — passes the gate unconditionally. A green scripted run says nothing about whether a *person in a browser* can save. Only this checker, which sets `Origin` deliberately, or a real human test.

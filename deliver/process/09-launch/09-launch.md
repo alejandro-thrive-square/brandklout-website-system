@@ -20,7 +20,7 @@ For improvement work, this module is used only when `15-improvement-intake-audit
 2. Update DNS records and connect the custom domain in the selected hosting platform.
 
 > [!IMPORTANT]
-> **On an Instatic site, connecting the domain is only half of step 2.** The admin rejects any save whose `Origin` is not in the host's `PUBLIC_ORIGIN`, so a domain moved without that env var produces an admin at the new address that logs in, opens, and then 403s on the first save — which reads like a permissions problem and is not. Run [`19-instatic-domain-origins`](../19-instatic-domain-origins/19-instatic-domain-origins.md) as part of this step, and do not send anyone an admin link until `node check-origins.mjs --all` is clean.
+> **On an Instatic site, connecting the domain is only half of step 2.** The admin rejects any state-changing request whose `Origin` is not in the host's `PUBLIC_ORIGIN` — and logging in is one — so a domain moved without that env var produces a login page at the new address that renders fine and then refuses the login with 403 `invalid origin`, which reads like a permissions or password problem and is neither. Run [`19-instatic-domain-origins`](../19-instatic-domain-origins/19-instatic-domain-origins.md) as part of this step, and do not send anyone an admin link until `node check-origins.mjs --all` is clean.
 3. Publish or promote the approved build to production.
 4. Smoke test priority pages, sitemap, robots.txt, forms, and primary CTAs.
 
