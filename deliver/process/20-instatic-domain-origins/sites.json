@@ -1,0 +1,30 @@
+{
+  "_comment": [
+    "The canonical admin URL per Instatic site — the single answer to 'what link do I send?'.",
+    "`adminUrl` is the origin a person should work from; `check-origins.mjs` appends its www/apex",
+    "twin automatically, so list only what that would not derive: a second client domain, the",
+    "platform host, staging, an old domain people still have bookmarked.",
+    "List a host even when it is currently broken — a host nobody checks is a host nobody fixes,",
+    "and the checker's job is to keep saying so until it is clean.",
+    "This file is the claim; `node check-origins.mjs --all` is the proof, and it probes the RUNNING",
+    "server rather than the Railway dashboard. Re-run it after any domain change or redeploy and",
+    "fix whichever of the two is wrong.",
+    "No secrets here. Credentials live in the per-worktree .env and never in this repo."
+  ],
+  "sites": [
+    {
+      "client": "dr-nahlah",
+      "adminUrl": "https://www.drnahlah.com",
+      "alternates": ["https://encorercm.com", "https://dr-nahlah.up.railway.app"],
+      "railway": { "project": "2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5", "service": "Dr Nahlah" },
+      "note": "Fixed 2026-08-28: www.drnahlah.com and drnahlah.com appended to PUBLIC_ORIGIN, which already held encorercm.com + www + the railway host from the 2026-08-18 fix. drnahlah.com 301s to www, so www is the one that must be listed. All five origins verified live."
+    },
+    {
+      "client": "mason-park",
+      "adminUrl": "https://www.masonparkdental.com",
+      "alternates": ["https://mason-park.up.railway.app"],
+      "railway": { "project": "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc", "service": "Mason Park" },
+      "note": "Fixed 2026-08-28. PUBLIC_ORIGIN had been set to the apex alone (https://masonparkdental.com) and had NEVER been applied — the container was still running its boot-time derived value. The apex also has no DNS record, so it is listed for the day it gets one but is not the link to hand out. Redeployed; www now verified live."
+    }
+  ]
+}

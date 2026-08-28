@@ -2,7 +2,7 @@
 
 This folder contains the canonical post-contract delivery template library for the Deliver microsystem. Sales owns offer definition, proposal sending, discovery meeting, contract onboarding, and the Deliver handoff package. Deliver starts after signing, then uses the handoff package's normalized `selected_offer` value to initialize a client folder and choose the correct delivery path.
 
-Each numbered module mirrors the standard workflow structure defined in [SYSTEM_RULES.md Section 2.1](../../SYSTEM_RULES.md): `.md` directive, `.py` executor, `TRIGGER_PROMPT.txt`, and a `.tmp/` artifact folder. Module `00` defines client-folder initialization. Modules `01` through `19` are reusable delivery execution templates; [OFFER_ROUTING.md](./OFFER_ROUTING.md) determines which execution modules are copied for each Sales offer.
+Each numbered module mirrors the standard workflow structure defined in [SYSTEM_RULES.md Section 2.1](../../SYSTEM_RULES.md): `.md` directive, `.py` executor, `TRIGGER_PROMPT.txt`, and a `.tmp/` artifact folder. Module `00` defines client-folder initialization. Modules `01` through `20` are reusable delivery execution templates; [OFFER_ROUTING.md](./OFFER_ROUTING.md) determines which execution modules are copied for each Sales offer.
 
 > [!IMPORTANT]
 > **Integrity Rule**: When a phase's or supporting workflow's logic, naming, output schema, or offer routing changes, update the relevant `.md`, this index, and [OFFER_ROUTING.md](./OFFER_ROUTING.md) (when routing is affected) in the same commit.
@@ -47,7 +47,7 @@ Use [OFFER_ROUTING.md](./OFFER_ROUTING.md) as the source of truth for required h
 
 ## Process Modules
 
-The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `10` sequence is the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `11` through `15`, deployment module `16`, AI Vercel/Airtable build module `17`, and the Instatic modules `18` and `19`.
+The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `10` sequence is the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `11` through `15`, deployment module `16`, AI Vercel/Airtable build module `17`, and the Instatic modules `18` and `20`.
 
 | # | Phase | Directive |
 | :---: | :--- | :--- |
@@ -70,16 +70,24 @@ The current numbered folders are reusable templates. Module `00` is the setup wo
 | 16 | Vercel Deployment | [16-vercel-deployment.md](./16-vercel-deployment/16-vercel-deployment.md) |
 | 17 | AI Site Build & Airtable | [17-ai-site-build-airtable.md](./17-ai-site-build-airtable/17-ai-site-build-airtable.md) |
 | 18 | Instatic Embeds | [18-instatic-embeds.md](./18-instatic-embeds/18-instatic-embeds.md) |
-| 19 | Instatic Domain & Admin Origins | [19-instatic-domain-origins.md](./19-instatic-domain-origins/19-instatic-domain-origins.md) |
+| 19 | Cloudflare Launch (sitemap, 301 map, canonical host) | _not yet promoted — lives in `bk-dr-nahlah` as `19-cloudflare-launch/`_ |
+| 20 | Instatic Domain & Admin Origins | [20-instatic-domain-origins.md](./20-instatic-domain-origins/20-instatic-domain-origins.md) |
 
-### Instatic modules (`18`, `19`)
+### Instatic modules (`18`, `20`)
 
 Not part of the offer-routing sequence — they apply to any engagement whose site is delivered on **Instatic** rather than Webflow or Vercel, and both are needed on every such site:
 
 - **`18` Instatic Embeds** makes third-party widgets possible at all. Instatic publishes behind `frame-src 'none'`, so without this plugin no booking form, review widget or chat bubble can load. Install it on every Instatic site.
-- **`19` Instatic Domain & Admin Origins** is run at launch and at every later domain change. It is what makes the client's own `client.com/admin` able to **save**, and the checker in it is the thing to run before sending anyone an admin link.
+- **`20` Instatic Domain & Admin Origins** is run at launch and at every later domain change. It is what makes the client's own `client.com/admin` able to **save**, and the checker in it is the thing to run before sending anyone an admin link.
 
-`19` should be run as part of [`09-launch`](./09-launch/09-launch.md) for an Instatic site; `09` otherwise only knows about Webflow and Vercel publishing targets.
+`20` should be run as part of [`09-launch`](./09-launch/09-launch.md) for an Instatic site; `09` otherwise only knows about Webflow and Vercel publishing targets.
+
+> [!IMPORTANT]
+> **Number `19` is taken.** `19-cloudflare-launch` was built during the Dr. Nahlah launch and still
+> lives untracked in the `bk-dr-nahlah` worktree, so it is invisible from `main` and a new module
+> numbered from `main` alone will collide with it. That already happened once: this module shipped
+> as `19` and was renumbered to `20`. **Before claiming a number, check the worktrees too**, not
+> just `git ls-files` on `main`. `19-cloudflare-launch` should be promoted here.
 
 ## Supporting Workflows
 Non-sequential tools that delivery phases call as needed. They live flat inside `deliver/process/` alongside the numbered phases (mirroring how `deliver/process/` already holds non-numbered items such as `design-system-library`), but they are **not** part of the `00`-`17` offer-routing sequence. Each follows the same standard folder shape and can be cloned into `deliver/[client-name]/workflows/` when run for a specific engagement.

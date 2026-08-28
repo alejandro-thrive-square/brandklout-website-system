@@ -5,9 +5,9 @@ The real executor is `check-origins.mjs` beside this file (the same exception
 module has one entry point, and so the cutover sequence is printed in the right
 order rather than remembered in the wrong one.
 
-    python 19-instatic-domain-origins.py check                 # every site in sites.json
-    python 19-instatic-domain-origins.py check https://x.com   # one site
-    python 19-instatic-domain-origins.py cutover               # print the checklist
+    python 20-instatic-domain-origins.py check                 # every site in sites.json
+    python 20-instatic-domain-origins.py check https://x.com   # one site
+    python 20-instatic-domain-origins.py cutover               # print the checklist
 
 `check` sends no credentials and changes nothing, so it is safe for anyone to
 run at any time. It exits non-zero while any site has a TRAP host - a host that
@@ -27,7 +27,7 @@ CHECKER = HERE / "check-origins.mjs"
 
 CUTOVER = """\
 Instatic domain cutover - run every step, in order.
-Full detail and the reasoning: 19-instatic-domain-origins.md
+Full detail and the reasoning: 20-instatic-domain-origins.md
 
   1. Record the platform host (<app>.up.railway.app). It must SURVIVE the change:
      it is the toolkit's way in and the fallback when the domain misbehaves.
@@ -42,11 +42,16 @@ Full detail and the reasoning: 19-instatic-domain-origins.md
      Every host a human might use must be listed. Matching is an exact string
      compare; nothing about `www` is implied. Omitting one produces no warning,
      only a trap.
-  4. REDEPLOY. resolvePublicOrigins() runs at boot; an env change alone does
-     nothing.
+  4. REDEPLOY, and CONFIRM a new deployment appeared. resolvePublicOrigins()
+     runs once at boot; an env change alone does nothing. `railway variables
+     --set` usually triggers the deploy, but Mason Park proved it does not
+     always:  railway deployment list --service "<Service>"  must show a NEW
+     entry, newer than your edit.
   5. Update sites.json here: adminUrl = the new canonical domain.
-  6. Prove it:  node check-origins.mjs --all
+  6. Prove it against the RUNNING server:  node check-origins.mjs --all
      Every host must read OK. Zero TRAP lines. It exits non-zero until then.
+     "I checked the variable in Railway" is NOT proof - Mason Park's variable
+     read correctly for a day while the running container ignored it.
   7. Update INSTATIC_BASE_URL in that client's worktree .env to an origin that
      passes the gate, or the 18-instatic-embeds toolkit starts failing with
      403s that look like permissions.
