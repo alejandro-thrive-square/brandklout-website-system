@@ -334,6 +334,59 @@ console.log('\nAEO Schema — graph construction\n')
   check('and it is logged', broken.logs.some((l) => l.indexOf('not valid JSON') > -1), JSON.stringify(broken.logs))
 }
 
+// 6b ── a block that shares an @id EXTENDS the node, it does not duplicate it ──
+{
+  const url = 'https://www.drnahlah.com/about'
+  const h = await boot({ blocks: [{
+    key: 'about',
+    json: JSON.stringify({ '@type': 'AboutPage', '@id': url + '#webpage', inLanguage: 'en-US', name: 'Typed by hand' }),
+    enabled: true,
+  }] })
+  const doc = graphOf(h.filters['publish.html'](
+    page({ title: 'Why Choose Us | Dr. Nahlah Implants &amp; Prosthodontics | McLean, VA', body: BODY }),
+    { slug: 'about' }))
+  const page_ = doc['@graph'].filter((n) => n['@id'] === url + '#webpage')
+  check('a block sharing the generated @id collapses to ONE node', page_.length === 1,
+    JSON.stringify(doc['@graph'].map((n) => [n['@type'], n['@id']])))
+  check('the merged @type is the union, generated type first',
+    JSON.stringify(page_[0]['@type']) === JSON.stringify(['WebPage', 'AboutPage']),
+    JSON.stringify(page_[0]['@type']))
+  check('the block wins on a property both carry', page_[0].name === 'Typed by hand', page_[0].name)
+  check('the generated properties survive the merge',
+    page_[0].url === url && !!page_[0].description, JSON.stringify(page_[0]).slice(0, 200))
+  check('the block adds its own properties', page_[0].inLanguage === 'en-US')
+
+  // The same, for an article: BlogPosting folding into the generated Article.
+  const art = await boot({ blocks: [{
+    key: 'posts:all-on-four-your-questions',
+    json: JSON.stringify({
+      '@type': 'BlogPosting',
+      '@id': 'https://www.drnahlah.com/posts/all-on-four-your-questions#article',
+      articleSection: 'All-on-4',
+    }),
+    enabled: true,
+  }] })
+  const adoc = graphOf(art.filters['publish.html'](
+    page({ title: 'All-On-Four, Your Questions Answered', body: BODY }), { slug: 'post' }))
+  const anode = adoc['@graph'].filter((n) => String(n['@id']).endsWith('#article'))
+  check('an article is published ONCE, not as Article and BlogPosting separately',
+    anode.length === 1 && JSON.stringify(anode[0]['@type']) === JSON.stringify(['Article', 'BlogPosting']),
+    JSON.stringify(anode.map((n) => n['@type'])))
+  check('the merged article keeps its generated dates and gains the section',
+    anode[0].datePublished === '2026-06-11T10:00:00.000Z' && anode[0].articleSection === 'All-on-4')
+
+  // A block with no @id, or a different one, stays its own node.
+  const sep = await boot({ blocks: [{ key: 'about', json: JSON.stringify({ '@type': 'Person', '@id': url + '#person', name: 'Someone' }), enabled: true }] })
+  const sdoc = graphOf(sep.filters['publish.html'](
+    page({ title: 'Why Choose Us | Dr. Nahlah Implants &amp; Prosthodontics | McLean, VA' }), { slug: 'about' }))
+  check('a block with a DIFFERENT @id stays a separate node',
+    nodesOfType(sdoc, 'Person').length === 1 && nodesOfType(sdoc, 'WebPage').length === 1)
+  const noId = await boot({ blocks: [{ key: 'about', json: JSON.stringify({ '@type': 'Thing', name: 'no id' }), enabled: true }] })
+  const ndoc = graphOf(noId.filters['publish.html'](
+    page({ title: 'Why Choose Us | Dr. Nahlah Implants &amp; Prosthodontics | McLean, VA' }), { slug: 'about' }))
+  check('a block with no @id is left alone', nodesOfType(ndoc, 'Thing').length === 1)
+}
+
 // 7 ── organizationJson wins ────────────────────────────────────────────
 {
   const custom = { '@type': 'Dentist', name: 'Two offices', department: [{ '@type': 'Dentist', name: 'McLean' }] }

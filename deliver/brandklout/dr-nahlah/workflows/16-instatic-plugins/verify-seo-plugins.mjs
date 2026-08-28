@@ -132,16 +132,34 @@ for (const path of paths) {
       console.log(`  FAIL  ${path} JSON-LD does not parse: ${e.message}`)
     }
     if (doc) {
-      const types = (doc['@graph'] || []).map((n) => n['@type'])
+      /* `@type` is a STRING or an ARRAY. It became an array the moment the
+         plugin started collapsing nodes that share an `@id`, so a page node is
+         `["WebPage", "AboutPage"]` — a subtype added to the type it
+         specialises. Comparing with `===` silently stopped matching and this
+         gate reported 93 failures against a site that was entirely correct.
+         Treat it as the set it is. */
+      const typesOf = (n) => [].concat(n['@type'] || [])
+      const nodes = doc['@graph'] || []
+      const types = nodes.flatMap(typesOf)
+      const has = (t) => types.includes(t)
+
       check(`${path} the graph carries one @context`, doc['@context'] === 'https://schema.org')
-      check(`${path} the organisation is on the page`, types.includes('Dentist'), types.join(','))
-      check(`${path} a WebPage node is present`, types.includes('WebPage'), types.join(','))
+      check(`${path} the organisation is on the page`, has('Dentist'), types.join(','))
+      check(`${path} a WebPage node is present`, has('WebPage'), types.join(','))
       check(`${path} an article carries an Article node`,
-        path.indexOf('/posts/') !== 0 || types.includes('Article'), types.join(','))
+        path.indexOf('/posts/') !== 0 || has('Article'), types.join(','))
       check(`${path} an interior page carries breadcrumbs`,
-        path === '/' || types.includes('BreadcrumbList'), types.join(','))
-      const wp = (doc['@graph'] || []).find((n) => n['@type'] === 'WebPage')
+        path === '/' || has('BreadcrumbList'), types.join(','))
+
+      const wp = nodes.find((n) => typesOf(n).includes('WebPage'))
       check(`${path} the WebPage url matches the canonical`, wp && wp.url === canonical, `${wp && wp.url}`)
+
+      // One entity, one node. Two nodes sharing an id is the defect the
+      // collapse was added to remove, and it can only come back silently.
+      const ids = nodes.map((n) => n['@id']).filter(Boolean)
+      check(`${path} no @id appears twice in the graph`,
+        new Set(ids).size === ids.length,
+        ids.filter((v, i) => ids.indexOf(v) !== i).join(','))
     }
   }
   // Only 43 identical descriptions is the defect this replaced; a second

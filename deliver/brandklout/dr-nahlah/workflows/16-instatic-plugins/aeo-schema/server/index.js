@@ -405,7 +405,49 @@ function buildGraph (api, html, ctx) {
   }
 
   if (graph.length === 0) return null
-  return { '@context': 'https://schema.org', '@graph': graph }
+  return { '@context': 'https://schema.org', '@graph': collapseById(graph) }
+}
+
+/**
+ * Two nodes sharing an `@id` ARE one entity. Say so in the output rather than
+ * leaving every consumer to work it out.
+ *
+ * This is what lets a hand-written block EXTEND a generated node instead of
+ * sitting beside it: a page block keyed `<url>#webpage` folds into the
+ * generated WebPage, and an article's `BlogPosting` folds into the generated
+ * `Article`. Before this, `/privacy-policy` published two `WebPage` nodes with
+ * the same id and `/posts/…` published the same article twice.
+ *
+ * The block wins on any property both carry — a value someone typed should
+ * beat a derived one — and `@type` becomes the union, generated type first, so
+ * the merged node reads `["WebPage", "AboutPage"]`: a subtype added to the
+ * type it specialises, which is exactly what schema.org expects.
+ */
+function collapseById (graph) {
+  var out = []
+  var byId = {}
+  for (var i = 0; i < graph.length; i++) {
+    var node = graph[i]
+    var id = node && node['@id']
+    if (!id) { out.push(node); continue }
+    if (!byId[id]) { byId[id] = node; out.push(node); continue }
+
+    var target = byId[id]
+    var types = [].concat(target['@type'] || []).concat(node['@type'] || [])
+    var seen = {}
+    var merged = []
+    for (var t = 0; t < types.length; t++) {
+      if (!types[t] || seen[types[t]]) continue
+      seen[types[t]] = true
+      merged.push(types[t])
+    }
+    for (var k in node) {
+      if (k === '@type' || k === '@id') continue
+      target[k] = node[k]
+    }
+    target['@type'] = merged.length === 1 ? merged[0] : merged
+  }
+  return out
 }
 
 /**

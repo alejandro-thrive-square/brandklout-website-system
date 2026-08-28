@@ -1,4 +1,4 @@
-# AEO Schema — `webzite.aeo-schema` v1.0.0
+# AEO Schema — `webzite.aeo-schema` v1.2.0
 
 One JSON-LD `@graph` on every published page, managed from the admin and
 changeable across the whole site in one API call.
@@ -79,13 +79,34 @@ A page already carrying this plugin's script tag is returned untouched.
 `AEO Schema` in the admin sidebar, three tabs:
 
 - **Per page** — a searchable list of all 80 pages showing the `@type`s each one
-  declares, and an editor with server-side JSON validation.
+  declares, and an editor in a popup with server-side JSON validation. Closes on
+  Escape, on the backdrop, and on Close.
 - **Many at once** — one template across a matched set. `{title}`, `{slug}`,
   `{url}` and `{description}` are replaced per page inside **every string in the
   template, however deeply nested**, so one rule gives eighty pages eighty
   correct blocks. `replace` or `merge`. Preview is a dry run.
 - **Site-wide block** — added to the graph on every page, for something true of
   the whole practice.
+
+## One entity, one node
+
+A block whose `@id` matches a generated node **extends** it rather than sitting
+beside it: the plugin collapses nodes that share an `@id`, taking the union of
+their `@type` (generated type first) and letting the block win on any property
+both carry. So `/all-on-4` publishes one node typed `["WebPage",
+"MedicalWebPage"]` and an article publishes one typed `["Article",
+"BlogPosting"]` — a subtype added to the type it specialises — instead of two
+half-descriptions of the same page.
+
+## Every page is populated
+
+`populate-seo.mjs` gives all 80 pages a block whose type is true of that page:
+`AboutPage`, `ContactPage`, `CollectionPage`, `MedicalWebPage`, an
+`OfferCatalog` of the treatments on the home page, a `Person` for Dr. Nahlah,
+and `BlogPosting` with the article's own `articleSection` — the same `topic`
+cell the /posts filter reads, so the schema and the visible chip cannot
+disagree. The map is hand-written, not pattern-matched: `/dental-conditions` is
+conditions and not a procedure, and `/doctor-referral` addresses clinicians.
 
 ## The API
 

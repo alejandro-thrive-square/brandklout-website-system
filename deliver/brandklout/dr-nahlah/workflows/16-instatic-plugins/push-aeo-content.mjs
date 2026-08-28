@@ -79,7 +79,7 @@ if (qa.length < 4) {
 
 const faqBlock = {
   '@type': 'FAQPage',
-  '@id': `${PUBLIC}/${FAQ_SLUG}#faq`,
+  '@id': `${PUBLIC}/${FAQ_SLUG}#webpage`,
   mainEntity: qa.map((x) => ({
     '@type': 'Question',
     name: x.question,
@@ -119,7 +119,7 @@ for (const [slug, procedure] of Object.entries(PROCEDURES)) {
     key: slug,
     json: {
       '@type': 'MedicalWebPage',
-      '@id': `${row.url}#medicalwebpage`,
+      '@id': `${row.url}#webpage`,
       url: row.url,
       name: row.seoTitle || row.title,
       description: row.seoDescription || undefined,

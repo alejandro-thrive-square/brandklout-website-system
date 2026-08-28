@@ -533,11 +533,77 @@ on the page, which is the pattern Google names as a reason to distrust a site's
 structured data. Same for `aggregateRating`: the copy says 4.9 out of 5, and a
 rating in schema has to be backed by reviews the page displays and a real count.
 The capability exists; using it either way would be a mistake.
+### The per-page editor is a popup, and `<dialog>` is why
+
+Both admin pages open the per-page editor in a native `<dialog>` driven by
+`showModal()`. Not a styled div: the top layer escapes `overflow` and ancestor
+transforms, and the admin shell has both, so a `position: fixed` overlay would
+have been clipped by the scroll container the page lives in. The browser also
+supplies the focus trap, the inert background and Escape.
+
+Three things it cost, all worth writing down:
+
+- **`::backdrop` cannot be set inline.** One `<style>` is injected once. The
+  dialog itself is transparent and unpadded and the visible surface is the
+  host's own `Card`, so the popup is themed by the admin rather than by guesses
+  about its colour tokens.
+- **`inset: 0` + `margin: auto` is what centres it.** The UA sheet does that for
+  you only while nothing else sets margin or inset; the admin's reset does, and
+  without those the popup pinned itself to the top-left corner.
+- **Listen to `close`, not `cancel`.** Cancelling Escape and closing from React
+  looks right and was measured wrong: the element closed, the `cancel` handler
+  never ran, React went on believing the popup was open, and the row could never
+  be reopened. `close` fires however the element closed — including our own
+  `d.close()` — so it is the one source of truth.
+
+### One entity, one node
+
+`aeo-schema` collapses graph nodes that share an `@id`: the union of their
+`@type` (generated first), and the hand-written block wins on any property both
+carry. That is what lets a stored block EXTEND a generated node instead of
+sitting beside it — `/all-on-4` publishes one `["WebPage", "MedicalWebPage"]`
+and an article one `["Article", "BlogPosting"]`, a subtype added to the type it
+specialises. Before it, `/privacy-policy` published two `WebPage` nodes with the
+same id.
+
+**It also broke the gate, and that is the lesson.** `@type` is a string OR an
+array. `verify-seo-plugins.mjs` compared with `===`, silently stopped matching,
+and reported 93 failures against a site that was entirely correct. It now treats
+`@type` as the set it is, and additionally asserts no `@id` appears twice.
+
+### Populating every page
+
+`populate-seo.mjs` writes an explicit Open Graph override and a schema block for
+all 80 pages, through the plugins' own routes.
+
+Two values are left DERIVING on purpose, and both are the same judgement:
+**never freeze a fallback into 80 rows.** The canonical URL comes from the
+site-address setting, so storing 80 absolute URLs would make a domain change an
+80-row edit. And on the 7 pages with no `seoDescription`, the derived
+`og:description` is the site-wide sentence — freezing that would re-create the
+exact defect the Open Graph plugin was written to remove, except worse, because
+it would then no longer follow the setting. Those 7 pages are listed by the
+script so someone can write them a description.
+
+The mirror image of that rule caught a real bug in the dry run: `/` was
+deliberately pointed at the doctor's portrait, which is ALSO the fallback image,
+so the skip-the-fallback rule suppressed it and the home page would have come
+out with no override and fallen back to the first picture on the page — a
+patient's before photograph, as the card for the practice's front door. A
+hand-set picture now always wins over anything derived.
+
+**The script is the re-sync.** Materialising a derived value stops it tracking
+its source, so `og:title` no longer follows a CMS title edit. Re-running
+`populate-seo.mjs --apply` refreshes every stored title and description from the
+current content, while preserving the fields a person set by hand (image, alt,
+canonical URL, type).
+
 ## Output Artifacts
 - `open-graph/` — the Open Graph plugin (`plugin.json`, `server/index.js`, `admin/index.js`, `README.md`)
 - `aeo-schema/` — the AEO Schema plugin (`plugin.json`, `server/index.js`, `admin/index.js`, `README.md`)
 - `configure-seo-plugins.mjs` — the Dr Nahlah values for both, idempotent, dry-run by default
 - `push-aeo-content.mjs` — the FAQPage and MedicalWebPage blocks, written through the plugin's own API
+- `populate-seo.mjs` — an explicit Open Graph override and a schema block on all 80 pages; idempotent, and the re-sync after a content change
 - `test-open-graph.mjs` — 64 offline assertions, `--live` runs the filter over the real published pages
 - `test-aeo-schema.mjs` — 83 offline assertions, every emitted graph parsed back out of its script tag
 - `verify-seo-plugins.mjs` — the LIVE gate over every published URL; uniqueness of canonical / `og:url` is the check that matters

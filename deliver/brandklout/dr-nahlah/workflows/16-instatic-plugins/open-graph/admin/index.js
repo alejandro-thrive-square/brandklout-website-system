@@ -20,12 +20,83 @@
  * in the console. Anything outside `PluginUi*Props` — `id`, `name`,
  * `autoComplete`, `spellCheck` — is dropped on the floor.
  */
-import { createElement as h, useCallback, useEffect, useMemo, useState } from 'react'
+import { createElement as h, useCallback, useEffect, useMemo, useRef, useState } from 'react'
 import { usePluginRoutes } from '@instatic/host-hooks'
 import {
   Alert, Button, Card, EmptyState, Heading, Input, SearchBar, Select,
   Separator, Stack, Text, Textarea,
 } from '@instatic/host-ui'
+
+/* ── the popup ────────────────────────────────────────────────────────────
+ * A native `<dialog>` driven by `showModal()`, not a hand-rolled overlay.
+ * The browser then supplies the focus trap, the inert background, Escape,
+ * and the top layer — which is the part that matters here, because the top
+ * layer escapes `overflow` and ancestor transforms, and the admin shell has
+ * both. A `position: fixed` div would have been clipped by the scroll
+ * container this page lives in.
+ *
+ * `::backdrop` cannot be set from an inline style, so one stylesheet is
+ * injected once. The dialog itself is transparent and unpadded; the visible
+ * surface is the host's own `Card`, so the popup is themed by the admin and
+ * not by guesses about its colour tokens.
+ */
+const MODAL_STYLE_ID = 'wz-plugin-modal-style'
+function ensureModalStyles () {
+  if (typeof document === 'undefined' || document.getElementById(MODAL_STYLE_ID)) return
+  const el = document.createElement('style')
+  el.id = MODAL_STYLE_ID
+  el.textContent =
+    // `inset: 0` + `margin: auto` is what centres a modal dialog. The UA sheet
+    // does it for you ONLY while nothing else sets margin or inset; the admin's
+    // global reset does, and without these three the popup pins itself to the
+    // top-left corner — which is what it did the first time.
+    'dialog.wz-modal{position:fixed;inset:0;margin:auto;border:0;padding:0;background:transparent;' +
+    'width:min(920px,92vw);max-width:92vw;max-height:88vh;height:fit-content;overflow:visible}' +
+    'dialog.wz-modal::backdrop{background:rgba(0,0,0,.62)}' +
+    'dialog.wz-modal>.wz-modal-inner{max-height:88vh;overflow:auto}'
+  document.head.appendChild(el)
+}
+
+function Modal ({ open, onClose, children }) {
+  const ref = useRef(null)
+  useEffect(() => { ensureModalStyles() }, [])
+
+  useEffect(() => {
+    const d = ref.current
+    if (!d) return
+    // Never call showModal() on an already-open dialog — it throws
+    // InvalidStateError and the whole tree unmounts.
+    if (open && !d.open) d.showModal()
+    if (!open && d.open) d.close()
+  }, [open])
+
+  useEffect(() => {
+    const d = ref.current
+    if (!d) return
+    /* `close` is the authority here, not `cancel`.
+     *
+     * Escape is a UA-level close request. Cancelling it and closing from React
+     * instead LOOKS right and was measured wrong: the element closed, the
+     * `cancel` handler never ran, React went on believing the popup was open,
+     * and the row could never be reopened because `open` never changed.
+     * Listening to `close` — which fires however the element closed, including
+     * our own `d.close()` — keeps React and the DOM agreeing on one source of
+     * truth. The extra `onClose()` our own close triggers is a no-op.
+     */
+    const onClosed = () => onClose()
+    // A click on the backdrop targets the dialog itself; a click on anything
+    // inside targets that child. This is why the dialog carries no padding.
+    const onClick = (e) => { if (e.target === d) onClose() }
+    d.addEventListener('close', onClosed)
+    d.addEventListener('click', onClick)
+    return () => { d.removeEventListener('close', onClosed); d.removeEventListener('click', onClick) }
+  }, [onClose])
+
+  // The element stays mounted so the ref exists to call showModal() on; the
+  // children do not, so a closed popup holds no draft state.
+  return h('dialog', { ref, className: 'wz-modal', 'aria-modal': 'true' },
+    open ? h('div', { className: 'wz-modal-inner' }, children) : null)
+}
 
 const FIELDS = [
   { id: 'title', label: 'og:title', hint: 'Blank uses the page title.' },
@@ -73,7 +144,7 @@ function Field (props) {
 
 /* ── one page's overrides ─────────────────────────────────────────────── */
 
-function Editor ({ routes, row, onSaved }) {
+function Editor ({ routes, row, onSaved, onClose }) {
   const [draft, setDraft] = useState(() => ({ ...(row.override || {}) }))
   const [busy, setBusy] = useState(false)
   const [note, setNote] = useState(null)
@@ -119,8 +190,13 @@ function Editor ({ routes, row, onSaved }) {
 
   return h(Card, { padding: 16, bordered: true },
     h(Stack, { direction: 'column', gap: 12 },
-      h(Heading, { level: 3 }, row.title || row.slug),
-      h(Text, { variant: 'muted', size: 'sm' }, row.url || ('/' + row.slug)),
+      h(Stack, { direction: 'row', gap: 12, justify: 'between', align: 'start' },
+        h(Stack, { direction: 'column', gap: 4 },
+          h(Heading, { level: 3 }, row.title || row.slug),
+          h(Text, { variant: 'muted', size: 'sm' }, row.url || ('/' + row.slug)),
+        ),
+        h(Button, { variant: 'ghost', onClick: onClose, ariaLabel: 'Close' }, 'Close'),
+      ),
       h(Separator, null),
       h(Stack, { direction: 'column', gap: 4 },
         h(Text, { variant: 'muted', size: 'sm' }, 'Derived today, with nothing typed here:'),
@@ -293,8 +369,11 @@ export default function OpenGraphAdminApp () {
           key: p.key,
           variant: p.key === selected ? 'secondary' : 'ghost',
           fullWidth: true,
-          onClick: () => setSelected(p.key === selected ? null : p.key),
+          onClick: () => setSelected(p.key),
         }, (p.override ? '● ' : '○ ') + (p.title || p.slug) + '  —  ' + p.key))),
-    current ? h(Editor, { routes, row: current, onSaved: reload }) : null,
+    h(Modal, { open: !!current, onClose: () => setSelected(null) },
+      current ? h(Editor, {
+        routes, row: current, onSaved: reload, onClose: () => setSelected(null),
+      }) : null),
   )
 }

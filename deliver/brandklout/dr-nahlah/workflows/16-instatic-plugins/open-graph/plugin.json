@@ -1,7 +1,7 @@
 {
   "id": "webzite.open-graph",
   "name": "Open Graph",
-  "version": "1.0.0",
+  "version": "1.1.2",
   "apiVersion": 1,
   "description": "Social sharing previews for every published page: Open Graph and Twitter Card tags, a canonical link, and per-page meta descriptions. Derives everything from the page by default; every value can be overridden per page in the admin, or in bulk over the plugin's own API.",
   "permissions": [

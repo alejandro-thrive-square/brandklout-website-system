@@ -1,4 +1,4 @@
-# Open Graph — `webzite.open-graph` v1.0.0
+# Open Graph — `webzite.open-graph` v1.1.2
 
 Social sharing previews for every published page: Open Graph and Twitter Card
 tags, a `<link rel="canonical">`, and the page's own meta description.
@@ -83,8 +83,23 @@ The test suite asserts `filter(filter(x)) === filter(x)`.
   `{description}` interpolate per page. Preview is a dry run; nothing is written
   until Apply.
 - **A searchable list of all 80 pages**, `●` where an override exists.
-- **A per-page editor** showing what the page derives today above the fields
-  that override it.
+- **A per-page editor**, in a popup, showing what the page derives today above
+  the fields that override it. Closes on Escape, on the backdrop, and on Close.
+
+## Every page is populated
+
+`populate-seo.mjs` writes an explicit override for all 80 pages and articles —
+title, description, the page's own picture and its alt, and the type — so every
+row is filled in and editable rather than implied. Two values are deliberately
+left deriving: the **canonical URL** (it comes from the site-address setting, and
+freezing 80 absolute URLs would make a domain change an 80-row edit) and
+**og:description on the 7 pages with no `seoDescription`** (the derived value
+there is the site-wide sentence, and freezing that would re-create the defect
+this plugin removed).
+
+The script is idempotent, and that is the point: materialising a derived value
+stops it tracking its source, so **re-running it is the re-sync** after a title
+or description changes in the CMS.
 
 ## The API
 
