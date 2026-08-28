@@ -10,10 +10,23 @@
 > the canonical `15-improvement-intake-audit` and `16-vercel-deployment`.
 
 ## Client-Facing Overview
-Capabilities the stock platform does not offer are added as **installable plugins**, never as a modified platform build. Two are in service:
+Capabilities the stock platform does not offer are added as **installable plugins**, never as a modified platform build. Four are in service:
 
 - **Embed Origins** — third-party widgets (booking forms, review widgets, CRM embeds) can be switched on per site. A developer places them **by hand** from the editor: insert the **Embed** block, paste the URL or the vendor's snippet, publish.
 - **Link Editor** — the link address on any button or link can be edited, including internal pages, on-page anchors and phone numbers, not only full `https://` addresses.
+- **Open Graph** — a link to any page unfurls with a headline, a description and a picture wherever it is pasted. Also gives every page its own meta description and a canonical link, neither of which the platform emits. [README](./open-graph/README.md)
+- **AEO Schema** — one JSON-LD `@graph` on every page (organisation, page, breadcrumb, article), managed from the admin and changeable across the whole site in one API call. [README](./aeo-schema/README.md)
+
+> [!IMPORTANT]
+> **The publisher's `<head>` is the smallest surface on this platform, and three of
+> these four plugins exist because of it.** `buildDocumentMetaTags`
+> (`src/core/publisher/render.ts`) emits a title, ONE site-wide description and a
+> favicon. Not a canonical link, not an `og:` tag, not a line of structured data,
+> and — the one that surprises people — **not the per-page `seoDescription` the
+> admin has a field for and 73 of this site's 80 pages had filled in.** Before the
+> Open Graph plugin, every published page carried the same sentence. Check what the
+> publisher actually emits before assuming a field that exists in the admin reaches
+> the page.
 
 > [!IMPORTANT]
 > **Plugins are the standing answer here; patching the image is not.** A patch to
@@ -406,7 +419,106 @@ Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTR
 - **Credentials**: reuses `15-instatic-api-sync/insta-api.mjs` and the repo-root `.env`.
 - **Endpoints**: `POST /admin/api/cms/plugins/inspect-package`, `POST /admin/api/cms/plugins/package`, `GET|PUT /admin/api/cms/plugins/:id/settings`.
 
+---
+
+## Open Graph and AEO Schema — v1.0.0, LIVE 2026-08-28
+
+Two sibling plugins, built together because they need the same two facts and the
+same shape. Each has its own README; this section records what a future session
+needs and would otherwise have to rediscover.
+
+### The `<head>` surface, and the 73 buried descriptions
+
+`buildDocumentMetaTags` emits `settings.metaTitle ?? page.title`, a single
+`settings.metaDescription`, and `settings.faviconUrl`. That is the whole head.
+
+`pages.seoDescription` and `posts.seoDescription` are real cells with a real
+admin field, and 30 of 37 pages and 43 of 43 articles had one written — none of
+which ever reached a page. **A field existing in the Instatic admin is not
+evidence that the publisher emits it.** Read `render.ts` first.
+
+### `slug` does not identify an entry page — the trap both plugins are built around
+
+`applyPublishedHtmlPipeline` passes `publish.html` a context of
+`{ siteId, pageId, slug }`. For a data-row page those come from the merged
+TEMPLATE:
+
+```ts
+// publicRenderer.ts → renderPublishedDataRowTemplate
+return { ...rendered, pageId: merged.id, slug: merged.slug, siteId: … }
+```
+
+All 43 articles therefore arrive as `slug: "post"` sharing one `pageId`. Anything
+keyed off `slug` gives every article identical output, and it looks correct until
+two of them are compared. The same function sets `merged.title = row.cells.title`
+one line earlier, so `<title>` **is** the row's — which is why both plugins
+resolve slug-first-then-title, and why `verify-seo-plugins.mjs` asserts all 79
+published URLs carry a **distinct** `og:url`, canonical and `@id`.
+
+### A `publish.html` filter must be synchronous
+
+The filter runs inside the QuickJS worker over an RPC round-trip
+(`runHookFilterInWorker`). Calling `api.cms.content.*` or `api.cms.storage.*`
+from inside it is a second round-trip while the host awaits the first.
+`embed-origins` avoided this by reading only `api.cms.settings.get`, which is a
+synchronous mirror read. Both new plugins follow the same discipline: everything
+is loaded into an in-memory mirror on the `publish.before` event — which the
+pipeline `await`s — behind a 10-second floor, because `publish.before` fires
+**per page**, not per publish, and a 37-page publish would otherwise reload the
+whole content table 37 times.
+
+### An admin app page: what it costs and what it gives
+
+`adminPages[].content.kind = 'app'` mounts a real React component in the admin
+window. It requires the **`editor.code`** grant (`adminRuntime.ts` refuses the
+import without it, and says so in the page body rather than failing silently),
+and `admin.navigation` for the sidebar item. `assetPath` is filled in by the host
+at install — never set it in the manifest, it is stripped.
+
+No build step, exactly like the Link Editor: `react`, `@instatic/host-hooks` and
+`@instatic/host-ui` resolve through the host import map, and `createElement` is
+used directly because JSX would need a compiler. `usePluginRoutes()` gives
+`fetch`/`json` scoped to the plugin's own routes, so the admin page is a thin
+view and every rule lives on the server where the publish filter can also reach
+it.
+
+**The host-ui trap, again:** `Input` / `Textarea` / `Select` are the narrowed
+`PluginInput` wrappers and their `onChange` receives the **string value, not the
+event**. Anything outside `PluginUi*Props` (`id`, `name`, `autoComplete`) is
+dropped.
+
+### Manifest gotchas that cost a round-trip
+
+- **`keywords` must match `^[A-Za-z0-9_-]{1,30}$`.** `"open graph"` with a space
+  is a 400 at `inspect-package`, and the error names only the pattern, not the
+  field.
+- **`contentAccess[]` entries are keyed `table`, not `tableSlug`.**
+- Resource fields are `text | longtext | number | date | boolean`, and
+  `validatePluginRecordData` **drops any key not declared** — a JSON blob has to
+  be a declared `longtext` field or it silently vanishes.
+
+### The bulk API is the point
+
+Both plugins expose `POST /bulk` under
+`/admin/api/cms/plugins/<id>/runtime/`, gated on `content.manage`, **dry-run by
+default**, with `{title}` / `{slug}` / `{url}` / `{description}` interpolated per
+page — for AEO, inside every string of a JSON template however deeply nested.
+Eighty pages is past the point where clicking is a plan.
+
+### Live state, 2026-08-28
+
+Installed, `active`, configured by `configure-seo-plugins.mjs`, published, and
+gated: **`verify-seo-plugins.mjs` — 1511 assertions over all 79 published URLs,
+all green.** Every URL now carries a unique canonical, its own meta description,
+a full Open Graph and Twitter card, and a JSON-LD graph that parses.
+
 ## Output Artifacts
+- `open-graph/` — the Open Graph plugin (`plugin.json`, `server/index.js`, `admin/index.js`, `README.md`)
+- `aeo-schema/` — the AEO Schema plugin (`plugin.json`, `server/index.js`, `admin/index.js`, `README.md`)
+- `configure-seo-plugins.mjs` — the Dr Nahlah values for both, idempotent, dry-run by default
+- `test-open-graph.mjs` — 64 offline assertions, `--live` runs the filter over the real published pages
+- `test-aeo-schema.mjs` — 83 offline assertions, every emitted graph parsed back out of its script tag
+- `verify-seo-plugins.mjs` — the LIVE gate over every published URL; uniqueness of canonical / `og:url` is the check that matters
 - `embed-origins/` — the plugin source (`plugin.json`, `server/index.js` for the CSP filter, `modules/index.js` for the Embed block)
 - `link-editor/` — the Link Editor plugin source (`plugin.json`, `editor/index.js`, `README.md`)
 - `verify-link-editor.mjs` — offline gate for the Link Editor: safety-gate behaviour plus a drift test against the host's `html-sanitize`

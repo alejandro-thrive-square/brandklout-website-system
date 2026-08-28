@@ -63,6 +63,44 @@ const GRANTS = {
   //                     The permission is requested anyway because the plugin
   //                     genuinely writes, and the consent screen should say so.
   'webzite.link-editor': ['editor.code', 'editor.panels', 'editor.store.read', 'editor.store.write'],
+
+  // ---- Open Graph ---------------------------------------------------------
+  //   cms.hooks         the `publish.html` filter that writes og:/twitter: tags,
+  //                     a canonical link and the page's own meta description
+  //                     into `<head>`. Same mechanism as Embed Origins.
+  //   cms.storage       the per-page overrides, in the plugin's own record
+  //                     table. Nothing else on the site is written.
+  //   cms.routes        the admin page and the bulk API are the same six
+  //                     endpoints under `/admin/api/cms/plugins/<id>/runtime/`.
+  //                     NOT `cms.routes.public` — every one of them is behind a
+  //                     session, and the write routes behind `content.manage`.
+  //   cms.content.read  READ ONLY, and only `pages` + `posts`, declared in the
+  //                     manifest's `contentAccess[]`. It is what lets the plugin
+  //                     publish the `seoDescription` the platform stores and
+  //                     never emits. There is no `cms.content.write` here: the
+  //                     plugin cannot alter a page.
+  //   admin.navigation  the "Open Graph" item in the admin sidebar.
+  //   editor.code       REQUIRED by the host for an `adminPages[].content.kind
+  //                     = 'app'` page (`adminRuntime.ts` refuses to import the
+  //                     module without the explicit grant). Rated `dangerous`:
+  //                     the admin app is unsandboxed code in the admin window.
+  //                     Ours is one hand-written file, no build step, no
+  //                     third-party dependency, and it talks only to this
+  //                     plugin's own routes.
+  'webzite.open-graph': [
+    'cms.hooks', 'cms.storage', 'cms.routes', 'cms.content.read',
+    'admin.navigation', 'editor.code',
+  ],
+
+  // ---- AEO Schema ---------------------------------------------------------
+  // Identical set, for identical reasons — the two are siblings. The filter
+  // writes ONE `application/ld+json` graph per page; the content read is again
+  // `pages` + `posts`, read-only, for the titles, descriptions and publish
+  // dates that go into WebPage and Article.
+  'webzite.aeo-schema': [
+    'cms.hooks', 'cms.storage', 'cms.routes', 'cms.content.read',
+    'admin.navigation', 'editor.code',
+  ],
 }
 
 const bytes = readFileSync(zipPath)
