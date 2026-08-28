@@ -11,7 +11,37 @@
 | **Started** | 2026-08-05 (folder scaffolded from Asana dispatch) |
 | **Live site** | **https://bestdentistinkatytx.com/** (`masonparkdental.com` 302-redirects here) |
 
+> [!IMPORTANT]
+> **This client has a second site.** The practice also runs a pediatric brand at
+> https://pediatricdentistkatytx.com — same owners, same address, same doctors, and the **same
+> ThemeREX `tooth-fairy` theme**. It has its own folder because it has its own domain, WordPress
+> install, SiteGround account and database, but it is one client:
+> [`mason-park-kids/`](../../mason-park-kids/docs/project-overview.md).
+>
+> Findings cross over in both directions — the fabricated ThemeREX awards, the demo pages, the
+> hours contradiction and the injection IOCs are all worth re-checking on the other site before
+> assuming they are unique to this one.
+
 ## Status
+
+### 2026-08-28 — the six ad landing pages are LIVE on Instatic
+
+The domain cutover to Instatic took `masonparkdental.com` off Webflow, so the six paid-traffic
+landing pages 404'd while ad spend was running. They are rebuilt on Instatic **at the same six
+slugs**, so no campaign URL changed:
+`/invisalign`, `/invisalign-consultation`, `/invisalign-thank-you`, `/new-patient-special`,
+`/new-patient-special-consultation`, `/new-patient-thank-you`.
+
+See [`workflows/10-lp-instatic/README.md`](../workflows/10-lp-instatic/README.md). Three things
+there need someone's decision rather than more engineering:
+
+- **The embedded GoHighLevel form could not be carried over** — Instatic's published CSP blocks
+  third-party iframes and scripts by construction. The card now links to the same hosted
+  GoHighLevel form (same form ids, same pipeline), but the fill is no longer inline.
+- **Call-tracking numbers are gone** with it, so ad calls no longer attribute per campaign.
+- **The apex `masonparkdental.com` does not resolve at all** — only `www` does. Any ad, GBP link
+  or citation on the bare domain is dead, and fixing it needs Cloudflare dashboard access.
+
 
 ### 2026-08-25 — SCOPE CHANGED: full static rebuild of the main site
 
