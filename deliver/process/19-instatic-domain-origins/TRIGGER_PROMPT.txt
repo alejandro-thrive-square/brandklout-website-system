@@ -1,0 +1,38 @@
+Point a client domain at an Instatic site, or work out which admin URL is safe to send.
+
+Read 19-instatic-domain-origins.md first. The short version:
+
+Instatic's admin rejects any state-changing request whose Origin is not in PUBLIC_ORIGIN.
+A half-done cutover therefore produces an admin that looks perfect — login works, the
+editor opens — and then 403s on the first save with "invalid origin", which reads like a
+permissions problem and is not.
+
+If you only need to answer "what link do I give my teammate?":
+
+    cd deliver/process/19-instatic-domain-origins
+    node check-origins.mjs --all              # every site in sites.json
+    node check-origins.mjs https://client.com # any site
+
+That sends no credentials and changes nothing. Anyone can run it. Send the URL printed
+after GIVE THIS LINK, and never a host marked TRAP — a TRAP host serves a working-looking
+admin that cannot save.
+
+If you are doing an actual cutover, run the eight numbered steps in the directive. The two
+that get skipped and cause every incident:
+
+  * PUBLIC_ORIGIN must list EVERY host a human might use, including the www/apex twin —
+    matching is an exact string compare and nothing about `www` is implied. Client domain
+    FIRST (it becomes canonical), platform host LAST but still present, because
+    INSTATIC_BASE_URL in the client's .env points at it and the 18-instatic-embeds
+    toolkit needs it.
+  * Redeploy after changing the env var. The list is read once at boot.
+
+Then update sites.json, re-run `node check-origins.mjs --all` until it is clean and exits
+0, and update INSTATIC_BASE_URL in that client's worktree .env to an origin that passes.
+
+Do not trust a green scripted run as proof. Anything that sends no Origin header — curl,
+our own toolkit — passes the gate unconditionally, so scripts cannot reproduce this bug.
+Only this checker, or a real person saving in a real browser.
+
+PUBLIC_ORIGIN lives on the Instatic host (Railway), not in this repository. Nothing here
+can set it; report what needs changing and who needs to change it.

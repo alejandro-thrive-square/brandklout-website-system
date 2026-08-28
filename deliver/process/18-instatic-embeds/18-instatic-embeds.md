@@ -110,6 +110,18 @@ Verified against the v0.0.16 source and then against a live site:
 | `modules.register` | the Embed block in the canvas library |
 | `frontend.assets` | authority for module render `js` — used for ONE thing, the auto-height listener served same-origin from `/_instatic/module-js/`. It grants no third-party origin anything. |
 
+## Three different things here are called "origin"
+
+Worth naming, because mixing them up sends people to the wrong file:
+
+| | What it is | Where it is set | What it gates |
+|---|---|---|---|
+| `PUBLIC_ORIGIN` | the site's canonical public origin(s) | env var on the **Instatic host** (Railway) | **the admin** — CSRF on every state-changing request. [`19-instatic-domain-origins`](../19-instatic-domain-origins/19-instatic-domain-origins.md) |
+| `INSTATIC_BASE_URL` | which site this toolkit talks to | per-worktree `.env` in this repo | which admin **our scripts** hit |
+| frame / script / connect origins | vendor hosts an embed may load | **this plugin's** settings, in the admin UI | the **published page's** CSP |
+
+Changing one never affects the others. `INSTATIC_BASE_URL` must be an origin that passes the `PUBLIC_ORIGIN` gate, or every script here starts failing with 403s that read like permissions problems.
+
 ## Gotchas
 
 - **A publish bakes EVERY page.** Unrelated drift ships with whatever you were publishing. On Dr. Nahlah this cost the home page its six review-card fallbacks — present in the published HTML, absent from the draft, gone the moment anything was published. Audit before and after:
