@@ -111,6 +111,13 @@ The card keeps what the live render actually gave: the block stays selectable an
 
 Root carries `data-wz-embed-card="1"` next to the usual `data-wz-embed="<fit>"`. `render()` never emits it, so no published page has one. The `[data-wz-embed], .wz-embed-note` probe in `verify-embed-editor.mjs` keeps working unchanged.
 
+**Gate: `verify-embed-canvas.mjs`** (in `deliver/process/18-instatic-embeds/`, publishes nothing). It writes three CONFIGURED blocks into a draft — URL/auto, URL/ratio, and a snippet carrying a `<script>` *and* a `<style>` — opens the real editor under CDP and asserts 15 things across all three breakpoint canvases: every block rendered a card, no `<iframe>` was created anywhere, no `<script>`/`<style>`/`<link>` from the snippet reached the editor document, the snippet markup never rendered, the editor made **no network request to any vendor**, and each card names its host. It skips the inserter deliberately, which is what makes it reliable.
+
+**LIVE on Dr. Nahlah 2026-08-28 — plugin `1.4.0` installed, canvas gate 15/15.** Mason Park upgraded and gated the same day, also 15/15.
+
+> [!WARNING]
+> On that same run `verify-embed-editor.mjs` failed four assertions on BOTH sites, twice each — pack 200 and "Embed is offered" ok, then `inCanvas: 0` and an empty Properties Panel. That is the synthetic picker click not reaching React's handler, **not** a plugin fault: the canvas gate passed 15/15 minutes later on the same sites. Run the canvas gate before debugging the plugin from a red editor gate.
+
 ### What a raw snippet can and cannot do
 
 Snippet mode emits the markup verbatim, and the published CSP decides what runs: `script-src 'self' '<importmap-sha>'` with no `'unsafe-inline'`, so a pasted inline `<script>` and any `onclick=` handler are refused by the browser. A vendor's `<script src>` runs only if an operator has put that origin in *Allowed script origins*. Anyone who can edit a page here can already ship a site-wide code asset, so this widens no authority that did not exist.
