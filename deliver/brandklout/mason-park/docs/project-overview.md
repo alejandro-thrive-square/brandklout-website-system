@@ -32,16 +32,25 @@ slugs**, so no campaign URL changed:
 `/invisalign`, `/invisalign-consultation`, `/invisalign-thank-you`, `/new-patient-special`,
 `/new-patient-special-consultation`, `/new-patient-thank-you`.
 
-See [`workflows/10-lp-instatic/README.md`](../workflows/10-lp-instatic/README.md). Three things
-there need someone's decision rather than more engineering:
+See [`workflows/10-lp-instatic/README.md`](../workflows/10-lp-instatic/README.md).
 
-- **The embedded GoHighLevel form could not be carried over** — Instatic's published CSP blocks
-  third-party iframes and scripts by construction. The card now links to the same hosted
-  GoHighLevel form (same form ids, same pipeline), but the fill is no longer inline.
-- **Call-tracking numbers are gone** with it, so ad calls no longer attribute per campaign.
-- **The apex `masonparkdental.com` does not resolve at all** — only `www` does. Any ad, GBP link
-  or citation on the bare domain is dead, and fixing it needs Cloudflare dashboard access.
+The GoHighLevel forms are **embedded inline, one per campaign** — Invisalign
+(`YbX91GhEDKkCN4GH4gka`) on `/invisalign` and `/invisalign-consultation`, $189 New Patient
+(`AFu5BpJpMjgSnSf8yybc`) on `/new-patient-special` and `/new-patient-special-consultation`, and no
+form on the two thank-you pages. Per-campaign **call tracking works**: every page renders the pool
+number (281) 645-5375 in place of the public one, matching the Webflow reference.
 
+This needed the four Webzite plugins, now installed here and **required on every new site**:
+`embed-origins` (the Embed block plus the per-page CSP widening that makes any third-party embed
+possible), `aeo-schema`, `open-graph` and `link-editor`. See
+[`deliver/process/18-instatic-embeds`](../../../process/18-instatic-embeds/18-instatic-embeds.md).
+
+Still open, and needing someone other than an engineer:
+
+- **The apex `masonparkdental.com` does not resolve at all** — only `www` does. Any ad, GBP link or
+  citation on the bare domain is dead, and fixing it needs Cloudflare dashboard access.
+- **`aeo-schema`, `open-graph` and `link-editor` are not in `deliver/process/`** yet — they were
+  packed from the `bk-dr-nahlah` worktree and should be promoted the way `embed-origins` was.
 
 ### 2026-08-25 — SCOPE CHANGED: full static rebuild of the main site
 

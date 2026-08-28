@@ -85,6 +85,31 @@ Verified against the v0.0.16 source and then against a live site:
 | `modules.register` | the Embed block in the canvas library |
 | `frontend.assets` | authority for module render `js` — used for ONE thing, the auto-height listener served same-origin from `/_instatic/module-js/`. It grants no third-party origin anything. |
 
+### `GRANTS` is per plugin id (changed 2026-08-28)
+
+`install-plugin.mjs` used to hold ONE `GRANT` array, written for `embed-origins`. That made it
+refuse the other three Webzite plugins — they legitimately ask for different permissions — and, if
+the refusal had been bypassed, would have installed them with the wrong grants. It now keys an
+explicit `GRANTS` map by plugin id and grants each package exactly its own entry:
+
+| Plugin | Granted |
+|---|---|
+| `webzite.embed-origins` | `cms.hooks`, `modules.register`, `frontend.assets` |
+| `webzite.aeo-schema` | `cms.hooks`, `cms.storage`, `cms.routes`, `cms.content.read`, `admin.navigation`, `editor.code` |
+| `webzite.open-graph` | same as `aeo-schema` |
+| `webzite.link-editor` | `editor.code`, `editor.panels`, `editor.store.read`, `editor.store.write` |
+
+Both safety properties are kept and one is added: a package asking for more than its entry is
+refused, **and a plugin id with no entry at all cannot be installed** — so an unrecognised package
+has to be reviewed and added deliberately. Inspection now runs with an empty grant, since
+`inspect-package` only reads the manifest and the id is what selects the list.
+
+> [!NOTE]
+> Only `embed-origins` lives in this folder. `aeo-schema`, `open-graph` and `link-editor` are still
+> only in `deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins/` and have to be packed from
+> there (`node pack-plugin.mjs <path-to>/aeo-schema .tmp/aeo-schema.zip`). All four belong on every
+> new site, so those three should be promoted here the way `embed-origins` was.
+
 ## Gotchas
 
 - **A publish bakes EVERY page.** Unrelated drift ships with whatever you were publishing. On Dr. Nahlah this cost the home page its six review-card fallbacks — present in the published HTML, absent from the draft, gone the moment anything was published. Audit before and after:

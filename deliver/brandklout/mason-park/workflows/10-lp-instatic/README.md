@@ -1,7 +1,12 @@
 # 10 — Landing pages: Webflow → Instatic
 
 **Status: LIVE, 2026-08-28.** All six paid-traffic landing pages are published on the Instatic
-site and answer on the same URLs the ads already point at. `verify-live.mjs`: **0 problems.**
+site and answer on the same URLs the ads already point at, **with their GoHighLevel forms embedded
+inline and call tracking working**. `verify-live.mjs`, `verify-form.mjs` and `verify-tracking.mjs`:
+**0 problems each.**
+
+This site now carries the four Webzite plugins that belong on every new site — see
+[Plugins](#plugins-required-on-every-site).
 
 | Live URL | Campaign | Role |
 | :--- | :--- | :--- |
@@ -11,6 +16,43 @@ site and answer on the same URLs the ads already point at. `verify-live.mjs`: **
 | [/new-patient-special](https://www.masonparkdental.com/new-patient-special) | $189 New Patient | landing |
 | [/new-patient-special-consultation](https://www.masonparkdental.com/new-patient-special-consultation) | $189 New Patient | consultation |
 | [/new-patient-thank-you](https://www.masonparkdental.com/new-patient-thank-you) | $189 New Patient | thank-you |
+
+## Plugins required on every site
+
+This site now carries the four Webzite plugins that Dr Nahlah's does. **They belong on every new
+Instatic site**, and without `embed-origins` no third-party embed is possible at all.
+
+| Plugin | Version | What it is for |
+| :--- | :--- | :--- |
+| `webzite.embed-origins` | 1.3.0 | the Embed block + the per-page CSP widening that lets a vendor widget load |
+| `webzite.aeo-schema` | 1.2.0 | JSON-LD written into `<head>` at publish |
+| `webzite.open-graph` | 1.1.2 | Open Graph tags written into `<head>` at publish |
+| `webzite.link-editor` | 1.0.2 | editor-only link fixing; never runs on a published page |
+
+Installed with the shared toolkit, which is the canonical route:
+
+```bash
+cd deliver/process/18-instatic-embeds
+node test-embed-origins.mjs && node test-embed-module.mjs     # 54 + 44 offline assertions
+node pack-plugin.mjs embed-origins .tmp/embed-origins.zip
+node install-plugin.mjs .tmp/embed-origins.zip --apply
+node set-origins.mjs                                          # embedPolicy=compatible, autoTrust=on
+```
+
+`embedPolicy` is left at **compatible** and `autoTrust` on — the defaults. In that mode a page that
+*contains* an Embed block may load over `https`, and a page that does not is byte-for-byte
+untouched. That is why `/about-us` still publishes `frame-src 'none'; script-src 'none'` while
+`/invisalign` publishes `frame-src 'self' https:`.
+
+> [!IMPORTANT]
+> Only `embed-origins` lives in `deliver/process/`. The other three are still only in the
+> `bk-dr-nahlah` worktree under `deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins/`, and
+> they were packed from there. **They should be promoted to `deliver/process/` too** if they are
+> genuinely required on every site — see Open items.
+
+`install-plugin.mjs` now grants per plugin id (`GRANTS`) rather than from one list, so each of the
+four gets exactly the permissions its own manifest declares, and a package that is unknown or asks
+for more than its entry allows is refused rather than installed.
 
 ## Why this workflow exists
 
@@ -45,8 +87,11 @@ node build.mjs --media instatic-media-map.json     # final pass
 node audit.mjs                                     # GATE: must be 0 blockers
 node install-fonts.mjs --apply                     # Montserrat, once per instance
 node ship-convert-fetch.mjs                        # HTML -> nodes, inside the container
+node place-embeds.mjs                              # GATE: form + tracking Embed blocks
 node import.mjs --publish                          # pages + classes + lp.css, then publish
 node verify-live.mjs                               # GATE: must be 0 problems
+node verify-form.mjs                               # GATE: forms load, per campaign
+node verify-tracking.mjs                           # GATE: the number actually swaps
 ```
 
 Local preview and reference diffing, neither of which touches Instatic:
@@ -67,7 +112,8 @@ deliberate changes, all in `build.mjs`:
 1. **Scope.** Everything is wrapped in `.lp-page` and the stylesheet is namespaced to match.
 2. **Media.** Webflow CDN URLs become Instatic upload paths; `srcset`/`sizes` are dropped because
    Instatic regenerates its own variants. 114 URLs collapse to 27 files.
-3. **Scripts.** All stripped. See the GoHighLevel section below for what that cost.
+3. **Scripts.** Stripped from the markup, then the ones that matter are put back as Embed
+   blocks — see the GoHighLevel section below.
 4. **Styles.** The head `<style>` blocks are hoisted into `lp.css`. The **fluid rem engine** is
    among them and is load-bearing.
 5. **PDF.** The Patient Privacy Policy link is unwrapped to plain text — Instatic refuses
@@ -118,53 +164,77 @@ otherwise looked completely correct in the HTML. Read `publicPath`; never constr
 reports a perfect page as 100% broken. Only a real browser session tells the truth — that is why
 `verify-live.mjs` and `net-check.mjs` drive Chrome over CDP rather than fetching URLs.
 
-## The GoHighLevel form — the one real loss
+## The GoHighLevel forms — embedded, one per campaign
 
-**The embedded lead form could not be carried over.** It is an `<iframe>` to
-`api.leadconnectorhq.com` plus a `form_embed.js` loader, and Instatic publishes pages under a CSP
-it builds itself (`/app/src/core/publisher/cspPlan.ts`):
+The forms are embedded inline, exactly as on Webflow, via the **`webzite.embed-origins`**
+plugin (`deliver/process/18-instatic-embeds/`). Instatic's own publisher strips `<iframe>` and
+`<script>` and its base CSP carries `frame-src 'none'`; the plugin closes both halves — an Embed
+block module for the node graph, and a `publish.html` filter that rewrites the published page's
+CSP meta. The widening is **per page**: `/invisalign` publishes `frame-src 'self' https:` while
+`/about-us` still publishes `frame-src 'none'`.
 
-- `script-src` is `'none'`, relaxing to **exactly `'self'`** once the page has any script — never
-  to a third-party origin.
-- `frame-src` is `'none'`, and relaxes **only** for modules that declare CSP sources at render
-  time. The only module that does is the YouTube/Vimeo one.
-- The plugin SDK's `frontend.assets[]` ships assets **from the plugin zip**, so it cannot
-  allowlist a third-party origin either.
+**Two campaigns, two forms, and they must never cross:**
 
-Injecting the iframe from our own registered runtime script was tried and fails identically —
-`frame-src 'none'` blocks a scripted iframe exactly as it blocks a static one. That experiment is
-still in the repo (`lp-runtime.js`, `register-script.mjs`); the script was registered, proven to
-relax `script-src` only to `'self'`, and then removed with `--remove` so the site does not carry
-dead JS.
+| Campaign | GoHighLevel form | Pages |
+| :--- | :--- | :--- |
+| Invisalign | `YbX91GhEDKkCN4GH4gka` — "Contact Form Google Ads (Invisalign)" | `/invisalign`, `/invisalign-consultation` |
+| $189 New Patient | `AFu5BpJpMjgSnSf8yybc` — "Contact Form Google Ads (NP)" | `/new-patient-special`, `/new-patient-special-consultation` |
+| — | none (post-submission) | `/invisalign-thank-you`, `/new-patient-thank-you` |
 
-**What ships instead:** the form card now holds a prominent button linking to the *same*
-GoHighLevel form, hosted by GoHighLevel (`https://api.leadconnectorhq.com/widget/form/<id>`,
-verified to render standalone), plus a "Prefer to talk? Call (281) 769-8878." line. **The form ids
-are unchanged**, so submissions land in the same pipeline and automations as before. What is lost
-is that the visitor fills it on a GoHighLevel page instead of inline — a real conversion-rate cost.
+The id is read from the page being built, never assumed. `place-embeds.mjs` asserts each page ends
+up with the id its own Webflow original carried, that the two campaigns resolve to one id each, and
+that those two ids differ — a crossed mapping would put Invisalign leads in the New Patient
+pipeline. `verify-form.mjs` then re-checks it against the live pages.
 
-Two smaller casualties of the same CSP:
+The vendor snippet is carried **verbatim** — the iframe *and* GoHighLevel's `form_embed.js`, which
+is what resizes the iframe to the form. Verified live: iframe 200, loader 200, and the rendered
+size matches the Webflow reference exactly (514x749 on the landing pages, 485x721 on the
+consultations).
 
-- **Call-tracking numbers are gone.** The Webflow page loads a GoHighLevel `number_pool.js` that
-  swaps the practice's public number for a per-campaign one — the reference page renders
-  **(281) 645-5375** where the markup says (281) 769-8878. Every ad call now attributes to the
-  main number. This matters for measuring the campaigns and should be raised with Brandklout.
-- **The Elfsight review widget** (4 pages) does not load. The surrounding section still renders.
+### Call tracking and reviews are restored too
+
+The same mechanism carries the scripts the port had stripped, as a second Embed block per page
+(`fit: 'auto'`, so it adds no visible box):
+
+- **`number_pool.js` + `user_session.js`** — the call-tracking number pool, on all six pages.
+  Verified live: every page now renders **(281) 645-5375** in place of the markup's public
+  (281) 769-8878, matching the Webflow reference on all six. Without this every ad call attributes
+  to the main site.
+- **Elfsight `platform.js`** — the review widget on the four non-thank-you pages.
+
+`tracking.json` is built from what each page actually loaded on Webflow, filtered to an explicit
+host allowlist, so this cannot silently start shipping some other vendor's script.
+`link.msgsndr.com/js/form_embed.js` is deliberately not in that list — it travels inside the form
+snippet, with the form it belongs to.
+
+> [!NOTE]
+> **Headless Chrome is not proof here.** The form card renders blank in headless on our page *and*
+> on the Webflow original, because the widget lazy-loads. Confirmed in a normal browser instead:
+> the form renders its Name / Phone / Email / Treatment Type / Message fields, and the header shows
+> the swapped tracking number. `verify-form.mjs` is comparative for this reason — same iframe, same
+> id, same network result on ours and the reference.
 
 ## Open items
 
-1. **The apex domain does not resolve.** See above — needs Cloudflare dashboard access.
-2. **Restore inline forms + call tracking.** Needs Instatic to allow third-party `frame-src`/
-   `script-src`. The supported route is a first-party Instatic module or a change to `cspPlan.ts`
-   upstream — **not** a patch of the vendor build in the container, which a redeploy erases.
-3. **`noindex` is not set.** Four of the six Webflow originals carried `noindex, nofollow`, and
-   the v2 build report flagged the other two as needing it. Instatic's page rows only support
-   `title`/`slug`/`body` — there is no per-page robots or meta-description field — so the port
-   could not carry it. These six thin pages are therefore indexable. `build.mjs` records the
-   intended value on each page JSON for whenever a mechanism exists.
-4. **Meta descriptions are not published** either, for the same reason. This is pre-existing
-   behaviour for all 77 pages, not new.
-5. **No favicon** is served on any page of this site (a site-wide gap, not introduced here).
+1. **The apex domain does not resolve.** `masonparkdental.com` has no A/AAAA record, so only `www`
+   works and any ad, GBP link or citation on the bare domain is dead. Needs Cloudflare dashboard
+   access — the token in `bk-dr-nahlah/.env` reads zones but is not authorised for `dns_records`.
+2. **Promote the other three plugins to `deliver/process/`.** `aeo-schema`, `open-graph` and
+   `link-editor` are required on every site but live only in the `bk-dr-nahlah` worktree, the way
+   `embed-origins` did before it was promoted. Until then every new site has to reach across
+   worktrees for them, which is exactly the fragility SYSTEM_RULES §3 warns about.
+3. **`noindex` is not set.** Four of the six Webflow originals carried `noindex, nofollow`, and the
+   v2 build report flagged the other two as needing it. Instatic's page rows support only
+   `title`/`slug`/`body` — no per-page robots or meta-description field — so the port could not
+   carry it. `build.mjs` records the intended value on each page JSON for whenever a mechanism
+   exists. `webzite.open-graph` writes `<head>` tags at publish and may be the right home for it.
+4. **Meta descriptions are not published** either, for the same reason. Pre-existing for all 77
+   pages, not new here.
+5. **No favicon** is served on any page of this site (site-wide, not introduced here).
+6. **The security bargain of `compatible` mode should be said out loud at handover**, as the
+   18-instatic-embeds directive instructs: on a page carrying an embed, what stands between the
+   site and a maliciously injected script is `default-src`. What stood between it and a *pasted*
+   one was always the person pasting. It is per page, never site-wide.
 
 ## Version Control
 

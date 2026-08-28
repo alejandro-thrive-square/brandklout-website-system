@@ -8,6 +8,7 @@
  *   lp.css              the namespaced stylesheet (see scope-css.mjs)
  *   media-manifest.json every local file to upload, with its size
  *   forms.json          which page carries which GoHighLevel form
+ *   tracking.json       the third-party scripts each page keeps (call tracking, reviews)
  *
  * WHAT CHANGES, AND WHY ONLY THIS
  * The pages carry no Webflow interactions at all - zero `data-w-id`, zero
@@ -23,11 +24,13 @@
  *                Instatic regenerates its own responsive variants, and a
  *                candidate pointing at a file we never uploaded is a broken
  *                image. 114 URLs become 26 files.
- *   3. SCRIPTS.  Every <script> is stripped. Two of them do real work and come
- *                back as a registered Instatic runtime script instead: the
- *                GoHighLevel form embed and the call-tracking number pool.
- *                The rest (WebFont, Webflow's touch-class shim, GSAP, the
- *                MPD runtime) only enhance pages that already render.
+ *   3. SCRIPTS.  Every <script> is stripped from the markup. The ones that do
+ *                real work come back as `webzite.embed-origins` Embed blocks,
+ *                placed on the node graph by place-embeds.mjs: the GoHighLevel
+ *                form (with its own loader) and, per tracking.json, the call
+ *                -tracking number pool and the review widget. The rest
+ *                (WebFont, Webflow's touch-class shim, jQuery, webflow.js,
+ *                GSAP, the MPD runtime) only enhance pages that already render.
  *   4. STYLES.   <style> blocks in the head and body are hoisted into lp.css.
  *                The fluid rem engine is among them and is load-bearing.
  *   5. PDF.      The Patient Privacy Policy link is unwrapped to plain text.
@@ -56,6 +59,28 @@ const SLUGS = [
 ];
 
 const CDN = /https:\/\/(cdn\.prod\.website-files\.com|d3e54v103j8qbb\.cloudfront\.net)\/[^"'\s)]+/g;
+
+/**
+ * Third-party scripts carried over from the Webflow page, by host.
+ *
+ * Everything else the original loads is deliberately dropped: jQuery and
+ * webflow.js (no interactions survive the port anyway), the four GSAP bundles
+ * and the MPD runtime (they only enhance pages that already render), and
+ * WebFont (Montserrat is installed into Instatic instead).
+ *
+ *   backend.leadconnectorhq.com  the call-tracking number pool. On the Webflow
+ *                                page it swaps the practice's public number for
+ *                                a per-campaign one - the reference renders
+ *                                (281) 645-5375 where the markup says
+ *                                (281) 769-8878. Without it every ad call
+ *                                attributes to the main number.
+ *   elfsightcdn.com              the review widget the four non-thank-you pages
+ *                                already carry a container for.
+ *
+ * `link.msgsndr.com/js/form_embed.js` is NOT here: it travels inside the form
+ * snippet, so it lands with the form it belongs to.
+ */
+const TRACKING_HOSTS = /^https:\/\/(backend\.leadconnectorhq\.com|elfsightcdn\.com)\//;
 
 // ---------------------------------------------------------------- utilities
 
@@ -88,20 +113,23 @@ function harvestStyles(html) {
 /**
  * The GoHighLevel form is an <iframe> plus its loader script, inside a w-embed.
  *
- * IT CANNOT BE EMBEDDED ON INSTATIC. The publisher builds the page CSP from
- * what the node tree contains (`core/publisher/cspPlan.ts`): `frame-src`
- * relaxes only for modules that declare CSP sources at render time, and the
- * only module that does is the YouTube/Vimeo video one. The plugin SDK's
- * `frontend.assets[]` ships assets FROM THE PLUGIN ZIP, so it cannot allowlist
- * a third-party origin either. Injecting the iframe from our own runtime script
- * fails the same way - `frame-src 'none'` blocks a scripted iframe exactly as
- * it blocks a static one.
+ * Instatic's own publisher would strip both and its base CSP carries
+ * `frame-src 'none'`, so a plain port cannot keep them. The
+ * `webzite.embed-origins` plugin is what makes it possible: it registers an
+ * Embed block module AND rewrites the published page's CSP meta at publish
+ * time, per page, for pages that actually contain an embed.
  *
- * So the form becomes a link to the SAME GoHighLevel form, hosted by
- * GoHighLevel. The form id is unchanged, so submissions land in the same
- * pipeline and automations as before; what is lost is that the visitor fills it
- * on a GoHighLevel page instead of inline. That is a real conversion-rate cost
- * and it is recorded in the README as the top open item.
+ * This pass records the vendor snippet VERBATIM and leaves a placeholder in its
+ * place. `place-embeds.mjs` swaps that placeholder for a real Embed node after
+ * conversion - the HTML importer knows nothing about plugin modules, so the
+ * substitution has to happen on the node graph.
+ *
+ * Two campaigns, two different forms, and they must not be crossed:
+ *   Invisalign          YbX91GhEDKkCN4GH4gka  ("Contact Form Google Ads (Invisalign)")
+ *   $189 New Patient    AFu5BpJpMjgSnSf8yybc  ("Contact Form Google Ads (NP)")
+ * Each appears on its campaign's landing page AND its consultation page; the
+ * two thank-you pages carry no form. The id is read out of the page being
+ * built, never assumed, so a page can only ever get its own campaign's form.
  */
 function extractForms(html, slug, forms) {
   return html.replace(
@@ -111,15 +139,15 @@ function extractForms(html, slug, forms) {
       const name = (block.match(/data-form-name="([^"]+)"/) || [])[1] ?? "";
       const height = (block.match(/data-height="([^"]+)"/) || [])[1] ?? "723";
       if (!id) return block;
-      forms.push({ slug, formId: id, formName: name, height: Number(height) });
-      // The label mirrors the card's own heading, which reads "Start Your ..."
-      // on all four pages that carry a form.
-      return `<div class="lp_form-embed">`
-        + `<a class="button is-full" href="https://api.leadconnectorhq.com/widget/form/${id}"`
-        + ` target="_blank" rel="noopener noreferrer">Start your consultation</a>`
-        + `<p class="lp_form-note">Prefer to talk? Call `
-        + `<a href="tel:+12817698878">(281) 769-8878</a>.</p>`
-        + `</div>`;
+      // The snippet is the w-embed's contents - the iframe and its loader -
+      // with the Webflow wrapper removed. Kept byte-for-byte so the form
+      // behaves exactly as it does on the Webflow page.
+      const snippet = block
+        .replace(/^<div class="w-embed w-script">/i, "")
+        .replace(/<\/div>$/i, "")
+        .trim();
+      forms.push({ slug, formId: id, formName: name, height: Number(height), snippet });
+      return `<div class="lp_form-embed" data-ghl-form="${id}" data-ghl-height="${height}"></div>`;
     },
   );
 }
@@ -175,6 +203,7 @@ fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, "pages"), { recursive: true });
 
 const forms = [];
+const tracking = [];
 const used = new Set();
 const report = [];
 let spacesRestored = 0;
@@ -195,7 +224,17 @@ for (const slug of SLUGS) {
   let html = body;
   html = harvestStyles(html);
   html = extractForms(html, slug, forms);
-  html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
+  // Keep the tracking/review script tags before dropping the rest; they come
+  // back as their own Embed block in place-embeds.mjs.
+  const keepScripts = [];
+  html = html.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, (tag) => {
+    const src = (tag.match(/\bsrc="([^"]+)"/i) || [])[1];
+    if (src && TRACKING_HOSTS.test(src)) {
+      keepScripts.push(`<script src="${src}"${/\basync\b/i.test(tag) ? " async" : ""}></script>`);
+    }
+    return "";
+  });
+  if (keepScripts.length) tracking.push({ slug, scripts: keepScripts });
   html = html.replace(/<noscript\b[^>]*>[\s\S]*?<\/noscript>/gi, "");
   html = unwrapEmbeds(html);
   html = unwrapPdf(html);
@@ -226,13 +265,10 @@ const webflow = fs.readFileSync(path.join(CAPTURE, "css", "webflow-shared.css"),
 let css = scopeCss(`${webflow}\n${bundle}`);
 // Authored already scoped, so these deliberately bypass the transform above.
 css += `\n${MARKER_CSS}\n`;
-// The form card held a 723px iframe; it now holds a button and a note. Its
-// `min-height:40rem` was reserving space for that iframe and would otherwise
-// leave a tall empty white box in the hero. These come last in the sheet, so
-// they win over the Webflow rule at equal specificity.
-css += `.lp-page .lp_form-embed{display:flex;flex-direction:column;gap:0.75rem}\n`;
-css += `.lp-page .lp_form-note{margin:0;font-size:0.875rem;opacity:0.75}\n`;
-css += `.lp-page .lp_form-card{min-height:0}\n`;
+// The Embed block fills the form card again, exactly as the Webflow iframe
+// did, so the card keeps its own `min-height:40rem` and needs no override -
+// only the embed wrapper needs to span the card.
+css += `.lp-page .lp_form-embed{width:100%}\n`;
 // The two chevrons are referenced from the stylesheet, so they need the same
 // rewrite the markup got.
 css = css.replace(CDN, (u) => {
@@ -252,6 +288,7 @@ const manifest = [...used].sort().map((f) => {
 const missing = manifest.filter((m) => m.bytes === 0);
 fs.writeFileSync(path.join(OUT, "media-manifest.json"), JSON.stringify(manifest, null, 2));
 fs.writeFileSync(path.join(OUT, "forms.json"), JSON.stringify(forms, null, 2));
+fs.writeFileSync(path.join(OUT, "tracking.json"), JSON.stringify(tracking, null, 2));
 
 console.log("page                              bytes  forms  title");
 for (const r of report) {

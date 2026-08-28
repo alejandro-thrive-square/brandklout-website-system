@@ -169,3 +169,6 @@ deliver/brandklout/mason-park/workflows/10-lp-instatic/.tmp/capture/assets/
 deliver/brandklout/mason-park/workflows/10-lp-instatic/.tmp/compare/
 deliver/brandklout/mason-park/workflows/10-lp-instatic/.tmp/converted-pages.json
 deliver/brandklout/mason-park/workflows/10-lp-instatic/.tmp/preview.log
+
+# Plugin zips are build output of pack-plugin.mjs; the plugin SOURCE is committed.
+deliver/process/18-instatic-embeds/.tmp/

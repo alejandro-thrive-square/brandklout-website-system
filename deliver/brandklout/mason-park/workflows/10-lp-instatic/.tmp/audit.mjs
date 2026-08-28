@@ -37,7 +37,9 @@ for (const p of pages) {
   const imgs = [...p.html.matchAll(/<img[^>]+src="([^"]+)"/g)].map((m) => m[1]);
   const links = [...p.html.matchAll(/<a[^>]+href="([^"]+)"/g)].map((m) => m[1]);
   const h1 = (p.html.match(/<h1\b/g) || []).length;
-  const form = (p.html.match(/leadconnectorhq\.com\/widget\/form\//g) || []).length;
+  // The form is a placeholder here; place-embeds.mjs turns it into a real
+  // Embed block after conversion and gates the campaign->form mapping.
+  const form = (p.html.match(/data-ghl-form="/g) || []).length;
 
   // Text retention: the port must not silently drop copy.
   const strip = (s) => s.replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim();

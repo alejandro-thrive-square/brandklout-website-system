@@ -57,7 +57,9 @@ sock.addEventListener("message", async (e) => {
   // that no Instatic page has.
   if (m.method === "Network.responseReceived") {
     const { status, url } = m.params.response;
-    if (![200, 204, 206, 304].includes(status)) netBad.push(`${status} ${url}`);
+    // 201 is a success: GoHighLevel's number pool CREATES a number assignment
+    // for the visitor, and answers 201 when it does.
+    if (![200, 201, 204, 206, 304].includes(status)) netBad.push(`${status} ${url}`);
   }
 });
 await new Promise((r) => sock.addEventListener("open", r, { once: true }));
@@ -90,7 +92,7 @@ async function probe(url, width) {
       bodyFont: getComputedStyle(document.body).fontFamily.split(',')[0].replace(/["']/g,''),
       tel: document.querySelectorAll('a[href^="tel:"]').length,
       booking: document.querySelectorAll('a[href*="flexbook.me"]').length,
-      ghl: document.querySelectorAll('a[href*="leadconnectorhq.com/widget/form/"]').length,
+      ghl: document.querySelectorAll('iframe[src*="leadconnectorhq.com/widget/form/"]').length,
       h1: (document.querySelector('h1')||{}).innerText||'',
       lp: !!document.querySelector('.lp-page')
     })`,
@@ -115,7 +117,7 @@ for (const slug of LP) {
   if (d.overflow || m.overflow) problems.push(`${slug}: horizontal overflow (desktop=${d.overflow} mobile=${m.overflow})`);
   if (!d.tel) problems.push(`${slug}: no tel: link`);
   if (slug.includes("thank-you") ? d.ghl !== 0 : d.ghl < 1) {
-    problems.push(`${slug}: expected ${slug.includes("thank-you") ? "no" : "a"} GoHighLevel form link, found ${d.ghl}`);
+    problems.push(`${slug}: expected ${slug.includes("thank-you") ? "no" : "an"} embedded GoHighLevel form, found ${d.ghl}`);
   }
   // Instatic serves no favicon on ANY page, and Cloudflare injects a beacon
   // script and an obfuscation font that its own CSP then blocks - both are
