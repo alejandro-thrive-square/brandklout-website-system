@@ -42,6 +42,10 @@ node verify-embed-editor.mjs --place        # is a person OFFERED the block?
 node verify-embed-editor.mjs --check        # 11 assertions, publishes nothing
 node verify-embed-editor.mjs --cleanup
 
+node verify-embed-canvas.mjs --place        # does the CANVAS show the card?
+node verify-embed-canvas.mjs --check        # 15 assertions, publishes nothing
+node verify-embed-canvas.mjs --cleanup
+
 node verify-embed-scripts.mjs --place       # does a pasted SCRIPT actually run?
 node verify-embed-scripts.mjs --check
 node verify-embed-scripts.mjs --cleanup
@@ -80,7 +84,13 @@ Neither was a preview of the published page, so neither was worth showing.
 
 The card keeps the two things the live render did give: the block stays **selectable and stylable** (same root shape, machine-generated attributes only, so `injectClassIntoRootElement` still lands the author class on it), and the box is **sized to what will publish** — fixed height, aspect ratio, or the auto starting height as a `min-height` — so the page around it lays out honestly. It also says something the live render could not: for a snippet, **the hosts the paste reaches**, which are exactly the origins that must appear in this plugin's settings.
 
-The card root carries `data-wz-embed-card="1"` alongside the usual `data-wz-embed="<fit>"`. `render()` never emits it, so a published page has none. Gates that probe `[data-wz-embed], .wz-embed-note` keep working; a gate that wants to prove the canvas is *not* rendering the embed should assert on `data-wz-embed-card`.
+The card root carries `data-wz-embed-card="1"` alongside the usual `data-wz-embed="<fit>"`. `render()` never emits it, so a published page has none. Gates that probe `[data-wz-embed], .wz-embed-note` keep working.
+
+`verify-embed-canvas.mjs` is the live gate for all of this, and it **publishes nothing** — the editor reads the draft, so the temp page never needs baking. It writes three CONFIGURED blocks straight into a draft (URL/auto, URL/ratio, and a snippet carrying a `<script>` *and* a `<style>`), opens the real editor under CDP and asserts 15 things across all three breakpoint canvases: every block rendered a card, **no `<iframe>` was created anywhere**, **no `<script>`/`<style>`/`<link>` from the snippet reached the editor document**, the snippet markup never rendered, **the editor made no network request to any vendor**, and each card names its host.
+
+It deliberately skips the inserter, which is what makes it the reliable one — see the gotcha below.
+
+**LIVE 2026-08-28 — 15/15 on both sites**, Dr. Nahlah (`encorercm.com`) and Mason Park (`mason-park.up.railway.app`), both then upgraded to plugin `1.4.0`.
 
 ## Why a plugin can do this when a module cannot
 
@@ -135,6 +145,9 @@ has to be reviewed and added deliberately. Inspection now runs with an empty gra
 - **A created CSP directive must inherit from `default-src`.** An absent directive falls back to it, so writing `font-src https://vendor` on a page that had no `font-src` silently revoked the site's own webfonts. It surfaces as one violation per font file, which reads like a font problem. `widen()` seeds from `default-src` first; any new directive must do the same.
 - **`escapeProps()` runs before `render()` on the publish path** and HTML-escapes every non-`url` string prop, and the plugin control vocabulary has no `richtext`/`svg` type — so a pasted snippet arrives as `&lt;iframe …&gt;`. The module decodes then escapes exactly once, which is idempotent and therefore also correct on the canvas path, where props arrive RAW.
 - **The editor canvas mounts module HTML with `dangerouslySetInnerHTML`**, so `<script>` never runs there. Iframes do (the admin CSP sets no `frame-src`). This is why `preview()` shows a card and not the embed — see §The canvas shows a card.
+- **`verify-embed-editor.mjs`'s picker click fails repeatably, and it is NOT a product fault.** On 2026-08-28 it failed the same four assertions on BOTH sites, twice each: pack fetched 200, "Embed is offered in the inserter" ok, then `inCanvas: 0`, `sidebarTestids: []` — nothing was ever selected. `verify-embed-canvas.mjs` passed 15/15 on the same sites minutes later with configured blocks written into the draft, which proves the module, `preview()` and the canvas render are all fine and isolates the failure to the synthetic click on the picker item. **Do not debug the plugin from a red `verify-embed-editor.mjs`** — run the canvas gate first; if that is green the block itself works. A real trusted click (Chrome MCP `computer`) is the way to check the inserter by hand.
+- **A gate whose assertions are all negatives passes vacuously on an empty page.** `verify-embed-canvas.mjs` asserts "no iframe", "no injected script", "no vendor request" — every one of which an editor that never loaded satisfies perfectly. The first Mason Park run reported four greens over zero rendered canvases. Every such assertion is now gated behind `rendered` (3 canvases × 3 cards). Write the positive first, then hang the negatives off it.
+- **60s is not enough for a cold Railway dyno.** That first Mason Park run failed only because the editor-ready ceiling was 60s; at 120s the identical run passed 15/15. A short ceiling reports a working site as a dead editor.
 - **The deployed admin has no `toolbar-add-module-btn`.** That is in the v0.0.16 zip only; a gate written from the source waits for a button that never appears. The real doors are `canvas-notch-add-btn` and `dom-tree-insert-module`. Dump `[data-testid]` off the running page rather than trusting the zip for admin DOM.
 - **A widget that loads and renders nothing is usually not CSP.** Prove it away from the client's site before blaming the platform: `probe-elfsight-bare.mjs` serves the same snippet from localhost with no CSP at all. On Dr. Nahlah that exonerated the platform twice — once for a vendor script that was pure convenience (`probe-widget-postmessage.mjs`), once for a widget whose app id belonged to another client.
 - **Headless is not proof of what a visitor sees.** Lazy-loading widgets (Elfsight among them) may never finish in headless Chrome. Confirm in a normal browser before calling a widget broken.
@@ -156,7 +169,7 @@ node test-embed-origins.mjs     # 54 — CSP filter, both modes, hashes, inherit
 node test-embed-module.mjs      # 54 — the Embed block, publisher and canvas paths
 ```
 
-Both run with no host, no network and no site. What they cannot prove is that the host registers the module and calls it — that is what `verify-embed-editor.mjs` (the editor path) and `verify-embed-scripts.mjs` (the published path) are for.
+Both run with no host, no network and no site. What they cannot prove is that the host registers the module and calls it — that is what `verify-embed-editor.mjs` (is the block offered), `verify-embed-canvas.mjs` (does the canvas render the card) and `verify-embed-scripts.mjs` (the published path) are for. Only the last of those publishes.
 
 ## Technical Setup
 
@@ -173,6 +186,7 @@ Both run with no host, no network and no site. What they cannot prove is that th
 - `set-origins.mjs` — read / set / clear the allowlist
 - `test-embed-origins.mjs`, `test-embed-module.mjs` — offline suites
 - `verify-embed-editor.mjs` — is the block offered to a person? (publishes nothing)
+- `verify-embed-canvas.mjs` — does the CANVAS show the card and not the embed? 15 assertions against the real editor, configured blocks written into a draft, inserter skipped (publishes nothing)
 - `verify-embed-module.mjs`, `verify-embed-scripts.mjs` — published-page gates (these publish)
 - `probe-widget-postmessage.mjs`, `probe-elfsight-bare.mjs` — answer "is this the vendor's fault?" away from the client's site
 - `handoff/embed-block-guide.html` — the non-engineer guide; give a marketer this and a developer the directive
