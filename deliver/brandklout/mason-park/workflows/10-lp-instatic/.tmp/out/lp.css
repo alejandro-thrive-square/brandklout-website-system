@@ -5951,3 +5951,8 @@ margin: 0rem !important;
 
 .lp-page .lp-sp::after{content:" ";white-space:pre-wrap}
 .lp-page .lp_form-embed{width:100%}
+.lp-page .w-dropdown-toggle .lp_faq_icon,
+.lp-page .w-dropdown-toggle .confirm_faq_icon{display:inline-block;transition:transform .18s ease}
+.lp-page .w-dropdown-toggle.w--open .lp_faq_icon,
+.lp-page .w-dropdown-toggle.w--open .confirm_faq_icon{transform:rotate(45deg)}
+.lp-page .w-dropdown-toggle{cursor:pointer}

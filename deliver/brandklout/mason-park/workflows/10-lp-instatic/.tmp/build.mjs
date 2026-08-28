@@ -269,6 +269,17 @@ css += `\n${MARKER_CSS}\n`;
 // did, so the card keeps its own `min-height:40rem` and needs no override -
 // only the embed wrapper needs to span the card.
 css += `.lp-page .lp_form-embed{width:100%}\n`;
+
+// FAQ accordions. The reveal itself needs no new CSS - Webflow's own
+// `.w-dropdown-list.w--open{display:block}` does it, and lp-faq.js adds the
+// class webflow.js would have. This is only the open/closed affordance: the
+// `+` glyph rotates into an `x`. Purely visual, so the copy is untouched.
+css += `.lp-page .w-dropdown-toggle .lp_faq_icon,\n`
+  + `.lp-page .w-dropdown-toggle .confirm_faq_icon{display:inline-block;transition:transform .18s ease}\n`;
+css += `.lp-page .w-dropdown-toggle.w--open .lp_faq_icon,\n`
+  + `.lp-page .w-dropdown-toggle.w--open .confirm_faq_icon{transform:rotate(45deg)}\n`;
+// The toggle is a <div>; make it read as interactive.
+css += `.lp-page .w-dropdown-toggle{cursor:pointer}\n`;
 // The two chevrons are referenced from the stylesheet, so they need the same
 // rewrite the markup got.
 css = css.replace(CDN, (u) => {

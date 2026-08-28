@@ -2,8 +2,8 @@
 
 **Status: LIVE, 2026-08-28.** All six paid-traffic landing pages are published on the Instatic
 site and answer on the same URLs the ads already point at, **with their GoHighLevel forms embedded
-inline and call tracking working**. `verify-live.mjs`, `verify-form.mjs` and `verify-tracking.mjs`:
-**0 problems each.**
+inline and call tracking working**. `verify-live.mjs`, `verify-form.mjs`, `verify-tracking.mjs` and
+`verify-faq.mjs`: **0 problems each.**
 
 This site now carries the four Webzite plugins that belong on every new site — see
 [Plugins](#plugins-required-on-every-site).
@@ -92,6 +92,8 @@ node import.mjs --publish                          # pages + classes + lp.css, t
 node verify-live.mjs                               # GATE: must be 0 problems
 node verify-form.mjs                               # GATE: forms load, per campaign
 node verify-tracking.mjs                           # GATE: the number actually swaps
+node register-script.mjs lp-faq.js --publish       # FAQ accordions (once per instance)
+node verify-faq.mjs                                # GATE: every FAQ opens and closes
 ```
 
 Local preview and reference diffing, neither of which touches Instatic:
@@ -213,6 +215,48 @@ snippet, with the form it belongs to.
 > the form renders its Name / Phone / Email / Treatment Type / Message fields, and the header shows
 > the swapped tracking number. `verify-form.mjs` is comparative for this reason — same iframe, same
 > id, same network result on ours and the reference.
+
+## The FAQ accordions — fixed here, broken on Webflow
+
+The FAQ items are Webflow **Dropdown** components:
+
+```html
+<div class="… w-dropdown">
+  <div class="… w-dropdown-toggle">question<span class="…_icon">+</span></div>
+  <nav  class="… w-dropdown-list">answer</nav>
+</div>
+```
+
+The stylesheet hides every answer with `.w-dropdown-list{display:none}` and reveals it only via
+`.w-dropdown-list.w--open{display:block}`. That class is added by `webflow.js` — which the port
+strips — so on the imported pages every answer was permanently hidden and clicking did nothing.
+**26 answers across 4 pages** (7 on `/invisalign`, 5 on `/new-patient-special`, 7 on each
+thank-you page; the consultation pages have none).
+
+> [!IMPORTANT]
+> **They do not work on the Webflow original either.** Verified with a real trusted click on
+> `mason-park-dental.webflow.io`: `webflow.js` initialises the toggles — it adds `role`,
+> `aria-expanded` and `tabindex` — but the click never opens them; `aria-expanded` stays `"false"`
+> and the answer stays `display:none`. This is a pre-existing defect in the v2 Webflow build, not
+> something the port lost, and there was no working reference behaviour to copy. Those answers have
+> never been readable by a visitor on either site.
+
+`lp-faq.js` adds back the one thing the CSS is waiting for — the `w--open` class — so the reveal
+needs no new styling. It ships as an Instatic **runtime script asset**, served same-origin from
+`/_instatic/assets/`, so it runs under `script-src 'self'` and needs no CSP widening of its own:
+
+```bash
+node register-script.mjs lp-faq.js --publish
+```
+
+Three deliberate choices, since there was no reference to match:
+
+- **Items toggle independently.** Webflow's dropdown would also close on an outside click; that
+  makes sense for a menu, not for a FAQ someone is reading.
+- **Keyboard and screen-reader support is set up in the script** (`role="button"`, `tabindex`,
+  `aria-expanded`, `aria-controls`, Enter/Space) because `webflow.js` is not there to do it.
+- **The `+` rotates 45° into an `×` when open** — the only new CSS, purely visual, so no copy
+  changes.
 
 ## Open items
 

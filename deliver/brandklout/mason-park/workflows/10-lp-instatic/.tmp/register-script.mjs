@@ -1,8 +1,9 @@
 /**
- * Register lp-runtime.js as an Instatic runtime script, scoped to the six
+ * Register a landing-page runtime script with Instatic, scoped to the six
  * landing pages.
  *
- *   node register-script.mjs [--publish]
+ *   node register-script.mjs lp-faq.js [--publish]
+ *   node register-script.mjs lp-faq.js --remove [--publish]
  *
  * The script asset is a SiteFile of type 'script'; `site.runtime.scripts` is
  * keyed by that file's id and carries placement, timing and scope. Scope is
@@ -10,12 +11,14 @@
  * the main site must keep its own phone number and pull in no third-party JS
  * it did not have before.
  *
- * This also settles an open question: the instance currently publishes
- * `script-src 'none'; frame-src 'none'`, while the Dr Nahlah instance running
- * the same image publishes a permissive policy. If the policy tracks whether
- * the site has any runtime script, registering one flips it and the GoHighLevel
- * form works. Verify with `node verify-live.mjs` after publishing - do not
- * assume it worked.
+ * Currently used for `lp-faq.js`, which puts the FAQ accordions back: they are
+ * Webflow Dropdown components whose answers are revealed by a `w--open` class
+ * that only `webflow.js` adds, and the port strips `webflow.js`.
+ *
+ * Always read back after saving. A SiteFile without an `id` is dropped
+ * silently - the save answers ok:true and `files` comes back empty - so this
+ * re-fetches the document and asserts both the file and its runtime entry
+ * survived, rather than trusting the ok.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -25,7 +28,12 @@ import { api, getSite, getPages, publish as doPublish, publishStatus } from "../
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PUBLISH = process.argv.includes("--publish");
-const SCRIPT_PATH = "src/scripts/lp-runtime.js";
+const FILE = process.argv[2] && !process.argv[2].startsWith("--") ? process.argv[2] : null;
+if (!FILE) {
+  console.error("usage: node register-script.mjs <file.js> [--remove] [--publish]");
+  process.exit(2);
+}
+const SCRIPT_PATH = `src/scripts/${FILE}`;
 
 const ALPHABET = "useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict";
 const newId = () => Array.from(crypto.randomBytes(21), (b) => ALPHABET[b & 63]).join("");
@@ -36,16 +44,17 @@ const SLUGS = [
 ];
 
 const REMOVE = process.argv.includes("--remove");
-const js = fs.readFileSync(path.join(HERE, "lp-runtime.js"), "utf8");
+const js = fs.readFileSync(path.join(HERE, FILE), "utf8");
 const site = await getSite();
 const shell = site.site;
 
-// The answer turned out to be no: registering a script does relax `script-src`
-// from 'none' to 'self', but only to 'self'. The GoHighLevel iframe still hits
-// `frame-src 'none'`, and number_pool.js / form_embed.js / elfsight are all
-// cross-origin so `script-src 'self'` blocks them too. Keeping the script would
-// ship JS that cannot do anything AND leave a needlessly relaxed policy, so
-// --remove takes it back out. See build.mjs's extractForms for the full note.
+// A registered script is served same-origin from /_instatic/assets/, so it runs
+// under `script-src 'self'` and needs no CSP widening of its own. That is why
+// the FAQ fix ships this way rather than as an inline snippet in an Embed
+// block. (An earlier experiment tried to inject the GoHighLevel iframe from a
+// script like this; that could never work, because `frame-src 'none'` blocks a
+// scripted iframe exactly as it blocks a static one. The forms are Embed blocks
+// instead - see build.mjs's extractForms.)
 if (REMOVE) {
   const files = (shell.files ?? []).filter((f) => f.path !== SCRIPT_PATH);
   const gone = (shell.files ?? []).find((f) => f.path === SCRIPT_PATH);
