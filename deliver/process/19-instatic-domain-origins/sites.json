@@ -16,13 +16,13 @@
       "client": "dr-nahlah",
       "adminUrl": "https://encorercm.com",
       "alternates": ["https://www.drnahlah.com", "https://drnahlah.com"],
-      "note": "The Instatic origin is encorercm.com and PUBLIC_ORIGIN is set for it (apex + www both pass). The CLIENT-facing domain is drnahlah.com, which 301s to www.drnahlah.com and serves the admin — but is NOT in PUBLIC_ORIGIN, so it is a trap: log in fine, cannot save. Until that is fixed, send encorercm.com/admin."
+      "note": "The Instatic origin is encorercm.com and PUBLIC_ORIGIN is set for it (apex + www both pass). The CLIENT-facing domain is drnahlah.com, which 301s to www.drnahlah.com and serves the admin — but is NOT in PUBLIC_ORIGIN, so it is a trap: the login page renders and the login POST is refused with 403. Until that is fixed, send encorercm.com/admin."
     },
     {
       "client": "mason-park",
       "adminUrl": "https://mason-park.up.railway.app",
       "alternates": ["https://www.masonparkdental.com"],
-      "note": "PUBLIC_ORIGIN is NOT set on the host, so it falls back to RAILWAY_PUBLIC_DOMAIN. www.masonparkdental.com serves the admin but is rejected as a foreign origin — a trap. Until PUBLIC_ORIGIN is set, the Railway host is the only URL to hand out. Apex masonparkdental.com does not resolve."
+      "note": "PUBLIC_ORIGIN is NOT set on the host, so it falls back to RAILWAY_PUBLIC_DOMAIN. www.masonparkdental.com serves the login page but the login POST is refused with 403 invalid origin — a trap. Until PUBLIC_ORIGIN is set, the Railway host is the only URL to hand out. Apex masonparkdental.com does not resolve."
     }
   ]
 }

@@ -3,9 +3,9 @@ Point a client domain at an Instatic site, or work out which admin URL is safe t
 Read 19-instatic-domain-origins.md first. The short version:
 
 Instatic's admin rejects any state-changing request whose Origin is not in PUBLIC_ORIGIN.
-A half-done cutover therefore produces an admin that looks perfect — login works, the
-editor opens — and then 403s on the first save with "invalid origin", which reads like a
-permissions problem and is not.
+Logging in is one. So a half-done cutover produces an address that looks perfect — the
+login form renders normally — and then refuses the login itself with "invalid origin",
+which reads like a permissions or password problem and is neither. Nobody gets in.
 
 If you only need to answer "what link do I give my teammate?":
 
@@ -15,7 +15,7 @@ If you only need to answer "what link do I give my teammate?":
 
 That sends no credentials and changes nothing. Anyone can run it. Send the URL printed
 after GIVE THIS LINK, and never a host marked TRAP — a TRAP host serves a working-looking
-admin that cannot save.
+login page that refuses to let anyone in.
 
 If you are doing an actual cutover, run the eight numbered steps in the directive. The two
 that get skipped and cause every incident:
