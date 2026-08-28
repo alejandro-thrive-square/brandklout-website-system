@@ -368,6 +368,7 @@
         <h3>Open the page and add the block</h3>
         <div class="body">
           <p>In the editor, click the <strong>+</strong> on the canvas (or <strong>Insert module</strong> in the Layers panel), then pick <strong>Embed</strong>. It sits under <em>Media</em>, next to Image and Video.</p>
+          <p style="color:var(--muted)">On the canvas the block shows a grey card describing the embed, not the embed itself — that is deliberate, so the editor never loads a third party's code. It takes up the space the widget will take, and you position and style it exactly as you would any other block. Publish to see the real thing.</p>
         </div>
       </li>
 
@@ -432,11 +433,11 @@
   <section>
     <h2>What you will see, and what it means</h2>
     <dl class="faults">
-      <dt>The block shows grey placeholder text on the canvas</dt>
-      <dd>It has no URL or snippet yet. Fill in Source and the address in the Properties panel.</dd>
+      <dt>The block shows a grey card on the canvas instead of the widget</dt>
+      <dd>That is how it is meant to look. The editor deliberately never runs the widget — it shows a card naming the address it will load, what a pasted snippet contains, and how tall it will be. The widget itself appears on the published page. This is not a fault and there is nothing to fix.</dd>
 
-      <dt>It says the snippet contains a script, and shows nothing</dt>
-      <dd>Expected. Scripts never run inside the editor canvas, only on the published page. Publish and look at the real page to see it.</dd>
+      <dt>The card says “paste a URL” or “paste the vendor snippet”</dt>
+      <dd>The block has no address yet. Fill in Source and the address in the Properties panel.</dd>
 
       <dt>The widget is blank on the live page</dt>
       <dd>First check you published after adding it — the page a visitor sees is the last published one. If it is published and still blank, open the browser console on that page: a refusal names the exact address that was turned away, which is often not the company's marketing domain. Paste that address into <strong>Allowed iframe origins</strong> under Plugins → Embed Origins and publish again.</dd>
