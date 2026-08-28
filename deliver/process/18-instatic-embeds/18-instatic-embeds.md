@@ -134,6 +134,17 @@ has to be reviewed and added deliberately. Inspection now runs with an empty gra
 > only in `deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins/` and have to be packed from
 > there (`node pack-plugin.mjs <path-to>/aeo-schema .tmp/aeo-schema.zip`). All four belong on every
 > new site, so those three should be promoted here the way `embed-origins` was.
+## Three different things here are called "origin"
+
+Worth naming, because mixing them up sends people to the wrong file:
+
+| | What it is | Where it is set | What it gates |
+|---|---|---|---|
+| `PUBLIC_ORIGIN` | the site's canonical public origin(s) | env var on the **Instatic host** (Railway) | **the admin** — CSRF on every state-changing request. [`19-instatic-domain-origins`](../19-instatic-domain-origins/19-instatic-domain-origins.md) |
+| `INSTATIC_BASE_URL` | which site this toolkit talks to | per-worktree `.env` in this repo | which admin **our scripts** hit |
+| frame / script / connect origins | vendor hosts an embed may load | **this plugin's** settings, in the admin UI | the **published page's** CSP |
+
+Changing one never affects the others. `INSTATIC_BASE_URL` must be an origin that passes the `PUBLIC_ORIGIN` gate, or every script here starts failing with 403s that read like permissions problems.
 
 ## Gotchas
 
