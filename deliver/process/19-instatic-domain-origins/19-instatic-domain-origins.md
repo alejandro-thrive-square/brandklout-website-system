@@ -105,12 +105,15 @@ Both live Instatic sites have step 3 of the cutover undone, and in both cases th
 Neither is fixable from this repository — `PUBLIC_ORIGIN` lives on the Instatic service in Railway. The two values to set, each **merged into** whatever is already there rather than pasted over:
 
 ```
-# Dr. Nahlah
-PUBLIC_ORIGIN=https://encorercm.com,https://www.encorercm.com,https://www.drnahlah.com,https://drnahlah.com,https://<app>.up.railway.app
+# Dr. Nahlah  (Railway: project "Brandklout" -> service "Dr Nahlah")
+PUBLIC_ORIGIN=https://encorercm.com,https://www.encorercm.com,https://www.drnahlah.com,https://drnahlah.com
 
 # Mason Park
 PUBLIC_ORIGIN=https://www.masonparkdental.com,https://mason-park.up.railway.app
 ```
+
+> [!CAUTION]
+> **Read the current value first and merge into it.** Dr. Nahlah's Railway subdomain is recorded nowhere in this repository — audited across every file type, the only `*.up.railway.app` host we have written down anywhere is Mason Park's. So the line above is deliberately missing it. Whoever edits that variable must read the platform host off the Railway service and keep it in the list; dropping it breaks `INSTATIC_BASE_URL` and every script in `18-instatic-embeds`.
 
 Redeploy, then re-run the checker until it exits 0. Once Dr. Nahlah's is clean, move `adminUrl` in `sites.json` to `https://www.drnahlah.com` — the client's own domain is what their team should be using, and that field is what declares canonical.
 
