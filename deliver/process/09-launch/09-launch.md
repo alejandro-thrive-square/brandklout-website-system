@@ -7,7 +7,7 @@ After QA is approved, we connect the domain, confirm hosting and SSL, publish th
 > **Integrity Rule**: Any change to the Python executor or technical logic of this workflow must be documented here immediately.
 
 ## Operational Purpose
-Move the QA-approved staging build to production with DNS, SSL, publishing, rollback awareness, and post-publish verification. The publishing target is Webflow for Webflow routes and Vercel for the AI Claude/Vercel/Airtable route.
+Move the QA-approved staging build to production with DNS, SSL, publishing, rollback awareness, and post-publish verification. The publishing target is Webflow for Webflow routes, Vercel for the AI Claude/Vercel/Airtable route, and Instatic for sites delivered on that platform — Instatic adds a mandatory origin step, see [`19-instatic-domain-origins`](../19-instatic-domain-origins/19-instatic-domain-origins.md).
 For improvement work, this module is used only when `15-improvement-intake-audit` defines publishing, DNS, or a production release as in scope.
 
 ## Inputs From Sales / Previous Phase
@@ -18,6 +18,9 @@ For improvement work, this module is used only when `15-improvement-intake-audit
 ## Execution Steps
 1. Confirm QA approval, launch window, domain ownership, SSL readiness, and rollback plan.
 2. Update DNS records and connect the custom domain in the selected hosting platform.
+
+> [!IMPORTANT]
+> **On an Instatic site, connecting the domain is only half of step 2.** The admin rejects any save whose `Origin` is not in the host's `PUBLIC_ORIGIN`, so a domain moved without that env var produces an admin at the new address that logs in, opens, and then 403s on the first save — which reads like a permissions problem and is not. Run [`19-instatic-domain-origins`](../19-instatic-domain-origins/19-instatic-domain-origins.md) as part of this step, and do not send anyone an admin link until `node check-origins.mjs --all` is clean.
 3. Publish or promote the approved build to production.
 4. Smoke test priority pages, sitemap, robots.txt, forms, and primary CTAs.
 

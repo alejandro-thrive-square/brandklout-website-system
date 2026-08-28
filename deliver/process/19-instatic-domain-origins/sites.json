@@ -1,0 +1,25 @@
+{
+  "_comment": [
+    "The canonical admin URL per Instatic site — the single answer to 'what link do I send?'.",
+    "`adminUrl` is the origin a person should work from; `check-origins.mjs` appends its www/apex",
+    "twin automatically, so list only what that would not derive: the platform host, staging, an",
+    "old domain people still have bookmarked.",
+    "This file is the claim; `node check-origins.mjs --all` is the proof. Re-run it after any",
+    "domain change and fix whichever of the two is wrong.",
+    "No secrets here. Credentials live in the per-worktree .env and never in this repo."
+  ],
+  "sites": [
+    {
+      "client": "dr-nahlah",
+      "adminUrl": "https://encorercm.com",
+      "alternates": [],
+      "note": "Custom domain live. PUBLIC_ORIGIN is set explicitly on the host: apex and www both pass."
+    },
+    {
+      "client": "mason-park",
+      "adminUrl": "https://mason-park.up.railway.app",
+      "alternates": ["https://www.masonparkdental.com"],
+      "note": "PUBLIC_ORIGIN is NOT set on the host, so it falls back to RAILWAY_PUBLIC_DOMAIN. www.masonparkdental.com serves the admin but is rejected as a foreign origin — a trap. Until PUBLIC_ORIGIN is set, the Railway host is the only URL to hand out. Apex masonparkdental.com does not resolve."
+    }
+  ]
+}
