@@ -90,14 +90,29 @@ Run this whenever a domain is pointed at an Instatic site — a launch, a re-poi
 7. **Update the client's `.env`** in their worktree — `INSTATIC_BASE_URL` must be an origin that passes the gate, or the whole `18-instatic-embeds` toolkit starts failing with 403s that look like permissions.
 8. **Only now** send the link, and send the one the checker printed.
 
-## Current state
+## Current state — 2026-08-28
 
-| Client | Give this link | Status |
-|---|---|---|
-| Dr. Nahlah | `https://encorercm.com/admin` | Clean. `PUBLIC_ORIGIN` set explicitly; apex and `www` both pass. |
-| Mason Park | `https://mason-park.up.railway.app/admin` | **`PUBLIC_ORIGIN` not set** — falls back to the Railway host. `www.masonparkdental.com` serves the admin and is rejected: a live trap. Apex `masonparkdental.com` does not resolve. |
+Both live Instatic sites have step 3 of the cutover undone, and in both cases the **client's own brand domain is the trap**. Verified with `node check-origins.mjs --all`:
 
-Mason Park is step 3 of the cutover left undone after the domain move. Until it is fixed, **do not give anyone `masonparkdental.com/admin`** — they will be able to log in and unable to save.
+| Client | Send this today | Client domain | Status |
+|---|---|---|---|
+| Dr. Nahlah | `https://encorercm.com/admin` | `drnahlah.com` | `encorercm.com` + `www` pass. `drnahlah.com` **301s to `www.drnahlah.com`**, which serves the admin and is **rejected** — a live trap. |
+| Mason Park | `https://mason-park.up.railway.app/admin` | `masonparkdental.com` | `PUBLIC_ORIGIN` never set; falls back to `RAILWAY_PUBLIC_DOMAIN`. `www.masonparkdental.com` serves the admin and is **rejected** — a live trap. Apex does not resolve. |
+
+> [!WARNING]
+> **Do not send `drnahlah.com/admin` or `masonparkdental.com/admin` to anyone.** Both let a person log in and then fail on the first save. These are precisely the addresses a client or teammate would guess, which is why they are the ones that get sent by mistake.
+
+Neither is fixable from this repository — `PUBLIC_ORIGIN` lives on the Instatic service in Railway. The two values to set, each **merged into** whatever is already there rather than pasted over:
+
+```
+# Dr. Nahlah
+PUBLIC_ORIGIN=https://encorercm.com,https://www.encorercm.com,https://www.drnahlah.com,https://drnahlah.com,https://<app>.up.railway.app
+
+# Mason Park
+PUBLIC_ORIGIN=https://www.masonparkdental.com,https://mason-park.up.railway.app
+```
+
+Redeploy, then re-run the checker until it exits 0. Once Dr. Nahlah's is clean, move `adminUrl` in `sites.json` to `https://www.drnahlah.com` — the client's own domain is what their team should be using, and that field is what declares canonical.
 
 ## Gotchas
 
@@ -107,6 +122,8 @@ Mason Park is step 3 of the cutover left undone after the domain move. Until it 
 - **Scripts do not reproduce the bug.** Anything sending no `Origin` header — curl, our own toolkit — passes the gate unconditionally. A green scripted run says nothing about whether a *person in a browser* can save. Only this checker, which sets `Origin` deliberately, or a real human test.
 - **Do not "fix" a 403 by removing the platform host from `PUBLIC_ORIGIN`.** The `18-instatic-embeds` toolkit points at it via `INSTATIC_BASE_URL`; dropping it breaks every install and gate.
 - **The apex may not resolve even when `www` does.** Mason Park's does not. Check both rather than assuming the pair.
+- **An apex that 301s to `www` is not the host to fix.** The browser follows the redirect and then sends `www` as its `Origin`, so `www` is what must be listed. `drnahlah.com` does exactly this. The checker reports a `redirect` row naming the destination rather than pretending the apex passed or failed.
+- **Never paste a suggested `PUBLIC_ORIGIN` over the existing one.** The checker only knows the hosts it was given, so its suggestion cannot include a platform host or an old domain it never saw. Merge; dropping the `<app>.up.railway.app` entry silently breaks `INSTATIC_BASE_URL` and every script in `18-instatic-embeds`.
 - **This is not the embed origin allowlist.** Three different things in this system are called "origin": `PUBLIC_ORIGIN` (gates the **admin**, set on the host), `INSTATIC_BASE_URL` (which site our **toolkit** talks to, per-worktree `.env`), and the frame/script/connect origins in the Embed Origins plugin settings (what a **published page** may load — [18-instatic-embeds](../18-instatic-embeds/18-instatic-embeds.md)). Changing one never affects the others.
 
 ## Technical Setup
