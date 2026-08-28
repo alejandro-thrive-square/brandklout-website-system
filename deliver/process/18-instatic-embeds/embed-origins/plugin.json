@@ -1,7 +1,7 @@
 {
   "id": "webzite.embed-origins",
   "name": "Embed Origins",
-  "version": "1.3.0",
+  "version": "1.4.0",
   "apiVersion": 1,
   "description": "Add third-party embeds by hand: an Embed block for the canvas, plus the operator-approved origins that let the published page's Content-Security-Policy load them.",
   "permissions": ["cms.hooks", "modules.register", "frontend.assets"],

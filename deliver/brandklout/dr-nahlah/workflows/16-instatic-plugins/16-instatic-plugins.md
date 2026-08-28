@@ -72,7 +72,20 @@ A developer maintaining the site does this and nothing else:
 
 **`escapeProps()` runs before `render()` on the publish path.** It dispatches on the declared control type (`src/core/publisher/escapeProps.ts`): `url`/`image`/`media` props are scheme-checked and passed through raw, and **everything else is HTML-escaped** — and the plugin control vocabulary has no `richtext` or `svg` type to escape into. A pasted snippet therefore arrives at `render()` as `&lt;iframe …&gt;` and would publish as visible literal text. The module decodes entities and re-escapes exactly once (`norm()`), which is idempotent and so gives the same output on both paths. The **canvas** calls `preview() ?? render()` with RAW props, so the module can never assume it has been escaped, or that it has not.
 
-**The editor canvas mounts module HTML with `dangerouslySetInnerHTML`,** which never executes `<script>`. A script-driven widget looks empty in the editor and is fine once published — so snippet mode's `preview()` says so on the canvas instead of leaving someone to conclude the block is broken. Frames themselves DO render in the canvas: the admin CSP (`server/securityHeaders.ts`) sets only `frame-ancestors`, `base-uri` and `object-src`, never `frame-src`.
+**The editor canvas mounts module HTML with `dangerouslySetInnerHTML`,** which never executes `<script>`. Frames themselves DO render in the canvas: the admin CSP (`server/securityHeaders.ts`) sets only `frame-ancestors`, `base-uri` and `object-src`, never `frame-src`. Between them those two facts are why the canvas now gets a card instead of the embed — see below.
+
+### The canvas shows a card, not the embed
+
+Since **module `1.1.0` / plugin `1.4.0`**, `preview()` — the editor-only path — never emits the frame or the snippet. It returns a static description of the block: mode, destination host(s), what a snippet contains, the height rule, and "Appears when the page is published". `render()`, the publish path, is byte-for-byte unchanged.
+
+The live render was wrong on the canvas in both modes, for opposite reasons:
+
+- a **URL-mode iframe loads** in the editor (no `frame-src` in the admin CSP), so the vendor's widget booted inside the canvas — third-party requests, cookie banners and all — and then sat at its *starting* height forever, because the auto-height runtime is a `render()` output and never ships to the canvas. A widget that publishes at 1800px showed as a 600px box with its own scrollbar;
+- a **snippet** is mounted with `dangerouslySetInnerHTML`, so its `<script>` never runs and what appears is the vendor's *undressed* markup — the bare divs a bundle was supposed to fill — while any `<style>` or `<link>` in the same paste leaks OUT of the module and restyles the editor around it.
+
+The card keeps what the live render actually gave: the block stays selectable and stylable (same root shape, machine-generated attributes only, so `injectClassIntoRootElement` still lands the author class on it), and the box is sized to what will publish — fixed height, aspect ratio, or the auto starting height as a `min-height`. And it says one thing the live render could not: for a snippet, **the hosts the paste reaches**, which are exactly the origins that must go in this plugin's settings.
+
+Root carries `data-wz-embed-card="1"` next to the usual `data-wz-embed="<fit>"`. `render()` never emits it, so no published page has one. The `[data-wz-embed], .wz-embed-note` probe in `verify-embed-editor.mjs` keeps working unchanged.
 
 ### What a raw snippet can and cannot do
 
@@ -238,7 +251,7 @@ Say the trade out loud when handing it over: on the pages that carry an embed, t
 
 ```bash
 node test-embed-origins.mjs     # 11 assertions on the CSP filter — no network, no platform
-node test-embed-module.mjs      # 44 assertions on the Embed block — no network, no platform
+node test-embed-module.mjs      # 54 assertions on the Embed block — no network, no platform
 
 node verify-embed-module.mjs --place    # the PUBLISHED page: render, runtime, CSP
 node verify-embed-module.mjs --check

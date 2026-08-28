@@ -30,7 +30,7 @@ cd deliver/process/18-instatic-embeds
 #                                INSTATIC_PASSWORD=...
 
 node test-embed-origins.mjs                 # 54 assertions, offline
-node test-embed-module.mjs                  # 44 assertions, offline
+node test-embed-module.mjs                  # 54 assertions, offline
 
 node pack-plugin.mjs embed-origins .tmp/embed-origins.zip
 node install-plugin.mjs .tmp/embed-origins.zip          # dry run: shows the grants
@@ -66,6 +66,21 @@ Copy this module into `deliver/[client]/workflows/` only if that client needs cl
 Say the trade out loud at handover: on the pages carrying an embed, what stands between the site and a **maliciously injected** script is `default-src`. What stood between it and a **pasted** one was always the person pasting. That is the bargain Webflow makes, made deliberately, and it is per page rather than site-wide.
 
 `strict` + `autoTrust: false` returns to "nothing is allowed unless an operator typed it", which is where this plugin started.
+
+## The canvas shows a card
+
+Since **module `1.1.0` / plugin `1.4.0`**, `preview()` — the editor-only path — never emits the frame or the snippet. It returns a static description of the block: mode, destination host(s), what a snippet contains, the height rule, and "Appears when the page is published". `render()`, the publish path, is untouched.
+
+Rendering the real thing on the canvas cost more than it bought, differently in each mode:
+
+- a **URL-mode iframe does load** in the editor, because the admin CSP sets no `frame-src`. The vendor's widget booted inside the canvas — third-party requests, cookie banners and all — then sat at its *starting* height forever, since the auto-height runtime is a `render()` output and never ships to the canvas. A widget that publishes at 1800px showed as a 600px box with its own scrollbar;
+- a **snippet is mounted with `dangerouslySetInnerHTML`**, so its `<script>` never runs and what appears is the vendor's *undressed* markup — the bare divs a bundle was supposed to fill — while any `<style>` or `<link>` in the same paste leaks OUT of the module and restyles the editor around it.
+
+Neither was a preview of the published page, so neither was worth showing.
+
+The card keeps the two things the live render did give: the block stays **selectable and stylable** (same root shape, machine-generated attributes only, so `injectClassIntoRootElement` still lands the author class on it), and the box is **sized to what will publish** — fixed height, aspect ratio, or the auto starting height as a `min-height` — so the page around it lays out honestly. It also says something the live render could not: for a snippet, **the hosts the paste reaches**, which are exactly the origins that must appear in this plugin's settings.
+
+The card root carries `data-wz-embed-card="1"` alongside the usual `data-wz-embed="<fit>"`. `render()` never emits it, so a published page has none. Gates that probe `[data-wz-embed], .wz-embed-note` keep working; a gate that wants to prove the canvas is *not* rendering the embed should assert on `data-wz-embed-card`.
 
 ## Why a plugin can do this when a module cannot
 
@@ -119,7 +134,7 @@ has to be reviewed and added deliberately. Inspection now runs with an empty gra
   ```
 - **A created CSP directive must inherit from `default-src`.** An absent directive falls back to it, so writing `font-src https://vendor` on a page that had no `font-src` silently revoked the site's own webfonts. It surfaces as one violation per font file, which reads like a font problem. `widen()` seeds from `default-src` first; any new directive must do the same.
 - **`escapeProps()` runs before `render()` on the publish path** and HTML-escapes every non-`url` string prop, and the plugin control vocabulary has no `richtext`/`svg` type — so a pasted snippet arrives as `&lt;iframe …&gt;`. The module decodes then escapes exactly once, which is idempotent and therefore also correct on the canvas path, where props arrive RAW.
-- **The editor canvas mounts module HTML with `dangerouslySetInnerHTML`**, so `<script>` never runs there. Iframes do (the admin CSP sets no `frame-src`). A script-driven widget looks empty in the editor and is fine once published — `preview()` says so on the canvas.
+- **The editor canvas mounts module HTML with `dangerouslySetInnerHTML`**, so `<script>` never runs there. Iframes do (the admin CSP sets no `frame-src`). This is why `preview()` shows a card and not the embed — see §The canvas shows a card.
 - **The deployed admin has no `toolbar-add-module-btn`.** That is in the v0.0.16 zip only; a gate written from the source waits for a button that never appears. The real doors are `canvas-notch-add-btn` and `dom-tree-insert-module`. Dump `[data-testid]` off the running page rather than trusting the zip for admin DOM.
 - **A widget that loads and renders nothing is usually not CSP.** Prove it away from the client's site before blaming the platform: `probe-elfsight-bare.mjs` serves the same snippet from localhost with no CSP at all. On Dr. Nahlah that exonerated the platform twice — once for a vendor script that was pure convenience (`probe-widget-postmessage.mjs`), once for a widget whose app id belonged to another client.
 - **Headless is not proof of what a visitor sees.** Lazy-loading widgets (Elfsight among them) may never finish in headless Chrome. Confirm in a normal browser before calling a widget broken.
@@ -138,7 +153,7 @@ has to be reviewed and added deliberately. Inspection now runs with an empty gra
 
 ```bash
 node test-embed-origins.mjs     # 54 — CSP filter, both modes, hashes, inheritance
-node test-embed-module.mjs      # 44 — the Embed block, publisher and canvas paths
+node test-embed-module.mjs      # 54 — the Embed block, publisher and canvas paths
 ```
 
 Both run with no host, no network and no site. What they cannot prove is that the host registers the module and calls it — that is what `verify-embed-editor.mjs` (the editor path) and `verify-embed-scripts.mjs` (the published path) are for.

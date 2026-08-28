@@ -152,10 +152,48 @@ check('published output for an empty block is a comment, no element',
   render({ source: 'snippet' }) === '<!-- instatic: embed not configured -->')
 check('canvas shows a placeholder instead',
   /wz-embed-note/.test(preview({})) && /paste a URL/.test(preview({})))
-check('canvas warns that a script snippet cannot run in the editor',
-  /never run in the canvas/.test(preview({ source: 'snippet', snippet: '<script src="x"></script>' })))
-check('a configured block previews exactly what it publishes',
-  preview({ url }) === published({ url }))
+
+// 8b. The canvas gets a CARD, never the embed. This is the whole point of
+//     preview(): the editor must load no vendor, run no vendor markup and leak
+//     no vendor stylesheet, while the published page is untouched.
+const snip = '<div id="w"></div><style>body{background:red}</style>' +
+  '<script src="https://cdn.vendor.example/w.js"></script>'
+
+check('canvas never emits an iframe, in either mode',
+  !/<iframe/i.test(preview({ url })) &&
+  !/<iframe/i.test(preview({ source: 'snippet', snippet: '<iframe src="https://v.example/w"></iframe>' })))
+check('canvas never emits the vendor snippet, so no script/style/link reaches the editor',
+  !/<script|<style|<link/i.test(preview({ source: 'snippet', snippet: snip })))
+check('the card is marked as a card and is not what publishes',
+  /data-wz-embed-card="1"/.test(preview({ url })) &&
+  !/data-wz-embed-card/.test(published({ url })) &&
+  preview({ url }) !== published({ url }))
+check('the card is still found by the editor gate probe',
+  /(data-wz-embed=|wz-embed-note)/.test(preview({ url })) &&
+  /(data-wz-embed=|wz-embed-note)/.test(preview({})))
+check('the card names the destination host, not the whole URL',
+  preview({ url }).includes('reputationhub.site') &&
+  !preview({ url }).includes('widgetId'))
+check('the card names the hosts a snippet reaches, which is what settings need',
+  preview({ source: 'snippet', snippet: snip }).includes('cdn.vendor.example'))
+check('the card says what the snippet contains',
+  /1 script/.test(preview({ source: 'snippet', snippet: snip })))
+check('the card reserves the box the block will occupy',
+  /style="[^"]*height:600px/.test(preview({ url, fit: 'fixed', height: 600 })) &&
+  /style="[^"]*min-height:600px/.test(preview({ url, fit: 'auto', height: 600 })) &&
+  /--wz-embed-ratio:4\/3/.test(preview({ url, fit: 'ratio', ratio: '4 / 3' })))
+check('the card root carries no author text — classInjection scans it with [^>]*',
+  /^<div [^>]*>/.test(preview({ url, title: 'a > b' })) &&
+  !/^<div[^>]*a > b/.test(preview({ url, title: 'a > b' })))
+check('the card escapes what it echoes back',
+  !preview({ source: 'snippet', snippet: '<img src="https://x.example/a" onerror="alert(1)">' })
+    .includes('onerror='))
+check('canvas and publisher props give the same card',
+  preview({ url }) === EMBED.preview(asPublished({ ...D, url })).html &&
+  preview({ source: 'snippet', snippet: snip }) ===
+    EMBED.preview(asPublished({ ...D, source: 'snippet', snippet: snip })).html)
+check('the card ships no auto-height runtime',
+  EMBED.preview({ ...D, url }).js === undefined)
 
 // 9. CSS is emitted for anything that renders, and never for a comment.
 check('CSS ships with a rendered block and not with an empty one',

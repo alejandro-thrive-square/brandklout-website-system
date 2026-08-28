@@ -31,6 +31,31 @@
  * escape once. Idempotent, and identical in both contexts. `snippet` is the one
  * prop that is decoded and NOT re-escaped: emitting markup is its entire job.
  *
+ * ## The canvas gets a CARD, never the embed (v1.1.0)
+ *
+ * `preview()` no longer emits the frame or the snippet. It returns a static
+ * description of the block — mode, destination host(s), height rule — sized to
+ * the box the block will occupy, and nothing else.
+ *
+ * Rendering the real thing on the canvas was never worth what it cost, in both
+ * modes and for different reasons:
+ *
+ *   - a URL-mode iframe DOES load in the editor (the admin CSP sets no
+ *     `frame-src`), so the vendor's widget booted inside the canvas — third
+ *     party requests, cookie banners and all — and then sat at its START height
+ *     forever, because the auto-height runtime is a `render()` output and never
+ *     ships to the canvas. A widget that publishes at 1800px showed as a 600px
+ *     box with its own scrollbar;
+ *   - a snippet is mounted with `dangerouslySetInnerHTML`, so its `<script>`
+ *     never runs and what appears is the vendor's *undressed* markup — the bare
+ *     divs a bundle was supposed to fill — while any `<style>` or `<link>` in
+ *     the same paste leaks OUT of the module and restyles the editor around it.
+ *
+ * Neither is a preview of the published page, so neither is worth showing. The
+ * card is: it is the same in both modes, costs no third-party request, cannot
+ * leak styles, and states in words what publishing will produce. The published
+ * output is unchanged — `render()` does not know this function exists.
+ *
  * ## Why emitting a raw snippet is not a new hole
  *
  * The published CSP still decides what runs. It carries `script-src 'self'
@@ -122,6 +147,47 @@ function safeSrc(value) {
   return escape(raw)
 }
 
+/**
+ * Host of a URL, for the canvas card. Deliberately a regex and not `new URL()`:
+ * this pack also has to parse under QuickJS, and a half-typed URL must degrade
+ * to something readable rather than throw.
+ */
+function hostOf(value) {
+  var raw = decode(value).replace(/^[\u0000-\u0020]+/, '')
+  var m = raw.match(/^[a-zA-Z][a-zA-Z0-9+\-.]*:\/\/([^/?#]+)/)
+  if (m) return m[1]
+  m = raw.match(/^([^/?#\s]+)/)
+  return m ? m[1] : ''
+}
+
+/** "1 iframe + 2 scripts" — what a paste actually contains. */
+function snippetShape(snippet) {
+  var bits = []
+  var frames = snippet.match(/<iframe\b/gi)
+  var scripts = snippet.match(/<script\b/gi)
+  if (frames) bits.push(frames.length + (frames.length === 1 ? ' iframe' : ' iframes'))
+  if (scripts) bits.push(scripts.length + (scripts.length === 1 ? ' script' : ' scripts'))
+  return bits.length ? bits.join(' + ') : 'HTML'
+}
+
+/**
+ * The hosts a snippet reaches for. Shown on the card because they are exactly
+ * what has to appear in this plugin's settings for the paste to work once
+ * published — the one thing the editor cannot discover by looking at it.
+ */
+function hostsIn(snippet) {
+  var out = []
+  var re = /\b(?:src|href|data-src)\s*=\s*["']?(https?:\/\/[^"'\s>]+)/gi
+  var m = re.exec(snippet)
+  while (m) {
+    var h = hostOf(m[1])
+    if (h.length && out.indexOf(h) === -1) out.push(h)
+    if (out.length >= 3) return out
+    m = re.exec(snippet)
+  }
+  return out
+}
+
 function num(value, fallback) {
   var n = parseInt(String(value === null || value === undefined ? '' : value).replace(/[^0-9-]/g, ''), 10)
   return isNaN(n) || n <= 0 ? fallback : n
@@ -151,6 +217,19 @@ var CSS = [
   '.wz-embed[data-wz-embed="ratio"]{aspect-ratio:var(--wz-embed-ratio,16/9)}',
   '.wz-embed-note{font:500 12px/1.5 system-ui,sans-serif;letter-spacing:.02em;',
   'padding:10px 12px;border:1px dashed currentColor;border-radius:6px;opacity:.65}',
+  /* The canvas card. Everything below is EDITOR-ONLY: `render()` never emits a
+     [data-wz-embed-card] element, so a published page gets none of these rules
+     matching anything. They ship on the published page all the same — the CSS
+     string is per module type, not per call — which is a few hundred bytes and
+     keeps the two paths from needing two stylesheets. */
+  '.wz-embed[data-wz-embed-card]{display:flex;align-items:center;justify-content:center;',
+  'box-sizing:border-box;overflow:hidden;padding:12px;text-align:center;',
+  'border:1px dashed currentColor;border-radius:6px;opacity:.65}',
+  '.wz-embed-card{display:flex;flex-direction:column;gap:3px;max-width:100%;',
+  'font:500 12px/1.5 system-ui,sans-serif;letter-spacing:.02em}',
+  '.wz-embed-card-kind{font-size:10px;font-weight:700;text-transform:uppercase;letter-spacing:.1em}',
+  '.wz-embed-card-to{font-size:13px;word-break:break-all}',
+  '.wz-embed-card-meta{opacity:.75}',
 ].join('')
 
 /**
@@ -185,6 +264,41 @@ function placeholder(text) {
   return '<div class="wz-embed-note">' + escape(text) + '</div>'
 }
 
+/** How the block's height is decided, said in the words the control uses. */
+function fitLabel(fit, ratio, height) {
+  if (fit === 'fixed') return 'Fixed ' + height + 'px'
+  if (fit === 'ratio') return 'Aspect ratio ' + ratio
+  return 'Auto height, from ' + height + 'px'
+}
+
+/**
+ * The canvas stand-in. Same root shape as `wrapper()` — machine-generated
+ * attributes only, author text strictly INSIDE — so `injectClassIntoRootElement`
+ * still lands an author class on it and the block stays selectable, resizable
+ * and stylable in the editor exactly as before.
+ *
+ * `data-wz-embed` is kept so the editor gate's `[data-wz-embed], .wz-embed-note`
+ * probe still finds a placed block; `data-wz-embed-card` is what tells the two
+ * apart. The box is sized to what will publish (fixed height, aspect ratio, or
+ * the auto starting height as a minimum) so the page around it lays out
+ * honestly, which is the one thing rendering the live embed actually bought.
+ */
+function card(fit, ratio, styles, kind, to, meta) {
+  var s = styles.slice(0)
+  if (fit === 'fixed') s.push('height:' + meta.height + 'px')
+  else if (fit === 'auto') s.push('min-height:' + meta.height + 'px')
+  var style = s.length ? ' style="' + s.join(';') + '"' : ''
+  var rat = fit === 'ratio' ? ' data-wz-embed-ratio="' + escape(ratio) + '"' : ''
+  var inner = '<div class="wz-embed-card">'
+  inner += '<span class="wz-embed-card-kind">' + escape(kind) + '</span>'
+  if (to.length) inner += '<span class="wz-embed-card-to">' + escape(to) + '</span>'
+  inner += '<span class="wz-embed-card-meta">' + escape(meta.text) + '</span>'
+  inner += '<span class="wz-embed-card-meta">Appears when the page is published</span>'
+  inner += '</div>'
+  return '<div class="wz-embed" data-wz-embed="' + fit + '" data-wz-embed-card="1"' +
+    rat + style + '>' + inner + '</div>'
+}
+
 function build(props, isPreview) {
   var mode = decode(props.source) === 'snippet' ? 'snippet' : 'url'
   var fit = fitOf(props)
@@ -193,6 +307,8 @@ function build(props, isPreview) {
   var styles = []
   if (fit === 'ratio') styles.push('--wz-embed-ratio:' + escape(ratio.replace(/\s+/g, '')))
 
+  var meta = { height: height, text: fitLabel(fit, ratio, height) }
+
   if (mode === 'snippet') {
     var snippet = decode(props.snippet).trim()
     if (snippet.length === 0) {
@@ -200,23 +316,34 @@ function build(props, isPreview) {
         ? { html: placeholder('Embed — paste the vendor snippet in the properties panel'), css: CSS }
         : { html: '<!-- instatic: embed not configured -->' }
     }
-    /* Verbatim, by design: see the header. In the CANVAS this markup is mounted
-       with dangerouslySetInnerHTML, which never executes <script> — so a
-       script-driven widget looks empty there and is fine once published. Say so
-       rather than letting someone conclude the block is broken. */
-    var note = isPreview && /<script/i.test(snippet)
-      ? placeholder('Snippet contains a script — scripts never run in the canvas. Publish to see it.')
-      : ''
-    return { html: wrapper(fit, ratio, styles, note + snippet), css: CSS }
+    if (isPreview) {
+      /* The hosts are the useful half: they are exactly what has to be listed
+         in the plugin's settings for this paste to survive the published CSP,
+         and no amount of staring at the markup on the canvas would say so. */
+      var hosts = hostsIn(snippet)
+      return {
+        html: card(fit, ratio, styles, 'HTML snippet',
+          hosts.length ? hosts.join(', ') : '', {
+            height: height,
+            text: snippetShape(snippet) + ' · ' + meta.text,
+          }),
+        css: CSS,
+      }
+    }
+    /* Verbatim, by design: see the header. */
+    return { html: wrapper(fit, ratio, styles, snippet), css: CSS }
   }
 
-  var f = frame(props, fit, height)
-  if (f.length === 0) {
+  var src = safeSrc(props.url)
+  if (src.length === 0) {
     return isPreview
       ? { html: placeholder('Embed — paste a URL in the properties panel'), css: CSS }
       : { html: '<!-- instatic: embed not configured -->' }
   }
-  return { html: wrapper(fit, ratio, styles, f), css: CSS }
+  if (isPreview) {
+    return { html: card(fit, ratio, styles, 'Embed', hostOf(props.url), meta), css: CSS }
+  }
+  return { html: wrapper(fit, ratio, styles, frame(props, fit, height)), css: CSS }
 }
 
 /* ---------------------------------------------------------------------------
@@ -259,7 +386,7 @@ var EMBED = {
   description:
     'Place a third-party embed by hand: paste a URL, or the vendor snippet. The origin must also be allowed in this plugin\'s settings, and the page republished.',
   category: 'Media',
-  version: '1.0.0',
+  version: '1.1.0',
   htmlTag: 'div',
   canHaveChildren: false,
 
@@ -351,9 +478,10 @@ var EMBED = {
     return out
   },
 
-  /* The canvas needs a different answer in exactly two cases — an unconfigured
-     block (publish must emit nothing, the editor must show something to click)
-     and a script snippet (which cannot run under innerHTML). */
+  /* The canvas never gets the embed itself — see "The canvas gets a CARD" at
+     the top of this file. It gets a static description of the block, in the box
+     the block will occupy. No third-party request, no undressed vendor markup,
+     no leaked <style>, and no auto-height runtime to be missing. */
   preview: function (props) {
     return build(props, true)
   },
