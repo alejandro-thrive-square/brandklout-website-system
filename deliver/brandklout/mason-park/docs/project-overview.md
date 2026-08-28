@@ -16,7 +16,9 @@
 > https://pediatricdentistkatytx.com — same owners, same address, same doctors, and the **same
 > ThemeREX `tooth-fairy` theme**. It has its own folder because it has its own domain, WordPress
 > install, SiteGround account and database, but it is one client:
-> [`mason-park-kids/`](../../mason-park-kids/docs/project-overview.md).
+> [`mason-park-kids/`](../../mason-park-kids/docs/project-overview.md). Since 2026-08-28 it also
+> has **its own worktree**, `bk-mason-park-kids` — one worktree per *site*, not per client, after
+> sessions holding both kept crossing the two sites' facts. That folder is not checked out here.
 >
 > Findings cross over in both directions — the fabricated ThemeREX awards, the demo pages, the
 > hours contradiction and the injection IOCs are all worth re-checking on the other site before
