@@ -69,6 +69,13 @@ id_rsa*
 # next to it are the committed artifact.
 **/.tmp/**/html/
 
+# The Instatic import bundle, generated from dist/ by to-instatic.mjs in about a
+# second. Same reasoning as dist/ itself: it is output, not source, and the whole
+# page set is duplicated inside it as JSON. to-instatic.mjs IS committed - that is
+# the artifact worth keeping. Matches the parent practice's workflow 09, where the
+# bundle was likewise never committed.
+**/.tmp/instatic/
+
 # ===== Python =====
 __pycache__/
 *.py[cod]

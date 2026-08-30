@@ -24,10 +24,47 @@ node weigh.mjs         # per-page download weight, desktop vs phone
 node serve.mjs --port 4310   # browse it, as a host would serve it. 4300 is often taken
                              # by the PARENT site's server in this same worktree
 node shot.mjs .        # screenshot the built pages (add --mobile for 390px)
+node to-instatic.mjs   # dist/ -> instatic/, the import bundle. See "Shipping it to Instatic"
 ```
 
 `dist/` is the deployable site. It is gitignored — it is generated, and it carries ~14MB of the
 practice's photography, which the repo rules keep out of git.
+
+## Shipping it to Instatic
+
+`to-instatic.mjs` turns `dist/` into `instatic/`, which is what the import actually consumes:
+`pages/*.json` (a **body**, not a document), `site.css` and `site.js` as **site-wide code assets**,
+and `media-manifest.json`. The generated `instatic/IMPORT.md` is the run order — read that, not
+this. Ported from the parent practice's `09-static-rebuild/.tmp/to-instatic.mjs`; the contract is
+identical because both sites are the same ThemeREX build behind the same Client-First stylesheet.
+
+`instatic/` is gitignored for the same reason `dist/` is. The script is the artifact.
+
+**It is a two-pass process and the order is not optional.** Instatic assigns an id at upload time,
+so `/uploads/<id>-<name>` cannot be predicted: upload the media, harvest the map, then re-run with
+`--media`. The first pass reports every path as unmapped, which is correct and expected.
+
+Three things this port does that are worth knowing:
+
+- **`--lean` is much bigger here than on the parent.** 30 files / 5.1 MB against 138 / 13.9 MB,
+  because 111 of the referenced files exist only to fill a `srcset`. On a self-hosted instance a
+  publish snapshots every runtime asset into the volume and nothing is collected, so that footprint
+  is paid on **every** publish, not once. Use the same flag on both passes or the pages come back
+  pointing at candidates that were never uploaded.
+- **The harvest map must be keyed by full relative path, not basename.** Nine basenames here belong
+  to more than one file — `Dentist-in-Katy-Office*.webp` exists in both `2023/11` and `2024/09` at
+  different byte sizes, because the photo was re-uploaded. A basename-keyed map gives eight pages
+  the wrong image and the page still shows an office photo, so nobody catches it. The script exits
+  non-zero rather than resolve an ambiguous basename.
+- **A body-only export silently drops part of the `<head>`.** Every page's JSON-LD is preserved as
+  `jsonLd` on the page record, and the favicon is collected into the manifest's `headOnly`, because
+  neither travels in the body. Both have to be re-added through Instatic — step 6 of `IMPORT.md`.
+  Losing the `Dentist` schema on a rebuild whose whole purpose is holding the practice's rankings
+  would be self-inflicted.
+
+Before anything writes: **`.env` in this worktree points at the parent practice's live site**
+(`INSTATIC_BASE_URL=https://mason-park.up.railway.app`), inherited from the 2026-08-28 split. The
+pediatric instance is a different host.
 
 > **Do not run `build.mjs` while `responsive.mjs` is running.** The build deletes and rewrites
 > `dist/` under the gate's own static server, and the gate then hangs waiting on pages that have
