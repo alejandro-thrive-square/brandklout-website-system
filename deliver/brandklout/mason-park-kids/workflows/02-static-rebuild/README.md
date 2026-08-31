@@ -106,9 +106,17 @@ close it, and it needs a decision because they also relax the CSP.
 
 Before anything writes: **every script prints the host it is about to touch as its first line.**
 `.env` shipped pointing at the parent practice's live site, inherited from the 2026-08-28 split;
-it now points at the pediatric instance,
-`https://corebunchinstaticlatest-production-fb3b.up.railway.app` (the Railway service domain is
-named after the container image, not the client).
+it now points at the pediatric instance, `https://mason-park-kids.up.railway.app`.
+
+That host was itself generated as `corebunchinstaticlatest-production-fb3b.up.railway.app` — named
+after the container image rather than the client — and was renamed on 2026-08-31 to match
+`mason-park` and `dr-nahlah`. **Renaming a Railway service domain silently invalidates
+`PUBLIC_ORIGIN`**, which produces the 403-on-login trap that
+[process 20](../../../../process/20-instatic-domain-origins/20-instatic-domain-origins.md) exists
+to catch: the login page at the new address renders perfectly and then refuses the login. The
+order that avoids a broken window is to widen `PUBLIC_ORIGIN` to hold **both** hosts, confirm the
+container has actually applied it (a variable that is set but never redeployed is the exact bug
+the parent site hit), rename, then narrow it back.
 
 > **Do not run `build.mjs` while `responsive.mjs` is running.** The build deletes and rewrites
 > `dist/` under the gate's own static server, and the gate then hangs waiting on pages that have

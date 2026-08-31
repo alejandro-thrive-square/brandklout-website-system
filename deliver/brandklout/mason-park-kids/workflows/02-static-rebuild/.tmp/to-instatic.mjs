@@ -366,10 +366,9 @@ Prefer \`--lean\` permanently on this platform.
   and reuses the default install's \`index\` row for the home page.
 - **\`.env\` in this worktree shipped pointing at the PARENT practice's live
   site**, inherited from the 2026-08-28 worktree split. Corrected 2026-08-31 to
-  the pediatric instance, \`https://corebunchinstaticlatest-production-fb3b.up.railway.app\`
-  (the Railway service domain is named after the image, not the client). Check
-  it before running anything that writes — every script here prints the host it
-  is about to touch as its first line, for exactly this reason.
+  the pediatric instance, \`https://mason-park-kids.up.railway.app\`. Check it
+  before running anything that writes — every script here prints the host it is
+  about to touch as its first line, for exactly this reason.
 
 ## Routes
 

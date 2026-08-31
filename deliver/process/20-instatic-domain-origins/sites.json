@@ -28,10 +28,10 @@
     },
     {
       "client": "mason-park-kids",
-      "adminUrl": "https://corebunchinstaticlatest-production-fb3b.up.railway.app",
+      "adminUrl": "https://mason-park-kids.up.railway.app",
       "alternates": [],
       "railway": { "project": "a135c5ec-da62-4643-a775-c6a39317fb1b", "service": "Mason Park Kids" },
-      "note": "Added 2026-08-31, the day the rebuilt site was imported (54 pages). Still on the generated Railway host: the service domain is named after the IMAGE (corebunch/instatic:latest), not the client, which is ugly but is genuinely the only working admin origin today. pediatricdentistkatytx.com is still on SiteGround DNS and 301s to the parent practice's now-dead mason-park.up.railway.app; when it moves to Cloudflare and points here, add it to PUBLIC_ORIGIN (comma-separated, apex AND www) and re-run the checker BEFORE sending anyone the link."
+      "note": "Added 2026-08-31, the day the rebuilt site was imported (54 pages). The service domain was generated from the IMAGE name (corebunchinstaticlatest-production-fb3b) and was renamed the same day to match the convention the other two sites use. Renaming a service domain silently invalidates PUBLIC_ORIGIN, which is the 403-on-login trap this module exists for, so the order was: widen PUBLIC_ORIGIN to hold BOTH hosts, confirm the container had actually applied it, rename, then narrow it back to the new host alone. pediatricdentistkatytx.com is still on SiteGround DNS and 301s to the parent practice's now-dead mason-park.up.railway.app; when it moves to Cloudflare and points here, add apex AND www to PUBLIC_ORIGIN and re-run the checker BEFORE sending anyone the link."
     }
   ]
 }
