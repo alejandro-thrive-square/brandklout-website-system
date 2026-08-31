@@ -24,7 +24,14 @@
       "adminUrl": "https://www.masonparkdental.com",
       "alternates": ["https://mason-park.up.railway.app"],
       "railway": { "project": "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc", "service": "Mason Park" },
-      "note": "Fixed 2026-08-28. PUBLIC_ORIGIN had been set to the apex alone (https://masonparkdental.com) and had NEVER been applied — the container was still running its boot-time derived value. The apex also has no DNS record, so it is listed for the day it gets one but is not the link to hand out. Redeployed; www now verified live."
+      "note": "Fixed 2026-08-28. PUBLIC_ORIGIN had been set to the apex alone (https://masonparkdental.com) and had NEVER been applied — the container was still running its boot-time derived value. The apex also has no DNS record, so it is listed for the day it gets one but is not the link to hand out. Redeployed; www now verified live. 2026-08-31: mason-park.up.railway.app now answers 404 'Application not found' — the service domain was removed, so the Railway host is dead while the custom domain is healthy. It stays listed because PUBLIC_ORIGIN still names it and the checker should keep saying so until one of the two is corrected."
+    },
+    {
+      "client": "mason-park-kids",
+      "adminUrl": "https://corebunchinstaticlatest-production-fb3b.up.railway.app",
+      "alternates": [],
+      "railway": { "project": "a135c5ec-da62-4643-a775-c6a39317fb1b", "service": "Mason Park Kids" },
+      "note": "Added 2026-08-31, the day the rebuilt site was imported (54 pages). Still on the generated Railway host: the service domain is named after the IMAGE (corebunch/instatic:latest), not the client, which is ugly but is genuinely the only working admin origin today. pediatricdentistkatytx.com is still on SiteGround DNS and 301s to the parent practice's now-dead mason-park.up.railway.app; when it moves to Cloudflare and points here, add it to PUBLIC_ORIGIN (comma-separated, apex AND www) and re-run the checker BEFORE sending anyone the link."
     }
   ]
 }

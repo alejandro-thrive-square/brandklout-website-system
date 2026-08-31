@@ -13,3 +13,12 @@ weight-report.json
 #   content/, content-db/  - the extracted copy. Text, small, and the only
 #                            record of what the compromised host published.
 #   build-report.json      - names the links that were unwrapped and why.
+
+# The node graphs fetched back out of the container - 6.6 MB, and regenerated
+# by `ship-payload.mjs -> run-convert.mjs -> fetch-nodes.mjs` whenever the
+# pages change. The parent practice's workflow makes the same call.
+#
+# NOT ignored: instatic-media-map.json. It is small, and it is the only record
+# of which upload each local file became - Instatic assigns the id, so the map
+# cannot be recomputed from dist/ alone, only re-read off the live site.
+converted-pages.json

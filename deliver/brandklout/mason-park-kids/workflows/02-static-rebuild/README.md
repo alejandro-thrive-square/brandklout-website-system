@@ -50,21 +50,65 @@ Three things this port does that are worth knowing:
   because 111 of the referenced files exist only to fill a `srcset`. On a self-hosted instance a
   publish snapshots every runtime asset into the volume and nothing is collected, so that footprint
   is paid on **every** publish, not once. Use the same flag on both passes or the pages come back
-  pointing at candidates that were never uploaded.
+  pointing at candidates that were never uploaded. Measured on the real import, `--lean` also
+  costs nothing: Instatic derives its own `-w64`/`-w320`/`-w350` variants on upload, so 29
+  uploaded files became 144 live `/uploads/` references. Keep it on.
 - **The harvest map must be keyed by full relative path, not basename.** Nine basenames here belong
-  to more than one file — `Dentist-in-Katy-Office*.webp` exists in both `2023/11` and `2024/09` at
-  different byte sizes, because the photo was re-uploaded. A basename-keyed map gives eight pages
-  the wrong image and the page still shows an office photo, so nobody catches it. The script exits
-  non-zero rather than resolve an ambiguous basename.
+  to more than one file, and a basename-keyed map is a coin flip, so the script exits non-zero
+  rather than resolve one. Note the specific case is milder than previously recorded here: the one
+  such basename in the `--lean` set, `Dentist-in-Katy-Office.webp` in `2023/11` and `2024/09`, is
+  the **same image** — both 95606 bytes, sha `8ca3aedb…`. The earlier claim that they differed in
+  size because the photo was re-uploaded was wrong. `push-media.mjs` groups by SHA-256 and uploads
+  identical bytes once.
 - **A body-only export silently drops part of the `<head>`.** Every page's JSON-LD is preserved as
   `jsonLd` on the page record, and the favicon is collected into the manifest's `headOnly`, because
-  neither travels in the body. Both have to be re-added through Instatic — step 6 of `IMPORT.md`.
-  Losing the `Dentist` schema on a rebuild whose whole purpose is holding the practice's rankings
-  would be self-inflicted.
+  neither travels in the body. The favicon is restored by `set-favicon.mjs`. **The JSON-LD is
+  not**, and cannot be as things stand — see below.
 
-Before anything writes: **`.env` in this worktree points at the parent practice's live site**
-(`INSTATIC_BASE_URL=https://mason-park.up.railway.app`), inherited from the 2026-08-28 split. The
-pediatric instance is a different host.
+### Doing the import: it is headless, and it goes through the container
+
+The whole import runs with no browser. `IMPORT.md`'s "the import cannot run headlessly" is about
+the **MCP connector** — 29 of its `site_*` tools proxy through the in-editor AI chat stream — and
+not about the admin REST API underneath, which
+[`deliver/process/18-instatic-embeds/lib/insta-api.mjs`](../../../../process/18-instatic-embeds/lib/insta-api.mjs)
+speaks directly.
+
+The catch is that **pages are stored as node trees (`cells.body.nodes`), not HTML**. The converter
+is Instatic's own `@core/htmlImport`, so it runs *inside* the container over `railway ssh` —
+`container-convert.ts`, driven by `run-convert.mjs`. Same solution the parent practice reached.
+
+```bash
+node push-media.mjs                 # upload; writes instatic-media-map.json (outside instatic/)
+node to-instatic.mjs --media instatic-media-map.json --lean
+node ship-payload.mjs && node run-convert.mjs && node fetch-nodes.mjs
+node import-pages.mjs --only core   # then again without --only
+node import-styles.mjs && node install-fonts.mjs && node set-favicon.mjs
+node verify-live.mjs                # the proof; `{"publishedPages":54}` is not
+```
+
+Two failures here are invisible rather than loud, and both are handled by the scripts above:
+
+- **Instatic emits no class attribute for a class it has no rule for.** `import-styles.mjs`
+  registers every class name as an empty rule and ships `site.css` as a code asset to do the
+  actual styling. Skip it and you get perfect structure with zero styling, which looks exactly
+  like a stylesheet that failed to load.
+- **The published-page CSP blocks Google Fonts.** The base policy sets `style-src 'self'
+  'unsafe-inline'` and emits no `font-src` at all, so `site.css`'s `@import` of
+  `fonts.googleapis.com` can only fail — into the fallback stack, with nothing in the UI to say
+  so. `install-fonts.mjs` self-hosts DM Sans and Figtree through
+  `POST /admin/api/cms/fonts/install`; `import-styles.mjs` strips the dead `@import`.
+
+**Not solved: `jsonLd` and the meta `description`.** A page row carries only `title`, `slug` and
+`body` — there is no per-page head field, so step 6's "paste the JSON-LD into the head field"
+describes something that does not exist. The parent practice emits its `og:` tags and JSON-LD from
+the `webzite.open-graph` and `webzite.aeo-schema` plugins. Installing those here is the way to
+close it, and it needs a decision because they also relax the CSP.
+
+Before anything writes: **every script prints the host it is about to touch as its first line.**
+`.env` shipped pointing at the parent practice's live site, inherited from the 2026-08-28 split;
+it now points at the pediatric instance,
+`https://corebunchinstaticlatest-production-fb3b.up.railway.app` (the Railway service domain is
+named after the container image, not the client).
 
 > **Do not run `build.mjs` while `responsive.mjs` is running.** The build deletes and rewrites
 > `dist/` under the gate's own static server, and the gate then hangs waiting on pages that have

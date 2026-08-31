@@ -287,21 +287,48 @@ built before the upload will point at \`/assets/...\` and render broken.
 2. **Harvest the map** — a JSON of \`{ "<local name>": "/uploads/<id>-<name>" }\`.
    **Key it by the full relative path** (\`"uploads/2023/11/x.webp"\`), never by
    the basename alone. ${ambiguousBasenames.size} basenames in this site's media are used by more
-   than one file — \`Dentist-in-Katy-Office*.webp\` exists in both \`2023/11\` and
-   \`2024/09\` at different byte sizes, because the photo was re-uploaded. A
-   basename-keyed map hands those pages the wrong image, and the page still
-   shows an office photo so nobody notices. The script now refuses to finish
-   when a match could only be made by an ambiguous basename.
+   than one file, so a basename-keyed map is a coin flip; this script refuses to
+   finish when a match could only be made by an ambiguous basename.
+
+   Measured 2026-08-31, the one such basename in the \`--lean\` set —
+   \`Dentist-in-Katy-Office.webp\`, in both \`2023/11\` and \`2024/09\` — is the
+   SAME IMAGE: both are 95606 bytes and hash to \`8ca3aedb…\`. (An earlier note
+   here claimed they differed in size because the photo was re-uploaded. They do
+   not.) So on this site today the ambiguity is harmless in its effect and the
+   refusal is insurance, not a fix for a live bug. \`push-media.mjs\` groups by
+   SHA-256 and uploads identical bytes once, mapping every path in the group to
+   that single asset — which also stops the duplicate being re-snapshotted into
+   the volume on every publish.
 3. **Re-run this script with the map**: \`node to-instatic.mjs --media <map>.json\`.
    It reports anything still unmapped instead of shipping a broken path.
    Pass \`--lean\` in **both** runs if you used it in the first, or the pages
    come back out with srcset candidates that were never uploaded.
-4. **Add the two code assets** (\`site.css\`, \`site.js\`) site-wide.
-5. **Create each page** with \`site_add_page\` (title, slug), then insert its
-   \`html\` with \`site_insert_html\`, passing the returned **\`rootNodeId\`** as
-   \`parentId\` — a \`pageId\` is not a node id.
-6. **Set the favicon** from the file in \`headOnly\`, and paste each page's
-   \`jsonLd\` into its head/custom-code field. Neither travels in the body.
+
+   Write the map **outside \`instatic/\`** — this script does
+   \`rmSync(instatic/)\` before regenerating, so a map kept in there is read into
+   memory by the \`--media\` pass and deleted by that same run.
+4. **Convert the HTML to node trees**, in the container:
+   \`node ship-payload.mjs && node run-convert.mjs && node fetch-nodes.mjs\`.
+   Pages are stored as \`cells.body.nodes\`, not HTML, so this step is not
+   optional.
+5. **Create the pages**: \`node import-pages.mjs --only core\`, check, then
+   \`node import-pages.mjs\`.
+6. **Add the code assets and the typography**: \`node import-styles.mjs\` (also
+   registers each class name as an empty rule, without which Instatic emits no
+   class attributes at all and the site renders unstyled), then
+   \`node install-fonts.mjs\` — the published-page CSP blocks
+   \`fonts.googleapis.com\`, so the faces must be self-hosted.
+7. **Set the favicon**: \`node set-favicon.mjs\` — it is
+   \`settings.faviconUrl\`, and it is in \`headOnly\` because a \`<link rel="icon">\`
+   never travels in a body export.
+8. **Check it**: \`node verify-live.mjs\` — every route 200, every image
+   resolving, class attributes present. \`{"publishedPages":54}\` proves none of
+   that on its own.
+
+Still open after all of the above: \`jsonLd\` and the meta \`description\` have
+nowhere to go. A page row carries only \`title\`, \`slug\` and \`body\`; the parent
+practice's site emits its \`og:\` tags and JSON-LD from the \`webzite.open-graph\`
+and \`webzite.aeo-schema\` **plugins**, which are not installed here.
 
 ## \`--lean\`
 
@@ -311,22 +338,38 @@ a srcset, so the saving is most of the upload.
 
 Worth it twice over on a self-hosted instance: a publish snapshots *every*
 runtime asset into the volume and nothing is ever collected, so the asset
-footprint is paid again on each publish, not once. The cost is that phones
-fetch the full-size image — roughly double the mean page weight, from a very
-low base (median 47 KB). Re-run without the flag later to restore responsive
-images.
+footprint is paid again on each publish, not once.
+
+**It also turns out to cost nothing.** The stated cost — phones fetching the
+full-size image — does not apply: Instatic derives its OWN responsive variants
+on upload (\`-w64\`, \`-w320\`, \`-w350\`, …) and serves those, so the live pages
+came out with 144 distinct \`/uploads/\` references from 29 uploaded files.
+Shipping the build's srcset candidates only uploads a second, redundant set.
+Prefer \`--lean\` permanently on this platform.
 
 ## Three things that will bite
 
-- **The import cannot run headlessly.** Instatic's MCP edits a live workspace:
-  the Site editor has to be open in a browser, signed in as the connector owner.
-  So the admin has to work **before** the import, not after it.
-- **Never call \`site_add_page\` twice for the same page.** Slugs auto-unique, so
-  a repeat gives you \`about-2\`, not an overwrite. Use \`site_duplicate_page\` to
-  copy an existing page.
+- **The MCP cannot run headlessly — but the import can.** 29 of the connector's
+  \`site_*\` tools proxy through the in-editor AI chat stream and need the Site
+  editor open in a browser. The admin REST API underneath does not: the whole
+  import runs through
+  \`deliver/process/18-instatic-embeds/lib/insta-api.mjs\` with no browser at all.
+  Pages are stored as node trees rather than HTML, so the HTML→nodes step runs
+  Instatic's own \`@core/htmlImport\` **inside the container** over
+  \`railway ssh\` (\`run-convert.mjs\`), which is what makes the headless route
+  possible. The admin must still WORK before the import — that is what
+  \`deliver/process/20-instatic-domain-origins\` checks — but nobody has to sit
+  in front of it.
+- **Never create the same page twice.** Slugs auto-unique, so a repeat gives you
+  \`about-2\`, not an overwrite. \`import-pages.mjs\` skips any row that already
+  carries more than the empty \`base.body\` node unless you pass \`--overwrite\`,
+  and reuses the default install's \`index\` row for the home page.
 - **\`.env\` in this worktree shipped pointing at the PARENT practice's live
-  site** (\`INSTATIC_BASE_URL=https://mason-park.up.railway.app\`), inherited from
-  the 2026-08-28 worktree split. Check it before running anything that writes.
+  site**, inherited from the 2026-08-28 worktree split. Corrected 2026-08-31 to
+  the pediatric instance, \`https://corebunchinstaticlatest-production-fb3b.up.railway.app\`
+  (the Railway service domain is named after the image, not the client). Check
+  it before running anything that writes — every script here prints the host it
+  is about to touch as its first line, for exactly this reason.
 
 ## Routes
 

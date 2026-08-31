@@ -303,7 +303,10 @@ if (process.argv[1] && fileURLToPath(import.meta.url) === process.argv[1]) {
         styleFiles: (site.files ?? []).filter((f) => f.type === 'style').map((f) => `${f.path} (${(f.content ?? '').length}c)`),
       }
     },
-    pages: async () => (await getPages()).pages?.map((p) => p.slug) ?? [],
+    // The endpoint answers { rows: [...] } - DataRows, not a `pages` array. The
+    // older `.pages` read printed an empty list for a site full of pages, which
+    // reads as "nothing imported yet" and is the worst possible wrong answer here.
+    pages: async () => (await getPages()).rows?.map((p) => p.slug) ?? [],
     status: publishStatus,
     publish,
   }[cmd]
