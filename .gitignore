@@ -146,6 +146,11 @@ nul
 # happens to have one - this covers every copy of the toolkit, including the
 # shared module in deliver/process/.
 **/.tmp/.session
+# 2026-08-31: the cache is now keyed BY HOST (`.session-staging.masonparkdental.com`),
+# because one unlabelled file silently reused production's cookie against staging
+# and back. The wildcard has to follow it, or the first staging run commits a live
+# admin credential.
+**/.tmp/.session-*
 
 # Recovered client data: DB dumps carry credentials and patient-adjacent PII,
 # and WXR/media are heavy. Kept local, never committed.

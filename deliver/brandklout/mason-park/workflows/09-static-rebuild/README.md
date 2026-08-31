@@ -1,6 +1,15 @@
 # 09 — Static rebuild of bestdentistinkatytx.com
 
 > [!IMPORTANT]
+> **The redesign is LIVE ON STAGING as of 2026-08-31**, with two new pages, at
+> `https://staging.masonparkdental.com`. Production is untouched and still serves the
+> 2026-08-27 design. Read [CORE-PAGES-2026-08-31.md](./CORE-PAGES-2026-08-31.md) for the
+> eleven pages the client asked for, the staging run order (every step is now
+> environment-aware — `RAILWAY_ENV_NAME` and an explicit `INSTATIC_BASE_URL`), and the one
+> thing that broke on import: **Instatic's `base.button` takes no child nodes**, so an inline
+> `<svg>` inside a `<button>` is dropped silently, with no failure and no warning.
+
+> [!IMPORTANT]
 > **The design changed on 2026-08-28.** The site is now built on the client-approved Figma system
 > (Newsreader / Nunito Sans / Karla, the warm `#8C6349` palette) with a rebuilt layout, replacing
 > the WordPress-screenshot design described further down. Read

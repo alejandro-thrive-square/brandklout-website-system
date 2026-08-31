@@ -12,6 +12,8 @@ export const NAV = [
     label: "About", href: "/about-us/", children: [
       { label: "Meet Our Doctors", href: "/our-doctors/" },
       { label: "Meet Our Team", href: "/our-team/" },
+      // New 2026-08-31 for the core-pages brief. The live menu never had it.
+      { label: "Patient Reviews", href: "/patient-reviews/" },
       { label: "Smile Gallery", href: "/before-after/" },
       { label: "Technology", href: "/technology/" },
     ],
@@ -61,6 +63,9 @@ export const NAV = [
   },
   {
     label: "Patient Resources", href: "/patient-resources/", children: [
+      // New 2026-08-31 for the core-pages brief, and first in the list: it is
+      // the page a first-time visitor is actually looking for.
+      { label: "New Patients", href: "/new-patients/" },
       { label: "Dental Savings Plan", href: "/dental-savings-plan/" },
       { label: "Product Recommendations", href: "/product-recommendations/" },
       { label: "Toothpaste RDA Table", href: "/toothpaste-rda-table/" },

@@ -18,7 +18,6 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const SESSION_FILE = path.join(HERE, ".session");
 const COOKIE_NAME = "instatic_admin_session";
 
 // Walk up to the repo root for .env rather than assuming a depth.
@@ -50,10 +49,25 @@ loadEnv();
 export const BASE = (process.env.INSTATIC_BASE_URL || "").replace(/\/+$/, "");
 if (!BASE) throw new Error("INSTATIC_BASE_URL is not set - refusing to guess a target site.");
 
-// A misaimed run writes 71 pages into the wrong client's CMS, so this is a hard stop.
-if (!/mason-park/i.test(BASE)) {
-  throw new Error(`INSTATIC_BASE_URL is ${BASE}, which is not the Mason Park instance. Refusing to run.`);
+// A misaimed run writes 74 pages into the wrong client's CMS, so this is a hard stop.
+//
+// 2026-08-31: the pattern used to be `/mason-park/i`, which only ever matched the
+// hyphenated Railway host `mason-park.up.railway.app`. That host was DELETED, and
+// both real targets — `www.masonparkdental.com` and `staging.masonparkdental.com` —
+// spell the name without a hyphen, so this guard refused every live run. Match both.
+if (!/(mason-park|masonparkdental)/i.test(BASE)) {
+  throw new Error(`INSTATIC_BASE_URL is ${BASE}, which is not a Mason Park instance. Refusing to run.`);
 }
+
+// Which instance, said out loud. Instatic's publish is all-or-nothing, so knowing
+// production from staging is the difference between a review and an incident.
+export const IS_STAGING = /(^|\/\/|\.)staging\./i.test(BASE);
+
+// The session cache is keyed BY HOST. It used to be one bare `.session` file with
+// no record of where its cookie came from, so switching between production and
+// staging silently reused the other environment's session — which fails as a 401
+// on a good credential, or worse, succeeds against the wrong site.
+const SESSION_FILE = path.join(HERE, `.session-${BASE.replace(/^https?:\/\//, "").replace(/[^a-z0-9.-]/gi, "_")}`);
 
 const cacheCookie = (v) => fs.writeFileSync(SESSION_FILE, v, "utf8");
 const cachedCookie = () => (fs.existsSync(SESSION_FILE) ? fs.readFileSync(SESSION_FILE, "utf8").trim() : null);

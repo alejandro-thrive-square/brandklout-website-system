@@ -98,9 +98,13 @@ export function makePresentation(ctx) {
         <a class="navbar_phone" href="${PRACTICE.phoneHref}">${esc(PRACTICE.phone)}</a>
         ${C.button({ label: "Book", href: BOOKING, external: true })}
       </div>
-      <button class="navbar_toggle" type="button" aria-expanded="false" aria-controls="navbar-menu" aria-label="Menu">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" aria-hidden="true"><path d="M3.5 7h17M3.5 12h17M3.5 17h17"/></svg>
-      </button>
+      <!-- The three bars are drawn in CSS, NOT as an inline svg child. Instatic's
+           importer maps a button onto its base.button module, which carries a text
+           label and takes NO child nodes - so a child svg is silently dropped at
+           import and the live button renders as an empty box. Every other inline
+           icon on the site survives; this is the one element that cannot hold one.
+           See the .navbar_toggle rule in theme/site.css. -->
+      <button class="navbar_toggle" type="button" aria-expanded="false" aria-controls="navbar-menu" aria-label="Menu"></button>
     </div>
   </div></div>
 </header>

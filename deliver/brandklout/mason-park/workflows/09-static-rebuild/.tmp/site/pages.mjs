@@ -804,6 +804,190 @@ function patientResources(d, h) {
 }
 
 // ===========================================================================
+// New Patients — NEW PAGE, authored for the 2026-08-31 core-pages brief
+// (Asana `Build Core Pages` 1217892732561687). The old site had no such page:
+// a first-time visitor had to assemble the answer from /appointment/,
+// /special-offers/, /financing/ and two questions buried in /faq-page/.
+//
+// Every figure and every answer below is the practice's OWN published wording,
+// lifted from those pages rather than invented.
+// ===========================================================================
+function newPatients(d, h) {
+  const C = h.C;
+
+  // The three new-patient offers, from /special-offers/. Prices are the
+  // practice's own commercial terms, so they are quoted rather than restated.
+  const OFFERS = [
+    { price: "$189", title: "New patient special", body: [
+      "A comprehensive dental exam, x-rays, a cleaning, and a full treatment plan for just $189, saving you $328.",
+      "Exclusive to new patients. Cannot be used with insurance, or in cases of periodontal disease.",
+    ] },
+    { price: "$129", title: "Children's new patient exam", body: [
+      "A new patient exam for children under 13, priced at $129 — the gentle first visit that sets the tone for every one after it.",
+    ] },
+    { price: "$350", title: "New patient whitening", body: [
+      "Kor Whitening with at-home trays for $350, available to new patients alongside the first visit.",
+    ] },
+  ];
+
+  const STEPS = [
+    "Book online or call the front desk",
+    "Send your forms and insurance details ahead",
+    "Exam, x-rays and a cleaning on the day",
+    "Leave with a written treatment plan",
+  ];
+
+  const BRING = [
+    ["A photo ID", "Any government photo ID. The front desk takes a copy once, at the first visit."],
+    ["Your insurance card, if you have one", "We process a variety of plans and will check your benefits with you before treatment starts."],
+    ["Your new patient forms", "You can complete them ahead of time — ask the front desk when you book and we will send them over."],
+    ["A list of medications", "Bring anything you take regularly, including supplements, so the doctor can plan around it."],
+  ];
+
+  // The questions the practice has already answered about first visits, taken
+  // from /faq-page/ rather than rewritten. The fourth is ours and is marked as
+  // such in REDESIGN-2026-08-28.md — the practice needs to confirm the hour.
+  const QA = [
+    { question: "Do you accept new patients?",
+      html: "<p>Yes. Mason Park Dental of Katy welcomes new patients of every age, from a child's first tooth through adult restorative work. Book online at any hour, or call the front desk during office hours.</p>" },
+    { question: "What do I need to bring to my first dental appointment?",
+      html: "<p>Typically you will be asked to bring a photo ID and a copy of your insurance details, if you have any. Sometimes you can complete your new patient forms ahead of time — ask when you book.</p>" },
+    { question: "How often should I visit the dentist?",
+      html: "<p>The American Dental Association recommends that most people visit the dentist every six months. Specific needs may call for more frequent visits, and the doctor will tell you which applies to you at the first exam.</p>" },
+    { question: "Can I book a child and a parent on the same trip?",
+      html: "<p>Yes — adults and children are treated in the same building, which is the point of the practice. Say so when you book and the front desk will put the appointments together.</p>" },
+  ];
+
+  return [
+    openPage(h, "New Patients", "What a first visit at Mason Park Dental of Katy involves — what to bring, what it costs, and how long it takes."),
+
+    C.section({ name: "first-visit", inner: `
+      ${C.sectionHeading({ eyebrow: "Your first visit", title: "Four steps, one appointment",
+        text: "New patients of every age are welcome. Here is what happens, so nothing about the first appointment is a surprise." })}
+      ${C.stepList(STEPS)}` }),
+
+    C.section({ name: "offers", bg: "paper", inner: `
+      ${C.sectionHeading({ eyebrow: "New patient offers", title: "What the first visit costs",
+        text: "Three offers apply to first visits. Mention the one you want when you book and the front desk will apply it." })}
+      ${C.grid(3, OFFERS.map((o) => C.offerCard(o)))}
+      ${C.spacer("large")}
+      ${C.notice('<p>Offers are for new patients, cannot be combined with insurance, and do not apply in cases of periodontal disease. Every treatment plan is quoted before work begins — see <a href="/special-offers/">all current offers</a>.</p>')}` }),
+
+    C.section({ name: "bring", inner: `
+      ${C.sectionHeading({ title: "What to bring" })}
+      ${C.grid(2, BRING.map(([title, text]) => C.card({ title, text })))}` }),
+
+    C.section({ name: "paying", bg: "paper", inner: C.split(
+      `${C.eyebrow("Paying for it")}
+       ${C.heading("Insurance, financing, or neither")}
+       ${C.spacer("small")}
+       ${C.paragraph("We process a variety of insurance plans. Without insurance, the practice runs its own savings plan for routine care, and Cherry spreads larger treatment plans over monthly payments at 0% APR with no hard credit check.")}
+       ${C.spacer("medium")}
+       ${C.buttonGroup([
+          { label: "Financing and insurance", href: "/financing/" },
+          { label: "Dental savings plan", href: "/dental-savings-plan/", variant: "secondary" },
+        ])}`,
+      `<div class="card_component">
+         ${C.heading("Office hours", { level: 3, style: 4 })}
+         ${C.hoursList(h.HOURS)}
+         ${C.spacer("small")}
+         <p class="card_meta">In pain today? Call us — we keep time aside for <a href="/services/emergency-dentist/">dental emergencies</a>.</p>
+       </div>`,
+    ) }),
+
+    C.section({ name: "faq", inner: C.faqLayout({
+      eyebrow: "Before you come in",
+      title: "Questions new patients ask",
+      aside: C.spacer("medium") + C.linkArrow({ label: "All questions", href: "/faq-page/" }),
+      items: QA,
+    }) }),
+
+    C.section({ name: "request", bg: "paper", inner: `
+      ${C.sectionHeading({ title: "Request an appointment", centered: true })}
+      ${h.renderEmbed(FORMS.appointment)}` }),
+
+    bookingSection(h),
+  ].join("\n");
+}
+
+// ===========================================================================
+// Patient reviews and testimonials — NEW PAGE, same brief.
+//
+// The comps ask for "a Google reviews screenshot with scroll indicators". A
+// screenshot cannot be read by a screen reader, does not reflow on a phone, and
+// is wrong the day a review is added. These are the practice's own published
+// reviews as markup — read out of the homepage's own content so the two pages
+// can never drift apart.
+//
+// NO NUMERIC RATING IS PRINTED. `reviewLockup()` is in the component library
+// ready for one, but a star average set as static text is a claim that is wrong
+// the moment it moves, and the client has still not supplied a figure to
+// publish. The Google link is a Maps SEARCH url, not a listing deep link: the
+// practice has never published its listing URL, and a guessed CID that lands on
+// the wrong business is worse than a search that cannot.
+// ===========================================================================
+function patientReviews(d, h) {
+  const C = h.C;
+  const GOOGLE = "https://www.google.com/maps/search/?api=1&query=Mason+Park+Dental+Katy+TX";
+
+  const home = h.read("home");
+  const list = [];
+  if (home) {
+    const rb = home.blocks.filter((b) => b.section === 15);
+    const seen = new Set();
+    const key = (q) => q.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 60);
+    for (let i = 0; i < rb.length; i++) {
+      if (rb[i].type !== "para") continue;
+      const next = rb[i + 1];
+      const quote = rb[i].text.trim().replace(/^[“”"'\s]+/, "").replace(/[“”"'\s]+$/, "");
+      const author = next && next.type === "heading" ? next.text.replace(/^-\s*/, "") : "";
+      if (author && !seen.has(key(quote))) { seen.add(key(quote)); list.push({ quote, author }); }
+    }
+  }
+
+  return [
+    openPage(h, "Patient Reviews", "What Katy families say about Mason Park Dental, in their own words."),
+
+    C.section({ name: "reviews", inner: `
+      ${C.sectionHeading({ eyebrow: "From Katy families", title: "What patients say",
+        text: "Every review below was left publicly by a patient of this practice, and is reproduced as written." })}
+      ${list.length ? C.reviewList(list) : C.notice("<p>Reviews are being republished.</p>")}
+      ${C.spacer("large")}
+      ${C.buttonGroup([
+        { label: "Read every review on Google", href: GOOGLE, external: true },
+        { label: "Meet the team", href: "/our-team/", variant: "ghost" },
+      ])}` }),
+
+    C.section({ name: "themes", bg: "slate", padding: "medium", inner: C.quoteBand({
+      eyebrow: "What comes up most",
+      title: "Named, not numbered",
+      text: "Patients name the hygienists and the doctors individually rather than rating the building. That only happens where the same people are still there the next time you come in.",
+    }) }),
+
+    C.section({ name: "leave", bg: "paper", inner: C.split(
+      `${C.eyebrow("Already a patient?")}
+       ${C.heading("Tell the next family what to expect")}
+       ${C.spacer("small")}
+       ${C.paragraph("A review takes a minute and is the most useful thing a patient can do for a practice. If something was not right, tell us first — the front desk would rather fix it than read about it.")}
+       ${C.spacer("medium")}
+       ${C.buttonGroup([
+          { label: "Leave a Google review", href: GOOGLE, external: true },
+          { label: `Call ${h.PRACTICE.phone}`, href: h.PRACTICE.phoneHref, variant: "ghost" },
+        ])}`,
+      `<div class="card_component">
+         ${C.heading("Where to find us", { level: 3, style: 4 })}
+         ${C.spacer("xsmall")}
+         <p class="card_meta">${h.esc(LOCATION_NOTE)}</p>
+         ${C.spacer("small")}
+         ${C.hoursList(h.HOURS)}
+       </div>`,
+    ) }),
+
+    bookingSection(h),
+  ].join("\n");
+}
+
+// ===========================================================================
 export const BESPOKE = {
   home,
   "our-services": ourServices,
@@ -821,6 +1005,9 @@ export const BESPOKE = {
   "cookie-policy": legalPage("cookie-policy"),
   "special-offers": specialOffers,
   "patient-resources": patientResources,
+  // Both new for the 2026-08-31 core-pages brief; neither existed on the old site.
+  "new-patients": newPatients,
+  "patient-reviews": patientReviews,
 };
 
 // Pages that exist on the live site but carry nothing but theme demo content.
@@ -858,5 +1045,13 @@ export const META = {
   "our-services": {
     title: "Our Services | Dentist in Katy, TX | Mason Park Dental",
     description: "Family, cosmetic, restorative, pediatric and emergency dentistry in Katy, TX. Every treatment Mason Park Dental of Katy offers, in one place.",
+  },
+  "new-patients": {
+    title: "New Patients | Mason Park Dental of Katy",
+    description: "What a first visit at Mason Park Dental of Katy involves - what to bring, the $189 new patient special, and how insurance and financing work.",
+  },
+  "patient-reviews": {
+    title: "Patient Reviews | Mason Park Dental of Katy",
+    description: "What Katy families say about Mason Park Dental, in their own words - published reviews from patients of this practice.",
   },
 };

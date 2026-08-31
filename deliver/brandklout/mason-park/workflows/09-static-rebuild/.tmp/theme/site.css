@@ -369,13 +369,23 @@ button { font: inherit; }
 .navbar_phone:hover { color: var(--brand); }
 .navbar_actions .button { min-height: 2.9rem; padding: .8rem 1.6rem; }
 
+/* The hamburger is drawn here, in three background stripes, because the button
+   itself cannot hold a child: Instatic's `base.button` module takes a text label
+   and no children, so an inline <svg> inside it is dropped at import and the
+   live button comes out empty. Painting it on the element's own background is
+   the one mechanism that renders identically locally and on Instatic. */
 .navbar_toggle {
   display: none; align-items: center; justify-content: center;
   width: 2.9rem; height: 2.9rem; padding: 0;
   background: transparent; border: var(--hairline); border-radius: var(--radius);
   color: var(--ink); cursor: pointer;
+  background-image: linear-gradient(currentColor, currentColor),
+                    linear-gradient(currentColor, currentColor),
+                    linear-gradient(currentColor, currentColor);
+  background-size: 1.35rem 1.5px;
+  background-repeat: no-repeat;
+  background-position: center calc(50% - .42rem), center 50%, center calc(50% + .42rem);
 }
-.navbar_toggle svg { width: 1.35rem; height: 1.35rem; }
 .navbar_scrim {
   position: fixed; inset: 0; z-index: 80; padding: 0; border: 0;
   background: rgba(46, 53, 56, .5); opacity: 0; visibility: hidden;

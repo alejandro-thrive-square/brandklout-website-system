@@ -17,7 +17,20 @@ import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const PROJECT = "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc";
-const ENVIRONMENT = "f2bfcbee-c7c9-48be-b404-cc43937d30a2";
+// Which Railway ENVIRONMENT to convert in. Production is the default only
+// because that is where this pipeline was first run; it is NOT the safe
+// default. Staging is a full clone with its own volume, so a redesign should
+// be converted and reviewed there first:
+//   RAILWAY_ENV_NAME=staging node fetch-nodes.mjs
+// Ids come from the railway CLI (railway environment) on project e4a73ef0-....
+const ENVIRONMENTS = {
+  production: "f2bfcbee-c7c9-48be-b404-cc43937d30a2",
+  staging: "a05d3098-3049-452c-aea7-32b7e898c457",
+};
+const ENV_NAME = process.env.RAILWAY_ENV_NAME || "production";
+const ENVIRONMENT = ENVIRONMENTS[ENV_NAME];
+if (!ENVIRONMENT) throw new Error(`RAILWAY_ENV_NAME=${ENV_NAME} is not one of: ${Object.keys(ENVIRONMENTS).join(", ")}`);
+console.log(`railway environment: ${ENV_NAME}`);
 const SERVICE = "8a9bb8d3-ed09-418d-9a67-b5c8bf0f19fb";
 const PART = 200000;
 
