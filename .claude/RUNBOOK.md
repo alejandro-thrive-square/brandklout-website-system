@@ -1,4 +1,4 @@
-## DONE 2026-08-31: staging.drnahlah.com — a full clone of production, LIVE and VERIFIED, not committed
+## DONE 2026-08-31: staging.drnahlah.com — a full clone of production, LIVE and VERIFIED, committed `f5e9c66`
 
 Dr. Nahlah now has a real staging environment. It is a complete copy of production —
 same 37 pages, 43 posts, 501 media assets, all four plugins — on its own Railway
@@ -75,7 +75,10 @@ healthy and `drnahlah.com` still 301s to `www`.
 
 1. **SSL/TLS → Full (strict)** in Cloudflare. Safe: Railway serves a real Let's Encrypt
    cert with `CN=staging.drnahlah.com`.
-2. **Commit.** Working tree is not committed.
+2. **The rest of the working tree is still uncommitted** — ~341 files from earlier
+   sessions (the portrait-centring fix, design `.tmp` artifacts, BugHerd exports).
+   `f5e9c66` deliberately staged only the staging-clone and module-20 paths, so that work
+   is untouched and still needs its own commit from whoever owns it.
 3. Add staging to `process/20-instatic-domain-origins/sites.json` — `check-origins.mjs`
    now resolves the host and reports `OK`, so this is unblocked.
 4. Graduate the workflow to a root `deliver/process/` module before Mason Park uses it.
