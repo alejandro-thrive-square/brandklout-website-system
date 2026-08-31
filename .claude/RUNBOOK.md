@@ -1,3 +1,326 @@
+## DONE 2026-08-31: staging.drnahlah.com — a full clone of production, LIVE and VERIFIED, not committed
+
+Dr. Nahlah now has a real staging environment. It is a complete copy of production —
+same 37 pages, 43 posts, 501 media assets, all four plugins — on its own Railway
+environment, its own volume, its own domain. Nothing done there can reach the live site.
+
+**Full procedure, measurements and scripts:
+[`workflows/18-instatic-staging-clone/`](../deliver/brandklout/dr-nahlah/workflows/18-instatic-staging-clone/18-instatic-staging-clone.md).**
+This entry is the live state and the traps; that file is how to do it again.
+
+### Live state
+
+| | |
+|---|---|
+| staging site | `https://staging.drnahlah.com` (Cloudflare-proxied → Railway) |
+| staging admin | `https://staging.drnahlah.com/admin` — same `.env` credentials as production |
+| platform host | **deleted** — `dr-nahlah-staging.up.railway.app` now 404s, deliberately |
+| Railway | project `2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5`, service `Dr Nahlah`, env `staging` |
+| `PUBLIC_ORIGIN` (staging) | `https://staging.drnahlah.com` — single door |
+| indexing | `X-Robots-Tag: noindex, nofollow` via Cloudflare, staging hostname only |
+| canonical on staging | **off** (`emitCanonical: false` on Open Graph) — see below |
+| `PUBLIC_ORIGIN` (production) | **unchanged** — five origins, still clean |
+| staging owner | `XHvJtb2w5DXnlodWvHqQd` "Alejandro Milano" (production's is `s3cLf3kX8As7JDwesFlIy`) |
+
+Verified: `diff-sites.mjs` reports **37/37 pages content-equivalent, 0 differences**;
+posts listing renders all 43 with detail routes 200; origin probe returns **401** for
+`staging.drnahlah.com` and **403** for a bogus origin — i.e. a person can actually log in.
+Railway reports `Verified: yes`, certificate `VALID`. Production untouched throughout —
+`cms.db` mtime never moved and `check-origins.mjs --all` stayed green the whole way.
+
+### Indexing — DONE, and the order it had to happen in
+
+Staging stays **public on purpose**: BugHerd review happens on it, so Cloudflare Access
+would break the workflow staging exists for. De-indexed instead:
+
+1. Deleted the generated Railway domain — it bypasses Cloudflare, so no rule could ever
+   reach it. Had to go FIRST, because step 3 removes the only thing that protected it.
+2. Cloudflare Response Header Transform Rule on zone `drnahlah.com`
+   (`f126e891760316b7946887faacf306bd`): ruleset `18e6e6c0ac15437395bfbf71562ce1c6`,
+   rule `fbb0a95c55c948708ca9d056f66ff8ba`, expression `http.host eq "staging.drnahlah.com"`,
+   sets `X-Robots-Tag: noindex, nofollow`. Verified it fires on staging and NOT on
+   `www.drnahlah.com`, `drnahlah.com` or `encorercm.com`.
+3. `emitCanonical: false` on staging's Open Graph plugin, then republished.
+4. robots.txt deliberately left ALLOWING the crawl — Google must fetch the page to read
+   the `noindex`.
+
+`check-noindex.mjs` exits 0: staging de-indexed, production untouched.
+
+### Domain cleanup — three hosts retired from PRODUCTION
+
+`encorercm.com`, `www.encorercm.com` and `dr-nahlah.up.railway.app` were all removed from
+the Railway service and from `PUBLIC_ORIGIN`, which is now
+`https://www.drnahlah.com,https://drnahlah.com`. All three answer 404; the live site is
+healthy and `drnahlah.com` still 301s to `www`.
+
+- **`encorercm.com` had been `PUBLIC_ORIGIN[0]` — the CANONICAL origin** — even though it
+  was only ever the Instatic feasibility test. The client's own domain is now first, which
+  is what module 20 requires and what decides `expectedOrigin()` and the secure-cookie flag.
+- **The encorercm.com DOMAIN was NOT touched.** It carries live Google Workspace email
+  (`MX -> smtp.google.com`). Deleting the zone would have killed those mailboxes. Only its
+  use as an Instatic origin was removed. It currently 404s — decide whether it should 301
+  to drnahlah.com or serve its own thing; a Single Redirect ruleset can be added with the
+  `CLOUDFLAREAPI` token (rulesets are writable on that zone; DNS is NOT — the token has no
+  DNS permission on any zone).
+- **Before retiring any platform host, check `INSTATIC_BASE_URL` in EVERY worktree for
+  that client.** Dr. Nahlah's pointed at `www.drnahlah.com` so it was safe.
+  **`bk-mason-park` and `bk-mason-park-kids` both point at `mason-park.up.railway.app`** —
+  doing the same cleanup on Mason Park without repointing those first breaks the whole
+  `18-instatic-embeds` toolkit.
+- Module 20 gained a **"Retiring the platform host"** section and its stale
+  `Current state` table/values were corrected; `sites.json` updated and re-verified
+  (`check-origins.mjs --all` clean) in line with its Integrity Rule.
+
+### Still to do
+
+1. **SSL/TLS → Full (strict)** in Cloudflare. Safe: Railway serves a real Let's Encrypt
+   cert with `CN=staging.drnahlah.com`.
+2. **Commit.** Working tree is not committed.
+3. Add staging to `process/20-instatic-domain-origins/sites.json` — `check-origins.mjs`
+   now resolves the host and reports `OK`, so this is unblocked.
+4. Graduate the workflow to a root `deliver/process/` module before Mason Park uses it.
+
+### The traps — read these before touching staging again
+
+- **A duplicated Railway environment copies `PUBLIC_ORIGIN` verbatim** and does **not**
+  copy the volume. So it boots blank *and* listing production's domains — the exact
+  module-20 trap: login page renders, login POST 403s. Both were true here on day one.
+- **Plugins do not travel in an export bundle.** Staging came up with 0 of 4 and looked
+  perfect while missing every canonical, `og:*` and JSON-LD block — 22.8 KB pages instead
+  of 45 KB. This is the one that would ship a redesign to production with no SEO layer.
+- **Imported collection rows are not live until published one by one.** All 43 posts
+  imported with `status: "published"`, the `/posts` page body hashed *identical* to
+  production, publish status matched — and the listing rendered **zero** articles with
+  every post URL 404. `POST /data/rows/:id/publish` per row, then publish the site.
+  (Red herring: the missing `authorUserId` looks exactly like the cause. It is not — the
+  importer drops it unconditionally and remapping it changed nothing.)
+- **Never clone by volume.** `railway volume files` runs at **170 KB/s** and `cms.db` is
+  1.48 GB — ~2.5 h each way. The site document is **4.88 MB / ~3 s**. Production's
+  database is ~97% version history: the same site is 40 MB on staging.
+- **413 above ~95 MB** on the Railway edge, rejected on Content-Length in ~1 s. The
+  media-bearing export is 535 MB and simply cannot be imported whole.
+- **Step-up rotates the session cookie.** Use the rotated one or everything after 401s.
+- **Cloudflare's managed `robots.txt` is ACCOUNT-WIDE.** `www.drnahlah.com`,
+  `staging.drnahlah.com` and `encorercm.com` — two different domains — all serve the
+  byte-identical file (sha256 `8fa3036c68bfcbd3`). **Editing it to block staging would
+  de-index production.** Use a hostname-scoped Transform Rule, never robots.txt.
+- **Never ship `noindex` together with a canonical.** Google can apply the noindex to the
+  canonical's target, which is production. `check-noindex.mjs` fails the pair on sight.
+- **A `noindex` site must still be crawlable.** Blocking it in robots.txt stops Google
+  fetching the page, so it never reads the `noindex` and a linked URL stays indexed.
+- **Proton VPN poisons DNS for brand-new subdomains.** `10.2.0.1` served a cached
+  NXDOMAIN for `staging.drnahlah.com` long after it resolved fine on `8.8.8.8`, `1.1.1.1`
+  and `9.9.9.9`. The browser won't open it and `check-origins.mjs` reports `ENOTFOUND`
+  against a host that is demonstrably working. Reconnect the VPN; `ipconfig /flushdns`
+  does nothing because the stale entry is upstream. **Do not debug the domain — check
+  `nslookup ... 8.8.8.8` first.**
+- **Cloudflare proxied (orange) does NOT block Railway domain verification.** Railway
+  verifies via the `_railway-verify.*` **TXT** record and Cloudflare never proxies TXT.
+  The CLI showed `VALIDATING_OWNERSHIP` for a while purely from lag. Do not grey-cloud.
+
+### Working method worth reusing
+
+`railway ssh -s "Dr Nahlah" -e <env>` works, and the image ships its own TypeScript source
+at `/app/server` and `/app/src` with `bun` on PATH. Every question above was settled by
+reading the actual handler instead of guessing at the API — that is how the all-or-nothing
+publish, the per-row publish route, the argon2id hashing and the 413's true origin were
+all found. Also: `bun -e` with `bun:sqlite` gives `VACUUM INTO` for a consistent,
+zero-downtime snapshot of a live database (43.8 s for 1.48 GB), which is the correct way
+to copy SQLite if you ever must.
+
+## DONE 2026-08-30: portrait centring bug — FIXED, PUBLISHED AND VERIFIED LIVE, not committed
+
+Chapter 03's portrait (`#specPortrait`) sat half its own width too far left on the live
+site, correct locally. Fixed at the source, pushed, published, verified in a real browser.
+**Working tree is NOT committed** — that is the only thing left to do.
+
+### The cause: CSS and GSAP both centring the same element
+
+- `site-src/css/33-ch-specialist.css:8` — `left:50%; transform:translateX(-50%)`
+- `site-src/sections/ch-specialist.js` — `gsap.fromTo('#specPortrait',{xPercent:-50,...})`
+
+GSAP reads a starting transform through `getComputedStyle`, which returns a resolved
+**matrix** — the `-50%` arrives as plain pixels and is recorded as the baseline `x`.
+`xPercent:-50` is then layered on as a second translate, so the element is shifted twice:
+
+    transform: translate(-50%, 2.4054%) translate3d(-237.401px, 0px, 0px);
+
+**Fix**: pin `x:0` in both `fromTo` states. The CSS `translateX(-50%)` must stay — the
+`if(W.reduced) return;` at the top means the tween never runs under
+`prefers-reduced-motion`, and CSS is then the only thing centring the portrait.
+
+### Why it hid locally — the transferable lesson
+
+It depends on whether the image has a **laid-out width** when GSAP takes its snapshot.
+Local `<img>` has no `width`/`height` attributes, so pre-decode the box is 0px wide and
+`-50%` of 0 is a harmless 0. Instatic's uploader adds `width="1200" height="1500"` plus
+`srcset`/`sizes`, so the aspect ratio is known at parse time and the real half-width is
+baked in permanently. **Any element the CSS transforms AND GSAP animates is this bug
+waiting to happen, and a local pass proves nothing about the host.**
+
+Audited every other overlap — `#realityImg` (transform is on the parent `.re-frame`),
+`.sv-follow` (no CSS transform), `.bl-rc-fig img` (`css:2155`, same shape but no tween
+targets it), `.nav-chapter` (no JS). All clear. If `.bl-rc-fig img` ever gets
+`data-drift`, note the generic drift tween sets only `yPercent`, so it would *lose* its
+centring rather than double it.
+
+### Verified live
+
+`translate(-50%, 2.44%) translate3d(0px, 0px, 0px)` — same shape as the bug, `0px` where
+`-237.401px` was. Image centre and plate centre agree to **0px**. Post-publish audit vs a
+pre-publish capture of the same page: identical except `ogImage`, which varies run to run
+(three runs, three values) and is not publish drift.
+
+### Two traps that cost the most time here — READ BEFORE USING THE API TOOLKIT
+
+**The site's domain has moved to `https://www.drnahlah.com`.** `encorercm.com` no longer
+serves `/admin` (403). Both now documented in `15-instatic-api-sync.md` Gotchas:
+
+1. `insta-api.mjs` evaluated `BASE` **above** `loadEnv()`, so `.env` could set the email and
+   password but **not** `INSTATIC_BASE_URL` — it had already been frozen to the hard-coded
+   `encorercm.com`. Setting it in `.env` appeared to work and changed nothing. **Fixed** in
+   this session: `loadEnv()` runs first, default now `https://www.drnahlah.com`.
+2. A cached cookie from the old host returns **403 with an HTML body, not 401**, so
+   `request()`'s transparent re-login never fires. **Delete `.tmp/.session` after any domain
+   change.**
+
+Diagnostic that separates these from a credentials problem: `curl` the endpoint with no
+cookie. A clean `401` means host and route are fine. Then
+`node deliver/process/20-instatic-domain-origins/check-origins.mjs --all`, which needs no
+credentials and names the host to use.
+
+### State
+
+- Changed, uncommitted: `site-src/sections/ch-specialist.js`,
+  `final-site/assets/site.js`, `15-instatic-api-sync/insta-api.mjs`,
+  `15-instatic-api-sync.md`, this runbook. Also `.env` (untracked) → new base URL.
+- I did **not** run `node build-site.mjs` — it rewrites all 37 pages and the generators
+  (`gen-blog`, `gen-reviews`, `gen-gallery`, `gen-videos`, `gen-legal`, `add-cta-offices`)
+  post-process those afterwards, so a bare run drops their output. `site.js` is a verbatim
+  concatenation (`build-site.mjs:56-80`), so patching the bundle by hand is byte-identical
+  to rebuilding it — verified by re-running the bundle logic and diffing.
+- Before pushing I diffed the **live** asset against local: the only difference was this
+  fix. Worth repeating — the local bundle carries other uncommitted work that was already
+  live, so "local differs from HEAD" does not mean "unpublished".
+
+### Two things left for someone to decide
+
+- **The QA baseline in `08-qa/.tmp/audit-out/` is stale**: captured against
+  `encorercm.com`, and predates the Vimeo migration (`words` 1385 vs 1617 live, YouTube
+  iframes vs Vimeo, 25 images vs 37). It cannot function as the publish gate the workflow
+  doc describes until it is re-captured against `www.drnahlah.com`. I ran `--only index`,
+  then **restored the file to HEAD** rather than silently re-baselining a tracked record.
+- **The CSS deployed on Instatic is older than `site-src`**: live shows `height:100%` /
+  `object-fit:cover` and no `max-width:none` (so base `img,video{max-width:100%}` still
+  wins, clamping the portrait to its plate); source says `height:104%` /
+  `object-fit:contain` / `max-width:none`. Pushing `site.css` will change the portrait's
+  width. Not needed for this fix, and deliberately not done.
+
+### Pre-existing, not mine, still open
+
+Home page audit shows `imgBroken: ['']`, three images with no alt, and `401` on
+`player.vimeo.com/video/1221240290` — the Vimeo uploads are the BLOCKED item below.
+
+## BLOCKED 2026-08-28: YouTube -> Vimeo migration — 12 films downloaded, upload needs the right account
+
+Client wants the site's YouTube embeds moved to Vimeo "because Vimeo has better SEO".
+Downloads are done; the upload is blocked on credentials for the correct account.
+
+### What the site actually embeds
+
+20 distinct videos across three pages of the `04-design` build:
+`index.html` (1), `patient-stories.html` (6), `video-library.html` (14).
+Two mechanisms — 7 plain `<iframe>`, 13 facade cards (`data-yt` + `img.youtube.com`
+thumbnail, iframe built on click by `sections/video-library.js:44`).
+
+**`final-site/` is GENERATED.** Do not edit it. Sources are
+`04-design/.tmp/site-src/`: `pages/home.body.html:529`,
+`pages/patient-stories.body.html` (6 iframes), `pages/video-library.body.html`,
+`gen-videos.mjs:36,95`, `sections/video-library.js:44`, and `videos.json`
+(the 13 cards' id/title/thumb/zoom). `probe-thumbs.mjs` picks maxres vs hqdefault.
+
+### The ownership split — this is the important finding
+
+- **11** are Dr. Esam Nahlah's own channel `UCKAbJ7TTUB-rFOTQ57DEq9g`.
+- **1** (`bn3vdCgDTrc`) is `Esam Abou Nahlah` `UCymnZ1ijyJzczc5GvJTF8Ug` — alt
+  channel, almost certainly his, unconfirmed.
+- **8 are THE WELLNESS HOUR** `UC5g_QKb5sBQ-A6WSG9B7cHw` — a third party.
+  Bone Grafting, Fixing Grey Lines, Options for Failing Teeth, Replacing Front
+  Teeth, Sedation Dentistry, Seven Steps of Veneers, Single Tooth Implants,
+  Smile Makeovers. Syndicated patient-education content licensed for *embedding*.
+  **Not downloaded, not uploaded.** Re-hosting them on the client's Vimeo is a
+  rights question nobody has answered. Do not migrate these on your own judgement.
+
+### Done
+
+12 films downloaded at 1080p (326 MB) to
+`03-graphic-resources/.tmp/downloads/video/` (gitignored; `*.mp4` is too).
+Each has its `.info.json` + thumbnail. Manifest driving the whole job:
+`03-graphic-resources/.tmp/video-migration-manifest.csv` — 20 rows, with empty
+`vimeo_id` / `vimeo_thumb` columns to fill on upload.
+Uploader written and ready: `03-graphic-resources/upload_to_vimeo.py`
+(`--check` / `--dry-run` / run; checkpoints the CSV after every file, so an
+interrupted run resumes).
+
+### Gotchas
+
+- **Three Vimeo accounts are in play. Check which one a token belongs to before
+  uploading anything.** `.env`'s `VIMEO=` was first the app's *Client Secret*
+  (128-char base64 -> HTTP 401 `error_code 8003`); a real access token is much
+  shorter. The replacement token authenticates as **Alejandro Milano, FREE tier,
+  1 GB LIFETIME cap, 0 folders**. But the two Vimeo videos already on the live
+  site (`1221240290`, `1221697337`, Chapter 03) belong to **Sang Huynh
+  `vimeo.com/user248712727`** — that is where the client's Vimeo content already
+  lives, and the "Dr. Nahlah folder" the user says exists is presumably there.
+- **A free Vimeo account defeats the entire point of this migration.** Domain-
+  restricted embedding (`privacy.embed=whitelist`) and hiding from vimeo.com
+  (`privacy.view=disable`) are paid-tier only. On free, every film gets a public
+  indexed vimeo.com page under a personal profile — a second page the client does
+  not own, competing with their own. Worse for SEO than the YouTube status quo.
+- The site has **no `VideoObject` JSON-LD at all**. That, not the host swap, is
+  the change that actually does SEO work, and it is host-agnostic — worth doing
+  whether or not the Vimeo move happens.
+- Tooling installed this session: `yt-dlp` and `PyVimeo` (pip), `ffmpeg 9.0.1`
+  (winget `Gyan.FFmpeg`). ffmpeg is NOT on PATH for already-open shells; pass
+  `--ffmpeg-location .../Gyan.FFmpeg_.../ffmpeg-9.0.1-full_build/bin`.
+- The live site is **Instatic**, not this static build. Whatever is changed here
+  still has to be carried across; these embeds were not checked against live.
+
+### Next
+
+1. Get an access token on the account that owns the Dr. Nahlah folder (Sang
+   Huynh / the paid Brandklout account), scopes `public private edit upload
+   video_files`. Confirm tier is Starter+ before uploading.
+2. `python upload_to_vimeo.py --check`, then run it. Set `EMBED_DOMAINS` in that
+   script to the real production domain — currently a guess.
+3. Swap the source files listed above off the manifest, rebuild, verify.
+4. Decide the Wellness Hour 8: confirm redistribution rights, leave them on
+   YouTube (mixed library), or replace with practice footage.
+
+## 2026-08-28 - embed-origins upgraded to 1.4.0 on Dr. Nahlah (encorercm.com)
+
+The Embed block's `preview()` no longer renders the embed on the editor canvas; it renders a
+static card (mode, destination host, height rule, "Appears when the page is published").
+`render()` - the publish path - is byte-for-byte unchanged, so NOTHING about this site's
+published output moved. Nothing was published.
+
+- installed FROM THIS WORKTREE, because `.env` is per-worktree and main's has no
+  `INSTATIC_BASE_URL` on purpose. `cd deliver/process/18-instatic-embeds` then
+  `node pack-plugin.mjs embed-origins .tmp/embed-origins.zip` and
+  `node install-plugin.mjs .tmp/embed-origins.zip --apply` (step-up is automatic from `.env`).
+- **1.3.0 -> 1.4.0**, enabled, `lastError: null`, settings survived the upgrade.
+- **`verify-embed-canvas.mjs` 15/15 live** - 9 cards over 3 breakpoint canvases, zero iframes,
+  zero vendor network requests, zero `<script>`/`<style>` leaked into the editor document.
+  It publishes nothing. Temp page deleted.
+
+### Gotcha
+
+**`verify-embed-editor.mjs` is RED here and it is not the plugin.** Pack fetched 200, "Embed is
+offered in the inserter" ok, then `inCanvas: 0` and an empty Properties Panel - the synthetic
+picker click never reaches React's handler. Reproduced twice on this site and twice on the other.
+The canvas gate passing 15/15 minutes later is the proof that the block itself is fine. Run the
+canvas gate first; use a real trusted click (Chrome MCP `computer`) to check the inserter by hand.
+
 > [!IMPORTANT]
 > **Moved here 2026-08-21.** All Dr. Nahlah work now lives in this worktree
 > (`bk-dr-nahlah`, branched at `60d7cce` = main). The branch was fast-forwarded

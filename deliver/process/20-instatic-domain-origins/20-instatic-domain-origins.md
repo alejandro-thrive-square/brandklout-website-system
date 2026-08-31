@@ -77,7 +77,7 @@ The **first** entry is canonical: it is what `expectedOrigin()` returns and it d
 
 Run this whenever a domain is pointed at an Instatic site — a launch, a re-point, adding `www`, or moving hosts.
 
-1. **Before touching DNS**, record the platform host (`<app>.up.railway.app`). It must survive the change: it is the toolkit's way in and the fallback when the domain misbehaves.
+1. **Before touching DNS**, record the platform host (`<app>.up.railway.app`). It must survive *the cutover itself* — it is the toolkit's way in and the fallback while the domain is unproven. Retire it afterwards; see **Retiring the platform host** below.
 2. **Point DNS** at the Instatic host and add the domain in the platform (Railway → the service → Networking → custom domain). Do apex *and* `www`, or decide deliberately that only one exists.
 3. **Set `PUBLIC_ORIGIN`** on the Instatic service, comma-separated, **client domain first, platform host last**:
    ```
@@ -126,14 +126,14 @@ Both sites were repaired on 2026-08-28. `node check-origins.mjs --all` exits 0.
 
 | Client | Send this | Also works |
 |---|---|---|
-| Dr. Nahlah | `https://www.drnahlah.com/admin` | `encorercm.com`, `www.encorercm.com`, `dr-nahlah.up.railway.app` |
+| Dr. Nahlah | `https://www.drnahlah.com/admin` | `drnahlah.com` (301s to www), `staging.drnahlah.com` |
 | Mason Park | `https://www.masonparkdental.com/admin` | `mason-park.up.railway.app` |
 
 Live values now:
 
 ```
 # Dr. Nahlah   (was: the first three only)
-PUBLIC_ORIGIN=https://encorercm.com,https://www.encorercm.com,https://dr-nahlah.up.railway.app,https://www.drnahlah.com,https://drnahlah.com
+PUBLIC_ORIGIN=https://www.drnahlah.com,https://drnahlah.com
 
 # Mason Park   (was: https://masonparkdental.com alone)
 PUBLIC_ORIGIN=https://www.masonparkdental.com,https://masonparkdental.com,https://mason-park.up.railway.app
@@ -191,6 +191,45 @@ in-browser editor state: the collab socket drops. Do not redeploy while someone 
 > That is luck, not design. **Pin by digest**, and use `railway redeploy` *without* `--from-source`
 > to re-run the existing deployment rather than pulling the tag again.
 
+## Retiring the platform host
+
+Once a custom domain is live and proven, `<app>.up.railway.app` stops being an asset and
+becomes a liability: it serves a **full public duplicate** of the site, it answers 404 on
+`/robots.txt`, and because it never passes through Cloudflare **nothing at the edge can
+protect it** — no Transform Rule, no robots rule, no Access policy. Its only protection is
+whatever canonical the page happens to carry.
+
+Retire it, in this order:
+
+```bash
+# 1. Confirm NOTHING points at it. Check EVERY worktree for this client.
+grep -h "^INSTATIC_BASE_URL" /path/to/worktrees/*/.env
+
+# 2. Delete the domain, then drop it from PUBLIC_ORIGIN, client domain FIRST.
+railway domain delete <app>.up.railway.app --service "<Service>" --environment <env> --yes
+railway variables --set "PUBLIC_ORIGIN=https://www.client.com,https://client.com"   --service "<Service>" --environment <env>
+
+# 3. Prove it.
+node check-origins.mjs --all
+```
+
+> [!WARNING]
+> Not perfectly reversible: re-adding generates a **new random hostname**, not the old one.
+> That is acceptable because the emergency path survives — `railway domain` re-issues one in
+> seconds — but it does mean the fallback is no longer pre-provisioned, and restoring access
+> during an outage also needs a `PUBLIC_ORIGIN` edit and a redeploy.
+
+Done for Dr. Nahlah on 2026-08-31: `encorercm.com`, `www.encorercm.com` and
+`dr-nahlah.up.railway.app` all removed. **`encorercm.com` had wrongly been
+`PUBLIC_ORIGIN[0]`** — the canonical origin — despite being a disposable Instatic
+feasibility test; the client domain is now first, as this module requires. The
+encorercm.com *domain* was left alone: it carries live Google Workspace email
+(`MX -> smtp.google.com`), so only its use as an Instatic origin was removed.
+
+**Mason Park is NOT ready for this** — `bk-mason-park` and `bk-mason-park-kids` both set
+`INSTATIC_BASE_URL=https://mason-park.up.railway.app`. Repoint those first, or the whole
+`18-instatic-embeds` toolkit breaks.
+
 ## Gotchas
 
 - **A variable that reads correctly in Railway may not be the one in force.** `resolvePublicOrigins()` runs once at boot, so the dashboard shows intent and the running process shows reality. Mason Park sat for a day with a correct-looking value that had never been applied. The checker probes the running server; that is the only proof.
@@ -201,7 +240,8 @@ in-browser editor state: the collab socket drops. Do not redeploy while someone 
 - **`www` is not implied.** See the warning above. Half the traps in this system will be a missing `www` entry.
 - **An env change without a redeploy does nothing.** The list is read once at boot.
 - **Scripts do not reproduce the bug.** Anything sending no `Origin` header — curl, our own toolkit — passes the gate unconditionally. A green scripted run says nothing about whether a *person in a browser* can save. Only this checker, which sets `Origin` deliberately, or a real human test.
-- **Do not "fix" a 403 by removing the platform host from `PUBLIC_ORIGIN`.** The `18-instatic-embeds` toolkit points at it via `INSTATIC_BASE_URL`; dropping it breaks every install and gate.
+- **Do not "fix" a 403 by removing the platform host from `PUBLIC_ORIGIN`.** Where the `18-instatic-embeds` toolkit points at it via `INSTATIC_BASE_URL`, dropping it breaks every install and gate. Check that variable in **every** worktree for the client before removing anything — as of 2026-08-31 `bk-mason-park` and `bk-mason-park-kids` both point at `mason-park.up.railway.app`, so Mason Park's platform host is load-bearing and Dr. Nahlah's was not.
+- **A retired platform host is a crawlable duplicate that Cloudflare cannot protect.** It does not resolve through the proxy, so no Transform Rule, robots rule or Access policy reaches it. Retire it rather than leaving it serving (below).
 - **The apex may not resolve even when `www` does.** Mason Park's does not. Check both rather than assuming the pair.
 - **An apex that 301s to `www` is not the host to fix.** The browser follows the redirect and then sends `www` as its `Origin`, so `www` is what must be listed. `drnahlah.com` does exactly this. The checker reports a `redirect` row naming the destination rather than pretending the apex passed or failed.
 - **Never paste a suggested `PUBLIC_ORIGIN` over the existing one.** The checker only knows the hosts it was given, so its suggestion cannot include a platform host or an old domain it never saw. Merge; dropping the `<app>.up.railway.app` entry silently breaks `INSTATIC_BASE_URL` and every script in `18-instatic-embeds`.
