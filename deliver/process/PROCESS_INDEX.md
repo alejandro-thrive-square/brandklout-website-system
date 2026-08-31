@@ -72,13 +72,16 @@ The current numbered folders are reusable templates. Module `00` is the setup wo
 | 18 | Instatic Embeds | [18-instatic-embeds.md](./18-instatic-embeds/18-instatic-embeds.md) |
 | 19 | Cloudflare Launch (sitemap, 301 map, canonical host) | _not yet promoted — lives in `bk-dr-nahlah` as `19-cloudflare-launch/`_ |
 | 20 | Instatic Domain & Admin Origins | [20-instatic-domain-origins.md](./20-instatic-domain-origins/20-instatic-domain-origins.md) |
+| 21 | Instatic Staging Clone & Promotion | [21-instatic-staging-clone.md](./21-instatic-staging-clone/21-instatic-staging-clone.md) |
 
-### Instatic modules (`18`, `20`)
+### Instatic modules (`18`, `20`, `21`)
 
 Not part of the offer-routing sequence — they apply to any engagement whose site is delivered on **Instatic** rather than Webflow or Vercel, and both are needed on every such site:
 
 - **`18` Instatic Embeds** makes third-party widgets possible at all. Instatic publishes behind `frame-src 'none'`, so without this plugin no booking form, review widget or chat bubble can load. Install it on every Instatic site.
-- **`20` Instatic Domain & Admin Origins** is run at launch and at every later domain change. It is what makes the client's own `client.com/admin` able to **save**, and the checker in it is the thing to run before sending anyone an admin link.
+- **`20` Instatic Domain & Admin Origins** is run at launch and at every later domain change. It covers the two independent ways an Instatic domain breaks and carries a checker for each: `check-origins.mjs` (the **gate** — is `client.com/admin` able to *save*; run it before sending anyone an admin link) and `check-dns.mjs` (the **pointer** — does the domain still reach Railway at all). Railway mints a random CNAME target per custom domain; a redeploy does not move it, but deleting and re-adding the domain does, which is how Mason Park went down on 2026-08-28.
+
+- **`21` Instatic Staging Clone & Promotion** gives the site a real staging twin and a way back. Instatic's publish is all-or-nothing — one click replaces every public page — so a redesign cannot live as drafts on production without riding out with the next typo fix. Proven on Dr. Nahlah 2026-08-31 and run again for Mason Park the same day, which is what promoted it out of the client folder.
 
 `20` should be run as part of [`09-launch`](./09-launch/09-launch.md) for an Instatic site; `09` otherwise only knows about Webflow and Vercel publishing targets.
 

@@ -11,20 +11,45 @@
     "fix whichever of the two is wrong.",
     "No secrets here. Credentials live in the per-worktree .env and never in this repo."
   ],
+  "_dns_comment": [
+    "`dns` records the CNAME target Railway minted for each custom domain, so a change is",
+    "detectable. Railway mints a RANDOM target per domain and it is stable for the life of that",
+    "domain record — a redeploy does NOT change it. It changes when the domain is deleted and",
+    "re-added, which mints a fresh one and silently orphans whatever Cloudflare still points at.",
+    "`node check-dns.mjs` compares these against Railway and against public DNS. That one needs",
+    "`railway login`, because a Cloudflare-proxied record hides its CNAME from the world and",
+    "Railway is the only source of truth for what it should be.",
+    "`env` names the Railway environment the domain lives in; omit it for production. A staging",
+    "domain is invisible from the production environment, and without this the checker reports it",
+    "as unreadable rather than checking it.",
+    "Update these ONLY after Cloudflare has been fixed — `node check-dns.mjs --record` prints the",
+    "current values in this shape. Recording a change without making it just files the outage."
+  ],
   "sites": [
     {
       "client": "dr-nahlah",
       "adminUrl": "https://www.drnahlah.com",
       "alternates": ["https://encorercm.com", "https://dr-nahlah.up.railway.app"],
       "railway": { "project": "2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5", "service": "Dr Nahlah" },
-      "note": "Fixed 2026-08-28: www.drnahlah.com and drnahlah.com appended to PUBLIC_ORIGIN, which already held encorercm.com + www + the railway host from the 2026-08-18 fix. drnahlah.com 301s to www, so www is the one that must be listed. All five origins verified live."
+      "dns": [
+        { "host": "drnahlah.com", "record": "@", "expect": "3dz0c6o1.up.railway.app" },
+        { "host": "www.drnahlah.com", "record": "www", "expect": "msrhxbm8.up.railway.app" },
+        { "host": "encorercm.com", "record": "@", "expect": "ekr06qos.up.railway.app" },
+        { "host": "www.encorercm.com", "record": "www", "expect": "1dsz1ru0.up.railway.app" }
+      ],
+      "note": "Fixed 2026-08-28: www.drnahlah.com and drnahlah.com appended to PUBLIC_ORIGIN, which already held encorercm.com + www + the railway host from the 2026-08-18 fix. drnahlah.com 301s to www, so www is the one that must be listed. All five origins verified live. DNS targets recorded 2026-08-29 and unchanged since each domain was created (encorercm 2026-08-14, drnahlah 2026-08-25) across every redeploy since — this pair is the evidence that redeploys do not move the pointer."
     },
     {
       "client": "mason-park",
       "adminUrl": "https://www.masonparkdental.com",
-      "alternates": ["https://mason-park.up.railway.app"],
+      "alternates": ["https://staging.masonparkdental.com"],
       "railway": { "project": "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc", "service": "Mason Park" },
-      "note": "Fixed 2026-08-28. PUBLIC_ORIGIN had been set to the apex alone (https://masonparkdental.com) and had NEVER been applied — the container was still running its boot-time derived value. The apex also has no DNS record, so it is listed for the day it gets one but is not the link to hand out. Redeployed; www now verified live."
+      "dns": [
+        { "host": "masonparkdental.com", "record": "@", "expect": "l6wotb3m.up.railway.app" },
+        { "host": "www.masonparkdental.com", "record": "www", "expect": "pkez8lkn.up.railway.app" },
+        { "host": "staging.masonparkdental.com", "record": "staging", "expect": "pokjns4x.up.railway.app", "env": "staging" }
+      ],
+      "note": "2026-08-31: staging environment added (Railway env `staging`, PUBLIC_ORIGIN https://staging.masonparkdental.com only — no platform host was ever minted for it, so there was none to retire). THREE production faults fixed the same day: (1) the `www` Cloudflare record pointed at the APEX's target l6wotb3m and now points at pkez8lkn; (2) the zone's non-US block carried no path condition, so it 403d /.well-known/acme-challenge/ and no certificate could ever issue — it now exempts that path and the staging host, and BOTH production certificates went ISSUE_FAILED -> VALID within minutes of the retry; (3) the apex and www served byte-identical pages with no canonical, and the apex now 301s to www via a Cloudflare dynamic redirect that itself exempts the ACME path. `mason-park.up.railway.app` and `mason-park-production.up.railway.app` no longer exist — both were deleted before this session and 404; the platform host is gone from `alternates` and from this worktree's INSTATIC_BASE_URL, which now points at www. Staging carries X-Robots-Tag noindex via Cloudflare and emitCanonical:false on its Open Graph plugin."
     }
   ]
 }

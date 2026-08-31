@@ -1,24 +1,31 @@
 Point a client domain at an Instatic site, or work out which admin URL is safe to send.
 
-Read 20-instatic-domain-origins.md first. The short version:
+Read 20-instatic-domain-origins.md first. There are TWO independent failures here and
+they look nothing alike:
 
-Instatic's admin rejects any state-changing request whose Origin is not in PUBLIC_ORIGIN.
-Logging in is one. So a half-done cutover produces an address that looks perfect — the
-login form renders normally — and then refuses the login itself with "invalid origin",
-which reads like a permissions or password problem and is neither. Nobody gets in.
+  THE GATE    Instatic's admin rejects any state-changing request whose Origin is not in
+              PUBLIC_ORIGIN. Logging in is one. So a half-done cutover produces an address
+              that looks perfect — the login form renders normally — and then refuses the
+              login itself with "invalid origin", which reads like a permissions or
+              password problem and is neither. Nobody gets in.
 
-If you only need to answer "what link do I give my teammate?":
+  THE POINTER Railway mints a RANDOM eight-character CNAME target PER CUSTOM DOMAIN
+              (l6wotb3m.up.railway.app, pkez8lkn.up.railway.app). DNS has to point at the
+              right one. Get this wrong and there is no login page to be refused from —
+              the domain reaches nothing.
 
     cd deliver/process/20-instatic-domain-origins
-    node check-origins.mjs --all              # every site in sites.json
-    node check-origins.mjs https://client.com # any site
+    node check-origins.mjs --all              # the gate; every site in sites.json
+    node check-origins.mjs https://client.com # the gate; any site
+    node check-dns.mjs                        # the pointer; needs `railway login`
 
-That sends no credentials and changes nothing. Anyone can run it. Send the URL printed
-after GIVE THIS LINK, and never a host marked TRAP — a TRAP host serves a working-looking
-login page that refuses to let anyone in.
+check-origins.mjs sends no credentials and changes nothing — anyone can run it. Send the
+URL printed after GIVE THIS LINK, and never a host marked TRAP (a TRAP host serves a
+working-looking login page that refuses to let anyone in). A BLOCKED row is NOT a pass:
+it means a CDN answered instead of the origin, so that host was never actually tested.
 
-If you are doing an actual cutover, run the eight numbered steps in the directive. The two
-that get skipped and cause every incident:
+If you are doing an actual cutover, run the nine numbered steps in the directive. The
+ones that get skipped and cause every incident:
 
   * PUBLIC_ORIGIN must list EVERY host a human might use, including the www/apex twin —
     matching is an exact string compare and nothing about `www` is implied. Client domain
@@ -26,13 +33,29 @@ that get skipped and cause every incident:
     INSTATIC_BASE_URL in the client's .env points at it and the 18-instatic-embeds
     toolkit needs it.
   * Redeploy after changing the env var. The list is read once at boot.
+  * Read each domain's OWN target out of Railway. The apex's target is not the www target.
+    Using one for both still serves the site (Railway routes on Host) but no certificate
+    will ever issue, so it goes unnoticed until something checks.
 
-Then update sites.json, re-run `node check-origins.mjs --all` until it is clean and exits
-0, and update INSTATIC_BASE_URL in that client's worktree .env to an origin that passes.
+NEVER DELETE A CUSTOM DOMAIN IN RAILWAY TO FIX IT. Re-adding it mints a new target and
+orphans whatever DNS points at — that is the outage, not the fix. A redeploy does NOT
+move the pointer; the belief that it does is what this module now exists to correct.
+Changing PUBLIC_ORIGIN, changing the admin route, upgrading the image, restarting: none
+of them touch the domains.
 
-Do not trust a green scripted run as proof. Anything that sends no Origin header — curl,
-our own toolkit — passes the gate unconditionally, so scripts cannot reproduce this bug.
-Only this checker, or a real person saving in a real browser.
+Then update sites.json (adminUrl AND the dns targets), re-run both checkers until they
+exit 0, and update INSTATIC_BASE_URL in that client's worktree .env to an origin that
+passes.
 
-PUBLIC_ORIGIN lives on the Instatic host (Railway), not in this repository. Nothing here
-can set it; report what needs changing and who needs to change it.
+Do not trust a green scripted run as proof of the gate. Anything that sends no Origin
+header — curl, our own toolkit — passes it unconditionally, so scripts cannot reproduce
+that bug. Only this checker, or a real person saving in a real browser.
+
+Watch for a Cloudflare rule blocking non-US traffic (present on masonparkdental.com and
+encorercm.com). It blocks our checkers and it blocks certificate validation, so a domain
+added while it is on cannot get a certificate. Lift it for the duration, or expect
+ISSUE_FAILED.
+
+PUBLIC_ORIGIN and the DNS records live on the Instatic host (Railway) and in Cloudflare,
+not in this repository. Nothing here can set them; report what needs changing and who
+needs to change it.

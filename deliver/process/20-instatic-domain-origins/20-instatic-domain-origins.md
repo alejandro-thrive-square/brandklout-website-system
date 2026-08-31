@@ -4,7 +4,7 @@
 When a client's real domain goes live, their team should reach the site editor at their own address — `drnahlah.com/admin`, `masonparkdental.com/admin` — log in, edit and save. This module is the step that makes that true, and the check that proves it before anyone is given a link.
 
 > [!IMPORTANT]
-> **Integrity Rule**: Any change to the origin model, the checker or `sites.json` must be documented here immediately, and mirrored into [PROCESS_INDEX.md](../PROCESS_INDEX.md). `sites.json` must be re-verified with `node check-origins.mjs --all` in the same commit that changes it.
+> **Integrity Rule**: Any change to the origin model, the checker or `sites.json` must be documented here immediately, and mirrored into [PROCESS_INDEX.md](../PROCESS_INDEX.md). `sites.json` must be re-verified with **both** `node check-origins.mjs --all` and `node check-dns.mjs` in the same commit that changes it.
 
 ## Operational Purpose
 
@@ -18,16 +18,22 @@ So this module exists to answer one question, out loud, before a link is ever se
 
 > **From which addresses can a person actually LOG IN TO and use this site's admin?**
 
-## The one command
+## The two commands
+
+There are two independent ways this breaks, so there are two checks. Run both.
 
 ```bash
 cd deliver/process/20-instatic-domain-origins
 
-node check-origins.mjs --all                  # every site in sites.json
+node check-origins.mjs --all                  # THE GATE: who can actually log in
 node check-origins.mjs https://client.com     # any site, registry or not
+
+node check-dns.mjs                            # THE POINTER: does the domain still reach us
 ```
 
-It **sends no credentials, no cookie, and changes nothing**, so anyone on the team can run it against any site at any time. Give it to whoever is about to send the link.
+`check-origins.mjs` **sends no credentials, no cookie, and changes nothing**, so anyone on the team can run it against any site at any time. Give it to whoever is about to send the link.
+
+`check-dns.mjs` is read-only too, but needs `railway login` — see [The DNS pointer](#the-dns-pointer-what-changes-it-and-what-does-not) for why nothing credential-free can answer that question.
 
 Output is the answer, not a diagnosis to interpret:
 
@@ -73,27 +79,200 @@ otherwise           ->  derived from RENDER_EXTERNAL_URL and/or RAILWAY_PUBLIC_D
 
 The **first** entry is canonical: it is what `expectedOrigin()` returns and it decides `publicOriginIsHttps()`, which governs secure cookie flags. Put the client's real domain first, never the platform host.
 
+## The DNS pointer: what changes it, and what does not
+
+This is a **second, independent** way for the same site to break, and it does not
+look like the origin bug at all. `PUBLIC_ORIGIN` decides who may *log in*. The DNS
+pointer decides whether anyone reaches the server *at all*. Get the pointer wrong and
+there is no login page to be refused from — the domain simply stops resolving to
+anything of ours.
+
+```bash
+node check-dns.mjs               # every site: recorded target vs. Railway vs. the world
+node check-dns.mjs mason-park    # one client
+node check-dns.mjs --record      # print Railway's current targets in sites.json shape
+```
+
+### Railway mints a random target per domain
+
+Adding a custom domain in Railway does not give you `<app>.up.railway.app`. It mints a
+**fresh eight-character host, one per domain**, and that is what DNS must point at:
+
+| Domain | Railway wants |
+|---|---|
+| `masonparkdental.com` | `@` -> `l6wotb3m.up.railway.app` |
+| `www.masonparkdental.com` | `www` -> `pkez8lkn.up.railway.app` |
+| `drnahlah.com` | `@` -> `3dz0c6o1.up.railway.app` |
+| `www.drnahlah.com` | `www` -> `msrhxbm8.up.railway.app` |
+| `encorercm.com` | `@` -> `ekr06qos.up.railway.app` |
+| `www.encorercm.com` | `www` -> `1dsz1ru0.up.railway.app` |
+
+They are unrelated to each other and unrelated to the service domain. **The apex's target
+is not the `www` target.** Reading one off the dashboard and using it for both is a real
+and easy mistake — it happened here on 2026-08-29 — and it is nearly invisible, because
+Railway's edge routes on the `Host` header and will happily serve the site through the
+wrong target anyway. Railway even reports `Verified: yes` for a domain whose record points
+at a *sibling* domain's target, so its own dashboard will not flag it either. Fix it
+because it is wrong, not because you can see a symptom.
+
+> [!IMPORTANT]
+> **A redeploy does not change the target.** That belief is the wrong lesson to draw
+> from the 2026-08-28 outage, and acting on it means re-checking Cloudflare after every
+> deploy forever while the actual trigger goes unguarded.
+>
+> The evidence, from `railway domain status`:
+>
+> | | domain created | target | deploys since | target now |
+> |---|---|---|---|---|
+> | `encorercm.com` | 2026-08-14 | `ekr06qos` | many, incl. the 2026-08-18 and 08-28 origin fixes | `ekr06qos` — unchanged |
+> | `drnahlah.com` | 2026-08-25 | `3dz0c6o1` | incl. 2026-08-28 | `3dz0c6o1` — unchanged |
+> | `www.masonparkdental.com` | 2026-08-28 08:41 | `pkez8lkn` | the 2026-08-28 **18:29** deploy | `pkez8lkn` — unchanged |
+>
+> Mason Park's own domains survived a redeploy ten hours later with their `Updated`
+> timestamps still reading 08:42. A deploy does not touch them.
+
+### What does change it: deleting and re-adding the domain
+
+The target is minted when the **domain record** is created and lives as long as that
+record. Remove the domain in Railway and add it back — for any reason, including
+"it looked broken so I recreated it" — and you get a **new random target**. The old one
+now belongs to nobody. DNS still points at it. The site is down, and nothing anywhere
+says why.
+
+That is what happened to Mason Park. All of it inside three minutes on 2026-08-28:
+
+```
+08:39:21  Cloudflare custom WAF rule created on masonparkdental.com
+08:41:02  new Railway service domain  mason-park-production.up.railway.app
+08:41:21  masonparkdental.com      re-created in Railway -> new target l6wotb3m
+08:41:47  www.masonparkdental.com  re-created in Railway -> new target pkez8lkn
+```
+
+**So the rule is not "update Cloudflare after every redeploy". It is:**
+
+> **Never delete a custom domain in Railway.** Changing `PUBLIC_ORIGIN`, changing the
+> admin route, upgrading the image, restarting — none of these require touching the
+> domain, and none of them move the pointer. If a domain genuinely must be re-added,
+> that is a **DNS cutover**, not a redeploy: read the new target with
+> `railway domain status`, change Cloudflare, and re-verify before walking away.
+
+### What `check-dns.mjs` can and cannot see
+
+`sites.json` now records the expected target per host, so drift is detectable at all.
+The check has three independent sources and is honest about which ones answered:
+
+| Source | Answers | Needs |
+|---|---|---|
+| `railway domain status` | what the target **should** be | `railway login` |
+| system DNS | whether the host resolves **at all** | nothing |
+| Cloudflare API | what the record **actually holds** | a token with Zone -> DNS -> Read |
+
+> [!WARNING]
+> **Public DNS cannot see a proxied record's target.** An orange-clouded record answers
+> with Cloudflare's own IPs and never reveals its CNAME content, so `www` pointing at the
+> *apex's* target is indistinguishable from `www` pointing at the right one. Only the
+> Cloudflare API closes that gap.
+>
+> **Closed 2026-08-30.** `CLOUDFLAREDIAGNOSIS` in the repo `.env` is a read-scoped token
+> that can read `dns_records`, and `check-dns.mjs` prefers it. It immediately caught what
+> nothing else could see: `www.masonparkdental.com` pointing at the **apex's** target.
+> The older `CLOUDFLAREAPI` still returns `Authentication error` on `dns_records`, so it is
+> tried last and must never shadow the working one. Oddity worth knowing: the new token
+> fails `/user/tokens/verify` while working fine on every endpoint we actually use — do not
+> add a verify call as a gate.
+
 ## The standardized cutover
 
 Run this whenever a domain is pointed at an Instatic site — a launch, a re-point, adding `www`, or moving hosts.
 
 1. **Before touching DNS**, record the platform host (`<app>.up.railway.app`). It must survive the change: it is the toolkit's way in and the fallback when the domain misbehaves.
-2. **Point DNS** at the Instatic host and add the domain in the platform (Railway → the service → Networking → custom domain). Do apex *and* `www`, or decide deliberately that only one exists.
-3. **Set `PUBLIC_ORIGIN`** on the Instatic service, comma-separated, **client domain first, platform host last**:
+2. **Add the domain in Railway** (the service → Networking → custom domain), apex *and* `www`, or decide deliberately that only one exists — then **read back the target Railway minted for each one**, separately:
+   ```bash
+   railway domain status masonparkdental.com     --service "Mason Park" --environment production
+   railway domain status www.masonparkdental.com --service "Mason Park" --environment production
+   ```
+   **Point each Cloudflare record at its own domain's target.** They differ. The apex's target on the `www` record is a real failure mode, and Railway will not warn you about it — it reports `Verified: yes` either way, because its edge routes on `Host`.
+3. **Record the targets in `sites.json`** under `dns`, so the next person can tell a changed pointer from a working one: `node check-dns.mjs --record` prints them in the right shape. Record only *after* Cloudflare matches — recording first just files the outage as expected.
+4. **Set `PUBLIC_ORIGIN`** on the Instatic service, comma-separated, **client domain first, platform host last**:
    ```
    PUBLIC_ORIGIN=https://www.client.com,https://client.com,https://<app>.up.railway.app
    ```
    Include every host a human might use. Omitting one does not warn you; it produces a trap.
-4. **Redeploy, and confirm a new deployment actually appeared.** `resolvePublicOrigins()` runs once at boot
+5. **Redeploy, and confirm a new deployment actually appeared.** `resolvePublicOrigins()` runs once at boot
    (`server/index.ts:17-19`), so an env change with no restart does nothing. `railway variables --set`
    normally triggers the deploy for you — but Mason Park's earlier change proves it does not always,
    so check: `railway deployment list --service "<Service>"` must show a NEW entry, newer than your edit.
-5. **Update `sites.json`** in this folder: set `adminUrl` to the new canonical domain, and list any host you expect people to still have bookmarked under `alternates`.
-6. **Prove it against the RUNNING server**: `node check-origins.mjs --all`. Every host must read `OK`,
-   **zero `TRAP` lines**, exit 0. Do not substitute "I checked the variable in Railway" — Mason Park's
-   variable read correctly for a day while the running container ignored it.
-7. **Update the client's `.env`** in their worktree — `INSTATIC_BASE_URL` must be an origin that passes the gate, or the whole `18-instatic-embeds` toolkit starts failing with 403s that look like permissions.
-8. **Only now** send the link, and send the one the checker printed.
+   **This step does not touch the domains.** If you are here because a domain looks broken, do not
+   "fix" it by deleting and re-adding it — that mints new targets and takes the site down for real.
+6. **Update `sites.json`** in this folder: set `adminUrl` to the new canonical domain, list any host you expect people to still have bookmarked under `alternates`, and keep the `dns` targets from step 3 current.
+7. **Prove BOTH, against reality rather than the dashboard**:
+   ```bash
+   node check-dns.mjs        # the pointer: Railway vs. sites.json vs. what resolves
+   node check-origins.mjs --all   # the gate: probed on the RUNNING server
+   ```
+   Both must exit 0. Every host `OK`, zero `TRAP`, zero `CHANGED`. Do not substitute "I checked the
+   variable in Railway" — Mason Park's variable read correctly for a day while the running container
+   ignored it. A `BLOCKED` row is not a pass either: it means a CDN answered instead of the origin
+   and that host was never actually tested.
+8. **Update the client's `.env`** in their worktree — `INSTATIC_BASE_URL` must be an origin that passes the gate, or the whole `18-instatic-embeds` toolkit starts failing with 403s that look like permissions.
+9. **Only now** send the link, and send the one the checker printed.
+
+## The Cloudflare geo-block, and the two things it silently breaks
+
+Several of these zones carry a Cloudflare custom WAF rule that blocks every request
+from outside the United States:
+
+```
+[block]  "Geography-based rule [Template]"
+(ip.src.country ne "US") or (not ip.src.country in {"US"})
+```
+
+Present on `masonparkdental.com` (added 2026-08-28 08:39 UTC) and `encorercm.com`
+("Block None US Traffic", 2026-08-18). Absent on `drnahlah.com`. For a Katy dentist that
+is a defensible choice, and this module does not argue with it. But it has two
+consequences nobody signed up for, and both are invisible until something is already
+broken.
+
+**1. It blocks our own verification.** `check-origins.mjs` runs from wherever you are.
+Outside the US it gets Cloudflare's block page, not the admin — and before 2026-08-29 it
+reported that as `no admin ... (http 403)` and still exited 0. `www.masonparkdental.com`
+read as a clean pass while the checker had never once reached the server. It now reports
+`BLOCKED` and exits non-zero, because *not having looked* must never render as *looked
+and fine*.
+
+**2. It blocks certificate issuance.** ACME validates from multiple vantage points around
+the world, and the non-US ones are blocked like anything else. The correlation is exact:
+
+| Zone | Geo rule | Domain added | Railway certificate |
+|---|---|---|---|
+| `drnahlah.com` | none | 2026-08-25 | `VALID` |
+| `encorercm.com` | added 2026-08-18 | 2026-08-14 — **before** the rule | `VALID` |
+| `masonparkdental.com` | added 2026-08-28 08:39 | 2026-08-28 08:41 — **after** the rule | `ISSUE_FAILED` |
+
+Mason Park's pair — the only domains here added *after* their zone's rule existed — are
+the only ones that cannot get a certificate. Confirmed directly: connecting to either
+Railway target with SNI `www.masonparkdental.com` fails the TLS handshake with
+`SEC_E_WRONG_PRINCIPAL`, i.e. Railway is not serving a certificate for that name.
+
+The padlock the public sees is therefore **Cloudflare's, not Railway's**, and it holds
+only while Cloudflare is proxying in a mode that does not verify the origin certificate.
+Grey-clouding the record, or moving the zone to **Full (strict)**, would break the site.
+That has not been verified from here — the WAF rule blocks this machine before any
+request reaches the origin, and the repo's Cloudflare token cannot read
+`/zones/<id>/settings/ssl` — so treat it as the shape of the risk and check the zone's
+SSL mode in the dashboard before changing anything about the proxy.
+
+**Proven, not inferred** (2026-08-30): the rule's expression is
+`(ip.src.country ne "US") or (not ip.src.country in {"US"})` with **no path condition**, and
+`http(s)://www.masonparkdental.com/.well-known/acme-challenge/test` returns **403** from a
+non-US client while the same path at the Railway origin returns a clean 404. ACME
+validation is simply blocked at the edge.
+
+**To add a domain to a zone that has this rule**, disable the rule — or, better, put an
+`skip`/allow rule ABOVE it for `http.request.uri.path contains "/.well-known/acme-challenge/"`
+so renewals never hit this again — until `railway domain status` reports
+`CERTIFICATE_STATUS_TYPE_VALID`, then restore it. Certificates renew, so a one-off manual
+lift is a trap you will fall into again in ~60 days.
 
 ## Read the live value: you have Railway CLI access
 
@@ -120,14 +299,41 @@ railway deployment list --service "<Service>"      # confirm a NEW deployment ac
 **Reading the variable is not the same as knowing the running config**, and that distinction is
 the whole reason the checker exists. See the Mason Park case below.
 
-## Current state — 2026-08-28, both FIXED
+## Current state — 2026-08-29: origins fixed, Mason Park's DNS is NOT
 
-Both sites were repaired on 2026-08-28. `node check-origins.mjs --all` exits 0.
+`PUBLIC_ORIGIN` was repaired on both sites on 2026-08-28 and has stayed correct. What is
+open is the layer underneath it, on Mason Park only.
 
-| Client | Send this | Also works |
+| Client | Send this | Also works | DNS |
+|---|---|---|---|
+| Dr. Nahlah | `https://www.drnahlah.com/admin` | `encorercm.com`, `www.encorercm.com`, `dr-nahlah.up.railway.app` | clean — all four targets match, certs `VALID` |
+| Mason Park | `https://www.masonparkdental.com/admin` | `mason-park.up.railway.app` | **two open faults, below** |
+
+**Mason Park, as of 2026-08-29:**
+
+1. **FIXED during this session — the apex now resolves.** `masonparkdental.com` returned
+   `ENODATA` (no record at all) for the whole day; an apex record was added and it now
+   answers. Both hosts resolve.
+2. **OPEN — `www` points at the apex's target.** Cloudflare holds
+   `www CNAME l6wotb3m.up.railway.app`, which is the **apex's** target; `www` wants
+   `pkez8lkn.up.railway.app`. Confirmed against the Cloudflare API on 2026-08-30. The site
+   serves either way (Railway routes on `Host`) and Railway still says `Verified: yes`, so
+   nothing surfaces this but `check-dns.mjs`.
+3. **OPEN — both certificates are `CERTIFICATE_STATUS_TYPE_ISSUE_FAILED`.** The
+   **demonstrated** cause is the geo-block rule, not the `www` mismatch: the rule carries no
+   path exemption, so `/.well-known/acme-challenge/…` returns **403 through Cloudflare** to
+   any non-US client, and ACME validates from non-US vantage points. Verified 2026-08-30.
+   Fixing the `www` record alone will probably not issue the certificate.
+
+The two records Cloudflare should hold (`masonparkdental.com` zone, both proxied):
+
+| Name | Type | Content |
 |---|---|---|
-| Dr. Nahlah | `https://www.drnahlah.com/admin` | `encorercm.com`, `www.encorercm.com`, `dr-nahlah.up.railway.app` |
-| Mason Park | `https://www.masonparkdental.com/admin` | `mason-park.up.railway.app` |
+| `@` | CNAME | `l6wotb3m.up.railway.app` |
+| `www` | CNAME | `pkez8lkn.up.railway.app` |
+
+Done when `node check-dns.mjs mason-park` exits 0 and both certificates read
+`CERTIFICATE_STATUS_TYPE_VALID`.
 
 Live values now:
 
@@ -193,6 +399,10 @@ in-browser editor state: the collab socket drops. Do not redeploy while someone 
 
 ## Gotchas
 
+- **A redeploy does not move the DNS pointer; deleting and re-adding the domain does.** Two weeks of Dr. Nahlah deploys left every target untouched. Mason Park's targets changed the minute its domains were re-created. Never delete a custom domain in Railway to "reset" it — that is the outage, not the fix.
+- **Each custom domain gets its OWN random target, and the apex's is not the `www` one.** Mason Park currently has `www` pointing at the apex's target. It still serves, because Railway's edge routes on `Host`, and **Railway still reports `Verified: yes`** — so neither the site nor the dashboard shows anything wrong. Only `check-dns.mjs` comparing the two does. A working site is not evidence the pointer is right.
+- **Public DNS cannot verify a Cloudflare-proxied record.** The proxy answers with its own IPs and never reveals the CNAME content, so a mis-pointed record looks exactly like a correct one. Only the Cloudflare API can tell them apart, and the repo's `CLOUDFLAREAPI` token cannot read `dns_records` — a scoped token is the missing piece.
+- **A geo-block rule blocks our checkers and ACME as well as visitors.** The non-US block on `masonparkdental.com` and `encorercm.com` returns Cloudflare's 403 to `check-origins.mjs`, and blocks certificate validation from non-US vantage points. A `BLOCKED` row means nothing was learned about that host — it is not a pass and it is not a failure.
 - **A variable that reads correctly in Railway may not be the one in force.** `resolvePublicOrigins()` runs once at boot, so the dashboard shows intent and the running process shows reality. Mason Park sat for a day with a correct-looking value that had never been applied. The checker probes the running server; that is the only proof.
 - **`railway variables --json` prints every secret**, `DATABASE_URL` and `INSTATIC_SECRET_KEY` included. Filter before pasting output anywhere.
 - **There is no zero-downtime redeploy on these services, by construction.** A Railway volume mounts to one container at a time, so the old one must stop first. Measured 2026-08-28: ~5-10s on Mason Park, ~5s on Dr. Nahlah. No data is lost (all state is on the volume) but unsaved editor state is - do not redeploy while someone is mid-edit.
@@ -209,15 +419,16 @@ in-browser editor state: the collab socket drops. Do not redeploy while someone 
 
 ## Technical Setup
 
-- **Executor status**: Working. `check-origins.mjs` is the executor; `20-instatic-domain-origins.py` is a thin orchestrator over it, in the same spirit as `18-instatic-embeds`.
-- **Credentials**: none. Deliberately — the whole point is that anyone can run it.
+- **Executor status**: Working. Two executors: `check-origins.mjs` (the gate — who can log in) and `check-dns.mjs` (the pointer — whether anyone arrives). `20-instatic-domain-origins.py` is a thin orchestrator over both, in the same spirit as `18-instatic-embeds`.
+- **Credentials**: `check-origins.mjs` needs none, deliberately — the whole point is that anyone can run it. `check-dns.mjs` needs `railway login`, because a Cloudflare-proxied record hides its target from the world and Railway is the only source of truth for what it should be. It optionally reads `CLOUDFLARE_DNS_TOKEN` (or the repo `.env`'s `CLOUDFLAREAPI`) to see what Cloudflare actually holds; without a token that column degrades to `not read`, never to a pass.
 - **Endpoints**: `GET /admin/login` (is there an admin here), `POST /admin/api/cms/plugins/inspect-package` (which gate rejects first). If a future Instatic build removes the plugin routes, the probe returns `unknown` with the status rather than guessing, and `PROBE_PATH` needs pointing at another state-changing admin route.
 - **Where `PUBLIC_ORIGIN` lives**: the Instatic instance's own hosting environment (Railway today), **not** this repository. Nothing here can set it.
 
 ## Output Artifacts
-- `check-origins.mjs` — the checker. No credentials, changes nothing, exits non-zero on any problem
-- `sites.json` — canonical admin URL per client: the single answer to "what link do I send?"
-- `20-instatic-domain-origins.py` — orchestrator (`check`, `cutover`)
+- `check-origins.mjs` — the origin gate checker. No credentials, changes nothing, exits non-zero on any problem
+- `check-dns.mjs` — the DNS pointer checker: recorded target vs. Railway vs. public DNS vs. Cloudflare. Read-only; needs `railway login`
+- `sites.json` — canonical admin URL per client (the single answer to "what link do I send?") and the expected CNAME target per host
+- `20-instatic-domain-origins.py` — orchestrator (`check`, `dns`, `cutover`)
 - `TRIGGER_PROMPT.txt` — the agent entry point
 
 ## Version Control
