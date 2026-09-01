@@ -127,6 +127,14 @@ deliver/brandklout/dr-nahlah/workflows/01-content-intake/.tmp/current-site-scrap
 deliver/brandklout/dr-nahlah/workflows/00-client-delivery-initialization/.tmp/client-handoff/
 deliver/brandklout/dr-nahlah/workflows/00-client-delivery-initialization/.tmp/design-system/
 
+# Stone: the client's Google Drive export (187 files, 2026-08-31). The image
+# rules above already catch the .jpg/.png, but this also covers the PDF and any
+# future non-image drop, and says plainly that the whole directory is source
+# material rather than deliverable. It contains img/before-after/, which is
+# photographs of identifiable patients: see HANDOFF.md before touching it.
+# What the site actually uses is recorded in site-src/client-manifest.json.
+deliver/brandklout/stone-dental-implant-center/workflows/01-content-intake/.tmp/google-drive-images/
+
 # Windows reserved device names, created by stray `> nul` redirects. Git cannot
 # open them ("No such file or directory") and `git add -A` dies on the whole run.
 nul
@@ -139,4 +147,15 @@ nul
 # was protected by a local .tmp/.gitignore, which only helps the folder that
 # happens to have one - this covers every copy of the toolkit, including the
 # shared module in deliver/process/.
-**/.tmp/.session
+#
+# The trailing * is load bearing. On 2026-08-31 the cache was made per-host
+# (`.session-<host>`) so two clients' pipelines stop evicting each other's
+# login; the bare `.session` pattern matches an exact filename, so that rename
+# silently un-ignored the file and the next commit would have carried a live
+# session cookie for the Stone CMS.
+**/.tmp/.session*
+
+# The packed client-review build. 1.6MB of base64 images, regenerated in one
+# second by site-src/make-preview.mjs, so it is an artifact of the build rather
+# than a source file.
+deliver/brandklout/*/workflows/04-design/.tmp/*/preview-home.html

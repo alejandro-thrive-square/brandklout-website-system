@@ -35,6 +35,13 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 > | Tokens | `01-tokens.css` **untouched**. Palette and typefaces are the client's board, exactly as briefed |
 > | Other 17 pages | markup unchanged; they gain the CTA texture fix below and nothing else |
 > | New gate | `node journey-test.mjs` — **33/33** |
+> | **For review** | https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6 |
+> 
+> The review link is the real page packed into one self-contained file: stylesheet, GSAP and
+> every image inlined, so it scrolls on a phone with no server and without pushing an
+> unapproved design over the client's live Instatic site. Links to the other seventeen pages
+> are inert and say so when clicked. Rebuild it with `node site-src/make-preview.mjs` after any
+> change; the output is gitignored because it is 1.6MB of base64 and regenerates in a second.
 >
 > **A bug this surfaced, fixed, and worth knowing about.** `38-cta.css` and `30-hero.css` said
 > `url("assets/texture-stone.jpg")`. `site.css` is served FROM `assets/`, so a relative `url()` in it

@@ -10,6 +10,7 @@ The home page rebuilt as an editorial journey, 2026-08-31.
 | **Package** | [`surgical-arts/site-src/`](./surgical-arts/site-src/) — `pages/home.body.html`, `css/50-journey.css`, `js/10-journey.js` |
 | **v1** | Kept verbatim at `site-src/pages/_home-v1.body.html`. Not built. There to diff against |
 | **Gates** | `audit.mjs` FAIL none / WARN none · `check-copy.mjs` clean · `journey-test.mjs` **33/33** |
+| **For review** | https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6 |
 
 ## The diagnosis
 
