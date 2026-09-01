@@ -5125,6 +5125,14 @@ textarea {
   max-width: none;
   margin-inline: 0;
 }
+/* .container-medium is the same job at a narrower width and was missed the
+   first time: the FAQ on every service page uses it, so that one section sat
+   centred and about 150px further in than everything above it. It keeps a
+   reading measure, but starts on the spine like the rest. */
+.journey_page .container-medium {
+  max-width: 62rem;
+  margin-inline: 0;
+}
 /* Reference content: a measure, starting on the spine. */
 .journey_page .section_fees .container-large,
 .journey_page .section_financing .container-large,

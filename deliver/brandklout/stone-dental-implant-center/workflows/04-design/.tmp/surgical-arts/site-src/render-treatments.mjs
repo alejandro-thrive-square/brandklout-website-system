@@ -286,7 +286,6 @@ function proofSection(t) {
    consultation fee, the deposit and the financing providers are the practice's
    published figures, the same ones the home and booking pages carry. */
 function costSection(t) {
-  const fee = t.facts[0]
   return `<section class="cost_component">
   <div class="cost_inner">
     <div class="cost_head">
@@ -295,14 +294,14 @@ function costSection(t) {
     </div>
     <div class="cost_body">
       <div class="cost_figure">
-        <p class="cost_figure-label">${esc(fee.label)}</p>
-        <p class="cost_figure-value">${fee.value}</p>
-        <p class="cost_figure-note">Your written plan after the consultation carries the fee that applies to you. Complex cases are quoted individually.</p>
+        <p class="cost_figure-label">The consultation</p>
+        <p class="cost_figure-value">$175</p>
+        <p class="cost_figure-note">$250 from out of state. A $100 deposit holds the appointment and comes off the fee. You spend the hour with Dr. Stone rather than a treatment coordinator.</p>
       </div>
       <div class="cost_rows">
         <div class="cost_row">
-          <p class="cost_row-label">The consultation</p>
-          <p class="cost_row-text">$175 for Texas residents and $250 from out of state, with a $100 deposit that holds the appointment and comes off the fee.</p>
+          <p class="cost_row-label">This treatment</p>
+          <p class="cost_row-text">The fee is at the top of this page. Your written plan after the consultation carries the total that applies to you, and complex cases are quoted individually.</p>
         </div>
         <div class="cost_row">
           <p class="cost_row-label">Spreading it</p>

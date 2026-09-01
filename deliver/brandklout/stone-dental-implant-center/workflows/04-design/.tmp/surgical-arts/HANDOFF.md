@@ -62,6 +62,12 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 > 3. **Per-treatment patient quotes.** The two on each service page are practice-level and are
 >    LABELLED as such. Attaching the lip-filler review to the lip lift page, or the eyelid one to the
 >    brow lift, would put words in a patient's mouth about an operation they did not have.
+> 4. **`injectables` has no "Who it suits" list**, so it is the one service page without the
+>    symptom-led section, which is the strongest beat in the reference structure. Its first section
+>    is "Neuromodulators" and its bullets are per-unit prices. Four or five lines naming what
+>    injectables actually address (frown lines, crow's feet, lost lip volume, early jaw softening)
+>    would give it the same opening as the other eleven. That is clinical copy and has to come from
+>    the practice. `render-treatments.mjs` prints a note naming this exception on every run.
 >
 > **THE SERVICE TEMPLATE WAS REBUILT 2026-09-01.** All twelve pages, from one renderer. The head
 > now carries the treatment's own photograph and the five at-a-glance figures; the body's single
