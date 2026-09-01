@@ -50,6 +50,19 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 > they were designed to sit on stone. `audit.mjs` resolved CSS `url()` against the site root, so it
 > could never have caught it; it now resolves against the stylesheet, and strips comments first.
 >
+> **CONTENT GAPS THE SERVICE FLOW NOW MAKES VISIBLE.** The template follows the selling structure of
+> the reference page at `01-content-intake/.tmp/preview.html`, and two of that page's beats are
+> deliberately missing here because the content does not exist:
+>
+> 1. **A comparison against the alternatives**, per treatment. The hub has a general comparison FAQ;
+>    a per-treatment one would be clinical guidance and must come from Dr. Stone, not from us.
+> 2. **A low-commitment entry.** The practice published a virtual consultation page; confirm whether
+>    it still runs before offering it. Offering an appointment type that does not exist is worse than
+>    offering none.
+> 3. **Per-treatment patient quotes.** The two on each service page are practice-level and are
+>    LABELLED as such. Attaching the lip-filler review to the lip lift page, or the eyelid one to the
+>    brow lift, would put words in a patient's mouth about an operation they did not have.
+>
 > **THE SERVICE TEMPLATE WAS REBUILT 2026-09-01.** All twelve pages, from one renderer. The head
 > now carries the treatment's own photograph and the five at-a-glance figures; the body's single
 > five-hundred-word column became a lede plus one row per section, heading on the spine. No copy

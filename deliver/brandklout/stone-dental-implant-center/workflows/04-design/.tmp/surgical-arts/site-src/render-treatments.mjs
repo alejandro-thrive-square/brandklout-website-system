@@ -119,7 +119,11 @@ ${t.intro.map(para).join('\n')}
 }
 
 function specSection(t) {
+  /* The "Who it suits" block has been promoted to its own cards above, so it is
+     dropped here rather than printed twice. Everything else keeps the
+     heading-on-the-spine row it had. */
   const rows = t.sections
+    .filter((b) => !/^who it suits$/i.test(b.heading))
     .map((block) => {
       const body = block.body
         .map((item) => (Array.isArray(item) ? bullets(item) : para(item)))
@@ -133,9 +137,210 @@ ${body}
     })
     .join('\n')
 
+  if (!rows.trim()) return null
+
   return `<section class="spec_component">
   <div class="spec_inner">
 ${rows}
+  </div>
+</section>`
+}
+
+/* ===========================================================================
+   THE INFORMATION FLOW — restructured 2026-09-01 against the reference page a
+   teammate supplied as "basically the perfect flow of information for a service
+   page": 01-content-intake/.tmp/preview.html (Mason Park Dental, bonding).
+
+   Its order, and what this template now does about each beat:
+
+     1  hero                        kept: name, at-a-glance figures, photograph
+     2  trust signals               ADDED. Four, all already sourced
+     3  what it can improve         RESTRUCTURED. "Who it suits" was prose
+                                    bullets buried mid-page; it is the
+                                    symptom-led entry the reference leads with,
+                                    so it moves up and becomes cards
+     4  real patient proof          ADDED as an honest disclosure, NOT a
+                                    placeholder card. See below
+     5  why this practice           kept as a spec row (see the note on why it
+                                    is not promoted)
+     6  what to expect              kept: the three steps
+     7  comparison                  NOT ADDED. No per-treatment comparison data
+                                    exists and inventing one would be inventing
+                                    clinical guidance
+     8  cost and payment            ADDED. Fee comes from the treatment's own
+                                    facts; consultation fee and financing are
+                                    the practice's published figures
+     9  reviews                     ADDED, but labelled as being about the
+                                    PRACTICE, not this procedure. See below
+    10  low-commitment entry        NOT ADDED. The practice published a virtual
+                                    consultation page, but whether it still runs
+                                    is unconfirmed, and offering an appointment
+                                    type that does not exist is worse than not
+                                    offering one
+    11  FAQs                        kept
+    12  final CTA                   kept: the shared band
+
+   THE H1 IS DELIBERATELY NOT COPIED. The reference puts the benefit in the H1
+   ("Fix the little thing you notice every time you smile") and the procedure
+   name in the eyebrow. That reads beautifully and it is the wrong trade here:
+   these twelve pages exist to rank for the procedure name, which is what
+   someone types. The benefit line is the sub-headline directly underneath, so
+   the page still opens on the patient's problem.
+
+   NOTHING BELOW INVENTS COPY. Every string is either from treatments-data.mjs
+   or is a practice figure already published on the home and booking pages.
+   =========================================================================== */
+
+/* Four trust signals, identical on all twelve pages. Sources: the rating and
+   review count are what the practice's own retired footer carried; the surgeon,
+   the trauma training and the languages are on the live sister site. All four
+   already appear on the home page. */
+function trustSection() {
+  const items = [
+    ['4.8', 'From 142+ patient reviews'],
+    ['One surgeon', 'From consultation to final follow-up'],
+    ['Level 1', 'Residency across three trauma centres'],
+    ['English &amp; Spanish', 'Both spoken in the practice'],
+  ]
+    .map(
+      ([value, label]) => `    <div class="trust_item">
+      <p class="trust_value">${value}</p>
+      <p class="trust_label">${label}</p>
+    </div>`
+    )
+    .join('\n')
+
+  return `<section class="trust_component">
+  <div class="trust_inner">
+${items}
+  </div>
+</section>`
+}
+
+/* "Who it suits", promoted and turned into cards.
+   The reference's strongest move is leading with the PATIENT'S PROBLEM rather
+   than the procedure: six named things bonding can improve, high on the page,
+   so a reader self-identifies before being asked to believe anything. This
+   template already had exactly that content and buried it as bullet points in
+   the third screen of prose.
+
+   Keyed on the authored heading rather than on position, because injectables'
+   first section is "Neuromodulators" and its bullets are per-unit prices, not
+   symptoms. render() warns when a treatment has no "Who it suits" section so
+   the exception stays visible instead of silently rendering price lines as
+   symptoms. */
+function suitsSection(t) {
+  const block = t.sections.find((b) => /^who it suits$/i.test(b.heading))
+  if (!block) return null
+  const list = block.body.find(Array.isArray)
+  if (!list || !list.length) return null
+
+  const lead = block.body.filter((b) => !Array.isArray(b))
+  const cards = list
+    .map(
+      (item, i) => `      <li class="suits_card">
+        <span class="suits_index" aria-hidden="true">${String(i + 1).padStart(2, '0')}</span>
+        <p class="suits_text">${item}</p>
+      </li>`
+    )
+    .join('\n')
+
+  return `<section class="suits_component">
+  <div class="suits_inner">
+    <div class="suits_head">
+      <p class="chapter_mark">What this treats</p>
+      <h2 class="display-lg suits_title">${esc(block.heading)}</h2>
+${lead.length ? `      <div class="suits_lede">\n${lead.map((x) => `        <p>${x}</p>`).join('\n')}\n      </div>` : ''}
+    </div>
+    <ul class="suits_grid" data-j="stagger">
+${cards}
+    </ul>
+  </div>
+</section>`
+}
+
+/* The reference shows proof before it asks for belief. We have none to show:
+   the before/after library holds real, identifiable patients without current
+   written consent, and one file in it is another surgeon's marketing image.
+   A generated or stock "case" on a surgical practice's site is a fabricated
+   clinical outcome, which is the single claim a patient actually relies on.
+
+   Worth knowing: the reference page has the same gap. Its proof section is an
+   HTML comment reading "placeholders with Mason Park-owned bonding before/after
+   photography before launch". So this beat is honest disclosure plus a route to
+   the gallery, and it becomes real photography the day consent exists. */
+function proofSection(t) {
+  return `<section class="proof-note_component stone-panel">
+  <div class="proof-note_inner">
+    <p class="chapter_mark">Results</p>
+    <h2 class="proof-note_title">The work speaks in pairs of photographs.</h2>
+    <p class="proof-note_text">Cases are published only with the patient&rsquo;s current written consent, so the gallery fills as the practice&rsquo;s own photography is shot and cleared. Nothing on this page is a stock or generated result.</p>
+    <div class="proof-note_actions">
+      <a class="button is-secondary" href="results.html">See results &amp; reviews</a>
+    </div>
+  </div>
+</section>`
+}
+
+/* Cost and payment. The fee is this treatment's own first fact; the
+   consultation fee, the deposit and the financing providers are the practice's
+   published figures, the same ones the home and booking pages carry. */
+function costSection(t) {
+  const fee = t.facts[0]
+  return `<section class="cost_component">
+  <div class="cost_inner">
+    <div class="cost_head">
+      <p class="chapter_mark">Cost and payment</p>
+      <h2 class="display-lg">Know the fee before anything is booked.</h2>
+    </div>
+    <div class="cost_body">
+      <div class="cost_figure">
+        <p class="cost_figure-label">${esc(fee.label)}</p>
+        <p class="cost_figure-value">${fee.value}</p>
+        <p class="cost_figure-note">Your written plan after the consultation carries the fee that applies to you. Complex cases are quoted individually.</p>
+      </div>
+      <div class="cost_rows">
+        <div class="cost_row">
+          <p class="cost_row-label">The consultation</p>
+          <p class="cost_row-text">$175 for Texas residents and $250 from out of state, with a $100 deposit that holds the appointment and comes off the fee.</p>
+        </div>
+        <div class="cost_row">
+          <p class="cost_row-label">Spreading it</p>
+          <p class="cost_row-text">Financing through <a class="text-style-link" href="https://apply.sunbit.com/StoneSurgicalArts" rel="noopener">Sunbit</a>, CareCredit and Scratchpay. A membership banks credit month by month instead of borrowing against it.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>`
+}
+
+/* Two patient quotes, and they are LABELLED as being about the practice rather
+   than about this procedure, because that is what they are. Both were published
+   by the practice with the patient's name and are recovered verbatim from the
+   archived testimonials page.
+
+   The reference puts treatment-specific reviews here. Ours are not
+   treatment-specific: attaching the lip-filler review to the lip lift page, or
+   the eyelid one to the brow lift, would be putting words in a patient's mouth
+   about an operation they did not have. Per-treatment quotes are a content gap,
+   listed in HANDOFF.md. */
+function reviewsSection() {
+  return `<section class="svc-reviews_component">
+  <div class="svc-reviews_inner">
+    <div class="svc-reviews_head">
+      <p class="chapter_mark">About the practice</p>
+      <h2 class="display-lg">Not about this operation, about how it is done.</h2>
+    </div>
+    <div class="svc-reviews_grid" data-j="stagger">
+      <figure class="rail_card">
+        <blockquote class="rail_text">Dr. Stone is so kind and also a great, proactive surgeon. Not only do I send patients to her, I am one myself. The office and staff are equally fantastic.</blockquote>
+        <figcaption class="rail_meta"><span class="rail_name">Brittney Culp</span><span class="rail_tag">Referring provider</span></figcaption>
+      </figure>
+      <figure class="rail_card">
+        <blockquote class="rail_text">Dr. Stone will hear your concerns and give you all of your options. At no point will you feel pressured in your treatment choices.</blockquote>
+        <figcaption class="rail_meta"><span class="rail_name">Darci Wilson</span><span class="rail_tag">Non-surgical</span></figcaption>
+      </figure>
+    </div>
   </div>
 </section>`
 }
@@ -252,17 +457,34 @@ function render(t) {
      `band(t.bandImage)` is gone from this list: that photograph is the head
      now, and a second full-width copy of it two sections later was the strip
      that used to interrupt the reading. */
+  if (!t.sections.some((b) => /^who it suits$/i.test(b.heading))) {
+    console.warn(
+      `  note: ${t.slug} has no "Who it suits" section, so it gets no symptom cards. ` +
+        `Its first section is "${t.sections[0].heading}".`
+    )
+  }
+
+  /* The order is the reference page's, adapted to the content that exists.
+     See the block comment above trustSection() for what each beat is and why
+     two of the reference's beats are deliberately absent. */
   return [
     header,
     '<div class="journey_page">',
     headSection(t, cat),
+    trustSection(),
     ledeSection(t),
+    suitsSection(t),
     specSection(t),
     journeySection(t),
+    proofSection(t),
+    costSection(t),
+    reviewsSection(),
     faqSection(t),
     relatedSection(t, cat),
     '</div>',
-  ].join('\n\n') + '\n'
+  ]
+    .filter(Boolean)
+    .join('\n\n') + '\n'
 }
 
 let stale = 0
