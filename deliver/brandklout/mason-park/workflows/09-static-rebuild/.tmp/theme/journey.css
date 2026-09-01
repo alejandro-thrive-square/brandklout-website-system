@@ -1343,3 +1343,57 @@ body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); 
 }
 .sp-quote p::before { content: "\201C"; color: var(--accent-lg); }
 .sp-quote p::after { content: "\201D"; color: var(--accent-lg); }
+
+/* THE COMPLETE INDEX. Cards make you read a box per item; a column of hairlines
+   lets the eye run down a list the way it does in a book, which is what a page
+   whose job is "show me everything" actually owes a visitor. */
+.cx-index {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--bleed);
+  padding-right: var(--bleed);
+}
+@media (min-width: 700px) { .cx-index { grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr)); } }
+.cx-label {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  padding-bottom: .9rem;
+  border-bottom: 1px solid var(--rule-strong);
+  margin-bottom: .3rem;
+}
+.cx-group li { border-bottom: 1px solid var(--rule); }
+.cx-group a, .cx-group span {
+  display: block;
+  padding: .7rem 0;
+  font-family: var(--font-display);
+  font-size: calc(1.05rem * var(--t-text));
+  color: var(--fg);
+  text-decoration: none;
+  transition: padding-left .3s var(--ease), color .3s var(--ease);
+}
+.cx-group a:hover { padding-left: .6rem; color: var(--accent); }
+.cx-group span { color: var(--fg-soft); }
+
+/* The services page's two index chapters. Both end on a column index, which
+   carries no trailing rule of its own, so each gives back part of its own
+   measure rather than leaving a hairline stranded above a full one. */
+.ch-catalogue { padding-bottom: calc(var(--ch-pad) * .75); }
+.ch-cost { padding-bottom: calc(var(--ch-pad) * .75); }
+.ch-catalogue .rg-head, .ch-cost .rg-head { margin-bottom: clamp(2rem, 4vw, 3.25rem); }
+
+/* A group with many more items than its neighbours spans the row and flows in
+   its own columns instead. Twenty one entries in one track beside three tracks
+   of four left most of the section empty and made the long list look like an
+   afterthought rather than the majority of what the practice does. */
+.cx-group.is-wide { grid-column: 1 / -1; }
+.cx-group.is-wide ul { columns: 3; column-gap: clamp(2rem, 4vw, 3.5rem); }
+.cx-group.is-wide li { break-inside: avoid; }
+@media (max-width: 999px) { .cx-group.is-wide ul { columns: 2; } }
+@media (max-width: 699px) { .cx-group.is-wide ul { columns: 1; } }

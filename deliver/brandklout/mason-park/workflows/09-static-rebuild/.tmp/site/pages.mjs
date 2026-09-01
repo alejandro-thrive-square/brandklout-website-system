@@ -19,6 +19,7 @@ import { LEGAL_PAGES } from "./legal.mjs";
 // of the band layout it replaced; nothing renders it.
 import { home as homeJourney } from "./home.mjs";
 import { makeChapters } from "./chapters.mjs";
+import { ARCS } from "./catalogue.mjs";
 
 // ------------------------------------------------------------ block helpers
 const inSection = (d, n) => (d.blocks || []).filter((b) => b.section === n);
@@ -145,57 +146,135 @@ const bookingSection = (h) => {
 // text, so this lists every treatment page the site actually has.
 // ===========================================================================
 function ourServices(d, h) {
-  const C = h.C;
-  const menuServices = NAV.find((i) => i.label === "Services")?.children || [];
-  const inMenu = new Set();
-  (function collect(items) {
-    for (const it of items) { inMenu.add(it.href); if (it.children) collect(it.children); }
-  })(menuServices);
-  const unlisted = SERVICE_SLUGS_REF.filter((sl) => !inMenu.has(h.routeOf(sl)));
+  const K = makeChapters(h);
+  const esc = h.esc;
 
-  const groupCard = (g) => C.card({
-    title: g.label, href: g.href,
-    html: g.children?.length
-      ? `<ul class="sidebar_list">${g.children.map((c) => `<li>${h.esc(c.label)}</li>`).join("")}</ul>`
-      : "",
-  });
+  // Featured imagery comes from each service page's own content file, so a
+  // treatment brings its own photograph and no image slot is a placeholder.
+  const featured = (slug, fallback) => {
+    const page = h.read("services-" + slug) || h.read(slug);
+    return (page && page.featured && page.featured.src) || fallback;
+  };
+
+  // THE COMPLETE INDEX. The homepage shows the three arcs as a teaser; this
+  // page is where a visitor comes to see everything, so every service route the
+  // build actually renders is listed, grouped by the same three arcs plus the
+  // treatments that belong to none of them. Nothing is hand-typed: the groups
+  // are read off the catalogue and the remainder is whatever is left over, so
+  // adding a service page cannot silently fail to appear here.
+  const inArcs = new Set(ARCS.flatMap((a) => a.items.map(([, , href]) => href)));
+  const arcLabels = new Set(ARCS.flatMap((a) => a.items.map(([name]) => name.toLowerCase())));
+  const rest = SERVICE_SLUGS_REF
+    .map((sl) => ({ name: h.labelFor(sl), href: h.routeOf(sl) }))
+    .filter((x) => !inArcs.has(x.href))
+    // A label collision here means two pages reduce to the same words, which on
+    // an index pointing at two URLs is indistinguishable to a reader. Dropping
+    // one ORPHANS it, which audit.mjs correctly refuses. The fix belongs
+    // upstream, in the catalogue: each arc item is named for the page it
+    // actually opens. This assertion is what keeps it that way.
+    .filter((x) => {
+      if (arcLabels.has(x.name.toLowerCase())) {
+        throw new Error(`our-services: "${x.name}" (${x.href}) collides with an arc label. ` +
+          `Name the arc item for its own destination in site/catalogue.mjs rather than dropping ` +
+          `this page, which would orphan it.`);
+      }
+      return true;
+    })
+    .sort((a, b) => a.name.localeCompare(b.name));
+
+  const groups = ARCS.map((a) => ({
+    label: a.label,
+    items: a.items.map(([name, , href]) => ({ name, href })),
+  })).concat(rest.length ? [{ label: "Everything else we offer", items: rest, wide: true }] : []);
 
   return [
-    openPage(h, "Our Services", "Family, cosmetic, restorative and pediatric dentistry, all under one roof in Katy, Texas."),
-    C.section({ name: "service-tiles", inner: `
-      ${C.sectionHeading({ eyebrow: "What we do", title: "Care for every age, in one building" })}
-      ${SERVICE_GROUPS.map(([label, items]) => C.svcGroup({
-        label,
-        cols: items.length > 4 ? 3 : 4,
-        items: items.map(([icon, name, text, href]) => ({ icon, label: name, text, href })),
-      })).join("")}` }),
-    C.section({ name: "service-index", bg: "paper", inner: `
-      ${C.sectionHeading({ title: "Every service, A to Z", text: "Each treatment has its own page explaining what it is, who it suits and what to expect." })}
-      ${C.grid(3, [
-        ...menuServices.map(groupCard),
-        unlisted.length ? C.card({
-          title: "Also offered",
-          html: `<p class="card_meta">Treatment pages the old menu never linked to.</p>
-                 <ul class="sidebar_list">${unlisted.map((s) => `<li><a href="${h.routeOf(s)}">${h.esc(h.labelFor(s))}</a></li>`).join("")}</ul>`,
-        }) : "",
-        C.card({
-          title: "Technology",
-          html: `<ul class="sidebar_list">
-            <li><a href="/technology/">Our technology</a></li>
-            <li><a href="/technology-ai/">Technology / AI</a></li>
-            <li><a href="/pearl-ai/">Pearl AI</a></li>
-            <li><a href="/ceramillmotion3/">Ceramill Motion 3</a></li></ul>`,
-        }),
-        C.card({
-          title: "Costs and offers",
-          html: `<ul class="sidebar_list">
-            <li><a href="/dental-implant-costs/">Dental implant costs</a></li>
-            <li><a href="/dental-implant-costs-esp/">Costos de implantes dentales (Espa&ntilde;ol)</a></li>
-            <li><a href="/special-offers/">Special offers</a></li>
-            <li><a href="/financing/">Financing and insurance</a></li></ul>`,
-        }),
-      ])}` }),
-    bookingSection(h),
+    K.arrival({
+      n: 0, name: "The Range", compact: true,
+      image: featured("cosmetic-dentistry", "/wp-content/uploads/2023/11/Dentist-in-Katy-Office.webp"),
+      alt: "Treatment at Mason Park Dental of Katy",
+      title: "Thirty five treatments. <em>No</em> referral out.",
+      lede: "Everyday care, cosmetic and orthodontic work, and the restorative and surgical treatment most practices send you somewhere else for. All of it in one building on Kingsland Boulevard.",
+      actions: K.button({ label: "Book an appointment", href: BOOK, large: true, external: true }),
+    }),
+
+    K.chapter({
+      n: 1, name: "The Range", cls: "ch-range", id: "range", theme: "warm",
+      inner: `
+  <div class="wrap rg-head">
+    ${K.tag("01", "The Range")}
+    <h2 data-split>Three kinds of appointment, and what each one covers.</h2>
+  </div>
+  ${ARCS.map((a, i) => K.arc({
+    key: a.key, numeral: a.numeral, label: a.label, title: a.title, text: a.text,
+    image: featured(a.lead, "/wp-content/uploads/2023/11/Dentist-in-Katy-Office.webp"),
+    imageAlt: a.label + " at Mason Park Dental",
+    items: a.items.map(([name, blurb, href, slug]) => ({ name, blurb, href, thumb: featured(slug, "") })),
+    flipped: i % 2 === 1,
+  })).join("")}`,
+    }),
+
+    K.chapter({
+      n: 2, name: "Everything", cls: "ch-catalogue", id: "catalogue",
+      inner: `
+  <div class="wrap rg-head">
+    ${K.tag("02", "Everything")}
+    <h2 data-split>Every treatment, with a page of its own.</h2>
+    <p class="pe-lede">Each one explains what it is, who it suits and what to expect on the day. If you are not sure which you need, book and ask: that is what the first visit is for.</p>
+  </div>
+  ${K.columnIndex(groups)}`,
+    }),
+
+    K.chapter({
+      n: 3, name: "The Cost", cls: "ch-cost", id: "cost", theme: "warm",
+      inner: `
+  <div class="wrap rg-head">
+    ${K.tag("03", "The Cost")}
+    <h2 data-split>What it costs, before it starts.</h2>
+    <p class="pe-lede">Treatment is planned and priced in writing before any work begins, with what insurance covers and what it does not. Cherry splits the balance at 0% APR with no hard credit check.</p>
+  </div>
+  ${K.columnIndex([
+    { label: "Prices and plans", items: [
+      { name: "Dental implant costs", href: "/dental-implant-costs/" },
+      { name: "Costos de implantes dentales", href: "/dental-implant-costs-esp/" },
+      { name: "Financing and insurance", href: "/financing/" },
+      { name: "Dental savings plan", href: "/dental-savings-plan/" },
+      { name: "Special offers", href: "/special-offers/" },
+    ] },
+    { label: "The technology behind it", items: [
+      { name: "Our technology", href: "/technology/" },
+      { name: "Technology and AI", href: "/technology-ai/" },
+      { name: "Pearl AI", href: "/pearl-ai/" },
+      { name: "Ceramill Motion 3", href: "/ceramillmotion3/" },
+    ] },
+  ])}`,
+    }),
+
+    K.chapter({
+      n: 4, name: "The Invitation", cls: "ch-invitation", id: "invitation", theme: "dark",
+      inner: `
+  <div class="wrap iv-top">
+    <div class="iv-copy">
+      ${K.tag("04", "The Invitation")}
+      <h2 data-split>Not sure which one you need?</h2>
+      <p class="iv-lede">Book a first visit and say what is bothering you. A full exam, digital x-rays and a plan you can see are what that appointment is for, and nothing is started on the day you arrive.</p>
+      <div class="iv-actions">
+        ${K.button({ label: "Book an appointment", href: BOOK, large: true, external: true })}
+        ${K.button({ label: h.PRACTICE.phone, href: h.PRACTICE.phoneHref, ghost: true, large: true })}
+      </div>
+      ${K.facts([
+        ["In pain today", `Call the practice. We keep same day slots for pain, breaks and knocked out teeth. <a href="/services/emergency-dentist/">Emergency dentistry</a>.`],
+        ["Hours", "Mon and Wed <b>9am to 6pm</b><br>Tue and Thu <b>8am to 5pm</b><br>Fri to Sun <b>Closed</b>"],
+        ["Bringing children", `Dr. Nguyen is board certified in pediatric dentistry. <a href="/our-doctors/">Meet the doctors</a>.`],
+      ])}
+    </div>
+    <div class="iv-aside">
+      <figure class="iv-shot">
+        ${h.img("/wp-content/uploads/2023/11/Dentist-in-Katy-Office.webp", "The waiting room at Mason Park Dental of Katy", { sizes: "(max-width: 899px) 100vw, 42vw" })}
+        <figcaption>Suite 104A, on the ground floor. Free parking at the door.</figcaption>
+      </figure>
+    </div>
+  </div>`,
+    }),
   ].join("\n");
 }
 

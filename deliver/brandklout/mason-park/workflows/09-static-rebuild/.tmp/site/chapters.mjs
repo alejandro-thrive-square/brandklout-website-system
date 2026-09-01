@@ -204,6 +204,24 @@ export function makeChapters(h) {
     </div>
   </article>`;
 
+  /** A complete index, in labelled hairline columns. This is what a "see
+   *  everything" page owes the visitor that a grid of cards does not: cards
+   *  make you read a box per item, and a column of hairlines lets the eye run
+   *  down a list the way it does in a book. Used where the arcs above show the
+   *  headline treatments and the page still has to list all of them. */
+  const columnIndex = (groups) => `<div class="cx-index">
+    ${groups.map(({ label, items, wide }) => `
+    <section class="cx-group${wide ? " is-wide" : ""}">
+      <h3 class="cx-label">${esc(label)}</h3>
+      <ul>
+        ${items.map(({ name, href }) => {
+          const to = h.link(href);
+          return `<li>${to ? `<a href="${esc(to)}">${esc(name)}</a>` : `<span>${esc(name)}</span>`}</li>`;
+        }).join("")}
+      </ul>
+    </section>`).join("")}
+  </div>`;
+
   // ---------------------------------------------------------------- the path
   /** The pinned horizontal journey. SIZED IN svh, not rem: a pinned scene has
    *  to fit the window, and with a fluid root every rem in it grows 12.5% at
@@ -294,7 +312,7 @@ export function makeChapters(h) {
   return {
     chapter, tag, wrap, button, linkArrow,
     arrival, figures, versus, marquee,
-    arc, plate, plates, band, spread,
+    arc, plate, plates, band, spread, columnIndex,
     path, quote, quoteRail, badges,
     facts, faqList,
   };
