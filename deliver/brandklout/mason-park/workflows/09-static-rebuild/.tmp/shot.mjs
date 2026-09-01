@@ -29,13 +29,24 @@ const MOBILE = argv.includes("--mobile");
 // defines, which is the finished layout with no motion. Use it for layout and
 // responsive review; motion is verified by driving the page, never by a capture.
 const STILL = argv.includes("--still");
+// STICKY AND FIXED ELEMENTS ARE NOT WHERE captureBeyondViewport SAYS THEY ARE.
+// The homepage's header floats over the hero and is `position: sticky`. In a
+// full-page capture it paints at a translated offset and leaves a band of the
+// page background under it, which reads exactly like a broken negative margin:
+// a 74px white gap between the utility bar and the hero photograph at 1920.
+// Measuring it said `heroRect.y === navRect.y === 38`, i.e. no gap at all.
+// `--viewport` scrolls one viewport at a time and takes ordinary screenshots,
+// which is the only way to photograph a sticky header truthfully. Slower, and
+// the header repeats once per slice by definition, so it is for checking the
+// chrome rather than for reading a whole page.
+const VIEWPORT = argv.includes("--viewport");
 const VW = num("--vw", MOBILE ? 390 : 1440);
 const SLICE_W = num("--w", MOBILE ? 480 : 1000);
 const SLICE_H = num("--h", 1400);
 // Routes may be given with or without a leading slash. Git Bash on Windows
 // rewrites a leading-slash argument into a Windows path, so the bare form
 // (`node shot.mjs services/invisalign`) is the one that always works. `.` is home.
-const BOOL_FLAGS = new Set(["--mobile", "--still"]);
+const BOOL_FLAGS = new Set(["--mobile", "--still", "--viewport"]);
 const VALUE_FLAGS = new Set(["--w", "--h", "--vw"]);
 const routes = argv
   .filter((a, i) => !BOOL_FLAGS.has(a) && !VALUE_FLAGS.has(a) && !VALUE_FLAGS.has(argv[i - 1]))
@@ -134,6 +145,19 @@ for (const route of routes) {
   const broken = await evaluate("[...document.images].filter(i=>!i.complete||i.naturalWidth===0).map(i=>i.currentSrc||i.src)");
   if (broken?.length) console.log(`  ! ${route}: ${broken.length} broken image(s): ` + broken.slice(0, 5).join(", "));
   console.log(`${route} -> ${VW}x${h}`);
+
+  if (VIEWPORT) {
+    const VH = 900;
+    const steps = Math.ceil(h / VH);
+    for (let i = 0; i < steps; i++) {
+      await evaluate(`scrollTo(0, ${i * VH})`);
+      await wait(320);
+      const shot = await send("Page.captureScreenshot", { format: "png" });
+      fs.writeFileSync(path.join(OUT, `${name}-v${String(i + 1).padStart(2, "0")}.png`), Buffer.from(shot.data, "base64"));
+    }
+    console.log(`  ${steps} viewport slice(s) -> shots/${name}-v*.png`);
+    continue;
+  }
 
   const scale = SLICE_W / VW;
   const scaledH = Math.round(h * scale);
