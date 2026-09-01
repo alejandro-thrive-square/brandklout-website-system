@@ -555,3 +555,136 @@
   }
   window.addEventListener("load", function () { ScrollTrigger.refresh(); });
 })();
+
+
+/* ===========================================================================
+   THE GENERIC HOOKS — added 2026-09-01 with the nine core pages.
+
+   The block above binds every scene to a homepage chapter class and an id:
+   `#relayBig` inside `.ch-relay`, `#mqRow` inside `.ch-together`, and so on.
+   That was right for one page. Nine more pages each wanted one of those
+   mechanisms in a different chapter, and copying the scene per chapter is
+   how a runtime grows a page-specific branch for every page it serves.
+
+   So these bind by ATTRIBUTE. A page authors `data-write` on a paragraph and
+   gets the relay's word-by-word scrub; `data-count` on a number and gets the
+   counter; `data-rail` on a row and gets the proof rail's sideways travel;
+   `data-marquee`, `data-wipe` and `data-stagger` likewise. The homepage and
+   the Invisalign page carry none of these attributes, so nothing here can
+   touch them: that is the constraint, and it is checked by rendering both.
+
+   Same three rules as everything above. The final state is in the HTML
+   (a counter's value, a statement's words), reduced motion runs none of it,
+   and a missing GSAP leaves the page as plain markup.
+   ======================================================================== */
+(function () {
+  "use strict";
+  if (!document.querySelector("section[data-chapter]")) return;
+  if (!(window.gsap && window.ScrollTrigger)) return;
+  if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) return;
+
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.SplitText) gsap.registerPlugin(SplitText);
+
+  var EASE = "power3.out";
+  function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+  function dark(el) { var s = el.closest("[data-theme]"); return !!(s && s.getAttribute("data-theme") === "dark"); }
+
+  /* --- data-write: the statement, written word by word --------------------
+     The relay writes its body to ink and its last clause to the brand; here
+     the whole element writes to its theme's foreground unless `data-write-to`
+     says otherwise. The unwritten colour is set by the stylesheet, which is
+     what keeps the text readable when this never runs. */
+  $$("[data-write]").forEach(function (el) {
+    var to = el.getAttribute("data-write-to") || (dark(el) ? "#ffffff" : "#2e3538");
+    var sp = null;
+    if (window.SplitText) {
+      try {
+        sp = SplitText.create
+          ? SplitText.create(el, { type: "words", wordsClass: "jr-word" })
+          : new SplitText(el, { type: "words", wordsClass: "jr-word" });
+      } catch (e) { sp = null; }
+    }
+    if (sp && sp.words && sp.words.length) {
+      gsap.to(sp.words, {
+        color: to, stagger: .35, ease: "none",
+        scrollTrigger: { trigger: el, start: "top 80%", end: "bottom 45%", scrub: .5 }
+      });
+    } else {
+      gsap.to(el, { color: to, scrollTrigger: { trigger: el, start: "top 75%" } });
+    }
+  });
+
+  /* --- data-count: a number that counts up to the value it already shows.
+     `data-count` is the target, `data-decimals` the precision, `data-prefix`
+     and `data-suffix` the furniture. Skipped inside `.ch-together`, where
+     the homepage's own counter already owns the element. --------------- */
+  $$("[data-count]").forEach(function (b) {
+    if (b.closest(".ch-together")) return;
+    var to = parseFloat(b.getAttribute("data-count")) || 0;
+    var dec = parseInt(b.getAttribute("data-decimals") || "0", 10);
+    var pre = b.getAttribute("data-prefix") || "", suf = b.getAttribute("data-suffix") || "";
+    var group = b.closest("[data-counters]") || b;
+    var o = { v: 0 };
+    gsap.to(o, {
+      v: to, duration: 1.8, ease: "power2.out",
+      scrollTrigger: { trigger: group, start: "top 82%" },
+      onUpdate: function () {
+        var v = dec ? o.v.toFixed(dec) : Math.round(o.v).toLocaleString("en-US");
+        b.textContent = pre + v + suf;
+      }
+    });
+  });
+
+  /* --- data-rail: a row that travels sideways as the page scrolls -------
+     The proof rail, generalised. Only above 900, where the stylesheet has not
+     already turned the row into a native snapping scroller. ------------- */
+  $$("[data-rail]").forEach(function (row) {
+    var over = function () {
+      if (window.innerWidth < 900) return 0;
+      var host = row.parentElement;
+      return Math.max(0, row.scrollWidth - host.clientWidth + 24);
+    };
+    gsap.fromTo(row, { x: 0 }, {
+      x: function () { return -over(); },
+      ease: "none",
+      scrollTrigger: { trigger: row.parentElement, start: "top 85%", end: "bottom 15%", scrub: .6, invalidateOnRefresh: true }
+    });
+  });
+
+  /* --- data-marquee: velocity reactive drift, the homepage's mechanism --- */
+  $$("[data-marquee]").forEach(function (row) {
+    row.innerHTML += row.innerHTML;
+    var half = row.scrollWidth / 2;
+    var x = 0, extra = 0, last = window.pageYOffset;
+    gsap.ticker.add(function () {
+      var now = window.pageYOffset;
+      extra += (now - last) * 0.55;
+      last = now;
+      extra *= 0.92;
+      x -= 0.5 + extra * 0.06;
+      if (half && x <= -half) x += half;
+      if (x > 0) x -= half;
+      gsap.set(row, { x: x });
+    });
+  });
+
+  /* --- data-wipe: a frame revealed from the top edge down, as the doctor
+     plates are on the homepage --------------------------------------- */
+  $$("[data-wipe]").forEach(function (el, i) {
+    gsap.from(el, {
+      clipPath: "inset(0% 0% 100% 0%)", duration: 1.05, ease: "power4.out",
+      scrollTrigger: { trigger: el, start: "top 84%" }
+    });
+  });
+
+  /* --- data-stagger: the children of a grid arrive one after another ---- */
+  $$("[data-stagger]").forEach(function (group) {
+    var kids = Array.prototype.slice.call(group.children);
+    if (!kids.length) return;
+    gsap.from(kids, {
+      opacity: 0, y: 26, duration: .85, stagger: .08, ease: EASE,
+      scrollTrigger: { trigger: group, start: "top 82%" }
+    });
+  });
+})();

@@ -103,12 +103,42 @@ for (const file of pages) {
   const HOLDERS = [
     /<section class="lf-section"[^>]*id="([^"]*)"[\s\S]*?<\/section>/g,
     /<div class="svc-overlap_panel"[\s\S]*?<\/div>\s*<\/div>/g,
+    // The practice pages' two prose containers, added with the ab-/tm- block.
+    // Both hold running <p> and neither is `lf-section`, so without these two
+    // lines the gate reports "0 words" for a page carrying real prose -- the
+    // same silent pass the service page's move to cards produced.
+    /<div class="ab-open_col"[\s\S]*?<\/div>\s*<\/div>/g,
+    /<article class="ab-spec_item"[^>]*id="([^"]*)"[\s\S]*?<\/article>/g,
+    /<div class="tm-row_body">[\s\S]*?<\/dl>/g,
+    /<div class="tm-note">[\s\S]*?<\/div>/g,
+    // The nine core pages' prose containers, added with the cp- block. Same
+    // rule: anything that can hold two consecutive <p> is listed, or the gate
+    // reports "0 words" for a page full of prose.
+    /<div class="cp-spec_body">[\s\S]*?<\/div>/g,
+    /<div class="cp-split_warm">[\s\S]*?<\/dl>/g,
+    /<article class="cp-dossier">[\s\S]*?<\/article>/g,
+    /<div class="cp-card_copy">[\s\S]*?<\/div>\s*<\/div>/g,
+    /<div class="cp-qa_row">[\s\S]*?<\/div>/g,
+    /<div class="cp-mosaic_panel">[\s\S]*?<\/div>/g,
+    /<div class="cp-statement">[\s\S]*?<\/div>/g,
+    /<div class="cp-callout_in">[\s\S]*?<\/div>\s*<\/div>/g,
+    /<div class="cp-ticket"[\s\S]*?<\/div>\s*<\/div>/g,
+    /<div class="cp-bring_tour">[\s\S]*?<\/div>/g,
   ];
+  // A CLOSED FOLD IS NOT SHOWN, WHEREVER IT SITS. The rule above says the
+  // ceiling is on what the reader is shown, and `lf-more-in` is left out of
+  // HOLDERS for exactly that reason -- but that only works while the fold sits
+  // OUTSIDE every holder, which is where the service page happens to put it.
+  // Put a fold inside a holder, as the About page's spec entries do, and its
+  // hidden paragraphs are measured as a run of their own: the page was
+  // reported at 131 words for prose nobody is shown until they open it, i.e.
+  // penalised for applying the fix. Strip the folds, then measure.
+  const shown = (s) => s.replace(/<details class="lf-more"[\s\S]*?<\/details>/g, " ");
   let worst = 0, worstAt = "";
   for (const re of HOLDERS)
   for (const sec of html.matchAll(re)) {
     let run = 0;
-    for (const part of sec[0].split(/(<p\b[^>]*>[\s\S]*?<\/p>)/)) {
+    for (const part of shown(sec[0]).split(/(<p\b[^>]*>[\s\S]*?<\/p>)/)) {
       if (/^<p\b/.test(part)) {
         // a lead-in is a label for the list under it, not a paragraph of prose
         run += /class="lf-lead"/.test(part) ? 0 : words(part);

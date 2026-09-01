@@ -27,6 +27,15 @@
 | :--- | :--- |
 | `home/index.html` | **The homepage.** ~58KB. Edit this file to change the page. |
 | `home/services/invisalign/index.html` | **The service page**, and the pattern every other treatment page follows. ~50KB. |
+| `home/about-us/index.html` | **About the Practice.** Asana `1217892732561689`. See "The core pages" below. |
+| `home/our-doctors/index.html` | **Meet the Doctors.** Asana `1217892732561690`. |
+| `home/our-team/index.html` | **Meet the Team.** Asana `1217892732561691`. |
+| `home/our-services/index.html` | **Services Overview.** Asana `1217892732561693`. |
+| `home/new-patients/index.html` | **New Patients.** Asana `1217892732561695`. Carries the pinned first-visit scene. |
+| `home/financing/index.html` | **Insurance and Financing.** Asana `1217892732561697`. |
+| `home/dental-savings-plan/index.html` | **Membership Plan.** Asana `1217892732561698`. |
+| `home/patient-reviews/index.html` | **Patient Reviews.** Asana `1217892732561699`. |
+| `home/thank-you/index.html` | **General Thank You.** Asana `1217894480351481`. `noindex`. |
 | `home/assets/site.css` | The whole stylesheet, one file. Fluid root first, then the layout, then the journey layer. |
 | `home/assets/site.js` | Mobile menu, deferred map. |
 | `home/assets/journey.js` | The GSAP scroll layer — the three scenes described in [JOURNEY-2026-09-01.md](./JOURNEY-2026-09-01.md). |
@@ -36,6 +45,11 @@
 | `.tmp/shot.mjs` | **The gate that renders it.** Four widths, full-page PNGs plus overflow / broken images / never-revealed elements / console errors. `cd .tmp && npm i` once, then `node shot.mjs ../home/services/invisalign/index.html`. |
 | `.tmp/measure.mjs` | How long the page is and where the length went — px, screens, visible words and list heights per chapter. Run it before deciding what to cut. |
 | `.tmp/probe-scene.mjs` | Drives the pinned path scene and asserts it does work: the track travels, the bar fills, every card reveals. A screenshot cannot tell you any of that. |
+| `.tmp/probe-heights.mjs` | **The freeze gate.** Renders the homepage and the Invisalign page at four widths with reduced motion on and diffs every section height against a saved baseline. `--save base` before touching `site.css`, `--diff base` after; exits 1 if either approved page moved. |
+| `.tmp/probe-hooks.mjs` | **Drives the generic runtime hooks, motion on.** Steps every `data-write` to 10 / 50 / 90% of its own trigger range and asserts a different number of written words at each; checks every `data-count` reached its value, every `data-rail` travelled, every `data-wipe` finished, the pin fits, and the console stayed clean. |
+| `.tmp/probe-wall.mjs` | Opens every cell of the team page's name wall and clicks every link in the About page's spec index, then checks the index actually pins. A `<details>` photographs shut and a sticky column photographs as a list. |
+| `.tmp/probe-tag.mjs` | Every `.chapter-tag`'s computed opacity, transform and box after a scroll-through. Tells "the reveal never fired" apart from "it is behind the header", which look identical in a PNG. |
+| `.tmp/probe-map.mjs` | Whether the deferred map actually loaded — request statuses and the iframe's box, not its pixels. A map that is merely slow to paint and a map that is broken are the same screenshot. |
 | `.tmp/backup-site.mjs` | Dumps a whole instance -- shell, every page's node graph, media records -- to one local JSON. **Run it before anything destructive.** |
 | `.tmp/list-site.mjs` | Read-only inventory: which instance, who we are, pages, media, publish state. |
 | `.tmp/run-converter.mjs` | Ships `container-convert.ts` into the container, sha-verified, and runs it under bun. |
@@ -100,6 +114,116 @@ re-rendering `home/index.html` and confirming its four heights have not moved.
 | `svc-provider` | Portrait + copy + `svc-stats`. **Sized to the asset**: Dr. Sung is published at 230×300 and nothing larger, so the column caps at 15rem rather than upscaling him across a spread. |
 | `svc-card is-price` | The one filled panel on the page, for the money. |
 
+### The core pages, and what "not equal throughout the site" means
+
+Client note, 2026-09-01: *"Make variations to the sections so we make sure they
+are not equal throughout the site."* The nine pages of the Asana **Build Core
+Pages** task (`1217892732561687`; pull it fresh with
+`node deliver/brandklout/scripts/asana-context.mjs --task 1217892732561687 --out <dir>`,
+the cached intake context does not contain it) were built against that note,
+locally, for review. Two earlier drafts of About and Team from another session
+were discarded on the client's instruction and rebuilt from scratch; their
+`ab-`/`tm-` CSS block stays in the sheet as system vocabulary and three of its
+parts are reused where they fit (`ab-oneword`, `ab-diptych`, `tm-schools`).
+
+> **The chrome is constant, the chapter bodies vary.** The compact arrival, the
+> credential strip, the breadcrumb, the invitation, the header and the footer
+> are the same on all eleven pages, and are stamped from the Invisalign page so
+> they cannot drift. Varying those is not variety, it is a site that looks like
+> eleven different sites. What varies is the *body* of each chapter. Every
+> page carries at least two layouts that appear on no other page; the shared
+> scrubbed scenes (the pinned path, the proof rail, the written statement)
+> are system components and recur, never in the same sequence.
+
+**The runtime binds by attribute now, not only by chapter class.** The homepage's
+scenes are tied to `.ch-relay` / `#relayBig`, `.ch-together` / `#mqRow` and so
+on, which was right for one page and would have grown a page-specific branch
+per page after that. The second IIFE at the end of `journey.js` reads six
+hooks off the markup instead, and the two approved pages carry none of them:
+
+| Hook | What it does | Where it is used |
+| :--- | :--- | :--- |
+| `data-write` | The relay's word-by-word scrub on any element. Unwritten colour from `.ch [data-write]` (0,2,0, so `.ch p` cannot beat it), readable on `jr-fail` and reduced motion. `data-write-to` overrides the target colour. | About, Doctors, Team, Financing |
+| `data-count` | Counts up to the value the HTML already states. `data-decimals`, `data-prefix`, `data-suffix`; `data-counters` on the group sets the trigger. Skipped inside `.ch-together`. | Doctors, Reviews |
+| `data-rail` | The proof rail's sideways travel on any row, above 900 only. | About |
+| `data-marquee` | The velocity-reactive marquee. | Team |
+| `data-wipe` | The doctor plates' clip-path reveal on any frame. | About, Services, New Patients, Membership |
+| `data-stagger` | Children of a grid arrive one after another. | Most card grids |
+
+`probe-hooks.mjs` is the check: it steps each `data-write` to 10 / 50 / 90%
+of its own range and requires three different word counts, which is the
+"scrubbing is real" assertion from DESIGN-STANDARD.md. All nine pages pass it.
+
+The layouts, all in the `cp-` block at the end of `site.css`:
+
+| Page | Chapters, in order, and the layout each body uses |
+| :--- | :--- |
+| **About** | Premise: `cp-manifesto`, the practice's own sentence centred and written word by word, over a `cp-facts` strip. Building: `cp-mosaic`, three photographs at three sizes on a twelve column grid with one caption panel. Our Dental Family: `cp-rail` of `cp-person`, the practice's three verbatim headings on a row the page scrolls sideways. Instruments: `cp-spec`, the technology page as `<details>` rows on ink beside a sticky photograph. The Word: `ab-oneword`, a four word review. |
+| **Doctors** | Specialist: `cp-split`, half ink with the portrait edge to edge, half warm with her own words written word by word, facts in `cp-dl`. Generalists: `cp-duo` of two `cp-dossier`, portraits capped to the smallest asset. Training: `tm-schools`. Measure: `cp-figures`, four counted numbers from the bios on ink. Voices: `cp-voices`, one whole review per doctor, no rail. |
+| **Team** | Doctors: `cp-bylines`, one strip. Named: `cp-ticker` marquee of first names, then `cp-people` rows, name at statement size beside the review it came from. Reason: `cp-statement`, one sentence written on ink with a watermark. Off Duty: `cp-asides`, six cells on a drop initial, closing on `cp-band`. |
+| **Services** | Map: `cp-depts`, eight groups on a twelve column sheet, tiles sized by count, every treatment a chip. Finder: `cp-finder`, problem on the left, where the practice would start on the right. Two Practices: `ab-diptych`. Offers: `cp-menu`, the published offers as a price list with dotted leaders. |
+| **New Patients** | Offer: `cp-ticket`, $189 at the arrival headline size with the inclusions as a receipt and two stubs on a dashed edge. First Visit: `ch-path`, pinned, six steps. Bag: `cp-checklist` beside `cp-bring_tour`. Questions: `cp-qa`, open two-column Q and A. Proof: the shared quote and rail. |
+| **Financing** | Rule: `cp-promises`, three lines written word by word, each stepped further in. Ways to Pay: `cp-matrix`, a real `<table>` that becomes labelled cards below 768, then the base accordion. Plan: `cp-callout`, a full bleed sand band. |
+| **Membership** | Membership: `cp-card`, the plan drawn as a tilted card that straightens on hover. Inside: `svc-ledger` then `vs-table`. Who It Is For: `cp-situations` beside one photograph. Join: `cp-steps` on one hairline. |
+| **Reviews** | Number: `cp-score`, 4.9 counted at 1.35 times the arrival size. Proof: the shared quote and rail. Wall: `cp-wall`, CSS columns so no review is trimmed. Kids: `cp-kids` on ink with the sage pill. Write One: `cp-callout`. |
+| **Thank You** | Right Now: `cp-callbox`, the number at chapter headline size with the hours. Next: `cp-timeline`, three moments down a rule. Meanwhile: `svc-grid` of linked cards. `noindex`. |
+
+Things that cost a round, and will cost the next batch one too:
+
+1. **A chapter tag inside a component that styles `b` takes that component's
+   size.** `.cp-score_num b` made the tag read THE NUMBER at 140px. Scope
+   numeral rules to `> b`, and keep `.chapter-tag` out of any block that
+   styles bare `b`.
+2. **`height: 100%` on an image in an auto-height grid cell resolves to auto.**
+   The split's portrait left a band of bare ink under itself; above 900 it is
+   absolutely positioned inside the cell instead.
+3. **A card that is an `<a>` inherits the base underline on every word.**
+   `a.svc-card` resets it; the Invisalign page's cards are `<article>` so the
+   rule cannot reach them.
+4. **A rail that barely overflows does not read as a rail.** Three 26rem
+   people fit a 1440 row with 16px to spare, so the travel was invisible; at
+   30rem the row is wider than the screen and the scrub has somewhere to go.
+5. **shot.mjs's mobile full-page capture repeats the top of the page at the
+   bottom.** It does it to the approved homepage too. It is a Playwright
+   artefact of full-page capture under `isMobile`, not a duplicate section;
+   `probe-heights.mjs` reports the real height.
+6. **Five facts on a centred strip orphan the fifth.** Four, or six.
+
+### The named, and why the team page is built this way
+
+**The practice publishes no staff roster** — no names, no roles, no portraits
+for anyone but the three doctors, checked across the whole crawl. Both
+dishonest ways to fill that gap are already on this client's record: the old
+site ran four awards it had not won, and a smile gallery of theme stock
+presented as its own results.
+
+So the team page names **only the people the practice's own patients name in
+their own Google reviews**, each row carrying the review it came from whole,
+and asserts a role only where a review gives one ("Genevieve is a great dental
+hygienist" — Abi O). The disclosure is in the chapter, not just in a commit
+message.
+
+**Deliberately not merged: "Gen", "Jen" and "Jenn."** Five further reviews use
+them and they may be Genevieve spelled by ear. The page says so. Publishing a
+colleague's name at a guess is not a recoverable error. **Ask the practice** —
+see the open items below.
+
+**The reviews come from two places and both are the practice's own.** The
+homepage and the Invisalign page carry six reviews from the intake; the
+Trustindex widget the old site embedded (`01-content-intake/.tmp/site-scrape/
+assets/cdn.trustindex.io/.../richsnippet.json`) carries twenty more, with
+dates, and the 4.9 / 1,037 aggregate the reviews page states. Everything is
+shown whole, spelling and all, and the one Spanish review is shown in Spanish
+with `lang="es"`.
+
+**Chrome is stamped, bodies are authored.** The nine pages were produced by a
+scratch stamper that took the head, header, footer and script tags from the
+Invisalign page, rewrote the asset prefix, expanded an `{{img key=…}}` macro
+into `src`/`srcset`/`sizes` from what is actually on disk under `uploads/`,
+and wrapped a hand-written body. The stamper is not in the repo, on purpose:
+`home/<slug>/index.html` is the source from here on, exactly as the homepage
+is. If the chrome changes on all eleven pages at once, write a new one.
+
 Where prose still runs in a column, two frames carry it: `lf-layout lf-split` puts the chapter
 tag and heading in a sticky left column with the sections beside it, and `lf-layout is-solo` is
 one column at 72ch. **When you add a new prose container, add it to `HOLDERS` in
@@ -117,6 +241,19 @@ becomes `ul.lf-ticks`), dead paragraphs are dropped outright, and anything past 
 ceiling folds into `details.lf-more`. See **No wall of text** in
 [`deliver/brandklout/docs/DESIGN-STANDARD.md`](../../../docs/DESIGN-STANDARD.md); `check.mjs`
 measures it.
+
+> [!IMPORTANT]
+> **A closed `<details>` is not shown, wherever it sits — `check.mjs` now strips
+> folds before measuring.** The ceiling is on what the reader is *shown*, and
+> `lf-more-in` was left out of `HOLDERS` for exactly that reason. That only
+> worked while every fold sat OUTSIDE a holder, which is where the service page
+> happens to put them. Put one inside a holder, as About's spec entries do, and
+> its hidden paragraphs were measured as a run of their own: the page was
+> reported at 131 words for prose nobody sees until they open it — **penalised
+> for applying the fix.** Four new holders were registered at the same time
+> (`ab-open_col`, `ab-spec_item`, `tm-row_body`, `tm-note`); a new prose
+> container still has to be added by hand, or the gate silently reports 0 words
+> for a page full of prose.
 
 **Photographs may show the practice. They may not be presented as showing the treatment, its
 result, or its patient** — which is why the captions here talk about the building and the
@@ -333,9 +470,25 @@ publishing anywhere that matters, or you ship whatever else was sitting unreview
 freshly published image can 404 and succeed a moment later; `verify-live.mjs` filters those,
 and the Cloudflare bot beacon, so a real miss still stands out.
 
+## Open items for the practice — the core pages
+
+None of these blocks review. All of them need somebody other than an engineer.
+
+| # | Item | Why it matters |
+| :--- | :--- | :--- |
+| 1 | **A real staff roster: names, roles, and photographs.** | The team page names eight people because patients named them on Google. That is honest and it is not a substitute. Ask for the list, the job titles, and headshots on the same day and the same wall as Dr. Cho's and Dr. Nguyen's. |
+| 2 | **Are "Gen", "Jen" and "Jenn" Genevieve?** | Five reviews use those spellings. Not merged, and the page says so. One answer adds a name or confirms a spelling. |
+| 3 | **A larger portrait of Dr. Sung.** | His only published headshot is 230×300, from a different shoot to the other two. Every component that shows him is capped to that width and greyscales all three to reconcile it. |
+| 4 | **Confirm the office hours, again.** | Every page publishes the live site's hours (Mon/Wed 9–6, Tue/Thu 8–5, Fri–Sun closed). The doctors' old bio pages say Mon 9–7, Tue 7–5, Wed 8–6, Thu 7–5, **Fri 7–5**, and the old landing page says "open on Saturdays as well". See Open Question 9 in the project overview. |
+| 5 | **Are the published offers current?** | `/our-services/` and `/new-patients/` restate the $189 / $129 / $350 specials, the Invisalign and implant $1,000 discounts and the free second opinion exactly as the old site published them. Nobody has confirmed they still stand. |
+| 6 | **The membership plan's fee, and its brochure.** | The plan page states what the practice published: two exams, two cleanings, discounts, no pre-authorization, no pre-existing exclusions. It does not state a price, because the practice never published one, and the brochure the old page linked was not in the crawl. |
+| 7 | **The new patient forms.** | The old site said forms could be completed online but the crawl captured no link. New Patients and Thank You say "ask the front desk to send them". A URL turns that into a button. |
+| 8 | **Where should "write a review" go?** | The old blog's "Click here" link was not captured. The reviews page sends people to the Google Maps listing, which carries the review button. A `g.page` review link is better. |
+| 9 | **What the thank-you page follows.** | It assumes a request form whose reply is a phone call, which is how the old virtual-consult page worked. If the form redirects somewhere else, or confirms by email, the first chapter's copy changes. |
+
 ## Nav links
 
-The header links to about 55 pages, of which two now exist. That is deliberate: the nav
+The header links to about 55 pages, of which eleven now exist. That is deliberate: the nav
 describes the practice's site, not this folder. Locally the rest go nowhere; on Instatic they
 resolve as the pages are built.
 
