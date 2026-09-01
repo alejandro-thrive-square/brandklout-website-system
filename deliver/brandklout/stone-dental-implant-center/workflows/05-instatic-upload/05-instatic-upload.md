@@ -63,9 +63,17 @@ node push-site.mjs --apply --force   # write shell + pages + code assets in ONE 
                                #    --force is REQUIRED on any re-import: see trap 11
 node -e "import('.../insta-api.mjs').then(m=>m.publish())"   # 5. publish
 node verify-live.mjs            # 6. GATE — crawls every route, link and asset
+node compare-live.mjs           # 7. GATE — diffs the published pages against the
+                               #    local build: structure, computed style, geometry,
+                               #    text and runtime state. See traps 19 and 20
 ```
 
 `verify-live.mjs` is not optional. Every failure on this build reported success somewhere first.
+
+**Neither is `compare-live.mjs`, and it is the stronger of the two.** `verify-live.mjs` asks whether
+the routes and assets resolve; `compare-live.mjs` asks whether the page still LOOKS like the build.
+Two defects shipped through a clean `verify-live.mjs` run and were caught by the comparison: a
+`width` the converter dropped, and a background colour that changed because the cascade was rebuilt.
 
 ## Why the conversion runs on the container
 
@@ -357,6 +365,98 @@ site. It was correct in the browser.
 **Verify a fixed-attachment section with a VIEWPORT screenshot**, scrolled to it. `slices.mjs` in
 `site-src/` does exactly that and is the right tool for looking at a published page as well as a
 local one.
+
+### 19. A colon inside a comment defeats the lossy-declaration encoder
+
+`conv-encode.ts` exists because happy-dom drops declarations whose values it
+cannot evaluate. It probes each one and, when the engine would drop it, rewrites
+it to `--instatic-sub-<prop>` so Instatic's own decoder restores it at publish
+time. It works, and it is why `clamp()` and `min()` are all over the published
+stylesheet.
+
+`encodeChunk` found the property name with `chunk.indexOf(':')`. A *chunk* is
+everything between two top-level `;`, so it carries any comment written above
+the declaration — and **a colon inside that comment is found first**. The
+comment is then read as the property name, fails `PLAIN_PROPERTY_RE`, and the
+chunk is returned unencoded. happy-dom drops the declaration for real and
+nothing warns.
+
+`.path_panel` on the home page:
+
+```css
+flex: 0 0 auto;
+/* 40rem, not 30rem. ... the pinned chapter travelled 144px: the
+   reader could not tell it had moved. */
+width: min(40rem, 86vw);
+```
+
+`144px:` is the colon. **The published home page's three process panels were
+1045px wide inside a 390px phone** instead of 335px, so the rail scrolled about
+three screens per panel.
+
+**Three conditions had to line up**, which is why exactly one declaration on a
+130KB stylesheet was affected and why it survived four publishes:
+
+1. a colon in the comment attached to the declaration,
+2. a value the CSS engine rejects (`width: min()` is rejected; `min-height:
+   clamp()` is not), and
+3. no `var()` in that value — `var()` puts a declaration under Instatic's OWN
+   substitution protection, which is why `.surgeon_panel`'s
+   `padding-right: calc(var(--pad-panel) + ...)` came through untouched with the
+   same colon-in-comment problem.
+
+Fixed in `conv-encode.ts` by stripping comments before locating the colon, and
+inserting the marker where the property actually begins so the comment survives.
+**The same patch is applied to the Nahlah copy**, which was byte-identical.
+
+> A `min()`/`clamp()` value with no `var()` in it is the risky shape. There is no
+> reason to avoid writing one; `compare-live.mjs` is the check.
+
+### 20. The cascade is rebuilt, so equal-specificity rules can swap places
+
+`.stone-band` sets `background-color: #1c1b19`. `[data-theme="dark"]` in
+`01-tokens.css` sets `background-color: var(--bg)`, which is `--charcoal`. Both
+are specificity (0,1,0), so locally the later file wins and the band is
+`#1c1b19`. Instatic rebuilds the cascade out of the style registry and the
+attribute rule won instead: the published band was `#272727`.
+
+Two dark greys under a marble texture, invisible by eye, found by
+`compare-live.mjs` on both pages.
+
+**Source order is not a contract across the import.** Where two rules of equal
+specificity disagree and the outcome matters, make the winner win on
+specificity: `.stone-band.stone-band` is (0,2,0) and settles it in any order.
+Doubling a class is not a hack here, it is the cheapest way to say "this one, on
+purpose".
+
+### The check: `compare-live.mjs`
+
+```bash
+node compare-live.mjs                 # both pages, 1440 and 390
+node compare-live.mjs neck-lift 390   # one page, one width
+node compare-live.mjs --shots         # also write viewport PNG pairs
+```
+
+Serves the local `final-site` and opens both it and the published page at the
+same viewport, then reports:
+
+- **structure** — elements present locally and missing live, keyed by tag and
+  class list rather than by position, so a node the importer moved is still
+  matched and one it dropped is named once;
+- **style** — every property in a wide list, grouped by property with each
+  affected element listed, so "eighteen elements differ on width" is legible as
+  one bug rather than eighteen;
+- **geometry** — bounding boxes, which catch a layout that computes the same and
+  lays out differently;
+- **text** — the first point of divergence in the rendered copy;
+- **runtime**, scripts on — the `is-*` classes the site sets itself, the `hidden`
+  attributes, the resolved tokens, and counts of every control.
+
+Known-benign differences are declared in `BENIGN` with a reason each: Instatic's
+responsive `image-set`, its `<img>` width/height and blurhash, sub-pixel
+rounding, and the `.navbar_burger:empty` repair. **Resist adding to that list to
+make a run quiet.** Both of the bugs above would have been caught before the
+first publish by exactly this check.
 
 ## Output Artifacts
 

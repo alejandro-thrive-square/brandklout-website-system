@@ -140,7 +140,21 @@
   background-position: center;
 }
 
-.stone-band {
+/* THE SELECTOR IS DOUBLED, and it is not a typo. `[data-theme="dark"]` in
+   01-tokens.css sets `background-color: var(--bg)`, which is --charcoal, and it
+   has the same specificity as a single class. Locally `.stone-band` wins on
+   source order because 50-journey.css loads after 01-tokens.css; on Instatic
+   the registry rebuilds the cascade and the attribute rule won instead, so the
+   published band was #272727 where the build says #1c1b19. Two dark greys, both
+   under a marble texture, and nobody would have caught it by eye —
+   `compare-live.mjs` found it on both pages.
+
+   `.stone-band.stone-band` is (0,2,0) and beats the attribute rule whatever
+   order they end up in. The alternative, setting `--bg` inside the band, would
+   also have re-coloured `.surgeon_plate` and `.tl_stop::before`, which read
+   `var(--bg)` for a reason of their own. */
+.stone-band,
+.stone-band.stone-band {
   position: relative;
   isolation: isolate;
   background-color: #1c1b19;
