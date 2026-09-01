@@ -339,6 +339,40 @@ node verify-live.mjs $INSTATIC_BASE_URL / /services/invisalign   # 14. check wha
 node diff-live.mjs ../home/index.html $INSTATIC_BASE_URL/         # 15. and diff it against the local page
 ```
 
+### The BugHerd sidebar is on staging, and only staging
+
+The client reviews on BugHerd, so staging carries their sidebar snippet on every page since
+2026-09-01. It is **not** a page edit: `to-instatic.mjs` strips every `<script>`, and a code
+asset is inline JS by content with no `src` field, so `src/scripts/bugherd.js` is a four-line
+loader (`placement: head`, `timing: immediate`, `scope: all-pages`) that appends the real
+`<script src="https://www.bugherd.com/sidebarv2.js?apikey=…">`. `import-bugherd.mjs` registers
+it, `--remove` takes it off, and both refuse any host that is not staging.
+
+The other half is the CSP. The published page says `script-src 'self'`, and BugHerd needs
+`www.bugherd.com` (the loader, which 302s to `sidebar.bugherd.com/embed.js`, plus a
+communication `<iframe>`) and `sidebar.bugherd.com` (the sidebar bundles). Those go into the
+embed-origins plugin, and **`set-origins.mjs` replaces all three boxes on every call**, so the
+Google Maps frame origin has to be repeated or the map dies:
+
+```bash
+cd ../../../../process/18-instatic-embeds
+INSTATIC_BASE_URL=https://staging.masonparkdental.com node set-origins.mjs \
+  --frame "https://www.google.com https://www.bugherd.com" \
+  --script "https://www.bugherd.com https://sidebar.bugherd.com" \
+  --connect "https://notify.bugsnag.com https://sessions.bugsnag.com"
+```
+
+Plugin settings take effect at the next publish, so the order is: origins, then
+`import-bugherd.mjs --publish`. `probe-bugherd.mjs <url>` reads the live CSP, loads the page in
+Chrome and lists every bugherd request and CSP refusal. **A cookieless browser gets a `204` from
+BugHerd and no sidebar** — the sidebar is served only to a viewer logged into BugHerd, which is
+how the public never sees it. So the probe proves the policy and the loader; only a logged-in
+browser proves the mount.
+
+Two refusals the probe reports are older than BugHerd and unrelated to it: the Webflow icon
+font is a `data:` URI and `font-src` has no `data:`, and Cloudflare's own Web Analytics beacon
+(`static.cloudflareinsights.com`) is injected at the edge and refused by `script-src`.
+
 **Pages are node graphs, not HTML.** Steps 6–8 exist because the HTML→nodes importer is an MCP
 `site_*` tool that proxies a live browser editor and "cannot run headlessly"; calling Instatic's
 own importer inside the container sidesteps that. `railway ssh` takes its payload on the command
