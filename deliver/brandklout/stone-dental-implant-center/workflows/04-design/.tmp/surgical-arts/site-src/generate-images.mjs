@@ -350,6 +350,42 @@ const SLOTS = [
       'stone counter beside a folded cream cloth, vertical composition, warm daylight, no needles ' +
       'touching anything',
   },
+  /* --- fifth pass, 2026-09-01: two service pages were sharing a head --------
+     The service template now puts `bandImage` at the top of the page as the
+     hero, where it used to be a band halfway down. That promotion raised the
+     cost of reuse: two photographs were each doing duty as the HEAD of two
+     different treatments, which is barely noticeable mid-page and obvious when
+     it is the first thing on the screen twice.
+
+       gen-implant-forms  was the head of cheek-and-chin-implants AND jawline-implant
+       gen-planning       was the head of brow-lift AND myellevate-neck-lift
+
+     One new image each, so all twelve service pages open on something of their
+     own. Same rules as every other pass: an object or a room, never a face,
+     never a result. */
+  {
+    file: 'gen-contour-gauges.webp',
+    used: 'jawline-implant.html - the head (was sharing gen-implant-forms with cheek-and-chin)',
+    // The jawline implant page's copy is about the mandible's angle and
+    // projection being measured rather than chosen off a shelf. Contour gauges
+    // and a protractor say measurement without repeating the calipers that now
+    // belong to the cheek and chin page.
+    prompt:
+      'a set of machined metal contour gauges and a brass protractor laid on tracing paper over a ' +
+      'pale stone counter, precision measuring instruments, architectural draughting still life, ' +
+      'soft directional daylight',
+  },
+  {
+    file: 'gen-iclight-wand.webp',
+    used: 'myellevate-neck-lift.html - the head (was sharing gen-planning with brow-lift)',
+    // MyEllevate's distinguishing feature, in the practice's own description, is
+    // that the suture is placed under a guiding ICLED light. That is the honest
+    // subject for this page and it belongs to no other one.
+    prompt:
+      'a slim illuminated surgical light wand resting in its cradle on a pale stone counter in a ' +
+      'darkened calm treatment room, a narrow warm beam falling across folded cream linen, ' +
+      'close up, no people',
+  },
   {
     file: 'ask-reception-tall.webp',
     aspect: 'portrait_2_3',

@@ -472,7 +472,7 @@ export const TREATMENTS = [
     ],
     bandImage: {
       file: 'gen-implant-forms.webp',
-      alt: 'Smooth sculpted pale forms arranged on a stone surface in soft daylight',
+      alt: 'Brass calipers resting on a technical profile drawing on a pale stone counter',
     },
     journeyTitle: 'What the day actually looks like.',
     journeyImage: {
@@ -952,8 +952,8 @@ export const TREATMENTS = [
       { label: 'Results settle', value: '6 to 12 weeks' },
     ],
     bandImage: {
-      file: 'gen-planning.webp',
-      alt: 'A carved stone fragment on a plinth in a quiet, daylit room',
+      file: 'gen-iclight-wand.webp',
+      alt: 'An illuminated surgical light wand over folded linen in a darkened treatment room',
     },
     journeyTitle: 'What the day actually looks like.',
     journeyImage: {
@@ -1078,8 +1078,8 @@ export const TREATMENTS = [
       { label: 'Results settle', value: 'Two to three months' },
     ],
     bandImage: {
-      file: 'gen-implant-forms.webp',
-      alt: 'Smooth sculpted pale forms arranged on a stone surface in soft daylight',
+      file: 'gen-contour-gauges.webp',
+      alt: 'Machined contour gauges and a brass protractor on a technical drawing',
     },
     journeyTitle: 'What the day actually looks like.',
     journeyImage: {
