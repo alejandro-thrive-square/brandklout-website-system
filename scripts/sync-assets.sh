@@ -56,6 +56,14 @@ MEDIA_FILTERS=(
   --filter "+ **/.tmp/**/*.pdf"    --filter "+ **/.tmp/**/*.mp4"     --filter "+ **/.tmp/**/*.mov"
   --filter "+ **/.tmp/**/*.zip"    --filter "+ **/.tmp/**/*.7z"      --filter "+ **/.tmp/**/*.psd"
   --filter "+ **/.tmp/**/*.ai"     --filter "+ **/.tmp/**/*.eps"     --filter "+ **/.tmp/**/*.fig"    --filter "+ **/.tmp/**/*.sketch"
+  # Frozen design deliverables. These live OUTSIDE .tmp/ on purpose - they are the
+  # thing a client or a reviewer opens, so they sit in a plainly named folder rather
+  # than a dot-directory. Their imagery is still binary media that git refuses, so
+  # without these lines it would exist on one machine only, with no source of truth.
+  # Added 2026-09-01 for mason-park/workflows/09-static-rebuild/home/.
+  --filter "+ **/home/assets/**/*.png"   --filter "+ **/home/assets/**/*.jpg"    --filter "+ **/home/assets/**/*.jpeg"
+  --filter "+ **/home/assets/**/*.gif"   --filter "+ **/home/assets/**/*.svg"    --filter "+ **/home/assets/**/*.webp"   --filter "+ **/home/assets/**/*.ico"
+  --filter "+ **/home/assets/**/*.avif"  --filter "+ **/home/assets/**/*.pdf"
   --filter "- *"
 )
 

@@ -31,7 +31,10 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DIST = path.join(HERE, "dist");
+// The design deliverable is `../home/` — a plain, double-clickable folder of
+// HTML/CSS/JS, not a generated `dist/`. The generator was retired on 2026-09-01:
+// the homepage IS index.html now, hand-edited, and this exporter reads it.
+const DIST = path.join(HERE, "..", "home");
 const OUT = path.join(HERE, "instatic");
 
 const argv = process.argv.slice(2);
@@ -45,7 +48,7 @@ const MEDIA = mediaArg && fs.existsSync(mediaArg) ? JSON.parse(fs.readFileSync(m
 const LEAN = argv.includes("--lean");
 
 if (!fs.existsSync(DIST)) {
-  console.error("dist/ does not exist - run `node build.mjs` first.");
+  console.error("../home/ does not exist - that folder IS the site source.");
   process.exit(1);
 }
 
@@ -81,17 +84,28 @@ export const upload = (src) => {
 
 /** Instatic pages are a body, not a document. */
 const transform = (html) => {
-  let out = html;
+  // `home/index.html` addresses its assets RELATIVELY (`assets/site.css`) so it
+  // opens from file:// with no server. Every rule below was written against the
+  // absolute form, so restore it here rather than teaching each one both shapes.
+  let out = html.split(String.fromCharCode(34) + "assets/").join(String.fromCharCode(34) + "/assets/")
+                .split(" assets/").join(" /assets/");
 
   // 3. drop the local asset plumbing - these are site-wide code assets there
   out = out.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");
   out = out.replace(/<link\b[^>]*>/gi, "");
 
   // body only
-  const open = out.indexOf("<body>");
+  // The opening tag carries attributes (`<body class="has-journey">`), so match
+  // the tag rather than the literal string - an exact "<body>" search found
+  // nothing and threw on every page that had a body class.
+  // The opening tag carries attributes (<body class="has-journey">), so find
+  // the end of the TAG rather than searching for a literal "<body>": that exact
+  // search returned -1 and threw on every page that had a body class.
+  const bodyAt = out.indexOf("<body");
+  const bodyEnd = bodyAt === -1 ? -1 : out.indexOf(">", bodyAt);
   const close = out.lastIndexOf("</body>");
-  if (open === -1 || close === -1) throw new Error("no <body>");
-  out = out.slice(open + "<body>".length, close);
+  if (bodyEnd === -1 || close === -1) throw new Error("no <body>");
+  out = out.slice(bodyEnd + 1, close);
 
   // 1. routes - except an href into /assets/, which is a file to download, not a
   //    page. The brochure on /dental-savings-plan was going out as
