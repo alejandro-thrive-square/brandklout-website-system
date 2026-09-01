@@ -49,10 +49,29 @@ for (const route of routes) {
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
   await page.waitForTimeout(600);
 
-  const r = await page.evaluate(() => {
+  const r = await page.evaluate(async () => {
     const de = document.documentElement;
+    // IS THE PAGE PAINTING THE WEBFONT, OR FALLING BACK? Neither
+    // `document.fonts.check()` nor computed `font-family` can tell you: the
+    // first answers true for a fallback, the second reports the stack that was
+    // ASKED for. Measure the string in the family and in its own fallback --
+    // identical widths mean the fallback is what is on screen.
+    // This shipped wrong once: to-instatic.mjs strips the <link> that loads the
+    // three families, so the live pages were Georgia and Segoe UI while every
+    // other check passed.
+    await (document.fonts.ready ?? Promise.resolve());
+    const cv = document.createElement("canvas").getContext("2d");
+    const S = "Handgloves 12345";
+    const wOf = (f) => { cv.font = f; return cv.measureText(S).width; };
+    const paints = (name, fb) => wOf(`300 48px "${name}", ${fb}`) !== wOf(`300 48px ${fb}`);
+    const fonts = {
+      Newsreader: paints("Newsreader", "Georgia, serif"),
+      Karla: paints("Karla", '"Segoe UI", system-ui, sans-serif'),
+      "Nunito Sans": paints("Nunito Sans", '"Segoe UI", system-ui, sans-serif'),
+    };
     const imgs = [...document.images];
     return {
+      fonts,
       title: document.title,
       chapters: document.querySelectorAll("section[data-chapter]").length,
       cssLinked: [...document.querySelectorAll('link[rel="stylesheet"]')].map((l) => l.href.split("/").pop()),
@@ -88,6 +107,8 @@ for (const route of routes) {
   console.log("  title       " + r.title);
   console.log("  chapters    " + r.chapters + "   svc-cards " + r.svcCards);
   console.log("  stylesheet  " + r.cssLinked.join(", ") + "   .ch padding-top " + r.chPadded + "   root " + r.rootPx);
+  const fell = Object.entries(r.fonts).filter(([, ok]) => !ok).map(([n]) => n);
+  console.log("  fonts       " + Object.entries(r.fonts).map(([n, ok]) => n + " " + (ok ? "ok" : "FALLBACK")).join("   "));
   console.log("  motion      gsap " + r.gsap + "   jr-ready " + r.jrReady + "   jr-fail " + r.jrFail);
   console.log("  images      " + r.imgs + " (" + r.broken.length + " broken, " + r.stillLocal + " still /assets/)");
   console.log("  overflow    " + r.overflow + "px   height " + r.height + "px");
@@ -97,6 +118,7 @@ for (const route of routes) {
   if (!r.chapters) { console.log("  FAIL no data-chapter sections - the import flattened the page"); bad++; }
   if (r.chPadded === "0px") { console.log("  FAIL .ch has no padding - site.css did not apply"); bad++; }
   if (!r.gsap) { console.log("  FAIL gsap did not load"); bad++; }
+  if (fell.length) { console.log("  FAIL falling back to a system font: " + fell.join(", ")); bad++; }
   if (r.jrFail) { console.log("  warn jr-fail: the motion layer degraded"); }
   if (r.broken.length) { console.log("  FAIL broken images: " + r.broken.slice(0, 6).join(", ")); bad++; }
   if (r.stillLocal) { console.log("  FAIL " + r.stillLocal + " image(s) still point at /assets/"); bad++; }

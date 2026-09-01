@@ -39,6 +39,7 @@
 | `.tmp/backup-site.mjs` | Dumps a whole instance -- shell, every page's node graph, media records -- to one local JSON. **Run it before anything destructive.** |
 | `.tmp/list-site.mjs` | Read-only inventory: which instance, who we are, pages, media, publish state. |
 | `.tmp/run-converter.mjs` | Ships `container-convert.ts` into the container, sha-verified, and runs it under bun. |
+| `.tmp/import-fonts.mjs` | Installs Karla, Newsreader and Nunito Sans through Instatic's own font store. Without it the live pages render in Georgia and Segoe UI. |
 | `.tmp/import-scripts.mjs` | The JS half of the code assets: gsap + site.js + journey.js as one registered script. |
 | `.tmp/reset-to-deliverable.mjs` | Reduces an instance to what `home/` holds plus `KEEP`. Staging only, dry-run by default. |
 | `.tmp/verify-live.mjs` | Checks the PUBLISHED pages: 200, styles applied, GSAP booted, images resolve, no overflow. |
@@ -187,11 +188,12 @@ RAILWAY_ENV_NAME=staging node ship-payload.mjs         # 6. HTML -> the containe
 RAILWAY_ENV_NAME=staging node run-converter.mjs        # 7. HTML -> node graphs, inside the container
 RAILWAY_ENV_NAME=staging node fetch-nodes.mjs          # 8. -> converted-pages.json
 
-node import-styles.mjs                                 # 9. class rules + site.css as a code asset
-node import-scripts.mjs                                # 10. gsap + site.js + journey.js, bundled
-node reset-to-deliverable.mjs                          # 11. dry run: what would be deleted
-node reset-to-deliverable.mjs --apply --publish        # 12. one atomic PUT, then publish
-node verify-live.mjs $INSTATIC_BASE_URL / /services/invisalign   # 13. check what actually shipped
+node import-fonts.mjs                                  # 9. the three families, self-hosted by Instatic
+node import-styles.mjs                                 # 10. class rules + site.css as a code asset
+node import-scripts.mjs                                # 11. gsap + site.js + journey.js, bundled
+node reset-to-deliverable.mjs                          # 12. dry run: what would be deleted
+node reset-to-deliverable.mjs --apply --publish        # 13. one atomic PUT, then publish
+node verify-live.mjs $INSTATIC_BASE_URL / /services/invisalign   # 14. check what actually shipped
 ```
 
 **Pages are node graphs, not HTML.** Steps 6–8 exist because the HTML→nodes importer is an MCP
@@ -235,6 +237,33 @@ whose direction is undocumented. Guessing wrong gives a silently static page, so
 settled at build time instead.
 
 ### The import traps
+**The three type families are a `<link>` in the `<head>`, and the `<head>` is not shipped.**
+`to-instatic.mjs` sends a body and strips every `<link>`, so Karla, Newsreader and Nunito Sans
+never reached Instatic and the live pages rendered in **Georgia and Segoe UI** while every other
+check passed. It cannot be fixed with an `@import` at the top of `site.css` either — an
+`@import` is only valid before any other rule and the fluid root holds that position.
+
+`import-fonts.mjs` uses the platform's own mechanism, which is what Montserrat already uses on
+this site: `settings.fonts.items[]` with `source: "google"`. **Instatic fetches and stores the
+woff2 files itself** and serves them from `/uploads/fonts/<family>/`, so no third party is handed
+the visitor — the same rule the vendored GSAP follows.
+
+Two things about that API. `GET /admin/api/cms/fonts/google` is the **catalogue** and is GET-only;
+POSTing to it returns `405 Method not allowed`, which reads like a permissions problem. The
+install route is `POST /admin/api/cms/fonts/install`. And **installing is not registering**: the
+install fetches the files and returns a fat, complete-looking font object, but the family does not
+appear in `settings.fonts.items` until you save the shell with it, and until then no `@font-face`
+is emitted. Nothing in that response tells you the site is still unstyled.
+
+**Neither `document.fonts.check()` nor computed `font-family` can tell you which font is being
+painted** — the first answers `true` for a fallback, the second reports the stack that was *asked*
+for. Measure a string in the family and in its own fallback and compare the widths; identical
+widths mean the fallback is what is on screen. `verify-live.mjs` does this now.
+
+**Instatic installs static weight instances, not the variable font.** The local page asks Google
+for Newsreader's `opsz` axis; the live page gets discrete 300/400/500. At display sizes that is a
+~0.3% width difference and no visible change of design, but it is not byte-identical.
+
 
 **Instatic's `base.button` takes no child nodes.** An inline `<svg>` inside a `<button>` is
 dropped at import with no failure and no warning, and the live button renders as an empty box.
