@@ -162,7 +162,19 @@ for (const m of cssCode.matchAll(/url\(["']?(?!data:|https?:)([^"')]+)["']?\)/g)
 // --- unused assets, so nothing ships that nothing points at ---
 const allHtml = pages.map(load).join("");
 for (const f of fs.readdirSync(path.join(SITE, "assets"))) {
-  if (f === "site.css" || f === "site.js") continue;
+  if (f === "site.css" || f === "site.js" || f === "vendor.js") continue;
+  // assets/fonts/ is a directory of self-hosted typefaces, referenced by
+  // css/03-fonts.css as fonts/<file>.woff2. Check its contents, not the folder
+  // name, or every face reads as unreferenced.
+  const abs = path.join(SITE, "assets", f);
+  if (fs.statSync(abs).isDirectory()) {
+    for (const inner of fs.readdirSync(abs)) {
+      if (!allHtml.includes(inner) && !cssCode.includes(inner)) {
+        warn("assets", `${f}/${inner} is not referenced anywhere`);
+      }
+    }
+    continue;
+  }
   if (!allHtml.includes(f) && !cssCode.includes(f)) warn("assets", `${f} is not referenced anywhere`);
 }
 

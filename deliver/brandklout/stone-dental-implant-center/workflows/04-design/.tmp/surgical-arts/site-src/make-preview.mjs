@@ -33,6 +33,7 @@ const ASSETS = path.join(SITE, "assets");
 const OUT = process.argv[2] || path.resolve(HERE, "..", "preview-home.html");
 
 const MIME = {
+  ".woff2": "font/woff2",
   ".webp": "image/webp",
   ".jpg": "image/jpeg",
   ".jpeg": "image/jpeg",
@@ -97,9 +98,10 @@ const content = body.replace(/<script src="assets\/(?:vendor|site)\.js" defer><\
 const out = `<!-- Live <title> on the built page: ${seoTitle} -->
 <title>${title}</title>
 <meta name="description" content="${description}">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Inter:wght@300;400;500;600;700&display=swap">
+<!-- No font link. The faces are self-hosted and the url() rewrite above has
+     already turned each one into a data: URI inside the stylesheet, so this
+     file carries its own typography. That was the point of "everything should
+     be local": open this on a plane and it is still the design. -->
 <style>
 /* The site commits to one light visual world. Declaring it stops the host
    painting a dark ground behind a page that has no dark palette. */

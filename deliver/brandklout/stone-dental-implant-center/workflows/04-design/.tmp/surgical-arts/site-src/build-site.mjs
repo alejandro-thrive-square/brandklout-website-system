@@ -223,9 +223,17 @@ fs.writeFileSync(
 
 // Copy the image assets across. The contact sheet is a build-time aid, not part
 // of the site, so it is skipped.
+//
+// Directories are recursed rather than skipped: assets/fonts/ holds the
+// self-hosted typefaces, and copyFileSync on a directory throws rather than
+// quietly doing nothing, so this had to grow a branch the moment the fonts
+// stopped coming from Google.
 for (const f of fs.readdirSync(path.join(SRC, "assets"))) {
   if (f.startsWith("_")) continue;
-  fs.copyFileSync(path.join(SRC, "assets", f), path.join(OUT, "assets", f));
+  const from = path.join(SRC, "assets", f);
+  const to = path.join(OUT, "assets", f);
+  if (fs.statSync(from).isDirectory()) fs.cpSync(from, to, { recursive: true });
+  else fs.copyFileSync(from, to);
 }
 
 const built = [];

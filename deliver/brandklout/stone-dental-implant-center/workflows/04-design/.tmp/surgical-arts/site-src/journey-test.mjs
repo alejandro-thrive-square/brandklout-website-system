@@ -178,6 +178,44 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
   await page.close();
 }
 
+/* --- 1b. nothing is fetched from off this origin ----------------------------
+   Client, 2026-09-01: "Everything should be local." Until then the build pulled
+   both typefaces from fonts.googleapis.com on every page view, which on a
+   MEDICAL practice's site hands a third party the IP of everyone who visits,
+   and left the design one blocked request away from Georgia and Arial.
+
+   This asserts it stays true. A remote asset is easy to reintroduce by pasting
+   an embed or a CDN tag, and nothing else would notice. */
+{
+  const page = await browser.newPage();
+  const external = [];
+  page.on("request", (r) => {
+    const u = r.url();
+    if (!u.startsWith(`http://127.0.0.1:${PORT}`) && !u.startsWith("data:") && !u.startsWith("blob:")) {
+      external.push(u.slice(0, 70));
+    }
+  });
+  await page.setViewport({ width: 1440, height: 900 });
+  await page.goto(`http://127.0.0.1:${PORT}/${PAGE}`, { waitUntil: "networkidle0", timeout: 60000 });
+  await new Promise((r) => setTimeout(r, 500));
+  check("no off-origin requests", external.length === 0, external.slice(0, 3).join(" | "));
+
+  // And the self-hosted faces really loaded, rather than silently falling back
+  // to the stack in 01-tokens.css. document.fonts is the only way to tell:
+  // a fallback renders perfectly happily and looks wrong.
+  const fonts = await page.evaluate(async () => {
+    await document.fonts.ready;
+    const loaded = [...document.fonts].filter((f) => f.status === "loaded").map((f) => `${f.family} ${f.weight} ${f.style}`);
+    return { loaded, count: document.fonts.size };
+  });
+  check(
+    "both self-hosted typefaces actually loaded",
+    fonts.loaded.some((f) => f.includes("Cormorant")) && fonts.loaded.some((f) => f.includes("Inter")),
+    `${fonts.loaded.length} of ${fonts.count} faces loaded`
+  );
+  await page.close();
+}
+
 /* --- 2. the motion actually runs ------------------------------------------- */
 {
   const { page, errors } = await open({ width: 1440 });

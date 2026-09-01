@@ -44,14 +44,47 @@
   /* Display steps ABOVE the existing h1. The old scale topped out at 4.75rem,
      which is a heading, not a statement. These inherit --t-display so they
      step down at the same breakpoints as everything else. */
-  --size-display: calc(8rem * var(--t-display));
-  --size-display-sm: calc(5.25rem * var(--t-display));
-  --size-numeral: calc(6.5rem * var(--t-display));
+  --size-display: calc(6.9rem * var(--t-display));
+  --size-display-sm: calc(4.75rem * var(--t-display));
+  --size-numeral: calc(5.5rem * var(--t-display));
+  /* The journey layer's own mid-level heading. Nahlah's --h3 is 1.71rem where
+     this build's --size-h3 is 2.25rem, and the difference compounds: it sets
+     the category names, the path titles and the offer headings, so an oversized
+     h3 inflates four chapters at once. Set here rather than in 01-tokens.css so
+     the other seventeen pages keep the size they were built to. */
+  --size-h3-j: calc(1.85rem * var(--t-heading));
 
-  /* The page gutter, resolved once. Left-hand copy columns align to the same
-     line as .padding-global + .container-large so a full-bleed chapter still
-     lines up with a contained one. */
-  --gutter: max(5vw, calc((100vw - 80rem) / 2));
+  /* --- fluid proportions, measured against the Dr. Nahlah build -----------
+     Client, 2026-09-01: "This should have fluid responsive sizes. Let's have
+     the proportions that we have on the nahlah site."
+
+     Three things were fixed where they should have been fluid, and one of them
+     was making the page much wider-margined than the reference:
+
+     --gutter  was max(5vw, (100vw - 80rem)/2), which centres a 1280px column.
+               Nahlah runs to 1560px, so at 1920 this page was giving away 280px
+               of content width to margin and every chapter read as narrower and
+               taller than the reference. Nahlah's own gutter is
+               clamp(1.25rem, 4vw, 4.5rem); that is the small-screen half of
+               this, and the max() adds the centring the wide screens need.
+
+     --section the chapter rhythm. Nahlah: clamp(4.5rem, 9vw, 9.5rem). This is
+               a little tighter because Stone's chapters carry more internal
+               padding of their own (see --pad-panel), and 9vw on top of that
+               is what made them run to 1.7 screens each.
+
+     --pad-panel the padding INSIDE a bordered panel. This is the one that was
+               actually doing the damage: .surgeon_panel sat on --space-xhuge
+               INSIDE a section that was also on --space-xhuge, so there were
+               256px of nothing above the eyebrow at 1440. Measured with
+               site-src/measure.mjs before and after.
+
+     clamp() is used for SPACE, never for font-size: the fluid root owns type
+     and a clamped font-size would opt out of it. See fluid-root.md. */
+  --gutter: max(clamp(1.25rem, 4vw, 4.5rem), calc((100vw - 97.5rem) / 2));
+  --section: clamp(4rem, 7vw, 8.5rem);
+  --section-sm: clamp(2.5rem, 4.5vw, 5rem);
+  --pad-panel: clamp(1.75rem, 3.4vw, 4rem);
 }
 
 /* --- materials -------------------------------------------------------------
@@ -233,14 +266,21 @@
      it. One value so the photograph and its edges can never drift apart. */
   --arrival-frame: var(--space-xxlarge);
   align-items: stretch;
-  min-height: min(46rem, 94vh);
+  /* A floor AND a ceiling. min-height alone only ever set a floor, so the
+     chapter grew to whatever the copy column needed and the hero measured 1.43
+     screens at 1440x800. The photograph column stretches, so capping the
+     section is what keeps "one screen" true rather than aspirational. */
+  min-height: min(44rem, 92vh);
   overflow: clip;
 }
 .arrival_copy {
   display: flex;
   flex-direction: column;
   justify-content: center;
-  padding: calc(var(--space-xxhuge) * 0.72) var(--space-xlarge) var(--space-xhuge) var(--gutter);
+  /* --section-sm, not --section. The column is already centred inside a
+     min-height section, so a full chapter's padding top and bottom is fighting
+     the centring and only makes the hero taller than the screen. */
+  padding: var(--section-sm) var(--space-xlarge) var(--section-sm) var(--gutter);
 }
 .arrival_eyebrow {
   font-family: var(--font-body);
@@ -307,7 +347,7 @@
     min-height: 0;
   }
   .arrival_copy {
-    padding: var(--space-xxlarge) var(--gutter) var(--space-xlarge);
+    padding: var(--section-sm) var(--gutter) var(--section);
     order: 2;
   }
   /* Square, not 4/3, and capped at just over half the screen.
@@ -386,11 +426,11 @@
 
    The word-brighten is scrubbed: the clause resolves as you arrive at it. */
 .thesis_component {
-  padding: var(--space-xhuge) 0 var(--space-xxlarge);
+  padding: var(--section) 0 var(--section-sm);
 }
 .thesis_inner {
   padding-inline: var(--gutter);
-  max-width: 68rem;
+  max-width: 76rem;
 }
 .thesis_text {
   font-family: var(--font-display);
@@ -445,7 +485,7 @@
    Each card is a real photograph now. The brief is explicit that no image slot
    may be empty, and an icon in a box is an empty slot with a drawing in it. */
 .ways_component {
-  padding: var(--space-xhuge) 0;
+  padding: var(--section) 0;
 }
 .ways_head {
   padding-inline: var(--gutter);
@@ -453,7 +493,7 @@
   grid-template-columns: 1fr auto;
   align-items: end;
   gap: var(--space-large);
-  margin-bottom: var(--space-xxlarge);
+  margin-bottom: var(--section-sm);
 }
 .ways_title {
   margin: 0;
@@ -519,7 +559,7 @@
 .ways_name {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--size-h3);
+  font-size: var(--size-h3-j);
   line-height: 1;
   margin: 0;
   color: var(--fg);
@@ -549,7 +589,7 @@
 }
 .ways_foot {
   padding-inline: var(--gutter);
-  margin-top: var(--space-xxlarge);
+  margin-top: var(--section-sm);
 }
 
 @media (max-width: 991px) {
@@ -606,7 +646,7 @@
    underneath say the rest better than a sentence about them does. */
 .surgeon_component {
   position: relative;
-  padding: var(--space-xhuge) 0;
+  padding: var(--section) 0;
 }
 .surgeon_layout {
   position: relative;
@@ -616,10 +656,10 @@
   padding-inline: var(--gutter) 0;
 }
 .surgeon_panel {
-  padding: var(--space-xhuge) var(--space-xxlarge) var(--space-xhuge) var(--space-xxlarge);
+  padding: var(--pad-panel);
   border: 1px solid var(--line);
   /* The panel reaches under the portrait, which sits on top of it. */
-  padding-right: calc(var(--space-xxhuge) * 0.9);
+  padding-right: calc(var(--pad-panel) + var(--space-xxhuge) * 0.55);
   position: relative;
   z-index: 1;
 }
@@ -637,14 +677,19 @@
 .surgeon_actions {
   margin-top: var(--space-xlarge);
 }
+/* `align-self: stretch` plus a 4:5 ratio meant the portrait grew to whatever
+   the panel beside it needed, and it reached 901px against an 800px screen.
+   A vh cap with `align-self: center` keeps it a portrait and keeps it on the
+   screen. No aspect-ratio: paired with a max-height it would transfer the cap
+   into the width and shrink the column. */
 .surgeon_media {
   position: relative;
   z-index: 2;
   margin-left: calc(var(--space-xxhuge) * -1);
-  aspect-ratio: 4 / 5;
+  height: min(72vh, 40rem);
   overflow: clip;
-  align-self: stretch;
-  margin-block: var(--space-xxlarge);
+  align-self: center;
+  margin-block: var(--section-sm);
 }
 .surgeon_media img {
   width: 100%;
@@ -732,8 +777,8 @@
     grid-template-columns: minmax(0, 1fr) minmax(0, 0.72fr);
   }
   .surgeon_panel {
-    padding: var(--space-xxlarge) var(--space-xlarge);
-    padding-right: var(--space-xhuge);
+    padding: var(--pad-panel);
+    padding-right: calc(var(--pad-panel) + var(--space-xxlarge));
   }
   .surgeon_media {
     margin-left: calc(var(--space-xhuge) * -1);
@@ -750,11 +795,12 @@
   .surgeon_media {
     order: -1;
     margin: 0 0 calc(var(--space-xxlarge) * -1) 0;
+    height: auto;
     aspect-ratio: 3 / 2;
     max-width: 26rem;
   }
   .surgeon_panel {
-    padding: calc(var(--space-xxlarge) + var(--space-large)) var(--space-large) var(--space-xxlarge);
+    padding: calc(var(--pad-panel) + var(--space-xxlarge)) var(--pad-panel) var(--pad-panel);
   }
 }
 
@@ -770,11 +816,11 @@
 .path_component {
   position: relative;
   overflow: clip;
-  padding-block: var(--space-xhuge);
+  padding-block: var(--section);
 }
 .path_head {
   padding-inline: var(--gutter);
-  margin-bottom: var(--space-xxlarge);
+  margin-bottom: var(--section-sm);
   max-width: 46rem;
 }
 .path_viewport {
@@ -809,8 +855,13 @@
   background: var(--bg-card);
   border: 1px solid var(--line);
 }
+/* Height in vh, not an aspect ratio. A 4:3 frame on a 40rem panel is 480px
+   tall and, with the body underneath, made the pinned frame taller than the
+   viewport it was pinning. The image is object-fit: cover, so it takes the
+   frame it is given. */
 .path_media {
-  aspect-ratio: 4 / 3;
+  height: clamp(9rem, 27vh, 17rem);
+  width: 100%;
   overflow: clip;
   background: var(--stone-soft);
 }
@@ -838,7 +889,7 @@
 .path_title {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--size-h3);
+  font-size: var(--size-h3-j);
   line-height: 1.1;
   margin: 0;
   color: var(--fg);
@@ -873,14 +924,14 @@
    through [data-theme="dark"], which 01-tokens.css already defines, so no
    colour is restated. */
 .standard_component {
-  padding-block: var(--space-xhuge);
+  padding-block: var(--section);
   color: var(--fg-body);
 }
 .standard_inner {
   padding-inline: var(--gutter);
   display: grid;
   grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
-  gap: var(--space-xxlarge);
+  gap: clamp(var(--space-large), 4vw, var(--space-xxlarge));
   align-items: start;
 }
 .standard_title {
@@ -937,7 +988,7 @@
    One review at the size of a statement, then the rest on a rail. Six equal
    cards in a grid is the layout that guarantees none of them is read. */
 .proof_component {
-  padding-block: var(--space-xhuge);
+  padding-block: var(--section);
 }
 .proof_lead {
   padding-inline: var(--gutter);
@@ -945,7 +996,7 @@
   grid-template-columns: minmax(0, 1fr) 16rem;
   gap: var(--space-xxlarge);
   align-items: end;
-  margin-bottom: var(--space-xxlarge);
+  margin-bottom: var(--section-sm);
 }
 .proof_quote {
   margin: 0;
@@ -954,7 +1005,7 @@
   margin: 0;
   font-family: var(--font-display);
   font-weight: 300;
-  font-size: calc(3rem * var(--t-heading));
+  font-size: calc(2.6rem * var(--t-heading));
   line-height: 1.14;
   color: var(--fg);
   letter-spacing: -0.005em;
@@ -1060,7 +1111,7 @@
    Results and memberships. Asymmetric, and the image runs off the page edge on
    each so the two bands mirror rather than repeat. */
 .offer_component {
-  padding-block: var(--space-xhuge);
+  padding-block: var(--section);
   overflow: clip;
 }
 .offer_inner {
@@ -1069,11 +1120,11 @@
 .offer_row {
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-  gap: var(--space-xxlarge);
+  gap: clamp(var(--space-large), 4vw, var(--space-xxlarge));
   align-items: center;
 }
 .offer_row + .offer_row {
-  margin-top: var(--space-xhuge);
+  margin-top: var(--section);
 }
 .offer_row.is-reverse {
   grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
@@ -1146,19 +1197,22 @@
    like every other one. Sticky, so the image stays with you while the answers
    open. */
 .ask_component {
-  padding-block: var(--space-xhuge);
+  padding-block: var(--section);
 }
 .ask_layout {
   padding-inline: var(--gutter);
   display: grid;
   grid-template-columns: 0.72fr 1fr;
-  gap: var(--space-xxlarge);
+  gap: clamp(var(--space-large), 4vw, var(--space-xxlarge));
   align-items: start;
 }
+/* Sticky at 7rem, so the cap has to leave room for the offset as well as for
+   the navbar above it, or the bottom of the photograph is permanently below the
+   fold while it is stuck. */
 .ask_media {
   position: sticky;
   top: 7rem;
-  aspect-ratio: 3 / 4;
+  height: min(calc(100vh - 10rem), 34rem);
   overflow: clip;
   background: var(--stone-soft);
 }
@@ -1174,6 +1228,7 @@
   }
   .ask_media {
     position: static;
+    height: auto;
     aspect-ratio: 16 / 9;
   }
 }
@@ -1183,13 +1238,13 @@
    town names, plus the practical close. Twenty-one towns in the display face
    at reading size IS a picture of a service area. */
 .invite_component {
-  padding-block: var(--space-xhuge);
+  padding-block: var(--section);
 }
 .invite_inner {
   padding-inline: var(--gutter);
 }
 .invite_towns {
-  margin: var(--space-xlarge) 0 0;
+  margin: var(--space-large) 0 0;
   display: flex;
   flex-wrap: wrap;
   align-items: baseline;
@@ -1197,7 +1252,7 @@
   row-gap: 0.15em;
   font-family: var(--font-display);
   font-weight: 300;
-  font-size: calc(2.25rem * var(--t-heading));
+  font-size: calc(1.9rem * var(--t-heading));
   line-height: 1.45;
   color: var(--fg);
   max-width: 62rem;
@@ -1218,7 +1273,7 @@
    an address, a phone number and opening hours are a card you read down, not a
    row you scan across. */
 .invite_close {
-  margin-top: var(--space-xxlarge);
+  margin-top: var(--section-sm);
   display: grid;
   grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
   gap: var(--space-xxlarge);
@@ -1295,15 +1350,21 @@
     opacity 0.8s var(--ease),
     transform 0.8s var(--ease);
 }
-.js [data-j="stagger"].is-in > * {
+/* .is-in on the CHILD, not on the container. The containers are up to 1.6
+   screens tall, so revealing on the container meant the whole row animated the
+   instant its top edge appeared and three of four cards played off-screen. */
+.js [data-j="stagger"] > *.is-in {
   opacity: 1;
   transform: none;
 }
-.js [data-j="stagger"].is-in > *:nth-child(2) { transition-delay: 0.1s; }
-.js [data-j="stagger"].is-in > *:nth-child(3) { transition-delay: 0.2s; }
-.js [data-j="stagger"].is-in > *:nth-child(4) { transition-delay: 0.3s; }
-.js [data-j="stagger"].is-in > *:nth-child(5) { transition-delay: 0.4s; }
-.js [data-j="stagger"].is-in > *:nth-child(6) { transition-delay: 0.5s; }
+/* The delays still apply, so a row that genuinely does enter together still
+   reads as a stagger rather than a jump. A stacked list ignores them, because
+   its items arrive one at a time anyway. */
+.js [data-j="stagger"] > *.is-in:nth-child(2) { transition-delay: 0.08s; }
+.js [data-j="stagger"] > *.is-in:nth-child(3) { transition-delay: 0.16s; }
+.js [data-j="stagger"] > *.is-in:nth-child(4) { transition-delay: 0.24s; }
+.js [data-j="stagger"] > *.is-in:nth-child(5) { transition-delay: 0.32s; }
+.js [data-j="stagger"] > *.is-in:nth-child(6) { transition-delay: 0.4s; }
 
 /* Masked line reveal: each line sits in a clipped box and slides up out of it.
    10-journey.js wraps the lines; until it does, the rule below does nothing,
@@ -1326,6 +1387,7 @@
 @media (prefers-reduced-motion: reduce) {
   .js [data-j],
   .js [data-j] > *,
+  .js [data-j="stagger"] > *,
   .js .j-line {
     opacity: 1 !important;
     transform: none !important;

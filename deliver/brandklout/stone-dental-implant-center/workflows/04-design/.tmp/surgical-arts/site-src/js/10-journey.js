@@ -42,7 +42,21 @@
      rise-and-fade, and there is no reason to pay for a ScrollTrigger instance
      per paragraph. */
   function reveals() {
-    var items = page.querySelectorAll("[data-j]");
+    // Containers AND the children of a stagger group. The children are the
+    // point: a stagger container can be 1.6 screens tall, and revealing on the
+    // container meant every card in it animated the moment its top edge
+    // appeared, with three of the four playing off-screen. Observing the
+    // children means a card animates when the card is actually in view.
+    var items = [];
+    var all = page.querySelectorAll("[data-j]");
+    for (var a = 0; a < all.length; a++) {
+      items.push(all[a]);
+      if (all[a].getAttribute("data-j") === "stagger") {
+        var kids = all[a].children;
+        for (var k = 0; k < kids.length; k++) items.push(kids[k]);
+      }
+    }
+
     if (!("IntersectionObserver" in window) || reduce) {
       for (var i = 0; i < items.length; i++) items[i].classList.add("is-in");
       return;
@@ -55,9 +69,12 @@
           io.unobserve(e.target);
         });
       },
-      { rootMargin: "0px 0px -12% 0px", threshold: 0.08 }
+      // threshold 0 with a bottom margin, NOT a fraction of the element. A
+      // fractional threshold on an element taller than the viewport can never
+      // be met, and several chapters here are taller than the viewport.
+      { rootMargin: "0px 0px -10% 0px", threshold: 0 }
     );
-    for (var j = 0; j < items.length; j++) io.observe(items[j]);
+    for (var n = 0; n < items.length; n++) io.observe(items[n]);
   }
 
   /* --- masked line reveal ---------------------------------------------------

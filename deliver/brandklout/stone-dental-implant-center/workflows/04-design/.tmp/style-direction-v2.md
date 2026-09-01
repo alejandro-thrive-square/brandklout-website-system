@@ -9,7 +9,7 @@ The home page rebuilt as an editorial journey, 2026-08-31.
 | **Scope** | The home page only. The vocabulary is written to roll onto the other seventeen |
 | **Package** | [`surgical-arts/site-src/`](./surgical-arts/site-src/) — `pages/home.body.html`, `css/50-journey.css`, `js/10-journey.js` |
 | **v1** | Kept verbatim at `site-src/pages/_home-v1.body.html`. Not built. There to diff against |
-| **Gates** | `audit.mjs` FAIL none / WARN none · `check-copy.mjs` clean · `journey-test.mjs` **39/39** |
+| **Gates** | `audit.mjs` FAIL none / WARN none · `check-copy.mjs` clean · `journey-test.mjs` **41/41** |
 | **For review** | https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6 |
 
 ## The diagnosis
@@ -235,6 +235,76 @@ The gate is now 39 checks rather than 33, and the new one is the interesting one
 control may sit past the right edge** unless it is inside a rail the reader can scroll. It was
 verified by disabling the navbar fix and watching it fail with `Book a consultation`, then pass
 again, because a check that has never failed has proved nothing.
+
+## Third pass: fluid proportions, measured against Nahlah
+
+Client, 2026-09-01: *"This should have fluid responsive sizes. Let's have the proportions that we
+have on the nahlah site... Everything should be local."*
+
+`site-src/measure.mjs` is what this pass was built on. It reports, per screen size, which chapters
+exceed the viewport, whether every reveal fired, and what the gutter and content width resolve to.
+
+### The proportions, side by side
+
+| | Nahlah | Stone, before | Stone, now |
+| :--- | :--- | :--- | :--- |
+| Section rhythm | `clamp(4.5rem, 9vw, 9.5rem)` | fixed `8rem` | `clamp(4rem, 7vw, 8.5rem)` |
+| Gutter | `clamp(1.25rem, 4vw, 4.5rem)` | `max(5vw, (100vw - 80rem)/2)` | `max(clamp(1.25rem, 4vw, 4.5rem), (100vw - 97.5rem)/2)` |
+| Content max | 1560px | **1280px** | 1560px |
+| Display 1 | 6.66rem | **8rem** | 6.9rem |
+| Display 2 | 4.68rem | 5.25rem | 4.75rem |
+| h2 | 3.24rem | 3.25rem | unchanged |
+| Mid heading | 1.71rem | **2.25rem** | 1.85rem, journey layer only |
+
+The two in bold were doing most of the damage. At 1920 the page was giving away 280px of content
+width to margin, so every chapter read narrower and taller than the reference; and a two-line
+headline at 8rem is 240px of type before any padding, which is most of why the hero measured 1.35
+screens on a laptop.
+
+`--size-h3` itself is untouched, because it lives in `01-tokens.css` and all eighteen pages use it.
+The journey layer sets `--size-h3-j` instead, so the home page moves and nothing else does.
+
+### The sections that were too tall were not the ones that looked long
+
+Measured at 1440x800, a 13-inch laptop with browser chrome:
+
+| | Before | Now |
+| :--- | :--- | :--- |
+| Hero | 1.35 screens | **0.92** |
+| Pinned path frame | **1.04 screens** | 0.71 |
+| Surgeon portrait | **1.13 screens** | 0.79 |
+| Questions photo (sticky) | 707px under a 112px offset | capped at `100vh - 10rem` |
+| Whole page | 17.4 screens | 15.0 |
+
+The pinned one mattered most: the chapter holds the screen still and then does not fit on it, so you
+travel sideways through panels whose bottoms you cannot see. All four are capped in `vh` now, which
+is the only unit that can promise "fits the screen" at every size.
+
+### The animation was firing, at the wrong moment
+
+Every `data-j` element did get `.is-in`; nothing was stuck. But the class went on the stagger
+CONTAINER, and the containers run to 1.6 screens, so the instant `.ways_grid`'s top edge appeared
+all four category cards animated and three of them played off-screen. By the time you reached the
+fourth it had finished long ago.
+
+The class goes on each child now. The `nth-child` delays still apply, which is what keeps a row of
+four that genuinely do enter together reading as a stagger rather than a jump, while a stacked list
+ignores them because its items arrive one at a time anyway.
+
+The observer also moved from `threshold: 0.08` to `threshold: 0` plus a `rootMargin`, because a
+fractional threshold on an element taller than the viewport can never be met, and several chapters
+here are taller than the viewport.
+
+### Everything local
+
+Both typefaces were still fetched from `fonts.googleapis.com` on every page view. On a medical
+practice's site that hands a third party the IP of everyone who visits, and it left a design that IS
+two typefaces one blocked request away from Georgia and Arial.
+
+`site-src/get-fonts.mjs` downloads the seven cuts the stylesheets actually use (a grep of `css/` for
+`font-weight` shows the head was requesting five cuts nobody sets), latin subset only, and generates
+`css/03-fonts.css`. 161KB. Two new gates hold the line: **no off-origin requests**, and **both
+typefaces actually loaded**, because a fallback renders perfectly happily and simply looks wrong.
 
 ## What this does not fix
 

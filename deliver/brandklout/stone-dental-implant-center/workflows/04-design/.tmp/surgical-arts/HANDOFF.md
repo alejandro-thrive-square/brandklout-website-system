@@ -34,7 +34,7 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 > | Content | **nothing invented.** Every figure, quote, credential, fee, town and press item is the same sourced string v1 carried |
 > | Tokens | `01-tokens.css` **untouched**. Palette and typefaces are the client's board, exactly as briefed |
 > | Other 17 pages | markup unchanged; they gain the CTA texture fix below and nothing else |
-> | New gate | `node journey-test.mjs` — **39/39** |
+> | New gate | `node journey-test.mjs` — **41/41** |
 > | **For review** | https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6 |
 > 
 > The review link is the real page packed into one self-contained file: stylesheet, GSAP and
@@ -63,8 +63,10 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 | **Build** | `cd site-src && node build-site.mjs` |
 | **Check** | `cd site-src && node audit.mjs` — links, images, a11y, SEO. Exits non-zero on any failure |
 | **Copy gate** | `cd site-src && node check-copy.mjs` — **no em dashes in copy** ([SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md)). Runs on the BUILT output |
-| **Motion gate** | `cd site-src && node journey-test.mjs` — 39 headless checks on the home page's chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins |
+| **Motion gate** | `cd site-src && node journey-test.mjs` — 41 headless checks on the home page's chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins |
 | **Screenshot** | `node site-src/shot.mjs "$PWD/final-site" index.html out.png 1440` |
+| **Measure** | `cd site-src && node measure.mjs` — per screen size: which chapters exceed the viewport, whether every reveal fired, what the gutter and content width resolve to |
+| **Fonts** | `cd site-src && node get-fonts.mjs` — **REQUIRED ON A FRESH CLONE.** The `.woff2` files are gitignored like every other binary, so `assets/fonts/` is empty until this is run and the site silently falls back to Georgia and Arial. `css/03-fonts.css` and the generator ARE committed. Self-hosted, latin subset; **there is no request to fonts.googleapis.com any more** and `journey-test.mjs` asserts there is none |
 | **Imagery** | `node site-src/get-stock.mjs` (4 searched) · `node site-src/generate-images.mjs` (14 generated) |
 | **Live** | <https://stone-surgical-arts-production.up.railway.app> — see [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md) |
 | **Preview** | `node ../../../01-content-intake/.tmp/serve.mjs . 8792` then open `http://localhost:8792/preview.html` |
