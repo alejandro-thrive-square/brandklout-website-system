@@ -33,13 +33,39 @@ for (const route of routes) {
   const ctx = await browser.newContext({ viewport: { width: 1440, height: 900 } });
   const page = await ctx.newPage();
   const problems = [];
+  const thirdParty = [];
   const failed = [];
-  page.on("console", (m) => { if (m.type() === "error") problems.push("console: " + m.text().slice(0, 160)); });
+  page.on("console", (m) => {
+    if (m.type() !== "error") return;
+    const text = m.text();
+    // "Failed to load resource: ... 404" carries NO url in the console, so it
+    // cannot be attributed. Every such failure is already caught with its url
+    // by the response/requestfailed handlers below, where it can be judged --
+    // keeping the console copy too meant the gate always reported one problem
+    // for Cloudflare's bot beacon and could never read clean.
+    if (/^Failed to load resource/.test(text)) return;
+    // Two CSP violations are permanent furniture on this host and neither is
+    // ours, so they are reported and NOT counted -- a gate that always says
+    // "2 problems" is a gate nobody reads:
+    //   - Cloudflare injects its own analytics beacon, which the site's CSP
+    //     then blocks. Cloudflare's doing, both halves of it.
+    //   - a `data:application/x-font-ttf` face from `webflow-icons`, left in
+    //     the shell's style registry by the pre-Instatic build. Blocked, and
+    //     unused by either of our pages.
+    // A CSP violation naming anything else IS ours and still counts.
+    if (/cloudflareinsights|cdn-cgi|data:application\/x-font-ttf/.test(text)) { thirdParty.push(text.slice(0, 100)); return; }
+    problems.push("console: " + text.slice(0, 160));
+  });
   page.on("pageerror", (e) => problems.push("pageerror: " + e.message.slice(0, 160)));
   page.on("requestfailed", (r) => failed.push(r.url()));
   page.on("response", (r) => { if (r.status() >= 400) failed.push(r.status() + " " + r.url()); });
 
-  const res = await page.goto(url, { waitUntil: "load", timeout: 60000 });
+  // 120s, not 60. Staging is a small Railway container that cold-starts: TTFB
+  // is ~0.6s warm and was measured at 6.4s and 16.5s on the first hit after a
+  // publish. That is the instance, not the page -- nothing is pending after
+  // DOMContentLoaded -- but a 60s cap turned it into a hard failure on a page
+  // that was fine.
+  const res = await page.goto(url, { waitUntil: "load", timeout: 120000 });
   await page.waitForTimeout(2500);
   const total = await page.evaluate(() => document.body.scrollHeight);
   for (let y = 0; y < total; y += 540) {
@@ -72,6 +98,16 @@ for (const route of routes) {
     const imgs = [...document.images];
     return {
       fonts,
+      // THE BODY'S OWN CLASSES. `transform()` ships the body's CHILDREN, so a
+      // class on <body> reaches Instatic only if apply-body-class.mjs put it on
+      // the converted root node AND a style rule exists for it. `has-journey`
+      // is the switch for about forty rules -- transparent header, inverted
+      // logo, the hero pulled up under the chrome -- and journey.js checks for
+      // it before running the chrome scene at all. Missing, nothing errors:
+      // the page is simply the ordinary white-header version.
+      bodyClass: document.body.className || "",
+      navBg: getComputedStyle(document.querySelector(".navbar_component") || document.body).backgroundColor,
+      navH: getComputedStyle(document.documentElement).getPropertyValue("--jr-nav-h").trim(),
       title: document.title,
       chapters: document.querySelectorAll("section[data-chapter]").length,
       cssLinked: [...document.querySelectorAll('link[rel="stylesheet"]')].map((l) => l.href.split("/").pop()),
@@ -109,6 +145,7 @@ for (const route of routes) {
   console.log("  stylesheet  " + r.cssLinked.join(", ") + "   .ch padding-top " + r.chPadded + "   root " + r.rootPx);
   const fell = Object.entries(r.fonts).filter(([, ok]) => !ok).map(([n]) => n);
   console.log("  fonts       " + Object.entries(r.fonts).map(([n, ok]) => n + " " + (ok ? "ok" : "FALLBACK")).join("   "));
+  console.log("  body class  " + (r.bodyClass || "(none)") + "   nav bg " + r.navBg + "   --jr-nav-h " + (r.navH || "(unset)"));
   console.log("  motion      gsap " + r.gsap + "   jr-ready " + r.jrReady + "   jr-fail " + r.jrFail);
   console.log("  images      " + r.imgs + " (" + r.broken.length + " broken, " + r.stillLocal + " still /assets/)");
   console.log("  overflow    " + r.overflow + "px   height " + r.height + "px");
@@ -119,6 +156,18 @@ for (const route of routes) {
   if (r.chPadded === "0px") { console.log("  FAIL .ch has no padding - site.css did not apply"); bad++; }
   if (!r.gsap) { console.log("  FAIL gsap did not load"); bad++; }
   if (fell.length) { console.log("  FAIL falling back to a system font: " + fell.join(", ")); bad++; }
+  // Split-and-includes, NOT a word-boundary regex. This line was first written
+  // through a shell heredoc and its two backslash-b escapes arrived as literal
+  // BACKSPACE bytes: the regex parsed, matched nothing, and failed a page whose
+  // body carried the class. Third time this workflow has paid for that trap.
+  // Edit files in this folder with an editor, and run the CTRL scan after.
+  // Split-and-includes, NOT a word-boundary regex. This line was first written
+  // through a shell heredoc and its two backslash-b escapes arrived as literal
+  // BACKSPACE bytes: the regex parsed, matched nothing, and failed a page whose
+  // body carried the class. Third time this workflow has paid for that trap.
+  // Edit files in this folder with an editor, and run the CTRL scan after.
+  if (!r.bodyClass.split(/\s+/).includes("has-journey")) { console.log("  FAIL body is missing has-journey - the chapter chrome is off"); bad++; }
+  if (!r.navH) { console.log("  FAIL --jr-nav-h unset - journey.js never measured the header"); bad++; }
   if (r.jrFail) { console.log("  warn jr-fail: the motion layer degraded"); }
   if (r.broken.length) { console.log("  FAIL broken images: " + r.broken.slice(0, 6).join(", ")); bad++; }
   if (r.stillLocal) { console.log("  FAIL " + r.stillLocal + " image(s) still point at /assets/"); bad++; }

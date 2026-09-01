@@ -39,6 +39,7 @@
 | `.tmp/backup-site.mjs` | Dumps a whole instance -- shell, every page's node graph, media records -- to one local JSON. **Run it before anything destructive.** |
 | `.tmp/list-site.mjs` | Read-only inventory: which instance, who we are, pages, media, publish state. |
 | `.tmp/run-converter.mjs` | Ships `container-convert.ts` into the container, sha-verified, and runs it under bun. |
+| `.tmp/apply-body-class.mjs` | Puts each page's `<body>` classes on its converted root node. Without it the homepage loses `has-journey` and comes up with a solid white header. **Run it before `import-styles.mjs`.** |
 | `.tmp/import-fonts.mjs` | Installs Karla, Newsreader and Nunito Sans through Instatic's own font store. Without it the live pages render in Georgia and Segoe UI. |
 | `.tmp/import-scripts.mjs` | The JS half of the code assets: gsap + site.js + journey.js as one registered script. |
 | `.tmp/reset-to-deliverable.mjs` | Reduces an instance to what `home/` holds plus `KEEP`. Staging only, dry-run by default. |
@@ -187,6 +188,7 @@ node to-instatic.mjs --media instatic-media-map.json   # 5. second pass, /upload
 RAILWAY_ENV_NAME=staging node ship-payload.mjs         # 6. HTML -> the container, sha-verified
 RAILWAY_ENV_NAME=staging node run-converter.mjs        # 7. HTML -> node graphs, inside the container
 RAILWAY_ENV_NAME=staging node fetch-nodes.mjs          # 8. -> converted-pages.json
+node apply-body-class.mjs                              # 8b. <body class> onto the converted root
 
 node import-fonts.mjs                                  # 9. the three families, self-hosted by Instatic
 node import-styles.mjs                                 # 10. class rules + site.css as a code asset
@@ -237,6 +239,18 @@ whose direction is undocumented. Guessing wrong gives a silently static page, so
 settled at build time instead.
 
 ### The import traps
+**The body's own classes are content, and the exporter throws them away.** `transform()` ships the
+body's *children*, so `<body class="has-journey">` becomes an unclassed body on Instatic — and that
+one class is the switch for about forty rules: the transparent floating header, the white links,
+the inverted logo, and `.main-wrapper`'s negative top margin that pulls the hero up behind the
+chrome. `journey.js` checks for it too, so its chrome scene bails and `--jr-nav-h` is never
+measured. **Nothing errors.** The page is simply the ordinary white-header version.
+
+`apply-body-class.mjs` fixes it, and **must run before `import-styles.mjs`** — Instatic emits a
+class attribute only for a class it holds a style rule for, and import-styles harvests those rules
+from the converted pages' `classIds`. Patch after it and the class is in the node graph, missing
+from the registry, and missing from the HTML.
+
 **The three type families are a `<link>` in the `<head>`, and the `<head>` is not shipped.**
 `to-instatic.mjs` sends a body and strips every `<link>`, so Karla, Newsreader and Nunito Sans
 never reached Instatic and the live pages rendered in **Georgia and Segoe UI** while every other

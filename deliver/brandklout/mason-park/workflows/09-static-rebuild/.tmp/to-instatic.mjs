@@ -195,9 +195,19 @@ for (const file of pages) {
   const title = decodeEntities((html.match(/<title>([\s\S]*?)<\/title>/i) || [, ""])[1].trim());
   const description = decodeEntities((html.match(/<meta name="description" content="([^"]*)"/i) || [, ""])[1].trim());
 
+  // THE BODY'S OWN CLASSES ARE CONTENT, AND `transform` THROWS THEM AWAY.
+  // It ships the body's CHILDREN (`slice(bodyEnd + 1, close)`), so
+  // `<body class="has-journey">` becomes an unclassed body on Instatic -- and
+  // every one of the ~40 `.has-journey` rules in site.css misses. The homepage
+  // came up with a solid white header, copper links, an un-inverted logo and no
+  // negative margin pulling the hero under the chrome, because ALL of that is
+  // scoped to that one class. journey.js checks for it too, so its chrome scene
+  // bailed and never set `--jr-nav-h`.
+  // Recorded here; apply-body-class.mjs puts it on the converted root node.
+  const bodyClass = (html.match(/<body[^>]*\sclass="([^"]*)"/i) || [, ""])[1].trim();
   const body = transform(html);
   fs.writeFileSync(path.join(OUT, "pages", slug.replace(/\//g, "__") + ".json"),
-    JSON.stringify({ slug: route(localRoute), title, description, html: body }, null, 1));
+    JSON.stringify({ slug: route(localRoute), title, description, bodyClass, html: body }, null, 1));
   manifestPages.push({ slug: route(localRoute), file: `pages/${slug.replace(/\//g, "__")}.json`, title, bytes: body.length });
 }
 
