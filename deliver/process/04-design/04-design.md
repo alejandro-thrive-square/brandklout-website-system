@@ -184,8 +184,23 @@ All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.t
 > check fail by name, restore the fix, watch it pass. A check that has never failed has proved
 > nothing.
 
+> [!IMPORTANT]
+> **Scroll performance is part of "responsive", and it has to be measured THROTTLED.** At 1x every
+> build looks smooth on the machine that made it, which is why janky sites ship. Drive the scroll
+> through CDP at 4x CPU throttle and read the frame timeline: reference implementation is
+> `deliver/brandklout/stone-dental-implant-center/workflows/04-design/.tmp/surgical-arts/site-src/perf.mjs`.
+> On the Stone home page that found a chapter parallaxing twice, and took the worst zone from 13% of
+> frames below 30fps to 9% with no main-thread blocks at all.
+>
+> - **Never animate `background-position`.** It is a paint property, so a scrubbed one repaints the
+>   whole painted area every frame. Move a layer with `transform`, or let `background-attachment:
+>   fixed` do it. Check you are not doing both: on Stone the CSS and the JS were producing the same
+>   parallax and only the JS one cost anything.
+> - **`will-change: transform` on scrub targets, scoped to the class your runtime sets.** An idle
+>   `will-change` holds a compositor layer open for an element nothing will animate.
+
 > [!WARNING]
-> **Two CSS traps that produce layouts nobody wrote, both found on the Stone rebuild:**
+> **Three CSS traps that produce layouts nobody wrote, all found on the Stone rebuild:**
 >
 > - **A `max-width` media rule reaches every width below it.** A rule added for the 992-to-1279 band
 >   was written after the 991 mobile block, so it also matched at 768 and its two-column grid beat
@@ -194,6 +209,18 @@ All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.t
 > - **`aspect-ratio` together with `max-height` shrinks the WIDTH as well.** The capped height is
 >   transferred back through the ratio, so a full-width hero rendered as a 504px square with bare
 >   background beside it. Add an explicit `width: 100%` when the box must stay full width.
+> - **`min(<rem>, <vh>)` is a switch, not a curve.** It picks one arm and stays there, so above a
+>   certain viewport the rem always wins and the element stops responding: a hero on
+>   `min(44rem, 92vh)` was 704px on a 2560x1440 monitor, less than half the window, while every
+>   section below it scaled. Use `clamp(floor, vh, ceiling)` when the intent is "fluid between
+>   limits".
+
+> [!TIP]
+> **Use height queries for height problems, and check the widest screen against the narrowest
+> asset.** "Too tall for the screen" lives on the vertical axis and a `max-width` query cannot see
+> it. And a full-bleed section is the one place an image can be asked to exceed its source, because
+> every other section stops at the content width: at 2560 the Stone hero's column was 1254px against
+> a 1200px file, so the most important photograph on the page was the only soft one.
 19. Send the Figma link and Vercel review URL to the client for first-round feedback.
 20. Record the selected design path and move approved corrections into `05-design-revisions`.
 21. **Output**: `.tmp/component-spec.json`, `.tmp/screenshots/`, `.tmp/token-violations.json`, `deliver/[client-name]/docs/design-draft-review.md`

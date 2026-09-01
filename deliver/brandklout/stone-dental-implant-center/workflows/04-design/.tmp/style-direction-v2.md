@@ -335,6 +335,39 @@ gate now, because a control that happens to work is one refactor away from not.
 It is the one part of this design a full-page screenshot cannot show, and it had been asserted but
 never looked at until now.
 
+## Fifth pass: scroll performance, and the two bugs only big screens had
+
+Every check up to here asked what the page looks like standing still. This design does real work on
+every frame: a pin, four scrubbed timelines, four parallax tweens, a fixed-attachment marble band
+and a backdrop-filter. `site-src/perf.mjs` drives the scroll for real through CDP at **4x CPU
+throttle** and reads the frame timeline back.
+
+| Pass | Before | After |
+| :--- | :--- | :--- |
+| hero into ways | 13% of frames over 32ms, worst 67ms | 9%, worst 34ms |
+| through the pin | 12%, worst 66ms, one 65ms long task | 8%, worst 50ms, no long tasks |
+| the marble band | 5% | 2% |
+| proof to the end | 2% | 0% |
+
+**The marble band was parallaxing twice.** `.stone-band` carries `background-attachment: fixed`,
+which IS a parallax, and the runtime then scrubbed `backgroundPositionY` on top of it.
+`background-position` is a paint property, so every frame repainted a full-viewport marble image,
+plus a ScrollTrigger to decide by how much, to produce a second copy of an effect the stylesheet
+gives away for free. The JS is gone; the CSS effect stays, and still drops to `scroll` below 991 and
+under reduced motion.
+
+**Two bugs that only exist on a big monitor:**
+
+- The hero was `min-height: min(44rem, 92vh)`. `min()` picks the rem arm on any viewport over about
+  765px tall, so on a 2560x1440 screen the hero was 704px, less than half the window, while every
+  chapter below it scaled. It is `clamp(32rem, 84vh, 54rem)` now, which is what "fluid" actually
+  means: `min()` of a rem and a vh is a switch, not a curve.
+- The arrival is full-bleed, so its media column grows with the VIEWPORT while every other chapter
+  stops at 1560px. At 2560 that column was 1254px against a 1200px source, so the most striking
+  photograph on the page was the only one being enlarged past itself and going soft. The chapter and
+  the ledger under it now cap at the same content width as everything else on screens over 1700px,
+  which is what the reference build does and what lines the hero up with the ledger beneath it.
+
 ## What this does not fix
 
 Everything already on the [HANDOFF](./surgical-arts/HANDOFF.md) blocker list is still open, and none

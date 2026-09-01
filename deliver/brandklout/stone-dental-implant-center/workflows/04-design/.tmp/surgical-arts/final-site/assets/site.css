@@ -3839,11 +3839,12 @@ textarea {
      it. One value so the photograph and its edges can never drift apart. */
   --arrival-frame: var(--space-xxlarge);
   align-items: stretch;
-  /* A floor AND a ceiling. min-height alone only ever set a floor, so the
-     chapter grew to whatever the copy column needed and the hero measured 1.43
-     screens at 1440x800. The photograph column stretches, so capping the
-     section is what keeps "one screen" true rather than aspirational. */
-  min-height: min(44rem, 92vh);
+  /* Fluid between a floor and a ceiling, not min() of a rem and a vh.
+     min(44rem, 92vh) picks the rem arm on any viewport over about 765px tall,
+     so on a 2560x1440 monitor the hero was 704px: less than half the window,
+     while every chapter below it scaled. clamp() tracks the screen through the
+     middle of the range and only stops at the ends. */
+  min-height: clamp(32rem, 84vh, 54rem);
   overflow: clip;
 }
 .arrival_copy {
@@ -3913,6 +3914,30 @@ textarea {
   display: block;
 }
 
+
+/* --- very wide screens ---------------------------------------------------
+   The arrival is full-bleed, so its media column grows with the VIEWPORT while
+   every other chapter stops at the 1560px content width. At 2560 that column
+   was 1254px and hero-arrival.webp is 1200px wide, so the one photograph on the
+   page that is meant to be the most striking was the only one being enlarged
+   past its source and going soft.
+
+   Capping the chapter at the same content width as everything else fixes the
+   sharpness and lines the hero up with the ledger beneath it, which is also
+   what the reference build does: Nahlah's --maxw is 1560px and its chapters
+   stop there. --gutter has to be reset inside the cap, because its centring
+   arm resolves to 500px at 2560 and that is now padding INSIDE a 1560px box
+   rather than the margin around it. */
+@media (min-width: 1700px) {
+  .arrival_component,
+  .ledger_component {
+    max-width: 97.5rem;
+    margin-inline: auto;
+  }
+  .arrival_component {
+    --gutter: 4.5rem;
+  }
+}
 
 @media (max-width: 991px) {
   .arrival_component {
@@ -4109,6 +4134,13 @@ textarea {
   object-fit: cover;
   display: block;
   transition: transform 0.9s var(--ease);
+}
+/* Scoped to .js, because these are only transformed when the runtime is there
+   to transform them, and an idle will-change is a compositor layer held open
+   for nothing. The two scroll passes that run these scored worst in perf.mjs. */
+.js .ways_media img,
+.js .arrival_photo img {
+  will-change: transform;
 }
 .ways_card:hover .ways_media img,
 .ways_card:focus-visible .ways_media img {

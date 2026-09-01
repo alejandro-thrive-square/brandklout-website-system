@@ -65,6 +65,7 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 | **Copy gate** | `cd site-src && node check-copy.mjs` — **no em dashes in copy** ([SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md)). Runs on the BUILT output |
 | **Motion gate** | `cd site-src && node journey-test.mjs` — 47 headless checks on the home page's chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins |
 | **Screenshot** | `node site-src/shot.mjs "$PWD/final-site" index.html out.png 1440` |
+| **Perf** | `cd site-src && node perf.mjs` — drives the scroll through CDP at 4x CPU throttle and reports dropped frames and long tasks per zone. An unthrottled desktop is always smooth, which is why janky sites ship |
 | **Pin review** | `node site-src/pin-shot.mjs "$PWD/final-site" <outdir> 1440 800 laptop` — the pinned chapter at the start, middle and end of its travel. A full-page screenshot cannot show it |
 | **Measure** | `cd site-src && node measure.mjs` — per screen size: which chapters exceed the viewport, whether every reveal fired, what the gutter and content width resolve to |
 | **Fonts** | `cd site-src && node get-fonts.mjs` — **REQUIRED ON A FRESH CLONE.** The `.woff2` files are gitignored like every other binary, so `assets/fonts/` is empty until this is run and the site silently falls back to Georgia and Arial. `css/03-fonts.css` and the generator ARE committed. Self-hosted, latin subset; **there is no request to fonts.googleapis.com any more** and `journey-test.mjs` asserts there is none |

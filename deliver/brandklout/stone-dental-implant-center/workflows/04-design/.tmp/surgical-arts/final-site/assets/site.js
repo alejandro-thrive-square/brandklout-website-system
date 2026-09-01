@@ -648,21 +648,14 @@
     });
   }
 
-  /* --- 05 the standard: the marble drifts ----------------------------------- */
-  function standard() {
-    if (!useGsap) return;
-    var band = page.querySelector(".standard_component");
-    if (!band) return;
-    gsap.fromTo(
-      band,
-      { backgroundPositionY: "40%" },
-      {
-        backgroundPositionY: "60%",
-        ease: "none",
-        scrollTrigger: { trigger: band, start: "top bottom", end: "bottom top", scrub: 0.5 },
-      }
-    );
-  }
+  /* --- 05 the standard ------------------------------------------------------
+     There is no JS here on purpose. `.stone-band` carries
+     `background-attachment: fixed`, which already parallaxes the marble: the
+     background does not move with the layer. A scrubbed `backgroundPositionY`
+     used to sit on top of that, repainting a full-viewport image every frame to
+     produce a second copy of an effect the stylesheet was giving away for free.
+     50-journey.css drops the fixed attachment below 991 and under reduced
+     motion, which is the whole responsive story for this chapter. */
 
   function boot() {
     reveals();
@@ -673,7 +666,6 @@
       arrival();
       thesis();
       ways();
-      standard();
       path();
       // Webfonts change line heights, which changes every pinned distance and
       // every trigger position. Refresh once they have landed.
