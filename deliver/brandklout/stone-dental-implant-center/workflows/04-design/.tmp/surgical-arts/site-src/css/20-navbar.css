@@ -209,6 +209,32 @@
   transform: translateY(-0.29rem) rotate(-45deg);
 }
 
+/* --- the 992-to-1150 squeeze -------------------------------------------
+   FIXED 2026-09-01. Everything in the bar is `white-space: nowrap` and the
+   actions group is `flex: 0 0 auto`, so when the row runs out of room it does
+   not wrap or shrink, it overflows: at 1024 the book button was clipped at the
+   viewport edge and the Treatments caret fell to a second line. The burger did
+   not arrive until 991, leaving the entire small-laptop range broken.
+
+   Two steps rather than one, so the full menu survives as long as it fits.
+   Tightening the gaps first buys about 64px; dropping the phone number buys
+   another 166px, and it is the right thing to drop because it is the only item
+   in the bar that is repeated three times elsewhere on the page (the drawer,
+   the closing chapter and the footer all carry it). */
+@media (max-width: 1279px) {
+  .navbar_menu {
+    gap: 1.4rem;
+  }
+  .navbar_container {
+    gap: 1.25rem;
+  }
+}
+@media (max-width: 1199px) {
+  .navbar_phone {
+    display: none;
+  }
+}
+
 @media (max-width: 991px) {
   .navbar_menu,
   .navbar_phone {

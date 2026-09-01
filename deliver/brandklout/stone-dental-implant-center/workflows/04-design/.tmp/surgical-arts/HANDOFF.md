@@ -34,7 +34,7 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 > | Content | **nothing invented.** Every figure, quote, credential, fee, town and press item is the same sourced string v1 carried |
 > | Tokens | `01-tokens.css` **untouched**. Palette and typefaces are the client's board, exactly as briefed |
 > | Other 17 pages | markup unchanged; they gain the CTA texture fix below and nothing else |
-> | New gate | `node journey-test.mjs` — **33/33** |
+> | New gate | `node journey-test.mjs` — **39/39** |
 > | **For review** | https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6 |
 > 
 > The review link is the real page packed into one self-contained file: stylesheet, GSAP and
@@ -49,6 +49,12 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 > and every inner-page hero have been flat ivory on all eighteen pages since the first build**, when
 > they were designed to sit on stone. `audit.mjs` resolved CSS `url()` against the site root, so it
 > could never have caught it; it now resolves against the stylesheet, and strips comments first.
+>
+> **A second one, also on all eighteen pages.** The navbar overflowed from 992 to about 1150:
+> everything in it is `nowrap`, the actions group is `flex: 0 0 auto`, and the burger did not arrive
+> until 991, so "Book a consultation" was clipped at the viewport edge on any small laptop. Gaps
+> tighten at 1279 and the phone number drops at 1199. `journey-test.mjs` now asserts that no visible
+> control sits past the right edge, which is the check that catches it.
 
 | | |
 | :--- | :--- |
@@ -57,7 +63,7 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 | **Build** | `cd site-src && node build-site.mjs` |
 | **Check** | `cd site-src && node audit.mjs` — links, images, a11y, SEO. Exits non-zero on any failure |
 | **Copy gate** | `cd site-src && node check-copy.mjs` — **no em dashes in copy** ([SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md)). Runs on the BUILT output |
-| **Motion gate** | `cd site-src && node journey-test.mjs` — 33 headless checks on the home page's chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins |
+| **Motion gate** | `cd site-src && node journey-test.mjs` — 39 headless checks on the home page's chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins |
 | **Screenshot** | `node site-src/shot.mjs "$PWD/final-site" index.html out.png 1440` |
 | **Imagery** | `node site-src/get-stock.mjs` (4 searched) · `node site-src/generate-images.mjs` (14 generated) |
 | **Live** | <https://stone-surgical-arts-production.up.railway.app> — see [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md) |

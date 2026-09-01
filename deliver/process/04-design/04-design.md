@@ -161,6 +161,39 @@ All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.t
 > **A relative `url()` in a bundled stylesheet resolves against the BUNDLE, not the site root.** An
 > asset check that resolves against the site root cannot catch a broken texture path, and one went
 > undetected across eighteen live pages for two days.
+
+> [!IMPORTANT]
+> **Step 17 says capture screenshots AND review them visually. Both halves.** On the Stone rebuild
+> six widths passed an automated overflow gate and three of them were visibly broken when the
+> pictures were finally opened, including a navbar that had been clipping its own booking button on
+> every page of the site since the first build. An assertion answers the question you thought to
+> ask; the screenshot answers the ones you did not.
+>
+> **Overflow is two questions, not one, and one check cannot answer both:**
+>
+> 1. *Does the page scroll sideways?* `document.scrollWidth <= clientWidth`. This is what a reader
+>    feels, and it is the hard gate.
+> 2. *Is anything clipped out of reach?* Here `overflow-x` alone cannot decide. An editorial layout
+>    bleeds images off the page edge on purpose and relies on a clipping ancestor, so excusing every
+>    clipped element hides real bugs and excusing none flags every deliberate bleed. Ask about
+>    CONTROLS instead: **no visible link, button or input may sit past the right edge** unless it is
+>    inside a genuinely scrollable rail. A photograph bleeding off the page is the design; a button
+>    doing it cannot be clicked.
+>
+> **Verify a new check by breaking the thing it is meant to catch.** Disable the fix, watch the
+> check fail by name, restore the fix, watch it pass. A check that has never failed has proved
+> nothing.
+
+> [!WARNING]
+> **Two CSS traps that produce layouts nobody wrote, both found on the Stone rebuild:**
+>
+> - **A `max-width` media rule reaches every width below it.** A rule added for the 992-to-1279 band
+>   was written after the 991 mobile block, so it also matched at 768 and its two-column grid beat
+>   the single-column mobile rule. Bound a band on both sides:
+>   `@media (min-width: 992px) and (max-width: 1279px)`.
+> - **`aspect-ratio` together with `max-height` shrinks the WIDTH as well.** The capped height is
+>   transferred back through the ratio, so a full-width hero rendered as a 504px square with bare
+>   background beside it. Add an explicit `width: 100%` when the box must stay full width.
 19. Send the Figma link and Vercel review URL to the client for first-round feedback.
 20. Record the selected design path and move approved corrections into `05-design-revisions`.
 21. **Output**: `.tmp/component-spec.json`, `.tmp/screenshots/`, `.tmp/token-violations.json`, `deliver/[client-name]/docs/design-draft-review.md`

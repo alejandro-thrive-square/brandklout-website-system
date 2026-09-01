@@ -9,7 +9,7 @@ The home page rebuilt as an editorial journey, 2026-08-31.
 | **Scope** | The home page only. The vocabulary is written to roll onto the other seventeen |
 | **Package** | [`surgical-arts/site-src/`](./surgical-arts/site-src/) — `pages/home.body.html`, `css/50-journey.css`, `js/10-journey.js` |
 | **v1** | Kept verbatim at `site-src/pages/_home-v1.body.html`. Not built. There to diff against |
-| **Gates** | `audit.mjs` FAIL none / WARN none · `check-copy.mjs` clean · `journey-test.mjs` **33/33** |
+| **Gates** | `audit.mjs` FAIL none / WARN none · `check-copy.mjs` clean · `journey-test.mjs` **39/39** |
 | **For review** | https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6 |
 
 ## The diagnosis
@@ -199,6 +199,42 @@ GSAP, ScrollTrigger and SplitText all loaded; that the pin exists and the track 
 both progress bars fill; that the readout names chapter 04 while you are parked in it; that the
 counters land on their published values and not on a rounded tween; that reduced motion produces
 zero pins and hides nothing; and that the page is complete with JavaScript off.
+
+## Second pass: what looking at the screenshots found
+
+The first pass gated six widths for horizontal overflow and moved on. Opening them found three
+defects the gate could not see:
+
+- **The navbar overflowed from 992 to about 1150, on all eighteen pages.** "Book a consultation"
+  was clipped at the viewport edge and the Treatments caret dropped to a second line. Pre-existing
+  since the first build. Fixed in two steps so the full menu survives as long as it fits: gaps
+  tighten at 1279, and the phone number, which is repeated three times elsewhere on the page,
+  drops at 1199.
+- **The tablet hero cropped a portrait photograph to landscape.** `aspect-ratio` with a
+  `max-height` transfers the cap into the width as well, so at 768 the hero was a 504px square in a
+  768px column. Tablets now get a portrait frame on the left gutter, which keeps the desktop
+  asymmetry; the height cap belongs to phones, where its only job is holding the headline above the
+  fold.
+- **The headline broke to three lines from 992 to 1279.** The copy column now takes more of the row
+  in that band.
+
+Three changes came out of the same look:
+
+- **The hero caption is gone.** "One surgeon. One room. One plan." is the sub-headline directly
+  above it said again in fewer words, and it was an opaque plate fighting the photograph at 1024,
+  768 and 390. Two reasons to cut it and none to keep it.
+- **The category names went up a step**, from `--size-h4` to `--size-h3`. They are the four things
+  this page exists to route people to and they were smaller than the lede beside the section
+  heading, so the photograph carried the card and the word read as a caption.
+- **The closing band sits on the spine now.** The page spent nine chapters building a left-hand
+  rhythm and then closed on the one centred block that looks like every other template. **Scoped to
+  `.journey_page`**, so the other seventeen pages keep exactly the band they have while the
+  direction is under review; rolling it out later is deleting one selector.
+
+The gate is now 39 checks rather than 33, and the new one is the interesting one: **no visible
+control may sit past the right edge** unless it is inside a rail the reader can scroll. It was
+verified by disabling the navbar fix and watching it fail with `Book a consultation`, then pass
+again, because a check that has never failed has proved nothing.
 
 ## What this does not fix
 

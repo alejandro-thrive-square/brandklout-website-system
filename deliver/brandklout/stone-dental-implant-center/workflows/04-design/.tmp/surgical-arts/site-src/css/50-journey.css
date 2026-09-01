@@ -228,6 +228,10 @@
   position: relative;
   display: grid;
   grid-template-columns: 1.02fr 0.98fr;
+  /* --arrival-frame is how far the photograph is inset from the section's left
+     and bottom, which is what makes the Carrara ground read as a frame around
+     it. One value so the photograph and its edges can never drift apart. */
+  --arrival-frame: var(--space-xxlarge);
   align-items: stretch;
   min-height: min(46rem, 94vh);
   overflow: clip;
@@ -285,7 +289,7 @@
    marble. */
 .arrival_photo {
   position: absolute;
-  inset: 0 0 var(--space-xxlarge) var(--space-xxlarge);
+  inset: 0 0 var(--arrival-frame) var(--arrival-frame);
   z-index: 1;
   overflow: clip;
 }
@@ -295,20 +299,7 @@
   object-fit: cover;
   display: block;
 }
-.arrival_caption {
-  position: absolute;
-  left: var(--space-xxlarge);
-  bottom: calc(var(--space-xxlarge) + var(--space-large));
-  z-index: 2;
-  margin: 0;
-  padding: var(--space-small) var(--space-medium);
-  background: var(--bg);
-  border-top: 2px solid var(--accent-flat);
-  font-size: var(--size-text-tiny);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--fg-mute);
-}
+
 
 @media (max-width: 991px) {
   .arrival_component {
@@ -326,22 +317,18 @@
      comes FIRST on a phone, so every pixel it takes pushes the headline and the
      two buttons below the fold. A square at 56vh keeps the composition and
      still lands "Sculpt with confidence" on the first screen. */
+  /* Tablet: a portrait frame on the left, not a full-width band. The image is
+     2:3, and the marble showing beside it is the same asymmetry the desktop
+     hero has rather than a flattened version of it. */
   .arrival_media {
     order: 1;
-    aspect-ratio: 1 / 1;
-    max-height: 56vh;
+    width: min(28rem, 74%);
+    aspect-ratio: 3 / 4;
   }
-  .arrival_photo {
-    inset: 0 0 var(--space-large) var(--space-large);
+  .arrival_component {
+    --arrival-frame: var(--space-large);
   }
-  /* Flush with the photograph's bottom edge. At desktop the plate clears the
-     edge; repeating that offset on a phone left a 4px sliver of image showing
-     underneath it, which reads as a rendering fault rather than as a margin. */
-  .arrival_caption {
-    left: var(--space-large);
-    bottom: var(--space-large);
-    max-width: calc(100% - var(--space-xxlarge));
-  }
+
 }
 
 /* --- the ledger ------------------------------------------------------------
@@ -532,8 +519,8 @@
 .ways_name {
   font-family: var(--font-display);
   font-weight: 400;
-  font-size: var(--size-h4);
-  line-height: 1.1;
+  font-size: var(--size-h3);
+  line-height: 1;
   margin: 0;
   color: var(--fg);
 }
@@ -589,6 +576,20 @@
     margin-top: 0;
   }
 }
+/* Phone: full width, and NOW the height cap, whose only job is keeping the
+   headline and the two buttons on the first screen.
+   `width: 100%` is load-bearing alongside it: `aspect-ratio` with a
+   `max-height` transfers the capped height back into the width, and without an
+   explicit width the hero renders as a square island with bare marble beside
+   it. */
+@media (max-width: 600px) {
+  .arrival_media {
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    max-height: 56vh;
+  }
+}
+
 @media (max-width: 478px) {
   .ways_grid {
     grid-auto-columns: 82%;
@@ -705,6 +706,25 @@
   font-size: var(--size-text-small);
   color: var(--accent);
   letter-spacing: 0.08em;
+}
+
+/* The copy column needs more of the row before the headline will hold two
+   lines. At the default 1.02fr it broke to "Sculpt / with / confidence." from
+   1279 down to 992, which reads as a wrapping accident.
+
+   BOUNDED ON BOTH SIDES, and that is not optional. This block sits after the
+   991 block in the file, so as a plain max-width rule it also matched at 768
+   and its two-column grid beat the single-column mobile rule: the hero went
+   back to two columns on a phone and the headline ran off the screen. A rule
+   written for one band has to say which band. */
+@media (min-width: 992px) and (max-width: 1279px) {
+  .arrival_component {
+    grid-template-columns: 1.18fr 0.82fr;
+    --arrival-frame: var(--space-xlarge);
+  }
+  .arrival_copy {
+    padding-right: var(--space-large);
+  }
 }
 
 @media (max-width: 1279px) {
@@ -1315,4 +1335,38 @@
   .journey_readout {
     display: none;
   }
+}
+
+
+/* --- the closing band, home page only --------------------------------------
+   See the note in 38-cta.css: this is the same component, re-laid onto the
+   spine every other chapter sits on. Scoped to .journey_page so the other
+   seventeen pages are untouched while the direction is under review; rolling it
+   out later is deleting one selector. */
+.main-wrapper > .journey_page + .section_cta .cta_inner {
+  justify-items: start;
+  text-align: left;
+  gap: var(--space-small);
+}
+.main-wrapper > .journey_page + .section_cta .cta_title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--size-display-sm);
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  max-width: 18ch;
+}
+.main-wrapper > .journey_page + .section_cta .cta_text {
+  max-width: 34rem;
+  font-size: var(--size-text-medium);
+  line-height: 1.65;
+}
+.main-wrapper > .journey_page + .section_cta .eyebrow.is-center {
+  text-align: left;
+}
+.main-wrapper > .journey_page + .section_cta .button-group.is-center {
+  justify-content: flex-start;
+}
+.main-wrapper > .journey_page + .section_cta .cta_actions {
+  margin-top: var(--space-medium);
 }

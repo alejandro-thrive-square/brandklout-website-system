@@ -113,14 +113,17 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
   const over = await page.evaluate(() => {
     const de = document.documentElement;
     const wide = [];
-    // scrollWidth on the root is the summary; the per-element pass names the
-    // culprit, which is the difference between "something overflows" and a
-    // fixable report.
+    // scrollWidth on the root is what a reader actually feels. The per-element
+    // pass names the culprit, which is the difference between "something
+    // overflows" and a fixable report.
     document.querySelectorAll("body *").forEach((el) => {
       const r = el.getBoundingClientRect();
       if (r.width > 0 && r.right > de.clientWidth + 1.5) {
-        // A deliberately scrollable rail clips its own children, so an item
-        // sitting past the right edge INSIDE one is the design, not a bug.
+        // Excused if some ancestor contains it: a scrollable rail the reader
+        // can reach, or a clipping context, which is how every deliberate
+        // bleed in this design is built (the surgeon portrait, the two offer
+        // bands, the pinned track). Content clipped on purpose is not overflow.
+        // What that CANNOT excuse is a clipped control; see the next check.
         let p = el.parentElement;
         while (p && p !== document.body) {
           const ov = getComputedStyle(p).overflowX;
@@ -130,12 +133,46 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
         wide.push(el.className || el.tagName);
       }
     });
-    return { doc: de.scrollWidth, client: de.clientWidth, wide: wide.slice(0, 5) };
+
+    // No CONTROL may sit past the right edge. A photograph bleeding off the
+    // page is the design; a link or a button doing it cannot be clicked, and
+    // that is a defect at any width whatever is clipping it. This is the check
+    // that catches the navbar: at 1024 "Book a consultation" was cut in half at
+    // the viewport edge and the element sweep above excused it, because an
+    // ancestor with overflow-x: hidden was hiding the evidence.
+    const cut = [];
+    document.querySelectorAll("a[href], button, input, select, summary").forEach((el) => {
+      const cs = getComputedStyle(el);
+      // The mobile drawer is off-canvas and `visibility: hidden` when closed.
+      if (cs.visibility === "hidden" || cs.display === "none") return;
+      let p = el.parentElement;
+      while (p) {
+        const pcs = getComputedStyle(p);
+        if (pcs.visibility === "hidden") return;
+        // A control inside a scrollable rail is REACHABLE: the reader scrolls
+        // the rail and clicks it. The category cards on a phone live in one.
+        // `hidden` and `clip` get no such excuse, which is the whole point of
+        // this check: they mean the control cannot be reached at all.
+        if (pcs.overflowX === "auto" || pcs.overflowX === "scroll") return;
+        p = p.parentElement;
+      }
+      const r = el.getBoundingClientRect();
+      if (r.width > 0 && r.right > de.clientWidth + 1.5) {
+        cut.push((el.textContent || el.tagName).trim().slice(0, 24));
+      }
+    });
+
+    return { doc: de.scrollWidth, client: de.clientWidth, wide: wide.slice(0, 5), cut: cut.slice(0, 5) };
   });
   check(
     `no horizontal overflow @ ${width}`,
     over.doc <= over.client + 1 && over.wide.length === 0,
     `scrollWidth ${over.doc} vs ${over.client}${over.wide.length ? " :: " + over.wide.join(", ") : ""}`
+  );
+  check(
+    `no control clipped off the right edge @ ${width}`,
+    over.cut.length === 0,
+    over.cut.length ? over.cut.join(", ") : ""
   );
   check(`console clean @ ${width}`, errors.length === 0, errors.slice(0, 2).join(" | "));
   await page.close();
