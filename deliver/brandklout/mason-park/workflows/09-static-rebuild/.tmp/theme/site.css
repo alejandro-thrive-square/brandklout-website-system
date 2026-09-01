@@ -875,9 +875,17 @@ button { font: inherit; }
     position: fixed; inset: 0 0 0 auto; z-index: 85; width: min(24rem, 86vw);
     display: block; padding: 6.5rem 1.75rem 2.5rem; overflow-y: auto;
     background: var(--white); border-left: var(--hairline);
-    transform: translateX(100%); transition: transform .3s var(--ease);
+    /* `visibility`, not just `transform`. A drawer pushed off screen with a
+       transform is still in the accessibility tree and still focusable, so a
+       keyboard or switch user tabbing off the logo walked through FIFTY TWO
+       invisible links, at x=415 on a 390px screen, before reaching the page.
+       `visibility: hidden` takes them out of the tab order; transitioning it
+       alongside the transform keeps them present for the whole slide out, which
+       is the same mechanism `.navbar_scrim` above already uses. */
+    transform: translateX(100%); visibility: hidden;
+    transition: transform .3s var(--ease), visibility .3s;
   }
-  .nav-open .navbar_menu { transform: translateX(0); }
+  .nav-open .navbar_menu { transform: translateX(0); visibility: visible; }
   .navbar_menu-list { flex-direction: column; align-items: stretch; gap: 0; }
   .navbar_item { border-bottom: var(--hairline); }
   .navbar_link { display: block; padding: .95rem 0; }

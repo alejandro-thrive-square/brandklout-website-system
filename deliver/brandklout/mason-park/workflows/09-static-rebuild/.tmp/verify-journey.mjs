@@ -347,6 +347,34 @@ check("the close button is not trapped under the drawer it opened",
   /navbar_toggle/.test(String(drawer.toggleHitBy)) && drawer.closedAgain && drawer.stayedOnPage,
   `hit ${drawer.toggleHitBy}, closed ${drawer.closedAgain}, stayed ${drawer.stayedOnPage}`);
 
+// ----------------------------- 8a2. the closed drawer leaves the tab order
+// A drawer pushed off screen with a transform is still in the accessibility
+// tree and still focusable. Measured before the fix: 52 focusable links sitting
+// at x=415 on a 390px screen, all of them ahead of the page content in tab
+// order. Nothing visual shows it, and no screenshot ever could.
+await load(390, 800);
+const tab = await evaluate(`(async()=>{
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const menu=document.querySelector('.navbar_menu');
+  const link=()=>menu.querySelector('.navbar_link');
+  link().focus();
+  const closed = document.activeElement === link();
+  const count = menu.querySelectorAll('a[href], button').length;
+  document.querySelector('.navbar_toggle').click(); await sleep(450);
+  link().focus();
+  const open = document.activeElement === link();
+  return { closedFocusable: closed, openFocusable: open, links: count };
+})()`);
+check("the closed drawer is out of the tab order, and back in when open",
+  tab.closedFocusable === false && tab.openFocusable === true, JSON.stringify(tab));
+
+await load(1440, 800);
+const deskTab = await evaluate(`(()=>{
+  const l=document.querySelector('.navbar_menu .navbar_link'); l.focus();
+  return document.activeElement === l;
+})()`);
+check("the desktop nav stays focusable", deskTab === true, String(deskTab));
+
 // ------------------------------------------- 8c. the FAQ actually opens
 // `<details>` is progressive enhancement, so the risk is not that it fails to
 // toggle but that the answer never becomes readable: a closed `<details>` child
