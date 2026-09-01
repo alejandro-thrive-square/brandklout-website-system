@@ -36,6 +36,12 @@
 | `.tmp/shot.mjs` | **The gate that renders it.** Four widths, full-page PNGs plus overflow / broken images / never-revealed elements / console errors. `cd .tmp && npm i` once, then `node shot.mjs ../home/services/invisalign/index.html`. |
 | `.tmp/measure.mjs` | How long the page is and where the length went — px, screens, visible words and list heights per chapter. Run it before deciding what to cut. |
 | `.tmp/probe-scene.mjs` | Drives the pinned path scene and asserts it does work: the track travels, the bar fills, every card reveals. A screenshot cannot tell you any of that. |
+| `.tmp/backup-site.mjs` | Dumps a whole instance -- shell, every page's node graph, media records -- to one local JSON. **Run it before anything destructive.** |
+| `.tmp/list-site.mjs` | Read-only inventory: which instance, who we are, pages, media, publish state. |
+| `.tmp/run-converter.mjs` | Ships `container-convert.ts` into the container, sha-verified, and runs it under bun. |
+| `.tmp/import-scripts.mjs` | The JS half of the code assets: gsap + site.js + journey.js as one registered script. |
+| `.tmp/reset-to-deliverable.mjs` | Reduces an instance to what `home/` holds plus `KEEP`. Staging only, dry-run by default. |
+| `.tmp/verify-live.mjs` | Checks the PUBLISHED pages: 200, styles applied, GSAP booted, images resolve, no overflow. |
 | `.tmp/to-instatic.mjs` | Turns `home/` into what Instatic should hold. |
 | `.tmp/upload-media.mjs` | Uploads the media manifest, writes the local → uploaded path map. |
 | `.tmp/insta.mjs` | Minimal Instatic admin client. Points at Mason Park, deliberately not shared with another client's workflow. |
@@ -156,12 +162,42 @@ node -e 'for(const f of process.argv.slice(1)){const t=require("fs").readFileSyn
 module or `fetch()` anywhere. The exporter walks the folder, so every `index.html` under it is
 a page and its route comes from its own directory — nothing to register.
 
+> [!CAUTION]
+> **`INSTATIC_BASE_URL` in the repo `.env` is `https://www.masonparkdental.com` — PRODUCTION**,
+> which carries six paid-traffic landing pages. **Pass the URL explicitly on every command.**
+> `insta.mjs` refuses a host that is not Mason Park and keys its session cache by host, and
+> `reset-to-deliverable.mjs` refuses to run anywhere `IS_STAGING` is false — but the read-only
+> tools will happily read production if you let them.
+
+The full run order. Steps 5–8 are not optional and **five of these scripts were deleted by the
+2026-09-01 freeze and restored on 2026-09-01**; `git show 0499328:…/.tmp/<name>` has the
+originals if any goes missing again.
+
 ```bash
-cd .tmp
-node to-instatic.mjs            # -> instatic/  (first pass, media not yet mapped)
-node upload-media.mjs           # uploads instatic/media-manifest.json, writes the map
-node to-instatic.mjs --media instatic-media-map.json   # second pass, paths rewritten
+cd .tmp && npm i
+export INSTATIC_BASE_URL=https://staging.masonparkdental.com
+
+node backup-site.mjs                                   # 1. dump the instance first. 20 MB, one file.
+node list-site.mjs                                     # 2. what is there now
+node to-instatic.mjs                                   # 3. -> instatic/  (media not yet mapped)
+node upload-media.mjs                                  # 4. upload, write instatic-media-map.json
+node to-instatic.mjs --media instatic-media-map.json   # 5. second pass, /uploads paths
+
+RAILWAY_ENV_NAME=staging node ship-payload.mjs         # 6. HTML -> the container, sha-verified
+RAILWAY_ENV_NAME=staging node run-converter.mjs        # 7. HTML -> node graphs, inside the container
+RAILWAY_ENV_NAME=staging node fetch-nodes.mjs          # 8. -> converted-pages.json
+
+node import-styles.mjs                                 # 9. class rules + site.css as a code asset
+node import-scripts.mjs                                # 10. gsap + site.js + journey.js, bundled
+node reset-to-deliverable.mjs                          # 11. dry run: what would be deleted
+node reset-to-deliverable.mjs --apply --publish        # 12. one atomic PUT, then publish
+node verify-live.mjs $INSTATIC_BASE_URL / /services/invisalign   # 13. check what actually shipped
 ```
+
+**Pages are node graphs, not HTML.** Steps 6–8 exist because the HTML→nodes importer is an MCP
+`site_*` tool that proxies a live browser editor and "cannot run headlessly"; calling Instatic's
+own importer inside the container sidesteps that. `railway ssh` takes its payload on the command
+line and **fails silently past ~10 KB**, so both directions are chunked and sha256-verified.
 
 The exporter makes exactly three changes, and only three:
 
@@ -170,19 +206,54 @@ The exporter makes exactly three changes, and only three:
 2. **Media.** `assets/uploads/…` becomes `/uploads/<id>-<name>`, and the id is assigned at
    upload — so upload first, then re-run with `--media`. A page in a subfolder writes
    `../../assets/…`; any run of `../` is collapsed first so both depths reach the same rule.
-3. **Body only.** Instatic stores a body, not a document. `site.css` and `site.js` go in
-   separately as **site-wide code assets**, not per page.
+3. **Body only.** Instatic stores a body, not a document, so every `<script>` and
+   `<link rel=stylesheet>` is stripped. They come back as **site-wide code assets** — and
+   putting them back is steps 9 and 10, not something the exporter does.
 
 Add `--lean` to drop the srcset candidates and ship one file per image — 166 files down to
 roughly 50, at the cost of phones fetching the full-size image.
 
-### The one import trap
+### Code assets: a file alone is inert
+
+A `SiteFile` needs **both** an `id` (a nanoid, explicitly not the path, which is mutable on
+rename) **and** a `path`. An entry missing `id` is dropped silently: the save answers `ok:true`
+and `files` comes back empty.
+
+A **script** needs one thing more — an entry in `site.runtime.scripts` keyed by that same file
+id, giving `enabled`, `format`, `placement`, `timing` and `scope`. A `type: "style"` file is
+bundled into `userStyles-*.css` automatically; **a script with no runtime entry never loads at
+all**, with no error anywhere.
+
+`import-styles.mjs` only ever shipped the CSS, so until 2026-09-01 the imported pages went live
+correctly styled and carrying **no JavaScript whatsoever** — dead mobile menu, unloaded map,
+and no motion layer. It read as a deliberate static render because `journey.js` is written to
+degrade to exactly that. `import-scripts.mjs` is the missing half.
+
+**It ships one concatenated file, not five.** The page needs gsap → ScrollTrigger → SplitText →
+site.js → journey.js in that order, and the runtime registry orders scripts by a `priority`
+whose direction is undocumented. Guessing wrong gives a silently static page, so the order is
+settled at build time instead.
+
+### The import traps
 
 **Instatic's `base.button` takes no child nodes.** An inline `<svg>` inside a `<button>` is
 dropped at import with no failure and no warning, and the live button renders as an empty box.
 The menu toggle's three bars are therefore drawn in CSS, not as a child `<svg>` — see the
 `.navbar_toggle` rule in `site.css`. Every other inline icon on the page survives; this is the
 one element that cannot hold one.
+
+**A delete is a write, and it is optimistically locked like any other.** `deletedPageIds`
+carries no seq of its own, so each deleted row's current `seq` has to be quoted in `baseSeqs`
+exactly as a changed row's is. Omit them and the save returns `409 "Another admin saved a newer
+version of content in this save"`, naming every page you are deleting, with no other admin
+anywhere near the site — the newer version is each row's own seq, unquoted.
+
+**`publish` bakes the whole draft, not your change.** Check `draftMatchesPublished` before
+publishing anywhere that matters, or you ship whatever else was sitting unreviewed in it.
+
+**Instatic generates its `-w64.webp` placeholder variants lazily.** The first request for a
+freshly published image can 404 and succeed a moment later; `verify-live.mjs` filters those,
+and the Cloudflare bot beacon, so a real miss still stands out.
 
 ## Nav links
 

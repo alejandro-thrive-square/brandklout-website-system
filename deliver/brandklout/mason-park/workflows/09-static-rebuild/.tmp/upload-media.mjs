@@ -17,7 +17,14 @@ import { fileURLToPath } from "node:url";
 import { listMedia, uploadFile, BASE } from "./insta.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const DIST = path.join(HERE, "dist");
+// The files live in the deliverable, `../home/`, and the manifest addresses
+// them as `/assets/uploads/...` — so this is the folder those paths are
+// relative to. It used to be `.tmp/dist`, the generator's output, and the
+// 2026-09-01 freeze deleted that folder and repointed to-instatic.mjs at
+// ../home/ WITHOUT repointing this. The failure is loud but misleading: 137 of
+// 166 files reported "not on disk" at a path under a directory that no longer
+// exists at all, which reads like a missing export rather than a stale const.
+const DIST = path.join(HERE, "..", "home");
 const MANIFEST = path.join(HERE, "instatic", "media-manifest.json");
 const OUT_MAP = path.join(HERE, "instatic-media-map.json");
 const OUT_LOG = path.join(HERE, "media-upload-log.json");
