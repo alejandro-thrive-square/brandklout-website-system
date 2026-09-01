@@ -1921,6 +1921,11 @@ button { font: inherit; }
   .pa-track { overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: var(--bleed); -webkit-overflow-scrolling: touch; width: auto; padding-bottom: 1rem; }
   .pa-card { width: 78vw; scroll-snap-align: start; }
   .pa-shot img { filter: none; height: auto; aspect-ratio: 4 / 3; }
+  /* The bar reports the pin's progress, and below 900 there is no pin: the
+     track is a scroll region the reader swipes. It rendered as a hairline that
+     could never fill. `.ch-path.is-static` already hides it for the same
+     reason on a wide reduced-motion desktop; this is the other case. */
+  .pa-bar { display: none; }
 }
 
 /* ===========================================================================
@@ -2650,6 +2655,76 @@ body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); 
   transform: rotate(-45deg);
 }
 .lf-ticks strong, .lf-ticks b { color: var(--fg); font-weight: 600; }
+
+/* ---------------------------------------------------------------------------
+   THE SAME LIST, SCANNED RATHER THAN READ.
+   A treatment page's selling list is written as "Label. Two sentences saying
+   what the label means." Six of those is 200 words and 620px of one column,
+   and the reader who is deciding whether this treatment is for them wants the
+   six labels, not the twelve sentences. So the label IS the row and the
+   practice's own explanation is one click under it.
+
+   Client note, 2026-09-01: "Users don't scroll to a page that has that much
+   text." The answer is NOT to cut the explanation -- these pages earn search
+   traffic and the copy is the practice's. Every word is still in the HTML,
+   indexed, one interaction away. That is the same trade `.lf-more` makes, per
+   row instead of per run.
+
+   Native <details>: no JavaScript, works before site.js loads, and Ctrl+F
+   inside a closed <details> still finds the text in current browsers.
+   ------------------------------------------------------------------------ */
+.lf-ticks.is-compact { gap: 0; margin-top: .75rem; }
+.lf-ticks.is-compact > li { padding-left: 0; }
+/* The tick moves off the row and onto the summary, because the row is now a
+   control with its own padding and the marker has to line up with the label,
+   not with the top of the disclosure. */
+.lf-ticks.is-compact > li::before { display: none; }
+.lf-ticks.is-compact summary {
+  position: relative;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  list-style: none;
+  cursor: pointer;
+  padding: .7rem 0 .7rem 1.6rem;
+  border-bottom: 1px solid var(--rule);
+  font-weight: 600;
+  color: var(--fg);
+  line-height: 1.45;
+  transition: color .25s var(--ease);
+}
+.lf-ticks.is-compact summary::-webkit-details-marker { display: none; }
+.lf-ticks.is-compact summary::before {
+  content: "";
+  position: absolute;
+  left: .15rem;
+  top: 1.15em;
+  width: .5rem;
+  height: .5rem;
+  border-left: 1.5px solid var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  transform: rotate(-45deg);
+}
+.lf-ticks.is-compact summary::after {
+  content: "+";
+  flex: 0 0 auto;
+  font-family: var(--font-ui);
+  font-size: 1.15rem;
+  font-weight: 500;
+  line-height: 1;
+  color: var(--accent);
+  transition: transform .25s var(--ease);
+}
+.lf-ticks.is-compact details[open] > summary::after { transform: rotate(45deg); }
+.lf-ticks.is-compact summary:hover { color: var(--accent); }
+.lf-ticks.is-compact summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
+.lf-ticks.is-compact details > p {
+  padding: .8rem 1.5rem 1rem 1.6rem;
+  border-bottom: 1px solid var(--rule);
+  color: var(--fg-soft);
+  line-height: 1.7;
+}
 
 /* A label the editor typed as a heading because there was no other button for
    it: "Invisalign is ideal for:" above four bullets. Rendered as a heading it

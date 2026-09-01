@@ -125,7 +125,7 @@ for (const [name, v] of Object.entries(VIEWS)) {
       if (tiny.length > 4) break;
     }
     const hidden = [];
-    for (const el of document.querySelectorAll("[data-anim='hide'], [data-split], .lf-section, .vs-row, .pr-chip")) {
+    for (const el of document.querySelectorAll("[data-anim='hide'], [data-split], .lf-section, .vs-row, .pr-chip, .pa-card")) {
       const cs = getComputedStyle(el);
       if (el.getBoundingClientRect().height > 0 &&
           (cs.visibility === "hidden" || parseFloat(cs.opacity) < 0.05)) {

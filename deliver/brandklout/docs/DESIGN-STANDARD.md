@@ -240,6 +240,35 @@ heading. Pouring that into a template preserves the problem and adds a hero to i
    prefixed lines becomes a list. This is re-tagging, not rewriting — and it does most of the work,
    because these walls are usually several real sections that the CMS flattened into one.
 
+### The fifth part: measure how many times the page makes the same point
+
+The ceiling above is about *runs*. It cannot see the other half of the problem, which is a page
+that obeys it perfectly and still says one thing four times.
+
+Mason Park's Invisalign page had four lists — *Who is it for*, *When to consider*, *Benefits*,
+*Why choose us* — 21 items and 600 words, and 21 near-duplicate pairs between them. It made
+"virtually invisible" 16 times, "removable, eat what you like" 18, "no metal, no irritation" 28,
+"custom-fit from a 3D scan" 20. Every run was under the ceiling; three of the eighteen desktop
+screens were the same six sentences rewritten. That is what a client means by *"users don't
+scroll to a page that has that much text"* — not that the page is long, that it is **redundant**.
+
+**So measure repetition, not just run length.** A Jaccard pass over the page's own list items and
+a count of each selling point's synonyms takes a minute and tells you which chapters are copies of
+each other. The workflow's `.tmp/measure.mjs` reports screens, words and list heights per chapter;
+run it before deciding what to cut.
+
+**The fix is a fold, not a delete** — the same trade as rule 2, made at chapter and at row level:
+
+- **Row level.** `ul.lf-ticks.is-compact`: the label is the visible row and the practice's own two
+  sentences sit under it in a native `<details>`. Six benefits go from 622px to 288px and the
+  reader scans six labels in four seconds. Nothing leaves the HTML.
+- **Chapter level.** When two sections are the same argument, the weaker one folds whole into a
+  `details.lf-more` inside the stronger. *When to consider* and *Why choose us* both folded; the
+  chapter still answers its own question above the fold.
+
+Result on that page: **2,155 visible words to 1,450, and mobile from 22.4 screens to 16.9**, with
+every original word still in the file and still indexed.
+
 ### What may never be done to fix a wall
 
 - **Never rewrite, paraphrase or summarise clinical copy.** Removal and re-tagging only. A practice
@@ -288,6 +317,18 @@ the implementation and `photos.mjs` for the picture rules.
 - **Scrubbed scale must never land exactly on `1`** — causes edge flicker.
 - A fixed header's `z-index` can trap its own close button under an open drawer.
 - Fixed side rails need a real layout gutter plus a scrim, and inversion over light sections.
+- **The runtime's breakpoints must agree with the stylesheet's, and nothing enforces it.** If a
+  media query changes a scene's layout at 900px, the script that decides whether to pin it has to
+  test the same 900px. Mason Park's path scene guarded on `(hover:none) and (pointer:coarse)`,
+  which catches phones and tablets — and misses **a non-touch window between 768 and 899px**, a
+  resized laptop browser. There the CSS had already made the track a scroll region while GSAP
+  pinned it and translated a track its own container was clipping: a 1,051px scene inside a
+  4,064px section, **three thousand pixels of scroll in which nothing moved**, on the client's
+  approved homepage. Screenshot gates pass it (no overflow, no small text, everything visible);
+  only measuring the section against the scene inside it finds it. **Assert `sectionHeight ≈
+  sceneHeight + travel` at every breakpoint on both sides of the boundary.**
+- **A progress bar that cannot progress must be hidden, not left inert.** The same scene rendered
+  its scrub bar below 900 where there is no scrub.
 
 ## Brand Authority and Canary Gate
 

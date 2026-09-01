@@ -428,14 +428,38 @@
       });
     }
 
+    /* Below 900 the STYLESHEET has already turned the track into a snapping,
+       horizontally scrollable region, so there is nothing here for GSAP to do
+       but stay out of the way. */
+    function buildFlow() {
+      sec.classList.remove("is-static");
+      gsap.set(track, { clearProps: "transform" });
+      $$(".pa-card", sec).forEach(function (card) { card.classList.add("is-on"); });
+    }
+
     function decide() {
-      var wants = track.scrollWidth > window.innerWidth + 40 ? "pinned" : "static";
+      /* THE WIDTH TEST IS NOT OPTIONAL, and leaving it out cost the homepage
+         3,000px of dead scroll at every width from 768 to 899.
+         `TOUCH` above catches phones and tablets, but a NON-touch window in
+         that range - a laptop browser resized, a small desktop - fell through
+         to this line, and `track.scrollWidth > innerWidth` is trivially true
+         there, so it pinned. Meanwhile the max-width:899 block in site.css had
+         already set `overflow-x:auto` on the track and cancelled `min-height`
+         on the pin. The result: the pin spacer held the reader still for three
+         thousand pixels while the tween translated a track that its own
+         container was clipping. The section measured 4,064px around a 1,051px
+         scene, and nothing moved for most of it.
+         The CSS decides the layout below 900; the runtime has to agree. */
+      var wants = window.innerWidth < 900 ? "flow"
+        : (track.scrollWidth > window.innerWidth + 40 ? "pinned" : "static");
       if (wants === built) return;
       built = wants;
       ScrollTrigger.getAll().forEach(function (st) {
         if (st.trigger === pin || (st.trigger && st.trigger.classList && st.trigger.classList.contains("pa-card"))) st.kill();
       });
-      if (wants === "pinned") buildPinned(); else buildStatic();
+      if (wants === "pinned") buildPinned();
+      else if (wants === "static") buildStatic();
+      else buildFlow();
     }
     decide();
     ScrollTrigger.addEventListener("refreshInit", function () { gsap.set(track, { x: 0 }); });

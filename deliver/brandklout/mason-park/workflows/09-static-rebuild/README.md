@@ -34,6 +34,8 @@
 | `home/assets/uploads/` | The 166 images the page references, at every srcset width. |
 | `.tmp/check.mjs` | **The gate that reads the HTML.** Assets resolve, braces balance, no control bytes, no walls of text, ids unique, anchors land, alts present. `node .tmp/check.mjs`. |
 | `.tmp/shot.mjs` | **The gate that renders it.** Four widths, full-page PNGs plus overflow / broken images / never-revealed elements / console errors. `cd .tmp && npm i` once, then `node shot.mjs ../home/services/invisalign/index.html`. |
+| `.tmp/measure.mjs` | How long the page is and where the length went — px, screens, visible words and list heights per chapter. Run it before deciding what to cut. |
+| `.tmp/probe-scene.mjs` | Drives the pinned path scene and asserts it does work: the track travels, the bar fills, every card reveals. A screenshot cannot tell you any of that. |
 | `.tmp/to-instatic.mjs` | Turns `home/` into what Instatic should hold. |
 | `.tmp/upload-media.mjs` | Uploads the media manifest, writes the local → uploaded path map. |
 | `.tmp/insta.mjs` | Minimal Instatic admin client. Points at Mason Park, deliberately not shared with another client's workflow. |
@@ -59,7 +61,7 @@ order, each one a `data-chapter` section:
 | Is this you | `ch-qualify` | Qualify the reader out or in, first. |
 | The Treatment | `ch-treatment` | What it is and what is included. |
 | Why This One | `ch-why` (warm) | What it does for them, and why here. |
-| The Path | `ch-process` | What actually happens, step by step. |
+| The Path | `ch-path` | What actually happens, pinned and travelling sideways. The homepage's scene, reused: **the class must be `ch-path`, journey.js binds to it and not to the id.** No photographs on the cards — a picture beside "Step 3: aligner fitting" presents stock photography as showing this treatment. |
 | The Alternatives | `ch-compare` (warm) | The `vs-table`, honestly. |
 | The Cost | `ch-cost` | The price, before the ask. |
 | The Proof | `ch-proof` (warm) | The practice's own Google reviews. |
@@ -82,6 +84,22 @@ measures it.
 **Photographs may show the practice. They may not be presented as showing the treatment, its
 result, or its patient** — which is why the captions here talk about the building and the
 visit. Only the hero uses the page's own featured image.
+
+### Keeping it short, without deleting the practice's copy
+
+Client note, 2026-09-01: *"Users don't scroll to a page that has that much text."* Measure before
+cutting — on this page the problem was **repetition, not length**. Four lists were the same list
+in different words, and the page made "virtually invisible" 16 times and "no metal, no irritation"
+28. Three tools do the whole job, and none of them deletes a word:
+
+- `ul.lf-ticks.is-compact` — the label is the visible row, the practice's own two sentences sit
+  under it in a native `<details>`. Six benefits: 622px → 288px.
+- `details.lf-more` around a whole section, when two sections are the same argument.
+- `ch-path` instead of five stacked `lf-section`s for a process.
+
+2,155 visible words → 1,450; mobile 22.4 screens → 16.9. Everything is still in the HTML and still
+indexed. **Never delete ranking copy to shorten a page** — see "No wall of text" in
+[`DESIGN-STANDARD.md`](../../../docs/DESIGN-STANDARD.md).
 
 Two rules the stylesheet depends on, both load-bearing:
 
