@@ -2813,3 +2813,354 @@ body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); 
 @media (min-width: 900px) {
   .lf-split .lf-figure { width: min(118%, 46rem); }
 }
+
+/* ===========================================================================
+   THE SERVICE PAGE'S OWN FURNITURE — cards, not bullets
+   Added 2026-09-01 on the client's note: "Let's use more cards instead of
+   bullet points. Let's have more uncommon layouts and more images please.
+   Remember this is for the services page. The home page is currently great."
+
+   THE CONSTRAINT THAT SHAPES ALL OF IT: the homepage is approved and must not
+   move. Every selector below is either a NEW class the homepage does not use,
+   or is scoped to a chapter class that only exists on a treatment page
+   (`ch-qualify`, `ch-treatment`, `ch-why`, `ch-cost`, and `.ch-arrival`'s
+   `is-compact` variant). Nothing here is a bare element or a shared component.
+   Check that before adding to this block.
+   ======================================================================== */
+
+/* --- the compact hero's veil ---------------------------------------------
+   THE NAVBAR WAS NEVER DIFFERENT. The client read the service page's header as
+   changed; it is byte-identical markup and pixel-identical geometry, colour,
+   transparency and logo treatment. What changed is the PHOTOGRAPH BEHIND IT.
+   The homepage's team shot is mid-dark across the top, so the veil's .72 band
+   is plenty; the Invisalign featured image is a bright close-up whose blown
+   highlight sits exactly under "CONTACTS" and the phone number, and white
+   links on it wash out.
+
+   The right fix is not a darker photograph, because there are 34 more
+   treatment pages and 34 more featured images nobody has seen. The compact
+   hero guarantees its own contrast under the chrome instead: same gradient,
+   first stop taken to .88 and the falloff pushed past the header's height, so
+   the top ~20% is always dark enough for white text no matter what is behind
+   it. The homepage's full-height hero keeps its own veil untouched. */
+.ch-arrival.is-compact .ar-veil {
+  background:
+    linear-gradient(180deg, rgba(30, 36, 38, .88) 0%, rgba(30, 36, 38, .66) 20%, rgba(30, 36, 38, .34) 44%, rgba(30, 36, 38, .60) 74%, rgba(30, 36, 38, .94) 100%),
+    linear-gradient(94deg, rgba(30, 36, 38, .82) 0%, rgba(30, 36, 38, .45) 46%, rgba(30, 36, 38, .08) 82%);
+}
+
+/* --- the grid -------------------------------------------------------------
+   `is-stagger` is the uncommon one and the reason this is not `layout-grid`:
+   the even cards drop half a card, so the row reads as two overlapping ranks
+   rather than a tidy line of boxes. It is a TRANSFORM, not a margin, so it
+   costs no layout height and the cards below are unaffected — and it is
+   confined to >=900 because a stagger in one column is just a gap. */
+.svc-grid {
+  display: grid;
+  gap: clamp(1rem, 1.8vw, 1.75rem);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .svc-grid.is-3 { grid-template-columns: repeat(3, minmax(0, 1fr)); }
+  .svc-grid.is-4 { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+  /* One card carries the argument and the rest support it. */
+  .svc-grid.is-lead > *:first-child { grid-column: span 2; }
+  .svc-grid.is-stagger > *:nth-child(even) { transform: translateY(2.75rem); }
+  /* The stagger leaves a hole at the bottom of the odd column; the grid's own
+     bottom padding closes it rather than a margin on the cards. */
+  .svc-grid.is-stagger { padding-bottom: 2.75rem; }
+}
+@media (max-width: 599px) { .svc-grid { grid-template-columns: minmax(0, 1fr); } }
+
+/* --- the card ------------------------------------------------------------
+   Deliberately NOT `prop-card_component`: that one hardcodes `background:
+   var(--white)`, which is right on paper and wrong on the warm and dark
+   grounds these chapters use. This reads `--panel`, so the same card is white
+   on warm and ink-mid on dark without a second rule. */
+.svc-card {
+  display: flex;
+  flex-direction: column;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  overflow: hidden;
+  transition: border-color .4s var(--ease), transform .4s var(--ease);
+}
+.svc-card:hover { border-color: var(--rule-strong); }
+.svc-card_media { overflow: hidden; background: var(--sand); }
+.svc-card_media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  /* Grayscale at rest, like every other photograph in the system: these are
+     stock frames shot on different days against different grounds, and one
+     treatment is what makes a grid of them read as one set. */
+  filter: grayscale(1);
+  transition: filter .6s var(--ease), transform .6s var(--ease);
+}
+.svc-card:hover .svc-card_media img { filter: none; transform: scale(1.04); }
+.svc-card_body {
+  display: grid;
+  gap: .5rem;
+  padding: clamp(1.15rem, 1.9vw, 1.6rem);
+}
+.svc-card_no {
+  font-family: var(--font-display);
+  font-size: calc(1.5rem * var(--t-mid));
+  font-weight: 300;
+  line-height: 1;
+  color: var(--accent-lg);
+}
+.svc-card_name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--f-h4);
+  line-height: 1.25;
+  color: var(--fg);
+  margin: 0;
+}
+.svc-card_text {
+  font-size: var(--f-body);
+  line-height: 1.65;
+  color: var(--fg-soft);
+  margin: 0;
+}
+/* A tile that is only a photograph, dropped into the grid between the cards so
+   the run of text boxes is broken by an image at card size rather than by a
+   full-width figure. */
+.svc-card.is-shot { border: 0; background: none; }
+.svc-card.is-shot .svc-card_media img { aspect-ratio: 3 / 4; }
+.svc-card.is-shot figcaption {
+  margin-top: .6rem;
+  padding-left: .8rem;
+  border-left: 1.5px solid var(--accent);
+  font-family: var(--font-ui);
+  font-size: calc(.78rem * var(--t-ui));
+  line-height: 1.45;
+  color: var(--fg-soft);
+}
+
+/* --- the overlap ---------------------------------------------------------
+   The uncommon layout the note asked for: one grid, two children, SAME ROW.
+   The photograph runs 1..8 and the copy panel starts at 7, so the panel sits
+   on top of the image instead of beside it. Below 900 they simply stack, which
+   is why both children declare their own grid-row only inside the query. */
+.svc-overlap {
+  display: grid;
+  gap: 1.5rem;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--bleed);
+}
+.svc-overlap_media img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+}
+.svc-overlap_panel {
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  padding: clamp(1.5rem, 3vw, 2.75rem);
+}
+.svc-overlap_panel > * + * { margin-top: 1.15rem; }
+@media (min-width: 900px) {
+  .svc-overlap {
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    align-items: center;
+    gap: 0;
+  }
+  .svc-overlap_media { grid-column: 1 / span 8; grid-row: 1; }
+  .svc-overlap_panel { grid-column: 7 / span 6; grid-row: 1; z-index: 1; }
+  .svc-overlap.is-flipped .svc-overlap_media { grid-column: 5 / span 8; }
+  .svc-overlap.is-flipped .svc-overlap_panel { grid-column: 1 / span 6; }
+}
+
+/* --- the ledger ----------------------------------------------------------
+   "What is included" is five short facts. As a bulleted list it is five lines
+   of body copy; as hairline-separated tiles it is a receipt, which is what it
+   actually is. The 1px gap on a ruled ground draws the dividers, so there is
+   no per-cell border to double up at the seams. */
+/* `.lf-lead` is a lead-in for a list inside a column of prose: 1.4rem of top
+   margin and body weight. Above a full-width ledger that sits directly under a
+   photograph it read as an orphaned sentence touching the image. The ledger
+   names itself with a label, and owns the air above it. */
+.svc-ledger-label {
+  margin: clamp(2.75rem, 5vw, 4.5rem) 0 0;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.svc-ledger {
+  display: grid;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
+  margin: 1.25rem 0 0;
+  padding: 0;
+  list-style: none;
+}
+.svc-ledger > li {
+  background: var(--panel);
+  padding: 1.05rem 1.15rem;
+  display: grid;
+  gap: .3rem;
+  align-content: start;
+  padding-left: 1.15rem;
+}
+.svc-ledger > li::before { content: none; }
+.svc-ledger b {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.svc-ledger span {
+  font-size: var(--f-body);
+  line-height: 1.5;
+  color: var(--fg);
+}
+
+/* --- the provider band ---------------------------------------------------
+   Dr. Sung is named ten times in this page's copy and appeared nowhere on it.
+   His portrait is the ONLY asset the practice publishes of him and it exists
+   at exactly 230x300 — so the column is capped at 15rem rather than given a
+   spread's 44vw, which would upscale a 230px file across 600px of screen. Size
+   the component to the asset, not the asset to the component. */
+.svc-provider {
+  display: grid;
+  gap: clamp(1.5rem, 3vw, 2.75rem);
+  align-items: center;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--bleed);
+}
+@media (min-width: 768px) {
+  .svc-provider { grid-template-columns: minmax(0, 15rem) minmax(0, 1fr); }
+}
+.svc-provider_shot {
+  margin: 0;
+  max-width: 15rem;
+  border: 1px solid var(--rule);
+  background: var(--sand);
+  overflow: hidden;
+}
+/* Grayscale at rest, colour on hover — the same treatment the homepage gives
+   its three doctor portraits. Without it his was the only colour photograph in
+   a page of grayscale supporting imagery, which read as an oversight. */
+.svc-provider_shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 23 / 30;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter .6s var(--ease);
+}
+.svc-provider:hover .svc-provider_shot img { filter: none; }
+.svc-provider_body > * + * { margin-top: 1rem; }
+.svc-provider_body h3 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--f-d3);
+  line-height: 1.06;
+  letter-spacing: -.012em;
+  color: var(--fg);
+  max-width: 18ch;
+}
+.svc-provider_role {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.svc-provider_body p {
+  font-size: var(--f-lede);
+  line-height: 1.7;
+  color: var(--fg-body);
+  max-width: 54ch;
+}
+/* Three numbers the copy already states, set as facts rather than buried in a
+   sentence. Not `tg-figures`: that one is a counted tween bound to the
+   homepage's chapter and carries its own background. */
+.svc-stats {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.25rem clamp(1.5rem, 4vw, 3rem);
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+  list-style: none;
+}
+.svc-stats li { display: grid; gap: .15rem; }
+.svc-stats b {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(2.1rem * var(--t-mid));
+  line-height: 1;
+  color: var(--fg);
+}
+.svc-stats span {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+
+/* --- the price card ------------------------------------------------------
+   The cost chapter's lead card. `is-lead` above makes it span two columns;
+   this gives it the sand ground so the money is the one filled panel on an
+   otherwise hairline page. */
+.svc-card.is-price { background: var(--sand); border-color: var(--beige-mid); }
+.svc-card.is-price .svc-card_body { gap: .75rem; }
+.svc-price {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(2.6rem * var(--t-mid));
+  line-height: 1;
+  letter-spacing: -.015em;
+  color: var(--ink);
+}
+.svc-price small {
+  display: block;
+  margin-top: .5rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+/* --- chapter heads on a card chapter -------------------------------------
+   A chapter whose body is a grid rather than a column of prose does not use
+   `lf-split`, so it needs the ordinary chapter head above it. Same rhythm as
+   `rg-head`, one step tighter because a grid starts with a hard edge. */
+.svc-head { margin-bottom: clamp(1.75rem, 3.5vw, 3rem); }
+.svc-head .pe-lede {
+  margin-top: 1.1rem;
+  max-width: 48ch;
+  font-size: var(--f-lede);
+  line-height: 1.7;
+  color: var(--fg-body);
+}
+@media (min-width: 900px) {
+  .svc-head.is-split {
+    display: grid;
+    grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr);
+    gap: clamp(2rem, 5vw, 4.5rem);
+    align-items: end;
+  }
+  .svc-head.is-split .pe-lede { margin-top: 0; }
+}

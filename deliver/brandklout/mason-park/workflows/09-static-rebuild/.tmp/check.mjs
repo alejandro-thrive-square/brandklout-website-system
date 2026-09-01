@@ -90,14 +90,29 @@ for (const file of pages) {
   }
 
   // ---- 5. the prose ceiling, on unbroken runs of <p>
+  // EVERY container that can hold running prose, not just `lf-section`.
+  // When the service page moved from prose sections to cards and overlap
+  // panels this check silently reported "0 words" for a page that still had
+  // two-paragraph panels on it -- a gate that stops matching reports a PASS,
+  // which is the same failure the Elementor wrapper caused in the first place.
+  // Add the container here whenever a new one is introduced.
+  //
+  // `lf-more-in` is deliberately NOT here. The ceiling is on what the reader is
+  // SHOWN, and the whole point of the fold is that a closed <details> shows
+  // nothing. Counting inside one would fail the page for applying the fix.
+  const HOLDERS = [
+    /<section class="lf-section"[^>]*id="([^"]*)"[\s\S]*?<\/section>/g,
+    /<div class="svc-overlap_panel"[\s\S]*?<\/div>\s*<\/div>/g,
+  ];
   let worst = 0, worstAt = "";
-  for (const sec of html.matchAll(/<section class="lf-section"[^>]*id="([^"]*)"[\s\S]*?<\/section>/g)) {
+  for (const re of HOLDERS)
+  for (const sec of html.matchAll(re)) {
     let run = 0;
     for (const part of sec[0].split(/(<p\b[^>]*>[\s\S]*?<\/p>)/)) {
       if (/^<p\b/.test(part)) {
         // a lead-in is a label for the list under it, not a paragraph of prose
         run += /class="lf-lead"/.test(part) ? 0 : words(part);
-        if (run > worst) { worst = run; worstAt = sec[1]; }
+        if (run > worst) { worst = run; worstAt = sec[1] || "panel"; }
       } else if (stripTags(part).trim() || /<(ul|ol|figure|details|table|h[2-6]|blockquote)/.test(part)) {
         run = 0;
       }

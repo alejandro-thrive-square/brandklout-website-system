@@ -370,6 +370,29 @@ So: **the second page carries the same review weight as the canary, and its revi
 promotes the frozen set from "one page's CSS" to a system.** Render it at every breakpoint, and
 read the mobile branch of every shared component it touches — not just the page.
 
+### "It looks different on that page" — measure the report before acting on it
+
+A client reported that the service page's navbar had changed and asked for the homepage's to be
+imported into it. **The markup was byte-identical** — it had been lifted verbatim — and a probe
+of both rendered pages returned identical geometry, background, transparency, link colour, logo
+filter, measured header height and hero offset. Nothing about the navbar differed at all.
+
+What differed was **the photograph behind it**. The homepage's hero is mid-dark across the top,
+so the veil's 0.72 band carries white links comfortably; the service page's featured image is a
+bright close-up whose blown highlight sits exactly under the last nav item and the phone number.
+Same component, same colours, unreadable.
+
+Two things follow, and both are general:
+
+- **Reproduce a visual report as a measurement before you change anything.** "Import the
+  homepage's navbar" would have been a no-op that shipped, and the complaint would have come
+  back. A dozen computed properties across both pages took one script and named the real cause.
+- **A component that floats over client photography must guarantee its own contrast.** Not by
+  picking a darker photograph — there are 34 more treatment pages and 34 more featured images
+  nobody has chosen yet — but by making the scrim under the chrome dark enough for white text
+  *whatever* is behind it. Fixed on the inner-page hero variant only, so the approved homepage
+  hero is untouched.
+
 ## Verification — interaction, not screenshots
 
 A screenshot cannot tell you whether a reveal fired, a counter ran, or reduced-motion is

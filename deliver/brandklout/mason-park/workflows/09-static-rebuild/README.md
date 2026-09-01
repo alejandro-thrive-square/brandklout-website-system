@@ -68,11 +68,38 @@ order, each one a `data-chapter` section:
 | Questions | `ch-questions` | The objections, as an accordion. |
 | The Invitation | `ch-invitation` (dark) | Everything needed to act. Nothing after it but the footer. |
 
-Two frames carry the prose, and which one a chapter uses is a judgement about the chapter, not
-a default: `lf-layout lf-split` puts the chapter tag and heading in a sticky left column with
-the sections beside it, and `lf-layout is-solo` is one column at 72ch for a chapter that is
-only a section or two. A beat with nothing behind it is **dropped, not invented** — a thin
-treatment gets five chapters, not eleven.
+A beat with nothing behind it is **dropped, not invented** — a thin treatment gets five
+chapters, not eleven.
+
+### The service page's own furniture
+
+Client note, 2026-09-01: *"Let's use more cards instead of bullet points. Let's have more
+uncommon layouts and more images please. Remember this is for the services page. The home page
+is currently great."* Everything below is in the `svc-` block at the end of `site.css`, and
+every selector there is either a new `svc-*` class or scoped to `.ch-arrival.is-compact`.
+**The homepage uses none of them, and that is the constraint to preserve** — check it by
+re-rendering `home/index.html` and confirming its four heights have not moved.
+
+| Part | What it is |
+| :--- | :--- |
+| `svc-grid` | The card grid. `is-3` / `is-4` set the columns; `is-lead` gives the first card two of them. |
+| `svc-grid is-stagger` | **The uncommon one.** Even cards drop 2.75rem so the row reads as two ranks. It is a `transform`, so it costs no layout height, and it is confined to ≥900 because a stagger in one column is just a gap. |
+| `svc-card` | Optional `svc-card_media`, then `svc-card_no` / `_name` / `_text`. Reads `--panel`, not `#fff`, so the same card is white on warm and ink on dark — which is why it is not `prop-card_component`. |
+| `svc-overlap` | **The other uncommon one.** A 12-column grid where the photograph takes 1–8 and the copy panel takes 7–12 **in the same row**, so the panel sits *on* the image. `is-flipped` mirrors it. Stacks below 900. |
+| `svc-ledger` | Hairline-separated tiles on a 1px gap. For a list of short facts — "what's included" is a receipt, not prose. Give it a `svc-ledger-label`, not `lf-lead`. |
+| `svc-provider` | Portrait + copy + `svc-stats`. **Sized to the asset**: Dr. Sung is published at 230×300 and nothing larger, so the column caps at 15rem rather than upscaling him across a spread. |
+| `svc-card is-price` | The one filled panel on the page, for the money. |
+
+Where prose still runs in a column, two frames carry it: `lf-layout lf-split` puts the chapter
+tag and heading in a sticky left column with the sections beside it, and `lf-layout is-solo` is
+one column at 72ch. **When you add a new prose container, add it to `HOLDERS` in
+`.tmp/check.mjs`** — the wall-of-text gate matched only `lf-section`, and when this page moved
+to cards it silently reported "0 words" for a page that still had two-paragraph panels on it.
+
+**Photographs.** Eleven of the practice's own frames are safe on a treatment page; the pool and
+what each one shows is recoverable with `git show 0499328:…/site/photos.mjs` plus the alt text
+on `home/index.html`. Small supporting imagery is grayscale at rest and colour on hover, the
+hero and the overlap frames are colour. Nothing on the page is captioned as showing Invisalign.
 
 **The copy is the practice's, and it is re-tagged rather than rewritten.** Structure the
 WordPress editor implied is restored (a bold lead-in becomes `p.lf-lead`, a glyph-prefixed run
