@@ -123,7 +123,7 @@ const seek = async (y) => {
 };
 
 // ------------------------------------------------------- 1. no overflow
-for (const w of [360, 390, 768, 1024, 1440]) {
+for (const w of [360, 390, 768, 899, 900, 1024, 1279, 1280, 1440]) {
   await load(w, 900);
   const over = await evaluate(`(()=>{
     const d=document.documentElement;
@@ -307,6 +307,31 @@ for (const cid of chapterIds) {
 }
 check("every reveal has landed while its chapter is on screen", stuck.length === 0,
   stuck.slice(0, 4).join("  |  "));
+
+// ------------------------------- 8b. scroll containers keep their own gutter
+// `scroll-snap-align: start` aligns the first item to the SCROLLPORT edge, not
+// the content box, so a snap container scrolls its own padding away on load and
+// its first card sits flush against the window while every other section is
+// inset. Measured before the fix: railScroll 56, chipX 0, on 56px of padding.
+// `scroll-padding` is what tells a snap container where its start edge is.
+for (const [w, still] of [[390, true], [1024, true]]) {
+  await load(w, 900, still);
+  const g = await evaluate(`(()=>{
+    const out={};
+    for (const [k, box, item] of [['rail','.pr-rail','.pr-chip'], ['path','.pa-track','.pa-card']]) {
+      const b=document.querySelector(box), i=document.querySelector(item);
+      if (!b || !i) continue;
+      const scroller = getComputedStyle(b).overflowX === 'auto' ? b : b.parentElement;
+      out[k] = { x: Math.round(i.getBoundingClientRect().x), scrolled: Math.round(scroller.scrollLeft),
+                 want: Math.round(parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--bleed')) *
+                       parseFloat(getComputedStyle(document.documentElement).fontSize)) };
+    }
+    return out;
+  })()`);
+  for (const [k, v] of Object.entries(g || {})) {
+    check(`${k} keeps its gutter @ ${w}`, Math.abs(v.x - v.want) <= 2 && v.scrolled === 0, JSON.stringify(v));
+  }
+}
 
 // --------------------------- 9b. the type tier actually reaches the element
 // An unbalanced brace in the token block once made CSS error recovery swallow

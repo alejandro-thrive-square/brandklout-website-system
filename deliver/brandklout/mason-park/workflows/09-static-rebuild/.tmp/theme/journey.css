@@ -400,7 +400,7 @@
    ends on a link rather than an element, so it closes tighter, and Under One
    Roof opens directly under a stacked chapter at narrow widths, where two full
    measures of air read as a gap rather than a break. */
-.ch-together { padding-top: var(--ch-pad); }
+.ch-together { padding-top: var(--ch-pad); padding-bottom: 0; }
 .ch-range { padding-bottom: calc(var(--ch-pad) * .8); }
 @media (max-width: 899px) {
   .ch-relay { padding-bottom: calc(var(--ch-pad) * .7); }
@@ -500,7 +500,7 @@
   text-transform: uppercase;
   color: var(--fg-soft);
 }
-@media (max-width: 767px) { .tg-figures { grid-template-columns: repeat(2, 1fr) } }
+@media (max-width: 899px) { .tg-figures { grid-template-columns: repeat(2, 1fr) } }
 
 /* Deliberately unequal: the pediatric photograph is the taller one, because the
    pediatric dentist is the differentiator. */
@@ -615,7 +615,7 @@
    as a hairline index with a thumbnail, so a visitor finds theirs in one pass
    instead of reading fourteen equal labels.
    ======================================================================== */
-.rg-head { margin-bottom: 4.5rem; }
+.rg-head { margin-bottom: 1.5rem; }
 .rg-arc {
   display: grid;
   gap: 2.5rem;
@@ -866,7 +866,7 @@
   /* Below 900 there is no pin at all, so the scene goes back to document flow
      and the photograph goes back to its own proportions. */
   .pa-pin { min-height: 0; display: block; padding-block: var(--ch-pad); }
-  .pa-track { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; width: auto; padding-bottom: 1rem; }
+  .pa-track { overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: var(--bleed); -webkit-overflow-scrolling: touch; width: auto; padding-bottom: 1rem; }
   .pa-card { width: 78vw; scroll-snap-align: start; }
   .pa-shot img { filter: none; height: auto; aspect-ratio: 4 / 3; }
 }
@@ -932,7 +932,7 @@
 
 .pr-rail { overflow: hidden; padding: .5rem 0 1rem; }
 @media (prefers-reduced-motion: reduce) {
-  .pr-rail { overflow-x: auto; scroll-snap-type: x mandatory; }
+  .pr-rail { overflow-x: auto; scroll-snap-type: x mandatory; scroll-padding-left: var(--bleed); }
   .pr-chip { scroll-snap-align: start; }
 }
 .pr-rail-in { display: flex; gap: 1.4rem; padding: 0 var(--bleed); will-change: transform; }
