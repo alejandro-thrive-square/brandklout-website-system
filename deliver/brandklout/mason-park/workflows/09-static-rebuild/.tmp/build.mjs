@@ -460,13 +460,36 @@ fs.mkdirSync(path.join(DIST, "assets"), { recursive: true });
 // The stylesheet ships as ONE file, because Instatic registers it as a single
 // site-wide code asset. `journey.css` is authored separately only so the design
 // layer stays readable; it is concatenated here, never linked separately.
+// ORDER MATTERS. The fluid root has to be the first rule in the sheet, before
+// any reset, and nothing later may set a root font-size (see
+// deliver/process/04-design/fluid-root.md). It is emitted by
+// scripts/fluid-root.mjs and must never be hand-edited here.
 fs.writeFileSync(
   path.join(DIST, "assets", "site.css"),
   [
+    fs.readFileSync(path.join(HERE, "theme", "fluid-root.css"), "utf8"),
     fs.readFileSync(path.join(HERE, "theme", "site.css"), "utf8"),
     fs.readFileSync(path.join(HERE, "theme", "journey.css"), "utf8"),
   ].join(String.fromCharCode(10)),
 );
+// A BRACE COUNT, because an unbalanced one fails silently and expensively.
+// Splicing a token block into `:root` once dropped its closing brace. CSS error
+// recovery then swallowed the four type tiers below it as if they were
+// declarations, so --t-disp stayed at 1 at every width: the hero headline
+// rendered at its 1440 size on a 360 phone and ran off the screen. Nothing
+// reported it. audit.mjs checks classes, responsive.mjs checks rendered text,
+// and neither can see a stylesheet that parsed into the wrong shape.
+{
+  const css = fs.readFileSync(path.join(DIST, "assets", "site.css"), "utf8")
+    .replace(/\/\*[\s\S]*?\*\//g, "");
+  const open = (css.match(/{/g) || []).length;
+  const close = (css.match(/}/g) || []).length;
+  if (open !== close) {
+    console.error(`  ! site.css braces are unbalanced: ${open} open, ${close} close`);
+    process.exitCode = 1;
+  }
+}
+
 fs.copyFileSync(path.join(HERE, "theme", "site.js"), path.join(DIST, "assets", "site.js"));
 fs.copyFileSync(path.join(HERE, "theme", "journey.js"), path.join(DIST, "assets", "journey.js"));
 

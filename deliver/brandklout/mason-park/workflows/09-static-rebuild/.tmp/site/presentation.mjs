@@ -362,6 +362,11 @@ ${ogImage ? `<meta property="og:image" content="${esc(SITE_URL + ogImage)}">` : 
 <link rel="icon" href="/assets/uploads/2023/08/Dentist-Katy-TX-Logo-2.webp">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<!-- The three families used to be an @import at the top of site.css. They moved
+     here when the fluid root took that position: an @import is only valid before
+     any other rule in a sheet. A link is faster regardless, because an @import
+     cannot begin downloading until the sheet holding it has arrived and parsed. -->
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Karla:wght@500;700&amp;family=Newsreader:ital,opsz,wght@0,6..72,300;0,6..72,400;0,6..72,500;1,6..72,300;1,6..72,400&amp;family=Nunito+Sans:opsz,wght@6..12,400;6..12,600;6..12,700&amp;display=swap">
 <link rel="stylesheet" href="/assets/site.css">
 <script type="application/ld+json">${jsonLd(route)}</script>
 </head>

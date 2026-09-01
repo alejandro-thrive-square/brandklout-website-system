@@ -56,31 +56,65 @@
   --accent: var(--brand);
   --accent-lg: var(--copper);
 
-  /* THE TYPE STEPS. Unitless multipliers, restated at px breakpoints. Plain
-     rem times a multiplier, which is what the standard asks for: rem type, px
-     breakpoints, and nothing else touching the root size. */
-  --t-disp: 1; --t-lg: 1; --t-mid: 1; --t-text: 1;
+  /* ------------------------------------------------------------------
+     THE TYPE SCALE — Dr. Nahlah's proportions, on the house fluid root.
 
-  --f-d1: calc(6.4rem * var(--t-disp));    /* the arrival headline */
-  --f-d2: calc(4.2rem * var(--t-disp));    /* chapter headlines */
-  --f-d3: calc(2.9rem * var(--t-lg));      /* the pinned statement, quotes */
-  --f-h3: calc(1.85rem * var(--t-mid));    /* card and arc headings */
-  --f-h4: calc(1.25rem * var(--t-mid));
-  --f-lede: calc(1.28rem * var(--t-text)); /* the one paragraph per chapter */
-  --f-body: calc(1.0rem * var(--t-text));
-  --f-label: calc(.75rem * var(--t-text)); /* Karla, uppercase, tracked. FLOORED at 12px. */
+     The root now interpolates with viewport width (theme/fluid-root.css, the
+     first rule in the shipped sheet), so every rem below is viewport-relative
+     for free: type, spacing, radii and the container width all move together.
+     That is the answer to "the container seems too small". At 1440 the root is
+     16px and the content box is 1560px, exactly as it was; at 1920 the root is
+     18px and the same token resolves to 1755px, so the design fills a large
+     monitor instead of being stranded in the middle of it.
 
-  --ch-pad: 8.5rem;   /* the vertical rhythm of a chapter */
-  --bleed: 5.5rem;    /* the outer gutter of a full bleed chapter */
+     Sizes are plain rem times a unitless multiplier, stepped at px
+     breakpoints. Never clamp() on a font-size: the root is already doing the
+     fluid work and a clamp() with a live vw term on top of it scales twice.
+     Breakpoints are Webflow's own (1279 / 991 / 767 / 478), so the scale maps
+     one to one onto Designer breakpoints if this is ever converted.
 
-  /* Drawn plaster. Two octaves of fractal noise, no request, no 404. */
-  --stone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+     The five groups, and the ratios, are Dr. Nahlah's, measured out of
+     bk-dr-nahlah/.../site-src/css/01-tokens.css rather than re-invented:
+
+       --t-disp  the steep display slopes: the arrival headline, the numerals
+       --t-lg    the moderate display slopes: chapter headings, statements
+       --t-mid   card and section headings
+       --t-sm    headings sitting just above body copy
+       --t-text  body copy and labels
+
+     NOTE the missing --t-disp tier at 478. Below 479 the root itself is already
+     shrinking, and that IS the reduction display type wants; a tier there fires
+     at 478, where the root has not yet moved, and produces a step UP at the
+     breakpoint. Only the text group needs that tier, to stop body copy
+     following the root down past the 16px floor.
+     ------------------------------------------------------------------ */
+  /* --t-text and --t-ui are NOT declared here. site.css owns them, and this
+     file is concatenated after it: re-declaring either at equal specificity
+     would win at every width and silently disable the phone tier across the
+     whole site. Only the display groups belong to the journey layer. */
+  --t-disp: 1; --t-lg: 1; --t-mid: 1; --t-sm: 1;
+
+  --f-d1: calc(6.66rem * var(--t-disp));   /* arrival headline. 107px at 1440 */
+  --f-d2: calc(4.68rem * var(--t-disp));   /* chapter headlines */
+  --f-d3: calc(3.24rem * var(--t-lg));     /* the pinned statement, the quote */
+  --f-h3: calc(1.71rem * var(--t-mid));    /* arc and card headings */
+  --f-h4: calc(1.25rem * var(--t-sm));
+  --f-lede: calc(1.125rem * var(--t-text)); /* the one paragraph per chapter */
+  --f-body: calc(.975rem * var(--t-text));
+  --f-label: calc(.75rem * var(--t-ui));    /* Karla, uppercase. FLOORED at 12px */
+
+  /* Spacing and the container, in rem so they ride the root too. 97.5rem is
+     1560px at the flat root, which is Dr. Nahlah's --maxw exactly. */
+  --maxw: 97.5rem;
+  --ch-pad: 9rem;     /* the vertical rhythm of a chapter */
+  --bleed: 4.5rem;    /* the outer gutter, Dr. Nahlah's --gutter ceiling */
 }
 
-@media (max-width: 1279px) { :root { --t-disp: .82; --t-lg: .86; --t-mid: .9;  --ch-pad: 7rem;   --bleed: 3.5rem } }
-@media (max-width: 991px)  { :root { --t-disp: .68; --t-lg: .78; --t-mid: .86; --ch-pad: 6rem;   --bleed: 2.5rem } }
-@media (max-width: 767px)  { :root { --t-disp: .54; --t-lg: .66; --t-mid: .82; --ch-pad: 4.75rem; --bleed: 1.5rem } }
-@media (max-width: 478px)  { :root { --t-disp: .46; --t-lg: .58; --t-mid: .8;  --f-lede: 1.05rem } }
+@media (max-width: 1279px) { :root { --t-disp: .816; --t-lg: .816; --t-mid: .812; --t-sm: .834; --ch-pad: 7.5rem; --bleed: 3.5rem } }
+@media (max-width: 991px)  { :root { --t-disp: .688; --t-lg: .678; --t-mid: .75;  --t-sm: .82;  --ch-pad: 6.5rem; --bleed: 2.5rem } }
+@media (max-width: 767px)  { :root { --t-disp: .534; --t-lg: .594; --ch-pad: 5.25rem; --bleed: 1.5rem } }
+/* No --t-disp here, deliberately. See the note above. */
+@media (max-width: 478px)  { :root { --t-lg: .691; --t-mid: .872; --t-sm: .95; --ch-pad: 4.5rem } }
 
 .ch[data-theme="dark"] {
   --bg: var(--ink-deep); --bg-2: var(--ink-mid); --panel: var(--ink-mid);
@@ -109,7 +143,7 @@
 }
 .ch .wrap {
   width: 100%;
-  max-width: 92rem;
+  max-width: var(--maxw);
   margin-left: auto;
   margin-right: auto;
   padding: 0 var(--bleed);
@@ -189,7 +223,7 @@
   background: var(--brand);
   color: #fff;
   font-family: var(--font-ui);
-  font-size: .8rem;
+  font-size: calc(.8rem * var(--t-text));
   font-weight: 700;
   letter-spacing: .14em;
   text-transform: uppercase;
@@ -270,7 +304,7 @@
   position: relative;
   z-index: 2;
   width: 100%;
-  max-width: 92rem;
+  max-width: var(--maxw);
   margin: 0 auto;
   padding: 0 var(--bleed);
 }
@@ -404,7 +438,7 @@
   padding-top: 2rem;
   border-top: 1px solid var(--rule);
 }
-.re-after p { font-size: 1.02rem; line-height: 1.78; }
+.re-after p { font-size: calc(1.02rem * var(--t-text)); line-height: 1.78; }
 /* The turn of the chapter. It sits under the photograph rather than at the end
    of the paragraph, so the answer lands on the picture of the room it is
    describing. */
@@ -498,7 +532,7 @@
   align-items: baseline;
   gap: .9rem;
   padding-top: 1.1rem;
-  font-size: .95rem;
+  font-size: calc(.95rem * var(--t-text));
   line-height: 1.6;
   color: var(--fg-body);
 }
@@ -534,9 +568,9 @@
 }
 .vs-row.is-head .vs-a { color: var(--brand); }
 .vs-row.is-head .vs-b { color: var(--fg-soft); }
-.vs-a { color: var(--ink); font-weight: 600; font-size: 1rem; line-height: 1.55; }
-.vs-b { color: var(--fg-soft); font-size: .95rem; line-height: 1.55; }
-.vs-mid { display: grid; place-items: center; color: var(--rule-strong); font-size: .7rem; }
+.vs-a { color: var(--ink); font-weight: 600; font-size: calc(1rem * var(--t-text)); line-height: 1.55; }
+.vs-b { color: var(--fg-soft); font-size: calc(.95rem * var(--t-text)); line-height: 1.55; }
+.vs-mid { display: grid; place-items: center; color: var(--rule-strong); font-size: calc(.7rem * var(--t-text)); }
 .vs-mid i { width: 6px; height: 6px; border: 1px solid var(--beige-mid); transform: rotate(45deg); }
 @media (max-width: 767px) {
   .vs-row { grid-template-columns: 1fr; gap: .5rem; padding: 1.1rem 0; }
@@ -545,7 +579,7 @@
   .vs-a::before, .vs-b::before {
     display: block;
     font-family: var(--font-ui);
-    font-size: .75rem;
+    font-size: calc(.75rem * var(--t-text));
     font-weight: 700;
     letter-spacing: .18em;
     text-transform: uppercase;
@@ -573,7 +607,7 @@
   text-transform: uppercase;
   color: var(--fg-soft);
 }
-.mq-row b { color: var(--copper); font-size: .5rem; }
+.mq-row b { color: var(--copper); font-size: calc(.5rem * var(--t-text)); }
 
 /* ===========================================================================
    CHAPTER 03 — THE RANGE
@@ -586,7 +620,7 @@
   display: grid;
   gap: 2.5rem;
   align-items: center;
-  max-width: 92rem;
+  max-width: var(--maxw);
   margin: 0 auto;
   padding: 3.5rem var(--bleed);
 }
@@ -651,12 +685,12 @@
 .rg-name {
   display: block;
   font-family: var(--font-display);
-  font-size: 1.2rem;
+  font-size: calc(1.2rem * var(--t-text));
   font-weight: 400;
   color: var(--fg);
   line-height: 1.3;
 }
-.rg-blurb { display: block; grid-column: 2; font-size: .875rem; color: var(--fg-soft); line-height: 1.45; margin-top: .15rem; }
+.rg-blurb { display: block; grid-column: 2; font-size: calc(.875rem * var(--t-text)); color: var(--fg-soft); line-height: 1.45; margin-top: .15rem; }
 .rg-go { color: var(--accent); opacity: 0; transform: translateX(-.5rem); transition: all .35s var(--ease); }
 .rg-item > a:hover .rg-go { opacity: 1; transform: none; }
 .rg-foot { margin-top: 3rem; }
@@ -677,7 +711,7 @@
 .pe-grid {
   display: grid;
   gap: 2.5rem;
-  max-width: 92rem;
+  max-width: var(--maxw);
   margin: 0 auto;
   padding: 0 var(--bleed);
 }
@@ -720,7 +754,7 @@
   color: var(--fg-soft);
   margin: .4rem 0 .9rem;
 }
-.pe-blurb { font-size: .95rem; line-height: 1.68; }
+.pe-blurb { font-size: calc(.95rem * var(--t-text)); line-height: 1.68; }
 
 /* The band closes the chapter, so the chapter has no padding left under it. */
 .ch-people { padding-bottom: 0; }
@@ -737,6 +771,11 @@
   padding: 3.5rem var(--bleed) 2.2rem;
   background: linear-gradient(180deg, transparent, rgba(30, 36, 38, .9));
 }
+/* The fixed chapter readout lives in the bottom right corner from 992 up, and
+   this band's link sits in exactly that spot. The band gives way, not the
+   readout: the readout is chrome and has to stay where the eye learns to find
+   it. */
+@media (min-width: 992px) { .pe-band-in { padding-bottom: 5rem; } }
 .pe-band-in p { color: #fff; font-size: var(--f-lede); max-width: 34ch; margin: 0; }
 
 /* ===========================================================================
@@ -745,8 +784,30 @@
    is inside step three, where the objection actually lands.
    ======================================================================== */
 .ch-path { padding: 0; background: var(--bg); }
-.pa-pin { padding: var(--ch-pad) 0; }
-.pa-head { max-width: 92rem; margin: 0 auto 3.5rem; padding: 0 var(--bleed); }
+/* A PINNED SCENE MUST FIT THE VIEWPORT, and after the fluid root went in this
+   one did not: at 1920 the root is 18px, every rem in it grew 12.5%, and the
+   scene measured 1239px inside a 1000px window. Pinned, that puts the progress
+   bar and the bottom of every card permanently off screen, which is exactly
+   what "the animation should work when they are in the viewport" describes.
+   A scene that is 100svh tall always reports scrollHeight === clientHeight, so
+   the overflow is invisible to the obvious check; verify-journey.mjs measures
+   the contents against the box instead.
+
+   The fix is to size the scene in svh rather than rem, so it is bound to the
+   window instead of to the type scale. Everything inside it that would
+   otherwise grow without limit is capped the same way. */
+.pa-pin {
+  min-height: 100svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding-block: clamp(2rem, 5svh, 4.5rem);
+}
+.pa-head { max-width: var(--maxw); margin: 0 auto clamp(1.5rem, 4svh, 3rem); padding: 0 var(--bleed); }
+/* One step down from the other chapter headings. A scene that has to fit the
+   window cannot afford the full display size, and a two line heading at --f-d2
+   was 175px of the budget on its own at 1920. */
+.pa-head h2 { font-size: var(--f-d3); }
 .pa-head h2 { max-width: 20ch; }
 .pa-track {
   display: flex;
@@ -768,7 +829,9 @@
 .pa-shot { overflow: hidden; margin-bottom: .4rem; }
 .pa-shot img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  /* Height, not aspect-ratio: the card is inside a scene with a fixed height
+     budget, so the photograph is the thing that has to give. */
+  height: clamp(8rem, 20svh, 14rem);
   object-fit: cover;
   filter: grayscale(1);
   transition: filter .6s var(--ease);
@@ -783,13 +846,13 @@
   opacity: .7;
 }
 .pa-card h3 { font-size: var(--f-h4); }
-.pa-card p { font-size: .95rem; line-height: 1.68; }
+.pa-card p { font-size: calc(.95rem * var(--t-text)); line-height: 1.68; }
 .pa-card h3 + p { color: var(--fg-body); }
 .pa-card.is-cta { background: var(--sand); border-color: var(--beige-mid); justify-content: center; }
 .pa-card.is-cta h3 { font-size: var(--f-h3); }
 .pa-card.is-cta .button { align-self: flex-start; margin-top: .5rem; }
-.pa-call { font-size: .85rem; color: var(--fg-soft); }
-.pa-bar { max-width: 92rem; margin: 2.5rem auto 0; padding: 0 var(--bleed); }
+.pa-call { font-size: calc(.85rem * var(--t-text)); color: var(--fg-soft); }
+.pa-bar { max-width: var(--maxw); margin: clamp(1.25rem, 3svh, 2.5rem) auto 0; padding: 0 var(--bleed); }
 .pa-bar i { display: block; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left center; }
 .pa-bar::before { content: ""; display: block; height: 2px; background: var(--rule); margin-bottom: -2px; }
 /* Above the width where the whole track fits, pinning would hold the reader
@@ -797,10 +860,15 @@
 .ch-path.is-static .pa-track { flex-wrap: wrap; width: auto; }
 .ch-path.is-static .pa-card { width: auto; flex: 1 1 17rem; }
 .ch-path.is-static .pa-bar { display: none; }
+.ch-path.is-static .pa-pin { min-height: 0; display: block; padding-block: var(--ch-pad); }
+.ch-path.is-static .pa-shot img { height: auto; aspect-ratio: 4 / 3; }
 @media (max-width: 899px) {
+  /* Below 900 there is no pin at all, so the scene goes back to document flow
+     and the photograph goes back to its own proportions. */
+  .pa-pin { min-height: 0; display: block; padding-block: var(--ch-pad); }
   .pa-track { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; width: auto; padding-bottom: 1rem; }
   .pa-card { width: 78vw; scroll-snap-align: start; }
-  .pa-shot img { filter: none; }
+  .pa-shot img { filter: none; height: auto; aspect-ratio: 4 / 3; }
 }
 
 /* ===========================================================================
@@ -811,7 +879,7 @@
 .pr-head { display: grid; gap: 2rem; margin-bottom: 4.5rem; }
 @media (min-width: 960px) { .pr-head { grid-template-columns: 1.1fr .9fr; align-items: end; gap: 4rem; } }
 .pr-note {
-  font-size: .95rem;
+  font-size: calc(.95rem * var(--t-text));
   line-height: 1.75;
   color: var(--fg-soft);
   max-width: 42ch;
@@ -877,7 +945,7 @@
   border: 1px solid var(--rule);
 }
 .pr-chip p {
-  font-size: .95rem;
+  font-size: calc(.95rem * var(--t-text));
   line-height: 1.68;
   color: var(--fg-body);
   display: -webkit-box;
@@ -907,7 +975,7 @@
   flex-wrap: wrap;
   align-items: center;
   gap: 1.5rem clamp(1.5rem, 4vw, 3.5rem);
-  max-width: 92rem;
+  max-width: var(--maxw);
   margin: 0 auto;
   padding: 2rem var(--bleed);
 }
@@ -947,7 +1015,7 @@
   color: var(--accent);
   margin-bottom: .6rem;
 }
-.iv-facts dd { margin: 0; font-size: .95rem; line-height: 1.7; color: var(--fg-body); }
+.iv-facts dd { margin: 0; font-size: calc(.95rem * var(--t-text)); line-height: 1.7; color: var(--fg-body); }
 .iv-facts dd a { color: var(--fg-body); text-decoration: none; border-bottom: 1px solid var(--rule-strong); }
 .iv-facts dd a:hover { color: #fff; }
 .iv-facts b { color: var(--fg); font-weight: 600; }
@@ -1012,7 +1080,7 @@
   transition: transform .35s var(--ease);
 }
 .ch-invitation .faq_item[open] .faq_question::after { transform: rotate(-135deg); margin-top: -.2rem; }
-.ch-invitation .faq_answer { padding: 0 3rem 1.5rem 0; font-size: .95rem; line-height: 1.75; color: var(--fg-body); }
+.ch-invitation .faq_answer { padding: 0 3rem 1.5rem 0; font-size: calc(.95rem * var(--t-text)); line-height: 1.75; color: var(--fg-body); }
 .ch-invitation .faq_answer a { color: var(--accent); }
 
 /* ===========================================================================
@@ -1044,7 +1112,7 @@
   backdrop-filter: blur(6px);
   color: #fff;
   font-family: var(--font-ui);
-  font-size: .75rem;
+  font-size: calc(.75rem * var(--t-text));
   font-weight: 700;
   letter-spacing: .18em;
   text-transform: uppercase;

@@ -268,6 +268,115 @@ const counters = await evaluate(`[...document.querySelectorAll('.tg-fig b')].map
 check("counters land on their stated values",
   JSON.stringify(counters) === JSON.stringify(["3", "6mo", "35", "0%"]), counters.join(", "));
 
+// ------------------------------------- 9. every reveal lands, in the viewport
+// The complaint this check exists to answer: "the animation should work when
+// they are in the viewport." A reveal that has already finished before its
+// chapter is on screen is invisible, and so is one whose trigger was measured
+// against a document height that has since changed. Walk the page chapter by
+// chapter, park each one in the middle of the viewport, and assert that every
+// element the timeline touches has reached its resting state THERE.
+const REVEALED = ".chapter-tag span, [data-split], .rg-body, .rg-item, .pe-card .pe-note," +
+  " .pe-card h3, .tg-shot, .vs-row, .iv-facts > div, .pr-mark, .ar-lede, .ar-actions, .ar-meta";
+const stuck = [];
+const chapterIds = await evaluate(
+  `[...document.querySelectorAll('section[data-chapter]')].map(s=>s.id)`);
+for (const cid of chapterIds) {
+  const mid = await evaluate(`(()=>{
+    const s=document.getElementById(${JSON.stringify(cid)});
+    const r=s.getBoundingClientRect();
+    return r.top + scrollY + r.height/2 - innerHeight/2;
+  })()`);
+  await seek(Math.max(0, mid));
+  await wait(1200);   // the longest reveal is 1.15s; let it finish
+  const bad = await evaluate(`(()=>{
+    const s=document.getElementById(${JSON.stringify(cid)});
+    return [...s.querySelectorAll(${JSON.stringify(REVEALED)})].filter(el=>{
+      const r=el.getBoundingClientRect();
+      // Only judge what is actually on screen at this scroll position.
+      if (r.bottom < 0 || r.top > innerHeight || r.width === 0) return false;
+      const cs=getComputedStyle(el);
+      if (el.closest('[aria-hidden="true"]') || el.hasAttribute('aria-hidden')) return false;
+      if (Number(cs.opacity) < 0.99) return true;
+      if (cs.visibility === 'hidden') return true;
+      // A residual translate means the entrance never ran to completion.
+      const m=new DOMMatrixReadOnly(cs.transform);
+      return Math.abs(m.m42) > 1.5;
+    }).map(el=>(el.className||el.tagName)+'@'+Math.round(el.getBoundingClientRect().top));
+  })()`);
+  if (bad.length) stuck.push(cid + ": " + bad.slice(0, 4).join(", "));
+}
+check("every reveal has landed while its chapter is on screen", stuck.length === 0,
+  stuck.slice(0, 4).join("  |  "));
+
+// --------------------------- 9b. the type tier actually reaches the element
+// An unbalanced brace in the token block once made CSS error recovery swallow
+// all four type tiers as if they were declarations. --t-disp stayed at 1 at
+// every width, so the hero headline rendered at its 1440 size on a 360 phone
+// and ran off the screen. Nothing caught it: audit.mjs checks classes,
+// responsive.mjs checks rendered text size, and neither can see a stylesheet
+// that parsed into the wrong shape. This asserts the tier reaches the glyph.
+//
+// The shell, not the document, is the thing to measure. `body { overflow-x:
+// hidden }` makes a document-level check report nothing while a headline is
+// silently clipped, and a grid item's default `min-width: auto` means the
+// single longest word is what actually binds.
+const tierRows = [];
+for (const [w, maxDisp] of [[360, 0.6], [768, 0.72], [1440, 1.01]]) {
+  await load(w, 800);
+  const r = await evaluate(`(()=>{
+    const h1=document.querySelector('.ar-title');
+    const shell=h1.parentElement;
+    const nav=document.querySelector('.navbar_component');
+    const hero=document.querySelector('.ch-arrival');
+    return {
+      disp: parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--t-disp')),
+      h1: Math.round(parseFloat(getComputedStyle(h1).fontSize)),
+      clip: shell.scrollWidth - shell.clientWidth,
+      overlay: Math.round(hero.getBoundingClientRect().y - nav.getBoundingClientRect().y),
+    };
+  })()`);
+  tierRows.push(`${w}: t-disp ${r.disp}, h1 ${r.h1}px, clip ${r.clip}, overlay ${r.overlay}`);
+  check(`type tier steps at ${w}`, r.disp <= maxDisp, `--t-disp ${r.disp}`);
+  check(`hero headline is not clipped at ${w}`, r.clip <= 1, `shell overflow ${r.clip}px`);
+  check(`header overlays the hero at ${w}`, Math.abs(r.overlay) <= 1, `hero sits ${r.overlay}px below the nav`);
+}
+
+// ------------------------------------------------- 10. the root proof
+// Read the computed root at each breakpoint and compare it against the table in
+// scripts/fluid-root.mjs, so the stylesheet and the generator can never drift.
+// Assert the page LOADED first: about:blank reports a perfectly plausible 16px
+// root and would pass every assertion below it.
+const rootRows = [];
+for (const [w, want] of [[360, null], [390, 13.76], [768, 16], [1440, 16], [1920, 18]]) {
+  await load(w, 900);
+  const got = await evaluate(`(()=>{
+    const probe=document.querySelector('.ch-arrival h1');
+    if(!probe) return null;
+    return Math.round(parseFloat(getComputedStyle(document.documentElement).fontSize)*100)/100;
+  })()`);
+  rootRows.push(`${w}:${got}`);
+  if (got === null) { check(`root proof @ ${w}`, false, "page did not load"); continue; }
+  if (want !== null) check(`root font-size @ ${w} is ${want}px`, Math.abs(got - want) < 0.06, `got ${got}`);
+}
+
+// ------------------------------------------------- 11. the pin still fits
+// A scene that is 100svh tall always reports scrollHeight === clientHeight, so
+// that comparison proves nothing. Measure the pinned chapter's own contents
+// against its box at 1920, where the fluid root makes them 12.5% larger.
+await load(1920, 1000);
+await seek(await evaluate(`document.getElementById('pathPin').getBoundingClientRect().top + scrollY + 200`));
+const pinFit = await evaluate(`(()=>{
+  const pin=document.getElementById('pathPin');
+  const box=pin.getBoundingClientRect();
+  const over=[...pin.querySelectorAll('.pa-card')].filter(c=>{
+    const r=c.getBoundingClientRect();
+    return r.height > box.height + 2;
+  }).length;
+  return {pinH: Math.round(box.height), vh: innerHeight, over};
+})()`);
+check("pinned chapter fits the viewport at 1920",
+  pinFit.over === 0 && pinFit.pinH <= pinFit.vh + 2, JSON.stringify(pinFit));
+
 check("no console errors", consoleErrors.length === 0, consoleErrors.slice(0, 3).join(" || "));
 
 // --------------------------------------------- 9. reduced motion is complete
