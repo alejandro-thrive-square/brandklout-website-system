@@ -5260,12 +5260,16 @@ textarea {
 }
 .journey_page .section_header.is-center .section_header-title {
   grid-column: 1;
-  font-size: var(--size-display-sm);
+  /* --size-h2, which is what heading-style-h2 already sets. The override that
+     used to be here pushed every inner-page section head to display size, where
+     it matched the page's own H1 and nothing outranked anything. See the note in
+     type-probe.mjs. */
+  font-size: var(--size-h2);
   font-weight: 300;
-  line-height: 1.04;
-  letter-spacing: -0.015em;
+  line-height: 1.06;
+  letter-spacing: -0.01em;
   margin: 0;
-  max-width: 18ch;
+  max-width: 22ch;
 }
 /* An h3-level section head stays an h3: this scopes on the class the build
    actually uses, so a smaller heading is not blown up to display size. */
@@ -5715,22 +5719,31 @@ textarea {
    An honest disclosure, not a hatched placeholder. The reference has the same
    gap and fills it with a comment to itself; this says the thing out loud and
    routes to the gallery. */
+/* Two columns, like every other row on this page. As a single left-hand column
+   on a full-width stone panel it left the right 55% empty, and an empty half of
+   a textured band reads as a missing image rather than as space. */
 .proof-note_component {
   padding-block: var(--section);
 }
 .proof-note_inner {
   padding-inline: var(--gutter);
-  max-width: 62rem;
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
+  gap: var(--space-medium) var(--space-xxlarge);
+  align-items: start;
 }
 .proof-note_title {
-  margin: 0 0 var(--space-medium);
+  margin: 0;
   font-family: var(--font-display);
   font-weight: 300;
-  font-size: var(--size-display-sm);
-  line-height: 1.04;
-  letter-spacing: -0.015em;
+  /* A step down from the page's main heads. This is a disclosure about what is
+     NOT here yet, and giving it the same weight as "Who it suits" would be
+     advertising the gap. */
+  font-size: calc(2.6rem * var(--t-heading));
+  line-height: 1.06;
+  letter-spacing: -0.01em;
   color: var(--fg);
-  max-width: 18ch;
+  max-width: 16ch;
 }
 .proof-note_text {
   margin: 0;
@@ -5741,6 +5754,30 @@ textarea {
 }
 .proof-note_actions {
   margin-top: var(--space-large);
+}
+@media (max-width: 991px) {
+  .proof-note_inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- the "also in this category" head ------------------------------------
+   `.section_header.is-split` was the one head on the page the rollout never
+   picked up: `.is-center` was handled and this variant was not, so the related
+   treatments heading stayed at its original h3 while every other head on the
+   page moved to display scale. It ended the page on the only heading that
+   looked like it belonged to the old design.
+
+   A step below the main heads on purpose: this is the "if not this, then one of
+   these" beat, and it should not compete with the section that sells the
+   treatment the reader is actually on. */
+.journey_page .section_header.is-split h2,
+.journey_page .section_header.is-split h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: calc(2.6rem * var(--t-heading));
+  line-height: 1.06;
+  margin: 0;
 }
 
 /* --- cost and payment ---------------------------------------------------- */
@@ -5833,4 +5870,22 @@ textarea {
    Reused rather than restyled, so a review looks like a review everywhere. */
 .svc-reviews_grid .rail_card {
   width: auto;
+}
+
+
+/* --- inner-page section heads, one size ----------------------------------
+   `.display-lg` is the HOME page's chapter-head step (76px). On a service page
+   it collided with the page's own H1, which is also 76px, so the title did not
+   outrank its own sections. These four components carry `.display-lg` in the
+   markup and are re-stepped here rather than in the renderer, so the class
+   keeps meaning "chapter head" on the page it was written for.
+
+   Measured with `node type-probe.mjs neck-lift.html`. */
+.journey_page .suits_title,
+.journey_page .cost_head h2,
+.journey_page .svc-reviews_head h2 {
+  font-size: var(--size-h2);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  max-width: 22ch;
 }
