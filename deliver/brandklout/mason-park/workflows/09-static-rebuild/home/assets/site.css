@@ -2271,6 +2271,26 @@ body.nav-open.has-journey .navbar_component .navbar_logo { filter: none; }
 body.nav-open.has-journey .navbar_component .navbar_link { color: var(--ink); }
 body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); border-color: var(--beige); }
 
+/* THE DROPDOWN IS NOT PART OF THE INVERSION. Every rule above reaches
+   `.navbar_component .navbar_link` -- which includes the links inside the
+   dropdown panel, and that panel is an opaque white card in all three states.
+   So over the hero the panel painted white text on white: invisible, and
+   invisible in a screenshot too, because a closed navbar looks correct.
+   Restate the panel's own colours last, after all three states, so the card
+   reads the same wherever it is opened. */
+.has-journey .navbar_component .navbar_dropdown-list .navbar_link,
+.has-journey .navbar_component.is-solid .navbar_dropdown-list .navbar_link,
+html:not(.jr-ready) .has-journey .navbar_component .navbar_dropdown-list .navbar_link,
+body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link {
+  color: var(--body);
+}
+.has-journey .navbar_component .navbar_dropdown-list .navbar_link:hover,
+.has-journey .navbar_component.is-solid .navbar_dropdown-list .navbar_link:hover,
+html:not(.jr-ready) .has-journey .navbar_component .navbar_dropdown-list .navbar_link:hover,
+body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link:hover {
+  color: var(--brand);
+}
+
 /* ===========================================================================
    THE INNER PAGE PARTS
    Added with the first core page. Everything above this line was written for
@@ -3169,4 +3189,748 @@ body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); 
     align-items: end;
   }
   .svc-head.is-split .pe-lede { margin-top: 0; }
+}
+
+/* ===========================================================================
+   THE PRACTICE PAGES' OWN FURNITURE — /about-us/ and /our-team/
+   Added 2026-09-01 on the client's note: "Make variations to the sections so
+   we make sure they are not equal throughout the site."
+
+   THE SAME CONSTRAINT THE svc- BLOCK WORKS UNDER: the homepage and the
+   Invisalign page are approved and must not move a pixel. Every selector below
+   is either a NEW class those two pages do not use, or is scoped to a chapter
+   class that exists only on these two pages — `ch-dateline`, `ch-premise`,
+   `ch-family`, `ch-kit`, `ch-siblings`, `ch-word`, `ch-visit`, `ch-leads`,
+   `ch-schools`, `ch-named`, `ch-outside`. Nothing here is a bare element or a
+   shared component. Check that before adding to this block, and re-render both
+   approved pages afterwards: their four heights are the test, not a look.
+
+   WHAT IS DELIBERATELY *NOT* VARIED. The arrival chapter, the credential
+   strip, the breadcrumb, the invitation, the header and the footer are the
+   same on every page and are meant to be. Varying the chrome is not variety,
+   it is a site that looks like four different sites. What varies is the body
+   of each chapter, and no two chapters across the four pages now share a
+   layout.
+   ======================================================================== */
+
+/* --- the missing button variant ------------------------------------------
+   The journey layer restyles `.ch .button` at two-class specificity, which
+   lands AFTER `.button.is-ghost` in the sheet and therefore beats it: an
+   outline button inside any chapter came out solid brand. The layer only ever
+   defined `is-ghost-light`, for dark grounds, because until now no chapter had
+   a secondary action on a light one. Neither approved page uses `is-ghost` at
+   all, so this cannot move them - checked before adding. */
+.ch .button.is-ghost {
+  background: transparent;
+  color: var(--fg);
+  border-color: var(--rule-strong);
+}
+.ch .button.is-ghost::after { background: var(--ink); }
+.ch .button.is-ghost:hover { color: #fff; border-color: var(--ink); }
+
+/* --- the masthead ---------------------------------------------------------
+   ABOUT, CHAPTER 1. A dateline, not a chapter: four ruled cells across the
+   full width, no heading, no lede. It sits directly under the breadcrumb and
+   states what the practice IS before the page starts arguing. Every other
+   chapter on the site opens with a tag and an h2; this one deliberately opens
+   with neither, so the page starts on a different note from the other three.
+   `tg-figures` is the near neighbour and is wrong here: it is a counted tween
+   bound to the homepage's chapter and paints its own ground. */
+.ch-dateline { padding: 0; background: var(--white); }
+.ab-dateline {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--bleed);
+  border-top: 1px solid var(--beige);
+  border-bottom: 1px solid var(--beige);
+}
+@media (min-width: 768px) { .ab-dateline { grid-template-columns: repeat(4, minmax(0, 1fr)); } }
+.ab-dateline > div {
+  padding: clamp(1.5rem, 3vw, 2.4rem) clamp(1rem, 2vw, 1.75rem) clamp(1.5rem, 3vw, 2.4rem) 0;
+  display: grid;
+  gap: .5rem;
+  align-content: start;
+  border-left: 1px solid var(--beige);
+  padding-left: clamp(1rem, 2vw, 1.75rem);
+}
+/* The first cell in each row loses its rule, so the outer edge is the
+   container's own and not a stray hairline in the gutter. */
+.ab-dateline > div:nth-child(odd) { border-left: 0; padding-left: 0; }
+@media (min-width: 768px) {
+  .ab-dateline > div:nth-child(odd) { border-left: 1px solid var(--beige); padding-left: clamp(1rem, 2vw, 1.75rem); }
+  .ab-dateline > div:first-child { border-left: 0; padding-left: 0; }
+}
+.ab-dateline dt {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+.ab-dateline dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(1.9rem * var(--t-mid));
+  line-height: 1.1;
+  letter-spacing: -.012em;
+  color: var(--ink);
+}
+.ab-dateline dd small {
+  display: block;
+  margin-top: .4rem;
+  font-family: var(--font-body);
+  font-size: var(--f-body);
+  line-height: 1.55;
+  color: var(--muted);
+}
+
+/* --- the opener ----------------------------------------------------------
+   ABOUT, CHAPTER 2. The one place on the site with a drop cap, and the one
+   figure that runs off the right edge of the container instead of sitting
+   inside it. The measure is deliberately narrow (54ch) against a tall 3:4
+   frame, so the chapter reads as a page from a magazine rather than as a
+   two-column split. `layout-split` and `svc-overlap` are the two existing
+   pair layouts and neither breaks the container edge. */
+.ab-open {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.5rem);
+  align-items: start;
+}
+@media (min-width: 900px) {
+  .ab-open { grid-template-columns: minmax(0, 1fr) minmax(0, .82fr); align-items: end; }
+}
+.ab-open_col > * + * { margin-top: 1.15rem; }
+.ab-open_col p {
+  font-size: var(--f-lede);
+  line-height: 1.75;
+  max-width: 54ch;
+}
+/* The drop cap. `initial-letter` is still not in Firefox, so this is the
+   float, which needs an explicit line-height to sit on the third baseline
+   rather than wherever the font's own leading puts it. */
+.ab-open_col .ab-dropcap::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(4.1rem * var(--t-mid));
+  line-height: .84;
+  padding: .06em .14em 0 0;
+  color: var(--copper);
+}
+.ab-open_fig { margin: 0; position: relative; }
+.ab-open_fig img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+.ab-open_fig figcaption {
+  margin-top: .7rem;
+  padding-left: .8rem;
+  border-left: 1.5px solid var(--accent);
+  font-family: var(--font-ui);
+  font-size: calc(.78rem * var(--t-ui));
+  line-height: 1.45;
+  color: var(--muted);
+}
+/* Off the edge. `.ch .wrap` caps at --maxw and pads by --bleed; pulling the
+   figure by the bleed puts its right edge on the viewport, which no other
+   figure on the site does. Only above 900, where there are two columns for it
+   to be the right-hand one of. */
+@media (min-width: 900px) {
+  .ab-open_fig { margin-right: calc(-1 * var(--bleed)); }
+}
+
+/* --- the vignettes -------------------------------------------------------
+   ABOUT, CHAPTER 3. The practice's own three headings for its own three
+   doctors, kept verbatim. NOT a card grid and NOT the homepage's dark plates:
+   three columns hung under one hairline, each with a small round portrait
+   inset beside the name. The round crop exists nowhere else in the system and
+   is the point — it is the one component that reads as a masthead byline. */
+.ab-vignettes {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3.25rem);
+  border-top: 1px solid var(--rule-strong);
+  padding-top: clamp(1.75rem, 3vw, 2.75rem);
+}
+@media (min-width: 860px) { .ab-vignettes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.ab-vignette { display: grid; gap: .9rem; align-content: start; }
+.ab-vig_head { display: flex; align-items: center; gap: .9rem; }
+.ab-vig_face {
+  width: 3.4rem;
+  height: 3.4rem;
+  flex: none;
+  border-radius: 50%;
+  overflow: hidden;
+  background: var(--sand);
+  border: 1px solid var(--rule);
+}
+.ab-vig_face img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 22%;
+  filter: grayscale(1);
+  transition: filter .6s var(--ease);
+}
+.ab-vignette:hover .ab-vig_face img { filter: none; }
+.ab-vig_name {
+  display: grid;
+  gap: .1rem;
+  font-family: var(--font-ui);
+  font-size: calc(.95rem * var(--t-text));
+  font-weight: 700;
+  color: var(--fg);
+}
+.ab-vig_name span {
+  font-weight: 500;
+  font-size: var(--f-label);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.ch .ab-vignette h3 {
+  font-size: var(--f-h3);
+  line-height: 1.14;
+  max-width: 16ch;
+}
+.ab-vignette p {
+  font-size: var(--f-body);
+  line-height: 1.7;
+  color: var(--fg-body);
+  margin: 0;
+}
+
+/* --- the spec sheet ------------------------------------------------------
+   ABOUT, CHAPTER 4. Six instruments, each with real copy from the practice's
+   own technology page. A sticky INDEX on the left with the detail beside it —
+   the reader can see the whole list while reading any one of them, which a
+   stack of six headings cannot do. `lf-split` is the existing sticky column
+   and it holds the chapter head, not a navigable index; this one is a list of
+   in-page links, which is why it is its own component. */
+.ab-spec { display: grid; gap: clamp(2rem, 4vw, 3.5rem); align-items: start; }
+@media (min-width: 900px) {
+  .ab-spec { grid-template-columns: minmax(0, .34fr) minmax(0, 1fr); }
+  .ab-spec_index { position: sticky; top: 7.5rem; }
+}
+.ab-spec_index ol {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border-top: 1px solid var(--rule);
+  counter-reset: spec;
+}
+.ab-spec_index li { border-bottom: 1px solid var(--rule); counter-increment: spec; }
+.ab-spec_index li::before { content: none; }
+.ab-spec_index a {
+  display: flex;
+  align-items: baseline;
+  gap: .75rem;
+  padding: .8rem 0;
+  font-family: var(--font-ui);
+  font-size: calc(.85rem * var(--t-text));
+  font-weight: 600;
+  color: var(--fg-body);
+  text-decoration: none;
+  transition: color .3s var(--ease), padding-left .3s var(--ease);
+}
+.ab-spec_index a::before {
+  content: counter(spec, decimal-leading-zero);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .12em;
+  color: var(--accent);
+  flex: none;
+}
+.ab-spec_index a:hover { color: var(--accent); padding-left: .5rem; }
+.ab-spec_body { display: grid; gap: clamp(1.75rem, 3vw, 2.5rem); }
+.ab-spec_item {
+  display: grid;
+  gap: .7rem;
+  padding-bottom: clamp(1.75rem, 3vw, 2.5rem);
+  border-bottom: 1px solid var(--rule);
+  /* The sticky index is 7.5rem from the top; an anchor jump has to clear the
+     floating header by at least that much or the heading lands under it. */
+  scroll-margin-top: 7.5rem;
+}
+.ab-spec_item:last-child { border-bottom: 0; padding-bottom: 0; }
+.ch .ab-spec_item h3 { font-size: var(--f-h4); max-width: 24ch; }
+.ab-spec_item p {
+  font-size: var(--f-body);
+  line-height: 1.72;
+  max-width: 66ch;
+  margin: 0;
+}
+.ab-spec_tag {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--copper);
+}
+
+/* --- the diptych ---------------------------------------------------------
+   ABOUT, CHAPTER 5. Two practices at one address, so: two equal halves, each
+   a photograph with its panel sitting on the base of it. `svc-overlap` is one
+   image and one panel offset sideways; this is a matched pair, and the
+   symmetry is the argument — neither practice is the junior one. */
+.ab-diptych {
+  display: grid;
+  gap: 1.25rem;
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 0 var(--bleed);
+}
+@media (min-width: 860px) { .ab-diptych { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1.75rem; } }
+.ab-half { position: relative; display: block; overflow: hidden; }
+.ab-half img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: grayscale(1);
+  transform: scale(1.03);
+  transition: filter .7s var(--ease), transform .7s var(--ease);
+}
+.ab-half:hover img { filter: none; transform: scale(1.07); }
+.ab-half::after {
+  content: "";
+  position: absolute;
+  inset: 40% 0 0;
+  background: linear-gradient(180deg, rgba(30, 36, 38, 0) 0%, rgba(30, 36, 38, .82) 72%, rgba(30, 36, 38, .94) 100%);
+  pointer-events: none;
+}
+.ab-half_panel {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 1;
+  padding: clamp(1.25rem, 2.6vw, 2.25rem);
+  display: grid;
+  gap: .5rem;
+}
+.ab-half_kicker {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: #e3c3a8;
+}
+.ch .ab-half_panel h3 { color: #fff; font-size: var(--f-h3); max-width: 15ch; }
+.ab-half_panel p {
+  color: rgba(255, 255, 255, .8);
+  font-size: var(--f-body);
+  line-height: 1.6;
+  max-width: 34ch;
+  margin: 0;
+}
+.ab-half_go {
+  margin-top: .35rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: #fff;
+}
+
+/* --- the single quote ----------------------------------------------------
+   ABOUT, CHAPTER 6. ONE review, centred, at display size, with no portrait
+   and no rail. The homepage and the service page both run a lead quote beside
+   a photograph and then a drifting rail of chips; the reviews page will do
+   more of that again. About gets a full stop instead — one voice, nothing
+   else in the chapter. */
+.ab-oneword { max-width: 46rem; margin: 0 auto; text-align: center; }
+.ch .ab-oneword blockquote {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--f-d3);
+  line-height: 1.2;
+  letter-spacing: -.014em;
+  color: var(--fg);
+  margin: 0;
+  text-wrap: balance;
+}
+.ab-oneword figcaption {
+  margin-top: 1.75rem;
+  display: inline-flex;
+  align-items: center;
+  gap: .7rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+.ab-oneword figcaption i {
+  width: 2.2rem;
+  height: 1px;
+  background: var(--accent);
+  flex: none;
+}
+.ab-oneword .ab-stars {
+  display: block;
+  margin-bottom: 1.5rem;
+  font-size: calc(.95rem * var(--t-text));
+  letter-spacing: .35em;
+  color: var(--copper);
+}
+/* A class rather than an inline style: Instatic stores a node graph, and an
+   inline `style` attribute is not one of the four props `base.*` carries
+   through the converter. It would be dropped on import with nothing reported,
+   exactly as `alt` was. */
+.ab-oneword-foot { text-align: center; }
+
+/* --- the visit strip -----------------------------------------------------
+   ABOUT, CHAPTER 7. A full-bleed map with a card standing on it. The
+   homepage's invitation puts the map in a bordered box in a side column; this
+   runs it edge to edge with the hours card overlapping its left side, so the
+   two are not the same component doing the same job twice. */
+.ch-visit { padding: 0; }
+.ab-visit { position: relative; }
+/* The frame has to stay `.embed_component`, because that is the selector
+   site.js defers the map behind — and on Instatic the authored <iframe> is
+   published as a bare <div data-src>, which only the `.embed_component >
+   [data-src]` half of that selector catches. So the wrapper is the shared
+   component and everything visual is overridden here, scoped to this chapter.
+   Both shapes are sized, or the strip collapses to nothing on the live page
+   before the swap and IntersectionObserver never sees it. */
+.ab-visit .embed_component { border: 0; background: var(--sand); }
+.ab-visit .embed_component iframe,
+.ab-visit .embed_component > [data-src] {
+  display: block;
+  width: 100%;
+  height: clamp(22rem, 52vh, 34rem);
+  border: 0;
+  /* Desaturated to sit with the palette, not to grayscale — a map is the one
+     image on the site a visitor has to actually read. */
+  filter: grayscale(.55);
+}
+.ab-visit_card {
+  background: var(--white);
+  border: 1px solid var(--beige);
+  padding: clamp(1.5rem, 3vw, 2.5rem);
+  display: grid;
+  gap: 1.1rem;
+}
+@media (min-width: 900px) {
+  .ab-visit_card {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    left: var(--bleed);
+    width: min(28rem, 38vw);
+    box-shadow: 0 24px 60px rgba(30, 36, 38, .16);
+  }
+}
+.ch .ab-visit_card h3 { font-size: var(--f-h3); max-width: 14ch; }
+.ab-visit_card address {
+  font-style: normal;
+  font-size: var(--f-body);
+  line-height: 1.7;
+  color: var(--body);
+}
+.ab-visit_hours { display: grid; gap: .35rem; margin: 0; padding: 0; list-style: none; }
+.ab-visit_hours li {
+  display: flex;
+  justify-content: space-between;
+  gap: 1rem;
+  padding: .3rem 0;
+  border-bottom: 1px solid var(--beige);
+  font-size: calc(.875rem * var(--t-text));
+  color: var(--body);
+}
+.ab-visit_hours li::before { content: none; }
+.ab-visit_hours li b { color: var(--ink); font-weight: 600; }
+.ab-visit_hours li.is-shut b { color: var(--muted); font-weight: 500; }
+.ab-visit_note {
+  font-size: calc(.85rem * var(--t-text));
+  line-height: 1.6;
+  color: var(--muted);
+  margin: 0;
+}
+
+/* --- the roster ----------------------------------------------------------
+   TEAM, CHAPTER 1. Full-width rows, one doctor each, hairline separated: a
+   fixed small portrait, then the name, the role, one sentence, and a
+   horizontal strip of facts. The homepage runs the same three people as tall
+   dark plates in a three-up; this is the opposite shape on purpose, and it is
+   the shape that can carry facts, which the plates cannot.
+
+   THE PORTRAITS DO NOT MATCH AND THE COMPONENT HAS TO ABSORB THAT. Dr. Cho
+   and Dr. Nguyen were shot on the same day, studio, black scrubs, and exist up
+   to 1024x1536. Dr. Sung's only published portrait is outdoors, blue shirt,
+   and exists at exactly 230x300 and nothing larger. So the column is capped at
+   13rem — under his intrinsic width, so nothing upscales — and all three are
+   grayscale at rest, which is what makes two shoots read as one set. Size the
+   component to the worst asset, not to the best. */
+.tm-roster { border-top: 1px solid var(--rule-strong); }
+.tm-row {
+  display: grid;
+  gap: clamp(1.25rem, 3vw, 2.5rem);
+  padding: clamp(2rem, 4vw, 3.25rem) 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: start;
+}
+@media (min-width: 768px) { .tm-row { grid-template-columns: minmax(0, 13rem) minmax(0, 1fr); } }
+.tm-row_shot {
+  margin: 0;
+  max-width: 13rem;
+  overflow: hidden;
+  background: var(--sand);
+  border: 1px solid var(--rule);
+}
+.tm-row_shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 23 / 30;
+  object-fit: cover;
+  object-position: 50% 18%;
+  filter: grayscale(1);
+  transition: filter .6s var(--ease), transform .6s var(--ease);
+}
+.tm-row:hover .tm-row_shot img { filter: none; transform: scale(1.03); }
+.tm-row_body > * + * { margin-top: .85rem; }
+.tm-row_role {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.ch .tm-row_body h3 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--f-d3);
+  line-height: 1.05;
+  letter-spacing: -.014em;
+  max-width: 16ch;
+}
+.ch .tm-row_body h3 a { color: var(--fg); text-decoration: none; }
+.ch .tm-row_body h3 a:hover { color: var(--accent); }
+.tm-row_lede {
+  font-size: var(--f-lede);
+  line-height: 1.7;
+  color: var(--fg-body);
+  max-width: 58ch;
+}
+/* The facts strip. Not `svc-stats`: that one sets a numeral at 2.1rem display
+   for three counted figures. These are short phrases, several per doctor, and
+   they want to read as a row of labelled cells. */
+.tm-facts {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr));
+  gap: 1.1rem clamp(1.25rem, 3vw, 2.5rem);
+  margin: 0;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+.tm-facts dt {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  margin-bottom: .3rem;
+}
+.tm-facts dd {
+  margin: 0;
+  font-size: calc(.9rem * var(--t-text));
+  line-height: 1.55;
+  color: var(--fg);
+}
+
+/* --- the schools index ---------------------------------------------------
+   TEAM, CHAPTER 2. Where the three of them actually trained, which the
+   practice's own bios state and no page currently uses. A ruled index: the
+   institution set at display size on the left, the people and the degree on
+   the right. `svc-ledger` is the near neighbour and is a grid of equal tiles;
+   this is a two-column dictionary with a real hierarchy between the halves. */
+.tm-schools { border-top: 1px solid var(--rule-strong); }
+.tm-school {
+  display: grid;
+  gap: .5rem clamp(1.5rem, 4vw, 3.5rem);
+  padding: clamp(1.1rem, 2.4vw, 1.9rem) 0;
+  border-bottom: 1px solid var(--rule);
+  align-items: baseline;
+}
+@media (min-width: 768px) { .tm-school { grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr); } }
+.tm-school_name {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(2.1rem * var(--t-mid));
+  line-height: 1.08;
+  letter-spacing: -.012em;
+  color: var(--fg);
+  margin: 0;
+}
+.tm-school_name em { font-style: italic; color: var(--accent-lg); }
+.tm-school_who {
+  margin: 0;
+  font-size: var(--f-body);
+  line-height: 1.65;
+  color: var(--fg-body);
+}
+.tm-school_who b { color: var(--fg); font-weight: 600; }
+.tm-school_where {
+  display: block;
+  margin-top: .3rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+
+/* --- the name wall -------------------------------------------------------
+   TEAM, CHAPTER 3, and the honest centre of the page.
+
+   THE PRACTICE PUBLISHES NO STAFF ROSTER. No names, no roles, no portraits
+   for anyone but the three doctors — checked across the whole crawl. The two
+   dishonest ways to fill that gap are both already on this client's record:
+   the old site ran four awards it had not won, and a smile gallery of theme
+   stock presented as its own results. So nothing here is invented. These are
+   the people the practice's OWN patients name in their OWN Google reviews,
+   each one carrying the review it came from, and no role is asserted for
+   anybody the reviews do not give one to.
+
+   The layout follows from that: names at display size in an unequal flow, each
+   opening the quote beneath it. It is a `<details>`, so it works with no
+   JavaScript at all and the quotes are in the HTML for indexing whether or not
+   anybody opens one. */
+.tm-wall {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+}
+.tm-name {
+  background: var(--panel);
+  flex: 1 1 16rem;
+  min-width: 0;
+}
+/* The unequal flow: three of the seven ask for more room, so the row breaks
+   in a different place at every width instead of settling into a tidy grid. */
+.tm-name.is-wide { flex-grow: 2.1; flex-basis: 24rem; }
+.tm-name > summary {
+  list-style: none;
+  cursor: pointer;
+  padding: clamp(1.25rem, 2.6vw, 2rem);
+  display: grid;
+  gap: .45rem;
+  transition: background .35s var(--ease);
+}
+.tm-name > summary::-webkit-details-marker { display: none; }
+.tm-name > summary:hover { background: var(--bg-2); }
+.tm-name_first {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(2.6rem * var(--t-mid));
+  line-height: 1;
+  letter-spacing: -.016em;
+  color: var(--fg);
+}
+.tm-name_role {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.tm-name_cue {
+  font-family: var(--font-ui);
+  font-size: calc(.78rem * var(--t-ui));
+  letter-spacing: .1em;
+  color: var(--fg-soft);
+}
+.tm-name[open] > summary { background: var(--bg-2); }
+.tm-name[open] .tm-name_cue { opacity: 0; }
+.tm-name_body {
+  padding: 0 clamp(1.25rem, 2.6vw, 2rem) clamp(1.25rem, 2.6vw, 2rem);
+  background: var(--bg-2);
+}
+.tm-name_body blockquote {
+  margin: 0;
+  padding-left: 1rem;
+  border-left: 1.5px solid var(--accent);
+  font-size: var(--f-body);
+  line-height: 1.7;
+  color: var(--fg-body);
+}
+.tm-name_body cite {
+  display: block;
+  margin-top: .7rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-style: normal;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+/* The disclosure this chapter owes the reader, stated in the chapter and not
+   only in a commit message. */
+.tm-wall-note {
+  margin: clamp(1.5rem, 3vw, 2.25rem) 0 0;
+  padding-left: 1rem;
+  border-left: 1.5px solid var(--rule-strong);
+  font-size: calc(.85rem * var(--t-text));
+  line-height: 1.65;
+  color: var(--fg-soft);
+  max-width: 62ch;
+}
+
+/* --- the margin notes ----------------------------------------------------
+   TEAM, CHAPTER 4. What the three of them do when they are not here, all of
+   it from their own published bios. Notes hung off a vertical rule rather than
+   put in boxes: the chapter before it is a wall of hard-edged cells and the
+   chapter after it is the invitation, so this one wants no border at all. */
+.tm-notes { display: grid; gap: clamp(1.75rem, 3.5vw, 3rem); }
+@media (min-width: 860px) { .tm-notes { grid-template-columns: repeat(3, minmax(0, 1fr)); } }
+.tm-note {
+  padding-left: clamp(1rem, 2vw, 1.5rem);
+  border-left: 1px solid var(--rule-strong);
+  display: grid;
+  gap: .7rem;
+  align-content: start;
+}
+.tm-note_who {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.tm-note p {
+  margin: 0;
+  font-size: var(--f-body);
+  line-height: 1.75;
+  color: var(--fg-body);
+}
+/* One pulled line per note, set larger, so the three columns are not three
+   identical grey paragraphs. */
+.tm-note_pull {
+  font-family: var(--font-display) !important;
+  font-weight: 300;
+  font-size: var(--f-h3) !important;
+  line-height: 1.2 !important;
+  letter-spacing: -.01em;
+  color: var(--fg) !important;
+  max-width: 18ch;
 }
