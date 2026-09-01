@@ -1659,23 +1659,9 @@ textarea {
 }
 
 /* Breadcrumb — small, quiet, above the title. */
-.breadcrumb_component {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  margin-bottom: 1.25rem;
-  font-size: var(--size-text-tiny);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--fg-mute);
-}
-.breadcrumb_component a:hover {
-  color: var(--accent);
-}
-.breadcrumb_sep {
-  color: var(--line-strong);
-}
+/* The breadcrumb was removed sitewide on 2026-09-01 at the client's request:
+   "I don't think we need to spread crumbs." Its rules went with it. */
+
 
 @media (max-width: 767px) {
   .hero_component {
@@ -5177,11 +5163,7 @@ textarea {
   align-items: end;
   gap: var(--space-large) var(--space-xxlarge);
 }
-.journey_page .hero_component.is-page .breadcrumb_component {
-  grid-column: 1 / -1;
-  justify-content: flex-start;
-  margin-bottom: var(--space-small);
-}
+
 .journey_page .hero_component.is-page .hero_eyebrow {
   grid-column: 1;
   text-align: left;
@@ -5369,21 +5351,7 @@ textarea {
   justify-content: center;
   padding: var(--section-sm) var(--space-xlarge) var(--section-sm) var(--gutter);
 }
-.svc-head_component .breadcrumb_component {
-  justify-content: flex-start;
-  margin-bottom: var(--space-medium);
-  /* A four-level crumb does not fit one line on a phone. The base rule is a
-     flex row with no wrapping story at all, so it broke into ragged lines with
-     the separators stranded. Wrapping deliberately, with a row gap and each
-     crumb kept whole, makes the second line read as a continuation. */
-  flex-wrap: wrap;
-  row-gap: 0.35rem;
-  align-items: baseline;
-}
-.svc-head_component .breadcrumb_component a,
-.svc-head_component .breadcrumb_component [aria-current] {
-  white-space: nowrap;
-}
+
 .svc-head_title {
   margin: 0;
   max-width: 14ch;
@@ -5465,6 +5433,29 @@ textarea {
 .svc-lede_inner {
   padding-inline: var(--gutter);
 }
+/* With a picture the lede is a band; without one it stays a measured column.
+   `.has-media` is set by the renderer only when the treatment actually has a
+   lede image, so a treatment still waiting for art does not render a hole. */
+.svc-lede_component.has-media .svc-lede_inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.52fr);
+  gap: var(--space-xxlarge);
+  align-items: center;
+}
+.svc-lede_media {
+  margin: 0;
+  overflow: clip;
+  background: var(--stone-soft);
+  aspect-ratio: 3 / 4;
+  max-height: 32rem;
+  width: 100%;
+}
+.svc-lede_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .svc-lede_text {
   max-width: 46rem;
   font-size: var(--size-text-large);
@@ -5486,6 +5477,47 @@ textarea {
 .spec_inner {
   padding-inline: var(--gutter);
   border-top: 1px solid var(--line-strong);
+}
+/* The rows' left column held a two or three word heading and then a great deal
+   of nothing. With a picture the section becomes image | rows, and the headings
+   move above their own bodies inside the rows. Sticky, so the image stays with
+   the rows rather than scrolling out at the top of a long answer. */
+.spec_component.has-media .spec_inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.46fr) minmax(0, 1fr);
+  gap: var(--space-xxlarge);
+  align-items: start;
+  border-top: 0;
+}
+.spec_media {
+  margin: 0;
+  position: sticky;
+  top: 7rem;
+  overflow: clip;
+  background: var(--stone-soft);
+  aspect-ratio: 3 / 4;
+  max-height: min(70vh, 34rem);
+  width: 100%;
+}
+.spec_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.spec_component.has-media .spec_rows {
+  border-top: 1px solid var(--line-strong);
+}
+/* Inside a two-column section the rows are a single column: the picture is
+   already occupying the left, and a heading column inside the right one would
+   squeeze the answers into a gutter. */
+.spec_component.has-media .spec_row {
+  grid-template-columns: 1fr;
+  gap: var(--space-small);
+}
+.spec_component.has-media .spec_heading {
+  position: static;
+  max-width: none;
 }
 .spec_row {
   display: grid;
@@ -5529,6 +5561,20 @@ textarea {
 }
 
 @media (max-width: 991px) {
+  .svc-lede_component.has-media .svc-lede_inner,
+  .spec_component.has-media .spec_inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-large);
+  }
+  /* Stacked, a sticky image would sit over the answers it is meant to sit
+     beside. Same reason the spec headings unstick at this width. */
+  .spec_media {
+    position: static;
+    max-height: 26rem;
+  }
+  .svc-lede_media {
+    max-height: 26rem;
+  }
   .svc-head_component {
     grid-template-columns: 1fr;
     --arrival-frame: var(--space-large);
@@ -5794,13 +5840,29 @@ textarea {
   margin: 0;
   max-width: 18ch;
 }
+/* Three columns now: the consultation room, the fee, and the two payment rows.
+   The photograph carries the left edge so the section is not another block of
+   type in a page the client already said was short of images. */
 .cost_body {
   display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
-  gap: var(--space-xxlarge);
+  grid-template-columns: minmax(0, 0.72fr) minmax(0, 0.62fr) minmax(0, 1fr);
+  gap: var(--space-xlarge);
   align-items: start;
   border-top: 1px solid var(--line-strong);
   padding-top: var(--space-large);
+}
+.cost_media {
+  margin: 0;
+  overflow: clip;
+  background: var(--stone-soft);
+  aspect-ratio: 4 / 5;
+  max-height: 26rem;
+}
+.cost_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
 }
 .cost_figure-label {
   margin: 0;
@@ -5839,10 +5901,25 @@ textarea {
   line-height: 1.65;
   color: var(--fg-body);
 }
+@media (max-width: 1279px) {
+  .cost_body {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  }
+  /* At this width three columns squeeze the payment rows into a gutter, so the
+     photograph spans and the fee sits beside it. */
+  .cost_media {
+    grid-column: 1 / -1;
+    aspect-ratio: 16 / 7;
+    max-height: 18rem;
+  }
+}
 @media (max-width: 991px) {
   .cost_body {
     grid-template-columns: 1fr;
     gap: var(--space-large);
+  }
+  .cost_media {
+    aspect-ratio: 16 / 9;
   }
 }
 
@@ -5860,11 +5937,43 @@ textarea {
   margin: 0;
   max-width: 20ch;
 }
+/* The team photograph beside the two quotes. The section is headed "about the
+   practice", and the practice is who is in the picture. */
+.svc-reviews_inner {
+  display: grid;
+  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
+  gap: var(--space-xlarge) var(--space-xxlarge);
+  align-items: start;
+}
+.svc-reviews_head {
+  grid-column: 1 / -1;
+}
+.svc-reviews_media {
+  margin: 0;
+  overflow: clip;
+  background: var(--stone-soft);
+  aspect-ratio: 4 / 5;
+  max-height: 28rem;
+}
+.svc-reviews_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 .svc-reviews_grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(20rem, 1fr));
   gap: var(--space-xlarge);
-  max-width: 76rem;
+  align-content: start;
+}
+@media (max-width: 991px) {
+  .svc-reviews_inner {
+    grid-template-columns: 1fr;
+  }
+  .svc-reviews_media {
+    aspect-ratio: 16 / 9;
+    max-height: 20rem;
+  }
 }
 /* .rail_card is the home page's review card: a hairline over the quote, no box.
    Reused rather than restyled, so a review looks like a review everywhere. */

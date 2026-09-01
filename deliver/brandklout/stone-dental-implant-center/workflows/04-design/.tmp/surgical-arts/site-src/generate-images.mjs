@@ -386,6 +386,45 @@ const SLOTS = [
       'darkened calm treatment room, a narrow warm beam falling across folded cream linen, ' +
       'close up, no people',
   },
+  /* --- sixth pass, 2026-09-01: the service pages were text with two pictures
+     Client review of the neck lift page: "We shouldn't have this type of chunk
+     of text playing text and that's it. This is bad for conversions"; "Same
+     here. We only have text"; "Overall the entire page is lacking images."
+
+     Measured: two images across an 8,372px page, the thinnest on the site. The
+     two biggest reading blocks, the lede and the spec rows, had none at all.
+
+     Two per service page, and these two are the neck lift's. The other eleven
+     fall back to text-only until theirs exist, which the renderer reports. */
+  {
+    file: 'gen-marble-jawline.webp',
+    aspect: 'portrait_2_3',
+    maxWidth: 1000,
+    used: 'neck-lift.html - beside the lede',
+    // The lede is about the neck being where age shows first, and about the
+    // platysma being what gives the neck its shape. A carved jaw and neck IS
+    // that subject, it cannot be mistaken for a patient or a result, and the
+    // practice is called Stone. Cropped close and lit from the side so it reads
+    // as a study of the jawline rather than as another bust on a plinth.
+    prompt:
+      'a close side view of a classical marble sculpture, cropped to the jaw and neck, pale warm ' +
+      'stone with visible chisel texture, raking light from the left across the jawline, plain ' +
+      'ivory background, gallery lighting, tall vertical composition',
+  },
+  {
+    file: 'gen-surgical-loupes.webp',
+    aspect: 'portrait_2_3',
+    maxWidth: 1000,
+    used: 'neck-lift.html - beside the spec rows',
+    // The spec rows are "often combined with" and "why it matters who
+    // operates", and the second is about the marginal mandibular nerve and
+    // knowing anatomy in three dimensions. Magnifying loupes are the honest
+    // object for precision and for seeing what is small.
+    prompt:
+      'a pair of surgical magnifying loupes resting on folded sterile cloth beside a stainless ' +
+      'tray on a pale stone counter, precision optics catching the light, warm ivory ground, ' +
+      'soft directional daylight, tall vertical composition',
+  },
   {
     file: 'ask-reception-tall.webp',
     aspect: 'portrait_2_3',

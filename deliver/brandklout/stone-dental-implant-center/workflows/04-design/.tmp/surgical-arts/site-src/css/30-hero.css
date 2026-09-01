@@ -132,23 +132,9 @@
 }
 
 /* Breadcrumb — small, quiet, above the title. */
-.breadcrumb_component {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: 0.6rem;
-  margin-bottom: 1.25rem;
-  font-size: var(--size-text-tiny);
-  text-transform: uppercase;
-  letter-spacing: 0.16em;
-  color: var(--fg-mute);
-}
-.breadcrumb_component a:hover {
-  color: var(--accent);
-}
-.breadcrumb_sep {
-  color: var(--line-strong);
-}
+/* The breadcrumb was removed sitewide on 2026-09-01 at the client's request:
+   "I don't think we need to spread crumbs." Its rules went with it. */
+
 
 @media (max-width: 767px) {
   .hero_component {

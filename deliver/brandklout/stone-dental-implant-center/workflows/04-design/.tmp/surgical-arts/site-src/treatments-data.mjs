@@ -831,6 +831,14 @@ export const TREATMENTS = [
       { label: 'Back to work', value: 'Two weeks' },
       { label: 'Results settle', value: 'Three to six months' },
     ],
+    ledeImage: {
+      file: 'gen-marble-jawline.webp',
+      alt: 'A carved marble jaw and neck, lit from the side',
+    },
+    specImage: {
+      file: 'gen-surgical-loupes.webp',
+      alt: 'Surgical magnifying loupes on folded sterile cloth beside a stainless tray',
+    },
     bandImage: {
       file: 'gen-surgical-suite.webp',
       alt: 'A quiet operating suite with an empty table, instrument trolley and warm indirect light',

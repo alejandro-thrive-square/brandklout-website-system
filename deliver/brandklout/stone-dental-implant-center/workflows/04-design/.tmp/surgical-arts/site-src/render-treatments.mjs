@@ -64,12 +64,6 @@ function headSection(t, cat) {
 
   return `<section class="svc-head_component stone-panel">
   <div class="svc-head_copy">
-    <nav class="breadcrumb_component" aria-label="Breadcrumb">
-      <a href="index.html">Home</a><span class="breadcrumb_sep">/</span>
-      <a href="treatments.html">Treatments</a><span class="breadcrumb_sep">/</span>
-      <a href="treatments.html#${cat.anchor}">${cat.label}</a><span class="breadcrumb_sep">/</span>
-      <span aria-current="page">${t.name}</span>
-    </nav>
     <p class="chapter_mark">${cat.label}</p>
     <h1 class="display-lg svc-head_title">${t.name}</h1>
     <p class="svc-head_sub">${t.heroSub}</p>
@@ -109,12 +103,26 @@ ${rows}
 
    Not one word of copy changed. treatments-data.mjs is untouched. */
 function ledeSection(t) {
-  return `<section class="svc-lede_component">
+  /* Client review: "We shouldn't have this type of chunk of text playing text
+     and that's it. This is bad for conversions." Right: this was two paragraphs
+     alone on a screen. With a picture it is a band; without one it is a wall.
+
+     The image is OPTIONAL. A treatment that has not been given one yet renders
+     the text at a reading measure exactly as before, rather than showing a hole
+     where a photograph should be. */
+  const img = t.ledeImage
+    ? `    <figure class="svc-lede_media" data-j="rise">
+      <img src="assets/${t.ledeImage.file}" alt="${esc(t.ledeImage.alt)}" width="1000" height="1500" loading="lazy">
+    </figure>
+`
+    : ''
+
+  return `<section class="svc-lede_component${t.ledeImage ? ' has-media' : ''}">
   <div class="svc-lede_inner">
     <div class="svc-lede_text text-rich-text" data-j="rise">
 ${t.intro.map(para).join('\n')}
     </div>
-  </div>
+${img}  </div>
 </section>`
 }
 
@@ -139,9 +147,23 @@ ${body}
 
   if (!rows.trim()) return null
 
-  return `<section class="spec_component">
+  /* Client review: "Same here. We only have text."
+     The left column of these rows carried a two or three word heading and then
+     a great deal of nothing, which is exactly where a picture belongs. It is
+     sticky, so it stays with the rows it sits beside instead of scrolling out
+     at the top of a long answer. */
+  const aside = t.specImage
+    ? `    <figure class="spec_media" data-j="rise">
+      <img src="assets/${t.specImage.file}" alt="${esc(t.specImage.alt)}" width="1000" height="1500" loading="lazy">
+    </figure>
+`
+    : ''
+
+  return `<section class="spec_component${t.specImage ? ' has-media' : ''}">
   <div class="spec_inner">
+${aside}    <div class="spec_rows">
 ${rows}
+    </div>
   </div>
 </section>`
 }
@@ -286,7 +308,11 @@ function proofSection(t) {
 </section>`
 }
 
-/* Cost and payment. The fee is this treatment's own first fact; the
+/* Cost and payment. The photograph is the practice's own consultation room,
+   which is what this section is about: the $175 buys an hour in that room with
+   the surgeon. Same image on all twelve, because it is the same room.
+
+   The fee is this treatment's own first fact; the
    consultation fee, the deposit and the financing providers are the practice's
    published figures, the same ones the home and booking pages carry. */
 function costSection(t) {
@@ -297,6 +323,9 @@ function costSection(t) {
       <h2 class="display-lg">Know the fee before anything is booked.</h2>
     </div>
     <div class="cost_body">
+      <figure class="cost_media" data-j="rise">
+        <img src="assets/ssa-consult-room.webp" alt="A consultation room at the Westlake practice" width="1600" height="900" loading="lazy">
+      </figure>
       <div class="cost_figure">
         <p class="cost_figure-label">The consultation</p>
         <p class="cost_figure-value">$175</p>
@@ -334,6 +363,9 @@ function reviewsSection() {
       <p class="chapter_mark">About the practice</p>
       <h2 class="display-lg">Not about this operation, about how it is done.</h2>
     </div>
+    <figure class="svc-reviews_media" data-j="rise">
+      <img src="assets/ssa-team.webp" alt="The team at Stone Surgical Arts" width="1600" height="900" loading="lazy">
+    </figure>
     <div class="svc-reviews_grid" data-j="stagger">
       <figure class="rail_card">
         <blockquote class="rail_text">Dr. Stone is so kind and also a great, proactive surgeon. Not only do I send patients to her, I am one myself. The office and staff are equally fantastic.</blockquote>
@@ -460,6 +492,10 @@ function render(t) {
      `band(t.bandImage)` is gone from this list: that photograph is the head
      now, and a second full-width copy of it two sections later was the strip
      that used to interrupt the reading. */
+  const missingArt = ['ledeImage', 'specImage'].filter((k) => !t[k])
+  if (missingArt.length) {
+    console.warn(`  note: ${t.slug} still text-only in: ${missingArt.join(', ')}`)
+  }
   if (!t.sections.some((b) => /^who it suits$/i.test(b.heading))) {
     console.warn(
       `  note: ${t.slug} has no "Who it suits" section, so it gets no symptom cards. ` +
