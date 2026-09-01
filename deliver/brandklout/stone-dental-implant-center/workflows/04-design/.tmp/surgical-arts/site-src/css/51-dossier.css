@@ -465,14 +465,22 @@
   color: var(--fg-mute);
   transition: color 0.2s var(--ease), border-color 0.2s var(--ease);
 }
-.layers_tab-depth {
-  display: block;
-  margin-bottom: 0.3rem;
-  font-family: var(--font-body);
+/* The depth captions. They replace an eyebrow that used to sit inside each
+   tab, which Instatic's importer flattened into the tab's label string because
+   `base.button` has no children. Here they are plain text in a container, which
+   converts, and they are arguably the better place for them: the order they
+   describe is the thing the bars underneath are drawing. */
+.layers_cap {
   font-size: var(--size-text-tiny);
   letter-spacing: 0.14em;
   text-transform: uppercase;
   color: var(--fg-mute);
+}
+.layers_cap:first-child {
+  margin-bottom: 0.15rem;
+}
+.layers_cap:last-child {
+  margin-top: 0.15rem;
 }
 .layers_tab:hover {
   color: var(--fg);
@@ -480,9 +488,6 @@
 .layers_tab[aria-selected="true"] {
   color: var(--fg);
   border-bottom-color: var(--accent-flat);
-}
-.layers_tab[aria-selected="true"] .layers_tab-depth {
-  color: var(--accent);
 }
 
 /* Three stacked bars, deepest at the bottom, the active one filled. A diagram
@@ -493,7 +498,8 @@
   display: grid;
   gap: 4px;
   align-content: start;
-  padding-top: 2.6rem;
+  padding-top: 0.6rem;
+  text-align: right;
 }
 .layers_bar {
   display: flex;
@@ -1070,6 +1076,8 @@
     grid-auto-flow: column;
     grid-auto-columns: 1fr;
     gap: 4px;
+    align-items: center;
+    text-align: center;
   }
   .layers_bar {
     justify-content: center;
@@ -1261,4 +1269,72 @@
   .toc_link::before {
     transition: none !important;
   }
+}
+
+/* ===========================================================================
+   THE BURGER, WHEN ITS CHILDREN HAVE BEEN TAKEN AWAY
+
+   `.navbar_burger` draws its three bars with three `<span>` children. Instatic's
+   `base.button` module carries a `label` STRING and no children, so the importer
+   flattens whatever is inside a <button>: the burger arrives with `label: ""`
+   and nothing to style, and the published site has an invisible mobile menu
+   button. This is not new — it has been true of every Instatic publish of this
+   site — and it was found on 2026-09-01 by reading `import-out.json` rather than
+   by anything failing.
+
+   `:empty` is the fix and it is doing real work rather than being clever: it
+   matches ONLY where the children are gone, so the static build keeps its spans
+   and the imported one draws the same three bars from a border and a shadow.
+   Nothing has to know which environment it is in.
+
+   Lives here rather than in 20-navbar.css because it is an Instatic-conversion
+   repair, and 20-navbar.css should keep describing the component as authored. */
+.navbar_burger:empty {
+  position: relative;
+}
+.navbar_burger:empty::before,
+.navbar_burger:empty::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  width: 22px;
+  height: 1.5px;
+  background: currentColor;
+  transform: translateX(-50%);
+}
+.navbar_burger:empty::before {
+  top: calc(50% - 7px);
+  /* The middle bar, as a shadow on the top one: a third pseudo-element is not
+     available and a background-image gradient does not survive the registry. */
+  box-shadow: 0 7px 0 0 currentColor;
+}
+.navbar_burger:empty::after {
+  top: calc(50% + 6px);
+}
+/* The bars are `currentColor`, so the colour is set on the BUTTON. The
+   authored rules colour `.navbar_burger span`, and there are no spans here.
+   Over a photographic hero the bar is white like everything else in it; found
+   at 390 on the published page, where three dark grey bars sat on a dark
+   photograph inside a white border. */
+.navbar_burger:empty {
+  color: var(--fg);
+}
+.navbar_component:not(.is-solid):not(.is-static) .navbar_burger:empty {
+  color: var(--white);
+}
+/* Open, it is an X. The authored version transforms three spans; two
+   pseudo-elements can do it if the middle bar, which is a box-shadow on the
+   first, is pushed out of the way rather than hidden. */
+.navbar_burger:empty[aria-expanded="true"]::before {
+  top: 50%;
+  box-shadow: none;
+  transform: translateX(-50%) rotate(45deg);
+}
+.navbar_burger:empty[aria-expanded="true"]::after {
+  top: 50%;
+  transform: translateX(-50%) rotate(-45deg);
+}
+.navbar_burger:empty::before,
+.navbar_burger:empty::after {
+  transition: transform 0.3s var(--ease), top 0.3s var(--ease), box-shadow 0.2s var(--ease);
 }

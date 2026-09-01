@@ -177,10 +177,18 @@
         <p class="dsec_lede">Three layers have changed and a result that lasts means addressing all three in the same sitting. The one people expect to hear about is the one nearest the surface, and it is the least of them.</p>
 
         <div class="layers_component">
+          <!-- ONE STRING PER BUTTON, and that is an Instatic constraint rather
+               than a design preference. `base.button` takes a `label` and has no
+               children, so the importer FLATTENS whatever is inside a <button>
+               into one string: an eyebrow span inside the tab came back as
+               "DeepestMuscle" with the span gone. The depth wording lives on the
+               indicator beside them instead, which is where the order is
+               actually being shown. See 05-instatic-upload, and the same trap
+               bites `.navbar_burger`. -->
           <div class="layers_tabs" role="tablist" aria-label="The three layers">
-            <button class="layers_tab" type="button" role="tab" id="tab-muscle" aria-controls="panel-muscle" aria-selected="true"><span class="layers_tab-depth">Deepest</span>Muscle</button>
-            <button class="layers_tab" type="button" role="tab" id="tab-fat" aria-controls="panel-fat" aria-selected="false"><span class="layers_tab-depth">Between</span>Fat</button>
-            <button class="layers_tab" type="button" role="tab" id="tab-skin" aria-controls="panel-skin" aria-selected="false"><span class="layers_tab-depth">Surface</span>Skin</button>
+            <button class="layers_tab" type="button" role="tab" id="tab-muscle" aria-controls="panel-muscle" aria-selected="true">Muscle</button>
+            <button class="layers_tab" type="button" role="tab" id="tab-fat" aria-controls="panel-fat" aria-selected="false">Fat</button>
+            <button class="layers_tab" type="button" role="tab" id="tab-skin" aria-controls="panel-skin" aria-selected="false">Skin</button>
           </div>
 
           <!-- The depth indicator. Three stacked bars, deepest at the bottom,
@@ -188,9 +196,11 @@
                an ORDER, not an anatomical illustration, and drawing it as one
                would be claiming a precision the page has no source for. -->
           <div class="layers_depth" aria-hidden="true">
+            <span class="layers_cap">Surface</span>
             <span class="layers_bar" data-layer="skin"><em>Skin</em></span>
             <span class="layers_bar" data-layer="fat"><em>Fat</em></span>
             <span class="layers_bar" data-layer="muscle"><em>Muscle</em></span>
+            <span class="layers_cap">Deepest</span>
           </div>
 
           <div class="layers_panels">

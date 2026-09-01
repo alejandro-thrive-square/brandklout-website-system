@@ -6,23 +6,26 @@ into the client's own Instatic instance as an editable site — pages as node tr
 registry rules, images in the media library.
 
 > [!WARNING]
-> **THE SOURCE IS TWO PAGES, AND THE LIVE SITE IS STILL EIGHTEEN.**
+> **TWO PAGES, AND THE LIVE SITE IS NOW THOSE TWO.** Published 2026-09-01.
 >
 > Seven pages on 2026-08-30, eighteen on 2026-08-31, and on 2026-09-01 the client kept the home page
 > alone. The neck lift was then built back the same day, in the journey design, as the check on
 > whether that design works for a page that has to sell a procedure. `build-import-input.mjs` lists
 > those two and no longer derives treatment rows from `treatments-data.mjs`, which was deleted.
 >
-> **The next `--apply` deletes sixteen pages from the client's live instance and overwrites a
-> seventeenth.** `/neck-lift` exists live carrying the v1 design and is replaced rather than
-> retired. The deletions are trap 8 working as designed — in replace mode any stored page absent
-> from `changedPages` is removed server-side — and they are the intended outcome, but they are not
-> reversible from this side. Confirm before running, and note that the media library is untouched
-> either way: the assets for the deleted pages stay uploaded, matching the decision to keep them in
-> the repository.
+> **THIS HAS HAPPENED.** On 2026-09-01 the sixteen retired pages were deleted from the client's
+> live instance and `/neck-lift` was overwritten with the dossier rebuild, in one atomic PUT, at the
+> client's explicit request: *"let's remove all the Pages from Instatic... clean entirely instatic
+> so we can upload these two pages onto it so I can share it with the team."* The deletions are trap
+> 8 working as designed — in replace mode any stored page absent from `changedPages` is removed
+> server-side — and they are not reversible from this side.
 >
-> `verify-live.mjs` now carries both routes in `ROUTES` and the sixteen retired slugs in `GONE`, so
-> the run after the first apply proves the deletion as well as the deployment.
+> `verify-live.mjs` carries both routes in `ROUTES` and the sixteen retired slugs in `GONE`, and it
+> is clean: 2 routes, 41 URLs, 28 asset references, 16 retired routes confirmed 404.
+>
+> **The media library was NOT pruned**, per trap 11: `upload-media.mjs` is additive and nothing
+> removes an asset. The library holds 43 images, of which about twenty belong to pages that no
+> longer exist. Harmless, invisible to visitors, and it will keep accumulating.
 
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the scripts or technical logic of this workflow must be
@@ -49,8 +52,11 @@ and `GET /admin/api/cms/setup/status` answered `needsSetup: true`. `POST /admin/
 ```bash
 export RAILWAY_LINK_DIR=/path/to/a/dir/linked/to/the/Stone/project   # railway link -w Brandklout -p "Stone Surgical Arts"
 
+node install-fonts.mjs --apply  # 0. ONCE per instance: the two typefaces into Instatic's
+                               #    own library. See trap 16
 node upload-media.mjs           # 1. images -> media library, writes .tmp/media-map.json
-node build-import-input.mjs     # 2. assemble css + the page body, rewriting srcs and links
+node build-import-input.mjs     # 2. assemble css + the page body, rewriting srcs, links AND
+                               #    css url(), excising @font-face. See traps 14 and 16
 bash ship.sh                    # 3. ship to the container, run Instatic's own converters, retrieve
 node push-site.mjs              # 4. dry run
 node push-site.mjs --apply --force   # write shell + pages + code assets in ONE atomic PUT
@@ -243,6 +249,114 @@ survive `cssToStyleRules`.
 **And read the whole report, not its tail.** `bash ship.sh | tail -40` shows the last two or three
 pages of an eighteen-page report, which is how "0 auto-created classes" got recorded for this build
 when eleven pages were 0 and seven were not. Redirect to a file and grep it.
+
+### 13. `:root` blocks outside the two token files are dropped, and the failure is not uniform
+
+Trap 1 says custom properties do not survive the registry conversion, and `push-site.mjs` ships the
+token primitives as a code asset to get round it. Its list was `00-fluid-root.css` and
+`01-tokens.css`, which **stopped being the whole token layer on 2026-08-31**, when `50-journey.css`
+opened a `:root` of its own for `--size-display`, `--size-display-sm`, `--size-numeral`,
+`--size-h3-j`, `--gutter`, `--section`, `--section-sm` and `--pad-panel`. `51-dossier.css` added
+`--spec-w` and `--spec-top` on 2026-09-01.
+
+Those eleven went into the registry and happy-dom dropped them.
+
+**The reason it survived a publish is that the failure is not uniform.** `--size-h2` is in
+`01-tokens.css`, so every section heading was the right size; `--size-display` is not, so the `<h1>`
+rendered at inherited body size. `--gutter` is not, so `padding: var(--section) var(--gutter)` was an
+invalid declaration and the whole page sat flush against x=0 while every other spacing value looked
+correct. A half-tokenised page reads as a layout bug rather than as a token bug, and the first
+instinct is to go looking at the layout.
+
+`push-site.mjs` now **harvests** every `:root` block from every other stylesheet, top level and
+inside `@media`, and appends them to the code asset. A new stylesheet that declares a token is
+covered the day it is written rather than the day somebody remembers a list. It also asserts a
+`MUST` list of tokens the layout cannot survive without and refuses to build if one is missing — the
+first harvester keyed on the character before `:root`, found nothing at all in a file whose `:root`
+follows a comment, and that assertion is what caught it.
+
+### 14. `url()` in the CSS is not rewritten by the src rewriter, and a 404 texture is invisible
+
+`build-import-input.mjs` rewrites `src="assets/x.webp"` in the markup. It did not touch
+`url("tex-carrara.webp")` in the CSS, which is how `.stone-panel` and `.stone-band` reference their
+marble. In the static build that resolves because `site.css` is served FROM `assets/`. Instatic
+publishes the registry at `/_instatic/css/`, so the published pages asked for
+`/_instatic/css/tex-carrara.webp` and got a 404 on every one.
+
+> [!IMPORTANT]
+> **A missing background image is not a visible error.** `.stone-panel` also sets
+> `background-color: var(--ivory)` and `.stone-band` sets `#1c1b19`, so the panels rendered as flat
+> panels that look deliberate. Nothing warned. `verify-live.mjs` was clean, because it checks the
+> assets the MARKUP references and these are only in CSS. It took reading a browser network log.
+
+Rewritten now, against the same media map, with a check that fails the build on any remaining
+relative `url()`. The check runs on a comment-stripped copy: `38-cta.css` records the PREVIOUS
+incident of this same bug in a comment, quoting the broken path verbatim.
+
+### 15. `base.button` has a label, not children
+
+`importHtml` maps `<button>` onto `base.button`, whose content is a `label` STRING. Anything inside
+the button is flattened into it and the elements are gone.
+
+Two things were bitten:
+
+- **`.navbar_burger`** draws its three bars with three `<span>` children. It arrives with
+  `label: ""` and nothing to style, so **the published mobile menu button has been an empty
+  bordered square on every Instatic publish of this site.** Nothing failed; the drawer still opened
+  if you hit the invisible target.
+- **`.layers_tab`** on the neck lift page carried an eyebrow span, and came back as `"DeepestMuscle"`
+  with the span gone.
+
+The tab was fixed in the source: one string per button, and the depth wording moved onto the
+indicator beside them, which is where the order is actually being drawn. The burger is repaired in
+CSS with **`.navbar_burger:empty`**, which matches only where the children have been taken away, so
+the static build keeps its spans and the imported one draws the same three bars from a border, a
+pseudo-element and a box-shadow. `currentColor` is set on the button, because the authored rule
+colours `.navbar_burger span` and there are no spans.
+
+**Check `import-out.json` for `base.button` labels after any import that adds a button.**
+`node -e` over `.tmp/import-out.json` printing every `props.label` takes ten seconds.
+
+### 16. Fonts have to go into Instatic's own library
+
+`css/03-fonts.css` declares seven self-hosted cuts with `url("fonts/<file>.woff2")`, relative to
+`assets/`. There is no `assets/` on Instatic and nowhere to make one, so
+`build-import-input.mjs` refuses the payload rather than shipping seven dead `url()`s — and a dead
+`@font-face` is invisible in the same way a dead texture is, because the family name still resolves
+and the browser falls back to Georgia.
+
+`install-fonts.mjs` (this folder, Stone's own families) posts to
+`/admin/api/cms/fonts/install`, which downloads the woff2 files server-side, serves them from
+`/uploads/fonts/` and records a FontEntry the publisher emits `@font-face` from.
+`build-import-input.mjs` excises the `03-fonts.css` block from the CSS payload and asserts that no
+`@font-face` survived. The `<link rel="preload">` tags are stripped for the same reason.
+
+> `saveShell(shell, seq)` — **the seq is not optional.** Without it the API answers
+> `400 Invalid request body`, which reads like a malformed payload and is a missing
+> optimistic-concurrency token.
+
+### 17. There is one script asset, so the vendor split does not survive
+
+The static build emits GSAP as a separate `vendor.js` that only pages with `motion: true` request,
+so the neck lift page never downloads 122KB it has no use for. Instatic has one script asset for the
+whole site. `push-site.mjs` concatenates the vendor bundle **ahead of** `site.js` into that asset and
+both published pages carry it.
+
+Order is load-bearing and fails quietly if reversed: `js/10-journey.js` reads `window.gsap` at call
+time and guards on it, so a reversed order does not throw — it produces a home page with no pinned
+chapter and no split headlines, which looks like a design decision.
+
+### 18. A full-page screenshot lies about `background-attachment: fixed`
+
+Not an Instatic trap, but it cost a false alarm during this verification and belongs where the next
+person will look. `.stone-band` uses `background-attachment: fixed`. In a `fullPage: true`
+screenshot Chrome paints that background only where the viewport happened to be, so the dark
+chapter came back as white text on ivory and looked like a catastrophic theme failure on the live
+site. It was correct in the browser.
+
+**Verify a fixed-attachment section with a VIEWPORT screenshot**, scrolled to it. `slices.mjs` in
+`site-src/` does exactly that and is the right tool for looking at a published page as well as a
+local one.
 
 ## Output Artifacts
 

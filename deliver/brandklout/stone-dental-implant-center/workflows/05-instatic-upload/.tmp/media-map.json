@@ -1,18 +1,58 @@
 {
   "base": "https://stone-surgical-arts-production.up.railway.app",
-  "uploadedAt": "2026-08-31T22:27:37.811Z",
+  "uploadedAt": "2026-09-01T19:19:34.901Z",
   "map": {
+    "ask-reception-tall.webp": {
+      "id": "kuXBysYkzvRlVHdqfYhDH",
+      "url": "/uploads/5HxBBXKyOZmRXruM1XN3F-ask-reception-tall.webp",
+      "uploadedAs": "ask-reception-tall.webp",
+      "width": 1000,
+      "height": 1500,
+      "variants": 4
+    },
     "banner-ssa.avif": {
       "id": "VFnpl2rNDa2X-i7X_fs1K",
       "url": "/uploads/HVoYpxa76YtaNUiPkQd-1-banner-ssa.webp",
       "reused": true,
       "uploadedAs": "banner-ssa.webp"
     },
+    "cat-face-tall.webp": {
+      "id": "pHvLc4Hl1r5Ktf8pcWbRb",
+      "url": "/uploads/cWNLsB72QxZ1YPvMj6mbu-cat-face-tall.webp",
+      "uploadedAs": "cat-face-tall.webp",
+      "width": 1000,
+      "height": 1500,
+      "variants": 4
+    },
     "cat-face.webp": {
       "id": "qMS9qFFlFjmpAX55ByBaN",
       "url": "/uploads/nVD0ZRiJ4KUmhfqZJyjIa-cat-face.webp",
       "reused": true,
       "uploadedAs": "cat-face.webp"
+    },
+    "cat-neck-tall.webp": {
+      "id": "oYfgL7TzTtyeW7WU-wJvR",
+      "url": "/uploads/LejuQWObY3NIAo5I1mZEh-cat-neck-tall.webp",
+      "uploadedAs": "cat-neck-tall.webp",
+      "width": 1000,
+      "height": 1500,
+      "variants": 4
+    },
+    "cat-nonsurgical-tall.webp": {
+      "id": "DxDd3HmChoqoUrwl07GwG",
+      "url": "/uploads/ZrDCxTKJSBMxfsx8-Ku7o-cat-nonsurgical-tall.webp",
+      "uploadedAs": "cat-nonsurgical-tall.webp",
+      "width": 1000,
+      "height": 1500,
+      "variants": 4
+    },
+    "cat-skin-tall.webp": {
+      "id": "g6pYR-YoValNafmZZpnG7",
+      "url": "/uploads/OqzvX2nIWKKxNhBGgT08f-cat-skin-tall.webp",
+      "uploadedAs": "cat-skin-tall.webp",
+      "width": 1000,
+      "height": 1500,
+      "variants": 4
     },
     "clinic-detail.webp": {
       "id": "6kyjmoUzcv_s89GIP4-Xz",
@@ -38,11 +78,21 @@
       "reused": true,
       "uploadedAs": "dr-stone-portrait.webp"
     },
-    "gen-daylight-wall.webp": {
-      "id": "Oh0FuidNEq4-uH9EYgZQU",
-      "url": "/uploads/UC-jKKMr9AVLTdL34wLeb-gen-daylight-wall.webp",
-      "reused": true,
-      "uploadedAs": "gen-daylight-wall.webp"
+    "gen-contour-gauges.webp": {
+      "id": "MwieKp8idWKpSU1ViQ8ik",
+      "url": "/uploads/c4c8HVA9J8_mnheaDVy6H-gen-contour-gauges.webp",
+      "uploadedAs": "gen-contour-gauges.webp",
+      "width": 1600,
+      "height": 900,
+      "variants": 5
+    },
+    "gen-iclight-wand.webp": {
+      "id": "Dv95S--6KlwbghFQNupsW",
+      "url": "/uploads/kgH31Ndi1Xpc6aoFxw5ER-gen-iclight-wand.webp",
+      "uploadedAs": "gen-iclight-wand.webp",
+      "width": 1600,
+      "height": 900,
+      "variants": 5
     },
     "gen-implant-forms.webp": {
       "id": "H4nRaJniu-3en3QejLDv-",
@@ -73,6 +123,14 @@
       "url": "/uploads/9BKtiivMsOxHfob2tdXUH-gen-linen-detail.webp",
       "reused": true,
       "uploadedAs": "gen-linen-detail.webp"
+    },
+    "gen-marble-jawline.webp": {
+      "id": "C02AARIELxAamZvC_XNSs",
+      "url": "/uploads/NKkDid5C8lhlQULLqH_wx-gen-marble-jawline.webp",
+      "uploadedAs": "gen-marble-jawline.webp",
+      "width": 1000,
+      "height": 1500,
+      "variants": 4
     },
     "gen-or-light.webp": {
       "id": "_2AJ8kw0sxROz1sVONfBY",
@@ -110,6 +168,14 @@
       "reused": true,
       "uploadedAs": "gen-skincare-shelf.webp"
     },
+    "gen-surgical-loupes.webp": {
+      "id": "AZkN7kabWURuk4GeGf5SV",
+      "url": "/uploads/-OuEM7xQU3SBpiE5Z3996-gen-surgical-loupes.webp",
+      "uploadedAs": "gen-surgical-loupes.webp",
+      "width": 1000,
+      "height": 1500,
+      "variants": 4
+    },
     "gen-surgical-suite.webp": {
       "id": "T8GzTsmCntlkvYEqDfAmc",
       "url": "/uploads/eBwxfbTbHlY5wLI4Mhm5D-gen-surgical-suite.webp",
@@ -122,17 +188,59 @@
       "reused": true,
       "uploadedAs": "gen-suture-tray.webp"
     },
+    "hero-arrival.webp": {
+      "id": "1OWdnUPipD4_ooVlgCuHO",
+      "url": "/uploads/6jBHtXU7PEWOL4P4KQYCY-hero-arrival.webp",
+      "uploadedAs": "hero-arrival.webp",
+      "width": 1200,
+      "height": 1800,
+      "variants": 5
+    },
     "membership-still.webp": {
       "id": "LpwIXen6cof6llLTGkn1E",
       "url": "/uploads/aAKjukeOh2JLT_rbgpJNn-membership-still.webp",
       "reused": true,
       "uploadedAs": "membership-still.webp"
     },
-    "office-exterior.webp": {
-      "id": "COyDhDS-rpeBJOWw8DW-Y",
-      "url": "/uploads/fysOBJtSF2N0EZhorFHq6-office-exterior.webp",
-      "reused": true,
-      "uploadedAs": "office-exterior.webp"
+    "p-face-cat.webp": {
+      "id": "UQMdjMxBXKucZQVqvANXp",
+      "url": "/uploads/jo4TFrl2luQriD7a_Bu7S-p-face-cat.webp",
+      "uploadedAs": "p-face-cat.webp",
+      "width": 1400,
+      "height": 2100,
+      "variants": 5
+    },
+    "p-mirror.webp": {
+      "id": "KJ8_cfoajqlfnIwT6khih",
+      "url": "/uploads/xKkFTfAOlDibkbHS-B4JB-p-mirror.webp",
+      "uploadedAs": "p-mirror.webp",
+      "width": 1400,
+      "height": 933,
+      "variants": 5
+    },
+    "p-neck-profile.webp": {
+      "id": "33u79r9JjFuoU4OG1K9nM",
+      "url": "/uploads/0-5tDx8DR21sNoy03f6_m-p-neck-profile.webp",
+      "uploadedAs": "p-neck-profile.webp",
+      "width": 1400,
+      "height": 2100,
+      "variants": 5
+    },
+    "p-outdoors.webp": {
+      "id": "re-fVQ0KWVwQ5bgED9h4u",
+      "url": "/uploads/3JpMd75nJSqrkWeBVwiEr-p-outdoors.webp",
+      "uploadedAs": "p-outdoors.webp",
+      "width": 1400,
+      "height": 2100,
+      "variants": 5
+    },
+    "p-recovery-home.webp": {
+      "id": "4GvAUtvqfanCfmK1Q1sLY",
+      "url": "/uploads/Dsn3EN0bZj6cqcUEoYeih-p-recovery-home.webp",
+      "uploadedAs": "p-recovery-home.webp",
+      "width": 1400,
+      "height": 933,
+      "variants": 5
     },
     "ssa-consult-room.webp": {
       "id": "_iYf9XmQ3fGaRazYw6Uye",
@@ -170,11 +278,21 @@
       "reused": true,
       "uploadedAs": "staff-brooke.webp"
     },
-    "texture-stone.jpg": {
-      "id": "UZ_jxBPcHbUSKQwxt9Ab4",
-      "url": "/uploads/uDNEah7hX0JZVO9Wzavtb-texture-stone.jpg",
-      "reused": true,
-      "uploadedAs": "texture-stone.jpg"
+    "tex-carrara.webp": {
+      "id": "DO7i-KvP6fuFK0aS014di",
+      "url": "/uploads/QegZ_B0KX-IDM05M3lnQT-tex-carrara.webp",
+      "uploadedAs": "tex-carrara.webp",
+      "width": 1800,
+      "height": 900,
+      "variants": 6
+    },
+    "tex-marble-dark.webp": {
+      "id": "AbJHCt_jihKi2vxcbd4p2",
+      "url": "/uploads/iqy6m_rdoNiQidRcMvCuQ-tex-marble-dark.webp",
+      "uploadedAs": "tex-marble-dark.webp",
+      "width": 1800,
+      "height": 900,
+      "variants": 6
     }
   }
 }

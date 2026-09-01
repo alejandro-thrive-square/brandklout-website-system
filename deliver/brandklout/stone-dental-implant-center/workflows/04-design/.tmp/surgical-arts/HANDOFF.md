@@ -130,7 +130,7 @@ is live at the eighteen-page version; see "Taking it into Instatic".
 | **Measure** | `cd site-src && node measure.mjs` — per screen size: which chapters exceed the viewport, whether every reveal fired, what the gutter and content width resolve to |
 | **Fonts** | `cd site-src && node get-fonts.mjs` — **REQUIRED ON A FRESH CLONE.** The `.woff2` files are gitignored like every other binary, so `assets/fonts/` is empty until this is run and the site silently falls back to Georgia and Arial. `css/03-fonts.css` and the generator ARE committed. Self-hosted, latin subset; **there is no request to fonts.googleapis.com** and `journey-test.mjs` asserts there is none |
 | **Imagery** | `node site-src/get-stock.mjs` (searched, NO people ever) · `node site-src/generate-images.mjs` (generated, no people ever) · `node site-src/get-people.mjs` (**people and places**, added 2026-09-01) |
-| **Live** | <https://stone-surgical-arts-production.up.railway.app> — see [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md). **Still at the eighteen-page v1 build**; nothing since 2026-08-31 has been pushed |
+| **Live** | <https://stone-surgical-arts-production.up.railway.app> — **these two pages, published 2026-09-01.** The sixteen retired pages were deleted from the instance in the same atomic PUT and `verify-live.mjs` confirms all sixteen routes 404. See [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md), traps 13 to 18, for what the first publish of the rebuilt pages cost |
 | **Preview harness** | `node ../../../01-content-intake/.tmp/serve.mjs . 8792` then open `http://localhost:8792/preview.html` |
 | **Asana** | [Give Jess the core pages for Aesthetic - Stone](https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217846850268874) |
 | **Design** | "Stone Surgical Arts Website Redesign — 01 Sculpted Ivory", attached to that task |
@@ -347,16 +347,21 @@ from `bk-dr-nahlah` before `get-stock.mjs` will run.
 > **The site is live on the client's Instatic instance.**
 > <https://stone-surgical-arts-production.up.railway.app>
 >
-> It was last pushed at eighteen pages on 2026-08-31 — 18 pages converted with 0 auto-created
-> classes and 0 warnings, one atomic PUT, `{"publishedPages":18}`, `verify-live.mjs` clean at 18
-> routes. **That is now ahead of this repository by sixteen pages, and its `/neck-lift` is the v1
-> design.** Re-running `05-instatic-upload/ship.sh --apply` publishes two pages: it DELETES sixteen
-> and OVERWRITES `/neck-lift` with the journey rewrite. That is the intended outcome, the import is
-> an atomic PUT of the whole tree, and it is not reversible from this side. Confirm before running.
+> **The instance carries these two pages and nothing else, published 2026-09-01** at the client's
+> explicit request. The sixteen retired pages were deleted in the same atomic PUT. `verify-live.mjs`
+> is clean: 2 routes, 41 unique URLs, 28 asset references, and all 16 retired routes confirmed 404.
+> Both typefaces load, the marble textures resolve, and the three controls on the neck lift page
+> were driven on the published site rather than assumed.
 >
-> `build-import-input.mjs` and `verify-live.mjs` both carry the two-page list, and `verify-live.mjs`
-> now has the sixteen retired slugs in its `GONE` array, so the run after the first apply proves the
-> deletion as well as the deployment.
+> **It took four rounds to get there and each one found something the local gates could not see.**
+> Traps 13 to 18 in [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md) are
+> the record; the short version is that three separate things were silently missing from the
+> published CSS (eleven custom properties, two background textures, seven `@font-face` rules) and
+> every one of them degrades to something that looks deliberate rather than broken. **A publish is
+> not verified until somebody has looked at the published page.**
+>
+> **The media library was not pruned.** It holds 43 images, about twenty of them belonging to pages
+> that no longer exist. `upload-media.mjs` is additive and nothing removes an asset; see trap 11.
 >
 > The full pipeline, and the traps that had to be worked through, are in
 > [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md).

@@ -73,6 +73,27 @@ function rewrite(html, file) {
   //    broken reference.
   out = out.replace(/<!--[\s\S]*?-->/g, '')
 
+  // 0b. Drop the two <head> references that have no Instatic equivalent, before
+  //     step 1 goes looking for them in the media map.
+  //
+  //     vendor.js. The static build emits GSAP as a SEPARATE bundle that only
+  //     pages with `motion: true` request, so the neck lift page never
+  //     downloads 122KB it does not use. Instatic has ONE script asset for the
+  //     whole site, so that split cannot survive the import: push-site.mjs
+  //     concatenates the vendor bundle ahead of site.js into the single asset
+  //     and both published pages carry it. The split still earns its keep in
+  //     the static build and on any host that serves the files as they are.
+  out = out.replace(/[ \t]*<script[^>]+src="assets\/vendor\.js"[^>]*><\/script>\s*\n?/g, '')
+
+  //     The font preloads. The static build self-hosts both typefaces out of
+  //     `assets/fonts/` and preloads the two cuts that set the headline and the
+  //     body copy. There is no `assets/` on Instatic to preload FROM: the fonts
+  //     are installed into Instatic's own library by install-fonts.mjs, served
+  //     from `/uploads/fonts/`, and the publisher emits the @font-face rules
+  //     itself. A preload pointing at a path that does not exist is a console
+  //     error and a wasted round trip.
+  out = out.replace(/[ \t]*<link[^>]+rel="preload"[^>]+href="assets\/fonts\/[^"]+"[^>]*>\s*\n?/g, '')
+
   // 1. Image sources -> media library paths.
   out = out.replace(/(src|href)="assets\/([^"]+)"/g, (whole, attr, name) => {
     if (name === 'site.css' || name === 'site.js') return whole // handled below
@@ -121,7 +142,80 @@ const pages = PAGES.map((p) => {
   }
 })
 
-const css = fs.readFileSync(path.join(FINAL, 'assets', 'site.css'), 'utf8')
+/* The stylesheet, MINUS the self-hosted @font-face block.
+
+   `css/03-fonts.css` declares seven cuts with `url("fonts/<file>.woff2")`,
+   relative to `assets/` where site.css is served from in the static build.
+   There is no `assets/` on Instatic and nowhere to make one. The fonts live in
+   Instatic's own library instead (see install-fonts.mjs) and the publisher
+   emits its own @font-face rules from there.
+
+   Shipping this block as well would put seven dead `url()`s into the style
+   registry, and A DEAD @font-face IS NOT A VISIBLE ERROR: the family name still
+   resolves, the browser falls back to Georgia, and the page looks plausible and
+   wrong. That is the same trap install-fonts.mjs warns about.
+
+   The bundle carries one banner per source file, so the block is delimited by
+   its own banner and the next one. Both edges are asserted rather than assumed:
+   a bundler that stops emitting banners would otherwise make this excision
+   silently do nothing, or take the whole rest of the file. */
+const cssBundle = fs.readFileSync(path.join(FINAL, 'assets', 'site.css'), 'utf8')
+const FONT_BANNER = '/* ===== css/03-fonts.css ===== */'
+const BANNER_NEXT = '/* ===== css/'
+const fontStart = cssBundle.indexOf(FONT_BANNER)
+const fontEnd = fontStart < 0 ? -1 : cssBundle.indexOf(BANNER_NEXT, fontStart + FONT_BANNER.length)
+if (fontStart < 0) {
+  problems.push('site.css: no css/03-fonts.css banner. The bundler changed shape and the @font-face excision is doing nothing')
+} else if (fontEnd < 0) {
+  problems.push('site.css: css/03-fonts.css is the last block, so the excision would take the rest of the file')
+}
+let css =
+  fontStart >= 0 && fontEnd > fontStart ? cssBundle.slice(0, fontStart) + cssBundle.slice(fontEnd) : cssBundle
+const fontFaces = (cssBundle.match(/@font-face/g) ?? []).length
+const fontFacesLeft = (css.match(/@font-face/g) ?? []).length
+if (fontFacesLeft) {
+  problems.push(`site.css: ${fontFacesLeft} @font-face rule(s) survived the excision`)
+}
+
+/* --- CSS url() -> media library ------------------------------------------
+   FOUND ON THE PUBLISHED SITE, 2026-09-01, by reading the network log rather
+   than by anything failing.
+
+   `.stone-panel` and `.stone-band` reference their marble with
+   `url("tex-carrara.webp")` and `url("tex-marble-dark.webp")`. In the static
+   build that resolves correctly because site.css is served FROM `assets/`,
+   which is where the files are. Instatic publishes the registry at
+   `/_instatic/css/`, so the same relative url() asked for
+   `/_instatic/css/tex-carrara.webp` and got a 404 on every published page.
+
+   > [!IMPORTANT]
+   > **A 404 BACKGROUND IMAGE IS INVISIBLE.** `.stone-panel` also sets
+   > `background-color: var(--ivory)` and `.stone-band` sets `#1c1b19`, so a
+   > missing texture leaves a flat panel that looks like a deliberate flat
+   > panel. Nothing fails, nothing warns, and `verify-live.mjs` was happy: it
+   > checks the assets the MARKUP references and these are only in CSS. This is
+   > the third time this site has lost its marble to a url() resolution and the
+   > second time it took a screenshot or a network log to notice — see the CSS
+   > note in HANDOFF.md.
+
+   Rewritten against the same media map the markup uses. The CHECK below runs on
+   a comment-stripped copy: `38-cta.css` carries the previous incident in a
+   comment, quoting the old broken path verbatim, and a check that reads its own
+   notes back as failures is useless. */
+css = css.replace(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g, (whole, q, ref) => {
+  if (/^(data:|https?:|\/)/.test(ref)) return whole
+  const hit = mediaMap[ref]
+  if (!hit) return whole // reported below, after comments are stripped
+  return `url("${hit.url}")`
+})
+{
+  const bare = css.replace(/\/\*[\s\S]*?\*\//g, ' ')
+  for (const m of bare.matchAll(/url\(\s*(['"]?)([^'")]+)\1\s*\)/g)) {
+    const ref = m[2]
+    if (/^(data:|https?:|\/)/.test(ref)) continue
+    problems.push(`site.css: url(${ref}) has no media-map entry and would 404 once published`)
+  }
+}
 
 if (problems.length) {
   console.error('REFUSING to build the payload:\n  ' + problems.join('\n  '))
@@ -135,5 +229,8 @@ fs.writeFileSync(path.join(TMP, 'import-input.b64'), gz.toString('base64'))
 
 console.log(`pages: ${pages.length}`)
 for (const p of pages) console.log(`  ${p.slug.padEnd(18)} ${(p.html.length / 1024).toFixed(1)}KB  "${p.seoTitle.slice(0, 54)}"`)
-console.log(`css:   ${(css.length / 1024).toFixed(1)}KB`)
+console.log(
+  `css:   ${(css.length / 1024).toFixed(1)}KB  (${(cssBundle.length / 1024).toFixed(1)}KB bundle, less ` +
+    `${fontFaces} @font-face rule(s); Instatic emits its own, see install-fonts.mjs)`,
+)
 console.log(`payload ${(payload.length / 1024).toFixed(1)}KB -> gz ${(gz.length / 1024).toFixed(1)}KB -> b64 ${(gz.toString('base64').length / 1024).toFixed(1)}KB`)

@@ -25,10 +25,10 @@ decisions in the handoff. Start at
 [workflows/04-design/.tmp/surgical-arts/HANDOFF.md](../workflows/04-design/.tmp/surgical-arts/HANDOFF.md).
 
 > [!WARNING]
-> **The live Instatic site is still the eighteen-page version, all of it v1.** It has not been
-> re-published since the cut. Publishing is an atomic PUT of the whole tree, so the next `ship.sh`
-> drops sixteen pages from the live site and replaces `/neck-lift` with the rewrite. That is
-> probably what is wanted; it should still be a decision someone takes rather than a side effect.
+> **The live Instatic site is these two pages, published 2026-09-01.** The sixteen retired pages
+> were deleted from the instance in the same atomic PUT, at the client's request, so the staging
+> link can go to the team. `verify-live.mjs` is clean and both routes were read on the published
+> site rather than assumed. <https://stone-surgical-arts-production.up.railway.app>
 
 **Stone Med Spa: still not started**, and still unscoped. It is a separate brand — Instagram calls
 it *Westlake Medical Aesthetics* — and task `1217160668112180` has no page list, no design and no

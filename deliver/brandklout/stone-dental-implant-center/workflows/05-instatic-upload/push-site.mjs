@@ -56,7 +56,30 @@ const BOOTSTRAP = `/* Added by push-site.mjs — see the comment there before re
    Replaces the static build's inline <head> script, which Instatic strips. */
 document.documentElement.classList.add('js');
 `
-const siteJs = BOOTSTRAP + fs.readFileSync(path.join(SITE_SRC, 'assets', 'site.js'), 'utf8')
+/* THE VENDOR BUNDLE GOES IN FRONT OF IT, added 2026-09-01.
+
+   The static build keeps GSAP + ScrollTrigger + SplitText in a separate
+   `vendor.js` that only pages with `motion: true` request, so the neck lift
+   page never downloads 122KB it has no use for. **Instatic has one script asset
+   for the whole site**, so the split cannot survive the import and both
+   published pages carry the vendor bundle. That is a real regression against
+   the static build and it is recorded here rather than quietly absorbed; the
+   split still pays on any host that serves the files as they are.
+
+   ORDER IS LOAD-BEARING. `js/10-journey.js` reads `window.gsap` at call time
+   and guards on it, so a reversed order does not throw — it silently produces a
+   home page with no pinned chapter and no split headlines, which looks like a
+   design decision. Vendor first, always.
+
+   `build-import-input.mjs` strips the page-level `<script src="assets/vendor.js">`
+   for the same reason it strips site.js. */
+const vendorJs = fs.readFileSync(path.join(SITE_SRC, 'assets', 'vendor.js'), 'utf8')
+const siteJs =
+  BOOTSTRAP +
+  '/* ---- vendor.js, concatenated by push-site.mjs: Instatic has one script asset. ---- */\n' +
+  vendorJs +
+  '\n/* ---- site.js ---- */\n' +
+  fs.readFileSync(path.join(SITE_SRC, 'assets', 'site.js'), 'utf8')
 
 /* --- the token layer -----------------------------------------------------
    CUSTOM PROPERTIES DO NOT SURVIVE THE REGISTRY CONVERSION.
@@ -85,15 +108,119 @@ const siteJs = BOOTSTRAP + fs.readFileSync(path.join(SITE_SRC, 'assets', 'site.j
    Source files, verbatim and in order — keep them in step with site-src/css/. */
 const TOKEN_FILES = ['00-fluid-root.css', '01-tokens.css']
 const CSS_SRC = path.resolve(HERE, '../04-design/.tmp/surgical-arts/site-src/css')
+
+/* --- AND EVERY OTHER :root BLOCK, harvested ------------------------------
+   FOUND ON THE PUBLISHED SITE, 2026-09-01. The two files above were the whole
+   token layer when every custom property lived in them. They stopped being the
+   whole token layer on 2026-08-31, when `50-journey.css` opened its own `:root`
+   for `--size-display`, `--size-display-sm`, `--size-numeral`, `--size-h3-j`,
+   `--gutter`, `--section`, `--section-sm` and `--pad-panel` — and again on
+   2026-09-01, when `51-dossier.css` added `--spec-w` and `--spec-top`.
+
+   Those declarations went into the registry and happy-dom dropped them, exactly
+   as the note above describes, and nobody noticed because the FAILURE IS NOT
+   UNIFORM. `--size-h2` is in 01-tokens.css so every section heading was the
+   right size; `--size-display` is not, so the <h1> rendered at inherited body
+   size. `--gutter` is not, so `padding: var(--section) var(--gutter)` was an
+   invalid declaration and the whole page sat flush against x=0 while every
+   other spacing value looked correct. A half-tokenised page reads as a layout
+   bug, not as a token bug, which is why this cost a publish to find.
+
+   So harvest them rather than maintain a second list that will drift the same
+   way. Every `:root` block in every other stylesheet, top level and inside
+   `@media`, is appended verbatim. A new stylesheet that declares a token is
+   covered the day it is written. */
+function harvestRoots(src) {
+  // Comments first. `50-journey.css` opens with a fifty-line banner and its
+  // `:root` follows a `*/`, not a `}` — the first version of this keyed on the
+  // preceding character and harvested nothing at all, silently, which is the
+  // same class of failure it was written to prevent. The `MUST` assertion below
+  // is what caught it.
+  const css = src.replace(/\/\*[\s\S]*?\*\//g, ' ')
+  const out = []
+
+  // Walk rules by brace MATCHING, so an @media wrapper is one rule rather than
+  // something a `{[^}]*}` regex stops in the middle of.
+  const rules = (text) => {
+    const found = []
+    let i = 0
+    while (i < text.length) {
+      const open = text.indexOf('{', i)
+      if (open < 0) break
+      let depth = 0
+      let close = -1
+      for (let j = open; j < text.length; j++) {
+        if (text[j] === '{') depth++
+        else if (text[j] === '}') {
+          depth--
+          if (depth === 0) {
+            close = j
+            break
+          }
+        }
+      }
+      if (close < 0) break
+      found.push({ sel: text.slice(i, open).trim(), body: text.slice(open + 1, close) })
+      i = close + 1
+    }
+    return found
+  }
+
+  const isRoot = (sel) => /(^|,)\s*:root\s*$/.test(sel)
+
+  for (const r of rules(css)) {
+    if (isRoot(r.sel)) {
+      out.push(':root {' + r.body + '}')
+    } else if (/^@(media|supports)\b/.test(r.sel)) {
+      const inner = rules(r.body).filter((n) => isRoot(n.sel))
+      if (inner.length) {
+        out.push(r.sel + ' {' + inner.map((n) => ':root {' + n.body + '}').join('') + '}')
+      }
+    }
+  }
+  return out
+}
+
+const harvested = []
+for (const f of fs.readdirSync(CSS_SRC).filter((n) => n.endsWith('.css')).sort()) {
+  if (TOKEN_FILES.includes(f)) continue
+  const blocks = harvestRoots(fs.readFileSync(path.join(CSS_SRC, f), 'utf8'))
+  if (blocks.length) harvested.push({ file: f, blocks })
+}
+
 const tokensCss =
   `/* Token primitives, pushed as a code asset by push-site.mjs.\n` +
   `   These CANNOT live in the style registry: happy-dom drops --custom-property\n` +
   `   declarations during conversion, silently. Edit site-src/css/ and re-push. */\n\n` +
   TOKEN_FILES.map((f) => fs.readFileSync(path.join(CSS_SRC, f), 'utf8')).join('\n') +
-  // `--pos` drives the before/after wipe and is the one custom property
-  // declared outside the token files; site.js overwrites it on input.
-  `\n/* from 35-gallery.css — dropped by the same happy-dom limitation */\n` +
+  harvested
+    .map(
+      ({ file, blocks }) =>
+        `\n/* ===== :root harvested from ${file} ===== */\n` + blocks.join('\n\n') + '\n',
+    )
+    .join('') +
+  // `--pos` drove the before/after wipe. 35-gallery.css was deleted with the
+  // results page on 2026-09-01 and `.compare_component` is in no markup, so
+  // this rule is dormant rather than live. One rule costs nothing and it comes
+  // back with the page.
+  `\n/* from the deleted 35-gallery.css — dormant, see push-site.mjs */\n` +
   `.compare_component { --pos: 50%; }\n`
+
+/* A token that is declared and never reaches the asset is the failure this
+   whole block exists to stop, so assert the ones the layout cannot survive
+   without rather than trusting the harvest. */
+{
+  const MUST = ['--gutter', '--section', '--size-display', '--size-h3-j', '--spec-w', '--spec-top', '--ivory', '--space-large']
+  const missing = MUST.filter((t) => !tokensCss.includes(t + ':'))
+  if (missing.length) {
+    console.error(`REFUSING: the token asset is missing ${missing.join(', ')}. Every var() using them would resolve to nothing on the published site.`)
+    process.exit(1)
+  }
+  console.log(
+    `tokens     ${TOKEN_FILES.join(' + ')} + ${harvested.reduce((n, h) => n + h.blocks.length, 0)} harvested :root block(s) from ` +
+      `${harvested.map((h) => h.file).join(', ') || '(none)'}`,
+  )
+}
 
 /* --- read current state --------------------------------------------------- */
 const { site, seq } = await getSite()
@@ -244,7 +371,7 @@ const body = {
 
 const bytes = Buffer.byteLength(JSON.stringify(body))
 console.log(`shell      styleRules ${Object.keys(shell.styleRules).length}, conditions ${(shell.conditions ?? []).length}, files ${shell.files.length}`)
-console.log(`site.js    ${(siteJs.length / 1024).toFixed(1)}KB (bootstrap + bundle)`)
+console.log(`site.js    ${(siteJs.length / 1024).toFixed(1)}KB (bootstrap + vendor ${(vendorJs.length / 1024).toFixed(1)}KB + bundle)`)
 console.log(`pages      ${pages.length} written, ${deletedPageIds.length} deleted`)
 for (const p of pages) console.log(`   ${p.slug.padEnd(18)} ${Object.keys(p.nodes).length} nodes  id=${p.id}`)
 console.log(`payload    ${(bytes / 1024 / 1024).toFixed(2)}MB`)
