@@ -137,6 +137,44 @@
   }
 
   /* -------------------------------------------------------------------------
+     CHAPTER DEPARTURES.
+     DESIGN-STANDARD.md asks that a chapter both arrive AND depart, so that
+     leaving one feels like leaving a room rather than scrolling past a div.
+     Only Arrival had an exit; these are the other seven.
+
+     WHAT DEPARTS IS THE HEAD, NOT THE CHAPTER. The reference scrubs its whole
+     scene out on `start:'top top', end:'bottom top'`, which is right for a
+     chapter that is exactly one viewport tall. These are not: The Range runs
+     three screens. Fading a whole chapter from the moment its top touches the
+     viewport top would dim the paragraph somebody is still reading, several
+     hundred pixels lower down. So the tag and the headline recede as THEY pass
+     the top edge, which is the part of the scene that is genuinely leaving,
+     and the media keeps its own [data-drift] parallax underneath.
+
+     Triggered on the head rather than the section for the same reason the pin
+     needs it: in The Path the section is pinned at the viewport top for the
+     whole scene, so a section-anchored exit would fade the heading on arrival
+     and hold it faded. The head's own box only leaves when the pin releases.
+     --------------------------------------------------------------------- */
+  if (!reduced) {
+    $$("section[data-chapter]").forEach(function (sec) {
+      if (sec.classList.contains("ch-arrival")) return;   // has its own, above
+      var head = [sec.querySelector(".chapter-tag"), sec.querySelector("h2")].filter(Boolean);
+      if (!head.length) return;
+      gsap.to(head, {
+        yPercent: -55, opacity: 0, ease: "none",
+        scrollTrigger: {
+          trigger: head[0],
+          start: "top 5%",
+          end: "top -35%",
+          scrub: .6,
+          invalidateOnRefresh: true
+        }
+      });
+    });
+  }
+
+  /* -------------------------------------------------------------------------
      CHAPTER 00 — ARRIVAL
      --------------------------------------------------------------------- */
   (function arrival() {
@@ -351,6 +389,14 @@
           scrub: .3,
           anticipatePin: 1,
           invalidateOnRefresh: true,
+          /* MEASURED FIRST, because pinning inserts a spacer and everything
+             below Chapter 05 moves down by the length of the pin. A trigger
+             that refreshes before this one measures a document that does not
+             yet contain the spacer, and lands its start and end several hundred
+             pixels too high. That is what put The Proof's heading at 0.05
+             opacity while it was still half a screen from the top edge: its
+             departure had already run. Higher priority refreshes earlier. */
+          refreshPriority: 1,
           onUpdate: function (self) { if (bar) gsap.set(bar, { scaleX: self.progress }); }
         }
       });

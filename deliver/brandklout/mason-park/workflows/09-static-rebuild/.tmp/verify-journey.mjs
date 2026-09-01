@@ -292,8 +292,13 @@ for (const cid of chapterIds) {
     const s=document.getElementById(${JSON.stringify(cid)});
     return [...s.querySelectorAll(${JSON.stringify(REVEALED)})].filter(el=>{
       const r=el.getBoundingClientRect();
-      // Only judge what is actually on screen at this scroll position.
-      if (r.bottom < 0 || r.top > innerHeight || r.width === 0) return false;
+      // Only judge what is actually on screen at this scroll position, and only
+      // what is ARRIVING. An element whose top edge has passed the viewport top
+      // is in its departure, and a departure is a fade by definition: the
+      // invitation's headline sat at y=-152 with 4px still showing and was
+      // reported as an unlanded reveal. Arrival and departure are different
+      // assertions and check 9a covers the other one.
+      if (r.bottom < 0 || r.top > innerHeight || r.top < 0 || r.width === 0) return false;
       const cs=getComputedStyle(el);
       if (el.closest('[aria-hidden="true"]') || el.hasAttribute('aria-hidden')) return false;
       if (Number(cs.opacity) < 0.99) return true;
@@ -453,6 +458,36 @@ for (const [w, still] of [[390, true], [1024, true]]) {
     check(`${k} keeps its gutter @ ${w}`, Math.abs(v.x - v.want) <= 2 && v.scrolled === 0, JSON.stringify(v));
   }
 }
+
+// --------------------------------------- 9a. every chapter DEPARTS, scrubbed
+// DESIGN-STANDARD.md asks that a chapter both arrive and depart. Arrival is the
+// easy half and the one everybody ships; this asserts the other half, and it
+// asserts it as a SCRUB — three distinct intermediate opacities as the head
+// passes the top edge, not a two-state snap.
+//
+// This check is also the reason the pin carries refreshPriority: 1. Pinning
+// inserts a spacer, everything below Chapter 05 moves down by the length of the
+// pin, and a trigger refreshed before the pin measures a document without it.
+// The Proof's heading read 0.05 while still half a screen from the top: its
+// departure had already run against positions several hundred pixels too high.
+// Every trigger below the pin had the same error; the departures merely made it
+// visible.
+await load(1440, 900);
+const departs = [];
+for (const sel of [".ch-relay", ".ch-together", ".ch-range", ".ch-people", ".ch-proof", ".ch-invitation"]) {
+  const has = await evaluate(`!!document.querySelector('${sel} h2')`);
+  if (!has) continue;
+  const reads = [];
+  const top = await evaluate(`(()=>{const h=document.querySelector('${sel} h2');return h.getBoundingClientRect().top + scrollY;})()`);
+  for (const f of [-0.5, -0.03, 0.3]) {
+    await seek(Math.max(0, top + 900 * f));
+    reads.push(await evaluate(`Number(getComputedStyle(document.querySelector('${sel} h2')).opacity).toFixed(2)`));
+  }
+  const ok = Number(reads[0]) > 0.95 && Number(reads[1]) < Number(reads[0]) - 0.05 && Number(reads[2]) < 0.25;
+  departs.push(`${sel} ${reads.join(" -> ")}${ok ? "" : "  <-- FAILED"}`);
+}
+check("every chapter departs, and the departure is scrubbed",
+  !departs.some((d) => d.includes("FAILED")), departs.join("  |  "));
 
 // --------------------------- 9b. the type tier actually reaches the element
 // An unbalanced brace in the token block once made CSS error recovery swallow
