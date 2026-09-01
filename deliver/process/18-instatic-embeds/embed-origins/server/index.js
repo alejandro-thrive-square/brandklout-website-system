@@ -487,6 +487,14 @@ export function activate(api) {
     // behaviour that made them work.
     var compatible = api.cms.settings.get('embedPolicy') !== 'strict'
     var hasEmbed = EMBED_MARKER.test(html)
+    /* A review sidebar (BugHerd) is not an Embed block: it arrives through a
+       site-wide runtime script, so no page "contains" it, and once a reviewer
+       is logged in it opens a Pusher websocket, loads a SockJS fallback script
+       and builds blob: previews -- none of which the typed boxes can express
+       (they take `https?://host` and nothing else). This switch applies the
+       compatible policy to EVERY page. Off by default, and meant for a
+       staging instance whose whole purpose is that review. */
+    var everywhere = api.cms.settings.get('compatibleEverywhere') === true
     // Default ON: a plugin installed before this setting existed has no stored
     // value, and the point of the setting is the behaviour it enables.
     var auto = api.cms.settings.get('autoTrust') !== false
@@ -495,7 +503,7 @@ export function activate(api) {
     /* Compatible mode only engages where there is something to be compatible
        WITH. A page with no Embed block is left exactly as the publisher wrote
        it, which on this site is most of them. */
-    if (compatible && hasEmbed) {
+    if (compatible && (hasEmbed || everywhere)) {
       var cspC = null
       var matchC = CSP_META_RE.exec(html)
       if (!matchC) {

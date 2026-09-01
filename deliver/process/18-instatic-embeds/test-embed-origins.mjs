@@ -314,5 +314,33 @@ check('compatible mode is idempotent across republishes',
     return run({}, first) === first
   })())
 
+// compatibleEverywhere (v1.5.0) — the compatible policy on pages with NO embed.
+// A review sidebar (BugHerd) arrives through a site-wide runtime script, so no
+// page contains an Embed block, and once logged in it needs a websocket, a
+// SockJS fallback script and blob: previews that no typed box can express.
+console.log('\nEmbed Origins — compatibleEverywhere\n')
+
+const plainPage = page(LIVE_CSP)
+check('off by default: a page with no embed is still byte-identical',
+  run({}, plainPage) === plainPage)
+check('on: a page with no embed gets the compatible policy',
+  (() => {
+    const c = cspOf(run({ compatibleEverywhere: true }, plainPage))
+    return /script-src[^;]*https:/.test(c) && /connect-src[^;]*wss:/.test(c) &&
+      /img-src[^;]*blob:/.test(c) && /frame-src[^;]*https:/.test(c)
+  })(), cspOf(run({ compatibleEverywhere: true }, plainPage)))
+check('on: the typed boxes still apply on top',
+  cspOf(run({ compatibleEverywhere: true, frameOrigins: 'http://staging.local:3000' }, plainPage))
+    .includes('http://staging.local:3000'))
+check('on: strict mode still wins — the switch is a compatible-mode option',
+  run({ compatibleEverywhere: true, embedPolicy: 'strict' }, plainPage) === plainPage)
+check('on: idempotent across republishes',
+  (() => {
+    const first = run({ compatibleEverywhere: true }, plainPage)
+    return run({ compatibleEverywhere: true }, first) === first
+  })())
+check('a string "true" does not count — only the boolean the toggle stores',
+  run({ compatibleEverywhere: 'true' }, plainPage) === plainPage)
+
 console.log(`\n${pass} passed, ${fail} failed\n`)
 process.exit(fail ? 1 : 0)

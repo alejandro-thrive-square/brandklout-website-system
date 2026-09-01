@@ -71,6 +71,34 @@ Say the trade out loud at handover: on the pages carrying an embed, what stands 
 
 `strict` + `autoTrust: false` returns to "nothing is allowed unless an operator typed it", which is where this plugin started.
 
+### `compatibleEverywhere` — the staging switch (v1.5.0)
+
+A review sidebar is not an Embed block. BugHerd arrives through a **site-wide runtime script**, so
+no page "contains" it and compatible mode never engages; and once a reviewer is logged in it opens
+a **Pusher websocket** (`wss://ws-*.pusher.com`), loads a **SockJS fallback script** from
+`js.pusher.com`, and builds **`blob:` previews** for screenshots and uploads. The typed boxes take
+`https?://host` and nothing else, so none of that can be allowed by hand, and the sidebar loads,
+half-works, and floods the console with refusals as Pusher retries every transport.
+
+`compatibleEverywhere: true` applies the compatible policy to every published page. It is a
+compatible-mode option (strict still wins), the typed boxes still apply on top, and it is **off by
+default**. Turn it on for a staging instance whose purpose is that review; never on production,
+where it would trade the per-page locked-down policy for Webflow's no-policy on every page.
+
+```bash
+INSTATIC_BASE_URL=https://staging.masonparkdental.com node set-origins.mjs --compatible-everywhere on
+# then republish; the CSP is rewritten at publish time
+```
+
+Live on `staging.masonparkdental.com` since 2026-09-01 (plugin 1.5.0). Both production sites stay
+on 1.4.0 with the switch absent, which the filter reads as off.
+
+**The settings `PUT` replaces the whole record; it does not merge.** Measured while turning this
+on: a call carrying only the toggle emptied all three origin boxes, and the call that re-typed the
+boxes switched the toggle back off. Every key left out falls back to its schema default.
+`set-origins.mjs` now GETs the record and writes the merged one, so pass only the flags you mean
+to change. Upgrading the plugin does **not** reset settings; that was the replace, misread.
+
 ## The canvas shows a card
 
 Since **module `1.1.0` / plugin `1.4.0`**, `preview()` — the editor-only path — never emits the frame or the snippet. It returns a static description of the block: mode, destination host(s), what a snippet contains, the height rule, and "Appears when the page is published". `render()`, the publish path, is untouched.
