@@ -87,8 +87,16 @@ const transform = (html) => {
   // `home/index.html` addresses its assets RELATIVELY (`assets/site.css`) so it
   // opens from file:// with no server. Every rule below was written against the
   // absolute form, so restore it here rather than teaching each one both shapes.
-  let out = html.split(String.fromCharCode(34) + "assets/").join(String.fromCharCode(34) + "/assets/")
-                .split(" assets/").join(" /assets/");
+  //
+  // A page at home/services/invisalign/ writes `../../assets/x` and one at the
+  // root writes `assets/x`; the depth is whatever the folder is. Collapse any
+  // run of `../` first, then the root form, and both land on the absolute shape.
+  // The delimiter is captured and put back rather than matched and discarded:
+  // srcset candidates are separated by SPACES, so there is not always a quote
+  // to anchor on and eating the separator would glue two candidates together.
+  let out = html.replace(/(["\s])(?:\.\.\/)+assets\//g, "$1/assets/");
+  out = out.split(String.fromCharCode(34) + "assets/").join(String.fromCharCode(34) + "/assets/")
+           .split(" assets/").join(" /assets/");
 
   // 3. drop the local asset plumbing - these are site-wide code assets there
   out = out.replace(/<script\b[^>]*>[\s\S]*?<\/script>/gi, "");

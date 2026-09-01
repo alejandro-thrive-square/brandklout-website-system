@@ -1598,8 +1598,20 @@ button { font: inherit; }
     text-transform: uppercase;
     margin-bottom: .3rem;
   }
+  /* THE COLUMN NAMES ARE MARKUP, NOT STYLE. Below 767 the header row is
+     hidden and each cell restates which column it is, and those two strings
+     used to be literals here — the homepage's own headers, baked into a
+     component every other page reuses. The Invisalign page's table compares
+     Invisalign with traditional braces and rendered "At Mason Park / Two
+     practices" over its five rows on every phone, correct on the desktop it
+     was reviewed at and wrong on the width most people read it at.
+     `data-label` on the cell carries it now. The literals stay underneath as
+     a fallback so a row that forgets the attribute degrades to the old
+     behaviour instead of to no label at all. */
   .vs-a::before { content: "At Mason Park"; color: var(--brand); }
   .vs-b::before { content: "Two practices"; color: var(--muted); }
+  .vs-a[data-label]::before { content: attr(data-label); }
+  .vs-b[data-label]::before { content: attr(data-label); }
 }
 
 /* The marquee. Velocity reactive, so a fast scroll visibly speeds it up. */
@@ -2481,6 +2493,16 @@ body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); 
 }
 .lf-section { scroll-margin-top: 7rem; }
 .lf-section + .lf-section { margin-top: clamp(2.25rem, 4vw, 3.25rem); }
+/* THE PROSE INSIDE A SECTION. `.text-rich-text > * + *` is a DIRECT child
+   selector, and the direct children of `.lf-body` are the sections, not the
+   paragraphs inside them. So two consecutive <p> in one section rendered with
+   no space between them at all — the paragraph break, the one piece of
+   structure a wall of text still has, was invisible. It reads as one block,
+   which is the exact failure "No wall of text" exists to stop.
+   Found on the first service page built by hand rather than by the generator;
+   `.lf-more-in > p:first-child { margin-top: 0 }` further down was already
+   written as if this rule existed. */
+.lf-section > * + * { margin-top: 1.15rem; }
 .lf-section h2 {
   font-size: var(--f-h3);
   font-weight: 400;
@@ -2511,7 +2533,14 @@ body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); 
    chapter does not sit in a two column frame with an empty rail beside it. */
 .lf-layout.is-solo { grid-template-columns: minmax(0, 1fr); }
 .lf-layout.is-solo .lf-body { max-width: 72ch; }
-.lf-layout.is-solo .lf-section h3 {
+/* The section heading, in BOTH frames. It was written for `is-solo` only, so
+   in the split frame — which is what every beat with fewer than four sections
+   uses, and therefore most of a service page — the heading fell back to bare
+   `.ch h3`: no rule above it, no space under it, sitting hard on its own first
+   paragraph. `.lf-split .lf-section:first-child h3` further down already
+   cancels a border-top that nothing was setting, which is the tell. */
+.lf-layout.is-solo .lf-section h3,
+.lf-split .lf-section h3 {
   font-family: var(--font-display);
   font-weight: 400;
   font-size: var(--f-h3);
@@ -2669,6 +2698,11 @@ body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); 
 .lf-more > summary:hover { color: var(--fg); }
 .lf-more > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
 .lf-more-in { padding-top: .35rem; }
+/* Same direct-child trap as `.lf-section`, one level deeper: the folded tail is
+   always two or more paragraphs and they ran together into the block the fold
+   exists to prevent. The `:first-child` reset below was already written as if
+   this rule were here. */
+.lf-more-in > * + * { margin-top: 1.15rem; }
 .lf-more-in > p:first-child { margin-top: 0; }
 
 /* ------------------------------------------------------ pictures in a column */

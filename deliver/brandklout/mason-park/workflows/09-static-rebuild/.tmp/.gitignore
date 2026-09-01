@@ -11,3 +11,11 @@ instatic/
 # container and running the converter there. Reproducible, and far past
 # "lightweight artifact".
 converted-pages.json
+
+# playwright-core, installed by .tmp/package.json for shot.mjs. Already covered
+# by the root .gitignore; named here so it is obvious why the folder exists.
+node_modules/
+package-lock.json
+
+# shot.mjs output. PNGs are refused repo-wide by extension anyway.
+shots/

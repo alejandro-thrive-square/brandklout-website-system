@@ -301,6 +301,34 @@ renderings and drive its signature interaction before copying the system across 
 Freeze the approved token set, shell, type scale, and interaction runtime for that batch. A static
 gate score cannot approve visual direction, brand fidelity, typography scale, or composition.
 
+### The second canary: a shared component is not proven until a second page uses it
+
+Freezing one page's system and calling it a library is only half of the gate. **The first page
+that reuses a part is what actually tests it**, and until then every place the component quietly
+depends on that first page reads as working. Mason Park's homepage was frozen on 2026-09-01 and
+the Invisalign service page was the first thing built on the frozen sheet; it found three of
+these in one afternoon, none of them visible on the page they were written for:
+
+- **A component with the first page's copy baked into a media query.** The comparison table
+  hides its header row below 767px and restates each column name through `::before`. Those two
+  strings were CSS literals — *"At Mason Park" / "Two practices"* — so the Invisalign table
+  compared Invisalign with traditional braces on desktop and said "At Mason Park" over all five
+  rows on every phone. **Correct at the width it was reviewed at, wrong at the width most people
+  read it at.** Content belongs in the markup: `attr(data-label)` now, literal as a fallback.
+- **A direct-child selector reaching a container the new page nests one level deeper.**
+  `.text-rich-text > * + *` gave the homepage its rhythm; a service page wraps its prose in
+  `<section class="lf-section">`, so consecutive paragraphs rendered with *no* space between
+  them — the paragraph break, the one piece of structure a long clinical page still has, gone.
+  The homepage had no such section and could not show it.
+- **A rule written for one variant of a frame and a reset written for both.** The section
+  heading was styled under `.lf-layout.is-solo` only, while `.lf-split .lf-section:first-child
+  h3` already cancelled a `border-top` that nothing set. **A reset with no rule above it is the
+  tell** — read those before trusting a frame you have not rendered.
+
+So: **the second page carries the same review weight as the canary, and its review is what
+promotes the frozen set from "one page's CSS" to a system.** Render it at every breakpoint, and
+read the mobile branch of every shared component it touches — not just the page.
+
 ## Verification — interaction, not screenshots
 
 A screenshot cannot tell you whether a reveal fired, a counter ran, or reduced-motion is

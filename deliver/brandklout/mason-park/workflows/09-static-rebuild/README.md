@@ -1,9 +1,17 @@
-# 09 — The Mason Park homepage
+# 09 — The Mason Park site
 
 > [!IMPORTANT]
-> **The homepage is a plain HTML file. Open `home/index.html` by double-clicking it.**
+> **Every page is a plain HTML file. Open `home/index.html` by double-clicking it.**
 > No server, no build step, no `npm install`. Every path in it is relative, so it renders
 > from `file://` exactly as it will render on Instatic.
+
+> [!NOTE]
+> **`home/` is the site root, not "the homepage folder".** `home/index.html` is `/`, and
+> `home/services/invisalign/index.html` is `/services/invisalign/`. A page one folder deeper
+> reaches the shared assets with `../../assets/…`; the exporter collapses any depth of `../`
+> on the way to Instatic. **Add a page by copying the nearest existing one and editing it** —
+> the head, the topbar, the header, the footer and the five script tags are identical on
+> every page and are meant to stay that way.
 
 > [!IMPORTANT]
 > **The generator was retired on 2026-09-01, and every other page was deleted with it.**
@@ -18,11 +26,14 @@
 | Path | What it is |
 | :--- | :--- |
 | `home/index.html` | **The homepage.** ~58KB. Edit this file to change the page. |
+| `home/services/invisalign/index.html` | **The service page**, and the pattern every other treatment page follows. ~50KB. |
 | `home/assets/site.css` | The whole stylesheet, one file. Fluid root first, then the layout, then the journey layer. |
 | `home/assets/site.js` | Mobile menu, deferred map. |
 | `home/assets/journey.js` | The GSAP scroll layer — the three scenes described in [JOURNEY-2026-09-01.md](./JOURNEY-2026-09-01.md). |
 | `home/assets/gsap/` | GSAP 3.13 + ScrollTrigger + SplitText, vendored. Never a CDN: a dental site must not hand a third party the ability to run script on its pages. |
 | `home/assets/uploads/` | The 166 images the page references, at every srcset width. |
+| `.tmp/check.mjs` | **The gate that reads the HTML.** Assets resolve, braces balance, no control bytes, no walls of text, ids unique, anchors land, alts present. `node .tmp/check.mjs`. |
+| `.tmp/shot.mjs` | **The gate that renders it.** Four widths, full-page PNGs plus overflow / broken images / never-revealed elements / console errors. `cd .tmp && npm i` once, then `node shot.mjs ../home/services/invisalign/index.html`. |
 | `.tmp/to-instatic.mjs` | Turns `home/` into what Instatic should hold. |
 | `.tmp/upload-media.mjs` | Uploads the media manifest, writes the local → uploaded path map. |
 | `.tmp/insta.mjs` | Minimal Instatic admin client. Points at Mason Park, deliberately not shared with another client's workflow. |
@@ -34,6 +45,43 @@ Client-First class vocabulary (`padding-global`, `container-xlarge`, `section_*`
 chapter system is `data-chapter` sections styled in `site.css`. Read
 [JOURNEY-2026-09-01.md](./JOURNEY-2026-09-01.md) before changing a chapter — it records why
 each one exists and which four bugs are easy to reintroduce.
+
+### The service page pattern
+
+`home/services/invisalign/index.html` is the canary for the other 34 treatment pages. It runs
+the beats the client's own team called the right information flow for a service page, in this
+order, each one a `data-chapter` section:
+
+| Chapter | Class | What the beat is for |
+| :--- | :--- | :--- |
+| Arrival | `ch-arrival is-compact` | The name of the treatment, one sentence, and the booking button. Two thirds height — an inner page has to hand over quickly. |
+| — | `pr-badges` + breadcrumb | Trust, then position, before the first chapter. |
+| Is this you | `ch-qualify` | Qualify the reader out or in, first. |
+| The Treatment | `ch-treatment` | What it is and what is included. |
+| Why This One | `ch-why` (warm) | What it does for them, and why here. |
+| The Path | `ch-process` | What actually happens, step by step. |
+| The Alternatives | `ch-compare` (warm) | The `vs-table`, honestly. |
+| The Cost | `ch-cost` | The price, before the ask. |
+| The Proof | `ch-proof` (warm) | The practice's own Google reviews. |
+| Questions | `ch-questions` | The objections, as an accordion. |
+| The Invitation | `ch-invitation` (dark) | Everything needed to act. Nothing after it but the footer. |
+
+Two frames carry the prose, and which one a chapter uses is a judgement about the chapter, not
+a default: `lf-layout lf-split` puts the chapter tag and heading in a sticky left column with
+the sections beside it, and `lf-layout is-solo` is one column at 72ch for a chapter that is
+only a section or two. A beat with nothing behind it is **dropped, not invented** — a thin
+treatment gets five chapters, not eleven.
+
+**The copy is the practice's, and it is re-tagged rather than rewritten.** Structure the
+WordPress editor implied is restored (a bold lead-in becomes `p.lf-lead`, a glyph-prefixed run
+becomes `ul.lf-ticks`), dead paragraphs are dropped outright, and anything past the prose
+ceiling folds into `details.lf-more`. See **No wall of text** in
+[`deliver/brandklout/docs/DESIGN-STANDARD.md`](../../../docs/DESIGN-STANDARD.md); `check.mjs`
+measures it.
+
+**Photographs may show the practice. They may not be presented as showing the treatment, its
+result, or its patient** — which is why the captions here talk about the building and the
+visit. Only the hero uses the page's own featured image.
 
 Two rules the stylesheet depends on, both load-bearing:
 
@@ -59,8 +107,9 @@ node -e 'for(const f of process.argv.slice(1)){const t=require("fs").readFileSyn
 
 ## Instatic import
 
-`home/` is already shaped for it: one page, one stylesheet, one script, classic `<script>`
-tags and no module or `fetch()` anywhere.
+`home/` is already shaped for it: one stylesheet, one script, classic `<script>` tags and no
+module or `fetch()` anywhere. The exporter walks the folder, so every `index.html` under it is
+a page and its route comes from its own directory — nothing to register.
 
 ```bash
 cd .tmp
@@ -74,7 +123,8 @@ The exporter makes exactly three changes, and only three:
 1. **Routes.** `home/index.html` links to `/about-us/`; Instatic is routed, so that becomes
    `/about-us`. `/` stays `/`.
 2. **Media.** `assets/uploads/…` becomes `/uploads/<id>-<name>`, and the id is assigned at
-   upload — so upload first, then re-run with `--media`.
+   upload — so upload first, then re-run with `--media`. A page in a subfolder writes
+   `../../assets/…`; any run of `../` is collapsed first so both depths reach the same rule.
 3. **Body only.** Instatic stores a body, not a document. `site.css` and `site.js` go in
    separately as **site-wide code assets**, not per page.
 
@@ -91,15 +141,26 @@ one element that cannot hold one.
 
 ## Nav links
 
-The header links to about 55 pages that do not exist yet. That is deliberate: the nav describes
-the practice's site, not this folder. Locally those links go nowhere; on Instatic they resolve
-as the pages are built.
+The header links to about 55 pages, of which two now exist. That is deliberate: the nav
+describes the practice's site, not this folder. Locally the rest go nowhere; on Instatic they
+resolve as the pages are built.
+
+Because the links are root-absolute, **`/services/invisalign/` does not open from `file://`
+via the menu** — open the file directly. The two pages are only reachable from each other
+once they are on Instatic. That is the cost of shipping the same href to both, and it is the
+right trade: a relative nav would have to be rewritten per folder depth.
+
+The nav carries **no current-page state** — no `aria-current`, no active class, on either
+page. That is a site-wide decision to take once, when there are enough pages for it to matter,
+not one to make from a single service page.
 
 ## Version Control
 
 Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md).
 
-`home/index.html`, `site.css`, `site.js`, `journey.js` and the vendored GSAP are committed.
+Every `index.html` under `home/`, plus `site.css`, `site.js`, `journey.js` and the vendored
+GSAP, are committed. So are `.tmp/check.mjs`, `.tmp/shot.mjs` and `.tmp/package.json`;
+`.tmp/node_modules/` and `.tmp/shots/` are not.
 
 **`home/assets/uploads/` is NOT, and cannot be.** The root `.gitignore` refuses every image
 extension repo-wide, and SYSTEM_RULES §4 says binary media "must not be force-added" — the VPS is
