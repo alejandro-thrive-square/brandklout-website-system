@@ -161,11 +161,26 @@
       if (sec.classList.contains("ch-arrival")) return;   // has its own, above
       var head = [sec.querySelector(".chapter-tag"), sec.querySelector("h2")].filter(Boolean);
       if (!head.length) return;
+      /* A STICKY HEAD DEPARTS BY ITSELF, and must not be faded on top of that.
+         The treatment pages hold the chapter tag and heading in a sticky column
+         beside the prose, so the head sits near the top edge for the WHOLE
+         chapter. A departure keyed to the head passing "top 5%" then starts
+         fading it while the reader is still in the first paragraph: measured at
+         opacity < 1 with the chapter centred, on four chapters of every
+         treatment page. The sticky column already reads as leaving when it
+         finally scrolls out with its own section. */
+      var holder = head[head.length - 1].parentElement;
+      if (holder && getComputedStyle(holder).position === "sticky") return;
       gsap.to(head, {
         yPercent: -55, opacity: 0, ease: "none",
         scrollTrigger: {
           trigger: head[0],
-          start: "top 5%",
+          /* "top top", not "top 5%". A SHORT chapter centred in the window
+             puts its heading about 25px from the top edge, which is inside 5%
+             of a 900px viewport, so the departure had already begun while the
+             whole chapter was still comfortably on screen and readable. The
+             heading has to actually reach the top edge before it starts to go. */
+          start: "top top",
           end: "top -35%",
           scrub: .6,
           invalidateOnRefresh: true

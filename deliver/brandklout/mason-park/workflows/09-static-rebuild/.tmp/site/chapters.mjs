@@ -222,6 +222,39 @@ export function makeChapters(h) {
     </section>`).join("")}
   </div>`;
 
+  /** LONG FORM: a contents rail beside the prose.
+   *
+   *  A treatment page runs to a median of 1,958 words. Poured into one column
+   *  under a hero, the only way to find out whether it answers your question is
+   *  to read all of it. The rail lists the page's own headings, tracks reading
+   *  position as you scroll, and turns a wall into something you can enter in
+   *  the middle. On a phone it collapses to a `<details>`, because a sticky
+   *  rail there would cost a third of the screen.
+   *
+   *  The measure is capped at 68 characters. That is the single biggest thing
+   *  that can be done for a 2,000 word clinical page and it costs nothing. */
+  const longform = ({ lede, sections, aside = "" }) => `<div class="lf-layout">
+    <aside class="lf-rail">
+      <details class="lf-rail-box" open>
+        <summary class="lf-rail-title">On this page</summary>
+        <nav aria-label="Sections of this page">
+          <ol class="lf-toc">
+            ${sections.map((sec) => `<li><a href="#${esc(sec.id)}" data-toc="${esc(sec.id)}">${esc(sec.title)}</a></li>`).join("")}
+          </ol>
+        </nav>
+      </details>
+      ${aside}
+    </aside>
+    <div class="lf-body text-rich-text">
+      ${lede ? `<div class="lf-lede">${lede}</div>` : ""}
+      ${sections.map((sec) => `
+      <section class="lf-section" id="${esc(sec.id)}">
+        <h2>${esc(sec.title)}</h2>
+        ${sec.html}
+      </section>`).join("")}
+    </div>
+  </div>`;
+
   // ---------------------------------------------------------------- the path
   /** The pinned horizontal journey. SIZED IN svh, not rem: a pinned scene has
    *  to fit the window, and with a fluid root every rem in it grows 12.5% at
@@ -312,7 +345,7 @@ export function makeChapters(h) {
   return {
     chapter, tag, wrap, button, linkArrow,
     arrival, figures, versus, marquee,
-    arc, plate, plates, band, spread, columnIndex,
+    arc, plate, plates, band, spread, columnIndex, longform,
     path, quote, quoteRail, badges,
     facts, faqList,
   };

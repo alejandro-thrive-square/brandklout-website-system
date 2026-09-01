@@ -124,8 +124,19 @@ async function load(width, height, reduced = false) {
 // Scroll to an absolute document position and let the scrub lag settle. The
 // scrubs run at .3-.5, so a short settle is required or every reading is the
 // PREVIOUS step's state and the assertions pass for the wrong reason.
+// SMOOTH SCROLLING MAKES A HARNESS LIE.
+//
+// site.css sets `html { scroll-behavior: smooth }`, so `scrollTo(0, y)`
+// ANIMATES. Measured on the Invisalign page: a seek of 8,551px was still at
+// scroll 0 when the assertion ran, and the check then judged whatever element
+// happened to be at that spot. EVERY scroll-dependent check on a long page was
+// exposed to it, and the ones that passed did so because the distance was short
+// enough for the animation to finish inside the settle window.
+//
+// `behavior: "instant"` overrides the stylesheet per call, which is what a
+// harness wants: it is measuring the page, not scrolling through it.
 const seek = async (y) => {
-  await evaluate(`scrollTo(0, ${Math.round(y)})`);
+  await evaluate(`scrollTo({ top: ${Math.round(y)}, left: 0, behavior: "instant" })`);
   await wait(650);
 };
 
@@ -324,7 +335,13 @@ for (const cid of chapterIds) {
       // invitation's headline sat at y=-152 with 4px still showing and was
       // reported as an unlanded reveal. Arrival and departure are different
       // assertions and check 9a covers the other one.
-      if (r.bottom < 0 || r.top > innerHeight || r.top < 0 || r.width === 0) return false;
+      // The tolerance is 60px, not 0. The departure is triggered on the chapter
+      // TAG, which sits above the heading, so once the tag crosses the top edge
+      // both it and the heading are a few percent into their fade while the
+      // heading's own top edge is still barely on screen. Measured: opacity
+      // 0.971 with the heading at y=34. That is the departure working, not a
+      // reveal that failed, and 9a is the check that owns it.
+      if (r.bottom < 0 || r.top > innerHeight || r.top < 60 || r.width === 0) return false;
       const cs=getComputedStyle(el);
       if (el.closest('[aria-hidden="true"]') || el.hasAttribute('aria-hidden')) return false;
       if (Number(cs.opacity) < 0.99) return true;
@@ -332,7 +349,9 @@ for (const cid of chapterIds) {
       // A residual translate means the entrance never ran to completion.
       const m=new DOMMatrixReadOnly(cs.transform);
       return Math.abs(m.m42) > 1.5;
-    }).map(el=>(el.className||el.tagName)+'@'+Math.round(el.getBoundingClientRect().top));
+    }).map(el=>(el.className||el.tagName)+'@'+Math.round(el.getBoundingClientRect().top)
+        +' op'+getComputedStyle(el).opacity
+        +' y'+Math.round(scrollY)+'/'+Math.round(document.documentElement.scrollHeight-innerHeight));
   })()`);
   if (bad.length) stuck.push(cid + ": " + bad.slice(0, 4).join(", "));
 }

@@ -1397,3 +1397,205 @@ body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); 
 .cx-group.is-wide li { break-inside: avoid; }
 @media (max-width: 999px) { .cx-group.is-wide ul { columns: 2; } }
 @media (max-width: 699px) { .cx-group.is-wide ul { columns: 1; } }
+
+/* ===========================================================================
+   LONG FORM — the treatment pages
+   A median of 1,958 words per page. The measure and the rail are the two things
+   that turn that from a wall into something readable.
+   ======================================================================== */
+.lf-layout {
+  display: grid;
+  gap: clamp(2rem, 4vw, 3rem);
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: var(--bleed);
+  padding-right: var(--bleed);
+}
+@media (min-width: 900px) {
+  .lf-layout { grid-template-columns: minmax(0, 17rem) minmax(0, 1fr); gap: clamp(3rem, 6vw, 6rem); align-items: start; }
+  .lf-rail { position: sticky; top: 7rem; }
+}
+/* THE MEASURE. 68 characters, and it is the single biggest thing that can be
+   done for a two thousand word clinical page. */
+.lf-body { max-width: 68ch; }
+
+.lf-rail-box { border-top: 1px solid var(--rule-strong); padding-top: 1rem; }
+.lf-rail-title {
+  cursor: pointer;
+  list-style: none;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .9rem;
+}
+.lf-rail-title::-webkit-details-marker { display: none; }
+.lf-toc { display: grid; gap: .1rem; }
+.lf-toc a {
+  display: block;
+  padding: .45rem 0 .45rem .9rem;
+  border-left: 2px solid var(--rule);
+  font-size: calc(.92rem * var(--t-text));
+  line-height: 1.45;
+  color: var(--fg-soft);
+  text-decoration: none;
+  transition: color .3s var(--ease), border-color .3s var(--ease), padding-left .3s var(--ease);
+}
+.lf-toc a:hover { color: var(--fg); border-color: var(--rule-strong); }
+/* Set by journey.js from scroll POSITION, not from a one-shot trigger: on a
+   page this long the reader needs to know where they are, continuously. */
+.lf-toc a.is-here { color: var(--accent); border-color: var(--accent); padding-left: 1.15rem; }
+
+/* The lede: the practice's own opening paragraphs, set larger than the body so
+   the page starts with a voice rather than with a wall. */
+.lf-lede { margin-bottom: clamp(1.75rem, 3vw, 2.5rem); }
+.lf-lede p {
+  font-size: var(--f-lede);
+  line-height: 1.75;
+  color: var(--fg);
+}
+.lf-section { scroll-margin-top: 7rem; }
+.lf-section + .lf-section { margin-top: clamp(2.25rem, 4vw, 3.25rem); }
+.lf-section h2 {
+  font-size: var(--f-h3);
+  font-weight: 400;
+  max-width: 24ch;
+  margin-bottom: 1rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+@media (max-width: 899px) {
+  .lf-rail-box { border-bottom: 1px solid var(--rule); padding-bottom: 1rem; }
+  .lf-toc { max-height: 17rem; overflow-y: auto; }
+}
+
+/* ===========================================================================
+   THE TREATMENT PAGE CHAPTERS
+   The beats of the reference flow, each restating its own rhythm because each
+   holds a different amount: the treatment chapter carries most of a 2,000 word
+   page, the cost chapter often carries two paragraphs.
+   ======================================================================== */
+.ch-qualify { padding-bottom: calc(var(--ch-pad) * .7); }
+.ch-treatment { padding-bottom: calc(var(--ch-pad) * .8); }
+.ch-why { padding-bottom: calc(var(--ch-pad) * .8); }
+.ch-process { padding-bottom: calc(var(--ch-pad) * .8); }
+.ch-compare { padding-bottom: calc(var(--ch-pad) * .8); }
+.ch-questions { padding-bottom: calc(var(--ch-pad) * .85); }
+
+/* A beat with no contents rail: one column at the same measure, so a short
+   chapter does not sit in a two column frame with an empty rail beside it. */
+.lf-layout.is-solo { grid-template-columns: minmax(0, 1fr); }
+.lf-layout.is-solo .lf-body { max-width: 72ch; }
+.lf-layout.is-solo .lf-section h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--f-h3);
+  color: var(--fg);
+  max-width: 26ch;
+  margin-bottom: .9rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+.lf-layout.is-solo .lf-section + .lf-section { margin-top: clamp(2rem, 3.5vw, 3rem); }
+
+/* Related treatments, in the invitation's aside rather than as a chapter of
+   their own: at the end of a page about one treatment, the neighbouring ones
+   are a way out, not a beat in the argument. */
+.iv-related { border-top: 1px solid var(--rule); padding-top: 1.5rem; }
+.iv-related .sidebar_component, .iv-related .card_component { background: transparent; border: 0; padding: 0; }
+.iv-related a { color: #fff; }
+
+/* The trust strip belongs UNDER the hero, touching it. It inherits a 5rem top
+   margin from its use as the closer of The Proof on the homepage, which left it
+   floating in a band of white on a treatment page. Beat two of the reference
+   flow is trust, immediately, before the visitor has scrolled at all. */
+.ch-arrival + .pr-badges { margin-top: 0; }
+/* The breadcrumb then sits on its own line rather than adding a second measure
+   of air on top of the first chapter's. */
+.pr-badges + .padding-global { padding-top: 1.25rem; padding-bottom: 0; }
+.ch-arrival + .pr-badges + .padding-global + .ch { padding-top: calc(var(--ch-pad) * .7); }
+
+/* A beat with no contents rail still gets the system's asymmetric frame: the
+   chapter tag and heading hold the left column and stay there while the prose
+   runs past them on the right. Set as one narrow column it hugged the left edge
+   with sixty percent of the page empty beside it, which reads as unfinished
+   rather than as spare. */
+.lf-layout.lf-split .lf-aside { min-width: 0; }
+@media (min-width: 900px) {
+  .lf-layout.lf-split { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); }
+  .lf-layout.lf-split .lf-aside { position: sticky; top: 7rem; }
+}
+.lf-split .lf-aside h2 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--f-d2);
+  line-height: 1.04;
+  letter-spacing: -.018em;
+  color: var(--fg);
+  max-width: 15ch;
+}
+.lf-split .lf-aside .pe-lede { margin-top: 1.25rem; max-width: 40ch; }
+.lf-split .lf-body { max-width: 66ch; }
+.lf-split .lf-section:first-child h3 { padding-top: 0; border-top: 0; }
+
+/* `relatedServices` emits `<h2 class="heading-style-h4">`, and inside a chapter
+   `.ch h2` is (0,1,1) against that class's (0,1,0), so it won the cascade and
+   set "More services" at the chapter display size in the invitation's aside.
+   Same shape as every other cascade bug in this file: order and specificity,
+   not the value. Here it is a label, because that is what it is. */
+.iv-related h2 {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  max-width: none;
+  margin-bottom: .9rem;
+}
+.iv-related .sidebar_list { display: grid; gap: .1rem; }
+.iv-related .sidebar_list a {
+  display: block;
+  padding: .5rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-display);
+  font-size: calc(1rem * var(--t-text));
+  text-decoration: none;
+}
+.iv-related .sidebar_list a:hover { color: var(--accent); }
+.iv-related > p { margin-top: 1rem; }
+.iv-related > p a {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+}
+
+/* A list the editor typed as paragraphs with a glyph in front of each line.
+   The glyph was the bullet; this is the same list with a real marker and a
+   hanging indent, so the eye can run down the labels instead of reading a block
+   that only looks like prose. */
+.lf-ticks { display: grid; gap: .55rem; margin: 1rem 0 1.25rem; }
+.lf-ticks li {
+  position: relative;
+  padding-left: 1.6rem;
+  line-height: 1.7;
+}
+.lf-ticks li::before {
+  content: "";
+  position: absolute;
+  left: .15rem;
+  top: .62em;
+  width: .5rem;
+  height: .5rem;
+  border-left: 1.5px solid var(--accent);
+  border-bottom: 1.5px solid var(--accent);
+  transform: rotate(-45deg);
+}
+.lf-ticks strong, .lf-ticks b { color: var(--fg); font-weight: 600; }

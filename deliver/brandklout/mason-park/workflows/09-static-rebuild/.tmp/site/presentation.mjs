@@ -9,6 +9,8 @@
 // `makePresentation(ctx)` binds to the build's helpers and config.
 
 import { makeComponents } from "./components.mjs";
+import { makeChapters } from "./chapters.mjs";
+import { splitLongform, ledeText, routeSections, extractInlineFaq, extractEmbeddedFaq } from "./longform.mjs";
 
 export const LOGO = "/wp-content/uploads/2023/08/Dentist-Katy-TX-Logo-2.webp";
 export const BOOKING = "https://www.flexbook.me/masonpark/1";
@@ -55,11 +57,12 @@ const FOOTER_PATIENTS = [
 export function makePresentation(ctx) {
   const {
     esc, img, link, rewrite, demoteH1, normaliseHeadings, fixRunOn, softenCaps, stripBoilerplate,
-    titleOf, labelFor, routeOf, NAV, FOOTER_LINKS, PRACTICE, SERVICE_SLUGS,
+    titleOf, labelFor, routeOf, read, NAV, FOOTER_LINKS, PRACTICE, SERVICE_SLUGS,
     NAV_LABELS, SITE_URL,
   } = ctx;
 
   const C = makeComponents({ esc, img, link });
+  const K = makeChapters({ esc, img, link, C, PRACTICE });
 
   // ---------------------------------------------------------------- navbar
   // Menu entries pointing at something this build does not produce (the blog)
@@ -206,6 +209,271 @@ export function makePresentation(ctx) {
 
   // ------------------------------------------------------------- renderers
   /** A WordPress content page: header photo, then the article body and sidebar. */
+  // =========================================================================
+  // THE TREATMENT PAGE — 35 pages from one template.
+  //
+  // The old one was a hero, a breadcrumb, one column of 1,958 median words and
+  // a sidebar. The client's note about the homepage applies here twice over:
+  // big chunks of text do not convert. A visitor who came to find out what a
+  // root canal involves had to read the whole page to learn whether it says.
+  //
+  // What makes it fixable is that the copy was ALREADY structured and the old
+  // template discarded the structure: 479 h3 and 244 h4 across the set, a
+  // median of 13 headings per page. site/longform.mjs cuts the body at them.
+  // Nothing is rewritten, summarised or reordered; every character comes out in
+  // the order it went in.
+  //
+  // Four chapters: the treatment, how a first visit works, what else is
+  // offered, and the invitation. The first visit chapter is the same one the
+  // homepage uses, because it is the same practice and the same four steps.
+  // =========================================================================
+  // =========================================================================
+  // THE TREATMENT PAGE — 35 pages from one template.
+  //
+  // THE INFORMATION FLOW is copied from the reference the client's team called
+  // "basically the perfect flow of information for a service page"
+  // (01-content-intake/.tmp/preview.html). Its order is the argument: qualify
+  // the reader, say what it is, say why this one, say what happens, compare the
+  // alternatives, give the price, prove it, answer the objections, then ask.
+  // The DESIGN and LAYOUT stay in this build's own direction, which is what the
+  // client asked for.
+  //
+  // WHAT MADE THAT POSSIBLE WITHOUT WRITING A WORD. The old template poured a
+  // median of 1,958 words into one column under a hero. But the copy was
+  // already structured and the template discarded the structure: 472 sections
+  // across the 35 pages. Routed by their own headings they fall into the
+  // reference's beats almost exactly — 58 benefit sections on 31 pages, 52
+  // questions on 26, 51 process on 28, 28 candidacy on 23, 16 comparisons, 13
+  // on cost. site/longform.mjs does the cutting and the routing.
+  //
+  // Every section below is the practice's own copy, moved to where it does the
+  // most work. A beat with nothing behind it is DROPPED, never invented: a page
+  // with no cost section simply has no cost chapter.
+  // =========================================================================
+  const renderService = (d) => {
+    const title = titleOf(d);
+
+    // The pipeline, in order, and the order matters. `demoteH1` pushes the
+    // body's own <h1> to <h2>; that heading is the page title again, which the
+    // hero already shows, so it is dropped before the split runs.
+    let body = fixRunOn(demoteH1(rewrite(d.html)));
+    const flat = (x) => String(x).replace(/<[^>]+>/g, " ").replace(/\s+/g, " ").trim().toLowerCase();
+    body = body.replace(/^\s*<h2[^>]*>([\s\S]*?)<\/h2>/i, (whole, inner) => {
+      const a = flat(inner), b = flat(title);
+      // Same heading, or one is a prefix of the other: these titles run
+      // "Oral Surgery in Katy, TX - Safe & Skilled..." against a page title of
+      // "Oral Surgery in Katy, TX | Mason Park Dental".
+      return a && (a === b || a.startsWith(b.slice(0, 24)) || b.startsWith(a.slice(0, 24))) ? "" : whole;
+    });
+
+    const { lede, sections } = splitLongform(body);
+    const beat = routeSections(sections);
+
+    // AN FAQ WRITTEN AS BODY COPY. 22 of the 35 pages carry one: a heading of
+    // "Frequently Asked Questions" followed by a run of
+    // <p><strong>1.Question?</strong><br>Answer</p>. That container routes to
+    //  and renders as one more wall, which is the exact problem this pass
+    // exists to remove, reappearing inside the fix. 126 questions were sitting
+    // in there. Each container is replaced by its own rows, which then join the
+    // Questions chapter with the ones that were already headings.
+    // Two shapes, because whether the FAQ is its OWN section depends on which
+    // heading level that page happens to use. Pages that use <h3> for sections
+    // get the FAQ as a section; Invisalign uses <h2>, so its <h3>FAQ</h3> sits
+    // inside another section and came back with two accordion rows while its
+    // neighbours came back with twelve. Handling only the first shape recovers
+    // 126 questions on 22 pages; handling both recovers 143 on 24.
+    const inlineFaq = [];
+    for (const key of Object.keys(beat)) {
+      beat[key] = beat[key].filter((sec) => {
+        const whole = extractInlineFaq(sec);
+        if (whole) { inlineFaq.push(...whole); return false; }
+        const embedded = extractEmbeddedFaq(sec.html);
+        if (!embedded) return true;
+        inlineFaq.push(...embedded.items);
+        // The prose that came BEFORE the FAQ heading is ordinary body copy and
+        // stays where it is. Only the questions move.
+        sec.html = embedded.before;
+        return Boolean(embedded.before.replace(/<[^>]+>/g, "").trim());
+      });
+    }
+    const heroImg = d.featured?.src;
+    const clean = softenCaps(title.replace(/\s*[|–—-]\s*Mason Park.*$/i, "").trim());
+
+    // Renders a beat as its own chapter, or nothing at all when the page has no
+    // section for it. `filter(Boolean)` at the end drops the empties.
+    const beatChapter = ({ n, name, cls, id, theme, heading, lede: chapterLede, items, rail = false }) => {
+      if (!items || !items.length) return "";
+      // The contents rail is worth a column only when there is a list worth
+      // reading. Once the other beats have taken their sections, a page can be
+      // left with one or two here, and a rail listing a single entry beside a
+      // narrow column is worse than no rail: it claims the page is navigable
+      // and then proves it is not. Below four, this chapter uses the same split
+      // frame every other beat uses.
+      const useRail = rail && items.length >= 4;
+      return K.chapter({
+        n, name, cls, id, theme,
+        inner: `
+  ${useRail ? `<div class="wrap rg-head">
+    ${K.tag(String(n).padStart(2, "0"), name)}
+    <h2 data-split>${esc(heading)}</h2>
+    ${chapterLede ? `<p class="pe-lede">${esc(chapterLede)}</p>` : ""}
+  </div>` : ""}
+  ${useRail
+    ? K.longform({ lede: chapterLede ? "" : lede, sections: items })
+    : `<div class="lf-layout lf-split"><div class="lf-aside">${K.tag(String(n).padStart(2, "0"), name)}<h2 data-split>${esc(heading)}</h2>${chapterLede ? `<p class="pe-lede">${esc(chapterLede)}</p>` : ""}</div><div class="lf-body text-rich-text">${items.map((sec) => `
+      <section class="lf-section" id="${esc(sec.id)}"><h3>${esc(sec.title)}</h3>${sec.html}</section>`).join("")}</div></div>`}`,
+      });
+    };
+
+    // The practice's own reviews, from the homepage's content file. Three, not
+    // six: the reference puts proof here as reassurance, not as a reading task.
+    const homeDoc = read("home");
+    const rb = ((homeDoc && homeDoc.blocks) || []).filter((x) => x.section === 15);
+    const reviews = [];
+    const seen = new Set();
+    for (let i = 0; i < rb.length && reviews.length < 3; i++) {
+      if (rb[i].type !== "para") continue;
+      const next = rb[i + 1];
+      const quote = rb[i].text.trim().replace(/^[“”"'\s]+/, "").replace(/[“”"'\s]+$/, "");
+      const author = next && next.type === "heading" ? next.text.replace(/^-\s*/, "") : "";
+      const key = quote.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 60);
+      if (author && quote.length > 60 && quote.length < 260 && !seen.has(key)) {
+        seen.add(key);
+        reviews.push({ quote, author });
+      }
+    }
+
+    let n = 0;
+    return [
+      // ---- beat 1 and 2: arrival, then the trust strip immediately under it
+      K.arrival({
+        n: n++, name: "Arrival", compact: true,
+        image: heroImg || "/wp-content/uploads/2023/11/Dentist-in-Katy-Office.webp",
+        alt: d.featured?.alt || clean,
+        w: d.featured?.w, height: d.featured?.h,
+        title: esc(clean),
+        lede: ledeText(lede, d.description),
+        actions: K.button({ label: "Book an appointment", href: BOOKING, large: true, external: true }),
+      }),
+      K.badges(ACCREDITATIONS),
+      C.breadcrumb([
+        { label: "Home", href: "/" },
+        { label: "Services", href: "/our-services/" },
+        { label: title },
+      ]),
+
+      // ---- beat 3: is this you
+      beatChapter({
+        n: n++, name: "Is this you", cls: "ch-qualify", id: "qualify",
+        heading: "Is this the treatment you need?",
+        items: beat.qualifier,
+      }),
+
+      // ---- beat 4: what it is. The bulk, and the only chapter with the rail.
+      // A page with NO headings routes every beat empty, which dropped this
+      // chapter and the lede with it — that is, the entire body. Two stub pages
+      // (104 and 235 words) shipped carrying none of their own copy. When there
+      // are no sections, the lede IS the page.
+      (beat.body.length || beat.type.length)
+        ? beatChapter({
+            n: n++, name: "The Treatment", cls: "ch-treatment", id: "treatment",
+            heading: "What it is, and what it involves.",
+            items: [...beat.body, ...beat.type], rail: true,
+          })
+        : (lede ? K.chapter({
+            n: n++, name: "The Treatment", cls: "ch-treatment", id: "treatment",
+            inner: `
+  <div class="wrap rg-head">
+    ${K.tag(String(n - 1).padStart(2, "0"), "The Treatment")}
+    <h2 data-split>What it is, and what it involves.</h2>
+  </div>
+  <div class="lf-layout is-solo"><div class="lf-body text-rich-text">${lede}</div></div>`,
+          }) : ""),
+
+      // ---- beat 5: why this one, and why here
+      beatChapter({
+        n: n++, name: "Why This One", cls: "ch-why", id: "why", theme: "warm",
+        heading: "What it does for you.",
+        items: [...beat.benefit],
+      }),
+
+      // ---- beat 6: what actually happens
+      beatChapter({
+        n: n++, name: "The Path", cls: "ch-process", id: "process",
+        heading: "What happens, step by step.",
+        items: beat.process,
+      }),
+
+      // ---- beat 7: the alternatives, honestly
+      beatChapter({
+        n: n++, name: "The Alternatives", cls: "ch-compare", id: "compare", theme: "warm",
+        heading: "How it compares.",
+        items: beat.compare,
+      }),
+
+      // ---- beat 8: the price, before the ask
+      beatChapter({
+        n: n++, name: "The Cost", cls: "ch-cost", id: "cost",
+        heading: "What it costs, before it starts.",
+        chapterLede: "Treatment is planned and priced in writing before any work begins. Cherry splits the balance at 0% APR with no hard credit check.",
+        items: beat.cost,
+      }),
+
+      // ---- beat 9: proof
+      reviews.length ? K.chapter({
+        n: n++, name: "The Proof", cls: "ch-proof", id: "proof", theme: "warm",
+        inner: `
+  <div class="wrap rg-head">
+    ${K.tag(String(n - 1).padStart(2, "0"), "The Proof")}
+    <h2 data-split>What Katy families say about being here.</h2>
+  </div>
+  ${K.quoteRail(reviews, "serviceRail")}
+  <div class="wrap pr-foot">${K.linkArrow({ label: "Read more reviews", href: "/patient-reviews/" })}</div>`,
+      }) : "",
+
+      // ---- beat 11: the questions, as the reference has them, near the end
+      (beat.question.length || inlineFaq.length) ? K.chapter({
+        n: n++, name: "Questions", cls: "ch-questions", id: "questions",
+        inner: `
+  <div class="wrap rg-head">
+    ${K.tag(String(n - 1).padStart(2, "0"), "Questions")}
+    <h2 data-split>Questions patients ask before they decide.</h2>
+  </div>
+  ${K.faqList([...beat.question.map((sec) => ({ question: sec.title, html: sec.html })), ...inlineFaq])}`,
+      }) : "",
+
+      // ---- beat 10 and 12: the soft option, then the ask
+      K.chapter({
+        n: n++, name: "The Invitation", cls: "ch-invitation", id: "invitation", theme: "dark",
+        inner: `
+  <div class="wrap iv-top">
+    <div class="iv-copy">
+      ${K.tag(String(n - 1).padStart(2, "0"), "The Invitation")}
+      <h2 data-split>Ask about this one.</h2>
+      <p class="iv-lede">Book a first visit and say what is bothering you. Nothing is started on the day you arrive, and the plan and the price come before the work does.</p>
+      <div class="iv-actions">
+        ${K.button({ label: "Book an appointment", href: BOOKING, large: true, external: true })}
+        ${K.button({ label: PRACTICE.phone, href: PRACTICE.phoneHref, ghost: true, large: true })}
+      </div>
+      ${K.facts([
+        ["Not ready to sit in a chair", `Send photographs and get an opinion first. <a href="/virtual-consultation/">Free virtual consult</a>.`],
+        ["In pain today", `Call the practice. We keep same day slots. <a href="/services/emergency-dentist/">Emergency dentistry</a>.`],
+        ["Paying for it", `0% APR through Cherry, no hard credit check. <a href="/financing/">Financing and insurance</a>.`],
+        ["Hours", "Mon and Wed <b>9am to 6pm</b><br>Tue and Thu <b>8am to 5pm</b><br>Fri to Sun <b>Closed</b>"],
+      ])}
+    </div>
+    <div class="iv-aside">
+      <figure class="iv-shot">
+        ${img("/wp-content/uploads/2023/11/Dentist-in-Katy-Office.webp", "The waiting room at Mason Park Dental of Katy", { sizes: "(max-width: 899px) 100vw, 42vw" })}
+        <figcaption>Suite 104A, on the ground floor. Free parking at the door.</figcaption>
+      </figure>
+      ${relatedServices(d.slug) ? `<div class="iv-related">${relatedServices(d.slug)}</div>` : ""}
+    </div>
+  </div>`,
+      }),
+    ].filter(Boolean).join(String.fromCharCode(10));
+  };
+
   const renderArticle = (d) => {
     const title = titleOf(d);
     const isService = SERVICE_SLUGS.includes(d.slug);
@@ -383,6 +651,6 @@ ${motion ? `<script src="/assets/gsap/gsap.min.js" defer></script>
 
   return {
     C, chromeHeader, chromeFooter, renderEmbed, sidebarCta, relatedServices, pageCta,
-    renderArticle, renderBlocks, pageBody, layout, HOURS, ACCREDITATIONS, BOOKING, LOGO,
+    renderArticle, renderService, renderBlocks, pageBody, layout, HOURS, ACCREDITATIONS, BOOKING, LOGO,
   };
 }

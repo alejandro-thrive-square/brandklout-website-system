@@ -379,10 +379,13 @@ const labelFor = (slug) => titleOf(read(slug));
 
 const P = makePresentation({
   esc, img, link, rewrite, demoteH1, normaliseHeadings, fixRunOn, softenCaps, stripBoilerplate,
-  titleOf, labelFor, routeOf, NAV, FOOTER_LINKS, PRACTICE, SERVICE_SLUGS,
+  // `read` so the treatment pages can pull the practice's own reviews for their
+  // proof chapter. They live in the homepage's content file, section 15, which
+  // is where the crawler put them; there is no separate reviews source.
+  titleOf, labelFor, routeOf, read, NAV, FOOTER_LINKS, PRACTICE, SERVICE_SLUGS,
   NAV_LABELS, SITE_URL,
 });
-const { C, renderArticle, renderBlocks, renderEmbed, sidebarCta, pageBody, layout } = P;
+const { C, renderArticle, renderService, renderBlocks, renderEmbed, sidebarCta, pageBody, layout } = P;
 
 // ------------------------------------------------------------------- build
 fs.rmSync(DIST, { recursive: true, force: true });
@@ -415,7 +418,10 @@ for (const slug of ALL) {
   // run-on repair. Safe over whole markup: the rule needs two lowercase letters
   // before the stop and a capital after, which no path, class or URL here has.
   if (BESPOKE[slug]) body = fixRunOn(BESPOKE[slug](d, helpers));
-  else if (d.kind === "service" || d.kind === "article") body = renderArticle(d, route);
+  // The 35 treatment pages get their own renderer; the ~20 informational
+  // articles keep the single-column one, which is right for them.
+  else if (d.kind === "service") body = renderService(d, route);
+  else if (d.kind === "article") body = renderArticle(d, route);
   else body = renderBlocks(d, route);
 
   const meta = META[slug] || {};
@@ -472,6 +478,40 @@ fs.writeFileSync(
     fs.readFileSync(path.join(HERE, "theme", "journey.css"), "utf8"),
   ].join(String.fromCharCode(10)),
 );
+// CONTROL CHARACTERS IN SOURCE. Writing a JS regex through a shell heredoc
+// turns a backslash-b into a literal BACKSPACE byte. The file still parses,
+// the build still succeeds, and the pattern silently matches nothing: it cost
+// three rounds on the treatment pages, where every page came back with zero
+// sections and rendered perfectly as the wall it was supposed to replace.
+// Nothing else here can see that, so the build refuses it.
+{
+  // No regex literal here, deliberately. The first version of this guard was
+  // written as one and its own escapes collapsed into real control characters,
+  // which is the exact bug it exists to catch. A numeric scan has nothing to
+  // escape and cannot be mangled by whatever wrote this file.
+  const badAt = (text) => {
+    for (let k = 0; k < text.length; k++) {
+      const c = text.charCodeAt(k);
+      if (c < 32 && c !== 9 && c !== 10 && c !== 13) return k;
+    }
+    return -1;
+  };
+  const roots = ["site", "theme"];
+  for (const dir of roots) {
+    const abs = path.join(HERE, dir);
+    if (!fs.existsSync(abs)) continue;
+    for (const f of fs.readdirSync(abs)) {
+      if (!/.(mjs|js|css)$/.test(f)) continue;
+      const text = fs.readFileSync(path.join(abs, f), "utf8");
+      const at = badAt(text);
+      if (at !== -1) {
+        console.error( +
+          JSON.stringify(text.slice(Math.max(0, at - 50), at + 10)));
+        process.exitCode = 1;
+      }
+    }
+  }
+}
 // A BRACE COUNT, because an unbalanced one fails silently and expensively.
 // Splicing a token block into `:root` once dropped its closing brace. CSS error
 // recovery then swallowed the four type tiers below it as if they were
