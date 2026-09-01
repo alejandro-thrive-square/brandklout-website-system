@@ -1750,3 +1750,232 @@
   overflow: clip;
   padding-inline: var(--gutter);
 }
+
+
+/* ===========================================================================
+   THE SERVICE PAGE — the twelve treatment pages, added 2026-09-01.
+
+   Client: "hyper focus on the services pages." These are one template rendered
+   twelve times from treatments-data.mjs, so everything here lands on all of
+   them at once.
+
+   The template's two real problems were a head with no photograph in it, and a
+   body that was five hundred words of unbroken prose in a single column, which
+   is the plainest violation on the site of "big chunks of text are not good for
+   conversions". Both are structural, and neither needed a word of copy changed.
+   =========================================================================== */
+
+/* --- the head ------------------------------------------------------------
+   The arrival split, reused: copy on the page gutter, the treatment's own
+   photograph running to the viewport edge with the Carrara ground showing as a
+   frame. It replaces a small centred text block AND the full-width strip that
+   used to carry this image two sections further down. */
+.svc-head_component {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
+  align-items: stretch;
+  --arrival-frame: var(--space-xxlarge);
+  overflow: clip;
+}
+.svc-head_copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: var(--section-sm) var(--space-xlarge) var(--section-sm) var(--gutter);
+}
+.svc-head_component .breadcrumb_component {
+  justify-content: flex-start;
+  margin-bottom: var(--space-medium);
+  /* A four-level crumb does not fit one line on a phone. The base rule is a
+     flex row with no wrapping story at all, so it broke into ragged lines with
+     the separators stranded. Wrapping deliberately, with a row gap and each
+     crumb kept whole, makes the second line read as a continuation. */
+  flex-wrap: wrap;
+  row-gap: 0.35rem;
+  align-items: baseline;
+}
+.svc-head_component .breadcrumb_component a,
+.svc-head_component .breadcrumb_component [aria-current] {
+  white-space: nowrap;
+}
+.svc-head_title {
+  margin: 0;
+  max-width: 14ch;
+}
+.svc-head_sub {
+  margin: var(--space-medium) 0 0;
+  font-size: var(--size-text-large);
+  line-height: 1.5;
+  color: var(--fg-body);
+  max-width: 32rem;
+}
+.svc-head_actions {
+  margin-top: var(--space-large);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-small);
+}
+.svc-head_note {
+  margin: var(--space-medium) 0 0;
+  max-width: 32rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  line-height: 1.55;
+}
+.svc-head_media {
+  position: relative;
+}
+.svc-head_photo {
+  position: absolute;
+  inset: 0 0 var(--arrival-frame) var(--arrival-frame);
+  overflow: clip;
+}
+.svc-head_photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* --- at a glance ---------------------------------------------------------
+   The five things a person came to find out. This was a bordered card in a
+   sidebar halfway down the page, beside the wall of prose; it is a ledger under
+   the headline now, on hairlines, like the home page's four figures. */
+.svc-facts {
+  margin: var(--space-large) 0 0;
+  max-width: 32rem;
+  border-top: 1px solid var(--line);
+}
+.svc-facts_row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: var(--space-medium);
+  align-items: baseline;
+  padding: var(--space-xsmall) 0;
+  border-bottom: 1px solid var(--line);
+}
+.svc-facts_label {
+  margin: 0;
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.svc-facts_value {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--size-text-large);
+  line-height: 1.35;
+  color: var(--fg);
+  text-align: right;
+}
+
+/* --- the lede ------------------------------------------------------------
+   The intro, set larger and measured. It answers "what is this", and people
+   read one paragraph before deciding whether to read six. */
+.svc-lede_component {
+  padding-block: var(--section) var(--section-sm);
+}
+.svc-lede_inner {
+  padding-inline: var(--gutter);
+}
+.svc-lede_text {
+  max-width: 46rem;
+  font-size: var(--size-text-large);
+  line-height: 1.6;
+  color: var(--fg-body);
+}
+.svc-lede_text p + p {
+  margin-top: var(--space-medium);
+}
+
+/* --- the spec ------------------------------------------------------------
+   Each section as a ROW: heading on the left spine, body measured on the right,
+   hairline between. The page becomes something you can scan down the left edge
+   and drop into, which is how a spec is actually read. Before this the same
+   three headings sat inside one continuous column and broke nothing up. */
+.spec_component {
+  padding-block: 0 var(--section);
+}
+.spec_inner {
+  padding-inline: var(--gutter);
+  border-top: 1px solid var(--line-strong);
+}
+.spec_row {
+  display: grid;
+  /* 0.34, not 0.44. The headings are two or three words; a column wide enough
+     for six left a band of white between the heading and its own paragraph and
+     pushed the body far enough right that the page read as two disconnected
+     halves rather than a heading and its answer. */
+  grid-template-columns: minmax(0, 0.34fr) minmax(0, 1fr);
+  gap: var(--space-medium) var(--space-xxlarge);
+  padding-block: var(--section-sm);
+  border-bottom: 1px solid var(--line);
+}
+.spec_heading {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--size-h3-j);
+  line-height: 1.06;
+  color: var(--fg);
+  max-width: 16ch;
+  /* Sticks while its own body scrolls past, so you always know which question
+     the paragraph you are reading is answering. */
+  position: sticky;
+  top: 7rem;
+  align-self: start;
+}
+.spec_body {
+  max-width: 44rem;
+  color: var(--fg-body);
+  line-height: 1.68;
+}
+.spec_body p + p,
+.spec_body ul {
+  margin-top: var(--space-medium);
+}
+.spec_body ul {
+  padding-left: 1.1rem;
+}
+.spec_body li + li {
+  margin-top: var(--space-xsmall);
+}
+
+@media (max-width: 991px) {
+  .svc-head_component {
+    grid-template-columns: 1fr;
+    --arrival-frame: var(--space-large);
+  }
+  .svc-head_copy {
+    order: 2;
+    padding: var(--section-sm) var(--gutter) var(--section);
+  }
+  .svc-head_media {
+    order: 1;
+    width: 100%;
+    aspect-ratio: 4 / 3;
+  }
+  .spec_row {
+    grid-template-columns: 1fr;
+  }
+  /* Sticky headings need a column beside them to stick against. Stacked, the
+     heading would peel off its own paragraph and float down the page. */
+  .spec_heading {
+    position: static;
+    max-width: none;
+  }
+}
+@media (max-width: 600px) {
+  .svc-head_media {
+    aspect-ratio: 3 / 2;
+  }
+  .svc-facts_row {
+    grid-template-columns: 1fr;
+    gap: 0;
+  }
+  .svc-facts_value {
+    text-align: left;
+  }
+}

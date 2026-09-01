@@ -50,7 +50,13 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 > they were designed to sit on stone. `audit.mjs` resolved CSS `url()` against the site root, so it
 > could never have caught it; it now resolves against the stylesheet, and strips comments first.
 >
-> **A second one, also on all eighteen pages.** The navbar overflowed from 992 to about 1150:
+> **THE SERVICE TEMPLATE WAS REBUILT 2026-09-01.** All twelve pages, from one renderer. The head
+> now carries the treatment's own photograph and the five at-a-glance figures; the body's single
+> five-hundred-word column became a lede plus one row per section, heading on the spine. No copy
+> changed and `treatments-data.mjs` is untouched. **Edit the DATA and re-render** as always:
+> `node render-treatments.mjs`, and `--check` fails if the committed output has drifted.
+>
+> **A second bug, also on all eighteen pages.** The navbar overflowed from 992 to about 1150:
 > everything in it is `nowrap`, the actions group is `flex: 0 0 auto`, and the burger did not arrive
 > until 991, so "Book a consultation" was clipped at the viewport edge on any small laptop. Gaps
 > tighten at 1279 and the phone number drops at 1199. `journey-test.mjs` now asserts that no visible

@@ -6,7 +6,7 @@ The home page rebuilt as an editorial journey, 2026-08-31.
 | :--- | :--- |
 | **Trigger** | Brandklout's team reviewed the first build: *"the design is very ugly and simple"* |
 | **North Star** | [drnahlah.com](https://drnahlah.com) — *"the best one we have"* |
-| **Scope** | The home page, plus `treatments.html` as the first rollout. The vocabulary is written to roll onto the rest |
+| **Scope** | The home page, `treatments.html`, and all twelve service pages. Remaining: about, results, memberships, book |
 | **Package** | [`surgical-arts/site-src/`](./surgical-arts/site-src/) — `pages/home.body.html`, `css/50-journey.css`, `js/10-journey.js` |
 | **v1** | Kept verbatim at `site-src/pages/_home-v1.body.html`. Not built. There to diff against |
 | **Gates** | `audit.mjs` FAIL none / WARN none · `check-copy.mjs` clean · `journey-test.mjs` **47/47** |
@@ -400,6 +400,41 @@ But the fee schedule, the financing panel and the comparison FAQ are capped at 7
 LEFT-aligned rather than centred, so they start on the spine like everything else. A sixty-row price
 table stretched to 1560px puts a hand's width between a treatment and its price, which is worse to
 scan, not better. Editorial width for the argument, reading width for the reference.
+
+## The service pages
+
+*"The home page is good enough. Now let's hyper focus on the services pages."*
+
+All twelve at once, because they are a collection: `render-treatments.mjs` renders one template from
+`treatments-data.mjs`. One renderer, one stylesheet block. **Not one word of copy changed.**
+
+### The head had no photograph and none of the numbers
+
+It was a small centred stack of breadcrumb, category, name and one line. The treatment's own
+photograph sat two sections lower as a full-width strip that interrupted the reading, and the five
+things a patient actually came to find out were in a sidebar card halfway down beside the prose.
+
+The head is the arrival split now: copy on the gutter, the treatment's photograph running to the
+viewport edge with the Carrara ground framing it, and the five figures as a hairline ledger directly
+under the headline. **Fee, anaesthetic, time off work, when it settles and how long it lasts are all
+above the fold**, next to the two buttons. The redundant strip is deleted, so the page is a section
+shorter as well as better.
+
+### The body was the worst text on the site
+
+Two intro paragraphs and three headed sections, run together as one unbroken column five hundred
+words deep. The headings did not break it up because they were inside it. This was the plainest
+violation anywhere of the original brief's *"big chunks of text are not good for conversions"*.
+
+- The intro is a **lede**: larger, measured, on its own. It answers "what is this", and people read
+  one paragraph before deciding whether to read six.
+- Each section is a **row**: heading on the left spine, sticky so it stays with its own answer, body
+  measured beside it, hairline between. The page can be scanned down its left edge.
+
+The sticky heading is `position: static` below 991px, because stacked there is no adjacent column
+to stick against and it would peel off its own paragraph and float over the next one.
+
+Review: <https://claude.ai/code/artifact/271cdf39-20f8-4e96-ba12-bcab3c51626c>
 
 ## What this does not fix
 

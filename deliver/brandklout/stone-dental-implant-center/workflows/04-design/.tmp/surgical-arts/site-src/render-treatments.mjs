@@ -40,77 +40,105 @@ const para = (t) => `            <p>${t}</p>`
 const bullets = (items) =>
   ['            <ul>', ...items.map((i) => `              <li>${i}</li>`), '            </ul>'].join('\n')
 
-function heroSection(t, cat) {
-  return `<section class="section_hero hero_component is-page">
-  <div class="padding-global hero_inner">
-    <div class="container-large">
-      <nav class="breadcrumb_component" aria-label="Breadcrumb">
-        <a href="index.html">Home</a><span class="breadcrumb_sep">/</span>
-        <a href="treatments.html">Treatments</a><span class="breadcrumb_sep">/</span>
-        <a href="treatments.html#${cat.anchor}">${cat.label}</a><span class="breadcrumb_sep">/</span>
-        <span aria-current="page">${t.name}</span>
-      </nav>
-      <p class="eyebrow is-center hero_eyebrow">${cat.label}</p>
-      <h1 class="heading-style-h1 hero_title">${t.name}</h1>
-      <p class="text-size-large hero_sub">${t.heroSub}</p>
-    </div>
-  </div>
-</section>`
-}
+/* The page head.
+   REBUILT 2026-09-01. It was a small centred stack of breadcrumb, category,
+   name and one line, with no image at all, and the treatment's own photograph
+   sat two sections lower as a full-width strip that interrupted the reading.
+   Now the photograph IS the head, on the same asymmetric split as the home
+   page's arrival, and `t.bandImage` is consumed here instead of by a band of
+   its own further down.
 
-function detailSection(t) {
-  const body = []
-  for (const p of t.intro) body.push(para(p))
-  for (const block of t.sections) {
-    body.push(`\n            <h2 class="heading-style-h3">${esc(block.heading)}</h2>`)
-    for (const item of block.body) {
-      body.push(Array.isArray(item) ? bullets(item) : para(item))
-    }
-  }
-
+   The fact panel moved up here too. It is the five things a person came to
+   find out (fee, anaesthetic, time off work, when it settles, how long it
+   lasts), and it used to sit in a sidebar halfway down beside a wall of prose.
+   Above the fold, next to the price, is where it belongs. */
+function headSection(t, cat) {
   const rows = t.facts
     .map(
-      (f) => `            <div class="fact-panel_row">
-              <p class="fact-panel_label">${esc(f.label)}</p>
-              <p class="fact-panel_value">${f.value}</p>
-            </div>`
+      (f) => `        <div class="svc-facts_row">
+          <dt class="svc-facts_label">${esc(f.label)}</dt>
+          <dd class="svc-facts_value">${f.value}</dd>
+        </div>`
     )
     .join('\n')
 
-  return `<section class="section_detail">
-  <div class="padding-global">
-    <div class="container-large">
-      <div class="padding-section-large">
-        <div class="detail-layout_component">
+  return `<section class="svc-head_component stone-panel">
+  <div class="svc-head_copy">
+    <nav class="breadcrumb_component" aria-label="Breadcrumb">
+      <a href="index.html">Home</a><span class="breadcrumb_sep">/</span>
+      <a href="treatments.html">Treatments</a><span class="breadcrumb_sep">/</span>
+      <a href="treatments.html#${cat.anchor}">${cat.label}</a><span class="breadcrumb_sep">/</span>
+      <span aria-current="page">${t.name}</span>
+    </nav>
+    <p class="chapter_mark">${cat.label}</p>
+    <h1 class="display-lg svc-head_title">${t.name}</h1>
+    <p class="svc-head_sub">${t.heroSub}</p>
 
-          <div class="text-rich-text text-size-medium">
-${body.join('\n')}
-          </div>
-
-          <aside class="fact-panel_component" aria-label="At a glance">
+    <dl class="svc-facts" data-j="stagger">
 ${rows}
-            <a class="button" href="book.html#request">Book a consultation</a>
-            <p class="text-size-tiny text-style-muted text-align-center">Recovery figures are typical, not a promise. Yours is set out in your written plan.</p>
-          </aside>
+    </dl>
 
-        </div>
-      </div>
+    <div class="svc-head_actions">
+      <a class="button" href="book.html#request">Book a consultation</a>
+      <a class="button is-secondary" href="treatments.html#${cat.anchor}">All ${cat.short} fees</a>
+    </div>
+    <p class="svc-head_note">Recovery figures are typical, not a promise. Yours is set out in your written plan.</p>
+  </div>
+
+  <div class="svc-head_media">
+    <div class="svc-head_photo">
+      <img src="assets/${t.bandImage.file}" alt="${esc(t.bandImage.alt)}" width="1600" height="900" fetchpriority="high">
     </div>
   </div>
 </section>`
 }
 
-const band = (img) => `<section class="section_detail-band">
-  <div class="padding-global">
-    <div class="container-large">
-      <div class="padding-bottom padding-large">
-        <div class="band-media_component" data-reveal>
-          <img src="assets/${img.file}" alt="${esc(img.alt)}" width="1600" height="900" loading="lazy">
-        </div>
-      </div>
+/* The body.
+   REBUILT 2026-09-01, and this was the worst thing on the site measured against
+   the brief: "big chunks of text are not good for conversions." Every treatment
+   page ran its two intro paragraphs and then three headed sections as one
+   unbroken column of prose, five hundred words deep, with the headings inside
+   the column doing nothing to break it up.
+
+   Two changes. The intro becomes a LEDE, set larger and measured, because it is
+   the answer to "what is this" and people read one paragraph before they decide
+   whether to read six. And each section becomes a ROW: its heading on the left
+   spine, its body in a measured column on the right, with a hairline between
+   rows. That turns the page into something you can scan down the left edge and
+   drop into, which is how anyone actually reads a spec.
+
+   Not one word of copy changed. treatments-data.mjs is untouched. */
+function ledeSection(t) {
+  return `<section class="svc-lede_component">
+  <div class="svc-lede_inner">
+    <div class="svc-lede_text text-rich-text" data-j="rise">
+${t.intro.map(para).join('\n')}
     </div>
   </div>
 </section>`
+}
+
+function specSection(t) {
+  const rows = t.sections
+    .map((block) => {
+      const body = block.body
+        .map((item) => (Array.isArray(item) ? bullets(item) : para(item)))
+        .join('\n')
+      return `    <div class="spec_row" data-j="rise">
+      <h2 class="spec_heading">${esc(block.heading)}</h2>
+      <div class="spec_body text-rich-text">
+${body}
+      </div>
+    </div>`
+    })
+    .join('\n')
+
+  return `<section class="spec_component">
+  <div class="spec_inner">
+${rows}
+  </div>
+</section>`
+}
 
 function journeySection(t) {
   const steps = t.steps
@@ -217,14 +245,23 @@ function render(t) {
      ${t.reviewNote ? `\n     CLINICAL REVIEW: ${t.reviewNote}` : ''}
      ========================================================================== -->`
 
+  /* `.journey_page` is the whole opt-in to the design system: it re-frames the
+     section heads, the spine and the materials from the rollout layer at the
+     foot of css/50-journey.css. See treatments.body.html for the same move.
+
+     `band(t.bandImage)` is gone from this list: that photograph is the head
+     now, and a second full-width copy of it two sections later was the strip
+     that used to interrupt the reading. */
   return [
     header,
-    heroSection(t, cat),
-    detailSection(t),
-    band(t.bandImage),
+    '<div class="journey_page">',
+    headSection(t, cat),
+    ledeSection(t),
+    specSection(t),
     journeySection(t),
     faqSection(t),
     relatedSection(t, cat),
+    '</div>',
   ].join('\n\n') + '\n'
 }
 
