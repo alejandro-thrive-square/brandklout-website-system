@@ -1225,3 +1225,121 @@ body.nav-open.has-journey .navbar_component { background: var(--white); border-b
 body.nav-open.has-journey .navbar_component .navbar_logo { filter: none; }
 body.nav-open.has-journey .navbar_component .navbar_link { color: var(--ink); }
 body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); border-color: var(--beige); }
+
+/* ===========================================================================
+   THE INNER PAGE PARTS
+   Added with the first core page. Everything above this line was written for
+   the homepage and is reused unchanged; these two are what an inner page needs
+   that a homepage does not.
+   ======================================================================== */
+
+/* The compact arrival. Same shell, about two thirds the height, no scroll cue.
+   An inner page's hero has to hand over quickly: the visitor arrived wanting
+   the thing the page is named after, not an overture. */
+.ch-arrival.is-compact { min-height: 62svh; }
+.ch-arrival.is-compact .ar-title { font-size: var(--f-d2); max-width: 18ch; }
+.ch-arrival.is-compact .ar-lede { margin-bottom: 2rem; }
+.ch-arrival.is-compact .ar-actions { margin-bottom: 0; }
+@media (max-width: 767px) { .ch-arrival.is-compact { min-height: auto; } }
+
+/* THE SPREAD. One subject at full width, alternating down the page.
+   A card is a thing in a grid of like things; a spread is a subject that gets
+   the page to itself for as long as it takes to read. The measure is capped at
+   58 characters because this column is wide enough to run past comfortable. */
+.sp-row {
+  display: grid;
+  gap: 2.5rem;
+  /* `start`, never `center`. Centring two columns of different heights parks a
+     block of empty ground above the shorter one: a long bio next to a portrait
+     left 250px of nothing above the photograph. The arcs learned this first. */
+  align-items: start;
+  max-width: var(--maxw);
+  margin-left: auto;
+  margin-right: auto;
+  padding: clamp(2.5rem, 5vw, 4rem) var(--bleed);
+}
+@media (min-width: 900px) {
+  .sp-row { grid-template-columns: .85fr 1.15fr; gap: clamp(2.5rem, 5vw, 5rem); }
+  .sp-row.is-flipped .sp-media { order: 2; }
+  /* The portrait holds while the bio is read past it. A face is the thing a
+     nervous patient is actually here for, so it should not scroll away first. */
+  .sp-media { position: sticky; top: 7rem; }
+}
+.sp-media { overflow: hidden; }
+.sp-media img {
+  width: 100%;
+  aspect-ratio: 4 / 5;
+  object-fit: cover;
+  object-position: 50% 22%;
+  filter: grayscale(1) contrast(1.06) brightness(1.02);
+  transform: scale(1.02);
+  transition: filter .6s var(--ease), transform .8s var(--ease);
+}
+.sp-row:hover .sp-media img { filter: none; transform: scale(1.05); }
+@media (max-width: 899px) { .sp-media img { aspect-ratio: 4 / 3; } }
+.sp-eyebrow {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .8rem;
+}
+.sp-body h3 { font-size: var(--f-d3); font-weight: 300; letter-spacing: -.012em; max-width: 16ch; }
+.sp-role {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  margin: .7rem 0 1.4rem;
+}
+.sp-text { font-size: var(--f-lede); line-height: 1.75; max-width: 58ch; margin-bottom: 1rem; }
+/* The one line that is about the person rather than the credential. It reads
+   as an aside because that is what it is, and it is the reason a nervous
+   patient picks one name over another. */
+.sp-note {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--f-h3);
+  line-height: 1.35;
+  color: var(--fg);
+  max-width: 30ch;
+  margin: 1.75rem 0 0;
+  padding-left: 1.3rem;
+  border-left: 2px solid var(--copper);
+}
+.sp-body .link-arrow { margin-top: 1.75rem; }
+
+/* The doctors page's three chapters. Each restates its own rhythm, because each
+   ends on a different kind of element and inheriting one measure everywhere is
+   what made the old build's spacing read as arbitrary. The spreads carry their
+   own vertical padding, so a chapter that is nothing but spreads gives most of
+   its own back. */
+.ch-specialist { padding-bottom: calc(var(--ch-pad) * .45); }
+.ch-generalists { padding-top: calc(var(--ch-pad) * .8); padding-bottom: calc(var(--ch-pad) * .45); }
+/* Closes on the full bleed credential strip, so nothing under it. */
+.ch-standard { padding-bottom: 0; }
+.ch-standard .pr-badges { margin-top: clamp(2rem, 4vw, 3.5rem); }
+
+/* A doctor's own words, as distinct from the biography written about them. The
+   crawler hands these over jammed onto the end of the personal line; they are
+   separated in site/pages.mjs and set here at reading size rather than at the
+   aside's display size, because ninety words of Newsreader at --f-h3 is a wall. */
+.sp-quote {
+  margin: 1.75rem 0 0;
+  padding-left: 1.3rem;
+  border-left: 1px solid var(--rule-strong);
+  max-width: 56ch;
+}
+.sp-quote p {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-style: italic;
+  font-size: var(--f-lede);
+  line-height: 1.72;
+  color: var(--fg-body);
+}
+.sp-quote p::before { content: "\201C"; color: var(--accent-lg); }
+.sp-quote p::after { content: "\201D"; color: var(--accent-lg); }

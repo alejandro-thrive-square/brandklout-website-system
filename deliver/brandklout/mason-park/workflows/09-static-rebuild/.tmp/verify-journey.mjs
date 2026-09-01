@@ -102,6 +102,13 @@ const check = (name, pass, detail = "") => {
   results.push({ name, pass, detail });
   console.log(`${pass ? "PASS" : "FAIL"}  ${name}${detail ? "   " + detail : ""}`);
 };
+/* A part the page does not have is not a failure, and it is not a pass either.
+   Announced, so "53 checks" on a page with half the parts cannot read as a
+   clean sweep of the same 53. */
+const skip = (name, why) => {
+  results.push({ name, pass: true, skipped: true, detail: why });
+  console.log(`SKIP  ${name}   ${why}`);
+};
 
 async function load(width, height, reduced = false) {
   await send("Emulation.setDeviceMetricsOverride", { width, height, deviceScaleFactor: 1, mobile: width < 700 });
@@ -151,7 +158,16 @@ const runtime = await evaluate(`({
 })`);
 check("gsap + ScrollTrigger + SplitText loaded", runtime.gsap && runtime.st && runtime.split, JSON.stringify(runtime));
 check("motion layer booted (jr-ready, not jr-fail)", runtime.ready && !runtime.failed);
-check("at least one pinned chapter", runtime.pins >= 1, `${runtime.pins} pin(s), ${runtime.triggers} trigger(s)`);
+/* A PIN belongs to the treatment path, which is a homepage chapter, so it is
+   asserted only where that chapter exists. Forcing every page to pin something
+   would be motion for its own sake, which is the opposite of what the standard
+   is asking for. What IS required of every page is the other half of item 3 of
+   the Definition of Done: scroll has to DRIVE content, not trigger it, in at
+   least three places. That one is unconditional, and a content page meets it
+   through scrubbed departures and drifting media rather than through a pin. */
+const hasPath = await evaluate(`!!document.querySelector('.ch-path')`);
+if (hasPath) check("the treatment path pins", runtime.pins >= 1, `${runtime.pins} pin(s), ${runtime.triggers} trigger(s)`);
+else skip("the treatment path pins", "no treatment path on this page");
 check("at least three scrubbed triggers", runtime.scrubs >= 3, `${runtime.scrubs} scrub(s)`);
 
 // --------------------------------------------- 3. chapter 01 really scrubs
@@ -183,7 +199,7 @@ if (relayST) {
     new Set(counts).size === 3 && counts[0] < counts[1] && counts[1] < counts[2],
     relayReads.map((r, i) => `${[10, 50, 90][i]}%: ${r} written`).join("  |  "));
 } else {
-  check("chapter 01 statement is SCRUBBED, not triggered", false, "no scrubbed word tween found");
+  skip("chapter 01 statement is SCRUBBED", "no #relayBig on this page");
 }
 
 // --------------------------------------------- 4. chapter 05 pins and scrubs
@@ -209,25 +225,30 @@ if (pathInfo) {
     new Set(xs).size === 3 && xs[0] > xs[1] && xs[1] > xs[2], pathReads.join("  |  "));
   check("chapter 05 is actually pinned mid-scene", pathReads[1].endsWith("fixed"), pathReads[1]);
 } else {
-  check("chapter 05 pin exists", false, "no pinned trigger found");
+  skip("chapter 05 pin", "no pinned chapter on this page");
 }
 
 // --------------------------------------------- 5. chapter 06 quote scrubs
 const proofRange = await evaluate(`(()=>{
   const s=document.querySelector('.pr-lead');
+  if(!s) return null;
   const r=s.getBoundingClientRect();
   return {top: r.top + scrollY, height: r.height};
 })()`);
-const proofReads = [];
-for (const f of [0.1, 0.5, 0.9]) {
-  await seek(proofRange.top - 900 + proofRange.height * f + 500);
-  proofReads.push(await evaluate(`(()=>{
-    const w=[...document.querySelectorAll('#proofQuote .jr-word')];
-    if(!w.length) return null;
-    return [getComputedStyle(w[1]).color, getComputedStyle(w[Math.floor(w.length/2)]).color].join(' / ');
-  })()`));
+if (!proofRange) {
+  skip("chapter 06 quote is SCRUBBED", "no pull quote on this page");
+} else {
+  const proofReads = [];
+  for (const f of [0.1, 0.5, 0.9]) {
+    await seek(proofRange.top - 900 + proofRange.height * f + 500);
+    proofReads.push(await evaluate(`(()=>{
+      const w=[...document.querySelectorAll('#proofQuote .jr-word')];
+      if(!w.length) return null;
+      return [getComputedStyle(w[1]).color, getComputedStyle(w[Math.floor(w.length/2)]).color].join(' / ');
+    })()`));
+  }
+  check("chapter 06 quote is SCRUBBED", new Set(proofReads.filter(Boolean)).size >= 2, proofReads.join("  |  "));
 }
-check("chapter 06 quote is SCRUBBED", new Set(proofReads.filter(Boolean)).size >= 2, proofReads.join("  |  "));
 
 // --------------------------------------------- 6. reading progress is real
 const progress = [];
@@ -262,11 +283,16 @@ check("header resolves to solid past the hero",
   JSON.stringify(navDown));
 
 // --------------------------------------------- 8. counters land on the value
-await seek(await evaluate(`document.getElementById('tgFigures').getBoundingClientRect().top + scrollY - 300`));
-await wait(2200);
-const counters = await evaluate(`[...document.querySelectorAll('.tg-fig b')].map(b=>b.textContent)`);
-check("counters land on their stated values",
-  JSON.stringify(counters) === JSON.stringify(["3", "6mo", "35", "0%"]), counters.join(", "));
+const hasFigures = await evaluate(`!!document.getElementById('tgFigures')`);
+if (hasFigures) {
+  await seek(await evaluate(`document.getElementById('tgFigures').getBoundingClientRect().top + scrollY - 300`));
+  await wait(2200);
+  const counters = await evaluate(`[...document.querySelectorAll('.tg-fig b')].map(b=>b.textContent)`);
+  check("counters land on their stated values",
+    JSON.stringify(counters) === JSON.stringify(["3", "6mo", "35", "0%"]), counters.join(", "));
+} else {
+  skip("counters land on their stated values", "no figures row on this page");
+}
 
 // ------------------------------------- 9. every reveal lands, in the viewport
 // The complaint this check exists to answer: "the animation should work when
@@ -341,7 +367,7 @@ const drawer = await evaluate(`(async()=>{
   out.toggleHitBy = hit ? (hit.className||hit.tagName) : null;
   hit.click(); await sleep(450);
   out.closedAgain = !document.body.classList.contains('nav-open');
-  out.stayedOnPage = location.pathname === '/';
+  out.path = location.pathname;
   return out;
 })()`);
 check("drawer opens, and the header inverts back to ink for it",
@@ -349,8 +375,8 @@ check("drawer opens, and the header inverts back to ink for it",
   drawer.closedLink === "rgb(255, 255, 255)" && drawer.openLink !== "rgb(255, 255, 255)",
   JSON.stringify(drawer));
 check("the close button is not trapped under the drawer it opened",
-  /navbar_toggle/.test(String(drawer.toggleHitBy)) && drawer.closedAgain && drawer.stayedOnPage,
-  `hit ${drawer.toggleHitBy}, closed ${drawer.closedAgain}, stayed ${drawer.stayedOnPage}`);
+  /navbar_toggle/.test(String(drawer.toggleHitBy)) && drawer.closedAgain && drawer.path === ROUTE,
+  `hit ${drawer.toggleHitBy}, closed ${drawer.closedAgain}, still on ${drawer.path}`);
 
 // ----------------------------- 8a2. the closed drawer leaves the tab order
 // A drawer pushed off screen with a transform is still in the accessibility
@@ -401,6 +427,7 @@ const faq = await evaluate(`(async()=>{
     minTap: Math.min(...items.map(i=>Math.round(i.querySelector('.faq_question').getBoundingClientRect().height))),
   };
 })()`);
+if (!faq) skip("the FAQ opens and reveals every answer", "no FAQ on this page");
 if (faq) {
   check("the FAQ opens and reveals every answer",
     faq.grew > 200 && faq.visible === faq.count, JSON.stringify(faq));
@@ -419,6 +446,10 @@ for (const w of [390, 1000]) {
   await wait(1500);
   const t = await evaluate(`(()=>{
     const sec=document.querySelector('.ch-path'), tr=document.getElementById('pathTrack');
+    // Guard INSIDE the page expression. A throw here makes Runtime.evaluate
+    // return undefined, and the guard on the Node side then throws on the
+    // undefined rather than reporting a missing part.
+    if (!sec || !tr) return null;
     const cards=[...document.querySelectorAll('.pa-card')];
     const scrollable = getComputedStyle(tr).overflowX === 'auto';
     return {
@@ -429,6 +460,7 @@ for (const w of [390, 1000]) {
       cards: cards.length,
     };
   })()`);
+  if (!t) { skip(`treatment path on touch @ ${w}`, "no treatment path on this page"); continue; }
   check(`treatment path is usable on touch @ ${w}`,
     t.coarse && t.reachable && t.docOver <= 1 && t.allOn && t.cards === 5, JSON.stringify(t));
 }
@@ -545,6 +577,9 @@ for (const [w, want] of [[360, null], [390, 13.76], [768, 16], [1440, 16], [1920
 // that comparison proves nothing. Measure the pinned chapter's own contents
 // against its box at 1920, where the fluid root makes them 12.5% larger.
 await load(1920, 1000);
+const hasPin = await evaluate(`!!document.getElementById('pathPin')`);
+if (!hasPin) skip("pinned chapter fits the viewport at 1920", "no pinned chapter on this page");
+if (hasPin) {
 await seek(await evaluate(`document.getElementById('pathPin').getBoundingClientRect().top + scrollY + 200`));
 const pinFit = await evaluate(`(()=>{
   const pin=document.getElementById('pathPin');
@@ -557,6 +592,7 @@ const pinFit = await evaluate(`(()=>{
 })()`);
 check("pinned chapter fits the viewport at 1920",
   pinFit.over === 0 && pinFit.pinH <= pinFit.vh + 2, JSON.stringify(pinFit));
+}
 
 check("no console errors", consoleErrors.length === 0, consoleErrors.slice(0, 3).join(" || "));
 
@@ -576,9 +612,14 @@ const rm = await evaluate(`(()=>{
 })()`);
 check("reduced motion hides nothing", rm.hidden === 0 && rm.zero === 0, JSON.stringify(rm));
 check("reduced motion does not overflow", rm.overflow <= 1, `overflow ${rm.overflow}`);
-check("reduced motion still states the real figures", rm.counters === "3,6mo,35,0%", rm.counters);
+if (rm.counters) check("reduced motion still states the real figures", rm.counters === "3,6mo,35,0%", rm.counters);
+else skip("reduced motion still states the real figures", "no figures row on this page");
 
 const failed = results.filter((r) => !r.pass);
-console.log(`\n${results.length} checks, ${failed.length} failed`);
+const skipped = results.filter((r) => r.skipped);
+console.log("");
+console.log("route " + ROUTE + " — " + (results.length - skipped.length) + " checks, " + failed.length + " failed" + (skipped.length ? ", " + skipped.length + " not applicable" : ""));
 ws.close(); chrome.kill(); server.close();
-process.exit(failed.length ? 1 : 0);
+// `process.exitCode`, never `process.exit()`: exit() truncates pending stdout
+// on a pipe, and it ate the summary line of every run that had one to print.
+process.exitCode = failed.length ? 1 : 0;

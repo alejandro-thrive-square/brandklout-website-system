@@ -18,6 +18,7 @@ import { LEGAL_PAGES } from "./legal.mjs";
 // chapters. `home()` below is retained under `homeLegacy` purely as the record
 // of the band layout it replaced; nothing renders it.
 import { home as homeJourney } from "./home.mjs";
+import { makeChapters } from "./chapters.mjs";
 
 // ------------------------------------------------------------ block helpers
 const inSection = (d, n) => (d.blocks || []).filter((b) => b.section === n);
@@ -268,11 +269,25 @@ function ourTeam(d, h) {
 }
 
 // ===========================================================================
-// Meet our doctors — the long-form bios. The live page stacked three portraits
-// at their natural sizes with the bios below in a different order again.
+// Meet the doctors — the second page carried onto the chapter system.
+//
+// It was three alternating split sections and a booking band: the same
+// architecture the homepage was rebuilt out of, and the same failure. Swapping
+// two doctors changed nothing, because nothing connected them.
+//
+// The order is an argument now. Dr. Nguyen leads ALONE, in her own chapter,
+// because a board certified pediatric dentist in the building is the thing that
+// makes this practice different from every other one in Katy. The two general
+// dentists follow as a pair, because their story is the range they cover
+// between them. Then what all three hold in common, then the invitation.
+//
+// Every part comes from site/chapters.mjs. Nothing here writes markup, and the
+// copy is still verbatim out of the crawled page: the chapter system changes
+// the arrangement, never the practice's own words.
 // ===========================================================================
 function ourDoctors(d, h) {
-  const C = h.C;
+  const K = makeChapters(h);
+  const esc = h.esc;
   const PERSONAL = /^When (not in the office|he'?s not in the office|she'?s not in the office)/i;
 
   const doctors = [3, 4, 5].map((n) => {
@@ -291,23 +306,107 @@ function ourDoctors(d, h) {
     };
   }).filter((x) => x.name);
 
+  // The crawler returns Dr. Nguyen's personal line and her philosophy statement
+  // as ONE paragraph, run together with no space: `...national parks.“My
+  // philosophy focuses on...`. fixRunOn cannot repair it because the sentence
+  // boundary has a quotation mark sitting in it. They are two different things
+  // anyway, and setting ninety words as one display-size aside is a wall, so
+  // they are split at the opening quote and set as an aside and a pull quote.
+  const splitPersonal = (t) => {
+    if (!t) return { note: "", quote: "" };
+    const i = t.search(/[“"]/);
+    if (i === -1) return { note: t.trim(), quote: "" };
+    return {
+      note: t.slice(0, i).trim(),
+      quote: t.slice(i).replace(/^[“"]\s*/, "").replace(/[”"]\s*$/, "").trim(),
+    };
+  };
+
+  const pediatric = doctors.find((x) => x.name.toLowerCase().includes("nguyen"));
+  const general = doctors.filter((x) => x !== pediatric);
+
+  const spreadFor = (doc, i) => K.spread({
+    image: doc.portrait,
+    alt: doc.name + ", " + doc.role,
+    title: doc.name,
+    role: doc.role,
+    body: doc.bio,
+    note: splitPersonal(doc.personal).note,
+    quote: splitPersonal(doc.personal).quote,
+    link: doc.href ? K.linkArrow({ label: "Full profile", href: doc.href }) : "",
+    flipped: i % 2 === 1,
+  });
+
   return [
-    openPage(h, "Meet Our Doctors", "The three dentists who look after Katy families at Mason Park Dental."),
-    ...doctors.map((doc, i) => C.section({
-      name: "doctor", bg: i % 2 === 1 ? "paper" : "",
-      inner: C.split(
-        doc.portrait ? h.img(doc.portrait, doc.name, { sizes: "(max-width: 899px) 100vw, 560px" }) : "",
-        `${C.eyebrow(doc.role)}
-         ${C.heading(doc.name)}
-         ${C.spacer("small")}
-         ${doc.bio.map((p) => C.paragraph(p)).join(C.spacer("xsmall"))}
-         ${doc.personal ? C.spacer("medium") + C.notice(`<p>${h.esc(doc.personal)}</p>`) : ""}
-         ${doc.href ? C.spacer("small") + C.button({ label: "Full profile", href: doc.href, variant: "ghost" }) : ""}`,
-        { flipped: i % 2 === 1 },
-      ),
-    })),
-    bookingSection(h),
-  ].join("\n");
+    K.arrival({
+      n: 0, name: "The People", compact: true,
+      image: "/wp-content/uploads/2023/11/g7-1536x1024.jpg",
+      alt: "The team at Mason Park Dental of Katy", w: 1536, height: 1024,
+      title: "Three dentists. <em>One</em> building.",
+      lede: "A board certified pediatric dentist and two general dentists, sharing one practice on Kingsland Boulevard, so a family never has to be split between two.",
+      actions: K.button({ label: "Book an appointment", href: BOOK, large: true, external: true }),
+    }),
+
+    pediatric ? K.chapter({
+      n: 1, name: "The Specialist", cls: "ch-specialist", id: "specialist",
+      inner: `
+  <div class="wrap pe-head">
+    ${K.tag("01", "The Specialist")}
+    <h2 data-split>The reason a family does not need a second practice.</h2>
+    <p class="pe-lede">Pediatric dentistry is one of the recognised dental specialties and it takes three years beyond dental school. Most practices in Katy refer children out to somebody who has done it. This one does not.</p>
+  </div>
+  ${spreadFor(pediatric, 0)}`,
+    }) : "",
+
+    general.length ? K.chapter({
+      n: 2, name: "The Range", cls: "ch-generalists", id: "generalists", theme: "warm",
+      inner: `
+  <div class="wrap pe-head">
+    ${K.tag("02", "The Range")}
+    <h2 data-split>Between them, almost nothing gets referred out.</h2>
+    <p class="pe-lede">Sedation, endodontics, oral surgery, implant placement and cosmetic work are handled in this building rather than passed to somebody else's calendar.</p>
+  </div>
+  ${general.map((doc, i) => spreadFor(doc, i + 1)).join("")}`,
+    }) : "",
+
+    K.chapter({
+      n: 3, name: "The Standard", cls: "ch-standard", id: "standard", theme: "dark",
+      inner: `
+  <div class="wrap pe-head">
+    ${K.tag("03", "The Standard")}
+    <h2 data-split>What all three keep doing after they qualified.</h2>
+    <p class="pe-lede">Continuing education is the difference between a dentist who trained once and one who is still training. These are the bodies whose programmes this practice takes part in.</p>
+  </div>
+  ${K.badges(h.ACCREDITATIONS)}`,
+    }),
+
+    K.chapter({
+      n: 4, name: "The Invitation", cls: "ch-invitation", id: "invitation", theme: "dark",
+      inner: `
+  <div class="wrap iv-top">
+    <div class="iv-copy">
+      ${K.tag("04", "The Invitation")}
+      <h2 data-split>Ask for whichever one you want.</h2>
+      <p class="iv-lede">Tell the front desk who you would like to see and they will book it. If you are bringing a child and an adult on the same visit, say so and both go in one slot.</p>
+      <div class="iv-actions">
+        ${K.button({ label: "Book an appointment", href: BOOK, large: true, external: true })}
+        ${K.button({ label: h.PRACTICE.phone, href: h.PRACTICE.phoneHref, ghost: true, large: true })}
+      </div>
+      ${K.facts([
+        ["Address", `<a href="${esc(h.PRACTICE.maps)}" target="_blank" rel="noopener">${esc(h.PRACTICE.street)}<br>${esc(h.PRACTICE.city)}, ${esc(h.PRACTICE.region)} ${esc(h.PRACTICE.postal)}</a>`],
+        ["Hours", "Mon and Wed <b>9am to 6pm</b><br>Tue and Thu <b>8am to 5pm</b><br>Fri to Sun <b>Closed</b>"],
+        ["The whole team", `Hygienists and front desk are on the <a href="/our-team/">team page</a>.`],
+      ])}
+    </div>
+    <div class="iv-aside">
+      <figure class="iv-shot">
+        ${h.img("/wp-content/uploads/2023/11/Dentist-in-Katy-Office.webp", "The waiting room at Mason Park Dental of Katy", { sizes: "(max-width: 899px) 100vw, 42vw" })}
+        <figcaption>Suite 104A, on the ground floor. Free parking at the door.</figcaption>
+      </figure>
+    </div>
+  </div>`,
+    }),
+  ].filter(Boolean).join("\n");
 }
 
 // ===========================================================================

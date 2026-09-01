@@ -53,9 +53,13 @@ export function makeChapters(h) {
   /** The full bleed arrival. One sentence set very large over a photograph that
    *  fills the window, with the header floating on top of it. `facts` is the
    *  three things a first time visitor actually wants, under a rule. */
-  const arrival = ({ n = 0, name = "Arrival", image, alt, w, height, eyebrow, title, lede, actions, facts = [] }) =>
+  /* `compact` is the INNER PAGE hero: the same shell at about two thirds the
+     height, without the scroll cue or the fact strip. Inner pages need the
+     arrival to hand over quickly, and a second hero component would be a second
+     thing to keep in sync with this one for no gain. */
+  const arrival = ({ n = 0, name = "Arrival", image, alt, w, height, eyebrow, title, lede, actions, facts = [], compact = false }) =>
     chapter({
-      n, name, cls: "ch-arrival", theme: "dark", id: "arrival",
+      n, name, cls: "ch-arrival" + (compact ? " is-compact" : ""), theme: "dark", id: "arrival",
       inner: `
   <div class="ar-bg" data-drift>
     ${h.img(image, alt, { sizes: "100vw", eager: true, w, h: height })}
@@ -70,7 +74,7 @@ export function makeChapters(h) {
       ${facts.map(([b, s]) => `<div><b>${esc(b)}</b><span>${esc(s)}</span></div>`).join("")}
     </div>
   </div>
-  <p class="ar-cue" aria-hidden="true"><span>Scroll</span><i></i></p>`,
+  ${compact ? "" : '<p class="ar-cue" aria-hidden="true"><span>Scroll</span><i></i></p>'}`,
     });
 
   // ------------------------------------------------------------- the figures
@@ -179,6 +183,27 @@ export function makeChapters(h) {
     </div>
   </div>`;
 
+  /** An editorial SPREAD: one person or subject at full width, portrait on one
+   *  side and the copy on the other, alternating down the page. This is what an
+   *  inner page uses where the homepage uses a `plate`. The difference is not
+   *  decoration: a card is a thing in a grid of like things, and a spread is a
+   *  subject that gets the page to itself for as long as it takes to read. */
+  const spread = ({ image, alt, eyebrow, title, role, body = [], note, quote: pull, link, flipped = false }) =>
+    `<article class="sp-row${flipped ? " is-flipped" : ""}">
+    <div class="sp-media" data-drift>
+      ${h.img(image, alt || title, { sizes: "(max-width: 899px) 100vw, 44vw" })}
+    </div>
+    <div class="sp-body">
+      ${eyebrow ? `<p class="sp-eyebrow">${esc(eyebrow)}</p>` : ""}
+      <h3>${esc(title)}</h3>
+      ${role ? `<p class="sp-role">${esc(role)}</p>` : ""}
+      ${body.map((t) => `<p class="sp-text">${esc(t)}</p>`).join("")}
+      ${note ? `<p class="sp-note">${esc(note)}</p>` : ""}
+      ${pull ? `<blockquote class="sp-quote"><p>${esc(pull)}</p></blockquote>` : ""}
+      ${link || ""}
+    </div>
+  </article>`;
+
   // ---------------------------------------------------------------- the path
   /** The pinned horizontal journey. SIZED IN svh, not rem: a pinned scene has
    *  to fit the window, and with a fluid root every rem in it grows 12.5% at
@@ -269,7 +294,7 @@ export function makeChapters(h) {
   return {
     chapter, tag, wrap, button, linkArrow,
     arrival, figures, versus, marquee,
-    arc, plate, plates, band,
+    arc, plate, plates, band, spread,
     path, quote, quoteRail, badges,
     facts, faqList,
   };
