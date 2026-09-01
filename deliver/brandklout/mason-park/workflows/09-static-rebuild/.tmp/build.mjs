@@ -425,6 +425,10 @@ for (const slug of ALL) {
   const html = layout({
     title, description, route, body,
     ogImage: d.featured?.src ? asset(d.featured.src) : null,
+    // Detected from the markup rather than listed by slug, so a page gains the
+    // motion layer the moment it is authored as chapters and loses it the
+    // moment it is not. Nothing to keep in sync.
+    motion: body.includes("data-chapter="),
   });
   const outDir = route === "/" ? DIST : path.join(DIST, route.slice(1, -1));
   fs.mkdirSync(outDir, { recursive: true });
@@ -453,8 +457,29 @@ fs.writeFileSync(path.join(DIST, "404.html"), layout({
 
 // theme + assets
 fs.mkdirSync(path.join(DIST, "assets"), { recursive: true });
-fs.copyFileSync(path.join(HERE, "theme", "site.css"), path.join(DIST, "assets", "site.css"));
+// The stylesheet ships as ONE file, because Instatic registers it as a single
+// site-wide code asset. `journey.css` is authored separately only so the design
+// layer stays readable; it is concatenated here, never linked separately.
+fs.writeFileSync(
+  path.join(DIST, "assets", "site.css"),
+  [
+    fs.readFileSync(path.join(HERE, "theme", "site.css"), "utf8"),
+    fs.readFileSync(path.join(HERE, "theme", "journey.css"), "utf8"),
+  ].join(String.fromCharCode(10)),
+);
 fs.copyFileSync(path.join(HERE, "theme", "site.js"), path.join(DIST, "assets", "site.js"));
+fs.copyFileSync(path.join(HERE, "theme", "journey.js"), path.join(DIST, "assets", "journey.js"));
+
+// GSAP is vendored, not pulled off a CDN: a dental site must not hand a third
+// party the ability to run script on its pages, and the whole set is 125KB.
+// All plugins are free since GSAP 3.13, so ScrollTrigger and SplitText need no
+// licence check. Only the three the journey layer actually uses are shipped.
+const GSAP_SRC = path.join(HERE, "vendor", "gsap");
+if (fs.existsSync(GSAP_SRC)) {
+  const gd = path.join(DIST, "assets", "gsap");
+  fs.mkdirSync(gd, { recursive: true });
+  for (const f of fs.readdirSync(GSAP_SRC)) fs.copyFileSync(path.join(GSAP_SRC, f), path.join(gd, f));
+}
 
 let copied = 0, bytes = 0;
 if (!NO_ASSETS) {

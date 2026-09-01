@@ -1,6 +1,15 @@
 # 09 — Static rebuild of bestdentistinkatytx.com
 
 > [!IMPORTANT]
+> **The HOMEPAGE was rebuilt as a chaptered journey on 2026-09-01.** The team reviewed the
+> staging build and called the design ugly and simple, correctly: it was thirteen
+> interchangeable bands with no GSAP at all, which is the failure mode
+> [`DESIGN-STANDARD.md`](../../../docs/DESIGN-STANDARD.md) exists to prevent. It is now
+> **eight named chapters with three scroll-driven scenes**, built to the fundamentals of the
+> Dr. Nahlah reference. Read [JOURNEY-2026-09-01.md](./JOURNEY-2026-09-01.md) first. It is the
+> canary: the other pages have NOT been converted yet, and nothing has shipped.
+
+> [!IMPORTANT]
 > **The redesign is LIVE ON STAGING as of 2026-08-31**, with two new pages, at
 > `https://staging.masonparkdental.com`. Production is untouched and still serves the
 > 2026-08-27 design. Read [CORE-PAGES-2026-08-31.md](./CORE-PAGES-2026-08-31.md) for the
@@ -37,9 +46,18 @@ node extract.mjs      # crawl snapshots -> content/*.json   (only needed if the 
 node build.mjs        # content + templates -> dist/
 node audit.mjs        # content QA gate; exits non-zero on any blocker or error
 node responsive.mjs   # layout gate; every page at 390 / 768 / 1440px
+node verify-journey.mjs   # BEHAVIOUR gate for the homepage: drives the page over CDP and
+                          # asserts the scrubs actually scrub. 21 checks. Screenshots cannot
+                          # tell you whether a reveal fired; this can.
 node weigh.mjs        # per-page download weight, desktop vs phone
 node to-instatic.mjs  # body-only pages + code assets + media manifest -> instatic/
-node shot.mjs .       # screenshot the built pages (add --mobile for 390px)
+node shot.mjs . --still    # screenshot the built pages (--mobile for 390px, --vw N for any width)
+                          # ALWAYS pass --still for a scroll-driven page. The capture pass
+                          # scrolls the document to wake lazy images, which leaves every
+                          # scrubbed timeline mid-tween; the first capture of the new homepage
+                          # photographed the hero at 15% opacity for exactly that reason.
+                          # --still emulates prefers-reduced-motion, which is the finished
+                          # layout with no motion.
 node serve.mjs        # browse it at http://localhost:4300/, exactly as a host would serve it
 ```
 

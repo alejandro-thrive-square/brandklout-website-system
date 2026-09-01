@@ -21,13 +21,21 @@ fs.mkdirSync(OUT, { recursive: true });
 const argv = process.argv.slice(2);
 const num = (n, d) => { const i = argv.indexOf(n); return i === -1 ? d : Number(argv[i + 1]); };
 const MOBILE = argv.includes("--mobile");
+// LAYOUT captures need the motion layer OFF. The capture pass scrolls the whole
+// document to wake lazy images, which leaves every scrubbed timeline at whatever
+// state its scrub lag settled on, so a scroll-driven page photographs mid-tween:
+// the hero came out at 15% opacity because its departure scrub had run. Emulating
+// prefers-reduced-motion puts the page in the state the reduced-motion guard
+// defines, which is the finished layout with no motion. Use it for layout and
+// responsive review; motion is verified by driving the page, never by a capture.
+const STILL = argv.includes("--still");
 const VW = num("--vw", MOBILE ? 390 : 1440);
 const SLICE_W = num("--w", MOBILE ? 480 : 1000);
 const SLICE_H = num("--h", 1400);
 // Routes may be given with or without a leading slash. Git Bash on Windows
 // rewrites a leading-slash argument into a Windows path, so the bare form
 // (`node shot.mjs services/invisalign`) is the one that always works. `.` is home.
-const BOOL_FLAGS = new Set(["--mobile"]);
+const BOOL_FLAGS = new Set(["--mobile", "--still"]);
 const VALUE_FLAGS = new Set(["--w", "--h", "--vw"]);
 const routes = argv
   .filter((a, i) => !BOOL_FLAGS.has(a) && !VALUE_FLAGS.has(a) && !VALUE_FLAGS.has(argv[i - 1]))
@@ -101,6 +109,7 @@ await send("Page.enable");
 await send("Runtime.enable");
 await send("Log.enable");
 await send("Emulation.setDeviceMetricsOverride", { width: VW, height: 900, deviceScaleFactor: 1, mobile: MOBILE });
+if (STILL) await send("Emulation.setEmulatedMedia", { features: [{ name: "prefers-reduced-motion", value: "reduce" }] });
 const evaluate = async (expr) => (await send("Runtime.evaluate", { expression: expr, returnByValue: true, awaitPromise: true }))?.result?.value;
 
 for (const route of routes) {

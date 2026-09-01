@@ -14,6 +14,10 @@
 
 import { NAV, SERVICE_SLUGS as SERVICE_SLUGS_REF } from "../pages.config.mjs";
 import { LEGAL_PAGES } from "./legal.mjs";
+// The homepage moved out on 2026-08-31 when it was rebuilt as eight named
+// chapters. `home()` below is retained under `homeLegacy` purely as the record
+// of the band layout it replaced; nothing renders it.
+import { home as homeJourney } from "./home.mjs";
 
 // ------------------------------------------------------------ block helpers
 const inSection = (d, n) => (d.blocks || []).filter((b) => b.section === n);
@@ -125,211 +129,15 @@ const bookingSection = (h) => {
      </div>`,
   ) });
 };
-
 // ===========================================================================
-// Home
+// The homepage lives in site/home.mjs.
+//
+// It used to live here, as `home()`, and was thirteen full width bands of equal
+// weight. It was replaced on 2026-09-01 by eight named chapters, for the reason
+// recorded at the top of that file and in DESIGN-STANDARD.md. The old function
+// is deleted rather than kept commented out: a dead page template is the thing
+// that gets copied forward by mistake, and git has it.
 // ===========================================================================
-// Section order follows the Figma "Handoff — Page Overview": hero, credentials,
-// value props, services, retention, doctors, reviews, virtual consult, FAQ,
-// financing, scheduling, footer. What differs from the comps is the *shape* of
-// each one — see the notes in site/components.mjs and theme/site.css. The comps
-// stack thirteen full-width bands of equal weight; here the page alternates
-// between wide, full-bleed moments and quiet measured ones, so scrolling it
-// feels like moving through a place rather than past a list.
-function home(d, h) {
-  const C = h.C;
-  const hero = imgs(d, 2)[0];
-  const introHead = heads(d, 5).find((t) => t.startsWith("Experience"))
-    || "Experience Exceptional Dentistry at Mason Park Dental of Katy";
-  const introParas = paras(d, 5).filter((p) => p.text !== "Dentist in Katy, TX");
-  const servicesParas = paras(d, 7);
-  const doctorsParas = paras(d, 8);
-  const vcParas = paras(d, 10);
-  // The live theme shouted the consult heading and title-cased its three steps.
-  // Sentence case restores them; the wording itself is untouched.
-  const sentence = (s) => s.charAt(0).toUpperCase() + s.slice(1).toLowerCase();
-  const vcSteps = heads(d, 10)
-    .filter((t) => t !== "GET A FREE VIRTUAL DENTAL CONSULT")
-    .map((t) => sentence(fixTypos(t)));
-  const cherryLogo = imgs(d, 11)[0];
-  const cherryPara = paras(d, 11)[0];
-  const flexPara = paras(d, 13)[0];
-  const flexImg = imgs(d, 13)[0];
-
-  // Reviews: quote and attribution arrive as consecutive blocks. The live page
-  // repeats one twice with different trailing punctuation, so dedupe on a
-  // normalised prefix and drop any quote with no attribution.
-  const rb = inSection(d, 15);
-  const seen = new Set();
-  const key = (q) => q.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 60);
-  const reviews = [];
-  for (let i = 0; i < rb.length; i++) {
-    if (rb[i].type !== "para") continue;
-    const next = rb[i + 1];
-    // Quotes arrive with the theme's own smart quotes still attached, sometimes
-    // with a space in front of the closing one. Strip both ends completely.
-    const quote = rb[i].text.trim().replace(/^[“”"'\s]+/, "").replace(/[“”"'\s]+$/, "");
-    const author = next && next.type === "heading" ? next.text.replace(/^-\s*/, "") : "";
-    if (author && !seen.has(key(quote))) { seen.add(key(quote)); reviews.push({ quote, author }); }
-  }
-
-  // The four homepage questions. The comps name four questions but carry no
-  // answers, so these are four the practice has already answered in its own
-  // words on /faq-page/ — the Figma's four are logged for the client to answer.
-  const faqSource = h.read("faq-page");
-  const wanted = [
-    "do you accept new patients",
-    "what do i need to bring to my first dental appointment",
-    "how often should i visit the dentist",
-    "what services does a general dentist offer",
-  ];
-  const norm = (s) => String(s || "").toLowerCase().replace(/[^a-z0-9 ]/g, "").trim();
-  const homeFaqs = wanted
-    .map((w) => (faqSource?.blocks || []).find((b) => b.type === "faq" && norm(b.question) === w))
-    .filter(Boolean)
-    .map((b) => ({ question: b.question, html: h.rewrite(b.html) }));
-
-  return [
-    C.heroSplit({
-      eyebrow: "Katy, Texas",
-      title: "One practice for the whole family",
-      lede: "Cosmetic and restorative care for adults, gentle first visits for kids, under one roof on Kingsland Boulevard.",
-      actions: C.buttonGroup([
-        { label: "Schedule online", href: BOOK, external: true },
-        { label: "Meet our doctors", href: "/our-doctors/", variant: "secondary" },
-      ]),
-      image: hero?.src || "/wp-content/uploads/2023/11/g7-1024x683.jpg",
-      alt: "The team at Mason Park Dental of Katy",
-      w: hero?.w || 1024, h: hero?.h || 683,
-      plate: { value: "Mon–Thu", label: "Appointments" },
-      facts: [
-        ["Adults and kids", "Care under one roof"],
-        ["Board certified", "Pediatric dentistry"],
-        ["0% APR", "Financing available"],
-      ],
-    }),
-
-    C.badgeStrip(h.ACCREDITATIONS),
-
-    C.section({ name: "intro", inner: `
-      ${C.sectionHeading({ eyebrow: "Two practices, one address", title: introHead })}
-      <div class="max-width-large">${introParas.map((p) => C.paragraph(p.text, { size: "medium" })).join(C.spacer("small"))}</div>
-      ${C.spacer("xlarge")}
-      ${C.grid(2, [
-        C.propCard({
-          image: "/wp-content/uploads/2023/08/AdobeStock_118631127-scaled.jpeg",
-          alt: "A patient being treated in one of the practice's operatories",
-          tag: "For adults", title: "Cosmetic and restorative",
-          text: "Veneers, implants, Invisalign and the everyday work that keeps a smile lasting — planned with you before anything is prepared.",
-          linkLabel: "Adult services", href: "/our-services/",
-        }),
-        C.propCard({
-          image: "/wp-content/uploads/2023/08/AdobeStock_398040894-scaled.jpeg",
-          alt: "A child at a check-up with a pediatric dentist",
-          tag: "For kids", kids: true, title: "The dentist they ask to go back to",
-          text: "Board certified pediatric care from the first tooth through the teenage years, from a dentist who trained specifically for it.",
-          linkLabel: "Children's dentistry", href: "/services/pediatric-dental-care/",
-        }),
-      ])}` }),
-
-    C.section({ name: "services", bg: "paper", inner: `
-      ${C.sectionHeading({ eyebrow: "What we do", title: "Care for every age, in one building" })}
-      ${SERVICE_GROUPS.map(([label, items]) => C.svcGroup({
-        label,
-        cols: items.length > 4 ? 3 : 4,
-        items: items.map(([icon, name, text, href]) => ({ icon, label: name, text, href })),
-      })).join("")}
-      ${C.spacer("xlarge")}
-      ${C.split(
-        servicesParas.map((p) => C.paragraph(p.text)).join(C.spacer("xsmall")),
-        `${C.buttonGroup([
-           { label: "Request an appointment", href: BOOK, external: true },
-           { label: "All services", href: "/our-services/", variant: "secondary" },
-         ])}
-         ${C.spacer("small")}
-         <p class="card_meta">Or call <a href="${h.PRACTICE.phoneHref}">${h.esc(h.PRACTICE.phone)}</a></p>`,
-        { textWide: true },
-      )}` }),
-
-    C.section({ name: "retention", bg: "slate", padding: "medium", inner: C.quoteBand({
-      eyebrow: "Why families stay",
-      title: "You'll see the same faces next time",
-      text: "Low turnover is not a marketing line — it is why your child's hygienist remembers the trick that worked last time, and why your crown matches the shade we recorded three years ago.",
-    }) }),
-
-    C.section({ name: "doctors", inner: `
-      ${C.sectionHeading({ eyebrow: "Who you'll see", title: heads(d, 8)[0] || "Meet the doctors",
-        text: doctorsParas[0]?.text })}
-      ${C.grid(3, DOCTORS.map(([image, name, role, href, blurb]) => C.doctorCard({ image, name, role, href, blurb })))}
-      ${C.spacer("large")}
-      ${C.linkArrow({ label: "Read the full profiles", href: "/our-doctors/" })}` }),
-
-    C.section({ name: "reviews", bg: "paper", inner: `
-      ${C.sectionHeading({ eyebrow: "From Katy families", title: "What patients say" })}
-      ${C.reviewList(reviews.slice(0, 6))}` }),
-
-    C.section({ name: "virtual-consult", bg: "ink", inner: C.split(
-      `${C.eyebrow("Before you take time off work")}
-       ${C.heading("Get a free virtual consult in three steps")}
-       ${C.spacer("small")}
-       ${vcParas.map((p) => C.paragraph(p.text)).join(C.spacer("xsmall"))}
-       ${C.spacer("medium")}
-       ${C.button({ label: "Start a virtual consult", href: "/virtual-consultation/" })}`,
-      C.stepList(vcSteps),
-    ) }),
-
-    homeFaqs.length ? C.section({ name: "faq", inner: C.faqLayout({
-      eyebrow: "Before you come in",
-      title: "Questions we get every week",
-      aside: C.spacer("medium") + C.linkArrow({ label: "All questions", href: "/faq-page/" }),
-      items: homeFaqs,
-    }) }) : "",
-
-    C.section({ name: "financing", bg: "paper", padding: "large", inner: C.financePanel({
-      eyebrow: "Paying for it",
-      title: "Pay monthly at 0% APR, with no hard credit check",
-      text: cherryPara?.text,
-      actions: C.spacer("xsmall") + C.button({ label: "See financing options", href: "/financing/" }),
-      logo: cherryLogo?.src, logoAlt: "Cherry",
-      note: "Applications are handled by Cherry. Ask the front desk which account your application should go through.",
-    }) }),
-
-    C.ctaSplit({
-      eyebrow: "Book a visit",
-      title: heads(d, 13)[0] || "Flexible Scheduling and Emergency Care",
-      text: flexPara?.text,
-      actions: C.buttonGroup([
-        { label: "Request an appointment", href: BOOK, external: true },
-        { label: "Dental emergency?", href: "/services/emergency-dentist/", variant: "secondary" },
-      ]),
-      image: flexImg?.src, alt: "A team member taking a call at the practice",
-      w: flexImg?.w, h: flexImg?.h,
-    }),
-
-    // "Find us in Katy" — the map that sat between the reviews and the footer's
-    // contact band on the previous build. The redesign dropped it, so shipping
-    // the redesign would have taken the homepage map away; restored here.
-    //
-    // The street address is set in TEXT above the frame on purpose. A map pin
-    // is not readable by a screen reader, the frame is lazy and may never load
-    // on a slow connection, and the address is the thing a visitor copies into
-    // their own phone. The frame is the illustration, not the content.
-    C.section({ name: "map", padding: "small", inner: `
-      ${C.sectionHeading({
-        eyebrow: "Find us",
-        title: "Find us in Katy",
-        text: `${h.PRACTICE.street}, ${h.PRACTICE.city}, ${h.PRACTICE.region} ${h.PRACTICE.postal}`,
-        centered: true,
-      })}
-      ${h.renderEmbed(MAP_EMBED)}
-      ${C.spacer("small")}
-      <div class="text-align-center">
-        ${C.paragraph(LOCATION_NOTE)}
-        ${C.spacer("xsmall")}
-        ${C.button({ label: "Get directions", href: h.PRACTICE.maps, variant: "ghost", external: true })}
-      </div>` }),
-  ].filter(Boolean).join("\n");
-}
 
 // ===========================================================================
 // Our services — the live page was an icon carousel that named no service in
@@ -989,7 +797,7 @@ function patientReviews(d, h) {
 
 // ===========================================================================
 export const BESPOKE = {
-  home,
+  home: homeJourney,
   "our-services": ourServices,
   "about-us": aboutUs,
   "our-team": ourTeam,

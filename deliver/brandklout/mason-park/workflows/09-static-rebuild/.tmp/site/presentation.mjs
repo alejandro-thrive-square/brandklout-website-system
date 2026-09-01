@@ -341,7 +341,11 @@ ${body}
 ${chromeFooter()}
 </div>`;
 
-  const layout = ({ title, description, route, body, ogImage }) => `<!doctype html>
+  // `motion` opts a page into the journey layer: GSAP plus theme/journey.js,
+  // and the `has-journey` body class that lets the header overlay a full bleed
+  // hero instead of sitting on a white strip above it. Only pages built as
+  // chapters pass it, so the other seventy pay nothing.
+  const layout = ({ title, description, route, body, ogImage, motion = false }) => `<!doctype html>
 <html lang="en">
 <head>
 <meta charset="utf-8">
@@ -361,9 +365,13 @@ ${ogImage ? `<meta property="og:image" content="${esc(SITE_URL + ogImage)}">` : 
 <link rel="stylesheet" href="/assets/site.css">
 <script type="application/ld+json">${jsonLd(route)}</script>
 </head>
-<body>
+<body${motion ? ' class="has-journey"' : ""}>
 ${pageBody(body)}
 <script src="/assets/site.js" defer></script>
+${motion ? `<script src="/assets/gsap/gsap.min.js" defer></script>
+<script src="/assets/gsap/ScrollTrigger.min.js" defer></script>
+<script src="/assets/gsap/SplitText.min.js" defer></script>
+<script src="/assets/journey.js" defer></script>` : ""}
 </body>
 </html>
 `;

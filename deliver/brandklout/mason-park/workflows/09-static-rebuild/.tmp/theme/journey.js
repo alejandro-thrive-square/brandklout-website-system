@@ -1,0 +1,473 @@
+/* ===========================================================================
+   THE MOTION LAYER — Mason Park Dental
+   Ships as a site-wide code asset alongside site.js and runs only on a page
+   that carries `section[data-chapter]`, so every other page pays nothing but
+   one 404-free script tag.
+
+   THE RULE THIS FILE EXISTS TO OBEY (DESIGN-STANDARD.md):
+   scroll must DO WORK, not trigger work. An IntersectionObserver can only say
+   "this is now visible"; it cannot express HOW FAR THROUGH something you are,
+   which is what a scrubbed statement, a pinned track and a progress bar all
+   depend on. The previous Mason Park build was made entirely of observers and
+   contained no GSAP at all, and that single choice is most of why it read as a
+   stack of cards. Three chapters here are scrubbed:
+
+     Chapter 01  the statement is written word by word as you scroll
+     Chapter 05  the path travels sideways under a pin, driven by progress
+     Chapter 06  the pull quote is written the same way, and the rail drifts
+
+   Everything degrades. With GSAP missing or reduced motion on, `jr-fail`
+   reveals every hidden element and the page reads as ordinary static markup.
+   ======================================================================== */
+(function () {
+  "use strict";
+
+  var root = document.documentElement;
+  var chapters = document.querySelectorAll("section[data-chapter]");
+  if (!chapters.length) return;
+
+  var reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  var ok = !!(window.gsap && window.ScrollTrigger);
+
+  function $(sel, ctx) { return (ctx || document).querySelector(sel); }
+  function $$(sel, ctx) { return Array.prototype.slice.call((ctx || document).querySelectorAll(sel)); }
+
+  root.classList.add("jr-ready");
+  if (!ok || reduced) root.classList.add("jr-fail");
+
+  /* -------------------------------------------------------------------------
+     THE CHROME. Deliberately FIRST, and deliberately free of GSAP.
+     The header floating over the arrival chapter is a LAYOUT decision, not a
+     motion one, so it has to survive both reduced motion and GSAP failing to
+     load. Everything below this block may not run; this always does.
+
+     The header height is measured rather than assumed, because it changes with
+     the logo's intrinsic size and with the breakpoint, and the hero is pulled
+     up by exactly that amount.
+     --------------------------------------------------------------------- */
+  (function chrome() {
+    var nav = $(".navbar_component");
+    var hero = $(".ch-arrival");
+    if (!nav || !hero || !document.body.classList.contains("has-journey")) return;
+
+    var navH = 0;
+    function measure() {
+      navH = nav.offsetHeight;
+      root.style.setProperty("--jr-nav-h", navH + "px");
+    }
+    function solidity() {
+      /* Solid from the point the hero's bottom edge reaches the header, so the
+         bar never turns white while there is still photograph behind it. */
+      var edge = hero.getBoundingClientRect().bottom;
+      nav.classList.toggle("is-solid", edge <= navH + 1);
+    }
+    measure();
+    solidity();
+    window.addEventListener("scroll", solidity, { passive: true });
+    window.addEventListener("resize", function () {
+      clearTimeout(chrome._t);
+      chrome._t = setTimeout(function () {
+        measure(); solidity();
+        if (window.ScrollTrigger) ScrollTrigger.refresh();
+      }, 200);
+    });
+    if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { measure(); solidity(); });
+  })();
+
+  if (!ok) return;
+
+  /* Registered here rather than in <head>: ScrollTrigger initialised before
+     document.body exists leaves its internals half built. */
+  gsap.registerPlugin(ScrollTrigger);
+  if (window.SplitText) gsap.registerPlugin(SplitText);
+
+  var EASE = "power3.out";
+
+  function splitWords(el) {
+    if (!el || !window.SplitText) return null;
+    try {
+      return SplitText.create
+        ? SplitText.create(el, { type: "words", wordsClass: "jr-word" })
+        : new SplitText(el, { type: "words", wordsClass: "jr-word" });
+    } catch (e) { return null; }
+  }
+  function splitLines(el) {
+    if (!el || !window.SplitText) return null;
+    try {
+      var o = { type: "lines", mask: "lines", linesClass: "jr-line" };
+      return SplitText.create ? SplitText.create(el, o) : new SplitText(el, o);
+    } catch (e) { return null; }
+  }
+
+  /* -------------------------------------------------------------------------
+     REVEALS, shared by every chapter.
+     A chapter ARRIVES (tag rule draws out, headline lines rise through a mask,
+     the lede and actions follow) and DEPARTS (the whole block recedes on a
+     scrub bound to its own exit), so leaving a chapter feels like leaving a
+     room rather than scrolling past a div.
+     --------------------------------------------------------------------- */
+  if (!reduced) {
+    $$(".chapter-tag").forEach(function (tag) {
+      var rule = $("i", tag);
+      var tl = gsap.timeline({ scrollTrigger: { trigger: tag, start: "top 88%" } });
+      if (rule) tl.from(rule, { scaleX: 0, duration: .7, ease: EASE }, 0);
+      tl.from(tag.querySelectorAll("span,b"), { opacity: 0, x: -14, duration: .7, stagger: .08, ease: EASE }, .12);
+    });
+
+    $$("[data-split]").forEach(function (el) {
+      var sp = splitLines(el);
+      var targets = sp && sp.lines && sp.lines.length ? sp.lines : [el];
+      gsap.from(targets, {
+        yPercent: 108, opacity: 0, duration: 1.05, stagger: .09, ease: "power4.out",
+        scrollTrigger: { trigger: el, start: "top 86%" }
+      });
+    });
+
+    /* Photographs drift against the scroll. Scale never lands exactly on 1:
+       a scrubbed transform that resolves to the identity matrix flickers at
+       the edges as the compositor drops and re-takes the layer. */
+    $$("[data-drift] img").forEach(function (img) {
+      gsap.fromTo(img,
+        { yPercent: -4, scale: 1.09 },
+        {
+          yPercent: 4, scale: 1.03, ease: "none",
+          scrollTrigger: { trigger: img.closest("[data-drift]"), start: "top bottom", end: "bottom top", scrub: .8 }
+        });
+    });
+  }
+
+  /* -------------------------------------------------------------------------
+     CHAPTER 00 — ARRIVAL
+     --------------------------------------------------------------------- */
+  (function arrival() {
+    var sec = $(".ch-arrival");
+    if (!sec || reduced) return;
+
+    var tl = gsap.timeline({ delay: .15 });
+    var title = $(".ar-title", sec);
+    var sp = splitLines(title);
+    if (sp && sp.lines) {
+      gsap.set(title, { visibility: "visible" });
+      tl.from(sp.lines, { yPercent: 112, duration: 1.15, stagger: .1, ease: "power4.out" }, 0);
+    }
+    tl.to($$(".ar-lede, .ar-actions, .ar-meta", sec), {
+      visibility: "visible", opacity: 1, y: 0, duration: .95, stagger: .12, ease: EASE
+    }, .45);
+    gsap.set($$(".ar-lede, .ar-actions, .ar-meta", sec), { opacity: 0, y: 26 });
+
+    /* The chapter departs: the photograph sinks and the copy lifts away, so
+       the hero is visibly LEFT rather than simply scrolled off. */
+    gsap.to($(".ar-in", sec), {
+      yPercent: -14, opacity: .15, ease: "none",
+      scrollTrigger: { trigger: sec, start: "top top", end: "bottom top", scrub: .5 }
+    });
+  })();
+
+  /* -------------------------------------------------------------------------
+     CHAPTER 01 — THE RELAY   (scrub #1: the statement, written word by word)
+     --------------------------------------------------------------------- */
+  (function relay() {
+    var sec = $(".ch-relay");
+    if (!sec || reduced) return;
+    var big = $("#relayBig", sec);
+    var sp = splitWords(big);
+
+    if (sp && sp.words && sp.words.length) {
+      /* The closing clause is owned by the copper tween and excluded from the
+         ink one. Two scrubbed tweens writing `color` on the same word over
+         overlapping ranges overwrite each other every frame and flicker. One
+         word, one owner. */
+      var tail = sp.words.slice(-9);
+      var body = sp.words.slice(0, -9);
+      gsap.to(body, {
+        color: "#2e3538", stagger: .4, ease: "none",
+        scrollTrigger: { trigger: sec, start: "top 68%", end: "center 45%", scrub: .5 }
+      });
+      gsap.to(tail, {
+        color: "#8c6349", stagger: .3, ease: "none",
+        scrollTrigger: { trigger: sec, start: "center 55%", end: "bottom 68%", scrub: .5 }
+      });
+    } else {
+      gsap.to(big, { color: "#2e3538", scrollTrigger: { trigger: sec, start: "top 70%" } });
+    }
+
+    gsap.from($$("#relayAfter p", sec), {
+      opacity: 0, y: 26, duration: .9, stagger: .14, ease: EASE,
+      scrollTrigger: { trigger: "#relayAfter", start: "top 85%" }
+    });
+    gsap.fromTo($(".re-img", sec), { yPercent: -8, scale: 1.14 }, {
+      yPercent: 8, scale: 1.08, ease: "none",
+      scrollTrigger: { trigger: sec, start: "top bottom", end: "bottom top", scrub: .8 }
+    });
+  })();
+
+  /* -------------------------------------------------------------------------
+     CHAPTER 02 — UNDER ONE ROOF
+     Counters, staggered comparison rows, and a marquee whose speed is the
+     scroll velocity rather than a fixed animation.
+     --------------------------------------------------------------------- */
+  (function together() {
+    var sec = $(".ch-together");
+    if (!sec) return;
+
+    if (!reduced) {
+      /* The final value is in the HTML, and the tween counts UP to it. It used
+         to be a literal "0" that the tween replaced, which meant a reduced
+         motion visitor, and anyone whose JS failed, read "0 Doctors on staff".
+         A number the page states must be true before any script runs. */
+      $$(".tg-fig b", sec).forEach(function (b) {
+        var to = parseFloat(b.getAttribute("data-count")) || 0;
+        var suffix = b.getAttribute("data-suffix") || "";
+        var o = { v: 0 };
+        gsap.to(o, {
+          v: to, duration: 1.8, ease: "power2.out",
+          scrollTrigger: { trigger: "#tgFigures", start: "top 82%" },
+          onUpdate: function () { b.textContent = Math.round(o.v) + suffix; }
+        });
+      });
+
+      gsap.from($$(".tg-shot", sec), {
+        opacity: 0, y: 40, duration: 1, stagger: .14, ease: EASE,
+        scrollTrigger: { trigger: ".tg-pair", start: "top 80%" }
+      });
+      gsap.from($$(".vs-row", sec), {
+        opacity: 0, y: 18, duration: .7, stagger: .07, ease: EASE,
+        scrollTrigger: { trigger: ".vs-table", start: "top 84%" }
+      });
+    }
+
+    /* Velocity reactive marquee. It drifts on its own and the scroll adds to
+       it, so a fast flick visibly throws it. Duplicated once so the loop is
+       seamless whatever the row measures. */
+    var row = $("#mqRow", sec);
+    if (row && !reduced) {
+      row.innerHTML += row.innerHTML;
+      var half = row.scrollWidth / 2;
+      var x = 0, extra = 0;
+      var last = window.pageYOffset;
+      gsap.ticker.add(function () {
+        var now = window.pageYOffset;
+        extra += (now - last) * 0.55;
+        last = now;
+        extra *= 0.92;
+        x -= 0.6 + extra * 0.06;
+        if (half && x <= -half) x += half;
+        if (x > 0) x -= half;
+        gsap.set(row, { x: x });
+      });
+    }
+  })();
+
+  /* -------------------------------------------------------------------------
+     CHAPTER 03 — THE RANGE
+     --------------------------------------------------------------------- */
+  (function range() {
+    var sec = $(".ch-range");
+    if (!sec || reduced) return;
+    $$(".rg-arc", sec).forEach(function (arc) {
+      gsap.from($(".rg-body", arc), {
+        opacity: 0, y: 34, duration: 1, ease: EASE,
+        scrollTrigger: { trigger: arc, start: "top 76%" }
+      });
+      gsap.from($$(".rg-item", arc), {
+        opacity: 0, x: 18, duration: .6, stagger: .06, ease: EASE,
+        scrollTrigger: { trigger: $(".rg-index", arc), start: "top 84%" }
+      });
+      gsap.from($(".rg-numeral", arc), {
+        opacity: 0, yPercent: 30, duration: 1.1, ease: EASE,
+        scrollTrigger: { trigger: arc, start: "top 78%" }
+      });
+    });
+  })();
+
+  /* -------------------------------------------------------------------------
+     CHAPTER 04 — THE PEOPLE
+     --------------------------------------------------------------------- */
+  (function people() {
+    var sec = $(".ch-people");
+    if (!sec || reduced) return;
+    $$(".pe-card", sec).forEach(function (card, i) {
+      var tl = gsap.timeline({ scrollTrigger: { trigger: card, start: "top 82%" } });
+      tl.from($(".pe-plate", card), {
+        clipPath: "inset(0% 0% 100% 0%)", duration: 1.05, ease: "power4.out", delay: i * .08
+      }, 0);
+      tl.from(card.querySelectorAll(".pe-note, h3, .pe-role, .pe-blurb"), {
+        opacity: 0, y: 20, duration: .75, stagger: .07, ease: EASE
+      }, .3);
+    });
+    gsap.from($(".pe-band-in", sec), {
+      opacity: 0, y: 30, duration: .9, ease: EASE,
+      scrollTrigger: { trigger: ".pe-band", start: "top 78%" }
+    });
+  })();
+
+  /* -------------------------------------------------------------------------
+     CHAPTER 05 — THE PATH   (scrub #2: pinned horizontal travel)
+     --------------------------------------------------------------------- */
+  (function path() {
+    var sec = $(".ch-path");
+    if (!sec) return;
+    var pin = $("#pathPin", sec), track = $("#pathTrack", sec), bar = $("#pathBar", sec);
+    if (!pin || !track) return;
+
+    var TOUCH = window.matchMedia("(hover:none) and (pointer:coarse)").matches;
+    if (reduced || TOUCH) {
+      /* No pin. Below 900px the CSS turns the track into a snapping scroll
+         region; above it the track is `width: max-content` and would run off
+         the right edge with no way to reach the last card, so it has to wrap.
+         Leaving this out is a horizontal overflow bug that only a reduced
+         motion desktop visitor ever sees. */
+      $$(".pa-card", sec).forEach(function (c) { c.classList.add("is-on"); });
+      if (window.innerWidth >= 900) sec.classList.add("is-static");
+      return;
+    }
+
+    function distance() { return Math.max(0, track.scrollWidth - window.innerWidth + 40); }
+
+    var built = null;
+
+    function buildStatic() {
+      sec.classList.add("is-static");
+      gsap.set(track, { x: 0 });
+      $$(".pa-card", sec).forEach(function (card, i) {
+        card.classList.add("is-on");
+        gsap.from(card, {
+          opacity: 0, y: 30, duration: .9, ease: EASE, delay: i * .07,
+          scrollTrigger: { trigger: pin, start: "top 74%" }
+        });
+      });
+    }
+
+    function buildPinned() {
+      sec.classList.remove("is-static");
+      var tween = gsap.to(track, {
+        x: function () { return -distance(); },
+        ease: "none",
+        scrollTrigger: {
+          trigger: pin,
+          start: "top top",
+          end: function () { return "+=" + (distance() + window.innerHeight * 0.55); },
+          pin: true,
+          scrub: .3,
+          anticipatePin: 1,
+          invalidateOnRefresh: true,
+          onUpdate: function (self) { if (bar) gsap.set(bar, { scaleX: self.progress }); }
+        }
+      });
+      $$(".pa-card", sec).forEach(function (card) {
+        ScrollTrigger.create({
+          trigger: card,
+          containerAnimation: tween,
+          start: "left 78%",
+          end: "right 24%",
+          onEnter: function () { card.classList.add("is-on"); },
+          onEnterBack: function () { card.classList.add("is-on"); },
+          onLeaveBack: function () { card.classList.remove("is-on"); }
+        });
+      });
+    }
+
+    function decide() {
+      var wants = track.scrollWidth > window.innerWidth + 40 ? "pinned" : "static";
+      if (wants === built) return;
+      built = wants;
+      ScrollTrigger.getAll().forEach(function (st) {
+        if (st.trigger === pin || (st.trigger && st.trigger.classList && st.trigger.classList.contains("pa-card"))) st.kill();
+      });
+      if (wants === "pinned") buildPinned(); else buildStatic();
+    }
+    decide();
+    ScrollTrigger.addEventListener("refreshInit", function () { gsap.set(track, { x: 0 }); });
+    window.addEventListener("resize", function () { clearTimeout(path._t); path._t = setTimeout(decide, 200); });
+  })();
+
+  /* -------------------------------------------------------------------------
+     CHAPTER 06 — THE PROOF   (scrub #3: the quote, and a drifting rail)
+     --------------------------------------------------------------------- */
+  (function proof() {
+    var sec = $(".ch-proof");
+    if (!sec || reduced) return;
+    var q = $("#proofQuote", sec);
+    var sp = splitWords(q);
+    if (sp && sp.words && sp.words.length) {
+      gsap.to(sp.words, {
+        color: "#2e3538", stagger: .35, ease: "none",
+        scrollTrigger: { trigger: ".pr-lead", start: "top 78%", end: "bottom 55%", scrub: .5 }
+      });
+    } else if (q) {
+      gsap.to(q, { color: "#2e3538", scrollTrigger: { trigger: ".pr-lead", start: "top 78%" } });
+    }
+    gsap.from($(".pr-mark", sec), {
+      opacity: 0, scale: .7, duration: 1, ease: EASE,
+      scrollTrigger: { trigger: ".pr-lead", start: "top 84%" }
+    });
+
+    /* The rail travels sideways with the page, so the reviews are read by
+       scrolling rather than by dragging something nobody notices is draggable. */
+    var rail = $(".pr-rail-in", sec);
+    if (rail) {
+      var over = function () { return Math.max(0, rail.scrollWidth - window.innerWidth + 40); };
+      gsap.fromTo(rail, { x: 0 }, {
+        x: function () { return -over(); },
+        ease: "none",
+        scrollTrigger: {
+          trigger: ".pr-rail", start: "top bottom", end: "bottom top",
+          scrub: .6, invalidateOnRefresh: true
+        }
+      });
+    }
+  })();
+
+  /* -------------------------------------------------------------------------
+     CHAPTER 07 — THE INVITATION
+     --------------------------------------------------------------------- */
+  (function invitation() {
+    var sec = $(".ch-invitation");
+    if (!sec || reduced) return;
+    gsap.from($$(".iv-actions, .iv-facts > div", sec), {
+      opacity: 0, y: 24, duration: .85, stagger: .09, ease: EASE,
+      scrollTrigger: { trigger: ".iv-copy", start: "top 76%" }
+    });
+    gsap.from($(".iv-map", sec), {
+      opacity: 0, y: 34, duration: 1, ease: EASE,
+      scrollTrigger: { trigger: ".iv-map", start: "top 84%" }
+    });
+  })();
+
+  /* -------------------------------------------------------------------------
+     CONTINUITY — reading progress and the chapter readout.
+     The divisor is the LAST chapter index rather than a constant, so inserting
+     a chapter cannot drive the bar past 100%.
+     --------------------------------------------------------------------- */
+  (function continuity() {
+    var bar = document.createElement("div");
+    bar.className = "jr-progress";
+    document.body.appendChild(bar);
+
+    var readout = document.createElement("p");
+    readout.className = "jr-readout";
+    readout.innerHTML = '<b id="jrNo">00</b><span id="jrName">Arrival</span>';
+    document.body.appendChild(readout);
+
+    gsap.to(bar, { scaleX: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: .25 } });
+
+    var no = $("#jrNo"), name = $("#jrName");
+    Array.prototype.forEach.call(chapters, function (sec) {
+      var i = parseInt(sec.getAttribute("data-chapter"), 10) || 0;
+      var nm = sec.getAttribute("data-chapter-name") || "";
+      function on() {
+        if (no) no.textContent = String(i).padStart(2, "0");
+        if (name) name.textContent = nm;
+        readout.classList.toggle("is-on", i > 0);
+      }
+      ScrollTrigger.create({ trigger: sec, start: "top 55%", end: "bottom 45%", onEnter: on, onEnterBack: on });
+    });
+  })();
+
+  /* Fonts change line breaks, and every split above measured against the
+     fallback. Re-measure once the real faces are in. */
+  if (document.fonts && document.fonts.ready) {
+    document.fonts.ready.then(function () { ScrollTrigger.refresh(); });
+  }
+  window.addEventListener("load", function () { ScrollTrigger.refresh(); });
+})();

@@ -1,0 +1,1131 @@
+/* ===========================================================================
+   THE JOURNEY LAYER — Mason Park Dental
+   Appended to site.css at build time, so the site still ships one stylesheet.
+
+   WHY THIS EXISTS. The 2026-08-28 design took the Figma handoff literally and
+   produced a page the team called ugly and simple, correctly: thirteen bands of
+   equal weight, fourteen equal tiles, six equal review boxes, and body copy set
+   at 17px everywhere so nothing on the page was louder than anything else. A
+   page with no hierarchy has no voice.
+
+   WHAT IS KEPT FROM THE HANDOFF: the ten colour tokens and the three type
+   families. Nothing else. That is the standing instruction for a handed-off
+   style guide, and it is the right one, because a colour palette is a brand
+   asset and a section layout is not.
+
+   WHAT IS ELEVATED:
+
+   1. TYPE DOES THE WORK. The display face runs to 6.4rem at desktop against a
+      0.7rem uppercase Karla label. That ratio is roughly 9:1. The old page's
+      widest ratio was 2.5:1, which is why every section read at the same
+      volume. Sizes are plain rem stepped by unitless multipliers at px
+      breakpoints (the mechanism the reference build uses), never clamp() on a
+      fluid root, which would scale twice.
+
+   2. ATMOSPHERE SHIFTS. `data-theme` on the section, not a background colour
+      class. Light, ink, warm, ink again. Every rule below paints from the six
+      theme names, never a raw hex, so a chapter can be flipped by changing its
+      scope rather than rewriting its rules.
+
+   3. THE STONE. The old site had a plaster texture behind its editorial bands
+      and it is the one thing worth carrying forward from it. Here it is drawn,
+      not downloaded: a two octave fractal turbulence in an inline SVG data URI,
+      multiplied over the warm ground at 4% and tinted with the beige token. It
+      is under 400 bytes, resolution independent, and cannot 404.
+
+   4. NO EQUAL GRIDS. Every chapter is a different shape: full bleed, pinned
+      statement, asymmetric pair, alternating arcs, tall plates, horizontal
+      track, quote, split. Two adjacent sections never share a layout.
+   ======================================================================== */
+
+/* ---------------------------------------------------------------- theme */
+:root {
+  --ink-deep: #1e2426;      /* derived: the ground of a dark chapter */
+  --ink-mid: #262d30;       /* derived: a raised panel on that ground */
+  --paper: #f7f3ee;         /* derived: the warm editorial ground */
+
+  /* Six names. Every chapter paints from these and nothing else. */
+  --bg: var(--white);
+  --bg-2: var(--warm);
+  --panel: var(--white);
+  --fg: var(--ink);
+  --fg-body: var(--body);
+  --fg-soft: var(--muted);
+  --rule: var(--beige);
+  --rule-strong: var(--beige-mid);
+  --accent: var(--brand);
+  --accent-lg: var(--copper);
+
+  /* THE TYPE STEPS. Unitless multipliers, restated at px breakpoints. Plain
+     rem times a multiplier, which is what the standard asks for: rem type, px
+     breakpoints, and nothing else touching the root size. */
+  --t-disp: 1; --t-lg: 1; --t-mid: 1; --t-text: 1;
+
+  --f-d1: calc(6.4rem * var(--t-disp));    /* the arrival headline */
+  --f-d2: calc(4.2rem * var(--t-disp));    /* chapter headlines */
+  --f-d3: calc(2.9rem * var(--t-lg));      /* the pinned statement, quotes */
+  --f-h3: calc(1.85rem * var(--t-mid));    /* card and arc headings */
+  --f-h4: calc(1.25rem * var(--t-mid));
+  --f-lede: calc(1.28rem * var(--t-text)); /* the one paragraph per chapter */
+  --f-body: calc(1.0rem * var(--t-text));
+  --f-label: calc(.75rem * var(--t-text)); /* Karla, uppercase, tracked. FLOORED at 12px. */
+
+  --ch-pad: 8.5rem;   /* the vertical rhythm of a chapter */
+  --bleed: 5.5rem;    /* the outer gutter of a full bleed chapter */
+
+  /* Drawn plaster. Two octaves of fractal noise, no request, no 404. */
+  --stone: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='240' height='240'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='240' height='240' filter='url(%23n)'/%3E%3C/svg%3E");
+}
+
+@media (max-width: 1279px) { :root { --t-disp: .82; --t-lg: .86; --t-mid: .9;  --ch-pad: 7rem;   --bleed: 3.5rem } }
+@media (max-width: 991px)  { :root { --t-disp: .68; --t-lg: .78; --t-mid: .86; --ch-pad: 6rem;   --bleed: 2.5rem } }
+@media (max-width: 767px)  { :root { --t-disp: .54; --t-lg: .66; --t-mid: .82; --ch-pad: 4.75rem; --bleed: 1.5rem } }
+@media (max-width: 478px)  { :root { --t-disp: .46; --t-lg: .58; --t-mid: .8;  --f-lede: 1.05rem } }
+
+.ch[data-theme="dark"] {
+  --bg: var(--ink-deep); --bg-2: var(--ink-mid); --panel: var(--ink-mid);
+  --fg: #ffffff;
+  --fg-body: rgba(255, 255, 255, .76);
+  --fg-soft: rgba(255, 255, 255, .55);
+  --rule: rgba(255, 255, 255, .14);
+  --rule-strong: rgba(255, 255, 255, .3);
+  --accent: #d9b79c;      /* the brand, taken light enough to clear AA on ink */
+  --accent-lg: var(--copper);
+  background: var(--bg);
+  color: var(--fg-body);
+}
+.ch[data-theme="warm"] {
+  --bg: var(--paper); --bg-2: var(--white); --panel: var(--white);
+  background: var(--bg);
+}
+
+/* ------------------------------------------------------------- chapter shell */
+.ch {
+  position: relative;
+  background: var(--bg);
+  color: var(--fg-body);
+  padding: var(--ch-pad) 0;
+  overflow: clip;
+}
+.ch .wrap {
+  width: 100%;
+  max-width: 92rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 0 var(--bleed);
+}
+.ch h2 {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--f-d2);
+  line-height: 1.04;
+  letter-spacing: -.018em;
+  color: var(--fg);
+  max-width: 17ch;
+}
+.ch h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--f-h3);
+  line-height: 1.16;
+  color: var(--fg);
+}
+.ch p { color: var(--fg-body); }
+.ch em { font-style: italic; color: var(--accent-lg); }
+
+/* The warm and dark grounds carry the plaster. Applied on a pseudo element so
+   it never tints the content, and pinned to the section so it does not scroll
+   against it. */
+.ch[data-theme="warm"]::before,
+.ch[data-theme="dark"]::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: var(--stone);
+  background-size: 240px 240px;
+  opacity: .045;
+  pointer-events: none;
+  z-index: 0;
+}
+.ch[data-theme="dark"]::before { opacity: .07; }
+.ch > * { position: relative; z-index: 1; }
+
+/* ------------------------------------------------------------- chapter tag */
+/* The continuity device. Numbered, tagged, and animated in from the left, so a
+   visitor always knows which beat they are in. */
+.chapter-tag {
+  display: flex;
+  align-items: center;
+  gap: .7rem;
+  margin: 0 0 1.6rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+.chapter-tag i {
+  width: 2.6rem;
+  height: 1px;
+  background: var(--accent);
+  flex: none;
+  transform-origin: left center;
+}
+.chapter-tag b { font-weight: 500; color: var(--accent); }
+.chapter-tag span::after { content: " /"; opacity: .4; }
+
+/* ------------------------------------------------------------------ buttons */
+/* The style guide button is 13px Karla in a 2px box. At the sizes this page
+   works in it disappeared, so the journey layer has its own scale. */
+.ch .button,
+.ch a.button {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  padding: 1.05rem 1.9rem;
+  border: 1px solid var(--brand);
+  border-radius: 2px;
+  background: var(--brand);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: .8rem;
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+  transition: color .35s var(--ease), border-color .35s var(--ease);
+}
+/* The fill wipes up from the bottom rather than cross fading, so the hover has
+   a direction. */
+.ch .button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--ink);
+  transform: translateY(101%);
+  transition: transform .45s var(--ease);
+  z-index: 0;
+}
+.ch .button > * { position: relative; z-index: 1; }
+.ch .button:hover { color: #fff; border-color: var(--ink); }
+.ch .button:hover::after { transform: translateY(0); }
+.ch .button.is-lg { padding: 1.2rem 2.3rem; }
+.ch .button.is-ghost-light {
+  background: transparent;
+  border-color: rgba(255, 255, 255, .45);
+  color: #fff;
+}
+.ch .button.is-ghost-light::after { background: #fff; }
+.ch .button.is-ghost-light:hover { color: var(--ink); border-color: #fff; }
+
+.ch .link-arrow {
+  display: inline-flex;
+  align-items: center;
+  gap: .55rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rule-strong);
+  padding-bottom: .45rem;
+  transition: gap .3s var(--ease), border-color .3s var(--ease);
+}
+.ch .link-arrow:hover { gap: 1.1rem; border-color: var(--accent); color: var(--accent); }
+.ch .link-arrow.is-light { color: #fff; }
+
+/* ===========================================================================
+   CHAPTER 00 — ARRIVAL
+   Full bleed, the practice's own team photograph, one sentence set very large.
+   The old hero put the photo in a box beside a paragraph. A box beside a
+   paragraph is a brochure.
+   ======================================================================== */
+.ch-arrival {
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding: calc(var(--jr-nav-h, 5.5rem) + 1.5rem) 0 clamp(3rem, 7vh, 6rem);
+  color: #fff;
+}
+.ch-arrival::before { display: none; }   /* the photograph is the texture here */
+.ar-bg { position: absolute; inset: -6% 0; z-index: 0; }
+.ar-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 32%; }
+/* Two scrims. A vertical one so the copy has a floor and the header has a
+   ceiling, and a horizontal one so the left column always reads regardless of
+   what the photograph is doing on that side. */
+.ar-veil {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background:
+    linear-gradient(180deg, rgba(30, 36, 38, .72) 0%, rgba(30, 36, 38, .25) 34%, rgba(30, 36, 38, .55) 68%, rgba(30, 36, 38, .93) 100%),
+    linear-gradient(94deg, rgba(30, 36, 38, .82) 0%, rgba(30, 36, 38, .45) 46%, rgba(30, 36, 38, .08) 82%);
+}
+.ar-in {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  max-width: 92rem;
+  margin: 0 auto;
+  padding: 0 var(--bleed);
+}
+.ar-in .chapter-tag { color: rgba(255, 255, 255, .72); }
+.ar-in .chapter-tag i { background: var(--copper); }
+.ar-in .chapter-tag b { color: #fff; }
+.ar-title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--f-d1);
+  line-height: .98;
+  letter-spacing: -.028em;
+  color: #fff;
+  margin: 0 0 1.6rem;
+  max-width: 15ch;
+}
+.ar-title em { font-style: italic; color: #e3c3a8; }
+.ar-lede {
+  max-width: 46ch;
+  font-size: var(--f-lede);
+  line-height: 1.62;
+  color: rgba(255, 255, 255, .84);
+  margin: 0 0 2.4rem;
+}
+.ar-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-bottom: 3.2rem; }
+.ar-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: clamp(1.5rem, 5vw, 4.5rem);
+  padding-top: 1.7rem;
+  border-top: 1px solid rgba(255, 255, 255, .22);
+}
+.ar-meta div { display: grid; gap: .2rem; }
+.ar-meta b {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--f-h4);
+  color: #fff;
+}
+.ar-meta span {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .6);
+}
+.ar-cue {
+  position: absolute;
+  right: var(--bleed);
+  bottom: clamp(3rem, 7vh, 6rem);
+  z-index: 2;
+  display: flex;
+  align-items: center;
+  gap: .8rem;
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  letter-spacing: .22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .6);
+}
+.ar-cue i {
+  width: 1px;
+  height: 3.5rem;
+  background: linear-gradient(180deg, rgba(255, 255, 255, .7), transparent);
+  animation: cue 2.4s var(--ease) infinite;
+  transform-origin: top center;
+}
+@keyframes cue { 0%, 100% { transform: scaleY(.35); opacity: .4 } 50% { transform: scaleY(1); opacity: 1 } }
+@media (max-width: 767px) {
+  .ar-cue { display: none; }
+  /* The sticky call bar is fixed to the bottom edge below 768, so the hero has
+     to end above it or the last row of the fact strip is permanently covered.
+     `min-height: auto` because the content is what sets the height on a phone;
+     a viewport unit only ever clipped it. */
+  .ch-arrival { min-height: auto; padding-bottom: 5.5rem; }
+  .ar-lede { margin-bottom: 1.8rem; }
+  .ar-actions { margin-bottom: 2.2rem; gap: .7rem; }
+  /* Full width stacked buttons pushed the fact strip off the first screen.
+     They sit side by side and wrap only if they have to. */
+  .ar-actions .button { flex: 1 1 auto; justify-content: center; padding-inline: 1.1rem; }
+  .ar-meta { gap: 1rem 2rem; padding-top: 1.2rem; }
+}
+
+/* ===========================================================================
+   CHAPTER 01 — THE RELAY
+   The pain, named. The statement is written word by word as you scroll, which
+   is the first of the three places scroll does work rather than trigger.
+   ======================================================================== */
+.ch-relay { padding: calc(var(--ch-pad) * 1.15) 0; background: var(--white); }
+/* Both chapters restate their own rhythm rather than inheriting it: The Range
+   ends on a link rather than an element, so it closes tighter, and Under One
+   Roof opens directly under a stacked chapter at narrow widths, where two full
+   measures of air read as a gap rather than a break. */
+.ch-together { padding-top: var(--ch-pad); }
+.ch-range { padding-bottom: calc(var(--ch-pad) * .8); }
+@media (max-width: 899px) {
+  .ch-relay { padding-bottom: calc(var(--ch-pad) * .7); }
+  .ch-together { padding-top: calc(var(--ch-pad) * .8); }
+}
+/* `min-width: 0` on both columns, not decoration: a grid child defaults to
+   min-content width, and one very long unbreakable word in a review or a URL
+   is enough to push a column past its track and give the page a horizontal
+   scrollbar at 390. audit.mjs also flags any class with no rule at all, which
+   is what caught these four being pure JS hooks. */
+.re-grid { display: grid; gap: 3rem; }
+.re-copy { min-width: 0; }
+.re-img { display: block; }
+@media (min-width: 900px) {
+  .re-grid { grid-template-columns: 1.15fr .85fr; gap: clamp(3rem, 6vw, 6rem); align-items: start; }
+  /* The photograph HOLDS while the statement is written beside it. That
+     pairing is the whole point of the chapter: the room stays still, the
+     sentence arrives. */
+  .re-side { position: sticky; top: 7rem; }
+}
+.ch .re-big {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--f-d3);
+  line-height: 1.24;
+  letter-spacing: -.012em;
+  color: rgba(46, 53, 56, .18);   /* the unwritten state; the scrub brightens it */
+  margin: 0;
+}
+.re-after {
+  display: grid;
+  gap: 1.1rem;
+  max-width: 46ch;
+  margin-top: 2.75rem;
+  padding-top: 2rem;
+  border-top: 1px solid var(--rule);
+}
+.re-after p { font-size: 1.02rem; line-height: 1.78; }
+/* The turn of the chapter. It sits under the photograph rather than at the end
+   of the paragraph, so the answer lands on the picture of the room it is
+   describing. */
+.re-turn {
+  margin: 2.25rem 0 0;
+  padding-top: 1.75rem;
+  border-top: 2px solid var(--copper);
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--f-h3);
+  line-height: 1.22;
+  color: var(--ink);
+  max-width: 18ch;
+}
+.re-media { margin: 0; }
+/* This photograph is 2.33:1. Cropped to a portrait frame it is a picture of a
+   wall, so the frame follows the picture rather than the column. */
+.re-media img { width: 100%; aspect-ratio: 3 / 2; object-fit: cover; object-position: 50% 72%; }
+
+.re-media figcaption {
+  padding-top: .9rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  letter-spacing: .08em;
+  color: var(--fg-soft);
+  line-height: 1.6;
+}
+
+/* ===========================================================================
+   CHAPTER 02 — UNDER ONE ROOF
+   The answer, argued. Figures that count, a pair of photographs that are not
+   the same size, and the comparison the visitor is running in their head.
+   ======================================================================== */
+.tg-head { display: grid; gap: 1.75rem; margin-bottom: 4rem; }
+@media (min-width: 960px) { .tg-head { grid-template-columns: 1.05fr .95fr; gap: 4rem; align-items: end; } }
+.tg-lede { font-size: var(--f-lede); line-height: 1.72; max-width: 48ch; margin: 0; }
+
+.tg-figures {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background: var(--rule);
+  border: 1px solid var(--rule);
+  margin-bottom: 5rem;
+}
+.tg-fig { background: var(--bg); padding: 2.2rem 1.6rem; display: grid; gap: .5rem; }
+.tg-fig b {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(3.4rem * var(--t-lg));
+  line-height: 1;
+  color: var(--accent-lg);
+}
+.tg-fig span {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+@media (max-width: 767px) { .tg-figures { grid-template-columns: repeat(2, 1fr) } }
+
+/* Deliberately unequal: the pediatric photograph is the taller one, because the
+   pediatric dentist is the differentiator. */
+.tg-pair { display: grid; gap: 1.6rem; margin-bottom: 5.5rem; }
+@media (min-width: 900px) {
+  .tg-pair { grid-template-columns: 1.12fr .88fr; align-items: stretch; gap: clamp(2rem, 4vw, 3.5rem); }
+  .tg-pair > .tg-shot { display: flex; flex-direction: column; }
+  .tg-pair > .tg-shot img { flex: 1; aspect-ratio: auto; min-height: 30rem; }
+  .tg-side { display: flex; flex-direction: column; justify-content: flex-end; }
+}
+/* The right column used to be two thirds dead space beside a taller
+   photograph. It now carries the line that earns the picture. */
+.tg-aside {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--f-h3);
+  line-height: 1.34;
+  color: var(--fg);
+  max-width: 22ch;
+  margin-bottom: 2.2rem;
+  padding-left: 1.3rem;
+  border-left: 2px solid var(--copper);
+}
+.tg-shot { margin: 0; }
+.tg-shot img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+.tg-shot figcaption {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: .9rem;
+  padding-top: 1.1rem;
+  font-size: .95rem;
+  line-height: 1.6;
+  color: var(--fg-body);
+}
+.tg-pill {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--copper);
+  border: 1px solid currentColor;
+  padding: .35rem .7rem;
+}
+.tg-pill.is-kids { color: var(--sage); }
+
+.tg-versus h3 { margin-bottom: 2rem; max-width: 24ch; }
+.vs-table { border-top: 1px solid var(--rule-strong); }
+.vs-row {
+  display: grid;
+  grid-template-columns: 1fr 3.5rem 1fr;
+  align-items: center;
+  gap: 1rem;
+  padding: 1.35rem 0;
+  border-bottom: 1px solid var(--rule);
+}
+.vs-row.is-head { padding: .9rem 0; }
+.vs-row.is-head span {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+}
+.vs-row.is-head .vs-a { color: var(--brand); }
+.vs-row.is-head .vs-b { color: var(--fg-soft); }
+.vs-a { color: var(--ink); font-weight: 600; font-size: 1rem; line-height: 1.55; }
+.vs-b { color: var(--fg-soft); font-size: .95rem; line-height: 1.55; }
+.vs-mid { display: grid; place-items: center; color: var(--rule-strong); font-size: .7rem; }
+.vs-mid i { width: 6px; height: 6px; border: 1px solid var(--beige-mid); transform: rotate(45deg); }
+@media (max-width: 767px) {
+  .vs-row { grid-template-columns: 1fr; gap: .5rem; padding: 1.1rem 0; }
+  .vs-mid { display: none; }
+  .vs-row.is-head { display: none; }
+  .vs-a::before, .vs-b::before {
+    display: block;
+    font-family: var(--font-ui);
+    font-size: .75rem;
+    font-weight: 700;
+    letter-spacing: .18em;
+    text-transform: uppercase;
+    margin-bottom: .3rem;
+  }
+  .vs-a::before { content: "At Mason Park"; color: var(--brand); }
+  .vs-b::before { content: "Two practices"; color: var(--muted); }
+}
+
+/* The marquee. Velocity reactive, so a fast scroll visibly speeds it up. */
+.tg-marquee {
+  margin-top: 4rem;
+  padding: 1.5rem 0;
+  border-top: 1px solid var(--rule);
+  border-bottom: 1px solid var(--rule);
+  overflow: hidden;
+  white-space: nowrap;
+}
+.mq-row { display: inline-flex; align-items: center; gap: 1.6rem; will-change: transform; }
+.mq-row span {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+.mq-row b { color: var(--copper); font-size: .5rem; }
+
+/* ===========================================================================
+   CHAPTER 03 — THE RANGE
+   Three alternating arcs. Each leads with a photograph and sets its treatments
+   as a hairline index with a thumbnail, so a visitor finds theirs in one pass
+   instead of reading fourteen equal labels.
+   ======================================================================== */
+.rg-head { margin-bottom: 4.5rem; }
+.rg-arc {
+  display: grid;
+  gap: 2.5rem;
+  align-items: center;
+  max-width: 92rem;
+  margin: 0 auto;
+  padding: 3.5rem var(--bleed);
+}
+@media (min-width: 900px) {
+  /* `start`, never `center`. Centring two columns of different heights parks a
+     block of empty ground under the shorter one, which is what made the three
+     arcs read as loose rather than composed. */
+  .rg-arc { grid-template-columns: .92fr 1.08fr; gap: clamp(2.5rem, 5vw, 5rem); padding-block: 4.5rem; align-items: start; }
+  .rg-arc.is-flipped .rg-media { order: 2; }
+}
+.rg-media { position: relative; overflow: hidden; }
+.rg-media img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.06); }
+@media (max-width: 899px) { .rg-media img { aspect-ratio: 4 / 3; } }
+.rg-numeral {
+  position: absolute;
+  right: .12em;
+  bottom: -.2em;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(11rem * var(--t-disp));
+  line-height: 1;
+  color: #fff;
+  opacity: .95;
+  letter-spacing: -.04em;
+  pointer-events: none;
+  /* The photographs behind this run from near white to near black, so the
+     numeral carries its own shadow rather than trusting any one of them. */
+  text-shadow: 0 2px 24px rgba(30, 36, 38, .55);
+}
+.rg-label {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .2em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .9rem;
+}
+.rg-body h3 { max-width: 18ch; }
+.rg-text { font-size: var(--f-lede); line-height: 1.68; max-width: 46ch; margin: 1rem 0 2rem; }
+
+.rg-index { border-top: 1px solid var(--rule); }
+.rg-item { border-bottom: 1px solid var(--rule); }
+.rg-item > a, .rg-item-plain {
+  display: grid;
+  grid-template-columns: 4.2rem minmax(0, 1fr) 1.5rem;
+  align-items: center;
+  gap: 1.15rem;
+  padding: .7rem .4rem;
+  text-decoration: none;
+  color: inherit;
+  transition: padding-left .35s var(--ease), background-color .35s var(--ease);
+}
+.rg-item > a:hover { padding-left: 1.1rem; background: var(--bg-2); }
+.rg-thumb { width: 4.2rem; height: 3.4rem; overflow: hidden; background: var(--bg-2); }
+.rg-thumb img {
+  width: 100%; height: 100%; object-fit: cover;
+  filter: grayscale(1) contrast(1.05);
+  transition: filter .45s var(--ease), transform .6s var(--ease);
+}
+.rg-item > a:hover .rg-thumb img { filter: none; transform: scale(1.08); }
+.rg-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: 1.2rem;
+  font-weight: 400;
+  color: var(--fg);
+  line-height: 1.3;
+}
+.rg-blurb { display: block; grid-column: 2; font-size: .875rem; color: var(--fg-soft); line-height: 1.45; margin-top: .15rem; }
+.rg-go { color: var(--accent); opacity: 0; transform: translateX(-.5rem); transition: all .35s var(--ease); }
+.rg-item > a:hover .rg-go { opacity: 1; transform: none; }
+.rg-foot { margin-top: 3rem; }
+@media (max-width: 899px) {
+  .rg-numeral { font-size: calc(7rem * var(--t-disp)); }
+  .rg-item > a, .rg-item-plain { grid-template-columns: 3.4rem minmax(0, 1fr) 1.2rem; }
+  .rg-thumb { width: 3.4rem; height: 2.8rem; }
+}
+
+/* ===========================================================================
+   CHAPTER 04 — THE PEOPLE
+   Tall editorial plates on ink, with the one line that matters about each
+   doctor pulled out ABOVE the name. The old build ran three bordered cards
+   with the credential buried in the fourth line of a bio.
+   ======================================================================== */
+.pe-head { max-width: 52rem; margin-bottom: 4rem; }
+.pe-lede { font-size: var(--f-lede); line-height: 1.7; max-width: 50ch; margin-top: 1.4rem; }
+.pe-grid {
+  display: grid;
+  gap: 2.5rem;
+  max-width: 92rem;
+  margin: 0 auto;
+  padding: 0 var(--bleed);
+}
+@media (min-width: 900px) { .pe-grid { grid-template-columns: repeat(3, 1fr); gap: 2.2rem; } }
+.pe-plate { display: block; position: relative; overflow: hidden; margin-bottom: 1.5rem; }
+.pe-plate img {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: cover;
+  object-position: 50% 22%;
+  filter: grayscale(1) contrast(1.06) brightness(1.02);
+  transform: scale(1.02);
+  transition: filter .6s var(--ease), transform .8s var(--ease);
+}
+.pe-plate:hover img { filter: none; transform: scale(1.06); }
+.pe-veil {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 45%, rgba(30, 36, 38, .55) 100%);
+  pointer-events: none;
+}
+.pe-note {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .7rem;
+  min-height: 2.2em;
+}
+.pe-card h3 { font-size: var(--f-h3); }
+.pe-card h3 a { color: var(--fg); text-decoration: none; }
+.pe-card h3 a:hover { color: var(--accent); }
+.pe-role {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+  margin: .4rem 0 .9rem;
+}
+.pe-blurb { font-size: .95rem; line-height: 1.68; }
+
+/* The band closes the chapter, so the chapter has no padding left under it. */
+.ch-people { padding-bottom: 0; }
+.pe-band { position: relative; margin-top: 5rem; }
+.pe-band img { width: 100%; height: clamp(20rem, 42vh, 30rem); object-fit: cover; object-position: 50% 30%; }
+.pe-band-in {
+  position: absolute;
+  inset: auto 0 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 3.5rem var(--bleed) 2.2rem;
+  background: linear-gradient(180deg, transparent, rgba(30, 36, 38, .9));
+}
+.pe-band-in p { color: #fff; font-size: var(--f-lede); max-width: 34ch; margin: 0; }
+
+/* ===========================================================================
+   CHAPTER 05 — THE PATH
+   Pinned horizontal. The second place scroll does work. The financing answer
+   is inside step three, where the objection actually lands.
+   ======================================================================== */
+.ch-path { padding: 0; background: var(--bg); }
+.pa-pin { padding: var(--ch-pad) 0; }
+.pa-head { max-width: 92rem; margin: 0 auto 3.5rem; padding: 0 var(--bleed); }
+.pa-head h2 { max-width: 20ch; }
+.pa-track {
+  display: flex;
+  gap: 1.6rem;
+  padding: 0 var(--bleed);
+  width: max-content;
+}
+.pa-card {
+  width: clamp(17rem, 27vw, 24rem);
+  flex: none;
+  border: 1px solid var(--rule);
+  padding: 1.4rem;
+  background: var(--panel);
+  display: flex;
+  flex-direction: column;
+  gap: .85rem;
+  transition: border-color .45s var(--ease);
+}
+.pa-shot { overflow: hidden; margin-bottom: .4rem; }
+.pa-shot img {
+  width: 100%;
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+  filter: grayscale(1);
+  transition: filter .6s var(--ease);
+}
+.pa-card.is-on .pa-shot img { filter: none; }
+.pa-no {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(2.6rem * var(--t-lg));
+  line-height: 1;
+  color: var(--accent-lg);
+  opacity: .7;
+}
+.pa-card h3 { font-size: var(--f-h4); }
+.pa-card p { font-size: .95rem; line-height: 1.68; }
+.pa-card h3 + p { color: var(--fg-body); }
+.pa-card.is-cta { background: var(--sand); border-color: var(--beige-mid); justify-content: center; }
+.pa-card.is-cta h3 { font-size: var(--f-h3); }
+.pa-card.is-cta .button { align-self: flex-start; margin-top: .5rem; }
+.pa-call { font-size: .85rem; color: var(--fg-soft); }
+.pa-bar { max-width: 92rem; margin: 2.5rem auto 0; padding: 0 var(--bleed); }
+.pa-bar i { display: block; height: 2px; background: var(--accent); transform: scaleX(0); transform-origin: left center; }
+.pa-bar::before { content: ""; display: block; height: 2px; background: var(--rule); margin-bottom: -2px; }
+/* Above the width where the whole track fits, pinning would hold the reader
+   still while nothing moved, so the chapter becomes an ordinary row. */
+.ch-path.is-static .pa-track { flex-wrap: wrap; width: auto; }
+.ch-path.is-static .pa-card { width: auto; flex: 1 1 17rem; }
+.ch-path.is-static .pa-bar { display: none; }
+@media (max-width: 899px) {
+  .pa-track { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-overflow-scrolling: touch; width: auto; padding-bottom: 1rem; }
+  .pa-card { width: 78vw; scroll-snap-align: start; }
+  .pa-shot img { filter: none; }
+}
+
+/* ===========================================================================
+   CHAPTER 06 — THE PROOF
+   One quote at display size, scrubbed word by word, then the rest as a rail.
+   The old build ran six equal boxes of ninety word reviews, which nobody reads.
+   ======================================================================== */
+.pr-head { display: grid; gap: 2rem; margin-bottom: 4.5rem; }
+@media (min-width: 960px) { .pr-head { grid-template-columns: 1.1fr .9fr; align-items: end; gap: 4rem; } }
+.pr-note {
+  font-size: .95rem;
+  line-height: 1.75;
+  color: var(--fg-soft);
+  max-width: 42ch;
+  padding-left: 1.3rem;
+  border-left: 1px solid var(--rule-strong);
+}
+
+.pr-lead { display: grid; gap: 2.5rem; margin-bottom: 4.5rem; }
+@media (min-width: 960px) { .pr-lead { grid-template-columns: 1.15fr .85fr; gap: clamp(2.5rem, 5vw, 5rem); align-items: center; } }
+.pr-quote { position: relative; margin: 0; }
+.pr-portrait { overflow: hidden; }
+.pr-portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.04); }
+.pr-mark {
+  position: absolute;
+  left: -.35rem;
+  top: -2.6rem;
+  font-family: var(--font-display);
+  font-size: calc(9rem * var(--t-lg));
+  line-height: 1;
+  color: var(--beige);
+  z-index: 0;
+}
+.ch .pr-quote blockquote {
+  position: relative;
+  z-index: 1;
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(2.35rem * var(--t-lg));
+  line-height: 1.34;
+  letter-spacing: -.008em;
+  color: rgba(46, 53, 56, .2);
+  max-width: 30ch;
+}
+.pr-quote figcaption {
+  display: flex;
+  align-items: center;
+  gap: .9rem;
+  margin-top: 2rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--ink);
+}
+.pr-rule { width: 2.5rem; height: 1px; background: var(--beige-mid); flex: none; }
+.pr-quote figcaption b { font-weight: 500; color: var(--fg-soft); }
+.pr-quote figcaption b::before { content: "/ "; opacity: .5; }
+
+.pr-rail { overflow: hidden; padding: .5rem 0 1rem; }
+@media (prefers-reduced-motion: reduce) {
+  .pr-rail { overflow-x: auto; scroll-snap-type: x mandatory; }
+  .pr-chip { scroll-snap-align: start; }
+}
+.pr-rail-in { display: flex; gap: 1.4rem; padding: 0 var(--bleed); will-change: transform; }
+.pr-chip {
+  flex: none;
+  width: clamp(16rem, 24vw, 21rem);
+  margin: 0;
+  padding: 1.6rem;
+  background: var(--white);
+  border: 1px solid var(--rule);
+}
+.pr-chip p {
+  font-size: .95rem;
+  line-height: 1.68;
+  color: var(--fg-body);
+  display: -webkit-box;
+  -webkit-line-clamp: 6;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+.pr-chip cite {
+  display: block;
+  margin-top: 1.1rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  font-style: normal;
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.pr-foot { margin-top: 2.5rem; }
+
+/* The credential strip. Ink ground, because the five marks are white artwork
+   on transparency and only exist for one. */
+.ch-proof { padding-bottom: 0; }
+.pr-badges { margin-top: 5rem; background: var(--ink); }
+.pr-badges-in {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem clamp(1.5rem, 4vw, 3.5rem);
+  max-width: 92rem;
+  margin: 0 auto;
+  padding: 2rem var(--bleed);
+}
+.pr-badges-label {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, .55);
+  margin: 0;
+}
+.pr-badges ul { display: flex; flex-wrap: wrap; align-items: center; gap: 1.5rem clamp(1.5rem, 4vw, 3.5rem); flex: 1; justify-content: space-between; }
+/* One forced height. Five marks at five intrinsic sizes told a visitor
+   nothing, which is what the previous build shipped. */
+.pr-badges img { height: 2.6rem; width: auto; object-fit: contain; opacity: .9; }
+@media (max-width: 767px) { .pr-badges img { height: 2rem; } }
+
+/* ===========================================================================
+   CHAPTER 07 — THE INVITATION
+   Everything needed to act, in one place. Nothing after it but the footer, so
+   the page cannot dead end.
+   ======================================================================== */
+.iv-top { display: grid; gap: 3rem; }
+@media (min-width: 960px) { .iv-top { grid-template-columns: 1.05fr .95fr; gap: 4.5rem; align-items: start; } }
+.iv-copy { min-width: 0; }
+.iv-lede { font-size: var(--f-lede); line-height: 1.7; max-width: 44ch; margin: 1.4rem 0 2.2rem; }
+.iv-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-bottom: 3rem; }
+.iv-facts { display: grid; gap: 1.5rem; margin: 0; padding-top: 2rem; border-top: 1px solid var(--rule); }
+@media (min-width: 700px) { .iv-facts { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
+.iv-facts dt {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  margin-bottom: .6rem;
+}
+.iv-facts dd { margin: 0; font-size: .95rem; line-height: 1.7; color: var(--fg-body); }
+.iv-facts dd a { color: var(--fg-body); text-decoration: none; border-bottom: 1px solid var(--rule-strong); }
+.iv-facts dd a:hover { color: #fff; }
+.iv-facts b { color: var(--fg); font-weight: 600; }
+/* The right column leads with a PHOTOGRAPH and follows with the map. The map
+   alone was a blank white rectangle on an ink ground for as long as the iframe
+   took to arrive, and a permanently blank one wherever it is blocked. The
+   picture is the content; the map is the wayfinding. */
+.iv-aside { display: grid; gap: 1.5rem; }
+.iv-shot { margin: 0; }
+.iv-shot img { width: 100%; aspect-ratio: 16 / 9; object-fit: cover; }
+.iv-shot figcaption {
+  padding-top: .8rem;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  letter-spacing: .08em;
+  color: var(--fg-soft);
+}
+/* The embed component paints a warm background and a 26rem iframe by default.
+   Both are wrong on an ink ground and against a photograph that is already
+   carrying the column, so the frame is restated here rather than inherited. */
+.iv-map, .iv-map .embed_component {
+  background: var(--ink-mid);
+  border: 1px solid var(--rule);
+}
+.iv-map .embed_component { border: 0; }
+.iv-map .embed_component iframe {
+  display: block;
+  width: 100%;
+  height: 15rem;
+  border: 0;
+  filter: grayscale(.5) contrast(1.05) brightness(.92);
+}
+.iv-aside .link-arrow { justify-self: start; }
+
+.iv-faq { margin-top: 0; padding-top: 3.5rem; border-top: 1px solid var(--rule); }
+.iv-top { padding-bottom: 4.5rem; }
+.iv-faq h3 { margin-bottom: 1.5rem; }
+.iv-faq-list { border-top: 1px solid var(--rule); margin-bottom: 2rem; }
+.ch-invitation .faq_item { border-bottom: 1px solid var(--rule); }
+.ch-invitation .faq_question {
+  display: block;
+  cursor: pointer;
+  list-style: none;
+  padding: 1.25rem 2.5rem 1.25rem 0;
+  position: relative;
+  font-family: var(--font-display);
+  font-size: var(--f-h4);
+  color: var(--fg);
+}
+.ch-invitation .faq_question::-webkit-details-marker { display: none; }
+.ch-invitation .faq_question::after {
+  content: "";
+  position: absolute;
+  right: .4rem;
+  top: 50%;
+  width: .7rem;
+  height: .7rem;
+  margin-top: -.5rem;
+  border-right: 1px solid var(--accent);
+  border-bottom: 1px solid var(--accent);
+  transform: rotate(45deg);
+  transition: transform .35s var(--ease);
+}
+.ch-invitation .faq_item[open] .faq_question::after { transform: rotate(-135deg); margin-top: -.2rem; }
+.ch-invitation .faq_answer { padding: 0 3rem 1.5rem 0; font-size: .95rem; line-height: 1.75; color: var(--fg-body); }
+.ch-invitation .faq_answer a { color: var(--accent); }
+
+/* ===========================================================================
+   READING PROGRESS
+   Pinned to the bottom edge of the header, with the chapter readout beside it.
+   ======================================================================== */
+.jr-progress {
+  position: fixed;
+  left: 0;
+  top: 0;
+  height: 2px;
+  width: 100%;
+  background: var(--brand);
+  transform: scaleX(0);
+  transform-origin: left center;
+  z-index: 1200;
+  pointer-events: none;
+}
+.jr-readout {
+  position: fixed;
+  right: 1.1rem;
+  bottom: 1.1rem;
+  z-index: 1150;
+  display: none;
+  align-items: center;
+  gap: .55rem;
+  padding: .55rem .85rem;
+  background: rgba(30, 36, 38, .88);
+  backdrop-filter: blur(6px);
+  color: #fff;
+  font-family: var(--font-ui);
+  font-size: .75rem;
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  border-radius: 2px;
+}
+.jr-readout b { color: var(--copper); font-weight: 700; }
+@media (min-width: 992px) { .jr-readout.is-on { display: flex } }
+
+/* ===========================================================================
+   MOTION GUARDS
+   Elements the timeline reveals start hidden, and they are revealed by CSS the
+   moment the runtime says it cannot animate. `visibility` rather than
+   `display`, so the layout is measured correctly before the reveal.
+   ======================================================================== */
+html.jr-ready [data-anim="hide"] { visibility: hidden; }
+html.jr-fail [data-anim="hide"] { visibility: visible !important; }
+
+@media (prefers-reduced-motion: reduce) {
+  html [data-anim="hide"] { visibility: visible !important; }
+  .ch .re-big, .ch .pr-quote blockquote { color: var(--ink) !important; }
+  .ar-cue i { animation: none; }
+  /* Only the filter a SCROLL class would otherwise have removed. Grayscale on
+     the portraits and the index thumbnails is a design treatment, not motion,
+     and stripping it here made the three doctor portraits reduced-motion-only
+     colour, which is the opposite of consistent. */
+  .pa-shot img { filter: none !important; }
+  * { scroll-behavior: auto !important; }
+}
+
+/* ===========================================================================
+   THE CHROME, OVER A FULL BLEED HERO
+   Scoped to `.has-journey`, which only a page built as chapters carries, so
+   the other seventy keep the white sticky header exactly as it is.
+
+   The old homepage put a white bar and a dark utility strip ABOVE the hero,
+   which cost the top 120px of every screen and made the photograph look like
+   an illustration inside a document. Here the header floats over it: the mark
+   and the links invert to white, and the bar resolves to solid the moment the
+   hero is behind you. `--jr-nav-h` is measured by journey.js.
+   ======================================================================== */
+html.jr-ready .has-journey .main-wrapper { margin-top: calc(-1 * var(--jr-nav-h, 5.5rem)); }
+.has-journey .topbar_component {
+  position: relative;
+  z-index: 95;
+  background: var(--ink-deep);
+}
+.has-journey .navbar_component {
+  position: sticky;
+  top: 0;
+  z-index: 94;
+  background: transparent;
+  border-bottom: 1px solid transparent;
+  transition: background-color .45s var(--ease), border-color .45s var(--ease);
+}
+.has-journey .navbar_component .navbar_logo { filter: brightness(0) invert(1); transition: filter .45s var(--ease); }
+.has-journey .navbar_component .navbar_link,
+.has-journey .navbar_component .navbar_phone { color: #fff; transition: color .45s var(--ease); }
+/* The three bars are painted as background gradients in `currentColor`, so the
+   toggle inverts by changing `color` and nothing else. Setting background-image
+   here would erase them. */
+.has-journey .navbar_component .navbar_toggle { color: #fff; border-color: rgba(255, 255, 255, .45); transition: color .45s var(--ease), border-color .45s var(--ease); }
+
+/* Solid state. Applied by journey.js once the arrival chapter is behind you,
+   and by the CSS fallback whenever the motion layer never boots. */
+.has-journey .navbar_component.is-solid,
+html:not(.jr-ready) .has-journey .navbar_component {
+  background: var(--white);
+  border-bottom-color: var(--beige);
+}
+.has-journey .navbar_component.is-solid .navbar_logo,
+html:not(.jr-ready) .has-journey .navbar_component .navbar_logo { filter: none; }
+.has-journey .navbar_component.is-solid .navbar_link,
+html:not(.jr-ready) .has-journey .navbar_component .navbar_link { color: var(--ink); }
+.has-journey .navbar_component.is-solid .navbar_phone,
+html:not(.jr-ready) .has-journey .navbar_component .navbar_phone { color: var(--brand); }
+.has-journey .navbar_component.is-solid .navbar_toggle,
+html:not(.jr-ready) .has-journey .navbar_component .navbar_toggle { color: var(--ink); border-color: var(--beige); }
+
+/* The mobile drawer is white on every page, so its contents must not stay
+   inverted once it is open. */
+body.nav-open.has-journey .navbar_component { background: var(--white); border-bottom-color: var(--beige); }
+body.nav-open.has-journey .navbar_component .navbar_logo { filter: none; }
+body.nav-open.has-journey .navbar_component .navbar_link { color: var(--ink); }
+body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); border-color: var(--beige); }
