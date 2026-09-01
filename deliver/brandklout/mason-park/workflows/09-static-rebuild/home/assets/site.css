@@ -868,6 +868,12 @@ button { font: inherit; }
 /* --- embeds -------------------------------------------------------------- */
 .embed_component { border: var(--hairline); background: var(--warm); }
 .embed_component iframe { display: block; width: 100%; height: 26rem; border: 0; }
+/* The placeholder the deferred map is swapped into. On Instatic the authored
+   <iframe> is published as a bare <div data-src>, which has no intrinsic height
+   -- so the block collapsed to 0 and reserved nothing. Sized here so the
+   chapter's layout is the same before and after site.js swaps in the real
+   frame, and so the element is big enough for IntersectionObserver to see. */
+.embed_component > [data-src] { display: block; width: 100%; height: 26rem; }
 .embed_component.is-form iframe { height: 42rem; }
 
 /* --- footer -------------------------------------------------------------- */

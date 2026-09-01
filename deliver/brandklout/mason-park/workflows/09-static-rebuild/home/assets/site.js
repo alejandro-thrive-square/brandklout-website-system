@@ -68,11 +68,33 @@
   // -------------------------------------------------- deferred map embeds
   // The Google Maps iframe is the heaviest thing on the contact pages and
   // nothing above the fold needs it, so it only loads once it is close.
-  var lazyFrames = document.querySelectorAll("iframe[data-src]");
+  //
+  // IT MAY NOT BE AN IFRAME BY THE TIME THIS RUNS. Instatic stores a page as a
+  // node graph, and an <iframe> becomes a `base.container` with
+  // `tag: "custom", customTag: "iframe"` -- which the PUBLISHER does not
+  // honour: it emits a plain <div> carrying the attributes. So the map arrived
+  // live as `<div data-src="https://www.google.com/maps/embed?...">`, this
+  // selector matched nothing, and the invitation chapter had a 579x0 hole where
+  // the map should be. (Same on production, so the map has never worked there
+  // either.) Rather than fight the publisher, build the real element here: the
+  // local page hands us an <iframe> and we set its src, the live page hands us
+  // a <div> and we replace it.
+  var lazyFrames = document.querySelectorAll("iframe[data-src], .embed_component > [data-src]");
   if (lazyFrames.length) {
     var load = function (f) {
-      f.src = f.getAttribute("data-src");
-      f.removeAttribute("data-src");
+      var src = f.getAttribute("data-src");
+      if (f.tagName === "IFRAME") {
+        f.src = src;
+        f.removeAttribute("data-src");
+        return;
+      }
+      var frame = document.createElement("iframe");
+      frame.src = src;
+      frame.title = f.getAttribute("title") || "Map";
+      frame.loading = "lazy";
+      frame.setAttribute("referrerpolicy", f.getAttribute("referrerpolicy") || "no-referrer-when-downgrade");
+      if (f.className) frame.className = f.className;
+      f.parentNode.replaceChild(frame, f);
     };
     if ("IntersectionObserver" in window) {
       var io = new IntersectionObserver(function (entries) {

@@ -39,6 +39,8 @@
 | `.tmp/backup-site.mjs` | Dumps a whole instance -- shell, every page's node graph, media records -- to one local JSON. **Run it before anything destructive.** |
 | `.tmp/list-site.mjs` | Read-only inventory: which instance, who we are, pages, media, publish state. |
 | `.tmp/run-converter.mjs` | Ships `container-convert.ts` into the container, sha-verified, and runs it under bun. |
+| `.tmp/diff-live.mjs` | **Diffs a local page against its published twin** — head tags, every element signature, semantic tags, the attributes that get dropped, the visible text, and the box of every classed element. This is what finds the silent losses; run it after every import. |
+| `.tmp/apply-image-alt.mjs` | Restores `alt` and the `loading`/`fetchpriority` hints, which the converter drops. **Run it before `import-styles.mjs`.** |
 | `.tmp/apply-body-class.mjs` | Puts each page's `<body>` classes on its converted root node. Without it the homepage loses `has-journey` and comes up with a solid white header. **Run it before `import-styles.mjs`.** |
 | `.tmp/import-fonts.mjs` | Installs Karla, Newsreader and Nunito Sans through Instatic's own font store. Without it the live pages render in Georgia and Segoe UI. |
 | `.tmp/import-scripts.mjs` | The JS half of the code assets: gsap + site.js + journey.js as one registered script. |
@@ -189,6 +191,7 @@ RAILWAY_ENV_NAME=staging node ship-payload.mjs         # 6. HTML -> the containe
 RAILWAY_ENV_NAME=staging node run-converter.mjs        # 7. HTML -> node graphs, inside the container
 RAILWAY_ENV_NAME=staging node fetch-nodes.mjs          # 8. -> converted-pages.json
 node apply-body-class.mjs                              # 8b. <body class> onto the converted root
+node apply-image-alt.mjs                               # 8c. alt text + the eager/high hero hints
 
 node import-fonts.mjs                                  # 9. the three families, self-hosted by Instatic
 node import-styles.mjs                                 # 10. class rules + site.css as a code asset
@@ -196,6 +199,7 @@ node import-scripts.mjs                                # 11. gsap + site.js + jo
 node reset-to-deliverable.mjs                          # 12. dry run: what would be deleted
 node reset-to-deliverable.mjs --apply --publish        # 13. one atomic PUT, then publish
 node verify-live.mjs $INSTATIC_BASE_URL / /services/invisalign   # 14. check what actually shipped
+node diff-live.mjs ../home/index.html $INSTATIC_BASE_URL/         # 15. and diff it against the local page
 ```
 
 **Pages are node graphs, not HTML.** Steps 6–8 exist because the HTML→nodes importer is an MCP
@@ -239,6 +243,37 @@ whose direction is undocumented. Guessing wrong gives a silently static page, so
 settled at build time instead.
 
 ### The import traps
+**The converter keeps four props on an image and throws the rest away.** `base.image` holds
+`src`, `loading`, `fetchPriority` and `decoding`. So:
+
+- **`alt` is dropped on every image** — 0 of 38 described on the homepage, against 24 in the
+  source, and the 81-page site that was here before had the same hole. `props.alt` is *ignored*
+  by the module; it has to go through `htmlAttributes`, the escape hatch the map iframe's node
+  uses. The module then emits its own empty `alt=""` as well, so the published tag carries two —
+  ours first, which is the one every parser and screen reader takes.
+- **`loading` and `fetchPriority` are overwritten with `lazy`/`auto`**, so the hero — the LCP
+  element, deliberately eager and high priority — was published lazy along with all 38 images.
+- `srcset` and `sizes` go too, and that one is fine: Instatic generates its own srcset at publish,
+  in webp and with more breakpoints than we ship.
+
+`apply-image-alt.mjs` restores the first two. It pairs source `<img>` tags to image nodes **by
+document order, and verifies the pairing against the src sequence before writing** — keying by
+`src` is wrong in both directions, because the homepage's `rg-thumb` thumbnails deliberately reuse
+the arc photographs' src with an empty alt.
+
+**An `<iframe>` does not survive publish, and then CSP blocks it anyway.** The converter stores it
+correctly as `tag: "custom", customTag: "iframe"`, but the publisher ignores `customTag` and emits
+a plain `<div>` carrying the attributes — so the map was a 579×0 hole. (Production has the same
+hole; the map has never worked there.) `site.js` builds the real element at runtime now, from
+either shape. That is only half the fix: the published CSP is `frame-src 'none'` until the origin
+is allowed, and **`autoTrust` cannot help here** because it scans the stored page, where there is
+no iframe and no `src` — only a `data-src` on a div. Allow it explicitly, then republish:
+
+```bash
+cd ../../../../process/18-instatic-embeds
+INSTATIC_BASE_URL=https://staging.masonparkdental.com node set-origins.mjs --frame https://www.google.com
+```
+
 **The body's own classes are content, and the exporter throws them away.** `transform()` ships the
 body's *children*, so `<body class="has-journey">` becomes an unclassed body on Instatic — and that
 one class is the switch for about forty rules: the transparent floating header, the white links,
