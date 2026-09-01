@@ -48,6 +48,9 @@ const browser = await puppeteer.launch({
 const SIZES = [
   { w: 1920, h: 1080, label: "1920x1080 desktop" },
   { w: 1440, h: 800, label: "1440x800  laptop" },
+  // The short 13-inch. This is where tall frames stop being an asset, and it
+  // was not in the list until the vh caps went in and needed proving.
+  { w: 1440, h: 650, label: "1440x650  short laptop" },
   { w: 1024, h: 768, label: "1024x768  small laptop" },
   { w: 390, h: 844, label: "390x844   phone" },
 ];

@@ -636,6 +636,48 @@
   }
 }
 
+/* --- short screens ------------------------------------------------------
+   A 13-inch laptop with browser chrome is about 650px of page, and the tall
+   frames this design is built on stop being an asset there: a 2:3 category
+   card becomes 82% of the viewport and its own name sits below the fold.
+   These are height queries, not width queries, because that is the axis the
+   problem is on. Everything keeps its designed proportion at any normal
+   window height; only a genuinely short one compresses.
+
+   `aspect-ratio: auto` has to be restated before the height, or the ratio
+   keeps computing a height and the two fight. */
+@media (min-width: 992px) and (max-height: 760px) {
+  /* The hero measured 1.13 screens at 1440x650, and almost all of the excess
+     was padding and leading rather than content: the headline and both buttons
+     were already above the fold, only the closing line and the bottom pad were
+     not. Scoped to .journey_page so --size-display moves for this page and the
+     other seventeen keep the step they were built to. */
+  .journey_page {
+    --size-display: calc(5.6rem * var(--t-display));
+  }
+  .arrival_copy {
+    padding-block: var(--space-large);
+  }
+  .arrival_sub {
+    margin-top: var(--space-small);
+  }
+  .arrival_place {
+    margin-top: var(--space-medium);
+  }
+  .ways_media {
+    aspect-ratio: auto;
+    height: 46vh;
+  }
+  .offer_media {
+    aspect-ratio: auto;
+    height: 42vh;
+  }
+  .invite_media {
+    aspect-ratio: auto;
+    height: 36vh;
+  }
+}
+
 /* --- 03 THE SURGEON --------------------------------------------------------
    The archive's signature composition, and the one worth taking wholesale: a
    marble panel carrying the copy, with the portrait overlapping its edge and
@@ -1116,6 +1158,13 @@
 }
 .offer_inner {
   padding-inline: var(--gutter);
+}
+/* The memberships half sits immediately under the results half, so between
+   them there would be two full chapter pads where the single section used to
+   have one internal margin. This halves the seam without touching the space
+   above Results or below Memberships. */
+.offer_component.is-tight {
+  padding-top: 0;
 }
 .offer_row {
   display: grid;

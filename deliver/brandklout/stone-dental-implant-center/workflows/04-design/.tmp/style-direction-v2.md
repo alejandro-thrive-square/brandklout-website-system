@@ -9,7 +9,7 @@ The home page rebuilt as an editorial journey, 2026-08-31.
 | **Scope** | The home page only. The vocabulary is written to roll onto the other seventeen |
 | **Package** | [`surgical-arts/site-src/`](./surgical-arts/site-src/) — `pages/home.body.html`, `css/50-journey.css`, `js/10-journey.js` |
 | **v1** | Kept verbatim at `site-src/pages/_home-v1.body.html`. Not built. There to diff against |
-| **Gates** | `audit.mjs` FAIL none / WARN none · `check-copy.mjs` clean · `journey-test.mjs` **41/41** |
+| **Gates** | `audit.mjs` FAIL none / WARN none · `check-copy.mjs` clean · `journey-test.mjs` **47/47** |
 | **For review** | https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6 |
 
 ## The diagnosis
@@ -49,7 +49,7 @@ count. Nothing about Nahlah's brand is in this page.
 verification, breaks full-page capture, and buys a smoothing effect that is not what makes that
 site good. GSAP, ScrollTrigger and SplitText are vendored; ScrollSmoother is not.
 
-## The nine chapters
+## The eleven chapters
 
 | # | Chapter | The move it makes | Ground |
 | :-- | :--- | :--- | :--- |
@@ -61,9 +61,10 @@ site good. GSAP, ScrollTrigger and SplitText are vendored; ScrollSmoother is not
 | 04 | **The path** | **Pinned.** You travel sideways through the three visits | Carrara |
 | 05 | **The standard** | The one dark chapter, and the press index becomes the evidence under a claim | dark marble |
 | 06 | **The proof** | One review at the size of a statement, the rest on a rail | ivory |
-| 07 | **Results & memberships** | Mirrored, each image running off a different page edge | ivory |
-| 08 | **Questions** | The accordion with a sticky photograph beside it | Carrara |
-| 09 | **The invitation** | Twenty-one towns set as type, then the practice and the practical facts | ivory |
+| 07 | **The results** | The image runs off the left page edge, copy in a narrow column right | ivory |
+| 08 | **Memberships** | Mirrored: copy left, image off the right edge | ivory |
+| 09 | **Questions** | The accordion with a sticky photograph beside it | Carrara |
+| 10 | **The invitation** | Twenty-one towns set as type, then the practice and the practical facts | ivory |
 
 Three moves carry most of the difference:
 
@@ -305,6 +306,34 @@ two typefaces one blocked request away from Georgia and Arial.
 `font-weight` shows the head was requesting five cuts nobody sets), latin subset only, and generates
 `css/03-fonts.css`. 161KB. Two new gates hold the line: **no off-origin requests**, and **both
 typefaces actually loaded**, because a fallback renders perfectly happily and simply looks wrong.
+
+## Fourth pass: short screens, and eleven chapters
+
+**The page is eleven chapters now, not nine.** `Results & memberships` measured 1.69 screens, the
+tallest thing on the page after the pin, because it held two complete bands under one heading. It is
+`07 The results` and `08 Memberships`; Questions and The invitation renumbered to 09 and 10. The
+markup and the spacing are unchanged, the section was cut at the seam that was already there. A
+reader meets the two offers one at a time and the chapter readout should say which one they are in.
+
+**Short laptops are where tall frames stop being an asset.** At 1440x650 a 2:3 category frame is
+82% of the viewport, so the card fills the screen and its own name and description sit permanently
+below the fold. New rules under `@media (min-width: 992px) and (max-height: 760px)` compress the
+category, offer and invite frames and step the hero's display size down, so the hero fits a 650px
+window. These are HEIGHT queries: a width query cannot see the problem, and would have squared the
+cards off on a 1440x1080 monitor where they are perfectly fine.
+
+Everything keeps its designed proportion at any normal window height. Only a genuinely short one
+compresses.
+
+**The drawer and the keyboard were verified for the first time.** Both were built in the first pass
+and had only ever been asserted around. The drawer is 343px wide, scrolls its own overflow (1388px
+of content against an 844px phone), keeps all 23 links on screen and scroll-locks the page behind
+it; a Tab walk makes 39 stops and every one paints a focus ring. Nothing was wrong. Both are in the
+gate now, because a control that happens to work is one refactor away from not.
+
+`pin-shot.mjs` is new and captures the pinned chapter at the start, middle and end of its travel.
+It is the one part of this design a full-page screenshot cannot show, and it had been asserted but
+never looked at until now.
 
 ## What this does not fix
 

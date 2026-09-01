@@ -23,7 +23,7 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 > [!IMPORTANT]
 > **HOME PAGE REBUILT 2026-08-31 (v2, the journey).** Brandklout's team reviewed the first build and
 > called the design *"very ugly and simple"*, with drnahlah.com set as the quality bar. The home page
-> is now nine editorial chapters on three grounds, with pinned horizontal travel and a stone-textured
+> is now eleven editorial chapters on three grounds, with pinned horizontal travel and a stone-textured
 > material system. **Read [`style-direction-v2.md`](../style-direction-v2.md) first** — it carries the
 > diagnosis, what was and was not borrowed from Nahlah, and why each image exists.
 >
@@ -34,7 +34,7 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 > | Content | **nothing invented.** Every figure, quote, credential, fee, town and press item is the same sourced string v1 carried |
 > | Tokens | `01-tokens.css` **untouched**. Palette and typefaces are the client's board, exactly as briefed |
 > | Other 17 pages | markup unchanged; they gain the CTA texture fix below and nothing else |
-> | New gate | `node journey-test.mjs` — **41/41** |
+> | New gate | `node journey-test.mjs` — **47/47** |
 > | **For review** | https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6 |
 > 
 > The review link is the real page packed into one self-contained file: stylesheet, GSAP and
@@ -63,8 +63,9 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 | **Build** | `cd site-src && node build-site.mjs` |
 | **Check** | `cd site-src && node audit.mjs` — links, images, a11y, SEO. Exits non-zero on any failure |
 | **Copy gate** | `cd site-src && node check-copy.mjs` — **no em dashes in copy** ([SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md)). Runs on the BUILT output |
-| **Motion gate** | `cd site-src && node journey-test.mjs` — 41 headless checks on the home page's chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins |
+| **Motion gate** | `cd site-src && node journey-test.mjs` — 47 headless checks on the home page's chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins |
 | **Screenshot** | `node site-src/shot.mjs "$PWD/final-site" index.html out.png 1440` |
+| **Pin review** | `node site-src/pin-shot.mjs "$PWD/final-site" <outdir> 1440 800 laptop` — the pinned chapter at the start, middle and end of its travel. A full-page screenshot cannot show it |
 | **Measure** | `cd site-src && node measure.mjs` — per screen size: which chapters exceed the viewport, whether every reveal fired, what the gutter and content width resolve to |
 | **Fonts** | `cd site-src && node get-fonts.mjs` — **REQUIRED ON A FRESH CLONE.** The `.woff2` files are gitignored like every other binary, so `assets/fonts/` is empty until this is run and the site silently falls back to Georgia and Arial. `css/03-fonts.css` and the generator ARE committed. Self-hosted, latin subset; **there is no request to fonts.googleapis.com any more** and `journey-test.mjs` asserts there is none |
 | **Imagery** | `node site-src/get-stock.mjs` (4 searched) · `node site-src/generate-images.mjs` (14 generated) |

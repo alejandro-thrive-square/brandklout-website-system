@@ -320,6 +320,74 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
   await page.close();
 }
 
+/* --- 2b. the mobile drawer, and the keyboard ---------------------------------
+   Both of these were built in the first pass and neither had ever been opened.
+   They turned out to be fine, which is exactly why they are worth pinning down:
+   an untested control that happens to work is one refactor away from not. */
+{
+  const { page, errors } = await open({ width: 390, height: 844 });
+  await page.click(".navbar_burger");
+  await new Promise((r) => setTimeout(r, 700));
+  const drawer = await page.evaluate(() => {
+    const d = document.querySelector(".drawer_component");
+    const panel = document.querySelector(".drawer_panel");
+    const r = panel.getBoundingClientRect();
+    const links = [...panel.querySelectorAll("a")];
+    return {
+      open: d.classList.contains("is-open") && getComputedStyle(d).visibility === "visible",
+      onScreen: r.left >= -1 && r.right <= window.innerWidth + 1,
+      links: links.length,
+      // The menu is taller than a phone, so the PANEL has to scroll. If it does
+      // not, everything past the fold is unreachable while the drawer is open.
+      scrollable: panel.scrollHeight > r.height + 2 && ["auto", "scroll"].includes(getComputedStyle(panel).overflowY),
+      offscreenLinks: links.filter((a) => {
+        const lr = a.getBoundingClientRect();
+        return lr.width === 0 || lr.right > window.innerWidth + 1 || lr.left < -1;
+      }).length,
+      bodyLocked:
+        getComputedStyle(document.body).overflow === "hidden" ||
+        getComputedStyle(document.documentElement).overflow === "hidden",
+    };
+  });
+  check("the drawer opens and sits on screen", drawer.open && drawer.onScreen);
+  check("every drawer link is on screen", drawer.offscreenLinks === 0, `${drawer.links} links, ${drawer.offscreenLinks} off`);
+  check("the drawer scrolls its own overflow", drawer.scrollable);
+  check("the page behind the drawer is scroll-locked", drawer.bodyLocked);
+  check("no console errors with the drawer open", errors.length === 0, errors.slice(0, 2).join(" | "));
+  await page.close();
+}
+
+{
+  const { page } = await open({ width: 1440, height: 900 });
+  // Walk the page with Tab and confirm every stop paints something. A focus
+  // style that exists in the stylesheet but is overridden by a component rule
+  // is invisible in a screenshot and invisible in code review.
+  const seen = [];
+  const bare = [];
+  for (let i = 0; i < 45; i++) {
+    await page.keyboard.press("Tab");
+    const info = await page.evaluate(() => {
+      const el = document.activeElement;
+      if (!el || el === document.body) return null;
+      const cs = getComputedStyle(el);
+      const r = el.getBoundingClientRect();
+      return {
+        cls: (el.className || el.tagName).toString().slice(0, 34),
+        label: (el.textContent || el.getAttribute("aria-label") || "").trim().slice(0, 26),
+        painted: (cs.outlineStyle !== "none" && parseFloat(cs.outlineWidth) > 0) || (cs.boxShadow && cs.boxShadow !== "none"),
+        onScreen: r.width > 0 && r.height > 0,
+      };
+    });
+    if (!info) break;
+    const key = info.cls + "|" + info.label;
+    if (seen.includes(key)) continue;
+    seen.push(key);
+    if (info.onScreen && !info.painted) bare.push(`${info.cls} ${info.label}`);
+  }
+  check("every keyboard stop paints a focus ring", bare.length === 0, `${seen.length} stops` + (bare.length ? " :: " + bare.slice(0, 3).join(", ") : ""));
+  await page.close();
+}
+
 /* --- 3. reduced motion is a real branch ------------------------------------ */
 {
   const { page, errors } = await open({ width: 1440, reduce: true });
