@@ -196,6 +196,13 @@
 }
 .text-style-italic { font-style: italic; }
 .text-style-nowrap { white-space: nowrap; }
+/* The registered-trademark mark, cut down to a mark. Cormorant Garamond draws
+   (R) at FULL SIZE on the baseline, so "MyEllevate(R)" at heading size was a
+   circled letter nearly as tall as the word in front of it. Markup rather than
+   `font-variant-position`, which is unevenly supported and does nothing at all
+   unless the face ships superior figures, which this subset does not. A type
+   utility rather than a component rule because both pages use it. */
+.reg { font-size: 0.5em; vertical-align: 0.55em; letter-spacing: 0; }
 .text-style-muted { color: var(--fg-mute); }
 .text-style-link {
   text-decoration: underline;

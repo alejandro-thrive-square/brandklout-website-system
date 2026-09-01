@@ -171,6 +171,14 @@ for (const m of cssCode.matchAll(/url\(["']?(?!data:|https?:)([^"')]+)["']?\)/g)
    silenced outright. Anything in RETIRED is one of the known twenty; a name
    that is not on the list is genuinely new. */
 const RETIRED = new Set([
+  // THE STATUES, retired 2026-09-01. The client: "we have some statue images
+  // that don't lead to any surgical procedure." cat-face-tall was the home
+  // page's Face category card (a marble bust on a plinth) and
+  // gen-marble-jawline was the neck lift hero (a carved jaw). Both are replaced
+  // by photographs of people. Kept in the library rather than deleted, like
+  // everything else on this list: they are generated work and the day somebody
+  // wants a material still life they are here.
+  "cat-face-tall.webp",
   "cat-face.webp", "dr-stone-office.avif", "gen-contour-gauges.webp",
   "gen-iclight-wand.webp", "gen-injectables.webp", "gen-instruments-warm.webp",
   "gen-laser-device.webp", "gen-linen-detail.webp", "gen-marble-jawline.webp",

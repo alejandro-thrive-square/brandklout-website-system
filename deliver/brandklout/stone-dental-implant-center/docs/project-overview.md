@@ -14,11 +14,14 @@
 **Stone Surgical Arts: the home page and one service page, as of 2026-09-01.** It was seven core
 pages on 2026-08-30 and eighteen on 2026-08-31. The client reviewed the site and kept the home page;
 the other seventeen pages and everything that existed to serve them were deleted from the
-repository, though the asset library was kept whole. **The neck lift was then rebuilt the same day
-in the journey design** — not recovered, rewritten — as the check on whether that design works for
-a page that has to sell a procedure rather than position a practice. It does: eight of its ten
-chapters are the home page's own components, and the new vocabulary is four components. Awaiting
-sign-off on the direction, Instatic re-publish, and the client decisions in the handoff. Start at
+repository, though the asset library was kept whole. **The neck lift was then rebuilt the same day** — not
+recovered, rewritten — as the check on whether the design works for a page that has to sell a
+procedure rather than position a practice. The first attempt composed it out of the home page's own
+chapters and the client said so immediately: *"practically the same as the home page."* It is now a
+**dossier**: a two-column layout with a sticky spec rail, three interactive components, a comparison
+matrix and a recovery timeline that draws itself. The home page is a journey; a service page is a
+document you interrogate. Awaiting sign-off on the direction, Instatic re-publish, and the client
+decisions in the handoff. Start at
 [workflows/04-design/.tmp/surgical-arts/HANDOFF.md](../workflows/04-design/.tmp/surgical-arts/HANDOFF.md).
 
 > [!WARNING]

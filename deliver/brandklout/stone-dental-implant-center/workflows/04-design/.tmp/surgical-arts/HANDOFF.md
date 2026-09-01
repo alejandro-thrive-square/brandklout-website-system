@@ -6,6 +6,40 @@ journey design the same day.** Only the home page is live on the client's Instat
 is live at the eighteen-page version; see "Taking it into Instatic".
 
 > [!IMPORTANT]
+> **THE NECK LIFT WAS REBUILT ON 2026-09-01, HOURS AFTER IT WAS FIRST BUILT.**
+>
+> The first version composed the page almost entirely out of the home page's
+> chapters and reported the small size of the new stylesheet as the finding.
+> The client: *"The page is practically the same as the home page. It should
+> have an obvious variation in layout and interactions and animations."*
+>
+> They were right, and the mistake is worth naming because it is an easy one to
+> repeat: **reuse is a maintenance property, not a design goal.** Measuring a
+> second page type by how little new CSS it needed optimises for the wrong
+> thing, and a service page that reads as the home page with different words in
+> it has failed at the only job it has.
+>
+> **The page is now a DOSSIER and the home page is a JOURNEY.** A journey is one
+> column of chapters you travel through and it only works if you reach the
+> bottom. A dossier is a document you interrogate: somebody arrives from a
+> search result asking what it is, whether it is for them and what it costs.
+>
+> | | home | neck lift |
+> | :--- | :--- | :--- |
+> | layout | one column of chapters | two columns, a sticky spec rail on screen the whole read |
+> | hero | asymmetric split, marble showing in an L | one full-bleed photograph, type over it |
+> | ground | ivory, Carrara, one dark marble band | ivory, white cards, hairlines, one dark PANEL |
+> | state | none | three: a layer switcher, a self-check, a scroll-spy |
+> | motion | pinned horizontal travel, word-by-word lighting, counters | a timeline that draws its spine, a tab cross-fade, a rail marker |
+> | tables | none | a three-column comparison matrix |
+> | JS | GSAP + ScrollTrigger + SplitText, 122KB | none; `motion: false` |
+> | close | the shared CTA band | its own booking chapter; `cta: false` |
+>
+> Vocabulary: `css/51-dossier.css` and `js/11-dossier.js`. The gate is
+> `node dossier-test.mjs` — **50/50**, and it is a separate suite from
+> `journey-test.mjs` for the reason written at the top of it.
+
+> [!IMPORTANT]
 > **THE NECK LIFT IS THE DIRECTION CHECK, AND IT IS THE ONLY SERVICE PAGE.**
 >
 > The seventeen deleted pages were deleted because they were still in the v1 design the client
@@ -18,17 +52,18 @@ is live at the eighteen-page version; see "Taking it into Instatic".
 > (`57de5e9`, four items), and because it is the hardest of the twelve to lay out: a fee, a spec
 > table, a recovery timeline, four alternatives and six questions.
 >
-> **The answer is yes, and the evidence is the size of `css/51-service.css`.** Ten chapters, of
-> which eight are the home page's own components with different content in them. The new vocabulary
-> is four components and three modifiers, about 200 lines. The previous attempt at inner pages had
-> nine component families and a 200-line "rollout layer" correcting a design that had already been
-> rejected; that layer is deleted, and nothing needed to replace it.
+> **The answer is yes, but only once the page stopped borrowing the home page's
+> composition.** See the rebuild note above. What survived the rewrite is that
+> the CONTENT model generalises: every clinical sentence, figure and fee on the
+> page is a sourced string out of `treatments-data.mjs`, and the remaining
+> eleven treatments have the same fields. What did not survive is the idea that
+> the LAYOUT should generalise.
 >
 > | | |
 > | :--- | :--- |
-> | Reused unchanged | `.arrival_*` `.ledger_*` `.thesis_*` `.offer_*` `.path_*` `.standard_*` `.dealt_*` `.ask_*` `.faq_*` `.invite_*` |
-> | New | `.trio_*` (used twice), `.check_*`, `.aside_note`, `.reg`, `.offer_media.is-tall`, `.invite_lede`, `.ways_more` |
-> | Gates | `audit` FAIL none WARN none · `check-copy` clean · `all-pages` clean · `journey-test` **47/47 on BOTH pages** · `check-standalone` 7/7 on both previews · `perf` worst pass 4% |
+> | Shared with the home page | the palette, both typefaces, `--gutter` / `--section` / the type steps, the navbar, the drawer, the footer, `.faq_*`, `.dealt_*`, `.stone-band`, `.button` |
+> | This page's own | `.dossier_layout` `.spec_*` `.toc_*` `.dhero_*` `.dsec*` `.layers_*` `.check_*` `.tl_*` `.matrix_*` `.recov_*` `.book_*` `.mbar_*` |
+> | Gates | `audit` FAIL none WARN none · `check-copy` clean · `all-pages` clean · `journey-test` **47/47** (home) · `dossier-test` **50/50** (neck lift) · `check-standalone` 7/7 on both previews |
 > | Content | nothing invented; every string recovered from `treatments-data.mjs` at `196ef87f~1` |
 > | Clinical review | **still outstanding.** See the comment at the top of `pages/neck-lift.body.html` for exactly what Dr. Stone has to confirm |
 
@@ -82,7 +117,8 @@ is live at the eighteen-page version; see "Taking it into Instatic".
 | **Build** | `cd site-src && node build-site.mjs` |
 | **Check** | `cd site-src && node audit.mjs` — links, images, a11y, SEO. Exits non-zero on any failure |
 | **Copy gate** | `cd site-src && node check-copy.mjs` — **no em dashes in copy** ([SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md)). Runs on the BUILT output |
-| **Motion gate** | `cd site-src && node journey-test.mjs [../final-site] [page.html]` — 47 headless checks on the chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins. **Runs on either page and must pass on both;** two assertions were hard-coded to the home page's content and were generalised on 2026-09-01 |
+| **Motion gate, home** | `cd site-src && node journey-test.mjs` — 47 headless checks on the journey chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins |
+| **Dossier gate, neck lift** | `cd site-src && node dossier-test.mjs` — 50 headless checks on the service page: overflow AND nothing running past the right edge at six widths, that the rail really sticks, that the three controls change state, that the timeline draws, that the matrix opens on the reader's own column, and that with no JS at all every tab panel is on the page. Separate from the suite above on purpose; the reason is at the top of the file |
 | **Screenshot** | `node site-src/shot.mjs "$PWD/final-site" <page.html> out.png 1440` |
 | **Slices** | `node site-src/slices.mjs "$PWD/final-site" <page.html> <outdir> 1440 900` — the page cut into viewport-sized PNGs at 1:1, so it can be LOOKED at rather than only measured. A full-page shot of this site is 9,000 to 15,000px tall and a defect the height of a line of type is two pixels in it. Slices overlap by the navbar's height; without that, a band as tall as the fixed bar is in no slice at all |
 | **Packed preview** | `cd site-src && node make-preview.mjs [page.html]` — the page in one self-contained file, every asset and GSAP inlined. Then `node check-standalone.mjs [../preview-<page>.html]`. Both pages are packed and both pass 7/7 |
@@ -93,7 +129,7 @@ is live at the eighteen-page version; see "Taking it into Instatic".
 | **Pin review** | `node site-src/pin-shot.mjs "$PWD/final-site" <outdir> 1440 800 laptop` — the pinned chapter at the start, middle and end of its travel. A full-page screenshot cannot show it |
 | **Measure** | `cd site-src && node measure.mjs` — per screen size: which chapters exceed the viewport, whether every reveal fired, what the gutter and content width resolve to |
 | **Fonts** | `cd site-src && node get-fonts.mjs` — **REQUIRED ON A FRESH CLONE.** The `.woff2` files are gitignored like every other binary, so `assets/fonts/` is empty until this is run and the site silently falls back to Georgia and Arial. `css/03-fonts.css` and the generator ARE committed. Self-hosted, latin subset; **there is no request to fonts.googleapis.com** and `journey-test.mjs` asserts there is none |
-| **Imagery** | `node site-src/get-stock.mjs` (searched) · `node site-src/generate-images.mjs` (generated) |
+| **Imagery** | `node site-src/get-stock.mjs` (searched, NO people ever) · `node site-src/generate-images.mjs` (generated, no people ever) · `node site-src/get-people.mjs` (**people and places**, added 2026-09-01) |
 | **Live** | <https://stone-surgical-arts-production.up.railway.app> — see [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md). **Still at the eighteen-page v1 build**; nothing since 2026-08-31 has been pushed |
 | **Preview harness** | `node ../../../01-content-intake/.tmp/serve.mjs . 8792` then open `http://localhost:8792/preview.html` |
 | **Asana** | [Give Jess the core pages for Aesthetic - Stone](https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217846850268874) |
@@ -105,7 +141,7 @@ is live at the eighteen-page version; see "Taking it into Instatic".
 | Page | File | What it does |
 | :--- | :--- | :--- |
 | Home | `index.html` | positions the practice: arrival, the idea, the four categories, the surgeon, the path, the standard, the proof, results, memberships, questions, the invitation |
-| Neck lift | `neck-lift.html` | sells one procedure: arrival and fee, the idea, the three layers, who it suits, the day, why the surgeon matters, the alternatives, six questions, the invitation |
+| Neck lift | `neck-lift.html` | sells one procedure, as a dossier: a photographic hero with the fee, then seven numbered sections beside a sticky spec rail, then its own booking chapter |
 
 **The neck lift page routes nowhere either, and for the same reason.** MyEllevate, the jawline
 implant, the face and neck lift and Memberships are all named in its copy and all had pages that no
@@ -150,6 +186,57 @@ the results gallery — and they are **not** dead work, they are dormant: recove
 recover the blocker with it from git history. What follows still applies to what is actually built.
 
 ### 1. Photography · **client**
+
+> [!IMPORTANT]
+> **THE STATUES ARE GONE, AND THE RULE ABOUT PEOPLE MOVED WITH THEM.** The
+> client, 2026-09-01: *"we have some statue images that don't lead to any
+> surgical procedure. We need to make sure to grab some images of people and
+> places."* Correct on both counts. A carved marble bust says art gallery, not
+> facial surgery, and a page selling an operation on a human neck that contains
+> no human at all reads as evasive rather than as careful.
+>
+> `cat-face-tall.webp` (the home page's Face card) and `gen-marble-jawline.webp`
+> (the neck lift's first hero) are retired to the kept-assets list. Five new
+> photographs came in through **`site-src/get-people.mjs`**, which is a separate
+> file from `get-stock.mjs` because that file's contract, in capitals at the top
+> of it, is that no stock portrait may ever go on this site. Editing it to allow
+> people would have left a file whose header forbids what its code does.
+>
+> **What is still forbidden has not moved.** No before/after, ever. No image
+> captioned, framed or laid out as a Stone patient or a Stone result. No named
+> individual depicted by a stock or generated likeness. The rule the old header
+> was really protecting is that A FACE PLACED WHERE A RESULT GOES IS A CLAIM,
+> and that is still true; what changed is that a face in a consulting room, at a
+> mirror, on a sofa or in a park is not that.
+>
+> **Casting is part of the brief.** A neck lift is an operation for people in
+> their fifties and sixties and stock aesthetics photography defaults to
+> twenty-five-year-olds. The first run of the mirror slot returned a woman of
+> about twenty-five, directly under a heading asking the reader whether their
+> skin still retracts; the slot now says the age band out loud, drops "young"
+> and "teen" outright, and pins the chosen resource by id.
+
+> [!NOTE]
+> **THERE IS A REAL EXTERIOR PHOTOGRAPH OF THE PRACTICE AND IT NEEDS CLEARING.**
+> Southlake Style photographed the Westlake opening in February 2021 and
+> published eleven frames. Ten are an event: masked guests, a ribbon cutting, a
+> champagne trike. **One is the building** — stone and stucco, the SSA sign over
+> the arched entrance, blue sky, and only a small cluster of balloons to date it:
+> <https://www.southlakestyle.com/downloads/22129/download/TRG_1543.jpg>
+>
+> The site has no exterior shot at all and this is the only one that exists.
+> **It is not on the site and must not go on it until it is cleared**: the
+> copyright is Southlake Style's and their photographer's, not the practice's,
+> and a third party's photograph on a client's commercial site without a licence
+> is Brandklout's exposure as well as the client's. It is a one-line ask to the
+> magazine, and Dr. Stone hosted the event, so it is very likely to be granted.
+>
+> All eleven are downloaded to
+> [`01-content-intake/.tmp/press-photos/`](../../../01-content-intake/.tmp/press-photos/)
+> with a contact sheet, as research. Two more are worth asking for if the first
+> is granted: `TRG_1512` is a real treatment room and `TRG_1488` is the reception
+> desk under the signage.
+
 
 - **Home hero.** The board's hero is a studio portrait. The page currently opens on
   `hero-arrival.webp`, a generated room. Honest, and not the intended shot.

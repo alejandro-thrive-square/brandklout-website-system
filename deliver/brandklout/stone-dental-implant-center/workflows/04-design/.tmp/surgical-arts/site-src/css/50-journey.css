@@ -1523,3 +1523,27 @@
    and they are in css/51-service.css.
 
    Recover from git at 196ef87f if a v1 page is ever restored. */
+
+/* --- the one category card that leads somewhere -----------------------------
+   All four `.ways_card`s became `<div>`s on 2026-09-01 when the pages behind
+   them were deleted. The neck lift page brings one back as an `<a>`, and a link
+   has to say so: the card is otherwise identical to the three that are not
+   links, and a reader has no way to know which one rewards a click.
+
+   `.ways_card` already carries `text-decoration: none` and `color: inherit`
+   above; the comment there says those rules were kept for exactly this day. */
+.ways_more {
+  margin: var(--space-xsmall) 0 0;
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.ways_more span {
+  display: inline-block;
+  transition: transform 0.3s var(--ease);
+}
+a.ways_card:hover .ways_more span,
+a.ways_card:focus-visible .ways_more span {
+  transform: translateX(0.35rem);
+}

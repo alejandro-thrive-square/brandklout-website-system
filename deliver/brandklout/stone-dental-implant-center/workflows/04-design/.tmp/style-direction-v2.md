@@ -3,12 +3,21 @@
 The home page rebuilt as an editorial journey, 2026-08-31.
 
 > [!IMPORTANT]
-> **2026-09-01, later: the neck lift page is built in this system**, and it is the evidence that the
-> system generalises. Eight of its ten chapters are components described in this document, used
-> unchanged with different content in them; the new vocabulary is `css/51-service.css`, four
-> components and three modifiers. The claim in "Next" below that a returning page would be
-> "composition rather than a rewrite" has now been tested rather than asserted. See
-> [`surgical-arts/HANDOFF.md`](./surgical-arts/HANDOFF.md).
+> **2026-09-01, later: THIS DOCUMENT DESCRIBES THE HOME PAGE, AND ONLY THE HOME PAGE.**
+>
+> A neck lift page was built in this system that afternoon and the client's answer was immediate:
+> *"The page is practically the same as the home page. It should have an obvious variation in
+> layout and interactions and animations."* It was rebuilt as a **dossier** with its own vocabulary
+> in `css/51-dossier.css`: a two-column layout with a sticky spec rail, a full-bleed photographic
+> hero, a tab switcher, a self-check, a comparison matrix and a timeline that draws its own spine.
+>
+> So the claim in "Next" below that a returning page is "composition rather than a rewrite" has
+> been tested and is **half true**, and it is worth being exact about which half. The palette, both
+> typefaces, the fluid roots, the type steps, the shell and a handful of components (`.faq_*`,
+> `.dealt_*`, `.stone-band`, `.button`) carry across and are the reason a second page type took a
+> day rather than a week. The COMPOSITION does not carry across and should not: the journey
+> structure in this document is an argument you travel through, and a service page is a reference
+> somebody interrogates. See [`surgical-arts/HANDOFF.md`](./surgical-arts/HANDOFF.md).
 
 > [!IMPORTANT]
 > **2026-09-01: the client kept the home page and nothing else.** This document is why the home page
@@ -432,13 +441,17 @@ Chapters 02, 03, 04, 05 and 07 are still general components (`.stone-panel`, `.s
 comes back is composition rather than a rewrite. That was the argument for building them as
 components, and it is the one thing the cut did not cost.
 
-**That argument was tested the same day and it holds.** `pages/neck-lift.body.html` is ten chapters,
-eight of them the components listed above with a procedure's content in them: `.arrival_*` opens on
-the fee, `.ledger_*` is the spec table, `.thesis_*` carries the argument, `.offer_row` is "who it
-suits", `.path_*` is the recovery timeline, the dark `.stone-band` is "why it matters who
-operates", `.ask_*` is the FAQ and `.invite_*` closes it. The new vocabulary is four components.
-The eleven remaining treatments should be composed the same way, from a renderer over
-`treatments-data.mjs` (recoverable at `196ef87f~1`) rather than written by hand.
+**That argument was tested the same day and it came back qualified.** The first neck lift page was
+exactly this: ten chapters, eight of them the components listed above with a procedure's content in
+them. It built quickly, it passed every gate, and it was wrong, because the client could not tell it
+apart from the home page. The rebuilt page shares the palette, the typefaces, the fluid roots, the
+shell and four components, and shares no composition at all.
+
+**The lesson, for the eleven treatments still to come:** what generalises is the CONTENT model and
+the design SYSTEM, not the page. Every field the dossier renders exists in `treatments-data.mjs`
+(recoverable at `196ef87f~1`), so the remaining pages should come from a renderer over that data
+against `51-dossier.css` rather than be written by hand. They should NOT come from this document's
+chapter order.
 
 Then: re-import to Instatic, which needs `push-site.mjs --force` and a check of the pages'
 `updatedAt` first (see the runbook), plus a check that Instatic's converter does not strip the

@@ -48,13 +48,20 @@ const footer = read("partials/footer.html");
    `schema` learning to take an array.
 
    `photoHero` is true only where the navbar sits over a photograph and
-   therefore starts transparent. Both pages open on a marble panel with the
-   photograph to the RIGHT of the copy, so the bar sits over ivory on both and
-   both are static. `cta` false suppresses the shared closing band on a page
-   that already ends in one. */
+   therefore starts transparent. `cta` false suppresses the shared closing band
+   on a page that already ends in one. The two pages differ on both flags and on
+   `motion`, which is the shape of the 2026-09-01 rebuild: they are not the same
+   page with different words in it. */
 const PAGES = [
   { slug: "index", src: "home", photoHero: false, motion: true },
-  { slug: "neck-lift", src: "neck-lift", photoHero: false, motion: true },
+  // photoHero TRUE: this page opens on a full-bleed photograph and the navbar
+  // sits over it, so the bar starts transparent and goes solid on scroll. That
+  // is what the flag was built for and the home page has never used it.
+  // motion FALSE: no GSAP. Nothing on this page needs a pinned viewport, and a
+  // reference page should be the lighter of the two. See js/11-dossier.js.
+  // cta FALSE: it closes on its own booking chapter; the shared band would be a
+  // second "book a consultation" immediately after the first.
+  { slug: "neck-lift", src: "neck-lift", photoHero: true, motion: false, cta: false },
 ];
 
 /* --- bundles --------------------------------------------------------------
