@@ -104,7 +104,15 @@ const evaluate = async (expr) =>
 // Reduced motion is OFF by default; set PROBE_STILL=1 for the layout state.
 const W = Number(process.env.PROBE_W || 1440);
 const EXPR = process.argv[2] || "1";
-await send("Emulation.setDeviceMetricsOverride", { width: W, height: 900, deviceScaleFactor: 1, mobile: W < 700 });
+// PROBE_TOUCH forces a coarse pointer at any width. The treatment path branches
+// on `(hover:none) and (pointer:coarse)`, not on width, so a large tablet takes
+// the no-pin branch and a narrow desktop window does not. That branch cannot be
+// reached by resizing alone.
+const TOUCH = !!process.env.PROBE_TOUCH;
+await send("Emulation.setDeviceMetricsOverride", {
+  width: W, height: 900, deviceScaleFactor: 1, mobile: TOUCH || W < 700,
+});
+if (TOUCH) await send("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 });
 await send("Emulation.setEmulatedMedia", {
   features: process.env.PROBE_STILL ? [{ name: "prefers-reduced-motion", value: "reduce" }] : [],
 });

@@ -146,7 +146,8 @@
   max-width: var(--maxw);
   margin-left: auto;
   margin-right: auto;
-  padding: 0 var(--bleed);
+  padding-left: var(--bleed);
+  padding-right: var(--bleed);
 }
 .ch h2 {
   font-family: var(--font-display);
@@ -473,7 +474,7 @@
    the same size, and the comparison the visitor is running in their head.
    ======================================================================== */
 .tg-head { display: grid; gap: 1.75rem; margin-bottom: 4rem; }
-@media (min-width: 960px) { .tg-head { grid-template-columns: 1.05fr .95fr; gap: 4rem; align-items: end; } }
+@media (min-width: 900px) { .tg-head { grid-template-columns: 1.05fr .95fr; gap: 4rem; align-items: end; } }
 .tg-lede { font-size: var(--f-lede); line-height: 1.72; max-width: 48ch; margin: 0; }
 
 .tg-figures {
@@ -532,7 +533,7 @@
   align-items: baseline;
   gap: .9rem;
   padding-top: 1.1rem;
-  font-size: calc(.95rem * var(--t-text));
+  font-size: var(--f-body);
   line-height: 1.6;
   color: var(--fg-body);
 }
@@ -569,7 +570,7 @@
 .vs-row.is-head .vs-a { color: var(--brand); }
 .vs-row.is-head .vs-b { color: var(--fg-soft); }
 .vs-a { color: var(--ink); font-weight: 600; font-size: calc(1rem * var(--t-text)); line-height: 1.55; }
-.vs-b { color: var(--fg-soft); font-size: calc(.95rem * var(--t-text)); line-height: 1.55; }
+.vs-b { color: var(--fg-soft); font-size: var(--f-body); line-height: 1.55; }
 .vs-mid { display: grid; place-items: center; color: var(--rule-strong); font-size: calc(.7rem * var(--t-text)); }
 .vs-mid i { width: 6px; height: 6px; border: 1px solid var(--beige-mid); transform: rotate(45deg); }
 @media (max-width: 767px) {
@@ -754,7 +755,7 @@
   color: var(--fg-soft);
   margin: .4rem 0 .9rem;
 }
-.pe-blurb { font-size: calc(.95rem * var(--t-text)); line-height: 1.68; max-width: 62ch; }
+.pe-blurb { font-size: var(--f-body); line-height: 1.68; max-width: 62ch; }
 
 /* Three columns need real width. Between 700 and 1023 they gave each bio a 33
    character measure, which is a column of confetti rather than a paragraph, so
@@ -802,7 +803,7 @@
    this band's link sits in exactly that spot. The band gives way, not the
    readout: the readout is chrome and has to stay where the eye learns to find
    it. */
-@media (min-width: 992px) { .pe-band-in { padding-bottom: 5rem; } }
+@media (min-width: 900px) { .pe-band-in { padding-bottom: 5rem; } }
 .pe-band-in p { color: #fff; font-size: var(--f-lede); max-width: 34ch; margin: 0; }
 
 /* ===========================================================================
@@ -873,7 +874,7 @@
   opacity: .7;
 }
 .pa-card h3 { font-size: var(--f-h4); }
-.pa-card p { font-size: calc(.95rem * var(--t-text)); line-height: 1.68; }
+.pa-card p { font-size: var(--f-body); line-height: 1.68; }
 .pa-card h3 + p { color: var(--fg-body); }
 .pa-card.is-cta { background: var(--sand); border-color: var(--beige-mid); justify-content: center; }
 .pa-card.is-cta h3 { font-size: var(--f-h3); }
@@ -904,9 +905,9 @@
    The old build ran six equal boxes of ninety word reviews, which nobody reads.
    ======================================================================== */
 .pr-head { display: grid; gap: 2rem; margin-bottom: 4.5rem; }
-@media (min-width: 960px) { .pr-head { grid-template-columns: 1.1fr .9fr; align-items: end; gap: 4rem; } }
+@media (min-width: 900px) { .pr-head { grid-template-columns: 1.1fr .9fr; align-items: end; gap: 4rem; } }
 .pr-note {
-  font-size: calc(.95rem * var(--t-text));
+  font-size: var(--f-body);
   line-height: 1.75;
   color: var(--fg-soft);
   max-width: 42ch;
@@ -915,7 +916,7 @@
 }
 
 .pr-lead { display: grid; gap: 2.5rem; margin-bottom: 4.5rem; }
-@media (min-width: 960px) { .pr-lead { grid-template-columns: 1.15fr .85fr; gap: clamp(2.5rem, 5vw, 5rem); align-items: center; } }
+@media (min-width: 900px) { .pr-lead { grid-template-columns: 1.15fr .85fr; gap: clamp(2.5rem, 5vw, 5rem); align-items: center; } }
 .pr-quote { position: relative; margin: 0; }
 .pr-portrait { overflow: hidden; }
 .pr-portrait img { width: 100%; aspect-ratio: 4 / 5; object-fit: cover; transform: scale(1.04); }
@@ -972,7 +973,7 @@
   border: 1px solid var(--rule);
 }
 .pr-chip p {
-  font-size: calc(.95rem * var(--t-text));
+  font-size: var(--f-body);
   line-height: 1.68;
   color: var(--fg-body);
   display: -webkit-box;
@@ -1027,12 +1028,12 @@
    the page cannot dead end.
    ======================================================================== */
 .iv-top { display: grid; gap: 3rem; }
-@media (min-width: 960px) { .iv-top { grid-template-columns: 1.05fr .95fr; gap: 4.5rem; align-items: start; } }
+@media (min-width: 900px) { .iv-top { grid-template-columns: 1.05fr .95fr; gap: 4.5rem; align-items: start; } }
 .iv-copy { min-width: 0; }
 .iv-lede { font-size: var(--f-lede); line-height: 1.7; max-width: 44ch; margin: 1.4rem 0 2.2rem; }
 .iv-actions { display: flex; flex-wrap: wrap; gap: .9rem; margin-bottom: 3rem; }
 .iv-facts { display: grid; gap: 1.5rem; margin: 0; padding-top: 2rem; border-top: 1px solid var(--rule); }
-@media (min-width: 700px) { .iv-facts { grid-template-columns: repeat(3, 1fr); gap: 2rem; } }
+.iv-facts { grid-template-columns: repeat(auto-fit, minmax(11rem, 1fr)); gap: 2rem 1.75rem; }
 .iv-facts dt {
   font-family: var(--font-ui);
   font-size: var(--f-label);
@@ -1042,7 +1043,7 @@
   color: var(--accent);
   margin-bottom: .6rem;
 }
-.iv-facts dd { margin: 0; font-size: calc(.95rem * var(--t-text)); line-height: 1.7; color: var(--fg-body); }
+.iv-facts dd { margin: 0; font-size: var(--f-body); line-height: 1.7; color: var(--fg-body); }
 .iv-facts dd a { color: var(--fg-body); text-decoration: none; border-bottom: 1px solid var(--rule-strong); }
 .iv-facts dd a:hover { color: #fff; }
 .iv-facts b { color: var(--fg); font-weight: 600; }
@@ -1107,7 +1108,7 @@
   transition: transform .35s var(--ease);
 }
 .ch-invitation .faq_item[open] .faq_question::after { transform: rotate(-135deg); margin-top: -.2rem; }
-.ch-invitation .faq_answer { padding: 0 3rem 1.5rem 0; font-size: calc(.95rem * var(--t-text)); line-height: 1.75; color: var(--fg-body); }
+.ch-invitation .faq_answer { padding: 0 3rem 1.5rem 0; font-size: var(--f-body); line-height: 1.75; color: var(--fg-body); }
 .ch-invitation .faq_answer a { color: var(--accent); }
 
 /* ===========================================================================
@@ -1146,7 +1147,7 @@
   border-radius: 2px;
 }
 .jr-readout b { color: var(--copper); font-weight: 700; }
-@media (min-width: 992px) { .jr-readout.is-on { display: flex } }
+@media (min-width: 900px) { .jr-readout.is-on { display: flex } }
 
 /* ===========================================================================
    MOTION GUARDS

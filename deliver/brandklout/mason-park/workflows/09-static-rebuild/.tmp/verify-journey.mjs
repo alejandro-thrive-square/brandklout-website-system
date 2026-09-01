@@ -347,6 +347,60 @@ check("the close button is not trapped under the drawer it opened",
   /navbar_toggle/.test(String(drawer.toggleHitBy)) && drawer.closedAgain && drawer.stayedOnPage,
   `hit ${drawer.toggleHitBy}, closed ${drawer.closedAgain}, stayed ${drawer.stayedOnPage}`);
 
+// ------------------------------------------- 8c. the FAQ actually opens
+// `<details>` is progressive enhancement, so the risk is not that it fails to
+// toggle but that the answer never becomes readable: a closed `<details>` child
+// still reports a bounding box in Chrome, so measuring the answer proves
+// nothing. Measure the SECTION growing, and `checkVisibility()` per answer.
+await load(1440, 900);
+const faq = await evaluate(`(async()=>{
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const sec=document.querySelector('.ch-invitation');
+  const items=[...document.querySelectorAll('.ch-invitation .faq_item')];
+  if(!items.length) return null;
+  const h0=Math.round(sec.getBoundingClientRect().height);
+  items.forEach(i=>i.querySelector('.faq_question').click());
+  await sleep(600);
+  return {
+    count: items.length,
+    grew: Math.round(sec.getBoundingClientRect().height) - h0,
+    visible: items.filter(i=>i.querySelector('.faq_answer').checkVisibility()).length,
+    minTap: Math.min(...items.map(i=>Math.round(i.querySelector('.faq_question').getBoundingClientRect().height))),
+  };
+})()`);
+if (faq) {
+  check("the FAQ opens and reveals every answer",
+    faq.grew > 200 && faq.visible === faq.count, JSON.stringify(faq));
+  check("FAQ rows clear the 44px tap target", faq.minTap >= 44, `${faq.minTap}px`);
+}
+
+// ------------------------------- 8d. the touch branch of the treatment path
+// The path branches on `(hover:none) and (pointer:coarse)`, not on width, so a
+// large tablet takes the no-pin branch and a narrow desktop window does not.
+// That branch cannot be reached by resizing, and it is the one most of this
+// practice's traffic will actually get.
+for (const w of [390, 1000]) {
+  await send("Emulation.setDeviceMetricsOverride", { width: w, height: 900, deviceScaleFactor: 1, mobile: true });
+  await send("Emulation.setTouchEmulationEnabled", { enabled: true, maxTouchPoints: 5 });
+  await send("Page.navigate", { url: BASE + ROUTE });
+  await wait(1500);
+  const t = await evaluate(`(()=>{
+    const sec=document.querySelector('.ch-path'), tr=document.getElementById('pathTrack');
+    const cards=[...document.querySelectorAll('.pa-card')];
+    const scrollable = getComputedStyle(tr).overflowX === 'auto';
+    return {
+      coarse: matchMedia('(hover:none) and (pointer:coarse)').matches,
+      reachable: scrollable || tr.scrollWidth <= tr.clientWidth + 1,
+      docOver: document.documentElement.scrollWidth - document.documentElement.clientWidth,
+      allOn: cards.every(c=>c.classList.contains('is-on')),
+      cards: cards.length,
+    };
+  })()`);
+  check(`treatment path is usable on touch @ ${w}`,
+    t.coarse && t.reachable && t.docOver <= 1 && t.allOn && t.cards === 5, JSON.stringify(t));
+}
+await send("Emulation.setTouchEmulationEnabled", { enabled: false });
+
 // ------------------------------- 8b. scroll containers keep their own gutter
 // `scroll-snap-align: start` aligns the first item to the SCROLLPORT edge, not
 // the content box, so a snap container scrolls its own padding away on load and
