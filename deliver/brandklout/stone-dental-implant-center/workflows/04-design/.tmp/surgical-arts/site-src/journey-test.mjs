@@ -1,0 +1,301 @@
+/**
+ * Headless checks for the home page's journey chapters.
+ *
+ * The point of this file is that the journey layer's failure modes are SILENT.
+ * A pin that never creates, a scrub that never advances, a bundle that boots
+ * and then throws: all of them leave a page that looks plausible in a
+ * screenshot and is broken in a browser. Every assertion below is therefore
+ * POSITIVE ("the track moved 900px") rather than an absence check ("no error
+ * was thrown"), because the Nahlah build shipped a guard clause that reported
+ * PASS while ScrollSmoother was silently dead.
+ *
+ * It also asserts the two things the design has to keep no matter what:
+ *   - no horizontal overflow at any of the six widths, and
+ *   - with prefers-reduced-motion, ZERO pins and every reveal already visible.
+ *
+ * Usage:  node journey-test.mjs [../final-site] [index.html]
+ */
+import puppeteer from "puppeteer-core";
+import http from "node:http";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const ROOT = path.resolve(HERE, process.argv[2] || "../final-site");
+const PAGE = process.argv[3] || "index.html";
+const PORT = 8811;
+const CHROME = "C:/Program Files/Google/Chrome/Application/chrome.exe";
+
+const MIME = {
+  ".html": "text/html",
+  ".css": "text/css",
+  ".js": "text/javascript",
+  ".webp": "image/webp",
+  ".jpg": "image/jpeg",
+  ".png": "image/png",
+  ".avif": "image/avif",
+  ".svg": "image/svg+xml",
+  ".json": "application/json",
+};
+
+const server = http.createServer((req, res) => {
+  let p = decodeURIComponent(req.url.split("?")[0]);
+  if (p === "/") p = "/index.html";
+  const f = path.join(ROOT, p);
+  if (!fs.existsSync(f) || fs.statSync(f).isDirectory()) {
+    res.writeHead(404);
+    return res.end("not found");
+  }
+  res.writeHead(200, { "Content-Type": MIME[path.extname(f).toLowerCase()] || "application/octet-stream" });
+  fs.createReadStream(f).pipe(res);
+});
+await new Promise((r) => server.listen(PORT, r));
+
+const results = [];
+const check = (name, ok, detail = "") => {
+  results.push({ name, ok, detail });
+  console.log(`${ok ? "PASS" : "FAIL"}  ${name}${detail ? "  " + detail : ""}`);
+};
+
+const browser = await puppeteer.launch({
+  executablePath: CHROME,
+  headless: "new",
+  args: ["--no-sandbox", "--hide-scrollbars"],
+});
+
+async function open({ width, height = 900, reduce = false }) {
+  const page = await browser.newPage();
+  const errors = [];
+  page.on("pageerror", (e) => errors.push(String(e)));
+  page.on("console", (m) => {
+    if (m.type() === "error") errors.push(m.text());
+  });
+  if (reduce) await page.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
+  await page.setViewport({ width, height, deviceScaleFactor: 1 });
+  await page.goto(`http://127.0.0.1:${PORT}/${PAGE}`, { waitUntil: "networkidle0", timeout: 60000 });
+  // The site sets `scroll-behavior: smooth` on the root, which is correct for
+  // its anchor links and ruinous for a harness that scrolls and measures in the
+  // same breath: every reading is taken mid-glide. Turned off here, in the test
+  // only. Never assert against a page that is still moving.
+  await page.addStyleTag({ content: "html { scroll-behavior: auto !important; }" });
+  await new Promise((r) => setTimeout(r, 600));
+  return { page, errors };
+}
+
+/* Scroll, then wait until the page has actually stopped moving, then let
+   GSAP's scrubs catch up on top of that.
+ *
+ * This is a real function, not a string. page.evaluate() accepts a string, but
+ * it evaluates it as an EXPRESSION and silently drops the extra arguments: an
+ * earlier version passed the body as a template literal and every scroll in the
+ * suite quietly did nothing, which read as six separate feature failures. */
+const settle = (page, y) =>
+  page.evaluate(async (target) => {
+    window.scrollTo(0, target);
+    let last = -1;
+    let same = 0;
+    for (let i = 0; i < 90 && same < 3; i++) {
+      await new Promise((r) => requestAnimationFrame(r));
+      if (window.scrollY === last) same++;
+      else {
+        same = 0;
+        last = window.scrollY;
+      }
+    }
+    await new Promise((r) => setTimeout(r, 500));
+    return window.scrollY;
+  }, y);
+
+/* --- 1. no horizontal overflow, at every width the brief names ------------- */
+for (const width of [360, 390, 768, 1024, 1440, 1920]) {
+  const { page, errors } = await open({ width });
+  const over = await page.evaluate(() => {
+    const de = document.documentElement;
+    const wide = [];
+    // scrollWidth on the root is the summary; the per-element pass names the
+    // culprit, which is the difference between "something overflows" and a
+    // fixable report.
+    document.querySelectorAll("body *").forEach((el) => {
+      const r = el.getBoundingClientRect();
+      if (r.width > 0 && r.right > de.clientWidth + 1.5) {
+        // A deliberately scrollable rail clips its own children, so an item
+        // sitting past the right edge INSIDE one is the design, not a bug.
+        let p = el.parentElement;
+        while (p && p !== document.body) {
+          const ov = getComputedStyle(p).overflowX;
+          if (ov === "auto" || ov === "scroll" || ov === "hidden" || ov === "clip") return;
+          p = p.parentElement;
+        }
+        wide.push(el.className || el.tagName);
+      }
+    });
+    return { doc: de.scrollWidth, client: de.clientWidth, wide: wide.slice(0, 5) };
+  });
+  check(
+    `no horizontal overflow @ ${width}`,
+    over.doc <= over.client + 1 && over.wide.length === 0,
+    `scrollWidth ${over.doc} vs ${over.client}${over.wide.length ? " :: " + over.wide.join(", ") : ""}`
+  );
+  check(`console clean @ ${width}`, errors.length === 0, errors.slice(0, 2).join(" | "));
+  await page.close();
+}
+
+/* --- 2. the motion actually runs ------------------------------------------- */
+{
+  const { page, errors } = await open({ width: 1440 });
+
+  const booted = await page.evaluate(() => ({
+    gsap: !!window.gsap,
+    st: !!window.ScrollTrigger,
+    split: !!window.SplitText,
+    jsClass: document.documentElement.classList.contains("js"),
+    triggers: window.ScrollTrigger ? window.ScrollTrigger.getAll().length : 0,
+    pins: window.ScrollTrigger ? window.ScrollTrigger.getAll().filter((t) => t.pin).length : 0,
+  }));
+  check("GSAP + ScrollTrigger + SplitText all loaded", booted.gsap && booted.st && booted.split);
+  check("the .js scope survived the boot timer", booted.jsClass);
+  check("ScrollTriggers were created", booted.triggers > 8, `${booted.triggers} triggers`);
+  check("the path chapter pins", booted.pins >= 1, `${booted.pins} pin(s)`);
+
+  // Headlines were split into masked lines.
+  const lines = await page.evaluate(() => document.querySelectorAll(".j-line-mask").length);
+  check("headlines split into masked lines", lines >= 5, `${lines} lines`);
+
+  // The thesis is wrapped word by word and starts unlit.
+  const words = await page.evaluate(() => ({
+    total: document.querySelectorAll(".thesis_text .w").length,
+    lit: document.querySelectorAll(".thesis_text .w.is-lit").length,
+  }));
+  check("the thesis is wrapped word by word", words.total >= 9, `${words.total} words`);
+
+  // Scroll to the thesis and confirm the scrub actually lights words.
+  await settle(
+    page,
+    await page.evaluate(() => {
+      const r = document.querySelector(".thesis_component").getBoundingClientRect();
+      return r.top + window.scrollY - window.innerHeight * 0.35;
+    })
+  );
+  const litNow = await page.evaluate(() => document.querySelectorAll(".thesis_text .w.is-lit").length);
+  check("scrolling lights the thesis", litNow > words.lit, `${words.lit} -> ${litNow} of ${words.total}`);
+
+  // The pinned path chapter really travels sideways.
+  //
+  // The scroll targets come from the ScrollTrigger itself, NOT from
+  // section.offsetTop. Once a pin exists ScrollTrigger wraps the element in a
+  // pin-spacer, so offsetTop is measured inside that wrapper and is nowhere
+  // near the document position the pin actually starts at. An earlier version
+  // of this file scrolled by offsetTop, landed two chapters short, and reported
+  // "moved 0px" for a pin that works perfectly.
+  const bounds = await page.evaluate(() => {
+    const st = window.ScrollTrigger.getAll().find((t) => t.pin);
+    return { start: st.start, end: st.end };
+  });
+  await settle(page, bounds.start + 4);
+  const before = await page.evaluate(() => document.querySelector(".path_track").getBoundingClientRect().left);
+  await settle(page, bounds.end - 4);
+  const travel = await page.evaluate((before) => {
+    const track = document.querySelector(".path_track");
+    const fill = document.querySelector(".path_rule-fill");
+    return {
+      moved: Math.abs(track.getBoundingClientRect().left - before),
+      pathBar: new DOMMatrixReadOnly(getComputedStyle(fill).transform).a,
+    };
+  }, before);
+  travel.span = bounds.end - bounds.start;
+  check("the path track travels while pinned", travel.moved > 400, `moved ${Math.round(travel.moved)}px over a ${Math.round(travel.span)}px pin`);
+  check("the path progress rule fills to the end", travel.pathBar > 0.9, `scaleX ${Number(travel.pathBar).toFixed(2)}`);
+
+  // The readout names the chapter you are in. Read here, while parked inside
+  // the path chapter, so it is asserting the right answer and not just a
+  // different one from the starting value.
+  const readout = await page.evaluate(() => {
+    const pad = document.querySelector(".journey_readout");
+    return {
+      on: pad.classList.contains("is-on"),
+      num: pad.querySelector(".journey_readout-num").textContent,
+      name: pad.querySelector(".journey_readout-name").textContent,
+    };
+  });
+  check("the chapter readout names the path chapter", readout.on && readout.num === "04", `${readout.num} ${readout.name}`);
+
+  // The nav progress bar, read at the very bottom of the document where it has
+  // to be full.
+  await settle(page, 10 ** 6);
+  const navBar = await page.evaluate(() => {
+    const el = document.querySelector(".journey_progress-bar");
+    return new DOMMatrixReadOnly(getComputedStyle(el).transform).a;
+  });
+  check("the nav progress bar fills to the bottom", navBar > 0.9, `scaleX ${Number(navBar).toFixed(2)}`);
+
+  // Counters land on the published string, not on a rounded tween value.
+  await settle(page, 0);
+  await new Promise((r) => setTimeout(r, 1600));
+  const counted = await page.evaluate(() =>
+    [...document.querySelectorAll(".ledger_value")].map((e) => e.textContent.trim())
+  );
+  check(
+    "the ledger counters land on their published values",
+    counted.join("|") === "4.8|1|20|2",
+    counted.join(", ")
+  );
+
+  check("no console errors with motion on", errors.length === 0, errors.slice(0, 2).join(" | "));
+  await page.close();
+}
+
+/* --- 3. reduced motion is a real branch ------------------------------------ */
+{
+  const { page, errors } = await open({ width: 1440, reduce: true });
+  const state = await page.evaluate(() => ({
+    pins: window.ScrollTrigger ? window.ScrollTrigger.getAll().filter((t) => t.pin).length : 0,
+    triggers: window.ScrollTrigger ? window.ScrollTrigger.getAll().length : 0,
+    hidden: [...document.querySelectorAll("[data-j]")].filter(
+      (el) => parseFloat(getComputedStyle(el).opacity) < 0.99
+    ).length,
+    splits: document.querySelectorAll(".j-line-mask").length,
+    railScrolls: getComputedStyle(document.querySelector(".path_track")).overflowX,
+    pinned: document.querySelector(".path_viewport").classList.contains("is-pinned"),
+  }));
+  check("reduced motion creates NO pins", state.pins === 0, `${state.pins} pins, ${state.triggers} triggers`);
+  check("reduced motion leaves nothing hidden", state.hidden === 0, `${state.hidden} elements under full opacity`);
+  check("reduced motion does not split headlines", state.splits === 0, `${state.splits} masks`);
+  check("reduced motion leaves the path as a scrollable rail", !state.pinned && state.railScrolls === "auto", state.railScrolls);
+  check("no console errors with reduced motion", errors.length === 0, errors.slice(0, 2).join(" | "));
+  await page.close();
+}
+
+/* --- 4. the page is complete with no JS at all ----------------------------- */
+{
+  const page = await browser.newPage();
+  await page.setJavaScriptEnabled(false);
+  await page.setViewport({ width: 1440, height: 900 });
+  await page.goto(`http://127.0.0.1:${PORT}/${PAGE}`, { waitUntil: "networkidle0", timeout: 60000 });
+  const state = await page.evaluate(() => ({
+    js: document.documentElement.classList.contains("js"),
+    hidden: [...document.querySelectorAll("[data-j]")].filter(
+      (el) => parseFloat(getComputedStyle(el).opacity) < 0.99
+    ).length,
+    images: [...document.querySelectorAll("img")].length,
+    text: document.body.innerText.replace(/\s+/g, " ").trim().length,
+  }));
+  // This is the failure the head partial's timer exists for. Without JS the
+  // .js class is never added at all, so every hidden state in the stylesheet is
+  // out of scope and the page paints in full, unanimated.
+  check("no-JS: the .js scope is absent", !state.js);
+  check("no-JS: nothing is left invisible", state.hidden === 0, `${state.hidden} hidden`);
+  check("no-JS: the page still carries its content", state.text > 3000 && state.images >= 10, `${state.text} chars, ${state.images} images`);
+  await page.close();
+}
+
+await browser.close();
+server.close();
+
+const failed = results.filter((r) => !r.ok);
+console.log(`\n${results.length - failed.length}/${results.length} checks passed`);
+if (failed.length) {
+  console.log("\nFAILED:");
+  failed.forEach((f) => console.log(`  ${f.name}  ${f.detail}`));
+  process.exit(1);
+}

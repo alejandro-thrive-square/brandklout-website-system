@@ -1,0 +1,53 @@
+{
+  "source": "client Google Drive export, 01-content-intake/.tmp/google-drive-images",
+  "slots": {
+    "ssa-signage.webp": {
+      "from": "img/masthead/auxilary/03.jpg",
+      "sourceSize": "2200 1200",
+      "output": "1600x900",
+      "alt": "The Stone Surgical Arts sign on the practice wall",
+      "used": "about.html, and available as a closing band anywhere",
+      "note": "The practice’s own signage. Real, on brand, and it says whose building you are in."
+    },
+    "ssa-treatment-room.webp": {
+      "from": "img/masthead/auxilary/01.jpg",
+      "sourceSize": "2200 1200",
+      "output": "1600x900",
+      "alt": "A treatment room at the practice with the laser platform and a product display",
+      "used": "laser-resurfacing.html, morpheus8.html",
+      "note": "The actual devices in the actual room. Replaces a generated laser handpiece."
+    },
+    "ssa-front-desk.webp": {
+      "from": "img/masthead/auxilary/04.jpg",
+      "sourceSize": "2200 1200",
+      "output": "1600x900",
+      "alt": "Two members of the practice team at the front desk beneath the Stone Surgical Arts sign",
+      "used": "book.html",
+      "note": "Shows the people you actually meet. Has faces, but they are STAFF at a desk, which cannot be read as a clinical result."
+    },
+    "ssa-team.webp": {
+      "from": "img/masthead/auxilary/our-team.jpg",
+      "sourceSize": "2200 1200",
+      "output": "1600x900",
+      "alt": "The Stone Surgical Arts team seated together",
+      "used": "about.html",
+      "note": "The real team. Named individuals are still not identified in copy without confirmation."
+    },
+    "ssa-consult-room.webp": {
+      "from": "img/masthead/cosmetic-facial-surgery/glow-with-hydra-gacial-bg-img.jpg",
+      "sourceSize": "2200 983",
+      "output": "1600x900",
+      "alt": "A consultation room at the practice with an armchair, a side table and daylight through tall blinds",
+      "used": "treatments.html consultation band, injectables.html",
+      "note": "A real consult room. Better than gen-consult-pair for the same slot."
+    },
+    "staff-brooke.webp": {
+      "from": "img/staff/brooke.jpg",
+      "sourceSize": "597 615",
+      "output": "492x615",
+      "alt": "Brooke, nurse injector at Stone Surgical Arts",
+      "used": "about.html team grid",
+      "note": "SOURCE IS ONLY 597x615, which is small for this slot. Upscaled separately by upscale-client-images.mjs; this is the straight import and the fallback."
+    }
+  }
+}

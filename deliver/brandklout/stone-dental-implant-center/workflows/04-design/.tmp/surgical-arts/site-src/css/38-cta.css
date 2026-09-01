@@ -1,0 +1,91 @@
+/* The closing invitation. The board's version sits on the stone texture with
+   the display line "Your Confidence. Our Commitment." and one green button;
+   this is that band, reused at the foot of every page. */
+.cta_component {
+  position: relative;
+  background-color: var(--bg-alt);
+  /* FIXED 2026-08-31. This said url("assets/texture-stone.jpg"). site.css is
+     served FROM assets/, so a relative url() in it resolves against assets/ and
+     the browser was asking for assets/assets/texture-stone.jpg. The band has
+     been flat --bg-alt on all eighteen pages since the first build, which is
+     part of why the team's review said the design had no material in it. The
+     texture is also now tex-carrara.webp rather than texture-stone.jpg: the
+     latter is a cold grey slab and this is a warm ivory palette, which is why
+     it was barely used even where it did load. audit.mjs resolves CSS url()
+     against the stylesheet now and would have caught this. */
+  background-image: url("tex-carrara.webp");
+  background-size: cover;
+  background-position: center;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.cta_component::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(246, 244, 239, 0.88);
+}
+.cta_inner {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+.cta_title {
+  max-width: 20ch;
+}
+.cta_text {
+  max-width: 52ch;
+  color: var(--fg-body);
+}
+.cta_actions {
+  margin-top: 0.75rem;
+}
+
+/* The dark variant, for pages that end on a photograph rather than on copy. */
+.cta_component.is-dark {
+  background-image: none;
+  background-color: var(--charcoal);
+  border-color: var(--charcoal);
+}
+.cta_component.is-dark::before {
+  display: none;
+}
+
+/* The thin ribbon of category links that sits above the footer on inner pages,
+   so any page can reach any category without going back to the hub. */
+.category-ribbon_component {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background-color: var(--line);
+  border-top: 1px solid var(--line);
+}
+.category-ribbon_link {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.75rem 1.5rem;
+  background-color: var(--bg);
+  text-align: center;
+  transition: background-color 0.25s var(--ease);
+}
+.category-ribbon_link:hover {
+  background-color: var(--green-wash);
+}
+.category-ribbon_name {
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--fg);
+}
+.category-ribbon_count {
+  font-size: var(--size-text-tiny);
+  color: var(--fg-mute);
+}
+@media (max-width: 767px) {
+  .category-ribbon_component {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

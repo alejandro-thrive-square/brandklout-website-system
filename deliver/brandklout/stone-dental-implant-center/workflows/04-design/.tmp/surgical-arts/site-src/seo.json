@@ -1,0 +1,417 @@
+{
+  "_note": "Titles, descriptions and structured data for every page. build-site.mjs injects these; the head partial carries none of it. The origin assumes stonesurgicalarts.com comes back to this brand. Today it 301s to the implant-center site, so confirm before launch (see HANDOFF.md). NAP is Stone Surgical Arts' OWN published NAP, recovered from the archive 2026-08-31, not the sister practice's.",
+  "site": {
+    "name": "Stone Surgical Arts",
+    "origin": "https://www.stonesurgicalarts.com",
+    "ogImage": "/assets/banner-ssa.avif"
+  },
+  "organization": {
+    "@type": [
+      "MedicalBusiness",
+      "MedicalClinic"
+    ],
+    "@id": "https://www.stonesurgicalarts.com/#practice",
+    "name": "Stone Surgical Arts",
+    "alternateName": "Stone Surgical Arts: Facial & Cosmetic Surgery",
+    "url": "https://www.stonesurgicalarts.com/",
+    "description": "Boutique facial and cosmetic surgery practice in Westlake, Texas, led by oral and maxillofacial surgeon Dr. Mona Stone, DDS.",
+    "medicalSpecialty": "PlasticSurgery",
+    "telephone": "+1-817-918-3666",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "72 Andorra Dr #110",
+      "addressLocality": "Westlake",
+      "addressRegion": "TX",
+      "postalCode": "76262",
+      "addressCountry": "US"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Westlake"
+      },
+      {
+        "@type": "City",
+        "name": "Southlake"
+      },
+      {
+        "@type": "City",
+        "name": "Fort Worth"
+      },
+      {
+        "@type": "City",
+        "name": "Keller"
+      },
+      {
+        "@type": "City",
+        "name": "Colleyville"
+      },
+      {
+        "@type": "City",
+        "name": "Grapevine"
+      },
+      {
+        "@type": "City",
+        "name": "Roanoke"
+      },
+      {
+        "@type": "City",
+        "name": "Trophy Club"
+      },
+      {
+        "@type": "City",
+        "name": "North Richland Hills"
+      },
+      {
+        "@type": "City",
+        "name": "Coppell"
+      },
+      {
+        "@type": "City",
+        "name": "Flower Mound"
+      },
+      {
+        "@type": "City",
+        "name": "Irving"
+      },
+      {
+        "@type": "City",
+        "name": "Denton"
+      },
+      {
+        "@type": "City",
+        "name": "Argyle"
+      }
+    ],
+    "availableLanguage": [
+      "English",
+      "Spanish"
+    ],
+    "sameAs": [
+      "https://www.instagram.com/stonesurgicalart/",
+      "https://www.instagram.com/westlakeaesthetics/",
+      "https://www.facebook.com/stonesurgicalarts/",
+      "https://linktr.ee/stonesurgicalarts"
+    ],
+    "founder": {
+      "@id": "https://www.stonesurgicalarts.com/about#dr-mona-stone"
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    ],
+    "email": "info@stonesurgicalarts.com",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "142"
+    }
+  },
+  "pages": {
+    "index": {
+      "title": "Facial & Cosmetic Surgery Westlake TX | Stone Surgical Arts",
+      "description": "Boutique facial and cosmetic surgery in Westlake, Texas. Dr. Mona Stone plans and performs every case herself: face, neck and jawline, skin and non-surgical.",
+      "ogTitle": "Stone Surgical Arts: Facial & Cosmetic Surgery, Westlake TX",
+      "ogDescription": "Precise treatments. Impeccable results. Surgery and aesthetics planned around your face, by the surgeon who performs them."
+    },
+    "treatments": {
+      "title": "Treatments & Fees | Stone Surgical Arts, Westlake TX",
+      "description": "Every treatment Stone Surgical Arts offers, in four categories, with published fees. Face, neck and jawline, skin, and non-surgical, in Westlake, Texas.",
+      "ogTitle": "Treatments & Fees | Stone Surgical Arts",
+      "ogDescription": "Four categories, published fees, and a consultation that ends with a plan rather than a pitch.",
+      "schema": {
+        "@type": "FAQPage",
+        "mainEntity": [
+          {
+            "@type": "Question",
+            "name": "MyEllevate® or a neck lift: how do I know which?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "A neck lift uses small incisions behind the ears and under the chin and can last up to ten years. MyEllevate® places internal sutures through small punctures and lasts around five. MyEllevate® suits earlier laxity; a neck lift reverses more advanced sagging. MyEllevate® also needs only local anaesthetic, so you can drive yourself home."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Will a neck lift fix my jowls?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "No. Jowls sit low on the face but originate in sagging facial tissue, so they are addressed in a facelift rather than a neck lift. A minimally invasive facelift is the procedure that reduces them."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Implants or filler?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Fillers are gel injectables that plump and smooth lines, acne scars and thin lips, lasting months to a couple of years. Facial implants are customised inserts made from a biocompatible material that stays intact, so the contour is permanent. Filler changes the surface; an implant changes the underlying structure."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "How long does each result last?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Blepharoplasty 10–15 years or more. A neck lift up to ten years. MyEllevate® around five. Facial implants and buccal fat reduction are permanent, though significant weight gain can return fullness elsewhere in the cheek. Injectables last months rather than years."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Can I have more than one procedure at once?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Often, and it is frequently the better plan. A neck lift can be performed alongside a facelift or eyelid surgery in one procedure, with a single recovery. What can be combined safely depends on your anatomy and time under anaesthetic, so it is decided at the consultation."
+            }
+          },
+          {
+            "@type": "Question",
+            "name": "Why do some treatments not show a price?",
+            "acceptedAnswer": {
+              "@type": "Answer",
+              "text": "Because the practice never published a figure for those. Genioplasty, fat transfer and facelift fees vary genuinely with the case. Every other fee shown is the practice's own published price, currently being reconfirmed for 2026."
+            }
+          }
+        ]
+      }
+    },
+    "memberships": {
+      "title": "Memberships | Banked Credit | Stone Surgical Arts",
+      "description": "Three membership tiers built on banked credit: your monthly amount accumulates until you use it, so it can fund a syringe this month or a surgical fee next year.",
+      "ogTitle": "Memberships | Stone Surgical Arts",
+      "ogDescription": "Credit that banks instead of expiring. Three tiers, member pricing, no expiry."
+    },
+    "results": {
+      "title": "Results & Reviews | Stone Surgical Arts, Westlake TX",
+      "description": "Before and after results from Stone Surgical Arts in Westlake, Texas, filtered by treatment, alongside what patients say about Dr. Mona Stone.",
+      "ogTitle": "Results & Reviews | Stone Surgical Arts",
+      "ogDescription": "Real cases and real reviews from the practice in Westlake, Texas."
+    },
+    "about": {
+      "title": "Dr. Mona Stone, DDS | Facial Surgeon, Westlake TX",
+      "description": "Dr. Mona Stone is a biomedical engineer turned oral and maxillofacial surgeon, trained across three Level 1 trauma centres, who reads the whole face.",
+      "ogTitle": "Dr. Mona Stone, DDS | Stone Surgical Arts",
+      "ogDescription": "A surgeon's training. An artist's eye. Meet the practice in Westlake, Texas.",
+      "schema": {
+        "@type": "Physician",
+        "@id": "https://www.stonesurgicalarts.com/about#dr-mona-stone",
+        "name": "Dr. Mona Stone, DDS",
+        "jobTitle": "Oral & Maxillofacial Surgeon",
+        "medicalSpecialty": "PlasticSurgery",
+        "worksFor": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "alumniOf": "University of Missouri–Kansas City",
+        "sameAs": [
+          "https://www.instagram.com/drjawline/"
+        ]
+      }
+    },
+    "book": {
+      "title": "Book a Consultation | Stone Surgical Arts, Westlake TX",
+      "description": "Request a consultation with Dr. Mona Stone in Westlake, Texas. Hours, what to expect at your first visit, consultation fees and financing through Sunbit.",
+      "ogTitle": "Book a Consultation | Stone Surgical Arts",
+      "ogDescription": "Request a time, see what the first visit involves, and check financing before you come in."
+    },
+    "face-and-neck-lift": {
+      "title": "Face & Neck Lift Westlake TX | Stone Surgical Arts",
+      "description": "The full procedure, face and neck addressed together, because the two age as one structure and lifting only half of it shows.",
+      "ogTitle": "Face & Neck Lift | Stone Surgical Arts",
+      "ogDescription": "The full procedure, face and neck addressed together, because the two age as one structure and lifting only half of it shows.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "Face & Neck Lift",
+        "description": "The full procedure, face and neck addressed together, because the two age as one structure and lifting only half of it shows.",
+        "category": "Face",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/face-and-neck-lift"
+      }
+    },
+    "brow-lift": {
+      "title": "Brow & Forehead Lift Westlake TX | Stone Surgical Arts",
+      "description": "The upper third of the face, opened back up. Often the reason a face reads as tired when nothing else about it has changed.",
+      "ogTitle": "Brow & Forehead Lift | Stone Surgical Arts",
+      "ogDescription": "The upper third of the face, opened back up. Often the reason a face reads as tired when nothing else about it has changed.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "Brow & Forehead Lift",
+        "description": "The upper third of the face, opened back up. Often the reason a face reads as tired when nothing else about it has changed.",
+        "category": "Face",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/brow-lift"
+      }
+    },
+    "blepharoplasty": {
+      "title": "Blepharoplasty Westlake TX | Stone Surgical Arts",
+      "description": "Eyelid surgery, upper or lower. The smallest operation on this list and, for most faces, the one that changes the most.",
+      "ogTitle": "Blepharoplasty | Stone Surgical Arts",
+      "ogDescription": "Eyelid surgery, upper or lower. The smallest operation on this list and, for most faces, the one that changes the most.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "Blepharoplasty",
+        "description": "Eyelid surgery, upper or lower. The smallest operation on this list and, for most faces, the one that changes the most.",
+        "category": "Face",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/blepharoplasty"
+      }
+    },
+    "cheek-and-chin-implants": {
+      "title": "Cheek & Chin Implants Westlake TX | Stone Surgical Arts",
+      "description": "Structure, restored where the bone never provided it or where time has taken it. Planned to the skeleton, placed through the mouth, and reversible.",
+      "ogTitle": "Cheek & Chin Implants | Stone Surgical Arts",
+      "ogDescription": "Structure, restored where the bone never provided it or where time has taken it. Planned to the skeleton, placed through the mouth, and reversible.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "Cheek & Chin Implants",
+        "description": "Structure, restored where the bone never provided it or where time has taken it. Planned to the skeleton, placed through the mouth, and reversible.",
+        "category": "Face",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/cheek-and-chin-implants"
+      }
+    },
+    "buccal-fat-reduction": {
+      "title": "Buccal Fat Pad Reduction Westlake TX | Stone Surgical Arts",
+      "description": "Definition through the mid-face, by removing a discrete pad of fat through the mouth. Permanent, which is exactly why it is planned conservatively.",
+      "ogTitle": "Buccal Fat Pad Reduction | Stone Surgical Arts",
+      "ogDescription": "Definition through the mid-face, by removing a discrete pad of fat through the mouth. Permanent, which is exactly why it is planned conservatively.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "Buccal Fat Pad Reduction",
+        "description": "Definition through the mid-face, by removing a discrete pad of fat through the mouth. Permanent, which is exactly why it is planned conservatively.",
+        "category": "Face",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/buccal-fat-reduction"
+      }
+    },
+    "lip-lift": {
+      "title": "Surgical Lip Lift Westlake TX | Stone Surgical Arts",
+      "description": "Shortens the space between nose and lip and rolls the upper lip outward. A permanent alternative to filler, and a different result from it.",
+      "ogTitle": "Surgical Lip Lift | Stone Surgical Arts",
+      "ogDescription": "Shortens the space between nose and lip and rolls the upper lip outward. A permanent alternative to filler, and a different result from it.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "Surgical Lip Lift",
+        "description": "Shortens the space between nose and lip and rolls the upper lip outward. A permanent alternative to filler, and a different result from it.",
+        "category": "Face",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/lip-lift"
+      }
+    },
+    "neck-lift": {
+      "title": "Neck Lift Westlake TX | Stone Surgical Arts",
+      "description": "The full surgical procedure, with muscle repair and skin removal, for a neck that has gone past what a suture can hold.",
+      "ogTitle": "Neck Lift | Stone Surgical Arts",
+      "ogDescription": "The full surgical procedure, with muscle repair and skin removal, for a neck that has gone past what a suture can hold.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "Neck Lift",
+        "description": "The full surgical procedure, with muscle repair and skin removal, for a neck that has gone past what a suture can hold.",
+        "category": "Neck & Jawline",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/neck-lift"
+      }
+    },
+    "myellevate-neck-lift": {
+      "title": "MyEllevate® Neck Lift Westlake TX | Stone Surgical Arts",
+      "description": "Definition through the jaw and neck, achieved with a suture rather than a scar, and a recovery measured in days, not weeks.",
+      "ogTitle": "MyEllevate® Neck Lift | Stone Surgical Arts",
+      "ogDescription": "Definition through the jaw and neck, achieved with a suture rather than a scar, and a recovery measured in days, not weeks.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "MyEllevate® Neck Lift",
+        "description": "Definition through the jaw and neck, achieved with a suture rather than a scar, and a recovery measured in days, not weeks.",
+        "category": "Neck & Jawline",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/myellevate-neck-lift"
+      }
+    },
+    "jawline-implant": {
+      "title": "Jawline Implant Westlake TX | Stone Surgical Arts",
+      "description": "A custom implant along the mandibular border, for a jaw that needs projection rather than lifting. Planned to your bone and reversible.",
+      "ogTitle": "Jawline Implant | Stone Surgical Arts",
+      "ogDescription": "A custom implant along the mandibular border, for a jaw that needs projection rather than lifting. Planned to your bone and reversible.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "Jawline Implant",
+        "description": "A custom implant along the mandibular border, for a jaw that needs projection rather than lifting. Planned to your bone and reversible.",
+        "category": "Neck & Jawline",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/jawline-implant"
+      }
+    },
+    "laser-resurfacing": {
+      "title": "Laser Resurfacing Westlake TX | Stone Surgical Arts",
+      "description": "Texture, fine lines and pigment in one treatment. The only thing on this list that changes the surface of the skin rather than what is underneath it.",
+      "ogTitle": "Laser Resurfacing | Stone Surgical Arts",
+      "ogDescription": "Texture, fine lines and pigment in one treatment. The only thing on this list that changes the surface of the skin rather than what is underneath it.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "Laser Resurfacing",
+        "description": "Texture, fine lines and pigment in one treatment. The only thing on this list that changes the surface of the skin rather than what is underneath it.",
+        "category": "Skin",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/laser-resurfacing"
+      }
+    },
+    "morpheus8": {
+      "title": "Morpheus8 Westlake TX | Stone Surgical Arts",
+      "description": "Microneedling with radiofrequency delivered under the skin. Treats laxity as well as texture, with far less surface downtime than a laser.",
+      "ogTitle": "Morpheus8 | Stone Surgical Arts",
+      "ogDescription": "Microneedling with radiofrequency delivered under the skin. Treats laxity as well as texture, with far less surface downtime than a laser.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "Morpheus8",
+        "description": "Microneedling with radiofrequency delivered under the skin. Treats laxity as well as texture, with far less surface downtime than a laser.",
+        "category": "Skin",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/morpheus8"
+      }
+    },
+    "injectables": {
+      "title": "Injectables Westlake TX | Stone Surgical Arts",
+      "description": "Neuromodulators and filler, placed by the practice nurse injector, with Dr. Stone available for anything structural.",
+      "ogTitle": "Injectables | Stone Surgical Arts",
+      "ogDescription": "Neuromodulators and filler, placed by the practice nurse injector, with Dr. Stone available for anything structural.",
+      "schema": {
+        "@type": "MedicalProcedure",
+        "name": "Injectables",
+        "description": "Neuromodulators and filler, placed by the practice nurse injector, with Dr. Stone available for anything structural.",
+        "category": "Non-Surgical",
+        "provider": {
+          "@id": "https://www.stonesurgicalarts.com/#practice"
+        },
+        "url": "https://www.stonesurgicalarts.com/injectables"
+      }
+    }
+  }
+}

@@ -1,0 +1,1318 @@
+/* ===========================================================================
+   THE JOURNEY LAYER — the editorial vocabulary, added 2026-08-31.
+
+   WHY THIS FILE EXISTS. Brandklout's own team reviewed the first build and
+   called the design "very ugly and simple", with drnahlah.com set as the
+   quality bar. Screenshotting the two side by side says the same thing, and
+   the diagnosis is structural rather than decorative:
+
+     1. ONE GROUND, NO MATERIAL. Every section sat on flat ivory. The
+        practice's own retired site (Wayback 058-home.png) ran MARBLE: as the
+        page ground, as a panel behind copy, and as one dark break band. That
+        is where its editorial feel came from and none of it survived.
+     2. EVERYTHING CENTRED, EVERYTHING 50/50. Fourteen sections, each a
+        centred header over a symmetric grid. Nothing overlapped, nothing bled
+        off an edge, nothing was ever the wrong size on purpose.
+     3. NO SCALE CONTRAST. h1 at 4.75rem next to body at 1.125rem is a 4x
+        range. Editorial pages run 10x or more, and the quiet parts have to be
+        genuinely quiet for the loud parts to land.
+     4. SECTIONS, NOT CHAPTERS. A list of equal-weight blocks does not build
+        an argument, so there was no reason to reach the bottom.
+     5. EVERY IMAGE 16:9, IN A BOX. Which is why every section is a
+        horizontal band. Tall frames are what let a layout overlap and bleed.
+
+   WHAT IS BORROWED FROM THE NAHLAH BUILD, and what is not. Borrowed: the
+   chapter structure, the persistent readout and progress bar, the pinned
+   horizontal travel, scrubbed reveals, and dealing a credential list one line
+   at a time. Not borrowed: its palette, its typefaces, its copy and its
+   section order. The brief was to understand the fundamentals, not to copy the
+   page.
+
+   NAMESPACE. Everything here is new class names. Nothing in 10-client-first
+   through 40-proof is touched, so the other seventeen pages render exactly as
+   they did. The components are written to be REUSED — `.stone-panel`,
+   `.frame_component`, `.ledger_component`, `.dealt_component`, `.rail_component`
+   are general, and rolling this system onto the other pages is composition,
+   not a rewrite.
+
+   TOKENS. Palette and typefaces are the client's, unchanged, straight from
+   01-tokens.css. Per the brief, a handoff supplies colour and type; everything
+   else is ours to raise.
+   =========================================================================== */
+
+:root {
+  /* Display steps ABOVE the existing h1. The old scale topped out at 4.75rem,
+     which is a heading, not a statement. These inherit --t-display so they
+     step down at the same breakpoints as everything else. */
+  --size-display: calc(8rem * var(--t-display));
+  --size-display-sm: calc(5.25rem * var(--t-display));
+  --size-numeral: calc(6.5rem * var(--t-display));
+
+  /* The page gutter, resolved once. Left-hand copy columns align to the same
+     line as .padding-global + .container-large so a full-bleed chapter still
+     lines up with a contained one. */
+  --gutter: max(5vw, calc((100vw - 80rem) / 2));
+}
+
+/* --- materials -------------------------------------------------------------
+   Two grounds beyond the flat ivory, both photographed marble rather than a
+   gradient. A CSS gradient reads as a design system; stone reads as a place.
+
+   Both carry a wash on top of the texture so type contrast is a property of
+   the component and not of whatever the veining happens to do underneath. The
+   marble is never the thing you look at; it is the thing the page sits on. */
+.stone-panel {
+  position: relative;
+  isolation: isolate;
+  background-color: var(--ivory);
+  background-image: linear-gradient(rgba(246, 244, 239, 0.72), rgba(246, 244, 239, 0.72)),
+    url("tex-carrara.webp");
+  background-size: cover;
+  background-position: center;
+}
+
+.stone-band {
+  position: relative;
+  isolation: isolate;
+  background-color: #1c1b19;
+  background-image: linear-gradient(rgba(24, 23, 21, 0.78), rgba(24, 23, 21, 0.86)),
+    url("tex-marble-dark.webp");
+  background-size: cover;
+  background-position: center;
+  background-attachment: fixed;
+}
+/* background-attachment: fixed is a real repaint cost on mobile and does not
+   work at all in iOS Safari, where it snaps. Scroll it there instead; the
+   parallax is a nicety and the band still reads. */
+@media (max-width: 991px), (prefers-reduced-motion: reduce) {
+  .stone-band {
+    background-attachment: scroll;
+  }
+}
+
+/* --- type ------------------------------------------------------------------ */
+.display-xl,
+.display-lg {
+  font-family: var(--font-display);
+  font-weight: 300;
+  color: var(--fg);
+  letter-spacing: -0.015em;
+  text-wrap: balance;
+  margin: 0;
+}
+.display-xl {
+  font-size: var(--size-display);
+  line-height: 0.94;
+}
+.display-lg {
+  font-size: var(--size-display-sm);
+  line-height: 1.02;
+}
+/* The accented half of a two-part display line. The board sets the second line
+   in brand green; at display size green is a FILL, not text, so full-strength
+   --green is correct here and would not be at 16px. See 01-tokens.css. */
+.display-accent {
+  color: var(--accent-flat);
+  font-style: italic;
+}
+[data-theme="dark"] .display-xl,
+[data-theme="dark"] .display-lg,
+.stone-band .display-xl,
+.stone-band .display-lg {
+  color: var(--white);
+}
+
+/* A body column that is actually readable. The old build let paragraphs run
+   the full container width, which is where "big chunks of text" comes from:
+   the chunk is a measure problem before it is a length problem. */
+.measure {
+  max-width: 34rem;
+}
+.measure-short {
+  max-width: 26rem;
+}
+
+.chapter_mark {
+  display: flex;
+  align-items: baseline;
+  gap: var(--space-small);
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  margin: 0 0 var(--space-medium);
+}
+.chapter_mark::before {
+  content: "";
+  width: 2.5rem;
+  height: 1px;
+  background: var(--accent-flat);
+  transform: translateY(-0.28em);
+}
+.stone-band .chapter_mark,
+[data-theme="dark"] .chapter_mark {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+/* --- the persistent readout ------------------------------------------------
+   Nahlah's device, and the single cheapest thing that turns a scroll into a
+   journey: at any moment the page can say where you are. Decoration to a
+   screen reader (every chapter is reachable from the nav and the footer), so
+   the whole thing is aria-hidden. */
+.journey_progress {
+  position: fixed;
+  inset: 0 0 auto 0;
+  height: 2px;
+  background: transparent;
+  z-index: 300;
+  pointer-events: none;
+}
+.journey_progress-bar {
+  height: 100%;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: var(--accent-flat);
+}
+.journey_readout {
+  position: fixed;
+  left: var(--space-medium);
+  bottom: var(--space-medium);
+  z-index: 300;
+  display: flex;
+  align-items: baseline;
+  gap: 0.6rem;
+  padding: 0.5rem 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: 999px;
+  background: rgba(246, 244, 239, 0.86);
+  backdrop-filter: blur(8px);
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease);
+}
+.journey_readout.is-on {
+  opacity: 1;
+}
+.journey_readout-num {
+  font-family: var(--font-display);
+  font-size: var(--size-text-medium);
+  letter-spacing: 0;
+  color: var(--accent);
+  line-height: 1;
+}
+@media (max-width: 767px) {
+  .journey_readout {
+    display: none;
+  }
+}
+
+/* --- 00 ARRIVAL ------------------------------------------------------------
+   An asymmetric split, not a photograph with the headline dropped on top of
+   it. The old hero was the practice's own front desk cropped so the signage
+   read "STON", with a scrim over it and everything centred: the single most
+   generic composition available, on the one screen that has to say the
+   practice is not generic.
+
+   The copy column sits on the page gutter; the media column runs to the
+   viewport edge and past the bottom of the section, so the page starts by
+   breaking its own frame. */
+.arrival_component {
+  position: relative;
+  display: grid;
+  grid-template-columns: 1.02fr 0.98fr;
+  align-items: stretch;
+  min-height: min(46rem, 94vh);
+  overflow: clip;
+}
+.arrival_copy {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: calc(var(--space-xxhuge) * 0.72) var(--space-xlarge) var(--space-xhuge) var(--gutter);
+}
+.arrival_eyebrow {
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  font-weight: 500;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  margin: 0 0 var(--space-medium);
+}
+.arrival_title {
+  margin: 0;
+}
+.arrival_sub {
+  margin: var(--space-medium) 0 0;
+  font-size: var(--size-text-large);
+  line-height: 1.5;
+  color: var(--fg-body);
+  max-width: 30rem;
+}
+.arrival_actions {
+  margin-top: var(--space-large);
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-small);
+}
+.arrival_place {
+  margin: var(--space-xlarge) 0 0;
+  padding-top: var(--space-small);
+  border-top: 1px solid var(--line);
+  max-width: 30rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+}
+
+.arrival_media {
+  position: relative;
+}
+/* The photograph is inset from the section's left and bottom so the Carrara
+   GROUND shows as an L around it. That is the archive's device: on that site
+   nothing sat flush, everything was laid over marble that showed at the edges,
+   which is what stopped the images reading as stock rectangles.
+
+   An earlier version painted a second marble slab behind the image. It was
+   invisible, because the section is already .stone-panel and it was marble on
+   marble. */
+.arrival_photo {
+  position: absolute;
+  inset: 0 0 var(--space-xxlarge) var(--space-xxlarge);
+  z-index: 1;
+  overflow: clip;
+}
+.arrival_photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.arrival_caption {
+  position: absolute;
+  left: var(--space-xxlarge);
+  bottom: calc(var(--space-xxlarge) + var(--space-large));
+  z-index: 2;
+  margin: 0;
+  padding: var(--space-small) var(--space-medium);
+  background: var(--bg);
+  border-top: 2px solid var(--accent-flat);
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+
+@media (max-width: 991px) {
+  .arrival_component {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .arrival_copy {
+    padding: var(--space-xxlarge) var(--gutter) var(--space-xlarge);
+    order: 2;
+  }
+  /* Square, not 4/3, and capped at just over half the screen.
+     Two things are being balanced here. The hero photograph is a 2:3 portrait,
+     so a 4:3 frame showed a 292px letterbox of its middle and threw away both
+     the arch and the floor, which are the whole picture. But the media column
+     comes FIRST on a phone, so every pixel it takes pushes the headline and the
+     two buttons below the fold. A square at 56vh keeps the composition and
+     still lands "Sculpt with confidence" on the first screen. */
+  .arrival_media {
+    order: 1;
+    aspect-ratio: 1 / 1;
+    max-height: 56vh;
+  }
+  .arrival_photo {
+    inset: 0 0 var(--space-large) var(--space-large);
+  }
+  /* Flush with the photograph's bottom edge. At desktop the plate clears the
+     edge; repeating that offset on a phone left a 4px sliver of image showing
+     underneath it, which reads as a rendering fault rather than as a margin. */
+  .arrival_caption {
+    left: var(--space-large);
+    bottom: var(--space-large);
+    max-width: calc(100% - var(--space-xxlarge));
+  }
+}
+
+/* --- the ledger ------------------------------------------------------------
+   The four published figures. They were four bordered boxes in a row, which is
+   a dashboard. A ledger is hairlines and alignment: the number in the display
+   face at a size that earns its place, the label small and set in caps beneath
+   it. Same four facts, same sources, no box. */
+.ledger_component {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.ledger_item {
+  padding: var(--space-large) var(--space-medium);
+  border-left: 1px solid var(--line);
+}
+.ledger_item:first-child {
+  border-left: 0;
+}
+.ledger_value {
+  font-family: var(--font-display);
+  font-size: calc(3.5rem * var(--t-display));
+  font-weight: 300;
+  line-height: 1;
+  color: var(--fg);
+  margin: 0;
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.ledger_label {
+  margin: var(--space-xsmall) 0 0;
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  line-height: 1.5;
+}
+@media (max-width: 767px) {
+  .ledger_component {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .ledger_item:nth-child(3) {
+    border-left: 0;
+  }
+  .ledger_item:nth-child(n + 3) {
+    border-top: 1px solid var(--line);
+  }
+}
+
+/* --- 01 THE THESIS ---------------------------------------------------------
+   Dr. Stone's own line, promoted. It was a small centred pull-quote buried
+   between the surgeon section and the process steps, where nobody reads it.
+   It is the best sentence on the site and it is the practice's whole argument,
+   so it goes near the top at the size of an argument.
+
+   The word-brighten is scrubbed: the clause resolves as you arrive at it. */
+.thesis_component {
+  padding: var(--space-xhuge) 0 var(--space-xxlarge);
+}
+.thesis_inner {
+  padding-inline: var(--gutter);
+  max-width: 68rem;
+}
+.thesis_text {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: var(--size-display-sm);
+  line-height: 1.06;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+  margin: 0;
+  text-wrap: balance;
+}
+.thesis_text em {
+  font-style: italic;
+  color: var(--accent);
+}
+.thesis_attribution {
+  margin: var(--space-large) 0 0;
+  display: flex;
+  align-items: center;
+  gap: var(--space-small);
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.thesis_attribution::before {
+  content: "";
+  width: 3rem;
+  height: 1px;
+  background: var(--line-strong);
+}
+/* Scrubbed brighten. The words start at the muted colour and resolve to full
+   ink as the chapter passes; 10-journey.js drives --lit per word. With no JS
+   or reduced motion they are simply lit, which is the correct still state. */
+.js .thesis_text .w {
+  color: color-mix(in srgb, var(--fg) 26%, transparent);
+  transition: color 0.35s linear;
+}
+.js .thesis_text .w.is-lit {
+  color: var(--fg);
+}
+.js .thesis_text em .w.is-lit {
+  color: var(--accent);
+}
+
+/* --- 02 THE FOUR WAYS IN ---------------------------------------------------
+   Four tall frames on a staggered baseline, the way the archive laid its three
+   category cards with the middle one raised. The old version was four равные
+   bordered boxes each holding a line-drawn icon, which is a feature grid on a
+   SaaS page, not a cosmetic surgery practice.
+
+   Each card is a real photograph now. The brief is explicit that no image slot
+   may be empty, and an icon in a box is an empty slot with a drawing in it. */
+.ways_component {
+  padding: var(--space-xhuge) 0;
+}
+.ways_head {
+  padding-inline: var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: var(--space-large);
+  margin-bottom: var(--space-xxlarge);
+}
+.ways_title {
+  margin: 0;
+  max-width: 20ch;
+}
+.ways_lede {
+  margin: 0;
+  max-width: 30rem;
+  color: var(--fg-body);
+  font-size: var(--size-text-medium);
+  line-height: 1.6;
+}
+.ways_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-medium);
+  padding-inline: var(--gutter);
+  align-items: start;
+}
+/* The stagger. Cards 2 and 4 drop, so the top edge is a rhythm rather than a
+   ruler. Reversed under 1280 to keep the taller pair away from the fold. */
+.ways_card:nth-child(even) {
+  margin-top: var(--space-xxlarge);
+}
+.ways_card {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  position: relative;
+}
+.ways_media {
+  position: relative;
+  aspect-ratio: 2 / 3;
+  overflow: clip;
+  background: var(--stone-soft);
+}
+.ways_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.9s var(--ease);
+}
+.ways_card:hover .ways_media img,
+.ways_card:focus-visible .ways_media img {
+  transform: scale(1.045);
+}
+.ways_index {
+  position: absolute;
+  top: var(--space-small);
+  left: var(--space-small);
+  z-index: 2;
+  font-family: var(--font-display);
+  font-size: var(--size-text-medium);
+  color: var(--white);
+  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
+}
+.ways_body {
+  padding-top: var(--space-small);
+  border-top: 1px solid var(--line-strong);
+  margin-top: var(--space-small);
+}
+.ways_name {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--size-h4);
+  line-height: 1.1;
+  margin: 0;
+  color: var(--fg);
+}
+.ways_text {
+  margin: var(--space-xsmall) 0 var(--space-small);
+  font-size: var(--size-text-small);
+  line-height: 1.55;
+  color: var(--fg-body);
+}
+.ways_go {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--size-text-tiny);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.ways_go span {
+  transition: transform 0.4s var(--ease);
+}
+.ways_card:hover .ways_go span,
+.ways_card:focus-visible .ways_go span {
+  transform: translateX(0.35rem);
+}
+.ways_foot {
+  padding-inline: var(--gutter);
+  margin-top: var(--space-xxlarge);
+}
+
+@media (max-width: 991px) {
+  .ways_head {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  /* A four-up of 2:3 frames is 220px wide on a tablet, which is a thumbnail.
+     A snap rail keeps them at a size worth photographing. */
+  .ways_grid {
+    grid-template-columns: none;
+    grid-auto-flow: column;
+    grid-auto-columns: 68%;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    scroll-padding-inline: var(--gutter);
+    -webkit-overflow-scrolling: touch;
+    padding-bottom: var(--space-small);
+  }
+  .ways_card {
+    scroll-snap-align: start;
+  }
+  .ways_card:nth-child(even) {
+    margin-top: 0;
+  }
+}
+@media (max-width: 478px) {
+  .ways_grid {
+    grid-auto-columns: 82%;
+  }
+}
+
+/* --- 03 THE SURGEON --------------------------------------------------------
+   The archive's signature composition, and the one worth taking wholesale: a
+   marble panel carrying the copy, with the portrait overlapping its edge and
+   bleeding past the top. The first build had the same content as a 50/50 split
+   with a photo in a rectangle beside a wall of text.
+
+   The text is cut too. Two full paragraphs became one, because the credentials
+   underneath say the rest better than a sentence about them does. */
+.surgeon_component {
+  position: relative;
+  padding: var(--space-xhuge) 0;
+}
+.surgeon_layout {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.62fr);
+  align-items: center;
+  padding-inline: var(--gutter) 0;
+}
+.surgeon_panel {
+  padding: var(--space-xhuge) var(--space-xxlarge) var(--space-xhuge) var(--space-xxlarge);
+  border: 1px solid var(--line);
+  /* The panel reaches under the portrait, which sits on top of it. */
+  padding-right: calc(var(--space-xxhuge) * 0.9);
+  position: relative;
+  z-index: 1;
+}
+.surgeon_title {
+  margin: 0 0 var(--space-medium);
+  max-width: 16ch;
+}
+.surgeon_text {
+  margin: 0;
+  color: var(--fg-body);
+  font-size: var(--size-text-medium);
+  line-height: 1.65;
+  max-width: 32rem;
+}
+.surgeon_actions {
+  margin-top: var(--space-xlarge);
+}
+.surgeon_media {
+  position: relative;
+  z-index: 2;
+  margin-left: calc(var(--space-xxhuge) * -1);
+  aspect-ratio: 4 / 5;
+  overflow: clip;
+  align-self: stretch;
+  margin-block: var(--space-xxlarge);
+}
+.surgeon_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 18%;
+  display: block;
+}
+.surgeon_plate {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  z-index: 3;
+  background: var(--bg);
+  border-top: 1px solid var(--accent-flat);
+  padding: var(--space-small) var(--space-medium);
+}
+.surgeon_plate-role {
+  display: block;
+  margin: 0;
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.surgeon_plate-name {
+  display: block;
+  margin: 0.15rem 0 0;
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  color: var(--fg);
+}
+
+/* The dealt credential list. Nahlah deals eight credentials one line at a
+   time; four here, each on a hairline with a hairline rule that draws in from
+   the left. A row of pill chips said the same words and looked like tags. */
+.dealt_component {
+  margin: var(--space-xlarge) 0 0;
+  padding: 0;
+  list-style: none;
+  max-width: 32rem;
+}
+.dealt_item {
+  position: relative;
+  display: grid;
+  grid-template-columns: 2.5rem 1fr;
+  gap: var(--space-small);
+  align-items: baseline;
+  padding: var(--space-small) 0;
+  border-top: 1px solid var(--line);
+  font-size: var(--size-text-regular);
+  color: var(--fg);
+}
+.dealt_item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.dealt_num {
+  font-family: var(--font-display);
+  font-size: var(--size-text-small);
+  color: var(--accent);
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 1279px) {
+  .surgeon_layout {
+    grid-template-columns: minmax(0, 1fr) minmax(0, 0.72fr);
+  }
+  .surgeon_panel {
+    padding: var(--space-xxlarge) var(--space-xlarge);
+    padding-right: var(--space-xhuge);
+  }
+  .surgeon_media {
+    margin-left: calc(var(--space-xhuge) * -1);
+  }
+}
+@media (max-width: 991px) {
+  .surgeon_component {
+    padding: var(--space-xhuge) 0;
+  }
+  .surgeon_layout {
+    grid-template-columns: 1fr;
+    padding-inline: var(--gutter);
+  }
+  .surgeon_media {
+    order: -1;
+    margin: 0 0 calc(var(--space-xxlarge) * -1) 0;
+    aspect-ratio: 3 / 2;
+    max-width: 26rem;
+  }
+  .surgeon_panel {
+    padding: calc(var(--space-xxlarge) + var(--space-large)) var(--space-large) var(--space-xxlarge);
+  }
+}
+
+/* --- 04 THE PATH -----------------------------------------------------------
+   Pinned horizontal travel. The three steps were three bordered boxes in a
+   row; here the page stops and you travel sideways through them, which is the
+   difference between being told there is a process and going through one.
+
+   The whole effect is progressive enhancement. Without JS, or with reduced
+   motion, .path_track is an ordinary horizontally scrollable rail with snap
+   points: the same three panels, the same order, no pin. 10-journey.js only
+   adds the pin when it is allowed to. */
+.path_component {
+  position: relative;
+  overflow: clip;
+  padding-block: var(--space-xhuge);
+}
+.path_head {
+  padding-inline: var(--gutter);
+  margin-bottom: var(--space-xxlarge);
+  max-width: 46rem;
+}
+.path_viewport {
+  position: relative;
+}
+.path_track {
+  display: flex;
+  gap: var(--space-medium);
+  padding-inline: var(--gutter);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-inline: var(--gutter);
+  padding-bottom: var(--space-medium);
+}
+/* When the pin is active the track is driven by transform, so its own
+   scrolling has to stop or the two fight each other. */
+.path_viewport.is-pinned .path_track {
+  overflow: visible;
+  scroll-snap-type: none;
+  padding-bottom: 0;
+  will-change: transform;
+}
+.path_panel {
+  flex: 0 0 auto;
+  /* 40rem, not 30rem. At 30rem three panels plus the gutters came to 1584px
+     against a 1440px viewport, so the pinned chapter travelled 144px: the
+     reader could not tell it had moved. */
+  width: min(40rem, 86vw);
+  scroll-snap-align: start;
+  display: flex;
+  flex-direction: column;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+}
+.path_media {
+  aspect-ratio: 4 / 3;
+  overflow: clip;
+  background: var(--stone-soft);
+}
+.path_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.path_body {
+  padding: var(--space-large);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-xsmall);
+  flex: 1;
+}
+.path_num {
+  font-family: var(--font-display);
+  font-size: var(--size-numeral);
+  line-height: 0.8;
+  color: var(--accent-flat);
+  margin: 0 0 var(--space-small);
+  opacity: 0.85;
+}
+.path_title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--size-h3);
+  line-height: 1.1;
+  margin: 0;
+  color: var(--fg);
+}
+.path_text {
+  margin: 0;
+  color: var(--fg-body);
+  font-size: var(--size-text-regular);
+  line-height: 1.6;
+}
+/* Inside .path_viewport, so it is part of what gets pinned and the reader can
+   see how far through the chapter they are while they are travelling. */
+.path_rule {
+  margin-top: var(--space-large);
+  margin-inline: var(--gutter);
+  height: 2px;
+  background: var(--line);
+  position: relative;
+}
+.path_rule-fill {
+  position: absolute;
+  inset: 0 auto 0 0;
+  width: 100%;
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  background: var(--accent-flat);
+}
+
+/* --- 05 THE STANDARD (dark band) -------------------------------------------
+   One dark chapter, and only one. The archive did exactly this and it is why
+   the ivory either side of it reads as a choice. Everything in here inverts
+   through [data-theme="dark"], which 01-tokens.css already defines, so no
+   colour is restated. */
+.standard_component {
+  padding-block: var(--space-xhuge);
+  color: var(--fg-body);
+}
+.standard_inner {
+  padding-inline: var(--gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+  gap: var(--space-xxlarge);
+  align-items: start;
+}
+.standard_title {
+  margin: 0 0 var(--space-medium);
+  max-width: 14ch;
+}
+.standard_text {
+  margin: 0;
+  font-size: var(--size-text-medium);
+  line-height: 1.7;
+  max-width: 30rem;
+}
+/* The press index. It was a centred section of its own in the middle of the
+   page, doing nothing for the argument. On the dark band it becomes what it
+   actually is: the evidence under "she is asked to speak about this". */
+.index_component {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.index_item {
+  display: grid;
+  grid-template-columns: 13rem 1fr;
+  gap: var(--space-medium);
+  padding: var(--space-medium) 0;
+  border-bottom: 1px solid var(--line);
+  align-items: baseline;
+}
+.index_key {
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.index_value {
+  font-family: var(--font-display);
+  font-size: var(--size-text-large);
+  line-height: 1.35;
+  color: var(--fg);
+}
+@media (max-width: 991px) {
+  .standard_inner {
+    grid-template-columns: 1fr;
+    gap: var(--space-xlarge);
+  }
+  .index_item {
+    grid-template-columns: 1fr;
+    gap: var(--space-xxsmall);
+  }
+}
+
+/* --- 06 THE PROOF ----------------------------------------------------------
+   One review at the size of a statement, then the rest on a rail. Six equal
+   cards in a grid is the layout that guarantees none of them is read. */
+.proof_component {
+  padding-block: var(--space-xhuge);
+}
+.proof_lead {
+  padding-inline: var(--gutter);
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 16rem;
+  gap: var(--space-xxlarge);
+  align-items: end;
+  margin-bottom: var(--space-xxlarge);
+}
+.proof_quote {
+  margin: 0;
+}
+.proof_quote blockquote {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(3rem * var(--t-heading));
+  line-height: 1.14;
+  color: var(--fg);
+  letter-spacing: -0.005em;
+}
+.proof_quote figcaption {
+  margin-top: var(--space-medium);
+  display: flex;
+  gap: var(--space-small);
+  align-items: center;
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.proof_rating {
+  border-left: 1px solid var(--line-strong);
+  padding-left: var(--space-medium);
+}
+.proof_rating-value {
+  font-family: var(--font-display);
+  font-size: calc(4rem * var(--t-display));
+  line-height: 1;
+  margin: 0;
+  color: var(--fg);
+}
+.proof_rating-label {
+  margin: var(--space-xsmall) 0 0;
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  line-height: 1.5;
+}
+.rail_component {
+  display: flex;
+  gap: var(--space-medium);
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  padding-inline: var(--gutter);
+  scroll-padding-inline: var(--gutter);
+  padding-bottom: var(--space-medium);
+}
+.rail_card {
+  flex: 0 0 auto;
+  width: min(24rem, 76vw);
+  scroll-snap-align: start;
+  border-top: 2px solid var(--line-strong);
+  padding: var(--space-medium) 0 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-small);
+}
+.rail_text {
+  margin: 0;
+  font-size: var(--size-text-regular);
+  line-height: 1.65;
+  color: var(--fg-body);
+  flex: 1;
+}
+.rail_meta {
+  display: flex;
+  flex-direction: column;
+  gap: 0.15rem;
+  padding-top: var(--space-small);
+  border-top: 1px solid var(--line);
+}
+.rail_name {
+  font-family: var(--font-display);
+  font-size: var(--size-text-medium);
+  color: var(--fg);
+}
+.rail_tag {
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.proof_foot {
+  padding-inline: var(--gutter);
+  margin-top: var(--space-large);
+}
+@media (max-width: 767px) {
+  .proof_lead {
+    grid-template-columns: 1fr;
+    gap: var(--space-large);
+    align-items: start;
+  }
+  .proof_rating {
+    border-left: 0;
+    border-top: 1px solid var(--line-strong);
+    padding: var(--space-medium) 0 0;
+    display: flex;
+    align-items: baseline;
+    gap: var(--space-medium);
+  }
+  .proof_rating-label {
+    margin: 0;
+    max-width: 14rem;
+  }
+}
+
+/* --- 07 THE TWO OFFERS -----------------------------------------------------
+   Results and memberships. Asymmetric, and the image runs off the page edge on
+   each so the two bands mirror rather than repeat. */
+.offer_component {
+  padding-block: var(--space-xhuge);
+  overflow: clip;
+}
+.offer_inner {
+  padding-inline: var(--gutter);
+}
+.offer_row {
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: var(--space-xxlarge);
+  align-items: center;
+}
+.offer_row + .offer_row {
+  margin-top: var(--space-xhuge);
+}
+.offer_row.is-reverse {
+  grid-template-columns: minmax(0, 0.85fr) minmax(0, 1.15fr);
+}
+.offer_media {
+  aspect-ratio: 3 / 2;
+  overflow: clip;
+  background: var(--stone-soft);
+}
+.offer_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+/* The bleed. The media column starts at the viewport edge instead of the
+   gutter, which is the cheapest way to stop a two-column band looking like a
+   slide. */
+.offer_row .offer_media {
+  margin-left: calc(var(--gutter) * -1);
+}
+.offer_row.is-reverse .offer_media {
+  margin-left: 0;
+  margin-right: calc(var(--gutter) * -1);
+}
+.offer_body {
+  max-width: 32rem;
+}
+.offer_title {
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--size-h2);
+  line-height: 1.06;
+  margin: 0 0 var(--space-medium);
+  color: var(--fg);
+}
+.offer_text {
+  margin: 0 0 var(--space-small);
+  color: var(--fg-body);
+  font-size: var(--size-text-medium);
+  line-height: 1.65;
+}
+.offer_note {
+  margin: 0;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  line-height: 1.6;
+}
+.offer_actions {
+  margin-top: var(--space-large);
+}
+@media (max-width: 991px) {
+  .offer_row,
+  .offer_row.is-reverse {
+    grid-template-columns: 1fr;
+    gap: var(--space-large);
+  }
+  .offer_row .offer_media,
+  .offer_row.is-reverse .offer_media {
+    margin-inline: calc(var(--gutter) * -1);
+    aspect-ratio: 16 / 10;
+  }
+  .offer_row.is-reverse .offer_body {
+    order: 2;
+  }
+}
+
+/* --- 08 THE QUESTIONS ------------------------------------------------------
+   The accordion, with a tall photograph beside it so the chapter has a picture
+   like every other one. Sticky, so the image stays with you while the answers
+   open. */
+.ask_component {
+  padding-block: var(--space-xhuge);
+}
+.ask_layout {
+  padding-inline: var(--gutter);
+  display: grid;
+  grid-template-columns: 0.72fr 1fr;
+  gap: var(--space-xxlarge);
+  align-items: start;
+}
+.ask_media {
+  position: sticky;
+  top: 7rem;
+  aspect-ratio: 3 / 4;
+  overflow: clip;
+  background: var(--stone-soft);
+}
+.ask_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 991px) {
+  .ask_layout {
+    grid-template-columns: 1fr;
+  }
+  .ask_media {
+    position: static;
+    aspect-ratio: 16 / 9;
+  }
+}
+
+/* --- 09 THE INVITATION -----------------------------------------------------
+   The service area set as type rather than as a paragraph of dot-separated
+   town names, plus the practical close. Twenty-one towns in the display face
+   at reading size IS a picture of a service area. */
+.invite_component {
+  padding-block: var(--space-xhuge);
+}
+.invite_inner {
+  padding-inline: var(--gutter);
+}
+.invite_towns {
+  margin: var(--space-xlarge) 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  column-gap: 0.55em;
+  row-gap: 0.15em;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(2.25rem * var(--t-heading));
+  line-height: 1.45;
+  color: var(--fg);
+  max-width: 62rem;
+}
+.invite_towns span {
+  white-space: nowrap;
+}
+/* The separator is a flex ITEM, not ::after inside the nowrap span. As part of
+   the span it made the whole run of twenty-one names one unbreakable line, and
+   the list ran straight off the right of the viewport. */
+.invite_towns span:not(:last-child)::after {
+  content: " ·";
+  color: var(--accent-flat);
+  margin-left: 0.2em;
+}
+/* The photograph and the practical facts, side by side. The facts stack in a
+   single column beside the picture rather than running across three, because
+   an address, a phone number and opening hours are a card you read down, not a
+   row you scan across. */
+.invite_close {
+  margin-top: var(--space-xxlarge);
+  display: grid;
+  grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+  gap: var(--space-xxlarge);
+  align-items: center;
+  border-top: 1px solid var(--line);
+  padding-top: var(--space-xlarge);
+}
+.invite_media {
+  margin: 0;
+  aspect-ratio: 16 / 9;
+  overflow: clip;
+  background: var(--stone-soft);
+}
+.invite_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.invite_facts {
+  margin: 0;
+  display: grid;
+  gap: var(--space-large);
+}
+.invite_fact dt {
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  margin: 0 0 var(--space-xsmall);
+}
+.invite_fact dd {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--size-text-large);
+  line-height: 1.4;
+  color: var(--fg);
+}
+.invite_fact a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--line-strong);
+}
+.invite_fact a:hover {
+  border-color: var(--accent-flat);
+}
+@media (max-width: 991px) {
+  .invite_close {
+    grid-template-columns: 1fr;
+    gap: var(--space-large);
+  }
+}
+
+/* --- motion ----------------------------------------------------------------
+   The journey layer's own reveals. Same rule as 39-motion.css and for the same
+   reason: EVERY hidden state is scoped to .js, so a bundle that fails to boot
+   leaves a still page with all its content rather than a page of blank
+   chapters. The head's 2.5s timer removes .js if nothing signals ready. */
+.js [data-j="rise"] {
+  opacity: 0;
+  transform: translateY(1.75rem);
+  transition:
+    opacity 0.9s var(--ease),
+    transform 0.9s var(--ease);
+}
+.js [data-j="rise"].is-in {
+  opacity: 1;
+  transform: none;
+}
+.js [data-j="stagger"] > * {
+  opacity: 0;
+  transform: translateY(2rem);
+  transition:
+    opacity 0.8s var(--ease),
+    transform 0.8s var(--ease);
+}
+.js [data-j="stagger"].is-in > * {
+  opacity: 1;
+  transform: none;
+}
+.js [data-j="stagger"].is-in > *:nth-child(2) { transition-delay: 0.1s; }
+.js [data-j="stagger"].is-in > *:nth-child(3) { transition-delay: 0.2s; }
+.js [data-j="stagger"].is-in > *:nth-child(4) { transition-delay: 0.3s; }
+.js [data-j="stagger"].is-in > *:nth-child(5) { transition-delay: 0.4s; }
+.js [data-j="stagger"].is-in > *:nth-child(6) { transition-delay: 0.5s; }
+
+/* Masked line reveal: each line sits in a clipped box and slides up out of it.
+   10-journey.js wraps the lines; until it does, the rule below does nothing,
+   so an unsplit heading is simply a heading. */
+.js .j-line-mask {
+  display: block;
+  overflow: hidden;
+}
+.js .j-line {
+  display: block;
+  transform: translateY(105%);
+  transition: transform 1s var(--ease);
+}
+.js .is-in .j-line,
+.js .j-line-mask.is-in .j-line {
+  transform: none;
+}
+.js .j-line:nth-child(1) { transition-delay: 0.02s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-j],
+  .js [data-j] > *,
+  .js .j-line {
+    opacity: 1 !important;
+    transform: none !important;
+    transition: none !important;
+  }
+  .journey_progress,
+  .journey_readout {
+    display: none;
+  }
+}

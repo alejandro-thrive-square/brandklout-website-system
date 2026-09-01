@@ -1,0 +1,307 @@
+/* Navbar — the board's "NAVIGATION STYLE" panel: wordmark left, five links
+   centre-right, one green CTA. Ivory ground, hairline underneath, and it goes
+   solid once the page scrolls past the hero. */
+.navbar_component {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+.navbar_component.is-solid {
+  background-color: rgba(246, 244, 239, 0.94);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom-color: var(--line);
+}
+/* Pages whose hero is not a photograph start solid, so the wordmark never sits
+   on a light band as light text. */
+.navbar_component.is-static {
+  position: sticky;
+  background-color: var(--bg);
+  border-bottom-color: var(--line);
+}
+
+.navbar_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 5.5rem;
+}
+
+.navbar_logo-link {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+/* Over the home page's photograph the bar is transparent, so everything in it
+   inverts. The moment it goes solid — 24px of scroll — this stops applying and
+   the ivory-ground colours take over. */
+.navbar_component:not(.is-solid):not(.is-static) .navbar_link,
+.navbar_component:not(.is-solid):not(.is-static) .navbar_phone {
+  color: var(--white);
+}
+.navbar_component:not(.is-solid):not(.is-static) .brand_component {
+  color: var(--white);
+}
+.navbar_component:not(.is-solid):not(.is-static) .brand_sub {
+  color: rgba(255, 255, 255, 0.78);
+}
+.navbar_component:not(.is-solid):not(.is-static) .navbar_burger {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+.navbar_component:not(.is-solid):not(.is-static) .navbar_burger span {
+  background-color: var(--white);
+}
+
+.navbar_menu {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+  margin-left: auto;
+}
+.navbar_link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0;
+  font-size: var(--size-text-tiny);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.17em;
+  color: var(--fg);
+  white-space: nowrap;
+  transition: color 0.2s var(--ease);
+}
+.navbar_link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 1px;
+  background-color: var(--accent-flat);
+  transition: right 0.3s var(--ease);
+}
+.navbar_link:hover,
+.navbar_link[aria-current="page"] {
+  color: var(--accent);
+}
+.navbar_link:hover::after,
+.navbar_link[aria-current="page"]::after {
+  right: 0;
+}
+
+/* The Treatments item carries a dropdown, exactly as the board shows
+   "PROCEDURES ˅". It opens on hover on the desktop and on click for keyboards. */
+.navbar_dropdown {
+  position: relative;
+}
+.navbar_dropdown-toggle {
+  border: 0;
+  background: transparent;
+  cursor: pointer;
+}
+.navbar_dropdown-caret {
+  width: 0.55rem;
+  height: 0.55rem;
+  transition: transform 0.25s var(--ease);
+}
+.navbar_dropdown.is-open .navbar_dropdown-caret {
+  transform: rotate(180deg);
+}
+.navbar_dropdown-list {
+  position: absolute;
+  top: calc(100% + 0.9rem);
+  left: 50%;
+  transform: translate(-50%, 6px);
+  min-width: 15rem;
+  padding: 0.6rem;
+  background-color: var(--white);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+  list-style: none;
+  opacity: 0;
+  visibility: hidden;
+  transition:
+    opacity 0.22s var(--ease),
+    transform 0.22s var(--ease),
+    visibility 0.22s;
+}
+.navbar_dropdown:hover .navbar_dropdown-list,
+.navbar_dropdown.is-open .navbar_dropdown-list {
+  opacity: 1;
+  visibility: visible;
+  transform: translate(-50%, 0);
+}
+.navbar_dropdown-link {
+  display: block;
+  padding: 0.65rem 0.9rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+  border-radius: 2px;
+  transition:
+    background-color 0.2s var(--ease),
+    color 0.2s var(--ease);
+}
+.navbar_dropdown-link:hover {
+  background-color: var(--green-wash);
+  color: var(--accent);
+}
+
+.navbar_actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 0 0 auto;
+}
+.navbar_phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--size-text-small);
+  font-weight: 500;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.navbar_phone:hover {
+  color: var(--accent);
+}
+.navbar_phone-icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--accent-flat);
+}
+
+.navbar_burger {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background-color: transparent;
+  cursor: pointer;
+}
+.navbar_burger span {
+  display: block;
+  width: 1.15rem;
+  height: 1px;
+  margin: 0.28rem auto;
+  background-color: var(--fg);
+  transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+}
+.navbar_burger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(0.29rem) rotate(45deg);
+}
+.navbar_burger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.navbar_burger[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-0.29rem) rotate(-45deg);
+}
+
+@media (max-width: 991px) {
+  .navbar_menu,
+  .navbar_phone {
+    display: none;
+  }
+  .navbar_burger {
+    display: block;
+  }
+}
+@media (max-width: 767px) {
+  .navbar_actions .button {
+    display: none;
+  }
+}
+
+/* ===========================================================================
+   THE TREATMENTS MEGA MENU — added 2026-08-31
+   Twelve treatment pages replaced one shared detail page, and the dropdown was
+   still listing four category anchors. Client: "each of the drop down links
+   should go to their corresponding page." It is now four columns of real pages,
+   generated in build-site.mjs from treatments-data.mjs.
+   =========================================================================== */
+
+/* The label is a link and the caret is its own button, so the two sit together
+   as one visual trigger. */
+.navbar_dropdown-caret-btn {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.4rem 0.25rem;
+  margin-left: -0.15rem;
+  color: inherit;
+  background: none;
+  border: 0;
+  cursor: pointer;
+}
+.navbar_dropdown-caret-btn:hover {
+  color: var(--accent);
+}
+
+/* Four columns, so it must not stay a 15rem popover pinned to the trigger.
+   Width is capped and it re-centres itself against the navbar, clamped so it
+   can never overflow a narrow viewport. */
+.navbar_dropdown-list.is-mega {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(9.5rem, 1fr));
+  gap: 0.25rem 1.25rem;
+  min-width: 0;
+  width: max-content;
+  max-width: min(58rem, calc(100vw - 3rem));
+  padding: 1.25rem 1.4rem 1rem;
+}
+.navbar_mega-group {
+  min-width: 0;
+}
+.navbar_mega-heading {
+  display: block;
+  padding: 0 0.9rem 0.5rem;
+  margin-bottom: 0.35rem;
+  font-family: var(--font-display);
+  font-size: var(--size-text-small);
+  color: var(--fg);
+  border-bottom: 1px solid var(--line);
+}
+.navbar_mega-heading:hover {
+  color: var(--accent);
+}
+.navbar_mega-sublist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+/* The menu items wrap: "Cheek & Chin Implants" does not fit one line in a
+   column this narrow, and truncating a treatment name is worse than two lines. */
+.navbar_dropdown-list.is-mega .navbar_dropdown-link {
+  padding: 0.42rem 0.9rem;
+  line-height: 1.35;
+}
+/* "All treatments & fees" spans the full width as the menu's footer. */
+.navbar_mega-all {
+  grid-column: 1 / -1;
+  margin-top: 0.5rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--line);
+}
+.navbar_mega-all .navbar_dropdown-link {
+  font-family: var(--font-display);
+  color: var(--fg);
+}
+
+@media (max-width: 991px) {
+  /* Below the navbar's own breakpoint the drawer takes over, but if the menu
+     is ever shown at this width it stacks rather than squeezing four columns. */
+  .navbar_dropdown-list.is-mega {
+    grid-template-columns: repeat(2, minmax(9rem, 1fr));
+  }
+}

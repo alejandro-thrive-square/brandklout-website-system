@@ -1,0 +1,269 @@
+/* Editorial blocks — the split media band, the pull quote and the step list.
+   These carry the argument on Home, About and every treatment detail page. */
+
+.split_component {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  gap: 4rem;
+}
+.split_component.is-reverse .split_media {
+  order: 2;
+}
+.split_media {
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background-color: var(--stone);
+}
+.split_media.is-wide {
+  aspect-ratio: 4 / 3;
+}
+.split_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* Portraits are taller than the 4:5 plate, so cover crops. Bias the crop
+     upward or it takes the top of the head off. */
+  object-position: center 18%;
+}
+.split_media.is-wide img {
+  object-position: center;
+}
+.split_body {
+  display: grid;
+  gap: 1.25rem;
+  align-content: center;
+}
+.split_body p {
+  color: var(--fg-body);
+}
+.split_actions {
+  margin-top: 0.75rem;
+}
+@media (max-width: 991px) {
+  .split_component {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .split_component.is-reverse .split_media {
+    order: 0;
+  }
+  .split_media {
+    aspect-ratio: 3 / 2;
+  }
+}
+
+/* A caption plate over the corner of a portrait — used for Dr. Stone's
+   credentials on the home page. */
+.split_plate {
+  position: absolute;
+  left: 1.25rem;
+  bottom: 1.25rem;
+  right: 1.25rem;
+  padding: 1rem 1.25rem;
+  background-color: rgba(246, 244, 239, 0.94);
+  backdrop-filter: blur(6px);
+  border-radius: var(--radius);
+}
+.split_plate-name {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  color: var(--fg);
+}
+.split_plate-role {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+
+/* --- credential chips ---------------------------------------------------- */
+.chip-list_component {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+.chip_component {
+  padding: 0.45rem 0.85rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-body);
+  white-space: nowrap;
+}
+
+/* --- pull quote ---------------------------------------------------------- */
+.quote_component {
+  position: relative;
+  display: grid;
+  justify-items: center;
+  gap: 1.5rem;
+  text-align: center;
+}
+.quote_mark {
+  font-family: var(--font-display);
+  font-size: 5rem;
+  line-height: 0.6;
+  color: var(--accent-flat);
+}
+.quote_text {
+  max-width: 24ch;
+  font-family: var(--font-display);
+  font-size: var(--size-h2);
+  font-weight: 300;
+  line-height: 1.18;
+  color: var(--fg);
+}
+.quote_attribution {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+  color: var(--fg-mute);
+}
+
+/* --- numbered steps ------------------------------------------------------ */
+/* The step list is placed OUTSIDE padding-global/container-large in the markup
+   (home, about and all twelve treatment pages), so until 2026-08-31 it ran the
+   full width of the viewport and the cards touched both screen edges. Client
+   feedback, and correct: at 1064px the first and last card had no gutter at all.
+
+   Constrained here rather than by wrapping fourteen call sites, so the four
+   pages that share the component cannot drift apart. `min(80rem, 90%)` is
+   exactly padding-global's 5% gutters plus container-large's 80rem cap, which
+   is why the list now lines up with the section header above it instead of
+   sitting a gutter wider than everything else on the page. */
+.step-list_component {
+  box-sizing: border-box;
+  width: min(80rem, 90%);
+  margin-inline: auto;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1px;
+  background-color: var(--line);
+  border: 1px solid var(--line);
+}
+@media (max-width: 767px) {
+  /* Matches padding-global's mobile switch from 5% to a fixed 1.25rem. */
+  .step-list_component {
+    width: calc(100% - 2.5rem);
+  }
+}
+.step_component {
+  display: grid;
+  gap: 0.75rem;
+  padding: 2.25rem 1.75rem;
+  background-color: var(--bg);
+}
+.step_number {
+  font-family: var(--font-display);
+  font-size: var(--size-h3);
+  line-height: 1;
+  color: var(--accent-flat);
+}
+.step_title {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  color: var(--fg);
+}
+.step_text {
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+@media (max-width: 767px) {
+  .step-list_component {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* --- rich text for treatment copy ---------------------------------------- */
+.text-rich-text {
+  color: var(--fg-body);
+}
+.text-rich-text > * + * {
+  margin-top: 1.15rem;
+}
+.text-rich-text h2 {
+  font-size: var(--size-h3);
+  margin-top: 2.5rem;
+}
+.text-rich-text h3 {
+  font-size: var(--size-h4);
+  margin-top: 2rem;
+}
+.text-rich-text ul {
+  display: grid;
+  gap: 0.6rem;
+  padding-left: 0;
+  list-style: none;
+}
+.text-rich-text ul li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.text-rich-text ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.45rem;
+  height: 0.45rem;
+  border-radius: 50%;
+  background-color: var(--accent-flat);
+}
+.text-rich-text strong {
+  color: var(--fg);
+  font-weight: 600;
+}
+
+/* --- an at-a-glance panel beside treatment copy -------------------------- */
+.fact-panel_component {
+  position: sticky;
+  top: 7rem;
+  display: grid;
+  gap: 1.1rem;
+  padding: 1.75rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  box-shadow: var(--shadow-card);
+}
+.fact-panel_row {
+  display: grid;
+  gap: 0.2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--line);
+}
+.fact-panel_row:last-of-type {
+  border-bottom: 0;
+  padding-bottom: 0;
+}
+.fact-panel_label {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-mute);
+}
+.fact-panel_value {
+  font-size: var(--size-text-medium);
+  color: var(--fg);
+}
+
+.detail-layout_component {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 21rem;
+  gap: 3.5rem;
+  align-items: start;
+}
+@media (max-width: 991px) {
+  .detail-layout_component {
+    grid-template-columns: 1fr;
+    gap: 2.5rem;
+  }
+  .fact-panel_component {
+    position: static;
+  }
+}

@@ -1,0 +1,87 @@
+/* FAQ — native <details>, so it is open-able without JavaScript, findable by
+   in-page search, and correct for screen readers with no ARIA of our own. */
+.faq_list {
+  border-top: 1px solid var(--line);
+}
+.faq_item {
+  border-bottom: 1px solid var(--line);
+}
+.faq_question {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.35rem 0;
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  line-height: 1.25;
+  color: var(--fg);
+  cursor: pointer;
+  list-style: none;
+}
+.faq_question::-webkit-details-marker {
+  display: none;
+}
+.faq_question:hover {
+  color: var(--accent);
+}
+.faq_icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.35rem;
+}
+.faq_icon::before,
+.faq_icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: var(--accent-flat);
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.faq_icon::before {
+  width: 1.1rem;
+  height: 1.5px;
+}
+.faq_icon::after {
+  width: 1.5px;
+  height: 1.1rem;
+}
+.faq_item[open] .faq_icon::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+.faq_answer {
+  padding-bottom: 1.6rem;
+  max-width: 68ch;
+  color: var(--fg-body);
+}
+.faq_answer > * + * {
+  margin-top: 0.9rem;
+}
+
+/* Instructions list — pre-visit / pre-op steps on the booking page. */
+.checklist_component {
+  display: grid;
+  gap: 0.85rem;
+  list-style: none;
+}
+.checklist_component li {
+  position: relative;
+  padding-left: 2rem;
+  color: var(--fg-body);
+}
+.checklist_component li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.45em;
+  width: 0.85rem;
+  height: 0.48rem;
+  border-left: 1.5px solid var(--accent-flat);
+  border-bottom: 1.5px solid var(--accent-flat);
+  transform: rotate(-45deg);
+}

@@ -1,0 +1,160 @@
+/* Heroes.
+
+   Two shapes, both from the board:
+     .hero_component            the home hero — full-bleed photograph, scrim,
+                                display type bottom-left, one green CTA.
+     .hero_component.is-page    every inner page — a shorter band on the stone
+                                texture, breadcrumb, title, lede.
+*/
+.hero_component {
+  position: relative;
+  display: flex;
+  align-items: flex-end;
+  min-height: min(46rem, 92svh);
+  padding-top: 5.5rem;
+  overflow: hidden;
+  background-color: var(--stone);
+}
+
+.hero_bg {
+  position: absolute;
+  inset: 0;
+}
+.hero_bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: center 28%;
+}
+/* Two scrims, not one. The vertical pass anchors the type to the bottom of the
+   frame; the horizontal pass darkens the left column the copy occupies, which
+   is what makes white display type survive a bright interior photograph. */
+.hero_bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--scrim-side), var(--scrim);
+}
+
+.hero_inner {
+  position: relative;
+  width: 100%;
+  padding-top: var(--space-xhuge);
+  padding-bottom: var(--space-huge);
+}
+
+.hero_title {
+  max-width: 18ch;
+  color: var(--white);
+  text-shadow: 0 1px 30px rgba(39, 39, 39, 0.35);
+}
+.hero_sub {
+  max-width: 44ch;
+  margin-top: 1.5rem;
+  color: rgba(255, 255, 255, 0.9);
+}
+.hero_eyebrow {
+  color: var(--white);
+}
+.hero_eyebrow::before,
+.hero_eyebrow::after {
+  background-color: rgba(255, 255, 255, 0.7);
+}
+.hero_actions {
+  margin-top: 2.5rem;
+}
+
+/* The strip under the home hero — the board runs a line of service copy on the
+   stone texture directly beneath the photograph. */
+.hero_strip {
+  background-color: var(--bg-alt);
+  border-bottom: 1px solid var(--line);
+  text-align: center;
+}
+.hero_strip-text {
+  max-width: 62ch;
+  margin: 0 auto;
+  color: var(--fg-body);
+}
+
+/* --- inner-page hero ----------------------------------------------------- */
+.hero_component.is-page {
+  min-height: auto;
+  align-items: center;
+  /* The navbar is sticky (in flow) on inner pages, not fixed, so the 5.5rem of
+     clearance the photographic hero needs would be dead space here. */
+  padding-top: 0;
+  background-color: var(--bg-alt);
+  /* FIXED 2026-08-31. This said url("assets/texture-stone.jpg"). site.css is
+     served FROM assets/, so a relative url() in it resolves against assets/ and
+     the browser was asking for assets/assets/texture-stone.jpg. The band has
+     been flat --bg-alt on all eighteen pages since the first build, which is
+     part of why the team's review said the design had no material in it. The
+     texture is also now tex-carrara.webp rather than texture-stone.jpg: the
+     latter is a cold grey slab and this is a warm ivory palette, which is why
+     it was barely used even where it did load. audit.mjs resolves CSS url()
+     against the stylesheet now and would have caught this. */
+  background-image: url("tex-carrara.webp");
+  background-size: cover;
+  background-position: center;
+  border-bottom: 1px solid var(--line);
+}
+.hero_component.is-page::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: rgba(246, 244, 239, 0.86);
+}
+.hero_component.is-page .hero_inner {
+  padding-top: var(--space-xlarge);
+  padding-bottom: var(--space-xlarge);
+  text-align: center;
+}
+.hero_component.is-page .hero_title {
+  max-width: 20ch;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--fg);
+  text-shadow: none;
+}
+.hero_component.is-page .hero_sub {
+  max-width: 58ch;
+  margin-left: auto;
+  margin-right: auto;
+  color: var(--fg-body);
+}
+.hero_component.is-page .hero_eyebrow {
+  color: var(--accent);
+}
+.hero_component.is-page .hero_eyebrow::before,
+.hero_component.is-page .hero_eyebrow::after {
+  background-color: var(--accent-flat);
+}
+
+/* Breadcrumb — small, quiet, above the title. */
+.breadcrumb_component {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  margin-bottom: 1.25rem;
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-mute);
+}
+.breadcrumb_component a:hover {
+  color: var(--accent);
+}
+.breadcrumb_sep {
+  color: var(--line-strong);
+}
+
+@media (max-width: 767px) {
+  .hero_component {
+    min-height: 34rem;
+  }
+  .hero_title {
+    max-width: none;
+  }
+}

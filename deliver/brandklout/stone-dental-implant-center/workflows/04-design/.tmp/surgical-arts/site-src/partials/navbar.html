@@ -1,0 +1,50 @@
+<header class="navbar_component{{NAV_MODE}}" data-nav>
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="navbar_container">
+        <a class="navbar_logo-link" href="index.html" aria-label="Stone Surgical Arts, home">
+          <span class="brand_component">
+            <span class="brand_name">Stone</span>
+            <span class="brand_rule"><span class="brand_sub">Surgical Arts</span></span>
+          </span>
+        </a>
+
+        <nav class="navbar_menu" aria-label="Primary">
+          <!-- The four categories hang off Treatments, mirroring the board's
+               "PROCEDURES ˅". The links are anchors into the hub's tabs rather
+               than separate pages, because the hub IS the category index. -->
+          <!-- "Treatments" is a LINK, not a button, and the caret beside it is
+               a separate button. Client feedback 2026-08-31: the label did
+               nothing but open a menu, so the overview page was unreachable
+               from the nav. Splitting them means click-the-word navigates,
+               click-the-caret opens, hover opens (CSS), and both halves stay
+               keyboard reachable. The old single button called
+               preventDefault() on every click, which is why it could never
+               have been given an href. -->
+          <div class="navbar_dropdown">
+            <a class="navbar_link navbar_dropdown-toggle" href="treatments.html"{{CUR_TREATMENTS}}>Treatments</a>
+            <button class="navbar_dropdown-caret-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Open the treatments menu">
+              <svg class="navbar_dropdown-caret" viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5"/></svg>
+            </button>
+            {{TREATMENT_MENU}}
+          </div>
+          <a class="navbar_link" href="results.html"{{CUR_RESULTS}}>Results</a>
+          <a class="navbar_link" href="memberships.html"{{CUR_MEMBERSHIPS}}>Memberships</a>
+          <a class="navbar_link" href="about.html"{{CUR_ABOUT}}>About</a>
+          <a class="navbar_link" href="book.html#visit"{{CUR_BOOK}}>Contact</a>
+        </nav>
+
+        <div class="navbar_actions">
+          <a class="navbar_phone" href="tel:+18179183666">
+            <svg class="navbar_phone-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            (817) 918-3666
+          </a>
+          <a class="button is-small" href="book.html#request">Book a consultation</a>
+          <button class="navbar_burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>

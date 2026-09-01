@@ -19,6 +19,55 @@ This module uses the selected design-system package initialized during `00-clien
   size type, spacing and radii in `rem` — never `px`, and never `clamp()` for font-size. Full rules
   and the approved scale: [fluid-root.md](./fluid-root.md).
 
+## What a Brand Handoff Actually Supplies
+
+Added 2026-09-01, from the Stone Surgical Arts home rebuild.
+
+> Alejandro: *"When we are handed off with a design or style guide or a brand guideline, we should
+> be extracting color palette and font and that's it. The rest should be elevated, because I think
+> we already have a cap in terms of design."*
+
+**Take the palette and the typefaces. Take nothing else.** A client board, a style guide or a
+picked design template is authority over IDENTITY, not over composition. Reproducing its section
+order, its centred headers and its symmetric grids reproduces its ceiling, and that ceiling is what
+gets a build called "very ugly and simple" at review.
+
+Concretely, on every build:
+
+- Express the board's colours and typefaces as tokens and **do not touch them afterwards**.
+- Put everything else in a layer of your own with its own namespace, so the identity file stays
+  diffable and the composition can be replaced without touching it.
+- Display type steps almost always need to go ABOVE what a board specifies. A board's h1 is a
+  heading; an editorial page needs a statement, which is typically 1.5x to 2x that again.
+
+### The five things that make a build read as cheap
+
+Check a first draft against these before showing it. They are ordered by how much damage each does,
+and every one of them was true of the Stone v1 draft:
+
+1. **One ground, no material.** Every section on the same flat colour. Look for what the client's
+   own current or retired site used: stone, paper, a photographic ground. Reproduce the MATERIAL,
+   not the layout.
+2. **Everything centred, everything 50/50.** Nothing overlapping, nothing bleeding off an edge,
+   nothing deliberately the wrong size.
+3. **No scale contrast.** An h1-to-body range of about 4x. Editorial pages run 10x, and the quiet
+   parts have to be genuinely quiet for the loud parts to land.
+4. **Sections, not chapters.** A list of equal-weight blocks does not build an argument, so there is
+   no reason to reach the bottom. Each section should make a MOVE.
+5. **Every image the same aspect ratio, each in a box.** A library of 16:9 assets forces every
+   section to be a horizontal band. Tall frames are what let a layout overlap and bleed, and
+   cropping 16:9 to 2:3 throws away two thirds of the picture. Generate at the aspect the
+   composition needs.
+
+**An icon in a bordered box is an empty image slot with a drawing in it.** If a slot is for an
+image, it gets an image.
+
+### Where copy length actually comes from
+
+"Big chunks of text" is a MEASURE problem before it is a length problem: a paragraph allowed to run
+the full container width reads as a wall at any word count. Cap body columns (34rem is a good
+default) before cutting words. Then cut words.
+
 ## Design-System Source
 - The reusable source of truth lives at `deliver/process/design-system-library/`.
 - Sales discovery selects one approved reference from that library.
@@ -83,6 +132,35 @@ All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.t
     zero horizontal overflow at 360 and 390.
 18. Run interaction checks in a focused browser tab, computed-style/token consistency checks, and
     the fluid-root gate: `node scripts/fluid-root.mjs --check <package>` must exit 0.
+
+> [!IMPORTANT]
+> **Scroll-driven motion fails SILENTLY, so it has to be asserted, not eyeballed.** A pin that never
+> creates, a scrub that never advances and a bundle that throws after boot all leave a page that
+> looks correct in a screenshot. Reference implementation:
+> `deliver/brandklout/stone-dental-implant-center/workflows/04-design/.tmp/surgical-arts/site-src/journey-test.mjs`.
+>
+> - **Assert the positive, and assert the MAGNITUDE.** "A pin exists" passed while a pinned
+>   horizontal chapter travelled 144px, which is technically working and visually nothing. Assert
+>   "the track moved more than 400px". The Nahlah build shipped a guard clause that reported PASS
+>   while ScrollSmoother was silently dead.
+> - **Wait for the page to stop moving.** `scroll-behavior: smooth` is normal on these builds and
+>   makes every scroll-then-read a mid-glide sample. Disable it in the test page and poll `scrollY`
+>   until it settles.
+> - **Never use `offsetTop` on anything pinned.** ScrollTrigger inserts a pin-spacer, so `offsetTop`
+>   is measured inside it. Scroll to `trigger.start` / `trigger.end`.
+> - **`page.evaluate(aString, arg)` drops the arg.** Puppeteer evaluates a string as an expression;
+>   only a real function receives arguments.
+> - **Verify all three failure branches**, not just the happy one: no JavaScript at all, the motion
+>   library absent but the site bundle fine, and `prefers-reduced-motion` (which must produce ZERO
+>   pins and leave nothing hidden).
+>
+> **Gates must read code, not prose.** A CSS or copy check that scans raw source will report a
+> comment explaining a fixed bug as the bug. Strip comments first. This has now bitten twice, in
+> `check-copy.mjs` and in `audit.mjs`.
+>
+> **A relative `url()` in a bundled stylesheet resolves against the BUNDLE, not the site root.** An
+> asset check that resolves against the site root cannot catch a broken texture path, and one went
+> undetected across eighteen live pages for two days.
 19. Send the Figma link and Vercel review URL to the client for first-round feedback.
 20. Record the selected design path and move approved corrections into `05-design-revisions`.
 21. **Output**: `.tmp/component-spec.json`, `.tmp/screenshots/`, `.tmp/token-violations.json`, `deliver/[client-name]/docs/design-draft-review.md`

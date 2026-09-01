@@ -1,0 +1,354 @@
+/* Proof bands — reviews, press, service area, and the category bands on the
+   treatments hub. Added 2026-08-31 with the content expansion.
+
+   WHY THIS FILE SORTS AFTER 39-motion.css. The documented rule is that
+   filename order is cascade order, and motion was written to be last. It can
+   safely stay ahead of this file: every rule in 39 is scoped to
+   `.js [data-reveal]`, an attribute selector on a wrapper, and nothing here
+   sets opacity or transform on those wrappers. No rule below overrides a
+   reveal, and no reveal overrides a rule below.
+
+   Everything here is built from the tokens in 01-tokens.css. There is no new
+   colour, no new radius and no new shadow — this is the same design system,
+   applied to four more kinds of block. */
+
+/* ---------- reviews ------------------------------------------------------ */
+.review-grid_component {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-medium);
+}
+.review-card_component {
+  display: grid;
+  /* Pushes the attribution to the bottom so the names line up across a row
+     however uneven the quotes are. */
+  grid-template-rows: 1fr auto;
+  gap: var(--space-small);
+  margin: 0;
+  padding: var(--space-medium);
+  background-color: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+}
+.review-card_text {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: 1.16rem;
+  line-height: 1.5;
+  color: var(--fg-heading, var(--fg-body));
+}
+/* The opening quote mark hangs into the left margin so the first character of
+   the sentence still sits on the text edge. */
+.review-card_text::before {
+  content: "\201C";
+  margin-left: -0.42em;
+}
+.review-card_meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.5rem 0.75rem;
+  padding-top: var(--space-small);
+  border-top: 1px solid var(--line);
+}
+.review-card_name {
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+}
+.review-card_tag {
+  font-size: 0.74rem;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* ---------- in the media ------------------------------------------------- */
+.press-list_component {
+  display: grid;
+  gap: 0;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--line);
+}
+.press-item_component {
+  display: grid;
+  grid-template-columns: 15rem 1fr;
+  gap: var(--space-small);
+  align-items: baseline;
+  padding: 1.15rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.press-item_outlet {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.press-item_title {
+  font-family: var(--font-display);
+  font-size: 1.22rem;
+  line-height: 1.4;
+}
+
+/* ---------- service area ------------------------------------------------- */
+.area-list_component {
+  max-width: 68ch;
+  margin-inline: auto;
+  font-size: 0.95rem;
+  line-height: 2.1;
+  color: var(--fg-mute);
+}
+
+/* ---------- category band on the treatments hub -------------------------- */
+/* A full-width photograph with the category name and its treatment list over
+   the ivory beneath it. One per category, alternating side. */
+.category-band_component {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xlarge);
+  align-items: center;
+}
+.category-band_component.is-reverse .category-band_media {
+  order: 2;
+}
+.category-band_media {
+  position: relative;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  /* The stock in these slots is 16:9; the ratio is set here so a replacement
+     photograph of any shape still lands in the same hole. */
+  aspect-ratio: 16 / 10;
+}
+.category-band_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.category-band_body {
+  display: grid;
+  gap: var(--space-small);
+}
+.category-band_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin: var(--space-xsmall) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.category-band_list li {
+  padding: 0.36rem 0.7rem;
+  font-size: 0.82rem;
+  line-height: 1.3;
+  color: var(--fg-body);
+  background-color: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+}
+/* The named treatments the practice leads with in this category. */
+.category-band_lead {
+  font-weight: 600;
+  color: var(--accent);
+  border-color: color-mix(in srgb, var(--accent-flat) 45%, var(--line));
+}
+
+/* ---------- training timeline (about) ------------------------------------ */
+/* An ordered list with a hairline running down the left and a small square
+   node per entry. Deliberately not a card grid: the order is the meaning. */
+.timeline_component {
+  display: grid;
+  gap: var(--space-medium);
+  margin: 0;
+  padding: 0 0 0 var(--space-medium);
+  list-style: none;
+  border-left: 1px solid var(--line);
+}
+.timeline_item {
+  position: relative;
+}
+.timeline_item::before {
+  content: "";
+  position: absolute;
+  /* Half the node, plus the padding, puts it centred on the rule. */
+  left: calc(-1 * var(--space-medium) - 3px);
+  top: 0.5em;
+  width: 5px;
+  height: 5px;
+  background-color: var(--accent-flat);
+}
+.timeline_label {
+  margin: 0 0 0.3rem;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.timeline_body {
+  margin: 0;
+  max-width: 68ch;
+  color: var(--fg-body);
+}
+
+/* ---------- recovery cards (book) ---------------------------------------- */
+.recovery-grid_component {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 1px;
+  background-color: var(--line);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+}
+.recovery-card_component {
+  display: grid;
+  gap: 0.55rem;
+  align-content: start;
+  padding: var(--space-medium) 1.5rem;
+  background-color: var(--bg-card);
+}
+.recovery-card_label {
+  margin: 0;
+  font-size: 0.76rem;
+  font-weight: 600;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.recovery-card_body {
+  margin: 0;
+  font-size: 0.92rem;
+  line-height: 1.6;
+  color: var(--fg-body);
+}
+
+/* The required marker in the booking form. It has been in the markup since
+   the first build with no rule behind it, so it rendered as body-coloured
+   punctuation; it now reads as the accent, like every other marker. */
+.form_required {
+  color: var(--accent);
+}
+
+/* ---------- band media --------------------------------------------------- */
+/* A wide image used to break up a run of text sections. Deliberately shallow:
+   these are atmosphere, not content, and a 16:9 in the middle of a page reads
+   as a hero and steals the eye from the copy either side of it. */
+.band-media_component {
+  position: relative;
+  overflow: hidden;
+  aspect-ratio: 16 / 6;
+  border-radius: var(--radius-card);
+}
+.band-media_component img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+/* Deeper, for the one or two places the image carries more weight. */
+.band-media_component.is-tall {
+  aspect-ratio: 16 / 8;
+}
+@media (max-width: 767px) {
+  /* A 16:6 crop at 390px is a letterbox slot with nothing readable in it. */
+  .band-media_component,
+  .band-media_component.is-tall {
+    aspect-ratio: 4 / 3;
+  }
+}
+
+/* ---------- placeholder before/after cases ------------------------------- */
+/* The Results gallery needs to be DEMONSTRABLE before the practice has
+   consented photography: the client has to see the filter, the grid and the
+   before/after wipe working. These stand in for the photographs.
+
+   They are deliberately, unmistakably not photographs. Diagonal hatch, the
+   brand's own stone tones, and the word PLACEHOLDER on every layer, so no
+   screenshot of this page can ever be mistaken for a patient result and no
+   one can ship it by forgetting. Swapping in a real case means replacing the
+   two `.compare_layer > div` panels with `<img>` and deleting `is-placeholder`.
+
+   See results.body.html for the markup and HANDOFF.md §3 for the consent rule. */
+/* The hatch lives on the LAYER; the panel is an absolutely-positioned overlay
+   that fills it. An earlier version made the layer a centring grid, which
+   shrink-wrapped the panel to its text and left `justify-content` with nothing
+   to push against, so both labels stayed stacked on the wipe line. */
+.compare_layer.is-placeholder {
+  background-color: var(--ivory-deep);
+  background-image: repeating-linear-gradient(
+    45deg,
+    transparent 0 10px,
+    color-mix(in srgb, var(--line-strong) 40%, transparent) 10px 11px
+  );
+}
+.case-placeholder_panel {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  align-content: center;
+  gap: 0.3rem;
+  /* Each label sits in its own half, so the wipe never cuts through one and
+     the two never overlap wherever the handle is dragged to. */
+  justify-items: start;
+  padding-left: 10%;
+  text-align: left;
+}
+.compare_layer.is-after .case-placeholder_panel {
+  justify-items: end;
+  padding-left: 0;
+  padding-right: 10%;
+  text-align: right;
+}
+/* The "after" layer is a half-step darker so the wipe is legible even though
+   both sides are placeholders. */
+.compare_layer.is-after.is-placeholder {
+  background-color: color-mix(in srgb, var(--accent-flat) 12%, var(--ivory-deep));
+}
+/* One word, and it has to be READABLE. The first version put "Before" here in
+   muted 0.7rem, which duplicated the corner tag and rendered as good as
+   invisible, so the panel looked like an empty box rather than a labelled
+   placeholder. The corner tags carry before/after; this carries the warning. */
+.case-placeholder_note {
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--fg-body);
+}
+
+/* ---------- responsive --------------------------------------------------- */
+@media (max-width: 991px) {
+  .review-grid_component {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .recovery-grid_component {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .category-band_component {
+    gap: var(--space-large);
+  }
+}
+@media (max-width: 767px) {
+  .review-grid_component {
+    grid-template-columns: 1fr;
+  }
+  .recovery-grid_component {
+    grid-template-columns: 1fr;
+  }
+  .press-item_component {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+  .category-band_component,
+  .category-band_component.is-reverse {
+    grid-template-columns: 1fr;
+  }
+  /* Reset the order swap so every band reads picture-then-copy on a phone,
+     rather than alternating and stranding a heading under the wrong image. */
+  .category-band_component.is-reverse .category-band_media {
+    order: 0;
+  }
+}

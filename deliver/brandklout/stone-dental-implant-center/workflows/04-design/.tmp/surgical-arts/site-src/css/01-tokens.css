@@ -1,0 +1,163 @@
+/* ===========================================================================
+   SCULPTED IVORY — the design system Dr. Mona picked (Asana 1217846850268874,
+   board "Stone Surgical Arts Website Redesign / 01 — Sculpted Ivory").
+
+   The board publishes five colours and two typefaces. Those are reproduced here
+   exactly, and everything else is derived from them.
+
+     Ivory    #F6F4EF     Stone  #D8D3CA     Charcoal #272727
+     Green    #8FBC46     White  #FFFFFF
+     Cormorant Garamond (display) + Inter (body)
+
+   THE ONE DELIBERATE DEVIATION — read before "fixing" it.
+
+   Brand green is a light yellow-green. Measured against the palette's own
+   grounds it gives:
+
+     white text on #8FBC46 ............. 2.22:1   fails AA at every size
+     #8FBC46 text on ivory ............. 2.02:1   fails AA at every size
+
+   The board's button mock is white uppercase on green, which is the failing
+   combination, at the smallest type on the page. This is a surgical practice
+   whose previous site carried an /ada page, so the build does not ship it. Two
+   named tokens carry the fix, and both keep the brand hue:
+
+     --green-ink  #55731F   green taken dark enough to CLEAR AA as text
+                            4.95:1 on ivory, 5.44:1 on white
+     --btn-ink    charcoal  the label colour on a brand-green fill
+                            6.72:1 on #8FBC46
+
+   Buttons therefore stay brand green; their labels are charcoal, not white.
+   Brand green is still used at full strength for fills, rules, icons and
+   display-sized numerals, where contrast rules do not apply. If the client
+   insists on white-on-green, change --btn-ink here — one line, whole site.
+   =========================================================================== */
+:root {
+  /* --- the board's five, verbatim --- */
+  --ivory: #f6f4ef;
+  --stone: #d8d3ca;
+  --charcoal: #272727;
+  --green: #8fbc46;
+  --white: #ffffff;
+
+  /* --- derived --- */
+  --ivory-deep: #efece4; /* the alternate band, half a step down from ivory */
+  --stone-soft: #e7e3dc; /* hairlines and card edges on ivory */
+  --green-ink: #55731f; /* text-sized green — clears AA, see above */
+  --green-deep: #6f9433; /* hover on a green fill */
+  --green-wash: #f0f5e5; /* the faintest green ground, for callouts */
+  --charcoal-soft: #4a4a4a; /* body copy — softer than headings, still 8:1+ */
+  --charcoal-mute: #6a6862; /* meta, captions, disabled */
+
+  /* --- semantic layer. Sections paint from these names, never from a hex. --- */
+  --bg: var(--ivory);
+  --bg-alt: var(--ivory-deep);
+  --bg-card: var(--white);
+  --bg-deep: var(--charcoal);
+  --fg: var(--charcoal);
+  --fg-body: var(--charcoal-soft);
+  --fg-mute: var(--charcoal-mute);
+  --accent: var(--green-ink); /* accent AS TEXT */
+  --accent-flat: var(--green); /* accent as a FILL or a RULE */
+  --btn-ink: var(--charcoal); /* label on a brand-green fill */
+  --line: var(--stone-soft);
+  --line-strong: var(--stone);
+  --focus: var(--green-ink);
+  /* Scrim over photography so display type reads on any image. */
+  --scrim: linear-gradient(180deg, rgba(39, 39, 39, 0.42) 0%, rgba(39, 39, 39, 0.12) 38%, rgba(39, 39, 39, 0.72) 100%);
+  --scrim-side: linear-gradient(100deg, rgba(39, 39, 39, 0.66) 0%, rgba(39, 39, 39, 0.34) 42%, rgba(39, 39, 39, 0) 72%);
+
+  /* --- type --- */
+  --font-display: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Type steps. Unitless multipliers stepped at Webflow's own breakpoints
+     (1279 / 991 / 767 / 478) so the scale maps one-to-one onto Designer
+     breakpoints, and onto Instatic's, at conversion time. Same technique as
+     the Nahlah build — rem type, px media queries, one fluid root. */
+  --t-display: 1;
+  --t-heading: 1;
+  --t-sub: 1;
+  --t-text: 1;
+
+  --size-h1: calc(4.75rem * var(--t-display));
+  --size-h2: calc(3.25rem * var(--t-heading));
+  --size-h3: calc(2.25rem * var(--t-heading));
+  --size-h4: calc(1.625rem * var(--t-sub));
+  --size-h5: calc(1.25rem * var(--t-sub));
+  --size-h6: calc(1.0625rem * var(--t-sub));
+  --size-text-large: calc(1.25rem * var(--t-text));
+  --size-text-medium: calc(1.125rem * var(--t-text));
+  --size-text-regular: calc(1rem * var(--t-text));
+  --size-text-small: calc(0.875rem * var(--t-text));
+  --size-text-tiny: calc(0.75rem * var(--t-text));
+
+  /* --- Client-First spacing scale --- */
+  --space-0: 0rem;
+  --space-tiny: 0.125rem;
+  --space-xxsmall: 0.25rem;
+  --space-xsmall: 0.5rem;
+  --space-small: 1rem;
+  --space-medium: 2rem;
+  --space-large: 3rem;
+  --space-xlarge: 4rem;
+  --space-xxlarge: 5rem;
+  --space-huge: 6rem;
+  --space-xhuge: 8rem;
+  --space-xxhuge: 12rem;
+
+  --radius: 2px; /* the board's cards are barely rounded, and squared at the top */
+  --radius-card: 4px;
+  --shadow-card: 0 1px 2px rgba(39, 39, 39, 0.04), 0 8px 24px rgba(39, 39, 39, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(39, 39, 39, 0.06), 0 18px 44px rgba(39, 39, 39, 0.1);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 1279px) {
+  :root {
+    --t-display: 0.82;
+    --t-heading: 0.85;
+    --t-sub: 0.92;
+  }
+}
+@media (max-width: 991px) {
+  :root {
+    --t-display: 0.7;
+    --t-heading: 0.76;
+    --t-sub: 0.88;
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --t-display: 0.56;
+    --t-heading: 0.66;
+    --t-sub: 0.84;
+  }
+}
+/* Below 479 the root itself shrinks (16px at 479 -> 14px at 320). Display type
+   wants that; body copy does not, so --t-text is raised to hold it above 16px. */
+@media (max-width: 478px) {
+  :root {
+    --t-heading: 0.6;
+    --t-sub: 0.82;
+    --t-text: 1.1;
+  }
+}
+
+/* The dark band — the invitation strip and the footer opt in with this, so a
+   section can be flipped by the scope it sits in rather than by rewriting it. */
+[data-theme="dark"] {
+  --bg: var(--charcoal);
+  --bg-alt: #1e1e1e;
+  --bg-card: #333230;
+  --fg: var(--white);
+  --fg-body: rgba(255, 255, 255, 0.8);
+  --fg-mute: rgba(255, 255, 255, 0.62);
+  --accent: var(--green); /* on charcoal the brand green is 6.72:1 — fine as text */
+  --accent-flat: var(--green);
+  --line: rgba(255, 255, 255, 0.14);
+  --line-strong: rgba(255, 255, 255, 0.28);
+  --focus: var(--green);
+  background-color: var(--bg);
+  color: var(--fg-body);
+}

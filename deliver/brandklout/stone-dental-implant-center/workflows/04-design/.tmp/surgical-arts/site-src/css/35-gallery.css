@@ -1,0 +1,192 @@
+/* Results — the filterable before/after gallery, and the reviews band.
+
+   The gallery ships EMPTY on purpose. The archived site published 33 real
+   patient cases; those patients consented to a site that no longer exists, and
+   re-publishing them off an archive is not consent. The filter, the grid, the
+   before/after wipe and the empty state are all built and working, so the day
+   the practice supplies consented cases they drop into `.gallery_grid` as
+   `.case-card_component` items and nothing else has to change. */
+
+.filter_bar {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: var(--space-medium);
+}
+
+.gallery_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.25rem;
+}
+@media (max-width: 991px) {
+  .gallery_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 478px) {
+  .gallery_grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+.case-card_component {
+  display: grid;
+  gap: 0.75rem;
+}
+.case-card_component[hidden] {
+  display: none;
+}
+
+/* The before/after wipe. A range input drives --pos; the "after" layer is
+   clipped to it. Keyboard-operable because it IS a range input, not a div. */
+.compare_component {
+  --pos: 50%;
+  position: relative;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background-color: var(--stone);
+}
+.compare_layer {
+  position: absolute;
+  inset: 0;
+}
+.compare_layer img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.compare_layer.is-after {
+  clip-path: inset(0 0 0 var(--pos));
+}
+.compare_tag {
+  position: absolute;
+  bottom: 0.75rem;
+  padding: 0.3rem 0.7rem;
+  background-color: rgba(39, 39, 39, 0.72);
+  border-radius: 2px;
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--white);
+}
+.compare_tag.is-before {
+  left: 0.75rem;
+}
+.compare_tag.is-after {
+  right: 0.75rem;
+}
+.compare_handle {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  margin: 0;
+  opacity: 0;
+  cursor: ew-resize;
+}
+.compare_line {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: var(--pos);
+  width: 2px;
+  background-color: var(--white);
+  pointer-events: none;
+}
+.compare_line::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2.4rem;
+  height: 2.4rem;
+  transform: translate(-50%, -50%);
+  border: 2px solid var(--white);
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(2px);
+}
+
+/* Was a space-between flex row. At three columns a card is ~380px, and
+   "MyEllevate(R) neck lift" beside "12 weeks after - placeholder" overlapped:
+   two long strings pulled to opposite edges of a narrow box. Stacked, the
+   title gets the full width and the meta line sits under it. */
+.case-card_meta {
+  display: grid;
+  gap: 0.3rem;
+  align-content: start;
+}
+.case-card_title {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  color: var(--fg);
+}
+.case-card_tag {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-mute);
+}
+
+/* Empty state — what the page shows today. */
+/* `display: grid` here beats the reset's `[hidden] { display: none }` - both
+   are one selector, and this file loads later - so `empty.hidden = true` in
+   00-runtime.js did nothing. Latent until 2026-08-31: with no cases in the
+   gallery the empty state was supposed to be visible anyway, so the bug only
+   appeared the moment placeholder cases were added and it kept showing
+   underneath them. The same guard already exists for .case-card_component and
+   .tabs_pane; this is the third of the set. */
+.gallery_empty[hidden] {
+  display: none;
+}
+.gallery_empty {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  padding: var(--space-huge) 1.5rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-card);
+  text-align: center;
+}
+.gallery_empty-title {
+  font-family: var(--font-display);
+  font-size: var(--size-h3);
+  color: var(--fg);
+}
+.gallery_empty-text {
+  max-width: 46ch;
+  color: var(--fg-body);
+}
+
+/* --- reviews -------------------------------------------------------------
+   The sister site runs Elfsight for reviews. Rather than hard-code testimonial
+   copy that will go stale, the page reserves the same slot: drop the Elfsight
+   div in here at Instatic setup and the layout is already right. ----------- */
+.embed_slot {
+  display: grid;
+  place-items: center;
+  gap: 0.6rem;
+  min-height: 22rem;
+  padding: 2rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-card);
+  text-align: center;
+  color: var(--fg-mute);
+}
+.embed_slot-title {
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.embed_slot-text {
+  max-width: 44ch;
+  font-size: var(--size-text-small);
+}
+.embed_slot code {
+  font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 0.85em;
+  color: var(--fg);
+}
