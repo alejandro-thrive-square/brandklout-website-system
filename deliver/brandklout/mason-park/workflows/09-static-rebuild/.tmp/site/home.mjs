@@ -29,6 +29,8 @@
 // service page's own featured image, so the pairing is the client's, not ours.
 // ===========================================================================
 
+import { makeChapters } from "./chapters.mjs";
+
 const BOOK = "https://www.flexbook.me/masonpark/1";
 
 const MAP_EMBED = "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3463.0585305167815!2d-95.75121988455305!3d29.775949038160515!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x86412740e7dd5def%3A0xfa1ab8c6e696e133!2sMason%20Park%20Dental%20-%20Katy%20Dentist!5e0!3m2!1sen!2sus!4v1638807674675!5m2!1sen!2sus";
@@ -179,6 +181,10 @@ const VERSUS = [
 
 export function home(d, h) {
   const esc = h.esc;
+  // The frozen system. Every chapter below is composed from it rather than
+  // writing its own markup, so a change to a chapter's shape happens once and
+  // an inner page gets the same vocabulary for free.
+  const K = makeChapters(h);
 
   // Featured photography, read from each service page's own content file, so
   // an image slot is never empty and never a stock stand-in for a page that
@@ -234,28 +240,22 @@ export function home(d, h) {
   // large. The previous hero put the photo in a box beside a paragraph; a box
   // beside a paragraph is a brochure, and it is what the team called ugly.
   // =======================================================================
-  const arrival = `
-<section class="ch ch-arrival" id="arrival" data-chapter="0" data-chapter-name="Arrival" data-theme="dark">
-  <div class="ar-bg" data-drift>
-    ${h.img("/wp-content/uploads/2023/11/g7-1536x1024.jpg", "The team at Mason Park Dental of Katy", { sizes: "100vw", eager: true, w: 1536, h: 1024 })}
-  </div>
-  <div class="ar-veil" aria-hidden="true"></div>
-  <div class="ar-in">
-    ${tag("00", "Arrival")}
-    <h1 class="ar-title" data-split>Two dental practices.<br>One <em>front door.</em></h1>
-    <p class="ar-lede" data-anim="hide">A general practice for adults and a board certified pediatric practice for children, sharing one building on Kingsland Boulevard. Your six month old and your grandfather, the same afternoon.</p>
-    <div class="ar-actions" data-anim="hide">
-      <a class="button is-lg" href="${esc(BOOK)}" target="_blank" rel="noopener">Book an appointment</a>
-      <a class="button is-ghost-light is-lg" href="#together">See how that works</a>
-    </div>
-    <div class="ar-meta" data-anim="hide">
-      <div><b>Adults and kids</b><span>Under one roof</span></div>
-      <div><b>Board certified</b><span>Pediatric dentistry</span></div>
-      <div><b>Mon to Thu</b><span>Appointments</span></div>
-    </div>
-  </div>
-  <p class="ar-cue" aria-hidden="true"><span>Scroll</span><i></i></p>
-</section>`;
+  const arrival = K.arrival({
+    n: 0, name: "Arrival",
+    image: "/wp-content/uploads/2023/11/g7-1536x1024.jpg",
+    alt: "The team at Mason Park Dental of Katy", w: 1536, height: 1024,
+    title: "Two dental practices.<br>One <em>front door.</em>",
+    lede: "A general practice for adults and a board certified pediatric practice for children, sharing one building on Kingsland Boulevard. Your six month old and your grandfather, the same afternoon.",
+    actions: [
+      K.button({ label: "Book an appointment", href: BOOK, large: true, external: true }),
+      K.button({ label: "See how that works", href: "#together", ghost: true, large: true }),
+    ].join("\n      "),
+    facts: [
+      ["Adults and kids", "Under one roof"],
+      ["Board certified", "Pediatric dentistry"],
+      ["Mon to Thu", "Appointments"],
+    ],
+  });
 
   // =======================================================================
   // CHAPTER 01 — THE RELAY
@@ -298,13 +298,7 @@ export function home(d, h) {
       <p class="tg-lede">Two practices share this address. Dr. Nguyen is a board certified pediatric dentist, which is a three year specialty beyond dental school, and she is here rather than across town. That single fact is what collapses two trips into one.</p>
     </div>
 
-    <div class="tg-figures" id="tgFigures">
-      ${FIGURES.map(([n, suf, label]) => `
-      <div class="tg-fig">
-        <b data-count="${esc(n)}"${suf ? ` data-suffix="${esc(suf)}"` : ""}>${esc(n)}${esc(suf)}</b>
-        <span>${esc(label)}</span>
-      </div>`).join("")}
-    </div>
+    ${K.figures(FIGURES)}
 
     <div class="tg-pair">
       <figure class="tg-shot">
@@ -320,30 +314,16 @@ export function home(d, h) {
       </div>
     </div>
 
-    <div class="tg-versus">
-      <h3>Here, against the way most families do it.</h3>
-      <div class="vs-table" role="table" aria-label="Mason Park compared with using two separate dental practices">
-        <div class="vs-row is-head" role="row">
-          <span role="columnheader" class="vs-a">At Mason Park</span>
-          <span class="vs-mid" aria-hidden="true">vs</span>
-          <span role="columnheader" class="vs-b">Two separate practices</span>
-        </div>
-        ${VERSUS.map(([a, b]) => `
-        <div class="vs-row" role="row">
-          <span role="cell" class="vs-a">${esc(a)}</span>
-          <span class="vs-mid" aria-hidden="true"><i></i></span>
-          <span role="cell" class="vs-b">${esc(b)}</span>
-        </div>`).join("")}
-      </div>
-    </div>
+    ${K.versus({
+      title: "Here, against the way most families do it.",
+      a: "At Mason Park", b: "Two separate practices", rows: VERSUS,
+      label: "Mason Park compared with using two separate dental practices",
+    })}
   </div>
 
-  <div class="tg-marquee" aria-hidden="true">
-    <div class="mq-row" id="mqRow">
-      ${["Board Certified Pediatric Dentist", "Kois Center Trained", "Academy of General Dentistry", "Sedation Dentistry", "Invisalign Provider", "Same Day Emergencies", "0% APR Financing", "Open Monday to Thursday"]
-        .map((s) => `<span>${esc(s)}</span><b>&#9670;</b>`).join("")}
-    </div>
-  </div>
+  ${K.marquee(["Board Certified Pediatric Dentist", "Kois Center Trained", "Academy of General Dentistry",
+               "Sedation Dentistry", "Invisalign Provider", "Same Day Emergencies", "0% APR Financing",
+               "Open Monday to Thursday"])}
 </section>`;
 
   // =======================================================================
@@ -359,30 +339,13 @@ export function home(d, h) {
     ${tag("03", "The Range")}
     <h2 data-split>Thirty five treatments. One building. No referral out.</h2>
   </div>
-  ${ARCS.map((arc, i) => `
-  <article class="rg-arc${i % 2 ? " is-flipped" : ""}" data-arc="${esc(arc.key)}">
-    <div class="rg-media" data-drift>
-      ${h.img(featured(arc.lead, "/wp-content/uploads/2023/11/Dentist-in-Katy-Office.webp"), esc(arc.label) + " at Mason Park Dental", { sizes: "(max-width: 899px) 100vw, 48vw" })}
-      <span class="rg-numeral" aria-hidden="true">${esc(arc.numeral)}</span>
-    </div>
-    <div class="rg-body">
-      <p class="rg-label">${esc(arc.label)}</p>
-      <h3>${esc(arc.title)}</h3>
-      <p class="rg-text">${esc(arc.text)}</p>
-      <ul class="rg-index">
-        ${arc.items.map(([name, blurb, href, slug]) => {
-          const to = h.link(href);
-          const thumb = featured(slug, "");
-          const inner = `
-            <span class="rg-thumb">${thumb ? h.img(thumb, "", { sizes: "72px", decorative: true }) : ""}</span>
-            <span class="rg-name">${esc(name)}</span>
-            <span class="rg-blurb">${esc(blurb)}</span>
-            <span class="rg-go" aria-hidden="true">&rarr;</span>`;
-          return `<li class="rg-item">${to ? `<a href="${esc(to)}">${inner}</a>` : `<span class="rg-item-plain">${inner}</span>`}</li>`;
-        }).join("")}
-      </ul>
-    </div>
-  </article>`).join("")}
+  ${ARCS.map((a, i) => K.arc({
+    key: a.key, numeral: a.numeral, label: a.label, title: a.title, text: a.text,
+    image: featured(a.lead, "/wp-content/uploads/2023/11/Dentist-in-Katy-Office.webp"),
+    imageAlt: a.label + " at Mason Park Dental",
+    items: a.items.map(([name, blurb, href, slug]) => ({ name, blurb, href, thumb: featured(slug, "") })),
+    flipped: i % 2 === 1,
+  })).join("")}
   <div class="wrap rg-foot">
     <a class="link-arrow" href="/our-services/">Every treatment we offer <span aria-hidden="true">&rarr;</span></a>
   </div>
@@ -400,29 +363,13 @@ export function home(d, h) {
     <h2 data-split>You will see the same faces next time.</h2>
     <p class="pe-lede">Low turnover is not a marketing line. It is why your child's hygienist remembers the trick that worked last time, and why a crown placed three years ago still matches.</p>
   </div>
-  <div class="pe-grid">
-    ${DOCTORS.map((doc) => {
-      const to = h.link(doc.href) || "/our-doctors/";
-      return `
-    <article class="pe-card">
-      <a class="pe-plate" href="${esc(to)}">
-        ${h.img(doc.image, doc.name, { sizes: "(max-width: 899px) 100vw, 31vw" })}
-        <span class="pe-veil" aria-hidden="true"></span>
-      </a>
-      <p class="pe-note">${esc(doc.note)}</p>
-      <h3><a href="${esc(to)}">${esc(doc.name)}</a></h3>
-      <p class="pe-role">${esc(doc.role)}</p>
-      <p class="pe-blurb">${esc(doc.blurb)}</p>
-    </article>`;
-    }).join("")}
-  </div>
-  <div class="pe-band">
-    ${h.img("/wp-content/uploads/2023/11/g7-1536x1024.jpg", "The full team at Mason Park Dental of Katy", { sizes: "100vw" })}
-    <div class="pe-band-in">
-      <p>Behind the three doctors, the hygienists and front desk most families actually see the most.</p>
-      <a class="link-arrow is-light" href="/our-team/">Meet the team <span aria-hidden="true">&rarr;</span></a>
-    </div>
-  </div>
+  ${K.plates(DOCTORS)}
+  ${K.band({
+    image: "/wp-content/uploads/2023/11/g7-1536x1024.jpg",
+    alt: "The full team at Mason Park Dental of Katy",
+    text: "Behind the three doctors, the hygienists and front desk most families actually see the most.",
+    link: K.linkArrow({ label: "Meet the team", href: "/our-team/", light: true }),
+  })}
 </section>`;
 
   // =======================================================================
@@ -430,32 +377,18 @@ export function home(d, h) {
   // Pinned horizontal. The second place scroll does work. Financing is folded
   // into step three, where the objection actually lands.
   // =======================================================================
-  const path = `
-<section class="ch ch-path" id="path" data-chapter="5" data-chapter-name="The Path">
-  <div class="pa-pin" id="pathPin">
-    <div class="pa-head">
-      ${tag("05", "The Path")}
-      <h2>Four steps, and you know the price before the third.</h2>
-    </div>
-    <div class="pa-track" id="pathTrack">
-      ${PATH.map((s) => `
-      <article class="pa-card">
-        <div class="pa-shot">${h.img(s.image, s.alt, { sizes: "(max-width: 899px) 82vw, 30vw" })}</div>
-        <span class="pa-no">${esc(s.n)}</span>
-        <h3>${esc(s.title)}</h3>
-        <p>${esc(s.text)}</p>
-      </article>`).join("")}
-      <article class="pa-card is-cta">
+  const path = K.path({
+    n: 5, name: "The Path",
+    title: "Four steps, and you know the price before the third.",
+    steps: PATH,
+    cta: `<article class="pa-card is-cta">
         <span class="pa-no">&#9670;</span>
         <h3>Start at step one.</h3>
         <p>Booking online takes about a minute, and the front desk will put the whole family in one slot if you ask.</p>
-        <a class="button" href="${esc(BOOK)}" target="_blank" rel="noopener">Book an appointment</a>
+        ${K.button({ label: "Book an appointment", href: BOOK, external: true })}
         <p class="pa-call">Or call <a href="${h.PRACTICE.phoneHref}">${esc(h.PRACTICE.phone)}</a></p>
-      </article>
-    </div>
-    <div class="pa-bar" aria-hidden="true"><i id="pathBar"></i></div>
-  </div>
-</section>`;
+      </article>`,
+  });
 
   // =======================================================================
   // CHAPTER 06 — THE PROOF
@@ -472,25 +405,12 @@ export function home(d, h) {
     </div>
     <p class="pr-note">Every quote on this page is a review the practice's own patients left on Google. Nothing here is written by us, and nothing is trimmed to change what it says.</p>
   </div>
-  <div class="wrap pr-lead">
-    <figure class="pr-quote">
-      <span class="pr-mark" aria-hidden="true">&#8220;</span>
-      <blockquote id="proofQuote">${esc(lead.quote)}</blockquote>
-      <figcaption><span class="pr-rule" aria-hidden="true"></span>${esc(lead.author)}<b>Google review</b></figcaption>
-    </figure>
-    <div class="pr-portrait" data-drift>
-      ${h.img("/wp-content/uploads/2023/08/AdobeStock_388565488-scaled.jpeg", "A long standing patient of the practice", { sizes: "(max-width: 959px) 100vw, 34vw" })}
-    </div>
-  </div>
-  <div class="pr-rail" id="proofRail">
-    <div class="pr-rail-in">
-      ${rail.map((r) => `
-      <blockquote class="pr-chip">
-        <p>${esc(r.quote)}</p>
-        <cite>${esc(r.author)}</cite>
-      </blockquote>`).join("")}
-    </div>
-  </div>
+  ${K.quote({
+    text: lead.quote, author: lead.author,
+    portrait: "/wp-content/uploads/2023/08/AdobeStock_388565488-scaled.jpeg",
+    portraitAlt: "A long standing patient of the practice",
+  })}
+  ${K.quoteRail(rail)}
   <div class="wrap pr-foot">
     <a class="link-arrow" href="/patient-reviews/">Read more reviews <span aria-hidden="true">&rarr;</span></a>
   </div>
@@ -499,14 +419,7 @@ export function home(d, h) {
        only read on an ink ground. Rendered here rather than through
        C.badgeStrip, which emits its own full section and left a band of empty
        warm above and below it. -->
-  <div class="pr-badges">
-    <div class="pr-badges-in">
-      <p class="pr-badges-label">Credentialed by</p>
-      <ul>
-        ${h.ACCREDITATIONS.map(([src, alt]) => `<li>${h.img(src, alt, { sizes: "150px" })}</li>`).join("")}
-      </ul>
-    </div>
-  </div>
+  ${K.badges(h.ACCREDITATIONS)}
 </section>` : "";
 
   // =======================================================================
@@ -526,11 +439,11 @@ export function home(d, h) {
         <a class="button is-lg" href="${esc(BOOK)}" target="_blank" rel="noopener">Book an appointment</a>
         <a class="button is-ghost-light is-lg" href="${h.PRACTICE.phoneHref}">${esc(h.PRACTICE.phone)}</a>
       </div>
-      <dl class="iv-facts">
-        <div><dt>Address</dt><dd><a href="${esc(h.PRACTICE.maps)}" target="_blank" rel="noopener">${esc(h.PRACTICE.street)}<br>${esc(h.PRACTICE.city)}, ${esc(h.PRACTICE.region)} ${esc(h.PRACTICE.postal)}</a></dd></div>
-        <div><dt>Hours</dt><dd>Mon and Wed <b>9am to 6pm</b><br>Tue and Thu <b>8am to 5pm</b><br>Fri to Sun <b>Closed</b></dd></div>
-        <div><dt>Emergencies</dt><dd>Call the practice. We keep same day slots for pain, breaks and knocked out teeth.</dd></div>
-      </dl>
+      ${K.facts([
+        ["Address", `<a href="${esc(h.PRACTICE.maps)}" target="_blank" rel="noopener">${esc(h.PRACTICE.street)}<br>${esc(h.PRACTICE.city)}, ${esc(h.PRACTICE.region)} ${esc(h.PRACTICE.postal)}</a>`],
+        ["Hours", "Mon and Wed <b>9am to 6pm</b><br>Tue and Thu <b>8am to 5pm</b><br>Fri to Sun <b>Closed</b>"],
+        ["Emergencies", "Call the practice. We keep same day slots for pain, breaks and knocked out teeth."],
+      ])}
     </div>
     <div class="iv-aside">
       <figure class="iv-shot">
@@ -544,18 +457,10 @@ export function home(d, h) {
     </div>
   </div>
 
-  ${homeFaqs.length ? `
-  <div class="wrap iv-faq">
-    <h3>Before you book</h3>
-    <div class="iv-faq-list">
-      ${homeFaqs.map((f) => `
-      <details class="faq_item">
-        <summary class="faq_question">${esc(f.question)}</summary>
-        <div class="faq_answer">${f.html}</div>
-      </details>`).join("")}
-    </div>
-    <a class="link-arrow is-light" href="/faq-page/">All questions <span aria-hidden="true">&rarr;</span></a>
-  </div>` : ""}
+  ${K.faqList(homeFaqs, {
+    heading: "Before you book",
+    link: K.linkArrow({ label: "All questions", href: "/faq-page/", light: true }),
+  })}
 </section>`;
 
   return [arrival, relay, together, range, people, path, proof, invitation]
