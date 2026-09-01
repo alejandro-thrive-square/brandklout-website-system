@@ -9,7 +9,7 @@
 
   Serve the surgical-arts folder and open http://localhost:8792/preview.html
       node ../../01-content-intake/.tmp/serve.mjs . 8792
-  Change the page with ?p=treatments.html
+  Since 2026-09-01 the site is index.html alone, so the page switcher is gone.
 -->
 <style>
   body { margin: 0; padding: 16px; background: #333; color: #eee; font: 13px system-ui; }
@@ -18,19 +18,13 @@
   figure { margin: 0; }
   figcaption { padding: 6px 0; color: #bbb; }
   iframe { border: 0; background: #fff; display: block; }
-  nav a { color: #9fd15a; margin-right: 12px; }
 </style>
 <h1>Responsive preview</h1>
-<nav id="nav"></nav>
 <div class="row">
   <figure><figcaption>390 × 844 — phone</figcaption><iframe id="f1" width="390" height="844"></iframe></figure>
   <figure><figcaption>768 × 844 — tablet</figcaption><iframe id="f2" width="768" height="844"></iframe></figure>
   <figure><figcaption>1280 × 844 — laptop</figcaption><iframe id="f3" width="1280" height="844"></iframe></figure>
 </div>
 <script>
-  const PAGES = ['index.html','treatments.html','treatment-detail.html','memberships.html','results.html','about.html','book.html'];
-  const page = new URLSearchParams(location.search).get('p') || 'index.html';
-  document.getElementById('nav').innerHTML = PAGES
-    .map(p => `<a href="?p=${p}">${p === page ? '▸ ' : ''}${p}</a>`).join('');
-  for (const id of ['f1','f2','f3']) document.getElementById(id).src = 'final-site/' + page;
+  for (const id of ['f1','f2','f3']) document.getElementById(id).src = 'final-site/index.html';
 </script>

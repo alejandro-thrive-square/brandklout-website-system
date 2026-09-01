@@ -159,7 +159,27 @@ for (const m of cssCode.matchAll(/url\(["']?(?!data:|https?:)([^"')]+)["']?\)/g)
   if (!fs.existsSync(abs)) fail("assets/site.css", `url() missing: ${m[1]}`);
 }
 
-// --- unused assets, so nothing ships that nothing points at ---
+/* --- unused assets, so nothing ships that nothing points at ---------------
+   KEPT DELIBERATELY since 2026-09-01. Twenty-odd images in the library are
+   unreferenced because the pages that used them were deleted, not because they
+   were a mistake: the client kept the home page and asked for the asset library
+   to stay. They are generated or licensed work and re-making them is the
+   expensive part, so they are warnings and not failures, and this note exists
+   so the next reader does not "tidy" them away.
+
+   A NEW unreferenced asset is still worth seeing, which is why this is not
+   silenced outright. Anything in RETIRED is one of the known twenty; a name
+   that is not on the list is genuinely new. */
+const RETIRED = new Set([
+  "cat-face.webp", "dr-stone-office.avif", "gen-contour-gauges.webp",
+  "gen-iclight-wand.webp", "gen-injectables.webp", "gen-instruments-warm.webp",
+  "gen-laser-device.webp", "gen-linen-detail.webp", "gen-marble-jawline.webp",
+  "gen-or-light.webp", "gen-planning.webp", "gen-procedure-room.webp",
+  "gen-recovery-room.webp", "gen-surgical-loupes.webp", "gen-surgical-suite.webp",
+  "gen-suture-tray.webp", "membership-still.webp", "ssa-front-desk.webp",
+  "ssa-team.webp", "ssa-treatment-room.webp", "staff-brooke.webp",
+]);
+let retired = 0;
 const allHtml = pages.map(load).join("");
 for (const f of fs.readdirSync(path.join(SITE, "assets"))) {
   if (f === "site.css" || f === "site.js" || f === "vendor.js") continue;
@@ -175,8 +195,13 @@ for (const f of fs.readdirSync(path.join(SITE, "assets"))) {
     }
     continue;
   }
-  if (!allHtml.includes(f) && !cssCode.includes(f)) warn("assets", `${f} is not referenced anywhere`);
+  if (!allHtml.includes(f) && !cssCode.includes(f)) {
+    if (RETIRED.has(f)) retired++;
+    else warn("assets", `${f} is not referenced anywhere`);
+  }
 }
+if (retired) console.log(`assets: ${retired} images kept from the deleted pages, unreferenced on purpose
+`);
 
 console.log(`audited ${pages.length} pages: ${pages.join(", ")}\n`);
 if (fails.length) {

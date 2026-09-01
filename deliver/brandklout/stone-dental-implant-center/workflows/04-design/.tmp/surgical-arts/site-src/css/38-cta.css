@@ -1,3 +1,5 @@
+/* REMOVED 2026-09-01: .category-ribbon_*, the four-tile band above the footer.
+   Every tile linked to a tab on the treatments hub. */
 /* The closing invitation. The board's version sits on the stone texture with
    the display line "Your Confidence. Our Commitment." and one green button;
    this is that band, reused at the foot of every page. */
@@ -51,41 +53,4 @@
 }
 .cta_component.is-dark::before {
   display: none;
-}
-
-/* The thin ribbon of category links that sits above the footer on inner pages,
-   so any page can reach any category without going back to the hub. */
-.category-ribbon_component {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 1px;
-  background-color: var(--line);
-  border-top: 1px solid var(--line);
-}
-.category-ribbon_link {
-  display: grid;
-  gap: 0.3rem;
-  padding: 1.75rem 1.5rem;
-  background-color: var(--bg);
-  text-align: center;
-  transition: background-color 0.25s var(--ease);
-}
-.category-ribbon_link:hover {
-  background-color: var(--green-wash);
-}
-.category-ribbon_name {
-  font-size: var(--size-text-tiny);
-  font-weight: 600;
-  text-transform: uppercase;
-  letter-spacing: 0.2em;
-  color: var(--fg);
-}
-.category-ribbon_count {
-  font-size: var(--size-text-tiny);
-  color: var(--fg-mute);
-}
-@media (max-width: 767px) {
-  .category-ribbon_component {
-    grid-template-columns: repeat(2, 1fr);
-  }
 }

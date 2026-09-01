@@ -11,15 +11,40 @@
 
 ## Status
 
-**Scoped, not started.** Both Asana tasks are a single line of title text with no description, no
-references, no due date, and no attachments — but public research on 2026-08-05 resolved most of
-what was blocking an estimate. See
-[discovery-findings.md](../workflows/00-client-delivery-initialization/.tmp/discovery-findings.md).
+**Stone Surgical Arts: the home page, and nothing else, as of 2026-09-01.** It was seven core pages
+on 2026-08-30 and eighteen on 2026-08-31. The client reviewed the site and kept the home page; the
+other seventeen pages and everything that existed to serve them were deleted from the repository,
+though the asset library was kept whole. Awaiting Instatic re-publish and the client decisions in
+the handoff. Start at
+[workflows/04-design/.tmp/surgical-arts/HANDOFF.md](../workflows/04-design/.tmp/surgical-arts/HANDOFF.md).
 
-**Still do not start building.** The remaining unknowns are decisions only Brandklout or the client
-can make; they are in
-[scoping-questions.md](../workflows/00-client-delivery-initialization/.tmp/scoping-questions.md),
-which has not been sent.
+> [!WARNING]
+> **The live Instatic site is still the eighteen-page version.** It has not been re-published since
+> the cut. Publishing is an atomic PUT of the whole tree, so the next `ship.sh` drops the other
+> seventeen pages from the live site. That is probably what is wanted; it should still be a
+> decision someone takes rather than a side effect.
+
+**Stone Med Spa: still not started**, and still unscoped. It is a separate brand — Instagram calls
+it *Westlake Medical Aesthetics* — and task `1217160668112180` has no page list, no design and no
+brand identity. The questions in
+[scoping-questions.md](../workflows/00-client-delivery-initialization/.tmp/scoping-questions.md)
+still apply to it and still have not been sent.
+
+### What unblocked the Surgical Arts build
+
+The 2026-08-05 note said "do not start building" because nothing was specified. Three things landed
+in Asana on 2026-08-27 that specified it:
+
+| | |
+| :--- | :--- |
+| **The page list** | Sang Huynh named seven core pages in a comment on [`1217846850268874`](https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217846850268874). **Superseded 2026-09-01** — the client kept the home page alone |
+| **The design** | Jessica: *"Dr. Mona picked this design"* — the board **01 — Sculpted Ivory**, attached to the same task |
+| **The go-ahead** | Alejandro, 2026-08-30, choosing Surgical Arts over the med spa where Sang's wording was ambiguous |
+
+Sang's comment is worded for the *med spa* but the design Dr. Mona picked is titled *Stone Surgical
+Arts*, and its four categories are Face / Neck / Skin / Non-Surgical. The build follows the design's
+taxonomy inside Sang's seven-page architecture. That decision is recorded in
+[SURGICAL-ARTS-BRIEF.md](../workflows/01-content-intake/.tmp/SURGICAL-ARTS-BRIEF.md).
 
 ## Task manifest
 
@@ -48,8 +73,8 @@ therefore **pillars 2 and 3 of a brand split that is already one-third complete*
 | Pillar | Brand | Status |
 | :--- | :--- | :--- |
 | Oral & maxillofacial surgery | Stone Dental Implant Center | **Live on Webflow.** 43 URLs. |
-| Cosmetic facial *surgery* | Stone Surgical Arts | Task `1217160668112175` — to build |
-| Non-surgical skin & aesthetics | Stone Med Spa | Task `1217160668112180` — new brand, to build |
+| Cosmetic facial *surgery* | Stone Surgical Arts | Task `1217160668112175` — built to 18 pages by 2026-08-31, **cut to the home page alone 2026-09-01** on the client's review |
+| Non-surgical skin & aesthetics | Stone Med Spa / Westlake Medical Aesthetics | Task `1217160668112180` — new brand, not started |
 
 Rough sizing, for **sequencing and capacity only**: mirroring the archived architecture is ~42 pages
 across both builds; a lean hero-procedure launch is ~21. Which one we plan against depends on the
@@ -88,21 +113,26 @@ Only decisions the client or Brandklout can make. Full set with draft wording in
 | :--- | :--- | :--- |
 | `00-client-delivery-initialization` | **Artifacts produced 2026-08-05** | Discovery + scoping questions in `.tmp/`. Questions not yet sent. |
 | `12-migration-audit-plan` | **Applies** | Confirmed: content is recovered from an archived WordPress site, and a redirect map is needed. |
-| `01-content-intake` | Blocked | Source is the Wayback archive; needs Q6/Q7 answered before extraction. |
-| `02-wireframe` → `04-design` → build | Blocked | Needs Q1–Q3. |
+| `01-content-intake` | **Done for Surgical Arts, 2026-08-30** | [SURGICAL-ARTS-BRIEF.md](../workflows/01-content-intake/.tmp/SURGICAL-ARTS-BRIEF.md). Sources: the live sister site, the practice's Instagram and Linktree, and the archived screenshots — `web.archive.org` is blocking this IP. |
+| `04-design` → build | **Done for Surgical Arts; cut back 2026-09-01** | The home page in [`.tmp/surgical-arts/`](../workflows/04-design/.tmp/surgical-arts/HANDOFF.md). Sculpted Ivory, Client-First, audited clean. Seventeen other pages were built and then deleted on the client's review; they are in git history. |
+| Instatic setup | **Next** | HANDOFF.md § "Taking it into Instatic". Uses [15-instatic-api-sync](../../dr-nahlah/workflows/15-instatic-api-sync/15-instatic-api-sync.md) and [20-instatic-domain-origins](../../../process/20-instatic-domain-origins/20-instatic-domain-origins.md). |
+| Med Spa, all phases | Blocked | Needs Q1–Q3, and a brand identity that does not exist yet. |
 
 Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING.md).
 
 ## Recommended next action
 
-**Send the question set.** It is drafted and ready in
-[scoping-questions.md](../workflows/00-client-delivery-initialization/.tmp/scoping-questions.md);
-sending is a human decision because it goes to Brandklout, and nothing has been written to Asana.
+**Send HANDOFF.md's "Before this goes live" list to Brandklout.** Nine items; four need the client,
+and two of those block launch outright — the fee schedule (recovered from a two-generation-old
+archive) and the membership tiers (drafted by us, because the practice's real programme is published
+nowhere).
 
-Two undated full-site builds sitting alongside twelve landing pages due the same week is a capacity
-question as much as a scope question — surface it rather than absorbing it.
+Then the Instatic setup, which is a session of its own: the stylesheet has to go into the style
+registry rather than as a code asset, or the site looks right and cannot be edited.
 
-Separately and independent of scope: flag the ~130 dead Surgical Arts URLs. That is ongoing SEO loss
+Still open, and still worth raising independently: **`stonesurgicalarts.com` currently resolves to
+the implant-center Webflow site**, so pointing it at the new build is a deliberate cutover, not a
+DNS afterthought. And the ~130 dead Surgical Arts deep links are still 404ing — ongoing SEO loss
 that predates our involvement and is cheap to fix.
 
 ## Project structure
@@ -111,12 +141,22 @@ that predates our involvement and is cheap to fix.
 deliver/brandklout/stone-dental-implant-center/
 ├── docs/
 │   ├── project-overview.md   # This file
-│   └── mcp-access.md         # No grants yet — read before any platform action
+│   └── mcp-access.md         # Read before any platform action
 └── workflows/
-    └── 00-client-delivery-initialization/.tmp/
-        ├── discovery-findings.md    # Public research, 2026-08-05
-        ├── scoping-questions.md     # Draft message to Brandklout — NOT sent
-        └── archived-urls-raw.txt    # ~130 archived Surgical Arts URLs
+    ├── 00-client-delivery-initialization/.tmp/
+    │   ├── discovery-findings.md      # Public research, 2026-08-05
+    │   ├── scoping-questions.md       # Draft to Brandklout — NOT sent; med spa only now
+    │   └── archived-urls-raw.txt      # ~130 archived Surgical Arts URLs
+    ├── 01-content-intake/.tmp/
+    │   ├── SURGICAL-ARTS-BRIEF.md     # Every fact used in the build, and its source
+    │   ├── serve.mjs                  # Static server (the extension refuses file://)
+    │   ├── archive-text/              # Live-site text pull + the blocked Wayback fetcher
+    │   └── wayback-screenshots/       # 112 full-page PNGs, gitignored
+    └── 04-design/.tmp/surgical-arts/
+        ├── HANDOFF.md                 # START HERE for the Instatic session
+        ├── preview.html               # 390 / 768 / 1280 side by side
+        ├── site-src/                  # Source: partials, pages, css, js, seo.json
+        └── final-site/                # Generated — never hand-edit
 ```
 
 ## Version Control

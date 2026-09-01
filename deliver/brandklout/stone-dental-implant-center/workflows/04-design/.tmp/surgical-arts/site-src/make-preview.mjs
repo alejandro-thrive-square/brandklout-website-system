@@ -17,8 +17,6 @@
  * given a file that starts with <title> renders it in quirks mode with the
  * content in an implied body, which is a plausible-looking, subtly wrong page.
  * Now it is a real file you can double-click, mail, or drop on a USB stick.
- *   - neuters links to the other seventeen pages, which are not in the file,
- *     and says so when one is clicked rather than throwing a 404 at the client
  *
  * The GSAP files are INLINED rather than loaded from a CDN on purpose. The
  * pinned chapter is the single thing this preview exists to demonstrate, and a
@@ -28,8 +26,9 @@
  *
  * Usage:  node make-preview.mjs [page.html] [out.html]
  *
- * Defaults to index.html -> ../preview-home.html. Any built page can be packed:
- *   node make-preview.mjs treatments.html ../preview-treatments.html
+ * Defaults to index.html -> ../preview-home.html, which since 2026-09-01 is the
+ * only page there is. The arguments stay because packing one page out of many
+ * is what this is for, and the site is one page only for now.
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -65,8 +64,8 @@ let html = fs.readFileSync(path.join(SITE, SRC_PAGE), "utf8");
 let css = fs.readFileSync(path.join(ASSETS, "site.css"), "utf8");
 const js = fs.readFileSync(path.join(ASSETS, "site.js"), "utf8");
 /* Only pages with `motion: true` request the GSAP bundle, so only those need it
-   inlined. treatments.html is on the journey system but does not pin or scrub,
-   and inlining 122KB it never calls would be the opposite of the point. */
+   inlined. Detected from the built page rather than assumed, so a still page
+   never carries 122KB it will not call. */
 const usesVendor = /assets\/vendor\.js/.test(html);
 const vendor = usesVendor ? fs.readFileSync(path.join(ASSETS, "vendor.js"), "utf8") : "";
 
@@ -137,29 +136,11 @@ const out = `<!doctype html>
    painting a dark ground behind a page that has no dark palette. */
 :root { color-scheme: light; }
 ${css}
-/* --- preview only: the note shown when a link leaves this one page -------- */
-.preview-note {
-  position: fixed;
-  left: 50%;
-  bottom: 1.5rem;
-  transform: translate(-50%, 1rem);
-  z-index: 999;
-  background: var(--charcoal);
-  color: #fff;
-  padding: 0.75rem 1.25rem;
-  border-radius: 2px;
-  font-family: var(--font-body);
-  font-size: 0.875rem;
-  letter-spacing: 0.01em;
-  box-shadow: 0 8px 30px rgba(39, 39, 39, 0.25);
-  opacity: 0;
-  pointer-events: none;
-  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
-  max-width: min(30rem, 90vw);
-  text-align: center;
-}
-.preview-note.is-on { opacity: 1; transform: translate(-50%, 0); }
-@media (prefers-reduced-motion: reduce) { .preview-note { transition: none; } }
+/* The preview-note toast lived here until 2026-09-01. It caught a click on a
+   link to a page that was not packed into this file and explained itself
+   instead of 404ing the reviewer. The site is one page now, and every link on
+   it is an in-page anchor, a tel: or an off-site URL — all three of which the
+   toast already let through. */
 /* The host used to supply these; a standalone file has to bring its own. */
 body { margin: 0; }
 img { max-width: 100%; }
@@ -181,29 +162,8 @@ img { max-width: 100%; }
 
 ${content}
 
-<div class="preview-note" role="status" aria-live="polite"></div>
-
 ${usesVendor ? `<script>${vendor}</script>` : "<!-- no motion bundle: this page neither pins nor scrubs -->"}
 <script>${js}</script>
-<script>
-/* Preview only. The other seventeen pages are not in this file, so an internal
-   link would hand the reviewer a 404. Say what this is instead. */
-(function () {
-  var note = document.querySelector('.preview-note');
-  var timer;
-  document.addEventListener('click', function (e) {
-    var a = e.target.closest && e.target.closest('a[href]');
-    if (!a) return;
-    var href = a.getAttribute('href');
-    if (!href || href.charAt(0) === '#' || /^(https?:|tel:|mailto:)/.test(href)) return;
-    e.preventDefault();
-    note.textContent = 'This preview is the home page only. "' + a.textContent.trim().slice(0, 40) + '" goes to a page that is not in this file.';
-    note.classList.add('is-on');
-    clearTimeout(timer);
-    timer = setTimeout(function () { note.classList.remove('is-on'); }, 3600);
-  });
-})();
-</script>
 </body>
 </html>
 `;

@@ -1,3 +1,13 @@
+/* The home page's own vocabulary.
+
+   TRIMMED 2026-09-01. This file grew to carry every journey component on the
+   site; the client kept the home page and nothing else, so the rules that
+   belonged to the seventeen deleted pages went with them — svc-head_*,
+   svc-lede_*, svc-facts_*, svc-reviews_*, spec_*, suits_*, cost_*, trust_*,
+   proof-note_*, category-band_*, hero_* and the section_* wrappers of the hub.
+   What is left is what index.html actually renders, verified by screenshot
+   diff at 390 and 1440 before and after the cut. */
+
 /* ===========================================================================
    THE JOURNEY LAYER — the editorial vocabulary, added 2026-08-31.
 
@@ -153,16 +163,6 @@
 .stone-band .display-xl,
 .stone-band .display-lg {
   color: var(--white);
-}
-
-/* A body column that is actually readable. The old build let paragraphs run
-   the full container width, which is where "big chunks of text" comes from:
-   the chunk is a measure problem before it is a length problem. */
-.measure {
-  max-width: 34rem;
-}
-.measure-short {
-  max-width: 26rem;
 }
 
 .chapter_mark {
@@ -340,7 +340,6 @@
   object-fit: cover;
   display: block;
 }
-
 
 /* --- very wide screens ---------------------------------------------------
    The arrival is full-bleed, so its media column grows with the VIEWPORT while
@@ -543,6 +542,10 @@
 .ways_card:nth-child(even) {
   margin-top: var(--space-xxlarge);
 }
+/* Was an <a> into the treatments hub until 2026-09-01. It is a <div> now: the
+   hub is gone, so the card states the category and stops there. text-decoration
+   and color stay because the rule costs nothing and the day a card becomes a
+   link again it should not also need a style fix. */
 .ways_card {
   display: block;
   text-decoration: none;
@@ -560,18 +563,12 @@
   height: 100%;
   object-fit: cover;
   display: block;
-  transition: transform 0.9s var(--ease);
 }
 /* Scoped to .js, because these are only transformed when the runtime is there
    to transform them, and an idle will-change is a compositor layer held open
    for nothing. The two scroll passes that run these scored worst in perf.mjs. */
-.js .ways_media img,
 .js .arrival_photo img {
   will-change: transform;
-}
-.ways_card:hover .ways_media img,
-.ways_card:focus-visible .ways_media img {
-  transform: scale(1.045);
 }
 .ways_index {
   position: absolute;
@@ -601,27 +598,6 @@
   font-size: var(--size-text-small);
   line-height: 1.55;
   color: var(--fg-body);
-}
-.ways_go {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  font-size: var(--size-text-tiny);
-  font-weight: 500;
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.ways_go span {
-  transition: transform 0.4s var(--ease);
-}
-.ways_card:hover .ways_go span,
-.ways_card:focus-visible .ways_go span {
-  transform: translateX(0.35rem);
-}
-.ways_foot {
-  padding-inline: var(--gutter);
-  margin-top: var(--section-sm);
 }
 
 @media (max-width: 991px) {
@@ -747,9 +723,6 @@
   font-size: var(--size-text-medium);
   line-height: 1.65;
   max-width: 32rem;
-}
-.surgeon_actions {
-  margin-top: var(--space-xlarge);
 }
 /* `align-self: stretch` plus a 4:5 ratio meant the portrait grew to whatever
    the panel beside it needed, and it reached 901px against an 800px screen.
@@ -1157,10 +1130,6 @@
   text-transform: uppercase;
   color: var(--accent);
 }
-.proof_foot {
-  padding-inline: var(--gutter);
-  margin-top: var(--space-large);
-}
 @media (max-width: 767px) {
   .proof_lead {
     grid-template-columns: 1fr;
@@ -1253,9 +1222,6 @@
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.6;
-}
-.offer_actions {
-  margin-top: var(--space-large);
 }
 @media (max-width: 991px) {
   .offer_row,
@@ -1446,30 +1412,14 @@
 .js [data-j="stagger"] > *.is-in:nth-child(4) { transition-delay: 0.24s; }
 .js [data-j="stagger"] > *.is-in:nth-child(5) { transition-delay: 0.32s; }
 .js [data-j="stagger"] > *.is-in:nth-child(6) { transition-delay: 0.4s; }
-
-/* Masked line reveal: each line sits in a clipped box and slides up out of it.
-   10-journey.js wraps the lines; until it does, the rule below does nothing,
-   so an unsplit heading is simply a heading. */
-.js .j-line-mask {
-  display: block;
-  overflow: hidden;
-}
-.js .j-line {
-  display: block;
-  transform: translateY(105%);
-  transition: transform 1s var(--ease);
-}
-.js .is-in .j-line,
-.js .j-line-mask.is-in .j-line {
+.js .is-in .j-line {
   transform: none;
 }
-.js .j-line:nth-child(1) { transition-delay: 0.02s; }
 
 @media (prefers-reduced-motion: reduce) {
   .js [data-j],
   .js [data-j] > *,
-  .js [data-j="stagger"] > *,
-  .js .j-line {
+  .js [data-j="stagger"] > * {
     opacity: 1 !important;
     transform: none !important;
     transition: none !important;
@@ -1479,7 +1429,6 @@
     display: none;
   }
 }
-
 
 /* --- the closing band, home page only --------------------------------------
    See the note in 38-cta.css: this is the same component, re-laid onto the
@@ -1513,7 +1462,6 @@
 .main-wrapper > .journey_page + .section_cta .cta_actions {
   margin-top: var(--space-medium);
 }
-
 
 /* ===========================================================================
    THE ROLLOUT LAYER — inner pages, added 2026-09-01.
@@ -1573,8 +1521,7 @@
    all on the middle axis. It now sits on the same spine as everything else,
    with the lede beside the title rather than under it, which is the same
    asymmetry .ways_head uses on the home page. */
-/* CENTRING IS SET ON THE CHILDREN, so it has to be unset on the children.
-   The originals are `.hero_component.is-page .hero_inner { text-align: center }`
+/* CENTRING IS SET ON THE CHILDREN { text-align: center }`
    and `.hero_component.is-page .hero_title { margin-inline: auto }`. Setting
    `text-align: left` on the ANCESTOR loses every time, not on specificity but
    because a declaration on the element itself beats an inherited one from its
@@ -1759,495 +1706,6 @@
   padding-inline: var(--gutter);
 }
 
-
-/* ===========================================================================
-   THE SERVICE PAGE — the twelve treatment pages, added 2026-09-01.
-
-   Client: "hyper focus on the services pages." These are one template rendered
-   twelve times from treatments-data.mjs, so everything here lands on all of
-   them at once.
-
-   The template's two real problems were a head with no photograph in it, and a
-   body that was five hundred words of unbroken prose in a single column, which
-   is the plainest violation on the site of "big chunks of text are not good for
-   conversions". Both are structural, and neither needed a word of copy changed.
-   =========================================================================== */
-
-/* --- the head ------------------------------------------------------------
-   The arrival split, reused: copy on the page gutter, the treatment's own
-   photograph running to the viewport edge with the Carrara ground showing as a
-   frame. It replaces a small centred text block AND the full-width strip that
-   used to carry this image two sections further down. */
-.svc-head_component {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1.06fr) minmax(0, 0.94fr);
-  align-items: stretch;
-  --arrival-frame: var(--space-xxlarge);
-  overflow: clip;
-}
-.svc-head_copy {
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  padding: var(--section-sm) var(--space-xlarge) var(--section-sm) var(--gutter);
-}
-
-.svc-head_title {
-  margin: 0;
-  max-width: 14ch;
-}
-.svc-head_sub {
-  margin: var(--space-medium) 0 0;
-  font-size: var(--size-text-large);
-  line-height: 1.5;
-  color: var(--fg-body);
-  max-width: 32rem;
-}
-.svc-head_actions {
-  margin-top: var(--space-large);
-  display: flex;
-  flex-wrap: wrap;
-  gap: var(--space-small);
-}
-.svc-head_note {
-  margin: var(--space-medium) 0 0;
-  max-width: 32rem;
-  font-size: var(--size-text-small);
-  color: var(--fg-mute);
-  line-height: 1.55;
-}
-.svc-head_media {
-  position: relative;
-}
-.svc-head_photo {
-  position: absolute;
-  inset: 0 0 var(--arrival-frame) var(--arrival-frame);
-  overflow: clip;
-}
-.svc-head_photo img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-
-/* --- at a glance ---------------------------------------------------------
-   The five things a person came to find out. This was a bordered card in a
-   sidebar halfway down the page, beside the wall of prose; it is a ledger under
-   the headline now, on hairlines, like the home page's four figures. */
-.svc-facts {
-  margin: var(--space-large) 0 0;
-  max-width: 32rem;
-  border-top: 1px solid var(--line);
-}
-.svc-facts_row {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) auto;
-  gap: var(--space-medium);
-  align-items: baseline;
-  padding: var(--space-xsmall) 0;
-  border-bottom: 1px solid var(--line);
-}
-.svc-facts_label {
-  margin: 0;
-  font-size: var(--size-text-tiny);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fg-mute);
-}
-.svc-facts_value {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: var(--size-text-large);
-  line-height: 1.35;
-  color: var(--fg);
-  text-align: right;
-}
-
-/* --- the lede ------------------------------------------------------------
-   The intro, set larger and measured. It answers "what is this", and people
-   read one paragraph before deciding whether to read six. */
-.svc-lede_component {
-  padding-block: var(--section) var(--section-sm);
-}
-.svc-lede_inner {
-  padding-inline: var(--gutter);
-}
-/* With a picture the lede is a band; without one it stays a measured column.
-   `.has-media` is set by the renderer only when the treatment actually has a
-   lede image, so a treatment still waiting for art does not render a hole. */
-.svc-lede_component.has-media .svc-lede_inner {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.52fr);
-  gap: var(--space-xxlarge);
-  align-items: center;
-}
-.svc-lede_media {
-  margin: 0;
-  overflow: clip;
-  background: var(--stone-soft);
-  aspect-ratio: 3 / 4;
-  max-height: 32rem;
-  width: 100%;
-}
-.svc-lede_media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.svc-lede_text {
-  max-width: 46rem;
-  font-size: var(--size-text-large);
-  line-height: 1.6;
-  color: var(--fg-body);
-}
-.svc-lede_text p + p {
-  margin-top: var(--space-medium);
-}
-
-/* --- the spec ------------------------------------------------------------
-   Each section as a ROW: heading on the left spine, body measured on the right,
-   hairline between. The page becomes something you can scan down the left edge
-   and drop into, which is how a spec is actually read. Before this the same
-   three headings sat inside one continuous column and broke nothing up. */
-.spec_component {
-  padding-block: 0 var(--section);
-}
-.spec_inner {
-  padding-inline: var(--gutter);
-  border-top: 1px solid var(--line-strong);
-}
-/* The rows' left column held a two or three word heading and then a great deal
-   of nothing. With a picture the section becomes image | rows, and the headings
-   move above their own bodies inside the rows. Sticky, so the image stays with
-   the rows rather than scrolling out at the top of a long answer. */
-.spec_component.has-media .spec_inner {
-  display: grid;
-  grid-template-columns: minmax(0, 0.46fr) minmax(0, 1fr);
-  gap: var(--space-xxlarge);
-  align-items: start;
-  border-top: 0;
-}
-.spec_media {
-  margin: 0;
-  position: sticky;
-  top: 7rem;
-  overflow: clip;
-  background: var(--stone-soft);
-  aspect-ratio: 3 / 4;
-  max-height: min(70vh, 34rem);
-  width: 100%;
-}
-.spec_media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.spec_component.has-media .spec_rows {
-  border-top: 1px solid var(--line-strong);
-}
-/* Inside a two-column section the rows are a single column: the picture is
-   already occupying the left, and a heading column inside the right one would
-   squeeze the answers into a gutter. */
-.spec_component.has-media .spec_row {
-  grid-template-columns: 1fr;
-  gap: var(--space-small);
-}
-.spec_component.has-media .spec_heading {
-  position: static;
-  max-width: none;
-}
-.spec_row {
-  display: grid;
-  /* 0.34, not 0.44. The headings are two or three words; a column wide enough
-     for six left a band of white between the heading and its own paragraph and
-     pushed the body far enough right that the page read as two disconnected
-     halves rather than a heading and its answer. */
-  grid-template-columns: minmax(0, 0.34fr) minmax(0, 1fr);
-  gap: var(--space-medium) var(--space-xxlarge);
-  padding-block: var(--section-sm);
-  border-bottom: 1px solid var(--line);
-}
-.spec_heading {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--size-h3-j);
-  line-height: 1.06;
-  color: var(--fg);
-  max-width: 16ch;
-  /* Sticks while its own body scrolls past, so you always know which question
-     the paragraph you are reading is answering. */
-  position: sticky;
-  top: 7rem;
-  align-self: start;
-}
-.spec_body {
-  max-width: 44rem;
-  color: var(--fg-body);
-  line-height: 1.68;
-}
-.spec_body p + p,
-.spec_body ul {
-  margin-top: var(--space-medium);
-}
-.spec_body ul {
-  padding-left: 1.1rem;
-}
-.spec_body li + li {
-  margin-top: var(--space-xsmall);
-}
-
-@media (max-width: 991px) {
-  .svc-lede_component.has-media .svc-lede_inner,
-  .spec_component.has-media .spec_inner {
-    grid-template-columns: 1fr;
-    gap: var(--space-large);
-  }
-  /* Stacked, a sticky image would sit over the answers it is meant to sit
-     beside. Same reason the spec headings unstick at this width. */
-  .spec_media {
-    position: static;
-    max-height: 26rem;
-  }
-  .svc-lede_media {
-    max-height: 26rem;
-  }
-  .svc-head_component {
-    grid-template-columns: 1fr;
-    --arrival-frame: var(--space-large);
-  }
-  .svc-head_copy {
-    order: 2;
-    padding: var(--section-sm) var(--gutter) var(--section);
-  }
-  .svc-head_media {
-    order: 1;
-    width: 100%;
-    aspect-ratio: 4 / 3;
-  }
-  .spec_row {
-    grid-template-columns: 1fr;
-  }
-  /* Sticky headings need a column beside them to stick against. Stacked, the
-     heading would peel off its own paragraph and float down the page. */
-  .spec_heading {
-    position: static;
-    max-width: none;
-  }
-}
-@media (max-width: 600px) {
-  .svc-head_media {
-    aspect-ratio: 3 / 2;
-  }
-  .svc-facts_row {
-    grid-template-columns: 1fr;
-    gap: 0;
-  }
-  .svc-facts_value {
-    text-align: left;
-  }
-}
-
-
-/* ===========================================================================
-   THE SERVICE PAGE'S NEW BEATS — added 2026-09-01.
-
-   The information flow now follows the reference page a teammate supplied
-   (01-content-intake/.tmp/preview.html). The DESIGN does not follow it: these
-   are the same materials, spine and scale as the rest of the build, per the
-   instruction to copy the flow and keep the direction.
-   =========================================================================== */
-
-/* --- trust signals -------------------------------------------------------
-   Four, straight under the head, on hairlines. Same ledger idea as the home
-   page's four figures rather than the reference's boxed row, because this build
-   already has a way of stating numbers and a second one would be noise. */
-.trust_component {
-  padding-inline: var(--gutter);
-}
-.trust_inner {
-  display: grid;
-  grid-template-columns: repeat(4, minmax(0, 1fr));
-  border-top: 1px solid var(--line);
-  border-bottom: 1px solid var(--line);
-}
-.trust_item {
-  padding: var(--space-medium) var(--space-medium) var(--space-medium) 0;
-  border-left: 1px solid var(--line);
-  padding-left: var(--space-medium);
-}
-.trust_item:first-child {
-  border-left: 0;
-  padding-left: 0;
-}
-.trust_value {
-  margin: 0;
-  font-family: var(--font-display);
-  font-size: calc(2rem * var(--t-heading));
-  line-height: 1.1;
-  color: var(--fg);
-}
-.trust_label {
-  margin: var(--space-xxsmall) 0 0;
-  font-size: var(--size-text-tiny);
-  letter-spacing: 0.12em;
-  text-transform: uppercase;
-  color: var(--fg-mute);
-  line-height: 1.5;
-}
-@media (max-width: 767px) {
-  .trust_inner {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .trust_item:nth-child(3) {
-    border-left: 0;
-    padding-left: 0;
-  }
-  .trust_item:nth-child(n + 3) {
-    border-top: 1px solid var(--line);
-  }
-}
-
-/* --- what this treats ----------------------------------------------------
-   The reference's strongest move: the patient's problem, named, high on the
-   page, so they self-identify before being asked to believe anything. The
-   content was already here as bullet points in the third screen of prose. */
-.suits_component {
-  padding-block: var(--section-sm) var(--section);
-}
-.suits_inner {
-  padding-inline: var(--gutter);
-}
-.suits_head {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.9fr);
-  gap: var(--space-small) var(--space-xxlarge);
-  align-items: end;
-  margin-bottom: var(--section-sm);
-}
-/* The eyebrow and the title both belong in column ONE. Without saying so they
-   auto-place across the row: the eyebrow took column 1, the title took column
-   2, and the heading ended up floating on the right above its own lede. */
-.suits_head .chapter_mark {
-  grid-column: 1;
-  grid-row: 1;
-  margin-bottom: 0;
-}
-.suits_title {
-  grid-column: 1;
-  grid-row: 2;
-  margin: 0;
-  max-width: 14ch;
-}
-/* ONE grid item holding the paragraphs, not one grid item PER paragraph.
-   Giving every <p> the same explicit column AND row put them all in the same
-   cell, where they rendered on top of each other. */
-.suits_lede {
-  grid-column: 2;
-  grid-row: 1 / span 2;
-  align-self: end;
-  margin: 0;
-  max-width: 34rem;
-  font-size: var(--size-text-medium);
-  line-height: 1.65;
-  color: var(--fg-body);
-}
-.suits_lede p {
-  margin: 0;
-}
-.suits_lede p + p {
-  margin-top: var(--space-small);
-}
-.suits_grid {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(16rem, 1fr));
-  gap: var(--space-medium);
-}
-.suits_card {
-  display: grid;
-  grid-template-columns: auto 1fr;
-  gap: var(--space-small);
-  align-items: start;
-  padding-top: var(--space-small);
-  border-top: 2px solid var(--line-strong);
-}
-.suits_index {
-  font-family: var(--font-display);
-  font-size: var(--size-text-small);
-  color: var(--accent);
-  letter-spacing: 0.08em;
-}
-.suits_text {
-  margin: 0;
-  font-size: var(--size-text-medium);
-  line-height: 1.5;
-  color: var(--fg);
-}
-@media (max-width: 991px) {
-  .suits_head {
-    grid-template-columns: 1fr;
-  }
-  .suits_head .chapter_mark,
-  .suits_title,
-  .suits_lede {
-    grid-column: 1;
-    grid-row: auto;
-  }
-}
-
-/* --- the proof beat ------------------------------------------------------
-   An honest disclosure, not a hatched placeholder. The reference has the same
-   gap and fills it with a comment to itself; this says the thing out loud and
-   routes to the gallery. */
-/* Two columns, like every other row on this page. As a single left-hand column
-   on a full-width stone panel it left the right 55% empty, and an empty half of
-   a textured band reads as a missing image rather than as space. */
-.proof-note_component {
-  padding-block: var(--section);
-}
-.proof-note_inner {
-  padding-inline: var(--gutter);
-  display: grid;
-  grid-template-columns: minmax(0, 0.9fr) minmax(0, 1fr);
-  gap: var(--space-medium) var(--space-xxlarge);
-  align-items: start;
-}
-.proof-note_title {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 300;
-  /* A step down from the page's main heads. This is a disclosure about what is
-     NOT here yet, and giving it the same weight as "Who it suits" would be
-     advertising the gap. */
-  font-size: calc(2.6rem * var(--t-heading));
-  line-height: 1.06;
-  letter-spacing: -0.01em;
-  color: var(--fg);
-  max-width: 16ch;
-}
-.proof-note_text {
-  margin: 0;
-  max-width: 42rem;
-  font-size: var(--size-text-medium);
-  line-height: 1.65;
-  color: var(--fg-body);
-}
-.proof-note_actions {
-  margin-top: var(--space-large);
-}
-@media (max-width: 991px) {
-  .proof-note_inner {
-    grid-template-columns: 1fr;
-  }
-}
-
 /* --- the "also in this category" head ------------------------------------
    `.section_header.is-split` was the one head on the page the rollout never
    picked up: `.is-center` was handled and this variant was not, so the related
@@ -2266,162 +1724,6 @@
   line-height: 1.06;
   margin: 0;
 }
-
-/* --- cost and payment ---------------------------------------------------- */
-.cost_component {
-  padding-block: var(--section);
-}
-.cost_inner {
-  padding-inline: var(--gutter);
-}
-.cost_head {
-  margin-bottom: var(--section-sm);
-}
-.cost_head h2 {
-  margin: 0;
-  max-width: 18ch;
-}
-/* Three columns now: the consultation room, the fee, and the two payment rows.
-   The photograph carries the left edge so the section is not another block of
-   type in a page the client already said was short of images. */
-.cost_body {
-  display: grid;
-  grid-template-columns: minmax(0, 0.72fr) minmax(0, 0.62fr) minmax(0, 1fr);
-  gap: var(--space-xlarge);
-  align-items: start;
-  border-top: 1px solid var(--line-strong);
-  padding-top: var(--space-large);
-}
-.cost_media {
-  margin: 0;
-  overflow: clip;
-  background: var(--stone-soft);
-  aspect-ratio: 4 / 5;
-  max-height: 26rem;
-}
-.cost_media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.cost_figure-label {
-  margin: 0;
-  font-size: var(--size-text-tiny);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fg-mute);
-}
-.cost_figure-value {
-  margin: var(--space-xsmall) 0 0;
-  font-family: var(--font-display);
-  font-size: calc(3.4rem * var(--t-display));
-  line-height: 1;
-  color: var(--fg);
-}
-.cost_figure-note {
-  margin: var(--space-medium) 0 0;
-  max-width: 26rem;
-  font-size: var(--size-text-small);
-  line-height: 1.6;
-  color: var(--fg-mute);
-}
-.cost_rows {
-  display: grid;
-  gap: var(--space-large);
-}
-.cost_row-label {
-  margin: 0 0 var(--space-xsmall);
-  font-family: var(--font-display);
-  font-size: var(--size-h5);
-  color: var(--fg);
-}
-.cost_row-text {
-  margin: 0;
-  max-width: 38rem;
-  line-height: 1.65;
-  color: var(--fg-body);
-}
-@media (max-width: 1279px) {
-  .cost_body {
-    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
-  }
-  /* At this width three columns squeeze the payment rows into a gutter, so the
-     photograph spans and the fee sits beside it. */
-  .cost_media {
-    grid-column: 1 / -1;
-    aspect-ratio: 16 / 7;
-    max-height: 18rem;
-  }
-}
-@media (max-width: 991px) {
-  .cost_body {
-    grid-template-columns: 1fr;
-    gap: var(--space-large);
-  }
-  .cost_media {
-    aspect-ratio: 16 / 9;
-  }
-}
-
-/* --- the practice reviews ------------------------------------------------ */
-.svc-reviews_component {
-  padding-block: 0 var(--section);
-}
-.svc-reviews_inner {
-  padding-inline: var(--gutter);
-}
-.svc-reviews_head {
-  margin-bottom: var(--section-sm);
-}
-.svc-reviews_head h2 {
-  margin: 0;
-  max-width: 20ch;
-}
-/* The team photograph beside the two quotes. The section is headed "about the
-   practice", and the practice is who is in the picture. */
-.svc-reviews_inner {
-  display: grid;
-  grid-template-columns: minmax(0, 0.8fr) minmax(0, 1fr);
-  gap: var(--space-xlarge) var(--space-xxlarge);
-  align-items: start;
-}
-.svc-reviews_head {
-  grid-column: 1 / -1;
-}
-.svc-reviews_media {
-  margin: 0;
-  overflow: clip;
-  background: var(--stone-soft);
-  aspect-ratio: 4 / 5;
-  max-height: 28rem;
-}
-.svc-reviews_media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-.svc-reviews_grid {
-  display: grid;
-  gap: var(--space-xlarge);
-  align-content: start;
-}
-@media (max-width: 991px) {
-  .svc-reviews_inner {
-    grid-template-columns: 1fr;
-  }
-  .svc-reviews_media {
-    aspect-ratio: 16 / 9;
-    max-height: 20rem;
-  }
-}
-/* .rail_card is the home page's review card: a hairline over the quote, no box.
-   Reused rather than restyled, so a review looks like a review everywhere. */
-.svc-reviews_grid .rail_card {
-  width: auto;
-}
-
 
 /* --- inner-page section heads, one size ----------------------------------
    `.display-lg` is the HOME page's chapter-head step (76px). On a service page

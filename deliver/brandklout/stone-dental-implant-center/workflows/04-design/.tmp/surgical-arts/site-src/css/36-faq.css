@@ -1,3 +1,5 @@
+/* REMOVED 2026-09-01: .checklist_component, which only ever appeared on the
+   treatment pages. */
 /* FAQ — native <details>, so it is open-able without JavaScript, findable by
    in-page search, and correct for screen readers with no ARIA of our own. */
 .faq_list {
@@ -61,27 +63,4 @@
 }
 .faq_answer > * + * {
   margin-top: 0.9rem;
-}
-
-/* Instructions list — pre-visit / pre-op steps on the booking page. */
-.checklist_component {
-  display: grid;
-  gap: 0.85rem;
-  list-style: none;
-}
-.checklist_component li {
-  position: relative;
-  padding-left: 2rem;
-  color: var(--fg-body);
-}
-.checklist_component li::before {
-  content: "";
-  position: absolute;
-  left: 0;
-  top: 0.45em;
-  width: 0.85rem;
-  height: 0.48rem;
-  border-left: 1.5px solid var(--accent-flat);
-  border-bottom: 1.5px solid var(--accent-flat);
-  transform: rotate(-45deg);
 }

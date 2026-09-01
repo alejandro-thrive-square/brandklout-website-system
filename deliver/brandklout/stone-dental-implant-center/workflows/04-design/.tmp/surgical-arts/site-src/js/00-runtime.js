@@ -1,11 +1,16 @@
-// The whole runtime. Four behaviours, each guarding on its own selector so the
-// one bundle can ship to every page and only the modules whose markup is
-// present do anything.
+// The whole runtime. Each behaviour guards on its own selector, so a page that
+// does not carry the markup pays nothing for the module.
 //
-//   navbar   solid-on-scroll, the Treatments dropdown, the mobile drawer
-//   tabs     the price categories on the treatments hub
-//   filter   the Results gallery
-//   compare  the before/after wipe
+//   navbar   solid-on-scroll
+//   drawer   the mobile panel, which on this site is the mobile contact card
+//   reveal   the opt-in scroll reveal
+//
+// TRIMMED 2026-09-01, when the site became the home page alone. Gone with the
+// pages they served: the Treatments dropdown (navbar), `tabs` (the price
+// categories on the treatments hub), `filter` (the Results gallery), `compare`
+// (the before/after wipe) and `map` (the deferred map on the booking page).
+// They were guarded and therefore harmless, but a guard that can never fire is
+// just a thing the next reader has to rule out.
 //
 // No dependencies, no build step. Instatic serves this as one asset.
 (function () {
@@ -26,36 +31,6 @@
       window.addEventListener("scroll", onScroll, { passive: true });
     }
 
-    // The dropdown opens on hover via CSS. This adds the keyboard and touch
-    // path.
-    //
-    // CHANGED 2026-08-31. The trigger used to be one <button> carrying both
-    // jobs, and its handler called preventDefault() on every click, so the
-    // Treatments overview page was unreachable from the nav. It is now a real
-    // <a href="treatments.html"> for the label plus a separate caret <button>
-    // for the menu. Only the caret is wired here; the link is left alone so it
-    // navigates. Binding the old selector would silently kill the link again.
-    var dd = nav.querySelector(".navbar_dropdown");
-    if (dd) {
-      var caret = dd.querySelector(".navbar_dropdown-caret-btn");
-      var close = function () {
-        dd.classList.remove("is-open");
-        if (caret) caret.setAttribute("aria-expanded", "false");
-      };
-      if (caret) {
-        caret.addEventListener("click", function (e) {
-          e.preventDefault();
-          var open = dd.classList.toggle("is-open");
-          caret.setAttribute("aria-expanded", open ? "true" : "false");
-        });
-      }
-      document.addEventListener("click", function (e) {
-        if (!dd.contains(e.target)) close();
-      });
-      document.addEventListener("keydown", function (e) {
-        if (e.key === "Escape") close();
-      });
-    }
   }
 
   /* --- drawer ------------------------------------------------------------ */
@@ -87,7 +62,7 @@
       else open();
     });
     drawer.addEventListener("click", function (e) {
-      if (e.target.closest(".drawer_scrim, .drawer_close, .drawer_link, .drawer_sublink")) close();
+      if (e.target.closest(".drawer_scrim, .drawer_close, .drawer_link")) close();
     });
     document.addEventListener("keydown", function (e) {
       if (e.key === "Escape" && drawer.classList.contains("is-open")) close();
@@ -110,98 +85,6 @@
         e.preventDefault();
         first.focus();
       }
-    });
-  }
-
-  /* --- tabs --------------------------------------------------------------
-     One group per [data-tabs]. Buttons carry aria-controls; panes are hidden
-     with the `hidden` attribute rather than a class, so a pane is genuinely
-     removed from the accessibility tree and from in-page search. ---------- */
-  function initTabs() {
-    document.querySelectorAll("[data-tabs]").forEach(function (group) {
-      var links = Array.prototype.slice.call(group.querySelectorAll(".tabs_link"));
-      var panes = Array.prototype.slice.call(group.querySelectorAll(".tabs_pane"));
-      if (!links.length || !panes.length) return;
-
-      function select(id) {
-        links.forEach(function (l) {
-          var on = l.getAttribute("aria-controls") === id;
-          l.classList.toggle("is-active", on);
-          l.setAttribute("aria-selected", on ? "true" : "false");
-          l.tabIndex = on ? 0 : -1;
-        });
-        panes.forEach(function (p) {
-          p.hidden = p.id !== id;
-        });
-      }
-
-      links.forEach(function (l, i) {
-        l.addEventListener("click", function () {
-          select(l.getAttribute("aria-controls"));
-        });
-        // Left/right arrows move between tabs, as the tablist pattern expects.
-        l.addEventListener("keydown", function (e) {
-          var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
-          if (!d) return;
-          e.preventDefault();
-          var next = links[(i + d + links.length) % links.length];
-          next.focus();
-          select(next.getAttribute("aria-controls"));
-        });
-      });
-
-      // Deep link: /treatments#skin opens the Skin tab.
-      var hash = window.location.hash.replace("#", "");
-      var target = hash && group.querySelector('[aria-controls="' + hash + '"]');
-      select(target ? hash : links[0].getAttribute("aria-controls"));
-    });
-  }
-
-  /* --- gallery filter ----------------------------------------------------- */
-  function initFilter() {
-    document.querySelectorAll("[data-filter]").forEach(function (group) {
-      var buttons = Array.prototype.slice.call(group.querySelectorAll(".tabs_link"));
-      var items = Array.prototype.slice.call(group.querySelectorAll("[data-filter-tags]"));
-      var empty = group.querySelector("[data-filter-empty]");
-      if (!buttons.length) return;
-
-      function apply(value) {
-        var shown = 0;
-        items.forEach(function (item) {
-          var tags = (item.getAttribute("data-filter-tags") || "").split(/\s+/);
-          var on = value === "all" || tags.indexOf(value) !== -1;
-          item.hidden = !on;
-          if (on) shown++;
-        });
-        buttons.forEach(function (b) {
-          var on = b.getAttribute("data-filter-value") === value;
-          b.classList.toggle("is-active", on);
-          b.setAttribute("aria-pressed", on ? "true" : "false");
-        });
-        // The empty state is the page's normal condition until the practice
-        // supplies consented cases, so it shows whenever nothing matched.
-        if (empty) empty.hidden = shown !== 0;
-      }
-
-      buttons.forEach(function (b) {
-        b.addEventListener("click", function () {
-          apply(b.getAttribute("data-filter-value"));
-        });
-      });
-      apply("all");
-    });
-  }
-
-  /* --- before/after wipe -------------------------------------------------- */
-  function initCompare() {
-    document.querySelectorAll(".compare_component").forEach(function (box) {
-      var input = box.querySelector(".compare_handle");
-      if (!input) return;
-      var paint = function () {
-        box.style.setProperty("--pos", input.value + "%");
-      };
-      input.addEventListener("input", paint);
-      paint();
     });
   }
 
@@ -232,35 +115,13 @@
     });
   }
 
-  /* --- deferred map ------------------------------------------------------- */
-  function initMap() {
-    var btn = document.querySelector("[data-map-load]");
-    if (!btn) return;
-    btn.addEventListener("click", function () {
-      var box = btn.closest(".map_component");
-      var src = btn.getAttribute("data-map-load");
-      var frame = document.createElement("iframe");
-      frame.src = src;
-      frame.loading = "lazy";
-      frame.title = "Map to Stone Surgical Arts, 72 Andorra Dr #110A, Westlake, Texas";
-      frame.referrerPolicy = "no-referrer-when-downgrade";
-      frame.allowFullscreen = true;
-      box.innerHTML = "";
-      box.appendChild(frame);
-    });
-  }
-
   function boot() {
     // Tells the head's safety timer that the bundle arrived, so it leaves the
     // .js class — and therefore the scroll reveals — alone.
     window.__ssaBooted = true;
     initNavbar();
     initDrawer();
-    initTabs();
-    initFilter();
-    initCompare();
     initReveal();
-    initMap();
     // The current year in the footer, so nobody has to remember to change it.
     document.querySelectorAll("[data-year]").forEach(function (el) {
       el.textContent = String(new Date().getFullYear());

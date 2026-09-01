@@ -2,15 +2,23 @@
 
 The home page rebuilt as an editorial journey, 2026-08-31.
 
+> [!IMPORTANT]
+> **2026-09-01: the client kept the home page and nothing else.** This document is why the home page
+> looks the way it does, so it survives intact — but two of its sections described rolling the
+> system out to `treatments.html` and to the twelve service pages, and those pages have been
+> deleted. Both sections are now a summary rather than instructions; the detail is in git history
+> with the pages. Everywhere below that counts "all eighteen pages" is a statement about the site as
+> it was on 2026-08-31, and is left alone because the reasoning it supports has not changed.
+
 | | |
 | :--- | :--- |
 | **Trigger** | Brandklout's team reviewed the first build: *"the design is very ugly and simple"* |
 | **North Star** | [drnahlah.com](https://drnahlah.com) — *"the best one we have"* |
-| **Scope** | The home page, `treatments.html`, and all twelve service pages. Remaining: about, results, memberships, book |
+| **Scope** | The home page. It was the home page, `treatments.html` and twelve service pages until 2026-09-01; the rest were deleted, and the home page is the site |
 | **Package** | [`surgical-arts/site-src/`](./surgical-arts/site-src/) — `pages/home.body.html`, `css/50-journey.css`, `js/10-journey.js` |
-| **v1** | Kept verbatim at `site-src/pages/_home-v1.body.html`. Not built. There to diff against |
+| **v1** | Was kept at `site-src/pages/_home-v1.body.html` to diff against. Deleted 2026-09-01; recover it from history if a diff is ever wanted |
 | **Gates** | `audit.mjs` FAIL none / WARN none · `check-copy.mjs` clean · `journey-test.mjs` **47/47** |
-| **For review** | home <https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6> · treatments <https://claude.ai/code/artifact/b7e07a67-0d88-40a6-aae6-b7fec7faa2be> |
+| **For review** | home <https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6> |
 
 ## The diagnosis
 
@@ -368,97 +376,59 @@ under reduced motion.
   the ledger under it now cap at the same content width as everything else on screens over 1700px,
   which is what the reference build does and what lines the hero up with the ledger beneath it.
 
-## The rollout: treatments.html
+## The rollout, and where it went
 
-The first core page is on the system, and the way it got there is the point.
+The system WAS rolled out, to `treatments.html` and then to all twelve service pages, and both went
+with those pages on 2026-09-01. The ideas worth carrying forward:
 
-**The rollout is a stylesheet scope.** A page joins by gaining `.journey_page` on its wrapper and
-leaves by losing it. A block at the foot of `50-journey.css` then re-frames the components
-`10-client-first.css` through `40-proof.css` already provide: the page head, every
-`.section_header.is-center`, and the four category bands. **Not one line of `treatments.body.html`
-moved** except the wrapper itself and a comment explaining it.
-
-That matters more than the page does. It is the test of whether the home page produced a system or
-one nice page, and the remaining core pages are now the same one-line change plus whatever
-page-specific composition each deserves.
-
-| | |
-| :--- | :--- |
-| Kept exactly | all sixty-odd fee rows, the tab mechanics, the notice, every number, the FAQ |
-| Gained | the left-hand spine, the display scale, the fluid section rhythm, images bleeding off a page edge |
-| Not given | the progress bar and the chapter readout. Those are devices for a page that is a journey; a price list is a reference and should feel like one |
-| Not shipped | GSAP. Nothing here pins or scrubs, so `motion: true` is deliberately unset and the reveals fall back to the IntersectionObserver path |
-
-### The reference content keeps its measure
-
-Inside `.journey_page` the Client-First wrappers resolve to the journey spine, because the home page
-pads its chapters with `--gutter` while an inner page was padding 5% and then centring an 80rem
-column: content started at 145px where home starts at 58px, and two pages of one site with two
-different left margins is the most visible thing about a screenshot of both.
-
-But the fee schedule, the financing panel and the comparison FAQ are capped at 76rem and
-LEFT-aligned rather than centred, so they start on the spine like everything else. A sixty-row price
-table stretched to 1560px puts a hand's width between a treatment and its price, which is worse to
-scan, not better. Editorial width for the argument, reading width for the reference.
-
-## The service pages
-
-*"The home page is good enough. Now let's hyper focus on the services pages."*
-
-All twelve at once, because they are a collection: `render-treatments.mjs` renders one template from
-`treatments-data.mjs`. One renderer, one stylesheet block. **Not one word of copy changed.**
-
-### The head had no photograph and none of the numbers
-
-It was a small centred stack of breadcrumb, category, name and one line. The treatment's own
-photograph sat two sections lower as a full-width strip that interrupted the reading, and the five
-things a patient actually came to find out were in a sidebar card halfway down beside the prose.
-
-The head is the arrival split now: copy on the gutter, the treatment's photograph running to the
-viewport edge with the Carrara ground framing it, and the five figures as a hairline ledger directly
-under the headline. **Fee, anaesthetic, time off work, when it settles and how long it lasts are all
-above the fold**, next to the two buttons. The redundant strip is deleted, so the page is a section
-shorter as well as better.
-
-### The body was the worst text on the site
-
-Two intro paragraphs and three headed sections, run together as one unbroken column five hundred
-words deep. The headings did not break it up because they were inside it. This was the plainest
-violation anywhere of the original brief's *"big chunks of text are not good for conversions"*.
-
-- The intro is a **lede**: larger, measured, on its own. It answers "what is this", and people read
-  one paragraph before deciding whether to read six.
-- Each section is a **row**: heading on the left spine, sticky so it stays with its own answer, body
-  measured beside it, hairline between. The page can be scanned down its left edge.
-
-The sticky heading is `position: static` below 991px, because stacked there is no adjacent column
-to stick against and it would peel off its own paragraph and float over the next one.
-
-Review: <https://claude.ai/code/artifact/271cdf39-20f8-4e96-ba12-bcab3c51626c>
+- **The rollout was a stylesheet scope, not a rewrite.** A page joined by gaining `.journey_page` on
+  its wrapper and left by losing it; a block at the foot of `50-journey.css` then re-framed the
+  components the earlier sheets already provided. Not one line of `treatments.body.html` moved
+  except the wrapper. That was the test of whether the home page produced a *system* or one nice
+  page, and it passed. If a page comes back, that is still how it should join.
+- **Editorial width for the argument, reading width for the reference.** Inside `.journey_page` the
+  Client-First wrappers resolved to the journey spine, so an inner page started its content at the
+  same 58px the home page does instead of at 145px — two pages of one site with two different left
+  margins is the most visible thing about a screenshot of both. But the fee schedule and the
+  comparison FAQ were capped at 76rem and LEFT-aligned, because a sixty-row price table stretched to
+  1560px puts a hand's width between a treatment and its price. That distinction is the useful part
+  and it is written down nowhere else.
+- **The five things a patient came to find out belong above the fold** — fee, anaesthetic, time off
+  work, when it settles, how long it lasts — as a hairline ledger under the headline, not in a
+  sidebar card halfway down. And a five-hundred-word column does not read as broken up merely
+  because its headings are inside it: the fix was a lede plus one row per section, heading on the
+  left spine, sticky above 991px and static below. If the service pages return, start there rather
+  than from the original.
 
 ## What this does not fix
 
 Everything already on the [HANDOFF](./surgical-arts/HANDOFF.md) blocker list is still open, and none
 of it is a design problem:
 
-1. **The before/after gallery is still empty on purpose.** A generated or stock "case" on a surgical
-   practice's site is a fabricated clinical outcome, and it is the one claim a patient actually
-   relies on. Needs consented photography.
-2. **Clinical review of all twelve treatment pages.**
-3. **Abby has no photograph** and nothing may stand in for her.
-4. Real Google reviews widget, the forms, and the domain.
+1. **Photography.** The hero is a generated room where the board specifies a studio portrait, and
+   any before/after work needs consented photography — a generated or stock "case" on a surgical
+   practice's site is a fabricated clinical outcome, and it is the one claim a patient relies on.
+2. **The domain**, the button-label colour, the real logo and the favicon.
+
+*(Clinical review of the twelve treatment pages, Abby's missing portrait and the reviews widget were
+on this list until 2026-09-01. They belong to deleted pages and come back with them.)*
 
 ## Next
 
-**Get a decision on the direction before rolling it out.** Chapters 02, 03, 04, 05 and 07 are
-general components (`.stone-panel`, `.stone-band`, `.ways_*`, `.dealt_component`, `.rail_component`,
-`.offer_*`, `.ledger_component`), so applying the system to `treatments`, `about`, `results`,
-`memberships` and `book` is composition rather than a rewrite. Doing that before the direction is
-approved is seventeen pages of rework if it moves.
+**The direction is decided, and it arrived as a deletion rather than an approval.** The previous
+version of this section warned that rolling out before approval was "seventeen pages of rework if it
+moves". It moved.
+
+Chapters 02, 03, 04, 05 and 07 are still general components (`.stone-panel`, `.stone-band`,
+`.ways_*`, `.dealt_component`, `.rail_component`, `.offer_*`, `.ledger_component`), so any page that
+comes back is composition rather than a rewrite. That was the argument for building them as
+components, and it is the one thing the cut did not cost.
 
 Then: re-import to Instatic, which needs `push-site.mjs --force` and a check of the pages'
 `updatedAt` first (see the runbook), plus a check that Instatic's converter does not strip the
-`data-j` / `data-chapter` attributes the runtime binds to.
+`data-j` / `data-chapter` attributes the runtime binds to. **The live site is still the
+eighteen-page version**; publishing is an atomic PUT of the whole tree, so it will drop the other
+seventeen.
 
 ## Version Control
 - Follows the version control rules in [SYSTEM_RULES.md - Section 4](../../../../../SYSTEM_RULES.md).

@@ -49,5 +49,6 @@
       "used": "about.html team grid",
       "note": "SOURCE IS ONLY 597x615, which is small for this slot. Upscaled separately by upscale-client-images.mjs; this is the straight import and the fallback."
     }
-  }
+  },
+  "note": "The `used` field on each slot records where the image was placed when it was imported on 2026-08-31. Most of those pages were deleted on 2026-09-01 and the strings are left as they are on purpose: they are the provenance record, and the images were kept precisely so those pages can come back. Only the home page is built today."
 }

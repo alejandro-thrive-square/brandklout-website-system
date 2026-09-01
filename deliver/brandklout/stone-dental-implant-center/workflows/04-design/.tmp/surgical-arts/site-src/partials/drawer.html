@@ -1,3 +1,11 @@
+<!-- The mobile drawer. At 991px and below the navbar hides both its menu and
+     its phone number, so this panel is the ONLY place a phone gets the number
+     without scrolling to the footer. That is why it survives a one-page site:
+     it is not a menu any more, it is the mobile contact card.
+
+     A generated token used to expand here into four category headings and
+     twelve treatment links, built from treatments-data.mjs. Both are gone, and
+     so is the stray-token check's reason to complain about this file. -->
 <div class="drawer_component" id="drawer">
   <div class="drawer_scrim"></div>
   <div class="drawer_panel" role="dialog" aria-modal="true" aria-label="Menu">
@@ -10,20 +18,11 @@
     </div>
 
     <nav class="drawer_nav" aria-label="Mobile">
-      <a class="drawer_link" href="treatments.html">Treatments &amp; fees</a>
-      <!-- Opened out rather than nested, so a phone never has to tap through a
-           submenu. Generated from treatments-data.mjs: category headings link
-           to their tab on the hub, the treatments under them to their own
-           pages. -->
-      {{TREATMENT_DRAWER}}
-      <a class="drawer_link" href="results.html">Results</a>
-      <a class="drawer_link" href="memberships.html">Memberships</a>
-      <a class="drawer_link" href="about.html">About</a>
-      <a class="drawer_link" href="book.html#visit">Contact</a>
+      <a class="drawer_link" href="#contact">Contact</a>
     </nav>
 
     <div class="drawer_foot">
-      <a class="button" href="book.html#request">Book a consultation</a>
+      <a class="button" href="#contact">Book a consultation</a>
       <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
       <p class="drawer_meta">72 Andorra Dr #110, Westlake, TX 76262</p>
     </div>

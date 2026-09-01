@@ -19,6 +19,26 @@ Create or collect the visual assets required by the approved wireframes and bran
 2. Define art direction for illustrations, icons, photography, 3D, motion, or screenshots.
 3. Collect, create, or request missing assets.
 4. Prepare assets for Design with clear names, usage notes, and source/licensing notes when relevant.
+5. Where stock is standing in for photography the client does not yet own, source it through a **slot table**, not ad hoc. See below.
+
+### Sourcing stock through the Magnific / Freepik API
+
+The key is `MAGNIFIC` in the repo-root `.env` — gitignored and **per-worktree**, so a fresh worktree needs the line copied across (it currently originates in `bk-dr-nahlah`). It is Freepik-family: search and download at `api.freepik.com` with an `x-freepik-api-key` header, serving `magnific.com` resources.
+
+Reference implementation: `deliver/brandklout/stone-dental-implant-center/workflows/04-design/.tmp/surgical-arts/site-src/get-stock.mjs`.
+
+Drive it from a **slot table** — one entry per image the markup asks for, each with the target filename, the search term, a `prefer` list that re-ranks results and an `avoid` list that drops them. The filename is what the markup points at, so changing a query never renames a file and never breaks a page. Write a `stock-manifest.json` beside it recording each asset's id, title, author, licence and page URL, and **commit the manifest** — `.tmp/` images are gitignored under the binary rules, so the manifest is what makes the attribution survive.
+
+> [!WARNING]
+> **On a medical or health site, no stock image may contain a face.** A stock model on a surgery page reads as a patient, and a stock face beside a treatment name reads as that treatment's result. Both are misrepresentation whatever the alt text says. Restrict slots to rooms, objects, instruments and textures, assert the API's people-exclude filter, and keep a per-slot `avoid` list as a second line of defence. This is a content-integrity rule, not a stylistic preference.
+
+Practical notes:
+
+- **The orientation filter is not honoured.** A `horizontal` query returned a 1600×2400 flat-lay twice. Enforce the aspect with a centre crop at build time instead of trusting the API.
+- **Downloads are full-resolution originals** — 5,376px, up to 16 MB each. Eight raw files came to 55 MB and shipped at ~730 KB after a 16:9 crop, a 1600px resize and WebP at quality 82. Resizing is not optional.
+- **There is no ImageMagick and no `sharp` on the Windows workstation.** `convert` on PATH is the Windows filesystem utility — do not reach for it. **Pillow** does the image work, shelled out to from Node; ffmpeg is present as a fallback.
+- **Assets are premium-licensed against the client's own key**, so the licence runs with their subscription. Record it as a launch item: the subscription must still be active at go-live, and the terms need re-checking if the site is ever handed to a third party.
+- **Check the client's existing photography for the wrong branding.** On the Stone build a genuine photograph of the surgeon had the *sister* practice's signage legible on a screen behind her; it had to come off the page it was on.
 
 ## Offer-Specific Adaptations
 - **Development from Scratch**: Required before high-fidelity design.
@@ -38,6 +58,7 @@ Create or collect the visual assets required by the approved wireframes and bran
 - `deliver/[client-name]/workflows/03-graphic-resources/.tmp/missing-assets.md`
 - `deliver/[client-name]/workflows/03-graphic-resources/.tmp/source-asset-inventory.json` (migration only)
 - `deliver/[client-name]/workflows/03-graphic-resources/.tmp/extracted-assets/` (workflow-owned client assets; lightweight files committed, heavy media synced to VPS)
+- `stock-manifest.json` beside whichever build consumes the stock — id, title, author, licence and source URL per slot. **Committed**, because the images themselves are gitignored and this is the attribution record.
 
 ## Version Control
 - All changes to this workflow must follow the version control rules in [SYSTEM_RULES.md - Section 4](../../../SYSTEM_RULES.md).

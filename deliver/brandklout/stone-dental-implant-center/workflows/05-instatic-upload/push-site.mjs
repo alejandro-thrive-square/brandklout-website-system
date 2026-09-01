@@ -1,0 +1,302 @@
+/**
+ * Step 4 — write the converted site into Instatic.
+ *
+ * One atomic `PUT /site-document` carries all three things at once:
+ *   - the shell: 509 style rules + 9 conditions + site.js as a code asset
+ *   - the seven pages
+ *   - deletion of the starter Home page setup created
+ *
+ * `mode: 'replace'` is deliberate and is the platform's own documented import
+ * path ("imports are deliberate replace-everything operations" —
+ * server/handlers/cms/siteDocument.ts). It ignores baseSeqs/shellBaseSeq,
+ * which is right for a first import into an empty site and WRONG for anything
+ * afterwards: a second run of this against a site someone has edited would
+ * discard their work. Guarded below.
+ *
+ * Usage:
+ *   node push-site.mjs           dry run — prints what would change
+ *   node push-site.mjs --apply
+ */
+import fs from 'node:fs'
+import zlib from 'node:zlib'
+import path from 'node:path'
+import crypto from 'node:crypto'
+import { fileURLToPath } from 'node:url'
+import { getSite, getPages, api } from '../../../dr-nahlah/workflows/15-instatic-api-sync/insta-api.mjs'
+
+const HERE = path.dirname(fileURLToPath(import.meta.url))
+const TMP = path.join(HERE, '.tmp')
+const SITE_SRC = path.resolve(HERE, '../04-design/.tmp/surgical-arts/final-site')
+
+const apply = process.argv.includes('--apply')
+const force = process.argv.includes('--force')
+
+const converted = JSON.parse(fs.readFileSync(path.join(TMP, 'import-out.json'), 'utf8'))
+const input = JSON.parse(
+  zlib.gunzipSync(fs.readFileSync(path.join(TMP, 'import-input.json.gz'))).toString('utf8'),
+)
+
+const nid = () => crypto.randomBytes(16).toString('base64url').slice(0, 21)
+
+/* --- site.js -------------------------------------------------------------
+   The static build sets `class="js"` on <html> from an inline <head> script,
+   and 39-motion.css hides every [data-reveal] behind that class. Instatic has
+   no custom-head field, and importHtml strips inline scripts anyway, so the
+   class has to come from the bundle instead.
+
+   It is prepended HERE rather than left to the bundle so the failure mode
+   stays the one the design chose: if site.js does not load, `.js` is never
+   set, the reveal rules never match, and every section is simply visible.
+   The alternative — putting `js` on the body node statically — would hide the
+   whole site behind a script that might not arrive.
+
+   The cost is a possible flash on first paint, since the asset runs after
+   parse. That is strictly better than a blank page. */
+const BOOTSTRAP = `/* Added by push-site.mjs — see the comment there before removing.
+   Replaces the static build's inline <head> script, which Instatic strips. */
+document.documentElement.classList.add('js');
+`
+const siteJs = BOOTSTRAP + fs.readFileSync(path.join(SITE_SRC, 'assets', 'site.js'), 'utf8')
+
+/* --- the token layer -----------------------------------------------------
+   CUSTOM PROPERTIES DO NOT SURVIVE THE REGISTRY CONVERSION.
+
+   happy-dom's CSSStyleDeclaration does not enumerate `--*` declarations, so
+   `cssToStyleRules` turns every `:root { --ivory: …; --space-large: … }` block
+   into an EMPTY rule. It reports no warning: the conversion "succeeds", the
+   var() usages all survive on the rules that consume them, and the published
+   site loads a stylesheet in which every single var() resolves to nothing.
+
+   The symptom is not a missing colour or two. This design system is entirely
+   token-driven — spacing, radii, type scale, easing, the fluid rem basis — so
+   the first publish rendered as unstyled centred text with working fonts, and
+   looked like the CSS had half-loaded rather than like a token failure.
+
+   The fix is a layer split the platform already provides: the token
+   PRIMITIVES ship as a code asset (served verbatim as userStyles-*.css, never
+   parsed by happy-dom), and everything built on top of them stays in the
+   registry where the Styles panel can edit it. Nobody edits a raw token from
+   the panel anyway, so nothing is lost.
+
+   Cascade order is `reset -> framework -> style -> userStyles`, and these are
+   definitions consumed by var() at computed-value time, so loading last is
+   harmless.
+
+   Source files, verbatim and in order — keep them in step with site-src/css/. */
+const TOKEN_FILES = ['00-fluid-root.css', '01-tokens.css']
+const CSS_SRC = path.resolve(HERE, '../04-design/.tmp/surgical-arts/site-src/css')
+const tokensCss =
+  `/* Token primitives, pushed as a code asset by push-site.mjs.\n` +
+  `   These CANNOT live in the style registry: happy-dom drops --custom-property\n` +
+  `   declarations during conversion, silently. Edit site-src/css/ and re-push. */\n\n` +
+  TOKEN_FILES.map((f) => fs.readFileSync(path.join(CSS_SRC, f), 'utf8')).join('\n') +
+  // `--pos` drives the before/after wipe and is the one custom property
+  // declared outside the token files; site.js overwrites it on input.
+  `\n/* from 35-gallery.css — dropped by the same happy-dom limitation */\n` +
+  `.compare_component { --pos: 50%; }\n`
+
+/* --- read current state --------------------------------------------------- */
+const { site, seq } = await getSite()
+const existingPages = (await getPages()).rows ?? []
+
+const authored = existingPages.filter((r) => {
+  const nodes = r.cells?.body?.nodes ?? {}
+  // The starter page setup creates has exactly one node and no children.
+  return Object.keys(nodes).length > 1
+})
+if (authored.length > 0 && !force) {
+  console.error(
+    `REFUSING: ${authored.length} page(s) already carry authored content ` +
+      `(${authored.map((p) => p.slug).join(', ')}).\n` +
+      `replace mode would delete them. Re-run with --force only if that is intended.`,
+  )
+  process.exit(1)
+}
+
+/* --- build the payload ---------------------------------------------------- */
+const now = Date.now()
+
+/* --- survive the publish-time tree shake ---------------------------------
+   `styleRuleTreeShake.ts` drops registry rules at publish:
+     - a CLASS rule survives iff its id appears in some `node.classIds`;
+     - an AMBIENT rule survives iff no class token in its selector is a known
+       class-kind rule name that is unused.
+
+   Every class this site adds at RUNTIME — `is-solid`, `is-open`, `is-active`,
+   `is-revealed`, and `js` on <html> — appears in no static markup, so each is
+   an unused class-kind rule. That purges the rule itself AND, worse, every
+   ambient rule that so much as mentions it. Six rules of the form
+   `.navbar_component:not(.is-solid):not(.is-static) .navbar_link` went with
+   `is-solid`, which is why the first styled publish had a navbar in the wrong
+   colour over the hero photograph.
+
+   Demoting an unassigned class rule to `kind: 'ambient'` makes it and every
+   selector mentioning it survive — this is exactly what `--cutover` does in
+   15-instatic-api-sync. The selectors are already complete and correct
+   (`.navbar_component.is-solid`), so nothing else has to change.
+
+   Done generically rather than from a hard-coded list: any class the markup
+   does not carry is by definition runtime-or-dead, and either way belongs in
+   the ambient layer. */
+{
+  const usedClassIds = new Set()
+  for (const p of converted.pages) {
+    for (const node of Object.values(p.nodes)) {
+      for (const id of node.classIds ?? []) usedClassIds.add(id)
+    }
+  }
+  const demoted = []
+  for (const rule of Object.values(converted.styleRules)) {
+    if (rule.kind === 'class' && !usedClassIds.has(rule.id)) {
+      rule.kind = 'ambient'
+      demoted.push(rule.name)
+    }
+  }
+  console.log(
+    `tree-shake  demoted ${demoted.length} unassigned class rule(s) to ambient` +
+      (demoted.length ? `: ${demoted.slice(0, 12).join(', ')}${demoted.length > 12 ? ' …' : ''}` : ''),
+  )
+}
+
+const shell = {
+  ...site,
+  styleRules: converted.styleRules,
+  ...(converted.conditions.length ? { conditions: converted.conditions } : {}),
+  files: [
+    ...(site.files ?? []).filter(
+      (f) => f.path !== 'src/scripts/site.js' && f.path !== 'src/styles/tokens.css',
+    ),
+    {
+      id: nid(),
+      path: 'src/styles/tokens.css',
+      type: 'style',
+      content: tokensCss,
+      createdAt: now,
+      updatedAt: now,
+    },
+    {
+      id: nid(),
+      path: 'src/scripts/site.js',
+      type: 'script',
+      content: siteJs,
+      createdAt: now,
+      updatedAt: now,
+    },
+  ],
+  settings: {
+    // `metaTitle` is stripped, not merely omitted: `...site.settings` would
+    // carry forward a value saved by an earlier run and keep overriding every
+    // page's title.
+    ...Object.fromEntries(Object.entries(site.settings ?? {}).filter(([k]) => k !== 'metaTitle')),
+    // metaTitle is deliberately NOT set.
+    //
+    // The publisher builds the <title> as
+    //     settings.metaTitle ?? page.title ?? site.name
+    // (buildDocumentMetaTags, src/core/publisher/render.ts) — a SITE-level
+    // value that wins on every page. Setting it gave all seven pages the
+    // identical <title>. Leaving it unset lets each page's own title through,
+    // which is why `title` below carries the full SEO string.
+    metaDescription:
+      'Boutique facial and cosmetic surgery in Westlake, Texas. Dr. Mona Stone plans and performs every case herself.',
+    language: 'en',
+  },
+}
+
+// Reuse the existing row id for a slug we already have, so a re-run UPDATES a
+// page rather than replacing it with a new row — page ids are what the media
+// panel, the audit log and any external link point at.
+const idBySlug = new Map(existingPages.filter((p) => p.slug).map((p) => [p.slug, p.id]))
+const seoBySlugForTitle = Object.fromEntries(input.pages.map((p) => [p.slug, p]))
+const pages = converted.pages.map((p) => ({
+  id: idBySlug.get(p.slug) ?? nid(),
+  // The SEO title, not the short name.
+  //
+  // This publisher build renders <title> from `page.title` and has no per-page
+  // hook at all: the `seoTitle` / `seoDescription` cells exist on the pages
+  // table and are populated below, but `buildDocumentMetaTags` never reads
+  // them. Carrying the SEO string as the page title is the only way to get a
+  // correct, distinct <title> per page today. The cost is that Instatic's
+  // page list shows the long form, which is the better trade for a site that
+  // is found through search.
+  title: seoBySlugForTitle[p.slug]?.seoTitle || p.title,
+  slug: p.slug,
+  nodes: p.nodes,
+  rootNodeId: p.rootNodeId,
+}))
+
+// Replace mode derives deletions itself and 400s if this is non-empty:
+//   "replace mode derives deletions server-side — deleted*Ids must be empty"
+// Any stored row not in changedPages is removed for us.
+const deletedPageIds = []
+
+const body = {
+  mode: 'replace',
+  site: shell,
+  changedPages: pages,
+  deletedPageIds,
+  changedComponents: [],
+  deletedComponentIds: [],
+  changedLayouts: [],
+  deletedLayoutIds: [],
+  baseSeqs: {},
+  shellBaseSeq: seq,
+}
+
+const bytes = Buffer.byteLength(JSON.stringify(body))
+console.log(`shell      styleRules ${Object.keys(shell.styleRules).length}, conditions ${(shell.conditions ?? []).length}, files ${shell.files.length}`)
+console.log(`site.js    ${(siteJs.length / 1024).toFixed(1)}KB (bootstrap + bundle)`)
+console.log(`pages      ${pages.length} written, ${deletedPageIds.length} deleted`)
+for (const p of pages) console.log(`   ${p.slug.padEnd(18)} ${Object.keys(p.nodes).length} nodes  id=${p.id}`)
+console.log(`payload    ${(bytes / 1024 / 1024).toFixed(2)}MB`)
+
+if (!apply) {
+  console.log('\ndry run — re-run with --apply to write')
+  process.exit(0)
+}
+
+const res = await api('PUT', '/admin/api/cms/site-document', body)
+console.log('\nsaved:', JSON.stringify(res).slice(0, 200))
+
+/* --- SEO cells -----------------------------------------------------------
+   `pageToCells` maps title/slug/body/template only, so seoTitle and
+   seoDescription — which ARE built-in fields on the pages table — cannot ride
+   along on the Page object. They go in a second pass through the data-rows API.
+
+   > [!WARNING]
+   > `PATCH /data/rows/:id` is a **full replacement** of `cells`, not a merge:
+   >     const rawCells = body.cells ?? currentRow.cells      (rows.ts)
+   >     const slug = slugForTable(table, cells)
+   > Sending only `{seoTitle, seoDescription}` therefore deletes title, slug
+   > and body, and the derived slug becomes "". It answers 200 while doing it.
+   > That is exactly what happened on the first run of this script: all seven
+   > pages saved correctly and were then emptied a second later, and the site
+   > published as seven blank pages with working CSS.
+   >
+   > Always read the row, merge, and send the WHOLE cells object back. */
+const seoBySlug = Object.fromEntries(input.pages.map((p) => [p.slug, p]))
+for (const p of pages) {
+  const src = seoBySlug[p.slug]
+  if (!src?.seoTitle) continue
+  try {
+    const current = await api('GET', `/admin/api/cms/data/rows/${p.id}`)
+    const cells = { ...(current.row?.cells ?? current.cells ?? {}) }
+    if (!cells.body || !cells.slug) {
+      throw new Error(`row is missing body/slug before the merge — refusing to write`)
+    }
+    cells.seoTitle = src.seoTitle
+    cells.seoDescription = src.seoDescription
+    await api('PATCH', `/admin/api/cms/data/rows/${p.id}`, { cells })
+
+    // Read back: this platform reports some write failures as a 200.
+    const after = await api('GET', `/admin/api/cms/data/rows/${p.id}`)
+    const ac = after.row?.cells ?? after.cells ?? {}
+    const nodeCount = Object.keys(ac.body?.nodes ?? {}).length
+    if (!ac.slug || nodeCount === 0) {
+      throw new Error(`row lost content after write (slug="${ac.slug}", nodes=${nodeCount})`)
+    }
+    console.log(`seo  ${p.slug.padEnd(18)} ok  (${nodeCount} nodes intact)`)
+  } catch (e) {
+    console.log(`seo  ${p.slug.padEnd(18)} FAILED ${e.message.slice(0, 160)}`)
+    process.exitCode = 1
+  }
+}

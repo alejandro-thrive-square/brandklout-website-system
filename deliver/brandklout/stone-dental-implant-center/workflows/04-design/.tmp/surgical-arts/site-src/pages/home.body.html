@@ -64,9 +64,12 @@
       <p class="arrival_eyebrow" data-j="rise">Facial &amp; cosmetic surgery &middot; Westlake, Texas</p>
       <h1 class="display-xl arrival_title" data-j-split>Sculpt with <em class="display-accent">confidence</em>.</h1>
       <p class="arrival_sub" data-j="rise">A boutique practice where one surgeon plans your result, performs it, and sees you through every stage after.</p>
+      <!-- One button since 2026-09-01, not two. The secondary was "See
+           treatments & fees" and the hub it opened is gone; the primary now
+           lands on the invitation at the foot of this page, which is where the
+           address, the phone number and the hours actually are. -->
       <div class="arrival_actions" data-j="rise">
-        <a class="button" href="book.html#request">Schedule a consultation</a>
-        <a class="button is-secondary" href="treatments.html">See treatments &amp; fees</a>
+        <a class="button" href="#contact">Schedule a consultation</a>
       </div>
       <p class="arrival_place" data-j="rise">Based in Westlake and caring for patients across Southlake, Grapevine, Colleyville, Keller and Fort Worth.</p>
     </div>
@@ -139,7 +142,7 @@
     </div>
 
     <div class="ways_grid" data-j="stagger">
-      <a class="ways_card" href="treatments.html#face">
+      <div class="ways_card">
         <div class="ways_media">
           <span class="ways_index" aria-hidden="true">01</span>
           <img src="assets/cat-face-tall.webp" alt="A carved marble profile on a travertine plinth in a daylit room" width="1000" height="1500" loading="lazy">
@@ -147,11 +150,10 @@
         <div class="ways_body">
           <h3 class="ways_name">Face</h3>
           <p class="ways_text">Facial plastic surgery for refined, natural results.</p>
-          <span class="ways_go">Explore <span aria-hidden="true">&rarr;</span></span>
         </div>
-      </a>
+      </div>
 
-      <a class="ways_card" href="treatments.html#neck">
+      <div class="ways_card">
         <div class="ways_media">
           <span class="ways_index" aria-hidden="true">02</span>
           <img src="assets/cat-neck-tall.webp" alt="Polished surgical instruments laid in a row on cream linen" width="1000" height="1500" loading="lazy">
@@ -159,11 +161,10 @@
         <div class="ways_body">
           <h3 class="ways_name">Neck</h3>
           <p class="ways_text">Restore youthful contours and definition.</p>
-          <span class="ways_go">Explore <span aria-hidden="true">&rarr;</span></span>
         </div>
-      </a>
+      </div>
 
-      <a class="ways_card" href="treatments.html#skin">
+      <div class="ways_card">
         <div class="ways_media">
           <span class="ways_index" aria-hidden="true">03</span>
           <img src="assets/cat-skin-tall.webp" alt="A laser handpiece and amber bottles on a pale stone counter" width="1000" height="1500" loading="lazy">
@@ -171,11 +172,10 @@
         <div class="ways_body">
           <h3 class="ways_name">Skin</h3>
           <p class="ways_text">Advanced skin rejuvenation for a radiant glow.</p>
-          <span class="ways_go">Explore <span aria-hidden="true">&rarr;</span></span>
         </div>
-      </a>
+      </div>
 
-      <a class="ways_card" href="treatments.html#non-surgical">
+      <div class="ways_card">
         <div class="ways_media">
           <span class="ways_index" aria-hidden="true">04</span>
           <img src="assets/cat-nonsurgical-tall.webp" alt="Glass vials and capped syringes on a stainless tray beside folded linen" width="1000" height="1500" loading="lazy">
@@ -183,14 +183,10 @@
         <div class="ways_body">
           <h3 class="ways_name">Non-Surgical</h3>
           <p class="ways_text">Enhance your look with minimal downtime.</p>
-          <span class="ways_go">Explore <span aria-hidden="true">&rarr;</span></span>
         </div>
-      </a>
+      </div>
     </div>
 
-    <div class="ways_foot" data-j="rise">
-      <a class="button is-secondary" href="treatments.html">View all treatments &amp; fees</a>
-    </div>
   </section>
 
   <!-- ====================================================================
@@ -215,9 +211,6 @@
           <li class="dealt_item"><span class="dealt_num">03</span><span>Attending surgeon, Baylor and Methodist Medical Centers</span></li>
           <li class="dealt_item"><span class="dealt_num">04</span><span>KLS Martin IPS&reg; certified for patient-specific implant planning</span></li>
         </ol>
-        <div class="surgeon_actions" data-j="rise">
-          <a class="button is-secondary" href="about.html">More about Dr. Stone</a>
-        </div>
       </div>
       <figure class="surgeon_media" data-j="rise">
         <img src="assets/dr-stone-portrait.webp" alt="Dr. Mona Stone, DDS, at the Westlake practice" width="643" height="1020" loading="lazy">
@@ -344,9 +337,13 @@
        never reworded. The archive holds about thirty-five reviews and most are
        oral-surgery ones; these six are the cosmetic ones.
 
-       BEFORE LAUNCH these are quotes on a page, not a live feed. results.html
-       reserves the Elfsight slot for the real Google widget, which is what
-       should carry the rating long term. See HANDOFF.md.
+       BEFORE LAUNCH these are quotes on a page, not a live feed. The Elfsight
+       slot for the real Google widget was on results.html, which was deleted
+       on 2026-09-01; if a live feed is still wanted it needs a home, and this
+       section is the obvious one. Put the widget ABOVE these quotes rather
+       than in place of them: the archive's ~35 reviews are mostly oral
+       surgery, and an unfiltered feed is less useful to a cosmetic patient
+       than this hand-picked set. See HANDOFF.md.
        ==================================================================== -->
   <section class="proof_component" data-chapter="06" data-chapter-name="The proof">
     <div class="proof_lead">
@@ -383,10 +380,6 @@
         <figcaption class="rail_meta"><span class="rail_name">Saul Rivera</span><span class="rail_tag">Skin</span></figcaption>
       </figure>
     </div>
-
-    <div class="proof_foot" data-j="rise">
-      <a class="button is-secondary" href="results.html#reviews">Read more reviews</a>
-    </div>
   </section>
 
   <!-- ====================================================================
@@ -397,8 +390,9 @@
        NO SYNTHETIC BEFORE/AFTER, unchanged from v1 and deliberate. A generated
        or stock "case" on a surgical practice's site is a fabricated clinical
        outcome, and it is the one claim a prospective patient actually relies
-       on. The gallery mechanism is built and lives on results.html, where it is
-       labelled; here the copy says plainly what it is waiting for.
+       on. The gallery mechanism was built and lived on results.html, which was
+       deleted on 2026-09-01 and is recoverable from git history; here the copy
+       says plainly what it is waiting for, which is all this section ever did.
        ==================================================================== -->
   <section class="offer_component" data-chapter="07" data-chapter-name="The results">
     <div class="offer_inner">
@@ -418,9 +412,6 @@
           <h2 class="offer_title">The work speaks in pairs of photographs.</h2>
           <p class="offer_text">Neck lifts, blepharoplasty, chin and jawline work, fillers and resurfacing, filtered by treatment so you can look only at the one you came for.</p>
           <p class="offer_note">Cases are published only with the patient's current written consent, so the gallery fills as the practice's own photography is shot and cleared.</p>
-          <div class="offer_actions">
-            <a class="button is-secondary" href="results.html">See results &amp; reviews</a>
-          </div>
         </div>
       </div>
 
@@ -440,9 +431,6 @@
           <p class="chapter_mark">Memberships</p>
           <h2 class="offer_title">Credit that banks instead of expiring.</h2>
           <p class="offer_text">Aesthetic care is rarely one appointment. A membership turns a monthly amount into credit that accumulates until you want it: a syringe this spring, or a surgical fee next year, with member pricing on everything in between.</p>
-          <div class="offer_actions">
-            <a class="button is-secondary" href="memberships.html">See the three tiers</a>
-          </div>
         </div>
         <div class="offer_media">
           <img src="assets/gen-skincare-shelf.webp" alt="Skincare bottles and a folded towel on a pale stone shelf" width="1600" height="900" loading="lazy">
@@ -498,10 +486,6 @@
             <div class="faq_answer"><p>In most cases 48 hours after sutures come out. After CO2 laser, about ten days. Sun avoidance matters more than makeup does in that window: sun on healing skin is what darkens a scar.</p></div>
           </details>
         </div>
-
-        <div class="margin-top margin-large">
-          <a class="button is-secondary" href="book.html#financing">More answers on the booking page</a>
-        </div>
       </div>
     </div>
   </section>
@@ -518,7 +502,7 @@
        The chapter closes on the practical facts and hands over to the shared
        CTA band, which every page carries.
        ==================================================================== -->
-  <section class="invite_component" data-chapter="10" data-chapter-name="The invitation">
+  <section class="invite_component" id="contact" data-chapter="10" data-chapter-name="The invitation">
     <div class="invite_inner">
       <p class="chapter_mark" data-j="rise">Where patients travel from</p>
       <h2 class="display-lg" data-j-split>One practice in Westlake, serving the north side of the Metroplex.</h2>

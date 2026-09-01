@@ -1,3 +1,5 @@
+/* REMOVED 2026-09-01: .drawer_sublist / .drawer_sublink / .drawer_subheading,
+   the opened-out treatment menu. The drawer is now the mobile contact card. */
 /* The mobile drawer. Full-height ivory panel, the same link list as the navbar
    plus the four categories opened out, so a phone never needs a submenu. */
 .drawer_component {
@@ -76,20 +78,6 @@
 .drawer_link:hover {
   color: var(--accent);
 }
-.drawer_sublist {
-  list-style: none;
-  padding: 0.4rem 0 0.9rem;
-  border-bottom: 1px solid var(--line);
-}
-.drawer_sublink {
-  display: block;
-  padding: 0.5rem 0 0.5rem 1rem;
-  font-size: var(--size-text-small);
-  color: var(--fg-body);
-}
-.drawer_sublink:hover {
-  color: var(--accent);
-}
 
 .drawer_foot {
   margin-top: auto;
@@ -100,22 +88,4 @@
 .drawer_meta {
   font-size: var(--size-text-small);
   color: var(--fg-mute);
-}
-
-/* Drawer category headings, added with the mega menu 2026-08-31. The drawer
-   now lists every treatment page rather than four category anchors, so the
-   groups need a heading to stay scannable on a phone. */
-.drawer_subheading {
-  margin: 1.1rem 0 0.35rem;
-  padding-bottom: 0.4rem;
-  font-family: var(--font-display);
-  font-size: var(--size-text-small);
-  color: var(--fg-mute);
-  border-bottom: 1px solid var(--line);
-}
-.drawer_subheading a {
-  color: inherit;
-}
-.drawer_subheading a:hover {
-  color: var(--accent);
 }

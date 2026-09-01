@@ -337,9 +337,20 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
       open: d.classList.contains("is-open") && getComputedStyle(d).visibility === "visible",
       onScreen: r.left >= -1 && r.right <= window.innerWidth + 1,
       links: links.length,
-      // The menu is taller than a phone, so the PANEL has to scroll. If it does
-      // not, everything past the fold is unreachable while the drawer is open.
-      scrollable: panel.scrollHeight > r.height + 2 && ["auto", "scroll"].includes(getComputedStyle(panel).overflowY),
+      // The panel must be able to scroll its own overflow, because the page
+      // behind it is locked: anything past the panel's fold is otherwise
+      // unreachable while the drawer is open.
+      //
+      // This used to ALSO assert that the panel currently overflows, which was
+      // true when the menu carried four category headings and twelve treatment
+      // links. Since 2026-09-01 the drawer is three links and a contact block
+      // and it fits a 390x844 phone with room to spare, so that half of the
+      // assertion was failing on a drawer that is fine. What has to hold is the
+      // capability, and that the content fits or scrolls — never neither.
+      scrollable:
+        ["auto", "scroll"].includes(getComputedStyle(panel).overflowY) ||
+        panel.scrollHeight <= r.height + 2,
+      overflows: panel.scrollHeight > r.height + 2,
       offscreenLinks: links.filter((a) => {
         const lr = a.getBoundingClientRect();
         return lr.width === 0 || lr.right > window.innerWidth + 1 || lr.left < -1;
@@ -351,7 +362,7 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
   });
   check("the drawer opens and sits on screen", drawer.open && drawer.onScreen);
   check("every drawer link is on screen", drawer.offscreenLinks === 0, `${drawer.links} links, ${drawer.offscreenLinks} off`);
-  check("the drawer scrolls its own overflow", drawer.scrollable);
+  check("the drawer fits, or scrolls its own overflow", drawer.scrollable, drawer.overflows ? "overflows and scrolls" : "fits without scrolling");
   check("the page behind the drawer is scroll-locked", drawer.bodyLocked);
   check("no console errors with the drawer open", errors.length === 0, errors.slice(0, 2).join(" | "));
   await page.close();

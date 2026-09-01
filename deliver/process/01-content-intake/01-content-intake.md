@@ -20,6 +20,26 @@ Send, receive, and normalize the post-signing website-content questionnaire for 
 3. Normalize answers into structured page/content notes, open questions, and reusable copy blocks.
 4. Confirm that the minimum content required for wireframing is present before passing the package to Wireframe.
 5. When the engagement includes a competitive read, **screen the competitor set before scraping it**. Record the candidates, the criteria and the per-candidate evidence in `competitor-screen.csv` and a short selection report. Never state a rejection reason that has not been verified against the live site.
+6. **When the client is rebranding or replacing a site, recover the retired one before writing anything.** A practice's own published copy is the best content source there is: it is already approved, already in their voice, and already accurate about their own procedures. See below.
+
+### Recovering a client's retired site
+
+Rebrands routinely destroy the best content the client will ever have. If the old site is gone, assume the copy is recoverable until proven otherwise, and recover it *before* commissioning new writing — on the Stone engagement this turned a thin seven-page build into a full one and produced ~26,000 words of the client's own copy plus 60 of their own FAQ pairs.
+
+Working scripts to copy and adapt: `deliver/brandklout/stone-dental-implant-center/workflows/01-content-intake/.tmp/archive-text/` — `fetch-archive.mjs` (bulk fetch), `refetch-stubs.mjs` (repair pass), `extract-treatments.mjs` (structure the result into JSON).
+
+Five traps, all of which cost time on that engagement:
+
+1. **A 301 on the live domain does not mean the content is gone.** Deep URLs still in Google's index may 404 after a wholesale redirect to a sister site. Go to the archive rather than concluding the copy no longer exists.
+2. **`web.archive.org` rate-limits; it does not usually ban.** A hard block that resets every request was gone the next day. Wait a day before building a workaround — a whole session was once spent reading copy off screenshots that could simply have been fetched.
+3. **Recent captures may be bot-challenge interstitials.** Cloudflare-style "One moment, please…" pages archive with status 200 at ~5 KB. Asking for the *closest* or *newest* snapshot returns those, not the page. Read the full CDX history and take the **largest** 200 capture — length separates a real page (~140 KB) from an interstitial.
+4. **A pinned timestamp returns ~80-byte redirect stubs** wherever the nearest capture is a 301. Detect them by size and refetch those URLs individually.
+5. **The template chrome repeats on every page** — nav, footer, and often a testimonial carousel sitting *in the middle* of the content. Cut it at both ends and excise the middle block, or one page's worth of real copy arrives buried in twenty-five copies of the same menu.
+
+Two content judgements to make, not just extraction:
+
+- **Reviews and testimonials carry the old brand's mix.** A cosmetic rebrand inherits mostly non-cosmetic reviews. Select; do not bulk-import.
+- **Before/after photography does not transfer.** Consent was given for a site that no longer exists, under a brand that has been retired. Publish only cases the client re-supplies with current written consent. Record this as a launch blocker rather than quietly recovering the images.
 
 ### Competitor screening criteria (in priority order)
 1. **Catchment overlap** - competes for the same searcher. Weighted highest for local-service clients.

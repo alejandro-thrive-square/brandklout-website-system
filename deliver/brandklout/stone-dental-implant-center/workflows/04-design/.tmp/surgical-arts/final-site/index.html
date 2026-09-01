@@ -175,6 +175,16 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="page-wrapper">
+<!-- The navbar, since 2026-09-01, on a site that is one page.
+
+     WHAT WAS HERE. A Treatments link with a mega-dropdown listing four
+     categories and twelve treatment pages, then Results, Memberships, About and
+     Contact. Every one of those destinations was deleted with the pages, so the
+     menu is down to the two things that still lead somewhere: the phone number,
+     and the invitation at the foot of the home page.
+
+     The {{CUR_*}} current-page tokens went too. With one page there is nothing
+     to mark as current, and build-site.mjs no longer replaces them. -->
 <header class="navbar_component is-static" data-nav>
   <div class="padding-global">
     <div class="container-large">
@@ -187,62 +197,7 @@
         </a>
 
         <nav class="navbar_menu" aria-label="Primary">
-          <!-- The four categories hang off Treatments, mirroring the board's
-               "PROCEDURES ˅". The links are anchors into the hub's tabs rather
-               than separate pages, because the hub IS the category index. -->
-          <!-- "Treatments" is a LINK, not a button, and the caret beside it is
-               a separate button. Client feedback 2026-08-31: the label did
-               nothing but open a menu, so the overview page was unreachable
-               from the nav. Splitting them means click-the-word navigates,
-               click-the-caret opens, hover opens (CSS), and both halves stay
-               keyboard reachable. The old single button called
-               preventDefault() on every click, which is why it could never
-               have been given an href. -->
-          <div class="navbar_dropdown">
-            <a class="navbar_link navbar_dropdown-toggle" href="treatments.html">Treatments</a>
-            <button class="navbar_dropdown-caret-btn" type="button" aria-expanded="false" aria-haspopup="true" aria-label="Open the treatments menu">
-              <svg class="navbar_dropdown-caret" viewBox="0 0 12 8" fill="none" aria-hidden="true"><path d="M1 1l5 5 5-5" stroke="currentColor" stroke-width="1.5"/></svg>
-            </button>
-            <ul class="navbar_dropdown-list is-mega">
-              <li class="navbar_mega-group">
-                <a class="navbar_mega-heading" href="treatments.html#face">Face</a>
-                <ul class="navbar_mega-sublist">
-                  <li><a class="navbar_dropdown-link" href="face-and-neck-lift.html">Face &amp; Neck Lift</a></li>
-                  <li><a class="navbar_dropdown-link" href="brow-lift.html">Brow &amp; Forehead Lift</a></li>
-                  <li><a class="navbar_dropdown-link" href="blepharoplasty.html">Blepharoplasty</a></li>
-                  <li><a class="navbar_dropdown-link" href="cheek-and-chin-implants.html">Cheek &amp; Chin Implants</a></li>
-                  <li><a class="navbar_dropdown-link" href="buccal-fat-reduction.html">Buccal Fat Pad Reduction</a></li>
-                  <li><a class="navbar_dropdown-link" href="lip-lift.html">Surgical Lip Lift</a></li>
-                </ul>
-              </li>
-              <li class="navbar_mega-group">
-                <a class="navbar_mega-heading" href="treatments.html#neck">Neck &amp; Jawline</a>
-                <ul class="navbar_mega-sublist">
-                  <li><a class="navbar_dropdown-link" href="neck-lift.html">Neck Lift</a></li>
-                  <li><a class="navbar_dropdown-link" href="myellevate-neck-lift.html">MyEllevate&reg; Neck Lift</a></li>
-                  <li><a class="navbar_dropdown-link" href="jawline-implant.html">Jawline Implant</a></li>
-                </ul>
-              </li>
-              <li class="navbar_mega-group">
-                <a class="navbar_mega-heading" href="treatments.html#skin">Skin</a>
-                <ul class="navbar_mega-sublist">
-                  <li><a class="navbar_dropdown-link" href="laser-resurfacing.html">Laser Resurfacing</a></li>
-                  <li><a class="navbar_dropdown-link" href="morpheus8.html">Morpheus8</a></li>
-                </ul>
-              </li>
-              <li class="navbar_mega-group">
-                <a class="navbar_mega-heading" href="treatments.html#non-surgical">Non-Surgical</a>
-                <ul class="navbar_mega-sublist">
-                  <li><a class="navbar_dropdown-link" href="injectables.html">Injectables</a></li>
-                </ul>
-              </li>
-              <li class="navbar_mega-all"><a class="navbar_dropdown-link" href="treatments.html">All treatments &amp; fees <span aria-hidden="true">&rarr;</span></a></li>
-            </ul>
-          </div>
-          <a class="navbar_link" href="results.html">Results</a>
-          <a class="navbar_link" href="memberships.html">Memberships</a>
-          <a class="navbar_link" href="about.html">About</a>
-          <a class="navbar_link" href="book.html#visit">Contact</a>
+          <a class="navbar_link" href="#contact">Contact</a>
         </nav>
 
         <div class="navbar_actions">
@@ -250,7 +205,7 @@
             <svg class="navbar_phone-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
             (817) 918-3666
           </a>
-          <a class="button is-small" href="book.html#request">Book a consultation</a>
+          <a class="button is-small" href="#contact">Book a consultation</a>
           <button class="navbar_burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
             <span></span><span></span><span></span>
           </button>
@@ -260,6 +215,14 @@
   </div>
 </header>
 
+<!-- The mobile drawer. At 991px and below the navbar hides both its menu and
+     its phone number, so this panel is the ONLY place a phone gets the number
+     without scrolling to the footer. That is why it survives a one-page site:
+     it is not a menu any more, it is the mobile contact card.
+
+     A generated token used to expand here into four category headings and
+     twelve treatment links, built from treatments-data.mjs. Both are gone, and
+     so is the stray-token check's reason to complain about this file. -->
 <div class="drawer_component" id="drawer">
   <div class="drawer_scrim"></div>
   <div class="drawer_panel" role="dialog" aria-modal="true" aria-label="Menu">
@@ -272,43 +235,11 @@
     </div>
 
     <nav class="drawer_nav" aria-label="Mobile">
-      <a class="drawer_link" href="treatments.html">Treatments &amp; fees</a>
-      <!-- Opened out rather than nested, so a phone never has to tap through a
-           submenu. Generated from treatments-data.mjs: category headings link
-           to their tab on the hub, the treatments under them to their own
-           pages. -->
-            <p class="drawer_subheading"><a href="treatments.html#face">Face</a></p>
-      <ul class="drawer_sublist">
-        <li><a class="drawer_sublink" href="face-and-neck-lift.html">Face &amp; Neck Lift</a></li>
-        <li><a class="drawer_sublink" href="brow-lift.html">Brow &amp; Forehead Lift</a></li>
-        <li><a class="drawer_sublink" href="blepharoplasty.html">Blepharoplasty</a></li>
-        <li><a class="drawer_sublink" href="cheek-and-chin-implants.html">Cheek &amp; Chin Implants</a></li>
-        <li><a class="drawer_sublink" href="buccal-fat-reduction.html">Buccal Fat Pad Reduction</a></li>
-        <li><a class="drawer_sublink" href="lip-lift.html">Surgical Lip Lift</a></li>
-      </ul>
-      <p class="drawer_subheading"><a href="treatments.html#neck">Neck &amp; Jawline</a></p>
-      <ul class="drawer_sublist">
-        <li><a class="drawer_sublink" href="neck-lift.html">Neck Lift</a></li>
-        <li><a class="drawer_sublink" href="myellevate-neck-lift.html">MyEllevate&reg; Neck Lift</a></li>
-        <li><a class="drawer_sublink" href="jawline-implant.html">Jawline Implant</a></li>
-      </ul>
-      <p class="drawer_subheading"><a href="treatments.html#skin">Skin</a></p>
-      <ul class="drawer_sublist">
-        <li><a class="drawer_sublink" href="laser-resurfacing.html">Laser Resurfacing</a></li>
-        <li><a class="drawer_sublink" href="morpheus8.html">Morpheus8</a></li>
-      </ul>
-      <p class="drawer_subheading"><a href="treatments.html#non-surgical">Non-Surgical</a></p>
-      <ul class="drawer_sublist">
-        <li><a class="drawer_sublink" href="injectables.html">Injectables</a></li>
-      </ul>
-      <a class="drawer_link" href="results.html">Results</a>
-      <a class="drawer_link" href="memberships.html">Memberships</a>
-      <a class="drawer_link" href="about.html">About</a>
-      <a class="drawer_link" href="book.html#visit">Contact</a>
+      <a class="drawer_link" href="#contact">Contact</a>
     </nav>
 
     <div class="drawer_foot">
-      <a class="button" href="book.html#request">Book a consultation</a>
+      <a class="button" href="#contact">Book a consultation</a>
       <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
       <p class="drawer_meta">72 Andorra Dr #110, Westlake, TX 76262</p>
     </div>
@@ -382,9 +313,12 @@
       <p class="arrival_eyebrow" data-j="rise">Facial &amp; cosmetic surgery &middot; Westlake, Texas</p>
       <h1 class="display-xl arrival_title" data-j-split>Sculpt with <em class="display-accent">confidence</em>.</h1>
       <p class="arrival_sub" data-j="rise">A boutique practice where one surgeon plans your result, performs it, and sees you through every stage after.</p>
+      <!-- One button since 2026-09-01, not two. The secondary was "See
+           treatments & fees" and the hub it opened is gone; the primary now
+           lands on the invitation at the foot of this page, which is where the
+           address, the phone number and the hours actually are. -->
       <div class="arrival_actions" data-j="rise">
-        <a class="button" href="book.html#request">Schedule a consultation</a>
-        <a class="button is-secondary" href="treatments.html">See treatments &amp; fees</a>
+        <a class="button" href="#contact">Schedule a consultation</a>
       </div>
       <p class="arrival_place" data-j="rise">Based in Westlake and caring for patients across Southlake, Grapevine, Colleyville, Keller and Fort Worth.</p>
     </div>
@@ -457,7 +391,7 @@
     </div>
 
     <div class="ways_grid" data-j="stagger">
-      <a class="ways_card" href="treatments.html#face">
+      <div class="ways_card">
         <div class="ways_media">
           <span class="ways_index" aria-hidden="true">01</span>
           <img src="assets/cat-face-tall.webp" alt="A carved marble profile on a travertine plinth in a daylit room" width="1000" height="1500" loading="lazy">
@@ -465,11 +399,10 @@
         <div class="ways_body">
           <h3 class="ways_name">Face</h3>
           <p class="ways_text">Facial plastic surgery for refined, natural results.</p>
-          <span class="ways_go">Explore <span aria-hidden="true">&rarr;</span></span>
         </div>
-      </a>
+      </div>
 
-      <a class="ways_card" href="treatments.html#neck">
+      <div class="ways_card">
         <div class="ways_media">
           <span class="ways_index" aria-hidden="true">02</span>
           <img src="assets/cat-neck-tall.webp" alt="Polished surgical instruments laid in a row on cream linen" width="1000" height="1500" loading="lazy">
@@ -477,11 +410,10 @@
         <div class="ways_body">
           <h3 class="ways_name">Neck</h3>
           <p class="ways_text">Restore youthful contours and definition.</p>
-          <span class="ways_go">Explore <span aria-hidden="true">&rarr;</span></span>
         </div>
-      </a>
+      </div>
 
-      <a class="ways_card" href="treatments.html#skin">
+      <div class="ways_card">
         <div class="ways_media">
           <span class="ways_index" aria-hidden="true">03</span>
           <img src="assets/cat-skin-tall.webp" alt="A laser handpiece and amber bottles on a pale stone counter" width="1000" height="1500" loading="lazy">
@@ -489,11 +421,10 @@
         <div class="ways_body">
           <h3 class="ways_name">Skin</h3>
           <p class="ways_text">Advanced skin rejuvenation for a radiant glow.</p>
-          <span class="ways_go">Explore <span aria-hidden="true">&rarr;</span></span>
         </div>
-      </a>
+      </div>
 
-      <a class="ways_card" href="treatments.html#non-surgical">
+      <div class="ways_card">
         <div class="ways_media">
           <span class="ways_index" aria-hidden="true">04</span>
           <img src="assets/cat-nonsurgical-tall.webp" alt="Glass vials and capped syringes on a stainless tray beside folded linen" width="1000" height="1500" loading="lazy">
@@ -501,14 +432,10 @@
         <div class="ways_body">
           <h3 class="ways_name">Non-Surgical</h3>
           <p class="ways_text">Enhance your look with minimal downtime.</p>
-          <span class="ways_go">Explore <span aria-hidden="true">&rarr;</span></span>
         </div>
-      </a>
+      </div>
     </div>
 
-    <div class="ways_foot" data-j="rise">
-      <a class="button is-secondary" href="treatments.html">View all treatments &amp; fees</a>
-    </div>
   </section>
 
   <!-- ====================================================================
@@ -533,9 +460,6 @@
           <li class="dealt_item"><span class="dealt_num">03</span><span>Attending surgeon, Baylor and Methodist Medical Centers</span></li>
           <li class="dealt_item"><span class="dealt_num">04</span><span>KLS Martin IPS&reg; certified for patient-specific implant planning</span></li>
         </ol>
-        <div class="surgeon_actions" data-j="rise">
-          <a class="button is-secondary" href="about.html">More about Dr. Stone</a>
-        </div>
       </div>
       <figure class="surgeon_media" data-j="rise">
         <img src="assets/dr-stone-portrait.webp" alt="Dr. Mona Stone, DDS, at the Westlake practice" width="643" height="1020" loading="lazy">
@@ -662,9 +586,13 @@
        never reworded. The archive holds about thirty-five reviews and most are
        oral-surgery ones; these six are the cosmetic ones.
 
-       BEFORE LAUNCH these are quotes on a page, not a live feed. results.html
-       reserves the Elfsight slot for the real Google widget, which is what
-       should carry the rating long term. See HANDOFF.md.
+       BEFORE LAUNCH these are quotes on a page, not a live feed. The Elfsight
+       slot for the real Google widget was on results.html, which was deleted
+       on 2026-09-01; if a live feed is still wanted it needs a home, and this
+       section is the obvious one. Put the widget ABOVE these quotes rather
+       than in place of them: the archive's ~35 reviews are mostly oral
+       surgery, and an unfiltered feed is less useful to a cosmetic patient
+       than this hand-picked set. See HANDOFF.md.
        ==================================================================== -->
   <section class="proof_component" data-chapter="06" data-chapter-name="The proof">
     <div class="proof_lead">
@@ -701,10 +629,6 @@
         <figcaption class="rail_meta"><span class="rail_name">Saul Rivera</span><span class="rail_tag">Skin</span></figcaption>
       </figure>
     </div>
-
-    <div class="proof_foot" data-j="rise">
-      <a class="button is-secondary" href="results.html#reviews">Read more reviews</a>
-    </div>
   </section>
 
   <!-- ====================================================================
@@ -715,8 +639,9 @@
        NO SYNTHETIC BEFORE/AFTER, unchanged from v1 and deliberate. A generated
        or stock "case" on a surgical practice's site is a fabricated clinical
        outcome, and it is the one claim a prospective patient actually relies
-       on. The gallery mechanism is built and lives on results.html, where it is
-       labelled; here the copy says plainly what it is waiting for.
+       on. The gallery mechanism was built and lived on results.html, which was
+       deleted on 2026-09-01 and is recoverable from git history; here the copy
+       says plainly what it is waiting for, which is all this section ever did.
        ==================================================================== -->
   <section class="offer_component" data-chapter="07" data-chapter-name="The results">
     <div class="offer_inner">
@@ -736,9 +661,6 @@
           <h2 class="offer_title">The work speaks in pairs of photographs.</h2>
           <p class="offer_text">Neck lifts, blepharoplasty, chin and jawline work, fillers and resurfacing, filtered by treatment so you can look only at the one you came for.</p>
           <p class="offer_note">Cases are published only with the patient's current written consent, so the gallery fills as the practice's own photography is shot and cleared.</p>
-          <div class="offer_actions">
-            <a class="button is-secondary" href="results.html">See results &amp; reviews</a>
-          </div>
         </div>
       </div>
 
@@ -758,9 +680,6 @@
           <p class="chapter_mark">Memberships</p>
           <h2 class="offer_title">Credit that banks instead of expiring.</h2>
           <p class="offer_text">Aesthetic care is rarely one appointment. A membership turns a monthly amount into credit that accumulates until you want it: a syringe this spring, or a surgical fee next year, with member pricing on everything in between.</p>
-          <div class="offer_actions">
-            <a class="button is-secondary" href="memberships.html">See the three tiers</a>
-          </div>
         </div>
         <div class="offer_media">
           <img src="assets/gen-skincare-shelf.webp" alt="Skincare bottles and a folded towel on a pale stone shelf" width="1600" height="900" loading="lazy">
@@ -816,10 +735,6 @@
             <div class="faq_answer"><p>In most cases 48 hours after sutures come out. After CO2 laser, about ten days. Sun avoidance matters more than makeup does in that window: sun on healing skin is what darkens a scar.</p></div>
           </details>
         </div>
-
-        <div class="margin-top margin-large">
-          <a class="button is-secondary" href="book.html#financing">More answers on the booking page</a>
-        </div>
       </div>
     </div>
   </section>
@@ -836,7 +751,7 @@
        The chapter closes on the practical facts and hands over to the shared
        CTA band, which every page carries.
        ==================================================================== -->
-  <section class="invite_component" data-chapter="10" data-chapter-name="The invitation">
+  <section class="invite_component" id="contact" data-chapter="10" data-chapter-name="The invitation">
     <div class="invite_inner">
       <p class="chapter_mark" data-j="rise">Where patients travel from</p>
       <h2 class="display-lg" data-j-split>One practice in Westlake, serving the north side of the Metroplex.</h2>
@@ -888,7 +803,7 @@
           <h2 class="heading-style-h2 cta_title">Your Confidence. <em class="text-style-display-accent">Our Commitment.</em></h2>
           <p class="text-size-medium cta_text">Personalised care, advanced technique and beautiful, natural results, planned by the surgeon who performs them.</p>
           <div class="button-group is-center cta_actions">
-            <a class="button" href="book.html#request">Schedule a consultation</a>
+            <a class="button" href="#contact">Schedule a consultation</a>
             <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
           </div>
         </div>
@@ -898,7 +813,11 @@
 </section>
 
 </main>
-<!-- The category ribbon, then the board's three-column footer.
+<!-- The board's three-column footer.
+
+     The category ribbon that used to sit above it — Face, Neck & Jawline, Skin,
+     Non-Surgical, each linking to a tab on the treatments hub — went with the
+     hub on 2026-09-01. Its rules are still in 38-cta.css; nothing renders them.
 
      NAP RESOLVED 2026-08-31. This used to carry the sister practice's values
      ((817) 383-8361, suite #110A, Wed 9–3 / Fri 9–4) because the archive was
@@ -909,25 +828,6 @@
 
      So the design board's footer was correct, not placeholder. See
      SURGICAL-ARTS-BRIEF.md § "NAP" for the one page that disagrees. -->
-<nav class="category-ribbon_component" aria-label="Treatment categories">
-  <a class="category-ribbon_link" href="treatments.html#face">
-    <span class="category-ribbon_name">Face</span>
-    <span class="category-ribbon_count">Refined, natural results</span>
-  </a>
-  <a class="category-ribbon_link" href="treatments.html#neck">
-    <span class="category-ribbon_name">Neck &amp; Jawline</span>
-    <span class="category-ribbon_count">Contour and definition</span>
-  </a>
-  <a class="category-ribbon_link" href="treatments.html#skin">
-    <span class="category-ribbon_name">Skin</span>
-    <span class="category-ribbon_count">Rejuvenation and resurfacing</span>
-  </a>
-  <a class="category-ribbon_link" href="treatments.html#non-surgical">
-    <span class="category-ribbon_name">Non-Surgical</span>
-    <span class="category-ribbon_count">Minimal downtime</span>
-  </a>
-</nav>
-
 <footer class="footer_component">
   <div class="padding-global">
     <div class="container-large">

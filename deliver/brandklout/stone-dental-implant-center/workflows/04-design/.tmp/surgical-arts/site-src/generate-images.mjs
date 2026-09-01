@@ -22,7 +22,23 @@
  * >   - **Brooke's and Abby's portraits.** They are real, named people. A
  * >     generated likeness standing in for a named individual is a fabrication
  * >     of that person, whatever the alt text says.
- * >   - **The before/after gallery.** See results.body.html, and HANDOFF.md §3.
+ * >   - **The before/after gallery.** A generated or stock "case" on a surgical
+ * >     practice site is a fabricated clinical outcome, and it is the single
+ * >     claim a prospective patient relies on most. See HANDOFF.md.
+ *
+ * > [!NOTE]
+ * > **The `used` field on each slot below is a 2026-08-31 record, not a live
+ * > index.** The client kept the home page on 2026-09-01 and the other
+ * > seventeen pages were deleted; most of these slots therefore name a page
+ * > that no longer exists. The strings are left alone deliberately. The images
+ * > were kept for the same reason — they are the expensive part, the pages are
+ * > recoverable from git history, and a slot that remembers what it was for is
+ * > worth more than one that has been tidied into saying nothing.
+ * >
+ * > Live on the home page today: hero-arrival, cat-face-tall, cat-neck-tall,
+ * > cat-skin-tall, cat-nonsurgical-tall, gen-implant-forms, gen-recovery-daylight,
+ * > gen-skincare-shelf, clinic-detail, dr-stone-portrait, ssa-consult-room,
+ * > ssa-signage, ask-reception-tall, and the two stone textures.
  *
  * Auth: MAGNIFIC in the repo-root .env.
  *

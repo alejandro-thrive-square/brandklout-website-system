@@ -15,7 +15,7 @@
  *   - NOTHING fetched off the file, so it works on a plane
  *   - no console errors
  *
- * Usage:  node check-standalone.mjs [../preview-neck-lift.html]
+ * Usage:  node check-standalone.mjs [../preview-home.html]
  */
 import puppeteer from "puppeteer-core";
 import path from "node:path";
@@ -23,7 +23,7 @@ import fs from "node:fs";
 import { fileURLToPath, pathToFileURL } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const FILE = path.resolve(HERE, process.argv[2] || "../preview-neck-lift.html");
+const FILE = path.resolve(HERE, process.argv[2] || "../preview-home.html");
 if (!fs.existsSync(FILE)) {
   console.error(`no such file: ${FILE}`);
   process.exit(1);
