@@ -34,17 +34,27 @@ const cta = read("partials/cta.html");
 const footer = read("partials/footer.html");
 
 /* --- the page table -------------------------------------------------------
-   ONE PAGE, since 2026-09-01. The client kept the home page and nothing else,
+   TWO PAGES, since 2026-09-01. The client kept the home page and nothing else,
    so the other seventeen bodies, their seo.json entries and the collection in
-   treatments-data.mjs were deleted rather than left to rot. What survives here
-   is the shape of the table, not a stub: adding a page is still one row plus a
-   body and an seo entry.
+   treatments-data.mjs were deleted. The neck lift is the FIRST ONE BACK, and it
+   is back rewritten rather than recovered: the deleted seventeen were v1 pages,
+   and v1 is the design the client rejected. It is here to answer one question
+   before the other eleven treatments follow it, which is whether the journey
+   system works on a page that has to sell a procedure. See
+   pages/neck-lift.body.html, which opens with why.
+
+   Adding the second page cost exactly what the table's shape promised it would:
+   one row, one body, one seo entry. Nothing in the build changed except
+   `schema` learning to take an array.
 
    `photoHero` is true only where the navbar sits over a photograph and
-   therefore starts transparent. `cta` false suppresses the shared closing band
-   on a page that already ends in one. */
+   therefore starts transparent. Both pages open on a marble panel with the
+   photograph to the RIGHT of the copy, so the bar sits over ivory on both and
+   both are static. `cta` false suppresses the shared closing band on a page
+   that already ends in one. */
 const PAGES = [
   { slug: "index", src: "home", photoHero: false, motion: true },
+  { slug: "neck-lift", src: "neck-lift", photoHero: false, motion: true },
 ];
 
 /* --- bundles --------------------------------------------------------------
@@ -88,8 +98,14 @@ function seoBlock(slug) {
     `<meta name="twitter:title" content="${esc(d.ogTitle || d.title)}">`,
     `<meta name="twitter:description" content="${esc(d.ogDescription || d.description)}">`,
   ];
-  // Every page carries the practice graph; a page may add its own node.
-  const graph = [seo.organization].concat(d.schema ? [d.schema] : []);
+  // Every page carries the practice graph; a page may add its own node, or
+  // several. The neck lift page adds two — a MedicalProcedure and an FAQPage —
+  // which is why `schema` accepts an array as well as a single node. It used to
+  // take only one, and the deleted service pages got their FAQPage bolted on
+  // afterwards by a separate script (add-faq-schema.py). One shape in seo.json
+  // is better than a post-processing pass over the built HTML.
+  const own = d.schema ? (Array.isArray(d.schema) ? d.schema : [d.schema]) : [];
+  const graph = [seo.organization].concat(own);
   out.push(
     `<script type="application/ld+json">\n${JSON.stringify(
       { "@context": "https://schema.org", "@graph": graph },
@@ -148,7 +164,12 @@ for (const f of fs.readdirSync(path.join(SRC, "assets"))) {
 const built = [];
 for (const page of PAGES) {
   const body = read(`pages/${page.src}.body.html`);
-  const nav = navbar.replace("{{NAV_MODE}}", page.photoHero ? "" : " is-static");
+  // `aria-current="page"` rather than a class, in both the bar and the drawer.
+  // 20-navbar.css already styles the attribute selector, so the marker is
+  // meaningful to a screen reader first and visible second.
+  const cur = (s) => s.replace(/\{\{CUR_NECK\}\}/g, page.slug === "neck-lift" ? ' aria-current="page"' : "");
+  const nav = cur(navbar).replace("{{NAV_MODE}}", page.photoHero ? "" : " is-static");
+  const drawerHtml = cur(drawer);
 
   const html = `<!DOCTYPE html>
 <html lang="en">
@@ -159,7 +180,7 @@ ${head.replace("{{SEO}}", seoBlock(page.slug))}
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="page-wrapper">
 ${nav}
-${drawer}
+${drawerHtml}
 <main class="main-wrapper" id="main">
 ${body}
 ${page.cta === false ? "" : cta}

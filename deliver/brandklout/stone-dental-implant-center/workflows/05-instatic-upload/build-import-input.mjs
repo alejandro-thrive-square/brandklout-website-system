@@ -45,15 +45,17 @@ const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'seo.json'), 
    > [!WARNING]
    > This list IS the site, and trap 8 is the reason that matters. In replace
    > mode any stored page absent from `changedPages` is DELETED server-side.
-   > The live instance still holds eighteen pages; the next apply removes
-   > seventeen of them. That is the intended outcome, and it is irreversible
-   > from here, so confirm it is wanted before running with --apply.
+   > The live instance still holds eighteen pages; the next apply leaves TWO.
+   > Sixteen are removed, and the neck lift is rewritten from the v1 design to
+   > the journey one at the same slug. That is the intended outcome, and it is
+   > irreversible from here, so confirm it is wanted before running --apply.
 
    Slug order still matters: `index` must exist first, because setup already
    created a page at that slug and it is the one we overwrite rather than
    duplicate. */
 const PAGES = [
   { file: 'index.html', slug: 'index', title: 'Home' },
+  { file: 'neck-lift.html', slug: 'neck-lift', title: 'Neck Lift' },
 ]
 
 const problems = []

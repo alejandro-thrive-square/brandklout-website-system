@@ -1,5 +1,5 @@
 {
-  "_note": "Head metadata for the site. One entry per built page, keyed by slug. Since 2026-09-01 the site is the home page alone; entries for the other seventeen pages were removed with them.",
+  "_note": "Head metadata for the site. One entry per built page, keyed by slug. Since 2026-09-01 the site is the home page plus one service page, the neck lift, built to test the journey design on a page that has to sell a procedure. `schema` may be a single node or an array; both are merged into the page's @graph alongside the practice.",
   "site": {
     "name": "Stone Surgical Arts",
     "origin": "https://www.stonesurgicalarts.com",
@@ -123,6 +123,82 @@
       "description": "Boutique facial and cosmetic surgery in Westlake, Texas. Dr. Mona Stone plans and performs every case herself: face, neck and jawline, skin and non-surgical.",
       "ogTitle": "Stone Surgical Arts: Facial & Cosmetic Surgery, Westlake TX",
       "ogDescription": "Precise treatments. Impeccable results. Surgery and aesthetics planned around your face, by the surgeon who performs them."
+    },
+    "neck-lift": {
+      "title": "Neck Lift Westlake TX | Stone Surgical Arts",
+      "description": "The full surgical procedure, with muscle repair and skin removal, for a neck that has gone past what a suture can hold. $11,000 in Westlake, TX.",
+      "ogTitle": "Neck Lift | Stone Surgical Arts",
+      "ogDescription": "Muscle repair, contouring and skin removal, planned and performed by Dr. Mona Stone. $11,000 in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "Neck Lift",
+          "description": "A full surgical neck lift: repair of the platysma, contouring of submental fat and removal of excess skin, for a neck that has gone past what a suture suspension can hold.",
+          "category": "Neck & Jawline",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Neck",
+          "howPerformed": "Under general anaesthetic or deep sedation, two to four hours in theatre. The platysma is repaired where it has separated, fat is contoured under the chin and along the jaw, and skin that is genuinely in excess is removed.",
+          "preparation": "A consultation with Dr. Stone, a medical history, an assessment of general health, and photographs and measurements taken against your own anatomy.",
+          "followup": "Sutures come out in stages over two weeks. Most people are back at a desk at two weeks, and the contour refines for three to six months. Follow-ups are with Dr. Stone.",
+          "provider": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          },
+          "url": "https://www.stonesurgicalarts.com/neck-lift"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "How is a neck lift different from MyEllevate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "MyEllevate suspends the platysma with a suture and removes nothing, so there is no external incision and the recovery is days rather than weeks. A neck lift removes skin and repairs muscle directly. The first is for laxity, the second for excess, and which you have is an anatomical fact rather than a preference."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Where do neck lift scars go?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A small incision under the chin, and incisions around and behind the ears following the natural creases. They are placed where the anatomy conceals them and they mature over months from pink to pale."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does a neck lift last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The practice puts a full surgical neck lift at up to ten years, against about five for MyEllevate. The muscle repair is durable; what changes is that your neck keeps ageing around it. Skin quality, weight stability and genetics all move that number."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will I need a drain after a neck lift?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Sometimes, for the first day or two, depending on how much work the neck needed. If one is used it is removed at your first post-operative visit."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens at the consultation?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You and Dr. Stone go through your concerns and your goals, she takes a medical history and assesses your general health, and photographs and measurements are taken so the plan is drawn against your own anatomy."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does a neck lift cost, and can I finance it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "$11,000 for the neck alone, or $18,000 combined with the face. Financing runs through Sunbit, and membership credit can be applied to a surgical fee."
+              }
+            }
+          ]
+        }
+      ]
     }
   }
 }

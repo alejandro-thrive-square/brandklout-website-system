@@ -1,5 +1,12 @@
 /**
- * Headless checks for the home page's journey chapters.
+ * Headless checks for a journey page's chapters.
+ *
+ * RUNS AGAINST EITHER PAGE, and since 2026-09-01 it has to: the neck lift page
+ * is built in the same system and shares every failure mode. Pass the page as
+ * the second argument. Two assertions were hard-coded to the home page's
+ * content when the home page was the only page, and both are noted where they
+ * were generalised. Everything else was already page-agnostic, which is the
+ * useful thing this exercise proved about the suite.
  *
  * The point of this file is that the journey layer's failure modes are SILENT.
  * A pin that never creates, a scrub that never advances, a bundle that boots
@@ -304,16 +311,38 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
   });
   check("the nav progress bar fills to the bottom", navBar > 0.9, `scaleX ${Number(navBar).toFixed(2)}`);
 
-  // Counters land on the published string, not on a rounded tween value.
+  // The ledger, whether or not it counts.
+  //
+  // A COUNTED ledger has to land on the PUBLISHED string rather than on a
+  // rounded tween value, which is the whole reason counters() sets el.textContent
+  // back on complete. An UNCOUNTED one has to survive the tween machinery not
+  // running at all: a value left blank is the failure mode, and it is invisible
+  // in a screenshot taken before the reveal.
+  //
+  // Both shapes ship. The home page counts its four figures because they are
+  // achievements; the neck lift page does not, because one of them is a surgical
+  // fee and animating a price up from zero is a sales tactic. So the assertion
+  // reads `data-count` off the markup rather than hard-coding one page's values.
   await settle(page, 0);
   await new Promise((r) => setTimeout(r, 1600));
-  const counted = await page.evaluate(() =>
-    [...document.querySelectorAll(".ledger_value")].map((e) => e.textContent.trim())
+  const ledger = await page.evaluate(() =>
+    [...document.querySelectorAll(".ledger_value")].map((e) => ({
+      text: e.textContent.trim(),
+      count: e.getAttribute("data-count"),
+    }))
   );
+  const counted = ledger.filter((v) => v.count);
+  const landed =
+    ledger.length >= 4 &&
+    ledger.every((v) => v.text.length > 0) &&
+    // A counted value must not be sitting on the tween's own formatting: the
+    // final frame is the literal markup, so it parses back to data-count and is
+    // not merely the number.
+    counted.every((v) => parseFloat(v.text.replace(/[^0-9.]/g, "")) === parseFloat(v.count));
   check(
-    "the ledger counters land on their published values",
-    counted.join("|") === "4.8|1|20|2",
-    counted.join(", ")
+    `the ledger lands on its published values (${counted.length} of ${ledger.length} counted)`,
+    landed,
+    ledger.map((v) => v.text).join(", ")
   );
 
   check("no console errors with motion on", errors.length === 0, errors.slice(0, 2).join(" | "));
@@ -439,7 +468,11 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
   // out of scope and the page paints in full, unanimated.
   check("no-JS: the .js scope is absent", !state.js);
   check("no-JS: nothing is left invisible", state.hidden === 0, `${state.hidden} hidden`);
-  check("no-JS: the page still carries its content", state.text > 3000 && state.images >= 10, `${state.text} chars, ${state.images} images`);
+  // Seven images, not ten. The floor was written when the only page in the suite
+  // was the home page, which carries thirteen; a service page carries seven and
+  // is not thereby incomplete. What the check is actually for is a page that has
+  // gone BLANK without JS, and any real page clears both of these by a mile.
+  check("no-JS: the page still carries its content", state.text > 3000 && state.images >= 5, `${state.text} chars, ${state.images} images`);
   await page.close();
 }
 

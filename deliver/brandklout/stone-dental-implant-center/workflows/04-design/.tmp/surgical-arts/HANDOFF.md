@@ -1,7 +1,36 @@
 # Stone Surgical Arts — handoff
 
-**One page.** The home page, built locally, live on the client's Instatic instance. Written
-2026-08-30; content expansion 2026-08-31; **cut to the home page alone 2026-09-01.**
+**Two pages.** The home page and the neck lift, built locally. Written 2026-08-30; content
+expansion 2026-08-31; **cut to the home page alone 2026-09-01, and the neck lift built back in the
+journey design the same day.** Only the home page is live on the client's Instatic instance, and it
+is live at the eighteen-page version; see "Taking it into Instatic".
+
+> [!IMPORTANT]
+> **THE NECK LIFT IS THE DIRECTION CHECK, AND IT IS THE ONLY SERVICE PAGE.**
+>
+> The seventeen deleted pages were deleted because they were still in the v1 design the client
+> rejected: the home page had been rebuilt as a journey on 2026-08-31 and nothing else had. Before
+> eleven more treatments are rewritten, one had to answer a narrower question, which is whether the
+> journey system works on a page that has to SELL A PROCEDURE rather than position a practice.
+>
+> The neck lift was chosen because it is the practice signature (Dr. Stone is known online as
+> @drjawline), because it is the page the client reviewed most recently and in most detail
+> (`57de5e9`, four items), and because it is the hardest of the twelve to lay out: a fee, a spec
+> table, a recovery timeline, four alternatives and six questions.
+>
+> **The answer is yes, and the evidence is the size of `css/51-service.css`.** Ten chapters, of
+> which eight are the home page's own components with different content in them. The new vocabulary
+> is four components and three modifiers, about 200 lines. The previous attempt at inner pages had
+> nine component families and a 200-line "rollout layer" correcting a design that had already been
+> rejected; that layer is deleted, and nothing needed to replace it.
+>
+> | | |
+> | :--- | :--- |
+> | Reused unchanged | `.arrival_*` `.ledger_*` `.thesis_*` `.offer_*` `.path_*` `.standard_*` `.dealt_*` `.ask_*` `.faq_*` `.invite_*` |
+> | New | `.trio_*` (used twice), `.check_*`, `.aside_note`, `.reg`, `.offer_media.is-tall`, `.invite_lede`, `.ways_more` |
+> | Gates | `audit` FAIL none WARN none · `check-copy` clean · `all-pages` clean · `journey-test` **47/47 on BOTH pages** · `check-standalone` 7/7 on both previews · `perf` worst pass 4% |
+> | Content | nothing invented; every string recovered from `treatments-data.mjs` at `196ef87f~1` |
+> | Clinical review | **still outstanding.** See the comment at the top of `pages/neck-lift.body.html` for exactly what Dr. Stone has to confirm |
 
 > [!IMPORTANT]
 > **WHAT HAPPENED ON 2026-09-01, AND WHY THIS FILE IS A THIRD OF ITS PREVIOUS LENGTH.**
@@ -53,9 +82,11 @@
 | **Build** | `cd site-src && node build-site.mjs` |
 | **Check** | `cd site-src && node audit.mjs` — links, images, a11y, SEO. Exits non-zero on any failure |
 | **Copy gate** | `cd site-src && node check-copy.mjs` — **no em dashes in copy** ([SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md)). Runs on the BUILT output |
-| **Motion gate** | `cd site-src && node journey-test.mjs` — 47 headless checks on the chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins |
-| **Screenshot** | `node site-src/shot.mjs "$PWD/final-site" index.html out.png 1440` |
-| **Packed preview** | `cd site-src && node make-preview.mjs` — the page in one self-contained file, every asset and GSAP inlined. Then `node check-standalone.mjs` |
+| **Motion gate** | `cd site-src && node journey-test.mjs [../final-site] [page.html]` — 47 headless checks on the chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins. **Runs on either page and must pass on both;** two assertions were hard-coded to the home page's content and were generalised on 2026-09-01 |
+| **Screenshot** | `node site-src/shot.mjs "$PWD/final-site" <page.html> out.png 1440` |
+| **Slices** | `node site-src/slices.mjs "$PWD/final-site" <page.html> <outdir> 1440 900` — the page cut into viewport-sized PNGs at 1:1, so it can be LOOKED at rather than only measured. A full-page shot of this site is 9,000 to 15,000px tall and a defect the height of a line of type is two pixels in it. Slices overlap by the navbar's height; without that, a band as tall as the fixed bar is in no slice at all |
+| **Packed preview** | `cd site-src && node make-preview.mjs [page.html]` — the page in one self-contained file, every asset and GSAP inlined. Then `node check-standalone.mjs [../preview-<page>.html]`. Both pages are packed and both pass 7/7 |
+| **For review** | Neck lift: <https://claude.ai/code/artifact/122ed7e8-1915-4545-9a38-8a9d1d65611a>. Home: <https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6>. Both are the real page, scrollable and self-contained; rebuild after any change |
 | **Sanity sweep** | `cd site-src && node all-pages.mjs` — no sideways scroll, no clipped control, clean console, no off-origin request, both typefaces loaded, at 390/1024/1440. Built for eighteen pages and now runs one; **keep running it after touching anything in `css/`** |
 | **Weight** | `cd site-src && node weight.mjs` — transferred bytes, LCP, per-image over-delivery against the painted size at 2x |
 | **Perf** | `cd site-src && node perf.mjs` — drives the scroll through CDP at 4x CPU throttle, reports dropped frames and long tasks per zone. An unthrottled desktop is always smooth, which is why janky sites ship |
@@ -63,24 +94,31 @@
 | **Measure** | `cd site-src && node measure.mjs` — per screen size: which chapters exceed the viewport, whether every reveal fired, what the gutter and content width resolve to |
 | **Fonts** | `cd site-src && node get-fonts.mjs` — **REQUIRED ON A FRESH CLONE.** The `.woff2` files are gitignored like every other binary, so `assets/fonts/` is empty until this is run and the site silently falls back to Georgia and Arial. `css/03-fonts.css` and the generator ARE committed. Self-hosted, latin subset; **there is no request to fonts.googleapis.com** and `journey-test.mjs` asserts there is none |
 | **Imagery** | `node site-src/get-stock.mjs` (searched) · `node site-src/generate-images.mjs` (generated) |
-| **Live** | <https://stone-surgical-arts-production.up.railway.app> — see [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md) |
+| **Live** | <https://stone-surgical-arts-production.up.railway.app> — see [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md). **Still at the eighteen-page v1 build**; nothing since 2026-08-31 has been pushed |
 | **Preview harness** | `node ../../../01-content-intake/.tmp/serve.mjs . 8792` then open `http://localhost:8792/preview.html` |
 | **Asana** | [Give Jess the core pages for Aesthetic - Stone](https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217846850268874) |
 | **Design** | "Stone Surgical Arts Website Redesign — 01 Sculpted Ivory", attached to that task |
 | **Content sources** | [`01-content-intake/.tmp/SURGICAL-ARTS-BRIEF.md`](../../../01-content-intake/.tmp/SURGICAL-ARTS-BRIEF.md) — every fact, and where it came from |
 
-## The page
+## The pages
 
 | Page | File | What it does |
 | :--- | :--- | :--- |
 | Home | `index.html` | positions the practice: arrival, the idea, the four categories, the surgeon, the path, the standard, the proof, results, memberships, questions, the invitation |
+| Neck lift | `neck-lift.html` | sells one procedure: arrival and fee, the idea, the three layers, who it suits, the day, why the surgeon matters, the alternatives, six questions, the invitation |
 
-**It no longer routes anywhere.** That is the shape of the change, and it is worth being explicit
-about, because the page was designed as a hub. Eleven links left the page — four category cards, a
-treatments hub, an about page, a results page twice, a memberships page and a booking page twice —
-and there was nothing on the other end of any of them. What replaced them:
+**The neck lift page routes nowhere either, and for the same reason.** MyEllevate, the jawline
+implant, the face and neck lift and Memberships are all named in its copy and all had pages that no
+longer exist, so they are set as text. The one outbound link is Sunbit, which is a live third-party
+application form. When those pages come back, `.trio_item` becomes an `<a>` and nothing else
+changes.
 
-- **The four category cards are `<div>`s now, not links.** They keep their photograph, their
+**One category card is a link again.** The home page's "Neck" card has an href and an "Explore"
+affordance; the other three keep neither, because nothing is behind them. The inconsistency is the
+honest state of the site. `neck-lift.html` is also in the navbar and the drawer, marked with
+`aria-current="page"` on its own page by the one surviving `{{CUR_*}}` token.
+
+- **The other three category cards are `<div>`s, not links.** They keep their photograph, their
   numeral, their name and their line of copy, so the section still says what the practice does. The
   "Explore →" affordance was removed with the link; a card that looks clickable and is not is worse
   than a card that does not.
@@ -91,7 +129,8 @@ and there was nothing on the other end of any of them. What replaced them:
   fees", "More about Dr. Stone", "Read more reviews", "See results & reviews", "See the three
   tiers", "More answers on the booking page". Each sat alone in its section's action row, so the
   row went with it.
-- **The nav is the logo, a Contact link, the phone and one button.** The mega-dropdown is gone. The
+- **The nav is the logo, a Neck lift link, a Contact link, the phone and one button.** The
+  mega-dropdown is gone. The
   drawer survives because at 991px and below the navbar hides both its menu and its phone number,
   which makes the drawer the only place a phone gets the number without scrolling to the footer. It
   is not a menu any more; it is the mobile contact card.
@@ -118,8 +157,15 @@ recover the blocker with it from git history. What follows still applies to what
   for Face, instruments for Neck, the laser platform for Skin, vials for Non-Surgical. Objects and
   materials, never a face.
 - **The practice's own material is in.** Six real photographs from the client's 2026-08-31 Drive
-  export are imported and recorded in `site-src/client-manifest.json`. Of those, the page uses the
-  signage, a consult room and the reception detail. The rest are in the library.
+  export are imported and recorded in `site-src/client-manifest.json`. Of those, the two pages use
+  the signage, a consult room and the reception detail. The rest are in the library.
+- **The neck lift hero is soft on a retina screen, and that is a known trade.**
+  `gen-marble-jawline.webp` is 1000px wide and paints at 626px on a 1440 laptop, so a 2x display
+  wants 1252px and gets 1000. `weight.mjs` does not flag it (it only reports OVER-delivery) and it is
+  invisible at 1x. The remedy is `maxWidth: 1200` on that slot in `generate-images.mjs` plus
+  `--force --only gen-marble-jawline`, and the reason it was not done is that generation is
+  stochastic: a re-run returns a DIFFERENT marble jaw, and the current one was chosen. Do it when
+  the composition is no longer precious, or when the client's own photography replaces it.
 
 > [!IMPORTANT]
 > **A stock model face is the same problem as a generated one.** The rule that keeps faces out of
@@ -216,10 +262,14 @@ from `bk-dr-nahlah` before `get-stock.mjs` will run.
 >
 > It was last pushed at eighteen pages on 2026-08-31 — 18 pages converted with 0 auto-created
 > classes and 0 warnings, one atomic PUT, `{"publishedPages":18}`, `verify-live.mjs` clean at 18
-> routes. **That is now ahead of this repository by seventeen pages.** Re-running
-> `05-instatic-upload/ship.sh` publishes the home page alone; decide deliberately whether the live
-> site should lose the other seventeen at the same time, because the import is an atomic PUT of the
-> whole tree and it will.
+> routes. **That is now ahead of this repository by sixteen pages, and its `/neck-lift` is the v1
+> design.** Re-running `05-instatic-upload/ship.sh --apply` publishes two pages: it DELETES sixteen
+> and OVERWRITES `/neck-lift` with the journey rewrite. That is the intended outcome, the import is
+> an atomic PUT of the whole tree, and it is not reversible from this side. Confirm before running.
+>
+> `build-import-input.mjs` and `verify-live.mjs` both carry the two-page list, and `verify-live.mjs`
+> now has the sixteen retired slugs in its `GONE` array, so the run after the first apply proves the
+> deletion as well as the deployment.
 >
 > The full pipeline, and the traps that had to be worked through, are in
 > [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md).
@@ -284,15 +334,30 @@ site-src/
 └── js/00-runtime.js    navbar, drawer, reveals
 ```
 
-**The build still has a page table, and that is on purpose.** `PAGES` in `build-site.mjs` has one
-row. It was not collapsed into a hardcoded single-page build, because the shape is what makes adding
-a page one row plus a body plus an seo entry — and the odds that a page comes back are not small.
+`pages/` holds two bodies now. `css/51-service.css` is the service layer and is the whole cost of
+the second page type; read its header comment before adding a third page, because the ratio it
+records is the argument for composing rather than inventing.
+
+**The build's page table earned itself back.** It was kept at one row on 2026-09-01 on the argument
+that the shape is what makes adding a page cheap. Adding the neck lift the same afternoon cost
+exactly that: one row, one body, one `seo.json` entry. The only build change was `schema` learning to
+take an ARRAY, so a page can add a `MedicalProcedure` and an `FAQPage` without the separate
+post-processing pass the deleted `add-faq-schema.py` used to make.
 
 **The stylesheet numbering has gaps: 30 through 35, 37 and 40 are missing.** Those were the hero,
 cards, editorial, pricing, membership, gallery, form and proof sheets, and every component in them
 belonged to a deleted page. **Do not renumber to close the gaps.** Filename order is cascade order,
 the numbers are load-bearing, and a gap costs nothing while a renumber risks everything. If a page
-comes back, its stylesheet comes back at its old number.
+comes back, its stylesheet comes back at its old number. The service layer is `51-service.css`, after
+the journey layer, because one of its rules has to beat a `50-journey.css` media query.
+
+**The ~200-line "rollout layer" at the foot of `50-journey.css` is gone.** It re-framed
+`hero_component.is-page`, `section_header`, `category-band_*`, `suits_title`, `cost_head`,
+`section_fees` and the rest inside `.journey_page`, so the seventeen v1 pages would pick up the home
+page's spine without their markup changing. Every one of those classes went with the pages, and their
+base rules went with the eight deleted stylesheets, so it was overrides with nothing left to
+override. The neck lift page needed none of it: it is written in the journey vocabulary directly
+rather than in the old component set with a correction layer on top. In git at `196ef87f`.
 
 **`css/50-journey.css` was cut from 72.8KB to 55.1KB** by removing 119 rule blocks whose selectors
 named components no longer in any markup — `svc-head_*`, `svc-lede_*`, `svc-facts_*`,
@@ -328,15 +393,37 @@ comments first.
 
 ## What was verified, and what was not
 
-**Verified.** `audit.mjs` FAIL none, WARN none. `check-copy.mjs` clean. `journey-test.mjs` 47/47 —
-including the pinned chapter's travel, the counters landing on their published values, every
-keyboard stop painting a focus ring, and reduced motion producing zero pins. `all-pages.mjs` clean
-at 390/1024/1440: no sideways scroll, no clipped control, clean console, no off-origin request, both
-typefaces loaded. `check-standalone.mjs` 7/7 on the packed preview.
+**Verified, on BOTH pages.** `audit.mjs` FAIL none, WARN none. `check-copy.mjs` clean.
+`journey-test.mjs` **47/47 each** — including the pinned chapter's travel, the ledger landing on its
+published values, every keyboard stop painting a focus ring, and reduced motion producing zero pins.
+`all-pages.mjs` clean at 390/1024/1440: no sideways scroll, no clipped control, clean console, no
+off-origin request, both typefaces loaded. `check-standalone.mjs` 7/7 on both packed previews.
+`perf.mjs` worst pass drops 4% of frames at 4x CPU throttle. `measure.mjs` puts the neck lift at 12.6
+screens against the home page's 14.6, with its tallest non-pinned chapter at 1.56 screens against the
+home page's 1.47.
 
-**Not verified.** Nothing has been re-rendered in Instatic since the cut. No real-device testing, no
-screen-reader pass, no Lighthouse run. Everything under "Before this goes live" is by definition
-unverified: it needs the client.
+**And verified by looking.** Every screen of the neck lift page was read at 1:1 at 1440x900,
+1440x650 and 390x844, and the home page at 1440x900 and 390x844. **Five of the six defects fixed in
+this pass were invisible to the assertion suites and visible in a screenshot**, which is the same
+lesson as the 2026-08-31 pass and the reason `slices.mjs` now exists.
+
+**Not verified.** Nothing has been re-rendered in Instatic since the cut, and the live site is still
+the eighteen-page v1 build. No real-device testing, no screen-reader pass, no Lighthouse run. The
+neck lift page's clinical content has not been through Dr. Stone. Everything under "Before this goes
+live" is by definition unverified: it needs the client.
+
+### The six defects this pass found, and where they came from
+
+Kept because the pattern is more useful than the list. Note which tool found which.
+
+| Found by | What |
+| :--- | :--- |
+| Screenshot, 390 | **A component heading the same size as its own paragraph.** `.path_title` computed to 16.5px against `.path_text` at 16.4px. `--t-heading` drops to 0.6 below 479 for display type and `--t-text` rises to 1.1 to hold body copy up; the two walk into each other on a 1.85rem heading. Fixed by stepping `--size-h3-j` off `--t-sub` there. **It was wrong on the home page first**, since 2026-08-31 |
+| Screenshot, 1440 | **A registered-trademark mark drawn full size.** Cormorant sets `(R)` on the baseline at cap height, so "MyEllevate(R)" at heading size was mostly the mark. `.reg` cuts it to 0.5em and raises it |
+| Screenshot, 390 | **A flex container eating a question.** `.faq_question` is `display: flex`, so the `.reg` span made the summary THREE flex items and `space-between` threw the mark and the "?" to the far side of the row. Every summary on the site now wraps its label in `.faq_label` |
+| Probe at 1440x650 | **A ratio and a length fighting over which axis is definite.** The short-screen height query sets `.offer_media { height: 42vh }`; `.is-tall` put a 3:4 ratio back, and a definite height plus a ratio computes the WIDTH. The photograph was 205px wide in a 786px column. Same failure the `.surgeon_media` comment already describes, in a new place |
+| Screenshot, 1440 | **A four-line chapter heading in a 46rem box**, and a left-aligned eyebrow still drawing the trailing rule of its centred variant. The second was wrong on the home page first, too |
+| Reading the image | **The invitation photograph was the crop the client already rejected** — the practice's front desk, signage reading "STO", the sister brand's green, two members of staff. Replaced with the one image in the library that is an empty chair |
 
 > [!TIP]
 > **Headless Chrome clamps the layout viewport to 500px.** `--window-size=390,N` lays the page out

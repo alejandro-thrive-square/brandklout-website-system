@@ -97,6 +97,32 @@
   --pad-panel: clamp(1.75rem, 3.4vw, 4rem);
 }
 
+/* --- the component heading, on a phone -------------------------------------
+   FOUND 2026-09-01 by building a second page and measuring it. At 390 the
+   component heading and the paragraph under it were THE SAME SIZE: `.path_title`
+   computed to 16.5px against `.path_text` at 16.4px, and `.trio_name` to 16.5px
+   against 16.4px. A heading that is a tenth of a pixel larger than its own body
+   copy, in a lighter serif, reads as smaller than it.
+
+   It is a squeeze from both ends and only below 479. 01-tokens.css takes
+   --t-heading down to 0.6 there, which is the right cut for a 76px display line
+   and far too deep for a 30px component heading, and in the same breakpoint it
+   raises --t-text to 1.1 to hold body copy above 16px while the root shrinks.
+   The two multipliers walk into each other.
+
+   --t-sub is the multiplier that exists for exactly this size of heading, so the
+   step uses it below 479 and --t-heading everywhere else. 1.85 x 0.82 lands the
+   heading at about 23px against 16px of body.
+
+   THIS FIXES THE HOME PAGE TOO, and it was wrong there first: `.ways_name` and
+   `.path_title` have had it since 2026-08-31. Verified by screenshot at 390 on
+   both pages. */
+@media (max-width: 478px) {
+  :root {
+    --size-h3-j: calc(1.85rem * var(--t-sub));
+  }
+}
+
 /* --- materials -------------------------------------------------------------
    Two grounds beyond the flat ivory, both photographed marble rather than a
    gradient. A CSS gradient reads as a design system; stone reads as a place.
@@ -502,7 +528,7 @@
 
 /* --- 02 THE FOUR WAYS IN ---------------------------------------------------
    Four tall frames on a staggered baseline, the way the archive laid its three
-   category cards with the middle one raised. The old version was four равные
+   category cards with the middle one raised. The old version was four equal
    bordered boxes each holding a line-drawn icon, which is a feature grid on a
    SaaS page, not a cosmetic surgery practice.
 
@@ -1430,11 +1456,12 @@
   }
 }
 
-/* --- the closing band, home page only --------------------------------------
+/* --- the closing band, on any journey page ---------------------------------
    See the note in 38-cta.css: this is the same component, re-laid onto the
-   spine every other chapter sits on. Scoped to .journey_page so the other
-   seventeen pages are untouched while the direction is under review; rolling it
-   out later is deleting one selector. */
+   spine every other chapter sits on. Scoped to `.journey_page` rather than to
+   a page, which is what made rolling it onto the neck lift page on 2026-09-01
+   cost nothing: the page gained the wrapper class and the band followed. A page
+   built outside the system still gets the centred original. */
 .main-wrapper > .journey_page + .section_cta .cta_inner {
   justify-items: start;
   text-align: left;
@@ -1456,6 +1483,16 @@
 .main-wrapper > .journey_page + .section_cta .eyebrow.is-center {
   text-align: left;
 }
+/* `.eyebrow.is-center` draws a rule on BOTH sides, which is what a centred
+   eyebrow wants and a left-aligned one does not: the trailing rule ended up
+   floating off the end of "YOUR NEXT STEP" with nothing on the other side of
+   it, on both pages. Every other eyebrow on the site is `.chapter_mark`, whose
+   rule is a leading one only, so this is the shape the band should have had
+   from the day it moved onto the spine. Found 2026-09-01 while screenshotting
+   the neck lift page; it was wrong on the home page first. */
+.main-wrapper > .journey_page + .section_cta .eyebrow.is-center::after {
+  display: none;
+}
 .main-wrapper > .journey_page + .section_cta .button-group.is-center {
   justify-content: flex-start;
 }
@@ -1463,281 +1500,26 @@
   margin-top: var(--space-medium);
 }
 
-/* ===========================================================================
-   THE ROLLOUT LAYER — inner pages, added 2026-09-01.
+/* THE ROLLOUT LAYER WAS HERE, and it is gone as of 2026-09-01.
 
-   Everything here is scoped to `.journey_page`, so a page joins the system by
-   gaining one class on its wrapper and leaves it by losing one. No page markup
-   changes: these rules re-frame the components 10-client-first.css through
-   40-proof.css already provide.
+   It was ~200 lines that re-framed `hero_component.is-page`, `section_header`,
+   `category-band_*`, `suits_title`, `cost_head`, `svc-reviews_head`,
+   `section_fees`, `section_financing`, `section_consult`,
+   `section_treatment-faq`, `section_categories-detail` and `container-medium`
+   inside `.journey_page`, so that the seventeen v1 service pages would pick up
+   the home page's spine and display scale without their markup changing.
 
-   What a page gets: the left-hand spine, the display scale, the fluid section
-   rhythm, and images that bleed off a page edge instead of sitting in boxes.
-   What it does not get: the progress bar and the chapter readout, which are
-   home-page devices for a page that is a journey. A price list is not a
-   journey; it is a reference, and it should feel like one.
-   =========================================================================== */
+   Every one of those classes went with the pages on 2026-09-01, and the base
+   rules they were overriding went with the eight deleted stylesheets. The block
+   was therefore ~200 lines of corrections with nothing left to correct: it
+   could not be read, could not be tested, and described a page shape the client
+   had already rejected. `grep` for any of those class names in pages/ or
+   partials/ returns nothing.
 
-/* --- the spine -----------------------------------------------------------
-   The home page has no `.padding-global` or `.container-large` at all: its
-   chapters pad themselves with `--gutter`. An inner page is built from the
-   Client-First wrappers, which pad by 5% and then centre an 80rem column, so
-   its content started about 145px from the edge where the home page starts at
-   58px. Two pages of the same site with two different left margins is the most
-   visible thing on a screenshot of both, and no amount of matching type sizes
-   fixes it.
+   The service page that replaced it does not need one. neck-lift.body.html is
+   written in the journey vocabulary directly rather than in the old
+   Client-First component set with a correction layer on top, so there is
+   nothing to re-frame. What a service page genuinely needs is four components,
+   and they are in css/51-service.css.
 
-   So inside `.journey_page` the two wrappers resolve to the journey spine. The
-   REFERENCE blocks then get their measure back individually below: a
-   sixty-row fee schedule stretched to 1560px puts a hand's width between the
-   treatment and its price, which is worse to scan, not better. They are capped
-   and LEFT-aligned, so they start on the spine like everything else rather
-   than being centred in it. */
-.journey_page .padding-global {
-  padding-inline: var(--gutter);
-}
-.journey_page .container-large {
-  max-width: none;
-  margin-inline: 0;
-}
-/* .container-medium is the same job at a narrower width and was missed the
-   first time: the FAQ on every service page uses it, so that one section sat
-   centred and about 150px further in than everything above it. It keeps a
-   reading measure, but starts on the spine like the rest. */
-.journey_page .container-medium {
-  max-width: 62rem;
-  margin-inline: 0;
-}
-/* Reference content: a measure, starting on the spine. */
-.journey_page .section_fees .container-large,
-.journey_page .section_financing .container-large,
-.journey_page .section_treatment-faq .container-large,
-.journey_page .section_consult .container-large {
-  max-width: 76rem;
-}
-
-/* --- the page head -------------------------------------------------------
-   The inner-page hero was a centred stack: breadcrumb, eyebrow, title, lede,
-   all on the middle axis. It now sits on the same spine as everything else,
-   with the lede beside the title rather than under it, which is the same
-   asymmetry .ways_head uses on the home page. */
-/* CENTRING IS SET ON THE CHILDREN { text-align: center }`
-   and `.hero_component.is-page .hero_title { margin-inline: auto }`. Setting
-   `text-align: left` on the ANCESTOR loses every time, not on specificity but
-   because a declaration on the element itself beats an inherited one from its
-   parent whatever the parent's selector scores. Two rounds of this page still
-   looking centred were exactly that mistake.
-
-   This is the general shape of rolling a design system onto existing markup:
-   you are not adding rules to a blank element, you are overriding rules that
-   already target it, and you must match the element they target. */
-.journey_page .hero_component.is-page {
-  padding-block: var(--section);
-}
-.journey_page .hero_component.is-page .hero_inner {
-  text-align: left;
-}
-.journey_page .hero_component.is-page .hero_title {
-  margin-inline: 0;
-}
-.journey_page .hero_component.is-page .hero_inner {
-  padding-inline: var(--gutter);
-}
-.journey_page .hero_component.is-page .container-large {
-  max-width: none;
-  padding: 0;
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
-  align-items: end;
-  gap: var(--space-large) var(--space-xxlarge);
-}
-
-.journey_page .hero_component.is-page .hero_eyebrow {
-  grid-column: 1;
-  text-align: left;
-  margin: 0 0 var(--space-small);
-}
-.journey_page .hero_component.is-page .hero_title {
-  grid-column: 1;
-  grid-row: 3;
-  font-size: var(--size-display-sm);
-  font-weight: 300;
-  line-height: 1.02;
-  letter-spacing: -0.015em;
-  margin: 0;
-  max-width: 16ch;
-}
-.journey_page .hero_component.is-page .hero_sub {
-  grid-column: 2;
-  grid-row: 3;
-  /* margin-inline: 0 is the load-bearing half. 30-hero.css sets `auto` on both
-     sides, which centres the BOX inside its grid column: the text inside was
-     already left-aligned and still looked centred, because a 34rem box floating
-     in the middle of a 44rem column reads as centred whatever its text-align
-     says. */
-  margin: 0;
-  margin-inline: 0;
-  max-width: 34rem;
-  color: var(--fg-body);
-}
-/* The eyebrow's centred rules are drawn with ::before and ::after; on the left
-   spine only the leading one belongs. */
-.journey_page .hero_component.is-page .eyebrow.is-center::after {
-  display: none;
-}
-
-@media (max-width: 991px) {
-  .journey_page .hero_component.is-page .container-large {
-    grid-template-columns: 1fr;
-  }
-  .journey_page .hero_component.is-page .hero_title,
-  .journey_page .hero_component.is-page .hero_sub {
-    grid-column: 1;
-    grid-row: auto;
-  }
-}
-
-/* --- section heads -------------------------------------------------------
-   Every `.section_header.is-center` on an inner page is a centred eyebrow over
-   a centred title over a centred lede, and there are five of them on this page
-   alone. Left-aligning them and putting the lede beside the title is the single
-   change that makes an inner page read as part of the same site as the home
-   page. The markup does not move. */
-.journey_page .section_header.is-center {
-  text-align: left;
-  /* `justify-items: start` is the one that matters. The original sets
-     `justify-items: center`, and in a grid that centres every item INSIDE its
-     own column, so the heading floated in the middle of a left-hand column and
-     read as centred no matter what text-align said. */
-  justify-items: start;
-  align-items: start;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
-  gap: var(--space-small) var(--space-xxlarge);
-  max-width: none;
-}
-.journey_page .section_header.is-center .section_header-title,
-.journey_page .section_header.is-center .section_header-lede {
-  margin-inline: 0;
-}
-.journey_page .section_header.is-center .eyebrow.is-center {
-  grid-column: 1;
-  text-align: left;
-  margin: 0;
-}
-.journey_page .section_header.is-center .eyebrow.is-center::after {
-  display: none;
-}
-.journey_page .section_header.is-center .section_header-title {
-  grid-column: 1;
-  /* --size-h2, which is what heading-style-h2 already sets. The override that
-     used to be here pushed every inner-page section head to display size, where
-     it matched the page's own H1 and nothing outranked anything. See the note in
-     type-probe.mjs. */
-  font-size: var(--size-h2);
-  font-weight: 300;
-  line-height: 1.06;
-  letter-spacing: -0.01em;
-  margin: 0;
-  max-width: 22ch;
-}
-/* An h3-level section head stays an h3: this scopes on the class the build
-   actually uses, so a smaller heading is not blown up to display size. */
-.journey_page .section_header.is-center .heading-style-h3.section_header-title {
-  font-size: calc(2.4rem * var(--t-heading));
-  max-width: 22ch;
-}
-.journey_page .section_header.is-center .section_header-lede {
-  grid-column: 2;
-  grid-row: 2 / span 2;
-  align-self: end;
-  margin: 0;
-  margin-inline: 0;
-  max-width: 34rem;
-}
-@media (max-width: 991px) {
-  .journey_page .section_header.is-center {
-    grid-template-columns: 1fr;
-  }
-  .journey_page .section_header.is-center .section_header-lede {
-    grid-column: 1;
-    grid-row: auto;
-    margin-top: var(--space-small);
-  }
-}
-
-/* --- the category bands --------------------------------------------------
-   Already an alternating image/text pair, which is the right structure; they
-   just sat in boxes inside the container like everything else. The image now
-   runs off the page edge the way .offer_row does on the home page, and the two
-   columns are asymmetric rather than 50/50. Same markup. */
-.journey_page .category-band_component {
-  gap: clamp(var(--space-large), 4vw, var(--space-xxlarge));
-  align-items: center;
-}
-.journey_page .category-band_media {
-  margin-left: calc(var(--gutter) * -1);
-}
-.journey_page .category-band_component.is-reverse .category-band_media {
-  margin-left: 0;
-  margin-right: calc(var(--gutter) * -1);
-}
-.journey_page .category-band_body h3 {
-  font-size: calc(2.4rem * var(--t-heading));
-  font-weight: 400;
-  line-height: 1.08;
-}
-@media (max-width: 991px) {
-  .journey_page .category-band_media,
-  .journey_page .category-band_component.is-reverse .category-band_media {
-    margin-inline: calc(var(--gutter) * -1);
-  }
-}
-
-/* The bands are full-bleed now, so the section that holds them must not clip
-   them and must not re-pad them. */
-.journey_page .section_categories-detail .padding-global,
-.journey_page .section_categories-detail .container-large {
-  padding-inline: 0;
-  max-width: none;
-}
-.journey_page .section_categories-detail {
-  overflow: clip;
-  padding-inline: var(--gutter);
-}
-
-/* --- the "also in this category" head ------------------------------------
-   `.section_header.is-split` was the one head on the page the rollout never
-   picked up: `.is-center` was handled and this variant was not, so the related
-   treatments heading stayed at its original h3 while every other head on the
-   page moved to display scale. It ended the page on the only heading that
-   looked like it belonged to the old design.
-
-   A step below the main heads on purpose: this is the "if not this, then one of
-   these" beat, and it should not compete with the section that sells the
-   treatment the reader is actually on. */
-.journey_page .section_header.is-split h2,
-.journey_page .section_header.is-split h3 {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: calc(2.6rem * var(--t-heading));
-  line-height: 1.06;
-  margin: 0;
-}
-
-/* --- inner-page section heads, one size ----------------------------------
-   `.display-lg` is the HOME page's chapter-head step (76px). On a service page
-   it collided with the page's own H1, which is also 76px, so the title did not
-   outrank its own sections. These four components carry `.display-lg` in the
-   markup and are re-stepped here rather than in the renderer, so the class
-   keeps meaning "chapter head" on the page it was written for.
-
-   Measured with `node type-probe.mjs neck-lift.html`. */
-.journey_page .suits_title,
-.journey_page .cost_head h2,
-.journey_page .svc-reviews_head h2 {
-  font-size: var(--size-h2);
-  line-height: 1.06;
-  letter-spacing: -0.01em;
-  max-width: 22ch;
-}
+   Recover from git at 196ef87f if a v1 page is ever restored. */

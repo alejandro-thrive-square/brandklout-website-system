@@ -183,8 +183,16 @@
      menu is down to the two things that still lead somewhere: the phone number,
      and the invitation at the foot of the home page.
 
-     The {{CUR_*}} current-page tokens went too. With one page there is nothing
-     to mark as current, and build-site.mjs no longer replaces them. -->
+     ONE TREATMENT LINK CAME BACK on 2026-09-01, with the neck lift page. A
+     menu of one treatment is an odd-looking menu, and it is the honest one: it
+     is the only treatment page that exists, and a page nobody can reach cannot
+     be reviewed. When the other eleven return this becomes a Treatments
+     dropdown again, and it is in git at 196ef87f~1.
+
+     `` is the one current-page token that survives. It expands to
+     `aria-current="page"` on the neck lift page and to nothing everywhere else.
+     20-navbar.css already styles `.navbar_link[aria-current="page"]`, so the
+     marker is semantic first and decorated second. -->
 <header class="navbar_component is-static" data-nav>
   <div class="padding-global">
     <div class="container-large">
@@ -197,6 +205,7 @@
         </a>
 
         <nav class="navbar_menu" aria-label="Primary">
+          <a class="navbar_link" href="neck-lift.html">Neck lift</a>
           <a class="navbar_link" href="#contact">Contact</a>
         </nav>
 
@@ -235,6 +244,7 @@
     </div>
 
     <nav class="drawer_nav" aria-label="Mobile">
+      <a class="drawer_link" href="neck-lift.html">Neck lift</a>
       <a class="drawer_link" href="#contact">Contact</a>
     </nav>
 
@@ -402,7 +412,14 @@
         </div>
       </div>
 
-      <div class="ways_card">
+      <!-- THE ONE CARD THAT IS A LINK AGAIN, since 2026-09-01. All four became
+           <div>s when the treatment pages were deleted, on the rule that a card
+           which looks clickable and is not is worse than one that does not. The
+           neck lift page now exists, so this card gets its href and its
+           "Explore" affordance back and the other three keep neither. The
+           inconsistency is the honest state of the site: one category has
+           something behind it and three do not yet. -->
+      <a class="ways_card" href="neck-lift.html">
         <div class="ways_media">
           <span class="ways_index" aria-hidden="true">02</span>
           <img src="assets/cat-neck-tall.webp" alt="Polished surgical instruments laid in a row on cream linen" width="1000" height="1500" loading="lazy">
@@ -410,8 +427,9 @@
         <div class="ways_body">
           <h3 class="ways_name">Neck</h3>
           <p class="ways_text">Restore youthful contours and definition.</p>
+          <p class="ways_more">Neck lift <span aria-hidden="true">&rarr;</span></p>
         </div>
-      </div>
+      </a>
 
       <div class="ways_card">
         <div class="ways_media">
@@ -715,23 +733,23 @@
 
         <div class="faq_list margin-top margin-large" data-j="rise">
           <details class="faq_item">
-            <summary class="faq_question">What does the consultation cost, and what happens in it?<span class="faq_icon" aria-hidden="true"></span></summary>
+            <summary class="faq_question"><span class="faq_label">What does the consultation cost, and what happens in it?</span><span class="faq_icon" aria-hidden="true"></span></summary>
             <div class="faq_answer"><p>$175 for Texas residents and $250 from out of state, with a $100 deposit to hold the appointment that comes off the fee. You spend the hour with Dr. Stone rather than a treatment coordinator, and you leave with the options, the honest limits of each, and what each one costs.</p></div>
           </details>
           <details class="faq_item">
-            <summary class="faq_question">How much time will I need away from work?<span class="faq_icon" aria-hidden="true"></span></summary>
+            <summary class="faq_question"><span class="faq_label">How much time will I need away from work?</span><span class="faq_icon" aria-hidden="true"></span></summary>
             <div class="faq_answer"><p>The practice's own guidance: about a week after eyelid surgery, about ten days after CO2 laser resurfacing, and two weeks after a facelift. Plan for one to two weeks of private time and come back early if recovery goes better than expected. It is always easier that way round than the reverse.</p></div>
           </details>
           <details class="faq_item">
-            <summary class="faq_question">Can I finance treatment?<span class="faq_icon" aria-hidden="true"></span></summary>
+            <summary class="faq_question"><span class="faq_label">Can I finance treatment?</span><span class="faq_icon" aria-hidden="true"></span></summary>
             <div class="faq_answer"><p>Yes. The practice works with <a class="text-style-link" href="https://apply.sunbit.com/StoneSurgicalArts" rel="noopener">Sunbit</a>, CareCredit and Scratchpay, and is a preferred provider with all major dental and medical carriers where a procedure is covered. A membership is the other route: it banks credit month by month rather than borrowing against it.</p></div>
           </details>
           <details class="faq_item">
-            <summary class="faq_question">Will I need someone to drive me home?<span class="faq_icon" aria-hidden="true"></span></summary>
+            <summary class="faq_question"><span class="faq_label">Will I need someone to drive me home?</span><span class="faq_icon" aria-hidden="true"></span></summary>
             <div class="faq_answer"><p>For anything under intravenous sedation, yes. A responsible adult has to bring you, stay in the office through the procedure and drive you home, and you should not drive or operate machinery for 24 hours afterwards. Treatments done under local anaesthetic alone do not require it.</p></div>
           </details>
           <details class="faq_item">
-            <summary class="faq_question">When can I wear makeup again?<span class="faq_icon" aria-hidden="true"></span></summary>
+            <summary class="faq_question"><span class="faq_label">When can I wear makeup again?</span><span class="faq_icon" aria-hidden="true"></span></summary>
             <div class="faq_answer"><p>In most cases 48 hours after sutures come out. After CO2 laser, about ten days. Sun avoidance matters more than makeup does in that window: sun on healing skin is what darkens a scar.</p></div>
           </details>
         </div>

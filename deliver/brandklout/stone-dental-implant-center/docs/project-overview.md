@@ -11,18 +11,21 @@
 
 ## Status
 
-**Stone Surgical Arts: the home page, and nothing else, as of 2026-09-01.** It was seven core pages
-on 2026-08-30 and eighteen on 2026-08-31. The client reviewed the site and kept the home page; the
-other seventeen pages and everything that existed to serve them were deleted from the repository,
-though the asset library was kept whole. Awaiting Instatic re-publish and the client decisions in
-the handoff. Start at
+**Stone Surgical Arts: the home page and one service page, as of 2026-09-01.** It was seven core
+pages on 2026-08-30 and eighteen on 2026-08-31. The client reviewed the site and kept the home page;
+the other seventeen pages and everything that existed to serve them were deleted from the
+repository, though the asset library was kept whole. **The neck lift was then rebuilt the same day
+in the journey design** — not recovered, rewritten — as the check on whether that design works for
+a page that has to sell a procedure rather than position a practice. It does: eight of its ten
+chapters are the home page's own components, and the new vocabulary is four components. Awaiting
+sign-off on the direction, Instatic re-publish, and the client decisions in the handoff. Start at
 [workflows/04-design/.tmp/surgical-arts/HANDOFF.md](../workflows/04-design/.tmp/surgical-arts/HANDOFF.md).
 
 > [!WARNING]
-> **The live Instatic site is still the eighteen-page version.** It has not been re-published since
-> the cut. Publishing is an atomic PUT of the whole tree, so the next `ship.sh` drops the other
-> seventeen pages from the live site. That is probably what is wanted; it should still be a
-> decision someone takes rather than a side effect.
+> **The live Instatic site is still the eighteen-page version, all of it v1.** It has not been
+> re-published since the cut. Publishing is an atomic PUT of the whole tree, so the next `ship.sh`
+> drops sixteen pages from the live site and replaces `/neck-lift` with the rewrite. That is
+> probably what is wanted; it should still be a decision someone takes rather than a side effect.
 
 **Stone Med Spa: still not started**, and still unscoped. It is a separate brand — Instagram calls
 it *Westlake Medical Aesthetics* — and task `1217160668112180` has no page list, no design and no
@@ -73,7 +76,7 @@ therefore **pillars 2 and 3 of a brand split that is already one-third complete*
 | Pillar | Brand | Status |
 | :--- | :--- | :--- |
 | Oral & maxillofacial surgery | Stone Dental Implant Center | **Live on Webflow.** 43 URLs. |
-| Cosmetic facial *surgery* | Stone Surgical Arts | Task `1217160668112175` — built to 18 pages by 2026-08-31, **cut to the home page alone 2026-09-01** on the client's review |
+| Cosmetic facial *surgery* | Stone Surgical Arts | Task `1217160668112175` — built to 18 pages by 2026-08-31, **cut to the home page 2026-09-01** on the client's review, then the **neck lift** rebuilt in the journey design the same day as the direction check |
 | Non-surgical skin & aesthetics | Stone Med Spa / Westlake Medical Aesthetics | Task `1217160668112180` — new brand, not started |
 
 Rough sizing, for **sequencing and capacity only**: mirroring the archived architecture is ~42 pages

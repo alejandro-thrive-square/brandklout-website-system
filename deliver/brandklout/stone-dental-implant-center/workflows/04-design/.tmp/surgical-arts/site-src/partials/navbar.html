@@ -6,8 +6,16 @@
      menu is down to the two things that still lead somewhere: the phone number,
      and the invitation at the foot of the home page.
 
-     The {{CUR_*}} current-page tokens went too. With one page there is nothing
-     to mark as current, and build-site.mjs no longer replaces them. -->
+     ONE TREATMENT LINK CAME BACK on 2026-09-01, with the neck lift page. A
+     menu of one treatment is an odd-looking menu, and it is the honest one: it
+     is the only treatment page that exists, and a page nobody can reach cannot
+     be reviewed. When the other eleven return this becomes a Treatments
+     dropdown again, and it is in git at 196ef87f~1.
+
+     `{{CUR_NECK}}` is the one current-page token that survives. It expands to
+     `aria-current="page"` on the neck lift page and to nothing everywhere else.
+     20-navbar.css already styles `.navbar_link[aria-current="page"]`, so the
+     marker is semantic first and decorated second. -->
 <header class="navbar_component{{NAV_MODE}}" data-nav>
   <div class="padding-global">
     <div class="container-large">
@@ -20,6 +28,7 @@
         </a>
 
         <nav class="navbar_menu" aria-label="Primary">
+          <a class="navbar_link" href="neck-lift.html"{{CUR_NECK}}>Neck lift</a>
           <a class="navbar_link" href="#contact">Contact</a>
         </nav>
 

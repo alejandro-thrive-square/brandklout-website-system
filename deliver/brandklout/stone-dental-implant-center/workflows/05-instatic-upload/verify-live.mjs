@@ -23,18 +23,39 @@ const BASE = 'https://stone-surgical-arts-production.up.railway.app'
    from `treatments-data.mjs`; the client kept the home page and the collection
    was deleted with the pages.
 
-   Note what this gate can and cannot tell you now. It verifies that `/` is
-   healthy. It CANNOT tell you the other seventeen routes are gone, because a
-   route absent from this list is simply not checked — which was the exact
-   failure the derived list was written to prevent, arriving from the other
-   direction. After the next apply, check the seventeen are 404 by hand, or add
-   them to GONE below. */
-const ROUTES = ['/']
+   Note what this gate can and cannot tell you now. It verifies the routes below
+   are healthy. It CANNOT tell you the retired ones are gone, because a route
+   absent from this list is simply not checked — which was the exact failure the
+   derived list was written to prevent, arriving from the other direction. GONE
+   exists for that half, and it is filled in.
 
-/* Routes that must NOT resolve. Empty until the cut is published; fill it with
-   the seventeen retired slugs at that point and this gate proves the deletion
-   as well as the deployment. */
-const GONE = []
+   `/neck-lift` is on BOTH lists' worth of history and on neither by accident:
+   the slug existed on the live instance carrying the v1 design, and it is being
+   overwritten rather than retired, so it belongs in ROUTES. */
+const ROUTES = ['/', '/neck-lift']
+
+/* Routes that must NOT resolve. These are the sixteen slugs the 2026-09-01 cut
+   deleted, and this list is what turns the cut from "we did not upload them"
+   into a checked outcome. Empty until the cut is published; run this gate after
+   the first --apply that follows it. */
+const GONE = [
+  '/about',
+  '/blepharoplasty',
+  '/book',
+  '/brow-lift',
+  '/buccal-fat-reduction',
+  '/cheek-and-chin-implants',
+  '/face-and-neck-lift',
+  '/injectables',
+  '/jawline-implant',
+  '/laser-resurfacing',
+  '/lip-lift',
+  '/memberships',
+  '/morpheus8',
+  '/myellevate-neck-lift',
+  '/results',
+  '/treatments',
+]
 
 const fails = []
 const warns = []

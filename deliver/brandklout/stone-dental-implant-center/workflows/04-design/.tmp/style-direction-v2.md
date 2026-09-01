@@ -3,6 +3,14 @@
 The home page rebuilt as an editorial journey, 2026-08-31.
 
 > [!IMPORTANT]
+> **2026-09-01, later: the neck lift page is built in this system**, and it is the evidence that the
+> system generalises. Eight of its ten chapters are components described in this document, used
+> unchanged with different content in them; the new vocabulary is `css/51-service.css`, four
+> components and three modifiers. The claim in "Next" below that a returning page would be
+> "composition rather than a rewrite" has now been tested rather than asserted. See
+> [`surgical-arts/HANDOFF.md`](./surgical-arts/HANDOFF.md).
+
+> [!IMPORTANT]
 > **2026-09-01: the client kept the home page and nothing else.** This document is why the home page
 > looks the way it does, so it survives intact — but two of its sections described rolling the
 > system out to `treatments.html` and to the twelve service pages, and those pages have been
@@ -424,11 +432,19 @@ Chapters 02, 03, 04, 05 and 07 are still general components (`.stone-panel`, `.s
 comes back is composition rather than a rewrite. That was the argument for building them as
 components, and it is the one thing the cut did not cost.
 
+**That argument was tested the same day and it holds.** `pages/neck-lift.body.html` is ten chapters,
+eight of them the components listed above with a procedure's content in them: `.arrival_*` opens on
+the fee, `.ledger_*` is the spec table, `.thesis_*` carries the argument, `.offer_row` is "who it
+suits", `.path_*` is the recovery timeline, the dark `.stone-band` is "why it matters who
+operates", `.ask_*` is the FAQ and `.invite_*` closes it. The new vocabulary is four components.
+The eleven remaining treatments should be composed the same way, from a renderer over
+`treatments-data.mjs` (recoverable at `196ef87f~1`) rather than written by hand.
+
 Then: re-import to Instatic, which needs `push-site.mjs --force` and a check of the pages'
 `updatedAt` first (see the runbook), plus a check that Instatic's converter does not strip the
 `data-j` / `data-chapter` attributes the runtime binds to. **The live site is still the
-eighteen-page version**; publishing is an atomic PUT of the whole tree, so it will drop the other
-seventeen.
+eighteen-page version**; publishing is an atomic PUT of the whole tree, so it will drop sixteen of
+them and overwrite `/neck-lift`.
 
 ## Version Control
 - Follows the version control rules in [SYSTEM_RULES.md - Section 4](../../../../../SYSTEM_RULES.md).

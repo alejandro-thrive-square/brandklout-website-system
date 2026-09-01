@@ -6,17 +6,23 @@ into the client's own Instatic instance as an editable site — pages as node tr
 registry rules, images in the media library.
 
 > [!WARNING]
-> **THE SOURCE IS ONE PAGE, AND THE LIVE SITE IS STILL EIGHTEEN.**
+> **THE SOURCE IS TWO PAGES, AND THE LIVE SITE IS STILL EIGHTEEN.**
 >
 > Seven pages on 2026-08-30, eighteen on 2026-08-31, and on 2026-09-01 the client kept the home page
-> alone. `build-import-input.mjs` now lists exactly one page and no longer derives treatment rows
-> from `treatments-data.mjs`, which was deleted with them.
+> alone. The neck lift was then built back the same day, in the journey design, as the check on
+> whether that design works for a page that has to sell a procedure. `build-import-input.mjs` lists
+> those two and no longer derives treatment rows from `treatments-data.mjs`, which was deleted.
 >
-> **The next `--apply` deletes seventeen pages from the client's live instance.** That is trap 8
-> working as designed — in replace mode any stored page absent from `changedPages` is removed
-> server-side — and it is the intended outcome, but it is not reversible from this side. Confirm it
-> is wanted before running, and note that the media library is untouched either way: the assets for
-> the deleted pages stay uploaded, matching the decision to keep them in the repository.
+> **The next `--apply` deletes sixteen pages from the client's live instance and overwrites a
+> seventeenth.** `/neck-lift` exists live carrying the v1 design and is replaced rather than
+> retired. The deletions are trap 8 working as designed — in replace mode any stored page absent
+> from `changedPages` is removed server-side — and they are the intended outcome, but they are not
+> reversible from this side. Confirm before running, and note that the media library is untouched
+> either way: the assets for the deleted pages stay uploaded, matching the decision to keep them in
+> the repository.
+>
+> `verify-live.mjs` now carries both routes in `ROUTES` and the sixteen retired slugs in `GONE`, so
+> the run after the first apply proves the deletion as well as the deployment.
 
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the scripts or technical logic of this workflow must be

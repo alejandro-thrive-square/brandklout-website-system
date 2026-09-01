@@ -1,0 +1,290 @@
+/* ===========================================================================
+   THE SERVICE LAYER — what a procedure page needs that the home page did not.
+   Added 2026-09-01 with pages/neck-lift.body.html.
+
+   THIS FILE IS SHORT ON PURPOSE, and its length is the finding the neck lift
+   page was built to produce. The brief was "build one service page and see
+   whether we are heading in the right direction", and the honest measure of
+   that is how much NEW vocabulary a second page type needs. The answer is four
+   components and two modifiers, against ten chapters that are the home page's
+   own components with different content in them.
+
+   The previous attempt at inner pages went the other way. It had `svc-head_*`,
+   `svc-lede_*`, `svc-facts_*`, `svc-reviews_*`, `spec_*`, `suits_*`, `cost_*`,
+   `trust_*` and `proof-note_*` — nine component families for one page type,
+   plus a 200-line "rollout layer" at the foot of 50-journey.css whose entire
+   job was re-framing components from a design the client had already rejected.
+   All of it was deleted on 2026-09-01 and none of it is missed.
+
+   WHAT IS IN HERE
+
+     .trio_*      three columns under a head. Used twice on the neck lift page:
+                  the three layers the operation addresses (tag = a numeral),
+                  and the three neighbouring operations (tag = a fee). One
+                  component, because they are the same shape and the tag is the
+                  only thing that differs.
+     .check_*     a list of clinical signs. Hairlines and a short accent rule
+                  as the marker, because this site's marker vocabulary is rules
+                  and numerals (see .chapter_mark::before, .dealt_num) and a
+                  tick glyph would be the only icon on the site.
+     .aside_note  the callout that argues against the operation the page is
+                  selling. It has to be visibly a different kind of sentence
+                  from the copy around it, which is the one thing a paragraph
+                  cannot do for itself.
+     .reg         the registered-trademark mark, cut down to a mark. Cormorant
+                  draws a full-size (R) on the baseline, so "MyEllevate(R)" at
+                  heading size put a circled letter almost as tall as the word
+                  beside it.
+     modifiers    .offer_media.is-tall and .invite_lede.
+
+   TOKENS. Nothing new. Every value below resolves through 01-tokens.css and
+   the fluid roots in 50-journey.css.
+
+   CASCADE. Loads after 50-journey.css, which matters for `.offer_media.is-tall`:
+   it has to beat the 991px rule in that file that puts every `.offer_media`
+   back to 16:10, so its own mobile answer is stated here rather than relying on
+   source order accidentally working out.
+   =========================================================================== */
+
+/* --- the trio ---------------------------------------------------------------
+   Three columns, each opening with a tag: a numeral where the three items are
+   a sequence, a fee where they are alternatives. Hairline over each, so the
+   row reads as a ledger rather than as three cards. No borders on the sides
+   and no background: a card would put the three items in boxes, which is the
+   exact thing the v1 review objected to. */
+.trio_component {
+  padding: var(--section) 0;
+}
+/* For a trio that follows another chapter of its own kind, the way
+   .offer_component.is-tight works on the home page. Not currently used by any
+   page; it is here because the day a service page carries two trios in a row,
+   the seam between them is the first thing that will look wrong. */
+.trio_component.is-tight {
+  padding-top: 0;
+}
+.trio_head {
+  padding-inline: var(--gutter);
+  display: grid;
+  grid-template-columns: 1fr auto;
+  align-items: end;
+  gap: var(--space-large);
+  margin-bottom: var(--section-sm);
+}
+.trio_title {
+  margin: 0;
+  max-width: 20ch;
+}
+.trio_lede {
+  margin: 0;
+  max-width: 30rem;
+  color: var(--fg-body);
+  font-size: var(--size-text-medium);
+  line-height: 1.6;
+}
+.trio_grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(var(--space-medium), 3vw, var(--space-xxlarge));
+  padding-inline: var(--gutter);
+  align-items: start;
+}
+.trio_item {
+  border-top: 1px solid var(--line-strong);
+  padding-top: var(--space-medium);
+}
+/* The display face, so a fee and a numeral sit at the same optical weight.
+   tabular-nums matters here: $6,000 / $10,000 / $18,000 sit in a row and
+   proportional figures make the column edges ragged. */
+.trio_tag {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: var(--size-text-large);
+  line-height: 1;
+  color: var(--accent);
+  font-variant-numeric: lining-nums tabular-nums;
+}
+.trio_name {
+  margin: var(--space-medium) 0 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  font-size: var(--size-h3-j);
+  line-height: 1.05;
+  color: var(--fg);
+}
+.trio_text {
+  margin: var(--space-small) 0 0;
+  font-size: var(--size-text-regular);
+  line-height: 1.65;
+  color: var(--fg-body);
+}
+/* One column below 992, not two. Three items into two columns leaves the third
+   alone in the left-hand column, which reads as a layout that ran out rather
+   than as a decision. Each item is three lines, so stacked they cost about one
+   screen and lose nothing. */
+@media (max-width: 991px) {
+  .trio_head {
+    grid-template-columns: 1fr;
+    align-items: start;
+  }
+  .trio_grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-large);
+  }
+}
+
+/* --- the checklist ----------------------------------------------------------
+   Four clinical signs. The marker is a 0.9rem accent rule rather than a tick,
+   for the same reason .dealt_item uses a numeral and .chapter_mark uses a rule:
+   there is not one icon anywhere else on this site, and introducing one here
+   would make these four lines the loudest thing in the chapter.
+
+   The marker is positioned against the first LINE, not centred in the item: an
+   item that wraps to two lines must still have its rule beside the first one. */
+.check_list {
+  margin: var(--space-medium) 0 0;
+  padding: 0;
+  list-style: none;
+}
+.check_item {
+  position: relative;
+  padding: var(--space-small) 0 var(--space-small) 1.9rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--size-text-regular);
+  line-height: 1.55;
+  color: var(--fg);
+}
+.check_item:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.check_item::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: calc(var(--space-small) + 0.75em);
+  width: 0.9rem;
+  height: 1px;
+  background: var(--accent-flat);
+}
+
+/* --- the counter-argument ---------------------------------------------------
+   On the neck lift page this is the paragraph that tells a reader the cheaper
+   operation may be the right one. It is the most useful sentence on the page
+   and it is the one a reader skimming for the fee will scroll straight past, so
+   it gets the only tinted ground on the site.
+
+   --green-wash and --accent-flat are both from the board's own green. This is
+   a ground and a rule, never text, so the contrast note at the top of
+   01-tokens.css does not apply: the copy inside stays --fg-body on a wash that
+   is two per cent off ivory. */
+.aside_note {
+  margin: var(--space-medium) 0 0;
+  padding: var(--space-medium);
+  background: var(--green-wash);
+  border-left: 2px solid var(--accent-flat);
+  font-size: var(--size-text-small);
+  line-height: 1.65;
+  color: var(--fg-body);
+}
+
+/* --- modifiers --------------------------------------------------------------
+   .offer_media is 3:2 because both home page bands carry 16:9 sources. The
+   service page's "who it suits" band carries the 2:3 category frame, and a 3:2
+   window on a 2:3 source is a letterbox of its middle.
+
+   Both breakpoints are stated. Relying on this file loading after
+   50-journey.css to beat its 991px rule works, but it works silently, and the
+   day someone renumbers a stylesheet the image quietly goes back to 16:10 on
+   every phone with nothing to point at. */
+.offer_media.is-tall {
+  aspect-ratio: 3 / 4;
+}
+@media (max-width: 991px) {
+  .offer_row .offer_media.is-tall,
+  .offer_row.is-reverse .offer_media.is-tall {
+    aspect-ratio: 4 / 5;
+  }
+}
+/* SHORT LAPTOPS, and this one bit exactly as 50-journey.css warns it will.
+   The height query in that file compresses every frame on a screen under 760px
+   with `.offer_media { aspect-ratio: auto; height: 42vh }`. `.is-tall` is more
+   specific, so it put the 3:4 ratio back while the 42vh HEIGHT stayed, and a
+   definite height plus a ratio computes the WIDTH from them: measured at
+   1440x650 the photograph was 205px wide in a 786px column, a sliver of marble
+   beside a full-height column of copy.
+
+   This is the same failure the `.surgeon_media` comment in 50-journey.css
+   describes, in a new place, which is what makes it worth stating twice: a
+   ratio and a length on the same box is always a question of which axis is
+   definite, and the answer is rarely the one you meant.
+
+   The fix caps the WIDTH and lets the ratio compute the height from it, so the
+   frame is still a portrait: 24rem wide, 32rem tall, about eight tenths of a
+   650px screen. `margin-left: auto` keeps it on the right edge it bleeds off,
+   because an explicit width turns off the grid item's stretch. */
+@media (min-width: 992px) and (max-height: 760px) {
+  .offer_row.is-reverse .offer_media.is-tall,
+  .offer_row .offer_media.is-tall {
+    aspect-ratio: 3 / 4;
+    height: auto;
+    width: min(100%, 24rem);
+    margin-left: auto;
+  }
+}
+
+/* The invitation chapter's opening paragraph. The home page's invitation has no
+   prose at all: the twenty-one town names ARE its lede. A service page drops
+   that list, so the chapter needs a sentence, and the consultation fee is the
+   one a reader who has got this far is still missing. */
+.invite_lede {
+  margin: var(--space-large) 0 0;
+  max-width: 34rem;
+  font-size: var(--size-text-medium);
+  line-height: 1.65;
+  color: var(--fg-body);
+}
+
+/* --- the one category card that leads somewhere -----------------------------
+   All four `.ways_card`s on the home page became `<div>`s on 2026-09-01, when
+   the pages behind them were deleted. The neck lift page brings one of them
+   back as an `<a>`, and a link needs to say so: the card is otherwise identical
+   to the three that are not links, and a reader has no way to know which one
+   rewards a click.
+
+   `.ways_card` already carries `text-decoration: none` and `color: inherit`
+   from 50-journey.css — the comment there says the rules were kept for exactly
+   this day — so nothing has to be undone first. */
+.ways_more {
+  margin: var(--space-xsmall) 0 0;
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  transition: transform 0.3s var(--ease);
+}
+.ways_more span {
+  display: inline-block;
+  transition: transform 0.3s var(--ease);
+}
+a.ways_card:hover .ways_more span,
+a.ways_card:focus-visible .ways_more span {
+  transform: translateX(0.35rem);
+}
+
+/* --- the registered mark ----------------------------------------------------
+   MyEllevate is a registered trademark and the mark has to be carried, but
+   Cormorant Garamond draws (R) at full size on the baseline. At the trio
+   heading step that is a circled R nearly as tall as the cap height of the word
+   in front of it, and it was the loudest thing in the chapter.
+
+   0.5em and raised, which is what a superscript would be if `<sup>` did not
+   also shift the line box. `letter-spacing: 0` because the display face is
+   tracked and a tracked (R) leaves a hole after it.
+
+   It is markup rather than a font feature on purpose: `font-variant-position`
+   is unevenly supported and does nothing at all unless the face ships superior
+   figures, which this subset does not. */
+.reg {
+  font-size: 0.5em;
+  vertical-align: 0.55em;
+  letter-spacing: 0;
+}
