@@ -89,8 +89,12 @@ practice's photography, which the repo rules keep out of git.
 ├── site/presentation.mjs page chrome + the two generic renderers, composed from it
 ├── theme/site.js        mobile menu + deferred map
 ├── site/pages.mjs       hand-authored templates for the Elementor-built pages
+├── site/chapters.mjs    the frozen chapter library every page composes from
+├── site/longform.mjs    splits a treatment body into sections and routes the beats
+├── site/prose.mjs       the "no wall of text" rule: dead copy out, structure back in
+├── site/photos.mjs      the vetted picture pool, and what a treatment page may show
 ├── build.mjs            content + templates -> dist/
-├── audit.mjs            static QA gate over dist/ (content, links, images, meta)
+├── audit.mjs            static QA gate over dist/ (content, links, images, meta, walls)
 ├── responsive.mjs       layout gate - horizontal overflow at 3 widths, all pages
 ├── weigh.mjs            what a visitor downloads per page, desktop vs phone
 ├── serve.mjs            local preview on :4300, served the way a host serves it
@@ -160,6 +164,28 @@ gets into a price or a doctor's qualification.
 Nothing is styled by a bare tag name except the document defaults - a bare-tag rule collides
 site-wide the moment the markup is pasted into a builder, which is the failure the Client-First
 validator flags.
+
+### No wall of text
+
+`site/prose.mjs` enforces [DESIGN-STANDARD.md's rule of that name](../../docs/DESIGN-STANDARD.md)
+on the imported WordPress copy, and it is the pass to understand before editing any treatment page.
+It **removes** copy that carries no information and **re-tags** structure the editor had no button
+for — it never rewrites, paraphrases or summarises, because the practice is accountable for what
+these pages say about treatment and we are not their author.
+
+    node build.mjs
+      prose repair: 42 dead paragraphs dropped, 18 headings promoted,
+                    18 lead-ins demoted, 44 long runs folded
+
+**Read those counters after any edit to the rules.** There are ~1,900 paragraphs across the 35
+treatment pages, so a rule that is 95% right still bins ~95 paragraphs of real clinical copy. A
+jump in `dropped` is the thing to look at.
+
+The ceiling is on an unbroken RUN of paragraphs (110 words), not on a section — so the fix
+available to a page is always *add structure*, never *cut detail*. Anything past it folds into a
+closed `<details>`; nothing is deleted, and the copy still ranks. `audit.mjs` re-checks the rule on
+the **built HTML**, which is not redundant: the first version of the pass was defeated by an
+Elementor wrapper and reported success on a page that was still a 404-word wall.
 
 Pages compose `site/components.mjs`; no template writes a card, a section shell or a button by
 hand. `audit.mjs` enforces it: **any class in the markup that the stylesheet does not define is a

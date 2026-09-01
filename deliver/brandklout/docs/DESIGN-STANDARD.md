@@ -124,7 +124,12 @@ Chapters alone still read as a list unless the page tells you where you are:
 
 - **A reading-progress indicator.** The reference pins a 2px scaled bar to the top edge of the nav
   (`.nav-progress` → `transform:scaleX()`).
-- **Chapter tags.** `Chapter 04 · The Transformation` — visible, animated in, numbering the journey.
+- **Chapter tags.** `The Transformation` — visible, animated in, naming the beat the reader is in.
+  **Named, never numbered.** A visible "Chapter 04" counts sections the visitor has not read yet,
+  and on a template-driven page the same beat lands on a different number depending on how much
+  copy that page happens to carry — so the numeral is noise that also contradicts itself between
+  pages. Keep `data-chapter` on the section (the motion runtime binds to it); drop the numeral from
+  the tag and from the fixed readout.
 - **Theme shifts between chapters.** `data-theme="light"` / `"dark"` so the page changes atmosphere
   as the story turns, rather than alternating two background tints forever.
 - **A signature moment** the visitor would describe to someone else afterwards.
@@ -202,6 +207,77 @@ Motion serves the offer, never buries it. The phone number, the offer, and the f
 immediately reachable — sticky mobile call bar, visible CTA at every scroll depth. A page that
 wins on craft and loses the lead has failed. Section order comes from the Asana brief and the
 vendor originals; the *execution* is ours.
+
+## No wall of text
+
+**A page may not render an undifferentiated block of body copy.** This is a conversion rule, not a
+taste one, and it came back from the client twice — first on the homepage, then on
+`/services/invisalign/`: *"These chunks of text are not good for conversions or user experience at
+all. Remove this and make this a system rule. You shouldn't be doing this anymore."*
+
+It bites hardest on migrations. Imported WordPress copy is written for a crawler and structured for
+an editor with no components: a 2,000-word treatment page arrives as one column, its real sections
+flattened into bold paragraphs, its lists typed as glyphs, and a "call us today" wedged after every
+heading. Pouring that into a template preserves the problem and adds a hero to it.
+
+### The rule, in four parts
+
+1. **A ceiling on unbroken prose.** No more than **~110 words of consecutive paragraphs** before
+   something breaks the column — a list, a sub-heading, a figure, a table, a pull quote. The
+   ceiling is on the *run*, not the section: 400 words carrying two lists and three sub-headings is
+   fine, 200 words in one column is not. That is deliberate, because it means the fix available to
+   the page is *add structure*, never *cut clinical detail*.
+2. **Everything past the ceiling folds, it does not vanish.** The tail goes into a closed
+   `<details>`. The wall is gone from the page; the copy stays in the HTML, indexed and reachable.
+   On a site that earns traffic from these pages, deleting a few hundred words of ranking copy to
+   tidy a layout is a trade nobody asked for.
+3. **Dead paragraphs are removed outright.** A bare "Call us today at …", a naked "Learn more
+   about X", an address already in the header and the footer, and the SEO coda that closes a
+   section by restating it with the search terms in it. These carry no information, and the page
+   already has four real calls to action.
+4. **Structure the editor implied is restored, not invented.** A heading typed as a bold paragraph
+   becomes a heading. A list label typed as a heading becomes a lead-in. A list typed as glyph-
+   prefixed lines becomes a list. This is re-tagging, not rewriting — and it does most of the work,
+   because these walls are usually several real sections that the CMS flattened into one.
+
+### What may never be done to fix a wall
+
+- **Never rewrite, paraphrase or summarise clinical copy.** Removal and re-tagging only. A practice
+  is legally and professionally accountable for what its pages say about treatment; we are not the
+  authors of it.
+- **Never invent copy to fill a beat.** A page with no cost section gets no cost chapter.
+- **Never trim a review to make it fit.** Reviews are real people's words under their own names.
+  Show it whole or do not show it. If a component cannot hold the long ones, the component is
+  wrong — that is exactly how a proof rail shipped with one card in it.
+- **Be conservative with the removal rules.** Across 35 treatment pages there are ~1,900
+  paragraphs, so a rule that is 95% right still bins ~95 paragraphs of a real practice's clinical
+  copy. Where a pattern is ambiguous, the rule must decline to fire. Print the counts on every
+  build and read them.
+
+### Pictures are half of it
+
+The other half of the same note: *"To add more images overall. This is not a good services page
+right now."* An imported treatment page carries exactly one image — the featured photograph the
+hero already uses — so below the fold it ran two thousand words with nothing for the eye to stop
+on.
+
+- **Every long-form page carries at least one photograph below the hero**, and one roughly every
+  two sections after that.
+- **A photograph on a treatment page may show the practice** — the rooms, the team, a patient in
+  the chair. **It may not be presented as showing that treatment**, its result, or its patient.
+  Caption the building and the visit, never the procedure. Matching a stock image to a page by
+  keyword is how a photo of somebody else's teeth ends up captioned as this practice's work.
+- **The pool is shared and deterministic**, seeded off the page slug: the same page gets the same
+  pictures on every build, or every screenshot gate compares two different pages.
+
+### The gate
+
+Enforced on the **built HTML**, not on the build pass, and it has to be. The first version of this
+rule was defeated by a wrapper the reader cannot see — Elementor nests its paragraphs six divs
+deep, so the pass matched nothing, folded nothing, and reported success on a page that was still a
+404-word wall. `audit.mjs` fails the build on any rendered section over the limit and warns on any
+long-form page with no photograph below the hero. See `09-static-rebuild/.tmp/site/prose.mjs` for
+the implementation and `photos.mjs` for the picture rules.
 
 ## GSAP gotchas — learned the hard way, do not rediscover
 

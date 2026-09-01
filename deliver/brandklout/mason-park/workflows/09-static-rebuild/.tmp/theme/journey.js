@@ -111,7 +111,7 @@
       var rule = $("i", tag);
       var tl = gsap.timeline({ scrollTrigger: { trigger: tag, start: "top 88%" } });
       if (rule) tl.from(rule, { scaleX: 0, duration: .7, ease: EASE }, 0);
-      tl.from(tag.querySelectorAll("span,b"), { opacity: 0, x: -14, duration: .7, stagger: .08, ease: EASE }, .12);
+      tl.from(tag.querySelectorAll("b"), { opacity: 0, x: -14, duration: .7, stagger: .08, ease: EASE }, .12);
     });
 
     $$("[data-split]").forEach(function (el) {
@@ -507,17 +507,16 @@
 
     var readout = document.createElement("p");
     readout.className = "jr-readout";
-    readout.innerHTML = '<b id="jrNo">00</b><span id="jrName">Arrival</span>';
+    readout.innerHTML = '<span id="jrName">Arrival</span>';
     document.body.appendChild(readout);
 
     gsap.to(bar, { scaleX: 1, ease: "none", scrollTrigger: { start: 0, end: "max", scrub: .25 } });
 
-    var no = $("#jrNo"), name = $("#jrName");
+    var name = $("#jrName");
     Array.prototype.forEach.call(chapters, function (sec) {
       var i = parseInt(sec.getAttribute("data-chapter"), 10) || 0;
       var nm = sec.getAttribute("data-chapter-name") || "";
       function on() {
-        if (no) no.textContent = String(i).padStart(2, "0");
         if (name) name.textContent = nm;
         readout.classList.toggle("is-on", i > 0);
       }

@@ -34,9 +34,20 @@ export function makeChapters(h) {
     ` data-chapter="${esc(String(n))}" data-chapter-name="${esc(name)}"` +
     `${theme ? ` data-theme="${esc(theme)}"` : ""}>\n${inner}\n</section>`;
 
-  /** The continuity device. Numbered and named, animated in from the left. */
-  const tag = (n, name) =>
-    `<p class="chapter-tag"><i></i><span>Chapter ${esc(String(n))}</span><b>${esc(name)}</b></p>`;
+  /** The continuity device: a rule, then what this beat IS. Animated in from
+   *  the left.
+   *
+   *  NO NUMBER. It used to read "Chapter 07 / The Proof", and the client's note
+   *  on /services/invisalign/ was to drop the numbering site-wide. The number
+   *  was never information a visitor could use — it counted sections of a page
+   *  they had not read yet, and on a treatment page the count varies with how
+   *  much copy the practice happens to have written, so the same beat is
+   *  "Chapter 05" on one service and "Chapter 03" on another.
+   *
+   *  `data-chapter` still carries the index on the section, because journey.js
+   *  binds every scroll behaviour to it. What went is the visible numeral. */
+  const tag = (name) =>
+    `<p class="chapter-tag"><i></i><b>${esc(name)}</b></p>`;
 
   const wrap = (inner, cls = "") => `<div class="${h.C.cx("wrap", cls)}">${inner}</div>`;
 
@@ -66,7 +77,7 @@ export function makeChapters(h) {
   </div>
   <div class="ar-veil" aria-hidden="true"></div>
   <div class="ar-in">
-    ${tag(String(n).padStart(2, "0"), eyebrow || name)}
+    ${tag(eyebrow || name)}
     <h1 class="ar-title" data-split>${title}</h1>
     <p class="ar-lede" data-anim="hide">${esc(lede)}</p>
     <div class="ar-actions" data-anim="hide">${actions}</div>
@@ -233,7 +244,26 @@ export function makeChapters(h) {
    *
    *  The measure is capped at 68 characters. That is the single biggest thing
    *  that can be done for a 2,000 word clinical page and it costs nothing. */
-  const longform = ({ lede, sections, aside = "" }) => `<div class="lf-layout">
+  const longform = ({ lede, sections, aside = "", photos = [] }) => {
+    // One photograph every second section, and never after the last one. This
+    // is the chapter that carries the bulk of a treatment page — a median of
+    // 1,958 words — so it is the chapter that most needs somewhere for the eye
+    // to stop. See site/photos.mjs for what may be pictured.
+    let shot = 0;
+    const body = sections.map((sec, i) => {
+      const html = `
+      <section class="lf-section" id="${esc(sec.id)}">
+        <h2>${esc(sec.title)}</h2>
+        ${sec.html}
+      </section>`;
+      // In the gaps between sections, every other gap, never after the last
+      // one. See the note on the same rule in site/presentation.mjs.
+      const due = shot < photos.length &&
+        (sections.length === 1 ? i === 0 : i < sections.length - 1 && i % 2 === 0);
+      return due ? html + bodyFigure(photos[shot++]) : html;
+    }).join("");
+
+    return `<div class="lf-layout">
     <aside class="lf-rail">
       <details class="lf-rail-box" open>
         <summary class="lf-rail-title">On this page</summary>
@@ -247,13 +277,10 @@ export function makeChapters(h) {
     </aside>
     <div class="lf-body text-rich-text">
       ${lede ? `<div class="lf-lede">${lede}</div>` : ""}
-      ${sections.map((sec) => `
-      <section class="lf-section" id="${esc(sec.id)}">
-        <h2>${esc(sec.title)}</h2>
-        ${sec.html}
-      </section>`).join("")}
+      ${body}
     </div>
   </div>`;
+  };
 
   // ---------------------------------------------------------------- the path
   /** The pinned horizontal journey. SIZED IN svh, not rem: a pinned scene has
@@ -265,7 +292,7 @@ export function makeChapters(h) {
     inner: `
   <div class="pa-pin" id="pathPin">
     <div class="pa-head">
-      ${tag(String(n).padStart(2, "0"), name)}
+      ${tag(name)}
       <h2>${esc(title)}</h2>
     </div>
     <div class="pa-track" id="pathTrack">
@@ -296,6 +323,20 @@ export function makeChapters(h) {
       ${h.img(portrait, portraitAlt, { sizes: "(max-width: 959px) 100vw, 34vw" })}
     </div>
   </div>`;
+
+  /** A photograph set INTO a column of body copy, with its caption under it.
+   *
+   *  This is the part that turns a treatment page from a document into a page.
+   *  It is not decoration: the eye needs somewhere to stop every few hundred
+   *  words, and until now these pages gave it nowhere between the hero and the
+   *  footer. See site/photos.mjs for what may and may not be pictured here.
+   *
+   *  `data-drift` so it moves against the scroll like every other photograph in
+   *  the system. */
+  const bodyFigure = ({ src, alt, caption }) => `<figure class="lf-figure" data-drift>
+      ${h.img(src, alt, { sizes: "(max-width: 899px) 100vw, 62vw" })}
+      ${caption ? `<figcaption>${esc(caption)}</figcaption>` : ""}
+    </figure>`;
 
   /** Travels sideways with the page. scroll-padding is not optional: a snap
    *  container aligns its first item to the SCROLLPORT edge and would otherwise
@@ -345,7 +386,7 @@ export function makeChapters(h) {
   return {
     chapter, tag, wrap, button, linkArrow,
     arrival, figures, versus, marquee,
-    arc, plate, plates, band, spread, columnIndex, longform,
+    arc, plate, plates, band, spread, columnIndex, longform, bodyFigure,
     path, quote, quoteRail, badges,
     facts, faqList,
   };

@@ -11,9 +11,11 @@
 //   6. pages nothing links to
 //   7. any surviving reference to the compromised WordPress host or the malware
 //   8. accessibility: alt text, heading order, link and control names
+//   9. the "no wall of text" rule: unbroken prose, and pages with no picture
 import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
+import { longestProseRun, PROSE_RUN_CEILING } from "./site/prose.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const DIST = path.join(HERE, "dist");
@@ -174,6 +176,48 @@ const EXPECTED_ORPHANS = new Set(["/", "/404.html", "/thank-you/"]);
 for (const route of known) {
   if (EXPECTED_ORPHANS.has(route)) continue;
   if (!linkedTo.has(route)) flag("WARN", route, "orphan: nothing on the site links here");
+}
+
+// ---------------------------------------------------------------------------
+// 9. THE "NO WALL OF TEXT" RULE, checked on the rendered page.
+//
+// This is the gate for DESIGN-STANDARD.md's rule of the same name, and it
+// exists because the rule is enforced by a build pass (site/prose.mjs) that can
+// silently stop working. It already did once: an Elementor wrapper the reader
+// cannot see was separating every paragraph, so the ceiling matched nothing and
+// /services/what-is-tmj/ shipped a 404 word run while the build reported the
+// pass had run. A gate on the BUILT HTML is the only thing that catches that,
+// because it is the only check that looks at what the page actually is.
+//
+// THE BOUND IS THE CEILING PLUS THE FOLD MINIMUM. `foldLongRuns` declines to
+// fold a tail shorter than 45 words, on the grounds that a disclosure holding
+// two sentences is worse than the two sentences, so a compliant page can carry
+// a run of up to ceiling + 44 and eight of them legitimately do.
+const RUN_LIMIT = PROSE_RUN_CEILING + 45;
+
+for (const f of pages) {
+  const route = routeOf(f);
+  const html = fs.readFileSync(f, "utf8");
+  const sections = html.match(/<section class="lf-section"[\s\S]*?<\/section>/g) || [];
+  if (!sections.length) continue;                 // not a long-form page
+
+  for (const sec of sections) {
+    const inner = sec.replace(/^<section[^>]*>/, "").replace(/<\/section>$/, "");
+    const run = longestProseRun(inner);
+    if (run > RUN_LIMIT) {
+      const title = (sec.match(/<h[23]>([\s\S]*?)<\/h[23]>/) || [, ""])[1].replace(/<[^>]+>/g, "").trim();
+      flag("ERROR", route, `wall of text: ${run} words of unbroken prose in "${title}" (limit ${RUN_LIMIT})`);
+    }
+  }
+
+  // A long-form page with no photograph below the hero is the other half of the
+  // same client note. The hero, the logo and the five credential marks are
+  // chrome and do not count; this looks only at the article body.
+  const bodies = html.match(/<div class="lf-body[^"]*">[\s\S]*?<\/div>/g) || [];
+  const figures = (html.match(/<figure class="lf-figure"/g) || []).length;
+  if (bodies.length && !figures) {
+    flag("WARN", route, "long-form page carries no photograph below the hero");
+  }
 }
 
 for (const [cls, routes] of unknownClasses) {

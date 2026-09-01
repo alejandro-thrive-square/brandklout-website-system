@@ -22,6 +22,13 @@
 // character of the body comes out in the order it went in.
 // ===========================================================================
 
+import { repairProse, foldLongRuns, longestProseRun } from "./prose.mjs";
+
+/** What the repair did, across every page of a build. build.mjs prints it and
+ *  the numbers are the evidence that these rules stayed off the clinical copy:
+ *  a jump in `dropped` is the thing to look at after any edit to prose.mjs. */
+export const repairs = { dropped: 0, promoted: 0, demoted: 0, folded: 0 };
+
 /** Slug for an in-page anchor. Stable across builds, so a link into a section
  *  keeps working; deduped, because a page can repeat a heading. */
 export function anchorId(text, used) {
@@ -51,7 +58,7 @@ export function anchorId(text, used) {
  * correct answer for the two stub pages that have 104 and 235 words.
  */
 export function splitLongform(html) {
-  const src = String(html || "");
+  let src = String(html || "");
 
   // WHICH LEVEL IS THE SECTION LEVEL? It is not the same on every page, and
   // assuming <h2> is what made 34 of 35 pages come back as one section.
@@ -83,6 +90,31 @@ export function splitLongform(html) {
     for (const lvl of [2, 3, 4]) {
       if (countAt(lvl) >= 1) { level = lvl; break; }
     }
+  }
+  // PROSE REPAIR, and it runs HERE rather than in the caller because it needs
+  // the section level and it changes what the split will find. See
+  // site/prose.mjs: it drops the paragraphs that carry no information, promotes
+  // the headings the editor typed as bold body text, and demotes the list
+  // lead-ins the editor typed as headings.
+  //
+  // A page with no headings at all still gets the repair — a bold heading is
+  // often the ONLY structure such a page has — and the level is re-detected
+  // afterwards, because a promotion can turn a level-0 page into a level-2 one.
+  //
+  // `listifyBullets` HAS TO RUN FIRST, and the reason is not obvious. The list
+  // lead-in rule fires only when the block after the label is a real list, and
+  // on this site the commonest list is not one yet: Invisalign's "ideal for" is
+  // a single <p> holding four glyph-prefixed lines. With the bullets still
+  // unconverted, `<h3>Invisalign is ideal for:</h3>` sees a paragraph after it
+  // and stays a heading, which is the exact heading the client's note pointed
+  // at. Converting first is what lets the label be demoted.
+  const fixed = repairProse(listifyBullets(src), level || 2);
+  src = fixed.html;
+  repairs.dropped += fixed.dropped;
+  repairs.promoted += fixed.promoted;
+  repairs.demoted += fixed.demoted;
+  if (!level) {
+    for (const lvl of [2, 3, 4]) { if (countAt(lvl) >= 1) { level = lvl; break; } }
   }
   if (!level) return { lede: src.trim(), sections: [], level: 0 };
 
@@ -126,15 +158,24 @@ export function splitLongform(html) {
     );
   };
 
+  // THE CEILING, applied last. `listifyBullets` has to run first: a run of
+  // paragraphs that is really a bulleted list becomes a <ul>, which resets the
+  // prose run — folding before that would hide a list for being long prose.
+  const fold = (chunk) => {
+    const r = foldLongRuns(chunk);
+    repairs.folded += r.folded;
+    return r.html;
+  };
+
   return {
     // The lede sits under the page's own <h1>, so anything in it starts at h2.
     // A section's contents sit under the <h2> or <h3> the caller prints for the
     // section itself, so they start one below that.
-    lede: listifyBullets(reflow(lede, 2)).trim(),
+    lede: fold(listifyBullets(reflow(lede, 2))).trim(),
     level,
     sections: sections
       .filter((sec) => sec.title && sec.html.replace(/<[^>]+>/g, "").trim())
-      .map((sec) => ({ ...sec, html: listifyBullets(reflow(sec.html, 3)) })),
+      .map((sec) => ({ ...sec, html: fold(listifyBullets(reflow(sec.html, 3))) })),
   };
 }
 
@@ -353,4 +394,5 @@ export function routeSections(sections) {
   return out;
 }
 
-export default { splitLongform, ledeText, anchorId, classifySection, routeSections, extractInlineFaq, extractEmbeddedFaq, listifyBullets };
+export { longestProseRun };
+export default { splitLongform, ledeText, anchorId, classifySection, routeSections, extractInlineFaq, extractEmbeddedFaq, listifyBullets, repairs, longestProseRun };

@@ -11,6 +11,7 @@
 import { makeComponents } from "./components.mjs";
 import { makeChapters } from "./chapters.mjs";
 import { splitLongform, ledeText, routeSections, extractInlineFaq, extractEmbeddedFaq } from "./longform.mjs";
+import { photosFor, REVIEW_PORTRAIT } from "./photos.mjs";
 
 export const LOGO = "/wp-content/uploads/2023/08/Dentist-Katy-TX-Logo-2.webp";
 export const BOOKING = "https://www.flexbook.me/masonpark/1";
@@ -301,8 +302,34 @@ export function makePresentation(ctx) {
 
     // Renders a beat as its own chapter, or nothing at all when the page has no
     // section for it. `filter(Boolean)` at the end drops the empties.
-    const beatChapter = ({ n, name, cls, id, theme, heading, lede: chapterLede, items, rail = false }) => {
+    const beatChapter = ({ n, name, cls, id, theme, heading, lede: chapterLede, items, rail = false, photos = [] }) => {
       if (!items || !items.length) return "";
+      // A photograph between every second section. `photos` is what this
+      // chapter was given (see photosFor); when it is empty the body renders
+      // exactly as it did before, which is what keeps a chapter that has no
+      // business carrying a picture — the cost table, the FAQ — clean.
+      let shot = 0;
+      const withFigures = (secs) => secs.map((sec, i) => {
+        const html = `
+      <section class="lf-section" id="${esc(sec.id)}"><h3>${esc(sec.title)}</h3>${sec.html}</section>`;
+      // WHERE A FIGURE GOES: in the GAPS BETWEEN sections, every other gap,
+      // never after the last section. A chapter of n sections has n-1 gaps, so
+      // the commonest chapter on this site — two sections — gets exactly one
+      // picture, between them.
+      //
+      // The first version of this counted SECTIONS instead of gaps ("every
+      // second section, but not the last"), which silently gave a two-section
+      // chapter nothing at all. Seven pages came out with no photograph below
+      // the hero, /services/invisalign/ among them: the page the note was
+      // about. The audit's "carries no photograph" warning is what found it.
+      // A chapter with a SINGLE section has no gap, so on a thin page every
+      // chapter came back with no picture at all. There the figure closes the
+      // chapter body instead — which reads correctly, because the chapter's own
+      // bottom padding sits under it rather than another section's heading.
+        const due = shot < photos.length &&
+          (secs.length === 1 ? i === 0 : i < secs.length - 1 && i % 2 === 0);
+        return due ? html + K.bodyFigure(photos[shot++]) : html;
+      }).join("");
       // The contents rail is worth a column only when there is a list worth
       // reading. Once the other beats have taken their sections, a page can be
       // left with one or two here, and a rail listing a single entry beside a
@@ -314,34 +341,60 @@ export function makePresentation(ctx) {
         n, name, cls, id, theme,
         inner: `
   ${useRail ? `<div class="wrap rg-head">
-    ${K.tag(String(n).padStart(2, "0"), name)}
+    ${K.tag(name)}
     <h2 data-split>${esc(heading)}</h2>
     ${chapterLede ? `<p class="pe-lede">${esc(chapterLede)}</p>` : ""}
   </div>` : ""}
   ${useRail
-    ? K.longform({ lede: chapterLede ? "" : lede, sections: items })
-    : `<div class="lf-layout lf-split"><div class="lf-aside">${K.tag(String(n).padStart(2, "0"), name)}<h2 data-split>${esc(heading)}</h2>${chapterLede ? `<p class="pe-lede">${esc(chapterLede)}</p>` : ""}</div><div class="lf-body text-rich-text">${items.map((sec) => `
-      <section class="lf-section" id="${esc(sec.id)}"><h3>${esc(sec.title)}</h3>${sec.html}</section>`).join("")}</div></div>`}`,
+    ? K.longform({ lede: chapterLede ? "" : lede, sections: items, photos })
+    : `<div class="lf-layout lf-split"><div class="lf-aside">${K.tag(name)}<h2 data-split>${esc(heading)}</h2>${chapterLede ? `<p class="pe-lede">${esc(chapterLede)}</p>` : ""}</div><div class="lf-body text-rich-text">${withFigures(items)}</div></div>`}`,
       });
     };
 
-    // The practice's own reviews, from the homepage's content file. Three, not
-    // six: the reference puts proof here as reassurance, not as a reading task.
+    // The practice's own reviews, from the homepage's content file.
+    //
+    // THE LENGTH FILTER IS GONE, and it is why this chapter shipped with ONE
+    // review card in it. It required a quote between 60 and 260 characters;
+    // the seven reviews the practice has run 244, 262, 259, 270, 286, 473 and
+    // 491, so exactly one of them cleared the ceiling and the "rail" was a
+    // single chip sitting alone in a full width band.
+    //
+    // Trimming the long ones to fit was the other way to fix it and it is not
+    // available: these are real reviews by named patients, and the proof
+    // chapter states in as many words that nothing here is trimmed to change
+    // what it says. A review is shown whole or not at all.
     const homeDoc = read("home");
     const rb = ((homeDoc && homeDoc.blocks) || []).filter((x) => x.section === 15);
-    const reviews = [];
+    const allReviews = [];
     const seen = new Set();
-    for (let i = 0; i < rb.length && reviews.length < 3; i++) {
+    for (let i = 0; i < rb.length; i++) {
       if (rb[i].type !== "para") continue;
       const next = rb[i + 1];
       const quote = rb[i].text.trim().replace(/^[“”"'\s]+/, "").replace(/[“”"'\s]+$/, "");
       const author = next && next.type === "heading" ? next.text.replace(/^-\s*/, "") : "";
       const key = quote.toLowerCase().replace(/[^a-z0-9]/g, "").slice(0, 60);
-      if (author && quote.length > 60 && quote.length < 260 && !seen.has(key)) {
+      // No attribution means we cannot say who said it, so it is not proof.
+      if (author && quote.length > 60 && !seen.has(key)) {
         seen.add(key);
-        reviews.push({ quote, author });
+        allReviews.push({ quote, author });
       }
     }
+    // The same shape the homepage uses: one quote set at display size beside a
+    // photograph, then the others as a rail. The lead is the shortest one that
+    // still says something, because a ninety word review set at display size is
+    // a wall — the very thing this pass exists to remove.
+    const byLength = allReviews.slice().sort((a, b) => a.quote.length - b.quote.length);
+    const lead = byLength.find((r) => r.quote.length > 90 && r.quote.length < 260) || allReviews[0];
+    const reviews = allReviews.filter((r) => r !== lead).slice(0, 3);
+
+    // WHICH CHAPTERS GET PICTURES. The four that carry running prose, in the
+    // order a reader meets them, drawn from one deterministic set per page so
+    // the same photograph never appears twice on one page. The cost table, the
+    // comparison, the reviews and the FAQ get none: those chapters are already
+    // broken up by their own structure, and a photograph in them is filler.
+    const pool = photosFor(d.slug, 5);
+    let taken = 0;
+    const take = (n) => pool.slice(taken, (taken += n));
 
     let n = 0;
     return [
@@ -366,7 +419,7 @@ export function makePresentation(ctx) {
       beatChapter({
         n: n++, name: "Is this you", cls: "ch-qualify", id: "qualify",
         heading: "Is this the treatment you need?",
-        items: beat.qualifier,
+        items: beat.qualifier, photos: take(1),
       }),
 
       // ---- beat 4: what it is. The bulk, and the only chapter with the rail.
@@ -378,13 +431,13 @@ export function makePresentation(ctx) {
         ? beatChapter({
             n: n++, name: "The Treatment", cls: "ch-treatment", id: "treatment",
             heading: "What it is, and what it involves.",
-            items: [...beat.body, ...beat.type], rail: true,
+            items: [...beat.body, ...beat.type], rail: true, photos: take(2),
           })
         : (lede ? K.chapter({
             n: n++, name: "The Treatment", cls: "ch-treatment", id: "treatment",
             inner: `
   <div class="wrap rg-head">
-    ${K.tag(String(n - 1).padStart(2, "0"), "The Treatment")}
+    ${K.tag("The Treatment")}
     <h2 data-split>What it is, and what it involves.</h2>
   </div>
   <div class="lf-layout is-solo"><div class="lf-body text-rich-text">${lede}</div></div>`,
@@ -394,14 +447,14 @@ export function makePresentation(ctx) {
       beatChapter({
         n: n++, name: "Why This One", cls: "ch-why", id: "why", theme: "warm",
         heading: "What it does for you.",
-        items: [...beat.benefit],
+        items: [...beat.benefit], photos: take(1),
       }),
 
       // ---- beat 6: what actually happens
       beatChapter({
         n: n++, name: "The Path", cls: "ch-process", id: "process",
         heading: "What happens, step by step.",
-        items: beat.process,
+        items: beat.process, photos: take(1),
       }),
 
       // ---- beat 7: the alternatives, honestly
@@ -420,14 +473,15 @@ export function makePresentation(ctx) {
       }),
 
       // ---- beat 9: proof
-      reviews.length ? K.chapter({
+      lead ? K.chapter({
         n: n++, name: "The Proof", cls: "ch-proof", id: "proof", theme: "warm",
         inner: `
   <div class="wrap rg-head">
-    ${K.tag(String(n - 1).padStart(2, "0"), "The Proof")}
+    ${K.tag("The Proof")}
     <h2 data-split>What Katy families say about being here.</h2>
   </div>
-  ${K.quoteRail(reviews, "serviceRail")}
+  ${K.quote({ text: lead.quote, author: lead.author, portrait: REVIEW_PORTRAIT.src, portraitAlt: REVIEW_PORTRAIT.alt })}
+  ${reviews.length ? K.quoteRail(reviews, "serviceRail") : ""}
   <div class="wrap pr-foot">${K.linkArrow({ label: "Read more reviews", href: "/patient-reviews/" })}</div>`,
       }) : "",
 
@@ -436,7 +490,7 @@ export function makePresentation(ctx) {
         n: n++, name: "Questions", cls: "ch-questions", id: "questions",
         inner: `
   <div class="wrap rg-head">
-    ${K.tag(String(n - 1).padStart(2, "0"), "Questions")}
+    ${K.tag("Questions")}
     <h2 data-split>Questions patients ask before they decide.</h2>
   </div>
   ${K.faqList([...beat.question.map((sec) => ({ question: sec.title, html: sec.html })), ...inlineFaq])}`,
@@ -448,7 +502,7 @@ export function makePresentation(ctx) {
         inner: `
   <div class="wrap iv-top">
     <div class="iv-copy">
-      ${K.tag(String(n - 1).padStart(2, "0"), "The Invitation")}
+      ${K.tag("The Invitation")}
       <h2 data-split>Ask about this one.</h2>
       <p class="iv-lede">Book a first visit and say what is bothering you. Nothing is started on the day you arrive, and the plan and the price come before the work does.</p>
       <div class="iv-actions">

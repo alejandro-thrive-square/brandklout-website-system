@@ -180,8 +180,11 @@ export function home(d, h) {
     .filter(Boolean)
     .map((b) => ({ question: b.question, html: h.rewrite(b.html) }));
 
-  const tag = (n, name) =>
-    `<p class="chapter-tag"><i></i><span>Chapter ${n}</span><b>${esc(name)}</b></p>`;
+  // The chapter library owns this. It used to be re-declared here, and when the
+  // numeral was dropped site-wide the library's copy changed while this one did
+  // not — so every homepage tag rendered as "Chapter The Relay". A second
+  // definition of a shared part is a bug waiting for the first divergence.
+  const tag = K.tag;
 
   // =======================================================================
   // CHAPTER 00 — ARRIVAL
@@ -215,7 +218,7 @@ export function home(d, h) {
 <section class="ch ch-relay" id="relay" data-chapter="1" data-chapter-name="The Relay">
   <div class="wrap re-grid">
     <div class="re-copy">
-      ${tag("01", "The Relay")}
+      ${tag("The Relay")}
       <p class="re-big" id="relayBig">Most families in Katy run two dental offices. One for the adults. One for the children. Two waiting rooms, two drives across town, two sets of forms, and nobody who has seen the whole family.</p>
       <div class="re-after" id="relayAfter">
         <p>It is not a small inconvenience. It is the reason a child's check gets postponed to a term that never comes, and the reason an adult's own cleaning is the appointment that gets dropped.</p>
@@ -241,7 +244,7 @@ export function home(d, h) {
   <div class="wrap">
     <div class="tg-head">
       <div>
-        ${tag("02", "Under One Roof")}
+        ${tag("Under One Roof")}
         <h2 data-split>The whole family, on one afternoon.</h2>
       </div>
       <p class="tg-lede">Two practices share this address. Dr. Nguyen is a board certified pediatric dentist, which is a three year specialty beyond dental school, and she is here rather than across town. That single fact is what collapses two trips into one.</p>
@@ -285,7 +288,7 @@ export function home(d, h) {
   const range = `
 <section class="ch ch-range" id="range" data-chapter="3" data-chapter-name="The Range" data-theme="warm">
   <div class="wrap rg-head">
-    ${tag("03", "The Range")}
+    ${tag("The Range")}
     <h2 data-split>Thirty five treatments. One building. No referral out.</h2>
   </div>
   ${ARCS.map((a, i) => K.arc({
@@ -308,7 +311,7 @@ export function home(d, h) {
   const people = `
 <section class="ch ch-people" id="people" data-chapter="4" data-chapter-name="The People" data-theme="dark">
   <div class="wrap pe-head">
-    ${tag("04", "The People")}
+    ${tag("The People")}
     <h2 data-split>You will see the same faces next time.</h2>
     <p class="pe-lede">Low turnover is not a marketing line. It is why your child's hygienist remembers the trick that worked last time, and why a crown placed three years ago still matches.</p>
   </div>
@@ -349,7 +352,7 @@ export function home(d, h) {
 <section class="ch ch-proof" id="proof" data-chapter="6" data-chapter-name="The Proof" data-theme="warm">
   <div class="wrap pr-head">
     <div>
-      ${tag("06", "The Proof")}
+      ${tag("The Proof")}
       <h2 data-split>What Katy families actually say.</h2>
     </div>
     <p class="pr-note">Every quote on this page is a review the practice's own patients left on Google. Nothing here is written by us, and nothing is trimmed to change what it says.</p>
@@ -381,7 +384,7 @@ export function home(d, h) {
 <section class="ch ch-invitation" id="invitation" data-chapter="7" data-chapter-name="The Invitation" data-theme="dark">
   <div class="wrap iv-top">
     <div class="iv-copy">
-      ${tag("07", "The Invitation")}
+      ${tag("The Invitation")}
       <h2 data-split>Come and see the building.</h2>
       <p class="iv-lede">On the corner of Mason Road and Kingsland Boulevard, behind the Ranch 99 complex. Free parking at the door, and a waiting room that does not sound like a dental office.</p>
       <div class="iv-actions">

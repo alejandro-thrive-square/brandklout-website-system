@@ -186,8 +186,9 @@
 .ch > * { position: relative; z-index: 1; }
 
 /* ------------------------------------------------------------- chapter tag */
-/* The continuity device. Numbered, tagged, and animated in from the left, so a
-   visitor always knows which beat they are in. */
+/* The continuity device. Named and animated in from the left, so a visitor
+   always knows which beat they are in. The numeral was removed site-wide on
+   client feedback: see the `tag` helper in site/chapters.mjs. */
 .chapter-tag {
   display: flex;
   align-items: center;
@@ -208,7 +209,6 @@
   transform-origin: left center;
 }
 .chapter-tag b { font-weight: 500; color: var(--accent); }
-.chapter-tag span::after { content: " /"; opacity: .4; }
 
 /* ------------------------------------------------------------------ buttons */
 /* The style guide button is 13px Karla in a 2px box. At the sizes this page
@@ -964,9 +964,20 @@
   .pr-chip { scroll-snap-align: start; }
 }
 .pr-rail-in { display: flex; gap: 1.4rem; padding: 0 var(--bleed); will-change: transform; }
+/* SIZED TO THE REVIEWS, not the other way round. This card used to be 21rem
+   wide with `-webkit-line-clamp: 6`, and the practice's seven Google reviews run
+   244 to 491 characters — so every single one of them rendered with an ellipsis
+   that led nowhere, on a page whose own standfirst says "nothing is trimmed to
+   change what it says". A clamp is a promise that the rest is somewhere else,
+   and there was no somewhere else.
+   The chip is wider now and has no clamp: a review is shown whole or it is not
+   shown. Uneven text lengths are absorbed by the flex row, which stretches every
+   chip to the tallest. */
 .pr-chip {
   flex: none;
-  width: clamp(16rem, 24vw, 21rem);
+  display: flex;
+  flex-direction: column;
+  width: clamp(17rem, 27vw, 25rem);
   margin: 0;
   padding: 1.6rem;
   background: var(--white);
@@ -976,14 +987,14 @@
   font-size: var(--f-body);
   line-height: 1.68;
   color: var(--fg-body);
-  display: -webkit-box;
-  -webkit-line-clamp: 6;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
 }
+/* The row stretches every chip to the tallest, so a short review would leave
+   its attribution floating in the middle of a tall card. `auto` puts it on the
+   floor of the card instead and the names line up across the rail. */
 .pr-chip cite {
   display: block;
-  margin-top: 1.1rem;
+  margin-top: auto;
+  padding-top: 1.1rem;
   font-family: var(--font-ui);
   font-size: var(--f-label);
   font-weight: 700;
@@ -1146,7 +1157,6 @@
   text-transform: uppercase;
   border-radius: 2px;
 }
-.jr-readout b { color: var(--copper); font-weight: 700; }
 @media (min-width: 900px) { .jr-readout.is-on { display: flex } }
 
 /* ===========================================================================
@@ -1599,3 +1609,86 @@ body.nav-open.has-journey .navbar_component .navbar_toggle { color: var(--ink); 
   transform: rotate(-45deg);
 }
 .lf-ticks strong, .lf-ticks b { color: var(--fg); font-weight: 600; }
+
+/* A label the editor typed as a heading because there was no other button for
+   it: "Invisalign is ideal for:" above four bullets. Rendered as a heading it
+   put a type-scale jump and 36px of margin between a list and the four words
+   that name it, which is what made the two flagged sections read as two
+   sections each. It is a lead-in, so it is set as one. */
+.lf-lead {
+  margin: 1.4rem 0 .2rem;
+  color: var(--fg);
+  font-weight: 600;
+}
+.lf-lead + ul, .lf-lead + ol { margin-top: .5rem; }
+
+/* ------------------------------------------------------- the prose ceiling */
+/* The tail of an over-long run of paragraphs, folded away. See site/prose.mjs
+   for the rule and why the tail is kept rather than deleted: it is the
+   practice's own clinical copy and it still ranks. Closed by default, so what
+   the page SHOWS is never a wall, and open in one click with no script. */
+.lf-more { margin: 1.1rem 0 0; }
+.lf-more > summary {
+  display: inline-flex;
+  align-items: center;
+  gap: .5rem;
+  width: fit-content;
+  padding: .45rem 0;
+  color: var(--accent);
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 500;
+  letter-spacing: .12em;
+  text-transform: uppercase;
+  cursor: pointer;
+  list-style: none;
+}
+.lf-more > summary::-webkit-details-marker { display: none; }
+.lf-more > summary::after {
+  content: "";
+  width: .42rem;
+  height: .42rem;
+  border-right: 1.5px solid currentColor;
+  border-bottom: 1.5px solid currentColor;
+  transform: translateY(-.15em) rotate(45deg);
+  transition: transform .25s ease;
+}
+.lf-more[open] > summary::after { transform: translateY(.1em) rotate(-135deg); }
+.lf-more > summary:hover { color: var(--fg); }
+.lf-more > summary:focus-visible { outline: 2px solid var(--accent); outline-offset: 3px; }
+.lf-more-in { padding-top: .35rem; }
+.lf-more-in > p:first-child { margin-top: 0; }
+
+/* ------------------------------------------------------ pictures in a column */
+/* Until this existed a treatment page carried no photograph at all between the
+   hero and the footer, for a median of 1,958 words. It breaks the measure
+   deliberately — wider than the 66ch column it sits in — so the page has a
+   change of rhythm and not just a picture. See site/photos.mjs for what may be
+   pictured on a treatment page and what may not. */
+.lf-figure {
+  margin: clamp(2rem, 4vw, 3rem) 0;
+  width: min(100%, 46rem);
+}
+.lf-figure img {
+  display: block;
+  width: 100%;
+  height: auto;
+  aspect-ratio: 3 / 2;
+  object-fit: cover;
+  border-radius: 2px;
+}
+.lf-figure figcaption {
+  margin-top: .7rem;
+  padding-left: .9rem;
+  border-left: 1.5px solid var(--accent);
+  color: var(--fg-soft);
+  font-family: var(--font-ui);
+  font-size: calc(.8125rem * var(--t-ui));
+  line-height: 1.5;
+}
+/* The split frame's body column is narrower than the rail frame's, so the
+   figure is allowed to reach past it on a wide screen. Below the stack
+   breakpoint everything is one column and it stays in the measure. */
+@media (min-width: 900px) {
+  .lf-split .lf-figure { width: min(118%, 46rem); }
+}

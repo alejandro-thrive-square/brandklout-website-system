@@ -201,7 +201,7 @@ function ourServices(d, h) {
       n: 1, name: "The Range", cls: "ch-range", id: "range", theme: "warm",
       inner: `
   <div class="wrap rg-head">
-    ${K.tag("01", "The Range")}
+    ${K.tag("The Range")}
     <h2 data-split>Three kinds of appointment, and what each one covers.</h2>
   </div>
   ${ARCS.map((a, i) => K.arc({
@@ -217,7 +217,7 @@ function ourServices(d, h) {
       n: 2, name: "Everything", cls: "ch-catalogue", id: "catalogue",
       inner: `
   <div class="wrap rg-head">
-    ${K.tag("02", "Everything")}
+    ${K.tag("Everything")}
     <h2 data-split>Every treatment, with a page of its own.</h2>
     <p class="pe-lede">Each one explains what it is, who it suits and what to expect on the day. If you are not sure which you need, book and ask: that is what the first visit is for.</p>
   </div>
@@ -228,7 +228,7 @@ function ourServices(d, h) {
       n: 3, name: "The Cost", cls: "ch-cost", id: "cost", theme: "warm",
       inner: `
   <div class="wrap rg-head">
-    ${K.tag("03", "The Cost")}
+    ${K.tag("The Cost")}
     <h2 data-split>What it costs, before it starts.</h2>
     <p class="pe-lede">Treatment is planned and priced in writing before any work begins, with what insurance covers and what it does not. Cherry splits the balance at 0% APR with no hard credit check.</p>
   </div>
@@ -254,7 +254,7 @@ function ourServices(d, h) {
       inner: `
   <div class="wrap iv-top">
     <div class="iv-copy">
-      ${K.tag("04", "The Invitation")}
+      ${K.tag("The Invitation")}
       <h2 data-split>Not sure which one you need?</h2>
       <p class="iv-lede">Book a first visit and say what is bothering you. A full exam, digital x-rays and a plan you can see are what that appointment is for, and nothing is started on the day you arrive.</p>
       <div class="iv-actions">
@@ -430,7 +430,7 @@ function ourDoctors(d, h) {
       n: 1, name: "The Specialist", cls: "ch-specialist", id: "specialist",
       inner: `
   <div class="wrap pe-head">
-    ${K.tag("01", "The Specialist")}
+    ${K.tag("The Specialist")}
     <h2 data-split>The reason a family does not need a second practice.</h2>
     <p class="pe-lede">Pediatric dentistry is one of the recognised dental specialties and it takes three years beyond dental school. Most practices in Katy refer children out to somebody who has done it. This one does not.</p>
   </div>
@@ -441,7 +441,7 @@ function ourDoctors(d, h) {
       n: 2, name: "The Range", cls: "ch-generalists", id: "generalists", theme: "warm",
       inner: `
   <div class="wrap pe-head">
-    ${K.tag("02", "The Range")}
+    ${K.tag("The Range")}
     <h2 data-split>Between them, almost nothing gets referred out.</h2>
     <p class="pe-lede">Sedation, endodontics, oral surgery, implant placement and cosmetic work are handled in this building rather than passed to somebody else's calendar.</p>
   </div>
@@ -452,7 +452,7 @@ function ourDoctors(d, h) {
       n: 3, name: "The Standard", cls: "ch-standard", id: "standard", theme: "dark",
       inner: `
   <div class="wrap pe-head">
-    ${K.tag("03", "The Standard")}
+    ${K.tag("The Standard")}
     <h2 data-split>What all three keep doing after they qualified.</h2>
     <p class="pe-lede">Continuing education is the difference between a dentist who trained once and one who is still training. These are the bodies whose programmes this practice takes part in.</p>
   </div>
@@ -464,7 +464,7 @@ function ourDoctors(d, h) {
       inner: `
   <div class="wrap iv-top">
     <div class="iv-copy">
-      ${K.tag("04", "The Invitation")}
+      ${K.tag("The Invitation")}
       <h2 data-split>Ask for whichever one you want.</h2>
       <p class="iv-lede">Tell the front desk who you would like to see and they will book it. If you are bringing a child and an adult on the same visit, say so and both go in one slot.</p>
       <div class="iv-actions">

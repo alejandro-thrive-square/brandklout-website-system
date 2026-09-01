@@ -1,7 +1,7 @@
 {
  "pages": 75,
  "counts": {
-  "WARN": 47
+  "WARN": 45
  },
  "problems": [
   {
@@ -212,11 +212,6 @@
   {
    "level": "WARN",
    "route": "/services/silver-diamine-fluoride/",
-   "msg": "image hotlinked from grandmissiondentistry.com: https://grandmissiondentistry.com/wp-content/uploads/2024/02/Screenshot-2024-02-08-at-9.51"
-  },
-  {
-   "level": "WARN",
-   "route": "/services/silver-diamine-fluoride/",
    "msg": "image hotlinked from grandmissiondentistry.com: https://grandmissiondentistry.com/wp-content/uploads/2024/02/Thinkoutsidethe-box-2.png"
   },
   {
@@ -228,11 +223,6 @@
    "level": "WARN",
    "route": "/services/what-is-tmj/",
    "msg": "image hotlinked from grandmissiondentistry.com: https://grandmissiondentistry.com/wp-content/uploads/2024/02/AdobeStock_343844904-1024x102"
-  },
-  {
-   "level": "WARN",
-   "route": "/services/what-is-tmj/",
-   "msg": "image hotlinked from grandmissiondentistry.com: https://grandmissiondentistry.com/wp-content/uploads/2024/02/AdobeStock_640108801-1024x683"
   },
   {
    "level": "WARN",

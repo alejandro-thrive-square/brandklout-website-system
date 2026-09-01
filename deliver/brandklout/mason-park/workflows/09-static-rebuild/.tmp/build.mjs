@@ -16,6 +16,7 @@ import { fileURLToPath } from "node:url";
 import { NAV, FOOTER_LINKS, PRACTICE, SERVICE_SLUGS, TEAM_SLUGS } from "./pages.config.mjs";
 import { BESPOKE, SKIP, META } from "./site/pages.mjs";
 import { makePresentation } from "./site/presentation.mjs";
+import { repairs } from "./site/longform.mjs";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const CONTENT = path.join(HERE, "content");
@@ -577,6 +578,7 @@ fs.writeFileSync(path.join(HERE, "build-report.json"), JSON.stringify(report, nu
 
 console.log(`${written.length} pages -> dist/`);
 console.log("  templates:", JSON.stringify(report.byTemplate));
+console.log(`  prose repair: ${repairs.dropped} dead paragraphs dropped, ${repairs.promoted} headings promoted, ${repairs.demoted} lead-ins demoted, ${repairs.folded} long runs folded`);
 console.log(`  assets: ${copied} files, ${report.assetMB} MB`);
 console.log(`  out-of-scope links unwrapped: ${report.droppedLinks.length} distinct (see build-report.json)`);
 for (const e of report.externalImages) {

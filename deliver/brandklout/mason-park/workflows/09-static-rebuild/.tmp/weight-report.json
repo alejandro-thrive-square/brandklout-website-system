@@ -2,9 +2,9 @@
  "pages": [
   {
    "route": "/",
-   "bytes": 2542486,
-   "phoneBytes": 1315658,
-   "onLoadBytes": 181950,
+   "bytes": 2542376,
+   "phoneBytes": 1315548,
+   "onLoadBytes": 181840,
    "images": 29,
    "eagerImages": 2,
    "heaviest": [
@@ -14,82 +14,262 @@
   },
   {
    "route": "/services/root-canal-therapy/",
-   "bytes": 255042,
-   "phoneBytes": 165161,
-   "onLoadBytes": 135737,
-   "images": 7,
+   "bytes": 948010,
+   "phoneBytes": 484518,
+   "onLoadBytes": 150851,
+   "images": 13,
    "eagerImages": 2,
    "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_319243720-1536x1111.jpeg",
-    180877
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/our-doctors/",
+   "bytes": 644092,
+   "phoneBytes": 482737,
+   "onLoadBytes": 149112,
+   "images": 11,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
    ]
   },
   {
    "route": "/services/crown-lengthening/",
-   "bytes": 225942,
-   "phoneBytes": 159695,
-   "onLoadBytes": 130271,
-   "images": 7,
+   "bytes": 918359,
+   "phoneBytes": 478501,
+   "onLoadBytes": 144834,
+   "images": 13,
    "eagerImages": 2,
    "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_303293578-1536x1024.jpeg",
-    151658
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
    ]
   },
   {
    "route": "/services/invisalign/",
-   "bytes": 243901,
-   "phoneBytes": 156472,
-   "onLoadBytes": 127048,
-   "images": 7,
+   "bytes": 840798,
+   "phoneBytes": 436535,
+   "onLoadBytes": 134751,
+   "images": 12,
    "eagerImages": 2,
    "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_456365801_Editorial_Use_Only-1536x1024.jpeg",
-    166691
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
    ]
   },
   {
    "route": "/services/bone-grafting/",
-   "bytes": 258608,
-   "phoneBytes": 148901,
-   "onLoadBytes": 119477,
-   "images": 7,
+   "bytes": 951724,
+   "phoneBytes": 468406,
+   "onLoadBytes": 134739,
+   "images": 13,
    "eagerImages": 2,
    "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_465017268-1536x1152.jpeg",
-    183483
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/dental-hygiene-education/",
+   "bytes": 740776,
+   "phoneBytes": 371005,
+   "onLoadBytes": 123640,
+   "images": 11,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/airflow-one/",
+   "bytes": 870610,
+   "phoneBytes": 496999,
+   "onLoadBytes": 122665,
+   "images": 14,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
    ]
   },
   {
    "route": "/services/oral-surgery/",
-   "bytes": 245849,
-   "phoneBytes": 143210,
-   "onLoadBytes": 113786,
-   "images": 7,
+   "bytes": 930026,
+   "phoneBytes": 453776,
+   "onLoadBytes": 120109,
+   "images": 13,
    "eagerImages": 2,
    "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_38574720-1536x1024.jpeg",
-    161165
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
    ]
   },
   {
    "route": "/services/what-is-tmj/",
-   "bytes": 239131,
-   "phoneBytes": 140738,
-   "onLoadBytes": 111314,
-   "images": 7,
+   "bytes": 790641,
+   "phoneBytes": 386279,
+   "onLoadBytes": 116864,
+   "images": 12,
    "eagerImages": 2,
    "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_531850722-1536x1024.jpeg",
-    160782
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/restorative-dentistry/",
+   "bytes": 904137,
+   "phoneBytes": 449138,
+   "onLoadBytes": 115471,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
    ]
   },
   {
    "route": "/services/dental-implant-restorations/",
-   "bytes": 223319,
-   "phoneBytes": 139322,
-   "onLoadBytes": 109898,
-   "images": 7,
+   "bytes": 625243,
+   "phoneBytes": 319274,
+   "onLoadBytes": 114146,
+   "images": 11,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/mouth-guards/",
+   "bytes": 915491,
+   "phoneBytes": 446864,
+   "onLoadBytes": 113197,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/silver-diamine-fluoride/",
+   "bytes": 692208,
+   "phoneBytes": 344623,
+   "onLoadBytes": 107091,
+   "images": 11,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/dental-implant-placement/",
+   "bytes": 884797,
+   "phoneBytes": 437805,
+   "onLoadBytes": 104138,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/bridges/",
+   "bytes": 860625,
+   "phoneBytes": 437362,
+   "onLoadBytes": 103695,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/fluoride-treatment/",
+   "bytes": 865093,
+   "phoneBytes": 436073,
+   "onLoadBytes": 102406,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/dentures/",
+   "bytes": 857927,
+   "phoneBytes": 433592,
+   "onLoadBytes": 99925,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/sedation-dentistry/",
+   "bytes": 867187,
+   "phoneBytes": 429521,
+   "onLoadBytes": 95854,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/pediatric-dental-care/",
+   "bytes": 827334,
+   "phoneBytes": 404523,
+   "onLoadBytes": 92906,
+   "images": 12,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/extractions/",
+   "bytes": 850084,
+   "phoneBytes": 426215,
+   "onLoadBytes": 92548,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/tmj-tmd/",
+   "bytes": 867782,
+   "phoneBytes": 426212,
+   "onLoadBytes": 92545,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/dental-crowns/",
+   "bytes": 614793,
+   "phoneBytes": 313635,
+   "onLoadBytes": 92345,
+   "images": 12,
    "eagerImages": 2,
    "heaviest": [
     "/assets/uploads/2023/08/AdobeStock_388565488-1536x1024.jpeg",
@@ -97,207 +277,147 @@
    ]
   },
   {
-   "route": "/services/dental-hygiene-education/",
-   "bytes": 206948,
-   "phoneBytes": 139306,
-   "onLoadBytes": 109882,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_613444649-1-1536x1024.jpeg",
-    131894
-   ]
-  },
-  {
-   "route": "/services/airflow-one/",
-   "bytes": 178171,
-   "phoneBytes": 178171,
-   "onLoadBytes": 108080,
-   "images": 8,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/Airflow-One-840x630.jpeg",
-    61570
-   ]
-  },
-  {
-   "route": "/services/restorative-dentistry/",
-   "bytes": 212093,
-   "phoneBytes": 130705,
-   "onLoadBytes": 101281,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_605115846-1536x1025.jpeg",
-    133326
-   ]
-  },
-  {
-   "route": "/services/silver-diamine-fluoride/",
-   "bytes": 228634,
-   "phoneBytes": 130241,
-   "onLoadBytes": 100817,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_531850722-1536x1024.jpeg",
-    160782
-   ]
-  },
-  {
-   "route": "/services/mouth-guards/",
-   "bytes": 225032,
-   "phoneBytes": 130016,
-   "onLoadBytes": 100592,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_1207214607-1536x1152.jpeg",
-    153495
-   ]
-  },
-  {
-   "route": "/services/bridges/",
-   "bytes": 169810,
-   "phoneBytes": 120158,
-   "onLoadBytes": 90734,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_133444133-1536x1024.jpeg",
-    98338
-   ]
-  },
-  {
-   "route": "/services/dental-implant-placement/",
-   "bytes": 193504,
-   "phoneBytes": 120123,
-   "onLoadBytes": 90699,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_259143974-1536x1024.jpeg",
-    118624
-   ]
-  },
-  {
-   "route": "/services/dentures/",
-   "bytes": 168065,
-   "phoneBytes": 117341,
-   "onLoadBytes": 87917,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_276055916-1536x1025.jpeg",
-    93925
-   ]
-  },
-  {
-   "route": "/services/fluoride-treatment/",
-   "bytes": 172372,
-   "phoneBytes": 116963,
-   "onLoadBytes": 87539,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_215496499-1536x1025.jpeg",
-    95555
-   ]
-  },
-  {
-   "route": "/services/cosmetic-dentistry/",
-   "bytes": 169598,
-   "phoneBytes": 112821,
-   "onLoadBytes": 83397,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_118631127-1536x1024.jpeg",
-    88660
-   ]
-  },
-  {
-   "route": "/services/sedation-dentistry/",
-   "bytes": 175568,
-   "phoneBytes": 111513,
-   "onLoadBytes": 82089,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_1347482144-1536x1024.jpeg",
-    101052
-   ]
-  },
-  {
-   "route": "/services/pediatric-dental-care/",
-   "bytes": 163820,
-   "phoneBytes": 110780,
-   "onLoadBytes": 81356,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_398040894-1536x1024.jpeg",
-    90333
-   ]
-  },
-  {
-   "route": "/services/dental-crowns/",
-   "bytes": 183906,
-   "phoneBytes": 110564,
-   "onLoadBytes": 81140,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_239374670-1536x1211.jpeg",
-    110914
-   ]
-  },
-  {
-   "route": "/services/tmj-tmd/",
-   "bytes": 177944,
-   "phoneBytes": 109985,
-   "onLoadBytes": 80561,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_1025638262-1536x861.jpeg",
-    102486
-   ]
-  },
-  {
-   "route": "/services/extractions/",
-   "bytes": 160100,
-   "phoneBytes": 109842,
-   "onLoadBytes": 80418,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_298746307-1536x1025.jpeg",
-    83790
-   ]
-  },
-  {
    "route": "/services/night-guards/",
-   "bytes": 169675,
-   "phoneBytes": 109072,
-   "onLoadBytes": 79648,
-   "images": 7,
+   "bytes": 601243,
+   "phoneBytes": 312824,
+   "onLoadBytes": 91534,
+   "images": 12,
    "eagerImages": 2,
    "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_1312707296-1536x1022.jpeg",
-    99030
+    "/assets/uploads/2023/08/AdobeStock_388565488-1536x1024.jpeg",
+    148284
+   ]
+  },
+  {
+   "route": "/services/emergency-dentist/",
+   "bytes": 741299,
+   "phoneBytes": 370513,
+   "onLoadBytes": 90779,
+   "images": 11,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
    ]
   },
   {
    "route": "/services/preventative-dentistry/",
-   "bytes": 166351,
-   "phoneBytes": 107657,
-   "onLoadBytes": 78233,
-   "images": 7,
+   "bytes": 856159,
+   "phoneBytes": 423854,
+   "onLoadBytes": 90187,
+   "images": 13,
    "eagerImages": 2,
    "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_186401650-1536x1024.jpeg",
-    92542
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/sealants/",
+   "bytes": 851791,
+   "phoneBytes": 423602,
+   "onLoadBytes": 89935,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/cosmetic-dentistry/",
+   "bytes": 506929,
+   "phoneBytes": 279113,
+   "onLoadBytes": 89706,
+   "images": 11,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/08/AdobeStock_388565488-1536x1024.jpeg",
+    148284
+   ]
+  },
+  {
+   "route": "/services/hygiene-and-periodontics/",
+   "bytes": 840299,
+   "phoneBytes": 422866,
+   "onLoadBytes": 89199,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/comprehensive-care/",
+   "bytes": 842098,
+   "phoneBytes": 422662,
+   "onLoadBytes": 88995,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/oral-cancer-screening/",
+   "bytes": 810189,
+   "phoneBytes": 396432,
+   "onLoadBytes": 84815,
+   "images": 12,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/bonding/",
+   "bytes": 830172,
+   "phoneBytes": 418450,
+   "onLoadBytes": 84783,
+   "images": 13,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/composite-fillings/",
+   "bytes": 803629,
+   "phoneBytes": 392976,
+   "onLoadBytes": 81359,
+   "images": 12,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/our-services/",
+   "bytes": 1500135,
+   "phoneBytes": 655969,
+   "onLoadBytes": 80902,
+   "images": 16,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/08/AdobeStock_319243720-1536x1111.jpeg",
+    180877
+   ]
+  },
+  {
+   "route": "/services/laser-dentistry/",
+   "bytes": 801484,
+   "phoneBytes": 391454,
+   "onLoadBytes": 79837,
+   "images": 12,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
    ]
   },
   {
@@ -313,111 +433,27 @@
    ]
   },
   {
-   "route": "/services/emergency-dentist/",
-   "bytes": 164757,
-   "phoneBytes": 106965,
-   "onLoadBytes": 77541,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_271498960-1536x1024.jpeg",
-    90913
-   ]
-  },
-  {
-   "route": "/services/sealants/",
-   "bytes": 160773,
-   "phoneBytes": 106195,
-   "onLoadBytes": 76771,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_417599536-1536x1024.jpeg",
-    88113
-   ]
-  },
-  {
-   "route": "/services/oral-cancer-screening/",
-   "bytes": 148348,
-   "phoneBytes": 104362,
-   "onLoadBytes": 74938,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_512061327-1536x810.jpeg",
-    75151
-   ]
-  },
-  {
-   "route": "/services/comprehensive-care/",
-   "bytes": 150112,
-   "phoneBytes": 104287,
-   "onLoadBytes": 74863,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_818609184-1536x1025.jpeg",
-    76447
-   ]
-  },
-  {
-   "route": "/services/hygiene-and-periodontics/",
-   "bytes": 146971,
-   "phoneBytes": 103149,
-   "onLoadBytes": 73725,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_1172076099-1536x1024.jpeg",
-    72370
-   ]
-  },
-  {
-   "route": "/services/composite-fillings/",
-   "bytes": 142718,
-   "phoneBytes": 101836,
-   "onLoadBytes": 72412,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_263516893-1536x1024.jpeg",
-    69657
-   ]
-  },
-  {
-   "route": "/services/laser-dentistry/",
-   "bytes": 139870,
-   "phoneBytes": 99611,
-   "onLoadBytes": 70187,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_453782794-1-1536x1024.jpeg",
-    67186
-   ]
-  },
-  {
-   "route": "/services/bonding/",
-   "bytes": 137694,
-   "phoneBytes": 99583,
-   "onLoadBytes": 70159,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_686214232-1536x1152.jpeg",
-    64123
-   ]
-  },
-  {
    "route": "/services/frenectomy/",
-   "bytes": 130760,
-   "phoneBytes": 93577,
-   "onLoadBytes": 64153,
-   "images": 7,
+   "bytes": 596479,
+   "phoneBytes": 310104,
+   "onLoadBytes": 72572,
+   "images": 11,
    "eagerImages": 2,
    "heaviest": [
-    "/assets/uploads/2023/08/AdobeStock_870859169-1536x909.jpeg",
-    58029
+    "/assets/uploads/2023/11/g7-1536x1024.jpg",
+    258172
+   ]
+  },
+  {
+   "route": "/services/dental-implants/",
+   "bytes": 353118,
+   "phoneBytes": 192944,
+   "onLoadBytes": 57956,
+   "images": 10,
+   "eagerImages": 2,
+   "heaviest": [
+    "/assets/uploads/2023/08/AdobeStock_388565488-1536x1024.jpeg",
+    148284
    ]
   },
   {
@@ -433,15 +469,15 @@
    ]
   },
   {
-   "route": "/services/dental-implants/",
-   "bytes": 85955,
-   "phoneBytes": 82115,
-   "onLoadBytes": 52691,
-   "images": 7,
+   "route": "/services/porcelain-dental-veneers/",
+   "bytes": 253211,
+   "phoneBytes": 153654,
+   "onLoadBytes": 50549,
+   "images": 9,
    "eagerImages": 2,
    "heaviest": [
-    "/assets/uploads/2022/09/Dentist-in-Katy-1024x683-1-890x664.webp",
-    25890
+    "/assets/uploads/2023/08/AdobeStock_388565488-1536x1024.jpeg",
+    148284
    ]
   },
   {
@@ -466,18 +502,6 @@
    "heaviest": [
     "/assets/uploads/elementor/thumbs/Dentist-in-Katy-Office-qiktqh1mcn514kweuyijzt7ovhvbdh4341p0me2x88.webp",
     14778
-   ]
-  },
-  {
-   "route": "/services/porcelain-dental-veneers/",
-   "bytes": 75897,
-   "phoneBytes": 75897,
-   "onLoadBytes": 46473,
-   "images": 7,
-   "eagerImages": 2,
-   "heaviest": [
-    "/assets/uploads/2022/02/Dentist-Katy-TX-3-600x750.webp",
-    17020
    ]
   },
   {
@@ -577,18 +601,6 @@
    ]
   },
   {
-   "route": "/our-services/",
-   "bytes": 69656,
-   "phoneBytes": 69656,
-   "onLoadBytes": 40232,
-   "images": 6,
-   "eagerImages": 1,
-   "heaviest": [
-    "/assets/uploads/2023/08/Dentist-Katy-TX-Logo-2-370x142.webp",
-    10016
-   ]
-  },
-  {
    "route": "/dental-implants-faqs/",
    "bytes": 259269,
    "phoneBytes": 145620,
@@ -670,18 +682,6 @@
    "heaviest": [
     "/assets/uploads/2024/01/Plaque-Disclosing.png",
     58237
-   ]
-  },
-  {
-   "route": "/our-doctors/",
-   "bytes": 359004,
-   "phoneBytes": 359004,
-   "onLoadBytes": 34773,
-   "images": 9,
-   "eagerImages": 1,
-   "heaviest": [
-    "/assets/uploads/2023/11/HS-8-1024x1536.jpg",
-    153800
    ]
   },
   {
