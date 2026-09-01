@@ -65,6 +65,7 @@ Seven pages, built locally, ready to go into Instatic. Written 2026-08-30, **con
 | **Copy gate** | `cd site-src && node check-copy.mjs` — **no em dashes in copy** ([SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md)). Runs on the BUILT output |
 | **Motion gate** | `cd site-src && node journey-test.mjs` — 47 headless checks on the home page's chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins |
 | **Screenshot** | `node site-src/shot.mjs "$PWD/final-site" index.html out.png 1440` |
+| **Preview any page** | `cd site-src && node make-preview.mjs treatments.html` — packs any built page into one self-contained file. GSAP is inlined only into pages that request it |
 | **All pages** | `cd site-src && node all-pages.mjs` — 216 assertions across all 18 pages at 390/1024/1440: no sideways scroll, no clipped control, clean console, no off-origin request, both typefaces loaded. **Run this after touching anything in `css/` that is not `50-journey.css`** |
 | **Weight** | `cd site-src && node weight.mjs` — transferred bytes, LCP, and per-image over-delivery against the painted size at 2x |
 | **Perf** | `cd site-src && node perf.mjs` — drives the scroll through CDP at 4x CPU throttle and reports dropped frames and long tasks per zone. An unthrottled desktop is always smooth, which is why janky sites ship |

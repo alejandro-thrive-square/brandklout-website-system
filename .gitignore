@@ -158,4 +158,4 @@ nul
 # The packed client-review build. 1.6MB of base64 images, regenerated in one
 # second by site-src/make-preview.mjs, so it is an artifact of the build rather
 # than a source file.
-deliver/brandklout/*/workflows/04-design/.tmp/*/preview-home.html
+deliver/brandklout/*/workflows/04-design/.tmp/*/preview-*.html

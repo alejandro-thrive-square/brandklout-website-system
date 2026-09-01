@@ -21,7 +21,10 @@
  * the reviewer would see a working page and conclude the work was not done.
  * SplitText is a Club plugin and is on no public CDN at all.
  *
- * Usage:  node make-preview.mjs [out.html]
+ * Usage:  node make-preview.mjs [page.html] [out.html]
+ *
+ * Defaults to index.html -> ../preview-home.html. Any built page can be packed:
+ *   node make-preview.mjs treatments.html ../preview-treatments.html
  */
 import fs from "node:fs";
 import path from "node:path";
@@ -30,7 +33,10 @@ import { fileURLToPath } from "node:url";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SITE = path.resolve(HERE, "..", "final-site");
 const ASSETS = path.join(SITE, "assets");
-const OUT = process.argv[2] || path.resolve(HERE, "..", "preview-home.html");
+const SRC_PAGE = process.argv[2] || "index.html";
+const OUT =
+  process.argv[3] ||
+  path.resolve(HERE, "..", SRC_PAGE === "index.html" ? "preview-home.html" : `preview-${SRC_PAGE.replace(/\.html$/, "")}.html`);
 
 const MIME = {
   ".woff2": "font/woff2",
@@ -50,10 +56,14 @@ const dataUri = (file) => {
   return `data:${mime};base64,${fs.readFileSync(abs).toString("base64")}`;
 };
 
-let html = fs.readFileSync(path.join(SITE, "index.html"), "utf8");
+let html = fs.readFileSync(path.join(SITE, SRC_PAGE), "utf8");
 let css = fs.readFileSync(path.join(ASSETS, "site.css"), "utf8");
 const js = fs.readFileSync(path.join(ASSETS, "site.js"), "utf8");
-const vendor = fs.readFileSync(path.join(ASSETS, "vendor.js"), "utf8");
+/* Only pages with `motion: true` request the GSAP bundle, so only those need it
+   inlined. treatments.html is on the journey system but does not pin or scrub,
+   and inlining 122KB it never calls would be the opposite of the point. */
+const usesVendor = /assets\/vendor\.js/.test(html);
+const vendor = usesVendor ? fs.readFileSync(path.join(ASSETS, "vendor.js"), "utf8") : "";
 
 /* --- CSS url() -> data: ---------------------------------------------------
    Comments are stripped FIRST. site.css documents its own history, and one of
@@ -89,7 +99,16 @@ const body = html.slice(html.indexOf("<body>") + 6, html.lastIndexOf("</body>"))
    real title is kept in a comment so the client can still see what the browser
    tab will say. */
 const seoTitle = (html.match(/<title>([^<]*)<\/title>/) || [, ""])[1];
-const title = "Stone Surgical Arts";
+/* The gallery name has to be DISTINCT per page: publishing two artifacts both
+   called "Stone Surgical Arts" makes them indistinguishable in a list. The SEO
+   title is "<page> | Stone Surgical Arts" on inner pages, so its leading
+   segment is already the page's own name; home has no leading segment worth
+   using and takes the practice name. */
+const lead = seoTitle.split("|")[0].trim();
+const title =
+  SRC_PAGE === "index.html" || !lead || /stone surgical arts/i.test(lead)
+    ? "Stone Surgical Arts"
+    : `Stone ${lead}`;
 const description = (html.match(/<meta name="description" content="([^"]*)"/) || [, ""])[1];
 
 /* Drop the two external <script src> tags; their contents are inlined below. */
@@ -147,7 +166,7 @@ ${content}
 
 <div class="preview-note" role="status" aria-live="polite"></div>
 
-<script>${vendor}</script>
+${usesVendor ? `<script>${vendor}</script>` : "<!-- no motion bundle: this page neither pins nor scrubs -->"}
 <script>${js}</script>
 <script>
 /* Preview only. The other seventeen pages are not in this file, so an internal

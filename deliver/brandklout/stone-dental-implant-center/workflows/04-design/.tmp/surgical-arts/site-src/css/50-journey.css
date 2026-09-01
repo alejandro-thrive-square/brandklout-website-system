@@ -1513,3 +1513,240 @@
 .main-wrapper > .journey_page + .section_cta .cta_actions {
   margin-top: var(--space-medium);
 }
+
+
+/* ===========================================================================
+   THE ROLLOUT LAYER — inner pages, added 2026-09-01.
+
+   Everything here is scoped to `.journey_page`, so a page joins the system by
+   gaining one class on its wrapper and leaves it by losing one. No page markup
+   changes: these rules re-frame the components 10-client-first.css through
+   40-proof.css already provide.
+
+   What a page gets: the left-hand spine, the display scale, the fluid section
+   rhythm, and images that bleed off a page edge instead of sitting in boxes.
+   What it does not get: the progress bar and the chapter readout, which are
+   home-page devices for a page that is a journey. A price list is not a
+   journey; it is a reference, and it should feel like one.
+   =========================================================================== */
+
+/* --- the spine -----------------------------------------------------------
+   The home page has no `.padding-global` or `.container-large` at all: its
+   chapters pad themselves with `--gutter`. An inner page is built from the
+   Client-First wrappers, which pad by 5% and then centre an 80rem column, so
+   its content started about 145px from the edge where the home page starts at
+   58px. Two pages of the same site with two different left margins is the most
+   visible thing on a screenshot of both, and no amount of matching type sizes
+   fixes it.
+
+   So inside `.journey_page` the two wrappers resolve to the journey spine. The
+   REFERENCE blocks then get their measure back individually below: a
+   sixty-row fee schedule stretched to 1560px puts a hand's width between the
+   treatment and its price, which is worse to scan, not better. They are capped
+   and LEFT-aligned, so they start on the spine like everything else rather
+   than being centred in it. */
+.journey_page .padding-global {
+  padding-inline: var(--gutter);
+}
+.journey_page .container-large {
+  max-width: none;
+  margin-inline: 0;
+}
+/* Reference content: a measure, starting on the spine. */
+.journey_page .section_fees .container-large,
+.journey_page .section_financing .container-large,
+.journey_page .section_treatment-faq .container-large,
+.journey_page .section_consult .container-large {
+  max-width: 76rem;
+}
+
+/* --- the page head -------------------------------------------------------
+   The inner-page hero was a centred stack: breadcrumb, eyebrow, title, lede,
+   all on the middle axis. It now sits on the same spine as everything else,
+   with the lede beside the title rather than under it, which is the same
+   asymmetry .ways_head uses on the home page. */
+/* CENTRING IS SET ON THE CHILDREN, so it has to be unset on the children.
+   The originals are `.hero_component.is-page .hero_inner { text-align: center }`
+   and `.hero_component.is-page .hero_title { margin-inline: auto }`. Setting
+   `text-align: left` on the ANCESTOR loses every time, not on specificity but
+   because a declaration on the element itself beats an inherited one from its
+   parent whatever the parent's selector scores. Two rounds of this page still
+   looking centred were exactly that mistake.
+
+   This is the general shape of rolling a design system onto existing markup:
+   you are not adding rules to a blank element, you are overriding rules that
+   already target it, and you must match the element they target. */
+.journey_page .hero_component.is-page {
+  padding-block: var(--section);
+}
+.journey_page .hero_component.is-page .hero_inner {
+  text-align: left;
+}
+.journey_page .hero_component.is-page .hero_title {
+  margin-inline: 0;
+}
+.journey_page .hero_component.is-page .hero_inner {
+  padding-inline: var(--gutter);
+}
+.journey_page .hero_component.is-page .container-large {
+  max-width: none;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1.05fr) minmax(0, 0.95fr);
+  align-items: end;
+  gap: var(--space-large) var(--space-xxlarge);
+}
+.journey_page .hero_component.is-page .breadcrumb_component {
+  grid-column: 1 / -1;
+  justify-content: flex-start;
+  margin-bottom: var(--space-small);
+}
+.journey_page .hero_component.is-page .hero_eyebrow {
+  grid-column: 1;
+  text-align: left;
+  margin: 0 0 var(--space-small);
+}
+.journey_page .hero_component.is-page .hero_title {
+  grid-column: 1;
+  grid-row: 3;
+  font-size: var(--size-display-sm);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.015em;
+  margin: 0;
+  max-width: 16ch;
+}
+.journey_page .hero_component.is-page .hero_sub {
+  grid-column: 2;
+  grid-row: 3;
+  /* margin-inline: 0 is the load-bearing half. 30-hero.css sets `auto` on both
+     sides, which centres the BOX inside its grid column: the text inside was
+     already left-aligned and still looked centred, because a 34rem box floating
+     in the middle of a 44rem column reads as centred whatever its text-align
+     says. */
+  margin: 0;
+  margin-inline: 0;
+  max-width: 34rem;
+  color: var(--fg-body);
+}
+/* The eyebrow's centred rules are drawn with ::before and ::after; on the left
+   spine only the leading one belongs. */
+.journey_page .hero_component.is-page .eyebrow.is-center::after {
+  display: none;
+}
+
+@media (max-width: 991px) {
+  .journey_page .hero_component.is-page .container-large {
+    grid-template-columns: 1fr;
+  }
+  .journey_page .hero_component.is-page .hero_title,
+  .journey_page .hero_component.is-page .hero_sub {
+    grid-column: 1;
+    grid-row: auto;
+  }
+}
+
+/* --- section heads -------------------------------------------------------
+   Every `.section_header.is-center` on an inner page is a centred eyebrow over
+   a centred title over a centred lede, and there are five of them on this page
+   alone. Left-aligning them and putting the lede beside the title is the single
+   change that makes an inner page read as part of the same site as the home
+   page. The markup does not move. */
+.journey_page .section_header.is-center {
+  text-align: left;
+  /* `justify-items: start` is the one that matters. The original sets
+     `justify-items: center`, and in a grid that centres every item INSIDE its
+     own column, so the heading floated in the middle of a left-hand column and
+     read as centred no matter what text-align said. */
+  justify-items: start;
+  align-items: start;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.85fr);
+  gap: var(--space-small) var(--space-xxlarge);
+  max-width: none;
+}
+.journey_page .section_header.is-center .section_header-title,
+.journey_page .section_header.is-center .section_header-lede {
+  margin-inline: 0;
+}
+.journey_page .section_header.is-center .eyebrow.is-center {
+  grid-column: 1;
+  text-align: left;
+  margin: 0;
+}
+.journey_page .section_header.is-center .eyebrow.is-center::after {
+  display: none;
+}
+.journey_page .section_header.is-center .section_header-title {
+  grid-column: 1;
+  font-size: var(--size-display-sm);
+  font-weight: 300;
+  line-height: 1.04;
+  letter-spacing: -0.015em;
+  margin: 0;
+  max-width: 18ch;
+}
+/* An h3-level section head stays an h3: this scopes on the class the build
+   actually uses, so a smaller heading is not blown up to display size. */
+.journey_page .section_header.is-center .heading-style-h3.section_header-title {
+  font-size: calc(2.4rem * var(--t-heading));
+  max-width: 22ch;
+}
+.journey_page .section_header.is-center .section_header-lede {
+  grid-column: 2;
+  grid-row: 2 / span 2;
+  align-self: end;
+  margin: 0;
+  margin-inline: 0;
+  max-width: 34rem;
+}
+@media (max-width: 991px) {
+  .journey_page .section_header.is-center {
+    grid-template-columns: 1fr;
+  }
+  .journey_page .section_header.is-center .section_header-lede {
+    grid-column: 1;
+    grid-row: auto;
+    margin-top: var(--space-small);
+  }
+}
+
+/* --- the category bands --------------------------------------------------
+   Already an alternating image/text pair, which is the right structure; they
+   just sat in boxes inside the container like everything else. The image now
+   runs off the page edge the way .offer_row does on the home page, and the two
+   columns are asymmetric rather than 50/50. Same markup. */
+.journey_page .category-band_component {
+  gap: clamp(var(--space-large), 4vw, var(--space-xxlarge));
+  align-items: center;
+}
+.journey_page .category-band_media {
+  margin-left: calc(var(--gutter) * -1);
+}
+.journey_page .category-band_component.is-reverse .category-band_media {
+  margin-left: 0;
+  margin-right: calc(var(--gutter) * -1);
+}
+.journey_page .category-band_body h3 {
+  font-size: calc(2.4rem * var(--t-heading));
+  font-weight: 400;
+  line-height: 1.08;
+}
+@media (max-width: 991px) {
+  .journey_page .category-band_media,
+  .journey_page .category-band_component.is-reverse .category-band_media {
+    margin-inline: calc(var(--gutter) * -1);
+  }
+}
+
+/* The bands are full-bleed now, so the section that holds them must not clip
+   them and must not re-pad them. */
+.journey_page .section_categories-detail .padding-global,
+.journey_page .section_categories-detail .container-large {
+  padding-inline: 0;
+  max-width: none;
+}
+.journey_page .section_categories-detail {
+  overflow: clip;
+  padding-inline: var(--gutter);
+}

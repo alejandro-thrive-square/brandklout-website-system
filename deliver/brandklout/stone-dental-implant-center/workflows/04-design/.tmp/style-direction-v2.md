@@ -6,11 +6,11 @@ The home page rebuilt as an editorial journey, 2026-08-31.
 | :--- | :--- |
 | **Trigger** | Brandklout's team reviewed the first build: *"the design is very ugly and simple"* |
 | **North Star** | [drnahlah.com](https://drnahlah.com) — *"the best one we have"* |
-| **Scope** | The home page only. The vocabulary is written to roll onto the other seventeen |
+| **Scope** | The home page, plus `treatments.html` as the first rollout. The vocabulary is written to roll onto the rest |
 | **Package** | [`surgical-arts/site-src/`](./surgical-arts/site-src/) — `pages/home.body.html`, `css/50-journey.css`, `js/10-journey.js` |
 | **v1** | Kept verbatim at `site-src/pages/_home-v1.body.html`. Not built. There to diff against |
 | **Gates** | `audit.mjs` FAIL none / WARN none · `check-copy.mjs` clean · `journey-test.mjs` **47/47** |
-| **For review** | https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6 |
+| **For review** | home <https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6> · treatments <https://claude.ai/code/artifact/b7e07a67-0d88-40a6-aae6-b7fec7faa2be> |
 
 ## The diagnosis
 
@@ -367,6 +367,39 @@ under reduced motion.
   photograph on the page was the only one being enlarged past itself and going soft. The chapter and
   the ledger under it now cap at the same content width as everything else on screens over 1700px,
   which is what the reference build does and what lines the hero up with the ledger beneath it.
+
+## The rollout: treatments.html
+
+The first core page is on the system, and the way it got there is the point.
+
+**The rollout is a stylesheet scope.** A page joins by gaining `.journey_page` on its wrapper and
+leaves by losing it. A block at the foot of `50-journey.css` then re-frames the components
+`10-client-first.css` through `40-proof.css` already provide: the page head, every
+`.section_header.is-center`, and the four category bands. **Not one line of `treatments.body.html`
+moved** except the wrapper itself and a comment explaining it.
+
+That matters more than the page does. It is the test of whether the home page produced a system or
+one nice page, and the remaining core pages are now the same one-line change plus whatever
+page-specific composition each deserves.
+
+| | |
+| :--- | :--- |
+| Kept exactly | all sixty-odd fee rows, the tab mechanics, the notice, every number, the FAQ |
+| Gained | the left-hand spine, the display scale, the fluid section rhythm, images bleeding off a page edge |
+| Not given | the progress bar and the chapter readout. Those are devices for a page that is a journey; a price list is a reference and should feel like one |
+| Not shipped | GSAP. Nothing here pins or scrubs, so `motion: true` is deliberately unset and the reveals fall back to the IntersectionObserver path |
+
+### The reference content keeps its measure
+
+Inside `.journey_page` the Client-First wrappers resolve to the journey spine, because the home page
+pads its chapters with `--gutter` while an inner page was padding 5% and then centring an 80rem
+column: content started at 145px where home starts at 58px, and two pages of one site with two
+different left margins is the most visible thing about a screenshot of both.
+
+But the fee schedule, the financing panel and the comparison FAQ are capped at 76rem and
+LEFT-aligned rather than centred, so they start on the spine like everything else. A sixty-row price
+table stretched to 1560px puts a hand's width between a treatment and its price, which is worse to
+scan, not better. Editorial width for the argument, reading width for the reference.
 
 ## What this does not fix
 

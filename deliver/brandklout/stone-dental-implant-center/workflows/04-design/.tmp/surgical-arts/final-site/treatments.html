@@ -390,6 +390,21 @@
         row says "at consultation" rather than carrying a number.
      ========================================================================== -->
 
+<!-- ROLLED ONTO THE JOURNEY SYSTEM 2026-09-01, the first page after home.
+     This wrapper is the whole change: `.journey_page` opts the page into the
+     rollout layer at the foot of css/50-journey.css, which re-frames the page
+     head, the five section heads and the four category bands onto the same
+     spine, scale and materials as the home page. Not one line of the markup
+     below moved, and the sixty-odd fee rows, the tab mechanics, the notice and
+     every number are exactly as they were.
+
+     No progress bar and no chapter readout: those are home-page devices for a
+     page that is a journey, and this page is a reference. `motion: true` is
+     also deliberately not set for it in build-site.mjs, because nothing here
+     pins or scrubs, so there is no reason to ship 122KB of GSAP; the reveals
+     fall back to the IntersectionObserver path in 10-journey.js. -->
+<div class="journey_page">
+
 <section class="section_hero hero_component is-page">
   <div class="padding-global hero_inner">
     <div class="container-large">
@@ -956,6 +971,8 @@
     </div>
   </div>
 </section>
+
+</div>
 
 <!-- The closing invitation, on every page. The line is the board's own. -->
 <section class="section_cta cta_component">
