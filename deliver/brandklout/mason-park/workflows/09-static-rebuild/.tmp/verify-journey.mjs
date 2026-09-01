@@ -308,6 +308,45 @@ for (const cid of chapterIds) {
 check("every reveal has landed while its chapter is on screen", stuck.length === 0,
   stuck.slice(0, 4).join("  |  "));
 
+// ------------------------------------- 8a. the drawer, driven not photographed
+// The header floats over the hero with white contents, and the drawer it opens
+// is white. Both states have to be right, and the close button has to be
+// reachable: the drawer is `position: fixed` and a positioned element paints
+// above a static one whatever the DOM order, so the button that opened it can
+// end up UNDER it. Measured before the fix: the point at the centre of the
+// toggle hit-tested to a `.navbar_link`, i.e. tapping to close NAVIGATED. A
+// screenshot cannot see this; the button is drawn correctly, it is just not on
+// top.
+await load(390, 800);
+const drawer = await evaluate(`(async()=>{
+  const sleep=ms=>new Promise(r=>setTimeout(r,ms));
+  const t=document.querySelector('.navbar_toggle');
+  const nav=document.querySelector('.navbar_component');
+  const menu=document.querySelector('.navbar_menu');
+  const link=()=>getComputedStyle(menu.querySelector('.navbar_link')).color;
+  const out={ closedLink: link(), closedNavBg: getComputedStyle(nav).backgroundColor };
+  t.click(); await sleep(450);
+  out.open = document.body.classList.contains('nav-open');
+  out.aria = t.getAttribute('aria-expanded');
+  out.openLink = link();
+  out.openNavBg = getComputedStyle(nav).backgroundColor;
+  out.menuOnScreen = menu.getBoundingClientRect().x < innerWidth - 10;
+  const b=t.getBoundingClientRect();
+  const hit=document.elementFromPoint(b.x+b.width/2, b.y+b.height/2);
+  out.toggleHitBy = hit ? (hit.className||hit.tagName) : null;
+  hit.click(); await sleep(450);
+  out.closedAgain = !document.body.classList.contains('nav-open');
+  out.stayedOnPage = location.pathname === '/';
+  return out;
+})()`);
+check("drawer opens, and the header inverts back to ink for it",
+  drawer.open && drawer.menuOnScreen && drawer.aria === "true" &&
+  drawer.closedLink === "rgb(255, 255, 255)" && drawer.openLink !== "rgb(255, 255, 255)",
+  JSON.stringify(drawer));
+check("the close button is not trapped under the drawer it opened",
+  /navbar_toggle/.test(String(drawer.toggleHitBy)) && drawer.closedAgain && drawer.stayedOnPage,
+  `hit ${drawer.toggleHitBy}, closed ${drawer.closedAgain}, stayed ${drawer.stayedOnPage}`);
+
 // ------------------------------- 8b. scroll containers keep their own gutter
 // `scroll-snap-align: start` aligns the first item to the SCROLLPORT edge, not
 // the content box, so a snap container scrolls its own padding away on load and

@@ -715,7 +715,7 @@
   margin: 0 auto;
   padding: 0 var(--bleed);
 }
-@media (min-width: 900px) { .pe-grid { grid-template-columns: repeat(3, 1fr); gap: 2.2rem; } }
+@media (min-width: 1024px) { .pe-grid { grid-template-columns: repeat(3, 1fr); gap: 2.2rem; } }
 .pe-plate { display: block; position: relative; overflow: hidden; margin-bottom: 1.5rem; }
 .pe-plate img {
   width: 100%;
@@ -754,7 +754,34 @@
   color: var(--fg-soft);
   margin: .4rem 0 .9rem;
 }
-.pe-blurb { font-size: calc(.95rem * var(--t-text)); line-height: 1.68; }
+.pe-blurb { font-size: calc(.95rem * var(--t-text)); line-height: 1.68; max-width: 62ch; }
+
+/* Three columns need real width. Between 700 and 1023 they gave each bio a 33
+   character measure, which is a column of confetti rather than a paragraph, so
+   in that band each doctor becomes a ROW: portrait left, credential and bio
+   right. Three across returns at 1024.
+
+   Placement is explicit, not automatic. Five children auto-placed into two
+   columns interleave, and the first attempt put the bio in the portrait's
+   208px column while the 630px column held the role. This block also sits
+   AFTER the .pe-* base rules on purpose: a later declaration of equal
+   specificity beats one inside a media query, which is why the plate kept its
+   bottom margin the first time. */
+@media (min-width: 700px) and (max-width: 1023px) {
+  .pe-card {
+    display: grid;
+    grid-template-columns: minmax(0, 13rem) minmax(0, 1fr);
+    column-gap: 2rem;
+    align-content: center;
+  }
+  .pe-plate { grid-column: 1; grid-row: 1 / span 4; align-self: start; margin-bottom: 0; }
+  .pe-plate img { aspect-ratio: 4 / 5; }
+  .pe-note { grid-column: 2; grid-row: 1; min-height: 0; }
+  .pe-card h3 { grid-column: 2; grid-row: 2; }
+  .pe-role { grid-column: 2; grid-row: 3; }
+  .pe-blurb { grid-column: 2; grid-row: 4; }
+}
+
 
 /* The band closes the chapter, so the chapter has no padding left under it. */
 .ch-people { padding-bottom: 0; }

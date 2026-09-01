@@ -891,7 +891,16 @@ button { font: inherit; }
   .navbar_item.has-dropdown.is-open:hover > .navbar_dropdown-list { display: block; }
   .navbar_dropdown-list .navbar_item { border-bottom: 0; }
   .navbar_dropdown-list .navbar_link { padding: .5rem 0; }
-  .navbar_toggle { display: inline-flex; }
+  /* THE HEADER TRAPPING ITS OWN CLOSE BUTTON.
+     The drawer is `position: fixed; z-index: 85` and the toggle was static, and
+     a positioned element paints above a non-positioned one whatever the DOM
+     order. The drawer's own 6.5rem of top padding is exactly the strip the
+     toggle sits in, so with the menu open the point at the centre of the button
+     hit-tested to a `.navbar_link`: tapping to close the drawer NAVIGATED
+     instead. Both live inside the header's stacking context, so one z-index
+     above the drawer is the whole fix. Found by driving the drawer, never by a
+     screenshot: the button is drawn correctly, it is just not on top. */
+  .navbar_toggle { display: inline-flex; position: relative; z-index: 86; }
   .navbar_phone { display: none; }
   .navbar_container { min-height: 5.25rem; }
 
