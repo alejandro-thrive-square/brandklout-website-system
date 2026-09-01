@@ -10,8 +10,13 @@
  *   - inlines site.css, and every url() inside it, as data URIs
  *   - inlines site.js and the three vendored GSAP files
  *   - inlines every <img> as a data URI
- *   - strips the doctype/html/head/body shell, because the Artifact host
- *     supplies its own and only wants the page content
+ *   - emits a COMPLETE HTML document: doctype, html, head, body
+ *
+ * It used to strip the document shell, because it was written to feed a host
+ * that supplied its own. That made the output unopenable on its own: a browser
+ * given a file that starts with <title> renders it in quirks mode with the
+ * content in an implied body, which is a plausible-looking, subtly wrong page.
+ * Now it is a real file you can double-click, mail, or drop on a USB stick.
  *   - neuters links to the other seventeen pages, which are not in the file,
  *     and says so when one is clicked rather than throwing a 404 at the client
  *
@@ -114,7 +119,13 @@ const description = (html.match(/<meta name="description" content="([^"]*)"/) ||
 /* Drop the two external <script src> tags; their contents are inlined below. */
 const content = body.replace(/<script src="assets\/(?:vendor|site)\.js" defer><\/script>\s*/g, "");
 
-const out = `<!-- Live <title> on the built page: ${seoTitle} -->
+const out = `<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F6F4EF">
+<!-- Live <title> on the built page: ${seoTitle} -->
 <title>${title}</title>
 <meta name="description" content="${description}">
 <!-- No font link. The faces are self-hosted and the url() rewrite above has
@@ -149,7 +160,13 @@ ${css}
 }
 .preview-note.is-on { opacity: 1; transform: translate(-50%, 0); }
 @media (prefers-reduced-motion: reduce) { .preview-note { transition: none; } }
+/* The host used to supply these; a standalone file has to bring its own. */
+body { margin: 0; }
+img { max-width: 100%; }
+[hidden] { display: none !important; }
 </style>
+</head>
+<body>
 
 <!-- The head partial's inline bootstrap, verbatim: it adds the .js scope every
      hidden state in the stylesheet is scoped to, and removes it again after
@@ -187,6 +204,8 @@ ${usesVendor ? `<script>${vendor}</script>` : "<!-- no motion bundle: this page 
   });
 })();
 </script>
+</body>
+</html>
 `;
 
 fs.writeFileSync(OUT, out, "utf8");
