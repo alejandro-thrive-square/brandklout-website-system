@@ -1,0 +1,237 @@
+{
+  "client": "stone-med-spa",
+  "brand": "Stone Med Spa (trading name unconfirmed — Asana says 'Stone Med Spa', Instagram says 'Westlake Medical Aesthetics')",
+  "date": "2026-09-02",
+  "phase": "02-wireframe",
+  "status": "proposed — not approved, not built",
+  "blocked_by": "Scope question: which brand owns the med spa menu. See docs/project-overview.md.",
+  "source": {
+    "asana_task": "1218112701145002",
+    "asana_task_name": "Core Pages - MedSpa",
+    "asana_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218112701145002",
+    "note": "Eleven subtasks, all with empty descriptions. URLs, templates and section spines below are proposed from competitive research, not from a brief."
+  },
+  "templates": {
+    "T1-home": "Homepage. ~8 sections, ~450 words.",
+    "T2-content": "Standard content page with section spine and closing CTA.",
+    "T3-bio-lead": "Long-form single-provider biography.",
+    "T3-bio-grid": "Team grid, credentials in the heading, grouped by role.",
+    "T4-services-hub": "Dual-axis hub: by treatment and by concern.",
+    "T5-service-detail": "Ten-part treatment page. Botox is the sample and the template.",
+    "T6-proof": "Stacked proof: before/after, written reviews, video, authenticity FAQ.",
+    "T7-conversion": "Form-led booking page with treatment multi-select.",
+    "T8-thankyou": "noindex conversion endpoint."
+  },
+  "pages": [
+    {
+      "n": 1,
+      "title": "Home",
+      "url": "/",
+      "template": "T1-home",
+      "asana_gid": "1218112701145005",
+      "in_core_scope": true,
+      "sections": [
+        "Hero — positioning line + primary CTA",
+        "Trust row — credentials, affiliations, review count",
+        "The practice in one paragraph",
+        "Treatment categories (axis A)",
+        "What would you like to change? (axis B, concern entry)",
+        "Meet Dr. Mona Stone — short, links to full bio",
+        "Results preview",
+        "Consultation CTA"
+      ],
+      "model": "Beverly Hills Med Spa — 404 words, 8 sections, awards and press above the fold"
+    },
+    {
+      "n": 2,
+      "title": "About Us",
+      "url": "/about",
+      "template": "T2-content",
+      "asana_gid": "1218112701145006",
+      "in_core_scope": true,
+      "sections": ["Practice story", "Philosophy of care", "The facility", "Location and hours", "CTA"],
+      "note": "The practice's story, not the doctor's bio. Keep the two separate.",
+      "model": "Skin Solutions Collective"
+    },
+    {
+      "n": 3,
+      "title": "Meet The Doctor",
+      "url": "/about/dr-mona-stone",
+      "template": "T3-bio-lead",
+      "asana_gid": "1218112701145007",
+      "in_core_scope": true,
+      "sections": [
+        "Credentials — board-certified oral & maxillofacial surgeon, DDS",
+        "Signature approach",
+        "Training and affiliations",
+        "Media and recognition",
+        "Community",
+        "CTA"
+      ],
+      "note": "Carries the practice's clinical authority. A surgeon behind a med spa is the differentiator.",
+      "model": "NassifMD /about/dr-paul-nassif/"
+    },
+    {
+      "n": 4,
+      "title": "Meet the Team",
+      "url": "/about/team",
+      "template": "T3-bio-grid",
+      "asana_gid": "1218112701145008",
+      "in_core_scope": true,
+      "sections": ["Team intro", "Providers (credentials in heading)", "Aestheticians and support", "CTA"],
+      "model": "Viva /about/med-spa-staff/ — grouped by role, credentials in the heading"
+    },
+    {
+      "n": 5,
+      "title": "Services Overview",
+      "url": "/services",
+      "template": "T4-services-hub",
+      "asana_gid": "1218112695508586",
+      "in_core_scope": true,
+      "axis_a_treatment": ["Injectables", "Skin & Resurfacing", "Energy Devices", "Hair Restoration", "Skincare"],
+      "axis_b_concern": [
+        "Fine lines & wrinkles",
+        "Volume loss",
+        "Acne & scarring",
+        "Pigmentation & sun damage",
+        "Skin laxity",
+        "Hair thinning"
+      ],
+      "note": "Both axes land on the same service detail pages. Axis B ships as in-page anchors in phase 1 and is promoted to real /concerns/* pages later without changing any published URL.",
+      "model": "Beverly Hills /concerns (24 pages + search) and NassifMD /conditions-treated/ (8 pages)",
+      "changes_with_scope": true
+    },
+    {
+      "n": 6,
+      "title": "Service Page Sample (Botox)",
+      "url": "/services/botox",
+      "template": "T5-service-detail",
+      "asana_gid": "1218112701145009",
+      "in_core_scope": true,
+      "sections": [
+        "H1 — treatment + locality",
+        "What it is",
+        "What it does for you",
+        "Am I a candidate?",
+        "Before & after (embedded)",
+        "Botox vs Dysport vs Xeomin",
+        "Why this practice",
+        "Pre & post-treatment care",
+        "FAQ (6-10 questions)",
+        "Consultation CTA"
+      ],
+      "note": "The sample is the template for the entire menu. Build it as such.",
+      "model": "NassifMD /injectables/botox/ (1,420 words, 14 sections) plus Skin Solutions' pre/post-care block",
+      "changes_with_scope": true
+    },
+    {
+      "n": 7,
+      "title": "Testimonials / Before and After Gallery",
+      "url": "/results",
+      "template": "T6-proof",
+      "asana_gid": "1218112701145010",
+      "in_core_scope": true,
+      "sections": ["Before & after gallery", "Written reviews", "Video testimonials", "Authenticity FAQ", "CTA"],
+      "blocker": "Before-and-after photography cannot be published without current written consent per case. 15 archived galleries exist and none are cleared. Design the page to degrade: reviews + video only if consent is not obtained in time.",
+      "model": "Beverly Hills /results and Skin Solutions /before-and-afters (291 images)"
+    },
+    {
+      "n": 8,
+      "title": "Financing",
+      "url": "/financing",
+      "template": "T2-content",
+      "asana_gid": "1218112701145011",
+      "in_core_scope": true,
+      "sections": ["Overview", "Vendor 1 + FAQ", "Vendor 2 + FAQ", "Vendor 3 + FAQ", "Booking CTA"],
+      "note": "Vendor-FAQ structure, not a sales page. Only 1 of the 5 benchmark sites has a financing page at all — the Texas practice-attached one. Vendors to confirm with the client.",
+      "model": "Viva /med-spa/financing/ (1,844 words, FAQ-dominant)"
+    },
+    {
+      "n": 9,
+      "title": "Book Consultation - Virtual and In-Office",
+      "url": "/book-consultation",
+      "template": "T7-conversion",
+      "asana_gid": "1218112701145012",
+      "in_core_scope": true,
+      "sections": ["Consultation intro", "In-office path", "Virtual path", "Form with treatment multi-select", "What to expect"],
+      "open_question": "None of the 5 benchmark sites offers a virtual consultation. Before design: who takes the call, on what platform, and is it HIPAA-compliant? A video visit is a clinical service, not a form field.",
+      "model": "Viva /med-spa/complimentary-consultation/ — 'treatments you're interested in' multi-select"
+    },
+    {
+      "n": 10,
+      "title": "Membership Plan",
+      "url": "/membership",
+      "template": "T2-content",
+      "asana_gid": "1218112695508584",
+      "in_core_scope": true,
+      "sections": ["Programme intro", "Tier 1", "Tier 2", "Perks", "Terms link", "Join CTA"],
+      "note": "Two architectures observed: named tiers (Skin Solutions — 'High Maintenance' / 'Low Maintenance') or fee + account credit + partner perks (Ject). 4 of 5 benchmark sites run a membership; 2 put it in the primary nav.",
+      "model": "Skin Solutions /membership and Ject /membership",
+      "becomes_hero_under_scenario_c": true
+    },
+    {
+      "n": 11,
+      "title": "General Thank You Page",
+      "url": "/thank-you",
+      "template": "T8-thankyou",
+      "asana_gid": "1218112695508585",
+      "in_core_scope": true,
+      "sections": ["Confirmation", "What happens next", "Contact details", "Return link"],
+      "meta": { "robots": "noindex" },
+      "note": "None of the 5 benchmark sites exposes one. It is a conversion-tracking endpoint by convention."
+    }
+  ],
+  "required_before_launch_not_in_asana_list": [
+    { "title": "Contact", "url": "/contact", "why": "Address, hours, map, phone. Distinct from booking. All 5 benchmark sites have it." },
+    { "title": "Privacy Policy", "url": "/privacy-policy", "why": "Required." },
+    { "title": "Terms & Conditions", "url": "/terms", "why": "Required." },
+    { "title": "Accessibility Statement", "url": "/accessibility", "why": "Medical practice; ADA exposure." },
+    { "title": "404", "url": "/404", "why": "Required." }
+  ],
+  "phase_2_not_funded": {
+    "note": "The eleven-page brief funds one service page. These are the natural expansion and the URL scheme above is designed to accept them without redirects.",
+    "treatment_category_hubs": ["/services/injectables", "/services/skin", "/services/energy-devices", "/services/hair-restoration"],
+    "service_detail_pages": "One per treatment, on template T5",
+    "concern_pages": "/concerns/<slug> — promoted from the axis-B anchors on /services",
+    "blog": "/blog"
+  },
+  "global": {
+    "header": ["Logo", "Services", "Results", "Membership", "About (Doctor, Team)", "Financing", "(817) 383-8361 as tel: link", "Book a Consultation button"],
+    "cta_label": "Book a Consultation",
+    "cta_rationale": "Consultative, not transactional. Stone sells a surgeon's treatment plan, not an appointment slot. Transactional brands in the benchmark set say 'Book Now'; consultative ones say 'Book a Consultation'.",
+    "footer": ["Address + map", "Hours", "Phone", "Legal pages", "Social", "Stone Surgical Arts cross-link (Scenario B only)"]
+  },
+  "scope_scenarios": {
+    "A_two_competing_sites": {
+      "description": "Both brands sell the same menu in the same city under the same surgeon.",
+      "impact": "Search cannibalisation between /services and /services/botox and their published Surgical Arts equivalents.",
+      "verdict": "Name this as the one to avoid. It is what happens by default if nobody decides."
+    },
+    "B_menu_moves_here": {
+      "description": "The non-surgical menu is cut out of Stone Surgical Arts and moved to the med spa, split on modality.",
+      "impact": "Sitemap as proposed, plus a redirect map from the Surgical Arts treatment URLs and edits to a site the client has already reviewed.",
+      "verdict": "Recommended. NassifMD is a live, market-tested instance: one surgeon, two domains, split surgical/non-surgical, cross-linked by a header brand switcher."
+    },
+    "C_different_brand": {
+      "description": "Memberships, maintenance, wellness — a different product that happens to share a treatment room.",
+      "impact": "/services and /services/botox are rewritten or dropped; /membership becomes the hero and / is built around it.",
+      "verdict": "Viable. Viva shows the shape when two brands share one domain."
+    }
+  },
+  "open_questions": [
+    "Which scope scenario? Blocks design.",
+    "Trading name — 'Stone Med Spa' or 'Westlake Medical Aesthetics'? Every URL and H1 here is provisional.",
+    "Domain — none chosen.",
+    "Brand identity — no logo, palette or type system found. All 5 benchmark sites use custom photography; none use stock. Sits ahead of design on the critical path.",
+    "Before-and-after consent — per-case written consent needed before /results can carry photography.",
+    "Virtual consultation — operational answer needed before /book-consultation can be designed.",
+    "Are the five legal/utility pages in scope?"
+  ],
+  "benchmarks": [
+    { "name": "NassifMD Medical Spa", "url": "https://www.nassifmdmedspa.com/", "pages": 134, "lesson": "Surgeon's med spa as a separate brand, split on modality, joined by a header brand switcher" },
+    { "name": "Beverly Hills Med Spa", "url": "https://www.beverlyhillsmedspa.com/", "pages": 186, "lesson": "Concern-first IA: 24 concern pages plus a concern search box" },
+    { "name": "Skin Solutions Collective", "url": "https://www.skinsolutions.co/", "pages": 49, "lesson": "Closest 1:1 to our brief at a buildable size; named membership tiers" },
+    { "name": "Ject", "url": "https://ject.us/", "pages": 473, "lesson": "Treatments merchandised as products; strongest membership and booking machinery" },
+    { "name": "Viva Day Spa + Med Spa", "url": "https://www.vivadayspa.com/", "pages": 200, "lesson": "Texas; two brands under one roof; the only benchmark with a financing page" }
+  ]
+}

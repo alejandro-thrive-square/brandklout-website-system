@@ -71,15 +71,34 @@ Everything below came from public research and the archived site, not from a bri
 
 ## Asana state, pulled fresh 2026-09-02
 
-The task is **bare**: no description, no comments, no subtasks, no attachments. One activity signal,
-a due-date change. Compare Surgical Arts, whose build was unblocked by a nine-page list Sang Huynh
-posted in a comment and a design Jessica confirmed Dr. Mona picked. **Nothing equivalent exists for
-the med spa.**
+> [!IMPORTANT]
+> **This pillar has two Asana tasks, in two different projects.** The build task above is bare. The
+> page list lives somewhere else entirely and was found on 2026-09-02.
 
-Re-pull before trusting any cached copy:
+| Task | GID | Project | Content |
+| :--- | :--- | :--- | :--- |
+| Build New Stone Med Spa | `1217160668112180` | BK Activation `1213901750672059` | **Bare.** No description, comments, subtasks or attachments. One activity signal, a due-date change. |
+| **Core Pages - MedSpa** | `1218112701145002` | **Success Daily Stand-Up** `1211830976769588` | **Eleven named subtasks** — the first real page list this pillar has had. Every description empty. |
+
+The eleven: Home · About Us · Meet The Doctor · Meet the Team · Services Overview · Service Page
+Sample (Botox) · Testimonials / Before and After Gallery · Financing · Book Consultation (Virtual
+and In-Office) · Membership Plan · General Thank You Page.
+
+> [!WARNING]
+> **A page list is not a scope decision.** The eleven subtasks do not answer the blocker above —
+> two of the eleven (`Services Overview`, `Service Page Sample (Botox)`) are exactly the pages that
+> collide with Stone Surgical Arts. Do not read the list as permission to start.
+
+Compare Surgical Arts, whose build was unblocked by a nine-page list Sang Huynh posted in a comment
+*and* a design Jessica confirmed Dr. Mona picked. We now have the page list; we still have no scope
+decision and no design.
+
+Re-pull before trusting any cached copy — the slug pulls only the first task, so the second needs
+its GID:
 
 ```
 node deliver/brandklout/scripts/asana-context.mjs --task 1217160668112180 --out <dir>
+node deliver/brandklout/scripts/asana-context.mjs --task 1218112701145002 --out <dir>
 ```
 
 ## Routed workflows
@@ -88,6 +107,7 @@ node deliver/brandklout/scripts/asana-context.mjs --task 1217160668112180 --out 
 | :--- | :--- | :--- |
 | `00-client-delivery-initialization` | **Done 2026-09-02** | This folder. Med-spa-specific scoping questions in `.tmp/`. |
 | `01-content-intake` | **Blocked** | Needs the scope answer. The archived corpus is catalogued and ready. |
+| `02-wireframe` | **Research done 2026-09-02** | Competitive research against five best-in-class med spa sites, and a proposed eleven-page sitemap. See [`.tmp/competitive-research.md`](../workflows/02-wireframe/.tmp/competitive-research.md) and [`.tmp/sitemap.md`](../workflows/02-wireframe/.tmp/sitemap.md). Proposed, not approved. Wireframes not started — they need the scope answer. |
 | `12-migration-audit-plan` | **Applies** | Content is recovered from an archived WordPress site and a redirect map is needed. |
 | `04-design` | **Blocked** | Needs the scope answer *and* a brand identity that does not exist. |
 | `05-instatic-upload` | Tooling copied, unused | Snapshot of the Surgical Arts instance at `bk-stone` — the only place it exists. Read its traps 21–25 before the first publish. |
@@ -104,6 +124,16 @@ Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING
 **Send the med spa scoping questions.** They are four, they are short, and question 1 is the one
 that decides whether this build exists at all. Draft:
 [`scoping-questions.md`](../workflows/00-client-delivery-initialization/.tmp/scoping-questions.md).
+
+**Ask Q1 as a yes/no, not as an open question.** The competitive research found a live, working
+instance of outcome 2: **NassifMD Medical Spa**. Dr. Paul Nassif runs a surgical practice and a med
+spa as two separate domains, cut along **modality** — the med spa sells injectables, lasers, body
+contouring, aesthetician services and skincare and never sells an operation; the surgical site
+never sells a HydraFacial — and joins them with a brand switcher in the header of both. Put that to
+Brandklout as the recommended default and ask them to confirm or reject it. Name outcome 1 (two
+competing sites) explicitly as the one to avoid, because it is what happens by default if nobody
+decides. Two more client-side items belong in the same message: **per-case written consent** for
+the before-and-after photography, and an operational answer for the **virtual consultation**.
 
 The task is due 2026-09-03. It cannot be met as a website build. It can be met as a scope decision
 plus a page list, which is the honest deliverable for a task nobody has specified.
