@@ -73,6 +73,8 @@ const PAGES = [
   { slug: "blepharoplasty", src: "blepharoplasty", photoHero: true, motion: true, cta: false },
   { slug: "treatments", src: "treatments", photoHero: false, motion: true },
   { slug: "meet-the-doctor", src: "meet-the-doctor", photoHero: false, motion: true },
+  { slug: "about", src: "about", photoHero: true, motion: true },
+  { slug: "team", src: "team", photoHero: true, motion: true },
 ];
 
 /* --- bundles --------------------------------------------------------------

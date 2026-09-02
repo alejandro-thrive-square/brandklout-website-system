@@ -387,6 +387,38 @@
           "url": "https://www.stonesurgicalarts.com/meet-the-doctor"
         }
       ]
+    },
+    "about": {
+      "title": "About the Practice | Stone Surgical Arts, Westlake TX",
+      "description": "A boutique facial and cosmetic surgery practice at 72 Andorra Drive, Westlake, Texas. One surgeon, one address, and clear clinical oversight.",
+      "ogTitle": "About Stone Surgical Arts",
+      "ogDescription": "One building in Westlake, one surgeon, one plan. The rooms, the team and the way the practice is run.",
+      "schema": [
+        {
+          "@type": "AboutPage",
+          "name": "About Stone Surgical Arts",
+          "url": "https://www.stonesurgicalarts.com/about",
+          "about": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          }
+        }
+      ]
+    },
+    "team": {
+      "title": "Meet the Team | Stone Surgical Arts, Westlake TX",
+      "description": "The people at Stone Surgical Arts: Dr. Mona Stone, nurse injector Brooke, esthetician Abby, the office manager, the first assistant and the front desk.",
+      "ogTitle": "Meet the Team | Stone Surgical Arts",
+      "ogDescription": "One surgeon plans and performs every case. Around her, a nurse injector, an esthetician, an office manager, a first assistant and the front desk.",
+      "schema": [
+        {
+          "@type": "WebPage",
+          "name": "Meet the Team",
+          "url": "https://www.stonesurgicalarts.com/team",
+          "about": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          }
+        }
+      ]
     }
   }
 }
