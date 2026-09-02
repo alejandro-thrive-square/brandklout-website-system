@@ -228,26 +228,17 @@
 <body>
 <a class="skip-link" href="#main">Skip to content</a>
 <div class="page-wrapper">
-<!-- The navbar, since 2026-09-01, on a site that is one page.
+<!-- The navbar, on a ten-page site since 2026-09-02.
 
-     WHAT WAS HERE. A Treatments link with a mega-dropdown listing four
-     categories and twelve treatment pages, then Results, Memberships, About and
-     Contact. Every one of those destinations was deleted with the pages, so the
-     menu is down to the two things that still lead somewhere: the phone number,
-     and the invitation at the foot of the home page.
-
-     ONE TREATMENT LINK CAME BACK on 2026-09-01, with the neck lift page, and a
-     SECOND the same day with the blepharoplasty. Two treatments listed flat is
-     still not a Treatments menu, and it is still the honest shape: these are
-     the treatment pages that exist, and a page nobody can reach cannot be
-     reviewed. The dropdown returns when the count does, and it is in git at
-     196ef87f~1.
+     Five links and the book button. Treatments is the hub and the two
+     treatment dossiers sit under it; the team is reached from About and
+     from the drawer and the footer, where there is room for everything.
+     The book button goes to the booking page rather than to an in-page
+     anchor, because the booking page exists now and is the better landing.
 
      `{{CUR_<SLUG>}}` expands to `aria-current="page"` on that page and to
-     nothing everywhere else; build-site.mjs matches the token against the page
-     slug, lower-cased with underscores turned into hyphens. 20-navbar.css
-     already styles `.navbar_link[aria-current="page"]`, so the marker is
-     semantic first and decorated second. -->
+     nothing everywhere else; build-site.mjs matches the token against the
+     page slug, lower-cased with underscores turned into hyphens. -->
 <header class="navbar_component is-static" data-nav>
   <div class="padding-global">
     <div class="container-large">
@@ -260,9 +251,11 @@
         </a>
 
         <nav class="navbar_menu" aria-label="Primary">
-          <a class="navbar_link" href="neck-lift.html">Neck lift</a>
-          <a class="navbar_link" href="blepharoplasty.html">Eyelid surgery</a>
-          <a class="navbar_link" href="#contact">Contact</a>
+          <a class="navbar_link" href="treatments.html" aria-current="page">Treatments</a>
+          <a class="navbar_link" href="meet-the-doctor.html">Dr. Stone</a>
+          <a class="navbar_link" href="about.html">About</a>
+          <a class="navbar_link" href="results.html">Results</a>
+          <a class="navbar_link" href="memberships.html">Memberships</a>
         </nav>
 
         <div class="navbar_actions">
@@ -270,7 +263,7 @@
             <svg class="navbar_phone-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
             (817) 918-3666
           </a>
-          <a class="button is-small" href="#contact">Book a consultation</a>
+          <a class="button is-small" href="book.html">Book a consultation</a>
           <button class="navbar_burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
             <span></span><span></span><span></span>
           </button>
@@ -300,13 +293,20 @@
     </div>
 
     <nav class="drawer_nav" aria-label="Mobile">
+      <a class="drawer_link" href="index.html">Home</a>
+      <a class="drawer_link" href="treatments.html" aria-current="page">Treatments &amp; fees</a>
       <a class="drawer_link" href="neck-lift.html">Neck lift</a>
       <a class="drawer_link" href="blepharoplasty.html">Eyelid surgery</a>
-      <a class="drawer_link" href="#contact">Contact</a>
+      <a class="drawer_link" href="meet-the-doctor.html">Dr. Stone</a>
+      <a class="drawer_link" href="about.html">About the practice</a>
+      <a class="drawer_link" href="team.html">Meet the team</a>
+      <a class="drawer_link" href="results.html">Results &amp; reviews</a>
+      <a class="drawer_link" href="memberships.html">Memberships</a>
+      <a class="drawer_link" href="book.html">Book a consultation</a>
     </nav>
 
     <div class="drawer_foot">
-      <a class="button" href="#contact">Book a consultation</a>
+      <a class="button" href="book.html">Book a consultation</a>
       <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
       <p class="drawer_meta">72 Andorra Dr #110, Westlake, TX 76262</p>
     </div>
@@ -724,7 +724,7 @@
           <h2 class="heading-style-h2 cta_title">Your Confidence. <em class="text-style-display-accent">Our Commitment.</em></h2>
           <p class="text-size-medium cta_text">Personalised care, advanced technique and beautiful, natural results, planned by the surgeon who performs them.</p>
           <div class="button-group is-center cta_actions">
-            <a class="button" href="#contact">Schedule a consultation</a>
+            <a class="button" href="book.html">Schedule a consultation</a>
             <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
           </div>
           </div>
@@ -758,6 +758,20 @@
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-medium">
+        <!-- The site's pages, since 2026-09-02. All four references close on
+             a fat footer that lists the site; this is that row. -->
+        <nav class="footer_nav" aria-label="Footer">
+          <a href="index.html">Home</a>
+          <a href="treatments.html" aria-current="page">Treatments &amp; fees</a>
+          <a href="neck-lift.html">Neck lift</a>
+          <a href="blepharoplasty.html">Eyelid surgery</a>
+          <a href="meet-the-doctor.html">Dr. Stone</a>
+          <a href="about.html">About</a>
+          <a href="team.html">The team</a>
+          <a href="results.html">Results &amp; reviews</a>
+          <a href="memberships.html">Memberships</a>
+          <a href="book.html">Book a consultation</a>
+        </nav>
         <div class="footer_top">
           <div class="footer_col">
             <div class="footer_item">

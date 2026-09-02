@@ -220,7 +220,7 @@ ${drawerHtml}
 ${body}
 ${page.cta === false ? "" : body.includes('id="contact"') ? cta : cta.replace('<section class="section_cta cta_component"', '<section class="section_cta cta_component" id="contact"')}
 </main>
-${footer}
+${cur(footer)}
 </div>
 ${page.motion ? '<script src="assets/vendor.js" defer></script>\n' : ""}<script src="assets/site.js" defer></script>
 </body>

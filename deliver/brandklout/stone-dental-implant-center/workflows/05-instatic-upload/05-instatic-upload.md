@@ -6,6 +6,19 @@ into the client's own Instatic instance as an editable site — pages as node tr
 registry rules, images in the media library.
 
 > [!WARNING]
+> **2026-09-02: SEVEN NEW PAGES ARE BUILT AND MUST NOT BE PUBLISHED YET.** The client, the same
+> evening the elevation started: *"remove the part on the plan to publish on Instatic. Let's do it
+> locally because the team is creating comments on BugHerd for the current iteration so let's not
+> mess up their work."* The live instance stays at seq 18, three pages, until those comments are
+> addressed on the local build. `build-import-input.mjs`, `verify-live.mjs` and
+> `compare-live.mjs` are already updated for ten pages so that the publish, when it comes, is
+> the same seven steps. `/about`, `/book`, `/memberships`, `/results` and `/treatments` moved
+> from `GONE` to `ROUTES`; `GONE` is ten now. Two new traps to expect on that run: the pages now
+> carry `<form>` and `<input type="range">` (the calculator) and `<button>`s inside the
+> catalogue with three spans each, which is trap 15's shape again; check `import-out.json` for
+> `base.button` labels and for whether `input` survives `importHtml` before trusting the apply.
+
+> [!WARNING]
 > **THREE PAGES, AND THE LIVE SITE IS NOW THOSE THREE.** Published 2026-09-01,
 > seq 18, `{"publishedPages":3}`. The blepharoplasty apply was an ADDITION, not
 > a cut: `push-site.mjs` reported **3 written, 0 deleted**, which is the number

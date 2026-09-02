@@ -61,6 +61,18 @@ const PAGES = [
   { file: 'index.html', slug: 'index', title: 'Home' },
   { file: 'neck-lift.html', slug: 'neck-lift', title: 'Neck Lift' },
   { file: 'blepharoplasty.html', slug: 'blepharoplasty', title: 'Blepharoplasty' },
+  /* THE SEVEN CORE PAGES, built 2026-09-02 and NOT YET PUBLISHED. Listed so
+     the next apply carries them; every one is an addition (push-site.mjs
+     should report 10 written, 0 deleted). Five of these slugs are on
+     verify-live.mjs's GONE list from the 2026-09-01 cut and were moved to
+     ROUTES the same day they were listed here. */
+  { file: 'treatments.html', slug: 'treatments', title: 'Treatments & Fees' },
+  { file: 'meet-the-doctor.html', slug: 'meet-the-doctor', title: 'Meet the Doctor' },
+  { file: 'about.html', slug: 'about', title: 'About' },
+  { file: 'team.html', slug: 'team', title: 'Meet the Team' },
+  { file: 'memberships.html', slug: 'memberships', title: 'Memberships' },
+  { file: 'results.html', slug: 'results', title: 'Results & Reviews' },
+  { file: 'book.html', slug: 'book', title: 'Book a Consultation' },
 ]
 
 const problems = []

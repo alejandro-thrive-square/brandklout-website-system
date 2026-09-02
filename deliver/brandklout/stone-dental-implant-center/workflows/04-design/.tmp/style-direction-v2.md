@@ -3,6 +3,16 @@
 The home page rebuilt as an editorial journey, 2026-08-31.
 
 > [!IMPORTANT]
+> **2026-09-02: ELEVATED.** The journey structure below survives; what changed is the density
+> of photographs, motion and interaction on top of it, and the four chapters that were rebuilt
+> (the four cards became a catalogue accordion, the surgeon became scrollytelling, the proof
+> became a carousel, and a concern index was added). The reasoning is at the top of
+> `surgical-arts/site-src/css/52-elevate.css`; the gap analysis that decided what to add is
+> `reference-sites/CONTENT-GAP.md`. Each of the seven pages built the same day has its own
+> stylesheet with its own thesis at the top, because a page that reads as the home page with
+> different words in it has already been rejected once.
+
+> [!IMPORTANT]
 > **2026-09-01, later: THIS DOCUMENT DESCRIBES THE HOME PAGE, AND ONLY THE HOME PAGE.**
 >
 > A neck lift page was built in this system that afternoon and the client's answer was immediate:
