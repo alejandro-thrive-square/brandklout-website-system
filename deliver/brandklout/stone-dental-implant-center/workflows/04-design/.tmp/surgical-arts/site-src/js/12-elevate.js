@@ -444,8 +444,40 @@
     go(0);
   }
 
+  /* --- the jump bar --------------------------------------------------------
+     The treatments hub's sticky category strip. Marks the link whose section
+     is in the reader's eyeline; every link is a plain anchor and works
+     without this. */
+  function jump() {
+    var bar = $(".jump_component");
+    if (!bar || !("IntersectionObserver" in window)) return;
+    var links = $$(".jump_link", bar);
+    var targets = links
+      .map(function (a) {
+        var id = (a.getAttribute("href") || "").slice(1);
+        return id ? document.getElementById(id) : null;
+      })
+      .filter(Boolean);
+    if (!targets.length) return;
+    var io = new IntersectionObserver(
+      function (entries) {
+        entries.forEach(function (e) {
+          if (!e.isIntersecting) return;
+          links.forEach(function (a) {
+            a.classList.toggle("is-current", a.getAttribute("href") === "#" + e.target.id);
+          });
+        });
+      },
+      { rootMargin: "-30% 0px -60% 0px", threshold: 0 }
+    );
+    targets.forEach(function (t) {
+      io.observe(t);
+    });
+  }
+
   function boot() {
     veil();
+    jump();
     masks();
     marquees();
     magnetic();

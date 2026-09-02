@@ -71,6 +71,7 @@ const PAGES = [
   // new JS module. What it did need was two hard-coded strings moved out of
   // js/11-dossier.js and into the markup, because they were about necks.
   { slug: "blepharoplasty", src: "blepharoplasty", photoHero: true, motion: true, cta: false },
+  { slug: "treatments", src: "treatments", photoHero: false, motion: true },
 ];
 
 /* --- bundles --------------------------------------------------------------
@@ -177,6 +178,10 @@ for (const f of fs.readdirSync(path.join(SRC, "assets"))) {
   else fs.copyFileSync(from, to);
 }
 
+// Every navbar, drawer and footer link to "#contact" has to land somewhere on
+// every page. The home page and the dossiers carry their own booking chapter
+// with that id; any page that does not gets it on the shared closing band,
+// which is the one section that exists everywhere. 2026-09-02.
 const built = [];
 for (const page of PAGES) {
   const body = read(`pages/${page.src}.body.html`);
@@ -207,7 +212,7 @@ ${nav}
 ${drawerHtml}
 <main class="main-wrapper" id="main">
 ${body}
-${page.cta === false ? "" : cta}
+${page.cta === false ? "" : body.includes('id="contact"') ? cta : cta.replace('<section class="section_cta cta_component"', '<section class="section_cta cta_component" id="contact"')}
 </main>
 ${footer}
 </div>

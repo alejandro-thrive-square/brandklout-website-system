@@ -276,6 +276,67 @@
           ]
         }
       ]
+    },
+    "treatments": {
+      "title": "Treatments & Fees | Facial Surgery, Skin & Injectables in Westlake TX | Stone Surgical Arts",
+      "description": "Every treatment at Stone Surgical Arts with the fee beside it: face, neck and jawline, skin, and non-surgical. Consultation $175. Westlake, Texas.",
+      "ogTitle": "Treatments & Fees | Stone Surgical Arts",
+      "ogDescription": "Face, neck and jawline, skin and non-surgical treatments, each with the practice's published fee. Planned and performed by Dr. Mona Stone in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "MyEllevate or a neck lift: how do I know which?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A neck lift uses small incisions behind the ears and under the chin to reach the tissue underneath, and delivers a result that can last up to ten years. MyEllevate places internal sutures through small punctures instead, and lasts around five. MyEllevate suits earlier laxity; a neck lift reverses more advanced sagging, wrinkling or fullness. MyEllevate needs only local anaesthetic, so you can drive yourself home."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will a neck lift fix my jowls?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Jowls sit low on the face, so people assume they are neck work, but they originate in sagging facial tissue and are addressed in a facelift, not a neck lift. A minimally invasive facelift is the procedure that reduces them."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Implants or filler?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Fillers are gel injectables that plump and smooth lines, acne scars and thin lips, and last from months to a couple of years. Implants are customised inserts that reshape the underlying structure and are permanent. Filler changes the surface; an implant changes the frame."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does each result actually last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The practice's own published figures: blepharoplasty 10 to 15 years or more; a neck lift up to ten; MyEllevate around five; facial implants and buccal fat reduction permanent. Injectables are months, not years."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I have more than one procedure at once?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Often. A neck lift can be done alongside a facelift or eyelid surgery in a single procedure, with one recovery instead of two. What can be combined safely depends on your anatomy and is decided at the consultation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why do some rows say at consultation instead of a price?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Because the practice never published a figure for those. Genioplasty, fat transfer and facelift fees vary with the case. Everything else on the page carries the fee the practice published, which is being reconfirmed for 2026."
+              }
+            }
+          ]
+        }
+      ]
     }
   }
 }
