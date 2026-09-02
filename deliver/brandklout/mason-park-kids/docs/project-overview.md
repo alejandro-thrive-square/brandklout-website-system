@@ -52,6 +52,17 @@ what you need rather than reaching across for it at build time.
 
 ## Status
 
+### 2026-09-02 — the eleven core pages, designed, and live on Instatic
+
+The Asana brief **Build New Mason Park Pediatric Site** `1218009803778905` → **Build Core
+Pages** `1218057689730298` is built in [`workflows/03-core-pages/`](../workflows/03-core-pages/README.md)
+and published to `mason-park-kids.up.railway.app` beside the 43 migrated pages it does not
+replace. The pediatric brand has its own design system (sampled from its logo: slate and
+sage, with sun and sky; Fraunces and Nunito) on the parent practice's process (chapters,
+constant chrome, scrubbed scenes, three gates). **Read that README before touching a page**:
+it records why the migration's stylesheet was renamed, why the migrated pages now render in
+the new faces, and the nine open items for the practice.
+
 ### 2026-08-28 — rebuilt as a static site, 54 pages, passing its own QA gate
 
 The rebuild is in [`workflows/02-static-rebuild/`](../workflows/02-static-rebuild/README.md) and
