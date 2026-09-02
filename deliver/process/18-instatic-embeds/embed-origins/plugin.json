@@ -1,7 +1,7 @@
 {
   "id": "webzite.embed-origins",
   "name": "Embed Origins",
-  "version": "1.5.0",
+  "version": "1.5.1",
   "apiVersion": 1,
   "description": "Add third-party embeds by hand: an Embed block for the canvas, plus the operator-approved origins that let the published page's Content-Security-Policy load them.",
   "permissions": ["cms.hooks", "modules.register", "frontend.assets"],
@@ -18,13 +18,6 @@
         { "label": "Strict - only what the page contains", "value": "strict" }
       ],
       "default": "compatible"
-    },
-    {
-      "id": "compatibleEverywhere",
-      "type": "toggle",
-      "label": "Apply the Compatible policy to every page (staging review only)",
-      "description": "On: every published page, not only those with an Embed block, may load anything over https - scripts, frames, websockets, fonts, styles and blob previews. This is what a review sidebar such as BugHerd needs, because it arrives through a site-wide script rather than an Embed block and opens a websocket once a reviewer is logged in. Leave it OFF on a production site; it drops the per-page locked-down policy everywhere.",
-      "default": false
     },
     {
       "id": "autoTrust",

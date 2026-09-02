@@ -46,20 +46,12 @@ if (clear) Object.assign(settings, { frameOrigins: '', scriptOrigins: '', connec
 if (argOf('--frame') !== null) settings.frameOrigins = argOf('--frame')
 if (argOf('--script') !== null) settings.scriptOrigins = argOf('--script')
 if (argOf('--connect') !== null) settings.connectOrigins = argOf('--connect')
-// `--compatible-everywhere on|off`: the compatible policy on every page, for a
-// staging instance carrying a review sidebar. The toggle stores a boolean and
-// the filter checks `=== true`, so the string must become one here.
-const everywhere = argOf('--compatible-everywhere')
-if (everywhere !== null) {
-  if (everywhere !== 'on' && everywhere !== 'off') {
-    console.error('--compatible-everywhere takes on or off')
-    process.exit(2)
-  }
-  settings.compatibleEverywhere = everywhere === 'on'
-}
-if (!clear && argOf('--frame') === null && argOf('--script') === null &&
-    argOf('--connect') === null && everywhere === null) {
-  console.error('nothing to set: pass --frame, --script, --connect, --compatible-everywhere or --clear')
+// A `compatibleEverywhere` key may linger in the stored record from the
+// short-lived 1.5.0 (2026-09-02, reverted the same day); the 1.4.0 schema does
+// not declare it, so drop it rather than have the validator reject the write.
+delete settings.compatibleEverywhere
+if (!clear && argOf('--frame') === null && argOf('--script') === null && argOf('--connect') === null) {
+  console.error('nothing to set: pass --frame, --script, --connect or --clear')
   process.exit(2)
 }
 const res = await api('PUT', `/admin/api/cms/plugins/${ID}/settings`, { settings })

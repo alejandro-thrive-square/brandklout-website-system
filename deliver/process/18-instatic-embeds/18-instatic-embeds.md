@@ -71,33 +71,29 @@ Say the trade out loud at handover: on the pages carrying an embed, what stands 
 
 `strict` + `autoTrust: false` returns to "nothing is allowed unless an operator typed it", which is where this plugin started.
 
-### `compatibleEverywhere` — the staging switch (v1.5.0)
+### A review sidebar is not an Embed block — and the one time that mattered, it was the VPN
 
-A review sidebar is not an Embed block. BugHerd arrives through a **site-wide runtime script**, so
-no page "contains" it and compatible mode never engages; and once a reviewer is logged in it opens
-a **Pusher websocket** (`wss://ws-*.pusher.com`), loads a **SockJS fallback script** from
-`js.pusher.com`, and builds **`blob:` previews** for screenshots and uploads. The typed boxes take
-`https?://host` and nothing else, so none of that can be allowed by hand, and the sidebar loads,
-half-works, and floods the console with refusals as Pusher retries every transport.
+BugHerd arrives through a **site-wide runtime script**, so no page "contains" it and compatible
+mode never engages; the typed boxes are what allow it. On 2026-09-02 a short-lived **1.5.0** added a
+`compatibleEverywhere` switch (the compatible policy on every page) to chase a sidebar that "did not
+open" on Mason Park's staging. It was reverted the same day: the cause was **NordVPN Threat
+Protection** forging certificates in Chrome and blanking the script with a synthetic `204`, which no
+policy can fix. The typed boxes were sufficient all along. The host **refuses to downgrade** a
+plugin (`400: installed at 1.5.0; refusing to downgrade to 1.4.0`), so the revert ships as
+**1.5.1**: the 1.4.0 filter and manifest under a higher number. Mason Park staging runs 1.5.1;
+both production sites stay on 1.4.0, and the two behave identically.
 
-`compatibleEverywhere: true` applies the compatible policy to every published page. It is a
-compatible-mode option (strict still wins), the typed boxes still apply on top, and it is **off by
-default**. Turn it on for a staging instance whose purpose is that review; never on production,
-where it would trade the per-page locked-down policy for Webflow's no-policy on every page.
+What BugHerd actually needs, measured with the filter off: `www.bugherd.com` as a script origin
+(the loader, which 302s to `sidebar.bugherd.com/embed.js`), `sidebar.bugherd.com` as a script
+origin (the bundles) **and as a frame origin** (the communication `<iframe>` at
+`sidebar.bugherd.com/sidebar/embed_html`). A logged-in sidebar also opens a Pusher websocket and
+builds `blob:` previews; those the boxes cannot express, and the sidebar degrades to no live updates
+rather than failing. Leave it there unless a reviewer reports it.
 
-```bash
-INSTATIC_BASE_URL=https://staging.masonparkdental.com node set-origins.mjs --compatible-everywhere on
-# then republish; the CSP is rewritten at publish time
-```
-
-Live on `staging.masonparkdental.com` since 2026-09-01 (plugin 1.5.0). Both production sites stay
-on 1.4.0 with the switch absent, which the filter reads as off.
-
-**The settings `PUT` replaces the whole record; it does not merge.** Measured while turning this
-on: a call carrying only the toggle emptied all three origin boxes, and the call that re-typed the
-boxes switched the toggle back off. Every key left out falls back to its schema default.
-`set-origins.mjs` now GETs the record and writes the merged one, so pass only the flags you mean
-to change. Upgrading the plugin does **not** reset settings; that was the replace, misread.
+**The settings `PUT` replaces the whole record; it does not merge.** A call carrying one box
+emptied the other two. Every key left out falls back to its schema default. `set-origins.mjs` now
+GETs the record and writes the merged one, so pass only the flags you mean to change. Upgrading the
+plugin does **not** reset settings; that was the replace, misread.
 
 ## The canvas shows a card
 

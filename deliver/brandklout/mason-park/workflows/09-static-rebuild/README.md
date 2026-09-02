@@ -348,46 +348,38 @@ loader (`placement: head`, `timing: immediate`, `scope: all-pages`) that appends
 `<script src="https://www.bugherd.com/sidebarv2.js?apikey=…">`. `import-bugherd.mjs` registers
 it, `--remove` takes it off, and both refuse any host that is not staging.
 
-The other half is the CSP, and **typing BugHerd's hosts into the embed-origins boxes is not
-enough.** That was the first attempt: `www.bugherd.com` (the loader, which 302s to
-`sidebar.bugherd.com/embed.js`, plus a communication `<iframe>`) and `sidebar.bugherd.com` (the
-sidebar bundles) were allowed, the loader ran clean in a cookieless browser, and the client
-reported the sidebar "bugging a lot" the moment they used it logged in. Reading the four sidebar
-bundles (`app`, `app-vendor`, `app-images`, `public`, ~8 MB, fetched anonymously from
-`sidebar.bugherd.com/clients/sidebar/`) explained it: once a reviewer is authenticated the
-sidebar opens a **Pusher websocket** (`wss://ws-*.pusher.com`), loads a **SockJS fallback
-script** from `js.pusher.com`, and builds **`blob:` previews** for screenshots and uploads. The
-boxes accept `https?://host` and nothing else, so a websocket, a `blob:` source and a wildcard
-host cannot be typed, and Pusher retries every transport in a loop, which is the flood of
-refusals the client saw.
-
-So staging runs the plugin's `compatibleEverywhere` switch (v1.5.0): the compatible policy —
-anything over `https:`, `wss:`, `blob:` and `data:` — on **every** page, not only pages with an
-Embed block. The typed origins stay on top of it, mostly as documentation of what BugHerd
-actually needs:
+The other half is the CSP. The published page says `script-src 'self'`, and BugHerd needs
+`www.bugherd.com` as a script origin (the loader, which 302s to `sidebar.bugherd.com/embed.js`)
+and `sidebar.bugherd.com` as a script origin (the bundles) **and a frame origin** (the
+communication `<iframe>` at `sidebar.bugherd.com/sidebar/embed_html` — not `www`, which the
+first pass allowed instead). Those go into the embed-origins plugin:
 
 ```bash
 cd ../../../../process/18-instatic-embeds
 INSTATIC_BASE_URL=https://staging.masonparkdental.com node set-origins.mjs \
-  --frame "https://www.google.com https://www.bugherd.com" \
+  --frame "https://www.google.com https://sidebar.bugherd.com" \
   --script "https://www.bugherd.com https://sidebar.bugherd.com" \
-  --connect "https://notify.bugsnag.com https://sessions.bugsnag.com" \
-  --compatible-everywhere on
+  --connect "https://notify.bugsnag.com https://sessions.bugsnag.com"
 ```
 
-`set-origins.mjs` reads the current record and merges the flags you pass since v1.5.0; before
-that, every call rewrote the whole record, because **the host's settings `PUT` replaces, it does
-not merge** — a call carrying only the toggle emptied all three origin boxes. Plugin settings
-take effect at the next publish, so the order is: origins, then `import-bugherd.mjs --publish`
-(or a bare publish). `probe-bugherd.mjs <url>` reads the live CSP, loads the page in Chrome and
-lists every bugherd request and CSP refusal; it reports 0 refusals on all three pages now.
-**A cookieless browser gets a `204` from BugHerd and no sidebar** — the sidebar is served only
-to a viewer logged into BugHerd, which is how the public never sees it. So the probe proves the
-policy and the loader; only a logged-in browser proves the mount.
+`set-origins.mjs` reads the current record and merges the flags you pass; **the host's settings
+`PUT` replaces, it does not merge**, so before that fix a call carrying one box emptied the other
+two. Plugin settings take effect at the next publish, so the order is: origins, then
+`import-bugherd.mjs --publish` (or a bare publish). `probe-bugherd.mjs <url>` reads the live
+CSP, loads the page in Chrome and lists every bugherd request and CSP refusal. **A browser not
+logged into BugHerd sees the loader, the communication frame and the `resources` call, and no
+sidebar** — the sidebar is served only to a logged-in reviewer, which is how the public never
+sees it. So the probe proves the policy, the loader and the frame; only a logged-in browser
+proves the mount.
 
-**This is a staging posture.** Production keeps plugin 1.4.0, its locked-down per-page policy,
-and no BugHerd. When staging graduates: `import-bugherd.mjs --remove`, then
-`set-origins.mjs --compatible-everywhere off`, then publish.
+**A short-lived plugin 1.5.0 was reverted the same day.** It added a "compatible policy on every
+page" switch to chase a sidebar that would not open; the cause was the VPN below, and the typed
+boxes were enough all along. A logged-in sidebar also opens a Pusher websocket and builds `blob:`
+previews, which the boxes cannot express; it degrades to no live updates rather than failing.
+
+**This is a staging posture.** Production has no BugHerd. When staging graduates:
+`import-bugherd.mjs --remove --publish`, then `set-origins.mjs --frame https://www.google.com
+--script "" --connect ""` and publish.
 
 **Two more things that looked like the site and were not.** The key in the snippet is the BugHerd
 *project* key: the first one the client sent belonged to the Dr Nahlah project, and the Mason Park
