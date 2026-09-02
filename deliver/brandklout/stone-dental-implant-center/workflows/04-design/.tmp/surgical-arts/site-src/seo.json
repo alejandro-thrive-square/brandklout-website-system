@@ -451,6 +451,22 @@
           }
         }
       ]
+    },
+    "book": {
+      "title": "Book a Consultation | Stone Surgical Arts, Westlake TX",
+      "description": "An hour with Dr. Mona Stone in Westlake, Texas. $175 for Texas residents, $250 out of state, a $100 deposit credited to the fee. Book online or call.",
+      "ogTitle": "Book a Consultation | Stone Surgical Arts",
+      "ogDescription": "An hour with the surgeon who would perform your procedure. You leave with a written plan, honest answers and a fee.",
+      "schema": [
+        {
+          "@type": "ContactPage",
+          "name": "Book a Consultation",
+          "url": "https://www.stonesurgicalarts.com/book",
+          "about": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          }
+        }
+      ]
     }
   }
 }
