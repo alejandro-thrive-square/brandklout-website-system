@@ -203,10 +203,10 @@
       gsap.set(title, { visibility: "visible" });
       tl.from(sp.lines, { yPercent: 112, duration: 1.15, stagger: .1, ease: "power4.out" }, 0);
     }
-    tl.to($$(".ar-lede, .ar-actions, .ar-meta", sec), {
+    tl.to($$(".ar-lede, .el-badge, .ar-actions, .ar-meta", sec), {
       visibility: "visible", opacity: 1, y: 0, duration: .95, stagger: .12, ease: EASE
     }, .45);
-    gsap.set($$(".ar-lede, .ar-actions, .ar-meta", sec), { opacity: 0, y: 26 });
+    gsap.set($$(".ar-lede, .el-badge, .ar-actions, .ar-meta", sec), { opacity: 0, y: 26 });
 
     /* The chapter departs: the photograph sinks and the copy lifts away, so
        the hero is visibly LEFT rather than simply scrolled off. */

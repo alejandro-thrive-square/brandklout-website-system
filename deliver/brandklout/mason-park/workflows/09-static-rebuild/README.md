@@ -297,6 +297,93 @@ this workflow two separate rounds. Edit files with an editor, and scan before co
 node -e 'for(const f of process.argv.slice(1)){const t=require("fs").readFileSync(f,"utf8");for(let k=0;k<t.length;k++){const c=t.charCodeAt(k);if(c<32&&c!==9&&c!==10&&c!==13){console.log("CTRL",f,k);break}}}' home/assets/*.js home/assets/*.css .tmp/*.mjs
 ```
 
+### The elevation, and the practice's own photographs
+
+Client note, 2026-09-02, reviewing staging: *"There is too much text overall in the
+staging site. If you can make a design improvement like we did on the stone site ...
+More images, less text and more animations."* The Stone Surgical Arts elevation of the
+day before is the model (`bk-stone/.../site-src/css/52-elevate.css`, `js/12-elevate.js`);
+this is the same set of components in Mason Park's vocabulary, applied to all eleven
+pages, and fed with the practice's **own** photographs.
+
+**The photographs.** The 2026-08-28 handoff pointed at a Google Photos album
+(`photos.app.goo.gl/k9MzHrudUfh4QhpW9`, "MARKETING PHOTOS", 212 frames) that nothing
+had used. It is the practice itself: the front desk, the treatment rooms, the sterilizer,
+the scanner, the team in their own scrubs, real families on the waiting room sofa.
+`.tmp/import-album.mjs` fetches sixty of them at the four srcset widths straight from
+Google (`=w<px>` on the frame URL) into `home/assets/uploads/2026/09/` as
+`mp-<what-it-shows>-<w>x<h>.jpg`, and `.tmp/recompress.mjs` runs them through Chrome's
+canvas at quality .8 (54 MB to 40 MB; no sharp in this folder). `album-manifest.json`
+carries the alt text and sizes. **The folder is gitignored like every other upload**, so
+on a fresh clone run `import-album.mjs` then `recompress.mjs` before `check.mjs` will
+pass. The rule at the top of `import-album.mjs`: rooms, people at work, and patients who
+sat for the practice's own marketing photographs; never the intraoral before/after pairs
+(a clinical result is the practice's claim to make) and never frame 187, which is a
+patient record with a name and a phone number on it.
+
+**The layer.** `home/assets/elevate.js` (sixth script tag on every page, sixth part of the
+Instatic bundle) and the `el-*` block at the end of `site.css`. Every hidden state is
+scoped to `html.el-ready`, which the script sets first, so a page without it is the plain
+page; `html.el-reduce` is the reduced-motion branch; GSAP is optional (parallax and the
+ghost drift use it, everything else is IntersectionObserver and CSS). The components:
+
+| Part | What it is | Where |
+| :--- | :--- | :--- |
+| `el-veil` | A one second curtain on first arrival, once per session | every page |
+| `data-el="mask"` | A frame that opens from the bottom as it enters, the photograph settling from a slight over-scale | most photographs |
+| `data-parallax` | The photograph drifts inside its frame with the scroll | heroes, bands, mosaics |
+| `el-inset` + `el-badge` | A second frame overlapping the hero, and the published 4.9 laid into the copy | home |
+| `el-strip` | A slow filmstrip of the practice, tiles at three heights on two baselines, paused on hover | home, about, doctors, team, reviews |
+| `el-band` | A full-bleed photograph with one line of display type | about, home, new patients, financing, savings plan |
+| `el-mosaic` | Seven photographs at three sizes on twelve columns, one sentence in the cell that is not a picture | about, team |
+| `el-story` | A sticky portrait that changes with the step in the reader's eyeline | about (the three doctors) |
+| `el-catalogue` | Groups as an accordion of lines with one sticky photograph that follows the open one | services |
+| `el-index` | Lines that float a photograph after the cursor; the thumbnail sits inline on touch | services (the finder) |
+| `el-carousel` | One review at a time at statement size, arrows, keyboard, swipe, a seven second bar | home, doctors, new patients, reviews, Invisalign |
+| `el-trio` | Photograph cards with one line each, leaning toward the pointer (`data-el-tilt`) | doctors, new patients, financing, thank you |
+| `el-behind` | A masked photograph fading in behind the copy of a dark chapter | about, doctors, team, services, reviews |
+| `el-ghost` | An outlined word at section size, drifting with the scroll | about, team, reviews, new patients, financing, Invisalign |
+| `el-ticker` | Two rows of towns travelling in opposite directions | home |
+| `el-fold` | The prose that stayed, folded under a summary. `check.mjs` strips it like `lf-more` | wherever the practice's own paragraphs were |
+
+**What "less text" measured.** Visible words in `<main>`, folds excluded, before and after:
+home 1,489 to 1,383; about 638 to 418; doctors 995 to 858; team 1,085 to 699; services
+818 to 764; new patients 1,265 to 778; reviews 1,534 to 1,474 (the wall is the page);
+Invisalign 1,302 to 929. Images in `<main>`: 36 to 48, 14 to 27, 10 to 24, 11 to 25, 9 to
+38, 9 to 19, 8 to 23, 17 to 22. Nothing the practice wrote was deleted: it is in an
+`el-fold` or an `lf-more`.
+
+**How the pages were rewritten.** `.tmp/splice-main.mjs <page> <body>` replaces a page's
+`<main>` with an authored file and runs `.tmp/expand-img.mjs`, which turns
+`{{img slug="kid-xray-smile" sizes="..."}}` into the full `<img src srcset sizes alt
+width height>` from the manifest, with the asset prefix worked out from the page's depth.
+Author with macros; never type a srcset.
+
+**The nav.** Client, same day: *"Remove the links that don't exist in the nav bar."*
+`.tmp/prune-nav.mjs` rewrites the header menu, the two footer columns and the legal row on
+every page to the eleven routes that exist, and reports any other internal href that does
+not resolve (`--check` to report only). It passes on all eleven pages. The treatment chips
+in the services catalogue are dashed `<span>`s, not links, for the same reason: a chip
+becomes a link the day its page exists.
+
+Three things learned, for the next pass:
+
+1. **A full-page capture lies about `data-el="mask"` frames** the same way it lies about
+   the scrubbed scenes: the observer never fires for a tile the capture did not scroll
+   into, so the mosaic photographs came out as blank boxes. `.tmp/probe-el.mjs <page>
+   <selector> [width] [out.png]` parks one element in the middle of a real window, waits,
+   screenshots it and reports every image inside it (loaded, natural size, box, opacity,
+   clip, and any request that came back 4xx). Use it before believing a blank.
+2. **Instatic drops `width`/`height` on images**, which changes what `aspect-ratio: auto`
+   resolves to. The home page's pair of photographs measured 975px locally and 604px
+   live because the local image kept its attribute ratio and the live one filled its flex
+   column. A fixed `aspect-ratio: 5 / 4` on that image makes both agree (`height: 0` on the
+   flex item did not; the grid row still took the attribute ratio); look for the same shape
+   wherever a rule relies on an image's intrinsic ratio.
+3. **A `<button>` may hold text and nothing else**, so the carousel arrows are `&larr;`
+   and `&rarr;`, and the catalogue trigger is an `<a role="button">` with a real in-page
+   href, exactly as on the Stone build.
+
 ## Instatic import
 
 `home/` is already shaped for it: one stylesheet, one script, classic `<script>` tags and no

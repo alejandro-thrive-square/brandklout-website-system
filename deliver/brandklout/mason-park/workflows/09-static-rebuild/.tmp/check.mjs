@@ -133,7 +133,9 @@ for (const file of pages) {
   // hidden paragraphs are measured as a run of their own: the page was
   // reported at 131 words for prose nobody is shown until they open it, i.e.
   // penalised for applying the fix. Strip the folds, then measure.
-  const shown = (s) => s.replace(/<details class="lf-more"[\s\S]*?<\/details>/g, " ");
+  // The elevation layer (2026-09-02) folds prose under <details class="el-fold">,
+  // the same trade as lf-more one level up: a closed fold is not shown.
+  const shown = (s) => s.replace(/<details class="(?:lf-more|el-fold)"[\s\S]*?<\/details>/g, " ");
   let worst = 0, worstAt = "";
   for (const re of HOLDERS)
   for (const sec of html.matchAll(re)) {

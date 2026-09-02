@@ -44,6 +44,7 @@ const PARTS = [
   "gsap/SplitText.min.js",
   "site.js",
   "journey.js",
+  "elevate.js",
 ];
 const ASSET_PATH = "src/scripts/mason-park.js";
 
