@@ -278,7 +278,7 @@
       ]
     },
     "treatments": {
-      "title": "Treatments & Fees | Facial Surgery, Skin & Injectables in Westlake TX | Stone Surgical Arts",
+      "title": "Treatments & Fees | Stone Surgical Arts, Westlake TX",
       "description": "Every treatment at Stone Surgical Arts with the fee beside it: face, neck and jawline, skin, and non-surgical. Consultation $175. Westlake, Texas.",
       "ogTitle": "Treatments & Fees | Stone Surgical Arts",
       "ogDescription": "Face, neck and jawline, skin and non-surgical treatments, each with the practice's published fee. Planned and performed by Dr. Mona Stone in Westlake, Texas.",
@@ -335,6 +335,56 @@
               }
             }
           ]
+        }
+      ]
+    },
+    "meet-the-doctor": {
+      "title": "Dr. Mona Stone, DDS | Stone Surgical Arts, Westlake TX",
+      "description": "Oral and maxillofacial surgeon and facial cosmetic surgeon in Westlake, Texas. Engineering first, then a full residency across three Level 1 trauma centres.",
+      "ogTitle": "Meet Dr. Mona Stone, DDS | Stone Surgical Arts",
+      "ogDescription": "The surgeon who plans, performs and follows up every case at Stone Surgical Arts. Engineering first, then a full oral and maxillofacial residency, then facial cosmetic surgery in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "Physician",
+          "@id": "https://www.stonesurgicalarts.com/meet-the-doctor#person",
+          "name": "Dr. Mona Stone, DDS",
+          "honorificPrefix": "Dr.",
+          "jobTitle": "Oral and maxillofacial surgeon; facial cosmetic surgeon",
+          "medicalSpecialty": [
+            "PlasticSurgery",
+            "Dentistry"
+          ],
+          "worksFor": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          },
+          "alumniOf": [
+            {
+              "@type": "CollegeOrUniversity",
+              "name": "University of Missouri-Kansas City"
+            },
+            {
+              "@type": "Hospital",
+              "name": "Truman Medical Center"
+            },
+            {
+              "@type": "Hospital",
+              "name": "Broward General Medical Center"
+            }
+          ],
+          "affiliation": [
+            {
+              "@type": "Hospital",
+              "name": "Baylor Medical Center"
+            },
+            {
+              "@type": "Hospital",
+              "name": "Methodist Hospital"
+            }
+          ],
+          "sameAs": [
+            "https://www.instagram.com/drjawline/"
+          ],
+          "url": "https://www.stonesurgicalarts.com/meet-the-doctor"
         }
       ]
     }

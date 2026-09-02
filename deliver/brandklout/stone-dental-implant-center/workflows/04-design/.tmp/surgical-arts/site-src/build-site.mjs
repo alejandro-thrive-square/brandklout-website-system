@@ -72,6 +72,7 @@ const PAGES = [
   // js/11-dossier.js and into the markup, because they were about necks.
   { slug: "blepharoplasty", src: "blepharoplasty", photoHero: true, motion: true, cta: false },
   { slug: "treatments", src: "treatments", photoHero: false, motion: true },
+  { slug: "meet-the-doctor", src: "meet-the-doctor", photoHero: false, motion: true },
 ];
 
 /* --- bundles --------------------------------------------------------------
