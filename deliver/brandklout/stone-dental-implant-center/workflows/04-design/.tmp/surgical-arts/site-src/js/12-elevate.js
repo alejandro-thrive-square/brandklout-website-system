@@ -244,7 +244,12 @@
     items.forEach(function (item) {
       var btn = $(".catalogue_trigger", item);
       if (!btn) return;
-      btn.addEventListener("click", function () {
+      btn.addEventListener("click", function (e) {
+        // An anchor, not a <button>: Instatic's importer flattens a button's
+        // children into a label string and the trigger carries three spans.
+        // The href is a real in-page anchor for the no-JS case; with JS the
+        // accordion opens in place instead of the page jumping.
+        e.preventDefault();
         activate(item);
       });
       if (finePointer) {

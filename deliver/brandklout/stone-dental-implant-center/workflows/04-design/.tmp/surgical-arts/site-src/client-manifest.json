@@ -2,44 +2,49 @@
   "source": "client Google Drive export, 01-content-intake/.tmp/google-drive-images",
   "slots": {
     "ssa-signage.webp": {
+      "kind": "practice",
       "from": "img/masthead/auxilary/03.jpg",
       "sourceSize": "2200 1200",
-      "output": "1600x900",
+      "output": "2133x1200",
       "alt": "The Stone Surgical Arts sign on the practice wall",
-      "used": "about.html, and available as a closing band anywhere",
+      "used": "index.html invitation; about",
       "note": "The practice’s own signage. Real, on brand, and it says whose building you are in."
     },
     "ssa-treatment-room.webp": {
+      "kind": "practice",
       "from": "img/masthead/auxilary/01.jpg",
       "sourceSize": "2200 1200",
-      "output": "1600x900",
+      "output": "2133x1200",
       "alt": "A treatment room at the practice with the laser platform and a product display",
-      "used": "laser-resurfacing.html, morpheus8.html",
-      "note": "The actual devices in the actual room. Replaces a generated laser handpiece."
+      "used": "index.html place strip; treatments",
+      "note": "The actual devices in the actual room."
     },
     "ssa-front-desk.webp": {
+      "kind": "practice",
       "from": "img/masthead/auxilary/04.jpg",
       "sourceSize": "2200 1200",
-      "output": "1600x900",
+      "output": "2133x1200",
       "alt": "Two members of the practice team at the front desk beneath the Stone Surgical Arts sign",
-      "used": "book.html",
+      "used": "index.html place strip; book",
       "note": "Shows the people you actually meet. Has faces, but they are STAFF at a desk, which cannot be read as a clinical result."
     },
     "ssa-team.webp": {
+      "kind": "practice",
       "from": "img/masthead/auxilary/our-team.jpg",
       "sourceSize": "2200 1200",
-      "output": "1600x900",
+      "output": "2133x1200",
       "alt": "The Stone Surgical Arts team seated together",
-      "used": "about.html",
-      "note": "The real team. Named individuals are still not identified in copy without confirmation."
+      "used": "index.html place strip; team",
+      "note": "The real team."
     },
     "ssa-consult-room.webp": {
+      "kind": "practice",
       "from": "img/masthead/cosmetic-facial-surgery/glow-with-hydra-gacial-bg-img.jpg",
       "sourceSize": "2200 983",
-      "output": "1600x900",
-      "alt": "A consultation room at the practice with an armchair, a side table and daylight through tall blinds",
-      "used": "treatments.html consultation band, injectables.html",
-      "note": "A real consult room. Better than gen-consult-pair for the same slot."
+      "output": "1748x983",
+      "alt": "A woman with a clipboard seated in an armchair in the practice’s consultation room",
+      "used": "index.html the path; neck-lift and blepharoplasty booking chapters",
+      "note": "A real consult room. The seated woman is at the RIGHT of the frame near the TOP; every slot that crops this needs .u-focus-figure or she is cropped out. See css/02-base.css."
     },
     "staff-brooke.webp": {
       "from": "img/staff/brooke.jpg",
@@ -53,7 +58,7 @@
       "kind": "practice",
       "from": "img/masthead/auxilary/02.jpg",
       "sourceSize": "2200 1200",
-      "output": "1600x900",
+      "output": "2133x1200",
       "alt": "The green neon sign on the practice wall: Be the best version of you",
       "used": "index.html, the band above the invitation",
       "note": "The practice’s own neon, in the brand green. The one image in the export that is both a real place and a line of copy."
@@ -220,7 +225,7 @@
       "kind": "model",
       "from": "img/masthead/home/02.jpg",
       "sourceSize": "2200 1200",
-      "output": "1600x900",
+      "output": "2133x1200",
       "alt": "A woman in profile in a slant of warm light, neck and jaw in shadow",
       "used": "index.html results band"
     },
@@ -228,7 +233,7 @@
       "kind": "model",
       "from": "img/masthead/home/03.jpg",
       "sourceSize": "2200 1200",
-      "output": "1600x900",
+      "output": "2133x1200",
       "alt": "A woman in profile against a dark ground, a hand raised to her cheek",
       "used": "index.html, the standard"
     },
@@ -244,7 +249,7 @@
       "kind": "model",
       "from": "img/masthead/necklift/02.jpg",
       "sourceSize": "2200 1200",
-      "output": "1600x900",
+      "output": "2133x1200",
       "alt": "A woman in profile outdoors, chin resting on her hand",
       "used": "index.html concerns, neck"
     },
@@ -300,7 +305,7 @@
       "kind": "model",
       "from": "img/masthead/home/05.jpg",
       "sourceSize": "2200 1200",
-      "output": "1600x900",
+      "output": "2133x1200",
       "alt": "A man in a checked jacket looking out of a doorway",
       "used": "index.html concerns, men"
     },

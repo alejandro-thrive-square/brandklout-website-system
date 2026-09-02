@@ -470,6 +470,7 @@
 .catalogue_trigger {
   width: 100%;
   display: grid;
+  text-decoration: none;
   grid-template-columns: 3.5rem 1fr auto;
   align-items: baseline;
   gap: var(--space-medium);
@@ -1492,4 +1493,115 @@ span.catalogue_link {
   .related_card {
     scroll-snap-align: start;
   }
+}
+
+/* --- 2K and 4K, 2026-09-02 --------------------------------------------------
+   The root font keeps growing past 1920 (00-fluid-root.css), so everything
+   set in rem scales with the screen and the content column stays capped at
+   97.5rem by --gutter. What did NOT scale were the FULL-BLEED two-column
+   bands, whose grid ran the whole viewport: at 3840 the hub's category
+   photograph sat a metre from the copy it belongs to. Same fix the arrival
+   hero has had since 2026-09-01: cap the band at the content width and
+   reset the gutter inside it. Photographs that bleed edge to edge (the neon,
+   the heroes, the strips) are meant to and are left alone; the ones the
+   client's export supplied at 2200px were re-exported at that width so a
+   4K screen is not looking at a 1600px picture stretched 2.4x. */
+@media (min-width: 1700px) {
+  .catx_band,
+  .book_component,
+  .place_inner,
+  .consent_inner,
+  .marquee_component,
+  .strip_head,
+  .jump_inner {
+    max-width: 97.5rem;
+    margin-inline: auto;
+  }
+  .catx_band,
+  .book_component {
+    --gutter: 4.5rem;
+  }
+  .still_component,
+  .neon_component,
+  .lead_component {
+    height: clamp(14rem, 26vw, 34rem);
+  }
+  .concern_float {
+    width: clamp(12rem, 14vw, 20rem);
+  }
+}
+@media (min-width: 2400px) {
+  .journey_readout {
+    left: calc((100vw - 97.5rem) / 2 - 8rem);
+  }
+}
+
+/* --- dark sections, one per page, 2026-09-02 ----------------------------------
+   The client: "a few dark mode sections, no more than three, one on each
+   page." The home page, the doctor page and the dossiers already carry
+   their dark band; these are the components that go dark on the other
+   pages, and the few tokens the dark palette does not already flip. */
+.stone-band .mech_card,
+.stone-band .brands_card,
+.stone-band .recov_card {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.14);
+}
+.stone-band .recov_card.is-key {
+  background: rgba(143, 188, 70, 0.14);
+  border-color: rgba(143, 188, 70, 0.3);
+}
+.stone-band .followup_note,
+.stone-band .calc_note {
+  border-color: rgba(255, 255, 255, 0.2);
+}
+.stone-band .brands_card:hover {
+  box-shadow: 0 18px 44px rgba(0, 0, 0, 0.35);
+}
+.stone-band .proof_slide blockquote,
+.stone-band .proof_count,
+.stone-band .proof_arrow,
+.stone-band .mech_title,
+.stone-band .brands_card h3,
+.stone-band .recov_body,
+.stone-band .mech_text,
+.stone-band .brands_card p,
+.stone-band .proof_rating-value {
+  color: var(--white);
+}
+.stone-band .proof_slide figcaption span:first-child,
+.stone-band .steps_lede {
+  color: rgba(255, 255, 255, 0.86);
+}
+.stone-band .proof_rating {
+  background: var(--charcoal);
+}
+.stone-band .proof_arrow {
+  border-color: rgba(255, 255, 255, 0.4);
+}
+.stone-band .proof_bar {
+  background: rgba(255, 255, 255, 0.25);
+}
+.stone-band .proof_quotemark {
+  opacity: 0.35;
+}
+
+/* --- Instatic's base.button has a label and no children --------------------------
+   The importer flattens whatever is inside a <button> into one string
+   (05-instatic-upload.md, trap 15). Two components here draw their button
+   with markup: the carousel arrows carry an SVG, and the catalogue triggers
+   carried three spans. The triggers became anchors with role="button", which
+   keep their children. The arrows keep their SVG locally and, where it has
+   been taken away, draw a chevron from a border, the same repair
+   .navbar_burger:empty uses. */
+.proof_arrow:empty::before {
+  content: "";
+  width: 0.55rem;
+  height: 0.55rem;
+  border-top: 1.4px solid currentColor;
+  border-right: 1.4px solid currentColor;
+  transform: rotate(45deg) translate(-1px, 1px);
+}
+.proof_arrow.is-prev:empty::before {
+  transform: rotate(-135deg) translate(-1px, 1px);
 }
