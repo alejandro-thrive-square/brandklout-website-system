@@ -389,6 +389,16 @@ policy and the loader; only a logged-in browser proves the mount.
 and no BugHerd. When staging graduates: `import-bugherd.mjs --remove`, then
 `set-origins.mjs --compatible-everywhere off`, then publish.
 
+**Two more things that looked like the site and were not.** The key in the snippet is the BugHerd
+*project* key: the first one the client sent belonged to the Dr Nahlah project, and the Mason Park
+project (`api_v2/projects/539151.json`, key `qvkdzpx4…`) has its own. And on the client's
+workstation the sidebar failed with a `204` from `sidebarv2.js` *with the session cookie sent*:
+**NordVPN Threat Protection** intercepts Chrome's HTTPS (certificate issuer
+`NordVPN S.A. -ThreatProtection`) and blanks the script when a page loads it, while a direct
+navigation to the same URL is allowed. Headless Chrome on the same machine is filtered too, so
+`probe-bugherd.mjs` reports the 204 as well; node and curl are not. Check the certificate issuer in
+DevTools > Security before blaming the page. Fix: allowlist `bugherd.com` in Threat Protection.
+
 **Pages are node graphs, not HTML.** Steps 6–8 exist because the HTML→nodes importer is an MCP
 `site_*` tool that proxies a live browser editor and "cannot run headlessly"; calling Instatic's
 own importer inside the container sidesteps that. `railway ssh` takes its payload on the command
