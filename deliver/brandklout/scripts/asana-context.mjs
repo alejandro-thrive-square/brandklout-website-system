@@ -42,6 +42,10 @@ export const CLIENT_TASKS = {
   'dr-nahlah': ['1216611404338509'],
   'stone-dental-implant-center': ['1217160668112180', '1217160668112175'],
   'legacy-dental-pasadena': ['1217611213174386'],
+  // Stone is three brands in one Asana project. The slug above pulls both build tasks; these two
+  // pull one pillar each, matching the client folder that owns it.
+  'stone-med-spa': ['1217160668112180'],
+  'stone-surgical-arts': ['1217160668112175'],
 }
 
 const TASK_FIELDS = [
