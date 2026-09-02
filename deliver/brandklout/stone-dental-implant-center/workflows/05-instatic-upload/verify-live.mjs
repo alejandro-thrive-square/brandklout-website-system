@@ -37,7 +37,7 @@ const BASE = 'https://stone-surgical-arts-production.up.railway.app'
    the sixteen the cut deleted, and it is back as the second dossier page. A
    slug can be on one list or the other and never on both: leaving it on GONE
    after publishing it would have failed this gate, which is the gate working. */
-const ROUTES = ['/', '/neck-lift', '/blepharoplasty', '/treatments', '/meet-the-doctor', '/about', '/team', '/memberships', '/results', '/book']
+const ROUTES = ['/', '/neck-lift', '/blepharoplasty', '/treatments', '/meet-the-doctor', '/about', '/team', '/memberships', '/results', '/book', '/myellevate-neck-lift']
 
 /* Routes that must NOT resolve. These were the sixteen slugs the 2026-09-01 cut
    deleted, and this list is what turns the cut from "we did not upload them"
@@ -53,7 +53,6 @@ const GONE = [
   '/laser-resurfacing',
   '/lip-lift',
   '/morpheus8',
-  '/myellevate-neck-lift',
 ]
 
 const fails = []

@@ -1403,6 +1403,11 @@ span.catalogue_link {
 .dsec_mark.is-flush {
   margin: 0;
 }
+/* A two-word title with a trademark in it breaks as "MyEllevate neck / lift"
+   at 1440; capped, it breaks as "MyEllevate / neck lift". */
+.dhero_title.is-long {
+  max-width: 11ch;
+}
 .related_component {
   padding: var(--section-sm) var(--gutter) var(--section);
   border-top: 1px solid var(--line);

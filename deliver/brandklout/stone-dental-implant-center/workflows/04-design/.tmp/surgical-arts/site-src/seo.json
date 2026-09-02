@@ -467,6 +467,82 @@
           }
         }
       ]
+    },
+    "myellevate-neck-lift": {
+      "title": "MyEllevate Neck Lift Westlake TX | Stone Surgical Arts",
+      "description": "A light-guided suture suspends the neck muscle with no external incision and a recovery measured in days. $6,000 in Westlake, TX, by Dr. Mona Stone.",
+      "ogTitle": "MyEllevate Neck Lift | Stone Surgical Arts",
+      "ogDescription": "Definition through the jaw and neck, achieved with a suture rather than a scar. $6,000, or $7,800 with FaceTite, in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "MyEllevate Neck Lift",
+          "description": "A light-guided suture suspension of the platysma for a neck whose skin still has tone: no external incision, local anaesthetic, and a recovery of about a week.",
+          "category": "Neck & Jawline",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Neck",
+          "howPerformed": "Under local anaesthetic, with sedation as an option, a suture is passed beneath the skin along a lit path and looped around the platysma to suspend it. Entry points are small and typically under the chin and behind the ears. About ninety minutes.",
+          "preparation": "A consultation with Dr. Stone, a medical history, an assessment of general health, and photographs and measurements taken against your own anatomy.",
+          "followup": "A support garment for the first days; most people are back at a desk inside a week; the contour settles over six to twelve weeks. Follow-ups are with Dr. Stone.",
+          "provider": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          },
+          "url": "https://www.stonesurgicalarts.com/myellevate-neck-lift"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Will there be a visible scar after MyEllevate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "There is no external incision along the neck. The suture is passed through small entry points, typically under the chin and behind the ears, which settle to be very difficult to find."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does MyEllevate last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The practice puts MyEllevate at around five years, against up to ten for a full surgical neck lift. The suspension itself is permanent; the neck keeps ageing around it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I drive myself home after MyEllevate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Under local anaesthetic alone, yes. If sedation is added, a responsible adult brings you, waits, and drives you home."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is MyEllevate the same as a thread lift?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. A thread lift places dissolving barbed threads in the soft tissue. MyEllevate places a permanent suture around the platysma itself under direct light guidance, performed by a surgeon."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I have MyEllevate if I have already had a facelift?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Often, yes. It is a common way to refresh a neck without repeating a larger operation. Bring the operative details of the previous surgery to the consultation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does MyEllevate cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "$6,000 on its own, or $7,800 combined with FaceTite for the neck. Financing runs through Sunbit, and membership credit can be applied to a surgical fee."
+              }
+            }
+          ]
+        }
+      ]
     }
   }
 }

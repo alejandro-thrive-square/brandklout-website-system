@@ -254,7 +254,10 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
     const cur = box.querySelector("thead .is-current");
     return { left: Math.round(box.scrollLeft), curLeft: Math.round(cur.offsetLeft), max: box.scrollWidth - box.clientWidth };
   });
-  check("the matrix opens on the current column", m.max > 0 && m.left > 0, `scrollLeft ${m.left} of ${m.max}`);
+  // A current column that is the FIRST data column (the MyEllevate page,
+  // 2026-09-02, where the cheapest option is the page's own) needs no scroll,
+  // and a scroll of zero is then the correct opening state.
+  check("the matrix opens on the current column", m.max > 0 && (m.left > 0 || m.curLeft < 200), `scrollLeft ${m.left} of ${m.max}, column at ${m.curLeft}`);
   await pg.close();
 }
 
