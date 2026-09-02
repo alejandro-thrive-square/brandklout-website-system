@@ -16,7 +16,8 @@
 // ===========================================================================
 import { chromium } from "playwright-core";
 const CHROME = process.env.CHROME_PATH || "C:\\Program Files\\Google\\Chrome\\Application\\chrome.exe";
-const url = "file:///" + process.argv[2].split("\\").join("/");
+// A live URL is taken as is; anything else is an absolute local path.
+const url = /^https?:\/\//.test(process.argv[2]) ? process.argv[2] : "file:///" + process.argv[2].split("\\").join("/");
 const w = +(process.argv[3] || 1440), h = +(process.argv[4] || 900);
 
 const browser = await chromium.launch({ executablePath: CHROME, args: ["--allow-file-access-from-files"] });

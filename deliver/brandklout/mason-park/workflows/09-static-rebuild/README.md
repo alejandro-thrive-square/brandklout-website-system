@@ -538,6 +538,26 @@ None of these blocks review. All of them need somebody other than an engineer.
 | 8 | **Where should "write a review" go?** | The old blog's "Click here" link was not captured. The reviews page sends people to the Google Maps listing, which carries the review button. A `g.page` review link is better. |
 | 9 | **What the thank-you page follows.** | It assumes a request form whose reply is a phone call, which is how the old virtual-consult page worked. If the form redirects somewhere else, or confirms by email, the first chapter's copy changes. |
 
+## The core pages are on staging
+
+**2026-09-02, 13:10Z.** All eleven pages under `home/` are published at
+`https://staging.masonparkdental.com` (seq 32, 12 pages: the eleven plus the kept `404`). The
+import ran exactly in the order above, plus one step the order did not have: **`import-scripts.mjs`
+scopes the bundle to the page ids it can see when it runs**, and it ran before
+`reset-to-deliverable.mjs` created the nine new rows, so the first publish shipped the GSAP bundle
+to three pages. Run `import-scripts.mjs --publish` again AFTER the pages exist; the scope now lists
+all twelve. `verify-live.mjs` on all eleven routes: clean. `diff-live.mjs` on `/about-us` and
+`/patient-reviews`: element signatures and visible text identical. `probe-hooks.mjs` takes a live
+URL now and the scenes do work on staging. `probe-dropdown.mjs` on `/our-doctors`: every link 6.58:1.
+
+Two things to know from that run. **Git Bash rewrites a leading-slash argument into a
+`C:/Program Files/Git/` path**, so `node verify-live.mjs <origin> / /about-us` visited nonsense
+URLs and reported every route as flattened; prefix the command with `MSYS_NO_PATHCONV=1`. And
+**the BugHerd loader was not on staging when the run began**: the 13:08Z backup, taken before any
+write, has no `bugherd.js` in `files` or `runtime.scripts`, so it was removed after the 01:05Z
+round 6 publish (the last publish before today was 01:27Z). This import did not touch it and did
+not put it back; `import-bugherd.mjs --publish` does, when the client wants it.
+
 ## Nav links
 
 The header links to about 55 pages, of which eleven now exist. That is deliberate: the nav
