@@ -24,11 +24,21 @@
 //   INSTATIC_BASE_URL=https://staging.masonparkdental.com node set-origins.mjs \
 //     --frame "https://www.google.com https://www.bugherd.com" \
 //     --script "https://www.bugherd.com https://sidebar.bugherd.com" \
-//     --connect "https://notify.bugsnag.com https://sessions.bugsnag.com"
+//     --connect "https://notify.bugsnag.com https://sessions.bugsnag.com" \
+//     --compatible-everywhere on
 //
-// `set-origins.mjs` REPLACES all three boxes on every call, so the Google Maps
-// frame origin has to be repeated or the map dies. A script origin also grants
-// itself connect/style/font, which is what the sidebar needs once running.
+// The typed origins are not enough on their own: a logged-in sidebar opens a
+// Pusher websocket, loads a SockJS fallback script and builds blob: previews,
+// so staging runs the plugin's `compatibleEverywhere` switch (v1.5.0). Since
+// 1.5.0 `set-origins.mjs` merges the flags you pass into the stored record.
+//
+// THE KEY IS THE PROJECT. `apikey` below is the BugHerd PROJECT key, and it
+// decides which board a pin lands on. The first install (2026-09-01) used
+// `wss7lflvrdyxfigqiilzsq`, which is the Dr Nahlah project's key -- the client
+// had sent that snippet -- and the fix on 2026-09-02 was the "Mason Park"
+// project's own key (project 539151, `api_v2/projects/539151.json`). Both
+// staging domains listed under one project, or one domain under two, are the
+// two setups BugHerd's help centre names for "the sidebar shows nothing".
 //
 // STAGING ONLY. The review sidebar must never reach www.masonparkdental.com,
 // so this refuses any host that is not staging, in both directions.
@@ -50,7 +60,7 @@ if (!IS_STAGING) {
 }
 
 const ASSET_PATH = "src/scripts/bugherd.js";
-const BUGHERD_SRC = "https://www.bugherd.com/sidebarv2.js?apikey=wss7lflvrdyxfigqiilzsq";
+const BUGHERD_SRC = "https://www.bugherd.com/sidebarv2.js?apikey=qvkdzpx4g4rksbukk7ea7q";
 
 const ALPHABET = "useandom-26T198340PX75pxJACKVERYMINDBUSHWOLF_GQZbfghjklqvwyzrict";
 const newFileId = () => Array.from(crypto.randomBytes(21), (b) => ALPHABET[b & 63]).join("");
