@@ -38,6 +38,12 @@ const MIME = {
 }
 
 const force = process.argv.includes('--force')
+// --only a.webp,b.webp  re-uploads just those names even though the library
+// already has them. Added 2026-09-02 when ten photographs were re-exported at
+// their 2200px source width for 4K screens: --force would have re-uploaded
+// all 78 and orphaned 78 more (trap 11), for ten that changed.
+const onlyIx = process.argv.indexOf('--only')
+const only = onlyIx > -1 ? new Set(process.argv[onlyIx + 1].split(',')) : new Set()
 
 /* --- AVIF is not uploadable to this platform ------------------------------
    Instatic sniffs the MIME from magic bytes and never trusts the declared
@@ -117,7 +123,7 @@ for (const name of files) {
   // The name the bytes are uploaded under; for AVIF that is the WebP twin.
   const uploadName = isAvif ? name.replace(/\.avif$/i, '.webp') : name
   const hit = existing.get(uploadName)
-  if (hit && !force) {
+  if (hit && !force && !only.has(uploadName)) {
     map[name] = { id: hit.id, url: hit.publicPath, reused: true, uploadedAs: uploadName }
     log.push(`skip   ${name.padEnd(24)} ${hit.publicPath}`)
     continue

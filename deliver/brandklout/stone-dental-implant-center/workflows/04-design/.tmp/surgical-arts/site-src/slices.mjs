@@ -62,7 +62,10 @@ const pg = await browser.newPage()
 // frame, the carousel) can be looked at as a visitor sees them. 2026-09-01.
 if (!process.env.MOTION) await pg.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])
 await pg.setViewport({ width, height, deviceScaleFactor: 1 })
-await pg.goto(`http://127.0.0.1:8801/${page}`, { waitUntil: 'networkidle0', timeout: 60000 })
+// A root that starts with http is a LIVE site: no local server, the page is a
+// route. `node slices.mjs https://host neck-lift out 1440 900`. 2026-09-02.
+const live = /^https?:/.test(root)
+await pg.goto(live ? `${root.replace(/\/$/, '')}/${page === 'index.html' ? '' : page.replace(/\.html$/, '')}` : `http://127.0.0.1:8801/${page}`, { waitUntil: 'networkidle0', timeout: 90000 })
 
 // Wake every lazy image and every reveal, then return to the top.
 // INSTANT SCROLLING, whatever the stylesheet says. 02-base.css sets
@@ -99,7 +102,7 @@ const overlap = await pg.evaluate(() => {
 })
 const step = height - overlap
 const n = Math.max(1, Math.ceil((total - height) / step) + 1)
-const stem = page.replace(/\.html$/, '') + (process.env.MOTION ? '-motion' : '')
+const stem = page.replace(/\.html$/, '') + (process.env.MOTION ? '-motion' : '') + (/^https?:/.test(root) ? '-live' : '')
 for (let i = 0; i < n; i++) {
   const y = Math.max(0, Math.min(i * step, total - height))
   await pg.evaluate((v) => window.scrollTo(0, v), y)

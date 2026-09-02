@@ -486,8 +486,21 @@
      credit is a data attribute on the card, so replacing the proposed tiers
      with the real programme is a markup edit. */
   function calculator() {
-    var range = $("[data-calc-range]");
-    if (!range) return;
+    var slot = $("[data-calc-slot]");
+    if (!slot) return;
+    // The input is created here rather than shipped in the markup, because
+    // Instatic's input module publishes every <input> as type="text" and
+    // strips step, aria-label and data-* from it. Built at runtime it is the
+    // same element on both sides.
+    var range = document.createElement("input");
+    range.type = "range";
+    range.className = "calc_range";
+    range.min = slot.getAttribute("data-min") || "1";
+    range.max = slot.getAttribute("data-max") || "24";
+    range.step = "1";
+    range.value = slot.getAttribute("data-value") || "12";
+    range.setAttribute("aria-label", slot.getAttribute("data-label") || "Months");
+    slot.appendChild(range);
     var cards = $$("[data-monthly]");
     var monthsOut = $$("[data-calc-months]");
     var milestones = [

@@ -5493,6 +5493,7 @@ span.catalogue_link {
 .proof_arrow {
   width: 3rem;
   height: 3rem;
+  padding: 0;
   border: 1px solid var(--line-strong);
   border-radius: 50%;
   background: transparent;
@@ -5765,47 +5766,6 @@ span.catalogue_link {
   }
   .related_card {
     scroll-snap-align: start;
-  }
-}
-
-/* --- 2K and 4K, 2026-09-02 --------------------------------------------------
-   The root font keeps growing past 1920 (00-fluid-root.css), so everything
-   set in rem scales with the screen and the content column stays capped at
-   97.5rem by --gutter. What did NOT scale were the FULL-BLEED two-column
-   bands, whose grid ran the whole viewport: at 3840 the hub's category
-   photograph sat a metre from the copy it belongs to. Same fix the arrival
-   hero has had since 2026-09-01: cap the band at the content width and
-   reset the gutter inside it. Photographs that bleed edge to edge (the neon,
-   the heroes, the strips) are meant to and are left alone; the ones the
-   client's export supplied at 2200px were re-exported at that width so a
-   4K screen is not looking at a 1600px picture stretched 2.4x. */
-@media (min-width: 1700px) {
-  .catx_band,
-  .book_component,
-  .place_inner,
-  .consent_inner,
-  .marquee_component,
-  .strip_head,
-  .jump_inner {
-    max-width: 97.5rem;
-    margin-inline: auto;
-  }
-  .catx_band,
-  .book_component {
-    --gutter: 4.5rem;
-  }
-  .still_component,
-  .neon_component,
-  .lead_component {
-    height: clamp(14rem, 26vw, 34rem);
-  }
-  .concern_float {
-    width: clamp(12rem, 14vw, 20rem);
-  }
-}
-@media (min-width: 2400px) {
-  .journey_readout {
-    left: calc((100vw - 97.5rem) / 2 - 8rem);
   }
 }
 
@@ -7109,6 +7069,12 @@ a.fee_row:hover .fee_go {
   font-size: var(--size-text-medium);
   line-height: 1.65;
 }
+.roster_links {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-medium);
+}
 .roster_handle {
   display: inline-block;
   font-size: var(--size-text-tiny);
@@ -7259,6 +7225,11 @@ a.fee_row:hover .fee_go {
 }
 .offer_hero-media {
   aspect-ratio: 4 / 5;
+  /* width 100% first, then the cap. Without an explicit width a grid item
+     with justify-self: end shrinks to its content, and on Instatic the
+     content is an <img> whose width attribute is the smallest responsive
+     variant: the frame published at 300px. 2026-09-02. */
+  width: 100%;
   max-width: 28rem;
   justify-self: end;
   overflow: clip;
@@ -7383,11 +7354,24 @@ a.fee_row:hover .fee_go {
   text-transform: uppercase;
   margin-left: 0.4rem;
 }
-.calc_range {
+.calc_slot {
+  min-height: 2px;
+}
+/* Doubled class: Instatic's framework styles inputs by attribute selector,
+   which outranks a single class, and published the track at 4px with a
+   border, a margin and overflow: clip, which hides the thumb. Every property
+   the framework touches is restated here at (0,2,0). 2026-09-02. */
+.calc_range.calc_range {
   -webkit-appearance: none;
   appearance: none;
+  display: block;
   width: 100%;
   height: 2px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
   background: var(--line-strong);
   outline: none;
 }
@@ -7886,6 +7870,7 @@ a.ways-in_card:hover {
   border-bottom-color: var(--accent-flat);
 }
 .form_textarea {
+  height: 6rem;
   min-height: 6rem;
   resize: vertical;
 }
@@ -7899,7 +7884,9 @@ a.ways-in_card:hover {
   line-height: 1.5;
 }
 .form_consent input {
-  margin-top: 0.3rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0.25rem 0 0;
   accent-color: var(--green-ink);
 }
 .form_note {
@@ -8085,3 +8072,58 @@ a.ways-in_card:hover {
     text-align: left;
   }
 }
+
+
+/* ===== css/59-wide.css ===== */
+/* ===========================================================================
+   WIDE SCREENS — 2K and 4K. 2026-09-02.
+
+   LAST IN THE CASCADE ON PURPOSE. This block lived in 52-elevate.css and its
+   `@media (min-width: 1700px) { .still_component { height: ... } }` was
+   silently beaten by 53-hub.css's own base `.still_component { height }`,
+   which came later in the bundle at the same specificity. A wide-screen
+   override has to follow every base rule it overrides, so it is the last
+   file in css/.
+   =========================================================================== */
+
+/* --- 2K and 4K, 2026-09-02 --------------------------------------------------
+   The root font keeps growing past 1920 (00-fluid-root.css), so everything
+   set in rem scales with the screen and the content column stays capped at
+   97.5rem by --gutter. What did NOT scale were the FULL-BLEED two-column
+   bands, whose grid ran the whole viewport: at 3840 the hub's category
+   photograph sat a metre from the copy it belongs to. Same fix the arrival
+   hero has had since 2026-09-01: cap the band at the content width and
+   reset the gutter inside it. Photographs that bleed edge to edge (the neon,
+   the heroes, the strips) are meant to and are left alone; the ones the
+   client's export supplied at 2200px were re-exported at that width so a
+   4K screen is not looking at a 1600px picture stretched 2.4x. */
+@media (min-width: 1700px) {
+  .catx_band,
+  .book_component,
+  .place_inner,
+  .consent_inner,
+  .marquee_component,
+  .strip_head,
+  .jump_inner {
+    max-width: 97.5rem;
+    margin-inline: auto;
+  }
+  .catx_band,
+  .book_component {
+    --gutter: 4.5rem;
+  }
+  .still_component,
+  .neon_component,
+  .lead_component {
+    height: clamp(14rem, 26vw, 34rem);
+  }
+  .concern_float {
+    width: clamp(12rem, 14vw, 20rem);
+  }
+}
+@media (min-width: 2400px) {
+  .journey_readout {
+    left: calc((100vw - 97.5rem) / 2 - 8rem);
+  }
+}
+

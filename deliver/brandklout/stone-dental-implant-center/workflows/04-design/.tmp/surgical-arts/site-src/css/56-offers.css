@@ -43,6 +43,11 @@
 }
 .offer_hero-media {
   aspect-ratio: 4 / 5;
+  /* width 100% first, then the cap. Without an explicit width a grid item
+     with justify-self: end shrinks to its content, and on Instatic the
+     content is an <img> whose width attribute is the smallest responsive
+     variant: the frame published at 300px. 2026-09-02. */
+  width: 100%;
   max-width: 28rem;
   justify-self: end;
   overflow: clip;
@@ -167,11 +172,24 @@
   text-transform: uppercase;
   margin-left: 0.4rem;
 }
-.calc_range {
+.calc_slot {
+  min-height: 2px;
+}
+/* Doubled class: Instatic's framework styles inputs by attribute selector,
+   which outranks a single class, and published the track at 4px with a
+   border, a margin and overflow: clip, which hides the thumb. Every property
+   the framework touches is restated here at (0,2,0). 2026-09-02. */
+.calc_range.calc_range {
   -webkit-appearance: none;
   appearance: none;
+  display: block;
   width: 100%;
   height: 2px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 0;
+  overflow: visible;
   background: var(--line-strong);
   outline: none;
 }
@@ -670,6 +688,7 @@ a.ways-in_card:hover {
   border-bottom-color: var(--accent-flat);
 }
 .form_textarea {
+  height: 6rem;
   min-height: 6rem;
   resize: vertical;
 }
@@ -683,7 +702,9 @@ a.ways-in_card:hover {
   line-height: 1.5;
 }
 .form_consent input {
-  margin-top: 0.3rem;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin: 0.25rem 0 0;
   accent-color: var(--green-ink);
 }
 .form_note {

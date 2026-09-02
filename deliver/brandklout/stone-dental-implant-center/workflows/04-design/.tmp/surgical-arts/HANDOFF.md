@@ -1,6 +1,20 @@
 # Stone Surgical Arts — handoff
 
 > [!IMPORTANT]
+> **2026-09-02, MORNING: TWELVE PAGES PUBLISHED.** The hold below was lifted the same morning
+> (*"the team didn't leave any feedback yet"*). Before the publish, three more things the client
+> asked for that morning: **one dark marble section on every page** (the hub's financing, About's
+> sister practices, the team's reviews, the membership mechanic, the booking page's recovery; the
+> home, doctor and dossier pages already had theirs), **2K and 4K** (the full-bleed two-column
+> bands cap at the content width above 1700px like the hero; ten full-bleed photographs
+> re-exported at their 2200px source; the wide-screen block is `css/59-wide.css`, last in the
+> cascade on purpose), and **a page-by-page comparison of live against local**, which ran five
+> times and ended at two cosmetic findings. What it found on the way is traps 21 to 25 in
+> `05-instatic-upload.md`, the biggest being that every bare `clamp()` size was dropped by the
+> conversion and now ships in the code asset with its whole cascade. Two more dossiers were built
+> overnight in the loop: **MyEllevate** and the **face and neck lift**.
+
+> [!IMPORTANT]
 > **2026-09-02: TEN PAGES, ELEVATED, AND NOT PUBLISHED.** Read this block first; everything
 > below it describes the site as it was on 2026-09-01 and is kept for its reasoning.
 >

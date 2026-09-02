@@ -69,7 +69,13 @@
 
     <div class="calc_control" data-j="rise">
       <span class="calc_label">Months of membership</span>
-      <input class="calc_range" type="range" min="1" max="24" value="12" step="1" aria-label="Months of membership" data-calc-range>
+      <!-- A SLOT, not an <input type="range">. Instatic's input module renders
+           every input as type="text" and drops step, aria-label and data-*
+           on it (found live 2026-09-02: the slider published as a 2px text
+           field). 12-elevate.js creates the range input inside this slot at
+           runtime, locally and on Instatic alike, so both render the same
+           control. Without JS the cards show the twelve-month figures. -->
+      <div class="calc_slot" data-calc-slot data-min="1" data-max="24" data-value="12" data-label="Months of membership"></div>
       <p class="calc_months"><span data-calc-months>12</span><span>months</span></p>
     </div>
 

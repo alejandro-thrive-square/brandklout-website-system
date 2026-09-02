@@ -331,6 +331,12 @@
   font-size: var(--size-text-medium);
   line-height: 1.65;
 }
+.roster_links {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--space-medium);
+}
 .roster_handle {
   display: inline-block;
   font-size: var(--size-text-tiny);

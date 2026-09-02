@@ -205,7 +205,12 @@ const PROBE = (props) => {
   const seen = new Map()
   const out = {}
   const geo = {}
-  const skip = new Set(['SCRIPT', 'STYLE', 'LINK', 'META', 'TITLE', 'HEAD'])
+  // svg and path are skipped since 2026-09-02: they carry no class, Instatic
+  // strips the SVG out of any <button> (trap 15, repaired by CSS), and the
+  // two missing arrows then shifted every later icon's index so the diff
+  // reported thirty colour and alignment findings that were the same icons
+  // one place apart. The icons' own boxes are covered by their parents.
+  const skip = new Set(['SCRIPT', 'STYLE', 'LINK', 'META', 'TITLE', 'HEAD', 'svg', 'path', 'circle', 'rect'])
   for (const el of document.querySelectorAll('body *')) {
     if (skip.has(el.tagName)) continue
     const cls = (el.className && el.className.toString ? el.className.toString() : '')

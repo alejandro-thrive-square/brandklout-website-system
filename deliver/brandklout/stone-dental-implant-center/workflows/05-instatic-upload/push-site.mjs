@@ -181,6 +181,115 @@ function harvestRoots(src) {
   return out
 }
 
+/* --- AND EVERY clamp()/min()/max() DECLARATION, harvested ---------------------
+   FOUND 2026-09-02 by compare-live.mjs on the twelve-page publish: 168
+   findings, and nearly all of them one cause. happy-dom's cssToStyleRules
+   DROPS any declaration whose value is a math function without a var() in
+   it: `font-size: clamp(6rem, 21vw, 22rem)` on the ghost words (16px live),
+   `height: min(calc(100vh - 9rem), 44rem)` on the catalogue's sticky
+   photograph (0px live, a page with an invisible picture), the doctor's name
+   at 32px, the hub's category words at 16px. `min(40rem, 86vw)` on
+   .path_panel survived the same run, so which math functions it keeps is
+   not predictable.
+
+   The encoder route (conv-encode.ts, trap 19) does NOT help here: it rewrites
+   the declaration to a `--instatic-sub-*` custom property, and custom
+   properties are exactly what the conversion drops (trap 1). import-out.json
+   carried zero of them after a run that reported 23 encoded.
+
+   So these declarations take the same road as the tokens: verbatim, in the
+   code asset, which is served last in the cascade (reset -> framework ->
+   style -> userStyles) and never parsed by happy-dom. Each rule is emitted
+   with its own selector and, where it sat inside one, its @media prelude, and
+   carries ONLY the math declarations; the rest of the rule stays in the
+   registry where the Styles panel can reach it. A value with var() in it is
+   left alone because Instatic protects those itself. */
+function harvestLossy(files) {
+  /* THE WHOLE CASCADE FOR EVERY AFFECTED PAIR, not just the math value.
+     The first version emitted only the math declarations, and the asset
+     loads LAST: an unconditional `.catalogue_media { height: min(...) }`
+     then beat the registry's own `@media (max-width: 991px) { height: auto }`
+     and the hero's `width: min(28rem, 74%)` at 991 beat the registry's
+     `width: 100%` at 600. So for every (selector, property) pair that has at
+     least one math value anywhere in the bundle, EVERY declaration of that
+     pair is emitted, in source order, inside its own @media where it had
+     one. The asset then carries the same cascade the source does for those
+     pairs, and the registry's surviving copies of the non-math ones repeat
+     identical values. Selectors are matched on their exact text. */
+  const MATH = /\b(?:clamp|min|max)\(/
+  const SAFE = /\b(?:var|env)\(/
+  const rules = (text) => {
+    const found = []
+    let i = 0
+    while (i < text.length) {
+      const open = text.indexOf('{', i)
+      if (open < 0) break
+      let depth = 0
+      let close = -1
+      for (let j = open; j < text.length; j++) {
+        if (text[j] === '{') depth++
+        else if (text[j] === '}') {
+          depth--
+          if (depth === 0) {
+            close = j
+            break
+          }
+        }
+      }
+      if (close < 0) break
+      found.push({ sel: text.slice(i, open).trim(), body: text.slice(open + 1, close) })
+      i = close + 1
+    }
+    return found
+  }
+  const isRoot = (sel) => /(^|,)\s*:root\s*$/.test(sel)
+  const entries = []
+  const push = (file, media, sel, body) => {
+    for (const d of body.split(';')) {
+      const t = d.trim()
+      const colon = t.indexOf(':')
+      if (colon < 1) continue
+      const prop = t.slice(0, colon).trim()
+      const value = t.slice(colon + 1).trim()
+      if (!/^-?[a-zA-Z][a-zA-Z-]*$/.test(prop)) continue
+      // A grouped selector is split into its parts, one entry each, so that a
+      // responsive override written as `.catx_band, .catx_band.is-reverse
+      // { min-height: 0 }` joins the `.catx_band` cascade. Found 2026-09-02:
+      // the hub's category band kept its desktop min-height on a phone.
+      for (const part of sel.split(',')) {
+        const one = part.replace(/\s+/g, ' ').trim()
+        if (one) entries.push({ file, media, sel: one, prop, value, math: MATH.test(value) && !SAFE.test(value) })
+      }
+    }
+  }
+  for (const file of files) {
+    const css = fs.readFileSync(path.join(CSS_SRC, file), 'utf8').replace(/\/\*[\s\S]*?\*\//g, ' ')
+    for (const r of rules(css)) {
+      if (/^@(media|supports)\b/.test(r.sel)) {
+        for (const n of rules(r.body)) if (!n.sel.startsWith('@') && !isRoot(n.sel)) push(file, r.sel, n.sel, n.body)
+      } else if (!r.sel.startsWith('@') && !isRoot(r.sel)) push(file, '', r.sel, r.body)
+    }
+  }
+  // A group is one (selector, property); a group is affected if any member
+  // is a bare math value. Every member of an affected group is emitted.
+  const affected = new Set(entries.filter((e) => e.math).map((e) => e.sel + '\u0000' + e.prop))
+  const out = []
+  for (const e of entries) {
+    if (!affected.has(e.sel + '\u0000' + e.prop)) continue
+    const rule = `${e.sel} { ${e.prop}: ${e.value}; }`
+    out.push({ file: e.file, text: e.media ? `${e.media} { ${rule} }` : rule })
+  }
+  return out
+}
+
+const lossyRules = harvestLossy(fs.readdirSync(CSS_SRC).filter((n) => n.endsWith('.css') && !TOKEN_FILES.includes(n)).sort())
+const lossy = []
+for (const r of lossyRules) {
+  const last = lossy[lossy.length - 1]
+  if (last && last.file === r.file) last.blocks.push(r.text)
+  else lossy.push({ file: r.file, blocks: [r.text] })
+}
+
 const harvested = []
 for (const f of fs.readdirSync(CSS_SRC).filter((n) => n.endsWith('.css')).sort()) {
   if (TOKEN_FILES.includes(f)) continue
@@ -204,7 +313,13 @@ const tokensCss =
   // this rule is dormant rather than live. One rule costs nothing and it comes
   // back with the page.
   `\n/* from the deleted 35-gallery.css — dormant, see push-site.mjs */\n` +
-  `.compare_component { --pos: 50%; }\n`
+  `.compare_component { --pos: 50%; }\n` +
+  lossy
+    .map(
+      ({ file, blocks }) =>
+        `\n/* ===== the cascade of every clamp()/min()/max() pair, from ${file}, see push-site.mjs ===== */\n` + blocks.join('\n') + '\n',
+    )
+    .join('')
 
 /* A token that is declared and never reaches the asset is the failure this
    whole block exists to stop, so assert the ones the layout cannot survive
@@ -220,6 +335,7 @@ const tokensCss =
     `tokens     ${TOKEN_FILES.join(' + ')} + ${harvested.reduce((n, h) => n + h.blocks.length, 0)} harvested :root block(s) from ` +
       `${harvested.map((h) => h.file).join(', ') || '(none)'}`,
   )
+  console.log(`lossy      ${lossy.reduce((n, h) => n + h.blocks.length, 0)} declaration(s) in the cascade of math-function pairs, from ${lossy.map((h) => h.file).join(', ') || '(none)'}`)
 }
 
 /* --- read current state --------------------------------------------------- */

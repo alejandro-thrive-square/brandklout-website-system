@@ -6,56 +6,16 @@ into the client's own Instatic instance as an editable site — pages as node tr
 registry rules, images in the media library.
 
 > [!WARNING]
-> **2026-09-02: SEVEN NEW PAGES ARE BUILT AND MUST NOT BE PUBLISHED YET.** The client, the same
-> evening the elevation started: *"remove the part on the plan to publish on Instatic. Let's do it
-> locally because the team is creating comments on BugHerd for the current iteration so let's not
-> mess up their work."* The live instance stays at seq 18, three pages, until those comments are
-> addressed on the local build. `build-import-input.mjs`, `verify-live.mjs` and
-> `compare-live.mjs` are already updated for ten pages so that the publish, when it comes, is
-> the same seven steps. `/about`, `/book`, `/memberships`, `/results` and `/treatments` moved
-> from `GONE` to `ROUTES`; `GONE` is ten now. Two new traps to expect on that run: the pages now
-> carry `<form>` and `<input type="range">` (the calculator) and `<button>`s inside the
-> catalogue with three spans each, which is trap 15's shape again; check `import-out.json` for
-> `base.button` labels and for whether `input` survives `importHtml` before trusting the apply.
-
-> [!WARNING]
-> **THREE PAGES, AND THE LIVE SITE IS NOW THOSE THREE.** Published 2026-09-01,
-> seq 18, `{"publishedPages":3}`. The blepharoplasty apply was an ADDITION, not
-> a cut: `push-site.mjs` reported **3 written, 0 deleted**, which is the number
-> to read on any re-import. `--force` was still required, because both existing
-> pages carry authored content and the refusal is unconditional.
+> **TWELVE PAGES, PUBLISHED 2026-09-02, `{"publishedPages":12}`, `12 written, 0 deleted`.** The
+> client lifted the hold the same morning (*"let's upload to Instatic, the team didn't leave any
+> feedback yet"*) and asked for the comparison page by page. `verify-live.mjs` clean: 12 routes,
+> 92 URLs, 205 asset references, 8 retired routes 404, 12/12 distinct titles. `compare-live.mjs`
+> went **168 → 122 → 48 → 5 → 2** findings across five applies in one morning, and the two that
+> remain are an 8px auto-margin on one page's footer container. Every step of that descent is a
+> trap below (21 to 24), and every one of them answered 200 on the way in.
 >
-> `/blepharoplasty` moved from `GONE` to `ROUTES` in `verify-live.mjs` in the
-> same change. It was one of the sixteen the cut deleted, so it was on the
-> must-not-resolve list; a slug belongs to one list or the other and never to
-> both, and leaving it on `GONE` would have failed the gate. `GONE` is fifteen
-> now. `compare-live.mjs` gained the third slug too.
->
-> Both gates clean after publishing: `verify-live.mjs` 3 routes, 44 URLs, 38
-> asset references, 15 retired routes confirmed 404, 3/3 distinct titles.
-> `compare-live.mjs` **no differences** across all three pages.
-
-> [!NOTE]
-> **BEFORE THAT: two pages.** Published 2026-09-01.
->
-> Seven pages on 2026-08-30, eighteen on 2026-08-31, and on 2026-09-01 the client kept the home page
-> alone. The neck lift was then built back the same day, in the journey design, as the check on
-> whether that design works for a page that has to sell a procedure. `build-import-input.mjs` lists
-> those two and no longer derives treatment rows from `treatments-data.mjs`, which was deleted.
->
-> **THIS HAS HAPPENED.** On 2026-09-01 the sixteen retired pages were deleted from the client's
-> live instance and `/neck-lift` was overwritten with the dossier rebuild, in one atomic PUT, at the
-> client's explicit request: *"let's remove all the Pages from Instatic... clean entirely instatic
-> so we can upload these two pages onto it so I can share it with the team."* The deletions are trap
-> 8 working as designed — in replace mode any stored page absent from `changedPages` is removed
-> server-side — and they are not reversible from this side.
->
-> `verify-live.mjs` carries both routes in `ROUTES` and the sixteen retired slugs in `GONE`, and it
-> is clean: 2 routes, 41 URLs, 28 asset references, 16 retired routes confirmed 404.
->
-> **The media library was NOT pruned**, per trap 11: `upload-media.mjs` is additive and nothing
-> removes an asset. The library holds 43 images, of which about twenty belong to pages that no
-> longer exist. Harmless, invisible to visitors, and it will keep accumulating.
+> **Ten photographs were re-uploaded at their 2200px source width** with the new `--only` flag on
+> `upload-media.mjs`; the library is 88 files, ten of them now orphans of the same name.
 
 > [!IMPORTANT]
 > **A THIRD-PARTY SCRIPT TAG CANNOT BE ADDED TO A PAGE. IT GOES IN THE BUNDLE.**
@@ -479,6 +439,61 @@ specificity disagree and the outcome matters, make the winner win on
 specificity: `.stone-band.stone-band` is (0,2,0) and settles it in any order.
 Doubling a class is not a hack here, it is the cheapest way to say "this one, on
 purpose".
+
+### 21. `clamp()`, `min()` and `max()` without a `var()` are dropped, and the encoder cannot save them
+
+Trap 19 said the encoder rewrites a rejected value to `--instatic-sub-<prop>` and Instatic's
+decoder restores it. **That is not what happens through the registry.** happy-dom drops
+`--custom-property` declarations (trap 1), so an encoded declaration is dropped exactly as the
+original was; `import-out.json` carried zero `instatic-sub` strings after a run that reported 23
+encoded. And the probe that decides what to encode disagrees with the converter: a
+`CSSStyleSheet` keeps `font-size: clamp(6rem, 21vw, 22rem)` (so the probe says "survives") and
+`cssToStyleRules` drops it. `min(40rem, 86vw)` survived the same run. Which math functions live
+is not predictable.
+
+On the twelve-page publish that was the ghost words at 16px, the catalogue's sticky photograph
+0px tall, the doctor's name at 32px, the hub's category words at 16px, the surgeon frame 0px,
+the doctor page's team band gone: 168 findings from one cause.
+
+**Fix:** `push-site.mjs` `harvestLossy()`. Every declaration whose value carries a bare math
+function goes into the **code asset** with the tokens, served verbatim and last in the cascade.
+And not the math declaration alone: **the whole cascade of that (selector, property) pair**,
+every declaration of it in every `@media`, in source order, with grouped selectors split into
+their parts. The first version emitted only the math values, and an unconditional
+`.catalogue_media { height: min(…) }` at the end of the cascade beat the registry's own
+`@media (max-width: 991px) { height: auto }`; the second version missed
+`.catx_band, .catx_band.is-reverse { min-height: 0 }` because the group's text is not
+`.catx_band`. 49 declarations in the asset now. `conv-encode.ts` is back to what it was.
+
+### 22. `<input type="range">` publishes as `type="text"`, with `step`, `aria-label` and `data-*` gone
+
+Instatic's `base.input` renders one input type. The membership calculator's slider published as
+a 2px text field and its `data-calc-range` hook was gone, so the calculator was inert. Divs keep
+their `data-*` attributes (`data-monthly`, `data-calc-banked` all arrived); inputs do not.
+
+**Fix:** the markup ships a `<div class="calc_slot" data-calc-slot …>` and `12-elevate.js`
+creates the range input inside it at runtime on both sides. The same rule applies to anything
+`<input>` needs beyond a text field.
+
+### 23. Whitespace between inline elements is collapsed to nothing
+
+Two `<a>`s separated by `&nbsp;&nbsp;` published touching. The text diff caught it. Lay inline
+siblings out with a flex container and `gap`, never with whitespace.
+
+### 24. A grid item with `justify-self: end` and no width shrinks to the image variant
+
+Locally `<img width="1160">` makes a frame's max-content 1160px and `max-width: 28rem` caps it.
+Live, Instatic's image module writes the smallest responsive variant's width on the `<img>`
+and the frame published at 300px. **Give every photographic frame an explicit `width: 100%`
+before its `max-width`.** Instatic also styles inputs by attribute selector, which outranks a
+single class: `.calc_range.calc_range` restates every property the framework touches.
+
+### 25. The diff tool skips `svg` and `path`
+
+They carry no class, Instatic strips the SVG out of any `<button>` (trap 15), and the two
+missing carousel arrows shifted every later icon's index so the diff reported thirty colour and
+alignment findings that were the same icons one place apart. `compare-live.mjs` skips them; the
+icons' boxes are covered by their parents.
 
 ### The check: `compare-live.mjs`
 
