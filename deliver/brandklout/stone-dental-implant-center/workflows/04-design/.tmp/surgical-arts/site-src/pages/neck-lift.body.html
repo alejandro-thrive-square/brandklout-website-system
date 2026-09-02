@@ -260,7 +260,17 @@
                 <div class="check_item"><input class="check_input" type="checkbox" id="chk-jaw"><label for="chk-jaw">A jawline that has lost its border entirely rather than softened</label></div>
                 <div class="check_item"><input class="check_input" type="checkbox" id="chk-weight"><label for="chk-weight">Significant weight loss that has left the neck with more skin than it needs</label></div>
               </fieldset>
-              <output class="check_out" aria-live="polite">
+              <!-- THE FIVE READINGS MOVED HERE FROM 11-dossier.js on
+                   2026-09-01, when the blepharoplasty page arrived and the
+                   runtime turned out to be holding five sentences about necks.
+                   `data-r1` to `data-r4` are the ticked states; the zero state
+                   is the text content below, which is what a reader with no
+                   JavaScript sees and therefore has to be the authored one. -->
+              <output class="check_out" aria-live="polite"
+                      data-r1="One sign on its own settles nothing. It is worth an hour with Dr. Stone to find out which of the three neck procedures, if any, fits what she measures."
+                      data-r2="Two of the four is the usual reason people book. Bring them to a consultation; the answer may still be the smaller operation."
+                      data-r3="Three of the four is the pattern this operation is for, though the retraction test is what actually decides it and that has to be done in person."
+                      data-r4="All four is the picture this page describes. It is still Dr. Stone's examination that says whether it is a neck lift, a face and neck lift, or something less.">
                 <span class="check_out-count">0 of 4</span>
                 <span class="check_out-text">Tick whichever apply. Nothing here is stored or sent.</span>
               </output>
@@ -499,7 +509,7 @@
        nothing is the most expensive bug on a site like this.
        ==================================================================== -->
   <section class="book_component" id="contact">
-    <div class="book_media">
+    <div class="book_media u-focus-figure">
       <!-- THE PRACTICE'S OWN ROOM, not a stock consultation. The first build
            used a stock desk scene that had a pill bottle on it, which reads
            pharmacy rather than surgery, and stock is the wrong call in the one
@@ -507,7 +517,7 @@
            number. This photograph is the actual consultation room at 72 Andorra
            Dr. It is also on the home page's first process panel; the same real
            room appearing twice on a two-page site is a constant, not a repeat. -->
-      <img src="assets/ssa-consult-room.webp" alt="A consultation room at Stone Surgical Arts" width="1600" height="900" loading="lazy">
+      <img src="assets/ssa-consult-room.webp" alt="A woman with a clipboard seated in an armchair in the practice's consultation room" width="1600" height="900" loading="lazy">
     </div>
     <div class="book_body">
       <p class="dsec_mark">Book it</p>

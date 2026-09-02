@@ -136,6 +136,22 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
   await pg.goto(url, { waitUntil: "networkidle0", timeout: 60000 });
 
   // the layer switcher
+  //
+  // THE LAYER NAMES ARE READ OFF THE PAGE, not written down here. This block
+  // asserted "active === 'muscle'" and clicked "#tab-skin" until 2026-09-01,
+  // which was the neck's anatomy hard-coded into the suite. The blepharoplasty
+  // page runs the same control over skin, muscle and fat, and a suite that only
+  // knows one page's tissue names is a suite that can only gate one page.
+  //
+  // What is actually being asserted is unchanged and is a property of the
+  // CONTROL rather than of the anatomy: the surface layer is the first bar in
+  // the DOM, the deepest is the last, the indicator fills from the surface down
+  // to whichever is chosen, and the strip opens on the deepest.
+  const anatomy = await pg.evaluate(() => {
+    const bars = [...document.querySelectorAll(".layers_bar")].map((b) => b.getAttribute("data-layer"));
+    return { surface: bars[0], deepest: bars[bars.length - 1], count: bars.length };
+  });
+
   const start = await pg.evaluate(() => ({
     visible: [...document.querySelectorAll(".layers_panel")].filter((p) => !p.hidden).length,
     name: document.querySelector(".layers_panel:not([hidden]) .layers_name").textContent.trim(),
@@ -143,10 +159,16 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
     active: document.querySelector(".layers_bar.is-active")?.getAttribute("data-layer"),
   }));
   check("one layer panel is shown at a time", start.visible === 1, `${start.visible} visible, "${start.name}"`);
-  check("choosing the deepest layer lights all three bars", start.lit === 3 && start.active === "muscle",
-    `${start.lit} lit, active ${start.active}`);
+  check("choosing the deepest layer lights all three bars",
+    start.lit === anatomy.count && start.active === anatomy.deepest,
+    `${start.lit} lit, active ${start.active}, deepest ${anatomy.deepest}`);
 
-  await pg.click("#tab-skin");
+  const surfaceTab = `#tab-${anatomy.surface}`;
+  const surfaceName = await pg.evaluate(
+    (l) => document.querySelector(`#panel-${l} .layers_name`).textContent.trim(),
+    anatomy.surface
+  );
+  await pg.click(surfaceTab);
   await new Promise((r) => setTimeout(r, 320));
   const skin = await pg.evaluate(() => ({
     name: document.querySelector(".layers_panel:not([hidden]) .layers_name").textContent.trim(),
@@ -154,16 +176,23 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
     active: document.querySelector(".layers_bar.is-active")?.getAttribute("data-layer"),
     selected: document.querySelector('.layers_tab[aria-selected="true"]').id,
   }));
-  check("the tab swaps the panel", skin.name === "Excess skin", `now "${skin.name}"`);
-  check("the surface layer lights one bar", skin.lit === 1 && skin.active === "skin", `${skin.lit} lit, active ${skin.active}`);
-  check("aria-selected follows the click", skin.selected === "tab-skin", skin.selected);
+  check("the tab swaps the panel", skin.name === surfaceName, `now "${skin.name}"`);
+  check("the surface layer lights one bar", skin.lit === 1 && skin.active === anatomy.surface,
+    `${skin.lit} lit, active ${skin.active}`);
+  check("aria-selected follows the click", skin.selected === `tab-${anatomy.surface}`, skin.selected);
 
   // the arrow keys, which is the half of the tab pattern that is usually missing
-  await pg.focus("#tab-skin");
+  const nextId = await pg.evaluate((id) => {
+    const tabs = [...document.querySelectorAll(".layers_tab")];
+    const i = tabs.findIndex((t) => t.id === id);
+    return tabs[(i + 1) % tabs.length].id;
+  }, `tab-${anatomy.surface}`);
+  await pg.focus(surfaceTab);
   await pg.keyboard.press("ArrowRight");
   await new Promise((r) => setTimeout(r, 120));
   const wrapped = await pg.evaluate(() => document.querySelector('.layers_tab[aria-selected="true"]').id);
-  check("the arrow keys move between tabs", wrapped === "tab-muscle", `ArrowRight from skin -> ${wrapped}`);
+  check("the arrow keys move between tabs", wrapped === nextId,
+    `ArrowRight from ${anatomy.surface} -> ${wrapped}, expected ${nextId}`);
 
   // the self-check
   const boxes = await pg.$$(".check_input");

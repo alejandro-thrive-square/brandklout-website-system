@@ -6,7 +6,24 @@ into the client's own Instatic instance as an editable site — pages as node tr
 registry rules, images in the media library.
 
 > [!WARNING]
-> **TWO PAGES, AND THE LIVE SITE IS NOW THOSE TWO.** Published 2026-09-01.
+> **THREE PAGES, AND THE LIVE SITE IS NOW THOSE THREE.** Published 2026-09-01,
+> seq 18, `{"publishedPages":3}`. The blepharoplasty apply was an ADDITION, not
+> a cut: `push-site.mjs` reported **3 written, 0 deleted**, which is the number
+> to read on any re-import. `--force` was still required, because both existing
+> pages carry authored content and the refusal is unconditional.
+>
+> `/blepharoplasty` moved from `GONE` to `ROUTES` in `verify-live.mjs` in the
+> same change. It was one of the sixteen the cut deleted, so it was on the
+> must-not-resolve list; a slug belongs to one list or the other and never to
+> both, and leaving it on `GONE` would have failed the gate. `GONE` is fifteen
+> now. `compare-live.mjs` gained the third slug too.
+>
+> Both gates clean after publishing: `verify-live.mjs` 3 routes, 44 URLs, 38
+> asset references, 15 retired routes confirmed 404, 3/3 distinct titles.
+> `compare-live.mjs` **no differences** across all three pages.
+
+> [!NOTE]
+> **BEFORE THAT: two pages.** Published 2026-09-01.
 >
 > Seven pages on 2026-08-30, eighteen on 2026-08-31, and on 2026-09-01 the client kept the home page
 > alone. The neck lift was then built back the same day, in the journey design, as the check on
@@ -26,6 +43,27 @@ registry rules, images in the media library.
 > **The media library was NOT pruned**, per trap 11: `upload-media.mjs` is additive and nothing
 > removes an asset. The library holds 43 images, of which about twenty belong to pages that no
 > longer exist. Harmless, invisible to visitors, and it will keep accumulating.
+
+> [!IMPORTANT]
+> **A THIRD-PARTY SCRIPT TAG CANNOT BE ADDED TO A PAGE. IT GOES IN THE BUNDLE.**
+>
+> Instatic has **no custom-head field**, and `importHtml` strips every
+> `<script>` out of a page it imports — that is the `strippedScripts: 2` this
+> workflow prints per page on every run. A tag pasted into
+> `partials/head.html` or a page body works perfectly in `final-site/` and then
+> simply does not exist on the published site, which is the worse of the two
+> failures because the local build proves it works.
+>
+> There is exactly ONE script asset for the whole site, `src/scripts/site.js`,
+> assembled by `push-site.mjs` as `bootstrap + vendor.js + site.js`. Anything
+> third-party has to be a JS module in `site-src/js/` that injects the tag at
+> runtime. `js/90-bugherd.js` is the worked example: `build-site.mjs`
+> concatenates `js/*.js` in filename order into `assets/site.js`,
+> `push-site.mjs` reads that file, and **no part of this workflow needs
+> changing.** `90-` sorts last and marks it as not-core.
+>
+> Anything of that kind should also be HOST-GATED rather than remembered about
+> at launch. See the header of `js/90-bugherd.js`.
 
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the scripts or technical logic of this workflow must be

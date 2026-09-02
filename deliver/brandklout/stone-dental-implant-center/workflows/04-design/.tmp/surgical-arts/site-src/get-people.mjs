@@ -163,6 +163,44 @@ const SLOTS = [
     avoid: ["young", "teen", "child", "glamour", "studio flash"],
     used: "index.html — the Face category card. REPLACES cat-face-tall.webp, a marble bust on a plinth.",
   },
+
+  /* --- the blepharoplasty page, 2026-09-01 --------------------------------
+     TWO NEW SLOTS AND NOT FOUR. The eyelid page reuses `p-recovery-home.webp`
+     and `p-outdoors.webp` from the neck lift, because a sofa in the first
+     fortnight and a park at month three are pictures of a RECOVERY, not of a
+     procedure, and nothing in either frame is about a neck. The two that had
+     to be replaced are the two where the subject was the anatomy: a profile of
+     a jawline and a hand resting on a throat are both the wrong body part on a
+     page about eyes, and leaving them would have been the visual version of
+     the mistake the client already caught once. */
+  {
+    file: "p-eyes-portrait.webp",
+    id: 315873470, // the first hit was a broad open-mouthed smile by a window, and a big smile closes the eye. This page is about the upper lid; the subject has to be looking out of it.
+    aspect: 2 / 3,
+    term: "mature woman fifties face portrait eyes open natural window light neutral background",
+    orientation: "vertical",
+    prefer: ["mature", "portrait", "eyes", "woman", "natural", "calm", "face"],
+    // Same age rule as every slot here, and it bites harder on this one: eyelid
+    // stock is overwhelmingly a twenty-year-old's eye in a beauty close-up.
+    avoid: ["young", "teen", "child", "glamour", "makeup", "mascara", "lashes", "eyelash", "closeup"],
+    used: "blepharoplasty.html — the full-bleed hero. Object-position is set at 38% rather than the neck page's 55%, because on this page the band that has to land is the eyes, not the jaw.",
+  },
+  {
+    file: "p-eyes-mirror.webp",
+    // Three were tried before this one. 366817402 was a teal-tiled locker room and
+    // the subject looked unhappy with her own face, which is a register this
+    // practice does not use. 396822584 was warm but she is pulling her cheeks in a
+    // skincare-advert gesture, with soap bottles and a houseplant in shot. This one
+    // is a face inside a round mirror, in the site's own warm neutrals, and the eye
+    // and upper lid are the thing she is actually looking at.
+    id: 58988501,
+    aspect: 3 / 2,
+    term: "mature woman touching her eyebrow temple with fingertip looking in mirror soft daylight",
+    orientation: "horizontal",
+    prefer: ["mature", "mirror", "reflection", "looking", "woman", "middle aged", "bathroom"],
+    avoid: ["makeup application", "cosmetics", "brush", "mascara", "young", "teen", "girl"],
+    used: "blepharoplasty.html — who it suits. The section is a self-assessment and the brow test is done in front of a mirror, which is what this is a picture of.",
+  },
 ];
 
 const KEY = apiKey();

@@ -103,6 +103,21 @@
   object-position: 50% 66%;
   display: block;
 }
+/* THE ONE MODIFIER THIS COMPONENT HAS, added 2026-09-01 with the second dossier
+   page. 66% is right when the subject of the page is at the bottom of a face:
+   the neck lift's hero has to show a mouth, a jaw and a throat. It is wrong
+   when the subject is at the TOP of one. At 66% the blepharoplasty hero was a
+   crop of a nose and a mouth, on a page about eyelids, which is the same class
+   of mistake as the forehead crop this rule was written to fix.
+
+   18%, not 32%, because the frame is a wide band cut from a 2:3 portrait: only
+   about 36% of the source's height is ever on screen at 1440, so the value is
+   much more sensitive than it looks and half a face fits between two of these
+   numbers. Horizontal stays at 50%; a 1400px source in a 1440px frame has no
+   horizontal slack to position with, so the crop is a vertical decision only. */
+.dhero_media.is-upper img {
+  object-position: 50% 18%;
+}
 /* The scrim. Two stops rather than a flat wash: the type sits in the bottom
    third and darkening the whole photograph to serve it would throw away the
    picture, which is the reason the hero is a photograph at all. */

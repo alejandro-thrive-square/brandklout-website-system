@@ -627,10 +627,19 @@
     if (!strip || tabs.length !== 3 || panels.length !== 3) return;
 
     // The depth indicator fills from the surface DOWN TO the active layer, so
-    // "muscle" lights all three and "skin" lights one. That is the point being
-    // made: the deep work is under the other two, and an operation that reaches
-    // the muscle has been through them.
-    var order = ["skin", "fat", "muscle"];
+    // the deepest tab lights all three and the surface one lights one. That is
+    // the point being made: the deep work is under the other two, and an
+    // operation that reaches it has been through them.
+    //
+    // THE ORDER IS READ OUT OF THE MARKUP, surface first, in DOM order. It was
+    // a literal `["skin", "fat", "muscle"]` until 2026-09-01, which was the
+    // neck's anatomy hard-coded into a file shared by every dossier page. The
+    // blepharoplasty page's three tissues are skin, muscle and fat, in that
+    // order, and one page's anatomy sitting in the runtime would have meant
+    // either a wrong indicator or a branch on the page name. The bars already
+    // declare the order; this reads what they declare.
+    var order = [];
+    for (var o = 0; o < bars.length; o++) order.push(bars[o].getAttribute("data-layer"));
 
     function select(idx, focus) {
       for (var i = 0; i < tabs.length; i++) {
@@ -689,13 +698,18 @@
     var text = form.querySelector(".check_out-text");
     if (!inputs.length || !count || !text) return;
 
-    var READINGS = [
-      "Tick whichever apply. Nothing here is stored or sent.",
-      "One sign on its own settles nothing. It is worth an hour with Dr. Stone to find out which of the three neck procedures, if any, fits what she measures.",
-      "Two of the four is the usual reason people book. Bring them to a consultation; the answer may still be the smaller operation.",
-      "Three of the four is the pattern this operation is for, though the retraction test is what actually decides it and that has to be done in person.",
-      "All four is the picture this page describes. It is still Dr. Stone's examination that says whether it is a neck lift, a face and neck lift, or something less.",
-    ];
+    // THE READINGS LIVE IN THE MARKUP, on `data-r1` to `data-r4` of the output
+    // element, with the zero state as its own text content. They were five
+    // string literals in this file until 2026-09-01, all of them about necks,
+    // in a runtime shared by every dossier page.
+    //
+    // The zero state is read rather than declared for a reason worth keeping:
+    // it is the sentence a reader sees with no JavaScript at all, so it has to
+    // be the one the author wrote in the HTML, and this file must not be able
+    // to disagree with it.
+    var out = form.querySelector(".check_out");
+    var READINGS = [text.textContent];
+    for (var r = 1; out && out.dataset["r" + r]; r++) READINGS.push(out.dataset["r" + r]);
 
     function update() {
       var n = 0;
@@ -817,4 +831,81 @@
   } else {
     boot();
   }
+})();
+
+
+/* ===== js/90-bugherd.js ===== */
+/* ===========================================================================
+   BUGHERD — the review sidebar, on the review host only. 2026-09-01.
+
+   WHY THIS IS A JS MODULE AND NOT A <script> TAG IN partials/head.html.
+   Instatic has NO custom-head field, and `importHtml` strips every <script>
+   out of a page it imports: `ship.sh` reports `strippedScripts: 2` per page on
+   every run, which is exactly this. A tag pasted into the head partial would
+   work in `final-site/` and then silently not exist on the published site,
+   which is the worst of the two possible failures because the local build
+   would prove it works.
+
+   Instatic has exactly ONE script asset for the whole site,
+   `src/scripts/site.js`, assembled by push-site.mjs as
+   `bootstrap + vendor.js + site.js`. That bundle is the only hook a
+   third-party script has. This file is part of `site.js` — build-site.mjs
+   concatenates `js/*.js` in FILENAME ORDER — so it reaches both targets from
+   one place with no change to the upload workflow at all. `90-` puts it last,
+   after the runtime and the two page layers, and marks it as not-core.
+
+   > [!IMPORTANT]
+   > **IT IS HOST-GATED, AND THE GATE IS THE POINT.**
+   >
+   > `partials/head.html` carries an explicit decision this file would
+   > otherwise contradict: the typefaces are self-hosted rather than pulled
+   > from Google because *"this is a medical practice, and a third-party
+   > stylesheet on every page view hands Google the IP of everyone who visits"*.
+   > A feedback widget loading unconditionally from bugherd.com is the same
+   > trade made in the opposite direction, on a site whose visitors are people
+   > researching surgery.
+   >
+   > So it runs on the Railway review instance and nowhere else. When this
+   > moves to stonesurgicalarts.com the script stops loading BY ITSELF. That is
+   > a deliberate choice of mechanism over discipline: "remember to strip
+   > BugHerd before launch" is a checklist item, and checklist items are
+   > forgotten. A hostname test cannot be.
+   >
+   > It also keeps `check-standalone.mjs` green. That suite asserts NOTHING is
+   > fetched off the file so the packed previews work on a plane, and an
+   > unconditional third-party script fails it on all three.
+
+   Add a host here to extend it. Do not remove the gate and rely on removing
+   the file later.
+   =========================================================================== */
+(function () {
+  "use strict";
+
+  /* The Instatic instance the team reviews on. Suffix match rather than
+     equality, so a Railway redeploy that mints a new generated domain does not
+     silently turn the sidebar off. */
+  var REVIEW_HOSTS = [".up.railway.app"];
+
+  var host = String(window.location.hostname || "");
+  var onReviewHost = REVIEW_HOSTS.some(function (suffix) {
+    return host === suffix.replace(/^\./, "") || host.slice(-suffix.length) === suffix;
+  });
+  if (!onReviewHost) return;
+
+  /* The project key. It is a PUBLIC client-side key by design — it ships in the
+     page source of every BugHerd-instrumented site — so it is not a secret and
+     it does not belong in .env. It does identify the board, so swapping client
+     means swapping this. */
+  var API_KEY = "wss7lflvrdyxfigqiilzsq";
+  var SRC = "https://www.bugherd.com/sidebarv2.js?apikey=" + API_KEY;
+
+  /* Guard on the positive, same rule as the rest of this build's JS. A second
+     copy of the sidebar is a visible bug, and Instatic's own editor chrome can
+     re-run a bundle. */
+  if (document.querySelector('script[src*="bugherd.com/sidebarv2.js"]')) return;
+
+  var s = document.createElement("script");
+  s.src = SRC;
+  s.async = true;
+  document.head.appendChild(s);
 })();

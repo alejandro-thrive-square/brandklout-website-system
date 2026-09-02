@@ -37,18 +37,22 @@ const TMP = path.join(HERE, '.tmp')
 const mediaMap = JSON.parse(fs.readFileSync(path.join(TMP, 'media-map.json'), 'utf8')).map
 const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'seo.json'), 'utf8'))
 
-/* ONE PAGE, since 2026-09-01. The client kept the home page; the other
-   seventeen were deleted from the static build, and `treatments-data.mjs` --
-   the collection the twelve treatment rows were derived from -- went with them.
-   This file used to import it.
+/* THREE PAGES, since 2026-09-01. One after the client's cut, two once the neck
+   lift was rebuilt, three once the blepharoplasty followed it as the second
+   dossier. `treatments-data.mjs` -- the collection the twelve treatment rows
+   used to be derived from -- is still deleted, and this list is still written
+   out by hand rather than generated. That is deliberate: see the warning.
 
    > [!WARNING]
    > This list IS the site, and trap 8 is the reason that matters. In replace
    > mode any stored page absent from `changedPages` is DELETED server-side.
-   > The live instance still holds eighteen pages; the next apply leaves TWO.
-   > Sixteen are removed, and the neck lift is rewritten from the v1 design to
-   > the journey one at the same slug. That is the intended outcome, and it is
-   > irreversible from here, so confirm it is wanted before running --apply.
+   > Removing a line here deletes a live page. The 2026-09-01 cut from eighteen
+   > to two happened exactly that way and was not reversible from this side.
+   >
+   > **Adding a line is safe.** The blepharoplasty apply is an addition: the
+   > live instance holds `index` and `neck-lift`, both are still listed, and
+   > `/blepharoplasty` is a slug that has existed before (it was one of the
+   > sixteen deleted) so it is being created rather than overwritten.
 
    Slug order still matters: `index` must exist first, because setup already
    created a page at that slug and it is the one we overwrite rather than
@@ -56,6 +60,7 @@ const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'seo.json'), 
 const PAGES = [
   { file: 'index.html', slug: 'index', title: 'Home' },
   { file: 'neck-lift.html', slug: 'neck-lift', title: 'Neck Lift' },
+  { file: 'blepharoplasty.html', slug: 'blepharoplasty', title: 'Blepharoplasty' },
 ]
 
 const problems = []

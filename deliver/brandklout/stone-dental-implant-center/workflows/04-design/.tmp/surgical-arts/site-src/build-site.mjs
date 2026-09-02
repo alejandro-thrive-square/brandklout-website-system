@@ -62,6 +62,12 @@ const PAGES = [
   // cta FALSE: it closes on its own booking chapter; the shared band would be a
   // second "book a consultation" immediately after the first.
   { slug: "neck-lift", src: "neck-lift", photoHero: true, motion: false, cta: false },
+  // THE THIRD PAGE, 2026-09-01. Same three flags as the neck lift and for the
+  // same three reasons, which is the finding: a second dossier page is a row
+  // here and a body file, and it needed no new flag, no new stylesheet and no
+  // new JS module. What it did need was two hard-coded strings moved out of
+  // js/11-dossier.js and into the markup, because they were about necks.
+  { slug: "blepharoplasty", src: "blepharoplasty", photoHero: true, motion: false, cta: false },
 ];
 
 /* --- bundles --------------------------------------------------------------
@@ -174,7 +180,15 @@ for (const page of PAGES) {
   // `aria-current="page"` rather than a class, in both the bar and the drawer.
   // 20-navbar.css already styles the attribute selector, so the marker is
   // meaningful to a screen reader first and visible second.
-  const cur = (s) => s.replace(/\{\{CUR_NECK\}\}/g, page.slug === "neck-lift" ? ' aria-current="page"' : "");
+  // `{{CUR_<SLUG>}}` expands to `aria-current="page"` on that page and to
+  // nothing everywhere else. It was a single `{{CUR_NECK}}` while there was one
+  // treatment link; a second link on 2026-09-01 made the token generic rather
+  // than adding `{{CUR_BLEPH}}` beside it, because that road ends with twelve
+  // of them. `CUR_NECK_LIFT` -> `neck-lift`: underscores become hyphens.
+  const cur = (s) =>
+    s.replace(/\{\{CUR_([A-Z0-9_]+)\}\}/g, (_, key) =>
+      key.toLowerCase().replace(/_/g, "-") === page.slug ? ' aria-current="page"' : ""
+    );
   const nav = cur(navbar).replace("{{NAV_MODE}}", page.photoHero ? "" : " is-static");
   const drawerHtml = cur(drawer);
 

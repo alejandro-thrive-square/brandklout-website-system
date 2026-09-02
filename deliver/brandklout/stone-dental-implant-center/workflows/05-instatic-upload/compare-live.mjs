@@ -81,7 +81,7 @@ if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
 const args = process.argv.slice(2).filter((a) => a !== '--shots')
 const wantShots = process.argv.includes('--shots')
-const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index', 'neck-lift']
+const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index', 'neck-lift', 'blepharoplasty']
 const WIDTHS = args.find((a) => /^\d+$/.test(a)) ? [Number(args.find((a) => /^\d+$/.test(a)))] : [1440, 390]
 
 /* The properties worth comparing. Deliberately wide: the failures this exists

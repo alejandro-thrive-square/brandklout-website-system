@@ -19,9 +19,9 @@
  */
 const BASE = 'https://stone-surgical-arts-production.up.railway.app'
 
-/* ONE ROUTE, since 2026-09-01. This was six core routes plus twelve derived
-   from `treatments-data.mjs`; the client kept the home page and the collection
-   was deleted with the pages.
+/* THREE ROUTES, since the blepharoplasty was published on 2026-09-01. This was
+   six core routes plus twelve derived from `treatments-data.mjs`; the client
+   kept the home page and the collection was deleted with the pages.
 
    Note what this gate can and cannot tell you now. It verifies the routes below
    are healthy. It CANNOT tell you the retired ones are gone, because a route
@@ -31,16 +31,20 @@ const BASE = 'https://stone-surgical-arts-production.up.railway.app'
 
    `/neck-lift` is on BOTH lists' worth of history and on neither by accident:
    the slug existed on the live instance carrying the v1 design, and it is being
-   overwritten rather than retired, so it belongs in ROUTES. */
-const ROUTES = ['/', '/neck-lift']
+   overwritten rather than retired, so it belongs in ROUTES.
 
-/* Routes that must NOT resolve. These are the sixteen slugs the 2026-09-01 cut
+   `/blepharoplasty` MOVED FROM `GONE` TO `ROUTES` on 2026-09-01. It was one of
+   the sixteen the cut deleted, and it is back as the second dossier page. A
+   slug can be on one list or the other and never on both: leaving it on GONE
+   after publishing it would have failed this gate, which is the gate working. */
+const ROUTES = ['/', '/neck-lift', '/blepharoplasty']
+
+/* Routes that must NOT resolve. These were the sixteen slugs the 2026-09-01 cut
    deleted, and this list is what turns the cut from "we did not upload them"
-   into a checked outcome. Empty until the cut is published; run this gate after
-   the first --apply that follows it. */
+   into a checked outcome. FIFTEEN now: `/blepharoplasty` was rebuilt and moved
+   to ROUTES the same day. Move a slug across rather than adding it to both. */
 const GONE = [
   '/about',
-  '/blepharoplasty',
   '/book',
   '/brow-lift',
   '/buccal-fat-reduction',

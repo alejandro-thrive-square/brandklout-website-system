@@ -78,10 +78,19 @@
     if (!strip || tabs.length !== 3 || panels.length !== 3) return;
 
     // The depth indicator fills from the surface DOWN TO the active layer, so
-    // "muscle" lights all three and "skin" lights one. That is the point being
-    // made: the deep work is under the other two, and an operation that reaches
-    // the muscle has been through them.
-    var order = ["skin", "fat", "muscle"];
+    // the deepest tab lights all three and the surface one lights one. That is
+    // the point being made: the deep work is under the other two, and an
+    // operation that reaches it has been through them.
+    //
+    // THE ORDER IS READ OUT OF THE MARKUP, surface first, in DOM order. It was
+    // a literal `["skin", "fat", "muscle"]` until 2026-09-01, which was the
+    // neck's anatomy hard-coded into a file shared by every dossier page. The
+    // blepharoplasty page's three tissues are skin, muscle and fat, in that
+    // order, and one page's anatomy sitting in the runtime would have meant
+    // either a wrong indicator or a branch on the page name. The bars already
+    // declare the order; this reads what they declare.
+    var order = [];
+    for (var o = 0; o < bars.length; o++) order.push(bars[o].getAttribute("data-layer"));
 
     function select(idx, focus) {
       for (var i = 0; i < tabs.length; i++) {
@@ -140,13 +149,18 @@
     var text = form.querySelector(".check_out-text");
     if (!inputs.length || !count || !text) return;
 
-    var READINGS = [
-      "Tick whichever apply. Nothing here is stored or sent.",
-      "One sign on its own settles nothing. It is worth an hour with Dr. Stone to find out which of the three neck procedures, if any, fits what she measures.",
-      "Two of the four is the usual reason people book. Bring them to a consultation; the answer may still be the smaller operation.",
-      "Three of the four is the pattern this operation is for, though the retraction test is what actually decides it and that has to be done in person.",
-      "All four is the picture this page describes. It is still Dr. Stone's examination that says whether it is a neck lift, a face and neck lift, or something less.",
-    ];
+    // THE READINGS LIVE IN THE MARKUP, on `data-r1` to `data-r4` of the output
+    // element, with the zero state as its own text content. They were five
+    // string literals in this file until 2026-09-01, all of them about necks,
+    // in a runtime shared by every dossier page.
+    //
+    // The zero state is read rather than declared for a reason worth keeping:
+    // it is the sentence a reader sees with no JavaScript at all, so it has to
+    // be the one the author wrote in the HTML, and this file must not be able
+    // to disagree with it.
+    var out = form.querySelector(".check_out");
+    var READINGS = [text.textContent];
+    for (var r = 1; out && out.dataset["r" + r]; r++) READINGS.push(out.dataset["r" + r]);
 
     function update() {
       var n = 0;

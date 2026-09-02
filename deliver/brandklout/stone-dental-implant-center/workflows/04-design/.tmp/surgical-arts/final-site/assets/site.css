@@ -327,6 +327,30 @@ textarea {
   left: 0;
 }
 
+/* A FOCAL POINT THAT BELONGS TO THE PHOTOGRAPH, not to the component.
+
+   `ssa-consult-room.webp` is the practice's own consultation room and there is
+   a woman seated in an armchair on the RIGHT of the frame, near the TOP. Every
+   slot it fills crops it, and a centred crop loses her in every one of them:
+   the home page's process panel is a wide letterbox and cut her off at the
+   chin, keeping her legs; the two booking chapters are a tall column and cut
+   her out of frame entirely, keeping a plant and an empty chair. The client,
+   2026-09-01: *"Here the person does not show at all. Choose the legs that are
+   showing."*
+
+   One value serves both crops because they crop on OPPOSITE axes: the wide
+   slot has no horizontal slack, so the 100% is inert there and only the 0%
+   does any work, and the tall slot has no vertical slack, so the reverse. That
+   is why this is one utility on the image rather than a modifier on each of
+   the two components, which would have been two numbers to keep in step.
+
+   It lives here, with `.u-sr-only`, because both `50-journey.css` and
+   `51-dossier.css` need it and neither owns it. Add a slot for this image and
+   add the class; the focal point does not have to be worked out again. */
+.u-focus-figure img {
+  object-position: 100% 0%;
+}
+
 .u-sr-only {
   position: absolute;
   width: 1px;
@@ -3235,6 +3259,21 @@ a.ways_card:focus-visible .ways_more span {
      position with and the crop is entirely a vertical decision. */
   object-position: 50% 66%;
   display: block;
+}
+/* THE ONE MODIFIER THIS COMPONENT HAS, added 2026-09-01 with the second dossier
+   page. 66% is right when the subject of the page is at the bottom of a face:
+   the neck lift's hero has to show a mouth, a jaw and a throat. It is wrong
+   when the subject is at the TOP of one. At 66% the blepharoplasty hero was a
+   crop of a nose and a mouth, on a page about eyelids, which is the same class
+   of mistake as the forehead crop this rule was written to fix.
+
+   18%, not 32%, because the frame is a wide band cut from a 2:3 portrait: only
+   about 36% of the source's height is ever on screen at 1440, so the value is
+   much more sensitive than it looks and half a face fits between two of these
+   numbers. Horizontal stays at 50%; a 1400px source in a 1440px frame has no
+   horizontal slack to position with, so the crop is a vertical decision only. */
+.dhero_media.is-upper img {
+  object-position: 50% 18%;
 }
 /* The scrim. Two stops rather than a flat wash: the type sits in the bottom
    third and darkening the whole photograph to serve it would throw away the

@@ -1,9 +1,10 @@
 # Stone Surgical Arts — handoff
 
-**Two pages.** The home page and the neck lift, built locally. Written 2026-08-30; content
-expansion 2026-08-31; **cut to the home page alone 2026-09-01, and the neck lift built back in the
-journey design the same day.** Only the home page is live on the client's Instatic instance, and it
-is live at the eighteen-page version; see "Taking it into Instatic".
+**Three pages.** The home page, the neck lift and the blepharoplasty, built locally. Written
+2026-08-30; content expansion 2026-08-31; **cut to the home page alone 2026-09-01, the neck lift
+built back in the journey design the same day, and the blepharoplasty added the same day as the
+second dossier.** All three are live on the client's Instatic instance as of 2026-09-01, seq 18.
+See "The pages" for what the second dossier cost, and "Taking it into Instatic".
 
 > [!IMPORTANT]
 > **THE NECK LIFT WAS REBUILT ON 2026-09-01, HOURS AFTER IT WAS FIRST BUILT.**
@@ -119,9 +120,10 @@ is live at the eighteen-page version; see "Taking it into Instatic".
 | **Copy gate** | `cd site-src && node check-copy.mjs` — **no em dashes in copy** ([SYSTEM_RULES.md](../../../../../../SYSTEM_RULES.md)). Runs on the BUILT output |
 | **Motion gate, home** | `cd site-src && node journey-test.mjs` — 47 headless checks on the journey chapters: overflow at six widths, that the pin really travels, and that reduced motion produces zero pins |
 | **Dossier gate, neck lift** | `cd site-src && node dossier-test.mjs` — 50 headless checks on the service page: overflow AND nothing running past the right edge at six widths, that the rail really sticks, that the three controls change state, that the timeline draws, that the matrix opens on the reader's own column, and that with no JS at all every tab panel is on the page. Separate from the suite above on purpose; the reason is at the top of the file |
+| **BugHerd gate** | `cd site-src && node bugherd-test.mjs` — 6 checks. `js/90-bugherd.js` is HOST-GATED, so on every machine you can reach it is supposed to do nothing, and "I looked and saw no sidebar" is the pass state and the total-failure state at once. This fakes the hostname with Chrome's `--host-resolver-rules` and asserts the tag loads on the Railway review host and does NOT load on `stonesurgicalarts.com`. **It has to be HTTPS**: `.app` is HSTS-preloaded, so an http harness never navigates and reports a false pass. Needs `openssl` on PATH |
 | **Screenshot** | `node site-src/shot.mjs "$PWD/final-site" <page.html> out.png 1440` |
 | **Slices** | `node site-src/slices.mjs "$PWD/final-site" <page.html> <outdir> 1440 900` — the page cut into viewport-sized PNGs at 1:1, so it can be LOOKED at rather than only measured. A full-page shot of this site is 9,000 to 15,000px tall and a defect the height of a line of type is two pixels in it. Slices overlap by the navbar's height; without that, a band as tall as the fixed bar is in no slice at all |
-| **Packed preview** | `cd site-src && node make-preview.mjs [page.html]` — the page in one self-contained file, every asset and GSAP inlined. Then `node check-standalone.mjs [../preview-<page>.html]`. Both pages are packed and both pass 7/7 |
+| **Packed preview** | `cd site-src && node make-preview.mjs [page.html]` — the page in one self-contained file, every asset and GSAP inlined. Then `node check-standalone.mjs [../preview-<page>.html]`. All three pages are packed and all three pass 7/7. Its "nothing fetched off the file" assertion is the second reason BugHerd is host-gated: unconditional, it fails this on every preview |
 | **For review** | Neck lift: <https://claude.ai/code/artifact/122ed7e8-1915-4545-9a38-8a9d1d65611a>. Home: <https://claude.ai/code/artifact/8b745715-0d68-4bbc-af0c-d2214396b0b6>. Both are the real page, scrollable and self-contained; rebuild after any change |
 | **Instatic parity** | `cd ../../../05-instatic-upload && node compare-live.mjs` — diffs the PUBLISHED pages against this build: structure, computed style, geometry, text and runtime state. It found a `width` the converter had dropped and a background colour the rebuilt cascade had changed, both after `verify-live.mjs` reported clean. Run it after every publish |
 | **Sanity sweep** | `cd site-src && node all-pages.mjs` — no sideways scroll, no clipped control, clean console, no off-origin request, both typefaces loaded, at 390/1024/1440. Built for eighteen pages and now runs one; **keep running it after touching anything in `css/`** |
@@ -131,7 +133,7 @@ is live at the eighteen-page version; see "Taking it into Instatic".
 | **Measure** | `cd site-src && node measure.mjs` — per screen size: which chapters exceed the viewport, whether every reveal fired, what the gutter and content width resolve to |
 | **Fonts** | `cd site-src && node get-fonts.mjs` — **REQUIRED ON A FRESH CLONE.** The `.woff2` files are gitignored like every other binary, so `assets/fonts/` is empty until this is run and the site silently falls back to Georgia and Arial. `css/03-fonts.css` and the generator ARE committed. Self-hosted, latin subset; **there is no request to fonts.googleapis.com** and `journey-test.mjs` asserts there is none |
 | **Imagery** | `node site-src/get-stock.mjs` (searched, NO people ever) · `node site-src/generate-images.mjs` (generated, no people ever) · `node site-src/get-people.mjs` (**people and places**, added 2026-09-01) |
-| **Live** | <https://stone-surgical-arts-production.up.railway.app> — **these two pages, published 2026-09-01.** The sixteen retired pages were deleted from the instance in the same atomic PUT and `verify-live.mjs` confirms all sixteen routes 404. See [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md), traps 13 to 18, for what the first publish of the rebuilt pages cost |
+| **Live** | <https://stone-surgical-arts-production.up.railway.app> — **these three pages, published 2026-09-01.** The sixteen retired pages were deleted from the instance in an earlier atomic PUT and `verify-live.mjs` confirms the fifteen still-retired routes 404 (`/blepharoplasty` moved to `ROUTES` when it was rebuilt). See [`05-instatic-upload`](../../../05-instatic-upload/05-instatic-upload.md), traps 13 to 18, for what the first publish of the rebuilt pages cost |
 | **Preview harness** | `node ../../../01-content-intake/.tmp/serve.mjs . 8792` then open `http://localhost:8792/preview.html` |
 | **Asana** | [Give Jess the core pages for Aesthetic - Stone](https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217846850268874) |
 | **Design** | "Stone Surgical Arts Website Redesign — 01 Sculpted Ivory", attached to that task |
@@ -143,6 +145,90 @@ is live at the eighteen-page version; see "Taking it into Instatic".
 | :--- | :--- | :--- |
 | Home | `index.html` | positions the practice: arrival, the idea, the four categories, the surgeon, the path, the standard, the proof, results, memberships, questions, the invitation |
 | Neck lift | `neck-lift.html` | sells one procedure, as a dossier: a photographic hero with the fee, then seven numbered sections beside a sticky spec rail, then its own booking chapter |
+| Blepharoplasty | `blepharoplasty.html` | the same dossier, second procedure. Added 2026-09-01 to find out what a second treatment page actually costs |
+
+> [!IMPORTANT]
+> **THE SECOND DOSSIER, 2026-09-01, AND WHAT IT COST.** The neck lift answered
+> "does the dossier work on a page that has to sell a procedure". This page
+> answered the cheaper and more useful question, which is what the SECOND one
+> costs once the first exists.
+>
+> | | |
+> | :--- | :--- |
+> | New files | `pages/blepharoplasty.body.html`, `assets/p-eyes-portrait.webp`, `assets/p-eyes-mirror.webp` |
+> | Changed | one row in `PAGES`, one entry in `seo.json`, one nav link in each of two partials, four lines of CSS |
+> | Not changed | no new component, no new stylesheet, no new JS module, no new page flag |
+> | Gates | `audit` FAIL none WARN none · `check-copy` clean · `all-pages` clean · `journey-test` 47/47 · `dossier-test` **50/50 on BOTH pages** · `check-standalone` 7/7 on all three previews |
+| Published | seq 18, `{"publishedPages":3}`, **3 written 0 deleted** · `verify-live` clean · `compare-live` **no differences** |
+>
+> **Two hard-coded strings had to leave `js/11-dossier.js` for this to work**,
+> and they are the finding worth keeping. The layer switcher held
+> `var order = ["skin", "fat", "muscle"]` and the self-check held five sentences
+> about necks, in a runtime shared by every dossier page. Both now come out of
+> the markup: the order is read off the `data-layer` attributes in DOM order,
+> and the five readings live on `data-r1`&ndash;`data-r4` of the `.check_out`
+> element with the zero state as its own text content, so a page with no
+> JavaScript still shows the sentence the author wrote. `dossier-test.mjs` was
+> generalised the same way and now gates either page from one argument.
+>
+> **The one new CSS declaration is `.dhero_media.is-upper`.** The shared hero
+> crops to 66% of the source height, which is correct when the subject is at
+> the bottom of a face and put a nose and a mouth on a page about eyelids. The
+> modifier moves it to 18%.
+
+> [!IMPORTANT]
+> **THE CONSULTATION-ROOM PHOTOGRAPH HAS A PERSON IN IT AND EVERY CROP WAS
+> LOSING HER.** The client, on review: *"Here the person does not show at all.
+> Choose the legs that are showing."*
+>
+> `ssa-consult-room.webp` is 1600x900 with a woman seated in an armchair at the
+> RIGHT of the frame and her head at the TOP of it. `client-manifest.json` still
+> describes it as "an armchair, a side table and daylight through tall blinds",
+> which is what is left once a centred crop has removed her, and that alt text
+> had been carried onto all three pages.
+>
+> Both slots crop it and a centred crop failed in both: the home page's process
+> panel is a wide letterbox and cut her off above the chin, keeping her legs;
+> the two booking chapters are a tall column and cut her out of frame entirely,
+> keeping the plant and an empty chair.
+>
+> Fixed with **one utility on the image rather than a modifier on each
+> component**, `.u-focus-figure` in `02-base.css`: `object-position: 100% 0%`.
+> One value serves both because the two slots crop on OPPOSITE axes, so each
+> half of the value is inert in one of them. The alt text on all three pages now
+> describes the person. **Applied to the first process panel only** on the home
+> page; the other two are still lifes and a centred crop is right for them.
+
+### Why blepharoplasty, and a note on four of the twelve slugs
+
+The Asana subtask **Build Core Pages** (`1217847568412975`) lists nine children and one of them is
+*Treatment Details*, singular and generic. It names no treatment, so the treatment was chosen
+against the practice's own site instead, on one test: does Stone Surgical Arts offer this, in its
+own words, on its own pages.
+
+Blepharoplasty passes four times over: `cosmetic-facial-surgery-southlake/blepharoplasty`, a second
+`eyelid-lifting` page, a `before-after/surgical/blepharoplasty` gallery, and a line on both
+surviving snapshots of the price list. It is also the only treatment in the corpus with a
+testimonial that names it.
+
+> [!WARNING]
+> **FOUR OF THE TWELVE DELETED SLUGS DO NOT PASS THAT TEST.** `brow-lift`,
+> `jawline-implant`, `lip-lift` and `cheek-and-chin-implants` have no page of
+> their own anywhere in `archive-text/pages/`. Three of the four are on the
+> price list, so they are not invented, but a line item is not a destination and
+> recovering them as pages would be inventing demand the practice's own site
+> does not show. Confirm with Brandklout before any of the four is built.
+
+> [!WARNING]
+> **A FEE WAS CORRECTED AGAINST `treatments-data.mjs`.** That file records
+> "Quoted: Upper and lower together" for blepharoplasty and its own `reviewNote`
+> flags the claim as unconfirmed. **Both** archived price lists say
+> "Blepharoplasty (upper OR lower)", which is the opposite claim and is the
+> practice's own wording, so the page follows the practice. The two snapshots
+> also disagree on the number: `patient-resources--pricing.txt` says $3,400 and
+> the older `pricing.txt` says $3,200&ndash;3,600. $3,400 is used, being the
+> later snapshot and the figure the rest of this build already carries. **Dr.
+> Stone has to settle whether $3,400 buys one lid set or both.**
 
 **The neck lift page routes nowhere either, and for the same reason.** MyEllevate, the jawline
 implant, the face and neck lift and Memberships are all named in its copy and all had pages that no
@@ -150,10 +236,17 @@ longer exist, so they are set as text. The one outbound link is Sunbit, which is
 application form. When those pages come back, `.trio_item` becomes an `<a>` and nothing else
 changes.
 
+**The blepharoplasty page routes nowhere either.** The brow lift and laser resurfacing are named
+in its matrix and in its copy, neither has a page, and both are set as text. Its one outbound link
+is Sunbit, the same live third-party form the neck lift uses.
+
 **One category card is a link again.** The home page's "Neck" card has an href and an "Explore"
 affordance; the other three keep neither, because nothing is behind them. The inconsistency is the
-honest state of the site. `neck-lift.html` is also in the navbar and the drawer, marked with
-`aria-current="page"` on its own page by the one surviving `{{CUR_*}}` token.
+honest state of the site, and it is now one page out of date: the Face card leads nowhere while
+`blepharoplasty.html` exists and is in the nav. Pointing the Face card at it is a one-line change
+and it was left for the review rather than made, because the card stands for a category of twelve
+and would then lead to one of them. Both treatment pages are in the navbar and the drawer, each
+marked with `aria-current="page"` on its own page.
 
 - **The other three category cards are `<div>`s, not links.** They keep their photograph, their
   numeral, their name and their line of copy, so the section still says what the practice does. The
@@ -166,8 +259,10 @@ honest state of the site. `neck-lift.html` is also in the navbar and the drawer,
   fees", "More about Dr. Stone", "Read more reviews", "See results & reviews", "See the three
   tiers", "More answers on the booking page". Each sat alone in its section's action row, so the
   row went with it.
-- **The nav is the logo, a Neck lift link, a Contact link, the phone and one button.** The
-  mega-dropdown is gone. The
+- **The nav is the logo, two treatment links, a Contact link, the phone and one button.** Neck lift
+  and Eyelid surgery, listed flat; the mega-dropdown is gone and comes back when the count does. The
+  current-page token is generic now (`{{CUR_<SLUG>}}`, matched against the page slug in
+  `build-site.mjs`) rather than the single `{{CUR_NECK}}` that served one link. The
   drawer survives because at 991px and below the navbar hides both its menu and its phone number,
   which makes the drawer the only place a phone gets the number without scrolling to the footer. It
   is not a menu any more; it is the mobile contact card.
@@ -427,15 +522,17 @@ site-src/
 └── js/00-runtime.js    navbar, drawer, reveals
 ```
 
-`pages/` holds two bodies now. `css/51-service.css` is the service layer and is the whole cost of
-the second page type; read its header comment before adding a third page, because the ratio it
-records is the argument for composing rather than inventing.
+`pages/` holds three bodies now. `css/51-dossier.css` is the dossier layer and was the whole cost of
+the second page TYPE; the third page reused it entire and added four lines to it. Read its header
+before adding a fourth page.
 
-**The build's page table earned itself back.** It was kept at one row on 2026-09-01 on the argument
-that the shape is what makes adding a page cheap. Adding the neck lift the same afternoon cost
-exactly that: one row, one body, one `seo.json` entry. The only build change was `schema` learning to
-take an ARRAY, so a page can add a `MedicalProcedure` and an `FAQPage` without the separate
-post-processing pass the deleted `add-faq-schema.py` used to make.
+**The build's page table earned itself back twice.** It was kept at one row on 2026-09-01 on the
+argument that the shape is what makes adding a page cheap. Adding the neck lift the same afternoon
+cost exactly that: one row, one body, one `seo.json` entry, plus `schema` learning to take an ARRAY
+so a page can add a `MedicalProcedure` and an `FAQPage` without the post-processing pass the
+deleted `add-faq-schema.py` used to make. Adding the blepharoplasty an hour later cost one row, one
+body and one `seo.json` entry and **no build change at all** except making the current-page token
+generic, which was a four-line regex replacing a hard-coded slug comparison.
 
 **The stylesheet numbering has gaps: 30 through 35, 37 and 40 are missing.** Those were the hero,
 cards, editorial, pricing, membership, gallery, form and proof sheets, and every component in them
@@ -486,12 +583,14 @@ comments first.
 
 ## What was verified, and what was not
 
-**Verified, on BOTH pages.** `audit.mjs` FAIL none, WARN none. `check-copy.mjs` clean.
-`journey-test.mjs` **47/47 each** — including the pinned chapter's travel, the ledger landing on its
+**Verified, on ALL THREE pages.** `audit.mjs` FAIL none, WARN none across three pages.
+`check-copy.mjs` clean. `all-pages.mjs` clean, 36 assertions. `dossier-test.mjs` **50/50 on the neck
+lift AND 50/50 on the blepharoplasty**, from one suite that now reads the layer names off the page
+instead of holding one page's anatomy. `check-standalone.mjs` 7/7 on all three packed previews.
+`journey-test.mjs` **47/47** — including the pinned chapter's travel, the ledger landing on its
 published values, every keyboard stop painting a focus ring, and reduced motion producing zero pins.
-`all-pages.mjs` clean at 390/1024/1440: no sideways scroll, no clipped control, clean console, no
-off-origin request, both typefaces loaded. `check-standalone.mjs` 7/7 on both packed previews.
-`perf.mjs` worst pass drops 4% of frames at 4x CPU throttle. `measure.mjs` puts the neck lift at 12.6
+No sideways scroll, no clipped control, clean console, no off-origin request, both typefaces
+loaded, at 390/1024/1440. `perf.mjs` worst pass drops 4% of frames at 4x CPU throttle. `measure.mjs` puts the neck lift at 12.6
 screens against the home page's 14.6, with its tallest non-pinned chapter at 1.56 screens against the
 home page's 1.47.
 
@@ -500,9 +599,16 @@ home page's 1.47.
 this pass were invisible to the assertion suites and visible in a screenshot**, which is the same
 lesson as the 2026-08-31 pass and the reason `slices.mjs` now exists.
 
-**Not verified.** Nothing has been re-rendered in Instatic since the cut, and the live site is still
-the eighteen-page v1 build. No real-device testing, no screen-reader pass, no Lighthouse run. The
-neck lift page's clinical content has not been through Dr. Stone. Everything under "Before this goes
+**Verified on the published site.** `verify-live.mjs` clean: 3 routes, 44 URLs, 38 asset
+references, the 15 remaining retired routes still 404, 3/3 distinct titles. `compare-live.mjs`
+**no differences** across all three pages, which covers structure, computed style, geometry, text
+and runtime state. `.u-focus-figure` was confirmed by hand to have survived the publish-time tree
+shake as an ambient rule, because a demoted-and-dropped focal point would have silently put the
+crop back where the client objected to it.
+
+**Not verified.** No real-device testing, no screen-reader pass, no Lighthouse run. Neither
+treatment page's clinical content has been through Dr. Stone, and the blepharoplasty carries the
+larger open question: whether $3,400 is one lid set or both. Everything under "Before this goes
 live" is by definition unverified: it needs the client.
 
 ### The six defects this pass found, and where they came from

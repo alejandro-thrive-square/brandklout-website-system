@@ -199,6 +199,83 @@
           ]
         }
       ]
+    },
+    "blepharoplasty": {
+      "title": "Blepharoplasty Westlake TX | Stone Surgical Arts",
+      "description": "Eyelid surgery, upper or lower, by Dr. Mona Stone. An hour or less in the chair and seven to ten days off work. $3,400 in Westlake, TX.",
+      "ogTitle": "Eyelid Surgery | Stone Surgical Arts",
+      "ogDescription": "Excess lid skin, muscle and fat, removed and repositioned by Dr. Mona Stone. $3,400 in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "Blepharoplasty",
+          "alternateName": "Eyelid surgery",
+          "description": "Eyelid surgery on the upper or lower lid: excess skin, muscle and the fat that has come forward behind it, removed or repositioned so the eye reads open rather than heavy.",
+          "category": "Face",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Eyelid",
+          "howPerformed": "An outpatient operation of an hour or less, under local anaesthetic with sedation. On the upper lid the incision is made in the natural crease; on the lower lid beneath the lash line, or inside the lid where only fat is being addressed.",
+          "preparation": "A consultation with Dr. Stone, a medical history, an assessment of general health, and photographs and measurements taken against your own anatomy. The brow is held in position to establish whether the heaviness is in the lid or above it.",
+          "followup": "Fine sutures come out at around a week. Most people are back to normal activities inside a fortnight and comfortable in photographs at three weeks, and the last of the lid swelling resolves over two to three months.",
+          "provider": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          },
+          "url": "https://www.stonesurgicalarts.com/blepharoplasty"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Will blepharoplasty scars show?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "On the upper lid the incision sits in the natural crease and disappears into it once healed. On the lower lid it is placed just beneath the lash line, or inside the lid entirely where only fat is being addressed, in which case there is no external scar at all."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does eyelid surgery last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The practice puts eyelid surgery at ten to fifteen years or more, and upper lid surgery is a once in a lifetime operation for most patients. You continue to age, but the tissue that was removed does not come back."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will my insurance cover blepharoplasty?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Occasionally, for upper lids only, and only where the excess skin is documented to obstruct the visual field. That requires formal visual field testing and photographs. Most cases are cosmetic."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can filler or laser do this instead?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They address different things. Filler can soften a hollow under the eye and laser can improve the texture of thin lid skin, and for early changes either may be enough. Neither removes excess skin or repositions fat that has come forward, which is what makes a lid look heavy."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What happens at the consultation?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "You and Dr. Stone go through your concerns and your goals, she takes a medical history and assesses your general health, and photographs and measurements are taken so the plan is drawn against your own anatomy."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does blepharoplasty cost, and can I finance it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "$3,400, which the practice's price list quotes for upper or lower. Whether you need one or both is settled at the consultation. Financing runs through Sunbit, and membership credit can be applied to a surgical fee."
+              }
+            }
+          ]
+        }
+      ]
     }
   }
 }

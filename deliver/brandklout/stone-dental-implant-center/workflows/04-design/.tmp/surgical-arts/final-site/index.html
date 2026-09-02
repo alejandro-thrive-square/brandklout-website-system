@@ -183,16 +183,18 @@
      menu is down to the two things that still lead somewhere: the phone number,
      and the invitation at the foot of the home page.
 
-     ONE TREATMENT LINK CAME BACK on 2026-09-01, with the neck lift page. A
-     menu of one treatment is an odd-looking menu, and it is the honest one: it
-     is the only treatment page that exists, and a page nobody can reach cannot
-     be reviewed. When the other eleven return this becomes a Treatments
-     dropdown again, and it is in git at 196ef87f~1.
+     ONE TREATMENT LINK CAME BACK on 2026-09-01, with the neck lift page, and a
+     SECOND the same day with the blepharoplasty. Two treatments listed flat is
+     still not a Treatments menu, and it is still the honest shape: these are
+     the treatment pages that exist, and a page nobody can reach cannot be
+     reviewed. The dropdown returns when the count does, and it is in git at
+     196ef87f~1.
 
-     `` is the one current-page token that survives. It expands to
-     `aria-current="page"` on the neck lift page and to nothing everywhere else.
-     20-navbar.css already styles `.navbar_link[aria-current="page"]`, so the
-     marker is semantic first and decorated second. -->
+     `{{CUR_<SLUG>}}` expands to `aria-current="page"` on that page and to
+     nothing everywhere else; build-site.mjs matches the token against the page
+     slug, lower-cased with underscores turned into hyphens. 20-navbar.css
+     already styles `.navbar_link[aria-current="page"]`, so the marker is
+     semantic first and decorated second. -->
 <header class="navbar_component is-static" data-nav>
   <div class="padding-global">
     <div class="container-large">
@@ -206,6 +208,7 @@
 
         <nav class="navbar_menu" aria-label="Primary">
           <a class="navbar_link" href="neck-lift.html">Neck lift</a>
+          <a class="navbar_link" href="blepharoplasty.html">Eyelid surgery</a>
           <a class="navbar_link" href="#contact">Contact</a>
         </nav>
 
@@ -245,6 +248,7 @@
 
     <nav class="drawer_nav" aria-label="Mobile">
       <a class="drawer_link" href="neck-lift.html">Neck lift</a>
+      <a class="drawer_link" href="blepharoplasty.html">Eyelid surgery</a>
       <a class="drawer_link" href="#contact">Contact</a>
     </nav>
 
@@ -519,8 +523,8 @@
     <div class="path_viewport">
       <div class="path_track">
         <article class="path_panel">
-          <div class="path_media">
-            <img src="assets/ssa-consult-room.webp" alt="A consultation room at Stone Surgical Arts" width="1600" height="900" loading="lazy">
+          <div class="path_media u-focus-figure">
+            <img src="assets/ssa-consult-room.webp" alt="A woman with a clipboard seated in an armchair in the practice's consultation room" width="1600" height="900" loading="lazy">
           </div>
           <div class="path_body">
             <p class="path_num">01</p>
