@@ -57,17 +57,20 @@ const PAGES = [
   // photoHero TRUE: this page opens on a full-bleed photograph and the navbar
   // sits over it, so the bar starts transparent and goes solid on scroll. That
   // is what the flag was built for and the home page has never used it.
-  // motion FALSE: no GSAP. Nothing on this page needs a pinned viewport, and a
-  // reference page should be the lighter of the two. See js/11-dossier.js.
+  // motion TRUE since 2026-09-01 evening: the elevation layer (js/12-elevate.js)
+  // parallaxes every frame and drifts the ghost words with ScrollTrigger, and
+  // the client's brief is animation on every page. It was false while the
+  // dossier ran without GSAP; on Instatic the vendor bundle is shipped to every
+  // page regardless (trap 17), so the split only ever saved bytes locally.
   // cta FALSE: it closes on its own booking chapter; the shared band would be a
   // second "book a consultation" immediately after the first.
-  { slug: "neck-lift", src: "neck-lift", photoHero: true, motion: false, cta: false },
+  { slug: "neck-lift", src: "neck-lift", photoHero: true, motion: true, cta: false },
   // THE THIRD PAGE, 2026-09-01. Same three flags as the neck lift and for the
   // same three reasons, which is the finding: a second dossier page is a row
   // here and a body file, and it needed no new flag, no new stylesheet and no
   // new JS module. What it did need was two hard-coded strings moved out of
   // js/11-dossier.js and into the markup, because they were about necks.
-  { slug: "blepharoplasty", src: "blepharoplasty", photoHero: true, motion: false, cta: false },
+  { slug: "blepharoplasty", src: "blepharoplasty", photoHero: true, motion: true, cta: false },
 ];
 
 /* --- bundles --------------------------------------------------------------

@@ -54,3 +54,71 @@
 .cta_component.is-dark::before {
   display: none;
 }
+
+/* --- the surgeon in the band, 2026-09-01 --------------------------------------
+   Two columns from 992 up: the copy, then the portrait bleeding to the band's
+   bottom edge. Below that the portrait sits above the copy as a 4:5 frame. */
+.cta_component {
+  overflow: clip;
+}
+.cta_inner {
+  grid-template-columns: minmax(0, 1fr) minmax(0, 0.7fr);
+  justify-items: start;
+  text-align: left;
+  align-items: end;
+  gap: var(--space-xlarge);
+}
+.cta_copy {
+  display: grid;
+  gap: 1.25rem;
+  justify-items: start;
+  padding-block: var(--space-large);
+}
+.cta_media {
+  position: relative;
+  margin: 0;
+  align-self: end;
+  width: 100%;
+  max-width: 26rem;
+  justify-self: end;
+  height: min(60vh, 34rem);
+  margin-bottom: calc(var(--space-xxlarge) * -1 - var(--space-large));
+  overflow: clip;
+  -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 82%, rgba(0, 0, 0, 0) 100%);
+  mask-image: linear-gradient(180deg, rgba(0, 0, 0, 1) 82%, rgba(0, 0, 0, 0) 100%);
+}
+.cta_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 0;
+}
+.cta_media-plate {
+  position: absolute;
+  left: 0;
+  bottom: 22%;
+  padding: 0.5rem 0.9rem;
+  background: var(--bg);
+  border-top: 1px solid var(--accent-flat);
+  font-family: var(--font-display);
+  font-size: var(--size-text-medium);
+  color: var(--fg);
+}
+@media (max-width: 991px) {
+  .cta_inner {
+    grid-template-columns: 1fr;
+  }
+  .cta_media {
+    order: -1;
+    justify-self: start;
+    height: auto;
+    aspect-ratio: 4 / 5;
+    max-width: 18rem;
+    margin-bottom: 0;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  .cta_media-plate {
+    bottom: 0;
+  }
+}

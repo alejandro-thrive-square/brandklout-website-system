@@ -57,20 +57,36 @@ const browser = await puppeteer.launch({
   args: ['--no-sandbox', '--hide-scrollbars'],
 })
 const pg = await browser.newPage()
-await pg.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])
+// MOTION=1 in the environment skips the reduced-motion emulation, so the
+// runtime's own states (the catalogue's open panel, the surgeon's current
+// frame, the carousel) can be looked at as a visitor sees them. 2026-09-01.
+if (!process.env.MOTION) await pg.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])
 await pg.setViewport({ width, height, deviceScaleFactor: 1 })
 await pg.goto(`http://127.0.0.1:8801/${page}`, { waitUntil: 'networkidle0', timeout: 60000 })
 
 // Wake every lazy image and every reveal, then return to the top.
+// INSTANT SCROLLING, whatever the stylesheet says. 02-base.css sets
+// `scroll-behavior: smooth` on <html> (and turns it off under reduced
+// motion), so with motion on every scrollTo() here ANIMATES and the waits
+// below end before the page has arrived: observers never see the frames and
+// every masked photograph screenshots as a grey box. Found 2026-09-01 after
+// an hour of suspecting the observers.
+await pg.evaluate(() => { document.documentElement.style.scrollBehavior = 'auto' })
+// PACED, since 2026-09-01. A 500px step every 30ms never gives headless
+// Chrome a rendering frame between steps, and an IntersectionObserver only
+// reports on a frame, so the page's own reveals (the mask frames above all)
+// were never fired by this pass and came out as grey boxes in a motion
+// screenshot. Two animation frames plus a short wait per 400px step is
+// enough; the pass takes about three seconds on the longest page.
 await pg.evaluate(async () => {
-  await new Promise((r) => {
-    let y = 0
-    const t = setInterval(() => {
-      window.scrollBy(0, 500)
-      y += 500
-      if (y > document.body.scrollHeight) { clearInterval(t); r() }
-    }, 30)
-  })
+  const frame = () => new Promise((r) => requestAnimationFrame(() => requestAnimationFrame(r)))
+  let y = 0
+  while (y < document.documentElement.scrollHeight) {
+    window.scrollBy(0, 400)
+    y += 400
+    await frame()
+    await new Promise((r) => setTimeout(r, 40))
+  }
   window.scrollTo(0, 0)
 })
 await new Promise((r) => setTimeout(r, 1200))
@@ -83,7 +99,7 @@ const overlap = await pg.evaluate(() => {
 })
 const step = height - overlap
 const n = Math.max(1, Math.ceil((total - height) / step) + 1)
-const stem = page.replace(/\.html$/, '')
+const stem = page.replace(/\.html$/, '') + (process.env.MOTION ? '-motion' : '')
 for (let i = 0; i < n; i++) {
   const y = Math.max(0, Math.min(i * step, total - height))
   await pg.evaluate((v) => window.scrollTo(0, v), y)

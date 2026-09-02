@@ -526,6 +526,15 @@
   height: 1px;
   background: var(--line-strong);
 }
+/* The surgeon's own face beside her own sentence, 2026-09-01. */
+.thesis_face {
+  width: 3.25rem;
+  height: 3.25rem;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid var(--white);
+  box-shadow: var(--shadow-card);
+}
 /* Scrubbed brighten. The words start at the muted colour and resolve to full
    ink as the chapter passes; 10-journey.js drives --lit per word. With no JS
    or reduced motion they are simply lit, which is the correct still state. */
@@ -540,130 +549,13 @@
   color: var(--accent);
 }
 
-/* --- 02 THE FOUR WAYS IN ---------------------------------------------------
-   Four tall frames on a staggered baseline, the way the archive laid its three
-   category cards with the middle one raised. The old version was four equal
-   bordered boxes each holding a line-drawn icon, which is a feature grid on a
-   SaaS page, not a cosmetic surgery practice.
-
-   Each card is a real photograph now. The brief is explicit that no image slot
-   may be empty, and an icon in a box is an empty slot with a drawing in it. */
-.ways_component {
-  padding: var(--section) 0;
-}
-.ways_head {
-  padding-inline: var(--gutter);
-  display: grid;
-  grid-template-columns: 1fr auto;
-  align-items: end;
-  gap: var(--space-large);
-  margin-bottom: var(--section-sm);
-}
-.ways_title {
-  margin: 0;
-  max-width: 20ch;
-}
-.ways_lede {
-  margin: 0;
-  max-width: 30rem;
-  color: var(--fg-body);
-  font-size: var(--size-text-medium);
-  line-height: 1.6;
-}
-.ways_grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: var(--space-medium);
-  padding-inline: var(--gutter);
-  align-items: start;
-}
-/* The stagger. Cards 2 and 4 drop, so the top edge is a rhythm rather than a
-   ruler. Reversed under 1280 to keep the taller pair away from the fold. */
-.ways_card:nth-child(even) {
-  margin-top: var(--space-xxlarge);
-}
-/* Was an <a> into the treatments hub until 2026-09-01. It is a <div> now: the
-   hub is gone, so the card states the category and stops there. text-decoration
-   and color stay because the rule costs nothing and the day a card becomes a
-   link again it should not also need a style fix. */
-.ways_card {
-  display: block;
-  text-decoration: none;
-  color: inherit;
-  position: relative;
-}
-.ways_media {
-  position: relative;
-  aspect-ratio: 2 / 3;
-  overflow: clip;
-  background: var(--stone-soft);
-}
-.ways_media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
-/* Scoped to .js, because these are only transformed when the runtime is there
-   to transform them, and an idle will-change is a compositor layer held open
-   for nothing. The two scroll passes that run these scored worst in perf.mjs. */
+/* --- 02 THE FOUR WAYS IN: REMOVED 2026-09-01 -------------------------------
+   The four category cards became the catalogue (css/52-elevate.css). The
+   one rule that lived in this block and was not about the cards survives: */
 .js .arrival_photo img {
   will-change: transform;
 }
-.ways_index {
-  position: absolute;
-  top: var(--space-small);
-  left: var(--space-small);
-  z-index: 2;
-  font-family: var(--font-display);
-  font-size: var(--size-text-medium);
-  color: var(--white);
-  text-shadow: 0 1px 8px rgba(0, 0, 0, 0.4);
-}
-.ways_body {
-  padding-top: var(--space-small);
-  border-top: 1px solid var(--line-strong);
-  margin-top: var(--space-small);
-}
-.ways_name {
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--size-h3-j);
-  line-height: 1;
-  margin: 0;
-  color: var(--fg);
-}
-.ways_text {
-  margin: var(--space-xsmall) 0 var(--space-small);
-  font-size: var(--size-text-small);
-  line-height: 1.55;
-  color: var(--fg-body);
-}
 
-@media (max-width: 991px) {
-  .ways_head {
-    grid-template-columns: 1fr;
-    align-items: start;
-  }
-  /* A four-up of 2:3 frames is 220px wide on a tablet, which is a thumbnail.
-     A snap rail keeps them at a size worth photographing. */
-  .ways_grid {
-    grid-template-columns: none;
-    grid-auto-flow: column;
-    grid-auto-columns: 68%;
-    overflow-x: auto;
-    scroll-snap-type: x mandatory;
-    scroll-padding-inline: var(--gutter);
-    -webkit-overflow-scrolling: touch;
-    padding-bottom: var(--space-small);
-  }
-  .ways_card {
-    scroll-snap-align: start;
-  }
-  .ways_card:nth-child(even) {
-    margin-top: 0;
-  }
-}
 /* Phone: full width, and NOW the height cap, whose only job is keeping the
    headline and the two buttons on the first screen.
    `width: 100%` is load-bearing alongside it: `aspect-ratio` with a
@@ -712,10 +604,6 @@
   .arrival_place {
     margin-top: var(--space-medium);
   }
-  .ways_media {
-    aspect-ratio: auto;
-    height: 46vh;
-  }
   .offer_media {
     aspect-ratio: auto;
     height: 42vh;
@@ -726,65 +614,9 @@
   }
 }
 
-/* --- 03 THE SURGEON --------------------------------------------------------
-   The archive's signature composition, and the one worth taking wholesale: a
-   marble panel carrying the copy, with the portrait overlapping its edge and
-   bleeding past the top. The first build had the same content as a 50/50 split
-   with a photo in a rectangle beside a wall of text.
-
-   The text is cut too. Two full paragraphs became one, because the credentials
-   underneath say the rest better than a sentence about them does. */
-.surgeon_component {
-  position: relative;
-  padding: var(--section) 0;
-}
-.surgeon_layout {
-  position: relative;
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 0.62fr);
-  align-items: center;
-  padding-inline: var(--gutter) 0;
-}
-.surgeon_panel {
-  padding: var(--pad-panel);
-  border: 1px solid var(--line);
-  /* The panel reaches under the portrait, which sits on top of it. */
-  padding-right: calc(var(--pad-panel) + var(--space-xxhuge) * 0.55);
-  position: relative;
-  z-index: 1;
-}
-.surgeon_title {
-  margin: 0 0 var(--space-medium);
-  max-width: 16ch;
-}
-.surgeon_text {
-  margin: 0;
-  color: var(--fg-body);
-  font-size: var(--size-text-medium);
-  line-height: 1.65;
-  max-width: 32rem;
-}
-/* `align-self: stretch` plus a 4:5 ratio meant the portrait grew to whatever
-   the panel beside it needed, and it reached 901px against an 800px screen.
-   A vh cap with `align-self: center` keeps it a portrait and keeps it on the
-   screen. No aspect-ratio: paired with a max-height it would transfer the cap
-   into the width and shrink the column. */
-.surgeon_media {
-  position: relative;
-  z-index: 2;
-  margin-left: calc(var(--space-xxhuge) * -1);
-  height: min(72vh, 40rem);
-  overflow: clip;
-  align-self: center;
-  margin-block: var(--section-sm);
-}
-.surgeon_media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 18%;
-  display: block;
-}
+/* --- 03 THE SURGEON: REWRITTEN 2026-09-01 in css/52-elevate.css as
+   scrollytelling. The plate under the portrait survives here because both
+   versions use it. */
 .surgeon_plate {
   position: absolute;
   left: 0;
@@ -856,38 +688,6 @@
   }
   .arrival_copy {
     padding-right: var(--space-large);
-  }
-}
-
-@media (max-width: 1279px) {
-  .surgeon_layout {
-    grid-template-columns: minmax(0, 1fr) minmax(0, 0.72fr);
-  }
-  .surgeon_panel {
-    padding: var(--pad-panel);
-    padding-right: calc(var(--pad-panel) + var(--space-xxlarge));
-  }
-  .surgeon_media {
-    margin-left: calc(var(--space-xhuge) * -1);
-  }
-}
-@media (max-width: 991px) {
-  .surgeon_component {
-    padding: var(--space-xhuge) 0;
-  }
-  .surgeon_layout {
-    grid-template-columns: 1fr;
-    padding-inline: var(--gutter);
-  }
-  .surgeon_media {
-    order: -1;
-    margin: 0 0 calc(var(--space-xxlarge) * -1) 0;
-    height: auto;
-    aspect-ratio: 3 / 2;
-    max-width: 26rem;
-  }
-  .surgeon_panel {
-    padding: calc(var(--pad-panel) + var(--space-xxlarge)) var(--pad-panel) var(--pad-panel);
   }
 }
 
@@ -1071,124 +871,7 @@
   }
 }
 
-/* --- 06 THE PROOF ----------------------------------------------------------
-   One review at the size of a statement, then the rest on a rail. Six equal
-   cards in a grid is the layout that guarantees none of them is read. */
-.proof_component {
-  padding-block: var(--section);
-}
-.proof_lead {
-  padding-inline: var(--gutter);
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) 16rem;
-  gap: var(--space-xxlarge);
-  align-items: end;
-  margin-bottom: var(--section-sm);
-}
-.proof_quote {
-  margin: 0;
-}
-.proof_quote blockquote {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: calc(2.6rem * var(--t-heading));
-  line-height: 1.14;
-  color: var(--fg);
-  letter-spacing: -0.005em;
-}
-.proof_quote figcaption {
-  margin-top: var(--space-medium);
-  display: flex;
-  gap: var(--space-small);
-  align-items: center;
-  font-size: var(--size-text-tiny);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--fg-mute);
-}
-.proof_rating {
-  border-left: 1px solid var(--line-strong);
-  padding-left: var(--space-medium);
-}
-.proof_rating-value {
-  font-family: var(--font-display);
-  font-size: calc(4rem * var(--t-display));
-  line-height: 1;
-  margin: 0;
-  color: var(--fg);
-}
-.proof_rating-label {
-  margin: var(--space-xsmall) 0 0;
-  font-size: var(--size-text-tiny);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--fg-mute);
-  line-height: 1.5;
-}
-.rail_component {
-  display: flex;
-  gap: var(--space-medium);
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  padding-inline: var(--gutter);
-  scroll-padding-inline: var(--gutter);
-  padding-bottom: var(--space-medium);
-}
-.rail_card {
-  flex: 0 0 auto;
-  width: min(24rem, 76vw);
-  scroll-snap-align: start;
-  border-top: 2px solid var(--line-strong);
-  padding: var(--space-medium) 0 0;
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-small);
-}
-.rail_text {
-  margin: 0;
-  font-size: var(--size-text-regular);
-  line-height: 1.65;
-  color: var(--fg-body);
-  flex: 1;
-}
-.rail_meta {
-  display: flex;
-  flex-direction: column;
-  gap: 0.15rem;
-  padding-top: var(--space-small);
-  border-top: 1px solid var(--line);
-}
-.rail_name {
-  font-family: var(--font-display);
-  font-size: var(--size-text-medium);
-  color: var(--fg);
-}
-.rail_tag {
-  font-size: var(--size-text-tiny);
-  letter-spacing: 0.14em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-@media (max-width: 767px) {
-  .proof_lead {
-    grid-template-columns: 1fr;
-    gap: var(--space-large);
-    align-items: start;
-  }
-  .proof_rating {
-    border-left: 0;
-    border-top: 1px solid var(--line-strong);
-    padding: var(--space-medium) 0 0;
-    display: flex;
-    align-items: baseline;
-    gap: var(--space-medium);
-  }
-  .proof_rating-label {
-    margin: 0;
-    max-width: 14rem;
-  }
-}
+/* --- 06 THE PROOF: REWRITTEN 2026-09-01 as a carousel, css/52-elevate.css. */
 
 /* --- 07 THE TWO OFFERS -----------------------------------------------------
    Results and memberships. Asymmetric, and the image runs off the page edge on
@@ -1456,9 +1139,15 @@
   transform: none;
 }
 
+/* `[data-j="mask"]` is EXCLUDED from the child rule, 2026-09-01. The
+   catalogue and the surgeon stack several photographs inside one masked
+   frame and show one at a time by opacity; forcing every child of a data-j
+   element to opacity 1 under reduced motion painted the LAST photograph in
+   each stack on top of the right one. The frame itself still gets its
+   still state from the first selector. */
 @media (prefers-reduced-motion: reduce) {
   .js [data-j],
-  .js [data-j] > *,
+  .js [data-j]:not([data-j="mask"]) > *,
   .js [data-j="stagger"] > * {
     opacity: 1 !important;
     transform: none !important;
@@ -1538,26 +1227,5 @@
 
    Recover from git at 196ef87f if a v1 page is ever restored. */
 
-/* --- the one category card that leads somewhere -----------------------------
-   All four `.ways_card`s became `<div>`s on 2026-09-01 when the pages behind
-   them were deleted. The neck lift page brings one back as an `<a>`, and a link
-   has to say so: the card is otherwise identical to the three that are not
-   links, and a reader has no way to know which one rewards a click.
-
-   `.ways_card` already carries `text-decoration: none` and `color: inherit`
-   above; the comment there says those rules were kept for exactly this day. */
-.ways_more {
-  margin: var(--space-xsmall) 0 0;
-  font-size: var(--size-text-tiny);
-  letter-spacing: 0.16em;
-  text-transform: uppercase;
-  color: var(--accent);
-}
-.ways_more span {
-  display: inline-block;
-  transition: transform 0.3s var(--ease);
-}
 a.ways_card:hover .ways_more span,
-a.ways_card:focus-visible .ways_more span {
-  transform: translateX(0.35rem);
-}
+
