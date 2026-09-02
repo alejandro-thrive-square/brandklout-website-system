@@ -311,6 +311,24 @@
       "output": "1160x1450",
       "alt": "A woman looking to one side, light on her eyes",
       "used": "treatments"
+    },
+    "dr-stone-candid.webp": {
+      "kind": "practice",
+      "from": "img/feature/media/03.jpeg",
+      "sourceSize": "457 457",
+      "output": "457x457",
+      "alt": "Dr. Mona Stone outdoors in a dark jacket",
+      "used": "meet-the-doctor; about",
+      "note": "457x457 at source, a social-media asset. Small; keep it under 460px."
+    },
+    "dr-stone-steps.webp": {
+      "kind": "practice",
+      "from": "img/feature/media/youtube.jpg",
+      "sourceSize": "702 431",
+      "output": "646x431",
+      "alt": "Dr. Mona Stone seated on tiled steps outside the practice",
+      "used": "meet-the-doctor",
+      "note": "702x431 at source, the previous site’s video poster. The one photograph of her outside the building."
     }
   },
   "note": "Two kinds of slot: `practice` is the practice’s own photography, `model` is the portrait library from the previous site. A model slot may show a person as a person and never as a patient or a result. See the header of import-client-images.mjs."

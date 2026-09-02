@@ -110,7 +110,7 @@
          it exists: the shared rule crops to 66% of the source height, which is
          correct for a page about a jaw and puts a nose and a mouth on a page
          about eyelids. -->
-    <div class="dhero_media is-upper">
+    <div class="dhero_media is-upper" data-parallax="10">
       <img src="assets/p-eyes-portrait.webp" alt="A woman in her fifties by a window in soft daylight, looking towards the camera" width="1400" height="2100" fetchpriority="high">
     </div>
     <div class="dhero_inner">
@@ -123,6 +123,7 @@
         <li class="dhero_chip"><span>Back to work</span>7 to 10 days</li>
       </ul>
     </div>
+    <p class="arrival_scroll is-light" aria-hidden="true"><span class="arrival_scroll-line"></span>Scroll</p>
   </section>
 
   <!-- ====================================================================
@@ -251,7 +252,7 @@
         <h2 class="dsec_title">The test is what happens when the brow is held where it used to sit.</h2>
 
         <div class="suits_layout">
-          <figure class="suits_media">
+          <figure class="suits_media" data-j="mask">
             <img src="assets/p-eyes-mirror.webp" alt="A woman in her fifties looking at her own face in a round mirror in daylight" width="1400" height="933" loading="lazy">
           </figure>
           <div class="suits_body">
@@ -351,11 +352,11 @@
              both surgical pages reads as a house style, not as a repeat. The
              captions are this page's own; the timescale is different. -->
         <div class="recov_media">
-          <figure class="recov_figure">
+          <figure class="recov_figure" data-j="mask">
             <img src="assets/p-recovery-home.webp" alt="A woman with a cup of tea on a sofa by a window" width="1400" height="933" loading="lazy">
             <figcaption>The bruising week is at home, and it is a week.</figcaption>
           </figure>
-          <figure class="recov_figure">
+          <figure class="recov_figure" data-j="mask">
             <img src="assets/p-outdoors.webp" alt="A woman in a coat on a bridge in a park in autumn light" width="1400" height="2100" loading="lazy">
             <figcaption>By three weeks most people have stopped avoiding cameras.</figcaption>
           </figure>
@@ -454,6 +455,9 @@
            above them.
            ================================================================ -->
       <section class="dsec is-band stone-band" data-theme="dark" id="surgeon">
+        <div class="standard_photo" data-parallax="10" aria-hidden="true">
+          <img src="assets/m-profile-dark.webp" alt="" width="1600" height="900" loading="lazy">
+        </div>
         <p class="dsec_mark">06 &middot; The surgeon</p>
         <h2 class="dsec_title">A lower lid gives back nothing that is taken from it in error.</h2>
         <p class="dsec_lede">Lower lids punish over-resection. Take too much skin or too much fat and the lid pulls away from the eye, which is difficult to correct and immediately obvious to everyone including you. Dr. Stone trained in oral and maxillofacial surgery across three Level 1 trauma centres, where the orbit and the tissues around it are rebuilt after injury. It is a demanding way to learn an anatomy that leaves very little room for error, and it is the background she brings to an elective lid.</p>
@@ -510,6 +514,41 @@
   </div>
 
   <!-- ====================================================================
+       ALSO CONSIDER
+       Three neighbouring treatments as photographs, added 2026-09-01 with
+       the elevation pass. The matrix above already compares them as data;
+       this is the same content as a row a reader can look at, and it is the
+       one place on a dossier page that borrows the home page's photographic
+       density. Every fee is the practice's own list.
+       ==================================================================== -->
+  <section class="related_component" aria-label="Related treatments">
+    <div class="related_head">
+      <p class="dsec_mark is-flush">Also consider</p>
+      <a class="related_all" href="treatments.html">Every treatment, with fees <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <div class="related_grid">
+      <a class="related_card" href="treatments.html#face">
+        <div class="related_media" data-j="mask"><img src="assets/m-eyes-young.webp" alt="" width="1160" height="1450" loading="lazy"></div>
+        <h3 class="related_name">Brow &amp; forehead lift</h3>
+        <p class="related_text">When the heaviness is the brow rather than the lid, the lift belongs above the eye. $5,000 to $7,000.</p>
+        <p class="related_more">On the treatments page <span aria-hidden="true">&rarr;</span></p>
+      </a>
+      <a class="related_card" href="treatments.html#face">
+        <div class="related_media" data-j="mask"><img src="assets/m-cheek.webp" alt="" width="1200" height="1200" loading="lazy"></div>
+        <h3 class="related_name">Facial fat transfer</h3>
+        <p class="related_text">Hollowing under the eye is volume, not skin, and is answered with your own fat rather than a knife.</p>
+        <p class="related_more">On the treatments page <span aria-hidden="true">&rarr;</span></p>
+      </a>
+      <a class="related_card" href="treatments.html#skin">
+        <div class="related_media" data-j="mask"><img src="assets/m-freckles.webp" alt="" width="1600" height="900" loading="lazy"></div>
+        <h3 class="related_name">CO2 laser resurfacing</h3>
+        <p class="related_text">Fine lines on the lid and the crow&rsquo;s feet beside it, where surgery removes nothing. $2,000 to $2,800.</p>
+        <p class="related_more">On the treatments page <span aria-hidden="true">&rarr;</span></p>
+      </a>
+    </div>
+  </section>
+
+  <!-- ====================================================================
        THE BOOKING CHAPTER
        Full width, outside the two-column layout, and it is why this page sets
        `cta: false` in the page table, exactly as the neck lift does.
@@ -523,8 +562,8 @@
        and a room it owns is not one of those.
        ==================================================================== -->
   <section class="book_component" id="contact">
-    <div class="book_media u-focus-figure">
-      <img src="assets/ssa-consult-room.webp" alt="A woman with a clipboard seated in an armchair in the practice's consultation room" width="1600" height="900" loading="lazy">
+    <div class="book_media u-focus-figure" data-parallax="8" data-parallax-anchor="top">
+      <div class="u-fill" data-j="mask"><img src="assets/ssa-consult-room.webp" alt="A woman with a clipboard seated in an armchair in the practice's consultation room" width="1600" height="900" loading="lazy"></div>
     </div>
     <div class="book_body">
       <p class="dsec_mark">Book it</p>

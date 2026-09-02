@@ -81,6 +81,14 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
         if (r.width === 0 || r.height === 0) return false;
         // The matrix is ALLOWED to be wider than its box; it scrolls inside it.
         if (el.closest(".matrix_scroll")) return false;
+        // So is anything inside a frame that clips or scrolls its overflow: a
+        // parallaxed photograph is deliberately larger than its frame, and the
+        // related row is a snap rail on a phone. Added 2026-09-02 with the
+        // elevation pass, which is when both shapes arrived on this page.
+        for (let a = el.parentElement; a; a = a.parentElement) {
+          const o = getComputedStyle(a).overflowX;
+          if (o === "clip" || o === "hidden" || o === "auto" || o === "scroll") return false;
+        }
         return r.right > document.documentElement.clientWidth + 1;
       })
       .map((el) => el.className.toString().split(" ")[0] || el.tagName)
@@ -100,8 +108,8 @@ for (const width of [360, 390, 768, 1024, 1440, 1920]) {
   await pg.setViewport({ width: 1440, height: 900 });
   await pg.goto(url, { waitUntil: "networkidle0", timeout: 60000 });
   const g = await pg.evaluate(() => ({ gsap: !!window.gsap, st: !!window.ScrollTrigger }));
-  check("the vendor bundle is never requested", !requested.some((u) => u.includes("vendor.js")), `${requested.length} requests`);
-  check("GSAP is absent from the page", !g.gsap && !g.st);
+  check("the vendor bundle is requested (motion: true since the 2026-09-01 elevation)", requested.some((u) => u.includes("vendor.js")), `${requested.length} requests`);
+  check("GSAP and ScrollTrigger are present for the parallax", !!g.gsap && !!g.st);
   check("no off-origin requests", requested.every((u) => u.startsWith(`http://127.0.0.1:${PORT}`) || u.startsWith("data:")),
     requested.filter((u) => !u.startsWith(`http://127.0.0.1:${PORT}`) && !u.startsWith("data:")).slice(0, 2).join(" "));
   await pg.close();

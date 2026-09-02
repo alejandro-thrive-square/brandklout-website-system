@@ -100,7 +100,7 @@
        the page another screen. They are the same three the rail repeats.
        ==================================================================== -->
   <section class="dhero_component">
-    <div class="dhero_media">
+    <div class="dhero_media" data-parallax="10">
       <img src="assets/p-neck-profile.webp" alt="A woman in her fifties in profile, in warm daylight" width="1400" height="2100" fetchpriority="high">
     </div>
     <div class="dhero_inner">
@@ -113,6 +113,7 @@
         <li class="dhero_chip"><span>Back to work</span>2 weeks</li>
       </ul>
     </div>
+    <p class="arrival_scroll is-light" aria-hidden="true"><span class="arrival_scroll-line"></span>Scroll</p>
   </section>
 
   <!-- ====================================================================
@@ -240,7 +241,7 @@
         <h2 class="dsec_title">The test is whether the skin takes up when you lift your chin.</h2>
 
         <div class="suits_layout">
-          <figure class="suits_media">
+          <figure class="suits_media" data-j="mask">
             <img src="assets/p-mirror.webp" alt="A woman at a bathroom mirror in daylight, one hand at her neck" width="1400" height="933" loading="lazy">
           </figure>
           <div class="suits_body">
@@ -344,11 +345,11 @@
         </ol>
 
         <div class="recov_media">
-          <figure class="recov_figure">
+          <figure class="recov_figure" data-j="mask">
             <img src="assets/p-recovery-home.webp" alt="A woman with a cup of tea on a sofa by a window" width="1400" height="933" loading="lazy">
             <figcaption>The first fortnight is at home.</figcaption>
           </figure>
-          <figure class="recov_figure">
+          <figure class="recov_figure" data-j="mask">
             <img src="assets/p-outdoors.webp" alt="A woman in a coat on a bridge in a park in autumn light" width="1400" height="2100" loading="lazy">
             <figcaption>By month three most people have stopped thinking about it.</figcaption>
           </figure>
@@ -444,6 +445,9 @@
            claim about the practice.
            ================================================================ -->
       <section class="dsec is-band stone-band" data-theme="dark" id="surgeon">
+        <div class="standard_photo" data-parallax="10" aria-hidden="true">
+          <img src="assets/m-profile-dark.webp" alt="" width="1600" height="900" loading="lazy">
+        </div>
         <p class="dsec_mark">06 &middot; The surgeon</p>
         <h2 class="dsec_title">The nerve that moves your lower lip runs through this operation.</h2>
         <p class="dsec_lede">The marginal mandibular nerve runs exactly where a neck lift works. A surgeon has to know that anatomy in three dimensions, in a particular neck, under tension, rather than as a diagram. Dr. Stone spent her residency rebuilding it after it had been broken, which is the background she brings to an elective neck.</p>
@@ -498,6 +502,41 @@
   </div>
 
   <!-- ====================================================================
+       ALSO CONSIDER
+       Three neighbouring treatments as photographs, added 2026-09-01 with
+       the elevation pass. The matrix above already compares them as data;
+       this is the same content as a row a reader can look at, and it is the
+       one place on a dossier page that borrows the home page's photographic
+       density. Every fee is the practice's own list.
+       ==================================================================== -->
+  <section class="related_component" aria-label="Related treatments">
+    <div class="related_head">
+      <p class="dsec_mark is-flush">Also consider</p>
+      <a class="related_all" href="treatments.html">Every treatment, with fees <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <div class="related_grid">
+      <a class="related_card" href="treatments.html#neck">
+        <div class="related_media" data-j="mask"><img src="assets/m-neck-soft.webp" alt="" width="1200" height="1200" loading="lazy"></div>
+        <h3 class="related_name">MyEllevate&reg; neck lift</h3>
+        <p class="related_text">A suture suspension for laxity where the skin still has tone. $6,000, no external incision.</p>
+        <p class="related_more">On the treatments page <span aria-hidden="true">&rarr;</span></p>
+      </a>
+      <a class="related_card" href="treatments.html#face">
+        <div class="related_media" data-j="mask"><img src="assets/m-facelift-hand.webp" alt="" width="1160" height="1450" loading="lazy"></div>
+        <h3 class="related_name">Face &amp; neck lift</h3>
+        <p class="related_text">The jowl and the neck treated as one continuous problem. $18,000, planned and performed together.</p>
+        <p class="related_more">On the treatments page <span aria-hidden="true">&rarr;</span></p>
+      </a>
+      <a class="related_card" href="treatments.html#neck">
+        <div class="related_media" data-j="mask"><img src="assets/m-jawline.webp" alt="" width="1200" height="1200" loading="lazy"></div>
+        <h3 class="related_name">Jawline implant</h3>
+        <p class="related_text">Projection for a mandible that never had it, which no amount of lifting creates. $10,000.</p>
+        <p class="related_more">On the treatments page <span aria-hidden="true">&rarr;</span></p>
+      </a>
+    </div>
+  </section>
+
+  <!-- ====================================================================
        THE BOOKING CHAPTER
        Full width, outside the two-column layout, and it is why this page sets
        `cta: false` in the page table: the shared closing band would be a second
@@ -509,7 +548,7 @@
        nothing is the most expensive bug on a site like this.
        ==================================================================== -->
   <section class="book_component" id="contact">
-    <div class="book_media u-focus-figure">
+    <div class="book_media u-focus-figure" data-parallax="8" data-parallax-anchor="top">
       <!-- THE PRACTICE'S OWN ROOM, not a stock consultation. The first build
            used a stock desk scene that had a pill bottle on it, which reads
            pharmacy rather than surgery, and stock is the wrong call in the one
@@ -517,7 +556,7 @@
            number. This photograph is the actual consultation room at 72 Andorra
            Dr. It is also on the home page's first process panel; the same real
            room appearing twice on a two-page site is a constant, not a repeat. -->
-      <img src="assets/ssa-consult-room.webp" alt="A woman with a clipboard seated in an armchair in the practice's consultation room" width="1600" height="900" loading="lazy">
+      <div class="u-fill" data-j="mask"><img src="assets/ssa-consult-room.webp" alt="A woman with a clipboard seated in an armchair in the practice's consultation room" width="1600" height="900" loading="lazy"></div>
     </div>
     <div class="book_body">
       <p class="dsec_mark">Book it</p>

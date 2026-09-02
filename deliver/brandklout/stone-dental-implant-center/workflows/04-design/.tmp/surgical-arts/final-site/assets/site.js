@@ -961,12 +961,19 @@
       var img = $("img", frame);
       if (!img) return;
       var amount = parseFloat(frame.getAttribute("data-parallax")) || 10;
-      gsap.set(img, { height: 100 + amount * 2 + "%", top: -amount + "%", position: "relative" });
+      // A frame whose subject sits at the TOP of the photograph (the practice's
+      // consultation room, whose seated figure is at the top right; anything
+      // carrying .u-focus-figure or data-parallax-anchor="top") keeps its top
+      // edge in the frame and only ever drifts upward. Centred, the first 8%
+      // of the picture was off the top of the frame before the scroll began,
+      // and on that photograph the 8% was the person's face. 2026-09-02.
+      var top = frame.classList.contains("u-focus-figure") || frame.getAttribute("data-parallax-anchor") === "top";
+      gsap.set(img, { height: 100 + amount * 2 + "%", top: top ? 0 : -amount + "%", position: "relative" });
       gsap.fromTo(
         img,
-        { yPercent: -amount * 0.5 },
+        { yPercent: top ? 0 : -amount * 0.5 },
         {
-          yPercent: amount * 0.5,
+          yPercent: top ? -amount : amount * 0.5,
           ease: "none",
           scrollTrigger: { trigger: frame, start: "top bottom", end: "bottom top", scrub: 0.6 },
         }
