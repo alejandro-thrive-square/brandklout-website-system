@@ -74,6 +74,7 @@ const PAGES = [
   { file: 'results.html', slug: 'results', title: 'Results & Reviews' },
   { file: 'book.html', slug: 'book', title: 'Book a Consultation' },
   { file: 'myellevate-neck-lift.html', slug: 'myellevate-neck-lift', title: 'MyEllevate Neck Lift' },
+  { file: 'face-and-neck-lift.html', slug: 'face-and-neck-lift', title: 'Face & Neck Lift' },
 ]
 
 const problems = []

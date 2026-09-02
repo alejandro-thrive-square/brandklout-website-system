@@ -543,6 +543,82 @@
           ]
         }
       ]
+    },
+    "face-and-neck-lift": {
+      "title": "Face & Neck Lift Westlake TX | Stone Surgical Arts",
+      "description": "The full face and neck lift: the SMAS repositioned, the platysma repaired, the skin redraped rather than pulled. $18,000 in Westlake, TX, by Dr. Mona Stone.",
+      "ogTitle": "Face & Neck Lift | Stone Surgical Arts",
+      "ogDescription": "Face and neck addressed together, because the two age as one structure. $18,000, planned and performed by Dr. Mona Stone in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "Face & Neck Lift",
+          "description": "A full face and neck lift: the SMAS lifted and repositioned, the platysma repaired, fat contoured along the jaw and under the chin, and the skin redraped with only the genuine excess removed.",
+          "category": "Face",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "bodyLocation": "Face and neck",
+          "howPerformed": "Under general anaesthetic, four to six hours in theatre. Incisions follow the creases in front of the ear, around the lobe and into the hairline, with a small one under the chin. Home the same day with a responsible adult, or an overnight stay where that is safer.",
+          "preparation": "A consultation with Dr. Stone, a medical history, an assessment of general health, and photographs and measurements taken against your own anatomy.",
+          "followup": "Sutures out in stages over two weeks; back to work at two to three weeks; the result settles over six to twelve months. Follow-ups are with Dr. Stone for up to eighteen months.",
+          "provider": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          },
+          "url": "https://www.stonesurgicalarts.com/face-and-neck-lift"
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Where do face lift scars go?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They follow the natural creases in front of the ear, around the earlobe and back into the hairline behind it, placed where the anatomy hides them, and they mature over months from pink to pale."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does a face and neck lift last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A well-executed lift resets the clock rather than stopping it. Most people look substantially better than their unoperated baseline for a decade or more and continue to age normally from the new starting point."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will I look like a different person after a face lift?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. The aim is that people register that you look well rather than altered, which is a matter of how much tension is placed on which layer."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I have just the neck?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. The neck lift is quoted separately at $11,000, and for the right anatomy MyEllevate at $6,000 achieves a great deal with no external incision."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I combine a face lift with eyelid surgery or resurfacing?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Often. Blepharoplasty is commonly planned alongside a lift; laser resurfacing reaches the texture and pigment a lift cannot and is usually staged rather than done the same day."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does a face and neck lift cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "$18,000 for the face and neck together. Financing runs through Sunbit, and membership credit can be applied to a surgical fee."
+              }
+            }
+          ]
+        }
+      ]
     }
   }
 }

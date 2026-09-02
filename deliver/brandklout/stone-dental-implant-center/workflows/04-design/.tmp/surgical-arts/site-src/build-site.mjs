@@ -79,6 +79,7 @@ const PAGES = [
   { slug: "results", src: "results", photoHero: false, motion: true },
   { slug: "book", src: "book", photoHero: true, motion: true, cta: false },
   { slug: "myellevate-neck-lift", src: "myellevate-neck-lift", photoHero: true, motion: true, cta: false },
+  { slug: "face-and-neck-lift", src: "face-and-neck-lift", photoHero: true, motion: true, cta: false },
 ];
 
 /* --- bundles --------------------------------------------------------------
