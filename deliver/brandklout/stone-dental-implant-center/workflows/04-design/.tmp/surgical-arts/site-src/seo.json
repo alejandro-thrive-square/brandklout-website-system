@@ -419,6 +419,38 @@
           }
         }
       ]
+    },
+    "memberships": {
+      "title": "Memberships | Banked Credit | Stone Surgical Arts, Westlake TX",
+      "description": "Three membership tiers on a banked-credit model: a monthly amount that accumulates until you want it, spendable on injectables, skin or a surgical fee.",
+      "ogTitle": "Memberships | Stone Surgical Arts",
+      "ogDescription": "Credit that waits for you. Banked monthly, never expiring while the membership is active, spendable on anything at member pricing.",
+      "schema": [
+        {
+          "@type": "WebPage",
+          "name": "Memberships",
+          "url": "https://www.stonesurgicalarts.com/memberships",
+          "about": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          }
+        }
+      ]
+    },
+    "results": {
+      "title": "Results & Reviews | Stone Surgical Arts, Westlake TX",
+      "description": "Before-and-after cases published only with each patient's current consent, and the practice's own patient reviews: a 4.8 average across more than 142.",
+      "ogTitle": "Results & Reviews | Stone Surgical Arts",
+      "ogDescription": "Consented before-and-after photography and the practice's own reviews, from cosmetic patients of Dr. Mona Stone in Westlake, Texas.",
+      "schema": [
+        {
+          "@type": "WebPage",
+          "name": "Results & Reviews",
+          "url": "https://www.stonesurgicalarts.com/results",
+          "about": {
+            "@id": "https://www.stonesurgicalarts.com/#practice"
+          }
+        }
+      ]
     }
   }
 }

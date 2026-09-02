@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F6F4EF">
+<!-- Title, description, Open Graph, canonical and JSON-LD are injected by
+     build-site.mjs from seo.json. Do not hand-edit the output in final-site/ —
+     edit seo.json and rebuild. -->
+<title>Memberships | Banked Credit | Stone Surgical Arts, Westlake TX</title>
+<meta name="description" content="Three membership tiers on a banked-credit model: a monthly amount that accumulates until you want it, spendable on injectables, skin or a surgical fee.">
+<link rel="canonical" href="https://www.stonesurgicalarts.com/memberships">
+<meta property="og:site_name" content="Stone Surgical Arts">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.stonesurgicalarts.com/memberships">
+<meta property="og:title" content="Memberships | Stone Surgical Arts">
+<meta property="og:description" content="Credit that waits for you. Banked monthly, never expiring while the membership is active, spendable on anything at member pricing.">
+<meta property="og:image" content="https://www.stonesurgicalarts.com/assets/banner-ssa.avif">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Memberships | Stone Surgical Arts">
+<meta name="twitter:description" content="Credit that waits for you. Banked monthly, never expiring while the membership is active, spendable on anything at member pricing.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "MedicalBusiness",
+        "MedicalClinic"
+      ],
+      "@id": "https://www.stonesurgicalarts.com/#practice",
+      "name": "Stone Surgical Arts",
+      "alternateName": "Stone Surgical Arts: Facial & Cosmetic Surgery",
+      "url": "https://www.stonesurgicalarts.com/",
+      "description": "Boutique facial and cosmetic surgery practice in Westlake, Texas, led by oral and maxillofacial surgeon Dr. Mona Stone, DDS.",
+      "medicalSpecialty": "PlasticSurgery",
+      "telephone": "+1-817-918-3666",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "72 Andorra Dr #110",
+        "addressLocality": "Westlake",
+        "addressRegion": "TX",
+        "postalCode": "76262",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Westlake"
+        },
+        {
+          "@type": "City",
+          "name": "Southlake"
+        },
+        {
+          "@type": "City",
+          "name": "Fort Worth"
+        },
+        {
+          "@type": "City",
+          "name": "Keller"
+        },
+        {
+          "@type": "City",
+          "name": "Colleyville"
+        },
+        {
+          "@type": "City",
+          "name": "Grapevine"
+        },
+        {
+          "@type": "City",
+          "name": "Roanoke"
+        },
+        {
+          "@type": "City",
+          "name": "Trophy Club"
+        },
+        {
+          "@type": "City",
+          "name": "North Richland Hills"
+        },
+        {
+          "@type": "City",
+          "name": "Coppell"
+        },
+        {
+          "@type": "City",
+          "name": "Flower Mound"
+        },
+        {
+          "@type": "City",
+          "name": "Irving"
+        },
+        {
+          "@type": "City",
+          "name": "Denton"
+        },
+        {
+          "@type": "City",
+          "name": "Argyle"
+        }
+      ],
+      "availableLanguage": [
+        "English",
+        "Spanish"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/stonesurgicalart/",
+        "https://www.instagram.com/westlakeaesthetics/",
+        "https://www.facebook.com/stonesurgicalarts/",
+        "https://linktr.ee/stonesurgicalarts"
+      ],
+      "founder": {
+        "@id": "https://www.stonesurgicalarts.com/about#dr-mona-stone"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      ],
+      "email": "info@stonesurgicalarts.com",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "142"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "name": "Memberships",
+      "url": "https://www.stonesurgicalarts.com/memberships",
+      "about": {
+        "@id": "https://www.stonesurgicalarts.com/#practice"
+      }
+    }
+  ]
+}
+</script>
+<!-- The two typefaces are SELF-HOSTED, in assets/fonts/, declared by
+     css/03-fonts.css and therefore already inside assets/site.css. There is no
+     request to fonts.googleapis.com any more: this is a medical practice, and a
+     third-party stylesheet on every page view hands Google the IP of everyone
+     who visits. Regenerate with `node site-src/get-fonts.mjs --force`.
+
+     The two most-used cuts are preloaded, because a webfont declared inside a
+     stylesheet is not discovered until that stylesheet has parsed, and these
+     two set the headline and the body copy. -->
+<link rel="preload" href="assets/fonts/cormorant-garamond-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+<!-- Every scroll-reveal rule in the stylesheet is scoped to .js, and this is
+     what sets it. Inline and in the head so it lands before first paint — there
+     is no flash of content that then hides itself.
+
+     The timer is the safety net. Reveals start at opacity 0, so if site.js
+     never boots — blocked bundle, an Instatic script conflict, a bad cache —
+     content that should be visible would stay invisible. If nothing has
+     signalled ready inside 2.5s the class comes off and the whole page paints,
+     unanimated. A site with no animation is fine; a site with no content is
+     not. -->
+<script>
+  document.documentElement.classList.add('js');
+  setTimeout(function () {
+    if (!window.__ssaBooted) document.documentElement.classList.remove('js');
+  }, 2500);
+</script>
+<!-- A favicon file has not been supplied. This draws the wordmark's S on the
+     brand ivory so the tab is never a blank sheet; replace it with the real
+     mark when the client sends one. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F4EF'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23272727'%3ES%3C/text%3E%3C/svg%3E">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="page-wrapper">
+<!-- The navbar, since 2026-09-01, on a site that is one page.
+
+     WHAT WAS HERE. A Treatments link with a mega-dropdown listing four
+     categories and twelve treatment pages, then Results, Memberships, About and
+     Contact. Every one of those destinations was deleted with the pages, so the
+     menu is down to the two things that still lead somewhere: the phone number,
+     and the invitation at the foot of the home page.
+
+     ONE TREATMENT LINK CAME BACK on 2026-09-01, with the neck lift page, and a
+     SECOND the same day with the blepharoplasty. Two treatments listed flat is
+     still not a Treatments menu, and it is still the honest shape: these are
+     the treatment pages that exist, and a page nobody can reach cannot be
+     reviewed. The dropdown returns when the count does, and it is in git at
+     196ef87f~1.
+
+     `{{CUR_<SLUG>}}` expands to `aria-current="page"` on that page and to
+     nothing everywhere else; build-site.mjs matches the token against the page
+     slug, lower-cased with underscores turned into hyphens. 20-navbar.css
+     already styles `.navbar_link[aria-current="page"]`, so the marker is
+     semantic first and decorated second. -->
+<header class="navbar_component is-static" data-nav>
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="navbar_container">
+        <a class="navbar_logo-link" href="index.html" aria-label="Stone Surgical Arts, home">
+          <span class="brand_component">
+            <span class="brand_name">Stone</span>
+            <span class="brand_rule"><span class="brand_sub">Surgical Arts</span></span>
+          </span>
+        </a>
+
+        <nav class="navbar_menu" aria-label="Primary">
+          <a class="navbar_link" href="neck-lift.html">Neck lift</a>
+          <a class="navbar_link" href="blepharoplasty.html">Eyelid surgery</a>
+          <a class="navbar_link" href="#contact">Contact</a>
+        </nav>
+
+        <div class="navbar_actions">
+          <a class="navbar_phone" href="tel:+18179183666">
+            <svg class="navbar_phone-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            (817) 918-3666
+          </a>
+          <a class="button is-small" href="#contact">Book a consultation</a>
+          <button class="navbar_burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- The mobile drawer. At 991px and below the navbar hides both its menu and
+     its phone number, so this panel is the ONLY place a phone gets the number
+     without scrolling to the footer. That is why it survives a one-page site:
+     it is not a menu any more, it is the mobile contact card.
+
+     A generated token used to expand here into four category headings and
+     twelve treatment links, built from treatments-data.mjs. Both are gone, and
+     so is the stray-token check's reason to complain about this file. -->
+<div class="drawer_component" id="drawer">
+  <div class="drawer_scrim"></div>
+  <div class="drawer_panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer_head">
+      <span class="brand_component">
+            <span class="brand_name">Stone</span>
+            <span class="brand_rule"><span class="brand_sub">Surgical Arts</span></span>
+          </span>
+      <button class="drawer_close" type="button" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="drawer_nav" aria-label="Mobile">
+      <a class="drawer_link" href="neck-lift.html">Neck lift</a>
+      <a class="drawer_link" href="blepharoplasty.html">Eyelid surgery</a>
+      <a class="drawer_link" href="#contact">Contact</a>
+    </nav>
+
+    <div class="drawer_foot">
+      <a class="button" href="#contact">Book a consultation</a>
+      <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
+      <p class="drawer_meta">72 Andorra Dr #110, Westlake, TX 76262</p>
+    </div>
+  </div>
+</div>
+
+<main class="main-wrapper" id="main">
+<!-- ==========================================================================
+     MEMBERSHIPS. Built 2026-09-02 in the elevated system.
+
+     Sang: "three tiers on a banked-credit model."
+
+     WHERE THE NUMBERS COME FROM, read this before showing the page to anyone.
+     The practice HAS a membership programme (a pinned highlight on the
+     @westlakeaesthetics Instagram); its terms are published nowhere. The
+     tier names, monthly amounts and perks are therefore a PROPOSAL, designed
+     around the mechanic Sang specified and labelled as such on the page.
+     What is NOT invented is the pricing they are calibrated against: the
+     practice's own published fees ($800 a filler syringe, $12 a Botox unit,
+     $380 microneedling, $189 HydraFacial, $3,400 blepharoplasty, $6,000
+     MyEllevate, $11,000 neck lift). The calculator does arithmetic on those
+     figures and nothing else.
+
+     Replace the three tiers with the client's real programme before launch.
+     The calculator reads each tier's monthly credit off a data attribute, so
+     the layout does not change when you do.
+     ========================================================================== -->
+
+<div class="memberships_page journey_page">
+
+  <section class="offer_hero has-ghost" data-chapter="00" data-chapter-name="Memberships">
+    <div class="ghost_word is-right" aria-hidden="true">Banked</div>
+    <div>
+      <p class="chapter_mark" data-j="rise">Memberships &middot; banked credit, no expiry</p>
+      <h1 class="display-xl" data-j-split>Credit that waits <em class="display-accent">for you</em>.</h1>
+      <p class="offer_hero-lede" data-j="rise">Most memberships are a use-it-or-lose-it subscription. This one is not. Your monthly amount becomes credit that accumulates until you decide what it is for: a syringe this spring, or a surgical fee next year.</p>
+    </div>
+    <div class="offer_hero-media" data-j="mask">
+      <div class="u-fill" data-parallax="8"><img src="assets/m-skin-glow.webp" alt="A close portrait of clear skin in soft daylight" width="1160" height="1450" fetchpriority="high"></div>
+    </div>
+  </section>
+
+  <!-- The mechanic: three things to understand. -->
+  <section class="mech_component" data-chapter="01" data-chapter-name="How it works">
+    <div class="mech_card" data-j="rise">
+      <span class="mech_num" aria-hidden="true">01</span>
+      <h2 class="mech_title">It banks</h2>
+      <p class="mech_text">Your monthly amount lands as credit on your account. Skip three months and you have three months of credit, and nothing expires while the membership is active.</p>
+    </div>
+    <div class="mech_card" data-j="rise">
+      <span class="mech_num" aria-hidden="true">02</span>
+      <h2 class="mech_title">It spends on anything</h2>
+      <p class="mech_text">Injectables, skin treatments, or against a surgical fee. Credit is credit; it is not restricted to one category or one product line.</p>
+    </div>
+    <div class="mech_card" data-j="rise">
+      <span class="mech_num" aria-hidden="true">03</span>
+      <h2 class="mech_title">It buys at member pricing</h2>
+      <p class="mech_text">Members pay less per unit and per syringe than the published fee, so banked credit goes further than the same money spent as a walk-in.</p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       THE CALCULATOR AND THE TIERS
+       12-elevate.js reads data-monthly off each tier and the months off the
+       range, and writes the banked total and what it buys at the practice's
+       published fees. Without JS the cards show the twelve-month figure.
+       ==================================================================== -->
+  <section class="calc_component stone-panel" id="tiers" data-chapter="02" data-chapter-name="The tiers">
+    <div class="calc_head">
+      <div>
+        <p class="chapter_mark" data-j="rise">The three tiers</p>
+        <h2 class="display-lg" data-j-split>Drag the months. Watch what each tier has banked.</h2>
+      </div>
+      <p class="calc_note" data-j="rise"><strong>Draft tiers, for review.</strong> The structure is the practice&rsquo;s model; the names, amounts and perks are a proposal to react to, and the fees the calculator uses are the practice&rsquo;s own published prices.</p>
+    </div>
+
+    <div class="calc_control" data-j="rise">
+      <span class="calc_label">Months of membership</span>
+      <input class="calc_range" type="range" min="1" max="24" value="12" step="1" aria-label="Months of membership" data-calc-range>
+      <p class="calc_months"><span data-calc-months>12</span><span>months</span></p>
+    </div>
+
+    <div class="tier_grid" data-j="stagger">
+      <article class="tier_card" data-monthly="125">
+        <div>
+          <h3 class="tier_name">Maintain</h3>
+          <p class="tier_tag">For someone whose routine is Botox twice a year and a facial when they remember.</p>
+        </div>
+        <p class="tier_price">$125 <span>/ month &middot; cancel any time</span></p>
+        <div class="tier_bank">
+          <p class="tier_bank-label">Banked after <span data-calc-months>12</span> months</p>
+          <p class="tier_banked" data-calc-banked>$1,500</p>
+          <p class="tier_buys" data-calc-buys>Enough for <strong>a syringe of filler</strong> with change</p>
+        </div>
+        <ul class="tier_list">
+          <li>Member pricing on injectables and skin treatments</li>
+          <li>One complimentary skin assessment a year</li>
+          <li>Credit never expires while the membership is active</li>
+        </ul>
+        <div><a class="button is-secondary" href="book.html">Enquire about Maintain</a></div>
+      </article>
+
+      <article class="tier_card is-featured" data-monthly="275">
+        <span class="tier_flag">Most chosen</span>
+        <div>
+          <h3 class="tier_name">Refine</h3>
+          <p class="tier_tag">For someone actively working on their skin, with a procedure somewhere on the horizon.</p>
+        </div>
+        <p class="tier_price">$250 <span>/ month &middot; banks $275, a 10% uplift</span></p>
+        <div class="tier_bank">
+          <p class="tier_bank-label">Banked after <span data-calc-months>12</span> months</p>
+          <p class="tier_banked" data-calc-banked>$3,300</p>
+          <p class="tier_buys" data-calc-buys>Enough for <strong>blepharoplasty</strong> outright</p>
+        </div>
+        <ul class="tier_list">
+          <li>Everything in Maintain, plus priority booking</li>
+          <li>Two complimentary treatment reviews a year</li>
+          <li>Credit applies to surgical fees, not only to injectables</li>
+          <li>Guest pass: one friend&rsquo;s first treatment at member pricing</li>
+        </ul>
+        <div><a class="button" href="book.html">Enquire about Refine</a></div>
+      </article>
+
+      <article class="tier_card" data-monthly="575">
+        <div>
+          <h3 class="tier_name">Sculpt</h3>
+          <p class="tier_tag">For someone building towards surgery, or already in a full facial programme.</p>
+        </div>
+        <p class="tier_price">$500 <span>/ month &middot; banks $575, a 15% uplift</span></p>
+        <div class="tier_bank">
+          <p class="tier_bank-label">Banked after <span data-calc-months>12</span> months</p>
+          <p class="tier_banked" data-calc-banked>$6,900</p>
+          <p class="tier_buys" data-calc-buys>Enough for <strong>a MyEllevate<span class="reg">&reg;</span> neck lift</strong> outright</p>
+        </div>
+        <ul class="tier_list">
+          <li>Everything in Refine, at the highest member pricing tier</li>
+          <li>Annual planning consultation with Dr. Stone</li>
+          <li>Credit transferable to an immediate family member</li>
+          <li>Combinable with Sunbit financing on a surgical fee</li>
+        </ul>
+        <div><a class="button is-secondary" href="book.html">Enquire about Sculpt</a></div>
+      </article>
+    </div>
+    <p class="tier_foot" data-j="rise">Memberships are monthly and can be cancelled at any time. Banked credit stays available for 90 days after cancellation. Credit is not redeemable for cash. &ldquo;What it buys&rdquo; is arithmetic on the practice&rsquo;s published fees before member pricing, so real credit goes further than shown.</p>
+  </section>
+
+  <!-- ====================================================================
+       WHAT THE CREDIT BUYS
+       The practice's own published rates, so the credit means something.
+       ==================================================================== -->
+  <section class="offer_component" data-chapter="03" data-chapter-name="What it buys">
+    <div class="offer_inner">
+      <div class="offer_row is-reverse" data-j="rise">
+        <div class="offer_body">
+          <p class="chapter_mark">What the credit buys</p>
+          <h2 class="offer_title">Priced against what the practice actually charges.</h2>
+          <p class="offer_text">Credit is only meaningful next to a real number. These are the practice&rsquo;s own published rates, and members buy skincare at member pricing too: the practice is an authorised skinbetter science<span class="reg">&reg;</span> stockist, a physician-dispensed line rather than something you can order yourself.</p>
+          <ul class="rates_component">
+            <li>Botox, Jeuveau <strong>$12 / unit</strong></li>
+            <li>Dysport <strong>$6 / unit</strong></li>
+            <li>Dermal filler <strong>$800 / syringe</strong></li>
+            <li>SkinPen <strong>$300 / session</strong></li>
+            <li>HydraFacial MD <strong>from $189</strong></li>
+            <li>Microneedling <strong>$380</strong></li>
+            <li>Morpheus8, three <strong>$2,800</strong></li>
+            <li>Blepharoplasty <strong>$3,400</strong></li>
+          </ul>
+          <div class="arrival_actions"><a class="button is-secondary" href="treatments.html">The full fee schedule</a></div>
+        </div>
+        <div class="offer_media" data-parallax="10">
+          <div class="u-fill" data-j="mask"><img src="assets/membership-still.webp" alt="Skincare products arranged on a shelf" width="1600" height="900" loading="lazy"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       THE QUESTIONS
+       ==================================================================== -->
+  <section class="hubfaq_component" id="questions" data-chapter="04" data-chapter-name="The small print">
+    <div>
+      <p class="chapter_mark" data-j="rise">Membership questions</p>
+      <h2 class="display-lg" data-j-split>The small print, in plain terms.</h2>
+      <div class="faq_list margin-top margin-large" data-j="rise">
+        <details class="faq_item">
+          <summary class="faq_question"><span class="faq_label">What happens to my credit if I cancel?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+          <div class="faq_answer"><p>It stays spendable for 90 days after your last payment, so nothing you have already paid for is lost. After that it lapses.</p></div>
+        </details>
+        <details class="faq_item">
+          <summary class="faq_question"><span class="faq_label">Can I use credit towards surgery?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+          <div class="faq_answer"><p>Yes, on Refine and Sculpt. Credit comes off the surgical fee, and the balance can be financed through Sunbit.</p></div>
+        </details>
+        <details class="faq_item">
+          <summary class="faq_question"><span class="faq_label">Can I spend more than I have banked?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+          <div class="faq_answer"><p>Yes: credit is applied first and you pay the difference at member pricing. There is no requirement to wait until the balance covers the whole treatment.</p></div>
+        </details>
+        <details class="faq_item">
+          <summary class="faq_question"><span class="faq_label">Can someone else use my credit?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+          <div class="faq_answer"><p>On Sculpt, credit is transferable to an immediate family member. On the other tiers it stays with the member.</p></div>
+        </details>
+        <details class="faq_item">
+          <summary class="faq_question"><span class="faq_label">Can I move between tiers?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+          <div class="faq_answer"><p>Up at any time, and down at the end of a billing month. Credit you have already banked moves with you.</p></div>
+        </details>
+      </div>
+    </div>
+    <div class="hubfaq_media" data-j="mask">
+      <div class="u-fill" data-parallax="8"><img src="assets/m-facelift-hand.webp" alt="A woman with a hand held to her cheek, looking at the camera" width="1160" height="1450" loading="lazy"></div>
+    </div>
+  </section>
+
+</div>
+
+<!-- The closing invitation, on every page. The line is the board's own.
+
+     THE PORTRAIT, 2026-09-01. All four reference home pages close on a
+     band that carries the surgeon's own photograph beside the booking
+     line. This one now does: the copy on the Carrara ground at left, Dr.
+     Stone at right, cropped to the band's height. Pages that end on their
+     own booking chapter (cta: false in build-site.mjs) never carry it. -->
+<section class="section_cta cta_component" id="contact">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="cta_inner" data-reveal>
+          <div class="cta_copy">
+          <p class="eyebrow is-center">Your next step</p>
+          <h2 class="heading-style-h2 cta_title">Your Confidence. <em class="text-style-display-accent">Our Commitment.</em></h2>
+          <p class="text-size-medium cta_text">Personalised care, advanced technique and beautiful, natural results, planned by the surgeon who performs them.</p>
+          <div class="button-group is-center cta_actions">
+            <a class="button" href="#contact">Schedule a consultation</a>
+            <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
+          </div>
+          </div>
+          <figure class="cta_media">
+            <img src="assets/dr-stone-standing.webp" alt="Dr. Mona Stone, DDS, in a white coat at the Westlake practice" width="988" height="1482" loading="lazy">
+            <figcaption class="cta_media-plate">Dr. Mona Stone, DDS</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<!-- The board's three-column footer.
+
+     The category ribbon that used to sit above it — Face, Neck & Jawline, Skin,
+     Non-Surgical, each linking to a tab on the treatments hub — went with the
+     hub on 2026-09-01. Its rules are still in 38-cta.css; nothing renders them.
+
+     NAP RESOLVED 2026-08-31. This used to carry the sister practice's values
+     ((817) 383-8361, suite #110A, Wed 9–3 / Fri 9–4) because the archive was
+     unreachable and the sister site was the only live source. The archive is
+     reachable again, and Stone Surgical Arts' OWN published footer — on every
+     recovered page — reads (817) 918-3666, 72 Andorra Dr #110, Mon–Fri 9–5,
+     Saturday by appointment. That is what is here now.
+
+     So the design board's footer was correct, not placeholder. See
+     SURGICAL-ARTS-BRIEF.md § "NAP" for the one page that disagrees. -->
+<footer class="footer_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-medium">
+        <div class="footer_top">
+          <div class="footer_col">
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 15s5-4.7 5-8.4A5 5 0 0 0 3 6.6C3 10.3 8 15 8 15Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
+              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110<br>Westlake, TX 76262</a>
+            </div>
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <a href="tel:+18179183666">(817) 918-3666</a>
+            </div>
+            <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
+          </div>
+
+          <div class="footer_brand">
+            <span class="brand_component is-large">
+            <span class="brand_name">Stone</span>
+            <span class="brand_rule"><span class="brand_sub">Surgical Arts</span></span>
+          </span>
+            <div class="footer_socials">
+              <a class="footer_social" href="https://www.instagram.com/stonesurgicalart/" aria-label="Stone Surgical Arts on Instagram" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
+              </a>
+              <a class="footer_social" href="https://www.facebook.com/stonesurgicalarts/" aria-label="Stone Surgical Arts on Facebook" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 8.5H17V5.2h-2.6c-2.3 0-3.9 1.6-3.9 4v2H8v3.3h2.5V22h3.4v-7.5h2.5l.5-3.3h-3v-1.6c0-.6.4-1.1 1.1-1.1Z" fill="currentColor"/></svg>
+              </a>
+              <!-- The med spa's own Instagram — a second account, so it gets the
+                   Instagram glyph too, distinguished by its label. -->
+              <a class="footer_social" href="https://www.instagram.com/westlakeaesthetics/" aria-label="Westlake Medical Aesthetics on Instagram" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
+              </a>
+              <a class="footer_social" href="https://linktr.ee/stonesurgicalarts" aria-label="All Stone Surgical Arts links" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M5.5 7.5 12 11l6.5-3.5M5.5 14 12 17.5 18.5 14" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer_col is-right">
+            <p class="text-size-tiny text-style-allcaps text-color-accent">Hours</p>
+            <dl class="footer_hours">
+              <div class="footer_hours-row"><dt>Mon &ndash; Fri</dt><dd>9:00 – 5:00</dd></div>
+              <div class="footer_hours-row"><dt>Saturday</dt><dd>By appointment</dd></div>
+              <div class="footer_hours-row"><dt>Sunday</dt><dd>Closed</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="footer_signature">
+          <svg class="footer_signature-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M24 3 45 24 24 45 3 24 24 3Z" stroke="currentColor" stroke-width="1"/>
+            <text x="24" y="30" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="18" fill="currentColor">S</text>
+          </svg>
+          <p class="footer_signature-words">Sculpt. Lift. Define.</p>
+        </div>
+
+        <!-- LAUNCH TASK: these three point at the sister site's live policies,
+             which cover the same legal entity, so nothing here is a dead link
+             today. Stone Surgical Arts needs its own copies in Instatic before
+             the domain goes live — see HANDOFF.md. -->
+        <div class="footer_legal">
+          <span>&copy; <span data-year>2026</span> Stone Surgical Arts. All rights reserved.</span>
+          <a href="https://www.stonedentalimplantcenter.com/privacy-policy" rel="noopener">Privacy Policy</a>
+          <a href="https://www.stonedentalimplantcenter.com/terms-of-service" rel="noopener">Terms of Service</a>
+          <a href="https://www.stonedentalimplantcenter.com/sms-terms-conditions" rel="noopener">SMS Terms</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script src="assets/vendor.js" defer></script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

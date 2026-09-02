@@ -75,6 +75,8 @@ const PAGES = [
   { slug: "meet-the-doctor", src: "meet-the-doctor", photoHero: false, motion: true },
   { slug: "about", src: "about", photoHero: true, motion: true },
   { slug: "team", src: "team", photoHero: true, motion: true },
+  { slug: "memberships", src: "memberships", photoHero: false, motion: true },
+  { slug: "results", src: "results", photoHero: false, motion: true },
 ];
 
 /* --- bundles --------------------------------------------------------------

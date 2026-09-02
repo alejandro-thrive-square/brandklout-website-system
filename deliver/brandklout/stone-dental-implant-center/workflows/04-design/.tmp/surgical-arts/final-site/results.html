@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F6F4EF">
+<!-- Title, description, Open Graph, canonical and JSON-LD are injected by
+     build-site.mjs from seo.json. Do not hand-edit the output in final-site/ —
+     edit seo.json and rebuild. -->
+<title>Results &amp; Reviews | Stone Surgical Arts, Westlake TX</title>
+<meta name="description" content="Before-and-after cases published only with each patient's current consent, and the practice's own patient reviews: a 4.8 average across more than 142.">
+<link rel="canonical" href="https://www.stonesurgicalarts.com/results">
+<meta property="og:site_name" content="Stone Surgical Arts">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://www.stonesurgicalarts.com/results">
+<meta property="og:title" content="Results &amp; Reviews | Stone Surgical Arts">
+<meta property="og:description" content="Consented before-and-after photography and the practice's own reviews, from cosmetic patients of Dr. Mona Stone in Westlake, Texas.">
+<meta property="og:image" content="https://www.stonesurgicalarts.com/assets/banner-ssa.avif">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Results &amp; Reviews | Stone Surgical Arts">
+<meta name="twitter:description" content="Consented before-and-after photography and the practice's own reviews, from cosmetic patients of Dr. Mona Stone in Westlake, Texas.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": [
+        "MedicalBusiness",
+        "MedicalClinic"
+      ],
+      "@id": "https://www.stonesurgicalarts.com/#practice",
+      "name": "Stone Surgical Arts",
+      "alternateName": "Stone Surgical Arts: Facial & Cosmetic Surgery",
+      "url": "https://www.stonesurgicalarts.com/",
+      "description": "Boutique facial and cosmetic surgery practice in Westlake, Texas, led by oral and maxillofacial surgeon Dr. Mona Stone, DDS.",
+      "medicalSpecialty": "PlasticSurgery",
+      "telephone": "+1-817-918-3666",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "72 Andorra Dr #110",
+        "addressLocality": "Westlake",
+        "addressRegion": "TX",
+        "postalCode": "76262",
+        "addressCountry": "US"
+      },
+      "areaServed": [
+        {
+          "@type": "City",
+          "name": "Westlake"
+        },
+        {
+          "@type": "City",
+          "name": "Southlake"
+        },
+        {
+          "@type": "City",
+          "name": "Fort Worth"
+        },
+        {
+          "@type": "City",
+          "name": "Keller"
+        },
+        {
+          "@type": "City",
+          "name": "Colleyville"
+        },
+        {
+          "@type": "City",
+          "name": "Grapevine"
+        },
+        {
+          "@type": "City",
+          "name": "Roanoke"
+        },
+        {
+          "@type": "City",
+          "name": "Trophy Club"
+        },
+        {
+          "@type": "City",
+          "name": "North Richland Hills"
+        },
+        {
+          "@type": "City",
+          "name": "Coppell"
+        },
+        {
+          "@type": "City",
+          "name": "Flower Mound"
+        },
+        {
+          "@type": "City",
+          "name": "Irving"
+        },
+        {
+          "@type": "City",
+          "name": "Denton"
+        },
+        {
+          "@type": "City",
+          "name": "Argyle"
+        }
+      ],
+      "availableLanguage": [
+        "English",
+        "Spanish"
+      ],
+      "sameAs": [
+        "https://www.instagram.com/stonesurgicalart/",
+        "https://www.instagram.com/westlakeaesthetics/",
+        "https://www.facebook.com/stonesurgicalarts/",
+        "https://linktr.ee/stonesurgicalarts"
+      ],
+      "founder": {
+        "@id": "https://www.stonesurgicalarts.com/about#dr-mona-stone"
+      },
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      ],
+      "email": "info@stonesurgicalarts.com",
+      "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": "4.8",
+        "reviewCount": "142"
+      }
+    },
+    {
+      "@type": "WebPage",
+      "name": "Results & Reviews",
+      "url": "https://www.stonesurgicalarts.com/results",
+      "about": {
+        "@id": "https://www.stonesurgicalarts.com/#practice"
+      }
+    }
+  ]
+}
+</script>
+<!-- The two typefaces are SELF-HOSTED, in assets/fonts/, declared by
+     css/03-fonts.css and therefore already inside assets/site.css. There is no
+     request to fonts.googleapis.com any more: this is a medical practice, and a
+     third-party stylesheet on every page view hands Google the IP of everyone
+     who visits. Regenerate with `node site-src/get-fonts.mjs --force`.
+
+     The two most-used cuts are preloaded, because a webfont declared inside a
+     stylesheet is not discovered until that stylesheet has parsed, and these
+     two set the headline and the body copy. -->
+<link rel="preload" href="assets/fonts/cormorant-garamond-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+<!-- Every scroll-reveal rule in the stylesheet is scoped to .js, and this is
+     what sets it. Inline and in the head so it lands before first paint — there
+     is no flash of content that then hides itself.
+
+     The timer is the safety net. Reveals start at opacity 0, so if site.js
+     never boots — blocked bundle, an Instatic script conflict, a bad cache —
+     content that should be visible would stay invisible. If nothing has
+     signalled ready inside 2.5s the class comes off and the whole page paints,
+     unanimated. A site with no animation is fine; a site with no content is
+     not. -->
+<script>
+  document.documentElement.classList.add('js');
+  setTimeout(function () {
+    if (!window.__ssaBooted) document.documentElement.classList.remove('js');
+  }, 2500);
+</script>
+<!-- A favicon file has not been supplied. This draws the wordmark's S on the
+     brand ivory so the tab is never a blank sheet; replace it with the real
+     mark when the client sends one. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F4EF'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23272727'%3ES%3C/text%3E%3C/svg%3E">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="page-wrapper">
+<!-- The navbar, since 2026-09-01, on a site that is one page.
+
+     WHAT WAS HERE. A Treatments link with a mega-dropdown listing four
+     categories and twelve treatment pages, then Results, Memberships, About and
+     Contact. Every one of those destinations was deleted with the pages, so the
+     menu is down to the two things that still lead somewhere: the phone number,
+     and the invitation at the foot of the home page.
+
+     ONE TREATMENT LINK CAME BACK on 2026-09-01, with the neck lift page, and a
+     SECOND the same day with the blepharoplasty. Two treatments listed flat is
+     still not a Treatments menu, and it is still the honest shape: these are
+     the treatment pages that exist, and a page nobody can reach cannot be
+     reviewed. The dropdown returns when the count does, and it is in git at
+     196ef87f~1.
+
+     `{{CUR_<SLUG>}}` expands to `aria-current="page"` on that page and to
+     nothing everywhere else; build-site.mjs matches the token against the page
+     slug, lower-cased with underscores turned into hyphens. 20-navbar.css
+     already styles `.navbar_link[aria-current="page"]`, so the marker is
+     semantic first and decorated second. -->
+<header class="navbar_component is-static" data-nav>
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="navbar_container">
+        <a class="navbar_logo-link" href="index.html" aria-label="Stone Surgical Arts, home">
+          <span class="brand_component">
+            <span class="brand_name">Stone</span>
+            <span class="brand_rule"><span class="brand_sub">Surgical Arts</span></span>
+          </span>
+        </a>
+
+        <nav class="navbar_menu" aria-label="Primary">
+          <a class="navbar_link" href="neck-lift.html">Neck lift</a>
+          <a class="navbar_link" href="blepharoplasty.html">Eyelid surgery</a>
+          <a class="navbar_link" href="#contact">Contact</a>
+        </nav>
+
+        <div class="navbar_actions">
+          <a class="navbar_phone" href="tel:+18179183666">
+            <svg class="navbar_phone-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            (817) 918-3666
+          </a>
+          <a class="button is-small" href="#contact">Book a consultation</a>
+          <button class="navbar_burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- The mobile drawer. At 991px and below the navbar hides both its menu and
+     its phone number, so this panel is the ONLY place a phone gets the number
+     without scrolling to the footer. That is why it survives a one-page site:
+     it is not a menu any more, it is the mobile contact card.
+
+     A generated token used to expand here into four category headings and
+     twelve treatment links, built from treatments-data.mjs. Both are gone, and
+     so is the stray-token check's reason to complain about this file. -->
+<div class="drawer_component" id="drawer">
+  <div class="drawer_scrim"></div>
+  <div class="drawer_panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer_head">
+      <span class="brand_component">
+            <span class="brand_name">Stone</span>
+            <span class="brand_rule"><span class="brand_sub">Surgical Arts</span></span>
+          </span>
+      <button class="drawer_close" type="button" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="drawer_nav" aria-label="Mobile">
+      <a class="drawer_link" href="neck-lift.html">Neck lift</a>
+      <a class="drawer_link" href="blepharoplasty.html">Eyelid surgery</a>
+      <a class="drawer_link" href="#contact">Contact</a>
+    </nav>
+
+    <div class="drawer_foot">
+      <a class="button" href="#contact">Book a consultation</a>
+      <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
+      <p class="drawer_meta">72 Andorra Dr #110, Westlake, TX 76262</p>
+    </div>
+  </div>
+</div>
+
+<main class="main-wrapper" id="main">
+<!-- ==========================================================================
+     RESULTS. Built 2026-09-02 in the elevated system.
+
+     Sang: "filterable before/after gallery plus reviews."
+
+     THE GALLERY IS EMPTY, ON PURPOSE, AND THE PAGE SAYS SO. The archived
+     site published 33 before/after cases of identifiable patients who
+     consented to a website that no longer exists under a brand that has
+     been retired; the Drive export adds a device manufacturer's photograph
+     of another surgeon's patient. None of it goes here. No stock or
+     generated "case" goes here either, because a fabricated clinical outcome
+     is the one claim a prospective patient relies on. The band below says
+     what the gallery is waiting for, and the filter and the wall are built
+     so the day the practice hands over consented cases, each one is a card.
+
+     THE REVIEWS ARE REAL. Eight, published by the practice itself with the
+     patient's name on stonesurgicalarts.com, recovered verbatim from the
+     archived testimonials page and trimmed only for length. Two carry no
+     name because none was published. The filter works on these today.
+     ========================================================================== -->
+
+<div class="results_page journey_page">
+
+  <section class="offer_hero stone-panel has-ghost" data-chapter="00" data-chapter-name="Results">
+    <div class="ghost_word" aria-hidden="true">Results</div>
+    <div>
+      <p class="chapter_mark" data-j="rise">Results &middot; before and after, and reviews</p>
+      <h1 class="display-xl" data-j-split>The work speaks in pairs of <em class="display-accent">photographs</em>.</h1>
+      <p class="offer_hero-lede" data-j="rise">Every case shown here is one of Dr. Stone&rsquo;s own patients, photographed under the same lighting and the same angle each time, and published only with that patient&rsquo;s current written consent.</p>
+    </div>
+    <div class="offer_hero-figure" data-j="rise">
+      <span class="offer_hero-stars" aria-hidden="true">
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.8 3.8 14.1l1-4.6L1.3 6.3 6 5.8z"/></svg>
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.8 3.8 14.1l1-4.6L1.3 6.3 6 5.8z"/></svg>
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.8 3.8 14.1l1-4.6L1.3 6.3 6 5.8z"/></svg>
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.8 3.8 14.1l1-4.6L1.3 6.3 6 5.8z"/></svg>
+        <svg viewBox="0 0 16 16" fill="currentColor"><path d="M8 1.5l2 4.3 4.7.5-3.5 3.2 1 4.6L8 11.8 3.8 14.1l1-4.6L1.3 6.3 6 5.8z"/></svg>
+      </span>
+      <p class="ledger_value" data-count="4.8">4.8</p>
+      <p class="ledger_label">From 142+ patient reviews</p>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       BEFORE & AFTER: the honest state
+       ==================================================================== -->
+  <section class="consent_component" id="gallery" data-chapter="01" data-chapter-name="Before & after">
+    <div class="consent_media" data-parallax="12">
+      <img src="assets/m-profile-light.webp" alt="A woman in profile in a slant of warm light" width="1600" height="900" loading="lazy">
+    </div>
+    <div class="consent_inner">
+      <div>
+        <p class="chapter_mark" data-j="rise">Before &amp; after</p>
+        <h2 class="display-lg" data-j-split>Photography is on its way, and it will be consented.</h2>
+      </div>
+      <div data-j="rise">
+        <p class="consent_text">The practice is preparing a new set of before-and-after cases, photographed to a consistent standard and published with each patient&rsquo;s current consent. Until then, ask at your consultation, where Dr. Stone will show you cases like yours in the room.</p>
+        <p class="consent_text">No result on this page is a guarantee of yours: anatomy, healing and ageing differ from person to person.</p>
+        <div class="consent_actions">
+          <a class="button" href="book.html">Book a consultation</a>
+          <a class="button is-secondary" href="https://www.instagram.com/stonesurgicalart/" rel="noopener">Recent work on Instagram</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ====================================================================
+       THE REVIEW WALL
+       ==================================================================== -->
+  <section class="wall_component" id="reviews" data-chapter="02" data-chapter-name="In their words">
+    <div class="wall_head">
+      <div>
+        <p class="chapter_mark" data-j="rise">In their words</p>
+        <h2 class="display-lg" data-j-split>What patients say afterwards.</h2>
+      </div>
+      <p class="steps_lede" data-j="rise">A 4.8 average across more than 142 reviews. These are the ones from cosmetic patients, published by the practice itself.</p>
+    </div>
+
+    <div data-filter data-j="rise">
+      <div class="filter_bar" role="group" aria-label="Filter reviews by treatment">
+        <button class="filter_btn" type="button" data-filter-value="all" aria-pressed="true">All</button>
+        <button class="filter_btn" type="button" data-filter-value="surgical" aria-pressed="false">Surgical</button>
+        <button class="filter_btn" type="button" data-filter-value="nonsurgical" aria-pressed="false">Non-surgical</button>
+        <button class="filter_btn" type="button" data-filter-value="skin" aria-pressed="false">Skin</button>
+        <button class="filter_btn" type="button" data-filter-value="consultation" aria-pressed="false">The consultation</button>
+      </div>
+      <p class="filter_count" data-filter-count>8 reviews</p>
+
+      <div class="wall_grid">
+        <figure class="wall_card is-large" data-filter-tags="nonsurgical">
+          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="wall_text">I went in looking for lip fillers wanting the &ldquo;sexy pout&rdquo;. Dr. Stone talked me through the process and told me she would not overfill for the sake of having big lips. Which I loved. She said we would start small and work our way up. I am in love with my lips. Plump but natural.</blockquote>
+          <figcaption class="wall_meta"><span class="wall_name">Sarah Routon</span><span class="wall_tag">Lip filler</span></figcaption>
+        </figure>
+        <figure class="wall_card" data-filter-tags="surgical">
+          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="wall_text">Dr. Stone and her staff made me feel comfortable and welcomed. My eyelid surgery went very well and I am very pleased. I highly recommend her!</blockquote>
+          <figcaption class="wall_meta"><span class="wall_name">Bahereh Hessari</span><span class="wall_tag">Blepharoplasty</span></figcaption>
+        </figure>
+        <figure class="wall_card" data-filter-tags="nonsurgical">
+          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="wall_text">Dr. Stone will hear your concerns and give you all of your options. At no point will you feel pressured in your treatment choices. I started out with more of a conservative maintenance with my cosmetic facial routine and I couldn&rsquo;t be happier with the results.</blockquote>
+          <figcaption class="wall_meta"><span class="wall_name">Darci Wilson</span><span class="wall_tag">Non-surgical</span></figcaption>
+        </figure>
+        <figure class="wall_card" data-filter-tags="consultation">
+          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="wall_text">Dr. Stone is so kind and also a great, proactive surgeon. Not only do I send patients to her, I am one myself. The office and staff are equally fantastic.</blockquote>
+          <figcaption class="wall_meta"><span class="wall_name">Brittney Culp</span><span class="wall_tag">Referring provider</span></figcaption>
+        </figure>
+        <figure class="wall_card" data-filter-tags="consultation">
+          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="wall_text">Absolutely beautiful office with cutting-edge equipment. The staff at Stone Surgical Arts are an amazing team. Dr. Stone is an incredible surgeon, she takes the time to talk through procedures and treatment plans with her patients.</blockquote>
+          <figcaption class="wall_meta"><span class="wall_name">Dia P.</span><span class="wall_tag">Consultation</span></figcaption>
+        </figure>
+        <figure class="wall_card" data-filter-tags="consultation">
+          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="wall_text">My consultation was unrushed and there was no pressure of any kind, while still being completely professional. Everyone at the front desk is friendly and helpful.</blockquote>
+          <figcaption class="wall_meta"><span class="wall_name">Google review</span><span class="wall_tag">Consultation</span></figcaption>
+        </figure>
+        <figure class="wall_card" data-filter-tags="skin">
+          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="wall_text">Four months ago I took my daughter to Dr. Stone with her face covered with acne, and through the past few months she has helped my daughter clear her skin tremendously. It&rsquo;s a friendly environment and she&rsquo;s the sweetest doctor ever.</blockquote>
+          <figcaption class="wall_meta"><span class="wall_name">Saul Rivera</span><span class="wall_tag">Skin</span></figcaption>
+        </figure>
+        <figure class="wall_card" data-filter-tags="consultation">
+          <span class="wall_mark" aria-hidden="true">&ldquo;</span>
+          <blockquote class="wall_text">Solo quiero dar muchas gracias a la doctora Mona. Mi experiencia fue muy buena y todo el personal son s&uacute;per amables, y atentas.</blockquote>
+          <figcaption class="wall_meta"><span class="wall_name">Google review</span><span class="wall_tag">En espa&ntilde;ol</span></figcaption>
+        </figure>
+      </div>
+      <p class="wall_empty" data-filter-empty>No published cosmetic review carries this tag yet.</p>
+    </div>
+    <p class="tier_foot" data-j="rise">Reviews as published by the practice. Two are shown without a name because none was published with them. The live Google widget, when it is wired in, goes above this wall rather than in place of it.</p>
+  </section>
+
+  <!-- The two treatment pages that exist, as the way into the work. -->
+  <section class="related_component" aria-label="Treatment pages">
+    <div class="related_head">
+      <p class="dsec_mark is-flush">Read about the work</p>
+      <a class="related_all" href="treatments.html">Every treatment, with fees <span aria-hidden="true">&rarr;</span></a>
+    </div>
+    <div class="related_grid">
+      <a class="related_card" href="neck-lift.html">
+        <div class="related_media" data-j="mask"><img src="assets/p-neck-profile.webp" alt="" width="1400" height="2100" loading="lazy"></div>
+        <h3 class="related_name">Neck lift</h3>
+        <p class="related_text">The full surgical procedure, with muscle repair and skin removal. $11,000.</p>
+        <p class="related_more">The dossier <span aria-hidden="true">&rarr;</span></p>
+      </a>
+      <a class="related_card" href="blepharoplasty.html">
+        <div class="related_media" data-j="mask"><img src="assets/p-eyes-portrait.webp" alt="" width="1400" height="2100" loading="lazy"></div>
+        <h3 class="related_name">Blepharoplasty</h3>
+        <p class="related_text">Eyelid surgery, upper or lower. The smallest operation on the list. $3,400.</p>
+        <p class="related_more">The dossier <span aria-hidden="true">&rarr;</span></p>
+      </a>
+      <a class="related_card" href="treatments.html#neck">
+        <div class="related_media" data-j="mask"><img src="assets/m-jawline.webp" alt="" width="1200" height="1200" loading="lazy"></div>
+        <h3 class="related_name">Jawline implant</h3>
+        <p class="related_text">The work that earned Dr. Stone the name @drjawline. $10,000.</p>
+        <p class="related_more">On the treatments page <span aria-hidden="true">&rarr;</span></p>
+      </a>
+    </div>
+  </section>
+
+</div>
+
+<!-- The closing invitation, on every page. The line is the board's own.
+
+     THE PORTRAIT, 2026-09-01. All four reference home pages close on a
+     band that carries the surgeon's own photograph beside the booking
+     line. This one now does: the copy on the Carrara ground at left, Dr.
+     Stone at right, cropped to the band's height. Pages that end on their
+     own booking chapter (cta: false in build-site.mjs) never carry it. -->
+<section class="section_cta cta_component" id="contact">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="cta_inner" data-reveal>
+          <div class="cta_copy">
+          <p class="eyebrow is-center">Your next step</p>
+          <h2 class="heading-style-h2 cta_title">Your Confidence. <em class="text-style-display-accent">Our Commitment.</em></h2>
+          <p class="text-size-medium cta_text">Personalised care, advanced technique and beautiful, natural results, planned by the surgeon who performs them.</p>
+          <div class="button-group is-center cta_actions">
+            <a class="button" href="#contact">Schedule a consultation</a>
+            <a class="button is-secondary" href="tel:+18179183666">Call (817) 918-3666</a>
+          </div>
+          </div>
+          <figure class="cta_media">
+            <img src="assets/dr-stone-standing.webp" alt="Dr. Mona Stone, DDS, in a white coat at the Westlake practice" width="988" height="1482" loading="lazy">
+            <figcaption class="cta_media-plate">Dr. Mona Stone, DDS</figcaption>
+          </figure>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<!-- The board's three-column footer.
+
+     The category ribbon that used to sit above it — Face, Neck & Jawline, Skin,
+     Non-Surgical, each linking to a tab on the treatments hub — went with the
+     hub on 2026-09-01. Its rules are still in 38-cta.css; nothing renders them.
+
+     NAP RESOLVED 2026-08-31. This used to carry the sister practice's values
+     ((817) 383-8361, suite #110A, Wed 9–3 / Fri 9–4) because the archive was
+     unreachable and the sister site was the only live source. The archive is
+     reachable again, and Stone Surgical Arts' OWN published footer — on every
+     recovered page — reads (817) 918-3666, 72 Andorra Dr #110, Mon–Fri 9–5,
+     Saturday by appointment. That is what is here now.
+
+     So the design board's footer was correct, not placeholder. See
+     SURGICAL-ARTS-BRIEF.md § "NAP" for the one page that disagrees. -->
+<footer class="footer_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-medium">
+        <div class="footer_top">
+          <div class="footer_col">
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 15s5-4.7 5-8.4A5 5 0 0 0 3 6.6C3 10.3 8 15 8 15Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
+              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110<br>Westlake, TX 76262</a>
+            </div>
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <a href="tel:+18179183666">(817) 918-3666</a>
+            </div>
+            <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
+          </div>
+
+          <div class="footer_brand">
+            <span class="brand_component is-large">
+            <span class="brand_name">Stone</span>
+            <span class="brand_rule"><span class="brand_sub">Surgical Arts</span></span>
+          </span>
+            <div class="footer_socials">
+              <a class="footer_social" href="https://www.instagram.com/stonesurgicalart/" aria-label="Stone Surgical Arts on Instagram" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
+              </a>
+              <a class="footer_social" href="https://www.facebook.com/stonesurgicalarts/" aria-label="Stone Surgical Arts on Facebook" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 8.5H17V5.2h-2.6c-2.3 0-3.9 1.6-3.9 4v2H8v3.3h2.5V22h3.4v-7.5h2.5l.5-3.3h-3v-1.6c0-.6.4-1.1 1.1-1.1Z" fill="currentColor"/></svg>
+              </a>
+              <!-- The med spa's own Instagram — a second account, so it gets the
+                   Instagram glyph too, distinguished by its label. -->
+              <a class="footer_social" href="https://www.instagram.com/westlakeaesthetics/" aria-label="Westlake Medical Aesthetics on Instagram" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
+              </a>
+              <a class="footer_social" href="https://linktr.ee/stonesurgicalarts" aria-label="All Stone Surgical Arts links" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M12 3v18M5.5 7.5 12 11l6.5-3.5M5.5 14 12 17.5 18.5 14" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round"/></svg>
+              </a>
+            </div>
+          </div>
+
+          <div class="footer_col is-right">
+            <p class="text-size-tiny text-style-allcaps text-color-accent">Hours</p>
+            <dl class="footer_hours">
+              <div class="footer_hours-row"><dt>Mon &ndash; Fri</dt><dd>9:00 – 5:00</dd></div>
+              <div class="footer_hours-row"><dt>Saturday</dt><dd>By appointment</dd></div>
+              <div class="footer_hours-row"><dt>Sunday</dt><dd>Closed</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="footer_signature">
+          <svg class="footer_signature-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M24 3 45 24 24 45 3 24 24 3Z" stroke="currentColor" stroke-width="1"/>
+            <text x="24" y="30" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="18" fill="currentColor">S</text>
+          </svg>
+          <p class="footer_signature-words">Sculpt. Lift. Define.</p>
+        </div>
+
+        <!-- LAUNCH TASK: these three point at the sister site's live policies,
+             which cover the same legal entity, so nothing here is a dead link
+             today. Stone Surgical Arts needs its own copies in Instatic before
+             the domain goes live — see HANDOFF.md. -->
+        <div class="footer_legal">
+          <span>&copy; <span data-year>2026</span> Stone Surgical Arts. All rights reserved.</span>
+          <a href="https://www.stonedentalimplantcenter.com/privacy-policy" rel="noopener">Privacy Policy</a>
+          <a href="https://www.stonedentalimplantcenter.com/terms-of-service" rel="noopener">Terms of Service</a>
+          <a href="https://www.stonedentalimplantcenter.com/sms-terms-conditions" rel="noopener">SMS Terms</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script src="assets/vendor.js" defer></script>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

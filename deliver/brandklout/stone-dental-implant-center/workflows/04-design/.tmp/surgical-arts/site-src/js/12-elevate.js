@@ -475,9 +475,115 @@
     });
   }
 
+  /* --- the membership calculator ------------------------------------------
+     Months in, banked credit and what it buys out, per tier. The milestones
+     are the practice's published fees (treatments.html); the tier's monthly
+     credit is a data attribute on the card, so replacing the proposed tiers
+     with the real programme is a markup edit. */
+  function calculator() {
+    var range = $("[data-calc-range]");
+    if (!range) return;
+    var cards = $$("[data-monthly]");
+    var monthsOut = $$("[data-calc-months]");
+    var milestones = [
+      [11000, "a full neck lift"],
+      [6000, "a MyEllevate neck lift"],
+      [3400, "blepharoplasty"],
+      [2800, "a Morpheus8 course of three"],
+      [1600, "two syringes of filler"],
+      [800, "a syringe of filler"],
+      [380, "a microneedling session"],
+      [189, "a HydraFacial"],
+    ];
+    var money = function (n) {
+      return "$" + Math.round(n).toLocaleString("en-US");
+    };
+    var update = function () {
+      var m = parseInt(range.value, 10) || 1;
+      monthsOut.forEach(function (el) {
+        el.textContent = String(m);
+      });
+      cards.forEach(function (card) {
+        var monthly = parseFloat(card.getAttribute("data-monthly")) || 0;
+        var banked = monthly * m;
+        var out = $("[data-calc-banked]", card);
+        var buys = $("[data-calc-buys]", card);
+        if (out) out.textContent = money(banked);
+        if (buys) {
+          var hit = null;
+          for (var i = 0; i < milestones.length; i++) {
+            if (banked >= milestones[i][0]) {
+              hit = milestones[i];
+              break;
+            }
+          }
+          if (!hit) buys.innerHTML = "Building towards <strong>a HydraFacial</strong> at $189";
+          else {
+            var change = banked - hit[0];
+            buys.innerHTML = "Enough for <strong>" + hit[1] + "</strong>" + (change >= 189 ? " with " + money(change) + " to spare" : "");
+          }
+        }
+      });
+    };
+    range.addEventListener("input", update);
+    update();
+  }
+
+  /* --- the review filter ---------------------------------------------------
+     Tag buttons over a wall of cards. Cards carry data-filter-tags; the
+     count and the empty state follow the selection. */
+  function filter() {
+    var root = $("[data-filter]");
+    if (!root) return;
+    var buttons = $$("[data-filter-value]", root);
+    var cards = $$("[data-filter-tags]", root);
+    var count = $("[data-filter-count]", root);
+    var empty = $("[data-filter-empty]", root);
+    var apply = function (value) {
+      var shown = 0;
+      cards.forEach(function (c) {
+        var tags = (c.getAttribute("data-filter-tags") || "").split(/\s+/);
+        var on = value === "all" || tags.indexOf(value) > -1;
+        c.classList.toggle("is-hidden", !on);
+        if (on) shown++;
+      });
+      buttons.forEach(function (b) {
+        b.setAttribute("aria-pressed", b.getAttribute("data-filter-value") === value ? "true" : "false");
+      });
+      if (count) count.textContent = shown + (shown === 1 ? " review" : " reviews");
+      if (empty) empty.classList.toggle("is-on", shown === 0);
+    };
+    buttons.forEach(function (b) {
+      b.addEventListener("click", function () {
+        apply(b.getAttribute("data-filter-value"));
+      });
+    });
+  }
+
+  /* --- the consultation form -----------------------------------------------
+     The form has no endpoint yet (HANDOFF.md, the wiring job at Instatic
+     setup). Until it does, submitting it must not look like it worked: the
+     page says so and points at the two ways in that do. Remove this the day
+     the action attribute exists. */
+  function form() {
+    var f = $('form[data-form="consultation"]');
+    if (!f || f.getAttribute("action")) return;
+    var status = $(".form_status", f);
+    f.addEventListener("submit", function (e) {
+      e.preventDefault();
+      if (status) {
+        status.hidden = false;
+        status.focus();
+      }
+    });
+  }
+
   function boot() {
     veil();
     jump();
+    calculator();
+    filter();
+    form();
     masks();
     marquees();
     magnetic();
