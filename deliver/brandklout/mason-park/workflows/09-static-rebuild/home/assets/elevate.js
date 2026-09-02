@@ -1,29 +1,37 @@
 /* ===========================================================================
-   THE ELEVATION LAYER — Mason Park Dental, 2026-09-02.
+   THE ELEVATION LAYER — Mason Park Dental, 2026-09-02, second cut.
 
    WHY. The client, reviewing staging: "There is too much text overall ...
-   more images, less text and more animations", pointing at the elevation
-   done on the Stone Surgical Arts home page the day before. This is that
-   layer in Mason Park's vocabulary: the components the Stone page grew
-   (mask reveals, parallax frames, a filmstrip, a catalogue with a sticky
-   photograph, an index whose photograph follows the cursor, a review
-   carousel, ghost words, a town ticker, magnetic buttons, a one-second
-   veil) rebuilt on this site's tokens, and fed with the practice's OWN
-   photographs from the client's album (see .tmp/import-album.mjs).
+   more images, less text and more animations." The first cut of this file
+   ported the Stone Surgical Arts components one for one (catalogue accordion
+   with a sticky photograph, cursor-following index, review carousel,
+   filmstrip marquee, ghost words, town ticker, veil, hero inset), and the
+   client's second note was the right one: "You practically cloned the stone
+   site structure. None of our client sites should be the same." So these
+   are DIFFERENT shapes that answer the same brief, and none of them exists
+   on the Stone build:
 
-   Same three rules as journey.js, and they are not negotiable:
+     the stack      three hero frames that fan out as the page starts to scroll
+     the columns    a photo wall in three columns moving at three speeds
+     the tabs       service groups as a row of display-size tabs, one big frame
+     the finder     rows that swap a photograph in a sticky side panel
+     the deck       reviews as cards that stack on each other as you scroll
+     the pair       two half-bleed photographs sliding in from either edge
+     the pillars    three tall portraits revealed one after another by scroll
+     the pane       a tall photograph in a narrow column beside a dark chapter
+     the sheet      a contact sheet, grayscale at rest, colour under the pointer
+     the seal       a slow-turning ring of type, the practice's own stamp
+
+   Same three rules as journey.js, not negotiable:
      1. NOTHING IS HIDDEN BY THIS FILE. Every hidden state in site.css is
-        scoped to `html.el-ready`, which this file sets first thing, so a
-        page whose script never runs is the plain page.
-     2. GSAP IS OPTIONAL. Parallax and the ghost drift use ScrollTrigger
-        when it is there and do nothing when it is not; everything else runs
-        on IntersectionObserver and CSS transitions.
-     3. REDUCED MOTION IS A BRANCH. No veil, no parallax, no marquee loop,
-        no autoplay, no cursor-following frame. The controls still work.
+        scoped to `html.el-ready`, which this file sets first thing.
+     2. GSAP IS OPTIONAL. The scrubbed effects (stack, columns, deck, pair,
+        pillars, pane, parallax) use ScrollTrigger when it is there and leave
+        the still state when it is not; the tabs, finder, masks and seal run
+        on IntersectionObserver and CSS.
+     3. REDUCED MOTION IS A BRANCH. No scrubs, no turning seal, no tilt.
 
-   Every module guards on its own selector, so a page that does not carry
-   the markup pays nothing. Bundled after journey.js by import-scripts.mjs;
-   it does not depend on it.
+   Every module guards on its own selector. Bundled after journey.js.
    =========================================================================== */
 (function () {
   "use strict";
@@ -42,39 +50,10 @@
   var $ = function (s, r) { return (r || document).querySelector(s); };
   var $$ = function (s, r) { return Array.prototype.slice.call((r || document).querySelectorAll(s)); };
 
-  /* --- the veil ------------------------------------------------------------
-     Shown once per session. Whatever happens, it is gone inside 2.4s: the
-     timer is the guarantee, the animation is the nicety. */
-  function veil() {
-    var el = $(".el-veil");
-    if (!el) return;
-    var seen = false;
-    try { seen = sessionStorage.getItem("mp-veil") === "1"; } catch (e) {}
-    if (reduce || seen) { el.classList.add("is-done"); return; }
-    try { sessionStorage.setItem("mp-veil", "1"); } catch (e) {}
-    var mark = $(".el-veil_mark", el);
-    var rule = $(".el-veil_rule", el);
-    var finish = function () { el.classList.add("is-done"); };
-    setTimeout(finish, 2400);
-    if (gsap) {
-      var tl = gsap.timeline({ onComplete: finish });
-      tl.to(mark, { opacity: 1, y: 0, duration: 0.6, ease: "power2.out" }, 0.05)
-        .to(rule, { width: "6rem", duration: 0.6, ease: "power2.inOut" }, 0.2)
-        .to(el, { yPercent: -100, duration: 0.85, ease: "power3.inOut" }, 1.0);
-    } else {
-      mark.style.transition = "opacity .5s, transform .5s";
-      mark.style.opacity = "1";
-      mark.style.transform = "none";
-      setTimeout(function () {
-        el.style.transition = "transform .8s cubic-bezier(.7,0,.3,1)";
-        el.style.transform = "translateY(-100%)";
-      }, 900);
-    }
-  }
-
   /* --- the mask reveals ----------------------------------------------------
-     A frame opens as it enters. IntersectionObserver, not ScrollTrigger: a
-     class toggle is all it needs and it has to work without GSAP. */
+     A frame opens as it enters. IntersectionObserver, so it works without
+     GSAP. A frame that is also parallaxed gets its settle from GSAP, because
+     the parallax writes an inline transform the stylesheet cannot beat. */
   function masks() {
     var items = $$('[data-el="mask"]');
     if (!items.length) return;
@@ -82,10 +61,6 @@
       items.forEach(function (el) { el.classList.add("is-in"); });
       return;
     }
-    // A photograph that is ALSO parallaxed gets its settle from GSAP, not
-    // from the stylesheet: parallax() writes an inline transform and GSAP
-    // folds whatever scale the CSS held into it, so the stylesheet's
-    // `.is-in img { transform: none }` could never win. (Stone, 2026-09-01.)
     var settled = function (el) {
       if (!useGsap) return null;
       var imgs = $$("img", el).filter(function (im) { return im.closest("[data-parallax]"); });
@@ -97,8 +72,7 @@
       entries.forEach(function (e) {
         if (!e.isIntersecting) return;
         e.target.classList.add("is-in");
-        var imgs = e.target.__settle;
-        if (imgs) gsap.to(imgs, { scale: 1, duration: 1.5, ease: "power3.out" });
+        if (e.target.__settle) gsap.to(e.target.__settle, { scale: 1, duration: 1.5, ease: "power3.out" });
         io.unobserve(e.target);
       });
     }, { rootMargin: "0px 0px -8% 0px", threshold: 0 });
@@ -106,11 +80,8 @@
   }
 
   /* --- parallax ------------------------------------------------------------
-     data-parallax="12" means the image travels 12% of its own height across
-     the frame's time on screen. The image is set slightly taller than the
-     frame so the travel never shows an edge. data-parallax-anchor="top"
-     keeps the top edge in the frame for a photograph whose subject is up
-     there. */
+     data-parallax="12": the image travels 12% of its own height across the
+     frame's time on screen. Set taller than the frame so no edge shows. */
   function parallax() {
     if (!useGsap) return;
     $$("[data-parallax]").forEach(function (frame) {
@@ -119,237 +90,234 @@
       var amount = parseFloat(frame.getAttribute("data-parallax")) || 10;
       var top = frame.getAttribute("data-parallax-anchor") === "top";
       gsap.set(img, { height: 100 + amount * 2 + "%", top: top ? 0 : -amount + "%", position: "relative" });
-      gsap.fromTo(img,
-        { yPercent: top ? 0 : -amount * 0.5 },
-        { yPercent: top ? -amount : amount * 0.5, ease: "none",
-          scrollTrigger: { trigger: frame, start: "top bottom", end: "bottom top", scrub: 0.6 } });
+      gsap.fromTo(img, { yPercent: top ? 0 : -amount * 0.5 }, {
+        yPercent: top ? -amount : amount * 0.5, ease: "none",
+        scrollTrigger: { trigger: frame, start: "top bottom", end: "bottom top", scrub: 0.6 }
+      });
     });
   }
 
-  /* --- the ghost words -----------------------------------------------------
-     Drift sideways with the scroll. Decoration; aria-hidden in the markup. */
-  function ghosts() {
+  /* --- the stack -----------------------------------------------------------
+     Three frames sit on each other at the hero's edge. As the page starts to
+     scroll they fan out, each one rotating and drifting its own way, so the
+     hero is left rather than scrolled past. Without GSAP: three fanned
+     frames, still. */
+  function stack() {
+    var el = $(".el-stack");
+    if (!el || !useGsap) return;
+    var frames = $$(".el-stack_frame", el);
+    var sec = el.closest("section") || el.parentNode;
+    frames.forEach(function (f, i) {
+      var dir = i - (frames.length - 1) / 2;
+      gsap.fromTo(f,
+        { xPercent: 0, yPercent: 0, rotate: dir * 3 },
+        { xPercent: dir * 34, yPercent: -18 - i * 12, rotate: dir * 12, ease: "none",
+          scrollTrigger: { trigger: sec, start: "top top", end: "bottom top", scrub: 0.5 } });
+    });
+  }
+
+  /* --- the columns ---------------------------------------------------------
+     A photo wall in three columns. Scroll moves the outer columns up and the
+     middle one down, at three speeds, so the wall slides against itself.
+     Without GSAP it is a grid. Below 900 the stylesheet lays the tiles as a
+     snapping row and this does nothing. */
+  function columns() {
     if (!useGsap) return;
-    $$(".el-ghost").forEach(function (el) {
-      var dir = el.classList.contains("is-right") ? 1 : -1;
-      gsap.fromTo(el, { xPercent: dir * 6 }, { xPercent: dir * -6, ease: "none",
-        scrollTrigger: { trigger: el.parentNode, start: "top bottom", end: "bottom top", scrub: 0.8 } });
-    });
-  }
-
-  /* --- the marquees --------------------------------------------------------
-     Clone a track's children until it is at least twice the viewport, then
-     let CSS loop it by translating half its width. The duration scales with
-     the width so every strip moves at about the same speed. */
-  function marquee(track, pxPerSecond) {
-    if (!track || track.classList.contains("is-ready")) return;
-    var kids = Array.prototype.slice.call(track.children);
-    if (!kids.length) return;
-    var target = Math.max(window.innerWidth * 2, track.scrollWidth * 2);
-    var guard = 0;
-    while (track.scrollWidth < target && guard < 12) {
-      kids.forEach(function (k) {
-        var c = k.cloneNode(true);
-        c.setAttribute("aria-hidden", "true");
-        track.appendChild(c);
-      });
-      guard++;
-    }
-    var half = track.scrollWidth / 2;
-    track.style.setProperty("--el-marquee-duration", Math.round(half / pxPerSecond) + "s");
-    if (!reduce) track.classList.add("is-ready");
-  }
-  function marquees() {
-    $$(".el-strip_track").forEach(function (t) { marquee(t, 32); });
-    $$(".el-ticker_row").forEach(function (t) { marquee(t, 40); });
-    $$(".el-words_track").forEach(function (t) { marquee(t, 45); });
-  }
-
-  /* --- magnetic buttons ----------------------------------------------------
-     A few pixels toward the pointer, and a spring back. Fine pointers only;
-     the transition in site.css makes the spring. */
-  function magnetic() {
-    if (!finePointer || reduce) return;
-    $$(".ch .button").forEach(function (btn) {
-      btn.addEventListener("mousemove", function (e) {
-        var r = btn.getBoundingClientRect();
-        var x = (e.clientX - (r.left + r.width / 2)) / r.width;
-        var y = (e.clientY - (r.top + r.height / 2)) / r.height;
-        btn.style.transform = "translate(" + x * 8 + "px," + y * 6 + "px)";
-      });
-      btn.addEventListener("mouseleave", function () { btn.style.transform = ""; });
-    });
-  }
-
-  /* --- the catalogue -------------------------------------------------------
-     One open group at a time. Hover opens on a fine pointer, click and
-     keyboard everywhere; the sticky photograph follows the open one. The
-     trigger is an <a>, not a <button>: Instatic's importer flattens a
-     button's children into a label string and the trigger carries three
-     spans. The href is a real in-page anchor for the no-JS case. */
-  function catalogue() {
-    $$(".el-catalogue").forEach(function (rootEl) {
-      var items = $$(".el-catalogue_item", rootEl);
-      var imgs = $$(".el-catalogue_media img", rootEl);
-      var caption = $(".el-catalogue_caption", rootEl);
-      var activate = function (item) {
-        items.forEach(function (it) {
-          var on = it === item;
-          it.classList.toggle("is-active", on);
-          var btn = $(".el-catalogue_trigger", it);
-          if (btn) btn.setAttribute("aria-expanded", on ? "true" : "false");
+    $$(".el-columns").forEach(function (wall) {
+      if (window.innerWidth < 900) return;
+      var cols = $$(".el-columns_col", wall);
+      var speeds = [-14, 10, -22];
+      cols.forEach(function (col, i) {
+        gsap.fromTo(col, { yPercent: -speeds[i % 3] / 2 }, {
+          yPercent: speeds[i % 3] / 2, ease: "none",
+          scrollTrigger: { trigger: wall, start: "top bottom", end: "bottom top", scrub: 0.7 }
         });
-        var key = item.getAttribute("data-cat");
-        imgs.forEach(function (im) { im.classList.toggle("is-active", im.getAttribute("data-cat") === key); });
-        if (caption) {
-          var name = $(".el-catalogue_name", item);
-          var count = $$(".el-catalogue_link", item).length;
-          caption.innerHTML = "<span>" + count + (count === 1 ? " treatment" : " treatments") + "</span><strong>" + (name ? name.textContent : "") + "</strong>";
+      });
+    });
+  }
+
+  /* --- the tabs ------------------------------------------------------------
+     Service groups as a row of display-size names. The active one shows its
+     frame and its chips; the frame crossfades. Click and keyboard; hover on
+     a fine pointer. The tab is an <a> with an in-page href so it works
+     without this and survives Instatic (a <button> keeps no children). */
+  function tabs() {
+    $$(".el-tabs").forEach(function (rootEl) {
+      var links = $$(".el-tabs_tab", rootEl);
+      var panels = $$(".el-tabs_panel", rootEl);
+      var frames = $$(".el-tabs_frames img", rootEl);
+      var count = $(".el-tabs_count", rootEl);
+      var show = function (key) {
+        links.forEach(function (a) {
+          var on = a.getAttribute("data-tab") === key;
+          a.classList.toggle("is-active", on);
+          a.setAttribute("aria-selected", on ? "true" : "false");
+        });
+        panels.forEach(function (p) { p.classList.toggle("is-active", p.getAttribute("data-tab") === key); });
+        frames.forEach(function (f) { f.classList.toggle("is-active", f.getAttribute("data-tab") === key); });
+        if (count) {
+          var p = panels.filter(function (x) { return x.getAttribute("data-tab") === key; })[0];
+          var n = p ? $$(".el-tabs_chip", p).length : 0;
+          count.textContent = n + (n === 1 ? " treatment" : " treatments");
         }
       };
-      items.forEach(function (item) {
-        var btn = $(".el-catalogue_trigger", item);
-        if (!btn) return;
-        btn.addEventListener("click", function (e) { e.preventDefault(); activate(item); });
-        if (finePointer) btn.addEventListener("mouseenter", function () { activate(item); });
+      links.forEach(function (a) {
+        a.addEventListener("click", function (e) { e.preventDefault(); show(a.getAttribute("data-tab")); a.focus(); });
+        if (finePointer) a.addEventListener("mouseenter", function () { show(a.getAttribute("data-tab")); });
+        a.addEventListener("keydown", function (e) {
+          var i = links.indexOf(a);
+          if (e.key === "ArrowRight" || e.key === "ArrowDown") { e.preventDefault(); links[(i + 1) % links.length].click(); }
+          if (e.key === "ArrowLeft" || e.key === "ArrowUp") { e.preventDefault(); links[(i - 1 + links.length) % links.length].click(); }
+        });
       });
-      var first = $(".el-catalogue_item.is-active", rootEl) || items[0];
-      if (first) activate(first);
+      var first = $(".el-tabs_tab.is-active", rootEl) || links[0];
+      if (first) show(first.getAttribute("data-tab"));
     });
   }
 
-  /* --- the story -----------------------------------------------------------
-     A sticky frame whose photograph changes with the step in the reader's
-     eyeline. Scrollytelling without a control. */
-  function story() {
-    $$(".el-story").forEach(function (rootEl) {
-      var steps = $$(".el-story_step", rootEl);
-      var frames = $$(".el-story_frames img", rootEl);
-      if (!steps.length || !frames.length) return;
-      var show = function (step) {
-        var key = step.getAttribute("data-frame");
-        steps.forEach(function (s) { s.classList.toggle("is-current", s === step); });
-        frames.forEach(function (f) { f.classList.toggle("is-active", f.getAttribute("data-frame") === key); });
+  /* --- the finder ----------------------------------------------------------
+     A list of what is wrong; a sticky panel beside it shows the room where
+     that gets answered. Hover or focus on a row swaps the panel's frame and
+     its caption. On touch the panel sits above the list and the first row's
+     frame stays. */
+  function finder() {
+    $$(".el-finder").forEach(function (rootEl) {
+      var rows = $$(".el-finder_row", rootEl);
+      var frames = $$(".el-finder_panel img", rootEl);
+      var cap = $(".el-finder_caption", rootEl);
+      if (!rows.length || !frames.length) return;
+      var show = function (row) {
+        var key = row.getAttribute("data-img");
+        rows.forEach(function (r) { r.classList.toggle("is-current", r === row); });
+        frames.forEach(function (f) { f.classList.toggle("is-active", f.getAttribute("data-img") === key); });
+        if (cap) cap.textContent = row.getAttribute("data-caption") || "";
       };
-      show(steps[0]);
-      if (!("IntersectionObserver" in window)) return;
-      var io = new IntersectionObserver(function (entries) {
-        entries.forEach(function (e) { if (e.isIntersecting) show(e.target); });
-      }, { rootMargin: "-40% 0px -40% 0px", threshold: 0 });
-      steps.forEach(function (s) { io.observe(s); });
-    });
-  }
-
-  /* --- the index -----------------------------------------------------------
-     A list of lines; hovering one floats a photograph that follows the
-     pointer with a little lag and swaps to the row under it. On a touch
-     screen the stylesheet shows the thumbnail inline instead. */
-  function index() {
-    $$(".el-index").forEach(function (rootEl) {
-      var frame = $(".el-index_float", rootEl);
-      var rows = $$(".el-index_row", rootEl);
-      if (!frame || !rows.length || !finePointer || reduce) return;
-      var imgs = $$("img", frame);
-      var tx = 0, ty = 0, cx = 0, cy = 0, raf = null, on = false;
-      var tick = function () {
-        cx += (tx - cx) * 0.14;
-        cy += (ty - cy) * 0.14;
-        frame.style.left = cx + "px";
-        frame.style.top = cy + "px";
-        if (on || Math.abs(tx - cx) > 0.5 || Math.abs(ty - cy) > 0.5) raf = requestAnimationFrame(tick);
-        else raf = null;
-      };
-      rootEl.addEventListener("mousemove", function (e) {
-        var r = rootEl.getBoundingClientRect();
-        tx = e.clientX - r.left;
-        ty = e.clientY - r.top;
-        if (!raf) raf = requestAnimationFrame(tick);
-      });
       rows.forEach(function (row) {
-        row.addEventListener("mouseenter", function (e) {
-          var key = row.getAttribute("data-img");
-          imgs.forEach(function (im) { im.classList.toggle("is-active", im.getAttribute("data-img") === key); });
-          if (!on) {
-            var r = rootEl.getBoundingClientRect();
-            cx = tx = e.clientX - r.left;
-            cy = ty = e.clientY - r.top;
-          }
-          on = true;
-          frame.classList.add("is-on");
-          if (!raf) raf = requestAnimationFrame(tick);
+        row.addEventListener("mouseenter", function () { show(row); });
+        row.addEventListener("focus", function () { show(row); });
+      });
+      show(rows[0]);
+    });
+  }
+
+  /* --- the deck ------------------------------------------------------------
+     Reviews as cards. The stylesheet makes each one sticky, so as the page
+     scrolls they pile on top of each other; this scales and dims the ones
+     already covered, scrubbed to the card that covers them. CSS alone gives
+     the pile; GSAP gives the depth. */
+  function deck() {
+    if (!useGsap) return;
+    $$(".el-deck").forEach(function (rootEl) {
+      var cards = $$(".el-deck_card", rootEl);
+      cards.forEach(function (card, i) {
+        var next = cards[i + 1];
+        if (!next) return;
+        gsap.to(card, {
+          scale: 0.94, opacity: 0.55, ease: "none",
+          scrollTrigger: { trigger: next, start: "top 75%", end: "top 20%", scrub: 0.4 }
         });
-        row.addEventListener("mouseleave", function () { on = false; frame.classList.remove("is-on"); });
       });
     });
   }
 
-  /* --- the carousel --------------------------------------------------------
-     One review at a time at the size of a statement. Arrows, keyboard,
-     swipe, a seven second autoplay with a visible bar that stops while the
-     reader is on it and never runs under reduced motion. */
-  function carousel() {
-    $$(".el-carousel").forEach(function (rootEl) {
-      var slides = $$(".el-carousel_slide", rootEl);
-      if (slides.length < 2) return;
-      var prev = $(".el-carousel_arrow.is-prev", rootEl);
-      var next = $(".el-carousel_arrow.is-next", rootEl);
-      var count = $(".el-carousel_count", rootEl);
-      var bar = $(".el-carousel_bar-fill", rootEl);
-      var live = $(".el-carousel_slides", rootEl);
-      var i = 0, timer = null, paused = false;
-      var pad = function (n) { return (n < 10 ? "0" : "") + n; };
-      var arm = function () {
-        if (timer) clearTimeout(timer);
-        if (bar) { bar.classList.remove("is-running"); void bar.offsetWidth; }
-        if (reduce || paused) return;
-        if (bar) bar.classList.add("is-running");
-        timer = setTimeout(function () { go(i + 1); }, 7000);
-      };
-      var go = function (n) {
-        i = (n + slides.length) % slides.length;
-        slides.forEach(function (s, k) {
-          s.classList.toggle("is-active", k === i);
-          s.setAttribute("aria-hidden", k === i ? "false" : "true");
-        });
-        if (count) count.innerHTML = pad(i + 1) + " <span>/ " + pad(slides.length) + "</span>";
-        arm();
-      };
-      var stop = function (e) { if (e) e.preventDefault(); };
-      if (prev) prev.addEventListener("click", function (e) { stop(e); go(i - 1); });
-      if (next) next.addEventListener("click", function (e) { stop(e); go(i + 1); });
-      rootEl.addEventListener("keydown", function (e) {
-        if (e.key === "ArrowLeft") go(i - 1);
-        if (e.key === "ArrowRight") go(i + 1);
+  /* --- the pair ------------------------------------------------------------
+     Two half-bleed photographs, one from each edge, meeting under a line of
+     type as the section crosses the window. */
+  function pair() {
+    if (!useGsap) return;
+    $$(".el-pair").forEach(function (rootEl) {
+      var a = $(".el-pair_frame.is-left", rootEl), b = $(".el-pair_frame.is-right", rootEl), line = $(".el-pair_line", rootEl);
+      var st = { trigger: rootEl, start: "top 90%", end: "center 45%", scrub: 0.6 };
+      if (a) gsap.fromTo(a, { xPercent: -22 }, { xPercent: 0, ease: "none", scrollTrigger: st });
+      if (b) gsap.fromTo(b, { xPercent: 22 }, { xPercent: 0, ease: "none", scrollTrigger: st });
+      if (line) gsap.fromTo(line, { opacity: 0, y: 30 }, { opacity: 1, y: 0, ease: "none", scrollTrigger: st });
+    });
+  }
+
+  /* --- the pillars ---------------------------------------------------------
+     Three tall portraits, revealed from the bottom one after another as the
+     row scrolls into view, their captions following. Scrubbed, so a reader
+     can move through it at their own pace and back. */
+  function pillars() {
+    if (!useGsap) return;
+    $$(".el-pillars").forEach(function (rootEl) {
+      var items = $$(".el-pillar", rootEl);
+      items.forEach(function (p, i) {
+        var frame = $(".el-pillar_frame", p), copy = $(".el-pillar_copy", p);
+        // each pillar's window starts a little later than the one before it,
+        // so the three open left to right as the row rises through the screen
+        if (frame) gsap.fromTo(frame, { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none",
+          scrollTrigger: { trigger: rootEl, start: "top " + (88 - i * 12) + "%", end: "top " + (36 - i * 6) + "%", scrub: 0.5 } });
+        if (copy) gsap.fromTo(copy, { opacity: 0, y: 24 }, { opacity: 1, y: 0, ease: "none",
+          scrollTrigger: { trigger: rootEl, start: "top " + (66 - i * 12) + "%", end: "top " + (30 - i * 6) + "%", scrub: 0.5 } });
       });
-      var hold = function () { paused = true; arm(); };
-      var release = function () { paused = false; arm(); };
-      rootEl.addEventListener("mouseenter", hold);
-      rootEl.addEventListener("mouseleave", release);
-      rootEl.addEventListener("focusin", hold);
-      rootEl.addEventListener("focusout", release);
-      var x0 = null;
-      if (live) {
-        live.addEventListener("touchstart", function (e) { x0 = e.touches[0].clientX; }, { passive: true });
-        live.addEventListener("touchend", function (e) {
-          if (x0 === null) return;
-          var dx = e.changedTouches[0].clientX - x0;
-          if (Math.abs(dx) > 40) go(dx < 0 ? i + 1 : i - 1);
-          x0 = null;
-        }, { passive: true });
-      }
-      if ("IntersectionObserver" in window) {
-        var io = new IntersectionObserver(function (entries) {
-          entries.forEach(function (e) { if (e.isIntersecting) release(); else hold(); });
-        }, { threshold: 0.2 });
-        io.observe(rootEl);
-      }
-      go(0);
+    });
+  }
+
+  /* --- the sheet -----------------------------------------------------------
+     A contact sheet. Grayscale at rest, colour under the pointer, and the
+     caption of the tile under the pointer is written into the sheet's one
+     caption line rather than onto every tile. */
+  function sheet() {
+    $$(".el-sheet").forEach(function (rootEl) {
+      var tiles = $$(".el-sheet_tile", rootEl);
+      var line = $(".el-sheet_line", rootEl);
+      if (!line) return;
+      var rest = line.textContent;
+      tiles.forEach(function (t) {
+        var say = function () { line.textContent = t.getAttribute("data-caption") || rest; };
+        t.addEventListener("mouseenter", say);
+        t.addEventListener("focus", say);
+        t.addEventListener("mouseleave", function () { line.textContent = rest; });
+        t.addEventListener("blur", function () { line.textContent = rest; });
+      });
+    });
+  }
+
+  /* --- the seal ------------------------------------------------------------
+     A ring of type that turns slowly with the scroll. Built from the text in
+     the element: each character is placed on the circle by rotation. Under
+     reduced motion it is a still ring. */
+  function seal() {
+    $$(".el-seal").forEach(function (el) {
+      var text = (el.getAttribute("data-text") || el.textContent || "").trim();
+      if (!text) return;
+      var chars = text.split("");
+      el.textContent = "";
+      var ring = document.createElement("span");
+      ring.className = "el-seal_ring";
+      ring.setAttribute("aria-hidden", "true");
+      chars.forEach(function (c, i) {
+        var s = document.createElement("i");
+        s.textContent = c === " " ? " " : c;
+        s.style.transform = "rotate(" + (i * 360 / chars.length) + "deg)";
+        ring.appendChild(s);
+      });
+      el.appendChild(ring);
+      var mark = document.createElement("span");
+      mark.className = "el-seal_mark";
+      mark.setAttribute("aria-hidden", "true");
+      mark.textContent = el.getAttribute("data-mark") || "MP";
+      el.appendChild(mark);
+      if (!useGsap) return;
+      gsap.to(ring, { rotate: 360, ease: "none", scrollTrigger: { trigger: el.parentNode, start: "top bottom", end: "bottom top", scrub: 1 } });
+    });
+  }
+
+  /* --- the pane ------------------------------------------------------------
+     The tall photograph beside a dark chapter drifts at its own rate. */
+  function pane() {
+    if (!useGsap) return;
+    $$(".el-pane").forEach(function (p) {
+      var img = $("img", p);
+      if (!img) return;
+      gsap.fromTo(img, { yPercent: -8, scale: 1.12 }, { yPercent: 8, scale: 1.04, ease: "none",
+        scrollTrigger: { trigger: p.parentNode, start: "top bottom", end: "bottom top", scrub: 0.8 } });
     });
   }
 
   /* --- the tilt cards ------------------------------------------------------
-     A photograph card that leans a few degrees toward the pointer. Fine
-     pointers only; the stylesheet's transition returns it. */
+     A photograph card that leans a few degrees toward the pointer. */
   function tilt() {
     if (!finePointer || reduce) return;
     $$("[data-el-tilt]").forEach(function (card) {
@@ -364,26 +332,22 @@
   }
 
   function boot() {
-    veil();
     masks();
-    marquees();
-    magnetic();
-    catalogue();
-    story();
-    index();
-    carousel();
+    tabs();
+    finder();
+    sheet();
+    seal();
     tilt();
     if (useGsap) {
       parallax();
-      ghosts();
+      stack();
+      columns();
+      deck();
+      pair();
+      pillars();
+      pane();
       if (document.fonts && document.fonts.ready) document.fonts.ready.then(function () { ST.refresh(); });
     }
-    window.addEventListener("resize", function () {
-      $$(".el-strip_track, .el-ticker_row, .el-words_track").forEach(function (t) {
-        if (t.scrollWidth < window.innerWidth * 2) t.classList.remove("is-ready");
-      });
-      marquees();
-    });
   }
 
   if (document.readyState === "loading") document.addEventListener("DOMContentLoaded", boot);

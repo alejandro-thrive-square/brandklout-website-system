@@ -321,30 +321,55 @@ sat for the practice's own marketing photographs; never the intraoral before/aft
 (a clinical result is the practice's claim to make) and never frame 187, which is a
 patient record with a name and a phone number on it.
 
+> [!IMPORTANT]
+> **The first cut of this layer was a port of the Stone components, and the client said so:**
+> *"You practically cloned the stone site structure. That's not good. None of our client
+> sites should be the same. Make variations of the sections."* The second cut, the same
+> day, replaced every Stone-shaped part (catalogue accordion with a sticky photograph,
+> cursor-following index, review carousel, filmstrip marquee, ghost words, town ticker,
+> veil, hero inset, masked photograph behind a dark chapter) with shapes the Stone build
+> does not have. The rule from here: **a component may share a technique with another
+> client's build (a mask reveal, a parallax frame); it may not share a shape.** Before
+> adding a section, grep the other worktrees' stylesheets for the idea, not the class name.
+>
+> **And this site is the GENERAL practice.** The pediatric practice, Mason Park Kids, is a
+> separate site on its own Railway instance in the `bk-mason-park-kids` worktree. The
+> first cut leaned on the album's photographs of child patients and grew a "Pediatric
+> Side" chapter and a "For kids" services group; the client called it context
+> contamination. The second cut carries no child-patient photograph (`kid-*` slugs are
+> unused; `girl-chair-*`, a teenager, appears on the Invisalign page only, which the
+> practice markets to teens), no kids chapter, and names Dr. Nguyen as the pediatric
+> dentist *across the hall*, because the approved homepage argument, one building for the
+> whole family, still needs her to exist. Do not add child photography to this site.
+
 **The layer.** `home/assets/elevate.js` (sixth script tag on every page, sixth part of the
 Instatic bundle) and the `el-*` block at the end of `site.css`. Every hidden state is
 scoped to `html.el-ready`, which the script sets first, so a page without it is the plain
-page; `html.el-reduce` is the reduced-motion branch; GSAP is optional (parallax and the
-ghost drift use it, everything else is IntersectionObserver and CSS). The components:
+page; `html.el-reduce` is the reduced-motion branch; GSAP is optional (the scrubbed parts
+use it and leave their still state without it; the tabs, finder, sheet and seal run on
+CSS and plain listeners). The components, none of which the Stone build has:
 
 | Part | What it is | Where |
 | :--- | :--- | :--- |
-| `el-veil` | A one second curtain on first arrival, once per session | every page |
 | `data-el="mask"` | A frame that opens from the bottom as it enters, the photograph settling from a slight over-scale | most photographs |
-| `data-parallax` | The photograph drifts inside its frame with the scroll | heroes, bands, mosaics |
-| `el-inset` + `el-badge` | A second frame overlapping the hero, and the published 4.9 laid into the copy | home |
-| `el-strip` | A slow filmstrip of the practice, tiles at three heights on two baselines, paused on hover | home, about, doctors, team, reviews |
-| `el-band` | A full-bleed photograph with one line of display type | about, home, new patients, financing, savings plan |
-| `el-mosaic` | Seven photographs at three sizes on twelve columns, one sentence in the cell that is not a picture | about, team |
-| `el-story` | A sticky portrait that changes with the step in the reader's eyeline | about (the three doctors) |
-| `el-catalogue` | Groups as an accordion of lines with one sticky photograph that follows the open one | services |
-| `el-index` | Lines that float a photograph after the cursor; the thumbnail sits inline on touch | services (the finder) |
-| `el-carousel` | One review at a time at statement size, arrows, keyboard, swipe, a seven second bar | home, doctors, new patients, reviews, Invisalign |
-| `el-trio` | Photograph cards with one line each, leaning toward the pointer (`data-el-tilt`) | doctors, new patients, financing, thank you |
-| `el-behind` | A masked photograph fading in behind the copy of a dark chapter | about, doctors, team, services, reviews |
-| `el-ghost` | An outlined word at section size, drifting with the scroll | about, team, reviews, new patients, financing, Invisalign |
-| `el-ticker` | Two rows of towns travelling in opposite directions | home |
+| `data-parallax` | The photograph drifts inside its frame with the scroll | heroes, mosaics, overlaps |
+| `el-stack` | Three fanned frames at the hero's edge that spread as the page starts to scroll; the rating sits in the hero's fact strip as `el-rating` | home |
+| `el-columns` | A photo wall in three columns moving at three speeds against the scroll; a snapping row below 900 | home |
+| `el-tabs` | Service groups as a row of display-size tabs; the active one shows a big frame and its chips | services (the map) |
+| `el-finder` | Rows of what is wrong, and a sticky side panel whose photograph and caption follow the row under the pointer | services |
+| `el-deck` | Reviews as cards that pile on each other as the page scrolls (CSS sticky), the covered ones scaled back by GSAP, a photograph in the pile | home |
+| `el-pair` | Two half-bleed photographs sliding in from either edge, a line of type between them | home, about, doctors, team, new patients, financing, savings plan |
+| `el-pillars` | Three tall portraits revealed left to right on the scroll, a name, a role and one line each | about (the three doctors) |
+| `el-pane` | A tall photograph in a narrow column beside a dark chapter's copy | doctors, team, services, reviews |
+| `el-sheet` | A contact sheet, grayscale at rest and colour under the pointer, one caption line for the tile under it | about, team |
+| `el-seal` | A ring of type built from `data-text`, turning with the scroll, a mark in the middle | about, new patients, reviews, financing, Invisalign |
+| `el-mosaic` | Photographs at three sizes on twelve columns, one sentence in the cell that is not a picture. This site's own `cp-mosaic`, elevated | about |
+| `el-trio` | Photograph cards with one line each, leaning toward the pointer (`data-el-tilt`) | new patients, financing, thank you |
 | `el-fold` | The prose that stayed, folded under a summary. `check.mjs` strips it like `lf-more` | wherever the practice's own paragraphs were |
+
+The homepage's own proof scene (`ch-proof`: the written quote beside a photograph and the
+rail that travels with the scroll) is back on the new patients, reviews and Invisalign
+pages, because it is Mason Park's, and the doctors page keeps its three `cp-voices`.
 
 **What "less text" measured.** Visible words in `<main>`, folds excluded, before and after:
 home 1,489 to 1,383; about 638 to 418; doctors 995 to 858; team 1,085 to 699; services
@@ -380,9 +405,12 @@ Three things learned, for the next pass:
    column. A fixed `aspect-ratio: 5 / 4` on that image makes both agree (`height: 0` on the
    flex item did not; the grid row still took the attribute ratio); look for the same shape
    wherever a rule relies on an image's intrinsic ratio.
-3. **A `<button>` may hold text and nothing else**, so the carousel arrows are `&larr;`
-   and `&rarr;`, and the catalogue trigger is an `<a role="button">` with a real in-page
-   href, exactly as on the Stone build.
+3. **A `<button>` may hold text and nothing else** on Instatic, so every control in the
+   layer is an `<a>` with a real in-page href (the tabs, the finder rows) or a plain
+   element with a `tabindex` (the sheet tiles). Nothing here is a `<button>`.
+4. **The word and image counts above are the first cut's.** The second cut kept the
+   word counts within a few percent and dropped some images with the child photographs;
+   run the counting one-liner in the runbook rather than trusting this paragraph.
 
 ## Instatic import
 

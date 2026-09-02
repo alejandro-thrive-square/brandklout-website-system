@@ -5053,859 +5053,256 @@ a.svc-card .svc-card_name, a.svc-card .svc-card_text { text-decoration: none; }
 
 
 /* ===========================================================================
-   THE ELEVATION LAYER — 2026-09-02. See home/assets/elevate.js for why.
+   THE ELEVATION LAYER — 2026-09-02, second cut. See home/assets/elevate.js.
 
-   The client, reviewing staging: "There is too much text overall ... more
-   images, less text and more animations", pointing at the Stone Surgical
-   Arts elevation of the day before. These are that page's components in
-   this site's vocabulary, fed with the practice's own album photographs.
+   The first cut ported the Stone Surgical Arts components one for one and
+   the client said so: "You practically cloned the stone site structure.
+   None of our client sites should be the same." These are different shapes
+   for the same brief (more images, less text, more animation), none of
+   which the Stone build has: the stack, the columns, the tabs, the finder
+   with a side panel, the deck, the pair, the pillars, the pane, the sheet,
+   the seal. Kept from the first cut because they are this site's own or
+   generic technique: the mosaic (Mason Park's cp-mosaic, elevated), the
+   trio, mask reveals, parallax frames, el-head and el-fold.
 
-   TOKENS. Nothing new at :root. Every colour is one of the six chapter
-   names (--bg --fg --fg-body --fg-soft --rule --accent), every size is a
-   rem times an existing tier, every space is --ch-pad or --bleed or a
-   fraction of one. Newsreader / Nunito Sans / Karla, untouched.
+   TOKENS. Nothing new at :root. Six chapter colours, the rem type tiers,
+   --ch-pad and --bleed. Newsreader / Nunito Sans / Karla, untouched.
 
-   NAMESPACE. `.el-*`, and two attributes: `[data-el="mask"]` on a frame
-   that opens as it enters, `[data-parallax]` on a frame whose photograph
-   drifts. Hidden states are scoped to `html.el-ready`, which elevate.js
-   sets first thing, so the page without it is the plain page; `html.el-
-   reduce` is the reduced-motion branch.
-
-   ORDER. This block is LAST in the sheet on purpose. It restyles nothing
-   that exists; it only adds. A rule here that has to beat an earlier rule
-   at equal specificity wins by position, which is the same trap the .ch
-   .wrap bug was, so keep it last.
+   NAMESPACE `.el-*`, attributes `[data-el="mask"]` and `[data-parallax]`.
+   Hidden states are scoped to `html.el-ready`; `html.el-reduce` is the
+   reduced-motion branch. LAST in the sheet on purpose; keep it last.
    ======================================================================== */
 
-/* --- the veil -------------------------------------------------------------
-   A one-second curtain on first arrival: the wordmark on warm ground, then
-   the sheet lifts. Once per session, never under reduced motion, never
-   without JS, and elevate.js removes it on a timer whatever else happens. */
-.el-veil { display: none; }
-html.el-ready .el-veil {
-  display: grid;
-  place-items: center;
-  position: fixed;
-  inset: 0;
-  z-index: 900;
-  background: var(--paper);
-  pointer-events: none;
-  transform-origin: 50% 0;
-}
-html.el-ready .el-veil.is-done { display: none; }
-html.el-reduce .el-veil { display: none; }
-.el-veil_mark {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: var(--f-d3);
-  letter-spacing: -.01em;
-  color: var(--ink);
-  opacity: 0;
-  transform: translateY(.6rem);
-  text-align: center;
-  margin: 0;
-}
-.el-veil_mark em { font-style: italic; color: var(--copper); }
-.el-veil_rule { width: 0; height: 1px; background: var(--copper); margin-top: 1.2rem; }
-
-/* --- image mask reveal ----------------------------------------------------
-   The frame opens from the bottom and the photograph settles from a slight
-   over-scale as it does. Opt in with data-el="mask" on the FRAME; the img
-   inside is what scales. */
-html.el-ready:not(.el-reduce) [data-el="mask"] {
-  clip-path: inset(100% 0 0 0);
-  transition: clip-path 1.3s var(--ease);
-}
-html.el-ready:not(.el-reduce) [data-el="mask"] img {
-  transform: scale(1.16);
-  transition: transform 1.5s var(--ease);
-}
+/* --- image mask reveal ---------------------------------------------------- */
+html.el-ready:not(.el-reduce) [data-el="mask"] { clip-path: inset(100% 0 0 0); transition: clip-path 1.3s var(--ease); }
+html.el-ready:not(.el-reduce) [data-el="mask"] img { transform: scale(1.16); transition: transform 1.5s var(--ease); }
 html.el-ready:not(.el-reduce) [data-el="mask"].is-in { clip-path: inset(0 0 0 0); }
 html.el-ready:not(.el-reduce) [data-el="mask"].is-in img { transform: none; }
 [data-el="mask"] { overflow: clip; }
-/* Parallax frames. The img is a little taller than its frame and drifts
-   inside it; elevate.js scrubs the drift. Without it the img covers the
-   frame. A frame that is BOTH masked and parallaxed: the parallax wraps
-   the mask, so the two transforms never share an element. */
 [data-parallax] { overflow: clip; }
 [data-parallax] img { height: 100%; width: 100%; object-fit: cover; display: block; }
 html.el-ready [data-parallax] img { will-change: transform; }
 [data-parallax] [data-el="mask"] { height: 100%; }
 .el-fill { height: 100%; }
 
-/* --- magnetic buttons ---------------------------------------------------- */
-html.el-ready .ch .button {
-  transition:
-    color .35s var(--ease),
-    border-color .35s var(--ease),
-    transform .5s cubic-bezier(.2, .9, .3, 1.3);
-}
+/* --- the stack ------------------------------------------------------------
+   Three frames of the practice on each other at the hero's right edge,
+   fanned by a few degrees. elevate.js spreads them as the page scrolls.
+   Below 992 they sit as a small row under the copy. */
+.el-stack { position: absolute; right: calc(var(--bleed) + 4rem); bottom: calc(clamp(3rem, 7vh, 6rem) + 5rem); z-index: 2; width: 14rem; aspect-ratio: 4 / 5; }
+.el-stack_frame { position: absolute; inset: 0; margin: 0; overflow: clip; border: 4px solid rgba(255, 255, 255, .92); box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .7); background: var(--ink-mid); transform-origin: 50% 110%; }
+.el-stack_frame:nth-child(1) { transform: rotate(-6deg); }
+.el-stack_frame:nth-child(2) { transform: rotate(0deg); }
+.el-stack_frame:nth-child(3) { transform: rotate(6deg); }
+.el-stack_frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.el-stack_frame figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: .5rem .7rem; background: linear-gradient(180deg, rgba(30, 36, 38, 0), rgba(30, 36, 38, .8)); color: #fff; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .12em; text-transform: uppercase; }
+.ch-arrival.is-compact .el-stack { display: none; }
+@media (max-width: 1279px) { .el-stack { width: 11rem; right: calc(var(--bleed) + 3rem); } }
+@media (max-width: 991px) { .el-stack { display: none; } }
 
-/* --- the ghost word -------------------------------------------------------
-   An outlined word at the size of the section behind it. Stroke only, so it
-   is texture rather than text, and aria-hidden because it repeats a heading
-   that is already there. */
-.el-ghost {
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: 0;
-  z-index: 0;
-  pointer-events: none;
-  user-select: none;
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: calc(14rem * var(--t-disp));
-  line-height: .9;
-  letter-spacing: -.02em;
-  text-transform: uppercase;
-  color: transparent;
-  -webkit-text-stroke: 1px var(--rule-strong);
-  white-space: nowrap;
-  overflow: hidden;
-  opacity: .5;
-  margin: 0;
-  padding-left: var(--bleed);
-}
-.el-ghost.is-right { text-align: right; padding-left: 0; padding-right: var(--bleed); }
-.el-ghost.is-low { top: auto; bottom: 0; }
-.ch[data-theme="dark"] .el-ghost { -webkit-text-stroke-color: rgba(255, 255, 255, .14); }
-.ch.has-ghost > *:not(.el-ghost) { position: relative; z-index: 1; }
+/* The rating, as a fourth fact in the hero's strip rather than a pill. */
+.ar-meta .el-rating b { display: inline-flex; align-items: baseline; gap: .5rem; }
+.ar-meta .el-rating b i { font-style: normal; font-size: .8em; letter-spacing: .08em; color: #e3c3a8; }
 
-/* --- the arrival, elevated ------------------------------------------------
-   A second, smaller frame overlapping the hero's right side and drifting
-   at its own rate, so the hero is a composition rather than a rectangle,
-   and the practice's published rating laid into the copy column. */
-.el-inset {
-  position: absolute;
-  right: var(--bleed);
-  bottom: calc(clamp(3rem, 7vh, 6rem) + 4.5rem);
-  z-index: 2;
-  width: 17rem;
-  aspect-ratio: 4 / 5;
-  overflow: clip;
-  border: 5px solid rgba(255, 255, 255, .9);
-  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .6);
-  margin: 0;
-}
-.el-inset img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 20%; display: block; }
-.el-inset figcaption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: .6rem .8rem;
-  background: linear-gradient(180deg, rgba(30, 36, 38, 0) 0%, rgba(30, 36, 38, .78) 100%);
-  color: #fff;
-  font-family: var(--font-ui);
-  font-size: var(--f-label);
-  letter-spacing: .1em;
-  text-transform: uppercase;
-  line-height: 1.4;
-}
-.el-inset figcaption strong {
-  display: block;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--f-h4);
-  letter-spacing: 0;
-  text-transform: none;
-}
-.el-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: .75rem;
-  margin: 0 0 1.8rem;
-  padding: .55rem .95rem .55rem .75rem;
-  border: 1px solid rgba(255, 255, 255, .28);
-  border-radius: 999px;
-  background: rgba(30, 36, 38, .38);
-  backdrop-filter: blur(6px);
-  font-family: var(--font-ui);
-  font-size: var(--f-label);
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  color: rgba(255, 255, 255, .78);
-  width: fit-content;
-}
-.el-badge_stars { color: #e3c3a8; letter-spacing: .1em; font-size: calc(.85rem * var(--t-ui)); }
-.el-badge strong {
-  font-family: var(--font-display);
-  font-size: var(--f-h4);
-  font-weight: 400;
-  letter-spacing: 0;
-  color: #fff;
-  line-height: 1;
-}
-.ch-arrival.is-compact .el-inset { display: none; }
-@media (max-width: 1279px) { .el-inset { width: 13rem; } }
-@media (max-width: 991px) { .el-inset { display: none; } }
-
-/* --- the filmstrip --------------------------------------------------------
-   A slow strip of the practice itself: the desk, the rooms, the team, the
-   toy machine. Real photographs only, uncaptioned as anything but the
-   place. The tiles are different heights on different baselines so the row
-   reads as a contact sheet rather than a carousel. Hover pauses it. */
-.el-strip { padding: calc(var(--ch-pad) * .6) 0 var(--ch-pad); overflow: hidden; }
-.el-strip.is-tight { padding-top: 0; }
-.el-strip_head {
-  padding: 0 var(--bleed);
-  margin: 0 auto 2.4rem;
-  max-width: var(--maxw);
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1.5rem;
-}
-.el-strip_head .chapter-tag { margin: 0; }
-.el-strip_head p:not(.chapter-tag) {
-  margin: 0;
-  font-family: var(--font-ui);
-  font-size: var(--f-label);
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--fg-soft);
-}
-.el-strip_track {
-  display: flex;
-  align-items: flex-end;
-  gap: 1.25rem;
-  width: max-content;
-  --el-marquee-duration: 70s;
-}
-html.el-ready .el-strip_track.is-ready { animation: el-marquee var(--el-marquee-duration) linear infinite; }
-.el-strip:hover .el-strip_track { animation-play-state: paused; }
-.el-strip_tile {
-  flex: 0 0 auto;
-  overflow: clip;
-  background: var(--bg-2);
-  margin: 0;
-  height: 19rem;
-  transition: transform .6s var(--ease);
-}
-.el-strip_tile.is-wide { aspect-ratio: 4 / 3; }
-.el-strip_tile.is-tall { aspect-ratio: 3 / 4; height: 24rem; }
-.el-strip_tile.is-square { aspect-ratio: 1; height: 16rem; }
-.el-strip_tile.is-up { margin-bottom: 3rem; }
-.el-strip_tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
-.el-strip_tile:hover img { transform: scale(1.05); }
-@media (max-width: 767px) {
-  .el-strip_tile { height: 13rem; }
-  .el-strip_tile.is-tall { height: 17rem; }
-  .el-strip_tile.is-square { height: 11rem; }
-  .el-strip_tile.is-up { margin-bottom: 1.5rem; }
-}
-html.el-reduce .el-strip { overflow-x: auto; }
-@keyframes el-marquee { from { transform: translateX(0); } to { transform: translateX(-50%); } }
-
-/* --- the words strip ------------------------------------------------------
-   A typographic marquee of the practice's credentials in the display face,
-   looped by elevate.js. Hover pauses it. */
-.el-words { border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); padding: 1.6rem 0; overflow: hidden; --el-marquee-duration: 48s; }
-.el-words_track { display: flex; align-items: baseline; width: max-content; white-space: nowrap; }
-html.el-ready .el-words_track.is-ready { animation: el-marquee var(--el-marquee-duration) linear infinite; }
-.el-words:hover .el-words_track { animation-play-state: paused; }
-.el-words_track span {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: calc(1.9rem * var(--t-lg));
-  line-height: 1;
-  color: var(--fg);
-  padding: 0 1.6rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 1.6rem;
-}
-.el-words_track span::after { content: ""; width: .35rem; height: .35rem; border-radius: 50%; background: var(--accent-lg); flex: 0 0 auto; }
-
-/* --- the ticker -----------------------------------------------------------
-   The towns the practice's patients drive in from, as two rows of type
-   travelling in opposite directions. */
-.el-ticker { margin: 3rem 0 0; overflow: hidden; border-top: 1px solid var(--rule); border-bottom: 1px solid var(--rule); --el-marquee-duration: 60s; }
-.el-ticker_row { display: flex; align-items: baseline; width: max-content; white-space: nowrap; padding: .5rem 0; }
-.el-ticker_row + .el-ticker_row { border-top: 1px solid var(--rule); }
-html.el-ready .el-ticker_row.is-ready { animation: el-marquee var(--el-marquee-duration) linear infinite; }
-html.el-ready .el-ticker_row.is-reverse.is-ready { animation-direction: reverse; }
-.el-ticker:hover .el-ticker_row { animation-play-state: paused; }
-.el-ticker_row span {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: calc(2.4rem * var(--t-lg));
-  line-height: 1.2;
-  color: var(--fg);
-  padding: 0 1.2rem;
-  display: inline-flex;
-  align-items: center;
-  gap: 1.2rem;
-}
-.el-ticker_row span::after { content: ""; width: .3rem; height: .3rem; border-radius: 50%; background: var(--accent-lg); }
-
-/* --- the catalogue --------------------------------------------------------
-   Groups as an accordion of numbered lines, and one sticky photograph that
-   changes with the open group. The trigger is an <a> so it works from the
-   keyboard and survives Instatic; the panel opens with the grid-rows trick
-   so it animates without a fixed height. */
-.el-catalogue { overflow: clip; }
-.el-catalogue_layout {
-  display: grid;
-  grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
-  gap: clamp(2rem, 5vw, 6rem);
-  align-items: start;
-}
-.el-catalogue_list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule-strong); }
-.el-catalogue_item { border-bottom: 1px solid var(--rule-strong); }
-.el-catalogue_trigger {
-  width: 100%;
-  display: grid;
-  grid-template-columns: 3.5rem 1fr auto;
-  align-items: baseline;
-  gap: 1.5rem;
-  padding: 1.5rem 0;
-  text-decoration: none;
-  color: var(--fg);
-  cursor: pointer;
-}
-.el-catalogue_num { font-family: var(--font-display); font-size: var(--f-h4); color: var(--accent); letter-spacing: .06em; }
-.el-catalogue_name {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: calc(3rem * var(--t-lg));
-  line-height: 1;
-  display: block;
-  transition: transform .5s var(--ease), color .3s var(--ease);
-}
-.el-catalogue_trigger:hover .el-catalogue_name,
-.el-catalogue_item.is-active .el-catalogue_name { transform: translateX(.6rem); }
-.el-catalogue_item.is-active .el-catalogue_name { color: var(--accent); }
-.el-catalogue_icon { position: relative; width: 1.4rem; height: 1.4rem; align-self: center; }
-.el-catalogue_icon::before, .el-catalogue_icon::after {
-  content: "";
-  position: absolute;
-  top: 50%;
-  left: 0;
-  width: 100%;
-  height: 1px;
-  background: var(--accent-lg);
-  transition: transform .4s var(--ease);
-}
-.el-catalogue_icon::after { transform: rotate(90deg); }
-.el-catalogue_item.is-active .el-catalogue_icon::after { transform: rotate(0deg); }
-.el-catalogue_panel { display: grid; grid-template-rows: 0fr; transition: grid-template-rows .6s var(--ease); }
-.el-catalogue_item.is-active .el-catalogue_panel { grid-template-rows: 1fr; }
-html:not(.el-ready) .el-catalogue_panel { grid-template-rows: 1fr; }
-.el-catalogue_panel-inner { overflow: hidden; min-height: 0; }
-.el-catalogue_body { display: grid; grid-template-columns: 3.5rem 1fr; gap: 1.5rem; padding: 0 0 2rem; }
-.el-catalogue_text { grid-column: 2; margin: 0 0 1rem; color: var(--fg-body); font-size: var(--f-lede); line-height: 1.6; max-width: 30rem; }
-.el-catalogue_links { grid-column: 2; margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: .5rem .75rem; max-width: 36rem; }
-.el-catalogue_link {
-  display: inline-flex;
-  align-items: center;
-  gap: .4rem;
-  padding: .45rem .9rem;
-  border: 1px solid var(--rule-strong);
-  border-radius: 999px;
-  font-family: var(--font-ui);
-  font-size: calc(.8rem * var(--t-ui));
-  letter-spacing: .04em;
-  color: var(--fg);
-  text-decoration: none;
-  background: transparent;
-  transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease);
-}
-a.el-catalogue_link:hover, a.el-catalogue_link:focus-visible { background: var(--accent); border-color: var(--accent); color: #fff; }
-span.el-catalogue_link { color: var(--fg-soft); border-style: dashed; }
-.el-catalogue_more { grid-column: 2; margin: 1.2rem 0 0; }
-.el-catalogue_media {
-  position: sticky;
-  top: 7rem;
-  height: min(calc(100vh - 9rem), 44rem);
-  overflow: clip;
-  background: var(--bg-2);
-}
-.el-catalogue_media img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  opacity: 0;
-  transform: scale(1.06);
-  transition: opacity .8s var(--ease), transform 1.4s var(--ease);
-}
-.el-catalogue_media img.is-active { opacity: 1; transform: none; }
-html:not(.el-ready) .el-catalogue_media img:first-child { opacity: 1; transform: none; }
-.el-catalogue_caption {
-  position: absolute;
-  left: 0;
-  bottom: 0;
-  z-index: 2;
-  margin: 0;
-  padding: .9rem 1.4rem;
-  background: var(--panel);
-  border-top: 1px solid var(--accent-lg);
-  font-family: var(--font-ui);
-  font-size: var(--f-label);
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--fg-soft);
-}
-.el-catalogue_caption strong {
-  display: block;
-  margin-top: .15rem;
-  font-family: var(--font-display);
-  font-weight: 400;
-  font-size: var(--f-h4);
-  letter-spacing: 0;
-  text-transform: none;
-  color: var(--fg);
-}
-@media (max-width: 991px) {
-  .el-catalogue_layout { grid-template-columns: 1fr; gap: 2rem; }
-  .el-catalogue_media { position: relative; top: auto; order: -1; height: auto; aspect-ratio: 4 / 3; margin: 0 calc(var(--bleed) * -1); }
-  .el-catalogue_name { font-size: calc(2.2rem * var(--t-lg)); }
-  .el-catalogue_trigger { grid-template-columns: 2.5rem 1fr auto; }
-  .el-catalogue_body { grid-template-columns: 2.5rem 1fr; }
-}
-
-/* --- the story ------------------------------------------------------------
-   A sticky frame on one side that CHANGES as the steps on the other pass
-   it. Scrollytelling that needs no control. */
-.el-story_layout {
-  display: grid;
-  grid-template-columns: minmax(0, .8fr) minmax(0, 1fr);
-  gap: clamp(2.5rem, 6vw, 7rem);
-  align-items: start;
-}
-.el-story_layout.is-flipped .el-story_stick { order: 2; }
-.el-story_stick { position: sticky; top: 6.5rem; }
-.el-story_frames {
-  position: relative;
-  margin: 0;
-  height: min(calc(100vh - 9rem), 46rem);
-  overflow: clip;
-  background: var(--bg-2);
-}
-.el-story_frames img {
-  position: absolute;
-  inset: 0;
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 20%;
-  opacity: 0;
-  transform: scale(1.05);
-  transition: opacity .9s var(--ease), transform 1.6s var(--ease);
-}
-.el-story_frames img.is-active { opacity: 1; transform: none; }
-html:not(.el-ready) .el-story_frames img:first-child { opacity: 1; transform: none; }
-.el-story_scroll { padding-top: .5rem; }
-.el-story_step {
-  padding: 2.6rem 0;
-  border-top: 1px solid var(--rule-strong);
-  display: grid;
-  grid-template-columns: 4rem 1fr;
-  gap: 1.5rem;
-  transition: opacity .5s var(--ease);
-}
-html.el-ready .el-story_step { opacity: .38; }
-html.el-ready .el-story_step.is-current { opacity: 1; }
-.el-story_num { font-family: var(--font-display); font-size: var(--f-h3); line-height: 1; color: var(--accent-lg); }
-.el-story_title { font-family: var(--font-display); font-weight: 400; font-size: var(--f-h3); line-height: 1.1; margin: 0 0 .8rem; color: var(--fg); }
-.el-story_text { margin: 0; color: var(--fg-body); font-size: var(--f-lede); line-height: 1.65; max-width: 32rem; }
-.el-story_step .link-arrow { margin-top: 1.2rem; }
+/* --- the columns ----------------------------------------------------------
+   A photo wall: three columns, each a stack of frames, moving at three
+   speeds against the scroll. The wall is clipped a little shorter than
+   its columns so the travel never shows an edge. Below 900 it is one
+   snapping row. */
+.el-columns { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.25rem; height: 52rem; overflow: clip; align-items: start; }
+.el-columns_col { display: grid; gap: 1.25rem; }
+.el-columns_col:nth-child(2) { margin-top: -5rem; }
+.el-columns_col:nth-child(3) { margin-top: -2rem; }
+.el-columns_tile { margin: 0; overflow: clip; background: var(--bg-2); }
+.el-columns_tile.is-tall { aspect-ratio: 3 / 4; }
+.el-columns_tile.is-wide { aspect-ratio: 4 / 3; }
+.el-columns_tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
+.el-columns_tile:hover img { transform: scale(1.04); }
 @media (max-width: 899px) {
-  .el-story_layout { grid-template-columns: 1fr; }
-  .el-story_layout.is-flipped .el-story_stick { order: 0; }
-  .el-story_stick { position: relative; top: auto; }
-  .el-story_frames { height: auto; aspect-ratio: 4 / 5; max-width: 26rem; }
-  html.el-ready .el-story_step { opacity: 1; }
-  .el-story_step { grid-template-columns: 2.6rem 1fr; padding: 1.8rem 0; }
+  .el-columns { display: flex; height: auto; overflow-x: auto; gap: .9rem; scroll-snap-type: x mandatory; scroll-padding-left: var(--bleed); padding-bottom: .5rem; margin: 0 calc(var(--bleed) * -1); padding-left: var(--bleed); padding-right: var(--bleed); }
+  .el-columns_col { display: contents; }
+  .el-columns_tile { flex: 0 0 68vw; scroll-snap-align: start; aspect-ratio: 4 / 3; }
+  .el-columns_tile.is-tall { flex-basis: 52vw; aspect-ratio: 3 / 4; }
 }
 
-/* --- the index ------------------------------------------------------------
-   Entry by the problem, not the treatment's name. Hovering a line floats a
-   photograph that follows the pointer; on a touch screen the photograph
-   sits inline at the right of the row instead. */
-.el-index { position: relative; }
-.el-index_list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule-strong); position: relative; z-index: 1; }
-.el-index_item { border-bottom: 1px solid var(--rule-strong); }
-.el-index_row {
-  display: grid;
-  grid-template-columns: 3.5rem minmax(0, 1fr) minmax(0, .7fr) 2.5rem;
-  align-items: center;
-  gap: 1.5rem;
-  padding: 1.3rem 0;
-  color: var(--fg);
-  text-decoration: none;
-  transition: padding-left .5s var(--ease);
-}
-.el-index_row:hover, .el-index_row:focus-visible { padding-left: 1rem; }
-.el-index_num { font-family: var(--font-display); font-size: var(--f-h4); color: var(--accent); letter-spacing: .06em; }
-.el-index_text { font-family: var(--font-display); font-weight: 300; font-size: calc(2.1rem * var(--t-lg)); line-height: 1.05; transition: color .3s var(--ease); }
-.el-index_row:hover .el-index_text { color: var(--accent); }
-.el-index_to { font-family: var(--font-body); font-size: var(--f-body); color: var(--fg-soft); line-height: 1.4; }
-.el-index_to strong {
-  display: block;
-  font-family: var(--font-ui);
-  font-weight: 500;
-  font-size: var(--f-label);
-  letter-spacing: .14em;
-  text-transform: uppercase;
-  color: var(--fg-soft);
-  margin-bottom: .15rem;
-}
-.el-index_arrow {
-  width: 2.5rem;
-  height: 2.5rem;
-  border: 1px solid var(--rule-strong);
-  border-radius: 50%;
-  display: grid;
-  place-items: center;
-  color: var(--fg);
-  font-size: 1rem;
-  transition: background-color .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease), transform .4s var(--ease);
-}
-.el-index_row:hover .el-index_arrow { background: var(--accent); border-color: var(--accent); color: #fff; transform: rotate(-45deg); }
-.el-index_thumb { display: none; }
-.el-index_float {
-  position: absolute;
-  top: 0;
-  left: 0;
-  z-index: 2;
-  width: 17rem;
-  aspect-ratio: 4 / 5;
-  pointer-events: none;
-  opacity: 0;
-  transform: translate(-50%, -50%) scale(.9) rotate(-4deg);
-  transition: opacity .35s var(--ease), transform .5s var(--ease);
-  overflow: clip;
-  box-shadow: 0 30px 60px -30px rgba(0, 0, 0, .55);
-  will-change: left, top;
-}
-.el-index_float.is-on { opacity: 1; transform: translate(-50%, -50%) scale(1) rotate(-2deg); }
-.el-index_float img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity .4s var(--ease); }
-.el-index_float img.is-active { opacity: 1; }
-@media (hover: none), (max-width: 767px) {
-  .el-index_float { display: none; }
-  .el-index_row { grid-template-columns: 2.5rem minmax(0, 1fr) 4.5rem; grid-template-areas: "num text thumb" "num to thumb"; row-gap: .35rem; }
-  .el-index_num { grid-area: num; }
-  .el-index_text { grid-area: text; font-size: calc(1.6rem * var(--t-lg)); }
-  .el-index_to { grid-area: to; }
-  .el-index_arrow { display: none; }
-  .el-index_thumb { display: block; grid-area: thumb; width: 4.5rem; aspect-ratio: 4 / 5; overflow: clip; background: var(--bg-2); }
-  .el-index_thumb img { width: 100%; height: 100%; object-fit: cover; }
+/* --- the tabs -------------------------------------------------------------
+   Service groups as a row of names in the display face. The active one is
+   copper with a rule under it; its frame is a big photograph on the left,
+   its chips sit in a panel on the right. */
+.el-tabs_row { display: flex; flex-wrap: wrap; gap: .4rem 2rem; margin: 0 0 2.4rem; padding: 0; list-style: none; border-bottom: 1px solid var(--rule-strong); }
+.el-tabs_tab { display: inline-block; padding: .4rem 0 .9rem; margin-bottom: -1px; font-family: var(--font-display); font-weight: 300; font-size: calc(2rem * var(--t-lg)); line-height: 1; color: var(--fg-soft); text-decoration: none; border-bottom: 2px solid transparent; transition: color .3s var(--ease), border-color .3s var(--ease); }
+.el-tabs_tab:hover, .el-tabs_tab.is-active { color: var(--accent); border-color: var(--accent); }
+.el-tabs_body { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(0, .9fr); gap: clamp(1.5rem, 4vw, 4rem); align-items: stretch; }
+.el-tabs_frames { position: relative; margin: 0; min-height: 30rem; overflow: clip; background: var(--bg-2); }
+.el-tabs_frames img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.05); transition: opacity .7s var(--ease), transform 1.3s var(--ease); }
+.el-tabs_frames img.is-active { opacity: 1; transform: none; }
+html:not(.el-ready) .el-tabs_frames img:first-child { opacity: 1; transform: none; }
+.el-tabs_count { position: absolute; left: 0; bottom: 0; z-index: 2; margin: 0; padding: .7rem 1.1rem; background: var(--panel); border-top: 1px solid var(--accent-lg); font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .16em; text-transform: uppercase; color: var(--fg-soft); }
+.el-tabs_panels { position: relative; display: grid; }
+.el-tabs_panel { grid-area: 1 / 1; opacity: 0; transform: translateY(.6rem); transition: opacity .5s var(--ease), transform .5s var(--ease); pointer-events: none; display: flex; flex-direction: column; justify-content: center; padding: 1.5rem 0; }
+.el-tabs_panel.is-active { opacity: 1; transform: none; pointer-events: auto; }
+html:not(.el-ready) .el-tabs_panel { position: static; opacity: 1; transform: none; pointer-events: auto; }
+.el-tabs_panel h3 { margin: 0 0 .6rem; }
+.el-tabs_text { margin: 0 0 1.4rem; color: var(--fg-body); font-size: var(--f-lede); line-height: 1.6; max-width: 32rem; }
+.el-tabs_chips { margin: 0; padding: 0; list-style: none; display: flex; flex-wrap: wrap; gap: .5rem .6rem; }
+.el-tabs_chip { display: inline-flex; align-items: center; padding: .5rem .95rem; border: 1px solid var(--rule-strong); border-radius: 2px; font-family: var(--font-ui); font-size: calc(.8rem * var(--t-ui)); letter-spacing: .04em; color: var(--fg); text-decoration: none; background: var(--panel); transition: background-color .25s var(--ease), border-color .25s var(--ease), color .25s var(--ease); }
+a.el-tabs_chip:hover, a.el-tabs_chip:focus-visible { background: var(--accent); border-color: var(--accent); color: #fff; }
+span.el-tabs_chip { color: var(--fg-soft); background: transparent; border-style: dashed; }
+.el-tabs_panel .link-arrow { margin-top: 1.4rem; align-self: flex-start; }
+@media (max-width: 899px) {
+  .el-tabs_row { gap: .2rem 1.2rem; }
+  .el-tabs_tab { font-size: calc(1.5rem * var(--t-lg)); padding-bottom: .6rem; }
+  .el-tabs_body { grid-template-columns: 1fr; }
+  .el-tabs_frames { min-height: 0; aspect-ratio: 4 / 3; margin: 0 calc(var(--bleed) * -1); }
 }
 
-/* --- the carousel ---------------------------------------------------------
-   One review at a time at the size of a statement. A photograph sits beside
-   the stage with the published rating laid in. Autoplay on a seven second
-   count with a visible bar, paused by hover or focus, arrows, keyboard,
-   swipe. The arrows are text-only buttons: Instatic drops a button's
-   children, so no svg lives in one. */
-.el-carousel_layout {
-  display: grid;
-  grid-template-columns: minmax(0, .7fr) minmax(0, 1.3fr);
-  gap: clamp(2.5rem, 5vw, 7rem);
-  align-items: center;
-}
-.el-carousel_media { position: relative; aspect-ratio: 4 / 5; overflow: clip; background: var(--bg-2); margin: 0; }
-.el-carousel_media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.el-carousel_rating {
-  position: absolute;
-  right: 0;
-  bottom: 0;
-  z-index: 2;
-  background: var(--panel);
-  border-top: 1px solid var(--accent-lg);
-  padding: 1rem 1.4rem;
-}
-.el-carousel_rating-value { font-family: var(--font-display); font-size: calc(3rem * var(--t-disp)); line-height: 1; margin: 0; color: var(--fg); }
-.el-carousel_rating-label { margin: .3rem 0 0; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-soft); line-height: 1.5; }
-.el-carousel_stage { position: relative; }
-.el-carousel_mark {
-  position: absolute;
-  top: -.25em;
-  left: -.12em;
-  font-family: var(--font-display);
-  font-size: calc(12rem * var(--t-disp));
-  line-height: 1;
-  color: var(--accent-lg);
-  opacity: .18;
-  pointer-events: none;
-  user-select: none;
-}
-.el-carousel_slides { position: relative; display: grid; }
-.el-carousel_slide {
-  grid-area: 1 / 1;
-  margin: 0;
-  opacity: 0;
-  transform: translateY(1rem);
-  transition: opacity .7s var(--ease), transform .7s var(--ease);
-  pointer-events: none;
-}
-.el-carousel_slide.is-active { opacity: 1; transform: none; pointer-events: auto; }
-html:not(.el-ready) .el-carousel_slide { position: static; opacity: 1; transform: none; margin-bottom: 2rem; }
-.el-carousel_slide blockquote {
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: calc(2.3rem * var(--t-lg));
-  line-height: 1.18;
-  color: var(--fg);
-  letter-spacing: -.005em;
-  text-wrap: pretty;
-}
-.el-carousel_slide.is-long blockquote { font-size: calc(1.7rem * var(--t-lg)); line-height: 1.3; }
-.el-carousel_slide figcaption {
-  margin-top: 1.5rem;
-  display: flex;
-  gap: 1rem;
-  align-items: center;
-  font-family: var(--font-ui);
-  font-size: var(--f-label);
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--fg-soft);
-}
-.el-carousel_slide figcaption span:first-child { color: var(--fg); }
-.el-carousel_slide figcaption span + span::before { content: ""; display: inline-block; width: 1.5rem; height: 1px; background: var(--accent-lg); vertical-align: middle; margin-right: 1rem; }
-.el-carousel_controls { margin-top: 2.6rem; display: grid; grid-template-columns: auto auto 1fr; align-items: center; gap: 1.5rem; }
-html:not(.el-ready) .el-carousel_controls { display: none; }
-.el-carousel_arrows { display: flex; gap: .5rem; }
-.el-carousel_arrow {
-  width: 3rem;
-  height: 3rem;
-  padding: 0;
-  border: 1px solid var(--rule-strong);
-  border-radius: 50%;
-  background: transparent;
-  display: grid;
-  place-items: center;
-  cursor: pointer;
-  color: var(--fg);
-  font-family: var(--font-body);
-  font-size: 1.1rem;
-  line-height: 1;
-  text-decoration: none;
-  transition: background-color .3s var(--ease), border-color .3s var(--ease), color .3s var(--ease);
-}
-.el-carousel_arrow:hover { background: var(--accent); border-color: var(--accent); color: #fff; }
-.el-carousel_count { font-family: var(--font-display); font-size: var(--f-h4); color: var(--fg); letter-spacing: .04em; font-variant-numeric: tabular-nums; margin: 0; }
-.el-carousel_count span { color: var(--fg-soft); }
-.el-carousel_bar { height: 1px; background: var(--rule-strong); position: relative; }
-.el-carousel_bar-fill { position: absolute; inset: 0 auto 0 0; width: 100%; background: var(--accent-lg); transform: scaleX(0); transform-origin: 0 50%; }
-.el-carousel_bar-fill.is-running { transition: transform 7s linear; transform: scaleX(1); }
-@media (max-width: 991px) {
-  .el-carousel_layout { grid-template-columns: 1fr; gap: 2rem; }
-  .el-carousel_media { aspect-ratio: 16 / 10; margin: 0 calc(var(--bleed) * -1); }
-  .el-carousel_controls { grid-template-columns: auto auto; }
-  .el-carousel_bar { grid-column: 1 / -1; }
+/* --- the finder -----------------------------------------------------------
+   What is wrong on the left, where the practice would start under it, and a
+   sticky panel on the right showing the room where that happens. */
+.el-finder_layout { display: grid; grid-template-columns: minmax(0, 1.2fr) minmax(0, .8fr); gap: clamp(2rem, 5vw, 5rem); align-items: start; }
+.el-finder_list { margin: 0; padding: 0; list-style: none; border-top: 1px solid var(--rule-strong); }
+.el-finder_item { border-bottom: 1px solid var(--rule-strong); }
+.el-finder_row { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: .35rem 1.2rem; padding: 1.2rem 0; color: var(--fg); text-decoration: none; transition: padding-left .45s var(--ease), background-color .45s var(--ease); }
+.el-finder_row:hover, .el-finder_row.is-current { padding-left: .8rem; }
+.el-finder_num { grid-row: span 2; font-family: var(--font-display); font-size: var(--f-h4); color: var(--accent); letter-spacing: .06em; padding-top: .35rem; }
+.el-finder_text { font-family: var(--font-display); font-weight: 300; font-size: calc(1.9rem * var(--t-lg)); line-height: 1.08; transition: color .3s var(--ease); }
+.el-finder_row.is-current .el-finder_text { color: var(--accent); }
+.el-finder_to { font-family: var(--font-body); font-size: var(--f-body); color: var(--fg-body); line-height: 1.5; max-width: 40rem; }
+.el-finder_to b { font-family: var(--font-ui); font-weight: 500; font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-soft); margin-right: .6rem; }
+.el-finder_panel { position: sticky; top: 7rem; margin: 0; aspect-ratio: 4 / 5; overflow: clip; background: var(--bg-2); }
+.el-finder_panel img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; opacity: 0; transform: scale(1.04); transition: opacity .6s var(--ease), transform 1.2s var(--ease); }
+.el-finder_panel img.is-active { opacity: 1; transform: none; }
+html:not(.el-ready) .el-finder_panel img:first-child { opacity: 1; transform: none; }
+.el-finder_caption { position: absolute; left: 0; right: 0; bottom: 0; z-index: 2; margin: 0; padding: .8rem 1.1rem; background: linear-gradient(180deg, rgba(30, 36, 38, 0), rgba(30, 36, 38, .82)); color: #fff; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; }
+@media (max-width: 899px) {
+  .el-finder_layout { grid-template-columns: 1fr; gap: 1.5rem; }
+  .el-finder_panel { position: relative; top: auto; order: -1; aspect-ratio: 16 / 10; margin: 0 calc(var(--bleed) * -1); }
+  .el-finder_text { font-size: calc(1.5rem * var(--t-lg)); }
+  .el-finder_row { grid-template-columns: 2.2rem minmax(0, 1fr); }
 }
 
-/* --- the photograph behind a dark chapter ---------------------------------
-   A photograph fades in from the right edge behind the copy of an ink
-   chapter; the mask keeps the type on ink, not on a face. */
-.el-behind {
-  position: absolute;
-  top: 0;
-  right: 0;
-  bottom: 0;
-  width: 58%;
-  z-index: 0;
-  pointer-events: none;
-  margin: 0;
-  -webkit-mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .9) 45%, rgba(0, 0, 0, 1) 100%);
-  mask-image: linear-gradient(90deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .9) 45%, rgba(0, 0, 0, 1) 100%);
-  opacity: .5;
-}
-.el-behind.is-left {
-  right: auto;
-  left: 0;
-  -webkit-mask-image: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .9) 45%, rgba(0, 0, 0, 1) 100%);
-  mask-image: linear-gradient(270deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, .9) 45%, rgba(0, 0, 0, 1) 100%);
-}
-.el-behind img { width: 100%; height: 100%; object-fit: cover; object-position: 60% 30%; display: block; }
-.ch.has-behind > *:not(.el-behind) { position: relative; z-index: 1; }
-@media (max-width: 991px) {
-  .el-behind, .el-behind.is-left {
-    width: 100%;
-    left: 0;
-    right: 0;
-    opacity: .26;
-    -webkit-mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 60%);
-    mask-image: linear-gradient(180deg, rgba(0, 0, 0, 0) 0%, rgba(0, 0, 0, 1) 60%);
-  }
-}
+/* --- the deck -------------------------------------------------------------
+   Reviews as cards that pile up. Each card is sticky at the same offset,
+   so the next one slides over the last as the page scrolls; elevate.js
+   scales the covered ones back. A photograph card sits in the pile too. */
+.el-deck { display: grid; gap: 1.5rem; }
+.el-deck_card { position: sticky; top: 7rem; margin: 0; background: var(--panel); border: 1px solid var(--rule); padding: clamp(1.5rem, 3vw, 2.6rem); display: grid; grid-template-columns: minmax(0, 1fr) auto; gap: 1.2rem 2rem; align-items: end; transform-origin: 50% 0; box-shadow: 0 30px 50px -40px rgba(46, 53, 56, .5); }
+.el-deck_card blockquote { grid-column: 1 / -1; margin: 0; font-family: var(--font-display); font-weight: 300; font-size: calc(1.9rem * var(--t-lg)); line-height: 1.22; color: var(--fg); letter-spacing: -.005em; text-wrap: pretty; }
+.el-deck_card.is-long blockquote { font-size: calc(1.45rem * var(--t-lg)); line-height: 1.32; }
+.el-deck_card figcaption { font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .16em; text-transform: uppercase; color: var(--fg); }
+.el-deck_card figcaption span { color: var(--fg-soft); }
+.el-deck_card figcaption span::before { content: ""; display: inline-block; width: 1.5rem; height: 1px; background: var(--accent-lg); vertical-align: middle; margin: 0 .8rem; }
+.el-deck_stars { font-size: .85rem; letter-spacing: .12em; color: var(--accent-lg); }
+.el-deck_card.is-photo { padding: 0; border: 0; aspect-ratio: 16 / 7; overflow: clip; display: block; }
+.el-deck_card.is-photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.el-deck_card.is-photo figcaption { position: absolute; left: 0; bottom: 0; padding: .8rem 1.2rem; background: rgba(253, 252, 251, .92); color: var(--fg-soft); }
+.el-deck_foot { display: flex; align-items: center; flex-wrap: wrap; gap: 1rem 1.5rem; margin-top: 2.4rem; }
+.el-deck_score { font-family: var(--font-display); font-weight: 300; font-size: calc(3rem * var(--t-disp)); line-height: 1; color: var(--fg); }
+.el-deck_score-label { font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-soft); margin-right: auto; }
+@media (max-width: 767px) { .el-deck_card { top: 5.5rem; } .el-deck_card.is-photo { aspect-ratio: 4 / 3; } }
 
-/* --- the band -------------------------------------------------------------
-   A full-bleed photograph of the practice, slow parallax, one caption. */
-.el-band { position: relative; height: 62vh; min-height: 22rem; max-height: 42rem; overflow: clip; background: var(--ink-deep); padding: 0; }
-.el-band_media { position: absolute; inset: -12% 0; margin: 0; }
-.el-band_media img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 45%; }
-.el-band_caption {
-  position: absolute;
-  left: var(--bleed);
-  bottom: 2.4rem;
-  z-index: 2;
-  margin: 0;
-  padding: .6rem .9rem;
-  background: rgba(253, 252, 251, .92);
-  font-family: var(--font-ui);
-  font-size: var(--f-label);
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--body);
-}
-.el-band_word {
-  position: absolute;
-  right: var(--bleed);
-  bottom: 1.6rem;
-  z-index: 2;
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: var(--f-d2);
-  line-height: 1;
-  color: #fff;
-  text-shadow: 0 2px 30px rgba(0, 0, 0, .4);
-}
-.el-band_word em { font-style: italic; color: #e3c3a8; }
-@media (max-width: 767px) { .el-band { height: 44vh; } .el-band_word { display: none; } }
+/* --- the pair -------------------------------------------------------------
+   Two half-bleed photographs, one from each edge, and a line between them. */
+.el-pair { position: relative; display: grid; grid-template-columns: 1fr 1fr; gap: 0; padding: 0; overflow: clip; background: var(--bg); }
+.el-pair_frame { margin: 0; aspect-ratio: 4 / 3; overflow: clip; background: var(--bg-2); }
+.el-pair_frame img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.el-pair_line { position: absolute; left: 50%; top: 50%; transform: translate(-50%, -50%); z-index: 2; margin: 0; padding: 1.1rem 1.8rem; background: var(--panel); border: 1px solid var(--rule); font-family: var(--font-display); font-weight: 300; font-size: var(--f-d3); line-height: 1.1; color: var(--fg); text-align: center; white-space: nowrap; box-shadow: 0 30px 60px -40px rgba(46, 53, 56, .5); }
+.el-pair_line em { font-style: italic; color: var(--accent-lg); }
+@media (max-width: 767px) { .el-pair_frame { aspect-ratio: 3 / 4; } .el-pair_line { white-space: normal; padding: .8rem 1rem; font-size: var(--f-h3); max-width: 70%; } }
+
+/* --- the pillars ----------------------------------------------------------
+   Three tall portraits in a row, each with a name, a role and one line.
+   elevate.js reveals them left to right on the scroll. */
+.el-pillars { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: clamp(1rem, 3vw, 2.5rem); align-items: start; }
+.el-pillar { margin: 0; }
+.el-pillar_frame { aspect-ratio: 3 / 4; overflow: clip; background: var(--bg-2); }
+.el-pillar_frame img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 15%; display: block; }
+.el-pillar_frame.is-small img { object-fit: contain; object-position: 50% 100%; background: var(--paper); }
+.el-pillar_copy { padding: 1.2rem 0 0; }
+.el-pillar_copy h3 { margin: 0 0 .25rem; }
+.el-pillar_role { margin: 0 0 .8rem; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); }
+.el-pillar_line { margin: 0; color: var(--fg-body); font-size: var(--f-body); line-height: 1.6; }
+.el-pillar_copy .el-fold { margin-top: .8rem; }
+@media (max-width: 767px) { .el-pillars { grid-template-columns: 1fr; gap: 2.5rem; } .el-pillar_frame { max-width: 22rem; } }
+
+/* --- the pane -------------------------------------------------------------
+   A dark chapter split with a tall photograph in a narrow column. The copy
+   keeps the ink; the picture keeps its colour. */
+.el-pane_layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(16rem, .42fr); gap: clamp(2rem, 5vw, 5rem); align-items: stretch; }
+.el-pane { position: relative; margin: 0; overflow: clip; background: var(--bg-2); min-height: 28rem; }
+.el-pane img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.el-pane figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: .8rem 1.1rem; background: linear-gradient(180deg, rgba(30, 36, 38, 0), rgba(30, 36, 38, .85)); color: #fff; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; }
+@media (max-width: 899px) { .el-pane_layout { grid-template-columns: 1fr; } .el-pane { min-height: 0; aspect-ratio: 16 / 10; } }
+
+/* --- the sheet ------------------------------------------------------------
+   A contact sheet: uniform tiles, grayscale at rest and colour under the
+   pointer, the same treatment the homepage gives its small imagery. One
+   caption line under the sheet says what the tile under the pointer shows. */
+.el-sheet_grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: .75rem; }
+.el-sheet_tile { margin: 0; aspect-ratio: 1; overflow: clip; background: var(--bg-2); display: block; }
+.el-sheet_tile img { width: 100%; height: 100%; object-fit: cover; display: block; filter: grayscale(1); transition: filter .5s var(--ease), transform .8s var(--ease); }
+.el-sheet_tile:hover img, .el-sheet_tile:focus-visible img { filter: none; transform: scale(1.04); }
+html.el-reduce .el-sheet_tile img { filter: none; }
+.el-sheet_line { margin: 1.2rem 0 0; min-height: 1.5em; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .14em; text-transform: uppercase; color: var(--fg-soft); }
+@media (max-width: 767px) { .el-sheet_grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+
+/* --- the seal -------------------------------------------------------------
+   A ring of type built by elevate.js from data-text, turning with the
+   scroll, with a mark in the middle. Sits in a chapter's corner. */
+.el-seal { position: absolute; z-index: 2; width: 9rem; height: 9rem; right: var(--bleed); top: var(--ch-pad); pointer-events: none; }
+.el-seal.is-low { top: auto; bottom: var(--ch-pad); }
+.el-seal.is-left { right: auto; left: var(--bleed); }
+.el-seal_ring { position: absolute; inset: 0; }
+.el-seal_ring i { position: absolute; left: 50%; top: 0; width: 1ch; height: 50%; margin-left: -.5ch; transform-origin: 50% 100%; font-style: normal; font-family: var(--font-ui); font-size: var(--f-label); font-weight: 700; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); text-align: center; }
+.el-seal_mark { position: absolute; inset: 0; display: grid; place-items: center; font-family: var(--font-display); font-weight: 300; font-size: var(--f-h3); color: var(--fg); }
+.el-seal::before { content: ""; position: absolute; inset: 1.6rem; border: 1px solid var(--rule-strong); border-radius: 50%; }
+.ch[data-theme="dark"] .el-seal_ring i { color: var(--accent); }
+@media (max-width: 767px) { .el-seal { width: 6.5rem; height: 6.5rem; top: 1.5rem; } .el-seal::before { inset: 1.2rem; } .el-seal.is-low { bottom: 1.5rem; } }
 
 /* --- the mosaic -----------------------------------------------------------
-   Photographs at three sizes on a twelve column grid, with one short line
-   of copy in the one cell that is not a picture. Less text, more images,
-   as a layout rather than a sentence. */
-.el-mosaic {
-  display: grid;
-  grid-template-columns: repeat(12, minmax(0, 1fr));
-  grid-auto-rows: 9rem;
-  gap: 1rem;
-}
+   Photographs at three sizes on a twelve column grid, one sentence in the
+   cell that is not a picture. This site's own cp-mosaic, elevated. */
+.el-mosaic { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); grid-auto-rows: 9rem; gap: 1rem; }
 .el-mosaic_tile { margin: 0; overflow: clip; background: var(--bg-2); position: relative; }
 .el-mosaic_tile img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .8s var(--ease); }
 .el-mosaic_tile:hover img { transform: scale(1.04); }
 .el-mosaic_tile.is-a { grid-column: 1 / 8; grid-row: span 3; }
 .el-mosaic_tile.is-b { grid-column: 8 / 13; grid-row: span 2; }
-.el-mosaic_tile.is-c { grid-column: 8 / 11; grid-row: span 1; }
-.el-mosaic_tile.is-d { grid-column: 11 / 13; grid-row: span 1; }
 .el-mosaic_tile.is-e { grid-column: 1 / 5; grid-row: span 2; }
 .el-mosaic_tile.is-f { grid-column: 5 / 9; grid-row: span 2; }
 .el-mosaic_tile.is-g { grid-column: 9 / 13; grid-row: span 2; }
-.el-mosaic_copy {
-  grid-column: 8 / 13;
-  grid-row: span 1;
-  display: flex;
-  align-items: center;
-  padding: 0 1.4rem;
-  background: var(--panel);
-  border: 1px solid var(--rule);
-  margin: 0;
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: var(--f-h4);
-  line-height: 1.3;
-  color: var(--fg);
-}
-.el-mosaic_tile figcaption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: .6rem .9rem;
-  background: linear-gradient(180deg, rgba(30, 36, 38, 0) 0%, rgba(30, 36, 38, .7) 100%);
-  color: #fff;
-  font-family: var(--font-ui);
-  font-size: var(--f-label);
-  letter-spacing: .12em;
-  text-transform: uppercase;
-  opacity: 0;
-  transform: translateY(.4rem);
-  transition: opacity .35s var(--ease), transform .35s var(--ease);
-}
+.el-mosaic_copy { grid-column: 8 / 13; grid-row: span 1; display: flex; align-items: center; padding: 0 1.4rem; background: var(--panel); border: 1px solid var(--rule); margin: 0; font-family: var(--font-display); font-weight: 300; font-size: var(--f-h4); line-height: 1.3; color: var(--fg); }
+.el-mosaic_tile figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: .6rem .9rem; background: linear-gradient(180deg, rgba(30, 36, 38, 0) 0%, rgba(30, 36, 38, .7) 100%); color: #fff; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .12em; text-transform: uppercase; opacity: 0; transform: translateY(.4rem); transition: opacity .35s var(--ease), transform .35s var(--ease); }
 .el-mosaic_tile:hover figcaption { opacity: 1; transform: none; }
 @media (max-width: 767px) {
   .el-mosaic { grid-auto-rows: 7rem; gap: .6rem; }
   .el-mosaic_tile.is-a { grid-column: 1 / 13; grid-row: span 3; }
   .el-mosaic_tile.is-b { grid-column: 1 / 8; grid-row: span 2; }
-  .el-mosaic_tile.is-c { grid-column: 8 / 13; grid-row: span 1; }
-  .el-mosaic_tile.is-d { grid-column: 8 / 13; grid-row: span 1; }
   .el-mosaic_tile.is-e { grid-column: 1 / 7; grid-row: span 2; }
   .el-mosaic_tile.is-f { grid-column: 7 / 13; grid-row: span 2; }
   .el-mosaic_tile.is-g { grid-column: 1 / 13; grid-row: span 2; }
   .el-mosaic_copy { grid-column: 1 / 13; }
 }
 
-/* --- the duo --------------------------------------------------------------
-   One photograph and one sentence, side by side. The sentence is set at
-   statement size so the pair is a scene rather than a paragraph with an
-   illustration. */
-.el-duo { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: clamp(2rem, 5vw, 6rem); align-items: center; }
-.el-duo.is-flipped .el-duo_media { order: 2; }
-.el-duo_media { margin: 0; aspect-ratio: 4 / 5; overflow: clip; background: var(--bg-2); }
-.el-duo_media.is-wide { aspect-ratio: 4 / 3; }
-.el-duo_media img { width: 100%; height: 100%; object-fit: cover; display: block; }
-.el-duo_copy h2 { margin: 0 0 1.4rem; }
-.el-duo_copy h3 { margin: 0 0 1rem; }
-.el-duo_line {
-  font-family: var(--font-display);
-  font-weight: 300;
-  font-size: var(--f-d3);
-  line-height: 1.16;
-  letter-spacing: -.01em;
-  color: var(--fg);
-  margin: 0 0 1.6rem;
-  max-width: 18ch;
-}
-.el-duo_line em { font-style: italic; color: var(--accent-lg); }
-.el-duo_copy p:not(.el-duo_line):not(.chapter-tag) { font-size: var(--f-lede); line-height: 1.62; max-width: 40ch; margin: 0 0 1.4rem; }
-.el-duo_copy .lf-more { margin-top: .5rem; }
-@media (max-width: 899px) {
-  .el-duo { grid-template-columns: 1fr; gap: 2rem; }
-  .el-duo.is-flipped .el-duo_media { order: 0; }
-  .el-duo_media { aspect-ratio: 4 / 3; }
-}
-
 /* --- the trio -------------------------------------------------------------
-   Three photograph cards with one line each. A grid of pictures in place
-   of a grid of paragraphs; the cards lean toward the pointer. */
+   Photograph cards with one line each, leaning toward the pointer. */
 .el-trio { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1.5rem; }
 .el-trio_card { margin: 0; position: relative; overflow: clip; background: var(--bg-2); aspect-ratio: 3 / 4; transition: transform .6s var(--ease); transform-style: preserve-3d; }
 .el-trio_card img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 1s var(--ease); }
 .el-trio_card:hover img { transform: scale(1.05); }
-.el-trio_card figcaption {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 1.4rem 1.4rem 1.2rem;
-  background: linear-gradient(180deg, rgba(30, 36, 38, 0) 0%, rgba(30, 36, 38, .82) 100%);
-  color: #fff;
-}
-.el-trio_card figcaption b {
-  display: block;
-  font-family: var(--font-ui);
-  font-weight: 500;
-  font-size: var(--f-label);
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: #e3c3a8;
-  margin-bottom: .35rem;
-}
+.el-trio_card figcaption { position: absolute; left: 0; right: 0; bottom: 0; padding: 1.4rem 1.4rem 1.2rem; background: linear-gradient(180deg, rgba(30, 36, 38, 0) 0%, rgba(30, 36, 38, .82) 100%); color: #fff; }
+.el-trio_card figcaption b { display: block; font-family: var(--font-ui); font-weight: 500; font-size: var(--f-label); letter-spacing: .16em; text-transform: uppercase; color: #e3c3a8; margin-bottom: .35rem; }
 .el-trio_card figcaption span { display: block; font-family: var(--font-display); font-weight: 400; font-size: var(--f-h3); line-height: 1.15; }
 .el-trio_card figcaption small { display: block; margin-top: .5rem; font-family: var(--font-body); font-size: var(--f-body); color: rgba(255, 255, 255, .8); line-height: 1.5; }
 .el-trio.is-four { grid-template-columns: repeat(4, minmax(0, 1fr)); }
-.el-trio.is-two { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-.el-trio.is-two .el-trio_card { aspect-ratio: 4 / 3; }
 @media (max-width: 991px) { .el-trio, .el-trio.is-four { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 1rem; } }
-@media (max-width: 599px) { .el-trio, .el-trio.is-four, .el-trio.is-two { grid-template-columns: 1fr; } .el-trio_card { aspect-ratio: 4 / 3; } }
+@media (max-width: 599px) { .el-trio, .el-trio.is-four { grid-template-columns: 1fr; } .el-trio_card { aspect-ratio: 4 / 3; } }
 
 /* --- the chapter head, shared by the new chapters ------------------------ */
 .el-head { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, .6fr); gap: 2rem 3rem; align-items: end; margin-bottom: 3.2rem; }
 .el-head h2 { margin: 0; }
 .el-head .chapter-tag { margin-bottom: 1.2rem; }
 .el-head_lede { margin: 0; font-size: var(--f-lede); line-height: 1.6; max-width: 34rem; color: var(--fg-body); }
-.el-head.is-solo { grid-template-columns: 1fr; }
 @media (max-width: 899px) { .el-head { grid-template-columns: 1fr; align-items: start; margin-bottom: 2.2rem; } }
 
 /* --- the scroll cue, light variant, for the compact arrival ---------------- */
@@ -5918,21 +5315,7 @@ html.el-reduce .el-cue i::after { animation: none; transform: none; }
 
 /* --- the prose that stayed: shorter, and folded -------------------------- */
 .el-fold { margin-top: 1rem; }
-.el-fold summary {
-  cursor: pointer;
-  list-style: none;
-  font-family: var(--font-ui);
-  font-size: var(--f-label);
-  font-weight: 700;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  color: var(--accent);
-  display: inline-flex;
-  align-items: center;
-  gap: .6rem;
-  padding-bottom: .45rem;
-  border-bottom: 1px solid var(--rule-strong);
-}
+.el-fold summary { cursor: pointer; list-style: none; font-family: var(--font-ui); font-size: var(--f-label); font-weight: 700; letter-spacing: .16em; text-transform: uppercase; color: var(--accent); display: inline-flex; align-items: center; gap: .6rem; padding-bottom: .45rem; border-bottom: 1px solid var(--rule-strong); }
 .el-fold summary::-webkit-details-marker { display: none; }
 .el-fold summary::after { content: "+"; font-family: var(--font-display); font-size: 1.1rem; line-height: 1; transition: transform .3s var(--ease); }
 .el-fold[open] summary::after { transform: rotate(45deg); }
@@ -5940,7 +5323,6 @@ html.el-reduce .el-cue i::after { animation: none; transform: none; }
 .el-fold p { font-size: var(--f-body); line-height: 1.65; max-width: 62ch; }
 .el-fold p + p { margin-top: .8rem; }
 
-/* --- photographs between the reviews on the wall ---------------------------
-   A tile that packs into the review columns like a review does. */
+/* --- photographs between the reviews on the wall ------------------------- */
 .cp-wall .el-wall_photo { break-inside: avoid; margin: 0 0 1.25rem; overflow: clip; background: var(--bg-2); aspect-ratio: 4 / 5; }
 .cp-wall .el-wall_photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
