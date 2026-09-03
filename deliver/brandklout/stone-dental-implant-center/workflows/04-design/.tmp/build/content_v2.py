@@ -37,6 +37,8 @@ EXTERIOR = f"{A}/6a16079e87043846a4628ffd_656023592_18090389450155974_5574691659
 RECEPTION = f"{A}/6a242c6d587d8591d7f04c39_banner-office-bg-img.webp"
 FRONTDESK = C.OFFICE                          # two team members at the front desk
 ALLONX_SMILE = f"{A}/6a0dd7721fac1e363ecd0eaf_All-on-X%20smile.avif"
+PIN_ICON = f"{A}/6a08728921f08afd8371be3a_location-pin-svgrepo-com%20(3).svg"
+PHONE_ICON = f"{A}/6a08728921f08afd8371be39_phone-svgrepo-com%20(5).svg"
 
 OPT_SINGLE = f"{A}/6a0ded9d1b6246a805b7d1c2_Single%20implant%20at%20stone%20surgical%20arts.webp"
 OPT_ALLONX = f"{A}/6a0ded9d9e4b8a5c407fd460_all%20on%20x%20at%20stone%20surgical%20arts.webp"
@@ -111,6 +113,9 @@ CSS_V2 = """
 /* header address pill */
 .axon-header_addr { display: inline-flex; align-items: center; gap: 8px; color: #081f33; font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 600; text-decoration: none; letter-spacing: 0.2px; }
 .axon-header_addr:hover { color: #2179a8; }
+.axon-header_icon { width: 16px; height: 16px; display: block; flex-shrink: 0; }
+.axon-header_tel { display: inline-flex; align-items: center; gap: 8px; font-family: Montserrat, sans-serif; color: #081f33; font-size: 16px; font-weight: 600; text-decoration: none; }
+.axon-header_tel:hover { color: #2179a8; }
 
 /* stat trust bar */
 .axon-trustbar { position: relative; background-color: #f2f2f2; padding-top: 44px; padding-bottom: 44px; }
@@ -118,7 +123,6 @@ CSS_V2 = """
 .axon-stat { text-align: center; padding-left: 12px; padding-right: 12px; border-left: 1px solid rgba(8, 31, 51, 0.12); }
 .axon-stat_n { display: block; font-family: Italiana, serif; font-size: 30px; line-height: 1.1; color: #081f33; margin-bottom: 6px; }
 .axon-stat_l { display: block; font-family: Montserrat, sans-serif; font-size: 12px; line-height: 1.5; letter-spacing: 0.6px; text-transform: uppercase; color: #606060; }
-.axon-badges { display: flex; align-items: center; justify-content: center; gap: 28px; margin-top: 28px; flex-wrap: wrap; }
 
 /* journey: slider shell */
 .axon-ba_shell { max-width: 640px; margin-left: auto; margin-right: auto; }
@@ -150,14 +154,10 @@ CSS_V2 = """
 /* video grids */
 .axon-vid_wide { max-width: 860px; margin-left: auto; margin-right: auto; margin-top: 56px; }
 .axon-vid_row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 32px; }
-.axon-vid_row2 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 24px; }
-.axon-vid_pair { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; margin-top: 24px; max-width: 860px; margin-left: auto; margin-right: auto; }
 .axon-vid_slot { width: 100%; }
 .axon-vid_cap { display: block; font-family: Montserrat, sans-serif; font-size: 13px; line-height: 1.5; color: #606060; margin-top: 12px; text-align: center; }
 .axon-vid_cap-light { display: block; font-family: Montserrat, sans-serif; font-size: 13px; line-height: 1.5; color: rgba(255, 255, 255, 0.75); margin-top: 12px; text-align: center; }
 .axon-vid_star { color: #efb44d; letter-spacing: 2px; margin-right: 8px; }
-.axon-subhead { font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: #606060; text-align: center; margin-top: 64px; margin-bottom: 4px; }
-.axon-subnote { font-family: Montserrat, sans-serif; font-size: 14px; line-height: 1.6; color: #606060; text-align: center; max-width: 620px; margin-left: auto; margin-right: auto; margin-top: 0px; margin-bottom: 24px; }
 
 /* process */
 .axon-proc_grid { display: grid; grid-template-columns: 1.25fr 0.75fr; gap: 56px; align-items: center; }
@@ -180,17 +180,16 @@ CSS_V2 = """
 .axon-opt_feat { border-color: #2179a8; box-shadow: 0 18px 50px rgba(33, 121, 168, 0.18); }
 .axon-opt_img { width: 100%; height: 200px; object-fit: cover; display: block; }
 .axon-opt_body { padding: 28px; display: flex; flex-direction: column; flex-grow: 1; }
-.axon-opt_tag { display: inline-block; align-self: flex-start; background-color: #2179a8; color: #ffffff; font-family: Montserrat, sans-serif; font-size: 11px; font-weight: 700; letter-spacing: 1.2px; text-transform: uppercase; padding: 6px 12px; border-radius: 999px; margin-bottom: 12px; }
 .axon-opt_h { font-family: Italiana, serif; font-size: 24px; line-height: 1.25; color: #081f33; margin-top: 0px; margin-bottom: 12px; }
 .axon-opt_d { font-family: Montserrat, sans-serif; font-size: 15px; line-height: 1.7; color: #606060; margin-top: 0px; margin-bottom: 20px; }
 .axon-spec { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 12px; padding-bottom: 12px; border-top: 1px solid rgba(8, 31, 51, 0.08); }
 .axon-spec_k { font-family: Montserrat, sans-serif; font-size: 13px; color: #606060; margin: 0px; }
 .axon-spec_v { font-family: Montserrat, sans-serif; font-size: 13px; font-weight: 700; color: #081f33; text-align: right; margin: 0px; }
 .axon-spec_note { font-family: Montserrat, sans-serif; font-size: 12px; line-height: 1.6; color: #606060; margin-top: 14px; margin-bottom: 20px; }
-.axon-opt_foot { margin-top: auto; }
 
 /* gallery */
 .axon-gal3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; }
+.axon-spec_last { display: flex; align-items: baseline; justify-content: space-between; gap: 16px; padding-top: 12px; padding-bottom: 12px; border-top: 1px solid rgba(8, 31, 51, 0.08); }
 .axon-gal_img { width: 100%; height: auto; display: block; border-radius: 14px; box-shadow: 0 12px 40px rgba(8, 31, 51, 0.1); }
 
 /* office grid, five up */
@@ -213,8 +212,10 @@ CSS_V2 = """
 .axon-marks_lab { font-family: Montserrat, sans-serif; font-size: 12px; font-weight: 700; letter-spacing: 1.4px; text-transform: uppercase; color: #606060; text-align: center; margin-top: 0px; margin-bottom: 20px; }
 .axon-marks_slot { width: 100%; }
 
-/* footer disclaimer */
-.axon-disc { font-family: Montserrat, sans-serif; font-size: 12px; line-height: 1.7; color: #8a8a8a; margin-top: 24px; }
+/* footer: legal line + disclaimer only, matching the reference */
+.axon-foot_legal { font-family: Montserrat, sans-serif; font-size: 14px; line-height: 1.7; color: #ffffff; margin-top: 0px; margin-bottom: 16px; }
+.axon-foot_addr { color: rgba(255, 255, 255, 0.6); }
+.axon-disc { font-family: Montserrat, sans-serif; font-size: 12px; line-height: 1.7; color: rgba(255, 255, 255, 0.45); margin-top: 0px; }
 
 @media screen and (max-width: 991px) {
   .axon-stats { grid-template-columns: repeat(3, 1fr); row-gap: 32px; }
@@ -223,7 +224,6 @@ CSS_V2 = """
   .axon-grid3opt { grid-template-columns: 1fr; }
   .axon-strip { grid-template-columns: repeat(2, 1fr); }
   .axon-vid_row { grid-template-columns: repeat(3, 1fr); gap: 16px; }
-  .axon-vid_row2 { grid-template-columns: repeat(2, 1fr); }
   .axon-gal3 { grid-template-columns: repeat(2, 1fr); }
   .axon-off_c { grid-column: span 3; }
 }
@@ -232,8 +232,6 @@ CSS_V2 = """
   .axon-jcols { grid-template-columns: 1fr; }
   .axon-chapters { grid-template-columns: 1fr; }
   .axon-vid_row { grid-template-columns: 1fr; }
-  .axon-vid_row2 { grid-template-columns: 1fr; }
-  .axon-vid_pair { grid-template-columns: 1fr; }
   .axon-gal3 { grid-template-columns: 1fr; }
   .axon-off5 { grid-template-columns: 1fr; }
   .axon-off_a { grid-column: span 1; }
@@ -253,19 +251,20 @@ CSS_V2 = """
 """
 
 # ---------------------------------------------------------------------------
-# SECTIONS  (Arvada order, block for block)
+# SECTIONS  (strict clone of Arvada, block for block, item for item)
+# Arvada reference: site 693c51e685b19f0d0c149cab, page 6a8403e80803b770778d2d72
+# Same components, same layout, same item counts. Stone's content and brand only.
 # ---------------------------------------------------------------------------
 
+# 1. header: address, logo, phone. No CTA button (Arvada has none).
 S_HEADER = f"""
 <header class="axon-header"><div class="axon-header_inner">
-<a href="{MAPS_URL}" target="_blank" rel="noopener" class="axon-header_addr">{ADDRESS}</a>
+<a href="{MAPS_URL}" target="_blank" rel="noopener" class="axon-header_addr"><img src="{PIN_ICON}" alt="" class="axon-header_icon"/>{ADDRESS}</a>
 <a href="/" aria-label="Stone Dental Implant Center home"><img src="{LOGO}" alt="Stone Dental Implant Center logo" class="axon-logo" loading="eager"/></a>
-<div class="axon-header_right">
-<a href="{PHONE_TEL}" class="axon-header_phone">{PHONE_DISPLAY}</a>
-<a href="{CONSULT_URL}" class="axon-button">Book a Consultation</a>
-</div>
+<a href="{PHONE_TEL}" class="axon-header_tel"><img src="{PHONE_ICON}" alt="" class="axon-header_icon"/>{PHONE_DISPLAY}</a>
 </div></header>"""
 
+# 2. hero: label, rating, h1, lead, 3 bullets, ONE cta, note, video + caption, form card.
 S_HERO = f"""
 <section class="axon-section axon-section_navytop axon-hero-pad" id="top"><div class="axon-container"><div class="axon-grid2 axon-grid2_top">
 <div>
@@ -274,26 +273,26 @@ S_HERO = f"""
 <h1 class="axon-h1 axon-h1_light">Permanent Teeth. One Day.<br/><span class="axon-h1_accent">Designed Around Your Face.</span></h1>
 <p class="axon-p axon-p_light axon-p_lead">Full-arch All-on-X restoration handled entirely in-house by Dr. Mona Stone, a board-certified oral &amp; maxillofacial surgeon in Westlake, TX.<br/><br/>Surgery, design, and the final smile, all under one roof.</p>
 <ul class="axon-bullets" role="list">
-<li class="axon-bullet"><span class="axon-check">✓</span>Complimentary first visit with a 3D CT scan and a full treatment plan</li>
-<li class="axon-bullet"><span class="axon-check">✓</span>A fixed temporary arch the same day in most cases</li>
+<li class="axon-bullet"><span class="axon-check">✓</span>A full arch of fixed teeth, often the same day</li>
+<li class="axon-bullet"><span class="axon-check">✓</span>Sedation available, planned for a gentle, minimally invasive visit</li>
 <li class="axon-bullet"><span class="axon-check">✓</span>Complex and atrophic cases welcome, including bone loss other clinics turn away</li>
 </ul>
 <div class="axon-ctas">
 <a href="{CONSULT_URL}" class="axon-button axon-button_yellow">Book a Consultation</a>
-<a href="{PHONE_TEL}" class="axon-button axon-button_ghost">Call {PHONE_DISPLAY}</a>
 </div>
 <p class="axon-note axon-note_light">Serving Westlake, Southlake, Keller, Trophy Club &amp; the DFW Metroplex</p>
-<div class="axon-hero_media" data-embed="hero-video"></div>
+<div class="axon-hero_media"></div>
 <span class="axon-media_caption">▶ All-on-4 explained by Stone Dental Implant Center</span>
 </div>
 <div class="axon-form_card" id="book">
-<p class="axon-form_title">Request Your All-on-X Consultation</p>
-<p class="axon-form_sub">Send us your details and our team will call you to set up your visit.</p>
+<p class="axon-form_title">Start Your All-on-X Consultation</p>
+<p class="axon-form_sub">Tell us what you are dealing with and our team will reach out to schedule your visit.</p>
 <div class="axon-form_embed"></div>
 </div>
 </div></div></section>"""
 
-S_TRUST = f"""
+# 3. trust strip: five stat items, nothing else.
+S_TRUST = """
 <section class="axon-trustbar"><div class="axon-container">
 <div class="axon-stats">
 <div class="axon-stat"><span class="axon-stat_n">255+</span><span class="axon-stat_l">Five-Star Patient Reviews</span></div>
@@ -302,19 +301,15 @@ S_TRUST = f"""
 <div class="axon-stat"><span class="axon-stat_n">Baylor &amp; Methodist</span><span class="axon-stat_l">Attending Surgeon</span></div>
 <div class="axon-stat"><span class="axon-stat_n">Full-Arch Focused</span><span class="axon-stat_l">Surgery, Grafting And The Final Arch, All In-House</span></div>
 </div>
-<div class="axon-badges">
-<span class="axon-trust_item"><img src="{C.GOOGLE}" alt="Google" class="axon-trust_img"/>Five-Star Rated on Google</span>
-<span class="axon-trust_stars" aria-hidden="true">★★★★★</span>
-<span class="axon-trust_item"><img src="{C.YELP}" alt="Yelp" class="axon-trust_img"/>Five-Star Rated on Yelp</span>
-</div>
 </div></section>"""
 
+# 4. journey: intro, slider, before/after columns, four chapters, one cta.
 S_JOURNEY = f"""
 <section class="axon-section"><div class="axon-container">
 <div class="axon-head-block axon-head-block_center axon-center">
 <span class="axon-eyebrow">One Patient's Real Journey</span>
 <h2 class="axon-h2">From a Failing Arch<br/><span class="axon-h1_accent">To a Smile That Stays In</span></h2>
-<p class="axon-p">This is a real Stone Dental Implant Center patient. He arrived with several failing teeth and years of patchwork dentistry. Drag the handle to see what changed when the whole arch was rebuilt around one plan, designed for his face.</p>
+<p class="axon-p">This is a real Stone Dental Implant Center patient. She arrived with an arch of failing teeth, years of patchwork dentistry, and a bite she had stopped trusting.</p>
 </div>
 <div class="axon-ba_shell"><div></div></div>
 <div class="axon-jcols">
@@ -376,11 +371,12 @@ S_JOURNEY = f"""
 <div class="axon-ctas axon-ctas_center"><a href="{CONSULT_URL}" class="axon-button axon-button_dark">Book a Consultation</a></div>
 </div></section>"""
 
+# 5. story: label, h2, four cards, one wide video, three vertical videos, one cta.
 S_STORY = f"""
 <section class="axon-section axon-section_soft"><div class="axon-container">
 <div class="axon-head-block axon-head-block_center axon-center">
-<span class="axon-eyebrow">Why Stone</span>
-<h2 class="axon-h2">Most Clinics Place Implants.<br/><span class="axon-h1_accent">Dr. Stone Designs Faces.</span></h2>
+<span class="axon-eyebrow">The Stone Difference</span>
+<h2 class="axon-h2">Why Patients Drive Past<br/><span class="axon-h1_accent">Other Full-Arch Clinics</span></h2>
 </div>
 <div class="axon-grid4">
 <div class="axon-feature"><h3 class="axon-h3">One surgeon, start to finish</h3><p class="axon-feature_p">Your case stays in one pair of hands from the first scan to the final arch. No repeating your story to a new provider, no referrals out.</p></div>
@@ -389,35 +385,26 @@ S_STORY = f"""
 <div class="axon-feature"><h3 class="axon-h3">Complex cases welcome</h3><p class="axon-feature_p">Complex and atrophic cases are welcome here, including bone loss that other clinics turn away. A 3D scan shows what is possible for you.</p></div>
 </div>
 <div class="axon-vid_wide">
-<div class="axon-vid_slot" data-embed="story-wide"></div>
-<span class="axon-vid_cap"><span class="axon-vid_star" aria-hidden="true">★★★★★</span>Patient story · William Goldman, in his own words</span>
+<div class="axon-vid_slot"></div>
+<span class="axon-vid_cap"><span class="axon-vid_star" aria-hidden="true">★★★★★</span>Patient story · in their own words</span>
 </div>
 <div class="axon-vid_row">
-<div><div class="axon-vid_slot" data-embed="story-v1"></div><span class="axon-vid_cap"><span class="axon-vid_star" aria-hidden="true">★★★★★</span>All-on-4 transformation</span></div>
-<div><div class="axon-vid_slot" data-embed="story-v2"></div><span class="axon-vid_cap"><span class="axon-vid_star" aria-hidden="true">★★★★★</span>A new smile before the holidays</span></div>
-<div><div class="axon-vid_slot" data-embed="story-v3"></div><span class="axon-vid_cap"><span class="axon-vid_star" aria-hidden="true">★★★★★</span>One arch, one plan, one day</span></div>
-</div>
-<div class="axon-vid_row2">
-<div><div class="axon-vid_slot" data-embed="story-v4"></div><span class="axon-vid_cap"><span class="axon-vid_star" aria-hidden="true">★★★★★</span>Patient story · Don Hull</span></div>
-<div><div class="axon-vid_slot" data-embed="story-v5"></div><span class="axon-vid_cap"><span class="axon-vid_star" aria-hidden="true">★★★★★</span>Patient story · Samuel Compos</span></div>
-<div><div class="axon-vid_slot" data-embed="story-v6"></div><span class="axon-vid_cap"><span class="axon-vid_star" aria-hidden="true">★★★★★</span>Patient story · in their own words</span></div>
-</div>
-<p class="axon-subhead">Beyond full-arch care</p>
-<p class="axon-subnote">Dr. Stone practices the full scope of oral and maxillofacial surgery. These patients came for other procedures, and their experience says as much about the practice as any implant case.</p>
-<div class="axon-vid_pair">
-<div><div class="axon-vid_slot" data-embed="story-o1"></div><span class="axon-vid_cap">Wayne · facial trauma treatment</span></div>
-<div><div class="axon-vid_slot" data-embed="story-o2"></div><span class="axon-vid_cap">Barbara · alveoloplasty</span></div>
+<div><div class="axon-vid_slot"></div><span class="axon-vid_cap"><span class="axon-vid_star" aria-hidden="true">★★★★★</span>Patient story · a full-arch transformation</span></div>
+<div><div class="axon-vid_slot"></div><span class="axon-vid_cap"><span class="axon-vid_star" aria-hidden="true">★★★★★</span>Patient story · a new smile before the holidays</span></div>
+<div><div class="axon-vid_slot"></div><span class="axon-vid_cap"><span class="axon-vid_star" aria-hidden="true">★★★★★</span>Patient story · one arch, one plan</span></div>
 </div>
 <div class="axon-ctas axon-ctas_center"><a href="{CONSULT_URL}" class="axon-button axon-button_dark">Book a Consultation</a></div>
 </div></section>"""
 
+# 6. specialist: video, label, h2, copy, four credential rows, blockquote, four-image strip.
+#    No button (Arvada has none here).
 S_SPECIALIST = f"""
 <section class="axon-section axon-section_dark"><div class="axon-container">
 <div class="axon-doc_grid">
-<div class="axon-doc_media" data-embed="doctor-video"></div>
+<div class="axon-doc_media"></div>
 <div>
-<span class="axon-eyebrow axon-eyebrow_light">Your Surgeon</span>
-<h2 class="axon-h2 axon-h2_light">A Surgeon's Training.<br/><span class="axon-h1_accent">An Artist's Eye.</span></h2>
+<span class="axon-eyebrow axon-eyebrow_light">Your Full-Arch Surgeon</span>
+<h2 class="axon-h2 axon-h2_light">The Surgeon Who Places<br/><span class="axon-h1_accent">And Restores Your Whole Arch</span></h2>
 <p class="axon-p axon-p_light">Dr. Mona Stone's path to surgery started in engineering: a biomedical engineering degree, a Doctorate of Dental Surgery from the University of Missouri-Kansas City, and a full residency in oral and maxillofacial surgery in Fort Lauderdale across three Level 1 trauma centers. She is an attending surgeon at Baylor and Methodist, and implant surgery is the heart of her practice.</p>
 <ul class="axon-creds_list" role="list">
 <li class="axon-cred_row"><span class="axon-check">✓</span><span class="axon-cred_txt"><span class="axon-cred_lab">Board-certified oral &amp; maxillofacial surgeon</span>, placing and restoring full-arch cases herself, start to finish</span></li>
@@ -426,7 +413,6 @@ S_SPECIALIST = f"""
 <li class="axon-cred_row"><span class="axon-check">✓</span><span class="axon-cred_txt"><span class="axon-cred_lab">KLS MARTIN IPS® certified, Pinnacle faculty</span>, and an attending surgeon at Baylor and Methodist</span></li>
 </ul>
 <blockquote class="axon-quote">What truly sets her apart is how she sees.</blockquote>
-<div class="axon-ctas"><a href="{CONSULT_URL}" class="axon-button axon-button_yellow">Book a Consultation</a></div>
 </div>
 </div>
 <div class="axon-strip">
@@ -437,12 +423,14 @@ S_SPECIALIST = f"""
 </div>
 </div></section>"""
 
+# 7. options: label, h2, intro, three cards. Each card: image, h3, description,
+#    four spec rows, a pricing note. No tags, no buttons (Arvada has none).
 S_OPTIONS = f"""
 <section class="axon-section axon-section_soft"><div class="axon-container">
 <div class="axon-head-block axon-head-block_center axon-center">
-<span class="axon-eyebrow">Your Options</span>
+<span class="axon-eyebrow">Your Comprehensive Options</span>
 <h2 class="axon-h2">From a Failing Arch<br/><span class="axon-h1_accent">To Teeth That Stay In</span></h2>
-<p class="axon-p">Your consultation maps your bone, bite, timeline, and goals, then points to the path that fits. Here is the landscape before you walk in.</p>
+<p class="axon-p">Your consultation determines which path fits your bone, bite, timeline, and budget. Here is the landscape before you walk in.</p>
 </div>
 <div class="axon-grid3opt">
 
@@ -452,88 +440,83 @@ S_OPTIONS = f"""
 <h3 class="axon-opt_h">Single Dental Implants</h3>
 <p class="axon-opt_d">An implant rebuilds one missing tooth, root and crown, without grinding down the healthy teeth on either side of it.</p>
 <div class="axon-spec"><p class="axon-spec_k">Implants placed</p><p class="axon-spec_v">1</p></div>
-<div class="axon-spec"><p class="axon-spec_k">Replaces</p><p class="axon-spec_v">One tooth</p></div>
-<div class="axon-spec"><p class="axon-spec_k">Ideal if you want</p><p class="axon-spec_v">One gap closed, neighbours untouched</p></div>
+<div class="axon-spec"><p class="axon-spec_k">Treatment time</p><p class="axon-spec_v">4 to 6 months</p></div>
+<div class="axon-spec"><p class="axon-spec_k">Ideal if you want</p><p class="axon-spec_v">One tooth replaced, neighbours untouched</p></div>
 <div class="axon-spec"><p class="axon-spec_k">Investment</p><p class="axon-spec_v">$</p></div>
 <p class="axon-spec_note">Your exact fee is itemized at your consultation, after the 3D scan shows whether any grafting is needed first.</p>
-<div class="axon-opt_foot"><a href="{CONSULT_URL}" class="axon-button axon-button_dark">Ask About Single Implants</a></div>
 </div>
 </div>
 
 <div class="axon-opt axon-opt_feat">
 <img src="{OPT_ALLONX}" alt="All-on-X full-arch dental implants at Stone Dental Implant Center" class="axon-opt_img" loading="lazy"/>
 <div class="axon-opt_body">
-<span class="axon-opt_tag">Full-Arch Solution</span>
 <h3 class="axon-opt_h">All-on-X Full-Arch Implants</h3>
 <p class="axon-opt_d">A complete row of fixed teeth carried by four to six precisely placed implants. It stays in around the clock. Nothing removable, nothing to take out at night.</p>
-<div class="axon-spec"><p class="axon-spec_k">Implants per arch</p><p class="axon-spec_v">4 to 6</p></div>
-<div class="axon-spec"><p class="axon-spec_k">Treatment time</p><p class="axon-spec_v">Often same-day temporary teeth</p></div>
+<div class="axon-spec"><p class="axon-spec_k">Implants placed</p><p class="axon-spec_v">4 to 6 per arch</p></div>
+<div class="axon-spec"><p class="axon-spec_k">Treatment time</p><p class="axon-spec_v">Often same-day teeth</p></div>
 <div class="axon-spec"><p class="axon-spec_k">Ideal if you want</p><p class="axon-spec_v">Fixed, non-removable teeth</p></div>
 <div class="axon-spec"><p class="axon-spec_k">Investment</p><p class="axon-spec_v">$$</p></div>
 <p class="axon-spec_note">All-on-X in the Westlake and DFW area typically runs about $25,000 to $50,000 or more per arch, depending on the number of implants, the materials, and whether bone work is needed. Financing is available through Lending Club, Cherry, Sunbit and Proceed Finance.</p>
-<div class="axon-opt_foot"><a href="{CONSULT_URL}" class="axon-button">Book a Consultation</a></div>
 </div>
 </div>
 
 <div class="axon-opt">
 <img src="{OPT_GRAFT}" alt="Bone grafting and sinus lift at Stone Dental Implant Center" class="axon-opt_img" loading="lazy"/>
 <div class="axon-opt_body">
-<h3 class="axon-opt_h">Full Arch With Bone Grafting or a Sinus Lift</h3>
+<h3 class="axon-opt_h">Full Arch With Grafting or a Sinus Lift</h3>
 <p class="axon-opt_d">For arches with significant bone loss. Dr. Stone can often angle implants around the loss, or rebuild the site with grafting and a sinus lift so a fixed arch becomes possible.</p>
-<div class="axon-spec"><p class="axon-spec_k">Implants per arch</p><p class="axon-spec_v">4 to 6, plus site work</p></div>
+<div class="axon-spec"><p class="axon-spec_k">Implants placed</p><p class="axon-spec_v">4 to 6, after site work</p></div>
 <div class="axon-spec"><p class="axon-spec_k">Treatment time</p><p class="axon-spec_v">Longer, healing between stages</p></div>
 <div class="axon-spec"><p class="axon-spec_k">Ideal if you want</p><p class="axon-spec_v">A yes after being told no</p></div>
 <div class="axon-spec"><p class="axon-spec_k">Investment</p><p class="axon-spec_v">$$$</p></div>
 <p class="axon-spec_note">Where a case falls depends on how much bone has to be rebuilt and how many stages that takes. The 3D scan at your consultation settles it.</p>
-<div class="axon-opt_foot"><a href="{CONSULT_URL}" class="axon-button axon-button_dark">See If You Qualify</a></div>
 </div>
 </div>
 
 </div></div></section>"""
 
+# 8. process: label, h2, intro, three numbered cards, one cta, video beside.
 S_PROCESS = f"""
 <section class="axon-section"><div class="axon-container">
 <div class="axon-proc_grid">
 <div>
-<span class="axon-eyebrow">The Process</span>
+<span class="axon-eyebrow">How It Works</span>
 <h2 class="axon-h2">Three Visits Between You<br/><span class="axon-h1_accent">And a Permanent Smile</span></h2>
 <p class="axon-p">A complimentary first visit, complete records, and a clear plan, because an arch you will chew on for decades begins with understanding, not urgency.</p>
 <div class="axon-proc_steps">
-<div class="axon-step"><p class="axon-step_num">01</p><div><h3 class="axon-h3">Consultation &amp; 3D Scan</h3><p class="axon-step_p">A complimentary exam with a 3D CT scan that maps your bone, bite, and goals, then hands you a clear plan and an itemized quote before anything begins.</p></div></div>
-<div class="axon-step"><p class="axon-step_num">02</p><div><h3 class="axon-h3">Placement &amp; Same-Day Teeth</h3><p class="axon-step_p">Dr. Stone performs the placement with guided, minimally invasive technique; sedation is available. Most patients head home the same day with a fixed temporary arch in place.</p></div></div>
-<div class="axon-step"><p class="axon-step_num">03</p><div><h3 class="axon-h3">Your Permanent Smile</h3><p class="axon-step_p">Once the implants have fused with the jaw, generally 4 to 6 months, your custom final arch goes in, shaped to your face and made to last.</p></div></div>
+<div class="axon-step"><p class="axon-step_num">01</p><div><h3 class="axon-h3">Consultation &amp; 3D scan</h3><p class="axon-step_p">A complimentary exam with a 3D CT scan that maps your bone, bite, and goals, then hands you a clear plan and an itemized quote before anything begins.</p></div></div>
+<div class="axon-step"><p class="axon-step_num">02</p><div><h3 class="axon-h3">Your surgical day</h3><p class="axon-step_p">Dr. Stone performs the placement with guided, minimally invasive technique; sedation is available. Most patients head home the same day with a fixed temporary arch in place.</p></div></div>
+<div class="axon-step"><p class="axon-step_num">03</p><div><h3 class="axon-h3">Your final arch</h3><p class="axon-step_p">Once the implants have fused with the jaw, generally 4 to 6 months, your custom final arch goes in, shaped to your face and made to last.</p></div></div>
 </div>
 <div class="axon-ctas"><a href="{CONSULT_URL}" class="axon-button axon-button_dark">Book a Consultation</a></div>
 </div>
-<div class="axon-doc_media" data-embed="process-video"></div>
+<div class="axon-doc_media"></div>
 </div>
 </div></section>"""
 
+# 9. gallery: label, h2, intro, three images, one cta.
 S_GALLERY = f"""
 <section class="axon-section axon-section_soft"><div class="axon-container">
 <div class="axon-head-block axon-head-block_center axon-center">
 <span class="axon-eyebrow">Smile Gallery</span>
-<h2 class="axon-h2">Real Patients.<br/><span class="axon-h1_accent">Real Arches. Real Results.</span></h2>
+<h2 class="axon-h2">Real Patients.<br/><span class="axon-h1_accent">Real Results.</span></h2>
 <p class="axon-p">Every arch below started with a conversation, a 3D scan, and a plan designed around that specific patient. No shortcuts, no standard molds.</p>
 </div>
 <div class="axon-gal3">
 <img src="{BA['g']}" alt="{BA_ALT}" class="axon-gal_img" loading="lazy"/>
 <img src="{BA['h']}" alt="{BA_ALT}" class="axon-gal_img" loading="lazy"/>
 <img src="{BA['j']}" alt="{BA_ALT}" class="axon-gal_img" loading="lazy"/>
-<img src="{BA['c']}" alt="{BA_ALT}" class="axon-gal_img" loading="lazy"/>
-<img src="{BA['e']}" alt="{BA_ALT}" class="axon-gal_img" loading="lazy"/>
-<img src="{BA['l']}" alt="{BA_ALT}" class="axon-gal_img" loading="lazy"/>
 </div>
-<p class="axon-disclaimer">Individual results vary. All photos show actual patients of Stone Dental Implant Center.</p>
 <div class="axon-ctas axon-ctas_center"><a href="{CONSULT_URL}" class="axon-button axon-button_dark">Book a Consultation</a></div>
 </div></section>"""
 
+# 10. space: label, h2, intro, five-image office grid. No button.
 S_SPACE = f"""
 <section class="axon-section"><div class="axon-container">
 <div class="axon-head-block axon-head-block_center axon-center">
-<span class="axon-eyebrow">The Experience</span>
-<h2 class="axon-h2">Comfortable, Modern,<br/><span class="axon-h1_accent">And Built Around You</span></h2>
-<p class="axon-p">The experience starts the moment you arrive. Our team speaks English and Spanish, and someone is available 24/7 to help you schedule. Virtual consultations are available for out-of-town patients.</p>
+<span class="axon-eyebrow">Your Experience</span>
+<h2 class="axon-h2">A Space Designed<br/><span class="axon-h1_accent">For Your Comfort</span></h2>
+<p class="axon-p">From the moment you walk in, Stone feels different. Our team speaks English and Spanish, someone is available 24/7 to help you schedule, and virtual consultations are available for out-of-town patients.</p>
 </div>
 <div class="axon-off5">
 <img src="{EXTERIOR}" alt="Stone Dental Implant Center in Westlake, TX" class="axon-off_a" loading="lazy"/>
@@ -542,60 +525,43 @@ S_SPACE = f"""
 <img src="{DR_PHOTO}" alt="Dr. Mona Stone in the consultation room at Stone Dental Implant Center" class="axon-off_c" loading="lazy"/>
 <img src="{DR_STANDING}" alt="Dr. Mona Stone, DDS, at Stone Dental Implant Center" class="axon-off_c" loading="lazy"/>
 </div>
-<div class="axon-ctas axon-ctas_center"><a href="{PHONE_TEL}" class="axon-button axon-button_dark">Call {PHONE_DISPLAY}</a></div>
 </div></section>"""
 
+# 11. faq: centred label, h2, ten accordion items.
 S_FAQ = """
 <section class="axon-section axon-section_soft"><div class="axon-container">
 <div class="axon-head-block axon-head-block_center axon-center">
 <span class="axon-eyebrow">Before You Call</span>
-<h2 class="axon-h2">Questions We Hear Most</h2>
+<h2 class="axon-h2">Any Questions<br/><span class="axon-h1_accent">Before You Call?</span></h2>
 </div>
 <div class="axon-faq_slot"></div>
 </div></section>"""
 
+# 12. final: label, h2, copy, video, ONE cta (call), the prefer-to-talk line.
 S_FINAL = f"""
 <section class="axon-section axon-section_navytop axon-center"><div class="axon-container"><div class="axon-final_inner">
-<span class="axon-eyebrow axon-eyebrow_light">Time Matters</span>
-<h2 class="axon-h2 axon-h2_light">Bone Loss Doesn't Wait.<br/><span class="axon-h1_accent">See Where You Stand Today.</span></h2>
-<p class="axon-p axon-p_light axon-p_lead">The 3D CT scan at your complimentary consultation maps exactly what your case needs before anything begins.</p>
-<div class="axon-final_media" data-embed="final-video"></div>
+<span class="axon-eyebrow axon-eyebrow_light">Limited Consultation Availability</span>
+<h2 class="axon-h2 axon-h2_light">Stop Rescuing Teeth<br/><span class="axon-h1_accent">One At a Time</span></h2>
+<p class="axon-p axon-p_light axon-p_lead">Every failing tooth you patch costs money now and bone you will want later. The 3D CT scan at your complimentary consultation maps exactly what your case needs before anything begins.</p>
+<div class="axon-final_media"></div>
 <div class="axon-ctas axon-ctas_center">
-<a href="{CONSULT_URL}" class="axon-button axon-button_yellow">Book a Consultation</a>
 <a href="{PHONE_TEL}" class="axon-button axon-button_ghost">Call {PHONE_DISPLAY}</a>
 </div>
-<p class="axon-alt">Prefer to talk? Call <a href="{PHONE_TEL}" class="axon-alt_a">{PHONE_DISPLAY}</a>. Mon 9 to 5 · Tue 9 to 5 · Wed 9 to 3 · Thu 9 to 5 · Fri 9 to 4. Someone is available 24/7 to schedule.</p>
+<p class="axon-alt">Prefer to talk? Call <a href="{PHONE_TEL}" class="axon-alt_a">{PHONE_DISPLAY}</a>. Mon 9 to 5 · Tue 9 to 5 · Wed 9 to 3 · Thu 9 to 5 · Fri 9 to 4.</p>
 </div></div></section>"""
 
+# 13. marks: label + marquee.
 S_MARKS = """
 <section class="axon-marks"><div class="axon-container">
 <p class="axon-marks_lab">Dr. Mona Stone, DDS</p>
 <div class="axon-marks_slot"></div>
 </div></section>"""
 
+# 14. footer: legal line + disclaimer. Nothing else (Arvada carries no logo, columns or links).
 S_FOOTER = f"""
 <footer class="axon-footer"><div class="axon-container">
-<div class="axon-footer_grid">
-<div class="axon-footer_col">
-<img src="{LOGO}" alt="Stone Dental Implant Center logo" class="axon-footer_logo" loading="lazy"/>
-<p class="axon-footer_p">{ADDRESS}<br/>{PHONE_DISPLAY}</p>
-<p class="axon-footer_p">Mon 9 to 5 · Tue 9 to 5 · Wed 9 to 3 · Thu 9 to 5 · Fri 9 to 4</p>
-</div>
-<div class="axon-footer_col">
-<p class="axon-footer_h">Practice</p>
-<a href="/meet-dr-mona-stone" class="axon-footer_link">Meet Dr. Mona Stone</a>
-<a href="/patient-testimonials" class="axon-footer_link">Patient Testimonials</a>
-<a href="/contact" class="axon-footer_link">Contact</a>
-</div>
-</div>
+<p class="axon-foot_legal">Stone Dental Implant Center, Dr. Mona Stone, DDS <span class="axon-foot_addr">{ADDRESS} · {PHONE_DISPLAY}</span></p>
 <p class="axon-disc">Individual results vary with each patient's oral health, anatomy and treatment plan. Nothing on this page is a diagnosis or a promise of a specific outcome. Candidacy for dental implants is determined at a clinical examination with Dr. Mona Stone. Any range shown is typical and is confirmed in an itemized quote at your consultation. All photographs on this page show actual patients of Stone Dental Implant Center.</p>
-<div class="axon-footer_bottom">
-<p class="axon-footer_legal">© 2026 Stone Dental Implant Center. All Rights Reserved.</p>
-<div class="axon-footer_links">
-<a href="/privacy-policy" class="axon-footer_legal">Privacy Policy</a>
-<a href="/terms-of-service" class="axon-footer_legal">Terms of Service</a>
-</div>
-</div>
 </div></footer>"""
 
 LANDING_V2 = [
@@ -616,27 +582,21 @@ LANDING_V2 = [
 ]
 
 # ---------------------------------------------------------------------------
-# EMBEDS  (inserted after the structure; whtml strips iframes, style and script)
-# key -> (container style name, index among same-styled containers, code)
+# EMBEDS  (8 video slots, matching Arvada one for one)
 # ---------------------------------------------------------------------------
 EMBEDS = {
     "hero-video": yt_embed(V_EXPLAINER, "All on 4 explained, Stone Dental Implant Center"),
-    "story-wide": yt_embed(V_WILLIAM, "William Goldman, All-on-X patient testimony"),
+    "story-wide": yt_embed(V_WILLIAM, "Stone Dental Implant Center patient testimony"),
     "story-v1": vimeo_embed(VM_2, "All-on-4 transformation, Stone Dental Implant Center"),
     "story-v2": vimeo_embed(VM_3, "A new smile before the holidays"),
-    "story-v3": vimeo_embed(VM_1, "One arch, one plan, one day"),
-    "story-v4": yt_embed(V_DON, "Don Hull, patient testimony"),
-    "story-v5": yt_embed(V_SAMUEL, "Samuel Compos, patient testimony"),
-    "story-v6": yt_embed(V_NOV, "Stone Dental Implant Center patient testimony"),
-    "story-o1": yt_embed(V_WAYNE, "Wayne, facial trauma treatment"),
-    "story-o2": yt_embed(V_BARBARA, "Barbara, alveoloplasty"),
+    "story-v3": vimeo_embed(VM_1, "One arch, one plan"),
     "doctor-video": yt_embed(V_DOCTOR, "Dr. Mona Stone, Stone Dental Implant Center"),
     "process-video": yt_embed(V_OVERVIEW, "Stone Dental Implant Center practice overview"),
     "final-video": yt_embed(V_RON, "Patient Ron, Stone Dental Implant Center testimonial"),
 }
 
 # ---------------------------------------------------------------------------
-# FAQ  (10 questions; every answer traced to the client's own live pages)
+# FAQ  (10 questions, matching Arvada's count; every answer from the client's pages)
 # ---------------------------------------------------------------------------
 FAQ = [
     ("How much do All-on-X implants cost?",
@@ -668,7 +628,7 @@ def faq_code():
         items.append(
             '<details class="sfaq__item">'
             f'<summary class="sfaq__q"><span>{q}</span><span class="sfaq__i" aria-hidden="true"></span></summary>'
-            f'<div class="sfaq__a"><p>{a}</p></div>'
+            f'<div class="sfaq__a"><span class="sfaq__dot" aria-hidden="true">&#10003;</span><p>{a}</p></div>'
             "</details>"
         )
     return (
@@ -686,7 +646,8 @@ def faq_code():
         ".sfaq__i::before{top:6px;left:0;width:14px;height:2px}"
         ".sfaq__i::after{top:0;left:6px;width:2px;height:14px}"
         ".sfaq__item[open] .sfaq__i::after{transform:rotate(90deg)}"
-        ".sfaq__a{padding:0 24px 22px}"
+        ".sfaq__a{padding:0 24px 22px;display:flex;gap:12px;align-items:flex-start}"
+        ".sfaq__dot{flex:0 0 auto;color:#2179a8;font-weight:700;line-height:1.7}"
         ".sfaq__a p{margin:0;font-family:Montserrat,sans-serif;font-size:15px;line-height:1.7;"
         "color:#606060}"
         "@media (max-width:479px){.sfaq__q{padding:16px 18px;font-size:15px}"
@@ -702,7 +663,7 @@ MARKS = [
     "UMKC Doctorate of Dental Surgery",
     "Residency Across 3 Level 1 Trauma Centers",
     "Attending Surgeon, Baylor &amp; Methodist",
-    "KLS MARTIN IPS® Certified",
+    "KLS MARTIN IPS&#174; Certified",
     "Pinnacle Faculty",
 ]
 

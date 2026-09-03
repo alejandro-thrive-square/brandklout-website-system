@@ -1,6 +1,6 @@
 # All-on-X Landing Page — Arvada Parity Gap Analysis
 
-Status: **BUILT AND STAGED** 2026-09-03. Live on the Webflow subdomain only
+Status: **STRICT CLONE, BUILT AND STAGED** 2026-09-03. Live on the Webflow subdomain only
 (`https://stone-surgical-arts.webflow.io/ads-landing-pages/all-on-x`); the four custom domains are
 untouched and still serve the old page, pending a go-ahead for the full-site publish.
 
@@ -153,11 +153,78 @@ pair, 5 practice photos and all 13 videos**.
 
 | Bug | Cause | Fix |
 | :--- | :--- | :--- |
+| Header phone lost its styling and rendered as a default blue underlined link | `CSS_V2` redefined the existing site class `.axon-header_phone` with a different rule body, so Webflow minted `.axon-header_phone-1` carrying only the new properties | renamed to a fresh class `.axon-header_tel` with the full property set. Same family as the `inline-section-0` bug below: **never redefine an existing site class from `whtml_builder`; always use a new name** |
 | Trust bar rendered navy on navy, text unreadable | an inline `style=` attribute made Webflow mint `.inline-section-0`, which collided with a pre-existing site style carrying a navy background | gave the section its own `.axon-trustbar` class; **never use inline `style=` in `whtml_builder` HTML on this site** |
 | "Drag to compare" appeared twice | the slider embed renders its own hint | removed the duplicate `<p>` from the section HTML |
 | Process steps crushed into ~150px columns | 3-across steps inside the narrow half of a `0.85fr 1.15fr` grid | new `.axon-proc_grid` (1.25fr / 0.75fr) with steps stacked vertically |
 | Office/strip photos cropped through faces | `object-fit: cover` centred on tall portraits | added `object-position` to `.axon-off_*` and `.axon-strip_img` |
 | A prominent photo reads "Dr. Monica Stone" | the client's own banner asset carries that artwork | `Doctor Mona Stone Banner.avif` dropped from the page entirely; see §6 |
+
+## 5b. Strict-clone pass (2026-09-03, after the teammate review)
+
+The first build was Arvada's structure plus extras. The brief was tightened to a **strict clone:
+same components, same layout, same item counts, different content**. These extras were removed.
+
+| Removed | Count | Why |
+| :--- | :--- | :--- |
+| "Book a Consultation" button in the header | 1 | Arvada's header is address, logo, phone only |
+| Second hero CTA ("Call ...") | 1 | Arvada's hero has one CTA |
+| Google/Yelp badge row under the trust stats | 1 row | Arvada's trust strip is five stat tiles, nothing else |
+| Second testimonial video row | 3 videos | Arvada has one wide + three vertical, full stop |
+| "Beyond full-arch care" block (label, note, 2 videos) | 1 block | Not in Arvada; the two off-topic videos come off the page |
+| "Book a Consultation" in the specialist section | 1 | Arvada has no button there |
+| Buttons on all three option cards | 3 | Arvada's option cards carry no CTA |
+| "Full-Arch Solution" tag on the featured option card | 1 | Not in Arvada |
+| Three extra gallery images | 3 | Arvada's gallery is a three-up grid |
+| Gallery disclaimer paragraph | 1 | Arvada's disclaimer lives only in the footer |
+| "Call ..." button in the experience section | 1 | Arvada has no button there |
+| Second final-CTA button | 1 | Arvada's closing block has one call CTA |
+| Footer logo, hours, Practice column, nav links, copyright row, legal links | 7 links | Arvada's footer is a legal line and a disclaimer, nothing else |
+
+Added for fidelity: the pin and phone icons in the header (Stone has its own copies of both
+`location-pin-svgrepo-com` and `phone-svgrepo-com`), and a check mark before each FAQ answer to
+match Arvada's answer rows.
+
+### Verified parity, item for item
+
+| Item | Arvada | Stone |
+| :--- | ---: | ---: |
+| CTA buttons on the page | 6 | 6 |
+| Distinct videos | 8 | 8 |
+| h1 / h2 / h3 | 1 / 9 / 16 | 1 / 9 / 16 |
+| Hero bullets | 3 | 3 |
+| Trust stat tiles | 5 | 5 |
+| Life Before / After list items | 10 | 10 |
+| Journey chapters | 4 | 4 |
+| Feature + process step cards | 7 | 7 |
+| Credential rows / blockquote | 4 / 1 | 4 / 1 |
+| Option cards | 3 | 3 |
+| Gallery images | 3 | 3 |
+| FAQ items | 10 | 10 |
+| Footer paragraphs / links | 2 / 0 | 2 / 0 |
+
+Videos in use (8): `TfxI89BAY9w` hero, `WSBoMQuIwPU` story wide, Vimeo `1188307682` /
+`1188307691` / `1188307662` story vertical, `MClykj3NC-M` specialist, `YYmE8wszrBw` process,
+`0_DIwrmIGu0` closing. **Five of Stone's videos are now unused** (`nGXAhZDvsgs`, `M6HwFDnQeJE`,
+`Ts__XGC0sTc`, and the two off-topic ones `9Ha_jOTupqo` facial trauma and `4cCSqJlfWGM`
+alveoloplasty), because Arvada has only eight slots.
+
+### Two things that are still not identical, and cannot be
+
+1. **The Google reviews widget.** Arvada's story section embeds ElfSight app
+   `5c283beb-4bc5-4802-8a1a-4fb3f6cd6f1f`. That widget shows **Arvada's** reviews, so it cannot be
+   reused. Stone's ElfSight account has only a floating review badge (`c92f78df-...`, already
+   global on the page) and an Instagram feed (`7b3bee65-...`). **A Google Reviews widget needs to
+   be created in Stone's ElfSight account** and its id dropped into the story section to close
+   this last gap.
+2. **Tag semantics.** Arvada renders the trust strip and the credential marquee as `<div>`; ours
+   are `<section>`. Rendered output and layout are identical; only the wrapper tag differs.
+
+### A consequence worth a decision
+
+Arvada's footer carries **no Privacy Policy or Terms links**, so the strict clone dropped Stone's.
+Google Ads generally expects a reachable privacy policy on a paid landing page. Say the word and
+the two links go back into the footer legal line; it is a one-line change.
 
 ## 6. Open items for the client
 

@@ -132,23 +132,19 @@ def make_embed(parent_id, code, label):
 
 # key -> (container style, ordinal among that style, code)
 def embed_plan():
+    """8 video slots + form + FAQ + marquee, matching Arvada one for one."""
     return [
-        ("hero-video",   "axon-hero_media",  0, V.EMBEDS["hero-video"]),
-        ("ghl-form",     "axon-form_embed",  0, C.CONSULT_IFRAME),
-        ("story-wide",   "axon-vid_slot",    0, V.EMBEDS["story-wide"]),
-        ("story-v1",     "axon-vid_slot",    1, V.EMBEDS["story-v1"]),
-        ("story-v2",     "axon-vid_slot",    2, V.EMBEDS["story-v2"]),
-        ("story-v3",     "axon-vid_slot",    3, V.EMBEDS["story-v3"]),
-        ("story-v4",     "axon-vid_slot",    4, V.EMBEDS["story-v4"]),
-        ("story-v5",     "axon-vid_slot",    5, V.EMBEDS["story-v5"]),
-        ("story-v6",     "axon-vid_slot",    6, V.EMBEDS["story-v6"]),
-        ("story-o1",     "axon-vid_slot",    7, V.EMBEDS["story-o1"]),
-        ("story-o2",     "axon-vid_slot",    8, V.EMBEDS["story-o2"]),
-        ("doctor-video", "axon-doc_media",   0, V.EMBEDS["doctor-video"]),
-        ("process-video","axon-doc_media",   1, V.EMBEDS["process-video"]),
-        ("final-video",  "axon-final_media", 0, V.EMBEDS["final-video"]),
-        ("faq",          "axon-faq_slot",    0, V.faq_code()),
-        ("marks",        "axon-marks_slot",  0, V.marks_code()),
+        ("hero-video",    "axon-hero_media",  0, V.EMBEDS["hero-video"]),
+        ("ghl-form",      "axon-form_embed",  0, C.CONSULT_IFRAME),
+        ("story-wide",    "axon-vid_slot",    0, V.EMBEDS["story-wide"]),
+        ("story-v1",      "axon-vid_slot",    1, V.EMBEDS["story-v1"]),
+        ("story-v2",      "axon-vid_slot",    2, V.EMBEDS["story-v2"]),
+        ("story-v3",      "axon-vid_slot",    3, V.EMBEDS["story-v3"]),
+        ("doctor-video",  "axon-doc_media",   0, V.EMBEDS["doctor-video"]),
+        ("process-video", "axon-doc_media",   1, V.EMBEDS["process-video"]),
+        ("final-video",   "axon-final_media", 0, V.EMBEDS["final-video"]),
+        ("faq",           "axon-faq_slot",    0, V.faq_code()),
+        ("marks",         "axon-marks_slot",  0, V.marks_code()),
     ]
 
 

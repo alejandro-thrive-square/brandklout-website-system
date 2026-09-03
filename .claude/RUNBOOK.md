@@ -9,7 +9,14 @@ that is actually live. **Landing pages for ad campaigns**, not site work.
 43 URLs. Dr. Mona Stone, DDS, 72 Andorra Dr #110A, Westlake, TX 76262, (817) 383-8361.
 The same Webflow site also serves `stonesurgicalarts.com` — see gotcha 2 and 5.
 
-## Status: landing page REBUILT to Arvada parity, STAGED not live (2026-09-03, 4th session)
+## Status: landing page is a STRICT CLONE of Arvada, STAGED not live (2026-09-03, 4th session)
+
+Brief tightened mid-session by a teammate: **same components, same layout, same item counts as
+Arvada, different content**. No extra buttons, no extra labels. 13 extras were stripped out
+(full list in ARVADA-PARITY-GAP.md section 5b) and parity is verified item for item: 6 CTAs,
+8 videos, 3 option cards, 3 gallery images, 10 FAQs, a 2-paragraph footer with zero links.
+Five of Stone's 13 videos are now unused because Arvada has only eight slots.
+
 
 `/ads-landing-pages/all-on-x` was wiped and rebuilt block for block against the **Arvada Dental
 Center** All-on-X ad page. It is published to the **Webflow subdomain only**:
@@ -169,7 +176,13 @@ campaign-specific form for attribution) and needs another full-site publish.
     byte-identical before and after. Still diff a pre-edit capture against the published page
     before declaring a publish clean.
 
-13. **Never put an inline `style=` attribute in HTML passed to `whtml_builder` on this site.**
+13. **Never redefine an existing site class, and never use an inline `style=`, in
+    `whtml_builder` HTML.** Both make Webflow mint a *new* class (`.axon-header_phone-1`,
+    `.inline-section-0`) that carries only the properties from your call, silently dropping
+    everything the original class had. This bit twice in one session: a navy-on-navy trust bar,
+    and a header phone link that reverted to default blue underline. Give new markup a **new**
+    class name. Original wording:
+    **Never put an inline `style=` attribute in HTML passed to `whtml_builder` on this site.**
     Webflow mints a class named `inline-section-N` for it, and `.inline-section-0` **already
     exists site-wide carrying a navy background**. The builder reports
     `dropped_style ... Cannot have duplicate style names` and silently reuses the existing style,
