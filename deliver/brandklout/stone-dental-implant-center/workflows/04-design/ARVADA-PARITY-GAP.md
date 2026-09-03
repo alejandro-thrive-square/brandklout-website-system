@@ -209,6 +209,28 @@ Videos in use (8): `TfxI89BAY9w` hero, `WSBoMQuIwPU` story wide, Vimeo `11883076
 `Ts__XGC0sTc`, and the two off-topic ones `9Ha_jOTupqo` facial trauma and `4cCSqJlfWGM`
 alveoloplasty), because Arvada has only eight slots.
 
+### Video provenance, verified 2026-09-03
+
+Every video on the page was checked back to the client. **All Brandklout client video, across
+practices, is hosted on one shared Vimeo account, `vimeo.com/user248712727` ("Sang Huynh").**
+Presence in that account therefore proves nothing about whose patient a clip shows, so each of the
+three Vimeo clips used here was verified two further ways:
+
+1. **Embedded on Stone's own live site.** All three appear on `stonedentalimplantcenter.com`
+   (re-fetched live, not from a cached capture) under *"Patient testimonials, Before They Trusted
+   Dr. Stone, They Were Just Like You."*
+2. **Thumbnail matched to Stone's own before/after library.** `1188307682` is the same patient as
+   `imgi_38_590414907`; `1188307691` is the same patient as `imgi_46_573322229`. Both photos are
+   Stone assets already used on the client's site.
+
+They appear on no other client site in this workspace. Titles are `#allon4` transformations.
+
+> **Caution for the next campaign.** The shared account has already cross-wired at least once:
+> Arvada's live All-on-X hero (`vimeo.com/1193458475`) is titled *"Dr. Chris' Vision For Implant
+> Care"*, and Dr. Chris is **Livewell's** doctor, not Arvada's Dr. Bennett. Worth raising with
+> whoever owns Arvada. Long term, each practice's clips should live in that practice's own Vimeo
+> account.
+
 ### Two things that are still not identical, and cannot be
 
 1. **The Google reviews widget.** Arvada's story section embeds ElfSight app
