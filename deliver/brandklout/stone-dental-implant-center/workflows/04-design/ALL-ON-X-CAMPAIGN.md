@@ -1,6 +1,14 @@
 # All-on-X Ad Campaign — Landing Page Set
 
-Status: **LIVE** on `stonedentalimplantcenter.com`, published 2026-09-03.
+> [!IMPORTANT]
+> **The landing page has been rebuilt against a new reference.** Everything below describes the
+> v1 build, which was modelled on Livewell Dental and is still what the four live domains serve.
+> The landing page in the Designer is now the **Arvada-parity v2 build**, staged on the Webflow
+> subdomain and awaiting a live publish. For the landing page read
+> [ARVADA-PARITY-GAP.md](./ARVADA-PARITY-GAP.md) instead; this document remains accurate for the
+> **consultation and thank-you pages**, which were not rebuilt.
+
+Status: v1 **LIVE** on `stonedentalimplantcenter.com`, published 2026-09-03.
 Reference implementation: Livewell Dental's implant ad trio
 (`/ads-landing-pages/dental-implants`, `-consultation`, `thank-you-implants`), cloned and
 adapted to Stone's brand and the All-on-X service. No Livewell content shipped.

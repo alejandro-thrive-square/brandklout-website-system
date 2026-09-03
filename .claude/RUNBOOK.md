@@ -9,6 +9,18 @@ that is actually live. **Landing pages for ad campaigns**, not site work.
 43 URLs. Dr. Mona Stone, DDS, 72 Andorra Dr #110A, Westlake, TX 76262, (817) 383-8361.
 The same Webflow site also serves `stonesurgicalarts.com` — see gotcha 2 and 5.
 
+## Status: landing page REBUILT to Arvada parity, STAGED not live (2026-09-03, 4th session)
+
+`/ads-landing-pages/all-on-x` was wiped and rebuilt block for block against the **Arvada Dental
+Center** All-on-X ad page. It is published to the **Webflow subdomain only**:
+`https://stone-surgical-arts.webflow.io/ads-landing-pages/all-on-x`. The four custom domains still
+serve the previous version. **The live full-site publish is pending Alejandro's go-ahead.**
+
+Read [`workflows/04-design/ARVADA-PARITY-GAP.md`](../deliver/brandklout/stone-dental-implant-center/workflows/04-design/ARVADA-PARITY-GAP.md)
+first: it holds the parity table, the asset and video inventory, the build recipe, the five bugs
+found in QA, and the open items for the client. Source of truth for the page is
+`workflows/04-design/.tmp/build/content_v2.py`, driven by `build_v2.py`.
+
 ## Status: All-on-X ad campaign trio LIVE (2026-09-03)
 
 First campaign delivered. Three pages live under `/ads-landing-pages/` (folder
@@ -71,6 +83,10 @@ Alejandro said a different model built the trio during an outage; this session o
   resolve to Stone paths. Captures in `workflows/01-content-intake/.tmp/live/` (before) and
   `live2/` (after).
 
+### FIXED in the 4th session — the hero form is now live again (see the rebuild above)
+
+Historic note from the 3rd session:
+
 ### Found, NOT fixed — the landing page hero form is empty in production
 
 `/ads-landing-pages/all-on-x` renders its hero form card as
@@ -84,9 +100,13 @@ campaign-specific form for attribution) and needs another full-site publish.
 
 ## Next
 
-0. **Fix the empty hero form embed on `/ads-landing-pages/all-on-x`** (see above) — highest
-   priority, it is live on the primary ad destination.
-1. Campaign copy/design sign-off from the client if required; the pages are live either way.
+0. **Publish the rebuilt landing page to the live domains** once Alejandro approves. Full-site
+   publish to all four domains; there is no single-page publish on this plan.
+1. Consult and thank-you pages are still the Livewell shape. Arvada has its own consult and
+   thank-you pages if parity is wanted there too.
+2. Client items raised by the rebuild: the `Doctor Mona Stone Banner.avif` artwork reads
+   "Dr. Monica Stone"; the review count says 255+ while the live widget reads 276; the practice
+   photos carry "Stone Surgical Arts" signage. See ARVADA-PARITY-GAP.md §6.
 2. Point the Google Ads campaign at `/ads-landing-pages/all-on-x` and wire the thank-you page as
    the conversion destination if GHL is not already reporting.
 3. Optional: dedicated GHL form for the campaign (lead tracking), swapped into the two form cards.
@@ -148,3 +168,30 @@ campaign-specific form for attribution) and needs another full-site publish.
     blank an `HtmlEmbed`'s `code`. Text-only edits appear safe: iframe/embed/script counts were
     byte-identical before and after. Still diff a pre-edit capture against the published page
     before declaring a publish clean.
+
+13. **Never put an inline `style=` attribute in HTML passed to `whtml_builder` on this site.**
+    Webflow mints a class named `inline-section-N` for it, and `.inline-section-0` **already
+    exists site-wide carrying a navy background**. The builder reports
+    `dropped_style ... Cannot have duplicate style names` and silently reuses the existing style,
+    so the section inherits navy. This shipped a navy-on-navy, unreadable trust bar to staging
+    before it was caught. Give every element a real named class instead.
+
+14. **`get_settings` takes ONE `element_id` per action**, with `type` of `all_raw_settings` /
+    `all_resolved_settings` / `query_settings`. There is no `operations` array (that is the shape
+    for `set_settings`). `query_settings` with a `key` filter did **not** return the value in
+    practice; `all_raw_settings` does, under `data.matches[].value`. A verify pass built on the
+    wrong shape reported 12 of 17 embeds as empty when all 17 were fine.
+
+15. **The Webflow MCP rate-limits under a fast build loop.** Full-depth `get_all_elements` and
+    settings reads intermittently return `{label, action, error}` with no `result`. Retry with
+    increasing backoff and fetch the element tree **once** per pass rather than per lookup;
+    `build_v2.py` does both.
+
+16. **A staging-only publish is safe and is the review mechanism.** `publish_site` with
+    `customDomains: []` and `publishToWebflowSubdomain: true` publishes to
+    `stone-surgical-arts.webflow.io` and leaves all four custom domains untouched (verified: live
+    stayed at the old 33 KB page while staging served the new 53 KB one).
+
+17. **Blank YouTube iframes in Chrome here are NordVPN Threat Protection, not the page.** All 13
+    of Stone's video ids were confirmed live via `curl` against the oEmbed endpoint while the same
+    embeds rendered as empty dark boxes in the browser.
