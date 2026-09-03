@@ -92,9 +92,15 @@ lives inside *this* client folder on the `bk-stone` branch — see gotcha 2.
    `:first-of-type` (only `:hover`/`:focus`/`:active`), and a CSS error aborts the whole call —
    insert one section per call and check each result. An early failed batch here produced
    classless ghost elements; they were removed, but check the tree after any error.
-7. **No prices, no invented content.** Patient-facing pricing on the pages comes from the client's
+7. **The landing page now carries an HtmlEmbed slider and GHL embeds whose `code` can be wiped
+   by later element operations on the page.** After any structural edit, re-read every embed's
+   `code` setting and re-set if empty before publishing (this bit us once: the form iframe went
+   live-empty and had to be re-set and republished). See the gotchas list in
+   `ALL-ON-X-CAMPAIGN.md`.
+
+8. **No prices, no invented content.** Patient-facing pricing on the pages comes from the client's
    own FAQ (`$25,000–$50,000+ per arch`, their finance partners). Never compute or record a
    Brandklout engagement price anywhere under `deliver/brandklout/`.
-8. **`docs/project-overview.md` in this folder is stale** — describes all three Stone brands and
+9. **`docs/project-overview.md` in this folder is stale** — describes all three Stone brands and
    predates the campaign. Trust this runbook and
    [`ALL-ON-X-CAMPAIGN.md`](../deliver/brandklout/stone-dental-implant-center/workflows/04-design/ALL-ON-X-CAMPAIGN.md).

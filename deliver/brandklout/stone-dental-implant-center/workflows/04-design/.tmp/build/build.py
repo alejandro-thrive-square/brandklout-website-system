@@ -12,6 +12,8 @@ def call(tool, args):
     out = subprocess.run(MCP + ["call", tool, json.dumps(args)], capture_output=True, text=True, encoding="utf-8", cwd=ROOT).stdout
     if "status: 200" not in out:
         raise RuntimeError(f"{tool} failed: {out[:600]}")
+    if "MCP error" in out:
+        raise RuntimeError(f"{tool} MCP error: {out.split(chr(10))[1][:500] if chr(10) in out else out[:500]}")
     body = out.split("status: 200\n", 1)[1].strip()
     try:
         return json.loads(body)

@@ -18,11 +18,20 @@ convention for ad pages). SEO titles/descriptions set per page.
 
 ## Structure (mirrors Livewell, section for section)
 
-**Landing**: header → hero (copy left / GHL form card right) → trust strip (Google/Yelp) →
-before/after gallery → journey (4 story cards) → why-Stone (4 features) → specialist (Dr. Stone
+**Landing** (14 sections, mirroring Livewell 1:1): header → hero (copy left / GHL form card
+right) → trust strip (Google/Yelp) → **before/after drag-comparison slider** ("One Patient. One
+Complete Plan.") → journey (4 story cards) → why-Stone (4 features) → specialist (Dr. Stone
 photo + credential chips) → options (single vs All-on-X comparison cards) → process (3 steps) →
-office experience → FAQ (6, real answers from the client's own All-on-X service page) → final CTA
-→ footer.
+**smile gallery** (all four patient before/after photos) → office experience (2-image grid) →
+FAQ (6, real answers from the client's own All-on-X service page) → final CTA → footer.
+
+The slider is an HtmlEmbed (self-contained `<style>` + markup + `<script>`, id `axon-ba2`) over
+cropped before/after halves. The four Livewell-style combined BA photos were split into halves
+with PIL, uploaded as 8 new assets (`allonx-p1..p5-before/after.jpg`), and wired through a
+range-input slider. Livewell's §12 credential-logos strip was deliberately NOT reproduced: those
+logos (ICOI, Implant Accelerator, etc.) belong to Livewell's doctor. Stone's credential proof
+lives in the specialist section's chips instead; if the client supplies their own membership
+badges they can be added as a strip.
 
 **Consultation**: minimal header → hero (copy + doctor card left / form card right) → patient
 stories (practice imagery + links to live Google/Yelp/testimonials) → footer.
@@ -81,6 +90,21 @@ swapped in.
 - `build.py` / `rebuild.py` / `add-forms.py`: insert, wipe+reinsert, and re-attach form embeds.
 - Publish: `data_sites_tool` → `publish_site` with the four domain **IDs** (not URLs) and
   `publishToWebflowSubdomain: true`. Expect a 429 on rapid retries; wait and repeat.
+
+## Build gotchas learned here
+
+- `whtml_builder` drops a class from an element when no CSS rule for it exists in the call or the
+  site — a placeholder div with a class but no styles comes back classless. Give every element a
+  rule, or query for it by position instead.
+- Descendant selectors (`.grid img`) and `:first-of-type` are rejected; media queries must use
+  Webflow's exact breakpoints (tiny = **479px**). A single bad rule aborts the whole call.
+- `<style>`/`<script>` are stripped from `html` — custom components go in an **HtmlEmbed**
+  (`data_element_builder` → type HtmlEmbed, then set its `code` setting), which allows them.
+- `query_elements` with `return_parent` returns the element itself, not the parent — walk a
+  full-depth `get_all_elements` tree locally instead.
+- **HtmlEmbed `code` has been observed to end up empty after later element operations on the same
+  page.** After any structural change, re-read the `code` setting of every embed
+  (`get_settings` → key `code`) and re-set if empty, before publishing.
 
 ## QA
 
