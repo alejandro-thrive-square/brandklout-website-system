@@ -1,84 +1,82 @@
 /* ===========================================================================
-   THE CLOSING BAND — the shared invitation, dark, on every page that does not
-   already end on one.
+   THE CLOSING BAND — on every page that does not end on its own.
 
-   The client asked Surgical Arts for one dark section on every page and the
-   same instinct applies here, but this band is a different object: no portrait,
-   one display line, and three plain facts about what a consultation is. See
-   partials/cta.html for why the facts are here and not on the booking page.
+   Charcoal, with a green light rising from the foot of the band rather than
+   the sibling's dark marble: this site has no marble anywhere, which is one of
+   the ways it reads as a different brand on the same palette. One split line
+   at display size, two buttons, three plain facts about a consultation. The
+   footer beneath it is dark too, so the page ends the way it began.
    =========================================================================== */
 .close_component {
-  background-color: var(--charcoal);
   position: relative;
   overflow: hidden;
 }
-/* The dark marble, at low opacity, so the band has a surface rather than being
-   flat charcoal. The texture is the practice's own asset, shared with the
-   sibling site — a material is not a section shape. */
 .close_component::before {
   content: "";
   position: absolute;
-  inset: 0;
-  background-image: url("tex-marble-dark.webp");
-  background-size: cover;
-  background-position: center;
-  opacity: 0.4;
+  left: 50%;
+  bottom: -40%;
+  width: 90vw;
+  height: 70vw;
+  max-width: 1400px;
+  max-height: 900px;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  background: radial-gradient(ellipse at center, rgba(143, 188, 70, 0.28) 0%, rgba(143, 188, 70, 0) 60%);
+  pointer-events: none;
 }
 .close_inner {
   position: relative;
   z-index: 1;
-  max-width: 62rem;
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 4fr);
+  gap: 3rem 5rem;
+  align-items: end;
 }
 .close_title {
-  margin-top: 1.5rem;
-  max-width: 18ch;
+  margin-top: 1.25rem;
+  font-size: clamp(2.8rem, 6.2vw, 6rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  max-width: 12ch;
   color: var(--white);
+}
+.close_actions {
+  margin-top: 2.5rem;
 }
 .close_facts {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 2.5rem;
-  margin-top: 3.4rem;
-  padding-top: 2rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.2);
+  gap: 1.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
 }
 .close_fact {
   display: grid;
-  gap: 0.55rem;
+  grid-template-columns: 8rem 1fr;
+  gap: 1rem;
+  align-items: baseline;
 }
 .close_fact-key {
   font-family: var(--font-display);
-  font-size: var(--size-h4);
+  font-size: var(--size-h5);
   line-height: 1.15;
   color: var(--green);
 }
 .close_fact-val {
   font-size: var(--size-text-small);
-  line-height: 1.6;
-  color: rgba(255, 255, 255, 0.78);
-  max-width: 34ch;
-}
-.close_actions {
-  margin-top: 3rem;
+  line-height: 1.55;
+  color: var(--fg-body);
 }
 
 @media (max-width: 991px) {
-  .close_facts {
+  .close_inner {
     grid-template-columns: 1fr;
-    gap: 1.6rem;
-  }
-  .close_fact {
-    grid-template-columns: 9rem 1fr;
-    align-items: baseline;
-    gap: 1.25rem;
-  }
-  .close_fact-key {
-    font-size: var(--size-h5);
+    gap: 2.5rem;
   }
 }
 @media (max-width: 478px) {
   .close_fact {
     grid-template-columns: 1fr;
-    gap: 0.4rem;
+    gap: 0.3rem;
   }
 }

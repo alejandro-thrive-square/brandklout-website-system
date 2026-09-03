@@ -1,0 +1,100 @@
+/* ===========================================================================
+   THE PLACE — the practice's own two photographs, offset, and the facts.
+
+   Copy in a narrow column at left; at right a wide frame of the front desk
+   with the neon riding over its lower-left corner at its own speed. Both are
+   the practice's photography, not a model's — you are being shown the room
+   you will actually walk into.
+   =========================================================================== */
+.place_grid {
+  display: grid;
+  grid-template-columns: minmax(0, 4fr) minmax(0, 7fr);
+  gap: 3rem 5rem;
+  align-items: center;
+}
+.place_copy .heading-style-h2 {
+  margin-top: 1.25rem;
+  max-width: 12ch;
+}
+.place_text {
+  margin-top: 1.5rem;
+  max-width: 38ch;
+}
+.place_facts {
+  display: grid;
+  gap: 1rem;
+  margin-top: 2.25rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line);
+}
+.place_facts > div {
+  display: grid;
+  grid-template-columns: 5rem 1fr;
+  gap: 1rem;
+  font-size: var(--size-text-small);
+  line-height: 1.55;
+}
+.place_facts dt {
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  padding-top: 0.2rem;
+}
+.place_facts dd {
+  color: var(--fg-body);
+}
+.place_media {
+  position: relative;
+  padding-left: 3rem;
+  padding-bottom: 3rem;
+}
+.place_frame {
+  margin: 0;
+  border-radius: var(--radius-frame);
+  overflow: hidden;
+}
+.place_frame.is-large {
+  aspect-ratio: 16 / 10;
+}
+.place_frame.is-large img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.place_frame.is-small {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 38%;
+  aspect-ratio: 4 / 3;
+  border-radius: var(--radius-card);
+  border: 0.4rem solid var(--bg);
+  box-shadow: 0 24px 60px rgba(39, 39, 39, 0.2);
+}
+.place_frame.is-small img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 991px) {
+  .place_grid {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .place_media {
+    order: -1;
+  }
+}
+@media (max-width: 767px) {
+  .place_media {
+    padding-left: 1.25rem;
+    padding-bottom: 2rem;
+  }
+  .place_facts > div {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+}

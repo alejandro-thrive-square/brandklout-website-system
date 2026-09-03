@@ -115,8 +115,14 @@
   --space-xhuge: 8rem;
   --space-xxhuge: 12rem;
 
-  --radius: 2px; /* the board's cards are barely rounded, and squared at the top */
-  --radius-card: 4px;
+  /* THE ONE AESTHETIC DEVIATION FROM SURGICAL ARTS, 2026-09-03. The sibling's
+     cards are barely rounded and its buttons are squared; that is right for a
+     surgical practice and reads as an instrument. This site is skin and light,
+     so its frames are soft and its buttons are pills. Same five colours, same
+     two typefaces — the radius is where the two brands part. */
+  --radius: 999px; /* buttons, chips, pills */
+  --radius-card: 1.25rem; /* photographs and cards */
+  --radius-frame: 1.75rem; /* the big frames — hero, panels, plates */
   --shadow-card: 0 1px 2px rgba(39, 39, 39, 0.04), 0 8px 24px rgba(39, 39, 39, 0.06);
   --shadow-card-hover: 0 2px 4px rgba(39, 39, 39, 0.06), 0 18px 44px rgba(39, 39, 39, 0.1);
   --ease: cubic-bezier(0.22, 1, 0.36, 1);
@@ -167,6 +173,39 @@
   --line: rgba(255, 255, 255, 0.14);
   --line-strong: rgba(255, 255, 255, 0.28);
   --focus: var(--green);
+  background-color: var(--bg);
+  color: var(--fg-body);
+}
+
+/* THE GREEN BAND — the way this site uses the palette that the sibling never
+   does. Brand green as a GROUND with charcoal ink on it is 6.72:1, which clears
+   AA at every size, so a whole chapter can sit on it. Surgical Arts keeps the
+   green to rules and buttons; here it is the colour of the signature section,
+   the year grid. One section per page at most, like the dark one. */
+[data-theme="green"] {
+  --bg: var(--green);
+  --bg-alt: #83ad3f;
+  --bg-card: rgba(255, 255, 255, 0.34);
+  --fg: var(--charcoal);
+  --fg-body: rgba(39, 39, 39, 0.82);
+  --fg-mute: rgba(39, 39, 39, 0.64);
+  --accent: var(--charcoal);
+  --accent-flat: var(--charcoal);
+  --btn-ink: var(--white);
+  --line: rgba(39, 39, 39, 0.18);
+  --line-strong: rgba(39, 39, 39, 0.4);
+  --focus: var(--charcoal);
+  background-color: var(--bg);
+  color: var(--fg-body);
+}
+/* THE STONE BAND — the fifth colour, which the sibling uses only as a hairline.
+   As a ground it is the warm grey of the imagery chapters. */
+[data-theme="stone"] {
+  --bg: var(--stone);
+  --bg-alt: #cfc9bf;
+  --bg-card: var(--ivory);
+  --line: rgba(39, 39, 39, 0.12);
+  --line-strong: rgba(39, 39, 39, 0.28);
   background-color: var(--bg);
   color: var(--fg-body);
 }

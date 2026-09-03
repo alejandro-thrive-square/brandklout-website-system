@@ -1,0 +1,184 @@
+/* ===========================================================================
+   THE SHELF — the menu as seven expanding panels, on the stone ground.
+
+   Seven photographs side by side; the open one takes four shares of the row
+   and shows its name and its two numbers, the closed ones show their name
+   set vertically. Hover opens on a fine pointer (CSS); the script mirrors it
+   with a class so a tap and a keyboard focus open too, and a tap on the open
+   panel follows the link. Below 767 the row turns on its side and the panels
+   stack, opening downward.
+
+   The stone ground (#D8D3CA) is the fifth colour of the palette and the one
+   Surgical Arts uses only as a hairline; here it is the whole chapter.
+   =========================================================================== */
+.shelf_head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 2.5rem;
+}
+.shelf_head .heading-style-h2 {
+  margin-top: 1.25rem;
+  max-width: 16ch;
+}
+.shelf_component {
+  display: flex;
+  gap: 0.6rem;
+  height: clamp(28rem, 62vh, 38rem);
+}
+.shelf_item {
+  position: relative;
+  flex: 1 1 0;
+  min-width: 0;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--charcoal);
+  transition: flex 0.9s var(--ease);
+}
+.shelf_item.is-open {
+  flex: 4.2 1 0;
+}
+.shelf_link {
+  position: absolute;
+  inset: 0;
+  display: block;
+  color: var(--white);
+}
+.shelf_media {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+.shelf_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 20%;
+  transform: scale(1.08);
+  transition: transform 1.4s var(--ease), filter 0.9s var(--ease);
+  filter: saturate(0.85);
+}
+.shelf_item.is-open .shelf_media img {
+  transform: none;
+  filter: none;
+}
+.shelf_media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(39, 39, 39, 0.18) 0%, rgba(39, 39, 39, 0) 40%, rgba(39, 39, 39, 0.72) 100%);
+}
+.shelf_index {
+  position: absolute;
+  top: 1.1rem;
+  left: 1.1rem;
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.85);
+}
+/* the closed state's vertical name */
+.shelf_vert {
+  position: absolute;
+  left: 1.05rem;
+  bottom: 1.1rem;
+  writing-mode: vertical-rl;
+  transform: rotate(180deg);
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1;
+  white-space: nowrap;
+  color: var(--white);
+  opacity: 1;
+  transition: opacity 0.3s var(--ease);
+}
+.shelf_item.is-open .shelf_vert {
+  opacity: 0;
+}
+/* the open state's body */
+.shelf_body {
+  position: absolute;
+  left: 1.25rem;
+  right: 1.25rem;
+  bottom: 1.25rem;
+  display: grid;
+  gap: 0.6rem;
+  opacity: 0;
+  transform: translateY(0.6rem);
+  transition: opacity 0.5s var(--ease) 0.25s, transform 0.6s var(--ease) 0.25s;
+}
+.shelf_item.is-open .shelf_body {
+  opacity: 1;
+  transform: none;
+}
+.shelf_name {
+  font-family: var(--font-display);
+  font-size: clamp(1.8rem, 3vw, 2.8rem);
+  font-weight: 300;
+  line-height: 1;
+  white-space: nowrap;
+}
+.shelf_meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1.6rem;
+  font-size: var(--size-text-tiny);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.82);
+}
+.shelf_meta span::before {
+  content: "";
+  display: inline-block;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background: var(--green);
+  margin-right: 0.6rem;
+  vertical-align: middle;
+}
+
+@media (max-width: 991px) {
+  .shelf_component {
+    height: 30rem;
+  }
+}
+@media (max-width: 767px) {
+  .shelf_head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .shelf_component {
+    flex-direction: column;
+    height: auto;
+    gap: 0.5rem;
+  }
+  .shelf_item {
+    flex: 0 0 4.5rem;
+    transition: flex-basis 0.7s var(--ease);
+  }
+  .shelf_item.is-open {
+    flex: 0 0 22rem;
+  }
+  .shelf_vert {
+    writing-mode: horizontal-tb;
+    transform: none;
+    left: 1.1rem;
+    right: 1.1rem;
+    top: 50%;
+    bottom: auto;
+    margin-top: -0.6em;
+    padding-left: 2.6rem;
+    font-size: var(--size-h6);
+  }
+  .shelf_index {
+    top: 50%;
+    margin-top: -0.5em;
+  }
+  .shelf_item.is-open .shelf_index {
+    top: 1.1rem;
+    margin-top: 0;
+  }
+}

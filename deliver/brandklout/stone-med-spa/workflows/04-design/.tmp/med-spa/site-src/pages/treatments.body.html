@@ -1,35 +1,32 @@
-<!-- SERVICES OVERVIEW — Asana subtask 5 of 11.
+<!-- SERVICES OVERVIEW — Asana subtask 5 of 11. Second build, 2026-09-03.
 
-     The dual-axis hub the sitemap called for, built as ONE page rather than as
-     a hub plus twenty-four concern pages. Axis A is the table, grouped by
-     shelf. Axis B is the concern picker above it, which filters the same table.
-     Both land on the same rows, so nothing can go stale between them.
+     THE MENU. Still one page carrying both axes — the concern picker above,
+     the menu itself below, both landing on the same generated rows — and
+     still containing no treatment names of its own: every row, pill and
+     category head is emitted by build-site.mjs from treatments-data.mjs.
 
-     Every row and every pill is generated from treatments-data.mjs. This file
-     contains no treatment names at all, on purpose. -->
-<section class="section_pagehead pagehead_component">
-  <div class="padding-global">
-    <div class="container-large">
-      <div class="pagehead_inner">
-        <p class="eyebrow">Treatments</p>
-        <h1 class="heading-style-h1 pagehead_title">The whole menu, on <em class="text-style-display-accent">one page</em>.</h1>
-        <p class="text-size-large pagehead_lede">
-          Seven treatments, with the four numbers that actually decide between them: how long
-          the appointment is, when it shows, how long it lasts, and what it costs you in
-          downtime. Open a row for the detail.
-        </p>
-        <div class="pagehead_facts">
-          <div class="pagehead_fact">
-            <span class="pagehead_fact-key">7</span>
-            <span class="pagehead_fact-val">Treatments, all non-surgical, all performed by Dr. Stone</span>
-          </div>
-          <div class="pagehead_fact">
-            <span class="pagehead_fact-key">15 min</span>
-            <span class="pagehead_fact-val">The shortest appointment on the menu</span>
-          </div>
-          <div class="pagehead_fact">
-            <span class="pagehead_fact-key">0</span>
-            <span class="pagehead_fact-val">Treatments here that require an incision — those are at Stone Surgical Arts</span>
+     What changed: it opens on a photograph, the concern picker is the green
+     chapter, each category head is its still life at full size, each row is
+     an index numeral and a name in display type that opens onto its portrait,
+     and the boundary at the foot is two doors you hover between. -->
+<section class="section_cover cover_component">
+  <figure class="cover_media" data-parallax="10">
+    <img src="assets/m-profile-light.webp" alt="" width="2133" height="1200" fetchpriority="high">
+  </figure>
+  <div class="cover_body">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="cover_inner">
+          <p class="eyebrow is-alternate">Treatments</p>
+          <h1 class="cover_title" data-split data-split-now>Seven treatments. <em class="text-style-display-accent">Four numbers.</em></h1>
+          <p class="cover_lede">
+            How long the appointment is, when it shows, how long it lasts, and what it costs
+            you in downtime. Open a row for the rest.
+          </p>
+          <div class="cover_facts">
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="7">7</span></span><span>treatments, all performed by Dr. Stone</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="15">15</span> min</span><span>the shortest appointment on the menu</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="0">0</span></span><span>incisions &mdash; those are next door</span></p>
           </div>
         </div>
       </div>
@@ -37,76 +34,74 @@
   </div>
 </section>
 
-<!-- AXIS B. Above the table because it is the more valuable half: patients
-     search for the problem, not the product. -->
-<section class="section_concerns concerns_component">
+<!-- AXIS B, on the green ground. Patients search for the problem, not the
+     product, so the concern picker comes first and filters the rows below. -->
+<section class="section_concern concern_component" data-theme="green">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-medium">
-        <div class="concerns_head">
-          <div>
-            <p class="eyebrow">Start from the problem</p>
-            <h2 class="heading-style-h3">What would you like to change?</h2>
-          </div>
+        <div class="concern_head">
+          <p class="eyebrow">Start from the problem</p>
+          <h2 class="heading-style-h2 concern_title" data-split>What would you like to <em class="text-style-display-accent">change</em>?</h2>
         </div>
-        <ul class="concerns_list">
+        <ul class="concern_list" data-reveal="stagger">
 {{CONCERNS}}
         </ul>
-        <p class="concerns_count" data-ledger-count role="status" aria-live="polite"></p>
+        <p class="concern_count" data-ledger-count role="status" aria-live="polite"></p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- AXIS A. The table. -->
-<section class="section_ledger ledger_component">
+<!-- AXIS A. The menu, generated. -->
+<section class="section_menu menu_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large" data-ledger>
 {{LEDGER}}
-        <p class="ledger_empty" data-ledger-empty hidden>
+        <p class="menu_empty" data-ledger-empty hidden>
           Nothing on this menu addresses that. Dr. Stone may still be able to help, or point
-          you somewhere that can — <a class="text-style-link" href="book.html">ask her</a>.
+          you somewhere that can &mdash; <a class="text-style-link" href="book.html">ask her</a>.
         </p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- The boundary. This is the page a visitor looking for a facelift is most
-     likely to land on from a search, so it is the page that has to redirect
-     them properly. -->
-<section class="section_boundary band_component is-alt">
+<!-- THE BOUNDARY, as two doors. This is the page a visitor searching for a
+     facelift is most likely to land on, so it has to send them on properly.
+     Hover (or focus) opens a door; both are real links. -->
+<section class="section_doors doors_section" data-theme="stone">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
-        <div class="band_inner" data-reveal>
-          <figure class="band_media">
-            <img src="assets/ssa-consult-room.webp" alt="The consultation room at the Westlake practice" width="1000" height="800" loading="lazy" class="u-focus-figure">
-          </figure>
-          <div>
-            <p class="eyebrow">Not on this list</p>
-            <h2 class="heading-style-h2 band_title">If it needs an incision, it is <em class="text-style-display-accent">next door</em>.</h2>
-            <div class="text-size-medium band_text">
-              <p>
-                Facelifts, neck lifts, eyelid surgery, FaceTite, facial implants, buccal fat
-                removal and fat transfer are performed by the same surgeon, under a different
-                name, at the same address.
-              </p>
-              <p>
-                The split is not a marketing decision. It is the line between what can be done
-                in a treatment room and what needs an operating one, and keeping the two menus
-                separate is how you can tell which you are being sold.
-              </p>
-            </div>
-            <div class="band_switch">
-              <p class="band_switch-title">Looking for surgery?</p>
-              <p>
-                <a href="https://stone-surgical-arts-production.up.railway.app/" rel="noopener">Stone Surgical Arts</a>
-                carries the twelve surgical procedures, the same surgeon and the same address.
-              </p>
-            </div>
-          </div>
+        <div class="doors_head">
+          <p class="eyebrow">Not on this list</p>
+          <h2 class="heading-style-h2" data-split>If it needs an incision, it is <em class="text-style-display-accent">next door</em>.</h2>
+          <p class="text-size-medium doors_lede" data-reveal>
+            Same surgeon, same address, two menus &mdash; split at the incision, so you can
+            always tell which one you are being sold.
+          </p>
+        </div>
+        <div class="doors_component" data-reveal>
+          <a class="doors_door is-here is-open" href="book.html" data-cursor="Book">
+            <figure class="doors_media"><img src="assets/gen-recovery-daylight.webp" alt="" width="1600" height="900" loading="lazy"></figure>
+            <span class="doors_label">Here</span>
+            <span class="doors_body">
+              <span class="doors_name">Stone Med Spa</span>
+              <span class="doors_text">Injectables, skin and restoration. A treatment room, forty-five minutes at most.</span>
+              <span class="button is-alternate is-small">Book a consultation</span>
+            </span>
+          </a>
+          <a class="doors_door is-there" href="https://stone-surgical-arts-production.up.railway.app/" rel="noopener" data-cursor="Visit">
+            <figure class="doors_media"><img src="assets/gen-procedure-room.webp" alt="" width="1600" height="900" loading="lazy"></figure>
+            <span class="doors_label">Next door</span>
+            <span class="doors_body">
+              <span class="doors_name">Stone Surgical Arts</span>
+              <span class="doors_text">Facelifts, neck lifts, eyelids, FaceTite, implants, fat transfer. An operating room.</span>
+              <span class="button is-alternate is-small">Go to Surgical Arts</span>
+            </span>
+          </a>
         </div>
       </div>
     </div>

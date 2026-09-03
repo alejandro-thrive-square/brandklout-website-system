@@ -1,0 +1,123 @@
+/* ===========================================================================
+   THE WORDS — the dark chapter: a sentence whose last word keeps changing,
+   and the reviews as a rail you drag.
+
+   The rotating word is the idea of the whole practice in one line — what you
+   will look like is "rested", "like yourself", "awake", "not done" — and it
+   replaces the first build's three-paragraph premise. The rail underneath is
+   the reviews: short, at the size of a statement, dragged with a cursor that
+   says "Drag". Used again on /results with more cards.
+   =========================================================================== */
+.words_section {
+  position: relative;
+  overflow: hidden;
+}
+/* a soft green light in the corner, so the dark is not flat */
+.words_section::before {
+  content: "";
+  position: absolute;
+  right: -20%;
+  top: -30%;
+  width: 60vw;
+  height: 60vw;
+  max-width: 900px;
+  max-height: 900px;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(143, 188, 70, 0.22) 0%, rgba(143, 188, 70, 0) 62%);
+  pointer-events: none;
+}
+.words_section > * {
+  position: relative;
+}
+.words_title {
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(2.8rem, 7vw, 6.8rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
+  color: var(--white);
+  max-width: 14ch;
+}
+.words_component {
+  min-width: 6ch;
+}
+.words_item {
+  white-space: nowrap;
+}
+.words_rail-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-top: 4rem;
+}
+.words_arrows {
+  display: flex;
+  gap: 0.6rem;
+}
+.words_rail {
+  display: flex;
+  gap: 1.5rem;
+  padding-bottom: var(--space-xhuge);
+  padding-right: 5%;
+}
+.quote_card {
+  flex: 0 0 auto;
+  width: min(30rem, 78vw);
+  display: grid;
+  align-content: space-between;
+  gap: 2.5rem;
+  min-height: 17rem;
+  padding: 2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background: var(--bg-card);
+  transition: border-color 0.3s var(--ease), transform 0.5s var(--ease);
+}
+.quote_card:hover {
+  border-color: var(--line-strong);
+}
+.quote_text {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  line-height: 1.25;
+  color: var(--fg);
+}
+.quote_meta {
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.quote_card.is-link {
+  padding: 0;
+  background: transparent;
+  border-style: dashed;
+}
+.quote_link {
+  display: grid;
+  align-content: space-between;
+  gap: 2rem;
+  height: 100%;
+  padding: 2rem;
+  color: inherit;
+}
+.quote_card.is-link .quote_text {
+  color: var(--fg-mute);
+}
+.quote_card.is-link:hover .quote_text {
+  color: var(--fg);
+}
+
+@media (max-width: 767px) {
+  .words_rail-head {
+    margin-top: 2.5rem;
+  }
+  .quote_card {
+    min-height: 14rem;
+    padding: 1.5rem;
+  }
+  .words_rail {
+    padding-bottom: var(--space-xlarge);
+  }
+}

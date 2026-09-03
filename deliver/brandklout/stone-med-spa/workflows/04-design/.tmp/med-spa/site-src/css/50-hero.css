@@ -1,288 +1,239 @@
 /* ===========================================================================
-   THE HERO, AND THE INTERVAL RAIL UNDER IT.
+   THE HERO — second build, 2026-09-03.
 
-   This is the section that decides the whole site reads differently from Stone
-   Surgical Arts, so it is worth saying what it is doing.
+   A full-bleed photograph on charcoal with the headline set large at the foot
+   of the frame, and one move: the section is pinned (data-hero-pin) and, over
+   one extra viewport of scrolling, the photograph shrinks into a rounded frame
+   inside the page while the copy lifts away. The first build's interval rail
+   is gone; the ticker under this section carries the same seven facts as a
+   strip instead.
 
-   Surgical Arts opens on a parallax photograph with a centred display line, and
-   the page beneath it is a journey: a person decides once, has an operation,
-   recovers. That is the correct shape for surgery and the wrong shape here.
-
-   Non-surgical aesthetics is not a decision, it is a CADENCE. You come back
-   every three or four months, forever, and the thing a visitor actually needs
-   to understand in the first screen is not "what does it look like" but "what
-   am I signing up to". So the hero carries a rail pinned to its bottom edge
-   listing all seven treatments with the interval each one runs on. It is the
-   menu and the commitment in one object, and it is the first thing you see.
-
-   The rail scrolls horizontally on a phone and sits still on a desktop. It is
-   markup, generated at build time from treatments-data.mjs, so a treatment
-   added to the menu appears here without anyone editing a page.
+   The intro on arrival is CSS: the photograph settles from an over-scale
+   (.is-in, set by heroIntro in 20-motion.js on the second frame) while the
+   headline's lines rise out of their masks (data-split-now).
    =========================================================================== */
 .hero_component {
   position: relative;
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  min-height: 92vh;
-  min-height: 92svh;
-  overflow: hidden;
+  min-height: 100vh;
+  min-height: 100svh;
   background-color: var(--charcoal);
+  overflow: hidden;
+  color: var(--white);
 }
-
 .hero_media {
   position: absolute;
   inset: 0;
   margin: 0;
+  overflow: hidden;
+  border-radius: 0;
+  transform-origin: 50% 50%;
+  will-change: transform, border-radius;
 }
-.hero_media img {
+.hero_media > img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  /* The frame is a face at upper-centre. A centred crop puts the headline over
-     her jaw at every width; pushing the image up keeps the copy on the shoulder
-     and the neck, which is empty. */
-  object-position: 50% 22%;
+  object-position: 55% 40%;
+  transform: scale(1.14);
+  transition: transform 2.4s var(--ease);
 }
-/* THE SCRIM IS SIDE-WEIGHTED ONLY WHILE THE COPY IS IN A COLUMN.
-
-   --scrim-side darkens the left third and fades to nothing by 72%, which is
-   right on a desktop where .hero_copy is capped at 34ch and never reaches the
-   bright half of the frame. Below the tablet breakpoint the copy goes full
-   width and runs straight into the model's near-white hair, so the same
-   gradient leaves the last words of every line unreadable.
-
-   So the narrow viewport gets the vertical scrim instead — dark at the top
-   behind the navbar, dark at the bottom behind the rail — plus a flat floor
-   under the whole frame. Two different problems, two different scrims. */
+.hero_component.is-in .hero_media > img,
+html:not(.js) .hero_media > img {
+  transform: none;
+}
 .hero_media::after {
   content: "";
   position: absolute;
   inset: 0;
-  background: var(--scrim-side);
-}
-@media (max-width: 991px) {
-  .hero_media::after {
-    background: var(--scrim), rgba(39, 39, 39, 0.32);
-  }
-}
-
-/* The eyebrow's default is --accent, which is green-ink: taken deliberately
-   dark so it clears AA on ivory. Over a photograph that is the wrong end of the
-   ramp — it is 2:1 against the lit side of this frame. Inside the hero it uses
-   brand green at full strength, which is what the token is for on a dark
-   ground and what [data-theme="dark"] would have given it if this section were
-   scoped that way. It is not, because the hero paints its own colours. */
-.hero_copy .eyebrow,
-.hero_copy .text-style-display-accent {
-  color: var(--green);
-}
-.hero_copy .eyebrow::before,
-.hero_copy .eyebrow::after {
-  background-color: var(--green);
+  background:
+    linear-gradient(180deg, rgba(39, 39, 39, 0.5) 0%, rgba(39, 39, 39, 0) 32%, rgba(39, 39, 39, 0) 48%, rgba(39, 39, 39, 0.78) 100%),
+    linear-gradient(90deg, rgba(39, 39, 39, 0.42) 0%, rgba(39, 39, 39, 0) 55%);
 }
 
 .hero_body {
   position: relative;
-  z-index: 2;
-  padding-top: 12rem;
+  z-index: 1;
+  min-height: 100vh;
+  min-height: 100svh;
+}
+.hero_body > .padding-global,
+.hero_body > .padding-global > .container-large {
+  min-height: inherit;
+}
+.hero_body > .padding-global > .container-large {
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  padding-top: 7.5rem;
+  padding-bottom: 2.25rem;
+}
+
+/* the top line: two facts, right-aligned, small */
+.hero_top {
+  display: flex;
+  justify-content: flex-end;
+}
+.hero_meta {
+  display: grid;
+  justify-items: end;
+  gap: 0.35rem;
+  text-align: right;
+  font-size: var(--size-text-tiny);
+  font-weight: 500;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.8);
 }
 
 .hero_copy {
-  max-width: 34ch;
+  align-self: end;
+  max-width: 52rem;
+  padding-bottom: 3rem;
+}
+.eyebrow.is-alternate {
+  color: var(--green);
 }
 .hero_title {
+  margin-top: 1.25rem;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: clamp(3.2rem, 8.6vw, 8.4rem);
+  line-height: 0.96;
+  letter-spacing: -0.025em;
   color: var(--white);
-}
-/* The display line breaks by hand — three lines on a desktop, and the italic
-   clause always starts its own. An automatic break put "the" alone on line 3. */
-.hero_title .hero_break {
-  display: block;
+  max-width: 12ch;
 }
 .hero_lede {
   margin-top: 1.6rem;
-  max-width: 46ch;
+  max-width: 34rem;
+  font-size: var(--size-text-medium);
+  line-height: 1.6;
   color: rgba(255, 255, 255, 0.86);
 }
 .hero_actions {
-  margin-top: 2.4rem;
+  margin-top: 2.2rem;
 }
 
-/* --- the interval rail ---------------------------------------------------
-   Pinned to the bottom of the hero, on a hairline, over the photograph. Each
-   item is a treatment name and the interval it runs on. --------------------- */
-/* THE RAIL NEEDS A REAL GROUND, NOT A GRADIENT.
-
-   This was a gradient from transparent to 34% charcoal, which is fine over the
-   dark left third of the hero photograph and completely illegible over the
-   right two thirds: the model's hair is near-white there, and the green
-   interval text vanished into it. A scrim tuned to the part of the image the
-   headline sits on cannot also serve a strip that runs the full width.
-
-   So the rail gets its own ground — 78% charcoal with a blur behind it — and
-   stops depending on what is underneath. It still reads as part of the
-   photograph rather than as a separate band, because the blur carries the
-   image's colour through it. */
-.hero_rail {
+/* the foot line: a scroll hint at left, the surgeon's name at right */
+.hero_foot {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.22);
+}
+.hero_scroll {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.8rem;
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: rgba(255, 255, 255, 0.72);
+}
+.hero_scroll i {
+  display: block;
+  width: 3.5rem;
+  height: 1px;
+  background: rgba(255, 255, 255, 0.35);
   position: relative;
-  z-index: 2;
-  margin-top: 4.5rem;
-  border-top: 1px solid rgba(255, 255, 255, 0.28);
-  background-color: rgba(28, 28, 28, 0.78);
-  backdrop-filter: saturate(130%) blur(14px);
+  overflow: hidden;
 }
-/* No backdrop-filter (older Firefox, and anything with it disabled) means the
-   78% ground is doing all the work on its own, which is not quite enough over
-   the brightest part of the frame. Take it to 88% there. */
-@supports not (backdrop-filter: blur(4px)) {
-  .hero_rail {
-    background-color: rgba(28, 28, 28, 0.88);
+.hero_scroll i::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--green);
+  transform: translateX(-100%);
+  animation: hero-scroll 2.2s var(--ease) infinite;
+}
+@keyframes hero-scroll {
+  0% {
+    transform: translateX(-100%);
+  }
+  60%,
+  100% {
+    transform: translateX(100%);
   }
 }
-.hero_rail-inner {
-  display: flex;
-  align-items: stretch;
-  /* No wrap and no shrink: on a narrow screen this becomes a scroller rather
-     than a stack, because a stacked rail is just a list and the point of the
-     object is that you read it sideways, the way a calendar runs. */
-  overflow-x: auto;
-  scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
-}
-.hero_rail-inner::-webkit-scrollbar {
-  display: none;
-}
-.hero_rail-item {
-  flex: 1 0 auto;
-  min-width: 10.5rem;
-  padding: 1.15rem 1.35rem 1.35rem;
-  border-left: 1px solid rgba(255, 255, 255, 0.14);
-  color: var(--white);
-  transition: background-color 0.3s var(--ease);
-}
-.hero_rail-item:first-child {
-  border-left: 0;
-  padding-left: 0;
-}
-.hero_rail-item:hover {
-  background-color: rgba(255, 255, 255, 0.07);
-}
-.hero_rail-name {
-  display: block;
-  font-family: var(--font-body);
-  font-size: var(--size-text-small);
-  font-weight: 500;
-  line-height: 1.3;
-  white-space: nowrap;
-}
-.hero_rail-interval {
-  display: block;
-  margin-top: 0.4rem;
+.hero_who {
   font-size: var(--size-text-tiny);
-  letter-spacing: 0.04em;
-  color: var(--green);
-  white-space: nowrap;
-}
-/* The rail's own label, sitting in the gutter above it. */
-.hero_rail-legend {
-  position: relative;
-  z-index: 2;
-  display: flex;
-  align-items: baseline;
-  justify-content: space-between;
-  gap: 1rem;
-  padding-bottom: 0.9rem;
-  color: rgba(255, 255, 255, 0.62);
-  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
   text-transform: uppercase;
-  letter-spacing: 0.2em;
+  color: rgba(255, 255, 255, 0.72);
+  text-align: right;
 }
-.hero_rail-hint {
-  letter-spacing: 0.12em;
-  text-transform: none;
+
+/* --- the ticker under it ------------------------------------------------------ */
+.section_ticker {
+  border-bottom: 1px solid var(--line);
+  padding-block: 1.35rem;
+  background-color: var(--bg);
+}
+.marquee_item {
+  display: inline-flex;
+  align-items: baseline;
+  gap: 1rem;
+  padding-inline: 1.6rem;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.marquee_item::after {
+  content: "";
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background: var(--green);
+  align-self: center;
+  margin-left: 1.6rem;
+  flex: 0 0 auto;
+}
+.marquee_name {
+  font-family: var(--font-display);
+  font-size: calc(1.75rem * var(--t-heading));
+  font-weight: 300;
+  line-height: 1;
+}
+.marquee_cadence {
+  font-size: var(--size-text-tiny);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+}
+.marquee_item:hover .marquee_name {
+  color: var(--accent);
 }
 
 @media (max-width: 991px) {
-  .hero_component {
-    min-height: 0;
+  .hero_body > .padding-global > .container-large {
+    padding-top: 6.5rem;
   }
-  .hero_body {
-    padding-top: 9rem;
-  }
-  .hero_rail {
-    margin-top: 3rem;
-  }
-  .hero_rail-item {
-    min-width: 9.5rem;
+  .hero_media > img {
+    object-position: 62% 40%;
   }
 }
 @media (max-width: 767px) {
-  .hero_body {
-    padding-top: 7.5rem;
+  .hero_top {
+    justify-content: flex-start;
   }
-  .hero_media img {
-    object-position: 56% 18%;
+  .hero_meta {
+    justify-items: start;
+    text-align: left;
   }
-  .hero_rail-legend .hero_rail-hint {
+  .hero_title {
+    font-size: clamp(2.9rem, 13vw, 4.2rem);
+  }
+  .hero_lede {
+    font-size: var(--size-text-regular);
+  }
+  .hero_who {
     display: none;
   }
-}
-
-/* --- the premise band -----------------------------------------------------
-   The argument, made once, immediately after the hero: the person injecting is
-   the surgeon, not an employee of the surgeon. It is a two-column band with a
-   display statement at left and a numbered ledger at right, and it is the only
-   place on the site that argues rather than describes. --------------------- */
-.premise_component {
-  background-color: var(--bg);
-}
-.premise_inner {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 5rem;
-  align-items: start;
-}
-.premise_statement {
-  position: sticky;
-  top: 8rem;
-}
-.premise_kicker {
-  margin-top: 1.8rem;
-  max-width: 34ch;
-  color: var(--fg-body);
-}
-.premise_points {
-  display: grid;
-  gap: 0;
-  border-top: 1px solid var(--line);
-}
-.premise_point {
-  display: grid;
-  grid-template-columns: 3.5rem 1fr;
-  gap: 1.5rem;
-  padding: 1.9rem 0;
-  border-bottom: 1px solid var(--line);
-}
-.premise_num {
-  font-family: var(--font-display);
-  font-size: var(--size-h4);
-  line-height: 1;
-  color: var(--accent-flat);
-}
-.premise_point-title {
-  margin-bottom: 0.55rem;
-}
-.premise_point-text {
-  color: var(--fg-body);
-  max-width: 52ch;
-}
-
-@media (max-width: 991px) {
-  .premise_inner {
-    grid-template-columns: 1fr;
-    gap: 3rem;
+  .hero_copy {
+    padding-bottom: 2rem;
   }
-  .premise_statement {
-    position: static;
+  .marquee_name {
+    font-size: 1.35rem;
   }
 }

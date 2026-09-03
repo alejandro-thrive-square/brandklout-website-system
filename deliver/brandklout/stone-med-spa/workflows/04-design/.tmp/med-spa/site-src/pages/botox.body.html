@@ -1,181 +1,108 @@
-<!-- SERVICE PAGE SAMPLE (BOTOX) — Asana subtask 6 of 11.
+<!-- SERVICE PAGE SAMPLE (BOTOX) — Asana subtask 6 of 11. Second build.
 
-     THE SAMPLE IS THE TEMPLATE. The eleven-page brief funds one service page,
-     so this one has to be the shape all seven eventually take. Its section
-     spine is the one the competitive research pulled off NassifMD's Botox page
-     — the deepest of the 35 captured, at 1,420 words — plus the two sections
-     Skin Solutions adds and NassifMD does not: pre/post care, and a comparison
-     against the adjacent products.
+     THE SAMPLE IS STILL THE TEMPLATE: the eleven-page brief funds one service
+     page and the other six take this shape when they are written. The section
+     spine is unchanged from the research (what it is, what it does, candidacy,
+     the four products, why here, care, before/after, FAQ, related). What
+     changed is the weight: about half the words, a photograph between every
+     two sections, the products as a stack of cards that pile up as you scroll,
+     and the vitals rail sticky beside the prose.
 
-     The vitals rail at left is GENERATED from treatments-data.mjs, so it cannot
-     disagree with the same treatment's row on /treatments. That is what makes
-     the next six pages cheap: a body file, and nothing else.
-
+     The vitals are GENERATED from treatments-data.mjs ({{VITALS:botox}}).
      CLINICAL REVIEW OUTSTANDING on every figure and every claim on this page. -->
-<section class="section_pagehead pagehead_component">
-  <div class="padding-global">
-    <div class="container-large">
-      <div class="pagehead_inner">
-        <p class="eyebrow"><a href="treatments.html">Treatments</a> &nbsp;/&nbsp; Injectables</p>
-        <h1 class="heading-style-h1 pagehead_title">Botox &amp; Xeomin in <em class="text-style-display-accent">Westlake, TX</em></h1>
-        <p class="text-size-large pagehead_lede">
-          Fifteen minutes, no anaesthetic, no downtime. Visible at three to seven days, fully
-          settled at two weeks, gone by month four. Placed by an oral and maxillofacial
-          surgeon who will use fewer units than you expect the first time.
-        </p>
+<section class="section_cover cover_component">
+  <figure class="cover_media" data-parallax="10">
+    <img src="assets/m-eyes-young.webp" alt="" width="1160" height="1450" fetchpriority="high" class="u-cover-top">
+  </figure>
+  <div class="cover_body">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="cover_inner">
+          <p class="eyebrow is-alternate cover_crumb"><a href="treatments.html">Treatments</a>&nbsp; / &nbsp;Injectables</p>
+          <h1 class="cover_title" data-split data-split-now>Botox &amp; Xeomin in <em class="text-style-display-accent">Westlake</em>.</h1>
+          <p class="cover_lede">
+            Fifteen minutes, no anaesthetic, no downtime, placed by an oral and maxillofacial
+            surgeon who will use fewer units than you expect the first time.
+          </p>
+          <div class="cover_facts">
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="15">15</span> min</span><span>in the chair</span></p>
+            <p class="cover_fact"><span class="cover_fact-num">3&ndash;7 days</span><span>until it shows</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="0">0</span></span><span>days of downtime</span></p>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- THE SPEC SHEET. Sticky vitals at left, the prose at right, a photograph
+     between the first two sections. -->
 <section class="section_detail detail_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
         <div class="detail_layout">
 
-          <aside class="detail_rail">
-            <div class="detail_vitals">
+          <aside class="spec_rail" data-reveal>
+            <p class="spec_title">At a glance</p>
+            <div class="spec_vitals">
 {{VITALS:botox}}
             </div>
-            <div class="detail_rail-actions">
+            <div class="button-group spec_actions">
               <a class="button" href="book.html">Book a consultation</a>
               <a class="button is-secondary" href="tel:+18173838361">Call (817) 383-8361</a>
             </div>
-            <p class="detail_rail-note">
-              Fees are quoted at the consultation, per area and per unit, once Dr. Stone has
-              assessed what you actually need. We do not publish a price for this, because the
-              number is meaningless without the assessment.
-            </p>
+            <p class="spec_note">Fees are quoted at the consultation, per area and per unit, after the assessment.</p>
           </aside>
 
           <div class="detail_prose">
-            <h2 class="heading-style-h3">What it is</h2>
-            <p>
-              Botox and Xeomin are both botulinum toxin type A: a purified protein that
-              temporarily stops a specific muscle from contracting. Injected in very small
-              units into the muscles of the upper face, they stop those muscles from folding
-              the skin above them, and the lines that folding creates soften and, over
-              repeated treatments, stop deepening.
-            </p>
-            <p>
-              They do not fill anything, tighten anything or remove anything. If a line is
-              visible when your face is completely still, it is etched into the skin and a
-              neuromodulator alone will improve it slowly if at all. That distinction is the
-              single most common misunderstanding about this treatment, and it is the first
-              thing Dr. Stone will check at your consultation.
-            </p>
-
-            <h2 class="heading-style-h3">What it does for you</h2>
-            <p>
-              Most people come in describing how they look rather than what they want done:
-              tired, cross, older than they feel. In the upper face those three impressions
-              are usually created by three specific muscles, and this is the treatment that
-              addresses them.
-            </p>
-            <ul>
-              <li>The horizontal lines across your forehead soften, without dropping your brow.</li>
-              <li>The vertical crease between your eyebrows stops making you look annoyed.</li>
-              <li>The lines fanning from the outer corners of your eyes ease when you smile.</li>
-              <li>A heavy brow can be lifted a millimetre or two by relaxing what pulls it down.</li>
-            </ul>
-
-            <h2 class="heading-style-h3">Am I a candidate?</h2>
-            <p>
-              Most healthy adults are. The consultation exists to find the people who are not,
-              and to work out how much you actually need, which for a first treatment is
-              almost always less than you have in mind.
-            </p>
-            <div class="detail_aside">
-              <p class="detail_aside-title">This is not for you if</p>
-              <p class="text-size-small">
-                You are pregnant or breastfeeding; you have a neuromuscular condition such as
-                myasthenia gravis; you have an active infection at the injection site; or your
-                lines are static — visible with your face at rest — in which case Dr. Stone
-                will talk to you about resurfacing or filler instead, or about nothing at all.
+            <div class="detail_block" data-reveal>
+              <h2 class="heading-style-h3 detail_heading">What it is</h2>
+              <p>
+                Botox and Xeomin are both botulinum toxin type A: a purified protein that
+                temporarily stops a specific muscle from contracting. Placed in small units into
+                the muscles of the upper face, it stops them folding the skin, and the lines
+                that folding creates soften.
+              </p>
+              <p>
+                It does not fill, tighten or remove anything. A line visible with your face
+                completely still is etched into the skin, and a neuromodulator alone will
+                improve it slowly if at all. That is the first thing Dr. Stone checks.
               </p>
             </div>
 
-            <h2 class="heading-style-h3">Four products, and which one you get</h2>
-            <p>
-              All four are botulinum toxin type A and all four do the same thing. They differ
-              in how quickly they start, how far they spread from the injection point, and how
-              they behave in patients who have been treated for years. Dr. Stone keeps all
-              four so the choice is clinical rather than whatever the practice stocks.
-            </p>
-            <div class="compare_scroll">
-              <table class="compare_table">
-                <thead>
-                  <tr>
-                    <th scope="col">Product</th>
-                    <th scope="col">Starts</th>
-                    <th scope="col">Spread</th>
-                    <th scope="col">Chosen when</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr class="is-here">
-                    <th scope="row">Botox</th>
-                    <td>3&ndash;7 days</td>
-                    <td>Precise</td>
-                    <td>The default. Longest track record, most predictable in a small area.</td>
-                  </tr>
-                  <tr class="is-here">
-                    <th scope="row">Xeomin</th>
-                    <td>3&ndash;7 days</td>
-                    <td>Precise</td>
-                    <td>You have stopped responding to Botox. Xeomin carries no accessory proteins.</td>
-                  </tr>
-                  <tr class="is-here">
-                    <th scope="row">Dysport</th>
-                    <td>2&ndash;5 days</td>
-                    <td>Wider</td>
-                    <td>A broad forehead, where a wider field of effect is an advantage.</td>
-                  </tr>
-                  <tr class="is-here">
-                    <th scope="row">Jeuveau</th>
-                    <td>2&ndash;5 days</td>
-                    <td>Precise</td>
-                    <td>The glabella specifically. The newest of the four.</td>
-                  </tr>
-                </tbody>
-              </table>
+            <figure class="detail_figure" data-wipe>
+              <span class="wipe_inner" data-parallax="10"><img src="assets/gen-injectables.webp" alt="" width="1600" height="900" loading="lazy"></span>
+            </figure>
+
+            <div class="detail_block" data-reveal>
+              <h2 class="heading-style-h3 detail_heading">What it does for you</h2>
+              <p>
+                Most people describe how they look, not what they want done: tired, cross,
+                older than they feel. In the upper face those three are usually three muscles.
+              </p>
+              <ul class="detail_list">
+                <li>The horizontal lines across the forehead soften, without dropping the brow.</li>
+                <li>The crease between the eyebrows stops making you look annoyed.</li>
+                <li>The lines fanning from the corners of the eyes ease when you smile.</li>
+                <li>A heavy brow lifts a millimetre or two by relaxing what pulls it down.</li>
+              </ul>
             </div>
 
-            <h2 class="heading-style-h3">Why have it done here</h2>
-            <p>
-              Because the person injecting you operates on the facial skeleton for a living.
-              An oral and maxillofacial surgeon has spent years working underneath the muscles
-              she is now treating from above, and that changes two things: where the needle
-              goes, and what she tells you when the honest answer is that this treatment will
-              not fix what is bothering you.
-            </p>
-            <p>
-              It also means the conversation about what happens in ten years is a real one.
-              Every appointment here is with Dr. Stone. There is no injector who sees you
-              while she sees someone else.
-            </p>
-
-            <h2 class="heading-style-h3">Before and after your appointment</h2>
-            <div class="care_grid">
-              <div>
-                <p class="care_col-title">The week before</p>
-                <ol class="care_list">
-                  <li>Stop fish oil, vitamin E and high-dose NSAIDs for about a week if your doctor agrees — they thin the blood and cause bruising.</li>
-                  <li>Skip alcohol for 24 hours beforehand, for the same reason.</li>
-                  <li>Come with a clean face if you can. Makeup is removed before we start.</li>
-                  <li>Tell us about any recent dental work, vaccination or illness.</li>
-                </ol>
-              </div>
-              <div>
-                <p class="care_col-title">The 24 hours after</p>
-                <ol class="care_list">
-                  <li>Stay upright for four hours. No lying flat, no massage tables, no face-down naps.</li>
-                  <li>Do not rub, press or massage the treated areas. Product moves.</li>
-                  <li>No strenuous exercise, saunas or hot yoga for 24 hours.</li>
-                  <li>Small red bumps settle within an hour; a bruise, if you get one, takes a few days.</li>
-                  <li>Judge the result at two weeks, not at three days. We book your review then.</li>
-                </ol>
+            <div class="detail_block" data-reveal>
+              <h2 class="heading-style-h3 detail_heading">Am I a candidate?</h2>
+              <p>
+                Most healthy adults are. The consultation exists to find the people who are
+                not, and to work out how much you actually need &mdash; for a first treatment,
+                almost always less than you have in mind.
+              </p>
+              <div class="detail_aside">
+                <p class="detail_aside-title">Not for you if</p>
+                <p class="text-size-small">
+                  You are pregnant or breastfeeding, have a neuromuscular condition, have an
+                  infection at the site, or your lines are static. In that last case Dr. Stone
+                  will talk to you about resurfacing or filler instead, or about nothing at all.
+                </p>
               </div>
             </div>
           </div>
@@ -185,38 +112,61 @@
   </div>
 </section>
 
-<!-- BEFORE & AFTER, embedded rather than only linked — the sitemap is explicit
-     that the service page carries it. It is the same reserved frame /results
-     uses, and it degrades the same way: when consent arrives the frame fills
-     and nothing around it moves. -->
-<section class="section_gallery gallery_component">
+<!-- THE FOUR PRODUCTS, as a stack. Each card slides up over the last. -->
+<section class="section_products products_component" data-theme="stone">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
-        <div data-reveal>
-          <p class="eyebrow">Before &amp; after</p>
-          <h2 class="heading-style-h2">Botox results, and why they are not here yet.</h2>
-        </div>
-        <div class="gallery_reserved">
-          <div class="gallery_plates" aria-hidden="true">
-            <span class="gallery_plate">Before</span>
-            <span class="gallery_plate">After</span>
+        <div class="products_layout">
+          <div class="products_intro">
+            <p class="eyebrow">Four products</p>
+            <h2 class="heading-style-h2" data-split>One molecule, four <em class="text-style-display-accent">formulations</em>.</h2>
+            <p class="text-size-medium products_lede" data-reveal>
+              All four are botulinum toxin type A. They differ in how fast they start, how far
+              they spread, and how they behave after years of treatment. Dr. Stone keeps all
+              four so the choice is clinical, not whatever the practice stocks.
+            </p>
+            <figure class="products_figure" data-wipe>
+              <span class="wipe_inner" data-parallax="10"><img src="assets/m-skin-glow.webp" alt="" width="1160" height="1450" loading="lazy"></span>
+            </figure>
           </div>
-          <div>
-            <h3 class="heading-style-h4 gallery_reserved-title">Awaiting written consent</h3>
-            <div class="text-size-medium gallery_reserved-text">
-              <p>
-                The practice has photographed its Botox patients for years and those results
-                exist. Publishing a patient's face requires their current written consent for
-                that specific use, per case, and we are collecting it rather than assuming the
-                consent given for a previous website still covers this one.
-              </p>
-              <p>
-                Until every image on this page is covered, none of them go up.
-                <a class="text-style-link" href="book.html">Ask at your consultation</a> — Dr.
-                Stone can show you comparable cases in the room.
-              </p>
-            </div>
+          <div class="stack_component products_stack" data-stack>
+            <article class="stack_item products_card is-here">
+              <p class="products_index">01 &middot; In the room</p>
+              <h3 class="products_name">Botox</h3>
+              <dl class="products_facts">
+                <div><dt>Starts</dt><dd>3&ndash;7 days</dd></div>
+                <div><dt>Spread</dt><dd>Precise</dd></div>
+                <div><dt>Chosen when</dt><dd>The default. Longest track record, most predictable in a small area.</dd></div>
+              </dl>
+            </article>
+            <article class="stack_item products_card is-here">
+              <p class="products_index">02 &middot; In the room</p>
+              <h3 class="products_name">Xeomin</h3>
+              <dl class="products_facts">
+                <div><dt>Starts</dt><dd>3&ndash;7 days</dd></div>
+                <div><dt>Spread</dt><dd>Precise</dd></div>
+                <div><dt>Chosen when</dt><dd>You have stopped responding to Botox. Xeomin carries no accessory proteins.</dd></div>
+              </dl>
+            </article>
+            <article class="stack_item products_card">
+              <p class="products_index">03</p>
+              <h3 class="products_name">Dysport</h3>
+              <dl class="products_facts">
+                <div><dt>Starts</dt><dd>2&ndash;5 days</dd></div>
+                <div><dt>Spread</dt><dd>Wider</dd></div>
+                <div><dt>Chosen when</dt><dd>A broad forehead, where a wider field of effect is an advantage.</dd></div>
+              </dl>
+            </article>
+            <article class="stack_item products_card">
+              <p class="products_index">04</p>
+              <h3 class="products_name">Jeuveau</h3>
+              <dl class="products_facts">
+                <div><dt>Starts</dt><dd>2&ndash;5 days</dd></div>
+                <div><dt>Spread</dt><dd>Precise</dd></div>
+                <div><dt>Chosen when</dt><dd>The glabella specifically. The newest of the four.</dd></div>
+              </dl>
+            </article>
           </div>
         </div>
       </div>
@@ -224,77 +174,175 @@
   </div>
 </section>
 
-<section class="section_faq related_component">
+<!-- WHY HERE. The surgeon, and one sentence. -->
+<section class="section_why why_component">
   <div class="padding-global">
-    <div class="container-medium">
+    <div class="container-large">
       <div class="padding-section-large">
-        <div data-reveal>
-          <p class="eyebrow">Questions</p>
-          <h2 class="heading-style-h2">The ones we are asked most.</h2>
-        </div>
-        <div class="faq_list is-spaced">
-          <details class="faq_item">
-            <summary class="faq_question"><span class="faq_label">Does it hurt?</span><span class="faq_icon" aria-hidden="true"></span></summary>
-            <div class="faq_answer">
-              <p>The needle is very fine and each injection takes about a second. Most patients describe a brief sting. No anaesthetic is needed for a standard upper-face treatment, and you can drive yourself home.</p>
+        <div class="why_grid">
+          <div class="why_copy">
+            <p class="eyebrow">Why have it done here</p>
+            <h2 class="heading-style-h2" data-split>The person holding the needle operates on the <em class="text-style-display-accent">skeleton</em>.</h2>
+            <p class="text-size-medium why_text" data-reveal>
+              An oral and maxillofacial surgeon has spent years underneath the muscles she is
+              now treating from above. That changes where the needle goes, and what she tells
+              you when this treatment will not fix what is bothering you.
+            </p>
+            <div class="button-group" data-reveal>
+              <a class="button is-secondary" href="meet-the-doctor.html">Meet Dr. Stone</a>
             </div>
-          </details>
-          <details class="faq_item">
-            <summary class="faq_question"><span class="faq_label">How soon will I see it?</span><span class="faq_icon" aria-hidden="true"></span></summary>
-            <div class="faq_answer">
-              <p>Movement starts to soften at three to seven days and reaches full effect at about fourteen. Do not judge the result before two weeks — we book your review appointment at that point for exactly this reason.</p>
-            </div>
-          </details>
-          <details class="faq_item">
-            <summary class="faq_question"><span class="faq_label">Will I look frozen?</span><span class="faq_icon" aria-hidden="true"></span></summary>
-            <div class="faq_answer">
-              <p>That is a dosing and placement decision, not a property of the drug. Dr. Stone treats the specific muscles that are folding your skin and leaves the rest working. A first treatment here is deliberately conservative — it is easy to add at your two-week review and impossible to remove.</p>
-            </div>
-          </details>
-          <details class="faq_item">
-            <summary class="faq_question"><span class="faq_label">What happens when it wears off?</span><span class="faq_icon" aria-hidden="true"></span></summary>
-            <div class="faq_answer">
-              <p>Your muscles go back to doing what they did before, and so do your lines. Nothing gets worse than it was — the idea that stopping makes you look older than if you had never started is a myth. What is true is that people notice the return, because they have got used to the softer version.</p>
-            </div>
-          </details>
-          <details class="faq_item">
-            <summary class="faq_question"><span class="faq_label">Can I have it with something else the same day?</span><span class="faq_icon" aria-hidden="true"></span></summary>
-            <div class="faq_answer">
-              <p>Often, yes. Botox and filler are routinely done in one visit. Combining it with a resurfacing treatment depends on the depth and the order, and Dr. Stone will sequence it at your consultation rather than fitting it around your calendar.</p>
-            </div>
-          </details>
-          <details class="faq_item">
-            <summary class="faq_question"><span class="faq_label">How many units will I need?</span><span class="faq_icon" aria-hidden="true"></span></summary>
-            <div class="faq_answer">
-              <p>It depends on your muscle mass, which is why nobody can answer it over the phone. Men usually need more than women; a strong glabella needs more than a forehead. You are quoted your number after the assessment, before anything is injected.</p>
-            </div>
-          </details>
+          </div>
+          <div class="why_media">
+            <figure class="why_frame" data-wipe>
+              <span class="wipe_inner" data-parallax="10"><img src="assets/dr-stone-standing.webp" alt="Dr. Mona Stone, DDS" width="988" height="1482" loading="lazy"></span>
+            </figure>
+            <figure class="why_frame-small" data-speed="-0.25">
+              <img src="assets/consult-room.webp" alt="" width="1600" height="900" loading="lazy">
+            </figure>
+          </div>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section_related related_component is-plain">
+<!-- CARE. The week before and the day after, either side of a still life. -->
+<section class="section_care care_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="care_head">
+          <p class="eyebrow">Before and after your appointment</p>
+          <h2 class="heading-style-h2" data-split>Nine things, and none of them <em class="text-style-display-accent">hard</em>.</h2>
+        </div>
+        <div class="care_grid">
+          <div class="care_col" data-reveal>
+            <p class="care_col-title">The week before</p>
+            <ol class="care_list">
+              <li>Stop fish oil, vitamin E and high-dose NSAIDs for about a week if your doctor agrees. They cause bruising.</li>
+              <li>No alcohol for 24 hours beforehand, for the same reason.</li>
+              <li>Come with a clean face if you can. Makeup comes off before we start.</li>
+              <li>Tell us about recent dental work, a vaccination or an illness.</li>
+            </ol>
+          </div>
+          <figure class="care_figure" data-wipe>
+            <span class="wipe_inner" data-parallax="8"><img src="assets/gen-linen-detail.webp" alt="" width="1600" height="900" loading="lazy"></span>
+          </figure>
+          <div class="care_col" data-reveal>
+            <p class="care_col-title">The 24 hours after</p>
+            <ol class="care_list" start="5">
+              <li>Stay upright for four hours. No lying flat, no face-down naps.</li>
+              <li>Do not rub or massage the treated areas. Product moves.</li>
+              <li>No strenuous exercise, saunas or hot yoga for a day.</li>
+              <li>Small red bumps settle within an hour; a bruise takes a few days.</li>
+              <li>Judge the result at two weeks, not three days. We book your review then.</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- BEFORE & AFTER, the reserved frame. When per-case consent arrives the
+     plates fill and nothing around them moves. -->
+<section class="section_gallery gallery_component" data-theme="dark">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="gallery_grid">
+          <div class="gallery_plates" aria-hidden="true" data-reveal>
+            <span class="gallery_plate"><span>Before</span></span>
+            <span class="gallery_plate"><span>After</span></span>
+          </div>
+          <div class="gallery_copy">
+            <p class="eyebrow">Before &amp; after</p>
+            <h2 class="heading-style-h2" data-split>The results exist. The <em class="text-style-display-accent">consent</em> is being collected.</h2>
+            <p class="text-size-medium gallery_text" data-reveal>
+              Publishing a patient's face needs their current written consent for this
+              specific use, per case, and we are asking rather than assuming. Until every
+              image here is covered, none go up. Dr. Stone can show you comparable cases in
+              the room.
+            </p>
+            <div class="button-group" data-reveal>
+              <a class="button" href="book.html">Ask at a consultation</a>
+              <a class="button is-alternate" href="results.html">All results</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- QUESTIONS. -->
+<section class="section_faq detail_faq">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="detail_faq-grid">
+          <div class="detail_faq-head">
+            <p class="eyebrow">Questions</p>
+            <h2 class="heading-style-h2" data-split>The ones we are <em class="text-style-display-accent">asked most</em>.</h2>
+          </div>
+          <div class="faq_list" data-reveal>
+            <details class="faq_item">
+              <summary class="faq_question"><span class="faq_label">Does it hurt?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+              <div class="faq_answer"><p>The needle is very fine and each injection takes about a second. Most patients describe a brief sting. No anaesthetic is needed and you can drive yourself home.</p></div>
+            </details>
+            <details class="faq_item">
+              <summary class="faq_question"><span class="faq_label">How soon will I see it?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+              <div class="faq_answer"><p>Movement softens at three to seven days and reaches full effect at about fourteen. We book your review at two weeks for exactly this reason.</p></div>
+            </details>
+            <details class="faq_item">
+              <summary class="faq_question"><span class="faq_label">Will I look frozen?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+              <div class="faq_answer"><p>That is a dosing and placement decision, not a property of the drug. A first treatment here is deliberately conservative: easy to add at the review, impossible to remove.</p></div>
+            </details>
+            <details class="faq_item">
+              <summary class="faq_question"><span class="faq_label">What happens when it wears off?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+              <div class="faq_answer"><p>Your muscles go back to what they did before, and so do your lines. Nothing gets worse than it was. People notice the return because they got used to the softer version.</p></div>
+            </details>
+            <details class="faq_item">
+              <summary class="faq_question"><span class="faq_label">How many units will I need?</span><span class="faq_icon" aria-hidden="true"></span></summary>
+              <div class="faq_answer"><p>It depends on your muscle mass, which is why nobody can answer it over the phone. You are quoted your number after the assessment, before anything is injected.</p></div>
+            </details>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- RELATED. Three cards with photographs. -->
+<section class="section_related related_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-medium">
         <p class="eyebrow">Often asked about together</p>
-        <div class="related_grid">
-          <a class="related_card" href="treatments.html#dermal-fillers">
-            <span class="related_card-meta">Injectables</span>
-            <h3 class="heading-style-h4">Dermal Fillers</h3>
-            <p class="text-size-small text-style-muted">For the volume that has gone, rather than the muscle that is folding. Frequently done in the same visit.</p>
+        <div class="related_grid" data-reveal="stagger">
+          <a class="related_card" href="treatments.html#dermal-fillers" data-cursor="Open">
+            <figure class="related_media"><img src="assets/m-lips.webp" alt="" width="1160" height="1450" loading="lazy"></figure>
+            <span class="related_body">
+              <span class="related_meta">Injectables</span>
+              <span class="related_name">Dermal Fillers</span>
+              <span class="related_text">For the volume that has gone, rather than the muscle that folds. Often the same visit.</span>
+            </span>
           </a>
-          <a class="related_card" href="treatments.html#morpheus8">
-            <span class="related_card-meta">Skin &amp; resurfacing</span>
-            <h3 class="heading-style-h4">Morpheus8</h3>
-            <p class="text-size-small text-style-muted">For a line that is still visible when your face is at rest, and for the jawline.</p>
+          <a class="related_card" href="treatments.html#morpheus8" data-cursor="Open">
+            <figure class="related_media"><img src="assets/m-jawline.webp" alt="" width="1200" height="1200" loading="lazy"></figure>
+            <span class="related_body">
+              <span class="related_meta">Skin &amp; resurfacing</span>
+              <span class="related_name">Morpheus8</span>
+              <span class="related_text">For a line still visible at rest, and for the jawline.</span>
+            </span>
           </a>
-          <a class="related_card" href="membership.html">
-            <span class="related_card-meta">Membership</span>
-            <h3 class="heading-style-h4">Three or four times a year</h3>
-            <p class="text-size-small text-style-muted">If you are going to keep this up, the membership is built around exactly this cadence.</p>
+          <a class="related_card" href="membership.html" data-cursor="Open">
+            <figure class="related_media"><img src="assets/gen-planning.webp" alt="" width="1600" height="900" loading="lazy"></figure>
+            <span class="related_body">
+              <span class="related_meta">Membership</span>
+              <span class="related_name">Three or four times a year</span>
+              <span class="related_text">If you are keeping this up, the membership is built around exactly this cadence.</span>
+            </span>
           </a>
         </div>
       </div>

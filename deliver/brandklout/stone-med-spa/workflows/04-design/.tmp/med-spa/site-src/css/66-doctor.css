@@ -1,0 +1,288 @@
+/* ===========================================================================
+   MEET THE DOCTOR — second build.
+
+   Four chapters: the tall cover (49-cover.css), three rules as STACKED cards,
+   the under-treat rule on green, and a pinned filmstrip. See the note at the
+   top of pages/meet-the-doctor.body.html for what this deliberately is not.
+
+   .doctor_*  the rules and the green statement
+   .film_*    the filmstrip, on the shared .hscroll_* primitive (40-motion.css)
+   =========================================================================== */
+/* The cover portrait is 1000x1482 in a landscape frame: her face is in the
+   top fifth of the file, so the crop anchors near the top rather than at the
+   shared cover's 30%. */
+.doctor_cover .cover_media > img {
+  object-position: 50% 6%;
+}
+.doctor_head {
+  max-width: 40rem;
+  margin-bottom: 3rem;
+}
+.doctor_head .heading-style-h2 {
+  margin-top: 1.25rem;
+}
+
+/* --- the stacked cards ------------------------------------------------------ */
+.doctor_stack {
+  gap: 1.25rem;
+}
+.doctor_card {
+  display: grid;
+  grid-template-columns: minmax(0, 5fr) minmax(0, 7fr);
+  min-height: 34rem;
+  background: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-frame);
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+.doctor_card-media {
+  margin: 0;
+  min-height: 18rem;
+}
+.doctor_card-media .wipe_inner {
+  display: block;
+  height: 100%;
+}
+.doctor_card-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 30%;
+}
+.doctor_card-body {
+  display: grid;
+  align-content: center;
+  gap: 1rem;
+  padding: clamp(2rem, 5vw, 4.5rem);
+}
+.doctor_card-num {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  line-height: 1;
+  color: var(--accent);
+}
+.doctor_card-title {
+  font-size: clamp(2rem, 3.6vw, 3.4rem);
+  line-height: 1.05;
+  letter-spacing: -0.015em;
+  max-width: 14ch;
+}
+.doctor_card-text {
+  max-width: 40ch;
+  font-size: var(--size-text-medium);
+  color: var(--fg-body);
+}
+
+/* --- the rule, on green ------------------------------------------------------ */
+.doctor_rule-grid {
+  display: grid;
+  grid-template-columns: minmax(0, 7fr) minmax(0, 5fr);
+  gap: 3rem 5rem;
+  align-items: center;
+}
+.doctor_rule-title {
+  margin-top: 1.25rem;
+  font-size: clamp(2.6rem, 5.6vw, 5.4rem);
+  line-height: 1;
+  letter-spacing: -0.02em;
+  max-width: 12ch;
+}
+.doctor_rule-text {
+  margin-top: 1.5rem;
+  max-width: 40ch;
+}
+.doctor_rule-facts {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.5rem;
+  margin-top: 2.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-strong);
+  max-width: 30rem;
+}
+.doctor_rule-fact {
+  display: grid;
+  gap: 0.4rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.doctor_rule-fact-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.2rem, 3.6vw, 3.4rem);
+  line-height: 1;
+  color: var(--fg);
+}
+.doctor_rule-media {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-frame);
+  overflow: hidden;
+}
+.doctor_rule-media .wipe_inner {
+  display: block;
+  height: 100%;
+}
+.doctor_rule-media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* --- the filmstrip ------------------------------------------------------------ */
+.film_component {
+  background: var(--bg-alt);
+  padding-top: var(--space-xhuge);
+  padding-bottom: var(--space-xhuge);
+}
+.film_head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  margin-bottom: 3rem;
+}
+.film_head .heading-style-h2 {
+  margin-top: 1.25rem;
+}
+.hscroll_bar {
+  width: 12rem;
+  height: 2px;
+  background: var(--line-strong);
+  flex: 0 0 auto;
+  margin-bottom: 0.6rem;
+}
+.hscroll_bar-fill {
+  display: block;
+  height: 100%;
+  background: var(--accent-flat);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+}
+.film_track {
+  padding-inline: 5%;
+  gap: 1.25rem;
+  align-items: flex-end;
+}
+.film_item {
+  position: relative;
+  flex: 0 0 auto;
+  margin: 0;
+  width: 30rem;
+  aspect-ratio: 16 / 10;
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  background: var(--stone);
+}
+.film_item.is-tall {
+  width: 22rem;
+  aspect-ratio: 2 / 3;
+}
+.film_item.is-square {
+  width: 18rem;
+  aspect-ratio: 1;
+}
+.film_item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 25%;
+  transition: transform 1.2s var(--ease);
+}
+.film_item:hover img {
+  transform: scale(1.04);
+}
+.film_caption {
+  position: absolute;
+  left: 1rem;
+  bottom: 1rem;
+  padding: 0.45rem 0.9rem;
+  border-radius: var(--radius);
+  background: rgba(39, 39, 39, 0.62);
+  color: var(--white);
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+.film_item.is-link {
+  background: transparent;
+  border: 1px dashed var(--line-strong);
+  width: 22rem;
+  aspect-ratio: 2 / 3;
+}
+.film_link {
+  display: grid;
+  align-content: space-between;
+  height: 100%;
+  padding: 2rem;
+  color: var(--fg);
+}
+.film_link-text {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  line-height: 1.2;
+  max-width: 12ch;
+}
+
+@media (max-width: 991px) {
+  .doctor_card {
+    grid-template-columns: 1fr;
+    min-height: 0;
+  }
+  .doctor_card-media {
+    aspect-ratio: 16 / 10;
+    min-height: 0;
+  }
+  .doctor_rule-grid {
+    grid-template-columns: 1fr;
+  }
+  .doctor_rule-media {
+    aspect-ratio: 4 / 3;
+    order: -1;
+  }
+  .film_component {
+    padding-top: var(--space-huge);
+    padding-bottom: var(--space-huge);
+  }
+  .film_track {
+    padding-bottom: 1rem;
+  }
+  .film_item {
+    width: 24rem;
+  }
+  .film_item.is-tall,
+  .film_item.is-link {
+    width: 17rem;
+  }
+  .film_item.is-square {
+    width: 15rem;
+  }
+}
+@media (max-width: 767px) {
+  .doctor_card-body {
+    padding: 1.5rem;
+  }
+  .doctor_rule-facts {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .film_head {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .film_item {
+    width: 18rem;
+  }
+  .film_item.is-tall,
+  .film_item.is-link {
+    width: 13rem;
+  }
+  .film_item.is-square {
+    width: 12rem;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .doctor_card {
+    position: static;
+  }
+}

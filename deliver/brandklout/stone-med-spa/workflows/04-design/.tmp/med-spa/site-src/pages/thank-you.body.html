@@ -1,57 +1,35 @@
-<!-- GENERAL THANK YOU PAGE — Asana subtask 11 of 11.
+<!-- GENERAL THANK YOU PAGE — Asana subtask 11 of 11. Second build.
 
-     noindex (set in seo.json), and cta: false — the visitor is past the
-     conversion, so the shared closing band would be asking them to do the thing
-     they have just done.
-
-     It is a general thank-you, per the Asana name: it serves the booking form,
-     the phone, and any future campaign landing page, so it does not claim to
-     know which one you came from. What it does carry is real timings, because
-     the single most common reason someone rings the day after submitting a form
-     is that nobody told them how long to wait.
-
-     NOTE: nothing routes here yet. The booking form is inert (js/11-form.js), so
-     this page is currently reachable only by URL. It is built now because it is
-     the conversion-tracking endpoint and the tag has to have somewhere to fire. -->
-<section class="section_thanks thanks_component">
-  <div class="padding-global">
-    <div class="container-large">
-      <div class="thanks_inner">
-        <svg class="thanks_mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
-          <circle cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5"/>
-          <path d="M15 24.5 21 30.5 33 18.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-        </svg>
-        <p class="eyebrow">Received</p>
-        <h1 class="heading-style-h1 thanks_title">Thank you. <em class="text-style-display-accent">We have it.</em></h1>
-        <p class="text-size-large thanks_text">
-          Your request is with the front desk. Here is exactly what happens next, so you are not
-          left wondering whether to call.
-        </p>
-
-        <div class="thanks_next">
-          <div class="thanks_next-item">
-            <span class="thanks_next-when">Today</span>
-            <span>The desk sees your request and checks it against Dr. Stone's diary. If you sent it after 5pm or at a weekend, this happens the next working morning.</span>
+     noindex (seo.json) and cta: false. Everything lives inside one tall cover
+     on the practice's neon sign: a check mark that draws itself, the three
+     real timings, the phone. Nothing routes here yet — the booking form is
+     inert (js/11-form.js) — so it is reachable only by URL. It exists because
+     it is the conversion-tracking endpoint and the tag needs somewhere to
+     fire. -->
+<section class="section_cover cover_component is-tall thanks_component">
+  <figure class="cover_media" data-parallax="8">
+    <img src="assets/ssa-neon.webp" alt="" width="2133" height="1200" fetchpriority="high">
+  </figure>
+  <div class="cover_body">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="cover_inner thanks_inner">
+          <svg class="thanks_mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <circle class="thanks_mark-ring" cx="24" cy="24" r="22" stroke="currentColor" stroke-width="1.5"/>
+            <path class="thanks_mark-tick" d="M15 24.5 21 30.5 33 18.5" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+          <p class="eyebrow is-alternate">Received</p>
+          <h1 class="cover_title" data-split data-split-now>Thank you. <em class="text-style-display-accent">We have it.</em></h1>
+          <p class="cover_lede">Your request is with the front desk. Here is what happens next.</p>
+          <dl class="thanks_next" data-reveal="stagger">
+            <div><dt>Today</dt><dd>The desk checks your request against Dr. Stone's diary. After 5pm or at a weekend, the next working morning.</dd></div>
+            <div><dt>Within one working day</dt><dd>We call the number you gave us to offer you times. If we cannot reach you, twice more, then email.</dd></div>
+            <div><dt>At your visit</dt><dd>Thirty minutes with Dr. Stone. A written plan, a cadence, no obligation to start.</dd></div>
+          </dl>
+          <div class="button-group cover_actions" data-reveal>
+            <a class="button is-alternate" href="tel:+18173838361">Faster: call (817) 383-8361</a>
+            <a class="button is-secondary thanks_button" href="treatments.html">The treatments</a>
           </div>
-          <div class="thanks_next-item">
-            <span class="thanks_next-when">Within one working day</span>
-            <span>Someone calls you on the number you gave us, to confirm what you are looking for and to offer you times. If we cannot reach you we will try twice more and then email.</span>
-          </div>
-          <div class="thanks_next-item">
-            <span class="thanks_next-when">At your visit</span>
-            <span>Thirty minutes with Dr. Stone. You leave with a written plan, a cadence and a quote &mdash; and no obligation to start.</span>
-          </div>
-        </div>
-
-        <p class="text-size-medium thanks_text">
-          If you would rather not wait, the phone is faster and it is answered by the same
-          people: <a class="text-style-link" href="tel:+18173838361">(817) 383-8361</a>,
-          Monday to Friday, 9 to 5.
-        </p>
-
-        <div class="button-group thanks_actions">
-          <a class="button is-secondary" href="treatments.html">Read about the treatments</a>
-          <a class="button is-secondary" href="index.html">Back to the home page</a>
         </div>
       </div>
     </div>

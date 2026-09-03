@@ -283,7 +283,12 @@
   background-color: var(--green-deep);
   border-color: var(--green-deep);
   color: var(--white);
-  transform: translateY(-1px);
+}
+/* On a dark ground the primary button keeps its green; on the green ground it
+   flips to charcoal with a white label, from the tokens — no per-section rule. */
+[data-theme="green"] .button:hover {
+  background-color: #111;
+  border-color: #111;
 }
 
 .button.is-secondary {
@@ -322,7 +327,24 @@
   background-color: transparent;
   border-color: transparent;
   color: var(--fg);
-  transform: none;
+}
+/* A round icon button — the arrows on a rail, the play mark on a frame. */
+.button.is-icon {
+  width: 3.25rem;
+  height: 3.25rem;
+  padding: 0;
+  background-color: transparent;
+  border-color: var(--line-strong);
+  color: var(--fg);
+}
+.button.is-icon:hover {
+  background-color: var(--accent-flat);
+  border-color: var(--accent-flat);
+  color: var(--btn-ink);
+}
+.button.is-icon svg {
+  width: 1.1rem;
+  height: 1.1rem;
 }
 .button.is-link .button_arrow {
   transition: transform 0.25s var(--ease);

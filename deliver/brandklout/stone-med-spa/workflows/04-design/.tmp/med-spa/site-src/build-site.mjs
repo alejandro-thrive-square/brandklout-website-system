@@ -13,9 +13,9 @@
 //                       per page. The head partial carries none of it.
 //
 // WHAT IS DIFFERENT HERE: treatments-data.mjs. The menu is seven records, and
-// four separate things on the site are views of those same seven — the hero's
-// interval rail, the ledger table, the concern pills, and the vitals rail on a
-// treatment page. All four are GENERATED below rather than hand-written, so a
+// five separate things on the site are views of those same seven — the home
+// ticker, the home shelf, the menu rows, the concern pills, and the vitals rail
+// on a treatment page. All five are GENERATED below rather than hand-written, so a
 // treatment cannot appear on the menu with one interval and in the year grid
 // with another. The sibling site learned this the expensive way: it had a
 // treatments-data.mjs, the pages drifted from it, and it was deleted.
@@ -49,50 +49,77 @@ const esc = (s) =>
    MedSpa" and its eleven subtasks, which is the only page list this pillar has
    ever had. The Asana names are in the comments; the slugs are ours.
 
-   `photoHero` is true only where the navbar sits over a photograph and
-   therefore starts transparent. On this site that is the home page and nothing
-   else, which is the deliberate difference from Surgical Arts, where every
-   interior page opens full-bleed — see the note at the top of 49-pagehead.css.
+   `photoHero` is true where the navbar sits over a photograph and therefore
+   starts transparent. Since the second build (2026-09-03) that is every page:
+   each opens on the cover header in css/49-cover.css.
 
    `cta` false suppresses the shared closing band on a page that already ends in
    its own conversion moment. Two pages do: the booking page, which IS the
    conversion, and the thank-you page, which is past it.
 
-   `motion` ships the GSAP vendor bundle. It is FALSE ON EVERY PAGE right now.
-   Nothing on this site currently uses GSAP — the reveals are IntersectionObserver
-   in 00-runtime.js and everything else is CSS — so shipping 125KB to do nothing
-   would be waste. The flag is kept because the sibling build proved the split is
-   what makes adding an animated page cheap later. */
+   `motion` ships the GSAP vendor bundle (GSAP, ScrollTrigger, SplitText). TRUE
+   on every page since the second build: js/20-motion.js pins, scrubs and splits
+   on all of them. */
+const M = { photoHero: true, motion: true };
 const PAGES = [
-  { slug: "index", src: "home", photoHero: true }, //            1. Home
-  { slug: "about", src: "about" }, //                            2. About Us
-  { slug: "meet-the-doctor", src: "meet-the-doctor" }, //        3. Meet The Doctor
-  { slug: "team", src: "team" }, //                              4. Meet the Team
-  { slug: "treatments", src: "treatments" }, //                  5. Services Overview
-  { slug: "botox", src: "botox" }, //                            6. Service Page Sample (Botox)
-  { slug: "results", src: "results" }, //                        7. Testimonials / Before & After
-  { slug: "financing", src: "financing" }, //                    8. Financing
-  { slug: "book", src: "book", cta: false }, //                  9. Book Consultation
-  { slug: "membership", src: "membership" }, //                 10. Membership Plan
-  { slug: "thank-you", src: "thank-you", cta: false }, //       11. General Thank You Page
+  { slug: "index", src: "home", ...M }, //                       1. Home
+  { slug: "about", src: "about", ...M }, //                      2. About Us
+  { slug: "meet-the-doctor", src: "meet-the-doctor", ...M }, //  3. Meet The Doctor
+  { slug: "team", src: "team", ...M }, //                        4. Meet the Team
+  { slug: "treatments", src: "treatments", ...M }, //            5. Services Overview
+  { slug: "botox", src: "botox", ...M }, //                      6. Service Page Sample (Botox)
+  { slug: "results", src: "results", ...M }, //                  7. Testimonials / Before & After
+  { slug: "financing", src: "financing", ...M }, //              8. Financing
+  { slug: "book", src: "book", ...M, cta: false }, //            9. Book Consultation
+  { slug: "membership", src: "membership", ...M }, //           10. Membership Plan
+  { slug: "thank-you", src: "thank-you", ...M, cta: false }, // 11. General Thank You Page
 ];
+/* 2026-09-03, second build: `photoHero` and `motion` are TRUE ON EVERY PAGE.
+   Every page now opens on a photograph with the navbar over it, and every page
+   carries the motion layer (js/20-motion.js), which needs the vendor bundle.
+   The two flags are kept rather than deleted because the thank-you page or a
+   future campaign page may legitimately want neither. */
 
 /* --- generated views of treatments-data.mjs ------------------------------ */
 
-/** The hero's interval rail: every treatment, and how often it recurs. */
-function heroRail() {
+/** The ticker under the home hero: every treatment, and how often it recurs.
+    20-motion.js clones the track until it is twice the viewport and loops it. */
+function ticker() {
   return TREATMENTS.map(
-    (t) => `        <a class="hero_rail-item" href="treatments.html#${t.slug}">
-          <span class="hero_rail-name">${esc(t.name)}</span>
-          <span class="hero_rail-interval">${esc(t.cadence)}</span>
-        </a>`
+    (t) => `          <a class="marquee_item" href="treatments.html#${t.slug}">
+            <span class="marquee_name">${esc(t.name)}</span>
+            <span class="marquee_cadence">${esc(t.cadence)}</span>
+          </a>`
+  ).join("\n");
+}
+
+/** The shelf: the seven treatments as expanding panels, each carrying its
+    portrait, its appointment length and its cadence. The home page's menu. */
+function shelf() {
+  return TREATMENTS.map(
+    (t, i) => `          <div class="shelf_item${i === 0 ? " is-open" : ""}">
+            <a class="shelf_link" href="treatments.html#${t.slug}" data-cursor="Open">
+              <figure class="shelf_media">
+                <img src="assets/${t.portrait}" alt="" width="900" height="1125" loading="lazy">
+              </figure>
+              <span class="shelf_index">0${i + 1}</span>
+              <span class="shelf_vert">${esc(t.name)}</span>
+              <span class="shelf_body">
+                <span class="shelf_name">${esc(t.name)}</span>
+                <span class="shelf_meta">
+                  <span>${esc(t.appointment)}</span>
+                  <span>${esc(t.cadence)}</span>
+                </span>
+              </span>
+            </a>
+          </div>`
   ).join("\n");
 }
 
 /** The concern pills. Buttons, not links — they filter, they do not navigate. */
 function concernPills() {
   return CONCERNS.map(
-    (c) => `          <li><button class="concerns_button" type="button" data-concern="${c.id}" aria-pressed="false">${esc(
+    (c) => `          <li><button class="concern_chip" type="button" data-concern="${c.id}" aria-pressed="false">${esc(
       c.name
     )}</button></li>`
   ).join("\n");
@@ -107,60 +134,70 @@ function concernPills() {
 const concernNames = (t) =>
   t.concerns.map((id) => CONCERNS.find((c) => c.id === id).name).join(", ");
 
-/** One ledger row. A <details> so it opens with no JavaScript at all. */
-function ledgerRow(t) {
+/** One menu row. A <details> so it opens with no JavaScript at all. Second
+    build (css/57-menu.css): an index numeral across the whole menu, the name
+    in display type, the four numbers, and the portrait revealed on open.
+    `index` is the running position across all three groups, 1-based. */
+function ledgerRow(t, index) {
   const link = t.page
     ? `<a class="button is-link" href="${t.page}">Read the full page <span class="button_arrow">&rarr;</span></a>`
-    : `<span class="ledger_nopage">A full page for this treatment is not written yet. Dr. Stone covers it in a consultation.</span>`;
-  return `          <details class="ledger_row" id="${t.slug}" data-treatment data-concerns="${t.concerns.join(" ")}">
-            <summary class="ledger_summary">
-              <span class="ledger_name">${esc(t.name)}</span>
-              <span class="ledger_cell"><span class="ledger_cell-key">Appointment</span><span class="ledger_cell-val">${esc(
-                t.appointment
-              )}</span></span>
-              <span class="ledger_cell"><span class="ledger_cell-key">Shows</span><span class="ledger_cell-val">${esc(
-                t.onset
-              )}</span></span>
-              <span class="ledger_cell"><span class="ledger_cell-key">Lasts</span><span class="ledger_cell-val">${esc(
-                t.lasts
-              )}</span></span>
-              <span class="ledger_cell is-area"><span class="ledger_cell-key">Downtime</span><span class="ledger_cell-val">${esc(
-                t.downtime
-              )}</span></span>
-              <span class="ledger_chev" aria-hidden="true"></span>
+    : `<span class="row_nopage">A full page for this treatment is not written yet. Dr. Stone covers it in a consultation.</span>`;
+  const vital = (key, val) =>
+    `<span class="row_vital"><span class="row_vital-key">${key}</span><span class="row_vital-val">${esc(val)}</span></span>`;
+  return `          <details class="row_component" id="${t.slug}" data-treatment data-concerns="${t.concerns.join(" ")}">
+            <summary class="row_summary">
+              <span class="row_index">${String(index).padStart(2, "0")}</span>
+              <span class="row_thumb"><img src="assets/${t.portrait}" alt="" width="120" height="120" loading="lazy"></span>
+              <span class="row_name">${esc(t.name)}</span>
+              <span class="row_vitals">
+                ${vital("Appointment", t.appointment)}
+                ${vital("Shows", t.onset)}
+                ${vital("Lasts", t.lasts)}
+                ${vital("Downtime", t.downtime)}
+              </span>
+              <span class="row_toggle" aria-hidden="true"></span>
             </summary>
-            <div class="ledger_detail">
-              <div>
-                <p class="text-size-medium ledger_lede">${esc(t.lede)}</p>
-                <div class="ledger_meta">
-                  <span class="ledger_meta-item"><strong>${esc(t.area)}</strong>Where it is placed</span>
-                  <span class="ledger_meta-item"><strong>${esc(concernNames(t))}</strong>What it addresses</span>
-                </div>
-                <div class="ledger_actions">
+            <div class="row_detail">
+              <figure class="row_figure">
+                <img src="assets/${t.portrait}" alt="" width="900" height="675" loading="lazy">
+              </figure>
+              <div class="row_body">
+                <p class="row_lede">${esc(t.lede)}</p>
+                <dl class="row_meta">
+                  <div><dt>Placed</dt><dd>${esc(t.area)}</dd></div>
+                  <div><dt>Addresses</dt><dd>${esc(concernNames(t))}</dd></div>
+                  <div><dt>Cadence</dt><dd>${esc(t.cadence)}</dd></div>
+                </dl>
+                <div class="button-group row_actions">
                   ${link}
                   <a class="button is-small is-secondary" href="book.html">Ask about this</a>
                 </div>
               </div>
-              <figure class="ledger_figure">
-                <img src="assets/${t.portrait}" alt="" width="900" height="675" loading="lazy">
-              </figure>
             </div>
           </details>`;
 }
 
-/** The whole table, grouped by shelf. */
+/** The whole menu, grouped by shelf. Each group opens on its still life at
+    full size beside a roman numeral and the category name; the rows follow. */
 function ledger() {
+  const roman = ["I", "II", "III", "IV", "V"];
+  let n = 0;
   return CATEGORIES.map(
-    (c) => `        <div class="ledger_group" data-group>
-          <div class="ledger_group-head">
-            <figure class="ledger_group-figure">
-              <img src="assets/${c.image}" alt="" width="240" height="240" loading="lazy">
+    (c, gi) => `        <div class="menu_group" data-group id="cat-${c.id}">
+          <div class="menu_group-head">
+            <figure class="menu_group-figure" data-wipe>
+              <span class="wipe_inner" data-parallax="8"><img src="assets/${c.image}" alt="" width="1600" height="900" loading="lazy"></span>
             </figure>
-            <h2 class="heading-style-h3">${esc(c.name)}</h2>
-            <p class="ledger_group-blurb">${esc(c.blurb)}</p>
+            <div class="menu_group-copy">
+              <span class="menu_group-num" aria-hidden="true">${roman[gi]}</span>
+              <h2 class="heading-style-h2" data-split>${esc(c.name)}</h2>
+              <p class="menu_group-blurb" data-reveal>${esc(c.blurb)}</p>
+            </div>
           </div>
-          <div class="ledger_table">
-${byCategory(c.id).map(ledgerRow).join("\n")}
+          <div class="menu_rows">
+${byCategory(c.id)
+  .map((t) => ledgerRow(t, ++n))
+  .join("\n")}
           </div>
         </div>`
   ).join("\n");
@@ -260,16 +297,17 @@ function vitals(slug) {
   if (!t) throw new Error(`treatments-data.mjs has no treatment "${slug}"`);
   const rows = [
     ["Appointment", t.appointment],
-    ["Results show", t.onset],
-    ["Results last", t.lasts],
+    ["Shows", t.onset],
+    ["Lasts", t.lasts],
     ["Downtime", t.downtime],
-    ["Areas treated", t.area],
+    ["Cadence", t.cadence],
+    ["Areas", t.area],
   ];
   return rows
     .map(
-      ([k, v]) => `            <div class="detail_vital">
-              <span class="detail_vital-key">${esc(k)}</span>
-              <span class="detail_vital-val">${esc(v)}</span>
+      ([k, v]) => `            <div class="spec_vital">
+              <span class="spec_vital-key">${esc(k)}</span>
+              <span class="spec_vital-val">${esc(v)}</span>
             </div>`
     )
     .join("\n");
@@ -375,10 +413,8 @@ fs.mkdirSync(path.join(OUT, "assets"), { recursive: true });
 fs.writeFileSync(path.join(OUT, "assets", "site.css"), bundle("css", ".css"), "utf8");
 fs.writeFileSync(path.join(OUT, "assets", "site.js"), bundle("js", ".js"), "utf8");
 
-// The motion vendor bundle, emitted as a separate asset. No page opts in today
-// (see the PAGES table), so this is written and not linked. It is still written
-// because the moment one page sets motion: true it has to exist, and a build
-// that half-ships a feature is worse than one that ships an unused asset.
+// The motion vendor bundle, emitted as a separate asset and linked by every
+// page with motion: true — all eleven since the second build.
 const VENDOR = path.join(SRC, "js", "vendor");
 const vendorFiles = fs
   .readdirSync(VENDOR)
@@ -409,7 +445,8 @@ for (const page of PAGES) {
 
   // The generated views. Done on the body only — no partial carries one.
   body = body
-    .replace("{{HERO_RAIL}}", heroRail)
+    .replace("{{TICKER}}", ticker)
+    .replace("{{SHELF}}", shelf)
     .replace("{{CONCERNS}}", concernPills)
     .replace("{{LEDGER}}", ledger)
     .replace("{{CADENCE_GRID}}", cadenceGrid)
@@ -472,5 +509,5 @@ console.log(built.join("\n"));
 const kb = (f) => (fs.statSync(path.join(OUT, "assets", f)).size / 1024).toFixed(1);
 console.log(`\nsite.css   ${kb("site.css")}KB`);
 console.log(`site.js    ${kb("site.js")}KB`);
-console.log(`vendor.js  ${kb("vendor.js")}KB  (written, linked by no page — see PAGES)`);
+console.log(`vendor.js  ${kb("vendor.js")}KB  (linked by every page with motion: true)`);
 console.log(`\n${TREATMENTS.length} treatments, ${CATEGORIES.length} categories, ${CONCERNS.length} concerns, ${PAGES.length} pages.`);

@@ -61,6 +61,25 @@ All `.tmp/` paths below resolve to `deliver/[client-name]/workflows/04-design/.t
 8. Verify the canary at mobile and desktop against the selected authority: typography, palette,
    density, responsive geometry, interaction, reduced motion, and console state. Record the result
    in `.tmp/canary-review.md` and obtain internal/user approval of the direction.
+   > [!IMPORTANT]
+   > **The canary is built at the review bar, not below it (2026-09-03).** Two Brandklout builds in
+   > a row were rejected whole at first review for the same reason: Stone Surgical Arts v1 ("very
+   > ugly and simple") and Stone Med Spa v1 ("we need to elevate it way more... a lot of high-end
+   > interactions and animations, scroll-based animations, way more imagery and less text"). The
+   > second was eleven correct, well-argued, static pages on flat ivory, and none of that mattered.
+   > The bar the reviewer holds is Awwwards-level, so the canary must carry it from the start:
+   > every page opens on a photograph with the navbar over it; the GSAP vendor bundle ships from
+   > day one; at least three scroll-driven moves per page (a pin, a scrub, a masked image reveal, a
+   > counted numeral, a sideways chapter); the ground colour changes chapter by chapter; body copy
+   > is one sentence per idea. A restrained v1 "to elevate later" costs a full session and is
+   > thrown away. The constraint that still holds is the sibling rule: the techniques may repeat
+   > between two clients' sites, the section shapes may not. Reference implementation:
+   > `deliver/brandklout/stone-med-spa/workflows/04-design/.tmp/med-spa/site-src/css/40-motion.css`
+   > and `js/20-motion.js`, which define a page-agnostic motion vocabulary (`data-split`,
+   > `data-wipe`, `data-parallax`, `data-speed`, `data-count`, `data-hero-pin`, `data-hscroll`,
+   > `data-stack`, `data-words`, `data-drag`) with the three rules every build must keep: nothing
+   > is hidden unless the root carries `.js`; GSAP is optional and every hidden state has a class
+   > fallback; reduced motion is a branch, not a shorter duration.
 9. Freeze the approved tokens, shared shell, component vocabulary, and interaction runtime for this
    batch. Later pages may vary in composition and content, but must not silently choose a new system.
 10. Compose self-contained HTML/CSS/JS prototypes for the remaining approved page templates.

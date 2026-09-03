@@ -27,7 +27,7 @@ import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, process.argv[2] || "../final-site");
-const PORT = 8819;
+const PORT = 0;
 const WIDTHS = [390, 1024, 1440];
 
 const MIME = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".webp": "image/webp", ".jpg": "image/jpeg", ".png": "image/png", ".avif": "image/avif", ".svg": "image/svg+xml", ".woff2": "font/woff2" };
@@ -40,6 +40,7 @@ const server = http.createServer((req, res) => {
   fs.createReadStream(f).pipe(res);
 });
 await new Promise((r) => server.listen(PORT, r));
+const LIVE = server.address().port;
 
 const pages = fs.readdirSync(ROOT).filter((f) => f.endsWith(".html")).sort();
 const browser = await puppeteer.launch({
@@ -61,10 +62,10 @@ for (const file of pages) {
     page.on("console", (m) => { if (m.type() === "error") errors.push(m.text().slice(0, 90)); });
     page.on("request", (r) => {
       const u = r.url();
-      if (!u.startsWith(`http://127.0.0.1:${PORT}`) && !u.startsWith("data:") && !u.startsWith("blob:")) external.push(u.slice(0, 60));
+      if (!u.startsWith(`http://127.0.0.1:${LIVE}`) && !u.startsWith("data:") && !u.startsWith("blob:")) external.push(u.slice(0, 60));
     });
     await page.setViewport({ width, height: 900 });
-    await page.goto(`http://127.0.0.1:${PORT}/${file}`, { waitUntil: "networkidle0", timeout: 60000 });
+    await page.goto(`http://127.0.0.1:${LIVE}/${file}`, { waitUntil: "networkidle0", timeout: 60000 });
     await new Promise((r) => setTimeout(r, 450));
 
     const res = await page.evaluate(() => {
@@ -78,6 +79,9 @@ for (const file of pages) {
           const pcs = getComputedStyle(p);
           if (pcs.visibility === "hidden") return;
           if (pcs.overflowX === "auto" || pcs.overflowX === "scroll") return;
+          // A marquee or a pinned sideways track deliberately holds controls
+          // past the edge; it says so with data-overflow-ok. 2026-09-03.
+          if (p.hasAttribute("data-overflow-ok")) return;
           p = p.parentElement;
         }
         const r = el.getBoundingClientRect();

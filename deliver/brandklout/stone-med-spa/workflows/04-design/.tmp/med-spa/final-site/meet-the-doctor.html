@@ -111,7 +111,8 @@
      `{{CUR_<SLUG>}}` expands to `aria-current="page"` on that page and to
      nothing everywhere else; build-site.mjs matches the token against the page
      slug, lower-cased with underscores turned into hyphens. -->
-<header class="navbar_component is-static" data-nav>
+<header class="navbar_component" data-nav>
+  <span class="navbar_progress" aria-hidden="true"></span>
   <div class="padding-global">
     <div class="container-large">
       <div class="navbar_container">
@@ -182,172 +183,216 @@
 </div>
 
 <main class="main-wrapper" id="main">
-<!-- MEET THE DOCTOR — Asana subtask 3 of 11.
+<!-- MEET THE DOCTOR — Asana subtask 3 of 11. Second build, 2026-09-03.
 
-     The sitemap distinguishes this from About: About is the practice's story,
-     this is the deep bio, and it carries the clinical authority. On a med spa
-     site that authority is the entire differentiator, so the page opens on the
-     credential rather than working up to it. -->
-<section class="section_pagehead pagehead_component is-split">
-  <div class="padding-global">
-    <div class="container-large">
-      <div class="pagehead_inner">
-        <div>
-          <p class="eyebrow">Your injector</p>
-          <h1 class="heading-style-h1 pagehead_title">Dr. Mona Stone, <em class="text-style-display-accent">DDS</em></h1>
-          <p class="text-size-large pagehead_lede">
-            Board-certified oral and maxillofacial surgeon. She came to facial aesthetics from
-            underneath the skin rather than from the surface down, and she performs every
-            injection in this practice herself.
+     The first build was a split header, a credential strip and two text bands.
+     This is four chapters and about 170 words: a full-height cover on her
+     portrait with three counted facts; her three rules as cards that STACK on
+     top of each other as you scroll (data-stack); the under-treat rule as a
+     green statement; and a pinned filmstrip (data-hscroll) of every
+     photograph the practice has of her and the rooms she works in.
+
+     NOT the sibling's magazine profile (no name set behind the portrait, no
+     training ledger, no theatre behind a dark band) and not the home page's
+     surgeon chapter (a portrait with a small frame over its corner). Nothing
+     is claimed here that the first build did not: board-certified oral and
+     maxillofacial surgeon, DDS, English and Spanish, three practices, every
+     injection placed by her. -->
+<section class="section_cover cover_component is-tall doctor_cover">
+  <figure class="cover_media" data-parallax="10">
+    <img src="assets/dr-stone-coat.webp" alt="Dr. Mona Stone, DDS, in a white coat at the Westlake practice" width="1000" height="1482" fetchpriority="high">
+  </figure>
+  <div class="cover_body">
+    <div class="padding-global">
+      <div class="container-large">
+        <div class="cover_inner">
+          <p class="eyebrow is-alternate">Your injector</p>
+          <h1 class="cover_title" data-split data-split-now>Dr. Mona Stone, <em class="text-style-display-accent">DDS</em></h1>
+          <p class="cover_lede">
+            Board-certified oral and maxillofacial surgeon. She came to aesthetics from
+            underneath the skin, and she performs every injection here herself.
           </p>
-          <div class="button-group pagehead_actions">
+          <div class="cover_facts">
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="100" data-suffix="%">100%</span></span><span>of injections placed by her</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="2">2</span></span><span>languages at the chair, English and Spanish</span></p>
+            <p class="cover_fact"><span class="cover_fact-num"><span data-count="3">3</span></span><span>practices under her name</span></p>
+          </div>
+          <div class="button-group cover_actions">
             <a class="button" href="book.html">Book with Dr. Stone</a>
           </div>
         </div>
-        <figure class="pagehead_media">
-          <img src="assets/dr-stone-standing.webp" alt="Dr. Mona Stone, DDS, in a white coat at the Westlake practice" width="988" height="1235" fetchpriority="high">
-        </figure>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section_creds creds_component">
-  <div class="padding-global">
-    <div class="container-large">
-      <div class="padding-section-medium">
-        <div class="creds_grid">
-          <div class="creds_item">
-            <span class="creds_key">OMS</span>
-            <span class="creds_val">Board-certified in oral and maxillofacial surgery — the specialty of the facial skeleton</span>
-          </div>
-          <div class="creds_item">
-            <span class="creds_key">100%</span>
-            <span class="creds_val">Of injections in this practice are placed by her, not delegated</span>
-          </div>
-          <div class="creds_item">
-            <span class="creds_key">2</span>
-            <span class="creds_val">Languages at the chairside — English and Spanish</span>
-          </div>
-          <div class="creds_item">
-            <span class="creds_key">3</span>
-            <span class="creds_val">Practices under her name: implants, surgery and this one</span>
-          </div>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<section class="section_bio band_component">
+<!-- 01 THE THREE RULES, stacked. Each card is sticky at the same offset, so
+     the next one slides over the last and the covered card scales back. -->
+<section class="section_rules doctor_rules">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
-        <div class="band_inner" data-reveal>
-          <figure class="band_media">
-            <img src="assets/dr-stone-desk.webp" alt="Dr. Stone at her desk" width="1000" height="800" loading="lazy">
-          </figure>
-          <div>
-            <p class="eyebrow">The training</p>
-            <h2 class="heading-style-h2 band_title">She learned the face from the <em class="text-style-display-accent">inside</em>.</h2>
-            <div class="text-size-medium band_text">
-              <p>
-                Oral and maxillofacial surgery is the specialty that treats the jaws, the
-                facial bones and the soft tissue over them. It is reconstruction, trauma,
-                implants and orthognathic work — years of operating on the structure that
-                everything cosmetic sits on top of.
-              </p>
-              <p>
-                Aesthetic injection is a small, precise application of that anatomy. Most
-                people who perform it learned it as a procedure. Dr. Stone learned the
-                territory first and the procedure second, which is why her consultations are
-                longer and her first doses are smaller.
-              </p>
-              <p>
-                It is also why she is comfortable telling patients that an injectable is the
-                wrong answer. She has the surgical option available and no commercial reason
-                to avoid recommending it, or to recommend it when it is not needed.
-              </p>
+        <div class="doctor_head">
+          <p class="eyebrow">How she works</p>
+          <h2 class="heading-style-h2" data-split>Three things that do not <em class="text-style-display-accent">change</em>.</h2>
+        </div>
+        <div class="stack_component doctor_stack" data-stack>
+          <article class="stack_item doctor_card">
+            <figure class="doctor_card-media" data-wipe>
+              <span class="wipe_inner" data-parallax="8"><img src="assets/dr-stone-desk.webp" alt="Dr. Stone at her desk" width="700" height="525" loading="lazy"></span>
+            </figure>
+            <div class="doctor_card-body">
+              <span class="doctor_card-num">01</span>
+              <h3 class="doctor_card-title">She trained on the skeleton first.</h3>
+              <p class="doctor_card-text">Years operating on the facial bones and the tissue over them, before the first syringe. Filler goes where the bone has flattened, not where the cheek looks hollow.</p>
             </div>
-          </div>
+          </article>
+          <article class="stack_item doctor_card">
+            <figure class="doctor_card-media" data-wipe>
+              <span class="wipe_inner" data-parallax="8"><img src="assets/gen-injectables.webp" alt="" width="1600" height="900" loading="lazy"></span>
+            </figure>
+            <div class="doctor_card-body">
+              <span class="doctor_card-num">02</span>
+              <h3 class="doctor_card-title">Nothing is delegated.</h3>
+              <p class="doctor_card-text">If Dr. Stone is not in, you are not injected. Fewer appointments a week, every one of them with the surgeon.</p>
+            </div>
+          </article>
+          <article class="stack_item doctor_card">
+            <figure class="doctor_card-media" data-wipe>
+              <span class="wipe_inner" data-parallax="8"><img src="assets/gen-planning.webp" alt="" width="1600" height="900" loading="lazy"></span>
+            </figure>
+            <div class="doctor_card-body">
+              <span class="doctor_card-num">03</span>
+              <h3 class="doctor_card-title">She will say when the answer is surgery.</h3>
+              <p class="doctor_card-text">Past a point, filler adds weight to a face that needs lifting. She has the surgical practice next door and no reason not to say so.</p>
+            </div>
+          </article>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<section class="section_approach band_component is-alt is-flip">
+<!-- 02 THE RULE, on green. One statement, one line, one photograph. -->
+<section class="section_rule doctor_rule" data-theme="green">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
-        <div class="band_inner" data-reveal>
-          <figure class="band_media">
-            <img src="assets/dr-stone-candid.webp" alt="Dr. Stone in consultation" width="1000" height="800" loading="lazy">
-          </figure>
-          <div>
+        <div class="doctor_rule-grid">
+          <div class="doctor_rule-copy">
             <p class="eyebrow">The approach</p>
-            <h2 class="heading-style-h2 band_title">Under-treat first.</h2>
-            <div class="text-size-medium band_text">
-              <p>
-                A first treatment here is deliberately conservative, and you are booked for a
-                review two weeks later. Adding a little more at that review takes five minutes.
-                Removing too much takes three months of waiting.
-              </p>
-              <p>
-                That approach costs the practice a second appointment and saves patients the
-                experience most of them are actually afraid of, which is not the needle. It is
-                walking out looking like they have had something done.
-              </p>
-            </div>
-            <div class="button-group band_actions">
-              <a class="button" href="book.html">Book a consultation</a>
-              <a class="button is-secondary" href="team.html">Meet the rest of the team</a>
+            <h2 class="doctor_rule-title" data-split>Under-treat. Then review at two weeks.</h2>
+            <p class="text-size-medium doctor_rule-text" data-reveal>
+              Adding a little more at the review takes five minutes. Waiting out too much takes three months. So a first dose here is smaller than you expect.
+            </p>
+            <div class="doctor_rule-facts" data-reveal="stagger">
+              <p class="doctor_rule-fact"><span class="doctor_rule-fact-num"><span data-count="30">30</span> min</span><span>the consultation, with her</span></p>
+              <p class="doctor_rule-fact"><span class="doctor_rule-fact-num"><span data-count="2">2</span> wks</span><span>to the review, built into the plan</span></p>
             </div>
           </div>
+          <figure class="doctor_rule-media" data-wipe>
+            <span class="wipe_inner" data-parallax="10"><img src="assets/gen-linen-detail.webp" alt="" width="1600" height="900" loading="lazy"></span>
+          </figure>
         </div>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- 03 THE FILMSTRIP. Pinned; the track travels sideways. Every photograph
+     the practice has of her, and the rooms she works in. Below 991 it is a
+     plain horizontal scroller. -->
+<section class="section_film film_component hscroll_component" data-hscroll>
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="film_head">
+        <div>
+          <p class="eyebrow">In the practice</p>
+          <h2 class="heading-style-h2" data-split>Her, and the <em class="text-style-display-accent">rooms</em>.</h2>
+        </div>
+        <div class="hscroll_bar" aria-hidden="true"><span class="hscroll_bar-fill"></span></div>
+      </div>
+    </div>
+  </div>
+  <div class="hscroll_track film_track" data-overflow-ok>
+    <figure class="film_item is-tall">
+      <img src="assets/dr-stone-standing.webp" alt="Dr. Stone standing at the practice" width="988" height="1482" loading="lazy">
+      <figcaption class="film_caption">Dr. Stone</figcaption>
+    </figure>
+    <figure class="film_item">
+      <img src="assets/ssa-consult-room.webp" alt="The consultation room" width="1748" height="983" loading="lazy">
+      <figcaption class="film_caption">The consultation room</figcaption>
+    </figure>
+    <figure class="film_item is-square">
+      <img src="assets/dr-stone-smile.webp" alt="Dr. Stone" width="550" height="550" loading="lazy">
+      <figcaption class="film_caption">At the desk</figcaption>
+    </figure>
+    <figure class="film_item">
+      <img src="assets/ssa-treatment-room.webp" alt="A treatment room" width="2133" height="1200" loading="lazy">
+      <figcaption class="film_caption">A treatment room</figcaption>
+    </figure>
+    <figure class="film_item is-tall">
+      <img src="assets/dr-stone-portrait.webp" alt="Dr. Stone in the corridor" width="643" height="1020" loading="lazy">
+      <figcaption class="film_caption">Between rooms</figcaption>
+    </figure>
+    <figure class="film_item">
+      <img src="assets/ssa-team.webp" alt="The practice team" width="2133" height="1200" loading="lazy">
+      <figcaption class="film_caption">The team</figcaption>
+    </figure>
+    <figure class="film_item is-square">
+      <img src="assets/dr-stone-candid.webp" alt="Dr. Stone" width="457" height="457" loading="lazy">
+      <figcaption class="film_caption">Off duty</figcaption>
+    </figure>
+    <figure class="film_item">
+      <img src="assets/dr-stone-steps.webp" alt="Dr. Stone on the steps outside" width="646" height="431" loading="lazy">
+      <figcaption class="film_caption">Outside</figcaption>
+    </figure>
+    <figure class="film_item">
+      <img src="assets/ssa-neon.webp" alt="The neon sign in the practice" width="2133" height="1200" loading="lazy">
+      <figcaption class="film_caption">The sign</figcaption>
+    </figure>
+    <figure class="film_item is-link">
+      <a class="film_link" href="team.html">
+        <span class="film_link-text">The people you will actually see.</span>
+        <span class="button is-link">Meet the team <span class="button_arrow">&rarr;</span></span>
+      </a>
+    </figure>
   </div>
 </section>
 
 <!-- The closing invitation, on every page that does not end on its own.
 
-     DELIBERATELY NOT THE SURGICAL ARTS BAND. That one is copy on a Carrara
-     ground at left and Dr. Stone's portrait at right, cropped to the band's
-     height. Repeating it here would make the two sites read as one site with
-     two names, which is the exact failure gotcha 4 is about.
-
-     This is a dark band carrying one display line and three plain facts about
-     what a consultation actually is. The facts are here rather than on the
-     booking page because this band is the last thing on nine pages and the
-     objection it answers - what am I committing to? - is what stops a
-     non-surgical booking. -->
+     Not the Surgical Arts band (copy on Carrara, the portrait at right) and
+     not the first build's marble either. Charcoal with a green light under
+     it, one display line that splits in, two buttons, three plain facts about
+     what a consultation is — the objection this answers, "what am I
+     committing to", is the one that stops a non-surgical booking. -->
 <section class="section_close close_component" id="contact" data-theme="dark">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
-        <div class="close_inner" data-reveal>
-          <p class="eyebrow">Start here</p>
-          <h2 class="heading-style-h2 close_title">
-            One appointment, and a plan for the <em class="text-style-display-accent">year ahead</em>.
-          </h2>
-          <div class="close_facts">
+        <div class="close_inner">
+          <div>
+            <p class="eyebrow">Start here</p>
+            <h2 class="heading-style-h2 close_title" data-split>One appointment. A plan for the <em class="text-style-display-accent">year</em>.</h2>
+            <div class="button-group close_actions" data-reveal>
+              <a class="button" href="book.html">Book a consultation</a>
+              <a class="button is-alternate" href="tel:+18173838361">Call (817) 383-8361</a>
+            </div>
+          </div>
+          <div class="close_facts" data-reveal="stagger">
             <div class="close_fact">
               <span class="close_fact-key">30 minutes</span>
-              <span class="close_fact-val">The length of a consultation. You are assessed by Dr. Stone, not by a coordinator.</span>
+              <span class="close_fact-val">With Dr. Stone, not a coordinator.</span>
             </div>
             <div class="close_fact">
               <span class="close_fact-key">No obligation</span>
-              <span class="close_fact-val">You leave with a written plan and a cadence. Whether you start that day is your call.</span>
+              <span class="close_fact-val">You leave with a written plan. Starting that day is your call.</span>
             </div>
             <div class="close_fact">
-              <span class="close_fact-key">Virtual or in-office</span>
-              <span class="close_fact-val">A first consultation can be taken by video. Anything injected happens in Westlake.</span>
+              <span class="close_fact-key">Video or in person</span>
+              <span class="close_fact-val">A first consultation can be by video. Anything injected happens in Westlake.</span>
             </div>
-          </div>
-          <div class="button-group close_actions">
-            <a class="button" href="book.html">Book a consultation</a>
-            <a class="button is-alternate" href="tel:+18173838361">Call (817) 383-8361</a>
           </div>
         </div>
       </div>
@@ -371,7 +416,7 @@
      and the phone is left at 383-8361 because that is what this pillar's own
      overview records. BOTH need one line of confirmation from the client
      before a domain goes live. See HANDOFF.md. -->
-<footer class="footer_component">
+<footer class="footer_component" data-theme="dark">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-medium">
@@ -449,6 +494,7 @@
 </footer>
 
 </div>
+<script src="assets/vendor.js" defer></script>
 <script src="assets/site.js" defer></script>
 </body>
 </html>

@@ -1,48 +1,60 @@
 /* ===========================================================================
-   THE YEAR — a twelve-month strip showing what a plan actually looks like.
+   THE YEAR — the twelve-month grid, now on the green ground.
 
-   THE SIGNATURE SECTION. If one object on this site has to be the thing nobody
-   confuses with Stone Surgical Arts, it is this one, and it earns its place by
-   answering the question every other med spa site leaves the visitor to work
-   out on their own: how often am I here, and for what.
+   THE SIGNATURE SECTION, kept from the first build because it is the one
+   object that answers the question every other med spa leaves open: how often
+   am I here, and for what. What changed: it sits on brand green with charcoal
+   ink (data-theme="green" in 01-tokens.css remaps every semantic token, so
+   nothing below names a colour), the dots POP IN month by month when the grid
+   arrives (data-in -> .is-in), and the runs draw themselves from left to
+   right. Three counted numerals sit beside the heading.
 
-   It is a grid, twelve columns wide, one row per treatment in a sample plan.
-   A dot in a cell is an appointment. Read across a row and you see a treatment
-   cadence; read down a column and you see a month. That is the whole idea, and
-   it is why this is a grid and not a list of cards.
+   The grid rules — every child placed explicitly, month N in column N + 1,
+   the run as a grid item with a computed margin — are unchanged; see gotcha
+   14 in .claude/RUNBOOK.md for why.
 
-   THE PLAN IS AN ILLUSTRATION, NOT A PRESCRIPTION. The markup says so, in the
-   section, not in a footnote — a sample plan on a medical site that does not
-   say it is a sample is a claim about your treatment. Clinical review is
-   outstanding on the intervals; see treatments-data.mjs.
-
-   Below 767 the grid stops being a grid. A twelve-column matrix on a 390px
-   screen is unreadable at any type size, so it re-forms as a list BY MONTH,
-   which is the same information read the other way round.
+   Below 767 the grid becomes a list by month, as before.
    =========================================================================== */
 .cadence_component {
-  background-color: var(--bg-alt);
   overflow: hidden;
 }
 .cadence_head {
   display: grid;
-  grid-template-columns: minmax(0, 30rem) 1fr;
-  gap: 4rem;
+  grid-template-columns: minmax(0, 1.2fr) minmax(0, 1fr);
+  gap: 3rem 5rem;
   align-items: end;
   margin-bottom: 3.5rem;
 }
-.cadence_note {
-  max-width: 46ch;
+.cadence_stats {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--line-strong);
+}
+.cadence_stat {
+  display: grid;
+  gap: 0.4rem;
+  font-size: var(--size-text-small);
+  line-height: 1.45;
   color: var(--fg-body);
+}
+.cadence_stat-num {
+  font-family: var(--font-display);
+  font-size: clamp(2.4rem, 4vw, 3.6rem);
+  line-height: 1;
+  color: var(--fg);
+}
+.cadence_foot {
+  margin-top: 2rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
 }
 
 .cadence_grid {
   --cad-label: 13rem;
   position: relative;
 }
-
-/* The month header. Same column template as every plan row, so the labels sit
-   over the cells they name and stay over them at every width. */
 .cadence_months,
 .cadence_row {
   display: grid;
@@ -51,7 +63,7 @@
 }
 .cadence_months {
   padding-bottom: 0.85rem;
-  border-bottom: 1px solid var(--charcoal);
+  border-bottom: 1px solid var(--fg);
 }
 .cadence_month {
   text-align: center;
@@ -67,12 +79,13 @@
   letter-spacing: 0.16em;
   color: var(--fg-mute);
 }
-
 .cadence_row {
   border-bottom: 1px solid var(--line);
-  min-height: 4.15rem;
+  min-height: 4.4rem;
 }
 .cadence_label {
+  grid-column: 1;
+  grid-row: 1;
   padding-right: 1.5rem;
 }
 .cadence_label-name {
@@ -88,29 +101,6 @@
   font-size: var(--size-text-tiny);
   color: var(--fg-mute);
 }
-
-/* A cell is a click target on the desktop grid only in the sense that it has a
-   tooltip; the dot is the mark. The vertical hairline is what makes a column
-   readable as a month all the way down the stack. */
-/* EVERY CHILD OF A ROW IS PLACED EXPLICITLY. Nothing here is auto-placed, and
-   that is not tidiness, it is the fix for a real bug.
-
-   The run below is placed explicitly, by necessity — it spans a computed pair
-   of columns. In CSS grid, explicitly-placed items are positioned first and
-   auto-placed items then fill what is LEFT. So the run sat across columns 2 to
-   11, the twelve cells found those occupied, and they wrapped into implicit
-   rows: every treatment rendered as two stacked half-rows with its dots in the
-   wrong months. It looked plausible enough in a full-page screenshot to nearly
-   pass, and only reading the computed grid-column of each cell showed it.
-
-   Mixing explicit and auto placement in one grid is the trap. So the label
-   takes column 1, each cell takes its own month column by class, and the run
-   spans between them; auto-placement never runs at all and DOM order stops
-   mattering. */
-.cadence_label {
-  grid-column: 1;
-  grid-row: 1;
-}
 .cadence_cell {
   grid-row: 1;
   position: relative;
@@ -120,7 +110,6 @@
   justify-content: center;
   border-left: 1px solid var(--line);
 }
-/* Month N is grid column N + 1, because column 1 is the treatment label. */
 .cadence_cell.is-m1 { grid-column: 2; }
 .cadence_cell.is-m2 { grid-column: 3; }
 .cadence_cell.is-m3 { grid-column: 4; }
@@ -133,49 +122,78 @@
 .cadence_cell.is-m10 { grid-column: 11; }
 .cadence_cell.is-m11 { grid-column: 12; }
 .cadence_cell.is-m12 { grid-column: 13; }
+
 .cadence_dot {
-  width: 0.72rem;
-  height: 0.72rem;
+  width: 0.85rem;
+  height: 0.85rem;
   border-radius: 50%;
-  background-color: var(--accent-flat);
-  box-shadow: 0 0 0 0 rgba(143, 188, 70, 0.5);
-  transition: box-shadow 0.4s var(--ease), transform 0.3s var(--ease);
+  background-color: var(--fg);
+  transition: transform 0.3s var(--ease);
 }
-/* The first appointment in a row is the one that starts the plan, so it reads
-   as a ring rather than a fill — it is a different kind of visit. */
 .cadence_dot.is-start {
   background-color: transparent;
-  border: 2px solid var(--charcoal);
+  border: 2px solid var(--fg);
 }
 .cadence_row:hover .cadence_dot {
-  transform: scale(1.18);
+  transform: scale(1.25);
 }
-
-/* A run — the band drawn between the first and last appointment in a row, so
-   the INTERVAL reads as a length rather than being inferred from two dots.
-
-   It is a GRID ITEM spanning the columns it covers, not an absolutely
-   positioned bar. Absolute positioning would have to know the label column's
-   width to compute a left offset, and that width changes at three breakpoints
-   (--cad-label), so the bar and the dots would drift apart on exactly the
-   screens nobody re-checks. As a grid item it is placed by the same track
-   definition that places the dots, and it cannot disagree with them.
-
-   grid-row: 1 puts it in the row's only row, alongside the cells rather than
-   after them; the cells are position: relative and therefore paint above it. */
 .cadence_run {
   grid-row: 1;
   align-self: center;
-  height: 1px;
-  background-color: var(--line-strong);
+  height: 2px;
+  background-color: var(--fg);
+  opacity: 0.45;
   pointer-events: none;
+  transform-origin: 0 50%;
+}
+
+/* the arrival: dots pop in by month, runs draw left to right */
+.js [data-in] .cadence_dot {
+  transform: scale(0);
+}
+.js [data-in] .cadence_run {
+  transform: scaleX(0);
+}
+.js [data-in].is-in .cadence_dot {
+  animation: cadence-pop 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.4) both;
+}
+.js [data-in].is-in .cadence_run {
+  animation: cadence-draw 1.4s var(--ease) 0.2s both;
+}
+.js [data-in].is-in .is-m1 .cadence_dot { animation-delay: 0.1s; }
+.js [data-in].is-in .is-m2 .cadence_dot { animation-delay: 0.18s; }
+.js [data-in].is-in .is-m3 .cadence_dot { animation-delay: 0.26s; }
+.js [data-in].is-in .is-m4 .cadence_dot { animation-delay: 0.34s; }
+.js [data-in].is-in .is-m5 .cadence_dot { animation-delay: 0.42s; }
+.js [data-in].is-in .is-m6 .cadence_dot { animation-delay: 0.5s; }
+.js [data-in].is-in .is-m7 .cadence_dot { animation-delay: 0.58s; }
+.js [data-in].is-in .is-m8 .cadence_dot { animation-delay: 0.66s; }
+.js [data-in].is-in .is-m9 .cadence_dot { animation-delay: 0.74s; }
+.js [data-in].is-in .is-m10 .cadence_dot { animation-delay: 0.82s; }
+.js [data-in].is-in .is-m11 .cadence_dot { animation-delay: 0.9s; }
+.js [data-in].is-in .is-m12 .cadence_dot { animation-delay: 0.98s; }
+@keyframes cadence-pop {
+  from {
+    transform: scale(0);
+  }
+  to {
+    transform: scale(1);
+  }
+}
+@keyframes cadence-draw {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
 }
 
 .cadence_legend {
   display: flex;
   flex-wrap: wrap;
   gap: 1.1rem 2.4rem;
-  margin-top: 2.4rem;
+  margin-top: 2rem;
   font-size: var(--size-text-small);
   color: var(--fg-mute);
 }
@@ -185,20 +203,18 @@
   gap: 0.6rem;
 }
 .cadence_legend-dot {
-  width: 0.72rem;
-  height: 0.72rem;
+  width: 0.85rem;
+  height: 0.85rem;
   border-radius: 50%;
-  background-color: var(--accent-flat);
+  background-color: var(--fg);
   flex: 0 0 auto;
 }
 .cadence_legend-dot.is-start {
   background-color: transparent;
-  border: 2px solid var(--charcoal);
+  border: 2px solid var(--fg);
 }
 
-/* --- the phone version ----------------------------------------------------
-   The same plan, read by month instead of by treatment. Hidden on desktop and
-   the grid is hidden here, so the two never both render. -------------------- */
+/* --- the phone version ------------------------------------------------------ */
 .cadence_bymonth {
   display: none;
 }
@@ -212,7 +228,7 @@
 .cadence_bymonth-month {
   font-family: var(--font-display);
   font-size: var(--size-h5);
-  color: var(--accent);
+  color: var(--fg);
 }
 .cadence_bymonth-list {
   list-style: none;
@@ -226,6 +242,17 @@
   color: var(--fg-mute);
 }
 
+/* Reduced motion is a branch: the dots and runs are simply there. Relying on a
+   0.01ms animation to land them was not enough — the full-page capture, which
+   emulates reduced motion, showed an empty grid. */
+@media (prefers-reduced-motion: reduce) {
+  .js [data-in] .cadence_dot,
+  .js [data-in] .cadence_run {
+    transform: none !important;
+    animation: none !important;
+  }
+}
+
 @media (max-width: 1279px) {
   .cadence_grid {
     --cad-label: 10.5rem;
@@ -234,7 +261,7 @@
 @media (max-width: 991px) {
   .cadence_head {
     grid-template-columns: 1fr;
-    gap: 1.4rem;
+    gap: 2rem;
   }
   .cadence_grid {
     --cad-label: 9rem;
@@ -251,6 +278,15 @@
   }
   .cadence_bymonth {
     display: block;
-    border-top: 1px solid var(--charcoal);
+    border-top: 1px solid var(--fg);
+  }
+  .cadence_stats {
+    grid-template-columns: 1fr;
+    gap: 1rem;
+  }
+  .cadence_stat {
+    grid-template-columns: 6rem 1fr;
+    align-items: baseline;
+    gap: 1rem;
   }
 }

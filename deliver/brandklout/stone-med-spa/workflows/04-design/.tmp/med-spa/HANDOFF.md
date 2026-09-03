@@ -1,7 +1,38 @@
 # Stone Med Spa — handoff
 
-**Built 2026-09-03.** Eleven core pages, local only. Nothing has been published and no Instatic
-instance exists for this brand.
+**Built 2026-09-03, rebuilt the same day.** Eleven core pages, local only. Nothing has been
+published and no Instatic instance exists for this brand.
+
+> [!IMPORTANT]
+> **2026-09-03, EVENING: THE SECOND BUILD.** The first build (below, kept for its reasoning) was
+> reviewed the day it was finished: *"I didn't like the result. We need to elevate it way more
+> like on Surgical Stone... maintain the colours but try to use them differently. Make different
+> layouts... a site with a lot of high-end interactions and animations, scroll-based animations,
+> way more imagery and less text."* Every one of the eleven pages was rebuilt to that brief.
+>
+> **What changed, and where to read why:**
+>
+> | | first build | second build |
+> | :-- | :-- | :-- |
+> | Ground | flat ivory, one dark band | the five colours as grounds in turn: charcoal hero, ivory, **stone**, **green**, ivory, dark, ivory, dark close and a dark footer (`01-tokens.css` grew `[data-theme="green"]` and `[data-theme="stone"]`) |
+> | Motion | IntersectionObserver reveals | GSAP + ScrollTrigger + SplitText on every page (`motion: true`), and a page-agnostic vocabulary in `css/40-motion.css` + `js/20-motion.js`: `data-split`, `data-wipe`, `data-parallax`, `data-speed`, `data-count`, `data-hero-pin`, `data-hscroll`, `data-stack`, `data-words`, `data-drag`, the marquee, a custom cursor, magnetic buttons, a progress hairline |
+> | Interior headers | eyebrow + H1 on ivory | a photograph with the navbar over it, on every page (`css/49-cover.css`) |
+> | Imagery | 33 files, ~12 used | 72 files (the sibling's model library, the practice's own photographs, the previous site's masthead portrait converted from the Drive export, five lifestyle images from the old blog), four to nineteen photographs per page |
+> | Copy | ~450 words on the home page | ~260; every page cut by half or more |
+> | Radius | 2px | pills and 1.25–1.75rem frames — the one aesthetic deviation from the Surgical Arts style guide, and it is deliberate (see the token comment) |
+> | Marble | one dark marble band | none anywhere |
+>
+> **Page by page** (each stylesheet opens with its thesis): home `50-hero` `51-mosaic` `53-shelf` `52-cadence` `54-surgeon` `55-words` `56-place` `58-close`; about `61-about` (three stacked names, the line on stone, three rules, a drag rail of the rooms); team `62-team` (wipe-in portraits, a pinned filmstrip); treatments `57-menu` (concern chips on green, generated rows with index numerals and round portraits, two doors on stone); botox `59-detail` (sticky spec card, four products as stacked cards, care lists, the reserved frame on the dark section); results `65-proof` (drag rail of reviews with portraits between, the empty plates on stone); financing + membership `63-plan` (stacked ways to pay, the dark principle band, tiers as a split on stone, the year grid on green); doctor `66-doctor` (stacked rules, the under-treat rule on green, a pinned filmstrip of every doctor photograph); book + thank-you `64-book` (split screen with a sticky frame, the phone at display size, the self-drawing check).
+>
+> **Gates:** `audit.mjs` FAIL none · `all-pages.mjs` 11 × 3 widths, 132 assertions clean ·
+> `menu-test.mjs` 9/9 · `probe.mjs` console clean on every page with motion on. `probe.mjs` is
+> new: it captures the VIEWPORT at scroll stops with motion enabled, which is the only way to see
+> a pin or a scrub — `shot.mjs` emulates reduced motion on purpose.
+>
+> **Nothing about the open items below changed.** Every placeholder survived the rebuild, shorter:
+> reviews are placeholders, the gallery is a reserved consent frame, team roles are unconfirmed,
+> the tiers are a proposal, the vendors are unconfirmed, the form is inert, the domain and trading
+> name are unresolved, and there is still no price anywhere.
 
 ---
 
@@ -69,7 +100,7 @@ layer, navbar, drawer, footer, brand wordmark, FAQ and motion CSS. `css/01-token
 build's file with only the comment changed.
 
 **Nothing from its 50-journey / 51-dossier / 52-elevate / 53-hub / 54-profile / 55-about /
-56-offers was copied.** Every section stylesheet from `49-pagehead.css` onward is new, per gotcha 4
+56-offers was copied.** Every section stylesheet from `49-cover.css` onward is new, per gotcha 4
 in the runbook — two brands sharing a surgeon, an address and a palette have to differ somewhere,
 and where they differ is the layout.
 

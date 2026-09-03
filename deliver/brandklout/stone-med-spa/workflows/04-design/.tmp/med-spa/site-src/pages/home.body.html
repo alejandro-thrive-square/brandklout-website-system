@@ -1,110 +1,89 @@
-<!-- HOME. Eight sections and about 450 words, which makes it the lightest page
-     in the set on purpose: the home page's job is to state the difference, show
-     the menu and the rhythm, and get out of the way. Every page it links to is
-     deeper than it is. -->
+<!-- HOME, second build, 2026-09-03.
 
-<!-- 1. THE HERO. The only full-bleed photographic header on the site, and the
-     only page where the navbar starts transparent (photoHero: true). The rail
-     across the bottom is the menu and the commitment in one object — see the
-     note at the top of css/50-hero.css. -->
-<section class="section_hero hero_component">
-  <figure class="hero_media">
-    <img src="assets/m-hero.webp" alt="" width="1400" height="1750" fetchpriority="high">
+     The first build was eight sections and 450 words on flat ivory, and the
+     client's review was that it was not elevated enough: high-end interactions,
+     scroll-based animation, far more imagery, far less text, the colours used
+     differently. This is that. Nine chapters, about 260 words, nineteen
+     photographs, and every chapter moves.
+
+     THE COLOUR ORDER IS THE STRUCTURE. Dark hero, ivory, ivory, STONE, GREEN,
+     ivory, dark, ivory, dark close. Surgical Arts is ivory-and-Carrara with one
+     dark band; this page runs the same five colours as grounds in turn, and the
+     green chapter is the year grid — the signature object — because brand
+     green as a ground is the one thing the sibling never does. -->
+
+<!-- 00 THE HERO. Full-bleed photograph on charcoal, pinned: over one viewport
+     of scroll the picture shrinks into a rounded frame and the headline lifts
+     away (data-hero-pin, 20-motion.js). The photograph is the previous site's
+     own masthead portrait — warm, sunlit, skin — and it is a model shown as a
+     person, per the rule at the top of treatments-data.mjs. -->
+<section class="section_hero hero_component" data-hero-pin>
+  <figure class="hero_media" data-parallax="0">
+    <img src="assets/m-glow-hat.webp" alt="" width="2200" height="1185" fetchpriority="high">
   </figure>
   <div class="hero_body">
     <div class="padding-global">
       <div class="container-large">
+        <div class="hero_top">
+          <p class="hero_meta">
+            <span>Westlake, Texas</span>
+            <span>Non-surgical, by a surgeon</span>
+          </p>
+        </div>
         <div class="hero_copy">
-          <p class="eyebrow">Westlake, Texas</p>
-          <h1 class="heading-style-h1 hero_title">
-            <span class="hero_break">The surgeon</span>
-            <span class="hero_break"><em class="text-style-display-accent">does your</em> injectables.</span>
-          </h1>
-          <p class="text-size-large hero_lede">
-            Not an aesthetician. Not a nurse the surgeon supervises. Dr. Mona Stone is a
-            board-certified oral and maxillofacial surgeon, and she is the person holding
-            the syringe.
+          <p class="eyebrow is-alternate">Stone Med Spa</p>
+          <h1 class="hero_title" data-split data-split-now>Injectables, by the surgeon.</h1>
+          <p class="hero_lede">
+            Every injection here is placed by Dr. Mona Stone, a board-certified oral and
+            maxillofacial surgeon. Nothing is delegated.
           </p>
           <div class="button-group hero_actions">
             <a class="button" href="book.html">Book a consultation</a>
-            <a class="button is-alternate" href="treatments.html">See all seven treatments</a>
+            <a class="button is-alternate" href="treatments.html">The seven treatments</a>
           </div>
         </div>
-      </div>
-    </div>
-  </div>
-
-  <div class="hero_rail">
-    <div class="padding-global">
-      <div class="container-large">
-        <p class="hero_rail-legend">
-          <span>What we do, and how often</span>
-          <span class="hero_rail-hint">Scroll the row &rarr;</span>
-        </p>
-      </div>
-    </div>
-    <div class="padding-global">
-      <div class="container-large">
-        <div class="hero_rail-inner">
-{{HERO_RAIL}}
+        <div class="hero_foot">
+          <p class="hero_scroll" aria-hidden="true"><span>Scroll</span><i></i></p>
+          <p class="hero_who">Dr. Mona Stone, DDS &middot; Oral &amp; maxillofacial surgeon</p>
         </div>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 2. THE PREMISE. The one section on the site that argues rather than
-     describes. Three points, and the third is the uncomfortable one, which is
-     why it is last and why it names the alternative plainly. -->
-<section class="section_premise premise_component">
+<!-- THE TICKER. The seven treatments and how often each one recurs, as one
+     continuous strip. Generated from treatments-data.mjs, so it cannot list a
+     treatment the menu does not have. -->
+<section class="section_ticker marquee_component" aria-label="The seven treatments">
+  <div class="marquee_track" data-overflow-ok data-speed-px="55">
+{{TICKER}}
+  </div>
+</section>
+
+<!-- 01 THE PREMISE, as a statement and a mosaic. One sentence of argument, three
+     photographs drifting at their own speeds, three lines of why. -->
+<section class="section_mosaic mosaic_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
-        <div class="premise_inner">
-          <div class="premise_statement" data-reveal>
-            <p class="eyebrow">Why here</p>
-            <h2 class="heading-style-h2">Anatomy is the <em class="text-style-display-accent">whole job</em>.</h2>
-            <p class="text-size-medium premise_kicker">
-              A syringe is easy to hold. Knowing what is under the skin at that exact point,
-              and what happens over the next ten years if you keep putting product there, is
-              a different qualification entirely.
-            </p>
-          </div>
-          <div class="premise_points" data-reveal="stagger">
-            <div class="premise_point">
-              <span class="premise_num">01</span>
-              <div>
-                <h3 class="heading-style-h5 premise_point-title">She trained on the skeleton first</h3>
-                <p class="text-size-small premise_point-text">
-                  An oral and maxillofacial surgeon spends years operating on the facial bones
-                  and the soft tissue over them. Filler placed by someone who has seen that
-                  anatomy from the inside goes on the bone that has flattened, not into the
-                  cheek that looks hollow.
-                </p>
-              </div>
-            </div>
-            <div class="premise_point">
-              <span class="premise_num">02</span>
-              <div>
-                <h3 class="heading-style-h5 premise_point-title">Nothing is delegated</h3>
-                <p class="text-size-small premise_point-text">
-                  Every injection in this practice is placed by Dr. Stone. That is unusual, it
-                  limits how many patients we can take in a week, and it is the reason to come
-                  here rather than somewhere with more appointment slots.
-                </p>
-              </div>
-            </div>
-            <div class="premise_point">
-              <span class="premise_num">03</span>
-              <div>
-                <h3 class="heading-style-h5 premise_point-title">She will tell you when the answer is surgery</h3>
-                <p class="text-size-small premise_point-text">
-                  There is a point past which filler stops helping and starts adding weight to
-                  a face that needs lifting. A practice that only sells injectables has no
-                  reason to say so. This one has a surgical practice next door and says it.
-                </p>
-              </div>
-            </div>
+        <div class="mosaic_head">
+          <p class="eyebrow">Why here</p>
+          <h2 class="heading-style-h2 mosaic_title" data-split>Anatomy is the <em class="text-style-display-accent">whole</em> job.</h2>
+        </div>
+        <div class="mosaic_grid">
+          <figure class="mosaic_frame is-a" data-speed="0.35">
+            <span class="wipe_frame" data-wipe><img src="assets/m-jawline.webp" alt="" width="1200" height="1200" loading="lazy"></span>
+          </figure>
+          <figure class="mosaic_frame is-b" data-speed="-0.2">
+            <span class="wipe_frame" data-wipe><img src="assets/gen-injectables.webp" alt="" width="1600" height="900" loading="lazy"></span>
+          </figure>
+          <figure class="mosaic_frame is-c" data-speed="0.15">
+            <span class="wipe_frame" data-wipe><img src="assets/m-neck-soft.webp" alt="" width="1200" height="1200" loading="lazy"></span>
+          </figure>
+          <div class="mosaic_points" data-reveal="stagger">
+            <p class="mosaic_point"><span class="mosaic_num">01</span>She trained on the facial skeleton before she ever held a syringe.</p>
+            <p class="mosaic_point"><span class="mosaic_num">02</span>Nothing is delegated. Fewer appointments a week, all of them with her.</p>
+            <p class="mosaic_point"><span class="mosaic_num">03</span>She will tell you when the honest answer is surgery, because she does that too.</p>
           </div>
         </div>
       </div>
@@ -112,98 +91,84 @@
   </div>
 </section>
 
-<!-- 3. THE YEAR. The signature section — see css/52-cadence.css. It is here,
-     third, rather than further down, because the cadence is the thing that
-     distinguishes non-surgical care from surgery and the visitor has just been
-     told the practice is surgical. -->
-<section class="section_cadence cadence_component">
+<!-- 02 THE SHELF. The menu as seven expanding panels on the stone ground.
+     Hover opens on a desktop; a tap opens on a phone and a second tap follows
+     the link. Generated from treatments-data.mjs. -->
+<section class="section_shelf shelf_section" data-theme="stone">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
-        <div class="cadence_head" data-reveal>
+        <div class="shelf_head">
+          <div>
+            <p class="eyebrow">The menu</p>
+            <h2 class="heading-style-h2" data-split>Seven treatments. <em class="text-style-display-accent">No more.</em></h2>
+          </div>
+          <a class="button is-secondary" href="treatments.html">The whole menu</a>
+        </div>
+        <div class="shelf_component">
+{{SHELF}}
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- 03 THE RHYTHM. The signature object on the signature ground: the year
+     grid, on brand green. The dots pop in month by month as it arrives. -->
+<section class="section_cadence cadence_component" data-theme="green">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="cadence_head">
           <div>
             <p class="eyebrow">The rhythm</p>
-            <h2 class="heading-style-h2">What a year <em class="text-style-display-accent">actually</em> looks like.</h2>
+            <h2 class="heading-style-h2" data-split>A year, not <em class="text-style-display-accent">an event</em>.</h2>
           </div>
-          <p class="text-size-medium cadence_note">
-            Nobody tells you this part before you start. Non-surgical results are not an
-            event, they are a schedule — and it is a lighter one than most people expect.
-            This is a sample plan for someone starting in January.
-          </p>
+          <div class="cadence_stats">
+            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="4">4</span></span><span>visits a year is the usual cadence</span></p>
+            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="15">15</span> min</span><span>the shortest appointment on the menu</span></p>
+            <p class="cadence_stat"><span class="cadence_stat-num"><span data-count="0">0</span></span><span>treatments here that need an incision</span></p>
+          </div>
         </div>
+        <div data-in>
 {{CADENCE_GRID}}
-        <p class="text-size-small text-style-muted proof_note">
-          An illustration, not a prescription. Your plan depends on what you want to change,
-          what your skin does and what your calendar allows. Dr. Stone writes yours at the
-          consultation.
-        </p>
+        </div>
+        <p class="cadence_foot">A sample plan for someone starting in January. Yours is written at the consultation.</p>
       </div>
     </div>
   </div>
 </section>
 
-<!-- 4. THE MENU, as three shelves. The full table is on /treatments; this is
-     the doorway to it. Reuses .related_grid from 53-detail.css — a card grid is
-     a component, not a section shape. -->
-<section class="section_menu related_component">
+<!-- 04 THE SURGEON. Her portrait, a second frame drifting over its corner,
+     and three counted facts. The full page is one click away. -->
+<section class="section_surgeon surgeon_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
-        <div data-reveal>
-          <p class="eyebrow">The menu</p>
-          <h2 class="heading-style-h2">Seven treatments. <em class="text-style-display-accent">No more than that.</em></h2>
-          <p class="text-size-medium premise_kicker">
-            A short menu is a decision, not a limitation. These are the seven Dr. Stone
-            performs often enough to be genuinely good at.
-          </p>
-        </div>
-        <div class="related_grid" data-reveal="stagger">
-          <a class="related_card" href="treatments.html#botox">
-            <span class="related_card-meta">Injectables</span>
-            <h3 class="heading-style-h4">Botox, Xeomin, Dysport, Jeuveau &amp; fillers</h3>
-            <p class="text-size-small text-style-muted">Four neuromodulators and hyaluronic acid. Fifteen to forty-five minutes.</p>
-          </a>
-          <a class="related_card" href="treatments.html#morpheus8">
-            <span class="related_card-meta">Skin &amp; resurfacing</span>
-            <h3 class="heading-style-h4">Morpheus8 &amp; chemical peels</h3>
-            <p class="text-size-small text-style-muted">Controlled injury, then repair. These run as a series and improve for months.</p>
-          </a>
-          <a class="related_card" href="treatments.html#prp">
-            <span class="related_card-meta">Restoration</span>
-            <h3 class="heading-style-h4">PRP &amp; hair restoration</h3>
-            <p class="text-size-small text-style-muted">Your own platelets, returned to the tissue. The slowest and the longest-lasting.</p>
-          </a>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- 5. DR. STONE. A band, not a profile — the full page is one click away. -->
-<section class="section_doctor band_component">
-  <div class="padding-global">
-    <div class="container-large">
-      <div class="padding-section-large">
-        <div class="band_inner" data-reveal>
-          <figure class="band_media">
-            <img src="assets/dr-stone-portrait.webp" alt="Dr. Mona Stone, DDS, at the Westlake practice" width="1000" height="800" loading="lazy">
-          </figure>
-          <div>
+        <div class="surgeon_grid">
+          <div class="surgeon_media">
+            <figure class="surgeon_frame" data-wipe>
+              <span class="wipe_inner" data-parallax="10"><img src="assets/dr-stone-coat.webp" alt="Dr. Mona Stone, DDS, at the Westlake practice" width="1000" height="1482" loading="lazy"></span>
+            </figure>
+            <figure class="surgeon_frame-small" data-speed="-0.25">
+              <img src="assets/dr-stone-candid.webp" alt="" width="457" height="457" loading="lazy">
+            </figure>
+          </div>
+          <div class="surgeon_copy">
             <p class="eyebrow">Your injector</p>
-            <h2 class="heading-style-h2 band_title">Dr. Mona Stone, <em class="text-style-display-accent">DDS</em></h2>
-            <div class="text-size-medium band_text">
-              <p>
-                Board-certified in oral and maxillofacial surgery. She built her practice around
-                the facial skeleton — implants, jaws, reconstruction — and came to aesthetics
-                from underneath it rather than from the surface down.
-              </p>
-              <p>
-                She speaks English and Spanish, and she does the consultation herself, which is
-                why it takes thirty minutes rather than ten.
-              </p>
+            <h2 class="heading-style-h2" data-split>She learned the face from the <em class="text-style-display-accent">inside</em>.</h2>
+            <p class="text-size-medium surgeon_text" data-reveal>
+              Oral and maxillofacial surgery is the specialty of the facial bones and the tissue
+              over them. Dr. Stone came to aesthetics from underneath, which is why her first
+              doses are smaller and her consultations longer.
+            </p>
+            <div class="surgeon_facts" data-reveal="stagger">
+              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="100" data-suffix="%">100%</span></span><span>of injections placed by her</span></p>
+              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="30">30</span></span><span>minute consultation, with her</span></p>
+              <p class="surgeon_fact"><span class="surgeon_fact-num"><span data-count="2">2</span></span><span>languages at the chair</span></p>
             </div>
-            <div class="button-group band_actions">
-              <a class="button is-secondary" href="meet-the-doctor.html">Read her full background</a>
+            <div class="button-group" data-reveal>
+              <a class="button is-secondary" href="meet-the-doctor.html">Meet Dr. Stone</a>
             </div>
           </div>
         </div>
@@ -212,106 +177,82 @@
   </div>
 </section>
 
-<!-- 6. REVIEWS. Three, in full, rather than a carousel of fragments. The
-     honest note about the gallery belongs on /results, not here — the home page
-     links to it and the explanation lives where the gap is. -->
-<section class="section_reviews reviews_component">
+<!-- 05 THE WORDS. The one dark chapter in the middle: a sentence whose last
+     word keeps changing, and a rail of reviews you drag. -->
+<section class="section_words words_section" data-theme="dark">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
-        <div data-reveal>
+        <h2 class="words_title" data-reveal>
+          You will look
+          <span class="words_component" data-words="2200" aria-label="rested">
+            <span class="words_item text-style-display-accent">rested.</span>
+            <span class="words_item text-style-display-accent">like yourself.</span>
+            <span class="words_item text-style-display-accent">awake.</span>
+            <span class="words_item text-style-display-accent">not done.</span>
+          </span>
+        </h2>
+        <div class="words_rail-head" data-drag-scope>
           <p class="eyebrow">In their words</p>
-          <h2 class="heading-style-h2">What patients say.</h2>
+          <div class="words_arrows">
+            <button class="button is-icon" type="button" data-drag-prev aria-label="Previous review"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M10 3 5 8l5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+            <button class="button is-icon" type="button" data-drag-next aria-label="Next review"><svg viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="m6 3 5 5-5 5" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg></button>
+          </div>
         </div>
-        <div class="reviews_grid" data-reveal="stagger">
-          <article class="review_card">
-            <span class="review_stars" aria-label="Five out of five">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-            </span>
-            <p class="review_quote">She talked me out of half of what I came in asking for.</p>
-            <p class="review_body">
-              I had a list. She went through it and told me two of the things on it would not
-              do what I thought, and that one of them would make it worse. I have never had
-              that happen anywhere else.
-            </p>
-            <p class="review_meta">Google review</p>
-          </article>
-          <article class="review_card">
-            <span class="review_stars" aria-label="Five out of five">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-            </span>
-            <p class="review_quote">Nobody can tell. That was the entire point.</p>
-            <p class="review_body">
-              My sister asked if I had been sleeping better. That is the review. I did not want
-              to look done, I wanted to look like I was not tired, and that is what happened.
-            </p>
-            <p class="review_meta">Google review</p>
-          </article>
-          <article class="review_card">
-            <span class="review_stars" aria-label="Five out of five">
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-              <svg viewBox="0 0 16 16" fill="currentColor" aria-hidden="true"><path d="M8 1.5l1.9 3.9 4.3.6-3.1 3 .7 4.3L8 11.3 4.2 13.3l.7-4.3-3.1-3 4.3-.6L8 1.5z"/></svg>
-            </span>
-            <p class="review_quote">A surgeon, for the price of a med spa appointment.</p>
-            <p class="review_body">
-              I did not realise until my second visit that she is an actual oral surgeon. It
-              explains why the consultation was so much more specific than the last three
-              places I went to.
-            </p>
-            <p class="review_meta">Google review</p>
-          </article>
-        </div>
-        <p class="text-size-small text-style-muted proof_note">
-          These three are representative of the practice's public Google reviews.
-          <strong>They are placeholders pending a verbatim pull with the reviewer names the
-          client is willing to publish</strong> — see HANDOFF.md. Nothing here is invented about
-          a treatment or an outcome, but the exact wording must be replaced with real reviews
-          before this page goes live.
-          <a class="text-style-link" href="results.html">All reviews and results</a>.
-        </p>
       </div>
+    </div>
+  </div>
+  <div class="padding-global">
+    <div class="words_rail" data-drag data-cursor="Drag" data-overflow-ok>
+      <article class="quote_card">
+        <p class="quote_text">&ldquo;She talked me out of half of what I came in asking for.&rdquo;</p>
+        <p class="quote_meta">Google review &middot; placeholder pending the verbatim pull</p>
+      </article>
+      <article class="quote_card">
+        <p class="quote_text">&ldquo;Nobody can tell. That was the entire point.&rdquo;</p>
+        <p class="quote_meta">Google review &middot; placeholder pending the verbatim pull</p>
+      </article>
+      <article class="quote_card">
+        <p class="quote_text">&ldquo;A surgeon, for the price of a med spa appointment.&rdquo;</p>
+        <p class="quote_meta">Google review &middot; placeholder pending the verbatim pull</p>
+      </article>
+      <article class="quote_card is-link">
+        <a class="quote_link" href="results.html">
+          <span class="quote_text">All reviews, and what we cannot show you yet.</span>
+          <span class="button is-link">Results <span class="button_arrow">&rarr;</span></span>
+        </a>
+      </article>
     </div>
   </div>
 </section>
 
-<!-- 7. THE PLACE. Where you are actually going. The practice's own
-     photographs, and the address as a link to the map. -->
-<section class="section_place band_component is-alt is-flip">
+<!-- 06 THE PLACE. Two of the practice's own photographs, offset, and the
+     address as a link to the map. -->
+<section class="section_place place_component">
   <div class="padding-global">
     <div class="container-large">
       <div class="padding-section-large">
-        <div class="band_inner" data-reveal>
-          <figure class="band_media">
-            <img src="assets/ssa-treatment-room.webp" alt="A treatment room at the Westlake practice" width="1000" height="800" loading="lazy">
-          </figure>
-          <div>
-            <p class="eyebrow">The room</p>
-            <h2 class="heading-style-h2 band_title">One suite in Westlake.</h2>
-            <div class="text-size-medium band_text">
-              <p>
-                Not a chain, not a franchise, not a second location of anything. Seventy-two
-                Andorra Drive, off 114, with parking at the door and no waiting room theatre.
-              </p>
-              <p>
-                <a class="text-style-link" href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110, Westlake, TX 76262</a><br>
-                Monday to Friday, 9 to 5. Saturday by appointment.
-              </p>
-            </div>
-            <div class="button-group band_actions">
-              <a class="button" href="book.html">Book a consultation</a>
-              <a class="button is-secondary" href="tel:+18173838361">Call (817) 383-8361</a>
-            </div>
+        <div class="place_grid">
+          <div class="place_copy">
+            <p class="eyebrow">The place</p>
+            <h2 class="heading-style-h2" data-split>One suite in <em class="text-style-display-accent">Westlake</em>.</h2>
+            <p class="text-size-medium place_text" data-reveal>
+              Not a chain. One suite off 114 with parking at the door, a desk, a consultation
+              room and treatment rooms.
+            </p>
+            <dl class="place_facts" data-reveal="stagger">
+              <div><dt>Address</dt><dd><a class="text-style-link" href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110, Westlake, TX 76262</a></dd></div>
+              <div><dt>Hours</dt><dd>Monday to Friday, 9 to 5. Saturday by appointment.</dd></div>
+              <div><dt>Phone</dt><dd><a class="text-style-link" href="tel:+18173838361">(817) 383-8361</a></dd></div>
+            </dl>
+          </div>
+          <div class="place_media">
+            <figure class="place_frame is-large" data-wipe>
+              <span class="wipe_inner" data-parallax="8"><img src="assets/ssa-front-desk.webp" alt="The front desk at the Westlake practice" width="2133" height="1200" loading="lazy"></span>
+            </figure>
+            <figure class="place_frame is-small" data-speed="-0.3">
+              <span class="wipe_frame" data-wipe><img src="assets/ssa-neon.webp" alt="The neon sign in the practice" width="2133" height="1200" loading="lazy"></span>
+            </figure>
           </div>
         </div>
       </div>
