@@ -1,0 +1,86 @@
+/* REMOVED 2026-09-01: .checklist_component, which only ever appeared on the
+   treatment pages. */
+/* FAQ — native <details>, so it is open-able without JavaScript, findable by
+   in-page search, and correct for screen readers with no ARIA of our own. */
+.faq_list {
+  border-top: 1px solid var(--line);
+}
+.faq_item {
+  border-bottom: 1px solid var(--line);
+}
+.faq_question {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.35rem 0;
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  line-height: 1.25;
+  color: var(--fg);
+  cursor: pointer;
+  list-style: none;
+}
+.faq_question::-webkit-details-marker {
+  display: none;
+}
+/* THE QUESTION IS ONE FLEX ITEM, and it has to be said in the markup because
+   `.faq_question` is a flex container: every child element becomes an item, and
+   so does every run of text between them. A summary that was plain text plus
+   the icon worked by accident, with the text as a single anonymous item. The
+   moment one carried an inline element (`MyEllevate<span class="reg">(R)</span>?`
+   on the neck lift page) it became THREE items, and `justify-content:
+   space-between` pushed the mark and the question mark to the far side of the
+   row, away from the words they belong to. Found at 390 on 2026-09-01.
+
+   `min-width: 0` is the other half: a flex item will not shrink below its
+   longest word without it, which is how a long question ends up pushing the
+   plus icon off the right edge on a phone.
+
+   Every summary on the site carries the wrapper now, including the five that
+   did not need it, because one component with two markup shapes is a trap
+   waiting for the next person to add a `<em>` to a question. */
+.faq_label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.faq_question:hover {
+  color: var(--accent);
+}
+.faq_icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.35rem;
+}
+.faq_icon::before,
+.faq_icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: var(--accent-flat);
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.faq_icon::before {
+  width: 1.1rem;
+  height: 1.5px;
+}
+.faq_icon::after {
+  width: 1.5px;
+  height: 1.1rem;
+}
+.faq_item[open] .faq_icon::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+.faq_answer {
+  padding-bottom: 1.6rem;
+  max-width: 68ch;
+  color: var(--fg-body);
+}
+.faq_answer > * + * {
+  margin-top: 0.9rem;
+}

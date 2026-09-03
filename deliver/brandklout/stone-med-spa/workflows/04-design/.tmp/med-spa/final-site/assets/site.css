@@ -1,0 +1,3895 @@
+/* ===== css/00-fluid-root.css ===== */
+/* Fluid root font-size — webzite-house-v1.
+   Same curve as the Dr. Nahlah build (site-src/css/00-fluid-root.css) so the two
+   Instatic sites share one rem basis. Client-First is a rem system: every size
+   token below is a rem, and this is the only rule allowed to touch the root. */
+:root {
+  --font-from: 18;
+  --font-to: 20;
+  --vw-from: calc(1920 / 100);
+  --vw-to: calc(2400 / 100);
+  --coefficient: calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from)));
+  --base: calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16);
+}
+
+html {
+  font-size: calc(var(--base) * 1rem + var(--coefficient) * 1vw);
+}
+
+@media screen and (max-width: 1920px) {
+  :root {
+    --font-from: 16;
+    --font-to: 18;
+    --vw-from: calc(1440 / 100);
+    --vw-to: calc(1920 / 100);
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  :root {
+    --font-from: 16;
+    --font-to: 16;
+    --vw-from: calc(479 / 100);
+    --vw-to: calc(1440 / 100);
+  }
+}
+
+@media screen and (max-width: 479px) {
+  :root {
+    --font-from: 14;
+    --font-to: 16;
+    --vw-from: calc(320 / 100);
+    --vw-to: calc(479 / 100);
+  }
+}
+
+
+/* ===== css/01-tokens.css ===== */
+/* ===========================================================================
+   SCULPTED IVORY — shared with Stone Surgical Arts, deliberately.
+
+   Dr. Mona Stone runs three pillars. The implant centre is live on Webflow;
+   Surgical Arts published twelve pages to Instatic on 2026-09-02; this is the
+   third. The client asked for this site to carry the same style guide as
+   Surgical Arts, so this file is that build's 01-tokens.css with nothing
+   changed but the words in this comment. Five colours, two typefaces, one
+   spacing scale, one type scale.
+
+     Ivory    #F6F4EF     Stone  #D8D3CA     Charcoal #272727
+     Green    #8FBC46     White  #FFFFFF
+     Cormorant Garamond (display) + Inter (body)
+
+   WHAT IS SHARED AND WHAT IS NOT. The style guide is shared; the section
+   shapes are not. Nothing in css/50-*.css onward exists on the sibling site,
+   and nothing from its 50-journey / 51-dossier / 52-elevate / 53-hub /
+   54-profile / 55-about / 56-offers was copied here. Two brands that share a
+   surgeon, an address and a palette have to differ somewhere, and where they
+   differ is the layout. See gotcha 4 in .claude/RUNBOOK.md.
+
+   THE ONE DELIBERATE DEVIATION — read before "fixing" it.
+
+   Brand green is a light yellow-green. Measured against the palette's own
+   grounds it gives:
+
+     white text on #8FBC46 ............. 2.22:1   fails AA at every size
+     #8FBC46 text on ivory ............. 2.02:1   fails AA at every size
+
+   The board's button mock is white uppercase on green, which is the failing
+   combination, at the smallest type on the page. This is a medical practice,
+   so the build does not ship it. Two named tokens carry the fix, and both keep
+   the brand hue:
+
+     --green-ink  #55731F   green taken dark enough to CLEAR AA as text
+                            4.95:1 on ivory, 5.44:1 on white
+     --btn-ink    charcoal  the label colour on a brand-green fill
+                            6.72:1 on #8FBC46
+
+   Buttons therefore stay brand green; their labels are charcoal, not white.
+   Brand green is still used at full strength for fills, rules, icons and
+   display-sized numerals, where contrast rules do not apply. If the client
+   insists on white-on-green, change --btn-ink here — one line, whole site.
+   =========================================================================== */
+:root {
+  /* --- the board's five, verbatim --- */
+  --ivory: #f6f4ef;
+  --stone: #d8d3ca;
+  --charcoal: #272727;
+  --green: #8fbc46;
+  --white: #ffffff;
+
+  /* --- derived --- */
+  --ivory-deep: #efece4; /* the alternate band, half a step down from ivory */
+  --stone-soft: #e7e3dc; /* hairlines and card edges on ivory */
+  --green-ink: #55731f; /* text-sized green — clears AA, see above */
+  --green-deep: #6f9433; /* hover on a green fill */
+  --green-wash: #f0f5e5; /* the faintest green ground, for callouts */
+  --charcoal-soft: #4a4a4a; /* body copy — softer than headings, still 8:1+ */
+  --charcoal-mute: #6a6862; /* meta, captions, disabled */
+
+  /* --- semantic layer. Sections paint from these names, never from a hex. --- */
+  --bg: var(--ivory);
+  --bg-alt: var(--ivory-deep);
+  --bg-card: var(--white);
+  --bg-deep: var(--charcoal);
+  --fg: var(--charcoal);
+  --fg-body: var(--charcoal-soft);
+  --fg-mute: var(--charcoal-mute);
+  --accent: var(--green-ink); /* accent AS TEXT */
+  --accent-flat: var(--green); /* accent as a FILL or a RULE */
+  --btn-ink: var(--charcoal); /* label on a brand-green fill */
+  --line: var(--stone-soft);
+  --line-strong: var(--stone);
+  --focus: var(--green-ink);
+  /* Scrim over photography so display type reads on any image. */
+  --scrim: linear-gradient(180deg, rgba(39, 39, 39, 0.42) 0%, rgba(39, 39, 39, 0.12) 38%, rgba(39, 39, 39, 0.72) 100%);
+  --scrim-side: linear-gradient(100deg, rgba(39, 39, 39, 0.66) 0%, rgba(39, 39, 39, 0.34) 42%, rgba(39, 39, 39, 0) 72%);
+
+  /* --- type --- */
+  --font-display: "Cormorant Garamond", "Cormorant", Georgia, "Times New Roman", serif;
+  --font-body: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+
+  /* Type steps. Unitless multipliers stepped at Webflow's own breakpoints
+     (1279 / 991 / 767 / 478) so the scale maps one-to-one onto Designer
+     breakpoints, and onto Instatic's, at conversion time. */
+  --t-display: 1;
+  --t-heading: 1;
+  --t-sub: 1;
+  --t-text: 1;
+
+  --size-h1: calc(4.75rem * var(--t-display));
+  --size-h2: calc(3.25rem * var(--t-heading));
+  --size-h3: calc(2.25rem * var(--t-heading));
+  --size-h4: calc(1.625rem * var(--t-sub));
+  --size-h5: calc(1.25rem * var(--t-sub));
+  --size-h6: calc(1.0625rem * var(--t-sub));
+  --size-text-large: calc(1.25rem * var(--t-text));
+  --size-text-medium: calc(1.125rem * var(--t-text));
+  --size-text-regular: calc(1rem * var(--t-text));
+  --size-text-small: calc(0.875rem * var(--t-text));
+  --size-text-tiny: calc(0.75rem * var(--t-text));
+
+  /* --- Client-First spacing scale --- */
+  --space-0: 0rem;
+  --space-tiny: 0.125rem;
+  --space-xxsmall: 0.25rem;
+  --space-xsmall: 0.5rem;
+  --space-small: 1rem;
+  --space-medium: 2rem;
+  --space-large: 3rem;
+  --space-xlarge: 4rem;
+  --space-xxlarge: 5rem;
+  --space-huge: 6rem;
+  --space-xhuge: 8rem;
+  --space-xxhuge: 12rem;
+
+  --radius: 2px; /* the board's cards are barely rounded, and squared at the top */
+  --radius-card: 4px;
+  --shadow-card: 0 1px 2px rgba(39, 39, 39, 0.04), 0 8px 24px rgba(39, 39, 39, 0.06);
+  --shadow-card-hover: 0 2px 4px rgba(39, 39, 39, 0.06), 0 18px 44px rgba(39, 39, 39, 0.1);
+  --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+@media (max-width: 1279px) {
+  :root {
+    --t-display: 0.82;
+    --t-heading: 0.85;
+    --t-sub: 0.92;
+  }
+}
+@media (max-width: 991px) {
+  :root {
+    --t-display: 0.7;
+    --t-heading: 0.76;
+    --t-sub: 0.88;
+  }
+}
+@media (max-width: 767px) {
+  :root {
+    --t-display: 0.56;
+    --t-heading: 0.66;
+    --t-sub: 0.84;
+  }
+}
+/* Below 479 the root itself shrinks (16px at 479 -> 14px at 320). Display type
+   wants that; body copy does not, so --t-text is raised to hold it above 16px. */
+@media (max-width: 478px) {
+  :root {
+    --t-heading: 0.6;
+    --t-sub: 0.82;
+    --t-text: 1.1;
+  }
+}
+
+/* The dark band — a section can be flipped by the scope it sits in rather than
+   by rewriting it. */
+[data-theme="dark"] {
+  --bg: var(--charcoal);
+  --bg-alt: #1e1e1e;
+  --bg-card: #333230;
+  --fg: var(--white);
+  --fg-body: rgba(255, 255, 255, 0.8);
+  --fg-mute: rgba(255, 255, 255, 0.62);
+  --accent: var(--green); /* on charcoal the brand green is 6.72:1 — fine as text */
+  --accent-flat: var(--green);
+  --line: rgba(255, 255, 255, 0.14);
+  --line-strong: rgba(255, 255, 255, 0.28);
+  --focus: var(--green);
+  background-color: var(--bg);
+  color: var(--fg-body);
+}
+
+
+/* ===== css/02-base.css ===== */
+/* Reset and element defaults. Everything visual past this point is a class:
+   Client-First forbids styling bare tags, because in Webflow and in Instatic a
+   tag-level style is global and silently reaches every page. The rules here are
+   the narrow set a reset is allowed — box model, media behaviour, focus — plus
+   the two typefaces bound to <body>. */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  -webkit-text-size-adjust: 100%;
+  scroll-behavior: smooth;
+  /* The navbar is fixed and ~5.5rem tall, so an in-page anchor would otherwise
+     land its target underneath it. Set once here rather than per anchor. */
+  scroll-padding-top: 7rem;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--fg-body);
+  font-family: var(--font-body);
+  font-size: var(--size-text-regular);
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin: 0;
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--fg);
+  letter-spacing: -0.01em;
+}
+
+p,
+figure,
+blockquote,
+dl,
+dd {
+  margin: 0;
+}
+
+ul,
+ol {
+  margin: 0;
+  padding: 0;
+}
+
+img,
+svg,
+video {
+  display: block;
+  max-width: 100%;
+}
+
+img {
+  height: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+button,
+input,
+select,
+textarea {
+  font: inherit;
+  color: inherit;
+}
+
+:where(a, button, input, select, textarea, summary, [tabindex]):focus-visible {
+  outline: 2px solid var(--focus);
+  outline-offset: 3px;
+  border-radius: 2px;
+}
+
+/* Skip link — the first thing in the DOM, visible only once focused. */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 0;
+  z-index: 1000;
+  padding: 0.75rem 1.25rem;
+  background-color: var(--charcoal);
+  color: var(--white);
+  font-size: var(--size-text-small);
+}
+.skip-link:focus {
+  left: 0;
+}
+
+/* A FOCAL POINT THAT BELONGS TO THE PHOTOGRAPH, not to the component.
+
+   `ssa-consult-room.webp` is the practice's own consultation room and there is
+   a woman seated in an armchair on the RIGHT of the frame, near the TOP. Every
+   slot it fills crops it, and a centred crop loses her in every one of them:
+   the home page's process panel is a wide letterbox and cut her off at the
+   chin, keeping her legs; the two booking chapters are a tall column and cut
+   her out of frame entirely, keeping a plant and an empty chair. The client,
+   2026-09-01: *"Here the person does not show at all. Choose the legs that are
+   showing."*
+
+   One value serves both crops because they crop on OPPOSITE axes: the wide
+   slot has no horizontal slack, so the 100% is inert there and only the 0%
+   does any work, and the tall slot has no vertical slack, so the reverse. That
+   is why this is one utility on the image rather than a modifier on each of
+   the two components, which would have been two numbers to keep in step.
+
+   It lives here, with `.u-sr-only`, because both `50-journey.css` and
+   `51-dossier.css` need it and neither owns it. Add a slot for this image and
+   add the class; the focal point does not have to be worked out again. */
+.u-focus-figure img {
+  object-position: 100% 0%;
+}
+
+.u-sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+
+/* ===== css/03-fonts.css ===== */
+/* ===========================================================================
+   THE TYPEFACES, SELF-HOSTED. Generated by site-src/get-fonts.mjs.
+
+   Client, 2026-09-01: "Everything should be local." This replaces the
+   render-blocking fonts.googleapis.com stylesheet the head partial used to
+   carry. Nothing about the design changes: same two families, same weights,
+   same fallback stacks in 01-tokens.css.
+
+   Why it is worth doing on this site in particular: it is a medical practice,
+   so a third-party request on every page view hands Google the IP of everyone
+   who visits; the design IS these two typefaces, so a blocked or slow request
+   turned the page into Georgia and Arial; and the client-review build is meant
+   to be self-contained and was not.
+
+   Paths are relative to assets/, because build-site.mjs concatenates css/ into
+   assets/site.css and a relative url() resolves against the stylesheet. This is
+   the same rule that the CTA band's texture got wrong for two days.
+
+   DO NOT HAND-EDIT. Re-run `node get-fonts.mjs --force` instead.
+   =========================================================================== */
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 300;
+  font-display: swap;
+  src: url("fonts/cormorant-garamond-300.woff2") format("woff2");
+  /* Latin only. The practice serves English and Spanish and both are covered;
+     the Cyrillic, Greek and Vietnamese blocks Google also ships would roughly
+     triple the download for glyphs this site never renders. */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/cormorant-garamond-400.woff2") format("woff2");
+  /* Latin only. The practice serves English and Spanish and both are covered;
+     the Cyrillic, Greek and Vietnamese blocks Google also ships would roughly
+     triple the download for glyphs this site never renders. */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Cormorant Garamond";
+  font-style: italic;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/cormorant-garamond-400-italic.woff2") format("woff2");
+  /* Latin only. The practice serves English and Spanish and both are covered;
+     the Cyrillic, Greek and Vietnamese blocks Google also ships would roughly
+     triple the download for glyphs this site never renders. */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 400;
+  font-display: swap;
+  src: url("fonts/inter-400.woff2") format("woff2");
+  /* Latin only. The practice serves English and Spanish and both are covered;
+     the Cyrillic, Greek and Vietnamese blocks Google also ships would roughly
+     triple the download for glyphs this site never renders. */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 500;
+  font-display: swap;
+  src: url("fonts/inter-500.woff2") format("woff2");
+  /* Latin only. The practice serves English and Spanish and both are covered;
+     the Cyrillic, Greek and Vietnamese blocks Google also ships would roughly
+     triple the download for glyphs this site never renders. */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-display: swap;
+  src: url("fonts/inter-600.woff2") format("woff2");
+  /* Latin only. The practice serves English and Spanish and both are covered;
+     the Cyrillic, Greek and Vietnamese blocks Google also ships would roughly
+     triple the download for glyphs this site never renders. */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+@font-face {
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 700;
+  font-display: swap;
+  src: url("fonts/inter-700.woff2") format("woff2");
+  /* Latin only. The practice serves English and Spanish and both are covered;
+     the Cyrillic, Greek and Vietnamese blocks Google also ships would roughly
+     triple the download for glyphs this site never renders. */
+  unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+    U+02DC, U+2000-206F, U+2074, U+20AC, U+2122, U+2191, U+2193, U+2212, U+2215,
+    U+FEFF, U+FFFD;
+}
+
+
+/* ===== css/10-client-first.css ===== */
+/* ===========================================================================
+   CLIENT-FIRST — Finsweet's structure, spacing and typography utilities.
+
+   This is the shared vocabulary. Every page in the build is assembled from it,
+   and a custom class only appears where Client-First has no equivalent (those
+   live in 20-*.css onward and are named [identifier]_[element], never bare).
+
+   Structure a page like this and nothing drifts:
+
+     page-wrapper
+       main-wrapper
+         section_<name>
+           padding-global
+             container-large
+               padding-section-large
+                 <content>
+
+   The names, sizes and combo-class conventions match the Client-First style
+   guide already on the Brandklout Webflow account (site 6a2e515ca82829dfe4a72701),
+   so this build and the Webflow sites speak the same language even though this
+   one ships to Instatic.
+   =========================================================================== */
+
+/* --- structure ----------------------------------------------------------- */
+.page-wrapper {
+  position: relative;
+  overflow-x: clip;
+}
+.main-wrapper {
+  display: block;
+}
+
+.padding-global {
+  padding-left: 5%;
+  padding-right: 5%;
+}
+@media (max-width: 767px) {
+  .padding-global {
+    padding-left: 1.25rem;
+    padding-right: 1.25rem;
+  }
+}
+
+.container-large {
+  width: 100%;
+  max-width: 80rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container-medium {
+  width: 100%;
+  max-width: 64rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+.container-small {
+  width: 100%;
+  max-width: 48rem;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.padding-section-small {
+  padding-top: var(--space-large);
+  padding-bottom: var(--space-large);
+}
+.padding-section-medium {
+  padding-top: var(--space-xxlarge);
+  padding-bottom: var(--space-xxlarge);
+}
+.padding-section-large {
+  padding-top: var(--space-xhuge);
+  padding-bottom: var(--space-xhuge);
+}
+@media (max-width: 991px) {
+  .padding-section-large {
+    padding-top: var(--space-huge);
+    padding-bottom: var(--space-huge);
+  }
+  .padding-section-medium {
+    padding-top: var(--space-xlarge);
+    padding-bottom: var(--space-xlarge);
+  }
+}
+@media (max-width: 767px) {
+  .padding-section-large {
+    padding-top: var(--space-xxlarge);
+    padding-bottom: var(--space-xxlarge);
+  }
+}
+
+/* --- spacing utilities ---------------------------------------------------
+   Client-First pairs a size class with a direction class. `.padding-medium`
+   alone pads all four sides; add `.padding-vertical` and the horizontal sides
+   are zeroed. Same for margin. -------------------------------------------- */
+.padding-0 { padding: var(--space-0); }
+.padding-tiny { padding: var(--space-tiny); }
+.padding-xxsmall { padding: var(--space-xxsmall); }
+.padding-xsmall { padding: var(--space-xsmall); }
+.padding-small { padding: var(--space-small); }
+.padding-medium { padding: var(--space-medium); }
+.padding-large { padding: var(--space-large); }
+.padding-xlarge { padding: var(--space-xlarge); }
+.padding-xxlarge { padding: var(--space-xxlarge); }
+.padding-huge { padding: var(--space-huge); }
+
+.padding-vertical { padding-left: 0; padding-right: 0; }
+.padding-horizontal { padding-top: 0; padding-bottom: 0; }
+.padding-top { padding-bottom: 0; padding-left: 0; padding-right: 0; }
+.padding-bottom { padding-top: 0; padding-left: 0; padding-right: 0; }
+
+.margin-0 { margin: var(--space-0); }
+.margin-tiny { margin: var(--space-tiny); }
+.margin-xxsmall { margin: var(--space-xxsmall); }
+.margin-xsmall { margin: var(--space-xsmall); }
+.margin-small { margin: var(--space-small); }
+.margin-medium { margin: var(--space-medium); }
+.margin-large { margin: var(--space-large); }
+.margin-xlarge { margin: var(--space-xlarge); }
+.margin-xxlarge { margin: var(--space-xxlarge); }
+
+.margin-vertical { margin-left: 0; margin-right: 0; }
+.margin-horizontal { margin-top: 0; margin-bottom: 0; }
+.margin-top { margin-bottom: 0; margin-left: 0; margin-right: 0; }
+.margin-bottom { margin-top: 0; margin-left: 0; margin-right: 0; }
+
+.spacer-xxsmall { width: 100%; padding-top: var(--space-xxsmall); }
+.spacer-xsmall { width: 100%; padding-top: var(--space-xsmall); }
+.spacer-small { width: 100%; padding-top: var(--space-small); }
+.spacer-medium { width: 100%; padding-top: var(--space-medium); }
+.spacer-large { width: 100%; padding-top: var(--space-large); }
+.spacer-xlarge { width: 100%; padding-top: var(--space-xlarge); }
+
+/* --- typography ---------------------------------------------------------- */
+.heading-style-h1 {
+  font-family: var(--font-display);
+  font-size: var(--size-h1);
+  font-weight: 300;
+  line-height: 1.02;
+  letter-spacing: -0.018em;
+  color: var(--fg);
+}
+.heading-style-h2 {
+  font-family: var(--font-display);
+  font-size: var(--size-h2);
+  font-weight: 300;
+  line-height: 1.08;
+  letter-spacing: -0.014em;
+  color: var(--fg);
+}
+.heading-style-h3 {
+  font-family: var(--font-display);
+  font-size: var(--size-h3);
+  font-weight: 400;
+  line-height: 1.14;
+  letter-spacing: -0.01em;
+  color: var(--fg);
+}
+.heading-style-h4 {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  font-weight: 400;
+  line-height: 1.22;
+  color: var(--fg);
+}
+.heading-style-h5 {
+  font-family: var(--font-body);
+  font-size: var(--size-h5);
+  font-weight: 500;
+  line-height: 1.35;
+  color: var(--fg);
+}
+.heading-style-h6 {
+  font-family: var(--font-body);
+  font-size: var(--size-h6);
+  font-weight: 600;
+  line-height: 1.4;
+  color: var(--fg);
+}
+
+.text-size-large { font-size: var(--size-text-large); line-height: 1.6; }
+.text-size-medium { font-size: var(--size-text-medium); line-height: 1.65; }
+.text-size-regular { font-size: var(--size-text-regular); line-height: 1.65; }
+.text-size-small { font-size: var(--size-text-small); line-height: 1.6; }
+.text-size-tiny { font-size: var(--size-text-tiny); line-height: 1.5; }
+
+.text-weight-light { font-weight: 300; }
+.text-weight-normal { font-weight: 400; }
+.text-weight-medium { font-weight: 500; }
+.text-weight-semibold { font-weight: 600; }
+.text-weight-bold { font-weight: 700; }
+
+.text-style-allcaps {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+}
+.text-style-italic { font-style: italic; }
+.text-style-nowrap { white-space: nowrap; }
+/* The registered-trademark mark, cut down to a mark. Cormorant Garamond draws
+   (R) at FULL SIZE on the baseline, so "MyEllevate(R)" at heading size was a
+   circled letter nearly as tall as the word in front of it. Markup rather than
+   `font-variant-position`, which is unevenly supported and does nothing at all
+   unless the face ships superior figures, which this subset does not. A type
+   utility rather than a component rule because both pages use it. */
+.reg { font-size: 0.5em; vertical-align: 0.55em; letter-spacing: 0; }
+.text-style-muted { color: var(--fg-mute); }
+.text-style-link {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-thickness: 1px;
+  text-decoration-color: var(--line-strong);
+}
+.text-style-link:hover { text-decoration-color: currentColor; }
+
+.text-align-center { text-align: center; }
+.text-align-left { text-align: left; }
+.text-align-right { text-align: right; }
+
+.text-color-accent { color: var(--accent); }
+.text-color-alternate { color: var(--white); }
+.text-color-muted { color: var(--fg-mute); }
+
+/* Display headings mix roman and italic — the board sets its second clause in
+   the serif italic ("Precise Treatments. Impeccable Results."). */
+.text-style-display-accent {
+  font-style: italic;
+  color: var(--accent);
+}
+
+/* --- widths and alignment ------------------------------------------------ */
+.max-width-xxsmall { width: 100%; max-width: 16rem; }
+.max-width-xsmall { width: 100%; max-width: 20rem; }
+.max-width-small { width: 100%; max-width: 26rem; }
+.max-width-medium { width: 100%; max-width: 35rem; }
+.max-width-large { width: 100%; max-width: 48rem; }
+.max-width-full { width: 100%; max-width: none; }
+.align-center { margin-left: auto; margin-right: auto; }
+
+/* --- background colours --------------------------------------------------
+   Client-First keeps section grounds as utilities so a band can be re-coloured
+   without touching the section's own class. `is-dark` also flips the theme
+   scope, so every token inside inverts with it. ---------------------------- */
+.background-color-primary { background-color: var(--bg); }
+.background-color-secondary { background-color: var(--bg-alt); }
+.background-color-white { background-color: var(--white); }
+.background-color-dark { background-color: var(--charcoal); }
+
+.overflow-hidden { overflow: hidden; }
+.hide { display: none; }
+@media (max-width: 991px) { .hide-tablet { display: none; } }
+@media (max-width: 767px) { .hide-mobile-landscape { display: none; } }
+@media (max-width: 478px) { .hide-mobile-portrait { display: none; } }
+@media (min-width: 992px) { .show-tablet-down { display: none; } }
+
+/* --- buttons -------------------------------------------------------------
+   One `.button` class; variants are combo classes (`is-secondary`, `is-small`,
+   `is-link`, `is-alternate`) exactly as Client-First specifies. Labels on the
+   green fill are charcoal — see the contrast note in 01-tokens.css. --------- */
+.button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6em;
+  padding: 1.05rem 2.1rem;
+  border: 1px solid var(--accent-flat);
+  border-radius: var(--radius);
+  background-color: var(--accent-flat);
+  color: var(--btn-ink);
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  line-height: 1;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    color 0.25s var(--ease),
+    transform 0.25s var(--ease);
+}
+.button:hover {
+  background-color: var(--green-deep);
+  border-color: var(--green-deep);
+  color: var(--white);
+  transform: translateY(-1px);
+}
+
+.button.is-secondary {
+  background-color: transparent;
+  border-color: var(--accent-flat);
+  color: var(--accent);
+}
+.button.is-secondary:hover {
+  background-color: var(--accent-flat);
+  color: var(--btn-ink);
+}
+
+.button.is-alternate {
+  background-color: var(--white);
+  border-color: var(--white);
+  color: var(--charcoal);
+}
+.button.is-alternate:hover {
+  background-color: transparent;
+  color: var(--white);
+  border-color: var(--white);
+}
+
+.button.is-small {
+  padding: 0.75rem 1.4rem;
+}
+
+.button.is-link {
+  padding: 0;
+  border-color: transparent;
+  background-color: transparent;
+  color: var(--accent);
+  letter-spacing: 0.14em;
+}
+.button.is-link:hover {
+  background-color: transparent;
+  border-color: transparent;
+  color: var(--fg);
+  transform: none;
+}
+.button.is-link .button_arrow {
+  transition: transform 0.25s var(--ease);
+}
+.button.is-link:hover .button_arrow {
+  transform: translateX(4px);
+}
+
+.button-group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.9rem;
+}
+.button-group.is-center {
+  justify-content: center;
+}
+
+/* --- the eyebrow ---------------------------------------------------------
+   The board opens every band with a small letter-spaced label. It is used often
+   enough to earn a name in the shared layer rather than in each section. ---- */
+.eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.75rem;
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.22em;
+  color: var(--accent);
+}
+.eyebrow::before {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background-color: var(--accent-flat);
+}
+.eyebrow.is-center {
+  justify-content: center;
+}
+.eyebrow.is-center::after {
+  content: "";
+  width: 1.75rem;
+  height: 1px;
+  background-color: var(--accent-flat);
+}
+.eyebrow.is-plain::before,
+.eyebrow.is-plain::after {
+  display: none;
+}
+
+
+/* ===== css/20-navbar.css ===== */
+/* REMOVED 2026-09-01: the Treatments dropdown and its mega-menu — the
+   twelve treatment pages and the hub they listed no longer exist. What is left
+   is the bar itself, the phone, the button and the burger. */
+/* Navbar — the board's "NAVIGATION STYLE" panel: wordmark left, five links
+   centre-right, one green CTA. Ivory ground, hairline underneath, and it goes
+   solid once the page scrolls past the hero. */
+.navbar_component {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  background-color: transparent;
+  border-bottom: 1px solid transparent;
+  transition:
+    background-color 0.35s var(--ease),
+    border-color 0.35s var(--ease),
+    box-shadow 0.35s var(--ease);
+}
+.navbar_component.is-solid {
+  background-color: rgba(246, 244, 239, 0.94);
+  backdrop-filter: saturate(140%) blur(10px);
+  border-bottom-color: var(--line);
+}
+/* Pages whose hero is not a photograph start solid, so the wordmark never sits
+   on a light band as light text. */
+.navbar_component.is-static {
+  position: sticky;
+  background-color: var(--bg);
+  border-bottom-color: var(--line);
+}
+
+.navbar_container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 2rem;
+  min-height: 5.5rem;
+}
+
+.navbar_logo-link {
+  display: flex;
+  align-items: center;
+  flex: 0 0 auto;
+}
+/* Over the home page's photograph the bar is transparent, so everything in it
+   inverts. The moment it goes solid — 24px of scroll — this stops applying and
+   the ivory-ground colours take over. */
+.navbar_component:not(.is-solid):not(.is-static) .navbar_link,
+.navbar_component:not(.is-solid):not(.is-static) .navbar_phone {
+  color: var(--white);
+}
+.navbar_component:not(.is-solid):not(.is-static) .brand_component {
+  color: var(--white);
+}
+.navbar_component:not(.is-solid):not(.is-static) .brand_sub {
+  color: rgba(255, 255, 255, 0.78);
+}
+.navbar_component:not(.is-solid):not(.is-static) .navbar_burger {
+  border-color: rgba(255, 255, 255, 0.55);
+}
+.navbar_component:not(.is-solid):not(.is-static) .navbar_burger span {
+  background-color: var(--white);
+}
+
+.navbar_menu {
+  display: flex;
+  align-items: center;
+  gap: 2.4rem;
+  margin-left: auto;
+}
+.navbar_link {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.4rem 0;
+  font-size: var(--size-text-tiny);
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.17em;
+  color: var(--fg);
+  white-space: nowrap;
+  transition: color 0.2s var(--ease);
+}
+.navbar_link::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 100%;
+  bottom: 0;
+  height: 1px;
+  background-color: var(--accent-flat);
+  transition: right 0.3s var(--ease);
+}
+.navbar_link:hover,
+.navbar_link[aria-current="page"] {
+  color: var(--accent);
+}
+.navbar_link:hover::after,
+.navbar_link[aria-current="page"]::after {
+  right: 0;
+}
+
+.navbar_actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  flex: 0 0 auto;
+}
+.navbar_phone {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: var(--size-text-small);
+  font-weight: 500;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.navbar_phone:hover {
+  color: var(--accent);
+}
+.navbar_phone-icon {
+  width: 0.95rem;
+  height: 0.95rem;
+  color: var(--accent-flat);
+}
+
+.navbar_burger {
+  display: none;
+  width: 2.75rem;
+  height: 2.75rem;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background-color: transparent;
+  cursor: pointer;
+}
+.navbar_burger span {
+  display: block;
+  width: 1.15rem;
+  height: 1px;
+  margin: 0.28rem auto;
+  background-color: var(--fg);
+  transition: transform 0.3s var(--ease), opacity 0.2s var(--ease);
+}
+.navbar_burger[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(0.29rem) rotate(45deg);
+}
+.navbar_burger[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.navbar_burger[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-0.29rem) rotate(-45deg);
+}
+
+/* --- the 992-to-1150 squeeze -------------------------------------------
+   FIXED 2026-09-01. Everything in the bar is `white-space: nowrap` and the
+   actions group is `flex: 0 0 auto`, so when the row runs out of room it does
+   not wrap or shrink, it overflows: at 1024 the book button was clipped at the
+   viewport edge and the Treatments caret fell to a second line. The burger did
+   not arrive until 991, leaving the entire small-laptop range broken.
+
+   Two steps rather than one, so the full menu survives as long as it fits.
+   Tightening the gaps first buys about 64px; dropping the phone number buys
+   another 166px, and it is the right thing to drop because it is the only item
+   in the bar that is repeated three times elsewhere on the page (the drawer,
+   the closing chapter and the footer all carry it). */
+@media (max-width: 1279px) {
+  .navbar_menu {
+    gap: 1.4rem;
+  }
+  .navbar_container {
+    gap: 1.25rem;
+  }
+}
+@media (max-width: 1199px) {
+  .navbar_phone {
+    display: none;
+  }
+}
+
+@media (max-width: 991px) {
+  .navbar_menu,
+  .navbar_phone {
+    display: none;
+  }
+  .navbar_burger {
+    display: block;
+  }
+}
+@media (max-width: 767px) {
+  .navbar_actions .button {
+    display: none;
+  }
+}
+
+
+/* ===== css/21-drawer.css ===== */
+/* REMOVED 2026-09-01: .drawer_sublist / .drawer_sublink / .drawer_subheading,
+   the opened-out treatment menu. The drawer is now the mobile contact card. */
+/* The mobile drawer. Full-height ivory panel, the same link list as the navbar
+   plus the four categories opened out, so a phone never needs a submenu. */
+.drawer_component {
+  position: fixed;
+  inset: 0;
+  z-index: 110;
+  visibility: hidden;
+  pointer-events: none;
+}
+.drawer_component.is-open {
+  visibility: visible;
+  pointer-events: auto;
+}
+
+.drawer_scrim {
+  position: absolute;
+  inset: 0;
+  background-color: rgba(39, 39, 39, 0.45);
+  opacity: 0;
+  transition: opacity 0.35s var(--ease);
+}
+.drawer_component.is-open .drawer_scrim {
+  opacity: 1;
+}
+
+.drawer_panel {
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  width: min(24rem, 88vw);
+  display: flex;
+  flex-direction: column;
+  padding: 1.5rem 1.75rem 2rem;
+  background-color: var(--bg);
+  border-left: 1px solid var(--line);
+  overflow-y: auto;
+  transform: translateX(100%);
+  transition: transform 0.4s var(--ease);
+}
+.drawer_component.is-open .drawer_panel {
+  transform: translateX(0);
+}
+
+.drawer_head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  min-height: 4rem;
+  margin-bottom: 1.5rem;
+}
+.drawer_close {
+  width: 2.5rem;
+  height: 2.5rem;
+  padding: 0;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background: transparent;
+  color: var(--fg);
+  font-size: 1.1rem;
+  line-height: 1;
+  cursor: pointer;
+}
+
+.drawer_nav {
+  display: flex;
+  flex-direction: column;
+}
+.drawer_link {
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-display);
+  font-size: 1.5rem;
+  color: var(--fg);
+}
+.drawer_link:hover {
+  color: var(--accent);
+}
+
+.drawer_foot {
+  margin-top: auto;
+  padding-top: 2rem;
+  display: grid;
+  gap: 0.9rem;
+}
+.drawer_meta {
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+}
+
+
+/* ===== css/22-footer.css ===== */
+/* Footer — the board's three-column layout: address left, wordmark and socials
+   centre, hours right, with the legal line beneath. Ivory on the board; here it
+   sits on the alternate band so it reads as the end of the page. */
+.footer_component {
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--line);
+}
+
+.footer_top {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: start;
+  gap: 3rem;
+}
+.footer_brand {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1.25rem;
+  text-align: center;
+}
+.footer_logo {
+  width: auto;
+  height: 3.4rem;
+}
+.footer_socials {
+  display: flex;
+  align-items: center;
+  gap: 0.9rem;
+}
+.footer_social {
+  display: grid;
+  place-items: center;
+  width: 2.35rem;
+  height: 2.35rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 50%;
+  color: var(--fg-body);
+  transition:
+    border-color 0.25s var(--ease),
+    color 0.25s var(--ease),
+    background-color 0.25s var(--ease);
+}
+.footer_social:hover {
+  border-color: var(--accent-flat);
+  background-color: var(--accent-flat);
+  color: var(--btn-ink);
+}
+.footer_social svg {
+  width: 1rem;
+  height: 1rem;
+}
+
+.footer_col {
+  display: grid;
+  gap: 0.85rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.footer_col.is-right {
+  justify-items: end;
+  text-align: right;
+}
+.footer_item {
+  display: flex;
+  align-items: flex-start;
+  gap: 0.65rem;
+}
+.footer_icon {
+  flex: 0 0 auto;
+  width: 0.95rem;
+  height: 0.95rem;
+  margin-top: 0.28rem;
+  color: var(--accent-flat);
+}
+.footer_hours {
+  width: max-content;
+}
+.footer_hours-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 2rem;
+  min-width: 12rem;
+}
+.footer_hours-row dt {
+  color: var(--fg-mute);
+}
+
+.footer_legal {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem 1.5rem;
+  padding-top: 2rem;
+  margin-top: 2.5rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--size-text-tiny);
+  color: var(--fg-mute);
+}
+.footer_legal a:hover {
+  color: var(--accent);
+}
+
+/* The mark and the tagline that close the board: a diamond S over
+   "SCULPT. LIFT. DEFINE." */
+.footer_signature {
+  display: grid;
+  justify-items: center;
+  gap: 1rem;
+  padding-top: 2.5rem;
+}
+.footer_signature-mark {
+  width: 2.6rem;
+  height: 2.6rem;
+  color: var(--fg-mute);
+}
+.footer_signature-words {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.42em;
+  color: var(--fg-mute);
+  text-indent: 0.42em;
+}
+
+@media (max-width: 991px) {
+  .footer_top {
+    grid-template-columns: 1fr;
+    justify-items: center;
+    text-align: center;
+    gap: 2.5rem;
+  }
+  .footer_col.is-right {
+    justify-items: center;
+    text-align: center;
+  }
+  .footer_item {
+    justify-content: center;
+  }
+  .footer_brand {
+    order: -1;
+  }
+}
+
+/* --- the page list, 2026-09-02 ------------------------------------------------ */
+.footer_nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem 2rem;
+  padding-bottom: var(--space-large);
+  margin-bottom: var(--space-large);
+  border-bottom: 1px solid var(--line);
+}
+.footer_nav a {
+  font-size: var(--size-text-tiny);
+  font-weight: 500;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--fg-body);
+  transition: color 0.2s var(--ease);
+}
+.footer_nav a:hover,
+.footer_nav a[aria-current="page"] {
+  color: var(--accent);
+}
+
+
+/* ===== css/23-brand.css ===== */
+/* The wordmark.
+
+   Set in markup rather than shipped as an image, because that is what the
+   Sculpted Ivory board specifies: STONE in wide-tracked Cormorant over a
+   hairline, SURGICAL ARTS small beneath it. Nothing pictorial, so there is
+   nothing to rasterise.
+
+   Two further reasons it is markup and not a file:
+   - the practice's existing SSA mark (the monogram with the green swoosh, seen
+     on the reception sign in assets/office-exterior.webp) is the OLD identity;
+     the board replaces it. There is no exported file of the new one.
+   - in Instatic the client can edit a text wordmark; they cannot edit an SVG.
+
+   If a logo file does arrive, swap .brand_component for an <img> in the three
+   partials — navbar, drawer and footer — and delete this file. */
+.brand_component {
+  display: inline-grid;
+  justify-items: center;
+  gap: 0.3rem;
+  color: var(--fg);
+  line-height: 1;
+}
+.brand_name {
+  font-family: var(--font-display);
+  font-size: 1.55rem;
+  text-transform: uppercase;
+  font-weight: 400;
+  letter-spacing: 0.34em;
+  text-indent: 0.34em; /* balances the trailing letter-space */
+  white-space: nowrap;
+}
+.brand_rule {
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+}
+.brand_rule::before,
+.brand_rule::after {
+  content: "";
+  height: 1px;
+  background-color: var(--accent-flat);
+}
+.brand_sub {
+  font-family: var(--font-body);
+  font-size: 0.5rem;
+  font-weight: 500;
+  letter-spacing: 0.3em;
+  text-indent: 0.3em;
+  text-transform: uppercase;
+  color: var(--fg-mute);
+  white-space: nowrap;
+}
+
+.brand_component.is-large .brand_name {
+  font-size: 2.6rem;
+}
+.brand_component.is-large .brand_sub {
+  font-size: 0.62rem;
+}
+
+/* On the photographic hero the wordmark sits on the image, so it inverts. */
+.brand_component.is-alternate {
+  color: var(--white);
+}
+.brand_component.is-alternate .brand_sub {
+  color: rgba(255, 255, 255, 0.78);
+}
+.brand_component.is-alternate .brand_rule::before,
+.brand_component.is-alternate .brand_rule::after {
+  background-color: rgba(255, 255, 255, 0.55);
+}
+
+@media (max-width: 767px) {
+  .brand_name {
+    font-size: 1.5rem;
+  }
+  .brand_sub {
+    font-size: 0.44rem;
+  }
+}
+
+
+/* ===== css/24-switch.css ===== */
+/* THE BRAND SWITCHER.
+
+   Its own file rather than an edit to 22-footer.css, because that file is a
+   verbatim copy of the Surgical Arts stylesheet and keeping it byte-identical
+   means a fix made on either site can be moved to the other without a diff to
+   read. Anything this site adds to the footer lives here.
+
+   The switcher is the load-bearing piece of the modality split. A visitor who
+   arrives here wanting a facelift has to reach the surgical site in one click,
+   and the same link has to exist in the other direction. NassifMD puts it in
+   the header of both sites; ours is in the footer because the navbar already
+   hits its squeeze limit at 992px (see the note at the foot of 20-navbar.css).
+
+   LAUNCH TASK: the href currently points at the Surgical Arts Instatic staging
+   host. It becomes the real domain when one is chosen. */
+.footer_switch {
+  display: inline-grid;
+  gap: 0.25rem;
+  margin-top: 1.6rem;
+  padding: 0.9rem 1.2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  transition: border-color 0.25s var(--ease), background-color 0.25s var(--ease);
+}
+.footer_switch:hover {
+  border-color: var(--accent-flat);
+  background-color: var(--green-wash);
+}
+.footer_switch-label {
+  font-size: var(--size-text-tiny);
+  color: var(--fg-mute);
+}
+.footer_switch-brand {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.2;
+  color: var(--fg);
+}
+
+
+/* ===== css/36-faq.css ===== */
+/* REMOVED 2026-09-01: .checklist_component, which only ever appeared on the
+   treatment pages. */
+/* FAQ — native <details>, so it is open-able without JavaScript, findable by
+   in-page search, and correct for screen readers with no ARIA of our own. */
+.faq_list {
+  border-top: 1px solid var(--line);
+}
+.faq_item {
+  border-bottom: 1px solid var(--line);
+}
+.faq_question {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 1.5rem;
+  padding: 1.35rem 0;
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  line-height: 1.25;
+  color: var(--fg);
+  cursor: pointer;
+  list-style: none;
+}
+.faq_question::-webkit-details-marker {
+  display: none;
+}
+/* THE QUESTION IS ONE FLEX ITEM, and it has to be said in the markup because
+   `.faq_question` is a flex container: every child element becomes an item, and
+   so does every run of text between them. A summary that was plain text plus
+   the icon worked by accident, with the text as a single anonymous item. The
+   moment one carried an inline element (`MyEllevate<span class="reg">(R)</span>?`
+   on the neck lift page) it became THREE items, and `justify-content:
+   space-between` pushed the mark and the question mark to the far side of the
+   row, away from the words they belong to. Found at 390 on 2026-09-01.
+
+   `min-width: 0` is the other half: a flex item will not shrink below its
+   longest word without it, which is how a long question ends up pushing the
+   plus icon off the right edge on a phone.
+
+   Every summary on the site carries the wrapper now, including the five that
+   did not need it, because one component with two markup shapes is a trap
+   waiting for the next person to add a `<em>` to a question. */
+.faq_label {
+  flex: 1 1 auto;
+  min-width: 0;
+}
+.faq_question:hover {
+  color: var(--accent);
+}
+.faq_icon {
+  position: relative;
+  flex: 0 0 auto;
+  width: 1.1rem;
+  height: 1.1rem;
+  margin-top: 0.35rem;
+}
+.faq_icon::before,
+.faq_icon::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: var(--accent-flat);
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.faq_icon::before {
+  width: 1.1rem;
+  height: 1.5px;
+}
+.faq_icon::after {
+  width: 1.5px;
+  height: 1.1rem;
+}
+.faq_item[open] .faq_icon::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+.faq_answer {
+  padding-bottom: 1.6rem;
+  max-width: 68ch;
+  color: var(--fg-body);
+}
+.faq_answer > * + * {
+  margin-top: 0.9rem;
+}
+
+
+/* ===== css/39-motion.css ===== */
+/* Reveal-on-scroll. Opt-in per element with data-reveal; 00-runtime.js adds
+   .is-revealed. Kept to a short rise and a fade — the board is a still,
+   editorial design and does not want anything more than that.
+
+   EVERY RULE IS SCOPED TO .js, WHICH IS SET BY A ONE-LINE INLINE SCRIPT IN THE
+   HEAD. Without that scope, a JavaScript failure — a blocked bundle, an
+   Instatic script conflict, a stale cache — leaves half the site's content at
+   opacity 0 and the page looks broken rather than unanimated. Scoped this way,
+   no JS means no animation and all the content, which is the correct failure. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+.js [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+.js [data-reveal="stagger"] > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s var(--ease),
+    transform 0.6s var(--ease);
+}
+.js [data-reveal="stagger"] {
+  opacity: 1;
+  transform: none;
+}
+.js [data-reveal="stagger"].is-revealed > * {
+  opacity: 1;
+  transform: none;
+}
+.js [data-reveal="stagger"].is-revealed > *:nth-child(2) { transition-delay: 0.08s; }
+.js [data-reveal="stagger"].is-revealed > *:nth-child(3) { transition-delay: 0.16s; }
+.js [data-reveal="stagger"].is-revealed > *:nth-child(4) { transition-delay: 0.24s; }
+.js [data-reveal="stagger"].is-revealed > *:nth-child(5) { transition-delay: 0.32s; }
+.js [data-reveal="stagger"].is-revealed > *:nth-child(6) { transition-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal],
+  .js [data-reveal] > *,
+  .js [data-reveal="stagger"] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}
+
+
+/* ===== css/48-utilities.css ===== */
+/* Site-local utilities — the small modifiers this build needs on top of the
+   shared Client-First layer.
+
+   THEY EXIST BECAUSE audit.mjs FAILS ON INLINE STYLE ATTRIBUTES, and it is
+   right to. Client-First forbids them, and more practically the Instatic
+   conversion does not carry a style attribute across reliably, so a spacing
+   value written inline is a value that silently disappears at publish. Every
+   one of these replaced a `style="..."` that was in the markup first. */
+
+/* The FAQ list needs air under the heading that introduces it. Three pages
+   carry an FAQ and all three wanted the same gap. */
+.faq_list.is-spaced {
+  margin-top: 2.4rem;
+}
+
+/* .related_component grounds itself on --bg-alt, which is right when it follows
+   an ivory section and wrong when it follows another alternate one. Two pages
+   need it on plain ivory so two bands do not run together. */
+.related_component.is-plain {
+  background-color: var(--bg);
+}
+
+/* The proposal flag normally sits below a grid it qualifies. On the team page
+   it leads the section instead, so it loses its top margin and gains a bottom
+   one. */
+.tiers_flag.is-lead-in {
+  margin-top: 0;
+  margin-bottom: 3rem;
+}
+
+
+/* ===== css/49-pagehead.css ===== */
+/* ===========================================================================
+   THE INTERIOR PAGE HEADER — one object, nine pages.
+
+   Every page except the home page opens with this: an eyebrow, an H1, a short
+   lede, and optionally a strip of facts on a rule beneath. It sits on ivory,
+   not on a photograph, which is the deliberate difference from Stone Surgical
+   Arts, where every interior page opens on a full-bleed image with the navbar
+   over it.
+
+   Why quieter here. This site has nine interior pages and seven of them are
+   reference material — a menu, a spec sheet, a membership comparison, a
+   financing FAQ. A full-bleed photographic header on a reference page costs a
+   screen of scrolling before the first fact. The one page that DOES open on a
+   photograph is the home page, and it is the only one.
+
+   `is-split` gives the header a portrait at right for the two pages about a
+   person (Dr. Stone, the team). Same object, one modifier.
+   =========================================================================== */
+.pagehead_component {
+  background-color: var(--bg);
+  border-bottom: 1px solid var(--line);
+}
+/* The navbar is fixed at ~5.5rem and these pages start solid, so the header
+   needs its own top padding rather than relying on the section scale. */
+.pagehead_inner {
+  padding-top: 10.5rem;
+  padding-bottom: var(--space-xlarge);
+}
+.pagehead_title {
+  margin-top: 1.5rem;
+  max-width: 20ch;
+}
+.pagehead_lede {
+  margin-top: 1.6rem;
+  max-width: 60ch;
+  color: var(--fg-body);
+}
+.pagehead_actions {
+  margin-top: 2.2rem;
+}
+
+/* The fact strip — three or four items on a rule under the lede. Used where a
+   page has vitals worth stating before the body starts (the menu's count, the
+   membership's two tiers, the booking page's two paths). */
+.pagehead_facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2.5rem 3.5rem;
+  margin-top: 3rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line);
+}
+.pagehead_fact {
+  display: grid;
+  gap: 0.35rem;
+}
+.pagehead_fact-key {
+  font-family: var(--font-display);
+  font-size: var(--size-h3);
+  line-height: 1;
+  color: var(--accent);
+}
+.pagehead_fact-val {
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  max-width: 26ch;
+}
+
+/* --- the split variant --------------------------------------------------- */
+.pagehead_component.is-split .pagehead_inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 26rem);
+  gap: 4.5rem;
+  align-items: end;
+}
+.pagehead_media {
+  margin: 0;
+  aspect-ratio: 4 / 5;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background-color: var(--bg-alt);
+}
+.pagehead_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+@media (max-width: 991px) {
+  .pagehead_inner {
+    padding-top: 8.5rem;
+  }
+  .pagehead_component.is-split .pagehead_inner {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+  .pagehead_component.is-split .pagehead_media {
+    max-width: 22rem;
+    aspect-ratio: 1 / 1;
+  }
+}
+@media (max-width: 767px) {
+  .pagehead_inner {
+    padding-top: 7.5rem;
+  }
+  .pagehead_facts {
+    gap: 1.8rem 2.5rem;
+  }
+}
+
+
+/* ===== css/50-hero.css ===== */
+/* ===========================================================================
+   THE HERO, AND THE INTERVAL RAIL UNDER IT.
+
+   This is the section that decides the whole site reads differently from Stone
+   Surgical Arts, so it is worth saying what it is doing.
+
+   Surgical Arts opens on a parallax photograph with a centred display line, and
+   the page beneath it is a journey: a person decides once, has an operation,
+   recovers. That is the correct shape for surgery and the wrong shape here.
+
+   Non-surgical aesthetics is not a decision, it is a CADENCE. You come back
+   every three or four months, forever, and the thing a visitor actually needs
+   to understand in the first screen is not "what does it look like" but "what
+   am I signing up to". So the hero carries a rail pinned to its bottom edge
+   listing all seven treatments with the interval each one runs on. It is the
+   menu and the commitment in one object, and it is the first thing you see.
+
+   The rail scrolls horizontally on a phone and sits still on a desktop. It is
+   markup, generated at build time from treatments-data.mjs, so a treatment
+   added to the menu appears here without anyone editing a page.
+   =========================================================================== */
+.hero_component {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  min-height: 92vh;
+  min-height: 92svh;
+  overflow: hidden;
+  background-color: var(--charcoal);
+}
+
+.hero_media {
+  position: absolute;
+  inset: 0;
+  margin: 0;
+}
+.hero_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* The frame is a face at upper-centre. A centred crop puts the headline over
+     her jaw at every width; pushing the image up keeps the copy on the shoulder
+     and the neck, which is empty. */
+  object-position: 50% 22%;
+}
+/* THE SCRIM IS SIDE-WEIGHTED ONLY WHILE THE COPY IS IN A COLUMN.
+
+   --scrim-side darkens the left third and fades to nothing by 72%, which is
+   right on a desktop where .hero_copy is capped at 34ch and never reaches the
+   bright half of the frame. Below the tablet breakpoint the copy goes full
+   width and runs straight into the model's near-white hair, so the same
+   gradient leaves the last words of every line unreadable.
+
+   So the narrow viewport gets the vertical scrim instead — dark at the top
+   behind the navbar, dark at the bottom behind the rail — plus a flat floor
+   under the whole frame. Two different problems, two different scrims. */
+.hero_media::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: var(--scrim-side);
+}
+@media (max-width: 991px) {
+  .hero_media::after {
+    background: var(--scrim), rgba(39, 39, 39, 0.32);
+  }
+}
+
+/* The eyebrow's default is --accent, which is green-ink: taken deliberately
+   dark so it clears AA on ivory. Over a photograph that is the wrong end of the
+   ramp — it is 2:1 against the lit side of this frame. Inside the hero it uses
+   brand green at full strength, which is what the token is for on a dark
+   ground and what [data-theme="dark"] would have given it if this section were
+   scoped that way. It is not, because the hero paints its own colours. */
+.hero_copy .eyebrow,
+.hero_copy .text-style-display-accent {
+  color: var(--green);
+}
+.hero_copy .eyebrow::before,
+.hero_copy .eyebrow::after {
+  background-color: var(--green);
+}
+
+.hero_body {
+  position: relative;
+  z-index: 2;
+  padding-top: 12rem;
+}
+
+.hero_copy {
+  max-width: 34ch;
+}
+.hero_title {
+  color: var(--white);
+}
+/* The display line breaks by hand — three lines on a desktop, and the italic
+   clause always starts its own. An automatic break put "the" alone on line 3. */
+.hero_title .hero_break {
+  display: block;
+}
+.hero_lede {
+  margin-top: 1.6rem;
+  max-width: 46ch;
+  color: rgba(255, 255, 255, 0.86);
+}
+.hero_actions {
+  margin-top: 2.4rem;
+}
+
+/* --- the interval rail ---------------------------------------------------
+   Pinned to the bottom of the hero, on a hairline, over the photograph. Each
+   item is a treatment name and the interval it runs on. --------------------- */
+/* THE RAIL NEEDS A REAL GROUND, NOT A GRADIENT.
+
+   This was a gradient from transparent to 34% charcoal, which is fine over the
+   dark left third of the hero photograph and completely illegible over the
+   right two thirds: the model's hair is near-white there, and the green
+   interval text vanished into it. A scrim tuned to the part of the image the
+   headline sits on cannot also serve a strip that runs the full width.
+
+   So the rail gets its own ground — 78% charcoal with a blur behind it — and
+   stops depending on what is underneath. It still reads as part of the
+   photograph rather than as a separate band, because the blur carries the
+   image's colour through it. */
+.hero_rail {
+  position: relative;
+  z-index: 2;
+  margin-top: 4.5rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.28);
+  background-color: rgba(28, 28, 28, 0.78);
+  backdrop-filter: saturate(130%) blur(14px);
+}
+/* No backdrop-filter (older Firefox, and anything with it disabled) means the
+   78% ground is doing all the work on its own, which is not quite enough over
+   the brightest part of the frame. Take it to 88% there. */
+@supports not (backdrop-filter: blur(4px)) {
+  .hero_rail {
+    background-color: rgba(28, 28, 28, 0.88);
+  }
+}
+.hero_rail-inner {
+  display: flex;
+  align-items: stretch;
+  /* No wrap and no shrink: on a narrow screen this becomes a scroller rather
+     than a stack, because a stacked rail is just a list and the point of the
+     object is that you read it sideways, the way a calendar runs. */
+  overflow-x: auto;
+  scrollbar-width: none;
+  -webkit-overflow-scrolling: touch;
+}
+.hero_rail-inner::-webkit-scrollbar {
+  display: none;
+}
+.hero_rail-item {
+  flex: 1 0 auto;
+  min-width: 10.5rem;
+  padding: 1.15rem 1.35rem 1.35rem;
+  border-left: 1px solid rgba(255, 255, 255, 0.14);
+  color: var(--white);
+  transition: background-color 0.3s var(--ease);
+}
+.hero_rail-item:first-child {
+  border-left: 0;
+  padding-left: 0;
+}
+.hero_rail-item:hover {
+  background-color: rgba(255, 255, 255, 0.07);
+}
+.hero_rail-name {
+  display: block;
+  font-family: var(--font-body);
+  font-size: var(--size-text-small);
+  font-weight: 500;
+  line-height: 1.3;
+  white-space: nowrap;
+}
+.hero_rail-interval {
+  display: block;
+  margin-top: 0.4rem;
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.04em;
+  color: var(--green);
+  white-space: nowrap;
+}
+/* The rail's own label, sitting in the gutter above it. */
+.hero_rail-legend {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-bottom: 0.9rem;
+  color: rgba(255, 255, 255, 0.62);
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.2em;
+}
+.hero_rail-hint {
+  letter-spacing: 0.12em;
+  text-transform: none;
+}
+
+@media (max-width: 991px) {
+  .hero_component {
+    min-height: 0;
+  }
+  .hero_body {
+    padding-top: 9rem;
+  }
+  .hero_rail {
+    margin-top: 3rem;
+  }
+  .hero_rail-item {
+    min-width: 9.5rem;
+  }
+}
+@media (max-width: 767px) {
+  .hero_body {
+    padding-top: 7.5rem;
+  }
+  .hero_media img {
+    object-position: 56% 18%;
+  }
+  .hero_rail-legend .hero_rail-hint {
+    display: none;
+  }
+}
+
+/* --- the premise band -----------------------------------------------------
+   The argument, made once, immediately after the hero: the person injecting is
+   the surgeon, not an employee of the surgeon. It is a two-column band with a
+   display statement at left and a numbered ledger at right, and it is the only
+   place on the site that argues rather than describes. --------------------- */
+.premise_component {
+  background-color: var(--bg);
+}
+.premise_inner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 5rem;
+  align-items: start;
+}
+.premise_statement {
+  position: sticky;
+  top: 8rem;
+}
+.premise_kicker {
+  margin-top: 1.8rem;
+  max-width: 34ch;
+  color: var(--fg-body);
+}
+.premise_points {
+  display: grid;
+  gap: 0;
+  border-top: 1px solid var(--line);
+}
+.premise_point {
+  display: grid;
+  grid-template-columns: 3.5rem 1fr;
+  gap: 1.5rem;
+  padding: 1.9rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.premise_num {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  line-height: 1;
+  color: var(--accent-flat);
+}
+.premise_point-title {
+  margin-bottom: 0.55rem;
+}
+.premise_point-text {
+  color: var(--fg-body);
+  max-width: 52ch;
+}
+
+@media (max-width: 991px) {
+  .premise_inner {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .premise_statement {
+    position: static;
+  }
+}
+
+
+/* ===== css/51-ledger.css ===== */
+/* ===========================================================================
+   THE LEDGER — the whole menu as one index, and the concern picker above it.
+
+   Stone Surgical Arts' treatments page is four category CHAPTERS, each with a
+   person, an instrument still life and a fee table, joined by a sticky jump
+   bar. It is a brochure you read top to bottom.
+
+   This is not that. Seven treatments is a small enough menu to show ENTIRELY,
+   at once, in one table, and a table is the correct object because the question
+   a med spa visitor has is comparative: which of these is the shortest
+   appointment, which one lasts longest, which one costs me a week indoors. Four
+   columns answer that at a glance and no chapter layout can.
+
+   Rows expand in place rather than navigating, because six of the seven have no
+   detail page yet (the eleven-page brief funds one) and a row that opens is
+   honest about that where a dead link would not be.
+
+   THE SECOND AXIS. Above the table sit the seven concerns, as text. Choosing
+   one filters the table. This is the two-axis structure the competitive
+   research found on every serious med spa site — patients search "sagging
+   jawline", not "Morpheus8" — built as a filter over one page rather than as
+   the twenty-four separate concern pages Beverly Hills runs, so it can be
+   promoted to real pages later without any published URL changing.
+   =========================================================================== */
+
+/* --- the concern picker -------------------------------------------------- */
+.concerns_component {
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.concerns_head {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  gap: 2rem;
+  flex-wrap: wrap;
+  margin-bottom: 2.6rem;
+}
+.concerns_list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.7rem;
+  list-style: none;
+}
+.concerns_button {
+  padding: 0.72rem 1.25rem;
+  border: 1px solid var(--line-strong);
+  border-radius: 999px;
+  background-color: transparent;
+  color: var(--fg);
+  font-family: var(--font-body);
+  font-size: var(--size-text-small);
+  font-weight: 500;
+  line-height: 1;
+  cursor: pointer;
+  transition:
+    background-color 0.25s var(--ease),
+    border-color 0.25s var(--ease),
+    color 0.25s var(--ease);
+}
+.concerns_button:hover {
+  border-color: var(--accent-flat);
+  color: var(--accent);
+}
+/* aria-pressed is the state, not a class — the button is a toggle and a screen
+   reader has to hear which one is on. The style follows the attribute so the
+   two can never disagree. */
+.concerns_button[aria-pressed="true"] {
+  background-color: var(--charcoal);
+  border-color: var(--charcoal);
+  color: var(--white);
+}
+.concerns_count {
+  margin-top: 1.6rem;
+  min-height: 1.5rem;
+  color: var(--fg-mute);
+  font-size: var(--size-text-small);
+}
+
+/* --- the ledger ---------------------------------------------------------- */
+.ledger_component {
+  background-color: var(--bg);
+}
+.ledger_group + .ledger_group {
+  margin-top: 4.5rem;
+}
+/* A shelf heading disappears with its rows when a filter empties it. */
+.ledger_group[hidden] {
+  display: none;
+}
+/* Thumbnail, heading, blurb. The still life is small on purpose: it is a mark
+   for the shelf, not a photograph of a treatment, and at any larger size it
+   starts competing with the table it introduces. */
+.ledger_group-head {
+  display: grid;
+  grid-template-columns: 5.5rem minmax(0, 20rem) 1fr;
+  gap: 1.75rem 2.5rem;
+  align-items: center;
+  padding-bottom: 1.5rem;
+}
+.ledger_group-figure {
+  margin: 0;
+  width: 5.5rem;
+  aspect-ratio: 1 / 1;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background-color: var(--bg-alt);
+}
+.ledger_group-figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.ledger_group-blurb {
+  max-width: 60ch;
+  color: var(--fg-body);
+}
+
+.ledger_table {
+  border-top: 1px solid var(--charcoal);
+}
+.ledger_row {
+  border-bottom: 1px solid var(--line);
+}
+.ledger_row[hidden] {
+  display: none;
+}
+/* The summary IS the row. Grid rather than flex so the four metadata columns
+   line up down the whole table regardless of how long a treatment name is. */
+.ledger_summary {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) repeat(4, minmax(0, 1fr)) 1.5rem;
+  gap: 1.5rem;
+  align-items: center;
+  padding: 1.55rem 0;
+  cursor: pointer;
+  list-style: none;
+  transition: color 0.25s var(--ease);
+}
+.ledger_summary::-webkit-details-marker {
+  display: none;
+}
+.ledger_summary:hover {
+  color: var(--accent);
+}
+.ledger_name {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  line-height: 1.2;
+  color: inherit;
+}
+.ledger_cell {
+  display: flex;
+  flex-direction: column;
+  gap: 0.28rem;
+  min-width: 0;
+}
+.ledger_cell-key {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-mute);
+}
+.ledger_cell-val {
+  font-size: var(--size-text-small);
+  font-weight: 500;
+  color: var(--fg);
+}
+.ledger_chev {
+  position: relative;
+  width: 1.5rem;
+  height: 1.5rem;
+  justify-self: end;
+}
+.ledger_chev::before,
+.ledger_chev::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  background-color: var(--accent-flat);
+  transform: translate(-50%, -50%);
+  transition: transform 0.3s var(--ease), opacity 0.3s var(--ease);
+}
+.ledger_chev::before {
+  width: 0.95rem;
+  height: 1.5px;
+}
+.ledger_chev::after {
+  width: 1.5px;
+  height: 0.95rem;
+}
+.ledger_row[open] .ledger_chev::after {
+  opacity: 0;
+  transform: translate(-50%, -50%) rotate(90deg);
+}
+
+/* --- the opened row ------------------------------------------------------ */
+.ledger_detail {
+  display: grid;
+  grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  gap: 3rem;
+  padding: 0.5rem 0 2.6rem;
+}
+.ledger_lede {
+  max-width: 62ch;
+  color: var(--fg-body);
+}
+.ledger_meta {
+  margin-top: 1.6rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 2.2rem;
+}
+.ledger_meta-item {
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+}
+.ledger_meta-item strong {
+  display: block;
+  font-weight: 500;
+  color: var(--fg);
+}
+.ledger_actions {
+  margin-top: 1.9rem;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 1.5rem;
+}
+/* The honest note on the six treatments with no page of their own. */
+.ledger_nopage {
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+}
+.ledger_figure {
+  margin: 0;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background-color: var(--bg-alt);
+}
+.ledger_figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* The empty state. A filter that matches nothing has to say so, or the page
+   just looks broken. */
+.ledger_empty {
+  padding: 3.5rem 0;
+  text-align: center;
+  color: var(--fg-mute);
+}
+.ledger_empty[hidden] {
+  display: none;
+}
+
+@media (max-width: 1279px) {
+  .ledger_summary {
+    grid-template-columns: minmax(0, 1.4fr) repeat(3, minmax(0, 1fr)) 1.5rem;
+  }
+  /* The fourth metadata column is the first to go: "area" is the one a visitor
+     can infer from the treatment name. */
+  .ledger_cell.is-area {
+    display: none;
+  }
+}
+@media (max-width: 991px) {
+  /* The thumbnail keeps its own column and the heading and blurb stack beside
+     it, rather than the image becoming a full-width band it was never shot to
+     be. */
+  .ledger_group-head {
+    grid-template-columns: 4rem 1fr;
+    gap: 0.6rem 1.25rem;
+    align-items: center;
+  }
+  .ledger_group-figure {
+    width: 4rem;
+    grid-row: span 2;
+    align-self: start;
+  }
+  .ledger_summary {
+    grid-template-columns: minmax(0, 1fr) 1.5rem;
+    gap: 0.75rem 1.5rem;
+    align-items: start;
+  }
+  .ledger_name {
+    grid-column: 1;
+  }
+  .ledger_chev {
+    grid-column: 2;
+    grid-row: 1;
+  }
+  /* Below the tablet breakpoint the row stops being a table row and becomes a
+     card: the name on its own line, the metadata as a wrapped strip beneath it.
+     The keys stay, because without the header row they are the only thing
+     saying what the numbers mean. */
+  .ledger_cell {
+    grid-column: 1;
+    flex-direction: row;
+    align-items: baseline;
+    gap: 0.6rem;
+  }
+  .ledger_cell.is-area {
+    display: flex;
+  }
+  .ledger_detail {
+    grid-template-columns: 1fr;
+    gap: 1.8rem;
+  }
+  .ledger_figure {
+    order: -1;
+  }
+}
+
+
+/* ===== css/52-cadence.css ===== */
+/* ===========================================================================
+   THE YEAR — a twelve-month strip showing what a plan actually looks like.
+
+   THE SIGNATURE SECTION. If one object on this site has to be the thing nobody
+   confuses with Stone Surgical Arts, it is this one, and it earns its place by
+   answering the question every other med spa site leaves the visitor to work
+   out on their own: how often am I here, and for what.
+
+   It is a grid, twelve columns wide, one row per treatment in a sample plan.
+   A dot in a cell is an appointment. Read across a row and you see a treatment
+   cadence; read down a column and you see a month. That is the whole idea, and
+   it is why this is a grid and not a list of cards.
+
+   THE PLAN IS AN ILLUSTRATION, NOT A PRESCRIPTION. The markup says so, in the
+   section, not in a footnote — a sample plan on a medical site that does not
+   say it is a sample is a claim about your treatment. Clinical review is
+   outstanding on the intervals; see treatments-data.mjs.
+
+   Below 767 the grid stops being a grid. A twelve-column matrix on a 390px
+   screen is unreadable at any type size, so it re-forms as a list BY MONTH,
+   which is the same information read the other way round.
+   =========================================================================== */
+.cadence_component {
+  background-color: var(--bg-alt);
+  overflow: hidden;
+}
+.cadence_head {
+  display: grid;
+  grid-template-columns: minmax(0, 30rem) 1fr;
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 3.5rem;
+}
+.cadence_note {
+  max-width: 46ch;
+  color: var(--fg-body);
+}
+
+.cadence_grid {
+  --cad-label: 13rem;
+  position: relative;
+}
+
+/* The month header. Same column template as every plan row, so the labels sit
+   over the cells they name and stay over them at every width. */
+.cadence_months,
+.cadence_row {
+  display: grid;
+  grid-template-columns: var(--cad-label) repeat(12, minmax(0, 1fr));
+  align-items: center;
+}
+.cadence_months {
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--charcoal);
+}
+.cadence_month {
+  text-align: center;
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-mute);
+}
+.cadence_months-spacer {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-mute);
+}
+
+.cadence_row {
+  border-bottom: 1px solid var(--line);
+  min-height: 4.15rem;
+}
+.cadence_label {
+  padding-right: 1.5rem;
+}
+.cadence_label-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.2;
+  color: var(--fg);
+}
+.cadence_label-interval {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: var(--size-text-tiny);
+  color: var(--fg-mute);
+}
+
+/* A cell is a click target on the desktop grid only in the sense that it has a
+   tooltip; the dot is the mark. The vertical hairline is what makes a column
+   readable as a month all the way down the stack. */
+/* EVERY CHILD OF A ROW IS PLACED EXPLICITLY. Nothing here is auto-placed, and
+   that is not tidiness, it is the fix for a real bug.
+
+   The run below is placed explicitly, by necessity — it spans a computed pair
+   of columns. In CSS grid, explicitly-placed items are positioned first and
+   auto-placed items then fill what is LEFT. So the run sat across columns 2 to
+   11, the twelve cells found those occupied, and they wrapped into implicit
+   rows: every treatment rendered as two stacked half-rows with its dots in the
+   wrong months. It looked plausible enough in a full-page screenshot to nearly
+   pass, and only reading the computed grid-column of each cell showed it.
+
+   Mixing explicit and auto placement in one grid is the trap. So the label
+   takes column 1, each cell takes its own month column by class, and the run
+   spans between them; auto-placement never runs at all and DOM order stops
+   mattering. */
+.cadence_label {
+  grid-column: 1;
+  grid-row: 1;
+}
+.cadence_cell {
+  grid-row: 1;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid var(--line);
+}
+/* Month N is grid column N + 1, because column 1 is the treatment label. */
+.cadence_cell.is-m1 { grid-column: 2; }
+.cadence_cell.is-m2 { grid-column: 3; }
+.cadence_cell.is-m3 { grid-column: 4; }
+.cadence_cell.is-m4 { grid-column: 5; }
+.cadence_cell.is-m5 { grid-column: 6; }
+.cadence_cell.is-m6 { grid-column: 7; }
+.cadence_cell.is-m7 { grid-column: 8; }
+.cadence_cell.is-m8 { grid-column: 9; }
+.cadence_cell.is-m9 { grid-column: 10; }
+.cadence_cell.is-m10 { grid-column: 11; }
+.cadence_cell.is-m11 { grid-column: 12; }
+.cadence_cell.is-m12 { grid-column: 13; }
+.cadence_dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 50%;
+  background-color: var(--accent-flat);
+  box-shadow: 0 0 0 0 rgba(143, 188, 70, 0.5);
+  transition: box-shadow 0.4s var(--ease), transform 0.3s var(--ease);
+}
+/* The first appointment in a row is the one that starts the plan, so it reads
+   as a ring rather than a fill — it is a different kind of visit. */
+.cadence_dot.is-start {
+  background-color: transparent;
+  border: 2px solid var(--charcoal);
+}
+.cadence_row:hover .cadence_dot {
+  transform: scale(1.18);
+}
+
+/* A run — the band drawn between the first and last appointment in a row, so
+   the INTERVAL reads as a length rather than being inferred from two dots.
+
+   It is a GRID ITEM spanning the columns it covers, not an absolutely
+   positioned bar. Absolute positioning would have to know the label column's
+   width to compute a left offset, and that width changes at three breakpoints
+   (--cad-label), so the bar and the dots would drift apart on exactly the
+   screens nobody re-checks. As a grid item it is placed by the same track
+   definition that places the dots, and it cannot disagree with them.
+
+   grid-row: 1 puts it in the row's only row, alongside the cells rather than
+   after them; the cells are position: relative and therefore paint above it. */
+.cadence_run {
+  grid-row: 1;
+  align-self: center;
+  height: 1px;
+  background-color: var(--line-strong);
+  pointer-events: none;
+}
+
+.cadence_legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem 2.4rem;
+  margin-top: 2.4rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+}
+.cadence_legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.cadence_legend-dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 50%;
+  background-color: var(--accent-flat);
+  flex: 0 0 auto;
+}
+.cadence_legend-dot.is-start {
+  background-color: transparent;
+  border: 2px solid var(--charcoal);
+}
+
+/* --- the phone version ----------------------------------------------------
+   The same plan, read by month instead of by treatment. Hidden on desktop and
+   the grid is hidden here, so the two never both render. -------------------- */
+.cadence_bymonth {
+  display: none;
+}
+.cadence_bymonth-item {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1.25rem;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.cadence_bymonth-month {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  color: var(--accent);
+}
+.cadence_bymonth-list {
+  list-style: none;
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.cadence_bymonth-list li + li {
+  margin-top: 0.3rem;
+}
+.cadence_bymonth-item.is-empty .cadence_bymonth-list {
+  color: var(--fg-mute);
+}
+
+@media (max-width: 1279px) {
+  .cadence_grid {
+    --cad-label: 10.5rem;
+  }
+}
+@media (max-width: 991px) {
+  .cadence_head {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .cadence_grid {
+    --cad-label: 9rem;
+  }
+  .cadence_month {
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+  }
+}
+@media (max-width: 767px) {
+  .cadence_grid,
+  .cadence_legend {
+    display: none;
+  }
+  .cadence_bymonth {
+    display: block;
+    border-top: 1px solid var(--charcoal);
+  }
+}
+
+
+/* ===== css/53-detail.css ===== */
+/* ===========================================================================
+   THE TREATMENT PAGE — a reference document, not a narrative.
+
+   Stone Surgical Arts' treatment pages are dossiers: full-bleed parallax hero,
+   mask reveals, a photograph behind a dark band, a related row. They are built
+   to carry someone through a decision they will make once, and they read like a
+   story because that is what a facelift is.
+
+   Botox is not that. Someone reading this page has usually already decided to
+   have it and is checking specifics: how long does it take, when does it show,
+   how long until I am back, what is the difference between the four products
+   in the room. So the page is a SPEC SHEET — a sticky rail of vitals at left
+   that stays put while the prose scrolls past it at right — and the vitals are
+   the first thing rendered, not the last.
+
+   This shape is also why Botox is the right sample page to fund first: the rail
+   is generated from the same treatments-data.mjs record that fills the ledger
+   row, so the other six pages are a body file each and nothing else.
+   =========================================================================== */
+.detail_component {
+  background-color: var(--bg);
+}
+.detail_layout {
+  display: grid;
+  grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+  gap: 5rem;
+  align-items: start;
+}
+/* BOTH TRACKS NEED min-width: 0, and the minmax(0, ...) above is not enough.
+
+   A grid ITEM defaults to `min-width: auto`, which resolves to its min-content
+   size, and a block's min-content is the largest min-content of anything inside
+   it. The comparison table carries `min-width: 40rem` so that four columns stay
+   legible, and that 40rem propagated straight out of the table, through
+   .detail_prose, and set the floor for the whole row.
+
+   At 390 that made both tracks 595px wide inside a 353px container. The page
+   did not scroll sideways, because .page-wrapper clips it — which is exactly
+   what made this hard to see: the only visible symptom was the two buttons in
+   the vitals rail hanging off the right edge, on the OPPOSITE side of the grid
+   from the table that caused it. Caught by all-pages.mjs at 390.
+
+   minmax(0, 1fr) fixes the TRACK's minimum; this fixes the ITEM's. Both are
+   required, and the table stays scrollable inside .compare_scroll. */
+.detail_layout > * {
+  min-width: 0;
+}
+
+/* --- the vitals rail ----------------------------------------------------- */
+.detail_rail {
+  position: sticky;
+  top: 8rem;
+}
+.detail_vitals {
+  border-top: 1px solid var(--charcoal);
+}
+.detail_vital {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.detail_vital-key {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-mute);
+}
+.detail_vital-val {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.25;
+  color: var(--fg);
+}
+.detail_rail-actions {
+  margin-top: 2rem;
+  display: grid;
+  gap: 0.75rem;
+}
+/* The rail carries the only "no prices" statement on the page, because the rail
+   is where a visitor looks for one. Saying nothing reads as hiding it. */
+.detail_rail-note {
+  margin-top: 1.4rem;
+  font-size: var(--size-text-tiny);
+  line-height: 1.55;
+  color: var(--fg-mute);
+}
+
+/* --- the prose column ---------------------------------------------------- */
+.detail_prose > * + * {
+  margin-top: 1.15rem;
+}
+.detail_prose h2 {
+  margin-top: 3.6rem;
+}
+.detail_prose h2:first-child {
+  margin-top: 0;
+}
+.detail_prose h3 {
+  margin-top: 2.4rem;
+}
+.detail_prose p,
+.detail_prose li {
+  max-width: 68ch;
+  color: var(--fg-body);
+}
+.detail_prose ul {
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+.detail_prose ul li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.detail_prose ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background-color: var(--accent-flat);
+}
+
+/* A pulled aside inside the prose — the "am I a candidate" block and the
+   honest note about who this is not for. */
+.detail_aside {
+  margin-top: 2.2rem;
+  padding: 1.9rem 2.1rem;
+  border-left: 2px solid var(--accent-flat);
+  background-color: var(--green-wash);
+}
+.detail_aside > * + * {
+  margin-top: 0.8rem;
+}
+.detail_aside-title {
+  font-family: var(--font-body);
+  font-size: var(--size-text-small);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+
+/* --- the comparison table ------------------------------------------------
+   Four products, one row each. This is the section the research found on
+   NassifMD's Botox page and the reason that page is the deepest in the set:
+   the visitor's real question is not "what is Botox", it is "which of these
+   four am I getting and why". A table answers it; prose does not. -------- */
+.compare_table {
+  width: 100%;
+  margin-top: 1.8rem;
+  border-collapse: collapse;
+  /* The table is the one element on the site allowed to scroll sideways, and
+     the wrapper below is what does it. */
+  min-width: 40rem;
+}
+.compare_scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.compare_table th,
+.compare_table td {
+  padding: 1rem 1.1rem 1rem 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.compare_table thead th {
+  border-bottom-color: var(--charcoal);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-mute);
+}
+.compare_table tbody th {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  font-weight: 400;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.compare_table tbody tr.is-here th::after {
+  content: "In the room";
+  display: block;
+  margin-top: 0.25rem;
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* --- pre and post care --------------------------------------------------
+   Two columns, before and after, each a short ordered list on a rule. It is
+   the section Skin Solutions adds that NassifMD does not, and it is the one
+   that reduces the phone calls the day after. ---------------------------- */
+.care_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 1.8rem;
+}
+.care_col-title {
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--charcoal);
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+.care_list {
+  list-style: none;
+  counter-reset: care;
+}
+.care_list li {
+  counter-increment: care;
+  position: relative;
+  padding: 0.95rem 0 0.95rem 2.4rem;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.care_list li::before {
+  content: counter(care, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  font-family: var(--font-display);
+  font-size: var(--size-text-small);
+  color: var(--accent-flat);
+}
+
+/* --- the related row ----------------------------------------------------- */
+.related_component {
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--line);
+}
+.related_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.4rem;
+}
+.related_card {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.6rem 1.7rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.related_card:hover {
+  border-color: var(--accent-flat);
+  transform: translateY(-2px);
+}
+.related_card-meta {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-mute);
+}
+
+@media (max-width: 991px) {
+  .detail_layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .detail_rail {
+    position: static;
+  }
+  .detail_vitals {
+    /* On one column the vitals become a two-up strip rather than a tall list,
+       so the prose still starts inside the first screen. */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+  .care_grid,
+  .related_grid {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+}
+@media (max-width: 478px) {
+  .detail_vitals {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ===== css/54-practice.css ===== */
+/* ===========================================================================
+   THE PRACTICE — about, the doctor, the team. Three pages, one vocabulary.
+
+   Stone Surgical Arts sets the doctor's name as a ghost word behind her
+   portrait and lays her training out as a ledger. That is a magazine profile
+   and it suits a surgeon you are choosing to operate on you.
+
+   Here the job is narrower and more specific: explain, quickly, why an oral and
+   maxillofacial surgeon is the person holding the syringe, and why there are
+   two Stone websites. Both are answered with facts on a rule rather than with
+   a spread, because a med spa visitor gives this page far less time than a
+   facelift patient gives the equivalent.
+   =========================================================================== */
+
+/* --- the credentials strip ----------------------------------------------
+   Four facts across, on ivory, under the page header. The numbers are set in
+   the display face at heading size because they are the argument. --------- */
+.creds_component {
+  background-color: var(--bg-alt);
+  border-bottom: 1px solid var(--line);
+}
+.creds_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem;
+}
+.creds_item {
+  display: grid;
+  gap: 0.5rem;
+}
+.creds_key {
+  font-family: var(--font-display);
+  font-size: var(--size-h3);
+  line-height: 1;
+  color: var(--fg);
+}
+.creds_val {
+  font-size: var(--size-text-small);
+  line-height: 1.55;
+  color: var(--fg-mute);
+  max-width: 24ch;
+}
+
+/* --- the alternating band -----------------------------------------------
+   Photograph one side, prose the other, flipping each time. Used on About for
+   the room, the practice and the two-brand explanation. `is-flip` swaps the
+   columns; nothing else changes. ----------------------------------------- */
+.band_component {
+  background-color: var(--bg);
+}
+.band_component.is-alt {
+  background-color: var(--bg-alt);
+}
+.band_inner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 4.5rem;
+  align-items: center;
+}
+.band_component.is-flip .band_media {
+  order: 2;
+}
+.band_media {
+  margin: 0;
+  aspect-ratio: 5 / 4;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background-color: var(--bg-alt);
+}
+.band_media img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.band_title {
+  margin-top: 1.4rem;
+}
+.band_text {
+  margin-top: 1.4rem;
+  color: var(--fg-body);
+}
+.band_text > * + * {
+  margin-top: 0.95rem;
+}
+.band_text p {
+  max-width: 56ch;
+}
+.band_actions {
+  margin-top: 2rem;
+}
+
+/* The two-brand note. It carries a rule and a green key line because it is the
+   one paragraph on the site that explains the modality split, and a visitor who
+   wants a facelift has to find it fast. */
+.band_switch {
+  margin-top: 2rem;
+  padding: 1.5rem 1.7rem;
+  border-left: 2px solid var(--accent-flat);
+  background-color: var(--green-wash);
+}
+.band_switch-title {
+  font-family: var(--font-body);
+  font-size: var(--size-text-small);
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.5rem;
+}
+.band_switch p {
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+  max-width: 52ch;
+}
+.band_switch a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+  text-decoration-color: var(--line-strong);
+}
+.band_switch a:hover {
+  text-decoration-color: currentColor;
+}
+
+/* --- the team grid -------------------------------------------------------
+   Four up on a desktop, on hairlines rather than in cards. A card with a
+   shadow reads as a product; these are people, and the practice's own staff
+   photographs are inconsistent enough that a shared frame flatters them more
+   than a raised box would. ------------------------------------------------ */
+.team_grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 2.5rem 2rem;
+}
+.team_member {
+  display: grid;
+  gap: 0;
+}
+.team_portrait {
+  margin: 0 0 1.1rem;
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+  border-radius: var(--radius-card);
+  background-color: var(--bg-alt);
+}
+.team_portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 50% 22%;
+  transition: transform 0.6s var(--ease);
+}
+.team_member:hover .team_portrait img {
+  transform: scale(1.03);
+}
+/* The placeholder frame for a member with no photograph. It says so rather
+   than showing a grey box, because a grey box looks like a bug. */
+.team_portrait.is-empty {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px dashed var(--line-strong);
+  background-color: transparent;
+}
+.team_portrait-note {
+  padding: 1rem;
+  text-align: center;
+  font-size: var(--size-text-tiny);
+  color: var(--fg-mute);
+}
+.team_name {
+  padding-top: 0.9rem;
+  border-top: 1px solid var(--line);
+}
+.team_role {
+  margin-top: 0.3rem;
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+.team_note {
+  margin-top: 0.6rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+}
+
+@media (max-width: 1279px) {
+  .creds_grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2.4rem 3rem;
+  }
+  .team_grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+@media (max-width: 991px) {
+  .band_inner {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+  /* On one column the photograph always leads, whichever side it was on. */
+  .band_component.is-flip .band_media {
+    order: 0;
+  }
+  .team_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 478px) {
+  .creds_grid {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+  .team_grid {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+
+/* ===== css/55-proof.css ===== */
+/* ===========================================================================
+   PROOF — reviews, and the gallery that cannot ship yet.
+
+   THE CONSTRAINT THAT SHAPES THIS WHOLE PAGE. There are fifteen archived
+   before-and-after galleries of real Stone patients. None of them can be
+   published without current written consent per case (docs/project-overview.md,
+   "Photography"). Getting that consent is a client task with weeks of lead time.
+
+   So the sitemap's instruction was: do not design a layout that collapses
+   without the photographs. This one does not. The page leads on WRITTEN
+   reviews, which exist today, and the gallery is a reserved frame that states
+   plainly what it is waiting for. When consent arrives the frame fills with a
+   grid and nothing above or below it moves.
+
+   That reserved frame is deliberately not a grey box or a "coming soon". A
+   medical practice that shows an empty gallery with no explanation reads as one
+   with nothing to show. It says what is missing and why, which is the more
+   flattering truth.
+
+   Stone Surgical Arts solved the same problem with a filterable review WALL.
+   This is a different object: a stacked editorial column of long reviews, and
+   an authenticity FAQ underneath, which is the pattern Beverly Hills uses to
+   answer "are these real clients" before the visitor thinks to ask.
+   =========================================================================== */
+
+/* --- the reviews --------------------------------------------------------- */
+.reviews_component {
+  background-color: var(--bg);
+}
+.reviews_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  margin-top: 3rem;
+}
+.review_card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 2.1rem 2.2rem 1.9rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+}
+.review_stars {
+  display: inline-flex;
+  gap: 0.18rem;
+  color: var(--accent-flat);
+}
+.review_stars svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+.review_quote {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.45;
+  color: var(--fg);
+}
+.review_body {
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.review_meta {
+  margin-top: auto;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--fg-mute);
+}
+
+/* --- the reserved gallery ------------------------------------------------ */
+.gallery_component {
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--line);
+}
+.gallery_reserved {
+  display: grid;
+  grid-template-columns: minmax(0, 26rem) 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  margin-top: 2.6rem;
+  padding: 3rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-card);
+  background-color: var(--bg);
+}
+/* The frame draws two empty plates, before and after, so the shape of what is
+   missing is legible rather than abstract. */
+.gallery_plates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.gallery_plate {
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--bg-alt);
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-mute);
+}
+.gallery_reserved-title {
+  margin-bottom: 1rem;
+}
+.gallery_reserved-text {
+  color: var(--fg-body);
+  max-width: 56ch;
+}
+.gallery_reserved-text > * + * {
+  margin-top: 0.85rem;
+}
+
+/* --- the authenticity FAQ sits on the shared 36-faq.css. Nothing new. --- */
+
+/* --- the video row, same reserved treatment, smaller ------------------- */
+.proof_note {
+  margin-top: 2.4rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  max-width: 62ch;
+}
+
+@media (max-width: 1279px) {
+  .reviews_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 991px) {
+  .gallery_reserved {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+    padding: 2rem;
+  }
+  .gallery_plates {
+    max-width: 22rem;
+  }
+}
+@media (max-width: 767px) {
+  .reviews_grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ===== css/56-plan.css ===== */
+/* ===========================================================================
+   MEMBERSHIP AND FINANCING.
+
+   NO NUMBERS. Stone Surgical Arts' membership page carries a credit calculator
+   with real fees in it. That is correct there and forbidden here: Brandklout is
+   a partner engagement and CLAUDE.md says never compute or record a price, a
+   rate, a quote or a cost anywhere under deliver/brandklout/. So this page
+   compares two tiers on what they INCLUDE and how often, and every figure on it
+   is a count or an interval.
+
+   That constraint turned out to make a better page. A membership is not bought
+   on its monthly figure, it is bought on whether the thing you already do every
+   four months becomes cheaper and easier; a comparison of what is in each tier
+   answers that, and a price does not.
+
+   The tiers are a PROPOSAL. Nobody has confirmed them. The page says so, in the
+   page, and both names are placeholders.
+   =========================================================================== */
+.tiers_component {
+  background-color: var(--bg);
+}
+.tiers_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  margin-top: 3rem;
+  align-items: start;
+}
+.tier_card {
+  display: flex;
+  flex-direction: column;
+  padding: 2.4rem 2.4rem 2.6rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background-color: var(--bg-card);
+}
+/* The recommended tier is marked by a charcoal ground, not by a most-popular
+   ribbon, because a ribbon is a claim about other people and this is a claim
+   about the practice's own advice. */
+.tier_card.is-lead {
+  background-color: var(--charcoal);
+  border-color: var(--charcoal);
+}
+.tier_card.is-lead .tier_name,
+.tier_card.is-lead .tier_for {
+  color: var(--white);
+}
+.tier_card.is-lead .tier_line {
+  color: rgba(255, 255, 255, 0.8);
+  border-bottom-color: rgba(255, 255, 255, 0.16);
+}
+.tier_card.is-lead .tier_line-count {
+  color: var(--green);
+}
+.tier_card.is-lead .tier_note {
+  color: rgba(255, 255, 255, 0.62);
+}
+.tier_eyebrow {
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.tier_card.is-lead .tier_eyebrow {
+  color: var(--green);
+}
+.tier_name {
+  margin-top: 0.9rem;
+}
+.tier_for {
+  margin-top: 0.8rem;
+  color: var(--fg-body);
+  max-width: 40ch;
+}
+.tier_lines {
+  margin-top: 2rem;
+  border-top: 1px solid var(--line);
+}
+.tier_card.is-lead .tier_lines {
+  border-top-color: rgba(255, 255, 255, 0.28);
+}
+.tier_line {
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: 1.5rem;
+  align-items: baseline;
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.tier_line-count {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1;
+  color: var(--accent);
+  white-space: nowrap;
+}
+.tier_actions {
+  margin-top: 2.2rem;
+}
+.tier_note {
+  margin-top: 1.2rem;
+  font-size: var(--size-text-tiny);
+  color: var(--fg-mute);
+}
+.tiers_flag {
+  margin-top: 2rem;
+  padding: 1.25rem 1.5rem;
+  border-left: 2px solid var(--line-strong);
+  background-color: var(--bg-alt);
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+  max-width: 68ch;
+}
+
+/* --- financing ----------------------------------------------------------
+   A vendor row and then an FAQ, which is the structure Viva uses and the only
+   one that survives a vendor being swapped. Each vendor is a plain card; no
+   logos, because none have been supplied and a third-party wordmark set in
+   this site's own typeface would misrepresent it. ------------------------ */
+.vendors_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.6rem;
+}
+.vendor_card {
+  display: grid;
+  gap: 0.7rem;
+  align-content: start;
+  padding: 1.9rem 2rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background-color: var(--bg-card);
+}
+.vendor_name {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  color: var(--fg);
+}
+.vendor_for {
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.vendor_meta {
+  margin-top: 0.4rem;
+  padding-top: 0.8rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--fg-mute);
+}
+.vendors_flag {
+  margin-top: 2rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  max-width: 68ch;
+}
+
+@media (max-width: 991px) {
+  .tiers_grid,
+  .vendors_grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+/* ===== css/57-book.css ===== */
+/* ===========================================================================
+   BOOKING — two paths, because the brief asks for two.
+
+   The Asana subtask is "Book Consultation (Virtual and In-Office)". The
+   competitive research went looking for how the five best-in-class med spas
+   handle a virtual consultation and found that NONE OF THEM OFFER ONE. Thirty-
+   five pages captured, one false positive. So there is no pattern to copy and
+   this page is designed from the requirement rather than from a reference.
+
+   Two cards, equal weight, each stating what that path is AND what it cannot
+   do. The in-office card says you can be treated the same visit; the virtual
+   card says you cannot, because anything injected happens in Westlake, and a
+   page that lets someone book a video call expecting Botox at the end of it
+   has failed them.
+
+   THE FORM POSTS NOWHERE. There is no endpoint, no scheduler and no
+   HIPAA-compliant channel decided for this practice yet — the open question in
+   the sitemap is who takes the call and on what platform. On submit the form
+   says so and points at the phone. It is inert ON PURPOSE and must stay inert
+   until a real endpoint exists: a medical intake form that silently drops a
+   patient's details is worse than no form at all.
+   =========================================================================== */
+.paths_component {
+  background-color: var(--bg);
+}
+.paths_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  margin-top: 2.6rem;
+}
+.path_card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2.3rem 2.4rem 2.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background-color: var(--bg-card);
+  transition: border-color 0.25s var(--ease);
+}
+.path_card:hover {
+  border-color: var(--accent-flat);
+}
+.path_tag {
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.path_text {
+  color: var(--fg-body);
+  max-width: 46ch;
+}
+.path_list {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+}
+.path_list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.path_list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background-color: var(--accent-flat);
+}
+/* The limit line — what this path cannot do. Muted and last, but present. */
+.path_limit {
+  margin-top: 1rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  max-width: 46ch;
+}
+.path_actions {
+  margin-top: auto;
+  padding-top: 1.6rem;
+}
+
+/* --- the form ------------------------------------------------------------ */
+.form_component {
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--line);
+}
+.form_layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+  gap: 4.5rem;
+  align-items: start;
+}
+.form_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.form_field {
+  display: grid;
+  gap: 0.45rem;
+}
+.form_field.is-full {
+  grid-column: 1 / -1;
+}
+.form_label {
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-mute);
+}
+.form_input,
+.form_select,
+.form_textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background-color: var(--bg-card);
+  color: var(--fg);
+  font-size: var(--size-text-small);
+  transition: border-color 0.2s var(--ease);
+}
+.form_input:focus,
+.form_select:focus,
+.form_textarea:focus {
+  border-color: var(--accent-flat);
+}
+.form_textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+.form_actions {
+  grid-column: 1 / -1;
+  margin-top: 0.6rem;
+}
+/* The status line the inert submit writes into. Polite-live, so a screen
+   reader hears it without the focus moving. */
+.form_status {
+  grid-column: 1 / -1;
+  min-height: 1.5rem;
+  font-size: var(--size-text-small);
+  color: var(--accent);
+}
+.form_status:empty {
+  min-height: 0;
+}
+.form_privacy {
+  grid-column: 1 / -1;
+  font-size: var(--size-text-tiny);
+  color: var(--fg-mute);
+  max-width: 60ch;
+}
+.form_aside {
+  padding: 2rem 2.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background-color: var(--bg-card);
+}
+.form_aside-title {
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+.form_aside-list {
+  list-style: none;
+}
+.form_aside-list li {
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.form_aside-list li:last-child {
+  border-bottom: 0;
+}
+.form_aside-list strong {
+  display: block;
+  font-weight: 500;
+  color: var(--fg);
+}
+
+/* --- the thank-you page --------------------------------------------------
+   noindex, and a conversion-tracking endpoint. Short by design: the visitor
+   has done the thing, so the page confirms it, says what happens next with
+   real timings, and offers exactly two onward links. ---------------------- */
+.thanks_component {
+  background-color: var(--bg);
+  min-height: 72vh;
+  display: flex;
+  align-items: center;
+}
+.thanks_inner {
+  max-width: 42rem;
+}
+.thanks_mark {
+  width: 3.25rem;
+  height: 3.25rem;
+  color: var(--accent-flat);
+}
+.thanks_title {
+  margin-top: 1.8rem;
+}
+.thanks_text {
+  margin-top: 1.4rem;
+  color: var(--fg-body);
+}
+.thanks_next {
+  margin-top: 2.6rem;
+  border-top: 1px solid var(--line);
+}
+.thanks_next-item {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.thanks_next-when {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.2;
+  color: var(--accent);
+}
+.thanks_actions {
+  margin-top: 2.4rem;
+}
+
+@media (max-width: 991px) {
+  .paths_grid,
+  .form_grid {
+    grid-template-columns: 1fr;
+  }
+  .form_layout {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+}
+@media (max-width: 478px) {
+  .thanks_next-item {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+}
+
+
+/* ===== css/58-close.css ===== */
+/* ===========================================================================
+   THE CLOSING BAND — the shared invitation, dark, on every page that does not
+   already end on one.
+
+   The client asked Surgical Arts for one dark section on every page and the
+   same instinct applies here, but this band is a different object: no portrait,
+   one display line, and three plain facts about what a consultation is. See
+   partials/cta.html for why the facts are here and not on the booking page.
+   =========================================================================== */
+.close_component {
+  background-color: var(--charcoal);
+  position: relative;
+  overflow: hidden;
+}
+/* The dark marble, at low opacity, so the band has a surface rather than being
+   flat charcoal. The texture is the practice's own asset, shared with the
+   sibling site — a material is not a section shape. */
+.close_component::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("tex-marble-dark.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
+}
+.close_inner {
+  position: relative;
+  z-index: 1;
+  max-width: 62rem;
+}
+.close_title {
+  margin-top: 1.5rem;
+  max-width: 18ch;
+  color: var(--white);
+}
+.close_facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 3.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.close_fact {
+  display: grid;
+  gap: 0.55rem;
+}
+.close_fact-key {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  line-height: 1.15;
+  color: var(--green);
+}
+.close_fact-val {
+  font-size: var(--size-text-small);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 34ch;
+}
+.close_actions {
+  margin-top: 3rem;
+}
+
+@media (max-width: 991px) {
+  .close_facts {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+  .close_fact {
+    grid-template-columns: 9rem 1fr;
+    align-items: baseline;
+    gap: 1.25rem;
+  }
+  .close_fact-key {
+    font-size: var(--size-h5);
+  }
+}
+@media (max-width: 478px) {
+  .close_fact {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}
+
+
+/* ===== css/59-wide.css ===== */
+/* ===========================================================================
+   2K AND 4K. Last in the cascade on purpose.
+
+   The client asked for this on Surgical Arts on 2026-09-02 and the reasoning
+   carries over unchanged: above about 1700px the fluid root keeps growing the
+   type but the full-bleed bands keep growing their MEASURE, so a two-column
+   band on a 4K monitor ends up with 140-character lines. The container caps at
+   80rem everywhere else; these are the places that opt out of it.
+
+   Technique borrowed from the sibling build, which is allowed — a technique may
+   repeat between the two sites, a section shape may not (gotcha 4).
+   =========================================================================== */
+@media (min-width: 1700px) {
+  /* The hero photograph may stay full-bleed; its COPY may not. */
+  .hero_copy {
+    max-width: 40ch;
+  }
+  .hero_rail-item {
+    min-width: 12rem;
+  }
+
+  /* The ledger's metadata columns stop growing and the name column takes the
+     slack, because a treatment name is the only cell that benefits from room. */
+  .ledger_summary {
+    grid-template-columns: minmax(0, 2.4fr) repeat(4, minmax(0, 1fr)) 1.5rem;
+  }
+
+  /* The twelve-month grid gets a wider label gutter rather than wider cells;
+     the cells only ever hold a 0.72rem dot. */
+  .cadence_grid {
+    --cad-label: 17rem;
+  }
+
+  /* Prose measures. Nothing on this site should exceed about 70 characters. */
+  .detail_prose p,
+  .detail_prose li,
+  .band_text p,
+  .premise_point-text {
+    max-width: 68ch;
+  }
+}
+
+@media (min-width: 2400px) {
+  /* At 4K the fluid root has stopped growing (00-fluid-root.css caps at 2400),
+     so the only thing left to do is stop the page itself from spreading. The
+     wrapper centres and the grounds still run edge to edge, which is what the
+     client asked for: full-bleed colour, contained content. */
+  .page-wrapper {
+    max-width: 2400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
+
+
+/* ===== css/60-cadence-plan.css ===== */
+/* GENERATED BY build-site.mjs FROM THE PLAN CONSTANT. Do not hand-edit.
+   One rule per row of the year grid: the columns that row's run spans. */
+.cadence_run.is-run-botox {
+  grid-column: 2 / 12;
+  margin-inline: 5.0000%;
+}
+.cadence_run.is-run-dermal-fillers {
+  grid-column: 3 / 13;
+  margin-inline: 5.0000%;
+}
+.cadence_run.is-run-morpheus8 {
+  grid-column: 4 / 7;
+  margin-inline: 16.6667%;
+}
+.cadence_run.is-run-chemical-peels {
+  grid-column: 7 / 11;
+  margin-inline: 12.5000%;
+}
+.cadence_run.is-run-prp {
+  grid-column: 8 / 11;
+  margin-inline: 16.6667%;
+}

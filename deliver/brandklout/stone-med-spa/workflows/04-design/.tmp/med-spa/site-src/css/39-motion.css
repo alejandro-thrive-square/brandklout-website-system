@@ -1,0 +1,49 @@
+/* Reveal-on-scroll. Opt-in per element with data-reveal; 00-runtime.js adds
+   .is-revealed. Kept to a short rise and a fade — the board is a still,
+   editorial design and does not want anything more than that.
+
+   EVERY RULE IS SCOPED TO .js, WHICH IS SET BY A ONE-LINE INLINE SCRIPT IN THE
+   HEAD. Without that scope, a JavaScript failure — a blocked bundle, an
+   Instatic script conflict, a stale cache — leaves half the site's content at
+   opacity 0 and the page looks broken rather than unanimated. Scoped this way,
+   no JS means no animation and all the content, which is the correct failure. */
+.js [data-reveal] {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.7s var(--ease),
+    transform 0.7s var(--ease);
+}
+.js [data-reveal].is-revealed {
+  opacity: 1;
+  transform: none;
+}
+.js [data-reveal="stagger"] > * {
+  opacity: 0;
+  transform: translateY(14px);
+  transition:
+    opacity 0.6s var(--ease),
+    transform 0.6s var(--ease);
+}
+.js [data-reveal="stagger"] {
+  opacity: 1;
+  transform: none;
+}
+.js [data-reveal="stagger"].is-revealed > * {
+  opacity: 1;
+  transform: none;
+}
+.js [data-reveal="stagger"].is-revealed > *:nth-child(2) { transition-delay: 0.08s; }
+.js [data-reveal="stagger"].is-revealed > *:nth-child(3) { transition-delay: 0.16s; }
+.js [data-reveal="stagger"].is-revealed > *:nth-child(4) { transition-delay: 0.24s; }
+.js [data-reveal="stagger"].is-revealed > *:nth-child(5) { transition-delay: 0.32s; }
+.js [data-reveal="stagger"].is-revealed > *:nth-child(6) { transition-delay: 0.4s; }
+
+@media (prefers-reduced-motion: reduce) {
+  .js [data-reveal],
+  .js [data-reveal] > *,
+  .js [data-reveal="stagger"] > * {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+}

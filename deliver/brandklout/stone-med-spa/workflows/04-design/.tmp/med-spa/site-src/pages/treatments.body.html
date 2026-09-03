@@ -1,0 +1,114 @@
+<!-- SERVICES OVERVIEW — Asana subtask 5 of 11.
+
+     The dual-axis hub the sitemap called for, built as ONE page rather than as
+     a hub plus twenty-four concern pages. Axis A is the table, grouped by
+     shelf. Axis B is the concern picker above it, which filters the same table.
+     Both land on the same rows, so nothing can go stale between them.
+
+     Every row and every pill is generated from treatments-data.mjs. This file
+     contains no treatment names at all, on purpose. -->
+<section class="section_pagehead pagehead_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="pagehead_inner">
+        <p class="eyebrow">Treatments</p>
+        <h1 class="heading-style-h1 pagehead_title">The whole menu, on <em class="text-style-display-accent">one page</em>.</h1>
+        <p class="text-size-large pagehead_lede">
+          Seven treatments, with the four numbers that actually decide between them: how long
+          the appointment is, when it shows, how long it lasts, and what it costs you in
+          downtime. Open a row for the detail.
+        </p>
+        <div class="pagehead_facts">
+          <div class="pagehead_fact">
+            <span class="pagehead_fact-key">7</span>
+            <span class="pagehead_fact-val">Treatments, all non-surgical, all performed by Dr. Stone</span>
+          </div>
+          <div class="pagehead_fact">
+            <span class="pagehead_fact-key">15 min</span>
+            <span class="pagehead_fact-val">The shortest appointment on the menu</span>
+          </div>
+          <div class="pagehead_fact">
+            <span class="pagehead_fact-key">0</span>
+            <span class="pagehead_fact-val">Treatments here that require an incision — those are at Stone Surgical Arts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AXIS B. Above the table because it is the more valuable half: patients
+     search for the problem, not the product. -->
+<section class="section_concerns concerns_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-medium">
+        <div class="concerns_head">
+          <div>
+            <p class="eyebrow">Start from the problem</p>
+            <h2 class="heading-style-h3">What would you like to change?</h2>
+          </div>
+        </div>
+        <ul class="concerns_list">
+{{CONCERNS}}
+        </ul>
+        <p class="concerns_count" data-ledger-count role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AXIS A. The table. -->
+<section class="section_ledger ledger_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large" data-ledger>
+{{LEDGER}}
+        <p class="ledger_empty" data-ledger-empty hidden>
+          Nothing on this menu addresses that. Dr. Stone may still be able to help, or point
+          you somewhere that can — <a class="text-style-link" href="book.html">ask her</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The boundary. This is the page a visitor looking for a facelift is most
+     likely to land on from a search, so it is the page that has to redirect
+     them properly. -->
+<section class="section_boundary band_component is-alt">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="band_inner" data-reveal>
+          <figure class="band_media">
+            <img src="assets/ssa-consult-room.webp" alt="The consultation room at the Westlake practice" width="1000" height="800" loading="lazy" class="u-focus-figure">
+          </figure>
+          <div>
+            <p class="eyebrow">Not on this list</p>
+            <h2 class="heading-style-h2 band_title">If it needs an incision, it is <em class="text-style-display-accent">next door</em>.</h2>
+            <div class="text-size-medium band_text">
+              <p>
+                Facelifts, neck lifts, eyelid surgery, FaceTite, facial implants, buccal fat
+                removal and fat transfer are performed by the same surgeon, under a different
+                name, at the same address.
+              </p>
+              <p>
+                The split is not a marketing decision. It is the line between what can be done
+                in a treatment room and what needs an operating one, and keeping the two menus
+                separate is how you can tell which you are being sold.
+              </p>
+            </div>
+            <div class="band_switch">
+              <p class="band_switch-title">Looking for surgery?</p>
+              <p>
+                <a href="https://stone-surgical-arts-production.up.railway.app/" rel="noopener">Stone Surgical Arts</a>
+                carries the twelve surgical procedures, the same surgeon and the same address.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

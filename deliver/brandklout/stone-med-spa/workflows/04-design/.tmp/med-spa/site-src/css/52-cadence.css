@@ -1,0 +1,256 @@
+/* ===========================================================================
+   THE YEAR — a twelve-month strip showing what a plan actually looks like.
+
+   THE SIGNATURE SECTION. If one object on this site has to be the thing nobody
+   confuses with Stone Surgical Arts, it is this one, and it earns its place by
+   answering the question every other med spa site leaves the visitor to work
+   out on their own: how often am I here, and for what.
+
+   It is a grid, twelve columns wide, one row per treatment in a sample plan.
+   A dot in a cell is an appointment. Read across a row and you see a treatment
+   cadence; read down a column and you see a month. That is the whole idea, and
+   it is why this is a grid and not a list of cards.
+
+   THE PLAN IS AN ILLUSTRATION, NOT A PRESCRIPTION. The markup says so, in the
+   section, not in a footnote — a sample plan on a medical site that does not
+   say it is a sample is a claim about your treatment. Clinical review is
+   outstanding on the intervals; see treatments-data.mjs.
+
+   Below 767 the grid stops being a grid. A twelve-column matrix on a 390px
+   screen is unreadable at any type size, so it re-forms as a list BY MONTH,
+   which is the same information read the other way round.
+   =========================================================================== */
+.cadence_component {
+  background-color: var(--bg-alt);
+  overflow: hidden;
+}
+.cadence_head {
+  display: grid;
+  grid-template-columns: minmax(0, 30rem) 1fr;
+  gap: 4rem;
+  align-items: end;
+  margin-bottom: 3.5rem;
+}
+.cadence_note {
+  max-width: 46ch;
+  color: var(--fg-body);
+}
+
+.cadence_grid {
+  --cad-label: 13rem;
+  position: relative;
+}
+
+/* The month header. Same column template as every plan row, so the labels sit
+   over the cells they name and stay over them at every width. */
+.cadence_months,
+.cadence_row {
+  display: grid;
+  grid-template-columns: var(--cad-label) repeat(12, minmax(0, 1fr));
+  align-items: center;
+}
+.cadence_months {
+  padding-bottom: 0.85rem;
+  border-bottom: 1px solid var(--charcoal);
+}
+.cadence_month {
+  text-align: center;
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.12em;
+  color: var(--fg-mute);
+}
+.cadence_months-spacer {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-mute);
+}
+
+.cadence_row {
+  border-bottom: 1px solid var(--line);
+  min-height: 4.15rem;
+}
+.cadence_label {
+  padding-right: 1.5rem;
+}
+.cadence_label-name {
+  display: block;
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.2;
+  color: var(--fg);
+}
+.cadence_label-interval {
+  display: block;
+  margin-top: 0.2rem;
+  font-size: var(--size-text-tiny);
+  color: var(--fg-mute);
+}
+
+/* A cell is a click target on the desktop grid only in the sense that it has a
+   tooltip; the dot is the mark. The vertical hairline is what makes a column
+   readable as a month all the way down the stack. */
+/* EVERY CHILD OF A ROW IS PLACED EXPLICITLY. Nothing here is auto-placed, and
+   that is not tidiness, it is the fix for a real bug.
+
+   The run below is placed explicitly, by necessity — it spans a computed pair
+   of columns. In CSS grid, explicitly-placed items are positioned first and
+   auto-placed items then fill what is LEFT. So the run sat across columns 2 to
+   11, the twelve cells found those occupied, and they wrapped into implicit
+   rows: every treatment rendered as two stacked half-rows with its dots in the
+   wrong months. It looked plausible enough in a full-page screenshot to nearly
+   pass, and only reading the computed grid-column of each cell showed it.
+
+   Mixing explicit and auto placement in one grid is the trap. So the label
+   takes column 1, each cell takes its own month column by class, and the run
+   spans between them; auto-placement never runs at all and DOM order stops
+   mattering. */
+.cadence_label {
+  grid-column: 1;
+  grid-row: 1;
+}
+.cadence_cell {
+  grid-row: 1;
+  position: relative;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-left: 1px solid var(--line);
+}
+/* Month N is grid column N + 1, because column 1 is the treatment label. */
+.cadence_cell.is-m1 { grid-column: 2; }
+.cadence_cell.is-m2 { grid-column: 3; }
+.cadence_cell.is-m3 { grid-column: 4; }
+.cadence_cell.is-m4 { grid-column: 5; }
+.cadence_cell.is-m5 { grid-column: 6; }
+.cadence_cell.is-m6 { grid-column: 7; }
+.cadence_cell.is-m7 { grid-column: 8; }
+.cadence_cell.is-m8 { grid-column: 9; }
+.cadence_cell.is-m9 { grid-column: 10; }
+.cadence_cell.is-m10 { grid-column: 11; }
+.cadence_cell.is-m11 { grid-column: 12; }
+.cadence_cell.is-m12 { grid-column: 13; }
+.cadence_dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 50%;
+  background-color: var(--accent-flat);
+  box-shadow: 0 0 0 0 rgba(143, 188, 70, 0.5);
+  transition: box-shadow 0.4s var(--ease), transform 0.3s var(--ease);
+}
+/* The first appointment in a row is the one that starts the plan, so it reads
+   as a ring rather than a fill — it is a different kind of visit. */
+.cadence_dot.is-start {
+  background-color: transparent;
+  border: 2px solid var(--charcoal);
+}
+.cadence_row:hover .cadence_dot {
+  transform: scale(1.18);
+}
+
+/* A run — the band drawn between the first and last appointment in a row, so
+   the INTERVAL reads as a length rather than being inferred from two dots.
+
+   It is a GRID ITEM spanning the columns it covers, not an absolutely
+   positioned bar. Absolute positioning would have to know the label column's
+   width to compute a left offset, and that width changes at three breakpoints
+   (--cad-label), so the bar and the dots would drift apart on exactly the
+   screens nobody re-checks. As a grid item it is placed by the same track
+   definition that places the dots, and it cannot disagree with them.
+
+   grid-row: 1 puts it in the row's only row, alongside the cells rather than
+   after them; the cells are position: relative and therefore paint above it. */
+.cadence_run {
+  grid-row: 1;
+  align-self: center;
+  height: 1px;
+  background-color: var(--line-strong);
+  pointer-events: none;
+}
+
+.cadence_legend {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem 2.4rem;
+  margin-top: 2.4rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+}
+.cadence_legend-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.6rem;
+}
+.cadence_legend-dot {
+  width: 0.72rem;
+  height: 0.72rem;
+  border-radius: 50%;
+  background-color: var(--accent-flat);
+  flex: 0 0 auto;
+}
+.cadence_legend-dot.is-start {
+  background-color: transparent;
+  border: 2px solid var(--charcoal);
+}
+
+/* --- the phone version ----------------------------------------------------
+   The same plan, read by month instead of by treatment. Hidden on desktop and
+   the grid is hidden here, so the two never both render. -------------------- */
+.cadence_bymonth {
+  display: none;
+}
+.cadence_bymonth-item {
+  display: grid;
+  grid-template-columns: 4.5rem 1fr;
+  gap: 1.25rem;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.cadence_bymonth-month {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  color: var(--accent);
+}
+.cadence_bymonth-list {
+  list-style: none;
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.cadence_bymonth-list li + li {
+  margin-top: 0.3rem;
+}
+.cadence_bymonth-item.is-empty .cadence_bymonth-list {
+  color: var(--fg-mute);
+}
+
+@media (max-width: 1279px) {
+  .cadence_grid {
+    --cad-label: 10.5rem;
+  }
+}
+@media (max-width: 991px) {
+  .cadence_head {
+    grid-template-columns: 1fr;
+    gap: 1.4rem;
+  }
+  .cadence_grid {
+    --cad-label: 9rem;
+  }
+  .cadence_month {
+    font-size: 0.62rem;
+    letter-spacing: 0.04em;
+  }
+}
+@media (max-width: 767px) {
+  .cadence_grid,
+  .cadence_legend {
+    display: none;
+  }
+  .cadence_bymonth {
+    display: block;
+    border-top: 1px solid var(--charcoal);
+  }
+}

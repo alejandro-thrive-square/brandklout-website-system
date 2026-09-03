@@ -1,0 +1,262 @@
+/* ===========================================================================
+   BOOKING — two paths, because the brief asks for two.
+
+   The Asana subtask is "Book Consultation (Virtual and In-Office)". The
+   competitive research went looking for how the five best-in-class med spas
+   handle a virtual consultation and found that NONE OF THEM OFFER ONE. Thirty-
+   five pages captured, one false positive. So there is no pattern to copy and
+   this page is designed from the requirement rather than from a reference.
+
+   Two cards, equal weight, each stating what that path is AND what it cannot
+   do. The in-office card says you can be treated the same visit; the virtual
+   card says you cannot, because anything injected happens in Westlake, and a
+   page that lets someone book a video call expecting Botox at the end of it
+   has failed them.
+
+   THE FORM POSTS NOWHERE. There is no endpoint, no scheduler and no
+   HIPAA-compliant channel decided for this practice yet — the open question in
+   the sitemap is who takes the call and on what platform. On submit the form
+   says so and points at the phone. It is inert ON PURPOSE and must stay inert
+   until a real endpoint exists: a medical intake form that silently drops a
+   patient's details is worse than no form at all.
+   =========================================================================== */
+.paths_component {
+  background-color: var(--bg);
+}
+.paths_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.75rem;
+  margin-top: 2.6rem;
+}
+.path_card {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  padding: 2.3rem 2.4rem 2.5rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background-color: var(--bg-card);
+  transition: border-color 0.25s var(--ease);
+}
+.path_card:hover {
+  border-color: var(--accent-flat);
+}
+.path_tag {
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  color: var(--accent);
+}
+.path_text {
+  color: var(--fg-body);
+  max-width: 46ch;
+}
+.path_list {
+  list-style: none;
+  display: grid;
+  gap: 0.6rem;
+  margin-top: 0.4rem;
+  padding-top: 1.2rem;
+  border-top: 1px solid var(--line);
+}
+.path_list li {
+  position: relative;
+  padding-left: 1.4rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.path_list li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.62em;
+  width: 0.35rem;
+  height: 0.35rem;
+  border-radius: 50%;
+  background-color: var(--accent-flat);
+}
+/* The limit line — what this path cannot do. Muted and last, but present. */
+.path_limit {
+  margin-top: 1rem;
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  max-width: 46ch;
+}
+.path_actions {
+  margin-top: auto;
+  padding-top: 1.6rem;
+}
+
+/* --- the form ------------------------------------------------------------ */
+.form_component {
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--line);
+}
+.form_layout {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 24rem);
+  gap: 4.5rem;
+  align-items: start;
+}
+.form_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1.25rem;
+  margin-top: 2rem;
+}
+.form_field {
+  display: grid;
+  gap: 0.45rem;
+}
+.form_field.is-full {
+  grid-column: 1 / -1;
+}
+.form_label {
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-mute);
+}
+.form_input,
+.form_select,
+.form_textarea {
+  width: 100%;
+  padding: 0.9rem 1rem;
+  border: 1px solid var(--line-strong);
+  border-radius: var(--radius);
+  background-color: var(--bg-card);
+  color: var(--fg);
+  font-size: var(--size-text-small);
+  transition: border-color 0.2s var(--ease);
+}
+.form_input:focus,
+.form_select:focus,
+.form_textarea:focus {
+  border-color: var(--accent-flat);
+}
+.form_textarea {
+  min-height: 7rem;
+  resize: vertical;
+}
+.form_actions {
+  grid-column: 1 / -1;
+  margin-top: 0.6rem;
+}
+/* The status line the inert submit writes into. Polite-live, so a screen
+   reader hears it without the focus moving. */
+.form_status {
+  grid-column: 1 / -1;
+  min-height: 1.5rem;
+  font-size: var(--size-text-small);
+  color: var(--accent);
+}
+.form_status:empty {
+  min-height: 0;
+}
+.form_privacy {
+  grid-column: 1 / -1;
+  font-size: var(--size-text-tiny);
+  color: var(--fg-mute);
+  max-width: 60ch;
+}
+.form_aside {
+  padding: 2rem 2.1rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  background-color: var(--bg-card);
+}
+.form_aside-title {
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--line);
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+.form_aside-list {
+  list-style: none;
+}
+.form_aside-list li {
+  padding: 0.95rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.form_aside-list li:last-child {
+  border-bottom: 0;
+}
+.form_aside-list strong {
+  display: block;
+  font-weight: 500;
+  color: var(--fg);
+}
+
+/* --- the thank-you page --------------------------------------------------
+   noindex, and a conversion-tracking endpoint. Short by design: the visitor
+   has done the thing, so the page confirms it, says what happens next with
+   real timings, and offers exactly two onward links. ---------------------- */
+.thanks_component {
+  background-color: var(--bg);
+  min-height: 72vh;
+  display: flex;
+  align-items: center;
+}
+.thanks_inner {
+  max-width: 42rem;
+}
+.thanks_mark {
+  width: 3.25rem;
+  height: 3.25rem;
+  color: var(--accent-flat);
+}
+.thanks_title {
+  margin-top: 1.8rem;
+}
+.thanks_text {
+  margin-top: 1.4rem;
+  color: var(--fg-body);
+}
+.thanks_next {
+  margin-top: 2.6rem;
+  border-top: 1px solid var(--line);
+}
+.thanks_next-item {
+  display: grid;
+  grid-template-columns: 7rem 1fr;
+  gap: 1.5rem;
+  padding: 1.1rem 0;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.thanks_next-when {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.2;
+  color: var(--accent);
+}
+.thanks_actions {
+  margin-top: 2.4rem;
+}
+
+@media (max-width: 991px) {
+  .paths_grid,
+  .form_grid {
+    grid-template-columns: 1fr;
+  }
+  .form_layout {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+}
+@media (max-width: 478px) {
+  .thanks_next-item {
+    grid-template-columns: 1fr;
+    gap: 0.3rem;
+  }
+}

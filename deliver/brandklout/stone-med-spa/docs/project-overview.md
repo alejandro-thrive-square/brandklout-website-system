@@ -29,31 +29,48 @@
 > differs. Sessions that held both kept crossing the two sites' facts. Do not work two Stone
 > pillars from one session.
 
-## The blocker, and it is not a formality
+## The blocker — RESOLVED 2026-09-03 by the client
 
-**Stone Surgical Arts has already built and published the entire med spa menu.** Its treatments
-hub carries a fee schedule for FaceTite, CO2 laser resurfacing, Morpheus8, chemical peels,
-Cosmelan, HydraFacial MD, microneedling, SkinPen, PRP, Botox & Xeomin, Sculptra, dermal filler and
-hair restoration. Two of the four categories in the design Dr. Mona approved are named **Skin** and
-**Non-Surgical**.
+> [!IMPORTANT]
+> **It is the modality split, and the client drew the line themselves.** On 2026-09-03 the client
+> sent the practice's own two category images, archived at
+> [`01-content-intake/.tmp/client-references/`](../workflows/01-content-intake/.tmp/client-references/).
+> They partition the menu with no ambiguity:
+>
+> | Surgical — Stone Surgical Arts | Med spa — this site |
+> | :--- | :--- |
+> | MyEllevate® Facelift · Neck Lift · Facelift \| Easy Lift · FaceTite · Facial Implants · Chin Sculpting & Reshaping · Buccal Fat Removal · Blepharoplasty · Neck Liposuction · Skin Lesion Removal · Male Facial Enhancement · Facial Fat Transfer | Dermal Fillers · Botox \| Xeomin · Morpheus8 · Hair Restoration · PRP Treatment · Chemical Peels · Dysport & Jeuveau |
+>
+> This is **outcome 2** below — the NassifMD pattern the competitive research recommended as the
+> default. The cut is at the incision, not at the price: FaceTite is minimally invasive but still
+> an incision under local anaesthetic, so it is surgical; Morpheus8 delivers radiofrequency through
+> microneedles, so it is here.
 
-That is this brand's whole product. There is no service left for a med spa site to sell that the
-surgical site is not already selling, at published prices, on a live staging link the client has
-seen.
+### What the blocker was
 
-This is scoping question 1 from 2026-08-05, which was drafted and **never sent**. It stopped being
-a planning question the moment Surgical Arts published. Building the med spa now, without an
-answer, produces one of three outcomes and we cannot pick between them:
+**Stone Surgical Arts had already built and published the entire med spa menu.** Its treatments hub
+carries a fee schedule for FaceTite, CO2 laser resurfacing, Morpheus8, chemical peels, Cosmelan,
+HydraFacial MD, microneedling, SkinPen, PRP, Botox & Xeomin, Sculptra, dermal filler and hair
+restoration. Building the med spa without an answer produced one of three outcomes and we could not
+pick between them:
 
 1. **A second site that competes with the first** for the same searches and the same patients.
-2. **A menu cut out of Surgical Arts** and moved here, which means editing a site the client has
-   already reviewed.
-3. **A different brand entirely** — memberships, wellness, weight loss, skin maintenance — that
-   happens to share a treatment room.
+2. **A menu cut out of Surgical Arts** and moved here — *this is the answer*.
+3. **A different brand entirely** — memberships, wellness, weight loss, skin maintenance.
+
+### What the answer now obliges, and neither task is on this worktree
 
 > [!WARNING]
-> **Do not start design until Brandklout answers which of the three it is.** The overlap is not a
-> content detail; it decides the page list, the positioning and whether the sibling site changes.
+> **Stone Surgical Arts still sells all seven of these treatments**, at published prices, on a live
+> staging link the client has reviewed. Choosing outcome 2 means that page **loses them**, and a
+> **301 redirect map** from those URLs to these has to exist before either domain goes live. That
+> work is on the `bk-stone` worktree.
+
+> [!CAUTION]
+> **Six treatments the sibling sells are on neither list the client sent** — Sculptra, CO2 laser
+> resurfacing, HydraFacial MD, microneedling, SkinPen and Cosmelan. They are non-surgical, so by
+> the stated rule they belong here, but the client did not name them. They are **not** in the
+> build. Ask before adding them; do not infer a menu the client did not write.
 
 ## What we actually know
 
@@ -106,10 +123,10 @@ node deliver/brandklout/scripts/asana-context.mjs --task 1218112701145002 --out 
 | Phase | Status | Notes |
 | :--- | :--- | :--- |
 | `00-client-delivery-initialization` | **Done 2026-09-02** | This folder. Med-spa-specific scoping questions in `.tmp/`. |
-| `01-content-intake` | **Blocked** | Needs the scope answer. The archived corpus is catalogued and ready. |
+| `01-content-intake` | **Partial 2026-09-03** | Unblocked. The client's two category images are in `.tmp/client-references/` and are the source of truth for the menu split. The archived corpus is catalogued and still unmined. |
 | `02-wireframe` | **Research done 2026-09-02** | Competitive research against five best-in-class med spa sites, and a proposed eleven-page sitemap. See [`.tmp/competitive-research.md`](../workflows/02-wireframe/.tmp/competitive-research.md) and [`.tmp/sitemap.md`](../workflows/02-wireframe/.tmp/sitemap.md). Proposed, not approved. Wireframes not started — they need the scope answer. |
 | `12-migration-audit-plan` | **Applies** | Content is recovered from an archived WordPress site and a redirect map is needed. |
-| `04-design` | **Blocked** | Needs the scope answer *and* a brand identity that does not exist. |
+| `04-design` | **Eleven pages built 2026-09-03, local only** | All eleven Asana core pages, in `.tmp/med-spa/`. Carries the Surgical Arts style guide by client request; every section shape is new. `audit.mjs` FAIL none WARN none; `all-pages.mjs` 11 pages × 3 widths clean. **Not published, no domain, brand identity still does not exist.** Read [`HANDOFF.md`](../workflows/04-design/.tmp/med-spa/HANDOFF.md) before touching it. |
 | `05-instatic-upload` | Tooling copied, unused | Snapshot of the Surgical Arts instance at `bk-stone` — the only place it exists. Read its traps 21–25 before the first publish. |
 | `20-instatic-domain-origins` | Later | Canonical, in `deliver/process/`. |
 
@@ -121,22 +138,33 @@ Routing rules: [deliver/process/OFFER_ROUTING.md](../../../process/OFFER_ROUTING
 
 ## Recommended next action
 
-**Send the med spa scoping questions.** They are four, they are short, and question 1 is the one
-that decides whether this build exists at all. Draft:
-[`scoping-questions.md`](../workflows/00-client-delivery-initialization/.tmp/scoping-questions.md).
+Q1 is answered and the eleven core pages are built, so what is left is the set of questions the
+build could not answer for itself. Every one needs the client, not more build time. In priority
+order, because the first has weeks of lead time:
 
-**Ask Q1 as a yes/no, not as an open question.** The competitive research found a live, working
-instance of outcome 2: **NassifMD Medical Spa**. Dr. Paul Nassif runs a surgical practice and a med
-spa as two separate domains, cut along **modality** — the med spa sells injectables, lasers, body
-contouring, aesthetician services and skincare and never sells an operation; the surgical site
-never sells a HydraFacial — and joins them with a brand switcher in the header of both. Put that to
-Brandklout as the recommended default and ask them to confirm or reject it. Name outcome 1 (two
-competing sites) explicitly as the one to avoid, because it is what happens by default if nobody
-decides. Two more client-side items belong in the same message: **per-case written consent** for
-the before-and-after photography, and an operational answer for the **virtual consultation**.
+1. **Per-case written consent for the before-and-after photography.** It gates the strongest asset
+   on the site. Fifteen archived galleries are ready and none can be published. `/results` and
+   `/botox` ship a reserved frame that says so, and degrade without a redesign.
+2. **The trading name.** Asana says *Stone Med Spa*; the live Instagram is *@westlakeaesthetics*,
+   "Westlake Medical Aesthetics". It is in the wordmark, every H1 and every page title. Cheap to
+   change now, expensive after the client has reviewed eleven pages.
+3. **The domain.** None chosen. `seo.json` carries a deliberate placeholder origin and the build
+   must not be published until it is replaced.
+4. **NAP.** The phone and suite recorded in this file are the same two values the Surgical Arts
+   footer flagged as belonging to the *sister* practice. One line settles whether the med spa
+   really shares that line.
+5. **The virtual consultation.** Who takes the call, on what platform, and is it HIPAA-compliant?
+   The booking page ships two paths and an inert form until this is answered.
+6. **Clinical sign-off** from Dr. Stone on every duration, onset and downtime in
+   `treatments-data.mjs` and on the Botox page.
+7. **Team roles**, and the five legal/utility pages (Contact, Privacy, Terms, Accessibility, 404)
+   the sitemap flags as sitting outside the eleven.
 
-The task is due 2026-09-03. It cannot be met as a website build. It can be met as a scope decision
-plus a page list, which is the honest deliverable for a task nobody has specified.
+Full detail, with what each one blocks, is in
+[`HANDOFF.md`](../workflows/04-design/.tmp/med-spa/HANDOFF.md).
+
+The 2026-09-03 due date is met as eleven built pages plus the scope decision the client themselves
+supplied — not as a launch, which none of the seven items above would allow.
 
 ## Project structure
 
@@ -151,9 +179,20 @@ deliver/brandklout/stone-med-spa/
     │   ├── archived-urls-medspa.md   # The non-surgical slice, classified
     │   ├── archived-urls-raw.txt     # All 183 archived URLs
     │   └── discovery-findings.md     # Public research, 2026-08-05
-    ├── 01-content-intake/.tmp/       # Empty until scope is answered
-    ├── 04-design/.tmp/               # Empty until scope is answered
-    └── 05-instatic-upload/           # Tooling snapshot from bk-stone
+    ├── 01-content-intake/.tmp/
+    │   └── client-references/         # The two category images that settled the menu split
+    ├── 02-wireframe/.tmp/             # Competitive research, sitemap, competitor screenshots
+    ├── 04-design/.tmp/med-spa/
+    │   ├── HANDOFF.md                 # READ FIRST. Open items, and what each one blocks.
+    │   ├── site-src/                  # The build. `node build-site.mjs`
+    │   │   ├── treatments-data.mjs    # The seven. Four views on the site are generated from it.
+    │   │   ├── build-site.mjs         # Also writes css/60-cadence-plan.css
+    │   │   ├── css/ js/ pages/ partials/ assets/
+    │   │   ├── audit.mjs              # Static gate. FAIL none WARN none.
+    │   │   └── all-pages.mjs          # 11 pages x 390/1024/1440. Clean.
+    │   ├── final-site/                # Build output, 11 pages
+    │   └── shots/                     # Review screenshots (gitignored, *.png)
+    └── 05-instatic-upload/            # Tooling snapshot from bk-stone, still unused
 ```
 
 ## Version Control

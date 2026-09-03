@@ -1,0 +1,153 @@
+/* ===========================================================================
+   PROOF — reviews, and the gallery that cannot ship yet.
+
+   THE CONSTRAINT THAT SHAPES THIS WHOLE PAGE. There are fifteen archived
+   before-and-after galleries of real Stone patients. None of them can be
+   published without current written consent per case (docs/project-overview.md,
+   "Photography"). Getting that consent is a client task with weeks of lead time.
+
+   So the sitemap's instruction was: do not design a layout that collapses
+   without the photographs. This one does not. The page leads on WRITTEN
+   reviews, which exist today, and the gallery is a reserved frame that states
+   plainly what it is waiting for. When consent arrives the frame fills with a
+   grid and nothing above or below it moves.
+
+   That reserved frame is deliberately not a grey box or a "coming soon". A
+   medical practice that shows an empty gallery with no explanation reads as one
+   with nothing to show. It says what is missing and why, which is the more
+   flattering truth.
+
+   Stone Surgical Arts solved the same problem with a filterable review WALL.
+   This is a different object: a stacked editorial column of long reviews, and
+   an authenticity FAQ underneath, which is the pattern Beverly Hills uses to
+   answer "are these real clients" before the visitor thinks to ask.
+   =========================================================================== */
+
+/* --- the reviews --------------------------------------------------------- */
+.reviews_component {
+  background-color: var(--bg);
+}
+.reviews_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.75rem;
+  margin-top: 3rem;
+}
+.review_card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.1rem;
+  padding: 2.1rem 2.2rem 1.9rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+}
+.review_stars {
+  display: inline-flex;
+  gap: 0.18rem;
+  color: var(--accent-flat);
+}
+.review_stars svg {
+  width: 0.95rem;
+  height: 0.95rem;
+}
+.review_quote {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.45;
+  color: var(--fg);
+}
+.review_body {
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.review_meta {
+  margin-top: auto;
+  padding-top: 1.1rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.13em;
+  color: var(--fg-mute);
+}
+
+/* --- the reserved gallery ------------------------------------------------ */
+.gallery_component {
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--line);
+}
+.gallery_reserved {
+  display: grid;
+  grid-template-columns: minmax(0, 26rem) 1fr;
+  gap: 3.5rem;
+  align-items: center;
+  margin-top: 2.6rem;
+  padding: 3rem;
+  border: 1px dashed var(--line-strong);
+  border-radius: var(--radius-card);
+  background-color: var(--bg);
+}
+/* The frame draws two empty plates, before and after, so the shape of what is
+   missing is legible rather than abstract. */
+.gallery_plates {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0.75rem;
+}
+.gallery_plate {
+  aspect-ratio: 3 / 4;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.9rem;
+  border: 1px solid var(--line);
+  border-radius: var(--radius);
+  background-color: var(--bg-alt);
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-mute);
+}
+.gallery_reserved-title {
+  margin-bottom: 1rem;
+}
+.gallery_reserved-text {
+  color: var(--fg-body);
+  max-width: 56ch;
+}
+.gallery_reserved-text > * + * {
+  margin-top: 0.85rem;
+}
+
+/* --- the authenticity FAQ sits on the shared 36-faq.css. Nothing new. --- */
+
+/* --- the video row, same reserved treatment, smaller ------------------- */
+.proof_note {
+  margin-top: 2.4rem;
+  padding-top: 1.6rem;
+  border-top: 1px solid var(--line);
+  font-size: var(--size-text-small);
+  color: var(--fg-mute);
+  max-width: 62ch;
+}
+
+@media (max-width: 1279px) {
+  .reviews_grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 991px) {
+  .gallery_reserved {
+    grid-template-columns: 1fr;
+    gap: 2.2rem;
+    padding: 2rem;
+  }
+  .gallery_plates {
+    max-width: 22rem;
+  }
+}
+@media (max-width: 767px) {
+  .reviews_grid {
+    grid-template-columns: 1fr;
+  }
+}

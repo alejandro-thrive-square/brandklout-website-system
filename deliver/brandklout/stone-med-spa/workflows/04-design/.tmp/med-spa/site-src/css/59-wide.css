@@ -1,0 +1,53 @@
+/* ===========================================================================
+   2K AND 4K. Last in the cascade on purpose.
+
+   The client asked for this on Surgical Arts on 2026-09-02 and the reasoning
+   carries over unchanged: above about 1700px the fluid root keeps growing the
+   type but the full-bleed bands keep growing their MEASURE, so a two-column
+   band on a 4K monitor ends up with 140-character lines. The container caps at
+   80rem everywhere else; these are the places that opt out of it.
+
+   Technique borrowed from the sibling build, which is allowed — a technique may
+   repeat between the two sites, a section shape may not (gotcha 4).
+   =========================================================================== */
+@media (min-width: 1700px) {
+  /* The hero photograph may stay full-bleed; its COPY may not. */
+  .hero_copy {
+    max-width: 40ch;
+  }
+  .hero_rail-item {
+    min-width: 12rem;
+  }
+
+  /* The ledger's metadata columns stop growing and the name column takes the
+     slack, because a treatment name is the only cell that benefits from room. */
+  .ledger_summary {
+    grid-template-columns: minmax(0, 2.4fr) repeat(4, minmax(0, 1fr)) 1.5rem;
+  }
+
+  /* The twelve-month grid gets a wider label gutter rather than wider cells;
+     the cells only ever hold a 0.72rem dot. */
+  .cadence_grid {
+    --cad-label: 17rem;
+  }
+
+  /* Prose measures. Nothing on this site should exceed about 70 characters. */
+  .detail_prose p,
+  .detail_prose li,
+  .band_text p,
+  .premise_point-text {
+    max-width: 68ch;
+  }
+}
+
+@media (min-width: 2400px) {
+  /* At 4K the fluid root has stopped growing (00-fluid-root.css caps at 2400),
+     so the only thing left to do is stop the page itself from spreading. The
+     wrapper centres and the grounds still run edge to edge, which is what the
+     client asked for: full-bleed colour, contained content. */
+  .page-wrapper {
+    max-width: 2400px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}

@@ -1,0 +1,84 @@
+/* ===========================================================================
+   THE CLOSING BAND — the shared invitation, dark, on every page that does not
+   already end on one.
+
+   The client asked Surgical Arts for one dark section on every page and the
+   same instinct applies here, but this band is a different object: no portrait,
+   one display line, and three plain facts about what a consultation is. See
+   partials/cta.html for why the facts are here and not on the booking page.
+   =========================================================================== */
+.close_component {
+  background-color: var(--charcoal);
+  position: relative;
+  overflow: hidden;
+}
+/* The dark marble, at low opacity, so the band has a surface rather than being
+   flat charcoal. The texture is the practice's own asset, shared with the
+   sibling site — a material is not a section shape. */
+.close_component::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("tex-marble-dark.webp");
+  background-size: cover;
+  background-position: center;
+  opacity: 0.4;
+}
+.close_inner {
+  position: relative;
+  z-index: 1;
+  max-width: 62rem;
+}
+.close_title {
+  margin-top: 1.5rem;
+  max-width: 18ch;
+  color: var(--white);
+}
+.close_facts {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 2.5rem;
+  margin-top: 3.4rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(255, 255, 255, 0.2);
+}
+.close_fact {
+  display: grid;
+  gap: 0.55rem;
+}
+.close_fact-key {
+  font-family: var(--font-display);
+  font-size: var(--size-h4);
+  line-height: 1.15;
+  color: var(--green);
+}
+.close_fact-val {
+  font-size: var(--size-text-small);
+  line-height: 1.6;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 34ch;
+}
+.close_actions {
+  margin-top: 3rem;
+}
+
+@media (max-width: 991px) {
+  .close_facts {
+    grid-template-columns: 1fr;
+    gap: 1.6rem;
+  }
+  .close_fact {
+    grid-template-columns: 9rem 1fr;
+    align-items: baseline;
+    gap: 1.25rem;
+  }
+  .close_fact-key {
+    font-size: var(--size-h5);
+  }
+}
+@media (max-width: 478px) {
+  .close_fact {
+    grid-template-columns: 1fr;
+    gap: 0.4rem;
+  }
+}

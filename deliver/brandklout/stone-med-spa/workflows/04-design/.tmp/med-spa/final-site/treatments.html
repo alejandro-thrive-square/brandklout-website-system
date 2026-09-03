@@ -1,0 +1,653 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#F6F4EF">
+<!-- Title, description, Open Graph, canonical and JSON-LD are injected by
+     build-site.mjs from seo.json. Do not hand-edit the output in final-site/ —
+     edit seo.json and rebuild. -->
+<title>Treatments | Stone Med Spa, Westlake TX</title>
+<meta name="description" content="Seven non-surgical treatments, with the appointment length, when results show, how long they last and the downtime for each. Filter by what you want to change.">
+<link rel="canonical" href="https://stonemedspa.example/treatments">
+<meta property="og:site_name" content="Stone Med Spa">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://stonemedspa.example/treatments">
+<meta property="og:title" content="Treatments | Stone Med Spa, Westlake TX">
+<meta property="og:description" content="Seven non-surgical treatments, with the appointment length, when results show, how long they last and the downtime for each. Filter by what you want to change.">
+<meta property="og:image" content="https://stonemedspa.example/assets/m-hero.webp">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="twitter:title" content="Treatments | Stone Med Spa, Westlake TX">
+<meta name="twitter:description" content="Seven non-surgical treatments, with the appointment length, when results show, how long they last and the downtime for each. Filter by what you want to change.">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "MedicalBusiness",
+      "@id": "https://stonemedspa.example/#practice",
+      "name": "Stone Med Spa",
+      "description": "Non-surgical facial aesthetics in Westlake, Texas, performed by Dr. Mona Stone, DDS, a board-certified oral and maxillofacial surgeon.",
+      "medicalSpecialty": "Dermatology",
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "72 Andorra Dr #110",
+        "addressLocality": "Westlake",
+        "addressRegion": "TX",
+        "postalCode": "76262",
+        "addressCountry": "US"
+      },
+      "telephone": "+1-817-383-8361",
+      "availableLanguage": [
+        "English",
+        "Spanish"
+      ],
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": [
+            "Monday",
+            "Tuesday",
+            "Wednesday",
+            "Thursday",
+            "Friday"
+          ],
+          "opens": "09:00",
+          "closes": "17:00"
+        }
+      ],
+      "founder": {
+        "@type": "Physician",
+        "name": "Dr. Mona Stone, DDS",
+        "medicalSpecialty": "OralAndMaxillofacialSurgery"
+      }
+    }
+  ]
+}
+</script>
+<!-- The two typefaces are SELF-HOSTED, in assets/fonts/, declared by
+     css/03-fonts.css and therefore already inside assets/site.css. There is no
+     request to fonts.googleapis.com: this is a medical practice, and a
+     third-party stylesheet on every page view hands Google the IP of everyone
+     who visits. Same decision, same files, as the Surgical Arts build. -->
+<link rel="preload" href="assets/fonts/cormorant-garamond-300.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="assets/site.css">
+<!-- Every scroll-reveal rule in the stylesheet is scoped to .js, and this sets
+     it, inline and in the head so it lands before first paint. The timer is the
+     safety net: reveals start at opacity 0, so if site.js never boots the class
+     comes off at 2.5s and the whole page paints, unanimated. A site with no
+     animation is fine; a site with no content is not. -->
+<script>
+  document.documentElement.classList.add('js');
+  setTimeout(function () {
+    if (!window.__smsBooted) document.documentElement.classList.remove('js');
+  }, 2500);
+</script>
+<!-- No favicon file has been supplied and no med spa brand identity exists yet
+     (project-overview.md, "Brand identity"). This draws the wordmark's S on the
+     brand ivory so the tab is never a blank sheet. Replace when a mark arrives. -->
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' fill='%23F6F4EF'/%3E%3Ctext x='16' y='23' text-anchor='middle' font-family='Georgia,serif' font-size='20' fill='%23272727'%3ES%3C/text%3E%3C/svg%3E">
+
+</head>
+<body>
+<a class="skip-link" href="#main">Skip to content</a>
+<div class="page-wrapper">
+<!-- The navbar. Five links, the phone and the book button.
+
+     WHY THESE FIVE. The med spa sells a rhythm, not an operation, so the two
+     links a surgical site would never lead with — Membership and Results — are
+     in the bar rather than buried. Financing, About and the Team are reached
+     from the drawer and the footer, where there is room for everything.
+
+     `{{CUR_<SLUG>}}` expands to `aria-current="page"` on that page and to
+     nothing everywhere else; build-site.mjs matches the token against the page
+     slug, lower-cased with underscores turned into hyphens. -->
+<header class="navbar_component is-static" data-nav>
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="navbar_container">
+        <a class="navbar_logo-link" href="index.html" aria-label="Stone Med Spa, home">
+          <span class="brand_component">
+            <span class="brand_name">Stone</span>
+            <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+          </span>
+        </a>
+
+        <nav class="navbar_menu" aria-label="Primary">
+          <a class="navbar_link" href="treatments.html" aria-current="page">Treatments</a>
+          <a class="navbar_link" href="results.html">Results</a>
+          <a class="navbar_link" href="membership.html">Membership</a>
+          <a class="navbar_link" href="meet-the-doctor.html">Dr. Stone</a>
+          <a class="navbar_link" href="about.html">About</a>
+        </nav>
+
+        <div class="navbar_actions">
+          <a class="navbar_phone" href="tel:+18173838361">
+            <svg class="navbar_phone-icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+            (817) 383-8361
+          </a>
+          <a class="button is-small" href="book.html">Book a consultation</a>
+          <button class="navbar_burger" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="drawer">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<!-- The mobile drawer. At 991px and below the navbar hides both its menu and
+     its phone number, so this panel is the ONLY place a phone gets the number
+     without scrolling to the footer. It is not a menu, it is the mobile
+     contact card, and it lists every page because there is room here. -->
+<div class="drawer_component" id="drawer">
+  <div class="drawer_scrim"></div>
+  <div class="drawer_panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer_head">
+      <span class="brand_component">
+        <span class="brand_name">Stone</span>
+        <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+      </span>
+      <button class="drawer_close" type="button" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="drawer_nav" aria-label="Mobile">
+      <a class="drawer_link" href="index.html">Home</a>
+      <a class="drawer_link" href="treatments.html" aria-current="page">All treatments</a>
+      <a class="drawer_link" href="botox.html">Botox &amp; Xeomin</a>
+      <a class="drawer_link" href="results.html">Results &amp; reviews</a>
+      <a class="drawer_link" href="membership.html">Membership</a>
+      <a class="drawer_link" href="financing.html">Financing</a>
+      <a class="drawer_link" href="meet-the-doctor.html">Dr. Stone</a>
+      <a class="drawer_link" href="about.html">About the practice</a>
+      <a class="drawer_link" href="team.html">Meet the team</a>
+      <a class="drawer_link" href="book.html">Book a consultation</a>
+    </nav>
+
+    <div class="drawer_foot">
+      <a class="button" href="book.html">Book a consultation</a>
+      <a class="button is-secondary" href="tel:+18173838361">Call (817) 383-8361</a>
+      <p class="drawer_meta">72 Andorra Dr #110, Westlake, TX 76262</p>
+    </div>
+  </div>
+</div>
+
+<main class="main-wrapper" id="main">
+<!-- SERVICES OVERVIEW — Asana subtask 5 of 11.
+
+     The dual-axis hub the sitemap called for, built as ONE page rather than as
+     a hub plus twenty-four concern pages. Axis A is the table, grouped by
+     shelf. Axis B is the concern picker above it, which filters the same table.
+     Both land on the same rows, so nothing can go stale between them.
+
+     Every row and every pill is generated from treatments-data.mjs. This file
+     contains no treatment names at all, on purpose. -->
+<section class="section_pagehead pagehead_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="pagehead_inner">
+        <p class="eyebrow">Treatments</p>
+        <h1 class="heading-style-h1 pagehead_title">The whole menu, on <em class="text-style-display-accent">one page</em>.</h1>
+        <p class="text-size-large pagehead_lede">
+          Seven treatments, with the four numbers that actually decide between them: how long
+          the appointment is, when it shows, how long it lasts, and what it costs you in
+          downtime. Open a row for the detail.
+        </p>
+        <div class="pagehead_facts">
+          <div class="pagehead_fact">
+            <span class="pagehead_fact-key">7</span>
+            <span class="pagehead_fact-val">Treatments, all non-surgical, all performed by Dr. Stone</span>
+          </div>
+          <div class="pagehead_fact">
+            <span class="pagehead_fact-key">15 min</span>
+            <span class="pagehead_fact-val">The shortest appointment on the menu</span>
+          </div>
+          <div class="pagehead_fact">
+            <span class="pagehead_fact-key">0</span>
+            <span class="pagehead_fact-val">Treatments here that require an incision — those are at Stone Surgical Arts</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AXIS B. Above the table because it is the more valuable half: patients
+     search for the problem, not the product. -->
+<section class="section_concerns concerns_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-medium">
+        <div class="concerns_head">
+          <div>
+            <p class="eyebrow">Start from the problem</p>
+            <h2 class="heading-style-h3">What would you like to change?</h2>
+          </div>
+        </div>
+        <ul class="concerns_list">
+          <li><button class="concerns_button" type="button" data-concern="lines" aria-pressed="false">Fine lines &amp; wrinkles</button></li>
+          <li><button class="concerns_button" type="button" data-concern="volume" aria-pressed="false">Volume loss</button></li>
+          <li><button class="concerns_button" type="button" data-concern="texture" aria-pressed="false">Texture &amp; pores</button></li>
+          <li><button class="concerns_button" type="button" data-concern="pigment" aria-pressed="false">Pigmentation &amp; tone</button></li>
+          <li><button class="concerns_button" type="button" data-concern="laxity" aria-pressed="false">Laxity &amp; jawline</button></li>
+          <li><button class="concerns_button" type="button" data-concern="scarring" aria-pressed="false">Acne scarring</button></li>
+          <li><button class="concerns_button" type="button" data-concern="hair" aria-pressed="false">Hair thinning</button></li>
+        </ul>
+        <p class="concerns_count" data-ledger-count role="status" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AXIS A. The table. -->
+<section class="section_ledger ledger_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large" data-ledger>
+        <div class="ledger_group" data-group>
+          <div class="ledger_group-head">
+            <figure class="ledger_group-figure">
+              <img src="assets/gen-injectables.webp" alt="" width="240" height="240" loading="lazy">
+            </figure>
+            <h2 class="heading-style-h3">Injectables</h2>
+            <p class="ledger_group-blurb">Neuromodulators relax the muscle that folds the skin; fillers replace the volume that time takes out. Both are placed by Dr. Stone.</p>
+          </div>
+          <div class="ledger_table">
+          <details class="ledger_row" id="botox" data-treatment data-concerns="lines">
+            <summary class="ledger_summary">
+              <span class="ledger_name">Botox | Xeomin</span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Appointment</span><span class="ledger_cell-val">15–20 min</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Shows</span><span class="ledger_cell-val">3–7 days</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Lasts</span><span class="ledger_cell-val">3–4 months</span></span>
+              <span class="ledger_cell is-area"><span class="ledger_cell-key">Downtime</span><span class="ledger_cell-val">None</span></span>
+              <span class="ledger_chev" aria-hidden="true"></span>
+            </summary>
+            <div class="ledger_detail">
+              <div>
+                <p class="text-size-medium ledger_lede">The two neuromodulators Dr. Stone keeps in the room. Same molecule, different formulation — Xeomin carries no accessory proteins, which matters if you have stopped responding to Botox.</p>
+                <div class="ledger_meta">
+                  <span class="ledger_meta-item"><strong>Forehead, glabella, crow's feet</strong>Where it is placed</span>
+                  <span class="ledger_meta-item"><strong>Fine lines &amp; wrinkles</strong>What it addresses</span>
+                </div>
+                <div class="ledger_actions">
+                  <a class="button is-link" href="botox.html">Read the full page <span class="button_arrow">&rarr;</span></a>
+                  <a class="button is-small is-secondary" href="book.html">Ask about this</a>
+                </div>
+              </div>
+              <figure class="ledger_figure">
+                <img src="assets/m-injectables.webp" alt="" width="900" height="675" loading="lazy">
+              </figure>
+            </div>
+          </details>
+          <details class="ledger_row" id="dysport-jeuveau" data-treatment data-concerns="lines">
+            <summary class="ledger_summary">
+              <span class="ledger_name">Dysport &amp; Jeuveau</span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Appointment</span><span class="ledger_cell-val">15–20 min</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Shows</span><span class="ledger_cell-val">2–5 days</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Lasts</span><span class="ledger_cell-val">3–4 months</span></span>
+              <span class="ledger_cell is-area"><span class="ledger_cell-key">Downtime</span><span class="ledger_cell-val">None</span></span>
+              <span class="ledger_chev" aria-hidden="true"></span>
+            </summary>
+            <div class="ledger_detail">
+              <div>
+                <p class="text-size-medium ledger_lede">Two more neuromodulators, held because patients differ. Dysport spreads a little further from the injection point, which suits a broad forehead; Jeuveau is the newest of the four.</p>
+                <div class="ledger_meta">
+                  <span class="ledger_meta-item"><strong>Forehead, glabella, crow's feet</strong>Where it is placed</span>
+                  <span class="ledger_meta-item"><strong>Fine lines &amp; wrinkles</strong>What it addresses</span>
+                </div>
+                <div class="ledger_actions">
+                  <span class="ledger_nopage">A full page for this treatment is not written yet. Dr. Stone covers it in a consultation.</span>
+                  <a class="button is-small is-secondary" href="book.html">Ask about this</a>
+                </div>
+              </div>
+              <figure class="ledger_figure">
+                <img src="assets/m-eyes-young.webp" alt="" width="900" height="675" loading="lazy">
+              </figure>
+            </div>
+          </details>
+          <details class="ledger_row" id="dermal-fillers" data-treatment data-concerns="volume laxity">
+            <summary class="ledger_summary">
+              <span class="ledger_name">Dermal Fillers</span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Appointment</span><span class="ledger_cell-val">30–45 min</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Shows</span><span class="ledger_cell-val">Immediate, settles at 2 weeks</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Lasts</span><span class="ledger_cell-val">6–18 months</span></span>
+              <span class="ledger_cell is-area"><span class="ledger_cell-key">Downtime</span><span class="ledger_cell-val">1–3 days</span></span>
+              <span class="ledger_chev" aria-hidden="true"></span>
+            </summary>
+            <div class="ledger_detail">
+              <div>
+                <p class="text-size-medium ledger_lede">Hyaluronic acid, placed on the bone or in the mid-face to rebuild a structure that has flattened. An oral and maxillofacial surgeon plans this from the skeleton up, which is the difference.</p>
+                <div class="ledger_meta">
+                  <span class="ledger_meta-item"><strong>Lips, cheeks, chin, jawline, tear trough</strong>Where it is placed</span>
+                  <span class="ledger_meta-item"><strong>Volume loss, Laxity &amp; jawline</strong>What it addresses</span>
+                </div>
+                <div class="ledger_actions">
+                  <span class="ledger_nopage">A full page for this treatment is not written yet. Dr. Stone covers it in a consultation.</span>
+                  <a class="button is-small is-secondary" href="book.html">Ask about this</a>
+                </div>
+              </div>
+              <figure class="ledger_figure">
+                <img src="assets/m-lips.webp" alt="" width="900" height="675" loading="lazy">
+              </figure>
+            </div>
+          </details>
+          </div>
+        </div>
+        <div class="ledger_group" data-group>
+          <div class="ledger_group-head">
+            <figure class="ledger_group-figure">
+              <img src="assets/gen-laser-device.webp" alt="" width="240" height="240" loading="lazy">
+            </figure>
+            <h2 class="heading-style-h3">Skin &amp; Resurfacing</h2>
+            <p class="ledger_group-blurb">Controlled injury, then repair. These treatments work by asking the skin to rebuild itself, which is why they run as a series and improve for months after the last one.</p>
+          </div>
+          <div class="ledger_table">
+          <details class="ledger_row" id="morpheus8" data-treatment data-concerns="laxity texture scarring">
+            <summary class="ledger_summary">
+              <span class="ledger_name">Morpheus8</span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Appointment</span><span class="ledger_cell-val">45–60 min</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Shows</span><span class="ledger_cell-val">3 weeks, building to 3 months</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Lasts</span><span class="ledger_cell-val">12+ months</span></span>
+              <span class="ledger_cell is-area"><span class="ledger_cell-key">Downtime</span><span class="ledger_cell-val">2–4 days</span></span>
+              <span class="ledger_chev" aria-hidden="true"></span>
+            </summary>
+            <div class="ledger_detail">
+              <div>
+                <p class="text-size-medium ledger_lede">Radiofrequency delivered below the surface through microneedles, so the heat lands in the layer that holds the jawline and the surface is left largely intact.</p>
+                <div class="ledger_meta">
+                  <span class="ledger_meta-item"><strong>Lower face, jawline, neck</strong>Where it is placed</span>
+                  <span class="ledger_meta-item"><strong>Laxity &amp; jawline, Texture &amp; pores, Acne scarring</strong>What it addresses</span>
+                </div>
+                <div class="ledger_actions">
+                  <span class="ledger_nopage">A full page for this treatment is not written yet. Dr. Stone covers it in a consultation.</span>
+                  <a class="button is-small is-secondary" href="book.html">Ask about this</a>
+                </div>
+              </div>
+              <figure class="ledger_figure">
+                <img src="assets/m-jawline.webp" alt="" width="900" height="675" loading="lazy">
+              </figure>
+            </div>
+          </details>
+          <details class="ledger_row" id="chemical-peels" data-treatment data-concerns="pigment texture">
+            <summary class="ledger_summary">
+              <span class="ledger_name">Chemical Peels</span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Appointment</span><span class="ledger_cell-val">30–45 min</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Shows</span><span class="ledger_cell-val">5–7 days</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Lasts</span><span class="ledger_cell-val">Months, as a series</span></span>
+              <span class="ledger_cell is-area"><span class="ledger_cell-key">Downtime</span><span class="ledger_cell-val">3–7 days</span></span>
+              <span class="ledger_chev" aria-hidden="true"></span>
+            </summary>
+            <div class="ledger_detail">
+              <div>
+                <p class="text-size-medium ledger_lede">Depth is the whole decision. A superficial peel is a lunch hour and a glow; a medium one is a week indoors and a genuine change in tone. Dr. Stone picks the depth against your calendar.</p>
+                <div class="ledger_meta">
+                  <span class="ledger_meta-item"><strong>Face, neck, décolleté, hands</strong>Where it is placed</span>
+                  <span class="ledger_meta-item"><strong>Pigmentation &amp; tone, Texture &amp; pores</strong>What it addresses</span>
+                </div>
+                <div class="ledger_actions">
+                  <span class="ledger_nopage">A full page for this treatment is not written yet. Dr. Stone covers it in a consultation.</span>
+                  <a class="button is-small is-secondary" href="book.html">Ask about this</a>
+                </div>
+              </div>
+              <figure class="ledger_figure">
+                <img src="assets/m-skin-glow.webp" alt="" width="900" height="675" loading="lazy">
+              </figure>
+            </div>
+          </details>
+          </div>
+        </div>
+        <div class="ledger_group" data-group>
+          <div class="ledger_group-head">
+            <figure class="ledger_group-figure">
+              <img src="assets/gen-iclight-wand.webp" alt="" width="240" height="240" loading="lazy">
+            </figure>
+            <h2 class="heading-style-h3">Restoration</h2>
+            <p class="ledger_group-blurb">Your own platelets, concentrated and returned to the tissue that needs them. The slowest results on the menu and the longest-lasting.</p>
+          </div>
+          <div class="ledger_table">
+          <details class="ledger_row" id="prp" data-treatment data-concerns="texture hair">
+            <summary class="ledger_summary">
+              <span class="ledger_name">PRP Treatment</span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Appointment</span><span class="ledger_cell-val">45–60 min</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Shows</span><span class="ledger_cell-val">4–6 weeks</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Lasts</span><span class="ledger_cell-val">A series of 3, then maintenance</span></span>
+              <span class="ledger_cell is-area"><span class="ledger_cell-key">Downtime</span><span class="ledger_cell-val">1–2 days</span></span>
+              <span class="ledger_chev" aria-hidden="true"></span>
+            </summary>
+            <div class="ledger_detail">
+              <div>
+                <p class="text-size-medium ledger_lede">Your blood is drawn, spun to concentrate the platelets, and the plasma is returned to the tissue. Nothing foreign goes in, which is why it is the treatment for people who will not have filler.</p>
+                <div class="ledger_meta">
+                  <span class="ledger_meta-item"><strong>Under-eye, face, scalp</strong>Where it is placed</span>
+                  <span class="ledger_meta-item"><strong>Texture &amp; pores, Hair thinning</strong>What it addresses</span>
+                </div>
+                <div class="ledger_actions">
+                  <span class="ledger_nopage">A full page for this treatment is not written yet. Dr. Stone covers it in a consultation.</span>
+                  <a class="button is-small is-secondary" href="book.html">Ask about this</a>
+                </div>
+              </div>
+              <figure class="ledger_figure">
+                <img src="assets/m-freckles.webp" alt="" width="900" height="675" loading="lazy">
+              </figure>
+            </div>
+          </details>
+          <details class="ledger_row" id="hair-restoration" data-treatment data-concerns="hair">
+            <summary class="ledger_summary">
+              <span class="ledger_name">Hair Restoration</span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Appointment</span><span class="ledger_cell-val">45–60 min</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Shows</span><span class="ledger_cell-val">3–4 months</span></span>
+              <span class="ledger_cell"><span class="ledger_cell-key">Lasts</span><span class="ledger_cell-val">Maintenance every 6–12 months</span></span>
+              <span class="ledger_cell is-area"><span class="ledger_cell-key">Downtime</span><span class="ledger_cell-val">Minimal</span></span>
+              <span class="ledger_chev" aria-hidden="true"></span>
+            </summary>
+            <div class="ledger_detail">
+              <div>
+                <p class="text-size-medium ledger_lede">PRP into the scalp, on a schedule, for thinning that has not yet become baldness. It works on follicles that are still alive, so the honest advice is to come early.</p>
+                <div class="ledger_meta">
+                  <span class="ledger_meta-item"><strong>Crown, hairline, part line</strong>Where it is placed</span>
+                  <span class="ledger_meta-item"><strong>Hair thinning</strong>What it addresses</span>
+                </div>
+                <div class="ledger_actions">
+                  <span class="ledger_nopage">A full page for this treatment is not written yet. Dr. Stone covers it in a consultation.</span>
+                  <a class="button is-small is-secondary" href="book.html">Ask about this</a>
+                </div>
+              </div>
+              <figure class="ledger_figure">
+                <img src="assets/m-man-suit.webp" alt="" width="900" height="675" loading="lazy">
+              </figure>
+            </div>
+          </details>
+          </div>
+        </div>
+        <p class="ledger_empty" data-ledger-empty hidden>
+          Nothing on this menu addresses that. Dr. Stone may still be able to help, or point
+          you somewhere that can — <a class="text-style-link" href="book.html">ask her</a>.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The boundary. This is the page a visitor looking for a facelift is most
+     likely to land on from a search, so it is the page that has to redirect
+     them properly. -->
+<section class="section_boundary band_component is-alt">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="band_inner" data-reveal>
+          <figure class="band_media">
+            <img src="assets/ssa-consult-room.webp" alt="The consultation room at the Westlake practice" width="1000" height="800" loading="lazy" class="u-focus-figure">
+          </figure>
+          <div>
+            <p class="eyebrow">Not on this list</p>
+            <h2 class="heading-style-h2 band_title">If it needs an incision, it is <em class="text-style-display-accent">next door</em>.</h2>
+            <div class="text-size-medium band_text">
+              <p>
+                Facelifts, neck lifts, eyelid surgery, FaceTite, facial implants, buccal fat
+                removal and fat transfer are performed by the same surgeon, under a different
+                name, at the same address.
+              </p>
+              <p>
+                The split is not a marketing decision. It is the line between what can be done
+                in a treatment room and what needs an operating one, and keeping the two menus
+                separate is how you can tell which you are being sold.
+              </p>
+            </div>
+            <div class="band_switch">
+              <p class="band_switch-title">Looking for surgery?</p>
+              <p>
+                <a href="https://stone-surgical-arts-production.up.railway.app/" rel="noopener">Stone Surgical Arts</a>
+                carries the twelve surgical procedures, the same surgeon and the same address.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- The closing invitation, on every page that does not end on its own.
+
+     DELIBERATELY NOT THE SURGICAL ARTS BAND. That one is copy on a Carrara
+     ground at left and Dr. Stone's portrait at right, cropped to the band's
+     height. Repeating it here would make the two sites read as one site with
+     two names, which is the exact failure gotcha 4 is about.
+
+     This is a dark band carrying one display line and three plain facts about
+     what a consultation actually is. The facts are here rather than on the
+     booking page because this band is the last thing on nine pages and the
+     objection it answers - what am I committing to? - is what stops a
+     non-surgical booking. -->
+<section class="section_close close_component" id="contact" data-theme="dark">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="close_inner" data-reveal>
+          <p class="eyebrow">Start here</p>
+          <h2 class="heading-style-h2 close_title">
+            One appointment, and a plan for the <em class="text-style-display-accent">year ahead</em>.
+          </h2>
+          <div class="close_facts">
+            <div class="close_fact">
+              <span class="close_fact-key">30 minutes</span>
+              <span class="close_fact-val">The length of a consultation. You are assessed by Dr. Stone, not by a coordinator.</span>
+            </div>
+            <div class="close_fact">
+              <span class="close_fact-key">No obligation</span>
+              <span class="close_fact-val">You leave with a written plan and a cadence. Whether you start that day is your call.</span>
+            </div>
+            <div class="close_fact">
+              <span class="close_fact-key">Virtual or in-office</span>
+              <span class="close_fact-val">A first consultation can be taken by video. Anything injected happens in Westlake.</span>
+            </div>
+          </div>
+          <div class="button-group close_actions">
+            <a class="button" href="book.html">Book a consultation</a>
+            <a class="button is-alternate" href="tel:+18173838361">Call (817) 383-8361</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+</main>
+<!-- The three-column footer, on the shared 22-footer.css from the Surgical Arts
+     build. The stylesheet is shared; the contents are this brand's.
+
+     NAP, AND IT IS NOT SETTLED. project-overview.md records the med spa's phone
+     as (817) 383-8361 and its suite as #110A. The Surgical Arts footer carries
+     a comment saying those exact two values were the SISTER practice's and were
+     wrong there. So one of two things is true: either the med spa genuinely
+     shares the implant centre's line, or the med spa overview inherited the
+     same bad pair. The address is the one part confirmed on every recovered
+     page: 72 Andorra Dr, Westlake, TX 76262.
+
+     The suite is written #110 here, matching Surgical Arts' verified footer,
+     and the phone is left at 383-8361 because that is what this pillar's own
+     overview records. BOTH need one line of confirmation from the client
+     before a domain goes live. See HANDOFF.md. -->
+<footer class="footer_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-medium">
+        <nav class="footer_nav" aria-label="Footer">
+          <a href="index.html">Home</a>
+          <a href="treatments.html" aria-current="page">All treatments</a>
+          <a href="botox.html">Botox &amp; Xeomin</a>
+          <a href="results.html">Results &amp; reviews</a>
+          <a href="membership.html">Membership</a>
+          <a href="financing.html">Financing</a>
+          <a href="meet-the-doctor.html">Dr. Stone</a>
+          <a href="about.html">About</a>
+          <a href="team.html">The team</a>
+          <a href="book.html">Book a consultation</a>
+        </nav>
+        <div class="footer_top">
+          <div class="footer_col">
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M8 15s5-4.7 5-8.4A5 5 0 0 0 3 6.6C3 10.3 8 15 8 15Z" stroke="currentColor" stroke-width="1.3"/><circle cx="8" cy="6.5" r="1.8" stroke="currentColor" stroke-width="1.3"/></svg>
+              <a href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">72 Andorra Dr #110<br>Westlake, TX 76262</a>
+            </div>
+            <div class="footer_item">
+              <svg class="footer_icon" viewBox="0 0 16 16" fill="none" aria-hidden="true"><path d="M14.5 11.3v2a1.3 1.3 0 0 1-1.5 1.3 13 13 0 0 1-5.7-2 12.8 12.8 0 0 1-4-4A13 13 0 0 1 1.4 3 1.3 1.3 0 0 1 2.7 1.5h2a1.3 1.3 0 0 1 1.3 1.2c.1.6.2 1.3.5 1.9a1.3 1.3 0 0 1-.3 1.4l-.8.8a10.7 10.7 0 0 0 4 4l.8-.8a1.3 1.3 0 0 1 1.4-.3c.6.3 1.2.4 1.9.5a1.3 1.3 0 0 1 1.1 1.1Z" stroke="currentColor" stroke-width="1.3" stroke-linejoin="round"/></svg>
+              <a href="tel:+18173838361">(817) 383-8361</a>
+            </div>
+            <p class="text-size-tiny text-style-muted">English &amp; Spanish spoken</p>
+          </div>
+
+          <div class="footer_brand">
+            <span class="brand_component is-large">
+              <span class="brand_name">Stone</span>
+              <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+            </span>
+            <div class="footer_socials">
+              <a class="footer_social" href="https://www.instagram.com/westlakeaesthetics/" aria-label="Stone Med Spa on Instagram" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><rect x="3" y="3" width="18" height="18" rx="5" stroke="currentColor" stroke-width="1.7"/><circle cx="12" cy="12" r="4" stroke="currentColor" stroke-width="1.7"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor"/></svg>
+              </a>
+              <a class="footer_social" href="https://www.facebook.com/stonesurgicalarts/" aria-label="Stone on Facebook" rel="noopener">
+                <svg viewBox="0 0 24 24" fill="none" aria-hidden="true"><path d="M14.5 8.5H17V5.2h-2.6c-2.3 0-3.9 1.6-3.9 4v2H8v3.3h2.5V22h3.4v-7.5h2.5l.5-3.3h-3v-1.6c0-.6.4-1.1 1.1-1.1Z" fill="currentColor"/></svg>
+              </a>
+            </div>
+            <a class="footer_switch" href="https://stone-surgical-arts-production.up.railway.app/" rel="noopener">
+              <span class="footer_switch-label">Looking for surgery?</span>
+              <span class="footer_switch-brand">Stone Surgical Arts &rarr;</span>
+            </a>
+          </div>
+
+          <div class="footer_col is-right">
+            <p class="text-size-tiny text-style-allcaps text-color-accent">Hours</p>
+            <dl class="footer_hours">
+              <div class="footer_hours-row"><dt>Mon &ndash; Fri</dt><dd>9:00 &ndash; 5:00</dd></div>
+              <div class="footer_hours-row"><dt>Saturday</dt><dd>By appointment</dd></div>
+              <div class="footer_hours-row"><dt>Sunday</dt><dd>Closed</dd></div>
+            </dl>
+          </div>
+        </div>
+
+        <div class="footer_signature">
+          <svg class="footer_signature-mark" viewBox="0 0 48 48" fill="none" aria-hidden="true">
+            <path d="M24 3 45 24 24 45 3 24 24 3Z" stroke="currentColor" stroke-width="1"/>
+            <text x="24" y="30" text-anchor="middle" font-family="Cormorant Garamond, Georgia, serif" font-size="18" fill="currentColor">S</text>
+          </svg>
+          <p class="footer_signature-words">Maintain. Refine. Return.</p>
+        </div>
+
+        <div class="footer_legal">
+          <span>&copy; <span data-year>2026</span> Stone Med Spa. All rights reserved.</span>
+          <a href="https://www.stonedentalimplantcenter.com/privacy-policy" rel="noopener">Privacy Policy</a>
+          <a href="https://www.stonedentalimplantcenter.com/terms-of-service" rel="noopener">Terms of Service</a>
+          <a href="https://www.stonedentalimplantcenter.com/sms-terms-conditions" rel="noopener">SMS Terms</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</footer>
+
+</div>
+<script src="assets/site.js" defer></script>
+</body>
+</html>

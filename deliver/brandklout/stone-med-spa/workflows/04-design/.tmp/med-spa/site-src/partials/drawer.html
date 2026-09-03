@@ -1,0 +1,35 @@
+<!-- The mobile drawer. At 991px and below the navbar hides both its menu and
+     its phone number, so this panel is the ONLY place a phone gets the number
+     without scrolling to the footer. It is not a menu, it is the mobile
+     contact card, and it lists every page because there is room here. -->
+<div class="drawer_component" id="drawer">
+  <div class="drawer_scrim"></div>
+  <div class="drawer_panel" role="dialog" aria-modal="true" aria-label="Menu">
+    <div class="drawer_head">
+      <span class="brand_component">
+        <span class="brand_name">Stone</span>
+        <span class="brand_rule"><span class="brand_sub">Med Spa</span></span>
+      </span>
+      <button class="drawer_close" type="button" aria-label="Close menu">&times;</button>
+    </div>
+
+    <nav class="drawer_nav" aria-label="Mobile">
+      <a class="drawer_link" href="index.html"{{CUR_INDEX}}>Home</a>
+      <a class="drawer_link" href="treatments.html"{{CUR_TREATMENTS}}>All treatments</a>
+      <a class="drawer_link" href="botox.html"{{CUR_BOTOX}}>Botox &amp; Xeomin</a>
+      <a class="drawer_link" href="results.html"{{CUR_RESULTS}}>Results &amp; reviews</a>
+      <a class="drawer_link" href="membership.html"{{CUR_MEMBERSHIP}}>Membership</a>
+      <a class="drawer_link" href="financing.html"{{CUR_FINANCING}}>Financing</a>
+      <a class="drawer_link" href="meet-the-doctor.html"{{CUR_MEET_THE_DOCTOR}}>Dr. Stone</a>
+      <a class="drawer_link" href="about.html"{{CUR_ABOUT}}>About the practice</a>
+      <a class="drawer_link" href="team.html"{{CUR_TEAM}}>Meet the team</a>
+      <a class="drawer_link" href="book.html"{{CUR_BOOK}}>Book a consultation</a>
+    </nav>
+
+    <div class="drawer_foot">
+      <a class="button" href="book.html">Book a consultation</a>
+      <a class="button is-secondary" href="tel:+18173838361">Call (817) 383-8361</a>
+      <p class="drawer_meta">72 Andorra Dr #110, Westlake, TX 76262</p>
+    </div>
+  </div>
+</div>

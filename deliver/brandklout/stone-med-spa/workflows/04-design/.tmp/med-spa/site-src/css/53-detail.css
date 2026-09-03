@@ -1,0 +1,298 @@
+/* ===========================================================================
+   THE TREATMENT PAGE — a reference document, not a narrative.
+
+   Stone Surgical Arts' treatment pages are dossiers: full-bleed parallax hero,
+   mask reveals, a photograph behind a dark band, a related row. They are built
+   to carry someone through a decision they will make once, and they read like a
+   story because that is what a facelift is.
+
+   Botox is not that. Someone reading this page has usually already decided to
+   have it and is checking specifics: how long does it take, when does it show,
+   how long until I am back, what is the difference between the four products
+   in the room. So the page is a SPEC SHEET — a sticky rail of vitals at left
+   that stays put while the prose scrolls past it at right — and the vitals are
+   the first thing rendered, not the last.
+
+   This shape is also why Botox is the right sample page to fund first: the rail
+   is generated from the same treatments-data.mjs record that fills the ledger
+   row, so the other six pages are a body file each and nothing else.
+   =========================================================================== */
+.detail_component {
+  background-color: var(--bg);
+}
+.detail_layout {
+  display: grid;
+  grid-template-columns: minmax(0, 20rem) minmax(0, 1fr);
+  gap: 5rem;
+  align-items: start;
+}
+/* BOTH TRACKS NEED min-width: 0, and the minmax(0, ...) above is not enough.
+
+   A grid ITEM defaults to `min-width: auto`, which resolves to its min-content
+   size, and a block's min-content is the largest min-content of anything inside
+   it. The comparison table carries `min-width: 40rem` so that four columns stay
+   legible, and that 40rem propagated straight out of the table, through
+   .detail_prose, and set the floor for the whole row.
+
+   At 390 that made both tracks 595px wide inside a 353px container. The page
+   did not scroll sideways, because .page-wrapper clips it — which is exactly
+   what made this hard to see: the only visible symptom was the two buttons in
+   the vitals rail hanging off the right edge, on the OPPOSITE side of the grid
+   from the table that caused it. Caught by all-pages.mjs at 390.
+
+   minmax(0, 1fr) fixes the TRACK's minimum; this fixes the ITEM's. Both are
+   required, and the table stays scrollable inside .compare_scroll. */
+.detail_layout > * {
+  min-width: 0;
+}
+
+/* --- the vitals rail ----------------------------------------------------- */
+.detail_rail {
+  position: sticky;
+  top: 8rem;
+}
+.detail_vitals {
+  border-top: 1px solid var(--charcoal);
+}
+.detail_vital {
+  display: grid;
+  gap: 0.3rem;
+  padding: 1.05rem 0;
+  border-bottom: 1px solid var(--line);
+}
+.detail_vital-key {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--fg-mute);
+}
+.detail_vital-val {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  line-height: 1.25;
+  color: var(--fg);
+}
+.detail_rail-actions {
+  margin-top: 2rem;
+  display: grid;
+  gap: 0.75rem;
+}
+/* The rail carries the only "no prices" statement on the page, because the rail
+   is where a visitor looks for one. Saying nothing reads as hiding it. */
+.detail_rail-note {
+  margin-top: 1.4rem;
+  font-size: var(--size-text-tiny);
+  line-height: 1.55;
+  color: var(--fg-mute);
+}
+
+/* --- the prose column ---------------------------------------------------- */
+.detail_prose > * + * {
+  margin-top: 1.15rem;
+}
+.detail_prose h2 {
+  margin-top: 3.6rem;
+}
+.detail_prose h2:first-child {
+  margin-top: 0;
+}
+.detail_prose h3 {
+  margin-top: 2.4rem;
+}
+.detail_prose p,
+.detail_prose li {
+  max-width: 68ch;
+  color: var(--fg-body);
+}
+.detail_prose ul {
+  list-style: none;
+  display: grid;
+  gap: 0.65rem;
+}
+.detail_prose ul li {
+  position: relative;
+  padding-left: 1.5rem;
+}
+.detail_prose ul li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.72em;
+  width: 0.4rem;
+  height: 0.4rem;
+  border-radius: 50%;
+  background-color: var(--accent-flat);
+}
+
+/* A pulled aside inside the prose — the "am I a candidate" block and the
+   honest note about who this is not for. */
+.detail_aside {
+  margin-top: 2.2rem;
+  padding: 1.9rem 2.1rem;
+  border-left: 2px solid var(--accent-flat);
+  background-color: var(--green-wash);
+}
+.detail_aside > * + * {
+  margin-top: 0.8rem;
+}
+.detail_aside-title {
+  font-family: var(--font-body);
+  font-size: var(--size-text-small);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--accent);
+}
+
+/* --- the comparison table ------------------------------------------------
+   Four products, one row each. This is the section the research found on
+   NassifMD's Botox page and the reason that page is the deepest in the set:
+   the visitor's real question is not "what is Botox", it is "which of these
+   four am I getting and why". A table answers it; prose does not. -------- */
+.compare_table {
+  width: 100%;
+  margin-top: 1.8rem;
+  border-collapse: collapse;
+  /* The table is the one element on the site allowed to scroll sideways, and
+     the wrapper below is what does it. */
+  min-width: 40rem;
+}
+.compare_scroll {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+.compare_table th,
+.compare_table td {
+  padding: 1rem 1.1rem 1rem 0;
+  text-align: left;
+  vertical-align: top;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.compare_table thead th {
+  border-bottom-color: var(--charcoal);
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-mute);
+}
+.compare_table tbody th {
+  font-family: var(--font-display);
+  font-size: var(--size-h5);
+  font-weight: 400;
+  color: var(--fg);
+  white-space: nowrap;
+}
+.compare_table tbody tr.is-here th::after {
+  content: "In the room";
+  display: block;
+  margin-top: 0.25rem;
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+
+/* --- pre and post care --------------------------------------------------
+   Two columns, before and after, each a short ordered list on a rule. It is
+   the section Skin Solutions adds that NassifMD does not, and it is the one
+   that reduces the phone calls the day after. ---------------------------- */
+.care_grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 3rem;
+  margin-top: 1.8rem;
+}
+.care_col-title {
+  padding-bottom: 0.9rem;
+  border-bottom: 1px solid var(--charcoal);
+  font-family: var(--font-body);
+  font-size: var(--size-text-tiny);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.16em;
+  color: var(--accent);
+}
+.care_list {
+  list-style: none;
+  counter-reset: care;
+}
+.care_list li {
+  counter-increment: care;
+  position: relative;
+  padding: 0.95rem 0 0.95rem 2.4rem;
+  border-bottom: 1px solid var(--line);
+  font-size: var(--size-text-small);
+  color: var(--fg-body);
+}
+.care_list li::before {
+  content: counter(care, decimal-leading-zero);
+  position: absolute;
+  left: 0;
+  top: 1.05rem;
+  font-family: var(--font-display);
+  font-size: var(--size-text-small);
+  color: var(--accent-flat);
+}
+
+/* --- the related row ----------------------------------------------------- */
+.related_component {
+  background-color: var(--bg-alt);
+  border-top: 1px solid var(--line);
+}
+.related_grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1.5rem;
+  margin-top: 2.4rem;
+}
+.related_card {
+  display: grid;
+  gap: 0.6rem;
+  padding: 1.6rem 1.7rem;
+  background-color: var(--bg-card);
+  border: 1px solid var(--line);
+  border-radius: var(--radius-card);
+  transition: border-color 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.related_card:hover {
+  border-color: var(--accent-flat);
+  transform: translateY(-2px);
+}
+.related_card-meta {
+  font-size: var(--size-text-tiny);
+  text-transform: uppercase;
+  letter-spacing: 0.14em;
+  color: var(--fg-mute);
+}
+
+@media (max-width: 991px) {
+  .detail_layout {
+    grid-template-columns: 1fr;
+    gap: 3rem;
+  }
+  .detail_rail {
+    position: static;
+  }
+  .detail_vitals {
+    /* On one column the vitals become a two-up strip rather than a tall list,
+       so the prose still starts inside the first screen. */
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    column-gap: 2rem;
+  }
+  .care_grid,
+  .related_grid {
+    grid-template-columns: 1fr;
+    gap: 2.4rem;
+  }
+}
+@media (max-width: 478px) {
+  .detail_vitals {
+    grid-template-columns: 1fr;
+  }
+}

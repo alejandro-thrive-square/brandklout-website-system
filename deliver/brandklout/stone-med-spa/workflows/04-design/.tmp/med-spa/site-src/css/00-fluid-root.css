@@ -1,0 +1,43 @@
+/* Fluid root font-size — webzite-house-v1.
+   Same curve as the Dr. Nahlah build (site-src/css/00-fluid-root.css) so the two
+   Instatic sites share one rem basis. Client-First is a rem system: every size
+   token below is a rem, and this is the only rule allowed to touch the root. */
+:root {
+  --font-from: 18;
+  --font-to: 20;
+  --vw-from: calc(1920 / 100);
+  --vw-to: calc(2400 / 100);
+  --coefficient: calc((var(--font-to) - var(--font-from)) / (var(--vw-to) - var(--vw-from)));
+  --base: calc((var(--font-from) - var(--vw-from) * var(--coefficient)) / 16);
+}
+
+html {
+  font-size: calc(var(--base) * 1rem + var(--coefficient) * 1vw);
+}
+
+@media screen and (max-width: 1920px) {
+  :root {
+    --font-from: 16;
+    --font-to: 18;
+    --vw-from: calc(1440 / 100);
+    --vw-to: calc(1920 / 100);
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  :root {
+    --font-from: 16;
+    --font-to: 16;
+    --vw-from: calc(479 / 100);
+    --vw-to: calc(1440 / 100);
+  }
+}
+
+@media screen and (max-width: 479px) {
+  :root {
+    --font-from: 14;
+    --font-to: 16;
+    --vw-from: calc(320 / 100);
+    --vw-to: calc(479 / 100);
+  }
+}

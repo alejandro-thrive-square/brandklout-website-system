@@ -1,0 +1,150 @@
+<!-- BOOK CONSULTATION (VIRTUAL AND IN-OFFICE) — Asana subtask 9 of 11.
+
+     cta: false in build-site.mjs — this page IS the conversion and does not
+     need the shared closing band underneath it.
+
+     THE FORM POSTS NOWHERE, ON PURPOSE. See the header of js/11-form.js for the
+     full reasoning: there is no endpoint, no scheduler and no decision on
+     whether the virtual channel is HIPAA-compliant, and a medical intake form
+     that silently drops a patient's details is worse than no form. On submit it
+     says so and gives the phone number. -->
+<section class="section_pagehead pagehead_component">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="pagehead_inner">
+        <p class="eyebrow">Book</p>
+        <h1 class="heading-style-h1 pagehead_title">Thirty minutes with <em class="text-style-display-accent">the surgeon</em>.</h1>
+        <p class="text-size-large pagehead_lede">
+          Not a coordinator, not an intake call. You are assessed by Dr. Stone, you leave with
+          a written plan and a cadence, and whether you start that day is entirely your call.
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section_paths paths_component" id="contact">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div data-reveal>
+          <p class="eyebrow">Two ways to start</p>
+          <h2 class="heading-style-h2">Pick the one that suits your week.</h2>
+        </div>
+        <div class="paths_grid" data-reveal="stagger">
+          <div class="path_card">
+            <span class="path_tag">In the office</span>
+            <h3 class="heading-style-h3">Westlake, thirty minutes</h3>
+            <p class="text-size-medium path_text">
+              The full assessment. Dr. Stone examines you in person, in the light she treats
+              in, and can show you comparable cases in the room.
+            </p>
+            <ul class="path_list">
+              <li>A physical assessment of the muscle and the volume, not a photograph of it</li>
+              <li>A written twelve-month plan before you leave</li>
+              <li>You can be treated the same visit if you decide to be</li>
+              <li>Parking at the door, off 114</li>
+            </ul>
+            <div class="button-group path_actions">
+              <a class="button" href="#form" data-path="in-office">Request an in-office visit</a>
+            </div>
+          </div>
+          <div class="path_card">
+            <span class="path_tag">By video</span>
+            <h3 class="heading-style-h3">From wherever you are</h3>
+            <p class="text-size-medium path_text">
+              A first conversation without the drive. Good for working out whether what you
+              want is on this menu at all, before you spend a morning on it.
+            </p>
+            <ul class="path_list">
+              <li>Same thirty minutes, same surgeon</li>
+              <li>Useful for a second opinion on a plan from somewhere else</li>
+              <li>A written summary afterwards, the same as in the office</li>
+            </ul>
+            <p class="path_limit">
+              You cannot be treated on a video call. Anything injected happens in Westlake, so
+              a virtual consultation is a first step and not a shortcut &mdash; and some
+              assessments genuinely need hands on the face, in which case Dr. Stone will say so
+              and bring you in.
+            </p>
+            <div class="button-group path_actions">
+              <a class="button is-secondary" href="#form" data-path="virtual">Request a video call</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="section_form form_component" id="form">
+  <div class="padding-global">
+    <div class="container-large">
+      <div class="padding-section-large">
+        <div class="form_layout">
+          <div>
+            <p class="eyebrow">Request an appointment</p>
+            <h2 class="heading-style-h2">Tell us a little, and we will call you.</h2>
+            <form class="form_grid" data-inert-form novalidate>
+              <div class="form_field">
+                <label class="form_label" for="f-name">Your name</label>
+                <input class="form_input" id="f-name" name="name" type="text" autocomplete="name">
+              </div>
+              <div class="form_field">
+                <label class="form_label" for="f-phone">Phone</label>
+                <input class="form_input" id="f-phone" name="phone" type="tel" autocomplete="tel">
+              </div>
+              <div class="form_field">
+                <label class="form_label" for="f-email">Email</label>
+                <input class="form_input" id="f-email" name="email" type="email" autocomplete="email">
+              </div>
+              <div class="form_field">
+                <label class="form_label" for="f-type">Consultation type</label>
+                <select class="form_select" id="f-type" name="visit" data-visit-type>
+                  <option value="in-office">In the office, Westlake</option>
+                  <option value="virtual">By video</option>
+                  <option value="either">Either &mdash; whichever is sooner</option>
+                </select>
+              </div>
+              <div class="form_field is-full">
+                <label class="form_label" for="f-interest">What would you like to change?</label>
+                <textarea class="form_textarea" id="f-interest" name="interest" placeholder="In your own words. You do not need to know the name of a treatment."></textarea>
+              </div>
+              <div class="form_actions">
+                <button class="button" type="submit">Request a consultation</button>
+              </div>
+              <p class="form_status" data-form-status role="status" aria-live="polite"></p>
+              <p class="form_privacy">
+                Please do not send detailed medical history through this form. We will take
+                that over the phone or in the room, on a channel appropriate for it.
+              </p>
+            </form>
+          </div>
+
+          <aside class="form_aside">
+            <p class="form_aside-title">Where you are coming to</p>
+            <ul class="form_aside-list">
+              <li>
+                <strong>72 Andorra Dr #110</strong>
+                Westlake, TX 76262. Parking at the door.
+                <a class="text-style-link" href="https://maps.google.com/?q=72+Andorra+Dr+%23110+Westlake+TX+76262" rel="noopener">Open in Maps</a>
+              </li>
+              <li>
+                <strong>(817) 383-8361</strong>
+                Monday to Friday, 9 to 5. The fastest way to be booked today.
+              </li>
+              <li>
+                <strong>Saturday by appointment</strong>
+                Ask when you call; Saturdays are held for existing patients first.
+              </li>
+              <li>
+                <strong>English &amp; Spanish</strong>
+                Both spoken at the chairside, not through a translator.
+              </li>
+            </ul>
+          </aside>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

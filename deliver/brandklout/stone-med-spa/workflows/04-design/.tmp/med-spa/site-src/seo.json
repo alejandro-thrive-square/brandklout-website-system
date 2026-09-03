@@ -1,0 +1,164 @@
+{
+  "_note": [
+    "ORIGIN IS A PLACEHOLDER AND MUST BE CHANGED BEFORE ANY PUBLISH.",
+    "No domain has been chosen for this brand (docs/project-overview.md, 'Domain'),",
+    "and stonesurgicalarts.com is already contested by the sibling build. Every",
+    "canonical and og:url below is built from site.origin, so a publish with this",
+    "value in place would tell Google the canonical home of all eleven pages is a",
+    "domain nobody owns. Change it here, once, and rebuild.",
+    "",
+    "THE TRADING NAME IS ALSO UNCONFIRMED. Asana says 'Stone Med Spa'; the live",
+    "Instagram account is @westlakeaesthetics, 'Westlake Medical Aesthetics'. If",
+    "the client picks the second, this file and the three partials carrying the",
+    "wordmark are the whole change."
+  ],
+  "site": {
+    "name": "Stone Med Spa",
+    "origin": "https://stonemedspa.example",
+    "ogImage": "/assets/m-hero.webp"
+  },
+  "organization": {
+    "@type": "MedicalBusiness",
+    "@id": "https://stonemedspa.example/#practice",
+    "name": "Stone Med Spa",
+    "description": "Non-surgical facial aesthetics in Westlake, Texas, performed by Dr. Mona Stone, DDS, a board-certified oral and maxillofacial surgeon.",
+    "medicalSpecialty": "Dermatology",
+    "address": {
+      "@type": "PostalAddress",
+      "streetAddress": "72 Andorra Dr #110",
+      "addressLocality": "Westlake",
+      "addressRegion": "TX",
+      "postalCode": "76262",
+      "addressCountry": "US"
+    },
+    "telephone": "+1-817-383-8361",
+    "availableLanguage": [
+      "English",
+      "Spanish"
+    ],
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": [
+          "Monday",
+          "Tuesday",
+          "Wednesday",
+          "Thursday",
+          "Friday"
+        ],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    ],
+    "founder": {
+      "@type": "Physician",
+      "name": "Dr. Mona Stone, DDS",
+      "medicalSpecialty": "OralAndMaxillofacialSurgery"
+    }
+  },
+  "pages": {
+    "index": {
+      "title": "Stone Med Spa | Non-Surgical Facial Aesthetics in Westlake, TX",
+      "description": "Botox, fillers, Morpheus8 and PRP in Westlake, Texas — placed by Dr. Mona Stone, an oral and maxillofacial surgeon, not delegated. Book a 30-minute consultation.",
+      "ogTitle": "The surgeon does your injectables. Stone Med Spa, Westlake TX."
+    },
+    "about": {
+      "title": "About Stone Med Spa | Westlake, Texas",
+      "description": "One practice, one surgeon, three names. What Stone Med Spa is for, where it sits beside Stone Surgical Arts, and what happens in the room."
+    },
+    "meet-the-doctor": {
+      "title": "Dr. Mona Stone, DDS | Stone Med Spa",
+      "description": "A board-certified oral and maxillofacial surgeon who plans facial aesthetics from the skeleton up — and who performs every injection herself.",
+      "schema": {
+        "@type": "Physician",
+        "name": "Dr. Mona Stone, DDS",
+        "medicalSpecialty": "OralAndMaxillofacialSurgery",
+        "worksFor": {
+          "@id": "https://stonemedspa.example/#practice"
+        }
+      }
+    },
+    "team": {
+      "title": "Meet the Team | Stone Med Spa, Westlake TX",
+      "description": "The people you will actually see — at the desk, in the treatment room and on the phone."
+    },
+    "treatments": {
+      "title": "Treatments | Stone Med Spa, Westlake TX",
+      "description": "Seven non-surgical treatments, with the appointment length, when results show, how long they last and the downtime for each. Filter by what you want to change."
+    },
+    "botox": {
+      "title": "Botox & Xeomin in Westlake, TX | Stone Med Spa",
+      "description": "Botox and Xeomin placed by an oral and maxillofacial surgeon in Westlake, TX. Fifteen minutes, visible in 3-7 days, lasting 3-4 months.",
+      "schema": [
+        {
+          "@type": "MedicalProcedure",
+          "name": "Botulinum toxin treatment (Botox, Xeomin)",
+          "procedureType": "https://schema.org/NoninvasiveProcedure",
+          "bodyLocation": "Face",
+          "howPerformed": "Small units of botulinum toxin type A are injected into the specific muscles that fold the overlying skin, relaxing them for three to four months.",
+          "provider": {
+            "@id": "https://stonemedspa.example/#practice"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Does Botox hurt?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The needle is very fine and each injection takes about a second. Most patients describe it as a brief sting. No anaesthetic is needed for a standard upper-face treatment."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How soon will I see it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Movement starts to soften at three to seven days and reaches its full effect at about fourteen days. Do not judge the result before two weeks."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the difference between Botox and Xeomin?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Both are botulinum toxin type A. Xeomin is formulated without the accessory proteins Botox carries, which is why it is often chosen for patients who appear to have stopped responding to Botox over time."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will I look frozen?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "That is a dosing and placement decision, not a property of the drug. Dr. Stone treats the specific muscles that are folding the skin and leaves the rest working, and a first treatment is deliberately conservative."
+              }
+            }
+          ]
+        }
+      ]
+    },
+    "results": {
+      "title": "Results & Reviews | Stone Med Spa, Westlake TX",
+      "description": "What patients say about Dr. Stone, and an honest account of why the before-and-after gallery is not published yet."
+    },
+    "financing": {
+      "title": "Financing | Stone Med Spa, Westlake TX",
+      "description": "How patients spread the cost of non-surgical treatment, which third-party lenders the practice works with, and what each one is suited to."
+    },
+    "book": {
+      "title": "Book a Consultation | Stone Med Spa, Westlake TX",
+      "description": "Two ways to start: a video consultation from home, or thirty minutes in the Westlake office. Both are with Dr. Stone."
+    },
+    "membership": {
+      "title": "Membership | Stone Med Spa, Westlake TX",
+      "description": "Non-surgical results are a cadence, not an event. Two proposed membership tiers built around how often you actually come in."
+    },
+    "thank-you": {
+      "title": "Thank You | Stone Med Spa",
+      "description": "Your consultation request has been received.",
+      "noindex": true
+    }
+  }
+}
