@@ -134,9 +134,10 @@ for this repo is `npm install`, and root `package.json` has a `postinstall` that
 (`deliver/process`, the pillar's `docs/` and `scripts/`, `scripts`, `mcp-servers`, `.claude`, plus the
 repo-root directives) and the one client its `bk-<slug>` branch names.
 
-If the branch name is not a prefix of the client folder — `bk-ifa-dentistry` vs
-`institute-for-advanced-dentistry` — nothing matches, the worktree keeps the shared context only, and
-the script prints the line to run:
+Orca names the branch `alejandro-thrive-square/bk-livewell`, so the client is derived from the
+worktree **directory** name first and the branch's last path segment second. If neither is a prefix
+of the client folder — `bk-ifa-dentistry` vs `institute-for-advanced-dentistry` — nothing matches, the
+worktree keeps the shared context only, and the script prints the line to run:
 
 ```bash
 bash scripts/sparsify-worktree.sh --client institute-for-advanced-dentistry

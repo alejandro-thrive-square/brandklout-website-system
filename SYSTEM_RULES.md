@@ -209,9 +209,15 @@ worktree that may already hold work:
   the cone; commit or stash first, or pass `--force` if the changes are inside the client you keep.
 - **An already-sparse worktree is left alone** and its cone printed, so re-running `npm install`
   never re-scopes a worktree you widened by hand. `--force` re-scopes deliberately.
-- **A branch name that matches no client keeps the shared context only** and prints the
+- **A name that matches no client keeps the shared context only** and prints the
   `git sparse-checkout add` line for every client. This is the `bk-ifa-dentistry` case — the slug is
   not a prefix of `institute-for-advanced-dentistry`, so pass `--client` there.
+
+The client is derived from the **worktree directory name first, the branch's last path segment
+second**, stripping `bk-` and then trimming `-suffixes` longest-first. Both halves are load-bearing:
+Orca names the branch `alejandro-thrive-square/bk-livewell`, not `bk-livewell`, so matching the raw
+branch finds nothing, and the directory name is exactly what was typed into Orca. `scripts/hooks/post-checkout`
+carries the same derivation for asset seeding and had the same prefix bug — keep the two in step.
 
 Sparse-checkout removes *tracked* files only. Assets mirrored in by `mirror-assets.sh` are
 git-ignored, so other clients can survive as asset-only leftover directories; the script lists them
