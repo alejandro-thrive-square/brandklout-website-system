@@ -1,7 +1,7 @@
 // npm postinstall -> scripts/sparsify-worktree.sh
 //
 // Orca's per-repo setup hook for this repo is `npm install`, which is how a
-// newly created worktree gets narrowed to one client. Two Windows facts make
+// newly created worktree gets narrowed to one client. Three Windows facts make
 // the obvious one-liner ("bash scripts/sparsify-worktree.sh || true") wrong:
 //
 //   1. npm runs scripts through cmd.exe, where `|| true` is not a shell
@@ -9,10 +9,16 @@
 //   2. `bash` on PATH under cmd.exe resolves to the WSL stub in WindowsApps
 //      before Git Bash, and WSL sees a different filesystem, so the script
 //      failed with "not inside a git repository".
+//   3. `where git` answers <git>/mingw64/bin/git.exe first, whose sibling bin/
+//      holds no bash.exe — the real one is under the Git install ROOT.
 //
-// So: locate a real Git Bash, run the script through it, and never fail the
-// install — a worktree that stayed full is a nuisance, a broken setup hook is
-// a blocked agent.
+// Paths here are written with FORWARD slashes on purpose. Windows accepts them,
+// and this file is regularly rewritten through a bash heredoc, which halves
+// backslashes: "C:\Program Files\Git\bin\bash.exe" silently became a string
+// containing a backspace character.
+//
+// Never fail the install: a worktree that stayed full is a nuisance, a broken
+// setup hook is a blocked agent.
 
 const { spawnSync, execFileSync } = require("node:child_process");
 const fs = require("node:fs");
@@ -24,21 +30,24 @@ function findBash() {
   if (process.platform !== "win32") return "bash";
 
   const candidates = [];
-  // git.exe lives in <git>/cmd or <git>/bin; bash.exe is its sibling in <git>/bin.
   try {
-    const gitExe = execFileSync("where", ["git"], { encoding: "utf8" })
+    const roots = execFileSync("where", ["git"], { encoding: "utf8" })
       .split(/\r?\n/)
-      .find((line) => line.trim().toLowerCase().endsWith("git.exe"));
-    if (gitExe) {
-      const gitRoot = path.dirname(path.dirname(gitExe.trim()));
-      candidates.push(path.join(gitRoot, "bin", "bash.exe"));
+      .filter((line) => line.trim().toLowerCase().endsWith("git.exe"))
+      // <git>/cmd/git.exe and <git>/mingw64/bin/git.exe both sit under the
+      // install root; walk up until a bin/bash.exe appears.
+      .map((line) => path.dirname(line.trim()));
+    for (const dir of roots) {
+      for (let up = dir; up !== path.dirname(up); up = path.dirname(up)) {
+        candidates.push(path.join(up, "bin", "bash.exe"));
+      }
     }
   } catch {
     // `where` missing or git not on PATH; the fixed paths below still apply.
   }
   candidates.push(
-    "C:\Program Files\Git\bin\bash.exe",
-    "C:\Program Files (x86)\Git\bin\bash.exe",
+    "C:/Program Files/Git/bin/bash.exe",
+    "C:/Program Files (x86)/Git/bin/bash.exe",
   );
 
   return candidates.find((c) => fs.existsSync(c)) || null;
@@ -57,5 +66,4 @@ const result = spawnSync(bash, [script], { stdio: "inherit" });
 if (result.error) {
   console.log(`postinstall: could not run ${script} (${result.error.message}) — skipped.`);
 }
-// Always succeed. The narrowing is a convenience, not a precondition.
 process.exit(0);
