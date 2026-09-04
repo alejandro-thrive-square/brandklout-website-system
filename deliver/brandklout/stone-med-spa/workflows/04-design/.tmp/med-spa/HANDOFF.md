@@ -123,10 +123,17 @@ drift apart. The sibling had this file, let its pages drift from it, and deleted
 
 > [!NOTE]
 > **Items 1 and 2 were what blocked the publish, and 1 is settled enough to have unblocked it on
-> 2026-09-04.** `site.origin` is now the Railway host — a real, resolvable origin, so canonicals
-> and `og:url` point at pages that exist. That is the right answer for a review site and the wrong
-> one for a launch; both still need the client. **Item 2 got MORE expensive, not less**, because
-> the trading name is now baked into the URL.
+> 2026-09-04.** `site.origin` is now the Railway host — a real, resolvable origin, so nothing built
+> from it names a domain nobody owns. That is the right answer for a review site and the wrong one
+> for a launch; both still need the client. **Item 2 got MORE expensive, not less**, because the
+> trading name is now baked into the URL.
+>
+> Worth knowing while reading the rest of this section: **the canonical, the `og:` tags and the
+> JSON-LD are not on the published site at all.** Instatic's publisher emits four head tags — title,
+> description, favicon, `lang` — and `partials/head.html` does not survive the import. See trap 31
+> in [`05-instatic-upload.md`](../../../05-instatic-upload/05-instatic-upload.md). So `seo.json`
+> governs the local build and the page titles today, and will govern the rest the day a runtime
+> module injects them.
 
 1. **No domain.** `seo.json` `site.origin` was `https://stonemedspa.example`, a deliberate
    placeholder, and publishing with that in place **would have told Google the canonical home of
