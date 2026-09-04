@@ -1,114 +1,198 @@
 {
   "base": "https://stone-surgical-arts-production.up.railway.app",
-  "uploadedAt": "2026-09-02T06:26:54.155Z",
+  "uploadedAt": "2026-09-04T21:28:16.929Z",
   "map": {
-    "ask-reception-tall.webp": {
-      "id": "kuXBysYkzvRlVHdqfYhDH",
-      "url": "/uploads/5HxBBXKyOZmRXruM1XN3F-ask-reception-tall.webp",
-      "reused": true,
-      "uploadedAs": "ask-reception-tall.webp"
-    },
-    "banner-ssa.avif": {
-      "id": "VFnpl2rNDa2X-i7X_fs1K",
-      "url": "/uploads/HVoYpxa76YtaNUiPkQd-1-banner-ssa.webp",
-      "reused": true,
-      "uploadedAs": "banner-ssa.webp"
-    },
-    "cat-face-tall.webp": {
-      "id": "pHvLc4Hl1r5Ktf8pcWbRb",
-      "url": "/uploads/cWNLsB72QxZ1YPvMj6mbu-cat-face-tall.webp",
-      "reused": true,
-      "uploadedAs": "cat-face-tall.webp"
-    },
-    "cat-face.webp": {
-      "id": "qMS9qFFlFjmpAX55ByBaN",
-      "url": "/uploads/nVD0ZRiJ4KUmhfqZJyjIa-cat-face.webp",
-      "reused": true,
-      "uploadedAs": "cat-face.webp"
-    },
-    "cat-neck-tall.webp": {
-      "id": "oYfgL7TzTtyeW7WU-wJvR",
-      "url": "/uploads/LejuQWObY3NIAo5I1mZEh-cat-neck-tall.webp",
-      "reused": true,
-      "uploadedAs": "cat-neck-tall.webp"
-    },
-    "cat-nonsurgical-tall.webp": {
-      "id": "DxDd3HmChoqoUrwl07GwG",
-      "url": "/uploads/ZrDCxTKJSBMxfsx8-Ku7o-cat-nonsurgical-tall.webp",
-      "reused": true,
-      "uploadedAs": "cat-nonsurgical-tall.webp"
-    },
-    "cat-skin-tall.webp": {
-      "id": "g6pYR-YoValNafmZZpnG7",
-      "url": "/uploads/OqzvX2nIWKKxNhBGgT08f-cat-skin-tall.webp",
-      "reused": true,
-      "uploadedAs": "cat-skin-tall.webp"
-    },
-    "clinic-detail.webp": {
-      "id": "6kyjmoUzcv_s89GIP4-Xz",
-      "url": "/uploads/I0Oq0m25yU-1Q0Ko6xYZU-clinic-detail.webp",
-      "reused": true,
-      "uploadedAs": "clinic-detail.webp"
-    },
-    "consult-room.webp": {
-      "id": "1fYFfBf5iE9pvlRfIP8jr",
-      "url": "/uploads/9jwPHSULBOK-lTzPa6ucO-consult-room.webp",
-      "reused": true,
-      "uploadedAs": "consult-room.webp"
-    },
     "dr-stone-candid.webp": {
-      "id": "-ULNSdpnJ4WDYJDYNjfcg",
-      "url": "/uploads/LD0Nm8uNupNcbcIjohQQ6-dr-stone-candid.webp",
-      "reused": true,
-      "uploadedAs": "dr-stone-candid.webp"
+      "id": "uT0EhynBfJ4JoAa9me-IF",
+      "url": "/uploads/rU3cXy6KjqVw9TqSorAo7-dr-stone-candid.webp",
+      "uploadedAs": "dr-stone-candid.webp",
+      "width": 1400,
+      "height": 1400,
+      "variants": 5
     },
     "dr-stone-desk.webp": {
-      "id": "71lRtRiB6avXdZ2aH8_pt",
-      "url": "/uploads/YJa31O5BNMevprD7LqvSx-dr-stone-desk.webp",
-      "reused": true,
-      "uploadedAs": "dr-stone-desk.webp"
-    },
-    "dr-stone-office.avif": {
-      "id": "v1OrR-xH6aKoX2ScaCb2S",
-      "url": "/uploads/OHLt07DiYeK52JEAFv1NL-dr-stone-office.webp",
-      "reused": true,
-      "uploadedAs": "dr-stone-office.webp"
+      "id": "_SOrajM75BQx-QBXXwlKp",
+      "url": "/uploads/5KKvhU7wiSdj-I-Y-44ej-dr-stone-desk.webp",
+      "uploadedAs": "dr-stone-desk.webp",
+      "width": 2000,
+      "height": 1500,
+      "variants": 6
     },
     "dr-stone-portrait.webp": {
-      "id": "wsDcx0hoV2UbYXNovyaD0",
-      "url": "/uploads/Avc4cBAJzVZfLCE8mbuV9-dr-stone-portrait.webp",
-      "reused": true,
-      "uploadedAs": "dr-stone-portrait.webp"
+      "id": "YREInzlvNV_bbvvwwHAlo",
+      "url": "/uploads/ZwRZ5bomC_P2fNSa2IpF4-dr-stone-portrait.webp",
+      "uploadedAs": "dr-stone-portrait.webp",
+      "width": 1200,
+      "height": 1903,
+      "variants": 5
     },
     "dr-stone-smile.webp": {
-      "id": "w4hrZFH5xzdWyBemZLmYF",
-      "url": "/uploads/Ivnc66yaHAxeILzQUC9LX-dr-stone-smile.webp",
-      "reused": true,
-      "uploadedAs": "dr-stone-smile.webp"
+      "id": "gg5UNyGNuNBBcbxDbrj3Q",
+      "url": "/uploads/2xd4Qoin5oAK_4vLuTc9P-dr-stone-smile.webp",
+      "uploadedAs": "dr-stone-smile.webp",
+      "width": 1600,
+      "height": 1600,
+      "variants": 5
     },
     "dr-stone-standing.webp": {
-      "id": "swu-ywsjKpNuNYTTtJjRS",
-      "url": "/uploads/U3SNkxrKml6t6uM1MqoOA-dr-stone-standing.webp",
-      "reused": true,
-      "uploadedAs": "dr-stone-standing.webp"
+      "id": "JdKcW9mxJYMdzpfxEEEVf",
+      "url": "/uploads/l4vIpVRFQmWU0yrukd1wu-dr-stone-standing.webp",
+      "uploadedAs": "dr-stone-standing.webp",
+      "width": 1973,
+      "height": 2960,
+      "variants": 6
     },
     "dr-stone-steps.webp": {
-      "id": "eoP7y8e-k_7A4dXSw2d_k",
-      "url": "/uploads/dSIopgTmtU2EFWIYBjlLa-dr-stone-steps.webp",
-      "reused": true,
-      "uploadedAs": "dr-stone-steps.webp"
+      "id": "e036gOZljga87ZC-HtB5N",
+      "url": "/uploads/OgH1YBO7mWGTwnBjX_c9L-dr-stone-steps.webp",
+      "uploadedAs": "dr-stone-steps.webp",
+      "width": 2000,
+      "height": 1333,
+      "variants": 6
     },
-    "gen-contour-gauges.webp": {
-      "id": "MwieKp8idWKpSU1ViQ8ik",
-      "url": "/uploads/c4c8HVA9J8_mnheaDVy6H-gen-contour-gauges.webp",
-      "reused": true,
-      "uploadedAs": "gen-contour-gauges.webp"
+    "ds-botox-brow.webp": {
+      "id": "ic1PPjakD12tcg2D5zcJw",
+      "url": "/uploads/P4cFnlnHFNG2TAvYq4xCD-ds-botox-brow.webp",
+      "uploadedAs": "ds-botox-brow.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
     },
-    "gen-iclight-wand.webp": {
-      "id": "Dv95S--6KlwbghFQNupsW",
-      "url": "/uploads/kgH31Ndi1Xpc6aoFxw5ER-gen-iclight-wand.webp",
-      "reused": true,
-      "uploadedAs": "gen-iclight-wand.webp"
+    "ds-botox-silver.webp": {
+      "id": "FngSxunQ5aUHOYGgDQoCy",
+      "url": "/uploads/VQSl6mf_O3nKC0hg2cW00-ds-botox-silver.webp",
+      "uploadedAs": "ds-botox-silver.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
+    },
+    "ds-botox-smile.webp": {
+      "id": "TephfkD2CjmOn6cxxKq7I",
+      "url": "/uploads/i1wrsGQQuGiyKhPEZVBH9-ds-botox-smile.webp",
+      "uploadedAs": "ds-botox-smile.webp",
+      "width": 2200,
+      "height": 1237,
+      "variants": 7
+    },
+    "ds-dysport-chair.webp": {
+      "id": "LDp5-1z8Chu20FqB4WrCY",
+      "url": "/uploads/gBbNNvFXOgzuB7OqxSG-R-ds-dysport-chair.webp",
+      "uploadedAs": "ds-dysport-chair.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
+    },
+    "ds-dysport-curls.webp": {
+      "id": "_KJC7ctHx0eRvTOhIFZiX",
+      "url": "/uploads/ChC8QBvOuVYL8aeg4GFJg-ds-dysport-curls.webp",
+      "uploadedAs": "ds-dysport-curls.webp",
+      "width": 1200,
+      "height": 1500,
+      "variants": 5
+    },
+    "ds-filler-fold.webp": {
+      "id": "qqTWK-0c3I-hrqTRtn_V8",
+      "url": "/uploads/TkkP8Q3zhN4Y6N4_bGe5P-ds-filler-fold.webp",
+      "uploadedAs": "ds-filler-fold.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
+    },
+    "ds-filler-smile.webp": {
+      "id": "wu0m-0H98mSOcgSYU4bSc",
+      "url": "/uploads/qM1hEeh0sOa8SGaDAw_K9-ds-filler-smile.webp",
+      "uploadedAs": "ds-filler-smile.webp",
+      "width": 1200,
+      "height": 1500,
+      "variants": 5
+    },
+    "ds-hair-hand.webp": {
+      "id": "tQ8L0kF-dWwnnUrlY15jE",
+      "url": "/uploads/qJp1y8MrLMBNjR3QHmSlR-ds-hair-hand.webp",
+      "uploadedAs": "ds-hair-hand.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
+    },
+    "ds-hair-mark.webp": {
+      "id": "Cao0iuT683M3PzR4vFVaJ",
+      "url": "/uploads/btFiTf52liCw7nSNsdFP1-ds-hair-mark.webp",
+      "uploadedAs": "ds-hair-mark.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
+    },
+    "ds-hair-pen.webp": {
+      "id": "2DE2AD_AkcRy-luEMVKtY",
+      "url": "/uploads/nI3PcDjqwTFd60Bf3JCHI-ds-hair-pen.webp",
+      "uploadedAs": "ds-hair-pen.webp",
+      "width": 1200,
+      "height": 1500,
+      "variants": 5
+    },
+    "ds-morpheus-cheek.webp": {
+      "id": "IQNz0fXfrl9n2T0_6Oexi",
+      "url": "/uploads/4cN6ZGfIoiZ0fY3zOHIMy-ds-morpheus-cheek.webp",
+      "uploadedAs": "ds-morpheus-cheek.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
+    },
+    "ds-morpheus-jaw.webp": {
+      "id": "WC6K757g-A8Ws9Uv4lDiD",
+      "url": "/uploads/CdEQhLHCtunw-aU2tvsTw-ds-morpheus-jaw.webp",
+      "uploadedAs": "ds-morpheus-jaw.webp",
+      "width": 1200,
+      "height": 1500,
+      "variants": 5
+    },
+    "ds-peel-brush.webp": {
+      "id": "KCHxLZ0AcX-CzVMRQ4YEv",
+      "url": "/uploads/GqY_70EJk6WBaiR4UhISe-ds-peel-brush.webp",
+      "uploadedAs": "ds-peel-brush.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
+    },
+    "ds-peel-lift.webp": {
+      "id": "4ak4VWwnKIspRJy0DPqPW",
+      "url": "/uploads/f3l3uH4EB-wBIfxMdPvxa-ds-peel-lift.webp",
+      "uploadedAs": "ds-peel-lift.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
+    },
+    "ds-prp-draw.webp": {
+      "id": "HFnalsuErRxzSJeME5ITd",
+      "url": "/uploads/14h-pC2w0oesPOu0o6QQ4-ds-prp-draw.webp",
+      "uploadedAs": "ds-prp-draw.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
+    },
+    "ds-prp-syringes.webp": {
+      "id": "Iu2jIBvyKKCdmXiQ5fzCl",
+      "url": "/uploads/pN71Qw-GnYnoiU_b4ZhWS-ds-prp-syringes.webp",
+      "uploadedAs": "ds-prp-syringes.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
+    },
+    "ds-prp-tray.webp": {
+      "id": "Sxe7GknuJ43eCgWFsapVz",
+      "url": "/uploads/HFwIwWBzJ0Z7M6vR2Nw4L-ds-prp-tray.webp",
+      "uploadedAs": "ds-prp-tray.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
+    },
+    "ds-prp-tube.webp": {
+      "id": "pPhJQf_MDAi8OYse3mO4G",
+      "url": "/uploads/dohGb_H2jDHufOU667dB4-ds-prp-tube.webp",
+      "uploadedAs": "ds-prp-tube.webp",
+      "width": 2200,
+      "height": 1238,
+      "variants": 7
     },
     "gen-implant-forms.webp": {
       "id": "H4nRaJniu-3en3QejLDv-",
@@ -122,29 +206,11 @@
       "reused": true,
       "uploadedAs": "gen-injectables.webp"
     },
-    "gen-instruments-warm.webp": {
-      "id": "QP3ST8o2dKD7rAQwrmLGK",
-      "url": "/uploads/mxI2VC01HOzyBIkQ4soxo-gen-instruments-warm.webp",
-      "reused": true,
-      "uploadedAs": "gen-instruments-warm.webp"
-    },
     "gen-laser-device.webp": {
       "id": "sZ-MSCDJNFT3K1MEyJPvd",
       "url": "/uploads/LLHoEa96dj3dK_zTJC4pW-gen-laser-device.webp",
       "reused": true,
       "uploadedAs": "gen-laser-device.webp"
-    },
-    "gen-linen-detail.webp": {
-      "id": "_QK7RCAZUb3Xzl2jlRft9",
-      "url": "/uploads/9BKtiivMsOxHfob2tdXUH-gen-linen-detail.webp",
-      "reused": true,
-      "uploadedAs": "gen-linen-detail.webp"
-    },
-    "gen-marble-jawline.webp": {
-      "id": "C02AARIELxAamZvC_XNSs",
-      "url": "/uploads/NKkDid5C8lhlQULLqH_wx-gen-marble-jawline.webp",
-      "reused": true,
-      "uploadedAs": "gen-marble-jawline.webp"
     },
     "gen-or-light.webp": {
       "id": "_2AJ8kw0sxROz1sVONfBY",
@@ -152,29 +218,11 @@
       "reused": true,
       "uploadedAs": "gen-or-light.webp"
     },
-    "gen-planning.webp": {
-      "id": "m8Dt8EkxcW-LKwKOr_G_P",
-      "url": "/uploads/5b9NARqOvEygBl786VZ1G-gen-planning.webp",
-      "reused": true,
-      "uploadedAs": "gen-planning.webp"
-    },
     "gen-procedure-room.webp": {
       "id": "Pc2ypUIUyPWl-lIKnBsWA",
       "url": "/uploads/-H8E6tlsfBCP8RNMZckew-gen-procedure-room.webp",
       "reused": true,
       "uploadedAs": "gen-procedure-room.webp"
-    },
-    "gen-recovery-daylight.webp": {
-      "id": "fKWSMYJP7-mwplChtMAUV",
-      "url": "/uploads/nYMrSoW7FixFbpx8W5_XT-gen-recovery-daylight.webp",
-      "reused": true,
-      "uploadedAs": "gen-recovery-daylight.webp"
-    },
-    "gen-recovery-room.webp": {
-      "id": "d4Vi1sdonoaQfNq8b52nz",
-      "url": "/uploads/gxZOh135WvB3TcWpWj3gE-gen-recovery-room.webp",
-      "reused": true,
-      "uploadedAs": "gen-recovery-room.webp"
     },
     "gen-skincare-shelf.webp": {
       "id": "7xq4qNHlP3oCGw2BDxIr7",
@@ -188,23 +236,11 @@
       "reused": true,
       "uploadedAs": "gen-surgical-loupes.webp"
     },
-    "gen-surgical-suite.webp": {
-      "id": "T8GzTsmCntlkvYEqDfAmc",
-      "url": "/uploads/eBwxfbTbHlY5wLI4Mhm5D-gen-surgical-suite.webp",
-      "reused": true,
-      "uploadedAs": "gen-surgical-suite.webp"
-    },
     "gen-suture-tray.webp": {
       "id": "xgGCnErK4nZGdcAM1D-E3",
       "url": "/uploads/BdW11ZErumTPEc45uNssH-gen-suture-tray.webp",
       "reused": true,
       "uploadedAs": "gen-suture-tray.webp"
-    },
-    "hero-arrival.webp": {
-      "id": "1OWdnUPipD4_ooVlgCuHO",
-      "url": "/uploads/6jBHtXU7PEWOL4P4KQYCY-hero-arrival.webp",
-      "reused": true,
-      "uploadedAs": "hero-arrival.webp"
     },
     "m-cheek.webp": {
       "id": "0XRYO75mIxBumYsG6um3j",
@@ -261,12 +297,10 @@
       "uploadedAs": "m-lips.webp"
     },
     "m-man-suit.webp": {
-      "id": "2R-gyxB7RynzYhNggev_v",
-      "url": "/uploads/SyT5y_kxDNmBbsS5yYbZM-m-man-suit.webp",
-      "uploadedAs": "m-man-suit.webp",
-      "width": 2133,
-      "height": 1200,
-      "variants": 7
+      "id": "CTPKcR_zftmUE9hSlh_wh",
+      "url": "/uploads/bYgNpGgDGrRE44C2hkoqQ-m-man-suit.webp",
+      "reused": true,
+      "uploadedAs": "m-man-suit.webp"
     },
     "m-mature-smile.webp": {
       "id": "q_wivISE_PMet6gB-JmN_",
@@ -281,12 +315,10 @@
       "uploadedAs": "m-neck-hand.webp"
     },
     "m-neck-outdoor.webp": {
-      "id": "Md7QqPY03OcBs_22g8QGv",
-      "url": "/uploads/7iM3HR9KNbBfgP-OuX66f-m-neck-outdoor.webp",
-      "uploadedAs": "m-neck-outdoor.webp",
-      "width": 2133,
-      "height": 1200,
-      "variants": 7
+      "id": "jZfIDx6D1HMeGKhtM3z0j",
+      "url": "/uploads/1_WmfMrYrLShze8KjDLVg-m-neck-outdoor.webp",
+      "reused": true,
+      "uploadedAs": "m-neck-outdoor.webp"
     },
     "m-neck-soft.webp": {
       "id": "GZp4x2cmWpeiIbN-pHfup",
@@ -295,20 +327,16 @@
       "uploadedAs": "m-neck-soft.webp"
     },
     "m-profile-dark.webp": {
-      "id": "tr0QalH6qLGiyM6AGZMeQ",
-      "url": "/uploads/VxOfvUTK5TzKXsRhmHRQf-m-profile-dark.webp",
-      "uploadedAs": "m-profile-dark.webp",
-      "width": 2133,
-      "height": 1200,
-      "variants": 7
+      "id": "jacJUfxe46guUimKVNXwR",
+      "url": "/uploads/rnRA6Oz9sqFBqi2eJs5HE-m-profile-dark.webp",
+      "reused": true,
+      "uploadedAs": "m-profile-dark.webp"
     },
     "m-profile-light.webp": {
-      "id": "Q1jzXJCumIAQhQubBjbxr",
-      "url": "/uploads/-RGWi743K6qaenG4unvdF-m-profile-light.webp",
-      "uploadedAs": "m-profile-light.webp",
-      "width": 2133,
-      "height": 1200,
-      "variants": 7
+      "id": "xyMk-rZZkn1v2_3OawHfn",
+      "url": "/uploads/_JPpjoIFOfwZqeToo_gOi-m-profile-light.webp",
+      "reused": true,
+      "uploadedAs": "m-profile-light.webp"
     },
     "m-skin-glow.webp": {
       "id": "HHMxKcMT8D9BH5oMKHdgo",
@@ -365,12 +393,10 @@
       "uploadedAs": "p-recovery-home.webp"
     },
     "ssa-consult-room.webp": {
-      "id": "YNyR2Qjj20DSsxk2y-v9H",
-      "url": "/uploads/_LLBf77TWpRtwjXN969Ja-ssa-consult-room.webp",
-      "uploadedAs": "ssa-consult-room.webp",
-      "width": 1748,
-      "height": 983,
-      "variants": 6
+      "id": "_iYf9XmQ3fGaRazYw6Uye",
+      "url": "/uploads/uCaGr5ii9wXUcPY2BEOv1-ssa-consult-room.webp",
+      "reused": true,
+      "uploadedAs": "ssa-consult-room.webp"
     },
     "ssa-desk-detail.webp": {
       "id": "Bf-YFancx48KFLHUDQmTY",
@@ -384,21 +410,25 @@
       "reused": true,
       "uploadedAs": "ssa-desk-laugh.webp"
     },
-    "ssa-front-desk.webp": {
-      "id": "jfCTgkqK02hd_pLiyqAym",
-      "url": "/uploads/ryfvlAbtuSCdDUIoHwyrg-ssa-front-desk.webp",
-      "uploadedAs": "ssa-front-desk.webp",
-      "width": 2133,
-      "height": 1200,
+    "ssa-exterior.webp": {
+      "id": "5pd-0WRE2LVf6Vno_xed4",
+      "url": "/uploads/AAYryxo-nFmQVwyJFe-Zr-ssa-exterior.webp",
+      "uploadedAs": "ssa-exterior.webp",
+      "width": 3200,
+      "height": 1800,
       "variants": 7
     },
+    "ssa-front-desk.webp": {
+      "id": "8DCYUg-yzfPH7YOmJ0cdb",
+      "url": "/uploads/S3PUgXBu-lbX0au1iAjWx-ssa-front-desk.webp",
+      "reused": true,
+      "uploadedAs": "ssa-front-desk.webp"
+    },
     "ssa-neon.webp": {
-      "id": "mdO09ua-nHuxvjULFFJih",
-      "url": "/uploads/1PK1E3Ogl9sS8Z6FySNij-ssa-neon.webp",
-      "uploadedAs": "ssa-neon.webp",
-      "width": 2133,
-      "height": 1200,
-      "variants": 7
+      "id": "azVug00LGrdPYO3jFpmH8",
+      "url": "/uploads/GHSZvW5WlXL4MHSl5lf3R-ssa-neon.webp",
+      "reused": true,
+      "uploadedAs": "ssa-neon.webp"
     },
     "ssa-reception-pair.webp": {
       "id": "DFc9ee4JwqPH4bQUZA-9y",
@@ -407,20 +437,16 @@
       "uploadedAs": "ssa-reception-pair.webp"
     },
     "ssa-signage.webp": {
-      "id": "5DBkawZ_X5XsNZRmxRiRv",
-      "url": "/uploads/pHoaKpP6896PGvlfe3qBH-ssa-signage.webp",
-      "uploadedAs": "ssa-signage.webp",
-      "width": 2133,
-      "height": 1200,
-      "variants": 7
+      "id": "zb7t_xJk-wAHrQWc5ej9D",
+      "url": "/uploads/OxO8Hqn1frIrEKNz3nXQ0-ssa-signage.webp",
+      "reused": true,
+      "uploadedAs": "ssa-signage.webp"
     },
     "ssa-team.webp": {
-      "id": "DEBLBiYSr214X-lL1EhIL",
-      "url": "/uploads/aXffawTbq9PYrld31yWzW-ssa-team.webp",
-      "uploadedAs": "ssa-team.webp",
-      "width": 2133,
-      "height": 1200,
-      "variants": 7
+      "id": "dI_28zkWdWmr_6MV9bBV6",
+      "url": "/uploads/mL7vaKcxgCUFKlCU5qx42-ssa-team.webp",
+      "reused": true,
+      "uploadedAs": "ssa-team.webp"
     },
     "ssa-treatment-pair.webp": {
       "id": "h6suJH-XDqvObEpSpJ-H_",
@@ -429,12 +455,10 @@
       "uploadedAs": "ssa-treatment-pair.webp"
     },
     "ssa-treatment-room.webp": {
-      "id": "J5g3k8c8lmtY4durCQxLf",
-      "url": "/uploads/NX3xxMhDkpDKLLnOb0W7h-ssa-treatment-room.webp",
-      "uploadedAs": "ssa-treatment-room.webp",
-      "width": 2133,
-      "height": 1200,
-      "variants": 7
+      "id": "cTeYWF9LUmzGbTlVfdCiq",
+      "url": "/uploads/HPQjgGiSdzIdbS8cZo-9I-ssa-treatment-room.webp",
+      "reused": true,
+      "uploadedAs": "ssa-treatment-room.webp"
     },
     "staff-alexis.webp": {
       "id": "ygvEwQTllAHmHya8Bn8cu",

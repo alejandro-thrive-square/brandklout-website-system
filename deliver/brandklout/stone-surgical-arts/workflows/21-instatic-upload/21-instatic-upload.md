@@ -6,6 +6,18 @@ into the client's own Instatic instance as an editable site — pages as node tr
 registry rules, images in the media library.
 
 > [!WARNING]
+> **REPUBLISHED 2026-09-04, `{"publishedPages":12}`, `12 written, 0 deleted`, seq 26.** The design
+> feedback round, the face crops, the doctor's stock and the un-parallaxed arrival inset. Media:
+> 25 uploads — 18 `ds-*`, `ssa-exterior`, and the six doctor photographs re-sent with `--only`
+> because the Magnific upscales replace originals of the same name (live was still serving
+> `dr-stone-portrait` at 643x1020 against a 1200x1903 local file; the byte-size sweep in the
+> runbook is how to find these). The two marble textures also differ byte-wise and were **left
+> alone on purpose**: the local copies are `w1800` variants re-downloaded from this instance, so
+> re-uploading would replace the originals with a downsample.
+>
+> Both gates clean, and `compare-live.mjs` went **17 findings → 0** — but see **trap 26**: both
+> findings were bugs in the LOCAL build that the import was rendering correctly.
+>
 > **TWELVE PAGES, PUBLISHED 2026-09-02, `{"publishedPages":12}`, `12 written, 0 deleted`.** The
 > client lifted the hold the same morning (*"let's upload to Instatic, the team didn't leave any
 > feedback yet"*) and asked for the comparison page by page. `verify-live.mjs` clean: 12 routes,
@@ -59,6 +71,17 @@ and `GET /admin/api/cms/setup/status` answered `needsSetup: true`. `POST /admin/
 409s afterwards, so it is safe to leave public.
 
 ## Execution Steps
+
+> [!IMPORTANT]
+> **In a sparse worktree, add the shared client first.** Every script here imports
+> `insta-api.mjs` from `deliver/brandklout/dr-nahlah/workflows/15-instatic-api-sync/`, which is
+> outside a Stone-only sparse checkout. The file is in the tree, so it fails as
+> `ERR_MODULE_NOT_FOUND` on a path that plainly exists in `git ls-tree` — which reads like a broken
+> import rather than a missing checkout. Once per worktree:
+>
+> ```bash
+> git sparse-checkout add deliver/brandklout/dr-nahlah/workflows/15-instatic-api-sync
+> ```
 
 ```bash
 export RAILWAY_LINK_DIR=/path/to/a/dir/linked/to/the/Stone/project   # railway link -w Brandklout -p "Stone Surgical Arts"
@@ -495,13 +518,56 @@ missing carousel arrows shifted every later icon's index so the diff reported th
 alignment findings that were the same icons one place apart. `compare-live.mjs` skips them; the
 icons' boxes are covered by their parents.
 
+### 26. A `compare-live` finding can mean the LOCAL build is the wrong one
+
+Every earlier entry on this list assumes the build is right and the import broke something. On the
+2026-09-04 publish both remaining findings were the other way round, and reading them the usual way
+would have "fixed" the live site by shipping the bug to it.
+
+Both had the same shape: **a top-level rule written BELOW an `@media` block that overrides the same
+property at the same specificity.** Media queries add no specificity, so the later top-level rule
+wins locally and the media rule never applies. Instatic rebuilds the cascade out of the style
+registry (trap 20) and the media rule won there — so live rendered what the author actually meant
+and local did not.
+
+- `22-footer.css` — `@media (max-width: 991px) { .footer_nav { align-items: center } }` at line 145,
+  then a `/* the page list, 2026-09-02 */` block appended at the END of the file setting
+  `align-items: flex-start`. The whole media block exists to centre the footer on a phone; the
+  append silently switched the nav back to left-aligned on all twelve pages. **Fixed by moving the
+  appended block above the media query**, which is where a base rule belongs.
+- `58-breathe.css` — `.concern_arrow` was grouped with three `… span` selectors taking
+  `display: inline-block`. That beat its own `display: grid` in `52-elevate.css` (so
+  `place-items: center` never centred the svg in its circle, at any width) *and* the
+  `display: none` that same file sets at `<=767px`, where `.concern_row`'s template has no arrow
+  column. On a phone the arrow fell into an implicit ninth grid row: +43px on all nine concern
+  rows, +381px on the home page. **Fixed by taking `.concern_arrow` out of the group** and leaving
+  it only the transition the file was there to give it.
+
+> **The tell is a finding where live looks *more* correct than local.** Before changing anything,
+> ask which value the CSS author asked for. `grep -n` the property across `css/` and look at
+> whether the losing rule is inside an `@media` — if it is, the bug is source order in the build,
+> not the import. Trap 20's remedy (double the class to win on specificity) is for the case where
+> the two rules genuinely disagree; here the right move was to put the rules in the correct order,
+> because the media rule was never meant to lose.
+
+**Appending to the bottom of a stylesheet is the habit that causes this.** Six of these files end
+in an `@media` block. A new base rule goes above it.
+
 ### The check: `compare-live.mjs`
 
 ```bash
 node compare-live.mjs                 # both pages, 1440 and 390
 node compare-live.mjs neck-lift 390   # one page, one width
 node compare-live.mjs --shots         # also write viewport PNG pairs
+COMPARE_PORT=8837 node compare-live.mjs   # when 8821 is held, see below
 ```
+
+**It serves the local build on 8821, and an interrupted run leaves that server behind.** The next
+run then dies on `EADDRINUSE` before comparing anything, which looks like a broken tool. `PORT` reads
+`COMPARE_PORT` since 2026-09-04 so you can just move; to clear the orphan instead,
+`Get-CimInstance Win32_Process -Filter "Name = 'node.exe'" | Where-Object { $_.CommandLine -like
+'*compare-live*' }` and stop it. Killing the listener and re-running immediately can still lose the
+race to a second orphan — check for more than one before assuming the port is yours.
 
 Serves the local `final-site` and opens both it and the published page at the
 same viewport, then reports:

@@ -57,7 +57,12 @@ const HERE = path.dirname(fileURLToPath(import.meta.url))
 const LOCAL_ROOT = path.resolve(HERE, '../04-design/.tmp/surgical-arts/final-site')
 const SHOTS = path.join(HERE, '.tmp', 'compare')
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
-const PORT = 8821
+// Overridable because a crashed or interrupted run leaves the static server
+// holding 8821 and the next run dies on EADDRINUSE before it compares
+// anything — which reads like a broken tool rather than a stale process.
+// `COMPARE_PORT=8822 node compare-live.mjs` gets you moving without hunting
+// the orphan first.
+const PORT = Number(process.env.COMPARE_PORT) || 8821
 
 function loadEnv() {
   let dir = HERE

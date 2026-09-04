@@ -186,9 +186,21 @@ a:hover > .offer_media img,
 /* Text links and rows: the arrow in a "more" link travels on hover. */
 .catalogue_more span,
 .surgeon_link span,
-.related_more span,
-.concern_arrow {
+.related_more span {
   display: inline-block;
+  transition: transform 0.5s var(--ease-settle);
+}
+/* `.concern_arrow` used to sit in the group above and take `display:
+   inline-block` with it. It must not: the arrow is its own `display: grid`
+   circle in 52-elevate.css (that is what centres the svg with `place-items`),
+   and 52-elevate.css hides it at <=767px, where the row template has no arrow
+   column and shows `.concern_thumb` instead. This file loads after that one,
+   so the group's `display` beat BOTH — the svg sat off-centre in its circle at
+   every width, and on a phone the arrow fell into an implicit ninth grid row,
+   adding ~43px to all nine concern rows. Live had it right and the local build
+   did not: Instatic rebuilds the cascade and the media rule won there, which is
+   how the difference surfaced (trap 20). Only the transition is wanted here. */
+.concern_arrow {
   transition: transform 0.5s var(--ease-settle);
 }
 .catalogue_more:hover span,
