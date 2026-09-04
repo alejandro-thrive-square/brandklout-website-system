@@ -1,6 +1,41 @@
 # Stone Surgical Arts — handoff
 
 > [!IMPORTANT]
+> **2026-09-04: THE REFINEMENT PASS, LOCAL ONLY, NOT PUBLISHED.** Alejandro, after the doctor had
+> seen the twelve pages: *"a little bit less text and more high-definition images ... regenerate
+> the same image but on high resolution using Magnific ... improve the spacing, images, reducing
+> the text, and improve a little bit the animations. Let's make it locally first so I can review
+> it tomorrow and then we can upload it to Instatic."* No layout, colour, type or markup changed;
+> the doctor approved the design.
+>
+> - **Photographs.** Every picture of Dr. Stone, the four small practice photographs and the six
+>   staff portraits were re-emitted through Magnific (`site-src/upscale-doctor.mjs`, 2x for the
+>   1000px sources, 4x for the 450 to 700px ones; raw PNGs in `assets/_upscaled/`). The steps
+>   photograph was a video thumbnail with a play icon on her chest: it is upscaled with the icon
+>   on and the icon is painted out afterwards by `fix-steps.py`. `fix-dims.py` rewrote 29
+>   width/height attributes to the new intrinsic sizes.
+> - **Copy.** Every page body shortened, text nodes only, no element added or removed, every fact,
+>   fee and duration kept: home 1474 to 1313 words, blepharoplasty 1966 to 1573, neck lift 1610 to
+>   1367, MyEllevate 1695 to 1308, face and neck 1815 to 1409, treatments 1726 to 1466, book 1322
+>   to 1208 (the nine sedation instructions and "How you will feel" are fenced off by their own
+>   notes and were not cut), memberships 662 to 596, results 588 to 541, doctor 549 to 486, about
+>   476 to 435, team 431 to 403.
+> - **Spacing, frames, motion.** One new stylesheet, `css/58-breathe.css`, before `59-wide.css`:
+>   the section rhythm up a fifth, eyebrow-to-headline a step, body copy at 1.7, the hero inset,
+>   the filmstrip, the path panels, the hub stills and the doctor's portrait a size step larger,
+>   reveals on a slower settle curve, masked frames on a cinematic curve, photographs answering
+>   hover at 1.05, a hairline lift on buttons.
+> - **Gates:** audit FAIL none, check-copy clean, all-pages 144/144, journey 47/47, dossier suite
+>   on all four dossiers (see the runbook for the numbers). Previews repacked for all twelve
+>   (`preview-*.html`); the home preview is the artifact
+>   <https://claude.ai/code/artifact/d91e1f09-d1d0-4dab-b97b-98402fa7dc38>, label "Refinement
+>   pass, 2026-09-04".
+> - **To publish, when Alejandro says so:** the same `build-import-input.mjs` / `push-site.mjs`
+>   route as 2026-09-02, `--force`, expect `12 written, 0 deleted`; then `verify-live.mjs` and
+>   `compare-live.mjs`. Nineteen image assets changed size, so expect the asset step to re-upload
+>   them.
+
+> [!IMPORTANT]
 > **2026-09-02, MORNING: TWELVE PAGES PUBLISHED.** The hold below was lifted the same morning
 > (*"the team didn't leave any feedback yet"*). Before the publish, three more things the client
 > asked for that morning: **one dark marble section on every page** (the hub's financing, About's

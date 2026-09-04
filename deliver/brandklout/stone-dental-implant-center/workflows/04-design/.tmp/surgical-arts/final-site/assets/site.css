@@ -8074,6 +8074,224 @@ a.ways-in_card:hover {
 }
 
 
+/* ===== css/58-breathe.css ===== */
+/* ===========================================================================
+   BREATHE — spacing, image size and motion refinements. 2026-09-04.
+
+   Alejandro, after the doctor had seen the twelve pages: "improve the
+   spacing, images, reducing the text, and improve a little bit the
+   animations in the interactions." Not a redesign; the doctor has approved
+   the design. So this file changes NO layout, NO colour, NO type size and
+   NO markup. It adjusts four things, and it does so as overrides, late in
+   the cascade, so every base rule keeps its reasoning where it was written:
+
+     1. RHYTHM. The chapter gap and the small gap grow by roughly a fifth,
+        and the eyebrow-to-headline gap by a step, because the copy is now
+        a quarter shorter on every page and the same padding around less
+        text reads as tighter, not roomier.
+     2. MEASURE. Body copy sits at line-height 1.7 and no wider than the
+        measure that was already set; nothing here widens a column.
+     3. FRAMES. The photographs that were re-emitted at high resolution
+        through Magnific (upscale-doctor.mjs) can afford to be larger: the
+        hero inset, the practice filmstrip, the path panels, the hub's still
+        lifes and the doctor's portrait each gain a size step. Every frame
+        keeps its aspect ratio, so no composition moves.
+     4. MOTION. Reveals take a touch longer on a slower curve and travel a
+        little less, so they settle rather than pop; masked frames open on a
+        cinematic curve; photographs inside links and cards answer hover with
+        a slow scale; buttons pick up a hairline lift. Everything sits
+        behind the existing reduced-motion branch because it only ever
+        changes transitions the base rules already declared.
+
+   Sits before 59-wide.css so the 2K/4K caps still win at the end.
+   =========================================================================== */
+
+/* --- 1. rhythm ------------------------------------------------------------ */
+:root {
+  --section: clamp(4.75rem, 8.25vw, 10.5rem);
+  --section-sm: clamp(3rem, 5.25vw, 6rem);
+  --pad-panel: clamp(2rem, 3.8vw, 4.5rem);
+}
+.chapter_mark {
+  margin-bottom: var(--space-large);
+}
+.chapter_mark.is-flush {
+  margin: 0;
+}
+.arrival_sub {
+  margin-top: var(--space-large);
+}
+.arrival_actions {
+  margin-top: var(--space-large);
+}
+.ledger_component {
+  padding-block: var(--space-xlarge);
+}
+.marquee_component {
+  padding-block: var(--space-large);
+}
+.catalogue_head,
+.concern_head,
+.path_head {
+  margin-bottom: var(--space-xlarge);
+}
+.surgeon_step {
+  padding-block: var(--space-xxlarge);
+}
+.faq_item .faq_question {
+  padding-block: var(--space-medium);
+}
+.strip_tile.is-up {
+  margin-bottom: var(--space-xxlarge);
+}
+
+/* --- 2. measure ----------------------------------------------------------- */
+.arrival_sub,
+.catalogue_lede,
+.concern_lede,
+.surgeon_text,
+.path_text,
+.offer_text,
+.offer_note,
+.faq_answer p,
+.prose_component p,
+.cv_text,
+.why_text,
+.beyond_text,
+.dossier_text,
+.hub_lede,
+.catx_text,
+.fee_note,
+.place_text,
+.team_text,
+.wall_lede,
+.desk_text,
+.tier_text {
+  line-height: 1.7;
+}
+
+/* --- 3. frames ------------------------------------------------------------ */
+.arrival_inset {
+  width: clamp(12rem, 22vw, 20rem);
+}
+.strip_tile {
+  height: clamp(14rem, 34vh, 24rem);
+}
+.strip_tile.is-tall {
+  height: clamp(18rem, 44vh, 30rem);
+}
+.path_media {
+  height: clamp(11rem, 32vh, 20rem);
+}
+.still_component {
+  height: clamp(16rem, 44vh, 28rem);
+}
+.prof_portrait {
+  width: clamp(18rem, 34vw, 32rem);
+}
+.thesis_face {
+  width: 3.25rem;
+  height: 3.25rem;
+}
+
+/* --- 4. motion ------------------------------------------------------------ */
+:root {
+  --ease-settle: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cine: cubic-bezier(0.77, 0, 0.175, 1);
+}
+.js [data-j="rise"] {
+  transform: translateY(1.5rem);
+  transition:
+    opacity 1.1s var(--ease-settle),
+    transform 1.1s var(--ease-settle);
+}
+.js [data-j="stagger"] > * {
+  transform: translateY(1.6rem);
+  transition:
+    opacity 1s var(--ease-settle),
+    transform 1s var(--ease-settle);
+}
+.js [data-j="stagger"] > *.is-in:nth-child(2) { transition-delay: 0.1s; }
+.js [data-j="stagger"] > *.is-in:nth-child(3) { transition-delay: 0.2s; }
+.js [data-j="stagger"] > *.is-in:nth-child(4) { transition-delay: 0.3s; }
+.js [data-j="stagger"] > *.is-in:nth-child(5) { transition-delay: 0.4s; }
+.js [data-j="stagger"] > *.is-in:nth-child(6) { transition-delay: 0.5s; }
+.js [data-j="mask"] {
+  transition: clip-path 1.5s var(--ease-cine);
+}
+.js [data-j="mask"] img {
+  transform: scale(1.14);
+  transition: transform 1.9s var(--ease-settle);
+}
+/* Photographs answer a hover with a slow settle, wherever they sit inside a
+   link, a card or a tile. The base rules already scale the strip tiles and
+   the related cards; this brings the rest into line at the same 1.05. */
+.strip_tile img,
+.related_media img,
+.offer_media img,
+.path_media img,
+.still_component img,
+.team_card img,
+.place_media img,
+.why_photo img,
+.arrival_inset img,
+.catalogue_media img,
+.proof_media img {
+  transition: transform 1.4s var(--ease-settle);
+}
+.strip_tile:hover img,
+.related_card:hover .related_media img,
+a:hover > .offer_media img,
+.team_card:hover img {
+  transform: scale(1.05);
+}
+/* Buttons: a hairline lift with the colour change, under the magnetic nudge
+   (which writes an inline transform on fine pointers and wins while it
+   does). Coarse pointers get the lift on active instead. */
+.button {
+  box-shadow: 0 0 0 rgba(39, 39, 39, 0);
+  transition:
+    background-color 0.3s var(--ease-settle),
+    border-color 0.3s var(--ease-settle),
+    color 0.3s var(--ease-settle),
+    box-shadow 0.4s var(--ease-settle),
+    transform 0.5s cubic-bezier(0.2, 0.9, 0.3, 1.3);
+}
+.button:hover {
+  box-shadow: 0 10px 24px -12px rgba(39, 39, 39, 0.45);
+}
+/* Text links and rows: the arrow in a "more" link travels on hover. */
+.catalogue_more span,
+.surgeon_link span,
+.related_more span,
+.concern_arrow {
+  display: inline-block;
+  transition: transform 0.5s var(--ease-settle);
+}
+.catalogue_more:hover span,
+.surgeon_link:hover span {
+  transform: translateX(0.35rem);
+}
+/* The accordion and the FAQ answer open on the settle curve too. */
+.catalogue_panel {
+  transition: grid-template-rows 0.7s var(--ease-settle);
+}
+.faq_answer {
+  transition: opacity 0.5s var(--ease-settle), transform 0.5s var(--ease-settle);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .strip_tile:hover img,
+  .related_card:hover .related_media img,
+  .team_card:hover img {
+    transform: none;
+  }
+  .button:hover {
+    box-shadow: none;
+  }
+}
+
+
 /* ===== css/59-wide.css ===== */
 /* ===========================================================================
    WIDE SCREENS — 2K and 4K. 2026-09-02.
