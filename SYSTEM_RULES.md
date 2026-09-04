@@ -247,6 +247,7 @@ It is sectioned, and the sections are load-bearing:
 | `[shared]` | every worktree | account-wide keys — one Browserbase, one Cloudflare account token, one Vimeo, one Figma |
 | `[<client>]` | only that client's worktree | `INSTATIC_BASE_URL`, the per-instance `INSTATIC_PASSWORD`, per-zone Cloudflare tokens, host credentials |
 | `[aliases]` | — | worktree name → section, for names that do not match by prefix |
+| `[vars]` | nothing — never written to a `.env` | named definitions, referenced as `${NAME}` from any section |
 
 **Why sections rather than one flat list.** `INSTATIC_BASE_URL` differs per client and the shared
 Instatic toolkit deliberately refuses to guess it ([18-instatic-embeds](./deliver/process/18-instatic-embeds/18-instatic-embeds.md)):
@@ -258,6 +259,18 @@ Section names match the client folder under `deliver/brandklout/`. A worktree pi
 its own **directory name** (what was typed into Orca) and then the branch's last path segment, with
 the same `bk-` strip and longest-first `-suffix` trim the narrowing script uses. Ambiguity is a hard
 error naming the fix: add a line to `[aliases]`.
+
+**`[vars]` is how one value gets a name without being copied.** Two client instances that share an
+admin password are two named definitions there and two `${NAME}` references in the client sections —
+so the value is typed once, rotating it is one edit, and it still reaches only the worktrees that ask
+for it. A `${NAME}` that resolves to nothing is a **hard error**: a blank password would otherwise
+surface much later as an authentication failure with no trace back to here.
+
+**Railway needs no `.env` to work.** The Railway CLI keeps its own auth in `~/.railway/config.json`,
+which is machine-global, so `railway` commands already run in every worktree — that is why no
+Railway variable existed anywhere. `RAILWAY_TOKEN` in `[shared]` exists for scripts and API calls
+that cannot shell out to an interactive login, and `RAILWAY_PROJECT_ID` per client section saves
+re-deriving the project from the runbook table.
 
 **Name host credentials with a prefix.** `USERNAME`, `HOSTNAME` and `PORT` are all set by Windows
 itself, and every `.env` loader in this system fills in only variables that are **not already set**,
