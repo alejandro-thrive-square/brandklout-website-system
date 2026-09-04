@@ -535,8 +535,26 @@ const shell = {
     // value that wins on every page. Setting it gave all seven pages the
     // identical <title>. Leaving it unset lets each page's own title through,
     // which is why `title` below carries the full SEO string.
+    // THE HOME PAGE'S OWN DESCRIPTION, read from seo.json rather than typed here.
+    //
+    // Trap 6: `meta description` is site-level, so all eleven pages share one
+    // and the per-page `seoDescription` cells sit stored and unread. That is a
+    // platform limit and it is not what went wrong. What went wrong is that
+    // this was a HARDCODED STRING, and when the workflow was copied to a second
+    // client it came with it — every page of the med spa published
+    // "Boutique facial and cosmetic surgery… Dr. Mona Stone plans and performs
+    // every case herself", which is the SIBLING's surgical positioning on a
+    // non-surgical site. `verify-live.mjs` does not look at descriptions and
+    // `compare-live.mjs` compares rendered pages, not <head>, so nothing caught
+    // it; it was found by reading the published <head> by hand.
+    //
+    // Deriving it means the value follows the build, and a third client that
+    // copies this file cannot inherit the second one's words.
     metaDescription:
-      'Boutique facial and cosmetic surgery in Westlake, Texas. Dr. Mona Stone plans and performs every case herself.',
+      input.pages.find((p) => p.slug === 'index')?.seoDescription ??
+      (() => {
+        throw new Error('no seoDescription for the index page — seo.json is missing pages.index.description')
+      })(),
     language: 'en',
   },
 }

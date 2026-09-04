@@ -640,6 +640,44 @@ document's own dimensions to hold still before measuring, which did **not** fix 
 Do **not** add it to the `IGNORE` list. An 8px margin on this class could one day be real, and a
 suppressed finding is worse than a noisy one.
 
+### 31. The published `<head>` is FOUR TAGS. No canonical, no Open Graph, no JSON-LD — and the site-level description was the sibling's
+
+Read `buildDocumentMetaTags` in `src/core/publisher/render.ts` and this stops being a surprise. The
+publisher emits exactly:
+
+```
+<title>            settings.metaTitle ?? page.title ?? site.name
+<meta description> override.description || settings.metaDescription     ← SITE-level
+<link rel=icon>    settings.faviconUrl                                   ← SITE-level, unset here
+lang=""            settings.language
+```
+
+and nothing else. Everything `build-site.mjs` writes into `partials/head.html` from `seo.json` —
+`<link rel="canonical">`, the eight `og:` and `twitter:` tags, the `MedicalBusiness` JSON-LD block —
+**is not on the published site.** There is no custom-head field and `importHtml` does not carry head
+tags across; this is the same shape as the script warning at the top of this file. The local build
+proves it works, and it is simply absent.
+
+Two consequences worth separating:
+
+- **For a review link, it does not matter.** Nobody reviewing eleven pages notices a missing
+  `og:image`, and `seo.json`'s origin being a real resolvable host is enough.
+- **For a launch it matters a great deal**, and it is on the "not done" list below rather than in
+  the build's `seo.json`, because no amount of editing `seo.json` will put those tags on the page.
+  The route is a runtime module in `site-src/js/` that injects them — the same road
+  `js/90-bugherd.js` takes — or an upstream change.
+
+**And the description was wrong in a way none of the gates could see.** `push-site.mjs` set
+`settings.metaDescription` to a HARDCODED string, so when this workflow was copied from the sibling
+every one of the med spa's eleven pages published *"Boutique facial and cosmetic surgery in
+Westlake, Texas. Dr. Mona Stone plans and performs every case herself"* — the surgical practice's
+positioning, on the non-surgical site, as the description Google would show. `verify-live.mjs` does
+not look at descriptions and `compare-live.mjs` compares rendered pages, not `<head>`. It was found
+by reading the published `<head>` by hand, which is now worth doing once per new instance.
+
+It is derived from `seo.json`'s home-page description now, and throws rather than falling back, so a
+third client copying this file cannot inherit the second one's words.
+
 ### The check: `compare-live.mjs`
 
 ```bash
@@ -685,7 +723,15 @@ first publish by exactly this check.
 - **Nav and footer are inlined into the page rather than being a Visual Component.** Eleven pages
   means editing the nav is eleven edits. This is now the strongest item on the list —
   `changedComponents` / `changedLayouts` are already in the `PUT /site-document` contract.
-- **Per-page meta descriptions** — see trap 6.
+- **Per-page meta descriptions** — see trap 6. All eleven share the home page's.
+- **Canonical, Open Graph and JSON-LD are not on the published site at all** — see trap 31. Fine
+  for review, not fine for launch. The route is a runtime module in `site-src/js/` that injects
+  them, the way `js/90-bugherd.js` injects its tag.
+- **No favicon**, so every published page answers 404 for `/favicon.ico` and the browser tab shows
+  a generic mark. This is one field — `settings.faviconUrl` in the site shell, pointing at an
+  uploaded asset — and it is deliberately still empty because **this brand has no logo or identity
+  yet** and a favicon invented here would be read as a proposed mark. Set it the day one exists.
+  It is the only console error on the whole site.
 - **The domain, and before it the trading name.** The site is on its Railway URL, and `seo.json`'s
   origin is that URL — a real, resolvable origin, unlike the `stonemedspa.example` placeholder it
   replaced. When a domain is bought: change `site.origin`, rebuild, republish, and run
