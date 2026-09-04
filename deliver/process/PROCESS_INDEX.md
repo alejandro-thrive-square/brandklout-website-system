@@ -92,8 +92,11 @@ Not part of the offer-routing sequence — they apply to any engagement whose si
 > the worktrees**, not just `git ls-files` on `main`:
 >
 > ```bash
-> ls ~/orca/workspaces/*/*/deliver/*/*/workflows/ | sort -u
+> ls ~/orca/workspaces/*/*/deliver/*/*/workflows/ | grep -E '^[0-9][0-9]-' | sort -u
 > ```
+>
+> Verified 2026-09-04: 27 distinct numbered modules across thirteen worktrees, against the 21 listed
+> above.
 >
 > Getting this wrong has real cost. `20-instatic-domain-origins` shipped as `19`, collided, and had
 > to be renumbered. `05-instatic-upload` collided with the canonical `05-design-revisions` in two
