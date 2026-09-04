@@ -88,15 +88,29 @@ BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
 # progressively shorter slugs, longest first. Orca branch names carry suffixes
 # (bk-mason-park-2, bk-mason-park-fix) that a full-slug match alone would miss,
 # and trimming longest-first stops bk-grand-mission being stolen by a sibling.
+# Orca prefixes the branch it creates with the git username
+# (alejandro-thrive-square/bk-livewell), so take the last path segment, and fall
+# back to the worktree directory name, which is exactly what was typed in Orca.
+SEEDS=()
+if [[ -n "$CLIENT" ]]; then
+  SEEDS=("$CLIENT")
+else
+  SEEDS=("$(basename "$HERE")" "${BRANCH##*/}")
+fi
+
 MATCHES=()
-CANDIDATE="${CLIENT:-${BRANCH#bk-}}"
-while [[ -n "$CANDIDATE" ]]; do
-  while IFS= read -r d; do
-    MATCHES+=("${d%/}")
-  done < <(cd "$MAIN" && ls -d deliver/*/"$CANDIDATE"*/ 2>/dev/null)
+CANDIDATE=""
+for seed in "${SEEDS[@]}"; do
+  CANDIDATE="${seed#bk-}"
+  while [[ -n "$CANDIDATE" ]]; do
+    while IFS= read -r d; do
+      MATCHES+=("${d%/}")
+    done < <(cd "$MAIN" && ls -d deliver/*/"$CANDIDATE"*/ 2>/dev/null)
+    [[ ${#MATCHES[@]} -gt 0 ]] && break
+    [[ "$CANDIDATE" == *-* ]] || break
+    CANDIDATE="${CANDIDATE%-*}"
+  done
   [[ ${#MATCHES[@]} -gt 0 ]] && break
-  [[ "$CANDIDATE" == *-* ]] || break
-  CANDIDATE="${CANDIDATE%-*}"
 done
 
 if [[ ${#MATCHES[@]} -gt 1 ]]; then
@@ -129,7 +143,7 @@ CONE=(
 echo "=== sparsify worktree"
 echo "  worktree : $HERE"
 echo "  branch   : $BRANCH"
-echo "  client   : ${CLIENT_DIR:-<none derived from '$BRANCH'>}"
+echo "  client   : ${CLIENT_DIR:-<none derived from '$(basename "$HERE")'>}"
 echo "  cone     : ${CONE[*]}"
 
 if [[ "$DRY_RUN" == true ]]; then
@@ -142,7 +156,7 @@ git sparse-checkout set "${CONE[@]}"
 
 echo ""
 if [[ -z "$CLIENT_DIR" ]]; then
-  echo "No client folder matched '$BRANCH', so this worktree kept the shared context only."
+  echo "No client folder matched '$(basename "$HERE")' or '$BRANCH' — kept the shared context only."
   echo "Add the one you want (nothing was lost — the index still holds them all):"
   (cd "$MAIN" && ls -d deliver/*/*/ 2>/dev/null | sed 's|/$||' | sed 's/^/  git sparse-checkout add /')
 fi

@@ -44,17 +44,22 @@ BRANCH="$(git rev-parse --abbrev-ref HEAD 2>/dev/null)"
 # (bk-mason-park-2, bk-mason-park-fix), and a full-slug match alone would miss
 # them: "mason-park-fix" is not a prefix of the folder "mason-park". Longest
 # first, so bk-grand-mission cannot be stolen by a shorter sibling.
-SLUG="${BRANCH#bk-}"
+# Orca prefixes the branches it creates with the git username
+# (alejandro-thrive-square/bk-livewell), so match on the last path segment, and
+# fall back to the worktree directory name, which is what was typed in Orca.
 SCOPES=()
-CANDIDATE="$SLUG"
-while [[ -n "$CANDIDATE" && ${#SCOPES[@]} -eq 0 ]]; do
-  while IFS= read -r d; do
-    SCOPES+=("${d%/}")
-  done < <(cd "$MAIN" && ls -d deliver/*/"$CANDIDATE"*/ 2>/dev/null)
+for SEED in "$(basename "$HERE")" "${BRANCH##*/}"; do
+  CANDIDATE="${SEED#bk-}"
+  while [[ -n "$CANDIDATE" && ${#SCOPES[@]} -eq 0 ]]; do
+    while IFS= read -r d; do
+      SCOPES+=("${d%/}")
+    done < <(cd "$MAIN" && ls -d deliver/*/"$CANDIDATE"*/ 2>/dev/null)
+    [[ ${#SCOPES[@]} -gt 0 ]] && break
+    # Drop the last -segment; stop once nothing is left to trim.
+    [[ "$CANDIDATE" == *-* ]] || break
+    CANDIDATE="${CANDIDATE%-*}"
+  done
   [[ ${#SCOPES[@]} -gt 0 ]] && break
-  # Drop the last -segment; stop once nothing is left to trim.
-  [[ "$CANDIDATE" == *-* ]] || break
-  CANDIDATE="${CANDIDATE%-*}"
 done
 
 if [[ ${#SCOPES[@]} -eq 0 ]]; then
