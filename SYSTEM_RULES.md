@@ -181,6 +181,42 @@ The script seeds assets explicitly rather than relying on the hook: `post-checko
 the previous HEAD is the null SHA, and the sparse flow checks out in a *second* step
 (`--no-checkout` → `sparse-checkout set` → `checkout`), so that hook does not fire.
 
+##### Worktrees created from the Orca app
+
+`new-client-worktree.sh` only covers worktrees created from the command line. A worktree created in
+the **Orca app** is a plain `git worktree add`, so it lands full — every Brandklout client visible in
+`deliver/brandklout/`, which makes it hard to tell which client the workspace is even for. Narrow it
+after the fact:
+
+```bash
+bash scripts/sparsify-worktree.sh                         # client derived from the bk-<slug> branch
+bash scripts/sparsify-worktree.sh --client institute-for-advanced-dentistry
+bash scripts/sparsify-worktree.sh --dry-run               # print the plan first
+bash scripts/sparsify-worktree.sh --undo                  # back to the full checkout
+```
+
+**This runs automatically on Orca worktree creation.** Orca's per-repo setup hook for this repo is
+`npm install`, and root `package.json` carries a `postinstall` that calls the script. Nothing to
+configure per worktree; if you ever change Orca's setup script, keep `npm install` in it or the
+narrowing stops happening.
+
+The guards matter more than the cone here, because unlike `new-client-worktree.sh` this one edits a
+worktree that may already hold work:
+
+- **The main worktree is never narrowed.** It is the source every other worktree seeds assets from,
+  and the one place the whole repo is meant to be visible.
+- **Uncommitted tracked changes abort it.** Narrowing would have to discard modified files outside
+  the cone; commit or stash first, or pass `--force` if the changes are inside the client you keep.
+- **An already-sparse worktree is left alone** and its cone printed, so re-running `npm install`
+  never re-scopes a worktree you widened by hand. `--force` re-scopes deliberately.
+- **A branch name that matches no client keeps the shared context only** and prints the
+  `git sparse-checkout add` line for every client. This is the `bk-ifa-dentistry` case — the slug is
+  not a prefix of `institute-for-advanced-dentistry`, so pass `--client` there.
+
+Sparse-checkout removes *tracked* files only. Assets mirrored in by `mirror-assets.sh` are
+git-ignored, so other clients can survive as asset-only leftover directories; the script lists them
+and prints the `rm -rf`, but never deletes on its own.
+
 #### 4.2.1 Worktree → main asset mirror (automatic)
 
 Excluding media from Git is load-bearing in three places, so the rule does not bend: it keeps merges

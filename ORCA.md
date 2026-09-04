@@ -125,6 +125,26 @@ Hand the new session a written brief it can act on alone — for this system tha
 
 For a genuine handoff, deliver the brief and stop monitoring. Use the `orchestration` skill and `orca orchestration ...` only when the user actually asked to supervise, wait for results, or coordinate a task DAG.
 
+### A new worktree shows one client, not all of them
+
+Orca creates worktrees with a plain `git worktree add`, which checks out **every** Brandklout client
+— thirteen client folders in a workspace that exists for one of them. Orca's per-repo **setup script**
+for this repo is `npm install`, and root `package.json` has a `postinstall` that runs
+`scripts/sparsify-worktree.sh`, so a new worktree narrows itself to the shared context
+(`deliver/process`, the pillar's `docs/` and `scripts/`, `scripts`, `mcp-servers`, `.claude`, plus the
+repo-root directives) and the one client its `bk-<slug>` branch names.
+
+If the branch name is not a prefix of the client folder — `bk-ifa-dentistry` vs
+`institute-for-advanced-dentistry` — nothing matches, the worktree keeps the shared context only, and
+the script prints the line to run:
+
+```bash
+bash scripts/sparsify-worktree.sh --client institute-for-advanced-dentistry
+```
+
+Sparse never touches commits or the index; `--undo` restores the full checkout. Full rules and guards
+in [SYSTEM_RULES.md §4.2.0](./SYSTEM_RULES.md).
+
 ## Client Worktrees and Directive Propagation
 
 Use the root `main` worktree as the **orchestration and canonical-process worktree**. Perform client
