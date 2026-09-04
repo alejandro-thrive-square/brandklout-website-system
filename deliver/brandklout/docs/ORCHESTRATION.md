@@ -14,7 +14,7 @@ Webzite Agentic Workflow  (main, refs/heads/main)   <-- orchestration only
 ├── bk-arvada               worktree   -> deliver/brandklout/arvada-dental-center/
 ├── bk-mason-park           worktree   -> deliver/brandklout/mason-park/
 ├── bk-dr-nahlah            worktree   -> deliver/brandklout/dr-nahlah/
-├── bk-stone                worktree   -> deliver/brandklout/stone-dental-implant-center/
+├── bk-stone                worktree   -> deliver/brandklout/stone-surgical-arts/
 ├── bk-livewell             worktree   -> deliver/brandklout/livewell-dental/
 ├── bk-west-la-implants     worktree   -> deliver/brandklout/west-la-implants/
 └── bk-legacy-dental        worktree   -> deliver/brandklout/legacy-dental-pasadena/

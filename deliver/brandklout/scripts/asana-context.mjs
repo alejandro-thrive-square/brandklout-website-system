@@ -40,6 +40,12 @@ export const CLIENT_TASKS = {
   'arvada-dental-center': ['1217040406855586'],
   'mason-park': ['1217040406855582'],
   'dr-nahlah': ['1216611404338509'],
+  // The Stone engagement is one client delivered as THREE projects. Asana still
+  // carries both GIDs under the single "Stone Dental Implant Center" task pair,
+  // and which GID belongs to which site is NOT yet established — the Asana
+  // reorganisation is in progress. Both slugs therefore pull both tasks; split
+  // them once Asana does.
+  'stone-surgical-arts': ['1217160668112180', '1217160668112175'],
   'stone-dental-implant-center': ['1217160668112180', '1217160668112175'],
   'legacy-dental-pasadena': ['1217611213174386'],
 }

@@ -133,7 +133,7 @@ deliver/brandklout/dr-nahlah/workflows/00-client-delivery-initialization/.tmp/de
 # material rather than deliverable. It contains img/before-after/, which is
 # photographs of identifiable patients: see HANDOFF.md before touching it.
 # What the site actually uses is recorded in site-src/client-manifest.json.
-deliver/brandklout/stone-dental-implant-center/workflows/01-content-intake/.tmp/google-drive-images/
+deliver/brandklout/stone-surgical-arts/workflows/01-content-intake/.tmp/google-drive-images/
 
 # Windows reserved device names, created by stray `> nul` redirects. Git cannot
 # open them ("No such file or directory") and `git add -A` dies on the whole run.

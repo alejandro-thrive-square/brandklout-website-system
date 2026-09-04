@@ -1,11 +1,14 @@
-# Project Overview — Stone Dental Implant Center
+# Project Overview — Stone Surgical Arts
 
 | Field | Value |
 | :--- | :--- |
-| **Client** | Stone Dental Implant Center |
+| **Project** | Stone Surgical Arts |
+| **Client** | Dr. Mona Stone — one client, **three projects** (see below) |
 | **Agency** | Brandklout (white-label partner; Webzite delivers, Brandklout owns the relationship) |
-| **Source** | Asana — `BK Activation - Stone Dental Implant Center` |
-| **Scope** | **2 full websites** — not landing pages |
+| **Source** | Asana — `BK Activation - Stone Dental Implant Center` (not yet split per project) |
+| **Scope** | **One full website** — not landing pages |
+| **Platform** | Instatic — `stone-surgical-arts-production.up.railway.app` |
+| **Worktree** | `bk-stone` (Orca display name `bk-stone-surgical-arts`) |
 | **Due** | None set in Asana |
 | **Started** | 2026-08-05 (folder created from Asana dispatch) |
 
@@ -21,17 +24,24 @@ recorded here.
 | Routed modules | `00-client-delivery-initialization`, `01-content-intake`, `04-design`, `21-instatic-upload` |
 | Not routed | 02, 03, 05-20 — this is an Instatic build, not a Webflow one, so the Webflow phases (07, 08) and the Figma/migration modules do not apply |
 
-### Two sites in one client folder
+### One client, three projects
 
-The signed scope is **two full websites** under one Asana project, so this single client folder holds
-both. They are separated inside the design workflow, not by having two client folders:
+Dr. Mona Stone's engagement is delivered as **three separate projects**, each with its own folder,
+worktree, platform instance and overview. They are separate websites with separate brands, so they
+are not folded into one folder:
 
-| Site | Lives in | Published to |
-| :--- | :--- | :--- |
-| **Stone Surgical Arts** | `workflows/04-design/.tmp/surgical-arts/` | Instatic — `stone-surgical-arts-production.up.railway.app` |
-| **Stone Dental Implant Center** | ad landing pages, built in the `bk-stone-dental` worktree | Webflow |
+| Project | Folder | Worktree | Platform |
+| :--- | :--- | :--- | :--- |
+| **Stone Surgical Arts** (this one) | `stone-surgical-arts/` | `bk-stone` | Instatic |
+| Stone Dental Implant Center | `stone-dental-implant-center/` | `bk-stone-dental` | Webflow (ad landing pages) |
+| Stone Med Spa | `stone-med-spa/` | `bk-stone-med-spa` | Instatic |
 
-Stone Med Spa is a **different client** and has its own folder, `deliver/brandklout/stone-med-spa/`.
+Asana has not been split to match yet — both Stone task GIDs are still listed against the first two
+in `asana-context.mjs`. Split them there once Asana is reorganised.
+
+Before 2026-09-04 this project lived inside `stone-dental-implant-center/` because the signed scope
+was written as "2 full websites" under one Asana project. It was separated so that a folder means a
+website.
 
 ### Documented deviations
 

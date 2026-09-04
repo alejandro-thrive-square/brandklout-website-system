@@ -52,7 +52,9 @@ All IDs below were read from `list_sites` on 2026-08-07 against the live `webflo
 | `grand-mission-dentistry/` | Grand Mission Dentistry | `698111847e9608eb30ee21c6` | **Confirmed 2026-08-07.** Domains `grandmissiondentistry.com`, `www.` — a large live site, 303 pages |
 | `arvada-dental-center/` | Arvada Dental Center | `693c51e685b19f0d0c149cab` | **Confirmed 2026-08-07 by the user** as the site to edit. Domains `arvadadentalimplants.com`, `www.` See the copies warning below |
 | `mason-park/` | Mason Park Dental | `6a60bdc0340e5f1784b4d553` | **Confirmed 2026-08-07.** Effectively empty — **1 page** (Home). No custom domain |
-| `stone-dental-implant-center/` | — | — | **NOT PRESENT in the site list.** See below |
+| `stone-surgical-arts/` | — | — | **Not a Webflow site.** Built on **Instatic** — `stone-surgical-arts-production.up.railway.app`. Worktree `bk-stone`. |
+| `stone-dental-implant-center/` | — | — | **NOT PRESENT in the site list.** See below. Ad landing pages built in `bk-stone-dental`. |
+| `stone-med-spa/` | — | — | **Not a Webflow site.** Built on Instatic. Worktree `bk-stone-med-spa`. |
 | `west-la-implants/` | — | — | **No site yet.** Client added 2026-08-20; nothing built. Read-only until a site is created in this workspace and its ID is recorded here |
 | `legacy-dental-pasadena/` | Legacy Dental Pasadena - Cosmetic & Implant Dentistry | `68e12d861f12c7f04a762a8e` | **Confirmed 2026-08-20** via `get_site`. Short name `legacy-dental`. **78 pages, live production site** serving `legacydentalpasadena.com`. **Also carries `caldentalpasadena.com` + `www.` — a second brand. Publish staging-only until that is explained.** See the warning below |
 | `marvel-dental/` | Marvel Dental Main | `69aedbc6b0c7e78051fd6a2c` | **Confirmed 2026-08-21** via `get_site`. Short name `marvel-dental-main`. **77 pages, live production site** serving `marveldentaldds.com` + `www.`. Four other sites in the workspace carry the Marvel name and are old iterations — match on the ID. See the warning below |
@@ -153,8 +155,13 @@ Asana workspace connected.
 > [!IMPORTANT]
 > Every client engagement seen in Asana now has a folder under `deliver/brandklout/`:
 > `arvada-dental-center`, `dr-nahlah`, `grand-mission-dentistry`, `livewell-dental`, `mason-park`,
-> `stone-dental-implant-center`. For any *new* client, create the folder and its `mcp-access.md`
-> before doing platform work, and add a row to the client site registry above.
+> `stone-surgical-arts`, `stone-dental-implant-center`, `stone-med-spa`. For any *new* client, create
+> the folder and its `mcp-access.md` before doing platform work, and add a row to the client site
+> registry above.
+>
+> **One client may be several projects.** The three Stone folders are one engagement delivered as
+> three separate websites, each with its own folder, worktree and platform instance. Give each its
+> own row; do not fold them together.
 
 ## Allowed Operations
 - Read tasks, subtasks, projects, sections, custom fields, assignees, due dates, attachments
