@@ -151,8 +151,12 @@ if [[ "$DRY_RUN" == true ]]; then
   exit 0
 fi
 
-git sparse-checkout init --cone
-git sparse-checkout set "${CONE[@]}"
+# `set --cone` initialises and scopes in ONE step. Splitting it into
+# `init --cone` + `set` makes git pass through a root-only cone first: it strips
+# the whole tree, warns that every directory holding untracked files "is not in
+# the sparse-checkout cone" (including ones the real cone keeps), then puts it
+# all back. Alarming, and slow on a worktree the size of dr-nahlah.
+git sparse-checkout set --cone "${CONE[@]}"
 
 echo ""
 if [[ -z "$CLIENT_DIR" ]]; then
