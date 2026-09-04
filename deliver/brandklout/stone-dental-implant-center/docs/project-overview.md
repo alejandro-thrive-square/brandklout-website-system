@@ -9,6 +9,45 @@
 | **Due** | None set in Asana |
 | **Started** | 2026-08-05 (folder created from Asana dispatch) |
 
+## Process Baseline
+
+Required by [DELIVER_SYSTEM_RULES §3.2](../../../DELIVER_SYSTEM_RULES.md): client workflow folders are
+versioned instances, not live mirrors of `deliver/process/`, so the baseline and every deviation are
+recorded here.
+
+| Field | Value |
+| :--- | :--- |
+| `process_baseline_commit` | `0eafef53` (local `main`, 2026-09-04) |
+| Routed modules | `00-client-delivery-initialization`, `01-content-intake`, `04-design`, `21-instatic-upload` |
+| Not routed | 02, 03, 05-20 — this is an Instatic build, not a Webflow one, so the Webflow phases (07, 08) and the Figma/migration modules do not apply |
+
+### Two sites in one client folder
+
+The signed scope is **two full websites** under one Asana project, so this single client folder holds
+both. They are separated inside the design workflow, not by having two client folders:
+
+| Site | Lives in | Published to |
+| :--- | :--- | :--- |
+| **Stone Surgical Arts** | `workflows/04-design/.tmp/surgical-arts/` | Instatic — `stone-surgical-arts-production.up.railway.app` |
+| **Stone Dental Implant Center** | ad landing pages, built in the `bk-stone-dental` worktree | Webflow |
+
+Stone Med Spa is a **different client** and has its own folder, `deliver/brandklout/stone-med-spa/`.
+
+### Documented deviations
+
+- **`21-instatic-upload` is a client-local module**, not a canonical one. It was created here as
+  `05-instatic-upload`, which **collided with the canonical `05-design-revisions`**; renamed
+  2026-09-04 to the next free number. [PROCESS_INDEX](../../../process/PROCESS_INDEX.md) claims
+  00-20, with 19 held by `19-cloudflare-launch` (promoted on the `bk-dr-nahlah` branch, not yet
+  merged to `main`). **Check the worktrees, not just `main`, before claiming a number.**
+  It should be promoted to `deliver/process/` — `bk-stone-med-spa` has its own copy of the same
+  module, still numbered `05`, and two clients using a module is the promotion trigger.
+- **Site output lives under `04-design/.tmp/`**, which is correct per §3 ("store ... design outputs
+  and final workflow assets inside the `.tmp/` folder of the workflow that produces them"). Note
+  `bk-mason-park` puts its build *outside* `.tmp/`; this folder follows the rule, that one does not.
+- **Modules 00, 01 and 04 carry no `.md` directive.** The standard workflow structure is
+  `.md` + `.py` + `TRIGGER_PROMPT.txt` + `.tmp/`; only `21-instatic-upload` has its directive.
+
 ## Status
 
 **Stone Surgical Arts: the home page and one service page, as of 2026-09-01.** It was seven core

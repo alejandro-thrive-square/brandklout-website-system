@@ -45,7 +45,7 @@
 > re-exported at their 2200px source; the wide-screen block is `css/59-wide.css`, last in the
 > cascade on purpose), and **a page-by-page comparison of live against local**, which ran five
 > times and ended at two cosmetic findings. What it found on the way is traps 21 to 25 in
-> `05-instatic-upload.md`, the biggest being that every bare `clamp()` size was dropped by the
+> `21-instatic-upload.md`, the biggest being that every bare `clamp()` size was dropped by the
 > conversion and now ships in the code asset with its whole cascade. Two more dossiers were built
 > overnight in the loop: **MyEllevate** and the **face and neck lift**.
 

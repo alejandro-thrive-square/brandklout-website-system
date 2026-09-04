@@ -5821,7 +5821,7 @@ span.catalogue_link {
 
 /* --- Instatic's base.button has a label and no children --------------------------
    The importer flattens whatever is inside a <button> into one string
-   (05-instatic-upload.md, trap 15). Two components here draw their button
+   (21-instatic-upload.md, trap 15). Two components here draw their button
    with markup: the carousel arrows carry an SVG, and the catalogue triggers
    carried three spans. The triggers became anchors with role="button", which
    keep their children. The arrows keep their SVG locally and, where it has
