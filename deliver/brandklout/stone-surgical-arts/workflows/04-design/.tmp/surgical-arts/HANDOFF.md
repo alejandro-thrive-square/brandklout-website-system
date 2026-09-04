@@ -1,6 +1,49 @@
 # Stone Surgical Arts — handoff
 
 > [!IMPORTANT]
+> **2026-09-04, EVENING: FACES UNCUT, AND THE DOCTOR'S OWN STOCK IN. LOCAL ONLY, NOT PUBLISHED.**
+> Two jobs on top of the morning's refinement pass, both still unpublished with it.
+>
+> - **The cut faces.** The client reported faces cut by their frames on several pages. Measured,
+>   not guessed: `site-src/crop-probe.mjs` records the visible region of every `object-fit: cover`
+>   frame at four widths and `crop-faces.py` intersects it with OpenCV face boxes; 31 of the 40
+>   cover rules had no `object-position`, so a portrait in a short frame lost its forehead or
+>   chin. Every value was then set from the photograph the frame shows (the values and the
+>   reasoning are comments beside each rule). Selectors that always carry a person got a value;
+>   selectors shared with rooms got it on the element through `u-focus-top` / `u-focus-upper` /
+>   `u-focus-left` in `02-base.css`; the dossier hero has three modifiers now (`is-upper`,
+>   `is-mid`, `is-lower`) because 66% held for none of its four photographs, and its 2K cap rose
+>   to 56rem so the band can hold a face at all. Two phone frames were too short for any crop and
+>   grew: the ask band (5:4) and the treatment step on About (4:5). Re-run the probe after any
+>   image swap; the gate is the render. `section-shot.mjs` cuts one section out of a full-page
+>   capture for the frames that sit under type.
+> - **The doctor's stock.** Twenty files she chose (`01-content-intake/.tmp/Stock Images-…/`),
+>   camera originals up to 8768px. `site-src/import-doctor-stock.mjs` brings eighteen in as
+>   `ds-*.webp` (16:9 at 2200 or 4:5 at 1200, alt text and provenance per slot in
+>   `doctor-stock-manifest.json`). Four are placed, all on the treatments page, beside the
+>   treatments they show: the Skin band (Morpheus8 handpiece), the Non-Surgical band (a filler
+>   patient smiling), and the two stills under them (PRP syringes, "The plasma"; the spun tube,
+>   "The spin"), which replace two generated still lifes. The other fourteen are the library:
+>   sized and named so the media panel holds them after the next upload and the client can swap
+>   a picture herself. **`Facial Fillers-3.jpeg` is a before-and-after collage of a stranger's
+>   mouth and was NOT imported**: a stock before/after on this site reads as the practice's
+>   result. **Licence:** she supplied these; nobody has seen the licence. Confirm it covers the
+>   practice's own site before the domain goes live.
+> - **The clip (`Chemical peels-3.mov`) needs a decision.** Converted to
+>   `site-src/video/ds-peel-clip.mp4` (1920x1012, 5 s, muted, 0.6 MB) with a poster frame, and
+>   kept OUT of `assets/` on purpose: no component on the site plays video (the steps photograph
+>   is a still with the play icon painted out) and `upload-media.mjs` has no `.mp4` entry.
+>   Whether a five-second peel clip belongs on the Skin chapter is a design call for Alejandro;
+>   if yes it needs a `<video muted loop playsinline>` component with the poster for
+>   reduced-motion, and a check that Instatic serves `.mp4` from its media library at all.
+> - **Gates:** audit FAIL none / WARN none (the probe found the restored asset library was
+>   missing the seven typefaces and the two marble textures; fonts came back with
+>   `get-fonts.mjs`, the textures from the live instance's `/uploads/` URLs, both gitignored),
+>   all-pages 144/144, journey 47/47, dossier suites unchanged on all four. **To publish, when
+>   Alejandro says so:** same route as before; expect the asset step to upload the 18 `ds-*`
+>   files and the four re-exported photographs, and `12 written, 0 deleted`.
+
+> [!IMPORTANT]
 > **2026-09-04: THE REFINEMENT PASS, LOCAL ONLY, NOT PUBLISHED.** Alejandro, after the doctor had
 > seen the twelve pages: *"a little bit less text and more high-definition images ... regenerate
 > the same image but on high resolution using Magnific ... improve the spacing, images, reducing

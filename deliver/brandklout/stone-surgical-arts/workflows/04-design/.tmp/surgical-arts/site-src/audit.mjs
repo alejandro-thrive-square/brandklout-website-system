@@ -188,6 +188,7 @@ const RETIRED = new Set([
   "ssa-team.webp", "ssa-treatment-room.webp", "staff-brooke.webp",
 ]);
 let retired = 0;
+let library = 0;
 const allHtml = pages.map(load).join("");
 for (const f of fs.readdirSync(path.join(SITE, "assets"))) {
   if (f === "site.css" || f === "site.js" || f === "vendor.js") continue;
@@ -205,10 +206,17 @@ for (const f of fs.readdirSync(path.join(SITE, "assets"))) {
   }
   if (!allHtml.includes(f) && !cssCode.includes(f)) {
     if (RETIRED.has(f)) retired++;
+    // ds-*: the photographs Dr. Stone chose and supplied (2026-09-04,
+    // doctor-stock-manifest.json). Four are placed; the rest are imported on
+    // purpose as the library, so the media panel holds them and the client can
+    // swap a picture without a developer. Counted, not warned.
+    else if (f.startsWith("ds-")) library++;
     else warn("assets", `${f} is not referenced anywhere`);
   }
 }
 if (retired) console.log(`assets: ${retired} images kept from the deleted pages, unreferenced on purpose
+`);
+if (library) console.log(`assets: ${library} of the doctor's chosen photographs imported as the library, unplaced on purpose
 `);
 
 console.log(`audited ${pages.length} pages: ${pages.join(", ")}\n`);

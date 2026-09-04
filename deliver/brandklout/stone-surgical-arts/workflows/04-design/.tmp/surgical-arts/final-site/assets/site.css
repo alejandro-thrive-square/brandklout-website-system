@@ -6128,6 +6128,17 @@ span.catalogue_link {
   object-position: 50% 12%;
   display: block;
 }
+/* The Skin and Non-Surgical bands carry the doctor's chosen photographs since
+   2026-09-04 (doctor-stock-manifest.json): landscape sources cut to 4:5 with
+   the subject in the MIDDLE, not portraits with the face at the top, so 12%
+   took the chin off on a phone. 40% is measured against ds-filler-smile,
+   whose face runs from 0.22 to 0.68 of the frame: the phone band shows 60%
+   of it, and 40% opens on the hairline with the chin just in. A modifier rather than a
+   utility because `.catx_media img` above sets its own value and a utility
+   from 02-base.css would lose to it on order. */
+.catx_media.is-centred img {
+  object-position: 50% 40%;
+}
 .catx_word {
   position: absolute;
   left: var(--space-medium);
