@@ -239,10 +239,18 @@
   font-size: var(--size-text-medium);
   color: var(--fg-body);
 }
+/* A DEFINITE width, not `max-width` on a shrink-to-fit box.
+   `justify-self: end` + `max-width` makes the figure's width depend on the
+   IMAGE's intrinsic width, and Instatic republishes every <img> with its own
+   srcset/sizes="auto" — so the published figure sized itself from a responsive
+   candidate and came out 300x450 against the build's 320x480, dragging the
+   whole section 30px shorter. A definite width takes the image out of the
+   calculation and the two agree exactly. */
 .book_call-media {
   margin: 0;
   aspect-ratio: 2 / 3;
-  max-width: 20rem;
+  width: 20rem;
+  max-width: 100%;
   justify-self: end;
   border-radius: var(--radius-frame);
   overflow: hidden;
@@ -345,7 +353,7 @@
   }
   .book_call-media {
     justify-self: start;
-    max-width: 16rem;
+    width: 16rem;
     aspect-ratio: 4 / 5;
   }
 }

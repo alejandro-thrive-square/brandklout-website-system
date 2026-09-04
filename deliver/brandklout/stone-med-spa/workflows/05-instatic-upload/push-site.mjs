@@ -26,7 +26,7 @@ import { getSite, getPages, api } from '../../../dr-nahlah/workflows/15-instatic
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const TMP = path.join(HERE, '.tmp')
-const SITE_SRC = path.resolve(HERE, '../04-design/.tmp/surgical-arts/final-site')
+const SITE_SRC = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site')
 
 const apply = process.argv.includes('--apply')
 const force = process.argv.includes('--force')
@@ -107,7 +107,7 @@ const siteJs =
 
    Source files, verbatim and in order — keep them in step with site-src/css/. */
 const TOKEN_FILES = ['00-fluid-root.css', '01-tokens.css']
-const CSS_SRC = path.resolve(HERE, '../04-design/.tmp/surgical-arts/site-src/css')
+const CSS_SRC = path.resolve(HERE, '../04-design/.tmp/med-spa/site-src/css')
 
 /* --- AND EVERY OTHER :root BLOCK, harvested ------------------------------
    FOUND ON THE PUBLISHED SITE, 2026-09-01. The two files above were the whole
@@ -168,14 +168,80 @@ function harvestRoots(src) {
 
   const isRoot = (sel) => /(^|,)\s*:root\s*$/.test(sel)
 
-  for (const r of rules(css)) {
-    if (isRoot(r.sel)) {
-      out.push(':root {' + r.body + '}')
-    } else if (/^@(media|supports)\b/.test(r.sel)) {
-      const inner = rules(r.body).filter((n) => isRoot(n.sel))
-      if (inner.length) {
-        out.push(r.sel + ' {' + inner.map((n) => ':root {' + n.body + '}').join('') + '}')
+  /* A CUSTOM PROPERTY IS NOT ALWAYS DECLARED ON :root, and trap 1 does not care
+     where it was declared — happy-dom drops it either way.
+
+     `--pos` on `.compare_component` was the sibling's instance of this and was
+     handled by hand, as one literal rule appended below. Hand-handling does not
+     scale and does not warn: this site declares `--marquee-duration` on
+     `.marquee_component` (40-motion.css) and `--cad-label` on `.cadence_grid`
+     (52-cadence.css, and again at a breakpoint in 90-wide.css), and all three
+     would have gone the same way in silence. The marquee would not scroll and
+     the year grid's labels would size from nothing — neither of which fails,
+     warns, or looks like a token problem.
+
+     So harvest by DECLARATION rather than by selector. Any rule that declares a
+     custom property contributes its selector and ONLY its custom-property
+     declarations. Taking the whole body would be wrong: the token asset is
+     served after the registry, so a `display` or `padding` riding along would
+     silently outrank the registry copy the Styles panel edits. */
+  const customProps = (body) => {
+    const kept = []
+    // Split on top-level `;` so a `var(--x, a; b)` or a nested block cannot cut
+    // a declaration in half.
+    let depth = 0
+    let start = 0
+    const parts = []
+    for (let i = 0; i < body.length; i++) {
+      const c = body[i]
+      if (c === '(' || c === '{') depth++
+      else if (c === ')' || c === '}') depth--
+      else if (c === ';' && depth === 0) {
+        parts.push(body.slice(start, i))
+        start = i + 1
       }
+    }
+    parts.push(body.slice(start))
+    for (const p of parts) {
+      if (/^\s*--[a-zA-Z0-9-]+\s*:/.test(p)) kept.push(p.trim())
+    }
+    return kept
+  }
+
+  /* CUSTOM PROPERTIES ONLY, `:root` INCLUDED, AND THAT IS THE WHOLE POINT.
+     FOUND 2026-09-04 by compare-live.mjs: the footer published charcoal
+     (#272727) instead of the near-black it is designed in (#1e1e1e), on all
+     eleven pages, and the same cause was one card on /financing publishing
+     green instead of white.
+
+     The token asset is the LAST stylesheet in the cascade
+     (reset -> framework -> style -> userStyles). Any ORDINARY declaration in it
+     therefore outranks the registry copy of itself whenever specificity ties —
+     and it ties constantly, because `[data-theme="dark"]` (an attribute, 0-1-0)
+     ties with `.footer_component` (a class, 0-1-0). Locally 01-tokens.css is
+     read before 22-footer.css so the footer's `background-color: var(--bg-alt)`
+     wins; published, the theme block is re-emitted after it and
+     `background-color: var(--bg)` wins instead. Nothing errors. The site is
+     simply the wrong colour, in a way that reads as a design decision.
+
+     The ordinary declarations are not lost: they are in the registry already,
+     which is where they belong and where the Styles panel can edit them. Only
+     the custom properties need this second road, because those are what the
+     conversion drops. So carry those and nothing else. */
+  const emit = (r) => {
+    if (/^@/.test(r.sel)) return null // handled by the caller
+    const props = customProps(r.body)
+    if (!props.length) return null
+    return (isRoot(r.sel) ? ':root' : r.sel) + ' { ' + props.join('; ') + '; }'
+  }
+
+  for (const r of rules(css)) {
+    if (/^@(media|supports)\b/.test(r.sel)) {
+      const inner = rules(r.body).map(emit).filter(Boolean)
+      if (inner.length) out.push(r.sel + ' {' + inner.join('') + '}')
+    } else {
+      const one = emit(r)
+      if (one) out.push(one)
     }
   }
   return out
@@ -301,19 +367,25 @@ const tokensCss =
   `/* Token primitives, pushed as a code asset by push-site.mjs.\n` +
   `   These CANNOT live in the style registry: happy-dom drops --custom-property\n` +
   `   declarations during conversion, silently. Edit site-src/css/ and re-push. */\n\n` +
-  TOKEN_FILES.map((f) => fs.readFileSync(path.join(CSS_SRC, f), 'utf8')).join('\n') +
+  // THE TOKEN FILES GO THROUGH THE SAME FILTER, not in verbatim. They used to
+  // be pasted whole, which is how `[data-theme="dark"] { background-color }`
+  // reached the end of the cascade — see the note in harvestRoots.
+  TOKEN_FILES.map(
+    (f) =>
+      `/* ===== ${f} ===== */\n` +
+      harvestRoots(fs.readFileSync(path.join(CSS_SRC, f), 'utf8')).join('\n') +
+      '\n',
+  ).join('\n') +
   harvested
     .map(
       ({ file, blocks }) =>
         `\n/* ===== :root harvested from ${file} ===== */\n` + blocks.join('\n\n') + '\n',
     )
     .join('') +
-  // `--pos` drove the before/after wipe. 35-gallery.css was deleted with the
-  // results page on 2026-09-01 and `.compare_component` is in no markup, so
-  // this rule is dormant rather than live. One rule costs nothing and it comes
-  // back with the page.
-  `\n/* from the deleted 35-gallery.css — dormant, see push-site.mjs */\n` +
-  `.compare_component { --pos: 50%; }\n` +
+  // The sibling appended one literal rule here — `.compare_component { --pos }`
+  // from a deleted stylesheet — because harvestRoots only looked at `:root`.
+  // It now harvests by declaration instead, so a custom property on a class is
+  // picked up wherever it is written and there is nothing to append by hand.
   lossy
     .map(
       ({ file, blocks }) =>
@@ -325,7 +397,31 @@ const tokensCss =
    whole block exists to stop, so assert the ones the layout cannot survive
    without rather than trusting the harvest. */
 {
-  const MUST = ['--gutter', '--section', '--size-display', '--size-h3-j', '--spec-w', '--spec-top', '--ivory', '--space-large']
+  /* DERIVED, not written by hand. The sibling listed eight token names it could
+     not survive without, and that list had to be extended by hand twice — once
+     per stylesheet that opened a new `:root` — which is the same drift the
+     harvest above exists to prevent, moved one file along. It also cannot
+     travel: those eight names are the sibling's, and six of them do not exist
+     on this site at all, so the first run here refused a payload that was fine.
+
+     Every custom property DECLARED anywhere in site-src/css/ must appear in the
+     token asset. That is the actual invariant, it needs no maintenance, and it
+     covers a stylesheet written tomorrow. */
+  const MUST = [
+    ...new Set(
+      fs
+        .readdirSync(CSS_SRC)
+        .filter((n) => n.endsWith('.css'))
+        .flatMap((n) =>
+          [
+            ...fs
+              .readFileSync(path.join(CSS_SRC, n), 'utf8')
+              .replace(/\/\*[\s\S]*?\*\//g, ' ')
+              .matchAll(/(^|[;{])\s*(--[a-zA-Z0-9-]+)\s*:/g),
+          ].map((m) => m[2]),
+        ),
+    ),
+  ]
   const missing = MUST.filter((t) => !tokensCss.includes(t + ':'))
   if (missing.length) {
     console.error(`REFUSING: the token asset is missing ${missing.join(', ')}. Every var() using them would resolve to nothing on the published site.`)

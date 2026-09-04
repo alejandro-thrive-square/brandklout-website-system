@@ -9,13 +9,13 @@
      edit seo.json and rebuild. -->
 <title>Botox &amp; Xeomin in Westlake, TX | Stone Med Spa</title>
 <meta name="description" content="Botox and Xeomin placed by an oral and maxillofacial surgeon in Westlake, TX. Fifteen minutes, visible in 3-7 days, lasting 3-4 months.">
-<link rel="canonical" href="https://stonemedspa.example/botox">
+<link rel="canonical" href="https://stone-med-spa-production.up.railway.app/botox">
 <meta property="og:site_name" content="Stone Med Spa">
 <meta property="og:type" content="website">
-<meta property="og:url" content="https://stonemedspa.example/botox">
+<meta property="og:url" content="https://stone-med-spa-production.up.railway.app/botox">
 <meta property="og:title" content="Botox &amp; Xeomin in Westlake, TX | Stone Med Spa">
 <meta property="og:description" content="Botox and Xeomin placed by an oral and maxillofacial surgeon in Westlake, TX. Fifteen minutes, visible in 3-7 days, lasting 3-4 months.">
-<meta property="og:image" content="https://stonemedspa.example/assets/m-hero.webp">
+<meta property="og:image" content="https://stone-med-spa-production.up.railway.app/assets/m-hero.webp">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Botox &amp; Xeomin in Westlake, TX | Stone Med Spa">
 <meta name="twitter:description" content="Botox and Xeomin placed by an oral and maxillofacial surgeon in Westlake, TX. Fifteen minutes, visible in 3-7 days, lasting 3-4 months.">
@@ -25,7 +25,7 @@
   "@graph": [
     {
       "@type": "MedicalBusiness",
-      "@id": "https://stonemedspa.example/#practice",
+      "@id": "https://stone-med-spa-production.up.railway.app/#practice",
       "name": "Stone Med Spa",
       "description": "Non-surgical facial aesthetics in Westlake, Texas, performed by Dr. Mona Stone, DDS, a board-certified oral and maxillofacial surgeon.",
       "medicalSpecialty": "Dermatology",
@@ -69,7 +69,7 @@
       "bodyLocation": "Face",
       "howPerformed": "Small units of botulinum toxin type A are injected into the specific muscles that fold the overlying skin, relaxing them for three to four months.",
       "provider": {
-        "@id": "https://stonemedspa.example/#practice"
+        "@id": "https://stone-med-spa-production.up.railway.app/#practice"
       }
     },
     {
@@ -265,7 +265,11 @@
     <div class="padding-global">
       <div class="container-large">
         <div class="cover_inner">
-          <p class="eyebrow is-alternate cover_crumb"><a href="treatments.html">Treatments</a>&nbsp; / &nbsp;Injectables</p>
+          <!-- The separator is spaced by CSS, not by &nbsp;. importHtml collapses
+               entity whitespace to one ordinary space, so the published crumb was
+               17px narrower than the build and nothing reported it but the
+               comparison gate. Spacing that must survive the import goes in CSS. -->
+          <p class="eyebrow is-alternate cover_crumb"><a href="treatments.html">Treatments</a><span class="cover_crumb-sep">/</span>Injectables</p>
           <h1 class="cover_title" data-split data-split-now>Botox &amp; Xeomin in <em class="text-style-display-accent">Westlake</em>.</h1>
           <p class="cover_lede">
             Fifteen minutes, no anaesthetic, no downtime, placed by an oral and maxillofacial

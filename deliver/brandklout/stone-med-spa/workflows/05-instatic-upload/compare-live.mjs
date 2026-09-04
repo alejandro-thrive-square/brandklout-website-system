@@ -54,7 +54,7 @@ import { fileURLToPath } from 'node:url'
 import puppeteer from 'puppeteer-core'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const LOCAL_ROOT = path.resolve(HERE, '../04-design/.tmp/surgical-arts/final-site')
+const LOCAL_ROOT = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site')
 const SHOTS = path.join(HERE, '.tmp', 'compare')
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 const PORT = 8821
@@ -81,7 +81,7 @@ if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
 const args = process.argv.slice(2).filter((a) => a !== '--shots')
 const wantShots = process.argv.includes('--shots')
-const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index', 'neck-lift', 'blepharoplasty', 'treatments', 'meet-the-doctor', 'about', 'team', 'memberships', 'results', 'book', 'myellevate-neck-lift', 'face-and-neck-lift']
+const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index', 'treatments', 'botox', 'results', 'membership', 'financing', 'meet-the-doctor', 'team', 'about', 'book', 'thank-you']
 const WIDTHS = args.find((a) => /^\d+$/.test(a)) ? [Number(args.find((a) => /^\d+$/.test(a)))] : [1440, 390]
 
 /* The properties worth comparing. Deliberately wide: the failures this exists
@@ -279,6 +279,49 @@ async function capture(browser, url, width, height, withJs) {
       window.scrollTo({ top: 0, behavior: 'instant' })
     })
     await wait(1400)
+
+    /* WAIT FOR THE PAGE TO STOP MOVING, rather than trusting a fixed 1400ms.
+
+       Added 2026-09-04 while chasing an intermittent finding, and it did NOT
+       fix that one — read the note below before spending time on it again. It
+       stays because waiting for the document to hold still is right anyway and
+       costs nothing on a settled page.
+
+       > [!NOTE]
+       > **THE `container-large` 8px AUTO-MARGIN FINDING IS COMPARISON NOISE,
+       > and the proof is that its DIRECTION FLIPS.** The same publish reported
+       > 2, then 6, then 4 findings on consecutive runs, on different pages each
+       > time, always the same shape: a `container-large` whose `margin: 0 auto`
+       > reads 8px on one side and 0px on the other. Probing the two pages
+       > directly showed all ten containers identical — and on the run after
+       > that, the SAME two containers read 0px LOCALLY and 8px live, the
+       > opposite of what the gate had just reported. A real publish difference
+       > does not change sides.
+       >
+       > The mechanism is the scroll pass this function performs: the pinned
+       > sections' spacers exist or do not exist depending on where GSAP is in
+       > its own setup, and `.padding-global`'s `5%` resolves against whatever
+       > the containing block is at that instant (72px against 1440, 80px
+       > against 1600), which moves an auto margin by exactly 8px.
+       >
+       > So do not chase it as a styling bug, and do NOT add it to the IGNORE
+       > list either: an 8px margin on this class could one day be real, and a
+       > suppressed finding is worse than a noisy one. */
+    await pg.evaluate(async () => {
+      const dims = () => [
+        document.documentElement.scrollWidth,
+        document.documentElement.scrollHeight,
+        Math.round(document.body.getBoundingClientRect().width),
+      ].join('x')
+      let last = dims()
+      let stable = 0
+      for (let i = 0; i < 60 && stable < 3; i++) {
+        await new Promise((r) => setTimeout(r, 100))
+        const now = dims()
+        stable = now === last ? stable + 1 : 0
+        last = now
+      }
+    })
   } else {
     await wait(500)
   }

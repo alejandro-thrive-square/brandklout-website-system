@@ -18,7 +18,11 @@
     <div class="padding-global">
       <div class="container-large">
         <div class="cover_inner">
-          <p class="eyebrow is-alternate cover_crumb"><a href="treatments.html">Treatments</a>&nbsp; / &nbsp;Injectables</p>
+          <!-- The separator is spaced by CSS, not by &nbsp;. importHtml collapses
+               entity whitespace to one ordinary space, so the published crumb was
+               17px narrower than the build and nothing reported it but the
+               comparison gate. Spacing that must survive the import goes in CSS. -->
+          <p class="eyebrow is-alternate cover_crumb"><a href="treatments.html">Treatments</a><span class="cover_crumb-sep">/</span>Injectables</p>
           <h1 class="cover_title" data-split data-split-now>Botox &amp; Xeomin in <em class="text-style-display-accent">Westlake</em>.</h1>
           <p class="cover_lede">
             Fifteen minutes, no anaesthetic, no downtime, placed by an oral and maxillofacial

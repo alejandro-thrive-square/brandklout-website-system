@@ -30,51 +30,49 @@ import zlib from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const SITE = path.resolve(HERE, '../04-design/.tmp/surgical-arts')
+const SITE = path.resolve(HERE, '../04-design/.tmp/med-spa')
 const FINAL = path.join(SITE, 'final-site')
 const TMP = path.join(HERE, '.tmp')
 
 const mediaMap = JSON.parse(fs.readFileSync(path.join(TMP, 'media-map.json'), 'utf8')).map
 const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'seo.json'), 'utf8'))
 
-/* THREE PAGES, since 2026-09-01. One after the client's cut, two once the neck
-   lift was rebuilt, three once the blepharoplasty followed it as the second
-   dossier. `treatments-data.mjs` -- the collection the twelve treatment rows
-   used to be derived from -- is still deleted, and this list is still written
-   out by hand rather than generated. That is deliberate: see the warning.
+/* ELEVEN PAGES — the second build, one per subtask on Asana task
+   1218112701145002. Written out by hand rather than derived from the
+   filesystem, and that is deliberate: see the warning.
 
    > [!WARNING]
    > This list IS the site, and trap 8 is the reason that matters. In replace
    > mode any stored page absent from `changedPages` is DELETED server-side.
-   > Removing a line here deletes a live page. The 2026-09-01 cut from eighteen
-   > to two happened exactly that way and was not reversible from this side.
+   > Removing a line here deletes a live page. On the sibling instance a cut
+   > from eighteen pages to two happened exactly that way and was not
+   > reversible from this side.
    >
-   > **Adding a line is safe.** The blepharoplasty apply is an addition: the
-   > live instance holds `index` and `neck-lift`, both are still listed, and
-   > `/blepharoplasty` is a slug that has existed before (it was one of the
-   > sixteen deleted) so it is being created rather than overwritten.
+   > **Adding a line is safe.** Every line below is an addition on this
+   > instance: it was provisioned on 2026-09-04 and had never been published
+   > to, so the first apply creates all eleven.
 
    Slug order still matters: `index` must exist first, because setup already
    created a page at that slug and it is the one we overwrite rather than
-   duplicate. */
+   duplicate.
+
+   `title` is the CMS page label the editor shows in its page list, not the
+   browser title — the <title> comes from seo.json via `seoTitle` below.
+
+   The six remaining treatment dossiers get a line each the day they are built.
+   `botox` is the only one so far and it is the template for the rest. */
 const PAGES = [
   { file: 'index.html', slug: 'index', title: 'Home' },
-  { file: 'neck-lift.html', slug: 'neck-lift', title: 'Neck Lift' },
-  { file: 'blepharoplasty.html', slug: 'blepharoplasty', title: 'Blepharoplasty' },
-  /* THE SEVEN CORE PAGES, built 2026-09-02 and NOT YET PUBLISHED. Listed so
-     the next apply carries them; every one is an addition (push-site.mjs
-     should report 10 written, 0 deleted). Five of these slugs are on
-     verify-live.mjs's GONE list from the 2026-09-01 cut and were moved to
-     ROUTES the same day they were listed here. */
-  { file: 'treatments.html', slug: 'treatments', title: 'Treatments & Fees' },
-  { file: 'meet-the-doctor.html', slug: 'meet-the-doctor', title: 'Meet the Doctor' },
-  { file: 'about.html', slug: 'about', title: 'About' },
-  { file: 'team.html', slug: 'team', title: 'Meet the Team' },
-  { file: 'memberships.html', slug: 'memberships', title: 'Memberships' },
+  { file: 'treatments.html', slug: 'treatments', title: 'Treatments' },
+  { file: 'botox.html', slug: 'botox', title: 'Botox & Xeomin' },
   { file: 'results.html', slug: 'results', title: 'Results & Reviews' },
+  { file: 'membership.html', slug: 'membership', title: 'Membership' },
+  { file: 'financing.html', slug: 'financing', title: 'Financing' },
+  { file: 'meet-the-doctor.html', slug: 'meet-the-doctor', title: 'Meet the Doctor' },
+  { file: 'team.html', slug: 'team', title: 'Meet the Team' },
+  { file: 'about.html', slug: 'about', title: 'About' },
   { file: 'book.html', slug: 'book', title: 'Book a Consultation' },
-  { file: 'myellevate-neck-lift.html', slug: 'myellevate-neck-lift', title: 'MyEllevate Neck Lift' },
-  { file: 'face-and-neck-lift.html', slug: 'face-and-neck-lift', title: 'Face & Neck Lift' },
+  { file: 'thank-you.html', slug: 'thank-you', title: 'Thank You' },
 ]
 
 const problems = []

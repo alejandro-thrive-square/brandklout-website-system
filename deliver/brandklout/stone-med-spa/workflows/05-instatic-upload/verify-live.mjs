@@ -17,42 +17,25 @@
  *
  * Usage: node verify-live.mjs
  */
-const BASE = 'https://stone-surgical-arts-production.up.railway.app'
+const BASE = 'https://stone-med-spa-production.up.railway.app'
 
-/* THREE ROUTES, since the blepharoplasty was published on 2026-09-01. This was
-   six core routes plus twelve derived from `treatments-data.mjs`; the client
-   kept the home page and the collection was deleted with the pages.
+/* ELEVEN ROUTES — the eleven core pages of the second build, one per subtask on
+   Asana task 1218112701145002. Every slug is the static build's filename minus
+   `.html`, except `index.html`, which Instatic serves at `/`.
 
-   Note what this gate can and cannot tell you now. It verifies the routes below
-   are healthy. It CANNOT tell you the retired ones are gone, because a route
-   absent from this list is simply not checked — which was the exact failure the
-   derived list was written to prevent, arriving from the other direction. GONE
-   exists for that half, and it is filled in.
+   Note what this gate can and cannot tell you. It verifies the routes below are
+   healthy. It CANNOT tell you an unlisted route is gone, because a route absent
+   from this list is simply not checked — GONE exists for that half.
 
-   `/neck-lift` is on BOTH lists' worth of history and on neither by accident:
-   the slug existed on the live instance carrying the v1 design, and it is being
-   overwritten rather than retired, so it belongs in ROUTES.
+   Add the six remaining treatment dossiers here the day they are published;
+   `botox` is the only one built so far and it is the template for the rest. */
+const ROUTES = ['/', '/treatments', '/botox', '/results', '/membership', '/financing', '/meet-the-doctor', '/team', '/about', '/book', '/thank-you']
 
-   `/blepharoplasty` MOVED FROM `GONE` TO `ROUTES` on 2026-09-01. It was one of
-   the sixteen the cut deleted, and it is back as the second dossier page. A
-   slug can be on one list or the other and never on both: leaving it on GONE
-   after publishing it would have failed this gate, which is the gate working. */
-const ROUTES = ['/', '/neck-lift', '/blepharoplasty', '/treatments', '/meet-the-doctor', '/about', '/team', '/memberships', '/results', '/book', '/myellevate-neck-lift', '/face-and-neck-lift']
-
-/* Routes that must NOT resolve. These were the sixteen slugs the 2026-09-01 cut
-   deleted, and this list is what turns the cut from "we did not upload them"
-   into a checked outcome. FIFTEEN now: `/blepharoplasty` was rebuilt and moved
-   to ROUTES the same day. Move a slug across rather than adding it to both. */
-const GONE = [
-  '/brow-lift',
-  '/buccal-fat-reduction',
-  '/cheek-and-chin-implants',
-  '/injectables',
-  '/jawline-implant',
-  '/laser-resurfacing',
-  '/lip-lift',
-  '/morpheus8',
-]
+/* Nothing has ever been retired here. This instance was provisioned on
+   2026-09-04 and its first publish was this site, so there is no earlier slug
+   to have gone stale. Fill this in the first time a page is deleted rather than
+   overwritten — an empty list is a true statement, not an unfinished one. */
+const GONE = []
 
 const fails = []
 const warns = []

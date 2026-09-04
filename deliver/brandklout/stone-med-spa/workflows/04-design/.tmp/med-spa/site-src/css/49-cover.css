@@ -103,6 +103,12 @@ html:not(.js) .cover_media > img {
 .cover_crumb {
   color: rgba(255, 255, 255, 0.72);
 }
+/* The breadcrumb separator. Spacing lives here rather than in `&nbsp;` in the
+   markup: entity whitespace does not survive Instatic's importHtml, which
+   collapses it to a single ordinary space and quietly narrows the crumb. */
+.cover_crumb-sep {
+  margin: 0 0.7rem;
+}
 .cover_crumb a {
   color: inherit;
 }

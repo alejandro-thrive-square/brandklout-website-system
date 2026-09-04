@@ -1,7 +1,8 @@
 # Stone Med Spa — handoff
 
-**Built 2026-09-03, rebuilt the same day.** Eleven core pages, local only. Nothing has been
-published and no Instatic instance exists for this brand.
+**Built 2026-09-03, rebuilt the same day, PUBLISHED 2026-09-04** to this brand's own Instatic
+instance at <https://stone-med-spa-production.up.railway.app>. Eleven core pages. That is the link
+for review; the admin is the same URL + `/admin`.
 
 > [!IMPORTANT]
 > **2026-09-03, EVENING: THE SECOND BUILD.** The first build (below, kept for its reasoning) was
@@ -120,12 +121,25 @@ drift apart. The sibling had this file, let its pages drift from it, and deleted
 
 ### Blocking a publish
 
-1. **No domain.** `seo.json` `site.origin` is `https://stonemedspa.example`, a deliberate
-   placeholder. Every canonical and `og:url` is built from it. **Publishing with this in place
-   would tell Google the canonical home of all eleven pages is a domain nobody owns.**
+> [!NOTE]
+> **Items 1 and 2 were what blocked the publish, and 1 is settled enough to have unblocked it on
+> 2026-09-04.** `site.origin` is now the Railway host — a real, resolvable origin, so canonicals
+> and `og:url` point at pages that exist. That is the right answer for a review site and the wrong
+> one for a launch; both still need the client. **Item 2 got MORE expensive, not less**, because
+> the trading name is now baked into the URL.
+
+1. **No domain.** `seo.json` `site.origin` was `https://stonemedspa.example`, a deliberate
+   placeholder, and publishing with that in place **would have told Google the canonical home of
+   all eleven pages is a domain nobody owns.** It is now
+   `https://stone-med-spa-production.up.railway.app`. When a real domain is bought: change
+   `site.origin`, rebuild, republish, and run `deliver/process/20-instatic-domain-origins` —
+   `PUBLIC_ORIGIN` on the Railway service must gain the new host **and keep the railway one**, or
+   every admin write answers `403 invalid origin` and every script in the upload workflow breaks.
 2. **Trading name unconfirmed.** Asana says *Stone Med Spa*; the live Instagram is
-   *@westlakeaesthetics*, "Westlake Medical Aesthetics". Changing it is `seo.json` plus the
-   wordmark in three partials — cheap now, expensive after review.
+   *@westlakeaesthetics*, "Westlake Medical Aesthetics". This used to be `seo.json` plus the
+   wordmark in three partials. It is now also the Railway project, the service, the generated
+   domain and `PUBLIC_ORIGIN`. Still doable in an hour, but ask before the client reviews at a URL
+   that turns out to be the wrong name.
 3. **NAP is not settled.** `project-overview.md` records the med spa phone as **(817) 383-8361**
    and suite **#110A**. The Surgical Arts footer carries a comment saying those exact two values
    were the *sister practice's* and were wrong there. So either the med spa genuinely shares the

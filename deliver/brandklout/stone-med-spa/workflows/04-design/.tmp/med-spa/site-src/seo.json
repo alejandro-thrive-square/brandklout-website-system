@@ -1,25 +1,28 @@
 {
   "_note": [
-    "ORIGIN IS A PLACEHOLDER AND MUST BE CHANGED BEFORE ANY PUBLISH.",
-    "No domain has been chosen for this brand (docs/project-overview.md, 'Domain'),",
-    "and stonesurgicalarts.com is already contested by the sibling build. Every",
-    "canonical and og:url below is built from site.origin, so a publish with this",
-    "value in place would tell Google the canonical home of all eleven pages is a",
-    "domain nobody owns. Change it here, once, and rebuild.",
+    "ORIGIN IS THE RAILWAY REVIEW HOST, NOT A PURCHASED DOMAIN.",
+    "Set 2026-09-04 to https://stone-med-spa-production.up.railway.app, which is where",
+    "the site is published for internal and client review. It is a real, resolvable",
+    "origin, so canonicals and og:url now point at pages that exist — the previous",
+    "placeholder (stonemedspa.example) pointed at a domain nobody owns.",
     "",
-    "THE TRADING NAME IS ALSO UNCONFIRMED. Asana says 'Stone Med Spa'; the live",
+    "WHEN A REAL DOMAIN IS BOUGHT: change site.origin here, rebuild, republish, and",
+    "follow deliver/process/20-instatic-domain-origins — PUBLIC_ORIGIN on the Railway",
+    "service must gain the new host or every admin write answers 403 invalid origin.",
+    "",
+    "THE TRADING NAME IS STILL UNCONFIRMED. Asana says 'Stone Med Spa'; the live",
     "Instagram account is @westlakeaesthetics, 'Westlake Medical Aesthetics'. If",
     "the client picks the second, this file and the three partials carrying the",
     "wordmark are the whole change."
   ],
   "site": {
     "name": "Stone Med Spa",
-    "origin": "https://stonemedspa.example",
+    "origin": "https://stone-med-spa-production.up.railway.app",
     "ogImage": "/assets/m-hero.webp"
   },
   "organization": {
     "@type": "MedicalBusiness",
-    "@id": "https://stonemedspa.example/#practice",
+    "@id": "https://stone-med-spa-production.up.railway.app/#practice",
     "name": "Stone Med Spa",
     "description": "Non-surgical facial aesthetics in Westlake, Texas, performed by Dr. Mona Stone, DDS, a board-certified oral and maxillofacial surgeon.",
     "medicalSpecialty": "Dermatology",
@@ -74,7 +77,7 @@
         "name": "Dr. Mona Stone, DDS",
         "medicalSpecialty": "OralAndMaxillofacialSurgery",
         "worksFor": {
-          "@id": "https://stonemedspa.example/#practice"
+          "@id": "https://stone-med-spa-production.up.railway.app/#practice"
         }
       }
     },
@@ -97,7 +100,7 @@
           "bodyLocation": "Face",
           "howPerformed": "Small units of botulinum toxin type A are injected into the specific muscles that fold the overlying skin, relaxing them for three to four months.",
           "provider": {
-            "@id": "https://stonemedspa.example/#practice"
+            "@id": "https://stone-med-spa-production.up.railway.app/#practice"
           }
         },
         {

@@ -139,4 +139,11 @@ nul
 # was protected by a local .tmp/.gitignore, which only helps the folder that
 # happens to have one - this covers every copy of the toolkit, including the
 # shared module in deliver/process/.
+#
+# The `-*` half is not decoration. `insta-api.mjs` writes ONE cache PER HOST now
+# (`.session-stone-med-spa-production.up.railway.app`), because a single shared
+# file replayed one client's cookie at another instance. The rename silently
+# walked every one of those files out from behind this rule, and the first one
+# turned up untracked-and-not-ignored in `git status`. Found 2026-09-04.
 **/.tmp/.session
+**/.tmp/.session-*

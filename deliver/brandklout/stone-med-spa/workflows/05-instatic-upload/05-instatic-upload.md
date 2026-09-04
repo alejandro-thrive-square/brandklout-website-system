@@ -1,21 +1,30 @@
-# Workflow: 05 - Instatic Upload (Stone Surgical Arts)
+# Workflow: 05 - Instatic Upload (Stone Med Spa)
 
 Takes the static build in
-[`04-design/.tmp/surgical-arts/final-site`](../04-design/.tmp/surgical-arts/final-site) and puts it
+[`04-design/.tmp/med-spa/final-site`](../04-design/.tmp/med-spa/final-site) and puts it
 into the client's own Instatic instance as an editable site — pages as node trees, CSS as style
 registry rules, images in the media library.
 
+> [!NOTE]
+> **This file arrived as a verbatim copy of Stone Surgical Arts'
+> [`21-instatic-upload.md`](../../../stone-surgical-arts/workflows/21-instatic-upload/21-instatic-upload.md)
+> and its traps 1–25 are that build's, found on that build.** They were all still true here, which
+> is the point of copying them; traps 23 and 24 in particular predicted two of this build's four
+> real defects before anyone looked. Traps 26 onward are this build's own. Where a trap names a
+> page or a stylesheet that does not exist here, it is the sibling's — read the mechanism, not the
+> filename.
+
 > [!WARNING]
-> **TWELVE PAGES, PUBLISHED 2026-09-02, `{"publishedPages":12}`, `12 written, 0 deleted`.** The
-> client lifted the hold the same morning (*"let's upload to Instatic, the team didn't leave any
-> feedback yet"*) and asked for the comparison page by page. `verify-live.mjs` clean: 12 routes,
-> 92 URLs, 205 asset references, 8 retired routes 404, 12/12 distinct titles. `compare-live.mjs`
-> went **168 → 122 → 48 → 5 → 2** findings across five applies in one morning, and the two that
-> remain are an 8px auto-margin on one page's footer container. Every step of that descent is a
-> trap below (21 to 24), and every one of them answered 200 on the way in.
+> **ELEVEN PAGES, PUBLISHED 2026-09-04, `{"publishedPages":11}`, `11 written, 0 deleted`, on a
+> brand-new instance provisioned the same day.** `verify-live.mjs` clean: 11 routes, 81 URLs, 166
+> asset references, 11/11 distinct titles. `compare-live.mjs` went **36 → 12 → 10 → 2** findings
+> across three applies, and what remains is comparison noise whose direction flips between runs —
+> trap 30 explains why it is not a publish difference and why it is deliberately not suppressed.
 >
-> **Ten photographs were re-uploaded at their 2200px source width** with the new `--only` flag on
-> `upload-media.mjs`; the library is 88 files, ten of them now orphans of the same name.
+> Four real defects, all of them silent, all of them shipped a 200: the whole site's dark band
+> published in the wrong charcoal (trap 26), two custom properties on classes vanished (trap 27),
+> **every image published with `alt=""`** (trap 28), and a breadcrumb lost its spacing (trap 23,
+> already written down). The media library is 73 files and 23 of them now carry alt text.
 
 > [!IMPORTANT]
 > **A THIRD-PARTY SCRIPT TAG CANNOT BE ADDED TO A PAGE. IT GOES IN THE BUNDLE.**
@@ -46,26 +55,61 @@ registry rules, images in the media library.
 
 | | |
 | :--- | :--- |
-| **URL** | `https://stone-surgical-arts-production.up.railway.app` |
-| **Railway** | workspace `Brandklout` → project **`Stone Surgical Arts`** → service `Stone Surgical Arts` |
-| **Image** | `ghcr.io/corebunch/instatic:latest`, volume `/app/storage`, DB `/app/storage/data/cms.db` |
-| **Renamed** | 2026-08-31. Project, service and generated domain all carry the business name now. The CLI cannot rename either, so it went through `backboard.railway.com/graphql/v2` (`projectUpdate`, `serviceUpdate`, `serviceDomainCreate`) with the token in `~/.railway/config.json`. **Rename BEFORE minting the domain** — a generated domain is derived from the service name at creation, which is why the old one was named after the Docker image. **`PUBLIC_ORIGIN` must move with it**, or every write answers `403 invalid origin`. |
-| **Owner** | `alejandro@thrivesquare.com` — the same credentials as Mason Park, created 2026-08-31 |
-| **Credentials** | `INSTATIC_BASE_URL` / `INSTATIC_EMAIL` / `INSTATIC_PASSWORD` in the repo-root `.env` |
+| **URL** | `https://stone-med-spa-production.up.railway.app` |
+| **Admin** | `https://stone-med-spa-production.up.railway.app/admin` — verified by `check-origins.mjs`, registered in [`20-instatic-domain-origins/sites.json`](../../../../process/20-instatic-domain-origins/sites.json) |
+| **Railway** | workspace `Brandklout` → project **`Stone Med Spa`** `ad4db12e-eb77-42b8-9021-4e84083fc99d` → service `Stone Med Spa` `001e714b-6bba-4cb4-b4e6-b60117e2ef1d`, env `production` `70523c39-dd75-4438-93bb-2c76f93b4c1a` |
+| **Image** | `ghcr.io/corebunch/instatic:latest`, volume `/app/storage`, DB `/app/storage/data/cms.db`, healthcheck `/health`, port 8080 |
+| **Owner** | `alejandro@thrivesquare.com` — the same credentials as Mason Park, created 2026-09-04 |
+| **Credentials** | `INSTATIC_BASE_URL` / `INSTATIC_EMAIL` / `INSTATIC_PASSWORD` in the repo-root `.env`, generated from `~/.webzite/.env` `[stone-med-spa]` |
 
-The instance was provisioned but **never set up** — `users`, `site` and `sessions` were all empty
-and `GET /admin/api/cms/setup/status` answered `needsSetup: true`. `POST /admin/api/cms/setup`
+### Provisioning it, in the order that matters
+
+The sibling was created from the Railway dashboard and then **renamed**, which is what taught us the
+ordering: a generated domain is derived from the service name **at creation**, so the sibling's first
+domain was named after the Docker image and `PUBLIC_ORIGIN` had to be moved with it afterwards. This
+instance was created name-first instead, in one script, and was correct from its first boot.
+
+The Railway CLI cannot create a project or name a service, so this goes through
+`backboard.railway.com/graphql/v2` with the token in `~/.railway/config.json`:
+
+1. `projectCreate` `{name: "Stone Med Spa", workspaceId, defaultEnvironmentName: "production"}`
+2. `serviceCreate` `{projectId, environmentId, name: "Stone Med Spa", source: {image: "ghcr.io/corebunch/instatic:latest"}}`
+3. `volumeCreate` `{projectId, environmentId, serviceId, mountPath: "/app/storage"}`
+4. `serviceDomainCreate` `{environmentId, serviceId, targetPort: 8080}` — **only now**, so the
+   generated host is `stone-med-spa-production.up.railway.app` and not the image's name
+5. `variableCollectionUpsert` — `DATABASE_URL=sqlite:/app/storage/data/cms.db`,
+   `PUBLIC_ORIGIN=https://<the domain from step 4>`, `PORT=8080`, `STATIC_DIR=/app/dist`,
+   `UPLOADS_DIR=/app/storage/uploads`, `RAILWAY_RUN_UID=0`, and a **fresh**
+   `INSTATIC_SECRET_KEY` (`randomBytes(32).toString('base64')` — never reuse another client's)
+6. `serviceInstanceUpdate` `{healthcheckPath: "/health"}`, then `serviceInstanceDeploy`
+
+A new instance is provisioned but **not set up** — `users`, `site` and `sessions` are empty and
+`GET /admin/api/cms/setup/status` answers `needsSetup: true`. `POST /admin/api/cms/setup`
 (`{siteName, email, password, displayName}`, password ≥ 12 chars) is a one-shot bootstrap that
-409s afterwards, so it is safe to leave public.
+409s afterwards, so it is safe to leave public. Then add the `[<client>]` section to
+`~/.webzite/.env` and re-run `node scripts/env-sync.mjs` in the worktree.
+
+> [!IMPORTANT]
+> **The business name has to be decided BEFORE step 1, because it is baked into the URL** and the
+> URL is what goes into `seo.json` as the origin, into every canonical and `og:url`, and into the
+> link the team reviews from. Here that name is *Stone Med Spa*, from Asana and from every string
+> in the build — but the live Instagram trades as *Westlake Medical Aesthetics* and the client has
+> not confirmed which is the trading name. If they pick the second, the project, the service and
+> the domain are all renamed, `PUBLIC_ORIGIN` moves with them, and `seo.json` is rebuilt.
 
 ## Execution Steps
 
 ```bash
-export RAILWAY_LINK_DIR=/path/to/a/dir/linked/to/the/Stone/project   # railway link -w Brandklout -p "Stone Surgical Arts"
+export RAILWAY_LINK_DIR=/path/to/a/dir/linked/to/the/project
+                               # railway link -p ad4db12e-eb77-42b8-9021-4e84083fc99d \
+                               #              -s "Stone Med Spa" -e production
 
 node install-fonts.mjs --apply  # 0. ONCE per instance: the two typefaces into Instatic's
                                #    own library. See trap 16
 node upload-media.mjs           # 1. images -> media library, writes .tmp/media-map.json
+node set-alt.mjs --apply        # 1b. alt text -> the media library, which is the ONLY place
+                               #    Instatic reads it from. Skip this and every image on the
+                               #    published site has alt="". See trap 28
 node build-import-input.mjs     # 2. assemble css + the page body, rewriting srcs, links AND
                                #    css url(), excising @font-face. See traps 14 and 16
 bash ship.sh                    # 3. ship to the container, run Instatic's own converters, retrieve
@@ -495,6 +539,107 @@ missing carousel arrows shifted every later icon's index so the diff reported th
 alignment findings that were the same icons one place apart. `compare-live.mjs` skips them; the
 icons' boxes are covered by their parents.
 
+### 26. The token asset must carry CUSTOM PROPERTIES ONLY — an ordinary declaration in it outranks the registry
+
+Found 2026-09-04 by `compare-live.mjs`, on all eleven pages at once: the footer published as
+`#272727` where the build is `#1e1e1e`, and one card on `/financing` published green where the
+build is white. Twenty-four of the run's thirty-six findings were this.
+
+`push-site.mjs` used to paste `00-fluid-root.css` and `01-tokens.css` into the token code asset
+**verbatim**, which was fine while those files declared nothing but custom properties. This build's
+`01-tokens.css` also carries `background-color` and `color` inside its three `[data-theme="…"]`
+blocks — a section flips its whole palette by carrying an attribute — and those two declarations
+rode along.
+
+The token asset is the **last** stylesheet in the cascade
+(`reset → framework → style → userStyles`). So a re-emitted `[data-theme="dark"] {background-color:
+var(--bg)}` lands after the registry's `.footer_component {background-color: var(--bg-alt)}`, and
+the two have **equal specificity** — an attribute selector and a class are both 0-1-0. Locally
+`01-tokens.css` is read before `22-footer.css` and the footer wins; published, the order is
+reversed and the theme wins. Nothing errors, nothing warns, and the site is simply the wrong
+colour in a way that reads as a design decision.
+
+**Fix:** `harvestRoots()` in `push-site.mjs` now filters every block it emits down to its
+custom-property declarations, and the token files go through it rather than in verbatim. The
+ordinary declarations are not lost — they are in the registry already, which is where they belong
+and where the Styles panel can edit them.
+
+### 27. A custom property is not always declared on `:root`
+
+Trap 13 is about `:root` blocks in stylesheets other than the token files. This is the same failure
+one step further out: `--marquee-duration` on `.marquee_component` (`40-motion.css`) and
+`--cad-label` on `.cadence_grid` (`52-cadence.css`, and again at a breakpoint in `90-wide.css`)
+are declared on **classes**, and trap 1 does not care where a custom property was written.
+
+The sibling hit this once, as `--pos` on `.compare_component`, and handled it by appending that one
+rule to the token asset by hand. Hand-handling does not scale and does not warn — this build would
+have published a marquee that does not scroll and a year grid whose labels size from nothing.
+
+**Fix:** harvest by declaration rather than by selector. Any rule declaring a custom property
+contributes its selector and only its custom-property declarations. The `MUST` assertion under it
+is now **derived** from the sources too — every `--x:` written anywhere in `site-src/css/` must
+appear in the asset — because the sibling's hand-written list of eight token names had already
+needed extending twice, and six of those eight names do not exist on this site at all, so the first
+run here refused a payload that was perfectly fine.
+
+### 28. `importHtml` DISCARDS `alt`, and the site publishes with `alt=""` on every image
+
+The worst of this build's four, because it is invisible to everyone who can see. The local build
+carries written alt text on every photograph — `audit.mjs` fails a page without it — and the first
+published home page had fifteen images and fifteen `alt=""`.
+
+It is not a bug. It is a design decision, and the platform says so out loud:
+
+```
+ImageEditor.tsx:10             alt text comes from the library asset
+                               (single source of truth — edit via the Media viewer)
+modules/base/image/index.ts:187  const alt = escapeHtml(media?.altText?.trim() ?? '')
+```
+
+A `base.image` node has no alt at all: `props` is `{src, loading, fetchPriority, decoding,
+htmlAttributes}` and the importer does not even park the attribute in `htmlAttributes`. **No amount
+of care in the markup can survive the import.**
+
+**Fix:** `set-alt.mjs`, a new step 1b. It harvests every `<img alt="…">` from `final-site/`, keys it
+by filename through `media-map.json`, and `PATCH`es `altText` onto the media asset
+(`PATCH /admin/api/cms/media/:id`). Idempotent, and it needs no re-import — alt lives on the asset,
+so a re-publish picks it up.
+
+The consequence to understand is that **alt is per ASSET here, not per usage.** Eight photographs
+on this site are used twice with different words. `set-alt.mjs` takes the longest and prints every
+conflict; where the two usages genuinely wanted different alt text, the answer is two assets, not a
+cleverer script.
+
+### 29. `&nbsp;` is not spacing that survives — this is trap 23, arriving from the other direction
+
+Trap 23 is about whitespace *between* inline elements. This is entity whitespace *inside* one:
+`<a>Treatments</a>&nbsp; / &nbsp;Injectables` published as `<a>Treatments</a> / Injectables`, and
+the breadcrumb came out 17px narrower than the build. `verify-live.mjs` was happy — the text is
+still there and the link still resolves — and only the geometry comparison saw it.
+
+**Any typographic spacing that must survive the import goes in CSS.** The separator is now a
+`<span class="cover_crumb-sep">` with a margin.
+
+### 30. The `container-large` 8px auto-margin finding is comparison NOISE, and its direction flips
+
+The residual on this publish, and worth writing down so nobody spends a morning on it twice.
+`compare-live.mjs` reports a `div.container-large` whose `margin: 0 auto` reads `8px` on one side
+and `0px` on the other — on a different page each run, and with a different number of findings each
+run (2, then 6, then 4 on one unchanged publish).
+
+**The proof that it is not a publish difference is that it changes sides.** Probing the two pages
+directly showed all ten containers identical; on the very next run the same two containers read
+`0px` locally and `8px` live, the exact opposite of what the gate had just reported.
+
+The mechanism is the scroll pass `capture()` performs before it measures. The pinned sections'
+spacers exist or do not exist depending on where GSAP is in its own setup, and `.padding-global`'s
+`5%` resolves against whatever the containing block is at that instant — 72px against 1440, 80px
+against 1600 — which moves an auto margin by exactly 8px. `compare-live.mjs` now waits for the
+document's own dimensions to hold still before measuring, which did **not** fix it.
+
+Do **not** add it to the `IGNORE` list. An 8px margin on this class could one day be real, and a
+suppressed finding is worse than a noisy one.
+
 ### The check: `compare-live.mjs`
 
 ```bash
@@ -526,23 +671,32 @@ first publish by exactly this check.
 
 ## Output Artifacts
 
-- `.tmp/media-map.json` — original filename → media library path, id, dimensions
+- `.tmp/media-map.json` — original filename → media library path, id, dimensions (73 files)
 - `.tmp/import-input.json.gz` — the payload shipped to the container
-- `.tmp/import-out.json` — 509 style rules, 9 conditions, 7 page node trees
-- `.tmp/converted/` — AVIF→WebP intermediates
+- `.tmp/import-out.json` — 985 style rules, 11 conditions, 11 page node trees
+- `.tmp/live-shots/` — full-page captures of the PUBLISHED site (reduced motion, so they show the
+  static state; use a real browser for the pins and scrubs)
+- `.tmp/probe-key.mjs` — looks one `compare-live.mjs` finding up on both sides, with the CSS rules
+  that set the property. Keys elements exactly as `compare-live.mjs` does, so a finding's key can
+  be pasted straight in. This is the tool for turning "some element differs" into "this rule does"
 
 ## What is NOT done
 
-- **Nav and footer are inlined into the page rather than being a Visual Component.** At eighteen
-  pages this was the strongest item on this list, because editing the nav meant eighteen edits. At
-  one page it costs nothing today and is still the right shape the moment a second page returns —
+- **Nav and footer are inlined into the page rather than being a Visual Component.** Eleven pages
+  means editing the nav is eleven edits. This is now the strongest item on the list —
   `changedComponents` / `changedLayouts` are already in the `PUT /site-document` contract.
 - **Per-page meta descriptions** — see trap 6.
-- **The domain.** The site is on its Railway URL. Pointing `stonesurgicalarts.com` here is
-  [HANDOFF §4](../04-design/.tmp/surgical-arts/HANDOFF.md), and after that run
+- **The domain, and before it the trading name.** The site is on its Railway URL, and `seo.json`'s
+  origin is that URL — a real, resolvable origin, unlike the `stonemedspa.example` placeholder it
+  replaced. When a domain is bought: change `site.origin`, rebuild, republish, and run
   [`20-instatic-domain-origins`](../../../../process/20-instatic-domain-origins) before sending
-  anyone the admin link.
-- **The booking form still posts nowhere** — HANDOFF §5.
+  anyone the admin link. Keep the railway host in `PUBLIC_ORIGIN` — `INSTATIC_BASE_URL` points at
+  it and every script here would start answering 403 without it.
+- **No brand identity, logo or favicon**, and no per-case photo consent — see `HANDOFF.md`.
+- **The booking form still posts nowhere.**
+- **The six remaining treatment dossiers.** `botox` is the built template; each of the others is a
+  body file, a line in `PAGES` here and a line in `ROUTES` in `verify-live.mjs` and `PAGES` in
+  `compare-live.mjs`. All three lists are written by hand on purpose — see the warning on `PAGES`.
 
 ## Version Control
 
