@@ -137,6 +137,29 @@ textarea {
 .u-focus-figure img {
   object-position: 100% 0%;
 }
+/* THE OTHER FOCAL POINTS, 2026-09-04. The client reported faces cut off by
+   their frames, and the probe (`crop-probe.mjs` + `crop-faces.py`) showed why:
+   forty `cover` rules and twelve `object-position` declarations, so most frames
+   centre-crop, and a centred crop of a portrait in a short frame takes the
+   forehead. Where a selector ALWAYS carries a person the value sits on the
+   selector. Where the same selector serves a person on one page and a room on
+   another (`.prep_media`, `.hubfaq_media`, `.offer_media`, `.steps_media`,
+   `.proof_media`), the value cannot go on the selector without shifting the
+   rooms too, so it goes on the element instead, through these. Each value is
+   measured from the photograph it was added for; do not blanket-apply one.
+   - top:   the head is in the top sixth (a standing or seated person).
+   - upper: the head is in the top third (a desk portrait, a group on a sofa).
+   - left:  two people in a landscape frame shown in a portrait one; keep the
+            left person whole rather than half of each. */
+.u-focus-top img {
+  object-position: 50% 12%;
+}
+.u-focus-upper img {
+  object-position: 50% 22%;
+}
+.u-focus-left img {
+  object-position: 12% 50%;
+}
 
 .u-sr-only {
   position: absolute;

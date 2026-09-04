@@ -611,6 +611,11 @@ span.catalogue_link {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Every catalogue image is a head-and-shoulders portrait with the face in
+     the top half. Centred, the phone frame (56% of the source) and the 1920
+     frame (74%) both cut across the forehead. 12% is measured against the
+     lowest chin of the set. */
+  object-position: 50% 12%;
   opacity: 0;
   transform: scale(1.06);
   transition: opacity 0.8s var(--ease), transform 1.4s var(--ease);
@@ -785,7 +790,10 @@ span.catalogue_link {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 15%;
+  /* 6%, down from 15%: at 1920 the frame is 738px on a 2:3 source and 15%
+     took the top of Dr. Stone's hair. The desk portrait is landscape and has
+     no vertical slack, so the value is only felt on the standing ones. */
+  object-position: 50% 6%;
   opacity: 0;
   transform: scale(1.05);
   transition: opacity 0.9s var(--ease), transform 1.6s var(--ease);
@@ -897,7 +905,13 @@ span.catalogue_link {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 70% 30%;
+  /* 18% horizontal, not 70%. The face in m-profile-dark sits at x 0.36 to
+     0.53 of a 16:9 source, and this frame is a portrait column (a 183px sliver
+     on a phone). At 70% every width showed the hand and the light and cut the
+     face at the left edge or lost it altogether; 18% centres the face at
+     every width, which is the only part of the picture that reads at 55%
+     opacity behind type. */
+  object-position: 18% 30%;
 }
 .standard_inner {
   position: relative;
@@ -1455,6 +1469,9 @@ span.catalogue_link {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* 4:5 cards of 2:3 portraits: 84% of the source is visible and the only
+     one that lost anything centred was the profile, at the top of the hair. */
+  object-position: 50% 30%;
   display: block;
   transition: transform 0.8s var(--ease);
 }

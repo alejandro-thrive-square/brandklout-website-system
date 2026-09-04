@@ -201,6 +201,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Same portraits as the home catalogue, same measurement: see
+     `.catalogue_media img` in 52-elevate.css. */
+  object-position: 50% 12%;
   display: block;
 }
 .catx_word {

@@ -43,6 +43,14 @@
   .concern_float {
     width: clamp(12rem, 14vw, 20rem);
   }
+  /* The dossier hero. Its 50rem cap was set against a 1440x800 frame; on a
+     1920x1080 screen it left an 800px band on a 2:3 photograph scaled to
+     2880px, which is 28% of the picture and less than one face. 56rem is
+     31%, which is the least that holds a face with the per-photograph
+     object-position in 51-dossier.css. Still bound by the viewport. */
+  .dhero_component {
+    min-height: clamp(30rem, 86vh, 56rem);
+  }
 }
 @media (min-width: 2400px) {
   .journey_readout {

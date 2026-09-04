@@ -350,6 +350,29 @@ textarea {
 .u-focus-figure img {
   object-position: 100% 0%;
 }
+/* THE OTHER FOCAL POINTS, 2026-09-04. The client reported faces cut off by
+   their frames, and the probe (`crop-probe.mjs` + `crop-faces.py`) showed why:
+   forty `cover` rules and twelve `object-position` declarations, so most frames
+   centre-crop, and a centred crop of a portrait in a short frame takes the
+   forehead. Where a selector ALWAYS carries a person the value sits on the
+   selector. Where the same selector serves a person on one page and a room on
+   another (`.prep_media`, `.hubfaq_media`, `.offer_media`, `.steps_media`,
+   `.proof_media`), the value cannot go on the selector without shifting the
+   rooms too, so it goes on the element instead, through these. Each value is
+   measured from the photograph it was added for; do not blanket-apply one.
+   - top:   the head is in the top sixth (a standing or seated person).
+   - upper: the head is in the top third (a desk portrait, a group on a sofa).
+   - left:  two people in a landscape frame shown in a portrait one; keep the
+            left person whole rather than half of each. */
+.u-focus-top img {
+  object-position: 50% 12%;
+}
+.u-focus-upper img {
+  object-position: 50% 22%;
+}
+.u-focus-left img {
+  object-position: 12% 50%;
+}
 
 .u-sr-only {
   position: absolute;
@@ -2059,6 +2082,10 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* 30%, measured. The frame is near-square and the source is 2:3 with the
+     face in the upper half and the hand under the chin; centred, the phone and
+     1920 crops both took the chin and the hand off. */
+  object-position: 50% 30%;
   display: block;
 }
 
@@ -2671,6 +2698,9 @@ textarea {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* The photograph is a square head-and-shoulders; the face is most of it.
+     35% keeps the hairline and the chin both in on the wide frames. */
+  object-position: 50% 35%;
   display: block;
 }
 @media (max-width: 991px) {
@@ -2680,7 +2710,9 @@ textarea {
   .ask_media {
     position: static;
     height: auto;
-    aspect-ratio: 16 / 9;
+    /* 5:4, not 16:9. A 16:9 band on a square portrait shows 56% of it and no
+       object-position holds a whole face in that; at 5:4 it shows 80%. */
+    aspect-ratio: 5 / 4;
   }
 }
 
@@ -3018,12 +3050,20 @@ a.ways_card:hover .ways_more span,
   object-position: 50% 66%;
   display: block;
 }
-/* THE ONE MODIFIER THIS COMPONENT HAS, added 2026-09-01 with the second dossier
-   page. 66% is right when the subject of the page is at the bottom of a face:
+/* THE MODIFIERS. The first was added 2026-09-01 with the second dossier page;
+   the other three on 2026-09-04, when the client reported faces cut off and the
+   probe showed that 66% held for none of the photographs actually in the
+   frame. Each value below is measured from its photograph at 1440 and 1920,
+   where the band is 27% to 36% of the source's height, so a value is a
+   statement about ONE picture: a new hero photograph gets its own line, not a
+   nearest match. 66% is right when the subject of the page is at the bottom of a face:
    the neck lift's hero has to show a mouth, a jaw and a throat. It is wrong
    when the subject is at the TOP of one. At 66% the blepharoplasty hero was a
    crop of a nose and a mouth, on a page about eyelids, which is the same class
-   of mistake as the forehead crop this rule was written to fix.
+   of mistake as the forehead crop this rule was written to fix. The MyEllevate
+   hero (m-neck-hand, face in the top third, hand and necklace below) takes the
+   same modifier since 2026-09-04: at 66% its 1920 frame showed the hand and
+   nothing of the person; 18% opens on the brow and keeps the jaw and the neck.
 
    18%, not 32%, because the frame is a wide band cut from a 2:3 portrait: only
    about 36% of the source's height is ever on screen at 1440, so the value is
@@ -3032,6 +3072,18 @@ a.ways_card:hover .ways_more span,
    horizontal slack to position with, so the crop is a vertical decision only. */
 .dhero_media.is-upper img {
   object-position: 50% 18%;
+}
+/* is-mid: the face fills the middle of the source (p-face-cat, the face and
+   neck lift hero, hairline at 0.20 and chin at 0.58). 42% opens on the eyes at
+   1920 with the chin just in, and on the hair at 1440. */
+.dhero_media.is-mid img {
+  object-position: 50% 42%;
+}
+/* is-lower: the face is in the middle but the page is about the jaw and the
+   throat (p-neck-profile, the neck lift hero, chin at 0.62). 45% keeps the
+   chin and the neck in at 1920 and gives up the top of the hair for it. */
+.dhero_media.is-lower img {
+  object-position: 50% 45%;
 }
 /* The scrim. Two stops rather than a flat wash: the type sits in the bottom
    third and darkening the whole photograph to serve it would throw away the
@@ -3543,6 +3595,11 @@ a.ways_card:hover .ways_more span,
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Felt only by the one square portrait in this slot (m-neck-soft, on the
+     MyEllevate page), whose face is 0.08 to 0.72 of the source: the phone
+     frame is 16:10 and centred it cut both the brow and the chin. The mirror
+     photographs are landscape and have no vertical slack here. */
+  object-position: 50% 35%;
   display: block;
 }
 .suits_body {
@@ -3730,6 +3787,11 @@ a.ways_card:hover .ways_more span,
 }
 .recov_figure:last-child img {
   aspect-ratio: 3 / 4;
+  /* The second figure is the full-length photograph outdoors on every
+     dossier, and on a phone the frame is 3:2 (below), which shows 44% of a
+     2:3 source: centred, that band ran from the shoulders to the knees. 12%
+     starts at the head. */
+  object-position: 50% 12%;
 }
 .recov_figure figcaption {
   margin-top: var(--space-xsmall);
@@ -4884,6 +4946,11 @@ span.catalogue_link {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Every catalogue image is a head-and-shoulders portrait with the face in
+     the top half. Centred, the phone frame (56% of the source) and the 1920
+     frame (74%) both cut across the forehead. 12% is measured against the
+     lowest chin of the set. */
+  object-position: 50% 12%;
   opacity: 0;
   transform: scale(1.06);
   transition: opacity 0.8s var(--ease), transform 1.4s var(--ease);
@@ -5058,7 +5125,10 @@ span.catalogue_link {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 50% 15%;
+  /* 6%, down from 15%: at 1920 the frame is 738px on a 2:3 source and 15%
+     took the top of Dr. Stone's hair. The desk portrait is landscape and has
+     no vertical slack, so the value is only felt on the standing ones. */
+  object-position: 50% 6%;
   opacity: 0;
   transform: scale(1.05);
   transition: opacity 0.9s var(--ease), transform 1.6s var(--ease);
@@ -5170,7 +5240,13 @@ span.catalogue_link {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  object-position: 70% 30%;
+  /* 18% horizontal, not 70%. The face in m-profile-dark sits at x 0.36 to
+     0.53 of a 16:9 source, and this frame is a portrait column (a 183px sliver
+     on a phone). At 70% every width showed the hand and the light and cut the
+     face at the left edge or lost it altogether; 18% centres the face at
+     every width, which is the only part of the picture that reads at 55%
+     opacity behind type. */
+  object-position: 18% 30%;
 }
 .standard_inner {
   position: relative;
@@ -5728,6 +5804,9 @@ span.catalogue_link {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* 4:5 cards of 2:3 portraits: 84% of the source is visible and the only
+     one that lost anything centred was the profile, at the top of the hair. */
+  object-position: 50% 30%;
   display: block;
   transition: transform 0.8s var(--ease);
 }
@@ -6044,6 +6123,9 @@ span.catalogue_link {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Same portraits as the home catalogue, same measurement: see
+     `.catalogue_media img` in 52-elevate.css. */
+  object-position: 50% 12%;
   display: block;
 }
 .catx_word {
@@ -6609,6 +6691,11 @@ a.fee_row:hover .fee_go {
   grid-row: 1 / 3;
   aspect-ratio: 2 / 3;
 }
+/* The full-length portrait has her head at the very top of the frame; the
+   2:3 slot is a hair narrower than the source, so a centred crop clipped it. */
+.beyond_grid .is-a img {
+  object-position: 50% 0%;
+}
 .beyond_grid .is-b {
   aspect-ratio: 1;
 }
@@ -6665,6 +6752,11 @@ a.fee_row:hover .fee_go {
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* The team on the sofa, heads at 0.04 to 0.24 of the source, in a band
+     that is 46% of it at 1920. Centred, every head was above the frame; 22%,
+     the value the taller team-page hero uses for the same photograph, still
+     took the top of every head here. 6% opens on the wall above them. */
+  object-position: 50% 6%;
 }
 .lead_card {
   position: absolute;
@@ -6947,6 +7039,11 @@ a.fee_row:hover .fee_go {
 .gallery_item.is-2x1 { grid-column: span 2; }
 .gallery_item.is-2x2 { grid-column: span 2; grid-row: span 2; }
 .gallery_item.is-4x1 { grid-column: span 4; }
+/* The 2x2 tile is the one portrait in the gallery (the laugh on the phone);
+   her face is at 0.15 to 0.32 of it and the phone tile shows 54%. */
+.gallery_item.is-2x2 img {
+  object-position: 50% 15%;
+}
 
 /* --- the two sister practices ---------------------------------------------------- */
 .brands_component {
@@ -7157,6 +7254,13 @@ a.fee_row:hover .fee_go {
   }
   .steps_media {
     aspect-ratio: 16 / 10;
+  }
+  /* The third step is the treatment photograph: two faces, one at the top
+     of a 2:3 source and one in the middle. 16:10 shows 42% of that and no
+     object-position holds both, so this one stays 4:5 on a phone and takes
+     `.u-focus-top` for the rest. */
+  .steps_media.is-tall {
+    aspect-ratio: 4 / 5;
   }
   .gallery_grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));
@@ -8337,6 +8441,14 @@ a:hover > .offer_media img,
   }
   .concern_float {
     width: clamp(12rem, 14vw, 20rem);
+  }
+  /* The dossier hero. Its 50rem cap was set against a 1440x800 frame; on a
+     1920x1080 screen it left an 800px band on a 2:3 photograph scaled to
+     2880px, which is 28% of the picture and less than one face. 56rem is
+     31%, which is the least that holds a face with the per-photograph
+     object-position in 51-dossier.css. Still bound by the viewport. */
+  .dhero_component {
+    min-height: clamp(30rem, 86vh, 56rem);
   }
 }
 @media (min-width: 2400px) {

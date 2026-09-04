@@ -209,6 +209,11 @@
 .gallery_item.is-2x1 { grid-column: span 2; }
 .gallery_item.is-2x2 { grid-column: span 2; grid-row: span 2; }
 .gallery_item.is-4x1 { grid-column: span 4; }
+/* The 2x2 tile is the one portrait in the gallery (the laugh on the phone);
+   her face is at 0.15 to 0.32 of it and the phone tile shows 54%. */
+.gallery_item.is-2x2 img {
+  object-position: 50% 15%;
+}
 
 /* --- the two sister practices ---------------------------------------------------- */
 .brands_component {
@@ -419,6 +424,13 @@
   }
   .steps_media {
     aspect-ratio: 16 / 10;
+  }
+  /* The third step is the treatment photograph: two faces, one at the top
+     of a 2:3 source and one in the middle. 16:10 shows 42% of that and no
+     object-position holds both, so this one stays 4:5 on a phone and takes
+     `.u-focus-top` for the rest. */
+  .steps_media.is-tall {
+    aspect-ratio: 4 / 5;
   }
   .gallery_grid {
     grid-template-columns: repeat(2, minmax(0, 1fr));

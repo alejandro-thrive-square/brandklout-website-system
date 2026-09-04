@@ -272,6 +272,11 @@
   grid-row: 1 / 3;
   aspect-ratio: 2 / 3;
 }
+/* The full-length portrait has her head at the very top of the frame; the
+   2:3 slot is a hair narrower than the source, so a centred crop clipped it. */
+.beyond_grid .is-a img {
+  object-position: 50% 0%;
+}
 .beyond_grid .is-b {
   aspect-ratio: 1;
 }
@@ -328,6 +333,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* The team on the sofa, heads at 0.04 to 0.24 of the source, in a band
+     that is 46% of it at 1920. Centred, every head was above the frame; 22%,
+     the value the taller team-page hero uses for the same photograph, still
+     took the top of every head here. 6% opens on the wall above them. */
+  object-position: 50% 6%;
 }
 .lead_card {
   position: absolute;

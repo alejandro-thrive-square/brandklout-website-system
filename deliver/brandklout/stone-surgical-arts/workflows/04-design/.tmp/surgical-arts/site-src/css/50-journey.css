@@ -378,6 +378,10 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* 30%, measured. The frame is near-square and the source is 2:3 with the
+     face in the upper half and the hand under the chin; centred, the phone and
+     1920 crops both took the chin and the hand off. */
+  object-position: 50% 30%;
   display: block;
 }
 
@@ -990,6 +994,9 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* The photograph is a square head-and-shoulders; the face is most of it.
+     35% keeps the hairline and the chin both in on the wide frames. */
+  object-position: 50% 35%;
   display: block;
 }
 @media (max-width: 991px) {
@@ -999,7 +1006,9 @@
   .ask_media {
     position: static;
     height: auto;
-    aspect-ratio: 16 / 9;
+    /* 5:4, not 16:9. A 16:9 band on a square portrait shows 56% of it and no
+       object-position holds a whole face in that; at 5:4 it shows 80%. */
+    aspect-ratio: 5 / 4;
   }
 }
 

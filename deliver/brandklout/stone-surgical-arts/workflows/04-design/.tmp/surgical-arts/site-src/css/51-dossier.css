@@ -103,12 +103,20 @@
   object-position: 50% 66%;
   display: block;
 }
-/* THE ONE MODIFIER THIS COMPONENT HAS, added 2026-09-01 with the second dossier
-   page. 66% is right when the subject of the page is at the bottom of a face:
+/* THE MODIFIERS. The first was added 2026-09-01 with the second dossier page;
+   the other three on 2026-09-04, when the client reported faces cut off and the
+   probe showed that 66% held for none of the photographs actually in the
+   frame. Each value below is measured from its photograph at 1440 and 1920,
+   where the band is 27% to 36% of the source's height, so a value is a
+   statement about ONE picture: a new hero photograph gets its own line, not a
+   nearest match. 66% is right when the subject of the page is at the bottom of a face:
    the neck lift's hero has to show a mouth, a jaw and a throat. It is wrong
    when the subject is at the TOP of one. At 66% the blepharoplasty hero was a
    crop of a nose and a mouth, on a page about eyelids, which is the same class
-   of mistake as the forehead crop this rule was written to fix.
+   of mistake as the forehead crop this rule was written to fix. The MyEllevate
+   hero (m-neck-hand, face in the top third, hand and necklace below) takes the
+   same modifier since 2026-09-04: at 66% its 1920 frame showed the hand and
+   nothing of the person; 18% opens on the brow and keeps the jaw and the neck.
 
    18%, not 32%, because the frame is a wide band cut from a 2:3 portrait: only
    about 36% of the source's height is ever on screen at 1440, so the value is
@@ -117,6 +125,18 @@
    horizontal slack to position with, so the crop is a vertical decision only. */
 .dhero_media.is-upper img {
   object-position: 50% 18%;
+}
+/* is-mid: the face fills the middle of the source (p-face-cat, the face and
+   neck lift hero, hairline at 0.20 and chin at 0.58). 42% opens on the eyes at
+   1920 with the chin just in, and on the hair at 1440. */
+.dhero_media.is-mid img {
+  object-position: 50% 42%;
+}
+/* is-lower: the face is in the middle but the page is about the jaw and the
+   throat (p-neck-profile, the neck lift hero, chin at 0.62). 45% keeps the
+   chin and the neck in at 1920 and gives up the top of the hair for it. */
+.dhero_media.is-lower img {
+  object-position: 50% 45%;
 }
 /* The scrim. Two stops rather than a flat wash: the type sits in the bottom
    third and darkening the whole photograph to serve it would throw away the
@@ -628,6 +648,11 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
+  /* Felt only by the one square portrait in this slot (m-neck-soft, on the
+     MyEllevate page), whose face is 0.08 to 0.72 of the source: the phone
+     frame is 16:10 and centred it cut both the brow and the chin. The mirror
+     photographs are landscape and have no vertical slack here. */
+  object-position: 50% 35%;
   display: block;
 }
 .suits_body {
@@ -815,6 +840,11 @@
 }
 .recov_figure:last-child img {
   aspect-ratio: 3 / 4;
+  /* The second figure is the full-length photograph outdoors on every
+     dossier, and on a phone the frame is 3:2 (below), which shows 44% of a
+     2:3 source: centred, that band ran from the shoulders to the knees. 12%
+     starts at the head. */
+  object-position: 50% 12%;
 }
 .recov_figure figcaption {
   margin-top: var(--space-xsmall);
