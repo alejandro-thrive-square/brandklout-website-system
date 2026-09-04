@@ -28,6 +28,7 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 - **Sales, Manage and Growth pillars**: not in this repository. This repo is the Deliver pillar scoped to Brandklout; the other three live in `webzite-agentic-workflow`.
 - **Pricing & Timeline Rules**: not in this repository, and they do **not** apply here. Brandklout is a partner engagement, not a per-page client — never compute or record a price, rate, quote or cost anywhere under `deliver/brandklout/`.
 - **Deliver Pillar**: [deliver/DELIVER_SYSTEM_RULES.md](./deliver/DELIVER_SYSTEM_RULES.md)
+- **Credentials**: [SYSTEM_RULES.md §4.2.2](./SYSTEM_RULES.md) - `~/.webzite/.env` is the single master file; every worktree `.env` is generated from it and must never be hand-edited
 - **MCP Index**: [mcp-servers/MCP_INDEX.md](./mcp-servers/MCP_INDEX.md) - all MCP servers used across the project
 - **MCP Access Model**: [mcp-servers/ACCESS_MODEL.md](./mcp-servers/ACCESS_MODEL.md) - folder-based MCP permissions and profiles
 - **Webflow MCP Setup**: [mcp-servers/webflow/setup.md](./mcp-servers/webflow/setup.md)
@@ -40,7 +41,8 @@ Welcome, agent. You are operating within the **Webzite Agentic Workflow** system
 5. **MCP Management**: MCP servers are shared infrastructure in `mcp-servers/`. Register new servers with `claude mcp add --scope project`. Before using any MCP, read the nearest `mcp-access.md` and the referenced profile in `mcp-servers/profiles/`. See [MCP Index](./mcp-servers/MCP_INDEX.md) and [MCP Access Model](./mcp-servers/ACCESS_MODEL.md).
 6. **Directive Improvement Loop**: At task completion, update the related directive `.md` files used to learn or execute the process whenever the task reveals a missing step, changed requirement, new decision, corrected assumption, or reusable process improvement.
 7. **Runbook Loop**: Also at task completion, update `.claude/RUNBOOK.md` in the current worktree — Done (with the commit SHA), Next, and especially **Gotchas**. Write it for a reader with no memory of your session, and read it yourself when you pick a worktree up; it is no longer injected for you. This is a separate obligation from the directive loop above: directives capture reusable process, the runbook captures the live state of *this* worktree.
-8. **Version Control**: This system is managed via a GitHub repository. Follow the version control rules in [SYSTEM_RULES.md - Section 4](./SYSTEM_RULES.md). Commit lightweight `.tmp/` workflow artifacts when useful, but never commit `.env` files, secrets, or binary/media assets. All new `.md` files must include a Version Control section.
+8. **Credentials**: Never hand-edit a worktree `.env` — it is generated from the single master file at `~/.webzite/.env` and rewritten on every `npm install`. A missing credential is added to the master (`[shared]` for account-wide, `[<client>]` for one client), then `node scripts/env-sync.mjs` in the worktree. Read [SYSTEM_RULES.md §4.2.2](./SYSTEM_RULES.md) before touching any secret, and never paste a value into a `.md`, a commit, or a chat.
+9. **Version Control**: This system is managed via a GitHub repository. Follow the version control rules in [SYSTEM_RULES.md - Section 4](./SYSTEM_RULES.md). Commit lightweight `.tmp/` workflow artifacts when useful, but never commit `.env` files, secrets, or binary/media assets. All new `.md` files must include a Version Control section.
 
 ## Version Control
 

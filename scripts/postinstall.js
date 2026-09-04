@@ -53,17 +53,29 @@ function findBash() {
   return candidates.find((c) => fs.existsSync(c)) || null;
 }
 
+// No early exit when bash is missing: the credential sync below is pure Node
+// and must still run.
 const bash = findBash();
 if (!bash) {
   console.log(
     "postinstall: no Git Bash found — skipping the worktree narrowing.\n" +
       "  Run it by hand from Git Bash:  bash scripts/sparsify-worktree.sh",
   );
-  process.exit(0);
+} else {
+  const result = spawnSync(bash, [script], { stdio: "inherit" });
+  if (result.error) {
+    console.log(`postinstall: could not run ${script} (${result.error.message}) — skipped.`);
+  }
 }
 
-const result = spawnSync(bash, [script], { stdio: "inherit" });
-if (result.error) {
-  console.log(`postinstall: could not run ${script} (${result.error.message}) — skipped.`);
+// Resolve the master credential file into this worktree's .env. Runs in the
+// MAIN worktree too, unlike the narrowing above — main gets [shared] only.
+// Node, not bash, so it works even where findBash() came up empty.
+const envSync = spawnSync(process.execPath, [path.join(__dirname, "env-sync.mjs")], {
+  stdio: "inherit",
+});
+if (envSync.error) {
+  console.log(`postinstall: could not run env-sync.mjs (${envSync.error.message}) — skipped.`);
 }
+
 process.exit(0);

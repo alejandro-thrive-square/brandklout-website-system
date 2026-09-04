@@ -95,7 +95,21 @@ Then activate the venv again.
 
 ## Step 4: Restore Secrets
 
-Create the root `.env` file from the private credential source. This file is intentionally ignored by Git.
+Create the **master** credential file at `~/.webzite/.env` from the private credential source, using
+[.env.example](./.env.example) as the template. This is the only credential file you create by hand.
+
+Every worktree's `.env`, including this repo's own, is then generated from it:
+
+```powershell
+node scripts/env-sync.mjs
+```
+
+`npm install` runs that automatically, and Orca runs `npm install` whenever it creates a worktree, so
+in normal use a new workspace arrives with its credentials already in place. The master lives outside
+every repo so a fresh clone cannot overwrite it and Git cannot see it. See
+[SYSTEM_RULES.md §4.2.2](./SYSTEM_RULES.md).
+
+The generated repo-root `.env` is intentionally ignored by Git.
 
 Required values depend on the workflows being used, but commonly include:
 
@@ -324,7 +338,7 @@ Before declaring the new computer ready, confirm:
 - Repository cloned and clean.
 - Correct branch checked out.
 - Python venv created and dependencies installed.
-- Root `.env` restored and ignored.
+- Master `~/.webzite/.env` restored; `node scripts/env-sync.mjs` run; the generated root `.env` ignored.
 - GitHub authentication works.
 - VPS SSH authentication works.
 - `rclone` remote `vps` works.

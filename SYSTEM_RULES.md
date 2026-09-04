@@ -223,6 +223,47 @@ Sparse-checkout removes *tracked* files only. Assets mirrored in by `mirror-asse
 git-ignored, so other clients can survive as asset-only leftover directories; the script lists them
 and prints the `rm -rf`, but never deletes on its own.
 
+#### 4.2.2 Credentials: one master file, generated per worktree
+
+**`~/.webzite/.env` is the only credential file anyone edits.** Every worktree's `.env` — this
+repo's main checkout included — is a **generated artifact**, rewritten by `scripts/env-sync.mjs` on
+every `npm install`, which is Orca's per-worktree setup hook. Hand-edit a worktree `.env` and the
+next sync discards it. Rotate a credential in the master, run `npm install` where you need it, done.
+
+```bash
+node scripts/env-sync.mjs --check      # what would be written (key NAMES only, never values)
+node scripts/env-sync.mjs              # write this worktree's .env
+node scripts/env-sync.mjs --force      # overwrite a .env that was not generated (backs it up first)
+```
+
+The master lives **outside every repo** on purpose: no clone, no `git clean -x`, and no worktree
+deletion can take it, and it cannot be committed by accident. `WEBZITE_ENV_MASTER` overrides the
+path. `.env.example` is the template.
+
+It is sectioned, and the sections are load-bearing:
+
+| Section | Reaches | Holds |
+| :--- | :--- | :--- |
+| `[shared]` | every worktree | account-wide keys — one Browserbase, one Cloudflare account token, one Vimeo, one Figma |
+| `[<client>]` | only that client's worktree | `INSTATIC_BASE_URL`, the per-instance `INSTATIC_PASSWORD`, per-zone Cloudflare tokens, host credentials |
+| `[aliases]` | — | worktree name → section, for names that do not match by prefix |
+
+**Why sections rather than one flat list.** `INSTATIC_BASE_URL` differs per client and the shared
+Instatic toolkit deliberately refuses to guess it ([18-instatic-embeds](./deliver/process/18-instatic-embeds/18-instatic-embeds.md)):
+a flat file holding several would resolve first-match and publish one client's plugin to **another
+client's site**. A missing section fails loudly instead. For the same reason the **main worktree gets
+`[shared]` only** — no client's site URL can leak into work done there.
+
+Section names match the client folder under `deliver/brandklout/`. A worktree picks its section from
+its own **directory name** (what was typed into Orca) and then the branch's last path segment, with
+the same `bk-` strip and longest-first `-suffix` trim the narrowing script uses. Ambiguity is a hard
+error naming the fix: add a line to `[aliases]`.
+
+**Name host credentials with a prefix.** `USERNAME`, `HOSTNAME` and `PORT` are all set by Windows
+itself, and every `.env` loader in this system fills in only variables that are **not already set**,
+so an unprefixed `USERNAME` silently resolves to the Windows login rather than the host account.
+Hence `SITEGROUND_USERNAME`, not `USERNAME`.
+
 #### 4.2.1 Worktree → main asset mirror (automatic)
 
 Excluding media from Git is load-bearing in three places, so the rule does not bend: it keeps merges

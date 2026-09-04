@@ -92,7 +92,7 @@ Run this whenever a domain is pointed at an Instatic site — a launch, a re-poi
 6. **Prove it against the RUNNING server**: `node check-origins.mjs --all`. Every host must read `OK`,
    **zero `TRAP` lines**, exit 0. Do not substitute "I checked the variable in Railway" — Mason Park's
    variable read correctly for a day while the running container ignored it.
-7. **Update the client's `.env`** in their worktree — `INSTATIC_BASE_URL` must be an origin that passes the gate, or the whole `18-instatic-embeds` toolkit starts failing with 403s that look like permissions.
+7. **Update the client's `[<client>]` section in `~/.webzite/.env`**, then re-run `node scripts/env-sync.mjs` in their worktree — `INSTATIC_BASE_URL` must be an origin that passes the gate, or the whole `18-instatic-embeds` toolkit starts failing with 403s that look like permissions. Editing the worktree `.env` directly does not survive the next sync.
 8. **Only now** send the link, and send the one the checker printed.
 
 ## Read the live value: you have Railway CLI access
@@ -221,4 +221,4 @@ in-browser editor state: the collab socket drops. Do not redeploy while someone 
 - `TRIGGER_PROMPT.txt` — the agent entry point
 
 ## Version Control
-Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md). `check-origins.mjs`, `sites.json` and this `.md` are committed. `sites.json` holds no secrets — hostnames only; credentials stay in the per-worktree `.env`.
+Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md). `check-origins.mjs`, `sites.json` and this `.md` are committed. `sites.json` holds no secrets — hostnames only; credentials stay in `~/.webzite/.env` and reach a worktree only through the generated `.env`.
