@@ -9,7 +9,20 @@ that is actually live. **Landing pages for ad campaigns**, not site work.
 43 URLs. Dr. Mona Stone, DDS, 72 Andorra Dr #110A, Westlake, TX 76262, (817) 383-8361.
 The same Webflow site also serves `stonesurgicalarts.com` — see gotcha 2 and 5.
 
-## Status: landing page is a STRICT CLONE of Arvada, STAGED not live (2026-09-03, 4th session)
+## Status: all three pages fixed and STAGED, not live (2026-09-03, 4th session)
+
+Landing page is a strict clone of Arvada. Three post-review fixes then landed on all three pages
+(ARVADA-PARITY-GAP.md section 5c):
+* **Landing FAQ is now real, editable Webflow elements**, not an HtmlEmbed. Only a copy-free
+  behaviour script stays in an embed.
+* **Consult page** gained the closing CTA / proof section it was missing.
+* **Thank-you page** had *another practice's content live on it*: Livewell's "what happens next"
+  (offering a scan at their Fairfax Station practice) and **Arvada's entire FAQ**, including
+  Arvada's prices ($7,895 to $17,795), Dr. Bennett's name, and CareCredit/PatientFi. Plus Stone's
+  own hero photo carried `alt="Dr. Gregory Bennett of Arvada Dental Center & Implants"`. All
+  removed; both sections rebuilt to Arvada's structure with Stone's sourced content.
+
+## Status: landing page is a STRICT CLONE of Arvada (2026-09-03, 4th session)
 
 Brief tightened mid-session by a teammate: **same components, same layout, same item counts as
 Arvada, different content**. No extra buttons, no extra labels. 13 extras were stripped out
@@ -208,3 +221,25 @@ campaign-specific form for attribution) and needs another full-site publish.
 17. **Blank YouTube iframes in Chrome here are NordVPN Threat Protection, not the page.** All 13
     of Stone's video ids were confirmed live via `curl` against the oEmbed endpoint while the same
     embeds rendered as empty dark boxes in the browser.
+
+18. **Other clients' sections get pasted into Stone's pages, and they sit unpublished in the
+    Designer where a live-page fetch will not show them.** The thank-you page carried a Livewell
+    block and Arvada's whole FAQ (their pricing, their doctor) that were invisible on the live
+    URL. Before trusting any page, walk the **Designer element tree**, not the published HTML.
+    Foreign blocks are easy to spot by class prefix: `lw-`, `ty-`, `imp-`, `qz-`, `csm-`,
+    `faq-item2`, `service_item` are Livewell/Arvada namespaces, not `axon-`.
+
+19. **Scan element `settings`, not just text, when hunting foreign content.** An image's `altText`
+    is not a text node, so a walk over `String` nodes misses it. Stone's own photo of Dr. Stone
+    was captioned "Dr. Gregory Bennett of Arvada Dental Center & Implants" and the first sweep
+    reported the page clean.
+
+20. **Prefer real elements over HtmlEmbed for anything the client may want to edit.** An embedded
+    FAQ cannot be edited in the Designer. The pattern that works: build the items as real
+    elements, then add ONE embed holding only `<style>` + `<script>` that attaches behaviour by
+    class. See `content_v3.faq_html()` and `FAQ_BEHAVIOUR`.
+
+21. **The Webflow CDN serves a stale page for a while after a staging publish.** A fetch straight
+    after publishing showed the old FAQ embed and no consult CTA while the Designer tree already
+    had the new elements. Re-fetch with a cache-busting query and `Cache-Control: no-cache`, or
+    verify against the element tree.

@@ -248,6 +248,50 @@ Arvada's footer carries **no Privacy Policy or Terms links**, so the strict clon
 Google Ads generally expects a reachable privacy policy on a paid landing page. Say the word and
 the two links go back into the footer legal line; it is a one-line change.
 
+## 5c. Post-review fixes, all three pages (2026-09-03)
+
+Built by `.tmp/build/content_v3.py` + `build_v3.py` (surgical: nothing outside the named blocks
+is touched).
+
+### Landing: the FAQ is now editable
+
+It was a single `HtmlEmbed`, so no one could edit the copy in the Designer. Rebuilt as **real
+Webflow elements** (`axon-fq_*`): each question is an `h3`, each answer a `p`. A single
+behaviour-only embed supplies the open/close script and carries **no copy at all**, so editing
+questions and answers in the Designer is safe and that embed never needs to change. Verified live:
+10 real items, first open by default, click and keyboard toggle both work, `aria-expanded` tracks
+state.
+
+### Consult: the missing closing CTA
+
+Added `axon-qz_proof`, cloned from Arvada's `section_qz-proof`: drifting background text, centred
+label, an `h2` with an italic accent, and the rating badge. No button, matching Arvada.
+Stone copy: "Why Others Chose Stone" / "One surgeon, *start to finish*" /
+"255+ Five-Star Reviews · Board-Certified Surgeon", drift reads "implants · artistry · precision".
+
+### Thank-you: two other practices' content was live on the page
+
+The page carried **four blocks that should not have been there**. None were built in this session;
+they were pasted in earlier and were sitting unpublished in the Designer.
+
+| Removed | What it actually was |
+| :--- | :--- |
+| `ty-div section_ty-expect lw-sec` | **Livewell's** "what happens next", offering a scan "at our **Fairfax Station** practice" (Livewell is in Virginia; Stone is in Westlake, TX) |
+| `ty-div section_ty-faq lw-sec` | **Arvada's entire FAQ**: "How much does All-On-4 cost in **Arvada, Colorado**?", "All-On-4 at **Arvada Dental Center & Implants** typically ranges from **$7,895 to $17,795** per arch", "Why does **Dr. Bennett**...", plus CareCredit and PatientFi, who are not Stone's finance partners |
+| Stone's own "Why the Calendar Matters" | duplicated the delay-risk list; Arvada has no standalone equivalent |
+| alt text on the hero image | Stone's own photo of Dr. Stone carried `alt="Dr. Gregory Bennett of Arvada Dental Center & Implants"` |
+
+The "what happens next" and FAQ blocks were then rebuilt to Arvada's structure with Stone's own
+sourced content: a two-column expect grid (3 numbered steps + 4 delay risks) with the
+"No cost, no obligation" reassurance line, and an 11-item editable accordion (matching Arvada's
+count, but 11 *distinct* questions; Arvada's own list repeats several).
+
+The page is now Arvada's 7-block shape: header, hero, expect, why, FAQ, CTA, footer.
+
+**A scan of all three pages for foreign copy, foreign class names, and foreign `alt` text now
+comes back clean.** Note that the first scan missed the alt text because it only walked visible
+text nodes; check element `settings` too.
+
 ## 6. Open items for the client
 
 1. **`Doctor Mona Stone Banner.avif` says "Dr. Monica Stone"** while the practice trades as
