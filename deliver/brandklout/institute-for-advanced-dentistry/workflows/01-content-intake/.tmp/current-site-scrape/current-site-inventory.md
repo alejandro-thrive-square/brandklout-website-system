@@ -1,0 +1,170 @@
+# Institute for Advanced Dentistry — current site inventory
+
+Scraped 2026-09-04 from https://www.ifadentistry.com (the outgoing agency's WordPress build). Everything in this folder was produced by the scripts in `scrapers/`; nothing was hand-edited.
+
+## What is in this folder
+
+| Path | What it is |
+| :--- | :--- |
+| `site/` | The whole site rewritten to relative paths. Open `site/index.html` in a browser: CSS, JS, GSAP/Motion.page animations, fonts, images and the hero video all load from disk. Internal links go to the local copies. |
+| `raw-html/` | The untouched server HTML of every URL, for diffing and for the redirect map later. |
+| `screenshots/desktop/` | Full-page PNG of every URL at 1440 px, live site, scroll-triggered blocks revealed. |
+| `screenshots/local-check/` | The same shot taken from the `file://` mirror for six pages, to prove the mirror renders. |
+| `media-library/` | Every original in the WordPress media library (237 files, 34.6 MB), pulled through the REST API, so it includes uploads no page currently uses. |
+| `media-library/vimeo/` | The Vimeo clips the site embeds, downloaded from the player. |
+| `pages/` | One Markdown extract per URL: title, meta description, outline, image list, body text. |
+| `site-data.json` / `pages.csv` / `assets-manifest.csv` | Page and asset manifests with status and byte counts. |
+| `media-library.json` / `media-library.csv` | Media-library manifest with dimensions, alt text and captions. |
+| `vimeo.json` | Vimeo clip manifest: id, title, owner, duration, which page embeds it. |
+
+## Platform
+
+- WordPress with the **Bricks** theme (plus a `bricks-child`), **Motion.page** for GSAP scroll animation, **Fluent Forms** for the contact form (reCAPTCHA v3), **Site Kit**, **Bricksable**, **Akismet**.
+- Tracking: Google Tag Manager `GTM-K8N3JK3Q`. Widgets: Trustindex (Google reviews) and UserWay (accessibility). Both load from their CDNs, so they still work in the mirror while online.
+- Fonts: Kanit and the theme's other Google Fonts, mirrored into `site/_ext/`.
+- The Yoast sitemap URLs return 200 with the 404 page, so the crawl came from the WP REST API (pages, posts, categories) plus every same-origin link found in the pages. `robots.txt` blocks AI crawlers by name but allows everything else.
+- Phone on every page: (602) 242-2256. Address on the home page: 13360 N 94th Dr, Suite B, Peoria, AZ.
+
+## Pages: 56 URLs captured, 44,158 words of body copy
+
+### Top-level pages (9)
+
+| URL | Kind | H1 | Words | Meta description |
+| :--- | :--- | :--- | ---: | :--- |
+| /terms-of-service/ | page | Terms of Service | 859 | no |
+| /contact-us/thank-you/ | page |  | 14 | no |
+| /patient-referrals/ | page | Patient Referrals | 207 | no |
+| /smile-gallery/ | page | You Deserve Extraordinary Results | 151 | no |
+| /testimonials/ | page | Our patients say it best | 2591 | no |
+| /accessibility-statement/ | page | Accessibility Statement | 276 | no |
+| /contact-us/ | page |  | 162 | no |
+| / | page | Replace Missing Teeth with Strong, Natural-Looking Dental Implants | 876 | no |
+| /privacy-policy/ | page | Privacy Policy | 1753 | no |
+
+### Service pages (/dental-services/) (17)
+
+| URL | Kind | H1 | Words | Meta description |
+| :--- | :--- | :--- | ---: | :--- |
+| /dental-services/cosmetic-dentistry-ppc/ | page | Advanced Cosmetic Dentistry in Peoria | 555 | no |
+| /dental-services/new-teeth-in-one-day/ | page | New Teeth in One Day | 1245 | no |
+| /dental-services/denture-stabilization/ | page | Denture Stabilization with Dental Implants | 870 | no |
+| /dental-services/dental-implants/ | page | Full-Service Dental Implant Treatment in Peoria, AZ | 1312 | no |
+| /dental-services/dental-implant-complications/ | page | Dental Implant Complications | 555 | no |
+| /dental-services/teeth-cleanings/ | page | Teeth Cleanings | 509 | no |
+| /dental-services/cosmetic-dentistry/ | page | Cosmetic Dentistry | 710 | no |
+| /dental-services/biocompatible-dentistry/ | page | Biocompatible Dentistry | 591 | no |
+| /dental-services/new-patient-exam/ | page | New Patient Exam | 499 | no |
+| /dental-services/tmj-treatment/ | page | TMJ Treatment | 691 | no |
+| /dental-services/sedation-dentistry/ | page | Comfort & Sedation Dentistry | 579 | no |
+| /dental-services/sleep-apnea/ | page | Sleep Apnea and Snoring Treatment | 492 | no |
+| /dental-services/tooth-extractions/ | page | Tooth Extractions | 297 | no |
+| /dental-services/dental-crowns-and-bridges/ | page | Dental Crowns & Bridges | 549 | no |
+| /dental-services/full-mouth-rehabilitation/ | page | Full-Mouth Rehabilitation | 287 | no |
+| /dental-services/dental-veneers/ | page | Dental Veneers | 671 | no |
+| /dental-services/ | page | Our Top-Quality Dental Services & Solutions | 127 | no |
+
+### About pages (/about-our-practice/) (5)
+
+| URL | Kind | H1 | Words | Meta description |
+| :--- | :--- | :--- | ---: | :--- |
+| /about-our-practice/articles/ | page | Articles | 391 | no |
+| /about-our-practice/payment-options/ | page | Payment Options | 230 | no |
+| /about-our-practice/ | page | About Our Practice | 484 | no |
+| /about-our-practice/what-is-a-prosthodontist/ | page | What is a Prosthodontist? | 292 | no |
+| /about-our-practice/meet-dr-bensoussan/ | page | Meet Dr. Bensoussan | 580 | no |
+
+### Blog posts (root-level slugs) (19)
+
+| URL | Kind | H1 | Words | Meta description |
+| :--- | :--- | :--- | ---: | :--- |
+| /peoria-prosthodontics-institute-for-advanced-dentistry/ | post | Peoria Prosthodontics – Institute For Advanced Dentistry | 1492 | yes |
+| /expert-implants-dentist-peoria/ | post | Expert Implants Dentist in Peoria – Advanced Dentistry | 1489 | no |
+| /implant-crown-peoria-az/ | post | What Is an Implant Crown? A Prosthodontist’s Guide for Peoria Patients | 1239 | yes |
+| /advanced-dental-restorations-in-peoria-az/ | post | Advanced Dental Restorations in Peoria, AZ | 2028 | yes |
+| /cosmetic-dental-treatments/ | post | Transform Your Smile With Cosmetic Dental Treatments | 1900 | no |
+| /dental-implant-success-rates-in-2026/ | post | Dental Implant Success Rates in 2026: What You Should Know Before Choosing Dental Implants | 1088 | yes |
+| /what-is-a-prosthodontist/ | post | What Is a Prosthodontist? Understanding This Advanced Dental Specialty | 959 | yes |
+| /new-smile-in-one-day-in-peoria-az/ | post | How to Get a New Smile in One Day in Peoria AZ | 1020 | yes |
+| /cosmetic-dentist-in-peoria-az/ | post | What Can You Expect from a Cosmetic Dentist in Peoria AZ? | 997 | yes |
+| /tooth-replacement-peoria-az/ | post | Tooth Replacement Peoria AZ: A Full Guide to Dental Implants | 1381 | yes |
+| /why-prosthodontist-dental-implants-in-peoria/ | post | 9 Reasons To Choose A Prosthodontist for Dental Implants in Peoria AZ | 1744 | no |
+| /dental-implants-for-single-tooth-replacement/ | post | Benefits of Dental Implants for Single Tooth Replacement | 931 | yes |
+| /6-reasons-dental-implants-are-ideal-for-young-adults/ | post | 6 Reasons Dental Implants Are Ideal for Young Adults | 700 | yes |
+| /are-dental-implants-tax-deductible/ | post | Are Dental Implants Tax Deductible? | 1945 | no |
+| /how-age-affects-dental-implant-surgery/ | post | How Age Affects Dental Implant Surgery | 770 | yes |
+| /how-dental-implants-improve-airway-stability-and-breathing-during-sleep/ | post | How Dental Implants Improve Airway Stability and Breathing During Sleep | 1006 | yes |
+| /how-dental-implants-can-transform-your-lifestyle/ | post | How Dental Implants Can Transform Your Lifestyle | 676 | no |
+| /understanding-dental-implant-success-rates-and-longevity/ | post | Understanding Dental Implant Success Rates and Longevity | 1480 | no |
+| /the-role-of-dental-implants-in-addressing-speech-disorders-and-cleft-palate-conditions/ | post | The Role of Dental Implants in Addressing Speech Disorders and Cleft Palate Conditions | 731 | no |
+
+### Archives (category / pagination) (6)
+
+| URL | Kind | H1 | Words | Meta description |
+| :--- | :--- | :--- | ---: | :--- |
+| /category/advanced-treatment/ | archive | Advanced Treatment | 107 | no |
+| /category/cosmetic-dentistry/ | archive | Cosmetic Dentistry | 107 | no |
+| /category/general-and-preventive-care/ | archive | General & Preventive Care | 138 | no |
+| /category/implants-and-full-arch-solutions/ | archive | Implants & Full-Arch Solutions | 297 | no |
+| /category/uncategorized/ | archive | Uncategorized | 391 | no |
+| /category/uncategorized/page/2/ | archive | Uncategorized | 137 | no |
+
+Redirects seen while crawling: `/contact/` → `/contact-us/`, `/about/` → `/about-our-practice/`.
+
+## Assets referenced by the pages (778 files, 54.8 MB)
+
+| Type | Files | Size |
+| :--- | ---: | ---: |
+| jpg | 487 | 35.8 MB |
+| mp4 | 2 | 9.0 MB |
+| png | 79 | 3.9 MB |
+| woff2 | 130 | 2.4 MB |
+| webp | 33 | 1.5 MB |
+| js | 19 | 0.9 MB |
+| ttf | 4 | 0.8 MB |
+| css | 19 | 0.4 MB |
+| woff | 1 | 0.1 MB |
+| svg | 4 | 0.0 MB |
+
+5 "assets" failed: they are wildcard patterns (`/wp-content/plugins/*`) inside a plugin config, not files.
+
+## Media library (237 originals)
+
+| MIME | Files | Size |
+| :--- | ---: | ---: |
+| image/jpeg | 186 | 22.3 MB |
+| video/mp4 | 2 | 9.0 MB |
+| image/png | 35 | 2.4 MB |
+| image/webp | 7 | 0.9 MB |
+| image/svg+xml | 7 | 0.0 MB |
+
+- 33 images are 1600 px wide or wider. 26 images carry no alt text.
+- Self-hosted video: `intro_video_v6.mp4` (home hero) and `dental-implant-and-ceramic-crown-placement-video.mp4`.
+
+## Video embeds (Vimeo)
+
+| Vimeo id | Title | Owner | Length | Embedded on | Local file |
+| :--- | :--- | :--- | ---: | :--- | :--- |
+| 1095751306 | Porcelain Veneers | Gilleard Marketing | 13 s | /dental-services/cosmetic-dentistry/ | 1095751306-Porcelain-Veneers.mp4 |
+| 1091943220 |  |  |  s | /dental-services/cosmetic-dentistry/ | **failed**: no playerConfig on the player page |
+| 1095751286 | Dental Bonding | Gilleard Marketing | 10 s | /dental-services/cosmetic-dentistry/ | 1095751286-Dental-Bonding.mp4 |
+| 1095751275 | Teeth Whitening | Gilleard Marketing | 10 s | /dental-services/cosmetic-dentistry/ | 1095751275-Teeth-Whitening.mp4 |
+| 1091954104 |  |  |  s | /dental-services/cosmetic-dentistry/, /dental-services/new-teeth-in-one-day/ | **failed**: Navigation timeout of 60000 ms exceeded |
+| 1091943339 |  |  |  s | /dental-services/tmj-treatment/ | **failed**: no playerConfig on the player page |
+| 1130043614 |  |  |  s | /testimonials/ | **failed**: no playerConfig on the player page |
+| 1130043702 |  |  |  s | /testimonials/ | **failed**: no playerConfig on the player page |
+| 1130043822 |  |  |  s | /testimonials/ | **failed**: no playerConfig on the player page |
+| 1130043776 |  |  |  s | /testimonials/ | **failed**: no playerConfig on the player page |
+
+Every clip sits on the outgoing agency's Vimeo account ("Gilleard Marketing"). The six short procedure animations are stock explainers; the four testimonials (Helen, Mark, Philip, Lisa) are the practice's own footage. The embeds die the day that account revokes them, so the downloaded files are the copy to re-host.
+
+7 clips could not be pulled: they are domain-locked and Vimeo's connection check ("We couldn't verify the security of your connection") refused this machine's IP, even inside the real embedding page. The three public-embed clips came through. Retry `node vimeo.mjs` from another network (VPN off), or ask the outgoing agency for the source files, which is the right ask anyway for the four testimonials.
+
+## What does not work offline
+
+- The Fluent Forms contact form posts to `admin-ajax.php`; it renders but cannot submit.
+- Trustindex reviews, UserWay and the Google Maps iframes need the network.
+- Search (`?s=`) and the RSS feeds were left pointing at the live site.
+
+## Version Control
+
+Text manifests, page extracts and the scripts in `scrapers/` are committed. `site/`, `raw-html/`, `screenshots/`, `media-library/` and `scrapers/node_modules/` are binary or bulk and stay local, per the root `.gitignore`. Re-create them with `node mirror.mjs`, `node screenshots.mjs`, `node vimeo.mjs`, then `node inventory.mjs`.

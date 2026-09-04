@@ -82,7 +82,7 @@ Copied from `deliver/process/` at baseline `21ae9682`. Route:
 | Phase | Status | Notes |
 | :--- | :--- | :--- |
 | `00-client-delivery-initialization` | **Done** | This doc + `mcp-access.md`; folder scaffolded; Asana brief pulled |
-| `01-content-intake` | **Next** | Maps to Asana "Study the site" + "Extract All Assets" (due 2026-09-03, already due). Scrape ifadentistry.com fully — no sitemap, so crawl from the nav. The Asana task also wants assets placed in Brandklout's Share Drive |
+| `01-content-intake` | **In progress** | Maps to Asana "Study the site" + "Extract All Assets" (due 2026-09-03, already due). **Scrape done 2026-09-04**: `workflows/01-content-intake/.tmp/current-site-scrape/` holds a working local mirror (`site/index.html`), 56 desktop screenshots, the full 237-file media library, 3 of 10 Vimeo clips, and per-page text extracts; read `current-site-inventory.md` there first. The Yoast sitemap serves the 404 page, so the crawl came from the WP REST API. Still open: 7 domain-locked Vimeo clips (4 are the practice's own testimonials), placing the assets in Brandklout's Share Drive, and the questionnaire/summary side of intake |
 | `02-wireframe` | Pending | Asana "Comparable sites" (3 minimum) and "Content Gap analysis" (SpyFu) sit here |
 | `03-graphic-resources` | Pending | Client's own photography first; the practice documents smile transformations |
 | `04-design` | Pending | Home page first, due 2026-09-21. Elevated build from day one per [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md): photograph in every chapter, GSAP scroll moves, varied grounds, a sentence per idea |
