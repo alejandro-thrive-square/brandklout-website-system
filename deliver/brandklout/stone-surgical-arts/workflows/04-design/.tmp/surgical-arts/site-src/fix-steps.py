@@ -24,7 +24,12 @@ HERE = os.path.dirname(os.path.abspath(__file__))
 RAW = os.path.join(HERE, "assets", "_upscaled", "dr-stone-steps.png")
 im = Image.open(RAW).convert("RGB")
 W, H = im.size
-s = W / 702  # source-to-raw scale
+# source-to-raw scale. 702 was the Drive export's width; the source in use
+# since 2026-09-04 is the asset restored from the published site, 646x431, the
+# same frame with 28px off each side, so every x below is 28 less than it was
+# and the scale is against 646. Measured on the 4x: the white triangle's dense
+# pixels run x 1253..1353, y 763..943, which is 315..340 x 192..237 here.
+s = W / 646
 px = im.load()
 
 
@@ -66,8 +71,8 @@ def patch(rect, seed=7):
     im.paste(fill, (x0, y0), mask)
 
 
-# the white triangle spans source x 343..365, y 197..239
-patch((339, 192, 369, 244))
+# the white triangle spans source x 315..340, y 192..237 (was 343..365 in the 702px export)
+patch((311, 187, 344, 242))
 im.save(RAW.replace(".png", ".fixed.png"))
 
 # emit, exactly as upscale-doctor.mjs does: 3:2 centre crop, 2000 wide

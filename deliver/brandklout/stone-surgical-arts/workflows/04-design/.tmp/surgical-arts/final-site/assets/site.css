@@ -80,6 +80,12 @@ html {
    insists on white-on-green, change --btn-ink here — one line, whole site.
    =========================================================================== */
 :root {
+  /* --wide scales every text column and heading cap (`max-width` in rem or
+     ch, written as calc(... * var(--wide))). 1 up to 1700px; 59-wide.css
+     raises it for 2K and 4K so the columns keep their share of the screen
+     instead of shrinking with it. Client, 2026-09-04: "these containers
+     around text shrink too much on larger screens above 2K." */
+  --wide: 1;
   /* --- the board's five, verbatim --- */
   --ivory: #f6f4ef;
   --stone: #d8d3ca;
@@ -1191,9 +1197,11 @@ textarea {
 
 .footer_top {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  /* Four columns since 2026-09-04: the page list, the address, the mark, the
+     hours. The list used to be a wrapped row above these three. */
+  grid-template-columns: auto 1fr auto 1fr;
   align-items: start;
-  gap: 3rem;
+  gap: 3rem 4rem;
 }
 .footer_brand {
   display: flex;
@@ -1323,16 +1331,17 @@ textarea {
   .footer_brand {
     order: -1;
   }
+  .footer_nav {
+    align-items: center;
+  }
 }
 
 /* --- the page list, 2026-09-02 ------------------------------------------------ */
 .footer_nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 2rem;
-  padding-bottom: var(--space-large);
-  margin-bottom: var(--space-large);
-  border-bottom: 1px solid var(--line);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
 }
 .footer_nav a {
   font-size: var(--size-text-tiny);
@@ -1560,10 +1569,10 @@ textarea {
   text-align: center;
 }
 .cta_title {
-  max-width: 20ch;
+  max-width: calc(20ch * var(--wide));
 }
 .cta_text {
-  max-width: 52ch;
+  max-width: calc(52ch * var(--wide));
   color: var(--fg-body);
 }
 .cta_actions {
@@ -1604,7 +1613,7 @@ textarea {
   margin: 0;
   align-self: end;
   width: 100%;
-  max-width: 26rem;
+  max-width: calc(26rem * var(--wide));
   justify-self: end;
   height: min(60vh, 34rem);
   margin-bottom: calc(var(--space-xxlarge) * -1 - var(--space-large));
@@ -1638,7 +1647,7 @@ textarea {
     justify-self: start;
     height: auto;
     aspect-ratio: 4 / 5;
-    max-width: 18rem;
+    max-width: calc(18rem * var(--wide));
     margin-bottom: 0;
     -webkit-mask-image: none;
     mask-image: none;
@@ -2044,7 +2053,7 @@ textarea {
   font-size: var(--size-text-large);
   line-height: 1.5;
   color: var(--fg-body);
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
 }
 .arrival_actions {
   margin-top: var(--space-large);
@@ -2056,7 +2065,7 @@ textarea {
   margin: var(--space-xlarge) 0 0;
   padding-top: var(--space-small);
   border-top: 1px solid var(--line);
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
   font-size: var(--size-text-small);
   color: var(--fg-mute);
 }
@@ -2357,7 +2366,7 @@ textarea {
   margin: var(--space-xlarge) 0 0;
   padding: 0;
   list-style: none;
-  max-width: 32rem;
+  max-width: calc(32rem * var(--wide));
 }
 .dealt_item {
   position: relative;
@@ -2416,7 +2425,12 @@ textarea {
 .path_head {
   padding-inline: var(--gutter);
   margin-bottom: var(--section-sm);
-  max-width: 46rem;
+  /* The gutter is INSIDE this cap (border-box), and above 97.5rem the gutter
+     grows to centre the content column: at 2425px it is 232px a side, which
+     left the heading 460px of a 925px box and broke "Three steps, and no
+     surprises." onto three lines. The cap is the text column; the gutter is
+     added on top of it. */
+  max-width: calc(46rem * var(--wide) + 2 * var(--gutter));
 }
 .path_viewport {
   position: relative;
@@ -2531,13 +2545,13 @@ textarea {
 }
 .standard_title {
   margin: 0 0 var(--space-medium);
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .standard_text {
   margin: 0;
   font-size: var(--size-text-medium);
   line-height: 1.7;
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
 }
 /* The press index. It was a centred section of its own in the middle of the
    page, doing nothing for the argument. On the dark band it becomes what it
@@ -2632,7 +2646,7 @@ textarea {
   margin-right: calc(var(--gutter) * -1);
 }
 .offer_body {
-  max-width: 32rem;
+  max-width: calc(32rem * var(--wide));
 }
 .offer_title {
   font-family: var(--font-display);
@@ -2889,10 +2903,10 @@ textarea {
   font-size: var(--size-display-sm);
   line-height: 1.02;
   letter-spacing: -0.015em;
-  max-width: 18ch;
+  max-width: calc(18ch * var(--wide));
 }
 .main-wrapper > .journey_page + .section_cta .cta_text {
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   font-size: var(--size-text-medium);
   line-height: 1.65;
 }
@@ -3128,7 +3142,7 @@ a.ways_card:hover .ways_more span,
 }
 .dhero_sub {
   margin: var(--space-medium) 0 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   font-size: var(--size-text-large);
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.88);
@@ -3359,12 +3373,12 @@ a.ways_card:hover .ways_more span,
   line-height: 1.06;
   letter-spacing: -0.01em;
   color: var(--fg);
-  max-width: 20ch;
+  max-width: calc(20ch * var(--wide));
   text-wrap: balance;
 }
 .dsec_lede {
   margin: var(--space-medium) 0 0;
-  max-width: 46rem;
+  max-width: calc(46rem * var(--wide));
   font-size: var(--size-text-medium);
   line-height: 1.65;
   color: var(--fg-body);
@@ -3390,7 +3404,7 @@ a.ways_card:hover .ways_more span,
 }
 .dsec.is-band .dsec_title {
   color: var(--white);
-  max-width: 24ch;
+  max-width: calc(24ch * var(--wide));
 }
 .dsec.is-band .dsec_mark {
   color: var(--green);
@@ -3398,7 +3412,7 @@ a.ways_card:hover .ways_more span,
 
 .prose_component {
   margin-top: var(--space-medium);
-  max-width: 46rem;
+  max-width: calc(46rem * var(--wide));
 }
 .prose_component p {
   margin: 0 0 var(--space-small);
@@ -3524,7 +3538,7 @@ a.ways_card:hover .ways_more span,
   min-width: 0;
 }
 .layers_panel {
-  max-width: 42rem;
+  max-width: calc(42rem * var(--wide));
 }
 /* Without JS every panel is simply on the page, one after another, separated
    by a rule. `hidden` is set by the script, never in the markup, so a blocked
@@ -3759,7 +3773,7 @@ a.ways_card:hover .ways_more span,
 }
 .tl_text {
   margin: 0;
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
   font-size: var(--size-text-regular);
   line-height: 1.7;
   color: var(--fg-body);
@@ -3898,7 +3912,7 @@ a.ways_card:hover .ways_more span,
 }
 .matrix_foot {
   margin: var(--space-medium) 0 0;
-  max-width: 46rem;
+  max-width: calc(46rem * var(--wide));
   font-size: var(--size-text-small);
   line-height: 1.65;
   color: var(--fg-mute);
@@ -3928,7 +3942,7 @@ a.ways_card:hover .ways_more span,
 }
 .book_body {
   padding: var(--section) var(--gutter) var(--section) clamp(var(--space-large), 4vw, var(--space-xxlarge));
-  max-width: 46rem;
+  max-width: calc(46rem * var(--wide));
 }
 .book_title {
   margin: 0;
@@ -3938,7 +3952,7 @@ a.ways_card:hover .ways_more span,
   line-height: 1.06;
   letter-spacing: -0.01em;
   color: var(--fg);
-  max-width: 18ch;
+  max-width: calc(18ch * var(--wide));
 }
 .book_lede {
   margin: var(--space-medium) 0 0;
@@ -4777,11 +4791,11 @@ a.ways_card:hover .ways_more span,
 }
 .catalogue_title {
   margin: 0;
-  max-width: 20ch;
+  max-width: calc(20ch * var(--wide));
 }
 .catalogue_lede {
   margin: 0;
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
@@ -4884,7 +4898,7 @@ a.ways_card:hover .ways_more span,
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
 }
 .catalogue_links {
   grid-column: 2;
@@ -4894,7 +4908,7 @@ a.ways_card:hover .ways_more span,
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 0.75rem;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
 }
 .catalogue_link {
   display: inline-flex;
@@ -5142,7 +5156,7 @@ span.catalogue_link {
 }
 .surgeon_title {
   margin: 0 0 var(--space-large);
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .surgeon_step {
   padding: var(--space-xlarge) 0;
@@ -5177,7 +5191,7 @@ span.catalogue_link {
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.65;
-  max-width: 32rem;
+  max-width: calc(32rem * var(--wide));
 }
 .surgeon_step .dealt_component {
   margin-top: var(--space-medium);
@@ -5208,7 +5222,7 @@ span.catalogue_link {
   .surgeon_frames {
     height: auto;
     aspect-ratio: 4 / 5;
-    max-width: 26rem;
+    max-width: calc(26rem * var(--wide));
   }
   .js .surgeon_step {
     opacity: 1;
@@ -5285,14 +5299,14 @@ span.catalogue_link {
   align-items: end;
 }
 .concern_head .display-lg {
-  max-width: 16ch;
+  max-width: calc(16ch * var(--wide));
 }
 .concern_lede {
   margin: 0;
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
-  max-width: 28rem;
+  max-width: calc(28rem * var(--wide));
 }
 .concern_list {
   margin: 0;
@@ -5757,7 +5771,7 @@ span.catalogue_link {
 /* A two-word title with a trademark in it breaks as "MyEllevate neck / lift"
    at 1440; capped, it breaks as "MyEllevate / neck lift". */
 .dhero_title.is-long {
-  max-width: 11ch;
+  max-width: calc(11ch * var(--wide));
 }
 .related_component {
   padding: var(--section-sm) var(--gutter) var(--section);
@@ -5971,11 +5985,11 @@ span.catalogue_link {
   overflow: clip;
 }
 .hub_hero .display-xl {
-  max-width: 12ch;
+  max-width: calc(12ch * var(--wide));
 }
 .hub_lede {
   margin: var(--space-medium) 0 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   font-size: var(--size-text-large);
   line-height: 1.5;
   color: var(--fg-body);
@@ -6037,7 +6051,16 @@ span.catalogue_link {
   align-items: center;
   gap: var(--space-large);
   overflow-x: auto;
+  /* overflow-x: auto computes overflow-y to auto as well, and the current
+     link's underline sat 1px below the box, so Windows drew a scrollbar
+     inside the bar (client, 2026-09-04). The vertical axis is clipped and
+     the horizontal scrollbar is hidden: on a phone the row still swipes. */
+  overflow-y: hidden;
+  scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+}
+.jump_inner::-webkit-scrollbar {
+  display: none;
 }
 .jump_label {
   flex: 0 0 auto;
@@ -6064,7 +6087,7 @@ span.catalogue_link {
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -1px;
+  bottom: 0;
   height: 2px;
   background: var(--accent-flat);
   transform: scaleX(0);
@@ -6173,18 +6196,18 @@ span.catalogue_link {
 }
 .catx_title {
   margin: 0 0 var(--space-medium);
-  max-width: 16ch;
+  max-width: calc(16ch * var(--wide));
 }
 .catx_text {
   margin: 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.65;
 }
 .catx_note {
   margin: var(--space-small) 0 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.6;
@@ -6264,7 +6287,7 @@ span.catalogue_link {
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.6;
-  max-width: 22rem;
+  max-width: calc(22rem * var(--wide));
 }
 .fee_group {
   margin: 0 0 var(--space-large);
@@ -6351,7 +6374,7 @@ a.fee_row:hover .fee_go {
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.6;
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
 }
 
 /* --- the hub's questions --------------------------------------------------------- */
@@ -6523,7 +6546,7 @@ a.fee_row:hover .fee_go {
   font-size: var(--size-h4);
   line-height: 1.2;
   color: var(--fg);
-  max-width: 16ch;
+  max-width: calc(16ch * var(--wide));
 }
 .prof_side {
   grid-column: 3;
@@ -6542,7 +6565,7 @@ a.fee_row:hover .fee_go {
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.5;
-  max-width: 14rem;
+  max-width: calc(14rem * var(--wide));
 }
 .prof_side img {
   width: 5.5rem;
@@ -6562,7 +6585,7 @@ a.fee_row:hover .fee_go {
   padding: var(--section) var(--gutter) var(--section-sm);
 }
 .prof_quote .thesis_text {
-  max-width: 24ch;
+  max-width: calc(24ch * var(--wide));
 }
 
 /* --- the training ledger ------------------------------------------------------ */
@@ -6578,11 +6601,11 @@ a.fee_row:hover .fee_go {
   top: 7rem;
 }
 .cv_head .display-lg {
-  max-width: 12ch;
+  max-width: calc(12ch * var(--wide));
 }
 .cv_lede {
   margin: var(--space-medium) 0 0;
-  max-width: 24rem;
+  max-width: calc(24rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
@@ -6623,7 +6646,7 @@ a.fee_row:hover .fee_go {
 }
 .cv_text {
   margin: 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-regular);
   line-height: 1.65;
@@ -6659,18 +6682,18 @@ a.fee_row:hover .fee_go {
 .why_inner {
   position: relative;
   z-index: 1;
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
 }
 .why_inner .display-lg {
   color: var(--white);
-  max-width: 16ch;
+  max-width: calc(16ch * var(--wide));
 }
 .why_text {
   margin: var(--space-medium) 0 0;
   font-size: var(--size-text-medium);
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.86);
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
 }
 
 /* --- the person ------------------------------------------------------------- */
@@ -6715,11 +6738,11 @@ a.fee_row:hover .fee_go {
   margin-left: var(--space-large);
 }
 .beyond_body .display-lg {
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .beyond_text {
   margin: var(--space-medium) 0 0;
-  max-width: 32rem;
+  max-width: calc(32rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.65;
@@ -6774,7 +6797,7 @@ a.fee_row:hover .fee_go {
   left: var(--gutter);
   bottom: var(--space-large);
   z-index: 2;
-  max-width: 24rem;
+  max-width: calc(24rem * var(--wide));
   padding: var(--space-medium);
   background: rgba(246, 244, 239, 0.94);
   backdrop-filter: blur(6px);
@@ -6905,14 +6928,14 @@ a.fee_row:hover .fee_go {
 }
 .place_inner .display-xl {
   color: var(--white);
-  max-width: 12ch;
+  max-width: calc(12ch * var(--wide));
 }
 .place_inner .chapter_mark {
   color: rgba(255, 255, 255, 0.7);
 }
 .place_lede {
   margin: 0;
-  max-width: 28rem;
+  max-width: calc(28rem * var(--wide));
   font-size: var(--size-text-large);
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.88);
@@ -6933,11 +6956,11 @@ a.fee_row:hover .fee_go {
   margin-bottom: var(--section-sm);
 }
 .steps_head .display-lg {
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .steps_lede {
   margin: 0;
-  max-width: 26rem;
+  max-width: calc(26rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
@@ -6998,13 +7021,13 @@ a.fee_row:hover .fee_go {
   margin-bottom: var(--space-large);
 }
 .gallery_head .display-lg {
-  max-width: 16ch;
+  max-width: calc(16ch * var(--wide));
 }
 .gallery_head p {
   margin: 0;
   color: var(--fg-mute);
   font-size: var(--size-text-small);
-  max-width: 20rem;
+  max-width: calc(20rem * var(--wide));
 }
 .gallery_grid {
   display: grid;
@@ -7102,14 +7125,14 @@ a.fee_row:hover .fee_go {
 }
 .roster_head {
   margin-bottom: var(--section-sm);
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
 }
 .roster_lede {
   margin: var(--space-medium) 0 0;
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
 }
 .roster_lead {
   display: grid;
@@ -7126,7 +7149,7 @@ a.fee_row:hover .fee_go {
   aspect-ratio: 4 / 5;
   overflow: clip;
   background: var(--stone-soft);
-  max-width: 26rem;
+  max-width: calc(26rem * var(--wide));
 }
 .roster_lead-media img {
   width: 100%;
@@ -7172,7 +7195,7 @@ a.fee_row:hover .fee_go {
 }
 .roster_text {
   margin: 0 0 var(--space-small);
-  max-width: 32rem;
+  max-width: calc(32rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.65;
@@ -7234,7 +7257,7 @@ a.fee_row:hover .fee_go {
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.6;
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
 }
 
 /* --- responsive ------------------------------------------------------------------ */
@@ -7329,11 +7352,11 @@ a.fee_row:hover .fee_go {
   overflow: clip;
 }
 .offer_hero .display-xl {
-  max-width: 11ch;
+  max-width: calc(11ch * var(--wide));
 }
 .offer_hero-lede {
   margin: var(--space-medium) 0 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   font-size: var(--size-text-large);
   line-height: 1.5;
   color: var(--fg-body);
@@ -7345,7 +7368,7 @@ a.fee_row:hover .fee_go {
      content is an <img> whose width attribute is the smallest responsive
      variant: the frame published at 300px. 2026-09-02. */
   width: 100%;
-  max-width: 28rem;
+  max-width: calc(28rem * var(--wide));
   justify-self: end;
   overflow: clip;
   background: var(--stone-soft);
@@ -7425,7 +7448,7 @@ a.fee_row:hover .fee_go {
   margin-bottom: var(--space-xlarge);
 }
 .calc_head .display-lg {
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .calc_note {
   margin: 0;
@@ -7637,7 +7660,7 @@ a.fee_row:hover .fee_go {
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.6;
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
 }
 
 /* --- memberships: what the credit buys (reuses .offer_row) ------------------------- */
@@ -7702,7 +7725,7 @@ a.fee_row:hover .fee_go {
 }
 .consent_inner .display-lg {
   color: var(--white);
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .consent_inner .chapter_mark {
   color: rgba(255, 255, 255, 0.7);
@@ -7712,7 +7735,7 @@ a.fee_row:hover .fee_go {
   color: rgba(255, 255, 255, 0.86);
   font-size: var(--size-text-medium);
   line-height: 1.65;
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
 }
 .consent_text + .consent_text {
   margin-top: var(--space-small);
@@ -7744,7 +7767,7 @@ a.fee_row:hover .fee_go {
   margin-bottom: var(--space-large);
 }
 .wall_head .display-lg {
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .filter_bar {
   display: flex;
@@ -8460,6 +8483,20 @@ a:hover > .offer_media img,
      object-position in 51-dossier.css. Still bound by the viewport. */
   .dhero_component {
     min-height: clamp(30rem, 86vh, 56rem);
+  }
+}
+/* The text columns and heading caps keep their share of the screen: see
+   --wide in 01-tokens.css. 1.15 at 2K and 1.3 from 2400px, on top of the root
+   font's own growth, which lands a 14ch heading at 1440 and at 2560 on the
+   same fraction of the viewport within a few percent. */
+@media (min-width: 1700px) {
+  :root {
+    --wide: 1.15;
+  }
+}
+@media (min-width: 2400px) {
+  :root {
+    --wide: 1.3;
   }
 }
 @media (min-width: 2400px) {

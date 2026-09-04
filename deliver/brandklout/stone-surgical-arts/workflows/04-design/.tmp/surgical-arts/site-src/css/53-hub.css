@@ -49,11 +49,11 @@
   overflow: clip;
 }
 .hub_hero .display-xl {
-  max-width: 12ch;
+  max-width: calc(12ch * var(--wide));
 }
 .hub_lede {
   margin: var(--space-medium) 0 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   font-size: var(--size-text-large);
   line-height: 1.5;
   color: var(--fg-body);
@@ -115,7 +115,16 @@
   align-items: center;
   gap: var(--space-large);
   overflow-x: auto;
+  /* overflow-x: auto computes overflow-y to auto as well, and the current
+     link's underline sat 1px below the box, so Windows drew a scrollbar
+     inside the bar (client, 2026-09-04). The vertical axis is clipped and
+     the horizontal scrollbar is hidden: on a phone the row still swipes. */
+  overflow-y: hidden;
+  scrollbar-width: none;
   -webkit-overflow-scrolling: touch;
+}
+.jump_inner::-webkit-scrollbar {
+  display: none;
 }
 .jump_label {
   flex: 0 0 auto;
@@ -142,7 +151,7 @@
   position: absolute;
   left: 0;
   right: 0;
-  bottom: -1px;
+  bottom: 0;
   height: 2px;
   background: var(--accent-flat);
   transform: scaleX(0);
@@ -251,18 +260,18 @@
 }
 .catx_title {
   margin: 0 0 var(--space-medium);
-  max-width: 16ch;
+  max-width: calc(16ch * var(--wide));
 }
 .catx_text {
   margin: 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.65;
 }
 .catx_note {
   margin: var(--space-small) 0 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.6;
@@ -342,7 +351,7 @@
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.6;
-  max-width: 22rem;
+  max-width: calc(22rem * var(--wide));
 }
 .fee_group {
   margin: 0 0 var(--space-large);
@@ -429,7 +438,7 @@ a.fee_row:hover .fee_go {
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.6;
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
 }
 
 /* --- the hub's questions --------------------------------------------------------- */

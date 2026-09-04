@@ -32,11 +32,11 @@
   overflow: clip;
 }
 .offer_hero .display-xl {
-  max-width: 11ch;
+  max-width: calc(11ch * var(--wide));
 }
 .offer_hero-lede {
   margin: var(--space-medium) 0 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   font-size: var(--size-text-large);
   line-height: 1.5;
   color: var(--fg-body);
@@ -48,7 +48,7 @@
      content is an <img> whose width attribute is the smallest responsive
      variant: the frame published at 300px. 2026-09-02. */
   width: 100%;
-  max-width: 28rem;
+  max-width: calc(28rem * var(--wide));
   justify-self: end;
   overflow: clip;
   background: var(--stone-soft);
@@ -128,7 +128,7 @@
   margin-bottom: var(--space-xlarge);
 }
 .calc_head .display-lg {
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .calc_note {
   margin: 0;
@@ -340,7 +340,7 @@
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.6;
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
 }
 
 /* --- memberships: what the credit buys (reuses .offer_row) ------------------------- */
@@ -405,7 +405,7 @@
 }
 .consent_inner .display-lg {
   color: var(--white);
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .consent_inner .chapter_mark {
   color: rgba(255, 255, 255, 0.7);
@@ -415,7 +415,7 @@
   color: rgba(255, 255, 255, 0.86);
   font-size: var(--size-text-medium);
   line-height: 1.65;
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
 }
 .consent_text + .consent_text {
   margin-top: var(--space-small);
@@ -447,7 +447,7 @@
   margin-bottom: var(--space-large);
 }
 .wall_head .display-lg {
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .filter_bar {
   display: flex;

@@ -33,6 +33,12 @@
    insists on white-on-green, change --btn-ink here — one line, whole site.
    =========================================================================== */
 :root {
+  /* --wide scales every text column and heading cap (`max-width` in rem or
+     ch, written as calc(... * var(--wide))). 1 up to 1700px; 59-wide.css
+     raises it for 2K and 4K so the columns keep their share of the screen
+     instead of shrinking with it. Client, 2026-09-04: "these containers
+     around text shrink too much on larger screens above 2K." */
+  --wide: 1;
   /* --- the board's five, verbatim --- */
   --ivory: #f6f4ef;
   --stone: #d8d3ca;

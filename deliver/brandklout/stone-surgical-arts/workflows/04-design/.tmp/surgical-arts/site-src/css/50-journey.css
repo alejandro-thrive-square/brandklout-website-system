@@ -340,7 +340,7 @@
   font-size: var(--size-text-large);
   line-height: 1.5;
   color: var(--fg-body);
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
 }
 .arrival_actions {
   margin-top: var(--space-large);
@@ -352,7 +352,7 @@
   margin: var(--space-xlarge) 0 0;
   padding-top: var(--space-small);
   border-top: 1px solid var(--line);
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
   font-size: var(--size-text-small);
   color: var(--fg-mute);
 }
@@ -653,7 +653,7 @@
   margin: var(--space-xlarge) 0 0;
   padding: 0;
   list-style: none;
-  max-width: 32rem;
+  max-width: calc(32rem * var(--wide));
 }
 .dealt_item {
   position: relative;
@@ -712,7 +712,12 @@
 .path_head {
   padding-inline: var(--gutter);
   margin-bottom: var(--section-sm);
-  max-width: 46rem;
+  /* The gutter is INSIDE this cap (border-box), and above 97.5rem the gutter
+     grows to centre the content column: at 2425px it is 232px a side, which
+     left the heading 460px of a 925px box and broke "Three steps, and no
+     surprises." onto three lines. The cap is the text column; the gutter is
+     added on top of it. */
+  max-width: calc(46rem * var(--wide) + 2 * var(--gutter));
 }
 .path_viewport {
   position: relative;
@@ -827,13 +832,13 @@
 }
 .standard_title {
   margin: 0 0 var(--space-medium);
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .standard_text {
   margin: 0;
   font-size: var(--size-text-medium);
   line-height: 1.7;
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
 }
 /* The press index. It was a centred section of its own in the middle of the
    page, doing nothing for the argument. On the dark band it becomes what it
@@ -928,7 +933,7 @@
   margin-right: calc(var(--gutter) * -1);
 }
 .offer_body {
-  max-width: 32rem;
+  max-width: calc(32rem * var(--wide));
 }
 .offer_title {
   font-family: var(--font-display);
@@ -1185,10 +1190,10 @@
   font-size: var(--size-display-sm);
   line-height: 1.02;
   letter-spacing: -0.015em;
-  max-width: 18ch;
+  max-width: calc(18ch * var(--wide));
 }
 .main-wrapper > .journey_page + .section_cta .cta_text {
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   font-size: var(--size-text-medium);
   line-height: 1.65;
 }

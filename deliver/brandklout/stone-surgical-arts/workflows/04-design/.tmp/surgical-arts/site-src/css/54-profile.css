@@ -93,7 +93,7 @@
   font-size: var(--size-h4);
   line-height: 1.2;
   color: var(--fg);
-  max-width: 16ch;
+  max-width: calc(16ch * var(--wide));
 }
 .prof_side {
   grid-column: 3;
@@ -112,7 +112,7 @@
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.5;
-  max-width: 14rem;
+  max-width: calc(14rem * var(--wide));
 }
 .prof_side img {
   width: 5.5rem;
@@ -132,7 +132,7 @@
   padding: var(--section) var(--gutter) var(--section-sm);
 }
 .prof_quote .thesis_text {
-  max-width: 24ch;
+  max-width: calc(24ch * var(--wide));
 }
 
 /* --- the training ledger ------------------------------------------------------ */
@@ -148,11 +148,11 @@
   top: 7rem;
 }
 .cv_head .display-lg {
-  max-width: 12ch;
+  max-width: calc(12ch * var(--wide));
 }
 .cv_lede {
   margin: var(--space-medium) 0 0;
-  max-width: 24rem;
+  max-width: calc(24rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
@@ -193,7 +193,7 @@
 }
 .cv_text {
   margin: 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-regular);
   line-height: 1.65;
@@ -229,18 +229,18 @@
 .why_inner {
   position: relative;
   z-index: 1;
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
 }
 .why_inner .display-lg {
   color: var(--white);
-  max-width: 16ch;
+  max-width: calc(16ch * var(--wide));
 }
 .why_text {
   margin: var(--space-medium) 0 0;
   font-size: var(--size-text-medium);
   line-height: 1.7;
   color: rgba(255, 255, 255, 0.86);
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
 }
 
 /* --- the person ------------------------------------------------------------- */
@@ -285,11 +285,11 @@
   margin-left: var(--space-large);
 }
 .beyond_body .display-lg {
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .beyond_text {
   margin: var(--space-medium) 0 0;
-  max-width: 32rem;
+  max-width: calc(32rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.65;
@@ -344,7 +344,7 @@
   left: var(--gutter);
   bottom: var(--space-large);
   z-index: 2;
-  max-width: 24rem;
+  max-width: calc(24rem * var(--wide));
   padding: var(--space-medium);
   background: rgba(246, 244, 239, 0.94);
   backdrop-filter: blur(6px);

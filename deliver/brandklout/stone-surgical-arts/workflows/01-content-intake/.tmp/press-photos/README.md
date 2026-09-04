@@ -35,6 +35,15 @@ This is the same class of decision as the before/after warning in
 [HANDOFF.md](../../../04-design/.tmp/surgical-arts/HANDOFF.md): the material exists, it is tempting,
 and the reason not to publish it is not about quality.
 
+## 2026-09-04: TRG_1543 is on the site, on instruction
+
+Alejandro, reviewing the home page: *"we need to change this image for the front of the location,
+if you can't find a local photo, grab one from the internet."* There is no local photograph of the
+building, so `TRG_1543` (the 1601x2400 rendition, saved here as `TRG_1543-1601.jpg`) is cropped to a
+16:9 band, upscaled 2x and placed as `assets/ssa-exterior.webp` on the home page's place band. See
+`site-src/import-exterior.mjs` and `site-src/press-manifest.json`. **Everything in the section
+above still holds: the ask below has not been sent, and it has to be before the domain goes live.**
+
 ## The ask
 
 One line to Southlake Style requesting permission to use **`TRG_1543`** on stonesurgicalarts.com.

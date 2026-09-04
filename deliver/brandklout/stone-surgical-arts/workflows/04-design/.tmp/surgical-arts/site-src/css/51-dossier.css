@@ -181,7 +181,7 @@
 }
 .dhero_sub {
   margin: var(--space-medium) 0 0;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
   font-size: var(--size-text-large);
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.88);
@@ -412,12 +412,12 @@
   line-height: 1.06;
   letter-spacing: -0.01em;
   color: var(--fg);
-  max-width: 20ch;
+  max-width: calc(20ch * var(--wide));
   text-wrap: balance;
 }
 .dsec_lede {
   margin: var(--space-medium) 0 0;
-  max-width: 46rem;
+  max-width: calc(46rem * var(--wide));
   font-size: var(--size-text-medium);
   line-height: 1.65;
   color: var(--fg-body);
@@ -443,7 +443,7 @@
 }
 .dsec.is-band .dsec_title {
   color: var(--white);
-  max-width: 24ch;
+  max-width: calc(24ch * var(--wide));
 }
 .dsec.is-band .dsec_mark {
   color: var(--green);
@@ -451,7 +451,7 @@
 
 .prose_component {
   margin-top: var(--space-medium);
-  max-width: 46rem;
+  max-width: calc(46rem * var(--wide));
 }
 .prose_component p {
   margin: 0 0 var(--space-small);
@@ -577,7 +577,7 @@
   min-width: 0;
 }
 .layers_panel {
-  max-width: 42rem;
+  max-width: calc(42rem * var(--wide));
 }
 /* Without JS every panel is simply on the page, one after another, separated
    by a rule. `hidden` is set by the script, never in the markup, so a blocked
@@ -812,7 +812,7 @@
 }
 .tl_text {
   margin: 0;
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
   font-size: var(--size-text-regular);
   line-height: 1.7;
   color: var(--fg-body);
@@ -951,7 +951,7 @@
 }
 .matrix_foot {
   margin: var(--space-medium) 0 0;
-  max-width: 46rem;
+  max-width: calc(46rem * var(--wide));
   font-size: var(--size-text-small);
   line-height: 1.65;
   color: var(--fg-mute);
@@ -981,7 +981,7 @@
 }
 .book_body {
   padding: var(--section) var(--gutter) var(--section) clamp(var(--space-large), 4vw, var(--space-xxlarge));
-  max-width: 46rem;
+  max-width: calc(46rem * var(--wide));
 }
 .book_title {
   margin: 0;
@@ -991,7 +991,7 @@
   line-height: 1.06;
   letter-spacing: -0.01em;
   color: var(--fg);
-  max-width: 18ch;
+  max-width: calc(18ch * var(--wide));
 }
 .book_lede {
   margin: var(--space-medium) 0 0;

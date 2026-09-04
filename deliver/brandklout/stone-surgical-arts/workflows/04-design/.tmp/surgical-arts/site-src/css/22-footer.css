@@ -8,9 +8,11 @@
 
 .footer_top {
   display: grid;
-  grid-template-columns: 1fr auto 1fr;
+  /* Four columns since 2026-09-04: the page list, the address, the mark, the
+     hours. The list used to be a wrapped row above these three. */
+  grid-template-columns: auto 1fr auto 1fr;
   align-items: start;
-  gap: 3rem;
+  gap: 3rem 4rem;
 }
 .footer_brand {
   display: flex;
@@ -140,16 +142,17 @@
   .footer_brand {
     order: -1;
   }
+  .footer_nav {
+    align-items: center;
+  }
 }
 
 /* --- the page list, 2026-09-02 ------------------------------------------------ */
 .footer_nav {
   display: flex;
-  flex-wrap: wrap;
-  gap: 0.75rem 2rem;
-  padding-bottom: var(--space-large);
-  margin-bottom: var(--space-large);
-  border-bottom: 1px solid var(--line);
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 0.7rem;
 }
 .footer_nav a {
   font-size: var(--size-text-tiny);

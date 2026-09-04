@@ -442,11 +442,11 @@
 }
 .catalogue_title {
   margin: 0;
-  max-width: 20ch;
+  max-width: calc(20ch * var(--wide));
 }
 .catalogue_lede {
   margin: 0;
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
@@ -549,7 +549,7 @@
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
-  max-width: 30rem;
+  max-width: calc(30rem * var(--wide));
 }
 .catalogue_links {
   grid-column: 2;
@@ -559,7 +559,7 @@
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem 0.75rem;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
 }
 .catalogue_link {
   display: inline-flex;
@@ -807,7 +807,7 @@ span.catalogue_link {
 }
 .surgeon_title {
   margin: 0 0 var(--space-large);
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .surgeon_step {
   padding: var(--space-xlarge) 0;
@@ -842,7 +842,7 @@ span.catalogue_link {
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.65;
-  max-width: 32rem;
+  max-width: calc(32rem * var(--wide));
 }
 .surgeon_step .dealt_component {
   margin-top: var(--space-medium);
@@ -873,7 +873,7 @@ span.catalogue_link {
   .surgeon_frames {
     height: auto;
     aspect-ratio: 4 / 5;
-    max-width: 26rem;
+    max-width: calc(26rem * var(--wide));
   }
   .js .surgeon_step {
     opacity: 1;
@@ -950,14 +950,14 @@ span.catalogue_link {
   align-items: end;
 }
 .concern_head .display-lg {
-  max-width: 16ch;
+  max-width: calc(16ch * var(--wide));
 }
 .concern_lede {
   margin: 0;
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
-  max-width: 28rem;
+  max-width: calc(28rem * var(--wide));
 }
 .concern_list {
   margin: 0;
@@ -1422,7 +1422,7 @@ span.catalogue_link {
 /* A two-word title with a trademark in it breaks as "MyEllevate neck / lift"
    at 1440; capped, it breaks as "MyEllevate / neck lift". */
 .dhero_title.is-long {
-  max-width: 11ch;
+  max-width: calc(11ch * var(--wide));
 }
 .related_component {
   padding: var(--section-sm) var(--gutter) var(--section);

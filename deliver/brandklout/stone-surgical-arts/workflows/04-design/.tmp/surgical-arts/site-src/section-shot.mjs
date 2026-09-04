@@ -20,6 +20,13 @@ import { execFileSync } from "node:child_process";
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.join(HERE, "..", "final-site");
 const [page, selector, widthArg, out] = process.argv.slice(2);
+// --motion: leave prefers-reduced-motion alone so the parallax, the masks and
+// the settle run as they do for a reviewer; --scroll=<px>: where to leave the
+// scroll before capturing (the parallax is scrubbed to it). --vh=<px>: the
+// viewport height (default 900).
+const MOTION = process.argv.includes("--motion");
+const SCROLL = Number((process.argv.find((a) => a.startsWith("--scroll=")) || "--scroll=0").slice(9));
+const VH = Number((process.argv.find((a) => a.startsWith("--vh=")) || "--vh=900").slice(5));
 if (!out) { console.error("usage: node section-shot.mjs <page.html> <selector> <width> <out.png>"); process.exit(2); }
 const width = Number(widthArg);
 const MIME = { ".html": "text/html", ".css": "text/css", ".js": "text/javascript", ".webp": "image/webp", ".jpg": "image/jpeg", ".png": "image/png", ".svg": "image/svg+xml", ".woff2": "font/woff2", ".json": "application/json" };
@@ -35,19 +42,20 @@ const PORT = 8796;
 await new Promise((r) => srv.listen(PORT, r));
 const browser = await puppeteer.launch({ executablePath: "C:/Program Files/Google/Chrome/Application/chrome.exe", headless: "new", args: ["--no-sandbox", "--hide-scrollbars"] });
 const pg = await browser.newPage();
-await pg.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
-await pg.setViewport({ width, height: 900, deviceScaleFactor: 1 });
+if (!MOTION) await pg.emulateMediaFeatures([{ name: "prefers-reduced-motion", value: "reduce" }]);
+await pg.setViewport({ width, height: VH, deviceScaleFactor: 1 });
 await pg.goto(`http://127.0.0.1:${PORT}/${page}`, { waitUntil: "networkidle0", timeout: 60000 });
-const box = await pg.evaluate(async (sel) => {
+const box = await pg.evaluate(async (sel, scrollTo) => {
   document.documentElement.style.scrollBehavior = "auto";
   await new Promise((r) => { let y = 0; const t = setInterval(() => { window.scrollBy(0, 600); y += 600; if (y > document.body.scrollHeight) { clearInterval(t); r(); } }, 40); });
-  window.scrollTo(0, 0);
-  await new Promise((r) => setTimeout(r, 600));
+  window.scrollTo(0, scrollTo);
+  // Long enough for a mask reveal and the settle to finish with motion on.
+  await new Promise((r) => setTimeout(r, 2600));
   const el = document.querySelector(sel);
   if (!el) return null;
   const r = el.getBoundingClientRect();
   return { x: r.left + window.scrollX, y: r.top + window.scrollY, width: r.width, height: r.height };
-}, selector);
+}, selector, SCROLL);
 if (!box) { console.error(`no element for ${selector} on ${page}`); process.exit(1); }
 const full = out.replace(/\.png$/, ".full.png");
 await pg.screenshot({ path: full, fullPage: true });

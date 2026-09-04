@@ -64,14 +64,14 @@
 }
 .place_inner .display-xl {
   color: var(--white);
-  max-width: 12ch;
+  max-width: calc(12ch * var(--wide));
 }
 .place_inner .chapter_mark {
   color: rgba(255, 255, 255, 0.7);
 }
 .place_lede {
   margin: 0;
-  max-width: 28rem;
+  max-width: calc(28rem * var(--wide));
   font-size: var(--size-text-large);
   line-height: 1.5;
   color: rgba(255, 255, 255, 0.88);
@@ -92,11 +92,11 @@
   margin-bottom: var(--section-sm);
 }
 .steps_head .display-lg {
-  max-width: 14ch;
+  max-width: calc(14ch * var(--wide));
 }
 .steps_lede {
   margin: 0;
-  max-width: 26rem;
+  max-width: calc(26rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
@@ -157,13 +157,13 @@
   margin-bottom: var(--space-large);
 }
 .gallery_head .display-lg {
-  max-width: 16ch;
+  max-width: calc(16ch * var(--wide));
 }
 .gallery_head p {
   margin: 0;
   color: var(--fg-mute);
   font-size: var(--size-text-small);
-  max-width: 20rem;
+  max-width: calc(20rem * var(--wide));
 }
 .gallery_grid {
   display: grid;
@@ -261,14 +261,14 @@
 }
 .roster_head {
   margin-bottom: var(--section-sm);
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
 }
 .roster_lede {
   margin: var(--space-medium) 0 0;
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.6;
-  max-width: 34rem;
+  max-width: calc(34rem * var(--wide));
 }
 .roster_lead {
   display: grid;
@@ -285,7 +285,7 @@
   aspect-ratio: 4 / 5;
   overflow: clip;
   background: var(--stone-soft);
-  max-width: 26rem;
+  max-width: calc(26rem * var(--wide));
 }
 .roster_lead-media img {
   width: 100%;
@@ -331,7 +331,7 @@
 }
 .roster_text {
   margin: 0 0 var(--space-small);
-  max-width: 32rem;
+  max-width: calc(32rem * var(--wide));
   color: var(--fg-body);
   font-size: var(--size-text-medium);
   line-height: 1.65;
@@ -393,7 +393,7 @@
   font-size: var(--size-text-small);
   color: var(--fg-mute);
   line-height: 1.6;
-  max-width: 44rem;
+  max-width: calc(44rem * var(--wide));
 }
 
 /* --- responsive ------------------------------------------------------------------ */

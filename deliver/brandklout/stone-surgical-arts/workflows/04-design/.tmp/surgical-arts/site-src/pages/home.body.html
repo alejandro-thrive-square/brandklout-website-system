@@ -96,7 +96,10 @@
         <img src="assets/m-hero.webp" alt="A woman in her fifties with her eyes closed and a hand at her neck, in soft ivory light" width="976" height="1464" fetchpriority="high">
       </div>
       <figure class="arrival_inset" data-parallax="6">
-        <img src="assets/dr-stone-desk.webp" alt="Dr. Mona Stone at the front desk beneath the practice’s sign" width="2000" height="1500" loading="lazy">
+        <!-- eager, not lazy: this is in the first viewport, and lazy left the
+             figure's stone-soft ground showing as an empty box while the
+             photograph arrived (client, 2026-09-04). -->
+        <img src="assets/dr-stone-desk.webp" alt="Dr. Mona Stone at the front desk beneath the practice’s sign" width="2000" height="1500" loading="eager" fetchpriority="high">
         <figcaption class="arrival_inset-plate">Your surgeon, at every visit<strong>Dr. Mona Stone, DDS</strong></figcaption>
       </figure>
     </div>
@@ -630,7 +633,10 @@
     <div class="ghost_word" aria-hidden="true">Results</div>
     <div class="offer_inner">
       <div class="offer_row" data-j="rise">
-        <div class="offer_media" data-parallax="10">
+        <!-- anchored at the top with a short travel: the face is at the very top
+             of this photograph and the centred 10% drift cut it at the eyes
+             (client, 2026-09-04). -->
+        <div class="offer_media" data-parallax="4" data-parallax-anchor="top">
           <div class="u-fill" data-j="mask">
             <img src="assets/m-profile-light.webp" alt="A woman in profile in a slant of warm light" width="2133" height="1200" loading="lazy">
           </div>
@@ -705,13 +711,17 @@
     </div>
   </section>
 
-  <!-- The neon. The practice's own wall, and a line of copy it already
-       chose for itself. -->
-  <section class="neon_component" aria-label="The practice's neon sign: Be the best version of you">
+  <!-- The building. Until 2026-09-04 this band was the neon on the practice's
+       wall; the client asked for the front of the location instead. The
+       practice owns no exterior photograph, so this is Southlake Style's
+       frame from the 2021 opening, on the client's instruction, with the
+       permission ask still to send: see import-exterior.mjs and
+       press-manifest.json. The neon stays in the place strip and on About. -->
+  <section class="neon_component" aria-label="The front of the practice at 72 Andorra Drive">
     <div class="neon_media" data-parallax="14">
-      <img src="assets/ssa-neon.webp" alt="The green neon sign on the practice wall: Be the best version of you" width="2133" height="1200" loading="lazy">
+      <img src="assets/ssa-exterior.webp" alt="The front of the practice at 72 Andorra Drive: stone and stucco, the Stone Surgical Arts sign over the entrance" width="3200" height="1800" loading="lazy">
     </div>
-    <p class="neon_caption">On the wall at 72 Andorra Drive</p>
+    <p class="neon_caption">72 Andorra Drive, Westlake</p>
   </section>
 
   <!-- ====================================================================

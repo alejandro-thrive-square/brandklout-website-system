@@ -1,6 +1,43 @@
 # Stone Surgical Arts — handoff
 
 > [!IMPORTANT]
+> **2026-09-04, NIGHT: THE FIRST FEEDBACK ROUND ON THE LOCAL BUILD, EIGHT ITEMS. LOCAL ONLY, NOT
+> PUBLISHED.** Alejandro reviewed the home and treatments pages at 2425 and 1918 wide.
+>
+> - **Dr. Stone's photographs, resolution.** All six re-emitted through Magnific at 2x/4x
+>   (`upscale-doctor.mjs`; the script now falls back to the restored asset when the Drive export
+>   file is missing, and records that it did). Checked face by face against the source: the same
+>   person, sharper, no reinterpretation. The steps photograph's play icon is painted out again by
+>   `fix-steps.py`, whose geometry now matches the 646px restored source rather than the 702px
+>   export; a faint patch remains on the black top at 100% and is invisible at the tile size the
+>   page uses. One file per photograph, reused everywhere it appears.
+> - **The hero inset "empty when it loads"**: it was `loading="lazy"` in the first viewport, so
+>   the figure's stone ground showed until the photograph arrived. Eager now, high priority.
+> - **The results band cut the model at the eyes** with motion on. The parallax drifted a
+>   photograph whose face is at its very top; it now takes `data-parallax-anchor="top"` with a
+>   4% travel. Verified with motion on at 2425 (`section-shot.mjs --motion`).
+> - **Text columns shrinking above 2K.** Two causes. (1) Every heading cap and copy column is in
+>   `ch` or `rem`, which follow the root font (x1.25 from 1440 to 2425) but not the viewport
+>   (x1.68). Seventy of them now read `calc(N * var(--wide))`; `--wide` is 1, 1.15 from 1700px and
+>   1.3 from 2400px (`01-tokens.css`, `59-wide.css`), which is the one place to tune it. (2) The
+>   "Three steps" heading sat in a box that applied the section gutter and a 46rem cap on the same
+>   element; above 1560px the gutter grows to centre the content column and had squeezed the text
+>   to 460px. The cap now excludes the gutter. Measured at 1440 and 2425 on three pages.
+> - **The neon band is now the front of the building.** The practice owns no exterior
+>   photograph and the sister site's "office" banner is the reception desk, so this is Southlake
+>   Style's TRG_1543 from the 2021 opening, 16:9 band, Magnific 2x, `assets/ssa-exterior.webp`,
+>   on Alejandro's instruction ("grab one from the internet"). **The copyright is the magazine's
+>   and the one-line permission ask in `01-content-intake/.tmp/press-photos/README.md` still has
+>   to be sent**; if refused, one line in `home.body.html` puts the neon back. The neon itself
+>   stays in the place strip and as the About hero.
+> - **The footer's page list** is a column now, the first of four beside the address, the mark
+>   and the hours (`partials/footer.html`, `22-footer.css`).
+> - **The treatments jump bar's scrollbar**: `overflow-x: auto` computes `overflow-y` to auto,
+>   and the current link's underline sat 1px below the box. Clipped, and the scrollbar hidden.
+> - **Gates:** audit FAIL none / WARN none, all-pages 144/144, journey 47/47, dossier suites
+>   50/50; crop probe re-run at 390/1440/2425 with nothing new.
+
+> [!IMPORTANT]
 > **2026-09-04, EVENING: FACES UNCUT, AND THE DOCTOR'S OWN STOCK IN. LOCAL ONLY, NOT PUBLISHED.**
 > Two jobs on top of the morning's refinement pass, both still unpublished with it.
 >

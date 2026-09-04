@@ -157,9 +157,22 @@ print(im.width, im.height)
 
 async function run(job) {
   const stem = job.file.replace(/\.webp$/, '')
-  const src = job.abs ?? path.join(SRC, job.from)
+  let src = job.abs ?? path.join(SRC, job.from)
   const dst = path.join(ASSETS, job.file)
   const marker = path.join(RAW, `${stem}.png`)
+  // 2026-09-04: the Drive export is gone (01-content-intake/.tmp/google-drive-images
+  // is empty and the client's copy is unavailable), and the local assets were
+  // restored PRE-UPSCALE from the published site. When the export file is
+  // missing, the restored asset is the best source that exists: it is the same
+  // photograph at the same pixels the export gave us, re-encoded once at q82.
+  // The raw PNG in _upscaled/ is still the marker, so a real export dropped in
+  // later re-runs from the original with --force.
+  if (!fs.existsSync(src) && fs.existsSync(dst) && !fs.existsSync(marker)) {
+    console.log(`note  ${job.file}: export missing, upscaling the restored asset (${dst})`)
+    src = path.join(RAW, `${stem}.source.webp`)
+    fs.mkdirSync(RAW, { recursive: true })
+    fs.copyFileSync(dst, src)
+  }
   if (!fs.existsSync(src)) return console.error(`MISSING SOURCE ${src}`)
   if (fs.existsSync(marker) && !force && !only) return console.log(`skip  ${job.file} (already upscaled)`)
   fs.mkdirSync(RAW, { recursive: true })

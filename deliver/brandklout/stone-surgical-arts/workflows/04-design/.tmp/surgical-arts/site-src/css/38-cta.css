@@ -35,10 +35,10 @@
   text-align: center;
 }
 .cta_title {
-  max-width: 20ch;
+  max-width: calc(20ch * var(--wide));
 }
 .cta_text {
-  max-width: 52ch;
+  max-width: calc(52ch * var(--wide));
   color: var(--fg-body);
 }
 .cta_actions {
@@ -79,7 +79,7 @@
   margin: 0;
   align-self: end;
   width: 100%;
-  max-width: 26rem;
+  max-width: calc(26rem * var(--wide));
   justify-self: end;
   height: min(60vh, 34rem);
   margin-bottom: calc(var(--space-xxlarge) * -1 - var(--space-large));
@@ -113,7 +113,7 @@
     justify-self: start;
     height: auto;
     aspect-ratio: 4 / 5;
-    max-width: 18rem;
+    max-width: calc(18rem * var(--wide));
     margin-bottom: 0;
     -webkit-mask-image: none;
     mask-image: none;
