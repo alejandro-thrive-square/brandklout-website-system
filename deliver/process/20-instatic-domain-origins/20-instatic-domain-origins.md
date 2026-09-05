@@ -143,7 +143,7 @@ PUBLIC_ORIGIN=https://www.masonparkdental.com,https://masonparkdental.com,https:
 
 **Dr. Nahlah — set once, never extended.** `PUBLIC_ORIGIN` already held
 `encorercm.com,www.encorercm.com,dr-nahlah.up.railway.app` from a fix on **2026-08-18**, recorded in
-`bk-dr-nahlah/.claude/RUNBOOK.md`. That entry diagnosed this exact class of bug (editor stuck
+[`dr-nahlah/docs/runbook/2026-08-18-latest-completed-instatic-admin-403s-csrf-origin.md`](../../brandklout/dr-nahlah/docs/runbook/2026-08-18-latest-completed-instatic-admin-403s-csrf-origin.md). That entry diagnosed this exact class of bug (editor stuck
 "reconnecting", cannot sign out, new user cannot log in — all one origin check) and even wrote down
 the rule: *"Adding a custom domain in Railway does not update `PUBLIC_ORIGIN`, and `www` is a
 separate domain."* Then `drnahlah.com` went live on 2026-08-25 and was not appended. **The knowledge

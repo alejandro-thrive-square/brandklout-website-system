@@ -363,15 +363,38 @@ The system has **two workspaces that can both change repo state**: the local mac
 - **Concurrency**: do not run `vps-commit-push.sh` on the VPS and `sync.sh` on local at the same time. If a push is rejected because the other side pushed first, simply re-run the safe command.
 - **Hermes**: when committing inside this repo, Hermes must use `scripts/vps-commit-push.sh` (which pulls before pushing) and must never force-push or rewrite shared history.
 
-## 5. Runbooks — the per-worktree handoff note
+## 5. Runbooks — one file per run, tracked, per project
 
-**Every worktree keeps `.claude/RUNBOOK.md`: what this worktree is for, what is done, what is next, and what cost time.** Update it after each task you complete, and read it when you pick a worktree up. Nothing enforces it — see below.
+**A run gets its own file.** After each task, write
+`deliver/brandklout/<client>/docs/runbook/YYYY-MM-DD-<slug>.md`, add its row to that folder's
+`INDEX.md`, and refresh the standing `docs/RUNBOOK.md` with what is true *now*. Repo-level work that
+belongs to no client goes to `.claude/runbook/` instead.
 
-Untracked by design (see `.gitignore`): every worktree writes the same path, so tracking it would guarantee a merge conflict on every client branch. The durable record of what a session did is its **commits**; the runbook is only the bridge between sessions.
+**Reading rule: open `INDEX.md`, then only the runs you need.** Never read the whole history. The
+index flags which runs carry a `Gotchas` or `Open questions` section, which is usually all you want.
 
-Write it for a reader with **no memory of your session**. **Gotchas** is the most valuable section: failed approaches, environment quirks and false leads are exactly what a fresh session would otherwise pay to rediscover. Be concrete — paths, commands, SHAs, not summaries.
+**Runbooks are tracked — commit them.** They were gitignored until 2026-09-04 for a reason that the
+current layout dissolves: every worktree wrote *the same path*, `.claude/RUNBOOK.md`, so tracking
+guaranteed a merge conflict on every client branch. Now each project writes its own path and each run
+its own file, so two sessions almost never touch the same file. What ignoring them actually cost was
+worse than the conflicts: they travelled with nothing, were backed up nowhere, and died with the
+worktree — the same failure class that lost Mason Park's `uploads/` and Stone's Drive export. Tracking
+them also means a merge to `main` gives every worktree every project's history, which is the point.
 
-### The automation behind this was removed on 2026-08-22
+Write for a reader with **no memory of your session**. **Gotchas** is the most valuable section:
+failed approaches, environment quirks and false leads are exactly what a fresh session would
+otherwise pay to rediscover. Be concrete — paths, commands, SHAs, not summaries.
+
+**Why one file per run.** The old single file grew without bound: `bk-dr-nahlah` reached 6,459 lines
+and ~81,500 tokens, 41% of a 200k context window before any work began. Splitting only helps if the
+reading rule above is followed — a session that opens every run file is worse off than before.
+
+**An undated `## ` heading belongs to the run above it.** The historical files use `## Done`,
+`## Next` and `## Gotchas` as h2 sub-sections of a run, and are newest-first, so a trailing `Next`
+describes the *oldest* entry, not current state. The 2026-09-04 migration attached them accordingly;
+do not read a pre-migration `Next` as a plan.
+
+### The session-rotation automation was removed on 2026-08-22
 
 There used to be a rule here: a session that reached 200,000 tokens handed off to a fresh one automatically. Four scripts implemented it — `session-lib.mjs`, `session-guard.mjs` (a `Stop` hook), `session-resume.mjs` (a `SessionStart` hook) and `session-rotate.mjs` — registered in a project-level `.claude/settings.json`. All of it is deleted. `git log -- scripts/session-rotate.mjs` has the history if it is ever wanted back.
 

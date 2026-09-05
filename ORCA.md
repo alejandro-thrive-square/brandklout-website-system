@@ -161,7 +161,7 @@ Before dispatching a new client task:
    standard into a dirty, half-finished run.
 3. Merge the current local `main` into the client branch, resolve conflicts as a union of the client
    adaptation and the canonical correction, and record the resulting baseline commit in the client
-   `docs/project-overview.md` and `.claude/RUNBOOK.md`.
+   `docs/project-overview.md` and the client's standing `docs/RUNBOOK.md`.
 4. Read the canonical directive under `deliver/process/` first, then the client workflow instance
    and its documented deviations. A client workflow copied earlier is a snapshot, not a live link.
 5. Confirm that every required reference and lightweight tool exists inside the active worktree.
