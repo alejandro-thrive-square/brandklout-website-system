@@ -284,6 +284,66 @@ function harvestLossy(files) {
      identical values. Selectors are matched on their exact text. */
   const MATH = /\b(?:clamp|min|max)\(/
   const SAFE = /\b(?:var|env)\(/
+
+  /* AND EVERY MULTI-LAYER background, WHICH LOSES ALL BUT ITS LAST LAYER.
+     FOUND 2026-09-04 by visual-diff.mjs, on ten of the eleven pages at once,
+     and it is the worst defect this build has shipped.
+
+     happy-dom expands a `background` shorthand into longhands and keeps ONE
+     layer. `.cover_media::after` is written as
+
+         background:
+           linear-gradient(180deg, rgba(39,39,39,.55) 0%, … .82 100%),   <- the scrim
+           linear-gradient(90deg,  rgba(39,39,39,.4)  0%, … 0 60%);
+
+     and published as `background-image: linear-gradient(90deg, …)` alone. The
+     180deg layer is what darkens the top and foot of every interior header so
+     white type can be read over a photograph; without it the published covers
+     are the raw photograph at full brightness with white text lying on it. The
+     /thank-you neon sign is the extreme case — the heading is barely legible.
+
+     NOTHING ELSE COULD SEE THIS. `verify-live.mjs` checks routes and assets.
+     `compare-live.mjs` compares computed properties on elements it can pair by
+     class, and `::after` is a pseudo-element: it has no node, so it is not in
+     `document.querySelectorAll('body *')` and never gets compared. `filter`,
+     `backdrop-filter` and `mix-blend-mode` are not in its property list either.
+     It took subtracting the two screenshots.
+
+     There are three of these on the site and all three are scrims — the home
+     hero, the interior cover, and the /thank-you override. They take the same
+     road as the math declarations: verbatim, in the code asset, last. */
+  const layers = (value) => {
+    let depth = 0
+    let n = 1
+    for (const c of value) {
+      if (c === '(') depth++
+      else if (c === ')') depth--
+      else if (c === ',' && depth === 0) n++
+    }
+    return n
+  }
+  const LAYERABLE = /^(?:background|background-image|mask|mask-image|-webkit-mask-image)$/
+
+  /* AND PROPERTIES THE CONVERSION DOES NOT KNOW AT ALL, which it drops without
+     a word. FOUND 2026-09-04 by css-parity.mjs — the only one of the three
+     lossy failures that was found by ASKING rather than by noticing.
+
+     `html { -webkit-text-size-adjust; scroll-behavior; scroll-padding-top }`
+     published as `html { font-size }` alone. `scroll-padding-top: 7rem` is the
+     one that matters: the navbar is fixed and about 5.5rem tall, so without it
+     every in-page anchor on the published site scrolls its target UNDERNEATH
+     the navbar. The local build is correct and `menu-test.mjs` asserts it, so
+     the check passes and the published site still does the wrong thing.
+
+     This list is not a guess and it is not exhaustive. It is what
+     `css-parity.mjs` reported missing on a real publish; run that after any
+     change to the stylesheets and add whatever it names. */
+  const DROPPED = /^(?:scroll-behavior|scroll-padding(?:-|$)|scroll-margin(?:-|$)|-webkit-text-size-adjust|text-size-adjust|overscroll-behavior(?:-|$))/
+
+  const isLossy = (prop, value) =>
+    (MATH.test(value) && !SAFE.test(value)) ||
+    (LAYERABLE.test(prop) && layers(value) > 1) ||
+    DROPPED.test(prop)
   const rules = (text) => {
     const found = []
     let i = 0
@@ -324,7 +384,7 @@ function harvestLossy(files) {
       // the hub's category band kept its desktop min-height on a phone.
       for (const part of sel.split(',')) {
         const one = part.replace(/\s+/g, ' ').trim()
-        if (one) entries.push({ file, media, sel: one, prop, value, math: MATH.test(value) && !SAFE.test(value) })
+        if (one) entries.push({ file, media, sel: one, prop, value, math: isLossy(prop, value) })
       }
     }
   }
@@ -389,7 +449,9 @@ const tokensCss =
   lossy
     .map(
       ({ file, blocks }) =>
-        `\n/* ===== the cascade of every clamp()/min()/max() pair, from ${file}, see push-site.mjs ===== */\n` + blocks.join('\n') + '\n',
+        `\n/* ===== the cascade of every pair the conversion is lossy on — a clamp()/min()/max()\n` +
+        `        value, or a multi-layer background — from ${file}. See push-site.mjs ===== */\n` +
+        blocks.join('\n') + '\n',
     )
     .join('')
 
@@ -431,7 +493,7 @@ const tokensCss =
     `tokens     ${TOKEN_FILES.join(' + ')} + ${harvested.reduce((n, h) => n + h.blocks.length, 0)} harvested :root block(s) from ` +
       `${harvested.map((h) => h.file).join(', ') || '(none)'}`,
   )
-  console.log(`lossy      ${lossy.reduce((n, h) => n + h.blocks.length, 0)} declaration(s) in the cascade of math-function pairs, from ${lossy.map((h) => h.file).join(', ') || '(none)'}`)
+  console.log(`lossy      ${lossy.reduce((n, h) => n + h.blocks.length, 0)} declaration(s) in the cascade of the pairs the conversion is lossy on (math values, multi-layer backgrounds, properties it drops outright), from ${lossy.map((h) => h.file).join(', ') || '(none)'}`)
 }
 
 /* --- read current state --------------------------------------------------- */

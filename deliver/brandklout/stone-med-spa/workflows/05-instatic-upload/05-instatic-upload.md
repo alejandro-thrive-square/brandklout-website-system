@@ -16,15 +16,25 @@ registry rules, images in the media library.
 
 > [!WARNING]
 > **ELEVEN PAGES, PUBLISHED 2026-09-04, `{"publishedPages":11}`, `11 written, 0 deleted`, on a
-> brand-new instance provisioned the same day.** `verify-live.mjs` clean: 11 routes, 81 URLs, 166
-> asset references, 11/11 distinct titles. `compare-live.mjs` went **36 → 12 → 10 → 2** findings
-> across three applies, and what remains is comparison noise whose direction flips between runs —
-> trap 30 explains why it is not a publish difference and why it is deliberately not suppressed.
+> brand-new instance provisioned the same day.** Gates: `verify-live.mjs` clean (11 routes, 81 URLs,
+> 166 asset references, 11/11 distinct titles) · `css-parity.mjs` FAIL none · `visual-diff.mjs`
+> ≤1.6% at 1440 and ≤4.4% at 390, all of it text antialiasing and image re-encoding ·
+> `compare-live.mjs` **36 → 12 → 10 → 2**, and those two are comparison noise whose direction flips
+> between runs (trap 30).
 >
-> Four real defects, all of them silent, all of them shipped a 200: the whole site's dark band
-> published in the wrong charcoal (trap 26), two custom properties on classes vanished (trap 27),
-> **every image published with `alt=""`** (trap 28), and a breadcrumb lost its spacing (trap 23,
-> already written down). The media library is 73 files and 23 of them now carry alt text.
+> **EIGHT real defects, every one silent, every one behind a 200.** Four found by `compare-live.mjs`
+> and by reading the published `<head>`: the whole site's dark band published in the wrong charcoal
+> (trap 26), two custom properties declared on classes vanished (trap 27), **every image published
+> with `alt=""`** (trap 28), and every page published the SIBLING's meta description (trap 31). One
+> was trap 23 arriving again — a breadcrumb's `&nbsp;` spacing (trap 29).
+>
+> **And three that nothing in the workflow could see, which is why it gained two gates.**
+> `visual-diff.mjs` — a plain pixel subtraction — found that a multi-layer `background` loses every
+> layer but the last, so **the scrim over every interior header was gone and `/thank-you` was 56%
+> different** (trap 32). `css-parity.mjs` — which asks whether each declared property arrived at all
+> — found `scroll-padding-top` dropped, meaning every in-page anchor landed under the fixed navbar
+> (trap 34). And two "missing photographs" turned out to be `fullPage: true` screenshots lying
+> (trap 33).
 
 > [!IMPORTANT]
 > **A THIRD-PARTY SCRIPT TAG CANNOT BE ADDED TO A PAGE. IT GOES IN THE BUNDLE.**
@@ -121,6 +131,12 @@ node verify-live.mjs            # 6. GATE — crawls every route, link and asset
 node compare-live.mjs           # 7. GATE — diffs the published pages against the
                                #    local build: structure, computed style, geometry,
                                #    text and runtime state. See traps 19 and 20
+node css-parity.mjs             # 7b. GATE — did every declaration the build wrote reach
+                               #    the published CSS at all? Asks directly, in seconds.
+                               #    See trap 34
+node visual-diff.mjs            # 8. GATE — subtracts the two renders, pixel for pixel,
+node visual-diff.mjs 390        #    at both widths. No pairing, no property list, no
+                               #    suppressions. See traps 32 and 33
 ```
 
 `verify-live.mjs` is not optional. Every failure on this build reported success somewhere first.
@@ -678,6 +694,118 @@ by reading the published `<head>` by hand, which is now worth doing once per new
 It is derived from `seo.json`'s home-page description now, and throws rather than falling back, so a
 third client copying this file cannot inherit the second one's words.
 
+### 32. A MULTI-LAYER `background` LOSES EVERY LAYER BUT THE LAST — and that layer is the scrim
+
+The worst thing this build has published, and neither existing gate could see it.
+
+`.cover_media::after` is the dark wash that sits between an interior page's
+photograph and its white type. It is written as two stacked gradients:
+
+```css
+background:
+  linear-gradient(180deg, rgba(39,39,39,.55) 0%, …, rgba(39,39,39,.82) 100%),   /* the scrim */
+  linear-gradient(90deg,  rgba(39,39,39,.4)  0%, rgba(39,39,39,0) 60%);
+```
+
+happy-dom expands the shorthand into longhands and keeps **one** layer. Published:
+
+```css
+background-image: linear-gradient(90deg, rgba(39,39,39,0.4) 0%, rgba(39,39,39,0) 60%);
+```
+
+The 180deg layer — the one that darkens the top and the foot so a title can be read over a
+photograph — is gone. Every interior header published as the raw photograph at full brightness with
+white text lying on top of it. On `/thank-you`, whose photograph is a bright green neon sign, the
+heading was barely legible and the secondary button had all but vanished.
+
+There are three of these on the site and **all three are scrims**: the home hero, the interior
+cover, and the `/thank-you` override.
+
+**Why nothing caught it.** `verify-live.mjs` checks routes and assets. `compare-live.mjs` compares
+computed properties on elements it can pair by class — and `::after` **is a pseudo-element**: it has
+no node, it is not in `document.querySelectorAll('body *')`, so no pseudo-element on this site has
+ever been compared. Two more blind spots in the same place: an element with **no class at all** is
+skipped (`if (!cls) continue`), which is every bare `<img>`; and `filter`, `backdrop-filter`,
+`mix-blend-mode`, `clip-path` and the inset properties are not in its property list.
+
+**Fix:** `harvestLossy()` now treats a multi-layer `background` / `background-image` / `mask` the
+same way it treats a bare `clamp()` — the whole (selector, property) cascade goes verbatim into the
+token code asset, which is served last. Same road, same reasoning, three more declarations.
+
+**And a new gate, `visual-diff.mjs`, because a property list will never be complete.** It subtracts
+the two full-page renders and reports what differs, with no pairing and no suppressions. It found
+this in its first run: `/thank-you` was 56% different.
+
+### 33. `fullPage: true` IS NOT WHAT A VISITOR SEES, and it invents missing photographs
+
+Chrome takes a full-page screenshot by **resizing the viewport to the whole document** — 8,600px
+tall on the home page — and re-rendering. Every scroll-driven effect then evaluates against a
+viewport no human has, and every `loading="lazy"` image is asked to decide whether it is in view
+inside that giant frame.
+
+Two photographs "went missing" on the published site and neither was missing: the home page's
+`data-wipe` frame in the place section, and Dr. Stone's portrait on `/about` at 390. Both are
+present and pixel-identical at a real 1440x900 or 390x900. Both cost a round of investigation, and
+both looked utterly convincing in a diff — a solid block where a picture should be.
+
+`visual-diff.mjs` therefore scrolls a real viewport down the page and stitches the tiles, hiding
+`position: fixed` elements after the first tile (identically on both sides) so the navbar does not
+repeat down the seam. `shot.mjs` still uses `fullPage` and that is fine for a static reference
+image; it is **not** fine as the input to a comparison.
+
+The related half of this: **wait for the images before capturing.** Poll `complete && naturalWidth`,
+bounded — do not `await img.decode()` on a lazy image the browser has not chosen to fetch, because
+that promise never settles and the run dies on the CDP protocol timeout instead.
+
+### 34. Some properties are dropped outright, and `scroll-padding-top` is the one that hurts
+
+Three lossy conversions are now documented — custom properties (trap 1), bare math values
+(trap 21), multi-layer backgrounds (trap 32). This is the fourth shape: **a property the parser
+simply does not know, discarded with no trace.**
+
+```css
+/* 02-base.css, as written */          /* as published */
+html {                                 html {
+  -webkit-text-size-adjust: 100%;        font-size: calc(…);
+  scroll-behavior: smooth;             }
+  scroll-padding-top: 7rem;
+}
+```
+
+`scroll-padding-top` is not cosmetic here. The navbar is **fixed** and about 5.5rem tall, so
+without it every in-page anchor on the published site scrolls its target underneath the navbar.
+`menu-test.mjs` asserts the anchor lands at `top=112` — **against the local build**, so it passes
+while the published site does the wrong thing. That is the recurring shape of everything in this
+file: the gate that would have caught it is pointed at the wrong copy.
+
+**Fix:** `harvestLossy()` takes a third category, `DROPPED`, alongside the math values and the
+layered backgrounds. It covers `scroll-behavior`, `scroll-padding*`, `scroll-margin*`,
+`overscroll-behavior*` and `text-size-adjust`.
+
+**That list is not a guess and it is not exhaustive** — it is exactly what `css-parity.mjs`
+reported missing on a real publish. Which is the point of the new gate:
+
+### The check: `css-parity.mjs`
+
+```bash
+node css-parity.mjs      # seconds; needs only INSTATIC_BASE_URL
+```
+
+It indexes every rule in `final-site/assets/site.css` and every rule in the four published
+stylesheets, pairs them by normalised selector, and asks whether each **property name** the build
+declared is declared live. Values are deliberately not compared: the publisher rewrites them freely
+(`0` becomes `0px`, shorthands expand, colours normalise) and a value comparator is a project of its
+own, while a missing property NAME catches every failure this workflow has actually had. Shorthands
+that the publisher expands are matched against their longhands.
+
+It also lists selectors that are not published at all — that is the tree shake (trap 2), expected
+for runtime-only classes, so it reports them rather than failing on them.
+
+This is the cheapest of the three live gates and the one to reach for first after any stylesheet
+change. `verify-live.mjs` asks whether the site is whole; `compare-live.mjs` asks whether it still
+looks right; `visual-diff.mjs` asks the same question with no assumptions; this one asks whether
+the CSS survived the trip, which is where four of this workflow's worst defects came from.
+
 ### The check: `compare-live.mjs`
 
 ```bash
@@ -717,6 +845,14 @@ first publish by exactly this check.
 - `.tmp/probe-key.mjs` — looks one `compare-live.mjs` finding up on both sides, with the CSS rules
   that set the property. Keys elements exactly as `compare-live.mjs` does, so a finding's key can
   be pasted straight in. This is the tool for turning "some element differs" into "this rule does"
+- `.tmp/probe-sel.mjs` — the same, addressed by an ordinary CSS selector rather than by a
+  comparison key. Reaches the things `compare-live.mjs` cannot: a bare `<img>`, a pseudo-element's
+  host, anything with no class
+- `.tmp/viewshot.mjs` — one section, local above live, captured in a REAL viewport scrolled to it.
+  The arbiter when a full-page diff and a probe disagree; see trap 33
+- `.tmp/crop.mjs` — cuts a y-band out of the diff images so a band can be looked at rather than
+  guessed at
+- `.tmp/visual/` — the full-page renders and their diffs (gitignored: `*.png`)
 
 ## What is NOT done
 
