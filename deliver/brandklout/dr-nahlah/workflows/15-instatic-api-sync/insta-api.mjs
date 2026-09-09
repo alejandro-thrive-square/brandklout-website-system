@@ -44,8 +44,6 @@ const TMP = join(HERE, '.tmp')
 const SESSION_FILE = join(TMP, '.session')
 const COOKIE_NAME = 'instatic_admin_session'
 
-export const BASE = (process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(/\/$/, '')
-
 function loadEnv() {
   // Repo-root .env, walked up from here. Keeps secrets out of the workflow folder.
   let dir = HERE
@@ -64,6 +62,19 @@ function loadEnv() {
   }
 }
 loadEnv()
+
+/* MUST come after loadEnv(). This used to sit above it, which meant the repo-root
+   .env could set INSTATIC_EMAIL and INSTATIC_PASSWORD but NOT INSTATIC_BASE_URL --
+   BASE had already been frozen to the default by the time the file was read, so
+   every script silently talked to the default host no matter what .env said. That
+   surfaced on 2026-08-29 as `login failed 403` against a domain whose login was
+   verified working by hand seconds earlier.
+
+   The default is the canonical adminUrl from
+   deliver/process/20-instatic-domain-origins/sites.json. It changes when the
+   client's domain does -- encorercm.com was the default until the drnahlah.com
+   cutover, and a stale default here is indistinguishable from a broken login. */
+export const BASE = (process.env.INSTATIC_BASE_URL || 'https://www.drnahlah.com').replace(/\/$/, '')
 
 let cookie = null
 
@@ -183,8 +194,51 @@ async function request(method, path, body, { retryAuth = true, retryStepUp = tru
   return parsed
 }
 
-/** Escape hatch for endpoints without a named helper (fonts, media, plugins). */
+/**
+ * Backfill `template` onto any `changedPages` entry whose row currently has one.
+ *
+ * This is a SAFETY NET at the single choke point, not a substitute for writing
+ * the field. `PUT /site-document` replaces a page's cells with the output of
+ * `pageToCells()`, which only emits the template trio when the payload carries a
+ * `template` object — so a page write that forgets it silently un-templates the
+ * page. On 2026-08-25 that turned `post`, the entry template for the `posts`
+ * post-type, into an ordinary page and 404'd all 43 articles on publish. Eleven
+ * scripts in this folder had the same shape, so guarding each call site was
+ * never going to hold; guarding the one function they all go through does.
+ *
+ * It only ADDS what the row already had. It never invents or changes a template,
+ * so a caller deliberately setting or clearing one still wins.
+ */
+async function backfillTemplates(changedPages) {
+  const rows = (await request('GET', '/admin/api/cms/pages')).rows ?? []
+  const byId = new Map(rows.map((r) => [r.id, r]))
+  const out = []
+  for (const entry of changedPages) {
+    if (entry.template !== undefined) { out.push(entry); continue }
+    const row = byId.get(entry.id)
+    if (!row) { out.push(entry); continue }
+    const full = await request('GET', `/admin/api/cms/data/rows/${row.id}`)
+    const cells = full.row?.cells ?? {}
+    if (cells.templateEnabled !== true) { out.push(entry); continue }
+    console.warn(`[insta-api] carrying template through for "${row.slug}" — the caller omitted it`)
+    out.push({
+      ...entry,
+      template: { enabled: true, target: cells.templateTarget, priority: cells.templatePriority ?? 0 },
+    })
+  }
+  return out
+}
+
+/**
+ * Escape hatch for endpoints without a named helper (fonts, media, plugins).
+ *
+ * Site-document saves are intercepted so a page write cannot drop a template —
+ * see `backfillTemplates`. Nothing else is touched.
+ */
 export async function api(method, path, body) {
+  if (method === 'PUT' && path.includes('/site-document') && Array.isArray(body?.changedPages) && body.changedPages.length) {
+    body = { ...body, changedPages: await backfillTemplates(body.changedPages) }
+  }
   return request(method, path, body)
 }
 
@@ -252,6 +306,86 @@ export async function saveShell(shell, shellBaseSeq) {
     baseSeqs: {},
     shellBaseSeq,
   })
+}
+
+
+// ── page writes ────────────────────────────────────────────────────────────
+/**
+ * Build ONE `changedPages` entry from a row you have read.
+ *
+ * `PUT /site-document` does NOT merge cells. Every entry in `changedPages` is
+ * run through `pageToCells()` (`core/data/pageFromRow.ts`) and the result
+ * REPLACES the row's cells:
+ *
+ *     const cells = { title, slug, body: { nodes, rootNodeId } }
+ *     if (page.template) { cells.templateEnabled = true; … }
+ *
+ * Two things follow, and both have already broken this site:
+ *
+ *  1. **`template` survives only if you send it.** Omitting it un-templates the
+ *     page. On 2026-08-25 that turned `post` — the entry template for the
+ *     `posts` post-type — into an ordinary page, and all 43 articles 404'd the
+ *     moment the draft was published.
+ *  2. **`seoTitle` / `seoDescription` cannot survive at all.** They are not in
+ *     `pageToCells`, so ANY page write through this endpoint drops them. They
+ *     must be re-applied afterwards through `PATCH /data/rows/:id`, which does
+ *     merge — that is what `push-page-seo-cells.mjs` is for.
+ *
+ * Always build entries with this helper rather than by hand.
+ */
+export function toChangedPage(row, overrides = {}) {
+  const cells = row.cells ?? {}
+  const entry = {
+    id: row.id,
+    slug: cells.slug ?? row.slug,
+    title: cells.title,
+    nodes: cells.body?.nodes,
+    rootNodeId: cells.body?.rootNodeId,
+    ...overrides,
+  }
+  // Carry the template through untouched unless the caller is deliberately
+  // changing it. `enabled` is a literal `true` in the schema.
+  if (cells.templateEnabled === true && entry.template === undefined) {
+    entry.template = {
+      enabled: true,
+      target: cells.templateTarget,
+      priority: cells.templatePriority ?? 0,
+    }
+  }
+  return entry
+}
+
+/**
+ * Read back every page that was written and fail loudly if a template was lost.
+ * Call this after any `changedPages` save. Cheap, and it is the check that
+ * would have caught the 43 dead articles before they were published.
+ */
+export async function assertTemplatesIntact(expected) {
+  const rows = (await getPages()).rows
+  const broken = []
+  for (const [slug, want] of Object.entries(expected)) {
+    const r = rows.find((x) => x.slug === slug)
+    if (!r) { broken.push(`${slug}: page missing`); continue }
+    const full = await request('GET', `/admin/api/cms/data/rows/${r.id}`)
+    const on = full.row.cells.templateEnabled === true
+    if (want && !on) broken.push(`${slug}: template LOST`)
+    if (!want && on) broken.push(`${slug}: template unexpectedly enabled`)
+  }
+  if (broken.length) {
+    throw new Error(`page template check failed: ${broken.join(' | ')}`)
+  }
+  return true
+}
+
+/** Slug → true for every page that currently carries a template. */
+export async function templateMap() {
+  const rows = (await getPages()).rows
+  const out = {}
+  for (const r of rows) {
+    const full = await request('GET', `/admin/api/cms/data/rows/${r.id}`)
+    if (full.row.cells.templateEnabled === true) out[r.slug] = true
+  }
+  return out
 }
 
 export async function publish() {

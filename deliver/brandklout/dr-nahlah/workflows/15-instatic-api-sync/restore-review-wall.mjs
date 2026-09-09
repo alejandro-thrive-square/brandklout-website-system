@@ -40,10 +40,10 @@
  * Classes are referenced by id; every id is looked up by NAME from the live
  * shell rather than hardcoded, and a missing one aborts before any write.
  */
-import { readFileSync } from 'node:fs'
+import { readFileSync, writeFileSync, mkdirSync } from 'node:fs'
 import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { api, getSite, getPages } from './insta-api.mjs'
+import { api, getSite, getPages, toChangedPage } from './insta-api.mjs'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
 const LOCAL = join(HERE, '../04-design/.tmp/final-site/index.html')
@@ -146,9 +146,14 @@ const nameOf = (n) => (n.classIds || []).map((id) => {
 const findByClass = (name) =>
   Object.values(body.nodes).find((n) => nameOf(n).includes(name))
 
-const live = findByClass('rv-live')
-if (!live) { console.error('no .rv-live on the page — the section is not what this script expects'); process.exit(1) }
-const section = body.nodes[live.parentId]
+/* Anchor on the SECTION, not on `.rv-live`. The original version of this script
+   found the section via the live slot, because that slot was the only thing
+   left of the review block. It has since been replaced by a
+   `webzite.embed-origins.embed` node (the ReputationHub widget), so `.rv-live`
+   no longer exists and anchoring on it aborts. `.pf-reviews` is the section
+   itself and has survived every revision of this block. */
+const section = findByClass('pf-reviews')
+if (!section) { console.error('no .pf-reviews on the page — the section is not what this script expects'); process.exit(1) }
 
 if (findByClass('rv-wall')) {
   console.log('the page already has a .rv-wall — nothing to do')
@@ -157,17 +162,45 @@ if (findByClass('rv-wall')) {
 
 nodes[wallId].parentId = section.id
 Object.assign(body.nodes, nodes)
-/* Directly after the header, so the cards are the section's content and the
-   live slot still sits where it is today (the widget replaces them at runtime
-   and hides the wall — see ch-proof.js). */
+/* Directly after the header, so the cards are the section's content. */
 const at = Math.min(1, section.children.length)
 section.children.splice(at, 0, wallId)
 
+/* Put the vendor embed LAST, after the "Read the patient stories" link. That is
+   the order the published page carried before the wall was lost
+   (`rv-wall` → `rv-more` → live slot, per `.tmp/.instatic2/index.json`), and it
+   matters now for a reason it did not then: the widget's own SSR payload
+   currently returns `reviews: []` (no review source is connected to it at the
+   vendor), so it collapses to ~91px. Between the cards and the link that reads
+   as a hole in the section; after the link it is invisible until the vendor
+   account is fixed, at which point it appears in place with no further edit. */
+const embed = Object.values(body.nodes).find(
+  (n) => n.moduleId === 'webzite.embed-origins.embed' && n.parentId === section.id,
+)
+if (embed) {
+  const from = section.children.indexOf(embed.id)
+  section.children.splice(from, 1)
+  section.children.push(embed.id)
+  console.log(`moved the vendor embed "${embed.id}" from index ${from} to last`)
+}
+
 console.log(`inserting ${Object.keys(nodes).length} nodes into "${section.id}" at index ${at}`)
 console.log(`page node count ${Object.keys(row.cells.body.nodes).length} -> ${Object.keys(body.nodes).length}`)
+console.log(`section children: ${section.children.join(', ')}`)
 if (!APPLY) { console.log('\nDRY RUN — re-run with --apply to write the draft'); process.exit(0) }
 
-const page = { id: row.id, slug: row.cells.slug, title: row.cells.title, ...body }
+/* `toChangedPage` carries `template` through. A page write REPLACES the row's
+   cells (`pageToCells`), so anything not in the payload is dropped — that is
+   how 43 articles were un-templated on 2026-08-25. `index` carries no template
+   today, but going through the helper means this stays correct if it ever does.
+   `seoTitle` / `seoDescription` CANNOT survive this call at all; re-apply them
+   afterwards with `push-page-seo-cells.mjs --only index --apply`. */
+mkdirSync(join(HERE, '.tmp', 'backups'), { recursive: true })
+const backup = join(HERE, '.tmp', 'backups', 'pre-review-wall-index.json')
+writeFileSync(backup, JSON.stringify(row, null, 1))
+console.log(`backed up the page row to ${backup}`)
+
+const page = toChangedPage(row, { nodes: body.nodes, rootNodeId: body.rootNodeId })
 const res = await api('PUT', '/admin/api/cms/site-document', {
   mode: 'incremental',
   site,
@@ -181,4 +214,30 @@ const res = await api('PUT', '/admin/api/cms/site-document', {
   shellBaseSeq,
 })
 console.log('saved:', JSON.stringify(res).slice(0, 200))
-console.log('\nNot published. Run: node insta-api.mjs publish')
+
+// ── read back, and prove it ────────────────────────────────────────────────
+
+const after = (await getPages()).rows.find((r) => r.id === row.id)
+const nodesAfter = after.cells.body.nodes
+const nameAfter = (n) => (n.classIds || []).map((id) => {
+  for (const [name, cid] of idByName) if (cid === id) return name
+  return id
+})
+const count = (name) => Object.values(nodesAfter).filter((n) => nameAfter(n).includes(name)).length
+const checks = [
+  ['.rv-wall present', count('rv-wall') === 1],
+  ['6 .rv-card', count('rv-card') === 6],
+  ['node count', Object.keys(nodesAfter).length === Object.keys(body.nodes).length],
+  ['slug intact', after.cells.slug === row.cells.slug],
+  ['title intact', after.cells.title === row.cells.title],
+  ['root intact', after.cells.body.rootNodeId === row.cells.body.rootNodeId],
+  ['embed survived', Object.values(nodesAfter).some((n) => n.moduleId === 'webzite.embed-origins.embed')],
+]
+let bad = 0
+for (const [label, ok] of checks) { console.log(`  ${ok ? 'ok  ' : 'FAIL'} ${label}`); if (!ok) bad++ }
+if (bad) { console.error(`\n${bad} check(s) failed — restore from ${backup}`); process.exit(1) }
+
+console.log('\nNot published.')
+console.log('NEXT, in this order:')
+console.log('  1. node push-page-seo-cells.mjs --only index --apply   (this write wiped them)')
+console.log('  2. node insta-api.mjs publish')

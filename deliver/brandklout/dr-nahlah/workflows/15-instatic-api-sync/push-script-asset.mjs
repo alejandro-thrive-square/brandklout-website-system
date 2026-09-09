@@ -15,9 +15,9 @@
  * and `PUT /site-document` is atomic with an optimistic seq check. So the whole file
  * goes in one write, and a concurrent edit is rejected rather than interleaved.
  *
- * The banner and the `__wz_end__` sentinel are preserved exactly as the original
- * push wrote them: the sentinel is how a truncated write is detected later, so a
- * push that dropped it would disarm that check.
+ * The banner and whichever end sentinel the asset carries are preserved exactly as
+ * the original push wrote them: the sentinel is how a truncated write is detected
+ * later, so a push that dropped it would disarm that check.
  *
  * Nothing here publishes. Run `node insta-api.mjs publish` when the draft is right.
  */
@@ -36,7 +36,14 @@ if (!assetPath || !localPath) {
 }
 
 const BANNER = '/* Dr. Nahlah runtime: WZ, every section module, the boot sequence. One file. */\n'
-const SENTINEL = '/*__wz_end__*/'
+
+/* Every sentinel this site's chunked pushes have used, not just site.js's.
+   `seo-head.js` carries `/*__wz_seo_end__*\/` (gen-seo-head.mjs's SENTINEL) and
+   the single-sentinel version of this script did not recognise it — so a push
+   of that asset dropped the marker and disarmed the truncation check for the
+   one file most likely to be truncated, silently, on the next chunked write.
+   Matched longest-first so the shorter marker cannot claim the longer one. */
+const SENTINELS = ['/*__wz_seo_end__*/', '/*__wz_end__*/']
 
 const local = readFileSync(resolve(HERE, localPath), 'utf8')
 const { site: shell, seq } = await getSite()
@@ -49,13 +56,13 @@ if (!file) {
 // Reuse whatever wrapper is already on the asset rather than assuming one, so this
 // stays correct for assets the banner was never applied to.
 const hadBanner = file.content.startsWith(BANNER)
-const hadSentinel = file.content.trimEnd().endsWith(SENTINEL)
-const next = (hadBanner ? BANNER : '') + local + (hadSentinel ? SENTINEL : '')
+const sentinel = SENTINELS.find((s) => file.content.trimEnd().endsWith(s)) ?? ''
+const next = (hadBanner ? BANNER : '') + local + sentinel
 
 console.log(`asset      ${assetPath}  (id ${file.id})`)
 console.log(`live       ${file.content.length} chars`)
 console.log(`local      ${local.length} chars  -> ${next.length} with wrapper`)
-console.log(`wrapper    banner=${hadBanner} sentinel=${hadSentinel}`)
+console.log(`wrapper    banner=${hadBanner} sentinel=${sentinel || "(none)"}`)
 
 if (next === file.content) {
   console.log('\nidentical — nothing to do')
