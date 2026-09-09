@@ -32,7 +32,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import http from 'node:http'
-import { api, getSite, getPages, publish, BASE } from '../15-instatic-api-sync/insta-api.mjs'
+import { api, getSite, getPages, publish, BASE } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
 const SLUG = 'plugin-embed-test'
 const PAGE_URL = `${BASE}/${SLUG}`

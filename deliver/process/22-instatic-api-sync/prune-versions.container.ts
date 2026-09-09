@@ -3,7 +3,7 @@
  *
  * Deletes old published versions, then compacts the database. Written the way it
  * is because of two traps that cost a live-site scare on 2026-08-21 - see
- * 15-instatic-api-sync.md, "Railway volume".
+ * 22-instatic-api-sync.md, "Railway volume".
  *
  * Usage: bun run prune.ts <keep> [--apply]
  */

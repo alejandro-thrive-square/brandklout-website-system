@@ -16,7 +16,7 @@
  */
 import { readFileSync, existsSync } from 'node:fs'
 import { basename } from 'node:path'
-import { requestForm } from '../15-instatic-api-sync/insta-api.mjs'
+import { requestForm } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
 const zipPath = process.argv[2]
 const apply = process.argv.includes('--apply')

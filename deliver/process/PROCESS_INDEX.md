@@ -47,7 +47,7 @@ Use [OFFER_ROUTING.md](./OFFER_ROUTING.md) as the source of truth for required h
 
 ## Process Modules
 
-The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `10` sequence is the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `11` through `15`, deployment module `16`, AI Vercel/Airtable build module `17`, and the Instatic modules `18` and `20`.
+The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `10` sequence is the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `11` through `15`, deployment module `16`, AI Vercel/Airtable build module `17`, and the Instatic modules `18`, `20` and `22`.
 
 | # | Phase | Directive |
 | :---: | :--- | :--- |
@@ -73,18 +73,20 @@ The current numbered folders are reusable templates. Module `00` is the setup wo
 | 19 | Cloudflare Launch (sitemap, 301 map, canonical host) | _promoted on the `bk-dr-nahlah` branch as `deliver/process/19-cloudflare-launch/`; **not yet merged to `main`**_ |
 | 20 | Instatic Domain & Admin Origins | [20-instatic-domain-origins.md](./20-instatic-domain-origins/20-instatic-domain-origins.md) |
 | 21 | Instatic Upload (build → import → publish) | _client-local — `bk-stone` as `21-instatic-upload/`; `bk-stone-med-spa` still has it as `05`. **Due for promotion.**_ |
+| 22 | Instatic API Sync (CSS registry, publish, parity gate) | [22-instatic-api-sync.md](./22-instatic-api-sync/22-instatic-api-sync.md) |
 
-### Instatic modules (`18`, `20`)
+### Instatic modules (`18`, `20`, `22`)
 
-Not part of the offer-routing sequence — they apply to any engagement whose site is delivered on **Instatic** rather than Webflow or Vercel, and both are needed on every such site:
+Not part of the offer-routing sequence — they apply to any engagement whose site is delivered on **Instatic** rather than Webflow or Vercel, and all three are needed on every such site:
 
 - **`18` Instatic Embeds** makes third-party widgets possible at all. Instatic publishes behind `frame-src 'none'`, so without this plugin no booking form, review widget or chat bubble can load. Install it on every Instatic site.
 - **`20` Instatic Domain & Admin Origins** is run at launch and at every later domain change. It is what makes the client's own `client.com/admin` able to **save**, and the checker in it is the thing to run before sending anyone an admin link.
+- **`22` Instatic API Sync** is the build-and-publish toolchain: the CSS registry migration, the `var()`/custom-property handling happy-dom does not survive, the publish call and the parity gate that catches a dropped declaration before it ships. It is shared tooling — run it from whichever worktree is active, and set `INSTATIC_BASE_URL` for the client you are pointing at.
 
 `20` should be run as part of [`09-launch`](./09-launch/09-launch.md) for an Instatic site; `09` otherwise only knows about Webflow and Vercel publishing targets.
 
 > [!IMPORTANT]
-> **00-21 are all claimed. The next free number is `22`.**
+> **00-22 are all claimed. The next free number is `23`.**
 >
 > Numbers are claimed across every worktree, not just `main`, and most of the claims are invisible
 > from here. `19-cloudflare-launch` is promoted into `deliver/process/` on the `bk-dr-nahlah`
@@ -95,8 +97,8 @@ Not part of the offer-routing sequence — they apply to any engagement whose si
 > ls ~/orca/workspaces/*/*/deliver/*/*/workflows/ | grep -E '^[0-9][0-9]-' | sort -u
 > ```
 >
-> Verified 2026-09-04: 27 distinct numbered modules across thirteen worktrees, against the 21 listed
-> above.
+> Verified 2026-09-09: 27 distinct numbered modules across thirteen worktrees, against the 22
+> listed above.
 >
 > Getting this wrong has real cost. `20-instatic-domain-origins` shipped as `19`, collided, and had
 > to be renumbered. `05-instatic-upload` collided with the canonical `05-design-revisions` in two
@@ -104,10 +106,12 @@ Not part of the offer-routing sequence — they apply to any engagement whose si
 > `05` copy.
 >
 > **Client-local modules that two clients use should be promoted here**, which also settles their
-> number once instead of per worktree. Currently due: `19-cloudflare-launch`, `21-instatic-upload`,
-> and the Dr. Nahlah Instatic run (`15-instatic-api-sync`, `16-instatic-plugins`,
-> `17-instatic-platform-patch`, `18-instatic-staging-clone` — every one of those four collides with
-> a canonical module of the same number).
+> number once instead of per worktree. `15-instatic-api-sync` was the worked example: it lived in
+> `dr-nahlah/workflows/`, and `bk-stone` and `bk-stone-med-spa` reached it by sparse-checking a
+> `dr-nahlah/` skeleton into worktrees that have nothing to do with that client. Promoted to `22`
+> on 2026-09-09. Still due: `19-cloudflare-launch`, `21-instatic-upload`, and the rest of the
+> Dr. Nahlah Instatic run (`16-instatic-plugins`, `17-instatic-platform-patch`,
+> `18-instatic-staging-clone` — each collides with a canonical module of the same number).
 
 ## Supporting Workflows
 Non-sequential tools that delivery phases call as needed. They live flat inside `deliver/process/` alongside the numbered phases (mirroring how `deliver/process/` already holds non-numbered items such as `design-system-library`), but they are **not** part of the `00`-`17` offer-routing sequence. Each follows the same standard folder shape and can be cloned into `deliver/[client-name]/workflows/` when run for a specific engagement.
