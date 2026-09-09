@@ -13,6 +13,9 @@ editorial standard. Fifty-two routes published, up from sixteen.
   - `compare-live.mjs` — **no differences**, all 52 routes at 1440 and 390.
   - Local: `blog-validate` clean, `audit` FAIL none WARN none, `check-copy` clean, `blog-test`
     243 passed 0 failed, `all-pages` 52 pages x 3 widths, 624 assertions clean.
+  - `blog-test.mjs --live` against the published site — **243 passed, 0 failed**, the same suite
+    the local build passes. That covers all 39 articles at six widths plus the navigation,
+    anchor, related-post and no-JavaScript journeys.
 
 ## What was in the backup
 
