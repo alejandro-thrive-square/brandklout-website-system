@@ -5326,3 +5326,64 @@ html.el-reduce .el-cue i::after { animation: none; transform: none; }
 /* --- photographs between the reviews on the wall ------------------------- */
 .cp-wall .el-wall_photo { break-inside: avoid; margin: 0 0 1.25rem; overflow: clip; background: var(--bg-2); aspect-ratio: 4 / 5; }
 .cp-wall .el-wall_photo img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+/* ===========================================================================
+   THE BLOG GRID  (bl-)
+   ---------------------------------------------------------------------------
+   The index of 161 articles. Deliberately a TYPE grid and not a photo grid:
+   the posts' original hero images still sit on the WordPress host this build
+   replaces, and hotlinking them would make the new site depend on the old one.
+   Cards carry a topic, a date and the practice's own description instead.
+
+   Three columns above 1080, two above 700, one below. The breakpoint order
+   matters -- see the Instatic note in process 22 about custom conditions
+   emitting in array order, which once flattened this grid from three columns
+   to two on the live site.
+   =========================================================================== */
+.bl-grid { list-style: none; margin: 0; padding: 0; display: grid; gap: 1px; background: var(--rule); border: 1px solid var(--rule); }
+@media (min-width: 700px)  { .bl-grid { grid-template-columns: repeat(2, 1fr); } }
+@media (min-width: 1080px) { .bl-grid { grid-template-columns: repeat(3, 1fr); } }
+
+.bl-card { background: var(--panel); }
+.bl-card_link {
+  display: flex; flex-direction: column; gap: .55rem; height: 100%;
+  padding: 1.6rem 1.5rem 1.5rem; text-decoration: none; color: inherit;
+  transition: background-color .25s var(--ease);
+}
+.bl-card_link:hover, .bl-card_link:focus-visible { background: var(--warm); }
+
+.bl-card_meta {
+  display: flex; flex-wrap: wrap; gap: .5rem .75rem; align-items: baseline;
+  font-family: var(--font-ui); font-size: calc(.68rem * var(--t-ui));
+  letter-spacing: .09em; text-transform: uppercase; color: var(--fg-soft);
+}
+.bl-card_meta b { color: var(--accent); font-weight: 700; }
+
+/* `.bl-card_title` is an h3 inside a link. Scope the reset tightly: the base
+   sheet underlines every word of an anchor, and a card that is an <a> inherits
+   that on all of its text -- the same trap `a.svc-card` documents. */
+.bl-card_link .bl-card_title { margin: 0; font-size: calc(1.05rem * var(--t-ui)); line-height: 1.25; text-decoration: none; }
+.bl-card_link .bl-card_text { margin: 0; color: var(--fg-soft); font-size: calc(.86rem * var(--t-ui)); line-height: 1.5; text-decoration: none; }
+
+.bl-card_more { margin-top: auto; padding-top: .5rem; font-family: var(--font-ui); font-size: calc(.72rem * var(--t-ui)); letter-spacing: .06em; color: var(--accent); }
+.bl-card_link:hover .bl-card_more { text-decoration: underline; }
+
+/* The article body reuses lf-layout is-solo, which is already the site's 72ch
+   prose column. Only the heading rhythm inside a generated article needs
+   setting, because extract-posts.mjs emits bare <h2> and <p>. */
+.lf-body h2 { margin: 2rem 0 .6rem; font-size: calc(1.15rem * var(--t-ui)); line-height: 1.3; }
+.lf-body h2:first-child { margin-top: 0; }
+
+/* --- the blog pager ------------------------------------------------------ */
+.bl-pager { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem; margin-top: 2rem; }
+.bl-pager_nums { display: flex; flex-wrap: wrap; gap: .35rem; list-style: none; margin: 0; padding: 0; }
+.bl-page {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 2.4rem; padding: .5rem .7rem; border: 1px solid var(--rule-strong);
+  font-family: var(--font-ui); font-size: calc(.78rem * var(--t-ui));
+  color: var(--fg); text-decoration: none; background: var(--panel);
+  transition: background-color .25s var(--ease), color .25s var(--ease), border-color .25s var(--ease);
+}
+a.bl-page:hover, a.bl-page:focus-visible { background: var(--accent); border-color: var(--accent); color: #fff; }
+.bl-page.is-current { background: var(--fg); border-color: var(--fg); color: #fff; }
+.bl-page.is-off { opacity: .35; }

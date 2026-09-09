@@ -7,7 +7,7 @@ then only the runs you need. Do not read them all.
 
 ## Where the build stands — 2026-09-09
 
-**42 pages built.** The eleven approved on 2026-09-01, plus seventeen treatment pages.
+**213 pages built.** The eleven approved on 2026-09-01, plus seventeen treatment pages.
 **All 31 approved treatments have pages.** Every catalogue chip links; none are dashed. Every internal link on every page resolves.
 
 **The treatment catalogue is finished.** What remains is the non-service pages. The definitive list is the
@@ -22,7 +22,15 @@ Consultation, the Patient Resources hub and its four pages, FAQs, the blog, the
 sitemap, the town resource. Full inventory and the deliberate exclusions are in
 [`runbook/2026-09-09-treatment-pages-batch-1-restorative-and-surgery.md`](./runbook/2026-09-09-treatment-pages-batch-1-restorative-and-surgery.md).
 
-**Nothing here has been published.** Instatic still holds the eleven-page site.
+**Nothing here has been published.** Instatic still holds the eleven-page site — a 202-page gap.
+
+**The blog is generated, not authored.** `home/blog/**` is output from `.tmp/blog/posts.json`;
+hand edits are overwritten by `build-blog.mjs`. `blog/cms-rows.json` (161 rows) is written and
+NOT uploaded.
+
+**There is no Privacy Policy.** The legal page built is a Terms of Service, which references a
+Privacy Policy and Cookie Policy that the crawl never captured (`/privacy-policy` 403'd). Ask
+the practice for both.
 
 ### Traps that are live right now
 
