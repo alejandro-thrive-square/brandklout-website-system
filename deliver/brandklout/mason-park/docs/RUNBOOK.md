@@ -7,10 +7,10 @@ then only the runs you need. Do not read them all.
 
 ## Where the build stands — 2026-09-09
 
-**35 pages built.** The eleven approved on 2026-09-01, plus seventeen treatment pages.
-**24 of the 31 approved treatments now have pages**; Preventative, Restorative, Hygiene and gums and Comfort and pain are all complete.
+**42 pages built.** The eleven approved on 2026-09-01, plus seventeen treatment pages.
+**All 31 approved treatments have pages.** Every catalogue chip links; none are dashed. Every internal link on every page resolves.
 
-**7 of the 31 approved treatments still have no page.** The definitive list is the
+**The treatment catalogue is finished.** What remains is the non-service pages. The definitive list is the
 `el-tabs` chips on `home/our-services/index.html`, not the old site's 35
 `/services/*` pages. Three of the 22 — **Whitening**, **Porcelain veneers** and
 **Wisdom teeth** — have no usable source copy and must not be written from general

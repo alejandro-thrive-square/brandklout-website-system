@@ -1,11 +1,12 @@
 # Runbook index
 
-5 runs, newest first. Each line is one file in this folder.
+6 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-09 | 2026-09-09 — Treatment pages, batch 5: all 31 built, and the blocked list was my own mistake | [`2026-09-09-treatment-pages-batch-5-all-31-complete.md`](./2026-09-09-treatment-pages-batch-5-all-31-complete.md) |
 | 2026-09-09 | 2026-09-09 — Treatment pages, batch 4: Comfort and pain, and a triage table I had to delete | [`2026-09-09-treatment-pages-batch-4-comfort-and-pain.md`](./2026-09-09-treatment-pages-batch-4-comfort-and-pain.md) |
 | 2026-09-09 | 2026-09-09 — Treatment pages, batch 3: Hygiene and gums, and a gate that could not fail | [`2026-09-09-treatment-pages-batch-3-hygiene-and-gums.md`](./2026-09-09-treatment-pages-batch-3-hygiene-and-gums.md) |
 | 2026-09-09 | 2026-09-09 — Treatment pages, batch 2: the whole Preventative group, and the Services menu becomes grouped | [`2026-09-09-treatment-pages-batch-2-preventative-and-the-grouped-menu.md`](./2026-09-09-treatment-pages-batch-2-preventative-and-the-grouped-menu.md) |
