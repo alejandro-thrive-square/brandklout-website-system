@@ -140,3 +140,14 @@ nul
 # happens to have one - this covers every copy of the toolkit, including the
 # shared module in deliver/process/.
 **/.tmp/.session
+
+# --- 2026-09-09: worktree hygiene ---------------------------------------------
+# The Instatic run's .tmp is 576MB: 80MB of page backups, ~14MB per parity
+# snapshot with a dozen of them, plus scratch .mjs written mid-session. All of it
+# is regenerable output from the scripts beside it. The client's copy of the
+# module carries its own .tmp/.gitignore too; this catches the path either way.
+deliver/brandklout/dr-nahlah/workflows/15-instatic-api-sync/.tmp/
+deliver/brandklout/dr-nahlah/workflows/22-instatic-api-sync/.tmp/
+
+# Editors keep creating these empty files at the repo root.
+/untitled*.md

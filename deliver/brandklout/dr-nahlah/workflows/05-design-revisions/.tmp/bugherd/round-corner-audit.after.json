@@ -1,0 +1,337 @@
+{
+  "scanned": 270,
+  "findings": [
+    {
+      "name": "allon4.png",
+      "src": "/uploads/QUS2PT32OCsMg_-3UcAbE-allon4.png",
+      "pages": [
+        "all-on-4"
+      ],
+      "method": "png-pixels",
+      "why": "transparent corners, opaque edge midpoints, 79% covered",
+      "cornerLum": 0,
+      "centreLum": 242
+    },
+    {
+      "name": "team-hana.png",
+      "src": "/uploads/cUWWJuossUedKO27dCAAt-team-hana.png",
+      "pages": [
+        "our-team"
+      ],
+      "method": "png-pixels",
+      "why": "transparent corners, opaque edge midpoints, 79% covered",
+      "cornerLum": 0,
+      "centreLum": 115
+    }
+  ],
+  "suspects": [
+    {
+      "name": "7607.jpg",
+      "src": "/uploads/T7llYzvdydG9vsvayfTzn-7607.jpg",
+      "pages": [
+        "dental-implants",
+        "implant-supported-dentures"
+      ],
+      "why": "blurHash: four flat bright corners around a darker centre",
+      "cornerLum": 253,
+      "centreLum": 123,
+      "method": "blurhash-screen"
+    },
+    {
+      "name": "1-1.jpeg",
+      "src": "/uploads/d2CPjG92fojb38lIwSZ78-1-1.jpg",
+      "pages": [
+        "smile-gallery"
+      ],
+      "why": "blurHash: four flat bright corners around a darker centre",
+      "cornerLum": 250,
+      "centreLum": 160,
+      "method": "blurhash-screen"
+    },
+    {
+      "name": "1-3-1024x684-1.jpeg",
+      "src": "/uploads/gCnn5uF0VYaGDFEo58jQa-1-3-1024x684-1.jpg",
+      "pages": [
+        "smile-gallery"
+      ],
+      "why": "blurHash: four flat bright corners around a darker centre",
+      "cornerLum": 252,
+      "centreLum": 173,
+      "method": "blurhash-screen"
+    },
+    {
+      "name": "4-1-1024x684-1.jpeg",
+      "src": "/uploads/U6bqfR1dgFe3xCwqysCu8-4-1-1024x684-1.jpg",
+      "pages": [
+        "smile-gallery"
+      ],
+      "why": "blurHash: four flat bright corners around a darker centre",
+      "cornerLum": 250,
+      "centreLum": 201,
+      "method": "blurhash-screen"
+    },
+    {
+      "name": "Jennifer-Before-Fix-1.jpeg",
+      "src": "/uploads/8JVROVqVWXy2g4TsuOou1-Jennifer-Before-Fix-1.jpg",
+      "pages": [
+        "smile-gallery"
+      ],
+      "why": "blurHash: four flat bright corners around a darker centre",
+      "cornerLum": 252,
+      "centreLum": 78,
+      "method": "blurhash-screen"
+    },
+    {
+      "name": "Michael-Before-1.jpeg",
+      "src": "/uploads/8SunlLfEUAb1Jj45qj7MV-Michael-Before-1.jpg",
+      "pages": [
+        "smile-gallery"
+      ],
+      "why": "blurHash: four flat bright corners around a darker centre",
+      "cornerLum": 251,
+      "centreLum": 127,
+      "method": "blurhash-screen"
+    }
+  ],
+  "cutouts": [
+    {
+      "name": "logo.png",
+      "src": "/uploads/V1ex_8TusqaQntDvRqdSX-logo.png",
+      "pages": [
+        "index",
+        "dental-implants",
+        "crowns-and-bridges",
+        "financing",
+        "doctor-referral",
+        "implant-supported-dentures",
+        "implant-cost",
+        "oral-surgery",
+        "meet-dr-nahlah",
+        "patient-center",
+        "our-facility",
+        "smile-makeover",
+        "sedation-dentistry",
+        "veneers",
+        "teeth-whitening",
+        "cosmetic-dentistry",
+        "about",
+        "emergency-dentistry",
+        "all-on-4",
+        "posts",
+        "post",
+        "contact-alexandria",
+        "contact-maclean",
+        "video-library",
+        "terms-of-service-maclean",
+        "terms-of-service-alexandria",
+        "privacy-policy-maclean",
+        "privacy-policy-alexandria",
+        "thank-you",
+        "terms-conditions",
+        "contact",
+        "smile-gallery",
+        "privacy-policy",
+        "patient-stories",
+        "our-team",
+        "dental-implant-faq",
+        "dental-conditions"
+      ],
+      "why": "cut-out on transparency (20% covered) — not a rounded crop"
+    },
+    {
+      "name": "fp1-fp3-comparison.png",
+      "src": "/uploads/O8K0-ujYx-z7LlY5eRhSF-fp1-fp3-comparison.png",
+      "pages": [
+        "index",
+        "all-on-4"
+      ],
+      "why": "cut-out on transparency (34% covered) — not a rounded crop"
+    },
+    {
+      "name": "dental-implant-model-3.png",
+      "src": "/uploads/ew4sEiCkL6XsnFbN50gjn-dental-implant-model-3.png",
+      "pages": [
+        "dental-implants",
+        "smile-makeover",
+        "dental-implant-faq"
+      ],
+      "why": "cut-out on transparency (47% covered) — not a rounded crop"
+    },
+    {
+      "name": "logo-carecredit.png",
+      "src": "/uploads/1UC30SPyXcD6fkyufjAI7-logo-carecredit.png",
+      "pages": [
+        "financing",
+        "implant-cost"
+      ],
+      "why": "cut-out on transparency (30% covered) — not a rounded crop"
+    },
+    {
+      "name": "logo-proceed.png",
+      "src": "/uploads/lwYxCyL2QEI0P-GwjuJpu-logo-proceed.png",
+      "pages": [
+        "financing",
+        "implant-cost"
+      ],
+      "why": "cut-out on transparency (24% covered) — not a rounded crop"
+    },
+    {
+      "name": "multiple-dental-implant-model.png",
+      "src": "/uploads/Z5LEmyT8FSYM5xjjDPH5J-multiple-dental-implant-model.png",
+      "pages": [
+        "implant-cost"
+      ],
+      "why": "cut-out on transparency (52% covered) — not a rounded crop"
+    },
+    {
+      "name": "dr-headshot.png",
+      "src": "/uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot.png",
+      "pages": [
+        "meet-dr-nahlah",
+        "about"
+      ],
+      "why": "cut-out on transparency (54% covered) — not a rounded crop"
+    },
+    {
+      "name": "smile-makeover-patient.png",
+      "src": "/uploads/KrlAuAr0h65ex-bhMtspl-smile-makeover-patient.png",
+      "pages": [
+        "smile-makeover",
+        "cosmetic-dentistry"
+      ],
+      "why": "cut-out on transparency (30% covered) — not a rounded crop"
+    },
+    {
+      "name": "whitening-graphic.png",
+      "src": "/uploads/UkPy-6W7rR0zxH5cN72BW-whitening-graphic.png",
+      "pages": [
+        "teeth-whitening"
+      ],
+      "why": "cut-out on transparency (87% covered) — not a rounded crop"
+    },
+    {
+      "name": "dr-nahlah.png",
+      "src": "/uploads/3TStFVfzcPUbzOZ_nJqk1-dr-nahlah.png",
+      "pages": [
+        "post"
+      ],
+      "why": "cut-out on transparency (54% covered) — not a rounded crop"
+    },
+    {
+      "name": "multi-implant-model.png",
+      "src": "/uploads/H4bmz6srCxUa1kMJQZgnQ-multi-implant-model.png",
+      "pages": [
+        "dental-implant-faq"
+      ],
+      "why": "cut-out on transparency (52% covered) — not a rounded crop"
+    },
+    {
+      "name": "tooth-model.png",
+      "src": "/uploads/BJ-NKshEQmZP3u_SgDyE0-tooth-model.png",
+      "pages": [
+        "dental-conditions"
+      ],
+      "why": "cut-out on transparency (71% covered) — not a rounded crop"
+    }
+  ],
+  "undecoded": [
+    {
+      "name": "google.svg",
+      "src": "/uploads/EgOezVNdesL-SyRfEnf7h-google.svg",
+      "pages": [
+        "index"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/8DH9ZdyBcp4/maxresdefault.jpg",
+      "src": "https://img.youtube.com/vi/8DH9ZdyBcp4/maxresdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/fiWLQROMvcg/maxresdefault.jpg",
+      "src": "https://img.youtube.com/vi/fiWLQROMvcg/maxresdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/glyfx-NFHHM/maxresdefault.jpg",
+      "src": "https://img.youtube.com/vi/glyfx-NFHHM/maxresdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/lU62bTDjV64/maxresdefault.jpg",
+      "src": "https://img.youtube.com/vi/lU62bTDjV64/maxresdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/BnB_W6F_P1g/maxresdefault.jpg",
+      "src": "https://img.youtube.com/vi/BnB_W6F_P1g/maxresdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/A9wuNvIfFEw/hqdefault.jpg",
+      "src": "https://img.youtube.com/vi/A9wuNvIfFEw/hqdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/yo1gLUGnRbM/hqdefault.jpg",
+      "src": "https://img.youtube.com/vi/yo1gLUGnRbM/hqdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/938agcztJjs/hqdefault.jpg",
+      "src": "https://img.youtube.com/vi/938agcztJjs/hqdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/fx6eztXBVqQ/hqdefault.jpg",
+      "src": "https://img.youtube.com/vi/fx6eztXBVqQ/hqdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/zjvRSifApBs/hqdefault.jpg",
+      "src": "https://img.youtube.com/vi/zjvRSifApBs/hqdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/btCwe4wry5o/hqdefault.jpg",
+      "src": "https://img.youtube.com/vi/btCwe4wry5o/hqdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/um69fjRjTHs/hqdefault.jpg",
+      "src": "https://img.youtube.com/vi/um69fjRjTHs/hqdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    },
+    {
+      "name": "https://img.youtube.com/vi/xgOBrrKQjeU/hqdefault.jpg",
+      "src": "https://img.youtube.com/vi/xgOBrrKQjeU/hqdefault.jpg",
+      "pages": [
+        "video-library"
+      ]
+    }
+  ]
+}

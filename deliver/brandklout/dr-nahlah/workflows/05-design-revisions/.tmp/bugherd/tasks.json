@@ -1,0 +1,2226 @@
+{
+  "project": {
+    "id": 537587,
+    "name": "Dr Nahlah",
+    "created_at": "2026-08-24 15:53:38",
+    "owner_name": "Alejandro Milano",
+    "tasks": true,
+    "sites": [
+      "https://drnahlah.com/"
+    ]
+  },
+  "pulled_tasks": 27,
+  "tasks": [
+    {
+      "id": 30863284,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-25T18:44:56.025Z",
+      "updated_at": "2026-08-27T02:49:16.756Z",
+      "local_task_id": 2,
+      "priority_id": 3,
+      "status_id": 2308884,
+      "title": null,
+      "description": "Add a video below this photo\n\nhttps://vimeo.com/1221240290?share=copy&fl=sv&fe=ci",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/s4h7dpitk2pqxbcerl4tca/screenshot.jpg",
+      "status": "done",
+      "priority": "normal",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/ru0juAEGQWYVfkhDfd2z9Q",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/2",
+      "deleted_at": null,
+      "site": "https://encorercm.com",
+      "url": "/",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 2056,
+        "screenshot_height": 2056,
+        "screenshot_pin_x": 559,
+        "screenshot_pin_y": 439
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 147.0.0.0",
+      "requester_browser_size": "2056 x 1147 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#specialist.ch-specialist>div.wrap.section.doc-grid>div.doc-portrait>div.doc-plate>img#specPortrait",
+        "html": "<img id=\"specPortrait\" src=\"/uploads/EP2LNlq7dpfnXJ8HUzyFL-dr-and-yolanda.jpg\" alt=\"Dr. Nahlah with Yolanda, a full-arch patient of the practice\" srcset=\"/uploads/EP2LNlq7dpfnXJ8HUzyFL-dr-and-yolanda-w64.webp 64w, /uploads/EP2LNlq7dpfnXJ8HUzyFL-dr-and-yolanda-w320.webp 320w, /uploads/EP2LNlq7dpfnXJ8HUzyFL-dr-and-yolanda-w640.webp 640w, /uploads/EP2LNlq7dpfnXJ8HUzyFL-dr-and-yolanda-w800.webp 800w\" sizes=\"auto, 100vw\" width=\"800\" height=\"535\" loading=\"lazy\" decoding=\"async\" style=\"background-image",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.5556491587320589,
+          "bugOffsetY": 0.9323742746763516
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30868593,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-26T02:50:27.215Z",
+      "updated_at": "2026-08-27T03:49:49.012Z",
+      "local_task_id": 3,
+      "priority_id": 0,
+      "status_id": 2308884,
+      "title": null,
+      "description": "This video should be after the container on mobile",
+      "description_html": null,
+      "tag_names": [
+        "Mobile"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/t0tzgjcna7476oy7sjxrpw/screenshot.jpg",
+      "status": "done",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/DcGFk4AaVpWHD1X8j0rwuw",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/3",
+      "deleted_at": null,
+      "site": "https://encorercm.com",
+      "url": "/",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 550,
+        "screenshot_pin_y": 551
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#specialist.ch-specialist>div.wrap.section.doc-grid>div>div.vimeo-video.wz-embed>div>iframe",
+        "html": "<iframe src=\"https://player.vimeo.com/video/1221240290?badge=0&amp;autopause=0&amp;player_id=0&amp;app_id=58479\" frameborder=\"0\" allow=\"autoplay; fullscreen; picture-in-picture; clipboard-write; encrypted-media; web-share\" referrerpolicy=\"strict-origin-when-cross-origin\" style=\"position:absolute;top:0;left:0;width:100%;height:100%;\" title=\"Dr. Esam Nahlah, DDS - Changing Smiles &amp; Changing Lives\" data-ready=\"true\"></iframe>",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.7776226665972439,
+          "bugOffsetY": 0.24411751528929918
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30868600,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-26T02:51:25.623Z",
+      "updated_at": "2026-08-27T02:48:55.742Z",
+      "local_task_id": 4,
+      "priority_id": 0,
+      "status_id": 2308884,
+      "title": null,
+      "description": "On mobile the flickering keeps going on. Search on Webflow to see what we did on the custom code settings or disable the smooth scrolling to see",
+      "description_html": null,
+      "tag_names": [
+        "Mobile"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/jywosmog6aomqnhncmxbag/screenshot.jpg",
+      "status": "done",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/uaOSRHug7YoYmxDt8cShfw",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/4",
+      "deleted_at": null,
+      "site": "https://encorercm.com",
+      "url": "/",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 490,
+        "screenshot_pin_y": 401
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#transformation.ch-transformation>div.pin-spacer>div#tPin.tf-pin>div.wrap",
+        "html": "<div class=\"wrap\"><div class=\"tf-head\"><div class=\"chapter-tag\" style=\"translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;\"><i></i><span class=\"label\">Chapter 04 · The Transformation</span></div><h2 style=\"translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;\">Keep scrolling. Watch it change.</h2></div><div class=\"tf-cmp\" id=\"cmp\" style=\"--pos: 100%;\"><div class=\"tf-slide is-on\" data-slide=\"0\"><img src=\"/uploads/w61YOeebj7qkb4",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.3051639459718183,
+          "bugOffsetY": 0.23977948724931347
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30868605,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-26T02:51:51.379Z",
+      "updated_at": "2026-08-27T02:49:27.419Z",
+      "local_task_id": 5,
+      "priority_id": 0,
+      "status_id": 2308884,
+      "title": null,
+      "description": "On mobile the flickering keeps going on. Search on Webflow to see what we did on the custom code settings or disable the smooth scrolling to see",
+      "description_html": null,
+      "tag_names": [
+        "Mobile"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/idteeumkowrkbr4qxr30tw/screenshot.jpg",
+      "status": "done",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/2RoUa1puGkD3VmlxAvS80g",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/5",
+      "deleted_at": null,
+      "site": "https://encorercm.com",
+      "url": "/",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 573,
+        "screenshot_pin_y": 327
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#path.ch-path>div.pin-spacer>div#pathPin.pa-pin",
+        "html": "<div class=\"pa-pin\" id=\"pathPin\" style=\"translate: none; rotate: none; scale: none; inset: 0px auto auto 0px; margin: 0px; max-width: 1670.18px; width: 1670.18px; max-height: 859.649px; height: 859.649px; padding: 0px; transform: translate(0px, 0px);\"><div class=\"pa-head\"><div class=\"chapter-tag\"><i></i><span class=\"label\">Chapter 05 · The Path</span></div><h2>Four visits, not four years.</h2></div><div class=\"pa-track\" id=\"pathTrack\" style=\"translate: none; rotate: none; scale: none; transform:",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.3430777359314671,
+          "bugOffsetY": 0.2687266401581282
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30868617,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-26T02:55:41.573Z",
+      "updated_at": "2026-08-27T02:49:06.231Z",
+      "local_task_id": 6,
+      "priority_id": 0,
+      "status_id": 2308884,
+      "title": null,
+      "description": "Let's add an explicit services section before this selected section so we can display and link to the current services pages.",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/lhhgovoc9ardyxq3dqsbhg/screenshot.jpg",
+      "status": "done",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/DXYjXiAwHqXA4TRGOXmXXA",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/6",
+      "deleted_at": null,
+      "site": "https://encorercm.com",
+      "url": "/",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 48,
+        "screenshot_pin_y": 538
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#proof.ch-proof",
+        "html": "<section class=\"ch-proof\" data-chapter=\"7\" data-chapter-name=\"The Proof\" id=\"proof\"><div class=\"wrap section\"><div class=\"chapter-tag\"><i></i><span class=\"label\">Chapter 07 · The Proof</span></div><div class=\"pf-story\"><div class=\"pf-shot\" id=\"storyShot\" style=\"clip-path: inset(0px 0px 0%);\"><div class=\"pf-embed\"><iframe src=\"https://www.youtube.com/embed/HiNtywrb4Yg\" title=\"Melanie tells her full-arch implant story\" loading=\"lazy\" frameborder=\"0\" allow=\"autoplay; encrypted-media; fullscreen\" al",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.028739496203683112,
+          "bugOffsetY": 0.012490206554007932
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30883540,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-26T20:45:32.242Z",
+      "updated_at": "2026-08-27T03:49:47.594Z",
+      "local_task_id": 7,
+      "priority_id": 0,
+      "status_id": 2308884,
+      "title": null,
+      "description": "We have this blog article example on the attachment. We need to improve this design on all of the blog pages so you can choose stock photos from the Magnific API. If you find any related image to the topic of the article on the static panel asset, you can choose from there.",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [
+        {
+          "id": 4216114,
+          "task_id": 30883540,
+          "user_id": 619229,
+          "created_at": "2026-08-26T20:45:32.263Z",
+          "url": "https://files.bugherd.com/zij9xftdboh85fewcxxeqw/blog_dental-implants-vs-dentures-orlando-fl.jpg",
+          "file_name": "blog__dental-implants-vs-dentures-orlando-fl.jpg"
+        }
+      ],
+      "screenshot_url": "https://files.bugherd.com/7ygmlc7lu1ywyp9v4brsca/screenshot.jpg",
+      "status": "done",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/O1oqO8TLNjOTXpKS2AdRiQ",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/7",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/posts/all-on-four-your-questions",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 303,
+        "screenshot_pin_y": 170
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>main#top.pk>div.wrap.section",
+        "html": "<div class=\"wrap section\"><article class=\"bl-post\"><div class=\"pk-crumb\" data-rv=\"\" style=\"opacity: 1; translate: none; rotate: none; scale: none; transform: translate(0px, 0px);\"><a href=\"/\" target=\"_self\">Home</a><i></i><a href=\"/posts\" target=\"_self\">Journal</a></div><div class=\"bl-body\" data-rv=\"\" style=\"opacity: 1; translate: none; rotate: none; scale: none; transform: translate(0px, 0px);\"><div data-instatic-content-region=\"\"><h1>All-On-Four, Your Questions Answered</h1>\n<p class=\"bl-when\"",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.17395289375835113,
+          "bugOffsetY": 0.06789946592888738
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30886700,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T03:54:06.490Z",
+      "updated_at": "2026-08-27T06:17:45.752Z",
+      "local_task_id": 8,
+      "priority_id": 0,
+      "status_id": 2308884,
+      "title": null,
+      "description": "On desktop I want to have a hover effect with an image showing following the cursor and on mobile and tablet the image should be present on the card with no hover effect.",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/lsixjujd49hvsrn1ks3whq/screenshot.jpg",
+      "status": "done",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/T5g3RDrWz5aYKGJo8nFUPQ",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/8",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 564,
+        "screenshot_pin_y": 251
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#services.ch-services>div.wrap.section>div#svcGrid.sv-grid>a.sv-card",
+        "html": "<a class=\"sv-card\" href=\"/dental-implants\" target=\"_self\" style=\"translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;\"><span class=\"sv-no\">01</span><h3>Dental Implants</h3><p>Single implants, bridges and full arches, planned and placed by one board-certified prosthodontist.</p><span class=\"sv-more\">Explore</span></a>",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 1.1080344476301722,
+          "bugOffsetY": 0.16235971013692846
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30886706,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T03:54:49.560Z",
+      "updated_at": "2026-08-27T06:17:38.397Z",
+      "local_task_id": 9,
+      "priority_id": 0,
+      "status_id": 2308884,
+      "title": null,
+      "description": "Here we should display the main image of the blog post",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/v71i7dqtdlsyomj8culizg/screenshot.jpg",
+      "status": "done",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/aHG6miwtFqloHeuW0ta2XQ",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/9",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/posts",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 578,
+        "screenshot_pin_y": 516
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#articles.pk.pk-alt>div.wrap.section>div.bl-grid>article.bl-card",
+        "html": "<article class=\"bl-card\" data-rv=\"\" style=\"opacity: 1; translate: none; rotate: none; scale: none; transform: translate(0px, 0px);\"><h2><a href=\"/posts/navigating-the-world-of-dental-implant-surgery-in-mclean-va\" target=\"_self\">Navigating the World of Dental Implant Surgery in McLean, VA</a></h2><p>Explore our completed dental implant work with a temporary abutment. With our expert solutions, enjoy a seamless transition to your new smile!</p><a class=\"bl-more\" href=\"/posts/navigating-the-world-o",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 1.1450590211695475,
+          "bugOffsetY": 1.019712303480685
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30886710,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T03:55:35.461Z",
+      "updated_at": "2026-08-27T06:17:28.715Z",
+      "local_task_id": 10,
+      "priority_id": 0,
+      "status_id": 2308884,
+      "title": null,
+      "description": "Here we should have a search bar and a filter per topic",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/nygf6p5ehtmny7eiw1udxq/screenshot.jpg",
+      "status": "done",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/XX1aXpiIrCKUXgAb044e5Q",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/10",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/posts",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 280,
+        "screenshot_pin_y": 346
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#articles.pk.pk-alt>div.wrap.section",
+        "html": "<div class=\"wrap section\"><div class=\"bl-grid\" data-instatic-loop=\"q2FbSgyS7sY4-nsUaiIjA\" data-instatic-loop-page=\"1\"><article class=\"bl-card\" data-rv=\"\" style=\"opacity: 1; translate: none; rotate: none; scale: none; transform: translate(0px, 0px);\"><h2><a href=\"/posts/navigating-the-world-of-dental-implant-surgery-in-mclean-va\" target=\"_self\">Navigating the World of Dental Implant Surgery in McLean, VA</a></h2><p>Explore our completed dental implant work with a temporary abutment. With our expe",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.1578146359994755,
+          "bugOffsetY": 0.013514362658511837
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30886860,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T04:19:04.142Z",
+      "updated_at": "2026-08-27T13:36:26.981Z",
+      "local_task_id": 11,
+      "priority_id": 0,
+      "status_id": 2308884,
+      "title": null,
+      "description": "There are a lot of repeated images in this site overall. We need to make sure not to repeat images on the same page. If you don't have a related image or if the image has a round radius to it, pick a new one from the Magnific API.",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/uphbqteh5dhv12swzhnpkg/screenshot.jpg",
+      "status": "done",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/LlRtvf2XY9PUc9h3IBb66A",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/11",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/smile-makeover",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 830,
+        "screenshot_pin_y": 412
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#process.pk.pk-light>div.wrap.section>div.pk-cards.pk-cards-4",
+        "html": "<div class=\"pk-cards pk-cards-4\" data-rv=\"stagger\" style=\"opacity: 1;\"><article class=\"pk-card\" style=\"translate: none; rotate: none; scale: none; transform: translate(0px, 30px); opacity: 1;\"><div class=\"pk-card-fig\"><img src=\"/uploads/jduVfan8vMKD2_IVcpssp-consult-discussion.jpg\" alt=\"A clinician showing a patient a dental model during a consultation\" srcset=\"/uploads/jduVfan8vMKD2_IVcpssp-consult-discussion-w64.webp 64w, /uploads/jduVfan8vMKD2_IVcpssp-consult-discussion-w320.webp 320w, /uploa",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.49643500642040056,
+          "bugOffsetY": 0.45285682499672675
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30887273,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T05:34:55.308Z",
+      "updated_at": "2026-08-27T06:17:54.750Z",
+      "local_task_id": 12,
+      "priority_id": 2,
+      "status_id": 2308884,
+      "title": null,
+      "description": "need to use different photos for 2 to 4",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/iqf0mpx4imjjgln8jm5oxw/screenshot.jpg",
+      "status": "done",
+      "priority": "important",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/RjH3hMhnzDj7nlXbI9y08Q",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/12",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/smile-makeover",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1857,
+        "screenshot_height": 1857,
+        "screenshot_pin_x": 790,
+        "screenshot_pin_y": 383
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1857 x 1236 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#process.pk.pk-light>div.wrap.section",
+        "html": "<div class=\"wrap section\"><div class=\"pk-head\"><div class=\"chapter-tag\" data-rv=\"\" style=\"opacity: 1; translate: none; rotate: none; scale: none; transform: translate(0px, 0px);\"><i></i><span class=\"label\">The Sequence</span></div><h2 data-split=\"\" aria-label=\"How a makeover actually runs.\"><div class=\"wz-line-mask\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; overflow: visible;\"><div class=\"wz-line\" aria-hidden=\"true\" style=\"position: relative; display: block",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.45677156562558635,
+          "bugOffsetY": 0.515870144487556
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30887291,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T05:37:50.907Z",
+      "updated_at": "2026-08-27T13:40:33.211Z",
+      "local_task_id": 13,
+      "priority_id": 3,
+      "status_id": 2308882,
+      "title": null,
+      "description": "Her face is cut off. shift picture down",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/xu0b6omghe4tfbaoxnwoow/screenshot.jpg",
+      "status": "todo",
+      "priority": "normal",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/B4VL4B5Jcmdqg7wJmatdqw",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/13",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/patient-stories",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1857,
+        "screenshot_height": 1857,
+        "screenshot_pin_x": 1016,
+        "screenshot_pin_y": 472
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1857 x 1236 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#band.mband>figure.mband-fig",
+        "html": "<figure class=\"mband-fig\"><img data-drift=\"\" src=\"/uploads/BYGzCYArMlMFumGuxPDWp-pt-yolanda-transformation.jpg\" alt=\"Yolanda holding a framed photograph of her smile before treatment\" srcset=\"/uploads/BYGzCYArMlMFumGuxPDWp-pt-yolanda-transformation-w64.webp 64w, /uploads/BYGzCYArMlMFumGuxPDWp-pt-yolanda-transformation-w320.webp 320w, /uploads/BYGzCYArMlMFumGuxPDWp-pt-yolanda-transformation-w640.webp 640w, /uploads/BYGzCYArMlMFumGuxPDWp-pt-yolanda-transformation-w800.webp 800w\" sizes=\"auto, 100vw",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.5471190091545504,
+          "bugOffsetY": 0.12717018949257056
+        }
+      },
+      "due_at": null,
+      "column_id": 2308882,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [
+        {
+          "id": 18002547,
+          "created_at": "2026-08-27T13:40:33.209Z",
+          "text": "Fixing this, the face is cut of on larger breakpoints so the solution is to have a max width on this section across the site.\n\nShould be larger than the global container or max width but on middle and smaller screens should be filling up the entire screen width.",
+          "user_id": 619229,
+          "is_private": false
+        }
+      ],
+      "local_media": []
+    },
+    {
+      "id": 30887294,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T05:38:21.700Z",
+      "updated_at": "2026-08-27T06:20:38.083Z",
+      "local_task_id": 14,
+      "priority_id": 3,
+      "status_id": 2308881,
+      "title": null,
+      "description": "Add review widget here",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/kedbhxvlbww1swm7njhlfg/screenshot.jpg",
+      "status": "backlog",
+      "priority": "normal",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/uoUybDCyCKFkqKzBUPPtqQ",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/14",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/patient-stories",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1857,
+        "screenshot_height": 1857,
+        "screenshot_pin_x": 829,
+        "screenshot_pin_y": 1003
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1857 x 1236 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#score.pk.pk-light>div.wrap.section",
+        "html": "<div class=\"wrap section\"><div class=\"pk-head\"><div class=\"chapter-tag\" data-rv=\"\" style=\"opacity: 1; translate: none; rotate: none; scale: none; transform: translate(0px, 0px);\"><i></i><span class=\"label\">The Rating</span></div><h2 data-split=\"\" aria-label=\"Five out of five, and what that is worth.\"><div class=\"wz-line-mask\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: start; overflow: visible;\"><div class=\"wz-line\" aria-hidden=\"true\" style=\"position: relative; disp",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.48302365127806424,
+          "bugOffsetY": 1.2630413733333725
+        }
+      },
+      "due_at": null,
+      "column_id": 2308881,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30887544,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T06:19:46.746Z",
+      "updated_at": "2026-08-27T13:37:49.282Z",
+      "local_task_id": 15,
+      "priority_id": 0,
+      "status_id": 2308884,
+      "title": null,
+      "description": "Here the images seem to be having some sort of margin. Should be covered so they don't show those borders.\n\nSpecifically the second and third.",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/oyfq6y5bglx4taixmvh6ww/screenshot.jpg",
+      "status": "done",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/wYK81yUkKghNDGlV2oiEHg",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/15",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/dental-implants",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 786,
+        "screenshot_pin_y": 284
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#anatomy.pk.pk-alt>div.wrap.section>div.mz.mz-3>figure.mz-fig.mz-plain>img",
+        "html": "<img src=\"/uploads/RFplHh9deFcWRHFCZM3K9-dental-implant-crown-model.jpg\" alt=\"An abutment and crown on an implant post\" srcset=\"/uploads/RFplHh9deFcWRHFCZM3K9-dental-implant-crown-model-w64.webp 64w, /uploads/RFplHh9deFcWRHFCZM3K9-dental-implant-crown-model-w320.webp 320w, /uploads/RFplHh9deFcWRHFCZM3K9-dental-implant-crown-model-w640.webp 640w, /uploads/RFplHh9deFcWRHFCZM3K9-dental-implant-crown-model-w800.webp 800w\" sizes=\"auto, 50vw\" width=\"800\" height=\"534\" loading=\"lazy\" decoding=\"async\" st",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.44663592100378535,
+          "bugOffsetY": 0.06576346006550936
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30887549,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T06:20:22.018Z",
+      "updated_at": "2026-08-27T13:36:16.378Z",
+      "local_task_id": 16,
+      "priority_id": 0,
+      "status_id": 2308884,
+      "title": null,
+      "description": "Here we have the same problem with the images. They have a border or margin I'm not sure. ",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/2wmi7xb9ewclulh8z2yyzg/screenshot.jpg",
+      "status": "done",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/wXGMXZ3QIcQHXn5cXyFHTA",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/16",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/dental-implants",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 835,
+        "screenshot_pin_y": 257
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#options.pk>div.wrap.section>div.pk-cards.pk-cards-4",
+        "html": "<div class=\"pk-cards pk-cards-4\" data-rv=\"stagger\" style=\"opacity: 1;\"><article class=\"pk-card\" style=\"translate: none; rotate: none; scale: none; transform: translate(0px, 30px); opacity: 1;\"><div class=\"pk-card-fig\"><img src=\"/uploads/LQxL4hkHY04vR5l16FTQC-21216.jpg\" alt=\"\" srcset=\"/uploads/LQxL4hkHY04vR5l16FTQC-21216-w64.webp 64w, /uploads/LQxL4hkHY04vR5l16FTQC-21216-w320.webp 320w, /uploads/LQxL4hkHY04vR5l16FTQC-21216-w640.webp 640w, /uploads/LQxL4hkHY04vR5l16FTQC-21216-w1024.webp 1024w, /up",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.499943272257874,
+          "bugOffsetY": 0.1048275882032473
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30887713,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T06:44:39.188Z",
+      "updated_at": "2026-08-27T13:41:02.048Z",
+      "local_task_id": 17,
+      "priority_id": 1,
+      "status_id": 2308884,
+      "title": null,
+      "description": "No photo or broken photo link",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/njlae12xs519bvkoysbdaq/screenshot.jpg",
+      "status": "done",
+      "priority": "critical",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/apM9dQHO0XTWgRYiNWlDmg",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/17",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/implant-supported-dentures",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1857,
+        "screenshot_height": 1857,
+        "screenshot_pin_x": 1404,
+        "screenshot_pin_y": 526
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1857 x 1236 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#cases.pk.pk-alt>div.wrap.section>div.pk-ba-grid>figure>div.pk-ba>input",
+        "html": "<input data-instatic-form-control=\"input\" type=\"range\" value=\"50\" min=\"0\" max=\"100\" aria-label=\"Reveal the after photograph\">",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.6324643098836648,
+          "bugOffsetY": 0.2663458370930549
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30887812,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T06:56:16.778Z",
+      "updated_at": "2026-08-27T12:43:46.532Z",
+      "local_task_id": 18,
+      "priority_id": 3,
+      "status_id": 2308884,
+      "title": null,
+      "description": "No Dr. Esam. to this video https://vimeo.com/manage/videos/1221697337",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/t4qdrzgj0pvpkclwt2t60g/screenshot.jpg",
+      "status": "done",
+      "priority": "normal",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/lOEd0P200AopM0RItUqbVw",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/18",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/meet-dr-nahlah",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1857,
+        "screenshot_height": 1857,
+        "screenshot_pin_x": 813,
+        "screenshot_pin_y": 372
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1857 x 1236 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#teaching.pk.pk-light>div.wrap.section.pk-split>figure.sp-fig>img",
+        "html": "<img data-drift=\"\" src=\"/uploads/L4CuvdYpnP1oKSPsa7rjE-1447.jpg\" alt=\"\" srcset=\"/uploads/L4CuvdYpnP1oKSPsa7rjE-1447-w64.webp 64w, /uploads/L4CuvdYpnP1oKSPsa7rjE-1447-w320.webp 320w, /uploads/L4CuvdYpnP1oKSPsa7rjE-1447-w640.webp 640w, /uploads/L4CuvdYpnP1oKSPsa7rjE-1447-w1024.webp 1024w, /uploads/L4CuvdYpnP1oKSPsa7rjE-1447-w1600.webp 1600w, /uploads/L4CuvdYpnP1oKSPsa7rjE-1447-w2048.webp 2048w, /uploads/L4CuvdYpnP1oKSPsa7rjE-1447-w5632.webp 5632w\" sizes=\"auto, 100vw\" width=\"5632\" height=\"3072\" loa",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.8454153340552908,
+          "bugOffsetY": 0.1339387046749648
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30887831,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T06:59:33.439Z",
+      "updated_at": "2026-08-27T13:40:58.157Z",
+      "local_task_id": 19,
+      "priority_id": 2,
+      "status_id": 2308884,
+      "title": null,
+      "description": "Dr's face is cut off. Need to shift photo down",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/0e5sxrhtsqkezkwnuvvhoq/screenshot.jpg",
+      "status": "done",
+      "priority": "important",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/WX7dZXfPh49fhTCs1DGZ8g",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/19",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/about",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1857,
+        "screenshot_height": 1857,
+        "screenshot_pin_x": 1313,
+        "screenshot_pin_y": 488
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1857 x 1236 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#specialist.pk>div.wrap.section.pk-split.pk-split-rev>figure.sp-fig>img",
+        "html": "<img data-drift=\"\" src=\"/uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot.png\" alt=\"Dr. Esam Nahlah, board-certified prosthodontist\" srcset=\"/uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot-w64.webp 64w, /uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot-w320.webp 320w, /uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot-w640.webp 640w, /uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot-w1024.webp 1024w, /uploads/2LB_FQE0Yk3mHR8rlDnxS-dr-headshot-w1200.webp 1200w\" sizes=\"auto, 100vw\" width=\"1200\" height=\"1500\" loading=\"lazy\" decodin",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.49414715564461104,
+          "bugOffsetY": 0.1256081839025673
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30887931,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T07:16:51.011Z",
+      "updated_at": "2026-08-27T13:40:55.495Z",
+      "local_task_id": 20,
+      "priority_id": 4,
+      "status_id": 2308884,
+      "title": null,
+      "description": "extend top picture to fill this gap",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/hzkmtv9antujcr0yqf95xq/screenshot.jpg",
+      "status": "done",
+      "priority": "minor",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/hmWPOyQtL7rB51nCQ4WIPw",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/20",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/our-facility",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1857,
+        "screenshot_height": 1857,
+        "screenshot_pin_x": 1480,
+        "screenshot_pin_y": 642
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1857 x 1236 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#welcome.pk.pk-alt>div.wrap.section>div.mz.mz-3",
+        "html": "<div class=\"mz mz-3\" data-rv=\"stagger\" style=\"opacity: 1;\"><figure class=\"mz-fig mz-wide\" style=\"translate: none; rotate: none; scale: none; transform: translate(0px, 0px); opacity: 1;\"><img src=\"/uploads/wLx5986aU4QIdny8mqxu4-practice-space-1.jpg\" alt=\"The reception desk, with the Dr. Nahlah wordmark above a marble counter and cream and gold waiting chairs\" srcset=\"/uploads/wLx5986aU4QIdny8mqxu4-practice-space-1-w64.webp 64w, /uploads/wLx5986aU4QIdny8mqxu4-practice-space-1-w320.webp 320w, /uplo",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.871228136602194,
+          "bugOffsetY": 0.46508141350194016
+        }
+      },
+      "due_at": null,
+      "column_id": 2308884,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30887936,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T07:17:33.197Z",
+      "updated_at": "2026-08-27T13:41:13.812Z",
+      "local_task_id": 21,
+      "priority_id": 2,
+      "status_id": 2308883,
+      "title": null,
+      "description": "wrong photo",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/xjogwexuco9ztb0hjawgxq/screenshot.jpg",
+      "status": "doing",
+      "priority": "important",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/mLCoCRXNI3BLLXU21Sg5lA",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/21",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/our-facility",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1857,
+        "screenshot_height": 1857,
+        "screenshot_pin_x": 944,
+        "screenshot_pin_y": 333
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1857 x 1236 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#technology.pk.pk-light>div.wrap.section>div.pk-cards.pk-cards-3>article.pk-card>div.pk-card-fig>img",
+        "html": "<img src=\"/uploads/w_FyO-Sni--DRNnuixIV5-tech-advanced.jpg\" alt=\"A stereo microscope over the bench in the practice's in-house laboratory\" srcset=\"/uploads/w_FyO-Sni--DRNnuixIV5-tech-advanced-w64.webp 64w, /uploads/w_FyO-Sni--DRNnuixIV5-tech-advanced-w320.webp 320w, /uploads/w_FyO-Sni--DRNnuixIV5-tech-advanced-w640.webp 640w, /uploads/w_FyO-Sni--DRNnuixIV5-tech-advanced-w800.webp 800w\" sizes=\"auto, 100vw\" width=\"800\" height=\"535\" loading=\"lazy\" decoding=\"async\" style=\"background-image:url('data:",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.5325994084784752,
+          "bugOffsetY": 0.44465109854679274
+        }
+      },
+      "due_at": null,
+      "column_id": 2308883,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [
+        {
+          "id": 18002278,
+          "created_at": "2026-08-27T13:21:18.681Z",
+          "text": "Can you attach the correct photo here please?Because I don't know which is the correct one on the asset panel.",
+          "user_id": 619229,
+          "is_private": false
+        },
+        {
+          "id": 18002306,
+          "created_at": "2026-08-27T13:23:27.887Z",
+          "text": "I'm going to ask Jessica to get more context",
+          "user_id": 619229,
+          "is_private": false
+        }
+      ],
+      "local_media": []
+    },
+    {
+      "id": 30887940,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T07:17:53.264Z",
+      "updated_at": "2026-08-27T13:41:17.254Z",
+      "local_task_id": 22,
+      "priority_id": 2,
+      "status_id": 2308883,
+      "title": null,
+      "description": "wrong photo",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/mccjgu5qk4sq3owqy5ccaq/screenshot.jpg",
+      "status": "doing",
+      "priority": "important",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/XjpNsSaYfT0Pcqp2ARQU1Q",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/22",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/our-facility",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1857,
+        "screenshot_height": 1857,
+        "screenshot_pin_x": 1503,
+        "screenshot_pin_y": 255
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1857 x 1236 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#technology.pk.pk-light>div.wrap.section>div.pk-cards.pk-cards-3>article.pk-card>div.pk-card-fig>img",
+        "html": "<img src=\"/uploads/tLu2DSPNBgt17_vmoeTZ9-Closeup-of-unrecognizable-dentist-pointing-at-tooth-model-while-explaining-dental-implant-surgery-to-patient-in-clinic.jpg\" alt=\"A tooth model used to explain an extraction\" srcset=\"/uploads/tLu2DSPNBgt17_vmoeTZ9-Closeup-of-unrecognizable-dentist-pointing-at-tooth-model-while-explaining-dental-implant-surgery-to-patient-in-clinic-w64.webp 64w, /uploads/tLu2DSPNBgt17_vmoeTZ9-Closeup-of-unrecognizable-dentist-pointing-at-tooth-model-while-explaining-dental-",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.648126848504765,
+          "bugOffsetY": 0.3997873363730967
+        }
+      },
+      "due_at": null,
+      "column_id": 2308883,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [
+        {
+          "id": 18002279,
+          "created_at": "2026-08-27T13:21:23.228Z",
+          "text": "Can you attach the correct photo here please?Because I don't know which is the correct one on the asset panel.",
+          "user_id": 619229,
+          "is_private": false
+        }
+      ],
+      "local_media": []
+    },
+    {
+      "id": 30887941,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T07:18:07.962Z",
+      "updated_at": "2026-08-27T13:41:18.677Z",
+      "local_task_id": 23,
+      "priority_id": 2,
+      "status_id": 2308883,
+      "title": null,
+      "description": "wrong photo",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/vw766edbpolhaipar723pq/screenshot.jpg",
+      "status": "doing",
+      "priority": "important",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/xls6LTAXgLMVRCtIeXtsNQ",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/23",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/our-facility",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1857,
+        "screenshot_height": 1857,
+        "screenshot_pin_x": 1523,
+        "screenshot_pin_y": 790
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1857 x 1236 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#technology.pk.pk-light>div.wrap.section>div.pk-cards.pk-cards-3>article.pk-card>div.pk-card-fig>img",
+        "html": "<img src=\"/uploads/ne5WBStimzIUUFQaRgIAG-crown-model.jpg\" alt=\"A crown being seated onto a demonstration model\" srcset=\"/uploads/ne5WBStimzIUUFQaRgIAG-crown-model-w64.webp 64w, /uploads/ne5WBStimzIUUFQaRgIAG-crown-model-w320.webp 320w, /uploads/ne5WBStimzIUUFQaRgIAG-crown-model-w640.webp 640w, /uploads/ne5WBStimzIUUFQaRgIAG-crown-model-w800.webp 800w\" sizes=\"auto, 100vw\" width=\"800\" height=\"534\" loading=\"lazy\" decoding=\"async\" style=\"background-image:url('data:image/svg+xml,%3Csvg%20xmlns%3D%22h",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.6901906013802169,
+          "bugOffsetY": 0.30954740893502314
+        }
+      },
+      "due_at": null,
+      "column_id": 2308883,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [
+        {
+          "id": 18002280,
+          "created_at": "2026-08-27T13:21:26.488Z",
+          "text": "Can you attach the correct photo here please?Because I don't know which is the correct one on the asset panel.",
+          "user_id": 619229,
+          "is_private": false
+        }
+      ],
+      "local_media": []
+    },
+    {
+      "id": 30892155,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T13:33:09.003Z",
+      "updated_at": "2026-08-27T13:41:16.133Z",
+      "local_task_id": 24,
+      "priority_id": 0,
+      "status_id": 2308882,
+      "title": null,
+      "description": "We shouldn't add doctors who are not Dr. Nahlah. Let's try to edit this photo with the Magnific AI Generation API so we can swap the face for the Dr. Nahlah.",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/ftzu99h5obgg0yyxsas7fw/screenshot.jpg",
+      "status": "todo",
+      "priority": "not set",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/7ufWgLmX954JXLXX0qroZQ",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/24",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/our-facility",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 851,
+        "screenshot_pin_y": 544
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#technology.pk.pk-light>div.wrap.section>div.pk-cards.pk-cards-3>article.pk-card>div.pk-card-fig>img",
+        "html": "<img src=\"/uploads/N77gckzCpwJYut5N9fmqB-26192.jpg\" alt=\"\" srcset=\"/uploads/N77gckzCpwJYut5N9fmqB-26192-w64.webp 64w, /uploads/N77gckzCpwJYut5N9fmqB-26192-w320.webp 320w, /uploads/N77gckzCpwJYut5N9fmqB-26192-w640.webp 640w, /uploads/N77gckzCpwJYut5N9fmqB-26192-w1024.webp 1024w, /uploads/N77gckzCpwJYut5N9fmqB-26192-w1600.webp 1600w, /uploads/N77gckzCpwJYut5N9fmqB-26192-w2048.webp 2048w, /uploads/N77gckzCpwJYut5N9fmqB-26192-w7008.webp 7008w\" sizes=\"auto, 100vw\" width=\"7008\" height=\"4672\" loading=\"",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.5349021642038401,
+          "bugOffsetY": 0.581669831865054
+        }
+      },
+      "due_at": null,
+      "column_id": 2308882,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30892219,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T13:37:38.516Z",
+      "updated_at": "2026-08-27T13:37:39.733Z",
+      "local_task_id": 25,
+      "priority_id": 3,
+      "status_id": 2308882,
+      "title": null,
+      "description": "On this section the heading should be wrapped in a symmetrical way",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/vydggydg2yckewoxavqhug/screenshot.jpg",
+      "status": "todo",
+      "priority": "normal",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/cQSFtPgHQHXc6VWjAzVyBg",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/25",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/smile-makeover",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 1131,
+        "screenshot_pin_y": 394
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#book.pk.pk-cta>div.wrap.section.cta-in",
+        "html": "<div class=\"wrap section cta-in\"><h2 data-split=\"\" aria-label=\"See it before you commit to it.\"><div class=\"wz-line-mask\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: center; overflow: clip;\"><div class=\"wz-line\" aria-hidden=\"true\" style=\"position: relative; display: block; text-align: center; translate: none; rotate: none; scale: none; transform: translate(0px, 0px);\">See it before you commit to </div></div><div class=\"wz-line-mask\" aria-hidden=\"true\" style=\"positio",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.754930173077874,
+          "bugOffsetY": 0.3952542183203573
+        }
+      },
+      "due_at": null,
+      "column_id": 2308882,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30900383,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T20:12:14.303Z",
+      "updated_at": "2026-08-27T20:12:15.768Z",
+      "local_task_id": 26,
+      "priority_id": 3,
+      "status_id": 2308882,
+      "title": null,
+      "description": "We need to create the topics, some sort of categories to filter.",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/krvpyw50oh9bfqu8cjxvfa/screenshot.jpg",
+      "status": "todo",
+      "priority": "normal",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/qmwgn8vqndTu0xdqBqDuYg",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/26",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/posts",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 1183,
+        "screenshot_pin_y": 587
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#articles.pk.pk-alt>div.wrap.section>div#blFilter.bl-filter>div.bl-f-field>select#blTopic.bl-f-select",
+        "html": "<select class=\"bl-f-select\" data-instatic-form-control=\"select\" name=\"topic\" id=\"blTopic\"><option value=\"\">All topics</option></select>",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.4891597187837349,
+          "bugOffsetY": 0.7277295715373698
+        }
+      },
+      "due_at": null,
+      "column_id": 2308882,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30900403,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T20:13:15.055Z",
+      "updated_at": "2026-08-27T20:13:16.543Z",
+      "local_task_id": 27,
+      "priority_id": 3,
+      "status_id": 2308882,
+      "title": null,
+      "description": "If you see we have a lot of repeated images here, let's use stock photos from Magnific API. Make sure to analyze the image so it matches the topic of the article. ",
+      "description_html": null,
+      "tag_names": [
+        "All Breakpoints"
+      ],
+      "external_id": null,
+      "requester_email": "alejandro@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/vpf4txn8sswrau0a4xgyhq/screenshot.jpg",
+      "status": "todo",
+      "priority": "normal",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/AAmO2HDUEgpH2qsOVf8RvQ",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/27",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/posts",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1685,
+        "screenshot_height": 1685,
+        "screenshot_pin_x": 565,
+        "screenshot_pin_y": 326
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Windows 10",
+      "requester_browser": "Chrome 151.0.0.0",
+      "requester_browser_size": "1685 x 860 px",
+      "requester_resolution": "1685 x 948 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#articles.pk.pk-alt>div.wrap.section>div.bl-grid>article.bl-card",
+        "html": "<article class=\"bl-card\" data-rv=\"\" style=\"opacity: 1; translate: none; rotate: none; scale: none; transform: translate(0px, 0px);\"><a class=\"bl-rel-fig\" aria-hidden=\"true\" tabindex=\"-1\" href=\"/posts/navigating-the-world-of-dental-implant-surgery-in-mclean-va\" target=\"_self\"><img src=\"/uploads/Uam4qX0ckWBg_7V5-bJYh-pt-interaction.jpg\" alt=\"A patient reviewing her CBCT scan and an implant model with a clinician\" srcset=\"/uploads/Uam4qX0ckWBg_7V5-bJYh-pt-interaction-w64.webp 64w, /uploads/Uam4qX0c",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 1.1123805349156635,
+          "bugOffsetY": 0.04166784044064739
+        }
+      },
+      "due_at": null,
+      "column_id": 2308882,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    },
+    {
+      "id": 30902521,
+      "project_id": 537587,
+      "project_name": "Dr Nahlah",
+      "created_at": "2026-08-27T23:13:16.777Z",
+      "updated_at": "2026-08-27T23:13:17.664Z",
+      "local_task_id": 28,
+      "priority_id": 1,
+      "status_id": 2308881,
+      "title": null,
+      "description": "picture is still cut off",
+      "description_html": null,
+      "tag_names": [],
+      "external_id": null,
+      "requester_email": "sang@thrivesquare.com",
+      "attachments": [],
+      "screenshot_url": "https://files.bugherd.com/vjbxe93rjzwjabapwaxtuq/screenshot.jpg",
+      "status": "backlog",
+      "priority": "critical",
+      "closed_at": null,
+      "secret_link": "https://www.bugherd.com/t/SPQpSXCUTnV1uFT1ReXLsw",
+      "admin_link": "https://www.bugherd.com/projects/537587/tasks/28",
+      "deleted_at": null,
+      "site": "https://www.drnahlah.com",
+      "url": "/",
+      "metadata": {},
+      "screenshot_data": {
+        "screenshot_width": 1857,
+        "screenshot_height": 1857,
+        "screenshot_pin_x": 392,
+        "screenshot_pin_y": 343
+      },
+      "fullstory_session_url": null,
+      "logrocket_session_url": null,
+      "requester_os": "Mac OS 10.15.7",
+      "requester_browser": "Chrome 152.0.0.0",
+      "requester_browser_size": "1857 x 1236 px",
+      "requester_resolution": "2056 x 1329 px",
+      "selector_info": {
+        "path": "html>body.wz-kit>div#smooth-wrapper>div#smooth-content>main#top>section#specialist.ch-specialist>div.wrap.section.doc-grid>div>div.doc-portrait>div.doc-plate>img#specPortrait",
+        "html": "<img id=\"specPortrait\" src=\"/uploads/EP2LNlq7dpfnXJ8HUzyFL-dr-and-yolanda.jpg\" alt=\"Dr. Nahlah with Yolanda, a full-arch patient of the practice\" srcset=\"/uploads/EP2LNlq7dpfnXJ8HUzyFL-dr-and-yolanda-w64.webp 64w, /uploads/EP2LNlq7dpfnXJ8HUzyFL-dr-and-yolanda-w320.webp 320w, /uploads/EP2LNlq7dpfnXJ8HUzyFL-dr-and-yolanda-w640.webp 640w, /uploads/EP2LNlq7dpfnXJ8HUzyFL-dr-and-yolanda-w800.webp 800w\" sizes=\"auto, 100vw\" width=\"800\" height=\"535\" loading=\"lazy\" decoding=\"async\" style=\"background-image",
+        "version": 2,
+        "data": {
+          "bugOffsetX": 0.8602097471354522,
+          "bugOffsetY": 0.3984183229839612
+        }
+      },
+      "due_at": null,
+      "column_id": 2308881,
+      "logs": null,
+      "assignees": [
+        {
+          "id": 619229,
+          "email": "alejandro@thrivesquare.com",
+          "display_name": "Alejandro Milano",
+          "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+        }
+      ],
+      "assigned_to": {
+        "id": 619229,
+        "email": "alejandro@thrivesquare.com",
+        "display_name": "Alejandro Milano",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "requester": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "updater": {
+        "id": 619105,
+        "email": "sang@thrivesquare.com",
+        "display_name": "Sang Huynh",
+        "avatar_url": "https://www.bugherd.com/images/sidebar/avatar-generic.svg"
+      },
+      "comments": [],
+      "local_media": []
+    }
+  ]
+}

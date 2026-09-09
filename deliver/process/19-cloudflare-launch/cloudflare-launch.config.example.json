@@ -1,0 +1,18 @@
+{
+  "apex": "example.com",
+  "canonicalHost": "https://www.example.com",
+  "workerName": "example-seo",
+  "listName": "example_301",
+
+  "auditCsv": "redirects-audit.csv",
+
+  "subpathProbes": [
+    ["/2019/05/some-old-post", "/"],
+    ["/blog/page/3", "/posts"],
+    ["/blog/any-old-article", "/posts"],
+    ["/category/some-category", "/posts"],
+    ["/tag/some-tag", "/posts"],
+    ["/author/admin", "/meet-the-doctor"],
+    ["/wp-json/wp/v2/posts", "/"]
+  ]
+}

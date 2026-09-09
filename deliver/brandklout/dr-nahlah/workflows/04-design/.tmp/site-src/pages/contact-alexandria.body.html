@@ -1,0 +1,164 @@
+<!-- ==========================================================================
+     CONTACT — ALEXANDRIA.
+
+     The Alexandria half of the split described in contact-maclean.body.html.
+     Everything on this page is identical to that one by design — that is how the
+     Webflow build has it — EXCEPT the embedded form, which here is
+     "Alexandria - Wordpress contact page" (g7FeioS7e7quSCxIQHRw).
+
+     Read contact-maclean.body.html's header before editing either page; the note
+     about the `data-wz-embed` wrapper being load-bearing applies equally here.
+
+     TWO DEFECTS ON THE WEBFLOW SOURCE ARE DELIBERATELY NOT REPRODUCED:
+       - Webflow prints the Alexandria "current patients" number as
+         (703) 940-541, one digit short. It is (703) 940-5410 everywhere else on
+         both sites, and it is correct here.
+       - Webflow links the Alexandria "new patients" number to `#` rather than to
+         a tel: URL. It dials here.
+     Fix both on Webflow too; this page is not the only place a patient reads
+     that number.
+     ========================================================================== -->
+<section class="pg-hero" id="hero" style="min-height:clamp(440px,56svh,600px)">
+  <div class="ph-bg">
+    <img src="assets/office-hero.jpg" alt="The practice reception in Northern Virginia" data-drift>
+  </div>
+  <div class="wrap ph-in">
+    <div class="pk-crumb" data-rv><a href="index.html">Home</a><i></i><a href="contact.html">Contact</a><i></i><span>Alexandria</span></div>
+    <h1 data-split>Two offices. <em>One</em> specialist.</h1>
+    <p class="ph-lead" data-rv>Tysons Corner in McLean and Old Town Alexandria. Both run the same
+      way, by the same team, with the laboratory in the building.</p>
+    <div class="ph-actions" data-rv>
+      <a class="btn btn-primary magnetic" href="#book"><span>Request a consultation</span></a>
+      <a class="btn btn-ghost magnetic" href="#offices"><span>Find an office</span></a>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- offices ---------- -->
+<section class="pk pk-alt" id="offices">
+  <div class="wrap section">
+    <div class="pk-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Locations</span></div>
+      <h2 data-split>Where to go.</h2>
+    </div>
+    <div class="ct-office-grid" data-rv="stagger">
+      <article class="ct-office">
+        <h3>Tysons Corner &middot; McLean</h3>
+        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+          7901 Jones Branch Drive, Suite 220<br>
+          McLean, VA 22102</address>
+        <div class="ct-office-line"><span>New patients</span>
+          <a href="tel:+15717029900">(571) 702-9900</a></div>
+        <div class="ct-office-line"><span>Current patients</span>
+          <a href="tel:+17034483312">(703) 448-3312</a></div>
+        <a class="pk-more ct-office-dirs"
+           href="https://www.google.com/maps/search/?api=1&amp;query=7901+Jones+Branch+Drive+Suite+220+McLean+VA+22102"
+           target="_blank" rel="noopener">Directions</a>
+        <a class="btn btn-primary magnetic" href="https://www.flexbook.me/DrNahlahTy/1"
+           target="_blank" rel="noopener"><span>Book now</span></a>
+      </article>
+      <article class="ct-office">
+        <h3>Alexandria</h3>
+        <address>Dr. Nahlah Implants and Prosthodontics Specialists<br>
+          2855 Duke Street<br>
+          Alexandria, VA 22314</address>
+        <div class="ct-office-line"><span>New patients</span>
+          <a href="tel:+15712537790">(571) 253-7790</a></div>
+        <div class="ct-office-line"><span>Current patients</span>
+          <a href="tel:+17039405410">(703) 940-5410</a></div>
+        <a class="pk-more ct-office-dirs"
+           href="https://www.google.com/maps/search/?api=1&amp;query=2855+Duke+Street+Alexandria+VA+22314"
+           target="_blank" rel="noopener">Directions</a>
+        <a class="btn btn-primary magnetic" href="https://flexbook.me/drnahlah"
+           target="_blank" rel="noopener"><span>Book now</span></a>
+      </article>
+    </div>
+
+    <div class="pk-stats" data-rv="stagger" style="margin-top:clamp(2.5rem,5vw,4rem)">
+      <div><b>Mon&ndash;Thu</b><span>8:00am &ndash; 5:00pm</span></div>
+      <div><b>Friday</b><span>8:00am &ndash; 2:00pm</span></div>
+      <div><b>Saturday</b><span>Closed</span></div>
+      <div><b>Sunday</b><span>Closed</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- request form ---------- -->
+<section class="pk" id="book">
+  <div class="wrap section pk-lede">
+    <div class="lc-head">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Request A Consultation</span></div>
+      <h2 data-split>Tell us what you are dealing with.</h2>
+      <p data-rv style="color:var(--fg-body);font-weight:400;margin-top:1rem;max-width:52ch">
+        A consultation includes the 3D scan and a straight answer about what your case actually
+        needs. Second opinions on implant surgery are free.<br><br>
+        Prefer to speak to someone?<br><br>
+        <b>Tysons Corner &middot; McLean</b><br>
+        New patients: <a href="tel:+15717029900" style="color:var(--accent)">(571) 702-9900</a><br>
+        Current patients: <a href="tel:+17034483312" style="color:var(--accent)">(703) 448-3312</a><br><br>
+        <b>Alexandria</b><br>
+        New patients: <a href="tel:+15712537790" style="color:var(--accent)">(571) 253-7790</a><br>
+        Current patients: <a href="tel:+17039405410" style="color:var(--accent)">(703) 940-5410</a><br><br>
+        If anxiety is what has kept you away, say so when you call. It changes how the
+        appointment is planned.</p>
+    </div>
+    <div class="wz-embed" data-wz-embed="auto"><iframe
+    src="https://api.leadconnectorhq.com/widget/form/g7FeioS7e7quSCxIQHRw"
+    style="width:100%;height:100%;border:none;border-radius:8px"
+    id="inline-g7FeioS7e7quSCxIQHRw"
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="Alexandria - Wordpress contact page"
+    data-height="1037"
+    data-layout-iframe-id="inline-g7FeioS7e7quSCxIQHRw"
+    data-form-id="g7FeioS7e7quSCxIQHRw"
+    title="Alexandria - Wordpress contact page"
+>
+</iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script></div>
+  </div>
+</section>
+
+<!-- ---------- before you come ---------- -->
+<section class="pk pk-light" id="visiting">
+  <div class="wrap section pk-split">
+    <figure class="sp-fig" style="margin:0">
+      <img src="assets/office-outside.jpg" alt="The practice building exterior" data-drift loading="lazy">
+    </figure>
+    <div class="sp-copy">
+      <div class="chapter-tag" data-rv><i></i><span class="label">Before You Come</span></div>
+      <h2 data-split>What to bring, and what to expect.</h2>
+      <ul class="sp-list" data-rv="stagger">
+        <li><i></i>Any existing treatment plan or quote. Second opinions on implant surgery are free</li>
+        <li><i></i>Recent imaging, if another practice has already scanned you</li>
+        <li><i></i>Your insurance details; most dental PPO plans are accepted and claims are filed for you</li>
+        <li><i></i>A list of medications, particularly if sedation is likely</li>
+        <li><i></i>Time. A first consultation includes an examination and a cone-beam scan</li>
+      </ul>
+      <p data-rv><a class="pk-more" href="implant-cost.html">Cost and financing before you come</a></p>
+    </div>
+  </div>
+</section>
+
+<!-- ---------- next ---------- -->
+<section class="pk pk-alt" id="next">
+  <div class="wrap section">
+    <div class="pk-head"><h2 data-split>Where to go next.</h2></div>
+    <nav class="pk-next" data-rv="stagger" aria-label="Related pages">
+      <a href="dental-implants.html"><span class="nx-k">Treatment</span>
+        <span class="nx-t">Dental Implants</span>
+        <span class="nx-d">Start here if teeth are missing rather than damaged.</span></a>
+      <a href="smile-makeover.html"><span class="nx-k">Cosmetic</span>
+        <span class="nx-t">Smile Makeover</span>
+        <span class="nx-d">Start here if the teeth are there but you dislike them.</span></a>
+      <a href="sedation-dentistry.html"><span class="nx-k">Comfort</span>
+        <span class="nx-t">Sedation</span>
+        <span class="nx-d">Start here if the chair itself is the problem.</span></a>
+    </nav>
+  </div>
+</section>
