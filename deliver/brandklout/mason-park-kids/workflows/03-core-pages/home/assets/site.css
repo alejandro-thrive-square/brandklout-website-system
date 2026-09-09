@@ -1879,4 +1879,71 @@ a.card:hover h3 { color: var(--accent); }
 .background-color-tan .button:not(.is-ghost) { background: var(--sage-deep); color: #fff; border-color: var(--sage-deep); }
 .background-color-tan .button.is-ghost { color: var(--ink); border-color: var(--sage-line); }
 
+/* ===========================================================================
+   THE BLOG  (2026-09-09, evening)
+   /blog/ and /blog/<slug>/, built by .tmp/build-blog.mjs from the 157 posts
+   the old WordPress site published. Two layouts that appear on no other
+   page: the feature spread on the overview (one long read beside two short
+   ones) and the year archive (one <details> per year, a row per post). The
+   article itself is the long-form frame every migrated page already uses
+   (`.lf-layout.lf-split`), with the sticky head carrying a table of contents
+   and a byline instead of a note.
+   ======================================================================== */
+/* the sticky head of an article: contents, then byline, then the picture */
+.bl-toc { margin-top: 1.4rem; counter-reset: toc; }
+.bl-toc li { counter-increment: toc; display: flex; gap: .7rem; align-items: baseline; padding: .5rem 0; border-top: 1px solid var(--rule); font-size: calc(.92rem * var(--t-text)); line-height: 1.45; }
+.bl-toc li::before { content: counter(toc, decimal-leading-zero); flex: none; font-family: var(--font-ui); font-size: var(--f-label); font-weight: 800; letter-spacing: .08em; color: var(--accent); }
+.bl-toc a { color: var(--fg); text-decoration: none; }
+.bl-toc a:hover { color: var(--sage-deep); }
+.bl-byline { display: grid; gap: .55rem; margin-top: 1.4rem; padding-top: 1rem; border-top: 1px solid var(--rule-strong); }
+.bl-byline div { display: grid; grid-template-columns: 6.5rem minmax(0, 1fr); gap: .6rem; align-items: baseline; }
+.bl-byline dt { font-family: var(--font-ui); font-size: var(--f-label); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-soft); }
+.bl-byline dd { margin: 0; font-size: calc(.9rem * var(--t-text)); line-height: 1.5; color: var(--fg-body); }
+.bl-byline dd a { color: inherit; text-decoration: none; border-bottom: 1px solid var(--rule-strong); }
+/* a section that only continues the one above it: no rule, no gap */
+.lf-section.is-cont { margin-top: 1rem; padding-top: 0; border-top: 0; }
+.lf-steps { display: grid; gap: .6rem; margin: 1rem 0; padding-left: 1.4rem; }
+.lf-steps li { font-size: var(--f-body); line-height: 1.6; color: var(--fg-body); }
+.lf-section p a { color: var(--sage-deep); text-decoration: none; border-bottom: 1px solid var(--sage-line, var(--rule-strong)); }
+.lf-section p a:hover { color: var(--ink); border-color: var(--ink); }
+
+/* a post card, in the feature spread, the read-next row and the topics row */
+.bl-kicker { display: flex; flex-wrap: wrap; gap: .3rem 0; font-family: var(--font-ui); font-size: var(--f-label); font-weight: 800; letter-spacing: .1em; text-transform: uppercase; color: var(--accent); }
+.bl-kicker span + span::before { content: "\00b7"; margin: 0 .55em; color: var(--fg-soft); }
+.bl-card h3 a { color: inherit; text-decoration: none; }
+.bl-card h3 a:hover { color: var(--sage-deep); }
+.bl-card .is-soon { color: var(--fg-soft); }
+.bl-soon { margin-top: auto; padding-top: .6rem; font-family: var(--font-ui); font-size: var(--f-label); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-soft); }
+.bl-feature { display: grid; gap: 1.25rem; }
+@media (min-width: 900px) {
+  .bl-feature { grid-template-columns: minmax(0, 1.45fr) minmax(0, 1fr); grid-template-rows: auto auto; }
+  .bl-feature .bl-card-big { grid-row: 1 / span 2; }
+}
+.bl-card-big .card_media { flex: 1 1 auto; min-height: 16rem; }
+.bl-card-big .card_media img { aspect-ratio: auto; height: 100%; min-height: 16rem; }
+.bl-card-big h3 { font-size: var(--f-h3); max-width: 22ch; }
+.bl-card-big > p:not(.bl-kicker) { font-size: var(--f-lede); line-height: 1.65; }
+.bl-topics .card_no { margin-bottom: .2rem; }
+.bl-topics .card { color: inherit; }
+
+/* the year archive */
+.bl-archive { border-top: 1px solid var(--rule-strong); }
+.bl-year { border-bottom: 1px solid var(--rule-strong); }
+.bl-year summary { cursor: pointer; list-style: none; display: flex; justify-content: space-between; align-items: baseline; gap: 1rem; padding: 1.2rem 0; font-family: var(--font-display); font-weight: 500; font-size: var(--f-h3); color: var(--fg); font-variation-settings: "SOFT" 100, "opsz" 144; }
+.bl-year summary::-webkit-details-marker { display: none; }
+.bl-year summary small { font-family: var(--font-ui); font-size: var(--f-label); font-weight: 800; letter-spacing: .12em; text-transform: uppercase; color: var(--fg-soft); }
+.bl-year summary small::after { content: "+"; margin-left: 1rem; font-size: 1.2em; color: var(--accent); }
+.bl-year[open] summary small::after { content: "\2212"; }
+.bl-rows { padding-bottom: 1.2rem; }
+.bl-row { display: grid; grid-template-columns: 8rem minmax(0, 1fr) auto; gap: .2rem 1.2rem; align-items: baseline; padding: .7rem 0; border-top: 1px solid var(--rule); }
+.bl-row time { font-family: var(--font-ui); font-size: var(--f-label); font-weight: 700; letter-spacing: .06em; color: var(--fg-soft); }
+.bl-row a { color: var(--fg); text-decoration: none; border-bottom: 1px solid var(--rule-strong); line-height: 1.45; }
+.bl-row a:hover { color: var(--sage-deep); border-color: var(--sage-deep); }
+.bl-row .is-soon { color: var(--fg-soft); line-height: 1.45; }
+.bl-row em { font-style: normal; font-family: var(--font-ui); font-size: var(--f-label); font-weight: 700; letter-spacing: .08em; text-transform: uppercase; color: var(--fg-soft); white-space: nowrap; }
+@media (max-width: 767px) {
+  .bl-row { grid-template-columns: minmax(0, 1fr); }
+  .bl-row em { white-space: normal; }
+}
+
 /* == end of the stylesheet: page blocks are appended above this line == */

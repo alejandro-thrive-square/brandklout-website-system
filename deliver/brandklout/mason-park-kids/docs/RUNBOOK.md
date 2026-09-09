@@ -25,6 +25,7 @@ published site.
 | | State |
 | :--- | :--- |
 | The **eleven core pages** | Designed, and the design is now identical on disk and published. `workflows/03-core-pages/` is the source. |
+| The **blog** | **In shape, 2026-09-09 (evening), local only.** `/blog/` and nine sample articles built by `build-blog.mjs` from the 157 recovered posts; the rest are one `--all` away once the practice says which. |
 | The **46 migrated pages** | **Redesigned, 2026-09-09.** All 57 pages now carry the same masthead and footer, the fluid type, the journey layer, at least one photograph and a ground that changes under the reader. They have local source for the first time: `.tmp/harvest-migrated.mjs` pulled their content down, a recipe in `.tmp/recipes/` says which blocks go where, and `.tmp/build-pages.mjs` wrote the files. **From here the files are the source** - edit a page's `<main>` in place, exactly like the eleven. |
 | Head tags | Every page has a description, canonical, Open Graph and JSON-LD, written at publish by the two plugins in `deliver/process/19-instatic-seo`. |
 | Type | Fraunces and Nunito, the VARIABLE files, self-hosted on both sides. The platform's static instances are still installed as the fallback. |
@@ -42,6 +43,7 @@ Run from `workflows/03-core-pages/.tmp/`. All of them are cheap; run them all.
 | `node hover-probe.mjs ../home/<page>/index.html` | Can you still read a button while hovering it? A crop of every variant, hovered. |
 | `node nav-probe.mjs ../home/<page>/index.html` | Can the client click through the review from disk? Every internal link must resolve to a file, at every depth. |
 | `python recompose-figures.py --dry-run` | Is every picture still where the plan puts it? 0 pages should change. |
+| `node build-blog.mjs --list` | Which of the 157 posts are built, and the old-URL to new-URL map. `--all` builds every post; the overview links whatever is on disk. |
 | `node build-pages.mjs --list` | Which pages have a recipe. **Order is `build-pages` then `stamp` then `check`, and it does not commute.** |
 | `node diff-all.mjs` | Local against live, all eleven: head, structure, text, geometry. |
 | `node audit-live.mjs` / `--width 390` | **All 57 routes**, not the eleven. |

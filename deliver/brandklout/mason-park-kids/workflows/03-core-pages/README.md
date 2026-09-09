@@ -56,6 +56,7 @@ The Asana brief is **Build New Mason Park Pediatric Site** `1218009803778905` â†
 | `.tmp/get-album.mjs` | The practice's FRONT OF HOUSE from the client's own Google Photos album into `_album/`: the front desk, the waiting-room sofa, the gumball machine, the product shelf. Nothing clinical is taken from that album; its header says why. |
 | `.tmp/probe-stock.mjs` | Twelve Magnific candidates per search term, with preview URLs, so a contact sheet can be looked at BEFORE a credit is spent. Every slot bought on 2026-09-09 (evening) was chosen this way and is pinned by `id` in `get-stock.mjs`. |
 | `.tmp/nav-probe.mjs` | Opens a page over `file://`, checks every internal link resolves to a file on disk after `site.js` has rewritten it, and clicks through three of them. The review gate: if this fails, the client cannot click around. |
+| `.tmp/build-blog.mjs`, `blog-content.json` | **The blog.** `--harvest` reads the 157 posts out of workflow 01's WordPress export into `blog-content.json` (committed, 1.7 MB, so a worktree without the mirror can still build); a run writes `/blog/` and `/blog/<slug>/` for the nine sample posts, `--all` for every post, `--only a,b` for some. Its header is the record of what the harvest drops (pasted bios, disclaimers, a directions link) and how old links are rewritten. `--list` prints the old-URL to new-URL map for the cutover redirects. |
 | `.tmp/hover-probe.mjs` | Hovers one of every button variant on a page and records the label colour, the fill behind it and a crop. Exists because the fill slid up OVER the label on every button for a week and no gate measured a hover. |
 | `.tmp/shoot-all.mjs`, `viewport-probe.mjs` | Full-page captures of all 57 pages into one folder, and viewport captures through a pinned scene. The first is how this pass found what the per-page gates could not; the second is how it told a pin spacer from a fault. |
 | `.tmp/upload-fonts.mjs` | The variable Fraunces and Nunito: `--fetch` downloads them into `_fonts/` and `home/assets/fonts/`, then a run uploads them and writes `font-map.json`. |
@@ -347,6 +348,23 @@ full-page capture of every page, looked at in order.
 390 on the recomposed pages. **Local only, by the client's instruction** - the
 Instatic import has not run; when it does, `upload-media.mjs` has 23 new keys
 to carry and `import-styles.mjs` must re-export `site.css`.
+
+## The blog
+
+The old site published 157 posts (2021-11 to 2026-06). On 2026-09-09 (evening) the client
+asked for a blog overview page and an article page, built locally first, to upload into
+Instatic and then populate. `build-blog.mjs` builds both from the recovered export:
+
+| Route | Chapters |
+| :--- | :--- |
+| `/blog/` | Arrival (the story frame), **The Latest** (a feature spread: one long read beside two short ones), By Topic (five shelves with counts), **Every Post** (one `<details>` per year, a row per post, linked when the post exists on disk), The Invitation |
+| `/blog/<slug>/` | Arrival (topic, title, excerpt, published / reading time / written by), **The Article** (the long-form frame with a sticky head carrying a numbered table of contents, a byline and a photograph; a run over the prose ceiling continues in a second section with no rule above it), Read Next (three cards, same topic first), The Invitation with the treatment pages the article links to |
+
+Nine sample posts are built: the three newest, plus six across both eras and four topics. The
+overview lists all 157 and links the nine. Which posts come across is the practice's editorial
+call, made by looking at pages rather than a list; sixty-three of them are Invisalign pieces
+and some of those were written for adults. The old URLs were `/<slug>/`; the new ones are
+`/blog/<slug>/`, so the domain cutover needs a redirect per post.
 
 ## Editing
 

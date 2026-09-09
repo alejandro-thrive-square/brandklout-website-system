@@ -122,6 +122,20 @@ on four pages now read white on ink. Commit `f6408ede`.
   be the ask if the client wants her whole face. `probe-hooks.mjs`: all scenes still do work.
   Commit `fb60f3ee`.
 
+### 6. The blog, in shape
+
+The client asked what the old site's blog held, then for an overview page and an article page
+built locally first. `build-blog.mjs` (see the README's blog section) harvests the 157 posts
+from the recovery's WordPress export into `blog-content.json` and builds `/blog/` and
+`/blog/<slug>/` on the current chrome with real posts in them: nine samples, the overview
+listing all 157 and linking the nine. Two layouts on no other page (the feature spread, the
+year archive); the article is the long-form frame with a table of contents in its sticky head.
+`check.mjs` 68 pages, 0 errors; `nav-probe.mjs` on `/blog/` 62 links, 0 bad. **Not published.**
+Two things to know: the 2025-2026 posts carried a pasted author bio, a directions link and a
+disclaimer in the body, all dropped by the harvest (the byline carries the author); and the
+old blog has one duplicated post ("Pacifiers and Teeth Development", 2021 and 2023), left as
+found for the client to decide. Commit `BLOGSHA`.
+
 ## Where it is now
 
 Done locally, **not published**. Commit `e8f2e9ba` on `bk-mason-park-kids`, pushed.
@@ -152,6 +166,10 @@ Images inside `<main>`: `waiting` on 0 pages (was 50); 23 new keys in the pool
 3. `populate-seo.mjs` needs no re-run; no title or description changed.
 
 ## Open questions for the client
+
+0. **Which posts come back.** 157 are harvested and nine are built. Sixty-three are Invisalign
+   pieces, some written for adults; one post is duplicated. The overview lists every title so
+   the choice can be made from the page.
 
 1. **The album frames.** Nine photographs from the family practice's shoot now appear here as
    the shared front of house, captioned as shared. If the practice would rather the kids' site
