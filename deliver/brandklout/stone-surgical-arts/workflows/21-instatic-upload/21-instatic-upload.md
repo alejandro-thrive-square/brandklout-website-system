@@ -688,6 +688,84 @@ rounding, and the `.navbar_burger:empty` repair. **Resist adding to that list to
 make a run quiet.** Both of the bugs above would have been caught before the
 first publish by exactly this check.
 
+### 28. A JS-only change does not need the convert steps, and `/assets/site.js` does not exist live
+
+Two halves of the same session, 2026-09-09, swapping the BugHerd board key — one line in
+`site-src/js/90-bugherd.js`.
+
+**The shortcut.** `push-site.mjs` reads `assets/site.js` and `assets/vendor.js` live from
+`final-site/`, but takes the page node trees from `.tmp/import-out.json`, which is whatever the
+last `ship.sh` produced. So when a rebuild changes *only* JS, the previous run's `import-out.json`
+is still valid and steps 1–3 (`upload-media`, `build-import-input`, `ship.sh`) can be skipped
+entirely — go straight to `push-site.mjs --apply --force` and `publish()`. That turns a
+twenty-minute pipeline into two minutes.
+
+**The test for whether you may.** Rebuild, then:
+
+```bash
+git diff --stat -- .../final-site/
+```
+
+If the only modified file is `assets/site.js` (or `vendor.js`), take the shortcut. If any `.html`
+or the CSS differs, the stored node trees are stale and you must run the whole pipeline —
+`push-site.mjs` will happily publish the OLD markup with the NEW script and report success.
+
+**The verification trap.** There is no `/assets/site.js` on the published site. Fetching it
+returns 21 bytes and no match, which reads exactly like the publish silently failed. Instatic
+serves the bundle from a content-hashed path — `/_instatic/assets/<id>/entries/site-<hash>.js` —
+so a live check has to read the `<script src>` off the HTML first:
+
+```bash
+node -e "const B=process.env.INSTATIC_BASE_URL;
+fetch(B+'/').then(r=>r.text()).then(async t=>{
+  const s=[...t.matchAll(/<script[^>]+src=\"([^\"]+)\"/g)].map(m=>m[1]);
+  for (const u of s) console.log(u, (await fetch(B+u).then(r=>r.text())).length) })"
+```
+
+Related: the header of `js/90-bugherd.js` explains why a third-party tag belongs in the JS bundle
+and never in `partials/head.html` — `importHtml` strips every `<script>` out of an imported page,
+so the head tag works locally and does not exist live.
+
+
+### 29. Instatic publishes a CSP, and it blocks every third-party script and iframe
+
+Found 2026-09-09, when the BugHerd sidebar would not appear on a site that demonstrably carried
+the tag. Every published page gets a `<meta http-equiv="Content-Security-Policy">` written by
+Instatic's publisher:
+
+```
+default-src 'self'; frame-src 'none'; img-src 'self' data: https:; media-src 'self' data: https:;
+script-src 'self'; style-src 'self' 'unsafe-inline'; worker-src 'self' blob:;
+```
+
+**It is not in our build and it is not an HTTP header** — `grep` finds it nowhere in `site-src/`,
+and the response headers do not carry it. So it is invisible to every local check: the page works
+in `final-site/`, and the difference only exists once published. `compare-live.mjs` does not catch
+it either, because it compares the two documents' structure and computed style, and a blocked
+third-party script changes neither.
+
+The failure is also disguised. The browser reports the blocked request as **503**, which reads as
+"BugHerd is down" or "the key is wrong". `node` fetching the identical URL returns 200, which reads
+as "then it must be the browser or the VPN". Injecting the same tag on `example.com` in the same
+browser loads it fine. Only the page's own CSP explains all three.
+
+**What relaxes it**, from the container (`/app/src/core/publisher/`):
+
+- `cspPlan.ts` — `createBaseCspPlan` sets `script-src 'self'` once the page has any script tag.
+- `render.ts:461` — the base plan is unioned with `moduleCspSources`.
+- `renderNode.ts:181` — which come from a module's `render()` output declaring `cspSources`. The
+  worked example in its own comment is a YouTube embed lifting `frame-src 'none'`.
+- `plugins/manifest.ts:304,524` — a plugin's `frontend.assets[]`, with the `frontend.assets`
+  permission.
+
+Those two are the whole list. A third-party URL inside `site.js` is neither: `getSite()` exposes no
+CSP field and the container has no CSP env var. **Do not post-process the published HTML** — the
+next `publish()` regenerates it.
+
+Older Instatic instances emit no CSP at all (`westlaimplants.com` and `novismilerogers.com` serve
+none), so a script that works on an older client site is no evidence it will work here.
+
+
 ## Output Artifacts
 
 - `.tmp/media-map.json` — original filename → media library path, id, dimensions

@@ -40,6 +40,26 @@
 
    Add a host here to extend it. Do not remove the gate and rely on removing
    the file later.
+
+   > [!WARNING]
+   > **THIS DOES NOT CURRENTLY RENDER, AND THE FAULT IS NOT HERE. 2026-09-09.**
+   > The tag below is injected correctly on every published page with the right
+   > key — verified live in the DOM. Instatic's publisher then writes a
+   > `Content-Security-Policy` meta into every published page carrying
+   > `script-src 'self'; frame-src 'none'`, which forbids the bugherd.com
+   > script AND the sidebar's iframe. The CSP is not in this build and is not
+   > an HTTP header, so nothing local reveals it.
+   >
+   > Do not "fix" this by loosening the host gate, changing the key, or moving
+   > the tag back into `partials/head.html` — none of those is the cause, and
+   > the head tag is stripped by `importHtml` anyway. The only things that
+   > relax Instatic's CSP are a module declaring `cspSources` and a plugin
+   > declaring `frontend.assets[]`. See trap 29 in
+   > `workflows/21-instatic-upload/21-instatic-upload.md`.
+   >
+   > `bugherd-test.mjs` passes 104/104 regardless: it aborts bugherd.com
+   > requests and asserts the host GATE, which still works. It has never
+   > asserted that the sidebar renders.
    =========================================================================== */
 (function () {
   "use strict";
@@ -59,7 +79,7 @@
      page source of every BugHerd-instrumented site — so it is not a secret and
      it does not belong in .env. It does identify the board, so swapping client
      means swapping this. */
-  var API_KEY = "wss7lflvrdyxfigqiilzsq";
+  var API_KEY = "whxgp1fjoqpgvwaf6mdttg";
   var SRC = "https://www.bugherd.com/sidebarv2.js?apikey=" + API_KEY;
 
   /* Guard on the positive, same rule as the rest of this build's JS. A second

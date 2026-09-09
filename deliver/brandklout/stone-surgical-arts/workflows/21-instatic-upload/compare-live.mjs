@@ -278,12 +278,54 @@ const RUNTIME_PROBE = () => {
   }
 }
 
+/* The two families the build declares. See settleFonts. */
+const FONT_FAMILIES = ['Cormorant Garamond', 'Inter']
+
+/* WAIT FOR THE FACES, NOT FOR THE NETWORK.
+   `networkidle0` means no request for 500ms. It does NOT mean the webfonts are
+   applied, and this build cannot tolerate that gap: `38-cta.css` sizes the CTA
+   with `max-width: calc(20ch * var(--wide))`, and `ch` is the advance of the
+   font's "0" glyph. Measure one page against a fallback face and the reported
+   max-width moves by a THIRD -- 13.8px per ch instead of 17.8 -- which prints
+   as a style + geometry finding on a page nobody touched.
+
+   That is what a full 52-page run produced on 2026-09-09 (hair-restoration at
+   390, three findings) and what the same page alone, re-run, did not. A race
+   under load, not a difference.
+
+   `document.fonts.ready` is not enough on its own: it resolves before the CSS
+   declaring the faces has parsed, so it can settle against an empty face set.
+   Ask for every face explicitly, then wait again. Returns the families that
+   never arrived so the caller can fail loudly rather than measure a fallback. */
+async function settleFonts(pg) {
+  return pg.evaluate(async (fams) => {
+    const load = async () => {
+      await document.fonts.ready
+      await Promise.all(
+        fams.flatMap((f) => ['400', '600', '700'].map((w) =>
+          document.fonts.load(`${w} 1em "${f}"`).catch(() => []))),
+      )
+      await document.fonts.ready
+    }
+    await load()
+    /* One retry: a face requested while the sheet was still parsing resolves to
+       nothing and needs asking for a second time. */
+    let missing = fams.filter((f) => !document.fonts.check(`1em "${f}"`))
+    if (missing.length) {
+      await load()
+      missing = fams.filter((f) => !document.fonts.check(`1em "${f}"`))
+    }
+    return missing
+  }, FONT_FAMILIES)
+}
+
 async function capture(browser, url, width, height, withJs) {
   const pg = await browser.newPage()
   await pg.setJavaScriptEnabled(withJs)
   await pg.emulateMediaFeatures([{ name: 'prefers-reduced-motion', value: 'reduce' }])
   await pg.setViewport({ width, height })
   await pg.goto(url, { waitUntil: 'networkidle0', timeout: 90000 })
+  const missingFonts = await settleFonts(pg)
   if (withJs) {
     await pg.evaluate(async () => {
       await new Promise((r) => { let y = 0; const t = setInterval(() => { window.scrollBy(0, 700); y += 700; if (y > document.body.scrollHeight) { clearInterval(t); r() } }, 25) })
@@ -294,7 +336,7 @@ async function capture(browser, url, width, height, withJs) {
     await wait(500)
   }
   const data = await pg.evaluate(withJs ? RUNTIME_PROBE : PROBE, withJs ? undefined : PROPS)
-  return { pg, data }
+  return { pg, data, missingFonts }
 }
 
 const findings = []
@@ -312,6 +354,11 @@ for (const slug of PAGES) {
     const height = width < 700 ? 844 : 900
     const a = await capture(browser, localUrl, width, height, RUNTIME_LAYOUT)
     const b = await capture(browser, liveUrl, width, height, RUNTIME_LAYOUT)
+
+    /* A face that never arrived makes every ch-derived width meaningless. Say so
+       rather than reporting the fallback metrics as a difference. See settleFonts. */
+    if (a.missingFonts?.length) note(slug, width, 'fonts never loaded (local)', a.missingFonts.join(', '))
+    if (b.missingFonts?.length) note(slug, width, 'fonts never loaded (live)', b.missingFonts.join(', '))
     if (RUNTIME_LAYOUT) {
       a.data = await a.pg.evaluate(PROBE, PROPS)
       b.data = await b.pg.evaluate(PROBE, PROPS)

@@ -57,7 +57,7 @@ time.
 
 ## Traps
 
-The long list — 27 of them, each one a defect that shipped or nearly shipped — is in
+The long list — 29 of them, each one a defect that shipped or nearly shipped — is in
 [`workflows/21-instatic-upload/21-instatic-upload.md`](../workflows/21-instatic-upload/21-instatic-upload.md).
 Read it before any publish. The three that bite hardest:
 
@@ -79,8 +79,16 @@ More broadly: **a lot of `.tmp/` is untracked or gitignored** (`*.woff2`, `*.png
 
 - `capture()` in `compare-live.mjs` needs a `pg.close()` so `--shots` survives a full sixteen-route
   run.
-- The journal has had no client review pass. BugHerd is still installed sitewide and comes off at
-  handoff.
+- **BugHerd is installed, points at the right board, and does not render — Instatic's CSP blocks
+  it.** The published pages carry `script-src 'self'; frame-src 'none'`, written by Instatic's
+  publisher, which forbids both the bugherd.com script and the sidebar iframe. Not fixable from
+  this repository; `bugherd-test.mjs` passes anyway because it tests the host gate, not execution.
+  The evidence and the three options are in
+  [`runbook/2026-09-09-bugherd-board-key-swapped.md`](./runbook/2026-09-09-bugherd-board-key-swapped.md).
+  The board key moved to `whxgp1fjoqpgvwaf6mdttg` on 2026-09-09; it lives in
+  `site-src/js/90-bugherd.js` and nowhere else, and is a public client-side key, not a secret.
+- The journal has had no client review pass, and cannot have one through BugHerd until the above
+  is resolved.
 
 ## Version Control
 
