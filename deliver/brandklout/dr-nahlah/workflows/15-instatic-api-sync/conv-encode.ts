@@ -107,15 +107,54 @@ function survivesParse(prop: string, value: string): boolean {
   return ok
 }
 
+/**
+ * Find the property name, then decide whether the declaration needs encoding.
+ *
+ * > [!IMPORTANT]
+ * > **COMMENTS ARE STRIPPED BEFORE THE COLON IS LOCATED, and that is the whole
+ * > point of this function's shape.** A chunk is everything between two
+ * > top-level `;`, so it carries any comment written above the declaration.
+ * > This used to do `chunk.indexOf(':')`, which finds the first colon in the
+ * > COMMENT when there is one, reads the comment as the property name, fails
+ * > `PLAIN_PROPERTY_RE`, and returns the chunk unencoded — after which the CSS
+ * > engine drops the declaration for real and nothing says so.
+ * >
+ * > Found on the published Stone site, 2026-09-01. `.path_panel` carried:
+ * >
+ * >     flex: 0 0 auto;
+ * >     /* 40rem, not 30rem. ... the pinned chapter travelled 144px: the
+ * >        reader could not tell it had moved. *\/
+ * >     width: min(40rem, 86vw);
+ * >
+ * > `144px:` is the colon. The width was never encoded, happy-dom dropped it,
+ * > and the published home page's three process panels were 1045px wide inside
+ * > a 390px phone instead of 335px. Three conditions had to line up — a colon
+ * > in the comment, a value the engine rejects, and no `var()` in that value to
+ * > put it under Instatic's own substitution protection — which is why exactly
+ * > one declaration on a 130KB stylesheet was affected and why it survived four
+ * > publishes.
+ *
+ * The comment is preserved in the output: only the SEARCH runs on the stripped
+ * copy, and the marker is inserted at the point where the property actually
+ * begins.
+ */
 function encodeChunk(chunk: string): string {
-  const colon = chunk.indexOf(':')
+  const stripped = chunk.replace(/\/\*[\s\S]*?\*\//g, '')
+  const colon = stripped.indexOf(':')
   if (colon === -1) return chunk
-  const prop = chunk.slice(0, colon).trim()
-  const value = chunk.slice(colon + 1)
+  const prop = stripped.slice(0, colon).trim()
+  const value = stripped.slice(colon + 1)
   if (!PLAIN_PROPERTY_RE.test(prop) || !value.trim()) return chunk
   if (survivesParse(prop, value.trim().replace(/!important$/i, '').trim())) return chunk
-  const leading = chunk.slice(0, chunk.length - chunk.trimStart().length)
-  return `${leading}${MARKER}${prop}:${value}`
+  // Where the property starts in the ORIGINAL chunk: after the last comment, if
+  // any, so the comment is kept and the marker goes in front of the property.
+  const lastComment = chunk.lastIndexOf('*/')
+  const head = lastComment === -1 ? 0 : lastComment + 2
+  const before = chunk.slice(0, head)
+  const rest = chunk.slice(head)
+  const leading = rest.slice(0, rest.length - rest.trimStart().length)
+  const body = rest.trimStart()
+  return `${before}${leading}${MARKER}${body}`
 }
 
 /**
