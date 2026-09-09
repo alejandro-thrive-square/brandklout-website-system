@@ -79,16 +79,14 @@ More broadly: **a lot of `.tmp/` is untracked or gitignored** (`*.woff2`, `*.png
 
 - `capture()` in `compare-live.mjs` needs a `pg.close()` so `--shots` survives a full sixteen-route
   run.
-- **BugHerd is installed, points at the right board, and does not render — Instatic's CSP blocks
-  it.** The published pages carry `script-src 'self'; frame-src 'none'`, written by Instatic's
-  publisher, which forbids both the bugherd.com script and the sidebar iframe. Not fixable from
-  this repository; `bugherd-test.mjs` passes anyway because it tests the host gate, not execution.
-  The evidence and the three options are in
-  [`runbook/2026-09-09-bugherd-board-key-swapped.md`](./runbook/2026-09-09-bugherd-board-key-swapped.md).
-  The board key moved to `whxgp1fjoqpgvwaf6mdttg` on 2026-09-09; it lives in
-  `site-src/js/90-bugherd.js` and nowhere else, and is a public client-side key, not a secret.
-- The journal has had no client review pass, and cannot have one through BugHerd until the above
-  is resolved.
+- **BugHerd is GONE, removed 2026-09-09, and must not be re-added as a script.** It could never
+  have worked: Instatic publishes `script-src 'self'; frame-src 'none'`, which blocks both the
+  bugherd.com script and the sidebar's iframe, whether the tag sits in the head or is injected at
+  runtime from `site.js`. The other client sites run an older Instatic that emits no CSP, which is
+  why the same tag works there and is not evidence it will work here. Trap 29 has the diagnosis;
+  it applies to **any** third-party script proposed next — analytics, chat, heatmaps.
+- The journal has had no client review pass, and cannot have one through an in-page review tool on
+  this instance. Use the BugHerd browser extension, or have Instatic relax the CSP.
 
 ## Version Control
 

@@ -16,7 +16,8 @@
  *     from ours (one variable file covers all four Inter weights; ours are four
  *     static subsets). Swapping the local files for Instatic's changes nothing,
  *     because with scripts off the two already measure IDENTICALLY.
- *   - NOT BugHerd. Blocking bugherd.com leaves the difference exactly as it was.
+ *   - NOT BugHerd. Blocking bugherd.com left the difference exactly as it was. (BugHerd was
+ *     installed when this was diagnosed; it was removed on 2026-09-09.)
  *   - NOT an injected stylesheet. The four Instatic stylesheets carry seven
  *     @font-face rules between them, all same-origin, no local() source.
  *   - NOT document.fonts.add(). Hooking it before any page script records zero

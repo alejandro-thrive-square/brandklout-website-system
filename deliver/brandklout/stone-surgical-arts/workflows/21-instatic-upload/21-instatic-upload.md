@@ -40,15 +40,23 @@ registry rules, images in the media library.
 > failures because the local build proves it works.
 >
 > There is exactly ONE script asset for the whole site, `src/scripts/site.js`,
-> assembled by `push-site.mjs` as `bootstrap + vendor.js + site.js`. Anything
-> third-party has to be a JS module in `site-src/js/` that injects the tag at
-> runtime. `js/90-bugherd.js` is the worked example: `build-site.mjs`
+> assembled by `push-site.mjs` as `bootstrap + vendor.js + site.js`. A JS module
+> dropped in `site-src/js/` reaches both targets for free: `build-site.mjs`
 > concatenates `js/*.js` in filename order into `assets/site.js`,
 > `push-site.mjs` reads that file, and **no part of this workflow needs
-> changing.** `90-` sorts last and marks it as not-core.
+> changing.** Use a `90-` prefix to sort last and mark a module as not-core.
 >
-> Anything of that kind should also be HOST-GATED rather than remembered about
-> at launch. See the header of `js/90-bugherd.js`.
+> [!WARNING]
+> **That route works for OUR OWN code and not for a third-party URL.** Instatic
+> publishes a CSP with `script-src 'self'; frame-src 'none'`, so a module that
+> injects a `<script src="https://third-party...">` at runtime is blocked just
+> as firmly as a tag in the head — it merely fails later and less visibly. This
+> cost a full session to diagnose against BugHerd, which was removed on
+> 2026-09-09 for exactly this reason. **There is no way to load a third-party
+> script on this instance from this repository.** The only two things that
+> relax the policy are an Instatic module declaring `cspSources` and a plugin
+> declaring `frontend.assets[]`. Read trap 29 BEFORE promising anyone an
+> analytics tag, a chat widget, a heatmap or a review tool.
 
 > [!IMPORTANT]
 > **Integrity Rule**: Any change to the scripts or technical logic of this workflow must be
@@ -617,7 +625,9 @@ one of them looks like the answer:
   `*.woff2` is in `.gitignore`, so there is no `git checkout` back. Regenerate with
   `node site-src/get-fonts.mjs --force`, or copy from `site-src/assets/fonts`, which the build
   copies *from* and which therefore still holds the originals.
-- **Not BugHerd.** Blocking `bugherd.com` leaves the difference exactly as it was.
+- **Not BugHerd.** Blocking `bugherd.com` left the difference exactly as it was. (BugHerd was on
+  the site when trap 27 was diagnosed; it was removed on 2026-09-09. The elimination still stands —
+  it was never the cause.)
 - **Not an injected stylesheet.** The four Instatic stylesheets carry seven `@font-face` rules
   between them, all same-origin, none with a `local()` source.
 - **Not `document.fonts.add()`.** Hooking it ahead of every page script records zero calls, and
@@ -690,8 +700,9 @@ first publish by exactly this check.
 
 ### 28. A JS-only change does not need the convert steps, and `/assets/site.js` does not exist live
 
-Two halves of the same session, 2026-09-09, swapping the BugHerd board key — one line in
-`site-src/js/90-bugherd.js`.
+Two halves of the same session, 2026-09-09, swapping the BugHerd board key — one line in a single
+JS module. (That module has since been deleted, but the shortcut it revealed is general: it applies
+to any rebuild that touches only `js/`.)
 
 **The shortcut.** `push-site.mjs` reads `assets/site.js` and `assets/vendor.js` live from
 `final-site/`, but takes the page node trees from `.tmp/import-out.json`, which is whatever the
@@ -722,15 +733,16 @@ fetch(B+'/').then(r=>r.text()).then(async t=>{
   for (const u of s) console.log(u, (await fetch(B+u).then(r=>r.text())).length) })"
 ```
 
-Related: the header of `js/90-bugherd.js` explains why a third-party tag belongs in the JS bundle
-and never in `partials/head.html` — `importHtml` strips every `<script>` out of an imported page,
-so the head tag works locally and does not exist live.
+Related: `importHtml` strips every `<script>` out of an imported page, so a tag in
+`partials/head.html` works locally and does not exist live. For a THIRD-PARTY script neither route
+works at all — see trap 29.
 
 
 ### 29. Instatic publishes a CSP, and it blocks every third-party script and iframe
 
 Found 2026-09-09, when the BugHerd sidebar would not appear on a site that demonstrably carried
-the tag. Every published page gets a `<meta http-equiv="Content-Security-Policy">` written by
+the tag. BugHerd has since been removed from this build; the trap is about the CSP, and applies to
+any third-party script anyone proposes next. Every published page gets a `<meta http-equiv="Content-Security-Policy">` written by
 Instatic's publisher:
 
 ```
