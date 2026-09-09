@@ -100,7 +100,14 @@ const PAGES = [
   // /meet-dr-nahlah. That freed the /about slug for the separate office-overview
   // page the client asked for — built out below.
   { slug: "meet-dr-nahlah", journey: 0, navKey: "ABOUT" },
+  // /contact is the CHOOSER. The Webflow build split the contact page one-per-
+  // office on 2026-08-24 because each office has its own LeadConnector form, so
+  // the pre-split slug is kept alive here — sitewide nav, footer, drawer and the
+  // Book a Consult CTA all point at it, and Instatic has no redirect tool. Same
+  // treatment as privacy-policy / terms-conditions below.
   { slug: "contact", journey: 0, navKey: "CONTACT" },
+  { slug: "contact-maclean", journey: 0, navKey: "CONTACT" },
+  { slug: "contact-alexandria", journey: 0, navKey: "CONTACT" },
   // The blog index. 43 migrated WordPress posts live under /posts/<slug>; the
   // slug here has to stay "posts" because that is what all 43 of them and the
   // 117 redirect rules already point at.

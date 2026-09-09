@@ -46,6 +46,14 @@ const getJSON = (p) => new Promise((res, rej) => {
     let d = ""; r.on("data", (c) => (d += c)); r.on("end", () => res(JSON.parse(d)));
   }).on("error", rej);
 });
+/* The document as SERVED, before any script has touched it. Used by the
+   "no CSS or JS inlined" check — see the comment at its call site. */
+const fetchText = (u) => new Promise((res, rej) => {
+  http.get(u, (r) => {
+    let d = ""; r.setEncoding("utf8");
+    r.on("data", (c) => (d += c)); r.on("end", () => res(d));
+  }).on("error", rej);
+});
 let wsUrl;
 for (let i = 0; i < 150; i++) {
   try { const v = await getJSON("/json/version"); if (v.webSocketDebuggerUrl) { wsUrl = v.webSocketDebuggerUrl; break; } } catch {}
@@ -209,12 +217,29 @@ for (const page of PAGES) {
   /* The architecture claim, checked rather than asserted in a comment: styling
      and behaviour are site-wide, and each section's module runs exactly when
      that section's markup is present. That is what makes a section something
-     you can move between pages by moving only the markup. */
+     you can move between pages by moving only the markup.
+
+     The claim is about what THIS BUILD ships, so the count is taken from the
+     shipped document, not from the live DOM. A page carrying a third-party
+     embed cannot control what the vendor's script does after load, and
+     LeadConnector's form_embed.js injects a 2.8 KB `.ep-*` <style> into <head>
+     — measuring the live DOM failed both contact pages for a stylesheet this
+     repository does not write and cannot remove.
+
+     The check is NOT weakened by that: a <style> or an inline <script> that we
+     author into a page body is in the shipped HTML and still fails, on every
+     page, embed or no embed. What is no longer counted is what a vendor adds at
+     runtime, which was never this check's subject. */
+  /* Comments are stripped FIRST. The page bodies discuss their own markup —
+     "One <style> + one <script>, injected once per page" is a real comment in
+     contact.body.html — and counting those reports a violation that is a
+     sentence in English, not an element. */
+  const shipped = (await fetchText(url)).replace(/<!--[\s\S]*?-->/g, "");
+  const shippedStyles = (shipped.match(/<style[\s>]/gi) || []).length;
+  const shippedInline = (shipped.match(/<script(?![^>]*\bsrc=)(?![^>]*application\/ld\+json)[^>]*>/gi) || []).length;
   check(page, "no CSS or JS inlined into the page",
-    await evalJs(`document.querySelectorAll('style').length === 0
-      && document.querySelectorAll('script:not([src]):not([type="application/ld+json"])').length === 0`),
-    await evalJs(`document.querySelectorAll('style').length + ' style, '
-      + document.querySelectorAll('script:not([src]):not([type="application/ld+json"])').length + ' inline script'`));
+    shippedStyles === 0 && shippedInline === 0,
+    `${shippedStyles} style, ${shippedInline} inline script (as shipped)`);
 
   const modules = await evalJs(`(function(){
     if (!window.WZ || !WZ.modules) return 'no registry';

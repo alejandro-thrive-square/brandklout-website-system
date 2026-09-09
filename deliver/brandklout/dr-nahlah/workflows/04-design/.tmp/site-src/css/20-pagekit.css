@@ -149,6 +149,11 @@
 .pk-split .sp-fig{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist)}
 .pk-split .sp-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   will-change:transform}
+/* BugHerd #19. A 4:5 portrait cut-out in a 4:3 frame loses 40% of its height
+   to `cover`, and [data-drift] takes another 11%: centred, /about's specialist
+   opened below the doctor's mouth. Anchor that one to the top of the source.
+   `contain` was the other way and is what pins #15 and #16 object to. */
+.pk-split .sp-fig.sp-fig-top img{object-position:50% 0}
 .pk-split .sp-copy{display:grid;gap:1.1rem;max-width:56ch}
 .pk-split .sp-copy p{color:var(--fg-body);font-weight:400;line-height:1.85}
 .sp-list{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:0}
@@ -259,13 +264,59 @@
 .pk-cta{position:relative;overflow:hidden;
   background:linear-gradient(115deg,var(--gold-deep),var(--gold) 48%,var(--gold-light));
   color:var(--black);text-align:center}
-.pk-cta .cta-in{display:grid;gap:1.25rem;justify-items:center;max-width:60ch;margin-inline:auto}
-.pk-cta h2{font-size:var(--d2);max-width:15ch}
+/* 90ch, not the 60ch this file carried until 2026-08-24 — that was DRIFT, not a
+   change made here. The Instatic registry has held 90ch for some time (someone
+   widened it in the editor and the local package was never brought into step),
+   so the live site and this build have been laying this band out differently.
+   Aligned to the live value rather than the other way round: 90ch is what
+   visitors have been seeing, and it is wide enough for the office cards, whose
+   own max-width does the real constraining. */
+.pk-cta .cta-in{display:grid;gap:1.25rem;justify-items:center;max-width:90ch;margin-inline:auto}
+/* BugHerd #25. `max-width:15ch` decides WHERE this heading wraps, and on
+   /smile-makeover it left one word alone on the second line ("…commit to" /
+   "it."). `balance` spreads the words evenly across the lines instead. It has to
+   be a real stylesheet rule, not something added later: GSAP SplitText measures
+   the natural line boxes at boot and replaces them with one div per line, and
+   after that there is nothing left for the browser to re-balance. */
+.pk-cta h2{font-size:var(--d2);max-width:15ch;text-wrap:balance}
 .pk-cta p{color:rgba(11,11,12,.78);font-weight:400;max-width:46ch}
 .pk-cta .cta-phones{display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:center;
   margin-top:.5rem;font-size:.8rem;letter-spacing:.06em;color:rgba(11,11,12,.72)}
 .pk-cta .cta-phones a{font-family:var(--f-display);font-size:1.15rem;color:var(--black);
   border-bottom:1px solid rgba(11,11,12,.3)}
+
+/* ---------------------------------------------------------------------------
+   THE TWO OFFICES, ON A CALL-TO-ACTION BAND.
+
+   Every CTA on the site used to end in ONE button. The two practices keep
+   SEPARATE Flexbook calendars, so a single "book now" cannot serve both — it
+   silently sends every reader to whichever office is hardcoded in it, which is
+   exactly what the home page did (everyone went to Alexandria). The Webflow
+   build fixed it by putting both offices in the band, each with its own booking
+   link, and this is that block in this design's vocabulary.
+
+   It reuses .ct-office from the contact pages, but NOT .ct-office-grid: that
+   grid draws its separator as a 1px var(--line) gap showing through from the
+   container's background, which against the gold gradient reads as a seam
+   rather than a divider. Webflow's own .location-cta is two detached cards
+   10px apart, and so is this.
+
+   The cards are left-aligned inside a centred band, because an address and two
+   labelled telephone numbers are a list, not a slogan. Never collapse this back
+   to one button.
+
+   It wraps with `auto-fit`/`minmax` rather than a breakpoint on purpose. This
+   block has to be added to the Instatic style registry by hand, and a media
+   query there is not one rule but a rule plus a condition entry plus a
+   per-rule contextStyles key whose emission order is load-bearing (see
+   15-instatic-api-sync.md, "Cascade order — three separate traps"). One
+   intrinsic rule cannot get that wrong. 19rem is chosen so the cards are side
+   by side from ~40rem up and stacked below it, which is where a 2-up of this
+   density stops fitting anyway.
+   --------------------------------------------------------------------------- */
+.cta-offices{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));
+  gap:10px;width:100%;max-width:64rem;margin-inline:auto;text-align:left;justify-self:stretch}
+.cta-offices .ct-office{background:var(--card);color:var(--fg)}
 
 /* Pre-reveal state. Applied only once the kit's script confirms GSAP is live,
    so a scripting failure leaves a fully readable page rather than a blank one. */

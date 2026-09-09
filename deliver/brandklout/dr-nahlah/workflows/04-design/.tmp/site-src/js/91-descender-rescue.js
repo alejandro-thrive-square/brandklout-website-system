@@ -41,7 +41,41 @@
       masks[i].style.overflow = Math.abs(ty(line)) < EPS ? 'visible' : 'clip';
     }
   }
-  sweep();
-  setInterval(sweep, 200);
-  window.addEventListener('load', sweep);
+  /* The poll used to run every 200ms for the life of the page. There are 8
+     masks, `ty()` calls getComputedStyle on each and the loop then writes
+     `style.overflow` back, so that was a forced style recalc five times a
+     second, for ever, on every page -- 336ms of TimerFire in an 11s mobile
+     trace, all of it after the lines had long since landed.
+
+     A line only needs sweeping while it is TRAVELLING, so the poll now stops
+     once nothing has moved for three consecutive passes and re-arms on the two
+     events that can put a clipped mask back on the page: `load`, and the
+     resize that makes SplitText autoSplit rebuild them. Same behaviour, no
+     standing timer. */
+  var timer = null, idle = 0;
+
+  function pass() {
+    var masks = document.querySelectorAll('.wz-line-mask,.wz-mask-line-mask');
+    var moving = 0;
+    for (var i = 0; i < masks.length; i++) {
+      var line = masks[i].firstElementChild;
+      if (!line) continue;
+      var clipped = Math.abs(ty(line)) >= EPS;
+      if (clipped) moving++;
+      masks[i].style.overflow = clipped ? 'clip' : 'visible';
+    }
+    if (moving) idle = 0;
+    else if (++idle >= 3) stop();
+  }
+  function start() { if (!timer) { idle = 0; timer = setInterval(pass, 200); } }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+  pass();
+  start();
+  window.addEventListener('load', function () { pass(); start(); });
+  var rt;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(start, 120);   // autoSplit rebuilds masks clipped
+  });
 })();

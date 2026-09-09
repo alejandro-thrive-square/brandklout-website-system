@@ -41,7 +41,14 @@
 /* A diagram or a render on the cream, not a photograph cropped to the box. */
 .mz .mz-fig.mz-plain{background:var(--bg-3)}
 .mz .mz-fig.mz-plain img{object-fit:contain;padding:clamp(.9rem,1.8vw,1.6rem)}
+/* BugHerd #20. A `.mz-wide` is 16/9 across two columns, so it is taller than the
+   4/3 single-column figure beside it and row one ends in a hole (163px at 1440).
+   Dropping the aspect-ratio lets the grid's own `align-self:stretch` size that
+   figure from the row. Above 720 only: below it the mosaic is two columns and
+   the figure can end up alone in a row, where an auto row measured from an
+   absolutely-positioned image is 0px and the picture would disappear. */
 @media(min-width:720px){
+  .mz .mz-fig.mz-fill{aspect-ratio:auto;height:100%}
   .mz.mz-3{grid-template-columns:repeat(3,1fr)}
   .mz.mz-4{grid-template-columns:repeat(4,1fr)}
 }
@@ -52,13 +59,29 @@
 }
 
 /* ---------- full-bleed band ---------- */
+/* BugHerd #13, second pass. The height caps at 34rem but the width did not, so
+   the wider the screen the worse `cover` cropped: at 2560 the band was 2545x680
+   (3.74:1) against a 1.50:1 photograph and showed 36% of its height. Capping the
+   WIDTH holds the frame at roughly the 1440 proportion however large the display
+   gets. 1800 is deliberately wider than `--maxw` (1560) so the band still reads
+   as breaking out of the content column, and below 1800 it fills the viewport on
+   its own — no breakpoint needed. */
 .mband{position:relative;overflow:hidden;height:clamp(18rem,42vw,34rem);
+  max-width:1800px;margin-inline:auto;
   display:grid;align-items:end;background:var(--ink-900)}
 .mband .mband-fig{position:absolute;inset:0;margin:0;overflow:hidden}
 .mband .mband-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   will-change:transform}
 /* The scrim is the whole reason a line of text can sit on any of the 370 source
    photographs without being vetted one at a time. */
+/* BugHerd #13. The band is 2.6:1 and the photograph is 1.5:1, so `cover`
+   throws away 43% of the source height and the [data-drift] parallax
+   (scale 1.12, yPercent -6..6) takes another 11% and slides the window inside
+   it. Centred, /patient-stories started below the subject's eyes. Anchoring the
+   crop to the top of the source keeps the whole head in frame at both ends of
+   the drift, at every width. Opt-in per figure: the other four bands are
+   correctly centred. */
+.mband .mband-fig.mband-top img{object-position:50% 0}
 .mband .mband-fig::after{content:"";position:absolute;inset:0;
   background:linear-gradient(transparent 30%,var(--scrim))}
 .mband .mband-in{position:relative;z-index:1;padding:0 var(--gutter) clamp(1.8rem,4vw,3rem);

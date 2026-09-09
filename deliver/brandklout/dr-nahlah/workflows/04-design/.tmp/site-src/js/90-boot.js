@@ -5,6 +5,14 @@
   var W = window.WZ;
   document.documentElement.classList.add('wz-ready');
 
+  /* Pointer capability as a class, so CSS can branch on it without a media
+     query. Instatic stores a non-viewport media query as a custom condition
+     ordered by raw array position, which is a cascade trap; a class is not.
+     Set before flush() so a section's setup sees it. */
+  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    document.documentElement.classList.add('wz-fine');
+  }
+
   if(!W || !W.ok){
     /* GSAP missing: reveal everything so the page is still readable. */
     document.querySelectorAll('[data-anim="hide"]').forEach(function(el){ el.style.visibility='visible'; });
@@ -17,7 +25,34 @@
   if(window.SplitText)      gsap.registerPlugin(SplitText);
   if(window.Observer)       gsap.registerPlugin(Observer);
 
-  if(!W.reduced && window.ScrollSmoother){
+  /* THE SMOOTHER IS DESKTOP-ONLY, and this is the mobile flicker fix.
+
+     ScrollTrigger has two ways to pin. With NO smoother it uses native
+     `position:fixed` and the browser holds the chapter still for free. With a
+     smoother present it switches to `pinType:'transform'`, because fixed
+     positioning cannot be trusted inside a smoothed container -- and then the
+     pinned element's `translateY` has to be rewritten from JS on every single
+     scroll update. Measured on the two live builds at the same scroll depth,
+     mid-pin:
+
+       Webflow  (no smoother)  #tPin  position:fixed   transform: identity
+       Instatic (smoother on)  #tPin  position:static  transform: translateY(1350.5px)
+
+     On a phone that per-frame write lands late whenever the main thread is
+     busy, and the pinned chapter drifts against the finger. That is what the
+     client has been reporting as flicker on Chapters 04 and 05.
+
+     The Webflow build is smooth by accident, not by configuration: its
+     `#smooth-wrapper` never survived the conversion, so `create()` is skipped
+     and the page scrolls natively. `smoothTouch:false` does NOT get us there --
+     it only disables the EASING on touch; the smoother is still instantiated,
+     and its mere existence is what flips the pin strategy.
+
+     Touch is the condition, not width -- same reasoning as sections/ch-path.js.
+     A narrow desktop window keeps the smoother; a large tablet does not. */
+  var TOUCH = window.matchMedia('(hover:none) and (pointer:coarse)').matches;
+
+  if(!W.reduced && !TOUCH && window.ScrollSmoother && document.getElementById('smooth-wrapper')){
     try{
       W.smoother = ScrollSmoother.create({
         wrapper:'#smooth-wrapper', content:'#smooth-content',
@@ -42,6 +77,12 @@
            scrolls 0px instead of 535px. Not worth it. */
         normalizeScroll: false, ignoreMobileResize: true
       });
+      /* `#smooth-wrapper{overflow:hidden}` is scoped to this class. Without a
+         smoother the wrapper must NOT clip, or the page cannot scroll at all —
+         which is exactly what happened when this was A/B tested by stubbing the
+         plugin alone: two runs travelled 0px and reported a flattering 16.7ms
+         for a stationary page. Set only on success, never optimistically. */
+      document.documentElement.classList.add('wz-smooth');
     }catch(e){ console.warn('ScrollSmoother unavailable', e); }
   }
 
@@ -58,13 +99,22 @@
   gsap.to(navPr,{scaleX:1,ease:'none',
     scrollTrigger:{start:0,end:'max',scrub:.25}});
 
-  gsap.utils.toArray('section[data-chapter]').forEach(function(sec){
+  var CHAPTERS = gsap.utils.toArray('section[data-chapter]');
+  var LAST = CHAPTERS.reduce(function(m, s){
+    return Math.max(m, parseInt(s.getAttribute('data-chapter'), 10) || 0);
+  }, 1);
+  CHAPTERS.forEach(function(sec){
     var i = parseInt(sec.getAttribute('data-chapter'),10),
         name = sec.getAttribute('data-chapter-name');
     function activate(){
       if(navCh) navCh.textContent = String(i).padStart(2,'0');
       if(navNm) navNm.textContent = name;
-      if(navBar) navBar.style.setProperty('--p', (i/8).toFixed(3));
+      /* Divisor is the LAST chapter index, not a constant: Chapter 07 (The
+         Services) was added on 2026-08-26 and Proof/Invitation shifted to 08
+         and 09, so a hardcoded 8 would have driven the nav progress bar past
+         100% on the final two sections. Derived so the next insertion cannot
+         reintroduce the bug. */
+      if(navBar) navBar.style.setProperty('--p', (i/LAST).toFixed(3));
     }
     ScrollTrigger.create({trigger:sec,start:'top 55%',end:'bottom 45%',
       onEnter:activate,onEnterBack:activate});

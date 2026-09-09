@@ -92,9 +92,11 @@ fs.writeFileSync(CACHE, JSON.stringify(reviews, null, 1));
 console.log(`${reviews.length} reviews (${OFFLINE ? "cached" : "fetched"}), rendering ${Math.min(LIMIT, reviews.length)}`);
 
 const MONTH = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
+// Month first, day second (US convention, and the practice is in Virginia).
+// Changed 2026-08-25 at the client's request; was `18 Aug 2026`.
 const when = (iso) => {
   const [y, m, d] = iso.split("-");
-  return `${Number(d)} ${MONTH[Number(m) - 1]} ${y}`;
+  return `${MONTH[Number(m) - 1]} ${Number(d)}, ${y}`;
 };
 
 const card = (r) => `        <article class="rv-card">

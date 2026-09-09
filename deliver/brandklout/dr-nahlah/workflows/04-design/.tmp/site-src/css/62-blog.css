@@ -33,6 +33,150 @@
 @media(min-width:700px){ .bl-grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1080px){ .bl-grid{grid-template-columns:repeat(3,1fr)} }
 
+/* --- index: search bar + topic filter ----------------------  BugHerd pin #10
+   Client, pinned on `section#articles > div.wrap.section`:
+   "Here we should have a search bar and a filter per topic".
+
+   All 43 rows are already in the DOM — the loop is `limit: 60`,
+   `pagination: 'none'` — so this filters what is on the page. No fetch, no
+   spinner, and nothing added to a site that already has one measured mobile
+   performance problem. No library either; it is ~90 lines of DOM work.
+
+   HIDING IS THE `hidden` ATTRIBUTE, NEVER A STATE CLASS. Two reasons, and the
+   second is the one that eats sessions:
+     1. `.bl-card` sets `display:grid`, which outranks the UA sheet's
+        `[hidden]{display:none}` — the same reason `.ga-item[hidden]` exists
+        for the gallery filter. So the rule has to be written out.
+     2. An attribute selector carries no CLASS TOKEN, so the publish tree-shake
+        (`styleRuleTreeShake.ts`) has nothing to purge. A `.is-hidden` class
+        rule that no node references is a *known class name that is unused*,
+        and that takes down every ambient rule mentioning it — which is exactly
+        how `.drawer.open` disappeared.
+
+   AND IT IS NOT `position:sticky`. ScrollSmoother wraps the page in
+   `#smooth-wrapper{position:fixed;overflow:hidden}`, so sticky is inert on this
+   site; it would need a ScrollTrigger pin. A filter row that follows you down
+   43 cards is also more furniture than help, so: it scrolls away. */
+.bl-filter{display:grid;gap:clamp(.9rem,2vw,1.4rem);grid-template-columns:1fr;
+  align-items:end;padding-bottom:clamp(1.25rem,2.5vw,1.75rem);
+  border-bottom:1px solid var(--line)}
+.bl-f-field{display:grid;gap:.5rem;min-width:0}
+.bl-f-label{font-family:var(--f-body);font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;color:var(--fg-soft)}
+/* `max(1rem,16px)`, not `1rem`. This site's root font-size is FLUID
+   (00-fluid-root.css), so 1rem computes to 13.76px at a 390px viewport — and
+   iOS Safari zooms the whole page in when you focus a control whose computed
+   font-size is under 16px, which on a filter bar means the reader is thrown
+   sideways the moment they tap the search box. Measured, not assumed.
+   (`.ct-form input` has the same `1rem` and the same defect; that is the
+   contact form's to fix, but there is no reason to copy it here.) */
+.bl-f-input,.bl-f-select{font:inherit;font-size:max(1rem,16px);font-weight:400;color:var(--fg);
+  background:var(--card);border:1px solid var(--line-strong);border-radius:0;
+  padding:.85rem 1rem;width:100%;transition:border-color .35s}
+.bl-f-input:focus,.bl-f-select:focus{border-color:var(--rule);outline:none}
+.bl-f-input:focus-visible,.bl-f-select:focus-visible{outline:2px solid var(--focus);
+  outline-offset:2px}
+.bl-f-input::placeholder{color:var(--fg-faint)}
+/* Two-layer arrow, copied from `.ct-form select` so the two controls on this
+   site agree. It is written as the `background-image` LONGHAND on purpose: the
+   `background` shorthand is the one happy-dom flattens to its last layer, and
+   that is how the hero lost two of its three gradients. */
+.bl-f-select{appearance:none;padding-right:2.6rem;
+  background-image:linear-gradient(45deg,transparent 50%,var(--fg-soft) 50%),
+    linear-gradient(135deg,var(--fg-soft) 50%,transparent 50%);
+  background-position:calc(100% - 1.15rem) 55%,calc(100% - .8rem) 55%;
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+/* `role="status"`; it announces the result count on every change. */
+.bl-f-count{margin:0;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-faint);align-self:end;padding-bottom:.95rem}
+@media(min-width:700px){ .bl-filter{grid-template-columns:minmax(0,2fr) minmax(0,1fr) auto} }
+
+/* The topic, rendered per card from the row's `topic` cell. `:empty` covers a
+   row nobody has classified — the token resolves to "" rather than to the
+   placeholder text, so an unfilled row collapses instead of showing a gap. */
+/* A <span>, not a <p>. `.bl-card p` is (0,1,1) and would outrank a (0,1,0)
+   `.bl-topic` on colour and weight; and it keeps `card.querySelector('p')` in
+   blog-filter.js meaning the excerpt and nothing else. */
+.bl-topic{font-family:var(--f-body);font-size:.64rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;color:var(--accent);margin:0}
+.bl-topic:empty{display:none}
+
+.bl-card[hidden]{display:none}
+.bl-grid[hidden]{display:none}
+/* Only while the filter is NARROWING the set (JS sets the attribute when
+   visible < total). `.bl-grid`'s hairlines are its own background showing
+   through a 1px gap, so a filtered row of one or two in a three-track grid
+   would paint `--line` across the empty tracks. Dropping the background and
+   opening the gap turns the survivors into tiles instead. Typing a character
+   that still matches all 43 does not trigger it, so the page does not reflow
+   under the reader for nothing. */
+.bl-grid[data-bl-active]{background:transparent;gap:clamp(.75rem,1.6vw,1.25rem)}
+
+/* Reserve height so shrinking the result set cannot pull the footer up into
+   the fold. `.bl-grid` is the wrong place for it — its background IS the
+   hairline colour, so a min-height there paints a grey slab. */
+#articles .wrap.section{min-height:clamp(26rem,58svh,40rem)}
+
+.bl-empty{display:grid;gap:.9rem;justify-items:start;max-width:54ch;
+  padding:clamp(2rem,5vw,3.5rem) 0}
+.bl-empty[hidden]{display:none}
+.bl-empty h3{font-family:var(--f-display);font-size:calc(1.35rem * var(--t-sm));
+  font-weight:500;line-height:1.28;margin:0}
+.bl-empty p{color:var(--fg-body);font-weight:300;font-size:.94rem;line-height:1.7;margin:0}
+/* Not `.btn`: `.btn` slides a `::after` panel up on hover and relies on a
+   `<span>` wrapper to keep its label above it (`.btn>span{z-index:1}`), and
+   Instatic's `base.button` emits `props.label` with no wrapper at all. Same
+   micro-link treatment as `.bl-more` instead, which needs no inner element. */
+.bl-clear{display:inline-flex;align-items:center;gap:.6rem;margin-top:.35rem;
+  font-family:var(--f-body);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:var(--accent);background:none;border:0;padding:0;cursor:pointer}
+.bl-clear::after{content:"";display:block;width:18px;height:1px;background:var(--rule);
+  transition:width .4s cubic-bezier(.22,1,.36,1)}
+.wz-fine .bl-clear:hover::after{width:38px}
+.bl-clear:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+/* --- end of the pin #10 block ---
+   push-posts-filter.mjs slices between this marker and its opening one, and
+   upserts every rule it finds in between. Anything written BELOW this line is
+   somebody else's and that script will not touch it. Pin #9 appended
+   `.bl-rel-fig` rules here while this was being written; the first version of
+   the slice ended at "A SINGLE POST" and swept them up. Keep new /posts index
+   rules ABOVE the marker only if they are pin #10's. */
+
+/* --- INDEX CARD IMAGE ----------------------------------- BugHerd pin #9 ---
+   "Here we should display the main image of the blog post."
+
+   The index is ONE `base.loop` whose single child is `article.bl-card`, so all
+   43 cards render from one node with one set of props. The thumbnail is
+   `{currentEntry.featuredMediaPath}` — the same field the article hero and the
+   related strip already read, resolved per row by the loop
+   (`src/core/loops/sources/dataRows.ts`), which also means the publisher's
+   media pre-pass finds it and the img ships with srcset, sizes, intrinsic
+   width/height and the library's alt text.
+
+   THERE IS NO SECOND THUMBNAIL STYLE HERE ON PURPOSE. The figure carries
+   `.bl-rel-fig`, the class the article page's related strip already uses:
+   same 16/10 box, same `object-fit:cover`, same `--mist` placeholder, same
+   hover scale, no rounding. Only the hover SELECTOR differs, because on the
+   index the hovered ancestor is `.bl-card` and not `.bl-rel-card`. The name
+   says "related" for historical reasons; read it as "the blog thumbnail".
+
+   No `loading:eager` / `fetchpriority:high` on the first row, and it is not an
+   oversight. A loop cannot express per-index props — `renderLoop` round-robins
+   over the loop's CHILDREN, so N children give N alternating variants, not a
+   hook on item 0. And this page's LCP image is already the `.pg-hero` photo,
+   which carries the page's one `fetchpriority="high"`; a second would compete
+   with it (see perf-image-priority.mjs). Lazy is both the only expressible
+   answer and the correct one. */
+.wz-fine .bl-card:hover .bl-rel-fig img{transform:scale(1.045)}
+/* The deliberate no-image case, and it needs no JS. `base.image.render` returns
+   `{html:''}` when `src` is empty, and `base.link` joins its children with '',
+   so a row with no `featuredMedia` publishes a genuinely EMPTY `<a>` rather
+   than a broken img — `:empty` matches it exactly and hides it before first
+   paint, with no flash of grey plate. This also covers the article page's
+   related strip, where `sections/blog-post.js` does the same removal at
+   runtime; belt and braces, and it works with JS off. */
+.bl-rel-fig:empty{display:none}
+
 /* =============================================================================
    A SINGLE POST                                             BugHerd pin #7
    Reworked 2026-08-27 to the layout of the reference the client attached (a
@@ -248,7 +392,23 @@
 .bl-rel-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
 @media(min-width:700px){ .bl-rel-grid{grid-template-columns:repeat(3,1fr)} }
 .bl-rel-card{display:grid;gap:.7rem;align-content:start}
-.bl-rel-fig{display:block;position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--mist)}
+/* `max-width` here is a PERFORMANCE declaration, not a layout one, and it is
+   inert at every width this design produces. The publisher derives each image's
+   `sizes` from the layout (`core/publisher/sizesResolver.ts`) by walking the
+   ancestor chain for px `width` / `max-width` / padding — and on this site it
+   finds NOTHING: `.wrap`'s cap is `max-width:var(--maxw)`, every gutter and
+   card padding is a `clamp()`, and the resolver skips both, plus it bails out
+   of a `base.loop` grid's track maths by design. So it returns null and the
+   module falls back to `sizes="auto, 100vw"`. Chrome 121+ honours `auto` and
+   picks correctly; Safari and Firefox read 100vw and fetch the w2000 variant —
+   measured 238 KB against the 38.5 KB w640 they actually need, on every card.
+   One px `max-width` on a class the node carries is the only hook the resolver
+   reads, and 640px is 45px above the widest this figure can ever be (595.08px,
+   at a 699px viewport, one column: 699 - 2x27.96 gutter - 2x24 card padding).
+   If the blog index is ever made one column ABOVE ~700px, raise this or the
+   thumbnail will stop short of the card. */
+.bl-rel-fig{display:block;position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--mist);
+  max-width:640px}
 .bl-rel-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   transition:transform .8s cubic-bezier(.22,1,.36,1)}
 .wz-fine .bl-rel-card:hover .bl-rel-fig img{transform:scale(1.045)}

@@ -124,11 +124,14 @@ const js = `/* Per-URL <head> for a platform that emits only the site defaults.
     var l = document.createElement('link'); l.setAttribute('rel', 'canonical'); return l;
   }).setAttribute('href', location.origin + (p === '/' ? '/' : p));
 
-  /* No page declares an icon, so every browser falls back to /favicon.ico and
-     every page logs a 404. The site does serve /favicon.svg. */
-  tag('link[rel="icon"]', function () {
-    var l = document.createElement('link'); l.setAttribute('rel', 'icon'); l.setAttribute('type', 'image/svg+xml'); return l;
-  }).setAttribute('href', '/favicon.svg');
+  /* NO ICON BLOCK HERE, DELIBERATELY. Removed 2026-08-27.
+     It used to point link[rel=icon] at /favicon.svg, back when no page declared
+     an icon and every browser fell back to a 404ing /favicon.ico. Since
+     settings.faviconUrl was set (2026-08-25) the publisher emits the icon link
+     itself -- and `tag()` SELECTS-OR-CREATES, so this block found that link and
+     overwrote it with the platform's default glyph on every page load. Two
+     rounds of "the favicon still has not changed" were this line.
+     settings.faviconUrl is the one source of truth; push-favicon.mjs writes it. */
 
   meta('property', 'og:site_name', ${JSON.stringify(SITE_NAME)});
   meta('property', 'og:type', e.ty || 'website');

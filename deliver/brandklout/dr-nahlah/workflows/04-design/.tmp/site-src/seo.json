@@ -1,1523 +1,1663 @@
 {
- "index": {
-  "title": "Dental Implants & Prosthodontics | McLean & Alexandria VA",
-  "desc": "Board-certified prosthodontist Dr. Esam Nahlah rebuilds complex and failed cases. Implants, All-on-4 and full-mouth work in McLean and Alexandria, Virginia.",
-  "ogTitle": "Dr. Nahlah Implants and Prosthodontics Specialists",
-  "ogDesc": "Implant dentistry and prosthodontics for Northern Virginia, rebuilding smiles that other practices call too complex.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": [
-      "Dentist",
-      "MedicalBusiness"
-     ],
-     "@id": "/#practice",
-     "name": "Dr. Nahlah Implants and Prosthodontics Specialists",
-     "url": "/",
-     "medicalSpecialty": "Prosthodontic",
-     "description": "Implant dentistry and prosthodontics for Northern Virginia, rebuilding smiles that other practices call too complex.",
-     "areaServed": [
-      {
-       "@type": "AdministrativeArea",
-       "name": "Northern Virginia"
-      }
-     ],
-     "sameAs": [
-      "https://www.facebook.com/DentalGroupofTysons/",
-      "https://www.instagram.com/drnahlah",
-      "https://www.youtube.com/channel/UCKAbJ7TTUB-rFOTQ57DEq9g"
-     ],
-     "founder": {
-      "@id": "/about#dr-esam-nahlah"
-     },
-     "employee": {
-      "@id": "/about#dr-esam-nahlah"
-     },
-     "department": [
-      {
-       "@type": "Dentist",
-       "@id": "/#office-mclean",
-       "name": "Dr. Nahlah Implants and Prosthodontics Specialists - Tysons Corner, McLean",
-       "parentOrganization": {
+  "index": {
+    "title": "Dental Implants & Prosthodontics | McLean & Alexandria VA",
+    "desc": "Board-certified prosthodontist Dr. Esam Nahlah rebuilds complex and failed cases. Implants, All-on-4 and full-mouth work in McLean and Alexandria, Virginia.",
+    "ogTitle": "Dr. Nahlah Implants and Prosthodontics Specialists",
+    "ogDesc": "Implant dentistry and prosthodontics for Northern Virginia, rebuilding smiles that other practices call too complex.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": [
+            "Dentist",
+            "MedicalBusiness"
+          ],
+          "@id": "/#practice",
+          "name": "Dr. Nahlah Implants and Prosthodontics Specialists",
+          "url": "/",
+          "medicalSpecialty": "Prosthodontic",
+          "description": "Implant dentistry and prosthodontics for Northern Virginia, rebuilding smiles that other practices call too complex.",
+          "areaServed": [
+            {
+              "@type": "AdministrativeArea",
+              "name": "Northern Virginia"
+            }
+          ],
+          "sameAs": [
+            "https://www.facebook.com/DentalGroupofTysons/",
+            "https://www.instagram.com/drnahlah",
+            "https://www.youtube.com/channel/UCKAbJ7TTUB-rFOTQ57DEq9g"
+          ],
+          "founder": {
+            "@id": "/about#dr-esam-nahlah"
+          },
+          "employee": {
+            "@id": "/about#dr-esam-nahlah"
+          },
+          "department": [
+            {
+              "@type": "Dentist",
+              "@id": "/#office-mclean",
+              "name": "Dr. Nahlah Implants and Prosthodontics Specialists - Tysons Corner, McLean",
+              "parentOrganization": {
+                "@id": "/#practice"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "7901 Jones Branch Drive, Suite 220",
+                "addressLocality": "McLean",
+                "addressRegion": "VA",
+                "postalCode": "22102",
+                "addressCountry": "US"
+              },
+              "telephone": "+1-571-619-9442",
+              "medicalSpecialty": "Prosthodontic",
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "new patients",
+                  "telephone": "+1-571-619-9442"
+                },
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "existing patients",
+                  "telephone": "+1-703-448-3312"
+                }
+              ],
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday"
+                  ],
+                  "opens": "08:00",
+                  "closes": "17:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "Friday",
+                  "opens": "08:00",
+                  "closes": "14:00"
+                }
+              ]
+            },
+            {
+              "@type": "Dentist",
+              "@id": "/#office-alexandria",
+              "name": "Dr. Nahlah Implants and Prosthodontics Specialists - Old Town Alexandria",
+              "parentOrganization": {
+                "@id": "/#practice"
+              },
+              "address": {
+                "@type": "PostalAddress",
+                "streetAddress": "2855 Duke Street",
+                "addressLocality": "Alexandria",
+                "addressRegion": "VA",
+                "postalCode": "22314",
+                "addressCountry": "US"
+              },
+              "telephone": "+1-571-410-3430",
+              "medicalSpecialty": "Prosthodontic",
+              "contactPoint": [
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "new patients",
+                  "telephone": "+1-571-410-3430"
+                },
+                {
+                  "@type": "ContactPoint",
+                  "contactType": "existing patients",
+                  "telephone": "+1-703-940-5410"
+                }
+              ],
+              "openingHoursSpecification": [
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": [
+                    "Monday",
+                    "Tuesday",
+                    "Wednesday",
+                    "Thursday"
+                  ],
+                  "opens": "08:00",
+                  "closes": "17:00"
+                },
+                {
+                  "@type": "OpeningHoursSpecification",
+                  "dayOfWeek": "Friday",
+                  "opens": "08:00",
+                  "closes": "14:00"
+                }
+              ]
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalProcedure",
+              "name": "Dental implants",
+              "url": "/dental-implants"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "All-on-4 full arch implants",
+              "url": "/all-on-4"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Porcelain veneers",
+              "url": "/veneers"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Smile makeover",
+              "url": "/smile-makeover"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Sedation dentistry",
+              "url": "/sedation-dentistry"
+            }
+          ]
+        },
+        {
+          "@type": "Person",
+          "@id": "/about#dr-esam-nahlah",
+          "name": "Dr. Esam Nahlah",
+          "honorificSuffix": "D.D.S., M.S.",
+          "jobTitle": "Board-certified prosthodontist",
+          "url": "/about",
+          "description": "Diplomate of the American Board of Prosthodontics, practising in Northern Virginia since 2013.",
+          "worksFor": {
+            "@id": "/#practice"
+          },
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "Board certification",
+              "name": "Diplomate of the American Board of Prosthodontics"
+            }
+          ],
+          "knowsAbout": [
+            "Prosthodontics",
+            "Dental implants",
+            "Full-mouth rehabilitation",
+            "Smile design",
+            "All-on-4"
+          ]
+        },
+        {
+          "@type": "WebSite",
+          "@id": "/#website",
+          "name": "Dr. Nahlah Implants and Prosthodontics Specialists",
+          "url": "/",
+          "publisher": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "WebPage",
+          "name": "Dental Implants and Prosthodontics in McLean and Alexandria",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "dental-implants": {
+    "title": "Dental Implants | Board-Certified Prosthodontist | Virginia",
+    "desc": "Single implants, bridges and full arches planned and placed by one board-certified prosthodontist in McLean and Alexandria, Virginia.",
+    "ogTitle": "Dental Implants in McLean & Alexandria, Virginia",
+    "ogDesc": "A titanium root, an abutment and a tooth built to your bite, planned and placed by the same specialist.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Dental implants",
+          "description": "Single implants, bridges and full arches planned and placed by one board-certified prosthodontist in McLean and Alexandria, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Dental implants",
+          "description": "Single implants, bridges and full arches planned and placed by one board-certified prosthodontist in McLean and Alexandria, Virginia.",
+          "bodyLocation": "Jaw",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Will the surgery hurt?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Implant surgery is done under sedation. You feel nothing during it, and most patients have no memory of the appointment at all. Afterwards, patients generally report minor discomfort managed with over-the-counter medication."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is recovery like?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Rest for a few days. Most people are back to normal activity within a week. A soft-food diet is needed for the next several months while the implants integrate with the jawbone."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Am I a candidate?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Many patients already are. Others qualify after preparatory treatment such as bone grafting or extractions. It is not something to guess at. Candidacy is determined properly from a comprehensive consultation and a 3D scan."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long do implants last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They are designed to last decades, and can last the rest of your life. Surgical precision, materials and your own habits are what decide it. Implants have held a published success rate above 95% since they were introduced."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I still need check-ups?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Implant restorations resist decay, but the gum around an implant can still develop peri-implantitis from plaque and tartar. Brush twice daily, floss once, and keep the six-month hygiene appointments."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What does it cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on how many teeth are missing, how long they have been missing, the materials used and whether anything has to be rebuilt first. We file insurance claims on your behalf and can help you apply for financing."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "all-on-4": {
+    "title": "All-on-4 Full Arch Dental Implants | McLean & Alexandria",
+    "desc": "Four implants, a fixed provisional arch the same day, and a definitive zirconia bridge. Planned and placed by a board-certified prosthodontist.",
+    "ogTitle": "All-on-4 Full Arch Implants | Dr. Nahlah",
+    "ogDesc": "A fixed arch on four implants, placed in a single visit under sedation.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "All-on-4 full arch dental implants",
+          "description": "Four implants, a fixed provisional arch the same day, and a definitive zirconia bridge.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "All-on-4 full arch dental implants",
+          "description": "Four implants, a fixed provisional arch the same day, and a definitive zirconia bridge.",
+          "bodyLocation": "Jaw",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Will I leave surgery without teeth?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. In most cases you leave the same visit wearing a fixed PMMA provisional prosthesis, which stays in place while the implants integrate."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can All-on-4 do both jaws?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes: upper, lower, or both. Cases are described here as single arch or double arch for exactly that reason."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What if I have bone loss?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "All-on-4 is often the answer because of bone loss: the rear implants are angled to reach denser bone. Some cases still need grafting first, which the cone-beam scan determines at the consultation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What sedation is available?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Nitrous oxide, oral sedation and IV sedation. Oral and IV are administered by a medical anaesthesiologist and need transport arranged both ways."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long until it is finished?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Three to four months from surgery to the final zirconia prosthesis, then a further two to four months for complete healing around it."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "implant-cost": {
+    "title": "Dental Implant Cost in Northern Virginia | Dr. Nahlah",
+    "desc": "What actually moves the price of an implant case, and the three ways patients pay for it: insurance, credit, and third-party financing.",
+    "ogTitle": "What Dental Implants Cost | Dr. Nahlah",
+    "ogDesc": "Nobody can price an implant case from a phone call. Here is what actually moves the number.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Dental Implant Cost in Northern Virginia",
+          "description": "What actually moves the price of an implant case, and the three ways patients pay for it.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Why is there no price list on this page?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Because an honest one cannot exist. Two people missing the same tooth can need entirely different treatment depending on how long it has been gone and what the bone is doing. You get a real number after the scan, in writing, at the consultation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Does insurance cover dental implants?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Some plans offer limited coverage. The practice files claims on your behalf and works to get every benefit your plan entitles you to. Whether that is a large or small share depends entirely on the plan."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I finance the whole case?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "In most cases yes, through CareCredit, Proceed Finance or LendingClub. Proceed Finance in particular is designed for patients whose credit score would rule out conventional lending, with terms up to 96 months."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is a second opinion really free?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, on implant surgery. If you have been quoted elsewhere, bring the plan and any imaging."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "sedation-dentistry": {
+    "title": "Sedation Dentistry | Nitrous, Oral & IV | McLean, VA",
+    "desc": "Nitrous, oral and IV sedation for implant and full-arch surgery, with hospital privileges at a Level 1 trauma centre and a medical anaesthesiologist.",
+    "ogTitle": "Sedation Dentistry | Dr. Nahlah, Northern Virginia",
+    "ogDesc": "Hours of full-arch surgery, turned into something you do not remember.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Sedation dentistry",
+          "description": "Nitrous, oral and IV sedation for implant and full-arch surgery.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Sedation dentistry",
+          "description": "Nitrous, oral and IV sedation for implant and full-arch surgery.",
+          "bodyLocation": "Mouth",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Will I be unconscious?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Not in the general-anaesthetic sense. Under IV sedation most patients drift and have no memory of the procedure afterwards; you remain responsive throughout. Nitrous is lighter still: you stay awake and simply stop minding."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can I drive myself home?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "After nitrous oxide, in most cases yes, because recovery is quick. After oral or IV sedation, no: transport to and from the appointment has to be arranged in advance."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is sedation only for surgery?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. It is available for any procedure. If anxiety or a gag reflex is what has kept you away from routine care, say so when you book."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who administers it?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Oral and IV sedation are administered by a medical anaesthesiologist, depending on the extent of treatment and your personal health."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "smile-makeover": {
+    "title": "Smile Makeover | Digital Smile Design | McLean, Virginia",
+    "desc": "One design decided first: shape, shade, lip line and facial proportion. Free Digital Smile Design preview with a board-certified prosthodontist.",
+    "ogTitle": "Smile Makeover | Dr. Nahlah, Northern Virginia",
+    "ogDesc": "Not a list of procedures. One design, decided first, then the treatments needed to build it.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Smile Makeover",
+          "description": "One design decided first: shape, shade, lip line and facial proportion.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Smile makeover",
+          "description": "A single design covering shape, shade, lip line, gum symmetry and facial proportion, then the treatments needed to build it.",
+          "provider": {
+            "@id": "/#practice"
+          },
+          "performerType": "Board-certified prosthodontist"
+        }
+      ]
+    }
+  },
+  "veneers": {
+    "title": "Porcelain Veneers | Digital Smile Design | McLean, VA",
+    "desc": "Thin porcelain veneers hand-designed to your lip line, gum line and colouring, with a free Digital Smile Design preview before anything is prepared.",
+    "ogTitle": "Porcelain Veneers | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Chips, cracks, gaps, crowding and deep staining, covered by porcelain designed to your own face.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Porcelain veneers",
+          "description": "Thin porcelain veneers hand-designed to your lip line, gum line and colouring.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Porcelain veneers",
+          "description": "Thin porcelain veneers hand-designed to your lip line, gum line and colouring.",
+          "bodyLocation": "Tooth",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "Do veneers ruin your teeth?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Preparation removes less than a millimetre from the front surface of the enamel, enough for the veneer to sit flush instead of bulking the tooth out. It is a permanent modification, which is exactly why the design is agreed and previewed before anything is prepared."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will they stain?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Porcelain does not stain the way natural enamel does. That is not a reason to change your routine: brush twice a day and floss once, as before."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Can veneers fix my bite?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Veneers are a cosmetic treatment for the smile zone. A bad bite is a functional problem and needs to be addressed as one, which is often the reason a prosthodontist is the right person to be assessing it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does it take?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "As few as two appointments once the design is settled: one to prepare and take impressions, one to verify fit and bond."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "smile-gallery": {
+    "title": "Smile Gallery | Before & After Cases | Dr. Nahlah",
+    "desc": "Before-and-after clinical photographs of implant, All-on-4 and veneer cases treated at Dr. Nahlah's Northern Virginia practice.",
+    "ogTitle": "Smile Gallery | Before & After | Dr. Nahlah",
+    "ogDesc": "Every pair was treated at this practice. Drag the line across any of them.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ImageGallery",
+          "name": "Smile Gallery",
+          "description": "Before-and-after clinical photographs of cases treated at this practice.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "patient-stories": {
+    "title": "Patient Stories & Reviews | Dr. Nahlah Prosthodontics",
+    "desc": "Patients of Dr. Esam Nahlah on implants, All-on-4 and full-mouth rehabilitation at the practice's McLean and Alexandria offices.",
+    "ogTitle": "Patient Stories | Dr. Nahlah Prosthodontics",
+    "ogDesc": "Real patients, real cases, in their own words.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Patient Stories",
+          "description": "Patients of Dr. Esam Nahlah on implants, All-on-4 and full-mouth rehabilitation.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "meet-dr-nahlah": {
+    "title": "Meet Dr. Esam Nahlah, Prosthodontist | McLean & Alexandria",
+    "desc": "Dr. Esam Nahlah, D.D.S., M.S., is a Diplomate of the American Board of Prosthodontics and has practised in Northern Virginia since 2013.",
+    "ogTitle": "Meet Dr. Esam Nahlah, Board-Certified Prosthodontist",
+    "ogDesc": "One of twelve recognized dental specialties, and three years of training beyond dental school. Meet the specialist behind the practice.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Person",
+          "@id": "/about#dr-esam-nahlah",
+          "name": "Dr. Esam Nahlah",
+          "honorificSuffix": "D.D.S., M.S.",
+          "jobTitle": "Board-certified prosthodontist",
+          "url": "/about",
+          "description": "Diplomate of the American Board of Prosthodontics, practising in Northern Virginia since 2013.",
+          "worksFor": {
+            "@id": "/#practice"
+          },
+          "hasCredential": [
+            {
+              "@type": "EducationalOccupationalCredential",
+              "credentialCategory": "Board certification",
+              "name": "Diplomate of the American Board of Prosthodontics"
+            }
+          ],
+          "knowsAbout": [
+            "Prosthodontics",
+            "Dental implants",
+            "Full-mouth rehabilitation",
+            "Smile design",
+            "All-on-4"
+          ]
+        },
+        {
+          "@type": "ProfilePage",
+          "name": "Meet Dr. Esam Nahlah",
+          "mainEntity": {
+            "@id": "/about#dr-esam-nahlah"
+          },
+          "isPartOf": {
+            "@id": "/#website"
+          }
+        }
+      ]
+    }
+  },
+  "contact": {
+    "title": "Contact & Locations | Dr. Nahlah Prosthodontics, Virginia",
+    "desc": "Two Northern Virginia offices: Tysons Corner in McLean and Old Town Alexandria. Each answers its own enquiries — choose an office to request a consultation, or call.",
+    "ogTitle": "Contact Dr. Nahlah | McLean & Alexandria, Virginia",
+    "ogDesc": "Two offices, one specialist. Request a consultation with a board-certified prosthodontist.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ContactPage",
+          "name": "Contact and Locations",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "Dentist",
+          "@id": "/#office-mclean",
+          "name": "Dr. Nahlah Implants and Prosthodontics Specialists - Tysons Corner, McLean",
+          "parentOrganization": {
+            "@id": "/#practice"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "7901 Jones Branch Drive, Suite 220",
+            "addressLocality": "McLean",
+            "addressRegion": "VA",
+            "postalCode": "22102",
+            "addressCountry": "US"
+          },
+          "telephone": "+1-571-702-9900",
+          "medicalSpecialty": "Prosthodontic",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "contactType": "new patients",
+              "telephone": "+1-571-702-9900"
+            },
+            {
+              "@type": "ContactPoint",
+              "contactType": "existing patients",
+              "telephone": "+1-703-448-3312"
+            }
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday"
+              ],
+              "opens": "08:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Friday",
+              "opens": "08:00",
+              "closes": "14:00"
+            }
+          ]
+        },
+        {
+          "@type": "Dentist",
+          "@id": "/#office-alexandria",
+          "name": "Dr. Nahlah Implants and Prosthodontics Specialists - Old Town Alexandria",
+          "parentOrganization": {
+            "@id": "/#practice"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "2855 Duke Street",
+            "addressLocality": "Alexandria",
+            "addressRegion": "VA",
+            "postalCode": "22314",
+            "addressCountry": "US"
+          },
+          "telephone": "+1-571-253-7790",
+          "medicalSpecialty": "Prosthodontic",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "contactType": "new patients",
+              "telephone": "+1-571-253-7790"
+            },
+            {
+              "@type": "ContactPoint",
+              "contactType": "existing patients",
+              "telephone": "+1-703-940-5410"
+            }
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday"
+              ],
+              "opens": "08:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Friday",
+              "opens": "08:00",
+              "closes": "14:00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "contact-maclean": {
+    "title": "Contact the Tysons Corner Office | Dr. Nahlah, McLean VA",
+    "desc": "Request a consultation at the Tysons Corner office, 7901 Jones Branch Drive, McLean. New patients (571) 702-9900, current patients (703) 448-3312.",
+    "ogTitle": "Contact Dr. Nahlah | Tysons Corner, McLean",
+    "ogDesc": "Request a consultation at the McLean office with a board-certified prosthodontist.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ContactPage",
+          "name": "Contact the Tysons Corner office",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#office-mclean"
+          }
+        },
+        {
+          "@type": "Dentist",
+          "@id": "/#office-mclean",
+          "name": "Dr. Nahlah Implants and Prosthodontics Specialists - Tysons Corner, McLean",
+          "parentOrganization": {
+            "@id": "/#practice"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "7901 Jones Branch Drive, Suite 220",
+            "addressLocality": "McLean",
+            "addressRegion": "VA",
+            "postalCode": "22102",
+            "addressCountry": "US"
+          },
+          "telephone": "+1-571-702-9900",
+          "medicalSpecialty": "Prosthodontic",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "contactType": "new patients",
+              "telephone": "+1-571-702-9900"
+            },
+            {
+              "@type": "ContactPoint",
+              "contactType": "existing patients",
+              "telephone": "+1-703-448-3312"
+            }
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday"
+              ],
+              "opens": "08:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Friday",
+              "opens": "08:00",
+              "closes": "14:00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "contact-alexandria": {
+    "title": "Contact the Alexandria Office | Dr. Nahlah Prosthodontics",
+    "desc": "Request a consultation at the Old Town Alexandria office, 2855 Duke Street. New patients (571) 253-7790, current patients (703) 940-5410.",
+    "ogTitle": "Contact Dr. Nahlah | Alexandria, Virginia",
+    "ogDesc": "Request a consultation at the Alexandria office with a board-certified prosthodontist.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "ContactPage",
+          "name": "Contact the Alexandria office",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#office-alexandria"
+          }
+        },
+        {
+          "@type": "Dentist",
+          "@id": "/#office-alexandria",
+          "name": "Dr. Nahlah Implants and Prosthodontics Specialists - Old Town Alexandria",
+          "parentOrganization": {
+            "@id": "/#practice"
+          },
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "2855 Duke Street",
+            "addressLocality": "Alexandria",
+            "addressRegion": "VA",
+            "postalCode": "22314",
+            "addressCountry": "US"
+          },
+          "telephone": "+1-571-253-7790",
+          "medicalSpecialty": "Prosthodontic",
+          "contactPoint": [
+            {
+              "@type": "ContactPoint",
+              "contactType": "new patients",
+              "telephone": "+1-571-253-7790"
+            },
+            {
+              "@type": "ContactPoint",
+              "contactType": "existing patients",
+              "telephone": "+1-703-940-5410"
+            }
+          ],
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday"
+              ],
+              "opens": "08:00",
+              "closes": "17:00"
+            },
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": "Friday",
+              "opens": "08:00",
+              "closes": "14:00"
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "about": {
+    "title": "Why Choose Us | Dr. Nahlah Implants & Prosthodontics | McLean, VA",
+    "desc": "A board-certified prosthodontist with 7,000+ full-mouth implants placed, six surgical suites and an in-house digital lab. Free second opinions and same-day emergencies.",
+    "ogTitle": "Why Choose Us | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Twenty years, 7,000+ full-mouth implants, and the whole chain of treatment in one building.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "AboutPage",
+          "name": "Why choose Dr. Nahlah Implants and Prosthodontics Specialists",
+          "description": "A prosthodontic practice in McLean, VA with an in-house digital laboratory, six surgical suites and a five-year cosmetic warranty.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "our-team": {
+    "title": "Meet the Team | Dr. Nahlah Implants & Prosthodontics | McLean, VA",
+    "desc": "The five people behind the treatment: office manager, digital lab designer, treatment coordinator, dental assistant and hygienist, across both Virginia offices.",
+    "ogTitle": "Meet the Team | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "One coordinator holds your case end to end, and the lab designer works down the hall.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "AboutPage",
+          "name": "Meet the team",
+          "description": "The staff of Dr. Nahlah Implants and Prosthodontics Specialists in McLean and Alexandria, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "our-facility": {
+    "title": "Our Facility | Six Surgical Suites & In-House Lab | McLean, VA",
+    "desc": "A tour of the Tysons Corner practice: six surgical suites, a CBCT scanner, an intraoral scanner and an in-house digital laboratory that mills and fires on site.",
+    "ogTitle": "Our Facility | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Scan, plan, surgery, design, mill, fire and fit: the whole chain inside one building.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Our facility",
+          "description": "The McLean, Virginia facility of Dr. Nahlah Implants and Prosthodontics Specialists, including its six surgical suites and in-house digital laboratory.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "cosmetic-dentistry": {
+    "title": "Cosmetic Dentistry | Veneers, Crowns & Whitening | McLean, VA",
+    "desc": "Five cosmetic treatments and the sequence they belong in, with a free Digital Smile Design preview before anything is prepared. McLean and Alexandria, Virginia.",
+    "ogTitle": "Cosmetic Dentistry | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Veneers, crowns, bridges, whitening and inlays. Which one you need is what the evaluation answers.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Cosmetic dentistry",
+          "description": "Personalized cosmetic dentistry in McLean, Virginia: veneers, crowns, bridges, whitening, and inlays and onlays.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Cosmetic dentistry",
+          "description": "Personalized cosmetic treatment combining veneers, crowns, bridges, whitening and inlays into a single sequenced plan.",
+          "bodyLocation": "Tooth",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "teeth-whitening": {
+    "title": "Teeth Whitening | A White Smile in One Visit | McLean, VA",
+    "desc": "Professional-grade in-office whitening that lifts internal stains as well as surface ones, in about an hour, with no abrasive step and the shade chosen with you.",
+    "ogTitle": "Teeth Whitening | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Strips and baking soda cost you enamel. Professional whitening does not.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Teeth whitening",
+          "description": "Professional in-office teeth whitening in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Professional teeth whitening",
+          "description": "In-office whitening with professional-grade bleaching agents that reach internal as well as surface stains.",
+          "bodyLocation": "Tooth",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "crowns-and-bridges": {
+    "title": "Dental Crowns & Bridges | Reinforce At-Risk Teeth | McLean, VA",
+    "desc": "A damaged tooth is not automatically a lost one. Porcelain and ceramic crowns and bridges, designed and milled in the practice’s own in-house digital laboratory.",
+    "ogTitle": "Crowns & Bridges | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "If the roots and interior are still healthy, the tooth is worth saving. It may just need a new exterior.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Dental crowns and bridges",
+          "description": "Porcelain and ceramic crowns and bridges in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Dental crown",
+          "description": "A fixed porcelain or ceramic cap that restores strength and appearance to a damaged tooth.",
+          "bodyLocation": "Tooth",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Dental bridge",
+          "description": "A fixed run of fused crowns replacing one or more missing teeth, anchored to adjacent teeth or to implants.",
+          "bodyLocation": "Tooth",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "oral-surgery": {
+    "title": "Oral Surgery | Extractions, Bone Grafting & Implants | McLean, VA",
+    "desc": "Extractions, bone grafting and CT-guided implant placement performed in-office by the specialist who also restores the tooth afterwards. Sedation available.",
+    "ogTitle": "Oral Surgery | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "The person who removes the tooth also plans what replaces it. That changes how it is removed.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Oral surgery",
+          "description": "In-office oral surgery in McLean, Virginia: tooth extraction, bone grafting and dental implant placement.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Tooth extraction",
+          "description": "Removal of a tooth without disturbing healthy bone or gum tissue, planned around what will replace it.",
+          "bodyLocation": "Jaw",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Bone grafting",
+          "description": "Replacement of lost jawbone using autologous or donor bone, allowed to integrate before an implant or denture is placed.",
+          "bodyLocation": "Jaw",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Dental implant surgery",
+          "description": "CT-guided placement of an implant post into the jawbone, with immediate loading of a temporary restoration for qualifying patients.",
+          "bodyLocation": "Jaw",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "emergency-dentistry": {
+    "title": "Emergency Dentist in McLean, VA | Seen the Same Day",
+    "desc": "Toothache, abscess, knocked-out or broken tooth? Space is made in the schedule the same day wherever possible, with sedation available. McLean and Alexandria, Virginia.",
+    "ogTitle": "Emergency Dentistry | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "A dental emergency does not usually mean the emergency room. Call, and you will be seen with urgency.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Emergency dentistry",
+          "description": "Same-day emergency dental treatment in McLean, Virginia: root canals, lost fillings, abscesses, broken and knocked-out teeth.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What should I do with a knocked-out tooth?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "If you can, put the tooth back in its socket and hold it there until you are seen. If you cannot, place it in a small container of milk to preserve it. Do not scrub it clean. Replaced in the socket within the right window and held with a splint, the tooth may be saveable."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why will a toothache not go away?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Pain that persists generally means infection, often inside the tooth. Sometimes a filling is the whole answer, but extreme sensitivity or sharp pain when you bite or chew can point to the tooth root, and those cases usually need root canal therapy before the pain can be relieved."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Is a broken tooth an emergency?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Minor chips and cracks can wait for a normal appointment. A tooth that is broken or fractured after trauma cannot, because the damage may run past the outside surface into the tooth. You may need a filling, a crown or a root canal; the most severe cases need an emergency extraction."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is dry socket?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A dry socket occurs when the blood clot in an empty tooth socket is dislodged, exposing the underlying bone and nerves. It needs treating immediately to prevent infection, usually by cleaning the socket and packing the space with gauze."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "dental-conditions": {
+    "title": "Conditions We Treat | Gum Disease to Toothache | McLean, VA",
+    "desc": "Ten everyday dental complaints, what each usually turns out to be, and what is done about it: loose dentures, bleeding gums, cracked teeth, gummy smile, toothache and more.",
+    "ogTitle": "Conditions We Treat | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Bring the small thing in before it becomes the large one. Second opinions are free.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Conditions we treat",
+          "description": "Ten dental conditions treated at Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "implant-supported-dentures": {
+    "title": "Fixed Teeth vs. Removable | Implant Dentures | McLean, VA",
+    "desc": "Traditional dentures restore about 20% of natural function, implant-supported dentures about 60%, and a fixed full arch over 98%. All three compared honestly, drawbacks included.",
+    "ogTitle": "Fixed vs. Removable | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Dentures are not your only option. Three answers, differing by a factor of five in what they give back.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Fixed teeth versus removable dentures",
+          "description": "A comparison of traditional dentures, implant-supported dentures and fixed full-arch implants in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "MedicalProcedure",
+          "name": "Implant-supported dentures",
+          "description": "A removable denture stabilized by two or more dental implants, restoring roughly 60% of natural function.",
+          "bodyLocation": "Jaw",
+          "performerType": "Board-certified prosthodontist",
+          "provider": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "dental-implant-faq": {
+    "title": "Dental Implant FAQ | 12 Common Questions | McLean, VA",
+    "desc": "What an implant is, whether surgery hurts, how long recovery takes, what it costs and how long implants last. Twelve questions answered before you book a consultation.",
+    "ogTitle": "Dental Implant FAQ | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Twelve questions patients actually ask, including the two about pain and money.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "MedicalWebPage",
+          "name": "Dental implant FAQ",
+          "description": "Common questions about dental implant treatment in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "What is a dental implant?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Three parts: a titanium or ceramic post, an abutment, and a restoration. The post functions as a tooth root does, providing bone support and a stable foundation for a single crown, a bridge, a denture or a full-arch prosthesis."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Why are dental implants called the gold standard?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They are the only permanent tooth replacement option and are designed to last decades. Because the post is surgically placed into the jawbone, the health and functional benefits are comparable to a natural tooth."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is the success rate of dental implants?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Consistently over 95% since implants were introduced decades ago. That comes from the combination of surgical technology, high-quality materials, clinical experience and long-term maintenance."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Who is a candidate for dental implants?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Many patients already are, and many of the rest qualify after preparatory treatment such as bone grafting or extractions. Candidacy is determined accurately only after a comprehensive consultation and evaluation."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is dental implant surgery like?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Modern placement is efficient and precise. Often the procedure is completed in a few hours using patient-fitted surgical guides planned from the scan beforehand."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Will dental implant surgery be painful?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The surgery is completed while you are under sedation. You will feel no pain and may sleep lightly through it. Most patients have no memory of the appointment or the procedure."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "What is recovery from dental implants like?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Rest for a few days afterwards. Patients generally report minor discomfort that over-the-counter medication handles, and most return to normal activity after about a week. A soft food diet is required for the next several months while the implants integrate with the jawbone."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long does the dental implant process take?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Anywhere from a few months to over a year. If bone grafting is needed first that is a separate procedure with several months of healing. After placement, integration takes three or more months before the final restoration can be permanently attached."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How do I care for dental implants?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Like natural teeth, with no special maintenance. Brush twice a day and floss once. Depending on the restoration you may need a water flosser to clear debris from underneath it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "Do I still need dental check-ups with implants?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Implant restorations cannot decay, but they can develop peri-implantitis, an infection of the gums around the implant caused by plaque and tartar buildup. Keep the hygiene routine and the six-month visits."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How long do dental implants last?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They are designed to last decades and have the potential to last the rest of your life. Surgical technology, clinical experience and your own habits all affect it."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "How much do dental implants cost?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on how many teeth are missing and for how long, the materials used, and what additional procedures are needed first. The practice will help you apply for dental financing and will file insurance claims on your behalf."
+              }
+            }
+          ]
+        }
+      ]
+    }
+  },
+  "patient-center": {
+    "title": "Your First Visit | What to Expect, Step by Step | McLean, VA",
+    "desc": "The first appointment in eight steps: welcome, the team, an office tour, consultation, digital X-rays, examination, hygiene cleaning and complimentary gifts. Sedation available.",
+    "ogTitle": "Your First Visit | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Eight steps, in order, so nothing on the day is a surprise and none of it is a sales pitch.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Your first visit",
+          "description": "What to expect at a first appointment with Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "financing": {
+    "title": "Insurance & Financing | Payment Options | McLean, VA",
+    "desc": "Cash, check, credit card, most dental PPO plans, and three financing partners including no-collateral loans up to $60,000 over terms to 96 months. No insurance needed to qualify.",
+    "ogTitle": "Insurance & Financing | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Cost should never be the reason you did not get treated. Five ways to pay and three financing partners.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Insurance and financing",
+          "description": "Payment, insurance and third-party dental financing options at Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "doctor-referral": {
+    "title": "For Referring Doctors | Prosthodontic & Implant Referrals | McLean, VA",
+    "desc": "Refer a patient for prosthodontic, implant or full-arch treatment. CBCT planning, computer-guided surgery and an in-house digital laboratory, all in one Tysons Corner facility.",
+    "ogTitle": "For Referring Doctors | Dr. Nahlah, McLean & Alexandria",
+    "ogDesc": "Diagnosis, surgery and prosthetics in one building, so a complex case does not fragment across three practices.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "For referring doctors",
+          "description": "Referral information for dentists referring patients to Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "thank-you": {
+    "title": "Thank You | Dr. Nahlah Implants & Prosthodontics | McLean, VA",
+    "desc": "Your consultation request has reached the practice. Here is what happens next, and how to reach us directly if it cannot wait.",
+    "ogTitle": "Request received | Dr. Nahlah",
+    "ogDesc": "What happens next after a consultation request.",
+    "robots": "noindex, follow"
+  },
+  "terms-of-service-maclean": {
+    "title": "Terms of Service | McLean Office | Dr. Nahlah Implants & Prosthodontics",
+    "desc": "The terms governing use of this website, appointment requests, SMS messaging and online services for the McLean office at 7901 Jones Branch Dr., Suite 220.",
+    "ogTitle": "Terms of Service | Dr. Nahlah, McLean",
+    "ogDesc": "The terms governing this website and our online services for the McLean office.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Terms of Service, McLean office",
+          "description": "Terms of Service for the McLean office of Dr. Nahlah Implants and Prosthodontics Specialists.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "terms-of-service-alexandria": {
+    "title": "Terms of Service | Alexandria Office | Dr. Nahlah Implants & Prosthodontics",
+    "desc": "The terms governing use of this website, appointment requests, SMS messaging and online services for the Alexandria office at 2855 Duke St.",
+    "ogTitle": "Terms of Service | Dr. Nahlah, Alexandria",
+    "ogDesc": "The terms governing this website and our online services for the Alexandria office.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Terms of Service, Alexandria office",
+          "description": "Terms of Service for the Alexandria office of Dr. Nahlah Implants and Prosthodontics Specialists.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "privacy-policy-maclean": {
+    "title": "Privacy Policy | McLean Office | Dr. Nahlah Implants & Prosthodontics",
+    "desc": "How the McLean office collects, uses, shares and secures your personal information, including cookies, SMS messaging and the choices available to you.",
+    "ogTitle": "Privacy Policy | Dr. Nahlah, McLean",
+    "ogDesc": "How the McLean office handles your personal information.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Privacy Policy, McLean office",
+          "description": "Privacy Policy for the McLean office of Dr. Nahlah Implants and Prosthodontics Specialists.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "privacy-policy-alexandria": {
+    "title": "Privacy Policy | Alexandria Office | Dr. Nahlah Implants & Prosthodontics",
+    "desc": "How the Alexandria office collects, uses, shares and secures your personal information, including cookies, SMS messaging and the choices available to you.",
+    "ogTitle": "Privacy Policy | Dr. Nahlah, Alexandria",
+    "ogDesc": "How the Alexandria office handles your personal information.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Privacy Policy, Alexandria office",
+          "description": "Privacy Policy for the Alexandria office of Dr. Nahlah Implants and Prosthodontics Specialists.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "video-library": {
+    "title": "Video Library | Implant & Prosthodontic Procedures Explained | Dr. Nahlah",
+    "desc": "Fourteen short films from the practice: implant planning, 3D guided placement, the in-house lab, bone grafting, veneers and full-arch restoration, explained by Dr. Nahlah.",
+    "ogTitle": "Video Library | Dr. Nahlah Prosthodontics",
+    "ogDesc": "The procedures, explained by the specialist who performs them.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "CollectionPage",
+          "name": "Video library",
+          "description": "Educational films on implant and prosthodontic procedures from Dr. Esam Nahlah.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "privacy-policy": {
+    "title": "Privacy Policy | Dr. Nahlah Implants & Prosthodontics | McLean & Alexandria",
+    "desc": "The practice trades as two separate entities, so each office has its own privacy policy. Choose the document that governs the office you are treated at.",
+    "ogTitle": "Privacy Policy | Dr. Nahlah",
+    "ogDesc": "Two offices, two entities, two documents.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Privacy Policy",
+          "description": "Chooser for the per-entity privacy policy documents.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "terms-conditions": {
+    "title": "Terms of Service | Dr. Nahlah Implants & Prosthodontics | McLean & Alexandria",
+    "desc": "The practice trades as two separate entities, so each office has its own terms of service. Choose the document that governs the office you are treated at.",
+    "ogTitle": "Terms of Service | Dr. Nahlah",
+    "ogDesc": "Two offices, two entities, two documents.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebPage",
+          "name": "Terms of Service",
+          "description": "Chooser for the per-entity terms of service documents.",
+          "isPartOf": {
+            "@id": "/#website"
+          },
+          "about": {
+            "@id": "/#practice"
+          }
+        }
+      ]
+    }
+  },
+  "posts": {
+    "title": "Journal | Implants, Prosthodontics and Smile Design | Dr. Nahlah",
+    "desc": "Articles on dental implants, All-on-4, full-mouth reconstruction and cosmetic dentistry, written by the practice in McLean and Alexandria, Virginia.",
+    "ogTitle": "Journal | Dr. Nahlah Implants and Prosthodontics Specialists",
+    "ogDesc": "Articles on implants, prosthodontics and smile design from a board-certified prosthodontist in Northern Virginia.",
+    "jsonLd": {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "Journal | Dr. Nahlah Implants and Prosthodontics Specialists",
+      "description": "Articles on implants, prosthodontics and smile design from a board-certified prosthodontist in Northern Virginia.",
+      "url": "/posts",
+      "publisher": {
         "@id": "/#practice"
-       },
-       "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "7901 Jones Branch Drive, Suite 220",
-        "addressLocality": "McLean",
-        "addressRegion": "VA",
-        "postalCode": "22102",
-        "addressCountry": "US"
-       },
-       "telephone": "+1-571-619-9442",
-       "medicalSpecialty": "Prosthodontic",
-       "contactPoint": [
-        {
-         "@type": "ContactPoint",
-         "contactType": "new patients",
-         "telephone": "+1-571-619-9442"
-        },
-        {
-         "@type": "ContactPoint",
-         "contactType": "existing patients",
-         "telephone": "+1-703-448-3312"
-        }
-       ],
-       "openingHoursSpecification": [
-        {
-         "@type": "OpeningHoursSpecification",
-         "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday"
-         ],
-         "opens": "08:00",
-         "closes": "17:00"
-        },
-        {
-         "@type": "OpeningHoursSpecification",
-         "dayOfWeek": "Friday",
-         "opens": "08:00",
-         "closes": "14:00"
-        }
-       ]
-      },
-      {
-       "@type": "Dentist",
-       "@id": "/#office-alexandria",
-       "name": "Dr. Nahlah Implants and Prosthodontics Specialists - Old Town Alexandria",
-       "parentOrganization": {
-        "@id": "/#practice"
-       },
-       "address": {
-        "@type": "PostalAddress",
-        "streetAddress": "2855 Duke Street",
-        "addressLocality": "Alexandria",
-        "addressRegion": "VA",
-        "postalCode": "22314",
-        "addressCountry": "US"
-       },
-       "telephone": "+1-571-410-3430",
-       "medicalSpecialty": "Prosthodontic",
-       "contactPoint": [
-        {
-         "@type": "ContactPoint",
-         "contactType": "new patients",
-         "telephone": "+1-571-410-3430"
-        },
-        {
-         "@type": "ContactPoint",
-         "contactType": "existing patients",
-         "telephone": "+1-703-940-5410"
-        }
-       ],
-       "openingHoursSpecification": [
-        {
-         "@type": "OpeningHoursSpecification",
-         "dayOfWeek": [
-          "Monday",
-          "Tuesday",
-          "Wednesday",
-          "Thursday"
-         ],
-         "opens": "08:00",
-         "closes": "17:00"
-        },
-        {
-         "@type": "OpeningHoursSpecification",
-         "dayOfWeek": "Friday",
-         "opens": "08:00",
-         "closes": "14:00"
-        }
-       ]
       }
-     ],
-     "availableService": [
-      {
-       "@type": "MedicalProcedure",
-       "name": "Dental implants",
-       "url": "/dental-implants"
-      },
-      {
-       "@type": "MedicalProcedure",
-       "name": "All-on-4 full arch implants",
-       "url": "/all-on-4"
-      },
-      {
-       "@type": "MedicalProcedure",
-       "name": "Porcelain veneers",
-       "url": "/veneers"
-      },
-      {
-       "@type": "MedicalProcedure",
-       "name": "Smile makeover",
-       "url": "/smile-makeover"
-      },
-      {
-       "@type": "MedicalProcedure",
-       "name": "Sedation dentistry",
-       "url": "/sedation-dentistry"
-      }
-     ]
-    },
-    {
-     "@type": "Person",
-     "@id": "/about#dr-esam-nahlah",
-     "name": "Dr. Esam Nahlah",
-     "honorificSuffix": "D.D.S., M.S.",
-     "jobTitle": "Board-certified prosthodontist",
-     "url": "/about",
-     "description": "Diplomate of the American Board of Prosthodontics, practising in Northern Virginia since 2013.",
-     "worksFor": {
-      "@id": "/#practice"
-     },
-     "hasCredential": [
-      {
-       "@type": "EducationalOccupationalCredential",
-       "credentialCategory": "Board certification",
-       "name": "Diplomate of the American Board of Prosthodontics"
-      }
-     ],
-     "knowsAbout": [
-      "Prosthodontics",
-      "Dental implants",
-      "Full-mouth rehabilitation",
-      "Smile design",
-      "All-on-4"
-     ]
-    },
-    {
-     "@type": "WebSite",
-     "@id": "/#website",
-     "name": "Dr. Nahlah Implants and Prosthodontics Specialists",
-     "url": "/",
-     "publisher": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "WebPage",
-     "name": "Dental Implants and Prosthodontics in McLean and Alexandria",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
     }
-   ]
+  },
+  "post": {
+    "title": "Article | Dr. Nahlah Implants and Prosthodontics Specialists",
+    "desc": "An article from the practice archive on implants, full-arch restoration, cost and aftercare.",
+    "ogTitle": "Article | Dr. Nahlah Implants and Prosthodontics Specialists",
+    "ogDesc": "An article from the practice archive.",
+    "robots": "noindex, follow"
   }
- },
- "dental-implants": {
-  "title": "Dental Implants | Board-Certified Prosthodontist | Virginia",
-  "desc": "Single implants, bridges and full arches planned and placed by one board-certified prosthodontist in McLean and Alexandria, Virginia.",
-  "ogTitle": "Dental Implants in McLean & Alexandria, Virginia",
-  "ogDesc": "A titanium root, an abutment and a tooth built to your bite, planned and placed by the same specialist.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Dental implants",
-     "description": "Single implants, bridges and full arches planned and placed by one board-certified prosthodontist in McLean and Alexandria, Virginia.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Dental implants",
-     "description": "Single implants, bridges and full arches planned and placed by one board-certified prosthodontist in McLean and Alexandria, Virginia.",
-     "bodyLocation": "Jaw",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "FAQPage",
-     "mainEntity": [
-      {
-       "@type": "Question",
-       "name": "Will the surgery hurt?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Implant surgery is done under sedation. You feel nothing during it, and most patients have no memory of the appointment at all. Afterwards, patients generally report minor discomfort managed with over-the-counter medication."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "What is recovery like?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Rest for a few days. Most people are back to normal activity within a week. A soft-food diet is needed for the next several months while the implants integrate with the jawbone."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Am I a candidate?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Many patients already are. Others qualify after preparatory treatment such as bone grafting or extractions. It is not something to guess at. Candidacy is determined properly from a comprehensive consultation and a 3D scan."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "How long do implants last?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "They are designed to last decades, and can last the rest of your life. Surgical precision, materials and your own habits are what decide it. Implants have held a published success rate above 95% since they were introduced."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Do I still need check-ups?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Implant restorations resist decay, but the gum around an implant can still develop peri-implantitis from plaque and tartar. Brush twice daily, floss once, and keep the six-month hygiene appointments."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "What does it cost?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It depends on how many teeth are missing, how long they have been missing, the materials used and whether anything has to be rebuilt first. We file insurance claims on your behalf and can help you apply for financing."
-       }
-      }
-     ]
-    }
-   ]
-  }
- },
- "all-on-4": {
-  "title": "All-on-4 Full Arch Dental Implants | McLean & Alexandria",
-  "desc": "Four implants, a fixed provisional arch the same day, and a definitive zirconia bridge. Planned and placed by a board-certified prosthodontist.",
-  "ogTitle": "All-on-4 Full Arch Implants | Dr. Nahlah",
-  "ogDesc": "A fixed arch on four implants, placed in a single visit under sedation.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "All-on-4 full arch dental implants",
-     "description": "Four implants, a fixed provisional arch the same day, and a definitive zirconia bridge.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "All-on-4 full arch dental implants",
-     "description": "Four implants, a fixed provisional arch the same day, and a definitive zirconia bridge.",
-     "bodyLocation": "Jaw",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "FAQPage",
-     "mainEntity": [
-      {
-       "@type": "Question",
-       "name": "Will I leave surgery without teeth?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. In most cases you leave the same visit wearing a fixed PMMA provisional prosthesis, which stays in place while the implants integrate."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Can All-on-4 do both jaws?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes: upper, lower, or both. Cases are described here as single arch or double arch for exactly that reason."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "What if I have bone loss?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "All-on-4 is often the answer because of bone loss: the rear implants are angled to reach denser bone. Some cases still need grafting first, which the cone-beam scan determines at the consultation."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "What sedation is available?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Nitrous oxide, oral sedation and IV sedation. Oral and IV are administered by a medical anaesthesiologist and need transport arranged both ways."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "How long until it is finished?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Three to four months from surgery to the final zirconia prosthesis, then a further two to four months for complete healing around it."
-       }
-      }
-     ]
-    }
-   ]
-  }
- },
- "implant-cost": {
-  "title": "Dental Implant Cost in Northern Virginia | Dr. Nahlah",
-  "desc": "What actually moves the price of an implant case, and the three ways patients pay for it: insurance, credit, and third-party financing.",
-  "ogTitle": "What Dental Implants Cost | Dr. Nahlah",
-  "ogDesc": "Nobody can price an implant case from a phone call. Here is what actually moves the number.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Dental Implant Cost in Northern Virginia",
-     "description": "What actually moves the price of an implant case, and the three ways patients pay for it.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "FAQPage",
-     "mainEntity": [
-      {
-       "@type": "Question",
-       "name": "Why is there no price list on this page?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Because an honest one cannot exist. Two people missing the same tooth can need entirely different treatment depending on how long it has been gone and what the bone is doing. You get a real number after the scan, in writing, at the consultation."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Does insurance cover dental implants?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Some plans offer limited coverage. The practice files claims on your behalf and works to get every benefit your plan entitles you to. Whether that is a large or small share depends entirely on the plan."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Can I finance the whole case?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "In most cases yes, through CareCredit, Proceed Finance or LendingClub. Proceed Finance in particular is designed for patients whose credit score would rule out conventional lending, with terms up to 96 months."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Is a second opinion really free?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes, on implant surgery. If you have been quoted elsewhere, bring the plan and any imaging."
-       }
-      }
-     ]
-    }
-   ]
-  }
- },
- "sedation-dentistry": {
-  "title": "Sedation Dentistry | Nitrous, Oral & IV | McLean, VA",
-  "desc": "Nitrous, oral and IV sedation for implant and full-arch surgery, with hospital privileges at a Level 1 trauma centre and a medical anaesthesiologist.",
-  "ogTitle": "Sedation Dentistry | Dr. Nahlah, Northern Virginia",
-  "ogDesc": "Hours of full-arch surgery, turned into something you do not remember.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Sedation dentistry",
-     "description": "Nitrous, oral and IV sedation for implant and full-arch surgery.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Sedation dentistry",
-     "description": "Nitrous, oral and IV sedation for implant and full-arch surgery.",
-     "bodyLocation": "Mouth",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "FAQPage",
-     "mainEntity": [
-      {
-       "@type": "Question",
-       "name": "Will I be unconscious?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Not in the general-anaesthetic sense. Under IV sedation most patients drift and have no memory of the procedure afterwards; you remain responsive throughout. Nitrous is lighter still: you stay awake and simply stop minding."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Can I drive myself home?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "After nitrous oxide, in most cases yes, because recovery is quick. After oral or IV sedation, no: transport to and from the appointment has to be arranged in advance."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Is sedation only for surgery?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. It is available for any procedure. If anxiety or a gag reflex is what has kept you away from routine care, say so when you book."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Who administers it?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Oral and IV sedation are administered by a medical anaesthesiologist, depending on the extent of treatment and your personal health."
-       }
-      }
-     ]
-    }
-   ]
-  }
- },
- "smile-makeover": {
-  "title": "Smile Makeover | Digital Smile Design | McLean, Virginia",
-  "desc": "One design decided first: shape, shade, lip line and facial proportion. Free Digital Smile Design preview with a board-certified prosthodontist.",
-  "ogTitle": "Smile Makeover | Dr. Nahlah, Northern Virginia",
-  "ogDesc": "Not a list of procedures. One design, decided first, then the treatments needed to build it.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Smile Makeover",
-     "description": "One design decided first: shape, shade, lip line and facial proportion.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Smile makeover",
-     "description": "A single design covering shape, shade, lip line, gum symmetry and facial proportion, then the treatments needed to build it.",
-     "provider": {
-      "@id": "/#practice"
-     },
-     "performerType": "Board-certified prosthodontist"
-    }
-   ]
-  }
- },
- "veneers": {
-  "title": "Porcelain Veneers | Digital Smile Design | McLean, VA",
-  "desc": "Thin porcelain veneers hand-designed to your lip line, gum line and colouring, with a free Digital Smile Design preview before anything is prepared.",
-  "ogTitle": "Porcelain Veneers | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "Chips, cracks, gaps, crowding and deep staining, covered by porcelain designed to your own face.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Porcelain veneers",
-     "description": "Thin porcelain veneers hand-designed to your lip line, gum line and colouring.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Porcelain veneers",
-     "description": "Thin porcelain veneers hand-designed to your lip line, gum line and colouring.",
-     "bodyLocation": "Tooth",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "FAQPage",
-     "mainEntity": [
-      {
-       "@type": "Question",
-       "name": "Do veneers ruin your teeth?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Preparation removes less than a millimetre from the front surface of the enamel, enough for the veneer to sit flush instead of bulking the tooth out. It is a permanent modification, which is exactly why the design is agreed and previewed before anything is prepared."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Will they stain?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Porcelain does not stain the way natural enamel does. That is not a reason to change your routine: brush twice a day and floss once, as before."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Can veneers fix my bite?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "No. Veneers are a cosmetic treatment for the smile zone. A bad bite is a functional problem and needs to be addressed as one, which is often the reason a prosthodontist is the right person to be assessing it."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "How long does it take?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "As few as two appointments once the design is settled: one to prepare and take impressions, one to verify fit and bond."
-       }
-      }
-     ]
-    }
-   ]
-  }
- },
- "smile-gallery": {
-  "title": "Smile Gallery | Before & After Cases | Dr. Nahlah",
-  "desc": "Before-and-after clinical photographs of implant, All-on-4 and veneer cases treated at Dr. Nahlah's Northern Virginia practice.",
-  "ogTitle": "Smile Gallery | Before & After | Dr. Nahlah",
-  "ogDesc": "Every pair was treated at this practice. Drag the line across any of them.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "ImageGallery",
-     "name": "Smile Gallery",
-     "description": "Before-and-after clinical photographs of cases treated at this practice.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "patient-stories": {
-  "title": "Patient Stories & Reviews | Dr. Nahlah Prosthodontics",
-  "desc": "Patients of Dr. Esam Nahlah on implants, All-on-4 and full-mouth rehabilitation at the practice's McLean and Alexandria offices.",
-  "ogTitle": "Patient Stories | Dr. Nahlah Prosthodontics",
-  "ogDesc": "Real patients, real cases, in their own words.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Patient Stories",
-     "description": "Patients of Dr. Esam Nahlah on implants, All-on-4 and full-mouth rehabilitation.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "meet-dr-nahlah": {
-  "title": "Meet Dr. Esam Nahlah, Prosthodontist | McLean & Alexandria",
-  "desc": "Dr. Esam Nahlah, D.D.S., M.S., is a Diplomate of the American Board of Prosthodontics and has practised in Northern Virginia since 2013.",
-  "ogTitle": "Meet Dr. Esam Nahlah, Board-Certified Prosthodontist",
-  "ogDesc": "One of twelve recognised dental specialties, and three years of training beyond dental school. Meet the specialist behind the practice.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "Person",
-     "@id": "/about#dr-esam-nahlah",
-     "name": "Dr. Esam Nahlah",
-     "honorificSuffix": "D.D.S., M.S.",
-     "jobTitle": "Board-certified prosthodontist",
-     "url": "/about",
-     "description": "Diplomate of the American Board of Prosthodontics, practising in Northern Virginia since 2013.",
-     "worksFor": {
-      "@id": "/#practice"
-     },
-     "hasCredential": [
-      {
-       "@type": "EducationalOccupationalCredential",
-       "credentialCategory": "Board certification",
-       "name": "Diplomate of the American Board of Prosthodontics"
-      }
-     ],
-     "knowsAbout": [
-      "Prosthodontics",
-      "Dental implants",
-      "Full-mouth rehabilitation",
-      "Smile design",
-      "All-on-4"
-     ]
-    },
-    {
-     "@type": "ProfilePage",
-     "name": "Meet Dr. Esam Nahlah",
-     "mainEntity": {
-      "@id": "/about#dr-esam-nahlah"
-     },
-     "isPartOf": {
-      "@id": "/#website"
-     }
-    }
-   ]
-  }
- },
- "contact": {
-  "title": "Contact & Locations | Dr. Nahlah Prosthodontics, Virginia",
-  "desc": "Two Northern Virginia offices: Tysons Corner in McLean and Old Town Alexandria. Request a consultation, or call to book with Dr. Nahlah's team.",
-  "ogTitle": "Contact Dr. Nahlah | McLean & Alexandria, Virginia",
-  "ogDesc": "Two offices, one specialist. Request a consultation with a board-certified prosthodontist.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "ContactPage",
-     "name": "Contact and Locations",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "Dentist",
-     "@id": "/#office-mclean",
-     "name": "Dr. Nahlah Implants and Prosthodontics Specialists - Tysons Corner, McLean",
-     "parentOrganization": {
-      "@id": "/#practice"
-     },
-     "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "7901 Jones Branch Drive, Suite 220",
-      "addressLocality": "McLean",
-      "addressRegion": "VA",
-      "postalCode": "22102",
-      "addressCountry": "US"
-     },
-     "telephone": "+1-571-619-9442",
-     "medicalSpecialty": "Prosthodontic",
-     "contactPoint": [
-      {
-       "@type": "ContactPoint",
-       "contactType": "new patients",
-       "telephone": "+1-571-619-9442"
-      },
-      {
-       "@type": "ContactPoint",
-       "contactType": "existing patients",
-       "telephone": "+1-703-448-3312"
-      }
-     ],
-     "openingHoursSpecification": [
-      {
-       "@type": "OpeningHoursSpecification",
-       "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday"
-       ],
-       "opens": "08:00",
-       "closes": "17:00"
-      },
-      {
-       "@type": "OpeningHoursSpecification",
-       "dayOfWeek": "Friday",
-       "opens": "08:00",
-       "closes": "14:00"
-      }
-     ]
-    },
-    {
-     "@type": "Dentist",
-     "@id": "/#office-alexandria",
-     "name": "Dr. Nahlah Implants and Prosthodontics Specialists - Old Town Alexandria",
-     "parentOrganization": {
-      "@id": "/#practice"
-     },
-     "address": {
-      "@type": "PostalAddress",
-      "streetAddress": "2855 Duke Street",
-      "addressLocality": "Alexandria",
-      "addressRegion": "VA",
-      "postalCode": "22314",
-      "addressCountry": "US"
-     },
-     "telephone": "+1-571-410-3430",
-     "medicalSpecialty": "Prosthodontic",
-     "contactPoint": [
-      {
-       "@type": "ContactPoint",
-       "contactType": "new patients",
-       "telephone": "+1-571-410-3430"
-      },
-      {
-       "@type": "ContactPoint",
-       "contactType": "existing patients",
-       "telephone": "+1-703-940-5410"
-      }
-     ],
-     "openingHoursSpecification": [
-      {
-       "@type": "OpeningHoursSpecification",
-       "dayOfWeek": [
-        "Monday",
-        "Tuesday",
-        "Wednesday",
-        "Thursday"
-       ],
-       "opens": "08:00",
-       "closes": "17:00"
-      },
-      {
-       "@type": "OpeningHoursSpecification",
-       "dayOfWeek": "Friday",
-       "opens": "08:00",
-       "closes": "14:00"
-      }
-     ]
-    }
-   ]
-  }
- },
- "about": {
-  "title": "Why Choose Us | Dr. Nahlah Implants & Prosthodontics | McLean, VA",
-  "desc": "A board-certified prosthodontist with 7,000+ full-mouth implants placed, six surgical suites and an in-house digital lab. Free second opinions and same-day emergencies.",
-  "ogTitle": "Why Choose Us | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "Twenty years, 7,000+ full-mouth implants, and the whole chain of treatment in one building.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "AboutPage",
-     "name": "Why choose Dr. Nahlah Implants and Prosthodontics Specialists",
-     "description": "A prosthodontic practice in McLean, VA with an in-house digital laboratory, six surgical suites and a five-year cosmetic warranty.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "our-team": {
-  "title": "Meet the Team | Dr. Nahlah Implants & Prosthodontics | McLean, VA",
-  "desc": "The five people behind the treatment: office manager, digital lab designer, treatment coordinator, dental assistant and hygienist, across both Virginia offices.",
-  "ogTitle": "Meet the Team | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "One coordinator holds your case end to end, and the lab designer works down the hall.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "AboutPage",
-     "name": "Meet the team",
-     "description": "The staff of Dr. Nahlah Implants and Prosthodontics Specialists in McLean and Alexandria, Virginia.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "our-facility": {
-  "title": "Our Facility | Six Surgical Suites & In-House Lab | McLean, VA",
-  "desc": "A tour of the Tysons Corner practice: six surgical suites, a CBCT scanner, an intraoral scanner and an in-house digital laboratory that mills and fires on site.",
-  "ogTitle": "Our Facility | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "Scan, plan, surgery, design, mill, fire and fit: the whole chain inside one building.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "WebPage",
-     "name": "Our facility",
-     "description": "The McLean, Virginia facility of Dr. Nahlah Implants and Prosthodontics Specialists, including its six surgical suites and in-house digital laboratory.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "cosmetic-dentistry": {
-  "title": "Cosmetic Dentistry | Veneers, Crowns & Whitening | McLean, VA",
-  "desc": "Five cosmetic treatments and the sequence they belong in, with a free Digital Smile Design preview before anything is prepared. McLean and Alexandria, Virginia.",
-  "ogTitle": "Cosmetic Dentistry | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "Veneers, crowns, bridges, whitening and inlays. Which one you need is what the evaluation answers.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Cosmetic dentistry",
-     "description": "Personalized cosmetic dentistry in McLean, Virginia: veneers, crowns, bridges, whitening, and inlays and onlays.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Cosmetic dentistry",
-     "description": "Personalized cosmetic treatment combining veneers, crowns, bridges, whitening and inlays into a single sequenced plan.",
-     "bodyLocation": "Tooth",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "teeth-whitening": {
-  "title": "Teeth Whitening | A White Smile in One Visit | McLean, VA",
-  "desc": "Professional-grade in-office whitening that lifts internal stains as well as surface ones, in about an hour, with no abrasive step and the shade chosen with you.",
-  "ogTitle": "Teeth Whitening | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "Strips and baking soda cost you enamel. Professional whitening does not.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Teeth whitening",
-     "description": "Professional in-office teeth whitening in McLean, Virginia.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Professional teeth whitening",
-     "description": "In-office whitening with professional-grade bleaching agents that reach internal as well as surface stains.",
-     "bodyLocation": "Tooth",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "crowns-and-bridges": {
-  "title": "Dental Crowns & Bridges | Reinforce At-Risk Teeth | McLean, VA",
-  "desc": "A damaged tooth is not automatically a lost one. Porcelain and ceramic crowns and bridges, designed and milled in the practice’s own in-house digital laboratory.",
-  "ogTitle": "Crowns & Bridges | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "If the roots and interior are still healthy, the tooth is worth saving. It may just need a new exterior.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Dental crowns and bridges",
-     "description": "Porcelain and ceramic crowns and bridges in McLean, Virginia.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Dental crown",
-     "description": "A fixed porcelain or ceramic cap that restores strength and appearance to a damaged tooth.",
-     "bodyLocation": "Tooth",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Dental bridge",
-     "description": "A fixed run of fused crowns replacing one or more missing teeth, anchored to adjacent teeth or to implants.",
-     "bodyLocation": "Tooth",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "oral-surgery": {
-  "title": "Oral Surgery | Extractions, Bone Grafting & Implants | McLean, VA",
-  "desc": "Extractions, bone grafting and CT-guided implant placement performed in-office by the specialist who also restores the tooth afterwards. Sedation available.",
-  "ogTitle": "Oral Surgery | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "The person who removes the tooth also plans what replaces it. That changes how it is removed.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Oral surgery",
-     "description": "In-office oral surgery in McLean, Virginia: tooth extraction, bone grafting and dental implant placement.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Tooth extraction",
-     "description": "Removal of a tooth without disturbing healthy bone or gum tissue, planned around what will replace it.",
-     "bodyLocation": "Jaw",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Bone grafting",
-     "description": "Replacement of lost jawbone using autologous or donor bone, allowed to integrate before an implant or denture is placed.",
-     "bodyLocation": "Jaw",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Dental implant surgery",
-     "description": "CT-guided placement of an implant post into the jawbone, with immediate loading of a temporary restoration for qualifying patients.",
-     "bodyLocation": "Jaw",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "emergency-dentistry": {
-  "title": "Emergency Dentist in McLean, VA | Seen the Same Day",
-  "desc": "Toothache, abscess, knocked-out or broken tooth? Space is made in the schedule the same day wherever possible, with sedation available. McLean and Alexandria, Virginia.",
-  "ogTitle": "Emergency Dentistry | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "A dental emergency does not usually mean the emergency room. Call, and you will be seen with urgency.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Emergency dentistry",
-     "description": "Same-day emergency dental treatment in McLean, Virginia: root canals, lost fillings, abscesses, broken and knocked-out teeth.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "FAQPage",
-     "mainEntity": [
-      {
-       "@type": "Question",
-       "name": "What should I do with a knocked-out tooth?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "If you can, put the tooth back in its socket and hold it there until you are seen. If you cannot, place it in a small container of milk to preserve it. Do not scrub it clean. Replaced in the socket within the right window and held with a splint, the tooth may be saveable."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Why will a toothache not go away?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Pain that persists generally means infection, often inside the tooth. Sometimes a filling is the whole answer, but extreme sensitivity or sharp pain when you bite or chew can point to the tooth root, and those cases usually need root canal therapy before the pain can be relieved."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Is a broken tooth an emergency?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Minor chips and cracks can wait for a normal appointment. A tooth that is broken or fractured after trauma cannot, because the damage may run past the outside surface into the tooth. You may need a filling, a crown or a root canal; the most severe cases need an emergency extraction."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "What is dry socket?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "A dry socket occurs when the blood clot in an empty tooth socket is dislodged, exposing the underlying bone and nerves. It needs treating immediately to prevent infection, usually by cleaning the socket and packing the space with gauze."
-       }
-      }
-     ]
-    }
-   ]
-  }
- },
- "dental-conditions": {
-  "title": "Conditions We Treat | Gum Disease to Toothache | McLean, VA",
-  "desc": "Ten everyday dental complaints, what each usually turns out to be, and what is done about it: loose dentures, bleeding gums, cracked teeth, gummy smile, toothache and more.",
-  "ogTitle": "Conditions We Treat | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "Bring the small thing in before it becomes the large one. Second opinions are free.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Conditions we treat",
-     "description": "Ten dental conditions treated at Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "implant-supported-dentures": {
-  "title": "Fixed Teeth vs. Removable | Implant Dentures | McLean, VA",
-  "desc": "Traditional dentures restore about 20% of natural function, implant-supported dentures about 60%, and a fixed full arch over 98%. All three compared honestly, drawbacks included.",
-  "ogTitle": "Fixed vs. Removable | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "Dentures are not your only option. Three answers, differing by a factor of five in what they give back.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Fixed teeth versus removable dentures",
-     "description": "A comparison of traditional dentures, implant-supported dentures and fixed full-arch implants in McLean, Virginia.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "MedicalProcedure",
-     "name": "Implant-supported dentures",
-     "description": "A removable denture stabilized by two or more dental implants, restoring roughly 60% of natural function.",
-     "bodyLocation": "Jaw",
-     "performerType": "Board-certified prosthodontist",
-     "provider": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "dental-implant-faq": {
-  "title": "Dental Implant FAQ | 12 Common Questions | McLean, VA",
-  "desc": "What an implant is, whether surgery hurts, how long recovery takes, what it costs and how long implants last. Twelve questions answered before you book a consultation.",
-  "ogTitle": "Dental Implant FAQ | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "Twelve questions patients actually ask, including the two about pain and money.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "MedicalWebPage",
-     "name": "Dental implant FAQ",
-     "description": "Common questions about dental implant treatment in McLean, Virginia.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    },
-    {
-     "@type": "FAQPage",
-     "mainEntity": [
-      {
-       "@type": "Question",
-       "name": "What is a dental implant?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Three parts: a titanium or ceramic post, an abutment, and a restoration. The post functions as a tooth root does, providing bone support and a stable foundation for a single crown, a bridge, a denture or a full-arch prosthesis."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Why are dental implants called the gold standard?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "They are the only permanent tooth replacement option and are designed to last decades. Because the post is surgically placed into the jawbone, the health and functional benefits are comparable to a natural tooth."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "What is the success rate of dental implants?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Consistently over 95% since implants were introduced decades ago. That comes from the combination of surgical technology, high-quality materials, clinical experience and long-term maintenance."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Who is a candidate for dental implants?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Many patients already are, and many of the rest qualify after preparatory treatment such as bone grafting or extractions. Candidacy is determined accurately only after a comprehensive consultation and evaluation."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "What is dental implant surgery like?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Modern placement is efficient and precise. Often the procedure is completed in a few hours using patient-fitted surgical guides planned from the scan beforehand."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Will dental implant surgery be painful?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "The surgery is completed while you are under sedation. You will feel no pain and may sleep lightly through it. Most patients have no memory of the appointment or the procedure."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "What is recovery from dental implants like?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Rest for a few days afterwards. Patients generally report minor discomfort that over-the-counter medication handles, and most return to normal activity after about a week. A soft food diet is required for the next several months while the implants integrate with the jawbone."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "How long does the dental implant process take?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Anywhere from a few months to over a year. If bone grafting is needed first that is a separate procedure with several months of healing. After placement, integration takes three or more months before the final restoration can be permanently attached."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "How do I care for dental implants?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Like natural teeth, with no special maintenance. Brush twice a day and floss once. Depending on the restoration you may need a water flosser to clear debris from underneath it."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "Do I still need dental check-ups with implants?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "Yes. Implant restorations cannot decay, but they can develop peri-implantitis, an infection of the gums around the implant caused by plaque and tartar buildup. Keep the hygiene routine and the six-month visits."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "How long do dental implants last?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "They are designed to last decades and have the potential to last the rest of your life. Surgical technology, clinical experience and your own habits all affect it."
-       }
-      },
-      {
-       "@type": "Question",
-       "name": "How much do dental implants cost?",
-       "acceptedAnswer": {
-        "@type": "Answer",
-        "text": "It depends on how many teeth are missing and for how long, the materials used, and what additional procedures are needed first. The practice will help you apply for dental financing and will file insurance claims on your behalf."
-       }
-      }
-     ]
-    }
-   ]
-  }
- },
- "patient-center": {
-  "title": "Your First Visit | What to Expect, Step by Step | McLean, VA",
-  "desc": "The first appointment in eight steps: welcome, the team, an office tour, consultation, digital X-rays, examination, hygiene cleaning and complimentary gifts. Sedation available.",
-  "ogTitle": "Your First Visit | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "Eight steps, in order, so nothing on the day is a surprise and none of it is a sales pitch.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "WebPage",
-     "name": "Your first visit",
-     "description": "What to expect at a first appointment with Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "financing": {
-  "title": "Insurance & Financing | Payment Options | McLean, VA",
-  "desc": "Cash, check, credit card, most dental PPO plans, and three financing partners including no-collateral loans up to $60,000 over terms to 96 months. No insurance needed to qualify.",
-  "ogTitle": "Insurance & Financing | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "Cost should never be the reason you did not get treated. Five ways to pay and three financing partners.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "WebPage",
-     "name": "Insurance and financing",
-     "description": "Payment, insurance and third-party dental financing options at Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "doctor-referral": {
-  "title": "For Referring Doctors | Prosthodontic & Implant Referrals | McLean, VA",
-  "desc": "Refer a patient for prosthodontic, implant or full-arch treatment. CBCT planning, computer-guided surgery and an in-house digital laboratory, all in one Tysons Corner facility.",
-  "ogTitle": "For Referring Doctors | Dr. Nahlah, McLean & Alexandria",
-  "ogDesc": "Diagnosis, surgery and prosthetics in one building, so a complex case does not fragment across three practices.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "WebPage",
-     "name": "For referring doctors",
-     "description": "Referral information for dentists referring patients to Dr. Nahlah Implants and Prosthodontics Specialists in McLean, Virginia.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "thank-you": {
-  "title": "Thank You | Dr. Nahlah Implants & Prosthodontics | McLean, VA",
-  "desc": "Your consultation request has reached the practice. Here is what happens next, and how to reach us directly if it cannot wait.",
-  "ogTitle": "Request received | Dr. Nahlah",
-  "ogDesc": "What happens next after a consultation request.",
-  "robots": "noindex, follow"
- },
- "terms-of-service-maclean": {
-  "title": "Terms of Service | McLean Office | Dr. Nahlah Implants & Prosthodontics",
-  "desc": "The terms governing use of this website, appointment requests, SMS messaging and online services for the McLean office at 7901 Jones Branch Dr., Suite 220.",
-  "ogTitle": "Terms of Service | Dr. Nahlah, McLean",
-  "ogDesc": "The terms governing this website and our online services for the McLean office.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "WebPage",
-     "name": "Terms of Service, McLean office",
-     "description": "Terms of Service for the McLean office of Dr. Nahlah Implants and Prosthodontics Specialists.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "terms-of-service-alexandria": {
-  "title": "Terms of Service | Alexandria Office | Dr. Nahlah Implants & Prosthodontics",
-  "desc": "The terms governing use of this website, appointment requests, SMS messaging and online services for the Alexandria office at 2855 Duke St.",
-  "ogTitle": "Terms of Service | Dr. Nahlah, Alexandria",
-  "ogDesc": "The terms governing this website and our online services for the Alexandria office.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "WebPage",
-     "name": "Terms of Service, Alexandria office",
-     "description": "Terms of Service for the Alexandria office of Dr. Nahlah Implants and Prosthodontics Specialists.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "privacy-policy-maclean": {
-  "title": "Privacy Policy | McLean Office | Dr. Nahlah Implants & Prosthodontics",
-  "desc": "How the McLean office collects, uses, shares and secures your personal information, including cookies, SMS messaging and the choices available to you.",
-  "ogTitle": "Privacy Policy | Dr. Nahlah, McLean",
-  "ogDesc": "How the McLean office handles your personal information.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "WebPage",
-     "name": "Privacy Policy, McLean office",
-     "description": "Privacy Policy for the McLean office of Dr. Nahlah Implants and Prosthodontics Specialists.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "privacy-policy-alexandria": {
-  "title": "Privacy Policy | Alexandria Office | Dr. Nahlah Implants & Prosthodontics",
-  "desc": "How the Alexandria office collects, uses, shares and secures your personal information, including cookies, SMS messaging and the choices available to you.",
-  "ogTitle": "Privacy Policy | Dr. Nahlah, Alexandria",
-  "ogDesc": "How the Alexandria office handles your personal information.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "WebPage",
-     "name": "Privacy Policy, Alexandria office",
-     "description": "Privacy Policy for the Alexandria office of Dr. Nahlah Implants and Prosthodontics Specialists.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "video-library": {
-  "title": "Video Library | Implant & Prosthodontic Procedures Explained | Dr. Nahlah",
-  "desc": "Fourteen short films from the practice: implant planning, 3D guided placement, the in-house lab, bone grafting, veneers and full-arch restoration, explained by Dr. Nahlah.",
-  "ogTitle": "Video Library | Dr. Nahlah Prosthodontics",
-  "ogDesc": "The procedures, explained by the specialist who performs them.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "CollectionPage",
-     "name": "Video library",
-     "description": "Educational films on implant and prosthodontic procedures from Dr. Esam Nahlah.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "privacy-policy": {
-  "title": "Privacy Policy | Dr. Nahlah Implants & Prosthodontics | McLean & Alexandria",
-  "desc": "The practice trades as two separate entities, so each office has its own privacy policy. Choose the document that governs the office you are treated at.",
-  "ogTitle": "Privacy Policy | Dr. Nahlah",
-  "ogDesc": "Two offices, two entities, two documents.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "WebPage",
-     "name": "Privacy Policy",
-     "description": "Chooser for the per-entity privacy policy documents.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "terms-conditions": {
-  "title": "Terms of Service | Dr. Nahlah Implants & Prosthodontics | McLean & Alexandria",
-  "desc": "The practice trades as two separate entities, so each office has its own terms of service. Choose the document that governs the office you are treated at.",
-  "ogTitle": "Terms of Service | Dr. Nahlah",
-  "ogDesc": "Two offices, two entities, two documents.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@graph": [
-    {
-     "@type": "WebPage",
-     "name": "Terms of Service",
-     "description": "Chooser for the per-entity terms of service documents.",
-     "isPartOf": {
-      "@id": "/#website"
-     },
-     "about": {
-      "@id": "/#practice"
-     }
-    }
-   ]
-  }
- },
- "posts": {
-  "title": "Journal | Implants, Prosthodontics and Smile Design | Dr. Nahlah",
-  "desc": "Articles on dental implants, All-on-4, full-mouth reconstruction and cosmetic dentistry, written by the practice in McLean and Alexandria, Virginia.",
-  "ogTitle": "Journal | Dr. Nahlah Implants and Prosthodontics Specialists",
-  "ogDesc": "Articles on implants, prosthodontics and smile design from a board-certified prosthodontist in Northern Virginia.",
-  "jsonLd": {
-   "@context": "https://schema.org",
-   "@type": "Blog",
-   "name": "Journal | Dr. Nahlah Implants and Prosthodontics Specialists",
-   "description": "Articles on implants, prosthodontics and smile design from a board-certified prosthodontist in Northern Virginia.",
-   "url": "/posts",
-   "publisher": {
-    "@id": "/#practice"
-   }
-  }
- },
- "post": {
-  "title": "Article | Dr. Nahlah Implants and Prosthodontics Specialists",
-  "desc": "An article from the practice archive on implants, full-arch restoration, cost and aftercare.",
-  "ogTitle": "Article | Dr. Nahlah Implants and Prosthodontics Specialists",
-  "ogDesc": "An article from the practice archive.",
-  "robots": "noindex, follow"
- }
 }

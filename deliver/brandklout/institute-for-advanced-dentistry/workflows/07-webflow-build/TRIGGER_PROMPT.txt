@@ -1,0 +1,52 @@
+Execute the 07-Webflow-Build workflow for client [CLIENT_NAME] using the
+pasteable section-components method.
+
+Preflight:
+1. Confirm the client worktree is clean or checkpointed and contains the current
+   local-main baseline recorded in docs/project-overview.md.
+2. Read the canonical standard first:
+   deliver/process/07-webflow-build/PASTEABLE-COMPONENTS.md
+3. Then read the client overview and configuration:
+   deliver/[CLIENT_NAME]/workflows/07-webflow-build/07-webflow-build.md
+   deliver/[CLIENT_NAME]/workflows/07-webflow-build/webflow-build.config.json
+4. Read the client's docs/mcp-access.md before any MCP use and confirm the exact
+   target site and page IDs.
+
+Input design:
+deliver/[CLIENT_NAME]/workflows/05-design-revisions/.tmp/final-design/[page].html
+(fall back to 04-design/.tmp/final-design/ if no revisions exist).
+
+Setup (once per project/site):
+5. Run `python 07-webflow-build.py init-config` and fill in
+   webflow-build.config.json (asset_base, css, pages).
+6. Confirm required fonts are enabled in Webflow Site Settings.
+7. Install exactly one shared site/page runtime as specified by
+   PASTEABLE-COMPONENTS.md. Do not create a second ScrollSmoother.
+
+Per page:
+8. Re-author section behavior into per-section `WZ.add(...)` HtmlEmbeds before
+   conversion; each manual-paste embed must remain under 10,000 characters.
+9. Convert the whole page with one root, resolve fluid variants, upload/rebind
+   assets, then split the result with `extract_section_components.mjs`.
+10. Generate one PASTE.html and README per component plus an ordered
+    PASTE-QUEUE.md. Do not depend on files that exist only untracked in another
+    worktree.
+11. Run `simulate_paste.mjs` on the whole-page payload and representative
+    component payloads; assert one root, style closure, zero relative assets,
+    valid embeds, and live motion hooks.
+12. Paste the shell (for new pages) and components manually in queue order.
+    After paste, use MCP only for surgical content/asset/attribute patches;
+    never rebuild or re-paste a section to fix copy.
+13. Publish to staging only after explicit confirmation, then run computed-style
+    parity and live scrub/pin verification against the approved local design.
+
+Use https://evercoder.github.io/clipboard-inspector/ only when capturing or
+debugging Webflow clipboard reference JSON. Save reference captures as
+.tmp/webflow_*.json.
+
+Verification note: Designer appearance is not sufficient. Verify the published
+staging URL, drive every pinned/scrubbed interaction in a focused tab, and fail
+the build on unexplained local-vs-live computed-style differences.
+
+Save generated artifacts to:
+deliver/[CLIENT_NAME]/workflows/07-webflow-build/.tmp/

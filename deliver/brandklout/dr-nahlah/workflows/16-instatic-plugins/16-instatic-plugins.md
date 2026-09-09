@@ -133,15 +133,15 @@ node set-origins.mjs                                        # show current allow
 node set-origins.mjs --frame https://reputationhub.site --script https://reputationhub.site
 node set-origins.mjs --clear                                # back to locked-down
 
-node ../15-instatic-api-sync/insta-api.mjs publish          # settings only affect pages published AFTER
-node ../15-instatic-api-sync/test-embed.mjs veneers         # gate: does the widget actually load?
+node ../../../../process/22-instatic-api-sync/insta-api.mjs publish          # settings only affect pages published AFTER
+node ../../../../process/22-instatic-api-sync/test-embed.mjs veneers         # gate: does the widget actually load?
 ```
 
 **Settings changes do not touch already-published pages.** The filter runs at publish time, so a widened allowlist reaches the site only on the next publish. The same is true in reverse: `--clear` needs a publish to take effect.
 
 ## Gate: `test-embed.mjs`
 
-Lives in `15-instatic-api-sync/`. It injects the real LeadConnector snippet into a live page under CDP and reports what the browser actually did. Proven results on `encorercm.com/veneers`:
+Lives in `deliver/process/22-instatic-api-sync/`. It injects the real LeadConnector snippet into a live page under CDP and reports what the browser actually did. Proven results on `encorercm.com/veneers`:
 
 | allowlist | script | iframe |
 |---|---|---|
@@ -258,7 +258,7 @@ Say the trade out loud when handing it over: on the pages that carry an embed, t
 
 ### Gotchas from building the Embed block
 
-- **A publish bakes EVERY page, so any draft that has drifted from what is live ships with it.** Publishing to verify the Embed block republished all 35 pages, and the home page lost its six `.rv-card` fallback — present in the published HTML, absent from the draft. Nothing about the plugin caused it; the publish only revealed it. `15-instatic-api-sync/restore-review-wall.mjs` put it back, and the home audit is byte-identical to its committed baseline again (`words: 1741`). **Before publishing this site for any reason, check the pages you are not touching**, and re-run the audit against the committed `08-qa/.tmp/audit-out/` records afterwards.
+- **A publish bakes EVERY page, so any draft that has drifted from what is live ships with it.** Publishing to verify the Embed block republished all 35 pages, and the home page lost its six `.rv-card` fallback — present in the published HTML, absent from the draft. Nothing about the plugin caused it; the publish only revealed it. `deliver/process/22-instatic-api-sync/restore-review-wall.mjs` put it back, and the home audit is byte-identical to its committed baseline again (`words: 1741`). **Before publishing this site for any reason, check the pages you are not touching**, and re-run the audit against the committed `08-qa/.tmp/audit-out/` records afterwards.
 - **The unnamed script that fails on every page is Cloudflare's.** The 73-URL audit reports `netFailed: [" Script"]` site-wide and it had never been identified. Driving a page with a `securitypolicyviolation` listener names it: `script-src-elem https://static.cloudflareinsights.com/beacon.min.js/…`. The CDN injects its analytics beacon into every response and the page CSP refuses it. Pre-existing, unrelated to embeds, and harmless — but a gate that asserts "zero CSP violations" on this site will fail on someone else's beacon, so assert on the directives you care about.
 - **`changedPages` takes FLAT `Page` objects** (`src/core/page-tree/page.ts`: `id`, `slug`, `title`, `nodes`, `rootNodeId` at the top level), NOT the CMS row shape with `cells` that `GET /admin/api/cms/pages` returns. Send the row shape and the validator rejects `site.pages[0].slug: Expected string` — a path the payload appears to contain — one field per round trip.
 ### Gotchas from gating the editor UI
@@ -436,7 +436,7 @@ Instatic is MIT (`github.com/corebunch/instatic`, v0.0.16, pre-1.0) with a CONTR
 ## Technical Setup
 
 - **Executor status**: Working. v1.3.0 installed and verified live on `encorercm.com` (Dr. Nahlah) on 2026-08-22, plugin `active`, all three permissions granted. Current allowlist: `frameOrigins = https://reputationhub.site`, script and connect **empty** — the Google review widget runs on `frame-src` alone. The Embed block gated end to end at 1440 and 390: URL mode grew from a 240px start to 861px / 2116px on the widget's own postMessage, snippet mode survived the publish boundary as an element at its fixed height, no frame refused by CSP.
-- **Credentials**: reuses `15-instatic-api-sync/insta-api.mjs` and the repo-root `.env`.
+- **Credentials**: reuses `deliver/process/22-instatic-api-sync/insta-api.mjs` and the repo-root `.env`.
 - **Endpoints**: `POST /admin/api/cms/plugins/inspect-package`, `POST /admin/api/cms/plugins/package`, `GET|PUT /admin/api/cms/plugins/:id/settings`.
 
 ---

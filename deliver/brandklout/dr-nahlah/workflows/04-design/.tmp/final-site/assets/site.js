@@ -191,6 +191,526 @@ WZ.add(function (W) {
   });
 })();
 
+/* ===== sections/blog-filter.js ===== */
+/* =============================================================================
+   SECTION: blog-filter                                          BugHerd pin #10
+   Search + topic filter over the /posts index.
+
+   Registered against #blFilter rather than a class: the section around it
+   carries the generic `.pk .pk-alt` every interior page uses, so guarding on
+   that would run this on 27 pages that have no grid. Same reasoning as
+   gallery-filter's #gaGrid guard.
+
+   WZ.dom, not WZ.section. The queue is only flushed once ScrollSmoother has
+   been created, and when GSAP fails to load the boot sequence reveals the
+   content and returns WITHOUT flushing — so a queued listener would never be
+   attached and the search box would be dead furniture on exactly the visits
+   where the page is already degraded. Filtering is plain DOM work; it must
+   survive GSAP being absent.
+
+   THE TOPIC IS DATA, NOT A GUESS. Each card renders `<p class="bl-topic">` from
+   its row's `topic` cell (see push-posts-filter.mjs). Nothing here re-derives a
+   topic from a title — this file has no taxonomy in it at all, and the <option>
+   list is pruned against what the cards actually carry, so adding a thirteenth
+   topic to post-image-pool.mjs and re-running the push is the whole change.
+   ============================================================================= */
+WZ.dom('blog-filter', '#blFilter', function () {
+  var bar = document.getElementById('blFilter'),
+      grid = document.querySelector('#articles .bl-grid'),
+      input = document.getElementById('blSearch'),
+      select = document.getElementById('blTopic'),
+      count = document.getElementById('blCount'),
+      empty = document.getElementById('blEmpty'),
+      clear = document.getElementById('blClear');
+  if (!bar || !grid || !input || !select || !count) return;
+
+  /* Fold case, strip diacritics, and reduce every run of punctuation to one
+     space. Without this, "all-on-4" does not match "All-on-4 " and a search for
+     "implant's" matches nothing. Hyphens become spaces on BOTH sides, so
+     "all on 4" and "all-on-4" are the same query. */
+  function norm (s) {
+    var v = String(s == null ? '' : s).toLowerCase();
+    /* Guarded: String.prototype.normalize is absent on older Android WebViews,
+       and a filter that throws is worse than one that does not fold accents. */
+    if (v.normalize) v = v.normalize('NFD').replace(/[̀-ͯ]/g, '');
+    return v.replace(/[^a-z0-9]+/g, ' ').replace(/^ +| +$/g, '');
+  }
+  /* The URL form of a topic. By construction slugify(label) === the taxonomy id
+     in post-image-pool.mjs, which is what makes `?topic=implants` work with no
+     lookup table on this side. push-posts-filter.mjs asserts that for all
+     twelve and refuses to run if a label is ever edited into one that breaks it. */
+  function slugify (s) { return norm(s).replace(/ /g, '-'); }
+
+  /* ---- index the cards ONCE -------------------------------------------- */
+  /* 43 cards x (title + excerpt) is a few kilobytes of string. Building it per
+     keystroke would still be fast, but building it once means a keystroke is a
+     substring test and nothing else. */
+  var cards = [].slice.call(grid.querySelectorAll('.bl-card')).map(function (el) {
+    var h = el.querySelector('h2'),
+        p = el.querySelector('p'),
+        t = el.querySelector('.bl-topic');
+    return {
+      el: el,
+      topic: t ? slugify(t.textContent) : '',
+      /* Title AND excerpt. Title-only search feels broken on this archive:
+         "dental implants" is in almost every one of the 43 headlines, so it
+         would return everything while a real question returns nothing. The
+         topic word is in the haystack too, so typing "sedation" finds the
+         sedation pieces even when the word is absent from the copy. */
+      hay: norm((h ? h.textContent : '') + ' ' +
+                (p ? p.textContent : '') + ' ' +
+                (t ? t.textContent : ''))
+    };
+  });
+  var total = cards.length;
+
+  /* ---- prune the topic list to what is actually on the page ------------- */
+  /* The <option> list is published from the full taxonomy. A topic no article
+     has been classified under is a dead end, so it goes — rather than leaving
+     the reader a choice that always returns the empty state. */
+  var present = {};
+  cards.forEach(function (c) { if (c.topic) present[c.topic] = (present[c.topic] || 0) + 1; });
+  [].slice.call(select.options).forEach(function (o) {
+    if (o.value && !present[o.value]) o.remove();
+  });
+
+  /* ---- apply ------------------------------------------------------------ */
+  function apply (fromUser) {
+    var q = norm(input.value),
+        terms = q ? q.split(' ') : [],
+        topic = select.value,
+        shown = [];
+
+    cards.forEach(function (c) {
+      /* Every term must appear somewhere in the card — AND, not OR. On an
+         archive this uniform, OR returns all 43 for any two-word query. */
+      var hit = (!topic || c.topic === topic) && terms.every(function (t) {
+        return c.hay.indexOf(t) !== -1;
+      });
+      if (hit) shown.push(c.el);
+      c.el.hidden = !hit;
+    });
+
+    var narrowed = shown.length < total;
+    /* Only while the filter is actually narrowing — see .bl-grid[data-bl-active]
+       in 62-blog.css. Typing a character that still matches all 43 must not
+       reflow the grid under the reader. */
+    if (narrowed) grid.setAttribute('data-bl-active', ''); else grid.removeAttribute('data-bl-active');
+    grid.hidden = shown.length === 0;
+    if (empty) empty.hidden = shown.length !== 0;
+
+    count.textContent = shown.length === 0
+      ? 'No articles match'
+      : narrowed
+        ? shown.length + ' of ' + total + ' articles'
+        : total + ' articles';
+
+    /* Anything the reader has just asked to see must be VISIBLE, not waiting on
+       a scroll trigger that was measured against the old layout.
+       `.wz-kit [data-rv]{opacity:0}` plus a per-card `gsap.from` means a card
+       below the fold has never been revealed; filtered up into view it would be
+       a blank cell. Kill the tween (which kills the ScrollTrigger it created)
+       and clear the inline transform.
+
+       Deliberately NOT done on the initial unfiltered pass — a normal visit
+       still gets the entrance animation. The deep-linked case is handled before
+       this ever runs; see `unreveal` at the bottom of this file. */
+    if (fromUser && window.gsap) {
+      shown.forEach(function (el) {
+        gsap.killTweensOf(el);
+        gsap.set(el, { clearProps: 'transform' });
+        gsap.set(el, { opacity: 1 });
+      });
+    }
+
+    /* The page just got shorter or taller. ScrollSmoother caches the content
+       height, so without this the reader can be scrolled past the new end of
+       the document and every pinned trigger on the page is measuring stale
+       numbers. */
+    if (window.ScrollTrigger) ScrollTrigger.refresh();
+
+    if (fromUser) writeUrl(input.value, topic);
+  }
+
+  /* ---- the URL ---------------------------------------------------------- */
+  /* replaceState, not pushState: a filter is not a navigation, and 43 history
+     entries from 43 keystrokes would trap the reader's back button on the page. */
+  function writeUrl (q, topic) {
+    if (!window.history || !history.replaceState) return;
+    var u;
+    try { u = new URL(window.location.href); } catch (e) { return; }
+    if (q) u.searchParams.set('q', q); else u.searchParams.delete('q');
+    if (topic) u.searchParams.set('topic', topic); else u.searchParams.delete('topic');
+    history.replaceState(null, '', u.pathname + (u.search ? u.search : '') + u.hash);
+  }
+
+  function readUrl () {
+    var p;
+    try { p = new URL(window.location.href).searchParams; } catch (e) { return; }
+    var q = p.get('q'), topic = p.get('topic');
+    if (q) input.value = q;
+    /* Only honour a topic the <select> still offers — a stale or hand-typed
+       `?topic=` must not leave the control showing "All topics" while the grid
+       shows nothing. */
+    if (topic && [].some.call(select.options, function (o) { return o.value === topic; })) {
+      select.value = topic;
+    }
+  }
+
+  /* ---- wire up ---------------------------------------------------------- */
+  input.addEventListener('input', function () { apply(true); });
+  select.addEventListener('change', function () { apply(true); });
+  input.addEventListener('keydown', function (e) {
+    if (e.key !== 'Escape' && e.keyCode !== 27) return;
+    if (!input.value) return;
+    input.value = '';
+    apply(true);
+  });
+  if (clear) clear.addEventListener('click', function () {
+    input.value = '';
+    select.value = '';
+    apply(true);
+    input.focus();
+  });
+
+  /* ---- the deep-linked load ---------------------------------------------
+     Ordering, and it is the whole reason this is not just `gsap.set(...)` in
+     `apply`: this module runs IMMEDIATELY (WZ.dom), while the `[data-rv]`
+     reveal in js/20-pagekit.js is QUEUED and does not register until
+     js/90-boot.js flushes it after ScrollSmoother exists. So anything we set
+     here is overwritten a moment later by pagekit's own
+     `gsap.from(el,{opacity:0, scrollTrigger:…})`, and the reader who followed
+     `/posts?topic=…` lands on a screen of blank cells — measured, in Chrome,
+     before this was written.
+
+     `gsap.utils.toArray('[data-rv]')` is what pagekit reads. Taking the
+     attribute off the cards BEFORE the flush means they are never registered
+     at all, and `.wz-kit [data-rv]{opacity:0}` stops matching them, so they
+     paint at full opacity with no tween to fight. The rest of the page keeps
+     its reveals; only the archive gives its up, and only on a visit that
+     arrived pre-filtered — where an entrance animation for results you
+     explicitly asked for is wrong anyway. */
+  function unreveal () {
+    cards.forEach(function (c) { c.el.removeAttribute('data-rv'); });
+  }
+
+  readUrl();
+  if (input.value || select.value) unreveal();
+  apply(false);
+});
+
+/* ===== sections/blog-post.js ===== */
+/* =============================================================================
+   SECTION: blog-post                                        BugHerd pin #7
+   Registered against `.bl-post`, so it costs nothing on the other 34 pages.
+
+   The template can only place furniture AROUND the article. On Instatic the
+   whole entry — h1, date and body — renders through a single `base.outlet`, and
+   nothing in the template can reach inside it. Everything in this file is a
+   consequence of that:
+
+   1. TITLE AND DATE. They belong in the hero now (the client's reference puts
+      them over the photograph). The hero binds `{currentEntry.title}` itself,
+      but there is no date FIELD to bind — `publishedAt` is the import
+      timestamp, identical on all 43 rows — so the only true date is the one
+      written into the article body, and it is MOVED from there into the hero.
+      The body's own h1 is removed rather than hidden: two h1s in one document,
+      one of them display:none, is a worse page than one.
+
+   2. CONTENTS. Built from the headings the article actually has. Articles with
+      fewer than three H2s get none: a two-item table of contents is furniture,
+      not navigation. It is ONE node with two homes — in the flow below 1280,
+      in the left rail above it — never a copy in each.
+
+   3. FAQ. Only from headings that are QUESTIONS, so an article whose sections
+      are statements gets no accordion. Each row carries the OPENING of that
+      section and a link into it, not the section again; the full answers go out
+      as FAQPage JSON-LD, which is what an FAQ block is for.
+
+   4. RELATED. The related strip is a `base.loop` over the posts table, and the
+      loop has no "not equal" filter — the article being read can appear in its
+      own related list. It is removed here by comparing hrefs. The strip asks
+      for four and shows three, so removing one never leaves a short row.
+
+   Plain DOM via WZ.dom: none of the above depends on GSAP, and an article must
+   keep its contents list even if the animation runtime failed to load. The
+   rails are a separate module below, because they do depend on it.
+   ============================================================================= */
+WZ.dom('blog-post', '.bl-post', function () {
+  var post = document.querySelector('.bl-post');
+  var body = post && post.querySelector('.bl-body');
+  if (!body) return;
+
+  var hero = document.querySelector('.pg-hero.bl-ph');
+  /* The region the outlet renders into. Everything the entry brought with it is
+     inside this one element, not spread across .bl-body. */
+  var region = body.firstElementChild && body.firstElementChild.children.length
+    ? body.firstElementChild
+    : body;
+
+  /* ---- title and date, into the hero ------------------------------------- */
+  /* Only when there IS a hero to move them to. On a template that predates the
+     hero this leaves the article exactly as it was rather than beheading it. */
+  if (hero) {
+    var when = region.querySelector('.bl-when');
+    var slot = hero.querySelector('.bl-ph-when');
+    if (when && slot) slot.textContent = (when.textContent || '').trim();
+    if (when) when.remove();
+    var h1 = region.querySelector('h1');
+    if (h1) h1.remove();
+  }
+
+  /* ---- contents ---------------------------------------------------------- */
+  var heads = [].slice.call(region.querySelectorAll('h2'));
+  var nav = null;
+  var marker = null;
+
+  heads.forEach(function (head, i) {
+    /* The body is authored HTML and carries no ids. Derive one from the
+       heading text so a shared link survives a re-render, and fall back to
+       the index if two headings slugify the same. */
+    if (!head.id) {
+      var slug = (head.textContent || '')
+        .toLowerCase().replace(/[^\w\s-]/g, '').trim().replace(/\s+/g, '-').slice(0, 60);
+      head.id = slug && !document.getElementById(slug) ? slug : 'section-' + (i + 1);
+    }
+  });
+
+  if (heads.length >= 3) {
+    nav = document.createElement('nav');
+    nav.className = 'bl-toc';
+    nav.setAttribute('aria-labelledby', 'blTocTitle');
+
+    var h = document.createElement('b');
+    h.id = 'blTocTitle';
+    h.textContent = 'Contents';
+    nav.appendChild(h);
+
+    var list = document.createElement('ol');
+    heads.forEach(function (head) {
+      var li = document.createElement('li');
+      var a = document.createElement('a');
+      a.href = '#' + head.id;
+      a.textContent = head.textContent;
+      li.appendChild(a);
+      list.appendChild(li);
+    });
+    nav.appendChild(list);
+
+    /* Immediately before the FIRST HEADING, which is after the lede when there
+       is one and at the very top when there is not — several of the 43 open
+       straight into an h2. Anchoring to the first paragraph instead buried the
+       list inside section one on those. The marker holds the spot, so moving
+       the list out to the rail and back is exact. */
+    marker = document.createComment('bl-toc');
+    region.insertBefore(marker, heads[0]);
+    marker.parentNode.insertBefore(nav, marker);
+
+    /* ScrollSmoother owns the scroll position, so a raw hash jump lands in the
+       wrong place. Route these the way js/90-boot.js routes every other anchor. */
+    nav.addEventListener('click', function (e) {
+      var a = e.target.closest('a[href^="#"]');
+      if (!a) return;
+      var t = document.getElementById(a.getAttribute('href').slice(1));
+      if (!t) return;
+      e.preventDefault();
+      var W = window.WZ;
+      if (W && W.smoother) W.smoother.scrollTo(t, true, 'top 96px');
+      else t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+
+    /* ---- one list, two homes ---------------------------------------------
+       In the rail the list is a column of its own; in the flow it is a bordered
+       block after the lede. Same node either way — a copy in each would drift
+       the moment one of them gained a state. */
+    var railL = document.querySelector('.bl-rail-l');
+    var wide = window.matchMedia('(min-width: 1280px)');
+    var place = function () {
+      if (!railL) return;
+      if (wide.matches) {
+        if (nav.parentNode !== railL) railL.appendChild(nav);
+      } else if (marker.parentNode && nav.parentNode !== marker.parentNode) {
+        marker.parentNode.insertBefore(nav, marker);
+      }
+    };
+    place();
+    wide.addEventListener('change', function () {
+      place();
+      if (window.ScrollTrigger) ScrollTrigger.refresh();
+    });
+
+    /* Which heading the reader is inside. One callback per crossing rather than
+       per frame — the same reason Chapter 05's card reveal is an observer. The
+       band is the top third of the window, so "here" is the heading the reader
+       has most recently passed rather than whichever is merely on screen. */
+    if (window.IntersectionObserver) {
+      var lis = [].slice.call(list.children);
+      var visible = {};
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) { visible[en.target.id] = en.isIntersecting; });
+        var idx = -1;
+        for (var i = 0; i < heads.length; i++) { if (visible[heads[i].id]) { idx = i; break; } }
+        if (idx < 0) return;
+        lis.forEach(function (li, i) { li.classList.toggle('is-here', i === idx); });
+      }, { rootMargin: '-96px 0px -68% 0px' });
+      heads.forEach(function (head) { io.observe(head); });
+    }
+  }
+
+  /* ---- the FAQ ----------------------------------------------------------- */
+  var questions = heads.filter(function (h) { return /\?\s*$/.test((h.textContent || '').trim()); });
+  if (questions.length >= 3) {
+    var faq = document.createElement('section');
+    faq.className = 'bl-faq';
+    var faqTitle = document.createElement('b');
+    faqTitle.textContent = 'Common questions';
+    faq.appendChild(faqTitle);
+
+    var acc = document.createElement('div');
+    acc.className = 'pk-faq';
+    faq.appendChild(acc);
+
+    var schema = [];
+    questions.forEach(function (head) {
+      /* Everything between this heading and the next one IS the answer. */
+      var paras = [];
+      var n = head.nextElementSibling;
+      while (n && n.tagName !== 'H2') {
+        if (/^(P|UL|OL)$/.test(n.tagName)) paras.push(n);
+        n = n.nextElementSibling;
+      }
+      if (!paras.length) return;
+
+      var d = document.createElement('details');
+      var s = document.createElement('summary');
+      s.textContent = (head.textContent || '').trim();
+      d.appendChild(s);
+
+      var fb = document.createElement('div');
+      fb.className = 'fa-body';
+      var p = document.createElement('p');
+      p.textContent = (paras[0].textContent || '').trim();
+      fb.appendChild(p);
+
+      var more = document.createElement('a');
+      more.className = 'pk-more';
+      more.href = '#' + head.id;
+      more.textContent = paras.length > 1 ? 'Read the full answer' : 'Read it in context';
+      fb.appendChild(more);
+      d.appendChild(fb);
+      acc.appendChild(d);
+
+      schema.push({
+        '@type': 'Question',
+        name: s.textContent,
+        acceptedAnswer: {
+          '@type': 'Answer',
+          text: paras.map(function (el) { return (el.textContent || '').trim(); }).join(' ')
+        }
+      });
+    });
+
+    if (acc.children.length >= 3) {
+      var cta = post.querySelector('.bl-cta');
+      if (cta && cta.parentNode) cta.parentNode.insertBefore(faq, cta);
+      else (document.querySelector('.bl-main') || post).appendChild(faq);
+
+      /* The anchors have to travel through the smoother like every other one. */
+      acc.addEventListener('click', function (e) {
+        var a = e.target.closest('a[href^="#"]');
+        if (!a) return;
+        var t = document.getElementById(a.getAttribute('href').slice(1));
+        if (!t) return;
+        e.preventDefault();
+        var W = window.WZ;
+        if (W && W.smoother) W.smoother.scrollTo(t, true, 'top 96px');
+        else t.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      });
+
+      var ld = document.createElement('script');
+      ld.type = 'application/ld+json';
+      ld.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'FAQPage',
+        mainEntity: schema
+      });
+      document.head.appendChild(ld);
+    }
+  }
+
+  /* ---- related ----------------------------------------------------------- */
+  var strip = document.querySelector('.bl-related');
+  if (!strip) return;
+  var here = location.pathname.replace(/\/$/, '');
+  var cards = [].slice.call(strip.querySelectorAll('.bl-rel-card'));
+  var shown = 0;
+  cards.forEach(function (card) {
+    var link = card.querySelector('a[href]');
+    var href = link ? link.getAttribute('href').replace(/\/$/, '') : '';
+    if (href === here || shown >= 3) { card.remove(); return; }
+    /* A row with no featured image would otherwise show an empty grey plate. */
+    var fig = card.querySelector('.bl-rel-fig');
+    var img = fig && fig.querySelector('img');
+    if (fig && (!img || !img.getAttribute('src'))) fig.remove();
+    shown++;
+  });
+  if (!shown) strip.remove();
+});
+
+/* =============================================================================
+   SECTION: blog-rails — the two columns that stay put
+   `position: sticky` CANNOT work on this site. ScrollSmoother puts the whole
+   page inside `#smooth-wrapper{position:fixed;overflow:hidden}` and translates
+   the content, so nothing has a scrolling ancestor to stick to: the existing
+   `.pk-lede .lc-head` sticky rule has been inert on the live site for as long
+   as the smoother has been on. Measured on /sedation-dentistry — 400px of
+   scroll moved the "sticky" heading the full 400px.
+
+   So the rails are PINNED with ScrollTrigger instead, and only where they are a
+   third column at all. `pinSpacing: false` because the pin must not add height:
+   the rail is shorter than the article by definition, and a spacer would push
+   the related strip down by the length of the pin.
+
+   Registered with WZ.section rather than WZ.dom so it runs AFTER the smoother
+   exists and measures the settled layout.
+   ============================================================================= */
+WZ.section('blog-rails', '.bl-post', function (W) {
+  if (W.reduced || !window.ScrollTrigger || !window.gsap) return;
+  var main = document.querySelector('.bl-main');
+  if (!main) return;
+
+  var TOP = 120;          /* clear of the nav, which is 96px plus its progress bar */
+  var mm = gsap.matchMedia();
+
+  /* ONLY THE CONTENTS RAIL IS PINNED. The trust rail is three cards and runs
+     about 1,100px — taller than the window on any laptop — so pinning it would
+     hold its own foot off the screen for the length of the article. It sits at
+     the top of the piece and scrolls away, which is what the reference does
+     with the same stack; the consult block at the end of the article is what
+     carries the CTA the rest of the way down. */
+  mm.add('(min-width: 1280px)', function () {
+    var rail = document.querySelector('.bl-rail-l');
+    if (!rail || !rail.firstElementChild) return;
+    /* Still guarded: a 20-heading contents list on a short window would hide
+       its own tail. Then it simply scrolls, and the layout is unchanged. */
+    if (rail.offsetHeight > window.innerHeight - TOP - 24) return;
+    var t = ScrollTrigger.create({
+      trigger: rail,
+      start: 'top ' + TOP + 'px',
+      end: function () {
+        return '+=' + Math.max(0, main.offsetHeight - rail.offsetHeight - 24);
+      },
+      pin: true,
+      pinSpacing: false,
+      invalidateOnRefresh: true,
+      /* Declared even though this is the page's only pin: the home page lost a
+         whole chapter to leaving pin ordering implicit. */
+      refreshPriority: -1
+    });
+    return function () { t.kill(); };
+  });
+});
+
 /* ===== sections/ch-arrival.js ===== */
 /* =============================================================================
    SECTION: ch-arrival
@@ -313,8 +833,12 @@ WZ.section("ch-difference", function (W) {
    ============================================================================= */
 WZ.section("ch-invitation", function (W) {
   if(W.reduced) return;
-  gsap.from('#locs .iv-loc',{opacity:0,y:34,duration:1,stagger:.14,ease:'power3.out',
-    scrollTrigger:{trigger:'#locs',start:'top 82%'}});
+  /* The bespoke `#locs .iv-loc` stagger that used to sit here is gone with the
+     markup it animated. On 2026-08-24 the standalone locations strip was folded
+     into the CTA band as `.cta-offices`, which carries `data-rv="stagger"` and
+     is therefore revealed by the kit like every other staggered block. Leaving
+     the old call in place would not have thrown — it would simply have matched
+     nothing, which is the kind of dead animation nobody notices for months. */
   W.splitLines(document.getElementById('ctaTitle'), function(self){
     return gsap.from(self.lines,{yPercent:110,duration:1,stagger:.09,ease:'power4.out',
       scrollTrigger:{trigger:'#ctaTitle',start:'top 85%'}});
@@ -378,44 +902,129 @@ WZ.section("ch-path", function (W) {
         scrub: .3,
         anticipatePin: 1,
         invalidateOnRefresh: true,
+        /* Refreshes AFTER Chapter 04 (refreshPriority 1), so this measures
+           against a document that already includes that pin's spacer. */
+        refreshPriority: 0,
         onUpdate: function(self){ gsap.set(bar,{scaleX:self.progress}); }
       }
     });
 
-  /* Each card lights its underline as it reaches centre stage. */
+  /* Each card brightens its border as it reaches centre stage.
+
+     The grayscale half of this only runs where the CSS applies grayscale in
+     the first place, i.e. a fine pointer -- see 35-ch-path.css. Tweening
+     `filter` is a main-thread PAINT animation, and on a phone it was repainting
+     four images on every frame of the scrub. Nothing to un-grey on touch, so
+     there is nothing to tween. */
+  /* Runs on touch too now — see the note in css/35-ch-path.css. */
+  var grey = function(card, on){
+    gsap.to(card.querySelector('.pa-shot img'),{filter:'grayscale('+(on?1:0)+')',duration:.6});
+  };
   gsap.utils.toArray('#pathTrack .pa-card').forEach(function(card){
-    gsap.to(card,{'--x':1,duration:.1});
     ScrollTrigger.create({
       trigger: card,
       containerAnimation: tween,
       start: 'left 72%',
       end: 'right 28%',
-      onEnter:      function(){ gsap.to(card,{borderColor:'rgba(138,126,78,.55)',duration:.5});
-                                gsap.to(card.querySelector('.pa-shot img'),{filter:'grayscale(0)',duration:.6}); },
+      onEnter:      function(){ gsap.to(card,{borderColor:'rgba(138,126,78,.55)',duration:.5}); grey(card,false); },
       onLeave:      function(){ gsap.to(card,{borderColor:'rgba(20,20,22,.13)',duration:.5}); },
       onEnterBack:  function(){ gsap.to(card,{borderColor:'rgba(138,126,78,.55)',duration:.5}); },
-      onLeaveBack:  function(){ gsap.to(card,{borderColor:'rgba(20,20,22,.13)',duration:.5});
-                                gsap.to(card.querySelector('.pa-shot img'),{filter:'grayscale(1)',duration:.6}); }
+      onLeaveBack:  function(){ gsap.to(card,{borderColor:'rgba(20,20,22,.13)',duration:.5}); grey(card,true); }
     });
     gsap.fromTo(card.querySelector('.pa-no'),{opacity:.35},{opacity:1,duration:.4,
       scrollTrigger:{trigger:card,containerAnimation:tween,start:'left 78%',toggleActions:'play none none reverse'}});
     });
   }
 
+  /* THE MOBILE PATH — a native swipe, not a scrubbed pin.
+
+     Pinning this chapter and driving the track's `x` from scroll costs a phone
+     the entire section: measured at p50 33.3ms with 67% of frames over 32ms on
+     a 6x-throttled CPU, i.e. a sustained 30fps, while the unpinned chapters on
+     the same page sat at 16.7ms. The work is compositor-side and inherent to
+     the effect -- 1.3s of Layerize and 1367 raster tasks in an 11s trace --
+     so it does not optimise away: gating the grayscale filter, the one clearly
+     wasteful paint in here, moved it 67.3% -> 61.5% and left p50 untouched.
+
+     Scroll-snap hands the same left-to-right reading to the compositor. No pin,
+     no scrub, no per-frame JS at all, and the momentum is the platform's own,
+     which is why it feels better than anything this file could animate.
+
+     Touch is the condition, not width: a narrow desktop window has the CPU and
+     the mouse wheel for the pinned version, and a large tablet has neither. */
+  var TOUCH = window.matchMedia('(hover:none) and (pointer:coarse)').matches;
+
+  function buildSwipe(){
+    sec.classList.add('is-swipe');
+    gsap.set(track,{x:0});
+    gsap.set(bar,{scaleX:0});
+    /* The bar still reports position, driven by the scroller rather than by a
+       tween -- a passive scroll listener, not a rAF loop. */
+    var onScroll = function(){
+      var max = track.scrollWidth - track.clientWidth;
+      gsap.set(bar,{scaleX: max > 0 ? track.scrollLeft / max : 0});
+    };
+    track.addEventListener('scroll', onScroll, {passive:true});
+    onScroll();
+
+    /* THE CARD REVEAL, restored for touch.
+
+       The pinned build lights each card as it reaches centre stage -- gold
+       border, the number up from 35%, the photo out of grayscale -- and all of
+       it hangs off `containerAnimation`, which only exists when there IS a
+       scrubbed tween. Dropping the pin dropped the animation with it, and the
+       chapter went flat on phones while Webflow (still pinned there) kept it.
+
+       An IntersectionObserver gives the same cue without the scrub. The root is
+       the TRACK, the horizontal rootMargin narrows the trigger zone to the
+       middle ~30% of it, and the class it toggles is animated by CSS
+       transitions -- so this costs one callback per card per crossing instead
+       of JS on every frame. That is the whole point: the swipe path exists
+       because per-frame work on a phone is what caused the flicker, so the
+       reveal must not reintroduce any.
+
+       No fallback needed: IntersectionObserver predates every browser that can
+       run ScrollSmoother, but guard anyway so an exotic engine degrades to
+       "all cards lit" rather than none. */
+    var cards = track.querySelectorAll('.pa-card');
+    if (!('IntersectionObserver' in window)) {
+      for (var i = 0; i < cards.length; i++) cards[i].classList.add('is-live');
+      return;
+    }
+    var io = new IntersectionObserver(function(entries){
+      for (var i = 0; i < entries.length; i++) {
+        entries[i].target.classList.toggle('is-live', entries[i].isIntersecting);
+      }
+    }, { root: track, rootMargin: '0px -35% 0px -35%', threshold: 0 });
+    for (var c = 0; c < cards.length; c++) io.observe(cards[c]);
+    /* gsap.context() reverts this build on resize; disconnect with it. */
+    return function(){ io.disconnect(); };
+  }
+
   function build(){
     if (built) built.revert();
+    sec.classList.remove('is-swipe');
+    /* Pinned on touch as well — the client's ask, and what Webflow does. The
+       flicker that sent phones to `buildSwipe` came from ScrollSmoother forcing
+       `pinType:'transform'`; the smoother is desktop-only now and the pin is
+       native `position:fixed`. */
     built = gsap.context(distance() > 0 ? buildPinned : buildStatic);
   }
   build();
 
-  var t;
-  window.addEventListener('resize', function(){
-    clearTimeout(t);
-    t = setTimeout(function(){
-      var wants = distance() > 0;
-      if (wants !== !sec.classList.contains('is-static')) build();
-    }, 250);
-  });
+  /* A touch device never crosses back into the pinned build, and rebuilding on
+     every address-bar show/hide is exactly the churn the swipe path exists to
+     avoid -- so the resize watcher is desktop-only. */
+  if (!TOUCH) {
+    var t;
+    window.addEventListener('resize', function(){
+      clearTimeout(t);
+      t = setTimeout(function(){
+        var wants = distance() > 0;
+        if (wants !== !sec.classList.contains('is-static')) build();
+      }, 250);
+    });
+  }
 });
 
 /* ===== sections/ch-proof.js ===== */
@@ -598,6 +1207,175 @@ WZ.section("ch-reality", function (W) {
     scrollTrigger:{trigger:root,start:'top bottom',end:'bottom top',scrub:.8}});
 });
 
+/* ===== sections/ch-services.js ===== */
+/* =============================================================================
+   SECTION: ch-services                                          BugHerd pin #8
+   -----------------------------------------------------------------------------
+   "On desktop I want to have a hover effect with an image showing following the
+   cursor and on mobile and tablet the image should be present on the card with
+   no hover effect."
+
+   ONE shared floating element that swaps what it shows per hovered card — not
+   eleven absolutely-positioned images. Eleven would mean eleven layers, eleven
+   more nodes in a section that is deliberately a typographic index, and eleven
+   images fetched by a visitor who may never reach the chapter.
+
+   Guarded on `#svcGrid` rather than `.ch-services` so the module travels with
+   the grid and costs nothing on the 25 pages that do not carry it.
+   ============================================================================= */
+WZ.section('ch-services', '#svcGrid', function (W) {
+  /* Reduced motion keeps the image, and drops the chase. Returning here means
+     `.wz-svfollow` is never set, so the card's own image stays laid out — the
+     same fallback a coarse pointer gets. That is deliberately NOT the magnetic
+     buttons' behaviour (js/90-boot.js), which simply returns and loses nothing;
+     here returning without the class would leave a desktop with no image at
+     all. */
+  if (W.reduced) return;
+
+  /* POINTER CAPABILITY, NOT WIDTH. `.wz-fine` is set from
+     `(hover:hover) and (pointer:fine)` in js/90-boot.js and is how every other
+     hover on this site is gated. A narrow desktop window keeps the follower; a
+     1024px tablet does not. Width would have got both of those wrong. */
+  if (!document.documentElement.classList.contains('wz-fine')) return;
+
+  var grid  = document.getElementById('svcGrid');
+  var cards = [].slice.call(grid.querySelectorAll('.sv-card'));
+  var shots = cards.map(function (c) { return c.querySelector('.sv-shot img'); });
+  if (!shots.some(Boolean)) return;   /* markup without images: leave the cards alone */
+
+  /* --- the element ------------------------------------------------------- */
+  var el = document.createElement('div');
+  el.className = 'sv-follow';
+  el.setAttribute('aria-hidden', 'true');
+  var img = document.createElement('img');
+  img.alt = '';
+  img.decoding = 'async';
+  el.appendChild(img);
+
+  /* APPENDED TO <body>, OUTSIDE #smooth-wrapper.
+     ScrollSmoother translates #smooth-content, and a transformed ancestor makes
+     `position:fixed` resolve against THAT element instead of the viewport — the
+     plate would scroll away with the page and drift further from the cursor the
+     further down you were. Same reason the nav and the drawer live out here
+     (css/02-base.css, "fixed UI lives OUTSIDE the wrapper"). */
+  document.body.appendChild(el);
+
+  /* Only now: the class that takes the in-card copies out of the flow. If
+     anything above returned, or GSAP never loaded and the queue was never
+     flushed, this never runs and the cards keep their images. */
+  document.documentElement.classList.add('wz-svfollow');
+
+  /* --- which variant to ask for ------------------------------------------
+     `base.image` publishes a `srcset` of `-w<N>.webp` variants beside the
+     original. The follower is at most 320 CSS px, so the original (up to
+     3000px on the smile-makeover card) is 10x more image than it can show.
+     Pick the smallest variant that still covers the plate at this DPR, and
+     fall back to `src` when there is no srcset — the local build has none. */
+  var want = Math.round(el.getBoundingClientRect().width * (window.devicePixelRatio || 1));
+  function source (im) {
+    var set = im.getAttribute('srcset');
+    if (!set) return im.src;
+    var best = null;
+    set.split(',').forEach(function (part) {
+      var m = /^\s*(\S+)\s+(\d+)w\s*$/.exec(part);
+      if (!m) return;
+      var w = +m[2];
+      if (w >= want && (!best || w < best.w)) best = { url: m[1], w: w };
+    });
+    return best ? best.url : im.src;
+  }
+  var urls = shots.map(function (im) { return im ? source(im) : null; });
+
+  /* --- motion -------------------------------------------------------------
+     quickTo, the same primitive the magnetic buttons use: one pre-built tween
+     per property, re-targeted on each move. The .55s power3 is the lag — the
+     plate trails the cursor rather than being pinned to it, which is the whole
+     effect. A pointermove handler that called gsap.to() would build a tween per
+     event instead. */
+  var xTo = gsap.quickTo(el, 'x', { duration: .55, ease: 'power3' });
+  var yTo = gsap.quickTo(el, 'y', { duration: .55, ease: 'power3' });
+  gsap.set(el, { xPercent: -50, yPercent: -50, scale: .94 });
+
+  var open = false;
+  var token = 0;          /* invalidates a decode that finished too late */
+  var warmed = false;
+
+  /* Preload once, and only for a visitor who actually reaches Chapter 07 — the
+     ScrollTrigger below fires this the moment the section enters the viewport,
+     which is the earliest honest signal and is well before a cursor can travel
+     to a card. `pointerenter` on the grid is the backstop for a pointer that
+     arrives without a scroll (an anchor jump, a restored scroll position).
+
+     LOW priority, because these eleven are speculative and must not compete
+     with the page's real work — or with the one image `show()` is waiting on.
+     That race is not theoretical: warming on grid-enter alone put all eleven in
+     flight in the same event burst as the first hover, and the wanted one came
+     back after the plate had given up waiting. */
+  function warm () {
+    if (warmed) return;
+    warmed = true;
+    urls.forEach(function (u) {
+      if (!u) return;
+      var p = new Image();
+      p.fetchPriority = 'low';
+      p.decoding = 'async';
+      p.src = u;
+    });
+  }
+
+  function place (e, jump) {
+    if (jump) { xTo(e.clientX, e.clientX); yTo(e.clientY, e.clientY); }
+    else { xTo(e.clientX); yTo(e.clientY); }
+  }
+
+  function show (url, e) {
+    var mine = ++token;
+    place(e, !open);
+    /* Decode BEFORE swapping. Assigning a cold src straight onto the visible
+       element blanks the plate for a frame or two on the first hover of each
+       card; loading into a detached Image first means the swap is a cache hit
+       and the previous picture holds until the new one is ready. */
+    var pre = new Image();
+    pre.fetchPriority = 'high';   /* jump the queue ahead of warm()'s eleven */
+    var swap = function () {
+      if (mine !== token) return;
+      img.src = url;
+      open = true;
+      gsap.to(el, { autoAlpha: 1, scale: 1, duration: .4, ease: 'power2.out', overwrite: 'auto' });
+    };
+    pre.onload = swap;
+    pre.src = url;
+    if (pre.complete) swap();
+  }
+
+  function hide () {
+    token++;
+    if (!open) return;
+    open = false;
+    gsap.to(el, { autoAlpha: 0, scale: .94, duration: .3, ease: 'power2.in', overwrite: 'auto' });
+  }
+
+  grid.addEventListener('pointerenter', warm);
+  grid.addEventListener('pointermove', function (e) { if (open) place(e); });
+  grid.addEventListener('pointerleave', hide);
+
+  cards.forEach(function (card, i) {
+    if (!urls[i]) return;
+    card.addEventListener('pointerenter', function (e) { show(urls[i], e); });
+  });
+
+  /* Two jobs, no scrub and no per-frame work — four callbacks at the edges.
+     Entering starts the preload. Leaving closes the plate: `pointerleave` does
+     fire when the smoother slides the grid out from under a stationary cursor,
+     because the browser re-runs hit-testing on the transform, but the plate is
+     fixed to the VIEWPORT and would be left hanging over the next chapter if it
+     ever did not. */
+  ScrollTrigger.create({
+    trigger: '#services', start: 'top bottom', end: 'bottom top',
+    onEnter: warm, onEnterBack: warm, onLeave: hide, onLeaveBack: hide
+  });
+});
+
 /* ===== sections/ch-specialist.js ===== */
 /* =============================================================================
    SECTION: ch-specialist
@@ -618,8 +1396,31 @@ WZ.section("ch-specialist", function (W) {
   gsap.from('#credList li',{opacity:0,x:-22,duration:.6,stagger:.07,ease:'power2.out',
     scrollTrigger:{trigger:'#credList',start:'top 85%'}});
 
-  /* Portrait rises slightly out of its plate as the chapter passes. */
-  gsap.fromTo('#specPortrait',{xPercent:-50,yPercent:6},{xPercent:-50,yPercent:-4,ease:'none',
+  /* Portrait rises slightly out of its plate as the chapter passes.
+
+     x:0 is load-bearing, not decoration. The CSS centres this image with
+     `left:50%; transform:translateX(-50%)` (css/33-ch-specialist.css), and that
+     has to stay -- the `W.reduced` return above means this tween never runs
+     under prefers-reduced-motion, so CSS is the only thing centring it there.
+     But GSAP reads the element's starting transform through getComputedStyle,
+     which hands back a resolved MATRIX: the -50% arrives as a plain pixel
+     number and is recorded as the baseline `x`. xPercent:-50 is then layered on
+     top of it as a second translate, and the portrait is shifted left by half
+     its width twice --
+
+       transform: translate(-50%, 2.4%) translate3d(-237.401px, 0px, 0px)
+
+     Whether it visibly breaks depends on whether the image has a laid-out width
+     at the moment GSAP takes that snapshot, which is why it hid locally and
+     showed up on the host: the local <img> carries no width/height attributes,
+     so before the file decodes the box is 0px wide, -50% of 0 is 0, and the
+     snapshot is harmless. Instatic's uploader rewrites the tag with
+     width/height (plus srcset/sizes), the browser knows the aspect ratio at
+     parse time, and the real half-width gets baked in permanently.
+
+     Pinning x:0 tells GSAP what the baseline is instead of letting it infer one
+     from the matrix, so the CSS -50% and the tween stop stacking. */
+  gsap.fromTo('#specPortrait',{xPercent:-50,x:0,yPercent:6},{xPercent:-50,x:0,yPercent:-4,ease:'none',
     scrollTrigger:{trigger:'#specialist',start:'top bottom',end:'bottom top',scrub:.8}});
 });
 
@@ -695,7 +1496,14 @@ WZ.section("ch-transformation", function (W) {
       pin: true,
       scrub: .3,
       anticipatePin: 1,
-      invalidateOnRefresh: true
+      invalidateOnRefresh: true,
+      /* REFRESH ORDER MATTERS ONCE TWO SECTIONS PIN. ScrollTrigger measures in
+         creation order unless told otherwise, and Chapter 05 is built before
+         this one — so it measured #pathPin at its PRE-SPACER position and
+         started 2,700px too early, landing inside this chapter's pinned range
+         and rendering on top of it. Higher priority refreshes first, so this
+         pin's spacer is in the flow before anything downstream measures. */
+      refreshPriority: 1
     }
   });
 
@@ -818,6 +1626,14 @@ WZ.dom("vl-grid", function () {
   var W = window.WZ;
   document.documentElement.classList.add('wz-ready');
 
+  /* Pointer capability as a class, so CSS can branch on it without a media
+     query. Instatic stores a non-viewport media query as a custom condition
+     ordered by raw array position, which is a cascade trap; a class is not.
+     Set before flush() so a section's setup sees it. */
+  if (window.matchMedia('(hover:hover) and (pointer:fine)').matches) {
+    document.documentElement.classList.add('wz-fine');
+  }
+
   if(!W || !W.ok){
     /* GSAP missing: reveal everything so the page is still readable. */
     document.querySelectorAll('[data-anim="hide"]').forEach(function(el){ el.style.visibility='visible'; });
@@ -830,7 +1646,34 @@ WZ.dom("vl-grid", function () {
   if(window.SplitText)      gsap.registerPlugin(SplitText);
   if(window.Observer)       gsap.registerPlugin(Observer);
 
-  if(!W.reduced && window.ScrollSmoother){
+  /* THE SMOOTHER IS DESKTOP-ONLY, and this is the mobile flicker fix.
+
+     ScrollTrigger has two ways to pin. With NO smoother it uses native
+     `position:fixed` and the browser holds the chapter still for free. With a
+     smoother present it switches to `pinType:'transform'`, because fixed
+     positioning cannot be trusted inside a smoothed container -- and then the
+     pinned element's `translateY` has to be rewritten from JS on every single
+     scroll update. Measured on the two live builds at the same scroll depth,
+     mid-pin:
+
+       Webflow  (no smoother)  #tPin  position:fixed   transform: identity
+       Instatic (smoother on)  #tPin  position:static  transform: translateY(1350.5px)
+
+     On a phone that per-frame write lands late whenever the main thread is
+     busy, and the pinned chapter drifts against the finger. That is what the
+     client has been reporting as flicker on Chapters 04 and 05.
+
+     The Webflow build is smooth by accident, not by configuration: its
+     `#smooth-wrapper` never survived the conversion, so `create()` is skipped
+     and the page scrolls natively. `smoothTouch:false` does NOT get us there --
+     it only disables the EASING on touch; the smoother is still instantiated,
+     and its mere existence is what flips the pin strategy.
+
+     Touch is the condition, not width -- same reasoning as sections/ch-path.js.
+     A narrow desktop window keeps the smoother; a large tablet does not. */
+  var TOUCH = window.matchMedia('(hover:none) and (pointer:coarse)').matches;
+
+  if(!W.reduced && !TOUCH && window.ScrollSmoother && document.getElementById('smooth-wrapper')){
     try{
       W.smoother = ScrollSmoother.create({
         wrapper:'#smooth-wrapper', content:'#smooth-content',
@@ -855,6 +1698,12 @@ WZ.dom("vl-grid", function () {
            scrolls 0px instead of 535px. Not worth it. */
         normalizeScroll: false, ignoreMobileResize: true
       });
+      /* `#smooth-wrapper{overflow:hidden}` is scoped to this class. Without a
+         smoother the wrapper must NOT clip, or the page cannot scroll at all —
+         which is exactly what happened when this was A/B tested by stubbing the
+         plugin alone: two runs travelled 0px and reported a flattering 16.7ms
+         for a stationary page. Set only on success, never optimistically. */
+      document.documentElement.classList.add('wz-smooth');
     }catch(e){ console.warn('ScrollSmoother unavailable', e); }
   }
 
@@ -871,13 +1720,22 @@ WZ.dom("vl-grid", function () {
   gsap.to(navPr,{scaleX:1,ease:'none',
     scrollTrigger:{start:0,end:'max',scrub:.25}});
 
-  gsap.utils.toArray('section[data-chapter]').forEach(function(sec){
+  var CHAPTERS = gsap.utils.toArray('section[data-chapter]');
+  var LAST = CHAPTERS.reduce(function(m, s){
+    return Math.max(m, parseInt(s.getAttribute('data-chapter'), 10) || 0);
+  }, 1);
+  CHAPTERS.forEach(function(sec){
     var i = parseInt(sec.getAttribute('data-chapter'),10),
         name = sec.getAttribute('data-chapter-name');
     function activate(){
       if(navCh) navCh.textContent = String(i).padStart(2,'0');
       if(navNm) navNm.textContent = name;
-      if(navBar) navBar.style.setProperty('--p', (i/8).toFixed(3));
+      /* Divisor is the LAST chapter index, not a constant: Chapter 07 (The
+         Services) was added on 2026-08-26 and Proof/Invitation shifted to 08
+         and 09, so a hardcoded 8 would have driven the nav progress bar past
+         100% on the final two sections. Derived so the next insertion cannot
+         reintroduce the bug. */
+      if(navBar) navBar.style.setProperty('--p', (i/LAST).toFixed(3));
     }
     ScrollTrigger.create({trigger:sec,start:'top 55%',end:'bottom 45%',
       onEnter:activate,onEnterBack:activate});
@@ -1031,7 +1889,41 @@ WZ.dom("vl-grid", function () {
       masks[i].style.overflow = Math.abs(ty(line)) < EPS ? 'visible' : 'clip';
     }
   }
-  sweep();
-  setInterval(sweep, 200);
-  window.addEventListener('load', sweep);
+  /* The poll used to run every 200ms for the life of the page. There are 8
+     masks, `ty()` calls getComputedStyle on each and the loop then writes
+     `style.overflow` back, so that was a forced style recalc five times a
+     second, for ever, on every page -- 336ms of TimerFire in an 11s mobile
+     trace, all of it after the lines had long since landed.
+
+     A line only needs sweeping while it is TRAVELLING, so the poll now stops
+     once nothing has moved for three consecutive passes and re-arms on the two
+     events that can put a clipped mask back on the page: `load`, and the
+     resize that makes SplitText autoSplit rebuild them. Same behaviour, no
+     standing timer. */
+  var timer = null, idle = 0;
+
+  function pass() {
+    var masks = document.querySelectorAll('.wz-line-mask,.wz-mask-line-mask');
+    var moving = 0;
+    for (var i = 0; i < masks.length; i++) {
+      var line = masks[i].firstElementChild;
+      if (!line) continue;
+      var clipped = Math.abs(ty(line)) >= EPS;
+      if (clipped) moving++;
+      masks[i].style.overflow = clipped ? 'clip' : 'visible';
+    }
+    if (moving) idle = 0;
+    else if (++idle >= 3) stop();
+  }
+  function start() { if (!timer) { idle = 0; timer = setInterval(pass, 200); } }
+  function stop() { if (timer) { clearInterval(timer); timer = null; } }
+
+  pass();
+  start();
+  window.addEventListener('load', function () { pass(); start(); });
+  var rt;
+  window.addEventListener('resize', function () {
+    clearTimeout(rt);
+    rt = setTimeout(start, 120);   // autoSplit rebuilds masks clipped
+  });
 })();

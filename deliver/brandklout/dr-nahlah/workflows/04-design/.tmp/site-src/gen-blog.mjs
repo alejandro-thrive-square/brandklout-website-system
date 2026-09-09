@@ -40,6 +40,18 @@ import { fileURLToPath } from 'node:url';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const POSTS = path.resolve(HERE, '../../../13-content-export-import/.tmp/posts.json');
 
+/* The topic taxonomy is NOT redefined here. `post-image-pool.mjs` is the one
+   ordered, specific-before-general list this project has, and it already decides
+   which photograph each article gets — deriving the topic label from anywhere
+   else would let a card's picture and its topic label disagree.
+
+   The chip LABEL is the id with its first letter capitalised, nothing more, so
+   `slugify(label) === id` holds by construction and `?topic=implants` needs no
+   lookup table in the browser. push-posts-filter.mjs asserts that for all twelve
+   and refuses to run if it ever stops holding. */
+import { TOPICS, topicFor } from '../../../15-instatic-api-sync/post-image-pool.mjs';
+const topicLabel = (id) => id.charAt(0).toUpperCase() + id.slice(1);
+
 const raw = JSON.parse(fs.readFileSync(POSTS, 'utf8'));
 const posts = Array.isArray(raw) ? raw : raw.posts || [];
 if (!posts.length) throw new Error('no posts in posts.json');
@@ -48,12 +60,47 @@ const esc = (s) => String(s)
   .replace(/&(?![a-zA-Z#0-9]+;)/g, '&amp;')
   .replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
 
-/** One card, shaped exactly like the loop's child so the swap is 1:1. */
+/** One card, shaped like the loop's child.
+ *
+ * NO LONGER 1:1, and deliberately so. BugHerd #9 gave the Instatic loop card a
+ * leading thumbnail bound to `{currentEntry.featuredMediaPath}`:
+ *
+ *     <a class="bl-rel-fig" aria-hidden="true" tabindex="-1" href="...">
+ *       <img src="{currentEntry.featuredMediaPath}" loading="lazy">
+ *     </a>
+ *
+ * The static build cannot reproduce it. Those 22 photographs live in the
+ * Instatic media library and `site-src/assets/` holds nine files, none of them
+ * a match — the picks are in `15-instatic-api-sync/.tmp/post-images/picks.json`
+ * (slug -> asset) if anyone wants to close the gap, but it means copying the
+ * library into the design package, and the repo rules say no binary assets.
+ *
+ * Emitting the markup anyway with a src that resolves to nothing would print a
+ * broken image on every static card, which is worse than the honest omission:
+ * a row with no image publishes an EMPTY `<a>` on Instatic too, and
+ * `.bl-rel-fig:empty{display:none}` hides it. So the static build renders what
+ * the CMS renders for an imageless row, which is the closest thing to parity
+ * available here.
+ *
+ * The STYLING is shared and unaffected — it is all in css/62-blog.css.
+ */
 const card = (p) => `      <article class="bl-card" data-rv>
+        <span class="bl-topic">${esc(topicLabel(topicFor(p.title).id))}</span>
         <h2><a href="posts/${p.slug}.html">${esc(p.title)}</a></h2>
         <p>${esc(p.seoDescription || '')}</p>
         <a class="bl-more" href="posts/${p.slug}.html">Read the article</a>
       </article>`;
+
+/* The <option> list is published in TAXONOMY order (specific before general),
+   not alphabetical: `topicFor` is first-match-wins, so this order is the one
+   that explains the assignments. Only topics some article actually landed in
+   are offered — a choice that can only ever return the empty state is a dead
+   end, not a filter. blog-filter.js prunes again at runtime against the cards
+   on the page, so the published list and the DOM can never disagree. */
+const usedTopics = new Set(posts.map((p) => topicFor(p.title).id));
+const TOPIC_OPTIONS = TOPICS.filter((t) => usedTopics.has(t.id))
+  .map((t) => `          <option value="${t.id}">${esc(topicLabel(t.id))}</option>`)
+  .join('\n');
 
 const index = `<!-- ==========================================================================
      JOURNAL — the index over the 43 posts migrated from the WordPress site.
@@ -88,8 +135,29 @@ const index = `<!-- ============================================================
          so the last cards animate long after they are on screen; and the loop
          that replaces this grid on Instatic copies its CHILD markup, so a
          per-card attribute is the only one that survives the swap. -->
+    <div class="bl-filter" id="blFilter" role="search">
+      <div class="bl-f-field">
+        <label class="bl-f-label" for="blSearch">Search the journal</label>
+        <input class="bl-f-input" type="search" id="blSearch" name="q"
+               placeholder="implants, cost, sedation…" autocomplete="off">
+      </div>
+      <div class="bl-f-field">
+        <label class="bl-f-label" for="blTopic">Topic</label>
+        <select class="bl-f-select" id="blTopic" name="topic">
+          <option value="">All topics</option>
+${TOPIC_OPTIONS}
+        </select>
+      </div>
+      <p class="bl-f-count" id="blCount" role="status" aria-live="polite">${posts.length} articles</p>
+    </div>
     <div class="bl-grid">
 ${posts.map(card).join('\n')}
+    </div>
+    <div class="bl-empty" id="blEmpty" hidden>
+      <h3>Nothing in the archive matches that.</h3>
+      <p>Try a single word rather than a phrase — or clear the filters and browse
+        the whole archive.</p>
+      <button class="bl-clear" type="button" id="blClear">Show every article</button>
     </div>
   </div>
 </section>

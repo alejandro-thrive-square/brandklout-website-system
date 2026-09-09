@@ -202,8 +202,15 @@ p{margin:0}
 .btn-dark::after{background:var(--ink-700)}
 .btn-dark:hover{color:var(--bg)}
 
-/* ScrollSmoother scaffolding — fixed UI lives OUTSIDE the wrapper */
-#smooth-wrapper{overflow:hidden}
+/* ScrollSmoother scaffolding — fixed UI lives OUTSIDE the wrapper.
+
+   The clip is SCOPED to `.wz-smooth`, which js/90-boot.js sets only after
+   ScrollSmoother has actually been created. Unscoped, this rule clips a page
+   that has no smoother driving it and scrolling stops dead — the wrapper is
+   full document height with its overflow hidden and nothing translating the
+   content. On touch, where the smoother is now deliberately not created, the
+   wrapper must stay transparent to scrolling. */
+.wz-smooth #smooth-wrapper{overflow:hidden}
 
 /* Pre-paint guard: hide split targets until GSAP has set their state so we
    never flash unsplit text. .wz-ready is set by the bootstrap. */
@@ -535,6 +542,11 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .pk-split .sp-fig{position:relative;overflow:hidden;aspect-ratio:4/3;background:var(--mist)}
 .pk-split .sp-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   will-change:transform}
+/* BugHerd #19. A 4:5 portrait cut-out in a 4:3 frame loses 40% of its height
+   to `cover`, and [data-drift] takes another 11%: centred, /about's specialist
+   opened below the doctor's mouth. Anchor that one to the top of the source.
+   `contain` was the other way and is what pins #15 and #16 object to. */
+.pk-split .sp-fig.sp-fig-top img{object-position:50% 0}
 .pk-split .sp-copy{display:grid;gap:1.1rem;max-width:56ch}
 .pk-split .sp-copy p{color:var(--fg-body);font-weight:400;line-height:1.85}
 .sp-list{list-style:none;margin:.4rem 0 0;padding:0;display:grid;gap:0}
@@ -645,13 +657,59 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .pk-cta{position:relative;overflow:hidden;
   background:linear-gradient(115deg,var(--gold-deep),var(--gold) 48%,var(--gold-light));
   color:var(--black);text-align:center}
-.pk-cta .cta-in{display:grid;gap:1.25rem;justify-items:center;max-width:60ch;margin-inline:auto}
-.pk-cta h2{font-size:var(--d2);max-width:15ch}
+/* 90ch, not the 60ch this file carried until 2026-08-24 — that was DRIFT, not a
+   change made here. The Instatic registry has held 90ch for some time (someone
+   widened it in the editor and the local package was never brought into step),
+   so the live site and this build have been laying this band out differently.
+   Aligned to the live value rather than the other way round: 90ch is what
+   visitors have been seeing, and it is wide enough for the office cards, whose
+   own max-width does the real constraining. */
+.pk-cta .cta-in{display:grid;gap:1.25rem;justify-items:center;max-width:90ch;margin-inline:auto}
+/* BugHerd #25. `max-width:15ch` decides WHERE this heading wraps, and on
+   /smile-makeover it left one word alone on the second line ("…commit to" /
+   "it."). `balance` spreads the words evenly across the lines instead. It has to
+   be a real stylesheet rule, not something added later: GSAP SplitText measures
+   the natural line boxes at boot and replaces them with one div per line, and
+   after that there is nothing left for the browser to re-balance. */
+.pk-cta h2{font-size:var(--d2);max-width:15ch;text-wrap:balance}
 .pk-cta p{color:rgba(11,11,12,.78);font-weight:400;max-width:46ch}
 .pk-cta .cta-phones{display:flex;flex-wrap:wrap;gap:.6rem 2rem;justify-content:center;
   margin-top:.5rem;font-size:.8rem;letter-spacing:.06em;color:rgba(11,11,12,.72)}
 .pk-cta .cta-phones a{font-family:var(--f-display);font-size:1.15rem;color:var(--black);
   border-bottom:1px solid rgba(11,11,12,.3)}
+
+/* ---------------------------------------------------------------------------
+   THE TWO OFFICES, ON A CALL-TO-ACTION BAND.
+
+   Every CTA on the site used to end in ONE button. The two practices keep
+   SEPARATE Flexbook calendars, so a single "book now" cannot serve both — it
+   silently sends every reader to whichever office is hardcoded in it, which is
+   exactly what the home page did (everyone went to Alexandria). The Webflow
+   build fixed it by putting both offices in the band, each with its own booking
+   link, and this is that block in this design's vocabulary.
+
+   It reuses .ct-office from the contact pages, but NOT .ct-office-grid: that
+   grid draws its separator as a 1px var(--line) gap showing through from the
+   container's background, which against the gold gradient reads as a seam
+   rather than a divider. Webflow's own .location-cta is two detached cards
+   10px apart, and so is this.
+
+   The cards are left-aligned inside a centred band, because an address and two
+   labelled telephone numbers are a list, not a slogan. Never collapse this back
+   to one button.
+
+   It wraps with `auto-fit`/`minmax` rather than a breakpoint on purpose. This
+   block has to be added to the Instatic style registry by hand, and a media
+   query there is not one rule but a rule plus a condition entry plus a
+   per-rule contextStyles key whose emission order is load-bearing (see
+   15-instatic-api-sync.md, "Cascade order — three separate traps"). One
+   intrinsic rule cannot get that wrong. 19rem is chosen so the cards are side
+   by side from ~40rem up and stacked below it, which is where a 2-up of this
+   density stops fitting anyway.
+   --------------------------------------------------------------------------- */
+.cta-offices{display:grid;grid-template-columns:repeat(auto-fit,minmax(19rem,1fr));
+  gap:10px;width:100%;max-width:64rem;margin-inline:auto;text-align:left;justify-self:stretch}
+.cta-offices .ct-office{background:var(--card);color:var(--fg)}
 
 /* Pre-reveal state. Applied only once the kit's script confirms GSAP is live,
    so a scripting failure leaves a fully readable page rather than a blank one. */
@@ -902,9 +960,30 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .ch-path .pa-card h3{font-size:var(--h3)}
 .ch-path .pa-card p{color:var(--fg-body);font-weight:400;font-size:.95rem}
 .ch-path .pa-card .pa-shot{margin-top:auto;aspect-ratio:16/10;overflow:hidden}
-.ch-path .pa-card .pa-shot img{width:100%;height:100%;object-fit:cover;filter:grayscale(1);
-  transition:filter .6s,transform .8s}
-.ch-path .pa-card:hover .pa-shot img{filter:grayscale(0);transform:scale(1.05)}
+/* The grayscale->colour reveal is a POINTER affordance, and it was costing a
+   phone the whole chapter. A CSS filter on an element inside a transformed
+   ancestor cannot be composited while that ancestor moves: the browser has to
+   re-rasterize the filtered subtree on every frame of the horizontal scrub, so
+   four filtered images turned this section into a sustained 30fps on mobile
+   (p50 33.3ms, 67% of frames over 32ms). Behind (hover:hover) it costs touch
+   devices nothing and desktop keeps the effect unchanged. Measured either side
+   with 08-qa/.tmp/mobile-pin-diagnose.mjs. */
+.ch-path .pa-card .pa-shot img{width:100%;height:100%;object-fit:cover}
+/* `.wz-fine` is set on <html> by js/90-boot.js when the device has a real
+   hovering pointer. A CLASS rather than `@media(hover:hover)` on purpose:
+   Instatic's style registry stores non-viewport media queries as custom
+   conditions whose emit order is the raw `site.conditions` array order, with
+   none of the sorting viewport breakpoints get -- so a hand-added pointer
+   condition is a cascade bug waiting to happen. A plain descendant selector
+   needs no condition at all and behaves identically in both places. */
+/* Ungated: the pinned build runs on touch now and the grayscale->colour reveal
+   is the half of the effect a reader actually notices. It was withheld because
+   tweening `filter` inside a TRANSFORM-pinned ancestor repainted four images
+   every frame; pinning is native `position:fixed` now, so there is no moving
+   transform to composite against. The HOVER lift below stays behind `.wz-fine`
+   — that one genuinely needs a pointer. */
+.ch-path .pa-card .pa-shot img{filter:grayscale(1);transition:filter .6s,transform .8s}
+.wz-fine .ch-path .pa-card:hover .pa-shot img{filter:grayscale(0);transform:scale(1.05)}
 .ch-path .pa-bar{position:absolute;left:var(--pa-inset);right:var(--pa-inset-end);
   bottom:clamp(1.5rem,4vw,3rem);height:1px;background:var(--line)}
 /* Nothing to scroll means nothing to report: the JS adds this when the whole
@@ -912,6 +991,66 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .ch-path.is-static .pa-bar{display:none}
 .ch-path .pa-bar i{position:absolute;inset:0;background:var(--rule);transform:scaleX(0);transform-origin:left}
 @media(max-width:719px){ .ch-path .pa-card{width:78vw} }
+
+/* THE SWIPE PATH (touch). Added by sections/ch-path.js -- see the note there
+   for the measurements that made it necessary.
+
+   The pin becomes an ordinary block so the chapter takes only the height it
+   needs, and the track becomes a snapping scroller. `overscroll-behavior-x:
+   contain` stops a horizontal swipe that runs out of track from turning into
+   a browser back-gesture, which is the one way a carousel like this can lose
+   the reader the page. */
+/* Top padding clears the fixed nav: the pinned build centred its content in a
+   100svh box so there was always headroom, and a natural-height block has
+   none. `scroll-margin-top` does the same for an anchor jump to #path. */
+.ch-path.is-swipe{scroll-margin-top:var(--nav-h,78px)}
+.ch-path.is-swipe .pa-pin{height:auto;
+  padding-top:calc(var(--nav-h,78px) + clamp(2rem,6vw,3.5rem));
+  padding-bottom:clamp(3rem,9vw,5rem)}
+.ch-path.is-swipe .pa-track{
+  overflow-x:auto;overflow-y:hidden;width:auto;
+  scroll-snap-type:x mandatory;overscroll-behavior-x:contain;
+  -webkit-overflow-scrolling:touch;
+  scrollbar-width:none;padding-bottom:.5rem}
+.ch-path.is-swipe .pa-track::-webkit-scrollbar{display:none}
+.ch-path.is-swipe .pa-card{scroll-snap-align:center;
+  border-color:var(--line);transition:border-color .5s}
+
+/* THE REVEAL ON TOUCH. `.is-live` is toggled by an IntersectionObserver in
+   sections/ch-path.js as each card crosses the middle of the track — the same
+   cue the pinned build takes from `containerAnimation`, without the scrub.
+
+   These are CSS transitions on purpose. The pinned build tweened the same
+   properties from JS on every frame, and on a phone that is what made the
+   chapter stutter; a transition is declared once and run by the compositor,
+   and it fires on a discrete crossing rather than continuously.
+
+   The grayscale reveal is included here even though `.wz-fine` withholds it
+   from touch elsewhere. The reason it was withheld was per-frame repaint of a
+   filtered image inside a moving transform — the scrub. There is no scrub in
+   this build, so the filter animates once per crossing, which is a bounded
+   cost, and it is the most visible half of the effect. */
+.ch-path.is-swipe .pa-card .pa-no{opacity:.35;transition:opacity .45s}
+.ch-path.is-swipe .pa-card .pa-shot img{filter:grayscale(1);transition:filter .6s}
+.ch-path.is-swipe .pa-card.is-live{border-color:rgba(138,126,78,.55)}
+.ch-path.is-swipe .pa-card.is-live .pa-no{opacity:1}
+.ch-path.is-swipe .pa-card.is-live .pa-shot img{filter:grayscale(0)}
+
+@media(prefers-reduced-motion:reduce){
+  /* Reveal without the travel: every card lit, nothing transitioning. */
+  .ch-path.is-swipe .pa-card .pa-no{opacity:1}
+  .ch-path.is-swipe .pa-card .pa-shot img{filter:none}
+}
+/* RELATIVE, never static. `.pa-bar i` is the progress fill and is
+   `position:absolute;inset:0` — it needs .pa-bar to be its containing block. Set
+   static here and the fill escapes to `#pathPin` and paints a FULL-HEIGHT gold
+   rectangle over a third of the chapter (measured: 126x677 instead of 356x1).
+   It is invisible at rest because the fill starts at scaleX(0), so it only
+   appears once the reader actually swipes — which is exactly how it reached
+   production unnoticed. The bar only needs to leave the absolute flow of the
+   pinned build; relative does that and keeps the fill anchored. */
+.ch-path.is-swipe .pa-bar{position:relative;margin-top:clamp(1.25rem,4vw,2rem);
+  margin-inline:var(--pa-inset) var(--pa-inset-end)}
 
 /* ===== css/36-ch-standard.css ===== */
 .ch-standard{background:var(--bg-2);position:relative}
@@ -998,7 +1137,7 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
    the ReputationHub iframe on 2026-08-19: Instatic lifts CSP frame-src only for
    YouTube, so that embed could never render there, and inside a frame the
    reviews counted for the vendor's domain rather than this one. Cards are a
-   1px-gap grid over the rule colour, the same construction as .iv-locs. */
+   1px-gap grid over the rule colour, the same construction as .ct-office-grid. */
 .rv-wall{display:grid;grid-template-columns:1fr;gap:1px;background:var(--line);
   margin-top:clamp(1.5rem,3vw,2.25rem)}
 .rv-card{background:var(--card);padding:clamp(1.35rem,2.2vw,1.9rem);
@@ -1037,24 +1176,18 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
    gold CTA band at the foot is unchanged and still closes the page. */
 .ch-invitation{background:var(--bg)}
 .ch-invitation h2{font-size:var(--h2);max-width:16ch;margin-top:1rem}
-.ch-invitation .iv-locs{display:grid;grid-template-columns:1fr;gap:1px;
-  background:var(--line);margin-top:clamp(2rem,4vw,3rem)}
-.ch-invitation .iv-loc{background:var(--card);padding:clamp(1.75rem,3.2vw,3rem);
-  display:grid;gap:1rem;align-content:start}
-.ch-invitation .iv-loc h3{font-size:var(--h3)}
-.ch-invitation .iv-loc address{font-style:normal;color:var(--fg-soft);font-weight:300}
-.ch-invitation .iv-row{display:grid;gap:.3rem;padding-top:1rem;border-top:1px solid var(--line-2)}
-.ch-invitation .iv-row a{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-sm));
-  color:var(--accent-lg);transition:opacity .3s}
-.ch-invitation .iv-row a:hover{opacity:.7}
-.ch-invitation .iv-row span{font-size:.7rem;letter-spacing:.16em;text-transform:uppercase;
-  color:var(--fg-soft)}
+/* `.iv-locs` / `.iv-loc` / `.iv-row` were removed on 2026-08-24. That block was
+   a standalone locations strip sitting directly above the gold band, and the
+   band below it closed the page with ONE booking button — so the page showed
+   the two offices and then offered a single calendar for both. The offices now
+   live inside the band itself as `.cta-offices` (css/20-pagekit.css), which is
+   what the Webflow build does, and showing them twice in a row was the reason
+   not to simply add the cards and leave the strip. */
 .iv-cta{background:linear-gradient(120deg,var(--gold-deep),var(--gold) 48%,var(--gold-light));
   color:var(--black);text-align:center;margin-top:clamp(3rem,7vw,6rem)}
 .iv-cta h2{font-size:var(--d2);max-width:18ch;margin-inline:auto;color:var(--black)}
 .iv-cta p{margin-top:1.1rem;max-width:46ch;margin-inline:auto;color:rgba(11,11,12,.72)}
-.iv-cta .btn{margin-top:2rem}
-@media(min-width:720px){ .ch-invitation .iv-locs{grid-template-columns:repeat(2,1fr)} }
+.iv-cta .cta-offices{margin-top:2rem}
 
 /* --- the practice, photographed (added 2026-08-18 from the client's Webflow build) ---
    One wide cell then a row of four. The wide cell is what stops five landscape
@@ -1077,6 +1210,158 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
   .ch-invitation .iv-gallery{grid-template-columns:repeat(3,1fr)}
   .ch-invitation .iv-shot-wide{grid-column:span 2;aspect-ratio:auto}
 }
+
+/* ===== css/39-ch-services.css ===== */
+/* =============================================================================
+   Chapter 07 — The Services            BugHerd pin #6
+   -----------------------------------------------------------------------------
+   The home page told the whole story — the problem, the specialist, the path,
+   the standard, the proof — without ever listing what the practice actually
+   does. Every treatment page was reachable only from the drawer. This chapter
+   is the explicit index the client asked for, sitting between The Standard and
+   The Proof.
+
+   Deliberately NOT another image grid. `.ch-standard` immediately above it is
+   four photographic cards and `.ch-proof` immediately below opens on
+   full-bleed video, so a third picture block between them would read as more
+   of the same and add eleven more images to a page that already carries the
+   heaviest media on the site. This is a typographic index: a number, a name,
+   one line, a rule that draws itself on hover.
+
+   The card is an <a>, so the whole tile is the target — not a "Learn more"
+   link with dead space around it.
+   ========================================================================== */
+
+.ch-services{background:var(--bg);position:relative}
+
+.ch-services .sv-head{max-width:62ch;margin-bottom:clamp(2.5rem,5vw,4rem)}
+.ch-services .sv-head h2{font-size:var(--h2);margin-top:.75rem}
+.ch-services .sv-head p{color:var(--fg-body);font-weight:400;margin-top:1rem}
+
+/* One column on a phone, two from 620px, three from 1040px. The card is tall
+   enough that four across would strand the last row on most laptops. */
+.ch-services .sv-grid{display:grid;grid-template-columns:1fr;
+  border-top:1px solid var(--line)}
+@media(min-width:620px){ .ch-services .sv-grid{grid-template-columns:1fr 1fr} }
+@media(min-width:1040px){ .ch-services .sv-grid{grid-template-columns:repeat(3,1fr)} }
+
+/* Cards share single hairlines rather than each drawing a full border, so the
+   grid reads as one table instead of eleven boxes.
+
+   Mobile-first, and every override rides an EXISTING site condition (620px and
+   1040px are both already in site.conditions, sorted min-ascending). That is
+   deliberate: this platform emits custom conditions in raw array order, so a
+   newly invented breakpoint is a cascade bug waiting to happen
+   (15-instatic-api-sync.md, "Cascade order").
+
+   The outer edges must not draw. One column has no right neighbour at all; from
+   two columns up, the card at the end of each row drops its rule. The trailing
+   row is COUNT-DEPENDENT -- eleven cards means the last row is one card at two
+   columns and two cards at three. Revisit if the service list changes length. */
+.ch-services .sv-card{position:relative;display:flex;flex-direction:column;
+  gap:.55rem;padding:clamp(1.5rem,2.6vw,2.25rem);
+  border-bottom:1px solid var(--line);border-right:0;
+  text-decoration:none;color:inherit;isolation:isolate}
+.ch-services .sv-card:last-child{border-bottom:0}
+@media(min-width:620px){
+  .ch-services .sv-card{border-right:1px solid var(--line)}
+  .ch-services .sv-card:nth-child(2n){border-right:0}
+}
+@media(min-width:1040px){
+  .ch-services .sv-card:nth-child(2n){border-right:1px solid var(--line)}
+  .ch-services .sv-card:nth-child(3n){border-right:0}
+  .ch-services .sv-card:nth-last-child(-n+2){border-bottom:0}
+}
+
+/* The wash and the top rule are the whole hover state: no transform, so
+   nothing here can trigger the compositing cost that made Chapter 05 flicker
+   on touch (see 35-ch-path.css). */
+.ch-services .sv-card::before{content:"";position:absolute;inset:0;z-index:-1;
+  background:var(--card);opacity:0;transition:opacity .45s}
+.ch-services .sv-card::after{content:"";position:absolute;left:0;right:0;top:-1px;
+  height:1px;background:var(--rule);transform:scaleX(0);transform-origin:left;
+  transition:transform .5s cubic-bezier(.22,1,.36,1)}
+.wz-fine .ch-services .sv-card:hover::before{opacity:1}
+.wz-fine .ch-services .sv-card:hover::after{transform:scaleX(1)}
+.ch-services .sv-card:focus-visible{outline:2px solid var(--focus);outline-offset:-2px}
+
+.ch-services .sv-no{font-family:var(--f-display);font-size:calc(1.5rem * var(--t-lg));
+  color:var(--accent-lg);line-height:1}
+.ch-services .sv-card h3{font-size:var(--h3)}
+.ch-services .sv-card p{color:var(--fg-body);font-weight:400;font-size:.95rem;
+  margin-bottom:.35rem}
+
+.ch-services .sv-more{margin-top:auto;font-family:var(--f-body);font-size:.7rem;
+  letter-spacing:.18em;text-transform:uppercase;font-weight:700;color:var(--accent)}
+.ch-services .sv-more::after{content:"→";display:inline-block;margin-left:.5rem;
+  transition:transform .4s}
+.wz-fine .ch-services .sv-card:hover .sv-more::after{transform:translateX(5px)}
+
+/* ---------------------------------------------------------------------------
+   BugHerd #8 — the treatment image, presented two ways
+   ---------------------------------------------------------------------------
+   "On desktop I want to have a hover effect with an image showing following the
+   cursor and on mobile and tablet the image should be present on the card with
+   no hover effect."
+
+   The image is in the CARD in both cases. It is the same <img>, authored once,
+   and on a fine pointer the card's copy is taken out of the flow while a single
+   shared floating element (sections/ch-services.js) shows it under the cursor
+   instead. One image per card in the markup, never eleven absolutely-positioned
+   copies and never a second source of truth for the URL — the follower reads
+   the card's own <img>, so the two cannot drift.
+
+   THE GATE IS A CLASS, NOT A WIDTH, AND NOT A POINTER MEDIA QUERY.
+   `.wz-svfollow` is put on <html> by the section module only AFTER it has
+   actually built the floating element, the same shape as `.wz-smooth`
+   (js/90-boot.js). That matters: the module bails on a coarse pointer, on
+   reduced motion, and — because it is a queued WZ.section — whenever GSAP
+   failed to load at all. In every one of those cases the class is absent and
+   the laid-out image simply stays in the card, which is the correct fallback
+   rather than a card with no image and no hover.
+
+   A pointer media query would have been the other way to write this, and it is
+   the wrong one here: Instatic stores a non-viewport media query as a custom
+   condition emitted in raw array order, which is the cascade trap this file
+   already avoids for its breakpoints (see the note above and
+   15-instatic-api-sync.md, "Cascade order"). A class has no such problem.
+
+   `mobile` on this site is `(max-width: 375px)` and misses every phone wider
+   than an SE, so nothing here goes near it. The image rides the card's existing
+   1 / 2 / 3-column rhythm at 620px and 1040px and needs no breakpoint of its
+   own.
+   --------------------------------------------------------------------------- */
+
+/* Full-bleed to the card's edges — the padding is cancelled rather than
+   re-declared, so the plate can never disagree with the card it sits in. The
+   card is a column flex container and this is a stretched item, so a negative
+   inline margin genuinely widens it instead of overflowing: used width is the
+   content width MINUS the margins. 16:9 matches the follower, and it is the
+   crop the eleven sources lose least to (they run 3:2 to 2:1). */
+.ch-services .sv-shot{position:relative;overflow:hidden;background:var(--card);
+  aspect-ratio:16/9;
+  margin:calc(-1 * clamp(1.5rem,2.6vw,2.25rem)) calc(-1 * clamp(1.5rem,2.6vw,2.25rem)) .4rem}
+.ch-services .sv-shot img{display:block;width:100%;height:100%;object-fit:cover}
+
+/* Desktop: the card's copy leaves the flow entirely. `display:none` on a
+   `loading="lazy"` image is also why the eleven cost a desktop visitor nothing
+   until they hover — a lazy image with no box never intersects, so it is never
+   fetched. The follower then requests one variant at a time, sized. */
+.wz-svfollow .ch-services .sv-shot{display:none}
+
+/* The follower itself. Built and appended to <body> by the section module, so
+   it is absent from the DOM on touch rather than present-and-hidden.
+
+   z-index sits under the nav (120) and the drawer (125) on purpose: a plate
+   chasing the cursor must never cover the site's own fixed chrome.
+   `pointer-events:none` keeps it out of its own hit-testing, otherwise it would
+   steal the pointerleave from the card it is standing on.
+   opacity/visibility start closed so there is no flash before GSAP's first set;
+   both are what `autoAlpha` drives. */
+.sv-follow{position:fixed;left:0;top:0;z-index:100;pointer-events:none;
+  width:clamp(200px,20vw,320px);aspect-ratio:16/9;overflow:hidden;
+  background:var(--card);opacity:0;visibility:hidden;will-change:transform}
+.sv-follow img{display:block;width:100%;height:100%;object-fit:cover}
 
 /* ===== css/40-thin-arch.css ===== */
 /* =============================================================================
@@ -1172,6 +1457,24 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 .ct-form .ct-req{color:var(--accent)}
 .ct-form .ct-note{font-size:.82rem;color:var(--fg-soft);font-weight:400;line-height:1.7}
 .ct-form button{justify-self:start;margin-top:.4rem}
+
+/* ---------------------------------------------------------------------------
+   Third-party embed wrapper.
+
+   These four rules are a MIRROR of the CSS the Instatic plugin
+   `webzite.embed-origins` injects for itself (embed-origins/modules/index.js,
+   the CSS array). They exist here so the local build renders a pasted vendor
+   embed the same way the platform does.
+
+   DO NOT convert them into registry rules. On Instatic the plugin supplies
+   them; a second copy in site.styleRules would be a duplicate that nothing
+   references and that the publish-time tree shake would drop anyway. If the
+   plugin's CSS changes, change this block to match — the plugin is the source.
+   --------------------------------------------------------------------------- */
+.wz-embed{position:relative;width:100%;max-width:100%}
+.wz-embed>iframe{display:block;width:100%;border:0}
+.wz-embed[data-wz-embed="ratio"]>iframe{height:100%;position:absolute;inset:0}
+.wz-embed[data-wz-embed="ratio"]{aspect-ratio:var(--wz-embed-ratio,16/9)}
 
 /* ===== css/52-emergency-notice.css ===== */
 /* A notice, not a card. It carries a heavier left rule and its own ground so
@@ -1409,7 +1712,14 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 /* A diagram or a render on the cream, not a photograph cropped to the box. */
 .mz .mz-fig.mz-plain{background:var(--bg-3)}
 .mz .mz-fig.mz-plain img{object-fit:contain;padding:clamp(.9rem,1.8vw,1.6rem)}
+/* BugHerd #20. A `.mz-wide` is 16/9 across two columns, so it is taller than the
+   4/3 single-column figure beside it and row one ends in a hole (163px at 1440).
+   Dropping the aspect-ratio lets the grid's own `align-self:stretch` size that
+   figure from the row. Above 720 only: below it the mosaic is two columns and
+   the figure can end up alone in a row, where an auto row measured from an
+   absolutely-positioned image is 0px and the picture would disappear. */
 @media(min-width:720px){
+  .mz .mz-fig.mz-fill{aspect-ratio:auto;height:100%}
   .mz.mz-3{grid-template-columns:repeat(3,1fr)}
   .mz.mz-4{grid-template-columns:repeat(4,1fr)}
 }
@@ -1420,13 +1730,29 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 }
 
 /* ---------- full-bleed band ---------- */
+/* BugHerd #13, second pass. The height caps at 34rem but the width did not, so
+   the wider the screen the worse `cover` cropped: at 2560 the band was 2545x680
+   (3.74:1) against a 1.50:1 photograph and showed 36% of its height. Capping the
+   WIDTH holds the frame at roughly the 1440 proportion however large the display
+   gets. 1800 is deliberately wider than `--maxw` (1560) so the band still reads
+   as breaking out of the content column, and below 1800 it fills the viewport on
+   its own — no breakpoint needed. */
 .mband{position:relative;overflow:hidden;height:clamp(18rem,42vw,34rem);
+  max-width:1800px;margin-inline:auto;
   display:grid;align-items:end;background:var(--ink-900)}
 .mband .mband-fig{position:absolute;inset:0;margin:0;overflow:hidden}
 .mband .mband-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
   will-change:transform}
 /* The scrim is the whole reason a line of text can sit on any of the 370 source
    photographs without being vetted one at a time. */
+/* BugHerd #13. The band is 2.6:1 and the photograph is 1.5:1, so `cover`
+   throws away 43% of the source height and the [data-drift] parallax
+   (scale 1.12, yPercent -6..6) takes another 11% and slides the window inside
+   it. Centred, /patient-stories started below the subject's eyes. Anchoring the
+   crop to the top of the source keeps the whole head in frame at both ends of
+   the drift, at every width. Opt-in per figure: the other four bands are
+   correctly centred. */
+.mband .mband-fig.mband-top img{object-position:50% 0}
 .mband .mband-fig::after{content:"";position:absolute;inset:0;
   background:linear-gradient(transparent 30%,var(--scrim))}
 .mband .mband-in{position:relative;z-index:1;padding:0 var(--gutter) clamp(1.8rem,4vw,3rem);
@@ -1520,29 +1846,389 @@ footer.foot .foot-base{margin-top:clamp(2.5rem,5vw,4rem);padding-top:1.5rem;
 @media(min-width:700px){ .bl-grid{grid-template-columns:repeat(2,1fr)} }
 @media(min-width:1080px){ .bl-grid{grid-template-columns:repeat(3,1fr)} }
 
-/* --- a single post ---
-   One column, measured for reading. The body arrives from the CMS as plain
-   h2/h3/p/ul, so it is styled by element rather than by class: nothing in the
-   entry markup carries one, and it is not ours to rewrite per post. */
-.bl-post{max-width:74ch;margin-inline:auto}
-.bl-post .bl-when{display:block;margin-bottom:1rem}
-/* --h1 is not a token in this system and never has been, so this declaration
-   was invalid and the headline fell back to the inherited body size: every one
-   of the 43 published articles rendered its title SMALLER than its own h2s.
-   Sized off the same ramp the article's h2 uses, one step up, because the
-   headline sits in the 74ch reading column and not in a page hero. */
-.bl-post h1{font-family:var(--f-display);font-size:calc(2.6rem * var(--t-sm));font-weight:500;
-  line-height:1.14;max-width:20ch;margin-bottom:clamp(1.5rem,3vw,2.25rem)}
+/* --- index: search bar + topic filter ----------------------  BugHerd pin #10
+   Client, pinned on `section#articles > div.wrap.section`:
+   "Here we should have a search bar and a filter per topic".
+
+   All 43 rows are already in the DOM — the loop is `limit: 60`,
+   `pagination: 'none'` — so this filters what is on the page. No fetch, no
+   spinner, and nothing added to a site that already has one measured mobile
+   performance problem. No library either; it is ~90 lines of DOM work.
+
+   HIDING IS THE `hidden` ATTRIBUTE, NEVER A STATE CLASS. Two reasons, and the
+   second is the one that eats sessions:
+     1. `.bl-card` sets `display:grid`, which outranks the UA sheet's
+        `[hidden]{display:none}` — the same reason `.ga-item[hidden]` exists
+        for the gallery filter. So the rule has to be written out.
+     2. An attribute selector carries no CLASS TOKEN, so the publish tree-shake
+        (`styleRuleTreeShake.ts`) has nothing to purge. A `.is-hidden` class
+        rule that no node references is a *known class name that is unused*,
+        and that takes down every ambient rule mentioning it — which is exactly
+        how `.drawer.open` disappeared.
+
+   AND IT IS NOT `position:sticky`. ScrollSmoother wraps the page in
+   `#smooth-wrapper{position:fixed;overflow:hidden}`, so sticky is inert on this
+   site; it would need a ScrollTrigger pin. A filter row that follows you down
+   43 cards is also more furniture than help, so: it scrolls away. */
+.bl-filter{display:grid;gap:clamp(.9rem,2vw,1.4rem);grid-template-columns:1fr;
+  align-items:end;padding-bottom:clamp(1.25rem,2.5vw,1.75rem);
+  border-bottom:1px solid var(--line)}
+.bl-f-field{display:grid;gap:.5rem;min-width:0}
+.bl-f-label{font-family:var(--f-body);font-size:.66rem;letter-spacing:.16em;
+  text-transform:uppercase;font-weight:600;color:var(--fg-soft)}
+/* `max(1rem,16px)`, not `1rem`. This site's root font-size is FLUID
+   (00-fluid-root.css), so 1rem computes to 13.76px at a 390px viewport — and
+   iOS Safari zooms the whole page in when you focus a control whose computed
+   font-size is under 16px, which on a filter bar means the reader is thrown
+   sideways the moment they tap the search box. Measured, not assumed.
+   (`.ct-form input` has the same `1rem` and the same defect; that is the
+   contact form's to fix, but there is no reason to copy it here.) */
+.bl-f-input,.bl-f-select{font:inherit;font-size:max(1rem,16px);font-weight:400;color:var(--fg);
+  background:var(--card);border:1px solid var(--line-strong);border-radius:0;
+  padding:.85rem 1rem;width:100%;transition:border-color .35s}
+.bl-f-input:focus,.bl-f-select:focus{border-color:var(--rule);outline:none}
+.bl-f-input:focus-visible,.bl-f-select:focus-visible{outline:2px solid var(--focus);
+  outline-offset:2px}
+.bl-f-input::placeholder{color:var(--fg-faint)}
+/* Two-layer arrow, copied from `.ct-form select` so the two controls on this
+   site agree. It is written as the `background-image` LONGHAND on purpose: the
+   `background` shorthand is the one happy-dom flattens to its last layer, and
+   that is how the hero lost two of its three gradients. */
+.bl-f-select{appearance:none;padding-right:2.6rem;
+  background-image:linear-gradient(45deg,transparent 50%,var(--fg-soft) 50%),
+    linear-gradient(135deg,var(--fg-soft) 50%,transparent 50%);
+  background-position:calc(100% - 1.15rem) 55%,calc(100% - .8rem) 55%;
+  background-size:6px 6px,6px 6px;background-repeat:no-repeat}
+/* `role="status"`; it announces the result count on every change. */
+.bl-f-count{margin:0;font-size:.72rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-faint);align-self:end;padding-bottom:.95rem}
+@media(min-width:700px){ .bl-filter{grid-template-columns:minmax(0,2fr) minmax(0,1fr) auto} }
+
+/* The topic, rendered per card from the row's `topic` cell. `:empty` covers a
+   row nobody has classified — the token resolves to "" rather than to the
+   placeholder text, so an unfilled row collapses instead of showing a gap. */
+/* A <span>, not a <p>. `.bl-card p` is (0,1,1) and would outrank a (0,1,0)
+   `.bl-topic` on colour and weight; and it keeps `card.querySelector('p')` in
+   blog-filter.js meaning the excerpt and nothing else. */
+.bl-topic{font-family:var(--f-body);font-size:.64rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;color:var(--accent);margin:0}
+.bl-topic:empty{display:none}
+
+.bl-card[hidden]{display:none}
+.bl-grid[hidden]{display:none}
+/* Only while the filter is NARROWING the set (JS sets the attribute when
+   visible < total). `.bl-grid`'s hairlines are its own background showing
+   through a 1px gap, so a filtered row of one or two in a three-track grid
+   would paint `--line` across the empty tracks. Dropping the background and
+   opening the gap turns the survivors into tiles instead. Typing a character
+   that still matches all 43 does not trigger it, so the page does not reflow
+   under the reader for nothing. */
+.bl-grid[data-bl-active]{background:transparent;gap:clamp(.75rem,1.6vw,1.25rem)}
+
+/* Reserve height so shrinking the result set cannot pull the footer up into
+   the fold. `.bl-grid` is the wrong place for it — its background IS the
+   hairline colour, so a min-height there paints a grey slab. */
+#articles .wrap.section{min-height:clamp(26rem,58svh,40rem)}
+
+.bl-empty{display:grid;gap:.9rem;justify-items:start;max-width:54ch;
+  padding:clamp(2rem,5vw,3.5rem) 0}
+.bl-empty[hidden]{display:none}
+.bl-empty h3{font-family:var(--f-display);font-size:calc(1.35rem * var(--t-sm));
+  font-weight:500;line-height:1.28;margin:0}
+.bl-empty p{color:var(--fg-body);font-weight:300;font-size:.94rem;line-height:1.7;margin:0}
+/* Not `.btn`: `.btn` slides a `::after` panel up on hover and relies on a
+   `<span>` wrapper to keep its label above it (`.btn>span{z-index:1}`), and
+   Instatic's `base.button` emits `props.label` with no wrapper at all. Same
+   micro-link treatment as `.bl-more` instead, which needs no inner element. */
+.bl-clear{display:inline-flex;align-items:center;gap:.6rem;margin-top:.35rem;
+  font-family:var(--f-body);font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;
+  font-weight:600;color:var(--accent);background:none;border:0;padding:0;cursor:pointer}
+.bl-clear::after{content:"";display:block;width:18px;height:1px;background:var(--rule);
+  transition:width .4s cubic-bezier(.22,1,.36,1)}
+.wz-fine .bl-clear:hover::after{width:38px}
+.bl-clear:focus-visible{outline:2px solid var(--focus);outline-offset:3px}
+/* --- end of the pin #10 block ---
+   push-posts-filter.mjs slices between this marker and its opening one, and
+   upserts every rule it finds in between. Anything written BELOW this line is
+   somebody else's and that script will not touch it. Pin #9 appended
+   `.bl-rel-fig` rules here while this was being written; the first version of
+   the slice ended at "A SINGLE POST" and swept them up. Keep new /posts index
+   rules ABOVE the marker only if they are pin #10's. */
+
+/* --- INDEX CARD IMAGE ----------------------------------- BugHerd pin #9 ---
+   "Here we should display the main image of the blog post."
+
+   The index is ONE `base.loop` whose single child is `article.bl-card`, so all
+   43 cards render from one node with one set of props. The thumbnail is
+   `{currentEntry.featuredMediaPath}` — the same field the article hero and the
+   related strip already read, resolved per row by the loop
+   (`src/core/loops/sources/dataRows.ts`), which also means the publisher's
+   media pre-pass finds it and the img ships with srcset, sizes, intrinsic
+   width/height and the library's alt text.
+
+   THERE IS NO SECOND THUMBNAIL STYLE HERE ON PURPOSE. The figure carries
+   `.bl-rel-fig`, the class the article page's related strip already uses:
+   same 16/10 box, same `object-fit:cover`, same `--mist` placeholder, same
+   hover scale, no rounding. Only the hover SELECTOR differs, because on the
+   index the hovered ancestor is `.bl-card` and not `.bl-rel-card`. The name
+   says "related" for historical reasons; read it as "the blog thumbnail".
+
+   No `loading:eager` / `fetchpriority:high` on the first row, and it is not an
+   oversight. A loop cannot express per-index props — `renderLoop` round-robins
+   over the loop's CHILDREN, so N children give N alternating variants, not a
+   hook on item 0. And this page's LCP image is already the `.pg-hero` photo,
+   which carries the page's one `fetchpriority="high"`; a second would compete
+   with it (see perf-image-priority.mjs). Lazy is both the only expressible
+   answer and the correct one. */
+.wz-fine .bl-card:hover .bl-rel-fig img{transform:scale(1.045)}
+/* The deliberate no-image case, and it needs no JS. `base.image.render` returns
+   `{html:''}` when `src` is empty, and `base.link` joins its children with '',
+   so a row with no `featuredMedia` publishes a genuinely EMPTY `<a>` rather
+   than a broken img — `:empty` matches it exactly and hides it before first
+   paint, with no flash of grey plate. This also covers the article page's
+   related strip, where `sections/blog-post.js` does the same removal at
+   runtime; belt and braces, and it works with JS off. */
+.bl-rel-fig:empty{display:none}
+
+/* =============================================================================
+   A SINGLE POST                                             BugHerd pin #7
+   Reworked 2026-08-27 to the layout of the reference the client attached (a
+   competitor's article page), in this site's own vocabulary rather than that
+   site's: full-bleed hero with the title over the photograph, a contents rail
+   on the left, the article in the middle, a persistent trust rail on the right,
+   an FAQ accordion and a related strip with thumbnails.
+
+   Nothing here invents a look. The hero is `.pg-hero`, which every interior
+   page already uses; the accordion is `.pk-faq`; the stars are `.rv-stars`;
+   the read-on links are `.pk-more`; the rail cards paint from the theme tokens
+   and nothing else. What changed is the ARRANGEMENT, which is what was asked.
+   ============================================================================= */
+
+/* --- the hero ---
+   `.pg-hero` sits OUTSIDE `.wrap` so the photograph is full bleed, which is why
+   the template moves it up to be a child of `.pk`. `.bl-ph` is the article
+   modifier: shorter than a landing-page hero, and titled at --h2 rather than
+   --d2 because an article title is a sentence and runs 12-16 words where a
+   landing headline runs four. */
+.pg-hero.bl-ph{min-height:clamp(380px,52svh,560px);
+  padding-top:clamp(7rem,13vw,9.5rem);padding-bottom:clamp(2rem,4.5vw,3.25rem)}
+.pg-hero.bl-ph h1{font-size:var(--h2);max-width:22ch}
+.pg-hero.bl-ph .ph-in{gap:clamp(.9rem,2vw,1.4rem)}
+/* Filled by sections/blog-post.js from the date inside the entry body -- there
+   is no date FIELD on the posts table (publishedAt is the import timestamp), so
+   the only true date is the one written into the article. Empty until it is
+   moved, and an article with no date simply has no line here.
+
+   Its OWN class, not `.bl-when`. On Instatic a node carries a class by
+   referencing a registry rule whose kind is `class`, and `.bl-when` is an
+   AMBIENT rule — ambient rules have a selector for a name, so a node pointing
+   at one emits `class=".bl-when"`. Rather than change the kind of a rule the
+   43 entry bodies already depend on, the hero brings its own. */
+.bl-ph-when{margin:0;font-size:.66rem;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--fg-soft)}
+.bl-ph-when:empty{display:none}
+/* A LIGHTER SCRIM THAN THE INTERIOR PAGES GET, and the reason is what the
+   photograph IS. On a service page the hero image is atmosphere behind a
+   headline, so `.pg-hero::after` drowns it to 94% cream and nobody misses it.
+   Here it is the article's FEATURED IMAGE — the one picture chosen for this
+   piece — and drowning it leaves the reader looking at a cream rectangle. The
+   copy column keeps its floor; the right of the frame lets the picture through.
+   Same three-layer structure and the same bled inset as the base rule, because
+   the hero-seam fix lives in that geometry and this must not disturb it. */
+.pg-hero.bl-ph::after{
+  background:
+    radial-gradient(80% 70% at 82% 40%,rgba(171,158,106,.16),transparent 64%),
+    linear-gradient(100deg,rgba(250,248,243,.97) 0%,rgba(250,248,243,.90) 34%,rgba(250,248,243,.30) 68%,rgba(250,248,243,.06) 100%),
+    linear-gradient(180deg,rgba(250,248,243,.80) 0%,rgba(250,248,243,.12) 32%,rgba(250,248,243,.88) 100%)}
+/* The base filter lifts brightness 6% to push a photo behind the heavy scrim.
+   With the lighter scrim above that reads as a washed-out picture. */
+.pg-hero.bl-ph .ph-bg img{filter:grayscale(.1) contrast(1.03) brightness(1)}
+
+/* --- the three columns ---
+   One column below 1280, three above it. 1280 rather than 1100 because the two
+   rails cost 30rem and the article still has to hold a readable measure: at
+   1100 the middle column lands around 50ch, which is worse than no rails. */
+.bl-post{max-width:none;margin-inline:0;display:grid;grid-template-columns:1fr;
+  gap:clamp(2.5rem,5vw,3.5rem)}
+.bl-main{min-width:0;max-width:74ch;display:grid;align-content:start}
+/* A rail with nothing in it is not a row. The contents rail is empty until the
+   script moves the list into it, and it stays empty on every article with fewer
+   than three headings. */
+.bl-rail{display:grid;gap:1px;background:var(--line);align-content:start}
+.bl-rail:empty{display:none}
+@media(min-width:1280px){
+  .bl-post{grid-template-columns:13rem minmax(0,66ch) 17rem;
+    column-gap:clamp(2rem,3.4vw,4rem);row-gap:clamp(2.5rem,5vw,4rem);
+    justify-content:center;align-items:start}
+  .bl-rail-l{grid-column:1;grid-row:1}
+  /* ScrollTrigger wraps a pinned element in a `.pin-spacer` of its own, and
+     THAT becomes the grid item in the rail's place. Placed explicitly so the
+     first column does not depend on auto-placement happening to pick the cell
+     the rail just vacated. */
+  .bl-post > .pin-spacer{grid-column:1;grid-row:1}
+  .bl-main{grid-column:2;grid-row:1;max-width:none}
+  .bl-rail-r{grid-column:3;grid-row:1}
+  .bl-related{grid-column:2;grid-row:2}
+  .bl-foot{grid-column:2;grid-row:3}
+}
+
+/* The article itself. The body arrives from the CMS as plain h2/h3/p/ul, so it
+   is styled by element rather than by class: nothing in the entry markup
+   carries one, and it is not ours to rewrite per post. */
 .bl-body{color:var(--fg-body);font-weight:300}
 .bl-body > * + *{margin-top:1.15rem}
+/* The title and date render in the HERO now. They still arrive inside the
+   outlet, so they are hidden here for the moment before the script lifts them
+   out -- CSS first so there is never a frame with the title in two places, and
+   the script then REMOVES rather than leaves a duplicate h1 in the document. */
+.bl-post .bl-body h1{display:none}
+.bl-post .bl-body .bl-when{display:none}
+/* `max-width:none` undoes `.pk h2{max-width:18ch}`, which the article body has
+   been inheriting since it moved under `.pk`: every heading in all 43 articles
+   was wrapping at 18 characters inside a 66ch column. A section heading in a
+   piece of prose is a sentence, not a display line. */
 .bl-body h2{font-family:var(--f-display);font-size:calc(1.6rem * var(--t-sm));font-weight:500;
-  color:var(--fg);line-height:1.3;margin-top:clamp(2rem,3.6vw,2.75rem)}
+  color:var(--fg);line-height:1.3;margin-top:clamp(2rem,3.6vw,2.75rem);max-width:none}
+/* An article that opens straight into a heading — several of the 43 do — should
+   not start with that heading's section gap above it. */
+.bl-body h2:first-child{margin-top:0}
 .bl-body h3{font-family:var(--f-display);font-size:calc(1.22rem * var(--t-sm));font-weight:500;
   color:var(--fg);margin-top:clamp(1.6rem,2.8vw,2.25rem)}
 .bl-body p{line-height:1.85}
 .bl-body ul{display:grid;gap:.6rem;padding-left:1.1rem;list-style:disc}
 .bl-body li{line-height:1.75}
 .bl-body a{color:var(--accent);text-decoration:underline;text-underline-offset:.18em}
-.bl-foot{margin-top:clamp(2.5rem,5vw,4rem);padding-top:clamp(1.5rem,3vw,2.25rem);
+.bl-foot{padding-top:clamp(1.5rem,3vw,2.25rem);
   border-top:1px solid var(--line);display:flex;flex-wrap:wrap;gap:1rem;
   justify-content:space-between;align-items:center}
+
+/* --- contents ---
+   Built by sections/blog-post.js from the headings the article actually has,
+   and only when there are three or more. Below 1280 it sits in the flow after
+   the first paragraph; above it, the script moves the same node into the left
+   rail. One list, two homes -- never a copy in each. */
+.bl-toc{border-top:1px solid var(--line);border-bottom:1px solid var(--line);
+  padding-block:clamp(1rem,2.2vw,1.4rem);margin-block:clamp(1.5rem,3vw,2rem)}
+.bl-toc b{display:block;font-family:var(--f-body);font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:.7rem}
+.bl-toc ol{display:grid;gap:.42rem;margin:0;padding:0;list-style:none;counter-reset:toc}
+.bl-toc li{counter-increment:toc;display:flex;gap:.7rem;align-items:baseline;line-height:1.45}
+.bl-toc li::before{content:counter(toc,decimal-leading-zero);flex:0 0 auto;
+  font-size:.68rem;color:var(--fg-faint);font-variant-numeric:tabular-nums}
+.bl-toc a{color:var(--fg);text-decoration:none;font-size:.92rem;
+  border-bottom:1px solid transparent;transition:border-color .3s}
+.wz-fine .bl-toc a:hover{border-bottom-color:var(--rule)}
+/* In the rail it is a column of its own, so it drops the horizontal rules and
+   the reading-column margins and takes the rail's hairline instead. The heading
+   the reader is inside is marked `.is-here` as they pass it. */
+.bl-rail .bl-toc{border:0;padding:0;margin:0;background:var(--bg)}
+.bl-rail .bl-toc ol{gap:0}
+.bl-rail .bl-toc li{padding-block:.55rem;border-top:1px solid var(--line)}
+.bl-rail .bl-toc li:first-child{border-top:0}
+.bl-rail .bl-toc a{font-size:.82rem;line-height:1.4;color:var(--fg-soft)}
+.bl-rail .bl-toc li.is-here a{color:var(--fg)}
+.bl-rail .bl-toc li.is-here::before{color:var(--accent)}
+
+/* --- the trust rail ---
+   Three cards, hairline-joined the way `.bl-grid` joins the Journal index the
+   reader just came from. Above 1280 it is the third column; below it the whole
+   rail moves under the article, which is why it is a normal grid item and never
+   a hidden one. */
+.bl-rc{background:var(--card);padding:clamp(1.1rem,1.8vw,1.35rem);
+  display:grid;gap:.6rem;align-content:start}
+/* `strong`, not `b`. On Instatic a text node's tag comes from a fixed
+   vocabulary — none|p|h1..h6|span|div|small|strong|em — and an invalid tag makes
+   the whole module fall back to its DEFAULTS, which is how two headings once
+   published as "Add your text here." while the stored props were correct. */
+.bl-rc strong{font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.18rem * var(--t-sm));line-height:1.3;color:var(--fg)}
+.bl-rc p{color:var(--fg-body);font-weight:400;font-size:.84rem;line-height:1.65;margin:0}
+.bl-rc blockquote{margin:0;color:var(--fg-body);font-weight:300;font-size:.86rem;line-height:1.7}
+.bl-rc cite{font-style:normal;font-size:.72rem;letter-spacing:.06em;color:var(--fg-soft)}
+.bl-rc .pk-more{margin-top:.2rem;justify-self:start}
+.bl-rc .rv-stars{font-size:.8rem}
+/* The portrait is a transparent cutout, not a photograph with a background, so
+   it gets the plate the home page gives it rather than a scrim caption over it
+   -- a scrim over transparency paints a grey rectangle. */
+.bl-rc-fig{position:relative;overflow:hidden;aspect-ratio:1/1;background:var(--bg-3);
+  margin:calc(-1 * clamp(1.1rem,1.8vw,1.35rem)) calc(-1 * clamp(1.1rem,1.8vw,1.35rem)) .35rem}
+.bl-rc-fig img{position:absolute;left:50%;bottom:0;transform:translateX(-50%);
+  height:100%;width:auto;max-width:none;object-fit:contain}
+/* The consult card. Dark, because the CTA on every other page of this site is
+   the one thing that changes ground. Both offices, each booking its own
+   calendar -- a single button here would send every reader to Alexandria. */
+.bl-rc-dark{background:var(--bg)}
+.bl-rc-off{display:flex;align-items:baseline;justify-content:space-between;gap:.75rem;
+  padding-top:.7rem;border-top:1px solid var(--line)}
+.bl-rc-off span{font-size:.7rem;letter-spacing:.06em;color:var(--fg-soft);line-height:1.4}
+.bl-rc-off a{font-size:.64rem;letter-spacing:.16em;text-transform:uppercase;font-weight:600;
+  color:var(--accent);white-space:nowrap;border-bottom:1px solid transparent;
+  transition:border-color .3s}
+.wz-fine .bl-rc-off a:hover{border-bottom-color:var(--rule)}
+
+/* --- the FAQ ---
+   Built by sections/blog-post.js, and only from headings that are QUESTIONS --
+   an article whose sections are statements gets no accordion. Each row carries
+   the opening of that section and a link into it rather than the whole section
+   again: the reference's accordion holds answers that exist nowhere else on its
+   page, and restating 2,000 words underneath themselves is not the same thing.
+   The same questions and their full answers go out as FAQPage JSON-LD, which is
+   what an FAQ block is really for. */
+.bl-faq{margin-top:clamp(2.5rem,5vw,3.5rem);padding-top:clamp(1.5rem,3vw,2.25rem);
+  border-top:1px solid var(--line)}
+.bl-faq > b{display:block;font-family:var(--f-body);font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:1rem}
+.bl-faq .pk-faq summary{font-size:calc(1.12rem * var(--t-sm))}
+.bl-faq .fa-body p{margin:0 0 .6rem}
+
+/* --- the consult block ---
+   Closes the article before the related strip. One action, the same one the
+   rest of the site asks for. */
+.bl-cta{margin-top:clamp(2.5rem,5vw,3.5rem);padding:clamp(1.6rem,3.4vw,2.4rem);
+  background:var(--bg-3);border:1px solid var(--line);
+  display:flex;flex-wrap:wrap;gap:1.25rem;align-items:center;justify-content:space-between}
+.bl-cta div{max-width:46ch}
+.bl-cta strong{display:block;font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.25rem * var(--t-sm));line-height:1.3;margin-bottom:.4rem}
+.bl-cta p{color:var(--fg-body);font-size:.92rem;line-height:1.65;margin:0}
+
+/* --- related ---
+   The reference leads each row with a thumbnail, so this does too: the loop
+   binds `{currentEntry.featuredMediaPath}`, the same field the hero reads.
+   Three across on a wide screen, a single stacked column on a phone. */
+/* No `margin-top`: `.bl-related` and `.bl-foot` are grid items of `.bl-post`
+   now, and the grid's own row gap already separates them. Keeping the margin as
+   well stacked the two and put 130px between the consult block and this strip. */
+.bl-related{padding-top:clamp(1.5rem,3vw,2.25rem);border-top:1px solid var(--line)}
+.bl-related > strong{display:block;font-family:var(--f-body);font-size:.7rem;letter-spacing:.18em;
+  text-transform:uppercase;font-weight:700;color:var(--accent);margin-bottom:1.25rem}
+.bl-rel-grid{display:grid;grid-template-columns:1fr;gap:1.5rem}
+@media(min-width:700px){ .bl-rel-grid{grid-template-columns:repeat(3,1fr)} }
+.bl-rel-card{display:grid;gap:.7rem;align-content:start}
+/* `max-width` here is a PERFORMANCE declaration, not a layout one, and it is
+   inert at every width this design produces. The publisher derives each image's
+   `sizes` from the layout (`core/publisher/sizesResolver.ts`) by walking the
+   ancestor chain for px `width` / `max-width` / padding — and on this site it
+   finds NOTHING: `.wrap`'s cap is `max-width:var(--maxw)`, every gutter and
+   card padding is a `clamp()`, and the resolver skips both, plus it bails out
+   of a `base.loop` grid's track maths by design. So it returns null and the
+   module falls back to `sizes="auto, 100vw"`. Chrome 121+ honours `auto` and
+   picks correctly; Safari and Firefox read 100vw and fetch the w2000 variant —
+   measured 238 KB against the 38.5 KB w640 they actually need, on every card.
+   One px `max-width` on a class the node carries is the only hook the resolver
+   reads, and 640px is 45px above the widest this figure can ever be (595.08px,
+   at a 699px viewport, one column: 699 - 2x27.96 gutter - 2x24 card padding).
+   If the blog index is ever made one column ABOVE ~700px, raise this or the
+   thumbnail will stop short of the card. */
+.bl-rel-fig{display:block;position:relative;overflow:hidden;aspect-ratio:16/10;background:var(--mist);
+  max-width:640px}
+.bl-rel-fig img{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;
+  transition:transform .8s cubic-bezier(.22,1,.36,1)}
+.wz-fine .bl-rel-card:hover .bl-rel-fig img{transform:scale(1.045)}
+/* The card's heading wraps the link, mirroring how the Journal index builds its
+   own loop items (`h2 > a`), so both grids share one markup shape. */
+.bl-rel-card h3{font-family:var(--f-display);font-weight:500;
+  font-size:calc(1.02rem * var(--t-sm));line-height:1.35;margin:0}
+.bl-rel-card h3 a{color:inherit;text-decoration:none;
+  border-bottom:1px solid transparent;transition:border-color .35s}
+.wz-fine .bl-rel-card h3 a:hover{border-bottom-color:var(--rule)}
