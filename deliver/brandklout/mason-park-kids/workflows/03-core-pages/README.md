@@ -3,7 +3,9 @@
 > [!IMPORTANT]
 > **Every page is a plain HTML file. Open `home/index.html` by double-clicking it.**
 > No server, no build step. Every path is relative, so it renders from `file://` exactly as
-> it renders on Instatic. `home/` is the site root: `home/index.html` is `/`,
+> it renders on Instatic, **and the navigation works from disk**: the links are root-relative
+> for Instatic, and on `file://` only, `site.js` rewrites each one to this page's own folder
+> depth and points it at the folder's `index.html`. `node .tmp/nav-probe.mjs <page>` proves it. `home/` is the site root: `home/index.html` is `/`,
 > `home/about-us/index.html` is `/about-us/`, `home/services/comprehensive-pediatric-dentistry/`
 > is that route.
 
@@ -53,6 +55,7 @@ The Asana brief is **Build New Mason Park Pediatric Site** `1218009803778905` â†
 | `.tmp/recompose-figures.py` | **The 2026-09-09 evening pass, as one readable plan.** Every image swap, every dropped, banded or side-by-side figure, and every invitation photograph, per page. `--dry-run` prints what it would do. Idempotent. |
 | `.tmp/get-album.mjs` | The practice's FRONT OF HOUSE from the client's own Google Photos album into `_album/`: the front desk, the waiting-room sofa, the gumball machine, the product shelf. Nothing clinical is taken from that album; its header says why. |
 | `.tmp/probe-stock.mjs` | Twelve Magnific candidates per search term, with preview URLs, so a contact sheet can be looked at BEFORE a credit is spent. Every slot bought on 2026-09-09 (evening) was chosen this way and is pinned by `id` in `get-stock.mjs`. |
+| `.tmp/nav-probe.mjs` | Opens a page over `file://`, checks every internal link resolves to a file on disk after `site.js` has rewritten it, and clicks through three of them. The review gate: if this fails, the client cannot click around. |
 | `.tmp/shoot-all.mjs`, `viewport-probe.mjs` | Full-page captures of all 57 pages into one folder, and viewport captures through a pinned scene. The first is how this pass found what the per-page gates could not; the second is how it told a pin spacer from a fault. |
 | `.tmp/upload-fonts.mjs` | The variable Fraunces and Nunito: `--fetch` downloads them into `_fonts/` and `home/assets/fonts/`, then a run uploads them and writes `font-map.json`. |
 | `.tmp/crop-probe.mjs`, `crop-all.mjs` | Does any heading lose ink to a clipping ancestor? Takes a file or a URL; `crop-all.mjs --live` sweeps the published site. |

@@ -106,13 +106,17 @@ Done locally, **not published**. Commit `e8f2e9ba` on `bk-mason-park-kids`, push
 | `node shot.mjs --only mobile` on financing, services, doctors, thank-you | 0px overflow, nothing unrevealed |
 | `node shoot-all.mjs` | all 57 captured and looked at, twice |
 | `python recompose-figures.py --dry-run` | 0 pages would change (idempotent) |
+| `node nav-probe.mjs` at three depths | 68 / 50 / 51 internal links, 0 bad; clicks through the masthead land |
 
 Images inside `<main>`: `waiting` on 0 pages (was 50); 23 new keys in the pool
 (14 stock, 9 album); `st-case`, `highfive` on 0 pages.
 
 ## Next
 
-1. **Client review** at `file://` — open `home/index.html` and any page; every path is relative.
+1. **Client review** at `file://` — open `home/index.html` and click around. Every path is
+   relative, and since `19fd1458`+1 the navigation works from disk too: `site.js` rewrites the
+   root-relative links on `file://` only (the client asked for this the same evening; a review
+   with dead links is not a review). `nav-probe.mjs` checks it at three depths.
 2. If approved: `node upload-media.mjs` (23 new keys), `node import-styles.mjs` (`site.css`
    changed — the overlap fix, `.is-top`, the sticky plate), `node import-pages.mjs`, publish,
    then `audit-live.mjs` at both widths and `crop-all.mjs --live`. `ship-payload.mjs` in the

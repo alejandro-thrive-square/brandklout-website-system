@@ -15,6 +15,29 @@
 
   var body = document.body;
 
+  // ------------------------------------------------------- file:// review
+  // Every internal link is root-relative (`/about-us/`), which is what
+  // Instatic serves. Opened from disk for a review, the browser resolves
+  // `/about-us/` against the drive root and every link is dead. On file://
+  // only, rewrite each one to a path relative to THIS page and point it at
+  // the folder's index.html, since a directory does not serve one from disk.
+  // The stylesheet's own href already says how far up the site root is
+  // (`assets/`, `../assets/`, `../../assets/`), so nothing is guessed.
+  // Inert on http(s): the branch never runs there. Added 2026-09-09 (evening).
+  if (location.protocol === "file:") {
+    var css = document.querySelector('link[rel="stylesheet"][href$="site.css"]');
+    var up = css ? css.getAttribute("href").replace(/assets\/site\.css$/, "") : "";
+    var links = document.querySelectorAll('a[href^="/"]');
+    for (var k = 0; k < links.length; k++) {
+      var href = links[k].getAttribute("href");
+      if (href.indexOf("//") === 0) continue;
+      var hash = "", q = href.indexOf("#");
+      if (q >= 0) { hash = href.slice(q); href = href.slice(0, q); }
+      if (href.charAt(href.length - 1) !== "/") href += "/";
+      links[k].setAttribute("href", up + href.slice(1) + "index.html" + hash);
+    }
+  }
+
   function first(sels) {
     for (var i = 0; i < sels.length; i++) {
       var el = document.querySelector(sels[i]);

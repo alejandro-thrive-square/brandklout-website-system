@@ -39,6 +39,7 @@ Run from `workflows/03-core-pages/.tmp/`. All of them are cheap; run them all.
 | `node shot.mjs <page>` | What does it look like at four widths, and which font is really painted? |
 | `node crop-all.mjs` / `--live` | Does any heading lose ink to a clipping ancestor? Walks `home/`, so it sweeps all 57. |
 | `node shoot-all.mjs ../home <dir>` then LOOK | Does every chapter hold together? The per-page gates cannot see a figure hanging alone; this can. Pinned scenes show as empty ground here and are fine: `viewport-probe.mjs` for those. |
+| `node nav-probe.mjs ../home/<page>/index.html` | Can the client click through the review from disk? Every internal link must resolve to a file, at every depth. |
 | `python recompose-figures.py --dry-run` | Is every picture still where the plan puts it? 0 pages should change. |
 | `node build-pages.mjs --list` | Which pages have a recipe. **Order is `build-pages` then `stamp` then `check`, and it does not commute.** |
 | `node diff-all.mjs` | Local against live, all eleven: head, structure, text, geometry. |
