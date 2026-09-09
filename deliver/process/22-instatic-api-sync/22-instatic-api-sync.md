@@ -75,7 +75,9 @@ node css-parity.mjs diff before after      # must report 0
 
 `insta-api.mjs` and this workflow's reasoning were reused on 2026-08-31 to put a seven-page site
 into a **fresh** Instatic instance for Stone Surgical Arts — see
-[`05-instatic-upload`](../../../stone-dental-implant-center/workflows/05-instatic-upload/05-instatic-upload.md).
+`21-instatic-upload` (on the `bk-stone` branch, at
+`deliver/brandklout/stone-surgical-arts/workflows/21-instatic-upload/`; it was `05-instatic-upload`
+until the 2026-09-04 renumber and is itself due for promotion into `deliver/process/`).
 Four things learned there belong here, because they are properties of the platform and not of that
 client:
 
@@ -252,4 +254,7 @@ because **this platform reports some write failures as prose with a 200**.
 - `.tmp/parity-pseudo-before-1440.json` / `.tmp/parity-pseudo-after-1440.json` — the 28-difference proof that only the two `::after` overlays moved
 
 ## Version Control
-Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). Scripts and `.md` are committed; `.tmp/` snapshots are lightweight and may be committed when useful. `.tmp/.session` holds a live session cookie and must never be committed.
+Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md). Scripts and `.md` are committed. **`.tmp/` is not** — this is shared tooling run against every
+Instatic client from whichever worktree is active, so a tracked artifact here is one client's
+output on a path every other client also writes to. `.tmp/.gitignore` ignores the whole folder.
+The cached session (`.tmp/.session-<host>`) holds a live cookie and must never be committed.

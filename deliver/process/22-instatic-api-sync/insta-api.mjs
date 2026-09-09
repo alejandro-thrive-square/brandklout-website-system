@@ -76,7 +76,7 @@ export const BASE = (process.env.INSTATIC_BASE_URL || 'https://encorercm.com').r
 // back to back kept evicting each other's session and re-hitting the login
 // rate limiter (5 failures locks the account).
 const TMP = join(HERE, '.tmp')
-const SESSION_FILE = join(TMP, `.session-${BASE.replace(/^https?:\/\//, '').replace(/[^a-z0-9.-]/gi, '_')}`)
+export const SESSION_FILE = join(TMP, `.session-${BASE.replace(/^https?:\/\//, '').replace(/[^a-z0-9.-]/gi, '_')}`)
 
 let cookie = null
 

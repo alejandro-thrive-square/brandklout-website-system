@@ -71,7 +71,7 @@ file.updatedAt = Date.now()
 const res = await saveShell(shell, seq)
 
 // Read back rather than trusting the write: this platform reports some failures as
-// a 200 with a prose body (see 15-instatic-api-sync.md).
+// a 200 with a prose body (see 22-instatic-api-sync.md).
 const { site: after } = await getSite()
 const written = (after.files ?? []).find((f) => f.path === assetPath)?.content ?? ''
 const ok = written === next
