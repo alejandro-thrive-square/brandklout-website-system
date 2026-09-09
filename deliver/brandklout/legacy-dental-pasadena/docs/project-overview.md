@@ -12,7 +12,7 @@
 | **Live site** | https://legacydentalpasadena.com/ — **already Webflow**, site `68e12d861f12c7f04a762a8e` |
 | **Staging** | https://legacy-dental.webflow.io (live, 200) |
 | **Offer routing** | Closest to `Webflow Improvements & Updates` (new pages on an existing Webflow site). Route run as `01` → `04` → `07` → `08`, matching the Mason Park / Grand Mission LP-campaign precedent |
-| **`process_baseline_commit`** | recorded at worktree dispatch — see `.claude/RUNBOOK.md` in `bk-legacy-dental` |
+| **`process_baseline_commit`** | recorded at worktree dispatch — see `docs/runbook/` in `bk-legacy-dental` (that worktree has no runbook yet) |
 | **Worktree** | `bk-legacy-dental` → this folder only |
 
 ## The brief, verbatim

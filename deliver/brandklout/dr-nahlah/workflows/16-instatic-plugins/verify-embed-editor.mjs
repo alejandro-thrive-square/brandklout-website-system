@@ -35,7 +35,7 @@ import fs from 'node:fs'
 import os from 'node:os'
 import path from 'node:path'
 import http from 'node:http'
-import { api, getSite, getPages, BASE } from '../15-instatic-api-sync/insta-api.mjs'
+import { api, getSite, getPages, BASE, SESSION_FILE } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
 const SLUG = 'plugin-embed-editor-test'
 const MODULE_ID = 'webzite.embed-origins.embed'
@@ -146,9 +146,7 @@ async function check() {
   /* The admin is behind the session cookie. `insta-api.mjs` keeps a live one on
      disk; reuse it rather than driving the login form (which is step-up
      protected and rotates the cookie out from under a second client). */
-  const sessionFile = path.resolve(
-    import.meta.dirname, '../15-instatic-api-sync/.tmp/.session')
-  const cookie = fs.readFileSync(sessionFile, 'utf8').trim()
+  const cookie = fs.readFileSync(SESSION_FILE, 'utf8').trim()
   const [name, ...rest] = cookie.split('=')
   await S('Network.setCookie', {
     name: name.trim(),

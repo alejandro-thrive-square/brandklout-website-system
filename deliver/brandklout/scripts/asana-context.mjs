@@ -46,6 +46,7 @@ export const CLIENT_TASKS = {
   // pull one pillar each, matching the client folder that owns it.
   'stone-med-spa': ['1217160668112180'],
   'stone-surgical-arts': ['1217160668112175'],
+  'institute-for-advanced-dentistry': ['1215476573810829', '1217929763942271'],
 }
 
 const TASK_FIELDS = [
