@@ -221,6 +221,68 @@ Both were cases of the published site being right:
   worktree's root a 252-character path arrives as 323 and fails as "no such
   file". `abspath` first, everywhere.
 
+## The 2026-09-09 pass, part two: the other 46 pages
+
+The client, later the same day: *"<https://mason-park-kids.up.railway.app/services/invisalign>
+This page has the old design. It does not have the updated nav bar or footer. Please make sure
+all of the pages have the updated new design."*
+
+**It was 46 pages, and the reason they had drifted is the reason nobody had noticed.**
+`stamp.mjs` is the single source of the chrome and `check.mjs` fails a page whose chrome has
+drifted, but both read `home/**/index.html`, and the 46 migrated pages were not in `home/`.
+They existed only as Instatic node trees. Every gate was honest about what it looked at, and
+what it looked at was a fifth of the site. `crop-all.mjs` was worse: it carried the eleven as a
+hard-coded array. **It walks `home/` now, and so should anything else you add.**
+
+### Getting the source back
+
+| Step | What it does |
+| :--- | :--- |
+| `node harvest-migrated.mjs` | Fetches all 46 live routes and writes `migrated-content.json`: per page, the eyebrow, the h1, the breadcrumb, and the prose as numbered blocks. A small tokenizer, not a regex, not a dependency. |
+| `.tmp/recipes/*.mjs` | 46 recipes in four files. Each names the page's chapters and, per chapter, which blocks fill it. `b: [0, 1]` is this page's blocks verbatim; `b: ['other-slug', 3]` reaches into another page's, which is how a treatment page borrows the answer that lives on the FAQ page. |
+| `node build-pages.mjs` | Recipe + harvest -> `home/<slug>/index.html`. **Writes once and gets out of the way**: the output is the source from then on, edited in place like the eleven. A marker inside `<main>` makes it refuse to overwrite a hand-edited page without `--force`. |
+
+Twelve chapter kinds, all built from vocabulary already in `site.css`: `prose` (the sticky-head
+long-form frame), `cards`, `overlap`, `questions`, `qa` (the open two-column Q and A),
+`table`, `links`, `statement`, `figures`, `path`, `band`, `invite`.
+
+```bash
+node build-pages.mjs && node stamp.mjs && node check.mjs   # and it does not commute
+```
+
+`build-pages.mjs` emits a page with no chrome at all. Run `check.mjs` before `stamp.mjs` and
+you get one error per page that means nothing.
+
+### What the harvest turned up, which was not a design problem
+
+- **Both topic FAQ pages had lost their QUESTIONS.** The 02 migration imported the answers
+  intact; the WordPress accordion kept its question text in a widget the mirror never rendered.
+  Live, `/pediatric-dentistry-faqs-katy-tx/` is 30 orphaned answers under six headings. Every
+  question is restored to its own answer in the recipes, sitting under it where the two can be
+  checked against each other.
+- **The adult practice was on six pages.** Dr. William Sung on `/technology/` and
+  `/town-resource/`; the parent's phone number on `/virtual-consultation/`; "BMason Park Family
+  Dental" and a services list with teeth whitening and wisdom tooth removal on
+  `/town-resource/`; and `/faq-page/` was the parent's FAQ start to finish. Every re-attributed
+  sentence is written out in full in its recipe so the change is visible there.
+- **`/accessibility-statement/` described an accessibility widget this site does not have.**
+  Replaced with what is true.
+- **`/toothpaste-chart/` was Lead Safe Mama LLC's article pasted in whole**, fundraising links
+  and reader numbers included. Now credited and linked rather than copied. **A client decision**
+  - see Open items.
+- `/privacy-policy/` still said the pages load typefaces from Google Fonts.
+
+### Twelve more stock frames
+
+Fourteen slots could not give 46 more pages a photograph each without `waiting` carrying nine of
+them. `st-case`, `st-field`, `st-sleep`, `st-floss`, `st-water`, `st-soda`, `st-tube`,
+`st-blocks`, `st-hands`, `st-window`, `st-laptop`, `st-park`: all objects and empty rooms bar
+`st-hands`, which is two hands and no face. **The treatment pages' hero frames are the
+practice's own clinical photographs**, which the policy in `get-stock.mjs` makes the only
+pictures allowed beside a treatment name; a page about braces is searched by the object a
+parent recognises, never by the appliance. Seven of the first twelve terms returned the wrong
+thing and were re-termed before the credits were spent. **Read `--dry-run` first.**
+
 ## Editing
 
 - **One page:** edit its `<main>` in `home/<slug>/index.html`, then `node .tmp/check.mjs` and
@@ -345,7 +407,10 @@ None of these blocks review. All of them need somebody other than an engineer.
 | 4 | **The membership plan's fee, and its brochure.** The plan page states what the practice published and no price; the brochure was never recovered. | The Join chapter says "ask the front desk". |
 | 5 | **The new patient forms URL.** The old site said forms could be completed online; no link was captured. | New Patients and Thank You say the front desk sends them. |
 | 6 | **Where should "write a review" go?** The reviews page sends people to the Google Maps listing. | A `g.page` review link is better. |
-| 7 | **Dr. William Sung.** Named on the old technology and special-needs pages; not on these eleven, which name Dr. Nguyen and Dr. Cho as the practice's own contact page does. | Confirm before the treatment pages are rebuilt. |
+| 7 | **Dr. William Sung.** RESOLVED 2026-09-09 by removal: he is the parent practice's dentist and every mention on this site was inherited from the 02 migration. Six pages cleaned. | Say so if he should in fact appear here. |
+| 10 | **The Lead Safe Mama chart.** A third party's copyrighted, watermarked lab chart, published on `/toothpaste-chart/` as if it were the practice's own. Now credited and linked instead. | If the practice has permission to host it, it goes back as an image with the credit. |
+| 11 | **`/faq-page/` lost its content.** Every answer on it was about the adult practice; it is now the pediatric FAQ hub. | The adult questions belong on `bestdentistinkatytx.com`. |
+| 12 | **`/services/cosmetic-dentistry/` no longer lists implants, veneers or whitening**, which the migrated page did. | A pediatric practice does not place implants in children. A line points at the parent practice for them. |
 | 8 | **Office hours.** Mon/Wed 9 to 6, Tue/Thu 8 to 5, Fri to Sun closed, as the old footer published them. | The schema, the top line, the footer and every invitation say so. |
 | 9 | **What the thank-you page follows.** It assumes a request form whose reply is a phone call. | If the form confirms by email, the first chapter changes. |
 

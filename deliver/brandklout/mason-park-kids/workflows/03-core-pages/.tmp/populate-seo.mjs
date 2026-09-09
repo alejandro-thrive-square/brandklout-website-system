@@ -62,23 +62,18 @@ const metaFrom = (file) => {
   return m ? decode(m[2]) : null;
 };
 
-/* The eleven core routes and the local file each one is built from.
-   The home page's row slug on this instance is "index", not "" - it is the
-   one route whose slug is not its path, and keying this table on "" left the
-   home page to fall through to a derived description. */
-const CORE = {
-  "index": "index.html",
-  "about-us": "about-us/index.html",
-  "our-doctors": "our-doctors/index.html",
-  "our-team": "our-team/index.html",
-  "our-services": "our-services/index.html",
-  "services/comprehensive-pediatric-dentistry": "services/comprehensive-pediatric-dentistry/index.html",
-  "new-patients": "new-patients/index.html",
-  "financing": "financing/index.html",
-  "dental-saving-plan": "dental-saving-plan/index.html",
-  "patient-reviews": "patient-reviews/index.html",
-  "thank-you": "thank-you/index.html",
-};
+/* The local file a live slug is built from.
+   2026-09-09: this was a hand-written table of the ELEVEN core routes, and the
+   other forty-six therefore fell through to the mirror or to a derived
+   sentence even after they had local source of their own. Every page has a
+   local file now, so the mapping is just the path - which also means a page
+   added later is picked up without anybody remembering to add a row.
+   The home page is the one route whose slug is not its path: its row slug on
+   this instance is "index", not "", and keying on "" left it deriving. */
+const localFile = (slug) =>
+  slug && slug !== "index"
+    ? path.join(HOME, ...slug.split("/"), "index.html")
+    : path.join(HOME, "index.html");
 
 const rows = (await getPages()).rows ?? [];
 console.log(`${BASE}: ${rows.length} page(s)`);
@@ -89,8 +84,9 @@ for (const r of rows) {
   let description = null;
   let source = null;
 
-  if (CORE[slug] !== undefined) {
-    description = metaFrom(path.join(HOME, ...CORE[slug].split("/")));
+  const local = localFile(slug);
+  if (fs.existsSync(local)) {
+    description = metaFrom(local);
     if (description) source = "local";
   }
   if (!description) {
