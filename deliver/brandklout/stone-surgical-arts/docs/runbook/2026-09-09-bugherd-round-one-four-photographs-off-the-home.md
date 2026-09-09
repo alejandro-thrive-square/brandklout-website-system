@@ -115,4 +115,4 @@ Gates, all clean:
 
 ## Version Control
 
-Tracked. Committed with the work it describes.
+Tracked. Committed with the work it describes (`b7e3295e`).
