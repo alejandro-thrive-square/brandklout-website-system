@@ -50,7 +50,7 @@
    NAMESPACE. `.veil_*` `.marquee_*` `.ghost_word` `.catalogue_*` `.strip_*`
    `.surgeon_*` (rewritten; the old rules are gone from 50-journey.css)
    `.standard_photo` `.concern_*` `.proof_*` (rewritten, same) `.neon_*`
-   `.ticker_*` `.arrival_inset` `.arrival_badge` `.arrival_scroll`, and two
+   `.ticker_*` `.arrival_badge` `.arrival_scroll`, and two
    attributes: `[data-j="mask"]` and `[data-parallax]`.
 
    MOTION RULES, unchanged from 50-journey.css: every hidden state is scoped
@@ -211,46 +211,6 @@
   color: var(--fg);
   line-height: 1;
 }
-.arrival_inset {
-  position: absolute;
-  left: calc(var(--arrival-frame) * -0.6);
-  bottom: calc(var(--arrival-frame) * 0.55);
-  z-index: 3;
-  width: clamp(11rem, 19vw, 17rem);
-  aspect-ratio: 4 / 5;
-  overflow: clip;
-  background: var(--stone-soft);
-  box-shadow: var(--shadow-card-hover);
-  border: 6px solid var(--ivory);
-}
-.arrival_inset img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 50% 15%;
-  display: block;
-}
-.arrival_inset-plate {
-  position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  padding: 0.6rem 0.8rem;
-  background: linear-gradient(180deg, rgba(39, 39, 39, 0) 0%, rgba(39, 39, 39, 0.72) 100%);
-  color: var(--white);
-  font-size: var(--size-text-tiny);
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  line-height: 1.4;
-}
-.arrival_inset-plate strong {
-  display: block;
-  font-family: var(--font-display);
-  font-size: var(--size-text-medium);
-  font-weight: 400;
-  letter-spacing: 0;
-  text-transform: none;
-}
 .arrival_scroll {
   position: absolute;
   left: var(--gutter);
@@ -285,25 +245,11 @@
   100% { transform: translateX(100%); }
 }
 @media (max-width: 991px) {
-  .arrival_inset {
-    left: auto;
-    right: calc(var(--gutter) * -0.5);
-    bottom: calc(var(--arrival-frame) * -0.8);
-    width: clamp(8rem, 30vw, 11rem);
-  }
   .arrival_scroll {
     display: none;
   }
   .arrival_copy {
     padding-top: var(--space-xxlarge);
-  }
-  /* The plate's eyebrow has no room in a 9rem frame. */
-  .arrival_inset-plate {
-    font-size: 0;
-    padding: 0.5rem 0.6rem;
-  }
-  .arrival_inset-plate strong {
-    font-size: var(--size-text-small);
   }
 }
 @media (prefers-reduced-motion: reduce) {

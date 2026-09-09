@@ -27,7 +27,7 @@ The build lives in `workflows/04-design/.tmp/surgical-arts/` — author in `site
 
 ## The gates
 
-All three pass as of `ce2a4f03` (2026-09-08). Run them in this order.
+All three pass as of the 2026-09-09 BugHerd round. Run them in this order.
 
 ```bash
 # 0. the journal data is sound, before anything is built from it
@@ -52,8 +52,14 @@ failure — do not read the tail of the report and panic, as a previous session 
 
 `compare-live.mjs` **with scripts off is the gate.** `--runtime-layout` measures geometry with
 scripts on and reports a known platform condition on every prose-heavy page: it is a diagnostic.
-See trap 27. `--shots` still crashes on a full run (pages are never closed); use it a page at a
-time.
+See trap 27. **`--shots` survives a full run now** — `capture()` closes both pages in a `finally`,
+so one slow screenshot no longer leaks its pair and compounds into `Page.captureScreenshot timed
+out`. A full 52-page run takes well over ten minutes; background it.
+
+**One finding on `index` naming `is-* classes` / `is-current` is a race, not a defect.** It is the
+IntersectionObserver in `surgeon()` picking a different `.surgeon_step` in the local and live
+captures. `.surgeon_step` is the only `is-current` owner on the home page; re-run
+`compare-live.mjs index` and it comes back clean. A finding naming any other class there is real.
 
 ## Traps
 
@@ -77,8 +83,6 @@ More broadly: **a lot of `.tmp/` is untracked or gitignored** (`*.woff2`, `*.png
 
 ## Next
 
-- `capture()` in `compare-live.mjs` needs a `pg.close()` so `--shots` survives a full sixteen-route
-  run.
 - **BugHerd is GONE, removed 2026-09-09, and must not be re-added as a script.** It could never
   have worked: Instatic publishes `script-src 'self'; frame-src 'none'`, which blocks both the
   bugherd.com script and the sidebar's iframe, whether the tag sits in the head or is injected at
@@ -87,6 +91,11 @@ More broadly: **a lot of `.tmp/` is untracked or gitignored** (`*.woff2`, `*.png
   it applies to **any** third-party script proposed next — analytics, chat, heatmaps.
 - The journal has had no client review pass, and cannot have one through an in-page review tool on
   this instance. Use the BugHerd browser extension, or have Instatic relax the CSP.
+- **The BugHerd board is alive and readable even though the widget is gone.** The client pins
+  through the browser extension; read the board over the API with the `BUGHERD` key in
+  `~/.webzite/.env` (a personal API key, Basic `<key>:x`), project **539158**. The first round —
+  four photographs off the home page — was applied and published on 2026-09-09. The mechanics, and
+  the two things that waste an hour the first time, are in trap 29.
 
 ## Version Control
 

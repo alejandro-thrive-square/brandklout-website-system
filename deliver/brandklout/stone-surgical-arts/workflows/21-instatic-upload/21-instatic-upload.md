@@ -777,6 +777,32 @@ next `publish()` regenerates it.
 Older Instatic instances emit no CSP at all (`westlaimplants.com` and `novismilerogers.com` serve
 none), so a script that works on an older client site is no evidence it will work here.
 
+**The review round still happens, and the feedback is still readable from here.** Removing the tag
+removed the on-page sidebar, not the board. The client pins through the BugHerd **browser
+extension**, and the board is read over the API with the `BUGHERD` key in `~/.webzite/.env` — that
+key is a personal **API** key, not the public board key, and it authenticates as HTTP Basic
+`<key>:x`. Stone is project **539158**:
+
+```bash
+node -e 'const fs=require("fs");
+const key=(fs.readFileSync(process.env.USERPROFILE+"/.webzite/.env","utf8").match(/^BUGHERD=(.*)$/m))[1].trim();
+const auth="Basic "+Buffer.from(key+":x").toString("base64");
+fetch("https://www.bugherd.com/api_v2/projects/539158/tasks.json?per_page=100",{headers:{Authorization:auth}})
+  .then(r=>r.json()).then(j=>console.log(j.tasks.map(t=>t.id+" #"+t.local_task_id+" "+t.description).join("
+")))'
+```
+
+Two things about that API cost time the first time:
+
+- **The list endpoint is not enough.** `tasks.json` returns the description and nothing that says
+  *what was pinned* — no `url`, no `selector_info`, no `screenshot_url`. Fetch each task on its own
+  to get the CSS path and the `<img src>` under the pin, which is what actually identifies the
+  element.
+- **The single-task endpoint takes the global `id`, not `local_task_id`.** `tasks/1.json` is a
+  404 even though the board calls that task #1; `tasks/31030130.json` is the same task and returns
+  everything. `PATCH` the same URL with `{"task":{"status_id":<id>}}` to move it to Done — read
+  `columns.json` for the board's status ids rather than guessing.
+
 
 ## Output Artifacts
 

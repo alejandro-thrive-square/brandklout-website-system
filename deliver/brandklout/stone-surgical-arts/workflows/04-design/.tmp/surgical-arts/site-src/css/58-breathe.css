@@ -94,9 +94,6 @@
 }
 
 /* --- 3. frames ------------------------------------------------------------ */
-.arrival_inset {
-  width: clamp(12rem, 22vw, 20rem);
-}
 .strip_tile {
   height: clamp(14rem, 34vh, 24rem);
 }
@@ -157,7 +154,6 @@
 .team_card img,
 .place_media img,
 .why_photo img,
-.arrival_inset img,
 .catalogue_media img,
 .proof_media img {
   transition: transform 1.4s var(--ease-settle);

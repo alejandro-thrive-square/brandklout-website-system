@@ -1099,21 +1099,21 @@
     if (first) activate(first);
   }
 
-  /* --- 03 the surgeon's frames ---------------------------------------------
-     The step in the reader's eyeline decides which portrait is showing. */
+  /* --- 03 the surgeon's steps ----------------------------------------------
+     The step in the reader's eyeline is the one lit; the others dim. The
+     portrait no longer changes with it. It used to cross-fade three frames,
+     and the client called that off (BugHerd #4, 2026-09-09): "Let's just have
+     the first photo of Dr. Stone only. We don't need to switch photos. That
+     animation, I don't think it's good for UX." So the figure now holds one
+     image, marked .is-active in the markup, and nothing here touches it. */
   function surgeon() {
     var root = $(".surgeon_component");
     if (!root) return;
     var steps = $$(".surgeon_step", root);
-    var frames = $$(".surgeon_frames img", root);
-    if (!steps.length || !frames.length) return;
+    if (!steps.length) return;
     var show = function (step) {
-      var key = step.getAttribute("data-frame");
       steps.forEach(function (s) {
         s.classList.toggle("is-current", s === step);
-      });
-      frames.forEach(function (f) {
-        f.classList.toggle("is-active", f.getAttribute("data-frame") === key);
       });
     };
     show(steps[0]);
