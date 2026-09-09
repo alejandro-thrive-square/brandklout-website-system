@@ -7,6 +7,25 @@ const minutes = p => Math.max(1, Math.ceil([p.intro, ...p.sections.flatMap(s => 
 const photo = (p, eager = false) => `<img class="journal_image${p.image === 'gen-surgical-loupes.webp' ? ' is-instruments' : ''}" src="assets/${p.image}" alt="${esc(p.alt)}" width="${media[p.image]?.width || 1200}" height="${media[p.image]?.height || 1600}" ${eager ? 'fetchpriority="high"' : 'loading="lazy"'}>`;
 const meta = p => `<p class="journal_meta"><span>${esc(p.category)}</span><span>${minutes(p)} min read</span></p>`;
 const card = p => `<article class="journal_card"><a class="journal_card-link" href="${p.slug}.html"><div class="journal_card-media">${photo(p)}</div><div class="journal_card-copy">${meta(p)}<h3 class="journal_card-title">${esc(p.title)}</h3><p class="journal_excerpt">${esc(p.excerpt)}</p><span class="journal_read">Read article <span aria-hidden="true">↗</span></span></div></a></article>`;
+
+/* "Keep reading" used to be every other article, which read as a considered
+   choice while there were three of them and as a sitemap once there were
+   thirty-nine. Two, preferring the same category and falling back to the rest,
+   newest first. Sorted rather than sampled so a rebuild is reproducible. */
+/* The date the journal was last revised, in both the visible byline and the
+   BlogPosting schema. One constant, because these two drifted apart the first
+   time one of them was edited. */
+const UPDATED_ISO = '2026-09-09';
+const UPDATED_LABEL = 'September 9, 2026';
+
+const RELATED_COUNT = 2;
+const byNewest = (a, b) => (a.date < b.date ? 1 : a.date > b.date ? -1 : a.slug < b.slug ? -1 : 1);
+export const related = p => {
+  const others = posts.filter(r => r.slug !== p.slug);
+  const sameCategory = others.filter(r => r.category === p.category).sort(byNewest);
+  const rest = others.filter(r => r.category !== p.category).sort(byNewest);
+  return [...sameCategory, ...rest].slice(0, RELATED_COUNT);
+};
 export const BLOG_PAGES = [{slug:'blog',src:'blog',photoHero:false,motion:true}, ...posts.map(p=>({slug:p.slug,src:p.slug,photoHero:false,motion:true}))];
 export function blogBody(slug) {
   if(slug === 'blog') {
@@ -28,7 +47,7 @@ export function blogBody(slug) {
   return `<article class="journal_page journal_article">
     <header class="journal_article-head padding-global"><div class="container-large">
       <a class="journal_back" href="blog.html">← Back to the journal</a>${meta(p)}<h1 class="journal_article-title">${esc(p.title)}</h1><p class="journal_deck">${esc(p.excerpt)}</p>
-      <div class="journal_byline"><span>Stone Surgical Arts</span><span>Originally published ${p.dateLabel}</span><span>Updated September 8, 2026</span></div>
+      <div class="journal_byline"><span>Stone Surgical Arts</span><span>Originally published ${p.dateLabel}</span><span>Updated ${UPDATED_LABEL}</span></div>
     </div></header>
     <div class="padding-global"><div class="container-large journal_article-cover">${photo(p,true)}<p class="journal_caption">Perspective from Stone Surgical Arts</p></div></div>
     <div class="journal_reading padding-global"><div class="container-large journal_reading-grid">
@@ -39,10 +58,15 @@ export function blogBody(slug) {
         <a class="journal_read" href="${p.relatedTreatment.href}">${esc(p.relatedTreatment.label)} <span aria-hidden="true">↗</span></a>
       </div>
     </div></div>
-    <section class="journal_related padding-global"><div class="container-large"><div class="journal_section-heading"><h2>Keep reading</h2><a class="journal_back" href="blog.html">View all articles ↗</a></div><div class="journal_grid">${posts.filter(r=>r.slug!==p.slug).map(card).join('')}</div></div></section>
+    <section class="journal_related padding-global"><div class="container-large"><div class="journal_section-heading"><h2>Keep reading</h2><a class="journal_back" href="blog.html">View all articles ↗</a></div><div class="journal_grid">${related(p).map(card).join('')}</div></div></section>
   </article>`;
 }
 export function addBlogSeo(seo) {
   seo.pages.blog = {title:'The Journal | Stone Surgical Arts',description:'Thoughtful guides to facial aesthetics, cosmetic surgery and the questions to bring to a consultation at Stone Surgical Arts.',schema:{'@type':'Blog',name:'The Stone journal',url:seo.site.origin+'/blog'}};
-  for(const p of posts) seo.pages[p.slug] = {title:({'types-of-plastic-surgery':'Types of Plastic Surgery','dermal-fillers-vs-botox':'Dermal Fillers vs. Botox'}[p.slug] || p.title)+' | Stone Surgical Arts',description:p.excerpt,ogType:'article',schema:{'@type':'BlogPosting',headline:p.title,description:p.excerpt,datePublished:p.date,dateModified:'2026-09-08',author:{'@type':'Organization',name:'Stone Surgical Arts'},publisher:{'@id':seo.site.origin+'/#practice'},mainEntityOfPage:seo.site.origin+'/'+p.slug,image:seo.site.origin+'/assets/'+p.image}};
+  /* The <title> is the post title plus a 22-character suffix, and audit.mjs
+     warns over 65. A post whose headline does not fit carries its own
+     `seoTitle`; this used to be an inline map of two slugs, which did not
+     survive the article count going from three to thirty-nine. The headline
+     on the page and in the schema stays the full one either way. */
+  for(const p of posts) seo.pages[p.slug] = {title:(p.seoTitle || p.title)+' | Stone Surgical Arts',description:p.excerpt,ogType:'article',schema:{'@type':'BlogPosting',headline:p.title,description:p.excerpt,datePublished:p.date,dateModified:UPDATED_ISO,author:{'@type':'Organization',name:'Stone Surgical Arts'},publisher:{'@id':seo.site.origin+'/#practice'},mainEntityOfPage:seo.site.origin+'/'+p.slug,image:seo.site.origin+'/assets/'+p.image}};
 }

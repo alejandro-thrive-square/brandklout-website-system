@@ -7,6 +7,7 @@ import path from 'node:path';
 import puppeteer from 'puppeteer-core';
 import { fileURLToPath } from 'node:url';
 import { posts } from './blog-data.mjs';
+import { related } from './blog-render.mjs';
 const HERE = path.dirname(fileURLToPath(import.meta.url));
 const ROOT = path.resolve(HERE, '../final-site');
 const OUT = path.resolve(HERE, '../../blog-qa');
@@ -50,13 +51,15 @@ try {
       if(width<992){await page.click('.navbar_burger');await page.waitForSelector('.drawer_component.is-open');}
       const selector=width<992?'.drawer_nav a[href*="blog"]':'.navbar_menu a[href*="blog"]';
       await page.focus(selector);await Promise.all([page.waitForNavigation({waitUntil:'networkidle0'}),page.keyboard.press('Enter')]);assert.equal(new URL(page.url()).pathname,new URL(url('blog')).pathname);
-      assert.equal(await page.$$eval('.journal_card',cards=>cards.length),2);
+      // The overview lists every article except the featured one. Derived, not
+      // hard-coded: this assertion said 2 until the journal went from 3 to 39.
+      assert.equal(await page.$$eval('.journal_card',cards=>cards.length),posts.length-1);
       await Promise.all([page.waitForNavigation({waitUntil:'networkidle0'}),page.click('.journal_feature-copy .journal_read')]);
       assert.equal(await page.$eval('h1',e=>e.textContent),posts[0].title);
       const last=posts[0].sections.at(-1);await page.click(`.journal_toc a[href="#${last.id}"]`);
       await page.waitForFunction(id=>{const r=document.getElementById(id).getBoundingClientRect();return r.top>=0&&r.top<window.innerHeight/2;},{timeout:8000},last.id);
       await page.waitForFunction(id=>document.querySelector(`.journal_toc a[href="#${id}"]`).getAttribute('aria-current')==='location',{},last.id);
-      await Promise.all([page.waitForNavigation({waitUntil:'networkidle0'}),page.click('.journal_related .journal_card-link')]);assert.ok(new URL(page.url()).pathname.includes(posts[1].slug));
+      await Promise.all([page.waitForNavigation({waitUntil:'networkidle0'}),page.click('.journal_related .journal_card-link')]);assert.ok(new URL(page.url()).pathname.includes(related(posts[0])[0].slug));
       await Promise.all([page.waitForNavigation({waitUntil:'networkidle0'}),page.click('.journal_article-head .journal_back')]);assert.ok(new URL(page.url()).pathname.includes('blog'));
       await Promise.all([page.waitForNavigation({waitUntil:'networkidle0'}),page.click('.section_cta a.button')]);assert.ok(new URL(page.url()).pathname.includes('book'));
     }finally{await page.close();}
