@@ -134,7 +134,9 @@ year archive); the article is the long-form frame with a table of contents in it
 Two things to know: the 2025-2026 posts carried a pasted author bio, a directions link and a
 disclaimer in the body, all dropped by the harvest (the byline carries the author); and the
 old blog has one duplicated post ("Pacifiers and Teeth Development", 2021 and 2023), left as
-found for the client to decide. Commit `ee9fac70`.
+found for the client to decide. The client's one note on the pages: no space under the hero
+buttons. The compact hero zeroes that margin because it never carried the chip row before;
+the chips now take their own top margin when they follow the buttons. Commit `ee9fac70`.
 
 ## Where it is now
 

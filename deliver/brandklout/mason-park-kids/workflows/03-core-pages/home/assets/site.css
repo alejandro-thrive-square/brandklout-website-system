@@ -924,6 +924,10 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 }
 .ch-arrival.is-compact .ar-title { font-size: calc(var(--f-d1) * .78); }
 .ch-arrival.is-compact .ar-actions { margin-bottom: 0; }
+/* A compact hero never carried the chip row until the blog (2026-09-09,
+   evening), so its buttons had no space below them; the chips sat flush
+   against the buttons on every article. When the row follows, space it. */
+.ch-arrival.is-compact .ar-actions + .ar-meta { margin-top: 2.5rem; }
 
 @media (max-width: 767px) {
   .ar-cue { display: none; }
