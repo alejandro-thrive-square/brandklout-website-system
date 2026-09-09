@@ -1,6 +1,6 @@
 // Runs diff-live.mjs for every core page: local file against its live row.
 //
-//   node diff-all.mjs             all eleven
+//   node diff-all.mjs             every page under home/
 //   node diff-all.mjs --only /financing
 //
 // Prints one block per page and a tally at the end, so "a lot of errors on
@@ -8,19 +8,15 @@
 import { execFileSync } from "node:child_process";
 
 const BASE = "https://mason-park-kids.up.railway.app";
-const PAGES = [
-  ["../home/index.html", "/"],
-  ["../home/about-us/index.html", "/about-us"],
-  ["../home/our-doctors/index.html", "/our-doctors"],
-  ["../home/our-team/index.html", "/our-team"],
-  ["../home/our-services/index.html", "/our-services"],
-  ["../home/services/comprehensive-pediatric-dentistry/index.html", "/services/comprehensive-pediatric-dentistry"],
-  ["../home/new-patients/index.html", "/new-patients"],
-  ["../home/financing/index.html", "/financing"],
-  ["../home/dental-saving-plan/index.html", "/dental-saving-plan"],
-  ["../home/patient-reviews/index.html", "/patient-reviews"],
-  ["../home/thank-you/index.html", "/thank-you"],
-];
+// Every page under home/ (2026-09-09, evening: it carried the eleven as a
+// list while 57 more pages went live; a gate with a list watches only the list).
+import fs from "node:fs";
+import path from "node:path";
+const HOME = path.resolve("..", "home");
+const walkPages = (dir, rel) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+  e.isDirectory() && e.name !== "assets" ? walkPages(path.join(dir, e.name), rel + e.name + "/")
+  : e.name === "index.html" ? [[path.join(dir, e.name), "/" + rel.replace(/\/$/, "")]] : []);
+const PAGES = walkPages(HOME, "");
 
 const only = process.argv.includes("--only") ? process.argv[process.argv.indexOf("--only") + 1] : null;
 const rows = [];

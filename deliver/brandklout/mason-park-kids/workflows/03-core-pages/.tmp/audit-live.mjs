@@ -37,29 +37,16 @@ const width = args.includes("--width") ? Number(args[args.indexOf("--width") + 1
 const onlyArg = args.includes("--only") ? args[args.indexOf("--only") + 1].split(",") : null;
 const jsonOut = args.includes("--json") ? args[args.indexOf("--json") + 1] : null;
 
-// The eleven redesigned routes first, then everything the migration brought.
-const CORE = [
-  "", "about-us", "our-doctors", "our-team", "our-services",
-  "services/comprehensive-pediatric-dentistry", "new-patients", "financing",
-  "dental-saving-plan", "patient-reviews", "thank-you",
-];
-const MIGRATED = [
-  "virtual-consultation", "town-resource", "toothpaste-rda-table", "toothpaste-chart",
-  "technology", "special-offers", "sitemap",
-  "services/special-needs-patient-care", "services/space-maintainers", "services/sedation-dentistry",
-  "services/sealants", "services/retainers", "services/restorative-dentistry", "services/pulp-therapy",
-  "services/preventive-dentistry", "services/periodontics", "services/orthodontics",
-  "services/night-guards", "services/mouth-guards", "services/invisalign", "services/frenectomy",
-  "services/fluoride-treatment", "services/extractions", "services/early-intervention",
-  "services/dental-hygiene-education", "services/dental-crowns", "services/dental-cleanings-and-exams",
-  "services/cosmetic-dentistry", "services/composite-fillings", "services/bonding",
-  "refer-a-patient", "product-recommendations-2", "privacy-policy",
-  "ph-and-acidity-of-food-beverages", "pediatric-dentistry-faqs-katy-tx",
-  "knee-to-knee-pediatric-dental-exam", "invisalign-faqs-katy-tx", "faq-page",
-  "dental-library", "dental-dictionary", "before-after", "accessibility-statement",
-  "patient-resources", "emergency-pediatric-dentistry", "contacts", "appointment",
-];
-const ROUTES = (onlyArg ?? [...CORE, ...MIGRATED]).map((r) => r.replace(/^\//, ""));
+// EVERY page under home/, walked, in the order the folder gives. The two
+// hand-written lists this replaced (2026-09-09, evening) watched 57 routes
+// while eleven more arrived; a gate with a list watches only the list.
+import path from "node:path";
+const HOME = path.resolve("..", "home");
+const walkRoutes = (dir, rel) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+  e.isDirectory() && e.name !== "assets" ? walkRoutes(path.join(dir, e.name), rel + e.name + "/")
+  : e.name === "index.html" ? [rel.replace(/\/$/, "")] : []);
+const ALL = walkRoutes(HOME, "");
+const ROUTES = (onlyArg ?? ALL).map((r) => r.replace(/^\//, ""));
 
 const browser = await chromium.launch({ executablePath: CHROME });
 const report = [];
@@ -190,7 +177,7 @@ for (const route of ROUTES) {
   report.push({ route: "/" + route, width, status, chrome: facts.chrome, imgCount: facts.imgCount ?? 0, faults });
   await ctx.close();
 
-  const core = CORE.includes(route) ? "core" : "migrated";
+  const core = route.startsWith("blog") ? "blog" : "page";
   console.log(`\n/${route || ""}  [${core}]  ${status}  ${facts.chrome ?? "?"}  ${facts.imgCount ?? 0} img`);
   if (!faults.length) console.log("   clean");
   else {
