@@ -44,6 +44,12 @@ const routesOnDisk = () => {
   };
   if (fs.existsSync(path.join(SITE, "index.html"))) out.add("/");
   walkDirs(SITE);
+  // Real FILES at the site root are routes too. Without this, a link to
+  // /sitemap.xml -- which exists -- reports DEAD, because this walker only
+  // ever looked for directories holding an index.html.
+  for (const e of fs.readdirSync(SITE, { withFileTypes: true })) {
+    if (e.isFile() && e.name !== "index.html") out.add("/" + e.name);
+  }
   return out;
 };
 const ROUTES = routesOnDisk();
@@ -141,7 +147,7 @@ const CARE = `<ul class="footer_list"><li><a href="/our-services/">All services<
 const PATIENTS = `<ul class="footer_list"><li><a href="/new-patients/">New patients</a></li><li><a href="/financing/">Financing</a></li><li><a href="/dental-savings-plan/">Dental savings plan</a></li><li><a href="/patient-reviews/">Patient reviews</a></li><li><a href="/special-offers/">Special offers</a></li><li><a href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book online</a></li></ul>`;
 // A legal page nobody can reach is not published. The Terms of Service and
 // the Contact page both belong in the legal row, on every page.
-const LEGAL = `<div class="footer_legal">\n      &copy; 2026 Mason Park Dental of Katy &middot; <a href="/terms-of-service/">Terms of Service</a> &middot; <a href="/faq/">FAQs</a> &middot; <a href="/contacts/">Contact</a>\n    </div>`;
+const LEGAL = `<div class="footer_legal">\n      &copy; 2026 Mason Park Dental of Katy &middot; <a href="/terms-of-service/">Terms of Service</a> &middot; <a href="/faq/">FAQs</a> &middot; <a href="/sitemap/">Sitemap</a> &middot; <a href="/contacts/">Contact</a>\n    </div>`;
 
 const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
   e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]);
