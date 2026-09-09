@@ -349,7 +349,8 @@ function sectionsOf(post) {
   for (const s of secs) {
     if (s.h && /^introduction$/i.test(s.h)) s.h = null;
     let run = 0, part = { h: s.h, blocks: [], cont: false };
-    for (const b of s.blocks) {
+    const blocks = s.blocks.flatMap(b => (b.t === 'p' ? splitLong(b.html).map(h => ({ t: 'p', html: h })) : [b]));
+    for (const b of blocks) {
       const n = b.t === 'p' ? words(b.html) : 0;
       if (b.t === 'p' && run > 0 && run + n > CEILING) { out.push(part); part = { h: null, blocks: [], cont: true }; run = 0; }
       part.blocks.push(b);
@@ -364,6 +365,22 @@ function sectionsOf(post) {
     used.add(id);
     return { ...s, id };
   });
+}
+// A paragraph over the ceiling is split at sentence ends into paragraphs of
+// about a hundred words. The words are the author's; only the breaks are ours.
+// Seven of the 157 posts carried single paragraphs of 160 to 290 words, which
+// check.mjs fails as a wall of text and a phone shows as one.
+function splitLong(html) {
+  if (words(html) <= CEILING) return [html];
+  const parts = html.split(/(?<=[.!?][”"’)]?)\s+(?=[A-Z“"(])/);
+  const out = [];
+  let cur = '';
+  for (const part of parts) {
+    if (cur && words(cur) + words(part) > 100) { out.push(cur.trim()); cur = part; }
+    else cur = cur ? cur + ' ' + part : part;
+  }
+  if (cur.trim()) out.push(cur.trim());
+  return out;
 }
 const renderBlock = b => b.t === 'p' ? `<p>${type(b.html)}</p>`
   : b.t === 'ul' ? `<ul class="lf-ticks">${b.items.map(i => `<li>${type(i)}</li>`).join('')}</ul>`
@@ -397,7 +414,7 @@ function articlePage(post, all, built) {
   const fr = frames(post);
   const secs = sectionsOf(post);
   const toc = secs.filter(s => s.h).map(s => `<li><a href="#${s.id}">${txt(type(s.h))}</a></li>`).join('');
-  const body = secs.map(s => `      <section class="lf-section${s.cont ? ' is-cont' : ''}" id="${s.id}">
+  const body = secs.map(s => `      <section class="lf-section"${s.cont ? ' data-cont' : ''} id="${s.id}">
         ${s.h ? `<h3>${txt(type(s.h))}</h3>` : ''}
         ${s.blocks.map(renderBlock).join('\n        ')}
       </section>`).join('\n');
