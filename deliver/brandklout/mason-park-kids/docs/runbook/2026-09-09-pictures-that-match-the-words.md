@@ -97,7 +97,7 @@ object and may appear; a procedure, an instrument in a mouth, a chair, a result 
 
 ## Where it is now
 
-Done locally, **not published**. `git` commit on `bk-mason-park-kids`.
+Done locally, **not published**. Commit `e8f2e9ba` on `bk-mason-park-kids`, pushed.
 
 | Gate | Result |
 | :--- | :--- |
