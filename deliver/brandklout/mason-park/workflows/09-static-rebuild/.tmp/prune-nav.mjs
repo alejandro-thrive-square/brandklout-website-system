@@ -48,54 +48,86 @@ const routesOnDisk = () => {
 };
 const ROUTES = routesOnDisk();
 
-// The treatment pages in the Services dropdown are read off disk too, in
-// the catalogue's own order, so a page appears in the nav the day it is
-// stamped and never before. `label` is the chip wording from
-// /our-services/, which is what the client approved.
+// The Services menu is GROUPED, in the catalogue's own seven groups and
+// its own order, and every entry is read off disk: a treatment appears in
+// the nav the day its page is stamped and never before. `label` is the
+// chip wording from /our-services/, which is what the client approved.
 //
-// NOTE for the next batch: at ~10 entries this dropdown stops being a
-// dropdown. All 31 treatments will need the grouped mega-menu the
-// catalogue already implies (Preventative / Cosmetic / Invisalign /
-// Restorative / Hygiene and gums / Oral surgery / Comfort and pain).
-// Do not just let this list grow to thirty.
-const TREATMENTS = [
-  ["preventative-dentistry", "Cleanings and Exams"],
-  ["oral-cancer-screening", "Oral Cancer Screening"],
-  ["dental-hygiene-education", "Hygiene Education"],
-  ["mouth-guards", "Mouth Guards"],
-  ["night-guards", "Night Guards"],
-  ["fluoride-treatment", "Fluoride"],
-  ["sealants", "Sealants"],
-  ["cosmetic-dentistry", "Smile Makeovers"],
-  ["bonding", "Bonding"],
-  ["porcelain-veneers", "Porcelain Veneers"],
-  ["whitening", "Whitening"],
-  ["invisalign", "Invisalign"],
-  ["invisalign-questions", "Invisalign Questions"],
-  ["dental-implant-restorations", "Implant Restorations"],
-  ["dentures", "Dentures"],
-  ["dental-crowns", "Crowns"],
-  ["composite-fillings", "Tooth Coloured Fillings"],
-  ["bridges", "Bridges"],
-  ["root-canal-therapy", "Root Canal Therapy"],
-  ["comprehensive-care", "Deep Cleaning"],
-  ["laser-dentistry", "Laser Dentistry"],
-  ["airflow-one", "AIRFLOW&reg; ONE"],
-  ["frenectomy", "Frenectomy"],
-  ["extractions", "Extractions"],
-  ["wisdom-teeth", "Wisdom Teeth"],
-  ["dental-implant-placement", "Implant Placement"],
-  ["crown-lengthening", "Crown Lengthening"],
-  ["bone-grafting", "Bone Grafting"],
-  ["sedation-dentistry", "Sedation Dentistry"],
-  ["emergency-dentist", "Emergency Dentist"],
-  ["tmj-tmd", "TMJ and TMD"],
-].filter(([slug]) => ROUTES.has(`/services/${slug}/`));
+// It was a flat list until 2026-09-09, which was fine at two entries and
+// unusable at sixteen. The nesting needs no new CSS -- site.css already
+// styles `.navbar_dropdown-list .navbar_dropdown-list` and opens it on
+// hover and focus-within -- and no new JS, because site.js binds the
+// mobile toggle with `.has-dropdown > .navbar_link`, which matches a
+// nested group as well as a top-level one.
+//
+// "Night guards" is in two catalogue groups (Preventative and Comfort and
+// pain). A menu is not a catalogue, so it is listed once, under the group
+// where its chip first appears.
+const GROUPS = [
+  ["Preventative", [
+    ["preventative-dentistry", "Cleanings and Exams"],
+    ["oral-cancer-screening", "Oral Cancer Screening"],
+    ["dental-hygiene-education", "Hygiene Education"],
+    ["mouth-guards", "Mouth Guards"],
+    ["night-guards", "Night Guards"],
+    ["fluoride-treatment", "Fluoride"],
+    ["sealants", "Sealants"],
+  ]],
+  ["Cosmetic", [
+    ["cosmetic-dentistry", "Smile Makeovers"],
+    ["bonding", "Bonding"],
+    ["porcelain-veneers", "Porcelain Veneers"],
+    ["whitening", "Whitening"],
+  ]],
+  ["Invisalign&reg;", [
+    ["invisalign", "Invisalign&reg; Treatment"],
+    ["invisalign-questions", "Invisalign&reg; Questions"],
+  ]],
+  ["Restorative", [
+    ["dental-implant-restorations", "Implant Restorations"],
+    ["dentures", "Dentures"],
+    ["dental-crowns", "Crowns"],
+    ["composite-fillings", "Tooth Coloured Fillings"],
+    ["bridges", "Bridges"],
+    ["root-canal-therapy", "Root Canal Therapy"],
+  ]],
+  ["Hygiene and gums", [
+    ["comprehensive-care", "Deep Cleaning"],
+    ["laser-dentistry", "Laser Dentistry"],
+    ["airflow-one", "AIRFLOW&reg; ONE"],
+    ["frenectomy", "Frenectomy"],
+  ]],
+  ["Oral surgery", [
+    ["extractions", "Extractions"],
+    ["wisdom-teeth", "Wisdom Teeth"],
+    ["dental-implant-placement", "Implant Placement"],
+    ["crown-lengthening", "Crown Lengthening"],
+    ["bone-grafting", "Bone Grafting"],
+  ]],
+  ["Comfort and pain", [
+    ["sedation-dentistry", "Sedation Dentistry"],
+    ["emergency-dentist", "Emergency Dentist"],
+    ["tmj-tmd", "TMJ and TMD"],
+  ]],
+];
 
-const treatmentItems = TREATMENTS.map(([slug, label]) =>
-  `<li class="navbar_item"><a class="navbar_link" href="/services/${slug}/">${label}</a></li>`).join("");
+// Flatten for the footer picks and for the count reported at the end.
+const TREATMENTS = GROUPS.flatMap(([, items]) => items)
+  .filter(([slug]) => ROUTES.has(`/services/${slug}/`));
 
-const NAV = `<nav class="navbar_menu" id="navbar-menu" aria-label="Main"><ul class="navbar_menu-list"><li class="navbar_item"><a class="navbar_link" href="/">Home</a></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/about-us/">About</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/about-us/">About the Practice</a></li><li class="navbar_item"><a class="navbar_link" href="/our-doctors/">Meet Our Doctors</a></li><li class="navbar_item"><a class="navbar_link" href="/our-team/">Meet Our Team</a></li><li class="navbar_item"><a class="navbar_link" href="/patient-reviews/">Patient Reviews</a></li></ul></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/our-services/">Services</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/our-services/">All Services</a></li>${treatmentItems}</ul></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/new-patients/">Patients</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/new-patients/">New Patients</a></li><li class="navbar_item"><a class="navbar_link" href="/financing/">Financing</a></li><li class="navbar_item"><a class="navbar_link" href="/dental-savings-plan/">Dental Savings Plan</a></li></ul></li><li class="navbar_item"><a class="navbar_link" href="/patient-reviews/">Reviews</a></li></ul></nav>`;
+// A group with nothing built yet is dropped entirely rather than rendered
+// as an empty submenu. A group with exactly one page built is rendered
+// flat -- a submenu holding one item is a worse click than the item.
+const groupItems = GROUPS.map(([name, items]) => {
+  const live = items.filter(([slug]) => ROUTES.has(`/services/${slug}/`));
+  if (!live.length) return "";
+  const links = live.map(([slug, label]) =>
+    `<li class="navbar_item"><a class="navbar_link" href="/services/${slug}/">${label}</a></li>`).join("");
+  if (live.length === 1) return links;
+  return `<li class="navbar_item has-dropdown"><a class="navbar_link" href="/our-services/">${name}</a><ul class="navbar_dropdown-list">${links}</ul></li>`;
+}).join("");
+
+const NAV = `<nav class="navbar_menu" id="navbar-menu" aria-label="Main"><ul class="navbar_menu-list"><li class="navbar_item"><a class="navbar_link" href="/">Home</a></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/about-us/">About</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/about-us/">About the Practice</a></li><li class="navbar_item"><a class="navbar_link" href="/our-doctors/">Meet Our Doctors</a></li><li class="navbar_item"><a class="navbar_link" href="/our-team/">Meet Our Team</a></li><li class="navbar_item"><a class="navbar_link" href="/patient-reviews/">Patient Reviews</a></li></ul></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/our-services/">Services</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/our-services/">All Services</a></li>${groupItems}</ul></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/new-patients/">Patients</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/new-patients/">New Patients</a></li><li class="navbar_item"><a class="navbar_link" href="/financing/">Financing</a></li><li class="navbar_item"><a class="navbar_link" href="/dental-savings-plan/">Dental Savings Plan</a></li></ul></li><li class="navbar_item"><a class="navbar_link" href="/patient-reviews/">Reviews</a></li></ul></nav>`;
 
 // The footer's Care column stays six rows whatever the catalogue does --
 // a footer column is not a sitemap. It carries "All services" and the

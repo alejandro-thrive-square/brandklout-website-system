@@ -7,11 +7,10 @@ then only the runs you need. Do not read them all.
 
 ## Where the build stands — 2026-09-09
 
-**19 pages built.** The eleven approved on 2026-09-01, plus eight treatment pages
-added on 2026-09-09: crowns, bridges, dentures, tooth-coloured fillings, root canal
-therapy, implant restorations, extractions, bone grafting.
+**28 pages built.** The eleven approved on 2026-09-01, plus seventeen treatment pages.
+**17 of the 31 approved treatments now have pages**; the whole Preventative group is done.
 
-**22 of the 31 approved treatments still have no page.** The definitive list is the
+**14 of the 31 approved treatments still have no page.** The definitive list is the
 `el-tabs` chips on `home/our-services/index.html`, not the old site's 35
 `/services/*` pages. Three of the 22 — **Whitening**, **Porcelain veneers** and
 **Wisdom teeth** — have no usable source copy and must not be written from general
@@ -38,5 +37,9 @@ sitemap, the town resource. Full inventory and the deliberate exclusions are in
   re-saved it, so the freeze gate reported the approved pages MOVED for a week
   regardless of what you changed. It was re-saved on 2026-09-09 against HEAD.
   **`--save base` after any approved change, or the next person cannot trust it.**
-- **The Services dropdown needs the grouped mega-menu before the next batch.** It
-  is generated from disk now and already has nine entries; at 31 it stops working.
+- **The Services dropdown is grouped now** (`GROUPS` in `prune-nav.mjs`), rendering the
+  catalogue's seven groups as nested submenus. Empty groups are dropped; a group with one
+  built page renders flat. It needed no new CSS or JS.
+- **The old WordPress pages carry fabricated testimonials.** `services-sealants` has three
+  that match none of the 20 real Google reviews. Check any quoted patient against the
+  Trustindex JSON before reproducing it.

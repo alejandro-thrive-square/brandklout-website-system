@@ -9,9 +9,16 @@
 //   node probe-dropdown.mjs ../home/index.html
 //   node probe-dropdown.mjs https://staging.masonparkdental.com/
 //
-// Reports, for the first dropdown panel: the panel's own background, and the
-// colour of each link in it, at the top of the page (transparent navbar) and
-// after scrolling (solid navbar). Flags any pair whose contrast is under 3:1.
+// Reports, for EVERY dropdown panel including the nested group submenus under
+// Services: the panel's own background, and the colour of each link in it, at
+// the top of the page (transparent navbar) and after scrolling (solid navbar).
+// Flags any pair whose contrast is under 3:1.
+//
+// It used to read only `.navbar_item.has-dropdown` FIRST -- the About menu --
+// which meant it reported "every dropdown link is legible" for a nav whose
+// other three menus it had never opened. When the Services menu became a
+// grouped two-level dropdown on 2026-09-09 that blind spot got a whole level
+// deeper. A gate that inspects one of four menus is not a gate.
 // ===========================================================================
 import { chromium } from "playwright-core";
 import path from "node:path";
@@ -47,41 +54,68 @@ await page.waitForTimeout(600);
 // The panel only paints when its parent item is hovered, so hover it and read
 // the panel that becomes visible -- reading a hidden one gives the closed state.
 const read = async (label) => {
-  const item = page.locator(".navbar_item.has-dropdown").first();
-  await item.hover();
-  await page.waitForTimeout(400);
-  const out = await page.evaluate(() => {
-    const panel = document.querySelector(".navbar_item.has-dropdown > .navbar_dropdown-list");
-    if (!panel) return null;
-    // The panel background can be transparent, in which case what you see is
-    // whatever is behind it -- walk up until something actually paints.
-    let bgEl = panel, bg = getComputedStyle(panel).backgroundColor;
-    while (bgEl && /rgba\(0, 0, 0, 0\)|transparent/.test(bg)) {
-      bgEl = bgEl.parentElement;
-      bg = bgEl ? getComputedStyle(bgEl).backgroundColor : "rgb(255, 255, 255)";
-    }
-    const cs = getComputedStyle(panel);
-    return {
-      panelBg: cs.backgroundColor,
-      paintedBg: bg,
-      visibility: cs.visibility,
-      opacity: cs.opacity,
-      links: [...panel.querySelectorAll(":scope > .navbar_item > .navbar_link")].map((a) => ({
-        text: a.textContent.trim(),
-        color: getComputedStyle(a).color,
-      })),
-    };
-  });
-  if (!out) { console.log(`${label}: no dropdown panel found`); return 0; }
-  console.log(`\n--- ${label} ---`);
-  console.log(`panel background : ${out.panelBg}  (painted: ${out.paintedBg})`);
-  console.log(`panel visibility : ${out.visibility}, opacity ${out.opacity}`);
+  console.log(`
+--- ${label} ---`);
   let bad = 0;
-  for (const l of out.links) {
-    const c = contrast(l.color, out.paintedBg);
-    const flag = c < 3 ? "  <-- INVISIBLE" : "";
-    if (c < 3) bad++;
-    console.log(`  ${c.toFixed(2)}:1  ${l.color.padEnd(22)} ${l.text}${flag}`);
+
+  // Every dropdown in the nav, top level and nested, in document order. A
+  // nested panel only paints once its ancestors are hovered too, so hover the
+  // whole chain from the outside in before reading it.
+  const count = await page.locator(".navbar_item.has-dropdown").count();
+  for (let i = 0; i < count; i++) {
+    const item = page.locator(".navbar_item.has-dropdown").nth(i);
+    const chain = await item.evaluate((el) => {
+      const path = [];
+      for (let n = el; n; n = n.parentElement) {
+        if (n.classList && n.classList.contains("has-dropdown")) path.unshift(n);
+      }
+      return path.map((n) => n.querySelector(":scope > .navbar_link").textContent.trim());
+    });
+    for (const name of chain) {
+      await page.locator(".navbar_item.has-dropdown", { hasText: name }).first().hover().catch(() => {});
+    }
+    await item.hover();
+    await page.waitForTimeout(320);
+
+    const out = await item.evaluate((el) => {
+      const panel = el.querySelector(":scope > .navbar_dropdown-list");
+      if (!panel) return null;
+      // The panel background can be transparent, in which case what you see is
+      // whatever is behind it -- walk up until something actually paints.
+      let bgEl = panel, bg = getComputedStyle(panel).backgroundColor;
+      while (bgEl && /rgba\(0, 0, 0, 0\)|transparent/.test(bg)) {
+        bgEl = bgEl.parentElement;
+        bg = bgEl ? getComputedStyle(bgEl).backgroundColor : "rgb(255, 255, 255)";
+      }
+      const cs = getComputedStyle(panel);
+      return {
+        owner: el.querySelector(":scope > .navbar_link").textContent.trim(),
+        panelBg: cs.backgroundColor,
+        paintedBg: bg,
+        visibility: cs.visibility,
+        opacity: cs.opacity,
+        links: [...panel.querySelectorAll(":scope > .navbar_item > .navbar_link")].map((a) => ({
+          text: a.textContent.trim(),
+          color: getComputedStyle(a).color,
+        })),
+      };
+    });
+    if (!out) continue;
+
+    const depth = chain.length - 1;
+    const pad = "  ".repeat(depth);
+    console.log(`${pad}[${out.owner}] bg ${out.paintedBg}  ${out.visibility}, opacity ${out.opacity}`);
+    if (out.visibility === "hidden" || out.opacity === "0") {
+      console.log(`${pad}  ! panel did not open -- contrast not measured`);
+      bad++;
+      continue;
+    }
+    for (const l of out.links) {
+      const c = contrast(l.color, out.paintedBg);
+      const flag = c < 3 ? "  <-- INVISIBLE" : "";
+      if (c < 3) bad++;
+      console.log(`${pad}  ${c.toFixed(2)}:1  ${l.color.padEnd(22)} ${l.text}${flag}`);
+    }
   }
   return bad;
 };
