@@ -120,7 +120,7 @@ on four pages now read white on ink. Commit `f6408ede`.
   so this one hero holds the top, sits flush and carries no `data-drift`. What is still
   missing above her glasses is missing from the photograph; a frame with more headroom would
   be the ask if the client wants her whole face. `probe-hooks.mjs`: all scenes still do work.
-  Commit `HOMESHA`.
+  Commit `fb60f3ee`.
 
 ## Where it is now
 
