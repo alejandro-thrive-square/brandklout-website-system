@@ -40,11 +40,7 @@ import { dirname, join } from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const HERE = dirname(fileURLToPath(import.meta.url))
-const TMP = join(HERE, '.tmp')
-const SESSION_FILE = join(TMP, '.session')
 const COOKIE_NAME = 'instatic_admin_session'
-
-export const BASE = (process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(/\/$/, '')
 
 function loadEnv() {
   // Repo-root .env, walked up from here. Keeps secrets out of the workflow folder.
@@ -63,7 +59,24 @@ function loadEnv() {
     dir = up
   }
 }
+
+// MUST run before BASE is evaluated. This used to sit BELOW the BASE
+// declaration, which meant `INSTATIC_BASE_URL` in .env was read into the
+// environment a moment too late and BASE always fell back to the default.
+// It went unnoticed for as long as the only instance WAS the default: the
+// first run against a second client (Stone, 2026-08-31) posted the login to
+// encorercm.com and came back with Railway's "Application not found".
 loadEnv()
+
+export const BASE = (process.env.INSTATIC_BASE_URL || 'https://encorercm.com').replace(/\/$/, '')
+
+// The session cache is PER HOST. One shared `.tmp/.session` meant a cookie
+// minted for one client's instance was replayed against the next one's; the
+// 401-and-relogin path papered over it, but it also meant two pipelines run
+// back to back kept evicting each other's session and re-hitting the login
+// rate limiter (5 failures locks the account).
+const TMP = join(HERE, '.tmp')
+export const SESSION_FILE = join(TMP, `.session-${BASE.replace(/^https?:\/\//, '').replace(/[^a-z0-9.-]/gi, '_')}`)
 
 let cookie = null
 

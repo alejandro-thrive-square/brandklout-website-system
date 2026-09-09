@@ -65,9 +65,45 @@ node css-parity.mjs diff before after      # must report 0
 ## Technical Setup
 
 - **Executor status**: Working. `insta-api.mjs` (client), `repair-site-css.mjs`, `migrate-css-to-registry.mjs`, `css-parity.mjs`.
-- **Credentials**: `INSTATIC_EMAIL` / `INSTATIC_PASSWORD` in the repo-root `.env`, optional `INSTATIC_BASE_URL`. Never in source.
+- **Credentials**: `INSTATIC_EMAIL` / `INSTATIC_PASSWORD` in the repo-root `.env`, optional
+  `INSTATIC_BASE_URL` (defaults to Dr. Nahlah's host — **set it for any other client**). Never in
+  source. `.env` is per-worktree and gitignored, so a fresh worktree needs the lines copied across.
 - **Endpoints**: `GET /admin/api/cms/site` (shell + seq), `GET /pages`, `PUT /site-document` (atomic, `incremental` or `replace`, 409 on seq conflict), `POST /publish`, `GET /publish/status`.
 - **Deployment**: Railway workspace/project `Brandklout` -> service `Dr Nahlah`, `ghcr.io/corebunch/instatic:latest`, volume `/app/storage`, DB `/app/storage/data/cms.db`.
+
+## Also proven on a second client
+
+`insta-api.mjs` and this workflow's reasoning were reused on 2026-08-31 to put a seven-page site
+into a **fresh** Instatic instance for Stone Surgical Arts — see
+`21-instatic-upload` (on the `bk-stone` branch, at
+`deliver/brandklout/stone-surgical-arts/workflows/21-instatic-upload/`; it was `05-instatic-upload`
+until the 2026-09-04 renumber and is itself due for promotion into `deliver/process/`).
+Four things learned there belong here, because they are properties of the platform and not of that
+client:
+
+1. **Custom properties do not survive `cssToStyleRules`.** happy-dom does not enumerate `--*`
+   declarations, so every `:root { --token: … }` block converts to an EMPTY rule with no warning,
+   while the `var()` usages that consume them survive intact. On a token-driven design that is not
+   a missing colour, it is the whole layout. Ship token primitives as a **code asset** (`type:
+   'style'`, served as `userStyles-*.css`, never parsed) and keep everything built on them in the
+   registry. This is the one legitimate use of the code-asset layer this workflow otherwise exists
+   to eliminate.
+2. **`PATCH /admin/api/cms/data/rows/:id` replaces `cells` wholesale.** `body.cells ?? currentRow.cells`,
+   then the slug is re-derived from whatever it was handed. A partial patch silently deletes every
+   cell it omits — title, slug and page body included — and answers 200. Always read, merge, write
+   the whole object, then read back.
+3. **The tree-shake demotion this workflow documents is not optional on a JS-driven site.** Any
+   class added at runtime purges itself AND every ambient rule mentioning it. Demoting every
+   class-kind rule that no node references to `kind: 'ambient'` is the general form of `--cutover`
+   and can be computed from the page trees without a hard-coded list.
+4. **AVIF cannot be uploaded to the media library.** The magic-byte sniffer matches ISO-BMFF `ftyp`
+   without reading the brand, so AVIF stores as `video/mp4` with null dimensions and no variants.
+   Convert to WebP first. Worth reporting upstream.
+
+Two bugs in this folder's own client were fixed at the same time: `BASE` was evaluated **before**
+`loadEnv()` ran, so `INSTATIC_BASE_URL` in `.env` never took effect (harmless while the only
+instance was the hard-coded default, fatal on the second one); and the cached session was a single
+file shared across hosts, replaying one client's cookie at another.
 
 ## Gotchas
 
@@ -218,4 +254,7 @@ because **this platform reports some write failures as prose with a 200**.
 - `.tmp/parity-pseudo-before-1440.json` / `.tmp/parity-pseudo-after-1440.json` — the 28-difference proof that only the two `::after` overlays moved
 
 ## Version Control
-Follows the root-level rules in [SYSTEM_RULES.md](../../../../../SYSTEM_RULES.md). Scripts and `.md` are committed; `.tmp/` snapshots are lightweight and may be committed when useful. `.tmp/.session` holds a live session cookie and must never be committed.
+Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md). Scripts and `.md` are committed. **`.tmp/` is not** — this is shared tooling run against every
+Instatic client from whichever worktree is active, so a tracked artifact here is one client's
+output on a path every other client also writes to. `.tmp/.gitignore` ignores the whole folder.
+The cached session (`.tmp/.session-<host>`) holds a live cookie and must never be committed.
