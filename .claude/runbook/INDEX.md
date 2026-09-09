@@ -1,11 +1,12 @@
 # Runbook index
 
-10 runs, newest first. Each line is one file in this folder.
+11 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-09 | 2026-09-09 — Instatic API sync promoted out of `dr-nahlah/` to process `22` (`e3d8f864`) | [`2026-09-09-instatic-api-sync-promoted-out-of-dr-nahlah-to-2.md`](./2026-09-09-instatic-api-sync-promoted-out-of-dr-nahlah-to-2.md) |
 | 2026-09-04 | 2026-09-04 — Stone split into three projects (`604da383`) | [`2026-09-04-stone-split-into-three-projects-604da383.md`](./2026-09-04-stone-split-into-three-projects-604da383.md) |
 | 2026-09-04 | 2026-09-04 — Stone client folder standardised; the module-number registry was wrong | [`2026-09-04-stone-client-folder-standardised-the-module-numb.md`](./2026-09-04-stone-client-folder-standardised-the-module-numb.md) |
 | 2026-09-04 | 2026-09-04 — Stone Surgical Arts: assets restored, naming untangled | [`2026-09-04-stone-surgical-arts-assets-restored-naming-untan.md`](./2026-09-04-stone-surgical-arts-assets-restored-naming-untan.md) |
