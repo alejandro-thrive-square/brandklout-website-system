@@ -266,6 +266,14 @@ so the value is typed once, rotating it is one edit, and it still reaches only t
 for it. A `${NAME}` that resolves to nothing is a **hard error**: a blank password would otherwise
 surface much later as an authentication failure with no trace back to here.
 
+**A missing key is not a missing integration, and the two lead to opposite decisions.** When a task
+turns up evidence that this system talks to some API — a zone, an account, a dashboard, a reference
+in a directive or runbook — and the master holds no key for it, report *"the account exists, this
+machine holds no key for it"*, never *"there is no such integration"*. The first sends someone to
+fetch a credential; the second sends them to rebuild something that already exists. Check with
+`node scripts/env-sync.mjs --check`, which prints key **names** only. Never print a value, never
+move one into a tracked file, a script default, or a commit message.
+
 **Railway needs no `.env` to work.** The Railway CLI keeps its own auth in `~/.railway/config.json`,
 which is machine-global, so `railway` commands already run in every worktree — that is why no
 Railway variable existed anywhere. `RAILWAY_TOKEN` in `[shared]` exists for scripts and API calls
