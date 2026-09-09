@@ -214,7 +214,7 @@ Run this whenever a domain is pointed at an Instatic site — a launch, a re-poi
    variable in Railway" — Mason Park's variable read correctly for a day while the running container
    ignored it. A `BLOCKED` row is not a pass either: it means a CDN answered instead of the origin
    and that host was never actually tested.
-8. **Update the client's `.env`** in their worktree — `INSTATIC_BASE_URL` must be an origin that passes the gate, or the whole `18-instatic-embeds` toolkit starts failing with 403s that look like permissions.
+8. **Update the client's `[<client>]` section in `~/.webzite/.env`**, then re-run `node scripts/env-sync.mjs` in their worktree — `INSTATIC_BASE_URL` must be an origin that passes the gate, or the whole `18-instatic-embeds` toolkit starts failing with 403s that look like permissions. Editing the worktree `.env` directly does not survive the next sync.
 9. **Only now** send the link, and send the one the checker printed.
 
 ## The Cloudflare geo-block, and the two things it silently breaks
@@ -349,7 +349,7 @@ PUBLIC_ORIGIN=https://www.masonparkdental.com,https://masonparkdental.com,https:
 
 **Dr. Nahlah — set once, never extended.** `PUBLIC_ORIGIN` already held
 `encorercm.com,www.encorercm.com,dr-nahlah.up.railway.app` from a fix on **2026-08-18**, recorded in
-`bk-dr-nahlah/.claude/RUNBOOK.md`. That entry diagnosed this exact class of bug (editor stuck
+[`dr-nahlah/docs/runbook/2026-08-18-latest-completed-instatic-admin-403s-csrf-origin.md`](../../brandklout/dr-nahlah/docs/runbook/2026-08-18-latest-completed-instatic-admin-403s-csrf-origin.md). That entry diagnosed this exact class of bug (editor stuck
 "reconnecting", cannot sign out, new user cannot log in — all one origin check) and even wrote down
 the rule: *"Adding a custom domain in Railway does not update `PUBLIC_ORIGIN`, and `www` is a
 separate domain."* Then `drnahlah.com` went live on 2026-08-25 and was not appended. **The knowledge
@@ -432,4 +432,4 @@ in-browser editor state: the collab socket drops. Do not redeploy while someone 
 - `TRIGGER_PROMPT.txt` — the agent entry point
 
 ## Version Control
-Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md). `check-origins.mjs`, `sites.json` and this `.md` are committed. `sites.json` holds no secrets — hostnames only; credentials stay in the per-worktree `.env`.
+Follows the root-level rules in [SYSTEM_RULES.md](../../../SYSTEM_RULES.md). `check-origins.mjs`, `sites.json` and this `.md` are committed. `sites.json` holds no secrets — hostnames only; credentials stay in `~/.webzite/.env` and reach a worktree only through the generated `.env`.

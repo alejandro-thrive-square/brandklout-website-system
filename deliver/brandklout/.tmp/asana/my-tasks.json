@@ -10,29 +10,61 @@
       "resource_type": "workspace"
     }
   ],
-  "includeCompleted": false,
-  "taskCount": 25,
+  "includeCompleted": true,
+  "taskCount": 104,
   "tasks": [
+    {
+      "gid": "1217040406855602",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-24T14:23:22.152Z",
+      "created_at": "2026-07-31T10:09:28.543Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "modified_at": "2026-08-24T14:23:23.998Z",
+      "name": "Thank you Page",
+      "notes": "1. Immediate Status Banner\n2. Fast-Track Immediate Call Box (High-Intent Prompt)\n3. What to Expect (3-Step Timeline)\n4. Practice Details & Location Map\n\nCheck GHL for proper tracking number",
+      "parent": {
+        "gid": "1217040406855582",
+        "name": "Landing Page - Mason Park"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217040406855602",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
     {
       "gid": "1217162605683021",
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-08-24T14:22:10.828Z",
       "created_at": "2026-08-04T16:27:43.805Z",
       "due_at": null,
       "due_on": "2026-08-05",
-      "modified_at": "2026-08-13T15:46:09.252Z",
+      "modified_at": "2026-08-24T14:22:12.381Z",
       "name": "New Patient Special Landing Page",
       "notes": "https://sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC\nhttps://www.greenspotcrossingsdentistry.com/lp/59-nps/?sc_cid=Google_PMAX:P:GP:1257:Paid:Generic:offer_nps&ef_id=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB:G:s&_vsrefdom=pmax&gclsrc=aw.ds&gad_source=1&gad_campaignid=22786579408&gbraid=0AAAAAD86Pj7IsHgfsRsOFegiih3ctJtAO&gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB\n\n",
       "parent": {
         "gid": "1217040406855582",
         "name": "Landing Page - Mason Park"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217162605683021",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217162605683021",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "tags": []
     },
     {
@@ -41,42 +73,268 @@
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-08-24T14:21:44.993Z",
       "created_at": "2026-08-03T22:32:57.453Z",
       "due_at": null,
       "due_on": "2026-08-05",
-      "modified_at": "2026-08-13T15:45:10.876Z",
+      "modified_at": "2026-08-24T14:21:46.883Z",
       "name": "Invisalign Landing Page",
       "notes": "Use as Inspiration:\n\nhttps://tulipdent.com/Beautifulsmile/invisalign-treatment-in-redlands/?gad_source=1&gad_campaignid=23801751528&gbraid=0AAAAAoxO05erTKcyjyEp0Fc2sE-nnqMNq&gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lJgSbluMkRA5peaAr4gakmopPXAbmTVBG1A6LhuBKif8vDQpsNp08aAlepEALw_wcB\n\n\n",
       "parent": {
         "gid": "1217040406855582",
         "name": "Landing Page - Mason Park"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217133289235652",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217133289235652",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "tags": []
     },
     {
-      "gid": "1217040406855602",
+      "gid": "1217162344633758",
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
-      "created_at": "2026-07-31T10:09:28.543Z",
+      "completed": true,
+      "completed_at": "2026-08-19T12:09:42.162Z",
+      "created_at": "2026-08-04T16:39:24.265Z",
       "due_at": null,
       "due_on": "2026-08-05",
-      "modified_at": "2026-08-11T22:45:28.194Z",
-      "name": "Thank you Page",
-      "notes": "1. Immediate Status Banner\n2. Fast-Track Immediate Call Box (High-Intent Prompt)\n3. What to Expect (3-Step Timeline)\n4. Practice Details & Location Map\n\nCheck GHL for proper tracking number",
+      "modified_at": "2026-08-19T12:09:43.520Z",
+      "name": "Emergency Dentistry ",
+      "notes": "Use as inspiration \nhttps://smilecenter.com/treatments/emergency-dentistry",
       "parent": {
-        "gid": "1217040406855582",
-        "name": "Landing Page - Mason Park"
+        "gid": "1217040406855586",
+        "name": "Landing Page Needs - Arvada"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217040406855602",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217162344633758",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217162344633760",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:09:41.093Z",
+      "created_at": "2026-08-04T16:40:11.860Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "modified_at": "2026-08-19T12:09:42.367Z",
+      "name": "Implants Landing Page",
+      "notes": "Use for Inspiration: \n\nhttps://smile.dentalimplantsgps.com/dental-implants/ppc/?keyword=dental%20implants&utm_term=dental%20implants&utm_source=PPC&utm_campaign=AllPhraseExactGoogle&utm_content=Unbounce&gad_source=1&gad_campaignid=23843623573&gbraid=0AAAAABwYiMbsJSLG8lNvKL86BmmbY0Dms&gclid=Cj4KCQjwm8bTBhDWARItAC9Hi8kYBGyAndp8-d6G2kbNYv1KJMISjecEqHe2ojIL6tssUuNG9H2PkU73GgLCwRAC8P8HAQ\n ",
+      "parent": {
+        "gid": "1217040406855586",
+        "name": "Landing Page Needs - Arvada"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217162344633760",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217133289235650",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:09:38.444Z",
+      "created_at": "2026-08-03T22:30:59.906Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "modified_at": "2026-08-19T12:09:39.894Z",
+      "name": "Next Door Landing Page",
+      "notes": "https://sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC\nhttps://www.greenspotcrossingsdentistry.com/lp/59-nps/?sc_cid=Google_PMAX:P:GP:1257:Paid:Generic:offer_nps&ef_id=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB:G:s&_vsrefdom=pmax&gclsrc=aw.ds&gad_source=1&gad_campaignid=22786579408&gbraid=0AAAAAD86Pj7IsHgfsRsOFegiih3ctJtAO&gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB\n\n",
+      "parent": {
+        "gid": "1217040406855586",
+        "name": "Landing Page Needs - Arvada"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217133289235650",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217162344633759",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:05:07.913Z",
+      "created_at": "2026-08-04T16:39:50.168Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "modified_at": "2026-08-19T12:05:09.345Z",
+      "name": "Dentist Near Me Landing Page",
+      "notes": "https://www.greenspotcrossingsdentistry.com/lp/59-nps/?sc_cid=Google_PMAX:P:GP:1257:Paid:Generic:offer_nps&ef_id=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB:G:s&_vsrefdom=pmax&gclsrc=aw.ds&gad_source=1&gad_campaignid=22786579408&gbraid=0AAAAAD86Pj7IsHgfsRsOFegiih3ctJtAO&gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB",
+      "parent": {
+        "gid": "1217040406855586",
+        "name": "Landing Page Needs - Arvada"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217162344633759",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217162344633761",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:04:15.178Z",
+      "created_at": "2026-08-04T16:40:19.222Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "modified_at": "2026-08-19T12:04:16.603Z",
+      "name": "AOX Landing Page",
+      "notes": "https://yjoms.com/about-full-arch/?utm_source=google&utm_medium=cpc&utm_campaign=&utm_network=g&utm_term=get%20teeth%20replaced&gad_source=1&gad_campaignid=23751095165&gbraid=0AAAABDQDXzHPpgIdMOx7T_ZQULfWCYQ5i&gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8mX5eaMQrcYtFsXJzPl2qcv4uShhIIqCZ3yaeYfwLDGzlrNJL2OkWEaAhYREALw_wcB",
+      "parent": {
+        "gid": "1217040406855586",
+        "name": "Landing Page Needs - Arvada"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217162344633761",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217133289235649",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T11:50:41.349Z",
+      "created_at": "2026-08-03T22:30:50.596Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "modified_at": "2026-08-19T11:50:44.129Z",
+      "name": "Porcelain Veneers",
+      "notes": "Use for inspiration:\nhttps://www.avenue.dental/services/veneers/\nhttps://www.drpaulomalley.com/services/ultra-thin-veneers/",
+      "parent": {
+        "gid": "1217040406855586",
+        "name": "Landing Page Needs - Arvada"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217133289235649",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217162605683014",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T11:50:23.163Z",
+      "created_at": "2026-08-04T16:05:08.367Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "modified_at": "2026-08-19T11:50:24.898Z",
+      "name": "Thank you Landing Page",
+      "notes": "1. Immediate Status Banner\n2. Fast-Track Immediate Call Box (High-Intent Prompt)\n3. What to Expect (3-Step Timeline)\n4. Practice Details & Location Map",
+      "parent": {
+        "gid": "1217040406855578",
+        "name": "Landing Page - Grand Mission"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217162605683014",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217133289235653",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T11:50:20.933Z",
+      "created_at": "2026-08-03T22:33:09.217Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "modified_at": "2026-08-19T11:50:22.777Z",
+      "name": "Implant Landing Page",
+      "notes": "1. Header & Hero Section\n2. Solution Breakdown: Why Dental Implants?\n3. Patient Eligibility & Preliminary Procedures Section\n4. Insurance & Flexible Financing Matrix\n5. Doctor Spotlight & Patient Testimonials\n6. FAQ Section (Accordion Format)\n7. Reviews\n\nMake sure lead form is created in GHL for this specific page",
+      "parent": {
+        "gid": "1217040406855578",
+        "name": "Landing Page - Grand Mission"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217133289235653",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217072657902270",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T11:50:19.895Z",
+      "created_at": "2026-07-31T18:44:52.956Z",
+      "due_at": null,
+      "due_on": "2026-08-05",
+      "modified_at": "2026-08-19T11:50:22.068Z",
+      "name": "Cosmetic Landing Page",
+      "notes": "1. Header & Hero Section\n2. Meet the Cosmetic Doctors\n3. Service Offerings Grid\n4. Why Choose Grand Mission Dentistry\n5. Social Proof & Real Patient Gallery\n6. Sticky Mobile Bar\n7. Reviews\n\nMake sure lead form is created in GHL for this specific page",
+      "parent": {
+        "gid": "1217040406855578",
+        "name": "Landing Page - Grand Mission"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217072657902270",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "tags": []
     },
     {
@@ -85,174 +343,80 @@
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-09-04T03:08:12.604Z",
       "created_at": "2026-07-03T23:56:34.849Z",
       "due_at": null,
       "due_on": "2026-08-07",
-      "modified_at": "2026-08-10T16:19:15.134Z",
+      "modified_at": "2026-09-04T03:08:17.290Z",
       "name": "A2P",
       "notes": "Check Privacy Policy and update accordingly\n\n\nhttps://app.asana.com/app/asana/-/get_asset?asset_id=1217281443292141\n\n\n",
       "parent": {
         "gid": "1215816299489818",
         "name": "Mason Park (Account Split)"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1216272823277103",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1216272823277103",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "tags": []
     },
     {
-      "gid": "1217427173450380",
+      "gid": "1216611137372937",
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
-      "created_at": "2026-08-12T17:55:56.614Z",
+      "completed": true,
+      "completed_at": "2026-08-18T23:26:14.151Z",
+      "created_at": "2026-07-15T21:19:33.606Z",
       "due_at": null,
-      "due_on": "2026-08-13",
-      "modified_at": "2026-08-19T11:50:44.243Z",
-      "name": "Thank you Page",
-      "notes": "",
-      "parent": {
-        "gid": "1217133289235649",
-        "name": "Porcelain Veneers"
-      },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217427173450380",
-      "projects": [],
+      "due_on": "2026-08-07",
+      "modified_at": "2026-08-18T23:26:16.594Z",
+      "name": "Build Home Page",
+      "notes": "Build the home page for the new client. If you cannot get the home page done a wireframe needs to be completed before the next client meeting.\n\nStart the work on the site map and mood board.\n\n\nCurrent Website: https://drnahlah.com/\n\n",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1216611137372937",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
       "tags": []
     },
     {
-      "gid": "1217427173450379",
+      "gid": "1217292841282688",
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
-      "created_at": "2026-08-12T17:55:53.062Z",
+      "completed": true,
+      "completed_at": "2026-08-18T15:59:59.327Z",
+      "created_at": "2026-08-07T23:14:24.823Z",
       "due_at": null,
-      "due_on": "2026-08-13",
-      "modified_at": "2026-08-19T11:50:44.192Z",
-      "name": "Consult Page",
+      "due_on": "2026-08-12",
+      "modified_at": "2026-08-18T16:00:01.931Z",
+      "name": "Assist with wordpress implementation ",
       "notes": "",
       "parent": {
-        "gid": "1217133289235649",
-        "name": "Porcelain Veneers"
+        "gid": "1217206943779658",
+        "name": "Website Temp submission"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217427173450379",
-      "projects": [],
-      "tags": []
-    },
-    {
-      "gid": "1217427173450378",
-      "assignee": {
-        "gid": "1217162291350352",
-        "name": "Alejandro Milano"
-      },
-      "completed": false,
-      "completed_at": null,
-      "created_at": "2026-08-12T17:53:46.261Z",
-      "due_at": null,
-      "due_on": "2026-08-13",
-      "modified_at": "2026-08-19T11:50:44.135Z",
-      "name": "Landing Page",
-      "notes": "",
-      "parent": {
-        "gid": "1217133289235649",
-        "name": "Porcelain Veneers"
-      },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217427173450378",
-      "projects": [],
-      "tags": []
-    },
-    {
-      "gid": "1217427173694425",
-      "assignee": {
-        "gid": "1217162291350352",
-        "name": "Alejandro Milano"
-      },
-      "completed": false,
-      "completed_at": null,
-      "created_at": "2026-08-12T17:57:32.974Z",
-      "due_at": null,
-      "due_on": "2026-08-13",
-      "modified_at": "2026-08-19T11:50:43.916Z",
-      "name": "Thank you Page",
-      "notes": "",
-      "parent": {
-        "gid": "1217133289235650",
-        "name": "Next Door Landing Page"
-      },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217427173694425",
-      "projects": [],
-      "tags": []
-    },
-    {
-      "gid": "1217427173694424",
-      "assignee": {
-        "gid": "1217162291350352",
-        "name": "Alejandro Milano"
-      },
-      "completed": false,
-      "completed_at": null,
-      "created_at": "2026-08-12T17:57:24.282Z",
-      "due_at": null,
-      "due_on": "2026-08-13",
-      "modified_at": "2026-08-19T11:50:43.582Z",
-      "name": "Consult Page",
-      "notes": "",
-      "parent": {
-        "gid": "1217133289235650",
-        "name": "Next Door Landing Page"
-      },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217427173694424",
-      "projects": [],
-      "tags": []
-    },
-    {
-      "gid": "1217427173694423",
-      "assignee": {
-        "gid": "1217162291350352",
-        "name": "Alejandro Milano"
-      },
-      "completed": false,
-      "completed_at": null,
-      "created_at": "2026-08-12T17:57:09.736Z",
-      "due_at": null,
-      "due_on": "2026-08-13",
-      "modified_at": "2026-08-19T11:50:43.289Z",
-      "name": "Landing Page",
-      "notes": "",
-      "parent": {
-        "gid": "1217133289235650",
-        "name": "Next Door Landing Page"
-      },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217427173694423",
-      "projects": [],
-      "tags": []
-    },
-    {
-      "gid": "1217463274743063",
-      "assignee": {
-        "gid": "1217162291350352",
-        "name": "Alejandro Milano"
-      },
-      "completed": false,
-      "completed_at": null,
-      "created_at": "2026-08-13T15:42:37.627Z",
-      "due_at": null,
-      "due_on": "2026-08-13",
-      "modified_at": "2026-08-19T11:50:42.748Z",
-      "name": "Thank you Page",
-      "notes": "",
-      "parent": {
-        "gid": "1217162344633760",
-        "name": "Implants Landing Page"
-      },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217463274743063",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217292841282688",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "tags": []
     },
     {
@@ -261,20 +425,52 @@
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-09-04T03:08:12.711Z",
       "created_at": "2026-08-13T15:42:34.132Z",
       "due_at": null,
       "due_on": "2026-08-13",
-      "modified_at": "2026-08-19T11:50:42.713Z",
+      "modified_at": "2026-09-04T03:08:17.351Z",
       "name": "Consult",
       "notes": "",
       "parent": {
         "gid": "1217162344633760",
         "name": "Implants Landing Page"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217463274743062",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217463274743062",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217427173450378",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-09-04T03:08:12.910Z",
+      "created_at": "2026-08-12T17:53:46.261Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-09-04T03:08:17.321Z",
+      "name": "Landing Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217133289235649",
+        "name": "Porcelain Veneers"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217427173450378",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "tags": []
     },
     {
@@ -283,20 +479,545 @@
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-09-04T03:08:12.737Z",
       "created_at": "2026-08-13T15:42:33.008Z",
       "due_at": null,
       "due_on": "2026-08-13",
-      "modified_at": "2026-08-13T17:45:54.994Z",
+      "modified_at": "2026-09-04T03:08:17.288Z",
       "name": "Landing Page",
       "notes": "",
       "parent": {
         "gid": "1217162344633760",
         "name": "Implants Landing Page"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217463274743061",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217463274743061",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217427173450380",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-09-04T03:08:12.852Z",
+      "created_at": "2026-08-12T17:55:56.614Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-09-04T03:08:17.284Z",
+      "name": "Thank you Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217133289235649",
+        "name": "Porcelain Veneers"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217427173450380",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217427173694425",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-09-04T03:08:12.764Z",
+      "created_at": "2026-08-12T17:57:32.974Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-09-04T03:08:17.284Z",
+      "name": "Thank you Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217133289235650",
+        "name": "Next Door Landing Page"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217427173694425",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217463274743063",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-09-04T03:08:12.670Z",
+      "created_at": "2026-08-13T15:42:37.627Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-09-04T03:08:17.282Z",
+      "name": "Thank you Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217162344633760",
+        "name": "Implants Landing Page"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217463274743063",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217427173450379",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-09-04T03:08:12.885Z",
+      "created_at": "2026-08-12T17:55:53.062Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-09-04T03:08:17.278Z",
+      "name": "Consult Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217133289235649",
+        "name": "Porcelain Veneers"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217427173450379",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217427173694424",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-09-04T03:08:12.799Z",
+      "created_at": "2026-08-12T17:57:24.282Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-09-04T03:08:17.276Z",
+      "name": "Consult Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217133289235650",
+        "name": "Next Door Landing Page"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217427173694424",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217427173694423",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-09-04T03:08:12.827Z",
+      "created_at": "2026-08-12T17:57:09.736Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-09-04T03:08:17.273Z",
+      "name": "Landing Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217133289235650",
+        "name": "Next Door Landing Page"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217427173694423",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217463274743070",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:19:09.727Z",
+      "created_at": "2026-08-13T15:43:20.515Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-08-19T12:19:13.523Z",
+      "name": "Landing Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217162344633761",
+        "name": "AOX Landing Page"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217463274743070",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217427173694434",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:19:09.585Z",
+      "created_at": "2026-08-12T17:59:19.678Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-08-19T12:19:12.848Z",
+      "name": "Consult Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217162344633758",
+        "name": "Emergency Dentistry "
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217427173694434",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217463274743053",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:19:09.658Z",
+      "created_at": "2026-08-13T15:41:51.171Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-08-19T12:19:12.835Z",
+      "name": "Consult",
+      "notes": "",
+      "parent": {
+        "gid": "1217162344633759",
+        "name": "Dentist Near Me Landing Page"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217463274743053",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217463274743054",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:19:09.620Z",
+      "created_at": "2026-08-13T15:41:54.364Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-08-19T12:19:12.791Z",
+      "name": "Thank you Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217162344633759",
+        "name": "Dentist Near Me Landing Page"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217463274743054",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217463274743071",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:19:09.764Z",
+      "created_at": "2026-08-13T15:43:21.633Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-08-19T12:19:12.770Z",
+      "name": "Consult",
+      "notes": "",
+      "parent": {
+        "gid": "1217162344633761",
+        "name": "AOX Landing Page"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217463274743071",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217427173694435",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:19:09.518Z",
+      "created_at": "2026-08-12T17:59:26.998Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-08-19T12:19:12.751Z",
+      "name": "Thank you Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217162344633758",
+        "name": "Emergency Dentistry "
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217427173694435",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217463274743052",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:19:09.694Z",
+      "created_at": "2026-08-13T15:41:47.262Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-08-19T12:19:12.732Z",
+      "name": "Landing Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217162344633759",
+        "name": "Dentist Near Me Landing Page"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217463274743052",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217463274743072",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:19:09.797Z",
+      "created_at": "2026-08-13T15:43:25.249Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-08-19T12:19:10.739Z",
+      "name": "Thank you Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217162344633761",
+        "name": "AOX Landing Page"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217463274743072",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217427173694433",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:10:09.452Z",
+      "created_at": "2026-08-12T17:58:48.276Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-08-19T12:10:10.803Z",
+      "name": "Landing Page",
+      "notes": "",
+      "parent": {
+        "gid": "1217162344633758",
+        "name": "Emergency Dentistry "
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217427173694433",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1216611404338509",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-18T23:27:16.213Z",
+      "created_at": "2026-07-15T21:19:27.007Z",
+      "due_at": null,
+      "due_on": "2026-08-13",
+      "modified_at": "2026-08-18T23:27:17.885Z",
+      "name": "Conduct Research on New Client",
+      "notes": "Conduct initial research on new client. Check out their website and assign the development to someone on the team. Make the necessary Project inside of Asana for tracking.",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1216611404338509",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217206943779658",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T20:42:54.985Z",
+      "created_at": "2026-08-05T22:23:29.933Z",
+      "due_at": null,
+      "due_on": "2026-08-17",
+      "modified_at": "2026-08-19T20:42:57.014Z",
+      "name": "Website Temp submission",
+      "notes": "We need the temp website submitted to continue with the A2P process for GHL",
+      "parent": {
+        "gid": "1216611247147709",
+        "name": "GHL A2P"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217206943779658",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217040406855586",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T12:26:07.053Z",
+      "created_at": "2026-07-30T23:00:07.627Z",
+      "due_at": null,
+      "due_on": "2026-08-18",
+      "modified_at": "2026-08-19T12:26:07.243Z",
+      "name": "Landing Page Needs - Arvada",
+      "notes": "Use this one for inspiration:\nhttps://start.smartarchesdental.com/?step=start\nUse this one as inspiration as well: \nhttps://novismilerogers.com/?utm_source=google&utm_medium=cpc&utm_campaign=24091810786&utm_content=818968089590&utm_term=all%20on%20x%20dental%20implants&mt=p&nw=g&dv=c&gad_source=1&gad_campaignid=24091810786&gbraid=0AAAABEQDY-pcwGGqqmMpWSRrQduvavM4A&gclid=CjwKCAjwj7HTBhBiEiwA8s35OhO819xkzHFuex1g5sqcnuhcLbjnxa_kkwjRIn1SAaGXk3ycoB27UhoCx2gQAvD_BwE\nVeneers:\nhttps://www.drpaulomalley.com/services/ultra-thin-veneers/\n\nhttps://smilecenter.com/",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217040406855586",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1212508097665006",
+          "name": "BK Implementation - Arvada Dental Center & Implants"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217040406855578",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-19T11:50:25.030Z",
+      "created_at": "2026-07-30T22:58:57.514Z",
+      "due_at": null,
+      "due_on": "2026-08-18",
+      "modified_at": "2026-08-19T11:53:16.646Z",
+      "name": "Landing Page - Grand Mission",
+      "notes": "Add Landing page needs for Sang for Grand Mission\n\nUse this one for inspiration:\nhttps://start.smartarchesdental.com/?step=start\nUse this one as inspiration as well: \nhttps://novismilerogers.com/?utm_source=google&utm_medium=cpc&utm_campaign=24091810786&utm_content=818968089590&utm_term=all%20on%20x%20dental%20implants&mt=p&nw=g&dv=c&gad_source=1&gad_campaignid=24091810786&gbraid=0AAAABEQDY-pcwGGqqmMpWSRrQduvavM4A&gclid=CjwKCAjwj7HTBhBiEiwA8s35OhO819xkzHFuex1g5sqcnuhcLbjnxa_kkwjRIn1SAaGXk3ycoB27UhoCx2gQAvD_BwE\n\nAttached are the originals from the other Ad company. Use it as a reference point\n\nhttps://go.voitdental.com/",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217040406855578",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1212973917258998",
+          "name": "BK Implementation - Grand Mission Dentistry"
+        }
+      ],
       "tags": []
     },
     {
@@ -305,12 +1026,12 @@
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-08-24T14:23:43.615Z",
       "created_at": "2026-07-30T22:59:29.760Z",
       "due_at": null,
       "due_on": "2026-08-19",
-      "modified_at": "2026-08-20T17:12:37.385Z",
+      "modified_at": "2026-08-24T14:23:44.839Z",
       "name": "Landing Page - Mason Park",
       "notes": "Use this one for inspiration:\nhttps://start.smartarchesdental.com/?step=start\nUse this one as inspiration as well: \nhttps://novismilerogers.com/?utm_source=google&utm_medium=cpc&utm_campaign=24091810786&utm_content=818968089590&utm_term=all%20on%20x%20dental%20implants&mt=p&nw=g&dv=c&gad_source=1&gad_campaignid=24091810786&gbraid=0AAAABEQDY-pcwGGqqmMpWSRrQduvavM4A&gclid=CjwKCAjwj7HTBhBiEiwA8s35OhO819xkzHFuex1g5sqcnuhcLbjnxa_kkwjRIn1SAaGXk3ycoB27UhoCx2gQAvD_BwE\n\nAttached are the originals from the other Ad company. Use it as a reference point",
       "parent": null,
@@ -333,20 +1054,25 @@
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-08-24T14:33:52.268Z",
       "created_at": "2026-08-19T19:42:11.156Z",
       "due_at": null,
       "due_on": "2026-08-20",
-      "modified_at": "2026-08-20T04:11:08.772Z",
+      "modified_at": "2026-08-24T14:33:54.080Z",
       "name": "Thank you Page",
       "notes": "",
       "parent": {
         "gid": "1217611213174386",
         "name": "Legacy Landing Page Development (Invisalign)"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217658295652547",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217658295652547",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "tags": []
     },
     {
@@ -355,20 +1081,25 @@
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-08-24T14:33:05.720Z",
       "created_at": "2026-08-19T19:42:11.001Z",
       "due_at": null,
       "due_on": "2026-08-20",
-      "modified_at": "2026-08-20T04:11:08.659Z",
+      "modified_at": "2026-08-24T14:33:07.549Z",
       "name": "Consult",
       "notes": "",
       "parent": {
         "gid": "1217611213174386",
         "name": "Legacy Landing Page Development (Invisalign)"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217658295652542",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217658295652542",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "tags": []
     },
     {
@@ -377,46 +1108,23 @@
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-08-24T14:32:29.257Z",
       "created_at": "2026-08-19T19:42:10.849Z",
       "due_at": null,
       "due_on": "2026-08-20",
-      "modified_at": "2026-08-20T04:11:08.521Z",
+      "modified_at": "2026-08-24T14:32:30.943Z",
       "name": "Landing Page",
       "notes": "",
       "parent": {
         "gid": "1217611213174386",
         "name": "Legacy Landing Page Development (Invisalign)"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217658295652537",
-      "projects": [],
-      "tags": []
-    },
-    {
-      "gid": "1217611213174386",
-      "assignee": {
-        "gid": "1217162291350352",
-        "name": "Alejandro Milano"
-      },
-      "completed": false,
-      "completed_at": null,
-      "created_at": "2026-08-19T19:42:10.155Z",
-      "due_at": null,
-      "due_on": "2026-08-20",
-      "modified_at": "2026-08-20T04:09:29.385Z",
-      "name": "Legacy Landing Page Development (Invisalign)",
-      "notes": "We are moving from LSA for Dr. Sean and need to create an Invisalign landing page for his practice. ",
-      "parent": null,
-      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217611213174386",
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217658295652537",
       "projects": [
         {
           "gid": "1211830976769588",
           "name": "Success Daily Stand-Up"
-        },
-        {
-          "gid": "1212641204749217",
-          "name": "BK Implementation - Legacy Dental Pasadena"
         }
       ],
       "tags": []
@@ -427,12 +1135,12 @@
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-08-24T14:23:57.937Z",
       "created_at": "2026-01-30T04:37:04.953Z",
       "due_at": null,
       "due_on": "2026-08-20",
-      "modified_at": "2026-08-20T04:00:45.443Z",
+      "modified_at": "2026-08-24T14:23:59.662Z",
       "name": "Conduct Research on New Client",
       "notes": "Conduct initial research on new client. Check out their website and assign the development to someone on the team. Make the necessary Project inside of Asana for tracking.",
       "parent": null,
@@ -450,17 +1158,45 @@
       "tags": []
     },
     {
+      "gid": "1217697969470812",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-21T22:20:51.457Z",
+      "created_at": "2026-08-20T21:39:57.433Z",
+      "due_at": null,
+      "due_on": "2026-08-20",
+      "modified_at": "2026-08-21T22:20:53.006Z",
+      "name": "Marvel Dental Emergency Ad",
+      "notes": "During our call this morning Dr. Gazu said she's had the worst July and start of August since she's opened her practice. We need to invest into her success.\n\nhttps://www.marveldentaldds.com\nhttps://www.marveldentaldds.com/services/dental-emergency\n\n",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217697969470812",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1212009213957732",
+          "name": "BK Implementation - Marvel Dental"
+        }
+      ],
+      "tags": []
+    },
+    {
       "gid": "1216611137756982",
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-08-25T14:49:13.096Z",
       "created_at": "2026-07-15T21:20:35.360Z",
       "due_at": null,
-      "due_on": "2026-08-21",
-      "modified_at": "2026-08-19T11:52:17.370Z",
+      "due_on": "2026-08-24",
+      "modified_at": "2026-08-25T14:49:14.943Z",
       "name": "Complete Client Website",
       "notes": "",
       "parent": null,
@@ -478,6 +1214,663 @@
       "tags": []
     },
     {
+      "gid": "1217807424582652",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-27T13:42:50.686Z",
+      "created_at": "2026-08-24T23:39:12.639Z",
+      "due_at": null,
+      "due_on": "2026-08-25",
+      "modified_at": "2026-08-27T13:42:52.146Z",
+      "name": "Plug-in Site Ground",
+      "notes": "https://app.asana.com/app/asana/-/get_asset?asset_id=1217807424582659\n\n\nHow do I request a backup of the site that is more than what is currently have available in my account? It was discovered there was a plugin that was malicious on the site. It seems like we have successfully removed the plugin; however, out of an abundance of caution we would like to reinstate an older version of the site before this plugin was added. We have tried the 30-day backup but it has the plug-in installed. I'd like to see if a backup exists without this plugin available.\n04:38 PM\nThis question is related to website: http://bestdentistinkatytx.com/ and initiated by a collaborator.\n\nhttps://app.asana.com/app/asana/-/get_asset?asset_id=1217807424582657\n\n\n\nhttps://app.asana.com/app/asana/-/get_asset?asset_id=1217807424582662\n\n\n",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1215184535967345/task/1217807424582652",
+      "projects": [
+        {
+          "gid": "1215184535967345",
+          "name": "BK Implementation - Mason Park Dental"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217611213174386",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-25T23:13:43.690Z",
+      "created_at": "2026-08-19T19:42:10.155Z",
+      "due_at": null,
+      "due_on": "2026-08-25",
+      "modified_at": "2026-08-25T23:13:45.413Z",
+      "name": "Legacy Landing Page Development (Invisalign)",
+      "notes": "We are moving from LSA for Dr. Sean and need to create an Invisalign landing page for his practice. ",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217611213174386",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1212641204749217",
+          "name": "BK Implementation - Legacy Dental Pasadena"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217847693002196",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-25T23:03:35.601Z",
+      "created_at": "2026-08-25T22:52:46.084Z",
+      "due_at": null,
+      "due_on": "2026-08-25",
+      "modified_at": "2026-08-25T23:03:37.585Z",
+      "name": "Assign Web Manager >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+      "notes": "",
+      "parent": {
+        "gid": "1217847693002172",
+        "name": "Get Started Here"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1213901750672059/task/1217847693002196",
+      "projects": [
+        {
+          "gid": "1213901750672059",
+          "name": "BK Activation - Stone Dental Implant Center"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217830500466026",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-25T17:50:52.362Z",
+      "due_at": null,
+      "due_on": "2026-08-26",
+      "modified_at": "2026-08-26T04:11:36.982Z",
+      "name": "Finalize Tag Manager for Website",
+      "notes": "",
+      "parent": {
+        "gid": "1216611121698913",
+        "name": "Google Tag Manager"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217830500466026",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1218009803778898",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-09-01T15:00:09.326Z",
+      "created_at": "2026-09-01T14:58:14.876Z",
+      "due_at": null,
+      "due_on": "2026-08-28",
+      "modified_at": "2026-09-01T15:00:12.346Z",
+      "name": "Site Scraping",
+      "notes": "",
+      "parent": {
+        "gid": "1217160668112175",
+        "name": "Build New Stone Surgical Arts website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218009803778898",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1213901750672059",
+          "name": "BK Activation - Stone Dental Implant Center"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217932371430174",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T23:23:32.368Z",
+      "created_at": "2026-08-28T22:51:40.639Z",
+      "due_at": null,
+      "due_on": "2026-08-28",
+      "modified_at": "2026-08-28T23:23:34.011Z",
+      "name": "Main Site Recovery",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217932371430174",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1215184535967345",
+          "name": "BK Implementation - Mason Park Dental"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1216611138092304",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T23:22:55.577Z",
+      "created_at": "2026-07-15T21:21:31.162Z",
+      "due_at": null,
+      "due_on": "2026-08-28",
+      "modified_at": "2026-08-28T23:22:57.151Z",
+      "name": "Launch Client Website",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1216611138092304",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1216841931530915",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-07-24T00:01:51.180Z",
+      "due_at": null,
+      "due_on": "2026-08-31",
+      "modified_at": "2026-09-04T03:05:38.621Z",
+      "name": "Complete Client Website",
+      "notes": "Please add a second CTA on the site for Zocdoc\nhttps://us-74451.email-composer-webhooks.gong.io/email-tracking/clicked?email-info-token=eyJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiIxMzIxMTY2NDAzNzM2Njc3OTI5IiwiZHJhZnRJZCI6InI1ODA0NTExNDAxOTU3Nzc1MTExIiwibGlua1VybCI6Imh0dHBzOi8vd3d3LnpvY2RvYy5jb20vYm9va2luZy1saW5rL3ByYWN0aWNlL3dlc3QtbGEtaW1wbGFudHMtNjU5OTAiLCJsaW5rVGV4dCI6Imh0dHBzOi8vd3d3LnpvY2RvYy5jb20vYm9va2luZy1saW5rL3ByYWN0aWNlL3dlc3QtbGEtaW1wbGFudHMtNjU5OTAiLCJ0ZW1wbGF0ZUlkIjoiIiwiZXhwIjoxNzg3MzI4NDQxLCJpYXQiOjE3ODU1MTQwNDEsImp0aSI6InZrTTlrNDRYOGVkLyJ9.Fzy2lrom3LDqmEDkeE_i6auPOPvbCetMVCMonRD_jTY",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1216841931530915",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1213035312304439",
+          "name": "BK Implementation - West LA Implants"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217847693011245",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-25T22:52:47.875Z",
+      "due_at": null,
+      "due_on": "2026-09-01",
+      "modified_at": "2026-09-01T15:34:59.226Z",
+      "name": "Study the site",
+      "notes": "",
+      "parent": {
+        "gid": "1217160668112175",
+        "name": "Build New Stone Surgical Arts website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217847693011245",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1217847568412975",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-25T23:22:20.133Z",
+      "due_at": null,
+      "due_on": "2026-09-01",
+      "modified_at": "2026-09-01T15:34:52.017Z",
+      "name": "Build Core Pages",
+      "notes": "",
+      "parent": {
+        "gid": "1217160668112175",
+        "name": "Build New Stone Surgical Arts website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217847568412975",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1217835514580680",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-25T22:29:21.222Z",
+      "due_at": null,
+      "due_on": "2026-09-01",
+      "modified_at": "2026-09-01T15:29:48.882Z",
+      "name": "Study the site",
+      "notes": "",
+      "parent": {
+        "gid": "1217634021276355",
+        "name": "Build New Mason Park Site"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217835514580680",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1217892732561687",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-26T21:25:39.734Z",
+      "due_at": null,
+      "due_on": "2026-09-01",
+      "modified_at": "2026-09-01T15:29:33.449Z",
+      "name": "Build Core Pages",
+      "notes": "",
+      "parent": {
+        "gid": "1217634021276355",
+        "name": "Build New Mason Park Site"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217892732561687",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1218009803926812",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-01T15:15:49.756Z",
+      "due_at": null,
+      "due_on": "2026-09-01",
+      "modified_at": "2026-09-01T15:21:53.362Z",
+      "name": "Finish SOP's",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218009803926812",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1218009803926713",
+          "name": "Internal Website System"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1218009803926816",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-01T15:16:02.758Z",
+      "due_at": null,
+      "due_on": "2026-09-03",
+      "modified_at": "2026-09-03T04:08:23.991Z",
+      "name": "Create a reference design library",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218009803926816",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1218009803926713",
+          "name": "Internal Website System"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1218009803926814",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-01T15:15:56.244Z",
+      "due_at": null,
+      "due_on": "2026-09-03",
+      "modified_at": "2026-09-03T04:08:23.885Z",
+      "name": "Create Sitemaps",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218009803926814",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1218009803926713",
+          "name": "Internal Website System"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1218009803778905",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-01T15:04:22.313Z",
+      "due_at": null,
+      "due_on": "2026-09-03",
+      "modified_at": "2026-09-03T04:08:23.726Z",
+      "name": "Build New Mason Park Pediatric Site",
+      "notes": "Put together the templates for the home page to get the client's initial design completed.",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218009803778905",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1215184535967345",
+          "name": "BK Implementation - Mason Park Dental"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217932058617093",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-28T03:48:50.085Z",
+      "due_at": null,
+      "due_on": "2026-09-03",
+      "modified_at": "2026-09-03T04:07:25.769Z",
+      "name": "Extract All Assets and Place into Share Drive Folder",
+      "notes": "Grab all copy, media, and all assets. Place inside of the Share Drive in proper folders for faster deployment",
+      "parent": {
+        "gid": "1217931847433726",
+        "name": "Study the site"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217932058617093",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217160668112180",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-04T17:38:28.197Z",
+      "due_at": null,
+      "due_on": "2026-09-03",
+      "modified_at": "2026-09-03T04:03:29.861Z",
+      "name": "Build New Stone Med Spa",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1213901750672059/task/1217160668112180",
+      "projects": [
+        {
+          "gid": "1213901750672059",
+          "name": "BK Activation - Stone Dental Implant Center"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217160668112175",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-04T17:37:46.864Z",
+      "due_at": null,
+      "due_on": "2026-09-04",
+      "modified_at": "2026-09-04T03:41:25.592Z",
+      "name": "Build New Stone Surgical Arts website",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217160668112175",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1213901750672059",
+          "name": "BK Activation - Stone Dental Implant Center"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217932371430202",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-28T23:17:17.780Z",
+      "due_at": null,
+      "due_on": "2026-09-04",
+      "modified_at": "2026-09-04T03:35:46.925Z",
+      "name": "Improve Site",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217932371430202",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1218112701144997",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-02T20:22:54.770Z",
+      "due_at": null,
+      "due_on": "2026-09-04",
+      "modified_at": "2026-09-02T20:34:43.809Z",
+      "name": "Study Site",
+      "notes": "",
+      "parent": {
+        "gid": "1217847753593826",
+        "name": "Design Site - Surgical and MedSpa"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1218112701144997",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1217847753593826",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-25T22:52:47.580Z",
+      "due_at": null,
+      "due_on": "2026-09-04",
+      "modified_at": "2026-09-02T20:34:29.166Z",
+      "name": "Design Site - Surgical and MedSpa",
+      "notes": "Put together the templates for the home page to get the client's initial design completed.",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217847753593826",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1213901750672059",
+          "name": "BK Activation - Stone Dental Implant Center"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1218009803926818",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-01T15:16:18.828Z",
+      "due_at": null,
+      "due_on": "2026-09-04",
+      "modified_at": "2026-09-01T15:21:43.023Z",
+      "name": "Test system with new conditions",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218009803926818",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1218009803926713",
+          "name": "Internal Website System"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217932371430183",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-28T22:53:20.592Z",
+      "due_at": null,
+      "due_on": "2026-09-05",
+      "modified_at": "2026-09-02T15:13:00.638Z",
+      "name": "Pediatric Site Recovery ",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217932371430183",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1215184535967345",
+          "name": "BK Implementation - Mason Park Dental"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217634021276355",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-19T15:42:33.556Z",
+      "due_at": null,
+      "due_on": "2026-09-10",
+      "modified_at": "2026-09-03T23:19:40.841Z",
+      "name": "Build New Mason Park Site",
+      "notes": "Put together the templates for the home page to get the client's initial design completed.",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217634021276355",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1215184535967345",
+          "name": "BK Implementation - Mason Park Dental"
+        }
+      ],
+      "tags": []
+    },
+    {
       "gid": "1213035539833362",
       "assignee": {
         "gid": "1217162291350352",
@@ -487,8 +1880,8 @@
       "completed_at": null,
       "created_at": "2026-01-30T04:37:16.671Z",
       "due_at": null,
-      "due_on": "2026-08-25",
-      "modified_at": "2026-08-19T16:11:01.524Z",
+      "due_on": "2026-09-10",
+      "modified_at": "2026-08-31T23:56:58.047Z",
       "name": "Build Home Page",
       "notes": "Build the home page for the new client. If you cannot get the home page done a wireframe needs to be completed before the next client meeting.\n\nStart the work on the site map and mood board.",
       "parent": null,
@@ -506,21 +1899,831 @@
       "tags": []
     },
     {
-      "gid": "1216841931530915",
+      "gid": "1217931847433726",
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
       "completed": false,
       "completed_at": null,
-      "created_at": "2026-07-24T00:01:51.180Z",
+      "created_at": "2026-08-28T03:48:49.905Z",
       "due_at": null,
-      "due_on": "2026-08-31",
-      "modified_at": "2026-08-13T23:01:54.019Z",
-      "name": "Complete Client Website",
-      "notes": "Please add a second CTA on the site for Zocdoc\nhttps://us-74451.email-composer-webhooks.gong.io/email-tracking/clicked?email-info-token=eyJhbGciOiJIUzI1NiJ9.eyJjb21wYW55SWQiOiIxMzIxMTY2NDAzNzM2Njc3OTI5IiwiZHJhZnRJZCI6InI1ODA0NTExNDAxOTU3Nzc1MTExIiwibGlua1VybCI6Imh0dHBzOi8vd3d3LnpvY2RvYy5jb20vYm9va2luZy1saW5rL3ByYWN0aWNlL3dlc3QtbGEtaW1wbGFudHMtNjU5OTAiLCJsaW5rVGV4dCI6Imh0dHBzOi8vd3d3LnpvY2RvYy5jb20vYm9va2luZy1saW5rL3ByYWN0aWNlL3dlc3QtbGEtaW1wbGFudHMtNjU5OTAiLCJ0ZW1wbGF0ZUlkIjoiIiwiZXhwIjoxNzg3MzI4NDQxLCJpYXQiOjE3ODU1MTQwNDEsImp0aSI6InZrTTlrNDRYOGVkLyJ9.Fzy2lrom3LDqmEDkeE_i6auPOPvbCetMVCMonRD_jTY",
+      "due_on": "2026-09-18",
+      "modified_at": "2026-08-28T03:50:33.935Z",
+      "name": "Study the site",
+      "notes": "",
+      "parent": {
+        "gid": "1217929763942271",
+        "name": "Design Home Page"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217931847433726",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1217929763942271",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-28T03:48:48.954Z",
+      "due_at": null,
+      "due_on": "2026-09-21",
+      "modified_at": "2026-09-02T21:19:27.141Z",
+      "name": "Design Home Page",
+      "notes": "Put together the templates for the home page to get the client's initial design completed.",
       "parent": null,
-      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1213035312304439/task/1216841931530915",
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1215461031852894/task/1217929763942271",
+      "projects": [
+        {
+          "gid": "1215461031852894",
+          "name": "BK Implementation - Institute For Advanced Dentistry & Implants"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1218074384175704",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-01T23:20:06.756Z",
+      "due_at": null,
+      "due_on": "2026-09-30",
+      "modified_at": "2026-09-01T23:20:40.705Z",
+      "name": "Google Search Console",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218074384175704",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1218009803926713",
+          "name": "Internal Website System"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217847455796377",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-25T22:54:27.041Z",
+      "due_at": null,
+      "due_on": "2026-10-02",
+      "modified_at": "2026-09-02T00:39:32.951Z",
+      "name": "Design Home Page",
+      "notes": "Put together the templates for the home page to get the client's initial design completed.",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217847455796377",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1217835514580714",
+          "name": "BK Activation - Oceanic Dental"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1218112701145001",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-02T20:23:48.514Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-04T03:42:08.843Z",
+      "name": "Content Gap analysis",
+      "notes": "",
+      "parent": {
+        "gid": "1218112701144997",
+        "name": "Study Site"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1218112701145001",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1218112701145000",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-02T20:23:43.676Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-04T03:42:06.271Z",
+      "name": "Comparable sites",
+      "notes": "",
+      "parent": {
+        "gid": "1218112701144997",
+        "name": "Study Site"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1218112701145000",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1218112701144999",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-09-02T20:35:10.857Z",
+      "created_at": "2026-09-02T20:23:28.337Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-04T03:42:03.331Z",
+      "name": "Extract All Assets and Places into Share Drive Folder",
+      "notes": "",
+      "parent": {
+        "gid": "1218112701144997",
+        "name": "Study Site"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1218112701144999",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1218164971245146",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-04T03:07:06.708Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-04T03:07:07.443Z",
+      "name": "Thank you Page",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1218164971245146",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1218164971245127",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-03T22:25:29.591Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-03T22:25:52.893Z",
+      "name": "Improve Schema Strategy",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218164971245127",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1218009803926713",
+          "name": "Internal Website System"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1215476573810829",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-06-05T20:14:35.940Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-02T21:19:27.350Z",
+      "name": "Complete Client Website",
+      "notes": "",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1215461031852894/task/1215476573810829",
+      "projects": [
+        {
+          "gid": "1215461031852894",
+          "name": "BK Implementation - Institute For Advanced Dentistry & Implants"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1218112701145002",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-02T20:23:56.319Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-02T21:07:34.037Z",
+      "name": "Core Pages - MedSpa",
+      "notes": "",
+      "parent": {
+        "gid": "1218112701144997",
+        "name": "Study Site"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1218112701145002",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1218102467719018",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-02T16:15:19.111Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-02T18:35:26.222Z",
+      "name": "Assign Web Manager >>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>",
+      "notes": "",
+      "parent": {
+        "gid": "1218102578665163",
+        "name": "Get Started Here"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1218102467719018",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1218057689730298",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-01T15:04:25.253Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-01T15:04:30.244Z",
+      "name": "Build Core Pages",
+      "notes": "",
+      "parent": {
+        "gid": "1218009803778905",
+        "name": "Build New Mason Park Pediatric Site"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1218057689730298",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1218057681484331",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-09-01T15:04:23.618Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-01T15:04:28.087Z",
+      "name": "Study the site",
+      "notes": "",
+      "parent": {
+        "gid": "1218009803778905",
+        "name": "Build New Mason Park Pediatric Site"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1218057681484331",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1216611405101569",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-07-15T21:21:31.813Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-01T14:42:50.460Z",
+      "name": "Scan using AI for SEO improvement",
+      "notes": "",
+      "parent": {
+        "gid": "1217932371430202",
+        "name": "Improve Site"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1216611405101569",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1216611138092316",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-07-15T21:21:31.434Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-09-01T14:42:50.446Z",
+      "name": "Google Search Console",
+      "notes": "",
+      "parent": {
+        "gid": "1217932371430202",
+        "name": "Improve Site"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1216611138092316",
+      "projects": [],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398292",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T23:06:24.172Z",
+      "created_at": "2026-08-25T23:37:32.748Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T23:22:41.887Z",
+      "name": "The Review Widget",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398292",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398286",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T14:39:43.915Z",
+      "created_at": "2026-08-25T23:37:32.572Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T23:22:30.166Z",
+      "name": "Favicon",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398286",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398293",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:50:00.110Z",
+      "created_at": "2026-08-25T23:37:32.777Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:50:01.683Z",
+      "name": "Add mobile testing process",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398293",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398297",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:39:53.765Z",
+      "created_at": "2026-08-25T23:37:32.926Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:39:55.487Z",
+      "name": "Reconised verbiage",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398297",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398296",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:39:52.994Z",
+      "created_at": "2026-08-25T23:37:32.862Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:39:54.920Z",
+      "name": "Adding video below Dr Nahlah photo",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398296",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398295",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:39:50.301Z",
+      "created_at": "2026-08-25T23:37:32.832Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:39:52.121Z",
+      "name": "Change date order",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398295",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398288",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:39:41.767Z",
+      "created_at": "2026-08-25T23:37:32.640Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:39:43.429Z",
+      "name": "Sitemap",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398288",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398291",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:38:31.501Z",
+      "created_at": "2026-08-25T23:37:32.720Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:38:33.903Z",
+      "name": "Video Optimization",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398291",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398299",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:38:31.430Z",
+      "created_at": "2026-08-25T23:37:32.987Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:38:33.028Z",
+      "name": "Blog page redesign",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398299",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398300",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:38:31.449Z",
+      "created_at": "2026-08-25T23:37:33.017Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:38:32.988Z",
+      "name": "Services section",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398300",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398290",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:38:31.442Z",
+      "created_at": "2026-08-25T23:37:32.693Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:38:32.972Z",
+      "name": "OpenGraph",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398290",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398289",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:38:31.423Z",
+      "created_at": "2026-08-25T23:37:32.666Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:38:32.930Z",
+      "name": "AEO Schema",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398289",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398294",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:38:31.329Z",
+      "created_at": "2026-08-25T23:37:32.804Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:38:32.718Z",
+      "name": "Flickering animation problem on mobile",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398294",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217827524398287",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": true,
+      "completed_at": "2026-08-28T22:35:34.196Z",
+      "created_at": "2026-08-25T23:37:32.612Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T22:35:35.708Z",
+      "name": "301 Redirect",
+      "notes": "",
+      "parent": {
+        "gid": "1216611138092304",
+        "name": "Launch Client Website"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217827524398287",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        },
+        {
+          "gid": "1216581591101810",
+          "name": "BK Activation - Dr. Esam Nahlah"
+        }
+      ],
+      "tags": []
+    },
+    {
+      "gid": "1217835514580703",
+      "assignee": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
+      "completed": false,
+      "completed_at": null,
+      "created_at": "2026-08-25T22:45:44.235Z",
+      "due_at": null,
+      "due_on": null,
+      "modified_at": "2026-08-28T16:54:29.833Z",
+      "name": "Design Home Page",
+      "notes": "Put together the templates for the home page to get the client's initial design completed.",
+      "parent": null,
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1213035312304439/task/1217835514580703",
       "projects": [
         {
           "gid": "1213035312304439",
@@ -530,81 +2733,828 @@
       "tags": []
     },
     {
-      "gid": "1215463474851806",
+      "gid": "1215609089357905",
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
-      "completed": false,
-      "completed_at": null,
-      "created_at": "2026-06-05T20:13:42.807Z",
+      "completed": true,
+      "completed_at": "2026-08-25T21:30:41.232Z",
+      "created_at": "2026-06-10T19:26:22.531Z",
       "due_at": null,
-      "due_on": "2026-09-11",
-      "modified_at": "2026-08-19T05:02:15.079Z",
-      "name": "Build Home Page",
-      "notes": "Build the home page for the new client. If you cannot get the home page done a wireframe needs to be completed before the next client meeting.\n\nStart the work on the site map and mood board.",
-      "parent": null,
-      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1215463474851806",
-      "projects": [
-        {
-          "gid": "1211830976769588",
-          "name": "Success Daily Stand-Up"
-        },
-        {
-          "gid": "1215461031852894",
-          "name": "BK Implementation - Institute For Advanced Dentistry & Implants"
-        }
-      ],
+      "due_on": null,
+      "modified_at": "2026-08-25T21:30:41.345Z",
+      "name": "Emergency Dental Care",
+      "notes": "Same-Day Appointments\" and \"Pain Relief",
+      "parent": {
+        "gid": "1215609089357897",
+        "name": "General and Preventive Dentistry"
+      },
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1215609089357905",
+      "projects": [],
       "tags": []
     },
     {
-      "gid": "1217160668112175",
+      "gid": "1217790256069201",
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
       "completed": false,
       "completed_at": null,
-      "created_at": "2026-08-04T17:37:46.864Z",
+      "created_at": "2026-08-24T15:10:56.902Z",
       "due_at": null,
       "due_on": null,
-      "modified_at": "2026-08-10T21:33:40.189Z",
-      "name": "Build New Stone Surgical Arts website",
-      "notes": "",
+      "modified_at": "2026-08-24T15:10:57.191Z",
+      "name": "Consider delegating bilal@thrivesquare.com's tasks",
+      "notes": "When bilal@thrivesquare.com was removed from your organization, a private project was automatically created containing all the tasks that were assigned to that user, which you can find here:\nhttps://app.asana.com/1/1210572425689866/project/1217790341230058\n\nThose tasks are now unassigned. We recommend that you reassign the tasks, or add a team member to the project who can delegate the work.",
       "parent": null,
-      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1213901750672059/task/1217160668112175",
-      "projects": [
-        {
-          "gid": "1213901750672059",
-          "name": "BK Activation - Stone Dental Implant Center"
-        }
-      ],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217790256069201",
+      "projects": [],
       "tags": []
     },
     {
-      "gid": "1217160668112180",
+      "gid": "1217790255615206",
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
       "completed": false,
       "completed_at": null,
-      "created_at": "2026-08-04T17:38:28.197Z",
+      "created_at": "2026-08-24T15:10:22.633Z",
       "due_at": null,
       "due_on": null,
-      "modified_at": "2026-08-10T21:33:40.159Z",
-      "name": "Build New Stone Med Spa",
-      "notes": "",
+      "modified_at": "2026-08-24T15:10:22.854Z",
+      "name": "Consider delegating Nayeli Ortega's tasks",
+      "notes": "When Nayeli Ortega was removed from your organization, a private project was automatically created containing all the tasks that were assigned to that user, which you can find here:\nhttps://app.asana.com/1/1210572425689866/project/1217790323182010\n\nThose tasks are now unassigned. We recommend that you reassign the tasks, or add a team member to the project who can delegate the work.",
       "parent": null,
-      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1213901750672059/task/1217160668112180",
-      "projects": [
-        {
-          "gid": "1213901750672059",
-          "name": "BK Activation - Stone Dental Implant Center"
-        }
-      ],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217790255615206",
+      "projects": [],
       "tags": []
     }
   ],
-  "projects": []
+  "projects": [
+    {
+      "gid": "1210593237971416",
+      "archived": false,
+      "current_status": null,
+      "name": "Products Sprint Plan (Legacy)",
+      "team": {
+        "gid": "1210572519705485",
+        "name": "Engineering"
+      },
+      "task_counts": {
+        "num_tasks": 119,
+        "num_completed_tasks": 67,
+        "num_incomplete_tasks": 52
+      }
+    },
+    {
+      "gid": "1210593237971546",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Kanban",
+      "team": {
+        "gid": "1210572519705485",
+        "name": "Engineering"
+      },
+      "task_counts": {
+        "num_tasks": 870,
+        "num_completed_tasks": 735,
+        "num_incomplete_tasks": 135
+      }
+    },
+    {
+      "gid": "1210593237971736",
+      "archived": false,
+      "current_status": null,
+      "name": "AVT Sprint Planning",
+      "team": {
+        "gid": "1210572519705485",
+        "name": "Engineering"
+      },
+      "task_counts": {
+        "num_tasks": 108,
+        "num_completed_tasks": 85,
+        "num_incomplete_tasks": 23
+      }
+    },
+    {
+      "gid": "1210907122348243",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Onboarding",
+      "team": {
+        "gid": "1210572519705485",
+        "name": "Engineering"
+      },
+      "task_counts": {
+        "num_tasks": 25,
+        "num_completed_tasks": 11,
+        "num_incomplete_tasks": 14
+      }
+    },
+    {
+      "gid": "1211353800437208",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Activation - GP Template",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 117,
+        "num_completed_tasks": 0,
+        "num_incomplete_tasks": 117
+      }
+    },
+    {
+      "gid": "1211370097620791",
+      "archived": false,
+      "current_status": null,
+      "name": "Customer Support for Bank Account",
+      "team": {
+        "gid": "1210572519705485",
+        "name": "Engineering"
+      },
+      "task_counts": {
+        "num_tasks": 2,
+        "num_completed_tasks": 2,
+        "num_incomplete_tasks": 0
+      }
+    },
+    {
+      "gid": "1211388114636962",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Haven Cosmetic Dental",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 84,
+        "num_completed_tasks": 44,
+        "num_incomplete_tasks": 40
+      }
+    },
+    {
+      "gid": "1211591439800187",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Website Projects Flow",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 12,
+        "num_completed_tasks": 8,
+        "num_incomplete_tasks": 4
+      }
+    },
+    {
+      "gid": "1211830976769588",
+      "archived": false,
+      "current_status": null,
+      "name": "Success Daily Stand-Up",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 2096,
+        "num_completed_tasks": 1882,
+        "num_incomplete_tasks": 214
+      }
+    },
+    {
+      "gid": "1211938844219579",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Azusa Dental",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 90,
+        "num_completed_tasks": 61,
+        "num_incomplete_tasks": 29
+      }
+    },
+    {
+      "gid": "1212009213957732",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Marvel Dental",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 106,
+        "num_completed_tasks": 76,
+        "num_incomplete_tasks": 30
+      }
+    },
+    {
+      "gid": "1212234486700708",
+      "archived": false,
+      "current_status": null,
+      "name": "Website - Azusa Dental Clinic",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 17,
+        "num_completed_tasks": 17,
+        "num_incomplete_tasks": 0
+      }
+    },
+    {
+      "gid": "1212234489361211",
+      "archived": false,
+      "current_status": null,
+      "name": "Website - Master Template",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 18,
+        "num_completed_tasks": 0,
+        "num_incomplete_tasks": 18
+      }
+    },
+    {
+      "gid": "1212235714747179",
+      "archived": false,
+      "current_status": null,
+      "name": "Website - Ellem Dental",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 17,
+        "num_completed_tasks": 4,
+        "num_incomplete_tasks": 13
+      }
+    },
+    {
+      "gid": "1212235714747220",
+      "archived": false,
+      "current_status": null,
+      "name": "Website - Ace Dental",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 17,
+        "num_completed_tasks": 4,
+        "num_incomplete_tasks": 13
+      }
+    },
+    {
+      "gid": "1212235714747266",
+      "archived": false,
+      "current_status": null,
+      "name": "Website - Makris Dental Prosthodontics",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 19,
+        "num_completed_tasks": 11,
+        "num_incomplete_tasks": 8
+      }
+    },
+    {
+      "gid": "1212277835973895",
+      "archived": false,
+      "current_status": null,
+      "name": "Website - Marvel Dental",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 17,
+        "num_completed_tasks": 0,
+        "num_incomplete_tasks": 17
+      }
+    },
+    {
+      "gid": "1212283956943451",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - KCB",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 50,
+        "num_completed_tasks": 0,
+        "num_incomplete_tasks": 50
+      }
+    },
+    {
+      "gid": "1212283956943496",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - KOS-Ason",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 72,
+        "num_completed_tasks": 44,
+        "num_incomplete_tasks": 28
+      }
+    },
+    {
+      "gid": "1212315451220723",
+      "archived": false,
+      "current_status": null,
+      "name": "Website - Dr. Amy",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 17,
+        "num_completed_tasks": 0,
+        "num_incomplete_tasks": 17
+      }
+    },
+    {
+      "gid": "1212508097665006",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Arvada Dental Center & Implants",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 101,
+        "num_completed_tasks": 76,
+        "num_incomplete_tasks": 25
+      }
+    },
+    {
+      "gid": "1212607235372096",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - High Desert Skin Center",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 77,
+        "num_completed_tasks": 21,
+        "num_incomplete_tasks": 56
+      }
+    },
+    {
+      "gid": "1212641204749070",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Makris Dental Prosthodontics",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 74,
+        "num_completed_tasks": 43,
+        "num_incomplete_tasks": 31
+      }
+    },
+    {
+      "gid": "1212641204749119",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - OCPAO Implant Academy",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 58,
+        "num_completed_tasks": 0,
+        "num_incomplete_tasks": 58
+      }
+    },
+    {
+      "gid": "1212641204749168",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - AVA",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 88,
+        "num_completed_tasks": 56,
+        "num_incomplete_tasks": 32
+      }
+    },
+    {
+      "gid": "1212641204749217",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Legacy Dental Pasadena",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 89,
+        "num_completed_tasks": 63,
+        "num_incomplete_tasks": 26
+      }
+    },
+    {
+      "gid": "1212641204749266",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Omnia Dental Chino Hills",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 83,
+        "num_completed_tasks": 53,
+        "num_incomplete_tasks": 30
+      }
+    },
+    {
+      "gid": "1212848587311738",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Plan",
+      "team": {
+        "gid": "1210572519705485",
+        "name": "Engineering"
+      },
+      "task_counts": {
+        "num_tasks": 52,
+        "num_completed_tasks": 22,
+        "num_incomplete_tasks": 30
+      }
+    },
+    {
+      "gid": "1212973917258998",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Grand Mission Dentistry",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 118,
+        "num_completed_tasks": 86,
+        "num_incomplete_tasks": 32
+      }
+    },
+    {
+      "gid": "1213035312304390",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Atwood Dentistry",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 81,
+        "num_completed_tasks": 31,
+        "num_incomplete_tasks": 50
+      }
+    },
+    {
+      "gid": "1213035312304439",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - West LA Implants",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 98,
+        "num_completed_tasks": 54,
+        "num_incomplete_tasks": 44
+      }
+    },
+    {
+      "gid": "1213140025860450",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - South Bay Dental Loft",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 88,
+        "num_completed_tasks": 61,
+        "num_incomplete_tasks": 27
+      }
+    },
+    {
+      "gid": "1213176049264542",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Emerald Consulting Firm",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 61,
+        "num_completed_tasks": 10,
+        "num_incomplete_tasks": 51
+      }
+    },
+    {
+      "gid": "1213521748976394",
+      "archived": false,
+      "current_status": null,
+      "name": "South Bay Dental Loft - Request Tracker",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 13,
+        "num_completed_tasks": 12,
+        "num_incomplete_tasks": 1
+      }
+    },
+    {
+      "gid": "1213653314712728",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Activation - Livewell Dental",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 131,
+        "num_completed_tasks": 102,
+        "num_incomplete_tasks": 29
+      }
+    },
+    {
+      "gid": "1213655885496358",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Ortega Cottage Dentistry",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 93,
+        "num_completed_tasks": 60,
+        "num_incomplete_tasks": 33
+      }
+    },
+    {
+      "gid": "1213655885496405",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Organ Mountain Dental",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 82,
+        "num_completed_tasks": 50,
+        "num_incomplete_tasks": 32
+      }
+    },
+    {
+      "gid": "1213804573191122",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Markham Family Dental",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 87,
+        "num_completed_tasks": 58,
+        "num_incomplete_tasks": 29
+      }
+    },
+    {
+      "gid": "1213881588744044",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - South Seattle Smiles",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 51,
+        "num_completed_tasks": 30,
+        "num_incomplete_tasks": 21
+      }
+    },
+    {
+      "gid": "1213901750672059",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Activation - Stone Dental Implant Center",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 182,
+        "num_completed_tasks": 126,
+        "num_incomplete_tasks": 56
+      }
+    },
+    {
+      "gid": "1214111584809589",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Activation -  Hackensack Center for Dental Implants",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 89,
+        "num_completed_tasks": 48,
+        "num_incomplete_tasks": 41
+      }
+    },
+    {
+      "gid": "1214308405733045",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Restore Implant Studio",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 74,
+        "num_completed_tasks": 18,
+        "num_incomplete_tasks": 56
+      }
+    },
+    {
+      "gid": "1214461555479969",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Elite Oral Surgery",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 81,
+        "num_completed_tasks": 24,
+        "num_incomplete_tasks": 57
+      }
+    },
+    {
+      "gid": "1215184535802294",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Ason Oral Surgery",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 89,
+        "num_completed_tasks": 49,
+        "num_incomplete_tasks": 40
+      }
+    },
+    {
+      "gid": "1215184535967345",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Mason Park Dental",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 96,
+        "num_completed_tasks": 52,
+        "num_incomplete_tasks": 44
+      }
+    },
+    {
+      "gid": "1215461031852801",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Dentiq Dentistry",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 92,
+        "num_completed_tasks": 61,
+        "num_incomplete_tasks": 31
+      }
+    },
+    {
+      "gid": "1215461031852894",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Implementation - Institute For Advanced Dentistry & Implants",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 73,
+        "num_completed_tasks": 28,
+        "num_incomplete_tasks": 45
+      }
+    },
+    {
+      "gid": "1216578916179222",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Activation - Implant",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 84,
+        "num_completed_tasks": 0,
+        "num_incomplete_tasks": 84
+      }
+    },
+    {
+      "gid": "1216581591101810",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Activation - Dr. Esam Nahlah",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 214,
+        "num_completed_tasks": 170,
+        "num_incomplete_tasks": 44
+      }
+    },
+    {
+      "gid": "1216599387841696",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Activation - Prosthodontics",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 78,
+        "num_completed_tasks": 0,
+        "num_incomplete_tasks": 78
+      }
+    },
+    {
+      "gid": "1217790323182010",
+      "archived": false,
+      "current_status": null,
+      "name": "Nayeli Ortega's previously assigned tasks",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 0,
+        "num_completed_tasks": 0,
+        "num_incomplete_tasks": 0
+      }
+    },
+    {
+      "gid": "1217790341230058",
+      "archived": false,
+      "current_status": null,
+      "name": "bilal@thrivesquare.com's previously assigned tasks",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 3,
+        "num_completed_tasks": 0,
+        "num_incomplete_tasks": 3
+      }
+    },
+    {
+      "gid": "1217835514580714",
+      "archived": false,
+      "current_status": null,
+      "name": "BK Activation - Oceanic Dental",
+      "team": {
+        "gid": "1211351081751226",
+        "name": "Customer Success"
+      },
+      "task_counts": {
+        "num_tasks": 140,
+        "num_completed_tasks": 52,
+        "num_incomplete_tasks": 88
+      }
+    },
+    {
+      "gid": "1218009803926713",
+      "archived": false,
+      "current_status": null,
+      "name": "Internal Website System",
+      "team": null,
+      "task_counts": {
+        "num_tasks": 6,
+        "num_completed_tasks": 0,
+        "num_incomplete_tasks": 6
+      }
+    }
+  ]
 }

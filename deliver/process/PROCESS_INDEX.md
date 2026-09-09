@@ -47,7 +47,7 @@ Use [OFFER_ROUTING.md](./OFFER_ROUTING.md) as the source of truth for required h
 
 ## Process Modules
 
-The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `10` sequence is the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `11` through `15`, deployment module `16`, AI Vercel/Airtable build module `17`, and the Instatic modules `18` and `20`.
+The current numbered folders are reusable templates. Module `00` is the setup workflow for turning a Sales handoff into a client folder. The full `01` through `10` sequence is the default execution path for `Development from Scratch`; other offers assemble a subset or adapted version of these modules, including offer-specific modules `11` through `15`, deployment module `16`, AI Vercel/Airtable build module `17`, and the Instatic modules `18`, `20` and `22`.
 
 | # | Phase | Directive |
 | :---: | :--- | :--- |
@@ -70,27 +70,58 @@ The current numbered folders are reusable templates. Module `00` is the setup wo
 | 16 | Vercel Deployment | [16-vercel-deployment.md](./16-vercel-deployment/16-vercel-deployment.md) |
 | 17 | AI Site Build & Airtable | [17-ai-site-build-airtable.md](./17-ai-site-build-airtable/17-ai-site-build-airtable.md) |
 | 18 | Instatic Embeds | [18-instatic-embeds.md](./18-instatic-embeds/18-instatic-embeds.md) |
-| 19 | Cloudflare Launch (sitemap, 301 map, canonical host) | _not yet promoted — lives in `bk-dr-nahlah` as `19-cloudflare-launch/`_ |
+| 19 | Cloudflare Launch (sitemap, 301 map, canonical host) | _promoted on the `bk-dr-nahlah` branch as `deliver/process/19-cloudflare-launch/`; **not yet merged to `main`**_ |
 | 20 | Instatic Domain & Admin Origins | [20-instatic-domain-origins.md](./20-instatic-domain-origins/20-instatic-domain-origins.md) |
 | 21 | Instatic Staging Clone & Promotion | [21-instatic-staging-clone.md](./21-instatic-staging-clone/21-instatic-staging-clone.md) |
+| 22 | Instatic API Sync (CSS registry, publish, parity gate) | [22-instatic-api-sync.md](./22-instatic-api-sync/22-instatic-api-sync.md) |
 
-### Instatic modules (`18`, `20`, `21`)
+### Instatic modules (`18`, `20`, `21`, `22`)
 
-Not part of the offer-routing sequence — they apply to any engagement whose site is delivered on **Instatic** rather than Webflow or Vercel, and both are needed on every such site:
+Not part of the offer-routing sequence — they apply to any engagement whose site is delivered on **Instatic** rather than Webflow or Vercel, and all four are needed on every such site:
 
 - **`18` Instatic Embeds** makes third-party widgets possible at all. Instatic publishes behind `frame-src 'none'`, so without this plugin no booking form, review widget or chat bubble can load. Install it on every Instatic site.
 - **`20` Instatic Domain & Admin Origins** is run at launch and at every later domain change. It covers the two independent ways an Instatic domain breaks and carries a checker for each: `check-origins.mjs` (the **gate** — is `client.com/admin` able to *save*; run it before sending anyone an admin link) and `check-dns.mjs` (the **pointer** — does the domain still reach Railway at all). Railway mints a random CNAME target per custom domain; a redeploy does not move it, but deleting and re-adding the domain does, which is how Mason Park went down on 2026-08-28.
 
 - **`21` Instatic Staging Clone & Promotion** gives the site a real staging twin and a way back. Instatic's publish is all-or-nothing — one click replaces every public page — so a redesign cannot live as drafts on production without riding out with the next typo fix. Proven on Dr. Nahlah 2026-08-31 and run again for Mason Park the same day, which is what promoted it out of the client folder.
+- **`22` Instatic API Sync** is the build-and-publish toolchain: the CSS registry migration, the `var()`/custom-property handling happy-dom does not survive, the publish call and the parity gate that catches a dropped declaration before it ships. It is shared tooling — run it from whichever worktree is active, and set `INSTATIC_BASE_URL` for the client you are pointing at.
 
 `20` should be run as part of [`09-launch`](./09-launch/09-launch.md) for an Instatic site; `09` otherwise only knows about Webflow and Vercel publishing targets.
 
 > [!IMPORTANT]
-> **Number `19` is taken.** `19-cloudflare-launch` was built during the Dr. Nahlah launch and still
-> lives untracked in the `bk-dr-nahlah` worktree, so it is invisible from `main` and a new module
-> numbered from `main` alone will collide with it. That already happened once: this module shipped
-> as `19` and was renumbered to `20`. **Before claiming a number, check the worktrees too**, not
-> just `git ls-files` on `main`. `19-cloudflare-launch` should be promoted here.
+> **00-22 are all claimed. The next free number is `23`.**
+>
+> Numbers are claimed across every worktree, not just `main`, and most of the claims are invisible
+> from here. `19-cloudflare-launch` is promoted into `deliver/process/` on the `bk-dr-nahlah`
+> branch but unmerged; `21-instatic-upload` lives in `bk-stone` and **now collides with the promoted
+> `21-instatic-staging-clone`** — see below. **Before claiming a number, scan
+> the worktrees**, not just `git ls-files` on `main`:
+>
+> ```bash
+> ls ~/orca/workspaces/*/*/deliver/*/*/workflows/ | grep -E '^[0-9][0-9]-' | sort -u
+> ```
+>
+> Verified 2026-09-09: 27 distinct numbered modules across thirteen worktrees, against the 22
+> listed above.
+>
+> Getting this wrong has real cost. `20-instatic-domain-origins` shipped as `19`, collided, and had
+> to be renumbered. `05-instatic-upload` collided with the canonical `05-design-revisions` in two
+> client folders and was renumbered to `21` on 2026-09-04 — `bk-stone-med-spa` still carries the
+> `05` copy.
+>
+> **Client-local modules that two clients use should be promoted here**, which also settles their
+> number once instead of per worktree. `15-instatic-api-sync` was the worked example: it lived in
+> `dr-nahlah/workflows/`, and `bk-stone` and `bk-stone-med-spa` reached it by sparse-checking a
+> `dr-nahlah/` skeleton into worktrees that have nothing to do with that client. Promoted to `22`
+> on 2026-09-09, and `21-instatic-staging-clone` was promoted from the Mason Park run. Still due:
+> `19-cloudflare-launch` and the rest of the
+> Dr. Nahlah Instatic run (`16-instatic-plugins`, `17-instatic-platform-patch`,
+> `18-instatic-staging-clone` — each collides with a canonical module of the same number).
+>
+> **Open collision: `21`.** The promotion of `21-instatic-staging-clone` into `deliver/process/`
+> settles `21` for it, which leaves `bk-stone`'s client-local `21-instatic-upload` holding a number
+> it no longer owns. It was already renumbered once (`05` → `21`, 2026-09-04) for the same reason.
+> It should become `23` when it is promoted, and `bk-stone-med-spa` still carries the original `05`
+> copy. Nothing breaks until one of those branches merges: it is a naming clash, not a code one.
 
 ## Supporting Workflows
 Non-sequential tools that delivery phases call as needed. They live flat inside `deliver/process/` alongside the numbered phases (mirroring how `deliver/process/` already holds non-numbered items such as `design-system-library`), but they are **not** part of the `00`-`17` offer-routing sequence. Each follows the same standard folder shape and can be cloned into `deliver/[client-name]/workflows/` when run for a specific engagement.

@@ -1,0 +1,11 @@
+# This module is SHARED — it is promoted process tooling, run against every
+# Instatic client from whichever worktree is active. Nothing generated in here
+# belongs to the repository: a tracked artifact is one client's output sitting
+# on a path every other client also writes to.
+#
+# Until 2026-09-09 this folder lived at
+# deliver/brandklout/dr-nahlah/workflows/15-instatic-api-sync/ and five of
+# Dr. Nahlah's outputs (~373KB) were tracked and carried by every branch. They
+# are all regenerable; the last tracked copies are in history at the old path.
+*
+!.gitignore
