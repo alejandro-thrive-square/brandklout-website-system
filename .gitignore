@@ -108,7 +108,11 @@ desktop.ini
 # Deliberately untracked: every worktree writes the same path, so tracking it would
 # guarantee a merge conflict on every client branch. The durable record of what a
 # session did is its commits; the runbook is only the handoff between sessions.
-.claude/RUNBOOK.md
+# Runbooks are TRACKED as of 2026-09-04. A client's history lives at
+# deliver/brandklout/<client>/docs/RUNBOOK.md + docs/runbook/, and the repo's own
+# system history at .claude/RUNBOOK.md + .claude/runbook/. Ignoring them meant they
+# travelled with nothing, were backed up nowhere, and died with the worktree.
+# Nothing below re-ignores them.
 
 # Leftovers from the session-rotation hooks removed on 2026-08-22 (SYSTEM_RULES.md
 # section 5). Kept ignored so old worktrees do not surface them as new files.

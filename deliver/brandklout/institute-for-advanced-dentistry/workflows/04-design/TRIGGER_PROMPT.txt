@@ -1,0 +1,43 @@
+Execute the 04-Design workflow for client [CLIENT_NAME].
+
+Preflight:
+1. Confirm the client worktree is clean or checkpointed and contains the current
+   local-main baseline recorded in docs/project-overview.md.
+2. Read the canonical directive:
+   deliver/process/04-design/04-design.md
+3. Read the client project overview, handoff, wireframes, graphic resources,
+   selected design-system package, and any client/partner design standard.
+4. Inventory every authoritative design source, including current public pages,
+   Webflow embeds, Figma, moodboards, guidelines, and reference URLs. Download
+   required assets into the active worktree. Write `.tmp/reference-inventory.md`.
+   Do not infer that a page is empty without inspecting its embeds and linked assets.
+5. Resolve conflicts in source authority before design. If brand identity or
+   reference priority is unclear, stop before building multiple pages.
+
+Canary:
+6. Create `.tmp/style-direction.md` and `.tmp/design-tokens.json` from the selected
+   authority and initialized design-system package. Install the canonical fluid
+   root before sizing type or spacing.
+7. Build one representative canary page, or the shared shell plus the most complex
+   section. Do not build the remaining page set yet.
+8. Test the canary at 360, 390, 768, 1024, 1440, and 1920. Review screenshots,
+   assert zero mobile overflow, drive interactions in a focused tab, check reduced
+   motion and console state, and compare computed typography/palette/geometry to
+   the selected authority.
+9. Record findings and approval in `.tmp/canary-review.md`. Freeze the accepted
+   tokens, shell, component vocabulary, and interaction runtime for the batch.
+
+Batch:
+10. Build the remaining approved pages from the frozen system while preserving
+    real client content, per-page conversion goals, and responsive behavior.
+11. Produce the prototype manifest, final design package, component specification,
+    six-breakpoint screenshots, token audit, and interaction results required by
+    the canonical directive and any client/partner standard.
+12. Gate every page on `node scripts/fluid-root.mjs --check <package>`, mobile
+    overflow, visual review, and live interaction. Passing a structural/static
+    audit is necessary but not sufficient.
+13. Publish the review package only to the approved preview target. Record the
+    review URL and route accepted corrections into 05-design-revisions.
+
+All project-specific outputs belong in:
+deliver/[CLIENT_NAME]/workflows/04-design/.tmp/

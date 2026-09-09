@@ -198,6 +198,102 @@ The script seeds assets explicitly rather than relying on the hook: `post-checko
 the previous HEAD is the null SHA, and the sparse flow checks out in a *second* step
 (`--no-checkout` → `sparse-checkout set` → `checkout`), so that hook does not fire.
 
+##### Worktrees created from the Orca app
+
+`new-client-worktree.sh` only covers worktrees created from the command line. A worktree created in
+the **Orca app** is a plain `git worktree add`, so it lands full — every Brandklout client visible in
+`deliver/brandklout/`, which makes it hard to tell which client the workspace is even for. Narrow it
+after the fact:
+
+```bash
+bash scripts/sparsify-worktree.sh                         # client derived from the bk-<slug> branch
+bash scripts/sparsify-worktree.sh --client institute-for-advanced-dentistry
+bash scripts/sparsify-worktree.sh --dry-run               # print the plan first
+bash scripts/sparsify-worktree.sh --undo                  # back to the full checkout
+```
+
+**This runs automatically on Orca worktree creation.** Orca's per-repo setup hook for this repo is
+`npm install`, and root `package.json` carries a `postinstall` that calls the script. Nothing to
+configure per worktree; if you ever change Orca's setup script, keep `npm install` in it or the
+narrowing stops happening.
+
+The guards matter more than the cone here, because unlike `new-client-worktree.sh` this one edits a
+worktree that may already hold work:
+
+- **The main worktree is never narrowed.** It is the source every other worktree seeds assets from,
+  and the one place the whole repo is meant to be visible.
+- **Uncommitted tracked changes abort it.** Narrowing would have to discard modified files outside
+  the cone; commit or stash first, or pass `--force` if the changes are inside the client you keep.
+- **An already-sparse worktree is left alone** and its cone printed, so re-running `npm install`
+  never re-scopes a worktree you widened by hand. `--force` re-scopes deliberately.
+- **A name that matches no client keeps the shared context only** and prints the
+  `git sparse-checkout add` line for every client. This is the `bk-ifa-dentistry` case — the slug is
+  not a prefix of `institute-for-advanced-dentistry`, so pass `--client` there.
+
+The client is derived from the **worktree directory name first, the branch's last path segment
+second**, stripping `bk-` and then trimming `-suffixes` longest-first. Both halves are load-bearing:
+Orca names the branch `alejandro-thrive-square/bk-livewell`, not `bk-livewell`, so matching the raw
+branch finds nothing, and the directory name is exactly what was typed into Orca. `scripts/hooks/post-checkout`
+carries the same derivation for asset seeding and had the same prefix bug — keep the two in step.
+
+Sparse-checkout removes *tracked* files only. Assets mirrored in by `mirror-assets.sh` are
+git-ignored, so other clients can survive as asset-only leftover directories; the script lists them
+and prints the `rm -rf`, but never deletes on its own.
+
+#### 4.2.2 Credentials: one master file, generated per worktree
+
+**`~/.webzite/.env` is the only credential file anyone edits.** Every worktree's `.env` — this
+repo's main checkout included — is a **generated artifact**, rewritten by `scripts/env-sync.mjs` on
+every `npm install`, which is Orca's per-worktree setup hook. Hand-edit a worktree `.env` and the
+next sync discards it. Rotate a credential in the master, run `npm install` where you need it, done.
+
+```bash
+node scripts/env-sync.mjs --check      # what would be written (key NAMES only, never values)
+node scripts/env-sync.mjs              # write this worktree's .env
+node scripts/env-sync.mjs --force      # overwrite a .env that was not generated (backs it up first)
+```
+
+The master lives **outside every repo** on purpose: no clone, no `git clean -x`, and no worktree
+deletion can take it, and it cannot be committed by accident. `WEBZITE_ENV_MASTER` overrides the
+path. `.env.example` is the template.
+
+It is sectioned, and the sections are load-bearing:
+
+| Section | Reaches | Holds |
+| :--- | :--- | :--- |
+| `[shared]` | every worktree | account-wide keys — one Browserbase, one Cloudflare account token, one Vimeo, one Figma |
+| `[<client>]` | only that client's worktree | `INSTATIC_BASE_URL`, the per-instance `INSTATIC_PASSWORD`, per-zone Cloudflare tokens, host credentials |
+| `[aliases]` | — | worktree name → section, for names that do not match by prefix |
+| `[vars]` | nothing — never written to a `.env` | named definitions, referenced as `${NAME}` from any section |
+
+**Why sections rather than one flat list.** `INSTATIC_BASE_URL` differs per client and the shared
+Instatic toolkit deliberately refuses to guess it ([18-instatic-embeds](./deliver/process/18-instatic-embeds/18-instatic-embeds.md)):
+a flat file holding several would resolve first-match and publish one client's plugin to **another
+client's site**. A missing section fails loudly instead. For the same reason the **main worktree gets
+`[shared]` only** — no client's site URL can leak into work done there.
+
+Section names match the client folder under `deliver/brandklout/`. A worktree picks its section from
+its own **directory name** (what was typed into Orca) and then the branch's last path segment, with
+the same `bk-` strip and longest-first `-suffix` trim the narrowing script uses. Ambiguity is a hard
+error naming the fix: add a line to `[aliases]`.
+
+**`[vars]` is how one value gets a name without being copied.** Two client instances that share an
+admin password are two named definitions there and two `${NAME}` references in the client sections —
+so the value is typed once, rotating it is one edit, and it still reaches only the worktrees that ask
+for it. A `${NAME}` that resolves to nothing is a **hard error**: a blank password would otherwise
+surface much later as an authentication failure with no trace back to here.
+
+**Railway needs no `.env` to work.** The Railway CLI keeps its own auth in `~/.railway/config.json`,
+which is machine-global, so `railway` commands already run in every worktree — that is why no
+Railway variable existed anywhere. `RAILWAY_TOKEN` in `[shared]` exists for scripts and API calls
+that cannot shell out to an interactive login, and `RAILWAY_PROJECT_ID` per client section saves
+re-deriving the project from the runbook table.
+
+**Name host credentials with a prefix.** `USERNAME`, `HOSTNAME` and `PORT` are all set by Windows
+itself, and every `.env` loader in this system fills in only variables that are **not already set**,
+so an unprefixed `USERNAME` silently resolves to the Windows login rather than the host account.
+Hence `SITEGROUND_USERNAME`, not `USERNAME`.
+
 #### 4.2.1 Worktree → main asset mirror (automatic)
 
 Excluding media from Git is load-bearing in three places, so the rule does not bend: it keeps merges
@@ -284,15 +380,38 @@ The system has **two workspaces that can both change repo state**: the local mac
 - **Concurrency**: do not run `vps-commit-push.sh` on the VPS and `sync.sh` on local at the same time. If a push is rejected because the other side pushed first, simply re-run the safe command.
 - **Hermes**: when committing inside this repo, Hermes must use `scripts/vps-commit-push.sh` (which pulls before pushing) and must never force-push or rewrite shared history.
 
-## 5. Runbooks — the per-worktree handoff note
+## 5. Runbooks — one file per run, tracked, per project
 
-**Every worktree keeps `.claude/RUNBOOK.md`: what this worktree is for, what is done, what is next, and what cost time.** Update it after each task you complete, and read it when you pick a worktree up. Nothing enforces it — see below.
+**A run gets its own file.** After each task, write
+`deliver/brandklout/<client>/docs/runbook/YYYY-MM-DD-<slug>.md`, add its row to that folder's
+`INDEX.md`, and refresh the standing `docs/RUNBOOK.md` with what is true *now*. Repo-level work that
+belongs to no client goes to `.claude/runbook/` instead.
 
-Untracked by design (see `.gitignore`): every worktree writes the same path, so tracking it would guarantee a merge conflict on every client branch. The durable record of what a session did is its **commits**; the runbook is only the bridge between sessions.
+**Reading rule: open `INDEX.md`, then only the runs you need.** Never read the whole history. The
+index flags which runs carry a `Gotchas` or `Open questions` section, which is usually all you want.
 
-Write it for a reader with **no memory of your session**. **Gotchas** is the most valuable section: failed approaches, environment quirks and false leads are exactly what a fresh session would otherwise pay to rediscover. Be concrete — paths, commands, SHAs, not summaries.
+**Runbooks are tracked — commit them.** They were gitignored until 2026-09-04 for a reason that the
+current layout dissolves: every worktree wrote *the same path*, `.claude/RUNBOOK.md`, so tracking
+guaranteed a merge conflict on every client branch. Now each project writes its own path and each run
+its own file, so two sessions almost never touch the same file. What ignoring them actually cost was
+worse than the conflicts: they travelled with nothing, were backed up nowhere, and died with the
+worktree — the same failure class that lost Mason Park's `uploads/` and Stone's Drive export. Tracking
+them also means a merge to `main` gives every worktree every project's history, which is the point.
 
-### The automation behind this was removed on 2026-08-22
+Write for a reader with **no memory of your session**. **Gotchas** is the most valuable section:
+failed approaches, environment quirks and false leads are exactly what a fresh session would
+otherwise pay to rediscover. Be concrete — paths, commands, SHAs, not summaries.
+
+**Why one file per run.** The old single file grew without bound: `bk-dr-nahlah` reached 6,459 lines
+and ~81,500 tokens, 41% of a 200k context window before any work began. Splitting only helps if the
+reading rule above is followed — a session that opens every run file is worse off than before.
+
+**An undated `## ` heading belongs to the run above it.** The historical files use `## Done`,
+`## Next` and `## Gotchas` as h2 sub-sections of a run, and are newest-first, so a trailing `Next`
+describes the *oldest* entry, not current state. The 2026-09-04 migration attached them accordingly;
+do not read a pre-migration `Next` as a plan.
+
+### The session-rotation automation was removed on 2026-08-22
 
 There used to be a rule here: a session that reached 200,000 tokens handed off to a fresh one automatically. Four scripts implemented it — `session-lib.mjs`, `session-guard.mjs` (a `Stop` hook), `session-resume.mjs` (a `SessionStart` hook) and `session-rotate.mjs` — registered in a project-level `.claude/settings.json`. All of it is deleted. `git log -- scripts/session-rotate.mjs` has the history if it is ever wanted back.
 
