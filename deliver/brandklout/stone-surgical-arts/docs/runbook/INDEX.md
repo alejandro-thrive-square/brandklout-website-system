@@ -1,11 +1,12 @@
 # Runbook index
 
-12 runs, newest first. Each line is one file in this folder.
+13 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-09 | 2026-09-09, evening — Where the fees come from, and the list to get them confirmed | [`2026-09-09-where-the-fees-come-from-and-the-list-to-confirm.md`](./2026-09-09-where-the-fees-come-from-and-the-list-to-confirm.md) |
 | 2026-09-09 | 2026-09-09, afternoon — The first BugHerd round applied: four photographs off the home page | [`2026-09-09-bugherd-round-one-four-photographs-off-the-home.md`](./2026-09-09-bugherd-round-one-four-photographs-off-the-home.md) |
 | 2026-09-09 | 2026-09-09, later — BugHerd removed from the build | [`2026-09-09-bugherd-removed.md`](./2026-09-09-bugherd-removed.md) |
 | 2026-09-09 | 2026-09-09 — The BugHerd board key swapped, and the site republished | [`2026-09-09-bugherd-board-key-swapped.md`](./2026-09-09-bugherd-board-key-swapped.md) |

@@ -91,6 +91,18 @@ More broadly: **a lot of `.tmp/` is untracked or gitignored** (`*.woff2`, `*.png
   it applies to **any** third-party script proposed next — analytics, chat, heatmaps.
 - The journal has had no client review pass, and cannot have one through an in-page review tool on
   this instance. Use the BugHerd browser extension, or have Instatic relax the CSP.
+- **EVERY FEE ON THE PUBLISHED SITE IS UNCONFIRMED.** Forty-four published fees across nine pages
+  — consultation, surgical, skin, injectables, anaesthesia — all transcribed from the practice's
+  own archived `/patient-resources/pricing` page, and **never re-confirmed by Dr. Stone**. Two
+  independent copies of that page agree (a Wayback capture of 2026-03-16, and the client's own site
+  backup), so the transcription is sound; what is unknown is whether the prices are still current.
+  `SURGICAL-ARTS-BRIEF.md` has said "UNVERIFIED … must be re-confirmed before publishing" since
+  intake, and the site published anyway. `treatments.html` carries the hedge in its own footer
+  ("a guide while they are reconfirmed for 2026"), which is mitigation, not a fix. The list to send
+  her is [`PRICING-CONFIRMATION.md`](./PRICING-CONFIRMATION.md); three items on it are conflicts
+  rather than simple confirmations, and the membership tiers on it are our proposal, never a
+  published price. **Nothing about fees should be edited from the archive again — the next change
+  comes from Dr. Stone.**
 - **The BugHerd board is alive and readable even though the widget is gone.** The client pins
   through the browser extension; read the board over the API with the `BUGHERD` key in
   `~/.webzite/.env` (a personal API key, Basic `<key>:x`), project **539158**. The first round —
