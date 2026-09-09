@@ -83,7 +83,12 @@ for (const file of pages) {
   }
   let checked = 0;
   for (const ref of refs) {
-    if (!/assets\//.test(ref) || /^https?:/.test(ref)) continue;
+    if (/^(https?:|mailto:|tel:|#|\/)/.test(ref)) continue;
+    // 2026-09-09: a RELATIVE reference that is not under assets/ is a broken
+    // one - `../uploads/x.webp` painted as a grey box on seven pages while
+    // this gate reported clean, because it only looked at refs it could parse
+    // as assets. A relative ref is a file, and a file either exists or fails.
+    if (!/assets\//.test(ref) && !/\.(webp|png|jpg|jpeg|svg|css|js|woff2?)(\?|$)/.test(ref)) continue;
     checked++;
     if (!fs.existsSync(path.resolve(dir, ref))) fail(rel, "missing asset " + ref);
   }

@@ -13,7 +13,11 @@ is about `bestdentistinkatytx.com` / `mason-park.up.railway.app`, it belongs one
 ## Where the site is, as of 2026-09-09
 
 **57 pages live and published at <https://mason-park-kids.up.railway.app>, all of them on the
-same design as of 2026-09-09.** The public domain still does not point here; that host is the
+same design as of 2026-09-09.** **LOCAL IS AHEAD OF LIVE** since the evening of 2026-09-09:
+the image pass (`docs/runbook/2026-09-09-pictures-that-match-the-words.md`) is committed and
+awaiting the client's review at `file://`; when approved, run the import in the README's order
+(`upload-media` for 23 new keys, `import-styles` because `site.css` changed, `import-pages`,
+publish, then the live gates). The public domain still does not point here; that host is the
 review link. Every gate is clean: `check.mjs` 0 errors, `crop-all.mjs` 0 across 57 x 2 widths,
 `audit-live.mjs` 57/57 at both 1440 and 390, and `crop-all.mjs --live` 0 against the
 published site.
@@ -34,13 +38,15 @@ Run from `workflows/03-core-pages/.tmp/`. All of them are cheap; run them all.
 | `node check.mjs` | Do the assets resolve, the braces balance, the prose fit, the chrome match? |
 | `node shot.mjs <page>` | What does it look like at four widths, and which font is really painted? |
 | `node crop-all.mjs` / `--live` | Does any heading lose ink to a clipping ancestor? Walks `home/`, so it sweeps all 57. |
+| `node shoot-all.mjs ../home <dir>` then LOOK | Does every chapter hold together? The per-page gates cannot see a figure hanging alone; this can. Pinned scenes show as empty ground here and are fine: `viewport-probe.mjs` for those. |
+| `python recompose-figures.py --dry-run` | Is every picture still where the plan puts it? 0 pages should change. |
 | `node build-pages.mjs --list` | Which pages have a recipe. **Order is `build-pages` then `stamp` then `check`, and it does not commute.** |
 | `node diff-all.mjs` | Local against live, all eleven: head, structure, text, geometry. |
 | `node audit-live.mjs` / `--width 390` | **All 57 routes**, not the eleven. |
 | `node verify-live.mjs` / `--migrated` | The published pages, end to end. |
 | `node probe-hooks.mjs <url>` | Do the scrubbed scenes actually do work? |
 
-### Three traps that have each cost a session
+### The traps that have each cost a session
 
 1. **Look at every Magnific face before you ship it.** It will return a
    convincing photograph of somebody who is not the person. Two of this
@@ -57,7 +63,10 @@ Run from `workflows/03-core-pages/.tmp/`. All of them are cheap; run them all.
    onto a different nav bar for a week, and `check.mjs` reported the chrome
    identical the whole time because the other pages had no local file to read.
    Every gate walks `home/` now. Keep it that way.
-5. **The adult practice is not this practice.** Dr. William Sung, teeth
+5. **A transformed sibling paints on top.** `data-drift` and `data-wipe` put transforms
+   on figures; anything meant to overlap one needs `position: relative` and a `z-index`,
+   or the picture rides over the text (it did, on nineteen pages, for a week).
+6. **The adult practice is not this practice.** Dr. William Sung, teeth
    whitening, implants, `bestdentistinkatytx.com`: all of it belongs to
    `bk-mason-park`. It arrived here through the 02 migration and was cleaned
    out of six pages on 2026-09-09. If you see his name on this site, it is a

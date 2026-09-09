@@ -45,11 +45,15 @@ The Asana brief is **Build New Mason Park Pediatric Site** `1218009803778905` â†
 | `.tmp/check.mjs` | The static gate: assets resolve, braces balance, no control bytes, nothing Instatic refuses, the prose ceiling, ids and anchors, alt text, **no em dashes**, chrome identical to the homepage. |
 | `.tmp/shot.mjs` | The render gate: four widths, overflow, small text, never-revealed elements, broken images, console, **and which face is actually painted**. `--slices desktop` for readable windows. |
 | `.tmp/probe-hooks.mjs` | Motion on: every `data-write` at three intermediate states, the growth chart fills and changes hands, counters land, rails travel, wipes finish, the path pins and fits the window. Takes a file path or a live URL. |
-| `.tmp/prep-images.py` | Builds `uploads/` from three sources: the recovery mirror, Magnific's upscales in `_upscaled/`, and the bought stock in `_stock/`. **One place owns widths and the webp encode.** The pool is named by what each frame shows, and the notes say which are the practice's own. |
+| `.tmp/prep-images.py` | Builds `uploads/` from four sources: the recovery mirror, Magnific's upscales in `_upscaled/`, the bought stock in `_stock/`, and the album's front of house in `_album/`. **One place owns widths and the webp encode.** The pool is named by what each frame shows, and the notes say which are the practice's own. |
 | `.tmp/upscale-images.mjs` | The soft photographs, re-emitted through Magnific into `_upscaled/`. `--list` prints the table. **Read its header before re-running it on a face.** |
 | `.tmp/get-stock.mjs` | The bought frames, from Magnific into `_stock/`, with `stock-manifest.json` recording what each one is. **Its header is the policy for what stock may and may not do on this site.** |
 | `.tmp/contact-sheet.py`, `stock-sheet.py` | Before/after pairs for every upscale, and one sheet of the whole stock pool. Both exist to be LOOKED AT; two upscales were rejected on the first. |
-| `.tmp/add-figures.mjs` | Puts a `.ch-figure` into the chapters that had no photograph. Idempotent. |
+| `.tmp/add-figures.mjs` | Put a `.ch-figure` into the chapters that had no photograph (2026-09-08). **Superseded** by `recompose-figures.py` for placement: it appended plates and insets as their own `.wrap`, which is what left sixteen of them dangling. Kept for the record; do not re-run it. |
+| `.tmp/recompose-figures.py` | **The 2026-09-09 evening pass, as one readable plan.** Every image swap, every dropped, banded or side-by-side figure, and every invitation photograph, per page. `--dry-run` prints what it would do. Idempotent. |
+| `.tmp/get-album.mjs` | The practice's FRONT OF HOUSE from the client's own Google Photos album into `_album/`: the front desk, the waiting-room sofa, the gumball machine, the product shelf. Nothing clinical is taken from that album; its header says why. |
+| `.tmp/probe-stock.mjs` | Twelve Magnific candidates per search term, with preview URLs, so a contact sheet can be looked at BEFORE a credit is spent. Every slot bought on 2026-09-09 (evening) was chosen this way and is pinned by `id` in `get-stock.mjs`. |
+| `.tmp/shoot-all.mjs`, `viewport-probe.mjs` | Full-page captures of all 57 pages into one folder, and viewport captures through a pinned scene. The first is how this pass found what the per-page gates could not; the second is how it told a pin spacer from a fault. |
 | `.tmp/upload-fonts.mjs` | The variable Fraunces and Nunito: `--fetch` downloads them into `_fonts/` and `home/assets/fonts/`, then a run uploads them and writes `font-map.json`. |
 | `.tmp/crop-probe.mjs`, `crop-all.mjs` | Does any heading lose ink to a clipping ancestor? Takes a file or a URL; `crop-all.mjs --live` sweeps the published site. |
 | `.tmp/audit-live.mjs` | **Every live route, not just the eleven.** HTTP, images, overflow, console, head tags, headings, chrome, dead links, tiny text, and any image painted more than 1.35x its own pixels. |
@@ -282,6 +286,63 @@ practice's own clinical photographs**, which the policy in `get-stock.mjs` makes
 pictures allowed beside a treatment name; a page about braces is searched by the object a
 parent recognises, never by the appliance. Seven of the first twelve terms returned the wrong
 thing and were re-termed before the credits were spent. **Read `--dry-run` first.**
+
+## The 2026-09-09 pass, part three: pictures that match the words
+
+The client, that evening: *"We need to make a design upgrade to the site with
+better image selections that match the content they are attached to. There are
+a few sections throughout the site that are very unorganized and look very
+strange."*
+
+The per-page gates were all clean. What found it was `shoot-all.mjs`: one
+full-page capture of every page, looked at in order.
+
+### The sections that looked strange, and why
+
+1. **The overlap panel was painting UNDER its photograph** on all nineteen
+   pages that use `.sw-overlap`. The bullets of "What we look at before
+   recommending it" were half hidden behind the teenager. The panel is meant
+   to sit on the picture; `data-drift` puts a transform on the figure, and a
+   transformed element paints above any sibling that is neither positioned nor
+   transformed. One line: `.sw-overlap_panel { position: relative; z-index: 1 }`.
+2. **Sixteen figures were dangling.** `add-figures.mjs` appended every
+   chapter photograph as its own `.wrap` after the body. Under a full-width
+   body a band is fine; under a one-column body (the three promises on
+   financing, the price list on services) a plate hung alone at the foot of
+   the chapter with nothing beside it, and under a centred statement it sat
+   off to one side. `recompose-figures.py` gives each one a real place: a
+   plate goes BESIDE its column (`.ch-withfig`, and it now holds its place
+   while the column scrolls), a full-width body gets a band, and a chapter
+   that already carried photographs gets nothing.
+
+### The pictures that did not match
+
+- `waiting` - a 290px crop of a wall with an orchid - was the invitation
+  photograph on 45 pages and the hero on five. It is gone. The client's own
+  album has the front desk and waiting room the two practices share, and two
+  children at the gumball machine and the product shelf in that same front
+  area; `get-album.mjs` takes exactly those nine frames and nothing clinical.
+- `st-case`, searched as "a case on a shelf", came back as a food container
+  and stood for aligners on four pages. `st-floss` and `st-tube` are both
+  electric toothbrushes. A laptop and a sunlit curtain illustrated intra-oral
+  scanners and lasers. A toddler in the chair opened the Invisalign page.
+  `highfive` - a stock dentist who does not work here - sat in the overlap of
+  four treatment pages beside "Dr. Nguyen will...".
+- Fourteen new frames were bought, every one chosen from a candidate sheet
+  and pinned by `id`: an aligner in its case, a mouth guard, a boy with a
+  gap, a child asleep, a parent on the phone, a family on a video call,
+  toothpaste on a brush, floss, a paper crown, a bottle and a bear, a piggy
+  bank, a bedtime story, a toddler waving, a toddler with a cup. The policy
+  in `get-stock.mjs` is unchanged with one line made explicit: the OBJECT of
+  a treatment is an object and may appear; a procedure, an instrument in a
+  mouth, a chair, a result may not.
+
+### What it changed, and what it did not
+
+`check.mjs` 0 errors, `crop-all.mjs` 0 across 57 x 2, `shot.mjs` clean at
+390 on the recomposed pages. **Local only, by the client's instruction** - the
+Instatic import has not run; when it does, `upload-media.mjs` has 23 new keys
+to carry and `import-styles.mjs` must re-export `site.css`.
 
 ## Editing
 

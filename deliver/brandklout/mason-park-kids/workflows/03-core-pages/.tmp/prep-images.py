@@ -128,6 +128,41 @@ STOCK = {
     "st-tube":     (STOCKDIR, "st-tube.jpg", [480, 960, 1440]),
     "st-water":    (STOCKDIR, "st-water.jpg", [480, 960, 1440]),
     "st-window":   (STOCKDIR, "st-window.jpg", TALL),     # portrait; light on a wall
+    # 2026-09-09 (evening): fourteen frames that match the words they sit
+    # beside, each chosen by eye and pinned by id in get-stock.mjs. Every one
+    # is 3000px or wider.
+    "st-aligner":  (STOCKDIR, "st-aligner.jpg", [480, 960, 1440]),
+    "st-guard":    (STOCKDIR, "st-guard.jpg", [480, 960, 1440]),
+    "st-gap":      (STOCKDIR, "st-gap.jpg", [480, 960, 1440]),
+    "st-asleep":   (STOCKDIR, "st-asleep.jpg", [480, 960, 1440]),
+    "st-phone":    (STOCKDIR, "st-phone.jpg", [480, 960, 1440]),
+    "st-video":    (STOCKDIR, "st-video.jpg", [480, 960, 1440]),
+    "st-paste":    (STOCKDIR, "st-paste.jpg", [480, 960, 1440]),
+    "st-flossbox": (STOCKDIR, "st-flossbox.jpg", [480, 960, 1440]),
+    "st-crown":    (STOCKDIR, "st-crown.jpg", [480, 960, 1440]),
+    "st-bottle":   (STOCKDIR, "st-bottle.jpg", [480, 960, 1440]),
+    "st-piggy":    (STOCKDIR, "st-piggy.jpg", [480, 960, 1440]),
+    "st-story":    (STOCKDIR, "st-story.jpg", [480, 960, 1440]),
+    "st-wave":     (STOCKDIR, "st-wave.jpg", [480, 960, 1440]),
+    "st-milk":     (STOCKDIR, "st-milk.jpg", [480, 960, 1440]),
+}
+
+# --- the front of house, from the client's own album ------------------------
+# Fetched by get-album.mjs into _album/ (gitignored, like _stock/). These are
+# the practice's OWN photographs - the front desk and waiting room the two
+# practices share - so, unlike the stock, they MAY be captioned as the place.
+# Nothing clinical is taken from that album; see get-album.mjs.
+ALBUMDIR = os.path.abspath(os.path.join(HERE, "_album"))
+ALBUM = {
+    "desk-1":      (ALBUMDIR, "desk-1.jpg", TALL),
+    "desk-2":      (ALBUMDIR, "desk-2.jpg", TALL),
+    "desk-form":   (ALBUMDIR, "desk-form.jpg", TALL),
+    "desk-phone":  (ALBUMDIR, "desk-phone.jpg", TALL),
+    "gumball":     (ALBUMDIR, "gumball.jpg", WIDE),
+    "gumball-2":   (ALBUMDIR, "gumball-2.jpg", WIDE),
+    "shelf-kid":   (ALBUMDIR, "shelf-kid.jpg", TALL),
+    "shelf-kid-2": (ALBUMDIR, "shelf-kid-2.jpg", TALL),
+    "sofa":        (ALBUMDIR, "sofa.jpg", WIDE),
 }
 
 COPY = {
@@ -143,7 +178,7 @@ os.makedirs(OUT, exist_ok=True)
 written = 0
 missing_stock = []
 missing_mirror = []
-for key, (root, rel, widths) in {**PHOTOS, **STOCK}.items():
+for key, (root, rel, widths) in {**PHOTOS, **STOCK, **ALBUM}.items():
     src = os.path.join(root, rel)
     # The recovery mirror is workflow 01's `recovered/`, which is gitignored
     # and is therefore absent from a worktree that did not run the recovery.
@@ -155,6 +190,9 @@ for key, (root, rel, widths) in {**PHOTOS, **STOCK}.items():
     if root == KIDS and not os.path.exists(src) and not os.path.exists(os.path.join(UPSCALED, f"{key}.png")):
         missing_mirror.append(key)
         continue
+    if root == ALBUMDIR and not os.path.exists(src):
+        missing_stock.append(key + " (album)")
+        continue
     if root == STOCKDIR and not os.path.exists(src):
         # A stock key with no file is a `node get-stock.mjs` away, not a crash:
         # _stock/ is gitignored like uploads/, so a fresh clone has none of it.
@@ -165,7 +203,7 @@ for key, (root, rel, widths) in {**PHOTOS, **STOCK}.items():
     # REJECTED on the contact sheet has no PNG here and falls back to the
     # mirror automatically; see upscale-images.mjs for which two, and why.
     up = os.path.join(UPSCALED, f"{key}.png")
-    source_note = "  (magnific stock)" if root == STOCKDIR else ""
+    source_note = "  (magnific stock)" if root == STOCKDIR else ("  (album)" if root == ALBUMDIR else "")
     if os.path.exists(up):
         src = up
         source_note = "  (magnific)"

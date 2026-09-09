@@ -970,18 +970,32 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .ch-figure.is-right { margin-left: auto; }
 .ch-figure.is-centre { margin-left: auto; margin-right: auto; }
 /* A band is a horizon; at phone widths a 21:9 horizon is a stripe. */
+/* A portrait source cut to a band keeps its top, where the face is. */
+.ch-figure.is-top img { object-position: 50% 18%; }
 @media (max-width: 767px) {
   .ch-figure.is-band img { aspect-ratio: 16 / 10; }
   .ch-figure.is-plate img { aspect-ratio: 3 / 4; }
 }
 /* Beside a head rather than under it. The page decides the columns; this only
-   says that when there are two, the picture keeps its own. */
+   says that when there are two, the picture keeps its own.
+
+   2026-09-09 (evening): this is also the cure for a DANGLING plate. The
+   2026-09-08 pass appended `.is-plate` and `.is-inset` figures as their own
+   `.wrap` after the chapter body, which on a one-column body (the three
+   promises, the price list) left the picture hanging alone at the foot of
+   the chapter with nothing beside it. The client called those sections
+   "unorganized". A plate belongs BESIDE a column: wrap body and figure in
+   `.ch-withfig` and the plate takes the second column and holds its place
+   while the column scrolls. Where the body already fills the width (a table,
+   a card grid, two columns of Q and A) the picture is a `.is-band` under it
+   instead, and where the chapter already carries photographs it has none. */
 .ch-withfig {
   display: grid; gap: clamp(1.75rem, 4vw, 3.5rem);
   grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
   align-items: start;
 }
 .ch-withfig .ch-figure { margin-top: 0; }
+.ch-withfig .ch-figure.is-plate { max-width: none; position: sticky; top: calc(var(--jr-nav-h, 5rem) + 1.5rem); }
 @media (max-width: 899px) { .ch-withfig { grid-template-columns: minmax(0, 1fr); } }
 
 /* ===========================================================================
@@ -1597,6 +1611,12 @@ a.card:hover h3 { color: var(--accent); }
 @media (min-width: 900px) { .sw-overlap { grid-template-columns: repeat(12, minmax(0, 1fr)); align-items: center; } .sw-overlap_shot { grid-column: 1 / 8; grid-row: 1; } .sw-overlap_panel { grid-column: 7 / 13; grid-row: 1; } }
 .sw-overlap_shot { margin: 0; border-radius: var(--radius); overflow: hidden; }
 .sw-overlap_shot img { width: 100%; aspect-ratio: 4 / 3; object-fit: cover; }
+/* The panel must PAINT above the photograph. `data-drift` puts a transform on
+   the figure, and a transformed element paints in the positioned layer, above
+   any sibling that is neither positioned nor transformed - so without this the
+   photograph rode over the panel's bullets on all nineteen overlap pages
+   (found 2026-09-09, the evening pass). */
+.sw-overlap_panel { position: relative; z-index: 1; }
 .sw-overlap_panel { display: grid; gap: 1rem; padding: clamp(1.6rem, 3vw, 2.6rem); background: var(--panel); border: 1px solid var(--rule); border-radius: var(--radius); box-shadow: var(--shadow); }
 .sw-overlap_panel h3 { font-size: var(--f-d3); max-width: 16ch; }
 .sw-overlap_panel ul { display: grid; gap: .6rem; }

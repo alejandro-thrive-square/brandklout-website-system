@@ -263,6 +263,105 @@ const SLOTS = [
     alt: "A tree-lined path in a neighbourhood park",
     for: "the town resource page - Katy itself, not the practice",
   },
+
+  /* --- 2026-09-09 (evening): pictures that match the words ----------------
+     The client: "better image selections that match the content they are
+     attached to." The 2026-09-09 morning pool was searched around the object
+     a parent recognises, and some of those searches landed wide: `st-case`
+     came back as a food container and stood for aligners on four pages,
+     `st-floss` and `st-tube` are both electric toothbrushes, technology got a
+     laptop and a sunlit curtain. Every slot below was picked BY EYE from a
+     candidate sheet and is pinned by `id`, so the search is recorded but is
+     not what decides the frame.
+
+     The policy above is unchanged, with one line made explicit: the OBJECT of
+     a treatment (an aligner in its case, a mouth guard in a child's hand at a
+     match) is an object and may appear; a procedure, an instrument in a mouth,
+     a chair, a result may not. */
+  {
+    key: "st-aligner", id: 428880239, term: "clear teeth aligner in open case on white bathroom countertop", orientation: "horizontal",
+    people: false, prefer: [], avoid: [],
+    alt: "A clear aligner in its case on a bathroom counter",
+    for: "Invisalign, the Invisalign FAQ, orthodontics and retainers - replaces st-case, which was a food container",
+  },
+  {
+    key: "st-guard", id: 44211479, term: "mouthguard", orientation: "horizontal",
+    people: true, prefer: [], avoid: [],
+    alt: "A sports mouth guard and its case",
+    for: "mouth guards",
+  },
+  {
+    key: "st-gap", id: 77890253, term: "smiling child with missing front baby tooth outdoors", orientation: "horizontal",
+    people: true, prefer: [], avoid: [],
+    alt: "A laughing boy with a front tooth missing",
+    for: "extractions and space maintainers - the gap itself, in ordinary life",
+  },
+  {
+    key: "st-asleep", id: 37300690, term: "young child asleep in bed soft morning light", orientation: "horizontal",
+    people: true, prefer: [], avoid: [],
+    alt: "A young boy asleep in striped pyjamas",
+    for: "sedation and night guards - the subject is calm, and sleep",
+  },
+  {
+    key: "st-phone", id: 308415629, term: "worried mother on the phone at home holding young child", orientation: "horizontal",
+    people: true, prefer: [], avoid: [],
+    alt: "A parent on the phone at the kitchen table, a child on her lap",
+    for: "emergency care - the call is the first step on that page",
+  },
+  {
+    key: "st-video", id: 76906684, term: "parent and child at laptop video call kitchen table", orientation: "horizontal",
+    people: true, prefer: [], avoid: [],
+    alt: "A family waving at a laptop on a video call",
+    for: "the virtual consultation",
+  },
+  {
+    key: "st-paste", id: 347291843, term: "squeezing toothpaste from tube onto toothbrush close up", orientation: "horizontal",
+    people: false, prefer: [], avoid: [],
+    alt: "Toothpaste being squeezed onto a toothbrush",
+    for: "the toothpaste chart, the RDA table and product recommendations - actual toothpaste, which st-tube is not",
+  },
+  {
+    key: "st-flossbox", id: 354116946, term: "dental floss container close up on white bathroom shelf", orientation: "horizontal",
+    people: false, prefer: [], avoid: [],
+    alt: "A container of floss on a marble shelf",
+    for: "hygiene education and periodontics - actual floss, which st-floss is not",
+  },
+  {
+    key: "st-crown", id: 22051959, term: "child wearing a paper crown at a birthday party smiling", orientation: "horizontal",
+    people: true, prefer: [], avoid: [],
+    alt: "A girl in a paper crown, sitting on the grass",
+    for: "dental crowns - the word, in ordinary life",
+  },
+  {
+    key: "st-bottle", id: 404748021, term: "baby bottle and pacifier on a table soft light", orientation: "horizontal",
+    people: false, prefer: [], avoid: [],
+    alt: "A baby bottle and a teddy bear on a table",
+    for: "the knee-to-knee exam, early intervention and frenectomy - bottles, pacifiers and thumbs are what the first visit is about",
+  },
+  {
+    key: "st-piggy", id: 426528976, term: "child putting coin into piggy bank at kitchen table", orientation: "horizontal",
+    people: true, prefer: [], avoid: [],
+    alt: "A girl dropping a coin into a piggy bank",
+    for: "financing and the savings plan",
+  },
+  {
+    key: "st-story", id: 360021819, term: "parent reading bedtime story to child in bed", orientation: "horizontal",
+    people: true, prefer: [], avoid: [],
+    alt: "A parent and child reading a book in bed",
+    for: "the dental library and the reading chapters",
+  },
+  {
+    key: "st-wave", id: 357318314, term: "toddler waving goodbye at the door smiling", orientation: "horizontal",
+    people: true, prefer: [], avoid: [],
+    alt: "A toddler waving through a doorway",
+    for: "the thank-you page and the invitations that say come and look",
+  },
+  {
+    key: "st-milk", id: 37954136, term: "toddler drinking water from a cup at home", orientation: "horizontal",
+    people: true, prefer: [], avoid: [],
+    alt: "A toddler drinking from a cup in a high chair",
+    for: "fluoride, and the first-tooth chapters",
+  },
 ];
 
 const api = async (url) => {
@@ -275,6 +374,16 @@ const api = async (url) => {
 const hasAny = (s, words) => words.some((w) => s.includes(w));
 
 async function pick(slot) {
+  // A slot with an `id` was chosen BY EYE from a candidate sheet (2026-09-09,
+  // the content-matching pass): fetch that resource and skip the search, so a
+  // re-run cannot quietly swap the reviewed frame for a different one.
+  if (slot.id) {
+    // Some ids answer the search endpoint but 404 on /resources/{id}; the
+    // download endpoint still serves them, so a failed lookup is not a failed slot.
+    let d = {};
+    try { const { data } = await api(`https://api.freepik.com/v1/resources/${slot.id}`); d = data?.resource ?? data ?? {}; } catch {}
+    return { id: slot.id, title: d.title || slot.alt, author: d.author, licenses: d.licenses, url: d.url || `https://www.magnific.com/premium-photo/${slot.id}` };
+  }
   let url =
     `https://api.freepik.com/v1/resources?term=${encodeURIComponent(slot.term)}` +
     `&limit=60&order=relevance&filters[content_type][photo]=1` +
