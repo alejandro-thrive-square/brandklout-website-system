@@ -177,3 +177,17 @@ deliver/brandklout/mason-park/workflows/10-lp-instatic/.tmp/preview.log
 
 # Plugin zips are build output of pack-plugin.mjs; the plugin SOURCE is committed.
 deliver/process/18-instatic-embeds/.tmp/
+
+# --- 2026-09-09: worktree hygiene ---------------------------------------------
+# A site scrape mirrors every asset the source page requested, third-party
+# trackers included. Mason Park's is 1.2GB across ~1200 files, 682 of them under
+# google.com/rmkt/collect alone, and the deepest path is 321 characters — past
+# what Git can index on Windows. The scraped PAGES (pages/**/meta.json and
+# rendered.txt) are the useful part and stay tracked; the asset mirror does not.
+**/.tmp/site-scrape/assets/
+
+# Scrape state includes a live PHPSESSID for the site that was crawled.
+**/.tmp/site-scrape/.state/cookies.json
+
+# Editors keep creating these empty files at the repo root.
+/untitled*.md

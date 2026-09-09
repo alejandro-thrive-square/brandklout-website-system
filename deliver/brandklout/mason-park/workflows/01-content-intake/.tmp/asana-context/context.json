@@ -12,8 +12,8 @@
         "name": "Alejandro Milano"
       },
       "assignee_status": "inbox",
-      "completed": false,
-      "completed_at": null,
+      "completed": true,
+      "completed_at": "2026-08-24T14:23:43.615Z",
       "completed_by": null,
       "created_at": "2026-07-30T22:59:29.760Z",
       "custom_fields": [
@@ -175,10 +175,10 @@
             }
           ],
           "enum_value": {
-            "gid": "1213654480386512",
-            "color": "cool-gray",
+            "gid": "1213654480386515",
+            "color": "blue-green",
             "enabled": true,
-            "name": "In Progress",
+            "name": "Done",
             "resource_type": "enum_option"
           },
           "name": "Task Progress",
@@ -188,7 +188,7 @@
             "name": "Jessica",
             "resource_type": "user"
           },
-          "display_value": "In Progress",
+          "display_value": "Done",
           "resource_subtype": "enum",
           "resource_type": "custom_field",
           "is_formula_field": false,
@@ -345,10 +345,10 @@
             }
           ],
           "enum_value": {
-            "gid": "1215184637115808",
-            "color": "cool-gray",
+            "gid": "1215184637115811",
+            "color": "blue-green",
             "enabled": true,
-            "name": "In Progress",
+            "name": "Done",
             "resource_type": "enum_option"
           },
           "name": "Task Progress",
@@ -358,7 +358,7 @@
             "name": "Domeneque Camacho",
             "resource_type": "user"
           },
-          "display_value": "In Progress",
+          "display_value": "Done",
           "resource_subtype": "enum",
           "resource_type": "custom_field",
           "is_formula_field": false,
@@ -462,12 +462,12 @@
             "name": "Success Daily Stand-Up"
           },
           "section": {
-            "gid": "1211830976769601",
-            "name": "Open Tasks"
+            "gid": "1211830976769602",
+            "name": "Completed"
           }
         }
       ],
-      "modified_at": "2026-08-20T17:12:37.385Z",
+      "modified_at": "2026-08-24T14:23:44.839Z",
       "name": "Landing Page - Mason Park",
       "notes": "Use this one for inspiration:\nhttps://start.smartarchesdental.com/?step=start\nUse this one as inspiration as well: \nhttps://novismilerogers.com/?utm_source=google&utm_medium=cpc&utm_campaign=24091810786&utm_content=818968089590&utm_term=all%20on%20x%20dental%20implants&mt=p&nw=g&dv=c&gad_source=1&gad_campaignid=24091810786&gbraid=0AAAABEQDY-pcwGGqqmMpWSRrQduvavM4A&gclid=CjwKCAjwj7HTBhBiEiwA8s35OhO819xkzHFuex1g5sqcnuhcLbjnxa_kkwjRIn1SAaGXk3ycoB27UhoCx2gQAvD_BwE\n\nAttached are the originals from the other Ad company. Use it as a reference point",
       "num_subtasks": 4,
@@ -564,34 +564,34 @@
         {
           "gid": "1217162344633748",
           "created_at": "2026-08-04T16:30:04.642Z",
-          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683022/0cae1ec5fdaac3bc47d42c7246627121?e=1787252592&v=0&t=iZjIGQCn58cG1kgLdftcDlbLUe87C0KejjpWK2Est2A",
+          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683022/0cae1ec5fdaac3bc47d42c7246627121?e=1788299269&v=0&t=PhkWodcbmx8sAMvPP3QG6REI5i1Di5Ejwk_cBRIOE2A",
           "host": "asana",
           "name": "mpd-invisalign-lp.html",
           "permanent_url": "https://app.asana.com/app/asana/-/get_asset?asset_id=1217162344633748",
           "resource_subtype": "asana",
-          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683022/0cae1ec5fdaac3bc47d42c7246627121?e=1787252592&v=0&t=iZjIGQCn58cG1kgLdftcDlbLUe87C0KejjpWK2Est2A",
+          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162605683022/0cae1ec5fdaac3bc47d42c7246627121?e=1788299269&v=0&t=PhkWodcbmx8sAMvPP3QG6REI5i1Di5Ejwk_cBRIOE2A",
           "size": 26957
         },
         {
           "gid": "1217162344633750",
           "created_at": "2026-08-04T16:30:05.235Z",
-          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162344633749/5a934f5cc05dddc4a75d48a9523bf843?e=1787252592&v=0&t=ePWOWNlG_sq6ZOgwwEqT6ZgLFHxvTrrXbsenK6MRj0c",
+          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162344633749/5a934f5cc05dddc4a75d48a9523bf843?e=1788299269&v=0&t=9Ow-xbycOIYIhA-6_CiBEYySnz-RKho__i04H-86MFc",
           "host": "asana",
           "name": "mpd-new-patient-lp.html",
           "permanent_url": "https://app.asana.com/app/asana/-/get_asset?asset_id=1217162344633750",
           "resource_subtype": "asana",
-          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162344633749/5a934f5cc05dddc4a75d48a9523bf843?e=1787252592&v=0&t=ePWOWNlG_sq6ZOgwwEqT6ZgLFHxvTrrXbsenK6MRj0c",
+          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217162344633749/5a934f5cc05dddc4a75d48a9523bf843?e=1788299269&v=0&t=9Ow-xbycOIYIhA-6_CiBEYySnz-RKho__i04H-86MFc",
           "size": 31121
         },
         {
           "gid": "1217691620333463",
           "created_at": "2026-08-20T17:12:31.510Z",
-          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217691620333462/f38aa1d2855204bd983284b6b7e441c8?e=1787252592&v=0&t=iOo-r2yrV4jUW6cgUUjK8Pj_uJiYv9anjgWoTDo758s",
+          "download_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217691620333462/f38aa1d2855204bd983284b6b7e441c8?e=1788299269&v=0&t=zmyx5wysHqD1Y9yNNmaewhQIj-w6Dwn4ft9Sin-84aw",
           "host": "asana",
           "name": "image.png",
           "permanent_url": "https://app.asana.com/app/asana/-/get_asset?asset_id=1217691620333463",
           "resource_subtype": "asana",
-          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217691620333462/f38aa1d2855204bd983284b6b7e441c8?e=1787252592&v=0&t=iOo-r2yrV4jUW6cgUUjK8Pj_uJiYv9anjgWoTDo758s",
+          "view_url": "https://asanausercontent.com/us1/assets/1210572425689866/1217691620333462/f38aa1d2855204bd983284b6b7e441c8?e=1788299269&v=0&t=zmyx5wysHqD1Y9yNNmaewhQIj-w6Dwn4ft9Sin-84aw",
           "size": 872141
         }
       ],
@@ -604,18 +604,22 @@
         "follower_added": 2,
         "attachment_added": 2,
         "unassigned": 1,
-        "enum_custom_field_changed": 5,
+        "enum_custom_field_changed": 7,
         "comment_added": 3,
         "mentioned_comment_reminder_story": 1,
-        "unknown": 5,
+        "unknown": 7,
         "number_custom_field_changed": 6,
         "dependency_added": 2,
         "dependency_due_date_changed": 1,
         "dependency_removed": 1,
-        "all_dependencies_marked_complete": 1,
+        "all_dependencies_marked_complete": 3,
         "due_today": 1,
         "time_tracking_entry_added": 1,
-        "time_tracking_entry_changed": 1
+        "time_tracking_entry_changed": 1,
+        "dependency_marked_complete": 2,
+        "dependency_marked_incomplete": 1,
+        "marked_complete": 1,
+        "section_changed": 1
       },
       "stories": [
         {
@@ -721,7 +725,7 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added Nayeli Ortega as a collaborator",
+          "text": "Gauge Hill added a collaborator",
           "type": "system",
           "resource_subtype": "follower_added"
         },
@@ -999,7 +1003,7 @@
             "gid": "1211675097206163",
             "name": "Jessica"
           },
-          "text": "Jessica changed the due date to Yesterday",
+          "text": "Jessica changed the due date to Aug 19",
           "type": "system",
           "resource_subtype": "due_date_changed"
         },
@@ -1010,7 +1014,7 @@
             "gid": "1217162291350352",
             "name": "Alejandro Milano"
           },
-          "text": "Alejandro Milano have a task due Yesterday",
+          "text": "Alejandro Milano have a task due Aug 19",
           "type": "system",
           "resource_subtype": "due_today"
         },
@@ -1053,7 +1057,7 @@
             "gid": "1217162291350352",
             "name": "Alejandro Milano"
           },
-          "text": "Alejandro Milano marked this task as blocked by Masonpark.com Domain Access",
+          "text": "Alejandro Milano marked this task as blocked by ✓ Masonpark.com Domain Access",
           "type": "system",
           "resource_subtype": "dependency_added"
         },
@@ -1122,6 +1126,116 @@
           "text": "https://app.asana.com/app/asana/-/get_asset?asset_id=1217691620333463\n",
           "type": "comment",
           "resource_subtype": "comment_added"
+        },
+        {
+          "gid": "1217738871835425",
+          "created_at": "2026-08-21T22:20:23.683Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano changed Task Progress from In Progress to Done",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217738871835426",
+          "created_at": "2026-08-21T22:20:23.700Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "type": "system",
+          "resource_subtype": "unknown"
+        },
+        {
+          "gid": "1217738813862030",
+          "created_at": "2026-08-21T22:21:13.584Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano completed the blocking task ✓ Masonpark.com Domain Access",
+          "type": "system",
+          "resource_subtype": "dependency_marked_complete"
+        },
+        {
+          "gid": "1217738813862032",
+          "created_at": "2026-08-21T22:21:13.617Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "You can get started on this task since it's no longer waiting on other tasks",
+          "type": "system",
+          "resource_subtype": "all_dependencies_marked_complete"
+        },
+        {
+          "gid": "1217739061491062",
+          "created_at": "2026-08-21T22:31:26.927Z",
+          "created_by": null,
+          "text": "Asana marked the blocking task ✓ Masonpark.com Domain Access incomplete",
+          "type": "system",
+          "resource_subtype": "dependency_marked_incomplete"
+        },
+        {
+          "gid": "1217741475007261",
+          "created_at": "2026-08-22T00:08:03.406Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica completed the blocking task ✓ Masonpark.com Domain Access",
+          "type": "system",
+          "resource_subtype": "dependency_marked_complete"
+        },
+        {
+          "gid": "1217741475007263",
+          "created_at": "2026-08-22T00:08:03.449Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "You can get started on this task since it's no longer waiting on other tasks",
+          "type": "system",
+          "resource_subtype": "all_dependencies_marked_complete"
+        },
+        {
+          "gid": "1217786045767555",
+          "created_at": "2026-08-24T14:23:42.159Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano changed Task Progress from In Progress to Done",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217786045767556",
+          "created_at": "2026-08-24T14:23:42.186Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "type": "system",
+          "resource_subtype": "unknown"
+        },
+        {
+          "gid": "1217786179675324",
+          "created_at": "2026-08-24T14:23:43.650Z",
+          "created_by": null,
+          "text": "Asana marked this task complete",
+          "type": "system",
+          "resource_subtype": "marked_complete"
+        },
+        {
+          "gid": "1217785954032454",
+          "created_at": "2026-08-24T14:23:44.838Z",
+          "created_by": null,
+          "text": "Asana moved this task from \"Open Tasks\" to \"Completed\" in Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "section_changed"
         }
       ],
       "dependentTasks": [],
@@ -1132,26 +1246,39 @@
             "gid": "1211675097206163",
             "name": "Jessica"
           },
-          "completed": false,
+          "completed": true,
           "due_on": "2026-08-20",
           "name": "Masonpark.com Domain Access",
-          "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217634674183542",
+          "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217634674183542",
           "subtasks": [],
-          "comments": []
+          "comments": [
+            {
+              "gid": "1217739073690149",
+              "created_at": "2026-08-21T22:31:26.109Z",
+              "created_by": null,
+              "resource_type": "story",
+              "text": "Jessica Please add your task time",
+              "type": "comment",
+              "resource_subtype": "comment_added"
+            }
+          ]
         }
       ]
     },
     {
       "gid": "1217040406855602",
-      "actual_time_minutes": null,
+      "actual_time_minutes": 240,
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
       "assignee_status": "inbox",
-      "completed": false,
-      "completed_at": null,
-      "completed_by": null,
+      "completed": true,
+      "completed_at": "2026-08-24T14:23:22.152Z",
+      "completed_by": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
       "created_at": "2026-07-31T10:09:28.543Z",
       "custom_fields": [
         {
@@ -1306,10 +1433,10 @@
             }
           ],
           "enum_value": {
-            "gid": "1213654480386514",
-            "color": "orange",
+            "gid": "1213654480386515",
+            "color": "blue-green",
             "enabled": true,
-            "name": "Client Review",
+            "name": "Done",
             "resource_type": "enum_option"
           },
           "name": "Task Progress",
@@ -1319,7 +1446,7 @@
             "name": "Jessica",
             "resource_type": "user"
           },
-          "display_value": "Client Review",
+          "display_value": "Done",
           "resource_subtype": "enum",
           "resource_type": "custom_field",
           "is_formula_field": false,
@@ -1367,14 +1494,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 240,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "4h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -1476,10 +1603,10 @@
             }
           ],
           "enum_value": {
-            "gid": "1215184637115808",
-            "color": "cool-gray",
+            "gid": "1215184637115811",
+            "color": "blue-green",
             "enabled": true,
-            "name": "In Progress",
+            "name": "Done",
             "resource_type": "enum_option"
           },
           "name": "Task Progress",
@@ -1489,7 +1616,7 @@
             "name": "Domeneque Camacho",
             "resource_type": "user"
           },
-          "display_value": "In Progress",
+          "display_value": "Done",
           "resource_subtype": "enum",
           "resource_type": "custom_field",
           "is_formula_field": false,
@@ -1562,17 +1689,24 @@
           "name": "Gauge Hill"
         },
         {
-          "gid": "1216725885824030",
-          "name": "Nayeli Ortega"
-        },
-        {
           "gid": "1217162291350352",
           "name": "Alejandro Milano"
         }
       ],
       "html_notes": "<body>1. Immediate Status Banner\n2. Fast-Track Immediate Call Box (High-Intent Prompt)\n3. What to Expect (3-Step Timeline)\n4. Practice Details &amp; Location Map\n\nCheck GHL for proper tracking number</body>",
-      "memberships": [],
-      "modified_at": "2026-08-11T22:45:28.194Z",
+      "memberships": [
+        {
+          "project": {
+            "gid": "1211830976769588",
+            "name": "Success Daily Stand-Up"
+          },
+          "section": {
+            "gid": "1211830976769602",
+            "name": "Completed"
+          }
+        }
+      ],
+      "modified_at": "2026-08-24T14:23:23.998Z",
       "name": "Thank you Page",
       "notes": "1. Immediate Status Banner\n2. Fast-Track Immediate Call Box (High-Intent Prompt)\n3. What to Expect (3-Step Timeline)\n4. Practice Details & Location Map\n\nCheck GHL for proper tracking number",
       "num_subtasks": 0,
@@ -1580,8 +1714,13 @@
         "gid": "1217040406855582",
         "name": "Landing Page - Mason Park"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217040406855602",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217040406855602",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "start_on": null,
       "tags": [],
       "resource_subtype": "default_task",
@@ -1610,11 +1749,16 @@
         "due_date_changed": 2,
         "date_custom_field_changed": 1,
         "assigned": 3,
-        "enum_custom_field_changed": 4,
+        "enum_custom_field_changed": 6,
         "notes_changed": 1,
         "due_today": 1,
-        "unknown": 3,
-        "comment_added": 1
+        "unknown": 5,
+        "comment_added": 1,
+        "number_custom_field_changed": 1,
+        "time_tracking_entry_added": 1,
+        "marked_complete": 1,
+        "added_to_project": 1,
+        "section_changed": 1
       },
       "stories": [
         {
@@ -1624,7 +1768,7 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Landing Page - Mason Park",
+          "text": "Gauge Hill added this task as a subtask of ✓ Landing Page - Mason Park",
           "type": "system",
           "resource_subtype": "added_to_task"
         },
@@ -1794,6 +1938,91 @@
           "text": "https://app.asana.com/1/1210572425689866/profile/1213912114353152 two thank you page landing pages done \nhttps://mason-park-dental.webflow.io/thank-you-invisalign\nhttps://mason-park-dental.webflow.io/thank-you-new-patient",
           "type": "comment",
           "resource_subtype": "comment_added"
+        },
+        {
+          "gid": "1217786013446358",
+          "created_at": "2026-08-24T14:23:07.261Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano changed Task Progress from Client Review to Done",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217786013446359",
+          "created_at": "2026-08-24T14:23:07.277Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "type": "system",
+          "resource_subtype": "unknown"
+        },
+        {
+          "gid": "1217786013691471",
+          "created_at": "2026-08-24T14:23:15.978Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano changed TaskTime to \"4h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
+        },
+        {
+          "gid": "1217786013691472",
+          "created_at": "2026-08-24T14:23:16.010Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano added to actual time: \n- entry date: Aug 24\n- duration: 4h 00m\n ",
+          "type": "system",
+          "resource_subtype": "time_tracking_entry_added"
+        },
+        {
+          "gid": "1217786184377223",
+          "created_at": "2026-08-24T14:23:22.195Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano completed this task",
+          "type": "system",
+          "resource_subtype": "marked_complete"
+        },
+        {
+          "gid": "1217785953731403",
+          "created_at": "2026-08-24T14:23:23.705Z",
+          "created_by": null,
+          "text": "Asana added this task to Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "added_to_project"
+        },
+        {
+          "gid": "1217786013667974",
+          "created_at": "2026-08-24T14:23:23.723Z",
+          "created_by": null,
+          "text": "Asana changed Task Progress from In Progress to Done",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217786013667976",
+          "created_at": "2026-08-24T14:23:23.798Z",
+          "created_by": null,
+          "type": "system",
+          "resource_subtype": "unknown"
+        },
+        {
+          "gid": "1217785953731412",
+          "created_at": "2026-08-24T14:23:23.998Z",
+          "created_by": null,
+          "text": "Asana moved this task from \"Open Tasks\" to \"Completed\" in Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "section_changed"
         }
       ],
       "dependentTasks": [],
@@ -1801,15 +2030,18 @@
     },
     {
       "gid": "1217133289235652",
-      "actual_time_minutes": null,
+      "actual_time_minutes": 240,
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
       "assignee_status": "inbox",
-      "completed": false,
-      "completed_at": null,
-      "completed_by": null,
+      "completed": true,
+      "completed_at": "2026-08-24T14:21:44.993Z",
+      "completed_by": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
       "created_at": "2026-08-03T22:32:57.453Z",
       "custom_fields": [
         {
@@ -1964,10 +2196,10 @@
             }
           ],
           "enum_value": {
-            "gid": "1213654480386514",
-            "color": "orange",
+            "gid": "1213654480386515",
+            "color": "blue-green",
             "enabled": true,
-            "name": "Client Review",
+            "name": "Done",
             "resource_type": "enum_option"
           },
           "name": "Task Progress",
@@ -1977,7 +2209,7 @@
             "name": "Jessica",
             "resource_type": "user"
           },
-          "display_value": "Client Review",
+          "display_value": "Done",
           "resource_subtype": "enum",
           "resource_type": "custom_field",
           "is_formula_field": false,
@@ -2025,14 +2257,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 240,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "4h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -2134,10 +2366,10 @@
             }
           ],
           "enum_value": {
-            "gid": "1215184637115808",
-            "color": "cool-gray",
+            "gid": "1215184637115811",
+            "color": "blue-green",
             "enabled": true,
-            "name": "In Progress",
+            "name": "Done",
             "resource_type": "enum_option"
           },
           "name": "Task Progress",
@@ -2147,7 +2379,7 @@
             "name": "Domeneque Camacho",
             "resource_type": "user"
           },
-          "display_value": "In Progress",
+          "display_value": "Done",
           "resource_subtype": "enum",
           "resource_type": "custom_field",
           "is_formula_field": false,
@@ -2220,17 +2452,24 @@
           "name": "Gauge Hill"
         },
         {
-          "gid": "1216725885824030",
-          "name": "Nayeli Ortega"
-        },
-        {
           "gid": "1217162291350352",
           "name": "Alejandro Milano"
         }
       ],
       "html_notes": "<body>Use as Inspiration:\n\n<a href=\"https://tulipdent.com/Beautifulsmile/invisalign-treatment-in-redlands/?gad_source=1&amp;gad_campaignid=23801751528&amp;gbraid=0AAAAAoxO05erTKcyjyEp0Fc2sE-nnqMNq&amp;gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lJgSbluMkRA5peaAr4gakmopPXAbmTVBG1A6LhuBKif8vDQpsNp08aAlepEALw_wcB\">https://tulipdent.com/Beautifulsmile/invisalign-treatment-in-redlands/?gad_source=1&amp;gad_campaignid=23801751528&amp;gbraid=0AAAAAoxO05erTKcyjyEp0Fc2sE-nnqMNq&amp;gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lJgSbluMkRA5peaAr4gakmopPXAbmTVBG1A6LhuBKif8vDQpsNp08aAlepEALw_wcB</a>\n\n\n</body>",
-      "memberships": [],
-      "modified_at": "2026-08-13T15:45:10.876Z",
+      "memberships": [
+        {
+          "project": {
+            "gid": "1211830976769588",
+            "name": "Success Daily Stand-Up"
+          },
+          "section": {
+            "gid": "1211830976769602",
+            "name": "Completed"
+          }
+        }
+      ],
+      "modified_at": "2026-08-24T14:21:46.883Z",
       "name": "Invisalign Landing Page",
       "notes": "Use as Inspiration:\n\nhttps://tulipdent.com/Beautifulsmile/invisalign-treatment-in-redlands/?gad_source=1&gad_campaignid=23801751528&gbraid=0AAAAAoxO05erTKcyjyEp0Fc2sE-nnqMNq&gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lJgSbluMkRA5peaAr4gakmopPXAbmTVBG1A6LhuBKif8vDQpsNp08aAlepEALw_wcB\n\n\n",
       "num_subtasks": 9,
@@ -2238,8 +2477,13 @@
         "gid": "1217040406855582",
         "name": "Landing Page - Mason Park"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217133289235652",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217133289235652",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "start_on": null,
       "tags": [],
       "resource_subtype": "default_task",
@@ -2334,11 +2578,16 @@
         "due_date_changed": 2,
         "date_custom_field_changed": 1,
         "assigned": 3,
-        "enum_custom_field_changed": 4,
+        "enum_custom_field_changed": 6,
         "notes_changed": 1,
         "due_today": 1,
         "comment_added": 2,
-        "unknown": 3
+        "unknown": 5,
+        "number_custom_field_changed": 1,
+        "time_tracking_entry_added": 1,
+        "marked_complete": 1,
+        "added_to_project": 1,
+        "section_changed": 1
       },
       "stories": [
         {
@@ -2348,7 +2597,7 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Landing Page - Mason Park",
+          "text": "Gauge Hill added this task as a subtask of ✓ Landing Page - Mason Park",
           "type": "system",
           "resource_subtype": "added_to_task"
         },
@@ -2529,6 +2778,91 @@
           "text": "https://app.asana.com/1/1210572425689866/profile/1213912114353152 Go high-level form add it",
           "type": "comment",
           "resource_subtype": "comment_added"
+        },
+        {
+          "gid": "1217785737097603",
+          "created_at": "2026-08-24T14:21:34.240Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano changed TaskTime to \"4h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
+        },
+        {
+          "gid": "1217785737097604",
+          "created_at": "2026-08-24T14:21:34.271Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano added to actual time: \n- entry date: Aug 24\n- duration: 4h 00m\n ",
+          "type": "system",
+          "resource_subtype": "time_tracking_entry_added"
+        },
+        {
+          "gid": "1217785737158400",
+          "created_at": "2026-08-24T14:21:41.961Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano changed Task Progress from Client Review to Done",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217785737158401",
+          "created_at": "2026-08-24T14:21:41.977Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "type": "system",
+          "resource_subtype": "unknown"
+        },
+        {
+          "gid": "1217786012608371",
+          "created_at": "2026-08-24T14:21:45.044Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano completed this task",
+          "type": "system",
+          "resource_subtype": "marked_complete"
+        },
+        {
+          "gid": "1217785737008480",
+          "created_at": "2026-08-24T14:21:46.516Z",
+          "created_by": null,
+          "text": "Asana added this task to Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "added_to_project"
+        },
+        {
+          "gid": "1217786183066530",
+          "created_at": "2026-08-24T14:21:46.590Z",
+          "created_by": null,
+          "text": "Asana changed Task Progress from In Progress to Done",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217786183066532",
+          "created_at": "2026-08-24T14:21:46.668Z",
+          "created_by": null,
+          "type": "system",
+          "resource_subtype": "unknown"
+        },
+        {
+          "gid": "1217786183146154",
+          "created_at": "2026-08-24T14:21:46.882Z",
+          "created_by": null,
+          "text": "Asana moved this task from \"Open Tasks\" to \"Completed\" in Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "section_changed"
         }
       ],
       "dependentTasks": [],
@@ -2748,14 +3082,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -2939,7 +3273,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:44:47.782Z",
+      "modified_at": "2026-08-24T14:21:47.780Z",
       "name": "Landing Page",
       "notes": "",
       "num_subtasks": 0,
@@ -2961,7 +3295,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -2971,9 +3306,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Invisalign Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ Invisalign Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786178697370",
+          "created_at": "2026-08-24T14:21:47.776Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -3193,14 +3536,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -3384,7 +3727,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:44:50.941Z",
+      "modified_at": "2026-08-24T14:21:47.810Z",
       "name": "Consult",
       "notes": "",
       "num_subtasks": 0,
@@ -3406,7 +3749,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -3416,9 +3760,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Invisalign Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ Invisalign Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786178697373",
+          "created_at": "2026-08-24T14:21:47.806Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -3638,14 +3990,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -3829,7 +4181,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:44:53.480Z",
+      "modified_at": "2026-08-24T14:21:47.839Z",
       "name": "Thank you Page",
       "notes": "",
       "num_subtasks": 0,
@@ -3851,7 +4203,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -3861,9 +4214,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Invisalign Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ Invisalign Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786178697376",
+          "created_at": "2026-08-24T14:21:47.833Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -4083,14 +4444,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -4274,7 +4635,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:44:56.221Z",
+      "modified_at": "2026-08-24T14:21:47.864Z",
       "name": "Review Copywriting",
       "notes": "",
       "num_subtasks": 0,
@@ -4296,7 +4657,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -4306,9 +4668,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Invisalign Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ Invisalign Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786178697379",
+          "created_at": "2026-08-24T14:21:47.860Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -4528,14 +4898,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -4719,7 +5089,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:44:59.542Z",
+      "modified_at": "2026-08-24T14:21:47.891Z",
       "name": "Update copywriting to make sure its true",
       "notes": "",
       "num_subtasks": 0,
@@ -4741,7 +5111,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -4751,9 +5122,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Invisalign Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ Invisalign Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786178697382",
+          "created_at": "2026-08-24T14:21:47.887Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -4973,14 +5352,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -5164,7 +5543,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:45:03.160Z",
+      "modified_at": "2026-08-24T14:21:47.917Z",
       "name": "Connect tracking",
       "notes": "",
       "num_subtasks": 0,
@@ -5186,7 +5565,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -5196,9 +5576,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Invisalign Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ Invisalign Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786178697385",
+          "created_at": "2026-08-24T14:21:47.914Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -5418,14 +5806,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -5609,7 +5997,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:45:05.885Z",
+      "modified_at": "2026-08-24T14:21:47.946Z",
       "name": "DNI Set Up for landing page (code insertion)",
       "notes": "",
       "num_subtasks": 0,
@@ -5631,7 +6019,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -5641,9 +6030,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Invisalign Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ Invisalign Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786178697388",
+          "created_at": "2026-08-24T14:21:47.942Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -5863,14 +6260,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -6054,7 +6451,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:45:10.286Z",
+      "modified_at": "2026-08-24T14:21:47.973Z",
       "name": "Form creation and redirect to thank you page",
       "notes": "",
       "num_subtasks": 0,
@@ -6076,7 +6473,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -6086,9 +6484,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Invisalign Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ Invisalign Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786178697391",
+          "created_at": "2026-08-24T14:21:47.968Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -6308,14 +6714,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -6499,7 +6905,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:45:13.047Z",
+      "modified_at": "2026-08-24T14:21:48.001Z",
       "name": "Final Signoff",
       "notes": "",
       "num_subtasks": 0,
@@ -6521,7 +6927,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -6531,9 +6938,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Invisalign Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ Invisalign Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217785737304400",
+          "created_at": "2026-08-24T14:21:47.997Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -6541,15 +6956,18 @@
     },
     {
       "gid": "1217162605683021",
-      "actual_time_minutes": null,
+      "actual_time_minutes": 240,
       "assignee": {
         "gid": "1217162291350352",
         "name": "Alejandro Milano"
       },
       "assignee_status": "inbox",
-      "completed": false,
-      "completed_at": null,
-      "completed_by": null,
+      "completed": true,
+      "completed_at": "2026-08-24T14:22:10.828Z",
+      "completed_by": {
+        "gid": "1217162291350352",
+        "name": "Alejandro Milano"
+      },
       "created_at": "2026-08-04T16:27:43.805Z",
       "custom_fields": [
         {
@@ -6704,10 +7122,10 @@
             }
           ],
           "enum_value": {
-            "gid": "1213654480386514",
-            "color": "orange",
+            "gid": "1213654480386515",
+            "color": "blue-green",
             "enabled": true,
-            "name": "Client Review",
+            "name": "Done",
             "resource_type": "enum_option"
           },
           "name": "Task Progress",
@@ -6717,7 +7135,7 @@
             "name": "Jessica",
             "resource_type": "user"
           },
-          "display_value": "Client Review",
+          "display_value": "Done",
           "resource_subtype": "enum",
           "resource_type": "custom_field",
           "is_formula_field": false,
@@ -6765,14 +7183,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 240,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "4h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -6874,10 +7292,10 @@
             }
           ],
           "enum_value": {
-            "gid": "1215184637115808",
-            "color": "cool-gray",
+            "gid": "1215184637115811",
+            "color": "blue-green",
             "enabled": true,
-            "name": "In Progress",
+            "name": "Done",
             "resource_type": "enum_option"
           },
           "name": "Task Progress",
@@ -6887,7 +7305,7 @@
             "name": "Domeneque Camacho",
             "resource_type": "user"
           },
-          "display_value": "In Progress",
+          "display_value": "Done",
           "resource_subtype": "enum",
           "resource_type": "custom_field",
           "is_formula_field": false,
@@ -6960,17 +7378,24 @@
           "name": "Gauge Hill"
         },
         {
-          "gid": "1216725885824030",
-          "name": "Nayeli Ortega"
-        },
-        {
           "gid": "1217162291350352",
           "name": "Alejandro Milano"
         }
       ],
       "html_notes": "<body><a href=\"https://sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC\">https://sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC</a>\n<a href=\"https://www.greenspotcrossingsdentistry.com/lp/59-nps/?sc_cid=Google_PMAX:P:GP:1257:Paid:Generic:offer_nps&amp;ef_id=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB:G:s&amp;_vsrefdom=pmax&amp;gclsrc=aw.ds&amp;gad_source=1&amp;gad_campaignid=22786579408&amp;gbraid=0AAAAAD86Pj7IsHgfsRsOFegiih3ctJtAO&amp;gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB\">https://www.greenspotcrossingsdentistry.com/lp/59-nps/?sc_cid=Google_PMAX:P:GP:1257:Paid:Generic:offer_nps&amp;ef_id=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB:G:s&amp;_vsrefdom=pmax&amp;gclsrc=aw.ds&amp;gad_source=1&amp;gad_campaignid=22786579408&amp;gbraid=0AAAAAD86Pj7IsHgfsRsOFegiih3ctJtAO&amp;gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB</a>\n\n</body>",
-      "memberships": [],
-      "modified_at": "2026-08-13T15:46:09.252Z",
+      "memberships": [
+        {
+          "project": {
+            "gid": "1211830976769588",
+            "name": "Success Daily Stand-Up"
+          },
+          "section": {
+            "gid": "1211830976769602",
+            "name": "Completed"
+          }
+        }
+      ],
+      "modified_at": "2026-08-24T14:22:12.381Z",
       "name": "New Patient Special Landing Page",
       "notes": "https://sites.leadconnectorhq.com/preview/fhJtcZQi3uNr35Y2kKYC\nhttps://www.greenspotcrossingsdentistry.com/lp/59-nps/?sc_cid=Google_PMAX:P:GP:1257:Paid:Generic:offer_nps&ef_id=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB:G:s&_vsrefdom=pmax&gclsrc=aw.ds&gad_source=1&gad_campaignid=22786579408&gbraid=0AAAAAD86Pj7IsHgfsRsOFegiih3ctJtAO&gclid=Cj0KCQjwm8bTBhDWARIsAC9Hi8lT8EmkW826VWOrfIv4QGOGstZXxPKROON5VCkpivGz5y0C_vzTwp8aAro9EALw_wcB\n\n",
       "num_subtasks": 9,
@@ -6978,8 +7403,13 @@
         "gid": "1217040406855582",
         "name": "Landing Page - Mason Park"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217162605683021",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217162605683021",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "start_on": null,
       "tags": [],
       "resource_subtype": "default_task",
@@ -7072,13 +7502,18 @@
       "storyCounts": {
         "added_to_task": 1,
         "assigned": 3,
-        "enum_custom_field_changed": 3,
+        "enum_custom_field_changed": 5,
         "due_date_changed": 2,
         "date_custom_field_changed": 1,
         "notes_changed": 1,
         "due_today": 1,
         "comment_added": 2,
-        "unknown": 2
+        "unknown": 4,
+        "number_custom_field_changed": 1,
+        "time_tracking_entry_added": 1,
+        "marked_complete": 1,
+        "added_to_project": 1,
+        "section_changed": 1
       },
       "stories": [
         {
@@ -7088,7 +7523,7 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of Landing Page - Mason Park",
+          "text": "Gauge Hill added this task as a subtask of ✓ Landing Page - Mason Park",
           "type": "system",
           "resource_subtype": "added_to_task"
         },
@@ -7248,6 +7683,91 @@
           "text": "https://app.asana.com/1/1210572425689866/profile/1213912114353152 Go high-level form add it",
           "type": "comment",
           "resource_subtype": "comment_added"
+        },
+        {
+          "gid": "1217786178723223",
+          "created_at": "2026-08-24T14:21:56.347Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano changed Task Progress from Client Review to Done",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217786178723224",
+          "created_at": "2026-08-24T14:21:56.369Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "type": "system",
+          "resource_subtype": "unknown"
+        },
+        {
+          "gid": "1217785952988227",
+          "created_at": "2026-08-24T14:22:07.576Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano changed TaskTime to \"4h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
+        },
+        {
+          "gid": "1217785952988228",
+          "created_at": "2026-08-24T14:22:07.609Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano added to actual time: \n- entry date: Aug 24\n- duration: 4h 00m\n ",
+          "type": "system",
+          "resource_subtype": "time_tracking_entry_added"
+        },
+        {
+          "gid": "1217785953016368",
+          "created_at": "2026-08-24T14:22:10.877Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano completed this task",
+          "type": "system",
+          "resource_subtype": "marked_complete"
+        },
+        {
+          "gid": "1217785737541323",
+          "created_at": "2026-08-24T14:22:12.070Z",
+          "created_by": null,
+          "text": "Asana added this task to Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "added_to_project"
+        },
+        {
+          "gid": "1217785953034233",
+          "created_at": "2026-08-24T14:22:12.139Z",
+          "created_by": null,
+          "text": "Asana changed Task Progress from In Progress to Done",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217786179037160",
+          "created_at": "2026-08-24T14:22:12.212Z",
+          "created_by": null,
+          "type": "system",
+          "resource_subtype": "unknown"
+        },
+        {
+          "gid": "1217785737541332",
+          "created_at": "2026-08-24T14:22:12.381Z",
+          "created_by": null,
+          "text": "Asana moved this task from \"Open Tasks\" to \"Completed\" in Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "section_changed"
         }
       ],
       "dependentTasks": [],
@@ -7467,14 +7987,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -7658,7 +8178,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:45:26.585Z",
+      "modified_at": "2026-08-24T14:22:12.962Z",
       "name": "Landing Page",
       "notes": "",
       "num_subtasks": 0,
@@ -7680,7 +8200,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -7690,9 +8211,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of New Patient Special Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ New Patient Special Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217785952666814",
+          "created_at": "2026-08-24T14:22:12.956Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -7912,14 +8441,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -8103,7 +8632,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:45:38.688Z",
+      "modified_at": "2026-08-24T14:22:13.000Z",
       "name": "Consult",
       "notes": "",
       "num_subtasks": 0,
@@ -8125,7 +8654,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -8135,9 +8665,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of New Patient Special Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ New Patient Special Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217785952666817",
+          "created_at": "2026-08-24T14:22:12.994Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -8357,14 +8895,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -8548,7 +9086,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:45:51.034Z",
+      "modified_at": "2026-08-24T14:22:13.031Z",
       "name": "Thank you Page",
       "notes": "",
       "num_subtasks": 0,
@@ -8570,7 +9108,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -8580,9 +9119,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of New Patient Special Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ New Patient Special Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217785952666820",
+          "created_at": "2026-08-24T14:22:13.027Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -8802,14 +9349,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -8993,7 +9540,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:45:51.379Z",
+      "modified_at": "2026-08-24T14:22:13.062Z",
       "name": "Review Copywriting",
       "notes": "",
       "num_subtasks": 0,
@@ -9015,7 +9562,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -9025,9 +9573,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of New Patient Special Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ New Patient Special Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217785952666823",
+          "created_at": "2026-08-24T14:22:13.057Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -9247,14 +9803,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -9438,7 +9994,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:45:55.352Z",
+      "modified_at": "2026-08-24T14:22:13.090Z",
       "name": "Update copywriting to make sure its true",
       "notes": "",
       "num_subtasks": 0,
@@ -9460,7 +10016,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -9470,9 +10027,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of New Patient Special Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ New Patient Special Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217785952666826",
+          "created_at": "2026-08-24T14:22:13.086Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -9692,14 +10257,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -9883,7 +10448,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:45:59.224Z",
+      "modified_at": "2026-08-24T14:22:13.123Z",
       "name": "Connect tracking",
       "notes": "",
       "num_subtasks": 0,
@@ -9905,7 +10470,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -9915,9 +10481,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of New Patient Special Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ New Patient Special Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786012947240",
+          "created_at": "2026-08-24T14:22:13.114Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -10137,14 +10711,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -10328,7 +10902,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:46:04.064Z",
+      "modified_at": "2026-08-24T14:22:13.154Z",
       "name": "DNI Set Up for landing page (code insertion)",
       "notes": "",
       "num_subtasks": 0,
@@ -10350,7 +10924,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -10360,9 +10935,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of New Patient Special Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ New Patient Special Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786012947243",
+          "created_at": "2026-08-24T14:22:13.150Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -10582,14 +11165,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -10773,7 +11356,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:46:08.584Z",
+      "modified_at": "2026-08-24T14:22:13.185Z",
       "name": "Form creation and redirect to thank you page",
       "notes": "",
       "num_subtasks": 0,
@@ -10795,7 +11378,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -10805,9 +11389,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of New Patient Special Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ New Patient Special Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786012947246",
+          "created_at": "2026-08-24T14:22:13.180Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -11027,14 +11619,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": null,
+          "number_value": 0,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "0h 00m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -11218,7 +11810,7 @@
       ],
       "html_notes": "<body></body>",
       "memberships": [],
-      "modified_at": "2026-08-13T15:46:11.378Z",
+      "modified_at": "2026-08-24T14:22:13.217Z",
       "name": "Final Signoff",
       "notes": "",
       "num_subtasks": 0,
@@ -11240,7 +11832,8 @@
       "depth": 2,
       "attachments": [],
       "storyCounts": {
-        "added_to_task": 1
+        "added_to_task": 1,
+        "number_custom_field_changed": 1
       },
       "stories": [
         {
@@ -11250,9 +11843,17 @@
             "gid": "1213912114353154",
             "name": "Gauge Hill"
           },
-          "text": "Gauge Hill added this task as a subtask of New Patient Special Landing Page",
+          "text": "Gauge Hill added this task as a subtask of ✓ New Patient Special Landing Page",
           "type": "system",
           "resource_subtype": "added_to_task"
+        },
+        {
+          "gid": "1217786012947249",
+          "created_at": "2026-08-24T14:22:13.211Z",
+          "created_by": null,
+          "text": "Asana changed TaskTime to \"0h 00m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
         }
       ],
       "dependentTasks": [],
@@ -11260,15 +11861,18 @@
     },
     {
       "gid": "1217634674183542",
-      "actual_time_minutes": null,
+      "actual_time_minutes": 2,
       "assignee": {
         "gid": "1211675097206163",
         "name": "Jessica"
       },
       "assignee_status": "inbox",
-      "completed": false,
-      "completed_at": null,
-      "completed_by": null,
+      "completed": true,
+      "completed_at": "2026-08-22T00:08:02.719Z",
+      "completed_by": {
+        "gid": "1211675097206163",
+        "name": "Jessica"
+      },
       "created_at": "2026-08-19T22:53:53.881Z",
       "custom_fields": [
         {
@@ -11423,10 +12027,10 @@
             }
           ],
           "enum_value": {
-            "gid": "1213654480386511",
-            "color": "blue",
+            "gid": "1213654480386515",
+            "color": "blue-green",
             "enabled": true,
-            "name": "Not Started",
+            "name": "Done",
             "resource_type": "enum_option"
           },
           "name": "Task Progress",
@@ -11436,7 +12040,7 @@
             "name": "Jessica",
             "resource_type": "user"
           },
-          "display_value": "Not Started",
+          "display_value": "Done",
           "resource_subtype": "enum",
           "resource_type": "custom_field",
           "is_formula_field": false,
@@ -11484,14 +12088,14 @@
           "enabled": true,
           "name": "TaskTime",
           "description": "",
-          "number_value": 0,
+          "number_value": 2,
           "precision": 0,
           "created_by": {
             "gid": "1210572357798246",
             "name": "Sang Huynh",
             "resource_type": "user"
           },
-          "display_value": "0h 00m",
+          "display_value": "02m",
           "resource_subtype": "number",
           "resource_type": "custom_field",
           "is_formula_field": true,
@@ -11592,7 +12196,13 @@
               "resource_type": "enum_option"
             }
           ],
-          "enum_value": null,
+          "enum_value": {
+            "gid": "1215184637115811",
+            "color": "blue-green",
+            "enabled": true,
+            "name": "Done",
+            "resource_type": "enum_option"
+          },
           "name": "Task Progress",
           "description": "Asana-created. Track the progress of each task.",
           "created_by": {
@@ -11600,7 +12210,7 @@
             "name": "Domeneque Camacho",
             "resource_type": "user"
           },
-          "display_value": null,
+          "display_value": "Done",
           "resource_subtype": "enum",
           "resource_type": "custom_field",
           "is_formula_field": false,
@@ -11683,8 +12293,19 @@
         }
       ],
       "html_notes": "<body></body>",
-      "memberships": [],
-      "modified_at": "2026-08-20T07:05:05.724Z",
+      "memberships": [
+        {
+          "project": {
+            "gid": "1211830976769588",
+            "name": "Success Daily Stand-Up"
+          },
+          "section": {
+            "gid": "1211830976769602",
+            "name": "Completed"
+          }
+        }
+      ],
+      "modified_at": "2026-08-22T00:08:04.404Z",
       "name": "Masonpark.com Domain Access",
       "notes": "",
       "num_subtasks": 0,
@@ -11692,8 +12313,13 @@
         "gid": "1217040406855582",
         "name": "Landing Page - Mason Park"
       },
-      "permalink_url": "https://app.asana.com/1/1210572425689866/task/1217634674183542",
-      "projects": [],
+      "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217634674183542",
+      "projects": [
+        {
+          "gid": "1211830976769588",
+          "name": "Success Daily Stand-Up"
+        }
+      ],
       "start_on": null,
       "tags": [],
       "resource_subtype": "default_task",
@@ -11702,19 +12328,34 @@
         "name": "ThriveSquare"
       },
       "subtasks": [],
-      "comments": [],
+      "comments": [
+        {
+          "gid": "1217739073690149",
+          "created_at": "2026-08-21T22:31:26.109Z",
+          "created_by": null,
+          "text": "Jessica Please add your task time",
+          "type": "comment",
+          "resource_subtype": "comment_added"
+        }
+      ],
       "depth": 1,
       "attachments": [],
       "storyCounts": {
         "added_to_task": 1,
-        "number_custom_field_changed": 1,
+        "number_custom_field_changed": 3,
         "name_changed": 1,
         "assigned": 1,
-        "enum_custom_field_changed": 1,
-        "unknown": 1,
+        "enum_custom_field_changed": 3,
+        "unknown": 3,
         "due_date_changed": 1,
         "date_custom_field_changed": 1,
-        "dependent_added": 1
+        "dependent_added": 1,
+        "marked_complete": 2,
+        "added_to_project": 1,
+        "section_changed": 3,
+        "marked_incomplete": 1,
+        "comment_added": 1,
+        "time_tracking_entry_added": 1
       },
       "stories": [
         {
@@ -11724,7 +12365,7 @@
             "gid": "1217162291350352",
             "name": "Alejandro Milano"
           },
-          "text": "Alejandro Milano added this task as a subtask of Landing Page - Mason Park",
+          "text": "Alejandro Milano added this task as a subtask of ✓ Landing Page - Mason Park",
           "type": "system",
           "resource_subtype": "added_to_task"
         },
@@ -11780,7 +12421,7 @@
             "gid": "1217162291350352",
             "name": "Alejandro Milano"
           },
-          "text": "Alejandro Milano changed the due date to Today",
+          "text": "Alejandro Milano changed the due date to Aug 20",
           "type": "system",
           "resource_subtype": "due_date_changed"
         },
@@ -11788,7 +12429,7 @@
           "gid": "1217662714737608",
           "created_at": "2026-08-19T22:54:25.251Z",
           "created_by": null,
-          "text": "Asana changed Original Due Date to \"Today\"",
+          "text": "Asana changed Original Due Date to \"Aug 20\"",
           "type": "system",
           "resource_subtype": "date_custom_field_changed"
         },
@@ -11799,9 +12440,142 @@
             "gid": "1217162291350352",
             "name": "Alejandro Milano"
           },
-          "text": "Alejandro Milano marked Landing Page - Mason Park as blocked by this task",
+          "text": "Alejandro Milano marked ✓ Landing Page - Mason Park as blocked by this task",
           "type": "system",
           "resource_subtype": "dependent_added"
+        },
+        {
+          "gid": "1217738834013017",
+          "created_at": "2026-08-21T22:21:13.100Z",
+          "created_by": {
+            "gid": "1217162291350352",
+            "name": "Alejandro Milano"
+          },
+          "text": "Alejandro Milano marked this task complete",
+          "type": "system",
+          "resource_subtype": "marked_complete"
+        },
+        {
+          "gid": "1217738834124075",
+          "created_at": "2026-08-21T22:21:14.721Z",
+          "created_by": null,
+          "text": "Asana added this task to Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "added_to_project"
+        },
+        {
+          "gid": "1217739090011525",
+          "created_at": "2026-08-21T22:21:14.742Z",
+          "created_by": null,
+          "text": "Asana changed Task Progress to Done",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217739090011527",
+          "created_at": "2026-08-21T22:21:14.816Z",
+          "created_by": null,
+          "type": "system",
+          "resource_subtype": "unknown"
+        },
+        {
+          "gid": "1217738834124084",
+          "created_at": "2026-08-21T22:21:15.019Z",
+          "created_by": null,
+          "text": "Asana moved this task from \"Open Tasks\" to \"Completed\" in Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "section_changed"
+        },
+        {
+          "gid": "1217738834124088",
+          "created_at": "2026-08-21T22:21:15.109Z",
+          "created_by": null,
+          "text": "Asana changed Task Progress from Not Started to Done",
+          "type": "system",
+          "resource_subtype": "enum_custom_field_changed"
+        },
+        {
+          "gid": "1217738834124090",
+          "created_at": "2026-08-21T22:21:15.216Z",
+          "created_by": null,
+          "type": "system",
+          "resource_subtype": "unknown"
+        },
+        {
+          "gid": "1217739073690145",
+          "created_at": "2026-08-21T22:31:25.928Z",
+          "created_by": null,
+          "text": "Asana marked incomplete",
+          "type": "system",
+          "resource_subtype": "marked_incomplete"
+        },
+        {
+          "gid": "1217739073690149",
+          "created_at": "2026-08-21T22:31:26.109Z",
+          "created_by": null,
+          "text": "Jessica Please add your task time",
+          "type": "comment",
+          "resource_subtype": "comment_added"
+        },
+        {
+          "gid": "1217739073690156",
+          "created_at": "2026-08-21T22:31:26.386Z",
+          "created_by": null,
+          "text": "Asana moved this task from \"Completed\" to \"Missing Time\" in Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "section_changed"
+        },
+        {
+          "gid": "1217739669957534",
+          "created_at": "2026-08-22T00:07:59.945Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica changed TaskTime from \"0h 00m\" to \"02m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
+        },
+        {
+          "gid": "1217739669957535",
+          "created_at": "2026-08-22T00:07:59.986Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica changed TaskTime from \"0h 00m\" to \"02m\"",
+          "type": "system",
+          "resource_subtype": "number_custom_field_changed"
+        },
+        {
+          "gid": "1217739669957536",
+          "created_at": "2026-08-22T00:08:00.010Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica added to actual time: \n- entry date: Aug 21\n- duration: 02m\n- project: Success Daily Stand-Up\n ",
+          "type": "system",
+          "resource_subtype": "time_tracking_entry_added"
+        },
+        {
+          "gid": "1217739568380233",
+          "created_at": "2026-08-22T00:08:02.781Z",
+          "created_by": {
+            "gid": "1211675097206163",
+            "name": "Jessica"
+          },
+          "text": "Jessica completed this task",
+          "type": "system",
+          "resource_subtype": "marked_complete"
+        },
+        {
+          "gid": "1217739605714461",
+          "created_at": "2026-08-22T00:08:04.403Z",
+          "created_by": null,
+          "text": "Asana moved this task from \"Missing Time\" to \"Completed\" in Success Daily Stand-Up",
+          "type": "system",
+          "resource_subtype": "section_changed"
         }
       ],
       "dependentTasks": [
@@ -11811,7 +12585,7 @@
             "gid": "1217162291350352",
             "name": "Alejandro Milano"
           },
-          "completed": false,
+          "completed": true,
           "due_on": "2026-08-19",
           "name": "Landing Page - Mason Park",
           "permalink_url": "https://app.asana.com/1/1210572425689866/project/1211830976769588/task/1217040406855582",
@@ -11918,16 +12692,8 @@
           "name": "Juliana Medina"
         },
         {
-          "gid": "1216542200957989",
-          "name": "Maria J Alvarez"
-        },
-        {
           "gid": "1216639144002502",
           "name": "Jiseth Valderrama"
-        },
-        {
-          "gid": "1216725885824030",
-          "name": "Nayeli Ortega"
         },
         {
           "gid": "1217162291350352",
@@ -11946,9 +12712,9 @@
         "name": "Customer Success"
       },
       "task_counts": {
-        "num_tasks": 1833,
-        "num_completed_tasks": 1616,
-        "num_incomplete_tasks": 217
+        "num_tasks": 2056,
+        "num_completed_tasks": 1850,
+        "num_incomplete_tasks": 206
       },
       "attachments": []
     },
@@ -11968,6 +12734,10 @@
         {
           "gid": "1211675097206163",
           "name": "Jessica"
+        },
+        {
+          "gid": "1211894225964623",
+          "name": "Zoe Zou"
         }
       ],
       "name": "BK Implementation - Mason Park Dental",
@@ -11979,9 +12749,9 @@
         "name": "Customer Success"
       },
       "task_counts": {
-        "num_tasks": 89,
-        "num_completed_tasks": 43,
-        "num_incomplete_tasks": 46
+        "num_tasks": 96,
+        "num_completed_tasks": 51,
+        "num_incomplete_tasks": 45
       },
       "attachments": []
     }
@@ -11992,8 +12762,7 @@
       "ownerGid": "1217040406855582",
       "name": "mpd-invisalign-lp.html",
       "size": 26957,
-      "dest": "C:\\Users\\ACER\\orca\\workspaces\\Webzite Agentic Workflow\\bk-mason-park\\deliver\\brandklout\\mason-park\\workflows\\01-content-intake\\.tmp\\asana-context\\attachments\\1217162344633748-mpd-invisalign-lp.html",
-      "skipped": true,
+      "dest": "C:\\Users\\ACER\\orca\\workspaces\\Brandklout Website System\\bk-mason-park\\deliver\\brandklout\\mason-park\\workflows\\01-content-intake\\.tmp\\asana-context\\attachments\\1217162344633748-mpd-invisalign-lp.html",
       "bytes": 26957
     },
     {
@@ -12001,8 +12770,7 @@
       "ownerGid": "1217040406855582",
       "name": "mpd-new-patient-lp.html",
       "size": 31121,
-      "dest": "C:\\Users\\ACER\\orca\\workspaces\\Webzite Agentic Workflow\\bk-mason-park\\deliver\\brandklout\\mason-park\\workflows\\01-content-intake\\.tmp\\asana-context\\attachments\\1217162344633750-mpd-new-patient-lp.html",
-      "skipped": true,
+      "dest": "C:\\Users\\ACER\\orca\\workspaces\\Brandklout Website System\\bk-mason-park\\deliver\\brandklout\\mason-park\\workflows\\01-content-intake\\.tmp\\asana-context\\attachments\\1217162344633750-mpd-new-patient-lp.html",
       "bytes": 31121
     },
     {
@@ -12010,7 +12778,8 @@
       "ownerGid": "1217040406855582",
       "name": "image.png",
       "size": 872141,
-      "dest": "C:\\Users\\ACER\\orca\\workspaces\\Webzite Agentic Workflow\\bk-mason-park\\deliver\\brandklout\\mason-park\\workflows\\01-content-intake\\.tmp\\asana-context\\attachments\\1217691620333463-image.png",
+      "dest": "C:\\Users\\ACER\\orca\\workspaces\\Brandklout Website System\\bk-mason-park\\deliver\\brandklout\\mason-park\\workflows\\01-content-intake\\.tmp\\asana-context\\attachments\\1217691620333463-image.png",
+      "skipped": true,
       "bytes": 872141
     }
   ],
@@ -12054,13 +12823,6 @@
       ]
     },
     {
-      "name": "Nayeli Ortega",
-      "roles": [
-        "follower",
-        "member of \"Success Daily Stand-Up\""
-      ]
-    },
-    {
       "name": "Trong Huynh",
       "roles": [
         "member of \"Success Daily Stand-Up\"",
@@ -12080,15 +12842,15 @@
       ]
     },
     {
-      "name": "Maria J Alvarez",
+      "name": "Jiseth Valderrama",
       "roles": [
         "member of \"Success Daily Stand-Up\""
       ]
     },
     {
-      "name": "Jiseth Valderrama",
+      "name": "Zoe Zou",
       "roles": [
-        "member of \"Success Daily Stand-Up\""
+        "member of \"BK Implementation - Mason Park Dental\""
       ]
     }
   ]
