@@ -21,15 +21,91 @@ const HERE = path.dirname(fileURLToPath(import.meta.url));
 const SITE = path.join(HERE, "..", "home");
 const CHECK = process.argv.includes("--check");
 
-const ROUTES = new Set([
-  "/", "/about-us/", "/our-doctors/", "/our-team/", "/patient-reviews/",
-  "/our-services/", "/services/invisalign/",
-  "/new-patients/", "/financing/", "/dental-savings-plan/", "/thank-you/",
-]);
+// ROUTES is DERIVED FROM DISK, never listed by hand.
+//
+// It used to be a literal list of the eleven routes that existed on
+// 2026-09-02. The moment treatment pages started landing under
+// home/services/, that list made this gate lie in both directions: it
+// reported live pages (/services/dental-crowns/) as DEAD, and it would
+// have gone on pruning the nav down to eleven routes while thirty more
+// sat on disk. A gate with a hardcoded page list reports clean on the
+// pages it has never heard of. Walk the folder instead.
+const routesOnDisk = () => {
+  const out = new Set();
+  const walkDirs = (dir) => {
+    for (const e of fs.readdirSync(dir, { withFileTypes: true })) {
+      if (!e.isDirectory()) continue;
+      const abs = path.join(dir, e.name);
+      if (fs.existsSync(path.join(abs, "index.html"))) {
+        out.add("/" + path.relative(SITE, abs).split(path.sep).join("/") + "/");
+      }
+      walkDirs(abs);
+    }
+  };
+  if (fs.existsSync(path.join(SITE, "index.html"))) out.add("/");
+  walkDirs(SITE);
+  return out;
+};
+const ROUTES = routesOnDisk();
 
-const NAV = `<nav class="navbar_menu" id="navbar-menu" aria-label="Main"><ul class="navbar_menu-list"><li class="navbar_item"><a class="navbar_link" href="/">Home</a></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/about-us/">About</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/about-us/">About the Practice</a></li><li class="navbar_item"><a class="navbar_link" href="/our-doctors/">Meet Our Doctors</a></li><li class="navbar_item"><a class="navbar_link" href="/our-team/">Meet Our Team</a></li><li class="navbar_item"><a class="navbar_link" href="/patient-reviews/">Patient Reviews</a></li></ul></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/our-services/">Services</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/our-services/">All Services</a></li><li class="navbar_item"><a class="navbar_link" href="/services/invisalign/">Invisalign</a></li></ul></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/new-patients/">Patients</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/new-patients/">New Patients</a></li><li class="navbar_item"><a class="navbar_link" href="/financing/">Financing</a></li><li class="navbar_item"><a class="navbar_link" href="/dental-savings-plan/">Dental Savings Plan</a></li></ul></li><li class="navbar_item"><a class="navbar_link" href="/patient-reviews/">Reviews</a></li></ul></nav>`;
+// The treatment pages in the Services dropdown are read off disk too, in
+// the catalogue's own order, so a page appears in the nav the day it is
+// stamped and never before. `label` is the chip wording from
+// /our-services/, which is what the client approved.
+//
+// NOTE for the next batch: at ~10 entries this dropdown stops being a
+// dropdown. All 31 treatments will need the grouped mega-menu the
+// catalogue already implies (Preventative / Cosmetic / Invisalign /
+// Restorative / Hygiene and gums / Oral surgery / Comfort and pain).
+// Do not just let this list grow to thirty.
+const TREATMENTS = [
+  ["preventative-dentistry", "Cleanings and Exams"],
+  ["oral-cancer-screening", "Oral Cancer Screening"],
+  ["dental-hygiene-education", "Hygiene Education"],
+  ["mouth-guards", "Mouth Guards"],
+  ["night-guards", "Night Guards"],
+  ["fluoride-treatment", "Fluoride"],
+  ["sealants", "Sealants"],
+  ["cosmetic-dentistry", "Smile Makeovers"],
+  ["bonding", "Bonding"],
+  ["porcelain-veneers", "Porcelain Veneers"],
+  ["whitening", "Whitening"],
+  ["invisalign", "Invisalign"],
+  ["invisalign-questions", "Invisalign Questions"],
+  ["dental-implant-restorations", "Implant Restorations"],
+  ["dentures", "Dentures"],
+  ["dental-crowns", "Crowns"],
+  ["composite-fillings", "Tooth Coloured Fillings"],
+  ["bridges", "Bridges"],
+  ["root-canal-therapy", "Root Canal Therapy"],
+  ["comprehensive-care", "Deep Cleaning"],
+  ["laser-dentistry", "Laser Dentistry"],
+  ["airflow-one", "AIRFLOW&reg; ONE"],
+  ["frenectomy", "Frenectomy"],
+  ["extractions", "Extractions"],
+  ["wisdom-teeth", "Wisdom Teeth"],
+  ["dental-implant-placement", "Implant Placement"],
+  ["crown-lengthening", "Crown Lengthening"],
+  ["bone-grafting", "Bone Grafting"],
+  ["sedation-dentistry", "Sedation Dentistry"],
+  ["emergency-dentist", "Emergency Dentist"],
+  ["tmj-tmd", "TMJ and TMD"],
+].filter(([slug]) => ROUTES.has(`/services/${slug}/`));
 
-const CARE = `<ul class="footer_list"><li><a href="/our-services/">All services</a></li><li><a href="/services/invisalign/">Invisalign</a></li><li><a href="/our-doctors/#specialist">Children's dentistry</a></li><li><a href="/our-doctors/">Meet the doctors</a></li><li><a href="/our-team/">Meet the team</a></li><li><a href="/about-us/">About the practice</a></li></ul>`;
+const treatmentItems = TREATMENTS.map(([slug, label]) =>
+  `<li class="navbar_item"><a class="navbar_link" href="/services/${slug}/">${label}</a></li>`).join("");
+
+const NAV = `<nav class="navbar_menu" id="navbar-menu" aria-label="Main"><ul class="navbar_menu-list"><li class="navbar_item"><a class="navbar_link" href="/">Home</a></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/about-us/">About</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/about-us/">About the Practice</a></li><li class="navbar_item"><a class="navbar_link" href="/our-doctors/">Meet Our Doctors</a></li><li class="navbar_item"><a class="navbar_link" href="/our-team/">Meet Our Team</a></li><li class="navbar_item"><a class="navbar_link" href="/patient-reviews/">Patient Reviews</a></li></ul></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/our-services/">Services</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/our-services/">All Services</a></li>${treatmentItems}</ul></li><li class="navbar_item has-dropdown"><a class="navbar_link" href="/new-patients/">Patients</a><ul class="navbar_dropdown-list"><li class="navbar_item"><a class="navbar_link" href="/new-patients/">New Patients</a></li><li class="navbar_item"><a class="navbar_link" href="/financing/">Financing</a></li><li class="navbar_item"><a class="navbar_link" href="/dental-savings-plan/">Dental Savings Plan</a></li></ul></li><li class="navbar_item"><a class="navbar_link" href="/patient-reviews/">Reviews</a></li></ul></nav>`;
+
+// The footer's Care column stays six rows whatever the catalogue does --
+// a footer column is not a sitemap. It carries "All services" and the
+// three most-asked treatments that exist.
+const footerPicks = TREATMENTS
+  .filter(([slug]) => ["invisalign", "dental-implant-restorations", "dental-crowns", "extractions"].includes(slug))
+  .slice(0, 3)
+  .map(([slug, label]) => `<li><a href="/services/${slug}/">${label}</a></li>`).join("");
+
+const CARE = `<ul class="footer_list"><li><a href="/our-services/">All services</a></li>${footerPicks}<li><a href="/our-doctors/">Meet the doctors</a></li><li><a href="/about-us/">About the practice</a></li></ul>`;
 const PATIENTS = `<ul class="footer_list"><li><a href="/new-patients/">New patients</a></li><li><a href="/financing/">Financing</a></li><li><a href="/dental-savings-plan/">Dental savings plan</a></li><li><a href="/patient-reviews/">Patient reviews</a></li><li><a href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book online</a></li></ul>`;
 const LEGAL = `<div class="footer_legal">\n      &copy; 2026 Mason Park Dental of Katy\n    </div>`;
 
