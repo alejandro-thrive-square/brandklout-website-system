@@ -48,6 +48,7 @@ export const CLIENT_TASKS = {
   'stone-surgical-arts': ['1217160668112180', '1217160668112175'],
   'stone-dental-implant-center': ['1217160668112180', '1217160668112175'],
   'legacy-dental-pasadena': ['1217611213174386'],
+  'institute-for-advanced-dentistry': ['1215476573810829', '1217929763942271'],
 }
 
 const TASK_FIELDS = [

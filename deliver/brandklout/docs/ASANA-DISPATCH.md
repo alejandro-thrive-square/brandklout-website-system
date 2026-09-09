@@ -20,6 +20,7 @@ parallel agents can each take one client without colliding.
 | Arvada Dental Center & Implants | [`arvada-dental-center/`](../arvada-dental-center/docs/project-overview.md) | `1217040406855586` | 6 landing pages | 2026-08-05 | Six local journeys complete; Webflow build not dispatched |
 | Mason Park Dental | [`mason-park/`](../mason-park/docs/project-overview.md) | `1217040406855582` | 3 landing pages | 2026-08-05 | Three local/staging journeys re-themed; pasteable-component migration in progress |
 | Dr. Esam Nahlah | [`dr-nahlah/`](../dr-nahlah/docs/project-overview.md) | `1216611404338509` | Research + dev assignment | 2026-08-05 | Reference implementation active in dedicated client worktree; local artifact migration incomplete |
+| Institute for Advanced Dentistry | [`institute-for-advanced-dentistry/`](../institute-for-advanced-dentistry/docs/project-overview.md) | `1217929763942271` (Design Home Page), `1215476573810829` (Complete Client Website) — project `1215461031852894`, pulled 2026-09-03 | Full site from scratch; home page first | 2026-09-21 (home page design) | Initialized 2026-09-03; worktree `bk-ifa-dentistry`; nothing built |
 | Stone Surgical Arts | [`stone-surgical-arts/`](../stone-surgical-arts/docs/project-overview.md) | `1217160668112180` / `1217160668112175` (unsplit) | Full website | none | 12 pages built and published to Instatic staging |
 | Stone Dental Implant Center | [`stone-dental-implant-center/`](../stone-dental-implant-center/docs/project-overview.md) | `1217160668112180` / `1217160668112175` (unsplit) | Ad landing pages | none | Built in `bk-stone-dental` (Webflow) |
 | Stone Med Spa | [`stone-med-spa/`](../stone-med-spa/docs/project-overview.md) | — | Full website | none | Built in `bk-stone-med-spa` |
@@ -28,6 +29,7 @@ parallel agents can each take one client without colliding.
 > Stone Med Spa are delivered as separate projects with separate folders, worktrees and Instatic
 > instances, because they are separate websites with separate brands. Asana has not been split to
 > match yet, so both Stone task GIDs are still listed against the first two.
+
 
 Not in Asana but present in the repo:
 - `livewell-dental/` (no assigned tasks in this pull).

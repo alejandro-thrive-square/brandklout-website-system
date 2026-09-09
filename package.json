@@ -1,1 +1,9 @@
-{}
+{
+  "name": "brandklout-website-system",
+  "private": true,
+  "version": "0.0.0",
+  "description": "Brandklout delivery system. The root package exists so Orca's per-worktree setup hook (`npm install`) has something to run.",
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js"
+  }
+}

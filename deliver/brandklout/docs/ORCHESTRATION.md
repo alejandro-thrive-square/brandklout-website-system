@@ -17,7 +17,8 @@ Webzite Agentic Workflow  (main, refs/heads/main)   <-- orchestration only
 ├── bk-stone                worktree   -> deliver/brandklout/stone-surgical-arts/
 ├── bk-livewell             worktree   -> deliver/brandklout/livewell-dental/
 ├── bk-west-la-implants     worktree   -> deliver/brandklout/west-la-implants/
-└── bk-legacy-dental        worktree   -> deliver/brandklout/legacy-dental-pasadena/
+├── bk-legacy-dental        worktree   -> deliver/brandklout/legacy-dental-pasadena/
+└── bk-ifa-dentistry        worktree   -> deliver/brandklout/institute-for-advanced-dentistry/
 ```
 
 Repo id: `7b269532-4e7a-4ceb-baa4-707929ee41d3`
@@ -102,9 +103,14 @@ orca terminal send --terminal <handle> --text 'Run this and reply with only its 
 ## Creating a worktree for a new client
 
 ```text
-orca worktree create --repo id:7b269532-4e7a-4ceb-baa4-707929ee41d3 \
+orca worktree create --repo id:db55534c-1992-4094-b865-7eaecc3e5eab \
   --name bk-<client-slug> --no-parent --base-branch main --json
 ```
+
+That repo id is **Brandklout Website System** in `orca repo list --json`; the id this doc carried
+until 2026-09-03 (`7b269532…`) was the old `webzite-agentic-workflow` repo and would have created the
+worktree in the wrong repository. Orca names the branch `<git-username>/bk-<slug>`; rename it to bare
+`bk-<slug>` right after create (`git branch -m`) so `git worktree list` stays uniform.
 
 `--no-parent` keeps each client independent rather than stacked on another client's branch.
 `--base-branch main` is intentional: this orchestration checkout may be ahead of `origin/main`, and
