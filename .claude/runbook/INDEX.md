@@ -1,11 +1,12 @@
 # Runbook index
 
-12 runs, newest first. Each line is one file in this folder.
+13 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-09 | 2026-09-09 — the six client runbooks copied to main (snapshot) | [`2026-09-09-client-runbooks-copied-to-main.md`](./2026-09-09-client-runbooks-copied-to-main.md) |
 | 2026-09-09 | 2026-09-09 — bk-dr-nahlah, bk-mason-park and bk-stone-dental cleaned and merged | [`2026-09-09-three-worktrees-cleaned-and-merged.md`](./2026-09-09-three-worktrees-cleaned-and-merged.md) |
 | 2026-09-09 | 2026-09-09 — Instatic API sync promoted out of `dr-nahlah/` to process `22` (`e3d8f864`) | [`2026-09-09-instatic-api-sync-promoted-out-of-dr-nahlah-to-2.md`](./2026-09-09-instatic-api-sync-promoted-out-of-dr-nahlah-to-2.md) |
 | 2026-09-04 | 2026-09-04 — Stone split into three projects (`604da383`) | [`2026-09-04-stone-split-into-three-projects-604da383.md`](./2026-09-04-stone-split-into-three-projects-604da383.md) |
