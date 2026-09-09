@@ -112,6 +112,22 @@ STOCK = {
     "st-nook":     (STOCKDIR, "st-nook.jpg", [480, 960, 1440]),
     "st-play":     (STOCKDIR, "st-play.jpg", [480, 960, 1440]),
     "st-teen":     (STOCKDIR, "st-teen.jpg", [480, 960, 1440]),
+    # 2026-09-09, for the forty-six migrated pages. Fourteen slots could not
+    # give forty-six more pages a photograph each without `waiting` carrying
+    # nine of them. All objects and empty rooms bar st-hands, which is two
+    # hands and no face; see get-stock.mjs for what each one is for.
+    "st-blocks":   (STOCKDIR, "st-blocks.jpg", [480, 960, 1440]),
+    "st-case":     (STOCKDIR, "st-case.jpg", [480, 960, 1440]),
+    "st-field":    (STOCKDIR, "st-field.jpg", [480, 960, 1440]),
+    "st-floss":    (STOCKDIR, "st-floss.jpg", [480, 960, 1440]),
+    "st-hands":    (STOCKDIR, "st-hands.jpg", [480, 960, 1440]),
+    "st-laptop":   (STOCKDIR, "st-laptop.jpg", [480, 960, 1440]),
+    "st-park":     (STOCKDIR, "st-park.jpg", [480, 960, 1440]),
+    "st-sleep":    (STOCKDIR, "st-sleep.jpg", [480, 960, 1440]),
+    "st-soda":     (STOCKDIR, "st-soda.jpg", [480, 960, 1440]),
+    "st-tube":     (STOCKDIR, "st-tube.jpg", [480, 960, 1440]),
+    "st-water":    (STOCKDIR, "st-water.jpg", [480, 960, 1440]),
+    "st-window":   (STOCKDIR, "st-window.jpg", TALL),     # portrait; light on a wall
 }
 
 COPY = {
@@ -126,8 +142,19 @@ COPY = {
 os.makedirs(OUT, exist_ok=True)
 written = 0
 missing_stock = []
+missing_mirror = []
 for key, (root, rel, widths) in {**PHOTOS, **STOCK}.items():
     src = os.path.join(root, rel)
+    # The recovery mirror is workflow 01's `recovered/`, which is gitignored
+    # and is therefore absent from a worktree that did not run the recovery.
+    # uploads/ is gitignored too but is normally already built, so a missing
+    # MIRROR source is a "nothing to do here", not a crash: it would otherwise
+    # stop the run before it reached the stock keys, which are the only ones a
+    # later session actually adds. A key that is missing from BOTH is caught by
+    # check.mjs, which reads the markup and fails on an asset that will 404.
+    if root == KIDS and not os.path.exists(src) and not os.path.exists(os.path.join(UPSCALED, f"{key}.png")):
+        missing_mirror.append(key)
+        continue
     if root == STOCKDIR and not os.path.exists(src):
         # A stock key with no file is a `node get-stock.mjs` away, not a crash:
         # _stock/ is gitignored like uploads/, so a fresh clone has none of it.
@@ -181,6 +208,10 @@ for name, (root, rel) in COPY.items():
     shutil.copyfile(src, os.path.join(OUT, name))
     print(f"{name:18s} copied")
 
+if missing_mirror:
+    print()
+    print(f"no mirror source for {len(missing_mirror)} key(s), left as they are in uploads/: {', '.join(missing_mirror)}")
+    print("that is expected outside the worktree that ran 01-site-recovery.")
 if missing_stock:
     print("")
     print(f"no _stock file for: {', '.join(missing_stock)}  -  run `node get-stock.mjs`")

@@ -2,26 +2,27 @@
 //   node crop-all.mjs              the eleven local pages
 //   node crop-all.mjs --live       the eleven live routes
 import { execFileSync } from "node:child_process";
+import fs from "node:fs";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
 
-const LOCAL = [
-  "../home/index.html",
-  "../home/about-us/index.html",
-  "../home/our-doctors/index.html",
-  "../home/our-team/index.html",
-  "../home/our-services/index.html",
-  "../home/services/comprehensive-pediatric-dentistry/index.html",
-  "../home/new-patients/index.html",
-  "../home/financing/index.html",
-  "../home/dental-saving-plan/index.html",
-  "../home/patient-reviews/index.html",
-  "../home/thank-you/index.html",
-];
+// 2026-09-09: this used to carry the eleven core pages as a hard-coded list.
+// The other forty-six were then redesigned and none of them was ever swept,
+// which is the shape of bug this gate exists to catch. It now walks home/, so
+// a page added to the site is swept without anybody remembering to add it.
+const HERE = path.dirname(fileURLToPath(import.meta.url));
+const SITE = path.join(HERE, "..", "home");
+const walk = (dir) => fs.readdirSync(dir, { withFileTypes: true }).flatMap((e) =>
+  e.isDirectory() ? walk(path.join(dir, e.name)) : [path.join(dir, e.name)]);
+
+const routes = walk(SITE)
+  .filter((f) => f.endsWith("index.html"))
+  .map((f) => path.relative(SITE, path.dirname(f)).split(path.sep).filter(Boolean).join("/"))
+  .sort((a, b) => a.length - b.length || a.localeCompare(b));
+
+const LOCAL = routes.map((r) => (r ? `../home/${r}/index.html` : "../home/index.html"));
 const BASE = "https://mason-park-kids.up.railway.app";
-const LIVE = [
-  "/", "/about-us", "/our-doctors", "/our-team", "/our-services",
-  "/services/comprehensive-pediatric-dentistry", "/new-patients", "/financing",
-  "/dental-saving-plan", "/patient-reviews", "/thank-you",
-].map((p) => BASE + p);
+const LIVE = routes.map((r) => `${BASE}/${r}`);
 
 const live = process.argv.includes("--live");
 const targets = live ? LIVE : LOCAL;

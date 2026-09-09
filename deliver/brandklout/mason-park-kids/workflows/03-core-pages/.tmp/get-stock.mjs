@@ -179,6 +179,90 @@ const SLOTS = [
     alt: "A child holding an apple outdoors",
     for: "the prevention and the plan chapters",
   },
+
+  /* --- 2026-09-09: the 46 migrated pages ---------------------------------
+     Fourteen slots served eleven pages. Forty-six more pages arrived in the
+     redesign and the pool ran out: `waiting` and `knee` would have carried
+     nine treatment pages each. Everything below is an OBJECT or an ordinary
+     moment, per the policy at the top of this file - the practice's own
+     clinical frames stay the only pictures that appear beside a treatment
+     name, and these sit in the second half of a page as the mood.
+     AVOID_ALWAYS already drops "braces", "orthodont", "x-ray" and "dental",
+     so a slot for an orthodontic page is searched by the object a parent
+     recognises (a case on a shelf, a gum shield on grass), never the
+     appliance in a mouth. */
+  {
+    key: "st-case", term: "small clear plastic container with lid on a white bathroom countertop", orientation: "horizontal",
+    people: false, prefer: ["container", "case", "box", "plastic", "clear", "lid", "countertop"], avoid: ["jewellery", "jewelry", "makeup", "cosmetic", "pill", "medicine", "soap", "lily", "flower", "food", "lunch"],
+    alt: "A small clear case on a bathroom shelf",
+    for: "the appliance pages - aligners, retainers, night guards. An object on a shelf, never in a mouth",
+  },
+  {
+    key: "st-field", term: "empty grass sports field at a school on a bright morning", orientation: "horizontal",
+    people: false, prefer: ["field", "grass", "sport", "pitch", "school", "green"], avoid: ["stadium", "crowd", "night", "floodlight"],
+    alt: "A school sports field on a bright morning",
+    for: "mouth guards, and the knock that brings a family in for emergency care",
+  },
+  {
+    key: "st-sleep", term: "childs bedroom with a made bed and soft morning light", orientation: "horizontal",
+    people: false, prefer: ["bedroom", "bed", "child", "nursery", "morning", "soft"], avoid: ["hotel", "hospital", "dark", "adult"],
+    alt: "A child's bedroom in the morning",
+    for: "night guards, grinding, and the sedation pages where calm is the subject",
+  },
+  {
+    key: "st-floss", term: "dental floss and toothpaste on a clean white bathroom shelf", orientation: "horizontal",
+    people: false, prefer: ["floss", "toothpaste", "bathroom", "shelf", "white", "clean"], avoid: ["grunge", "dark", "rustic"],
+    alt: "Floss and toothpaste on a bathroom shelf",
+    for: "dental hygiene education, and the home-routine half of the preventive pages",
+  },
+  {
+    key: "st-water", term: "glass of clear water standing on a wooden kitchen table by a window", orientation: "horizontal",
+    people: false, prefer: ["water", "glass", "table", "kitchen", "window", "wooden"], avoid: ["cocktail", "splash", "dark", "lemon", "ice", "isolated", "white background", "bottle"],
+    alt: "A glass of water on a kitchen table",
+    for: "fluoride, and the acidity pages - the thing we ask them to drink instead",
+  },
+  {
+    key: "st-soda", term: "assorted colourful sweets and candy laid out on a table overhead flat lay", orientation: "horizontal",
+    people: false, prefer: ["candy", "sweet", "assorted", "colorful", "colourful", "flat lay", "table", "overhead"], avoid: ["alcohol", "beer", "cocktail", "bar", "splash", "mockup", "isolated", "white background"],
+    alt: "Fizzy drinks and sweets on a table",
+    for: "the pH and acidity table, the toothpaste chart, and the decay half of prevention",
+  },
+  {
+    key: "st-tube", term: "toothbrush with toothpaste on it resting on a bathroom sink", orientation: "horizontal",
+    people: false, prefer: ["toothpaste", "toothbrush", "sink", "bathroom", "counter"], avoid: ["dark", "grunge", "mockup", "blank", "isolated", "white background", "3d"],
+    alt: "Toothpaste tubes on a bathroom counter",
+    for: "the toothpaste chart and the RDA table",
+  },
+  {
+    key: "st-blocks", term: "child wooden building blocks stacked on a wooden floor in a playroom", orientation: "horizontal",
+    people: false, prefer: ["block", "wooden", "toy", "floor", "playroom", "stack", "build"], avoid: ["plastic", "lego", "dark", "yellow background", "isolated", "white background", "studio"],
+    alt: "Wooden building blocks on a table",
+    for: "space maintainers and early intervention - holding a gap, building in order",
+  },
+  {
+    key: "st-hands", term: "adult hand holding a small childs hand outdoors close up", orientation: "horizontal",
+    people: true, prefer: ["hand", "holding", "child", "parent", "together", "outdoor"], avoid: ["hospital", "elderly", "clinical"],
+    alt: "An adult and a child holding hands",
+    for: "special needs patient care, and the referral page",
+  },
+  {
+    key: "st-window", term: "soft morning sunlight falling through a window onto a calm bedroom wall", orientation: "vertical",
+    people: false, prefer: ["window", "sunlight", "morning", "calm", "quiet", "curtain", "light"], avoid: ["office", "corridor", "dark", "abandoned", "tropical", "night"],
+    alt: "Sunlight through a window in a quiet room",
+    for: "sedation, and the accessibility and privacy pages, where the mood is stillness",
+  },
+  {
+    key: "st-laptop", term: "open laptop and a mug on a kitchen table at home in daylight", orientation: "horizontal",
+    people: false, prefer: ["laptop", "kitchen", "table", "home", "mug", "coffee", "daylight"], avoid: ["office", "coworking", "dark", "night", "mockup", "whitescreen", "blank screen", "isolated"],
+    alt: "An open laptop on a kitchen table",
+    for: "the virtual consultation and the online-forms pages",
+  },
+  {
+    key: "st-park", term: "tree lined park path in a suburban neighbourhood on a sunny day", orientation: "horizontal",
+    people: false, prefer: ["park", "path", "tree", "neighbourhood", "neighborhood", "suburb", "sunny"], avoid: ["city", "crowd", "autumn leaves macro"],
+    alt: "A tree-lined path in a neighbourhood park",
+    for: "the town resource page - Katy itself, not the practice",
+  },
 ];
 
 const api = async (url) => {
