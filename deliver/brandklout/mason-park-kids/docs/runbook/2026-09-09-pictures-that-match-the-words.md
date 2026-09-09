@@ -114,7 +114,7 @@ Images inside `<main>`: `waiting` on 0 pages (was 50); 23 new keys in the pool
 ## Next
 
 1. **Client review** at `file://` — open `home/index.html` and click around. Every path is
-   relative, and since `19fd1458`+1 the navigation works from disk too: `site.js` rewrites the
+   relative, and since `656df723` the navigation works from disk too: `site.js` rewrites the
    root-relative links on `file://` only (the client asked for this the same evening; a review
    with dead links is not a review). `nav-probe.mjs` checks it at three depths.
 2. If approved: `node upload-media.mjs` (23 new keys), `node import-styles.mjs` (`site.css`
