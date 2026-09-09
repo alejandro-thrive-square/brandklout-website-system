@@ -24,6 +24,7 @@
 // judge scenes with probe-hooks.mjs, not a PNG.
 // ===========================================================================
 import { chromium } from "playwright-core";
+import { settle } from "./settle.mjs";
 import fs from "node:fs";
 import path from "node:path";
 
@@ -73,6 +74,9 @@ for (const [name, v] of Object.entries(VIEWS)) {
 
   await page.goto(url, { waitUntil: "load" });
   await page.waitForTimeout(1500);
+  // The faces are self-hosted now; measuring before they land reports the
+  // fallback and the wrong line count. See settle.mjs.
+  await settle(page);
 
   const total = await page.evaluate(() => document.body.scrollHeight);
 
@@ -132,6 +136,11 @@ for (const [name, v] of Object.entries(VIEWS)) {
     const h1 = document.querySelector("h1");
     // Which face is painted: measure a string in the family and in its own
     // fallback. Equal widths mean the fallback is on screen.
+    const first = (token, fallbackName) => {
+      const v = getComputedStyle(document.documentElement).getPropertyValue(token).trim();
+      if (!v) return fallbackName;
+      return v.split(",")[0].trim().replace(/^["']|["']$/g, "");
+    };
     const painted = (family, fallback) => {
       const s = document.createElement("span");
       s.textContent = "Mason Park Dental for Kids 0123456789";
@@ -148,8 +157,13 @@ for (const [name, v] of Object.entries(VIEWS)) {
       height: document.body.scrollHeight,
       rootPx: getComputedStyle(de).fontSize,
       h1px: h1 ? getComputedStyle(h1).fontSize : "no h1",
-      display: painted("Fraunces", "Georgia"),
-      body: painted("Nunito", "Arial"),
+      // Ask the TOKENS which family is meant to be painted, never a literal
+      // name. Since 2026-09-08 the stacks lead with the self-hosted variable
+      // faces "Fraunces VF" / "Nunito VF", and nothing on the site asks for
+      // plain "Fraunces" any more - so measuring that name reported FALLBACK
+      // on a page that was painting the right font perfectly.
+      display: painted(first("--font-display", "Fraunces"), "Georgia"),
+      body: painted(first("--font-body", "Nunito"), "Arial"),
     };
   });
 

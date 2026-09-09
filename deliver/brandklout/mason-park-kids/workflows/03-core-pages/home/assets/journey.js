@@ -107,6 +107,61 @@
     } catch (e) { return null; }
   }
 
+  /* How far a masked line starts below its mask, as a percentage of its own
+     height. It was 112 on the arrival and 108 on the rest; both were exactly
+     one line box plus a little, which is only enough while the mask clips at
+     the line box. site.css now bleeds the mask 0.18em past both edges so
+     Fraunces' caps and descenders survive it, and the line has to clear that
+     bleed as well as its own cap overshoot to stay hidden at the start.
+     The condition is (RISE - 100)% of the line-height >= bleed + cap
+     overshoot; at the tightest heading on the site (the h1, line-height .98,
+     cap overshoot .131em) 150 leaves 18px of margin and 133 would leave one. */
+  var RISE = 150;
+
+  /* -------------------------------------------------------------------------
+     SPLIT ONLY ONCE THE DISPLAY FACE IS ACTUALLY THERE.
+
+     A line split is a MEASUREMENT, and the wrapper divs it produces are
+     permanent - re-measuring later cannot re-break the lines. So splitting
+     while the browser is still painting the fallback bakes the FALLBACK's
+     line breaks into the page for good.
+
+     That is what was happening on the published site. On 2026-09-08 the same
+     h1, at the same 835.4px, with the same variable Fraunces and identical
+     metrics on both sides (measured: "The dentist your child" costs 801.4px
+     in both), came out as two lines locally and THREE lines live.
+
+     `document.fonts.ready` does not help, and worse, it lies: it resolves
+     when nothing is PENDING, and at that moment the stylesheet declaring the
+     faces has not been parsed yet, so nothing is pending. It resolved at 12ms
+     locally and 1016ms live, both before the faces were requested.
+
+     `document.fonts.load()` is the honest question - it names a face and
+     resolves when THAT face can be used. The local pages also carry a
+     <link rel="preload">, which the published pages cannot (their <head> is
+     the platform's), so on Instatic this is the only thing standing between
+     the design and the fallback's line breaks.
+
+     The timeout is not a nicety: `.ar-title` is hidden until the arrival
+     timeline runs, so a font that never arrives must not leave the hero
+     headline invisible. 1200ms, then go regardless. --------------------- */
+  function whenDisplayFace(cb) {
+    var fonts = document.fonts;
+    if (!fonts || !fonts.load) return cb();
+    var stack = getComputedStyle(root).getPropertyValue("--font-display") || "";
+    var family = (stack.split(",")[0] || "").trim().replace(/^["']|["']$/g, "");
+    if (!family) return cb();
+    var fired = false;
+    function go() { if (!fired) { fired = true; cb(); } }
+    try {
+      Promise.all([
+        fonts.load('500 99px "' + family + '"'),
+        fonts.load('italic 500 99px "' + family + '"'),
+      ]).then(go, go);
+    } catch (e) { return go(); }
+    setTimeout(go, 1200);
+  }
+
   /* -------------------------------------------------------------------------
      REVEALS, shared by every chapter. A chapter ARRIVES (the tag's dot pops,
      the headline lines rise through a mask) and DEPARTS (its head recedes on
@@ -120,13 +175,17 @@
       tl.from(tag.querySelectorAll("b"), { opacity: 0, x: -14, duration: .7, stagger: .08, ease: EASE }, .12);
     });
 
-    $$("[data-split]").forEach(function (el) {
-      var sp = splitLines(el);
-      var targets = sp && sp.lines && sp.lines.length ? sp.lines : [el];
-      gsap.from(targets, {
-        yPercent: 108, opacity: 0, duration: 1.05, stagger: .09, ease: "power4.out",
-        scrollTrigger: { trigger: el, start: "top 86%" }
+    /* Deferred until the display face can be used - see whenDisplayFace. */
+    whenDisplayFace(function () {
+      $$("[data-split]").forEach(function (el) {
+        var sp = splitLines(el);
+        var targets = sp && sp.lines && sp.lines.length ? sp.lines : [el];
+        gsap.from(targets, {
+          yPercent: RISE, opacity: 0, duration: 1.05, stagger: .09, ease: "power4.out",
+          scrollTrigger: { trigger: el, start: "top 86%" }
+        });
       });
+      ScrollTrigger.refresh();
     });
 
     /* Photographs drift against the scroll. Scale never lands exactly on 1:
@@ -162,16 +221,22 @@
     var sec = $(".ch-arrival");
     if (!sec || reduced) return;
 
+    /* The headline is the one element on the site whose line breaks are a
+       design decision, so it waits for the face it was designed in. */
+    whenDisplayFace(function () {
     var tl = gsap.timeline({ delay: .15 });
     var title = $(".ar-title", sec);
     var sp = splitLines(title);
     if (sp && sp.lines) {
       gsap.set(title, { visibility: "visible" });
-      tl.from(sp.lines, { yPercent: 112, duration: 1.15, stagger: .1, ease: "power4.out" }, 0);
+      tl.from(sp.lines, { yPercent: RISE, duration: 1.15, stagger: .1, ease: "power4.out" }, 0);
+    } else if (title) {
+      gsap.set(title, { visibility: "visible" });
     }
     var rest = $$(".ar-lede, .ar-actions, .ar-meta > div", sec);
     gsap.set(rest, { opacity: 0, y: 26 });
     tl.to(rest, { visibility: "visible", opacity: 1, y: 0, duration: .95, stagger: .1, ease: EASE }, .45);
+    });
 
     /* The chapter departs: the copy lifts away as the photograph sinks. */
     gsap.to($(".ar-in", sec), {

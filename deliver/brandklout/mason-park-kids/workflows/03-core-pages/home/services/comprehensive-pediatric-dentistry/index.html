@@ -14,12 +14,18 @@
 
 <meta name="theme-color" content="#587a68">
 <link rel="icon" href="../../assets/uploads/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- The two families are a <link>, not an @import: the fluid root is the first
-     rule in site.css and an @import is only valid before any other rule. On
-     Instatic they are self-hosted through the font store instead (import-fonts.mjs). -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..600,0..100,0..1;1,9..144,400..600,0..100,0..1&amp;family=Nunito:ital,wght@0,400;0,700;0,800;1,400&amp;display=swap">
+<!-- No Google Fonts link, and no preconnect to one. Both families are now
+     self-hosted VARIABLE woff2, declared @font-face at the top of site.css and
+     served from assets/fonts/ here and from /uploads/ on Instatic, where
+     import-styles.mjs rewrites the url(). The <link> that used to be here
+     fetched the static instances, which nothing on the page uses any more:
+     "Fraunces" and "Nunito" survive only as fallback names behind
+     "Fraunces VF" and "Nunito VF" in the stacks. Preloaded because a face
+     discovered inside a stylesheet starts downloading one round trip later
+     than one in the markup, and `font-display: swap` spends that round trip
+     painting Georgia. -->
+<link rel="preload" href="../../assets/fonts/fraunces-vf.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../../assets/fonts/nunito-vf.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../../assets/site.css">
 
 </head>
@@ -249,6 +255,10 @@
       <details class="faq_item"><summary class="faq_question">Do baby teeth really matter?</summary><div class="faq_answer">Absolutely. Baby teeth help with speech development, chewing, and guiding permanent teeth into proper alignment.</div></details>
       <details class="faq_item"><summary class="faq_question">How do I prepare a nervous child?</summary><div class="faq_answer">Use positive language, read dental-themed books, and bring comfort items like a blanket or toy. Avoid words like &ldquo;hurt&rdquo; or &ldquo;pain.&rdquo;</div></details>
     </div>
+  </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-band" data-wipe data-drift><img src="../../assets/uploads/st-lunchbox-1440.webp" srcset="../../assets/uploads/st-lunchbox-480.webp 480w, ../../assets/uploads/st-lunchbox-960.webp 960w, ../../assets/uploads/st-lunchbox-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 75vw" alt="A packed school lunch of fruit and vegetables" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 

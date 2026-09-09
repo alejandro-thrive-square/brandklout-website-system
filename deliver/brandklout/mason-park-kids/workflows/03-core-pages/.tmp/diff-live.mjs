@@ -19,6 +19,7 @@
 // wrote a bare div), so an exact tree diff is all noise, while a missing
 // <figcaption> or a <blockquote> that became a <div> shows up immediately.
 import { chromium } from "playwright-core";
+import { settle } from "./settle.mjs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
@@ -48,8 +49,18 @@ const HARVEST = () => {
     themeColor: (document.querySelector('meta[name="theme-color"]') || {}).content || "",
     favicon: ((document.querySelector('link[rel="icon"]') || {}).href || "").split("/").pop(),
     viewport: (document.querySelector('meta[name="viewport"]') || {}).content || "",
+    // The local pages write one flat object per script; the aeo-schema plugin
+    // writes a single `@graph` holding several. Reading only the top-level
+    // `@type` reported the published graph as "?" on all eleven routes and
+    // made a working plugin look like a missing one. Flatten the graph.
     jsonLd: [...document.querySelectorAll('script[type="application/ld+json"]')]
-      .map((s) => { try { const j = JSON.parse(s.textContent); return j["@type"] || "?"; } catch { return "UNPARSEABLE"; } })
+      .flatMap((s) => {
+        try {
+          const j = JSON.parse(s.textContent);
+          const nodes = Array.isArray(j) ? j : Array.isArray(j["@graph"]) ? j["@graph"] : [j];
+          return nodes.map((n) => n && n["@type"] ? n["@type"] : "?");
+        } catch { return ["UNPARSEABLE"]; }
+      })
       .sort(),
   };
   const main = document.querySelector("main") || document.body;
@@ -99,6 +110,10 @@ const grab = async (url) => {
   const p = await c.newPage();
   await p.goto(url, { waitUntil: "load", timeout: 120000 });
   await p.waitForTimeout(2600);
+  // Both sides must be photographed AFTER the webfonts resolve, or the
+  // geometry section compares one settled page with one mid-swap. See
+  // settle.mjs - this is what made the local h1 read as two lines.
+  await settle(p);
   const total = await p.evaluate(() => document.body.scrollHeight);
   for (let y = 0; y < total; y += 540) {
     await p.evaluate((n) => window.scrollTo({ top: n, behavior: "instant" }), y);

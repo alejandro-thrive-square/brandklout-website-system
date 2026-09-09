@@ -1,11 +1,12 @@
 # Runbook index
 
-8 runs, newest first. Each line is one file in this folder.
+9 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-09 | DONE 2026-09-09 - THE TITLES, THE IMAGERY, AND LOCAL RECONCILED WITH LIVE. Cropping 131 -> 0, live faults 285 -> 0, images 55 -> 89. **Gotchas: Magnific inventing a real colleague's face; `document.fonts.ready` lying.** | [`2026-09-09-titles-imagery-and-local-against-live.md`](./2026-09-09-titles-imagery-and-local-against-live.md) |
 | 2026-09-02 | DONE 2026-09-02 - THE ELEVEN CORE PAGES, designed and LIVE on Instatic. Commit `ad7a2d32`. | [`2026-09-02-the-eleven-core-pages-designed-and-live-on-insta.md`](./2026-09-02-the-eleven-core-pages-designed-and-live-on-insta.md) |
 | 2026-09-01 | 2026-09-01 - THE LIVE DOMAIN IS A SITE TOOLS REDIRECT, NOT .htaccess. WordPress is intact. | [`2026-09-01-the-live-domain-is-a-site-tools-redirect-not-hta.md`](./2026-09-01-the-live-domain-is-a-site-tools-redirect-not-hta.md) |
 | 2026-08-31 | 2026-08-31 (later) - CLOUDFLARE ZONE PREPPED. Domain cutover BLOCKED on a registrar transfer. | [`2026-08-31-later-cloudflare-zone-prepped-domain-cutover-blo.md`](./2026-08-31-later-cloudflare-zone-prepped-domain-cutover-blo.md) |

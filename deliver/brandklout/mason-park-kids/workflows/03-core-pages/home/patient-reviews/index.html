@@ -14,12 +14,18 @@
 
 <meta name="theme-color" content="#587a68">
 <link rel="icon" href="../assets/uploads/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- The two families are a <link>, not an @import: the fluid root is the first
-     rule in site.css and an @import is only valid before any other rule. On
-     Instatic they are self-hosted through the font store instead (import-fonts.mjs). -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..600,0..100,0..1;1,9..144,400..600,0..100,0..1&amp;family=Nunito:ital,wght@0,400;0,700;0,800;1,400&amp;display=swap">
+<!-- No Google Fonts link, and no preconnect to one. Both families are now
+     self-hosted VARIABLE woff2, declared @font-face at the top of site.css and
+     served from assets/fonts/ here and from /uploads/ on Instatic, where
+     import-styles.mjs rewrites the url(). The <link> that used to be here
+     fetched the static instances, which nothing on the page uses any more:
+     "Fraunces" and "Nunito" survive only as fallback names behind
+     "Fraunces VF" and "Nunito VF" in the stacks. Preloaded because a face
+     discovered inside a stylesheet starts downloading one round trip later
+     than one in the markup, and `font-display: swap` spends that round trip
+     painting Georgia. -->
+<link rel="preload" href="../assets/fonts/fraunces-vf.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/nunito-vf.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/site.css">
 
 </head>
@@ -110,6 +116,10 @@
       <p class="oneword figcaption ch-foot"><span class="kicker">M L</span></p>
     </div>
   </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-plate is-right" data-wipe data-drift><img src="../assets/uploads/st-family-960.webp" srcset="../assets/uploads/st-family-480.webp 480w, ../assets/uploads/st-family-960.webp 960w, ../assets/uploads/st-family-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 27rem" alt="A parent and a young child laughing together at home" loading="lazy" decoding="async"></figure>
+  </div>
 </section>
 
 <!-- THE COUNT. What the reviews name, counted. -->
@@ -158,6 +168,10 @@
       <figure class="rv-item"><blockquote lang="es">Todos MIs hijos an venido a este dentista y dos ya son mayores de 18 anos se los recomiendo super hamables y siempre te reciven muy bien y te dan el tratamie to que necesitas ni mas ni menos</blockquote><figcaption>Cynthia Guerrero <span>Google review, in Spanish</span></figcaption></figure>
     </div>
   </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-band" data-wipe data-drift><img src="../assets/uploads/knee-2-1400.webp" srcset="../assets/uploads/knee-2-480.webp 480w, ../assets/uploads/knee-2-960.webp 960w, ../assets/uploads/knee-2-1400.webp 1400w" sizes="(max-width: 899px) 100vw, 75vw" alt="A knee-to-knee exam: an infant on a parent's lap" loading="lazy" decoding="async"><figcaption>A knee-to-knee exam</figcaption></figure>
+  </div>
 </section>
 
 <!-- WRITE ONE. Where a review goes. -->
@@ -171,6 +185,10 @@
       </div>
       <div class="callout_actions"><a class="button" href="https://www.google.com/maps/place/21830+Kingsland+Blvd,+Katy,+TX+77450" target="_blank" rel="noopener">Review on Google</a></div>
     </div>
+  </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-inset is-centre" data-wipe data-drift><img src="../assets/uploads/st-crayons-960.webp" srcset="../assets/uploads/st-crayons-480.webp 480w, ../assets/uploads/st-crayons-960.webp 960w, ../assets/uploads/st-crayons-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 34rem" alt="Crayons and colouring pencils on a table" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 

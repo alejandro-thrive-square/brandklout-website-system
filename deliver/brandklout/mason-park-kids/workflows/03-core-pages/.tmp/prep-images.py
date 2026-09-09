@@ -39,12 +39,26 @@ import shutil
 from PIL import Image
 
 HERE = os.path.dirname(os.path.abspath(__file__))
-OUT = os.path.join(HERE, "..", "home", "assets", "uploads")
-KIDS = os.path.normpath(os.path.join(HERE, "..", "..", "01-site-recovery", ".tmp", "recovered", "mirror", "wp-content", "uploads"))
+# abspath, not normpath, and abspath again on every file below. Windows applies
+# MAX_PATH to the string BEFORE it resolves the "..", so a path that is 252
+# characters once collapsed is 323 on the way in from this worktree's root, and
+# every open() of the three longest filenames in the mirror fails with "no such
+# file" rather than anything that names the real problem. It cost a round of
+# "the source is missing" on 2026-09-08; the sources were all there.
+OUT = os.path.abspath(os.path.join(HERE, "..", "home", "assets", "uploads"))
+KIDS = os.path.abspath(os.path.join(HERE, "..", "..", "01-site-recovery", ".tmp", "recovered", "mirror", "wp-content", "uploads"))
+# Magnific's output, written by upscale-images.mjs. When a key has one, it is
+# a better source than the mirror and is used instead. See its header.
+UPSCALED = os.path.abspath(os.path.join(HERE, "_upscaled"))
 
 WIDE = [480, 960, 1440, 1920]
 TALL = [480, 960, 1400]
 SMALL = [320, 640]
+# Widths for the keys that GAINED resolution through Magnific. A key only gets
+# a wider list once _upscaled/<key>.png actually exists; the fallback below
+# still clamps every width to the source, so a missing upscale silently emits
+# the old, narrower set rather than a stretched one.
+PORTRAIT_UP = [320, 640, 960]
 
 PHOTOS = {
     "team":        (KIDS, "2023/11/g7-scaled.jpg", WIDE),
@@ -52,24 +66,52 @@ PHOTOS = {
     "operatory":   (KIDS, "2023/11/MPD-2-scaled.jpg", WIDE),
     "waiting":     (KIDS, "2023/11/Dentist-in-Katy-Office.webp", WIDE),
     "dr-nguyen":   (KIDS, "2023/11/HS-8-scaled.jpg", TALL),
-    "dr-nguyen-2": (KIDS, "2020/04/mam.png", SMALL),
+    "dr-nguyen-2": (KIDS, "2020/04/mam.png", PORTRAIT_UP),
     "dr-cho":      (KIDS, "2023/11/HS-7-scaled.jpg", TALL),
     "staff-anabel":    (KIDS, "2023/12/Anabel-Front-Desk.jpeg", SMALL),
-    "staff-gia":       (KIDS, "2023/12/Gia-Front-Desk-1.jpg", SMALL),
-    "staff-kebra":     (KIDS, "2023/12/Kebra-Front-Desk.jpeg", SMALL),
+    "staff-gia":       (KIDS, "2023/12/Gia-Front-Desk-1.jpg", PORTRAIT_UP),
+    "staff-kebra":     (KIDS, "2023/12/Kebra-Front-Desk.jpeg", PORTRAIT_UP),
     "staff-ivon":      (KIDS, "2023/12/Ivon-min-scaled-1.jpg", TALL),
     "staff-caisy":     (KIDS, "2023/12/Caisy-min-scaled-1.jpg", TALL),
     "staff-lizzie":    (KIDS, "2023/12/Lizzie-Dental-Assistant-1-scaled-1.jpg", TALL),
     "staff-genevieve": (KIDS, "2023/12/Genevieve-min-scaled-1.jpg", TALL),
     "staff-karen":     (KIDS, "2023/12/Karen-RDH.jpeg", SMALL),
     "staff-tiffany":   (KIDS, "2023/12/Tiffany-Dental-Hygienist-1-scaled-1.jpg", TALL),
-    "chair":       (KIDS, "2026/05/MeltdownstoSmilesWhatReallyHappensInsideaPediatricDentalClinic.jpg", [480, 960, 1200]),
-    "toddler":     (KIDS, "2023/08/44.webp", SMALL),
-    "baby":        (KIDS, "2023/08/45.webp", SMALL),
+    "chair":       (KIDS, "2026/05/MeltdownstoSmilesWhatReallyHappensInsideaPediatricDentalClinic.jpg", [480, 960, 1200, 1600]),
+    "toddler":     (KIDS, "2023/08/44.webp", PORTRAIT_UP),
+    "baby":        (KIDS, "2023/08/45.webp", PORTRAIT_UP),
     "highfive":    (KIDS, "2026/01/Why-Pediatric-Dentistry-Matters-A-Parents-Guide.jpeg", [480, 960, 1440]),
-    "mother":      (KIDS, "2026/05/TinyTeethBigDealWhyChoosingtheRightKidsDentistMattersMoreThanYouThink.jpg", [480, 960]),
-    "knee-2":      (KIDS, "2024/11/1.png", [480, 960]),
-    "smile":       (KIDS, "2024/11/2.png", [480, 960, 1200]),
+    "mother":      (KIDS, "2026/05/TinyTeethBigDealWhyChoosingtheRightKidsDentistMattersMoreThanYouThink.jpg", [480, 960, 1440]),
+    "knee-2":      (KIDS, "2024/11/1.png", [480, 960, 1400]),
+    "smile":       (KIDS, "2024/11/2.png", [480, 960, 1200, 1600]),
+}
+
+# --- the stock pool -------------------------------------------------------
+# Downloaded from Magnific by get-stock.mjs into _stock/, encoded here so there
+# is still ONE place that owns widths and webp. Read that script's header
+# before adding a key: what stock may and may not do on this site is written
+# out there, and the short version is that none of these frames may ever be
+# captioned as this practice's room, patient, team or result, and none of them
+# may appear in a clinical context.
+#
+# Every one is 3700px or wider, so the widths are the honest full set and the
+# `min(w, w0)` clamp below never fires.
+STOCKDIR = os.path.abspath(os.path.join(HERE, "_stock"))
+STOCK = {
+    "st-apple":    (STOCKDIR, "st-apple.jpg", TALL),      # a child with an apple, orchard
+    "st-backpack": (STOCKDIR, "st-backpack.jpg", [480, 960, 1440]),
+    "st-books":    (STOCKDIR, "st-books.jpg", [480, 960, 1440]),
+    "st-brush":    (STOCKDIR, "st-brush.jpg", [480, 960, 1440]),
+    "st-brushes":  (STOCKDIR, "st-brushes.jpg", TALL),    # portrait; a white shelf
+    "st-calendar": (STOCKDIR, "st-calendar.jpg", [480, 960, 1440]),
+    "st-crayons":  (STOCKDIR, "st-crayons.jpg", [480, 960, 1440]),
+    "st-desk":     (STOCKDIR, "st-desk.jpg", [480, 960, 1440]),
+    "st-family":   (STOCKDIR, "st-family.jpg", [480, 960, 1440]),
+    "st-infant":   (STOCKDIR, "st-infant.jpg", [480, 960, 1440]),
+    "st-lunchbox": (STOCKDIR, "st-lunchbox.jpg", [480, 960, 1440]),
+    "st-nook":     (STOCKDIR, "st-nook.jpg", [480, 960, 1440]),
+    "st-play":     (STOCKDIR, "st-play.jpg", [480, 960, 1440]),
+    "st-teen":     (STOCKDIR, "st-teen.jpg", [480, 960, 1440]),
 }
 
 COPY = {
@@ -83,8 +125,23 @@ COPY = {
 
 os.makedirs(OUT, exist_ok=True)
 written = 0
-for key, (root, rel, widths) in PHOTOS.items():
+missing_stock = []
+for key, (root, rel, widths) in {**PHOTOS, **STOCK}.items():
     src = os.path.join(root, rel)
+    if root == STOCKDIR and not os.path.exists(src):
+        # A stock key with no file is a `node get-stock.mjs` away, not a crash:
+        # _stock/ is gitignored like uploads/, so a fresh clone has none of it.
+        missing_stock.append(key)
+        continue
+    # Magnific's output when there is one. Same frame, same crop, same aspect -
+    # only more pixels - so nothing downstream changes. A key whose upscale was
+    # REJECTED on the contact sheet has no PNG here and falls back to the
+    # mirror automatically; see upscale-images.mjs for which two, and why.
+    up = os.path.join(UPSCALED, f"{key}.png")
+    source_note = "  (magnific stock)" if root == STOCKDIR else ""
+    if os.path.exists(up):
+        src = up
+        source_note = "  (magnific)"
     im = Image.open(src).convert("RGB")
     w0, h0 = im.size
     done = []
@@ -99,7 +156,7 @@ for key, (root, rel, widths) in PHOTOS.items():
         written += 1
     big = done[-1]
     shutil.copyfile(os.path.join(OUT, f"{key}-{big}.webp"), os.path.join(OUT, f"{key}.webp"))
-    print(f"{key:18s} {w0}x{h0}  -> {', '.join(str(d) for d in done)}")
+    print(f"{key:18s} {w0}x{h0}  -> {', '.join(str(d) for d in done)}{source_note}")
 
 for name, (root, rel) in COPY.items():
     src = os.path.join(root, rel)
@@ -124,4 +181,7 @@ for name, (root, rel) in COPY.items():
     shutil.copyfile(src, os.path.join(OUT, name))
     print(f"{name:18s} copied")
 
+if missing_stock:
+    print("")
+    print(f"no _stock file for: {', '.join(missing_stock)}  -  run `node get-stock.mjs`")
 print(f"{written} variants written to {os.path.normpath(OUT)}")

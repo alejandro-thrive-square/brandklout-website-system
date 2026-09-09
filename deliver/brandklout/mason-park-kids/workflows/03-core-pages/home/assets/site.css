@@ -77,6 +77,65 @@ html {
    INSTATIC: ships as one site-wide code asset. Pages carry classes only.
    ========================================================================= */
 
+/* --------------------------------------------------- the variable faces ----
+   THE PUBLISHED SITE WAS SETTING EVERY HEADING IN THE WRONG CUT OF FRAUNCES,
+   and this block is the fix. Added 2026-09-08.
+
+   Instatic's font installer (`/admin/api/cms/fonts/install`) asks Google for a
+   list of static WEIGHTS, so what it installed was five static instances.
+   `font-variation-settings: "SOFT" 100, "opsz" 144` is on every display face
+   below and a static instance ignores it in silence. Measured by
+   `.tmp/font-axes.mjs` on the same string at the same size:
+
+       local   opsz 9 -> 1665px,  opsz 144 -> 1340px   the axes move it
+       live    opsz 9 -> 1657px,  opsz 144 -> 1657px   the axes do nothing
+
+   So live was rendering the TEXT cut at display size: every heading 10-20%
+   wider than designed, wrong contrast, no softness, no wonk - on all
+   fifty-seven pages. `diff-live.mjs` had been reporting it as a geometry
+   difference for a week.
+
+   ONE SOURCE PER FACE, RELATIVE, and `import-styles.mjs` rewrites it to the
+   Instatic upload path on the way in, from `.tmp/font-map.json`. The first
+   attempt listed BOTH - the upload path first, the relative one behind it -
+   which does work, because the font loading algorithm walks the list. It also
+   put three `net::ERR_FILE_NOT_FOUND` in the console of every page opened from
+   `file://`, on every run of `shot.mjs`, for ever. A gate that always reports
+   three harmless errors is a gate nobody reads, so the rewrite happens once,
+   at import, and each copy of this sheet names only the path that exists
+   where it lives.
+
+   The family is "Fraunces VF", never "Fraunces": the five static instances are
+   still installed and registered on the shell, and two `@font-face` sets
+   claiming one family name would be decided by asset order - exactly the trap
+   `reorder-styles.mjs` exists for. A distinct name in front of the stack
+   cannot collide, and if an upload ever goes missing the stack falls back to
+   the static Fraunces, which is only what live had before.
+
+   Paths come from `.tmp/font-map.json`. Re-uploading changes them; edit here.
+   --------------------------------------------------------------------- */
+@font-face {
+  font-family: "Fraunces VF";
+  font-style: normal;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("fonts/fraunces-vf.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Fraunces VF";
+  font-style: italic;
+  font-weight: 400 600;
+  font-display: swap;
+  src: url("fonts/fraunces-vf-italic.woff2") format("woff2");
+}
+@font-face {
+  font-family: "Nunito VF";
+  font-style: normal;
+  font-weight: 400 800;
+  font-display: swap;
+  src: url("fonts/nunito-vf.woff2") format("woff2");
+}
+
 /* ---------------------------------------------------------------- variables */
 :root {
   /* The four type tiers. --t-ui is the label tier, floored at 12px; --t-text
@@ -108,9 +167,9 @@ html {
   --cream: #fbf8f2;        /* the warm ground */
   --white: #ffffff;
 
-  --font-display: "Fraunces", Georgia, "Times New Roman", serif;
-  --font-body: "Nunito", "Segoe UI", system-ui, sans-serif;
-  --font-ui: "Nunito", "Segoe UI", system-ui, sans-serif;
+  --font-display: "Fraunces VF", "Fraunces", Georgia, "Times New Roman", serif;
+  --font-body: "Nunito VF", "Nunito", "Segoe UI", system-ui, sans-serif;
+  --font-ui: "Nunito VF", "Nunito", "Segoe UI", system-ui, sans-serif;
 
   --radius: 1.5rem;
   --radius-sm: .9rem;
@@ -152,6 +211,16 @@ h1, h2, h3, h4, h5, h6 {
   font-variation-settings: "SOFT" 60, "WONK" 0;
 }
 p { margin: 0; }
+/* The UA gives <figure> `margin: 1em 40px`, and this reset never took it away.
+   Eight components had each quietly worked around it with their own
+   `margin: 0`; the two that had not - `.pe-plate` and `.pr-portrait` on the
+   home page - sat 80px narrower than the grid track they were given. Found by
+   `diff-live.mjs` on 2026-09-09, which reported them 434px against 514px live:
+   the PUBLISHED pages were right, because Instatic's own base stylesheet zeroes
+   it, and the local file was the one rendering the design wrong. Reset it here,
+   once, where the rest of the reset lives. */
+figure { margin: 0; }
+blockquote { margin: 0; }
 ul, ol { margin: 0; padding: 0; list-style: none; }
 a { color: var(--sage-deep); text-underline-offset: 3px; text-decoration-thickness: 1px; }
 a:hover { color: var(--ink); }
@@ -627,6 +696,43 @@ html:not(.jr-ready) .ch [data-write] { color: var(--fg); }
 @media (prefers-reduced-motion: reduce) { .ch [data-write] { color: var(--fg) !important; } }
 [data-wipe] { overflow: hidden; }
 
+/* --- masked line reveals, and why the titles used to crop ------------------
+   GSAP SplitText is asked for `{ type: "lines", mask: "lines" }`, and a masked
+   line is an extra div, `overflow: clip`, sized to the LINE BOX. Every display
+   size on this site runs a line-height at or below 1 (the h1 is .98), and
+   Fraunces' ink overshoots its line box at BOTH edges at those sizes. The mask
+   therefore cut the tops of the caps and every descender - measured 2026-09-08
+   by `.tmp/crop-probe.mjs` as 131 headings across the eleven pages, up to 13px
+   above and 11.8px below on the h1.
+
+   The fix does NOT resize anything. Two earlier attempts did, and both were
+   wrong for the same reason:
+     - padding on the mask alone leaves the reveal's start state visible: the
+       travel is a yPercent of the LINE's height, so a taller mask is no longer
+       cleared and the tops of the glyphs peek above the edge;
+     - padding on the line plus a negative margin on the mask needs the split
+       element to stop margins collapsing, and the only display that does that
+       without side effects is a flex column - which SplitText then re-measures
+       when the webfonts land (it re-splits on `document.fonts.ready`) and
+       every WORD becomes its own line. The h1 came back 875px tall.
+   So the box is left exactly as it is and the CLIP is moved instead:
+     1. `clip-path` with a negative vertical inset bleeds the mask past its own
+        edges by more than the ink overshoots (0.18em against a measured
+        0.131em at the worst heading), and `overflow` is neutralised so the
+        clip-path is the only thing cutting. Horizontal stays at 0 - the mask's
+        job there is unchanged;
+     2. the bleed at the BOTTOM is the edge the line rises from, so the reveal
+        now has to start further down to stay hidden behind it. journey.js
+        travels 150% of a line instead of 112/108, which clears H + 0.18em of
+        bleed + 0.131em of cap overshoot at every heading size on the site
+        (the tightest, the h1 at line-height .98, needs 133%).
+   Nothing here changes the layout, the split, or the line breaks, which is
+   the point: it survives the re-split. */
+.jr-line-mask {
+  overflow: visible !important;
+  clip-path: inset(-.18em 0);
+}
+
 /* The written statement. Display size, soft, the words arrive as you scroll. */
 .statement {
   font-family: var(--font-display);
@@ -809,6 +915,74 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
   .ar-actions .button { flex: 1 1 auto; padding-inline: 1.1rem; }
   .ar-meta div { padding: .7rem 1rem; }
 }
+
+/* ===========================================================================
+   THE CHAPTER PHOTOGRAPH
+   A shared scene, like the written statement and the rail, added 2026-09-08.
+
+   WHY. Eight of the eleven pages carried a photograph in the arrival and one
+   in the invitation and NOTHING in between: financing, services, reviews and
+   thank-you had two pictures each, and the whole middle of those pages was
+   type on a flat ground. The client asked for more imagery and they were
+   right - the house standard is a photograph in every chapter.
+
+   Three shapes, and the rule is the README's: the shared scenes may recur,
+   the SEQUENCE may not. No two pages use the same mix in the same order, and
+   each still keeps the two layouts that appear on no other page.
+     .is-band    the chapter's own width, short and wide. The default.
+     .is-plate   4:5, stands beside a head or a column.
+     .is-inset   3:2, small, sits inside a column of text.
+   `data-wipe` reveals it from the top edge, `data-drift` parallaxes the frame
+   inside it; both are journey.js hooks that already existed, so nothing new
+   has to run for these to move.
+
+   `figcaption` is optional AND IS NOT FOR STOCK. A caption under a stock
+   photograph is what turns it into a claim about this practice - see the
+   policy in the header of .tmp/get-stock.mjs. Caption the practice's own
+   frames; leave the bought ones to speak as decoration, which is what they
+   are.
+   ======================================================================== */
+.ch-figure {
+  margin: clamp(2.25rem, 4.5vw, 4rem) 0 0;
+  border-radius: var(--radius);
+  overflow: hidden;
+  position: relative;
+  background: var(--rule);
+}
+.ch-figure img { display: block; width: 100%; object-fit: cover; }
+.ch-figure.is-band img { aspect-ratio: 21 / 9; object-position: 50% 40%; }
+.ch-figure.is-plate img { aspect-ratio: 4 / 5; object-position: 50% 30%; }
+.ch-figure.is-inset img { aspect-ratio: 3 / 2; object-position: 50% 45%; }
+/* A caption sits ON the frame, bottom left, on a soft scrim - the pages have
+   no room for a line of type under every picture. */
+.ch-figure figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 2.5rem 1.25rem .9rem;
+  font-family: var(--font-ui); font-size: var(--f-label); font-weight: 700;
+  letter-spacing: .08em; text-transform: uppercase; color: #fff;
+  background: linear-gradient(to top, rgba(36, 44, 50, .62), rgba(36, 44, 50, 0));
+}
+/* A plate or an inset dropped into a chapter's full width would be a band
+   with the wrong aspect, so each keeps its own measure, and `is-right` puts it
+   on the other side of the column so two chapters running never rhyme. */
+.ch-figure.is-plate { max-width: 27rem; }
+.ch-figure.is-inset { max-width: 34rem; }
+.ch-figure.is-right { margin-left: auto; }
+.ch-figure.is-centre { margin-left: auto; margin-right: auto; }
+/* A band is a horizon; at phone widths a 21:9 horizon is a stripe. */
+@media (max-width: 767px) {
+  .ch-figure.is-band img { aspect-ratio: 16 / 10; }
+  .ch-figure.is-plate img { aspect-ratio: 3 / 4; }
+}
+/* Beside a head rather than under it. The page decides the columns; this only
+   says that when there are two, the picture keeps its own. */
+.ch-withfig {
+  display: grid; gap: clamp(1.75rem, 4vw, 3.5rem);
+  grid-template-columns: minmax(0, 1.35fr) minmax(0, 1fr);
+  align-items: start;
+}
+.ch-withfig .ch-figure { margin-top: 0; }
+@media (max-width: 899px) { .ch-withfig { grid-template-columns: minmax(0, 1fr); } }
 
 /* ===========================================================================
    THE CREDENTIAL STRIP AND THE BREADCRUMB
@@ -1604,5 +1778,66 @@ a.card:hover h3 { color: var(--accent); }
 .ty-moment b { font-family: var(--font-display); font-weight: 500; font-size: calc(2.4rem * var(--t-lg)); line-height: 1; color: var(--accent); font-variation-settings: "SOFT" 100, "opsz" 144; }
 .ty-moment h3 { font-size: var(--f-h4); }
 .ty-moment p { font-size: var(--f-body); line-height: 1.6; }
+
+/* ===========================================================================
+   THE FORTY-SIX MIGRATED PAGES
+   Repairs, not a redesign. Added 2026-09-08.
+
+   Two sheets share this Instatic site: `legacy-migration.css` for the pages
+   the 02 migration imported, and this one, which sorts last and therefore
+   wins. The 03 import already took the type and the palette across, so those
+   pages are in Fraunces and Nunito with the sage accent. What it did NOT take
+   across is anything the old theme got wrong, and an audit of all fifty-seven
+   live routes on 2026-09-08 (`.tmp/audit-live.mjs`) found the same two faults
+   on all forty-six of them and on none of the eleven:
+
+     - SIX RUNS OF TEXT UNDER 12px at 390. The top bar, the nav links, the
+       eyebrow, the breadcrumb and the call bar all compute to 10.7-11.7px on
+       a phone. The whole point of the fluid root at the top of this file is
+       that the label tier is FLOORED at 12px; the old theme set px sizes and
+       floored nothing.
+     - A TAN CONTACT BAND, `rgb(204, 188, 166)`. It is the old theme's accent
+       and it belongs to no part of this brand - the palette is slate, sage,
+       sun and sky, sampled from the logo. Sitting directly above the slate
+       accreditation strip and the ink footer, it reads as a mistake, which
+       is what the client saw.
+
+   Everything here is keyed to a `legacy-migration.css` class name, so none of
+   it can reach the eleven redesigned pages: those carry `masthead_*`,
+   `topline_*`, `foot_*` and `.ch`, and share not one selector below.
+   ======================================================================== */
+/* 1. Nothing on a phone may be smaller than the label tier's floor. */
+.topbar_component,
+.topbar_component a,
+.topbar_component span,
+.navbar_link,
+.breadcrumb_item,
+.breadcrumb_component a,
+.callbar_component,
+.footer_legal,
+.footer_legal a,
+.text-style-eyebrow {
+  font-size: max(0.75rem, var(--f-label));
+}
+/* The eyebrow is a heading's kicker and carries tracking, so it needs the
+   size AND the room; at 10.7px it was a grey smudge. */
+.text-style-eyebrow { letter-spacing: .1em; line-height: 1.5; }
+
+/* 2. The tan band becomes the sage tint the rest of the site uses. The old
+      theme put white text on that tan, so the text colours have to come with
+      it or the band is unreadable - the ground is light now. */
+.background-color-tan,
+.section_contact-band.background-color-tan {
+  background-color: var(--sage-tint) !important;
+  color: var(--body);
+}
+.background-color-tan h1, .background-color-tan h2,
+.background-color-tan h3, .background-color-tan h4,
+.background-color-tan b, .background-color-tan strong { color: var(--ink); }
+.background-color-tan p, .background-color-tan li, .background-color-tan span { color: var(--body); }
+.background-color-tan a:not([class]) { color: var(--sage-deep); }
+/* A button drawn for a dark tan ground disappears on a light one. */
+.background-color-tan .button:not(.is-ghost) { background: var(--sage-deep); color: #fff; border-color: var(--sage-deep); }
+.background-color-tan .button.is-ghost { color: var(--ink); border-color: var(--sage-line); }
 
 /* == end of the stylesheet: page blocks are appended above this line == */

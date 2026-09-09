@@ -39,12 +39,24 @@ The Asana brief is **Build New Mason Park Pediatric Site** `1218009803778905` �
 | `home/assets/site.js` | Mobile drawer, current-page marking, the deferred map. Handles the new `masthead_*` chrome and the migration's `navbar_*` chrome, because one script serves both generations of page on Instatic. |
 | `home/assets/journey.js` | The motion layer, ported from the parent practice: chrome, reveals, departures, arrival, the pinned path, the growth chart, the generic hooks, continuity. |
 | `home/assets/gsap/` | GSAP 3.13 + ScrollTrigger + SplitText, vendored. Never a CDN. |
-| `home/assets/uploads/` | The practice's photographs at a few widths each, written by `.tmp/prep-images.py`. **Gitignored**, like the parent's. |
+| `home/assets/uploads/` | Every photograph at a few widths each, written by `.tmp/prep-images.py`. **Gitignored**, like the parent's. |
+| `home/assets/fonts/` | Fraunces and Nunito, the VARIABLE files, self-hosted. **Gitignored** (the root refuses every font extension); `node .tmp/upload-fonts.mjs --fetch` puts them back. |
 | `.tmp/stamp.mjs` | **The chrome is constant.** Re-stamps every page's head, top line, masthead, footer and script tags from the homepage, keeping each page's own title, description, canonical, og tags, robots and `<main>`. `--check` reports drift. |
 | `.tmp/check.mjs` | The static gate: assets resolve, braces balance, no control bytes, nothing Instatic refuses, the prose ceiling, ids and anchors, alt text, **no em dashes**, chrome identical to the homepage. |
 | `.tmp/shot.mjs` | The render gate: four widths, overflow, small text, never-revealed elements, broken images, console, **and which face is actually painted**. `--slices desktop` for readable windows. |
 | `.tmp/probe-hooks.mjs` | Motion on: every `data-write` at three intermediate states, the growth chart fills and changes hands, counters land, rails travel, wipes finish, the path pins and fits the window. Takes a file path or a live URL. |
-| `.tmp/prep-images.py` | Builds `uploads/` from the recovery mirror. The pool is named by what each frame shows, and the notes say which are the practice's own. |
+| `.tmp/prep-images.py` | Builds `uploads/` from three sources: the recovery mirror, Magnific's upscales in `_upscaled/`, and the bought stock in `_stock/`. **One place owns widths and the webp encode.** The pool is named by what each frame shows, and the notes say which are the practice's own. |
+| `.tmp/upscale-images.mjs` | The soft photographs, re-emitted through Magnific into `_upscaled/`. `--list` prints the table. **Read its header before re-running it on a face.** |
+| `.tmp/get-stock.mjs` | The bought frames, from Magnific into `_stock/`, with `stock-manifest.json` recording what each one is. **Its header is the policy for what stock may and may not do on this site.** |
+| `.tmp/contact-sheet.py`, `stock-sheet.py` | Before/after pairs for every upscale, and one sheet of the whole stock pool. Both exist to be LOOKED AT; two upscales were rejected on the first. |
+| `.tmp/add-figures.mjs` | Puts a `.ch-figure` into the chapters that had no photograph. Idempotent. |
+| `.tmp/upload-fonts.mjs` | The variable Fraunces and Nunito: `--fetch` downloads them into `_fonts/` and `home/assets/fonts/`, then a run uploads them and writes `font-map.json`. |
+| `.tmp/crop-probe.mjs`, `crop-all.mjs` | Does any heading lose ink to a clipping ancestor? Takes a file or a URL; `crop-all.mjs --live` sweeps the published site. |
+| `.tmp/audit-live.mjs` | **Every live route, not just the eleven.** HTTP, images, overflow, console, head tags, headings, chrome, dead links, tiny text, and any image painted more than 1.35x its own pixels. |
+| `.tmp/diff-all.mjs` | `diff-live.mjs` over all eleven pages, with a tally. |
+| `.tmp/settle.mjs` | `await settle(page)` — waits for the webfonts and the relayout. Every gate calls it; see its header for why a fixed timeout is not a substitute. |
+| `.tmp/configure-seo.mjs`, `populate-seo.mjs` | The practice's values for the two SEO plugins, and a description for all 57 pages. |
+| `.tmp/font-axes.mjs`, `split-count.mjs`, `h1-metrics.mjs`, `grid-probe.mjs`, `ch-probe.mjs`, `dump-mask.mjs`, `probe-legacy.mjs`, `probe-abort.mjs`, `peek.mjs` | One-question probes, kept because each one answered a question that cost an hour. What font is really painted; how many lines did SplitText make; what does this heading's ink cost; what did this grid resolve to; what is a `ch` here; what DOM does SplitText build; what is wrong on a migrated page, by selector; who is making that aborted request (Instatic's own anti-bot probe, which `audit-live.mjs` now ignores); and a screenshot of any route. |
 | `.tmp/insta.mjs` | The admin client. Refuses any host that is not the pediatric instance; caches its session per host. |
 | `.tmp/list-site.mjs`, `backup-site.mjs`, `publish.mjs` | Inventory, a full dump, a bare publish. |
 | `.tmp/to-instatic.mjs` … `verify-live.mjs` | The import, in the order below. |
@@ -84,6 +96,131 @@ Dr. Nguyen with a child, the rooms, the nine staff portraits) plus four editoria
 its blog library, used uncaptioned and never presented as its patients or rooms. Two frames
 from the parent's folder were tried and dropped: both were stock.
 
+## The 2026-09-09 pass: the titles, the imagery, and local against live
+
+The client, on 2026-09-08: *"There are a lot of pages that don't have the last
+design upgrade but I see a lot of errors on Instatic so I don't want to cascade
+those errors to the redesign on rest of the pages. The titles crop. Run a
+comparison between local and instatic to fix the errors on instatic. Use more
+images and extract stock photos from Magnific. Increase image quality on blurry
+images."*
+
+### The titles cropped because a mask is exactly one line box tall
+
+`journey.js` asks SplitText for `{ type: "lines", mask: "lines" }`, and a masked
+line is a wrapper div with `overflow: clip` sized to the LINE BOX. Every display
+size here runs a line-height at or below 1 and Fraunces' ink overshoots its line
+box at both edges, so the mask cut the tops of the caps and every descender.
+Not a start state — the wrapper's permanent height, so a screenshot taken after
+the reveal still showed it. **131 headings across the eleven pages**, up to 13px
+above and 11.8px below on the h1, measured by `crop-probe.mjs`.
+
+The fix moves the CLIP rather than the box: `clip-path: inset(-.18em 0)` on the
+mask with `overflow` neutralised, and the reveal travels 150% of a line instead
+of 112 so the start state still clears the bleed. Two earlier attempts are
+written up in `site.css` because both look right and neither is: padding the
+mask leaves the start state visible, and padding the line needs a flex column,
+which SplitText then re-measures when the fonts land, turning every word into
+its own line. **131 → 0**, and 0 again against the published site.
+
+### The published site was setting every heading in the wrong cut of Fraunces
+
+`diff-live.mjs` had been reporting live headings 10–20% wider than local for a
+week and it was read as a rounding difference. `font-axes.mjs` settled it:
+
+| | `opsz` 9 | `opsz` 144 |
+| :--- | :--- | :--- |
+| local | 1665px | 1340px |
+| live (before) | 1657px | 1657px |
+
+Instatic's font installer asks Google for a list of static WEIGHTS, so what it
+installed was five static instances, and a static instance ignores
+`font-variation-settings` in silence. `"SOFT" 100, "opsz" 144` is on every
+display face in `site.css` and is where this brand's soft, slightly wonky
+display face comes from; live had none of it. `upload-fonts.mjs` self-hosts the
+variable files through the media library instead, `site.css` declares them as
+`Fraunces VF` / `Nunito VF` in front of the static names, and `import-styles.mjs`
+rewrites the relative `url()` to the upload path on the way in.
+
+### And the line breaks still disagreed, for a different reason
+
+Same font, same 835.4px, same metrics on both sides — and the h1 came out two
+lines locally and three live. A line split is a MEASUREMENT and its wrapper
+divs are permanent, so splitting before the face arrives bakes the FALLBACK's
+line breaks in for good. `document.fonts.ready` is no help and actively
+misleading: it resolves when nothing is *pending*, which is true before the
+stylesheet that declares the faces has even been parsed. It resolved at 12ms
+locally and 1016ms live, both too early. `journey.js` now asks
+`document.fonts.load()` for the display face by name before it splits anything,
+with a 1200ms cap so a font that never arrives cannot leave the hero headline
+hidden. That is the only thing standing between the design and the fallback's
+line breaks on the published pages, which cannot carry a `<link rel="preload">`
+because their `<head>` is the platform's.
+
+### More images, and where they came from
+
+`waiting` was on nine pages of eleven and `team` on six; financing, services,
+reviews and thank-you had two photographs each, the arrival and the invitation,
+with nothing in between. There was nothing left in the practice's library.
+
+- **Twelve of the practice's own frames re-emitted through Magnific**
+  (`upscale-images.mjs`) — four 300px staff thumbnails, Dr. Nguyen's 2020
+  portrait, and the frames under 1400px. **Two were rejected**: at 300px there
+  is not enough face left for the upscaler to hold on to, and Karen came back as
+  a different woman while Anabel came back slimmed. Both are `skip` in the table
+  with the reason, and their pages keep the soft originals. Judge the contact
+  sheet, never the settings.
+- **Fourteen frames bought from Magnific** (`get-stock.mjs`), every one warm,
+  bright and on-brand — objects, rooms with nobody in them, and children and
+  families in ordinary life. Two were rejected on the contact sheet and
+  re-searched: a grungy concrete wall and a bleak empty corridor, both the
+  opposite of this brand. `stock-manifest.json` records the id, title, author,
+  licence and page URL of each.
+- **28 chapter photographs placed** (`add-figures.mjs`), so the images inside
+  `<main>` went **55 → 89** and no page has fewer than five.
+
+The policy for what stock may and may not do here is in the header of
+`get-stock.mjs`. The short version: it may be childhood at a remove; it may
+never stand in for a named person, be captioned as this practice's room,
+patient, team or result, or appear in a clinical context. Which is also why the
+two staff portraits Magnific could not upscale were left soft rather than
+replaced.
+
+### What the comparison found on Instatic
+
+`audit-live.mjs` walks all fifty-seven routes, not the eleven. On 2026-09-08 it
+counted **285 faults on 57 of 57 routes**; every one fell into two groups.
+
+| Fault | Where | Fixed by |
+| :--- | :--- | :--- |
+| No description, canonical, `og:title` or JSON-LD — 4 per page, 228 total | all 57 | the two plugins in `deliver/process/19-instatic-seo`, configured by `configure-seo.mjs`, with a description per page from `populate-seo.mjs` |
+| Six runs of text under 12px at 390 — 276 total | the 46 migrated pages | a floor keyed to the legacy class names, at the end of `site.css` |
+| A tan contact band, `rgb(204,188,166)`, in no part of this palette | the 46 migrated pages | re-grounded to `--sage-tint` in the same block |
+
+`diff-live.mjs` across all eleven pages went **163 differences → 71**, and every
+one that remains is the published page being equal or richer:
+
+- `jsonLd` — live has `WebPage`, `WebSite` and `BreadcrumbList` that local does not.
+- `description` / `ogDescription` — live is the 158-character trim, which is
+  what a search result renders anyway.
+- `viewport`, `themeColor`, `favicon` — the platform owns those three lines.
+- `imgWithSrcset` / `imgWithSizes` on four pages — Instatic derives its own.
+
+Structure, visible text and geometry are now **identical on every page**.
+
+### Two bugs the comparison found in the LOCAL build
+
+Both were cases of the published site being right:
+
+- **`figure` never got a margin reset.** The UA gives it `margin: 1em 40px`;
+  eight components had each quietly worked around it with their own `margin: 0`
+  and the two that had not sat 80px narrower than their grid track. Instatic's
+  own reset zeroes it, so only the local file was wrong.
+- **`prep-images.py` could not open three of its sources.** Windows applies
+  MAX_PATH to the path string BEFORE it resolves the `..`, so from this
+  worktree's root a 252-character path arrives as 323 and fails as "no such
+  file". `abspath` first, everywhere.
+
 ## Editing
 
 - **One page:** edit its `<main>` in `home/<slug>/index.html`, then `node .tmp/check.mjs` and
@@ -111,13 +248,36 @@ node to-instatic.mjs --media instatic-media-map.json --lean   # 4. second pass, 
 node ship-payload.mjs && node run-convert.mjs && node fetch-nodes.mjs   # 5. HTML -> node graphs, inside the container
 node apply-body-class.mjs                           # 6. has-journey onto each root node
 node apply-image-alt.mjs                            # 7. alt text and the eager hero hints
-node import-fonts.mjs                               # 8. Fraunces + Nunito, self-hosted
+node import-fonts.mjs                               # 8. the platform's static instances
+node upload-fonts.mjs --fetch && node upload-fonts.mjs   #    the VARIABLE files -> font-map.json
 node import-styles.mjs                              # 9. class rules + site.css as a code asset
 node import-scripts.mjs                             # 10. gsap + site.js + journey.js, one bundle
 node import-pages.mjs --publish                     # 11. write the eleven rows, publish
 node verify-live.mjs && node verify-live.mjs --migrated   # 12. the proof
-node diff-live.mjs ../home/index.html https://mason-park-kids.up.railway.app/
+node diff-all.mjs                                   #     all eleven, local against live
+node audit-live.mjs && node audit-live.mjs --width 390    #     all 57 routes
+node crop-all.mjs --live                            #     no heading loses ink
 node probe-hooks.mjs https://mason-park-kids.up.railway.app/
+```
+
+Step 8 installs BOTH, and both are needed: the platform's static instances stay
+registered on the shell (they are what the fallback names in the stacks resolve
+to), and `upload-fonts.mjs` puts the variable files in the media library, which
+is the only route to a variable face on this platform. **`import-styles.mjs`
+reads `instatic/site.css`, not `home/assets/site.css`** — re-run
+`to-instatic.mjs` after any stylesheet edit or it ships the previous one, which
+it will happily do without a word.
+
+The SEO plugins are a one-off per site, not part of the page import:
+
+```bash
+cd ../../../../process/19-instatic-seo                # see 19-instatic-seo.md
+node ../18-instatic-embeds/pack-plugin.mjs open-graph .tmp/open-graph.zip
+node install-plugin.mjs .tmp/open-graph.zip --apply    # and aeo-schema
+cd -                                                   # back to .tmp
+node configure-seo.mjs --apply                        # this practice's facts
+node populate-seo.mjs                                 # a description for all 57
+node publish.mjs                                      # the plugins run at PUBLISH
 ```
 
 The container half (steps 5) is the 02 migration's, unchanged: `railway-ssh.mjs` addresses

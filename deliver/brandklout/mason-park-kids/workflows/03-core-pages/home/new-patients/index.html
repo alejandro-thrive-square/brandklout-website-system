@@ -14,12 +14,18 @@
 
 <meta name="theme-color" content="#587a68">
 <link rel="icon" href="../assets/uploads/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- The two families are a <link>, not an @import: the fluid root is the first
-     rule in site.css and an @import is only valid before any other rule. On
-     Instatic they are self-hosted through the font store instead (import-fonts.mjs). -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..600,0..100,0..1;1,9..144,400..600,0..100,0..1&amp;family=Nunito:ital,wght@0,400;0,700;0,800;1,400&amp;display=swap">
+<!-- No Google Fonts link, and no preconnect to one. Both families are now
+     self-hosted VARIABLE woff2, declared @font-face at the top of site.css and
+     served from assets/fonts/ here and from /uploads/ on Instatic, where
+     import-styles.mjs rewrites the url(). The <link> that used to be here
+     fetched the static instances, which nothing on the page uses any more:
+     "Fraunces" and "Nunito" survive only as fallback names behind
+     "Fraunces VF" and "Nunito VF" in the stacks. Preloaded because a face
+     discovered inside a stylesheet starts downloading one round trip later
+     than one in the markup, and `font-display: swap` spends that round trip
+     painting Georgia. -->
+<link rel="preload" href="../assets/fonts/fraunces-vf.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/nunito-vf.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/site.css">
 
 </head>
@@ -154,6 +160,10 @@
       <figure><img src="../assets/uploads/chair-960.webp" srcset="../assets/uploads/chair-480.webp 480w, ../assets/uploads/chair-960.webp 960w" sizes="(max-width: 899px) 50vw, 22vw" alt="A treatment room with a screen on the wall" loading="lazy" decoding="async"><figcaption>The screen on the wall.</figcaption></figure>
     </div>
   </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-inset is-right" data-wipe data-drift><img src="../assets/uploads/st-backpack-960.webp" srcset="../assets/uploads/st-backpack-480.webp 480w, ../assets/uploads/st-backpack-960.webp 960w, ../assets/uploads/st-backpack-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 34rem" alt="A child's backpack by a door" loading="lazy" decoding="async"></figure>
+  </div>
 </section>
 
 <!-- THE VISIT. A vertical timeline, down one rule. -->
@@ -173,6 +183,10 @@
       <div class="np-step"><h3>The plan</h3><p>Anything the exam found, shown to you on the screen, with the price before you leave. We accept most PPO insurance plans and Medicaid for qualified patients.</p></div>
       <div class="np-step"><h3>The next date</h3><p>Kids should come in every six months for cleanings and checkups. The next one goes in the diary before you go.</p></div>
     </div>
+  </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-band" data-wipe data-drift><img src="../assets/uploads/st-brush-1440.webp" srcset="../assets/uploads/st-brush-480.webp 480w, ../assets/uploads/st-brush-960.webp 960w, ../assets/uploads/st-brush-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 75vw" alt="A child brushing their teeth at a bathroom sink" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 
@@ -210,6 +224,10 @@
       <div class="np-qa_row"><h3>Are there new patient specials?</h3><p>We offer special discounted exams, X-rays, cleanings, and fluoride treatments for new patients ages 12 and under and ages 13+. Emergency exams are also available at a reduced price.</p></div>
       <div class="np-qa_row"><h3>How do I book?</h3><p>Booking is easy! Call (281) 578-7100 to schedule your child&rsquo;s visit or request an appointment through our website.</p></div>
     </div>
+  </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-plate is-right" data-wipe data-drift><img src="../assets/uploads/st-crayons-960.webp" srcset="../assets/uploads/st-crayons-480.webp 480w, ../assets/uploads/st-crayons-960.webp 960w, ../assets/uploads/st-crayons-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 27rem" alt="Crayons and colouring pencils on a table" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 

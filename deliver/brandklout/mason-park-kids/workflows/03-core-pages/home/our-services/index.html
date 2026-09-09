@@ -14,12 +14,18 @@
 
 <meta name="theme-color" content="#587a68">
 <link rel="icon" href="../assets/uploads/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- The two families are a <link>, not an @import: the fluid root is the first
-     rule in site.css and an @import is only valid before any other rule. On
-     Instatic they are self-hosted through the font store instead (import-fonts.mjs). -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..600,0..100,0..1;1,9..144,400..600,0..100,0..1&amp;family=Nunito:ital,wght@0,400;0,700;0,800;1,400&amp;display=swap">
+<!-- No Google Fonts link, and no preconnect to one. Both families are now
+     self-hosted VARIABLE woff2, declared @font-face at the top of site.css and
+     served from assets/fonts/ here and from /uploads/ on Instatic, where
+     import-styles.mjs rewrites the url(). The <link> that used to be here
+     fetched the static instances, which nothing on the page uses any more:
+     "Fraunces" and "Nunito" survive only as fallback names behind
+     "Fraunces VF" and "Nunito VF" in the stacks. Preloaded because a face
+     discovered inside a stylesheet starts downloading one round trip later
+     than one in the markup, and `font-display: swap` spends that round trip
+     painting Georgia. -->
+<link rel="preload" href="../assets/fonts/fraunces-vf.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/nunito-vf.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/site.css">
 
 </head>
@@ -163,6 +169,10 @@
       </div>
     </div>
   </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-band" data-wipe data-drift><img src="../assets/uploads/operatory-1440.webp" srcset="../assets/uploads/operatory-480.webp 480w, ../assets/uploads/operatory-960.webp 960w, ../assets/uploads/operatory-1440.webp 1440w, ../assets/uploads/operatory-1920.webp 1920w" sizes="(max-width: 899px) 100vw, 75vw" alt="A hygienist at the sink in a treatment room" loading="lazy" decoding="async"><figcaption>In the practice</figcaption></figure>
+  </div>
 </section>
 
 <!-- THE FINDER. What is wrong on the left, where the practice would start
@@ -187,6 +197,10 @@
       <div class="sv-find"><p class="sv-find_if">Grinding at night</p><span class="sv-find_arrow" aria-hidden="true">&rarr;</span><div class="sv-find_then"><a href="/services/night-guards/">Night guards</a></div></div>
     </div>
   </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-inset is-right" data-wipe data-drift><img src="../assets/uploads/st-books-960.webp" srcset="../assets/uploads/st-books-480.webp 480w, ../assets/uploads/st-books-960.webp 960w, ../assets/uploads/st-books-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 34rem" alt="A stack of children's picture books" loading="lazy" decoding="async"></figure>
+  </div>
 </section>
 
 <!-- BY AGE. The growth chart's five stages, on a rail this time. -->
@@ -206,6 +220,10 @@
       <article class="sv-age"><b>10<small>to 13</small></b><h3>The busy years</h3><p>A mouth guard for the season, orthodontics when the timing is right, and cleanings that keep up.</p><div class="sv-chips"><a href="/services/mouth-guards/">Mouth guards</a><a href="/services/orthodontics/">Orthodontics</a><a href="/services/retainers/">Retainers</a></div></article>
       <article class="sv-age"><b>14<small>to 18</small></b><h3>Nearly grown</h3><p>Invisalign, a night guard if they grind, and the habits that are theirs now.</p><div class="sv-chips"><a href="/services/invisalign/">Invisalign</a><a href="/services/night-guards/">Night guards</a><a href="/services/cosmetic-dentistry/">Cosmetic dentistry</a></div></article>
     </div>
+  </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-band" data-wipe data-drift><img src="../assets/uploads/st-teen-1440.webp" srcset="../assets/uploads/st-teen-480.webp 480w, ../assets/uploads/st-teen-960.webp 960w, ../assets/uploads/st-teen-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 75vw" alt="A smiling teenager outdoors" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 
@@ -227,6 +245,10 @@
       <li><b>Invisalign</b><i>$1,000 off</i><span>A complimentary Invisalign consult is available. Prepay in full to receive a 5% discount; in-office and third-party payment plans are available.</span></li>
     </ul>
     <p class="sv-menu_note">Specials cannot be combined with insurance, are for new patients only, and are not valid in cases of periodontal disease. See <a href="/special-offers/">special offers</a> for the full terms.</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-plate" data-wipe data-drift><img src="../assets/uploads/st-lunchbox-960.webp" srcset="../assets/uploads/st-lunchbox-480.webp 480w, ../assets/uploads/st-lunchbox-960.webp 960w, ../assets/uploads/st-lunchbox-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 27rem" alt="A packed school lunch of fruit and vegetables" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 

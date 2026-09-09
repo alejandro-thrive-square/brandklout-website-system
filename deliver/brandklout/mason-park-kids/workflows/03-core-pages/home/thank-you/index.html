@@ -14,12 +14,18 @@
 
 <meta name="theme-color" content="#587a68">
 <link rel="icon" href="../assets/uploads/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- The two families are a <link>, not an @import: the fluid root is the first
-     rule in site.css and an @import is only valid before any other rule. On
-     Instatic they are self-hosted through the font store instead (import-fonts.mjs). -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..600,0..100,0..1;1,9..144,400..600,0..100,0..1&amp;family=Nunito:ital,wght@0,400;0,700;0,800;1,400&amp;display=swap">
+<!-- No Google Fonts link, and no preconnect to one. Both families are now
+     self-hosted VARIABLE woff2, declared @font-face at the top of site.css and
+     served from assets/fonts/ here and from /uploads/ on Instatic, where
+     import-styles.mjs rewrites the url(). The <link> that used to be here
+     fetched the static instances, which nothing on the page uses any more:
+     "Fraunces" and "Nunito" survive only as fallback names behind
+     "Fraunces VF" and "Nunito VF" in the stacks. Preloaded because a face
+     discovered inside a stylesheet starts downloading one round trip later
+     than one in the markup, and `font-display: swap` spends that round trip
+     painting Georgia. -->
+<link rel="preload" href="../assets/fonts/fraunces-vf.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/nunito-vf.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/site.css">
 
 </head>
@@ -121,6 +127,10 @@
       </ul>
     </div>
   </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-band" data-wipe data-drift><img src="../assets/uploads/operatory-1440.webp" srcset="../assets/uploads/operatory-480.webp 480w, ../assets/uploads/operatory-960.webp 960w, ../assets/uploads/operatory-1440.webp 1440w, ../assets/uploads/operatory-1920.webp 1920w" sizes="(max-width: 899px) 100vw, 75vw" alt="A hygienist at the sink in a treatment room" loading="lazy" decoding="async"><figcaption>In the practice</figcaption></figure>
+  </div>
 </section>
 
 <!-- NEXT. Three moments, in order. -->
@@ -139,6 +149,10 @@
       <div class="ty-moment"><b>3</b><h3>The visit.</h3><p>About forty minutes for a first visit. Infants and anxious toddlers are examined knee to knee on your lap; you stay in the room throughout.</p></div>
     </div>
   </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-inset is-right" data-wipe data-drift><img src="../assets/uploads/st-calendar-960.webp" srcset="../assets/uploads/st-calendar-480.webp 480w, ../assets/uploads/st-calendar-960.webp 960w, ../assets/uploads/st-calendar-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 34rem" alt="A calendar and a pen on a desk" loading="lazy" decoding="async"></figure>
+  </div>
 </section>
 
 <!-- MEANWHILE. Three things worth reading before the call. -->
@@ -156,6 +170,10 @@
       <a class="card" href="/new-patients/"><span class="card_no">2</span><h3>Your first visit, start to finish</h3><p>The new patient special, what to bring, what happens in the room, and where part of your fee goes.</p><span class="link-arrow">Read it <span aria-hidden="true">&rarr;</span></span></a>
       <a class="card" href="/pediatric-dentistry-faqs-katy-tx/"><span class="card_no">3</span><h3>Every question parents ask</h3><p>First visits, cleanings, cavities, special needs care, emergencies, insurance and payments, answered by the practice.</p><span class="link-arrow">Read it <span aria-hidden="true">&rarr;</span></span></a>
     </div>
+  </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-plate" data-wipe data-drift><img src="../assets/uploads/st-nook-960.webp" srcset="../assets/uploads/st-nook-480.webp 480w, ../assets/uploads/st-nook-960.webp 960w, ../assets/uploads/st-nook-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 27rem" alt="A reading nook by a window" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 

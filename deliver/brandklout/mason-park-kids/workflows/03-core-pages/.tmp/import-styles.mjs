@@ -42,8 +42,37 @@ const newFileId = () => Array.from(crypto.randomBytes(21), (b) => ALPHABET[b & 6
 const pages = JSON.parse(fs.readFileSync(path.join(HERE, "converted-pages.json"), "utf8"));
 const classNames = new Set();
 for (const p of pages) for (const n of Object.values(p.body.nodes)) for (const c of n.classIds ?? []) classNames.add(c);
-const css = fs.readFileSync(path.join(HERE, "instatic", "site.css"), "utf8");
+let css = fs.readFileSync(path.join(HERE, "instatic", "site.css"), "utf8");
 if (/fonts\.googleapis\.com/.test(css)) { console.error("site.css imports Google Fonts - the CSP blocks it; the faces go through import-fonts.mjs"); process.exit(1); }
+
+/* THE SELF-HOSTED VARIABLE FACES. site.css names them relatively -
+   `url("fonts/fraunces-vf.woff2")` - which is correct beside the stylesheet on
+   disk and wrong here: this asset is served from `src/styles/`, so the same
+   relative URL would resolve to `/src/styles/fonts/...` and 404. The upload
+   paths are in font-map.json, written by upload-fonts.mjs.
+
+   Rewritten HERE rather than listed as a second `src` in the stylesheet
+   itself, because a two-source `src` means whichever path does not exist 404s
+   in the console of every page - three errors per page from `file://`, on
+   every shot.mjs run, permanently. See the block at the top of site.css.
+
+   A face with no mapping is fatal. Falling through would publish a stylesheet
+   whose display font silently degrades to the static Fraunces, which is the
+   exact bug this whole change exists to fix, and nothing would say so. */
+const fontMapPath = path.join(HERE, "font-map.json");
+const declared = [...css.matchAll(/url\("fonts\/([^"]+)"\)/g)].map((m) => m[1]);
+if (declared.length) {
+  if (!fs.existsSync(fontMapPath)) {
+    console.error(`site.css names ${declared.length} self-hosted face(s) and there is no font-map.json - run \`node upload-fonts.mjs --fetch\` then \`node upload-fonts.mjs\``);
+    process.exit(1);
+  }
+  const faces = JSON.parse(fs.readFileSync(fontMapPath, "utf8")).faces ?? {};
+  const missing = declared.filter((f) => !faces[f]?.url);
+  if (missing.length) { console.error(`no upload for ${missing.join(", ")} in font-map.json - re-run upload-fonts.mjs`); process.exit(1); }
+  css = css.replace(/url\("fonts\/([^"]+)"\)/g, (_, file) => `url("${faces[file].url}")`);
+  console.log(`fonts: ${declared.map((f) => `${f} -> ${faces[f].url}`).join("\n       ")}`);
+}
+if (/url\("fonts\//.test(css)) { console.error("a relative fonts/ url survived the rewrite"); process.exit(1); }
 for (let i = 0; i < css.length; i++) { const c = css.charCodeAt(i); if (c < 32 && c !== 9 && c !== 10 && c !== 13) { console.error(`control byte in site.css at ${i}`); process.exit(1); } }
 console.log(`site: ${BASE}`);
 console.log(`${classNames.size} classes across ${pages.length} pages, site.css ${(css.length / 1024).toFixed(0)} KB`);

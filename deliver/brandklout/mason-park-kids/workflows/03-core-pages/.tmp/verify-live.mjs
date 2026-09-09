@@ -15,6 +15,7 @@
 // painted (measured against their fallbacks), every image resolves, nothing
 // still points at /assets/, no overflow, no empty buttons, console clean.
 import { chromium } from "playwright-core";
+import { settle } from "./settle.mjs";
 import path from "node:path";
 import fs from "node:fs";
 import { fileURLToPath } from "node:url";
@@ -50,6 +51,7 @@ for (const route of routes) {
 
   const res = await page.goto(url, { waitUntil: "load", timeout: 120000 });
   await page.waitForTimeout(2500);
+  await settle(page);
   const total = await page.evaluate(() => document.body.scrollHeight);
   for (let y = 0; y < total; y += 540) { await page.evaluate((n) => window.scrollTo({ top: n, behavior: "instant" }), y); await page.waitForTimeout(100); }
   await page.evaluate(() => window.scrollTo({ top: 0, behavior: "instant" }));
@@ -64,7 +66,24 @@ for (const route of routes) {
     const paints = (name, fb) => wOf(`500 48px "${name}", ${fb}`) !== wOf(`500 48px ${fb}`);
     const imgs = [...document.images];
     return {
-      fonts: { Fraunces: paints("Fraunces", "Georgia, serif"), Nunito: paints("Nunito", "Arial, sans-serif") },
+      // Ask the TOKENS which family should be on screen, never a literal name.
+      // The stacks lead with the self-hosted variable faces "Fraunces VF" and
+      // "Nunito VF" since 2026-09-09, and nothing asks for plain "Fraunces"
+      // any more - so checking that name reported FALLBACK on all eleven
+      // routes while they were painting the right font.
+      fonts: (function () {
+        var cs = getComputedStyle(document.documentElement);
+        var lead = function (token, dflt) {
+          var v = (cs.getPropertyValue(token) || "").trim();
+          return v ? v.split(",")[0].trim().replace(/^["']|["']$/g, "") : dflt;
+        };
+        var d = lead("--font-display", "Fraunces");
+        var b = lead("--font-body", "Nunito");
+        var out = {};
+        out[d] = paints(d, "Georgia, serif");
+        out[b] = paints(b, "Arial, sans-serif");
+        return out;
+      })(),
       bodyClass: document.body.className || "",
       title: document.title,
       chapters: document.querySelectorAll("section[data-chapter]").length,

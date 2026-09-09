@@ -14,12 +14,18 @@
 
 <meta name="theme-color" content="#587a68">
 <link rel="icon" href="../assets/uploads/logo.png">
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<!-- The two families are a <link>, not an @import: the fluid root is the first
-     rule in site.css and an @import is only valid before any other rule. On
-     Instatic they are self-hosted through the font store instead (import-fonts.mjs). -->
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght,SOFT,WONK@0,9..144,400..600,0..100,0..1;1,9..144,400..600,0..100,0..1&amp;family=Nunito:ital,wght@0,400;0,700;0,800;1,400&amp;display=swap">
+<!-- No Google Fonts link, and no preconnect to one. Both families are now
+     self-hosted VARIABLE woff2, declared @font-face at the top of site.css and
+     served from assets/fonts/ here and from /uploads/ on Instatic, where
+     import-styles.mjs rewrites the url(). The <link> that used to be here
+     fetched the static instances, which nothing on the page uses any more:
+     "Fraunces" and "Nunito" survive only as fallback names behind
+     "Fraunces VF" and "Nunito VF" in the stacks. Preloaded because a face
+     discovered inside a stylesheet starts downloading one round trip later
+     than one in the markup, and `font-display: swap` spends that round trip
+     painting Georgia. -->
+<link rel="preload" href="../assets/fonts/fraunces-vf.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../assets/fonts/nunito-vf.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../assets/site.css">
 
 </head>
@@ -143,6 +149,10 @@
       <div class="mb-vs_row"><span class="mb-vs_q">Where it is used</span><span class="mb-vs_a">Here, with our team at Mason Park Dental.</span><span class="mb-vs_b">Any in-network practice.</span></div>
     </div>
   </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-plate is-right" data-wipe data-drift><img src="../assets/uploads/st-brushes-960.webp" srcset="../assets/uploads/st-brushes-480.webp 480w, ../assets/uploads/st-brushes-960.webp 960w, ../assets/uploads/st-brushes-1400.webp 1400w" sizes="(max-width: 899px) 100vw, 27rem" alt="Children's toothbrushes in a cup on a shelf" loading="lazy" decoding="async"></figure>
+  </div>
 </section>
 
 <!-- WHO IT IS FOR. Situations, beside the team. -->
@@ -166,6 +176,10 @@
       <img src="../assets/uploads/team-960.webp" srcset="../assets/uploads/team-480.webp 480w, ../assets/uploads/team-960.webp 960w, ../assets/uploads/team-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 40vw" alt="The Mason Park Dental team" loading="lazy" decoding="async">
     </figure>
   </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-band" data-wipe data-drift><img src="../assets/uploads/st-family-1440.webp" srcset="../assets/uploads/st-family-480.webp 480w, ../assets/uploads/st-family-960.webp 960w, ../assets/uploads/st-family-1440.webp 1440w" sizes="(max-width: 899px) 100vw, 75vw" alt="A parent and a young child laughing together at home" loading="lazy" decoding="async"></figure>
+  </div>
 </section>
 
 <!-- JOIN. Three steps on one hairline. -->
@@ -184,6 +198,10 @@
       <div class="mb-step"><b>Step three</b><h3>Book the first cleaning.</h3><p>The two exams and two cleanings start with the next appointment, and the discounts apply to anything the exam finds.</p></div>
     </div>
     <p class="ch-foot ch-note">For more detailed information the practice publishes a brochure; ask the front desk for the current copy, which also states the annual fee.</p>
+  </div>
+
+  <div class="wrap">
+    <figure class="ch-figure is-inset is-centre" data-wipe data-drift><img src="../assets/uploads/st-apple-960.webp" srcset="../assets/uploads/st-apple-480.webp 480w, ../assets/uploads/st-apple-960.webp 960w, ../assets/uploads/st-apple-1400.webp 1400w" sizes="(max-width: 899px) 100vw, 34rem" alt="A child holding an apple outdoors" loading="lazy" decoding="async"></figure>
   </div>
 </section>
 
