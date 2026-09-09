@@ -12,8 +12,11 @@ is about `bestdentistinkatytx.com` / `mason-park.up.railway.app`, it belongs one
 
 ## Where the site is, as of 2026-09-09
 
-**57 pages live and published at <https://mason-park-kids.up.railway.app>.** The public domain
-still does not point here; that host is the review link.
+**57 pages live and published at <https://mason-park-kids.up.railway.app>, all of them on the
+same design as of 2026-09-09.** The public domain still does not point here; that host is the
+review link. Every gate is clean: `check.mjs` 0 errors, `crop-all.mjs` 0 across 57 x 2 widths,
+`audit-live.mjs` 57/57 at both 1440 and 390, and `crop-all.mjs --live` 0 against the
+published site.
 
 | | State |
 | :--- | :--- |

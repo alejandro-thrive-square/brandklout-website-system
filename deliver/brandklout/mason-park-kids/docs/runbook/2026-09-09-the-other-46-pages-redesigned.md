@@ -125,15 +125,36 @@ mockup for "toothpaste tube", a splash shot for "soda") and were re-termed befor
 5. **`check.mjs` fails a prose run over 110 words**, and the migrated pages have several. The
    fix is a second `lf-section` at the point the copy changes subject, not a shorter paragraph.
 
+6. **`crop-probe.mjs` reports phantom crops when the machine is busy.** The first full sweep
+   found 3 on `/services/preventive-dentistry/` at 390; it was running alongside the Instatic
+   publish, and 114 browser launches on a loaded box meant `settle()` returned while the mask
+   reveal was still travelling, so the probe measured a mid-animation frame. Four re-probes and
+   a full re-sweep on a quiet machine: **0 across 57 pages x 2 widths.** A crop that does not
+   reproduce is not a crop. Re-run before you go looking for it in the CSS.
+
 ## Where it is now
 
-- **57 pages built locally**, `node check.mjs`: 0 errors, 2 warnings (both "over the 110 ceiling
-  but inside the fold bound", the same class `our-doctors` has always carried).
-- Commit `f12e01b4`.
-- **The Instatic import was in flight when this was written.** Steps 1 to 4 done (backup,
-  convert, 68 media uploaded, second pass); `ship-payload` / `run-convert` / `fetch-nodes` next,
-  then `apply-body-class`, `apply-image-alt`, `import-styles`, `import-pages --publish`, then
-  the live gates. `import-fonts`/`upload-fonts`/`import-scripts` are one-offs and were skipped.
+**Done, and live.** All 57 pages published at <https://mason-park-kids.up.railway.app>.
+
+| Gate | Result |
+| :--- | :--- |
+| `node check.mjs` | 57 pages, **0 errors**, 2 warnings (both "over the 110 ceiling but inside the fold bound", the class `our-doctors` has always carried; `technology` is the second) |
+| `node crop-all.mjs` | **0 cropped headings** across 57 pages x 2 widths |
+| `node audit-live.mjs` | **57/57 clean** at 1440px |
+| `node audit-live.mjs --width 390` | **57/57 clean** at 390px |
+| `node crop-all.mjs --live` | **0 cropped headings** across the published 57 x 2 widths |
+
+The import ran end to end with 57 pages in it rather than eleven: 68 new media,
+373 classes, styleRules 434 -> 503, every page read back with the expected node count,
+`publish {"publishedPages":57}`. `import-fonts` / `upload-fonts` / `import-scripts` are
+one-offs and were skipped.
+
+`populate-seo.mjs` was the **third** gate this pass carrying a hand-written list of the eleven
+core routes: the other 46 fell through to the recovery mirror or to a derived first sentence
+even after they had local source. It maps a slug to its local file now, and the run went from
+`local 11, mirror 19, derived 27` to `local 57`.
+
+Commits `f12e01b4` (the pages) and `9d7302fb` (the publish, the SEO fix, these docs).
 
 ## Open questions for the client
 
