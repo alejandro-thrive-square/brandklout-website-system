@@ -39,6 +39,7 @@ Run from `workflows/03-core-pages/.tmp/`. All of them are cheap; run them all.
 | `node shot.mjs <page>` | What does it look like at four widths, and which font is really painted? |
 | `node crop-all.mjs` / `--live` | Does any heading lose ink to a clipping ancestor? Walks `home/`, so it sweeps all 57. |
 | `node shoot-all.mjs ../home <dir>` then LOOK | Does every chapter hold together? The per-page gates cannot see a figure hanging alone; this can. Pinned scenes show as empty ground here and are fine: `viewport-probe.mjs` for those. |
+| `node hover-probe.mjs ../home/<page>/index.html` | Can you still read a button while hovering it? A crop of every variant, hovered. |
 | `node nav-probe.mjs ../home/<page>/index.html` | Can the client click through the review from disk? Every internal link must resolve to a file, at every depth. |
 | `python recompose-figures.py --dry-run` | Is every picture still where the plan puts it? 0 pages should change. |
 | `node build-pages.mjs --list` | Which pages have a recipe. **Order is `build-pages` then `stamp` then `check`, and it does not commute.** |
@@ -64,10 +65,13 @@ Run from `workflows/03-core-pages/.tmp/`. All of them are cheap; run them all.
    onto a different nav bar for a week, and `check.mjs` reported the chrome
    identical the whole time because the other pages had no local file to read.
    Every gate walks `home/` now. Keep it that way.
-5. **A transformed sibling paints on top.** `data-drift` and `data-wipe` put transforms
+5. **A positioned pseudo-element paints over its parent's own text.** The button fill at
+   `z-index: 0` hid every label on hover; `.button > *` cannot lift a bare text node. Fill at
+   `z-index: -1` inside `isolation: isolate`. `hover-probe.mjs` is the gate.
+6. **A transformed sibling paints on top.** `data-drift` and `data-wipe` put transforms
    on figures; anything meant to overlap one needs `position: relative` and a `z-index`,
    or the picture rides over the text (it did, on nineteen pages, for a week).
-6. **The adult practice is not this practice.** Dr. William Sung, teeth
+7. **The adult practice is not this practice.** Dr. William Sung, teeth
    whitening, implants, `bestdentistinkatytx.com`: all of it belongs to
    `bk-mason-park`. It arrived here through the 02 migration and was cleaned
    out of six pages on 2026-09-09. If you see his name on this site, it is a

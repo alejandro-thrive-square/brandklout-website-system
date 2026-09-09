@@ -269,6 +269,13 @@ button { font: inherit; }
   position: relative;
   overflow: hidden;
   cursor: pointer;
+  /* The button is its own stacking context so the sliding fill below can sit
+     at z-index -1: above the button's own background, BELOW its text. Until
+     2026-09-09 (evening) the fill was at z-index 0 and the label was a bare
+     text node, so on hover the ink slid up and covered the words on every
+     button on the site. `.button > *` lifted CHILDREN above the fill, but
+     these buttons have none; the text is the anchor's own. */
+  isolation: isolate;
   transition: color .35s var(--ease), border-color .35s var(--ease), transform .35s var(--ease), box-shadow .35s var(--ease);
 }
 .button::after {
@@ -278,7 +285,7 @@ button { font: inherit; }
   background: var(--ink);
   transform: translateY(101%);
   transition: transform .45s var(--ease);
-  z-index: 0;
+  z-index: -1;
 }
 .button > * { position: relative; z-index: 1; }
 .button:hover { color: #fff; border-color: var(--ink); transform: translateY(-2px); box-shadow: var(--shadow-sm); }
@@ -795,6 +802,9 @@ html.jr-ready .has-journey .main-wrapper { margin-top: calc(-1 * var(--jr-nav-h,
 .has-journey .masthead_component .masthead_link:hover { background: rgba(255, 255, 255, .14); color: #fff; }
 .has-journey .masthead_component .masthead_toggle { color: #fff; border-color: rgba(255, 255, 255, .5); transition: color .45s var(--ease), border-color .45s var(--ease); }
 .has-journey .masthead_component .masthead_actions .button { border-color: var(--sun); background: var(--sun); color: var(--ink); }
+/* That rule outweighs `.button:hover`, so without this the masthead's Book
+   stayed ink-on-ink while the fill slid up (2026-09-09, evening). */
+.has-journey .masthead_component .masthead_actions .button:hover { color: #fff; border-color: var(--ink); }
 
 .has-journey .masthead_component.is-solid,
 html:not(.jr-ready) .has-journey .masthead_component { background: var(--white); border-bottom-color: var(--sage-line); }

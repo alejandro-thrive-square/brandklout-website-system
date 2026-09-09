@@ -95,6 +95,18 @@ object and may appear; a procedure, an instrument in a mouth, a chair, a result 
 7. **`prep-images.py` re-encodes the whole pool**, including keys whose mirror source is
    absent from this worktree (it leaves those as they are and says so). Three minutes; fine.
 
+### 4. The button hover hid the label — every button, every page
+
+Reported by the client after the review link went out. `.button::after` is the ink fill that
+slides up on hover; it was `position: absolute; z-index: 0`, and the label is the anchor's own
+text, not a child. A positioned pseudo-element at z-index 0 paints above its parent's in-flow
+text, so the fill covered the words. `.button > * { z-index: 1 }` was meant to lift the label
+and did nothing, because there is no child. Fix: `isolation: isolate` on `.button` and
+`z-index: -1` on the fill, so it sits above the button's background and below its text. The
+masthead's Book needed one more line: its colour rule outweighs `.button:hover`, so its label
+was staying ink on ink. `hover-probe.mjs` hovers every variant and crops it; all four variants
+on four pages now read white on ink. Commit `HOVERSHA`.
+
 ## Where it is now
 
 Done locally, **not published**. Commit `e8f2e9ba` on `bk-mason-park-kids`, pushed.
@@ -106,6 +118,7 @@ Done locally, **not published**. Commit `e8f2e9ba` on `bk-mason-park-kids`, push
 | `node shot.mjs --only mobile` on financing, services, doctors, thank-you | 0px overflow, nothing unrevealed |
 | `node shoot-all.mjs` | all 57 captured and looked at, twice |
 | `python recompose-figures.py --dry-run` | 0 pages would change (idempotent) |
+| `node hover-probe.mjs` on four pages | every button variant legible while hovered |
 | `node nav-probe.mjs` at three depths | 68 / 50 / 51 internal links, 0 bad; clicks through the masthead land |
 
 Images inside `<main>`: `waiting` on 0 pages (was 50); 23 new keys in the pool
