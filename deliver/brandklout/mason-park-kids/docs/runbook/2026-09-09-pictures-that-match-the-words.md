@@ -107,6 +107,21 @@ masthead's Book needed one more line: its colour rule outweighs `.button:hover`,
 was staying ink on ink. `hover-probe.mjs` hovers every variant and crops it; all four variants
 on four pages now read white on ink. Commit `f6408ede`.
 
+### 5. The homepage, after the client's first look
+
+- **The comfort chapter's portrait slot** (two rows tall, middle column) carried `chair`, a
+  landscape treatment-room frame squeezed upright. It now carries `shelf-kid`, the practice's
+  own frame of a smiling boy holding a toothpaste box at the shelf by the front desk, captioned
+  as the shelf where most visits end.
+- **The hero is mirrored** so Dr. Nguyen is on the visible right instead of under the
+  headline's veil: `smile-flip`, a new key `prep-images.py` writes from `smile` (`MIRRORED`,
+  `--mirror-only`). Her glasses are at the frame's very top edge, and the parallax (a 6% box
+  bleed plus a drift that starts at scale 1.09 shifted up 4%) hid the top fifth of the frame,
+  so this one hero holds the top, sits flush and carries no `data-drift`. What is still
+  missing above her glasses is missing from the photograph; a frame with more headroom would
+  be the ask if the client wants her whole face. `probe-hooks.mjs`: all scenes still do work.
+  Commit `HOMESHA`.
+
 ## Where it is now
 
 Done locally, **not published**. Commit `e8f2e9ba` on `bk-mason-park-kids`, pushed.
@@ -130,7 +145,7 @@ Images inside `<main>`: `waiting` on 0 pages (was 50); 23 new keys in the pool
    relative, and since `656df723` the navigation works from disk too: `site.js` rewrites the
    root-relative links on `file://` only (the client asked for this the same evening; a review
    with dead links is not a review). `nav-probe.mjs` checks it at three depths.
-2. If approved: `node upload-media.mjs` (23 new keys), `node import-styles.mjs` (`site.css`
+2. If approved: `node upload-media.mjs` (24 new keys, `smile-flip` included), `node import-styles.mjs` (`site.css`
    changed — the overlap fix, `.is-top`, the sticky plate), `node import-pages.mjs`, publish,
    then `audit-live.mjs` at both widths and `crop-all.mjs --live`. `ship-payload.mjs` in the
    order the README gives.

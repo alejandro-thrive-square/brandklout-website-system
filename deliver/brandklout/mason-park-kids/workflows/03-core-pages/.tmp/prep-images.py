@@ -165,6 +165,17 @@ ALBUM = {
     "sofa":        (ALBUMDIR, "sofa.jpg", WIDE),
 }
 
+# --- mirrored variants ------------------------------------------------------
+# A frame flipped left-to-right, written from the encoded widths of its source
+# so it is the same pixels in the other direction. `smile-flip` is the homepage
+# hero: Dr. Nguyen is on the LEFT of `smile`, under the headline's veil, and
+# the client asked (2026-09-09, evening) to see a little of the doctor too.
+# Mirroring puts her on the visible right. Nothing in the frame reads as text.
+#   python prep-images.py --mirror-only    just these, no re-encode
+MIRRORED = {
+    "smile-flip": "smile",
+}
+
 COPY = {
     "logo.png":   (KIDS, "2023/12/Childrens-Dentist-Katy-Logo-1.png"),
     "aapd.webp":  (KIDS, "2023/08/aapd.webp"),
@@ -175,6 +186,25 @@ COPY = {
 }
 
 os.makedirs(OUT, exist_ok=True)
+import sys
+
+def mirror_all():
+    n = 0
+    for key, src in MIRRORED.items():
+        for f in sorted(os.listdir(OUT)):
+            if not (f == f"{src}.webp" or (f.startswith(src + "-") and f[len(src) + 1:-5].isdigit() and f.endswith(".webp"))):
+                continue
+            im = Image.open(os.path.join(OUT, f)).transpose(Image.FLIP_LEFT_RIGHT)
+            out = f.replace(src, key, 1)
+            im.save(os.path.join(OUT, out), "WEBP", quality=82, method=6)
+            n += 1
+        print(f"{key:18s} mirrored from {src}")
+    return n
+
+if "--mirror-only" in sys.argv:
+    print(f"{mirror_all()} mirrored variants written")
+    sys.exit(0)
+
 written = 0
 missing_stock = []
 missing_mirror = []
@@ -245,6 +275,8 @@ for name, (root, rel) in COPY.items():
         continue
     shutil.copyfile(src, os.path.join(OUT, name))
     print(f"{name:18s} copied")
+
+written += mirror_all()
 
 if missing_mirror:
     print()

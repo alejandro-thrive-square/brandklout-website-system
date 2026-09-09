@@ -16,7 +16,7 @@ is about `bestdentistinkatytx.com` / `mason-park.up.railway.app`, it belongs one
 same design as of 2026-09-09.** **LOCAL IS AHEAD OF LIVE** since the evening of 2026-09-09:
 the image pass (`docs/runbook/2026-09-09-pictures-that-match-the-words.md`) is committed and
 awaiting the client's review at `file://`; when approved, run the import in the README's order
-(`upload-media` for 23 new keys, `import-styles` because `site.css` changed, `import-pages`,
+(`upload-media` for 24 new keys, `import-styles` because `site.css` changed, `import-pages`,
 publish, then the live gates). The public domain still does not point here; that host is the
 review link. Every gate is clean: `check.mjs` 0 errors, `crop-all.mjs` 0 across 57 x 2 widths,
 `audit-live.mjs` 57/57 at both 1440 and 390, and `crop-all.mjs --live` 0 against the

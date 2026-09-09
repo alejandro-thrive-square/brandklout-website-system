@@ -853,6 +853,15 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .ch-arrival::before { display: none; }
 .ar-bg { position: absolute; inset: -6% 0; z-index: 0; }
 .ar-bg img { width: 100%; height: 100%; object-fit: cover; object-position: 50% 30%; }
+/* The homepage frame (`smile-flip`) has Dr. Nguyen's glasses at its very
+   top edge. The default 30% cut her off at the eyes once the frame was
+   mirrored to put her on the visible side (2026-09-09, evening), and so did
+   the parallax: the box bleeds 6% above the viewport and the drift starts at
+   scale 1.09 shifted up 4%, which together hide the top fifth of the frame.
+   So this hero holds the top, sits flush, and carries no `data-drift`. What
+   is still missing above her glasses is missing from the photograph. */
+.ar-bg.is-top { inset: 0; }
+.ar-bg.is-top img { object-position: 50% 0%; }
 .ar-veil {
   position: absolute; inset: 0; z-index: 1;
   background:
