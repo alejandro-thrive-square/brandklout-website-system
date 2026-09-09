@@ -105,7 +105,7 @@ and did nothing, because there is no child. Fix: `isolation: isolate` on `.butto
 `z-index: -1` on the fill, so it sits above the button's background and below its text. The
 masthead's Book needed one more line: its colour rule outweighs `.button:hover`, so its label
 was staying ink on ink. `hover-probe.mjs` hovers every variant and crops it; all four variants
-on four pages now read white on ink. Commit `HOVERSHA`.
+on four pages now read white on ink. Commit `f6408ede`.
 
 ## Where it is now
 
