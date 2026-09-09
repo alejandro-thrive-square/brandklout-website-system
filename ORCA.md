@@ -125,6 +125,27 @@ Hand the new session a written brief it can act on alone — for this system tha
 
 For a genuine handoff, deliver the brief and stop monitoring. Use the `orchestration` skill and `orca orchestration ...` only when the user actually asked to supervise, wait for results, or coordinate a task DAG.
 
+### A new worktree shows one client, not all of them
+
+Orca creates worktrees with a plain `git worktree add`, which checks out **every** Brandklout client
+— thirteen client folders in a workspace that exists for one of them. Orca's per-repo **setup script**
+for this repo is `npm install`, and root `package.json` has a `postinstall` that runs
+`scripts/sparsify-worktree.sh`, so a new worktree narrows itself to the shared context
+(`deliver/process`, the pillar's `docs/` and `scripts/`, `scripts`, `mcp-servers`, `.claude`, plus the
+repo-root directives) and the one client its `bk-<slug>` branch names.
+
+Orca names the branch `alejandro-thrive-square/bk-livewell`, so the client is derived from the
+worktree **directory** name first and the branch's last path segment second. If neither is a prefix
+of the client folder — `bk-ifa-dentistry` vs `institute-for-advanced-dentistry` — nothing matches, the
+worktree keeps the shared context only, and the script prints the line to run:
+
+```bash
+bash scripts/sparsify-worktree.sh --client institute-for-advanced-dentistry
+```
+
+Sparse never touches commits or the index; `--undo` restores the full checkout. Full rules and guards
+in [SYSTEM_RULES.md §4.2.0](./SYSTEM_RULES.md).
+
 ## Client Worktrees and Directive Propagation
 
 Use the root `main` worktree as the **orchestration and canonical-process worktree**. Perform client
@@ -140,7 +161,7 @@ Before dispatching a new client task:
    standard into a dirty, half-finished run.
 3. Merge the current local `main` into the client branch, resolve conflicts as a union of the client
    adaptation and the canonical correction, and record the resulting baseline commit in the client
-   `docs/project-overview.md` and `.claude/RUNBOOK.md`.
+   `docs/project-overview.md` and the client's standing `docs/RUNBOOK.md`.
 4. Read the canonical directive under `deliver/process/` first, then the client workflow instance
    and its documented deviations. A client workflow copied earlier is a snapshot, not a live link.
 5. Confirm that every required reference and lightweight tool exists inside the active worktree.

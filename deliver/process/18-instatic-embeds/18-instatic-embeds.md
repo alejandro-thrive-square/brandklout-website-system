@@ -117,7 +117,7 @@ Worth naming, because mixing them up sends people to the wrong file:
 | | What it is | Where it is set | What it gates |
 |---|---|---|---|
 | `PUBLIC_ORIGIN` | the site's canonical public origin(s) | env var on the **Instatic host** (Railway) | **the admin** — CSRF on every state-changing request. [`20-instatic-domain-origins`](../20-instatic-domain-origins/20-instatic-domain-origins.md) |
-| `INSTATIC_BASE_URL` | which site this toolkit talks to | per-worktree `.env` in this repo | which admin **our scripts** hit |
+| `INSTATIC_BASE_URL` | which site this toolkit talks to | the `[<client>]` section of `~/.webzite/.env`, generated into the worktree `.env` | which admin **our scripts** hit |
 | frame / script / connect origins | vendor hosts an embed may load | **this plugin's** settings, in the admin UI | the **published page's** CSP |
 
 Changing one never affects the others. `INSTATIC_BASE_URL` must be an origin that passes the `PUBLIC_ORIGIN` gate, or every script here starts failing with 403s that read like permissions problems — which is why the platform host must stay in `PUBLIC_ORIGIN` even after a client domain is added. Both live sites were repaired on 2026-08-28; see [`20-instatic-domain-origins`](../20-instatic-domain-origins/20-instatic-domain-origins.md).
@@ -161,7 +161,7 @@ Both run with no host, no network and no site. What they cannot prove is that th
 ## Technical Setup
 
 - **Executor status**: Working. The executor is the Node toolchain in this folder; `18-instatic-embeds.py` is a thin orchestrator over the documented sequence, in the same spirit as `07-webflow-build`.
-- **Credentials**: repo-root `.env` — `INSTATIC_BASE_URL`, `INSTATIC_EMAIL`, `INSTATIC_PASSWORD`. `lib/insta-api.mjs` walks up to find it. There is deliberately no default site.
+- **Credentials**: repo-root `.env` — `INSTATIC_BASE_URL`, `INSTATIC_EMAIL`, `INSTATIC_PASSWORD`. `lib/insta-api.mjs` walks up to find it. There is deliberately no default site. That `.env` is **generated** from `~/.webzite/.env` by `scripts/env-sync.mjs`: `INSTATIC_EMAIL` comes from `[shared]`, and `INSTATIC_BASE_URL` + the per-instance `INSTATIC_PASSWORD` from the client's own section. Add a missing value to the master, never to the worktree file — see [SYSTEM_RULES.md §4.2.2](../../../SYSTEM_RULES.md).
 - **Endpoints**: `POST /admin/api/cms/plugins/inspect-package`, `POST /admin/api/cms/plugins/package`, `GET|PUT /admin/api/cms/plugins/:id/settings`, `GET|PUT /admin/api/cms/site-document`, `POST /admin/api/cms/publish`.
 - **Origin**: promoted from `deliver/brandklout/dr-nahlah/workflows/16-instatic-plugins/` (built and proven there on `encorercm.com`, plugin v1.3.0). The client folder's numbering (`15`, `16`) predates this promotion and does not match canonical module numbers.
 

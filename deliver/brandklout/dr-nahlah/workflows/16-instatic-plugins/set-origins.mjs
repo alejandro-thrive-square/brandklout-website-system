@@ -11,7 +11,7 @@
  * so the `publish.html` filter sees the new values immediately. The pages
  * already published keep their old CSP until the site is republished.
  */
-import { api } from '../15-instatic-api-sync/insta-api.mjs'
+import { api } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
 const ID = 'webzite.embed-origins'
 const argOf = (flag) => {
