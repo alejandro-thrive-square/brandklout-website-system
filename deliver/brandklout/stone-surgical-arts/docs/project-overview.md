@@ -20,7 +20,7 @@ recorded here.
 
 | Field | Value |
 | :--- | :--- |
-| `process_baseline_commit` | `0eafef53` (local `main`, 2026-09-04) |
+| `process_baseline_commit` | `968cd4a9` (local `main`, merged as `260ac72b`, 2026-09-08) |
 | Routed modules | `00-client-delivery-initialization`, `01-content-intake`, `04-design`, `21-instatic-upload` |
 | Not routed | 02, 03, 05-20 — this is an Instatic build, not a Webflow one, so the Webflow phases (07, 08) and the Figma/migration modules do not apply |
 
@@ -58,7 +58,19 @@ website.
 - **Modules 00, 01 and 04 carry no `.md` directive.** The standard workflow structure is
   `.md` + `.py` + `TRIGGER_PROMPT.txt` + `.tmp/`; only `21-instatic-upload` has its directive.
 
-## Status
+## Current status, 2026-09-08
+
+The 12-page site published on September 4 is extended locally with a blog overview and three
+articles recovered from content intake, rendered through one article template. Local responsive
+and interaction tests pass; Instatic import and comparison are in progress. The older status
+notes below are historical and predate the twelve-page publication. See the current
+[runbook](RUNBOOK.md) and [blog provenance](../workflows/04-design/.tmp/surgical-arts/BLOG-CONTENT.md).
+
+Process refresh: merged current local main and reviewed canonical `04-design`; retained the
+client-local Instatic route and existing approved site design. The missing design directive is
+covered for this extension by `BLOG-CONTENT.md`; no Webflow conversion is part of this task.
+
+## Historical status
 
 **Stone Surgical Arts: the home page and one service page, as of 2026-09-01.** It was seven core
 pages on 2026-08-30 and eighteen on 2026-08-31. The client reviewed the site and kept the home page;

@@ -22,11 +22,14 @@ import fs from "node:fs";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 
+import { BLOG_PAGES, blogBody, addBlogSeo } from './blog-render.mjs';
+
 const SRC = path.dirname(fileURLToPath(import.meta.url));
 const OUT = path.resolve(SRC, "..", "final-site");
 const read = (p) => fs.readFileSync(path.join(SRC, p), "utf8");
 
 const seo = JSON.parse(read("seo.json"));
+addBlogSeo(seo);
 const head = read("partials/head.html");
 const navbar = read("partials/navbar.html");
 const drawer = read("partials/drawer.html");
@@ -82,6 +85,8 @@ const PAGES = [
   { slug: "face-and-neck-lift", src: "face-and-neck-lift", photoHero: true, motion: true, cta: false },
 ];
 
+PAGES.push(...BLOG_PAGES);
+
 /* --- bundles --------------------------------------------------------------
    A banner per file so the assembled output is still readable and a rule can be
    traced back to the component that owns it. */
@@ -114,7 +119,7 @@ function seoBlock(slug) {
     `<meta name="description" content="${esc(d.description)}">`,
     `<link rel="canonical" href="${url}">`,
     `<meta property="og:site_name" content="${esc(seo.site.name)}">`,
-    `<meta property="og:type" content="website">`,
+    `<meta property="og:type" content="${esc(d.ogType || "website")}">`,
     `<meta property="og:url" content="${url}">`,
     `<meta property="og:title" content="${esc(d.ogTitle || d.title)}">`,
     `<meta property="og:description" content="${esc(d.ogDescription || d.description)}">`,
@@ -192,7 +197,7 @@ for (const f of fs.readdirSync(path.join(SRC, "assets"))) {
 // which is the one section that exists everywhere. 2026-09-02.
 const built = [];
 for (const page of PAGES) {
-  const body = read(`pages/${page.src}.body.html`);
+  const body = blogBody(page.slug) ?? read(`pages/${page.src}.body.html`);
   // `aria-current="page"` rather than a class, in both the bar and the drawer.
   // 20-navbar.css already styles the attribute selector, so the marker is
   // meaningful to a screen reader first and visible second.

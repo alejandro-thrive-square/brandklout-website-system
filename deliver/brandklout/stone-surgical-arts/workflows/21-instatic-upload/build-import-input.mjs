@@ -29,6 +29,8 @@ import path from 'node:path'
 import zlib from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 
+import { BLOG_PAGES, addBlogSeo } from '../04-design/.tmp/surgical-arts/site-src/blog-render.mjs'
+
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const SITE = path.resolve(HERE, '../04-design/.tmp/surgical-arts')
 const FINAL = path.join(SITE, 'final-site')
@@ -76,6 +78,9 @@ const PAGES = [
   { file: 'myellevate-neck-lift.html', slug: 'myellevate-neck-lift', title: 'MyEllevate Neck Lift' },
   { file: 'face-and-neck-lift.html', slug: 'face-and-neck-lift', title: 'Face & Neck Lift' },
 ]
+
+addBlogSeo(seo)
+PAGES.push(...BLOG_PAGES.map(p => ({ file: p.slug + '.html', slug: p.slug, title: seo.pages[p.slug].title })))
 
 const problems = []
 

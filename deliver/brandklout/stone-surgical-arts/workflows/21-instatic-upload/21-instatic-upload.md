@@ -1,4 +1,4 @@
-# Workflow: 05 - Instatic Upload (Stone Surgical Arts)
+# Workflow: 21 - Instatic Upload (Stone Surgical Arts)
 
 Takes the static build in
 [`04-design/.tmp/surgical-arts/final-site`](../04-design/.tmp/surgical-arts/final-site) and puts it
@@ -54,6 +54,20 @@ registry rules, images in the media library.
 > **Integrity Rule**: Any change to the scripts or technical logic of this workflow must be
 > documented here immediately.
 
+## Blog extension, 2026-09-08
+
+The user authorized adding the overview and article pages locally and building/testing them on
+this Instatic instance. `BLOG_PAGES` in the design renderer feeds `build-import-input.mjs`,
+`verify-live.mjs` and `compare-live.mjs`, alongside the existing twelve routes. The content
+collection supplies three real recovered articles. See
+[content provenance and verification](../04-design/.tmp/surgical-arts/BLOG-CONTENT.md).
+
+Run `node ../04-design/.tmp/surgical-arts/site-src/blog-test.mjs --live` after the standard gates.
+It exercises the overview, every article and navigation at six widths, including 320 and 1920.
+The expected import has 16 pages and retains all 12 existing slugs. Confirm the actual remote
+slug set before using replace mode; `deletedPageIds` is empty by contract and is not proof that
+no existing rows would be deleted. The pre-task remote shell was sequence 26.
+
 ## The instance
 
 | | |
@@ -84,7 +98,12 @@ and `GET /admin/api/cms/setup/status` answered `needsSetup: true`. `POST /admin/
 > ```
 
 ```bash
-export RAILWAY_LINK_DIR=/path/to/a/dir/linked/to/the/Stone/project   # railway link -w Brandklout -p "Stone Surgical Arts"
+export RAILWAY_LINK_DIR=/path/to/a/dir/linked/to/the/project
+                               # railway link -p b3cae5d8-5f45-4e5c-8bfb-03113bb45327 \
+                               #              -s "Stone Surgical Arts" -e production
+                               # Link by project ID, never by the name "Stone": there are THREE
+                               # Stone projects. ship.sh runs check-link.mjs first and refuses a
+                               # link dir that does not serve INSTATIC_BASE_URL
 
 node install-fonts.mjs --apply  # 0. ONCE per instance: the two typefaces into Instatic's
                                #    own library. See trap 16
@@ -108,6 +127,34 @@ node compare-live.mjs           # 7. GATE — diffs the published pages against 
 the routes and assets resolve; `compare-live.mjs` asks whether the page still LOOKS like the build.
 Two defects shipped through a clean `verify-live.mjs` run and were caught by the comparison: a
 `width` the converter dropped, and a background colour that changed because the cascade was rebuilt.
+
+### The link guard, and the three ways the Railway target gets crossed
+
+`ship.sh` runs `check-link.mjs` as step 0 and refuses to ship if it fails. The invariant it
+enforces: **the linked Railway project and environment must actually serve `INSTATIC_BASE_URL`** —
+the same host `insta-api.mjs` resolves `BASE` from, so ship.sh and push-site.mjs cannot end up
+pointing at two different sites. It reads that host per-worktree, so it needs no per-client table
+here and stays correct when this toolkit is copied to the next client, which is the failure mode it
+exists for.
+
+It was written after the med spa worktree was found carrying this directive's own
+`railway link -p "Stone Surgical Arts"` line, four lines above a script that would have shipped the
+med spa's payload into the Surgical Arts container and run the importer there.
+
+Three separate mechanisms can point `railway` at the wrong instance. Only the first is obvious:
+
+1. **`$RAILWAY_LINK_DIR` copied from a sibling worktree.** `ship.sh` has no other source of truth —
+   every `railway ssh` runs `cd "$RAILWAY_LINK_DIR"`. This is what the guard checks.
+2. **`RAILWAY_PROJECT_ID` in the environment outranks the link dir entirely.** Standing in a
+   directory linked to Stone Surgical Arts with the med spa's value exported, `railway status`
+   reports *Stone Med Spa*. It is in the worktree `.env`, so `set -a; . .env` in the shell you run
+   `ship.sh` from is enough to do it. The guard names the variable when this happens.
+3. **`RAILWAY_TOKEN` in the worktree `.env` is stale and overrides the CLI's own stored auth.** Any
+   script that loads `.env` and then shells out to `railway` dies with `Invalid RAILWAY_TOKEN`, from
+   a CLI that works by hand a second later. `check-link.mjs` drops the RAILWAY_* values it injected
+   before spawning `railway`, so it observes the environment `ship.sh` will really have.
+
+Link by **project ID, never by the name "Stone"** — there are three Stone projects.
 
 ## Why the conversion runs on the container
 
@@ -553,6 +600,50 @@ and local did not.
 **Appending to the bottom of a stylesheet is the habit that causes this.** Six of these files end
 in an `@media` block. A new base rule goes above it.
 
+### 27. The published page picks a different font INSTANCE once scripts run
+
+Found on 2026-09-08, on the first pages with long prose. With scripts off the local build and the
+published page agree to the pixel on all sixteen routes. Turn scripts on and the published article
+is ~30px shorter: one body paragraph sets in two lines live and three lines locally.
+
+The cause is not the font files, and the list of things it is *not* is worth keeping, because every
+one of them looks like the answer:
+
+- **Not the binaries.** Instatic ignores `assets/fonts` entirely and serves its own
+  `/uploads/fonts/<family>/<weight>-latin-0.woff2` — one variable file covering all four Inter
+  weights against our four static subsets, so the bytes genuinely differ (trap 16). Irrelevant:
+  with scripts off the two already measure identically. Swapping the local files for Instatic's
+  changes nothing, and it silently overwrote seven untracked `.woff2` files to prove it —
+  `*.woff2` is in `.gitignore`, so there is no `git checkout` back. Regenerate with
+  `node site-src/get-fonts.mjs --force`, or copy from `site-src/assets/fonts`, which the build
+  copies *from* and which therefore still holds the originals.
+- **Not BugHerd.** Blocking `bugherd.com` leaves the difference exactly as it was.
+- **Not an injected stylesheet.** The four Instatic stylesheets carry seven `@font-face` rules
+  between them, all same-origin, none with a `local()` source.
+- **Not `document.fonts.add()`.** Hooking it ahead of every page script records zero calls, and
+  `document.adoptedStyleSheets` is empty.
+- **Not a third-party webfont.** The page never touches `fonts.gstatic.com`; the same six font
+  files load with scripts on and off.
+- **Not layout.** The paragraph is 640px wide either way, at the same size, line-height,
+  letter-spacing, word-spacing and weight.
+
+What actually changes is which *instance* of the same downloaded file gets rasterised.
+`CSS.getPlatformFontsForNode` reports `postScriptName` **`Inter`** (171 glyphs) with scripts off
+and **`Inter-Regular`** (172 glyphs) with scripts on. A 64-character string measures 480.41px
+against 479.80px — 0.13% narrower, about **0.6px per line**. That is invisible on its own and only
+surfaces where a long paragraph already sits on a line-break boundary, which is why the twelve
+original pages never showed it and the first long-prose pages did immediately.
+
+> **The tell is a geometry finding that appears only with scripts on, only on prose, and only as a
+> whole-line jump.** Run `node font-instance-probe.mjs <slug>`. Differing `postScriptName` between
+> its two blocks is this condition, not a regression. Nothing in this repository controls it; it is
+> the platform's font resolution.
+
+So the **gate stays `compare-live.mjs` with scripts off**, which is deterministic and passes.
+`--runtime-layout` re-measures geometry with scripts on and therefore reports this on every
+prose-heavy page — it is a **diagnostic, not a gate**. Do not silence it with a `BENIGN` entry: a
+tolerance wide enough to swallow a whole line is wide enough to swallow a real regression.
+
 ### The check: `compare-live.mjs`
 
 ```bash
@@ -560,7 +651,14 @@ node compare-live.mjs                 # both pages, 1440 and 390
 node compare-live.mjs neck-lift 390   # one page, one width
 node compare-live.mjs --shots         # also write viewport PNG pairs
 COMPARE_PORT=8837 node compare-live.mjs   # when 8821 is held, see below
+
+node compare-live.mjs --runtime-layout    # DIAGNOSTIC, not a gate. See trap 27.
+node font-instance-probe.mjs <slug>       # why --runtime-layout reports prose. Trap 27.
 ```
+
+Every flag has to be filtered out of `args` inside the script, not merely recognised: the slug test
+is `/^[a-z-]+$/`, which a long flag matches happily, so an unfiltered `--runtime-layout` silently
+became the entire page list until this was fixed on 2026-09-08.
 
 **It serves the local build on 8821, and an interrupted run leaves that server behind.** The next
 run then dies on `EADDRINUSE` before comparing anything, which looks like a broken tool. `PORT` reads

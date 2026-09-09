@@ -17,6 +17,7 @@
  *
  * Usage: node verify-live.mjs
  */
+import { BLOG_PAGES } from '../04-design/.tmp/surgical-arts/site-src/blog-render.mjs'
 const BASE = 'https://stone-surgical-arts-production.up.railway.app'
 
 /* THREE ROUTES, since the blepharoplasty was published on 2026-09-01. This was
@@ -43,6 +44,8 @@ const ROUTES = ['/', '/neck-lift', '/blepharoplasty', '/treatments', '/meet-the-
    deleted, and this list is what turns the cut from "we did not upload them"
    into a checked outcome. FIFTEEN now: `/blepharoplasty` was rebuilt and moved
    to ROUTES the same day. Move a slug across rather than adding it to both. */
+ROUTES.push(...BLOG_PAGES.map(p => '/' + p.slug))
+
 const GONE = [
   '/brow-lift',
   '/buccal-fat-reduction',

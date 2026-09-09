@@ -53,6 +53,8 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 import puppeteer from 'puppeteer-core'
 
+import { BLOG_PAGES } from '../04-design/.tmp/surgical-arts/site-src/blog-render.mjs'
+
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const LOCAL_ROOT = path.resolve(HERE, '../04-design/.tmp/surgical-arts/final-site')
 const SHOTS = path.join(HERE, '.tmp', 'compare')
@@ -84,9 +86,13 @@ loadEnv()
 const REMOTE = (process.env.INSTATIC_BASE_URL || '').replace(/\/$/, '')
 if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
-const args = process.argv.slice(2).filter((a) => a !== '--shots')
+/* Every flag has to be filtered out of `args` here, not just recognised below:
+   the slug test is /^[a-z-]+$/, which a long flag like `--runtime-layout`
+   matches happily, and an unfiltered flag silently becomes the page list. */
+const args = process.argv.slice(2).filter((a) => !a.startsWith('--'))
 const wantShots = process.argv.includes('--shots')
-const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index', 'neck-lift', 'blepharoplasty', 'treatments', 'meet-the-doctor', 'about', 'team', 'memberships', 'results', 'book', 'myellevate-neck-lift', 'face-and-neck-lift']
+const RUNTIME_LAYOUT = process.argv.includes('--runtime-layout')
+const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index', 'neck-lift', 'blepharoplasty', 'treatments', 'meet-the-doctor', 'about', 'team', 'memberships', 'results', 'book', 'myellevate-neck-lift', 'face-and-neck-lift', ...BLOG_PAGES.map(p => p.slug)]
 const WIDTHS = args.find((a) => /^\d+$/.test(a)) ? [Number(args.find((a) => /^\d+$/.test(a)))] : [1440, 390]
 
 /* The properties worth comparing. Deliberately wide: the failures this exists
@@ -304,8 +310,12 @@ for (const slug of PAGES) {
 
   for (const width of WIDTHS) {
     const height = width < 700 ? 844 : 900
-    const a = await capture(browser, localUrl, width, height, false)
-    const b = await capture(browser, liveUrl, width, height, false)
+    const a = await capture(browser, localUrl, width, height, RUNTIME_LAYOUT)
+    const b = await capture(browser, liveUrl, width, height, RUNTIME_LAYOUT)
+    if (RUNTIME_LAYOUT) {
+      a.data = await a.pg.evaluate(PROBE, PROPS)
+      b.data = await b.pg.evaluate(PROBE, PROPS)
+    }
 
     // --- structure
     const keysA = Object.keys(a.data.styles)
