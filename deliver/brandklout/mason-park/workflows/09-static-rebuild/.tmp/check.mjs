@@ -25,6 +25,11 @@
 //      second implementation of the measurement is how a win got hidden once.
 //   6. every id is unique, and every in-page #anchor resolves
 //   7. every img carries a non-empty alt
+//   8. the container tags balance. CSS braces were already checked and HTML
+//      tags were not, which left the more likely mistake unguarded: every
+//      page body under home/ is hand-authored, and an unclosed <div> does not
+//      throw -- the browser silently reparents everything after it and the
+//      layout quietly goes wrong at one breakpoint.
 // ===========================================================================
 import fs from "node:fs";
 import path from "node:path";
@@ -174,6 +179,37 @@ for (const file of pages) {
   console.log("  images: " + imgs + " on the page, " +
     ((inMain.match(/<img\b/g) || []).length) + " inside <main>");
   if (noAlt) warn(rel, noAlt + " image(s) with an empty alt and no aria-hidden");
+
+  // ---- 8. container tags balance
+  //
+  // Void elements (img, br, meta, ...) are never counted. This is a count and
+  // not a parse: <div><p></div></p> balances and is still wrong. It exists for
+  // the mistake that actually happens in a hand-authored body, which is a
+  // close tag simply missing.
+  // ONE regex literal, deliberately. Building these with `new RegExp("...\s...")`
+  // loses a backslash level on the way through whatever wrote the file, and the
+  // result is a regex that matches almost nothing while reporting confidently --
+  // `[\s>]` silently became `[s>]` the first time this was written. Same failure
+  // as the heredoc rule in the README. Never construct these from strings.
+  //
+  // Comments and <script>/<style> bodies are stripped first: the authored
+  // comments in these pages talk about `<div>` and `<details>` constantly, and
+  // counting those would make the gate cry wolf on every page.
+  const markup = html
+    .replace(/<!--[\s\S]*?-->/g, "")
+    .replace(/<script\b[\s\S]*?<\/script>/gi, "")
+    .replace(/<style\b[\s\S]*?<\/style>/gi, "");
+  const VOID = new Set(["img", "br", "hr", "meta", "link", "input", "source",
+    "area", "base", "col", "embed", "param", "track", "wbr"]);
+  const depth = new Map();
+  for (const m of markup.matchAll(/<(\/?)([a-zA-Z][a-zA-Z0-9]*)(?=[\s/>])/g)) {
+    const tag = m[2].toLowerCase();
+    if (VOID.has(tag)) continue;
+    depth.set(tag, (depth.get(tag) || 0) + (m[1] ? -1 : 1));
+  }
+  for (const [tag, d] of [...depth].sort()) {
+    if (d !== 0) fail(rel, "<" + tag + "> unbalanced: " + (d > 0 ? d + " unclosed" : -d + " stray close"));
+  }
 }
 
 // ---- 2. the stylesheet, once
