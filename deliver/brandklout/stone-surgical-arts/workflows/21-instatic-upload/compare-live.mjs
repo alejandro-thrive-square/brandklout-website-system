@@ -378,12 +378,24 @@ for (const slug of PAGES) {
       note(slug, width, 'text', `diverges at char ${i} of ${A.length}/${B.length}\n        local "${A.slice(i, i + 90)}"\n        live  "${B.slice(i, i + 90)}"`)
     }
 
-    if (wantShots) {
-      fs.mkdirSync(SHOTS, { recursive: true })
-      await a.pg.screenshot({ path: path.join(SHOTS, `${slug}-${width}-local.png`), fullPage: false })
-      await b.pg.screenshot({ path: path.join(SHOTS, `${slug}-${width}-live.png`), fullPage: false })
+    /* The two pages have to close even when a screenshot throws. They did not,
+       and that is why `--shots` died partway through a full run with
+       `Page.captureScreenshot timed out`: one slow capture leaked its pair,
+       the next inherited a browser with more open pages, and the timeouts
+       compounded until Chrome gave up. A single failed shot is worth a warning,
+       not the whole comparison. */
+    try {
+      if (wantShots) {
+        fs.mkdirSync(SHOTS, { recursive: true })
+        await a.pg.screenshot({ path: path.join(SHOTS, `${slug}-${width}-local.png`), fullPage: false })
+        await b.pg.screenshot({ path: path.join(SHOTS, `${slug}-${width}-live.png`), fullPage: false })
+      }
+    } catch (e) {
+      note(slug, width, 'screenshot', String(e.message || e).split('\n')[0])
+    } finally {
+      await a.pg.close().catch(() => {})
+      await b.pg.close().catch(() => {})
     }
-    await a.pg.close(); await b.pg.close()
   }
 
   // --- runtime, once per page at the desktop width

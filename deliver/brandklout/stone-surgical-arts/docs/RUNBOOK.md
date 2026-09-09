@@ -6,14 +6,20 @@ then only the runs you need. Do not read them all.
 
 ## Where it stands
 
-Sixteen routes are built and published to Instatic, served from Railway at
+Fifty-two routes are built and published to Instatic, served from Railway at
 `https://stone-surgical-arts-production.up.railway.app`.
 
 | | |
 | :--- | :--- |
 | Twelve practice pages | `/`, `/neck-lift`, `/blepharoplasty`, `/treatments`, `/meet-the-doctor`, `/about`, `/team`, `/memberships`, `/results`, `/book`, `/myellevate-neck-lift`, `/face-and-neck-lift` |
-| The journal, since 2026-09-08 | `/blog`, `/dermal-fillers-vs-botox`, `/types-of-plastic-surgery`, `/why-do-people-get-plastic-surgery` |
+| The journal | `/blog` plus **39 articles**: 3 from the Wayback recovery on 2026-09-08, 36 more from the client's own site backup on 2026-09-09 |
 | Eight retired routes | checked gone on every `verify-live` run |
+
+The journal is the whole of the old site's archive. Content provenance, and the substantial list of
+what was removed from the originals on the way in, is in
+[`BLOG-CONTENT.md`](../workflows/04-design/.tmp/surgical-arts/BLOG-CONTENT.md). Read it before
+editing any article: several of the removals are there for medico-legal reasons, not stylistic
+ones.
 
 The build lives in `workflows/04-design/.tmp/surgical-arts/` — author in `site-src/`, never in
 `final-site/`, which `build-site.mjs` regenerates. The publish lives in
@@ -24,8 +30,14 @@ The build lives in `workflows/04-design/.tmp/surgical-arts/` — author in `site
 All three pass as of `ce2a4f03` (2026-09-08). Run them in this order.
 
 ```bash
+# 0. the journal data is sound, before anything is built from it
+cd workflows/04-design/.tmp/surgical-arts/site-src
+node blog-validate.mjs                 # add --check-refs to request every cited URL
+
 # 1. the local build is internally sound
-cd workflows/04-design/.tmp/surgical-arts/site-src && node blog-test.mjs      # 27 checks
+node build-site.mjs && node audit.mjs && node check-copy.mjs
+node all-pages.mjs                     # 52 pages x 3 widths
+node blog-test.mjs                     # 243 checks
 
 # 2. the published routes are healthy and every asset resolves
 cd workflows/21-instatic-upload && node verify-live.mjs                       # ends "FAIL  none"
