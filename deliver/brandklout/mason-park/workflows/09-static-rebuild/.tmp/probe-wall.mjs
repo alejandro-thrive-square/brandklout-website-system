@@ -47,7 +47,9 @@ const fail = (m) => { bad++; console.log("  FAIL " + m); };
   if (over > 0) fail("horizontal overflow with every cell open: " + over + "px");
   console.log("  overflow with all open: " + over + "px");
   fs.mkdirSync("shots", { recursive: true });
-  await page.locator("#named").scrollIntoViewIfNeeded();
+  // The Named chapter was removed on 2026-09-10 (BugHerd #44); the wall half
+  // of this probe is then a no-op rather than a failure.
+  if (await page.locator("#named").count()) await page.locator("#named").scrollIntoViewIfNeeded();
   await page.waitForTimeout(400);
   await page.screenshot({ path: path.resolve("shots", "probe-wall-open.png") });
   await page.close();

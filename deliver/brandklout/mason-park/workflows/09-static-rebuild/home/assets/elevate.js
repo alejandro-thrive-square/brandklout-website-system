@@ -116,6 +116,36 @@
     });
   }
 
+  /* --- the stack, flipping ---------------------------------------------------
+     BugHerd #2 (2026-09-10): "it feels like it should either flip through the
+     photos or link to the team page." It does both: the stack is an <a> to
+     the team page in the markup, and the TOP frame swaps its photograph every
+     few seconds, cycling through all three, with a short fade. Only the top
+     frame changes, so the GSAP fan above is untouched (it writes transforms,
+     this writes innerHTML). No GSAP needed; paused under reduced motion, while
+     the pointer is over it, and while the tab is hidden. */
+  function stackCycle() {
+    var el = $(".el-stack");
+    if (!el || reduce) return;
+    var frames = $$(".el-stack_frame", el);
+    if (frames.length < 2) return;
+    var top = frames[frames.length - 1];
+    var shots = frames.map(function (f) { return f.innerHTML; });
+    var at = frames.length - 1, paused = false, timer;
+    el.addEventListener("mouseenter", function () { paused = true; });
+    el.addEventListener("mouseleave", function () { paused = false; });
+    function flip() {
+      if (paused || document.hidden) return;
+      at = (at + 1) % shots.length;
+      top.classList.add("is-flipping");
+      timer = setTimeout(function () {
+        top.innerHTML = shots[at];
+        top.classList.remove("is-flipping");
+      }, 420);
+    }
+    setInterval(flip, 3800);
+  }
+
   /* --- the columns ---------------------------------------------------------
      A photo wall in three columns. Scroll moves the outer columns up and the
      middle one down, at three speeds, so the wall slides against itself.
@@ -244,12 +274,16 @@
       var items = $$(".el-pillar", rootEl);
       items.forEach(function (p, i) {
         var frame = $(".el-pillar_frame", p), copy = $(".el-pillar_copy", p);
-        // each pillar's window starts a little later than the one before it,
-        // so the three open left to right as the row rises through the screen
-        if (frame) gsap.fromTo(frame, { clipPath: "inset(100% 0 0 0)" }, { clipPath: "inset(0% 0 0 0)", ease: "none",
-          scrollTrigger: { trigger: rootEl, start: "top " + (88 - i * 12) + "%", end: "top " + (36 - i * 6) + "%", scrub: 0.5 } });
+        // The three used to open left to right, each clipped from the top on
+        // its own later window. A reviewer caught the row mid-scroll and read
+        // the three different clip heights as a broken layout (BugHerd #38,
+        // 2026-09-10), and a screenshot cannot tell the two apart. So the three
+        // now rise together, unclipped: same window, a fade and a lift, the
+        // copy a beat behind its frame.
+        if (frame) gsap.fromTo(frame, { opacity: 0, y: 36 }, { opacity: 1, y: 0, ease: "none",
+          scrollTrigger: { trigger: rootEl, start: "top 88%", end: "top 52%", scrub: 0.5 } });
         if (copy) gsap.fromTo(copy, { opacity: 0, y: 24 }, { opacity: 1, y: 0, ease: "none",
-          scrollTrigger: { trigger: rootEl, start: "top " + (66 - i * 12) + "%", end: "top " + (30 - i * 6) + "%", scrub: 0.5 } });
+          scrollTrigger: { trigger: rootEl, start: "top 74%", end: "top 40%", scrub: 0.5 } });
       });
     });
   }
@@ -282,6 +316,11 @@
     $$(".el-seal").forEach(function (el) {
       var text = (el.getAttribute("data-text") || el.textContent || "").trim();
       if (!text) return;
+      // An <img> child is the mark (the practice's tree, since 2026-09-10,
+      // BugHerd #36/#48). It has to be a real element in the markup rather
+      // than a data- attribute, because the Instatic exporter only rewrites
+      // media paths it finds in src/srcset.
+      var markImg = $("img", el);
       var chars = text.split("");
       el.textContent = "";
       var ring = document.createElement("span");
@@ -297,7 +336,8 @@
       var mark = document.createElement("span");
       mark.className = "el-seal_mark";
       mark.setAttribute("aria-hidden", "true");
-      mark.textContent = el.getAttribute("data-mark") || "MP";
+      if (markImg) mark.appendChild(markImg);
+      else mark.textContent = el.getAttribute("data-mark") || "MP";
       el.appendChild(mark);
       if (!useGsap) return;
       gsap.to(ring, { rotate: 360, ease: "none", scrollTrigger: { trigger: el.parentNode, start: "top bottom", end: "bottom top", scrub: 1 } });
@@ -424,6 +464,7 @@
     seal();
     tilt();
     blog();
+    stackCycle();
     if (useGsap) {
       parallax();
       stack();

@@ -95,8 +95,10 @@ for (const slug of fs.readdirSync(SERVICES)) {
 
   // 2. the portrait
   if (html.includes("DrWilliamSung-230x300-1.webp")) {
-    html = html.replace(/<img src="[^"]*DrWilliamSung-230x300-1\.webp"[^>]*>/, '{{img slug="dr-sung" sizes="(max-width: 767px) 100vw, 24rem"}}');
-    notes.push("portrait -> dr-sung");
+    // dr-sung-standing since 2026-09-10 (BugHerd #16): the studio portrait had
+    // his arms crossed; the standing frame from the same site does not.
+    html = html.replace(/<img src="[^"]*DrWilliamSung-230x300-1\.webp"[^>]*>/, '{{img slug="dr-sung-standing" sizes="(max-width: 767px) 100vw, 24rem"}}');
+    notes.push("portrait -> dr-sung-standing");
   }
 
   if (html !== before) {

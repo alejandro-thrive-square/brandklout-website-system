@@ -239,6 +239,96 @@
       }
     ]
   },
+  "team-huddle": {
+    "frame": 134,
+    "alt": "The team gathered at the front desk before the doors open",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 308,
+        "file": "mp-team-huddle-410x308.jpg",
+        "bytes": 50409
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "file": "mp-team-huddle-768x576.jpg",
+        "bytes": 136299
+      },
+      {
+        "w": 1024,
+        "h": 769,
+        "file": "mp-team-huddle-1024x769.jpg",
+        "bytes": 217316
+      },
+      {
+        "w": 1536,
+        "h": 1153,
+        "file": "mp-team-huddle-1536x1153.jpg",
+        "bytes": 399470
+      }
+    ]
+  },
+  "team-window-smile": {
+    "frame": 85,
+    "alt": "One of the clinical team between appointments, by the window",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 308,
+        "file": "mp-team-window-smile-410x308.jpg",
+        "bytes": 39785
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "file": "mp-team-window-smile-768x576.jpg",
+        "bytes": 97632
+      },
+      {
+        "w": 1024,
+        "h": 769,
+        "file": "mp-team-window-smile-1024x769.jpg",
+        "bytes": 148970
+      },
+      {
+        "w": 1536,
+        "h": 1153,
+        "file": "mp-team-window-smile-1536x1153.jpg",
+        "bytes": 264115
+      }
+    ]
+  },
+  "desk-checkin-pair": {
+    "frame": 33,
+    "alt": "A mother and daughter checking in at the front desk",
+    "sizes": [
+      {
+        "w": 410,
+        "h": 308,
+        "file": "mp-desk-checkin-pair-410x308.jpg",
+        "bytes": 34914
+      },
+      {
+        "w": 768,
+        "h": 576,
+        "file": "mp-desk-checkin-pair-768x576.jpg",
+        "bytes": 92537
+      },
+      {
+        "w": 1024,
+        "h": 769,
+        "file": "mp-desk-checkin-pair-1024x769.jpg",
+        "bytes": 148415
+      },
+      {
+        "w": 1536,
+        "h": 1153,
+        "file": "mp-desk-checkin-pair-1536x1153.jpg",
+        "bytes": 278455
+      }
+    ]
+  },
   "kid-xray-smile": {
     "frame": 131,
     "alt": "A dentist smiling with a young patient before a digital x-ray",
@@ -289,7 +379,7 @@
         "w": 1024,
         "h": 1364,
         "file": "mp-kid-xray-1024x1364.jpg",
-        "bytes": 236337
+        "bytes": 236357
       },
       {
         "w": 1536,
@@ -415,7 +505,7 @@
         "w": 1536,
         "h": 1153,
         "file": "mp-kid-toy-machine-2-1536x1153.jpg",
-        "bytes": 280725
+        "bytes": 280713
       }
     ]
   },
@@ -469,13 +559,13 @@
         "w": 1024,
         "h": 1365,
         "file": "mp-kid-shelf-small-1024x1365.jpg",
-        "bytes": 338877
+        "bytes": 338906
       },
       {
         "w": 1536,
         "h": 2048,
         "file": "mp-kid-shelf-small-1536x2048.jpg",
-        "bytes": 684329
+        "bytes": 684895
       }
     ]
   },
@@ -649,7 +739,7 @@
         "w": 1024,
         "h": 1364,
         "file": "mp-desk-call-2-1024x1364.jpg",
-        "bytes": 346693
+        "bytes": 346690
       },
       {
         "w": 1536,
@@ -1165,7 +1255,7 @@
         "w": 1536,
         "h": 2046,
         "file": "mp-ceiling-screen-1536x2046.jpg",
-        "bytes": 855049
+        "bytes": 855072
       }
     ]
   },
@@ -1345,7 +1435,7 @@
         "w": 1536,
         "h": 2046,
         "file": "mp-hygienist-working-5-1536x2046.jpg",
-        "bytes": 676448
+        "bytes": 676436
       }
     ]
   },
@@ -1615,7 +1705,7 @@
         "w": 1536,
         "h": 2046,
         "file": "mp-pediatric-room-1536x2046.jpg",
-        "bytes": 645339
+        "bytes": 645345
       }
     ]
   },
@@ -1799,964 +1889,34 @@
       }
     ]
   },
-  "dr-sung": {
-    "frame": "grand-mission",
+  "dr-sung-standing": {
+    "frame": "external",
     "alt": "Dr. William Sung, DMD",
-    "source": "grandmissiondentistry.com (Dr. Sung's own practice site), 3703x4000 original, fetched 2026-09-10",
+    "source": "grandmissiondentistry.com, GrandMissionDentistry(15of28).webp 3931x5241, Dr. Sung beside Dr. Nguyen, cropped to him (1400px wide, the 1536 candidate is a 10% upscale); fetched 2026-09-10 for BugHerd #16 (no crossed arms)",
     "sizes": [
       {
         "w": 410,
         "h": 546,
-        "file": "mp-dr-sung-410x546.jpg",
-        "bytes": 21862
+        "file": "mp-dr-sung-standing-410x546.jpg",
+        "bytes": 26041
       },
       {
         "w": 768,
         "h": 1023,
-        "file": "mp-dr-sung-768x1023.jpg",
-        "bytes": 57723
+        "file": "mp-dr-sung-standing-768x1023.jpg",
+        "bytes": 66596
       },
       {
         "w": 1024,
         "h": 1364,
-        "file": "mp-dr-sung-1024x1364.jpg",
-        "bytes": 92445
+        "file": "mp-dr-sung-standing-1024x1364.jpg",
+        "bytes": 107070
       },
       {
         "w": 1536,
         "h": 2046,
-        "file": "mp-dr-sung-1536x2046.jpg",
-        "bytes": 177010
-      }
-    ]
-  },
-  "stock-crown": {
-    "frame": "unsplash",
-    "alt": "A ceramic crown seated on a dental model",
-    "source": "Unsplash photo-1609918438269-9a4c5f8fe3a4 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-crown-410x273.jpg",
-        "bytes": 9119
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-crown-768x512.jpg",
-        "bytes": 32495
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-crown-1024x683.jpg",
-        "bytes": 64314
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-crown-1536x1024.jpg",
-        "bytes": 170167
-      }
-    ]
-  },
-  "stock-bridge": {
-    "frame": "unsplash",
-    "alt": "Crowns on a plaster cast, before fitting",
-    "source": "Unsplash photo-1660300110556-fa3ccf6f4eb1 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-bridge-410x273.jpg",
-        "bytes": 11335
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-bridge-768x512.jpg",
-        "bytes": 29778
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-bridge-1024x683.jpg",
-        "bytes": 48612
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-bridge-1536x1024.jpg",
-        "bytes": 102130
-      }
-    ]
-  },
-  "stock-molar": {
-    "frame": "unsplash",
-    "alt": "The chewing surface of a molar, with its grooves",
-    "source": "Unsplash photo-1658053734960-789e370a2fd5 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-molar-410x273.jpg",
-        "bytes": 7557
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-molar-768x512.jpg",
-        "bytes": 18396
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-molar-1024x683.jpg",
-        "bytes": 29254
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-molar-1536x1024.jpg",
-        "bytes": 60053
-      }
-    ]
-  },
-  "stock-implant": {
-    "frame": "unsplash",
-    "alt": "A cutaway model of a dental implant beside natural teeth",
-    "source": "Unsplash photo-1593022356769-11f762e25ed9 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-implant-410x273.jpg",
-        "bytes": 16012
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-implant-768x512.jpg",
-        "bytes": 40256
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-implant-1024x683.jpg",
-        "bytes": 63696
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-implant-1536x1024.jpg",
-        "bytes": 125199
-      }
-    ]
-  },
-  "stock-implant-scan": {
-    "frame": "unsplash",
-    "alt": "A gloved hand pointing at a 3D scan of the jaw on a tablet",
-    "source": "Unsplash photo-1600170311833-c2cf5280ce49 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-implant-scan-410x273.jpg",
-        "bytes": 24553
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-implant-scan-768x512.jpg",
-        "bytes": 59365
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-implant-scan-1024x683.jpg",
-        "bytes": 91821
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-implant-scan-1536x1024.jpg",
-        "bytes": 179096
-      }
-    ]
-  },
-  "stock-xray": {
-    "frame": "unsplash",
-    "alt": "A dentist reading a set of x-rays on a light box",
-    "source": "Unsplash photo-1588776814546-1ffcf47267a5 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-xray-410x273.jpg",
-        "bytes": 18156
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-xray-768x512.jpg",
-        "bytes": 45953
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-xray-1024x683.jpg",
-        "bytes": 72081
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-xray-1536x1024.jpg",
-        "bytes": 136781
-      }
-    ]
-  },
-  "stock-aligner-fit": {
-    "frame": "unsplash",
-    "alt": "A clear aligner being seated over the teeth",
-    "source": "Unsplash photo-1777793636393-a0fec488f3fb (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-aligner-fit-410x273.jpg",
-        "bytes": 15569
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-aligner-fit-768x512.jpg",
-        "bytes": 38455
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-aligner-fit-1024x683.jpg",
-        "bytes": 59719
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-aligner-fit-1536x1024.jpg",
-        "bytes": 108295
-      }
-    ]
-  },
-  "stock-aligner": {
-    "frame": "unsplash",
-    "alt": "A clear aligner on a white surface",
-    "source": "Unsplash photo-1590062033099-a43ac5f82979 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-aligner-410x273.jpg",
-        "bytes": 6253
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-aligner-768x512.jpg",
-        "bytes": 17563
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-aligner-1024x683.jpg",
-        "bytes": 29079
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-aligner-1536x1024.jpg",
-        "bytes": 58651
-      }
-    ]
-  },
-  "stock-white-smile": {
-    "frame": "unsplash",
-    "alt": "A close smile in profile",
-    "source": "Unsplash photo-1677026010083-78ec7f1b84ed (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-white-smile-410x273.jpg",
-        "bytes": 8738
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-white-smile-768x512.jpg",
-        "bytes": 30746
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-white-smile-1024x683.jpg",
-        "bytes": 57531
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-white-smile-1536x1024.jpg",
-        "bytes": 130918
-      }
-    ]
-  },
-  "stock-red-smile": {
-    "frame": "unsplash",
-    "alt": "A close smile",
-    "source": "Unsplash photo-1769559893692-c6d0623bf8e4 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-red-smile-410x273.jpg",
-        "bytes": 15620
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-red-smile-768x512.jpg",
-        "bytes": 51450
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-red-smile-1024x683.jpg",
-        "bytes": 90120
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-red-smile-1536x1024.jpg",
-        "bytes": 190523
-      }
-    ]
-  },
-  "stock-veneers": {
-    "frame": "unsplash",
-    "alt": "Four porcelain veneers on a black surface",
-    "source": "Unsplash photo-1660300110427-c4a6efdf18b5 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-veneers-410x273.jpg",
-        "bytes": 7074
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-veneers-768x512.jpg",
-        "bytes": 17872
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-veneers-1024x683.jpg",
-        "bytes": 30305
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-veneers-1536x1024.jpg",
-        "bytes": 70033
-      }
-    ]
-  },
-  "stock-denture": {
-    "frame": "unsplash",
-    "alt": "A full denture on a white table",
-    "source": "Unsplash photo-1620775997990-ee3c25938b4c (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-denture-410x273.jpg",
-        "bytes": 8608
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-denture-768x512.jpg",
-        "bytes": 20065
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-denture-1024x683.jpg",
-        "bytes": 31590
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-denture-1536x1024.jpg",
-        "bytes": 63896
-      }
-    ]
-  },
-  "stock-tooth-model": {
-    "frame": "unsplash",
-    "alt": "A dentist holding a cutaway model of a tooth",
-    "source": "Unsplash photo-1777793389944-f7165259a05c (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-tooth-model-410x273.jpg",
-        "bytes": 18921
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-tooth-model-768x512.jpg",
-        "bytes": 45985
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-tooth-model-1024x683.jpg",
-        "bytes": 70490
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-tooth-model-1536x1024.jpg",
-        "bytes": 127176
-      }
-    ]
-  },
-  "stock-tooth": {
-    "frame": "unsplash",
-    "alt": "A single extracted tooth against black",
-    "source": "Unsplash photo-1655149141664-b1d35c547c45 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-tooth-410x273.jpg",
-        "bytes": 3455
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-tooth-768x512.jpg",
-        "bytes": 7639
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-tooth-1024x683.jpg",
-        "bytes": 11786
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-tooth-1536x1024.jpg",
-        "bytes": 22429
-      }
-    ]
-  },
-  "stock-tray": {
-    "frame": "unsplash",
-    "alt": "Sterile instruments laid out on a tray",
-    "source": "Unsplash photo-1619988252418-a1e6ee10b122 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-tray-410x273.jpg",
-        "bytes": 14951
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-tray-768x512.jpg",
-        "bytes": 34151
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-tray-1024x683.jpg",
-        "bytes": 51201
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-tray-1536x1024.jpg",
-        "bytes": 93471
-      }
-    ]
-  },
-  "stock-calm-chair": {
-    "frame": "unsplash",
-    "alt": "A patient reclined and at ease while the dentist prepares",
-    "source": "Unsplash photo-1606811842243-af7e16970c1f (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-calm-chair-410x273.jpg",
-        "bytes": 20225
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-calm-chair-768x512.jpg",
-        "bytes": 53343
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-calm-chair-1024x683.jpg",
-        "bytes": 85874
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-calm-chair-1536x1024.jpg",
-        "bytes": 166079
-      }
-    ]
-  },
-  "stock-laser": {
-    "frame": "unsplash",
-    "alt": "A blue curing light in the mouth",
-    "source": "Unsplash photo-1660737217690-15182b43899e (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-laser-410x273.jpg",
-        "bytes": 12830
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-laser-768x512.jpg",
-        "bytes": 32787
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-laser-1024x683.jpg",
-        "bytes": 54303
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-laser-1536x1024.jpg",
-        "bytes": 117140
-      }
-    ]
-  },
-  "stock-hose": {
-    "frame": "unsplash",
-    "alt": "A dentist in loupes working with an assistant",
-    "source": "Unsplash photo-1580821810660-5486b8e980a6 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-hose-410x273.jpg",
-        "bytes": 18457
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-hose-768x512.jpg",
-        "bytes": 45401
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-hose-1024x683.jpg",
-        "bytes": 69624
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-hose-1536x1024.jpg",
-        "bytes": 127561
-      }
-    ]
-  },
-  "stock-mouthguard": {
-    "frame": "unsplash",
-    "alt": "A pair of sports mouthguards",
-    "source": "Unsplash photo-1656623944690-9366fb1aba9b (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-mouthguard-410x273.jpg",
-        "bytes": 15105
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-mouthguard-768x512.jpg",
-        "bytes": 39733
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-mouthguard-1024x683.jpg",
-        "bytes": 66135
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-mouthguard-1536x1024.jpg",
-        "bytes": 137267
-      }
-    ]
-  },
-  "stock-nightguard": {
-    "frame": "unsplash",
-    "alt": "A clear night guard on a white surface",
-    "source": "Unsplash photo-1590062033099-a43ac5f82979 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-nightguard-410x273.jpg",
-        "bytes": 6253
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-nightguard-768x512.jpg",
-        "bytes": 17563
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-nightguard-1024x683.jpg",
-        "bytes": 29079
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-nightguard-1536x1024.jpg",
-        "bytes": 58651
-      }
-    ]
-  },
-  "stock-jaw": {
-    "frame": "unsplash",
-    "alt": "A woman holding the side of her jaw",
-    "source": "Unsplash photo-1592400400196-bf709e32aa88 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-jaw-410x273.jpg",
-        "bytes": 12371
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-jaw-768x512.jpg",
-        "bytes": 32738
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-jaw-1024x683.jpg",
-        "bytes": 55491
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-jaw-1536x1024.jpg",
-        "bytes": 122590
-      }
-    ]
-  },
-  "stock-brush-wood": {
-    "frame": "unsplash",
-    "alt": "A wooden toothbrush beside a sprig of leaves",
-    "source": "Unsplash photo-1627435602551-b6e78f6cb123 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-brush-wood-410x273.jpg",
-        "bytes": 14293
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-brush-wood-768x512.jpg",
-        "bytes": 35396
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-brush-wood-1024x683.jpg",
-        "bytes": 55633
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-brush-wood-1536x1024.jpg",
-        "bytes": 109045
-      }
-    ]
-  },
-  "stock-brush-black": {
-    "frame": "unsplash",
-    "alt": "A toothbrush with paste and interdental brushes on black",
-    "source": "Unsplash photo-1676897296672-2bb21aacb342 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-brush-black-410x273.jpg",
-        "bytes": 11872
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-brush-black-768x512.jpg",
-        "bytes": 28881
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-brush-black-1024x683.jpg",
-        "bytes": 46426
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-brush-black-1536x1024.jpg",
-        "bytes": 92917
-      }
-    ]
-  },
-  "stock-brush-paste": {
-    "frame": "unsplash",
-    "alt": "Toothpaste on a brush, held in one hand",
-    "source": "Unsplash photo-1693692273603-3b9e13789298 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-brush-paste-410x273.jpg",
-        "bytes": 9386
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-brush-paste-768x512.jpg",
-        "bytes": 23119
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-brush-paste-1024x683.jpg",
-        "bytes": 36215
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-brush-paste-1536x1024.jpg",
-        "bytes": 68432
-      }
-    ]
-  },
-  "stock-exam-mirror": {
-    "frame": "unsplash",
-    "alt": "A dental examination with mirror and probe",
-    "source": "Unsplash photo-1606811971618-4486d14f3f99 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-exam-mirror-410x273.jpg",
-        "bytes": 16636
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-exam-mirror-768x512.jpg",
-        "bytes": 46604
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-exam-mirror-1024x683.jpg",
-        "bytes": 75733
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-exam-mirror-1536x1024.jpg",
-        "bytes": 147430
-      }
-    ]
-  },
-  "stock-exam-smile": {
-    "frame": "unsplash",
-    "alt": "A dentist examining a smiling patient",
-    "source": "Unsplash photo-1663755489920-5e09f66d011a (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-exam-smile-410x273.jpg",
-        "bytes": 21629
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-exam-smile-768x512.jpg",
-        "bytes": 54972
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-exam-smile-1024x683.jpg",
-        "bytes": 86172
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-exam-smile-1536x1024.jpg",
-        "bytes": 163077
-      }
-    ]
-  },
-  "stock-two-dentists": {
-    "frame": "unsplash",
-    "alt": "Two clinicians at work over a patient",
-    "source": "Unsplash photo-1581584731241-c134a1afe9a0 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-two-dentists-410x273.jpg",
-        "bytes": 22539
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-two-dentists-768x512.jpg",
-        "bytes": 55127
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-two-dentists-1024x683.jpg",
-        "bytes": 85656
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-two-dentists-1536x1024.jpg",
-        "bytes": 164294
-      }
-    ]
-  },
-  "stock-exam-room": {
-    "frame": "unsplash",
-    "alt": "A dentist in a treatment room holding instruments",
-    "source": "Unsplash photo-1681939282741-9ace0a227977 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-exam-room-410x273.jpg",
-        "bytes": 20074
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-exam-room-768x512.jpg",
-        "bytes": 49742
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-exam-room-1024x683.jpg",
-        "bytes": 77920
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-exam-room-1536x1024.jpg",
-        "bytes": 151016
-      }
-    ]
-  },
-  "stock-compress": {
-    "frame": "unsplash",
-    "alt": "A woman holding a cold compress to her cheek",
-    "source": "Unsplash photo-1602932213623-cc17e9541bb4 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-compress-410x273.jpg",
-        "bytes": 15201
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-compress-768x512.jpg",
-        "bytes": 40272
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-compress-1024x683.jpg",
-        "bytes": 64574
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-compress-1536x1024.jpg",
-        "bytes": 123454
-      }
-    ]
-  },
-  "stock-instruments": {
-    "frame": "unsplash",
-    "alt": "A mirror and probes on a textured cloth",
-    "source": "Unsplash photo-1643660527090-bea721ad71f8 (Unsplash License), fetched 2026-09-10",
-    "sizes": [
-      {
-        "w": 410,
-        "h": 273,
-        "file": "mp-stock-instruments-410x273.jpg",
-        "bytes": 24187
-      },
-      {
-        "w": 768,
-        "h": 512,
-        "file": "mp-stock-instruments-768x512.jpg",
-        "bytes": 62100
-      },
-      {
-        "w": 1024,
-        "h": 683,
-        "file": "mp-stock-instruments-1024x683.jpg",
-        "bytes": 98081
-      },
-      {
-        "w": 1536,
-        "h": 1024,
-        "file": "mp-stock-instruments-1536x1024.jpg",
-        "bytes": 185244
+        "file": "mp-dr-sung-standing-1536x2046.jpg",
+        "bytes": 188368
       }
     ]
   }

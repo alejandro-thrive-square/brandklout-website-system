@@ -48,6 +48,13 @@ const PICKS = [
   [207, "team-pair-window", "Two of the clinical team by the treatment room window"],
   [132, "team-reading-chart", "Two hygienists reading a chart under the practice's award plaques"],
   [184, "team-plaques", "Two of the team under the practice's award plaques"],
+  // BugHerd 2026-09-10: #21 wanted a team frame where nobody looks sad (the
+  // front-desk huddle, 64, reads glum), #45 a portrait frame for the team
+  // page's narrow pane, #40 a landscape frame for About's 16:9 invitation
+  // shot so nobody's head is cropped off.
+  [134, "team-huddle", "The team gathered at the front desk before the doors open"],
+  [85, "team-window-smile", "One of the clinical team between appointments, by the window"],
+  [33, "desk-checkin-pair", "A mother and daughter checking in at the front desk"],
   [131, "kid-xray-smile", "A dentist smiling with a young patient before a digital x-ray"],
   [148, "kid-xray", "Taking a digital x-ray with a young patient"],
   [165, "kid-exam", "A dentist checking a young patient's teeth"],

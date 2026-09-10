@@ -64,6 +64,10 @@
 | `.tmp/upload-media.mjs` | Uploads the media manifest, writes the local → uploaded path map. |
 | `.tmp/apply-stock.mjs` | The page→stock-frame map for the 31 treatment pages and Dr. Sung's portrait swap. Idempotent; `--check` reports. |
 | `.tmp/stock-search.mjs` | Reads Unsplash search results through the installed Chrome (playwright-core) — ids, alts, links — for a contact sheet. |
+| `.tmp/frame.mjs` | Crops and resizes one image (any format Chrome decodes) into the four-width JPEG set and registers it in `album-manifest.json`. `--probe` writes a labelled grid to find the crop box. For a frame that did not come from the album. |
+| `.tmp/crop-tree.mjs` | The tree out of the logo as a transparent PNG (`mp-tree-mark.png`), the seals' mark. |
+| `.tmp/bugherd/` | One review round: the BugHerd export (`tasks-<date>.json`), the scripts that applied its structural edits, and the push logs. |
+| `.tmp/album-sheet/` | The client's Google Photos album as a numbered contact sheet (`render-sheet.mjs`), so "the photo with X" can be found by eye. Numbers match `album-urls.txt`. |
 | `.tmp/insta.mjs` | Minimal Instatic admin client. Points at Mason Park, deliberately not shared with another client's workflow. |
 
 ## Editing the design
@@ -461,6 +465,84 @@ a `base.loop`, so the design lives in CSS and `elevate.js`, not in per-article m
 every article shows the sample's. The topic filter compares the card's `.bl-card_meta b`
 text with the tile's `data-topic`, normalised to letters, and re-applies through a
 MutationObserver when "Load more" appends cards.
+
+### The review round, 2026-09-10: 48 BugHerd notes on five pages
+
+The agency reviewed staging on BugHerd (project 539151) and left 48 notes on the home,
+About, Doctors, Team and Reviews pages. The export with every note, selector and screenshot
+is `.tmp/bugherd/tasks-2026-09-10.json`; the per-number disposition is in the runbook run of
+the same date. What changed the *system*, as opposed to a line of copy:
+
+**The inner pages no longer open like the homepage** (#41, "change up the home design from
+the rest of the pages"). Every page's arrival was the homepage's: full-bleed photograph, veil,
+headline bottom-left. `.ch-arrival.is-compact` is now a **split** — copy on ink in the left
+column, the photograph held to the right 46% behind a soft fade, a copper rule under the
+band; below 768 the photograph drops under the copy. Pure CSS at the end of `site.css`, no
+page markup changed, and the homepage's own arrival (no `is-compact`) is untouched.
+
+**The credential strip is homepage-only** (#37 "we don't need this, it's already on the
+other page", #41). It left all 44 inner pages; `.ch-arrival + .padding-global` restates the
+rhythm the strip used to set. The two square marks (Seattle Study Club, AAPD) carry
+`li.is-mark` and render larger than the wordmarks (#25, #26); the label is readable (#24).
+
+**Dr. Sung's portrait is `dr-sung-standing`**, everywhere (#16, "no arms crossed, we should
+have one from Grand Mission without his arms crossed"). Both the 230×300 thumbnail and the
+3703×4000 studio portrait have his arms crossed. `grandmissiondentistry.com` publishes
+`GrandMissionDentistry(15of28).webp`, 3931×5241, Dr. Sung standing beside Dr. Nguyen with
+his arms down; `frame.mjs` cropped it to him (1400 px wide, so the 1536 candidate is a 10%
+upscale) at the four widths the srcsets use. The 29 provider bands and the four doctor
+pages all point at it; `apply-stock.mjs` writes the new slug. **The old `mp-dr-sung-*`
+files stay on disk and on the instance; nothing references them.**
+
+**Dr. Nguyen first, then Dr. Cho, then Dr. Sung** (#15, #34) on the home cards, About's
+pillars, Team's bylines and About's manifesto. `.tmp/bugherd/reorder-doctors.mjs` did it
+because those blocks carry srcsets; it is idempotent.
+
+**The team page names nobody** (#44, "Google policy is not to use employee names in
+reviews"). The Named chapter — the marquee of first names and the rows quoting the reviews
+that name them — is gone, with the arrival, the statement and the invitation rewritten to
+lead with the doctors (#46). The team portraits the agency mentioned (#43) are in their
+Canva; when they arrive, that is the chapter to rebuild. `probe-wall.mjs`'s wall half is
+now a no-op.
+
+**The seals carry the tree** (#36, #48). `crop-tree.mjs` cuts the tree out of the logo at
+4x as a transparent PNG; the seal `<div>` holds it as a real `<img>` (the exporter only
+rewrites media it finds in `src`/`srcset`, so a `data-` attribute would have shipped a
+local path) and `seal()` in `elevate.js` keeps an existing `<img>` as the mark. The
+treatment pages' seals keep their own marks (`$`, a check, the sun, `0%`) — those mean
+something.
+
+**Three new album frames** (`import-album.mjs` PICKS): `team-huddle` (134) for the home's
+people band, because the front-desk frame read glum (#21); `team-window-smile` (85) for the
+team page's narrow pane, which cropped a landscape frame (#45); `desk-checkin-pair` (33) for
+About's 16:9 invitation shot, which cut a head off a portrait frame (#40).
+
+**The pillars reveal together** (#38). The reviewer caught the left-to-right stagger
+mid-scroll and read three clip heights as a broken layout; a screenshot cannot tell the two
+apart, so the three now rise together, unclipped. **The doctors' dossiers share rows**
+(#42) through CSS subgrid, so names, facts and folds align.
+
+**The hero stack is a link and flips** (#2). `<a class="el-stack" href="/our-team/">`, and
+`stackCycle()` in `elevate.js` swaps the top frame's photograph every 3.8 s with a fade.
+Only the top frame changes, so the GSAP fan is untouched.
+
+**Not done, and why.** #1 wants the hero photograph to be "the one with Dr. Nguyen and Dr.
+Sung with their kids": it is in neither the album (212 frames, contact sheet in
+`.tmp/album-sheet/`), the old site's uploads, nor Grand Mission's site — the agency has to
+send it. #3 ("the bottom of the logo is being cut off") does not reproduce: the logo
+renders whole in Chrome at 1440/2x on both the local build and staging (`.tmp/bugherd/
+shot-header.mjs`); the artwork has two pixels of margin under DENTAL, which may be what was
+seen. Ask for the browser and width.
+
+**Traps this round added.** `frame.mjs` and `crop-tree.mjs` embed the source as a data URI
+inside `setContent` — a `file://` image in `setContent` never loads, and `page.goto` on an
+image file opens Chrome's viewer, which ignores an inline restyle, so a crop silently comes
+out as the whole frame. Several `home/**/index.html` files mix CRLF and LF; a regex anchored
+on `\n` matches some pages and not others — use `\r?\n`. And **never export
+`RAILWAY_TOKEN` from `.env` before the Railway steps**: the CLI is logged in on its own and
+the exported token answers "Unauthorized"; a chain built on `node x | tail` does not stop
+there, and the first push of this round published the new stylesheet over the old pages
+before the run was caught and redone.
 
 ## Instatic import
 

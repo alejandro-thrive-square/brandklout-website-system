@@ -5866,3 +5866,94 @@ a.bl-page:hover, a.bl-page:focus-visible { background: var(--accent); border-col
 .bl-grid.is-related .bl-card:first-child .bl-card_text { font-size: calc(.88rem * var(--t-ui)); line-height: 1.55; max-width: 40ch; color: var(--fg-soft); }
 .bl-grid.is-related .bl-card:first-child .bl-card_more { align-self: auto; }
 .bl-grid.is-related .bl-card:nth-child(9n + 5) .bl-card_link { background: var(--panel); color: inherit; }
+
+/* ===========================================================================
+   THE 2026-09-10 REVIEW ROUND — the agency's 48 BugHerd notes on staging.
+   Every rule here answers a numbered note in
+   .tmp/bugherd/tasks-2026-09-10.json; the number is in the comment. Placed at
+   the end so equal-specificity rules above lose to these.
+   ======================================================================== */
+
+/* #5  The relay's caption sat on the photograph's edge. The mask reveal
+   scales the image 1.16 inside a clipped figure, so before the reveal settles
+   the picture overlaps its own caption. The caption now paints over it and
+   has room. */
+.re-media figcaption { position: relative; z-index: 1; background: var(--white); padding-top: 1.25rem; }
+
+/* #6  Two full measures of air between The Relay and Under One Roof read as
+   a hole, not a break: the relay's own bottom padding plus the next chapter's
+   top. Tightened; the chapters still breathe. */
+.ch-relay { padding-bottom: calc(var(--ch-pad) * .55); }
+.ch-together { padding-top: calc(var(--ch-pad) * .7); }
+
+/* #24-#26  The credential strip: the label was too faint to read, and two of
+   the five marks (Seattle Study Club, AAPD) are square artwork that a single
+   forced height made tiny beside the wide wordmarks. */
+.pr-badges-label { color: rgba(255, 255, 255, .82); }
+.pr-badges img { height: 3rem; }
+.pr-badges li.is-mark img { height: 4.6rem; }
+@media (max-width: 767px) { .pr-badges img { height: 2.2rem; } .pr-badges li.is-mark img { height: 3.4rem; } }
+
+/* #37/#41  The strip left every inner page, so the breadcrumb now follows the
+   arrival directly. Same rhythm the strip used to set. */
+.ch-arrival + .padding-global { padding-top: 1.25rem; padding-bottom: 0; }
+.ch-arrival + .padding-global + .ch { padding-top: calc(var(--ch-pad) * .7); }
+
+/* #41  "Change up the home design from the rest of the pages." Every inner
+   page opened exactly like the homepage: a full-bleed photograph under a
+   veil, the headline bottom-left. The compact arrival is now a SPLIT — copy
+   on ink in the left column, the photograph held to the right 46% with a
+   soft fade into the ink and a copper rule under the whole band. Same
+   markup on all 44 pages, so no page changed for this; the homepage's own
+   arrival (no `is-compact`) is untouched. */
+.ch-arrival.is-compact {
+  min-height: 0;
+  align-items: center;
+  padding: calc(var(--jr-nav-h, 5.5rem) + 3.5rem) 0 4rem;
+  background: var(--ink);
+  border-bottom: 3px solid var(--copper);
+}
+.ch-arrival.is-compact .ar-bg { inset: 0 0 0 auto; width: 46%; }
+.ch-arrival.is-compact .ar-bg img { object-position: 50% 30%; }
+.ch-arrival.is-compact .ar-veil {
+  background:
+    linear-gradient(90deg, var(--ink) 0%, var(--ink) 53%, rgba(30, 36, 38, .6) 58%, rgba(30, 36, 38, .12) 70%, rgba(30, 36, 38, 0) 100%),
+    linear-gradient(180deg, rgba(30, 36, 38, .82) 0%, rgba(30, 36, 38, 0) 34%);
+}
+.ch-arrival.is-compact .ar-in { padding-right: 48%; }
+.ch-arrival.is-compact .ar-title { max-width: 14ch; }
+@media (max-width: 767px) {
+  .ch-arrival.is-compact { display: grid; padding-top: calc(var(--jr-nav-h, 5.5rem) + 2rem); padding-bottom: 0; }
+  .ch-arrival.is-compact .ar-in { order: 1; padding-right: var(--bleed); }
+  .ch-arrival.is-compact .ar-bg { order: 2; position: relative; inset: auto; width: 100%; aspect-ratio: 16 / 10; margin-top: 2rem; }
+  .ch-arrival.is-compact .ar-veil { display: none; }
+}
+
+/* #42  The two dossiers on the Doctors page were two independent stacks, so
+   the names, facts and folds sat at different heights. The columns now share
+   their rows (subgrid; browsers without it keep the old behaviour), and both
+   portraits are the same frame now that Dr. Sung has a full-size one. */
+@media (min-width: 860px) {
+  .cp-duo { align-items: stretch; }
+  .cp-dossier { grid-template-rows: subgrid; grid-row: span 6; }
+}
+.cp-dossier_shot { max-width: 20rem; }
+.cp-dossier_shot img { aspect-ratio: 4 / 5; object-position: 50% 0; }
+
+/* #36/#48  The seal's mark is the practice's tree, as an <img>. */
+.el-seal_mark img { width: 30%; height: auto; display: block; }
+
+/* #2  The hero stack is a link, and its top frame flips. */
+a.el-stack { display: block; text-decoration: none; cursor: pointer; }
+.el-stack_frame { transition: opacity .42s var(--ease); }
+.el-stack_frame.is-flipping { opacity: 0; }
+
+/* #46  Lead with the doctors: the team page's byline strip carries more
+   weight now that it is the page's first chapter in fact and not only in
+   order. */
+.cp-byline_face { width: 4.8rem; height: 4.8rem; }
+.cp-byline b { font-size: calc(1.3rem * var(--t-mid)); }
+
+/* #47  A lighter line under the emergency fact on the team page. */
+.iv-fun { display: block; margin-top: .6rem; font-family: var(--font-ui); font-size: var(--f-label); letter-spacing: .05em; color: #e3c3a8; line-height: 1.6; }
+.iv-fun a { color: #fff; border-bottom-color: rgba(255, 255, 255, .5); }
