@@ -139,7 +139,12 @@ ${vimeo
 
 Every clip sits on the outgoing agency's Vimeo account ("Gilleard Marketing"). The six short procedure animations are stock explainers; the four testimonials (Helen, Mark, Philip, Lisa) are the practice's own footage. The embeds die the day that account revokes them, so the downloaded files are the copy to re-host.
 
-${vimeo.filter((v) => v.status === "fail").length} clips could not be pulled: they are domain-locked and Vimeo's connection check ("We couldn't verify the security of your connection") refused this machine's IP, even inside the real embedding page. The three public-embed clips came through. Retry \`node vimeo.mjs\` from another network (VPN off), or ask the outgoing agency for the source files, which is the right ask anyway for the four testimonials.`
+${(() => {
+  const n = vimeo.filter((v) => v.status === "fail").length;
+  return n
+    ? `${n} clips could not be pulled; see \`vimeo.json\` for the error. Seven of them are domain-locked, and Vimeo answers a headless-Chrome user-agent with a 401 bot page, so \`vimeo.mjs\` must send a normal Chrome UA plus the site as referer. It works on the VPN.`
+    : "Every clip downloaded. Seven are domain-locked: they need the site as referer and a normal Chrome user-agent (a headless UA gets a 401 bot page).";
+})()}`
     : "_vimeo.json not generated yet._"
 }
 

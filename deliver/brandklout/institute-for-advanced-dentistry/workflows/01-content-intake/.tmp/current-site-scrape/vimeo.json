@@ -11,8 +11,7 @@
     "height": 2160,
     "thumbnail": null,
     "file": "1095751306-Porcelain-Veneers.mp4",
-    "source": "hls",
-    "status": "ok",
+    "status": "cached",
     "bytes": 23545438
   },
   {
@@ -20,8 +19,16 @@
     "embedded_on": [
       "/dental-services/cosmetic-dentistry/"
     ],
-    "status": "fail",
-    "error": "no playerConfig on the player page"
+    "title": "How Dental Crowns Are Placed on Teeth",
+    "owner": "Gilleard Marketing",
+    "duration_s": 10,
+    "width": 1920,
+    "height": 1080,
+    "thumbnail": null,
+    "file": "1091943220-How-Dental-Crowns-Are-Placed-on-Teeth.mp4",
+    "source": "hls",
+    "status": "ok",
+    "bytes": 7317996
   },
   {
     "id": "1095751286",
@@ -35,8 +42,7 @@
     "height": 1080,
     "thumbnail": null,
     "file": "1095751286-Dental-Bonding.mp4",
-    "source": "hls",
-    "status": "ok",
+    "status": "cached",
     "bytes": 2160417
   },
   {
@@ -51,8 +57,7 @@
     "height": 1080,
     "thumbnail": null,
     "file": "1095751275-Teeth-Whitening.mp4",
-    "source": "hls",
-    "status": "ok",
+    "status": "cached",
     "bytes": 4076082
   },
   {
@@ -61,47 +66,95 @@
       "/dental-services/cosmetic-dentistry/",
       "/dental-services/new-teeth-in-one-day/"
     ],
-    "status": "fail",
-    "error": "no playerConfig on the player page"
+    "title": "How Dental Implants and Ceramic Crowns Are Placed",
+    "owner": "Gilleard Marketing",
+    "duration_s": 12,
+    "width": 1920,
+    "height": 1080,
+    "thumbnail": null,
+    "file": "1091954104-How-Dental-Implants-and-Ceramic-Crowns-Are-Placed.mp4",
+    "source": "hls",
+    "status": "ok",
+    "bytes": 7920636
   },
   {
     "id": "1091943339",
     "embedded_on": [
       "/dental-services/tmj-treatment/"
     ],
-    "status": "fail",
-    "error": "no playerConfig on the player page"
+    "title": "TMJ Arthritis and Jaw Dislocation",
+    "owner": "Gilleard Marketing",
+    "duration_s": 21,
+    "width": 1920,
+    "height": 1080,
+    "thumbnail": null,
+    "file": "1091943339-TMJ-Arthritis-and-Jaw-Dislocation.mp4",
+    "source": "hls",
+    "status": "ok",
+    "bytes": 14586901
   },
   {
     "id": "1130043614",
     "embedded_on": [
       "/testimonials/"
     ],
-    "status": "fail",
-    "error": "no playerConfig on the player page"
+    "title": "Helen's Testimonial - Institute for Advanced Dentistry",
+    "owner": "Gilleard Marketing",
+    "duration_s": 130,
+    "width": 1920,
+    "height": 1080,
+    "thumbnail": null,
+    "file": "1130043614-Helens-Testimonial---Institute-for-Advanced-Dentistry.mp4",
+    "source": "hls",
+    "status": "ok",
+    "bytes": 55239561
   },
   {
     "id": "1130043702",
     "embedded_on": [
       "/testimonials/"
     ],
-    "status": "fail",
-    "error": "no playerConfig on the player page"
+    "title": "Mark's Testimonial - Institute for Advanced Dentistry",
+    "owner": "Gilleard Marketing",
+    "duration_s": 127,
+    "width": 1920,
+    "height": 1080,
+    "thumbnail": null,
+    "file": "1130043702-Marks-Testimonial---Institute-for-Advanced-Dentistry.mp4",
+    "source": "hls",
+    "status": "ok",
+    "bytes": 54215361
   },
   {
     "id": "1130043822",
     "embedded_on": [
       "/testimonials/"
     ],
-    "status": "fail",
-    "error": "no playerConfig on the player page"
+    "title": "Lisa's Testimonial - Institute for Advanced Dentistry",
+    "owner": "Gilleard Marketing",
+    "duration_s": 124,
+    "width": 1920,
+    "height": 1080,
+    "thumbnail": null,
+    "file": "1130043822-Lisas-Testimonial---Institute-for-Advanced-Dentistry.mp4",
+    "source": "hls",
+    "status": "ok",
+    "bytes": 54273217
   },
   {
     "id": "1130043776",
     "embedded_on": [
       "/testimonials/"
     ],
-    "status": "fail",
-    "error": "no playerConfig on the player page"
+    "title": "Philip's Testimonial - Institute for Advanced Dentistry",
+    "owner": "Gilleard Marketing",
+    "duration_s": 100,
+    "width": 1920,
+    "height": 1080,
+    "thumbnail": null,
+    "file": "1130043776-Philips-Testimonial---Institute-for-Advanced-Dentistry.mp4",
+    "source": "hls",
+    "status": "ok",
+    "bytes": 38494192
   }
 ]

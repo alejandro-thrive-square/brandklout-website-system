@@ -9,7 +9,7 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 
 ## Open
 
-- 7 of 10 Vimeo clips are domain-locked on the outgoing agency's account (Gilleard Marketing), including the 4 patient testimonials. Ask for the source files, or retry `node vimeo.mjs` with the VPN off.
+- Nothing is open on the scrape. All 10 Vimeo clips, including the 4 patient testimonials, are local in `media-library/vimeo/`. They still live on the outgoing agency's account (Gilleard Marketing), so re-host from these files.
 
 ## Version Control
 

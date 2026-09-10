@@ -144,19 +144,19 @@ Every referenced asset downloaded. (Wildcard patterns like `/wp-content/plugins/
 | Vimeo id | Title | Owner | Length | Embedded on | Local file |
 | :--- | :--- | :--- | ---: | :--- | :--- |
 | 1095751306 | Porcelain Veneers | Gilleard Marketing | 13 s | /dental-services/cosmetic-dentistry/ | 1095751306-Porcelain-Veneers.mp4 |
-| 1091943220 |  |  |  s | /dental-services/cosmetic-dentistry/ | **failed**: no playerConfig on the player page |
+| 1091943220 | How Dental Crowns Are Placed on Teeth | Gilleard Marketing | 10 s | /dental-services/cosmetic-dentistry/ | 1091943220-How-Dental-Crowns-Are-Placed-on-Teeth.mp4 |
 | 1095751286 | Dental Bonding | Gilleard Marketing | 10 s | /dental-services/cosmetic-dentistry/ | 1095751286-Dental-Bonding.mp4 |
 | 1095751275 | Teeth Whitening | Gilleard Marketing | 10 s | /dental-services/cosmetic-dentistry/ | 1095751275-Teeth-Whitening.mp4 |
-| 1091954104 |  |  |  s | /dental-services/cosmetic-dentistry/, /dental-services/new-teeth-in-one-day/ | **failed**: no playerConfig on the player page |
-| 1091943339 |  |  |  s | /dental-services/tmj-treatment/ | **failed**: no playerConfig on the player page |
-| 1130043614 |  |  |  s | /testimonials/ | **failed**: no playerConfig on the player page |
-| 1130043702 |  |  |  s | /testimonials/ | **failed**: no playerConfig on the player page |
-| 1130043822 |  |  |  s | /testimonials/ | **failed**: no playerConfig on the player page |
-| 1130043776 |  |  |  s | /testimonials/ | **failed**: no playerConfig on the player page |
+| 1091954104 | How Dental Implants and Ceramic Crowns Are Placed | Gilleard Marketing | 12 s | /dental-services/cosmetic-dentistry/, /dental-services/new-teeth-in-one-day/ | 1091954104-How-Dental-Implants-and-Ceramic-Crowns-Are-Placed.mp4 |
+| 1091943339 | TMJ Arthritis and Jaw Dislocation | Gilleard Marketing | 21 s | /dental-services/tmj-treatment/ | 1091943339-TMJ-Arthritis-and-Jaw-Dislocation.mp4 |
+| 1130043614 | Helen's Testimonial - Institute for Advanced Dentistry | Gilleard Marketing | 130 s | /testimonials/ | 1130043614-Helens-Testimonial---Institute-for-Advanced-Dentistry.mp4 |
+| 1130043702 | Mark's Testimonial - Institute for Advanced Dentistry | Gilleard Marketing | 127 s | /testimonials/ | 1130043702-Marks-Testimonial---Institute-for-Advanced-Dentistry.mp4 |
+| 1130043822 | Lisa's Testimonial - Institute for Advanced Dentistry | Gilleard Marketing | 124 s | /testimonials/ | 1130043822-Lisas-Testimonial---Institute-for-Advanced-Dentistry.mp4 |
+| 1130043776 | Philip's Testimonial - Institute for Advanced Dentistry | Gilleard Marketing | 100 s | /testimonials/ | 1130043776-Philips-Testimonial---Institute-for-Advanced-Dentistry.mp4 |
 
 Every clip sits on the outgoing agency's Vimeo account ("Gilleard Marketing"). The six short procedure animations are stock explainers; the four testimonials (Helen, Mark, Philip, Lisa) are the practice's own footage. The embeds die the day that account revokes them, so the downloaded files are the copy to re-host.
 
-7 clips could not be pulled: they are domain-locked and Vimeo's connection check ("We couldn't verify the security of your connection") refused this machine's IP, even inside the real embedding page. The three public-embed clips came through. Retry `node vimeo.mjs` from another network (VPN off), or ask the outgoing agency for the source files, which is the right ask anyway for the four testimonials.
+Every clip downloaded. Seven are domain-locked: they need the site as referer and a normal Chrome user-agent (a headless UA gets a 401 bot page).
 
 ## What does not work offline
 

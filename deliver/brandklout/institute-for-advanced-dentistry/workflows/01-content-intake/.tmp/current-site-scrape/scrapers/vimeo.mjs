@@ -39,6 +39,11 @@ const browser = await puppeteer.launch({
   headless: "new",
 });
 const page = await browser.newPage();
+// Headless Chrome's default UA says "HeadlessChrome"; Vimeo answers the domain-locked
+// clips with a 401 bot page for that, not for the VPN IP as first assumed.
+await page.setUserAgent(
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/126.0.0.0 Safari/537.36"
+);
 await page.setExtraHTTPHeaders({ referer: REFERER });
 const manifest = [];
 for (const [id, pages] of embeds) {

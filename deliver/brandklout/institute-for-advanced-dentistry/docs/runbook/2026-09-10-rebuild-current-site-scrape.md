@@ -13,15 +13,14 @@ Commit `d5a26932` on `bk-ifa-dentistry`, not pushed. Re-ran the committed scrape
 | `node mirror.mjs` | `site/` 63 MB, opens from `file://`. 55 of 57 URLs mirrored; the other 2 are redirects (`/contact/`, `/about/`). 777 assets. |
 | media-library pass | 237 of 237 WordPress originals, 36 MB, in `media-library/`. |
 | `node screenshots.mjs --shard 0/2` and `--shard 1/2` | 56 full-page desktop PNGs at 1440 px in `screenshots/desktop/`, 0 failures. |
-| `node vimeo.mjs` | 3 of 10 clips in `media-library/vimeo/`, the same 3 as the original run. |
+| `node vimeo.mjs` | 10 of 10 clips in `media-library/vimeo/` (about 262 MB), pulled over the VPN once `vimeo.mjs` sent a normal Chrome user-agent. Includes the 4 patient testimonials. |
 | `node inventory.mjs` | Regenerated `current-site-inventory.md`. |
 
 Script fixes: `mirror.mjs` now skips wildcard URLs, so the 5 fake "failed assets" (`/wp-content/uploads/*` and similar, from the speculation-rules script) are gone. `inventory.mjs` words that line to match. The intake directive now covers the local-only output and how to rebuild it.
 
 ## Next
 
-- Get the 7 locked Vimeo clips from the outgoing agency (Gilleard Marketing). The 4 patient testimonials (Helen, Mark, Lisa, Philip, about 2 min each) are the ones that matter. The other 3 are stock procedure animations (crowns, implants + crowns, TMJ).
-- Or, with NordVPN disconnected, run `scrapers/pull-vimeo.cmd` (double-click it or run it from a terminal). It prints the public network, pulls whatever is missing and rebuilds the inventory. Claude can't run it, because Claude only works on the VPN, and the Hostinger VPS gets the same 401. NordVPN split tunneling (excluding Chrome, ffmpeg and node) is the other route.
+- Nothing is outstanding on the scrape. All 10 clips sit on the outgoing agency's Vimeo account, so the local files are the copies to re-host.
 
 ## Gotchas
 
@@ -29,7 +28,7 @@ Script fixes: `mirror.mjs` now skips wildcard URLs, so the 5 fake "failed assets
 - Re-running `screenshots.mjs` rewrites the committed `pages/*.md` and `page-extracts-*.json`. Their diffs are Trustindex review rotation and small word-count shifts, not copy changes.
 - `/category/uncategorized/page/2/` is still live (200), but this run's crawl did not reach it, so it has no local copy in `site/`. It does have a screenshot and an extract, because `screenshots.mjs` read the old page list. Every post it lists is mirrored on its own.
 - The screenshot job reports exit 1 when there are 0 failures. That comes from the `grep -c FAIL` summary line, not from the screenshots; read the logs.
-- The Vimeo `oembed` endpoint answers 200 for the locked clips (title, length), but the player page answers 401 even with the site as referrer.
+- **Vimeo's 401 was the user-agent, not the VPN.** The domain-locked clips answer headless Chrome's default "HeadlessChrome" UA (and short curl UAs) with a 401 bot page. With the site as referer and a full Chrome UA they play over NordVPN. The 2026-09-04 run blamed the IP. A test run with the VPN off still failed all 7; the fix was one `page.setUserAgent` line in `vimeo.mjs`. A short-lived `pull-vimeo.cmd` wrapper for VPN-off runs was added and then removed.
 
 ## Version Control
 

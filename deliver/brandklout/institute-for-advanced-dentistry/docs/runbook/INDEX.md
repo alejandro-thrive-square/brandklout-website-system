@@ -4,7 +4,7 @@ One row per run, newest first. Read the rows you need, not the whole history.
 
 | Date | Run | Summary |
 | :--- | :--- | :--- |
-| 2026-09-10 | [rebuild-current-site-scrape](2026-09-10-rebuild-current-site-scrape.md) | Rebuilt the gitignored scrape output lost in the worktree cleanup: mirror, 237 media files, 55 screenshots. 7 of 10 Vimeo clips are still locked. |
+| 2026-09-10 | [rebuild-current-site-scrape](2026-09-10-rebuild-current-site-scrape.md) | Rebuilt the gitignored scrape output lost in the worktree cleanup: mirror, 237 media files, 56 screenshots, all 10 Vimeo clips (the locked ones needed a real Chrome UA, not VPN-off). |
 
 ## Version Control
 
