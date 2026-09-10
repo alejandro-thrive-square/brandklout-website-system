@@ -104,6 +104,12 @@ The Railway CLI on this machine is authenticated against workspace **Brandklout*
 |---|---|---|
 | Dr. Nahlah | `2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5` | `Dr Nahlah` |
 | Mason Park | `e4a73ef0-64a3-48e5-b3c3-b2ea60737acc` | `Mason Park` |
+| Stone Surgical Arts | `b3cae5d8-5f45-4e5c-8bfb-03113bb45327` | `Stone Surgical Arts` |
+| Stone Med Spa | `ad4db12e-eb77-42b8-9021-4e84083fc99d` | `Westlake Medical Aesthetics` (renamed; the project is still `Stone Med Spa`) |
+
+`railway ssh`, `variables` and `deployment list` take `--project <id> --service "<Service>"
+--environment production` directly, with no `railway link` first. `--project` wants the **id**; a
+project *name* answers "Project not found".
 
 ```bash
 railway link -p <projectId> -s "<Service>" -e production
@@ -138,6 +144,32 @@ PUBLIC_ORIGIN=https://encorercm.com,https://www.encorercm.com,https://dr-nahlah.
 # Mason Park   (was: https://masonparkdental.com alone)
 PUBLIC_ORIGIN=https://www.masonparkdental.com,https://masonparkdental.com,https://mason-park.up.railway.app
 ```
+
+### 2026-09-10 — both Stone sites cut over
+
+| Client | Send this | Also works |
+|---|---|---|
+| Stone Surgical Arts | `https://www.dfwsurgicalarts.com/admin` | `dfwsurgicalarts.com` |
+| Stone Med Spa | `https://westlaketxmedspa.com/admin` | `www.westlaketxmedspa.com` |
+
+```
+PUBLIC_ORIGIN=https://www.dfwsurgicalarts.com,https://dfwsurgicalarts.com,https://stone-surgical-arts-production.up.railway.app
+PUBLIC_ORIGIN=https://westlaketxmedspa.com,https://www.westlaketxmedspa.com,https://stone-med-spa-production.up.railway.app
+```
+
+**A third failure shape: the platform host was taken away.** When the custom domains were
+connected, Railway **detached the generated `*-production.up.railway.app` host** — it no longer
+appears under the service's domains and answers 404 for everything, the admin included. Both
+services still had `PUBLIC_ORIGIN` naming only that host, so there was **no address at all** from
+which the admin could be logged into: the custom hosts were traps and the allowed host was gone.
+Consequences beyond the admin:
+
+- `INSTATIC_BASE_URL` pointed at the dead host, so the `18-instatic-embeds` toolkit, `ship.sh` and
+  `verify-live.mjs` were all aimed at a 404. The master `.env` now points at the custom domain.
+- Anything published with the railway host baked in is now a dead link. The med spa footer's
+  "switch" link to Stone Surgical Arts is one — it needs a rebuild and republish.
+- The dead host stays in `PUBLIC_ORIGIN` (the rule above), but is kept out of `sites.json` because
+  the checker would rightly report it as `no admin`.
 
 ### What each site had actually gone wrong — two different failures
 

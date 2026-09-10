@@ -18,7 +18,8 @@
  * Usage: node verify-live.mjs
  */
 import { BLOG_PAGES } from '../04-design/.tmp/surgical-arts/site-src/blog-render.mjs'
-const BASE = 'https://stone-surgical-arts-production.up.railway.app'
+/* The railway host was detached when dfwsurgicalarts.com was connected (2026-09-10) and now 404s. */
+const BASE = (process.env.INSTATIC_BASE_URL || 'https://www.dfwsurgicalarts.com').replace(/\/$/, '')
 
 /* THREE ROUTES, since the blepharoplasty was published on 2026-09-01. This was
    six core routes plus twelve derived from `treatments-data.mjs`; the client

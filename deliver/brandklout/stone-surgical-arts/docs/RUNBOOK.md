@@ -7,7 +7,14 @@ then only the runs you need. Do not read them all.
 ## Where it stands
 
 Fifty-two routes are built and published to Instatic, served from Railway at
-`https://stone-surgical-arts-production.up.railway.app`.
+**`https://www.dfwsurgicalarts.com`** (apex also serves) since 2026-09-10. The old
+`stone-surgical-arts-production.up.railway.app` host was **detached** by that cutover and 404s —
+any command below that still names it needs `INSTATIC_BASE_URL=https://www.dfwsurgicalarts.com`
+instead.
+
+**Admin:** `https://www.dfwsurgicalarts.com/admin`. Users: the owner account and **Sang**
+(`sang@thrivesquare.com`, admin, same password as on Mason Park) —
+[2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md).
 
 | | |
 | :--- | :--- |

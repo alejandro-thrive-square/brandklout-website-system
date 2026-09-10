@@ -1,11 +1,12 @@
 # Runbook index
 
-13 runs, newest first. Each line is one file in this folder.
+14 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-10 | 2026-09-10 — Domain cutover: admin reopened at dfwsurgicalarts.com, Sang added — carries **gotchas** | [`2026-09-10-domain-cutover-admin-origin-and-sang.md`](./2026-09-10-domain-cutover-admin-origin-and-sang.md) |
 | 2026-09-09 | 2026-09-09, evening — Where the fees come from, and the list to get them confirmed | [`2026-09-09-where-the-fees-come-from-and-the-list-to-confirm.md`](./2026-09-09-where-the-fees-come-from-and-the-list-to-confirm.md) |
 | 2026-09-09 | 2026-09-09, afternoon — The first BugHerd round applied: four photographs off the home page | [`2026-09-09-bugherd-round-one-four-photographs-off-the-home.md`](./2026-09-09-bugherd-round-one-four-photographs-off-the-home.md) |
 | 2026-09-09 | 2026-09-09, later — BugHerd removed from the build | [`2026-09-09-bugherd-removed.md`](./2026-09-09-bugherd-removed.md) |
