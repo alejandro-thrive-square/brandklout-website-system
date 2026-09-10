@@ -1,4 +1,4 @@
-# Open Graph — `webzite.open-graph` v1.1.2
+# Open Graph — `brandklout.open-graph` v1.1.2
 
 Social sharing previews for every published page: Open Graph and Twitter Card
 tags, a `<link rel="canonical">`, and the page's own meta description.
@@ -105,7 +105,7 @@ or description changes in the CMS.
 
 Everything the admin page does, it does over these routes. They are the answer
 to "change the whole site at once", and they are all under
-`/admin/api/cms/plugins/webzite.open-graph/runtime/`.
+`/admin/api/cms/plugins/brandklout.open-graph/runtime/`.
 
 | method | path | gate | what |
 | :--- | :--- | :--- | :--- |

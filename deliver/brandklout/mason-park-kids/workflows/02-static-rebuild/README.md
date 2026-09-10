@@ -101,7 +101,7 @@ Two failures here are invisible rather than loud, and both are handled by the sc
 **Not solved: `jsonLd` and the meta `description`.** A page row carries only `title`, `slug` and
 `body` — there is no per-page head field, so step 6's "paste the JSON-LD into the head field"
 describes something that does not exist. The parent practice emits its `og:` tags and JSON-LD from
-the `webzite.open-graph` and `webzite.aeo-schema` plugins. Installing those here is the way to
+the `brandklout.open-graph` and `brandklout.aeo-schema` plugins. Installing those here is the way to
 close it, and it needs a decision because they also relax the CSP.
 
 Before anything writes: **every script prints the host it is about to touch as its first line.**

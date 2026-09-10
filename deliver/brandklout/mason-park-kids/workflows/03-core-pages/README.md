@@ -461,7 +461,7 @@ under bun in `/app`. The rest is ported from the parent's workflow 09 with the d
   wanted them are classes (`.callout h3 + p`, `.ty-callbox_copy`).
 - **What does not travel:** the meta description, canonical, og tags, theme colour and the
   JSON-LD. A page row carries a title, a slug and a body, nothing else; the parent emits those
-  from the `webzite.open-graph` and `webzite.aeo-schema` plugins, which are not installed here.
+  from the `brandklout.open-graph` and `brandklout.aeo-schema` plugins, which are not installed here.
   Same open item the 02 migration recorded. The favicon stays the migration's upload of the
   same logo.
 

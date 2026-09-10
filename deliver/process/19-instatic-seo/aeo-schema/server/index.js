@@ -111,7 +111,7 @@ function pageUrl (base, routeBase, slug) {
 var TITLE_RE = /<title[^>]*>([\s\S]*?)<\/title\s*>/i
 var DESC_RE = /<meta\s+name=["']description["']\s+content="([^"]*)"\s*\/?>/i
 var HEAD_END_RE = /<\/head\s*>/i
-var OURS_RE = /<script type="application\/ld\+json" data-aeo="webzite\.aeo-schema">/i
+var OURS_RE = /<script type="application\/ld\+json" data-aeo="(?:brandklout|webzite)\.aeo-schema">/i
 
 var IMG_RE = /<img\b[^>]*>/gi
 var SRC_RE = /\bsrc\s*=\s*"([^"]*)"/i
@@ -762,8 +762,8 @@ export function activate (api) {
     }
     if (!doc) return html
 
-    var block = '\n  <!-- Structured data — webzite.aeo-schema -->\n' +
-      '  <script type="application/ld+json" data-aeo="webzite.aeo-schema">\n' +
+    var block = '\n  <!-- Structured data — brandklout.aeo-schema -->\n' +
+      '  <script type="application/ld+json" data-aeo="brandklout.aeo-schema">\n' +
       serialize(doc) + '\n  </script>\n'
     var at = html.search(HEAD_END_RE)
     return html.slice(0, at) + block + html.slice(at)

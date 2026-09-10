@@ -1,11 +1,23 @@
 # 19 — Instatic SEO: the head tags a published page does not get
 
+> [!IMPORTANT]
+> **The plugin ids changed on 2026-09-10: `webzite.*` -> `brandklout.*`.** The author is
+> Brandklout too. A rename is a MIGRATION, not an edit — the id keys the installed record,
+> `settings_json`, `plugin_records` (which is `on delete cascade`, so an uninstall takes the
+> rows with it), and the module id inside every page carrying an Embed block, which the host
+> forces to be `<pluginId>.<name>`. Use
+> [`deliver/process/22-instatic-api-sync/migrate-plugin-ids.mjs`](../22-instatic-api-sync/migrate-plugin-ids.mjs):
+> `export` -> `swap --zips <dir> --apply` -> `publish --apply` -> `verify` -> `uninstall --apply`.
+> It exports first, imports into the new id, rewrites the embed nodes, then DISABLES the old
+> plugins (rollback: they keep their rows until `uninstall`). All five live instances were
+> migrated on 2026-09-10; anything installed from an older package will carry the old id.
+
 Two Instatic plugins, and the scripts to install them:
 
 | Plugin | Version | What it writes into `<head>` at publish |
 | :--- | :--- | :--- |
-| `webzite.open-graph` | 1.1.3 | Open Graph + Twitter Card tags, `<link rel="canonical">`, and the page's own `<meta name="description">` |
-| `webzite.aeo-schema` | 1.2.0 | one `application/ld+json` graph per page: the organisation, the WebSite, the WebPage, a BreadcrumbList |
+| `brandklout.open-graph` | 1.1.3 | Open Graph + Twitter Card tags, `<link rel="canonical">`, and the page's own `<meta name="description">` |
+| `brandklout.aeo-schema` | 1.2.0 | one `application/ld+json` graph per page: the organisation, the WebSite, the WebPage, a BreadcrumbList |
 
 ## The problem they solve
 
@@ -83,7 +95,7 @@ Where "the page's own" comes from depends on the site:
 - Sites where the rows are only **`title, slug, body`** (Mason Park Kids) have
   nowhere to put one. Use the plugin's **override store** instead, which is the
   designed mechanism and needs no schema change:
-  `POST /admin/api/cms/plugins/webzite.open-graph/runtime/override`
+  `POST /admin/api/cms/plugins/brandklout.open-graph/runtime/override`
   with `{ key: <slug>, description, url, enabled: true }`.
   `03-core-pages/.tmp/populate-seo.mjs` is the worked example: it sources each
   description from the local build's own `<meta>`, then from the WordPress

@@ -55,7 +55,7 @@ const GRANTS = {
   //                     = 'app' page. Rated `dangerous`: unsandboxed code in
   //                     the admin window. One hand-written file, no build step,
   //                     no third-party dependency, talks only to its own routes.
-  'webzite.open-graph': [
+  'brandklout.open-graph': [
     'cms.hooks', 'cms.storage', 'cms.routes', 'cms.content.read',
     'admin.navigation', 'editor.code',
   ],
@@ -65,7 +65,7 @@ const GRANTS = {
   // writes ONE `application/ld+json` graph per page; the content read is again
   // `pages` + `posts`, read-only, for the titles, descriptions and dates that
   // go into WebPage and Article.
-  'webzite.aeo-schema': [
+  'brandklout.aeo-schema': [
     'cms.hooks', 'cms.storage', 'cms.routes', 'cms.content.read',
     'admin.navigation', 'editor.code',
   ],
