@@ -360,8 +360,7 @@ Instatic and then populate. `build-blog.mjs` builds both from the recovered expo
 | `/blog/` | Arrival (the story frame), **The Latest** (a feature spread: one long read beside two short ones), By Topic (five shelves with counts), **Every Post** (one `<details>` per year, a row per post, linked when the post exists on disk), The Invitation |
 | `/blog/<slug>/` | Arrival (topic, title, excerpt, published / reading time / written by), **The Article** (the long-form frame with a sticky head carrying a numbered table of contents, a byline and a photograph; a run over the prose ceiling continues in a second section with no rule above it), Read Next (three cards, same topic first), The Invitation with the treatment pages the article links to |
 
-Nine sample posts are built: the three newest, plus six across both eras and four topics. The
-overview lists all 157 and links the nine. Which posts come across is the practice's editorial
+All 157 posts are built and live (2026-09-09, night); the overview links every one. Which posts come across is the practice's editorial
 call, made by looking at pages rather than a list; sixty-three of them are Invisalign pieces
 and some of those were written for adults. The old URLs were `/<slug>/`; the new ones are
 `/blog/<slug>/`, so the domain cutover needs a redirect per post.
@@ -397,9 +396,9 @@ node import-fonts.mjs                               # 8. the platform's static i
 node upload-fonts.mjs --fetch && node upload-fonts.mjs   #    the VARIABLE files -> font-map.json
 node import-styles.mjs                              # 9. class rules + site.css as a code asset
 node import-scripts.mjs                             # 10. gsap + site.js + journey.js, one bundle
-node import-pages.mjs --publish                     # 11. write the eleven rows, publish
+node import-pages.mjs --publish                     # 11. write every row (215 as of 2026-09-09), publish
 node verify-live.mjs && node verify-live.mjs --migrated   # 12. the proof
-node diff-all.mjs                                   #     all eleven, local against live
+node diff-all.mjs                                   #     every page under home/, local against live
 node audit-live.mjs && node audit-live.mjs --width 390    #     all 57 routes
 node crop-all.mjs --live                            #     no heading loses ink
 node probe-hooks.mjs https://mason-park-kids.up.railway.app/

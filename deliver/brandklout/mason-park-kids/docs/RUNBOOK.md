@@ -12,20 +12,16 @@ is about `bestdentistinkatytx.com` / `mason-park.up.railway.app`, it belongs one
 
 ## Where the site is, as of 2026-09-09
 
-**57 pages live and published at <https://mason-park-kids.up.railway.app>, all of them on the
-same design as of 2026-09-09.** **LOCAL IS AHEAD OF LIVE** since the evening of 2026-09-09:
-the image pass (`docs/runbook/2026-09-09-pictures-that-match-the-words.md`) is committed and
-awaiting the client's review at `file://`; when approved, run the import in the README's order
-(`upload-media` for 24 new keys, `import-styles` because `site.css` changed, `import-pages`,
-publish, then the live gates). The public domain still does not point here; that host is the
-review link. Every gate is clean: `check.mjs` 0 errors, `crop-all.mjs` 0 across 57 x 2 widths,
-`audit-live.mjs` 57/57 at both 1440 and 390, and `crop-all.mjs --live` 0 against the
-published site.
+**215 pages live and published at <https://mason-park-kids.up.railway.app> as of the night of
+2026-09-09: the 57, the blog overview and all 157 posts, on one design.** Local and live are
+the same (`diff-all.mjs` 215/215; see `docs/runbook/2026-09-09-the-whole-site-on-instatic-215-pages.md`). The public domain still does not point here; that host is the
+review link. Every gate is clean over 215 pages: `check.mjs` 0 errors, `audit-live.mjs` 215/215 at 1440
+and 390, `diff-all.mjs` 215 match, `crop-all.mjs --live` 0 across 215 x 2 widths.
 
 | | State |
 | :--- | :--- |
 | The **eleven core pages** | Designed, and the design is now identical on disk and published. `workflows/03-core-pages/` is the source. |
-| The **blog** | **In shape, 2026-09-09 (evening), local only.** `/blog/` and nine sample articles built by `build-blog.mjs` from the 157 recovered posts; the rest are one `--all` away once the practice says which. |
+| The **blog** | **Live, all 157 posts and the overview,** built by `build-blog.mjs` from the recovered export. On the masthead and in the footer. Which posts the practice keeps is still its call; unpublishing one is a line in the generator's list. |
 | The **46 migrated pages** | **Redesigned, 2026-09-09.** All 57 pages now carry the same masthead and footer, the fluid type, the journey layer, at least one photograph and a ground that changes under the reader. They have local source for the first time: `.tmp/harvest-migrated.mjs` pulled their content down, a recipe in `.tmp/recipes/` says which blocks go where, and `.tmp/build-pages.mjs` wrote the files. **From here the files are the source** - edit a page's `<main>` in place, exactly like the eleven. |
 | Head tags | Every page has a description, canonical, Open Graph and JSON-LD, written at publish by the two plugins in `deliver/process/19-instatic-seo`. |
 | Type | Fraunces and Nunito, the VARIABLE files, self-hosted on both sides. The platform's static instances are still installed as the fallback. |
