@@ -1,6 +1,18 @@
 # Workflow: 16 - Instatic Plugins
 
 > [!IMPORTANT]
+> **The plugin ids changed on 2026-09-10: `webzite.*` -> `brandklout.*`.** The author is
+> Brandklout too. A rename is a MIGRATION, not an edit — the id keys the installed record,
+> `settings_json`, `plugin_records` (which is `on delete cascade`, so an uninstall takes the
+> rows with it), and the module id inside every page carrying an Embed block, which the host
+> forces to be `<pluginId>.<name>`. Use
+> [`deliver/process/22-instatic-api-sync/migrate-plugin-ids.mjs`](../../../../process/22-instatic-api-sync/migrate-plugin-ids.mjs):
+> `export` -> `swap --zips <dir> --apply` -> `publish --apply` -> `verify` -> `uninstall --apply`.
+> It exports first, imports into the new id, rewrites the embed nodes, then DISABLES the old
+> plugins (rollback: they keep their rows until `uninstall`). All five live instances were
+> migrated on 2026-09-10; anything installed from an older package will carry the old id.
+
+> [!IMPORTANT]
 > **Promoted to the canonical process.** The reusable copy of this toolkit now lives at
 > [`deliver/process/18-instatic-embeds/`](../../../../process/18-instatic-embeds/18-instatic-embeds.md)
 > and is where a NEW client build should start. This folder is the versioned instance it was
@@ -21,7 +33,7 @@ Instatic publishes every public page behind a strict Content-Security-Policy car
 
 There is no configuration escape in the host: the server reads no CSP env var, there is no site setting, and `frame-src` is only ever widened by a module's `cspSources` contribution — of which `base.video` (YouTube) is the only one shipped.
 
-`webzite.embed-origins` closes that gap **through the public plugin API**, with no fork of the platform and no patched image.
+`brandklout.embed-origins` closes that gap **through the public plugin API**, with no fork of the platform and no patched image.
 
 ## Why a plugin can do this when a module cannot
 
@@ -250,7 +262,7 @@ Say the trade out loud when handing it over: on the pages that carry an embed, t
 ## Security posture
 
 - With empty settings the filter returns the page **byte-for-byte unchanged** — installing the plugin alone changes nothing.
-- The plugin holds three permissions as of v1.1.0: `cms.hooks` (the CSP filter), `modules.register` (the Embed block) and `frontend.assets` (authority for the module's auto-height runtime, served same-origin from `/_instatic/module-js/webzite.embed-origins.embed.js` — it grants no third-party origin anything). `install-plugin.mjs` grants from an explicit `GRANT` list and **refuses** any package asking for more, so a future version that quietly widens its request cannot be installed by re-running the script.
+- The plugin holds three permissions as of v1.1.0: `cms.hooks` (the CSP filter), `modules.register` (the Embed block) and `frontend.assets` (authority for the module's auto-height runtime, served same-origin from `/_instatic/module-js/brandklout.embed-origins.embed.js` — it grants no third-party origin anything). `install-plugin.mjs` grants from an explicit `GRANT` list and **refuses** any package asking for more, so a future version that quietly widens its request cannot be installed by re-running the script.
 - The Embed block **cannot** widen CSP: `moduleAdapter.ts` drops plugin `cspSources`, so every origin is still typed by a person into settings.
 - Every widening is per-site, operator-typed, and reversible with `--clear` plus a publish.
 

@@ -1,7 +1,7 @@
 /**
  * Embed Origins — canvas module pack.
  *
- * Ships ONE module, `webzite.embed-origins.embed`, so a developer (or anyone
+ * Ships ONE module, `brandklout.embed-origins.embed`, so a developer (or anyone
  * with editor access) can place a third-party embed BY HAND: insert the block,
  * paste a URL or the vendor's snippet in the Properties Panel, publish. No
  * script, no code asset, no agent.
@@ -70,7 +70,7 @@
  * ## Auto height
  *
  * `fit: 'auto'` emits the module runtime (served as
- * `/_instatic/module-js/webzite.embed-origins.embed.js`, requires the plugin's
+ * `/_instatic/module-js/brandklout.embed-origins.embed.js`, requires the plugin's
  * granted `frontend.assets`). It sizes a frame from the resize message the
  * frame posts — the same mechanism the hand-written Dr. Nahlah reviews widget
  * uses, generalised. Frames are matched by `e.source === frame.contentWindow`,
@@ -381,7 +381,7 @@ var RUNTIME = [
  * ------------------------------------------------------------------------ */
 
 var EMBED = {
-  id: 'webzite.embed-origins.embed',
+  id: 'brandklout.embed-origins.embed',
   name: 'Embed',
   description:
     'Place a third-party embed by hand: paste a URL, or the vendor snippet. The origin must also be allowed in this plugin\'s settings, and the page republished.',
