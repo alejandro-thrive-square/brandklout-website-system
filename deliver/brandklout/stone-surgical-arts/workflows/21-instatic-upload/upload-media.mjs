@@ -22,7 +22,7 @@ import fs from 'node:fs'
 import path from 'node:path'
 import { execFileSync } from 'node:child_process'
 import { fileURLToPath } from 'node:url'
-import { api, requestForm, BASE } from '../../../dr-nahlah/workflows/15-instatic-api-sync/insta-api.mjs'
+import { api, requestForm, BASE } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const ASSETS = path.resolve(HERE, '../04-design/.tmp/surgical-arts/final-site/assets')

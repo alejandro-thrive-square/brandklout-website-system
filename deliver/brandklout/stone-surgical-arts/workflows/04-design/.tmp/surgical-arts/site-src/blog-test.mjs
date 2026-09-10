@@ -22,7 +22,7 @@ const server = live ? null : http.createServer((req,res)=>{
   res.writeHead(200,{'Content-Type':mime[path.extname(file)]||'application/octet-stream'});fs.createReadStream(file).pipe(res);
 });
 if(server) await new Promise(r=>server.listen(0,'127.0.0.1',r));
-const base = live ? 'https://stone-surgical-arts-production.up.railway.app' : `http://127.0.0.1:${server.address().port}`;
+const base = live ? (process.env.INSTATIC_BASE_URL || 'https://www.dfwsurgicalarts.com').replace(/\/$/, '') :`http://127.0.0.1:${server.address().port}`;
 const url = slug => `${base}/${slug==='index' ? (live?'':'index.html') : slug+(live?'':'.html')}`;
 const browser = await puppeteer.launch({executablePath:process.env.CHROME_PATH||'C:/Program Files/Google/Chrome/Application/chrome.exe',headless:true,args:['--no-sandbox','--hide-scrollbars']});
 const results=[]; const failures=[];

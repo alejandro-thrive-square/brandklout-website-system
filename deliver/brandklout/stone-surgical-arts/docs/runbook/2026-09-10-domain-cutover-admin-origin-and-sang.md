@@ -31,6 +31,12 @@ to be reachable there, and Sang needed an account like the one on Mason Park and
   - Done over `railway ssh` + `bun:sqlite`. It checks for an existing active Sang first, so a
     re-run changes nothing.
 - `sites.json` has the new entry, and module 20 has the Stone rows plus the new failure shape.
+- **The upload toolkit could not load.** `upload-media`, `push-site` and `install-fonts` imported
+  `../../../dr-nahlah/workflows/15-instatic-api-sync/insta-api.mjs`. That module moved to
+  `deliver/process/22-instatic-api-sync/` on 2026-09-09, and this sparse worktree has no
+  `dr-nahlah/` folder. They now import `../../../../process/22-instatic-api-sync/insta-api.mjs`,
+  and a `push-site` dry run loads and correctly refuses without `--force`.
+- `blog-test.mjs --live` follows `INSTATIC_BASE_URL`, falling back to the new domain.
 
 ## Gotchas
 
