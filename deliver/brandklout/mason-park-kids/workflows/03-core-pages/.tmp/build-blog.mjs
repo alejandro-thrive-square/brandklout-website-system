@@ -193,6 +193,7 @@ function normalise(body) {
 const KNOWN = localPages();
 function rewriteLinks(html) {
   return html.replace(/<a\b([^>]*)href="([^"]*)"([^>]*)>([\s\S]*?)<\/a>/g, (all, a1, href, a2, inner) => {
+    if (!plain(inner)) return '';   // an anchor with no words (one post linked a news story around nothing)
     if (href.startsWith(OLD)) {
       let p = href.slice(OLD.length).replace(/^\/+/, '');
       if (!p.endsWith('/') && !/[#?]/.test(p)) p += '/';

@@ -1379,7 +1379,14 @@ body.nav-open.has-journey .masthead_component .masthead_sub .masthead_link:hover
 .ticker_row span { font-family: var(--font-display); font-weight: 500; font-size: calc(1.5rem * var(--t-mid)); color: var(--fg); }
 .ticker_row i { width: .55rem; height: .55rem; border-radius: 50%; background: var(--sun); flex: none; }
 /* The prose frames for a long-form page. */
-.lf-layout { display: grid; gap: 2.5rem; }
+.lf-layout { display: grid; gap: 2.5rem; grid-template-columns: minmax(0, 1fr); }
+/* minmax(0, ...) on the one-column case too: an implicit `auto` column
+   takes the min-content width of its widest child, and one long unbreakable
+   run (a URL, a product name) in a blog post pushed the whole article column
+   to 527px inside a 390px phone, so every h3 in it lost its right edge to
+   the section's clip on 32 posts (2026-09-09, evening). Long runs now wrap
+   inside the column instead of widening it. */
+.lf-section p, .lf-section li, .lf-section h3 { overflow-wrap: anywhere; }
 @media (min-width: 900px) {
   .lf-layout.lf-split { grid-template-columns: minmax(0, .8fr) minmax(0, 1.2fr); gap: clamp(2.5rem, 6vw, 6rem); align-items: start; }
   .lf-layout.lf-split .lf-head { position: sticky; top: calc(var(--jr-nav-h, 6rem) + 1.5rem); }
