@@ -21,7 +21,7 @@ Script fixes: `mirror.mjs` now skips wildcard URLs, so the 5 fake "failed assets
 ## Next
 
 - Get the 7 locked Vimeo clips from the outgoing agency (Gilleard Marketing). The 4 patient testimonials (Helen, Mark, Lisa, Philip, about 2 min each) are the ones that matter. The other 3 are stock procedure animations (crowns, implants + crowns, TMJ).
-- Or retry `node vimeo.mjs` with NordVPN off. The locked player returns 401 to this IP.
+- Or, with NordVPN disconnected, run `scrapers/pull-vimeo.cmd` (double-click it or run it from a terminal). It prints the public network, pulls whatever is missing and rebuilds the inventory. Claude can't run it, because Claude only works on the VPN, and the Hostinger VPS gets the same 401. NordVPN split tunneling (excluding Chrome, ffmpeg and node) is the other route.
 
 ## Gotchas
 
