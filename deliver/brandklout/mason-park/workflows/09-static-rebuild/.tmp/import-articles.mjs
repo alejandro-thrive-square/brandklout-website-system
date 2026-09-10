@@ -66,6 +66,13 @@ const cellsFor = (r) => {
     body: r.cells.body,
     seoTitle: r.cells.seoTitle || r.cells.title,
     seoDescription: r.cells.metaDescription || "",
+    // The listing card reads these. `dateDisplay` / `dateIso` exist because
+    // the row's own publishedAt column is when the row entered Instatic, not
+    // when the practice published the article -- see blog-to-cms.mjs.
+    topic: r.cells.topic || "",
+    excerpt: r.cells.excerpt || "",
+    dateDisplay: r.cells.dateDisplay || "",
+    dateIso: r.cells.dateIso || "",
   };
   for (const k of Object.keys(c)) if (!known.has(k)) delete c[k];
   return c;

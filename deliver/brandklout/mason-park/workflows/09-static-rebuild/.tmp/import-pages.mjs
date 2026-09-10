@@ -48,7 +48,14 @@ const toSlug = (s) => (s === "/" ? "index" : s.replace(/^\/+/, ""));
 
 const all = JSON.parse(fs.readFileSync(PAGES, "utf8"));
 const existing = (await getPages()).rows ?? [];
-const bySlug = new Map(existing.map((r) => [r.slug, r]));
+// Key on the CELL slug, not the denormalized column. The two diverge for any
+// page with a slash in it the moment something PATCHes the row through
+// /admin/api/cms/data/rows/:id -- that handler re-derives the column with
+// slugFromTitle(), which turns `services/invisalign` into
+// `services-invisalign`. Keying on the column then misses every nested page,
+// and this script mints a NEW id for each one: 31 duplicate rows, the old set
+// still live and still 404ing. See apply-seo.mjs for the whole story.
+const bySlug = new Map(existing.map((r) => [r.cells?.slug ?? r.slug, r]));
 console.log(`${all.length} converted, ${existing.length} already in the CMS`);
 
 let wanted = all;
@@ -89,7 +96,17 @@ for (const p of todo) {
     nodes: p.body.nodes,
     rootNodeId: p.body.rootNodeId,
     status: "published",
-    cells: { title: p.title, slug, body: p.body },
+    // seoDescription is a REAL column on the pages table and nothing else
+    // writes it. Without these two cells every page ships with a <title> and
+    // no <meta name="description"> at all -- confirmed live on staging before
+    // this was added, 0 of 12 pages had one.
+    cells: {
+      title: p.title,
+      slug,
+      body: p.body,
+      seoTitle: p.title,
+      seoDescription: p.description || "",
+    },
   });
 }
 

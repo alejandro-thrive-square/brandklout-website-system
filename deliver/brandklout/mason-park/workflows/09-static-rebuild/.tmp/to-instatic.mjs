@@ -178,6 +178,20 @@ const decodeEntities = (s) =>
 // ------------------------------------------------------------------- run
 fs.rmSync(OUT, { recursive: true, force: true });
 fs.mkdirSync(path.join(OUT, "pages"), { recursive: true });
+fs.mkdirSync(path.join(OUT, "pages-blog-cms"), { recursive: true });
+
+// The blog does NOT ship as static pages. The 161 articles, the /blog listing
+// and the six /blog/page/N routes live in the Instatic CMS: the articles are
+// rows in the `Articles` data table, /blog is a base.loop over them, and
+// /blog/<slug> renders through the `blog-article` template page.
+//
+// They are still EXPORTED, because build-blog-templates.mjs lifts its chrome
+// from them -- but into their own folder, so `import-pages.mjs` can never see
+// them. This used to be a shell `mv` run by hand after every export; it failed
+// silently twice (mv cannot overwrite the copies already in the destination,
+// and the 2>/dev/null hid the error), each time leaving 217 pages staged for
+// an import that was meant to write 49. Routing it here removes the step.
+const blogPayload = (slug) => slug === "blog" || slug.startsWith("blog/");
 
 const pages = walk(DIST).filter((f) => f.endsWith("index.html"));
 const manifestPages = [];
@@ -206,9 +220,10 @@ for (const file of pages) {
   // Recorded here; apply-body-class.mjs puts it on the converted root node.
   const bodyClass = (html.match(/<body[^>]*\sclass="([^"]*)"/i) || [, ""])[1].trim();
   const body = transform(html);
-  fs.writeFileSync(path.join(OUT, "pages", slug.replace(/\//g, "__") + ".json"),
+  const dir = blogPayload(slug) ? "pages-blog-cms" : "pages";
+  fs.writeFileSync(path.join(OUT, dir, slug.replace(/\//g, "__") + ".json"),
     JSON.stringify({ slug: route(localRoute), title, description, bodyClass, html: body }, null, 1));
-  manifestPages.push({ slug: route(localRoute), file: `pages/${slug.replace(/\//g, "__")}.json`, title, bytes: body.length });
+  manifestPages.push({ slug: route(localRoute), file: `${dir}/${slug.replace(/\//g, "__")}.json`, title, bytes: body.length });
 }
 
 // site-wide code assets
@@ -314,7 +329,9 @@ const slugs = manifestPages.map((p2) => p2.slug);
 const dupes = slugs.filter((sl, i) => slugs.indexOf(sl) !== i);
 for (const sl of new Set(dupes)) problems.push(`duplicate slug ${sl} - site_add_page would auto-unique it to -2`);
 
-console.log(`${manifestPages.length} pages -> instatic/pages/`);
+const staticCount = manifestPages.filter((p) => !p.file.startsWith("pages-blog-cms/")).length;
+console.log(`${manifestPages.length} pages -> ${staticCount} in instatic/pages/, `
+  + `${manifestPages.length - staticCount} in instatic/pages-blog-cms/ (CMS-rendered, never imported as pages)`);
 console.log(`  media to upload: ${media.length} files, ${(media.reduce((a, m) => a + m.bytes, 0) / 1048576).toFixed(1)} MB`);
 console.log(`  code assets: site.css, site.js`);
 if (unmapped.size) {

@@ -184,12 +184,21 @@ const prio = (r) =>
   : isBlogPage(r) ? "0.3"
   : "0.6";
 
+// /blog/page/2..7 are NOT in the XML. The blog is served from the Instatic CMS
+// now -- /blog is a `base.loop` in `infinite` mode with a "Load more" button,
+// and Instatic has no numeric paginator module -- so those seven routes exist
+// only in the static build under home/ and 404 on the live site. Advertising a
+// 404 to Search Console is worse than leaving out a route that was never a
+// landing page. /blog itself and all 161 articles ARE listed, and their URLs
+// are identical in both builds.
+const xmlRoutes = routes.filter((r) => !isBlogPage(r));
+
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
-${routes.map((r) => `  <url><loc>${ORIGIN}${r}</loc><priority>${prio(r)}</priority></url>`).join("\n")}
+${xmlRoutes.map((r) => `  <url><loc>${ORIGIN}${r}</loc><priority>${prio(r)}</priority></url>`).join("\n")}
 </urlset>
 `;
 fs.writeFileSync(path.join(SITE, "sitemap.xml"), xml);
 
 console.log(`${routes.length} routes: ${routes.filter(isService).length} services, ${routes.filter(isBlogPost).length} articles, ${routes.filter(isBlogPage).length} blog pages`);
-console.log("wrote home/sitemap.xml");
+console.log(`wrote home/sitemap.xml with ${xmlRoutes.length} url(s); ${routes.length - xmlRoutes.length} paginated blog route(s) left out (the CMS blog has no numeric pages)`);

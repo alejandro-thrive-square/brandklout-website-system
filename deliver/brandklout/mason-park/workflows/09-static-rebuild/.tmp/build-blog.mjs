@@ -35,10 +35,17 @@ fs.mkdirSync(TMP, { recursive: true });
 const esc = (s) => String(s || "").replace(/&(?!#?\w+;)/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
 const escAttr = (s) => esc(s).replace(/"/g, "&quot;");
 
+// UTC, deliberately. Yoast dates a post "2026-04-29", which Date parses as
+// UTC midnight; toLocaleDateString then renders it in the BUILD MACHINE's
+// timezone and prints "April 28, 2026" anywhere west of Greenwich. Every card
+// on the blog was a day early.
+const MONTHS = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
 const niceDate = (iso) => {
   if (!iso) return "";
   const d = new Date(iso);
-  return d.toLocaleDateString("en-US", { year: "numeric", month: "long", day: "numeric" });
+  if (Number.isNaN(d.getTime())) return "";
+  return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
 };
 
 // The WordPress taxonomy is close to useless for filtering -- 79 of the 161
@@ -101,7 +108,7 @@ const cardsFor = (list) => list
         <a class="bl-card_link" href="/blog/${p.slug}/">
           <span class="bl-card_meta"><b>${esc(topic)}</b>${p.published ? `<time datetime="${escAttr(p.published)}">${esc(niceDate(p.published))}</time>` : ""}</span>
           <h3 class="bl-card_title">${esc(p.title)}</h3>
-          <p class="bl-card_text">${esc(p.description)}</p>
+          <p class="bl-card_text">${esc(p.excerpt || p.description)}</p>
           <span class="bl-card_more" aria-hidden="true">Read &rarr;</span>
         </a>
       </li>`;

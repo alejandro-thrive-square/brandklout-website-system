@@ -60,7 +60,13 @@ const ssh = (cmd, tries = 5) => {
   throw last;
 };
 
-const pagesDir = path.join(HERE, "instatic", "pages");
+// `--dir <name>` ships a DIFFERENT folder under instatic/ instead of pages/.
+// The blog template pages are converted in their own pass so the 49 static
+// pages, already imported, are not re-shipped and re-converted to add two.
+const di = process.argv.indexOf("--dir");
+const DIR = di > -1 ? process.argv[di + 1] : "pages";
+const pagesDir = path.join(HERE, "instatic", DIR);
+console.log(`payload dir: instatic/${DIR}`);
 const pages = fs.readdirSync(pagesDir)
   .map((f) => JSON.parse(fs.readFileSync(path.join(pagesDir, f), "utf8")))
   .map(({ slug, title, description, html }) => ({ slug, title, description, html }));

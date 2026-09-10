@@ -34,6 +34,19 @@ const posts = JSON.parse(fs.readFileSync(path.join(BLOG, "posts.json"), "utf8"))
 
 // One row per post. Field names are the CMS column names and are the contract
 // between this file and the template page -- change one, change both.
+// A date a reader can read, and a machine-readable one for <time datetime>.
+// The CMS row's own `publishedAt` column is when the ROW was published into
+// Instatic, which is today -- it is not when the practice published the
+// article, so the real date has to travel as its own cell.
+const MONTHS = ["January", "February", "March", "April", "May", "June",
+  "July", "August", "September", "October", "November", "December"];
+const displayDate = (iso) => {
+  if (!iso) return "";
+  const d = new Date(iso);
+  if (Number.isNaN(d.getTime())) return "";
+  return `${MONTHS[d.getUTCMonth()]} ${d.getUTCDate()}, ${d.getUTCFullYear()}`;
+};
+
 const rows = posts.map((p) => {
   const bodyPath = path.join(BLOG, "bodies", p.slug + ".html");
   const body = fs.existsSync(bodyPath) ? fs.readFileSync(bodyPath, "utf8") : "";
@@ -44,8 +57,10 @@ const rows = posts.map((p) => {
       slug: p.slug,
       seoTitle: p.seoTitle,
       metaDescription: p.description,
-      excerpt: p.description,
-      body,                       // HTML: <h2> and <p> only, no classes
+      excerpt: p.excerpt || p.description,
+      dateDisplay: displayDate(p.published),
+      dateIso: p.published || "",
+      body,                       // HTML: <h2>, <p> and <ul> only, no classes
       publishedAt: p.published,   // ISO 8601, or null for the one Yoast never dated
       updatedAt: p.modified,
       topic: p.categories.includes("invisalign")

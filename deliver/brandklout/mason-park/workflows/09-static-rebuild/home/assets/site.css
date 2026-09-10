@@ -5387,3 +5387,31 @@ html.el-reduce .el-cue i::after { animation: none; transform: none; }
 a.bl-page:hover, a.bl-page:focus-visible { background: var(--accent); border-color: var(--accent); color: #fff; }
 .bl-page.is-current { background: var(--fg); border-color: var(--fg); color: #fff; }
 .bl-page.is-off { opacity: .35; }
+
+/* ---------------------------------------------------------------------------
+   Instatic's loop "Load more" button.
+
+   The blog listing is a `base.loop` in `infinite` mode, and loop-runtime.js
+   creates this button at runtime and appends it INSIDE the loop element -- so
+   a <button> lands as a direct child of `ul.bl-grid` and takes a grid cell.
+   Left alone it is an unstyled browser button sitting in a card slot. It
+   spans the full row instead and reads as the last panel in the grid, which
+   is what it is: the way to see the next 24 articles.
+
+   The class name is the runtime's, not ours (`instatic-loop-load-more`), and
+   this rule is the only thing standing between a 161-article blog and a
+   24-article one -- there is no numeric paginator module in Instatic yet.
+--------------------------------------------------------------------------- */
+.instatic-loop-load-more {
+  grid-column: 1 / -1;
+  appearance: none; -webkit-appearance: none;
+  display: flex; align-items: center; justify-content: center; gap: .5rem;
+  width: 100%; padding: 1.35rem 1.5rem;
+  background: var(--panel); border: 0; cursor: pointer;
+  font-family: var(--font-ui); font-size: calc(.78rem * var(--t-ui));
+  letter-spacing: .09em; text-transform: uppercase; color: var(--fg);
+  transition: background-color .25s var(--ease), color .25s var(--ease);
+}
+.instatic-loop-load-more:hover:not(:disabled),
+.instatic-loop-load-more:focus-visible { background: var(--warm); }
+.instatic-loop-load-more:disabled { cursor: default; color: var(--fg-soft); }

@@ -29,3 +29,8 @@ backup-*.json
 # are the staging instance's) and rewritten by every upload-media.mjs run.
 instatic-media-map.json
 media-upload-log.json
+# Same shape as converted-pages.json: the node graphs the container's HTML
+# importer produced for the two blog CMS pages. Regenerate with
+# build-blog-templates.mjs -> ship-payload.mjs --dir pages-templates ->
+# run-converter.mjs -> fetch-nodes.mjs.
+converted-templates.json

@@ -25,8 +25,14 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const HERE = path.dirname(fileURLToPath(import.meta.url));
-const CONVERTED = path.join(HERE, "converted-pages.json");
-const PAGES_DIR = path.join(HERE, "instatic", "pages");
+// `--converted <file>` / `--dir <name>` let this run over a second payload set
+// -- the blog template pages are converted separately, in instatic/
+// pages-templates/, and would otherwise be skipped as "no exported html".
+const argv = process.argv.slice(2);
+const ci = argv.indexOf("--converted");
+const di = argv.indexOf("--dir");
+const CONVERTED = path.join(HERE, ci > -1 ? argv[ci + 1] : "converted-pages.json");
+const PAGES_DIR = path.join(HERE, "instatic", di > -1 ? argv[di + 1] : "pages");
 
 const converted = JSON.parse(fs.readFileSync(CONVERTED, "utf8"));
 const bySlug = new Map();
