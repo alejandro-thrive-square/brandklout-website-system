@@ -337,13 +337,13 @@ export function activate(api) {
     // The host logs activation failures onto the plugin card; a thrown error
     // is more useful than a panel that mounts and then throws on first render.
     throw new Error(
-      `[webzite.link-editor] missing permission(s): ${missing.join(', ')}. `
+      `[brandklout.link-editor] missing permission(s): ${missing.join(', ')}. `
       + 'Grant them on the Plugins page and reload the editor.',
     )
   }
 
   api.editor.panels.register({
-    id: 'webzite.link-editor.panel',
+    id: 'brandklout.link-editor.panel',
     label: 'Link URL',
     iconName: 'text-start-t',
     accent: 'sky',

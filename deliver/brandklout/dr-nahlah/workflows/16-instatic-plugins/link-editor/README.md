@@ -1,4 +1,4 @@
-# Link Editor — `webzite.link-editor` v1.0.2
+# Link Editor — `brandklout.link-editor` v1.0.2
 
 Adds a **Link URL** panel to the Instatic editor rail. Select a button or link
 on the canvas, and its address becomes editable — internal pages, on-page

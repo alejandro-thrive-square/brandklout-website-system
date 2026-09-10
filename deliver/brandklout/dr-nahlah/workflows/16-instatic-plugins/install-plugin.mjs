@@ -43,7 +43,7 @@ const GRANTS = {
   //                    `/_instatic/module-js/webzite.embed-origins.embed.js`.
   //                    It grants no third-party origin anything — those are still
   //                    typed into plugin settings, one at a time.
-  'webzite.embed-origins': ['cms.hooks', 'modules.register', 'frontend.assets'],
+  'brandklout.embed-origins': ['cms.hooks', 'modules.register', 'frontend.assets'],
 
   // ---- Link Editor --------------------------------------------------------
   //   editor.code       REQUIRED by the host for any `entrypoints.editor`
@@ -62,7 +62,7 @@ const GRANTS = {
   //                     draft that a store action must not be re-entered on.
   //                     The permission is requested anyway because the plugin
   //                     genuinely writes, and the consent screen should say so.
-  'webzite.link-editor': ['editor.code', 'editor.panels', 'editor.store.read', 'editor.store.write'],
+  'brandklout.link-editor': ['editor.code', 'editor.panels', 'editor.store.read', 'editor.store.write'],
 
   // ---- Open Graph ---------------------------------------------------------
   //   cms.hooks         the `publish.html` filter that writes og:/twitter: tags,
@@ -87,7 +87,7 @@ const GRANTS = {
   //                     Ours is one hand-written file, no build step, no
   //                     third-party dependency, and it talks only to this
   //                     plugin's own routes.
-  'webzite.open-graph': [
+  'brandklout.open-graph': [
     'cms.hooks', 'cms.storage', 'cms.routes', 'cms.content.read',
     'admin.navigation', 'editor.code',
   ],
@@ -97,7 +97,7 @@ const GRANTS = {
   // writes ONE `application/ld+json` graph per page; the content read is again
   // `pages` + `posts`, read-only, for the titles, descriptions and publish
   // dates that go into WebPage and Article.
-  'webzite.aeo-schema': [
+  'brandklout.aeo-schema': [
     'cms.hooks', 'cms.storage', 'cms.routes', 'cms.content.read',
     'admin.navigation', 'editor.code',
   ],

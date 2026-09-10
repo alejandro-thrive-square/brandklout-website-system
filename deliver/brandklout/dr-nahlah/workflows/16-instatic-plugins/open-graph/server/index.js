@@ -346,7 +346,7 @@ function buildTags (api, html, ctx) {
       ? 'article'
       : setting(api, 'defaultType', 'website'))
 
-  var out = '\n  <!-- Open Graph — webzite.open-graph -->\n'
+  var out = '\n  <!-- Open Graph — brandklout.open-graph -->\n'
   out += meta('og:title', title)
   if (description) out += meta('og:description', description)
   out += meta('og:type', type)

@@ -1,5 +1,17 @@
 # Workflow: 18 - Instatic Embeds
 
+> [!IMPORTANT]
+> **The plugin ids changed on 2026-09-10: `webzite.*` -> `brandklout.*`.** The author is
+> Brandklout too. A rename is a MIGRATION, not an edit — the id keys the installed record,
+> `settings_json`, `plugin_records` (which is `on delete cascade`, so an uninstall takes the
+> rows with it), and the module id inside every page carrying an Embed block, which the host
+> forces to be `<pluginId>.<name>`. Use
+> [`deliver/process/22-instatic-api-sync/migrate-plugin-ids.mjs`](../22-instatic-api-sync/migrate-plugin-ids.mjs):
+> `export` -> `swap --zips <dir> --apply` -> `publish --apply` -> `verify` -> `uninstall --apply`.
+> It exports first, imports into the new id, rewrites the embed nodes, then DISABLES the old
+> plugins (rollback: they keep their rows until `uninstall`). All five live instances were
+> migrated on 2026-09-10; anything installed from an older package will carry the old id.
+
 ## Client-Facing Overview
 Third-party widgets — booking forms, review widgets, chat bubbles, CRM embeds — can be placed on an Instatic site by hand, from the editor, by whoever is editing the page. Paste the vendor's iframe or snippet, publish, done. No developer, no agent, no platform fork.
 
@@ -10,7 +22,7 @@ Third-party widgets — booking forms, review widgets, chat bubbles, CRM embeds 
 
 Instatic publishes every public page behind a strict Content-Security-Policy carrying `frame-src 'none'` and `script-src 'self' '<importmap-sha>'`, and ships **no module that emits an `<iframe>` or raw HTML** (`base.video` is YouTube-only). Out of the box that makes every third-party embed impossible — not awkward, impossible — and there is no setting, env var or admin field that changes it.
 
-`webzite.embed-origins` closes both halves through the public plugin API, with no fork and no patched image:
+`brandklout.embed-origins` closes both halves through the public plugin API, with no fork and no patched image:
 
 | Half | Entrypoint | What it does |
 |---|---|---|

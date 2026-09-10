@@ -1,4 +1,4 @@
-# AEO Schema — `webzite.aeo-schema` v1.2.0
+# AEO Schema — `brandklout.aeo-schema` v1.2.0
 
 One JSON-LD `@graph` on every published page, managed from the admin and
 changeable across the whole site in one API call.
@@ -12,7 +12,7 @@ to resolve "who is this" against a knowledge graph it already holds.
 
 ## What it writes
 
-One `<script type="application/ld+json" data-aeo="webzite.aeo-schema">` before
+One `<script type="application/ld+json" data-aeo="brandklout.aeo-schema">` before
 `</head>`, holding a `@graph` of linked nodes:
 
 | node | where | built from |
@@ -110,7 +110,7 @@ conditions and not a procedure, and `/doctor-referral` addresses clinicians.
 
 ## The API
 
-Under `/admin/api/cms/plugins/webzite.aeo-schema/runtime/`.
+Under `/admin/api/cms/plugins/brandklout.aeo-schema/runtime/`.
 
 | method | path | gate | what |
 | :--- | :--- | :--- | :--- |
