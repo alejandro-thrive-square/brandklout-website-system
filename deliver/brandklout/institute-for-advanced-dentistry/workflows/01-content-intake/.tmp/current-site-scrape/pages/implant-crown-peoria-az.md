@@ -1,11 +1,11 @@
 # What Is an Implant Crown? A Prosthodontist’s Guide for Peoria Patients
 
 - URL: https://www.ifadentistry.com/implant-crown-peoria-az/
-- Title: Dental Implant Crowns In Peoria AZ — What To Expect
-- Meta description: Wondering what an implant crown from a prosthodontist involves? We explain the process, materials, and what makes specialist placement different.
+- Title: What Is an Implant Crown? A Prosthodontist’s Guide for Peoria Patients – Institute For Advanced Dentistry
+- Meta description: 
 - Canonical: https://www.ifadentistry.com/implant-crown-peoria-az/
-- OG image: https://www.ifadentistry.com/wp-content/uploads/2026/01/AdobeStock_868184903.webp
-- Words: 1239
+- OG image: https://www.ifadentistry.com/wp-content/uploads/2026/01/AdobeStock_868184903-1024x439.webp
+- Words: 1230
 - Screenshot: screenshots/desktop/implant-crown-peoria-az.png
 
 ## Outline
@@ -23,19 +23,19 @@
 - ### What’s the difference between an implant crown and a regular crown?
 - ## Ready to Learn More?
 - ## Share this post
-- ### Tooth Replacement Peoria AZ: A Full Guide to Dental Implants
-- ### What Is a Prosthodontist? Understanding This Advanced Dental Specialty
-- ### How to Get a New Smile in One Day in Peoria AZ
+- ### How Dental Implants Improve Airway Stability and Breathing During Sleep
+- ### Are Dental Implants Tax Deductible?
+- ### Peoria Prosthodontics – Institute For Advanced Dentistry
 
 ## Images on page
 - https://www.ifadentistry.com/wp-content/uploads/2026/01/AdobeStock_868184903-1536x658.webp — alt: "Dental Implant Success Rate blog for Institute for Advanced Dentistry, your trusted dental implant crowns in Peoria, AZ."
-- https://www.ifadentistry.com/wp-content/uploads/2025/09/Blogpost.jpg — alt: "Tooth replacement peoria az before and after."
-- https://www.ifadentistry.com/wp-content/uploads/2025/12/HMN01590.webp — alt: "Prosthodontist in Peoria AZ at Institute for Advanced Dentistry."
-- https://www.ifadentistry.com/wp-content/uploads/2025/11/cosmetic-dent-1.webp — alt: "Lady with her new smile in one day in Peoria AZ from IFA Dentistry"
+- https://www.ifadentistry.com/wp-content/uploads/2025/06/how-dental-implants-improve-airway-stability-and-breathing-during-sleep.jpg — alt: "How Dental Implants Improve Airway Stability and Breathing During Sleep"
+- https://www.ifadentistry.com/wp-content/uploads/2025/06/are-dental-implants-tax-deductible.jpg — alt: "Are Dental Implants Tax Deductible?"
+- https://www.ifadentistry.com/wp-content/uploads/2026/05/dental-restorations-peoria-az.webp — alt: "dental restorations peoria az"
 
 ## Video / embeds
 - https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d106311.30932174197!2d-112.277398!3d33.625319!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x872b4242037db28b%3A0x1a23fa86c6bcf3d5!2sInstitute%20For%20Advanced%20Dentistry%20Implants!5e0!3m2!1sen!2sus!4v1753304950089!5m2!1sen!2sus
-- https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LeDQaArAAAAAIslEvkBPLRj54W3iF1U1XyyCE2W&co=aHR0cHM6Ly93d3cuaWZhZGVudGlzdHJ5LmNvbTo0NDM.&hl=es-419&v=8x-4t2pegToiW8KmThtO4AQt&size=invisible&anchor-ms=20000&execute-ms=30000&cb=5z8hfeg0insl
+- https://www.google.com/recaptcha/api2/anchor?ar=1&k=6LeDQaArAAAAAIslEvkBPLRj54W3iF1U1XyyCE2W&co=aHR0cHM6Ly93d3cuaWZhZGVudGlzdHJ5LmNvbTo0NDM.&hl=es-419&v=BnqMGSY_YP4cCmbNINHpJPkd&size=invisible&anchor-ms=20000&execute-ms=30000&cb=xsulklqvsei7
 
 ## Text
 
@@ -96,4 +96,4 @@ A regular crown restores a damaged natural tooth by capping it. An implant crown
 Ready to Learn More?
 If you’re exploring dental implants in Peoria, AZ, we’d be glad to walk you through your options. Dr. Bensoussan offers comprehensive implant consultations, including a full evaluation of your bite, bone, and smile to determine whether an implant crown is the right solution for your case.
 Schedule a consultation or call our Peoria office at (602) 242-2256.
-Share this postPrevious postNext postRelated ArticlesTooth Replacement Peoria AZ: A Full Guide to Dental ImplantsSeptember 30, 2025Missing teeth can affect your confidence, chewing ability, facial structure, and oral health. Fortunately, modern dentistry offers durable, natural-looking solutions…What Is a Prosthodontist? Understanding This Advanced Dental SpecialtyDecember 30, 2025If you’ve been researching advanced dental care or complex smile restoration, you may have come across the term prosthodontist and…How to Get a New Smile in One Day in Peoria AZNovember 30, 2025What You Need to Know Before Transforming Your Teeth If you’ve ever wished you could wake up and finally fix…
+Share this postPrevious postNext postRelated ArticlesHow Dental Implants Improve Airway Stability and Breathing During SleepJune 12, 2024Dental implants help stabilize the airway and breathing during sleep by treating primary issues causing obstructive sleep apnea (OSA) and…Are Dental Implants Tax Deductible?July 16, 2024Are you considering dental implants and wondering if they can be tax-deductible? Yes, they can be under specific circumstances. You…Peoria Prosthodontics – Institute For Advanced DentistryAugust 3, 2026Introduction to Peoria Prosthodontics Peoria Prosthodontics stands as a beacon of dental excellence in Peoria, AZ, dedicated to transforming smiles…

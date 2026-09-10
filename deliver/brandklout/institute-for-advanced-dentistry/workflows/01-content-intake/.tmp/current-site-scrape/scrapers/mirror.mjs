@@ -104,6 +104,8 @@ function enqueuePage(pathname) {
 
 function enqueueAsset(absUrl, from) {
   const key = stripQuery(absUrl);
+  // the speculation-rules script lists "/wp-content/uploads/*" style globs, not files
+  if (key.includes("*")) return;
   if (!seenAsset.has(key)) {
     seenAsset.add(key);
     assetQueue.push({ url: absUrl, key, from });

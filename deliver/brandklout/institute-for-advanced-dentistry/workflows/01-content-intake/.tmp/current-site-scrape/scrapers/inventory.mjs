@@ -110,7 +110,10 @@ ${Object.entries(byExt)
   .map(([e, v]) => `| ${e} | ${v.n} | ${mb(v.b)} |`)
   .join("\n")}
 
-${site.assets.filter((a) => a.status === "fail").length} "assets" failed: they are wildcard patterns (\`/wp-content/plugins/*\`) inside a plugin config, not files.
+${(() => {
+  const n = site.assets.filter((a) => a.status === "fail").length;
+  return n ? `${n} assets failed to download; see \`assets-manifest.csv\`.` : "Every referenced asset downloaded. (Wildcard patterns like `/wp-content/plugins/*` in the speculation-rules script are skipped: they are not files.)";
+})()}
 
 ## Media library (${media.length} originals)
 
