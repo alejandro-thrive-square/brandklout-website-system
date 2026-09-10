@@ -6,7 +6,7 @@ The 2026-09-04 scrape of ifadentistry.com (commit `e931becc`) committed only its
 
 ## Done
 
-Re-ran the committed scrapers in `workflows/01-content-intake/.tmp/current-site-scrape/scrapers/`:
+Commit `d5a26932` on `bk-ifa-dentistry`, not pushed. Re-ran the committed scrapers in `workflows/01-content-intake/.tmp/current-site-scrape/scrapers/`:
 
 | Step | Result |
 | :--- | :--- |
