@@ -1,11 +1,12 @@
 # Runbook index
 
-13 runs, newest first. Each line is one file in this folder.
+14 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-10 | 2026-09-10 — plugin ids renamed to brandklout.* (migration, all instances) | [`2026-09-10-plugin-ids-renamed-to-brandklout.md`](./2026-09-10-plugin-ids-renamed-to-brandklout.md) |
 | 2026-09-10 | 2026-09-10 — Instatic plugin author changed to Brandklout (live + source) | [`2026-09-10-plugin-author-is-brandklout.md`](./2026-09-10-plugin-author-is-brandklout.md) |
 | 2026-09-09 | DONE 2026-09-09 (night) - THE WHOLE SITE ON INSTATIC: 215 PAGES, THE BLOG INCLUDED. All 157 posts built and published; local against live 215/215 on structure, text and geometry. **Gotchas: four browser sweeps on one machine fake timeouts; `populate-seo` drops writes on a busy host; the harvest bakes link rewrites into the JSON; two more gates carried lists; consecutive `<p>` are one prose run; the probes want absolute paths.** Railway needed a re-login and an SSH key on the new account. | [`2026-09-09-the-whole-site-on-instatic-215-pages.md`](./2026-09-09-the-whole-site-on-instatic-215-pages.md) |
 | 2026-09-09 | DONE 2026-09-09 (evening) - PICTURES THAT MATCH THE WORDS, AND NO FIGURE LEFT DANGLING. **Local only, not published.** The overlap panel painted under its photo on 19 pages (a transformed sibling); 16 figures hung alone at chapter feet; `waiting` (a wall) was the invitation on 45 pages. 23 new frames: 9 from the client's album (front of house only), 14 bought by id. **Gotchas: per-page gates cannot see composition; a pin spacer looks like empty ground at full page; `check.mjs` only checked refs under `assets/`; Magnific titles lie; a portrait cut to a band is a strip of wall.** | [`2026-09-09-pictures-that-match-the-words.md`](./2026-09-09-pictures-that-match-the-words.md) |
