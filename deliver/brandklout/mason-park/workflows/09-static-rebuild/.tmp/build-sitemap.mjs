@@ -48,7 +48,8 @@ const SECTIONS = [
   ["Patients", ["/new-patients/", "/financing/", "/dental-savings-plan/", "/special-offers/", "/virtual-consultation/", "/faq/", "/thank-you/"]],
   ["Treatments", null],   // /our-services/ + everything under /services/
   ["Blog", ["/blog/"]],
-  ["Legal", ["/terms-of-service/"]],
+  ["Resources", ["/dental-dictionary/"]],
+  ["Legal", ["/terms-of-service/", "/sitemap/"]],
 ];
 
 const esc = (s) => s.replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;");
