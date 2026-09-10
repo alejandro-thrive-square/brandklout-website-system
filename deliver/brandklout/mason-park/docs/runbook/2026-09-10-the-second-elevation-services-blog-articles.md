@@ -1,7 +1,12 @@
 # 2026-09-10 — The second elevation: services, blog index, articles, and Dr. Sung's portrait
 
 **Instance:** `https://staging.masonparkdental.com`. Production untouched.
-**Commit:** _(filled in below under Done)_
+**Commit:** `2e69cc1e` (this file's own SHA follows in the docs commit).
+**Verified live:** `verify-live.mjs` clean on `/`, four treatment pages, `/blog` and two
+articles; in Chrome on staging the topic filter shows 8 of 24 for Invisalign® and
+resets to 24, the article rail lists the headings with a 2-minute reading time and the
+tokenised topic and date, the related row has three cards, and the featured plate,
+the ink card and Dr. Sung's portrait all render.
 
 Client, this morning: *"Elevate the design on the services pages, the blog
 overview page and articles pages, improve it locally then to Instatic. There
