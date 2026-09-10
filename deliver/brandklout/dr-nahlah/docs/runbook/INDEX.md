@@ -1,11 +1,12 @@
 # Runbook index
 
-79 runs, newest first. Each line is one file in this folder.
+80 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-10 | 2026-09-10 — plugin ids renamed to brandklout.* (migration, all instances) | [`2026-09-10-plugin-ids-renamed-to-brandklout.md`](./2026-09-10-plugin-ids-renamed-to-brandklout.md) |
 | 2026-09-10 | 2026-09-10 — Instatic plugin author changed to Brandklout (live + source) | [`2026-09-10-plugin-author-is-brandklout.md`](./2026-09-10-plugin-author-is-brandklout.md) |
 | 2026-08-31 | DONE 2026-08-31: the 404 page — LIVE ON STAGING AND PRODUCTION, verified both
  | [`2026-08-31-the-404-page-live-on-staging-and-production-veri.md`](./2026-08-31-the-404-page-live-on-staging-and-production-veri.md) |
