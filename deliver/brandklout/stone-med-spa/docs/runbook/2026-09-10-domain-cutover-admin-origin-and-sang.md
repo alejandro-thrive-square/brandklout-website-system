@@ -63,6 +63,11 @@ The user asked for the republish once the open item was reported.
   - `css-parity`: `FAIL none`
   - `visual-diff` at 1440: 1.15% at worst (`treatments`), inside the 2026-09-04 baseline of 1.6%
   - `visual-diff` at 390: 2.81% at worst (`financing`), inside the baseline of 4.4%
+  - `compare-live`: 4 findings. All four are trap 30, the `div.container-large#4` 8px auto-margin
+    (left and right, local `8px` / live `0px`) on `treatments` and `botox`. The Sep 4 baseline
+    had two, the same element on one page; it is the scroll-pass noise, not a publish difference.
+    **Tail only the last lines of this gate and you see one finding and not the rest.** Save the
+    full output to a file.
 
 ## Gotchas
 
