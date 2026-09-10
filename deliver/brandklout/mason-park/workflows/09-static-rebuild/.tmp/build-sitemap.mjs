@@ -38,6 +38,10 @@ if (fs.existsSync(path.join(SITE, "index.html"))) routes.push("/");
 walk(SITE);
 routes.sort();
 
+// The 404 is a page on disk but not a destination: it is served at every
+// address that is NOT a page, it carries `noindex`, and it belongs neither in
+// the XML nor in a human list of where to go.
+const isNotFound = (r) => r === "/404/";
 const isBlogPost = (r) => r.startsWith("/blog/") && r !== "/blog/" && !r.startsWith("/blog/page/");
 const isBlogPage = (r) => r.startsWith("/blog/page/");
 const isService = (r) => r.startsWith("/services/");
@@ -73,6 +77,10 @@ const labelFor = (r) => {
   return r;
 };
 
+// Everything a person could actually visit -- the 404 is on disk but is not a
+// destination, so it is out of both the count and the lists.
+const xmlRoutes = routes.filter((r) => !isBlogPage(r) && !isNotFound(r));
+
 const listed = new Set();
 const sectionHtml = SECTIONS.map(([name, explicit]) => {
   const list = explicit
@@ -90,7 +98,7 @@ ${list.map((r) => `      <li><b>&rarr;</b><span><a href="${r}">${esc(labelFor(r)
 
 // Anything on disk that no section claimed, so a new page cannot go missing
 // from this page silently. Blog articles and blog pagination are expected.
-const unlisted = routes.filter((r) => !listed.has(r) && !isBlogPost(r) && !isBlogPage(r));
+const unlisted = routes.filter((r) => !listed.has(r) && !isBlogPost(r) && !isBlogPage(r) && !isNotFound(r));
 if (unlisted.length) {
   console.log("! not in any section, add them to SECTIONS: " + unlisted.join(" "));
 }
@@ -122,7 +130,7 @@ const body = `<main class="main-wrapper" id="main">
   <div class="wrap svc-head is-split">
     <div>
       <p class="chapter-tag"><i></i><b>Pages</b></p>
-      <h2 data-split>All ${routes.length} of them.</h2>
+      <h2 data-split>All ${xmlRoutes.length} of them.</h2>
     </div>
     <p class="pe-lede">The ${routes.filter(isBlogPost).length} blog articles are not listed one by one here &mdash; that is what <a href="/blog/">the blog</a> is for. They are all in <a href="/sitemap.xml">sitemap.xml</a>.</p>
   </div>
@@ -192,8 +200,6 @@ const prio = (r) =>
 // 404 to Search Console is worse than leaving out a route that was never a
 // landing page. /blog itself and all 161 articles ARE listed, and their URLs
 // are identical in both builds.
-const xmlRoutes = routes.filter((r) => !isBlogPage(r));
-
 const xml = `<?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
 ${xmlRoutes.map((r) => `  <url><loc>${ORIGIN}${r}</loc><priority>${prio(r)}</priority></url>`).join("\n")}

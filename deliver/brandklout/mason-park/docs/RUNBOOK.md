@@ -5,12 +5,17 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
-## Where the build stands — 2026-09-09
+## Where the build stands — 2026-09-10
 
-**Every page from the old build is rebuilt and live on staging.**
-`https://staging.masonparkdental.com` serves 54 static pages, the `/blog`
-listing, and 161 articles at their original URLs. `verify-live.mjs` is clean on
-all of them. Production has not been touched.
+**The rebuild is finished.** `https://staging.masonparkdental.com` serves 55
+static pages, the `/blog` listing, 161 articles at their original URLs, and a
+branded 404 on every unmatched address. 57 page rows. Every local gate is green
+and `verify-live.mjs` is clean on all 54 routable pages. **Production has not
+been touched — promoting staging is the next step, and it is the client's
+call.**
+
+Everything still open is a client decision, listed at the foot of
+[`runbook/2026-09-10-the-404-page.md`](./runbook/2026-09-10-the-404-page.md).
 
 **All 31 approved treatments have pages.** Every catalogue chip links; none are dashed.
 Every internal link on every page resolves. The definitive list is the `el-tabs` chips on
@@ -60,9 +65,14 @@ Associates account it is.
   into `services-invisalign` and 404s the page while the admin still looks healthy.
   Only `PUT /admin/api/cms/site-document` writes a page slug verbatim. `apply-seo.mjs`
   refuses to run for this reason and carries the whole story.
-- **`apply-blog-template.mjs` runs AFTER any `import-pages.mjs`.** The site-document save
-  rebuilds each row through `pageToCells()` and drops the template flags, and every
-  `/blog/<slug>` 404s the moment they are gone.
+- **`apply-blog-template.mjs` AND `apply-404-template.mjs` run AFTER any
+  `import-pages.mjs`.** The site-document save rebuilds each row through
+  `pageToCells()` and drops the template flags. Lose the first and every
+  `/blog/<slug>` 404s; lose the second and Instatic's bare stock 404 is back.
+  The full end-to-end order is in the 2026-09-10 run.
+- **`GET /404` returning 200 is Instatic's design**, not a soft-404 bug — its router
+  says so, matching how static hosts treat `404.html`. Unmatched URLs correctly get
+  status 404. Do not re-investigate.
 - **Re-run `import-scripts.mjs` whenever a page row id changes.** The script bundle is
   scoped to an explicit `pageIds` list; a page outside it loads no GSAP and no `journey.js`.
 - **Per-page meta descriptions do not render in this Instatic build.** Only entry routes

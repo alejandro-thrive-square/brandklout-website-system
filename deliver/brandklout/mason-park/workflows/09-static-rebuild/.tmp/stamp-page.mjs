@@ -78,7 +78,20 @@ html = html.replace(
   /<meta name="description" content="[^"]*">/,
   `<meta name="description" content="${esc(spec.description)}">`,
 );
-html = html.replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`);
+// `"noindex": true` in the spec: no canonical, no og:url, and a robots tag.
+// The 404 page is the case this exists for -- a not-found page that declares
+// itself canonical is telling Google to index an error, and it is the one page
+// on the site that is served at EVERY unmatched address, so a canonical on it
+// is wrong at all of them at once.
+if (spec.noindex) {
+  html = html.replace(/\s*<link rel="canonical" href="[^"]*">/, "");
+  html = html.replace(
+    /<meta name="description"/,
+    `<meta name="robots" content="noindex, follow">\n  <meta name="description"`,
+  );
+} else {
+  html = html.replace(/<link rel="canonical" href="[^"]*">/, `<link rel="canonical" href="${url}">`);
+}
 html = html.replace(
   /<meta property="og:title" content="[^"]*">/,
   `<meta property="og:title" content="${esc(spec.title)}">`,
@@ -87,7 +100,8 @@ html = html.replace(
   /<meta property="og:description" content="[^"]*">/,
   `<meta property="og:description" content="${esc(spec.description)}">`,
 );
-html = html.replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`);
+if (spec.noindex) html = html.replace(/\s*<meta property="og:url" content="[^"]*">/, "");
+else html = html.replace(/<meta property="og:url" content="[^"]*">/, `<meta property="og:url" content="${url}">`);
 
 // BreadcrumbList: only the third item moves.
 html = html.replace(/(<script type="application\/ld\+json">\{"@context":"https:\/\/schema\.org","@type":"BreadcrumbList")[\s\S]*?(<\/script>)/, (_m, open, close) => {
