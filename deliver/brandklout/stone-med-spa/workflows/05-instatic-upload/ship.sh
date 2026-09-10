@@ -15,11 +15,24 @@ set -euo pipefail
 
 HERE="$(cd "$(dirname "$0")" && pwd)"
 TMP="$HERE/.tmp"
-LINK="${RAILWAY_LINK_DIR:?set RAILWAY_LINK_DIR to a directory linked to the Stone project}"
+# No apostrophe in this message: inside ${VAR:?...} a single quote opens a
+# quoted string and the closing brace is never seen, so the whole file fails to
+# parse rather than the variable failing to expand.
+LINK="${RAILWAY_LINK_DIR:?set RAILWAY_LINK_DIR to a directory linked to the Railway project for THIS site — check-link.mjs verifies which}"
 
 rs() { ( cd "$LINK" && railway ssh "$@" ); }
 
 say() { printf '\n=== %s\n' "$1"; }
+
+# --- 0. is the link dir this site? ---------------------------------------
+# Everything below runs inside whatever container $LINK is linked to, and
+# nothing else here checks which one that is. A link dir carried over from a
+# sibling worktree ships THIS site's payload into THAT site's container and
+# runs the importer there. check-link.mjs asserts the linked project and
+# environment actually serve INSTATIC_BASE_URL; read its header for the rest.
+say "verifying the link dir"
+[ -f "$HERE/check-link.mjs" ] || { echo "check-link.mjs is missing — refusing to ship unverified" >&2; exit 1; }
+node "$HERE/check-link.mjs" "$LINK"
 
 # --- 1. the three TypeScript files --------------------------------------
 # Small enough to go in one shot each, but still base64'd: the sources contain

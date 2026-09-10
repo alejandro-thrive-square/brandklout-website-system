@@ -113,6 +113,9 @@ A new instance is provisioned but **not set up** — `users`, `site` and `sessio
 export RAILWAY_LINK_DIR=/path/to/a/dir/linked/to/the/project
                                # railway link -p ad4db12e-eb77-42b8-9021-4e84083fc99d \
                                #              -s "Stone Med Spa" -e production
+                               # Link by project ID, never by the name "Stone": there are THREE
+                               # Stone projects. ship.sh runs check-link.mjs first and refuses a
+                               # link dir that does not serve INSTATIC_BASE_URL
 
 node install-fonts.mjs --apply  # 0. ONCE per instance: the two typefaces into Instatic's
                                #    own library. See trap 16
@@ -145,6 +148,34 @@ node visual-diff.mjs 390        #    at both widths. No pairing, no property lis
 the routes and assets resolve; `compare-live.mjs` asks whether the page still LOOKS like the build.
 Two defects shipped through a clean `verify-live.mjs` run and were caught by the comparison: a
 `width` the converter dropped, and a background colour that changed because the cascade was rebuilt.
+
+### The link guard, and the three ways the Railway target gets crossed
+
+`ship.sh` runs `check-link.mjs` as step 0 and refuses to ship if it fails. The invariant it
+enforces: **the linked Railway project and environment must actually serve `INSTATIC_BASE_URL`** —
+the same host `insta-api.mjs` resolves `BASE` from, so ship.sh and push-site.mjs cannot end up
+pointing at two different sites. It reads that host per-worktree, so it needs no per-client table
+here and stays correct when this toolkit is copied to the next client, which is the failure mode it
+exists for.
+
+It was written after the med spa worktree was found carrying this directive's own
+`railway link -p "Stone Surgical Arts"` line, four lines above a script that would have shipped the
+med spa's payload into the Surgical Arts container and run the importer there.
+
+Three separate mechanisms can point `railway` at the wrong instance. Only the first is obvious:
+
+1. **`$RAILWAY_LINK_DIR` copied from a sibling worktree.** `ship.sh` has no other source of truth —
+   every `railway ssh` runs `cd "$RAILWAY_LINK_DIR"`. This is what the guard checks.
+2. **`RAILWAY_PROJECT_ID` in the environment outranks the link dir entirely.** Standing in a
+   directory linked to Stone Surgical Arts with the med spa's value exported, `railway status`
+   reports *Stone Med Spa*. It is in the worktree `.env`, so `set -a; . .env` in the shell you run
+   `ship.sh` from is enough to do it. The guard names the variable when this happens.
+3. **`RAILWAY_TOKEN` in the worktree `.env` is stale and overrides the CLI's own stored auth.** Any
+   script that loads `.env` and then shells out to `railway` dies with `Invalid RAILWAY_TOKEN`, from
+   a CLI that works by hand a second later. `check-link.mjs` drops the RAILWAY_* values it injected
+   before spawning `railway`, so it observes the environment `ship.sh` will really have.
+
+Link by **project ID, never by the name "Stone"** — there are three Stone projects.
 
 ## Why the conversion runs on the container
 
