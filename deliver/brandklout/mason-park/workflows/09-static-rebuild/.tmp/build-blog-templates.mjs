@@ -50,6 +50,18 @@ const sampleName = fs.readdirSync(SRC).find((f) => f.startsWith("blog__") && !f.
 const article = read(sampleName);
 const listing = read("blog.json");
 
+// ONE card, for both loops: the index's grid and the article's related row.
+// It is build-blog.mjs's `cardsFor` card with tokens where the values were;
+// keep the two in step or the loop's cards will not match the static ones.
+const CARD = '<li class="bl-card">'
+  + '<a class="bl-card_link" href="{currentEntry.permalink}">'
+  + '<span class="bl-card_meta"><b>{currentEntry.topic}</b>'
+  + '<time datetime="{currentEntry.dateIso}">{currentEntry.dateDisplay}</time></span>'
+  + '<h3 class="bl-card_title">{currentEntry.title}</h3>'
+  + '<p class="bl-card_text">{currentEntry.excerpt}</p>'
+  + '<span class="bl-card_more" aria-hidden="true">Read</span>'
+  + "</a></li>";
+
 // ---------------------------------------------------------------------------
 // 1. The entry template
 // ---------------------------------------------------------------------------
@@ -96,24 +108,33 @@ html = replaceOnce(html,
 // same trap is documented at `.lf-section > * + *` in site.css, which exists
 // because it was hit once already.
 {
-  const open = html.indexOf('<div class="lf-body text-rich-text">');
+  const open = html.indexOf('<div class="lf-body text-rich-text bl-art_body">');
   if (open < 0) throw new Error("template: could not find the article body");
   const close = html.indexOf("</div>", open) + 6;
   html = html.slice(0, open)
-    + '<div class="lf-body text-rich-text" id="@@OUTLET@@"></div>'
+    + '<div class="lf-body text-rich-text bl-art_body" id="@@OUTLET@@"></div>'
     + html.slice(close);
 }
 
-// The related-articles ledger. On a static page these are three hand-picked
+// The rail's facts (2026-09-10): the topic and the date are tokens too. The
+// static page writes the sample article's own values into these two <dd>s;
+// on the template every article would otherwise show the sample's.
+html = html.replace(/<dd class="bl-art_topic">[^<]*<\/dd>/, '<dd class="bl-art_topic">{currentEntry.topic}</dd>');
+html = html.replace(/<dd class="bl-art_date">[^<]*<\/dd>/, '<dd class="bl-art_date">{currentEntry.dateDisplay}</dd>');
+if (!html.includes('<dd class="bl-art_topic">{currentEntry.topic}</dd>') || !html.includes('<dd class="bl-art_date">{currentEntry.dateDisplay}</dd>'))
+  throw new Error("template: could not find the rail's topic and date");
+
+// The related-articles cards. On a static page these are three hand-picked
 // slugs; on a template there is no such thing, so it becomes a loop of the
-// three most recent articles. The loop's own children are the <li>s.
+// three most recent articles. The loop's own children are the <li>s, and
+// each is the same card the index uses.
 {
-  const open = html.indexOf('<ul class="svc-ledger">');
+  const open = html.indexOf('<ul class="bl-grid is-related">');
   if (open < 0) throw new Error("template: could not find the related list");
   const close = html.indexOf("</ul>", open) + 5;
   html = html.slice(0, open)
-    + '<ul class="svc-ledger" id="@@LOOP:recent:3@@">'
-    + '<li><b>Read</b><span><a href="{currentEntry.permalink}">{currentEntry.title}</a></span></li>'
+    + '<ul class="bl-grid is-related" id="@@LOOP:recent:3@@">'
+    + CARD
     + "</ul>"
     + html.slice(close);
 }
@@ -142,14 +163,7 @@ let index = listing.html;
   const close = index.indexOf("</ul>", open) + 5;
   index = index.slice(0, open)
     + '<ul class="bl-grid" id="@@LOOP:all:24@@">'
-    + '<li class="bl-card">'
-    + '<a class="bl-card_link" href="{currentEntry.permalink}">'
-    + '<span class="bl-card_meta"><b>{currentEntry.topic}</b>'
-    + '<time datetime="{currentEntry.dateIso}">{currentEntry.dateDisplay}</time></span>'
-    + '<h3 class="bl-card_title">{currentEntry.title}</h3>'
-    + '<p class="bl-card_text">{currentEntry.excerpt}</p>'
-    + '<span class="bl-card_more" aria-hidden="true">Read &rarr;</span>'
-    + "</a></li>"
+    + CARD
     + "</ul>"
     + index.slice(close);
 }

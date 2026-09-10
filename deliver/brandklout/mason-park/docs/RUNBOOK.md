@@ -7,6 +7,17 @@ then only the runs you need. Do not read them all.
 
 ## Where the build stands — 2026-09-10
 
+**The second elevation is on staging** (evening run,
+[`runbook/2026-09-10-the-second-elevation-services-blog-articles.md`](./runbook/2026-09-10-the-second-elevation-services-blog-articles.md)):
+the 31 treatment pages' ragged card grids are equal-row mosaics of photo cards
+and tonal plates, every Treatment overlap carries a stock photograph of the
+treatment (Unsplash, `stock-*` in the manifest), the provider band carries Dr.
+Sung's 3703×4000 portrait from his other practice's site (`dr-sung`), the blog
+index has a topic strip that filters the loop, and every article has a sticky
+contents rail. All of it is CSS at the end of `site.css` plus `elevate.js`'s
+`blog()`; `apply-stock.mjs` is the page→frame map. **Awaiting the client's
+review.**
+
 **The rebuild is finished.** `https://staging.masonparkdental.com` serves 55
 static pages, the `/blog` listing, 161 articles at their original URLs, and a
 branded 404 on every unmatched address. 57 page rows. Every local gate is green
@@ -73,7 +84,11 @@ Associates account it is.
 - **`GET /404` returning 200 is Instatic's design**, not a soft-404 bug — its router
   says so, matching how static hosts treat `404.html`. Unmatched URLs correctly get
   status 404. Do not re-investigate.
-- **Re-run `import-scripts.mjs` whenever a page row id changes.** The script bundle is
+- **`fetch-nodes.mjs` always writes `converted-pages.json`**, so the blog-templates
+  cycle overwrites the pages' set. Copy it to `converted-templates.json` right after that
+  fetch, and run `import-styles.mjs` for the pages BEFORE the templates cycle.
+- **Re-run `import-scripts.mjs` whenever a page row id changes**, and whenever
+  `elevate.js`, `journey.js` or `site.js` change — the bundle is a snapshot. The script bundle is
   scoped to an explicit `pageIds` list; a page outside it loads no GSAP and no `journey.js`.
 - **Per-page meta descriptions do not render in this Instatic build.** Only entry routes
   get their own (`documentMeta`). The 161 articles have real descriptions; the 54 pages

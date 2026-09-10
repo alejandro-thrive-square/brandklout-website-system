@@ -62,6 +62,8 @@
 | `.tmp/verify-live.mjs` | Checks the PUBLISHED pages: 200, styles applied, GSAP booted, images resolve, no overflow. |
 | `.tmp/to-instatic.mjs` | Turns `home/` into what Instatic should hold. |
 | `.tmp/upload-media.mjs` | Uploads the media manifest, writes the local → uploaded path map. |
+| `.tmp/apply-stock.mjs` | The page→stock-frame map for the 31 treatment pages and Dr. Sung's portrait swap. Idempotent; `--check` reports. |
+| `.tmp/stock-search.mjs` | Reads Unsplash search results through the installed Chrome (playwright-core) — ids, alts, links — for a contact sheet. |
 | `.tmp/insta.mjs` | Minimal Instatic admin client. Points at Mason Park, deliberately not shared with another client's workflow. |
 
 ## Editing the design
@@ -411,6 +413,54 @@ Three things learned, for the next pass:
 4. **The word and image counts above are the first cut's.** The second cut kept the
    word counts within a few percent and dropped some images with the child photographs;
    run the counting one-liner in the runbook rather than trusting this paragraph.
+
+### The second elevation, 2026-09-10: the messy layouts, the blog, and Dr. Sung's portrait
+
+Client note, 2026-09-10: *"Elevate the design on the services pages, the blog overview page
+and articles pages ... There are some layouts that look messy. Look for a Dr. William photo
+with higher resolution ... If you need to add images use stock photos related to the
+content."* Everything below is the `sv-`/`bl-` block at the **end** of `site.css` (after the
+`el-` layer and the first `bl-` block), and it is scoped so the homepage's four heights do
+not move; the Invisalign page moves deliberately and the height baseline was re-saved.
+
+**What was messy, and the fix.**
+
+| Where | What was wrong | What it is now |
+| :--- | :--- | :--- |
+| `svc-grid` (the qualify 4-up and the why 3-up) | Photo cards and text cards each took their own height, so a row read as four boxes at four heights with holes under the short ones; the stagger made it worse. | Rows are equal height (`align-items: stretch`). A card **without** a photograph is a *tonal plate*: sand ground, the numeral at 3.4rem (or a drawn copper diamond where there is no numeral), the copy at the foot. Photo and plate alternate and the set reads as one mosaic. The rule is `:has()`-based, so no markup changed. |
+| `svc-card_media` | A fixed 4:3 image left a band of empty panel under itself in a tall row. | The wrapper carries the aspect ratio and grows with the row; the image is absolute inside it. The why grid uses 16:10 so its plates do not tower. |
+| `svc-ledger` inside an overlap panel | "Porcelain-fused-to-metal" ran out of its cell and was clipped. | Labels wrap (`overflow-wrap: anywhere`); a ledger inside a panel is two columns, not auto-fit. |
+| `svc-provider` | Sized to hide a 230×300 thumbnail. | A 24rem portrait on an offset hairline plate, in colour. |
+| `bl-grid` | 161 identical white cards, a WordPress listing. | A topic strip (`bl-topics`: counted numbers, the practice's photographs, and each tile a **filter** for the grid), the newest article as a sand plate across the first row, an ink card every ninth, a numeral on every card (a CSS counter, so the loop needs nothing). |
+| The article | A 72ch column with two thirds of the screen empty beside it. | `bl-art`: a sticky rail (contents built from the headings by `elevate.js`, topic, date, reading time, the booking button, one photograph) beside 66ch of prose with a lede, a drop cap, ruled headings; related articles as the same cards the index uses. |
+
+**Dr. Sung's portrait.** The only file the practice ever published was
+`DrWilliamSung-230x300-1.webp`, and Wayback has nothing larger under either domain. His
+*other* practice, Grand Mission Dentistry (`grandmissiondentistry.com`, a Webflow site),
+publishes a 3703×4000 studio portrait of him in a white coat. It is cropped 3:4 at the four
+srcset widths as `mp-dr-sung-*.jpg` and registered in `album-manifest.json` as `dr-sung`
+with its source. The 459×600 file on the same site named "DrWilliamSung (1)" is **a
+different person** — check the face, not the filename.
+
+**The stock photographs.** With the client's leave, every treatment page's Treatment
+overlap now carries a photograph *of the treatment* — a crown on a model, an aligner, an
+extracted tooth — rather than a generic frame of the practice. They are Unsplash (Unsplash
+License), registered as `stock-*` in the manifest with their photo ids, cut 3:2 at the four
+widths. Two tools: `.tmp/stock-search.mjs` drives the installed Chrome through
+playwright-core to read Unsplash search results (curl gets a 401 and the Chrome extension
+blocks the JSON API), and `.tmp/apply-stock.mjs` holds the page→frame map and does the
+swap, idempotently, then expands the macros. Pick frames from a contact sheet, never from
+the alt text: "a pile of chocolate" is a row of crowns and "a white candle" is the crown on
+a black model. Stock rules that still hold: no child patients, and nothing captioned as the
+practice's own result.
+
+**The CMS side of the blog.** The article body on Instatic is a `base.outlet` and the index
+a `base.loop`, so the design lives in CSS and `elevate.js`, not in per-article markup.
+`build-blog-templates.mjs` now shares one `CARD` string with `build-blog.mjs`'s `cardsFor`
+— keep them in step — and tokenises the rail's `bl-art_topic` / `bl-art_date` cells, or
+every article shows the sample's. The topic filter compares the card's `.bl-card_meta b`
+text with the tile's `data-topic`, normalised to letters, and re-applies through a
+MutationObserver when "Load more" appends cards.
 
 ## Instatic import
 

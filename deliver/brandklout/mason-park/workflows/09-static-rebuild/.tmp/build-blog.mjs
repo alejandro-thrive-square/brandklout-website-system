@@ -72,6 +72,14 @@ const TOPIC_IMG = {
   "Dental implants": "scanner-screen-3",
   General: "hygienist-working-2",
 };
+// The photograph in the article's sticky rail (2026-09-10), by topic. On
+// Instatic every article shares one template, so the template carries the
+// General one; the static build varies it.
+const TOPIC_RAIL = {
+  "Invisalign&reg;": "scanner-chair",
+  "Dental implants": "dentist-standing",
+  General: "team-reception",
+};
 
 const relatedFor = (p) => {
   const topic = topicOf(p);
@@ -109,7 +117,7 @@ const cardsFor = (list) => list
           <span class="bl-card_meta"><b>${esc(topic)}</b>${p.published ? `<time datetime="${escAttr(p.published)}">${esc(niceDate(p.published))}</time>` : ""}</span>
           <h3 class="bl-card_title">${esc(p.title)}</h3>
           <p class="bl-card_text">${esc(p.excerpt || p.description)}</p>
-          <span class="bl-card_more" aria-hidden="true">Read &rarr;</span>
+          <span class="bl-card_more" aria-hidden="true">Read</span>
         </a>
       </li>`;
   })
@@ -118,6 +126,33 @@ const cardsFor = (list) => list
 const years = [...new Set(posts.map((p) => p.year).filter(Boolean))].sort().reverse();
 const topicCounts = {};
 for (const p of posts) topicCounts[topicOf(p)] = (topicCounts[topicOf(p)] || 0) + 1;
+
+// The topic strip (2026-09-10). One tile per topic, the count as a counted
+// numeral (journey.js's `data-count`), a photograph from the practice's own
+// album, and the tile itself a filter for the grid under it (elevate.js).
+// The first tile is "everything", and is the one on by default. The
+// photographs are rooms and staff, never a child patient -- see the
+// pediatric note in the README.
+const TOPIC_TILE = {
+  All: { img: "team-corridor", hint: "Every article, newest first" },
+  General: { img: "hygienist-working-3", hint: "Checkups, hygiene, what to expect" },
+  "Invisalign&reg;": { img: "scanner-screen-2", hint: "Clear aligners, for teens and adults" },
+  "Dental implants": { img: "dentist-handheld", hint: "Placement, restoration, healing" },
+};
+const topicStrip = () => {
+  const rows = [["All", posts.length], ...Object.entries(topicCounts).sort((a, b) => b[1] - a[1])];
+  return `    <ul class="bl-topics" data-counters>
+${rows.map(([t, n]) => {
+    const tile = TOPIC_TILE[t] || { img: "team-corridor", hint: "" };
+    const label = t === "All" ? "Everything" : t === "General" ? "General dental health" : t;
+    return `      <li><a class="bl-topic${t === "All" ? " is-on" : ""}" href="#articles" data-topic="${t === "All" ? "" : escAttr(t)}">
+        <span class="bl-topic_shot">{{img slug="${tile.img}" sizes="(max-width: 767px) 100vw, 25vw"}}</span>
+        <span class="bl-topic_body"><b class="bl-topic_num" data-count="${n}">${n}</b><span class="bl-topic_name">${label}</span><span class="bl-topic_hint">${esc(tile.hint)}</span></span>
+      </a></li>`;
+  }).join("\n")}
+    </ul>
+    <p class="bl-empty" hidden>No articles on this topic have loaded yet. Choose "Everything", or load more below.</p>`;
+};
 
 const overviewFor = (list, pageNo, pageCount) => `<main class="main-wrapper" id="main">
 <section class="ch ch-arrival is-compact" id="arrival" data-chapter="0" data-chapter-name="Arrival" data-theme="dark">
@@ -151,6 +186,7 @@ const overviewFor = (list, pageNo, pageCount) => `<main class="main-wrapper" id=
     <p class="pe-lede">${Object.entries(topicCounts).sort((a, b) => b[1] - a[1]).map(([t, n]) => `${n} on ${t === "General" ? "general dental health" : t}`).join(", ")}. Newest first.</p>
   </div>
   <div class="wrap">
+${topicStrip()}
     <ul class="bl-grid">
 ${cardsFor(list)}
     </ul>
@@ -228,11 +264,14 @@ for (const p of chosen) {
   const topic = topicOf(p);
   const related = relatedFor(p);
 
+  // Related articles as cards (2026-09-10), the same card the index uses.
+  // build-blog-templates.mjs finds `<ul class="bl-grid is-related">` and
+  // turns it into a loop of the three most recent; keep that string intact.
   const relatedHtml = related.length
-    ? `  <div class="wrap">
+    ? `  <div class="wrap bl-related">
     <p class="svc-ledger-label">More on ${esc(topic === "General" ? "dental health" : topic)}</p>
-    <ul class="svc-ledger">
-${related.map((r) => `      <li><b>Read</b><span><a href="/blog/${r.slug}/">${esc(r.title)}</a></span></li>`).join("\n")}
+    <ul class="bl-grid is-related">
+${cardsFor(related)}
     </ul>
   </div>`
     : "";
@@ -260,12 +299,26 @@ ${related.map((r) => `      <li><b>Read</b><span><a href="/blog/${r.slug}/">${es
   </nav>
 </div></div>
 
-<section class="ch ch-treatment" id="article" data-chapter="1" data-chapter-name="Article">
-  <div class="wrap">
-    <div class="lf-layout is-solo">
-      <div class="lf-body text-rich-text">
-${article}
+<section class="ch ch-treatment bl-article" id="article" data-chapter="1" data-chapter-name="Article">
+  <div class="wrap bl-art">
+    <aside class="bl-art_rail">
+      <div class="bl-art_sticky">
+        <p class="bl-art_label">In this article</p>
+        <ol class="bl-art_toc" data-toc></ol>
+        <dl class="bl-art_facts">
+          <div><dt>Topic</dt><dd class="bl-art_topic">${esc(topic)}</dd></div>
+          <div><dt>Published</dt><dd class="bl-art_date">${esc(niceDate(p.published)) || "Mason Park Dental of Katy"}</dd></div>
+          <div><dt>Reading time</dt><dd data-readtime>A few minutes</dd></div>
+        </dl>
+        <a class="button" href="https://www.flexbook.me/masonpark/1" target="_blank" rel="noopener">Book an appointment</a>
+        <figure class="bl-art_shot">
+          {{img slug="${TOPIC_RAIL[topic]}" sizes="(max-width: 1023px) 1px, 19rem"}}
+          <figcaption>Mason Park Dental of Katy, 21830 Kingsland Blvd</figcaption>
+        </figure>
       </div>
+    </aside>
+    <div class="lf-body text-rich-text bl-art_body">
+${article}
     </div>
   </div>
 ${relatedHtml}

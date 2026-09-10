@@ -5424,3 +5424,445 @@ a.bl-page:hover, a.bl-page:focus-visible { background: var(--accent); border-col
 .instatic-loop-load-more:hover:not(:disabled),
 .instatic-loop-load-more:focus-visible { background: var(--warm); }
 .instatic-loop-load-more:disabled { cursor: default; color: var(--fg-soft); }
+
+
+/* ===========================================================================
+   THE SECOND ELEVATION — services, blog listing, articles. 2026-09-10.
+
+   Client, reviewing staging: "There are some layouts that look messy" on the
+   services pages, the blog overview and the articles. What was messy, and
+   what this block does about it:
+
+     the grids     A svc-grid mixed photo cards with text cards and let each
+                   card take its own height, so a 4-up read as four boxes at
+                   four heights with holes under the short ones -- and the
+                   stagger, drawn to make two ranks, made it worse. Rows are
+                   now equal height, and a card WITHOUT a photograph is a
+                   tonal plate: sand ground, the numeral large, the copy at
+                   the foot. Photo and plate alternate and the set reads as
+                   one mosaic instead of a shelf of uneven boxes.
+     the ledger    A long uppercase label ("Porcelain-fused-to-metal") ran out
+                   of its cell and was clipped. Labels wrap, and a ledger
+                   inside an overlap panel is two columns, not auto-fit.
+     the provider  Dr. Sung's only portrait was 230x300, so the band was sized
+                   to hide that. His own practice site publishes a 3703x4000
+                   portrait (see album-manifest `dr-sung`); the band is now a
+                   proper feature: a tall frame on an offset plate, in colour.
+     the blog      A WordPress-shaped grid of 161 identical white cards. Now an
+                   editorial index: a topic strip with counted numbers, the
+                   newest article as a featured plate, an ink card every ninth
+                   to break the run, a numeral on every card.
+     the article   A 72ch column with two thirds of the screen empty beside it.
+                   Now a reading frame: a sticky rail (contents built from the
+                   headings by elevate.js, the facts, the booking button, one
+                   photograph) beside the prose; a lede paragraph, a drop cap,
+                   ruled headings, and related articles as cards.
+
+   Every selector here is either new (`sv-`, `bl-`) or scoped to a services
+   chapter; the homepage carries none of these classes and its four heights
+   must not move (`probe-heights.mjs --diff base`). The Invisalign page DOES
+   move, deliberately -- re-save the baseline after this is approved.
+   =========================================================================== */
+
+/* --- equal rows, and the tonal plate ------------------------------------ */
+.svc-grid { align-items: stretch; }
+.svc-card { height: 100%; }
+/* The photograph grows with the row. Its box is at least 4:3 (the aspect
+   ratio on the WRAPPER, so it has a size before the image loads) and the
+   image is absolute inside it, so a taller row gives a taller photograph
+   rather than a band of empty panel under a fixed one. */
+.svc-card_media { position: relative; flex: 1 1 auto; min-height: 0; aspect-ratio: 4 / 3; }
+.svc-card_media img { position: absolute; inset: 0; width: 100%; height: 100%; aspect-ratio: auto; }
+.svc-card.is-shot .svc-card_media { aspect-ratio: 3 / 4; }
+/* The why grid's rows are set by its photo cards; a 16:10 frame there keeps
+   the plates beside them from towering over their own two lines of copy. */
+.ch-why .svc-card_media { aspect-ratio: 16 / 10; }
+.svc-card_body { flex: 0 0 auto; }
+
+.ch-qualify .svc-card:not(:has(.svc-card_media)),
+.ch-why .svc-card:not(:has(.svc-card_media)) {
+  background: var(--sand);
+  border-color: transparent;
+}
+.ch[data-theme="dark"] .svc-card:not(:has(.svc-card_media)) { background: rgba(255, 255, 255, .06); }
+.ch-qualify .svc-card:not(:has(.svc-card_media)) .svc-card_body,
+.ch-why .svc-card:not(:has(.svc-card_media)) .svc-card_body {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  gap: .5rem;
+  min-height: 15rem;
+}
+.ch-qualify .svc-card:not(:has(.svc-card_media)) .svc-card_no,
+.ch-why .svc-card:not(:has(.svc-card_media)) .svc-card_no {
+  margin-bottom: auto;
+  font-size: calc(3.4rem * var(--t-mid));
+  color: var(--accent-lg);
+  opacity: .85;
+}
+/* A plate with no numeral (the why grid) opens on the copper diamond the
+   cost cards use, drawn rather than typed so no glyph is at the mercy of a
+   font subset. */
+.ch-why .svc-card:not(:has(.svc-card_media)):not(:has(.svc-card_no)) .svc-card_body::before {
+  content: "";
+  display: block;
+  width: .7rem;
+  height: .7rem;
+  margin: .2rem 0 auto .2rem;
+  background: var(--accent);
+  transform: rotate(45deg);
+}
+.ch-qualify .svc-card:not(:has(.svc-card_media)) .svc-card_text,
+.ch-why .svc-card:not(:has(.svc-card_media)) .svc-card_text { color: var(--fg-body); }
+/* Hover on a plate: the diamond and numeral warm up, the plate lifts a hair. */
+.svc-card:not(:has(.svc-card_media)):hover { transform: translateY(-3px); }
+@media (min-width: 900px) {
+  .svc-grid.is-stagger > *:nth-child(even):hover { transform: translateY(calc(2.75rem - 3px)); }
+}
+@media (max-width: 599px) {
+  .ch-qualify .svc-card:not(:has(.svc-card_media)) .svc-card_body,
+  .ch-why .svc-card:not(:has(.svc-card_media)) .svc-card_body { min-height: 0; }
+  .ch-qualify .svc-card:not(:has(.svc-card_media)) .svc-card_no { margin-bottom: .25rem; }
+}
+
+/* --- the ledger label that ran out of its cell --------------------------- */
+.svc-ledger b { overflow-wrap: anywhere; hyphens: manual; }
+.svc-overlap_panel .svc-ledger { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 479px) { .svc-overlap_panel .svc-ledger { grid-template-columns: minmax(0, 1fr); } }
+
+/* --- the provider band, now that there is a portrait --------------------- */
+.svc-provider {
+  gap: clamp(2rem, 5vw, 5.5rem);
+  padding-top: clamp(2.5rem, 5vw, 4.5rem);
+}
+@media (min-width: 768px) {
+  .svc-provider { grid-template-columns: minmax(0, 24rem) minmax(0, 1fr); }
+}
+.svc-provider_shot {
+  position: relative;
+  max-width: 24rem;
+  margin: 0 1.25rem 1.25rem 0;
+  border: 0;
+  background: var(--sand);
+  overflow: visible;
+}
+/* The plate: a hairline frame offset down and right, the same device the
+   arrival's stacked frames use. Drawn behind the photograph. */
+.svc-provider_shot::before {
+  content: "";
+  position: absolute;
+  inset: 1.25rem -1.25rem -1.25rem 1.25rem;
+  border: 1px solid var(--rule-strong);
+  z-index: 0;
+}
+.svc-provider_shot img {
+  position: relative;
+  z-index: 1;
+  aspect-ratio: 3 / 4;
+  filter: none;
+}
+.svc-provider_body h3 { font-size: calc(var(--f-d3) * 1.05); }
+.svc-provider_role { padding-bottom: .1rem; }
+.svc-stats b { font-size: calc(2.5rem * var(--t-mid)); }
+
+/* ===========================================================================
+   THE BLOG INDEX, second cut  (bl-)
+   =========================================================================== */
+/* The topic strip: one tile per topic, the count as a counted numeral, a
+   photograph from the practice's album, and the whole tile a filter for the
+   grid below it (elevate.js). */
+.bl-topics {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: clamp(1rem, 1.8vw, 1.75rem);
+  margin: 0 0 clamp(2.5rem, 4vw, 3.5rem);
+  padding: 0;
+  list-style: none;
+}
+@media (max-width: 991px) { .bl-topics { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+@media (max-width: 599px) { .bl-topics { grid-template-columns: minmax(0, 1fr); } }
+.bl-topic {
+  position: relative;
+  display: grid;
+  grid-template-rows: auto 1fr;
+  background: var(--panel);
+  border: 1px solid var(--rule);
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  transition: border-color .4s var(--ease), transform .4s var(--ease);
+}
+.bl-topic:hover, .bl-topic:focus-visible { border-color: var(--rule-strong); transform: translateY(-3px); }
+.bl-topic.is-on { border-color: var(--accent); }
+.bl-topic_shot { position: relative; aspect-ratio: 16 / 9; overflow: hidden; background: var(--sand); }
+.bl-topic_shot img {
+  position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block;
+  filter: grayscale(1);
+  transition: filter .6s var(--ease), transform .8s var(--ease);
+}
+.bl-topic:hover .bl-topic_shot img, .bl-topic.is-on .bl-topic_shot img { filter: none; transform: scale(1.04); }
+.bl-topic_body {
+  display: grid;
+  grid-template-columns: auto minmax(0, 1fr);
+  gap: .25rem 1.1rem;
+  align-items: end;
+  padding: 1.25rem 1.4rem 1.35rem;
+}
+.bl-topic_num {
+  grid-row: span 2;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(3.4rem * var(--t-mid));
+  line-height: .9;
+  letter-spacing: -.02em;
+  color: var(--fg);
+}
+.bl-topic_name {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  color: var(--accent);
+  align-self: end;
+}
+.bl-topic_hint {
+  font-family: var(--font-ui);
+  font-size: calc(.72rem * var(--t-ui));
+  letter-spacing: .06em;
+  color: var(--fg-soft);
+}
+.bl-topic.is-on .bl-topic_hint { color: var(--fg); }
+
+/* The grid: hairline cells, a numeral on every card, the first as a plate. */
+.bl-grid { counter-reset: post; }
+.bl-card { counter-increment: post; }
+.bl-card_link {
+  position: relative;
+  min-height: 17rem;
+  padding: 1.75rem 1.6rem 1.5rem;
+  gap: .7rem;
+}
+.bl-card_link::before {
+  content: counter(post, decimal-leading-zero);
+  position: absolute;
+  top: 1.45rem;
+  right: 1.5rem;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: calc(1.35rem * var(--t-mid));
+  line-height: 1;
+  color: var(--accent-lg);
+  opacity: .8;
+}
+.bl-card_link .bl-card_title {
+  font-size: calc(1.32rem * var(--t-ui));
+  line-height: 1.2;
+  max-width: 24ch;
+  padding-right: 2.5rem;
+  transition: color .3s var(--ease);
+}
+.bl-card_link:hover .bl-card_title { color: var(--brand); }
+.bl-card_link .bl-card_text { font-size: calc(.88rem * var(--t-ui)); line-height: 1.55; max-width: 40ch; }
+.bl-card_more {
+  display: inline-flex;
+  align-items: center;
+  gap: .6rem;
+  font-size: var(--f-label);
+  letter-spacing: .16em;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+.bl-card_more::after {
+  content: "";
+  display: block;
+  width: 2rem;
+  height: 1px;
+  background: currentColor;
+  transform-origin: 0 50%;
+  transform: scaleX(.5);
+  transition: transform .4s var(--ease);
+}
+.bl-card_link:hover .bl-card_more { text-decoration: none; }
+.bl-card_link:hover .bl-card_more::after { transform: scaleX(1); }
+
+/* The newest article is the plate: the whole first row, sand ground, the
+   title at statement size beside its own excerpt. */
+@media (min-width: 700px) {
+  .bl-card:first-child { grid-column: 1 / -1; }
+  .bl-card:first-child .bl-card_link {
+    display: grid;
+    grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+    grid-template-rows: auto 1fr auto;
+    gap: 1.25rem clamp(2rem, 4vw, 4rem);
+    align-items: start;
+    padding: clamp(2rem, 3.5vw, 3rem);
+    background: var(--sand);
+  }
+  .bl-card:first-child .bl-card_link:hover { background: var(--beige); }
+  .bl-card:first-child .bl-card_meta { grid-column: 1 / -1; }
+  .bl-card:first-child .bl-card_title {
+    grid-row: 2 / span 2;
+    font-size: calc(2.15rem * var(--t-mid));
+    line-height: 1.12;
+    letter-spacing: -.01em;
+    max-width: 22ch;
+    padding-right: 0;
+  }
+  .bl-card:first-child .bl-card_text { font-size: var(--f-lede); line-height: 1.65; max-width: 44ch; color: var(--fg-body); }
+  .bl-card:first-child .bl-card_more { align-self: end; }
+  .bl-card:first-child .bl-card_link::before { font-size: calc(2rem * var(--t-mid)); top: 1.6rem; right: 1.8rem; }
+}
+/* Every ninth card after the plate is ink, so a long run of white has a beat. */
+.bl-card:nth-child(9n + 5) .bl-card_link { background: var(--ink); color: #fff; }
+.bl-card:nth-child(9n + 5) .bl-card_link:hover { background: var(--ink-mid); }
+.bl-card:nth-child(9n + 5) .bl-card_link .bl-card_title { color: #fff; }
+.bl-card:nth-child(9n + 5) .bl-card_link:hover .bl-card_title { color: #e3c3a8; }
+.bl-card:nth-child(9n + 5) .bl-card_link .bl-card_text { color: rgba(255, 255, 255, .7); }
+.bl-card:nth-child(9n + 5) .bl-card_meta { color: rgba(255, 255, 255, .55); }
+.bl-card:nth-child(9n + 5) .bl-card_meta b, .bl-card:nth-child(9n + 5) .bl-card_more { color: #d9b79c; }
+/* A card the topic filter has hidden. `hidden` is the attribute, this is the
+   class the filter sets, so the runtime's own attribute is never fought. */
+.bl-card.is-filtered { display: none; }
+.bl-empty { padding: 2rem 0; color: var(--fg-soft); font-size: var(--f-body); }
+.bl-empty[hidden] { display: none; }
+
+/* ===========================================================================
+   THE ARTICLE  (bl-art)
+   =========================================================================== */
+.bl-article { padding-top: calc(var(--ch-pad) * .45); }
+.bl-art { display: grid; gap: clamp(2rem, 4vw, 3rem); align-items: start; }
+@media (min-width: 1024px) {
+  .bl-art { grid-template-columns: minmax(0, 19rem) minmax(0, 1fr); gap: clamp(3rem, 6vw, 6.5rem); }
+  .bl-art_sticky { position: sticky; top: 6.5rem; }
+}
+.bl-art_sticky { display: grid; gap: 1.5rem; }
+.bl-art_label {
+  margin: 0;
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  font-weight: 700;
+  letter-spacing: .18em;
+  text-transform: uppercase;
+  color: var(--accent);
+}
+.bl-art_toc {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  counter-reset: toc;
+  border-top: 1px solid var(--rule-strong);
+}
+.bl-art_toc:empty { display: none; }
+.bl-art_toc li { counter-increment: toc; }
+.bl-art_toc a {
+  display: grid;
+  grid-template-columns: 1.6rem minmax(0, 1fr);
+  gap: .6rem;
+  padding: .6rem 0;
+  border-bottom: 1px solid var(--rule);
+  font-family: var(--font-body);
+  font-size: calc(.86rem * var(--t-ui));
+  line-height: 1.4;
+  color: var(--fg-soft);
+  text-decoration: none;
+  transition: color .3s var(--ease);
+}
+.bl-art_toc a::before {
+  content: counter(toc, decimal-leading-zero);
+  font-family: var(--font-display);
+  font-size: calc(.95rem * var(--t-mid));
+  color: var(--accent-lg);
+  padding-top: .05em;
+}
+.bl-art_toc a:hover, .bl-art_toc a.is-active { color: var(--fg); }
+.bl-art_toc a.is-active::before { color: var(--brand); }
+.bl-art_toc li.is-sub a { padding-left: 1.6rem; grid-template-columns: minmax(0, 1fr); }
+.bl-art_toc li.is-sub a::before { content: none; }
+.bl-art_facts { margin: 0; display: grid; gap: .8rem; padding-top: .25rem; }
+.bl-art_facts div { display: grid; gap: .15rem; }
+.bl-art_facts dt {
+  font-family: var(--font-ui);
+  font-size: var(--f-label);
+  letter-spacing: .14em;
+  text-transform: uppercase;
+  color: var(--fg-soft);
+}
+.bl-art_facts dd { margin: 0; font-size: var(--f-body); color: var(--fg); }
+.bl-art_sticky .button { justify-self: start; }
+.bl-art_shot { margin: 0; position: relative; aspect-ratio: 4 / 5; overflow: hidden; background: var(--sand); }
+.bl-art_shot img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; display: block; }
+.bl-art_shot figcaption {
+  position: absolute; left: 0; right: 0; bottom: 0;
+  padding: 1rem 1.1rem .9rem;
+  background: linear-gradient(180deg, rgba(30, 36, 38, 0) 0%, rgba(30, 36, 38, .78) 100%);
+  color: rgba(255, 255, 255, .85);
+  font-family: var(--font-ui);
+  font-size: calc(.72rem * var(--t-ui));
+  letter-spacing: .06em;
+  line-height: 1.4;
+}
+@media (max-width: 1023px) {
+  .bl-art_sticky { grid-template-columns: repeat(2, minmax(0, 1fr)); align-items: start; }
+  .bl-art_label, .bl-art_toc { grid-column: 1 / -1; }
+  .bl-art_shot { display: none; }
+}
+@media (max-width: 599px) { .bl-art_sticky { grid-template-columns: minmax(0, 1fr); } }
+
+/* The prose. 66 characters, a lede, a drop cap, ruled headings. */
+.bl-art_body { max-width: 66ch; }
+.bl-art_body > p:first-of-type {
+  font-size: var(--f-lede);
+  line-height: 1.7;
+  color: var(--fg);
+}
+.bl-art_body > p:first-of-type::first-letter {
+  float: left;
+  font-family: var(--font-display);
+  font-weight: 300;
+  font-size: 3.9em;
+  line-height: .78;
+  padding: .08em .14em 0 0;
+  color: var(--accent);
+}
+.bl-art_body h2, .bl-art_body h3 {
+  font-family: var(--font-display);
+  font-weight: 400;
+  color: var(--fg);
+  max-width: 28ch;
+}
+.bl-art_body h2 {
+  font-size: var(--f-h3);
+  line-height: 1.15;
+  margin: 2.6rem 0 .9rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--rule);
+}
+.bl-art_body h3 { font-size: var(--f-h4); line-height: 1.25; margin: 2rem 0 .6rem; }
+.bl-art_body h2:first-child, .bl-art_body h3:first-child { margin-top: 0; padding-top: 0; border-top: 0; }
+.bl-art_body p, .bl-art_body li { line-height: 1.75; }
+.bl-art_body blockquote {
+  margin: 1.75rem 0;
+  padding: .25rem 0 .25rem 1.4rem;
+  border-left: 2px solid var(--accent);
+  font-family: var(--font-display);
+  font-size: calc(1.3rem * var(--t-mid));
+  line-height: 1.4;
+  color: var(--fg);
+}
+.bl-art_body img { display: block; width: 100%; height: auto; }
+.bl-art_body table { font-size: var(--f-body); }
+
+/* Related articles: three cards, not a ledger. */
+.bl-related { margin-top: clamp(3rem, 6vw, 5rem); }
+.bl-related .svc-ledger-label { margin-top: 0; margin-bottom: 1.25rem; }
+.bl-grid.is-related .bl-card_link { min-height: 12rem; }
+.bl-grid.is-related .bl-card:first-child { grid-column: auto; }
+.bl-grid.is-related .bl-card:first-child .bl-card_link { display: flex; background: var(--panel); padding: 1.75rem 1.6rem 1.5rem; }
+.bl-grid.is-related .bl-card:first-child .bl-card_link:hover { background: var(--warm); }
+.bl-grid.is-related .bl-card:first-child .bl-card_title { font-size: calc(1.32rem * var(--t-ui)); line-height: 1.2; grid-row: auto; padding-right: 2.5rem; max-width: 24ch; }
+.bl-grid.is-related .bl-card:first-child .bl-card_link::before { font-size: calc(1.35rem * var(--t-mid)); top: 1.45rem; right: 1.5rem; }
+.bl-grid.is-related .bl-card:first-child .bl-card_text { font-size: calc(.88rem * var(--t-ui)); line-height: 1.55; max-width: 40ch; color: var(--fg-soft); }
+.bl-grid.is-related .bl-card:first-child .bl-card_more { align-self: auto; }
+.bl-grid.is-related .bl-card:nth-child(9n + 5) .bl-card_link { background: var(--panel); color: inherit; }

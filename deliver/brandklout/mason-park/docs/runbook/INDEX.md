@@ -1,11 +1,12 @@
 # Runbook index
 
-10 runs, newest first. Each line is one file in this folder.
+11 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-10 | 2026-09-10 — The second elevation: services, blog index, articles, and Dr. Sung's portrait | [`2026-09-10-the-second-elevation-services-blog-articles.md`](./2026-09-10-the-second-elevation-services-blog-articles.md) |
 | 2026-09-10 | 2026-09-10 — The 404 page, and the build is finished | [`2026-09-10-the-404-page.md`](./2026-09-10-the-404-page.md) |
 | 2026-09-09 | 2026-09-09 — The last five pages from the old build, and a source that was wrong | [`2026-09-09-the-last-five-pages.md`](./2026-09-09-the-last-five-pages.md) |
 | 2026-09-09 | 2026-09-09 — The whole site on staging, and the blog moved into the CMS | [`2026-09-09-staging-upload-and-the-blog-as-cms-data.md`](./2026-09-09-staging-upload-and-the-blog-as-cms-data.md) |

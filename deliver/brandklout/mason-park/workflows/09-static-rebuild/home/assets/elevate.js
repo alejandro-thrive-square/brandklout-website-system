@@ -331,6 +331,91 @@
     });
   }
 
+  /* --- the blog ------------------------------------------------------------
+     Three small things the article and the index need and the markup cannot
+     carry on its own, because on Instatic the article body is a CMS outlet
+     and the index is a loop:
+       contents      the rail's list is built from the h2/h3 in the body,
+                     each heading given an id, the one in view marked
+       reading time  words / 220, written into [data-readtime]
+       topic filter  the strip's tiles hide every card whose topic is not
+                     theirs; cards the loop appends later are filtered by a
+                     MutationObserver, so "Load more" stays honest.
+     Nothing here is hidden without JS: the list is simply empty and every
+     card shows. */
+  function blog() {
+    var body = $(".bl-art_body");
+    if (body) {
+      var toc = $("[data-toc]");
+      var heads = $$("h2, h3", body);
+      if (toc && heads.length > 1) {
+        var used = {};
+        var links = [];
+        heads.forEach(function (h) {
+          if (!h.id) {
+            var base = (h.textContent || "").toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-+|-+$/g, "").slice(0, 60) || "section";
+            var id = base, n = 2;
+            while (used[id] || document.getElementById(id)) id = base + "-" + n++;
+            h.id = id;
+          }
+          used[h.id] = true;
+          var li = document.createElement("li");
+          if (h.tagName === "H3") li.className = "is-sub";
+          var a = document.createElement("a");
+          a.href = "#" + h.id;
+          /* "1. Dental Bonding" already carries its number; the list adds its own. */
+          a.textContent = (h.textContent || "").replace(/^\s*\d+\s*[.):]\s*/, "").trim() || h.textContent;
+          li.appendChild(a);
+          toc.appendChild(li);
+          links.push(a);
+        });
+        if ("IntersectionObserver" in window) {
+          var io = new IntersectionObserver(function (entries) {
+            entries.forEach(function (e) {
+              if (!e.isIntersecting) return;
+              links.forEach(function (l) { l.classList.toggle("is-active", l.getAttribute("href") === "#" + e.target.id); });
+            });
+          }, { rootMargin: "-18% 0px -72% 0px", threshold: 0 });
+          heads.forEach(function (h) { io.observe(h); });
+        }
+      }
+      var rt = $("[data-readtime]");
+      if (rt) {
+        var words = (body.textContent || "").trim().split(/\s+/).length;
+        rt.textContent = Math.max(1, Math.round(words / 220)) + " min read";
+      }
+    }
+
+    var topics = $$(".bl-topic");
+    var grid = $(".bl-grid:not(.is-related)");
+    if (topics.length && grid) {
+      var key = function (s) { return (s || "").toLowerCase().replace(/[^a-z0-9]+/g, ""); };
+      var current = "";
+      var empty = $(".bl-empty");
+      var apply = function () {
+        var shown = 0;
+        $$(".bl-card", grid).forEach(function (card) {
+          var b = $(".bl-card_meta b", card);
+          var off = !!current && key(b ? b.textContent : "") !== current;
+          card.classList.toggle("is-filtered", off);
+          if (!off) shown++;
+        });
+        topics.forEach(function (tp) { tp.classList.toggle("is-on", key(tp.getAttribute("data-topic")) === current); });
+        if (empty) empty.hidden = shown > 0;
+      };
+      topics.forEach(function (tp) {
+        tp.addEventListener("click", function () {
+          var t = key(tp.getAttribute("data-topic"));
+          current = t === current ? "" : t;
+          apply();
+        });
+      });
+      if ("MutationObserver" in window) {
+        new MutationObserver(function () { if (current) apply(); }).observe(grid, { childList: true });
+      }
+    }
+  }
+
   function boot() {
     masks();
     tabs();
@@ -338,6 +423,7 @@
     sheet();
     seal();
     tilt();
+    blog();
     if (useGsap) {
       parallax();
       stack();
