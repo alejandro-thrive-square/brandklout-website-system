@@ -5,7 +5,20 @@ Dated run history is one file per run under [`runbook/`](./runbook/INDEX.md) —
 then only the runs you need. Do not read them all.
 
 
-## Where the build stands — 2026-09-10
+## Where the build stands — 2026-09-10, evening
+
+**The agency's 48 BugHerd notes are answered on staging** (late run,
+[`runbook/2026-09-10-the-bugherd-round-48-notes-on-five-pages.md`](./runbook/2026-09-10-the-bugherd-round-48-notes-on-five-pages.md)):
+45 of them changed the site, three could not be done here. What changed the *system*:
+every inner page now opens on a **split arrival** (copy on ink, photograph right) instead
+of the homepage's full-bleed one, and **no inner page carries the credential strip**;
+**Dr. Sung's portrait is the standing Grand Mission frame** (`dr-sung-standing`) on all
+33 places, the crossed-arms files are orphaned; the doctors are ordered **Nguyen, Cho,
+Sung** everywhere; the **team page names nobody** (the Named chapter is gone, pending the
+agency's Canva portraits); both **seals carry the tree**. **Waiting on the agency:** the
+photograph of Drs. Nguyen and Sung with their kids for the hero (#1), the browser that
+clips the logo (#3, not reproducible), and the team portraits (#43). The 48 BugHerd tasks
+are still open on the board; the reviewer closes them.
 
 **The second elevation is on staging** (evening run,
 [`runbook/2026-09-10-the-second-elevation-services-blog-articles.md`](./runbook/2026-09-10-the-second-elevation-services-blog-articles.md)):
@@ -65,6 +78,13 @@ Associates account it is.
 
 ### Traps that are live right now
 
+- **Never export `RAILWAY_TOKEN` from `.env` before `ship-payload` / `run-converter` /
+  `fetch-nodes`.** The Railway CLI is logged in on its own; with the token in the
+  environment every `railway ssh` answers "Unauthorized". And a push chain must check each
+  step's exit code (`PIPESTATUS[0]`), not `node x | tail`: on 2026-09-10 a chain walked
+  past the failed ship and published the new stylesheet over the old pages.
+- **`home/**/index.html` files mix CRLF and LF.** Regexes anchored on `\n` match some
+  pages and not others; use `\r?\n`.
 - **Every Instatic command must export the staging URL.** `INSTATIC_BASE_URL` in `.env`
   points at **production**:
   ```bash
