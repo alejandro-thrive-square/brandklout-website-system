@@ -6,7 +6,7 @@ eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
-| 2026-09-10 | 2026-09-10 — Domain cutover: admin reopened at westlaketxmedspa.com, Sang added; footer link open — carries **gotchas** | [`2026-09-10-domain-cutover-admin-origin-and-sang.md`](./2026-09-10-domain-cutover-admin-origin-and-sang.md) |
+| 2026-09-10 | 2026-09-10 — Domain cutover: admin reopened at westlaketxmedspa.com, Sang added, republished with the cross-links fixed — carries **gotchas** | [`2026-09-10-domain-cutover-admin-origin-and-sang.md`](./2026-09-10-domain-cutover-admin-origin-and-sang.md) |
 | 2026-09-03 | Previous status: eleven core pages REBUILT (second build, 2026-09-03 evening), local only | [`2026-09-03-previous-status-eleven-core-pages-rebuilt-second.md`](./2026-09-03-previous-status-eleven-core-pages-rebuilt-second.md) |
 | 2026-09-02 | Done this session (2026-09-02) — the worktree exists (`f1560bad`) | [`2026-09-02-this-session-the-worktree-exists-f1560bad.md`](./2026-09-02-this-session-the-worktree-exists-f1560bad.md) |
 | 2026-09-02 | Done this session (2026-09-02, later) — competitive research and a proposed sitemap | [`2026-09-02-this-session-later-competitive-research-and-a-pr.md`](./2026-09-02-this-session-later-competitive-research-and-a-pr.md) |

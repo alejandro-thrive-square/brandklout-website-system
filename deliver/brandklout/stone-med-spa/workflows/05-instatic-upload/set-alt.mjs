@@ -37,7 +37,7 @@
 import fs from 'node:fs'
 import path from 'node:path'
 import { fileURLToPath } from 'node:url'
-import { api } from '../../../dr-nahlah/workflows/15-instatic-api-sync/insta-api.mjs'
+import { api } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const FINAL = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site')

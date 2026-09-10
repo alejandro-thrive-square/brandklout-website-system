@@ -29,15 +29,40 @@ to be reachable there, and Sang needed an account like the one on Mason Park and
   - The method is in the `bk-stone` run of the same date.
 - `sites.json`: the entry now names the new domain and the renamed service.
 
-## Open — needs a rebuild and republish
+## Later the same evening — republished with the cross-links fixed
 
-- **The published footer's "switch" link to Stone Surgical Arts points at
-  `https://stone-surgical-arts-production.up.railway.app/`, which is now a 404.** It should point
-  at `https://www.dfwsurgicalarts.com/`.
-- `site-src/seo.json` still sets `origin` and the JSON-LD `@id` to the dead med-spa host.
-- Both need the build rerun and a ship. That was **not done here**: `05-instatic-upload/` holds
-  uncommitted in-progress work (`ship.sh`, the directive, `check-link.mjs`, an import) that is not
-  this session's, and it was left untouched.
+The user asked for the republish once the open item was reported.
+
+- **Three links to Stone Surgical Arts pointed at its dead railway host**, not just the footer:
+  - `partials/footer.html`, the switch, which is on every page
+  - `pages/about.body.html`, the "The surgical practice" button
+  - `pages/treatments.body.html`, the `doors_door is-there` card
+
+  All three now go to `https://www.dfwsurgicalarts.com/`. The live site has 13 of those links and
+  zero `up.railway.app` strings.
+- `seo.json` now uses `origin` and the JSON-LD `@id` of `https://westlaketxmedspa.com`, and its
+  note was rewritten. **None of it reaches the live HTML**: neither Stone site serves a canonical,
+  an `og:url` or a sitemap. That was already true before today, and it is still open.
+- **The link guard was already sitting on disk, uncommitted, from the 2026-09-04 run.** It was
+  committed as found (`15726558`) and then used. `check-link` output:
+  `Stone Med Spa / production / Westlake Medical Aesthetics serves westlaketxmedspa.com`.
+- **The upload scripts could not load.** `upload-media`, `set-alt`, `push-site` and
+  `install-fonts` imported `insta-api.mjs` from `dr-nahlah/workflows/15-instatic-api-sync/`. That
+  folder moved to `deliver/process/22-instatic-api-sync/` on 2026-09-09, and this sparse
+  worktree has no `dr-nahlah/`. They now import `../../../../process/22-instatic-api-sync/`.
+- **Before `--force`**, the audit log was checked. Nobody had edited a page since the last push on
+  2026-09-04 23:54 UTC, so the full replace discarded nothing.
+- The run, in order:
+  1. `build-site`, then `audit` (`FAIL none`)
+  2. `build-import-input`
+  3. `ship.sh`, with `RAILWAY_LINK_DIR` a scratch dir linked by project id and `RAILWAY_*` unset
+  4. `push-site --apply --force` (all 11 pages `ok`)
+  5. `publish` (`{"publishedPages":11}`)
+- Gates:
+  - `verify-live`: `FAIL none` (11 routes, 81 URLs, 166 assets)
+  - `css-parity`: `FAIL none`
+  - `visual-diff` at 1440: 1.15% at worst (`treatments`), inside the 2026-09-04 baseline of 1.6%
+  - `visual-diff` at 390: 2.81% at worst (`financing`), inside the baseline of 4.4%
 
 ## Gotchas
 

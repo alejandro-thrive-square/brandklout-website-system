@@ -1,14 +1,10 @@
 {
   "_note": [
-    "ORIGIN IS THE RAILWAY REVIEW HOST, NOT A PURCHASED DOMAIN.",
-    "Set 2026-09-04 to https://stone-med-spa-production.up.railway.app, which is where",
-    "the site is published for internal and client review. It is a real, resolvable",
-    "origin, so canonicals and og:url now point at pages that exist — the previous",
-    "placeholder (stonemedspa.example) pointed at a domain nobody owns.",
-    "",
-    "WHEN A REAL DOMAIN IS BOUGHT: change site.origin here, rebuild, republish, and",
-    "follow deliver/process/20-instatic-domain-origins — PUBLIC_ORIGIN on the Railway",
-    "service must gain the new host or every admin write answers 403 invalid origin.",
+    "ORIGIN IS THE CLIENT DOMAIN, westlaketxmedspa.com, since 2026-09-10.",
+    "It replaced the Railway review host (stone-med-spa-production), which Railway",
+    "detached when the domain was connected and which now 404s. PUBLIC_ORIGIN on the",
+    "Railway service lists both the apex and www — see",
+    "deliver/process/20-instatic-domain-origins.",
     "",
     "THE TRADING NAME IS STILL UNCONFIRMED. Asana says 'Stone Med Spa'; the live",
     "Instagram account is @westlakeaesthetics, 'Westlake Medical Aesthetics'. If",
@@ -17,12 +13,12 @@
   ],
   "site": {
     "name": "Stone Med Spa",
-    "origin": "https://stone-med-spa-production.up.railway.app",
+    "origin": "https://westlaketxmedspa.com",
     "ogImage": "/assets/m-hero.webp"
   },
   "organization": {
     "@type": "MedicalBusiness",
-    "@id": "https://stone-med-spa-production.up.railway.app/#practice",
+    "@id": "https://westlaketxmedspa.com/#practice",
     "name": "Stone Med Spa",
     "description": "Non-surgical facial aesthetics in Westlake, Texas, performed by Dr. Mona Stone, DDS, a board-certified oral and maxillofacial surgeon.",
     "medicalSpecialty": "Dermatology",
@@ -77,7 +73,7 @@
         "name": "Dr. Mona Stone, DDS",
         "medicalSpecialty": "OralAndMaxillofacialSurgery",
         "worksFor": {
-          "@id": "https://stone-med-spa-production.up.railway.app/#practice"
+          "@id": "https://westlaketxmedspa.com/#practice"
         }
       }
     },
@@ -100,7 +96,7 @@
           "bodyLocation": "Face",
           "howPerformed": "Small units of botulinum toxin type A are injected into the specific muscles that fold the overlying skin, relaxing them for three to four months.",
           "provider": {
-            "@id": "https://stone-med-spa-production.up.railway.app/#practice"
+            "@id": "https://westlaketxmedspa.com/#practice"
           }
         },
         {

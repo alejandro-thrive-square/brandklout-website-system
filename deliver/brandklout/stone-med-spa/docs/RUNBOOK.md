@@ -19,9 +19,11 @@ Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/p
 `https://westlaketxmedspa.com/admin`. The old `stone-med-spa-production.up.railway.app` host was
 **detached** by the cutover and 404s everywhere; everything below that names it is historical.
 Users: the owner account and **Sang** (`sang@thrivesquare.com`, admin, same password as on Mason
-Park). **Open:** the published footer's switch link to Stone Surgical Arts still points at *its*
-dead railway host and needs a rebuild + republish —
-[2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md).
+Park). Republished the same evening: every link to Stone Surgical Arts (the footer switch, the
+about button, the treatments door) now goes to `https://www.dfwsurgicalarts.com/`. The upload
+scripts import `insta-api.mjs` from `deliver/process/22-instatic-api-sync/` —
+[2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md). **Still open:**
+neither Stone site serves a canonical, `og:url` or sitemap, so `seo.json` reaches nothing live.
 
 **2026-09-04.** The brand has an Instatic instance of its own, provisioned name-first so the
 generated host already carries the business name, and the second build is on it. Gates:
