@@ -28,10 +28,10 @@
     },
     {
       "client": "stone-med-spa",
-      "adminUrl": "https://stone-med-spa-production.up.railway.app",
+      "adminUrl": "https://westlaketxmedspa.com",
       "alternates": [],
-      "railway": { "project": "ad4db12e-eb77-42b8-9021-4e84083fc99d", "service": "Stone Med Spa" },
-      "note": "Provisioned 2026-09-04 and clean from the first boot, which is the point: the Railway project, the service and the generated domain were all named 'Stone Med Spa' BEFORE the domain was minted, and PUBLIC_ORIGIN was set to that host in the same call. A generated domain is derived from the service name at creation, so naming afterwards leaves the origin pointing at the old host and every admin write answers 403. There is no client domain yet; when one is bought, follow the cutover in this module and keep the railway host in PUBLIC_ORIGIN — INSTATIC_BASE_URL points at it."
+      "railway": { "project": "ad4db12e-eb77-42b8-9021-4e84083fc99d", "service": "Westlake Medical Aesthetics" },
+      "note": "Cut over 2026-09-10 to westlaketxmedspa.com + www. Connecting them DETACHED stone-med-spa-production.up.railway.app (now 404 everywhere) while PUBLIC_ORIGIN still named only that host, so no address could log in. PUBLIC_ORIGIN is now apex, www, then the dead railway host (kept per the rule; not listed here because it no longer serves the admin). The service was renamed 'Westlake Medical Aesthetics'; the project is still 'Stone Med Spa'. History: provisioned 2026-09-04 and clean from the first boot, which is the point: the Railway project, the service and the generated domain were all named 'Stone Med Spa' BEFORE the domain was minted, and PUBLIC_ORIGIN was set to that host in the same call. A generated domain is derived from the service name at creation, so naming afterwards leaves the origin pointing at the old host and every admin write answers 403. There is no client domain yet; when one is bought, follow the cutover in this module and keep the railway host in PUBLIC_ORIGIN — INSTATIC_BASE_URL points at it."
     }
   ]
 }

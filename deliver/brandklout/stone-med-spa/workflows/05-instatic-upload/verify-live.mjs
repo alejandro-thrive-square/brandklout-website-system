@@ -17,7 +17,8 @@
  *
  * Usage: node verify-live.mjs
  */
-const BASE = 'https://stone-med-spa-production.up.railway.app'
+/* The railway host was detached when westlaketxmedspa.com was connected (2026-09-10) and now 404s. */
+const BASE = (process.env.INSTATIC_BASE_URL || 'https://westlaketxmedspa.com').replace(/\/$/, '')
 
 /* ELEVEN ROUTES — the eleven core pages of the second build, one per subtask on
    Asana task 1218112701145002. Every slug is the static build's filename minus

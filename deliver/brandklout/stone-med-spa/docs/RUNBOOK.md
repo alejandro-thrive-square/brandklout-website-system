@@ -13,7 +13,15 @@ implant centre (live on Webflow) and Stone Surgical Arts (twelve pages, publishe
 
 Start at [`docs/project-overview.md`](../deliver/brandklout/stone-med-spa/docs/project-overview.md).
 
-## Status: PUBLISHED — eleven pages live at <https://stone-med-spa-production.up.railway.app>
+## Status: PUBLISHED — eleven pages live at <https://westlaketxmedspa.com>
+
+**2026-09-10 — domain cutover.** `westlaketxmedspa.com` (+ `www`) is connected and the admin is
+`https://westlaketxmedspa.com/admin`. The old `stone-med-spa-production.up.railway.app` host was
+**detached** by the cutover and 404s everywhere; everything below that names it is historical.
+Users: the owner account and **Sang** (`sang@thrivesquare.com`, admin, same password as on Mason
+Park). **Open:** the published footer's switch link to Stone Surgical Arts still points at *its*
+dead railway host and needs a rebuild + republish —
+[2026-09-10 run](./runbook/2026-09-10-domain-cutover-admin-origin-and-sang.md).
 
 **2026-09-04.** The brand has an Instatic instance of its own, provisioned name-first so the
 generated host already carries the business name, and the second build is on it. Gates:
@@ -28,7 +36,6 @@ whose direction flips between runs (trap 30) · `console-live` clean on all elev
 `settings.faviconUrl` is deliberately unset and the browser tab shows a generic mark. It is one
 field pointing at one uploaded asset the day a mark exists — see gotcha 29.
 
-**This is the link to send for review**, and the admin is the same URL + `/admin`, same login as
-Mason Park. Anyone can confirm the admin link is safe to send with
+**This is the link to send for review**, and the admin is the same URL + `/admin`. Anyone can confirm the admin link is safe to send with
 `node deliver/process/20-instatic-domain-origins/check-origins.mjs --all`.
 
