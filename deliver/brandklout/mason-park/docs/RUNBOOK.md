@@ -7,9 +7,10 @@ then only the runs you need. Do not read them all.
 
 ## Where the build stands — 2026-09-09
 
-**217 routes built and live on staging.** `https://staging.masonparkdental.com` serves
-49 static pages, the `/blog` listing, and 161 articles at their original URLs.
-`verify-live.mjs` is clean on all of them. Production has not been touched.
+**Every page from the old build is rebuilt and live on staging.**
+`https://staging.masonparkdental.com` serves 54 static pages, the `/blog`
+listing, and 161 articles at their original URLs. `verify-live.mjs` is clean on
+all of them. Production has not been touched.
 
 **All 31 approved treatments have pages.** Every catalogue chip links; none are dashed.
 Every internal link on every page resolves. The definitive list is the `el-tabs` chips on
@@ -27,16 +28,24 @@ are built from and as a file:// fallback. It is output from `.tmp/blog/posts.jso
 edits are overwritten by `build-blog.mjs`.
 
 **Non-service pages built:** Contact, Terms of Service, Special Offers, Technology, FAQ,
-Virtual Consultation, Sitemap, Dental Dictionary. **Still missing from the old build:**
-Toothpaste RDA table, pH & acidity, Product recommendations, the Patient Resources hub
-(build its children first), the Katy town resource.
+Virtual Consultation, Sitemap, Dental Dictionary, Patient Resources, Toothpaste RDA table,
+pH & acidity, Product recommendations, Town resources. **One page deliberately not
+rebuilt:** `/toothpaste-chart/`, which reproduces a third-party toxicant-testing chart
+credited to Lead Safe Mama, LLC — a licensing question for the client, not a build one.
+The old "Dental Library" is not rebuilt either: it was a treatment index, which is what
+`/our-services/` already is.
 
 **There is no Privacy Policy or Cookie Policy.** The Terms of Service references both.
 The crawl never captured them (`/privacy-policy` 403'd) and they are regulated under
 HIPAA / Texas law / A2P 10DLC — **do not draft them.** Ask the practice.
 
-**There is no form backend anywhere on the site.** Patient Resources' whole premise is
-"complete our online patient forms", so that hub is blocked on this decision.
+**There is no form backend anywhere on the site.** The Patient Resources hub says what
+actually happens instead — call ahead, or the tablet at reception — rather than linking a
+form that does not exist. Wiring a real one is still an open decision.
+
+**The Amazon affiliate tag on `/product-recommendations/` is `grandmissiond-20`**, which
+is not obviously this practice's. It is preserved verbatim; somebody should check whose
+Associates account it is.
 
 ### Traps that are live right now
 
@@ -57,7 +66,7 @@ HIPAA / Texas law / A2P 10DLC — **do not draft them.** Ask the practice.
 - **Re-run `import-scripts.mjs` whenever a page row id changes.** The script bundle is
   scoped to an explicit `pageIds` list; a page outside it loads no GSAP and no `journey.js`.
 - **Per-page meta descriptions do not render in this Instatic build.** Only entry routes
-  get their own (`documentMeta`). The 161 articles have real descriptions; the 49 pages
+  get their own (`documentMeta`). The 161 articles have real descriptions; the 54 pages
   fall through to the site-level setting. Worth reporting upstream.
 - **Build a treatment page with `.tmp/stamp-service.mjs`**, then run `.tmp/link-chips.mjs`
   and `.tmp/prune-nav.mjs`. Neither of the last two is triggered by the stamper, and the
@@ -79,3 +88,9 @@ HIPAA / Texas law / A2P 10DLC — **do not draft them.** Ask the practice.
   If article text ever looks like it starts mid-page, that is what regressed.
 - **Git Bash rewrites leading-slash arguments** into Windows paths
   (`/blog` → `C:/Program Files/Git/blog`). Prefix such commands with `MSYS_NO_PATHCONV=1`.
+- **`cityofkaty.com` answers 403 to anything that is not a browser**, including its own
+  root with a browser user-agent. Its links on `/town-resource/` are live — verified in
+  Chrome. Never delete a link from that host on the strength of a curl check.
+- **The old pH page's numbers are wrong in nine places.** `build-ph.mjs` validates every
+  value against the 0–14 scale, applies mechanical repairs only, prints each one, and
+  drops anything it cannot repair. Read that log before trusting the page.

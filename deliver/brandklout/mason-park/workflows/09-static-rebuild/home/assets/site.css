@@ -3032,7 +3032,15 @@ body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link:h
 .svc-ledger {
   display: grid;
   gap: 1px;
-  background: var(--rule);
+  /* The hairline grid used to be the CONTAINER's background showing through
+     the 1px gaps. That works until the last row is short -- an 87-item list
+     in a 6-up grid ends with four empty cells, and those show the rule colour
+     as one large tan block that reads as a rendering bug. So the container is
+     panel-coloured and each <li> paints its own hairline into the gap with a
+     spread shadow instead. Identical result on a full row, nothing at all
+     where there is no item, and no layout change: box-shadow does not affect
+     the box model, so the frozen pages do not move. */
+  background: var(--panel);
   border: 1px solid var(--rule);
   grid-template-columns: repeat(auto-fit, minmax(10.5rem, 1fr));
   margin: 1.25rem 0 0;
@@ -3041,6 +3049,7 @@ body.nav-open.has-journey .navbar_component .navbar_dropdown-list .navbar_link:h
 }
 .svc-ledger > li {
   background: var(--panel);
+  box-shadow: 0 0 0 1px var(--rule);
   padding: 1.05rem 1.15rem;
   display: grid;
   gap: .3rem;

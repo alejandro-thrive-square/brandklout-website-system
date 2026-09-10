@@ -48,7 +48,8 @@ const SECTIONS = [
   ["Patients", ["/new-patients/", "/financing/", "/dental-savings-plan/", "/special-offers/", "/virtual-consultation/", "/faq/", "/thank-you/"]],
   ["Treatments", null],   // /our-services/ + everything under /services/
   ["Blog", ["/blog/"]],
-  ["Resources", ["/dental-dictionary/"]],
+  ["Resources", ["/patient-resources/", "/dental-dictionary/", "/product-recommendations/",
+    "/toothpaste-rda-table/", "/ph-and-acidity-of-food-beverages/", "/town-resource/"]],
   ["Legal", ["/terms-of-service/", "/sitemap/"]],
 ];
 

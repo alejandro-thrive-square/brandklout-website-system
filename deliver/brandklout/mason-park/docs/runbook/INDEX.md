@@ -1,11 +1,12 @@
 # Runbook index
 
-8 runs, newest first. Each line is one file in this folder.
+9 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-09 | 2026-09-09 — The last five pages from the old build, and a source that was wrong | [`2026-09-09-the-last-five-pages.md`](./2026-09-09-the-last-five-pages.md) |
 | 2026-09-09 | 2026-09-09 — The whole site on staging, and the blog moved into the CMS | [`2026-09-09-staging-upload-and-the-blog-as-cms-data.md`](./2026-09-09-staging-upload-and-the-blog-as-cms-data.md) |
 | 2026-09-09 | 2026-09-09 — Contact, Terms, Offers, Technology, and the whole blog | [`2026-09-09-contact-legal-offers-technology-and-the-blog.md`](./2026-09-09-contact-legal-offers-technology-and-the-blog.md) |
 | 2026-09-09 | 2026-09-09 — Treatment pages, batch 5: all 31 built, and the blocked list was my own mistake | [`2026-09-09-treatment-pages-batch-5-all-31-complete.md`](./2026-09-09-treatment-pages-batch-5-all-31-complete.md) |
