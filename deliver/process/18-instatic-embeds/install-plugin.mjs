@@ -53,16 +53,16 @@ if (!zipPath || !existsSync(zipPath)) {
 // webzite.link-editor — editor-only. It never runs on a published page: it
 // reads and writes the editor store to fix up links in the canvas.
 const GRANTS = {
-  'webzite.embed-origins': ['cms.hooks', 'modules.register', 'frontend.assets'],
-  'webzite.aeo-schema': [
+  'brandklout.embed-origins': ['cms.hooks', 'modules.register', 'frontend.assets'],
+  'brandklout.aeo-schema': [
     'cms.hooks', 'cms.storage', 'cms.routes', 'cms.content.read',
     'admin.navigation', 'editor.code',
   ],
-  'webzite.open-graph': [
+  'brandklout.open-graph': [
     'cms.hooks', 'cms.storage', 'cms.routes', 'cms.content.read',
     'admin.navigation', 'editor.code',
   ],
-  'webzite.link-editor': [
+  'brandklout.link-editor': [
     'editor.code', 'editor.panels', 'editor.store.read', 'editor.store.write',
   ],
 }

@@ -24,10 +24,10 @@ Instatic site**, and without `embed-origins` no third-party embed is possible at
 
 | Plugin | Version | What it is for |
 | :--- | :--- | :--- |
-| `webzite.embed-origins` | 1.3.0 | the Embed block + the per-page CSP widening that lets a vendor widget load |
-| `webzite.aeo-schema` | 1.2.0 | JSON-LD written into `<head>` at publish |
-| `webzite.open-graph` | 1.1.2 | Open Graph tags written into `<head>` at publish |
-| `webzite.link-editor` | 1.0.2 | editor-only link fixing; never runs on a published page |
+| `brandklout.embed-origins` | 1.3.0 | the Embed block + the per-page CSP widening that lets a vendor widget load |
+| `brandklout.aeo-schema` | 1.2.0 | JSON-LD written into `<head>` at publish |
+| `brandklout.open-graph` | 1.1.2 | Open Graph tags written into `<head>` at publish |
+| `brandklout.link-editor` | 1.0.2 | editor-only link fixing; never runs on a published page |
 
 Installed with the shared toolkit, which is the canonical route:
 
@@ -168,7 +168,7 @@ reports a perfect page as 100% broken. Only a real browser session tells the tru
 
 ## The GoHighLevel forms — embedded, one per campaign
 
-The forms are embedded inline, exactly as on Webflow, via the **`webzite.embed-origins`**
+The forms are embedded inline, exactly as on Webflow, via the **`brandklout.embed-origins`**
 plugin (`deliver/process/18-instatic-embeds/`). Instatic's own publisher strips `<iframe>` and
 `<script>` and its base CSP carries `frame-src 'none'`; the plugin closes both halves — an Embed
 block module for the node graph, and a `publish.html` filter that rewrites the published page's
@@ -271,7 +271,7 @@ Three deliberate choices, since there was no reference to match:
    v2 build report flagged the other two as needing it. Instatic's page rows support only
    `title`/`slug`/`body` — no per-page robots or meta-description field — so the port could not
    carry it. `build.mjs` records the intended value on each page JSON for whenever a mechanism
-   exists. `webzite.open-graph` writes `<head>` tags at publish and may be the right home for it.
+   exists. `brandklout.open-graph` writes `<head>` tags at publish and may be the right home for it.
 4. **Meta descriptions are not published** either, for the same reason. Pre-existing for all 77
    pages, not new here.
 5. **No favicon** is served on any page of this site (site-wide, not introduced here).
