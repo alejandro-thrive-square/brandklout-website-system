@@ -9,6 +9,34 @@
   var FINE = window.matchMedia('(hover:hover) and (pointer:fine)').matches;
   if (FINE) document.documentElement.classList.add('wz-fine');
 
+  /* --- re-hydrate what Instatic's importer strips ---
+     base.button flattens children to a label string and Link modules unwrap
+     an only child, so the <span> inside every .btn (the label's z-index
+     guarantee over the hover fill), the burger's two bars and the FAQ
+     toggle's <i> glyph do not survive a round trip. Rebuilt here; a no-op
+     wherever the markup arrived intact. Runs before the GSAP gate so the
+     page is right even if the motion layer is absent. */
+  document.querySelectorAll('.btn').forEach(function(b){
+    if(b.querySelector('span') || !b.firstChild) return;
+    var t = b.textContent.trim(); if(!t) return;
+    var sp = document.createElement('span'); sp.textContent = t; b.textContent = ''; b.appendChild(sp);
+  });
+  document.querySelectorAll('.burger').forEach(function(b){
+    if(b.querySelector('span')) return;
+    b.appendChild(document.createElement('span')); b.appendChild(document.createElement('span'));
+  });
+  document.querySelectorAll('.faq-q').forEach(function(q){
+    if(!q.querySelector('span')){ var t = q.textContent.trim(); q.textContent=''; var s=document.createElement('span'); s.textContent=t; q.appendChild(s); }
+    if(!q.querySelector('i')) q.appendChild(document.createElement('i'));
+    if(!q.hasAttribute('aria-expanded')) q.setAttribute('aria-expanded','false');
+  });
+  /* the hero film: one src attribute (importers keep attributes, not <source>
+     children); phones get the 960 encode before the first play */
+  document.querySelectorAll('video[data-src]').forEach(function(v){
+    var mobile = v.getAttribute('data-src-mobile');
+    v.src = (mobile && window.innerWidth < 768) ? mobile : v.getAttribute('data-src');
+  });
+
   if(!W || !W.ok){
     document.querySelectorAll('[data-anim="hide"]').forEach(function(el){ el.style.visibility='visible'; });
     document.querySelectorAll('[data-wipe],.tr-shot,.pr-film').forEach(function(el){ el.style.clipPath='none'; });

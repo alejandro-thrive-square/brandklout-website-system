@@ -15,16 +15,37 @@
     {
       "client": "dr-nahlah",
       "adminUrl": "https://www.drnahlah.com",
-      "alternates": ["https://encorercm.com", "https://dr-nahlah.up.railway.app"],
-      "railway": { "project": "2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5", "service": "Dr Nahlah" },
+      "alternates": [
+        "https://encorercm.com",
+        "https://dr-nahlah.up.railway.app"
+      ],
+      "railway": {
+        "project": "2536e8b9-026a-4a55-b0da-5dbb2eb8b6c5",
+        "service": "Dr Nahlah"
+      },
       "note": "Fixed 2026-08-28: www.drnahlah.com and drnahlah.com appended to PUBLIC_ORIGIN, which already held encorercm.com + www + the railway host from the 2026-08-18 fix. drnahlah.com 301s to www, so www is the one that must be listed. All five origins verified live."
     },
     {
       "client": "mason-park",
       "adminUrl": "https://www.masonparkdental.com",
-      "alternates": ["https://mason-park.up.railway.app"],
-      "railway": { "project": "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc", "service": "Mason Park" },
+      "alternates": [
+        "https://mason-park.up.railway.app"
+      ],
+      "railway": {
+        "project": "e4a73ef0-64a3-48e5-b3c3-b2ea60737acc",
+        "service": "Mason Park"
+      },
       "note": "Fixed 2026-08-28. PUBLIC_ORIGIN had been set to the apex alone (https://masonparkdental.com) and had NEVER been applied — the container was still running its boot-time derived value. The apex also has no DNS record, so it is listed for the day it gets one but is not the link to hand out. Redeployed; www now verified live."
+    },
+    {
+      "client": "west-la-implants",
+      "adminUrl": "https://west-la-implants-production.up.railway.app",
+      "alternates": [],
+      "railway": {
+        "project": "a55b5cac-b92d-4653-a9ff-6da522a5c89c",
+        "service": "West LA Implants"
+      },
+      "note": "Provisioned 2026-09-10 name-first via 22-instatic-api-sync/provision-instance.mjs; PUBLIC_ORIGIN = the generated host from first boot. No client domain yet — westlaimplants.com is still the WordPress site. Homepage-only review build."
     }
   ]
 }

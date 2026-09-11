@@ -53,7 +53,7 @@ WZ.section('ch-arrival', function(W){
       lead = document.getElementById('heroLead');
   var hides = sec.querySelectorAll('[data-anim="hide"]');
 
-  if (film) { film.play && film.play().catch(function(){}); }
+  if (film) { film.load && film.load(); film.play && film.play().catch(function(){}); }
 
   if (W.reduced) { hides.forEach(function(el){ el.style.visibility = 'visible'; }); return; }
 
