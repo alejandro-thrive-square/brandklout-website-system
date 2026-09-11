@@ -23,7 +23,7 @@ move can happen without breaking email.
   verify this step; see Gotchas.
 - Do not switch the nameservers at Squarespace until the web records point somewhere real: either
   the WordKeeper origin IP from the agency, or the finished Instatic site.
-- Confirm who holds the Squarespace registrar login.
+- ~~Confirm who holds the Squarespace registrar login.~~ Resolved 2026-09-11: Brandklout has Squarespace access, so the move needs nothing from the outgoing agency.
 
 ## Gotchas
 

@@ -6,7 +6,7 @@ State as of **2026-09-11**, read from public DNS over HTTPS and from the Cloudfl
 
 | Item | Value |
 | :--- | :--- |
-| Registrar | Squarespace Domains. Nameserver changes are made there, so confirm who holds that login |
+| Registrar | Squarespace Domains. Nameserver changes are made there. Brandklout has access (confirmed 2026-09-11), so the agency is not needed |
 | Live nameservers | `cullen.ns.cloudflare.com`, `gracie.ns.cloudflare.com`. That is a **different Cloudflare account**, the outgoing agency's |
 | New zone | Brandklout's account (`Agency@brandklout.com's Account`), zone `223386e4eda469fb038a4c716bd3f0fe`, status `initializing`, assigned `ajay.ns.cloudflare.com` / `ruth.ns.cloudflare.com` |
 | Web host | WordPress on WordKeeper (LiteSpeed), proxied through the agency's Cloudflare. Origin IP is hidden |
