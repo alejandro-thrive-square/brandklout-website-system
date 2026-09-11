@@ -1,11 +1,12 @@
 # Runbook index
 
-15 runs, newest first. Each line is one file in this folder.
+16 runs, newest first. Each line is one file in this folder.
 **Read this index first and open only what you need** — opening every entry is how a runbook
 eats a context window.
 
 | Date | Run | File |
 | :--- | :--- | :--- |
+| 2026-09-11 | 2026-09-11 — `new-client-worktree.sh` put worktrees under ~/Documents/orca; default path fixed | [`2026-09-11-new-client-worktree-path-fixed.md`](./2026-09-11-new-client-worktree-path-fixed.md) |
 | 2026-09-10 | 2026-09-10 — plugin ids renamed webzite.* -> brandklout.* on all five instances | [`2026-09-10-plugin-ids-renamed-to-brandklout.md`](./2026-09-10-plugin-ids-renamed-to-brandklout.md) |
 | 2026-09-10 | 2026-09-10 — Instatic plugin author changed to Brandklout (source + 3 live instances) | [`2026-09-10-plugin-author-is-brandklout.md`](./2026-09-10-plugin-author-is-brandklout.md) |
 | 2026-09-09 | 2026-09-09 — the six client runbooks copied to main (snapshot) | [`2026-09-09-client-runbooks-copied-to-main.md`](./2026-09-09-client-runbooks-copied-to-main.md) |
