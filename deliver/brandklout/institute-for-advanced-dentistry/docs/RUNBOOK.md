@@ -8,12 +8,12 @@ Live state of this worktree (`bk-ifa-dentistry`). Run history is in [runbook/IND
 - **Scrape**: `workflows/01-content-intake/.tmp/current-site-scrape/current-site-inventory.md`. Refreshed 2026-09-11 (59 pages incl. the new post), proven complete by `scrapers/verify-mirror.mjs`.
 - **Local only, not in git**: `site/` (a working `file://` mirror), `raw-html/`, `screenshots/desktop/`, `media-library/` (237 WP originals plus `vimeo/`, `vimeo-instatic/` re-encodes, `vimeo-posters/`), and `21-instatic-upload/.tmp/` except the media map. If they are missing, rebuild them; see the intake directive's Version Control section.
 
-- **DNS / email**: [`dns/DNS-CUTOVER.md`](dns/DNS-CUTOVER.md). The domain is still on the agency's Cloudflare account. Brandklout's new zone is `initializing` and holds no records yet.
+- **DNS / email**: [`dns/DNS-CUTOVER.md`](dns/DNS-CUTOVER.md). **Cut over 2026-09-11 ~21:40Z**: the zone is active on `ajay`/`ruth`, email records are live, and the apex serves Instatic via Railway. `www` needs a CNAME to `wshw0478.up.railway.app`, and the URL rules and `PUBLIC_ORIGIN` are still open; see [runbook/2026-09-11-ghl-form-and-cutover.md](runbook/2026-09-11-ghl-form-and-cutover.md).
 
 ## Open
 
 - Before any nameserver switch at Squarespace: import `dns/ifadentistry.com-email.zone` into the new zone, and point `@`/`www` at the WordKeeper origin or at Instatic. The Cloudflare proxy IPs will not work as an origin.
-- Before the domain points at Instatic: the contact form has no destination (it posts to WordPress `admin-ajax.php`), the nested WordPress URLs need the Cloudflare rules in [`dns/URL-RULES.md`](dns/URL-RULES.md) (written and proven 61/61 by `verify-wp-urls.mjs`, not yet created in the zone), and `www.ifadentistry.com` must be added to `PUBLIC_ORIGIN`. Details in [runbook/2026-09-11-wordpress-clone-to-instatic.md](runbook/2026-09-11-wordpress-clone-to-instatic.md).
+- Before the domain points at Instatic: the Refer a Patient form (`patient-referrals`, Fluent #3) still posts to WordPress `admin-ajax.php` and needs its own GHL form. The contact form is now the GoHighLevel embed on 58 pages; see `21-instatic-upload.md`. the nested WordPress URLs need the Cloudflare rules in [`dns/URL-RULES.md`](dns/URL-RULES.md) (written and proven 61/61 by `verify-wp-urls.mjs`, not yet created in the zone), and `www.ifadentistry.com` must be added to `PUBLIC_ORIGIN`. Details in [runbook/2026-09-11-wordpress-clone-to-instatic.md](runbook/2026-09-11-wordpress-clone-to-instatic.md).
 - The 10 Vimeo clips are re-hosted in the Instatic media library; they still also live on the outgoing agency's Vimeo account (Gilleard Marketing), which no longer matters to the clone.
 
 ## Version Control

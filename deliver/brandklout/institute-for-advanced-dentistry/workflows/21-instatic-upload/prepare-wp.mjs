@@ -58,6 +58,29 @@ const REDIRECTS = { '/contact/': '/contact-us/', '/about/': '/about-our-practice
 // that outlives the WordPress server. See the wp-emoji-settings branch below.
 const WP_VERSION = '7.1'
 const WP_EMOJI_SRC = `https://cdn.jsdelivr.net/gh/WordPress/WordPress@${WP_VERSION}/wp-includes/js/wp-emoji-release.min.js`
+// The practice's GoHighLevel "Contact Form", as GHL hands it out (supplied 2026-09-11). It replaces
+// the Fluent Forms listed in GHL_REPLACES; see the contact-forms branch below.
+const GHL_REPLACES = new Set(['1', '6'])
+const GHL_FORM = `<iframe
+    src="https://api.leadconnectorhq.com/widget/form/cxtQ5q29TfUr3cYlMmDB"
+    style="width:100%;height:100%;border:none;border-radius:8px"
+    id="inline-cxtQ5q29TfUr3cYlMmDB"
+    data-layout="{'id':'INLINE'}"
+    data-trigger-type="alwaysShow"
+    data-trigger-value=""
+    data-activation-type="alwaysActivated"
+    data-activation-value=""
+    data-deactivation-type="neverDeactivate"
+    data-deactivation-value=""
+    data-form-name="Contact Form"
+    data-height="537"
+    data-layout-iframe-id="inline-cxtQ5q29TfUr3cYlMmDB"
+    data-form-id="cxtQ5q29TfUr3cYlMmDB"
+    data-cookie-consent="true"
+    data-cookie-consent-provider="auto"
+    title="Contact Form"
+></iframe>
+<script src="https://link.msgsndr.com/js/form_embed.js"></script>`
 
 fs.rmSync(path.join(OUT, 'pages'), { recursive: true, force: true })
 fs.mkdirSync(path.join(OUT, 'pages'), { recursive: true })
@@ -88,7 +111,7 @@ if (!pages.length) throw new Error('no pages in site-data.json')
 /* ============================================================================================
  * In-browser transform. Self-contained: it is serialised into the page by page.evaluate.
  * ========================================================================================== */
-function transform({ html, raw, rel, routes, redirects, origin, vimeoFiles }) {
+function transform({ html, raw, rel, routes, redirects, origin, vimeoFiles, ghlForm, ghlReplaces }) {
   const HOST = 'wz.local'
   const BASE = `http://${HOST}/` + rel.replace(/index\.html$/, '')
   const warnings = []
@@ -182,7 +205,7 @@ function transform({ html, raw, rel, routes, redirects, origin, vimeoFiles }) {
   }
 
   const body = doc.body
-  const counts = { forms: 0, renamed: 0, vimeo: 0, embeds: 0, videos: 0, emails: 0, nbsp: 0, spaces: 0, links: 0, imgs: 0 }
+  const counts = { forms: 0, renamed: 0, vimeo: 0, embeds: 0, ghl: 0, videos: 0, emails: 0, nbsp: 0, spaces: 0, links: 0, imgs: 0 }
 
   /* noscript in the body only applies with scripting off; every visitor has it on. */
   for (const el of Array.from(body.querySelectorAll('noscript'))) el.remove()
@@ -247,6 +270,20 @@ function transform({ html, raw, rel, routes, redirects, origin, vimeoFiles }) {
     embeds.push(f.outerHTML)
     f.replaceWith(holder)
     counts.embeds++
+  }
+
+  /* --- the contact forms become the practice's GoHighLevel form ---------------------------- */
+  /* Fluent Forms posts to WordPress's admin-ajax.php, which dies with the WordPress hosting.
+     Forms #1 (the contact form, 57 pages) and #6 (its short variant on dental-implants) are the
+     patient contact form, so their whole .fluentform wrapper becomes an Embed block carrying the
+     GHL snippet verbatim. #3 (Refer a Patient, for dentists) is a different form and is left. */
+  for (const f of Array.from(body.querySelectorAll('form.frm-fluent-form'))) {
+    if (!ghlReplaces.includes(f.getAttribute('data-form_id'))) continue
+    const holder = doc.createElement('x-wz-embed')
+    holder.setAttribute('data-wz-e', String(embeds.length))
+    embeds.push(ghlForm)
+    ;(f.closest('.fluentform') || f).replaceWith(holder)
+    counts.ghl++
   }
 
   /* --- video/source keep every attribute as containers (base.video keeps six) ------------- */
@@ -725,10 +762,10 @@ for (const p of pages) {
   const rawFile = path.join(RAW, ...p.rel.split('/'))
   const raw = fs.existsSync(rawFile) ? fs.readFileSync(rawFile, 'utf8') : html
   if (!fs.existsSync(rawFile)) report.warnings.push(`${p.route}: no raw-html copy, head tags taken from the mirror`)
-  const r = await tab.evaluate(transform, { html, raw, rel: p.rel, routes, redirects: REDIRECTS, origin: ORIGIN, vimeoFiles })
+  const r = await tab.evaluate(transform, { html, raw, rel: p.rel, routes, redirects: REDIRECTS, origin: ORIGIN, vimeoFiles, ghlForm: GHL_FORM, ghlReplaces: [...GHL_REPLACES] })
   results.push({ ...p, ...r })
   report.pages[p.slug] = { route: p.route, ...r.counts, styles: r.styles.length, scripts: r.scripts.length, warnings: r.warnings }
-  console.log(`page ${p.slug.padEnd(48)} styles ${String(r.styles.length).padStart(2)} scripts ${String(r.scripts.length).padStart(2)} renamed ${String(r.counts.renamed).padStart(3)} vimeo ${r.counts.vimeo} embeds ${r.counts.embeds}${r.warnings.length ? '  WARN ' + r.warnings.join('; ') : ''}`)
+  console.log(`page ${p.slug.padEnd(48)} styles ${String(r.styles.length).padStart(2)} scripts ${String(r.scripts.length).padStart(2)} renamed ${String(r.counts.renamed).padStart(3)} vimeo ${r.counts.vimeo} embeds ${r.counts.embeds} ghl ${r.counts.ghl}${r.warnings.length ? '  WARN ' + r.warnings.join('; ') : ''}`)
 }
 await browser.close()
 

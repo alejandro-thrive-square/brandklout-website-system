@@ -108,9 +108,15 @@ the rules itself, and on the domain it tests Cloudflare.
 
 ### What is still not WordPress
 
-- **The contact form cannot submit.** Fluent Forms posts to WordPress's `admin-ajax.php`, which the
-  browser refuses cross-origin (and whose nonce is WordPress's). It renders and validates exactly
-  as before. Before launch it needs a destination: an Instatic `cms` form or the practice's CRM.
+- **The contact form is the practice's GoHighLevel form, not Fluent Forms** (since 2026-09-11).
+  Fluent Forms posts to WordPress's `admin-ajax.php`, which the browser refuses cross-origin and
+  which dies with the WordPress hosting. `prepare-wp.mjs` replaces the whole `.fluentform` wrapper
+  of forms **#1** (the contact form, 57 pages) and **#6** (its short variant on
+  `dental-services-dental-implants`) with an Embed block carrying the GHL snippet verbatim
+  (`GHL_FORM`, `GHL_REPLACES`). This yields 58 GHL forms. Gate: `node verify-ghl-form.mjs > .tmp/verify-ghl.log 2>&1`.
+- **Refer a Patient (#3, `patient-referrals`) is still Fluent Forms and cannot submit.** It is a
+  form for dentists, not a patient contact form, so the GHL contact form does not replace it. It
+  needs its own GHL form, or a decision to drop it.
 - **Per-page meta descriptions** are stored but the publisher renders the site-level one (trap 6);
   canonical/OG/JSON-LD are injected by `runtime.js`, so Google sees them and social scrapers do not.
 - Links to WordPress-only URLs (feeds, author pages, `wp-json`) point at the live WordPress site.
