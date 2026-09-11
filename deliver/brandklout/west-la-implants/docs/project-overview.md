@@ -8,6 +8,7 @@
 | **Selected offer** | `Development from Scratch` (full site, built new — not a page-for-page migration) |
 | **Source** | Direct from Brandklout. **No Asana task exists yet** — the 2026-08-05 pull in `docs/ASANA-DISPATCH.md` predates this client |
 | **Due** | Not set |
+| **Instatic instance** | `https://west-la-implants-production.up.railway.app` — Railway project `a55b5cac-b92d-4653-a9ff-6da522a5c89c`, service "West LA Implants", provisioned 2026-09-10. Homepage review build only; the client domain stays on WordPress |
 | **Started** | 2026-08-20 (client folder initialized) |
 | **`process_baseline_commit`** | `8d65269` (2026-08-19) |
 | **Worktree** | `bk-west-la-implants` → this folder only |
@@ -73,13 +74,13 @@ Copied from `deliver/process/` at baseline `8d65269`. Route:
 | Phase | Status | Notes |
 | :--- | :--- | :--- |
 | `00-client-delivery-initialization` | **Done** | This doc + `mcp-access.md`; folder scaffolded |
-| `01-content-intake` | **Next, blocked on page count** | Existing-site scrape is the content source; download assets, do not just list URLs |
+| `01-content-intake` | **Done (2026-08-20, extended 2026-09-10)** | Client scrape 91/91 + 102 MB asset mirror; three competitors in full (Wilshire OMS, Santa Monica OMS, Implant Center LA); `gap-analysis/HOMEPAGE-GAP-ANALYSIS.md` is the homepage blueprint |
 | `02-wireframe` | Pending | IA consolidation of the 42-page WP tree happens here |
-| `03-graphic-resources` | Pending | Check the client's own extracted assets before any stock — the practice has a photo and video library |
-| `04-design` | Pending | Awwwards-grade, motion-led per [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md), benchmarked against Dr. Nahlah |
+| `03-graphic-resources` | **Done for the homepage** | The practice's four B-roll clips and 1080p stills cut from them carry the page; no stock used. Catalogue in `03-graphic-resources/.tmp/ASSETS.md` |
+| `04-design` | **Homepage built (2026-09-10)** | `04-design/.tmp/site-src/` — eight chapters, four pinned scrubs, passes every gate in [DESIGN-STANDARD.md](../../docs/DESIGN-STANDARD.md). Interior pages pending page-count sign-off |
 | `05-design-revisions` | Pending | Owns client approval before build |
 | `06-content-seo` | Pending | Existing site ranks on a large service-page footprint; preserve topical coverage |
-| `07-webflow-build` | Pending | Standard: [PASTEABLE-COMPONENTS.md](../workflows/07-webflow-build/PASTEABLE-COMPONENTS.md). No site ID exists yet |
+| `07-webflow-build` | **Superseded by Instatic** | The build ships to the client's Instatic instance through `21-instatic-upload/` (Stone Med Spa lineage), not Webflow. Kept for the component library only |
 | `08-qa` | Pending | |
 | `09-launch` | Pending | Domain cutover from WordPress — see redirects below |
 | `10-handoff-support` | Pending | |
@@ -101,7 +102,9 @@ Copied from `deliver/process/` at baseline `8d65269`. Route:
 > Related trap: [redirect maps expire](../../dr-nahlah/docs/seo-redirect-plan.md) — re-derive from
 > the built site, never from an old capture.
 
-## Open questions — close these before dispatching `01-content-intake`
+## Open questions
+
+Read [`RUNBOOK.md`](./RUNBOOK.md) for the live list. The original set, for the record:
 
 1. **Page count for the new build.** Drives the whole schedule and the fee. Blocking.
 2. **Is this a replacement at `westlaimplants.com`, or a new domain?** Decides whether `14` enters

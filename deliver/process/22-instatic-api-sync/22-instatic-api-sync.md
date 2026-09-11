@@ -35,6 +35,34 @@ State editing is fully supported once a rule is in the registry: `cssStatePseudo
 
 So `.drawer.open` was purged because `open` existed as an unassigned class-kind rule — not because the class is added at runtime. **Demoting an unassigned class rule to `kind: 'ambient'` makes it and every selector mentioning it survive.** That is what `--cutover` does, and it is why the whole design system can live in the registry without needing the code-asset escape hatch.
 
+## Provisioning a new instance
+
+Added 2026-09-10 (West LA Implants). Until then the six Railway mutations existed only as prose in
+Stone Med Spa's `05-instatic-upload.md` and were hand-run every time. `provision-instance.mjs`
+does them name-first, in the order that matters (project → service → volume → **then** the
+domain, so the generated host carries the business name → variables with a fresh
+`INSTATIC_SECRET_KEY` → healthcheck + deploy), polls `/health`, and runs the one-shot
+`POST /admin/api/cms/setup` when `INSTATIC_EMAIL` and `INSTATIC_SETUP_PASSWORD` are in the
+environment. It refuses a duplicate project name.
+
+```bash
+cd deliver/process/22-instatic-api-sync
+export INSTATIC_EMAIL=…  INSTATIC_SETUP_PASSWORD=…       # from ~/.webzite/.env, never typed into a file
+node provision-instance.mjs --name "Client Name" --dry     # prints the plan
+node provision-instance.mjs --name "Client Name" > "$TEMP/provision.log" 2>&1   # see the trap below
+```
+
+Then: fill `[<client>]` in `~/.webzite/.env` (`RAILWAY_PROJECT_ID`, `INSTATIC_BASE_URL`,
+`INSTATIC_PASSWORD=${…}`), `node scripts/env-sync.mjs`, add the site to
+`20-instatic-domain-origins/sites.json` and prove it with `node check-origins.mjs --all`, and
+`railway link -p <projectId> -s "<Client Name>" -e production` in a per-client link dir.
+
+> [!WARNING]
+> **Do not pipe this script's output** (`node … | grep`). Node 24 on Windows dies with
+> `Assertion failed: !(handle->flags & UV_HANDLE_CLOSING)` when stdout is a pipe during the
+> fetch sequence. It crashed once before any mutation ran; redirected to a file it completed in
+> under a minute. The duplicate-name guard makes a rerun safe either way.
+
 ## Execution Steps
 
 ### A. Repair the draft (do this first)
