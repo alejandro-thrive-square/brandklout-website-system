@@ -30,11 +30,15 @@ import zlib from 'node:zlib'
 import { fileURLToPath } from 'node:url'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const SITE = path.resolve(HERE, '../04-design/.tmp/med-spa')
+// Written by prepare-source.mjs from Sang's single HTML file.
+const SITE = path.resolve(HERE, '.tmp/site')
 const FINAL = path.join(SITE, 'final-site')
 const TMP = path.join(HERE, '.tmp')
 
-const mediaMap = JSON.parse(fs.readFileSync(path.join(TMP, 'media-map.json'), 'utf8')).map
+// Brandklout's page has no images, so upload-media.mjs has nothing to do and there may be no
+// map. Any `assets/` reference that does appear is still refused below.
+const mediaMapFile = path.join(TMP, 'media-map.json')
+const mediaMap = fs.existsSync(mediaMapFile) ? JSON.parse(fs.readFileSync(mediaMapFile, 'utf8')).map : {}
 const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'seo.json'), 'utf8'))
 
 /* ELEVEN PAGES — the second build, one per subtask on Asana task
@@ -61,18 +65,10 @@ const seo = JSON.parse(fs.readFileSync(path.join(SITE, 'site-src', 'seo.json'), 
 
    The six remaining treatment dossiers get a line each the day they are built.
    `botox` is the only one so far and it is the template for the rest. */
+// Brandklout phase 1: Sang's one page. (The comment above is the sibling's; the warning in it
+// still holds — in replace mode a slug missing from this list is deleted.)
 const PAGES = [
   { file: 'index.html', slug: 'index', title: 'Home' },
-  { file: 'treatments.html', slug: 'treatments', title: 'Treatments' },
-  { file: 'botox.html', slug: 'botox', title: 'Botox & Xeomin' },
-  { file: 'results.html', slug: 'results', title: 'Results & Reviews' },
-  { file: 'membership.html', slug: 'membership', title: 'Membership' },
-  { file: 'financing.html', slug: 'financing', title: 'Financing' },
-  { file: 'meet-the-doctor.html', slug: 'meet-the-doctor', title: 'Meet the Doctor' },
-  { file: 'team.html', slug: 'team', title: 'Meet the Team' },
-  { file: 'about.html', slug: 'about', title: 'About' },
-  { file: 'book.html', slug: 'book', title: 'Book a Consultation' },
-  { file: 'thank-you.html', slug: 'thank-you', title: 'Thank You' },
 ]
 
 const problems = []
@@ -181,7 +177,11 @@ const FONT_BANNER = '/* ===== css/03-fonts.css ===== */'
 const BANNER_NEXT = '/* ===== css/'
 const fontStart = cssBundle.indexOf(FONT_BANNER)
 const fontEnd = fontStart < 0 ? -1 : cssBundle.indexOf(BANNER_NEXT, fontStart + FONT_BANNER.length)
-if (fontStart < 0) {
+const hasFontFace = /@font-face/.test(cssBundle)
+if (fontStart < 0 && !hasFontFace) {
+  // Nothing to excise: the page loads its fonts from Google, and install-fonts.mjs puts the
+  // same families into Instatic's library. The survived-@font-face check below still runs.
+} else if (fontStart < 0) {
   problems.push('site.css: no css/03-fonts.css banner. The bundler changed shape and the @font-face excision is doing nothing')
 } else if (fontEnd < 0) {
   problems.push('site.css: css/03-fonts.css is the last block, so the excision would take the rest of the file')

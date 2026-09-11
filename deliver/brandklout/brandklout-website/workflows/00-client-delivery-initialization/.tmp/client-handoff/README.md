@@ -2,7 +2,7 @@
 
 Drop the source material here, once, exactly as received.
 
-- **`brandklout-chatgpt.html`**: the page Sang (Brandklout CEO) built with ChatGPT. It goes here
+- **`preview (1).html`** (the name it arrived with, kept): the page Sang (Brandklout CEO) built with ChatGPT. It goes here
   as-is, including any stylesheets, scripts or images that came with it. Do not edit this copy.
   Any cleanup happens on a working copy under `../../../21-instatic-upload/.tmp/`, so this file
   always shows what Sang actually sent.

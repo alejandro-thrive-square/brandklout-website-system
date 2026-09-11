@@ -17,8 +17,8 @@
  *
  * Usage: node verify-live.mjs
  */
-/* The railway host was detached when westlaketxmedspa.com was connected (2026-09-10) and now 404s. */
-const BASE = (process.env.INSTATIC_BASE_URL || 'https://westlaketxmedspa.com').replace(/\/$/, '')
+/* Brandklout: one page, on its review host until the domain moves. */
+const BASE = (process.env.INSTATIC_BASE_URL || 'https://brandklout-production.up.railway.app').replace(/\/$/, '')
 
 /* ELEVEN ROUTES — the eleven core pages of the second build, one per subtask on
    Asana task 1218112701145002. Every slug is the static build's filename minus
@@ -30,7 +30,7 @@ const BASE = (process.env.INSTATIC_BASE_URL || 'https://westlaketxmedspa.com').r
 
    Add the six remaining treatment dossiers here the day they are published;
    `botox` is the only one built so far and it is the template for the rest. */
-const ROUTES = ['/', '/treatments', '/botox', '/results', '/membership', '/financing', '/meet-the-doctor', '/team', '/about', '/book', '/thank-you']
+const ROUTES = ['/']
 
 /* Nothing has ever been retired here. This instance was provisioned on
    2026-09-04 and its first publish was this site, so there is no earlier slug
@@ -92,17 +92,19 @@ for (const route of ROUTES) {
     const userHref = (html.match(/\/_instatic\/css\/userStyles-[a-f0-9]+\.css/) ?? [])[0]
     if (!styleHref) fails.push('no style registry stylesheet on the homepage')
     if (!userHref) fails.push('no userStyles stylesheet — the token layer is missing')
+    // Brandklout: the runtime class is `.open` on `.faq-item` — the FAQ answers are
+    // `max-height: 0` until it is set. The sibling checked its navbar state rules here.
     if (styleHref) {
       const css = await (await fetch(BASE + styleHref)).text()
-      const navRules = (css.match(/navbar_component:not/g) ?? []).length
-      if (navRules < 6) {
-        fails.push(`only ${navRules}/6 navbar state rules survived the tree shake`)
+      if (!/\.faq-item\.open\s+\.faq-a/.test(css)) {
+        fails.push('the `.faq-item.open .faq-a` rule did not survive the tree shake — no FAQ answer can open')
       }
     }
+    // Sang's page's `:root` tokens, which the registry conversion drops (trap 1).
     if (userHref) {
       const css = await (await fetch(BASE + userHref)).text()
-      for (const token of ['--ivory', '--space-large', '--font-display', '--green-ink']) {
-        if (!css.includes(token)) fails.push(`token ${token} missing from userStyles`)
+      for (const token of ['--ink', '--paper', '--muted', '--line', '--cyan', '--max', '--shadow']) {
+        if (!css.includes(token + ':')) fails.push(`token ${token} missing from userStyles`)
       }
     }
     const script = (html.match(/src="(\/_instatic\/assets\/[^"]+\.js)"/) ?? [])[1]
@@ -112,7 +114,8 @@ for (const route of ROUTES) {
       if (!/classList\.add\(["']js["']\)/.test(js)) {
         fails.push('site.js is missing the `js` class bootstrap — scroll reveals will not arm')
       }
-      if (!js.includes('is-open')) fails.push('site.js does not contain the drawer logic')
+      if (!js.includes('.faq-q')) fails.push('site.js does not contain the FAQ toggle')
+      if (!js.includes('leadForm')) fails.push('site.js does not contain the form handler')
     }
   }
 }

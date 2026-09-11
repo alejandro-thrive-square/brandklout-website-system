@@ -26,7 +26,7 @@ import { getSite, getPages, api } from '../../../../process/22-instatic-api-sync
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
 const TMP = path.join(HERE, '.tmp')
-const SITE_SRC = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site')
+const SITE_SRC = path.resolve(HERE, '.tmp/site/final-site')
 
 const apply = process.argv.includes('--apply')
 const force = process.argv.includes('--force')
@@ -37,6 +37,16 @@ const input = JSON.parse(
 )
 
 const nid = () => crypto.randomBytes(16).toString('base64url').slice(0, 21)
+
+/* Brandklout, found 2026-09-11 by compare-live.mjs: `importHtml` gives a <textarea> with no
+   `rows` attribute `rows: 4`; the HTML default is 2. Sang's `.field textarea { min-height: 90px }`
+   then no longer decides the height and the field published 35px taller. The source has one
+   textarea and no `rows`, so put the default back. */
+for (const p of converted.pages) {
+  for (const node of Object.values(p.nodes)) {
+    if (node.moduleId === 'base.textarea' && node.props?.rows === 4) node.props.rows = 2
+  }
+}
 
 /* --- site.js -------------------------------------------------------------
    The static build sets `class="js"` on <html> from an inline <head> script,
@@ -73,7 +83,9 @@ document.documentElement.classList.add('js');
 
    `build-import-input.mjs` strips the page-level `<script src="assets/vendor.js">`
    for the same reason it strips site.js. */
-const vendorJs = fs.readFileSync(path.join(SITE_SRC, 'assets', 'vendor.js'), 'utf8')
+// Brandklout's page has no vendor bundle; the concatenation below then carries an empty one.
+const vendorFile = path.join(SITE_SRC, 'assets', 'vendor.js')
+const vendorJs = fs.existsSync(vendorFile) ? fs.readFileSync(vendorFile, 'utf8') : ''
 const siteJs =
   BOOTSTRAP +
   '/* ---- vendor.js, concatenated by push-site.mjs: Instatic has one script asset. ---- */\n' +
@@ -106,8 +118,10 @@ const siteJs =
    harmless.
 
    Source files, verbatim and in order — keep them in step with site-src/css/. */
-const TOKEN_FILES = ['00-fluid-root.css', '01-tokens.css']
-const CSS_SRC = path.resolve(HERE, '../04-design/.tmp/med-spa/site-src/css')
+// Brandklout: one stylesheet (Sang's inline <style>, as site-src/css/10-site.css). Its `:root`
+// tokens are picked up by the harvest below, so there are no separate token files.
+const TOKEN_FILES = []
+const CSS_SRC = path.resolve(HERE, '.tmp/site/site-src/css')
 
 /* --- AND EVERY OTHER :root BLOCK, harvested ------------------------------
    FOUND ON THE PUBLISHED SITE, 2026-09-01. The two files above were the whole
@@ -338,7 +352,11 @@ function harvestLossy(files) {
      This list is not a guess and it is not exhaustive. It is what
      `css-parity.mjs` reported missing on a real publish; run that after any
      change to the stylesheets and add whatever it names. */
-  const DROPPED = /^(?:scroll-behavior|scroll-padding(?:-|$)|scroll-margin(?:-|$)|-webkit-text-size-adjust|text-size-adjust|overscroll-behavior(?:-|$))/
+  //   Brandklout, 2026-09-11, pre-emptively: `background-clip: text` is what makes the
+  //   gradient headlines readable (`color: transparent` on top of it), and `backdrop-filter`
+  //   frosts the navbar. Both are uncommon enough to be dropped the same way; carrying them in
+  //   the asset costs nothing if they are not. css-parity.mjs is still the check.
+  const DROPPED = /^(?:scroll-behavior|scroll-padding(?:-|$)|scroll-margin(?:-|$)|-webkit-text-size-adjust|text-size-adjust|overscroll-behavior(?:-|$)|-webkit-background-clip|background-clip|-webkit-backdrop-filter|backdrop-filter)/
 
   const isLossy = (prop, value) =>
     (MATH.test(value) && !SAFE.test(value)) ||
@@ -371,6 +389,7 @@ function harvestLossy(files) {
   const isRoot = (sel) => /(^|,)\s*:root\s*$/.test(sel)
   const entries = []
   const push = (file, media, sel, body) => {
+    const decls = []
     for (const d of body.split(';')) {
       const t = d.trim()
       const colon = t.indexOf(':')
@@ -378,13 +397,23 @@ function harvestLossy(files) {
       const prop = t.slice(0, colon).trim()
       const value = t.slice(colon + 1).trim()
       if (!/^-?[a-zA-Z][a-zA-Z-]*$/.test(prop)) continue
+      decls.push({ prop, value })
+    }
+    /* A LOSSY VALUE TAKES ITS WHOLE RULE WITH IT. FOUND 2026-09-11 by css-parity.mjs on the
+       Brandklout page: `h1 { font-size: clamp(48px,6vw,76px); line-height: .99;
+       margin-bottom: 22px; max-width: 780px }` published with the clamp (carried here) and
+       WITHOUT the other three, so the headline lost its tight leading and its measure. The
+       conversion does not only drop the math declaration; it can drop its neighbours. So
+       every declaration of a rule that has one lossy value joins the carried cascade. */
+    const ruleLossy = decls.some((d) => isLossy(d.prop, d.value))
+    for (const { prop, value } of decls) {
       // A grouped selector is split into its parts, one entry each, so that a
       // responsive override written as `.catx_band, .catx_band.is-reverse
       // { min-height: 0 }` joins the `.catx_band` cascade. Found 2026-09-02:
       // the hub's category band kept its desktop min-height on a phone.
       for (const part of sel.split(',')) {
         const one = part.replace(/\s+/g, ' ').trim()
-        if (one) entries.push({ file, media, sel: one, prop, value, math: isLossy(prop, value) })
+        if (one) entries.push({ file, media, sel: one, prop, value, math: ruleLossy })
       }
     }
   }
@@ -442,6 +471,9 @@ const tokensCss =
         `\n/* ===== :root harvested from ${file} ===== */\n` + blocks.join('\n\n') + '\n',
     )
     .join('') +
+  // Brandklout: browser defaults the source relies on and the published page does not have.
+  // Before the carried cascade, so the page's own element rules (`h1 { margin-bottom }`) win.
+  '\n' + fs.readFileSync(path.join(HERE, 'ua-defaults.css'), 'utf8') +
   // The sibling appended one literal rule here — `.compare_component { --pos }`
   // from a deleted stylesheet — because harvestRoots only looked at `:root`.
   // It now harvests by declaration instead, so a custom property on a class is

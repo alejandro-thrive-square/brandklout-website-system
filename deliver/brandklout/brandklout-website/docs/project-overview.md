@@ -50,9 +50,13 @@ Phase 2 routes `02-wireframe` → `04-design` → `06-content-seo` → `08-qa` �
    current site's other pages have to come down, and whether anything needs redirecting.
 2. **Which domain?** The live Brandklout domain and its DNS host were not confirmed at kickoff.
 3. **Asana**: no task was linked at kickoff.
-4. **Forms and third-party scripts**: Instatic strips every `<script>` on import and blocks
-   third-party scripts and frames. If Sang's page has a contact form, analytics or a chat widget,
-   it needs `18-instatic-embeds` or a bundle module, and that goes back to him as a question.
+4. **Where do "Check my market" leads go?** Answered in part 2026-09-11: nowhere. Sang's page
+   has a prototype handler that shows "Prototype form submitted…". Instatic's own form storage
+   (`base.form`), a CRM webhook, or an embed via `18-instatic-embeds` are the options. He picks.
+5. **Legal pages.** Privacy, Terms and HIPAA link to `#` in Sang's page. They have to exist
+   before the domain moves.
+6. **Claims.** "60-day guarantee", "5.0★ reputation", "Henry Schein One API vendor listing", and
+   the three case-study figures. Only Sang can confirm these, and for a compliance fix they matter.
 
 ## Version Control
 

@@ -40,7 +40,7 @@ import { fileURLToPath } from 'node:url'
 import { api } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const FINAL = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site')
+const FINAL = path.resolve(HERE, '.tmp/site/final-site')
 const TMP = path.join(HERE, '.tmp')
 const apply = process.argv.includes('--apply')
 

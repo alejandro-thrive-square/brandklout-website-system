@@ -36,7 +36,7 @@ import { fileURLToPath } from 'node:url'
 import puppeteer from 'puppeteer-core'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const LOCAL_ROOT = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site')
+const LOCAL_ROOT = path.resolve(HERE, '.tmp/site/final-site')
 const OUT = path.join(HERE, '.tmp', 'visual')
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 
@@ -60,7 +60,7 @@ loadEnv()
 const REMOTE = (process.env.INSTATIC_BASE_URL || '').replace(/\/$/, '')
 if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
-const ALL = ['index', 'treatments', 'botox', 'results', 'membership', 'financing', 'meet-the-doctor', 'team', 'about', 'book', 'thank-you']
+const ALL = ['index']
 const args = process.argv.slice(2)
 const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ALL
 const WIDTH = Number(args.find((a) => /^\d+$/.test(a)) ?? 1440)

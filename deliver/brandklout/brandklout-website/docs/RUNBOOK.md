@@ -10,41 +10,42 @@ then only the runs you need.
 Instatic as supplied, to fix a compliance emergency on the current site. Phase 2 redesigns and
 expands the site. Full scope and open questions: [`project-overview.md`](./project-overview.md).
 
-## Status: instance ready, waiting on the source HTML (2026-09-11)
+## Status: PUBLISHED on the review link, waiting on Sang (2026-09-11)
 
-- Worktree `bk-brandklout-website`, sparse, based on `main` `116efa21`.
-- Railway: workspace `Brandklout` → project **`Brandklout`** `550ebd58-0e74-444e-96d5-2b836a2db98a`
-  → service `Brandklout` `742221a0-b1f1-45f1-bf42-fc7bab85adca`, env `production`
-  `ebac465d-468b-4cd3-afc6-78da721e0eb0`, volume `/app/storage`.
-- Review host: <https://brandklout-production.up.railway.app>. Admin at `/admin`, with the same
-  login as Mason Park and Stone Med Spa.
-- `~/.webzite/.env` has a `[brandklout-website]` section. This worktree's `.env` is generated from it.
-- **Nothing is published yet.** The source HTML has not landed.
+- **Live at <https://brandklout-production.up.railway.app>**: Sang's page as he wrote it, one
+  editable Instatic page. Admin at `/admin`, with the same login as Mason Park.
+- Gates: `verify-live` and `css-parity` FAIL none. `visual-diff` 0.013% at 1440 and 0.028% at 390.
+  `compare-live` shows 9 benign findings.
+- **Not on any Brandklout domain.** The cutover waits for Sang's approval.
+- **The page itself is not launch-ready, by its own text.** The lead form captures nothing and
+  tells visitors it is a prototype. Privacy, Terms and HIPAA link to `#`. Two lines say "replace
+  before production". The full list is in
+  [`runbook/2026-09-11-sangs-page-published.md`](./runbook/2026-09-11-sangs-page-published.md).
+- Worktree `bk-brandklout-website`. Railway project `Brandklout`
+  `550ebd58-0e74-444e-96d5-2b836a2db98a`, service `742221a0-b1f1-45f1-bf42-fc7bab85adca`, env
+  `production` `ebac465d-468b-4cd3-afc6-78da721e0eb0`.
 
 ## Next
 
-1. Alejandro drops Sang's HTML into
-   `workflows/00-client-delivery-initialization/.tmp/client-handoff/`.
-2. Read it before touching the toolkit. Count the pages, list every `<script>`, form, font,
-   external image and third-party embed. Every one of those is a known way an Instatic import
-   fails silently (see the traps in `21-instatic-upload.md`).
-3. Adapt `21-instatic-upload`. It was copied from Stone Med Spa and expects a multi-page
-   `final-site/` build with `seo.json`. One ChatGPT page needs a much thinner input step.
-4. Import, publish, and run the gates (`verify-live`, `css-parity`, `visual-diff`), then send Sang
-   the review link.
-5. Domain cutover only after Sang approves, via `20-instatic-domain-origins`.
+1. Sang reviews the link and answers the flagged list: where the form should send leads, the real
+   Privacy/Terms/HIPAA pages, the prototype lines, and the claims.
+2. Apply his corrections to the source (a new handoff file, or edits on a working copy), then
+   rerun the chain in `21-instatic-upload.md` → "Brandklout: the one-page run".
+3. Domain cutover via `20-instatic-domain-origins`, then add the domain to `sites.json`.
+4. Phase 2: redesign and expand (see the project overview).
 
 ## Gotchas
 
-1. **The Railway token is `user.accessToken` in `~/.railway/config.json`.** `user.token` is null
-   now, and the `[shared]` `RAILWAY_TOKEN` answers `Not Authorized` to GraphQL in every header
-   form (bearer, team, project). The CLI's own login is the only one that works.
-2. **The toolkit is a copy, and it carries a sibling's facts.** `push-site.mjs` once shipped the
-   sibling's meta description to every page (trap 31). Grep the copied scripts for `stone` and
-   `med-spa` before the first `--apply`.
-3. **`ship.sh` needs `RAILWAY_LINK_DIR` linked by project ID**
-   (`railway link -p 550ebd58-0e74-444e-96d5-2b836a2db98a -e production`), never by name.
-   `check-link.mjs` refuses a link dir that does not serve `INSTATIC_BASE_URL`.
+1. **The Railway token is `user.accessToken` in `~/.railway/config.json`.** `user.token` is null,
+   and the `[shared]` `RAILWAY_TOKEN` answers `Not Authorized`.
+2. **`ship.sh` needs `RAILWAY_LINK_DIR` linked by project ID**
+   (`railway link -p 550ebd58-0e74-444e-96d5-2b836a2db98a -e production -s Brandklout`).
+3. **`puppeteer-core` is not a repo dependency.** Run `npm install --no-save puppeteer-core` at the
+   worktree root before the Chrome gates.
+4. **`push-site.mjs --apply --force` replaces the whole site.** If anyone edits the page in the
+   admin, those edits are lost on the next push. Pull their changes into the source first.
+5. The toolkit's comments still describe Stone in many places. The Brandklout box and section at
+   the top of `21-instatic-upload.md` are what is true here.
 
 ## Version Control
 

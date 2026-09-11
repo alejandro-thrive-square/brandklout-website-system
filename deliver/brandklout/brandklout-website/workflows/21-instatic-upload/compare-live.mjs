@@ -54,7 +54,7 @@ import { fileURLToPath } from 'node:url'
 import puppeteer from 'puppeteer-core'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const LOCAL_ROOT = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site')
+const LOCAL_ROOT = path.resolve(HERE, '.tmp/site/final-site')
 const SHOTS = path.join(HERE, '.tmp', 'compare')
 const CHROME = process.env.CHROME_PATH || 'C:/Program Files/Google/Chrome/Application/chrome.exe'
 const PORT = 8821
@@ -81,7 +81,7 @@ if (!REMOTE) throw new Error('INSTATIC_BASE_URL is not set')
 
 const args = process.argv.slice(2).filter((a) => a !== '--shots')
 const wantShots = process.argv.includes('--shots')
-const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index', 'treatments', 'botox', 'results', 'membership', 'financing', 'meet-the-doctor', 'team', 'about', 'book', 'thank-you']
+const PAGES = args.find((a) => /^[a-z-]+$/.test(a)) ? [args.find((a) => /^[a-z-]+$/.test(a))] : ['index']
 const WIDTHS = args.find((a) => /^\d+$/.test(a)) ? [Number(args.find((a) => /^\d+$/.test(a)))] : [1440, 390]
 
 /* The properties worth comparing. Deliberately wide: the failures this exists

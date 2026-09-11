@@ -38,7 +38,7 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const LOCAL_CSS = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site/assets/site.css')
+const LOCAL_CSS = path.resolve(HERE, '.tmp/site/final-site/assets/site.css')
 
 function loadEnv() {
   let dir = HERE

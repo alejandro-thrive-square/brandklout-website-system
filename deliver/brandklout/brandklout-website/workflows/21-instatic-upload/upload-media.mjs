@@ -25,7 +25,7 @@ import { fileURLToPath } from 'node:url'
 import { api, requestForm, BASE } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
 const HERE = path.dirname(fileURLToPath(import.meta.url))
-const ASSETS = path.resolve(HERE, '../04-design/.tmp/med-spa/final-site/assets')
+const ASSETS = path.resolve(HERE, '.tmp/site/final-site/assets')
 const OUT = path.join(HERE, '.tmp', 'media-map.json')
 
 const MIME = {

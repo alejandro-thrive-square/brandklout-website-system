@@ -38,13 +38,11 @@
  */
 import { api, getSite, saveShell, login } from '../../../../process/22-instatic-api-sync/insta-api.mjs'
 
+// Brandklout: exactly the cuts Sang's page requests from Google Fonts
+// (`DM+Sans:wght@400;500;600;700&family=Manrope:wght@500;600;700;800`).
 const WANTED = [
-  // 300 sets every display line, 400 the mid-weight headings, 400italic the
-  // accented half of a two-part display line (`.display-accent`).
-  { family: 'Cormorant Garamond', variants: ['300', '400', '400italic'] },
-  // 400 body, 500 eyebrows and labels, 600 the self-check's active layer, 700
-  // the button labels.
-  { family: 'Inter', variants: ['400', '500', '600', '700'] },
+  { family: 'DM Sans', variants: ['400', '500', '600', '700'] },
+  { family: 'Manrope', variants: ['500', '600', '700', '800'] },
 ]
 // latin only. The site is one practice in Texas and latin-ext doubles the bytes
 // for glyphs no page contains.

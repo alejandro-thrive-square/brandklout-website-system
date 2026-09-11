@@ -18,6 +18,61 @@
 > run through the design pipeline first. Rewrite this directive for that input the first time it
 > runs, and keep the traps: they are about the Instatic importer, not about Stone.
 
+## Brandklout: the one-page run (2026-09-11)
+
+Published to `https://brandklout-production.up.railway.app`, `{"publishedPages":1}`. Gates:
+`verify-live` FAIL none · `css-parity` FAIL none · `visual-diff` **0.013%** at 1440, **0.028%** at 390 ·
+`compare-live` 9 findings, all benign (see trap 38 and the `.js` scope from trap 10).
+
+```bash
+node prepare-source.mjs          # 0. Sang's HTML -> .tmp/site/{final-site,site-src}. The original is never edited
+node install-fonts.mjs --apply   # 0b. once per instance: DM Sans + Manrope into Instatic's library
+                                 #    (no upload-media / set-alt: the page has no images)
+node build-import-input.mjs      # 1. payload; media map optional, font excision optional
+RAILWAY_LINK_DIR=<dir linked by project id> bash ship.sh   # 2. convert on the container
+node inspect-import.mjs          # 2b. buttons, form fields, ids — read it before pushing
+node push-site.mjs               # 3. dry run
+node push-site.mjs --apply [--force]   # --force from the second push on (trap 11)
+node -e "import('../../../../process/22-instatic-api-sync/insta-api.mjs').then(m=>m.publish())"
+node verify-live.mjs && node css-parity.mjs && node visual-diff.mjs && node visual-diff.mjs 390 && node compare-live.mjs
+node form-probe.mjs              # what the form does on submit; aborts every non-GET request
+```
+
+The Chrome gates need `puppeteer-core`, which is not a dependency of the repo: in a fresh worktree
+run `npm install --no-save puppeteer-core` at the worktree root (that is how `bk-stone` has it).
+
+### 35. A lossy value can take its NEIGHBOURS with it
+
+`h1 { font-size: clamp(48px,6vw,76px); line-height: .99; margin-bottom: 22px; max-width: 780px }`
+published with the clamp (carried by trap 21's harvest) and **without the other three**. Found by
+`css-parity.mjs`. `harvestLossy()` now marks every declaration of a rule as lossy when any one of
+them is, so the whole rule rides in the code asset. Cost: 18 → 51 carried declarations, all
+duplicates of registry values except the ones that were missing.
+
+### 36. The browser's default margins are gone on the published page
+
+A hand-written page leans on the UA stylesheet: `p { margin-block: 1em }`, `h2 { margin-block: .83em }`.
+Published, every `<p>` and heading without an explicit `margin-bottom` rendered 0 and the lower half
+of the page sat up to 49px higher (`visual-diff` 4% / 8.7%). `ua-defaults.css` restores
+`margin-bottom` for `p`, `h1`–`h4` in the code asset, **before** the carried cascade so the page's own
+element rules still win. Any source that was not written against a reset needs this.
+
+### 37. `<textarea>` without `rows` imports as `rows: 4`
+
+The HTML default is 2, so `min-height: 90px` stopped deciding the height and the field published
+35px taller. `push-site.mjs` sets `rows` back to 2 on `base.textarea` nodes that came in at 4.
+
+### 38. A submit `<button>` becomes `base.submit` and its children become text
+
+`<button type="submit">Check My Market <span class="arrow">↗</span></button>` publishes as
+`<button type="submit">Check My Market ↗</button>`. The glyph survives as text, so it looks right;
+the span and its sizing are gone. That is trap 15 again, for `base.submit`. Plain `<button>`s outside a
+form import as `base.container` with `customTag: button` and **keep** their children.
+
+Also true here, and good news: `<form>` imports as `base.form` with its `id`; inputs, selects and the
+textarea keep `name`, `type`, `placeholder` and `required`; section ids survive, so in-page anchors
+work.
+
 Takes the static build in
 [`04-design/.tmp/med-spa/final-site`](../04-design/.tmp/med-spa/final-site) and puts it
 into the client's own Instatic instance as an editable site — pages as node trees, CSS as style
