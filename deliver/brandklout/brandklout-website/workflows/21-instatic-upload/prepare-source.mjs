@@ -66,6 +66,9 @@ const walkDir = (root, rel = '') =>
         return d.isDirectory() ? walkDir(root, r) : [r]
       })
 const overlaid = new Set(walkDir(OVERLAY))
+// PATCHES: small find/replace edits on top of a package page (patches.mjs). Applied to pages only.
+const { loadPatches, applyPatches } = await import('./patches.mjs')
+const patches = await loadPatches()
 const read = (rel) => fs.readFileSync(path.join(overlaid.has(rel) ? OVERLAY : PKG, rel), 'utf8')
 const all = [...new Set([...walkDir(PKG), ...overlaid])]
 const htmlFiles = all.filter((f) => /\.html?$/i.test(f)).sort()
@@ -268,7 +271,12 @@ function localImageName(src) {
 for (const file of pageFiles) {
   const route = routeOf(file)
   if (!SLUG_OK.test(route)) refuse(`${file} -> slug "${route}" is not a valid Instatic page slug`)
-  const html = read(file)
+  let html
+  try {
+    html = applyPatches(file, read(file), patches)
+  } catch (e) {
+    refuse(e.message)
+  }
 
   const styleBlocks = [...html.matchAll(/<style[^>]*>([\s\S]*?)<\/style>/gi)]
   const cssLinks = [...html.matchAll(/<link\b[^>]*>/gi)]
@@ -433,6 +441,7 @@ fs.writeFileSync(
 
 console.log(`package  ${path.basename(PKG)}: ${htmlFiles.length} html, ${pages.length} page(s), aliases ${JSON.stringify(aliases)}`)
 if (overlaid.size) console.log(`overlay  ${[...overlaid].join(', ')} (replaces the package's copy)`)
+for (const [rel, list] of patches) console.log(`patches  ${rel}: ${list.length} applied`)
 for (const p of pages) console.log(`  ${p.slug.padEnd(42)} ${p.file.padEnd(52)} ${p.scope}`)
 console.log(`css      ${[...cssByScope].map(([s, v]) => `${s} ${(v.css.length / 1024).toFixed(1)}KB`).join(' · ')}`)
 console.log(`js       ${[...jsByScope].map(([s, v]) => `${s} ${v.js.length}B`).join(' · ')}`)

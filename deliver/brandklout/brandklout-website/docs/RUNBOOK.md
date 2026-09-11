@@ -23,6 +23,12 @@ expands the site. Full scope and open questions: [`project-overview.md`](./proje
   (`21-instatic-upload/overlay/survey/`), posting to his SheetDB sheet exactly as before. The
   `brandklout.embed-origins` plugin is installed with `connectOrigins: https://sheetdb.io` only.
   See [`runbook/2026-09-11-netlify-survey-rebuilt.md`](./runbook/2026-09-11-netlify-survey-rebuilt.md).
+- **Agency edits on Sang's home page live in `21-instatic-upload/patches/index.html.mjs`**: the
+  "Why us" cards are stacked, and his video plays in place. His file is untouched.
+- **The main CTA is a dead end.** Every "Check My Market" / "See If My Market Is Available" goes
+  to the home `#apply` form, which captures nothing. The working capture (`/survey`) is linked only
+  from the footer, and there is no "Book a Demo" or "Login" as on brandklout.com. Options are in
+  [`runbook/2026-09-11-why-us-stacked-and-flow-review.md`](./runbook/2026-09-11-why-us-stacked-and-flow-review.md).
 - **The site is not launch-ready, by its own text.** The home form captures nothing and tells
   visitors it is a prototype. Privacy, Terms and HIPAA link to `#`. The prototype lines are still there.
   The claims have grown: a 60-day money-back guarantee on every page, 10-mile exclusivity, and

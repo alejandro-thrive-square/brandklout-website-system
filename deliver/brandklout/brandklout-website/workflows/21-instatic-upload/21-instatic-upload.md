@@ -79,6 +79,18 @@ exactly the sheet's columns) and the Calendly link. It replaces the package's Ne
 `/survey`, whose POST 404'd on Instatic (trap 42). The page has no Zapier call. If a Zap fires,
 it fires from the sheet.
 
+**`patches/` edits a package page in place.** `patches/<package path>.mjs` default-exports
+`[{ why, find, replace }]`, applied by `prepare-source.mjs` (and by `visual-diff --source`) through
+`patches.mjs`. Each `find` must occur **exactly once** in the source, or the build refuses. A new
+package from Sang then either takes the patch cleanly or fails loudly where its anchor moved; it
+never silently drops or doubles an edit. Use a patch for an agency change to part of Sang's page,
+and `overlay/` to replace a whole page. When a patch edits CSS, keep new base rules **before** the
+stylesheet's `@media` blocks (trap 40's ordering assertion refuses otherwise).
+First use (2026-09-11): `patches/index.html.mjs`. It stacks the "Why us" cards and swaps Sang's
+thumbnail link for an embedded YouTube player (`base.video`, which also lifts the home page's
+`frame-src 'none'`). It also removes the thumbnail's `::after` gradient, which covered the whole
+media column and would have swallowed every click on the player.
+
 **The browser POSTs to `https://sheetdb.io`, so the CSP has to allow it.** Instatic's CSP has no
 `connect-src`, so it falls back to `default-src 'self'` and the fetch is blocked. The
 `brandklout.embed-origins` plugin (`deliver/process/18-instatic-embeds`) is installed on this

@@ -95,9 +95,19 @@ const THRESHOLD = 24
 const MIME = { '.html': 'text/html', '.css': 'text/css', '.js': 'text/javascript', '.webp': 'image/webp', '.woff2': 'font/woff2', '.svg': 'image/svg+xml', '.png': 'image/png', '.jpg': 'image/jpeg' }
 // A list of roots, first hit wins: the --source side is `overlay/` over Sang's package, the same
 // precedence prepare-source.mjs uses, so an overlaid page is compared with ITS source.
+// --source also applies patches/ (patches.mjs), the same edits prepare-source makes, so a patched
+// page is compared with its patched source and the check still isolates the prepare step.
+const { loadPatches, applyPatches } = await import('./patches.mjs')
+const patches = await loadPatches()
 const serve = (...roots) =>
   http.createServer((req, res) => {
     const rel = decodeURIComponent(req.url.split('?')[0])
+    const key = rel.replace(/^\//, '')
+    if (roots.length > 1 && patches.has(key)) {
+      const base = roots.map((r) => path.join(r, key)).find((f) => fs.existsSync(f))
+      res.writeHead(200, { 'content-type': 'text/html' })
+      return res.end(applyPatches(key, fs.readFileSync(base, 'utf8'), patches))
+    }
     const hit = (root) => {
       let f = path.join(root, rel)
       if (fs.existsSync(f) && fs.statSync(f).isDirectory()) f = path.join(f, 'index.html')
