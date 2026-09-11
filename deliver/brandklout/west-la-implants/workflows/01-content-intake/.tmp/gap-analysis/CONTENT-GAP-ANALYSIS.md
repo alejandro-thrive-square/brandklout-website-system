@@ -6,9 +6,81 @@
 | **Client address** | 12301 Wilshire Blvd #205, Los Angeles CA 90025 |
 | **Competitor** | Wilshire Oral Surgery & Implant Center, `wilshireoralsurgery.com` |
 | **Competitor address** | 12300 Wilshire Blvd #326, Los Angeles CA 90025 (**across the street**) |
-| **Pulled** | 2026-08-20 |
+| **Competitor 2** *(added 2026-09-10)* | Santa Monica Center for Oral Surgery, `santamonicaoms.com`, 2001 Wilshire Blvd, Santa Monica |
+| **Competitor 3** *(added 2026-09-10)* | Implant Center Los Angeles / Wilshire Smile Studio, `implantcenterlosangeles.com`, 6200 Wilshire Blvd #1609 |
+| **Pulled** | Client + competitor 1: 2026-08-20. Competitors 2 and 3: 2026-09-10 |
 | **Method** | Full sitemap crawl of both sites, text + structure extracted per page |
 | **Feeds** | `01-content-intake`, `02-wireframe` (IA), `06-content-seo` |
+
+## Update 2026-09-10: two more benchmarks
+
+Two further competitors were crawled on 2026-09-10 to widen the benchmark from one
+neighbour to three. The rest of this document still reads client vs Wilshire; this section
+puts all four on one table. A homepage-level comparison of the same four sites is in
+[`HOMEPAGE-GAP-ANALYSIS.md`](./HOMEPAGE-GAP-ANALYSIS.md).
+
+| | **West LA Implants** | **Wilshire Oral Surgery** | **Santa Monica OMS** | **Implant Center LA** |
+| :--- | ---: | ---: | ---: | ---: |
+| Domain | `westlaimplants.com` | `wilshireoralsurgery.com` | `santamonicaoms.com` | `implantcenterlosangeles.com` |
+| Distance from 12301 Wilshire | — | across the street | ~3.5 mi west | ~7 mi east |
+| URLs crawled | 91 | 79 | 91 | **69** |
+| Designed pages | 42 | **66** | 36 | 51 |
+| Blog posts | 46 | 13 | **53** | 17 |
+| Category / archive pages | 3 | 0 | 2 | 1 |
+| Total words | 66,775 | 105,475 | **143,546** | **28,943** |
+| Average words per page | 734 | 1,335 | **1,577** | **419** |
+| Median words per page | 755 | 1,527 | 1,465 | 354 |
+| Homepage words | 1,118 | 1,162 | 6,757 † | **421** |
+| Homepage images | 17 | 21 | **50** | 30 |
+| Service lines owned | **9** | 8 | 7 | 7 |
+| Neighbourhood landing pages | **0** | **31** | 1 | **0** ‡ |
+| Pages with an FAQ block | **1** | **44** | 12 | 1 |
+| Pages carrying a treatment price | 0 § | **1** (the implant hub price menu) | 3 (blog posts only) | **0** ¶ |
+| Pages with any JSON-LD | 90 of 91 | **79 of 79** | **1 of 91** | 69 of 69 |
+| Distinct media URLs | **219** | 59 | 142 | 35 |
+| Pages with a form | 8 | 5 | 2 | **66** |
+
+† SMOMS's homepage word count is inflated by a visually hidden testimonial carousel that
+repeats the same six reviews twelve times. Their visible homepage copy is roughly 900 words.
+
+‡ ICLA has no neighbourhood pages, but names its catchment in a homepage `h2`: "Serving Los
+Angeles, Santa Monica, Beverly Hills, West Hollywood, and More."
+
+§ The client's two flagged pages are a blog post about affordable implants and
+`/financing-los-angeles-ca/`, where every dollar figure is a **lender credit limit**, not a
+treatment price. The conclusion in §2 below stands: the client publishes no price.
+
+¶ ICLA's headline offer — **"$99 Special — Dental Implant Consult + CT Scans"** — runs as an
+announcement bar and as a baked JPEG. It never reaches indexable body text, so a search
+engine, a screen reader and an answer engine all see nothing.
+
+**What the two new benchmarks change, and what they do not.**
+
+1. **The neighbourhood gap is Wilshire's alone.** Neither new competitor runs a
+   service x neighbourhood matrix — SMOMS has one location page, ICLA has none. Local
+   coverage stays the largest single opportunity, but it is now clear that it is one
+   competitor's strategy rather than the market norm. It is still worth taking; the client
+   would be second into open ground, not ninth.
+2. **Page depth is not a market standard either.** SMOMS averages 1,577 words a page and ICLA
+   averages 419. The client sits between them at 734. Wilshire's 1,335 is a choice, not a
+   floor.
+3. **Nobody in the market publishes implant prices properly.** Wilshire has a price menu on
+   one hub page, SMOMS gives ranges only inside blog posts, ICLA hides a $99 offer in an
+   image. "Implant cost as an owned, indexable destination page" remains unclaimed across all
+   four sites.
+4. **Structured data: the client's lead has narrowed sharply.** See the correction in §4 below.
+5. **The client's media library is still the widest moat.** 219 distinct assets against 142,
+   59 and 35, and the client is the only one of the four with named patient story films.
+6. **Nothing here changes the build range.** The 28–34 designed-page estimate at the foot of
+   this document holds.
+
+Numbers produced by [`../scrapers/compare_four.py`](../scrapers/compare_four.py), output at
+[`four-site-summary.csv`](./four-site-summary.csv). Re-run with:
+
+```bash
+cd deliver/brandklout/west-la-implants/workflows/01-content-intake/.tmp
+python scrapers/compare_four.py --out gap-analysis/four-site-summary.csv
+```
 
 ## Why this competitor
 
@@ -151,24 +223,38 @@ patient-story video. Claiming surgical parity would be both false and losable.
 
 ### 4. Answer-engine surface: FAQ blocks and structured data
 
-| | Client | Competitor |
-| :--- | :--- | :--- |
-| Pages with a "Frequently Asked Questions" `h2` | **1** | **44** |
-| "What to expect / recovery" `h2` sections | 3 | **27** |
-| `FAQPage` schema | none | none |
-| `Review` / `AggregateRating` schema | none | none |
-| `VideoObject` schema | none | none |
-| Any JSON-LD | 90 of 91 pages | **31 of 79 pages** |
+| | Client | Wilshire | SMOMS | ICLA |
+| :--- | :--- | :--- | :--- | :--- |
+| Pages with a "Frequently Asked Questions" `h2` | **1** | **44** | 12 | 1 |
+| "What to expect / recovery" `h2` sections | 3 | **27** | — | — |
+| `FAQPage` schema | none | none | **1 page (homepage)** | none |
+| `AggregateRating` schema | **1 page** (`4.9`, 40 reviews) | **79 pages** (`4.9`, 238 reviews) | none | none |
+| `VideoObject` schema | **5 pages** | none | none | none |
+| Any JSON-LD | 90 of 91 pages | **79 of 79 pages** | 1 of 91 pages | 69 of 69 pages |
 
 The competitor attaches an FAQ block to **44 pages**, the client to one. That is the shape
-Google's AI Overviews and the LLM answer engines reward.
+Google's AI Overviews and the LLM answer engines reward, and it remains the clearest
+technical gap on the site.
 
-But note the reversal underneath: the competitor's structured data is **almost nonexistent**.
-They emit `BreadcrumbList` on 31 pages and *nothing at all* on the other 48, including their
-homepage. The client already carries `Dentist`, `MedicalOrganization`, `AboutPage`,
-`ContactPage` and `BlogPosting`. **Structured data is the one technical field the client
-already leads, and neither site has FAQPage, Review or VideoObject markup.** That is open
-ground worth taking in `06-content-seo`.
+> **Correction, 2026-09-10.** The August pass read only the top-level `@type` of each JSON-LD
+> block and missed everything nested inside `@graph`. Re-parsed recursively, two of the three
+> claims in the original version of this section were wrong.
+>
+> - **Wilshire is not weak on structured data.** They emit `LocalBusiness`, `Organization`,
+>   `BreadcrumbList`, `PostalAddress`, `EducationalOccupationalCredential` **and
+>   `AggregateRating` (`4.9`, `238` reviews) on all 79 pages** — not `BreadcrumbList` on 31.
+>   They out-mark the client on review schema completely.
+> - **The client already has `AggregateRating` and `VideoObject`.** The homepage carries
+>   `AggregateRating` (`4.9`, `40` reviews, static 2022-era markup) and `VideoObject` on five
+>   pages, including the homepage `Master-Broll.mp4` clip. No competitor has any `VideoObject`.
+> - **SMOMS ships `FAQPage`** on its homepage — the only `FAQPage` markup across all four
+>   sites — but nothing at all on its other 90 pages.
+>
+> **Revised conclusion.** The client's structured-data advantage is real but narrow: it is
+> `VideoObject` (uncontested) plus sitewide coverage. It is *not* review markup, where
+> Wilshire now leads on every page. The open ground worth taking in `06-content-seo` is
+> `FAQPage` on every service page — which only SMOMS has, and only once — combined with the
+> `VideoObject` lead the client already holds and should extend to the patient story films.
 
 ### 5. Whole service lines the competitor owns and the client does not
 
@@ -206,7 +292,7 @@ Do not rebuild past these. They are the existing moat.
 | Video | **12 embedded YouTube clips + 4 self-hosted B-roll MP4s** (33 MB) | 1 mention |
 | Named patient stories with stills and footage | Leslie, Emily, Michael | none |
 | Blog depth | **46 posts** | 13 |
-| Structured data | `Dentist`, `MedicalOrganization`, `BlogPosting` | `BreadcrumbList` only |
+| Structured data | `Dentist`, `MedicalOrganization`, `BlogPosting`, **`VideoObject` on 5 pages** | `LocalBusiness` + `AggregateRating` sitewide, **no `VideoObject`** |
 
 The blog is a real asset with a real problem: **46 question-format posts** ("Are There
 Factors That Determine Which Type Of Dental Implant Procedure I Can Get Treated With?") is
@@ -218,7 +304,8 @@ cadence is worth restarting.
 
 1. **Implant cost as a destination page.** Neither site owns a page titled for implant cost.
    The competitor covers it as a section, the client not at all. High-intent, unclaimed.
-2. **FAQPage, Review and VideoObject schema.** Neither has any.
+2. **`FAQPage` schema at scale.** Across all four sites there is exactly one `FAQPage` block
+   (SMOMS's homepage). Wilshire has 44 FAQ *blocks* and no markup on any of them.
 3. **Spanish-language content.** Zero on both sites, in a market where it is a live demand.
 4. **Named cost comparison** (implants vs bridge vs denture, with figures). Both gesture at
    it, neither commits.
@@ -304,6 +391,11 @@ All produced by the scrapers in `../scrapers/`, re-runnable.
 | `blog-topics.csv` | Every post title, URL, word count and publish date |
 | `trust-signals.csv` | 22 conversion and trust signals, presence per site |
 | `gap-data.json` | All of the above, structured |
+| `four-site-summary.csv` | Site-level metrics for all four sites (2026-09-10), from `compare_four.py` |
+| `HOMEPAGE-GAP-ANALYSIS.md` | Homepage-only comparison of the same four sites, plus the recommended homepage blueprint |
+| `../homepage-screenshots/` | 1440px full-page and above-the-fold PNGs of all four homepages and `concept-03`, with their rendered HTML |
+| `../competitor-scrape/santamonicaoms/` | Competitor 2: 91 pages, same shape |
+| `../competitor-scrape/implantcenterlosangeles/` | Competitor 3: 69 pages, same shape |
 | `../current-site-scrape/` | Client: 91 page extracts (`pages/*.md`), records (`data/*.json`), raw HTML, `site-data.json`, `media-manifest.csv` |
 | `../competitor-scrape/wilshireoralsurgery/` | Competitor: same shape, 79 pages |
 | `../../../03-graphic-resources/.tmp/` | Downloaded client binaries, `asset-manifest.csv`, `ASSETS.md` |
@@ -323,6 +415,15 @@ python scrapers/compare_content.py \
     --client current-site-scrape/site-data.json --client-label westlaimplants \
     --competitor competitor-scrape/wilshireoralsurgery/site-data.json \
     --competitor-label wilshireoralsurgery --out "$(pwd)/gap-analysis"
+
+# 2026-09-10 additions
+python scrapers/scrape_site.py --site https://santamonicaoms.com \
+    --out "$(pwd)/competitor-scrape/santamonicaoms" --delay 0.8
+
+python scrapers/scrape_site.py --site https://implantcenterlosangeles.com \
+    --out "$(pwd)/competitor-scrape/implantcenterlosangeles" --delay 0.8
+
+python scrapers/compare_four.py --out gap-analysis/four-site-summary.csv
 ```
 
 ## Caveats
@@ -338,6 +439,17 @@ python scrapers/compare_content.py \
 - Word counts exclude nav and footer chrome only where the theme does not repeat it as
   headings. Both sites are affected equally, so the ratio holds even if absolute counts
   run slightly high.
+- **Schema counts before 2026-09-10 read only the top-level `@type`** of each JSON-LD block
+  and therefore missed everything nested inside an `@graph`. `compare_four.py` walks the tree
+  recursively. Where the two disagree, the recursive count is correct — see the correction
+  box in §4.
+- **SMOMS's word counts are not directly comparable.** Their Framer build ships several
+  visually hidden duplicate blocks (the homepage testimonial carousel repeats twelve times),
+  which the crawler counts as text. Their totals run high by an unknown margin.
+- **The client and Wilshire were crawled on 2026-08-20, the two new competitors on
+  2026-09-10.** Any change either older site made in that three-week window is not captured,
+  with one exception: the JSON-LD figures above were re-parsed from the stored HTML on
+  2026-09-10.
 
 ## Version Control
 
